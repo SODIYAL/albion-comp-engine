@@ -1,0 +1,3 @@
+# The pipeline and tests need only this beyond the standard library
+# (node is needed for the three JS tests and the parity runner).
+pyyaml>=6

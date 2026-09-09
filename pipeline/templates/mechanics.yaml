@@ -5,8 +5,8 @@
 #
 # STATUS: CONSUMED since 2026-08-13 — build_dataset.py embeds this file and
 # both engine ports apply focus_fire / aoe_escalation / aoe_geometry /
-# build_stats as supply-side effectiveness multipliers (MECHANICS_TODO.md
-# implementation checklist). Numbers land here so there is exactly ONE
+# build_stats as supply-side effectiveness multipliers (MECHANICS_TODO.md,
+# "Closed" ledger: the 2026-08-13 first wiring). Numbers land here so there is exactly ONE
 # place to correct them after a patch — same rule as the capability sheets.
 
 # ---------------------------------------------------------------------------
@@ -72,7 +72,8 @@ focus_fire:
     mounted:   {attackers: 18, value: 0.800}
   # Resilience Penetration: per-weapon/ability stat letting an attacker ignore
   # a % of this reduction (melee-heavy; cut across the board in Realm
-  # Divided). Per-weapon values NOT yet recorded — MECHANICS_TODO.md Q7.
+  # Divided). Per-weapon values live in pipeline/resilience_penetration.yaml
+  # (wired 2026-08-25, MECHANICS_TODO.md Q7); this slot stays null.
   resilience_penetration: null
 
 # ---------------------------------------------------------------------------

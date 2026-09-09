@@ -6,7 +6,10 @@
 # SCORING a hand-built or live party — a manual comp always loads and scores;
 # constraint violations there surface as advice (off-comp flags), never errors.
 #
-# PROVISIONAL — seeded from the only real large-group evidence in the repo:
+# PROVISIONAL — seeded 2026-08-12 from what was then the only real
+# large-group evidence in the repo (the killer-party harvest in
+# out/party_rosters.json and out/roster_mixes.json came later and has not
+# moved these bands):
 # the four curated caller parties in data/published_comps/ (Deadlyhooker
 # parties 1-3, castle/territory/mass-roam 3x20, 2026-08-12; Timothy "blap"
 # blackzone roam 20, 2026-08-12), battlemount slots excluded. Every number
@@ -14,9 +17,11 @@
 # the 20-size templates applies (VALIDATION V4).
 
 # ---------------------------------------------------------------------------
-# Role classes for constraint counting. Primary source is each sheet's
-# role_hint (dataset field); overrides correct the cases where the curated
-# hint and the caller's usage disagree.
+# Role classes for constraint counting. Resolution (2026-09-03, "one role
+# read"): an override here wins; otherwise the weapon's primary SEAT class
+# from the role book (roles.yaml); a seatless weapon keeps its sheet
+# role_hint. Overrides correct the cases where that read and the caller's
+# usage disagree.
 roles:
   by_hint: {healer: healer, tank: frontline, support: support, melee: dps, range: dps}
   overrides:
@@ -171,29 +176,17 @@ derived_groups:
 # (that sample stays display-only). Only `exclusions` remove weapons from
 # the DEFAULT generation/suggestion pool; `core` adds a small prior bonus.
 viability:
-  # Economics gate (owner ruling 2026-08-23, forge-quality blind round):
-  # "crystal artifact weapons are quite expensive and are not in many small
-  # scale or even 20 man parties because of it. the utility they provide
-  # with their e is undeniable but it's hard to regear this weapon often ...
-  # I wouldn't run it unless there were 30+ people involved I think but
-  # others might use it if they are rich rich." build_dataset.py derives a
-  # `cost_tier` per weapon from its line suffix (crystal / avalonian /
-  # artifact / base); crystal is the only gated tier — Avalonian carries no
-  # penalty (the owner endorses Hand of Justice at 7). Killboard support
-  # (214-battle sample, display evidence for the ruling, never a scoring
-  # input): Exalted 0/0/5 and Forgebark 0/0/2 observed small/mid/large vs
-  # Mace 35 and Permafrost 45 large. Gates GENERATION/suggestions exactly
-  # like an exclusion: manual and locked picks always score, flagged
-  # off_budget in swap review. NOTE the tension this ruling accepts: the
-  # Deadlyhooker 20-man reference comps DO field Exalted — the owner calls
-  # that a rich-group choice, not a default the forge should produce.
-  cost_gate:
-    crystal:
-      min_size: 30
-      evidence:
-        reason: crystal regear economics — a default comp cannot assume it
-        source: "owner ruling 2026-08-23 (forge-quality session, in-chat)"
-        as_of: "2026-08-23"
+  # COST GATE RETIRED (owner ruling 2026-09-07). The 2026-08-23 gate barred
+  # crystal weapons from generation below 30 players because the forge kept
+  # fielding the Exalted Staff everywhere for its E. The owner's later
+  # reading: "a better ruling might be that that type of cleanse is not as
+  # important in small groups as the engine values ... not restricting
+  # weapons but rather focusing on mechanics." The mechanism that replaced
+  # it lives in the templates' anti_zone rows (Exalted is the sole
+  # anti_zone supplier): no row where no small comp fields it, and a
+  # DEMAND RAMP where comps do (nothing through 14, the measured value at
+  # 25, growing beyond). `cost_tier` stays a dataset fact for display;
+  # nothing gates on it.
   exclusions:
     # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (chapter-2
     # §F). Context attaches to the EXACT weapon: family-level evidence (a
@@ -228,30 +221,40 @@ viability:
         source: "owner ruling 2026-08-26 (roles grading board: 'never in medium-large scale (7+)')"
         as_of: "2026-08-26"
         clears_when: "an approved canonical build for the exact weapon at party size >= 7"
-  # Additive prior (scoring.weights.viability x core_bonus) for weapons a
-  # real caller has fielded in this size class. Large list = the union of
-  # the four data/published_comps/ parties' weapon slots (battlemounts excluded).
-  # No mid/small lists yet: no curated comps at those sizes exist — PROVISIONAL,
-  # empty means neutral, never a penalty.
+    - weapons: [2H_DOUBLEBLADEDSTAFF]
+      min_size: 10
+      allow: {}
+      evidence:
+        reason: >
+          A ganking weapon, not a group damage seat. Owner 2026-09-08:
+          "double bladed is a good ganking weapon but not a good brawl
+          weapon. but you need to check the actual stats." Checked the same
+          day against the killer-party harvest (2,042 battles): 24 parties
+          of 10+ field it — 9 are gank/dive squads (Bear Paws / Deathgivers
+          / Claws / Dagger Pair cores in 21-43-player fights, 0-2 healers)
+          and the rest carry ONE Double Bladed inside a 12-20 man clap or
+          clap-kite roster; 11 distinct wearers at 10+, none at 20+, in gank
+          kits (Hunter Shoes 6 of 11, Graveguard 5 of 11, item power
+          1030-1230). Its E now derives MELEE delivery (a leap lands where
+          the body lands), which bars clap/kite generation on its own; this
+          entry bars the brawl damage seat the owner rejected ("its E
+          insufficient to earn a brawl damage seat over other
+          quarterstaffs"). The gang band stays open: 1.6% of 4-9 man
+          killer parties, 18 players.
+        source: "owner ruling 2026-09-08 + party_rosters.json audit (tests/VALIDATION.md 2026-09-08, 'Five rulings after the Codex review')"
+        as_of: "2026-09-08"
+        clears_when: "an approved canonical build for the exact weapon at party size >= 10"
+  # RETIRED 2026-09-08 (owner: "sure" to one harvest prior replacing both
+  # hand lists — this core list and scoring.yaml's seven-weapon meta prior).
+  # Observed relevance is now the GENERATED, size-bucketed meta prior
+  # (pipeline/derive_meta_prior.py -> out/meta_prior.json: killer-party
+  # prevalence per fight-size bucket, one player one vote, shrunk toward
+  # zero on thin counts, capped at 1.0). `core` stays a valid, EMPTY key so
+  # scoring.weights.viability reads 0 for every weapon; nothing here is
+  # hand-listed any more.
   core_bonus: 1.0
-  core_min_size: 10   # the `large` list below applies at party size >= this
-  core:
-    large:   # size >= 10
-      [2H_HAMMER_AVALON, 2H_SHAPESHIFTER_KEEPER, MAIN_ARCANESTAFF,
-       MAIN_ROCKMACE_KEEPER, 2H_ARCANESTAFF, 2H_POLEHAMMER,
-       MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF_CRYSTAL, 2H_DUALMACE_AVALON,
-       2H_ARCANESTAFF_HELL, 2H_ICECRYSTAL_UNDEAD, 2H_KNUCKLES_SET3,
-       2H_AXE_AVALON, 2H_HARPOON_HELL, MAIN_ARCANESTAFF_UNDEAD,
-       2H_CURSEDSTAFF_MORGANA, 2H_FIRE_RINGPAIR_AVALON,
-       MAIN_CURSEDSTAFF_CRYSTAL, 2H_ICEGAUNTLETS_HELL,
-       2H_ENIGMATICORB_MORGANA, MAIN_CURSEDSTAFF_UNDEAD,
-       MAIN_FROSTSTAFF_KEEPER, 2H_SHAPESHIFTER_SET2, 2H_BOW_HELL,
-       2H_GLAIVE_CRYSTAL, 2H_HAMMER, 2H_SHAPESHIFTER_CRYSTAL,
-       2H_NATURESTAFF_KEEPER, 2H_CLEAVER_HELL, 2H_MACE_MORGANA, 2H_MACE,
-       2H_ROCKSTAFF_KEEPER, MAIN_MACE_CRYSTAL, MAIN_MACE,
-       2H_HALBERD_MORGANA, MAIN_DAGGER_HELL, MAIN_SCIMITAR_MORGANA,
-       2H_KNUCKLES_KEEPER, MAIN_RAPIER_MORGANA, 2H_HOLYSTAFF_UNDEAD,
-       2H_NATURESTAFF_HELL]
+  core_min_size: 10   # the `core` lists (none) would apply at party size >= this
+  core: {}
 
 # ---------------------------------------------------------------------------
 # Size physics — replaces the linear grow() extrapolation (removed

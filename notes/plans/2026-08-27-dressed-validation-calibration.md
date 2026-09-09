@@ -1,7 +1,7 @@
 # Dressed Validation & Calibration Hardening — Implementation Plan
 
 > **STATUS 2026-08-27: EXECUTED (all tasks).** Deliverables and measured
-> results: `docs/superpowers/findings/2026-08-27-*.md` (5 findings/reports),
+> results: `notes/findings/2026-08-27-*.md` (5 findings/reports),
 > `pipeline/out/*_audit*.json` + `calibration_report.json`, the reworked
 > `tests/tier2_blindtest.py`, `tests/test_validation_modes.py`,
 > `tests/gear_blindtest.py`, `pipeline/gear_join.py` + 5 audit/calibration
@@ -17,7 +17,7 @@
 
 **Tech Stack:** Python 3 (script-style tests, `py -3`), Node for the JS twin + parity runner, YAML evidence layer, JSON audit artifacts written `newline="\n"`.
 
-**Spec:** The owner's work order (this session's prompt): "Albion Comp Forge — Dressed Validation & Calibration Hardening", 12 phases / 17 execution steps. Standing project rules apply: `tests/VALIDATION.md` anti-circularity, `CLAUDE.md` invariants, dressed-forge spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`.
+**Spec:** The owner's work order (this session's prompt): "Albion Comp Forge — Dressed Validation & Calibration Hardening", 12 phases / 17 execution steps. Standing project rules apply: `tests/VALIDATION.md` anti-circularity, `CLAUDE.md` invariants, dressed-forge spec `notes/specs/2026-08-27-dressed-forge-design.md`.
 
 ## Global Constraints
 
@@ -34,7 +34,7 @@
 ### Task 1: Phase-1A/2 audit — document current V3/V4 behavior + empirical asymmetry probes
 
 **Files:**
-- Create: `docs/superpowers/findings/2026-08-27-dressed-validation-report.md` (started here, completed in Task 12)
+- Create: `notes/findings/2026-08-27-dressed-validation-report.md` (started here, completed in Task 12)
 - Create: `pipeline/audit_validation_asymmetry.py` (probe script, report-only)
 
 **Interfaces:**
@@ -156,7 +156,7 @@ First line of `kit_variants`: `if not self.dress_candidates: return [("v0", None
 
 **Files:**
 - Create: `pipeline/audit_frontline_floor.py` → `pipeline/out/frontline_floor_audit.json`
-- Create: `docs/superpowers/findings/2026-08-27-tankiness-frontline-finding.md`
+- Create: `notes/findings/2026-08-27-tankiness-frontline-finding.md`
 
 **Interfaces:**
 - Produces: Cases A (7-man, no frontline-menu weapon, doctrine kits), B (one member → genuine engage tank), C (DPS party in explicit plate/defensive kits — hand-built gear lists from catalog plate ids). Per case: tankiness supply naked/dressed, floor armed + cleared?, floor penalty magnitude, per-member gear tankiness contributions, `role_advisory` no-engage-tank flag state, fitness deltas. Finding doc weighs Options A–D (single cap / split / source-aware floors / role-layer structural rule) + the Phase-11 structural-floor question (primary_heal, frontline) and recommends the smallest structural fix — **no implementation**, owner ruling required.
@@ -167,7 +167,7 @@ First line of `kit_variants`: `if not self.dress_candidates: return [("v0", None
 
 **Files:**
 - Create: `pipeline/audit_gear_synergy.py` → `pipeline/out/gear_synergy_audit.json`
-- Create: `docs/superpowers/findings/2026-08-27-gear-synergy-finding.md`
+- Create: `notes/findings/2026-08-27-gear-synergy-finding.md`
 
 **Interfaces:**
 - Produces: for each pair (clump_create×burst_aoe 1.5, engage×catch 0.8, resist_shred×burst_st 0.8, heal_reduction×sustained_dps 0.8): three constructions (weapon A + weapon B; gear A + weapon B; weapon A + gear B) using real items (heal_reduction: HEAD_LEATHER_AVALON…; resist_shred/engage/catch/clump/burst from the catalog aggregate), measured `synergy()`/`comp_score` deltas, plus the labeled-hypothetical forgone bonus (engine's own pair rule `bonus*max(0,min(a,b)-J)` computed over gear-inclusive supply — analysis only, never a scoring path). Finding doc recommends Model 1 vs 2 vs 3 with the measured cases; no implementation.
@@ -207,8 +207,8 @@ First line of `kit_variants`: `if not self.dress_candidates: return [("v0", None
 ### Task 12: required reports, docs sync, full battery
 
 **Files:**
-- Complete: `docs/superpowers/findings/2026-08-27-dressed-validation-report.md` (report 1: V3-W/V3-D/V4-by-class numbers, weapon-only baseline, changed-recommendation examples)
-- Create: `docs/superpowers/findings/2026-08-27-dressed-template-audit.md` (report 2 summary over the JSON)
+- Complete: `notes/findings/2026-08-27-dressed-validation-report.md` (report 1: V3-W/V3-D/V4-by-class numbers, weapon-only baseline, changed-recommendation examples)
+- Create: `notes/findings/2026-08-27-dressed-template-audit.md` (report 2 summary over the JSON)
 - Reports 3/4 are Tasks 7/8's findings; report 5 = gear card status doc (answers pending); report 6 = calibration report + provisional-coefficient table.
 - Modify: `HANDOFF.md`, `tests/VALIDATION.md` (new dated section: V3-W/V3-D distinction, V4 evidence classes, audit findings, rulings needed), `CLAUDE.md` (test list + audit scripts), `engine/README.md` (set_dressing), `pipeline/README.md` (audit scripts), `MASTERSHEET.md` only if a pointer row is warranted.
 

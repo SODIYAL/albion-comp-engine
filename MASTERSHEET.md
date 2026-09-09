@@ -25,6 +25,78 @@ silently ignore your edit. And whatever is set here **wins** over the
 underlying files, so this file is the single place to look when asking
 "what is the engine actually using?"
 
+## Current owner rulings (2026-09-08)
+
+These supersede conflicting historical examples below. Distinguish the
+implemented rule from the research or implementation still required.
+
+- **Clap healer minimum — implemented:** one healer per five members,
+  rounded down: four at 20-24, five at 25-29. It is a minimum, not an exact
+  count or maximum. `styles.yaml` carries `role_min_per_players: {healer: 5}`;
+  both engines resolve it at the current forge size from five members up.
+  Existing smaller-party rules remain. Kite retains its lower minima but
+  no longer forces exactly one/two healers in its 5-29 size overrides.
+  The hybrids have separate rules; this ruling changes pure clap and kite.
+- **Complete force:** the planned roster must function without unmodelled
+  outside support. A captured in-game party (at most 20) may be only one
+  detachment in a larger allied force. A specialist tank/battlemount party
+  must not define standalone healer or damage requirements. Reliable
+  force reconstruction and evidence separation remain open work.
+- **Useful builds, not just capability totals:** judge the E's effect,
+  magnitude, cooldown, actual delivery and setup, then the chosen Q/W and
+  equipment. Assume an average competent player. Shields are not heals;
+  self-mobility is not automatically team mobility. Members need the mana,
+  protection and access to perform their assigned job. This is the design
+  requirement, not a claim that the current scalar model verifies all of it.
+- **Double Bladed — RULED 2026-09-08 (same day, after the data check):**
+  "double bladed is a good ganking weapon but not a good brawl weapon.
+  but you need to check the actual stats." Checked: 24 killer parties of
+  10+ field it — 9 gank/dive squads, 15 clap-type rosters carrying ONE;
+  11 distinct wearers at 10+, none at 20+, in gank kits (Hunter Shoes 6
+  of 11, Graveguard 5 of 11). Its leap now derives MELEE delivery (below),
+  which bars clap/kite generation, and a viability exclusion at 10+ bars
+  the brawl damage seat (composition.yaml, evidence-gated, gang band
+  open). Manual picks still score. F27; VALIDATION.md 2026-09-08.
+- **Payload reach, not travel — implemented:** "yes when an e lands the
+  caster should read as melee delivery." The dumps carry a `dash` node on
+  every leap / charge E (spell_index `caster_moves`, parse_dumps adapter
+  5); such an E's cast range counts toward flex delivery only for a FLEX
+  BOMB — the 2026-09-04 exception (Realmbreaker, Rift Glaive: group
+  payload at the job bar). Grailseeker's Soul Shaker moves nothing and
+  stays a standoff root field ("its like one of the longest range
+  snares"). Flips: Double Bladed, Carving, Daybreaker, Claymore,
+  Bloodletter, Forcepulse, Quarterstaff, Trinity Spear -> melee. T45.
+- **Observed relevance — implemented as the GENERATED meta prior:**
+  "sure" (2026-09-08) to one harvest prior replacing both hand lists. The
+  seven-weapon hand-set meta prior and composition.yaml's viability core
+  list are retired; `pipeline/derive_meta_prior.py` writes
+  out/meta_prior.json from the committed killer-party harvest — per size
+  bucket, distinct players per weapon, shrunk on thin counts, top weapon
+  = 1.0 — and build_dataset attaches it (hash-gated; a hand-set map fails
+  the build). Weight `delta` 0.15: tiebreak-sized, never a floor or a
+  seat. Re-derive after every harvest. H18/T46.
+- **Healers per five on brawl and the hybrids — implemented:** "sure on
+  healers at 25". `role_min_per_players: {healer: 5}` on brawl,
+  brawl_clap and clap_kite beside clap; kite keeps its minima; balanced
+  keeps the base band (3-5 at 20-29) — an OPEN question, since a balanced
+  castle-25 forge still fields 3 healers. F16.
+- **Chain-step voter floor — implemented:** "ok on arcane helmet". Every
+  archetype chain step needs 5 distinct players (was 2); the Arcane Staff
+  Judicator pocket (4 players) is gone. Harvest: Assassin Hood 30 /
+  Judicator 24 / Cleric Cowl 9 players on Arcane Staff at 10+. R35.
+- **Hoarfrost burst_aoe 3 — implemented** (tune:sheets, §6): the
+  2026-08-20 V4 hold no longer binds (byte-identical at 2 and 3). T44.
+- **Correction discipline:** a bad generated team can expose wrong game
+  facts, capability judgments, role requirements or search decisions. Trace
+  the cause before changing a number. A test disagreement alone does not
+  settle a spell's rating. Preserve original expert answers and record why
+  an expectation changes; familiar examples remain training material.
+
+The `tune:` blocks do not implement the prose above automatically. Role
+structure lives in the files listed in section 8b. The independent
+validation/holdout sets are still empty, so the present coefficient values
+are provisional rather than independently calibrated.
+
 ---
 
 ## 1. Where the data comes from
@@ -85,12 +157,14 @@ What happens inside "capability gain", in order:
 The dashboard's "Why" panel shows these exact terms for any pick — the
 numbers there ARE the scoring, not a summary of it.
 
-**Known blind spots** (the improvement roadmap, in priority order):
-damage magnitude is flat (a 1v1 weapon's AoE reads equal to Kingmaker's —
-the 1–7 rubric in §7 fixes this); enabler value is missing (Soulscythe's
-knockup line that makes everyone's damage land earns nothing yet); the
-"who actually plays this at scale" reality-check exists but is unwired;
-gear coherence (Heavy Mace on cloth) has no layer at all yet.
+**Current limitations:** the 1-7 capability grades remain curated judgments,
+not direct damage/healing measurements. The rubric in section 7 guides a
+reviewer but does not compute the final grade from stored component answers.
+Equipment, roles, conditional payloads and observed-kit guidance now exist;
+their presence does not prove that every selected build can perform its
+assigned job. Complete-force evidence, mana sufficiency (carrier floors) and
+setup compatibility still require further work; contextual weapon
+prevalence ships as the generated meta prior (2026-09-08).
 
 ---
 
@@ -125,16 +199,10 @@ capability_synergies:
   - {a: resist_shred,   b: burst_st,       bonus: 0.8}
   - {a: heal_reduction, b: sustained_dps,  bonus: 0.8}
 
-# Hand-set "people actually play this" nudges, 0–1 per weapon.
-# Real win-rate data replaces these in Phase 3.
-meta_prior:
-  MAIN_HOLYSTAFF_AVALON: 1.0   # Hallowfall
-  2H_MACE:               1.0   # Heavy Mace
-  2H_HAMMER:             0.8   # Great Hammer
-  2H_ICECRYSTAL_UNDEAD:  0.8   # Permafrost Prism
-  2H_HOLYSTAFF:          0.6   # Great Holy Staff
-  2H_LONGBOW:            0.6   # Longbow
-  MAIN_MACE:             0.6   # Mace
+# meta_prior is GENERATED since 2026-09-08 (owner ruling, see the rulings
+# block at the top): killer-party prevalence per fight-size bucket, one
+# player one vote, from pipeline/derive_meta_prior.py -> out/meta_prior.json.
+# A hand-set map here fails the build. `delta` above is the only dial.
 ```
 
 ## 4. The dials — fight physics
@@ -206,6 +274,18 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
 # bomb, above the sheet's 3.
 2H_KNUCKLES_AVALON:            # Fists of Avalon
   purge: 4
+
+# Owner ruling 2026-09-08 ("sure on 3 ... you r hoarfrost ruling"): the
+# 2026-08-20 rescore HELD Avalanche's burst at 2 because +0.5 unit tipped
+# the blap tank slot in the V4 blind test (69% vs the 70% gate). Re-measured
+# 2026-09-08 with the structure that landed since (need profiles, frontline
+# floors, the dressed forge): V4 is byte-identical at 2 and at 3 (17/23
+# actual_gear, 19/23 weapon_only), so the hold was a symptom of missing
+# team structure, not a wrong rating. The evidence stands on its own:
+# Avalanche measures 280/cast, top-20% of the burst_aoe board. Pinned by
+# golden T44.
+MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
+  burst_aoe: 3
 
 # 2H_TWINSCYTHE_HELL:          # Soulscythe
 #   knockback_displace: 4      # the line knockup is undervalued at 2
@@ -310,7 +390,7 @@ commit:
   ladder-consistent with Great Holy's 10m rung).
 - Damage boards: Clarent charge burst_st 4, Dagger Pair execute 4, Heron
   throw 3; shreds (axe W, arcane Frazzle) 3.
-- **One ruling HELD by the validation gate**: Hoarfrost's Avalanche
+- **One ruling HELD by the validation gate (HOLD LIFTED 2026-09-08 — ruled 3 in §6; V4 identical at 2 and 3)**: Hoarfrost's Avalanche
   measures 280/cast (top-20% of the burst_aoe board) and argues for 3 —
   but even +0.5 unit pushes the frontline pick out of a brawl comp's
   tank slot in the V4 blind test (69% vs the 70% gate; verified by
@@ -333,8 +413,9 @@ A member is no longer just weapon + weapon spells. The engine now models:
 - **Gear sheets**: `pipeline/sheets/gear/*.yaml` — same rules as weapon
   sheets (1–7 scale, no score without evidence; the evidence is the item's
   ability id, or `GEAR_STATS` for statless items like capes/potions/food).
-  Starter set = the items your doctrine names in §9; ~40 items curated
-  from the dumps descriptions. Add items by copying an entry.
+  Starter set = the items your doctrine names in §9; 129 items curated
+  (`core.yaml` + `combat_expansion.yaml`, 2026-08-27). Add items by
+  copying an entry.
 - **One ability per piece** — the loadout rule applies to gear too; the
   engine scores the chosen (or best) ability per slot.
 - **Item stats modify the person** (`build_stats` in the §4 mechanics
@@ -370,10 +451,10 @@ A member is no longer just weapon + weapon spells. The engine now models:
   whether raw throughput deserves value past the target is an expert
   call for the templates (a `heal_throughput` capability or a softer
   heal soft-cap), queued for the next tuning pass.
-- **Not yet**: gear inside the forge/recommend loops (the advisor and
-  the loadout panel are live in the page, and kit_options IS mirrored
-  and parity-checked in both engines — the remaining gap is the forge
-  pricing gear while it generates).
+- **Shipped 2026-08-27 (the dressed forge)**: forge and recommend
+  evaluate every candidate as weapon + combo + doctrine kit, priced by
+  the exact comp score the page displays; locked members are never
+  re-dressed (`notes/specs/2026-08-27-dressed-forge-design.md`).
 
 ### 8b. The role layer & forge structure — where those dials live
 
@@ -388,6 +469,9 @@ file — they live beside the role book, and every entry is cited:
 | Gear affinity rulings | replace a derived item-to-seat affinity | `pipeline/roles.yaml` `gear_affinity_overrides` |
 | **Need profiles** | fine-seat bands + function coverage the forge must field (engage 2-3 / stopper 1-2 default, terry stopper-heavy; pierce & heal-cut always) | `pipeline/roles.yaml` `need_profiles` |
 | Style role bands | healers/frontline/ranged-core per style & size (clap/clap_kite ranged core 7 at 20) | `pipeline/templates/styles.yaml` `constraint_overrides` |
+| Style × size rows | targets / soft caps per declared style × size band, GENERATED from the harvest board — never hand-edited, re-derived after every harvest (2026-09-04) | `pipeline/templates/style_bands.yaml` via `pipeline/derive_style_bands.py` |
+| Style-fit rulings | override a weapon's derived fits / situational / unfit verdict per style × band (cited, validated, release-blocking on errors) | `pipeline/style_overrides.yaml` |
+| Observed relevance | the meta prior: killer-party prevalence per fight-size bucket, one player one vote, GENERATED — never hand-set, re-derived after every harvest (2026-09-08) | `pipeline/out/meta_prior.json` via `pipeline/derive_meta_prior.py` |
 
 Same safety promise as this file: the build fails loudly on an unknown
 weapon, item, role or content id — a stale ruling never silently

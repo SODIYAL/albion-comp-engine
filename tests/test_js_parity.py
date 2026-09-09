@@ -178,6 +178,7 @@ def py_results(cases):
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
             "size_bucket": e.size_bucket(),
+            "constraint_band": e._band,
             "forge": forged,
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
@@ -291,6 +292,9 @@ def main():
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
         if a["size_bucket"] != b["size_bucket"]:
             errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")
+        if a["constraint_band"] != b.get("constraint_band"):
+            errs.append(f"constraint_band: py={a['constraint_band']} "
+                        f"js={b.get('constraint_band')}")
         if a["forge"] is not None:
             fa, fb = a["forge"], b["forge"] or {}
             if fa["party"] != fb.get("party") or fa["combos"] != fb.get("combos") \

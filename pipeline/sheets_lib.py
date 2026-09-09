@@ -22,9 +22,11 @@ Composed row order: the weapon's own rows first (sheet order), then
 applicable pool rows in pool-file order. Measured 2026-08-20: no weapon has
 two evidence rows for one capability, so order carries no semantics.
 
-Every consumer of per-weapon capability rows goes through compose() —
-build_dataset, evidence_lint, build_magnitude_review, build_interactions —
-so the pool layer cannot half-apply.
+The consumers of per-weapon capability rows go through compose() —
+build_dataset, evidence_lint, build_magnitude_review, build_stat_chart —
+so the pool layer cannot half-apply to a score. (build_interactions.py
+walks the sheets itself to build the spell -> capability DOMAIN for
+nonstacking_caps; that walk yields a superset and never scores.)
 """
 import glob
 import json

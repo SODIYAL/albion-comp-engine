@@ -5,9 +5,10 @@ bucketed by FIGHT size (VALIDATION V7; semantics fixed per changeschapter2.md
 §E).
 
 Source: the albionbb API (api.albionbb.com) — the same community killboard
-the original V2 spike used. The official gameinfo events endpoint 504s too
-often to sample at scale (verified 2026-08-13); albionbb serves the same
-kill-event data reliably. Weapons come from kill events (killer + victim),
+the original V2 spike used. (The official gameinfo events endpoint 504'd
+too often to sample at scale on 2026-08-13; re-tested 2026-08-29 it answers
+200 in under a second and sample_parties.py uses it for DETAIL — albionbb
+stays the DISCOVERY source because only it filters by minPlayers.) Weapons come from kill events (killer + victim),
 so coverage is combatants, not lurkers.
 
 WHAT THIS DATA IS — AND IS NOT (§E). A battle's `totalPlayers` is the TOTAL

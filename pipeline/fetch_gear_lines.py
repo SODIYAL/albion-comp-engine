@@ -31,8 +31,9 @@ consumables keep it, because T5_POTION_REVIVE and T7_POTION_REVIVE are
 different items, not tiers of one. Gear and weapon keys share one namespace
 without colliding — weapons are 2H_*/MAIN_*.
 
-MOUNT is excluded on purpose: battlemounts are a real ZvZ factor but
-the caller comps (data/published_comps/) already exclude mount slots, so pulling them in
+MOUNT is excluded on purpose: battlemounts are a real ZvZ factor and the
+caller comps do record battlemount slots (data/published_comps/, see
+gear_join.py), but the engine does not score mounts, so pulling them in
 would be catalogue weight nothing reads. Add it when the engine scores mounts.
 
 Usage:  py -3 pipeline/fetch_item_stats.py   (first — builds the source)

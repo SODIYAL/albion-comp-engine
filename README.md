@@ -1,6 +1,6 @@
 # Albion Composition Engine
 
-**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**  
+**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**
 **How it works: <https://sodiyal.github.io/albion-comp-engine/how-it-works.html>**
 
 Comp Forge is an Albion Online party-composition recommendation engine. Give it the content, expected party size, playstyle, and the weapons already in the group; it diagnoses the composition and recommends what should join next.
@@ -76,7 +76,7 @@ For example, killboard/battle sampling can tell the UI that a weapon is frequent
 
 Every nonzero curated capability score must also cite the spell/effect that supports it. `pipeline/evidence_lint.py` checks that the cited ability is actually equippable and can ground the claimed capability. This catches plausible-looking curation errors such as attributing purge, anti-heal, cleanse, or displacement to a weapon that cannot actually provide it.
 
-## Current state — August 2026
+## Current state (September 2026)
 
 The project has moved well beyond the original prototype described in early README versions.
 
@@ -88,12 +88,13 @@ The project has moved well beyond the original prototype described in early READ
 - The public planner now uses the **decision-first** Comp Status → Biggest Need → Best Next Pick hierarchy.
 - Observed-cohort affinity and the caller tools (player weapon pools, swap impact) shipped as display layers in August 2026.
 - The identity system (per-weapon style fit, comp identity, style-gated suggestions, kill-pressure lights, fight chain) shipped as descriptive layers in August 2026, built and validated through expert blind rounds — including a fifth playstyle (clap-kite) and a bomb-squad archetype the rounds surfaced.
-- The forge-quality expert rounds (late August 2026) turned six blind comp gradings into structural generation rules: a weapon-economics gate (crystal regear cost), a primary-healer foundation rule (the E must heal big **and** heal a group — both derived from the spell's own facts), style-aware role bands, a generation-fit gate (default comps field damage picks that *fit*, not merely "situational" ones), duplicates that must cite a real comp to repeat, derived job budgets (clump tools, curse pressure), and the first verified non-stacking effect priced into scoring (the cursed line's shared Vile-Curse pool).
+- The forge-quality expert rounds (late August 2026) turned six blind comp gradings into structural generation rules: a primary-healer foundation rule (the E must heal big **and** heal a group — both derived from the spell's own facts), style-aware role bands, a generation-fit gate (default comps field damage picks that *fit*, not merely "situational" ones), duplicates that must cite a real comp to repeat, derived job budgets (clump tools, curse pressure), and the first verified non-stacking effect priced into scoring (the cursed line's shared Vile-Curse pool).
 - Late-August 2026 expert rounds also priced real fight physics into the model: per-weapon **Resilience Penetration** (a cited wiki table; high-pen melee keeps more single-target value at scale, never enough to make it good), owner-confirmed Focus-Fire and AoE-Escalation tables, and **earned curse slots** (a group-scale slot in the non-stacking cursed line requires an enemy-debuff E — pierce, purge, or heal-cut).
 - The **role layer** shipped (late August 2026): roles are properties of the member-in-comp — weapon × spells × gear × what the team needs — never 1:1 weapon labels. An evidence-cited role book defines seat roles (with gear uniforms), cross-tree function roles (pierce / purge / shield break / anti-heal, derived E-first with Q/W abilities as a secondary tier), and a typed gear-effects catalog; equipment is classified by the *unique-ability-first* law (chests by tree stat numbers, offhands purely by stat profile). The planner detects the role each member is actually playing from their kit and flags mismatches ("this weapon's role wears plate") and comp balance holes ("no engage tank — nobody makes a clump") — descriptive only. Generated kits are **doctrine-led** (increment 2): the chest hard-gates to the seat's uniform, every other slot — food, potions and capes included — prefers items observed in that seat's real reference builds (build-id cited), the seat's tree-passive pick is resolved from the game data and counted in the build's stat channels, and stat pairings like CC-duration offhands on CC weapons emerge from physics rather than hand lists. Manual builds always score; doctrine only steers suggestions.
 - The **dressed forge** shipped (late August 2026): candidates are evaluated as complete builds — weapon, spells and kit — and forged members arrive already dressed, with structural floors deliberately reading the weapon+kit basis so worn gear can never buy its way past a load-bearing requirement.
 - A **taxonomy audit** (late August 2026) closed two long-standing holes. Six capabilities — slows, roots, enemy displacement, anti-dive, interrupts and health-cut — were curated on every weapon sheet and used by other layers, but no content template asked for them, so the engine scored them as worthless; they were fitted from the real comps and promoted, and every curated capability is now scored somewhere. And the structured effect catalogue, which for most of the project indexed weapon abilities only, was extended to **armor and consumables**, making gear claims checkable evidence for the first time; the first covered run caught six unsupported claims, including one that was recorded backwards.
 - The planner's comp status is now a **radar**: one axis per capability group, the comp's emerging playstyle in the centre, and every explanation in a hover. Both it and the capability board measure against the ceiling real comps actually reach, so nothing reads above 100% and a playstyle's trade-offs — what it gives up to be good at something else — show as the shape of the chart.
+- Early September 2026: a **nightly killboard harvest** of real killer-party rosters (the official API's party-at-kill-time with full gear) now feeds the kit doctrine — generated kits are what winners wear, one player one vote, the evidence unit is the party of ten or more — and **style × size rows** generated from the same harvest sit beside the content templates. The planner was re-laid-out for density (card grid, edge flyouts). The live-party companion parses the in-game inspect, so any member's worn kit and item power refresh on demand and flow into the scored loadout.
 - The live-party companion is live-verified end to end, with live sync keeping the loaded comp current.
 - Capability constraints are combo-aware: selected spell kits matter.
 - Composition targets are evaluated at the roster size actually present; next-pick advice evaluates one player ahead.
@@ -101,7 +102,7 @@ The project has moved well beyond the original prototype described in early READ
 
 The system should still be treated as a decision-support tool rather than an authoritative statement of the Albion meta. Capability grading, content calibration, and validation against experienced callers remain ongoing work.
 
-**Known open defect (the honest caveat):** every "how much a team needs" number was measured by counting *weapons*, but the engine now measures whole *people* — weapon plus armour, cape and consumables, which is roughly twice as much supply on average and far more for durability. Until those reference numbers are re-measured in the same unit, gear-heavy capabilities read as over-supplied. The correction is scoped and evidenced (see `HANDOFF.md`); it is deliberately not applied piecemeal, because a half-converted set of numbers would be worse than a consistently wrong one.
+**Units (resolved 2026-08-29):** every "how much a team needs" number now speaks the unit the engine measures — whole *people* (weapon plus armour, cape and consumables). The template rows were re-fitted together, never piecemeal, and structural hard floors deliberately stay in weapon units (see `CLAUDE.md`, "One unit, everywhere").
 
 ## Observed evidence and caller tools (shipped August 2026)
 
@@ -151,25 +152,13 @@ See `tests/VALIDATION.md` for the validation history and gates.
 
 On Windows, use `py -3` rather than `python`/`python3`.
 
-The authoritative full command list is maintained in `HANDOFF.md` and `pipeline/README.md`. The main day-to-day gates include:
+The authoritative gate list and build chain live in `CLAUDE.md` ("Tests" and "Build chain"); `pipeline/README.md` covers the game-patch workflow. The minimal day-to-day loop:
 
 ```bash
 py -3 pipeline/evidence_lint.py
-py -3 pipeline/build_builds.py
 py -3 pipeline/build_dataset.py
 py -3 tests/test_golden.py
-py -3 tests/test_forge.py
-py -3 tests/tier2_blindtest.py v4
 py -3 tests/test_js_parity.py
-node tests/test_loadout_codec.js
-py -3 tests/test_patch_history.py
-py -3 tests/test_provenance.py
-py -3 tests/test_builds.py
-py -3 pipeline/build_interactions.py
-py -3 tests/test_interactions.py
-py -3 tests/test_roles.py
-py -3 tests/test_cohort_families.py
-node tests/test_display_math.js
 py -3 dashboard/build.py
 ```
 
@@ -180,10 +169,15 @@ After a game patch, follow the pinned-snapshot procedure in `pipeline/README.md`
 ## Repository map
 
 ```text
-MASTERSHEET.md                 expert control surface / tuning rulings
-HANDOFF.md                     current project state + development handoff
-albion-comp-engine-design.md   research, architecture, taxonomy and design history
+CLAUDE.md                      the working contract: invariants, the ONE gate list, build chain
+MASTERSHEET.md                 expert control surface / tuning rulings (tune: blocks override everything)
+HANDOFF.md                     current project state + open work
+albion-comp-engine-design.md   research, architecture, taxonomy and design history (cited by section)
 roles-design.md                the role layer design record (seats, functions, gear effects)
+MECHANICS_TODO.md              the mechanics backlog (open items only)
+KILLBOARD_AFFINITY.md          what the killboard evidence means and does not mean
+COMPANION_SCOPE.md             companion legality reasoning + the verified wire map
+changeschapter2*.md            the evidence-layer work order + its adaptation record (cited by section)
 
 engine/                        THE ENGINE — scoring, in two parity-locked ports
   engine.py                    canonical Python scoring engine
@@ -191,17 +185,23 @@ engine/                        THE ENGINE — scoring, in two parity-locked port
 
 pipeline/                      the engine's data layer
   sheets/                      capability sheets (weapons + gear)
-  templates/                   content requirements
-  roles.yaml                   the role book: seats, functions, gear effects
-  build_dataset.py             builds the release dataset
+  templates/                   content requirements, styles, mechanics, GENERATED style_bands.yaml
+  roles.yaml                   the role book: seats, functions, gear effects, need profiles
+  build_dataset.py             builds the release dataset (fails closed)
+  sample_parties.py            killer-party roster harvest (nightly task)
   sample_battles.py            observational battle sampler
+  audit_*.py                   report-only audits
   out/                         generated data/evidence artifacts
+
+data/                          published comps / builds / armory imports (evidence layer)
+calibration/                   train / validation / holdout cases for tuning discipline
 
 tests/
   test_golden.py               recommendation regression cases
   test_forge.py                forge/constraint contracts
   test_js_parity.py            Python ↔ browser scoring parity
-  VALIDATION.md                validation record and external-quality gates
+  test_roles.py                role-book and kit-doctrine contracts
+  VALIDATION.md                the append-only ruling log and validation record
 
 dashboard/                     THE FRONTEND — display only, never computes a score
   build.py                     bundles dataset + engine + sources into the pages
@@ -209,9 +209,8 @@ dashboard/                     THE FRONTEND — display only, never computes a s
   _explainer.html              source for How It Works
   how-it-works.html            generated/local explainer copy
 
-docs/
-  index.html                   GitHub Pages product output
-  how-it-works.html            GitHub Pages explainer
+docs/                          GitHub Pages root: index.html + how-it-works.html only
+notes/                         internal plans, specs and findings (not served)
 
 companion/                     THE COMPANION — C# photon sniffer feeding the
                                live-party feature over localhost only

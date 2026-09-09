@@ -11,6 +11,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -41,6 +42,7 @@
    }
   ],
   "cast_range": "10",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -63,6 +65,7 @@
  "AIR_RAID": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -87,6 +90,7 @@
  "AMBUSH": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "50",
@@ -130,6 +134,7 @@
    }
   ],
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "44",
@@ -161,6 +166,7 @@
    }
   ],
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -197,6 +203,7 @@
    }
   ],
   "cast_range": "17",
+  "caster_moves": null,
   "casting_time": "0.2",
   "channel": null,
   "cooldown": "3",
@@ -225,6 +232,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "38",
@@ -259,6 +267,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "20",
@@ -286,6 +295,7 @@
  "ARMORCHAIN": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -316,6 +326,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -343,6 +354,7 @@
  "ARMOR_CD_RESET": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "60",
@@ -362,6 +374,7 @@
  "ARMOR_WEB": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "40",
@@ -394,6 +407,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -427,6 +441,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -455,6 +470,7 @@
  "ASSASSINSPIRIT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -479,6 +495,7 @@
  "ASSASSIN_DASH": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "14",
@@ -501,6 +518,7 @@
  "AUTOFIRE2": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "5",
@@ -531,6 +549,7 @@
    }
   ],
   "cast_range": "21",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -556,6 +575,7 @@
  "AXEBOOST": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -578,6 +598,7 @@
  "AXESMASH": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
@@ -608,6 +629,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -636,6 +658,7 @@
  "AXEWHIRLWIND2": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -661,6 +684,7 @@
  "AXE_CHARGE": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -699,6 +723,7 @@
    }
   ],
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -727,6 +752,7 @@
  "BACK_SLASH": {
   "area": null,
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -752,6 +778,7 @@
  "BATTLEFRENZY": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -779,6 +806,7 @@
  "BEARTRAP": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -806,6 +834,7 @@
  "BERSERK_SPRINT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -839,6 +868,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -888,6 +918,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.9",
   "channel": null,
   "cooldown": "30",
@@ -916,6 +947,7 @@
  "BLADE_AURA": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -955,6 +987,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -989,6 +1022,7 @@
    }
   ],
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -1016,6 +1050,7 @@
  "BLINDSPOT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -1040,6 +1075,7 @@
  "BLINK": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -1062,6 +1098,7 @@
  "BLOCK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "40",
@@ -1082,6 +1119,7 @@
  "BLOODLUST": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
@@ -1106,6 +1144,7 @@
  "BLOODTHIRSTYBLADE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -1133,6 +1172,7 @@
  "BLOOD_BLADE": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -1157,6 +1197,7 @@
  "BOLTSHOT": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -1198,6 +1239,7 @@
    }
   ],
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0.62",
   "channel": null,
   "cooldown": "20",
@@ -1246,6 +1288,7 @@
    }
   ],
   "cast_range": "16",
+  "caster_moves": null,
   "casting_time": "0.25",
   "channel": null,
   "cooldown": "10",
@@ -1273,6 +1316,7 @@
  "BRIEROFLIFE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -1298,6 +1342,7 @@
  "BURNAURA": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -1325,6 +1370,7 @@
  "BURNINGARROWS": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -1354,6 +1400,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "5",
@@ -1381,6 +1428,7 @@
  "CARTWHEEL": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "6",
@@ -1411,6 +1459,7 @@
  "CASTBUBBLE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "40",
@@ -1438,6 +1487,7 @@
  "CC_BLOCK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -1465,6 +1515,7 @@
  "CC_IMMUNITY": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
@@ -1493,6 +1544,7 @@
  "CELESTIAL_SPHERE": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "25",
@@ -1517,6 +1569,7 @@
  "CHAINDASH": {
   "area": null,
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -1542,6 +1595,7 @@
  "CHANNELED_RUN": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -1566,6 +1620,7 @@
  "CHARGESLOWAE": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -1595,6 +1650,7 @@
  "CHARGE_IN": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "25",
@@ -1624,6 +1680,7 @@
  "CHARGE_ROOT": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -1650,6 +1707,7 @@
  "CHARGE_SHIELD": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -1676,6 +1734,7 @@
  "CHARGINGBLADE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -1707,6 +1766,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "18",
@@ -1739,6 +1799,7 @@
  "CLAYMORECHARGE": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "20",
@@ -1770,6 +1831,7 @@
  "CLAYMORESLASH": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -1800,6 +1862,7 @@
  "CLEANSEHEAL": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -1827,6 +1890,7 @@
  "CLEANSESPEED2": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -1853,6 +1917,7 @@
  "CLEANSE_DASH": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -1877,6 +1942,7 @@
  "CLEAVE": {
   "area": null,
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -1908,6 +1974,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "26.8",
@@ -1935,6 +2002,7 @@
  "CONCUSSIVEBLOW_MULTI_1": {
   "area": null,
   "cast_range": "4",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -1963,6 +2031,7 @@
  "CONEPUNCH2": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -1989,6 +2058,7 @@
  "CREATE_OPENING": {
   "area": null,
   "cast_range": "2.5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -2022,6 +2092,7 @@
    }
   ],
   "cast_range": "24",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -2047,6 +2118,7 @@
  "CROSSBOW_CONE_ULTIMATE": {
   "area": null,
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": true,
   "cooldown": "30",
@@ -2096,6 +2168,7 @@
    }
   ],
   "cast_range": "26",
+  "caster_moves": null,
   "casting_time": "0.7",
   "channel": true,
   "cooldown": "35",
@@ -2120,6 +2193,7 @@
  "CROSSSTEP_ROUNDHOUSE": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -2148,6 +2222,7 @@
  "CRYSTALWAVE": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -2180,6 +2255,7 @@
  "CRYSTALXBOW": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -2208,6 +2284,7 @@
  "CRYSTAL_DAGGER_BLADE_RING": {
   "area": null,
   "cast_range": "7",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -2234,6 +2311,7 @@
  "CRYSTAL_SCYTHE_DASH_ZONE": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -2263,6 +2341,7 @@
    }
   ],
   "cast_range": "16",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "5",
@@ -2287,6 +2366,7 @@
  "CURSEDBEAM": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "10",
@@ -2311,6 +2391,7 @@
  "CURSEDHANDS_STACKUP": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -2333,6 +2414,7 @@
  "CURSEDOT": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2.4",
@@ -2362,6 +2444,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.2",
   "channel": null,
   "cooldown": "5",
@@ -2405,6 +2488,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -2435,6 +2519,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -2472,6 +2557,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "2",
   "channel": null,
   "cooldown": "30",
@@ -2499,6 +2585,7 @@
  "CURSE_SKELETON_BARF_FDHR": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -2529,6 +2616,7 @@
  "DARKMATTER": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "15",
@@ -2551,6 +2639,7 @@
  "DASHDMG": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -2580,6 +2669,7 @@
  "DASHKICK": {
   "area": null,
   "cast_range": "4",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
@@ -2606,6 +2696,7 @@
  "DASH_KNOCKBACK": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -2638,6 +2729,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -2665,6 +2757,7 @@
  "DEATHCURSE2": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "15",
@@ -2689,6 +2782,7 @@
  "DEATHMARK": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": true,
   "cooldown": "15",
@@ -2712,6 +2806,7 @@
  "DEEPCUTS": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -2737,6 +2832,7 @@
  "DEFENSERUN": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -2761,6 +2857,7 @@
  "DEFENSIVESLAM": {
   "area": null,
   "cast_range": "3.5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -2788,6 +2885,7 @@
  "DEFLECTINGSTANCE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "10",
@@ -2811,6 +2909,7 @@
  "DELAYED_TELEPORT": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -2834,6 +2933,7 @@
  "DEMONWALK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -2860,6 +2960,7 @@
  "DISEMBOWEL": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -2886,6 +2987,7 @@
  "DISRUPTIONIMMUNITY": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -2908,6 +3010,7 @@
  "DIVEPUNCH_RISE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -2932,6 +3035,7 @@
  "DIVINE_JUMP": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -2960,6 +3064,7 @@
  "DMG_BLINK": {
   "area": null,
   "cast_range": "7",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -2984,6 +3089,7 @@
  "DODGE": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -3004,6 +3110,7 @@
  "DUALAXE_CRAWLER": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -3032,6 +3139,7 @@
  "DUAL_NATURE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3064,6 +3172,7 @@
  "DUAL_RAPIDFIRE": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "20",
@@ -3100,6 +3209,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "30",
@@ -3132,6 +3242,7 @@
  "DYNAMIC_DEFENSE": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -3157,6 +3268,7 @@
  "ELECTRICSHOCK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "45",
@@ -3186,6 +3298,7 @@
  "EMERGENCY_SHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3213,6 +3326,7 @@
  "EMPOWERBEAM": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -3244,6 +3358,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3265,6 +3380,7 @@
  "ENERGYSHIELD2": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3289,6 +3405,7 @@
  "ENERGY_BARRIER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -3311,6 +3428,7 @@
  "ENFEEBLEAURA": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3346,6 +3464,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": true,
   "cooldown": "63",
@@ -3372,6 +3491,7 @@
  "ENIGMA_BLADE": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -3398,6 +3518,7 @@
  "ENRAGE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -3420,6 +3541,7 @@
  "ETHERIAL_PATH": {
   "area": null,
   "cast_range": "16",
+  "caster_moves": true,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "60",
@@ -3447,6 +3569,7 @@
  "EXECUTEDAGGER": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
@@ -3474,6 +3597,7 @@
  "EXPLODING_SHOT": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -3498,6 +3622,7 @@
  "FEAR_AURA": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -3526,6 +3651,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "1.5",
   "channel": true,
   "cooldown": "15",
@@ -3550,6 +3676,7 @@
  "FIRECONE": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -3599,6 +3726,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "30",
@@ -3627,6 +3755,7 @@
  "FIRESTAFFBOLT2": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0.8",
   "channel": null,
   "cooldown": "0",
@@ -3654,6 +3783,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "4",
@@ -3681,6 +3811,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -3714,6 +3845,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -3740,6 +3872,7 @@
  "FLAMEDASH": {
   "area": null,
   "cast_range": "14",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -3772,6 +3905,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -3796,6 +3930,7 @@
  "FLAMESHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -3829,6 +3964,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "1",
   "channel": null,
   "cooldown": "35",
@@ -3853,6 +3989,7 @@
  "FLEE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "120",
@@ -3879,6 +4016,7 @@
  "FLEE_MOB": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "180",
@@ -3904,6 +4042,7 @@
  "FLOWSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "120",
@@ -3931,6 +4070,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "50",
@@ -3956,6 +4096,7 @@
  "FORESTOFSPEARS": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
@@ -3980,6 +4121,7 @@
  "FRAZZLE2": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "12",
@@ -4004,6 +4146,7 @@
  "FREEZINGWIND": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -4033,6 +4176,7 @@
  "FROSTBEAM": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -4074,6 +4218,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -4107,6 +4252,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -4137,6 +4283,7 @@
  "FROSTSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "40",
@@ -4164,6 +4311,7 @@
  "FROSTWALK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -4195,6 +4343,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "0.3",
   "channel": null,
   "cooldown": "1.2",
@@ -4226,6 +4375,7 @@
    }
   ],
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "8",
@@ -4253,6 +4403,7 @@
  "FROST_TARGETED_CHANNEL": {
   "area": null,
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
@@ -4291,6 +4442,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.7",
   "channel": null,
   "cooldown": "30",
@@ -4323,6 +4475,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -4354,6 +4507,7 @@
  "GENEROUSHEAL": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "1.5",
@@ -4384,6 +4538,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -4412,6 +4567,7 @@
  "GHOSTSTRIKE": {
   "area": null,
   "cast_range": "7",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -4437,6 +4593,7 @@
  "GIANTSTEPS": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -4480,6 +4637,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -4508,6 +4666,7 @@
  "GLASS_MOVESPEED": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -4537,6 +4696,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -4580,6 +4740,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -4609,6 +4770,7 @@
  "GROUNDDASH": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "23.5",
@@ -4640,6 +4802,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -4669,6 +4832,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "10",
@@ -4701,6 +4865,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -4728,6 +4893,7 @@
  "GROWING_PUNCH": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -4754,6 +4920,7 @@
  "GROWING_RAGE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -4783,6 +4950,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
@@ -4817,6 +4985,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -4843,6 +5012,7 @@
  "HALBERDSMASH": {
   "area": null,
   "cast_range": "5.5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -4869,6 +5039,7 @@
  "HAMMERTACKLE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -4900,6 +5071,7 @@
  "HAMMERWHIRLWIND2": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -4929,6 +5101,7 @@
  "HAMMER_SHOVE": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
@@ -4956,6 +5129,7 @@
  "HAMMER_TREMOR": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "10",
@@ -4980,6 +5154,7 @@
  "HAMSTRINGSWORD": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "6",
@@ -5006,6 +5181,7 @@
  "HASTE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -5043,6 +5219,7 @@
    }
   ],
   "cast_range": "24",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "0",
@@ -5067,6 +5244,7 @@
  "HEALINGBEAM": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
@@ -5098,6 +5276,7 @@
    }
   ],
   "cast_range": "24",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -5122,6 +5301,7 @@
  "HELMET_FIREBREATH": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -5146,6 +5326,7 @@
  "HEROICSTRIKE2": {
   "area": null,
   "cast_range": "3.5",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -5170,6 +5351,7 @@
  "HOLYDESPERATEPRAYER2": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -5200,6 +5382,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "18",
@@ -5235,6 +5418,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "3.5",
@@ -5259,6 +5443,7 @@
  "HOLYHOT": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -5282,6 +5467,7 @@
  "HOLYORB": {
   "area": null,
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -5306,6 +5492,7 @@
  "HOLYSHIELD": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -5333,6 +5520,7 @@
  "HOLYTOUCH": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "20",
@@ -5366,6 +5554,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "65",
@@ -5398,6 +5587,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "1",
   "channel": null,
   "cooldown": "30",
@@ -5424,6 +5614,7 @@
  "HOTSHIELD": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -5451,6 +5642,7 @@
  "HOVER_SPRINT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": true,
   "cooldown": "10",
@@ -5474,6 +5666,7 @@
  "HOWL": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -5503,6 +5696,7 @@
  "HUMAN_TORCH": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.7",
   "channel": null,
   "cooldown": "20",
@@ -5529,6 +5723,7 @@
  "HYPER_FOCUS": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -5549,6 +5744,7 @@
  "ICEBLOCK2": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "90",
@@ -5580,6 +5776,7 @@
    }
   ],
   "cast_range": "26",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -5613,6 +5810,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "1.2",
   "channel": null,
   "cooldown": "0",
@@ -5646,6 +5844,7 @@
    }
   ],
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "30",
@@ -5686,6 +5885,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "16",
@@ -5716,6 +5916,7 @@
  "IMMORTAL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -5740,6 +5941,7 @@
  "IMPULSE_PUNCH": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "20",
@@ -5769,6 +5971,7 @@
  "INNERBLEEDING": {
   "area": null,
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -5794,6 +5997,7 @@
  "INNER_CORRUPTION": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -5816,6 +6020,7 @@
  "INTERRUPT2": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -5841,6 +6046,7 @@
  "INVISIBLE_WALK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "60",
@@ -5864,6 +6070,7 @@
  "INVULNERABILITY": {
   "area": null,
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -5898,6 +6105,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "6",
@@ -5926,6 +6134,7 @@
  "JUMP": {
   "area": null,
   "cast_range": "14",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -5953,6 +6162,7 @@
    }
   ],
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0.3",
   "channel": null,
   "cooldown": "18",
@@ -5989,6 +6199,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -6014,6 +6225,7 @@
  "KNOCKOUT": {
   "area": null,
   "cast_range": "1.5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -6036,6 +6248,7 @@
  "KNUCKLECOMBO": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -6064,6 +6277,7 @@
  "KNUCKLE_COUNTER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -6092,6 +6306,7 @@
  "LANCE_CHARGE": {
   "area": null,
   "cast_range": "16",
+  "caster_moves": true,
   "casting_time": "0.35",
   "channel": null,
   "cooldown": "25",
@@ -6121,6 +6336,7 @@
  "LAUNCHER": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -6149,6 +6365,7 @@
  "LEGBREAKER": {
   "area": null,
   "cast_range": "4",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -6177,6 +6394,7 @@
  "LETHAL_CLEAVER": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -6205,6 +6423,7 @@
  "LEVITATE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "45",
@@ -6229,6 +6448,7 @@
  "LIFESAVIOR": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "45",
@@ -6253,6 +6473,7 @@
  "LIFESTEALAURA": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -6289,6 +6510,7 @@
    }
   ],
   "cast_range": "26",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -6314,6 +6536,7 @@
  "MACELEAP": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -6342,6 +6565,7 @@
  "MACE_CRYSTAL_FRAGMENT_STORM": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1.5",
@@ -6382,6 +6606,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -6406,6 +6631,7 @@
  "MAGICMUSHROOM": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "90",
@@ -6435,6 +6661,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0.35",
   "channel": null,
   "cooldown": "5",
@@ -6468,6 +6695,7 @@
    }
   ],
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "30",
@@ -6500,6 +6728,7 @@
    }
   ],
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -6530,6 +6759,7 @@
  "MANADRAIN": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -6553,6 +6783,7 @@
  "MAXHEALTHBUFF": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "40",
@@ -6580,6 +6811,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "2",
   "channel": null,
   "cooldown": "30",
@@ -6607,6 +6839,7 @@
  "MIGHTYBLOW": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -6638,6 +6871,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -6667,6 +6901,7 @@
  "MIMIC": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": true,
   "cooldown": "0",
@@ -6691,6 +6926,7 @@
  "MIST_WALKER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "50",
@@ -6714,6 +6950,7 @@
  "MOVEMENTSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "60",
@@ -6738,6 +6975,7 @@
  "MULTISHOT2": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -6771,6 +7009,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -6799,6 +7038,7 @@
  "NATURERESILIENCE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -6823,6 +7063,7 @@
  "NATURE_ULTIMATE_SINGLE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -6847,6 +7088,7 @@
  "OUTOFCOMBATHEAL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -6871,6 +7113,7 @@
  "OVERSPRINT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "30",
@@ -6890,6 +7133,7 @@
  "PAINSPRINT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "150",
@@ -6912,6 +7156,7 @@
  "PARRY": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -6937,6 +7182,7 @@
  "PASSIVE_AASPEEDCHANCE_BOW": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -6957,6 +7203,7 @@
  "PASSIVE_AASPEEDCHANCE_DAGGER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -6977,6 +7224,7 @@
  "PASSIVE_AASPEEDCHANCE_SPEAR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -6997,6 +7245,7 @@
  "PASSIVE_ARMORCHANCE_AXE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7019,6 +7268,7 @@
  "PASSIVE_ARMORCHANCE_SWORD": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7041,6 +7291,7 @@
  "PASSIVE_ARMOR_BALANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7062,6 +7313,7 @@
  "PASSIVE_ARMOR_CASTER_ARCANESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7084,6 +7336,7 @@
  "PASSIVE_ARMOR_CASTER_NATURESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7106,6 +7359,7 @@
  "PASSIVE_ARMOR_CCDURATION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7125,6 +7379,7 @@
  "PASSIVE_ARMOR_CD_REDUCTION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7144,6 +7399,7 @@
  "PASSIVE_ARMOR_INCREASED_AASPEED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7163,6 +7419,7 @@
  "PASSIVE_ARMOR_INCREASED_CASTSPEED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7182,6 +7439,7 @@
  "PASSIVE_ARMOR_INCREASED_CCR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7203,6 +7461,7 @@
  "PASSIVE_ARMOR_INCREASED_DAMAGE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7224,6 +7483,7 @@
  "PASSIVE_ARMOR_MR_AR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7243,6 +7503,7 @@
  "PASSIVE_ARMOR_PIERCE_STACK": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7267,6 +7528,7 @@
  "PASSIVE_ARMOR_REDUCED_ENERGYCOST": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7286,6 +7548,7 @@
  "PASSIVE_ATTACKBUFF_ARCANESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7305,6 +7568,7 @@
  "PASSIVE_AVALON_YIELD_FIBER_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7324,6 +7588,7 @@
  "PASSIVE_AVALON_YIELD_FISH_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7343,6 +7608,7 @@
  "PASSIVE_AVALON_YIELD_HIDE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7362,6 +7628,7 @@
  "PASSIVE_AVALON_YIELD_ORE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7381,6 +7648,7 @@
  "PASSIVE_AVALON_YIELD_ROCK_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7400,6 +7668,7 @@
  "PASSIVE_AVALON_YIELD_WOOD_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7419,6 +7688,7 @@
  "PASSIVE_BACKPACK_FIBER_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7438,6 +7708,7 @@
  "PASSIVE_BACKPACK_FISH_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7457,6 +7728,7 @@
  "PASSIVE_BACKPACK_HIDE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7476,6 +7748,7 @@
  "PASSIVE_BACKPACK_ORE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7495,6 +7768,7 @@
  "PASSIVE_BACKPACK_ROCK_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7514,6 +7788,7 @@
  "PASSIVE_BACKPACK_WOOD_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7533,6 +7808,7 @@
  "PASSIVE_BALANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7554,6 +7830,7 @@
  "PASSIVE_BLEEDCHANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7576,6 +7853,7 @@
  "PASSIVE_BURN": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7598,6 +7876,7 @@
  "PASSIVE_CANNOTATTACK": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7615,6 +7894,7 @@
  "PASSIVE_CAPE_AVALON": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7641,6 +7921,7 @@
  "PASSIVE_CAPE_BRIDGEWATCH": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7668,6 +7949,7 @@
  "PASSIVE_CAPE_CAERLEON": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7689,6 +7971,7 @@
  "PASSIVE_CAPE_DEMON": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7714,6 +7997,7 @@
  "PASSIVE_CAPE_FEY": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7739,6 +8023,7 @@
  "PASSIVE_CAPE_FORTSTERLING": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7765,6 +8050,7 @@
  "PASSIVE_CAPE_HERETIC": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7791,6 +8077,7 @@
  "PASSIVE_CAPE_KEEPER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7814,6 +8101,7 @@
  "PASSIVE_CAPE_LYMHURST": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7835,6 +8123,7 @@
  "PASSIVE_CAPE_MARTLOCK": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7861,6 +8150,7 @@
  "PASSIVE_CAPE_MORGANA": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7883,6 +8173,7 @@
  "PASSIVE_CAPE_SMUGGLER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7904,6 +8195,7 @@
  "PASSIVE_CAPE_THETFORD": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7927,6 +8219,7 @@
  "PASSIVE_CAPE_UNDEAD": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7951,6 +8244,7 @@
  "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7971,6 +8265,7 @@
  "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -7991,6 +8286,7 @@
  "PASSIVE_CASTSPEED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8010,6 +8306,7 @@
  "PASSIVE_CCDURATION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8029,6 +8326,7 @@
  "PASSIVE_CCDURATION_CHANCE_HAMMER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8049,6 +8347,7 @@
  "PASSIVE_CCDURATION_CHANCE_MACE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8069,6 +8368,7 @@
  "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8089,6 +8389,7 @@
  "PASSIVE_CD_REDUCTION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8108,6 +8409,7 @@
  "PASSIVE_CD_RESET_Q": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8129,6 +8431,7 @@
  "PASSIVE_CURSE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8153,6 +8456,7 @@
  "PASSIVE_ENERGYCHANCE_ARCANESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8172,6 +8476,7 @@
  "PASSIVE_ENERGYCHANCE_BOW": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8191,6 +8496,7 @@
  "PASSIVE_ENERGYCHANCE_CROSSBOW": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8210,6 +8516,7 @@
  "PASSIVE_ENERGYCHANCE_CURSEDSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8229,6 +8536,7 @@
  "PASSIVE_ENERGYCHANCE_FIRESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8248,6 +8556,7 @@
  "PASSIVE_ENERGYCHANCE_FROSTSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8267,6 +8576,7 @@
  "PASSIVE_ENERGYCHANCE_HAMMER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8286,6 +8596,7 @@
  "PASSIVE_ENERGYCHANCE_HOLYSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8305,6 +8616,7 @@
  "PASSIVE_ENERGYCHANCE_MACE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8324,6 +8636,7 @@
  "PASSIVE_ENERGYCHANCE_NATURESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8343,6 +8656,7 @@
  "PASSIVE_ENERGYCHANCE_QUARTERSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8362,6 +8676,7 @@
  "PASSIVE_FROST": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8386,6 +8701,7 @@
  "PASSIVE_HEAD_YIELD_FIBER_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8408,6 +8724,7 @@
  "PASSIVE_HEAD_YIELD_FISH_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8430,6 +8747,7 @@
  "PASSIVE_HEAD_YIELD_HIDE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8452,6 +8770,7 @@
  "PASSIVE_HEAD_YIELD_ORE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8474,6 +8793,7 @@
  "PASSIVE_HEAD_YIELD_ROCK_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8496,6 +8816,7 @@
  "PASSIVE_HEAD_YIELD_WOOD_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8518,6 +8839,7 @@
  "PASSIVE_HEALPOWERCHANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8540,6 +8862,7 @@
  "PASSIVE_HEALTHCHANCE_AXE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8564,6 +8887,7 @@
  "PASSIVE_HEALTHCHANCE_DAGGER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8588,6 +8912,7 @@
  "PASSIVE_HEALTHCHANCE_HAMMER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8612,6 +8937,7 @@
  "PASSIVE_HEALTHCHANCE_MACE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8636,6 +8962,7 @@
  "PASSIVE_HEALTHCHANCE_QUARTERSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8660,6 +8987,7 @@
  "PASSIVE_HEALTHCHANCE_SPEAR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8684,6 +9012,7 @@
  "PASSIVE_HEROICSTACK": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8706,6 +9035,7 @@
  "PASSIVE_HOLY_ASCENDED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8728,6 +9058,7 @@
  "PASSIVE_INCREASED_AASPEED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8747,6 +9078,7 @@
  "PASSIVE_INCREASED_CCR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8768,6 +9100,7 @@
  "PASSIVE_INCREASED_DAMAGE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8789,6 +9122,7 @@
  "PASSIVE_KNOCKBACKCHANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8813,6 +9147,7 @@
  "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8837,6 +9172,7 @@
  "PASSIVE_KNUCKLE_BRAWLER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8857,6 +9193,7 @@
  "PASSIVE_KNUCKLE_BRAWLER_SPEED": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8877,6 +9214,7 @@
  "PASSIVE_KNUCKLE_COMBOBREAKER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8901,6 +9239,7 @@
  "PASSIVE_KNUCKLE_RAGE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8925,6 +9264,7 @@
  "PASSIVE_KNUCKLE_RUSHDOWN": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8945,6 +9285,7 @@
  "PASSIVE_MAXLOAD_SHOES": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8964,6 +9305,7 @@
  "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -8984,6 +9326,7 @@
  "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9004,6 +9347,7 @@
  "PASSIVE_MR_AR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9023,6 +9367,7 @@
  "PASSIVE_PLATEARMOR_HEALTH_REDUCTION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9045,6 +9390,7 @@
  "PASSIVE_PLATEARMOR_THREATGENERATION": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9064,6 +9410,7 @@
  "PASSIVE_REDUCED_ENERGYCOST": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9083,6 +9430,7 @@
  "PASSIVE_REDUCE_DMG_SWORD": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9105,6 +9453,7 @@
  "PASSIVE_SHAPESHIFT_ATTACK_BUFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9129,6 +9478,7 @@
  "PASSIVE_SHAPESHIFT_GATHER_CHARGES": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9150,6 +9500,7 @@
  "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9174,6 +9525,7 @@
  "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9194,6 +9546,7 @@
  "PASSIVE_SHOES_YIELD_FIBER_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9216,6 +9569,7 @@
  "PASSIVE_SHOES_YIELD_FISH_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9238,6 +9592,7 @@
  "PASSIVE_SHOES_YIELD_HIDE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9260,6 +9615,7 @@
  "PASSIVE_SHOES_YIELD_ORE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9282,6 +9638,7 @@
  "PASSIVE_SHOES_YIELD_ROCK_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9304,6 +9661,7 @@
  "PASSIVE_SHOES_YIELD_WOOD_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9326,6 +9684,7 @@
  "PASSIVE_SILENCECHANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9350,6 +9709,7 @@
  "PASSIVE_SLOWPOISON": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9374,6 +9734,7 @@
  "PASSIVE_SPELLPOWER_CASTER_CROSSBOW": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9394,6 +9755,7 @@
  "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9414,6 +9776,7 @@
  "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9434,6 +9797,7 @@
  "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9454,6 +9818,7 @@
  "PASSIVE_SPELLPOWER_CHANCE_AXE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9474,6 +9839,7 @@
  "PASSIVE_SPELLPOWER_CHANCE_DAGGER": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9494,6 +9860,7 @@
  "PASSIVE_SPELLPOWER_CHANCE_SPEAR": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9514,6 +9881,7 @@
  "PASSIVE_STUNCHANCE": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9538,6 +9906,7 @@
  "PASSIVE_STUNCHANCE_QUARTERSTAFF": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9562,6 +9931,7 @@
  "PASSIVE_YIELD_FIBER_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9584,6 +9954,7 @@
  "PASSIVE_YIELD_FISH_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9606,6 +9977,7 @@
  "PASSIVE_YIELD_HIDE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9628,6 +10000,7 @@
  "PASSIVE_YIELD_ORE_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9650,6 +10023,7 @@
  "PASSIVE_YIELD_ROCK_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9672,6 +10046,7 @@
  "PASSIVE_YIELD_WOOD_T4": {
   "area": null,
   "cast_range": null,
+  "caster_moves": null,
   "casting_time": null,
   "channel": null,
   "cooldown": null,
@@ -9694,6 +10069,7 @@
  "PBAOE_KNOCKBACK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -9723,6 +10099,7 @@
  "PBAOE_PULL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -9748,6 +10125,7 @@
  "PERPETUALENERGY": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -9769,6 +10147,7 @@
  "POISONARROW": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -9804,6 +10183,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "27.5",
@@ -9830,6 +10210,7 @@
  "PROTOTYPE_BIDE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "50",
@@ -9862,6 +10243,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -9884,6 +10266,7 @@
  "PROTOTYPE_CLEAR_MIND": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -9904,6 +10287,7 @@
  "PROTOTYPE_DISORIENT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -9930,6 +10314,7 @@
  "PROTOTYPE_FLARE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -9952,6 +10337,7 @@
  "PROTOTYPE_GLIDE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "40",
@@ -9969,6 +10355,7 @@
  "PROTOTYPE_ICESHIELD": {
   "area": null,
   "cast_range": "6",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -9999,6 +10386,7 @@
  "PROTOTYPE_IMMUNEAREA": {
   "area": null,
   "cast_range": "7",
+  "caster_moves": true,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "40",
@@ -10021,6 +10409,7 @@
  "PROTOTYPE_SKYFALL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -10045,6 +10434,7 @@
  "PULSINGHEAL": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -10075,6 +10465,7 @@
  "PUMMELING_STRIKES": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": true,
   "cooldown": "20",
@@ -10100,6 +10491,7 @@
  "PUNCHCOMBO": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "20",
@@ -10117,6 +10509,7 @@
  "PURGE_HELMET": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -10140,6 +10533,7 @@
  "PURGINGSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "120",
@@ -10166,6 +10560,7 @@
  "PURGINGSHIELD2": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -10197,6 +10592,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -10222,6 +10618,7 @@
  "PYROBLAST_SKILLSHOT": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "15",
@@ -10248,6 +10645,7 @@
  "QDASH": {
   "area": null,
   "cast_range": "4.5",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
@@ -10284,6 +10682,7 @@
    }
   ],
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
@@ -10308,6 +10707,7 @@
  "QSWHIRLWIND": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "29",
@@ -10343,6 +10743,7 @@
    }
   ],
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -10372,6 +10773,7 @@
  "QS_SLOWROPE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "37.5",
@@ -10401,6 +10803,7 @@
  "QS_WHIRLWIND2": {
   "area": null,
   "cast_range": "4",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -10435,6 +10838,7 @@
    }
   ],
   "cast_range": "16",
+  "caster_moves": true,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "30",
@@ -10464,6 +10868,7 @@
  "RAPIERSTAB": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -10492,6 +10897,7 @@
  "REANIMATE": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "7",
@@ -10516,6 +10922,7 @@
  "REFLECTAREA": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "40",
@@ -10542,6 +10949,7 @@
  "REFLECT_CHANNEL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -10574,6 +10982,7 @@
    }
   ],
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -10600,6 +11009,7 @@
  "REJUVENATION": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -10643,6 +11053,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2.5",
@@ -10668,6 +11079,7 @@
  "RENDINGCOMBO": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -10699,6 +11111,7 @@
  "RENDINGSPIN": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -10728,6 +11141,7 @@
  "RENDINGSTRIKE": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -10756,6 +11170,7 @@
  "RENDINGSWING": {
   "area": null,
   "cast_range": "7",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -10786,6 +11201,7 @@
  "RESURRECTION": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "1",
   "channel": null,
   "cooldown": "30",
@@ -10810,6 +11226,7 @@
  "RETALIATE2": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "45",
@@ -10832,6 +11249,7 @@
  "ROOTFIELD": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": true,
   "cooldown": "0",
@@ -10859,6 +11277,7 @@
  "ROOTSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "120",
@@ -10889,6 +11308,7 @@
  "ROTTENVINES": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -10914,6 +11334,7 @@
  "ROYAL_BANNER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "50",
@@ -10937,6 +11358,7 @@
  "ROYAL_MARCH": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -10972,6 +11394,7 @@
    }
   ],
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "7",
@@ -10997,6 +11420,7 @@
  "SACRIFICE_HEAL": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "50",
@@ -11027,6 +11451,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11059,6 +11484,7 @@
    }
   ],
   "cast_range": "18",
+  "caster_moves": null,
   "casting_time": "0.3",
   "channel": null,
   "cooldown": "1.5",
@@ -11081,6 +11507,7 @@
  "SELF_CLEANSE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11106,6 +11533,7 @@
  "SEPARATING_SLAM": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11135,6 +11563,7 @@
  "SHAPESHIFT_AVALONIAN_EAGLE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -11157,6 +11586,7 @@
  "SHAPESHIFT_BEAR": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -11179,6 +11609,7 @@
  "SHAPESHIFT_CRYSTAL_COBRA": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -11205,6 +11636,7 @@
  "SHAPESHIFT_ENT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "5",
@@ -11230,6 +11662,7 @@
  "SHAPESHIFT_IMP": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "8",
@@ -11256,6 +11689,7 @@
  "SHAPESHIFT_PANTHER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "5",
@@ -11279,6 +11713,7 @@
  "SHAPESHIFT_ROCK_ELEMENTAL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -11303,6 +11738,7 @@
  "SHAPESHIFT_WEREWOLF": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "8",
@@ -11327,6 +11763,7 @@
  "SHAPE_Q_CAST": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.8",
   "channel": null,
   "cooldown": "0",
@@ -11352,6 +11789,7 @@
  "SHAPE_Q_CONE_MELEE": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
@@ -11385,6 +11823,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "7",
@@ -11435,6 +11874,7 @@
    }
   ],
   "cast_range": "16",
+  "caster_moves": null,
   "casting_time": "0.3",
   "channel": null,
   "cooldown": "2",
@@ -11481,6 +11921,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
@@ -11518,6 +11959,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "8",
@@ -11551,6 +11993,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
@@ -11580,6 +12023,7 @@
  "SHAPE_W_TETHERBEAM": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -11619,6 +12063,7 @@
    }
   ],
   "cast_range": "16",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -11648,6 +12093,7 @@
  "SHIELDFRIENDLY": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "6",
@@ -11682,6 +12128,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -11719,6 +12166,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3.5",
@@ -11744,6 +12192,7 @@
  "SHOULDERTACKLE": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11770,6 +12219,7 @@
  "SHOVEL": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -11799,6 +12249,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11827,6 +12278,7 @@
  "SHRINKINGSMASH": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -11861,6 +12313,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0.7",
   "channel": null,
   "cooldown": "15",
@@ -11892,6 +12345,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "20",
@@ -11922,6 +12376,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -11954,6 +12409,7 @@
    }
   ],
   "cast_range": "26",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -11984,6 +12440,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -12017,6 +12474,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "30",
@@ -12043,6 +12501,7 @@
  "SLOWSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "60",
@@ -12069,6 +12528,7 @@
  "SMELLOFBLOOD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -12101,6 +12561,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "3",
@@ -12130,6 +12591,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -12156,6 +12618,7 @@
  "SNIPESHOT_CROSSBOW": {
   "area": null,
   "cast_range": "16",
+  "caster_moves": null,
   "casting_time": "2",
   "channel": null,
   "cooldown": "15",
@@ -12191,6 +12654,7 @@
    }
   ],
   "cast_range": "20",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -12218,6 +12682,7 @@
  "SOUL_LINK": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -12251,6 +12716,7 @@
    }
   ],
   "cast_range": "22",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -12295,6 +12761,7 @@
    }
   ],
   "cast_range": "17",
+  "caster_moves": true,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "30",
@@ -12329,6 +12796,7 @@
    }
   ],
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -12358,6 +12826,7 @@
  "SPEEDARCHER_KITE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -12382,6 +12851,7 @@
  "SPEEDCASTER": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12401,6 +12871,7 @@
  "SPEEDSHOT2": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -12424,6 +12895,7 @@
  "SPELLRUSH": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "45",
@@ -12454,6 +12926,7 @@
    }
   ],
   "cast_range": "17",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -12481,6 +12954,7 @@
  "SPINATTACK": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -12505,6 +12979,7 @@
  "SPINNING_SMASH": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12546,6 +13021,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12573,6 +13049,7 @@
  "SPIRITSPEAR": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -12595,6 +13072,7 @@
  "SPLASHWAVE": {
   "area": null,
   "cast_range": "18",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
@@ -12627,6 +13105,7 @@
    }
   ],
   "cast_range": "13",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -12655,6 +13134,7 @@
  "SPRINTEOT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12675,6 +13155,7 @@
  "SPRINTHOT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12699,6 +13180,7 @@
  "SPRINT_CD_REDUCTION": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "32.5",
@@ -12727,6 +13209,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
@@ -12752,6 +13235,7 @@
  "STONESKIN": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -12771,6 +13255,7 @@
  "STORMSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
@@ -12796,6 +13281,7 @@
  "STUNRUN": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -12821,6 +13307,7 @@
  "SUMMONER_CD_REDUCTION": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "40",
@@ -12841,6 +13328,7 @@
  "SUNDERARMOR2": {
   "area": null,
   "cast_range": "2",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -12866,6 +13354,7 @@
  "SUNDERSHOT": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "1",
   "channel": null,
   "cooldown": "7",
@@ -12892,6 +13381,7 @@
  "SWAP": {
   "area": null,
   "cast_range": "10",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
@@ -12916,6 +13406,7 @@
  "SWORD_BERSERK_RUN_RE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "0",
@@ -12939,6 +13430,7 @@
  "SWORD_SPIN": {
   "area": null,
   "cast_range": "9",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -12976,6 +13468,7 @@
    }
   ],
   "cast_range": "26",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -13003,6 +13496,7 @@
  "TAR_RING": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "20",
@@ -13029,6 +13523,7 @@
  "TAUNT": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13059,6 +13554,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "0",
@@ -13086,6 +13582,7 @@
  "THREATENINGSMASH": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
@@ -13111,6 +13608,7 @@
  "THREATENINGSTRIKE_HAMMER": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
@@ -13146,6 +13644,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
@@ -13185,6 +13684,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
@@ -13214,6 +13714,7 @@
    }
   ],
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "72",
@@ -13244,6 +13745,7 @@
    }
   ],
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -13273,6 +13775,7 @@
  "TRANSLUCENT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "45",
@@ -13302,6 +13805,7 @@
    }
   ],
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
@@ -13327,6 +13831,7 @@
  "TRIDENTTHROW": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
@@ -13355,6 +13860,7 @@
  "TRIPLECOMBO_DIVEKICK": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": true,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13387,6 +13893,7 @@
  "TRIPLE_KICK": {
   "area": null,
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
@@ -13416,6 +13923,7 @@
  "UNDEADARROWS": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13446,6 +13954,7 @@
    }
   ],
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "14",
@@ -13481,6 +13990,7 @@
    }
   ],
   "cast_range": "25",
+  "caster_moves": null,
   "casting_time": "0.25",
   "channel": null,
   "cooldown": "25",
@@ -13510,6 +14020,7 @@
  "VANITY_2H_BANNER_GUIDON_AJ_SPELL": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13527,6 +14038,7 @@
  "VANITY_2H_BANNER_GUIDON_GOLDEN_AJ_SPELL": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13544,6 +14056,7 @@
  "VANITY_2H_LUTE_AJ_LOVESONG_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -13561,6 +14074,7 @@
  "VANITY_2H_LUTE_AJ_OLDTOWNS_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -13578,6 +14092,7 @@
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_ALBION_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -13595,6 +14110,7 @@
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_LOVESONG_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -13612,6 +14128,7 @@
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_OLDTOWNS_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
@@ -13629,6 +14146,7 @@
  "VANITY_2H_MULTITOOL_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13646,6 +14164,7 @@
  "VANITY_2H_MULTITOOL_OVERCHARGED_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13663,6 +14182,7 @@
  "VANITY_ARMOR_VERY_WEALTHY_NOBLE_SPELL": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -13680,6 +14200,7 @@
  "VANITY_ARMOR_WEALTHY_NOBLE_SPELL": {
   "area": null,
   "cast_range": "8",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "1",
@@ -13697,6 +14218,7 @@
  "VANITY_FIREWORK_BLUE": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13714,6 +14236,7 @@
  "VANITY_FIREWORK_GREEN": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13731,6 +14254,7 @@
  "VANITY_FIREWORK_RED": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13748,6 +14272,7 @@
  "VANITY_HEAD_DESTINY_STONES_ADVANCED_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "60",
@@ -13767,6 +14292,7 @@
  "VANITY_HEAD_DESTINY_STONES_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "45",
@@ -13786,6 +14312,7 @@
  "VANITY_HEAD_FARMER_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13803,6 +14330,7 @@
  "VANITY_HEAD_FARMER_LUSH_AJ_SPELL": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13820,6 +14348,7 @@
  "VANITY_HEAD_SHADOW_HELMET_ORANGE_AJ_SPELL": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -13837,6 +14366,7 @@
  "VANITY_HEAD_SHADOW_HELMET_RED_AJ_SPELL": {
   "area": null,
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -13854,6 +14384,7 @@
  "VANITY_RUBBERBANDING": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": true,
   "cooldown": "60",
@@ -13873,6 +14404,7 @@
  "VANITY_SKELETON_LAUGH": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "120",
@@ -13892,6 +14424,7 @@
  "VANITY_SPELLBOOK_BIRD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -13909,6 +14442,7 @@
  "VANITY_SPELLBOOK_FIREWORKS": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -13926,6 +14460,7 @@
  "VANITY_SUMMONING_BAT": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -13943,6 +14478,7 @@
  "VANITY_SUMMONING_HILLMARMOT": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -13960,6 +14496,7 @@
  "VANITY_SUMMONING_PORTAL": {
   "area": null,
   "cast_range": "14",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
@@ -13979,6 +14516,7 @@
  "VANITY_SUMMONING_RABBIT": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
@@ -13996,6 +14534,7 @@
  "VANITY_SUMMONING_SNOWRABBIT": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -14013,6 +14552,7 @@
  "VANITY_SUMMONING_TOAD_EASTER": {
   "area": null,
   "cast_range": "12",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
@@ -14030,6 +14570,7 @@
  "VANITY_WARBANNER_CHARGE": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
@@ -14049,6 +14590,7 @@
  "VANITY_WARBANNER_PRESENT": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14066,6 +14608,7 @@
  "VANITY_WARBANNER_PRESENT_FW_BRIDGEWATCH": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14087,6 +14630,7 @@
  "VANITY_WARBANNER_PRESENT_FW_CAERLEON": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14108,6 +14652,7 @@
  "VANITY_WARBANNER_PRESENT_FW_FORTSTERLING": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14129,6 +14674,7 @@
  "VANITY_WARBANNER_PRESENT_FW_LYMHURST": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14150,6 +14696,7 @@
  "VANITY_WARBANNER_PRESENT_FW_MARTLOCK": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14171,6 +14718,7 @@
  "VANITY_WARBANNER_PRESENT_FW_THETFORD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14192,6 +14740,7 @@
  "VANITY_XMAS_HEAD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "120",
@@ -14209,6 +14758,7 @@
  "VAULT_ATTACK": {
   "area": null,
   "cast_range": "13",
+  "caster_moves": true,
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "15",
@@ -14236,6 +14786,7 @@
  "VOID": {
   "area": null,
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.5",
   "channel": true,
   "cooldown": "62",
@@ -14261,6 +14812,7 @@
  "WANDERLUST": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "60",
@@ -14283,6 +14835,7 @@
  "WATERSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "120",
@@ -14312,6 +14865,7 @@
    }
   ],
   "cast_range": "11",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
@@ -14347,6 +14901,7 @@
    }
   ],
   "cast_range": "15",
+  "caster_moves": null,
   "casting_time": "0.7",
   "channel": null,
   "cooldown": "20",
@@ -14371,6 +14926,7 @@
  "WHIRLING_STAFF": {
   "area": null,
   "cast_range": "5",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "3",
@@ -14393,6 +14949,7 @@
  "WILD_MAGIC": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
@@ -14425,6 +14982,7 @@
  "WINDSHIELD": {
   "area": null,
   "cast_range": "0",
+  "caster_moves": null,
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "120",
@@ -14458,6 +15016,7 @@
    }
   ],
   "cast_range": "3",
+  "caster_moves": null,
   "casting_time": "0",
   "channel": true,
   "cooldown": "40",

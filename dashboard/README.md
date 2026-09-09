@@ -60,8 +60,10 @@ looking at it.
 - **The wheel is a semicircle and the comp board is the roster dock.**
   Frameless weapon art rides the top arc (the art is the star — no card
   boxes); the hub floats in the arc's mouth; drag-to-rotate derives the
-  wheel centre from the box WIDTH, never its height. The board beneath it
-  REPLACED the old `ws-party` strip: four main-role columns of full `dm`
+  wheel centre from the box WIDTH, never its height. The board REPLACED
+  the old `ws-party` strip and, since the 2026-09-02 density redesign,
+  lives in the right-edge party flyout (`#pdash`, an `.epanel`), not
+  under the wheel: four main-role columns of full `dm`
   tiles that share `memberPop()` with what the strip used to render, plus
   the open-slots column and the notes rail (duplicate checks + kit editor).
   The board is built inside `renderRoster` and cached in `BOARD_HTML`, so

@@ -15,8 +15,11 @@ The scoring core of Comp Forge, in two parity-locked ports:
   the engine domain's data layer (`pipeline/` — sheets, templates,
   MASTERSHEET rulings, provenance gates). No other file feeds scoring.
 - **Exposes** `CompEngine` (recommend / fitness / weaknesses / explain /
-  swapReview / forge). The frontend calls this API and translates its
-  output; it never computes a score of its own.
+  swapReview / forge / refine) plus the parity-locked DESCRIPTIVE family
+  (comp_identity / kill_pressure / fight_chain / pick_report / analyze /
+  duplicate_conflicts / detect_role / role_advisory) and the kit advisor
+  (kit_options, doctrine read through `_seat_kit`). The frontend calls
+  this API and translates its output; it never computes a score of its own.
 - **Validation affordances** (2026-08-27, both ports, parity-pinned):
   `set_dressing(false)` makes every CANDIDATE evaluate naked through the
   identity short-circuit into the naked scorer — the V3-W symmetric
@@ -28,7 +31,7 @@ The scoring core of Comp Forge, in two parity-locked ports:
 - **Synergy is weapon-interaction synergy** (documented 2026-08-27):
   `synergy()` deliberately prices weapons only — worn-gear capabilities
   count in fitness, never in the pair bonuses (finding:
-  `docs/superpowers/findings/2026-08-27-gear-synergy-finding.md`).
+  `notes/findings/2026-08-27-gear-synergy-finding.md`).
 - **Structural floors are source-aware** (Option C, owner ruling
   2026-08-27): hard floors read the weapon+loadout supply in `fitness`
   and every marginal path — worn gear improves coverage/headroom/

@@ -1,10 +1,10 @@
-# Validation Plan — Composition Engine
+# Validation — Composition Engine
 
-How we test the design *before* building it, what already ran (2026-08-12), and what remains. Principle: every risky claim in the design doc gets a cheap falsification test; build only after the cheap tests pass.
+The APPEND-ONLY ruling log: every dated round, every owner quote, every score, newest entries at the bottom of each section. Standing rule (anti-circularity): comps that calibrated a template must not drive retuning against their own gate results — findings from gate runs are hypotheses for the owner, never fixes. The opening tiers below are the original 2026-08-12 plan, kept as written: how the design was tested *before* building it. Principle then and now: every risky claim gets a cheap falsification test.
 
 ## Tier 1 — Model validity (ran today, no product code needed)
 
-**V1. Golden-case recommendation tests** — `prototype_engine.py`, runnable anytime (`python3 prototype_engine.py`).
+**V1. Golden-case recommendation tests** — `tests/prototype_engine.py`, the throwaway prototype (runnable: `py -3 tests/prototype_engine.py`); its cases live on in `tests/test_golden.py`.
 A ~250-line throwaway implementation of the scoring model (13 hand-scored weapons, 1 content template) against 9 assertions encoding what any experienced player knows to be true:
 
 | # | Case | Result |
@@ -48,7 +48,7 @@ there produced two more load-bearing findings of the V1 class:
 
 ## Tier 2 — Recommendation quality (before/while building MVP, needs humans)
 
-**V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
+**V3. Expert blind test** (ran first 2026-08-23 — see the dated entries below; the V4 gate has since been re-based to `actual_gear` and enforces). Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
 
 **FIRST V3 ROUND (2026-08-23, n=1: the owner-expert, in-chat blind protocol)** — all 12 seed-20260812 castle_outpost cases answered blind (engine output withheld until each batch of picks was in), reasoning captured per case:
 
@@ -60,7 +60,7 @@ there produced two more load-bearing findings of the V1 class:
 
 **BLIND LABEL SPOT-CHECK (2026-08-23, in-chat, n=1 owner, 2 uncalibrated comps):** SOB BLAZE OS 7-man — owner "kite and clap... 1-shot comp, kill 1 or 2 then run and reset", engine "kite strong" (bomb share 45%, just under the clap line): AGREEMENT, and the comp's "lacking" kill-pressure lights match the owner's own kill-1-or-2-and-reset description. KroozLT19 6x-Wailing-Bow 8-man — engine "clap strong", owner: "it's a bomb squad... not part of main party but support main party by doing damage off timers... a different play style": a VOCABULARY GAP, not a misread — the owner taught a new archetype, shipped same day as the bomb-squad detachment label (near-monoculture ranged burst; golden T23e). Also ruled: the Harpoon review-queue entry resolved systemically (pierce/damage_debuff count as slot-carrying group utility; the review queue is now empty and only the Battleaxe override remains group-barred).
 
-**BLIND LABELS 3/4 (2026-08-23, same protocol):** Deadlyhooker P1 — owner clap, engine clap: AGREEMENT. albioncompo 20v20 competitive — owner clap, engine "split identity": MISS, diagnosed to one weapon: melee share 35.5% (a hair over the 35% ranged-core line) with Spirithunter as the sole rigid minority carrier — but the owner's same-day Harpoon ruling says its damage is incidental to its pierce-bot job. Fix (E-first-consistent, shipped same day): UTILITY CARRIERS (single-scale damage + exemption-clearing utility kit) never anchor a damage-identity split. OWNER FOLLOW-UP REFINEMENT, same session: "clap kite could be its own playstyle — the two comps I marked as clap have both clap potential and kite potential." Shipped as the fifth playstyle: `clap_kite` in styles.yaml (PROVISIONAL clap/kite weight blend, mechanics 6/3 — the ranged twin of brawl-clap), per-weapon fit = best of the weapon's clap and kite verdicts, and identity detection = ranged core with real bomb share (>=0.40) AND real reset mobility (>=2 evade pts/member) — DH P1 and the 20v20 (aoe ~.53, evade 2.6/m) read clap-kite while pure clap10 (evade 1.8) and pure kite10 (aoe .26) stay pure (golden T23f). Label spot-check running tally: 3 agreements, 1 vocabulary gap (bomb squad, taught), 1 threshold miss that unfolded into a NEW PLAYSTYLE — every miss so far has converted into a ruling the same day.
+**BLIND LABELS 3/4 (2026-08-23, same protocol):** Deadlyhooker P1 — owner clap, engine clap: AGREEMENT. albioncompo 20v20 competitive — owner clap, engine "split identity": MISS, diagnosed to one weapon: melee share 35.5% (a hair over the 35% ranged-core line) with Spirithunter as the sole rigid minority carrier — but the owner's same-day Harpoon ruling says its damage is incidental to its pierce-bot job. Fix (E-first-consistent, shipped same day): UTILITY CARRIERS (single-scale damage + exemption-clearing utility kit) never anchor a damage-identity split. OWNER FOLLOW-UP REFINEMENT, same session: "clap kite could be its own playstyle — the two comps I marked as clap have both clap potential and kite potential." Shipped as the fifth playstyle: `clap_kite` in styles.yaml (PROVISIONAL clap/kite weight blend, mechanics 6/3 — the ranged twin of brawl-clap), per-weapon fit = best of the weapon's clap and kite verdicts, and identity detection = ranged core with real bomb share (>=0.40) AND real reset mobility (>=2 evade pts/member) [superseded 2026-09-04: the bomb line is 0.45 and the kite half is STANDOFF TOOLS, not evade points — T34/T36] — DH P1 and the 20v20 (aoe ~.53, evade 2.6/m) read clap-kite while pure clap10 (evade 1.8) and pure kite10 (aoe .26) stay pure (golden T23f). Label spot-check running tally: 3 agreements, 1 vocabulary gap (bomb squad, taught), 1 threshold miss that unfolded into a NEW PLAYSTYLE — every miss so far has converted into a ruling the same day.
 
 **IDENTITY SYSTEM SHIPPED FROM THE ROUND'S FINDINGS (2026-08-23, phases A–D, all descriptive):** per-weapon style/size fit derived E-first with owner overrides (`style_overrides.yaml`, audit `out/style_fit_report.json`, H21 gates); `comp_identity()` v2 built up from member identities (T23 family); the style-selection-is-intent suggestion gate (F13/T24 — never scoring); and the kill-pressure three-light checklist (`kill_pressure()`, T25/T25b) whose bars are a lens over the comp-fitted targets this file's 2026-08-21 ruling established. VALIDATION NEEDED: the identity labels, fit verdicts, and kill-pressure lights are exactly the kind of claims the next V3-style blind rounds should spot-check — the owner reviewing `style_fit_report.json` (first review-queue entry: 2H_HARPOON_HELL) and disagreeing with labels in the planner is the tuning loop.
 
@@ -260,9 +260,9 @@ Per the standing rule, NOTHING was retuned off this run — these comps calibrat
 
 **GEAR COMBAT EXPANSION + T22 RE-PIN (2026-08-27)** — the owner directed the full combat gear catalog into the capability sheets ("add the combat pieces in"): 76 new pieces in `sheets/gear/combat_expansion.yaml` (19 heads, 16 chests, 21 shoes, 12 capes, 8 potions; gatherer/decorative/economy food skipped), every score citing the item's real ability or GEAR_STATS, with 23 `effect_overrides.yaml` additions for the known parser-artifact classes (teleports, immunity windows, self-cleanse, direction misreads — each dumps-cited). The expansion exposed a latent kit-advisor hole: comp-aware ranking was exact-marginal-first across the WHOLE catalog, and with 27 heads curated the castle-brawl control tank's "best head" became Mercenary Hood (scarce damage_debuff/interrupt), then Graveguard Helmet (scarce heal_burst) — golden T22 red. OWNER RULING (in-session): "search more comps to see what tanks are actually wearing — lots of tanks wear cleric cowl especially in brawl comps; no one is wearing graveguard helmet on tanks." Implemented evidence-first: (1) MetaBattle re-fetch widened the build sample 180→237 records — the observed engage_tank head tier now contains Cleric Cowl (confirming the owner's claim from evidence) and Graveguard Helmet appears in no tank tier; (2) comp-aware kit ranking went DOCTRINE-TIER-FIRST in both ports (marginal picks within the observed tier, never outside it — the increment-1 "member's job, not comp pool" rule closed for the full catalog); (3) T22 re-pinned to the mechanism: the tank head must come from the observed doctrine tier and never the off-tier marginal bait. Heavy Mace's comp-aware head resolves to its own observed tier (Assassin Hood / Judicator / Hellion Hood ×2 observed). Potion rows and the flagged judgment scores (marked "owner review" in the sheet) queue for the next blind round.
 
-**DRESSED FORGE + T30c RE-PIN (2026-08-27)** — forge/recommend now evaluate DRESSED candidates (weapon + combo + doctrine kit, one divergent variant; spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`), priced by the exact comp_score-with-gears the page displays (the page also started passing LOADOUT gear to scoring the same day — a discovered gap: the engine had scored full builds since 2026-08-20 but the UI never sent them). One golden flipped: T30c's "5th Longbow is negative" fixture was a NAKED four-stack, and the dressed candidate's kit (Knight Helmet/Cleric Robe/Royal Sandals/Martlock Cape/Muisak) closes ~28 units of genuinely missing supply → verdict "ok" +13.3. Against the same four-stack DRESSED in its own kits (the real-world case) the pick is negative −1.83 with caps_gain 0.0 — the 2026-08-24 ruling's exact shape. OWNER RULING (in-session): re-pin with the dressed fixture, and pin the naked-party behavior as the model's documented honesty. Search fixes landed with the change: 1-opt may re-pick the SAME weapon (the beam freezes combo+kit under an earlier partial state; re-resolution was unreachable — F5's faction_war case proved it), F5's reducibility checker prices dressed and legal-only, variant count capped at 2 by measurement (2.8× at 3 variants; 1.6×/0.9× at 2 — inside the 2× budget).
+**DRESSED FORGE + T30c RE-PIN (2026-08-27)** — forge/recommend now evaluate DRESSED candidates (weapon + combo + doctrine kit, one divergent variant; spec `notes/specs/2026-08-27-dressed-forge-design.md`), priced by the exact comp_score-with-gears the page displays (the page also started passing LOADOUT gear to scoring the same day — a discovered gap: the engine had scored full builds since 2026-08-20 but the UI never sent them). One golden flipped: T30c's "5th Longbow is negative" fixture was a NAKED four-stack, and the dressed candidate's kit (Knight Helmet/Cleric Robe/Royal Sandals/Martlock Cape/Muisak) closes ~28 units of genuinely missing supply → verdict "ok" +13.3. Against the same four-stack DRESSED in its own kits (the real-world case) the pick is negative −1.83 with caps_gain 0.0 — the 2026-08-24 ruling's exact shape. OWNER RULING (in-session): re-pin with the dressed fixture, and pin the naked-party behavior as the model's documented honesty. Search fixes landed with the change: 1-opt may re-pick the SAME weapon (the beam freezes combo+kit under an earlier partial state; re-resolution was unreachable — F5's faction_war case proved it), F5's reducibility checker prices dressed and legal-only, variant count capped at 2 by measurement (2.8× at 3 variants; 1.6×/0.9× at 2 — inside the 2× budget).
 
-**DRESSED VALIDATION HARDENING (2026-08-27, full pass — plan `docs/superpowers/plans/2026-08-27-dressed-validation-calibration.md`, findings in `docs/superpowers/findings/2026-08-27-*.md`).** The audit that motivated it: since the dressed forge, `recommend(party, n)` with no gears prices NAKED incumbents against DRESSED candidates — so every historical V3/V4 number was an asymmetric hybrid (neither weapon-model benchmark nor production). All pre-2026-08-27 numbers are re-labeled "weapon-only-incumbent benchmark with dressed candidates." What shipped (no scoring change anywhere; full battery green and byte-stable on the legacy metrics):
+**DRESSED VALIDATION HARDENING (2026-08-27, full pass — plan `notes/plans/2026-08-27-dressed-validation-calibration.md`, findings in `notes/findings/2026-08-27-*.md`).** The audit that motivated it: since the dressed forge, `recommend(party, n)` with no gears prices NAKED incumbents against DRESSED candidates — so every historical V3/V4 number was an asymmetric hybrid (neither weapon-model benchmark nor production). All pre-2026-08-27 numbers are re-labeled "weapon-only-incumbent benchmark with dressed candidates." What shipped (no scoring change anywhere; full battery green and byte-stable on the legacy metrics):
 
 - **`Engine.set_dressing(False)`** (both ports, parity case, contracts `tests/test_validation_modes.py`): candidates evaluate naked through the identity short-circuit — one formula, no second scoring path. Default ON; validation affordance only.
 - **V3 modes**: `score --mode w` (V3-W, symmetric weapon-only) / `--mode d` (V3-D, production dressed: incumbents in recorded gear else doctrine v0 else honestly naked, source recorded; candidates dressed). **The 70% gate applies to V3-D.** Richer blind form (PRIMARY NEED / BEST PICK / OTHER GOOD PICKS / BAD PICK / CONFIDENCE / REASON, optional GEAR_KEYS; legacy YOUR PICK still parses; seed-20260812 parties byte-identical) + the full metric set (top-1/top-3/acceptable/ranks/need-agreement/bad-pick-rate/confidence-weighted — never one collapsed number).
@@ -409,7 +409,7 @@ at 4.07 and 4.36, mid-pack. What actually differs is the TARGET: roads asks 0.37
 peel per person where blackzone_roam asks 2.01, a 5.4x spread. The templates
 disagree about peel far more than real comps do -- same shape in silence
 (0.13-1.01 per person) and zone_control (0.19-0.45). Corrected in
-`docs/superpowers/findings/2026-08-28-fielded-supply-per-person.md`.
+`notes/findings/2026-08-28-fielded-supply-per-person.md`.
 
 **Standing hazard this exposes, for the re-fit:** every supply/target RATIO
 carries two meanings -- "comps bring a lot" or "this template asks little" --
@@ -1886,7 +1886,7 @@ does, labelled by `comp_identity` (brawl 487 / clap_kite 305 / kite 211 /
 brawl_clap 150 / clap 109 / split 428), kits joined by player name
 (doctrine v0 where absent: 30-50% of members, counted), measured DRESSED
 per style x band as distinct rosters. Board:
-`docs/superpowers/findings/2026-09-04-style-roster-evidence.md`; numbers
+`notes/findings/2026-09-04-style-roster-evidence.md`; numbers
 and the blind-round answers: `out/style_roster_evidence.json`.
 
 What it says, before any ruling: full 20-stacks are scarce per style
@@ -2527,3 +2527,434 @@ mechanism on clap10 dressed in Royal Jackets (stays clap) and Hellions
 (turns brawl); T35/T40 speak `kit_lean` = brawl / ranged now. Rerun
 order after a harvest: audit (writes chest_lean.json) -> derive rows ->
 build_dataset -> gates. Gates green; parity 60/60.
+
+**THE COST GATE RETIRED (2026-09-07, owner ruling, in-chat).** Owner, verbatim: "remove the cost gate for weapons. we had added cost gate because the engine kept putting the crystal holy staff in every comp for it's area cleanse but a better ruling might be that that type of cleanse is not as important in small groups as the engine values. this would follow in line with us not restricting weapons but rather focusing on mechanics." Measured before changing anything: the Exalted Staff's sheet carries no `cleanse` at all — it is the catalogue's ONLY `anti_zone` supplier (Holy Dispel removes enemy ground areas), so with the gate lifted the forge took it in 8 of 8 contents, 7-man to 25-man, on an `anti_zone` target every template carried as `scales: false`. Evidence for the physics: no 7-man comp in the corpus fields an Exalted (push_monkey_7, sob_blaze_os, sortasaucy_7man); the curated comps that do are 20-mans, one 14 and one 10; the harvest (killer parties) fields one in 2.0% of 4-9 man parties, 7.2% at 10-14, 21.5% at 15-19, 32.1% at 20+. Shipped as mechanics, no weapon list: the gate removed from both ports and `composition.yaml` (`cost_tier` stays a display fact; `off_budget` gone from swap review and the page); `anti_zone` rows DELETED at castle_outpost and roads ("never invent a number" — the 2.02 target there was a fossil of the pre-08-27 anti_zone meaning, supported by no small comp) and set to `scales: true` at blackzone_roam / territory_defense / castle / faction_war (zone removal is demand created by enemy ground effects; more enemies lay more; the base-size number stays what the owner-vetted comps field). Result: no Exalted in any default 7-man forge (castle_outpost, roads, blackzone 7), Exalted still generated from 10 up (blackzone 10 target 0.9); other crystal weapons now compete on their merits (Arclight Blasters at 7, Rift Glaive at 20 clap). Open for the owner: whether 10-14 should field it (7% of winners do, one curated 10-man does) — the lever is the base-20 measurement the scaling reads, never a weapon rule. T42 + F14 pin it; T27 keeps its E-identity half.
+
+**THE ANTI_ZONE DEMAND RAMP (2026-09-07, owner ruling, same session).** Owner, on being told the scaled row still fielded the Exalted Staff at 10: "if only 7% of weapons do maybe it should be like a scaling thing. don't really need it at 10-14 and then need grows slightly as numbers grows and then becomes a good requirement at like 25+". Shipped as a general template-row mechanism, `ramp: {none_until, full_at}` in both ports: the row is DROPPED for the context at sizes <= none_until (identical to a content with no row — no target, no weight, nothing to chase), grows linearly from zero to the row's measured value at full_at, and grows with the party beyond it (the same proportional rule `scales` uses); target and soft cap move together; a row carries `ramp` or `scales`, never both. anti_zone rows at blackzone_roam / territory_defense / castle / faction_war carry `ramp: {none_until: 14, full_at: 25}` — the anchors are the owner's words, the row values stay the comp-fitted numbers. Measured after: no anti_zone requirement at 7, 10 or 14 (no Exalted forged); target 0.16 at 15, 0.98 at 20 (blackzone), 2.21 at 20 (territory), 1.8 at 25 (castle), 2.16 at 30. NOTED FOR THE OWNER: from 15 up the forge fields the Exalted Staff even on the 0.16 sliver — it is the sole supplier, so any nonzero row makes it the tie-break among otherwise equal healers; the ramp sets the SIZE of the need exactly as ruled, and whether a hybrid healer should win a tie on a sliver is a weight question, not a size one. T42 (7- and 10-man forges field none; 25-man does; manual scores) and F14 (the ramp values at 14/20/25/30) pin it; parity 60/60.
+
+### Blind round 4 (owner, 2026-09-08) — the 10-14 band, all twenty called
+
+Form: twenty rosters of 10-14 from the harvest (`--blind-round 4`, every
+graded battle excluded; the round-3 form's rosters 12-20 were re-drawn
+here). Calls came in two sittings: 1-10 on 2026-09-05 mid-way through the
+kit rounds (1 support, 3 gank, 5-7 and 9 clap, 8 brawl, 10 kite-clap; 2
+and 4 left uncalled), the rest today. Owner's calls today, in their words:
+2 "part of clap"; 4 "looking like a random roaming party"; 11 "looks
+brawl"; 12 "looks brawl"; 13 "looks clap kite possibly"; 14 "looks
+clapish, not sure"; 15 "looks like part bomb in brawl"; 16 "looks like
+clap"; 17 "looks like clap with kite potential"; 18 "gank group (you can
+tell by claws, dagger pair, whispering bow - these are catching and
+dismounting the enemy type of weapons)"; 19 "i am not sure why there are 3
+bloodletters, the only time i see bloodletters in large group fights is
+when its on a battlemount user who needs it just so they can run away if
+they get in trouble. so i assume this party is a 2nd or 3rd party of a
+larger group"; 20 "looks like part of a brawl squad". The owner's caveat
+on the whole form: "these groups i realize are not full groups but make
+part of a full party at times. my answers are based on the weapons in
+front of me alone but its hard to tell between clap and kite-clap and
+kite when looking at part of a group. so dont mind the differences too
+much."
+
+Engine labels are the audit's DRESSED reads (`blind_answers`); the naked
+`comp_identity` reproduction matches 19/20 — roster 18 reads split naked
+and clap with its kits.
+
+| # | owner | engine | grade |
+|---|-------|--------|-------|
+| 1 | support | clap strong | no style called (the support half: 3 Oathkeepers, 2 Hammers, Hallowfall, Dawnsong, Evensong) |
+| 2 | part of clap | split | abstain (melee 0.38, three points over the 0.35 ranged-core line) |
+| 3 | gank | brawl strong | gank — no gank read exists |
+| 4 | random roaming | clap strong | no style called |
+| 5 | clap | kite strong | MISS |
+| 6 | clap | clap leaning | exact |
+| 7 | clap | brawl_clap leaning | half (4 Battle Bracers, 7 supports; melee 1.0) |
+| 8 | brawl | brawl leaning | exact |
+| 9 | clap | clap strong | exact |
+| 10 | kite-clap | clap strong | half |
+| 11 | brawl | split | abstain (melee 0.47) |
+| 12 | brawl | brawl strong | exact |
+| 13 | clap-kite possibly | clap strong | half |
+| 14 | clapish | clap leaning | exact |
+| 15 | part bomb in brawl | brawl strong | exact |
+| 16 | clap | clap strong | exact |
+| 17 | clap with kite potential | clap strong | exact |
+| 18 | gank | clap leaning (dressed; split naked) | gank — no gank read exists |
+| 19 | not sure, a sub-party | split | both abstain |
+| 20 | part of brawl | brawl strong | exact |
+
+**Score:** of the 14 rosters where the owner named a style and the engine
+read one: 9 exact, 3 half-right (7, 10, 13 — every one on the clap /
+kite-clap / brawl-clap seam the owner said not to mind), 1 miss (5). Two
+abstentions where the owner called (2, 11), two gank calls the engine
+cannot make (3, 18), three rosters with no style called (1, 4, 19).
+
+**The misses, mechanically** (hypotheses for the owner — anti-circularity,
+NOTHING retuned):
+
+- **5 (clap / kite):** a ranged core (melee 0), bomb share 0.36 — under
+  the 0.45 lone-tool floor — and exactly ONE standoff tool: the Infernal
+  Staff's E (dumps `HUMAN_TORCH`, reach 12, utility 4, damage 2), which
+  `derive_style_fit` admits as a standoff E. So round 3's rule (a) made a
+  kite of a 14-stack fielding Blazing, Great Fire, Infernal, Longbow and
+  Realmbreaker, while the same label flags its two Great Holy Staffs
+  "off-kite at this size". Two levers, both owner questions: is the
+  Infernal Staff's E a standoff tool in the Bedrock sense (a hold-them-
+  there field) or a ranged utility bomb; and should one tool out-vote
+  five ranged damage dealers at 0.36 — the rule was fitted to one Icicle
+  in round 3's roster 4 and kite10's one Bedrock.
+- **11 (brawl / split):** melee 0.47. Rigid melee: Battle Bracers,
+  Galatine Pair, Greataxe; rigid ranged: Bow AND Witchwork Staff (a
+  frontline whose damage points count as a ranged carrier); flex: Heron
+  Spear and Realmbreaker, which the flex-home rule (rigid melee 2x rigid
+  ranged) leaves on the ranged side. The owner reads the four melee
+  bodies as the identity. Hypothesis: a frontline's damage points making
+  a ranged carrier — the same shape as round 3's REJECTED utility-carrier
+  rule, so it takes a ruling, not a retune.
+- **2 (part of clap / split):** Galatine Pair + Bloodletter melee against
+  Blazing + Shadowcaller ranged, Realmbreaker and Spiked Gauntlets flex;
+  melee 0.38. The owner hedged; recorded as an abstention.
+- **7 (clap / brawl_clap):** the owner's clap reads the seven supports,
+  the engine reads the only damage there is (four Battle Bracers). Not
+  pinned.
+
+**THE GANK READ now has a mechanism (open ruling, HANDOFF).** Three
+killer parties across the rounds — round 2 roster 9, round 4 rosters 3
+(Bear Paws x2, Galatine Pair x2, Deathgivers, Carrioncaller, Infernal
+Scythe, Ursine Maulers, Astral, Hallowfall: brawl strong 0.89) and 18 —
+the owner calls gank and the engine labels brawl or clap. The owner's
+tell, verbatim: "claws, dagger pair, whispering bow - these are catching
+and dismounting the enemy type of weapons". That is a derivable fact, not
+a weapon list: a damage core whose Es are catch / dismount / single-
+target-execute delivery with no bomb share. As it stands these rosters
+VOTE into the brawl and clap rows of `style_bands.yaml` at 10-14.
+Proposal for the owner, NOT built: a descriptive `gank` read at <= 14
+when the damage core is majority catch-and-execute delivery, which would
+label the roster on the board, keep it OUT of the five style rows, and
+never be a forge style (the five styles stand). Needs the owner's word
+before anything moves.
+
+**Facts recorded from the owner's reads:**
+
+- Bloodletter in a 10+ roster: "the only time i see bloodletters in large
+  group fights is when its on a battlemount user who needs it just so
+  they can run away". A Bloodletter stack marks a battlemount sub-party;
+  roster 19's three make it a 2nd/3rd party of a larger group. Consistent
+  with round 3 roster 11 (three Bloodletters, split): the Bloodletter is a
+  size-context tell, not a damage identity.
+- Killer parties of 10-14 are often PARTS of a bigger party; the owner's
+  calls on them are leaning reads, and clap / kite-clap / kite are not
+  reliably separable from a part.
+
+T43 pins the nine agreed rosters (6, 8, 9, 12, 14, 15, 16, 17, 20) naked
+against `comp_identity`; the twenty battles join `GRADED_BATTLES` so no
+form re-samples them. Nothing retuned; the two hypotheses and the gank
+proposal wait for the owner.
+
+### Coherent builds and style cells (2026-09-08, owner: "go ahead with your recommendations")
+
+Owner's question: how to use the harvested comps "to increase the
+quality of the engine such that we start seeing better quality of
+equipment for every seat". Measured first (2,042 battles, 51,125 builds,
+19,153 players; 168 of 670 weapon-slot modals resting on under 5 players;
+item power captured and read by nothing; 19,596 victim builds harvested
+and never contrasted). Seven levers proposed in priority order: coherent
+builds, style-conditioned doctrine, kill-vs-death contrast, item-power
+gating, seat-level pooling of thin slots, carrier floors, harvest
+targeting. Owner: "ok go ahead and do 1 and 2". One question asked:
+balanced comps follow the DECLARED style only, never the detected
+identity ("Declared style only", owner 2026-09-08). Spec:
+`notes/specs/2026-09-08-coherent-style-kits-design.md`; plan:
+`notes/plans/2026-09-08-coherent-style-kits.md`.
+
+**1. The chain guard (R29).** The archetype chain already ran across all
+seven slots; it stopped after one or two for 92 of 118 weapons because
+its rare-pocket guard compared a conditional COUNT inside the shrinking
+pocket with the unconditional modal's COUNT over the population — once
+the chest pocket was under half the population it failed by
+construction. Now: shares against shares, plus a pocket floor (20% of
+the population or 20 votes) that still stops the 2026-09-04 Greataxe
+pocket (8 of ~74). Rebuilt dataset: weapons reaching 4+ slots 6 -> 39 of
+117 (depth 1: 50 -> 25, 2: 42 -> 26, 3: 17 -> 27, 4: 6 -> 6, 5: 0 -> 8,
+6: 0 -> 20, 7: 0 -> 5); seats with a 4+ slot archetype 0 -> 10 of 20.
+Golden, forge, roles, validation_modes green — no pin moved.
+
+**2. Style cells (R30–R33, R24b).** `derive_party_styles.py` labels every
+10+ party in the committed artifact weapons-only (2,361 parties: clap
+1,008 / brawl 410 / clap_kite 319 / kite 246 / brawl_clap 43 / none
+335), byte-identical across runs, hash-gated in `build_dataset` (a
+tampered hash blocks the build, verified exit 2). `party_link.py` links
+builds to parties (exact `party` index from the analyzer from the next
+harvest on; today's artifact links 11,186 of 21,162 group-band builds by
+a unique (battle, weapon), 9,218 of them to a labelled party). The
+doctrine ships `kit_styles.<style>` per seat: 254 weapon cells across 13
+seats, 1,200 slot tiers, 180 cell chains (depth 2: 59, 3: 50, 4: 23,
+5: 10, 6: 30, 7: 3).
+
+The trap the first cut walked into, measured the same day: 63 cells
+carried a modal chest different from the band's, and 39 of them fronted
+an item with under 5 votes over a 70-90 vote band modal (Polehammer's
+4-vote Fey plate over 90 Soldier Armors; a 1-vote plate Witchwork over
+70 cloth) — thin evidence overriding fat evidence, the "random builds"
+complaint in a new coat. Fixed as evidence strength, no new number: the
+5-voter cell floor applies per weapon, per slot (the slot's modal item)
+and to the chain's chest step; a thin slot is absent and the engine's
+merge keeps the band's. After: 24 cells differ, none thin, and the ones
+that differ are the kit-round findings (Realmbreaker under clap: Royal
+Jacket 46 over the band's Hellion 211; Hand of Justice under clap: Fey
+plate 11 over Soldier 49).
+
+Pins: R29 (three synthetic populations), R30 (cells: five styles only,
+two-plus cells on 13 seats, every cell weapon >= 5 voters, gang band
+carries none), R31 (party link both paths + the analyzer stamping),
+R32 (labels + the hash contract), R33 (a declared clap and brawl dress
+from their cells, balanced from the band, the option names its style —
+Polehammer under the engage tank was the first fixture, Realmbreaker
+after the slot floor), R24b (the kit audit under a declared clap judges
+against the clap cell's modal: 38/40 agree, 0 bad), R12 re-pinned (the
+Grailseeker leather admission at balanced, the brawl cell's classes
+under brawl). Parity 60/60; full gate list green.
+
+Deferred, for the owner: the kill-vs-death contrast (this file reserves
+effectiveness claims for win-lift evidence — it needs a ruling before it
+orders anything), item-power gating, seat-level pooling of the 168 thin
+slots, carrier floors (which of the six effects are needs), and pointing
+focused harvest nights at 10-14 and 20+.
+
+## 2026-09-08 — mastersheet review: clap healer minimum and flexible kite
+
+Owner: "party shall have 1 healer per 5 people so 4 at 20 and 5 at 25
+etc for clap". Follow-up: keep four through 24; this is a MINIMUM and
+extra healers may be justified. Kite may have fewer but that is not an
+exact-count rule. This supersedes the 2026-08-23 clap 2-3 cap and kite's
+exact one/two healer bands, not the separately ruled hybrid profiles.
+
+Implemented `styles.clap.role_min_per_players: {healer: 5}` in both ports:
+from five members, floor(size / 5) replaces the healer band without a
+maximum. Kite's 5-29 overrides retain their existing minima and remove
+maxima. Scoring manual rosters is unchanged; these are forge constraints.
+Build-time validation rejects unknown ratio roles and nonpositive or
+noninteger divisors. MASTERSHEET.md now distinguishes live settings,
+historical guidance, and the still-open complete-force, role/delivery,
+contextual-prevalence and resource-sufficiency work.
+
+Validation: F16 covers 5/9/10/19/20/21/24/25/29/30/60 boundaries and a
+complete castle clap forge of 25. Generated clap has four healers at 20
+and five at 25; both are feasible. The test's kite at 20 selected five
+healers once its cap was removed: that is evidence of the current scorer's
+preference, not expert confirmation that five is strategically correct.
+38/38 forge, 69/69 golden, 60/60 Python/JS parity (now also compares the
+effective constraint band), 36/36 role, 25/25 validation-mode checks and
+dashboard layout pass. V4 actual-gear role gate passes 17/23; it remains
+weak-form evidence. No new independent validation/holdout cases were added.
+
+The owner's Double Bladed explanation is recorded as an open root-cause
+investigation rather than a numeric nerf: plate gank kits are not a group
+DPS job, the E commits the body, and its damage is insufficient to earn
+the clap/brawl damage seat over alternatives. Source inspection found
+the sustained_brawler membership, leap-range `flex` label, and `engage`
+utility exemption. Those mechanisms have not been changed in this patch.
+
+### Seat pooling for thin slots (2026-09-08, owner: "i leave it up 2 you to get the best results")
+
+Follow-on to the two levers above, after the owner asked what item-power
+gating and seat pooling meant. Item power: the harvest's `item_power` is
+the API's AverageItemPower, the per-player average across worn slots —
+the owner's own objection ("a 4.3 cape has 1200 ip but user might be
+using a 8.3 weapon") holds, and the per-slot tier survives only in the
+raw cache, so the gate is deferred behind five questions (which slot
+decides geared; tier line or relative; per size band; quality; doctrine
+votes only).
+
+Pooling, measured before designing. Forged tiles at 20, balanced, 135
+seated weapons: 844 tiles — 627 on a weapon item worn by 5+ players, 160
+on one worn by 2-4, 57 on the seat fallback. The kit reader was ALREADY
+falling to the seat's item on every slot where the weapon had nothing
+(the earlier "those slots stay unset" claim was wrong; corrected in
+chat). Bootstrap on weapons with 15+ voters, 20 draws each: the modal of
+3 random players' builds equals the true modal for the helmet 58%, boots
+48%, cape 68%, potion 86%, food 80%. The seat's modal among builds
+wearing the SAME chest: helmet 80%, boots 72%, cape 81%. The plain seat
+modal: 66% / 62% / 75%, and 95% / 82% for potion / food. Chest CLASS
+conditioning does not help (65% / 64% / 79%).
+
+Shipped: `kit_pool` and `kit_by_chest` per seat and band (items with 5+
+players, top 3 per slot, the five poolable slots; ~200 KB), the thin rule
+in both ports (a weapon slot whose own modal carries under 5 votes fronts
+the same-chest pool item for helmet / boots / cape, the plain seat pool
+item for potion / food, when it has 5+ players; marked `pooled` and
+`pooled_n`; chest and off-hand never pooled; a 5+ vote weapon modal is
+never overridden), the kit editor naming pooled slots. After: thin
+weapon tiles on poolable slots 129 -> 2; 94 tiles from the same-chest
+pool, 78 from the seat pool; the 25 thin chests and 6 thin off-hands stay
+the weapon's own by design.
+
+Pins: R34a (the pools' shape per band, none on style cells), R34b (a
+thin helmet / boots slot fronts the same-chest pool item, a thin potion
+the seat pool item, both marked; a 5+ vote slot keeps its own), R24 /
+R28 skip a slot whose killboard modal rests on fewer than 5 players — it
+is pooled, not matched (R24 56/58, R28 484/484). Parity 60/60; full gate
+list green.
+
+## 2026-09-08 — five rulings after the Codex review (owner, same day)
+
+Context: the owner answered a 13-question design review from Codex, then
+asked what the assistant thought. The assistant checked each answer
+against the engine and the killer-party harvest, reproduced the castle-25
+complaint, re-ran the V4 blind test with Hoarfrost's burst at 2 and at 3
+(byte-identical), and asked five follow-ups. The owner's words:
+
+- Double Bladed: "I think doublebalded is being ranked too high still,
+  check for the 11 distinct players wearing it in 10+ parties, if they
+  are gank parties of actual zvz parties. double bladed is a good ganking
+  weapon but not a good brawl weapon. but you need to check the actual
+  stats."
+- Delivery: "yes when an e lands the caster should read as melee
+  delivery. why would it touch grailseeker? grailseeker e does not move
+  the caster, its like one of the longest range snares, do you think
+  grailseeker moves the caster?" — the assistant had guessed; Soul Shaker
+  carries no dash node, so the rule never touches it (recorded as a miss).
+- Prior: "sure on 3" — one harvest prior replacing both hand lists,
+  tiebreak-sized, capped at the current 0.15.
+- Healers: "sure on healers at 25" — the one-per-five minimum extends to
+  brawl and both hybrids.
+- Arcane helmet: "ok on arcane hnelmet" — the 5-voter floor on every
+  chain step.
+- Hoarfrost: "you r hoarfrost ruling" — Avalanche burst_aoe 3.
+
+### The Double Bladed audit (the stats the owner asked for)
+
+Killer-party harvest, 2,042 battles. 24 parties of 10+ field a Double
+Bladed Staff. Nine are gank / dive squads — Bear Paws, Deathgivers,
+Claws, Dagger Pair, Battle Bracers cores in 21-43-player fights with 0-2
+healers (one 17-man carries seven gank tells and no healer). The other
+fifteen are real clap / clap-kite / kite rosters of 12-20 (Permafrost,
+Realmbreaker, Occult, Great Arcane cores in 42-387-player fights) that
+carry exactly ONE Double Bladed — a single player's choice, never a
+doctrine; one 20-man squad accounts for three of them. Wearers: 11
+distinct players at 10+, none at 20+; their kits are gank kits — Hunter
+Shoes 6 of 11, Graveguard Armor 5 of 11, gatherer hoods 3 of 11, item
+power 1030-1230, only 3 of 11 sightings as the killer. Gang band (4-9):
+1.6% of killer parties, 18 players, 11 of 20 builds in leather.
+
+Engine before: `fits` everywhere — the 15 m leap read as flex delivery
+and the E's own engage 4 rescued its 2-point damage — rank 12 of 79 in
+the castle-25 clap pool (bought for slow / peel / engage / catch while
+seated as dps) and forged into castle-25 brawl in a plate gank kit.
+
+Shipped: (1) the delivery rule below makes it melee (clap situational,
+kite unfit); (2) a viability exclusion at 10+ (composition.yaml,
+evidence-gated with the standard lift, gang band open) for the brawl
+damage seat the owner rejected. The role-book seat stays so a manual
+Double Bladed is still dressed and scored. F27.
+
+### Payload reach, not travel (the delivery rule)
+
+`parse_dumps` adapter 5 adds `caster_moves` to every spell: a `dash`
+node anywhere in the spell tree (58 of 559 indexed spells; 25 curated
+E spells — Soaring Swipe, Vault Leap, Breakthrough, Charge, Aftershock,
+Lunging Stabs, the dive kick ...). `derive_style_fit` now measures the
+DELIVERED reach: a caster-moving E's cast range is travel, not payload
+reach, and counts toward flex delivery only for a FLEX BOMB — group
+scale with E damage at the job bar (4), the owner's own 2026-09-04
+exception ("the damage arrives at range even though the body follows":
+Realmbreaker, Rift Glaive). Standoff tools additionally require no
+caster movement (no weapon changed). Delivery flips flex -> melee:
+Double Bladed, Carving Sword, Daybreaker, Claymore, Bloodletter,
+Forcepulse Bracers, Quarterstaff, Trinity Spear. Group-fit changes:
+Double Bladed clap fits -> situational and kite fits -> unfit; Daybreaker
+the same; Carving kite situational -> unfit. Unchanged: Realmbreaker
+(dash, flex bomb — 82.6% of 20+ clap killer parties, 92.6% of clap_kite,
+96.9% of kite), Rift Glaive (dash, flex bomb, 25-44%), Spiked Gauntlets
+(no dash, 85%), Grailseeker (no dash; standoff root field). Why the bomb
+exception is a fact and not a weapon list: the literal rule would have
+read Realmbreaker as melee and thrown the clap staples out of clap and
+kite generation. T45; parity 60/60.
+
+### The generated meta prior
+
+Two hand-set popularity bonuses were live in scoring, each worth up to
+0.15 and neither evidenced: the seven-weapon `meta_prior` (Hallowfall
+1.0, Heavy Mace 1.0, Great Hammer 0.8, Permafrost 0.8, Great Holy /
+Longbow / Mace 0.6) and composition.yaml's ~50-weapon viability `core`
+list. Both retired. `pipeline/derive_meta_prior.py` reads the COMMITTED
+party_rosters.json and writes out/meta_prior.json: per engine size
+bucket (party 2-5 small, 6-15 mid, 16+ large — Engine.size_bucket's
+axis, T46 pins the mirror), a weapon's share of the bucket's DISTINCT
+PLAYERS (one player, one vote; victims carry no party and cast none),
+shrunk n / (n + 8), normalized so the bucket's top weapon is 1.0, rows
+under 0.05 dropped (no signal, never a penalty). build_dataset attaches
+it, hash-gated to the artifact (fail closed), and REFUSES a hand-set map
+in scoring.yaml or MASTERSHEET tune:scoring. Rows: small 71, mid 63,
+large 40 weapons. Large bucket: Hallowfall 1.0 (three to five seats per
+party), Realmbreaker 0.377, Permafrost 0.30, Spiked Gauntlets 0.30,
+Battle Bracers 0.28, Dawnsong 0.27, Longbow 0.26, Spirithunter 0.24,
+Blight 0.21; Double Bladed 0 in every bucket; Dagger Pair small 0.31 /
+mid 0.12 / large 0. Both ports already carried the bucketed-map plumbing
+(2026-08-14); the engine reads it at ROSTER size while the dashboard's
+usage strip keeps keying off PLAN() — different axes by design. `delta`
+stays 0.15: tiebreak-sized, never a floor, never a seat. H18 re-pinned;
+golden and V4 (17/23) unchanged apart from the new pins. The old
+usage_v2-based `build_meta_prior.py` and its unwired artifact are gone.
+
+### Healers per five on every style but kite and balanced
+
+styles.yaml `role_min_per_players: {healer: 5}` now on brawl, brawl_clap
+and clap_kite (clap already). Harvest at 20, full solo killer parties:
+brawl 4 healers in 77% (n=22); clap 4 in 52%, 3 in 35% (n=69); clap_kite
+3 in 55%, 4 in 23% (n=64) — the clap_kite minimum sits one above the
+observed mode, recorded beside the ruling in styles.yaml. Forge after:
+castle 20 -> brawl 4 / clap 4 / clap_kite 5 / brawl_clap 4 / kite 5;
+castle 25 -> brawl 6 / clap 5 / clap_kite 6 / brawl_clap 6 / kite 6 /
+balanced 3. With the caps gone the scalar objective adds a healer beyond
+the minimum at 25 and at kite 20 — the scorer's preference, not expert
+confirmation (the same note the Codex round recorded for kite). OPEN FOR
+THE OWNER: `balanced` keeps the base band (3-5 at 20-29) and still
+forges 3 healers at castle 25; the guild sheet says "4 healers minimum"
+at 20+ with no style attached. F16.
+
+### Chain-step voter floor (the Arcane helmet)
+
+`CHAIN_STEP_MIN_VOTERS = 5` (was 2): every archetype chain step's pick
+needs five distinct players, the floor the tier modal and the cell chest
+step already carried. Arcane Staff's clap cell chained Knight Armor (10
+voters) into a Judicator Helmet worn by 4 people and fronted it; the
+chain now stops at the chest and the head slot reads the cell tier —
+Assassin Hood 6 players, Judicator Helmet 5, Cleric Cowl 2 — so Judicator
+survives as an evidence-band alternative the comp marginal may pick (it
+does, at castle 25 clap: plate helmet, tankiness), but no longer from a
+4-player pocket. The owner's "most people use cleric cowl on this
+weapon" is contradicted by the harvest — 10+ parties, distinct players:
+Assassin Hood 30, Judicator Helmet 24, Cleric Cowl 9, Hellion Hood 6;
+given Knight Armor: 19 / 12 / 5. Chain depth after: group band weapons
+with a chain 117 -> 101, reaching 4+ slots 39 -> 38, mean depth 3.22 ->
+3.33; gang band 119 -> 108, 24 -> 20, 2.64 -> 2.45. R35; R24 still >= 85%.
+
+### Hoarfrost burst_aoe 3
+
+MASTERSHEET tune:sheets; the sheet keeps 2 and says where the ruling
+lives. The 2026-08-20 hold (+0.5 unit tipped the blap tank slot, 69% vs
+70%) was re-measured before asking: V4 is byte-identical at 2 and at 3
+(17/23 actual_gear, 19/23 weapon_only), Hoarfrost stays 8th in the
+castle-25 clap pool either way — the hold was a symptom of team
+structure the engine lacked in August. T44.
+
+### Other numbers recorded this round (evidence, no ruling)
+
+- Detachments: 111 of 316 full 20-man killer parties (35%) share a battle
+  with a same-guild party of 10+; at 20 their healer counts differ little
+  from solo parties (clap median 3 vs 4); zero-healer parties live in the
+  10-14 band (12 of 261 solo clap parties there).
+- Energy carriers: Royal Armor on 3.65% of builds in 20-59-player battles
+  (about 0.7 per 20) against the guild sheet's "2 Royals per 10" — carrier
+  FLOORS stay an open owner ruling, and the harvest does not support the
+  guild number.
+- Dawnsong sits in 6.1% of 20+ clap-labelled killer parties and 25% of
+  kite ones, against "a classic weapon in clap comps" — with the caveat
+  that the style labels are the engine's own weapons-only read.
+
+Gates after this round: golden 72/72, forge 39/39, roles 39/39, builds
+55/55, parity 60/60 (embed check clean), validation modes 25/25,
+interactions 37/37, patch history 14/14, provenance 25/25 (byte-identical
+rebuild), cohort families 7/7, dashboard layout pass, codec 24/24,
+display math 28/28, live party pass, V4 actual_gear 17/23 PASS, evidence
+lint clean, release_clean true.

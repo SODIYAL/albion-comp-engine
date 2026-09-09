@@ -12,7 +12,10 @@
 > most importantly the `max(planned, roster)` sizing in §6.1 and the 0–3
 > score scale in §2.2. Not reflected here at all (by design): the forge
 > constraint rework (2026-08-18), the identity system and playstyle #5
-> (2026-08-23), and the forge-quality generation gates (2026-08-23/24).
+> (2026-08-23), the forge-quality generation gates (2026-08-23/24), the
+> role layer and kit doctrine (2026-08-25 → 09-04), the dressed forge and
+> Option C floors (2026-08-27), the unit re-fit (2026-08-29), the
+> style × size rows (2026-09-04) and the planner redesign (2026-09-02).
 
 *Research date: 2026-08-12. All API claims below were verified by live requests on this date unless marked otherwise.*
 
@@ -374,7 +377,8 @@ family (spread damage fits neither curve cleanly). Wired identically in
 directions; per-style parameter magnitudes are PROVISIONAL pending expert
 sign-off (`MECHANICS_TODO.md` Q14). Not yet modeled: Resilience Penetration
 per weapon (Q7), CC-escalation durations (Q8), per-spell escalation
-eligibility (Q9).*
+eligibility (Q9).* **[SUPERSEDED: all three closed — Q7 wired 2026-08-25,
+Q8/Q9 from the dumps 2026-08-20; MECHANICS_TODO.md "Closed".]**
 
 *Amendment 2026-08-13 (expert correction): the §2.2/§2.3 "Great Hammer
 clumps, Heavy Mace peels" example is half wrong — Great Hammer's Tackle is
@@ -396,6 +400,8 @@ unified with line-mates at 1. Removed: the holy W Sacred Pulse knockback
 line-wide and Redemption's AA-passive knockback. Golden T13 pins the
 ladder. Note: no template requires `knockback_displace` yet, so rankings
 are unchanged today — this pass makes the data safe to value later.*
+**[SUPERSEDED 2026-08-27: `knockback_displace` was promoted with the five
+other orphans and carries rows where real comps supply the measurement.]**
 
 ### 6.2 Data model (works as SQLite/Postgres in the pipeline, exported to JSON for the client)
 

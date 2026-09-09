@@ -74,7 +74,7 @@ weights:
 #      2026-08-27, Model 2): synergy() prices WEAPON+loadout supply only.
 #      Worn-gear capabilities count in fitness, never in these bonuses —
 #      measured, gear participation under the J rule above would move
-#      real comps NEGATIVELY (docs/superpowers/findings/
+#      real comps NEGATIVELY (notes/findings/
 #      2026-08-27-gear-synergy-finding.md). Do not read this block as
 #      generic source-independent capability synergy; a Model-1 revisit
 #      requires redesigning J for dressed vectors plus calibration
@@ -85,18 +85,20 @@ capability_synergies:
   - {a: resist_shred,   b: burst_st,       bonus: 0.8}
   - {a: heal_reduction, b: sustained_dps,  bonus: 0.8}
 
-# Meta prior (design doc §4.1): guards against weapons that fit on paper but
-# nobody plays. HAND-SET PLACEHOLDER VALUES — real win-lift arrives in Phase 3
-# from battle data (§8), with Bayesian shrinkage and minimum-n gates. Keyed by
-# weapon unique_name.
-meta_prior:
-  MAIN_HOLYSTAFF_AVALON: 1.0   # Hallowfall
-  2H_MACE:               1.0   # Heavy Mace
-  2H_HAMMER:             0.8   # Great Hammer
-  2H_ICECRYSTAL_UNDEAD:  0.8   # Permafrost Prism
-  2H_HOLYSTAFF:          0.6   # Great Holy Staff
-  2H_LONGBOW:            0.6   # Longbow
-  MAIN_MACE:             0.6   # Mace
+# Meta prior (design doc §4.1) — GENERATED since 2026-09-08 (owner: "sure" to
+# one harvest prior replacing both hand lists). pipeline/derive_meta_prior.py
+# reads the committed killer-party harvest (out/party_rosters.json) and writes
+# out/meta_prior.json: per fight-size bucket (small / mid / large — the
+# engine's size_bucket axis) a weapon's share of the bucket's DISTINCT PLAYERS
+# (one player, one vote), shrunk toward zero on thin counts, normalized so the
+# bucket's most-fielded weapon is 1.0; rows under 0.05 are omitted (no signal,
+# never a penalty). build_dataset attaches it here at build time, hash-gated
+# to the artifact it was derived from, and REFUSES a hand-set map in this file
+# or in MASTERSHEET tune:scoring. Retired the same day: the seven-weapon
+# placeholder that lived here (Hallowfall 1.0, Heavy Mace 1.0, Great Hammer /
+# Permafrost 0.8, Great Holy / Longbow / Mace 0.6) and composition.yaml's
+# viability core list. `delta` above stays 0.15: tiebreak-sized, never a floor,
+# never a seat. Re-derive after every harvest refresh (see pipeline/README.md).
 
 # Role sets used by the golden regression suite (tests/test_golden.py).
 # These are test fixtures, not engine inputs — the engine has no role concept.

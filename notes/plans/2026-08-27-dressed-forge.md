@@ -1,5 +1,7 @@
 # Dressed Forge Implementation Plan
 
+> **STATUS 2026-08-27: EXECUTED.** Shipped the same day (HANDOFF.md "the DRESSED FORGE shipped", `engine/README.md`, forge pins F25/F26); the checkboxes below were never ticked. Kept as the work record.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Forge and recommend evaluate DRESSED candidates (weapon + combo + doctrine kit + divergent variants) via the exact full-build score the loaded comp displays; the page starts scoring equipped gear (discovered gap); forged members arrive with kits pre-filled.
@@ -8,7 +10,7 @@
 
 **Tech Stack:** Python 3 (`engine/engine.py`), ES5-ish JS mirror (`engine/app_scoring.js` — contains a literal NUL byte: search with `Select-String`, read with the Read tool, never grep), `dashboard/_app.js`, script-style tests.
 
-**Spec:** `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`
+**Spec:** `notes/specs/2026-08-27-dressed-forge-design.md`
 
 ## Global Constraints
 

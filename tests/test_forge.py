@@ -31,15 +31,17 @@ Pins the structural contracts of the reworked engine:
   F12 predicate minima are combo-aware: locked non-qualifying kits are kept
       verbatim but never counted toward the ranged-AoE core.
   F13 style gate: unfit weapons leave suggestions/forge only.
-  F14 cost gate (owner ruling 2026-08-23): crystal weapons leave suggestions
-      and generation below 30 players; manual/locked picks score, flagged
-      off_budget; avalonian is never gated.
+  F14 no cost gate (owner ruling 2026-09-07, retiring the 2026-08-23 crystal
+      gate): every cost tier sits in every suggest pool, swap_review carries
+      no off_budget flag, and the anti_zone rows carry the physics instead —
+      no row in the 7-man templates, a DEMAND RAMP elsewhere (nothing
+      through 14, the measured value at 25, proportional beyond).
   F15 primary-heal minimum (owner ruling 2026-08-23): a hybrid healer can
       never be the comp's sole healing foundation — every forge fields the
       band's full-healer minimum in addition to the healer role band.
   F16 style role bands (owner ruling 2026-08-23): the declared style
       overrides the brawl-calibrated bands — at 20, brawl 3-4 healers,
-      clap 2-3, kite exactly 2; kite at 7 runs 1.
+      clap one healer per five (floor, no max); kite retains minima only.
 
 Run:  py -3 tests/test_forge.py
 """
@@ -431,37 +433,42 @@ def t_style_gate():
 
 
 def t_cost_gate():
-    """F14 (owner ruling 2026-08-23, forge-quality blind round): crystal
-    weapons are a rich-group choice, not a default — "I wouldn't run it
-    unless there were 30+ people involved". Barred from suggestions and
-    generation below 30 exactly like an exclusion; manual and locked picks
-    still score, flagged off_budget; avalonian is never gated (Hand of
-    Justice at 7 is fine by the same ruling)."""
-    CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL")
+    """F14 (owner ruling 2026-09-07, retiring the 2026-08-23 crystal gate):
+    "remove the cost gate for weapons ... a better ruling might be that
+    that type of cleanse is not as important in small groups as the engine
+    values. this would follow in line with us not restricting weapons but
+    rather focusing on mechanics." No cost tier is barred anywhere;
+    swap_review carries no off_budget flag; the Exalted Staff (sole
+    anti_zone supplier) is judged by the anti_zone rows — none in the
+    7-man templates, and a DEMAND RAMP in the rest (owner, same day:
+    "don't really need it at 10-14 and then need grows slightly as
+    numbers grows and then becomes a good requirement at like 25+")."""
+    CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL",
+               "2H_DUALCROSSBOW_CRYSTAL")
+    pools = [set(Engine(content=c, size=n).suggest_pool())
+             for c, n in (("castle_outpost", 7), ("roads", 7),
+                          ("blackzone_roam", 10), ("blackzone_roam", 20))]
+    admitted = all(w in p for p in pools for w in CRYSTAL)
     e = Engine(content="blackzone_roam", size=20, style="brawl")
-    barred = all(w not in set(e.suggest_pool()) for w in CRYSTAL)
-    not_rec = all(r["weapon"] not in CRYSTAL
-                  for r in e.recommend([], top_n=300))
-    r = e.forge(20)
-    forge_clean = all(e.weapons[w].get("cost_tier") != "crystal"
-                      for w in r["party"])
-    party = ["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
-    score = e.comp_score(party)
-    scoreable = score == score and score != 0.0
-    review = e.swap_review(party)
-    flagged = review[0]["off_budget"] and not review[1]["off_budget"]
-    locked = e.forge(20, locked=["2H_HOLYSTAFF_CRYSTAL"])
-    locked_kept = locked["party"][0] == "2H_HOLYSTAFF_CRYSTAL"
-    e30 = Engine(content="castle", size=30)
-    open30 = all(w in set(e30.suggest_pool()) for w in CRYSTAL)
-    avalon_open = "2H_HAMMER_AVALON" in set(
-        Engine(content="castle_outpost", size=7).suggest_pool())
-    check("F14 cost gate: crystal barred below 30 (suggest+forge), scores "
-          "when manual/locked, flagged off_budget; open at 30; avalonian free",
-          barred and not_rec and forge_clean and scoreable and flagged
-          and locked_kept and open30 and avalon_open,
-          f"score={score:.3f}, off_budget={[m['off_budget'] for m in review]}, "
-          f"open30={open30}, avalon_open={avalon_open}")
+    review = e.swap_review(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"])
+    no_flag = all("off_budget" not in m for m in review)
+    e7 = Engine(content="castle_outpost", size=7)
+    no_row_7 = ("anti_zone" not in e7.reqs
+                and "anti_zone" not in Engine(content="roads", size=7).reqs)
+    e14 = Engine(content="blackzone_roam", size=14)
+    e25 = Engine(content="castle", size=25)
+    e30 = Engine(content="blackzone_roam", size=30)
+    ramp = ("anti_zone" not in e14.reqs
+            and abs(e._targets["anti_zone"] - 1.8 * 6 / 11) < 1e-9
+            and abs(e25._targets["anti_zone"] - 1.8) < 1e-9
+            and abs(e30._targets["anti_zone"] - 1.8 * 30 / 25) < 1e-9)
+    check("F14 no cost gate: crystal in every suggest pool, no off_budget "
+          "flag, anti_zone has no row through 14, ramps to its measured "
+          "value at 25 and grows beyond",
+          admitted and no_flag and no_row_7 and ramp,
+          f"admitted={admitted} no_flag={no_flag} no_row_7={no_row_7} "
+          f"t14={e14._targets.get('anti_zone')} t20={e._targets.get('anti_zone')} "
+          f"t25={e25._targets.get('anti_zone')} t30={e30._targets.get('anti_zone')}")
 
 
 def t_primary_heal():
@@ -491,14 +498,14 @@ def t_primary_heal():
 
 
 def t_style_bands():
-    """F16 (owner ruling 2026-08-23): style-aware role bands — "having 5
-    healers in a party of 20 feels like too much, especially in clap and
-    kite". At 20: brawl 3-4 healers (frontline capped at blap's 5), clap
-    2-3, kite exactly 2; kite at 7 runs a single healer."""
+    """F16: one healer per five members, floor-rounded MINIMUM, no maximum
+    (owner 2026-09-08; extended the same day to brawl and both hybrids -
+    "sure on healers at 25"). Kite keeps its lower minima without a cap;
+    balanced keeps the base band."""
     ok = True
     lines = []
-    for style, lo, hi in (("brawl", 3, 4), ("clap", 2, 3), ("kite", 2, 2),
-                          ("clap_kite", 3, 4)):
+    for style, lo, hi in (("brawl", 4, 20), ("clap", 4, 20), ("kite", 2, 20),
+                          ("clap_kite", 4, 20)):
         e = Engine(content="blackzone_roam", size=20, style=style)
         r = e.forge(20)
         healers = sum(1 for w in r["party"] if e.role_of(w) == "healer")
@@ -516,11 +523,67 @@ def t_style_bands():
     ek = Engine(content="roads", size=7, style="kite")
     rk = ek.forge(7)
     kite7 = sum(1 for w in rk["party"] if ek.role_of(w) == "healer")
-    if kite7 != 1 or not rk["feasible"]:
+    if kite7 < 1 or not rk["feasible"] or "max" in ek._band["healer"]:
         ok = False
         lines.append(f"kite@7 healers {kite7}")
-    check("F16 style bands at 20: brawl 3-4h/<=5f, clap 2-3h, kite 2h, "
-          "clap_kite 3-4h (round 5); kite@7 1h", ok, "; ".join(lines))
+    for size, minimum in ((5, 1), (9, 1), (10, 2), (19, 3), (20, 4),
+                          (21, 4), (24, 4), (25, 5), (29, 5), (30, 6), (60, 12)):
+        ec = Engine(content="castle", size=size, style="clap")
+        if ec._band["healer"] != {"min": minimum}:
+            ok = False
+            lines.append(f"clap@{size}: {ec._band['healer']}")
+    ec25 = Engine(content="castle", size=25, style="clap")
+    rc25 = ec25.forge(25)
+    hc25 = sum(ec25.role_of(w) == "healer" for w in rc25["party"])
+    if not rc25["feasible"] or len(rc25["party"]) != 25 or hc25 < 5:
+        ok = False
+    lines.append(f"castle clap@25: {hc25}h, feasible={rc25['feasible']}")
+    # the per-five minimum on brawl and both hybrids (owner 2026-09-08)
+    for st in ("brawl", "brawl_clap", "clap_kite"):
+        for size, minimum in ((20, 4), (24, 4), (25, 5)):
+            band = Engine(content="castle", size=size, style=st)._band["healer"]
+            if band != {"min": minimum}:
+                ok = False
+                lines.append(f"{st}@{size}: {band}")
+        eb25 = Engine(content="castle", size=25, style=st)
+        rb25 = eb25.forge(25)
+        hb25 = sum(eb25.role_of(w) == "healer" for w in rb25["party"])
+        if not rb25["feasible"] or hb25 < 5:
+            ok = False
+        lines.append(f"castle {st}@25: {hb25}h")
+    eb = Engine(content="castle", size=25)
+    if eb._band["healer"] != {"min": 3, "max": 5}:
+        ok = False
+        lines.append(f"balanced@25 band changed: {eb._band['healer']}")
+    check("F16 one healer per five as a minimum on clap, brawl and both "
+          "hybrids (4 at 20-24, 5 at 25-29, no cap); kite keeps its minima; "
+          "balanced keeps the base band; full 25-person castle forges", ok,
+          "; ".join(lines))
+
+
+def t_double_bladed_gank():
+    """F27 (owner 2026-09-08: "double bladed is a good ganking weapon but
+    not a good brawl weapon. but you need to check the actual stats").
+    Checked against the killer-party harvest the same day: 24 parties of
+    10+ field it, 9 of them gank/dive squads, the rest carrying ONE inside
+    a clap roster; 11 distinct wearers at 10+ (gank kits: Hunter Shoes,
+    Graveguard), none at 20+. The exclusion (composition.yaml, evidence-
+    gated) bars 10+ generation; the gang band stays open (1.6% of 4-9 man
+    killer parties); manual picks still score."""
+    dbs = "2H_DOUBLEBLADEDSTAFF"
+    e25 = Engine(content="castle", size=25, style="brawl")
+    r = e25.forge(25)
+    e10 = Engine(content="blackzone_roam", size=10)
+    e7 = Engine(content="castle_outpost", size=7)
+    manual = e25.comp_score(["MAIN_HOLYSTAFF_AVALON", "2H_MACE", dbs])
+    check("F27 Double Bladed is barred from 10+ generation (gank weapon, "
+          "owner 2026-09-08 + harvest audit), open at 7; the castle-25 brawl "
+          "forge fields none; a manual Double Bladed still scores",
+          dbs not in set(e25.suggest_pool()) and dbs not in set(e10.suggest_pool())
+          and dbs in set(e7.suggest_pool()) and dbs not in r["party"]
+          and r["feasible"] and manual == manual and manual != 0.0,
+          f"in forge={dbs in r['party']} feasible={r['feasible']} "
+          f"manual={manual:.3f}")
 
 
 def t_generation_fit():
@@ -947,6 +1010,7 @@ if __name__ == "__main__":
     t_cost_gate()
     t_primary_heal()
     t_style_bands()
+    t_double_bladed_gank()
     t_generation_fit()
     t_dup_and_clump()
     t_curse_slot_earned()

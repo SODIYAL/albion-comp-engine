@@ -1,7 +1,7 @@
 # Castle Outpost Comp Book — Design
 
 **Date:** 2026-08-27
-**Status:** approved in chat section-by-section; this document is the written record
+**Status:** DROPPED 2026-09-07 (owner). Approved in chat section-by-section on 2026-08-27, never built; the implementation plan was deleted the day it was dropped. Kept as the design record for two ideas nothing else in the repo covers — content-labelled fights and a ratified comp book (§4–§5). The kit half (§6) was overtaken by the 2026-09-04 party harvest (`pipeline/sample_parties.py`: killer-party rosters with full gear from the official API), which feeds the kit doctrine and the style × size rows today
 **Owner decisions embedded:** evidence-first clustering; all four evidence sources; correctness = comp + per-seat kits + budget tiers; vertical slice (castle outposts first); doctrine-coherence tests; stage gates between every step
 
 ## 1. Goal and end state

@@ -6,13 +6,10 @@ For each weapon in the usage ranking, proposes a capability for every effect its
 equippable spells actually produce, resolved through the structured effect map
 (effect_map.yaml) rather than description keywords.
 
-WHAT CHANGED 2026-08-12. Seeding used to run off 13 prose regexes, which saw a
-fraction of the game: 100 weapon lines apply a movespeed debuff and the `slow`
-regex matched almost none of them. It also refused to propose structural
-capabilities (engage/peel/tankiness/...) on the grounds that they were pure
-judgement. That is no longer true for the ones the data can reach: 1H Mace's
-Deep Leap resolves to dash + invincibility + five immunities on self, which
-grounds engage, disengage, tankiness, mobility and catch mechanically.
+Structural capabilities (engage/peel/tankiness/...) are proposed wherever the
+effect data reaches them: 1H Mace's Deep Leap resolves to dash + invincibility
++ five immunities on self, which grounds engage, disengage, tankiness, mobility
+and catch mechanically.
 
 Everything is still provisional. Every row carries `review: TODO` and a comment
 naming the effect and direction it came from, so a curator can check the
@@ -32,13 +29,30 @@ sys.path.insert(0, HERE)
 from effect_lookup import EffectLookup  # noqa: E402
 
 WEAPONS = json.load(open(os.path.join(HERE, "out", "weapon_lines.json"), encoding="utf-8"))
-USAGE = json.load(open(os.path.join(HERE, "out", "weapon_usage.json"), encoding="utf-8"))["weapons"]
 LOOKUP = EffectLookup()
 
-# Never auto-seeded: the effect layer cannot express these, so a machine guess
-# would be fabrication. They stay a curator's job.
+
+def _load_usage():
+    """Sightings per weapon, summed across weapon_usage_v2.json's fight-size
+    buckets (sample_battles.py). The v1 weapon_usage.json this read until
+    2026-09-07 was a frozen 24-battle sample nothing wrote any more."""
+    v2 = json.load(open(os.path.join(HERE, "out", "weapon_usage_v2.json"), encoding="utf-8"))
+    out = {}
+    for weapons in (v2.get("buckets") or {}).values():
+        for key, n in weapons.items():
+            out.setdefault(key, {"count": 0})["count"] += int(n)
+    return out
+
+
+USAGE = _load_usage()
+
+# Never auto-seeded: these are MAGNITUDE calls (how much damage, how big a
+# clump) the effect layer can name but not size, so a machine guess would be
+# fabrication. They stay a curator's job. (`energy_drain` sat here until
+# 2026-09-07; it is not a capability — a documented fabrication, see
+# sheets/illustrative/prototype_v0.yaml.)
 HUMAN_ONLY = {"zone_control", "burst_aoe", "burst_st", "sustained_dps", "execute",
-              "clump_create", "heal_burst", "anti_dive", "energy_drain"}
+              "clump_create", "heal_burst", "anti_dive"}
 
 
 def curated_keys():

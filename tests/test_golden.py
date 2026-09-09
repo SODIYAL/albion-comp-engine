@@ -236,7 +236,7 @@ def run():
     # (resist_shred). The flat union has all of them; the scored loadout must
     # never count both alternatives of a slot at once.
     ez = Engine(content="blackzone_roam", size=20)
-    _df, _ds, extra = ez.best_loadout(ez.effective_supply([]), 0.0, DAGGERS)
+    _df, _ds, extra = ez.best_loadout(ez.effective_supply([]), DAGGERS)
     flat = E.caps_of(DAGGERS)
     check("T14 one-spell-per-slot: DP loadout never counts both W (or both Q) picks",
           not ("catch" in extra and "disengage" in extra)
@@ -672,31 +672,57 @@ def run():
           f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
 
     # T27 — forge-quality blind round (owner rulings 2026-08-23). The
-    # engine's darlings were overruled on ECONOMICS and E-identity, with
-    # the killboard sample corroborating (Exalted 0/0/5, Forgebark 0/0/2
-    # observed small/mid/large): crystal weapons leave the default pools
-    # below 30 players ("I wouldn't run it unless there were 30+ people
-    # involved"); Great Holy is brawl-only ("it has to stop moving and
-    # needs everyone to clump in place to heal with e — that's not good"
-    # for clap); a hybrid healer can never be the sole healing foundation
-    # ("too expensive to be the only healer ... the weapon needs to have
-    # high healing numbers on its e"). Contract details are pinned in
+    # engine's darlings were overruled on E-identity: Great Holy is
+    # brawl-only ("it has to stop moving and needs everyone to clump in
+    # place to heal with e — that's not good" for clap); a hybrid healer
+    # can never be the sole healing foundation ("too expensive to be the
+    # only healer ... the weapon needs to have high healing numbers on its
+    # e"). The same round's ECONOMICS ruling (crystal weapons out below 30)
+    # was RETIRED 2026-09-07 — see T42. Contract details are pinned in
     # tests/test_forge.py F14-F16; this golden pins the expert calls at
     # the suggestion surface where the blind round saw them.
     e_clap10 = Engine(content="blackzone_roam", size=10, style="clap")
     clap_pool = set(e_clap10.suggest_pool())
     e_brawl20 = Engine(content="blackzone_roam", size=20, style="brawl")
     brawl_pool = set(e_brawl20.suggest_pool())
-    check("T27 owner rulings: no Exalted/Forgebark below 30, Great Holy "
-          "barred from clap suggestions yet kept for brawl",
-          "2H_HOLYSTAFF_CRYSTAL" not in clap_pool
-          and "MAIN_NATURESTAFF_CRYSTAL" not in clap_pool
-          and GREAT_HOLY not in clap_pool
+    check("T27 owner rulings: Great Holy barred from clap suggestions yet "
+          "kept for brawl",
+          GREAT_HOLY not in clap_pool
           and HALLOWFALL in clap_pool
-          and GREAT_HOLY in brawl_pool
-          and "2H_HOLYSTAFF_CRYSTAL" not in brawl_pool,
+          and GREAT_HOLY in brawl_pool,
           f"clap10 has GH={GREAT_HOLY in clap_pool} "
           f"brawl20 has GH={GREAT_HOLY in brawl_pool}")
+    # T42 — the cost gate retired (owner 2026-09-07): "remove the cost gate
+    # for weapons. we had added cost gate because the engine kept putting
+    # the crystal holy staff in every comp for it's area cleanse but a
+    # better ruling might be that that type of cleanse is not as important
+    # in small groups as the engine values. this would follow in line with
+    # us not restricting weapons but rather focusing on mechanics." The
+    # Exalted Staff is the catalogue's only anti_zone supplier; the
+    # mechanism is the anti_zone row — none at the 7-man contents (no
+    # 7-man comp in the corpus fields one; 2% of 4-9 man winner parties
+    # do) and a DEMAND RAMP elsewhere (owner, same day: "don't really need
+    # it at 10-14 and then need grows slightly as numbers grows and then
+    # becomes a good requirement at like 25+"; winners: 7% at 10-14, 21%
+    # at 15-19, 32% at 20+). Pinned at both ends: a default 7-man and a
+    # default 10-man forge field no Exalted with nothing barring it, a
+    # default 25-man does, and a manual Exalted at 7 scores like any
+    # healer.
+    e_co7 = Engine(content="castle_outpost", size=7)
+    p7 = e_co7.forge(7)["party"]
+    p10 = Engine(content="blackzone_roam", size=10).forge(10)["party"]
+    p25 = Engine(content="castle", size=25).forge(25)["party"]
+    manual = e_co7.comp_score(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "2H_LONGBOW"])
+    check("T42 no cost gate: Exalted absent from default 7- and 10-man "
+          "forges by mechanics alone, present at 25, and scores when manual",
+          "2H_HOLYSTAFF_CRYSTAL" in set(e_co7.suggest_pool())
+          and "2H_HOLYSTAFF_CRYSTAL" not in p7
+          and "2H_HOLYSTAFF_CRYSTAL" not in p10
+          and "2H_HOLYSTAFF_CRYSTAL" in p25
+          and manual == manual and manual > 0,
+          f"p7={[E.weapons[w]['display_name'] for w in p7]} "
+          f"exalted@10={'2H_HOLYSTAFF_CRYSTAL' in p10} "
+          f"exalted@25={'2H_HOLYSTAFF_CRYSTAL' in p25} manual={manual:.2f}")
     check("T27b full-healer split matches the owner's named cases "
           "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
           E.weapons[GREAT_HOLY]["full_healer"]
@@ -1389,6 +1415,40 @@ def run():
           r3_ok == 6 and lone_ok and kite10_ok,
           f"round={r3_ok}/6 bad={r3_bad} lone={lone_ok} kite10={kite10_ok}")
 
+    # T43 — blind round 4 (owner, 2026-09-08; the 10-14 band, all twenty
+    # called: 1-10 on 09-05, the rest on 09-08). 9 exact / 3 half / 1 miss
+    # of 14 callable; two abstentions (2, 11), two gank calls the engine
+    # cannot make (3, 18), three uncalled (1, 4, 19). NOTHING retuned: the
+    # miss (5 — the Infernal Staff's E as a lone standoff tool at 0.36 bomb
+    # share) and the abstention (11 — Witchwork's damage points as a ranged
+    # carrier) are hypotheses for the owner, and the gank read is an open
+    # ruling that now has a mechanism in the owner's words ("claws, dagger
+    # pair, whispering bow - these are catching and dismounting the enemy
+    # type of weapons"). This pins the nine agreed rosters, weapons only,
+    # exactly as the owner called them.
+    round4 = {
+        6: ('clap', ['MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_MACE', '2H_LONGBOW', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON']),
+        8: ('brawl', ['2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_HOLYSTAFF_HELL', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_NATURESTAFF_KEEPER', 'MAIN_CURSEDSTAFF_AVALON', '2H_HAMMER_CRYSTAL']),
+        9: ('clap', ['2H_MACE_MORGANA', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_LONGBOW', '2H_AXE_AVALON', '2H_HOLYSTAFF_UNDEAD', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_HAMMER_CRYSTAL']),
+        12: ('brawl', ['2H_KNUCKLES_SET2', '2H_DUALAXE_KEEPER', '2H_CLEAVER_HELL', 'MAIN_DAGGER_HELL', 'MAIN_MACE_CRYSTAL', '2H_AXE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_MACE', '2H_KNUCKLES_SET3', '2H_ROCKSTAFF_KEEPER']),
+        14: ('clap', ['MAIN_ARCANESTAFF', 'MAIN_RAPIER_MORGANA', 'MAIN_RAPIER_MORGANA', '2H_MACE_MORGANA', '2H_CROSSBOW_CANNON_AVALON', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_ICECRYSTAL_UNDEAD', '2H_NATURESTAFF_KEEPER', '2H_GLAIVE_CRYSTAL', '2H_SHAPESHIFTER_SET2']),
+        15: ('brawl', ['MAIN_RAPIER_MORGANA', '2H_DAGGER_KATAR_AVALON', '2H_DAGGER_KATAR_AVALON', '2H_DAGGER_KATAR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_KNUCKLES_SET3']),
+        16: ('clap', ['2H_FIRE_RINGPAIR_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_CRYSTAL', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_LONGBOW', '2H_BOW_AVALON', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_AXE_AVALON', '2H_HOLYSTAFF_UNDEAD', '2H_HARPOON_HELL', '2H_BOW_HELL']),
+        17: ('clap', ['MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_LONGBOW', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        20: ('brawl', ['2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_DUALAXE_KEEPER', '2H_NATURESTAFF_HELL', '2H_AXE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER']),
+    }
+    r4_ok, r4_bad = 0, []
+    for rid, (agreed_style, ids) in sorted(round4.items()):
+        e39.set_content("territory_defense", len(ids))
+        got = e39.comp_identity(ids).get("style")
+        if got == agreed_style:
+            r4_ok += 1
+        else:
+            r4_bad.append(f"r{rid}:{got}")
+    check("T43 blind round 4 (2026-09-08, the 10-14 band): the nine agreed "
+          "rosters read as the owner called them; nothing retuned",
+          r4_ok == 9, f"round={r4_ok}/9 bad={r4_bad}")
+
     # T40 — KIT ROUNDS (owner, 2026-09-05: builds shown without labels,
     # graded against the styles of the rosters they were worn in).
     # Realmbreaker 7/8, Hallowfall 6/8; the disagreement was the LABEL:
@@ -1461,6 +1521,67 @@ def run():
           and ci_hell.get("style") == "brawl" and ci_hell.get("kit_lean") == "brawl",
           f"table={table_ok} royal={royal_j} hellion={hellion} "
           f"clap10 royal={ci_royal.get('style')} hellion={ci_hell.get('style')}")
+
+    # T44 - Hoarfrost Avalanche burst_aoe RULED 3 (owner 2026-09-08, "sure
+    # on 3 ... you r hoarfrost ruling"). The 2026-08-20 rescore HELD it at
+    # 2 because +0.5 unit tipped the blap tank slot in V4 (69% vs 70%);
+    # re-measured 2026-09-08 with the structure that landed since, V4 is
+    # byte-identical at 2 and 3 (17/23 actual_gear), so the hold was a
+    # symptom of missing team structure. The ruling lives in MASTERSHEET
+    # tune:sheets; the sheet still reads 2 and says so.
+    hf = "MAIN_FROSTSTAFF_KEEPER"
+    e20h = Engine(content="blackzone_roam", size=20)
+    check("T44 Hoarfrost burst_aoe ruled 3 via MASTERSHEET (owner 2026-09-08); "
+          "the 2026-08-20 V4 hold is lifted",
+          e20h.caps_of(hf).get("burst_aoe") == 3
+          and E.weapons[hf]["capabilities"]["burst_aoe"] == 3,
+          f"burst_aoe={e20h.caps_of(hf).get('burst_aoe')}")
+
+    # T45 - reach is PAYLOAD reach, not travel (owner 2026-09-08: "yes when
+    # an e lands the caster should read as melee delivery"). The dumps'
+    # dash node (spell_index caster_moves) marks every leap / charge; such
+    # an E counts toward flex delivery only as a FLEX BOMB - the owner's
+    # 2026-09-04 exception (Realmbreaker, Rift Glaive: unconditional group
+    # payload at the job bar). Double Bladed's Soaring Swipe (80 damage +
+    # a slow, e_dmg 2) and Carving's dash are melee delivery; Spiked
+    # Gauntlets' arc and Grailseeker's Soul Shaker move nothing (the owner:
+    # "grailseeker e does not move the caster, its like one of the longest
+    # range snares") and keep flex / standoff. Harvest, same day:
+    # Realmbreaker in 83% of 20+ clap killer parties, Rift Glaive 25%,
+    # Double Bladed 0% (11 wearers at 10+, none at 20+).
+    e20d = Engine(content="castle", size=20, style="clap")
+    pool20 = set(e20d.suggest_pool())
+    sfd = lambda w: e20d.weapons[w]["style_fit"]  # noqa: E731
+    dbs, rb, rg = "2H_DOUBLEBLADEDSTAFF", "2H_AXE_AVALON", "2H_GLAIVE_CRYSTAL"
+    sg, gs, cv = "2H_KNUCKLES_SET3", "2H_QUARTERSTAFF_AVALON", "2H_CLEAVER_HELL"
+    check("T45 payload reach: a caster-moving E is melee delivery unless it "
+          "is a flex bomb - Double Bladed + Carving melee (clap situational, "
+          "kite unfit for the Double Bladed carrier); Realmbreaker + Rift "
+          "Glaive keep flex and the clap-20 pool; Spiked Gauntlets and "
+          "Grailseeker move nothing (Grailseeker stays a standoff tool)",
+          sfd(dbs)["delivery"] == "melee" and sfd(dbs)["caster_moves"]
+          and sfd(dbs)["fit"]["clap"]["group"] == "situational"
+          and sfd(dbs)["fit"]["kite"]["group"] == "unfit"
+          and dbs not in pool20
+          and sfd(cv)["delivery"] == "melee" and sfd(cv)["caster_moves"]
+          and sfd(rb)["delivery"] == "flex" and sfd(rb)["caster_moves"]
+          and rb in pool20
+          and sfd(rg)["delivery"] == "flex" and sfd(rg)["caster_moves"]
+          and rg in pool20
+          and sfd(sg)["delivery"] == "flex" and not sfd(sg)["caster_moves"]
+          and sfd(gs)["standoff_e"] and not sfd(gs)["caster_moves"],
+          f"dbs={sfd(dbs)['delivery']}/{sfd(dbs)['fit']['clap']['group']} "
+          f"carving={sfd(cv)['delivery']} realm={sfd(rb)['delivery']} "
+          f"rift={sfd(rg)['delivery']} spiked={sfd(sg)['delivery']} "
+          f"grail standoff={sfd(gs)['standoff_e']}")
+
+    # T46 - the generated prior's bucket rule mirrors the engine's
+    # size_bucket at every party size the harvest can carry.
+    import derive_meta_prior as dmp
+    bucket_ok = all(dmp.bucket_of(s) == Engine(content="castle", size=s).size_bucket()
+                    for s in range(2, 41))
+    check("T46 derive_meta_prior.bucket_of mirrors Engine.size_bucket for "
+          "party sizes 2-40", bucket_ok, "")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

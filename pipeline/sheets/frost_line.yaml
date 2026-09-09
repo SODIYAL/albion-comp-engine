@@ -87,5 +87,5 @@
     - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
     - {cap: peel,          score: 4, evidence: ICEROCK_EXPLODE}  # wide ball knocks back MULTIPLE enemies + trail slows pursuit — "not as good as Bedrock in peel but not terrible" (owner band 4-5, held at 4 for separation from Bedrock's 6; ruling 2026-08-21)
     - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
-    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # rescore HELD at 2: measured 280/cast top-20% argues 3, but +0.5u tips the blap tank slot in V4 (69%) - revisit with V4b/win-lift
+    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # sheet 2, RULED 3 via MASTERSHEET tune:sheets (owner 2026-09-08): the 2026-08-20 hold (+0.5u tipped the blap tank slot in V4, 69%) no longer binds — re-measured 2026-09-08 at 2 and 3 the V4 gate is identical (17/23 actual_gear, 19/23 weapon_only); the 280/cast top-20% evidence stands
     - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

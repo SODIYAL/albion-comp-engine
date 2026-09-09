@@ -121,9 +121,19 @@ requirements:
   # Black Monk, Evensong) the constant top pick for every tail slot of a
   # 20-man. Lowered to actually honor the rule; the expert pass owns finals.
   # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
-  #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
-  #   groups. Real target, but a comp without it is not missing anything.
-  anti_zone:      {target: 1.8,  weight: 1,  soft_cap: 2.3,  scales: false, optional: true}
+  #   (Exalted Staff, the crystal holy staff). Real target, but a comp
+  #   without it is not missing anything.
+  # DEMAND RAMP (owner ruling 2026-09-07, replacing the crystal cost gate:
+  #   "that type of cleanse is not as important in small groups as the
+  #   engine values ... don't really need it at 10-14 and then need grows
+  #   slightly as numbers grows and then becomes a good requirement at like
+  #   25+"): zone removal is demand created by ENEMY ground effects, and more
+  #   enemies lay more of them. No requirement at all through 14; linear to
+  #   this row's measured value at 25; proportional beyond. Harvest (winner
+  #   parties, 2026-09-07): an Exalted in 2% of 4-9 man parties, 7% at
+  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape, the
+  #   anchors are the owner's.
+  anti_zone:      {target: 1.8,  weight: 1,  soft_cap: 2.3,  ramp: {none_until: 14, full_at: 25}, optional: true}
   damage_debuff:  {target: 1.2,  weight: 1,  soft_cap: 6.57,  scales: false}
 
 # Floors are absolute units (the engine does not scale them): at 20-man a

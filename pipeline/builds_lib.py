@@ -30,7 +30,6 @@ Everything human-maintained stays VERBATIM in data/; every derived value
 carries the basis it rests on, and stores unknowns explicitly as None +
 an `unknowns` list. Nothing ever silently resolves to option 1.
 """
-import json
 import os
 import re
 
@@ -54,10 +53,6 @@ ONE_V_ONE_MAX_SIZE = 2
 # a built dataset; must track pipeline/templates/*.yaml.
 KNOWN_CONTENTS = ("blackzone_roam", "castle", "castle_outpost",
                   "faction_war", "roads", "territory_defense")
-
-CONFIDENCE_DIMS = ("item_mapping", "spell_mapping", "patch",
-                   "content_context", "party_size", "source_independence",
-                   "loadout_completeness", "outcome")
 
 GEAR_FIELD_SLOT = {"helm": "head", "armor": "armor", "boots": "shoes",
                    "cape": "cape", "offhand": "offhand",

@@ -154,6 +154,16 @@ public sealed class PartyState
         lock (_lock) return _objectIdToName.GetValueOrDefault(objectId);
     }
 
+    /// <summary>Party member by guid — the inspect response's only identity.
+    /// Guids come from the roster event alone, so this is party-scoped by
+    /// construction (a stranger you inspect resolves to nothing).</summary>
+    public string? NameForGuid(Guid guid)
+    {
+        var key = guid.ToString();
+        lock (_lock)
+            return _members.Values.FirstOrDefault(m => m.Guid == key)?.Name;
+    }
+
     /// <summary>Equipment update for a player we may or may not track.
     /// Only party members (or self) are recorded — party scope only.</summary>
     public bool UpdateLoadout(string name,

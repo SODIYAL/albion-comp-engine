@@ -250,9 +250,28 @@ class Engine:
         self.content = content
         self.size = size
         self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
-        self.reqs = self.template["requirements"]
-        self.floors = self.template.get("hard_floors", {}) or {}
         self.base_size = self.template.get("base_size", size)
+        # DEMAND RAMP (owner ruling 2026-09-07, first for anti_zone: "don't
+        # really need it at 10-14 and then need grows slightly as numbers
+        # grows and then becomes a good requirement at like 25+"). A row
+        # carrying `ramp: {none_until, full_at}` is NOT a requirement at all
+        # at sizes <= none_until (the row is dropped for this context, exactly
+        # like a content with no row), grows linearly from zero to the row's
+        # measured value at full_at, and grows with the party beyond it (the
+        # same proportional rule `scales` uses). Target and soft cap move
+        # together. A ramp and `scales` never sit on the same row.
+        self._ramp = {}
+        reqs = {}
+        for c, r in self.template["requirements"].items():
+            rp = r.get("ramp")
+            if rp:
+                f = self._ramp_factor(rp, size)
+                if f <= 0.0:
+                    continue
+                self._ramp[c] = f
+            reqs[c] = r
+        self.reqs = reqs
+        self.floors = self.template.get("hard_floors", {}) or {}
         # Playstyle overlay (templates/styles.yaml): multiplies capability
         # WEIGHTS only. Targets/soft caps are content facts; hard floors stay
         # on the base weight — a kite comp still needs its healers.
@@ -260,9 +279,9 @@ class Engine:
         styles = self.data.get("styles", {}) or {}
         self.style_mults = (styles.get(style, {}) or {}).get("multipliers", {}) or {}
         # Mechanics overlay (templates/mechanics.yaml + per-style parameters).
-        # 2026-08-18: the linear grow() extrapolation is REPLACED by the
-        # piecewise absolute size table (composition.yaml size_physics) — a
-        # step function of party size multiplying each style's base counts.
+        # Party-size counts come from the piecewise absolute size table
+        # (composition.yaml size_physics) — a step function of party size
+        # multiplying each style's base counts, never a linear extrapolation.
         # Both the current (style, size) counts and the anchor (balanced,
         # base_size) read the SAME table, so template calibration at the base
         # is untouched, and size 11 is intentionally defined instead of a
@@ -337,11 +356,11 @@ class Engine:
         self.target_mults = (styles.get(style, {}) or {}).get(
             "target_mults", {}) or {}
         _tm = lambda c: self.target_mults.get(c, 1.0)
-        self._targets = {c: _tm(c) * (r["target"] * self.size / self.base_size
-                                      if r.get("scales") else r["target"])
+        _sz = lambda c, r: (self._ramp[c] if c in self._ramp
+                            else (self.size / self.base_size if r.get("scales") else 1.0))
+        self._targets = {c: _tm(c) * r["target"] * _sz(c, r)
                          for c, r in self.reqs.items()}
-        self._softs = {c: _tm(c) * (r["soft_cap"] * self.size / self.base_size
-                                    if r.get("scales") else r["soft_cap"])
+        self._softs = {c: _tm(c) * r["soft_cap"] * _sz(c, r)
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
@@ -464,21 +483,10 @@ class Engine:
                 if wk not in allowed:
                     excl.add(wk)
         self._excluded = excl
-        # Economics gate (owner ruling 2026-08-23, composition.yaml
-        # viability.cost_gate): a cost tier may be barred from SUGGESTIONS
-        # and generation below a party size — crystal regear economics make
-        # it a rich-group choice, not a default the forge should produce.
-        # Exactly like an exclusion: manual/locked picks always score;
-        # swap_review flags them off_budget.
-        self._cost_gated = set()
-        for tier, rule in (via.get("cost_gate", {}) or {}).items():
-            mn = (rule or {}).get("min_size")
-            if mn and self.size < mn:
-                for wk in self.pool:
-                    if self.weapons[wk].get("cost_tier") == tier:
-                        self._cost_gated.add(wk)
-        self._suggest = [w for w in self.pool
-                         if w not in excl and w not in self._cost_gated]
+        # No cost gate (owner ruling 2026-09-07: "not restricting weapons but
+        # rather focusing on mechanics" — the 2026-08-23 crystal gate is
+        # retired; anti_zone demand in the templates carries the physics).
+        self._suggest = [w for w in self.pool if w not in excl]
         # Style-fit suggestion gate (identity Phase C — owner ruling
         # 2026-08-23: style selection IS build intent; "clap comp should
         # never get suggestions like battle-axe"). A weapon whose derived
@@ -595,6 +603,16 @@ class Engine:
                             merged[key] = rule
                     self._band = merged
                     break
+        # Size-based style minima (owner 2026-09-08): clap requires one
+        # healer per FIVE people, rounded down. This replaces the role's
+        # fixed band, including its maximum; extra healers remain legal.
+        # Below one full group the existing small-party band is retained.
+        if self._band is not None:
+            for role, per in (styles.get(self.style, {}) or {}).get(
+                    "role_min_per_players", {}).items():
+                if self.size >= per:
+                    self._band = dict(self._band)
+                    self._band[role] = {"min": self.size // per}
         # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
         # bands + function coverage minima for the FORGE, scaled by
         # size/reference_size (half-up, the pinned rounding rule) and
@@ -717,8 +735,11 @@ class Engine:
         participants (both sides); a party of N fights battles of roughly 2N,
         so the axis maps through 2*size (2026-08-18 — party size used to be
         compared directly against participant counts, so an 11-man read the
-        under-12-participant sample). Usage stays display-only; the same
-        bucket feeds a size-bucketed meta prior if one is ever admitted."""
+        under-12-participant sample). This bucket keys the GENERATED meta
+        prior (admitted 2026-09-08, owner ruling: one harvest prior replacing
+        both hand lists) — meta_of() reads it at ROSTER size; the dashboard's
+        usage strip keys off PLAN() instead, deliberately (HANDOFF "Killboard
+        display-bucket rule")."""
         n = 2 * self.size
         return "small" if n < 12 else "mid" if n <= 30 else "large"
 
@@ -756,19 +777,24 @@ class Engine:
         flags such members off-comp with replacement advice instead."""
         return weapon in self._excluded
 
+    @staticmethod
+    def _ramp_factor(rp, size):
+        """Demand-ramp multiplier for a template row at `size`: 0 at or
+        below `none_until`, linear to 1 at `full_at`, size/full_at beyond
+        (mirrors app_scoring.js rampFactor)."""
+        lo, hi = float(rp["none_until"]), float(rp["full_at"])
+        if size <= lo:
+            return 0.0
+        if size < hi:
+            return (size - lo) / (hi - lo)
+        return size / hi
+
     def is_style_unfit(self, weapon):
         """True when the weapon's derived style_fit is UNFIT for the
         DECLARED style at this size band (identity Phase C). Bars
         suggestions only — scoring is never blocked; the dashboard flags
         such members off-style."""
         return weapon in self._style_unfit
-
-    def is_cost_gated(self, weapon):
-        """True when the weapon's cost tier bars it from GENERATED comps at
-        this size (crystal regear economics, owner ruling 2026-08-23).
-        Suggestions only — a manual/locked pick always scores; the
-        dashboard flags such members off-budget."""
-        return weapon in self._cost_gated
 
     def suggest_pool(self):
         """The default candidate pool for every suggestion/generation path:
@@ -1386,16 +1412,45 @@ class Engine:
     DOCTRINE_GANG_MAX = 9   # party sizes that read the gang doctrine band
 
     def _seat_kit(self, rec):
-        """The seat's doctrine for THIS party size (2026-09-04, kit
-        doctrine per size band): below DOCTRINE_GANG_MAX+1 members the
-        gang band (`kit_bands.gang`, mined from 4-9 man killer parties)
-        when the seat has one, else the group band the seat carries at
-        top level. Every doctrine reader goes through here."""
+        """The seat's doctrine for THIS party size and DECLARED style
+        (2026-09-04 size bands; 2026-09-08 style cells, spec notes/specs/
+        2026-09-08-coherent-style-kits-design.md): below DOCTRINE_GANG_MAX+1
+        members the gang band (`kit_bands.gang`, mined from 4-9 man killer
+        parties) when the seat has one; else, under a declared style with
+        a cell (`kit_styles.<style>`), the cell laid over the band — the
+        band fills every weapon and slot the cell lacks; else the band.
+        `balanced` NEVER reads a cell (owner 2026-09-08): the detected
+        identity is descriptive and stays out of generation. Every
+        doctrine reader goes through here."""
         if self.size <= self.DOCTRINE_GANG_MAX:
             gang = (rec.get("kit_bands") or {}).get("gang")
             if gang:
                 return gang
-        return rec
+        cell = ((rec.get("kit_styles") or {}).get(self.style)
+                if self.style in self.IDENTITY_STYLES else None)
+        if not cell:
+            return rec
+        merged = dict(rec)
+        kit = dict(rec.get("kit") or {})
+        kit.update(cell.get("kit") or {})
+        merged["kit"] = kit
+        # per-weapon tiers merge per SLOT (the band fills every slot the
+        # cell lacks); a chain is coherent and replaces the weapon's whole
+        # chain; the uniform extension replaces per weapon
+        per_w = {w: dict(slots) for w, slots in (rec.get("kit_weapon") or {}).items()}
+        for w, slots in (cell.get("kit_weapon") or {}).items():
+            per_w.setdefault(w, {}).update(slots)
+        merged["kit_weapon"] = per_w
+        for key in ("kit_weapon_build", "kit_weapon_uniform"):
+            per_w = dict(rec.get(key) or {})
+            per_w.update(cell.get(key) or {})
+            merged[key] = per_w
+        if cell.get("kit_build"):
+            merged["kit_build"] = cell["kit_build"]
+        merged["_style_arch"] = {
+            "weapons": sorted(cell.get("kit_weapon_build") or {}),
+            "seat": bool(cell.get("kit_build"))}
+        return merged
 
     def _chest_uniform(self, seat, weapon):
         """Chest classes admitted for `weapon` in `seat`: the book uniform
@@ -1498,7 +1553,7 @@ class Engine:
         wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
         # observed-build archetype (2026-09-01): weapon's own first,
         # seat fallback per slot
-        arch, arch_seat = {}, set()
+        arch, arch_seat, arch_styled = {}, set(), set()
         if role is not None:
             wb = (seat_rec.get("kit_weapon_build") or {}).get(weapon) or {}
             sb = seat_rec.get("kit_build") or {}
@@ -1506,6 +1561,12 @@ class Engine:
                 arch[slot] = wb.get(slot) or sb.get(slot)
                 if slot not in wb:
                     arch_seat.add(slot)   # seat-level fallback archetype
+            # which archetype slots came from the declared style's cell
+            # (2026-09-08): the option carries `observed_style`
+            styled = seat_rec.get("_style_arch") or {}
+            arch_styled = {slot for slot in arch
+                           if (slot in wb and weapon in styled.get("weapons", ()))
+                           or (slot in arch_seat and styled.get("seat"))}
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
@@ -1645,8 +1706,48 @@ class Engine:
                 for i, rr in enumerate(ranked):
                     if rr["gear"] == a[0]:
                         rr["observed_build"] = [a[1], a[2]]
+                        if slot in arch_styled:
+                            rr["observed_style"] = self.style
                         ranked.insert(0, ranked.pop(i))
                         break
+            # SEAT POOLING (2026-09-08, spec section 3): a THIN slot — the
+            # weapon's own modal under POOL_MIN_VOTES votes — is dressed
+            # from the seat's pool instead of a 2-4 player observation:
+            # helmet / boots / cape from the seat's builds wearing THE CHEST
+            # THIS KIT WEARS (options are ranked in slot order, armor
+            # first), potion / food from the plain seat pool; the first
+            # pool item with 5+ players that the doctrine tier already
+            # offers moves to the front, marked `pooled` / `pooled_n`.
+            # Measured: three players' helmets predict the true modal 58%,
+            # the same-chest seat pool 80%. Nothing pooled beats a 5+ vote
+            # weapon modal; chest and off-hand are never pooled.
+            if role is not None and slot in self.POOLED_SLOTS:
+                top_w = max(wslot.values()) if wslot else 0
+                if top_w < self.POOL_MIN_VOTES:
+                    cands = []
+                    if slot in self.CHEST_POOLED_SLOTS:
+                        chest = ((options.get("armor") or [{}])[0]).get("gear")
+                        if chest:
+                            cands.append(("seat|chest", (
+                                (seat_rec.get("kit_by_chest") or {})
+                                .get(chest) or {}).get(slot) or []))
+                    cands.append(("seat", (seat_rec.get("kit_pool") or {})
+                                  .get(slot) or []))
+                    placed = False
+                    for src, rows in cands:
+                        pick = next(((g, n) for g, n in rows
+                                     if n >= self.POOL_MIN_VOTES), None)
+                        if not pick:
+                            continue
+                        for i, rr in enumerate(ranked):
+                            if rr["gear"] == pick[0]:
+                                rr["pooled"] = src
+                                rr["pooled_n"] = pick[1]
+                                ranked.insert(0, ranked.pop(i))
+                                placed = True
+                                break
+                        if placed:
+                            break
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
@@ -2428,7 +2529,7 @@ class Engine:
             state, weapon, best[:4])
         return score, d_fit, d_syn, meta, combo, best[4], best[5]
 
-    def best_loadout(self, s, base_syn, weapon):
+    def best_loadout(self, s, weapon):
         """Legacy shim (golden T14; explain callers migrated): the candidate's
         best loadout against bare supply `s`, with no member-level synergy
         state (J=0 — exact for an empty party). Returns (d_fit, d_syn, extra)."""
@@ -2644,7 +2745,6 @@ class Engine:
                 "score": cur_score, "rank": len(better) + 1,
                 "off_comp": self.is_excluded(cur),
                 "off_style": self.is_style_unfit(cur),
-                "off_budget": self.is_cost_gated(cur),
                 "caps_gain": caps_gain,
                 "verdict": self._pick_verdict(cur_score, caps_gain),
                 "redundant": self._pick_verdict(cur_score, caps_gain) != "ok",
@@ -2793,7 +2893,6 @@ class Engine:
     IDENTITY_STRONG = 0.80         # a share past this reads "strong", not "leaning"
     IDENTITY_CLAP_AOE = 0.50       # ranged core at/above this bomb share -> clap
     IDENTITY_BC_AOE = 0.45         # mid band: bomb share half of brawl_clap
-    IDENTITY_BC_POSTURE = 0.45     # (retired 2026-09-04, round 2; kept for the record)
     # mid band: the BALL ITSELF carries the bomb — melee-side unconditional
     # group payloads (Battle Bracers, Bear Paws) hold at least this share
     # of the comp's bomb points (blind round 2, roster 11: five Battle
@@ -2802,15 +2901,14 @@ class Engine:
     IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
-    # Clap-Kite hybrid (owner 2026-08-23): a ranged core with BOTH real
-    # bomb share and real reset mobility. Calibrated on the owner-labeled
-    # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
-    # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
+    # Clap-Kite hybrid (owner 2026-08-23): a ranged core with BOTH a real
+    # bomb share and a KITE HALF (standoff tools, below). Calibrated on the
+    # owner-labeled comps: DH P1 / 20v20 (aoe ~.53) read hybrid; pure
+    # kite10 (aoe .26) does not.
     IDENTITY_HYBRID_AOE = 0.45     # bomb share at/above -> clap half present
                                    # (0.40 -> 0.45 after blind round 2: the
                                    # owner's kites with three standoff tools
                                    # sat at 0.39-0.44, the clap-kites at 0.46+)
-    IDENTITY_HYBRID_EVADE = 2.0    # (retired 2026-09-04; kept for the record)
     # KITE HALF (owner ruling 2026-09-04, blind round 1): standoff tools —
     # bodies whose E throws enemies away from range without committing
     # (style_fit `standoff_e`: Bedrock Mace, Hoarfrost, Demonic Staff, the
@@ -2828,6 +2926,15 @@ class Engine:
     IDENTITY_FLEX_HOME = 2.0       # rigid melee : rigid ranged that pulls flex bombs home
     IDENTITY_LONE_TOOL_AOE = 0.45  # a lone standoff body makes a kite only below this bomb share
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
+    # SEAT POOLING (2026-09-08, spec notes/specs/2026-09-08-coherent-style-
+    # kits-design.md section 3): a weapon slot whose own modal carries fewer
+    # than POOL_MIN_VOTES votes is THIN; the kit reader then fronts the
+    # seat's chest-conditioned pool item (helmet / boots / cape) or the
+    # plain seat pool item (potion / food) when it has 5+ players. Chest and
+    # off-hand are never pooled.
+    POOL_MIN_VOTES = 5
+    POOLED_SLOTS = ("head", "shoes", "cape", "potion", "food")
+    CHEST_POOLED_SLOTS = ("head", "shoes", "cape")
 
     def _chest_side(self, chest):
         """The style side a dps chest votes for: the ITEM's harvest lean
@@ -3052,7 +3159,6 @@ class Engine:
             # for party" — not an ordinary clap. Signature: one weapon holds
             # at least half of at least 3 damage-carrier bodies.
             top_carrier = max(carrier_count.values()) if carrier_count else 0
-            evade_pm = evade / n if n else 0.0
             if (clap and top_carrier >= 3
                     and top_carrier * 2 >= n_carrier_members):
                 out["archetype"] = "bomb_squad"

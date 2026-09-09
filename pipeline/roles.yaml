@@ -39,7 +39,7 @@ roles:
       - {id: MAIN_MACE, source: "comp:albioncompo_bist_roam15_2026_01 + timothy_blap (tank); guide:albiononlinegrind clap-kite comp 'Engage Tank (1H Mace + Mistcaller)'"}
       - {id: 2H_POLEHAMMER, source: "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Slowing Charge identity)"}
       - {id: 2H_HAMMER, source: "comp:deadlyhooker (main_tank) + sortasaucy_7man (tank)"}
-      - {id: MAIN_MACE_CRYSTAL, source: "comp:albioncompo_push_monkey_7 + timothy_blap (tank); crystal cost gate composes"}
+      - {id: MAIN_MACE_CRYSTAL, source: "comp:albioncompo_push_monkey_7 + timothy_blap (tank)"}
       # --- seat-all pass (owner:2026-09-01 "lets fix seat for all weapons";
       # killboard = party_rosters.json observed builds, 2026-08 harvest) ---
       - {id: MAIN_HAMMER, source: "killboard:party_rosters (51 builds, 100% plate); hammer-family engage precedent (2H_HAMMER, HAMMER_AVALON); owner:2026-09-01 seat-all"}

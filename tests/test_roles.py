@@ -345,7 +345,10 @@ def t_kit_uniform_gate():
     # R12 — increment 2's kill shot for the original bug: a GENERATED kit
     # starts from the seat's uniform; the comp-marginal only ranks within
     # it. Manual picks still score anything (role_advisory flags them).
-    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    # BAND contract at `balanced` (2026-09-08: under a DECLARED style the
+    # style cell speaks — see below — so the harvest-admission ruling is
+    # pinned where the band is what the engine reads)
+    e = Engine(content="blackzone_roam", size=20)
     classes = lambda ko: {e.gear[o["gear"]].get("gear_class")
                           for o in ko["options"].get("armor", [])}
     inc = e.kit_options("MAIN_MACE_HELL", top_n=300)
@@ -355,6 +358,22 @@ def t_kit_uniform_gate():
     # (owner accepted); Incubus stays plate-only
     gated = (classes(inc) == {"plate"} and classes(grail) == {"leather", "plate"}
              and "ARMOR_LEATHER_HELL" not in inc_ids)
+    # under a declared brawl the brawl CELL's armor tier is what the
+    # options serve where the cell has one (2026-09-08 style cells): the
+    # classes offered are exactly the classes the cell's tier carries
+    eb = Engine(content="blackzone_roam", size=20, style="brawl")
+    cell_tier = ((((eb.roles.get("stopper_tank") or {}).get("kit_styles")
+                   or {}).get("brawl") or {}).get("kit_weapon") or {}
+                 ).get("2H_QUARTERSTAFF_AVALON", {}).get("armor")
+    if cell_tier:
+        want = {eb.gear[g].get("gear_class") for g, _n in cell_tier
+                if eb.gear[g].get("gear_class") != "cloth"}
+        gb = eb.kit_options("2H_QUARTERSTAFF_AVALON", top_n=300)
+        cell_ok = {eb.gear[o["gear"]].get("gear_class")
+                   for o in gb["options"].get("armor", [])} == want
+    else:
+        cell_ok = True   # no brawl cell for Grailseeker on this harvest
+    gated = gated and cell_ok
     unc = e.kit_options("MAIN_MACE_HELL", top_n=300, role=None)
     back_compat = "ARMOR_LEATHER_HELL" in [
         o["gear"] for o in unc["options"]["armor"]]
@@ -817,6 +836,7 @@ def t_kit_audit_agreement():
                 and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
             g = dict(r["gear"])
             g["_w"] = 1.0 / per[(r["weapon"], r.get("player"))]
+            g["_p"] = r.get("player")
             by_w.setdefault(r["weapon"], []).append(g)
     eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
     pick = _random.Random(20260903).sample(eligible, 10)
@@ -832,15 +852,19 @@ def t_kit_audit_agreement():
         for slot, kb in slot_kb:
             if slot == "offhand" and e.weapons[w].get("two_handed"):
                 continue
-            c = _Counter()
+            c, who = _Counter(), {}
             for gd in by_w[w]:
                 v = gd.get(kb)
-                c[(e.gear_key(v) or v) if v else "-"] += gd["_w"]
+                key = (e.gear_key(v) or v) if v else "-"
+                c[key] += gd["_w"]
+                who.setdefault(key, set()).add(gd["_p"])
             n = sum(c.values())
             items = [(k, x) for k, x in c.most_common() if k != "-"]
             if not items or items[0][0] not in e.gear:
                 continue
             modal, mn = items[0]
+            if len(who.get(modal) or ()) < 5:
+                continue      # a thin modal is pooled, not matched (2026-09-08)
             eng = v0.get(slot)
             share = (c.get(eng, 0) / n) if eng else 0.0
             total += 1
@@ -854,6 +878,67 @@ def t_kit_audit_agreement():
           "worn < half as often as the modal",
           total >= 50 and agree >= 0.85 * total and bad == 0,
           f"agree={agree}/{total} bad={bad} {detail[:4]}")
+    # R24b (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-
+    # design.md "Tests"): under a DECLARED style the modal the forge must
+    # match is the STYLE CELL's — the modal among the weapon's builds
+    # linked to parties labelled that style — wherever the cell exists
+    # (>= 5 voters); weapons without a clap cell are skipped.
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import party_link
+    ps = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                      "party_styles.json"), encoding="utf-8"))
+    label = {(r["battle"], r["index"]): r["style"] for r in ps["parties"]
+             if r.get("style")}
+    by_battle = party_link.parties_by_battle(doc)
+    es = Engine(content="territory_defense", size=20, style="clap")
+    by_ws, per_s = {}, {}
+    for r in doc.get("builds") or []:
+        if r.get("weapon") in es.weapons and r.get("gear") \
+                and (r.get("party_size") or 0) >= 10:
+            idx = party_link.link_build(r, by_battle, 10)
+            if label.get((r["battle"], idx)) != "clap":
+                continue
+            k = (r["weapon"], r.get("player"))
+            per_s[k] = per_s.get(k, 0) + 1
+            by_ws.setdefault(r["weapon"], []).append(r)
+    total_s = agree_s = bad_s = 0
+    detail_s = []
+    for w in pick:
+        rows = by_ws.get(w) or []
+        if len({r.get("player") for r in rows}) < 5:
+            continue          # no clap cell for this weapon
+        v0 = {}
+        for g in (es.kit_variants(w)[0][1] or []):
+            v0[es.gear[g]["slot"]] = g
+        for slot, kb in slot_kb:
+            if slot == "offhand" and es.weapons[w].get("two_handed"):
+                continue
+            c, who = _Counter(), {}
+            for r in rows:
+                v = r["gear"].get(kb)
+                key = (es.gear_key(v) or v) if v else "-"
+                c[key] += 1.0 / per_s[(w, r.get("player"))]
+                who.setdefault(key, set()).add(r.get("player"))
+            n = sum(c.values())
+            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            if not items or items[0][0] not in es.gear:
+                continue
+            modal, mn = items[0]
+            if len(who.get(modal) or ()) < 5:
+                continue      # the cell carries no such slot (slot floor)
+            eng = v0.get(slot)
+            share = (c.get(eng, 0) / n) if eng else 0.0
+            total_s += 1
+            if eng == modal:
+                agree_s += 1
+            elif share < 0.5 * (mn / n):
+                bad_s += 1
+                detail_s.append(f"{w}:{slot}:{eng}<{modal}")
+    check("R24b styled kit audit: under a declared clap the forge kit "
+          "matches the clap cell's modal item in >= 85% of audited slots "
+          "and never picks an item worn < half as often",
+          total_s >= 10 and agree_s >= 0.85 * total_s and bad_s == 0,
+          f"agree={agree_s}/{total_s} bad={bad_s} {detail_s[:4]}")
 
 
 def t_carrier_quota():
@@ -1062,16 +1147,20 @@ def t_doctrine_bands():
         for raw, sl in slots.items():
             if sl == "offhand" and e7.weapons[w].get("two_handed"):
                 continue
-            votes = _Counter()
+            votes, who = _Counter(), {}
             for b in by_w[w]:
                 it = (b.get("gear") or {}).get(raw)
                 if it:
-                    votes[e7.gear_key(it) or it] += 1.0 / per[b["player"]]
+                    key = e7.gear_key(it) or it
+                    votes[key] += 1.0 / per[b["player"]]
+                    who.setdefault(key, set()).add(b["player"])
             if not votes:
                 continue
             modal, mv = votes.most_common(1)[0]
             if modal not in e7.gear or not kit.get(sl):
                 continue
+            if len(who.get(modal) or ()) < 5:
+                continue      # a thin modal is pooled, not matched (2026-09-08)
             tot += 1
             if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv:
                 agree += 1
@@ -1093,6 +1182,398 @@ def t_doctrine_bands():
           and differs,
           f"seats={len(banded)}/{len(seats_kit)} reads={reads} audit={agree}/{tot} "
           f"bad={bad} {misses[:3]} differs={differs}")
+
+
+def t_chain_guard():
+    # R29 (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-design.md
+    # section 1): the archetype chain's "rare pocket" guard compares SHARES,
+    # never a conditional count against an unconditional count, and a pocket
+    # continues only while it holds >= 20% of the population or 20 votes.
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "bd", os.path.join(ROOT, "pipeline", "build_dataset.py"))
+    bd = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(bd)
+    gear = {g: {"gear_class": "plate"} for g in (
+        "CHEST_A", "CHEST_B", "CHEST_C", "CHEST_D", "HELM_A", "HELM_X",
+        "SHOES_A", "SHOES_X", "HELM_B", "HELM_Z", "SHOES_B", "SHOES_Z",
+        "CAPE_B", "CAPE_Z")}
+    for extra in "PQRSTUV":
+        gear[f"HELM_{extra}"] = {"gear_class": "plate"}
+    ident = lambda v: v if v in gear else None
+    # A: a 30% chest pocket whose wearers all share helmet + shoes; the
+    # other 70 wear one helmet and one pair of shoes between them. The
+    # old guard (30 < 0.5 x 70) stopped at the chest; shares pass.
+    pop_a = []
+    for i in range(30):
+        pop_a.append(({"Armor": "CHEST_A", "Head": "HELM_A",
+                       "Shoes": "SHOES_A"}, 1.0, f"a{i}"))
+    for i, ch in enumerate(["CHEST_B"] * 25 + ["CHEST_C"] * 25
+                           + ["CHEST_D"] * 20):
+        pop_a.append(({"Armor": ch, "Head": "HELM_X", "Shoes": "SHOES_X"},
+                      1.0, f"x{i}"))
+    sel_a = bd._modal_build_chain(pop_a, {"plate"}, {}, gear, ident)
+    # B: the 2026-09-04 Greataxe shape — the chain narrows to a 13-build
+    # pocket by the shoes step (13 of 74 = 18% < 20%, < 20 votes): the
+    # 7-of-13 cape inside it is never picked. Every step before it passes
+    # the share guard (HELM_B 24/44 vs HELM_Z 50/74; SHOES_B 13/24 vs
+    # SHOES_Z 31/74).
+    pop_b = []
+    for i in range(30):
+        pop_b.append(({"Armor": "CHEST_A", "Head": "HELM_Z",
+                       "Shoes": "SHOES_A", "Cape": "CAPE_Z"}, 1.0, f"b{i}"))
+    for i in range(44):
+        head = "HELM_B" if i < 24 else "HELM_Z"
+        shoes = "SHOES_B" if i < 13 else "SHOES_Z"
+        cape = "CAPE_B" if i < 7 else "CAPE_Z"
+        pop_b.append(({"Armor": "CHEST_B", "Head": head, "Shoes": shoes,
+                       "Cape": cape}, 1.0, f"c{i}"))
+    sel_b = bd._modal_build_chain(pop_b, {"plate"}, {}, gear, ident)
+    # C: a pick under half the unconditional modal's SHARE stops: helmet A
+    # is 8 of the 30-build pocket (27%) while helmet X is 70% of everyone.
+    pop_c = []
+    for i in range(30):
+        pop_c.append(({"Armor": "CHEST_A",
+                       "Head": "HELM_A" if i < 8 else f"HELM_{'PQRSTUV'[i % 7]}"},
+                      1.0, f"d{i}"))
+    for i, ch in enumerate(["CHEST_B"] * 25 + ["CHEST_C"] * 25
+                           + ["CHEST_D"] * 20):
+        pop_c.append(({"Armor": ch, "Head": "HELM_X"}, 1.0, f"e{i}"))
+    sel_c = bd._modal_build_chain(pop_c, {"plate"}, {}, gear, ident)
+    check("R29 chain guard: a 30% pocket carries its helmet and shoes; an "
+          "18% pocket stops before its 7-of-13 cape; a pick under half the "
+          "unconditional modal's share stops",
+          list(sel_a) == ["armor", "head", "shoes"]
+          and sel_a["armor"][0] == "CHEST_A" and sel_a["head"][0] == "HELM_A"
+          and list(sel_b) == ["armor", "head", "shoes"]
+          and "cape" not in sel_b and sel_b["shoes"][0] == "SHOES_B"
+          and list(sel_c) == ["armor"],
+          f"a={sel_a} b={sel_b} c={sel_c}")
+
+
+
+def t_chain_step_voters():
+    # R35 (owner 2026-09-08, "ok on arcane helmet"): every archetype chain
+    # step's pick must be worn by CHAIN_STEP_MIN_VOTERS (5) DISTINCT
+    # players — the same floor the tier modal and the cell chest step carry.
+    # The case: Arcane Staff's clap cell chained Knight Armor (10 voters)
+    # into a Judicator Helmet worn by 4 people and fronted it over the
+    # band's Assassin Hood (19 same-chest wearers); a 4-player pocket passed
+    # the 20%-share guard because shares hide thin counts.
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "bd", os.path.join(ROOT, "pipeline", "build_dataset.py"))
+    bd = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(bd)
+    gear = {g: {"gear_class": "plate"} for g in ("CHEST_A", "HELM_A", "HELM_X")}
+    ident = lambda v: v if v in gear else None  # noqa: E731
+
+    def population(n_helm_a):
+        # n_helm_a players wear HELM_A once each (one vote apiece); three
+        # other players wear HELM_X twice each at half weight (one vote
+        # apiece) — HELM_A is the modal head by votes (n vs 3) and clears
+        # the share guards; only the voter floor can stop it.
+        pop = [({"Armor": "CHEST_A", "Head": "HELM_A"}, 1.0, f"a{i}")
+               for i in range(n_helm_a)]
+        for i in range(3):
+            pop += [({"Armor": "CHEST_A", "Head": "HELM_X"}, 0.5, f"x{i}")] * 2
+        return pop
+    sel_thin = bd._modal_build_chain(population(4), {"plate"}, {}, gear, ident)
+    sel_ok = bd._modal_build_chain(population(5), {"plate"}, {}, gear, ident)
+    check("R35 chain step voter floor: a step whose modal item rests on 4 "
+          "players stops the chain (the Arcane Staff Judicator pocket); "
+          "5 players carry it",
+          bd.CHAIN_STEP_MIN_VOTERS == 5
+          and list(sel_thin) == ["armor"]
+          and list(sel_ok) == ["armor", "head"] and sel_ok["head"][0] == "HELM_A",
+          f"thin={sel_thin} ok={sel_ok}")
+
+def t_party_link():
+    # R31 (2026-09-08, spec section 2 "Linkage"): a build links to its party
+    # exactly through the analyzer's `party` index, and — for artifacts
+    # harvested before the index existed — through (battle, weapon) only
+    # when exactly one 10+ party in that battle fields that weapon.
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import party_link
+    doc = {"parties": [
+        {"battle": 1, "size": 12, "weapons": ["2H_LONGBOW", "MAIN_MACE"]},
+        {"battle": 1, "size": 11, "weapons": ["2H_LONGBOW", "2H_AXE"]},
+        {"battle": 2, "size": 15, "weapons": ["2H_AXE"], "index": 4},
+        {"battle": 2, "size": 5, "weapons": ["MAIN_MACE"], "index": 0},
+    ]}
+    pb = party_link.parties_by_battle(doc)
+    idx_b1 = [p["index"] for p in pb[1]]
+    idx_b2 = [p["index"] for p in pb[2]]
+    exact = party_link.link_build({"battle": 1, "weapon": "2H_AXE", "party": 0}, pb)
+    unique = party_link.link_build({"battle": 1, "weapon": "MAIN_MACE"}, pb)
+    ambiguous = party_link.link_build({"battle": 1, "weapon": "2H_LONGBOW"}, pb)
+    small = party_link.link_build({"battle": 2, "weapon": "MAIN_MACE"}, pb)
+    check("R31 party link: ordinal fallback per battle, recorded index kept, "
+          "exact `party` wins, unique (battle, weapon) links, ambiguous and "
+          "under-size parties never link",
+          idx_b1 == [0, 1] and idx_b2 == [4, 0] and exact == 0
+          and unique == 0 and ambiguous is None and small is None,
+          f"b1={idx_b1} b2={idx_b2} exact={exact} unique={unique} "
+          f"amb={ambiguous} small={small}")
+    # the analyzer stamps both sides: run it on one synthetic cache record
+    import tempfile, json as _json, importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "sp", os.path.join(ROOT, "pipeline", "sample_parties.py"))
+    sp = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(sp)
+    tmp = tempfile.mkdtemp()
+    cache = os.path.join(tmp, "party_cache")
+    os.makedirs(cache)
+    members_a = [{"name": f"a{i}", "weapon": "2H_LONGBOW", "guild": "G"}
+                 for i in range(10)]
+    members_b = [{"name": f"b{i}", "weapon": "MAIN_MACE", "guild": "H"}
+                 for i in range(4)]
+    rec = {"battle": 77, "total_players": 14, "kill_events": 2,
+           "events_fetched": 2, "roster": [{"name": m["name"]}
+                                            for m in members_a + members_b],
+           "participant_sets": [],
+           "parties": [{"members": members_a, "seen_in_events": 1},
+                       {"members": members_b, "seen_in_events": 1}],
+           "builds": [{"name": "a3", "seen_as": "killer", "item_power": 1300,
+                       "slots_filled": 6,
+                       "gear": {"MainHand": "T8_2H_LONGBOW@1",
+                                "Armor": "T8_ARMOR_LEATHER_SET3"}},
+                      {"name": "b1", "seen_as": "killer", "item_power": 1200,
+                       "slots_filled": 6,
+                       "gear": {"MainHand": "T7_MAIN_MACE",
+                                "Armor": "T7_ARMOR_PLATE_SET2"}}]}
+    with open(os.path.join(cache, "77.json"), "w", encoding="utf-8") as f:
+        _json.dump(rec, f)
+    sp.CACHE, sp.OUT = cache, tmp
+    sp.analyze({"2H_LONGBOW", "MAIN_MACE"})
+    out = _json.load(open(os.path.join(tmp, "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = {b["weapon"]: b for b in out["builds"]}
+    idx = {tuple(p["weapons"])[0]: p.get("index") for p in out["parties"]}
+    check("R31b analyzer stamps `index` on parties and `party` on builds "
+          "(cluster order per battle; a member's build carries its party)",
+          idx.get("2H_LONGBOW") == 0 and idx.get("MAIN_MACE") == 1
+          and by_w["2H_LONGBOW"].get("party") == 0
+          and by_w["MAIN_MACE"].get("party") == 1,
+          f"idx={idx} builds={ {w: b.get('party') for w, b in by_w.items()} }")
+
+
+def t_party_styles():
+    # R32 (2026-09-08, spec section 2 "Labels"): parties of 10+ in the
+    # committed artifact are labelled with the engine's weapons-only
+    # identity; smaller parties are skipped, forming rosters get null; the
+    # file records the artifact hash it was derived from.
+    import json as _json
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import derive_party_styles as dps
+    clap = ["2H_FIRE_RINGPAIR_AVALON", "2H_SHAPESHIFTER_KEEPER",
+            "2H_HOLYSTAFF_CRYSTAL", "MAIN_CURSEDSTAFF_UNDEAD", "2H_LONGBOW",
+            "2H_BOW_AVALON", "MAIN_NATURESTAFF", "2H_DUALMACE_AVALON",
+            "2H_ICECRYSTAL_UNDEAD", "2H_AXE_AVALON", "2H_HOLYSTAFF_UNDEAD",
+            "2H_HARPOON_HELL", "2H_BOW_HELL"]        # round-4 roster 16
+    doc = {"parties": [
+        {"battle": 5, "size": 13, "weapons": sorted(clap)},
+        {"battle": 5, "size": 4, "weapons": ["MAIN_MACE"] * 4},
+        {"battle": 6, "size": 10, "weapons": ["NOT_A_WEAPON"] * 10, "index": 3},
+    ]}
+    out = dps.derive(doc, lambda size: Engine(content="territory_defense",
+                                              size=size))
+    rows = {(r["battle"], r["index"]): r for r in out["parties"]}
+    check("R32 party styles: a 13-stack labels clap, a 4-man is skipped, "
+          "an unknown-weapon roster is null, rows keep the recorded index",
+          rows.get((5, 0), {}).get("style") == "clap" and (5, 1) not in rows
+          and (6, 3) in rows and rows[(6, 3)]["style"] is None
+          and out["_min_size"] == 10,
+          f"rows={ {k: v['style'] for k, v in rows.items()} }")
+    ps_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
+    pr_path = os.path.join(ROOT, "pipeline", "out", "party_rosters.json")
+    have = os.path.exists(ps_path)
+    live = (_json.load(open(ps_path, encoding="utf-8")) if have else {})
+    check("R32b committed party_styles.json matches the committed artifact "
+          "hash and uses LF",
+          have and live["_source"]["party_rosters_sha256"] == dps.sha256_of(pr_path)
+          and b"\r\n" not in open(ps_path, "rb").read(),
+          f"have={have}")
+
+
+def t_style_cells():
+    # R30 (2026-09-08, spec section 2 "Doctrine"): the group band carries
+    # per-style kit cells mined from builds linked to labelled parties with
+    # the band's own floors plus a 5-voter cell floor; a cell is absent,
+    # never filled; the gang band carries none.
+    import json as _json
+    e = Engine(content="territory_defense", size=20)
+    styles_seen, cells, gang_cells, two_plus = set(), 0, 0, 0
+    for rid, rec in e.roles.items():
+        ks = rec.get("kit_styles") or {}
+        styles_seen |= set(ks)
+        cells += sum(1 for st, cell in ks.items() if cell.get("kit_weapon"))
+        if len(ks) >= 2:
+            two_plus += 1
+        gang_cells += len(((rec.get("kit_bands") or {}).get("gang") or {})
+                          .get("kit_styles") or {})
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"), encoding="utf-8"))
+    det = rep.get("kit_doctrine_styles") or {}
+    thin = []
+    for st, seats in det.items():
+        for sid, d in seats.items():
+            cv = d.get("cell_voters") or {}
+            for w in (d.get("by_weapon") or {}):
+                if cv.get(w, 0) < 5:
+                    thin.append(f"{st}/{sid}/{w}:{cv.get(w)}")
+    check("R30 style cells: only the five styles, at least two seats carry "
+          "two or more cells, every cell weapon has >= 5 voters, the gang "
+          "band carries no cells",
+          bool(styles_seen) and styles_seen <= set(e.IDENTITY_STYLES)
+          and cells >= 4 and two_plus >= 2 and not thin and gang_cells == 0,
+          f"styles={sorted(styles_seen)} cells={cells} two_plus={two_plus} "
+          f"thin={thin[:3]} gang={gang_cells}")
+
+
+def t_style_cell_reader():
+    # R33 (2026-09-08, spec section 2 "Engine"): a DECLARED style dresses a
+    # weapon from its style cell where one exists; balanced and a missing
+    # cell fall back to the band; the option names its style. Pinned on
+    # mechanism: the fixture is whichever weapon's clap and brawl cells both
+    # exist and disagree on the chest (neither cloth, which the brawl gate
+    # would hide), under its own primary seat.
+    band = Engine(content="territory_defense", size=20)
+    pick = None
+    for rid, rec in band.roles.items():
+        ks = rec.get("kit_styles") or {}
+        cw = (ks.get("clap") or {}).get("kit_weapon_build") or {}
+        bw = (ks.get("brawl") or {}).get("kit_weapon_build") or {}
+        for w in sorted(cw):
+            chain, bch = cw[w], bw.get(w) or {}
+            band_ch = (rec.get("kit_weapon_build") or {}).get(w) or {}
+            if (chain.get("armor") and bch.get("armor")
+                    and chain["armor"][0] != bch["armor"][0]
+                    and not bch["armor"][0].startswith("ARMOR_CLOTH")
+                    and band.primary_seat(w) == rid):
+                pick = (rid, w, chain["armor"][0], bch["armor"][0],
+                        (band_ch.get("armor") or [None])[0])
+                break
+        if pick:
+            break
+    ok = pick is not None
+    detail = f"pick={pick}"
+    if pick:
+        rid, w, clap_chest, brawl_chest, band_chest = pick
+        kc = Engine(content="territory_defense", size=20,
+                    style="clap").kit_options(w)
+        kb = Engine(content="territory_defense", size=20,
+                    style="brawl").kit_options(w)
+        kx = band.kit_options(w)
+        got = (kc["kit"].get("armor", {}).get("gear"),
+               kb["kit"].get("armor", {}).get("gear"),
+               kx["kit"].get("armor", {}).get("gear"))
+        styled = kc["kit"].get("armor", {}).get("observed_style")
+        ok = (got[0] == clap_chest and got[1] == brawl_chest
+              and got[2] == band_chest and styled == "clap"
+              and "observed_style" not in kx["kit"].get("armor", {}))
+        detail += f" got={got} styled={styled}"
+    check("R33 style cell reader: clap and brawl dress from their cells, "
+          "balanced from the band, the option names its style",
+          ok, detail)
+
+
+def t_seat_pools():
+    # R34a (2026-09-08, spec section 3 "Seat pooling"): every seat with a
+    # kit ships two player-counted pools per band — the plain seat pool per
+    # slot and the CHEST-CONDITIONED pool (the seat's items among builds
+    # wearing each chest) — for the five poolable slots only, items with
+    # >= 2 players; style cells carry neither key.
+    e = Engine(content="territory_defense", size=20)
+    POOL_SLOTS = {"head", "shoes", "cape", "potion", "food"}
+    seats = pools = by_chest = 0
+    bad = []
+    for rid, rec in e.roles.items():
+        for band_name, band in (("group", rec),
+                                ("gang", (rec.get("kit_bands") or {}).get("gang") or {})):
+            if not band.get("kit"):
+                continue
+            seats += 1
+            kp = band.get("kit_pool") or {}
+            kc = band.get("kit_by_chest") or {}
+            if not kp:
+                bad.append(f"{rid}/{band_name}: no kit_pool")
+                continue
+            pools += 1
+            if set(kp) - POOL_SLOTS:
+                bad.append(f"{rid}/{band_name}: pool slots {sorted(set(kp) - POOL_SLOTS)}")
+            for slot, rows in kp.items():
+                if any((not isinstance(n, int)) or n < 2 or g not in e.gear
+                       for g, n in rows):
+                    bad.append(f"{rid}/{band_name}/{slot}: bad pool row")
+                if [n for _g, n in rows] != sorted((n for _g, n in rows), reverse=True):
+                    bad.append(f"{rid}/{band_name}/{slot}: pool not sorted")
+            for chest, slots in kc.items():
+                by_chest += 1
+                if chest not in e.gear or e.gear[chest].get("slot") != "armor":
+                    bad.append(f"{rid}/{band_name}: by_chest key {chest}")
+                if set(slots) - POOL_SLOTS:
+                    bad.append(f"{rid}/{band_name}/{chest}: slots {sorted(set(slots) - POOL_SLOTS)}")
+        for st, cell in (rec.get("kit_styles") or {}).items():
+            if "kit_pool" in cell or "kit_by_chest" in cell:
+                bad.append(f"{rid}/{st}: cell carries a pool")
+    check("R34a seat pools ship: player-counted seat pool and chest-"
+          "conditioned pool per band for the five poolable slots, sorted, "
+          "catalog ids, none on style cells",
+          seats > 0 and pools == seats and by_chest > 0 and not bad,
+          f"seats={seats} pools={pools} by_chest={by_chest} bad={bad[:4]}")
+
+
+def t_seat_pooling():
+    # R34b (2026-09-08, spec section 3): where a weapon's slot evidence is
+    # THIN (its weapon-tier modal under POOL_MIN_VOTES votes) the kit reader
+    # fronts the seat's chest-conditioned pool item (helmet/boots/cape) or
+    # the plain seat pool item (potion/food) when that item has 5+ players,
+    # marks it `pooled`, and leaves a well-evidenced slot alone. Pinned on
+    # mechanism: the fixtures are found in the dataset, never hard-coded.
+    e = Engine(content="territory_defense", size=20)
+    found = {"chest": None, "plain": None, "keep": None}
+    for w in sorted(e.weapons):
+        seat = e.primary_seat(w)
+        if not seat or all(found.values()):
+            continue
+        rec = e._seat_kit(e.roles[seat])
+        wdoc = (rec.get("kit_weapon") or {}).get(w) or {}
+        ko = e.kit_options(w)
+        kit = ko.get("kit") or {}
+        chest = (kit.get("armor") or {}).get("gear")
+        for slot, key in (("head", "chest"), ("shoes", "chest"),
+                          ("potion", "plain")):
+            if found[key] or slot not in kit:
+                continue
+            wslot = wdoc.get(slot) or []
+            top_w = max((n for _g, n in wslot), default=0)
+            if top_w >= e.POOL_MIN_VOTES:
+                if not found["keep"] and "pooled" not in kit[slot]:
+                    found["keep"] = (w, slot, kit[slot]["gear"], top_w)
+                continue
+            if key == "chest":
+                rows = ((rec.get("kit_by_chest") or {}).get(chest) or {}).get(slot) or []
+            else:
+                rows = (rec.get("kit_pool") or {}).get(slot) or []
+            want = next((g for g, n in rows if n >= e.POOL_MIN_VOTES), None)
+            if want is None:
+                continue
+            got = kit[slot]
+            if got.get("gear") == want and got.get("pooled") in ("seat|chest", "seat") \
+                    and (got.get("pooled_n") or 0) >= e.POOL_MIN_VOTES:
+                found[key] = (w, slot, want, got.get("pooled"), got.get("pooled_n"))
+            else:
+                found[key] = ("MISS", w, slot, got.get("gear"), want, got.get("pooled"))
+    ok = (found["chest"] and found["chest"][0] != "MISS"
+          and found["chest"][3] == "seat|chest"
+          and found["plain"] and found["plain"][0] != "MISS"
+          and found["keep"] is not None)
+    check("R34b seat pooling: a thin helmet/boots slot fronts the seat's "
+          "same-chest pool item, a thin potion the seat pool item, both "
+          "marked pooled with their player count; a 5+ vote slot keeps "
+          "the weapon's own item",
+          bool(ok), f"chest={found['chest']} plain={found['plain']} keep={found['keep']}")
 
 
 if __name__ == "__main__":
@@ -1124,6 +1605,14 @@ if __name__ == "__main__":
     t_observed_chest_class()
     t_one_player_one_vote()
     t_doctrine_bands()
+    t_chain_guard()
+    t_chain_step_voters()
+    t_party_link()
+    t_party_styles()
+    t_style_cells()
+    t_style_cell_reader()
+    t_seat_pools()
+    t_seat_pooling()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

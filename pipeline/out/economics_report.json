@@ -33,7 +33,7 @@
    "2H_HOLYSTAFF_UNDEAD",
    "MAIN_HOLYSTAFF_AVALON"
   ],
-  "rule": "cost_tier from the unique_name's line suffix (crystal/avalonian/artifact/base; only crystal is gated \u2014 viability.cost_gate). full_healer (healing FOUNDATION) requires an E bundle with >= primary_healer.e_heal_min summed heal points AND a GROUP-scale heal (the spell's own radius/max_targets facts; heal_overrides.yaml corrects sub-effect areas the dumps do not surface, with citation; unknown never grants). Single-scale dedicated heal Es grade gang situational / group unfit in style_fit \u2014 the E-first ladder. Owner rulings 2026-08-23.",
+  "rule": "cost_tier from the unique_name's line suffix (crystal/avalonian/artifact/base; a display fact \u2014 no tier is gated since 2026-09-07). full_healer (healing FOUNDATION) requires an E bundle with >= primary_healer.e_heal_min summed heal points AND a GROUP-scale heal (the spell's own radius/max_targets facts; heal_overrides.yaml corrects sub-effect areas the dumps do not surface, with citation; unknown never grants). Single-scale dedicated heal Es grade gang situational / group unfit in style_fit \u2014 the E-first ladder. Owner rulings 2026-08-23.",
   "single_scale_healers": [
    "2H_DIVINESTAFF",
    "2H_NATURESTAFF",

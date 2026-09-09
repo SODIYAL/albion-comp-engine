@@ -21,7 +21,7 @@ near-complete killer-party roster of 10+ players:
 
 Output per style x size band (10-14 / 15-19 / 20):
   out/style_roster_evidence.json  - every number below, machine-readable
-  docs/superpowers/findings/<date>-style-roster-evidence.md - the board
+  notes/findings/<date>-style-roster-evidence.md - the board
 
 For each capability the board shows the harvest's 10th / 50th / 90th
 percentile beside every content template's CURRENT target and soft cap at
@@ -57,7 +57,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(HERE, "out")
 CACHE = os.path.join(OUT, "party_cache")
-FINDINGS = os.path.join(ROOT, "docs", "superpowers", "findings")
+FINDINGS = os.path.join(ROOT, "notes", "findings")
 sys.path.insert(0, ROOT)
 from engine.engine import Engine  # noqa: E402
 
@@ -77,7 +77,10 @@ GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 14
                   1439163242, 1442365275, 1442813939, 1443067935, 1443196794, 1442359908, 1442270050, 1442373560,
                   1439247869, 1439330979, 1439276629,
                   # round 3 (2026-09-05, the 10-14 band, rosters 1-11 called)
-                  1439331464, 1442240282, 1442879983, 1442360406, 1443108045, 1442343192, 1442339162, 1443074329, 1439338826, 1439172287, 1442358198]
+                  1439331464, 1442240282, 1442879983, 1442360406, 1443108045, 1442343192, 1442339162, 1443074329, 1439338826, 1439172287, 1442358198,
+                  # round 4 (2026-09-08, the 10-14 band, all twenty seen by the owner)
+                  1439334286, 1442250301, 1442972989, 1442398268, 1443176864, 1442349353, 1442348698, 1443926164, 1443148724, 1439351476,
+                  1439174574, 1443907529, 1442378155, 1443767342, 1442865547, 1443867507, 1443110811, 1443257154, 1442366915, 1442294064]
 
 
 def strip(t):
@@ -494,7 +497,7 @@ def main():
               encoding="utf-8", newline="\n") as f:
         f.write("\n".join(md) + "\n")
     print(f"board: {len(board)} style x band cells -> out/style_roster_evidence.json "
-          f"+ docs/superpowers/findings/{today}-style-roster-evidence.md")
+          f"+ notes/findings/{today}-style-roster-evidence.md")
 
 
 if __name__ == "__main__":

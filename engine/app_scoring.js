@@ -236,15 +236,29 @@
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
     this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
-    this.reqs = this.template.requirements;
+    /* DEMAND RAMP (owner ruling 2026-09-07; mirrors engine.py set_content):
+       a row with ramp {none_until, full_at} is dropped at sizes <=
+       none_until, grows linearly to its measured value at full_at, and
+       proportionally beyond. */
+    this._ramp = {};
+    this.reqs = {};
+    for (var capR in this.template.requirements) {
+      var rowR = this.template.requirements[capR];
+      if (rowR.ramp) {
+        var fR = rampFactor(rowR.ramp, this.size);
+        if (fR <= 0) continue;
+        this._ramp[capR] = fR;
+      }
+      this.reqs[capR] = rowR;
+    }
     this.floors = this.template.hard_floors || {};
     /* Playstyle overlay: multiplies capability WEIGHTS only (mirrors
        engine.py). */
     this.style = style || "balanced";
     var styles = this.data.styles || {};
     this.styleMults = (styles[this.style] || {}).multipliers || {};
-    /* Mechanics overlay (2026-08-18): the linear grow() extrapolation is
-       replaced by the piecewise absolute size table (size_physics). The
+    /* Mechanics overlay: party-size counts come from the piecewise absolute
+       size table (size_physics), never a linear extrapolation. The
        Resilience ratio is factorized into a STYLE factor (never clamped)
        and a SIZE factor (clamped at 1.0 above stBoostMaxSize). Mirrors
        engine.py set_content. */
@@ -306,8 +320,10 @@
       var r = this.reqs[cap2];
       var tm = this.targetMults[cap2];
       tm = (tm === undefined) ? 1.0 : tm;
-      this._targets[cap2] = tm * (r.scales ? r.target * this.size / this.baseSize : r.target);
-      this._softs[cap2] = tm * (r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap);
+      var sz2 = (cap2 in this._ramp) ? this._ramp[cap2]
+        : (r.scales ? this.size / this.baseSize : 1.0);
+      this._targets[cap2] = tm * r.target * sz2;
+      this._softs[cap2] = tm * r.soft_cap * sz2;
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
@@ -396,25 +412,11 @@
       }
     }
     this._excluded = excl;
-    /* Economics gate (owner ruling 2026-08-23, mirrors engine.py): a cost
-       tier may be barred from SUGGESTIONS/generation below a party size
-       (crystal regear economics). Manual/locked picks always score;
-       swap_review flags them off_budget. */
-    this._costGated = {};
-    var cg = via.cost_gate || {};
-    for (var tier in cg) {
-      var cgMin = (cg[tier] || {}).min_size;
-      if (cgMin && this.size < cgMin) {
-        for (i = 0; i < this.pool.length; i++) {
-          if (this.weapons[this.pool[i]].cost_tier === tier)
-            this._costGated[this.pool[i]] = true;
-        }
-      }
-    }
+    /* No cost gate (owner ruling 2026-09-07, mirrors engine.py): the
+       crystal gate is retired; anti_zone demand carries the physics. */
     this._suggest = [];
     for (i = 0; i < this.pool.length; i++) {
-      if (!excl[this.pool[i]] && !this._costGated[this.pool[i]])
-        this._suggest.push(this.pool[i]);
+      if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
     /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
        style selection IS build intent; unfit weapons leave suggestions,
@@ -547,6 +549,18 @@
           }
           this._band = merged;
           break;
+        }
+      }
+    }
+    /* Size-based style minima, mirrored in engine.py (owner 2026-09-08).
+       Floor(size / per), with no inherited maximum. Small parties keep
+       their existing band until they reach one complete group. */
+    if (this._band !== null) {
+      var rolePer = (styles[this.style] || {}).role_min_per_players || {};
+      for (var ratioRole in rolePer) {
+        if (this.size >= rolePer[ratioRole]) {
+          this._band = Object.assign({}, this._band);
+          this._band[ratioRole] = {min: Math.floor(this.size / rolePer[ratioRole])};
         }
       }
     }
@@ -684,8 +698,10 @@
   };
 
   CompEngine.prototype.sizeBucket = function () {
-    /* Usage-DISPLAY bucket, participant axis = 2 x party size (mirrors
-       engine.py size_bucket, corrected 2026-08-18). Display-only. */
+    /* Participant axis = 2 x party size (mirrors engine.py size_bucket,
+       corrected 2026-08-18). Keys the GENERATED meta prior (admitted
+       2026-09-08) through metaOf() at ROSTER size; the dashboard's usage
+       strip keys off PLAN() instead, deliberately. */
     var n = 2 * this.size;
     return n < 12 ? "small" : n <= 30 ? "mid" : "large";
   };
@@ -824,6 +840,14 @@
     return { members: members, tally: tally, flags: flags };
   };
 
+  function rampFactor(rp, size) {
+    /* mirrors engine.py _ramp_factor */
+    var lo = +rp.none_until, hi = +rp.full_at;
+    if (size <= lo) return 0.0;
+    if (size < hi) return (size - lo) / (hi - lo);
+    return size / hi;
+  }
+
   CompEngine.prototype.isStyleUnfit = function (weapon) {
     /* Unfit for the DECLARED style at this size band — bars suggestions
        only, never scoring (mirrors engine.py is_style_unfit). */
@@ -834,13 +858,6 @@
     /* Viability bar for GENERATED comps at this content+size — scoring is
        never blocked (mirrors engine.py is_excluded). */
     return !!this._excluded[weapon];
-  };
-
-  CompEngine.prototype.isCostGated = function (weapon) {
-    /* Cost-tier bar for GENERATED comps at this size (crystal regear
-       economics, owner ruling 2026-08-23) — suggestions only, scoring is
-       never blocked (mirrors engine.py is_cost_gated). */
-    return !!this._costGated[weapon];
   };
 
   CompEngine.prototype.suggestPool = function () {
@@ -1221,13 +1238,49 @@
   };
 
   CompEngine.prototype._seatKit = function (rec) {
-    /* the seat's doctrine for THIS party size (mirrors engine.py
-       _seat_kit): the gang band below 10 members when the seat has one */
+    /* the seat's doctrine for THIS party size and DECLARED style (mirrors
+       engine.py _seat_kit): the gang band below 10 members; else a declared
+       style's cell (kit_styles.<style>) laid over the band -- the band
+       fills what the cell lacks; `balanced` never reads a cell (owner
+       2026-09-08). */
     if (this.size <= DOCTRINE_GANG_MAX) {
       var gang = (rec.kit_bands || {}).gang;
       if (gang) return gang;
     }
-    return rec;
+    var cell = IDENTITY_STYLES[this.style] ? (rec.kit_styles || {})[this.style] : null;
+    if (!cell) return rec;
+    var merged = {}, k;
+    for (k in rec) merged[k] = rec[k];
+    var kit = {};
+    for (k in (rec.kit || {})) kit[k] = rec.kit[k];
+    for (k in (cell.kit || {})) kit[k] = cell.kit[k];
+    merged.kit = kit;
+    /* per-weapon tiers merge per SLOT (the band fills every slot the cell
+       lacks); a chain replaces the weapon's whole chain; the uniform
+       extension replaces per weapon -- mirrors engine.py */
+    var kw = {}, w, sl;
+    for (w in (rec.kit_weapon || {})) {
+      kw[w] = {};
+      for (sl in rec.kit_weapon[w]) kw[w][sl] = rec.kit_weapon[w][sl];
+    }
+    for (w in (cell.kit_weapon || {})) {
+      if (!kw[w]) kw[w] = {};
+      for (sl in cell.kit_weapon[w]) kw[w][sl] = cell.kit_weapon[w][sl];
+    }
+    merged.kit_weapon = kw;
+    var keys = ["kit_weapon_build", "kit_weapon_uniform"], ki;
+    for (ki = 0; ki < keys.length; ki++) {
+      var perW = {};
+      for (k in (rec[keys[ki]] || {})) perW[k] = rec[keys[ki]][k];
+      for (k in (cell[keys[ki]] || {})) perW[k] = cell[keys[ki]][k];
+      merged[keys[ki]] = perW;
+    }
+    if (cell.kit_build) merged.kit_build = cell.kit_build;
+    var sw = [];
+    for (k in (cell.kit_weapon_build || {})) sw.push(k);
+    sw.sort();
+    merged._style_arch = { weapons: sw, seat: !!cell.kit_build };
+    return merged;
   };
   CompEngine.prototype._chestUniform = function (seat, weapon) {
     /* chest classes admitted for `weapon` in `seat`: the book uniform plus
@@ -1290,13 +1343,20 @@
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
-    var arch = {}, archSeat = {};
+    var arch = {}, archSeat = {}, archStyled = {};
     if (role !== null) {
       var wbArch = (seatRec.kit_weapon_build || {})[weapon] || {};
       var sbArch = seatRec.kit_build || {};
       var aslot;
       for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
       for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
+      /* which archetype slots came from the declared style's cell
+         (2026-09-08, mirrors engine.py): the option carries observed_style */
+      var styledArch = seatRec._style_arch || { weapons: [], seat: false };
+      for (aslot in arch) {
+        if ((wbArch[aslot] && styledArch.weapons.indexOf(weapon) >= 0)
+            || (archSeat[aslot] && styledArch.seat)) archStyled[aslot] = true;
+      }
     }
     var bySlot = {}, k;
     for (k in this.gear) {
@@ -1434,8 +1494,47 @@
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
             ranked[ai].observed_build = [av[1], av[2]];
+            if (archStyled[slot]) ranked[ai].observed_style = this.style;
             ranked.unshift(ranked.splice(ai, 1)[0]);
             break;
+          }
+        }
+      }
+      /* SEAT POOLING (2026-09-08, mirrors engine.py): a THIN slot (the
+         weapon's own modal under POOL_MIN_VOTES votes) is dressed from the
+         seat's pool — helmet/boots/cape from the seat's builds wearing the
+         chest this kit wears (armor is ranked first), potion/food from the
+         plain seat pool; the first pool item with 5+ players the doctrine
+         tier already offers moves to the front, marked pooled/pooled_n. */
+      if (role !== null && POOLED_SLOTS[slot]) {
+        var topW = 0, tw;
+        for (tw in wslot) if (wslot[tw] > topW) topW = wslot[tw];
+        if (topW < POOL_MIN_VOTES) {
+          var cands = [];
+          if (CHEST_POOLED_SLOTS[slot]) {
+            var chestPick = ((options.armor || [])[0] || {}).gear;
+            if (chestPick) {
+              cands.push(["seat|chest",
+                (((seatRec.kit_by_chest || {})[chestPick]) || {})[slot] || []]);
+            }
+          }
+          cands.push(["seat", (seatRec.kit_pool || {})[slot] || []]);
+          var placed = false;
+          for (var ci = 0; ci < cands.length && !placed; ci++) {
+            var rows = cands[ci][1], pick = null;
+            for (var ri = 0; ri < rows.length; ri++) {
+              if (rows[ri][1] >= POOL_MIN_VOTES) { pick = rows[ri]; break; }
+            }
+            if (!pick) continue;
+            for (var pi = 0; pi < ranked.length; pi++) {
+              if (ranked[pi].gear === pick[0]) {
+                ranked[pi].pooled = cands[ci][0];
+                ranked[pi].pooled_n = pick[1];
+                ranked.unshift(ranked.splice(pi, 1)[0]);
+                placed = true;
+                break;
+              }
+            }
           }
         }
       }
@@ -2187,28 +2286,6 @@
     return out;
   };
 
-  CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
-    /* Legacy shim (mirrors engine.py best_loadout): candidate loadout vs
-       bare supply with J=0 — exact for an empty party. */
-    var state = { s: s, sSyn: s, J: [], pairVals: [], counts: {} };
-    var p;
-    for (p = 0; p < this._activeSyn.length; p++) {
-      state.J.push(0.0);
-      state.pairVals.push(this._pairValue(p, s[this._activeSyn[p][0]] || 0.0,
-                                          s[this._activeSyn[p][1]] || 0.0, 0.0));
-    }
-    var best = null;
-    var extras = this._comboExtras(weapon);
-    for (var i = 0; i < extras.length; i++) {
-      var dFit = this._margFitFrom(s, extras[i]);
-      var dSyn = this._margSynFrom(state, extras[i]);
-      var val = this.alpha * dFit + this.beta * dSyn;
-      if (best === null || val > best.val)
-        best = { val: val, dFit: dFit, dSyn: dSyn, extra: extras[i] };
-    }
-    return best === null ? { dFit: 0.0, dSyn: 0.0, extra: {} } : best;
-  };
-
   CompEngine.prototype.explain = function (party, candidate, combos, gears) {
     /* Per-capability delta terms for the candidate's CHOSEN loadout —
        matches what _evalPick scored (mirrors engine.py explain). */
@@ -2418,7 +2495,6 @@
         score: curScore, rank: better.length + 1,
         off_comp: this.isExcluded(cur),
         off_style: this.isStyleUnfit(cur),
-        off_budget: this.isCostGated(cur),
         caps_gain: curPc[1],
         verdict: curVerdict,
         redundant: curVerdict !== "ok",
@@ -2562,15 +2638,22 @@
      style-declared comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
-      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,   /* posture retired 2026-09-04 (round 2) */
+      IDENTITY_BC_AOE = 0.45,
       IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
+      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, blind round 2 */
       IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members (2026-09-04) */
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
       IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
+  /* SEAT POOLING (2026-09-08, mirrors engine.py POOL_MIN_VOTES /
+     POOLED_SLOTS / CHEST_POOLED_SLOTS): a thin weapon slot is dressed from
+     the seat's pool (same-chest for helmet/boots/cape, plain for
+     potion/food) when the pool item has 5+ players */
+  var POOL_MIN_VOTES = 5;
+  var POOLED_SLOTS = { head: true, shoes: true, cape: true, potion: true, food: true };
+  var CHEST_POOLED_SLOTS = { head: true, shoes: true, cape: true };
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
 
@@ -2741,7 +2824,6 @@
       for (var tc in carrierCount) {
         if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
       }
-      var evadePm = n ? evade / n : 0.0;
       if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
         out.archetype = "bomb_squad";
         out.label = "Bomb squad — off-timer artillery (clap detachment)";
@@ -2760,7 +2842,7 @@
       out.style = "clap_kite";
       out.strength = "leaning";
       out.label = sname("clap_kite", "Clap-Kite") +
-                  " -- bomb from range, throw them back";
+                  " — bomb from range, throw them back";
     } else if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
       out.style = "brawl_clap";
       out.strength = "leaning";

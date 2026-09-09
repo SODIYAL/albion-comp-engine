@@ -5,9 +5,9 @@ recommendation. Originated in PR #5 (chatgpt/killboard-affinity); the
 cohort sampler and observed-context surfaces were integrated into the
 mainline dashboard (2026-08-22). The decision-first surface itself
 landed separately via PR #4 and was kept as the headline UI, with its
-regressions repaired on main: the forge honesty reports moved to a
-full-width slot above the wheel stage (never hidden; since 2026-08-23 it
-lives under the wheel), the click-to-add
+regressions repaired on main: the forge honesty reports (`#warn-slot`)
+are never hidden — placed per width band by `dashboard/_layout.css`
+since the 2026-09-02 redesign — the click-to-add
 alternatives live inside the pick card, the observed-context note and
 the after-pick preview render in both the pick card and the why-panel,
 and the layout overrides now follow the shell's own breakpoints instead
@@ -21,7 +21,7 @@ The page embeds only the anonymous weapon baskets per bucket
 (`cohort_baskets`): organization identifiers and battle ids stay in
 `pipeline/out/weapon_usage_v2.json` for audit and never enter the page.
 
-This is intentionally **not party reconstruction**. AlbionBB kill events do not state authoritative party membership or side rosters. The UI therefore says "observed together" / "organization cohort", never "teammates", "party", "winning comp", or "successful comp".
+This cohort channel is intentionally **not party reconstruction**. AlbionBB kill events do not state authoritative party membership or side rosters. (The SECOND killboard channel, `pipeline/sample_parties.py` against the official API's `GroupMembers`, DOES reconstruct the killer's party at kill time with gear — `out/party_rosters.json`, the kit-doctrine and style × size evidence, winner-biased by construction. The limitations below are about the cohort channel only.) The UI therefore says "observed together" / "organization cohort", never "teammates", "party", "winning comp", or "successful comp".
 
 ## Metrics shown
 
@@ -51,14 +51,15 @@ Run:
 
 ```bash
 py -3 pipeline/sample_battles.py --battles 200 --server us
+py -3 pipeline/build_cohort_families.py
 py -3 dashboard/build.py
 ```
 
-The first command rewrites `pipeline/out/weapon_usage_v2.json` with the new `cohorts` and `cohort_meta` fields. The second embeds it into the static dashboard.
+The first command rewrites `pipeline/out/weapon_usage_v2.json` with the new `cohorts` and `cohort_meta` fields; the second re-mines the observed families from it (`out/cohort_families.json` — skipping it ships new baskets against stale families); the third embeds both into the static dashboard. Analysis is a reviewed step (pipeline/README.md weekly cadence), never automated.
 
 ## Important limitations
 
-- fight size is still total battle size, not party size;
+- fight size is total battle size, not party size (the party harvest carries `party_size` — this channel does not);
 - organization cohort is an Alliance/Guild proxy, not a party;
 - kill-event coverage is combatants observed in events, not every person present;
 - selected abilities remain unknown;

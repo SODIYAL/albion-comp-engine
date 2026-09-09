@@ -63,7 +63,14 @@ writes `pipeline/out/calibration_report.json`.
 - Golden tests remain the regression floor and are all
   train-contaminated by definition.
 
-## Current state (2026-08-27, honest)
+## Current state (2026-08-27, honest; still true 2026-09-07)
+
+Since this was written the repo ran the forge-quality rounds, the identity
+blind rounds (T34–T41), the kit audit rounds (R24–R28), the kit blind
+rounds and the gear cards — all recorded in `tests/VALIDATION.md`, none
+transcribed here as calibration cases. The loop did not stall; this
+directory simply has not been fed by it. Validation and holdout remain
+empty for that reason.
 
 - 4 seeded train cases transcribed from the one V3 round that has run
   (2026-08-23, n=1 expert — the owner — castle_outpost only, mostly

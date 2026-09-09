@@ -257,7 +257,14 @@ function loadoutEngineGear(i){
   let used = false;
   empty.forEach(s => {
     const top = (ko.kit || {})[s];
-    if (top && loGear(top.gear)){ L[s] = top.gear; used = true; }
+    if (top && loGear(top.gear)){
+      L[s] = top.gear; used = true;
+      /* the engine names the DECLARED style's observed build it dressed
+         from (observed_style, 2026-09-08) — display provenance only */
+      if (top.observed_style) L._style = top.observed_style;
+      /* a thin slot dressed from the seat's pool (pooled, 2026-09-08) */
+      if (top.pooled) (L._pooled = L._pooled || {})[s] = top.pooled;
+    }
   });
   if (used) L._eng = 1;
 }
@@ -340,7 +347,7 @@ function loadoutPanel(i){
   return `<div class="lo-panel">
     <div class="lo-row">${LO_SLOTS.map(s => loTile(i, s)).join("")}</div>
     <div class="lo-row lo-spells">${LO_SPELLS.map(s => loSpellPicker(i, s)).join("")}</div>
-    ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build</div>` : ""}
+    ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build${(LOADOUT[i] || {})._style ? ` · dressed from the ${esc((LOADOUT[i] || {})._style.replace("_", "-"))} build winners wear` : ""}${(LOADOUT[i] || {})._pooled ? ` · ${esc(Object.keys((LOADOUT[i] || {})._pooled).map(sl => LO_SLOT_LABEL[sl] || sl).join(", "))} from the seat's habit, this weapon's own evidence being thin` : ""}</div>` : ""}
     ${loDoctrineLine(i)}
     ${ref ? `<div class="lo-ref">reference: ${esc(ref.caller)}${ref.role ? " · " + esc(ref.role) : ""}
       ${raw.length ? " · wrote " + raw.map(([sl, t]) =>
@@ -381,6 +388,8 @@ function loadoutHandleClick(e){
     const L = LOADOUT[i] || (LOADOUT[i] = {});
     if (key) L[slot] = key; else delete L[slot];
     delete L._eng;   /* a hand-picked item makes the kit the player's own */
+    delete L._style;
+    delete L._pooled;
     LO_PICKING = null; LO_FILTER = "";
     return true;
   }
@@ -394,6 +403,8 @@ function loadoutHandleChange(e){
   const L = LOADOUT[+i] || (LOADOUT[+i] = {});
   if (sel.value === "") delete L[s]; else L[s] = +sel.value;
   delete L._eng;   /* a hand-picked spell makes the kit the player's own */
+  delete L._style;
+  delete L._pooled;
   return true;
 }
 

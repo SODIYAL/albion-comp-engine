@@ -102,10 +102,13 @@ requirements:
   # capabilities must never dominate a recommendation on unvalidated numbers.
   # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
   # these provisional niche weights dominated tail recommendations.
-  # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
-  #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
-  #   groups. Real target, but a comp without it is not missing anything.
-  anti_zone:      {target: 2.02, weight: 1,  soft_cap: 2.3, scales: false, optional: true}
+  # anti_zone — NO ROW (owner ruling 2026-09-07, replacing the crystal cost
+  #   gate). Its sole supplier is the Exalted Staff; no 7-man comp in the
+  #   corpus fields one (push_monkey_7, sob_blaze_os, sortasaucy_7man do
+  #   not) and the harvest sees one in 2% of 4-9 man winner parties. The
+  #   old target here (2.02) was a fossil of the pre-2026-08-27 anti_zone
+  #   meaning. "Never invent a number to fill a hole": we do not know what a
+  #   7-man needs of it, so nothing is scored.
   damage_debuff:  {target: 1.35, weight: 1,  soft_cap: 6.57, scales: false}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale.
   # WEAKEST evidence of the four fitted contents: roads has ONE comp in the

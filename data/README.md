@@ -9,7 +9,7 @@ automatically become "ideal" recommendations:
 |---|---|---|
 | game facts | `source_pins.yaml` + `pipeline/out/` | items/spells/ranges from ONE pinned ao-bin-dumps commit, manifest-verified |
 | published builds | `published_comps/`, `published_builds/`, `armory_imports/` | what named sources actually published, verbatim + provenance |
-| loadout observations | `pipeline/out/weapon_usage_v2.json`, companion imports | what players were SEEN wearing — prevalence, never advice |
+| loadout observations | `pipeline/out/weapon_usage_v2.json`, `pipeline/out/party_rosters.json` (killer parties with full gear, nightly harvest), companion imports | what players were SEEN wearing — prevalence and kit doctrine evidence, never advice |
 | canonical builds | `canonical_builds/` + generated flags in `builds_index.json` | human-reviewed defaults that cleared the §F promotion gate |
 
 Generated views: `pipeline/build_builds.py` normalizes everything here into
@@ -48,5 +48,6 @@ author never counts twice.
   recommendations.
 
 Nothing in this directory feeds Forge scoring. Displayed equipment/spell
-loadouts may come from canonical builds; gear stays non-scoring until a
-separately validated gear-capability model exists.
+loadouts may come from canonical builds. Gear itself IS scored since
+2026-08-20 — through the curated gear sheets in `pipeline/sheets/gear/`
+and `build_extra`, never through anything recorded here.

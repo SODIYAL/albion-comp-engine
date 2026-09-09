@@ -336,17 +336,40 @@ check("H16 the evidence gate ran (exclusion_gate list present, currently "
       "no contradiction)",
       VALIDATION.get("exclusion_gate") == [])
 
-# ---- H.18 no imported popularity/observation data in Forge scoring -------------
+# ---- H.18 the meta prior is GENERATED from the harvest, never hand-set ----------
+# Owner ruling 2026-09-08 ("sure" to one harvest prior replacing both hand
+# lists): scoring.meta_prior is the size-bucketed map derive_meta_prior.py
+# wrote from the COMMITTED party_rosters.json (hash-gated), scoring.yaml and
+# MASTERSHEET carry no hand-set map, composition.yaml's viability core list is
+# empty, and the dataset embeds the aggregate only — never raw observations.
+import hashlib as _hl
 sc = DATASET["scoring"]
 scoring_yaml = yaml.safe_load(open(os.path.join(
     PIPELINE, "templates", "scoring.yaml"), encoding="utf-8"))
-check("H18 the scoring meta prior is the hand-set scoring.yaml map, not the "
-      "usage-derived bucketed prior",
-      sc.get("meta_prior") == scoring_yaml.get("meta_prior")
-      and set(sc.get("meta_prior", {})) != {"small", "mid", "large"})
-check("H18 no usage/observation payload is embedded in the dataset",
+prior_doc = load_json(os.path.join(OUT, "meta_prior.json"))
+mp = sc.get("meta_prior") or {}
+with open(os.path.join(OUT, "party_rosters.json"), "rb") as _f:
+    _rosters_sha = _hl.sha256(_f.read()).hexdigest()
+check("H18 the scoring meta prior is the GENERATED bucketed harvest prior "
+      "(out/meta_prior.json, hash-gated to the committed party_rosters.json); "
+      "scoring.yaml carries no hand-set map; every value in (0, 1] with the "
+      "bucket's top weapon at 1.0",
+      set(mp) == {"small", "mid", "large"}
+      and not scoring_yaml.get("meta_prior")
+      and (prior_doc.get("_source") or {}).get("party_rosters_sha256") == _rosters_sha
+      and all(0.0 < v <= 1.0 for rows in mp.values() for v in rows.values())
+      and all(max(rows.values()) == 1.0 for rows in mp.values() if rows)
+      and all(mp[b] == {w: v for w, v in prior_doc["meta_prior"][b].items()
+                        if w in DATASET["weapons"]} for b in mp),
+      f"buckets={ {b: len(r) for b, r in mp.items()} }")
+check("H18b the hand-listed viability core is retired (empty), so the "
+      "viability term reads 0 for every weapon",
+      not any((comp_cfg.get("viability") or {}).get("core", {}).values()))
+check("H18 no raw usage/observation payload is embedded in the dataset "
+      "(the prior is an aggregate: weapon -> value per bucket)",
       "usage" not in DATASET and "weapon_usage" not in DATASET
-      and "builds_index" not in DATASET and "buckets" not in DATASET)
+      and "builds_index" not in DATASET and "buckets" not in DATASET
+      and all(isinstance(v, float) for rows in mp.values() for v in rows.values()))
 
 # ---- H.21 weapon style-fit identity (owner-specified 2026-08-23) ---------------
 FIT_REPORT = load_json(os.path.join(OUT, "style_fit_report.json"))
