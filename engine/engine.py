@@ -38,6 +38,7 @@ comparison are currently in different units, and the correction must move
 every template row at once.
 """
 import json, os, itertools, re
+import math
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -2700,7 +2701,15 @@ class Engine:
                 "combo": combo, "kit": vgears or [],
                 "score": score,
             })
-        out = sorted(out, key=lambda r: -r["score"])[:top_n]
+        # Deterministic ranking (2026-09-08): the score quantized to the
+        # parity tolerance (1e-9) first, then the weapon id. Two candidates
+        # can tie EXACTLY (case 22 of the parity suite: Keeper Nature and
+        # Wildstaff), and a bare score sort then hands the order to pool
+        # iteration plus whatever last-bit noise the toolchain adds -
+        # CI on Python 3.11 / Node 20 flipped a pair that Python 3.14 /
+        # Node 24 kept. Mirrored in app_scoring.js recommend().
+        out = sorted(out, key=lambda r: (-math.floor(r["score"] * 1e9 + 0.5),
+                                         r["weapon"]))[:top_n]
         # verdict lens on the returned rows only (the sweep stays lean):
         # a suggestion that survives ranking can still be a depth pick in
         # a saturated comp — say so instead of implying it fills a gap

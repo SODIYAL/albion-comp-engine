@@ -2440,7 +2440,15 @@
         score: ps.score,
       });
     }
-    out = out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
+    /* Deterministic ranking (mirrors engine.py recommend, 2026-09-08):
+       score quantized to the parity tolerance first, then weapon id -
+       an exact tie must not fall to pool order plus last-bit noise. */
+    out = out.sort(function (x, y) {
+      var kx = Math.floor(x.score * 1e9 + 0.5);
+      var ky = Math.floor(y.score * 1e9 + 0.5);
+      if (kx !== ky) return ky - kx;
+      return x.weapon < y.weapon ? -1 : (x.weapon > y.weapon ? 1 : 0);
+    }).slice(0, topN);
     /* verdict lens on the returned rows only (mirrors engine.py): a
        suggestion that survives ranking can still be a depth pick in a
        saturated comp — say so instead of implying it fills a gap */
