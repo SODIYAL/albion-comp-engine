@@ -2263,6 +2263,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
  */
 (function (root) {
   "use strict";
+  /* Ranking key for a score: quantized to the parity tolerance (1e-9) so
+     an exact or last-bit tie never falls to iteration order or the
+     toolchain's float noise (mirrors engine.py _qrank). */
+  var qrank = function (x) { return Math.floor(x * 1e9 + 0.5); };
 
   /* Mechanics-affected capability families (MECHANICS_TODO.md): mirrors
      AOE_ESCALATION_CAPS / RESILIENCE_CAPS in engine.py. */
@@ -3710,13 +3714,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         var t = tierRank(r), g = r.gear;
         if (t === 0) {
           if (joined !== null && inBand(g))
-            return [0, 0, -r.value, -(wslot[g] || 0)];
-          return [0, inBand(g) ? 0 : 1, -(wslot[g] || 0), -r.value];
+            return [0, 0, -qrank(r.value), -(wslot[g] || 0)];
+          return [0, inBand(g) ? 0 : 1, -(wslot[g] || 0), -qrank(r.value)];
         }
         if (t === 1)
           return [1, seatOrder[g] === undefined ? docPool.length : seatOrder[g],
-                  0, -r.value];
-        return [2, 0, -r.value, 0];
+                  0, -qrank(r.value)];
+        return [2, 0, -qrank(r.value), 0];
       };
       ranked.sort(function (a, b) {
         var ka = sortKey(a), kb = sortKey(b);
@@ -4545,7 +4549,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                      before: have, after: have + gain, target: target });
       }
     }
-    return terms.sort(function (x, y) { return y.delta - x.delta; });
+    return terms.sort(function (x, y) {
+      var kx = qrank(x.delta), ky = qrank(y.delta);
+      if (kx !== ky) return ky - kx;
+      return x.cap < y.cap ? -1 : x.cap > y.cap ? 1 : 0;
+    });
   };
 
   /* ------------------------------------- negative recs / redundancy lens
@@ -4597,7 +4605,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                   delta: cov + floorD - over, saturated: have >= target });
     }
     rows.sort(function (x, y) {
-      if (x.delta !== y.delta) return y.delta - x.delta;
+      var kx = qrank(x.delta), ky = qrank(y.delta);
+      if (kx !== ky) return ky - kx;
       return x.cap < y.cap ? -1 : x.cap > y.cap ? 1 : 0;
     });
     return [rows, capsGain];
@@ -4684,8 +4693,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
        score quantized to the parity tolerance first, then weapon id -
        an exact tie must not fall to pool order plus last-bit noise. */
     out = out.sort(function (x, y) {
-      var kx = Math.floor(x.score * 1e9 + 0.5);
-      var ky = Math.floor(y.score * 1e9 + 0.5);
+      var kx = qrank(x.score), ky = qrank(y.score);
       if (kx !== ky) return ky - kx;
       return x.weapon < y.weapon ? -1 : (x.weapon > y.weapon ? 1 : 0);
     }).slice(0, topN);
@@ -4733,7 +4741,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         if (v > curScore) better.push([v, w]);
       }
       better.sort(function (a, b) {
-        if (a[0] !== b[0]) return b[0] - a[0];
+        var ka = qrank(a[0]), kb = qrank(b[0]);
+        if (ka !== kb) return kb - ka;
         return a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0;
       });
       out.push({
@@ -4765,7 +4774,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                   gap: this.weight(cap) * (1 - Math.pow(Math.min(1.0, have / this.target(cap)), this.gamma)),
                   have: have, target: this.target(cap) });
     }
-    return gaps.sort(function (x, y) { return y.gap - x.gap; }).slice(0, topN);
+    return gaps.sort(function (x, y) {
+      var kx = qrank(x.gap), ky = qrank(y.gap);
+      if (kx !== ky) return ky - kx;
+      return x.cap < y.cap ? -1 : x.cap > y.cap ? 1 : 0;
+    }).slice(0, topN);
   };
 
   CompEngine.prototype.uncoveredCaps = function (party, combos) {
@@ -4854,7 +4867,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                        weighted_gap: this.weight(cap) * (target - have) / target });
       }
     }
-    missing.sort(function (a, b) { return b.weighted_gap - a.weighted_gap; });
+    missing.sort(function (a, b) {
+      var ka = qrank(a.weighted_gap), kb = qrank(b.weighted_gap);
+      if (ka !== kb) return kb - ka;
+      return a.cap < b.cap ? -1 : a.cap > b.cap ? 1 : 0;
+    });
     var cc = {};
     for (var i = 0; i < party.length; i++) {
       var eq = this.comboSpells(party[i], combos ? combos[i] : null);

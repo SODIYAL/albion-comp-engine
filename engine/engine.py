@@ -42,6 +42,16 @@ import math
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
+
+def _qrank(x):
+    """Ranking key for a score: quantized to the parity tolerance (1e-9)
+    so an exact or last-bit tie never falls to iteration order or the
+    toolchain's float noise (2026-09-08: CI on Python 3.11 / Node 20
+    flipped a pair that 3.14 / 24 kept). Every ranked list a caller
+    sees sorts by (-_qrank(score), name). Mirrored as qrank() in
+    app_scoring.js."""
+    return math.floor(x * 1e9 + 0.5)
+
 _KEY_TIER_RX = re.compile(r"^T\d+_")
 _KEY_ENCH_RX = re.compile(r"@\d+$")
 
@@ -1685,13 +1695,13 @@ class Engine:
                 t = tier_rank(r)
                 if t == 0:
                     if party is not None and in_band(g):
-                        return (0, 0, -r["value"], -wslot.get(g, 0), g)
+                        return (0, 0, -_qrank(r["value"]), -wslot.get(g, 0), g)
                     return (0, 0 if in_band(g) else 1,
-                            -wslot.get(g, 0), -r["value"], g)
+                            -wslot.get(g, 0), -_qrank(r["value"]), g)
                 if t == 1:
                     return (1, seat_order.get(g, len(seat_order)), 0,
-                            -r["value"], g)
-                return (2, 0, -r["value"], 0, g)
+                            -_qrank(r["value"]), g)
+                return (2, 0, -_qrank(r["value"]), 0, g)
             ranked.sort(key=sort_key)
             a = arch.get(slot)
             # the observed build leads the slot (overlay ruling) — but
@@ -2568,7 +2578,7 @@ class Engine:
             if d > 0.05:
                 terms.append({"delta": round(d, 2), "cap": cap,
                               "before": have, "after": have + gain, "target": target})
-        return sorted(terms, key=lambda t: -t["delta"])
+        return sorted(terms, key=lambda t: (-_qrank(t["delta"]), t["cap"]))
 
     # ------------------------------------- negative recs / redundancy lens
     # (roadmap item 3, 2026-08-24.) A DESCRIPTIVE decomposition of the same
@@ -2627,7 +2637,7 @@ class Engine:
                          "overstack_cost": over,
                          "delta": cov + floor_d - over,
                          "saturated": have >= target})
-        rows.sort(key=lambda r: (-r["delta"], r["cap"]))
+        rows.sort(key=lambda r: (-_qrank(r["delta"]), r["cap"]))
         return rows, caps_gain
 
     def _pick_verdict(self, score, caps_gain):
@@ -2708,8 +2718,7 @@ class Engine:
         # iteration plus whatever last-bit noise the toolchain adds -
         # CI on Python 3.11 / Node 20 flipped a pair that Python 3.14 /
         # Node 24 kept. Mirrored in app_scoring.js recommend().
-        out = sorted(out, key=lambda r: (-math.floor(r["score"] * 1e9 + 0.5),
-                                         r["weapon"]))[:top_n]
+        out = sorted(out, key=lambda r: (-_qrank(r["score"]), r["weapon"]))[:top_n]
         # verdict lens on the returned rows only (the sweep stays lean):
         # a suggestion that survives ranking can still be a depth pick in
         # a saturated comp — say so instead of implying it fills a gap
@@ -2746,7 +2755,7 @@ class Engine:
                 v = self._eval_pick(state, w)[0]
                 if v > cur_score:
                     better.append((v, w))
-            better.sort(key=lambda t: (-t[0], t[1]))
+            better.sort(key=lambda t: (-_qrank(t[0]), t[1]))
             out.append({
                 "index": i, "weapon": cur,
                 "display_name": self.weapons[cur]["display_name"],
@@ -2770,7 +2779,7 @@ class Engine:
                  "gap": self.weight(cap) * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
                  "have": s.get(cap, 0), "target": self.target(cap)}
                 for cap in self.reqs]
-        return sorted(gaps, key=lambda g: -g["gap"])[:top_n]
+        return sorted(gaps, key=lambda g: (-_qrank(g["gap"]), g["cap"]))[:top_n]
 
     def uncovered_caps(self, party, combos=None):
         """High-weight capabilities under half-supplied — feeds the greedy-trap
@@ -2868,7 +2877,7 @@ class Engine:
                 row["gap"] = target - have
                 row["weighted_gap"] = self.weight(cap) * (target - have) / target
                 missing.append(row)
-        missing.sort(key=lambda m: -m["weighted_gap"])
+        missing.sort(key=lambda m: (-_qrank(m["weighted_gap"]), m["cap"]))
         cc = set()
         for i, w in enumerate(party):
             for _slot, sid in self.combo_spells(
