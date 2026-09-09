@@ -60,9 +60,14 @@ from engine import Engine  # noqa: E402
 # sightings) while these audits re-measure fractional votes from the
 # killboard alone, so a pick sitting exactly on the half-line can read as
 # 25 of 50 to the engine and 24.5 of 50.5 here (Lifecurse's gang Soldier
-# Helmet). One vote of slack absorbs that seam; the mechanism pinned —
-# never front an item worn under half as often as the modal — is unchanged.
-BAND_SLACK = 1.0
+# Helmet), or 38 of 76 against 35.7 of 75.5 (Heavy Mace's gang Bridgewatch
+# Cape: two curated sightings plus a rounding on each side). The slack is
+# 5% of the modal, never under one vote (rounding) nor over three (a
+# couple of curated sightings), so it stays tight where the modal is
+# thin. The mechanism pinned — never front an item worn under half as
+# often as the modal — is unchanged; a wider gap is a real bad pick.
+def band_slack(modal_votes):
+    return min(3.0, max(1.0, 0.05 * modal_votes))
 
 RESULTS = []
 
@@ -878,7 +883,7 @@ def t_kit_audit_agreement():
             total += 1
             if eng == modal:
                 agree += 1
-            elif c.get(eng, 0) < 0.5 * mn - BAND_SLACK:
+            elif c.get(eng, 0) < 0.5 * mn - band_slack(mn):
                 bad += 1
                 detail.append(f"{w}:{slot}:{eng}<{modal}")
     check("R24 kit audit: forge kits match the killboard modal item in "
@@ -938,7 +943,7 @@ def t_kit_audit_agreement():
             total_s += 1
             if eng == modal:
                 agree_s += 1
-            elif c.get(eng, 0) < 0.5 * mn - BAND_SLACK:
+            elif c.get(eng, 0) < 0.5 * mn - band_slack(mn):
                 bad_s += 1
                 detail_s.append(f"{w}:{slot}:{eng}<{modal}")
     check("R24b styled kit audit: under a declared clap the forge kit "
@@ -1169,7 +1174,7 @@ def t_doctrine_bands():
             if len(who.get(modal) or ()) < 5:
                 continue      # a thin modal is pooled, not matched (2026-09-08)
             tot += 1
-            if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv - BAND_SLACK:
+            if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv - band_slack(mv):
                 agree += 1
             else:
                 bad += 1

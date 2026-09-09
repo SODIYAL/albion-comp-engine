@@ -3083,6 +3083,57 @@ fights — left as an OWNER CALL, not applied.
    battles with three tries 730/733 = 0.996 (502 x2, one timeout), 324 s
    wall including the analysis pass, ~3.7x the sequential rate.
 
-The 164 probe battles sit in the cache; the committed
-`party_rosters.json` was restored so the hash-gated derive steps stay
-consistent until the next in-session fold.
+### The fold script, and the second half-line case
+
+`pipeline/fold_harvest.ps1` (PowerShell, weekly, Tuesdays on the owner's
+calendar; the 2026-09-23 review decides on EU) runs the rosters
+re-derive, the chain, every gate and `pipeline/compare_fold.py`, which
+writes `notes/findings/<date>-fold-report.md` — the before/after tables
+above, reproduced from the working tree against the previous fold at
+HEAD. Its first run folded the 164 probe battles (3,583 -> 3,747) and
+stopped, as designed, at R28: Heavy Mace's gang cape. The chain fronts
+Bridgewatch Cape (Guardian Armor's own pocket: 21 votes to Smuggler's
+17.7 inside the chest); the engine's merged count reads 38 of a 76 modal
+— exactly half, two curated sightings and a rounding on each side — the
+killboard alone 35.7 of 75.5. The morning's one-vote slack was too tight
+for a curated sighting and too loose for a thin modal; it is now 5% of
+the modal, floored at one vote and capped at three (`band_slack`). The
+mechanism is unchanged.
+
+### The first full fold was NOT committed: V4 went 16/23 on a thrashing row (OPEN OWNER RULING)
+
+The fold script's first complete run (after the 15:00 harvest: 3,583 ->
+4,283 battles, 96,483 builds; event coverage 0.993 and 0.995 with four
+workers, 27 minutes for 536 battles) was green through every gate but
+the last: V4 actual_gear role-level 16/23 = 69.6% against the 70% gate
+(17/23 this morning). One slot flipped: Timothy's blap comp (declared
+brawl, blackzone_roam, 20) with Dreadstorm Monarch dropped — the third
+recommendation moved from Grovekeeper (a tank; role hit) to Battle
+Bracers (dps; miss). Neither weapon's meta prior nor doctrine kit
+changed. What moved is the row the comp is judged against: brawl|20's
+SILENCE target has read 6.79 (50 rosters, 09-05) -> 0.92 (98, 09-09
+morning) -> 4.14 (101, 09-09 evening) while every other row in the cell
+stayed within 5% (burst_aoe 13.7 / 14.0 / 14.0, tankiness 58.8 / 59.4 /
+59.5). Silence is BIMODAL in brawl rosters — many field none — so its
+p10 on ~100 rosters jumps whenever a few rosters enter, and the gate's
+granularity (one slot = 4.3%) sits within one case of the line.
+
+Per the anti-circularity rule this is a hypothesis for the owner, not a
+fix; the working tree was restored to the committed 3,583-battle fold
+(the cache keeps every battle; `fold_harvest.ps1` re-derives in ten
+minutes). Candidate rulings, none applied:
+
+1. A p10 that sits under some fraction of the cell's median (silence:
+   p10 0.92 against a median far above it) is a zero-heavy capability
+   and writes a SOFT-CAP-ONLY row, extending the existing "a zero p10
+   writes a soft-cap-only row" rule — the content target stands.
+2. Row-level stability: a target may move at most X% per fold until the
+   cell holds N distinct rosters (the cell floor is 40; the row is
+   thrashing at 100).
+3. Accept that V4 at 23 role slots cannot resolve 70% and re-base the
+   gate to 16/23, or add published comps so the denominator grows.
+
+The fold report for the uncommitted tree is
+`notes/findings/2026-09-09-fold-report.md` (pooled slots 108 -> 98 at
+20, 101 -> 80 at 7; 449 of 773 rows moved, median 0.3%, p90 6.3%; one
+weapon crossed 35 voters; kite|20 still 31, brawl_clap 21 / 27 / 12).

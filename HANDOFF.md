@@ -94,7 +94,12 @@ What a reader of this file needs:
   15:00 (2026-09-09: the discovery list reaches back ~13 h at the 8-player
   floor, so one pass a day missed half the mid-size fights; battles now
   fetch four at a time and each pass prints its event coverage). It
-  only harvests; rebuild + gates + audit + commit stay in-session. Rerun
+  only harvests; rebuild + gates + audit + commit stay in-session —
+  `pipeline/fold_harvest.ps1` runs all of it but the commit as one
+  command and writes `notes/findings/<date>-fold-report.md` (the
+  before/after read: cells under the floor, band moves, kit churn by
+  evidence thickness, weapons crossing 35 voters). Cadence: weekly,
+  Tuesdays; the 2026-09-23 review decides on the EU server. Rerun
   order after a harvest: `sample_parties` -> `audit_style_rosters` ->
   `derive_style_bands` -> `derive_party_styles` -> `derive_meta_prior` -> `build_dataset` ->
   gates. Because the corpus

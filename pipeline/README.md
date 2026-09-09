@@ -313,7 +313,12 @@ not needed as a source.
 
 ## Scheduled killboard fetches (cache-only)
 
-Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
+Two scheduled jobs, two APIs, two caches — neither rebuilds or commits.
+The fold is `pipeline/fold_harvest.ps1` (PowerShell, weekly): rosters
+from the cache -> the derive chain -> dataset -> pages -> every gate ->
+`pipeline/compare_fold.py`, which writes the before/after report to
+`notes/findings/<date>-fold-report.md` against the previous fold at
+HEAD (`--base` for another revision). Review the report, then commit.
 
 - `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
   at 03:00 AND 15:00 (the job CLAUDE.md names; twice since 2026-09-09
