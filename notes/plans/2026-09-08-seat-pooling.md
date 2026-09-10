@@ -1,5 +1,7 @@
 # Seat Pooling for Thin Slots — Implementation Plan
 
+> **STATUS 2026-09-08: EXECUTED.** Shipped the same day (R34a/R34b; VALIDATION.md index 09-08 "Seat pooling"). The checkboxes below are the plan as written.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Where a weapon's slot evidence is thin (under 5 votes), dress the slot from the seat's chest-conditioned pool instead of a 2-4 player observation.

@@ -174,7 +174,8 @@ MASTERSHEET.md                 expert control surface / tuning rulings (tune: bl
 HANDOFF.md                     current project state + open work
 albion-comp-engine-design.md   research, architecture, taxonomy and design history (cited by section)
 roles-design.md                the role layer design record (seats, functions, gear effects)
-MECHANICS_TODO.md              the mechanics backlog (open items only)
+MECHANICS_TODO.md              the mechanics Q ledger (closed questions, cited by number)
+BACKLOG.md                     the one list of open work
 KILLBOARD_AFFINITY.md          what the killboard evidence means and does not mean
 COMPANION_SCOPE.md             companion legality reasoning + the verified wire map
 changeschapter2*.md            the evidence-layer work order + its adaptation record (cited by section)

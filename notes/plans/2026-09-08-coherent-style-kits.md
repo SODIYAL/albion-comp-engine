@@ -1,5 +1,7 @@
 # Coherent Builds + Style-Conditioned Kit Doctrine — Implementation Plan
 
+> **STATUS 2026-09-08: EXECUTED.** Shipped the same day (R29–R33, R24b; VALIDATION.md index 09-08 "Coherent builds and style cells"). The checkboxes below are the plan as written.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Let the archetype chain carry a coherent build past the chest, and give every seat style-conditioned kit cells that fire on a DECLARED style only.

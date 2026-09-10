@@ -10,7 +10,8 @@ role checklist) with a single-file web planner on GitHub Pages (`docs/`). Live a
 
 Read before substantive work:
 
-- `HANDOFF.md` — current state, the engine model, forge/loadout rules, open work
+- `HANDOFF.md` — current state, the engine model, forge/loadout rules
+- `BACKLOG.md` — the one list of open work; no other file keeps its own
 - `MASTERSHEET.md` — the expert's control surface; its `tune:` blocks OVERRIDE
   scoring/mechanics/templates/sheets at build time. Check it first for "what is
   the engine actually using"
@@ -19,7 +20,7 @@ Read before substantive work:
   `notes/validation/` (append-only)
 - `pipeline/README.md` — the data pipeline, patch workflow, effect layer
 - `roles-design.md` + `pipeline/roles.yaml` — the role layer
-- `albion-comp-engine-design.md`, `MECHANICS_TODO.md` — design history, backlog
+- `albion-comp-engine-design.md`, `MECHANICS_TODO.md` — design history, the mechanics Q ledger
 - `notes/` — plans, specs, findings (internal, not served)
 
 ## Environment traps (Windows)

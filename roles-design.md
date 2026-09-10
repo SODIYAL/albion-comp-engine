@@ -28,10 +28,8 @@ design record:
   engage-leaning split overruled the owner's own stopper-heavy blind call,
   which survives as the territory-defense override.
 
-**Pending**: increment 3b (grading of the effect-quota table + mechanism
-pairing rules for effect carriers, then quota-aware kit allocation),
-increment 4 (uptime economics); Chillhowl/Stillgaze and Iron-clad stay off
-every menu pending an owner word.
+**Pending** (tracked in `BACKLOG.md`): increment 3b's second half (carrier
+floors + pairing rules), increment 4 (uptime economics), the menu-less weapons.
 
 ## The problem (owner observations, both verified)
 

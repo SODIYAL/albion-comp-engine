@@ -131,19 +131,12 @@ Integration paths, in order of preference:
 3. **Not**: forking/embedding the GPL codebase into this repo (license
    contamination + a second Node stack to maintain).
 
-## Risks / open questions
+## Risks
 
 - Event code drift per patch (mitigated: SAT `EventCodes.cs` as reference;
-  companion should fail loud when codes stop parsing, never silently).
-- Raw-socket mode needs admin; Npcap mode needs Npcap installed — pick one
-  as default UX (lean: Npcap optional, fall back to raw sockets + prompt).
-- Unverified: whether the inspect response carries spells on the wire (SAT
-  ignores them there; the companion takes a 14-slot array opportunistically
-  since 2026-09-06 and `--debug` reports `sp=14`/`sp=` either way); whether
-  the inspect shape itself still holds on the current patch (first live
-  inspect with `--debug` confirms — `/status` `detected_codes.Inspect`);
-  whether the gear-change event fires for ALL party members on zone-in or
-  only on change (observed: gear arrives on visibility — NewCharacter
-  carries equipment AND spells — and on change; the inspect response is
-  the on-demand refresh for everyone else).
+  the companion fails loud when codes stop parsing, never silently).
+- Raw-socket mode needs admin; Npcap mode needs Npcap installed.
 - Windows-only as scoped (capture stack).
+
+Open companion work (unverified wire shapes, mid-fight joins, polish, the
+default capture mode): `BACKLOG.md`.

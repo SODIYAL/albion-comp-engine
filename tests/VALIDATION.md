@@ -3,8 +3,8 @@
 The index of the ruling log. Every dated round, every owner quote and every score
 lives in full under `notes/validation/` (append-only, never edited); this file
 carries what has to stay in front of anyone changing the engine: the standing
-rules, the method, one line per ruling with its pin and where the full entry is,
-and the questions still waiting on the owner. Code and yaml cite the log as
+rules, the method, and one line per ruling with its pin and where the full
+entry is. Open questions live in `BACKLOG.md`. Code and yaml cite the log as
 `VALIDATION.md <date>` or by section title — resolve them in the index below.
 
 Archive files (`notes/validation/`): **plan** = `2026-08-12-plan.md`,
@@ -104,6 +104,7 @@ column is the archive file and the section title to search for.
 | 08-13 | First V4 run 69%; nothing retuned — anti-circularity stated | standing rule 1 | — | 08, First V4 run |
 | 08-18 | Style-declared scoring, anti_zone/damage_debuff trims, redundancy + viability; 77% — reweights PROVISIONAL | scoring.yaml | — | 08, V4 after the forge rework; Circularity disclosure |
 | 08-18 | Chillhowl (`MAIN_FROSTSTAFF_AVALON`) excluded >= 10 | composition.yaml exclusion | H16 | 08 (cited 09-02) |
+| 08-20 | Geometric AoE utility scaling: an AoE effect's supply scales with expected targets hit (style clump x spell reach), escalation on top; catch has four factors | `_geo_mult`, mechanics.yaml `geometric_caps` | T18/T18b | MECHANICS_TODO.md, Standing ruling |
 | 08-21 | Real comps set the numbers: 0.9x least / 1.15x most; Bist's Roam 15 admitted | 31 rows re-fitted | T15 | 08, RULED + RECALIBRATED |
 | 08-21 | Hoarfrost scores adjudicated; shield break sits below true purge | sheets | — | 08 (cited 08-25) |
 | 08-23 | V3 round 1: 12/12 role-level; clump-first is right (case 4) | no change | — | 08, FIRST V3 ROUND |
@@ -204,21 +205,8 @@ column is the archive file and the section title to search for.
 | 09-10 | R36: a failed PICK skips its slot, only a failed POOL ends the chain; F29: the need bound discounts only provable bodies; territory_defense at 25 OPEN | build_dataset, both ports | R36/F29 | 09b, Chains reach past a slot |
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
 
-## Open questions recorded in the log (owner rulings pending)
+## Open questions
 
-HANDOFF.md carries the working list; these are the ones the log itself left open,
-with where the evidence sits.
-
-- Nature Staff seated main_healer but 53% of users wear plate (08, Observed BUILDS).
-- `MAIN_FROSTSTAFF_AVALON` >= 10 exclusion premise is weaker since "AvA Raid" fields it (08, Corpus ingestion).
-- Whether a cloth Lifecurse should detect as dps (09a, THE KIT AUDIT addendum).
-- A descriptive `gank` read at <= 14 — proposed, not built (09b, Blind round 4).
-- Is the Infernal Staff's E a standoff tool; should one tool out-vote five ranged dealers at 0.36 (09b, Blind round 4 roster 5).
-- A frontline's damage points making a ranged carrier (09b, Blind round 4 roster 11).
-- `balanced` healers at castle 25 (3 forged; the guild sheet says 4 minimum) (09b, Healers per five).
-- territory_defense at 25: stopper minimum 3 inside a frontline cap of 5 deadlocks the search (09b, Chains reach past a slot).
-- Carrier FLOORS (which of the six gear effects are needs); the guild's "2 Royals per 10" is not supported by the harvest (09b, Other numbers).
-- Kill-vs-death contrast and item-power gating (09b, Coherent builds; Seat pooling).
-- Adding the EU server to the harvest (09b, Coverage, not speed).
-- Whether 10-14 should field the Exalted Staff (09b, Cost gate retired).
-- Hellfire Hands in kite generation (08, KITE EXTENSION); `brawl_clap` target_mults (08, Per-style targets round 2); blap's low disengage vs winning brawls (09a, The movement four).
+Every question the log left for the owner is in `BACKLOG.md` ("Needs an owner
+ruling"), each with its archive pointer. Index rows above marked OPEN are the
+same items.

@@ -210,43 +210,10 @@ move the snapshot silently or bypass the fail-closed gates.
 
 ## Open work
 
-Owner rulings pending (evidence location in the VALIDATION.md "Open questions"
-list):
+`BACKLOG.md` — the one list, grouped by what each item waits on (an owner
+ruling, evidence a round would produce, plain engineering, deprioritized
+product features). No other document keeps its own list.
 
-- **Forge**: territory_defense at 25 forges one to two members short (the
-  stopper minimum of 3 inside a frontline cap of 5; the deadlock guard checks
-  capacity exists, not that it is enough). Should `balanced` carry the
-  one-per-five healer minimum (it forges 3 at castle 25; the guild sheet says
-  4)? With caps gone the scorer adds a healer past the minimum at 25 and at
-  kite 20 — to be graded, not assumed right. Melee instant-payload bombs
-  (Spiked Gauntlets, Realmbreaker) generate into clap dps under the standing
-  conditional-payload ruling.
-- **Identity**: a descriptive `gank` read at <= 14 (catch-and-execute damage
-  core; proposed, not built — those rosters currently vote into brawl / clap
-  rows); whether the Infernal Staff's E is a standoff tool; whether a
-  frontline's damage points make a ranged carrier; the 20+ band once the
-  harvest can stand it.
-- **Role layer / kits**: carrier FLOORS (which of the six gear effects are
-  needs — the harvest does not support the guild's "2 Royals per 10");
-  kill-vs-death contrast (effectiveness claims need a win-lift ruling);
-  item-power gating (the harvest's `item_power` is the API's average — five
-  questions open: which slot decides, tier or relative line, per band,
-  quality, doctrine-only); a dps seat for cloth Lifecurse; Nature Staff's
-  plate majority vs its main_healer seat; Chillhowl / Stillgaze / Iron-clad
-  stay off menus pending a word; uptime economics (increment 4).
-- **Harvest**: whether to add the EU server (review 2026-09-23); the
-  `MAIN_FROSTSTAFF_AVALON` exclusion premise is weaker since "AvA Raid".
-- **Calibration**: targets stay conservative (good comps over-cover ~1.8x);
-  sharpening needs expert blind rounds under the train / validation / holdout
-  rule. Watch: Hellfire under clap_kite and in kite, `brawl_clap`
-  target_mults, castle-25 tail quality.
-- **Mechanics**: `MECHANICS_TODO.md` (per-spell `burst_aoe` escalation gating,
-  Q2 / Q5 / Q11 / Q13, the PASV and TOP magnitude queues).
-- **Companion**: incremental mid-fight join / leave; the inspect key still
-  needs one `--debug` capture during an in-game inspect.
-- **Product** (owner-deprioritized until comp quality satisfies): slot locks /
-  constrained reforge, saved player profiles, enemy-comp counter drafting,
-  fight-plan generation, the blind-validation workflow as a tool.
 
 ## Files to read before major changes
 
