@@ -171,6 +171,13 @@ Each is decidable today from evidence already in the repo.
   constant) so the rows and the prior are fitted on the other four fifths;
   then `v4h` is a true holdout measurement and can be considered for a gate
   (owner decision). Until then every styled `v4h` number is weak-form.
+- **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
+  `weapon_usage_v2.json`, the display strip's fight-size prevalence and the
+  cohort families) and `sample_rosters.py` (`roster_cache/` ->
+  `roster_mixes.json`, the need-profile evidence) are strictly weaker views of
+  what `sample_parties.py` already harvests with party structure and gear.
+  Re-derive both artifacts from `party_rosters.json`, retire the two older
+  samplers and their caches, and the overnight task feeds everything.
 - **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
   open with "KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md)" about the
   unit defect resolved 2026-08-29. Fix on the next engine touch (the JS
