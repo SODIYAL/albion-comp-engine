@@ -126,6 +126,18 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **Gear-active doctrine — pick the ability people equip, not the one that
+  scores best.** `default_gear_choice()` takes the sheet option worth most
+  under the template's weights; where a strong-on-paper ability is never
+  taken (Cleric Cowl's Force Field: owner 2026-09-10, MetaBattle 4/4 Ice
+  Block) that credits phantom supply. Mine an observed active per item (and
+  per size band where the evidence splits) from every source that records
+  gear abilities — MetaBattle `gear_spells_raw`, caller sheets, the
+  companion's spell array if it carries armor actives (verify) — the engine
+  prefers the evidenced active, keeps the argmax as a labelled `assumed`
+  fallback, and the UI exposes the pick like Q/W/E. Do this BEFORE the gear
+  pools below, which would otherwise spread the Force Field over-credit to
+  all ten cloth heads. (V: 09b, Cleric Cowl)
 - **Gear pools — the tree-shared actives are uncurated.** Every cloth head
   carries Energy Barrier + Force Field as its first two actives and only the
   third is unique, yet only Cleric Cowl's sheet cites Force Field; a Fiend

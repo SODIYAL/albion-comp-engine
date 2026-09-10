@@ -366,9 +366,11 @@ def run():
     # A guild-doctrine brawl support-tank build (1H Mace + Cleric Cowl +
     # Duskweaver Armor + Stalker Shoes + Caitiff Shield + Smuggler Cape +
     # Gigantify + Beef Stew) must add real supply on top of the bare weapon,
-    # and the gear layer must flow through the same physics (Cleric Cowl's
-    # Force Field carries delivery facts like any weapon AoE).
-    BUILD = ["HEAD_CLOTH_SET2", "ARMOR_PLATE_FEY", "SHOES_LEATHER_MORGANA",
+    # and the gear layer must flow through the same physics (Judicator
+    # Helmet's Electric Shock carries delivery facts like any weapon AoE).
+    # Re-pinned 2026-09-10 from Cleric Cowl's Force Field, which the owner
+    # ruled nobody equips in group content (T47).
+    BUILD = ["HEAD_PLATE_KEEPER", "ARMOR_PLATE_FEY", "SHOES_LEATHER_MORGANA",
              "OFF_SHIELD_HELL", "CAPEITEM_SMUGGLER", "T7_POTION_REVIVE",
              "T8_MEAL_STEW"]
     bare = E.member_extra("MAIN_MACE")
@@ -378,12 +380,28 @@ def run():
     f_bare = E.fitness(["MAIN_MACE", HALLOWFALL])
     f_full = E.fitness(["MAIN_MACE", HALLOWFALL], None, [BUILD, None])
     check("T20 full-build member: gear adds supply and fitness",
-          full.get("knockback_displace", 0) > bare.get("knockback_displace", 0)
+          full.get("stun", 0) > bare.get("stun", 0)
           and full.get("tankiness", 0) > bare.get("tankiness", 0)
           and len(gained) >= 4 and f_full > f_bare + 1e-9
-          and E.gear["HEAD_CLOTH_SET2"].get("cap_delivery", {})
-                .get("knockback_displace") is not None,
+          and E.gear["HEAD_PLATE_KEEPER"].get("cap_delivery", {})
+                .get("stun") is not None,
           f"gained={gained} fitness {f_bare:.2f}->{f_full:.2f}")
+
+    # T47 — owner ruling 2026-09-10: "no one uses the cleric cowl for its
+    # knockback ability regardless of content" (MetaBattle 4/4 run Ice
+    # Block). The engine's one-active-per-piece pick used to choose Force
+    # Field under every template that weighs peel, crediting a 20-man's
+    # cloth heads with a shove nobody equips. Cleric Cowl now supplies Ice
+    # Block's tankiness and NO knockback / peel / anti_dive, at 7 and at 20.
+    cc_ok = True
+    for size in (7, 20):
+        Ex = Engine(content="blackzone_roam", size=size, style="balanced")
+        ex = Ex.gear_extra("HEAD_CLOTH_SET2")
+        cc_ok = cc_ok and all(ex.get(c, 0) == 0 for c in
+                              ("knockback_displace", "peel", "anti_dive"))             and ex.get("tankiness", 0) > 0
+    check("T47 Cleric Cowl reads as Ice Block, never Force Field, in group "
+          "templates (owner 2026-09-10)", cc_ok,
+          f"gear_extra at 20: {Engine(content='blackzone_roam', size=20).gear_extra('HEAD_CLOTH_SET2')}")
 
     # T21 — build-stat coherence (the expert's founding gear example): item
     # stats MODIFY the person. Robe of Purity (+50% damage/heal, thin armor)

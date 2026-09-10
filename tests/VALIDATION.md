@@ -207,6 +207,7 @@ column is the archive file and the section title to search for.
 | 09-10 | The sweep: the page reads `ENG.reqs`; the forge's need bound made admissible; expansion sort quantized | both ports, page | L19, F28 | 09b, the sweep |
 | 09-10 | R36: a failed PICK skips its slot, only a failed POOL ends the chain; F29: the need bound discounts only provable bodies; territory_defense at 25 OPEN | build_dataset, both ports | R36/F29 | 09b, Chains reach past a slot |
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
+| 09-10 | "no one uses the cleric cowl for its knockback ability regardless of content" — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
 | 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
 
 ## Open questions
