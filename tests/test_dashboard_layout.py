@@ -412,6 +412,16 @@ check(".dl-alt-row" not in DECISION_CSS, "L18b .dl-alt-row orphan gone")
 check(".wf-actions{" not in SHELL, "L18c .wf-actions orphan gone")
 check(".wheel-foot .eyebrow{" not in SHELL, "L18d .eyebrow orphan gone")
 
+print("L19 - the page iterates the rows the ENGINE judges, never the raw template")
+# 2026-09-10: a ramp row (anti_zone, none_until 14) is dropped from ENG.reqs
+# at small sizes; REQS() read tpl().requirements and handed the capability
+# board a cap with no weight - render() died on the first paint (empty
+# party) at castle / blackzone_roam / territory_defense / faction_war and
+# the page stayed half-drawn. The display layer reads ENG.reqs, one source.
+check("const REQS = () => ENG.reqs;" in APP, "L19a REQS() is ENG.reqs")
+check("tpl().requirements" not in APP, "L19b no raw template requirement read in _app.js")
+check(".requirements" not in read("_decision_layer.js"), "L19c the decision layer reads no raw template rows")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

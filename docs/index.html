@@ -6572,7 +6572,13 @@ function comboAt(i){
 }
 
 const tpl = () => DATASET.templates[CONTENT];
-const REQS = () => tpl().requirements;
+/* the rows the ENGINE judges at the current size, never the raw template:
+   a ramp row (anti_zone: none_until 14) is absent from ENG.reqs at small
+   sizes, and reading the template instead handed the board a cap with no
+   weight or target - render() died in the capability rows on the first
+   paint (empty party, size 1) at every content with a ramp row, castle
+   included, and the page stayed half-drawn (2026-09-10) */
+const REQS = () => ENG.reqs;
 const FLOORS = () => tpl().hard_floors || {};
 const baseSize = () => tpl().base_size || 7;
 const validatedSizes = () => tpl().validated_sizes || [baseSize()];
