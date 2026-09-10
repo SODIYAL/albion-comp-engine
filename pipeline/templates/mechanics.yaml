@@ -222,9 +222,12 @@ kill_pressure:
   pierce_caps: [resist_shred]
   heal_cut_caps: [heal_reduction]
   burst_caps: [burst_aoe, burst_st, execute]
-  # a light is green at >= this share of its bar (the sum of the caps'
-  # size-scaled template targets, over caps the content actually requires;
-  # a content that demands none of a light's caps passes that light free)
+  # a light is green at >= this share of its bar: the sum of the caps'
+  # size-scaled BARE MINIMUMS (target_min — the least winners get away
+  # with; owner 2026-09-10, target is the median: "enough to kill" is a
+  # minimum question, and half of real winners sit under the typical
+  # number and still killed), over caps the content actually requires; a
+  # content that demands none of a light's caps passes that light free
   pass_ratio: 0.85   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
@@ -240,9 +243,14 @@ negative_recs:
   # a pick whose summed coverage + floor-lift gain is at or under this is
   # "redundant": every capability it supplies is already covered — its
   # remaining score is meta prior / viability, not gap-closing value.
-  # 0.05 is the same term floor explain() has always used to drop
-  # negligible why-lines.
-  redundant_gain_max: 0.05   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
+  # Was 0.05 (explain()'s term floor) while targets were the least any
+  # winner fielded — a bar every real party cleared, so "closes no gap"
+  # was nearly literal. TARGET IS THE MEDIAN (owner 2026-09-10): the bar
+  # is the typical winner now and almost any body closes SOMETHING, so
+  # the lens reads "under one weighted unit of coverage" — the same
+  # min_gain the swap advisor already calls noise. A third healer into
+  # two (castle_outpost 7) gains 0.59, all of it peel: redundant.
+  redundant_gain_max: 1.0   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated

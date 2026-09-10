@@ -606,10 +606,18 @@ def run():
           f"blap={kp_blap['verdict']} tanks={kp_tanks['verdict']} "
           f"(tank burst {kp_tanks['burst']['have']:.1f}/"
           f"{kp_tanks['burst']['bar']:.1f})")
+    # RE-PINNED 2026-09-10 (target is the median): the lights read the
+    # BARE MINIMUM now ("enough to kill" is a minimum question). The
+    # trio's one unit of shred meets castle_outpost's minimum because the
+    # refreshed three-comp fit says the least winning 7-man brought
+    # exactly one — so pierce turned GREEN here. Thin evidence (three
+    # comps), flagged to the owner as an open call (BACKLOG), not a
+    # semantic change; the separation the pin is about (burst green,
+    # heal-cut red) stands.
     check("T25b kill pressure separates the lights: a burst trio is green "
-          "on burst, red on pierce and heal-cut — and none of it scores "
+          "on burst, red on heal-cut — and none of it scores "
           "(fitness unchanged)",
-          kp_trio["burst"]["ok"] and not kp_trio["pierce"]["ok"]
+          kp_trio["burst"]["ok"]
           and not kp_trio["heal_cut"]["ok"]
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"trio={{'pierce': {kp_trio['pierce']['ok']}, "
@@ -641,11 +649,16 @@ def run():
     fc_heal = E.fight_chain([LONGBOW, WITCHWORK, PERMAFROST],
                             candidate=HALLOWFALL)
     fc_bal = ez.fight_chain(clap10)
-    # RE-PINNED 2026-09-10 (target is the median): the chain bars are the
-    # TYPICAL winner now, not the least any winner fielded, so a real
-    # winning ball sits AT the bar on most stages and reads "ok" — strong
-    # means above what winners usually field. The pin keeps what it always
-    # meant: blap is never weak or missing on its own chain.
+    # RE-GRADED 2026-09-10 (target is the median): a stage is weak under
+    # the bare minimum winners get away with, ok up to the typical winner,
+    # strong at/above it — the board's own stages, no 0.85/1.15 fudge. The
+    # real ball clears the typical number on every stage, as first pinned.
+    # RE-GRADED 2026-09-10 (target is the median): a stage is weak under
+    # the bare minimum winners get away with, ok up to the typical winner,
+    # strong at/above it — the board's own stages, no 0.85/1.15 fudge. The
+    # real ball clears the typical number on four stages and sits between
+    # minimum and typical on Denial (63.8 of 71): a typical winner reads
+    # ok-to-strong, never weak — which is what the pin always meant.
     check("T26 fight chain: blap never weak on the brawl sequence; a thin "
           "brawl five grades weak; Carving connects to Pressure",
           fc_blap["style"] == "brawl"
@@ -865,7 +878,9 @@ def run():
     rep_ok = E.pick_report([LONGBOW, WITCHWORK, PERMAFROST], HALLOWFALL)
     check("T30b verdicts: third healer into saturated heals warns (closes "
           "no gap); healer into 3 DPS reads ok",
-          rep["verdict"] in ("redundant", "negative") and rep["caps_gain"] < 0.5
+          # caps_gain tolerance 0.5 -> 1.0 (2026-09-10, target is the median):
+          # the lens threshold itself; the 0.59 here is peel, not healing
+          rep["verdict"] in ("redundant", "negative") and rep["caps_gain"] < 1.0
           and rep_ok["verdict"] == "ok" and rep_ok["caps_gain"] > 5
           and any(r["saturated"] for r in rep["caps"]),
           f"sat3rd={rep['verdict']}/{rep['caps_gain']:.2f} "
@@ -885,12 +900,22 @@ def run():
     # kit-doctrine stream changed Longbow's v0, and five copies of the new
     # kit leave one capability a hair under its ceiling — the substance
     # (negative verdict, dup priced, ~zero vs the naked rider's ~18) holds
-    check("T30c a 5th Longbow into a DRESSED four-stack is a negative "
-          "recommendation (dup penalty priced, zero gap-closing)",
-          rep_dup["verdict"] == "negative" and rep_dup["score"] <= 0
-          and rep_dup["dup_penalty"] > 0 and rep_dup["caps_gain"] < 0.6,
+    # RE-PINNED 2026-09-10 (target is the median): four Longbows sit far
+    # under the TYPICAL 7-man on tankiness and burst, so a 5th body of
+    # anything closes some of that and the raw marginal is no longer
+    # negative (1.39 dressed). The substance survives in a stronger form:
+    # the dup penalty is priced and the 5th Longbow ranks LAST of every
+    # candidate in the pool, at under a tenth of the top pick's score.
+    recs_lb = E.recommend(lb4, top_n=500, gears=[lb_kit] * 4)
+    order_lb = [r["weapon"] for r in recs_lb]
+    rank_lb = order_lb.index(LONGBOW) + 1 if LONGBOW in order_lb else None
+    check("T30c a 5th Longbow into a DRESSED four-stack is the worst pick "
+          "in the pool (dup penalty priced, under a tenth of the top score)",
+          rep_dup["dup_penalty"] > 0 and rank_lb == len(order_lb)
+          and rep_dup["score"] < 0.1 * recs_lb[0]["score"],
           f"score={rep_dup['score']:.3f} dup_pen={rep_dup['dup_penalty']:.2f} "
-          f"caps_gain={rep_dup['caps_gain']:.3f}")
+          f"caps_gain={rep_dup['caps_gain']:.3f} rank={rank_lb}/{len(order_lb)} "
+          f"top={recs_lb[0]['display_name']} {recs_lb[0]['score']:.2f}")
     rep_naked = E.pick_report(lb4, LONGBOW)
     check("T30c honesty rider: against a NAKED four-stack the 5th's KIT "
           "closes real gaps and the verdict says so",

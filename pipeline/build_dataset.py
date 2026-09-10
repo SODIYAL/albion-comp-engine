@@ -2412,19 +2412,39 @@ def load_templates(tune=None):
                         if fld not in row:
                             sys.exit(f"style_bands.yaml: {st}/{bk} lacks '{fld}'")
                     for cap, v in row["requirements"].items():
-                        # a row is {target, soft_cap} or {soft_cap} alone
-                        # (no minimum from the harvest: the content target
-                        # stands); a zero target is never written
+                        # a row is {min, target, soft_cap} or {soft_cap}
+                        # alone (most winners field none: the content
+                        # target stands); a zero target is never written;
+                        # min (p10) never exceeds the median
                         if not (v.get("soft_cap", 0) > v.get("target", 0)
-                                and (v.get("target") is None or v["target"] > 0)):
+                                and (v.get("target") is None or v["target"] > 0)
+                                and (v.get("min") is None
+                                     or 0 <= v["min"] <= (v.get("target") or 0))):
                             sys.exit(f"style_bands.yaml: {st}/{bk}/{cap}: "
                                      f"need soft_cap > target > 0 (or soft_cap "
-                                     f"alone), got {v}")
+                                     f"alone) and min <= target, got {v}")
         elif base == "mechanics.yaml":
             mechanics = doc
         elif base == "composition.yaml":
             composition = doc
         else:
+            # FIT PROVENANCE (owner 2026-09-10, target is the median): every
+            # content states how its targets were measured; the engine
+            # reports it as target_source() and the board labels thin rows.
+            # A row may carry `min` (the least fitted comp) beside target
+            # and soft_cap; min <= target < soft_cap or the build stops.
+            fit = doc.get("fit")
+            if not (isinstance(fit, dict)
+                    and fit.get("stat") in ("median", "minimum", "none")
+                    and type(fit.get("comps")) is int and fit["comps"] >= 0):
+                sys.exit(f"{base}: needs fit: {{comps: N, stat: median|minimum"
+                         f"|none}} (target provenance, owner 2026-09-10), "
+                         f"got {fit!r}")
+            for cap, v in (doc.get("requirements") or {}).items():
+                lo = v.get("min", v.get("target"))
+                if not (0 <= lo <= v.get("target", -1) < v.get("soft_cap", -1)):
+                    sys.exit(f"{base}: {cap}: need 0 <= min <= target < "
+                             f"soft_cap, got {v}")
             templates[doc["content"]] = doc
     # Size-based generation minima must be safe to divide by in both ports.
     for style, config in styles.items():

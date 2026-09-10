@@ -64,6 +64,16 @@ st_full_value: true
 name: Roads of Avalon
 base_size: 7
 validated_sizes: [7]
+# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# below were measured. stat median = min / target / soft_cap are the least,
+# the median and (raised only) 1.15 x the most of `comps` published comps in
+# the dressed audit (pipeline/refit_content_targets.py); minimum = still the
+# 2026-08-29 "0.9 x the least comp" fit (too few comps to take a median, so
+# the target IS the minimum); none = no comp in the corpus, rows borrowed
+# from a sibling content. The engine reports it as target_source() and the
+# board labels minimum/none rows, so a thin number is never read as what
+# winners field. At 10+ the harvest's style x size rows carry the targets.
+fit: {comps: 1, stat: minimum, source: dressed_template_audit, date: "2026-09-10"}
 # In-game hard cap: Roads zones refuse parties larger than 7. The engine will
 # still score bigger sizes if asked (free-form size is a product rule); the
 # UI reads this field to warn that such a party cannot actually field.

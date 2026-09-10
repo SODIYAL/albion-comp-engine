@@ -33,16 +33,26 @@ content: castle_outpost
 name: Castle Outpost
 base_size: 7
 validated_sizes: [7]
+# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# below were measured. stat median = min / target / soft_cap are the least,
+# the median and (raised only) 1.15 x the most of `comps` published comps in
+# the dressed audit (pipeline/refit_content_targets.py); minimum = still the
+# 2026-08-29 "0.9 x the least comp" fit (too few comps to take a median, so
+# the target IS the minimum); none = no comp in the corpus, rows borrowed
+# from a sibling content. The engine reports it as target_source() and the
+# board labels minimum/none rows, so a thin number is never read as what
+# winners field. At 10+ the harvest's style x size rows carry the targets.
+fit: {comps: 3, stat: median, source: dressed_template_audit, date: "2026-09-10"}
 
 requirements:
-  heal_sustain:   {target: 2.65, weight: 10, soft_cap: 5.5, scales: true}
-  heal_burst:     {target: 1.7, weight: 6,  soft_cap: 6.21, scales: true}
-  tankiness:      {target: 13.56, weight: 9,  soft_cap: 38.9, scales: true}
-  peel:           {target: 2.6, weight: 8,  soft_cap: 7.84, scales: true}
-  burst_aoe:      {target: 4.3, weight: 8,  soft_cap: 14.8, scales: true}
+  heal_sustain:   {min: 4.35, target: 4.5, weight: 10, soft_cap: 6.09, scales: true}
+  heal_burst:     {min: 2.6, target: 2.9, weight: 6,  soft_cap: 6.21, scales: true}
+  tankiness:      {min: 18.16, target: 25.59, weight: 9,  soft_cap: 38.9, scales: true}
+  peel:           {min: 11.75, target: 20.5, weight: 8,  soft_cap: 31.62, scales: true}
+  burst_aoe:      {min: 6.38, target: 12.87, weight: 8,  soft_cap: 15.44, scales: true}
   clump_create:   {target: 1.75, weight: 7,  soft_cap: 4.79, scales: false}
-  engage:         {target: 1.7, weight: 7,  soft_cap: 7.09, scales: false}
-  purge:          {target: 1.7, weight: 6,  soft_cap: 9.33, scales: false}
+  engage:         {min: 4.5, target: 6.5, weight: 7,  soft_cap: 12.65, scales: false}
+  purge:          {min: 2, target: 4, weight: 6,  soft_cap: 9.33, scales: false}
   # PROVISIONAL WEIGHT — needs the domain expert. anti_zone (removing enemy
   # ground areas) is enemy-dependent: worth a lot against Permafrost/Frost-heavy
   # zone comps, near-worthless otherwise, exactly like purge vs buff-less comps
@@ -65,26 +75,26 @@ requirements:
   # versions (Weakening, Frost Beam, Intimidating Presence) left at 0 pending
   # expert weighting. REWEIGHT 2026-08-18: 3 -> 1 (same rationale as anti_zone).
   damage_debuff:  {target: 1.35, weight: 1,  soft_cap: 6.57, scales: false}
-  heal_reduction: {target: 0.9, weight: 6,  soft_cap: 25.89, scales: false}
-  resist_shred:   {target: 2.29, weight: 5,  soft_cap: 4.15, scales: false}
+  heal_reduction: {min: 2, target: 2, weight: 6,  soft_cap: 25.89, scales: false}
+  resist_shred:   {min: 1, target: 4, weight: 5,  soft_cap: 6.32, scales: false}
   cleanse:        {target: 2.7, weight: 5,  soft_cap: 3.9, scales: false}
-  disengage:      {target: 0.9, weight: 4,  soft_cap: 9.75, scales: false}
-  zone_control:   {target: 2.6, weight: 4,  soft_cap: 20, scales: true}
-  silence:        {target: 0.9, weight: 4,  soft_cap: 12.44, scales: false}
-  stun:           {target: 3.59, weight: 4,  soft_cap: 5.93, scales: true}
-  sustained_dps:  {target: 6.73, weight: 5,  soft_cap: 24.09, scales: true}
+  disengage:      {min: 3.5, target: 4, weight: 4,  soft_cap: 12.07, scales: false}
+  zone_control:   {min: 6, target: 7, weight: 4,  soft_cap: 20, scales: true}
+  silence:        {min: 0, target: 5.95, weight: 4,  soft_cap: 12.44, scales: false}
+  stun:           {min: 0, target: 6.8, weight: 4,  soft_cap: 25.97, scales: true}
+  sustained_dps:  {min: 21.4, target: 29.01, weight: 5,  soft_cap: 35.82, scales: true}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale
   # (curated on every sheet, carried by the fight chain, scored by nothing).
   # Fitted from the three real castle-outpost comps, same 0.9x/1.15x
   # convention, weight 1 low-and-flat start. max_health_cut gets NO row:
   # no comp in the corpus fields it here, and an invented number is worse
   # than an honest gap.
-  slow:               {target: 2.7, weight: 1, soft_cap: 11.13, scales: true}
-  root:               {target: 1, weight: 1, soft_cap: 16.87, scales: true}
-  knockback_displace: {target: 2.22, weight: 1, soft_cap: 17.21, scales: true}
-  anti_dive:          {target: 3.86, weight: 1, soft_cap: 10.68, scales: false}
-  interrupt:          {target: 0.9, weight: 1, soft_cap: 1.57, scales: false}
-  mobility:       {target: 1.7, weight: 3,  soft_cap: 10.13, scales: true}
+  slow:               {min: 5, target: 6.11, weight: 1, soft_cap: 13.17, scales: true}
+  root:               {min: 2.25, target: 4, weight: 1, soft_cap: 16.87, scales: true}
+  knockback_displace: {min: 0, target: 3, weight: 1, soft_cap: 17.21, scales: true}
+  anti_dive:          {min: 1, target: 2, weight: 1, soft_cap: 10.68, scales: false}
+  interrupt:          {min: 0, target: 1, weight: 1, soft_cap: 1.57, scales: false}
+  mobility:       {min: 6, target: 7, weight: 3,  soft_cap: 17.25, scales: true}
 
 # HARD FLOORS — capabilities where near-zero supply is catastrophic, not merely
 # suboptimal. Load-bearing: the first prototype run omitted these and failed 4/9

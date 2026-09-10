@@ -26,6 +26,16 @@ content: castle
 name: Castle Fight
 base_size: 25
 validated_sizes: [25]
+# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# below were measured. stat median = min / target / soft_cap are the least,
+# the median and (raised only) 1.15 x the most of `comps` published comps in
+# the dressed audit (pipeline/refit_content_targets.py); minimum = still the
+# 2026-08-29 "0.9 x the least comp" fit (too few comps to take a median, so
+# the target IS the minimum); none = no comp in the corpus, rows borrowed
+# from a sibling content. The engine reports it as target_source() and the
+# board labels minimum/none rows, so a thin number is never read as what
+# winners field. At 10+ the harvest's style x size rows carry the targets.
+fit: {comps: 0, stat: none, source: dressed_template_audit, date: "2026-09-10"}
 
 requirements:
   heal_sustain:   {target: 8.57, weight: 10, soft_cap: 15.97, scales: true}

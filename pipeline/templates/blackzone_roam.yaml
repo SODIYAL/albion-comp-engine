@@ -51,24 +51,34 @@ content: blackzone_roam
 name: Blackzone Roam
 base_size: 20
 validated_sizes: [20]
+# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# below were measured. stat median = min / target / soft_cap are the least,
+# the median and (raised only) 1.15 x the most of `comps` published comps in
+# the dressed audit (pipeline/refit_content_targets.py); minimum = still the
+# 2026-08-29 "0.9 x the least comp" fit (too few comps to take a median, so
+# the target IS the minimum); none = no comp in the corpus, rows borrowed
+# from a sibling content. The engine reports it as target_source() and the
+# board labels minimum/none rows, so a thin number is never read as what
+# winners field. At 10+ the harvest's style x size rows carry the targets.
+fit: {comps: 18, stat: median, source: dressed_template_audit, date: "2026-09-10"}
 
 requirements:
-  heal_sustain:   {target: 7.65,  weight: 10, soft_cap: 17.64, scales: true}  # (comp-fit 2026-08-21)
-  heal_burst:     {target: 8.1,  weight: 6,  soft_cap: 18.97,  scales: true}  # (comp-fit 2026-08-21)
-  tankiness:      {target: 35.65, weight: 9,  soft_cap: 86.89, scales: true}
-  peel:           {target: 40.3,  weight: 8,  soft_cap: 88.76, scales: true}  # (comp-fit 2026-08-21)
-  engage:         {target: 11.7,  weight: 8,  soft_cap: 37.95, scales: true}  # (comp-fit 2026-08-21)
-  catch:          {target: 12.2,  weight: 7,  soft_cap: 24.04,  scales: true}  # (comp-fit 2026-08-21)
-  mobility:       {target: 19.8,  weight: 6,  soft_cap: 59.8, scales: true}  # (comp-fit 2026-08-21)
-  burst_aoe:      {target: 10, weight: 8,  soft_cap: 31.7, scales: true}
-  sustained_dps:  {target: 37.28,  weight: 5,  soft_cap: 79.9, scales: true}  # (comp-fit 2026-08-21)
+  heal_sustain:   {min: 4, target: 13.45,  weight: 10, soft_cap: 20.2, scales: true}  # (comp-fit 2026-08-21)
+  heal_burst:     {min: 1, target: 9.79,  weight: 6,  soft_cap: 18.97,  scales: true}  # (comp-fit 2026-08-21)
+  tankiness:      {min: 51.09, target: 71.17, weight: 9,  soft_cap: 101.91, scales: true}
+  peel:           {min: 30, target: 42.17,  weight: 8,  soft_cap: 88.76, scales: true}  # (comp-fit 2026-08-21)
+  engage:         {min: 11, target: 18.5,  weight: 8,  soft_cap: 39.1, scales: true}  # (comp-fit 2026-08-21)
+  catch:          {min: 6, target: 12,  weight: 7,  soft_cap: 24.04,  scales: true}  # (comp-fit 2026-08-21)
+  mobility:       {min: 27, target: 39,  weight: 6,  soft_cap: 60.95, scales: true}  # (comp-fit 2026-08-21)
+  burst_aoe:      {min: 7.94, target: 19.69, weight: 8,  soft_cap: 38.26, scales: true}
+  sustained_dps:  {min: 56.92, target: 63.24,  weight: 5,  soft_cap: 102.58, scales: true}  # (comp-fit 2026-08-21)
   # Resilience (focus-fire damage reduction) overpower damage piled on one
   # player, so a dedicated single-target slot buys little (expert ruling
   # 2026-08-14, "single-target dive isn't needed past ~5 players"). Kept a
   # token weight (kill-secure still happens) — not zeroed like castle_outpost.
-  burst_st:       {target: 1.7,  weight: 1,  soft_cap: 9.2,  scales: true}  # NOT comp-fit: blap's 7.0 is incidental melee cleave; golden T15's expert scale ruling outranks the fitting rule
-  stun:           {target: 8.88,  weight: 4,  soft_cap: 49.88, scales: true}  # (comp-fit 2026-08-21)
-  zone_control:   {target: 9,  weight: 3,  soft_cap: 46,  scales: true}  # (comp-fit 2026-08-21)
+  burst_st:       {min: 0, target: 4.39,  weight: 1,  soft_cap: 29.08,  scales: true}  # NOT comp-fit: blap's 7.0 is incidental melee cleave; golden T15's expert scale ruling outranks the fitting rule
+  stun:           {min: 6.06, target: 12.88,  weight: 4,  soft_cap: 49.88, scales: true}  # (comp-fit 2026-08-21)
+  zone_control:   {min: 11, target: 17.17,  weight: 3,  soft_cap: 46,  scales: true}  # (comp-fit 2026-08-21)
   # Since 2026-08-19 derived per spell bundle from the curated burst_aoe
   # claim + the spell's own delivery/cast range with cited overrides
   # (build_dataset.derive_ranged_presence, audit in
@@ -81,19 +91,19 @@ requirements:
   # good blackzone comp, so range is a STYLE demand (clap/kite want it, a
   # brawl melee ball legitimately does not), not a content floor. The style
   # multipliers in styles.yaml carry the real signal.
-  ranged_presence: {target: 5.0, weight: 4,  soft_cap: 10.0, scales: true}
+  ranged_presence: {min: 1, target: 5, weight: 4,  soft_cap: 10.35, scales: true}
   # threshold needs — one or two dedicated slots regardless of size
-  clump_create:   {target: 2.57,  weight: 7,  soft_cap: 5.75,  scales: false}
-  purge:          {target: 4.5,  weight: 6,  soft_cap: 18.4,  scales: false}  # (comp-fit 2026-08-21)
-  heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 32.86,  scales: false}
-  resist_shred:   {target: 6.75,  weight: 5,  soft_cap: 14.96,  scales: false}  # (comp-fit 2026-08-21)
-  disengage:      {target: 6.3,  weight: 5,  soft_cap: 34.5,  scales: false}  # (comp-fit 2026-08-21)
+  clump_create:   {min: 0, target: 2,  weight: 7,  soft_cap: 6.9,  scales: false}
+  purge:          {min: 1, target: 10,  weight: 6,  soft_cap: 20.7,  scales: false}  # (comp-fit 2026-08-21)
+  heal_reduction: {min: 1, target: 5.5,  weight: 6,  soft_cap: 32.86,  scales: false}
+  resist_shred:   {min: 5, target: 9.5,  weight: 5,  soft_cap: 16.1,  scales: false}  # (comp-fit 2026-08-21)
+  disengage:      {min: 10, target: 25,  weight: 5,  soft_cap: 41.97,  scales: false}  # (comp-fit 2026-08-21)
   # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
   #   9 of 10 published comps field none. Keep the target, do not require it.
   execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false, optional: true}  # NOT comp-fit: same T15 guard as burst_st
-  buff_allies:    {target: 11.57,  weight: 4,  soft_cap: 33.35,  scales: false}
-  cleanse:        {target: 2.4,  weight: 4,  soft_cap: 6.9,  scales: false}  # (comp-fit 2026-08-21)
-  silence:        {target: 7.1,  weight: 4,  soft_cap: 48.79,  scales: false}  # (comp-fit 2026-08-21)
+  buff_allies:    {min: 8, target: 19.25,  weight: 4,  soft_cap: 33.35,  scales: false}
+  cleanse:        {min: 0, target: 6,  weight: 4,  soft_cap: 16.1,  scales: false}  # (comp-fit 2026-08-21)
+  silence:        {min: 4.35, target: 13.39,  weight: 4,  soft_cap: 48.79,  scales: false}  # (comp-fit 2026-08-21)
   # ---------------------------------------------------------------------
   # PROMOTED 2026-08-27 (owner: "first let's add those missing items").
   # These six were curated on every weapon sheet and carried by the fight
@@ -107,12 +117,12 @@ requirements:
   # them is an owner ruling once the effect on real picks is seen.
   # slow/root/knockback scale with fight size (mechanics.yaml
   # geometric_caps); the dedicated-slot tools do not.
-  slow:               {target: 8.1, weight: 1, soft_cap: 32.69, scales: true}
-  root:               {target: 6.09, weight: 1, soft_cap: 37.78, scales: true}
-  knockback_displace: {target: 5.17, weight: 1, soft_cap: 27.93, scales: true}
-  anti_dive:          {target: 2.57, weight: 1, soft_cap: 21.36,  scales: false}
-  interrupt:          {target: 0.9, weight: 1, soft_cap: 3.29,  scales: false}
-  max_health_cut:     {target: 0.9, weight: 1, soft_cap: 3.45,  scales: false}
+  slow:               {min: 5.9, target: 18.57, weight: 1, soft_cap: 32.69, scales: true}
+  root:               {min: 2, target: 7.38, weight: 1, soft_cap: 38.4, scales: true}
+  knockback_displace: {min: 2, target: 8.62, weight: 1, soft_cap: 27.93, scales: true}
+  anti_dive:          {min: 0, target: 5, weight: 1, soft_cap: 21.36,  scales: false}
+  interrupt:          {min: 0, target: 1.5, weight: 1, soft_cap: 4.6,  scales: false}
+  max_health_cut:     {min: 0, target: 1, weight: 1, soft_cap: 3.45,  scales: false}
   # capabilities must never dominate a recommendation on unvalidated numbers.
   # REWEIGHT 2026-08-18: still PROVISIONAL and deliberately "low and flat so
   # an unvalidated number can never dominate a recommendation" — but concave
@@ -134,7 +144,7 @@ requirements:
   #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape, the
   #   anchors are the owner's.
   anti_zone:      {target: 1.8,  weight: 1,  soft_cap: 2.3,  ramp: {none_until: 14, full_at: 25}, optional: true}
-  damage_debuff:  {target: 1.2,  weight: 1,  soft_cap: 6.57,  scales: false}
+  damage_debuff:  {min: 0, target: 5,  weight: 1,  soft_cap: 18.97,  scales: false}
 
 # Floors are absolute units (the engine does not scale them): at 20-man a
 # comp with fewer than ~2 real healers (5 units) or ~2 real tanks (4 units)

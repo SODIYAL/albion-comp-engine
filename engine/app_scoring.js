@@ -3038,7 +3038,9 @@
         var c = caps[i];
         if (!(c in self.reqs)) continue;
         used.push(c);
-        bar += self.target(c);
+        /* the bar is the BARE MINIMUM (owner 2026-09-10; mirrors
+           engine.py kill_pressure): "enough to kill" is a minimum question */
+        bar += self.targetMin(c);
         have += s[c] || 0.0;
       }
       return { caps: used, have: have, bar: bar,
@@ -3054,7 +3056,9 @@
     return out;
   };
 
-  var CHAIN_WEAK = 0.85, CHAIN_STRONG = 1.15;
+  /* verdicts read the board's stages (owner 2026-09-10; mirrors
+       engine.py fight_chain): weak under the bare minimum (targetMin),
+       ok up to the typical winner (target), strong at/above it */
 
   CompEngine.prototype.fightChain = function (party, combos, gears, candidate) {
     /* The comp as the caller's fight SEQUENCE, graded stage by stage —
@@ -3092,18 +3096,19 @@
     var stages = [];
     for (var i = 0; i < chain.length; i++) {
       var caps = chain[i].caps || [];
-      var used = [], bar = 0.0, have = 0.0;
+      var used = [], bar = 0.0, low = 0.0, have = 0.0;
       for (var ci = 0; ci < caps.length; ci++) {
         if (!(caps[ci] in this.reqs)) continue;
         used.push(caps[ci]);
         bar += this.target(caps[ci]);
+        low += this.targetMin(caps[ci]);
         have += s[caps[ci]] || 0.0;
       }
       var verdict;
       if (!used.length || bar <= 0) verdict = "quiet";
       else if (have <= 0) verdict = "missing";
-      else if (have < CHAIN_WEAK * bar) verdict = "weak";
-      else if (have >= CHAIN_STRONG * bar) verdict = "strong";
+      else if (have < low) verdict = "weak";
+      else if (have >= bar) verdict = "strong";
       else verdict = "ok";
       var sources = [];
       for (var ui = 0; ui < used.length; ui++) {
@@ -3123,7 +3128,7 @@
         }
       }
       stages.push({ name: chain[i].name, caps: used,
-                    have: have, bar: bar, verdict: verdict,
+                    have: have, bar: bar, min: low, verdict: verdict,
                     sources: sources });
     }
     var out = { style: style, stages: stages, improves: null };

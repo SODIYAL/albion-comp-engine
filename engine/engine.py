@@ -3396,8 +3396,10 @@ class Engine:
         Phase D, owner 2026-08-23): pierce on the clump (resist_shred),
         heal-cut applied (heal_reduction), and enough burst to actually
         kill. Each light's bar is the sum of its capabilities' size-scaled
-        template targets — the comp-fitted numbers real comps set
-        (VALIDATION.md 2026-08-21) — and `have` reads effective_supply, so
+        BARE MINIMUMS (target_min — the least winners get away with;
+        owner 2026-09-10, target is the median): "enough to kill" is a
+        minimum question, and half of real winners sit under the typical
+        number and still killed. `have` reads effective_supply, so
         focus-fire tax and AoE escalation are already priced in.
 
         DESCRIPTIVE ONLY: a verdict panel, never a score term. Returns
@@ -3410,7 +3412,7 @@ class Engine:
 
         def light(caps):
             used = [c for c in caps if c in self.reqs]
-            bar = sum(self.target(c) for c in used)
+            bar = sum(self.target_min(c) for c in used)
             have = sum(s.get(c, 0.0) for c in used)
             return {"caps": used, "have": have, "bar": bar,
                     "ok": bar <= 0 or have >= ratio * bar}
@@ -3424,11 +3426,12 @@ class Engine:
                           else "partial" if greens == 2 else "lacking")
         return out
 
-    # Fight-chain verdict thresholds (lens over the comp-fitted targets,
-    # like kill_pressure): a stage is weak under CHAIN_WEAK of its bar,
-    # strong at/above CHAIN_STRONG, missing at zero supply.
-    CHAIN_WEAK = 0.85
-    CHAIN_STRONG = 1.15
+    # Fight-chain verdicts (owner 2026-09-10, target is the median) read
+    # the board's own stages: a stage is MISSING at zero supply, WEAK under
+    # the bare minimum winners get away with (sum of target_min), OK from
+    # there to the typical winner (sum of target), STRONG at/above typical.
+    # The 0.85 / 1.15 ratios that used to bracket a single floor number
+    # are gone: the two lines are measured, not fudged.
 
     def fight_chain(self, party, combos=None, gears=None, candidate=None):
         """The comp as the SEQUENCE a caller thinks the fight in (roadmap
@@ -3480,6 +3483,7 @@ class Engine:
         for st in chain:
             used = [c for c in (st.get("caps") or []) if c in self.reqs]
             bar = sum(self.target(c) for c in used)
+            low = sum(self.target_min(c) for c in used)
             have = sum(s.get(c, 0.0) for c in used)
             sources = []
             for cap in used:
@@ -3501,15 +3505,15 @@ class Engine:
                 verdict = "quiet"
             elif have <= 0:
                 verdict = "missing"
-            elif have < self.CHAIN_WEAK * bar:
+            elif have < low:
                 verdict = "weak"
-            elif have >= self.CHAIN_STRONG * bar:
+            elif have >= bar:
                 verdict = "strong"
             else:
                 verdict = "ok"
             stages.append({"name": st.get("name"), "caps": used,
-                           "have": have, "bar": bar, "verdict": verdict,
-                           "sources": sources})
+                           "have": have, "bar": bar, "min": low,
+                           "verdict": verdict, "sources": sources})
         out = {"style": style, "stages": stages, "improves": None}
         if candidate and candidate in self.weapons:
             # explain() deltas are already weighted fitness terms —
