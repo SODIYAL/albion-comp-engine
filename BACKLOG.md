@@ -126,6 +126,15 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **Regenerate the evidence board on the harvest checkout** so `balanced`
+  gets its pooled median rows: `py -3 pipeline/audit_style_rosters.py`
+  (needs the raw party cache, D: checkout only) -> `derive_style_bands.py`
+  -> `build_dataset.py` -> the gates. Target-is-the-median (2026-09-10)
+  shipped the pooled `balanced|<band>` cell in the audit and the engine
+  reads it like any style, but the committed board predates it, so
+  balanced at 10+ still reads the content row (labelled `content` /
+  `min` on the board) until the audit reruns there. (V: 09b, Target is
+  the median)
 - **Gear-active doctrine — pick the ability people equip, not the one that
   scores best.** `default_gear_choice()` takes the sheet option worth most
   under the template's weights; where a strong-on-paper ability is never

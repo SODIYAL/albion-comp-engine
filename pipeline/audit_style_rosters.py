@@ -341,12 +341,20 @@ def main():
 
     # ---- aggregate per style x band, by sighting and by distinct roster
     styles = sorted({r["style"] for r in rosters if r["style"]})
+    # POOLED cell (owner 2026-09-10, target is the median): `balanced` is
+    # "every winner at this size, whatever it was playing" — labelled and
+    # unlabelled rosters alike. Same dedupe, same stats, same MIN_DISTINCT
+    # downstream; derive_style_bands emits it like any style, and the
+    # engine reads it for the balanced style at 10+ in place of a content
+    # row fitted from a handful of comps and scaled up.
+    styles.append("balanced")
     caps = list(e.reqs)
     board = {}
     for band_key, lo, hi, ref in BANDS:
         for style in styles:
             rs = [r for r in rosters
-                  if r["style"] == style and lo <= r["size"] <= hi]
+                  if (style == "balanced" or r["style"] == style)
+                  and lo <= r["size"] <= hi]
             if not rs:
                 continue
             distinct = {}
