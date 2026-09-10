@@ -641,10 +641,15 @@ def run():
     fc_heal = E.fight_chain([LONGBOW, WITCHWORK, PERMAFROST],
                             candidate=HALLOWFALL)
     fc_bal = ez.fight_chain(clap10)
-    check("T26 fight chain: blap all-strong on the brawl sequence; a thin "
+    # RE-PINNED 2026-09-10 (target is the median): the chain bars are the
+    # TYPICAL winner now, not the least any winner fielded, so a real
+    # winning ball sits AT the bar on most stages and reads "ok" — strong
+    # means above what winners usually field. The pin keeps what it always
+    # meant: blap is never weak or missing on its own chain.
+    check("T26 fight chain: blap never weak on the brawl sequence; a thin "
           "brawl five grades weak; Carving connects to Pressure",
           fc_blap["style"] == "brawl"
-          and all(s["verdict"] == "strong" for s in fc_blap["stages"])
+          and all(s["verdict"] in ("ok", "strong") for s in fc_blap["stages"])
           and any(s["verdict"] in ("weak", "missing") for s in fc5["stages"])
           and (fc5["improves"] or {}).get("stage") == "Pressure",
           f"blap={[s['verdict'] for s in fc_blap['stages']]} "
@@ -1363,12 +1368,16 @@ def run():
         dressed = e38.fitness(party38, None, gears38) / e38.max_fitness(party38, None, gears38)
         sup = e38.effective_supply(party38, None, gears38)
         dressed_wins.append(dressed > naked)
-        clears.append(all(sup.get(c, 0.0) >= e38.target(c) for c in ("engage", "mobility")))
+        # RE-PINNED 2026-09-10 (target is the median): the doubt was "does a
+        # real comp clear the engage/mobility rows at all" — the bare
+        # minimum winners get away with (target_min), not the typical
+        # winner (target), which by definition half of real winners sit under
+        clears.append(all(sup.get(c, 0.0) >= e38.target_min(c) for c in ("engage", "mobility")))
         detail38.append(f"{name}={naked:.1%}->{dressed:.1%}")
     check("T38 the fixtures are judged dressed (owner 2026-09-04): recorded "
           "kits via the builds_index join, doctrine kits for the ten-mans; "
           "dressed beats naked on all five and every one clears its band's "
-          "engage and mobility targets",
+          "engage and mobility minimums",
           all(dressed_wins) and all(clears) and len(fx38) == 5,
           f"kits={sum(1 for _, (_p, g, _s, _c) in fx38.items() if all(g))}/5 "
           f"dressed>naked={dressed_wins} clears={clears} " + " ".join(detail38))

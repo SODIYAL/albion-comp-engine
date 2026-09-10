@@ -59,6 +59,8 @@ const out = cases.map((c, i) => {
     comp_score_locked: e.compScore(c.party, c.combos),
     redundancy: e.redundancy(c.party),
     size_bucket: e.sizeBucket(),
+    target_source: (() => { const o = {}; for (const cap in e.reqs) o[cap] = e.targetSource(cap); return o; })(),
+    target_min: (() => { const o = {}; for (const cap in e.reqs) o[cap] = e.targetMin(cap); return o; })(),
     constraint_band: e._band,
     forge: forged,
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({

@@ -330,6 +330,57 @@ def t_headroom():
           f"at_target {at_t}, mid {mid:.3f}, at_soft {at_soft:.3f}, past {past:.3f}")
 
 
+# ---------------------------------------------------- F30 target provenance
+def t_target_source():
+    """Target is the median (owner 2026-09-10). At 10+ a style reads the
+    harvest cell (balanced its pooled cell, once the board carries one);
+    every row says where its target came from and carries the bare
+    minimum beside it — display provenance for the board's four stages
+    (red < min < orange < typical < green < soft cap < purple), never a
+    scoring input."""
+    e = Engine(content="castle_outpost", size=15, style="kite")
+    srcs = {c: e.target_source(c) for c in e.reqs}
+    check("F30a a harvest-targeted row reports 'harvest'",
+          srcs.get("heal_burst") == "harvest", str(srcs.get("heal_burst")))
+    fit = (e.template.get("fit") or {}).get("stat")
+    want = "content" if fit == "median" else "content_min"
+    soft_only = [c for c, v in e.band_row["requirements"].items()
+                 if v.get("target") is None and c in e.reqs]
+    check("F30b a soft-cap-only harvest row keeps the content row's provenance",
+          all(e.target_source(c) == want for c in soft_only),
+          f"{soft_only[:3]} -> {[e.target_source(c) for c in soft_only[:3]]}")
+    check("F30c every source is one of the four words",
+          all(v in ("harvest", "harvest_borrowed", "content", "content_min")
+              for v in srcs.values()), str(srcs))
+    eb = Engine(content="castle_outpost", size=15, style="balanced")
+    has_pool = "balanced" in ((eb.data.get("style_bands") or {}).get("bands") or {})
+    check("F30d balanced reads its pooled band iff the board carries one",
+          (eb.band_row is not None) == has_pool,
+          f"has_pool={has_pool} band_key={eb.band_key}")
+    es = Engine(content="castle_outpost", size=7, style="kite")
+    check("F30e below min_size every row is content-sourced",
+          es.band_row is None and all(
+              es.target_source(c) in ("content", "content_min") for c in es.reqs))
+    check("F30f kite at 15 asks for more than one healer's heal_burst",
+          e.target("heal_burst") > 8.0, f"{e.target('heal_burst'):.2f}")
+    # the four stages: min <= target <= soft on every row, in every context
+    bad = []
+    for content in CONTENTS:
+        for style in STYLES:
+            for size in (5, 7, 12, 17, 25):
+                ex = Engine(content=content, size=size, style=style)
+                for c in ex.reqs:
+                    lo, t, hi = ex.target_min(c), ex.target(c), ex.soft_cap(c)
+                    if not (0.0 <= lo <= t + 1e-9 and t <= hi + 1e-9):
+                        bad.append((content, style, size, c, lo, t, hi))
+    check("F30g bare minimum <= typical <= soft cap on every row",
+          not bad, str(bad[:4]))
+    row = e.band_row["requirements"]["heal_burst"]
+    check("F30h a harvest row's minimum is its p10 scaled like the target",
+          abs(e.target_min("heal_burst") - row["min"] * 15 / e.band_row["ref_size"]) < 1e-9,
+          f"{e.target_min('heal_burst'):.3f} vs min {row['min']} @ref {e.band_row['ref_size']}")
+
+
 # ------------------------------------------------------------- F10 locks
 def t_locks():
     e = Engine(content="territory_defense", size=11)
@@ -1026,6 +1077,47 @@ def t_forge_every_band_size():
           "; ".join(lines) if lines else "all full")
 
 
+def t_min_need_disjoint_seats():
+    """F29 (2026-09-10): the minimum-need bound may discount a CROSS-ROLE
+    predicate against bodies already counted in a role only where those
+    bodies could actually carry it. The 2026-09-10 bound subtracted the
+    whole of a role's counted need, including bodies committed to a nested
+    SEAT minimum whose satisfiers cannot satisfy the predicate at all: at
+    territory_defense no stopper tank delivers ranged AoE, so a state
+    needing one more stopper AND one more ranged-AoE body reads 1 instead
+    of 2, the beam commits its last slot, and the roster dies one short.
+    Admissible means never MORE than a legal completion needs - it must
+    still never be LESS."""
+    e = Engine(content="territory_defense", size=20, style="brawl")
+    pool = e.suggest_pool()
+    ctx = e._forge_ctx(pool)
+
+    def sat(pn, w):
+        return pn in (e._pred_possible(w)
+                      | (e._profile_members.get(w) or frozenset()))
+    stoppers = [w for w in pool if e._profile_primary.get(w) == "stopper_tank"]
+    # the premise the arithmetic turns on, asserted rather than assumed
+    premise = bool(stoppers) and not any(sat("ranged_aoe_core", w)
+                                         for w in stoppers)
+    # a roster one body short on TWO minima no single body can cover: the
+    # frontline band is already met, so the stopper is a nested seat need
+    roles = {"frontline": 4, "healer": 4, "dps": 8, "support": 2}
+    preds = {"stopper_tank": 1, "ranged_aoe_core": 3, "engage_tank": 3,
+             "shield_support": 1, "pierce": 1, "anti_heal": 1,
+             "primary_heal": 2}
+    probe = next(w for w in pool if e.role_of(w) == "healer")
+    need = e._forge_min_need(ctx, roles, preds, probe, frozenset())
+    f = e.forge(20)
+    full = bool(f.get("feasible")) and len(f.get("party") or []) == 20
+    check("F29 minimum-need bound stays a LOWER bound: a cross-role "
+          "predicate is not discounted against bodies committed to a seat "
+          "minimum its satisfiers cannot fill; territory_defense brawl "
+          "forges a full roster at 20",
+          premise and need >= 2 and full,
+          f"premise={premise} need={need} (two bodies required) "
+          f"feasible={f.get('feasible')} party={len(f.get('party') or [])}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -1055,6 +1147,8 @@ if __name__ == "__main__":
     t_dressed_eval()
     t_locked_gears()
     t_refine_gears()
+    t_min_need_disjoint_seats()
+    t_target_source()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

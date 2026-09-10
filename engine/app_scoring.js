@@ -319,7 +319,7 @@
        its shape; hard floors do NOT scale. Default is identity — every
        style ships {} until the owner rules a value. */
     this.targetMults = (styles[this.style] || {}).target_mults || {};
-    this._targets = {}; this._softs = {}; this._weights = {};
+    this._targets = {}; this._softs = {}; this._weights = {}; this._mins = {};
     for (var cap2 in this.reqs) {
       var r = this.reqs[cap2];
       var tm = this.targetMults[cap2];
@@ -328,15 +328,28 @@
         : (r.scales ? this.size / this.baseSize : 1.0);
       this._targets[cap2] = tm * r.target * sz2;
       this._softs[cap2] = tm * r.soft_cap * sz2;
+      /* BARE MINIMUM beside the target (owner 2026-09-10, the four-stage
+         board; mirrors engine.py _mins): a median-fitted content row
+         carries `min`, a row still on the old 0.9 x least fit IS its
+         minimum. Display only — no scoring term reads it. */
+      this._mins[cap2] = tm * ((r.min === undefined || r.min === null) ? r.target : r.min) * sz2;
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
-    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; mirrors
-       engine.py set_content): a declared style at min_size+ reads the
-       harvest's per-band target/soft after the content row, scaled from
+    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; TARGET IS
+       THE MEDIAN, owner 2026-09-10; mirrors engine.py set_content): at
+       min_size+ the harvest's per-band target (the TYPICAL winner, p50),
+       min (p10) and soft cap replace the content row's, scaled from
        ref_size; a soft-cap-only row keeps the content target; rows are
-       measured per style, so target_mults do not stack on them. */
+       measured per style, so target_mults do not stack on them.
+       `balanced` reads the pooled cell when the board carries one.
+       _targetSrc records per capability where the target came from —
+       display provenance only. */
     this.bandRow = null; this.bandKey = null;
+    var fitStat = ((this.template.fit || {}).stat) || "minimum";
+    var contentSrc = (fitStat === "median") ? "content" : "content_min";
+    this._targetSrc = {};
+    for (var capS in this.reqs) this._targetSrc[capS] = contentSrc;
     var bands = this.data.style_bands || {};
     var bstyle = (bands.bands || {})[this.style];
     if (bstyle && this.size >= (bands.min_size || 10)) {
@@ -349,12 +362,15 @@
     }
     if (this.bandRow) {
       var bref = this.bandRow.ref_size;
+      var harvestSrc = this.bandRow.borrowed_from ? "harvest_borrowed" : "harvest";
       for (var capB in this.bandRow.requirements) {
         if (!(capB in this._targets)) continue;
         var bv = this.bandRow.requirements[capB];
         if (bv.target !== undefined && bv.target !== null) {
           this._targets[capB] = bv.target * this.size / bref;
           this._softs[capB] = bv.soft_cap * this.size / bref;
+          this._mins[capB] = ((bv.min === undefined || bv.min === null) ? bv.target : bv.min) * this.size / bref;
+          this._targetSrc[capB] = harvestSrc;
         } else {
           var softB = bv.soft_cap * this.size / bref;
           if (softB > this._targets[capB]) this._softs[capB] = softB;
@@ -716,6 +732,19 @@
 
   CompEngine.prototype.softCap = function (cap) {
     return this._softs[cap];
+  };
+
+  /* the bare minimum winners get away with (harvest p10 / least fitted
+     comp), scaled like the target — the board's red/orange line (owner
+     2026-09-10). Mirrors engine.py target_min. Display only. */
+  CompEngine.prototype.targetMin = function (cap) {
+    return this._mins[cap];
+  };
+
+  /* display provenance of a capability's target (mirrors engine.py
+     target_source): harvest | harvest_borrowed | content | content_min */
+  CompEngine.prototype.targetSource = function (cap) {
+    return this._targetSrc[cap];
   };
 
   CompEngine.prototype.capsOf = function (weapon) {
@@ -3232,9 +3261,9 @@
        mirrors engine.py _forge_ctx): the [role, seat] pairs of every pool
        weapon that could satisfy the predicate — _forgeFeasible refuses a
        pick that would strand an unmet minimum behind full bands. */
-    var predGates = {};
+    var predGates = {}, predSat = {};
     for (var pn2 in predMin) {
-      var gates = [], seen = {};
+      var gates = [], seen = {}, sats = {};
       for (var wi = 0; wi < pool.length; wi++) {
         var w2 = pool[wi];
         var poss = this._predPossible(w2);
@@ -3242,12 +3271,14 @@
         if (!poss[pn2] && !(prof && prof[pn2])) continue;
         var role2 = this.roleOf(w2);
         var seat2 = this._profilePrimary[w2];
+        sats[w2] = true;
         var gkey = role2 + "|" + (seat2 === undefined ? "-" : seat2);
         if (seen[gkey]) continue;
         seen[gkey] = true;
         gates.push([role2, seat2]);
       }
       predGates[pn2] = gates;
+      predSat[pn2] = sats;
     }
     /* the ROLES a predicate's satisfiers span (2026-09-10; mirrors
        engine.py): the admissible minimum-need bound nests a single-role
@@ -3262,7 +3293,7 @@
     }
     return { pool: pool, roleMin: roleMin, roleMax: roleMax,
              predMin: predMin, seatMax: seatMax, predGates: predGates,
-             predRoles: predRoles };
+             predRoles: predRoles, predSat: predSat };
   };
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
@@ -3296,6 +3327,7 @@
        twelve bodies satisfy, and forged nothing at exactly 15. */
     var r = this.roleOf(w);
     var needByRole = {}, seatSum = {}, otherMax = {}, cross = [];
+    var seatItems = {};   /* role -> [[seat predicate, unmet bodies]] */
     for (var r2 in ctx.roleMin) {
       var have = (roles[r2] || 0) + (r2 === r ? 1 : 0);
       if (ctx.roleMin[r2] > have) needByRole[r2] = ctx.roleMin[r2] - have;
@@ -3307,9 +3339,12 @@
       var pr = (ctx.predRoles || {})[pn] || { roles: {}, n: 0 };
       if (pr.n === 1) {
         var only = Object.keys(pr.roles)[0];
-        if (Object.prototype.hasOwnProperty.call(this._profileMin, pn)) seatSum[only] = (seatSum[only] || 0) + unmet;
-        else otherMax[only] = Math.max(otherMax[only] || 0, unmet);
-      } else cross.push([pr.roles, unmet]);
+        if (Object.prototype.hasOwnProperty.call(this._profileMin, pn)) {
+          seatSum[only] = (seatSum[only] || 0) + unmet;
+          if (!seatItems[only]) seatItems[only] = [];
+          seatItems[only].push([pn, unmet]);
+        } else otherMax[only] = Math.max(otherMax[only] || 0, unmet);
+      } else cross.push([pr.roles, unmet, pn]);
     }
     var keys = {}, k;
     for (k in needByRole) keys[k] = true;
@@ -3320,9 +3355,26 @@
       needByRole[k] = Math.max(needByRole[k] || 0, seatSum[k] || 0, otherMax[k] || 0);
       need += needByRole[k];
     }
+    /* A cross-role predicate is discounted only against bodies that COULD
+       carry it. A body committed to a nested SEAT minimum no satisfier of
+       the predicate can fill is proof of a SECOND body (F29, 2026-09-10;
+       mirrors engine.py): territory_defense needs one more stopper tank
+       and one more ranged-AoE body, and no stopper delivers ranged AoE,
+       so the whole-role discount read 1 where two are required and the
+       roster died one short. Admissible means never MORE than a legal
+       completion needs - it must never be LESS either. */
+    var predSat = ctx.predSat || {};
     for (var ci = 0; ci < cross.length; ci++) {
-      var counted = 0;
-      for (var rr in cross[ci][0]) counted += needByRole[rr] || 0;
+      var counted = 0, satP = predSat[cross[ci][2]] || {};
+      for (var rr in cross[ci][0]) {
+        var blocked = 0, items = seatItems[rr] || [];
+        for (var si = 0; si < items.length; si++) {
+          var satS = predSat[items[si][0]] || {}, shared = false, sk;
+          for (sk in satS) { if (satP[sk]) { shared = true; break; } }
+          if (!shared) blocked += items[si][1];
+        }
+        counted += Math.max(0, (needByRole[rr] || 0) - blocked);
+      }
       need += Math.max(0, cross[ci][1] - counted);
     }
     return need;

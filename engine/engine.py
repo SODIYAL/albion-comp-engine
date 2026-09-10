@@ -373,24 +373,41 @@ class Engine:
                          for c, r in self.reqs.items()}
         self._softs = {c: _tm(c) * r["soft_cap"] * _sz(c, r)
                        for c, r in self.reqs.items()}
+        # BARE MINIMUM beside the target (owner 2026-09-10, the four-stage
+        # board: red below the least winners get away with, orange up to
+        # the typical number, green to the soft cap, purple past it). A
+        # content row fitted to the median carries `min` (the least of its
+        # comps); a row still on the old 0.9 x least fit IS its minimum.
+        # Scaled exactly like the target. DISPLAY ONLY — no scoring term
+        # reads it.
+        self._mins = {c: _tm(c) * r.get("min", r["target"]) * _sz(c, r)
+                      for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
         # STYLE x SIZE ROWS (templates/style_bands.yaml, owner ruling
-        # 2026-09-04 after blind rounds 1+2): for a DECLARED style at
-        # min_size+, the harvest's per-style x band target/soft cap
-        # replaces the content row's for the capabilities the cell lists,
-        # scaled linearly from the cell's ref_size (person units both).
-        # A soft-cap-only row (no minimum from the harvest) keeps the
-        # content target and takes the harvest soft cap when it clears
-        # that target. The rows are MEASURED PER STYLE, so styles.yaml
-        # target_mults do not stack on them (clap's 1.71 burst_aoe was a
-        # proxy for exactly what the harvest now states). Hard floors,
-        # weights and `balanced` are untouched; below min_size the
-        # content row (with its target_mults) stands. The cell
+        # 2026-09-04 after blind rounds 1+2; TARGET IS THE MEDIAN, owner
+        # 2026-09-10): at min_size+ the harvest's per-style x band row
+        # replaces the content row's target/soft cap for the capabilities
+        # the cell lists, scaled linearly from the cell's ref_size (person
+        # units both). The target is what the TYPICAL winner fields (p50);
+        # `min` is the least winners get away with (p10); a soft-cap-only
+        # row (most winners field none) keeps the content target and takes
+        # the harvest soft cap when it clears that target. `balanced` reads
+        # the POOLED cell (every winner at the size) once the audit has
+        # written one; before that it keeps the content row. The rows are
+        # MEASURED PER STYLE, so styles.yaml target_mults do not stack on
+        # them (clap's 1.71 burst_aoe was a proxy for exactly what the
+        # harvest now states). Hard floors and weights are untouched; below
+        # min_size the content row (with its target_mults) stands. The cell
         # is exposed as `band_row` for display ("what winning claps at 20
-        # field"), never a second scorer.
+        # field"), never a second scorer. `_target_src` records per
+        # capability where the effective target came from — the board's
+        # provenance chips read it; nothing in scoring does.
         self.band_row = None
         self.band_key = None
+        fit_stat = ((self.template.get("fit") or {}).get("stat") or "minimum")
+        content_src = "content" if fit_stat == "median" else "content_min"
+        self._target_src = {c: content_src for c in self.reqs}
         bands = self.data.get("style_bands") or {}
         if (style in (bands.get("bands") or {})
                 and self.size >= (bands.get("min_size") or 10)):
@@ -401,12 +418,16 @@ class Engine:
                     break
         if self.band_row:
             ref = float(self.band_row["ref_size"])
+            harvest_src = ("harvest_borrowed" if self.band_row.get("borrowed_from")
+                           else "harvest")
             for c, v in self.band_row["requirements"].items():
                 if c not in self._targets:
                     continue
                 if v.get("target") is not None:
                     self._targets[c] = v["target"] * self.size / ref
                     self._softs[c] = v["soft_cap"] * self.size / ref
+                    self._mins[c] = v.get("min", v["target"]) * self.size / ref
+                    self._target_src[c] = harvest_src
                 else:
                     soft = v["soft_cap"] * self.size / ref
                     if soft > self._targets[c]:
@@ -759,6 +780,22 @@ class Engine:
 
     def soft_cap(self, cap):
         return self._softs[cap]
+
+    def target_min(self, cap):
+        """The bare minimum winners get away with (harvest p10, or the
+        least fitted comp), scaled like the target — the board's red/orange
+        line (owner 2026-09-10). Display only; no scoring term reads it."""
+        return self._mins[cap]
+
+    def target_source(self, cap):
+        """Where this capability's effective target came from — DISPLAY
+        provenance (owner 2026-09-10, target is the median): 'harvest'
+        (this style x band's measured median), 'harvest_borrowed' (a thin
+        cell borrowing its nearest), 'content' (the content row, re-fit to
+        the median of its comps), 'content_min' (a content row still on
+        the old 0.9 x least-comp minimum: thin or no comps). Never a
+        scoring input."""
+        return self._target_src[cap]
 
     def caps_of(self, weapon):
         return self.weapons[weapon]["capabilities"]
@@ -3601,15 +3638,17 @@ class Engine:
         # when Option C floor re-pricing steered every beam into picking a
         # band-capping non-full healer while primary_heal was unmet (the
         # beam died at 6/7); the blind spot itself predates the re-pricing.
-        pred_gates = {}
+        pred_gates, pred_sat = {}, {}
         for pn in pred_min:
-            gates = set()
+            gates, sats = set(), set()
             for w2 in pool:
                 if pn in self._pred_possible(w2) \
                         or pn in (self._profile_members.get(w2) or ()):
                     gates.add((self.role_of(w2),
                                self._profile_primary.get(w2)))
+                    sats.add(w2)
             pred_gates[pn] = gates
+            pred_sat[pn] = frozenset(sats)
         # the ROLES a predicate's satisfiers span (2026-09-10): the
         # admissible minimum-need bound nests a single-role predicate in
         # its role family and charges a cross-role one only beyond the
@@ -3618,7 +3657,8 @@ class Engine:
                       for pn, gates in pred_gates.items()}
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
                 "pred_min": pred_min, "seat_max": dict(self._profile_max),
-                "pred_gates": pred_gates, "pred_roles": pred_roles}
+                "pred_gates": pred_gates, "pred_roles": pred_roles,
+                "pred_sat": pred_sat}
 
     def _forge_counts(self, party, combos=None):
         """(weapon counts, role counts, predicate counts, group counts).
@@ -3663,6 +3703,7 @@ class Engine:
             if mn > have:
                 need_by_role[r2] = mn - have
         seat_sum, other_max, cross = {}, {}, []
+        seat_items = {}      # role -> [(seat predicate, unmet bodies)]
         for pn, mn in ctx["pred_min"].items():
             have = preds.get(pn, 0) + (1 if pn in pred_contrib else 0)
             unmet = mn - have
@@ -3673,16 +3714,33 @@ class Engine:
                 r2 = next(iter(rs))
                 if pn in self._profile_min:
                     seat_sum[r2] = seat_sum.get(r2, 0) + unmet
+                    seat_items.setdefault(r2, []).append((pn, unmet))
                 else:
                     other_max[r2] = max(other_max.get(r2, 0), unmet)
             else:
-                cross.append((rs, unmet))
+                cross.append((rs, unmet, pn))
         for r2 in set(need_by_role) | set(seat_sum) | set(other_max):
             need_by_role[r2] = max(need_by_role.get(r2, 0),
                                    seat_sum.get(r2, 0), other_max.get(r2, 0))
         need = sum(need_by_role.values())
-        for rs, unmet in cross:
-            need += max(0, unmet - sum(need_by_role.get(r2, 0) for r2 in rs))
+        sat = ctx.get("pred_sat") or {}
+        for rs, unmet, pn in cross:
+            # A cross-role predicate is discounted only against bodies that
+            # COULD carry it. A body committed to a nested SEAT minimum no
+            # satisfier of `pn` can fill is proof of a SECOND body (F29,
+            # 2026-09-10): territory_defense needs one more stopper tank and
+            # one more ranged-AoE body, and no stopper delivers ranged AoE,
+            # so the whole-role discount read 1 where two are required, the
+            # beam spent its last slot and the roster died one short.
+            # Admissible still means never MORE than a legal completion
+            # needs — it must never be LESS either.
+            disc = 0
+            for r2 in rs:
+                blocked = sum(u for pn2, u in seat_items.get(r2, ())
+                              if not ((sat.get(pn2) or frozenset())
+                                      & (sat.get(pn) or frozenset())))
+                disc += max(0, need_by_role.get(r2, 0) - blocked)
+            need += max(0, unmet - disc)
         return need
 
     def _forge_feasible(self, ctx, counts, roles, preds, groups, w, slots_left_after):

@@ -178,6 +178,10 @@ def py_results(cases):
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
             "size_bucket": e.size_bucket(),
+            # target provenance + the four-stage minimum (owner 2026-09-10):
+            # display reads, parity-carried like every descriptive layer
+            "target_source": {cap: e.target_source(cap) for cap in e.reqs},
+            "target_min": {cap: e.target_min(cap) for cap in e.reqs},
             "constraint_band": e._band,
             "forge": forged,
             "swap": None if sp is None else [
@@ -292,6 +296,13 @@ def main():
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
         if a["size_bucket"] != b["size_bucket"]:
             errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")
+        if a["target_source"] != b.get("target_source"):
+            errs.append(f"target_source: py={a['target_source']} "
+                        f"js={b.get('target_source')}")
+        bm = b.get("target_min") or {}
+        for cap, v in a["target_min"].items():
+            if cap not in bm or abs(v - bm[cap]) > EPS:
+                errs.append(f"target_min {cap}: py={v!r} js={bm.get(cap)!r}")
         if a["constraint_band"] != b.get("constraint_band"):
             errs.append(f"constraint_band: py={a['constraint_band']} "
                         f"js={b.get('constraint_band')}")

@@ -4,8 +4,6 @@
   "lint_passed": true,
   "mastersheet": [
    "guild_builds: present (shipped verbatim)",
-   "mechanics: aoe_geometry",
-   "scoring: capability_synergies, score_unit, weights",
    "sheets: 4 score override(s) on 4 weapon(s)"
   ],
   "note": "release candidate",
@@ -4108,36 +4106,10 @@
    "unique_name": "HEAD_CLOTH_SET1"
   },
   "HEAD_CLOTH_SET2": {
-   "cap_delivery": {
-    "anti_dive": {
-     "escalation": {
-      "value": 0.08
-     },
-     "radius": 6.0,
-     "spell": "PBAOE_KNOCKBACK"
-    },
-    "knockback_displace": {
-     "escalation": {
-      "value": 0.08
-     },
-     "radius": 6.0,
-     "spell": "PBAOE_KNOCKBACK"
-    },
-    "peel": {
-     "escalation": {
-      "value": 0.08
-     },
-     "radius": 6.0,
-     "spell": "PBAOE_KNOCKBACK"
-    }
-   },
    "capabilities": {
-    "anti_dive": 2,
-    "knockback_displace": 3,
-    "peel": 3,
     "tankiness": 2
    },
-   "curated_as_of": "2026-08-20",
+   "curated_as_of": "2026-09-10",
    "display_name": "Cleric Cowl",
    "doctrine_passives": {
     "dps": {
@@ -4166,15 +4138,6 @@
     }
    },
    "evidence": {
-    "anti_dive": [
-     "PBAOE_KNOCKBACK"
-    ],
-    "knockback_displace": [
-     "PBAOE_KNOCKBACK"
-    ],
-    "peel": [
-     "PBAOE_KNOCKBACK"
-    ],
     "tankiness": [
      "ICEBLOCK2"
     ]
@@ -4187,17 +4150,11 @@
     ],
     "slot_spells": [
      [
-      "PBAOE_KNOCKBACK",
       "ICEBLOCK2"
      ]
     ],
     "slots": [
      [
-      {
-       "anti_dive": 2,
-       "knockback_displace": 3,
-       "peel": 3
-      },
       {
        "tankiness": 2
       }
@@ -39371,6 +39328,26 @@
        "ARMOR_PLATE_KEEPER",
        318,
        1185
+      ],
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       40,
+       92
+      ],
+      "offhand": [
+       "OFF_HORN_KEEPER",
+       14,
+       41
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       20,
+       24
+      ],
+      "shoes": [
+       "SHOES_LEATHER_SET2",
+       90,
+       319
       ]
      },
      "kit_by_chest": {
@@ -42650,11 +42627,28 @@
         18
        ]
       },
+      "2H_HAMMER_UNDEAD": {
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        14,
+        40
+       ],
+       "potion": [
+        "T8_POTION_LAVA",
+        6,
+        18
+       ]
+      },
       "2H_MACE_MORGANA": {
        "armor": [
         "ARMOR_PLATE_SET3",
         8,
         19
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        5,
+        8
        ]
       },
       "2H_POLEHAMMER": {
@@ -42674,6 +42668,13 @@
         35
        ]
       },
+      "2H_RAM_KEEPER": {
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        8
+       ]
+      },
       "2H_SHAPESHIFTER_KEEPER": {
        "armor": [
         "ARMOR_PLATE_KEEPER",
@@ -42689,6 +42690,18 @@
         "SHOES_LEATHER_MORGANA",
         9,
         24
+       ]
+      },
+      "2H_TWINSCYTHE_HELL": {
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        7
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        7,
+        17
        ]
       },
       "MAIN_ARCANESTAFF_UNDEAD": {
@@ -42723,6 +42736,11 @@
         "ARMOR_PLATE_KEEPER",
         22,
         59
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        11,
+        22
        ]
       },
       "MAIN_MACE": {
@@ -44724,6 +44742,11 @@
         "HEAD_LEATHER_SET3",
         5,
         7
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_POLEHAMMER": {
@@ -44784,6 +44807,16 @@
         "ARMOR_PLATE_ROYAL",
         13,
         30
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        10,
+        13
+       ],
+       "offhand": [
+        "OFF_JESTERCANE_HELL",
+        5,
+        10
        ]
       }
      }
@@ -44827,6 +44860,11 @@
        "ARMOR_PLATE_KEEPER",
        11,
        31
+      ],
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       6,
+       7
       ],
       "head": [
        "HEAD_PLATE_KEEPER",
@@ -44968,6 +45006,16 @@
         "ARMOR_PLATE_FEY",
         5,
         9
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_MACE": {
@@ -44976,10 +45024,20 @@
         7,
         16
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
        "head": [
         "HEAD_PLATE_KEEPER",
         5,
         7
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       }
      }
@@ -46615,6 +46673,11 @@
         10,
         24
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        6
+       ],
        "head": [
         "HEAD_LEATHER_HELL",
         6,
@@ -46653,6 +46716,11 @@
         "ARMOR_PLATE_HELL",
         5,
         20
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
        ]
       },
       "2H_POLEHAMMER": {
@@ -46818,6 +46886,11 @@
        "HEAD_LEATHER_SET3",
        45,
        93
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       20,
+       20
       ],
       "shoes": [
        "SHOES_CLOTH_SET2",
@@ -47484,6 +47557,16 @@
         "ARMOR_PLATE_KEEPER",
         5,
         13
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        5,
+        5
        ]
       }
      },
@@ -48326,10 +48409,20 @@
         20,
         40
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        9,
+        9
+       ],
        "head": [
         "HEAD_PLATE_KEEPER",
         9,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        9
        ]
       },
       "2H_SHAPESHIFTER_KEEPER": {
@@ -48366,6 +48459,11 @@
         "ARMOR_PLATE_SET3",
         14,
         44
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        8,
+        14
        ]
       }
      },
@@ -51042,6 +51140,11 @@
       "ARMOR_PLATE_SET3",
       8,
       13
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      7,
+      8
      ]
     },
     "2H_HAMMER": {
@@ -51093,11 +51196,23 @@
       48
      ]
     },
+    "2H_HAMMER_UNDEAD": {
+     "shoes": [
+      "SHOES_LEATHER_SET2",
+      5,
+      17
+     ]
+    },
     "2H_MACE_MORGANA": {
      "armor": [
       "ARMOR_PLATE_SET3",
       12,
       41
+     ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      5,
+      12
      ]
     },
     "2H_POLEHAMMER": {
@@ -51127,6 +51242,16 @@
       "ARMOR_PLATE_SET2",
       6,
       20
+     ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      5,
+      6
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      5,
+      5
      ]
     },
     "2H_SHAPESHIFTER_KEEPER": {
@@ -51156,6 +51281,11 @@
       "ARMOR_PLATE_SET2",
       6,
       15
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      6,
+      6
      ]
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
@@ -51519,6 +51649,28 @@
        "SHOES_PLATE_ROYAL",
        "SHOES_CLOTH_SET3",
        "SHOES_PLATE_SET2"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_FW_BRIDGEWATCH",
+       91,
+       243
+      ],
+      "offhand": [
+       "OFF_JESTERCANE_HELL",
+       57,
+       103
+      ],
+      "potion": [
+       "T7_POTION_SLOWFIELD",
+       38,
+       97
+      ],
+      "shoes": [
+       "SHOES_LEATHER_SET2",
+       237,
+       555
       ]
      },
      "kit_by_chest": {
@@ -53443,6 +53595,11 @@
         22,
         36
        ],
+       "cape": [
+        "CAPEITEM_FW_CAERLEON",
+        5,
+        8
+       ],
        "head": [
         "HEAD_LEATHER_AVALON",
         8,
@@ -54520,10 +54677,20 @@
         64,
         89
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        30,
+        33
+       ],
        "head": [
         "HEAD_LEATHER_HELL",
         32,
         64
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        30,
+        30
        ]
       },
       "2H_QUARTERSTAFF_AVALON": {
@@ -54531,6 +54698,21 @@
         "ARMOR_PLATE_UNDEAD",
         9,
         25
+       ],
+       "cape": [
+        "CAPEITEM_DEMON",
+        8,
+        9
+       ],
+       "potion": [
+        "T8_POTION_COOLDOWN",
+        4,
+        8
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        9,
+        9
        ]
       },
       "2H_ROCKSTAFF_KEEPER": {
@@ -54600,10 +54782,20 @@
        8,
        13
       ],
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       6,
+       6
+      ],
       "head": [
        "HEAD_LEATHER_HELL",
        6,
        8
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       6,
+       6
       ]
      },
      "kit_weapon": {
@@ -54662,10 +54854,20 @@
         8,
         13
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        6
+       ],
        "head": [
         "HEAD_LEATHER_HELL",
         6,
         8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       }
      }
@@ -55559,6 +55761,16 @@
         "ARMOR_PLATE_SET3",
         8,
         15
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_MACE_HELL": {
@@ -56010,10 +56222,20 @@
         12,
         18
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        7
+       ],
        "head": [
         "HEAD_LEATHER_HELL",
         7,
         12
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "MAIN_MACE_HELL": {
@@ -56021,6 +56243,16 @@
         "ARMOR_PLATE_HELL",
         5,
         6
+       ],
+       "offhand": [
+        "OFF_SHIELD_AVALON",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_ROCKMACE_KEEPER": {
@@ -57917,6 +58149,21 @@
       "ARMOR_PLATE_UNDEAD",
       20,
       69
+     ],
+     "cape": [
+      "CAPEITEM_DEMON",
+      14,
+      18
+     ],
+     "potion": [
+      "T8_POTION_COOLDOWN",
+      6,
+      15
+     ],
+     "shoes": [
+      "SHOES_LEATHER_SET2",
+      18,
+      20
      ]
     },
     "2H_ROCKSTAFF_KEEPER": {
@@ -57961,6 +58208,18 @@
       "HEAD_LEATHER_SET3",
       6,
       10
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      4,
+      6
+     ]
+    },
+    "2H_SHAPESHIFTER_SET3": {
+     "potion": [
+      "T7_POTION_REVIVE",
+      7,
+      8
      ]
     },
     "MAIN_MACE_HELL": {
@@ -58251,6 +58510,28 @@
        "SHOES_PLATE_KEEPER",
        "SHOES_PLATE_UNDEAD",
        "SHOES_CLOTH_ROYAL"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       62,
+       100
+      ],
+      "food": [
+       "T7_MEAL_OMELETTE_AVALON",
+       20,
+       49
+      ],
+      "head": [
+       "HEAD_LEATHER_SET3",
+       99,
+       311
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       47,
+       64
       ]
      },
      "kit_by_chest": {
@@ -59417,6 +59698,35 @@
        "armor": [
         "ARMOR_PLATE_SET3",
         5,
+        10
+       ]
+      },
+      "2H_DUALMACE_AVALON": {
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        60,
+        94
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE_AVALON",
+        18,
+        46
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        93,
+        206
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        45,
+        61
+       ]
+      },
+      "2H_HAMMER_CRYSTAL": {
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
         10
        ]
       },
@@ -60652,6 +60962,11 @@
         "HEAD_LEATHER_HELL",
         5,
         12
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_DUALMACE_AVALON": {
@@ -61834,6 +62149,16 @@
       "ARMOR_PLATE_SET3",
       7,
       25
+     ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      6,
+      7
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      6,
+      6
      ]
     },
     "2H_QUARTERSTAFF": {
@@ -62098,6 +62423,26 @@
        "ARMOR_CLOTH_SET2",
        933,
        1896
+      ],
+      "cape": [
+       "CAPEITEM_FW_LYMHURST",
+       408,
+       579
+      ],
+      "food": [
+       "T7_MEAL_OMELETTE",
+       116,
+       239
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       217,
+       437
+      ],
+      "shoes": [
+       "SHOES_LEATHER_SET1",
+       570,
+       938
       ]
      },
      "kit_by_chest": {
@@ -64665,6 +65010,26 @@
         "ARMOR_CLOTH_SET2",
         293,
         535
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        142,
+        208
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        35,
+        74
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        68,
+        143
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        207,
+        295
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -64672,6 +65037,26 @@
         "ARMOR_CLOTH_SET2",
         207,
         311
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        104,
+        134
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        26,
+        56
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        53,
+        114
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        131,
+        208
        ]
       },
       "2H_NATURESTAFF_KEEPER": {
@@ -64679,6 +65064,11 @@
         "ARMOR_CLOTH_AVALON",
         8,
         26
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        8
        ]
       },
       "2H_WILDSTAFF": {
@@ -64752,6 +65142,21 @@
         "ARMOR_CLOTH_SET2",
         47,
         88
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        16,
+        22
+       ],
+       "offhand": [
+        "OFF_HORN_KEEPER",
+        6,
+        20
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        22,
+        46
        ]
       },
       "MAIN_NATURESTAFF_CRYSTAL": {
@@ -64760,10 +65165,20 @@
         13,
         27
        ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        7,
+        6
+       ],
        "head": [
         "HEAD_PLATE_UNDEAD",
         7,
         14
+       ],
+       "offhand": [
+        "OFF_HORN_KEEPER",
+        5,
+        6
        ]
       }
      }
@@ -66479,6 +66894,11 @@
         "ARMOR_CLOTH_SET2",
         15,
         53
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        10,
+        15
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -66498,6 +66918,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         19
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        4,
+        6
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -66926,10 +67351,20 @@
        81,
        120
       ],
+      "food": [
+       "T7_MEAL_OMELETTE",
+       25,
+       78
+      ],
       "head": [
        "HEAD_LEATHER_SET3",
        263,
        818
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       76,
+       81
       ],
       "shoes": [
        "SHOES_LEATHER_SET1",
@@ -68634,6 +69069,16 @@
         "ARMOR_CLOTH_SET2",
         8,
         11
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        8
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        4,
+        6
        ]
       },
       "2H_HOLYSTAFF_HELL": {
@@ -68658,6 +69103,26 @@
         "ARMOR_CLOTH_SET2",
         64,
         138
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        36,
+        49
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        15,
+        28
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        27,
+        36
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        49,
+        64
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -69605,6 +70070,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         14
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        6
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -69646,6 +70116,11 @@
         "ARMOR_CLOTH_AVALON",
         5,
         9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -70722,6 +71197,21 @@
         "ARMOR_CLOTH_SET2",
         19,
         30
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        9,
+        13
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        9
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        13,
+        19
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -70768,6 +71258,11 @@
         "ARMOR_CLOTH_SET2",
         7,
         19
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        7
        ]
       },
       "MAIN_HOLYSTAFF": {
@@ -70775,6 +71270,11 @@
         "ARMOR_CLOTH_SET2",
         7,
         11
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        5,
+        7
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -70804,6 +71304,16 @@
         "ARMOR_CLOTH_SET2",
         9,
         18
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        8
        ]
       }
      }
@@ -73065,6 +73575,16 @@
       "ARMOR_CLOTH_SET2",
       10,
       16
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      7,
+      10
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      4,
+      8
      ]
     },
     "2H_HOLYSTAFF_HELL": {
@@ -73089,6 +73609,26 @@
       "ARMOR_CLOTH_SET2",
       115,
       256
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      56,
+      75
+     ],
+     "food": [
+      "T7_MEAL_OMELETTE",
+      22,
+      42
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      41,
+      56
+     ],
+     "shoes": [
+      "SHOES_LEATHER_SET1",
+      75,
+      115
      ]
     },
     "2H_NATURESTAFF_HELL": {
@@ -73172,6 +73712,11 @@
       "ARMOR_CLOTH_SET2",
       42,
       69
+     ],
+     "shoes": [
+      "SHOES_LEATHER_SET1",
+      11,
+      42
      ]
     },
     "MAIN_HOLYSTAFF_AVALON": {
@@ -74872,6 +75417,28 @@
         "HEAD_CLOTH_SET1",
         7,
         18
+       ],
+       "offhand": [
+        "OFF_HORN_KEEPER",
+        6,
+        7
+       ],
+       "potion": [
+        "T7_POTION_STONESKIN",
+        5,
+        6
+       ]
+      },
+      "MAIN_NATURESTAFF_AVALON": {
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        6
+       ],
+       "head": [
+        "HEAD_PLATE_UNDEAD",
+        6,
+        7
        ]
       },
       "MAIN_NATURESTAFF_KEEPER": {
@@ -75832,6 +76399,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         19
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        4,
+        6
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -76953,6 +77525,11 @@
         "ARMOR_CLOTH_AVALON",
         5,
         9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -77380,6 +77957,11 @@
         "ARMOR_CLOTH_SET2",
         7,
         19
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        7
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -78296,6 +78878,11 @@
       12,
       19
      ],
+     "potion": [
+      "T7_POTION_STONESKIN",
+      5,
+      8
+     ],
      "shoes": [
       "SHOES_LEATHER_SET1",
       8,
@@ -78356,6 +78943,18 @@
       "ARMOR_CLOTH_SET2",
       8,
       11
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      5,
+      8
+     ]
+    },
+    "MAIN_NATURESTAFF_KEEPER": {
+     "food": [
+      "T7_MEAL_OMELETTE",
+      5,
+      7
      ]
     }
    },
@@ -78586,6 +79185,38 @@
        "SHOES_CLOTH_ROYAL",
        "SHOES_PLATE_SET3",
        "SHOES_LEATHER_UNDEAD"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_FW_LYMHURST",
+       116,
+       144
+      ],
+      "food": [
+       "T7_MEAL_OMELETTE",
+       18,
+       40
+      ],
+      "head": [
+       "HEAD_PLATE_SET3",
+       253,
+       774
+      ],
+      "offhand": [
+       "OFF_HORN_KEEPER",
+       39,
+       119
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       36,
+       57
+      ],
+      "shoes": [
+       "SHOES_LEATHER_SET1",
+       144,
+       253
       ]
      },
      "kit_by_chest": {
@@ -79718,6 +80349,33 @@
       ]
      }
     }
+   },
+   "kit_build": {
+    "cape": [
+     "CAPEITEM_FW_LYMHURST",
+     158,
+     251
+    ],
+    "head": [
+     "HEAD_LEATHER_SET3",
+     561,
+     2092
+    ],
+    "offhand": [
+     "OFF_HORN_KEEPER",
+     69,
+     158
+    ],
+    "potion": [
+     "T7_POTION_REVIVE",
+     66,
+     70
+    ],
+    "shoes": [
+     "SHOES_LEATHER_MORGANA",
+     249,
+     562
+    ]
    },
    "kit_by_chest": {
     "ARMOR_CLOTH_AVALON": {
@@ -84919,6 +85577,11 @@
         "HEAD_LEATHER_SET3",
         8,
         15
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        8
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -84975,6 +85638,11 @@
         "ARMOR_PLATE_SET2",
         12,
         41
+       ],
+       "shoes": [
+        "SHOES_LEATHER_ROYAL",
+        5,
+        12
        ]
       }
      },
@@ -85003,10 +85671,20 @@
      109,
      156
     ],
+    "food": [
+     "T7_MEAL_OMELETTE_AVALON",
+     38,
+     106
+    ],
     "head": [
      "HEAD_LEATHER_SET3",
      396,
      464
+    ],
+    "potion": [
+     "T7_POTION_REVIVE",
+     104,
+     109
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
@@ -86240,6 +86918,16 @@
         "ARMOR_PLATE_SET3",
         6,
         14
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        6
+       ],
+       "offhand": [
+        "OFF_SHIELD_AVALON",
+        4,
+        6
        ]
       }
      },
@@ -86403,8 +87091,18 @@
         6,
         7
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        6
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
+        6,
+        6
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
         6,
         6
        ]
@@ -86419,6 +87117,11 @@
         "HEAD_LEATHER_SET3",
         5,
         6
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_SHAPESHIFTER_SET2": {
@@ -86427,9 +87130,19 @@
         7,
         7
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        7
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         7,
+        7
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
         7
        ]
       }
@@ -88050,10 +88763,20 @@
         8,
         13
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        8
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         8,
         8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        7
        ]
       },
       "2H_ENIGMATICSTAFF": {
@@ -88061,6 +88784,21 @@
         "ARMOR_PLATE_KEEPER",
         8,
         10
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        8
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE",
+        4,
+        7
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        7
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -88106,6 +88844,11 @@
         22,
         26
        ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        8,
+        8
+       ],
        "shoes": [
         "SHOES_LEATHER_MORGANA",
         8,
@@ -88118,10 +88861,25 @@
         15,
         23
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        8,
+        8
+       ],
        "head": [
         "HEAD_PLATE_KEEPER",
         8,
         15
+       ],
+       "offhand": [
+        "OFF_SHIELD_AVALON",
+        7,
+        8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        7
        ]
       }
      }
@@ -88653,6 +89411,11 @@
         "ARMOR_PLATE_KEEPER",
         6,
         12
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -88715,10 +89478,20 @@
         14,
         29
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        8
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         7,
         14
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        7
        ]
       }
      }
@@ -91354,6 +92127,18 @@
         5,
         10
        ]
+      },
+      "MAIN_FROSTSTAFF_KEEPER": {
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        10
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        8
+       ]
       }
      }
     }
@@ -91740,10 +92525,20 @@
        7,
        16
       ],
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       6,
+       7
+      ],
       "head": [
        "HEAD_LEATHER_SET3",
        7,
        7
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       6,
+       6
       ]
      },
      "kit_weapon": {
@@ -91794,8 +92589,18 @@
         5,
         11
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
         5,
         5
        ]
@@ -92515,6 +93320,11 @@
         13,
         33
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        7
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         7,
@@ -92769,6 +93579,11 @@
         16,
         23
        ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        7
+       ],
        "shoes": [
         "SHOES_LEATHER_MORGANA",
         7,
@@ -92781,10 +93596,20 @@
         15,
         35
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        10,
+        12
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         12,
         15
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        9,
+        10
        ]
       }
      }
@@ -93332,10 +94157,20 @@
       8,
       24
      ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      6,
+      7
+     ],
      "head": [
       "HEAD_LEATHER_SET3",
       7,
       8
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      6,
+      6
      ]
     }
    },
@@ -93575,6 +94410,38 @@
        "SHOES_PLATE_SET2",
        "SHOES_PLATE_HELL",
        "SHOES_CLOTH_SET3"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       33,
+       50
+      ],
+      "food": [
+       "T7_MEAL_OMELETTE_AVALON",
+       8,
+       24
+      ],
+      "head": [
+       "HEAD_LEATHER_SET3",
+       130,
+       461
+      ],
+      "offhand": [
+       "OFF_SHIELD_AVALON",
+       11,
+       33
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       24,
+       25
+      ],
+      "shoes": [
+       "SHOES_LEATHER_MORGANA",
+       50,
+       130
       ]
      },
      "kit_by_chest": {
@@ -96867,9 +97734,19 @@
        7,
        14
       ],
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       8,
+       8
+      ],
       "head": [
        "HEAD_LEATHER_SET3",
        8,
+       8
+      ],
+      "offhand": [
+       "OFF_SHIELD_AVALON",
+       4,
        8
       ]
      },
@@ -96935,8 +97812,18 @@
         5,
         6
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
         5,
         5
        ]
@@ -97841,10 +98728,20 @@
        22,
        35
       ],
+      "food": [
+       "T7_MEAL_OMELETTE",
+       9,
+       21
+      ],
       "head": [
        "HEAD_LEATHER_SET3",
        50,
        53
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       20,
+       22
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -98581,6 +99478,16 @@
         "ARMOR_CLOTH_SET2",
         6,
         18
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        4,
+        6
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        4,
+        6
        ]
       },
       "MAIN_CURSEDSTAFF_UNDEAD": {
@@ -99870,6 +100777,30 @@
       126
      ]
     },
+    "2H_DEMONICSTAFF": {
+     "head": [
+      "HEAD_LEATHER_SET3",
+      5,
+      15
+     ]
+    },
+    "2H_SKULLORB_HELL": {
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      6,
+      10
+     ],
+     "head": [
+      "HEAD_LEATHER_SET3",
+      10,
+      15
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      6,
+      7
+     ]
+    },
     "MAIN_CURSEDSTAFF": {
      "armor": [
       "ARMOR_LEATHER_SET3",
@@ -100269,6 +101200,33 @@
        "SHOES_PLATE_ROYAL",
        "SHOES_PLATE_FEY",
        "SHOES_PLATE_KEEPER"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       206,
+       583
+      ],
+      "food": [
+       "T8_MEAL_STEW",
+       113,
+       193
+      ],
+      "head": [
+       "HEAD_LEATHER_SET3",
+       1513,
+       4230
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       182,
+       228
+      ],
+      "shoes": [
+       "SHOES_LEATHER_MORGANA",
+       571,
+       1572
       ]
      },
      "kit_by_chest": {
@@ -108745,6 +109703,13 @@
         19
        ]
       },
+      "2H_ARCANE_RINGPAIR_AVALON": {
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        8
+       ]
+      },
       "2H_BOW": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -108789,6 +109754,13 @@
         182
        ]
       },
+      "2H_BOW_CRYSTAL": {
+       "food": [
+        "T8_MEAL_STEW",
+        7,
+        10
+       ]
+      },
       "2H_BOW_HELL": {
        "armor": [
         "ARMOR_LEATHER_SET3",
@@ -108821,6 +109793,23 @@
         139
        ]
       },
+      "2H_BOW_KEEPER": {
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        25,
+        91
+       ],
+       "head": [
+        "HEAD_PLATE_ROYAL",
+        91,
+        236
+       ],
+       "potion": [
+        "T8_POTION_LAVA",
+        16,
+        27
+       ]
+      },
       "2H_CROSSBOW": {
        "armor": [
         "ARMOR_CLOTH_SET1",
@@ -108839,6 +109828,11 @@
         17,
         32
        ],
+       "food": [
+        "T8_MEAL_STEW",
+        7,
+        11
+       ],
        "head": [
         "HEAD_PLATE_SET3",
         11,
@@ -108855,6 +109849,11 @@
         "HEAD_LEATHER_SET3",
         6,
         18
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "2H_CROSSBOW_CANNON_AVALON": {
@@ -108908,6 +109907,11 @@
         "ARMOR_CLOTH_SET2",
         19,
         36
+       ],
+       "shoes": [
+        "SHOES_CLOTH_SET2",
+        5,
+        19
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -109003,6 +110007,11 @@
         "HEAD_LEATHER_SET3",
         10,
         19
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        8,
+        10
        ]
       },
       "2H_ICECRYSTAL_UNDEAD": {
@@ -109120,6 +110129,13 @@
         34
        ]
       },
+      "2H_REPEATINGCROSSBOW_UNDEAD": {
+       "cape": [
+        "CAPEITEM_FW_CAERLEON",
+        5,
+        12
+       ]
+      },
       "2H_SHAPESHIFTER_AVALON": {
        "armor": [
         "ARMOR_PLATE_SET1",
@@ -109217,6 +110233,16 @@
         "ARMOR_LEATHER_SET3",
         6,
         10
+       ],
+       "potion": [
+        "T8_POTION_COOLDOWN",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        5,
+        6
        ]
       },
       "MAIN_FIRESTAFF_KEEPER": {
@@ -109224,6 +110250,21 @@
         "ARMOR_CLOTH_SET2",
         19,
         29
+       ],
+       "cape": [
+        "CAPEITEM_FW_MARTLOCK",
+        5,
+        19
+       ],
+       "offhand": [
+        "OFF_BOOK",
+        7,
+        10
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        7
        ]
       },
       "MAIN_FROSTSTAFF": {
@@ -109262,6 +110303,33 @@
       ]
      }
     }
+   },
+   "kit_build": {
+    "cape": [
+     "CAPEITEM_SMUGGLER",
+     789,
+     1384
+    ],
+    "food": [
+     "T8_MEAL_STEW",
+     345,
+     776
+    ],
+    "head": [
+     "HEAD_LEATHER_SET3",
+     2369,
+     4552
+    ],
+    "potion": [
+     "T7_POTION_REVIVE",
+     753,
+     807
+    ],
+    "shoes": [
+     "SHOES_LEATHER_MORGANA",
+     1378,
+     2403
+    ]
    },
    "kit_by_chest": {
     "ARMOR_CLOTH_AVALON": {
@@ -112075,6 +113143,11 @@
         "ARMOR_LEATHER_SET3",
         9,
         19
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        8,
+        9
        ]
       },
       "2H_CROSSBOW": {
@@ -112082,6 +113155,11 @@
         "ARMOR_CLOTH_SET1",
         7,
         12
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        6,
+        7
        ]
       },
       "2H_FIRE_RINGPAIR_AVALON": {
@@ -112107,10 +113185,20 @@
         17,
         25
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        6,
+        6
+       ],
        "head": [
         "HEAD_CLOTH_SET2",
         6,
         17
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "2H_ICECRYSTAL_UNDEAD": {
@@ -112165,6 +113253,11 @@
         16,
         20
        ],
+       "food": [
+        "T8_MEAL_STEW",
+        5,
+        7
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         6,
@@ -112176,6 +113269,21 @@
         "ARMOR_PLATE_UNDEAD",
         19,
         51
+       ],
+       "offhand": [
+        "OFF_JESTERCANE_HELL",
+        16,
+        18
+       ],
+       "potion": [
+        "T8_POTION_COOLDOWN",
+        8,
+        16
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        16,
+        19
        ]
       }
      },
@@ -115946,6 +117054,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         21
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        4,
+        6
        ]
       },
       "2H_FIRESTAFF": {
@@ -115953,6 +117066,16 @@
         "ARMOR_CLOTH_SET2",
         11,
         18
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        6,
+        11
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        9
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -116150,6 +117273,11 @@
         27,
         37
        ],
+       "food": [
+        "T8_MEAL_STEW",
+        4,
+        8
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         8,
@@ -116180,6 +117308,11 @@
         "ARMOR_CLOTH_SET2",
         8,
         16
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        5,
+        8
        ]
       },
       "MAIN_1HCROSSBOW": {
@@ -116194,6 +117327,11 @@
         "ARMOR_CLOTH_SET2",
         21,
         35
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        4,
+        7
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -117434,6 +118572,11 @@
         "ARMOR_CLOTH_SET1",
         5,
         6
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_BOW_HELL": {
@@ -117473,6 +118616,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        7
        ]
       },
       "2H_CROSSBOW_CANNON_AVALON": {
@@ -117593,6 +118741,11 @@
         "HEAD_LEATHER_SET3",
         15,
         16
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        6
        ],
        "shoes": [
         "SHOES_CLOTH_ROYAL",
@@ -119483,6 +120636,16 @@
         "ARMOR_CLOTH_KEEPER",
         8,
         32
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        7,
+        9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        8,
+        10
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -119586,6 +120749,11 @@
         "ARMOR_LEATHER_SET3",
         6,
         22
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        4,
+        6
        ]
       },
       "2H_INFERNOSTAFF_MORGANA": {
@@ -119594,10 +120762,20 @@
         20,
         37
        ],
+       "food": [
+        "T8_MEAL_STEW",
+        6,
+        9
+       ],
        "head": [
         "HEAD_LEATHER_SET3",
         16,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        9,
+        10
        ],
        "shoes": [
         "SHOES_CLOTH_ROYAL",
@@ -119622,6 +120800,11 @@
         "ARMOR_LEATHER_SET2",
         13,
         18
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        5,
+        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -119666,6 +120849,11 @@
         "ARMOR_CLOTH_SET2",
         9,
         15
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        9
        ]
       },
       "MAIN_FROSTSTAFF": {
@@ -126036,6 +127224,33 @@
       28
      ]
     },
+    "2H_ARCANE_RINGPAIR_AVALON": {
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      14,
+      14
+     ],
+     "food": [
+      "T7_MEAL_OMELETTE_AVALON",
+      6,
+      12
+     ],
+     "head": [
+      "HEAD_LEATHER_SET3",
+      26,
+      32
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      10,
+      14
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      12,
+      26
+     ]
+    },
     "2H_BOW": {
      "armor": [
       "ARMOR_LEATHER_SET3",
@@ -126073,6 +127288,13 @@
       "SHOES_LEATHER_MORGANA",
       56,
       105
+     ]
+    },
+    "2H_BOW_CRYSTAL": {
+     "head": [
+      "HEAD_CLOTH_AVALON",
+      5,
+      7
      ]
     },
     "2H_BOW_HELL": {
@@ -126159,6 +127381,11 @@
       15,
       53
      ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      5,
+      14
+     ],
      "head": [
       "HEAD_LEATHER_SET3",
       14,
@@ -126187,6 +127414,13 @@
       39
      ]
     },
+    "2H_DUALCROSSBOW_CRYSTAL": {
+     "potion": [
+      "T7_POTION_REVIVE",
+      5,
+      9
+     ]
+    },
     "2H_DUALCROSSBOW_HELL": {
      "armor": [
       "ARMOR_CLOTH_SET2",
@@ -126204,6 +127438,21 @@
       "ARMOR_CLOTH_SET2",
       19,
       32
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      10,
+      19
+     ],
+     "food": [
+      "T8_MEAL_STEW",
+      4,
+      9
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      9,
+      16
      ]
     },
     "2H_FIRESTAFF_HELL": {
@@ -126470,11 +127719,23 @@
       27
      ]
     },
+    "2H_SHAPESHIFTER_HELL": {
+     "cape": [
+      "CAPEITEM_FW_CAERLEON",
+      5,
+      12
+     ]
+    },
     "2H_WARBOW": {
      "armor": [
       "ARMOR_LEATHER_SET3",
       14,
       33
+     ],
+     "shoes": [
+      "SHOES_PLATE_SET1",
+      4,
+      14
      ]
     },
     "MAIN_1HCROSSBOW": {
@@ -126482,6 +127743,43 @@
       "ARMOR_CLOTH_SET2",
       11,
       28
+     ],
+     "offhand": [
+      "OFF_HORN_KEEPER",
+      4,
+      12
+     ]
+    },
+    "MAIN_CURSEDSTAFF_CRYSTAL": {
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      128,
+      150
+     ],
+     "food": [
+      "T8_MEAL_STEW",
+      36,
+      74
+     ],
+     "head": [
+      "HEAD_LEATHER_SET3",
+      215,
+      258
+     ],
+     "offhand": [
+      "OFF_DEMONSKULL_HELL",
+      81,
+      129
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      72,
+      81
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      150,
+      215
      ]
     },
     "MAIN_FIRESTAFF": {
@@ -126501,6 +127799,28 @@
       "ARMOR_LEATHER_SET3",
       6,
       9
+     ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      5,
+      7
+     ]
+    },
+    "MAIN_FIRESTAFF_KEEPER": {
+     "head": [
+      "HEAD_LEATHER_SET3",
+      10,
+      26
+     ],
+     "offhand": [
+      "OFF_DEMONSKULL_HELL",
+      5,
+      6
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      6,
+      10
      ]
     },
     "MAIN_FROSTSTAFF": {
@@ -126990,10 +128310,20 @@
        68,
        148
       ],
+      "food": [
+       "T8_MEAL_STEW",
+       42,
+       69
+      ],
       "head": [
        "HEAD_PLATE_SET1",
        234,
        863
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       68,
+       70
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -134603,6 +135933,26 @@
         "ARMOR_LEATHER_MORGANA",
         142,
         268
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        33,
+        60
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        15,
+        24
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        22,
+        33
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        59,
+        142
        ]
       },
       "2H_AXE_AVALON": {
@@ -134627,6 +135977,18 @@
         47
        ]
       },
+      "2H_CLAYMORE": {
+       "head": [
+        "HEAD_LEATHER_MORGANA",
+        17,
+        45
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET3",
+        7,
+        17
+       ]
+      },
       "2H_CLAYMORE_AVALON": {
        "armor": [
         "ARMOR_LEATHER_HELL",
@@ -134649,6 +136011,11 @@
         "ARMOR_LEATHER_HELL",
         55,
         191
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        15,
+        55
        ]
       },
       "2H_DOUBLEBLADEDSTAFF": {
@@ -134661,6 +136028,18 @@
         "HEAD_CLOTH_HELL",
         5,
         17
+       ]
+      },
+      "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        7,
+        12
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        10,
+        40
        ]
       },
       "2H_DUALAXE_KEEPER": {
@@ -134729,6 +136108,11 @@
         "ARMOR_LEATHER_HELL",
         13,
         41
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        13
        ]
       },
       "2H_HALBERD_MORGANA": {
@@ -134780,6 +136164,40 @@
         "ARMOR_LEATHER_SET3",
         22,
         69
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        10,
+        22
+       ]
+      },
+      "2H_KNUCKLES_CRYSTAL": {
+       "cape": [
+        "CAPEITEM_AVALON",
+        8,
+        14
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        8
+       ]
+      },
+      "2H_KNUCKLES_HELL": {
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        13,
+        23
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        10,
+        13
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        21,
+        62
        ]
       },
       "2H_KNUCKLES_KEEPER": {
@@ -134853,11 +136271,43 @@
         58
        ]
       },
+      "2H_KNUCKLES_SET3": {
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        23,
+        27
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        16,
+        23
+       ],
+       "head": [
+        "HEAD_LEATHER_FEY",
+        39,
+        129
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        23,
+        23
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        27,
+        39
+       ]
+      },
       "2H_SCYTHE_CRYSTAL": {
        "armor": [
         "ARMOR_LEATHER_HELL",
         7,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        7
        ]
       },
       "2H_SCYTHE_HELL": {
@@ -134883,10 +136333,32 @@
         19,
         43
        ],
+       "cape": [
+        "CAPEITEM_FW_CAERLEON",
+        9,
+        11
+       ],
        "head": [
         "HEAD_LEATHER_MORGANA",
         11,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        9
+       ]
+      },
+      "2H_SPEAR": {
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        4,
+        5
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        5,
+        18
        ]
       },
       "MAIN_AXE": {
@@ -134911,6 +136383,11 @@
         "ARMOR_LEATHER_HELL",
         10,
         29
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        6,
+        10
        ]
       },
       "MAIN_SPEAR_KEEPER": {
@@ -134918,6 +136395,11 @@
         "ARMOR_PLATE_SET1",
         36,
         123
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        16,
+        37
        ]
       },
       "MAIN_SPEAR_LANCE_AVALON": {
@@ -134925,6 +136407,11 @@
         "ARMOR_LEATHER_HELL",
         24,
         43
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        8,
+        26
        ]
       },
       "MAIN_SWORD": {
@@ -134932,6 +136419,11 @@
         "ARMOR_LEATHER_SET1",
         11,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        11
        ]
       },
       "MAIN_SWORD_CRYSTAL": {
@@ -134939,6 +136431,26 @@
         "ARMOR_LEATHER_HELL",
         9,
         12
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
+       "offhand": [
+        "OFF_SPIKEDSHIELD_MORGANA",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        10
        ]
       }
      },
@@ -134982,10 +136494,20 @@
      258,
      408
     ],
+    "food": [
+     "T8_MEAL_STEW",
+     147,
+     258
+    ],
     "head": [
      "HEAD_PLATE_SET1",
      650,
      1473
+    ],
+    "potion": [
+     "T7_POTION_REVIVE",
+     255,
+     262
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
@@ -136182,10 +137704,20 @@
        128,
        207
       ],
+      "food": [
+       "T8_MEAL_STEW",
+       70,
+       124
+      ],
       "head": [
        "HEAD_PLATE_SET1",
        323,
        687
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       123,
+       128
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -138763,6 +140295,11 @@
         "HEAD_LEATHER_SET3",
         6,
         9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "2H_DUALSWORD": {
@@ -138794,6 +140331,11 @@
         "ARMOR_LEATHER_HELL",
         5,
         9
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_HARPOON_HELL": {
@@ -138813,6 +140355,11 @@
         "ARMOR_LEATHER_HELL",
         10,
         14
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        4,
+        10
        ]
       },
       "2H_KNUCKLES_HELL": {
@@ -138820,6 +140367,16 @@
         "ARMOR_LEATHER_HELL",
         6,
         18
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        6
        ]
       },
       "2H_KNUCKLES_KEEPER": {
@@ -138893,6 +140450,16 @@
         "ARMOR_LEATHER_HELL",
         7,
         9
+       ],
+       "cape": [
+        "CAPEITEM_FW_MARTLOCK",
+        7,
+        7
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        7,
+        7
        ]
       },
       "2H_SCYTHE_HELL": {
@@ -138932,6 +140499,11 @@
         "ARMOR_LEATHER_SET1",
         14,
         19
+       ],
+       "shoes": [
+        "SHOES_PLATE_SET1",
+        5,
+        14
        ]
       },
       "MAIN_SCIMITAR_MORGANA": {
@@ -138939,6 +140511,16 @@
         "ARMOR_LEATHER_HELL",
         11,
         17
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        11
        ]
       },
       "MAIN_SPEAR_KEEPER": {
@@ -138946,6 +140528,16 @@
         "ARMOR_PLATE_SET1",
         8,
         22
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_SPEAR_LANCE_AVALON": {
@@ -138953,6 +140545,16 @@
         "ARMOR_LEATHER_HELL",
         6,
         12
+       ],
+       "offhand": [
+        "OFF_SPIKEDSHIELD_MORGANA",
+        5,
+        6
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       }
      }
@@ -139263,6 +140865,21 @@
         "ARMOR_PLATE_SET3",
         7,
         19
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        7
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        7
+       ],
+       "shoes": [
+        "SHOES_PLATE_AVALON",
+        7,
+        7
        ]
       },
       "2H_DUALAXE_KEEPER": {
@@ -139270,6 +140887,11 @@
         "ARMOR_LEATHER_HELL",
         5,
         8
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "2H_KNUCKLES_SET2": {
@@ -139309,6 +140931,21 @@
         "ARMOR_LEATHER_AVALON",
         5,
         12
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        5,
+        5
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_PLATE_AVALON",
+        5,
+        5
        ]
       }
      }
@@ -139428,10 +141065,20 @@
        105,
        165
       ],
+      "food": [
+       "T8_MEAL_STEW",
+       59,
+       107
+      ],
       "head": [
        "HEAD_PLATE_SET1",
        243,
        563
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       104,
+       108
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -141708,6 +143355,16 @@
         "ARMOR_LEATHER_MORGANA",
         14,
         32
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        8
+       ],
+       "shoes": [
+        "SHOES_CLOTH_ROYAL",
+        8,
+        14
        ]
       },
       "2H_AXE_AVALON": {
@@ -141777,10 +143434,20 @@
         22,
         42
        ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        9,
+        13
+       ],
        "head": [
         "HEAD_PLATE_SET1",
         13,
         22
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        8,
+        9
        ]
       },
       "2H_DUALHAMMER_HELL": {
@@ -141809,6 +143476,16 @@
         "ARMOR_LEATHER_HELL",
         6,
         12
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        6
        ]
       },
       "2H_HARPOON_HELL": {
@@ -141848,6 +143525,11 @@
         "ARMOR_LEATHER_HELL",
         6,
         17
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        6
        ]
       },
       "2H_KNUCKLES_HELL": {
@@ -141963,6 +143645,11 @@
         "ARMOR_LEATHER_HELL",
         5,
         12
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
        ]
       },
       "MAIN_AXE": {
@@ -141970,6 +143657,11 @@
         "ARMOR_LEATHER_SET1",
         13,
         22
+       ],
+       "offhand": [
+        "OFF_TORCH",
+        7,
+        13
        ]
       }
      },
@@ -142648,6 +144340,11 @@
         "ARMOR_LEATHER_SET3",
         6,
         9
+       ],
+       "cape": [
+        "CAPEITEM_UNDEAD",
+        5,
+        6
        ]
       },
       "2H_HARPOON_HELL": {
@@ -142687,6 +144384,16 @@
         "ARMOR_LEATHER_SET2",
         6,
         20
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        6
        ]
       },
       "2H_KNUCKLES_SET3": {
@@ -143645,6 +145352,11 @@
         "ARMOR_LEATHER_MORGANA",
         7,
         13
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        7
        ]
       },
       "2H_AXE_AVALON": {
@@ -149130,6 +150842,13 @@
       11
      ]
     },
+    "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+     "potion": [
+      "T7_POTION_REVIVE",
+      5,
+      8
+     ]
+    },
     "2H_DUALAXE_KEEPER": {
      "armor": [
       "ARMOR_LEATHER_HELL",
@@ -149208,6 +150927,16 @@
       "ARMOR_LEATHER_HELL",
       12,
       28
+     ],
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      5,
+      9
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      9,
+      12
      ]
     },
     "2H_HARPOON_HELL": {
@@ -149374,6 +151103,16 @@
       "ARMOR_LEATHER_HELL",
       9,
       15
+     ],
+     "cape": [
+      "CAPEITEM_FW_MARTLOCK",
+      7,
+      7
+     ],
+     "shoes": [
+      "SHOES_LEATHER_SET1",
+      7,
+      9
      ]
     },
     "2H_SCYTHE_HELL": {
@@ -149405,6 +151144,13 @@
       7
      ]
     },
+    "2H_SPEAR": {
+     "shoes": [
+      "SHOES_LEATHER_SET3",
+      5,
+      9
+     ]
+    },
     "MAIN_AXE": {
      "armor": [
       "ARMOR_LEATHER_SET1",
@@ -149427,6 +151173,28 @@
       "ARMOR_LEATHER_HELL",
       14,
       31
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      5,
+      8
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      8,
+      14
+     ]
+    },
+    "MAIN_SPEAR_KEEPER": {
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      12,
+      24
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      22,
+      86
      ]
     },
     "MAIN_SPEAR_LANCE_AVALON": {
@@ -149435,10 +151203,32 @@
       13,
       23
      ],
+     "food": [
+      "T8_MEAL_STEW",
+      4,
+      5
+     ],
      "head": [
       "HEAD_PLATE_SET1",
       5,
       13
+     ],
+     "offhand": [
+      "OFF_SPIKEDSHIELD_MORGANA",
+      5,
+      5
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      5,
+      5
+     ]
+    },
+    "MAIN_SWORD": {
+     "shoes": [
+      "SHOES_LEATHER_SET3",
+      5,
+      10
      ]
     },
     "MAIN_SWORD_CRYSTAL": {
@@ -149447,10 +151237,25 @@
       11,
       17
      ],
+     "food": [
+      "T8_MEAL_STEW",
+      5,
+      5
+     ],
      "head": [
       "HEAD_PLATE_SET1",
       7,
       11
+     ],
+     "offhand": [
+      "OFF_SPIKEDSHIELD_MORGANA",
+      6,
+      7
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      5,
+      6
      ]
     }
    },
@@ -149746,6 +151551,33 @@
        "SHOES_PLATE_UNDEAD",
        "SHOES_PLATE_AVALON",
        "SHOES_LEATHER_SET1"
+      ]
+     },
+     "kit_build": {
+      "cape": [
+       "CAPEITEM_SMUGGLER",
+       26,
+       49
+      ],
+      "food": [
+       "T8_MEAL_STEW",
+       12,
+       26
+      ],
+      "head": [
+       "HEAD_LEATHER_SET3",
+       74,
+       180
+      ],
+      "potion": [
+       "T7_POTION_REVIVE",
+       26,
+       26
+      ],
+      "shoes": [
+       "SHOES_LEATHER_MORGANA",
+       47,
+       75
       ]
      },
      "kit_by_chest": {
@@ -150501,6 +152333,11 @@
         "ARMOR_CLOTH_SET2",
         6,
         12
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        6,
+        6
        ]
       }
      },
@@ -151923,6 +153760,11 @@
         10,
         10
        ],
+       "potion": [
+        "T7_POTION_ACID",
+        6,
+        6
+       ],
        "shoes": [
         "SHOES_CLOTH_FEY",
         6,
@@ -153280,6 +155122,16 @@
        "ARMOR_LEATHER_SET3",
        528,
        993
+      ],
+      "food": [
+       "T8_MEAL_STEW",
+       191,
+       282
+      ],
+      "potion": [
+       "T8_POTION_COOLDOWN",
+       223,
+       531
       ]
      },
      "kit_by_chest": {
@@ -155748,6 +157600,11 @@
         "ARMOR_LEATHER_SET3",
         7,
         15
+       ],
+       "food": [
+        "T8_MEAL_STEW",
+        5,
+        7
        ]
       },
       "2H_DAGGER_KATAR_AVALON": {
@@ -155784,6 +157641,13 @@
         30
        ]
       },
+      "2H_GLAIVE": {
+       "shoes": [
+        "SHOES_LEATHER_SET2",
+        6,
+        20
+       ]
+      },
       "MAIN_DAGGER": {
        "armor": [
         "ARMOR_LEATHER_SET2",
@@ -155794,6 +157658,16 @@
         "HEAD_LEATHER_SET3",
         11,
         18
+       ],
+       "offhand": [
+        "OFF_TORCH",
+        11,
+        12
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        6,
+        11
        ]
       },
       "MAIN_DAGGER_HELL": {
@@ -155801,6 +157675,11 @@
         "ARMOR_LEATHER_HELL",
         23,
         42
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        5,
+        9
        ],
        "head": [
         "HEAD_PLATE_SET1",
@@ -155840,6 +157719,11 @@
         "ARMOR_LEATHER_HELL",
         10,
         29
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        6,
+        10
        ]
       },
       "MAIN_SPEAR": {
@@ -155847,6 +157731,11 @@
         "ARMOR_LEATHER_SET3",
         14,
         35
+       ],
+       "offhand": [
+        "OFF_TORCH",
+        8,
+        14
        ]
       }
      },
@@ -155863,6 +157752,16 @@
      "ARMOR_LEATHER_SET3",
      317,
      885
+    ],
+    "food": [
+     "T8_MEAL_STEW",
+     87,
+     148
+    ],
+    "potion": [
+     "T8_POTION_COOLDOWN",
+     116,
+     322
     ]
    },
    "kit_by_chest": {
@@ -157510,6 +159409,11 @@
         "HEAD_CLOTH_HELL",
         9,
         22
+       ],
+       "potion": [
+        "T8_POTION_COOLDOWN",
+        6,
+        9
        ]
       },
       "MAIN_DAGGER_HELL": {
@@ -157551,6 +159455,16 @@
         "ARMOR_LEATHER_HELL",
         11,
         17
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        5,
+        5
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        5,
+        11
        ]
       }
      },
@@ -157591,6 +159505,11 @@
        "HEAD_PLATE_SET1",
        5,
        8
+      ],
+      "offhand": [
+       "OFF_SPIKEDSHIELD_MORGANA",
+       5,
+       5
       ]
      },
      "kit_weapon": {
@@ -157653,6 +159572,11 @@
         "HEAD_PLATE_SET1",
         5,
         8
+       ],
+       "offhand": [
+        "OFF_SPIKEDSHIELD_MORGANA",
+        5,
+        5
        ]
       }
      }
@@ -158251,6 +160175,11 @@
         10,
         10
        ],
+       "potion": [
+        "T7_POTION_ACID",
+        6,
+        6
+       ],
        "shoes": [
         "SHOES_CLOTH_FEY",
         6,
@@ -158260,6 +160189,11 @@
       "MAIN_DAGGER": {
        "armor": [
         "ARMOR_LEATHER_SET2",
+        5,
+        5
+       ],
+       "offhand": [
+        "OFF_TORCH",
         5,
         5
        ]
@@ -158663,6 +160597,11 @@
         "ARMOR_LEATHER_SET3",
         7,
         10
+       ],
+       "cape": [
+        "CAPEITEM_DEMON",
+        5,
+        7
        ]
       },
       "2H_DAGGERPAIR": {
@@ -160525,6 +162464,11 @@
       "ARMOR_LEATHER_SET2",
       7,
       11
+     ],
+     "offhand": [
+      "OFF_TORCH",
+      7,
+      8
      ]
     },
     "MAIN_DAGGER_HELL": {
@@ -160570,6 +162514,11 @@
       37,
       100
      ],
+     "offhand": [
+      "OFF_HORN_KEEPER",
+      9,
+      22
+     ],
      "shoes": [
       "SHOES_PLATE_SET1",
       12,
@@ -160581,6 +162530,16 @@
       "ARMOR_LEATHER_HELL",
       14,
       31
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      5,
+      8
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      8,
+      14
      ]
     },
     "MAIN_SPEAR": {
@@ -160588,6 +162547,16 @@
       "ARMOR_LEATHER_SET3",
       10,
       21
+     ],
+     "offhand": [
+      "OFF_TORCH",
+      8,
+      10
+     ],
+     "potion": [
+      "T6_POTION_HEAL",
+      5,
+      8
      ]
     }
    },
@@ -161092,105 +163061,147 @@
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "buff_allies": {
+       "min": 3.5,
        "soft_cap": 15.52,
-       "target": 3.15
+       "target": 7.5
       },
       "burst_aoe": {
+       "min": 6.21,
        "soft_cap": 18.85,
-       "target": 5.59
+       "target": 11.23
       },
       "burst_st": {
-       "soft_cap": 26.5
+       "min": 0.0,
+       "soft_cap": 26.5,
+       "target": 4.85
       },
       "catch": {
+       "min": 6.0,
        "soft_cap": 22.69,
-       "target": 5.4
+       "target": 11.25
       },
       "cleanse": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 6.9
+       "min": 0.0,
+       "soft_cap": 6.9,
+       "target": 2.5
       },
       "disengage": {
+       "min": 9.5,
        "soft_cap": 24.72,
-       "target": 8.55
+       "target": 15.5
       },
       "engage": {
+       "min": 9.0,
        "soft_cap": 23.0,
-       "target": 8.1
+       "target": 15.0
       },
       "execute": {
        "soft_cap": 4.4
       },
       "heal_burst": {
-       "soft_cap": 12.48
+       "min": 1.5,
+       "soft_cap": 12.48,
+       "target": 5.9
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "min": 0.0,
+       "soft_cap": 8.05,
+       "target": 3.0
       },
       "heal_sustain": {
-       "soft_cap": 13.11
+       "min": 2.8,
+       "soft_cap": 13.11,
+       "target": 7.25
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 2.5,
        "soft_cap": 18.33,
-       "target": 2.25
+       "target": 7.56
       },
       "max_health_cut": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "mobility": {
+       "min": 20.5,
        "soft_cap": 42.55,
-       "target": 18.45
+       "target": 28.5
       },
       "peel": {
+       "min": 16.62,
        "soft_cap": 46.36,
-       "target": 14.96
+       "target": 26.32
       },
       "purge": {
-       "soft_cap": 9.77
+       "min": 0.0,
+       "soft_cap": 9.77,
+       "target": 3.5
       },
       "ranged_presence": {
-       "soft_cap": 4.6
+       "min": 0.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "resist_shred": {
+       "min": 3.0,
        "soft_cap": 10.92,
-       "target": 2.7
+       "target": 6.0
       },
       "root": {
-       "soft_cap": 13.64
+       "min": 1.1,
+       "soft_cap": 13.64,
+       "target": 5.71
       },
       "silence": {
-       "soft_cap": 20.5
+       "min": 0.0,
+       "soft_cap": 20.5,
+       "target": 2.85
       },
       "slow": {
+       "min": 2.55,
        "soft_cap": 15.92,
-       "target": 2.29
+       "target": 7.36
       },
       "stun": {
+       "min": 2.6,
        "soft_cap": 20.18,
-       "target": 2.34
+       "target": 8.43
       },
       "sustained_dps": {
+       "min": 31.25,
        "soft_cap": 62.96,
-       "target": 28.12
+       "target": 41.99
       },
       "tankiness": {
+       "min": 25.08,
        "soft_cap": 57.32,
-       "target": 22.57
+       "target": 37.99
       },
       "zone_control": {
+       "min": 3.0,
        "soft_cap": 12.65,
-       "target": 2.7
+       "target": 7.0
       }
      },
      "sizes": [
@@ -161203,113 +163214,150 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 8.62
+       "min": 0.0,
+       "soft_cap": 8.62,
+       "target": 3.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 7.5,
        "soft_cap": 22.42,
-       "target": 6.75
+       "target": 13.5
       },
       "burst_aoe": {
+       "min": 10.88,
        "soft_cap": 24.23,
-       "target": 9.79
+       "target": 16.16
       },
       "burst_st": {
-       "soft_cap": 17.28
+       "min": 0.0,
+       "soft_cap": 17.28,
+       "target": 3.71
       },
       "catch": {
+       "min": 8.0,
        "soft_cap": 25.3,
-       "target": 7.2
+       "target": 13.7
       },
       "cleanse": {
-       "soft_cap": 8.62
+       "min": 2.0,
+       "soft_cap": 8.62,
+       "target": 4.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 11.5
+       "min": 0.0,
+       "soft_cap": 11.5,
+       "target": 5.0
       },
       "disengage": {
+       "min": 14.5,
        "soft_cap": 32.77,
-       "target": 13.05
+       "target": 21.0
       },
       "engage": {
+       "min": 14.0,
        "soft_cap": 31.05,
-       "target": 12.6
+       "target": 20.0
       },
       "execute": {
        "soft_cap": 4.44
       },
       "heal_burst": {
+       "min": 4.86,
        "soft_cap": 16.81,
-       "target": 4.37
+       "target": 10.25
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "min": 1.0,
+       "soft_cap": 8.05,
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 6.4,
        "soft_cap": 17.82,
-       "target": 5.76
+       "target": 11.4
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 6.5,
        "soft_cap": 29.61,
-       "target": 5.85
+       "target": 13.75
       },
       "max_health_cut": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "mobility": {
+       "min": 31.0,
        "soft_cap": 55.77,
-       "target": 27.9
+       "target": 40.0
       },
       "peel": {
+       "min": 32.35,
        "soft_cap": 72.42,
-       "target": 29.12
+       "target": 47.7
       },
       "purge": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 1.0,
        "soft_cap": 5.75,
-       "target": 0.9
+       "target": 3.0
       },
       "resist_shred": {
+       "min": 5.0,
        "soft_cap": 15.52,
-       "target": 4.5
+       "target": 9.5
       },
       "root": {
+       "min": 3.42,
        "soft_cap": 18.73,
-       "target": 3.08
+       "target": 8.62
       },
       "silence": {
-       "soft_cap": 30.64
+       "min": 0.0,
+       "soft_cap": 30.64,
+       "target": 14.83
       },
       "slow": {
+       "min": 5.8,
        "soft_cap": 23.01,
-       "target": 5.22
+       "target": 11.4
       },
       "stun": {
+       "min": 6.0,
        "soft_cap": 29.0,
-       "target": 5.4
+       "target": 13.71
       },
       "sustained_dps": {
+       "min": 44.95,
        "soft_cap": 82.17,
-       "target": 40.46
+       "target": 58.16
       },
       "tankiness": {
+       "min": 45.74,
        "soft_cap": 81.18,
-       "target": 41.17
+       "target": 61.16
       },
       "zone_control": {
+       "min": 7.0,
        "soft_cap": 19.55,
-       "target": 6.3
+       "target": 12.0
       }
      },
      "sizes": [
@@ -161322,116 +163370,150 @@
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 10.35
+       "min": 1.0,
+       "soft_cap": 10.35,
+       "target": 4.5
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 11.0,
        "soft_cap": 25.87,
-       "target": 9.9
+       "target": 16.5
       },
       "burst_aoe": {
+       "min": 15.56,
        "soft_cap": 28.59,
-       "target": 14.0
+       "target": 19.94
       },
       "burst_st": {
-       "soft_cap": 9.82
+       "min": 0.0,
+       "soft_cap": 9.82,
+       "target": 2.38
       },
       "catch": {
+       "min": 10.1,
        "soft_cap": 25.07,
-       "target": 9.09
+       "target": 16.0
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 9.2,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 14.37
+       "min": 2.5,
+       "soft_cap": 14.37,
+       "target": 5.0
       },
       "disengage": {
+       "min": 18.5,
        "soft_cap": 39.1,
-       "target": 16.65
+       "target": 26.0
       },
       "engage": {
+       "min": 18.0,
        "soft_cap": 33.92,
-       "target": 16.2
+       "target": 23.0
       },
       "execute": {
        "soft_cap": 4.05
       },
       "heal_burst": {
+       "min": 9.16,
        "soft_cap": 17.25,
-       "target": 8.24
+       "target": 12.21
       },
       "heal_reduction": {
+       "min": 1.0,
        "soft_cap": 6.9,
-       "target": 0.9
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 11.0,
        "soft_cap": 19.03,
-       "target": 9.9
+       "target": 13.56
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 11.75,
        "soft_cap": 37.66,
-       "target": 10.58
+       "target": 18.75
       },
       "max_health_cut": {
-       "soft_cap": 4.6
+       "min": 1.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "mobility": {
+       "min": 37.0,
        "soft_cap": 61.52,
-       "target": 33.3
+       "target": 46.0
       },
       "peel": {
+       "min": 46.15,
        "soft_cap": 85.44,
-       "target": 41.53
+       "target": 60.0
       },
       "purge": {
+       "min": 3.0,
        "soft_cap": 12.65,
-       "target": 2.7
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 2.0,
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 3.0
       },
       "resist_shred": {
+       "min": 7.5,
        "soft_cap": 17.25,
-       "target": 6.75
+       "target": 12.0
       },
       "root": {
+       "min": 4.2,
        "soft_cap": 21.02,
-       "target": 3.78
+       "target": 10.6
       },
       "silence": {
+       "min": 4.6,
        "soft_cap": 39.18,
-       "target": 4.14
+       "target": 18.29
       },
       "slow": {
+       "min": 8.0,
        "soft_cap": 27.9,
-       "target": 7.2
+       "target": 15.19
       },
       "stun": {
+       "min": 6.13,
        "soft_cap": 29.64,
-       "target": 5.52
+       "target": 15.23
       },
       "sustained_dps": {
+       "min": 52.3,
        "soft_cap": 90.83,
-       "target": 47.07
+       "target": 65.63
       },
       "tankiness": {
+       "min": 66.14,
        "soft_cap": 92.61,
-       "target": 59.53
+       "target": 72.05
       },
       "zone_control": {
+       "min": 10.0,
        "soft_cap": 23.0,
-       "target": 9.0
+       "target": 15.0
       }
      },
      "sizes": [
@@ -161447,105 +163529,147 @@
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "buff_allies": {
+       "min": 3.5,
        "soft_cap": 15.52,
-       "target": 3.15
+       "target": 7.5
       },
       "burst_aoe": {
+       "min": 6.21,
        "soft_cap": 18.85,
-       "target": 5.59
+       "target": 11.23
       },
       "burst_st": {
-       "soft_cap": 26.5
+       "min": 0.0,
+       "soft_cap": 26.5,
+       "target": 4.85
       },
       "catch": {
+       "min": 6.0,
        "soft_cap": 22.69,
-       "target": 5.4
+       "target": 11.25
       },
       "cleanse": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 6.9
+       "min": 0.0,
+       "soft_cap": 6.9,
+       "target": 2.5
       },
       "disengage": {
+       "min": 9.5,
        "soft_cap": 24.72,
-       "target": 8.55
+       "target": 15.5
       },
       "engage": {
+       "min": 9.0,
        "soft_cap": 23.0,
-       "target": 8.1
+       "target": 15.0
       },
       "execute": {
        "soft_cap": 4.4
       },
       "heal_burst": {
-       "soft_cap": 12.48
+       "min": 1.5,
+       "soft_cap": 12.48,
+       "target": 5.9
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "min": 0.0,
+       "soft_cap": 8.05,
+       "target": 3.0
       },
       "heal_sustain": {
-       "soft_cap": 13.11
+       "min": 2.8,
+       "soft_cap": 13.11,
+       "target": 7.25
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 2.5,
        "soft_cap": 18.33,
-       "target": 2.25
+       "target": 7.56
       },
       "max_health_cut": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "mobility": {
+       "min": 20.5,
        "soft_cap": 42.55,
-       "target": 18.45
+       "target": 28.5
       },
       "peel": {
+       "min": 16.62,
        "soft_cap": 46.36,
-       "target": 14.96
+       "target": 26.32
       },
       "purge": {
-       "soft_cap": 9.77
+       "min": 0.0,
+       "soft_cap": 9.77,
+       "target": 3.5
       },
       "ranged_presence": {
-       "soft_cap": 4.6
+       "min": 0.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "resist_shred": {
+       "min": 3.0,
        "soft_cap": 10.92,
-       "target": 2.7
+       "target": 6.0
       },
       "root": {
-       "soft_cap": 13.64
+       "min": 1.1,
+       "soft_cap": 13.64,
+       "target": 5.71
       },
       "silence": {
-       "soft_cap": 20.5
+       "min": 0.0,
+       "soft_cap": 20.5,
+       "target": 2.85
       },
       "slow": {
+       "min": 2.55,
        "soft_cap": 15.92,
-       "target": 2.29
+       "target": 7.36
       },
       "stun": {
+       "min": 2.6,
        "soft_cap": 20.18,
-       "target": 2.34
+       "target": 8.43
       },
       "sustained_dps": {
+       "min": 31.25,
        "soft_cap": 62.96,
-       "target": 28.12
+       "target": 41.99
       },
       "tankiness": {
+       "min": 25.08,
        "soft_cap": 57.32,
-       "target": 22.57
+       "target": 37.99
       },
       "zone_control": {
+       "min": 3.0,
        "soft_cap": 12.65,
-       "target": 2.7
+       "target": 7.0
       }
      },
      "sizes": [
@@ -161559,113 +163683,150 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 8.62
+       "min": 0.0,
+       "soft_cap": 8.62,
+       "target": 3.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 7.5,
        "soft_cap": 22.42,
-       "target": 6.75
+       "target": 13.5
       },
       "burst_aoe": {
+       "min": 10.88,
        "soft_cap": 24.23,
-       "target": 9.79
+       "target": 16.16
       },
       "burst_st": {
-       "soft_cap": 17.28
+       "min": 0.0,
+       "soft_cap": 17.28,
+       "target": 3.71
       },
       "catch": {
+       "min": 8.0,
        "soft_cap": 25.3,
-       "target": 7.2
+       "target": 13.7
       },
       "cleanse": {
-       "soft_cap": 8.62
+       "min": 2.0,
+       "soft_cap": 8.62,
+       "target": 4.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 11.5
+       "min": 0.0,
+       "soft_cap": 11.5,
+       "target": 5.0
       },
       "disengage": {
+       "min": 14.5,
        "soft_cap": 32.77,
-       "target": 13.05
+       "target": 21.0
       },
       "engage": {
+       "min": 14.0,
        "soft_cap": 31.05,
-       "target": 12.6
+       "target": 20.0
       },
       "execute": {
        "soft_cap": 4.44
       },
       "heal_burst": {
+       "min": 4.86,
        "soft_cap": 16.81,
-       "target": 4.37
+       "target": 10.25
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "min": 1.0,
+       "soft_cap": 8.05,
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 6.4,
        "soft_cap": 17.82,
-       "target": 5.76
+       "target": 11.4
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 6.5,
        "soft_cap": 29.61,
-       "target": 5.85
+       "target": 13.75
       },
       "max_health_cut": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "mobility": {
+       "min": 31.0,
        "soft_cap": 55.77,
-       "target": 27.9
+       "target": 40.0
       },
       "peel": {
+       "min": 32.35,
        "soft_cap": 72.42,
-       "target": 29.12
+       "target": 47.7
       },
       "purge": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 1.0,
        "soft_cap": 5.75,
-       "target": 0.9
+       "target": 3.0
       },
       "resist_shred": {
+       "min": 5.0,
        "soft_cap": 15.52,
-       "target": 4.5
+       "target": 9.5
       },
       "root": {
+       "min": 3.42,
        "soft_cap": 18.73,
-       "target": 3.08
+       "target": 8.62
       },
       "silence": {
-       "soft_cap": 30.64
+       "min": 0.0,
+       "soft_cap": 30.64,
+       "target": 14.83
       },
       "slow": {
+       "min": 5.8,
        "soft_cap": 23.01,
-       "target": 5.22
+       "target": 11.4
       },
       "stun": {
+       "min": 6.0,
        "soft_cap": 29.0,
-       "target": 5.4
+       "target": 13.71
       },
       "sustained_dps": {
+       "min": 44.95,
        "soft_cap": 82.17,
-       "target": 40.46
+       "target": 58.16
       },
       "tankiness": {
+       "min": 45.74,
        "soft_cap": 81.18,
-       "target": 41.17
+       "target": 61.16
       },
       "zone_control": {
+       "min": 7.0,
        "soft_cap": 19.55,
-       "target": 6.3
+       "target": 12.0
       }
      },
      "sizes": [
@@ -161679,116 +163840,150 @@
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 10.35
+       "min": 1.0,
+       "soft_cap": 10.35,
+       "target": 4.5
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 11.0,
        "soft_cap": 25.87,
-       "target": 9.9
+       "target": 16.5
       },
       "burst_aoe": {
+       "min": 15.56,
        "soft_cap": 28.59,
-       "target": 14.0
+       "target": 19.94
       },
       "burst_st": {
-       "soft_cap": 9.82
+       "min": 0.0,
+       "soft_cap": 9.82,
+       "target": 2.38
       },
       "catch": {
+       "min": 10.1,
        "soft_cap": 25.07,
-       "target": 9.09
+       "target": 16.0
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 9.2,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 14.37
+       "min": 2.5,
+       "soft_cap": 14.37,
+       "target": 5.0
       },
       "disengage": {
+       "min": 18.5,
        "soft_cap": 39.1,
-       "target": 16.65
+       "target": 26.0
       },
       "engage": {
+       "min": 18.0,
        "soft_cap": 33.92,
-       "target": 16.2
+       "target": 23.0
       },
       "execute": {
        "soft_cap": 4.05
       },
       "heal_burst": {
+       "min": 9.16,
        "soft_cap": 17.25,
-       "target": 8.24
+       "target": 12.21
       },
       "heal_reduction": {
+       "min": 1.0,
        "soft_cap": 6.9,
-       "target": 0.9
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 11.0,
        "soft_cap": 19.03,
-       "target": 9.9
+       "target": 13.56
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 11.75,
        "soft_cap": 37.66,
-       "target": 10.58
+       "target": 18.75
       },
       "max_health_cut": {
-       "soft_cap": 4.6
+       "min": 1.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "mobility": {
+       "min": 37.0,
        "soft_cap": 61.52,
-       "target": 33.3
+       "target": 46.0
       },
       "peel": {
+       "min": 46.15,
        "soft_cap": 85.44,
-       "target": 41.53
+       "target": 60.0
       },
       "purge": {
+       "min": 3.0,
        "soft_cap": 12.65,
-       "target": 2.7
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 2.0,
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 3.0
       },
       "resist_shred": {
+       "min": 7.5,
        "soft_cap": 17.25,
-       "target": 6.75
+       "target": 12.0
       },
       "root": {
+       "min": 4.2,
        "soft_cap": 21.02,
-       "target": 3.78
+       "target": 10.6
       },
       "silence": {
+       "min": 4.6,
        "soft_cap": 39.18,
-       "target": 4.14
+       "target": 18.29
       },
       "slow": {
+       "min": 8.0,
        "soft_cap": 27.9,
-       "target": 7.2
+       "target": 15.19
       },
       "stun": {
+       "min": 6.13,
        "soft_cap": 29.64,
-       "target": 5.52
+       "target": 15.23
       },
       "sustained_dps": {
+       "min": 52.3,
        "soft_cap": 90.83,
-       "target": 47.07
+       "target": 65.63
       },
       "tankiness": {
+       "min": 66.14,
        "soft_cap": 92.61,
-       "target": 59.53
+       "target": 72.05
       },
       "zone_control": {
+       "min": 10.0,
        "soft_cap": 23.0,
-       "target": 9.0
+       "target": 15.0
       }
      },
      "sizes": [
@@ -161803,107 +163998,145 @@
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 8.05
+       "min": 0.0,
+       "soft_cap": 8.05,
+       "target": 3.0
       },
       "buff_allies": {
+       "min": 3.0,
        "soft_cap": 16.1,
-       "target": 2.7
+       "target": 8.0
       },
       "burst_aoe": {
+       "min": 12.41,
        "soft_cap": 31.91,
-       "target": 11.17
+       "target": 19.67
       },
       "burst_st": {
-       "soft_cap": 9.25
+       "min": 0.0,
+       "soft_cap": 9.25,
+       "target": 1.64
       },
       "catch": {
+       "min": 6.0,
        "soft_cap": 21.85,
-       "target": 5.4
+       "target": 10.5
       },
       "cleanse": {
-       "soft_cap": 6.9
+       "min": 0.0,
+       "soft_cap": 6.9,
+       "target": 2.0
       },
       "clump_create": {
-       "soft_cap": 4.6
+       "min": 0.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "damage_debuff": {
        "soft_cap": 5.75
       },
       "disengage": {
+       "min": 6.0,
        "soft_cap": 18.4,
-       "target": 5.4
+       "target": 10.5
       },
       "engage": {
+       "min": 7.2,
        "soft_cap": 21.85,
-       "target": 6.48
+       "target": 13.0
       },
       "execute": {
        "soft_cap": 3.93
       },
       "heal_burst": {
-       "soft_cap": 13.8
+       "min": 2.9,
+       "soft_cap": 13.8,
+       "target": 6.0
       },
       "heal_reduction": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.5
       },
       "heal_sustain": {
+       "min": 3.0,
        "soft_cap": 13.85,
-       "target": 2.7
+       "target": 7.25
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 3.55,
        "soft_cap": 18.97,
-       "target": 3.19
+       "target": 9.5
       },
       "max_health_cut": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "mobility": {
+       "min": 15.0,
        "soft_cap": 34.5,
-       "target": 13.5
+       "target": 23.0
       },
       "peel": {
+       "min": 19.0,
        "soft_cap": 55.77,
-       "target": 17.1
+       "target": 33.0
       },
       "purge": {
-       "soft_cap": 9.2
+       "min": 0.0,
+       "soft_cap": 9.2,
+       "target": 3.0
       },
       "ranged_presence": {
+       "min": 3.0,
        "soft_cap": 8.05,
-       "target": 2.7
+       "target": 5.0
       },
       "resist_shred": {
+       "min": 3.0,
        "soft_cap": 9.77,
-       "target": 2.7
+       "target": 5.5
       },
       "root": {
+       "min": 2.0,
        "soft_cap": 15.85,
-       "target": 1.8
+       "target": 6.1
       },
       "silence": {
-       "soft_cap": 18.78
+       "min": 0.0,
+       "soft_cap": 18.78,
+       "target": 1.45
       },
       "slow": {
+       "min": 7.0,
        "soft_cap": 26.93,
-       "target": 6.3
+       "target": 14.15
       },
       "stun": {
-       "soft_cap": 42.39
+       "min": 2.25,
+       "soft_cap": 42.39,
+       "target": 10.95
       },
       "sustained_dps": {
+       "min": 34.82,
        "soft_cap": 69.62,
-       "target": 31.34
+       "target": 46.28
       },
       "tankiness": {
+       "min": 29.24,
        "soft_cap": 56.19,
-       "target": 26.32
+       "target": 37.94
       },
       "zone_control": {
+       "min": 6.0,
        "soft_cap": 18.4,
-       "target": 5.4
+       "target": 11.0
       }
      },
      "sizes": [
@@ -161916,115 +164149,150 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 5.5
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 7.5,
        "soft_cap": 23.57,
-       "target": 6.75
+       "target": 14.0
       },
       "burst_aoe": {
+       "min": 17.05,
        "soft_cap": 37.38,
-       "target": 15.35
+       "target": 24.57
       },
       "burst_st": {
-       "soft_cap": 8.16
+       "min": 0.0,
+       "soft_cap": 8.16,
+       "target": 1.34
       },
       "catch": {
+       "min": 8.5,
        "soft_cap": 25.87,
-       "target": 7.65
+       "target": 14.5
       },
       "cleanse": {
-       "soft_cap": 11.5
+       "min": 2.0,
+       "soft_cap": 11.5,
+       "target": 4.0
       },
       "clump_create": {
-       "soft_cap": 5.75
+       "min": 1.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "damage_debuff": {
-       "soft_cap": 6.9
+       "min": 0.0,
+       "soft_cap": 6.9,
+       "target": 2.5
       },
       "disengage": {
+       "min": 9.35,
        "soft_cap": 25.3,
-       "target": 8.41
+       "target": 15.0
       },
       "engage": {
+       "min": 13.0,
        "soft_cap": 28.75,
-       "target": 11.7
+       "target": 19.0
       },
       "execute": {
        "soft_cap": 4.27
       },
       "heal_burst": {
+       "min": 5.8,
        "soft_cap": 18.26,
-       "target": 5.22
+       "target": 10.6
       },
       "heal_reduction": {
+       "min": 1.0,
        "soft_cap": 6.9,
-       "target": 0.9
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 7.05,
        "soft_cap": 18.29,
-       "target": 6.34
+       "target": 11.7
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 7.5,
        "soft_cap": 27.02,
-       "target": 6.75
+       "target": 14.5
       },
       "max_health_cut": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "mobility": {
+       "min": 26.0,
        "soft_cap": 48.3,
-       "target": 23.4
+       "target": 34.0
       },
       "peel": {
+       "min": 35.42,
        "soft_cap": 78.87,
-       "target": 31.88
+       "target": 51.75
       },
       "purge": {
+       "min": 2.0,
        "soft_cap": 12.65,
-       "target": 1.8
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 4.0,
        "soft_cap": 9.2,
-       "target": 3.6
+       "target": 6.0
       },
       "resist_shred": {
+       "min": 5.0,
        "soft_cap": 12.65,
-       "target": 4.5
+       "target": 8.0
       },
       "root": {
+       "min": 4.0,
        "soft_cap": 19.29,
-       "target": 3.6
+       "target": 9.97
       },
       "silence": {
-       "soft_cap": 28.8
+       "min": 0.0,
+       "soft_cap": 28.8,
+       "target": 7.4
       },
       "slow": {
+       "min": 10.6,
        "soft_cap": 36.06,
-       "target": 9.54
+       "target": 20.31
       },
       "stun": {
+       "min": 4.15,
        "soft_cap": 50.77,
-       "target": 3.74
+       "target": 17.31
       },
       "sustained_dps": {
+       "min": 49.59,
        "soft_cap": 93.37,
-       "target": 44.63
+       "target": 65.49
       },
       "tankiness": {
+       "min": 45.05,
        "soft_cap": 78.14,
-       "target": 40.55
+       "target": 56.44
       },
       "zone_control": {
+       "min": 11.0,
        "soft_cap": 23.0,
-       "target": 9.9
+       "target": 15.0
       }
      },
      "sizes": [
@@ -162037,117 +164305,150 @@
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
+       "min": 3.0,
        "soft_cap": 13.22,
-       "target": 2.7
+       "target": 7.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 12.25,
        "soft_cap": 26.45,
-       "target": 11.03
+       "target": 17.5
       },
       "burst_aoe": {
+       "min": 20.67,
        "soft_cap": 40.7,
-       "target": 18.6
+       "target": 26.76
       },
       "burst_st": {
-       "soft_cap": 5.73
+       "min": 0.0,
+       "soft_cap": 5.73,
+       "target": 1.22
       },
       "catch": {
+       "min": 11.0,
        "soft_cap": 28.17,
-       "target": 9.9
+       "target": 17.75
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
+       "min": 1.0,
        "soft_cap": 6.9,
-       "target": 0.9
+       "target": 2.75
       },
       "damage_debuff": {
-       "soft_cap": 10.35
+       "min": 0.0,
+       "soft_cap": 10.35,
+       "target": 2.5
       },
       "disengage": {
+       "min": 11.0,
        "soft_cap": 29.32,
-       "target": 9.9
+       "target": 19.0
       },
       "engage": {
+       "min": 17.0,
        "soft_cap": 32.2,
-       "target": 15.3
+       "target": 23.0
       },
       "execute": {
        "soft_cap": 1.79
       },
       "heal_burst": {
+       "min": 9.0,
        "soft_cap": 18.86,
-       "target": 8.1
+       "target": 12.85
       },
       "heal_reduction": {
+       "min": 1.0,
        "soft_cap": 8.05,
-       "target": 0.9
+       "target": 4.0
       },
       "heal_sustain": {
+       "min": 10.0,
        "soft_cap": 20.1,
-       "target": 9.0
+       "target": 14.05
       },
       "interrupt": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 9.5,
        "soft_cap": 28.89,
-       "target": 8.55
+       "target": 16.25
       },
       "max_health_cut": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "mobility": {
+       "min": 31.75,
        "soft_cap": 54.05,
-       "target": 28.57
+       "target": 39.5
       },
       "peel": {
+       "min": 46.5,
        "soft_cap": 88.84,
-       "target": 41.85
+       "target": 62.38
       },
       "purge": {
+       "min": 4.0,
        "soft_cap": 13.8,
-       "target": 3.6
+       "target": 8.0
       },
       "ranged_presence": {
+       "min": 4.0,
        "soft_cap": 10.35,
-       "target": 3.6
+       "target": 7.0
       },
       "resist_shred": {
+       "min": 6.5,
        "soft_cap": 14.37,
-       "target": 5.85
+       "target": 10.0
       },
       "root": {
+       "min": 5.0,
        "soft_cap": 20.0,
-       "target": 4.5
+       "target": 11.09
       },
       "silence": {
-       "soft_cap": 35.81
+       "min": 1.45,
+       "soft_cap": 35.81,
+       "target": 14.83
       },
       "slow": {
+       "min": 13.6,
        "soft_cap": 36.66,
-       "target": 12.24
+       "target": 23.8
       },
       "stun": {
+       "min": 8.8,
        "soft_cap": 61.8,
-       "target": 7.92
+       "target": 26.32
       },
       "sustained_dps": {
+       "min": 53.55,
        "soft_cap": 104.12,
-       "target": 48.2
+       "target": 73.62
       },
       "tankiness": {
+       "min": 58.36,
        "soft_cap": 88.57,
-       "target": 52.52
+       "target": 68.68
       },
       "zone_control": {
+       "min": 14.0,
        "soft_cap": 26.45,
-       "target": 12.6
+       "target": 18.0
       }
      },
      "sizes": [
@@ -162162,109 +164463,143 @@
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
+       "min": 2.8,
        "soft_cap": 12.3,
-       "target": 2.52
+       "target": 6.5
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 5.3,
        "soft_cap": 21.27,
-       "target": 4.77
+       "target": 13.5
       },
       "burst_aoe": {
+       "min": 14.81,
        "soft_cap": 30.27,
-       "target": 13.33
+       "target": 20.5
       },
       "burst_st": {
        "soft_cap": 5.51
       },
       "catch": {
+       "min": 7.5,
        "soft_cap": 24.78,
-       "target": 6.75
+       "target": 13.5
       },
       "cleanse": {
-       "soft_cap": 6.9
+       "min": 0.9,
+       "soft_cap": 6.9,
+       "target": 4.0
       },
       "clump_create": {
-       "soft_cap": 4.6
+       "min": 0.0,
+       "soft_cap": 4.6,
+       "target": 2.0
       },
       "damage_debuff": {
        "soft_cap": 2.88
       },
       "disengage": {
+       "min": 5.8,
        "soft_cap": 18.97,
-       "target": 5.22
+       "target": 10.0
       },
       "engage": {
+       "min": 8.0,
        "soft_cap": 23.0,
-       "target": 7.2
+       "target": 15.0
       },
       "heal_burst": {
-       "soft_cap": 12.76
+       "min": 2.9,
+       "soft_cap": 12.76,
+       "target": 7.4
       },
       "heal_reduction": {
-       "soft_cap": 5.75
+       "min": 0.6,
+       "soft_cap": 5.75,
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 3.0,
        "soft_cap": 12.49,
-       "target": 2.7
+       "target": 7.05
       },
       "interrupt": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 2.0
       },
       "knockback_displace": {
+       "min": 8.0,
        "soft_cap": 23.57,
-       "target": 7.2
+       "target": 15.0
       },
       "max_health_cut": {
-       "soft_cap": 1.61
+       "min": 0.0,
+       "soft_cap": 1.61,
+       "target": 1.0
       },
       "mobility": {
+       "min": 17.8,
        "soft_cap": 34.5,
-       "target": 16.02
+       "target": 24.0
       },
       "peel": {
+       "min": 31.34,
        "soft_cap": 72.39,
-       "target": 28.21
+       "target": 51.15
       },
       "purge": {
-       "soft_cap": 9.2
+       "min": 0.0,
+       "soft_cap": 9.2,
+       "target": 4.0
       },
       "ranged_presence": {
+       "min": 4.0,
        "soft_cap": 8.05,
-       "target": 3.6
+       "target": 5.0
       },
       "resist_shred": {
+       "min": 2.0,
        "soft_cap": 7.47,
-       "target": 1.8
+       "target": 5.0
       },
       "root": {
+       "min": 8.4,
        "soft_cap": 23.69,
-       "target": 7.56
+       "target": 16.5
       },
       "silence": {
-       "soft_cap": 17.05
+       "min": 0.0,
+       "soft_cap": 17.05,
+       "target": 1.45
       },
       "slow": {
+       "min": 9.7,
        "soft_cap": 30.22,
-       "target": 8.73
+       "target": 18.86
       },
       "stun": {
+       "min": 3.0,
        "soft_cap": 35.94,
-       "target": 2.7
+       "target": 10.2
       },
       "sustained_dps": {
+       "min": 37.0,
        "soft_cap": 73.38,
-       "target": 33.3
+       "target": 50.4
       },
       "tankiness": {
+       "min": 32.6,
        "soft_cap": 55.08,
-       "target": 29.34
+       "target": 42.13
       },
       "zone_control": {
+       "min": 9.0,
        "soft_cap": 19.55,
-       "target": 8.1
+       "target": 12.0
       }
      },
      "sizes": [
@@ -162277,115 +164612,145 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
+       "min": 6.0,
        "soft_cap": 14.95,
-       "target": 5.4
+       "target": 10.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 13.5,
        "soft_cap": 28.17,
-       "target": 12.15
+       "target": 19.5
       },
       "burst_aoe": {
+       "min": 21.22,
        "soft_cap": 38.54,
-       "target": 19.1
+       "target": 26.67
       },
       "burst_st": {
-       "soft_cap": 3.16
+       "min": 0.0,
+       "soft_cap": 3.16,
+       "target": 1.27
       },
       "catch": {
+       "min": 10.0,
        "soft_cap": 27.02,
-       "target": 9.0
+       "target": 17.0
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
+       "min": 1.0,
        "soft_cap": 6.9,
-       "target": 0.9
+       "target": 4.0
       },
       "damage_debuff": {
        "soft_cap": 2.88
       },
       "disengage": {
+       "min": 9.0,
        "soft_cap": 23.0,
-       "target": 8.1
+       "target": 14.5
       },
       "engage": {
+       "min": 16.0,
        "soft_cap": 31.05,
-       "target": 14.4
+       "target": 22.0
       },
       "heal_burst": {
+       "min": 5.95,
        "soft_cap": 18.87,
-       "target": 5.36
+       "target": 10.5
       },
       "heal_reduction": {
+       "min": 2.0,
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 4.0
       },
       "heal_sustain": {
+       "min": 6.4,
        "soft_cap": 16.67,
-       "target": 5.76
+       "target": 10.55
       },
       "interrupt": {
+       "min": 1.0,
        "soft_cap": 3.45,
-       "target": 0.9
+       "target": 2.0
       },
       "knockback_displace": {
+       "min": 15.0,
        "soft_cap": 31.05,
-       "target": 13.5
+       "target": 22.0
       },
       "max_health_cut": {
-       "soft_cap": 2.3
+       "min": 0.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "mobility": {
+       "min": 28.0,
        "soft_cap": 46.0,
-       "target": 25.2
+       "target": 34.5
       },
       "peel": {
+       "min": 55.5,
        "soft_cap": 97.98,
-       "target": 49.95
+       "target": 73.0
       },
       "purge": {
+       "min": 2.0,
        "soft_cap": 12.65,
-       "target": 1.8
+       "target": 6.0
       },
       "ranged_presence": {
+       "min": 5.0,
        "soft_cap": 9.2,
-       "target": 4.5
+       "target": 6.0
       },
       "resist_shred": {
+       "min": 4.5,
        "soft_cap": 10.35,
-       "target": 4.05
+       "target": 6.5
       },
       "root": {
+       "min": 11.25,
        "soft_cap": 27.35,
-       "target": 10.12
+       "target": 18.5
       },
       "silence": {
-       "soft_cap": 18.72
+       "min": 0.0,
+       "soft_cap": 18.72,
+       "target": 2.9
       },
       "slow": {
+       "min": 14.0,
        "soft_cap": 41.81,
-       "target": 12.6
+       "target": 24.35
       },
       "stun": {
+       "min": 6.0,
        "soft_cap": 47.94,
-       "target": 5.4
+       "target": 20.14
       },
       "sustained_dps": {
+       "min": 58.45,
        "soft_cap": 94.71,
-       "target": 52.61
+       "target": 70.25
       },
       "tankiness": {
+       "min": 46.08,
        "soft_cap": 74.11,
-       "target": 41.47
+       "target": 56.19
       },
       "zone_control": {
+       "min": 13.0,
        "soft_cap": 24.15,
-       "target": 11.7
+       "target": 16.0
       }
      },
      "sizes": [
@@ -162398,115 +164763,143 @@
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
+       "min": 6.0,
        "soft_cap": 15.52,
-       "target": 5.4
+       "target": 10.5
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 17.0,
        "soft_cap": 32.37,
-       "target": 15.3
+       "target": 22.5
       },
       "burst_aoe": {
+       "min": 26.24,
        "soft_cap": 43.39,
-       "target": 23.62
+       "target": 29.68
       },
       "burst_st": {
        "soft_cap": 2.68
       },
       "catch": {
+       "min": 12.5,
        "soft_cap": 28.52,
-       "target": 11.25
+       "target": 19.0
       },
       "cleanse": {
+       "min": 4.0,
        "soft_cap": 11.5,
-       "target": 3.6
+       "target": 8.0
       },
       "clump_create": {
+       "min": 2.0,
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 4.0
       },
       "damage_debuff": {
        "soft_cap": 2.88
       },
       "disengage": {
+       "min": 12.0,
        "soft_cap": 24.15,
-       "target": 10.8
+       "target": 16.5
       },
       "engage": {
+       "min": 19.0,
        "soft_cap": 33.35,
-       "target": 17.1
+       "target": 25.0
       },
       "heal_burst": {
+       "min": 9.0,
        "soft_cap": 18.97,
-       "target": 8.1
+       "target": 13.23
       },
       "heal_reduction": {
+       "min": 3.0,
        "soft_cap": 8.05,
-       "target": 2.7
+       "target": 5.0
       },
       "heal_sustain": {
+       "min": 9.98,
        "soft_cap": 18.08,
-       "target": 8.98
+       "target": 12.75
       },
       "interrupt": {
+       "min": 1.0,
        "soft_cap": 3.45,
-       "target": 0.9
+       "target": 2.0
       },
       "knockback_displace": {
+       "min": 17.35,
        "soft_cap": 31.8,
-       "target": 15.62
+       "target": 23.25
       },
       "max_health_cut": {
-       "soft_cap": 2.3
+       "min": 1.0,
+       "soft_cap": 2.3,
+       "target": 1.0
       },
       "mobility": {
+       "min": 34.0,
        "soft_cap": 49.45,
-       "target": 30.6
+       "target": 39.0
       },
       "peel": {
+       "min": 61.7,
        "soft_cap": 102.35,
-       "target": 55.53
+       "target": 79.75
       },
       "purge": {
+       "min": 3.0,
        "soft_cap": 12.65,
-       "target": 2.7
+       "target": 7.0
       },
       "ranged_presence": {
+       "min": 6.0,
        "soft_cap": 10.35,
-       "target": 5.4
+       "target": 7.0
       },
       "resist_shred": {
+       "min": 6.5,
        "soft_cap": 11.5,
-       "target": 5.85
+       "target": 8.0
       },
       "root": {
+       "min": 13.7,
        "soft_cap": 29.65,
-       "target": 12.33
+       "target": 19.5
       },
       "silence": {
-       "soft_cap": 17.05
+       "min": 1.45,
+       "soft_cap": 17.05,
+       "target": 4.35
       },
       "slow": {
+       "min": 16.64,
        "soft_cap": 45.67,
-       "target": 14.98
+       "target": 27.4
       },
       "stun": {
+       "min": 7.45,
        "soft_cap": 48.63,
-       "target": 6.71
+       "target": 30.02
       },
       "sustained_dps": {
+       "min": 69.11,
        "soft_cap": 103.2,
-       "target": 62.2
+       "target": 80.04
       },
       "tankiness": {
+       "min": 57.68,
        "soft_cap": 80.51,
-       "target": 51.91
+       "target": 62.85
       },
       "zone_control": {
+       "min": 14.0,
        "soft_cap": 25.3,
-       "target": 12.6
+       "target": 18.0
       }
      },
      "sizes": [
@@ -162521,106 +164914,145 @@
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 12.65
+       "min": 1.0,
+       "soft_cap": 12.65,
+       "target": 5.0
       },
       "buff_allies": {
+       "min": 2.5,
        "soft_cap": 17.25,
-       "target": 2.25
+       "target": 8.0
       },
       "burst_aoe": {
+       "min": 5.61,
        "soft_cap": 21.29,
-       "target": 5.05
+       "target": 12.54
       },
       "burst_st": {
-       "soft_cap": 14.56
+       "min": 1.05,
+       "soft_cap": 14.56,
+       "target": 4.68
       },
       "catch": {
+       "min": 5.0,
        "soft_cap": 20.7,
-       "target": 4.5
+       "target": 11.0
       },
       "cleanse": {
-       "soft_cap": 9.2
+       "min": 0.0,
+       "soft_cap": 9.2,
+       "target": 4.0
       },
       "clump_create": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "damage_debuff": {
-       "soft_cap": 8.05
+       "min": 0.0,
+       "soft_cap": 8.05,
+       "target": 2.5
       },
       "disengage": {
+       "min": 7.0,
        "soft_cap": 18.97,
-       "target": 6.3
+       "target": 11.0
       },
       "engage": {
+       "min": 6.0,
        "soft_cap": 19.55,
-       "target": 5.4
+       "target": 12.0
       },
       "execute": {
        "soft_cap": 3.76
       },
       "heal_burst": {
-       "soft_cap": 12.65
+       "min": 1.25,
+       "soft_cap": 12.65,
+       "target": 5.8
       },
       "heal_reduction": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "heal_sustain": {
-       "soft_cap": 14.43
+       "min": 2.5,
+       "soft_cap": 14.43,
+       "target": 7.25
       },
       "interrupt": {
-       "soft_cap": 3.45
+       "min": 0.0,
+       "soft_cap": 3.45,
+       "target": 1.0
       },
       "knockback_displace": {
+       "min": 4.5,
        "soft_cap": 18.97,
-       "target": 4.05
+       "target": 9.75
       },
       "max_health_cut": {
        "soft_cap": 1.15
       },
       "mobility": {
+       "min": 16.0,
        "soft_cap": 33.35,
-       "target": 14.4
+       "target": 22.5
       },
       "peel": {
+       "min": 22.6,
        "soft_cap": 58.07,
-       "target": 20.34
+       "target": 35.75
       },
       "purge": {
-       "soft_cap": 12.65
+       "min": 1.5,
+       "soft_cap": 12.65,
+       "target": 5.5
       },
       "ranged_presence": {
+       "min": 2.0,
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 4.0
       },
       "resist_shred": {
+       "min": 3.0,
        "soft_cap": 8.62,
-       "target": 2.7
+       "target": 5.0
       },
       "root": {
+       "min": 3.6,
        "soft_cap": 19.58,
-       "target": 3.24
+       "target": 9.8
       },
       "silence": {
-       "soft_cap": 20.39
+       "min": 0.0,
+       "soft_cap": 20.39,
+       "target": 2.9
       },
       "slow": {
+       "min": 4.35,
        "soft_cap": 23.98,
-       "target": 3.91
+       "target": 12.65
       },
       "stun": {
-       "soft_cap": 33.07
+       "min": 1.5,
+       "soft_cap": 33.07,
+       "target": 12.93
       },
       "sustained_dps": {
+       "min": 30.4,
        "soft_cap": 69.86,
-       "target": 27.36
+       "target": 44.05
       },
       "tankiness": {
+       "min": 26.66,
        "soft_cap": 54.12,
-       "target": 23.99
+       "target": 36.7
       },
       "zone_control": {
+       "min": 5.0,
        "soft_cap": 16.1,
-       "target": 4.5
+       "target": 10.0
       }
      },
      "sizes": [
@@ -162633,115 +165065,150 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
+       "min": 3.45,
        "soft_cap": 16.67,
-       "target": 3.11
+       "target": 10.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 7.0,
        "soft_cap": 27.08,
-       "target": 6.3
+       "target": 16.0
       },
       "burst_aoe": {
+       "min": 12.9,
        "soft_cap": 28.16,
-       "target": 11.61
+       "target": 19.52
       },
       "burst_st": {
-       "soft_cap": 11.24
+       "min": 1.05,
+       "soft_cap": 11.24,
+       "target": 3.39
       },
       "catch": {
+       "min": 7.97,
        "soft_cap": 23.34,
-       "target": 7.17
+       "target": 13.75
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "damage_debuff": {
-       "soft_cap": 8.62
+       "min": 0.0,
+       "soft_cap": 8.62,
+       "target": 2.5
       },
       "disengage": {
+       "min": 8.95,
        "soft_cap": 23.0,
-       "target": 8.05
+       "target": 15.0
       },
       "engage": {
+       "min": 11.45,
        "soft_cap": 28.23,
-       "target": 10.3
+       "target": 19.0
       },
       "execute": {
        "soft_cap": 3.9
       },
       "heal_burst": {
+       "min": 5.8,
        "soft_cap": 18.92,
-       "target": 5.22
+       "target": 10.26
       },
       "heal_reduction": {
-       "soft_cap": 6.9
+       "min": 1.0,
+       "soft_cap": 6.9,
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 6.18,
        "soft_cap": 18.09,
-       "target": 5.56
+       "target": 11.32
       },
       "interrupt": {
-       "soft_cap": 3.45
+       "min": 1.0,
+       "soft_cap": 3.45,
+       "target": 2.0
       },
       "knockback_displace": {
+       "min": 10.73,
        "soft_cap": 28.0,
-       "target": 9.66
+       "target": 18.08
       },
       "max_health_cut": {
-       "soft_cap": 1.26
+       "min": 0.0,
+       "soft_cap": 1.26,
+       "target": 1.0
       },
       "mobility": {
+       "min": 24.95,
        "soft_cap": 44.33,
-       "target": 22.45
+       "target": 33.25
       },
       "peel": {
+       "min": 43.33,
        "soft_cap": 81.89,
-       "target": 39.0
+       "target": 58.67
       },
       "purge": {
+       "min": 3.0,
        "soft_cap": 14.95,
-       "target": 2.7
+       "target": 8.0
       },
       "ranged_presence": {
+       "min": 4.0,
        "soft_cap": 9.2,
-       "target": 3.6
+       "target": 6.0
       },
       "resist_shred": {
+       "min": 4.0,
        "soft_cap": 11.5,
-       "target": 3.6
+       "target": 7.25
       },
       "root": {
+       "min": 7.96,
        "soft_cap": 26.16,
-       "target": 7.16
+       "target": 16.5
       },
       "silence": {
-       "soft_cap": 22.06
+       "min": 0.0,
+       "soft_cap": 22.06,
+       "target": 4.4
       },
       "slow": {
+       "min": 11.35,
        "soft_cap": 31.88,
-       "target": 10.21
+       "target": 19.27
       },
       "stun": {
+       "min": 7.11,
        "soft_cap": 38.28,
-       "target": 6.4
+       "target": 16.71
       },
       "sustained_dps": {
+       "min": 49.27,
        "soft_cap": 92.44,
-       "target": 44.34
+       "target": 68.11
       },
       "tankiness": {
+       "min": 43.97,
        "soft_cap": 73.34,
-       "target": 39.57
+       "target": 54.24
       },
       "zone_control": {
+       "min": 9.9,
        "soft_cap": 21.85,
-       "target": 8.91
+       "target": 14.0
       }
      },
      "sizes": [
@@ -162755,115 +165222,150 @@
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
+       "min": 3.45,
        "soft_cap": 16.67,
-       "target": 3.11
+       "target": 10.0
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
+       "min": 7.0,
        "soft_cap": 27.08,
-       "target": 6.3
+       "target": 16.0
       },
       "burst_aoe": {
+       "min": 12.9,
        "soft_cap": 28.16,
-       "target": 11.61
+       "target": 19.52
       },
       "burst_st": {
-       "soft_cap": 11.24
+       "min": 1.05,
+       "soft_cap": 11.24,
+       "target": 3.39
       },
       "catch": {
+       "min": 7.97,
        "soft_cap": 23.34,
-       "target": 7.17
+       "target": 13.75
       },
       "cleanse": {
+       "min": 2.0,
        "soft_cap": 11.5,
-       "target": 1.8
+       "target": 6.0
       },
       "clump_create": {
-       "soft_cap": 5.75
+       "min": 0.0,
+       "soft_cap": 5.75,
+       "target": 2.0
       },
       "damage_debuff": {
-       "soft_cap": 8.62
+       "min": 0.0,
+       "soft_cap": 8.62,
+       "target": 2.5
       },
       "disengage": {
+       "min": 8.95,
        "soft_cap": 23.0,
-       "target": 8.05
+       "target": 15.0
       },
       "engage": {
+       "min": 11.45,
        "soft_cap": 28.23,
-       "target": 10.3
+       "target": 19.0
       },
       "execute": {
        "soft_cap": 3.9
       },
       "heal_burst": {
+       "min": 5.8,
        "soft_cap": 18.92,
-       "target": 5.22
+       "target": 10.26
       },
       "heal_reduction": {
-       "soft_cap": 6.9
+       "min": 1.0,
+       "soft_cap": 6.9,
+       "target": 3.0
       },
       "heal_sustain": {
+       "min": 6.18,
        "soft_cap": 18.09,
-       "target": 5.56
+       "target": 11.32
       },
       "interrupt": {
-       "soft_cap": 3.45
+       "min": 1.0,
+       "soft_cap": 3.45,
+       "target": 2.0
       },
       "knockback_displace": {
+       "min": 10.73,
        "soft_cap": 28.0,
-       "target": 9.66
+       "target": 18.08
       },
       "max_health_cut": {
-       "soft_cap": 1.26
+       "min": 0.0,
+       "soft_cap": 1.26,
+       "target": 1.0
       },
       "mobility": {
+       "min": 24.95,
        "soft_cap": 44.33,
-       "target": 22.45
+       "target": 33.25
       },
       "peel": {
+       "min": 43.33,
        "soft_cap": 81.89,
-       "target": 39.0
+       "target": 58.67
       },
       "purge": {
+       "min": 3.0,
        "soft_cap": 14.95,
-       "target": 2.7
+       "target": 8.0
       },
       "ranged_presence": {
+       "min": 4.0,
        "soft_cap": 9.2,
-       "target": 3.6
+       "target": 6.0
       },
       "resist_shred": {
+       "min": 4.0,
        "soft_cap": 11.5,
-       "target": 3.6
+       "target": 7.25
       },
       "root": {
+       "min": 7.96,
        "soft_cap": 26.16,
-       "target": 7.16
+       "target": 16.5
       },
       "silence": {
-       "soft_cap": 22.06
+       "min": 0.0,
+       "soft_cap": 22.06,
+       "target": 4.4
       },
       "slow": {
+       "min": 11.35,
        "soft_cap": 31.88,
-       "target": 10.21
+       "target": 19.27
       },
       "stun": {
+       "min": 7.11,
        "soft_cap": 38.28,
-       "target": 6.4
+       "target": 16.71
       },
       "sustained_dps": {
+       "min": 49.27,
        "soft_cap": 92.44,
-       "target": 44.34
+       "target": 68.11
       },
       "tankiness": {
+       "min": 43.97,
        "soft_cap": 73.34,
-       "target": 39.57
+       "target": 54.24
       },
       "zone_control": {
+       "min": 9.9,
        "soft_cap": 21.85,
-       "target": 8.91
+       "target": 14.0
       }
      },
      "sizes": [
@@ -162876,8 +165378,7 @@
   "convention": {
    "min_distinct": 40,
    "soft_of_p90": 1.15,
-   "target_of_p10": 0.9,
-   "zero_share_max": 0.05
+   "target_of_p50": 1.0
   },
   "excluded": [],
   "min_size": 10
