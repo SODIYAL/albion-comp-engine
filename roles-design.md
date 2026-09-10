@@ -12,7 +12,7 @@ kit doctrine, the observed-build overlay, carrier quotas, one player one
 vote, size bands). The invariants are in CLAUDE.md ("One role read",
 "Kits are what winners wear"); every round, score and board grade is in
 `tests/VALIDATION.md` (round 10, the full-board entry, R12–R28); the
-current shipped surface is HANDOFF.md "Current engine model". The
+current shipped surface is HANDOFF.md "The engine today". The
 owner's words that shaped it, kept here because this is the durable
 design record:
 

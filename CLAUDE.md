@@ -153,7 +153,7 @@ One-way, provenance-checked data flow:
    harvested winners wear (`_seat_kit` picks the band and style cell); where
    evidence runs out it proposes nothing.
 
-The full model, with each rule's owner ruling: `HANDOFF.md` "Current engine model"
+The full model, with each rule's owner ruling: `HANDOFF.md` "The engine today"
 and "Forge and loadouts"; `tests/VALIDATION.md` for the why.
 
 ## Load-bearing invariants
