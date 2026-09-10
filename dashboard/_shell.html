@@ -1063,11 +1063,18 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
 .cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
+/* four stages (owner 2026-09-10, target is the median): low = under the
+   bare minimum winners get away with (red), part = above it but under the
+   typical winner (amber), met = typical to the soft cap (green), over =
+   past the soft cap (purple). The brass tick marks typical, the thin one
+   the minimum. */
 .cap-rings .ring.met{stroke:var(--ok)}
 .cap-rings .ring.part{stroke:var(--amber)}
+.cap-rings .ring.low{stroke:var(--gap)}
 .cap-rings .ring.none{stroke:var(--gap)}
 .cap-rings .ring.over{stroke:var(--over)}
 .cap-rings .ring-tick{stroke:var(--brass-deep); stroke-width:2; stroke-linecap:round}
+.cap-rings .ring-tick.min{stroke:var(--gap); stroke-width:1; opacity:.7}
 .cap-rings .ring-over{fill:var(--over)}
 /* the legend IS the table view: every exact value stays readable with no
    hover, and each row keeps its evidence-drawer button */
@@ -1075,12 +1082,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-sw{width:8px; height:8px; border-radius:2px; display:inline-block; flex:none}
 .cap-sw.met{background:var(--ok)}
 .cap-sw.part{background:var(--amber)}
+.cap-sw.low{background:var(--gap)}
 .cap-sw.none{background:var(--gap)}
 .cap-sw.over{background:var(--over)}
 .cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
 .tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px; margin-left:5px}
 .tag.floor{background:var(--gap-wash); color:var(--gap)}
 .tag.over{background:rgba(157,92,255,.14); color:var(--over)}
+/* target provenance chip: the engine's word on where a row's "typical" came
+   from (a thin content minimum, a borrowed harvest cell) */
+.tag.src{background:transparent; color:var(--muted,#8FA7CF); border:1px dashed currentColor; opacity:.85}
 .tag.style-up{background:rgba(224,166,61,.14); color:var(--brand, #E0A63D)}
 .tag.style-down{background:rgba(122,135,165,.14); color:#8FA7CF}
 
@@ -1655,7 +1666,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     <!-- id so the grid can place it: #groups is the inner board, this
          section is the actual .main child -->
     <section id="supply-sec">
-      <div class="sec-label">Capability supply vs. target</div>
+      <div class="sec-label">Capability supply vs. typical winner</div>
       <div class="groups" id="groups"></div>
     </section>
 

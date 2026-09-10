@@ -35,6 +35,10 @@ function inPickContext(fn){
 }
 
 function syncEngine(){
+  /* the plan follows the roster (2026-09-10): the header read 7 while
+     eleven were seated - judgement was already at roster size, only the
+     stepper lagged, and only on the manual paths */
+  PLANNED = Math.max(PLANNED, party.length);
   SIZE = Math.max(party.length, 1);
   ENG.setContent(CONTENT, SIZE, STYLE);
   /* member combos re-resolve after every context change: the default
@@ -85,6 +89,11 @@ const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
+/* the bare minimum winners get away with, and where the typical number
+   came from (owner 2026-09-10, target is the median) - engine reads,
+   display only */
+const targetMin = cap => ENG.targetMin(cap);
+const targetSource = cap => ENG.targetSource(cap);
 /* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
    actually uses. Displaying raw sheet units next to effective-supply gap
    scores let a bar read "met" while the weakness list still charged a gap
@@ -428,16 +437,18 @@ function whySentence(party, cand){
   if (!party.length)
     return `Opening pick. With nothing on the board, ${nameOf(cand)} scores highest because it covers ${terms.slice(0,2).map(t => prose(t.cap)).join(" and ")} — the capabilities this template weights most heavily.`;
   const s = supply(party);
-  const strong = Object.keys(REQS()).filter(c => (s[c]||0)/target(c) >= 0.85)
-    .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
+  /* the lead gap is never "already covered" (2026-09-10): the card once
+     read "already covers sustained healing ... Hallowfall closes that" */
+  const strong = Object.keys(REQS()).filter(c => (!lead || c !== lead.cap) && (s[c]||0)/target(c) >= 0.85)
+    .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
   /* Option C: floor state reads the weapon+loadout supply, never gear */
   const sfl = supplyFloor(party);
   const floorClause = (lead && floorHit(lead.cap, sfl[lead.cap] || 0))
     ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
   /* +…toFixed(1): kit-effectiveness scaling makes supply fractional —
      without rounding this printed "at 7.730833333333333 of 7.9 units" */
-  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? +lead.before.toFixed(1) : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
+  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? +lead.before.toFixed(1) : 0} of the typical ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
 }
 
 /* ------------------------------------------------------- shareable state */
@@ -567,7 +578,7 @@ function renderSetup(){
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
+    `<div class="notice"><b>Extrapolated.</b> This content is blind-validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been blind-validated at this size yet.</div>`);
   /* honesty mirror (2026-09-02): the size input lives in the masthead now,
      so the caveat must surface THERE the moment an unvalidated size is set —
      the full prose stays in the setup panel this chip points at */
@@ -581,7 +592,7 @@ function renderSetup(){
       mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
     } else if (extra){
       mh.textContent = "extrapolated size";
-      mh.title = `validated at size ${validatedSizes().join(", ")} only — targets are scaled to ${SIZE}; Tier-2 validation must confirm it. Details in the setup panel`;
+      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet blind-validated. Details in the setup panel`;
     }
   }
 }
@@ -1377,15 +1388,29 @@ function renderGroups(){
   const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
   $("groups").innerHTML = Object.entries(groups).map(([g, caps]) => {
     const rows = caps.filter(c => REQS()[c]).map(c => {
-      const have = s[c] || 0, t = target(c), soft = softCap(c);
+      const have = s[c] || 0, t = target(c), soft = softCap(c), lo = targetMin(c);
       const below = floorHit(c, sfl[c] || 0);
       const over = have > soft;
-      const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
+      /* four stages (owner 2026-09-10, target is the median): red under
+         the bare minimum winners get away with, amber from there to the
+         typical winner, green from typical to the soft cap, purple past it */
+      const cls = over ? "over" : have < lo ? "low" : have < t ? "part" : "met";
       /* bar ruler (owner 2026-08-27, same as the radar): 100% = the
-         comp-fitted ceiling (soft cap); the brass tick marks the target
-         minimum. Beyond-ceiling stacking shows purple, never a longer bar. */
+         comp-fitted ceiling (soft cap); the brass tick marks the typical
+         winner, the thin red one the bare minimum. Beyond-ceiling stacking
+         shows purple, never a longer bar. */
       const fillPct = Math.min(100, have / Math.max(soft, .001) * 100);
       const tickPct = Math.min(100, t / Math.max(soft, .001) * 100);
+      const minPct = Math.min(100, lo / Math.max(soft, .001) * 100);
+      /* target provenance: the engine says whether this row's typical is
+         a measured harvest median or a thin content minimum - the chip is
+         its word, not ours */
+      const src = targetSource(c);
+      const srcTag = src === "content_min"
+        ? `<span class="tag src" title="no measured median for this row at this content: this is the old minimum (the least any fitted comp brought). Read it as a floor, not as what winners field.">min</span>`
+        : src === "harvest_borrowed"
+        ? `<span class="tag src" title="thin harvest cell: this typical number is borrowed from the nearest band of the same style">~</span>`
+        : "";
       /* styles multiply a capability's WEIGHT, never its target — surface
          that emphasis here so switching playstyles visibly (and truthfully)
          changes the board: ×1.6 = this style values the cap more, ×0.7 less */
@@ -1393,8 +1418,8 @@ function renderGroups(){
       const styledW = ENG.weight(c);
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
-        `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); targets never change with style — style changes what the engine emphasises, not what keeps a party alive">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
-      return {c, have, t, cls, below, over, fillPct, tickPct, styleTag};
+        `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); the typical number is measured per style at 10+, so it already reflects how this style fights — the weight says how much the engine cares">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
+      return {c, have, t, lo, cls, below, over, fillPct, tickPct, minPct, styleTag, srcTag};
     });
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
@@ -1412,9 +1437,11 @@ function renderGroups(){
          thick rings the proud length would cross the viewBox floor (the
          box clips on purpose) — clamp it, keeping 1px for the round cap */
       const tk = ringTick(cx, cy, r, x.tickPct / 100, Math.min(sw / 2 + 2, H - cy - r - 1));
+      const mk = ringTick(cx, cy, r, x.minPct / 100, Math.min(sw / 2, H - cy - r - 1));
       const d = ringPath(cx, cy, r, x.fillPct / 100);
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
-        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / ${x.t.toFixed(1)}</title></path>` : "")
+        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>` : "")
+        + (x.minPct < x.tickPct - 0.5 ? `<line class="ring-tick min" x1="${mk[0]}" y1="${mk[1]}" x2="${mk[2]}" y2="${mk[3]}"/>` : "")
         + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
         + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
     }).join("");
@@ -1422,13 +1449,13 @@ function renderGroups(){
        hovering, and each row keeps the evidence-drawer button */
     const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
         <span class="cap-sw ${x.cls}"></span>
-        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${x.c}${x.below ? '<span class="tag floor">below floor</span>' : ""}${x.over ? '<span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
-        <span class="cap-val">${x.have.toFixed(0)} / ${x.t.toFixed(1)}</span>
+        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${x.c}${x.below ? '<span class="tag floor">below floor</span>' : ""}${x.over ? '<span class="tag over">overstacked</span>' : ""}${x.styleTag}${x.srcTag}</button>
+        <span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}">${x.have.toFixed(0)} / ${x.t.toFixed(1)}</span>
       </li>`).join("");
     return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
       <h3>${g}</h3>
       <svg class="cap-rings" viewBox="0 0 ${W} ${H}" role="img"
-        aria-label="${esc(g)} capability supply against the comp-fitted ceiling; exact values are listed below">
+        aria-label="${esc(g)} capability supply against the typical winner and the comp-fitted ceiling; exact values are listed below">
         ${arcs}
       </svg>
       <ul class="cap-legend">${legend}</ul>

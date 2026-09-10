@@ -422,6 +422,33 @@ check("const REQS = () => ENG.reqs;" in APP, "L19a REQS() is ENG.reqs")
 check("tpl().requirements" not in APP, "L19b no raw template requirement read in _app.js")
 check(".requirements" not in read("_decision_layer.js"), "L19c the decision layer reads no raw template rows")
 
+print("L20 - the board shows the TYPICAL winner in four stages, and says when it cannot")
+# 2026-09-10 (target is the median): the second number on every row was the
+# least any winner fielded, labelled 'target'; every row overshot and the
+# reader concluded three healers at 15 was too many. The label now says
+# typical; the ring reads red below the bare minimum, amber up to typical,
+# green to the soft cap, purple past it (owner: "3 stages ... then purple");
+# a row whose target is not a measured median wears a chip the ENGINE
+# supplies (targetSource) - never a page-side rule.
+check("capability supply vs. typical winner" in SHELL.lower(),
+      "L20a the section label says typical winner")
+check("const targetSource = cap => ENG.targetSource(cap);" in APP
+      and "const targetMin = cap => ENG.targetMin(cap);" in APP,
+      "L20b the page reads provenance and the minimum from the engine")
+board = seg(APP, "function renderGroups", "function renderWeaknesses", "L20 board anchors")
+check("targetSource(" in board and 'class="tag src' in board,
+      "L20c the board chips content_min / borrowed rows from targetSource")
+check('have < lo ? "low"' in board and '"part"' in board and '"met"' in board,
+      "L20d the ring has the four stages: low < min <= part < typical <= met < soft cap < over")
+check("/ typical" in board, "L20e the legend value is labelled typical")
+check(".ring.low{" in SHELL and ".cap-sw.low{" in SHELL and ".tag.src{" in SHELL,
+      "L20f the low stage and the src chip are styled")
+why = seg(APP, "function whySentence", "function loadHash", "L20 why anchors")
+check("c !== lead.cap" in why, "L20g the lead gap never appears in 'already covers'")
+sync = seg(APP, "function syncEngine", "function gearsFromLoadout", "L20 sync anchors")
+check("PLANNED = Math.max(PLANNED, party.length)" in sync,
+      "L20h the SIZE stepper follows roster growth on every path")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
