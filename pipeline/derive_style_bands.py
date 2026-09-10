@@ -36,7 +36,19 @@ A capability whose p90 is zero in a cell gets NO row (the content row
 stands) — never invent a number to fill a hole. A capability whose p10 is
 zero (a tenth of winning rosters field none) has NO MINIMUM from the
 harvest: the row carries the soft cap only and the content target stands
-(the engine divides by the target, and zero is not a target).
+(the engine divides by the target, and zero is not a target). The same
+rule applies when the ZERO SHARE reaches ZERO_SHARE_MAX (owner 2026-09-09,
+"go ahead with your recommendations"): with a twentieth or more of the
+winners fielding none, p10 sits on the edge of that zero mass and flips
+between ~0 and a real minimum as a few rosters enter — brawl|20 silence
+read 7.5 / 1.0 / 4.6 across three folds while every other row in the
+cell held within 5%, and that one row flipped a V4 role slot. A
+capability a twentieth of winners skip has no harvest minimum; the
+content target stands, as for a zero p10. Measured before ruling: only
+two rows moved 2x between the 2,042- and 3,583-battle boards and both
+sat under a tenth of their median; stable rows (stun at a quarter of
+the median) keep their targets because the test is the zero share, not
+the ratio.
 
     py -3 pipeline/derive_style_bands.py
 """
@@ -56,6 +68,7 @@ MIN_DISTINCT = 40
 EXCLUDED = ()   # none since 2026-09-04 (see docstring, rule 3)
 TARGET_OF_P10 = 0.9
 SOFT_OF_P90 = 1.15
+ZERO_SHARE_MAX = 0.05   # >= this share of winners field none -> no minimum
 
 
 def main():
@@ -96,7 +109,8 @@ def main():
         "# `balanced` never reads a band. A capability absent from a cell keeps the",
         "# content row - a zero p90 is 'we do not know', never a number; a zero",
         "# p10 (no minimum from the harvest) writes the soft cap only and the",
-        "# content target stands.",
+        f"# content target stands, as does a row where {ZERO_SHARE_MAX:.0%} or more of the",
+        "# winners field none (p10 on the edge of the zero mass thrashes; 2026-09-09).",
         f"# Convention: target = {TARGET_OF_P10} x p10, soft_cap = {SOFT_OF_P90} x p90.",
         f"# Cells with fewer than {MIN_DISTINCT} distinct rosters borrow their nearest",
         "# filled cell (same style, nearest band; else the parent style) - stated per",
@@ -104,7 +118,7 @@ def main():
         f"{', '.join(EXCLUDED) if EXCLUDED else 'none (the 2026-09-04 movement exclusion was lifted the same day once measured)'}.",
         "",
         "min_size: 10",
-        f"convention: {{target_of_p10: {TARGET_OF_P10}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}}}",
+        f"convention: {{target_of_p10: {TARGET_OF_P10}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}, zero_share_max: {ZERO_SHARE_MAX}}}",
         f"excluded: [{', '.join(EXCLUDED)}]",   # empty list when nothing is excluded
         "",
         "bands:",
@@ -141,9 +155,14 @@ def main():
                 if soft <= target:
                     continue
                 p50 = s.get("p50") or 0.0
-                if target > 0:
+                zero = s.get("zero_share") or 0.0
+                if target > 0 and zero < ZERO_SHARE_MAX:
                     lines.append(f"        {cap + ':':<20}{{target: {target:>7.2f}, soft_cap: {soft:>7.2f}}}"
                                  f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}")
+                elif target > 0:
+                    lines.append(f"        {cap + ':':<20}{{soft_cap: {soft:>7.2f}}}"
+                                 f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}; {zero:.0%} of winners"
+                                 f" field none, no minimum, content target stands")
                 else:
                     lines.append(f"        {cap + ':':<20}{{soft_cap: {soft:>7.2f}}}"
                                  f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}; no minimum, content target stands")

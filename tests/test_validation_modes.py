@@ -360,6 +360,53 @@ def t_target_mults():
           not (d["styles"]["balanced"].get("target_mults") or {}))
 
 
+def t_zero_share_rows():
+    """V7 (owner 2026-09-09, "go ahead with your recommendations"): a
+    style x band row whose capability a twentieth or more of the winning
+    rosters skip carries NO harvest minimum - soft cap only, content
+    target stands - because p10 then sits on the edge of the zero mass and
+    thrashes (brawl|20 silence 7.5 / 1.0 / 4.6 across three folds, one V4
+    role slot flipping with it). Pinned on the SHIPPED file against the
+    board it was derived from: every row with a target comes from a cell
+    whose zero_share for that capability is under the max, and every
+    capability at or over it with a nonzero p10 ships soft-cap-only."""
+    import json, yaml
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import derive_style_bands as dsb
+    with open(os.path.join(ROOT, "pipeline", "templates", "style_bands.yaml"),
+              encoding="utf-8") as fh:
+        bands = yaml.safe_load(fh)
+    with open(os.path.join(ROOT, "pipeline", "out", "style_roster_evidence.json"),
+              encoding="utf-8") as fh:
+        board = json.load(fh)["board"]
+    zmax = dsb.ZERO_SHARE_MAX
+    conv = bands.get("convention") or {}
+    wrong, rows, demoted = [], 0, 0
+    for style, per_band in (bands.get("bands") or {}).items():
+        for band_key, cell in (per_band or {}).items():
+            src = cell.get("borrowed_from") or f"{style}|{band_key}"
+            supply = (board.get(src) or {}).get("supply") or {}
+            for cap, row in (cell.get("requirements") or {}).items():
+                s = supply.get(cap) or {}
+                z = s.get("zero_share")
+                p10 = s.get("p10") or 0.0
+                rows += 1
+                if z is None:
+                    wrong.append(f"{src}:{cap} board carries no zero_share")
+                elif "target" in row and z >= zmax:
+                    wrong.append(f"{src}:{cap} target with zero_share {z}")
+                elif "target" not in row and p10 > 0 and z < zmax:
+                    wrong.append(f"{src}:{cap} soft-cap-only with zero_share {z} and p10 {p10}")
+                elif "target" not in row and z >= zmax:
+                    demoted += 1
+    check("V7 zero-share rows: every target row's cell has zero_share under "
+          f"{zmax:.0%} for that capability; every capability at or over it "
+          "with a nonzero p10 ships soft-cap-only; the convention names the max",
+          rows >= 200 and not wrong and demoted >= 1
+          and abs((conv.get("zero_share_max") or 0) - zmax) < 1e-9,
+          f"rows={rows} demoted={demoted} wrong={wrong[:3]}")
+
+
 if __name__ == "__main__":
     t_dressing_switch()
     t_form_parser()
@@ -367,6 +414,7 @@ if __name__ == "__main__":
     t_gear_join()
     t_structural_floors()
     t_target_mults()
+    t_zero_share_rows()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} validation-mode tests passed")

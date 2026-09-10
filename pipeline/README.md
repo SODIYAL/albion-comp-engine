@@ -448,9 +448,14 @@ per declared playstyle x size band, target = 0.9 x p10 and soft cap =
 1.15 x p90 of the dressed capability supply winning killer parties field
 (person units). Cells with fewer than 40 distinct rosters borrow their
 nearest filled cell (`borrowed_from`); a zero p10 writes a soft-cap-only
-row (the content target stands); nothing is excluded (the movement four
+row (the content target stands), and so does a capability 5% or more of
+the cell's winners field none of (`zero_share`, owner 2026-09-09: p10 on
+the edge of the zero mass thrashes between folds — brawl|20 silence read
+7.5 / 1.0 / 4.6); nothing is excluded (the movement four
 were held back for an evening and admitted once measured — see
-tests/VALIDATION.md). `build_dataset`
+tests/VALIDATION.md). The audit reads `out/party_cache/` directly, not
+the committed rosters artifact, so its board follows the cache; the fold
+script re-derives the rosters first so both agree. `build_dataset`
 validates the file (fail closed) and ships it as `style_bands`; the engine
 reads it after the content row for a declared style at 10+. Explicit step:
 `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->

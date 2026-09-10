@@ -3137,3 +3137,40 @@ The fold report for the uncommitted tree is
 `notes/findings/2026-09-09-fold-report.md` (pooled slots 108 -> 98 at
 20, 101 -> 80 at 7; 449 of 773 rows moved, median 0.3%, p90 6.3%; one
 weapon crossed 35 voters; kite|20 still 31, brawl_clap 21 / 27 / 12).
+
+## 2026-09-09 — ruling: a zero-heavy capability has no harvest minimum (owner: "go ahead with your recommendations")
+
+Of the three candidates above the recommendation was the first, refined
+by measurement into a ZERO-SHARE rule rather than a p10/median ratio.
+Between the 2,042- and 3,583-battle boards only two rows moved 2x —
+brawl|20 silence (p10 7.54 -> 1.02, median 16.3) and kite|10-14 burst_st
+(0.1 -> 1.05, median 4.7) — and both sit under a tenth of their median,
+while stable rows sit at a quarter (clap|15-19 stun 4.0 -> 4.1 of 17.3):
+the ratio is not the mechanism. The mechanism is the mass of rosters
+fielding NONE: when it approaches a tenth, the tenth percentile sits on
+its edge and flips as a few rosters enter. So `audit_style_rosters`
+records `zero_share` per capability per cell, and `derive_style_bands`
+writes a row soft-cap-only when it reaches ZERO_SHARE_MAX = 0.05 — the
+existing zero-p10 rule extended by a twentieth of margin (about 1.7
+standard errors of a 10% share at 100 rosters). Applied on the committed
+corpus: 39 of 245 rows fall back to their content target (5-10% of
+winners field none of them — heal_burst / heal_sustain / cleanse /
+heal_reduction / stun / silence / anti_dive / root / burst_st /
+max_health_cut / interrupt / purge / clump_create / damage_debuff), the
+content silence target at blackzone_roam (7.1) standing in for the
+brawl|20 row that thrashed. Every other row is byte-identical. V7 pins
+the rule on the shipped file against the board it was derived from.
+Noted in passing: the audit reads `out/party_cache/` directly, so its
+board follows the cache rather than the committed rosters artifact; the
+fold script re-derives the rosters first so the two agree.
+
+With the rule in place the fold script's second full run on the
+4,283-battle cache was green end to end (26 minutes): V4 actual_gear
+back at 17/23 (the Dreadstorm Monarch slot's third pick is a tank again
+with the content silence target standing), V7 pass, every other gate as
+before. Folded: 3,583 -> 4,283 battles, 88,016 -> 96,483 builds, 4,214
+parties of 10+ (3,611 labelled); pooled slots 108 -> 98 at 20 and
+101 -> 80 at 7; 435 of 736 band rows moved, median 0.4%, p90 6.3%;
+Bloodletter (2H_COMBATSTAFF_MORGANA) crossed 35 group voters; kite|20
+holds at 31 rosters, brawl_clap at 21 / 27 / 12. Report:
+`notes/findings/2026-09-09-fold-report.md`.

@@ -97,9 +97,16 @@ def pct(xs, q):
 
 
 def stats(xs):
+    # zero_share (2026-09-09): the share of rosters fielding NONE of the
+    # capability. When it approaches a tenth, p10 sits on the edge of the
+    # zero mass and flips between ~0 and a real value as a few rosters
+    # enter (brawl|20 silence read 7.5 / 1.0 / 4.6 across three folds);
+    # derive_style_bands writes such a row soft-cap-only.
     return {"n": len(xs), "p10": pct(xs, 0.1), "p50": pct(xs, 0.5),
             "p90": pct(xs, 0.9),
-            "mean": round(sum(xs) / len(xs), 2) if xs else None}
+            "mean": round(sum(xs) / len(xs), 2) if xs else None,
+            "zero_share": (round(sum(1 for x in xs if x <= 0) / len(xs), 3)
+                           if xs else None)}
 
 
 def load_rosters(known, min_size, min_known):
