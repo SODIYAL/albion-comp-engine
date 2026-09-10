@@ -146,7 +146,7 @@ There are several different things worth validating, and they should not be conf
 
 A green unit test suite proves implementation behaviour, not that every recommendation is strategically correct. Expert blind testing and real-comp evidence are the important external checks.
 
-See `tests/VALIDATION.md` for the validation history and gates.
+See `tests/VALIDATION.md` for the standing rules and the rulings index, and `notes/validation/` for the full dated history.
 
 ## Rebuilding the project
 
@@ -200,7 +200,7 @@ tests/
   test_forge.py                forge/constraint contracts
   test_js_parity.py            Python ↔ browser scoring parity
   test_roles.py                role-book and kit-doctrine contracts
-  VALIDATION.md                the append-only ruling log and validation record
+  VALIDATION.md                the ruling index (standing rules, rulings, pins); full log in notes/validation/
 
 dashboard/                     THE FRONTEND — display only, never computes a score
   build.py                     bundles dataset + engine + sources into the pages
