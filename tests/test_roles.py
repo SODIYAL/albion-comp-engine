@@ -1300,6 +1300,62 @@ def t_chain_step_voters():
           and list(sel_ok) == ["armor", "head"] and sel_ok["head"][0] == "HELM_A",
           f"thin={sel_thin} ok={sel_ok}")
 
+def t_chain_skips_thin_slot():
+    # R36 (2026-09-10): a failed PICK skips its own slot; only a failed POOL
+    # ends the chain. Five guards used to `break` alike, so one diffuse slot
+    # killed every slot after it — and the fixed slot order puts the most
+    # concentrated slots (potion, food) last. Measured on the 4,283-battle
+    # harvest: 19 of 137 group-band weapons shipped NO chain at all because
+    # their chest was diffuse (Cursed Staff Crystal, 258 votes; Holy Staff
+    # Undead, 256 votes, one slot). A skipped slot does not narrow the pool,
+    # so every slot that IS selected stays a combination real players wore
+    # together — the skipped slot says nothing rather than ending the chain.
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "bd", os.path.join(ROOT, "pipeline", "build_dataset.py"))
+    bd = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(bd)
+    gear = {g: {"gear_class": "plate"} for g in (
+        "CHEST_A", "CHEST_B", "SHOES_A", "SHOES_B", "SHOES_Z", "FOOD_A",
+        "HELM_A", "HELM_B", "HELM_Z", "CAPE_B", "CAPE_Z")}
+    for extra in "PQRSTUV":
+        gear[f"HELM_{extra}"] = {"gear_class": "plate"}
+    ident = lambda v: v if v in gear else None  # noqa: E731
+    # A: a DIFFUSE head between a unanimous chest and unanimous shoes —
+    # 40 players in one chest, their helmets spread 5 apiece over eight
+    # models (modal share 12.5%, under the 25% floor, so the `share` guard
+    # fails), every one of them in the same boots. The head is unknown; the
+    # boots are not, and the chain must still reach them.
+    pop_a = [({"Armor": "CHEST_A", "Head": f"HELM_{'PQRSTUV'[i % 7]}"
+               if i % 8 else "HELM_A", "Shoes": "SHOES_A"}, 1.0, f"a{i}")
+             for i in range(40)]
+    sel_a = bd._modal_build_chain(pop_a, {"plate"}, {}, gear, ident)
+    # B: the R29 Greataxe pocket, plus a food every one of the 74 wears.
+    # The chain narrows to 13 of 74 by the cape step — that is a POOL
+    # verdict, not a pick verdict, and it must still END the chain: the
+    # unanimous food is NOT reachable past a collapsed pocket.
+    pop_b = []
+    for i in range(30):
+        pop_b.append(({"Armor": "CHEST_A", "Head": "HELM_Z",
+                       "Shoes": "SHOES_A", "Cape": "CAPE_Z",
+                       "Food": "FOOD_A"}, 1.0, f"b{i}"))
+    for i in range(44):
+        pop_b.append(({"Armor": "CHEST_B",
+                       "Head": "HELM_B" if i < 24 else "HELM_Z",
+                       "Shoes": "SHOES_B" if i < 13 else "SHOES_Z",
+                       "Cape": "CAPE_B" if i < 7 else "CAPE_Z",
+                       "Food": "FOOD_A"}, 1.0, f"c{i}"))
+    sel_b = bd._modal_build_chain(pop_b, {"plate"}, {}, gear, ident)
+    check("R36 chain skip: a diffuse slot is skipped and the chain reaches "
+          "the slots past it; a collapsed pocket still ends the chain",
+          list(sel_a) == ["armor", "shoes"]
+          and sel_a["shoes"][0] == "SHOES_A"
+          and sel_a["shoes"][2] == 40      # the skipped head never narrowed
+          and list(sel_b) == ["armor", "head", "shoes"]
+          and "food" not in sel_b,
+          f"a={sel_a} b={sel_b}")
+
+
 def t_party_link():
     # R31 (2026-09-08, spec section 2 "Linkage"): a build links to its party
     # exactly through the analyzer's `party` index, and — for artifacts
@@ -1624,6 +1680,7 @@ if __name__ == "__main__":
     t_doctrine_bands()
     t_chain_guard()
     t_chain_step_voters()
+    t_chain_skips_thin_slot()
     t_party_link()
     t_party_styles()
     t_style_cells()

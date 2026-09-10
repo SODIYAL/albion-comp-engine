@@ -1225,13 +1225,28 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     (2026-09-03 kit audit: excluding them chained Oathkeepers into a
     14-build pocket and fronted Hunter Hood over an Assassin Hood worn
     by 131 of 149 — the comp-level quota now lives in the FORGE, see
-    Engine._allocate_carriers, not in the evidence). A slot pick needs
-    >= 2 observations at its step, and the chain STOPS once the
-    conditional pool falls under CHAIN_MIN_POOL builds or the pick holds
-    less than CHAIN_MIN_SHARE of it — later slots fall back to plain
-    ranking rather than a rare build's tail. Builds missing a slot stay
-    in the pool (partial kits are common). Returns {slot: [id, n, of]}
-    where n/of = observations at that step / pool size at that step.
+    Engine._allocate_carriers, not in the evidence). Builds missing a
+    slot stay in the pool (partial kits are common). Returns
+    {slot: [id, n, of]} where n/of = observations at that step / pool
+    size at that step.
+
+    POOL VERDICTS END THE CHAIN, PICK VERDICTS SKIP THEIR SLOT
+    (2026-09-10, R36). The chain STOPS once the conditional pool falls
+    under CHAIN_MIN_POOL votes or the pocket holds too rare a slice of
+    the population — past either, no further conditional pick is
+    trustworthy. But a slot whose own modal fails (too few distinct
+    wearers, under CHAIN_MIN_SHARE of the pocket, or under half the
+    population modal's share) is SKIPPED and the chain carries on: a
+    skipped slot does NOT narrow the pool, so the slots after it stay a
+    combination real players wore together, and the skipped one falls
+    back to plain ranking. All five guards used to break alike, which let
+    one diffuse slot kill every slot after it — and the fixed slot order
+    puts the most concentrated slots, potion and food, last. Measured on
+    the 4,283-battle harvest: group-band weapons shipping NO chain
+    19 -> 4 of 137 (Cursed Staff Crystal has 258 votes and shipped
+    nothing, because its chest is diffuse), chains reaching 4+ slots
+    47 -> 57, mean depth 2.96 -> 3.51. A chain may now have GAPS; both
+    ports already read it per slot, never as a prefix.
 
     THE 2026-09-08 RESCALE (spec notes/specs/2026-09-08-coherent-style-
     kits-design.md): the "rare pocket" guard used to compare a conditional
@@ -1306,7 +1321,17 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
         if (len(players[gid]) < CHAIN_STEP_MIN_VOTERS
                 or n < CHAIN_MIN_SHARE * pool_w
                 or n / pool_w < 0.5 * uncond_share.get(slot, 0.0)):
-            break
+            # A failed PICK skips ITS OWN SLOT (2026-09-10, R36) — only a
+            # failed POOL ends the chain. All five guards used to break
+            # alike, so one diffuse slot killed every slot after it, and
+            # the fixed order puts the most concentrated slots (potion,
+            # food) last: 19 of 137 group-band weapons shipped no chain at
+            # all because their chest was diffuse (Cursed Staff Crystal,
+            # 258 votes). The skipped slot does NOT narrow the pool, so
+            # every slot still selected remains a combination real players
+            # wore together; the skipped one says nothing, which is the
+            # honest read, rather than ending the chain.
+            continue
         sel[slot] = [gid, int(round(n)), int(round(pool_w))]
         pool = [(b, wgt, pl) for b, wgt, pl in pool
                 if b.get(slot) in (gid, None)]
