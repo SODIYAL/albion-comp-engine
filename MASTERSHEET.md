@@ -91,10 +91,20 @@ AoE Escalation tables owner-verified 2026-08-25; `aoe_geometry` with
 
 ## Per-content demand — `tune:templates`
 
-Empty. Fields per capability: `target`, `weight`, `soft_cap`, `scales`.
+Empty. Fields per capability: `min`, `target`, `weight`, `soft_cap`, `scales`.
 Contents: `blackzone_roam`, `castle`, `castle_outpost`, `faction_war`,
 `roads`, `territory_defense`. Style x size rows are GENERATED
 (`templates/style_bands.yaml`) and are not overridden here.
+
+**Targets are the TYPICAL winner (harvest median, p50) since 2026-09-10**
+("the data should come from the harvest median"): style x size rows for
+every style at 10+ (`balanced` once the harvest checkout regenerates the
+pooled cell), content rows below that — re-fit to the median of their comps
+where three or more exist (`pipeline/refit_content_targets.py`; each
+template's `fit:` block says which). `min` is the least winners get away
+with (p10), `soft_cap` 1.15 x p90. A `target` set here overrides that
+number for one content and is read as a median; a `min` set here moves the
+board's red/orange line only (nothing scores it).
 
 ```yaml tune:templates
 # castle:

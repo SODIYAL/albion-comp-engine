@@ -12,6 +12,15 @@ them. Closed rulings are index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
+- **Is one unit of shred "pierce on the clump" in a 7-man?** The kill
+  lights bar on the bare minimum since 2026-09-10 ("enough to kill" is a
+  minimum question), and castle_outpost's refreshed three-comp fit says the
+  least winning 7-man brought exactly one unit of resist_shred — so the
+  owner's burst trio (Longbow / Witchwork / Permafrost, one unit) now reads
+  pierce GREEN where the 2026-08-23 pin said red. Thin evidence, not a
+  semantic call: rule it (a fourth castle-outpost comp would settle it), or
+  raise the content `min` for resist_shred by hand. (V: 09b, Target is the
+  median; T25b)
 - **Repo size: `pipeline/out/party_rosters.json` is 52 MB and committed**,
   growing with every fold (it was 83 KB on 2026-08-29, 4.4 MB the same day
   once builds joined). The split proposed then: commit the aggregates,

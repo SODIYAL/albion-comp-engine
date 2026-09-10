@@ -68,6 +68,13 @@ index rows where the owner's words are.
     never examined while tuning, scored once when a round is declared finished,
     then retired. Until validation and holdout sets exist, any parameter sweep
     is a sensitivity map — no coefficient moves on train evidence alone.
+17. **Target is the median** (2026-09-10): a target is what the TYPICAL
+    winner fields (harvest p50; the median of the fitted comps below 10),
+    never the least any winner got away with. `min` (p10 / least comp) is
+    the board's red/orange line and the kill-checklist bar; `soft_cap` is
+    1.15 x p90. Descriptive lenses grade against the two lines (weak <
+    min <= ok < typical <= strong); nothing scores `min`. A re-fit moves
+    every row at once and never tightens a soft cap on a handful of comps.
 
 ## The method — how a round runs
 
@@ -209,6 +216,7 @@ column is the archive file and the section title to search for.
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
 | 09-10 | "no one uses the cleric cowl for its knockback ability regardless of content" — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
 | 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
+| 09-10 | "the data should come from the harvest median" / four stages "red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much" — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest checkout; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
 
 ## Open questions
 

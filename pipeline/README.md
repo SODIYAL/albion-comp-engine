@@ -385,9 +385,17 @@ accumulated windows: the cache spans balance patches; slice by
   `castle` 25, `faction_war` 15, `castle_outpost` 7, `roads` 7) plus the playstyle
   overlays in `templates/styles.yaml` and the GENERATED style × size rows
   in `templates/style_bands.yaml`. The content rows were comp-fitted
-  2026-08-21 and re-fitted to person units 2026-08-29 (all rows together);
-  castle and faction_war still rest on no comps in the corpus. Sizes off
-  the validated list are linear extrapolation and labelled as such in the UI.
+  2026-08-21, re-fitted to person units 2026-08-29 and to the MEDIAN of
+  their comps 2026-09-10 (`refit_content_targets.py`, all rows together:
+  `min` = least comp, `target` = median, `soft_cap` raised to 1.15 x most
+  where a comp exceeded it, never lowered; each template's `fit:` block
+  states comps and stat); territory_defense (2 comps) and roads (1) stay
+  on the old minimum and say so; castle and faction_war rest on no comps.
+  Since 2026-09-10 every target — band row or content row — is the TYPICAL
+  winner, not the least any winner fielded (owner: "the data should come
+  from the harvest median"); the band rows carry `min` (p10) beside it.
+  Sizes off the validated list are linear extrapolation and labelled as
+  such in the UI.
 - ~~Default-kit harvester not built~~ — the MetaBattle adapter (46 pages,
   all group-PvP categories) + the caller comps now feed the mined
   kit-doctrine pools (`roles_report` `kit_doctrine`, per seat AND per

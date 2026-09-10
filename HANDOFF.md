@@ -47,7 +47,23 @@ Three layers, never merged:
   brawl_clap / clap_kite) carrying weight multipliers, `target_mults`,
   constraint overrides and a fight chain; GENERATED style x size rows beside
   the content rows (`templates/style_bands.yaml`, from harvested winners,
-  read for a declared style at 10+).
+  read at 10+; `balanced` reads a pooled cell once the harvest checkout
+  regenerates the board — BACKLOG).
+- **Target is the median (owner 2026-09-10).** Every row carries three
+  measured lines: `min` = the least winners get away with (harvest p10 /
+  least fitted comp), `target` = the TYPICAL winner (p50 / median of the
+  fitted comps) — the point of full credit and the board's second number
+  — and `soft_cap` = 1.15 x p90. Until then the target was 0.9 x p10 and
+  the score gave full credit at the floor (one healer "covered" fifteen).
+  The curve did not change; the number it aims at did, on every row at
+  once. `target_min(cap)` / `target_source(cap)` (harvest / harvest_borrowed
+  / content / content_min, from each template's `fit:` block) are display
+  provenance, parity-carried, never scored. Kill-pressure lights bar on the
+  minimum ("enough to kill"); fight-chain stages grade weak < min <= ok <
+  typical <= strong; the redundancy lens reads "under one weighted unit".
+  Content rows: `pipeline/refit_content_targets.py` (median of the dressed
+  audit's comps; blackzone_roam 18, castle_outpost 3; territory_defense 2 /
+  roads 1 / castle 0 / faction_war 0 stay on the old minimum and say so).
 - Fitness: coverage with diminishing returns, hard floors on the
   weapon+loadout basis, headroom, overstack, Focus Fire / Resilience and AoE
   escalation, per-weapon Resilience Penetration as a rebate, optional rows,
@@ -158,8 +174,13 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   bar: fitness, identity verdict, style / size / content, forge actions.
 - **Comp status is THE RADAR**: one axis per capability group against the
   comp-fitted CEILING (100% = soft cap, nothing above 100; a brass tick marks
-  the target; purple = over-ceiling stacking; pink = under a hard floor);
-  `comp_identity` in the hub; all prose in hovers.
+  the typical winner; purple = over-ceiling stacking; pink = under a hard
+  floor); `comp_identity` in the hub; all prose in hovers.
+- **Capability board = four stages** (owner 2026-09-10): red below the bare
+  minimum winners get away with, orange from there to the typical winner,
+  green from typical to the soft cap, purple past it. The legend reads
+  `have / typical`; a `min` chip (from `targetSource`) marks a content row
+  still on the old minimum fit, `~` a borrowed harvest cell.
 - **Biggest need** (floor failures first) -> **best next pick** with its
   engine-derived explanation, **what it fixes**, **still weak after** (one
   ahead, on the candidate's scored combo), and the **fight chain** strip.
