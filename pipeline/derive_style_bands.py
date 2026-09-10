@@ -6,10 +6,20 @@ brawls and winning claps at 20 field measurably different things. This
 step turns the evidence board (`audit_style_rosters.py` ->
 `out/style_roster_evidence.json`) into `templates/style_bands.yaml`: per
 playstyle x size band, a target and soft cap per capability under the
-standing convention (target 0.9 x p10, soft cap 1.15 x p90 of the dressed
-supply winning rosters field, person units), read by the engine AFTER the
-content row for declared styles at 10+ (hard floors stay content facts in
-weapon units; `balanced` never reads a band).
+standing convention (target = p50, the TYPICAL winner; soft cap 1.15 x
+p90 of the dressed supply winning rosters field, person units), read by
+the engine AFTER the content row at 10+ (hard floors stay content facts
+in weapon units).
+
+TARGET IS THE MEDIAN (owner ruling 2026-09-10, "the data should come from
+the harvest median"): until then the target was 0.9 x p10 — the LEAST any
+winner fielded — and the score gave full credit there, so every row on
+the board overshot ("if someone sees heal burst at 12/4 they will think
+they have too many healers, but 3 healers in a party of 15 is totally
+normal and standard to try to reach") and one healer "covered" fifteen
+people in the forge's eyes. The median is what winners cluster around —
+the number to aim for. The score curve is unchanged; only the number it
+aims at moved, on every row at once.
 
 Four owner-ruled rules:
   1. a layer BESIDE the content templates, never a replacement;
@@ -33,22 +43,18 @@ Four owner-ruled rules:
 Explicit step, never part of a normal build (like the samplers): rerun it
 after a harvest + audit refresh, then rebuild the dataset and run the gates.
 A capability whose p90 is zero in a cell gets NO row (the content row
-stands) — never invent a number to fill a hole. A capability whose p10 is
-zero (a tenth of winning rosters field none) has NO MINIMUM from the
-harvest: the row carries the soft cap only and the content target stands
-(the engine divides by the target, and zero is not a target). The same
-rule applies when the ZERO SHARE reaches ZERO_SHARE_MAX (owner 2026-09-09,
-"go ahead with your recommendations"): with a twentieth or more of the
-winners fielding none, p10 sits on the edge of that zero mass and flips
-between ~0 and a real minimum as a few rosters enter — brawl|20 silence
-read 7.5 / 1.0 / 4.6 across three folds while every other row in the
-cell held within 5%, and that one row flipped a V4 role slot. A
-capability a twentieth of winners skip has no harvest minimum; the
-content target stands, as for a zero p10. Measured before ruling: only
-two rows moved 2x between the 2,042- and 3,583-battle boards and both
-sat under a tenth of their median; stable rows (stun at a quarter of
-the median) keep their targets because the test is the zero share, not
-the ratio.
+stands) — never invent a number to fill a hole. A capability whose p50 is
+zero (most winners field none) carries the soft cap only and the content
+target stands (the engine divides by the target, and zero is not a
+target). The 2026-09-09 zero-share rule is retired with the p10
+convention it protected: p10 sat on the edge of the zero mass and
+thrashed between folds; the median does not (kite|10-14 heal_burst: 10%
+zeros, p50 5.8, stable across folds).
+
+`balanced` reads a POOLED cell — every winning roster at the size, any
+style — written by audit_style_rosters.py (2026-09-10). Before the audit
+runs on the harvest checkout the cell is absent and balanced keeps the
+content row; this script emits whatever cells the board carries.
 
     py -3 pipeline/derive_style_bands.py
 """
@@ -61,21 +67,19 @@ OUT = os.path.join(HERE, "out")
 EVIDENCE = os.path.join(OUT, "style_roster_evidence.json")
 TARGET = os.path.join(HERE, "templates", "style_bands.yaml")
 
-STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
+STYLES = ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite")
 BANDS = (("10-14", 10, 14, 12), ("15-19", 15, 19, 17), ("20", 20, 99, 20))
 PARENT = {"brawl_clap": "brawl", "clap_kite": "clap"}
 MIN_DISTINCT = 40
 EXCLUDED = ()   # none since 2026-09-04 (see docstring, rule 3)
-TARGET_OF_P10 = 0.9
+TARGET_OF_P50 = 1.0     # target IS the median (owner 2026-09-10)
 SOFT_OF_P90 = 1.15
-ZERO_SHARE_MAX = 0.05   # >= this share of winners field none -> no minimum
 
 
-def main():
-    if not os.path.exists(EVIDENCE):
-        sys.exit("no evidence board - run audit_style_rosters.py first")
-    with open(EVIDENCE, encoding="utf-8") as f:
-        ev = json.load(f)
+def derive(ev):
+    """The YAML lines for an evidence board (`ev["board"]`). Pure: reads
+    the board, returns lines; main() does the file I/O so the convention
+    can be pinned on a fixture (tests/test_style_bands_derive.py)."""
     board = ev["board"]
     filled = {k for k, e in board.items() if e["distinct"] >= MIN_DISTINCT}
 
@@ -101,30 +105,38 @@ def main():
         "# rerun the audit, then this script. Owner ruling 2026-09-04 (four parts, see",
         "# the script docstring and tests/VALIDATION.md 'Style x band rows').",
         "#",
-        "# Read by the engine AFTER the content row, for a DECLARED style at 10+:",
-        "# target/soft_cap replace the content template's for the capabilities",
-        "# listed, scaled linearly from ref_size (person units, like the content",
-        "# rows since the 2026-08-29 unit re-fit). Hard floors are untouched",
-        "# (weapon units, content facts); weights are untouched (styles.yaml);",
-        "# `balanced` never reads a band. A capability absent from a cell keeps the",
-        "# content row - a zero p90 is 'we do not know', never a number; a zero",
-        "# p10 (no minimum from the harvest) writes the soft cap only and the",
-        f"# content target stands, as does a row where {ZERO_SHARE_MAX:.0%} or more of the",
-        "# winners field none (p10 on the edge of the zero mass thrashes; 2026-09-09).",
-        f"# Convention: target = {TARGET_OF_P10} x p10, soft_cap = {SOFT_OF_P90} x p90.",
+        "# Read by the engine AFTER the content row, at 10+: target/soft_cap replace",
+        "# the content template's for the capabilities listed, scaled linearly from",
+        "# ref_size (person units, like the content rows since the 2026-08-29 unit",
+        "# re-fit). Hard floors are untouched (weapon units, content facts); weights",
+        "# are untouched (styles.yaml). `balanced` reads the POOLED cell (every winner",
+        "# at the size, any style) when the audit has written one. A capability absent",
+        "# from a cell keeps the content row - a zero p90 is 'we do not know', never a",
+        "# number; a zero p50 (most winners field none) writes the soft cap only and",
+        "# the content target stands.",
+        "# Convention (owner 2026-09-10, 'the data should come from the harvest",
+        f"# median'): target = {TARGET_OF_P50} x p50 - the TYPICAL winner, the number to",
+        f"# aim for - and soft_cap = {SOFT_OF_P90} x p90; `min` = p10, the bare minimum",
+        "# winners get away with (the board's red/orange line, never scored). Until",
+        "# 2026-09-10 the target was",
+        "# 0.9 x p10, the LEAST any winner fielded: every row overshot and the score",
+        "# gave full credit at the floor (one healer 'covered' 15 people).",
         f"# Cells with fewer than {MIN_DISTINCT} distinct rosters borrow their nearest",
         "# filled cell (same style, nearest band; else the parent style) - stated per",
         f"# cell as `borrowed_from`. Excluded capabilities: "
         f"{', '.join(EXCLUDED) if EXCLUDED else 'none (the 2026-09-04 movement exclusion was lifted the same day once measured)'}.",
         "",
         "min_size: 10",
-        f"convention: {{target_of_p10: {TARGET_OF_P10}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}, zero_share_max: {ZERO_SHARE_MAX}}}",
+        f"convention: {{target_of_p50: {TARGET_OF_P50}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}}}",
         f"excluded: [{', '.join(EXCLUDED)}]",   # empty list when nothing is excluded
         "",
         "bands:",
     ]
-    summary = []
     for style in STYLES:
+        # a style with no cell at all (balanced before the pooled audit
+        # runs) is omitted entirely: the engine then reads the content row
+        if not any(f"{style}|{b[0]}" in board for b in BANDS):
+            continue
         lines.append(f"  {style}:")
         for band_key, lo, hi, ref in BANDS:
             key = f"{style}|{band_key}"
@@ -142,38 +154,48 @@ def main():
                 own = board.get(key, {}).get("distinct", 0)
                 lines.append(f"      borrowed_from: \"{src}\"   # own cell: {own} distinct rosters")
             lines.append("      requirements:")
-            rows = 0
             for cap in sorted(e["supply"]):
                 if cap in EXCLUDED:
                     continue
                 s = e["supply"][cap]
-                p10, p90 = s.get("p10") or 0.0, s.get("p90") or 0.0
+                p10, p50, p90 = (s.get("p10") or 0.0, s.get("p50") or 0.0,
+                                 s.get("p90") or 0.0)
                 if p90 <= 0:
                     continue
-                target = round(TARGET_OF_P10 * p10, 2)
+                target = round(TARGET_OF_P50 * p50, 2)
                 soft = round(SOFT_OF_P90 * p90, 2)
                 if soft <= target:
                     continue
-                p50 = s.get("p50") or 0.0
-                zero = s.get("zero_share") or 0.0
-                if target > 0 and zero < ZERO_SHARE_MAX:
-                    lines.append(f"        {cap + ':':<20}{{target: {target:>7.2f}, soft_cap: {soft:>7.2f}}}"
+                if target > 0:
+                    # `min` = p10, the bare minimum winners get away with:
+                    # the board's red/orange boundary (owner 2026-09-10,
+                    # "red below the bare minimum for winning, orange above
+                    # it but not yet ideal, green at ideal, purple too
+                    # much"). Display provenance only; nothing scores it.
+                    lo_min = round(p10, 2)
+                    lines.append(f"        {cap + ':':<20}{{min: {lo_min:>7.2f}, target: {target:>7.2f}, soft_cap: {soft:>7.2f}}}"
                                  f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}")
-                elif target > 0:
-                    lines.append(f"        {cap + ':':<20}{{soft_cap: {soft:>7.2f}}}"
-                                 f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}; {zero:.0%} of winners"
-                                 f" field none, no minimum, content target stands")
                 else:
                     lines.append(f"        {cap + ':':<20}{{soft_cap: {soft:>7.2f}}}"
-                                 f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}; no minimum, content target stands")
-                rows += 1
-            summary.append((key, src, e["distinct"], rows))
+                                 f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f};"
+                                 f" most winners field none, content target stands")
+    return lines
+
+
+def main():
+    if not os.path.exists(EVIDENCE):
+        sys.exit("no evidence board - run audit_style_rosters.py first")
+    with open(EVIDENCE, encoding="utf-8") as f:
+        ev = json.load(f)
+    lines = derive(ev)
     with open(TARGET, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")
     print(f"wrote {os.path.relpath(TARGET, HERE)}")
-    for key, src, n, rows in summary:
-        tag = "" if key == src else f"  (borrowed from {src})"
-        print(f"  {key:<18} n={n:<4} rows={rows}{tag}")
+    for ln in lines:
+        if ln.startswith("  ") and not ln.startswith("    ") and ln.endswith(":"):
+            print(ln.strip())
+        elif ln.startswith("    \"") or ln.startswith("      borrowed_from"):
+            print("  " + ln.strip())
 
 
 if __name__ == "__main__":
