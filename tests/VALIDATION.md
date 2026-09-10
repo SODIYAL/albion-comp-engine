@@ -3174,3 +3174,66 @@ parties of 10+ (3,611 labelled); pooled slots 108 -> 98 at 20 and
 Bloodletter (2H_COMBATSTAFF_MORGANA) crossed 35 group voters; kite|20
 holds at 31 rosters, brawl_clap at 21 / 27 / 12. Report:
 `notes/findings/2026-09-09-fold-report.md`.
+
+## 2026-09-10 — the sweep: what two weeks of changes broke without a gate noticing (owner: "find all other issues ... and fix them")
+
+Trigger: the capability board died on the first paint at Castle Fight
+(`styledW is undefined`) — the page's `REQS()` read the raw content
+template while the engine drops the anti_zone ramp row at 14 and below
+(ruling 2026-09-08), so an empty party at castle / blackzone_roam /
+territory_defense / faction_war asked for a weight that did not exist and
+the page stayed half-drawn. Castle Outpost has no ramp row, so two days
+passed. Fixed: `REQS()` is `ENG.reqs` (L19 pins that no display code
+reads raw template rows).
+
+The sweep, three instruments, findings only then fixes:
+
+1. **The real page in headless Chromium** (`page_sweep.js`, the installed
+   Chrome behind npx Playwright): 258 states through the share-link hash
+   — every content x every style x sizes 7 / 12 / 14 / 15 / 20 / 25 / 30
+   with parties of 0-20, plus the empty first paint at every content —
+   then the panel tabs, Add to comp, style and size controls. Zero page
+   errors, zero console errors after the REQS fix.
+2. **Both engines brute-forced** (`sweep_py.py`, `sweep_js.js`): every
+   content x style x 20 sizes from 1 to 40 through set_content (every
+   judged row must carry finite target / soft cap / weight, soft >= target,
+   target nonzero), fitness, comp_score, analyze, weaknesses,
+   duplicate_conflicts, comp_identity, kill_pressure, fight_chain,
+   role_advisory, recommend, kit_options / kit_variants / explain /
+   pick_report on ten weapons at 7 and 20, and forge at 5 / 10 / 15 / 20 /
+   25. Python: zero findings. Browser port: four, all the same defect —
+3. **The forge forged NOTHING at exactly 15 for clap and clap_kite** on
+   blackzone_roam, castle and territory_defense (both ports agreed; 14
+   and 16 fit; no gate covered 15). Root cause: `_forge_min_need` summed
+   every unmet minimum as a separate body — its own docstring called the
+   over-count "slight" — and the constraints added since (need profiles
+   armed at 15, healers per five, the 15-19 ranged core) made it read 19
+   bodies for a roster twelve satisfy: frontline 3 with engage 2 +
+   stopper 1 inside it, healer 3 with 2 primary healers inside, ranged
+   core 5, a shield support, pierce and heal-cut. The bound is ADMISSIBLE
+   now, in both ports: per role band the largest of the unmet band
+   minimum, the unmet SEAT minima nested in it (one primary seat per
+   body) and any single-role non-seat predicate; a cross-role predicate
+   adds only what those counted bodies cannot carry; a predicate nothing
+   in the pool satisfies keeps its full count. F28 forges every style at
+   every band edge. The admissible bound then exposed a second latent
+   defect: the forge's internal expansion sort ordered RAW floats while
+   every ranked list a caller sees had been quantized on 2026-09-08, so
+   two partial rosters a last bit apart ordered differently in the two
+   ports once both survived (parity case 30 swapped two members). The
+   expansion sort quantizes too, in both ports. Gates after: forge 40/40,
+   golden 72/72, roles 39/39, validation modes 26/26, V4 17/23, parity
+   60/60 with the embed check clean.
+
+Also found on the way, in the companion, not the engine: after the
+September patch the shape fingerprint "a number at 0, no name at 1, any
+10-array and any 14-array" also matched event code 11 (the batched
+entity-update event), and the never-live-verified inspect response
+handed over ten near-identical values; the page correctly refused every
+resulting "weapon" (boots, a helmet, entity ids), so the party tab never
+filled from the live feed. `PartyState.PlausibleEquipment` now rejects a
+decoded array unless each resolved slot holds an item of that slot's
+kind and the main hand or chest resolves; a rejected event does not bind
+its code. Debug build clean; the Release binary the running companion
+uses is rebuilt at its next restart. The inspect key still needs one
+`--debug` capture during an in-game inspect.

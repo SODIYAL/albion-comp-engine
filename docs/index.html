@@ -5489,8 +5489,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
       predGates[pn2] = gates;
     }
+    /* the ROLES a predicate's satisfiers span (2026-09-10; mirrors
+       engine.py): the admissible minimum-need bound nests a single-role
+       predicate in its role family */
+    var predRoles = {};
+    for (var pr in predGates) {
+      var rset = {}, rn = 0;
+      for (var gi2 = 0; gi2 < predGates[pr].length; gi2++) {
+        if (!rset[predGates[pr][gi2][0]]) { rset[predGates[pr][gi2][0]] = true; rn++; }
+      }
+      predRoles[pr] = { roles: rset, n: rn };
+    }
     return { pool: pool, roleMin: roleMin, roleMax: roleMax,
-             predMin: predMin, seatMax: seatMax, predGates: predGates };
+             predMin: predMin, seatMax: seatMax, predGates: predGates,
+             predRoles: predRoles };
   };
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
@@ -5514,17 +5526,44 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   CompEngine.prototype._forgeMinNeed = function (ctx, roles, preds, w, predContrib) {
-    /* Slots still required for unmet minima after adding `w` (mirrors
-       engine.py _forge_min_need). */
-    var need = 0;
+    /* Bodies still required for unmet minima after adding `w` - the
+       ADMISSIBLE bound (2026-09-10; mirrors engine.py _forge_min_need):
+       per role band the largest of the unmet band minimum, the unmet
+       SEAT minima nested in it and any single-role non-seat predicate;
+       a cross-role predicate adds only what those counted bodies cannot
+       carry; a predicate nothing in the pool satisfies keeps its count.
+       The old plain sum read 19 at the clap 15-19 band for a roster
+       twelve bodies satisfy, and forged nothing at exactly 15. */
     var r = this.roleOf(w);
+    var needByRole = {}, seatSum = {}, otherMax = {}, cross = [];
     for (var r2 in ctx.roleMin) {
       var have = (roles[r2] || 0) + (r2 === r ? 1 : 0);
-      if (ctx.roleMin[r2] > have) need += ctx.roleMin[r2] - have;
+      if (ctx.roleMin[r2] > have) needByRole[r2] = ctx.roleMin[r2] - have;
     }
     for (var pn in ctx.predMin) {
       var haveP = (preds[pn] || 0) + (predContrib[pn] ? 1 : 0);
-      if (ctx.predMin[pn] > haveP) need += ctx.predMin[pn] - haveP;
+      var unmet = ctx.predMin[pn] - haveP;
+      if (unmet <= 0) continue;
+      var pr = (ctx.predRoles || {})[pn] || { roles: {}, n: 0 };
+      if (pr.n === 1) {
+        var only = Object.keys(pr.roles)[0];
+        if (Object.prototype.hasOwnProperty.call(this._profileMin, pn)) seatSum[only] = (seatSum[only] || 0) + unmet;
+        else otherMax[only] = Math.max(otherMax[only] || 0, unmet);
+      } else cross.push([pr.roles, unmet]);
+    }
+    var keys = {}, k;
+    for (k in needByRole) keys[k] = true;
+    for (k in seatSum) keys[k] = true;
+    for (k in otherMax) keys[k] = true;
+    var need = 0;
+    for (k in keys) {
+      needByRole[k] = Math.max(needByRole[k] || 0, seatSum[k] || 0, otherMax[k] || 0);
+      need += needByRole[k];
+    }
+    for (var ci = 0; ci < cross.length; ci++) {
+      var counted = 0;
+      for (var rr in cross[ci][0]) counted += needByRole[rr] || 0;
+      need += Math.max(0, cross[ci][1] - counted);
     }
     return need;
   };
@@ -5693,7 +5732,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
          order — deterministic in both engines. The canonical multiset key
          is computed LAZILY, only for candidates actually considered for
          the beam (mirrors engine.py). */
-      expansions.sort(function (a, b) { return b[0] - a[0]; });
+      /* QUANTIZED score (2026-09-10; mirrors engine.py): a last-bit
+         difference must not order the ports differently */
+      expansions.sort(function (a, b) { return qrank(b[0]) - qrank(a[0]); });
       var nextBeams = [], seen = {};
       for (var xi = 0; xi < expansions.length; xi++) {
         var ex = expansions[xi];

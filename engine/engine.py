@@ -3610,9 +3610,15 @@ class Engine:
                     gates.add((self.role_of(w2),
                                self._profile_primary.get(w2)))
             pred_gates[pn] = gates
+        # the ROLES a predicate's satisfiers span (2026-09-10): the
+        # admissible minimum-need bound nests a single-role predicate in
+        # its role family and charges a cross-role one only beyond the
+        # bodies those families already count
+        pred_roles = {pn: frozenset(r for r, _s in gates)
+                      for pn, gates in pred_gates.items()}
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
                 "pred_min": pred_min, "seat_max": dict(self._profile_max),
-                "pred_gates": pred_gates}
+                "pred_gates": pred_gates, "pred_roles": pred_roles}
 
     def _forge_counts(self, party, combos=None):
         """(weapon counts, role counts, predicate counts, group counts).
@@ -3634,20 +3640,49 @@ class Engine:
         return counts, roles, preds, groups
 
     def _forge_min_need(self, ctx, roles, preds, w, pred_contrib):
-        """Slots still required for unmet role/predicate minima after adding
-        `w` whose predicate contribution is `pred_contrib` (a weapon may
-        serve one role AND a predicate; the sum slightly over-counts that
-        overlap — conservative, documented)."""
-        need = 0
+        """Bodies still required for unmet role/predicate minima after adding
+        `w` whose predicate contribution is `pred_contrib`. ADMISSIBLE
+        (2026-09-10): never more than a legal completion truly needs. The
+        old plain sum counted a seat minimum on top of the role band it
+        sits inside (an engage tank IS a frontline) and a cross-role
+        predicate on top of the bodies that carry it; at the clap 15-19
+        band - frontline 3 with engage 2 + stopper 1 inside it, healer 3
+        with 2 primary healers inside, ranged core 5, a shield support,
+        pierce, heal-cut - it read 19 for a roster twelve bodies satisfy,
+        so clap and clap_kite forged NOTHING at exactly 15 while 16 fit.
+        Per role band: the largest of the unmet band minimum, the sum of
+        unmet SEAT minima nested in it (a body has one primary seat) and
+        any single-role non-seat predicate's unmet count; a predicate whose
+        satisfiers span roles adds only what those counted bodies cannot
+        carry; a predicate no pool weapon satisfies keeps its full count so
+        the arithmetic still reports it honestly."""
         r = self.role_of(w)
+        need_by_role = {}
         for r2, mn in ctx["role_min"].items():
             have = roles.get(r2, 0) + (1 if r2 == r else 0)
             if mn > have:
-                need += mn - have
+                need_by_role[r2] = mn - have
+        seat_sum, other_max, cross = {}, {}, []
         for pn, mn in ctx["pred_min"].items():
             have = preds.get(pn, 0) + (1 if pn in pred_contrib else 0)
-            if mn > have:
-                need += mn - have
+            unmet = mn - have
+            if unmet <= 0:
+                continue
+            rs = ctx.get("pred_roles", {}).get(pn) or frozenset()
+            if len(rs) == 1:
+                r2 = next(iter(rs))
+                if pn in self._profile_min:
+                    seat_sum[r2] = seat_sum.get(r2, 0) + unmet
+                else:
+                    other_max[r2] = max(other_max.get(r2, 0), unmet)
+            else:
+                cross.append((rs, unmet))
+        for r2 in set(need_by_role) | set(seat_sum) | set(other_max):
+            need_by_role[r2] = max(need_by_role.get(r2, 0),
+                                   seat_sum.get(r2, 0), other_max.get(r2, 0))
+        need = sum(need_by_role.values())
+        for rs, unmet in cross:
+            need += max(0, unmet - sum(need_by_role.get(r2, 0) for r2 in rs))
         return need
 
     def _forge_feasible(self, ctx, counts, roles, preds, groups, w, slots_left_after):
@@ -3831,11 +3866,14 @@ class Engine:
             if not expansions:
                 feasible = False
                 break
-            # stable sort by score only: equal scores keep (beam, pool) append
-            # order — deterministic in both engines. The canonical multiset
-            # key is computed LAZILY, only for candidates actually considered
-            # for the beam (it was the hottest line at size 60).
-            expansions.sort(key=lambda t: -t[0])
+            # stable sort by QUANTIZED score only (2026-09-10: the raw float
+            # let two expansions a last bit apart order differently in the
+            # two ports once the admissible need bound kept both alive —
+            # parity case 30 swapped two members): equal scores keep
+            # (beam, pool) append order — deterministic in both engines. The
+            # canonical multiset key is computed LAZILY, only for candidates
+            # actually considered for the beam (the hottest line at size 60).
+            expansions.sort(key=lambda t: -_qrank(t[0]))
             next_beams, seen = [], set()
             for score, bi, w, combo, vkey, vgears in expansions:
                 beam = beams[bi]

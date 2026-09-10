@@ -993,6 +993,39 @@ def t_refine_gears():
           f"fixed_ok={fixed_ok}")
 
 
+def t_forge_every_band_size():
+    """F28 (2026-09-10): every declared style forges a full, feasible roster
+    at every size the bands cover, including the band EDGES. The forge's
+    minimum-need precheck used to sum seat minima on top of the role bands
+    they sit inside and cross-role predicates on top of the bodies that
+    carry them; at the clap 15-19 band it read 19 bodies for a roster
+    twelve satisfy, and clap / clap_kite forged NOTHING at exactly 15 (16
+    fit) on every content - both ports agreed, no gate covered 15. The
+    bound is admissible now; this pins it at the edges."""
+    ok = True
+    lines = []
+    for content, style, size in (
+            ("blackzone_roam", "clap", 15), ("blackzone_roam", "clap_kite", 15),
+            ("castle", "clap", 15), ("territory_defense", "clap_kite", 15),
+            ("blackzone_roam", "brawl", 15), ("blackzone_roam", "kite", 15),
+            ("blackzone_roam", "brawl_clap", 15), ("blackzone_roam", "clap", 10),
+            ("blackzone_roam", "clap", 14), ("blackzone_roam", "clap", 16),
+            ("blackzone_roam", "clap", 19), ("blackzone_roam", "clap", 20),
+            ("blackzone_roam", "clap_kite", 20), ("blackzone_roam", "kite", 10),
+            ("blackzone_roam", "brawl", 20), ("castle", "clap", 25)):
+        e = Engine(content=content, size=size, style=style)
+        r = e.forge(size)
+        n = len(r.get("party") or [])
+        if not r.get("feasible") or n != size:
+            ok = False
+            lines.append(f"{content}/{style}@{size}: feasible={r.get('feasible')} party={n}")
+    check("F28 every style forges a full roster at every band edge (10 / 14 / "
+          "15 / 16 / 19 / 20 / 25): the minimum-need precheck is admissible - "
+          "nested seats count inside their role band, cross-role predicates "
+          "beyond the counted bodies only", ok,
+          "; ".join(lines) if lines else "all full")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -1010,6 +1043,7 @@ if __name__ == "__main__":
     t_cost_gate()
     t_primary_heal()
     t_style_bands()
+    t_forge_every_band_size()
     t_double_bladed_gank()
     t_generation_fit()
     t_dup_and_clump()
