@@ -1,6 +1,6 @@
 # Gear Validation Report — status
 
-**Date:** 2026-08-27 · **Status: cards generated, awaiting expert answers.** Nothing can be "expert-approved" until a human round runs — this report will be completed then.
+**Date:** 2026-08-27 · **Status: RETIRED 2026-09-10 — the cards, generator and answer key were deleted; `test_roles.py` R24 grades the kit advisor against the killboard modal item per slot continuously, which supersedes 16 hand-answered cards.** (Original status: cards generated, awaiting expert answers.) Nothing can be "expert-approved" until a human round runs — this report will be completed then.
 
 ## What exists now
 

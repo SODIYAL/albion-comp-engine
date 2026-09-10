@@ -80,8 +80,13 @@ node tests/test_live_party.js       # companion equipment -> loadout gear keys
 py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on published comps minus one member
 ```
 
+Report-only beside the gate: `py -3 tests/tier2_blindtest.py v4h --rebuild 5` —
+the same leave-one-out over ~700 harvested killer parties (holdout slice
+`battle id % 5 == 0`), plus a rebuild-the-last-5 recall. Never a gate until
+`derive_style_bands.py` honours the same holdout split.
+
 Expert-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
-generate|score` (V3 forms; `score --mode d` is the gate), `tests/gear_blindtest.py`,
+generate|score` (V3 forms; `score --mode d` is the gate),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N`,
 `pipeline/kit_blind_round.py`. Report-only audits: `pipeline/audit_*.py`. Findings
 and open rulings: `notes/findings/`. The `BION_DATASET` env override on `engine.py`

@@ -78,7 +78,7 @@ into a ruling, a cited override, or a golden pin. Forms: `tests/tier2_blindtest.
 generate|score` (V3 next-pick forms; `score --mode d` is the gate),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
 rosters, weapons only), `pipeline/kit_blind_round.py` (a weapon's most-worn
-builds without labels), `tests/gear_blindtest.py` (gear doctrine cards). Graded
+builds without labels). Graded
 battles join `GRADED_BATTLES` so no later form re-samples them. Owner
 disagreements that the data contradicts are shown the data (2026-09-04 roster 5,
 2026-09-08 Arcane helmet); the ruling then stands on the evidence, not the
@@ -87,8 +87,11 @@ guess.
 Gates (CI, exit code): the list in CLAUDE.md. The recommendation-quality gate is
 `tests/tier2_blindtest.py v4` — `actual_gear` role-level >= 70% on published
 comps minus one member (re-based from `weapon_only` 2026-08-29; it enforces via
-exit code since the same day). Read the current output; historical pass counts
-in the log are history.
+exit code since the same day). Beside it, report-only: `tier2_blindtest.py v4h`
+— the same leave-one-out over the harvested killer parties (a holdout slice of
+battles), plus a rebuild-the-last-k recall; its circularity caveats are printed
+with every run. Read the current output; historical pass counts in the log are
+history.
 
 ## Rulings index
 
@@ -204,6 +207,7 @@ column is the archive file and the section title to search for.
 | 09-10 | The sweep: the page reads `ENG.reqs`; the forge's need bound made admissible; expansion sort quantized | both ports, page | L19, F28 | 09b, the sweep |
 | 09-10 | R36: a failed PICK skips its slot, only a failed POOL ends the chain; F29: the need bound discounts only provable bodies; territory_defense at 25 OPEN | build_dataset, both ports | R36/F29 | 09b, Chains reach past a slot |
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
+| 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
 
 ## Open questions
 

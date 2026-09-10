@@ -52,11 +52,13 @@ This script does the three mechanical parts. It cannot do the human part.
               engine output — that is what makes it blind)
     score     read the filled form + compare against engine top-3 per mode
     v4        reproduce published meta comps minus one member
+    v4h       the same leave-one-out over the killer-party HARVEST (report-only)
 
 Usage:
     py -3 tests/tier2_blindtest.py generate --n 12 --out tier2_form.md
     py -3 tests/tier2_blindtest.py score tier2_form_filled.md [--mode both|w|d]
     py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json]
+    py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5]
 
 Party generation is seeded and deterministic, so every expert sees the same
 parties and a re-run reproduces the same set (seed 20260812 still emits the
@@ -600,6 +602,262 @@ def v4(args):
     return 0 if gate_ok else 1
 
 
+# ---------------------------------------------------------------- V4h ----
+V4H_CLASSES = ("weapon_only", "harvest_gear", "harvest_gear_doctrine")
+V4H_GEAR_SLOTS = ("Head", "Armor", "Shoes", "Cape", "OffHand", "Potion", "Food")
+
+
+def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod):
+    """Killer parties of [min_size, max_size] with every weapon known and in
+    the catalog, each with its weapons-only style label (party_styles.json,
+    the descriptive comp_identity read; `balanced` where the label is none /
+    split) and its linked builds' gear. `holdout_mod` keeps only battles
+    whose id % mod == 0 — a deterministic slice, see the caveat in v4h()."""
+    import party_link
+    by_battle = party_link.parties_by_battle(doc)
+    label = {(x["battle"], x["index"]): x for x in styles.get("parties", [])}
+    builds = {}
+    for b in doc.get("builds") or []:
+        if not b.get("gear"):
+            continue
+        idx = party_link.link_build(b, by_battle)
+        if idx is not None:
+            builds.setdefault((b["battle"], idx), []).append(b)
+    cat = set(e_probe.weapons)
+    out = []
+    for battle in sorted(by_battle):
+        if holdout_mod and int(battle) % holdout_mod != 0:
+            continue
+        for p in by_battle[battle]:
+            ws = p.get("weapons") or []
+            n = p.get("size") or 0
+            if not (min_size <= n <= max_size) or p.get("known_weapons") != n:
+                continue
+            if len(ws) != n or any(w not in cat for w in ws):
+                continue
+            lab = label.get((battle, p["index"]))
+            style = lab["style"] if lab and lab.get("style") in (e_probe.data.get("styles") or {}) else "balanced"
+            out.append({"battle": battle, "index": p["index"], "size": n,
+                        "weapons": list(ws), "style": style,
+                        "builds": builds.get((battle, p["index"]), [])})
+    return out
+
+
+def _harvest_gears(party, e):
+    """Per-member recorded kit from the party's linked builds: a build is
+    matched to the first still-unmatched member holding its weapon (the
+    roster is a multiset; builds carry no slot index). Members with no
+    linked build stay None — honestly naked, counted, never guessed.
+    Returns (gears, members_dressed, pieces_resolved, pieces_recorded)."""
+    gears = [None] * len(party["weapons"])
+    taken = set()
+    res = rec = 0
+    for b in sorted(party["builds"], key=lambda x: (x.get("player") or "", x.get("weapon") or "")):
+        for i, w in enumerate(party["weapons"]):
+            if i in taken or w != b.get("weapon"):
+                continue
+            kit = []
+            for slot in V4H_GEAR_SLOTS:
+                v = (b.get("gear") or {}).get(slot)
+                if not v:
+                    continue
+                rec += 1
+                gid = gear_join.normalize_gear_id(v, e.gear)
+                if gid is not None:
+                    kit.append(gid)
+                    res += 1
+            gears[i] = kit or None
+            taken.add(i)
+            break
+    return gears, len(taken), res, rec
+
+
+def v4h(args):
+    """V4 on the killer-party HARVEST (report-only, 2026-09-10): the same
+    leave-one-out as v4, over harvested parties of 10+ instead of the 23
+    published-comp slots. A killer party is a roster that took kills in a
+    real fight — win-conditioned evidence of what gets fielded, not a
+    ruling on what should be. Three incumbent-gear classes:
+
+      weapon_only            naked incumbents (the pre-re-fit unit; reported
+                             for continuity with v4)
+      harvest_gear           incumbents in the gear their own linked
+                             killboard build records; members with no
+                             linked build stay NAKED and are counted
+      harvest_gear_doctrine  as above, unlinked members in their doctrine
+                             kit (kit_variants v0) — inferred and labeled
+
+    Each sampled party drops `--drop` members (leave-one-out, the v4
+    metric) and, with `--rebuild k`, also removes its LAST k members at
+    once and rebuilds greedily (top-1, add, repeat) — V4b: the published
+    corpus is too small for it, the harvest is not. A rebuild step is a
+    weapon hit when the pick is one of the still-missing removed weapons,
+    a role hit when its role pool (healer / tank) is one still missing —
+    recall per removed member, each consumed by the first pick that
+    supplies it.
+
+    CIRCULARITY, stated plainly: `templates/style_bands.yaml` and the meta
+    prior are DERIVED from this same harvest (labelled rosters -> p10/p90
+    rows; distinct players -> prior). `--holdout-mod M` evaluates only
+    battles with id % M == 0 as a deterministic slice, but
+    derive_style_bands.py does NOT yet exclude that slice when fitting —
+    until it does, every number here is weak-form on the styled rows.
+    Content is not recorded on a killer party; `--content` sets the
+    template (default blackzone_roam, the ZvZ roam rows); the style is the
+    party's weapons-only label (party_styles.json) or balanced.
+
+    NOT A GATE. Prints beside v4 so the two can be compared; promotion to a
+    gate is an owner decision once the holdout split is honoured end to end.
+    """
+    rosters_path = os.path.join(ROOT, "pipeline", "out", "party_rosters.json")
+    styles_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
+    if not os.path.exists(rosters_path):
+        sys.exit(f"{rosters_path} missing — run the harvest fold first")
+    with open(rosters_path, encoding="utf-8") as f:
+        doc = json.load(f)
+    styles = {}
+    if os.path.exists(styles_path):
+        with open(styles_path, encoding="utf-8") as f:
+            styles = json.load(f)
+    probe = Engine()
+    if args.content not in probe.data["templates"]:
+        sys.exit(f"no template for content {args.content!r}")
+    role_sets = probe.scoring.get("role_sets", {})
+    pools = {"healer": set(role_sets.get("healers", [])),
+             "tank": set(role_sets.get("frontline", []))}
+
+    def role_of(w):
+        for r, pool in pools.items():
+            if w in pool:
+                return r
+        return None
+
+    parties = _harvest_parties(doc, styles, probe, args.min_size, args.max_size,
+                               args.holdout_mod)
+    if not parties:
+        sys.exit("no harvested parties match the filter")
+    rng = random.Random(args.seed)
+    sample = parties if args.n >= len(parties) else rng.sample(parties, args.n)
+    sample.sort(key=lambda p: (p["battle"], p["index"]))
+
+    tallies = {cl: {"w_hits": 0, "w_total": 0, "r_hits": 0, "r_total": 0}
+               for cl in V4H_CLASSES}
+    rebuild = {cl: {"w_hits": 0, "r_hits": 0, "r_total": 0, "total": 0}
+               for cl in V4H_CLASSES}
+    dressed_n = res_n = rec_n = members_n = 0
+    by_style = {}
+    engines = {}
+    for p in sample:
+        key = (p["size"], p["style"])
+        e = engines.get(key)
+        if e is None:
+            e = engines[key] = Engine(content=args.content, size=p["size"], style=p["style"])
+        ws = p["weapons"]
+        actual, dn, res, rec = _harvest_gears(p, e)
+        doctrine = gear_join.doctrine_gears(e, ws)
+        mixed = [a if a else d for a, d in zip(actual, doctrine)]
+        dressed_n += dn; res_n += res; rec_n += rec; members_n += len(ws)
+        classes = {"weapon_only": None, "harvest_gear": actual,
+                   "harvest_gear_doctrine": mixed}
+        drops = list(range(len(ws)))
+        if args.drop < len(ws):
+            drops = sorted(rng.sample(drops, args.drop))
+        st = by_style.setdefault(p["style"], {"r_hits": 0, "r_total": 0, "parties": 0})
+        st["parties"] += 1
+        for i in drops:
+            rest = ws[:i] + ws[i + 1:]
+            role = role_of(ws[i])
+            for cl, gl in classes.items():
+                g = None if gl is None else gl[:i] + gl[i + 1:]
+                top = [r["weapon"] for r in e.recommend(rest, TOP_N, gears=g)]
+                t = tallies[cl]
+                t["w_hits"] += ws[i] in top
+                t["w_total"] += 1
+                if role:
+                    hit = any(w in pools[role] for w in top)
+                    t["r_hits"] += hit
+                    t["r_total"] += 1
+                    if cl == "harvest_gear":
+                        st["r_hits"] += hit
+                        st["r_total"] += 1
+        k = args.rebuild
+        if k and k < len(ws):
+            removed = ws[-k:]
+            for cl, gl in classes.items():
+                cur = list(ws[:-k])
+                g = None if gl is None else list(gl[:-k])
+                # recall per removed member: weapons still missing, and the
+                # role pools (healer / tank) still missing, each consumed by
+                # the first pick that supplies it
+                missing_w = list(removed)
+                missing_r = [role_of(m) for m in removed if role_of(m)]
+                rb = rebuild[cl]
+                rb["total"] += len(removed)
+                rb["r_total"] += len(missing_r)
+                for _step in range(k):
+                    top = [r["weapon"] for r in e.recommend(cur, 1, gears=g)]
+                    if not top:
+                        break
+                    pick = top[0]
+                    if pick in missing_w:
+                        rb["w_hits"] += 1
+                        missing_w.remove(pick)
+                    pr = role_of(pick)
+                    if pr and pr in missing_r:
+                        rb["r_hits"] += 1
+                        missing_r.remove(pr)
+                    cur.append(pick)
+                    if g is not None:
+                        g.append(dict(e.kit_variants(pick)).get("v0"))
+
+    base = tallies["weapon_only"]
+    print(f"V4h leave-one-out over the killer-party harvest: {len(sample)} parties "
+          f"of {len(parties)} eligible (size {args.min_size}-{args.max_size}, "
+          f"{'battles id%' + str(args.holdout_mod) + '==0' if args.holdout_mod else 'all battles'}, "
+          f"seed {args.seed}), {args.drop} drops per party = {base['w_total']} drops; "
+          f"content {args.content}, style = the party's weapons-only label")
+    for cl in V4H_CLASSES:
+        t = tallies[cl]
+        rl = (f"role-level {t['r_hits']}/{t['r_total']} = {t['r_hits'] / t['r_total']:.0%}"
+              if t["r_total"] else "role-level n/a")
+        print(f"  [{cl:<22}] weapon-level: {t['w_hits']}/{t['w_total']} = "
+              f"{t['w_hits'] / t['w_total']:.0%}   {rl}")
+    print(f"  incumbent gear (harvest_gear class): {dressed_n}/{members_n} members "
+          f"carry a linked build ({dressed_n / members_n:.0%}); {res_n}/{rec_n} recorded "
+          f"pieces resolved into the curated catalog; the rest are honestly naked")
+    print("  role-level by style label (harvest_gear):")
+    for sty in sorted(by_style):
+        st = by_style[sty]
+        rl = f"{st['r_hits']}/{st['r_total']} = {st['r_hits'] / st['r_total']:.0%}" if st["r_total"] else "n/a"
+        print(f"    {sty:<11} {st['parties']:>4} parties   {rl}")
+    if args.rebuild:
+        print(f"  V4b rebuild of the last {args.rebuild} members (greedy top-1):")
+        for cl in V4H_CLASSES:
+            rb = rebuild[cl]
+            if rb["total"]:
+                rl = f"role {rb['r_hits']}/{rb['r_total']} = {rb['r_hits'] / rb['r_total']:.0%}" if rb["r_total"] else "role n/a"
+                print(f"    [{cl:<22}] weapon {rb['w_hits']}/{rb['total']} = "
+                      f"{rb['w_hits'] / rb['total']:.0%}   {rl}")
+    print("  caveat: style_bands.yaml rows and the meta prior are derived from this "
+          "same harvest; the --holdout-mod slice is not yet excluded by "
+          "derive_style_bands.py, so styled numbers are weak-form.")
+    print("  caveat: a killer party is win-conditioned evidence of what is fielded, "
+          "never a ruling; NOT A GATE - reported beside v4 for the owner.")
+    if args.json:
+        payload = {"parties": len(sample), "eligible": len(parties),
+                   "filter": {"min_size": args.min_size, "max_size": args.max_size,
+                              "holdout_mod": args.holdout_mod, "seed": args.seed,
+                              "drop": args.drop, "rebuild": args.rebuild,
+                              "content": args.content},
+                   "classes": tallies, "rebuild": rebuild, "by_style": by_style,
+                   "gear": {"members": members_n, "dressed": dressed_n,
+                            "resolved": res_n, "recorded": rec_n}}
+        with open(args.json, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(payload, f, indent=1, sort_keys=True)
+        print(f"\nwrote {args.json}")
+    return 0
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -623,6 +881,18 @@ if __name__ == "__main__":
                    default=os.path.join(ROOT, "data", "published_comps"))
     v.add_argument("--verbose", action="store_true", help="list weapon-level misses")
     v.add_argument("--json", default=None, help="dump per-class tallies")
+
+    h = sub.add_parser("v4h"); h.set_defaults(fn=v4h)
+    h.add_argument("--n", type=int, default=150, help="parties to sample")
+    h.add_argument("--drop", type=int, default=3, help="leave-one-out drops per party")
+    h.add_argument("--rebuild", type=int, default=0, help="V4b: rebuild the last k members")
+    h.add_argument("--min-size", type=int, default=10)
+    h.add_argument("--max-size", type=int, default=20)
+    h.add_argument("--holdout-mod", type=int, default=5,
+                   help="evaluate battles with id %% M == 0 only (0 = all)")
+    h.add_argument("--content", default="blackzone_roam")
+    h.add_argument("--seed", type=int, default=20260910)
+    h.add_argument("--json", default=None)
 
     a = ap.parse_args()
     sys.exit(a.fn(a) or 0)

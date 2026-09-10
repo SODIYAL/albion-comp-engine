@@ -104,8 +104,11 @@ Each is decidable today from evidence already in the repo.
   richer fields, engine output hidden. Score with
   `tests/tier2_blindtest.py score --mode both`. These create the first
   uncontaminated validation / holdout cases. (V: 08, FIVE RULINGS, ruling 4)
-- **16 gear blind cards** (`tests/gear_blindtest.py generate`, answer key
-  hidden) — awaiting the expert round. (notes/findings/2026-08-27-gear-validation-status.md)
+- **Harvest V4 findings** (`tier2_blindtest.py v4h`, 2026-09-10, weak-form):
+  leave-one-out role-level 64-65% over 150 holdout killer parties against the
+  published-comp gate's 74% on 23 slots; kite parties 38% (n=10); rebuild-5
+  role recall 82-87%. Hypotheses for the owner, nothing retuned. (V: 09b,
+  Harvest V4)
 - **The 20+ identity band**: no blind round yet; kite|20 still borrows
   kite|15-19 (31 distinct rosters) and brawl_clap borrows brawl in every band.
   A round once the harvest can stand it. (V: 09b)
@@ -162,6 +165,12 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
+- **Honour the holdout split end to end**: `v4h` evaluates battles with
+  `id % 5 == 0`, but `derive_style_bands.py` and `derive_meta_prior.py` still
+  fit on every battle. Give both a `--exclude-mod` (or read one shared split
+  constant) so the rows and the prior are fitted on the other four fifths;
+  then `v4h` is a true holdout measurement and can be considered for a gate
+  (owner decision). Until then every styled `v4h` number is weak-form.
 - **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
   open with "KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md)" about the
   unit defect resolved 2026-08-29. Fix on the next engine touch (the JS
