@@ -61,8 +61,8 @@ def _key_form(key):
     'POTION_REVIVE'. Mirrors pipeline/builds_lib.key_form — see gear_key()."""
     return _KEY_TIER_RX.sub("", _KEY_ENCH_RX.sub("", str(key).strip().upper()))
 # BION_DATASET: tooling override for the default dataset PATH (the
-# calibration sweep points test suites at patched coefficient copies —
-# pipeline/calibrate_scoring.py). Path plumbing only; never set in
+# fold report points the gates at the pre-fold dataset copy —
+# pipeline/compare_fold.py). Path plumbing only; never set in
 # production or normal test runs.
 DATASET = os.environ.get("BION_DATASET") or \
     os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json")

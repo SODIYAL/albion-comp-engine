@@ -3237,3 +3237,41 @@ kind and the main hand or chest resolves; a rejected event does not bind
 its code. Debug build clean; the Release binary the running companion
 uses is rebuilt at its next restart. The inspect key still needs one
 `--debug` capture during an in-game inspect.
+
+## 2026-09-10 — the calibration scaffold retired; its discipline kept here
+
+`calibration/` (2026-08-27) was the durable home for expert-labelled
+cases with train / validation / holdout splits, consumed by
+`pipeline/calibrate_scoring.py`. Two weeks later, honestly: four train
+cases from the one V3 round, validation and holdout both `[]`, no filled
+expert forms, nothing in the build or CI reading it, and every round
+since (T34–T41, R24–R36, the gear cards, the kit blind rounds) recorded
+in this file and pinned as golden / forge / roles tests instead. The
+owner asked whether it was fine to delete it; it was. Folder, script and
+`out/calibration_report.json` are gone; the `BION_DATASET` path override
+on `engine.py` stays because `pipeline/compare_fold.py` uses it. The four
+seeded cases were already golden-pinned, so no expert answer was lost.
+
+STANDING RULE (moved here from the retired README so it outlives the
+scaffold), for any future coefficient tuning:
+
+- **TRAIN** — may be inspected freely while changing the model. Every
+  case ever discussed in a session, converted to a golden test, or used
+  to motivate a change is train-contaminated and can never leave train.
+  Golden tests are the regression floor and are all train by definition.
+- **VALIDATION** — used to COMPARE candidate settings during a sweep.
+  Aggregate metrics only; a validation case that gets individually
+  debugged moves to train.
+- **HOLDOUT** — never examined while tuning. Collected in fresh expert
+  rounds, scored only when a tuning round is declared finished, reported
+  separately. Holdout misses do not become golden tests until the
+  evaluation round is complete. A holdout set that has been scored
+  against and iterated on is spent — retire it to validation and collect
+  a new one.
+- The anti-circularity rule at the top of this file is the bridge: cases
+  derived from comps that calibrated a template never drive retuning of
+  that template's numbers.
+
+Until validation and holdout sets exist, any parameter sweep is a
+sensitivity map, not a calibration — no coefficient moves on train
+evidence alone.

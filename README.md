@@ -194,7 +194,6 @@ pipeline/                      the engine's data layer
   out/                         generated data/evidence artifacts
 
 data/                          published comps / builds / armory imports (evidence layer)
-calibration/                   train / validation / holdout cases for tuning discipline
 
 tests/
   test_golden.py               recommendation regression cases
