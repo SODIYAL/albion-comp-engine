@@ -1,111 +1,196 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code working in this repository.
 
 ## What this is
 
-Comp Forge — an Albion Online party-composition recommendation engine (capability model, not a role checklist) with a single-file web planner published to GitHub Pages (`docs/`). Live at <https://sodiyal.github.io/albion-comp-engine/>.
+Comp Forge — an Albion Online party-composition engine (a capability model, not a
+role checklist) with a single-file web planner on GitHub Pages (`docs/`). Live at
+<https://sodiyal.github.io/albion-comp-engine/>.
 
 Read before substantive work:
 
-- `HANDOFF.md` — canonical current-state document
-- `MASTERSHEET.md` — the expert's control surface: its `tune:` YAML blocks are read at build time and **override** `scoring.yaml`/`mechanics.yaml`/templates/sheets. Check it first when asking "what is the engine actually using"; expert score rulings land there, not in sheets
-- `pipeline/README.md` — the data pipeline, patch workflow, and effect layer
-- `tests/VALIDATION.md` — the ruling INDEX: standing rules, the blind-round method, one line per owner ruling with its pin and archive location, open questions. The full dated entries (every round, every owner quote, every score) live verbatim in `notes/validation/` (append-only; new entries go to the newest file AND get an index row the same day)
-- `albion-comp-engine-design.md` / `MECHANICS_TODO.md` — design history and mechanics backlog
-- `KILLBOARD_AFFINITY.md`, `COMPANION_SCOPE.md`, `data/README.md` — evidence-layer scope docs; `notes/` holds plans, specs and findings (internal, not served on Pages)
-- `roles-design.md` + `pipeline/roles.yaml` — the role layer (roles are member-in-comp properties selected by kit, never 1:1 weapon labels; role book memberships are evidence-cited; detection/advisory are descriptive)
+- `HANDOFF.md` — current state, the engine model, forge/loadout rules, open work
+- `MASTERSHEET.md` — the expert's control surface; its `tune:` blocks OVERRIDE
+  scoring/mechanics/templates/sheets at build time. Check it first for "what is
+  the engine actually using"
+- `tests/VALIDATION.md` — the ruling index: standing rules, one line per owner
+  ruling with its pin and archive location, open questions. Full dated log in
+  `notes/validation/` (append-only)
+- `pipeline/README.md` — the data pipeline, patch workflow, effect layer
+- `roles-design.md` + `pipeline/roles.yaml` — the role layer
+- `albion-comp-engine-design.md`, `MECHANICS_TODO.md` — design history, backlog
+- `notes/` — plans, specs, findings (internal, not served)
 
 ## Environment traps (Windows)
 
-- Use `py -3`, never `python`/`python3` (Microsoft Store stubs). Redirected Python stdout is block-buffered — run background samplers with `py -3 -u`.
-- Commit messages MUST go via `git commit -F <file>` (PowerShell 5.1 mangles quoted here-strings into pathspec args). Write the message file BOM-less: `[System.IO.File]::WriteAllText($p,$msg,(New-Object System.Text.UTF8Encoding $false))` — `Set-Content -Encoding utf8` prepends a BOM that lands in the commit subject.
-- Never pipe a build through `grep`/`tail`/`Select-Object` in the same pipeline you read `$LASTEXITCODE` from — it masks the build's exit code, and `build_dataset.py` fails closed (exit 2, `release_clean: false`) on provenance drift. Run bare, or redirect to a file.
-- Every pipeline writer of a committed artifact opens with `newline="\n"` (dataset/builds JSON, dashboard pages, hashed artifacts). Keep that discipline for new writers or Windows rebuilds churn the tree with CRLF copies and invalidate recorded hashes.
-- `wiki.albiononline.com` and the game forum return 403 to scripts (Cloudflare). Use the Playwright MCP (`browser_navigate` + evaluate `innerText`) for wiki pages; the dumps carry the same numbers anyway.
-- Battle sampling uses `api.albionbb.com` for DISCOVERY — it is the only source with a `minPlayers` filter, and fight size comes from its battle LIST (`totalPlayers`; kill events carry no size at all). **The old note "the official gameinfo events endpoint 504s constantly" was true 2026-08-13 but is NOT true now** — re-tested 2026-08-29, events list / battles list / single-event detail all returned 200 in under a second, and a 25-event probe succeeded 25/25 with retry. Use the official API for DETAIL: it carries `GroupMembers` (the killer's party at kill time, with equipment) and `Participants`, both of which albionbb strips. That is what `pipeline/sample_parties.py` harvests.
-- The render service (`render.albiononline.com/v1/item/...`) serves every catalog weapon except `2H_IRONGAUNTLETS_HELL` (Black Hands) — 404 at every tier; retry with backoff, don't delete on first failure.
-- Playwright MCP: `file://` navigation is blocked — serve with `py -3 -m http.server --directory dashboard`; hash-only URL changes do NOT reload the page; write screenshots inside `.playwright-mcp/` (gitignored).
-- `engine/app_scoring.js` reads as BINARY to grep/ripgrep (a literal NUL byte serves as a cache-key separator) — search it with `Select-String`, read it with the Read tool.
-- Port 53321 may be held by the RUNNING companion (the user leaves it up) — check `localhost:53321/status` before binding a mock there.
-- `tests/test_cohort_families.py` spawns the builder as a subprocess and decodes its stdout as UTF-8; under a Git-Bash-spawned console the child Python emits cp1252 (an em-dash becomes byte 0x97) and the test dies with `UnicodeDecodeError`/`NoneType + str` — an ENVIRONMENT artifact, not a contract failure. Run it from PowerShell (7/7 passes) before suspecting the artifact.
+- Use `py -3`, never `python`/`python3` (Store stubs). Redirected Python stdout is
+  block-buffered — run background samplers with `py -3 -u`.
+- Commit messages go via `git commit -F <file>`; write the file BOM-less with
+  `[System.IO.File]::WriteAllText($p,$msg,(New-Object System.Text.UTF8Encoding $false))`.
+  PowerShell 5.1 mangles quoted here-strings and `Set-Content -Encoding utf8`
+  prepends a BOM into the subject.
+- Never pipe a build through `grep`/`tail`/`Select-Object` in the pipeline you
+  read `$LASTEXITCODE` from — it masks the exit code, and `build_dataset.py`
+  fails closed (exit 2). Run bare or redirect to a file.
+- Every writer of a committed artifact opens with `newline="\n"`, or Windows
+  rebuilds churn the tree with CRLF and invalidate recorded hashes.
+- `wiki.albiononline.com` and the forum 403 scripts. Use the Playwright MCP
+  (`browser_navigate` + `innerText`); the dumps carry the same numbers anyway.
+- Killboard: `api.albionbb.com` for DISCOVERY (only source with `minPlayers`;
+  fight size comes from its battle list). The official gameinfo API for DETAIL
+  (`GroupMembers` = the killer's party with gear; albionbb strips it). The old
+  "official events endpoint 504s" note is stale — re-tested fine 2026-08-29.
+- `render.albiononline.com` serves every weapon except `2H_IRONGAUNTLETS_HELL`
+  (404 at every tier) — retry with backoff, don't delete on first failure.
+- Playwright MCP: `file://` is blocked — serve with
+  `py -3 -m http.server --directory dashboard`; hash-only URL changes do not
+  reload; screenshots go in `.playwright-mcp/` (gitignored).
+- `engine/app_scoring.js` reads as BINARY to grep/ripgrep (a literal NUL byte is
+  a cache-key separator) — search with `Select-String`, read with the Read tool.
+- Port 53321 may be held by the RUNNING companion — check `localhost:53321/status`
+  before binding a mock.
+- `tests/test_cohort_families.py` decodes a child process as UTF-8; under a
+  Git-Bash console the child emits cp1252 and it dies with `UnicodeDecodeError`.
+  Run it from PowerShell before suspecting the artifact.
 
 ## Tests
 
-Script-style, **not pytest** — they run at import and call `sys.exit`, so `pytest tests/` breaks. Run each directly; exit 0 = pass. Don't trust historical pass counts in docs — read the current output. CI (`.github/workflows/gates.yml`) runs this list plus the build chain on every push and pull request; it needs only `requirements.txt` (PyYAML) and node.
+Script-style, **not pytest** — each runs at import and calls `sys.exit`; run
+directly, exit 0 = pass. Don't trust pass counts in docs; read the output. CI
+(`.github/workflows/gates.yml`) runs this list plus the build chain on every push.
 
 ```text
-py -3 tests/test_golden.py        # recommendation golden cases (add one when an expert overrules the engine)
-py -3 tests/test_forge.py         # forge/constraint contracts, pick-score invariant
-py -3 tests/test_builds.py        # evidence-layer rules (provenance envelopes, quarantine, source gates)
-py -3 tests/test_interactions.py  # duplicate/reflect/cleanse semantics + JS parity on those
-py -3 tests/test_provenance.py    # pinned-snapshot hash chain, byte-identical rebuilds, LF checks
-py -3 tests/test_patch_history.py # dumps-diff staleness detection
-py -3 tests/test_js_parity.py     # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
-py -3 tests/test_dashboard_layout.py # generated-page layout contracts (L1-L18) + the display-only boundary (no new engine calls from the UI)
-node tests/test_loadout_codec.js  # share-URL codec round-trips
-node tests/test_display_math.js   # killboard bucket + cohort-affinity/neighbour/family math (display layer)
-node tests/test_live_party.js     # companion equipment -> loadout gear keys (tier/enchant rules, chest->armor, uncurated stays unset)
-py -3 tests/test_cohort_families.py # observed-family artifact contracts (determinism, disjointness, no id leaks)
-py -3 tests/test_roles.py         # role-book contracts, kit-aware detection, advisory flags (descriptive)
-py -3 tests/test_validation_modes.py # dressed-validation contracts: set_dressing switch, V3 form parser, metrics, builds_index gear join
-py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps in 3 incumbent-gear classes. GATE: actual_gear role-level 70% (re-based from weapon_only, owner 2026-08-29, after the unit re-fit made naked scoring the wrong unit) — and it now ENFORCES via exit code; the v4 path used to return 0 unconditionally. weapon_only is still printed, reported not gated.
+py -3 tests/test_golden.py          # recommendation golden cases (add one when an expert overrules the engine)
+py -3 tests/test_forge.py           # forge/constraint contracts, pick-score invariant
+py -3 tests/test_builds.py          # evidence-layer rules (provenance, quarantine, source gates)
+py -3 tests/test_interactions.py    # duplicate/reflect/cleanse semantics + JS parity on those
+py -3 tests/test_provenance.py      # pinned-snapshot hash chain, byte-identical rebuilds, LF checks
+py -3 tests/test_patch_history.py   # dumps-diff staleness detection
+py -3 tests/test_js_parity.py       # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
+py -3 tests/test_dashboard_layout.py # generated-page layout contracts + no engine calls from the UI
+py -3 tests/test_cohort_families.py # observed-family artifact contracts
+py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descriptive)
+py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
+py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
+node tests/test_loadout_codec.js    # share-URL codec round-trips
+node tests/test_display_math.js     # killboard bucket / cohort / family display math
+node tests/test_live_party.js       # companion equipment -> loadout gear keys
+py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on published comps minus one member
 ```
 
-Expert-round tooling (generate/score, human-in-the-loop — not CI gates): `tests/tier2_blindtest.py generate|score` (V3 blind forms; `score --mode w|d|both` — W = weapon-only via `set_dressing(False)`, D = production dressed, THE gate), `tests/gear_blindtest.py generate|score` (gear doctrine cards; the answers file stays hidden from experts). Report-only audits (never part of a build): `pipeline/audit_validation_asymmetry.py`, `audit_dressed_templates.py`, `audit_frontline_floor.py`, `audit_gear_synergy.py`, `audit_style_rosters.py` (labels every harvested killer-party roster of 10+ with `comp_identity` and measures dressed supply per style × size band — the evidence board behind the style × size rows, proposals for the owner only; `--blind-sizes LO HI --blind-round N` draws a roster blind form; also writes `out/chest_lean.json`, which `build_dataset` ships), `pipeline/kit_blind_round.py` (a weapon's most-worn builds shown without labels; `--answers` reveals the styles). Findings + open owner rulings: `notes/findings/`. The `BION_DATASET` env override on `engine.py` is path plumbing for `pipeline/compare_fold.py` only — never set it normally. Tuning discipline (train / validation / holdout — holdout is never examined while tuning) is a standing rule in `tests/VALIDATION.md`; the `calibration/` scaffold that once carried it was retired 2026-09-10, never having been fed.
+Expert-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
+generate|score` (V3 forms; `score --mode d` is the gate), `tests/gear_blindtest.py`,
+`pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N`,
+`pipeline/kit_blind_round.py`. Report-only audits: `pipeline/audit_*.py`. Findings
+and open rulings: `notes/findings/`. The `BION_DATASET` env override on `engine.py`
+is plumbing for `pipeline/compare_fold.py` only — never set it normally.
 
 ## Build chain
 
 ```text
-py -3 pipeline/evidence_lint.py      # CI gate: every nonzero score cites an equippable, grounding spell
-py -3 pipeline/build_interactions.py # interactions.yaml -> out/interactions.json
-py -3 pipeline/build_builds.py       # data/ evidence -> out/builds_index.json (+ validation/quarantine)
-py -3 pipeline/build_dataset.py      # single source of truth: out/dataset-latest.json (fails closed)
-py -3 pipeline/build_cohort_families.py # cohort sample -> out/cohort_families.json (display-only observed cores; after build_dataset)
-py -3 dashboard/build.py             # regenerates dashboard/index.html + docs/ (GitHub Pages)
+py -3 pipeline/evidence_lint.py
+py -3 pipeline/build_interactions.py    # interactions.yaml -> out/interactions.json
+py -3 pipeline/build_builds.py          # data/ evidence -> out/builds_index.json
+py -3 pipeline/build_dataset.py         # single source of truth: out/dataset-latest.json (fails closed)
+py -3 pipeline/build_cohort_families.py # display-only observed cores (after build_dataset)
+py -3 dashboard/build.py                # regenerates dashboard/index.html + docs/
 ```
 
-After editing `MASTERSHEET.md`: rebuild dataset + dashboard, then run golden + parity. After a harvest: `sample_parties` → `audit_style_rosters` → `derive_style_bands` → `derive_party_styles` → `derive_meta_prior` → `build_dataset` → gates — or, as one command from PowerShell, `pipeline/fold_harvest.ps1` (2026-09-09: re-derives the rosters from the cache, runs the chain, every gate, then `pipeline/compare_fold.py`, the before/after report in `notes/findings/<date>-fold-report.md`; it never commits — the WEEKLY in-session fold, Tuesdays on the owner's calendar). After moving the game-data snapshot (`data/source_pins.yaml`): follow `pipeline/README.md` (fetch_snapshot → parse_dumps → fetch_item_stats → fetch_gear_lines → builds → dataset → full gate list), and re-check every `pipeline/effect_overrides.yaml` entry against the fresh dumps. Network steps are explicit, never part of a normal build: `pipeline/sample_battles.py` (usage/cohort refresh), `pipeline/sample_parties.py` (REAL PARTY ROSTERS from the official API's `GroupMembers` — the killer's party at kill time WITH gear, deduped by member overlap, winner-biased by construction; every build carries `party_size` and `--pages 0` re-derives the analysis offline from `out/party_cache/`; a Windows scheduled task, "CompForge overnight harvest", runs `pipeline/harvest_overnight.ps1` TWICE DAILY at 03:00 and 15:00 (2026-09-09: the 800-battle discovery list reaches back only ~13 h at the 8-player floor, so one nightly pass missed half of each day's 8-24-player fights; battles fetch four at a time, `--workers`, and every pass prints its event coverage against the 0.987 sequential baseline) — harvest only, so the rebuild, gates, audit and commit stay in-session, and because the corpus grows daily tests pin doctrine MECHANISMS, never exact counts), `pipeline/sample_rosters.py` (fight-roster mixes behind the need profiles; `--pages 0` re-analyzes offline) and `pipeline/adapters/metabattle.py fetch`. After a harvest refresh the order is `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` (writes the GENERATED `templates/style_bands.yaml`, owner-ruled 2026-09-04) -> `derive_party_styles` -> `derive_meta_prior` (writes the GENERATED `out/meta_prior.json`, owner-ruled 2026-09-08) -> `build_dataset` -> gates. `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
+- After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
+- After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
+  `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
+  `derive_party_styles` -> `derive_meta_prior` -> `build_dataset` -> every gate ->
+  `compare_fold.py`; never commits). Weekly, Tuesdays.
+- After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
+- Network steps are explicit, never part of a build: `sample_parties.py`,
+  `sample_battles.py`, `sample_rosters.py`, `adapters/metabattle.py fetch`. The
+  scheduled task "CompForge overnight harvest" runs `harvest_overnight.ps1` at
+  03:00 and 15:00 — harvest only; rebuild, gates and commit stay in-session.
+- `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
 
 ## Architecture
 
-Three applications with explicit boundaries (each directory's README states its contract):
+Three applications with explicit boundaries (each directory's README is its contract):
 
-- **The engine** — `engine/` (both scoring ports) + `pipeline/` (its data layer). Interface out: the `CompEngine` API. Interface in: `pipeline/out/dataset-latest.json`, its only input.
-- **The frontend** — `dashboard/` (sources + `build.py` bundler, generated pages, `docs/` copies). Display only: it calls the embedded `CompEngine` and translates; it never computes a score. If the UI needs a number the engine doesn't expose, extend the engine (both ports + parity), don't recompute it in the UI.
-- **The companion** — `companion/` (C# .NET photon sniffer). Talks to the page only over `localhost:53321`; zero build-time coupling.
+- **Engine** — `engine/engine.py` (canonical) and `engine/app_scoring.js` (browser
+  port). Change one, change both, rerun parity. Input: `pipeline/out/dataset-latest.json`
+  only. Output: the `CompEngine` API.
+- **Frontend** — `dashboard/`: `build.py` bundles the `_`-prefixed sources plus the
+  dataset and engine JS into `dashboard/index.html` and `docs/`. Display only: it
+  calls the embedded engine and translates; it never computes a score. **Never
+  hand-edit generated pages.**
+- **Companion** — `companion/` (C# photon sniffer), talks to the page over
+  `localhost:53321` only; zero build-time coupling.
 
-One-way data flow, provenance-checked end to end:
+One-way, provenance-checked data flow:
 
-1. **Pinned snapshot** — `data/source_pins.yaml` pins one `ao-data/ao-bin-dumps` commit; `out/source_manifest.json` records SHA-256 per input. Any hash drift, mixed commits, or stale adapter blocks the release.
-2. **Parsed game data** — `parse_dumps.py` → `out/weapon_lines.json` (full Q/W/E/passive pools), `out/spell_index.json` (function flags, direction, area geometry, and the structural `channel` fact behind the conditional-payload rule). The effect layer (`effect_map.yaml`, `effect_lookup.py`) maps game effects × target direction to candidate capabilities — candidates for curation, never assertions. `effect_catalogue.py` builds the structured index the lint checks against; since 2026-08-27 it indexes **gear actives/passives as well as weapon spells** (367 weapon + 194 gear), so armor claims are checkable evidence rather than prose — the run that first covered gear caught six bad claims including Demon Armor's `tankiness`, which was backwards (its aura buffs allies' resistances and *reduces* the wearer's).
-3. **Curation** — capability sheets scored **1–7** (2 points = one supply unit; `score_unit: 2` in scoring.yaml — thresholds and predicates speak 1–7). Shared tree Q/W spells live once in `pipeline/sheets/pools/`; each weapon's sheet carries its E (the weapon's identity); gear lives in `pipeline/sheets/gear/`. Every nonzero score cites an evidence spell; `evidence_lint.py` verifies the spell is equippable on that item and can ground the claim with the right direction.
-4. **Templates** — `pipeline/templates/*.yaml`: six content templates (targets, hard floors, weights, validated sizes) + `styles.yaml` — five playstyles (brawl / clap / kite / brawl_clap / clap_kite, the last owner-identified 2026-08-23) each carrying weight multipliers, delivery mechanics, AND a `chain` (the fight-stage sequence the fight-chain feature grades) + `composition.yaml` + `mechanics.yaml` (focus fire, escalation, geometry, build stats, kill_pressure lens config). Comp-fitted numbers come from real published comps (VALIDATION.md 2026-08-21 recalibration ruling: target = 0.9× the least any good comp fields, soft cap = 1.15× the most). **All 31 curated capabilities are now scored by at least one template** (any one template scores a subset — blackzone_roam scores 30, omitting `self_sustain`): the six orphans (`slow`, `root`, `knockback_displace`, `anti_dive`, `interrupt`, `max_health_cut`) were promoted 2026-08-27 after an audit found them curated on every sheet, used by the fight chain, and weighted zero by every template. **`reveal` stays PROPOSED-ONLY** — not curated, not scored; the refusal evidence lives in `effect_map.yaml` (every weapon source of `remove:invisibility` is a purge spell). **Units: RESOLVED 2026-08-29** — targets and soft caps speak PERSON units, matching the dressed supply the engine measures (the "One unit, everywhere" invariant below); the pre-fix analysis is bracketed HISTORICAL in HANDOFF.md.
-5. **Weapon identity** — `apply_resilience_penetration` stamps `resil_pen` from the cited wiki table (`pipeline/resilience_penetration.yaml`, melee-only stat; both engine ports rebate the weapon's burst_st/execute supply by the Focus-Fire physics it ignores — F20); `derive_economics` stamps `cost_tier` (name-suffix ladder; only crystal gates), `heal_scale` and `full_healer` (E heal magnitude × the spell's own area facts; `heal_overrides.yaml` = cited sub-effect fact corrections; audit in `out/economics_report.json`); `derive_style_fit` in `build_dataset.py` stamps every weapon with `style_fit` (delivery melee/flex/ranged from the E's own PAYLOAD reach — "the E is the weapon's identity"; an E that moves the caster (`caster_moves`, the dumps' `dash` node, parse_dumps adapter 5) counts its range only as a FLEX BOMB — group payload at the job bar, the owner's 2026-09-04 Realmbreaker / Rift Glaive exception; every other leap or charge is melee delivery with a gap closer (owner 2026-09-08: "when an e lands the caster should read as melee delivery", T45); group-vs-single damage scale from the E's area footprint; utility-carrier flag; fits/situational/unfit per style × size band trio/gang/group). Owner rulings override via `pipeline/style_overrides.yaml` (cited, validated, release-blocking on errors); the full derivation is auditable in `out/style_fit_report.json` with a MetaBattle cross-check review queue.
-6. **Dataset** — `build_dataset.py` compiles all of the above plus MASTERSHEET rulings into `out/dataset-latest.json`, byte-identically reproducible.
-7. **Twin engines** — `engine/engine.py` is canonical; `engine/app_scoring.js` is its browser port. Change one, change both, rerun parity. Recommendation score = exact marginal comp-score delta (0.55 capability + 0.20 synergy + 0.15 meta prior ± viability/duplicates — the meta prior is GENERATED since 2026-09-08 by `pipeline/derive_meta_prior.py` from the committed killer-party harvest into `out/meta_prior.json`, per engine size bucket, one player one vote, shrunk on thin counts, top weapon 1.0, hash-gated at build; a hand-set map in scoring.yaml or MASTERSHEET fails the build, and composition.yaml's viability `core` list is empty — the viability weight reads 0; H18/T46), evaluated **one player ahead** (roster+1), each candidate on its best single legal Q/W/E/passive combo, DRESSED in its doctrine kit — the DRESSED FORGE (2026-08-27, spec `notes/specs/2026-08-27-dressed-forge-design.md`): forge/recommend price every candidate by the exact comp_score-with-gears the page displays (fit half dressed, synergy weapon-only — comp_score's own seams), forge returns `gears`/`kits`, the page prefills them `_eng`-marked and passes LOADOUT gear (`GEARS_CUR`) to every scoring/suggestion call; locked members are never re-dressed; doctrine passives never enter evaluation (F22/F23/T30c). Beside scoring, both ports carry the DESCRIPTIVE analyzer family — `comp_identity` (playstyle label + per-member fit verdicts + bomb-squad archetype), `kill_pressure` (pierce/heal-cut/burst lights), `fight_chain` (stage-graded sequence with per-stage spell `sources` and named `improves` terms), `pick_report` (signed decomposition of the exact pick marginal; its terms reconstruct the score at 1e-9), `analyze` (per-cap saturation bands), `duplicate_conflicts`, and the ROLE LAYER (`detect_role`/`role_advisory`, roles-design.md + pipeline/roles.yaml: each member's played seat + riding functions + carried gear effects, flagging off-role kits and comp balance holes) — all parity-carried per case, none a scoring input. `kit_options` is DOCTRINE-LED, OBSERVED-BUILD-LED and FAIL-CLOSED (owner rulings 2026-09-01, test_roles R19/R20): the chest pool hard-gates to the resolved seat's uniform, every slot serves ONLY its doctrine tier mined from observed reference builds AND the killboard harvest (cited, noise-floored), the kit pick follows the conditional-modal BUILD ARCHETYPE people actually wear (`kit_build`/`kit_weapon_build`, fronted per slot with `observed_build: [n, of]`), and where evidence runs out the channel proposes NOTHING (no seat → `seat: None`; an evidence-less slot stays unset); `role=None` is the diagnostic escape; passive doctrine (cloth damage / leather CDR / plate CC-duration-or-CCR, dumps-resolved per piece) and the CC-duration stat feed `build_extra`'s stat channels (`cc_mult_caps` — offhand pairing as physics, never a hand list); manual builds always score. Suggestion pools funnel through `suggest_pool()`: viability exclusions, the style gate, and the generation-fit gate (default comps field damage picks whose derived verdict is "fits"; single-ally-heal-E healers never generate at 10+; non-stacking-group members — the cursed line — need a debuff-E at 10+) — all bar suggestion POOLS only; manual picks always score, flagged `off_comp`/`off_style` in swap review. Viability exclusions are per-weapon, evidence-gated and cited (Dagger Pair / Deathgivers at 7+, 2026-08-26; Double Bladed at 10+, 2026-09-08 — "a good ganking weapon but not a good brawl weapon", checked against 24 killer parties of 10+ and 11 wearers in gank kits, F27); they bar generation POOLS only and lift when a canonical large-group build appears. There is NO cost gate (owner ruling 2026-09-07: "not restricting weapons but rather focusing on mechanics" — the 2026-08-23 crystal gate is retired; the Exalted Staff is judged by the `anti_zone` rows: no row at the 7-man contents, and a DEMAND RAMP elsewhere — `ramp: {none_until: 14, full_at: 25}`, the owner's anchors ("don't really need it at 10-14 ... becomes a good requirement at like 25+"): the row is dropped for the context through 14, grows linearly to its measured value at 25, proportionally beyond. `ramp` is a general template-row mechanism in both ports (`_ramp_factor` / `rampFactor`); a row carries `ramp` or `scales`, never both. T42/F14). Forge structure additionally enforces `primary_heal` foundation minima, per-style role-band overrides (styles.yaml — incl. the clap/clap_kite 7-strong ranged-AoE core at 20), a 1-copy generation default (dup allowances cite real comps), derived job groups (clump_core, curse_pressure — computed at build, never hand lists), and the owner-ruled NEED PROFILES (roles.yaml `need_profiles`): fine-seat bands + function coverage on the forge's predicate channel — armed at 15+, scaled by size, generation-only (F21). The rulings behind each gate, with the owner's words: HANDOFF.md "Forge and loadouts" and VALIDATION.md.
-8. **Dashboard** — `dashboard/build.py` embeds the dataset, engine JS, and the `_`-prefixed sources (`dashboard/_shell.html`, `_app.js`, `_loadout.js`, `_decision_layer.js/.css`, `_explainer.html`) into generated single-file pages: `dashboard/index.html` and the `docs/` copies. **Never hand-edit generated pages** — edit the sources and rebuild. It also inlines a parity fixture so the browser asserts against engine.py on every build. Two owner-ruled display contracts (2026-08-26/27): the comp-status card is the **RADAR** (one axis per `GROUPS` capability group, identity glyph in the centre, all prose in hovers), and both it and the capability board quote the **CEILING RULER** — 100% is the comp-fitted soft cap, per-cap supply counts only up to its own ceiling so nothing exceeds 100, over-ceiling stacking shows as the purple marker, and a brass tick marks the target minimum. The wheel is a **semicircle** (frameless art on the top arc, hub in the mouth; drag math derives the centre from the box WIDTH) and the **comp board replaced the party strip entirely** (2026-08-27; since the 2026-09-02 density redesign it lives in the right-edge party flyout, an `.epanel`, not under the wheel) — four main-role columns of full `dm` tiles sharing `memberPop()` with everything the strip carried, plus the open-slots column and the notes rail (duplicate checks + kit editor).
+1. `data/source_pins.yaml` pins one `ao-bin-dumps` commit; any hash drift blocks the release.
+2. `parse_dumps.py` -> `out/weapon_lines.json`, `out/spell_index.json` (spell facts:
+   function flags, direction, area, `channel`, `caster_moves`). The effect layer
+   (`effect_map.yaml`, `effect_catalogue.py`) proposes capabilities — candidates for
+   curation, never assertions. It indexes weapon spells AND gear actives/passives.
+3. Curation: capability sheets scored 1–7 (2 points = one supply unit), every
+   nonzero score citing an evidence spell the lint can ground. Shared Q/W pools in
+   `sheets/pools/`, each weapon's E on its own sheet, gear in `sheets/gear/`.
+4. Templates: six content templates + `styles.yaml` (five playstyles with weight
+   multipliers, delivery mechanics, a fight chain) + `composition.yaml` +
+   `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`
+   and `out/meta_prior.json` are GENERATED from the harvest — never hand-edit.
+5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
+   `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from
+   the E's own payload). Owner rulings override via `style_overrides.yaml`, cited.
+6. `build_dataset.py` compiles everything plus MASTERSHEET rulings into
+   `out/dataset-latest.json`, byte-identically.
+7. Scoring: recommendation = exact marginal comp-score delta (0.55 capability +
+   0.20 synergy + 0.15 meta prior), evaluated one player ahead, each candidate on
+   its best legal spell combo, DRESSED in its doctrine kit. Beside scoring sit the
+   descriptive analyzers (`comp_identity`, `kill_pressure`, `fight_chain`,
+   `pick_report`, `analyze`, the role layer) — parity-carried, never a scoring input.
+8. Suggestion pools go through `suggest_pool()`: viability exclusions, the style
+   gate, the generation-fit gate. They bar POOLS only; manual picks always score.
+9. Kits: `kit_options` is doctrine-led and fail-closed — every slot serves what
+   harvested winners wear (`_seat_kit` picks the band and style cell); where
+   evidence runs out it proposes nothing.
 
-Side layers: `data/published_comps|published_builds|armory_imports` → `build_builds.py` → reference-build evidence (quarantine rules, canonical promotion gates — display only; records may carry a validated `style:` key). `sample_battles.py` → `out/weapon_usage_v2.json` fight-size prevalence + observed organization cohorts (display only; the page embeds anonymous weapon baskets, org ids stay in the JSON). `sample_rosters.py` → `out/roster_mixes.json` near-complete killboard fight-roster mixes (wiped sides attribute whole rosters; the need-profile evidence — display/evidence only, the profiles themselves are owner-ruled constants). The page's killboard strip also renders observed effect quotas (roster chests vs the median effect carriers observed rosters field — advice only, never a score). `review/` holds generated audit boards (`build_effect_review.py`, `build_magnitude_review.py`, `build_stat_chart.py`). `companion/` is a separate C# .NET photon-sniffer feeding the live-party feature over localhost — LIVE-VERIFIED end to end (2026-08-23: shape-based auto-calibration survives patches, spells resolve to sheet evidence IDs, and the web side live-syncs the loaded comp: weapon swaps update slots, members' real Q/W picks flow into loadouts).
-
-The validation loop that built the identity system: in-chat **blind rounds** with the owner (present cases, collect their call BEFORE revealing the engine's, log both in `notes/validation/` and add the index row to VALIDATION.md). Every disagreement converts into a same-day ruling, override, or golden pin — one round produced a new playstyle (clap_kite), a new archetype (bomb squad), and two systemic derivation fixes. Prefer this loop over guessing what the expert would say.
+The full model, with each rule's owner ruling: `HANDOFF.md` "Current engine model"
+and "Forge and loadouts"; `tests/VALIDATION.md` for the why.
 
 ## Load-bearing invariants
 
-- **Three layers, never merged**: engine truth (`CompEngine` scoring) / display explanation (UI translates engine output — no second hidden scoring system; `_decision_layer.js` is deliberately translation-only) / observed evidence (killboard prevalence, cohort affinity, reference builds — display-only, never a scoring input). Popularity is not effectiveness.
-- **Anti-circularity** (standing rule, VALIDATION.md): comps that calibrated a template must not drive retuning against their own gate results. Findings from gate runs are hypotheses for the owner/expert, not fixes. Template retunes need the owner's ruling.
-- **Judged at roster size**: the existing roster scores at actual size; `PLANNED` steers forge fill and warnings only. Do not collapse to `max(planned, roster)` scoring. Killboard *display* buckets are the opposite by design: `usageBucket()` in `_app.js` keys off `PLAN()` — the fights the comp is *for*.
-- **One spell per slot**: capability supply comes from resolved combos, never the flat union of a weapon's kit; forge constraints check the selected combo, not the sheet's theoretical maximum.
-- **Structural floors are source-aware** (Option C, owner ruling 2026-08-27): hard floors read the WEAPON+LOADOUT supply only — in `fitness`, every marginal path, `pick_report`/`explain`, and the dashboard's floor tags (`supplyFloor`). Worn gear counts toward coverage/headroom/overstack, never toward a structural floor, and a candidate's kit can never buy floor relief (the 2026-08-12 pseudo-tankiness ruling extended to the gear stat channel; `test_validation_modes.py` V5 pins it). Synergy is WEAPON-INTERACTION synergy — weapon+loadout supply only, never gear (scoring.yaml rule 3).
-- **Roster mutations** go through the central handlers (`data-add`, `data-swapat`) so loadout reset, provenance, prefill, and role re-sorting stay centralized; `sortPartyByRole()` applies one stable permutation across `party`/`PROV`/`COMBO`/`LOADOUT` — any new mutation path must preserve that.
-- **Descriptive layers never score**: `comp_identity`, `kill_pressure`, `fight_chain`, `pick_report`, the role layer (`detect_role`/`role_advisory` — test_roles R5), and the killboard surfaces describe — golden T23c/T25b/T26b/T30d literally prove fitness is untouched by computing them. The one sanctioned influence is the suggestion gate (bars suggestion POOLS, never scoring — forge F6/F13 pin the contract). Identity-aware *scoring* stays parked until more blind rounds validate the labels.
-- **Identity halves are derived facts** (owner rulings 2026-09-04/05, T34–T41; the derivations and every round's scores are in VALIDATION.md): the CLAP half of a hybrid excludes conditional-payload carriers (a ramp-dependent bomb counts as sustained — Galatine is not a clap bomb, Realmbreaker is; a ramp is FREE when a Q applies its charge to the caster unconditionally, `ramp_free`: the spear line, Rift Glaive). The KITE half is STANDOFF TOOLS (`style_fit.standoff_e`: an E delivered at range that displaces and commits nothing — Bedrock Mace, Hoarfrost, Demonic Staff, the meteor bombs — plus SLOW FIELDS laid at range (slow ≥ 4, not itself a bomb: Icicle, Arctic, Chillhowl) and, since 2026-09-05 "grailseeker can be kite or d tank", ROOT FIELDS laid at range (root ≥ 4: Grailseeker, Frost Staff); Occult's corridor is engage, not standoff), one per ten members, the hybrid never below two, a pure kite never below one, and a ranged core with none is a clap whatever its bomb share. The old evade-points read is retired. A FLEX BOMB (unconditional group payload landed at range — Realmbreaker, Spiked Gauntlets, Rift Glaive) joins whichever RIGID core the roster has and never forms one, going home to melee only when the rigid melee damage is twice the rigid ranged. Brawl-clap means THE BALL CARRIES THE BOMB (melee-delivered unconditional bombs hold half the bomb points); hybrid bomb share 0.45. In the MID BAND (10-14) with a real bomb share, whoever delivers the bomb names the style (ball → brawl-clap, range → clap; split only below the bomb line), and a LONE standoff body makes a kite only of a comp that is not bombing. When worn kits are known a SPLIT roster is decided by the dps chests (leather majority → brawl, cloth → ranged), and brawl-chest-majority dps overrule a weapons-decided clap to brawl ("point of clap is high dps which is not possible if majority of party is wearing leather"), the bomb-squad archetype exempt. A chest votes by its ITEM lean first (`chest_lean`: mined by the audit from weapons-only clean cores, ≥ 20 wearers, ≥ 75% one side — Royal Jacket / Tenacity / Hunter Jacket lean ranged though leather) and by the owner's class rule where it has none; never hand-list chests. Rejected with evidence: taking utility carriers' damage out of the numbers (it broke two agreed kites). Never reintroduce weapon lists here; extend the E facts.
-- **E-first identity**: a weapon's identity is its E spell first (sheets are structured that way; `derive_style_fit` reads the E's delivery and footprint; a utility-E weapon like Harpoon is a utility carrier whose damage never anchors an identity split).
-- **Unknowns stay explicit** — evidence records store `unknown`, never inferred values; quarantined records never become canonical defaults; only *verified* interaction records may affect scoring (unknown/likely never score). Two scoring couplings exist and both are verified-only with a required `scoring_note`: `nonstacking_caps` (a cap counts once across members) and `self_cost_offset_min_copies` (2026-08-28 — N copies cover each other's SELF-COST). The latter is the ONLY super-additive duplicate in the model, owner-ruled narrow ("duplicate is worth more only in special cases like demon armor"), and it may cancel a cost but never add supply.
-- **An item may cost its wearer** — `self_costs:` on a sheet entry (2026-08-28) records what wearing something takes AWAY, charged in `build_extra` on that member's own vector, never on the team pool, after the stat channels and floored at zero. Demon Armor's aura buys the group 0.43 resistances by spending 0.37 of the wearer's; before this field existed a sheet could only state the upside, which is how a backwards `tankiness` claim survived every review.
-- **Never invent a number to fill a hole** (owner challenge 2026-08-27, "or just randomly to make it fit within our 100% rule"): a template row exists only where real comps supply the measurement. The six promoted capabilities got rows only for the four contents with comps — castle and faction_war have none in the corpus and were left unscored on purpose; castle_outpost got no `max_health_cut` row because no comp fields it; roads (one comp) states in-file that its ceilings borrow the multi-comp median spread. Where the effect layer cannot ground a claim, the answer is to drop the claim, not to reach for the override channel — that is how `reveal` was refused and how six bad gear claims were caught. Say "we do not know" in the file.
-- **Style x size rows sit BESIDE the content templates** (owner ruling 2026-09-04, T37): `templates/style_bands.yaml` is GENERATED from the harvest board by `derive_style_bands.py` (target 0.9 x p10, soft cap 1.15 x p90 of the dressed supply winning rosters field, per declared style x band 10-14 / 15-19 / 20+; cells under 40 distinct rosters borrow their nearest filled cell and say so; a zero p10 writes a soft-cap-only row because fitness divides by the target, and so does a row whose capability 5% or more of the winners field none of (`zero_share`, owner 2026-09-09 "go ahead with your recommendations": p10 on the edge of the zero mass thrashed 7.5 / 1.0 / 4.6 on brawl|20 silence across three folds and flipped a V4 role slot; 39 of 245 rows fell back to their content targets; V7 pins it on the shipped file); NOTHING is excluded — engage / mobility / knockback / disengage were held back for an evening on the belief that boot claims inflated them, and measured the same day: winners' WEAPON-ONLY supply already runs 3-4x the content targets and boots add a third, so the content targets were outlier minimums off single comps, T37). `set_content` reads the band for a DECLARED style at 10+ AFTER the content row, scaled from the cell's ref size; the rows are measured per style so `target_mults` never stack on them; hard floors (weapon units), weights, `balanced` and every size under 10 keep the content row. Never hand-edit the yaml, never fill a thin cell with a number, and re-derive after every harvest refresh. The rows are measured on DRESSED winners, so validation fixtures are judged dressed (recorded kits via `pipeline/gear_join.py`, doctrine kits for synthetic parties — T38): a naked read against these rows is the unit error the 2026-08-29 re-fit removed, wearing new clothes.
-- **One unit, everywhere** — a capability number is only comparable to another measured the same way. **RESOLVED 2026-08-29: targets/soft caps now speak PERSON units, matching the dressed supply the engine measures** (152 rows across all six templates, moved together; VALIDATION.md "THE UNIT RE-FIT"). Two standing rules came out of it: a unit conversion can only ever RAISE a target (gear adds supply, never removes it — a factor below 1 is a recalibration claim, not a unit fix), and **hard floors stay in WEAPON units** because Option C makes them read the weapon+loadout supply by design. Only the 13 gear-fed capabilities moved; the other 16 were already right in person terms. Any future re-fit must still move every row at once, and any new row must state which unit it was measured in.
-- **One role read, three consumers** (2026-09-03): the coarse `role_class` (forge bands, role tally) derives from the weapon's primary SEAT class in the role book (first uniformed `role_menu` entry — the `detect_role` resolution; `composition.yaml` overrides still win; seatless weapons keep their sheet `role_hint`), and the comp board's column, tile colour and roster order all read that same seat. Never reintroduce a second classification for display. A weapon's `two_handed` fact (dumps `twohanded`) rides the dataset; `kit_options` drops the off-hand slot for two-handers in both ports, so no suggestion/dressing path may propose one.
-- **Kits are what winners wear** (owner 2026-09-03; R24 pins ≥ 85% modal agreement; the harvest counts and per-round numbers are in VALIDATION.md "THE KIT AUDIT"): every slot ranks by observed count first, from the weapon's own harvested builds, effect-carrier chests included; the comp marginal may reorder only the evidence band (items worn ≥ half as often as the modal); the archetype overlay never fronts an item outside that band. A weapon's observed chest class (≥ 25% of ≥ 50 builds) is admitted to its tier and kit_match beside the seat's book uniform (`kit_weapon_uniform`). The comp-level limit on carrier chests is the CARRIER QUOTA (`carrier_quotas`, killboard share × size, half-up, min 1) enforced inside the search — `party_state` counts DISCRETIONARY carriers (a chest at least half the weapon's builds wear is its identity chest and is exempt: Lifecurse and Bedrock Mace both keep Demon), capped kit variants are skipped, a carrier-modal weapon carries a non-carrier alternative — never a post-pass re-dress (that broke F5) and never a bar to scoring a manual kit. The evidence unit is the KILLER PARTY: `party_rosters.json` builds carry `party_size`, and doctrine, quotas and the audit read parties of 10+ only (`KB_MIN_PARTY`), because 2-8 man gank parties inside a 20+ battle wear gank kits. The VOTER is the player (R27): every build carries a hashed `player` key, a player's builds on a weapon share one vote, every doctrine floor counts distinct people (seat 3, weapon 2, a chain step 5 — was 2 until the 2026-09-08 Arcane Staff Judicator pocket, R35 — the uniform extension 35 voters), and rows ship rounded votes with `players` beside them — never let a sightings count back into a floor. The extension is evidence, not a ruling to defend (Grailseeker's harvest-admitted leather was accepted; Incubus at 0% leather is the off-role pin, R6/R12/R26). Doctrine ships in two SIZE BANDS (R28): the group band (10+ parties, all curated contents) at the seat's top level and a GANG band (4-9 man killer parties + small-scale curated contents) under `kit_bands.gang`; every doctrine reader in both ports goes through `_seat_kit`, which hands back the gang band at ≤ 9 members — never read `kit`/`kit_weapon`/`kit_build`/`kit_weapon_uniform` off the seat record directly. Catalogue gaps (a plain Cape, fish, a plain sandwich) are the only remaining audit misses; say so rather than invent a curated stand-in. **Style cells** (2026-09-08, spec `notes/specs/2026-09-08-coherent-style-kits-design.md`): the group band carries `kit_styles.<style>` mined from builds linked (`pipeline/party_link.py`: the analyzer's `party` index, else a unique (battle, weapon)) to parties `derive_party_styles.py` labelled weapons-only from the committed artifact (hash-gated, fail closed); `_seat_kit` lays a DECLARED style's cell over the band (per slot for tiers, whole chain for archetypes), `balanced` never reads a cell (owner 2026-09-08), and the 5-voter cell floor applies per weapon, per slot's modal item and to the chain's chest step — a thin cell or slot is absent, never filled (R30/R33/R24b). The archetype chain guard compares SHARES, never counts, with a 20%-or-20-votes pocket floor (R29). **Seat pooling** (2026-09-08, spec section 3): a weapon slot whose own modal carries under 5 distinct PEOPLE is THIN (`kit_weapon` tier rows ship `[id, count, players]` since 2026-09-09 — the people count rides as the third element on killboard-fed rows and the read falls back to the count only on a reference-only row; the first fold of the nightly corpus caught a 5-person Hunter Hood at 4.5 votes, rounded to 4, being pooled away under a declared clap, R24b) and the kit reader fronts the seat's pool item — same-chest pool (`kit_by_chest`) for helmet / boots / cape, plain seat pool (`kit_pool`) for potion / food — when it has 5+ players, marked `pooled`; chest and off-hand never pool; the audits skip a thin modal (R34a/R34b). Measured: three players' helmets predict the true modal 58%, the same-chest seat pool 80%.
-- **Fail closed, loudly**: the provenance gate, evidence lint, and MASTERSHEET parsing all block the build on errors rather than skipping them. Preserve that property in anything you add.
+Rules a change must not break. The ruling behind each is in `tests/VALIDATION.md`.
+
+- **Three layers, never merged**: engine truth / display explanation / observed
+  evidence. The UI never computes a score; killboard prevalence, cohort families
+  and reference builds never feed scoring. Popularity is not effectiveness.
+- **Anti-circularity**: comps that calibrated a template never drive retuning
+  against their own gate results. Gate findings are hypotheses for the owner.
+- **Never invent a number**: a template row exists only where real comps supply
+  the measurement; an ungroundable claim is dropped, not overridden in.
+- **No rules on individual weapons**: rulings land as derivations from the E's
+  facts (E-first / unique-ability-first); `style_overrides.yaml` corrects cited
+  facts, never taste.
+- **Descriptive layers never score**: identity, kill pressure, fight chain, roles,
+  the killboard surfaces. The one sanctioned influence is the suggestion gate.
+- **Judged at roster size**: the roster scores at its actual size; `PLANNED`
+  steers forge fill and warnings only. Killboard display buckets key off the plan.
+- **One spell per slot**: supply comes from resolved combos, never a kit's union.
+- **Structural floors are source-aware**: hard floors read weapon+loadout supply
+  only (weapon units); worn gear never buys floor relief. Synergy is
+  weapon-interaction synergy, never gear.
+- **One unit, everywhere**: targets and soft caps speak person units; a unit
+  conversion can only raise a target; any re-fit moves every row at once.
+- **Unknowns stay explicit**: `unknown` is stored, never inferred; quarantined
+  records never become defaults; only verified interaction records score.
+- **Duplicates**: 1 copy by default; the only super-additive duplicate is
+  `self_cost_offset_min_copies` (it cancels a cost, never adds supply).
+- **One role read**: `role_class`, the comp board column, tile colour and roster
+  order all derive from the weapon's primary seat. Never a second classification.
+- **Roster mutations** go through the central handlers (`data-add`, `data-swapat`).
+- **Kits are what winners wear**: the voter is the player, the evidence unit is
+  the killer party of 10+, thin evidence is absent — never filled.
+- **Fail closed, loudly**: provenance, lint and MASTERSHEET parsing block the
+  build on errors. Preserve that in anything you add.
+- **Validation is a blind round**: collect the owner's call BEFORE revealing the
+  engine's; every disagreement becomes a same-day ruling, override or golden pin,
+  logged in `notes/validation/` with an index row in `tests/VALIDATION.md`.
