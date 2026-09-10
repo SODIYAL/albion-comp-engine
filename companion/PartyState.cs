@@ -157,6 +157,39 @@ public sealed class PartyState
     /// <summary>Party member by guid — the inspect response's only identity.
     /// Guids come from the roster event alone, so this is party-scoped by
     /// construction (a stranger you inspect resolves to nothing).</summary>
+    /// <summary>A decoded equipment array is a kit only if every resolved
+    /// slot carries an item of that slot's kind: main hand a MAIN_/2H_ weapon,
+    /// off-hand OFF_, head HEAD_, chest ARMOR_, shoes SHOES_, cape CAPEITEM_,
+    /// potion POTION, food MEAL. An index missing from the item table counts
+    /// as wrong (a patch shift or a non-item number). At least the main hand
+    /// or the chest must resolve, or there is nothing to accept.</summary>
+    public static bool PlausibleEquipment(int[] eq, ItemDb items, out string why)
+    {
+        string[][] prefixes =
+        {
+            new[] { "MAIN_", "2H_" }, new[] { "OFF_" }, new[] { "HEAD_" },
+            new[] { "ARMOR_" }, new[] { "SHOES_" }, new[] { "BAG" },
+            new[] { "CAPEITEM_", "CAPE" }, new[] { "MOUNT_", "UNIQUE_MOUNT" },
+            new[] { "POTION", "T1_POTION", "UNIQUE_POTION" },
+            new[] { "MEAL", "UNIQUE_MEAL" },
+        };
+        var resolved = 0;
+        for (var i = 0; i < eq.Length && i < prefixes.Length; i++)
+        {
+            if (eq[i] <= 0) continue;
+            var full = items.FullName(eq[i]);
+            if (full.StartsWith("ITEM_")) { why = $"slot {i} index {eq[i]} not in the item table"; return false; }
+            var bare = System.Text.RegularExpressions.Regex.Replace(full, @"^T\d+_", "");
+            var ok = false;
+            foreach (var pre in prefixes[i]) if (bare.StartsWith(pre)) { ok = true; break; }
+            if (!ok) { why = $"slot {i} holds {full}"; return false; }
+            if (i == 0 || i == 3) resolved++;
+        }
+        if (resolved == 0) { why = "neither main hand nor chest resolved"; return false; }
+        why = "";
+        return true;
+    }
+
     public string? NameForGuid(Guid guid)
     {
         var key = guid.ToString();
@@ -174,6 +207,20 @@ public sealed class PartyState
             var key = name.ToLowerInvariant();
             var isSelf = _selfName != null && key == _selfName.ToLowerInvariant();
             if (!_members.ContainsKey(key) && !isSelf) return false;
+            // SLOT-MEANING GUARD (2026-09-10): the handlers find equipment by
+            // SHAPE (the first 10-long numeric array), and after the September
+            // patch that shape also matched the batched entity-update event and
+            // the unverified inspect response — boots as a main hand, a glaive
+            // as a helmet, eight consecutive entity ids as a kit. A real kit
+            // always satisfies the slot prefixes below; anything else is
+            // rejected here, the member keeps its last good state, and the
+            // caller does not bind the event code to this role.
+            if (equipment is { Length: > 0 } && _items is ItemDb chk
+                && !PlausibleEquipment(equipment, chk, out var why))
+            {
+                Console.WriteLine($"[guard] {source} for {name} rejected: {why}");
+                return false;
+            }
             Upsert(name, m =>
             {
                 if (equipment is { Length: > 0 } && _items is ItemDb items)
