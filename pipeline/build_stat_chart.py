@@ -91,7 +91,7 @@ def fnum(v):
 def extract(sid, reg):
     """Structured magnitude records for one spell, following references.
 
-    Beyond magnitudes, the rubric's ◆ facts (MASTERSHEET §7) are read
+    Beyond magnitudes, the rubric's ◆ facts (pipeline/sheets/README.md, the rubric) are read
     here: persistence (longest ground-area lifetime — Primal Slam's wall
     is spelleffectarea @time 4), delivery (root target kind + channel),
     cast position (cast range), and counter-immunity flags

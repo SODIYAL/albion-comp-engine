@@ -4,7 +4,7 @@
 # (gear_spells.json menu; a player equips ONE active per piece), or the
 # GEAR_STATS sentinel for statless items (capes, offhands, potions, food)
 # whose contribution is always-on. Starter set = the items the guild
-# doctrine names (MASTERSHEET §8); curated from the dumps descriptions.
+# doctrine names (MASTERSHEET tune:guild_builds); curated from the dumps descriptions.
 
 # ----------------------------------------------------------------- heads
 - gear: HEAD_CLOTH_SET2              # Cleric Cowl — "fallback, never wrong"

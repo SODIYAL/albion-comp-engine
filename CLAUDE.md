@@ -12,9 +12,9 @@ Read before substantive work:
 
 - `HANDOFF.md` — current state, the engine model, forge/loadout rules
 - `BACKLOG.md` — the one list of open work; no other file keeps its own
-- `MASTERSHEET.md` — the expert's control surface; its `tune:` blocks OVERRIDE
-  scoring/mechanics/templates/sheets at build time. Check it first for "what is
-  the engine actually using"
+- `MASTERSHEET.md` — the expert's control panel: `tune:` blocks that OVERRIDE
+  scoring/mechanics/templates/sheets at build time, rulings in force only
+- `pipeline/sheets/README.md` — the 1–7 curation rubric
 - `tests/VALIDATION.md` — the ruling index: standing rules, one line per owner
   ruling with its pin and archive location, open questions. Full dated log in
   `notes/validation/` (append-only)

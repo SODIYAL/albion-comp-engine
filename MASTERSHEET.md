@@ -1,259 +1,30 @@
-# MASTERSHEET — the control surface for the comp engine
+# MASTERSHEET — the expert's control panel
 
-This file is two things at once:
-
-1. **The plain-language explanation** of where every number in the engine
-   comes from and why a weapon ranks where it does.
-2. **The control panel.** The yaml blocks below marked `tune:` are read at
-   build time and **override** the underlying config files. Edit a value
-   here, rebuild, and the engine — the live dashboard and the Python engine
-   both — follows. You never have to hunt through the pipeline files.
-
-To apply your edits:
+The yaml blocks below marked `tune:` are read at build time and **override**
+the underlying config files — `templates/scoring.yaml`, `templates/mechanics.yaml`,
+the content templates and the weapon sheets. Edit a value here, rebuild, and
+both engines follow:
 
 ```
 py -3 pipeline/build_dataset.py
 py -3 dashboard/build.py
+py -3 tests/test_golden.py && py -3 tests/test_js_parity.py
 ```
 
-(Recommended after big edits: `py -3 tests/test_golden.py` and
-`py -3 tests/test_js_parity.py` to confirm nothing structural broke.)
+The build **fails loudly** on any mistake here — an unknown weapon, a
+capability the weapon doesn't have, a typo'd section — never silently
+ignores an edit. Whatever is set here wins, so this file is the single answer
+to "what is the engine actually using?" beyond the files themselves. It
+carries only rulings in force: each one cites the owner's words and the test
+that pins it; the history behind them is the `tests/VALIDATION.md` index.
+Sections: `scoring`, `mechanics`, `templates`, `sheets`, `guild_builds`
+(`pipeline/mastersheet.py`).
 
-Safety: the build **fails loudly** on any mistake here — an unknown weapon
-name, a capability a weapon doesn't have, a typo'd section — it will never
-silently ignore your edit. And whatever is set here **wins** over the
-underlying files, so this file is the single place to look when asking
-"what is the engine actually using?"
+## Per-weapon score overrides — `tune:sheets`
 
-## Current owner rulings (2026-09-08)
-
-These supersede conflicting historical examples below. Distinguish the
-implemented rule from the research or implementation still required.
-
-- **Clap healer minimum — implemented:** one healer per five members,
-  rounded down: four at 20-24, five at 25-29. It is a minimum, not an exact
-  count or maximum. `styles.yaml` carries `role_min_per_players: {healer: 5}`;
-  both engines resolve it at the current forge size from five members up.
-  Existing smaller-party rules remain. Kite retains its lower minima but
-  no longer forces exactly one/two healers in its 5-29 size overrides.
-  The hybrids have separate rules; this ruling changes pure clap and kite.
-- **Complete force:** the planned roster must function without unmodelled
-  outside support. A captured in-game party (at most 20) may be only one
-  detachment in a larger allied force. A specialist tank/battlemount party
-  must not define standalone healer or damage requirements. Reliable
-  force reconstruction and evidence separation remain open work.
-- **Useful builds, not just capability totals:** judge the E's effect,
-  magnitude, cooldown, actual delivery and setup, then the chosen Q/W and
-  equipment. Assume an average competent player. Shields are not heals;
-  self-mobility is not automatically team mobility. Members need the mana,
-  protection and access to perform their assigned job. This is the design
-  requirement, not a claim that the current scalar model verifies all of it.
-- **Double Bladed — RULED 2026-09-08 (same day, after the data check):**
-  "double bladed is a good ganking weapon but not a good brawl weapon.
-  but you need to check the actual stats." Checked: 24 killer parties of
-  10+ field it — 9 gank/dive squads, 15 clap-type rosters carrying ONE;
-  11 distinct wearers at 10+, none at 20+, in gank kits (Hunter Shoes 6
-  of 11, Graveguard 5 of 11). Its leap now derives MELEE delivery (below),
-  which bars clap/kite generation, and a viability exclusion at 10+ bars
-  the brawl damage seat (composition.yaml, evidence-gated, gang band
-  open). Manual picks still score. F27; VALIDATION.md 2026-09-08.
-- **Payload reach, not travel — implemented:** "yes when an e lands the
-  caster should read as melee delivery." The dumps carry a `dash` node on
-  every leap / charge E (spell_index `caster_moves`, parse_dumps adapter
-  5); such an E's cast range counts toward flex delivery only for a FLEX
-  BOMB — the 2026-09-04 exception (Realmbreaker, Rift Glaive: group
-  payload at the job bar). Grailseeker's Soul Shaker moves nothing and
-  stays a standoff root field ("its like one of the longest range
-  snares"). Flips: Double Bladed, Carving, Daybreaker, Claymore,
-  Bloodletter, Forcepulse, Quarterstaff, Trinity Spear -> melee. T45.
-- **Observed relevance — implemented as the GENERATED meta prior:**
-  "sure" (2026-09-08) to one harvest prior replacing both hand lists. The
-  seven-weapon hand-set meta prior and composition.yaml's viability core
-  list are retired; `pipeline/derive_meta_prior.py` writes
-  out/meta_prior.json from the committed killer-party harvest — per size
-  bucket, distinct players per weapon, shrunk on thin counts, top weapon
-  = 1.0 — and build_dataset attaches it (hash-gated; a hand-set map fails
-  the build). Weight `delta` 0.15: tiebreak-sized, never a floor or a
-  seat. Re-derive after every harvest. H18/T46.
-- **Healers per five on brawl and the hybrids — implemented:** "sure on
-  healers at 25". `role_min_per_players: {healer: 5}` on brawl,
-  brawl_clap and clap_kite beside clap; kite keeps its minima; balanced
-  keeps the base band (3-5 at 20-29) — an OPEN question, since a balanced
-  castle-25 forge still fields 3 healers. F16.
-- **Chain-step voter floor — implemented:** "ok on arcane helmet". Every
-  archetype chain step needs 5 distinct players (was 2); the Arcane Staff
-  Judicator pocket (4 players) is gone. Harvest: Assassin Hood 30 /
-  Judicator 24 / Cleric Cowl 9 players on Arcane Staff at 10+. R35.
-- **Hoarfrost burst_aoe 3 — implemented** (tune:sheets, §6): the
-  2026-08-20 V4 hold no longer binds (byte-identical at 2 and 3). T44.
-- **Correction discipline:** a bad generated team can expose wrong game
-  facts, capability judgments, role requirements or search decisions. Trace
-  the cause before changing a number. A test disagreement alone does not
-  settle a spell's rating. Preserve original expert answers and record why
-  an expectation changes; familiar examples remain training material.
-
-The `tune:` blocks do not implement the prose above automatically. Role
-structure lives in the files listed in section 8b. The independent
-validation/holdout sets are still empty, so the present coefficient values
-are provisional rather than independently calibrated.
-
----
-
-## 1. Where the data comes from
-
-The chain, start to finish:
-
-| Layer | What it is | Where it lives |
-| --- | --- | --- |
-| **Game files** | The game's own data: every spell's numbers, areas, escalation flags — pinned to one exact game-data snapshot so results are reproducible | `out/dumps_cache/` (snapshot), `data/source_pins.yaml` (the pin) |
-| **Parsed spells** | Each spell's damage, radius, max targets, escalation factors, cooldown, description | `out/spell_index.json` |
-| **Capability sheets** | The human judgment layer: what each weapon is actually good at, scored **1–7** (2 points = one supply unit; old 0–3 scores live on the even slots), with the exact spell cited as evidence. Shared Q/W spells are curated once per tree; each weapon's sheet carries only its E — the E is the weapon's identity | `pipeline/sheets/pools/` (tree Q/W), `pipeline/sheets/*.yaml` (the E) |
-| **Delivery physics** | Auto-derived per capability from its evidence spell: area footprint, target cap, escalation — this is what makes an AoE slow count more than a self speed-buff in big fights | stamped into the dataset at build time |
-| **Content templates** | What each content type demands: how much healing, catch, AoE damage etc. a castle fight vs a roads gank wants | `pipeline/templates/*.yaml` |
-| **The dataset** | Everything above compiled into one file; the browser engine and the Python engine read this same file, verified identical to 9 decimal places | `out/dataset-latest.json` |
-
-No score exists without a cited spell (the evidence lint blocks the build
-otherwise), and no data ships unless its whole chain hash-verifies against
-the pinned snapshot.
-
-**Tiers and item power:** gear maps to item power exactly (T4 = 700; each
-tier step or enchant = +100). Magnitudes scale ×1.0918 per 100 IP,
-compounding (≈ ×1.42 at 4.4/7.1, ×2.02 at 8.4), further weighted by the
-weapon family's ability-power coefficient (most 120; axes 138, crossbows
-144 — shown as [AP n] tags on the chart). What does NOT scale with tier:
-percentage effects, durations, distances, and any record the game flags
-`ignoreabilitypowerscaling` — the chart tags those **tier-flat** (Primal
-Slam's 18m wall is 18m at 4.1 and at 8.4, which is exactly what makes
-flagged utility the cost-efficient pick and damage weapons tier-hungry).
-The stat chart's Tier lens table carries the full multiplier row.
-
-## 2. Why a weapon ranks where it does
-
-A candidate's score is **exactly how much the party's total comp score
-changes if it joins**:
-
-```
-score = 0.55·(capability gain) + 0.20·(synergy gain) + 0.15·(meta prior)
-        ± viability/duplication adjustments
-```
-
-What happens inside "capability gain", in order:
-
-1. **One spell per slot.** The weapon is scored on its best single Q/W/E/passive
-   loadout — never the whole spell menu at once.
-2. **Geometry.** AoE-delivered utility (catch, peel, slow, stun, root,
-   silence, displace) is multiplied by how many enemies the spell's real
-   footprint reaches in this fight size and playstyle. A 7m Tornado ≈ 3× a
-   self-only speed buff at 20-man; the gap closes in small gangs. Effects
-   the game gives CC Escalation to (duration grows per target hit) get that
-   on top — read per spell from the game files.
-3. **Fight physics.** AoE damage escalates with clump size; stacked
-   single-target damage is taxed by the game's Focus Fire protection
-   (up to 75% at 26+ attackers).
-4. **Demand.** What's left is compared against the content template: filling
-   an empty need is worth the full weight, topping up a covered one is worth
-   little (concave), and over-stacking costs.
-
-The dashboard's "Why" panel shows these exact terms for any pick — the
-numbers there ARE the scoring, not a summary of it.
-
-**Current limitations:** the 1-7 capability grades remain curated judgments,
-not direct damage/healing measurements. The rubric in section 7 guides a
-reviewer but does not compute the final grade from stored component answers.
-Equipment, roles, conditional payloads and observed-kit guidance now exist;
-their presence does not prove that every selected build can perform its
-assigned job. Complete-force evidence, mana sufficiency (carrier floors) and
-setup compatibility still require further work; contextual weapon
-prevalence ships as the generated meta prior (2026-09-08).
-
----
-
-## 3. The dials — scoring
-
-These values are LIVE: edit and rebuild. They currently mirror the tuned
-defaults.
-
-```yaml tune:scoring
-# 1-7 grading scale (2026-08-20): sheets grade every capability 1-7. Old
-# 0-3 scores moved to the EVEN slots (1->2, 2->4, 3->6); odd slots are for
-# finer rulings — 1 = weaker than anything previously scored, 7 = beyond
-# the old top. score_unit = how many points make one supply unit; 2 keeps
-# all template targets and floors calibrated exactly as before.
-score_unit: 2
-
-weights:
-  alpha: 0.55        # weight of raw capability gain
-  beta: 0.20         # weight of synergy gain
-  delta: 0.15        # weight of the meta prior
-  gamma: 0.70        # concavity: how fast a filled need stops paying
-  overstack_max: 0.5 # max penalty for over-stacking a capability
-  rho: 0.25          # per-copy cost of duplicate weapons
-  viability: 0.15    # bonus for core-listed weapons at large sizes
-  headroom: 0.1      # small credit for supply between target and soft cap
-
-# Pairs worth more across two players than their sum. Add a pair by copying
-# a line; capability names must exist in the content template's demands.
-capability_synergies:
-  - {a: clump_create,   b: burst_aoe,      bonus: 1.5}
-  - {a: engage,         b: catch,          bonus: 0.8}
-  - {a: resist_shred,   b: burst_st,       bonus: 0.8}
-  - {a: heal_reduction, b: sustained_dps,  bonus: 0.8}
-
-# meta_prior is GENERATED since 2026-09-08 (owner ruling, see the rulings
-# block at the top): killer-party prevalence per fight-size bucket, one
-# player one vote, from pipeline/derive_meta_prior.py -> out/meta_prior.json.
-# A hand-set map here fails the build. `delta` above is the only dial.
-```
-
-## 4. The dials — fight physics
-
-```yaml tune:mechanics
-aoe_geometry:
-  # How many enemies an area of a given radius realistically affects
-  # (step table: the largest radius <= the spell's radius wins).
-  radius_targets:
-    0: 1
-    2: 2
-    3.5: 3
-    5: 4
-    6.5: 6
-    8: 8
-  # Which capabilities scale with targets reached. zone_control is excluded
-  # on purpose — area already IS its identity.
-  geometric_caps: [catch, peel, slow, stun, root, silence, knockback_displace]
-  # Which of those also get the game's CC Escalation (longer duration per
-  # target hit) when the spell carries the flag in the game files.
-  cc_duration_caps: [stun, root, silence]
-  escalation_cap_targets: 8
-  # THE ANCHOR: the clump size at which an AoE utility spell counts exactly
-  # its sheet score. 2 = "a small skirmish". Raise it and AoE utility gets
-  # weaker everywhere; lower it and AoE utility gets stronger everywhere.
-  reference_clump: 2
-```
-
-## 5. Per-content demand overrides
-
-Adjust what a content type demands without touching the template files.
-Empty = no overrides. Example (uncomment and edit):
-
-```yaml tune:templates
-# castle:
-#   catch:   {weight: 5, target: 3.5}   # castle wants more catch
-# blackzone_roam:
-#   burst_st: {weight: 0}               # zero out single-target at roam
-```
-
-Valid fields per capability: `target`, `weight`, `soft_cap`, `scales`.
-Contents: `blackzone_roam`, `castle`, `castle_outpost`, `faction_war`,
-`roads`, `territory_defense`.
-
-## 6. Per-weapon score overrides
-
-Your expert rulings, applied instantly without editing sheets. You can
-**re-rank** a capability the weapon already has, or **remove** it
-(score 0). You cannot invent a new capability here — that needs a sheet
-row with spell evidence, which keeps the no-score-without-proof rule
-intact. Empty = no overrides. Example:
+Re-rank a capability a weapon already has, or remove it (score 0). A NEW
+capability needs a sheet row with spell evidence — the no-score-without-proof
+rule stays intact. Keys are game unique names (`pipeline/sheets/*.yaml`).
 
 ```yaml tune:sheets
 # Expert ruling 2026-08-20 (pinned by golden T19): Bedrock Mace is THE
@@ -293,201 +64,63 @@ MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
 #   catch: 2                   # gank kit, not ZvZ catch — down from 4
 ```
 
-Weapon keys are the game's unique names — see any weapon's dossier in the
-dashboard, or `pipeline/sheets/*.yaml`.
+## Scoring dials — `tune:scoring`
 
-## 7. The 1–7 ability rubric (canonical, 2026-08-20 — scale is LIVE)
+Empty: the engine runs on `templates/scoring.yaml` as committed (alpha 0.55 /
+beta 0.20 / delta 0.15 / gamma 0.70, rho, headroom, the synergy pairs). To
+override, uncomment and edit — dicts merge, scalars replace. `meta_prior` is
+GENERATED (`derive_meta_prior.py`); a hand-set map here fails the build.
 
-Sheets now grade 1–7 (the old 0–3 sits on the even slots; odd slots are
-for finer rulings, 7 = beyond the old top; `score_unit: 2` in §3 keeps all
-calibration intact). The rubric below is how new 1–7 judgments are made,
-refined against the worked case that proved raw magnitude alone misleads:
-Bedrock's Primal Slam (18m throw + a wall that persists 4s, ground-cast
-from 18m, ignores CC resistance, on a kit with Guard Rune / Snare Charge /
-Defensive Slam) vs Iron-clad's whirlwind (12m, but the caster must
-physically contact the diver while channeling). Every line of that
-contrast is its own question.
+```yaml tune:scoring
+# weights:
+#   gamma: 0.65         # concavity: how fast a filled need stops paying
+# capability_synergies:
+#   - {a: clump_create, b: burst_aoe, bonus: 1.5}
+```
 
-Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment.
+## Fight physics — `tune:mechanics`
 
-**Spell × capability (eight questions, 1–7 each):**
+Empty: `templates/mechanics.yaml` as committed (Focus Fire / Resilience and
+AoE Escalation tables owner-verified 2026-08-25; `aoe_geometry` with
+`reference_clump: 2` — raise it and AoE utility weakens everywhere).
 
-1. **S1 ◆ Raw magnitude** — size per application, ranked WITHIN its own
-   effect type's ladder (meters vs meters, seconds vs seconds — never
-   across units; the cross-type exchange is S7's judgment).
-2. **S2 ◆ Persistence** — does it keep working after the cast with no
-   further input? 1 = only during contact/channel · 4 = one instant
-   application · 7 = leaves a lasting structure or zone (the 4s wall).
-3. **S3 ◇ Delivery demand & pilot dependence** — 1 = must physically
-   touch a moving enemy while channeling, or full value only under
-   exceptional piloting (Bow's +280% AA window is huge on paper; landing
-   sustained single-target autos on a priority target through a ZvZ is a
-   skill few bring — score the value an AVERAGE competent player gets) ·
-   3 = skillshot · 5 = targeted click · 7 = ground-cast fire-and-forget.
-4. **S4 ◆ Cast position** — 1 = must stand inside enemy threat range,
-   out of formation · 7 = castable from your own line (18m cast range).
-5. **S5 ◆ Counter-immunity** — the flags are in the data: ignores CC
-   resistance / ignores DR / purge- and cleanse-exposure. 1 = negated by
-   standard kit · 7 = all-flags (Primal Slam class).
-6. **S6 ◆ Economy vs job cadence** — cooldown measured against how often
-   THIS capability's job recurs (27.5s CD vs a dive window every ~30s =
-   always available; the same CD can mean one chance per fight for a
-   different job). Numbers auto, cadence judgment.
-7. **S7 ● Purpose fit** — does the effect's SHAPE do this capability's
-   job (a knockback that pushes divers out is ideal anti_dive, mediocre
-   catch; stasis denies a dive but also protects the target from damage).
-8. **S8 ● Team enablement** — does it make teammates' damage/CC land
-   (Soulscythe's line knockup) or deny the enemy team's follow-up (the
-   wall splitting a dive from its support)?
+```yaml tune:mechanics
+# aoe_geometry:
+#   reference_clump: 3
+```
 
-**Weapon × role (three questions):**
+## Per-content demand — `tune:templates`
 
-1. **W1 ◇ Kit reinforcement & cross-slot combos** — do the slot-mates the
-   role actually equips amplify the same job, or MULTIPLY the E?
-   (Bedrock: Defensive Slam Q + Guard Rune / Snare Charge W — every slot
-   serves anti-dive tanking. Longbow: Rain of Arrows E × Explosive Arrows
-   W — the W makes the E's clump damage bigger, and the 15s E cycles the
-   combo fast. Bow: the same W cannot turn a single-target AA window into
-   AoE — same tree, no combo.) 1H weapons add the OFFHAND as a free
-   amplifier slot (Hallowfall + healing offhand) — judged coarsely until
-   gear sheets land. The loadout model supplies the candidates.
-2. **W2 ● Identity density** — how many capabilities does the E cover AT
-   QUALITY in one button? (Primal Slam: displacement + zone + peel
-   simultaneously.)
-3. **W3 ◇ Role placement & practice** — does the role's position/build
-   put the spell where its job happens, and does reality agree (guild
-   CORE lists, usage data)?
+Empty. Fields per capability: `target`, `weight`, `soft_cap`, `scales`.
+Contents: `blackzone_roam`, `castle`, `castle_outpost`, `faction_war`,
+`roads`, `territory_defense`. Style x size rows are GENERATED
+(`templates/style_bands.yaml`) and are not overridden here.
 
-Targets-hit and content-fit are deliberately NOT in the rubric: the
-geometric layer and the templates already compute those — scoring them
-here would double-count. Combining: S1/S3/S7 are gates (a huge, reliable
-effect with the wrong shape is still wrong for the job); the rest are
-weighted modifiers with capability-specific weights.
+```yaml tune:templates
+# castle:
+#   catch: {weight: 5, target: 3.5}
+```
 
-The judging instruments: `review/stat_chart.html` (real numbers per
-capability, spell-keyed, typed sub-groups, plus the per-spell fact line —
-persistence, delivery, cast range, counter-immunity flags) and
-`review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild after
-sheet edits: `py -3 pipeline/build_stat_chart.py`.
+## What this file does NOT control
 
-### Rescore pass 1 — applied 2026-08-20 (34 rulings, in the sheets)
+The forge's structure lives beside the role book, every entry cited, with the
+same fail-loud promise:
 
-First board-by-board pass over the outlier worklist (measured rank vs
-curated score within typed unit groups). Conservative movement: mostly
-into the odd slots; grounds = S1 ladder position + S2–S6 facts + guild
-doctrine (W3). Highlights — full list in the sheet diffs of the rescore
-commit:
+| Dial | Where |
+| --- | --- |
+| Role book: seats, functions, memberships | `pipeline/roles.yaml` `roles:` |
+| Kit-pool and gear-affinity rulings | `pipeline/roles.yaml` `kit_doctrine.overrides`, `gear_affinity_overrides` |
+| Need profiles | `pipeline/roles.yaml` `need_profiles` |
+| Style role bands, healer minima | `pipeline/templates/styles.yaml` `constraint_overrides`, `role_min_per_players` |
+| Viability exclusions, duplicate allowances | `pipeline/templates/composition.yaml` |
+| Style-fit rulings per weapon | `pipeline/style_overrides.yaml` |
+| Style x size rows, meta prior | GENERATED from the harvest — never hand-set |
 
-- **Soulscythe Tornado** catch/peel/displace 2→4 (80%×~3s slow on a 25m
-  line, ignores CCR, team-enabling hold — the session's founding case).
-- **Double Bladed** catch 4→2 (gap-close catches one target — gank kit).
-- **Snare Charge** root 2→5 (5.1s ranged ground root on 15s CD — the
-  strongest root in the game; guild names it on CORE builds).
-- **Occult's corridor** slow 2→4 (8s persistent zone @25m — the kite
-  requirement); **Grailseeker's Soulshaker** catch 2→4; **Dreadstorm's
-  fragment storm** catch/slow/shred 2→4 (1.5s CD spam).
-- **Crossbow-line ranged CC** up (Silencing Bolt 4, ranged knockback 4 —
-  ladder-consistent with Great Holy's 10m rung).
-- Damage boards: Clarent charge burst_st 4, Dagger Pair execute 4, Heron
-  throw 3; shreds (axe W, arcane Frazzle) 3.
-- **One ruling HELD by the validation gate (HOLD LIFTED 2026-09-08 — ruled 3 in §6; V4 identical at 2 and 3)**: Hoarfrost's Avalanche
-  measures 280/cast (top-20% of the burst_aoe board) and argues for 3 —
-  but even +0.5 unit pushes the frontline pick out of a brawl comp's
-  tank slot in the V4 blind test (69% vs the 70% gate; verified by
-  isolating the single ruling). Held at 2 with the tension noted in the
-  sheet — revisit when V4b/win-lift can adjudicate. Healer boards
-  deliberately untouched this pass (V4 measures healer slots and the
-  saturation artifact already dominates those misses — MECHANICS_TODO
-  Q18).
+## Guild-approved builds — `tune:guild_builds`
 
-## 8. The full-build member model (gear layer, 2026-08-20)
-
-A member is no longer just weapon + weapon spells. The engine now models:
-
-> **person contribution** = weapon loadout + helmet ability + armor ability
-> + shoes ability + cape + offhand + potion + food — every slot's
-> capabilities, through the same physics (a Force Field's 6m AoE shove
-> scales geometrically like any weapon AoE; gear abilities carry the same
-> delivery facts and rank on the same stat-chart boards).
-
-- **Gear sheets**: `pipeline/sheets/gear/*.yaml` — same rules as weapon
-  sheets (1–7 scale, no score without evidence; the evidence is the item's
-  ability id, or `GEAR_STATS` for statless items like capes/potions/food).
-  Starter set = the items your doctrine names in §9; 129 items curated
-  (`core.yaml` + `combat_expansion.yaml`, 2026-08-27). Add items by
-  copying an entry.
-- **One ability per piece** — the loadout rule applies to gear too; the
-  engine scores the chosen (or best) ability per slot.
-- **Item stats modify the person** (`build_stats` in the §4 mechanics
-  dial): absolute defense (armor+MR, CC-resist) adds tankiness units;
-  percentage stats MULTIPLY the member's own capabilities — Robe of
-  Purity's +50% damage turns a DPS's damage supply ×1.5 and gives a
-  control tank with no damage caps nothing, while plate's 287 armor
-  points add tankiness either way. "Heavy Mace on cloth defeats its
-  purpose" is now a computable statement (golden T21 pins it).
-- **Engine**: `build_extra(weapon, combo, gear)` is a full member;
-  `fitness/comp_score(party, combos, gears)` price full builds. Weapon-only
-  calls are unchanged — gear is additive. Both engines verified identical
-  (parity includes full-build cases); golden T20 pins a doctrine build.
-- **The kit advisor** — `engine.kit_options(weapon, party=...)` returns
-  the ideal kit and ranked alternatives PER SLOT for the player of that
-  weapon in this content/style. Without a party it ranks by template
-  weights; with the rest of the comp it ranks by exact fitness deltas, so
-  the kit answers what THIS comp still needs, and role adaptation is
-  emergent (the stat channel makes cloth worth 1.5x a DPS's damage and
-  ~nothing on a control tank). Golden T22 pins the role differentiation.
-  Since the role layer (2026-08-25/26) it is DOCTRINE-LED: the chest
-  pool hard-gates to the weapon's seat uniform, every other slot ranks
-  what the seat's real reference builds actually wore — the weapon's
-  OWN observed kit first (with its honest sample size), the seat pool
-  behind it — and effect-carrier chests (Demon / Judicator / Guardian /
-  Royal / Hellion) are treated as comp-level allocations, never weapon
-  identity: the dashboard shows the observed per-roster quota for each
-  effect against the chests your roster has set.
-- **Known model-vs-doctrine tension** (recorded, not hidden): in a
-  4-healer comp the advisor does NOT surface Robe of Purity for healers,
-  because template healing is COVERAGE-based and covered — while the
-  doctrine runs Purity for healing THROUGHPUT beyond coverage. Deciding
-  whether raw throughput deserves value past the target is an expert
-  call for the templates (a `heal_throughput` capability or a softer
-  heal soft-cap), queued for the next tuning pass.
-- **Shipped 2026-08-27 (the dressed forge)**: forge and recommend
-  evaluate every candidate as weapon + combo + doctrine kit, priced by
-  the exact comp score the page displays; locked members are never
-  re-dressed (`notes/specs/2026-08-27-dressed-forge-design.md`).
-
-### 8b. The role layer & forge structure — where those dials live
-
-The forge no longer builds from capability math alone; it builds toward
-an owner-ruled STRUCTURE. Those dials deliberately do NOT live in this
-file — they live beside the role book, and every entry is cited:
-
-| Dial | What it rules | Where |
-| --- | --- | --- |
-| Role book | seats, function roles, every weapon membership (evidence-cited) | `pipeline/roles.yaml` `roles:` |
-| Kit-pool rulings | drop/add on the mined kit pools, per seat or per weapon | `pipeline/roles.yaml` `kit_doctrine.overrides` |
-| Gear affinity rulings | replace a derived item-to-seat affinity | `pipeline/roles.yaml` `gear_affinity_overrides` |
-| **Need profiles** | fine-seat bands + function coverage the forge must field (engage 2-3 / stopper 1-2 default, terry stopper-heavy; pierce & heal-cut always) | `pipeline/roles.yaml` `need_profiles` |
-| Style role bands | healers/frontline/ranged-core per style & size (clap/clap_kite ranged core 7 at 20) | `pipeline/templates/styles.yaml` `constraint_overrides` |
-| Style × size rows | targets / soft caps per declared style × size band, GENERATED from the harvest board — never hand-edited, re-derived after every harvest (2026-09-04) | `pipeline/templates/style_bands.yaml` via `pipeline/derive_style_bands.py` |
-| Style-fit rulings | override a weapon's derived fits / situational / unfit verdict per style × band (cited, validated, release-blocking on errors) | `pipeline/style_overrides.yaml` |
-| Observed relevance | the meta prior: killer-party prevalence per fight-size bucket, one player one vote, GENERATED — never hand-set, re-derived after every harvest (2026-09-08) | `pipeline/out/meta_prior.json` via `pipeline/derive_meta_prior.py` |
-
-Same safety promise as this file: the build fails loudly on an unknown
-weapon, item, role or content id — a stale ruling never silently
-no-ops. The grading board (`out/roles_report.json`) audits every mined
-pool and override; `out/roster_mixes.json` holds the killboard roster
-evidence the profiles were ruled against. Like every generation
-constraint: these shape what the forge PRODUCES, never what a manual
-party may score.
-
-## 9. Guild-approved builds
-
-The guild announcement, recorded 2026-08-20, structured but in the guild's
-own words and weapon names. It ships into the dataset verbatim as a
-**guideline layer**: visible in tooling, usable as a validation reference,
-never a hard rule the scorer enforces. (Mapping the guild's weapon names to
-game ids is a separate wiring step.)
+The guild announcement of 2026-08-20, in the guild's own words. Ships into
+the dataset verbatim as a guideline layer for display and validation — never
+a rule the scorer enforces.
 
 ```yaml tune:guild_builds
 source: guild announcement — approved builds, group content
@@ -657,18 +290,3 @@ battlemounts:
     health), Feyscale Sandals 4.4 (cheapest optimal, no real alternative;
     4.3 fine).
 ```
-
----
-
-## 10. House rules (how this stays trustworthy)
-
-- **No score without a cited spell.** The evidence lint fails the build on
-  any capability score that can't point at an equippable spell.
-- **The game files are the authority** on magnitudes, areas, and escalation
-  — patch data beats wiki notes beats memory.
-- **Every expert ruling becomes a pinned test** (the golden suite, 26 cases)
-  so later changes can't silently undo it.
-- **Browser and Python engines are bit-identical** (parity gate, 60 cases at
-  1e-9) — what the dashboard shows is what the engine computed.
-- **Fail closed.** Broken provenance, lint errors, or a bad edit in this
-  file stop the build; they never ship quietly.
