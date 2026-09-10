@@ -126,6 +126,16 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **Gear pools — the tree-shared actives are uncurated.** Every cloth head
+  carries Energy Barrier + Force Field as its first two actives and only the
+  third is unique, yet only Cleric Cowl's sheet cites Force Field; a Fiend
+  Cowl running it supplies zero knockback / peel. Same for every armor tree
+  and slot. Give gear the weapon sheets' pool structure (`sheets/gear/pools/`
+  per tree x slot, each item's sheet keeping its unique active), so the
+  engine's one-active-per-piece pick chooses among what the item can really
+  equip. Recorded as pending 2026-08-25 ("the tree-shared first two abilities
+  await curation"); do it BEFORE any gear magnitude review. (V: 08, Fourth
+  pass)
 - **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py` ->
   `review/magnitude.html`): the PASV queue (39 rows where a passive / stat
   sentinel grounds a score >= 2 — each needs a justification or a downgrade)
