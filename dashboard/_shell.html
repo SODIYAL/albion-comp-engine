@@ -485,7 +485,16 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* dossier PvP-interaction rows + badges + utility filter chips */
 .int-row{margin:0 0 10px; font-size:12.5px}
-.int-row .bdg.b-int{color:var(--brass); cursor:default}
+.int-row>div:first-child{display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px}
+/* interaction badges carry WORDS (pull, duplicate:full), not a semantic
+   icon — the 22px icon box overlapped them (2026-09-11 fix): a text pill */
+.bdg.b-int{
+  width:auto; height:auto; padding:2px 7px; margin-left:0; border-radius:99px;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
+  white-space:nowrap; vertical-align:middle; color:var(--brass); cursor:default;
+}
+.int-row .prov{vertical-align:middle}
+.sp-inter{display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px}
 .int-comps{margin-top:3px}
 .int-comps li{font-size:11.5px; color:var(--ink-2)}
 .int-comps i{color:var(--ink-3)}
@@ -545,7 +554,24 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border:0; border-radius:0; padding:8px 4px; white-space:nowrap;
 }
 .wf-bar .pgroup-t[aria-pressed="true"]{box-shadow:none; color:var(--brass)}
-.wf-bar .facet{margin:0}
+/* the facet readout takes the width the controls leave (2026-09-11 fix:
+   #picker-chips could shrink under its nowrap triggers and the facet's
+   wrapped text overran UTILITY, while "× clear" broke into two lines) */
+#picker-chips, .wf-search{flex:none}
+#facet-slot{flex:1 1 0; min-width:0; justify-content:flex-end; container-type:inline-size;
+  /* clips, never spills: this segment holds no flyout (they live in #picker-chips) */
+  overflow:hidden}
+#facet-slot:empty{display:none}
+.wf-bar .facet{margin:0; min-width:0; white-space:nowrap}
+.wf-bar .facet .facet-n{flex:none}
+/* the readout compacts by the slot's own width: full "18 matches · × clear"
+   -> "18 · ×" -> "×"; the description shows only with real room (the wheel
+   column fixes the bar at ~550px). The full sentence rides the tooltip. */
+.wf-bar .facet .facet-t{display:none; min-width:0; overflow:hidden; text-overflow:ellipsis}
+@container (min-width:300px){ .wf-bar .facet .facet-t{display:block} }
+@container (max-width:150px){ .wf-bar .facet .w{display:none} }
+@container (max-width:44px){ .wf-bar .facet .facet-n{display:none} }
+.wf-bar .facet .fx{flex:none; white-space:nowrap}
 
 /* the tree menu and the search popover share their surface */
 .wf-menu, .wf-pop{

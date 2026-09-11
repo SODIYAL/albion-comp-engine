@@ -517,6 +517,24 @@ check(".label" in lab and "L.tags" in lab and "det.word" in lab
 check("fine(m.role, party[i])" in tile,
       "L22b every tile composes its label from the member's detected seat and its own weapon")
 
+# L23 - three visual fixes (owner 2026-09-11): the picker facet never
+# overruns the controls, interaction badges are text pills, the masthead
+# size chip does not inherit the note box's margin
+check("#picker-chips, .wf-search{flex:none}" in SHELL and "#facet-slot{flex:1 1 0" in SHELL
+      and "container-type:inline-size" in SHELL and "@container (min-width:300px)" in SHELL,
+      "L23a the picker controls never shrink; the facet takes the leftover width and shows its description only when the slot has room")
+fac = seg(APP, 'const nMatch = ', 'const idx = wheelFocusIdx', "L23 facet anchors")
+check('class="facet-n"' in fac and 'class="facet-t"' in fac and 'title="showing:' in fac
+      and 'class="w"' in fac and "@container (max-width:150px){ .wf-bar .facet .w{display:none} }" in SHELL
+      and "@container (max-width:44px){ .wf-bar .facet .facet-n{display:none} }" in SHELL
+      and "overflow:hidden" in seg(SHELL, "#facet-slot{", "#facet-slot:empty", "L23 slot anchors"),
+      "L23b the facet readout is count-first, compacts by its own width (words, then the count) and clips rather than spills; the full sentence rides the tooltip")
+check(".bdg.b-int{" in SHELL and "width:auto; height:auto" in seg(SHELL, ".bdg.b-int{", "}", "L23 pill anchors")
+      and ".int-row>div:first-child{display:flex; flex-wrap:wrap" in SHELL,
+      "L23c interaction badges are text pills in a wrapping row, never the 22px icon box")
+check(".mh-bar .chip{margin:0}" in LAYOUT and ".mh-bar .sb-count{line-height:1}" in LAYOUT,
+      "L23d the masthead size chip and count centre with the controls")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

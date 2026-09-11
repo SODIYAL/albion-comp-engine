@@ -1382,9 +1382,14 @@ function renderWheel(recs){
     : FACET.type === "badge"
       ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
       : `utility: ${FACET.v}`;
+  /* one line in the bar (2026-09-11): the count never truncates, the
+     description ellipsizes, the full sentence rides the tooltip */
+  const nMatch = `${keys.length} match${keys.length === 1 ? "" : "es"}`;
+  /* the words compact away by the slot's own width (.w spans; see the
+     @container rules) — the count and the × survive down to nothing */
   $("facet-slot").innerHTML = FACET
-    ? `<div class="facet"><span>showing: <b>${esc(facetText)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
-       <button class="fx" id="facet-clear" aria-label="Clear filter">&times; clear</button></div>`
+    ? `<div class="facet" title="showing: ${esc(facetText)} — ${nMatch}"><span class="facet-n">${keys.length}<span class="w"> match${keys.length === 1 ? "" : "es"}</span></span><span class="facet-t">· <b>${esc(facetText)}</b></span>
+       <button class="fx" id="facet-clear" aria-label="Clear filter" title="clear the filter">&times;<span class="w"> clear</span></button></div>`
     : "";
   const idx = wheelFocusIdx(keys, recs);
   const rings = hubRingData();
