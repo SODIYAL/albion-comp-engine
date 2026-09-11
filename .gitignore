@@ -31,3 +31,6 @@ pipeline/out/roster_cache/
 pipeline/out/party_cache/
 pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
+
+# derive_meta_prior.py --all-battles audit copy (never shipped)
+pipeline/out/meta_prior-all-battles.json
