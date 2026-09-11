@@ -60,6 +60,10 @@
     this.rho = w.rho || 0.0;
     this.viabilityW = w.viability || 0.0;
     this.headroom = w.headroom || 0.0;
+    /* pair-aware prior (owner 2026-09-11, mirrors engine.py): blend weight
+       for the best observed partner; absent = 0 = pure solo */
+    this.metaPairW = w.meta_pair || 0.0;
+    this.metaPairs = this.scoring.meta_pairs || {};
     this.metaPrior = this.scoring.meta_prior || {};
     var mpKeys = Object.keys(this.metaPrior);
     this.metaBucketed = mpKeys.length > 0 &&
@@ -1942,9 +1946,53 @@
   };
 
   /* ----------------------------------------------------------------- priors */
-  CompEngine.prototype.metaOf = function (w) {
+  CompEngine.prototype._soloOf = function (w) {
+    /* the weapon's own share of killer parties at the current size
+       (mirrors engine.py _solo_of) */
     if (!this.metaBucketed) return this.metaPrior[w] || 0.0;
     return (this.metaPrior[this.sizeBucket()] || {})[w] || 0.0;
+  };
+
+  CompEngine.prototype._pairOf = function (weapon, party, skip) {
+    /* Best observed partner of `weapon` among the OTHER seats of `party`
+       (mirrors engine.py _pair_of): [score, partner|null]; [0, null] with
+       no row — absence is neutral, never a penalty. Ties break on the
+       partner id so the explanation matches Python. */
+    if (!party || !party.length || !this.metaPairW) return [0.0, null];
+    var rows = (this.metaPairs[this.sizeBucket()] || {})[weapon];
+    if (!rows) return [0.0, null];
+    var best = 0.0, who = null;
+    for (var i = 0; i < party.length; i++) {
+      if (i === skip) continue;
+      var m = party[i], s = rows[m] || 0.0;
+      if (s > best || (s === best && who !== null && s && m < who)) { best = s; who = m; }
+    }
+    return [best, who];
+  };
+
+  CompEngine.prototype.metaOf = function (w, party, skip) {
+    /* (1 - λ)·solo + λ·best observed partner (mirrors engine.py meta_of;
+       λ = weights.meta_pair, 0 on an older dataset = the solo prior). */
+    var solo = this._soloOf(w), lam = this.metaPairW;
+    if (!lam) return solo;
+    return (1.0 - lam) * solo + lam * this._pairOf(w, party, skip)[0];
+  };
+
+  CompEngine.prototype.metaExplain = function (w, party) {
+    /* Descriptive split of a CANDIDATE's meta term (mirrors engine.py
+       meta_explain). Never a scoring input. */
+    party = party || [];
+    var pr = this._pairOf(w, party), raise_ = 0.0;
+    if (this.metaPairW && party.length) {
+      var plus = party.concat([w]);
+      for (var i = 0; i < party.length; i++) {
+        var cur = this._pairOf(party[i], party, i)[0];
+        var nw = this._pairOf(party[i], plus, i)[0];
+        if (nw > cur) raise_ += nw - cur;
+      }
+    }
+    return { meta_solo: this._soloOf(w), meta_pair: pr[0], meta_partner: pr[1],
+             meta_raise: raise_ };
   };
 
   CompEngine.prototype.viabilityOf = function (w) {
@@ -1956,7 +2004,7 @@
     /* THE party-level objective (mirrors engine.py comp_score). */
     var meta = 0.0, viab = 0.0;
     for (var i = 0; i < party.length; i++) {
-      meta += this.metaOf(party[i]);
+      meta += this.metaOf(party[i], party, i);
       viab += this.viabilityOf(party[i]);
     }
     return this.alpha * this.fitness(party, combos, gears)
@@ -2005,7 +2053,12 @@
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
              nsMax: nsMax,
              /* carrier quota (2026-09-03): what this roster already wears */
-             carriers: this._carrierCounts(party, gears) };
+             carriers: this._carrierCounts(party, gears),
+             /* pair-aware prior (2026-09-11): each seat's best observed
+                partner so far, so a candidate's exact meta delta can include
+                the raise it hands existing members */
+             party: party.slice(),
+             pairMax: party.map(function (w, i) { return this._pairOf(w, party, i)[0]; }, this) };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra, sFloor, extraFloor) {
@@ -2100,8 +2153,18 @@
 
   CompEngine.prototype._pickTail = function (state, weapon, best) {
     /* Combo-independent candidate-score terms (mirrors engine.py
-       _pick_tail). */
-    var meta = this.metaOf(weapon);
+       _pick_tail). `meta` is the EXACT party-meta delta (2026-09-11): the
+       candidate's blended prior plus the raise it hands each member's
+       best-partner term — same seat order as Python, same bits. */
+    var party = state.party || [];
+    var meta = this.metaOf(weapon, party), lam = this.metaPairW;
+    if (lam && party.length) {
+      var rows = this.metaPairs[this.sizeBucket()] || {};
+      for (var i = 0; i < party.length; i++) {
+        var s = (rows[party[i]] || {})[weapon] || 0.0;
+        if (s > state.pairMax[i]) meta += lam * (s - state.pairMax[i]);
+      }
+    }
     var dup = (state.counts[weapon] || 0) + 1 - this._dupFree(weapon);
     var score = best.val + this.delta * meta
               + this.viabilityW * this.viabilityOf(weapon)
@@ -2465,12 +2528,15 @@
         nsLines.push({ spell: sid, name: rec.name || sid, lost: lost });
       }
     }
+    var mx = this.metaExplain(candidate, party);
     return {
       weapon: candidate,
       display_name: this.weapons[candidate].display_name,
       combo: pick.combo, kit: pick.vgears || [], score: pick.score,
       d_fitness: pick.dFit, d_synergy: pick.dSyn,
       meta_prior: pick.meta, viability: this.viabilityOf(candidate),
+      meta_solo: mx.meta_solo, meta_pair: mx.meta_pair,
+      meta_partner: mx.meta_partner, meta_raise: mx.meta_raise,
       dup_penalty: dupPenalty,
       caps: rows, caps_gain: capsGain,
       nonstack: nsLines,
@@ -2520,6 +2586,9 @@
                               out[i].kit.length ? out[i].kit : null);
       out[i].caps_gain = pc[1];
       out[i].verdict = this._pickVerdict(out[i].score, pc[1]);
+      var mx = this.metaExplain(out[i].weapon, party);
+      out[i].meta_solo = mx.meta_solo; out[i].meta_pair = mx.meta_pair;
+      out[i].meta_partner = mx.meta_partner; out[i].meta_raise = mx.meta_raise;
     }
     return out;
   };

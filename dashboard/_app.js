@@ -130,6 +130,9 @@ const recommend = (p, n = 4) => inPickContext(() =>
   ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null,
                 p === party ? GEARS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
+              /* pair-aware prior (2026-09-11): descriptive split, rendered only */
+              metaSolo: r.meta_solo, metaPair: r.meta_pair,
+              metaPartner: r.meta_partner, metaRaise: r.meta_raise,
               viab: r.viability, combo: r.combo, kit: r.kit, score: r.score,
               verdict: r.verdict, capsGain: r.caps_gain}));
 /* Signed pick decomposition (engine pickReport): the "why not" behind a
@@ -1695,7 +1698,7 @@ function renderRecDetail(recs){
           return `<div class="formula">
           <span class="k">score</span> = ${ENG.alpha}·Δfitness + ${ENG.beta}·Δsynergy + ${ENG.delta}·metaPrior ± viability/duplication<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b>${adjBit} = <b>${top.score.toFixed(2)}</b><br>
-          <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> is observed relevance: the weapon's share of killer parties at this fight size (one player, one vote, shrunk on thin counts, the most-fielded weapon = 1) — a tiebreak-sized nudge that never buys a floor or a seat.
+          <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> is observed relevance: half the weapon's own share of killer parties at this fight size (one player, one vote, shrunk on thin counts, the most-fielded weapon = 1), half its best observed partner already on your roster (one killer party, one vote per pairing, ≥3 guilds, capped at 8× over chance) — a tiebreak-sized nudge that never buys a floor or a seat.${top.metaPartner ? `<br><span class="k">observed with</span> ${nameOf(top.metaPartner)} on your roster — pair score <b>${top.metaPair.toFixed(2)}</b>${top.metaRaise > 0.005 ? `, and it raises the roster's own pairings by <b>${top.metaRaise.toFixed(2)}</b>` : ""}` : ""}
         </div>`;
         })()}
           </div>

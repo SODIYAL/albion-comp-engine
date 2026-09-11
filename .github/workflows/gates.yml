@@ -43,6 +43,7 @@ jobs:
           python3 tests/test_js_parity.py
           python3 tests/test_dashboard_layout.py
           python3 tests/test_cohort_families.py
+          python3 tests/test_meta_pairs.py
           python3 tests/test_roles.py
           python3 tests/test_validation_modes.py
           python3 tests/tier2_blindtest.py v4

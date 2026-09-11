@@ -217,11 +217,14 @@ Each is decidable today from evidence already in the repo.
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
 - **Honour the holdout split end to end**: `v4h` evaluates battles with
-  `id % 5 == 0`, but `derive_style_bands.py` and `derive_meta_prior.py` still
-  fit on every battle. Give both a `--exclude-mod` (or read one shared split
-  constant) so the rows and the prior are fitted on the other four fifths;
-  then `v4h` is a true holdout measurement and can be considered for a gate
-  (owner decision). Until then every styled `v4h` number is weak-form.
+  `id % 5 == 0`. `derive_meta_prior.py` honours it since 2026-09-11
+  (`HOLDOUT_MOD`, both tables); `derive_style_bands.py` and
+  `derive_role_counts.py` still fit on every battle. Give them the same
+  split constant so every harvest-derived row is fitted on the other four
+  fifths; then `v4h` is a true holdout measurement and can be considered
+  for a gate (owner decision). Until then every styled `v4h` number is
+  weak-form. Re-derive the pair prior on the harvest checkout after the
+  next fold (`fold_harvest.ps1` already runs `derive_meta_prior`).
 - **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
   `weapon_usage_v2.json`, the display strip's fight-size prevalence and the
   cohort families) and `sample_rosters.py` (`roster_cache/` ->

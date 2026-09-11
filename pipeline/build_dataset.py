@@ -2440,11 +2440,15 @@ META_PRIOR_PATH = os.path.join(OUT, "meta_prior.json")
 
 def load_meta_prior(known_weapons):
     """The GENERATED, size-bucketed meta prior (derive_meta_prior.py ->
-    out/meta_prior.json; owner ruling 2026-09-08). Fail closed, loudly: a
-    missing file, a file derived from a different party_rosters.json than
-    the one on disk, or a malformed bucket map blocks the build. Rows for
-    weapons the dataset does not carry are dropped; every kept value is in
-    (0, 1]. The engine detects the bucketed shape by its keys and reads it
+    out/meta_prior.json; owner ruling 2026-09-08) and, since 2026-09-11,
+    its pair table (`meta_pairs`, the best-observed-partner half of the
+    blend). Returns (solo, pairs). Fail closed, loudly: a missing file, a
+    file derived from a different party_rosters.json than the one on
+    disk, an artifact not derived on the training split (battle % 5 != 0
+    -- an all-battles copy is AUDIT ONLY), a malformed bucket map, an
+    asymmetric or out-of-range pair blocks the build. Rows for weapons the
+    dataset does not carry are dropped; every kept value is in (0, 1].
+    The engine detects the bucketed shape by its keys and reads it
     through size_bucket() at roster size."""
     import hashlib
     if not os.path.exists(META_PRIOR_PATH):
@@ -2459,6 +2463,11 @@ def load_meta_prior(known_weapons):
     if want != have:
         sys.exit("out/meta_prior.json was derived from a different "
                  "party_rosters.json — rerun derive_meta_prior.py")
+    split = doc.get("_split") or {}
+    if split.get("holdout_mod") != 5:
+        sys.exit("out/meta_prior.json was not derived on the training split "
+                 "(battle % 5 != 0) — an all-battles prior is AUDIT ONLY; "
+                 "rerun py -3 pipeline/derive_meta_prior.py without --all-battles")
     prior = doc.get("meta_prior") or {}
     if not prior or set(prior) - {"small", "mid", "large"}:
         sys.exit("out/meta_prior.json: meta_prior must be bucketed "
@@ -2468,7 +2477,30 @@ def load_meta_prior(known_weapons):
         rows = prior.get(bk) or {}
         out[bk] = {w: float(v) for w, v in sorted(rows.items())
                    if w in known_weapons and 0.0 < float(v) <= 1.0}
-    return out
+    pairs_in = doc.get("meta_pairs")
+    if not isinstance(pairs_in, dict) or set(pairs_in) - {"small", "mid", "large"}:
+        sys.exit("out/meta_prior.json: meta_pairs missing or not bucketed — "
+                 "rerun py -3 pipeline/derive_meta_prior.py")
+    pairs = {}
+    for bk in ("small", "mid", "large"):
+        rows = pairs_in.get(bk) or {}
+        kept = {}
+        for w, row in sorted(rows.items()):
+            if w not in known_weapons:
+                continue
+            for m, v in sorted((row or {}).items()):
+                if m not in known_weapons or m == w:
+                    continue
+                v = float(v)
+                if not 0.0 < v <= 1.0:
+                    sys.exit(f"out/meta_prior.json: meta_pairs {bk} {w}|{m} = {v} "
+                             "out of (0, 1]")
+                if abs(float((rows.get(m) or {}).get(w, -1.0)) - v) > 1e-12:
+                    sys.exit(f"out/meta_prior.json: meta_pairs {bk} {w}|{m} is not "
+                             "symmetric — rerun derive_meta_prior.py")
+                kept.setdefault(w, {})[m] = v
+        pairs[bk] = kept
+    return out, pairs
 
 
 ROLE_COUNTS_PATH = os.path.join(OUT, "role_counts.json")
@@ -2613,8 +2645,8 @@ def load_templates(tune=None):
     # The meta prior is GENERATED (owner ruling 2026-09-08: one harvest
     # prior replacing both hand lists) — a hand-set map in scoring.yaml or
     # MASTERSHEET tune:scoring is a build error, never silently merged.
-    if scoring.get("meta_prior"):
-        sys.exit("scoring.meta_prior is GENERATED since 2026-09-08 "
+    if scoring.get("meta_prior") or scoring.get("meta_pairs"):
+        sys.exit("scoring.meta_prior / meta_pairs are GENERATED since 2026-09-08 "
                  "(pipeline/derive_meta_prior.py -> out/meta_prior.json); "
                  "remove the hand-set map from templates/scoring.yaml or "
                  "MASTERSHEET.md tune:scoring")
@@ -2685,7 +2717,7 @@ def main():
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
     templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
     # observed relevance (owner 2026-09-08): the generated harvest prior
-    scoring["meta_prior"] = load_meta_prior(set(weapons))
+    scoring["meta_prior"], scoring["meta_pairs"] = load_meta_prior(set(weapons))
     # typical role counts (owner 2026-09-11): the generated harvest p50 per
     # size, the middle line the composition bands never had
     composition["role_typical"] = load_role_typical()
@@ -2695,9 +2727,11 @@ def main():
           + ", ".join(f"{st} {len(rows)}" for st, rows in rt["styles"].items())
           + ", comps " + ", ".join(f"{c} {len(rows)}"
                                    for c, rows in rt["comps"].items()))
-    print("  meta prior    : generated (out/meta_prior.json), "
+    print("  meta prior    : generated (out/meta_prior.json, training split), "
           + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
-          + " weapon rows")
+          + " weapon rows; pairs "
+          + ", ".join(f"{bk} {sum(len(r) for r in rows.values()) // 2}"
+                      for bk, rows in scoring["meta_pairs"].items()))
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):

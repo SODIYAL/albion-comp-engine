@@ -90,7 +90,9 @@ const out = cases.map((c, i) => {
     max_fitness_party: e.maxFitness(c.party, c.combos, c.gears),
     recommend: e.recommend(c.party, 5).map((r) => ({
       weapon: r.weapon, score: r.score, combo: r.combo, kit: r.kit,
-      caps_gain: r.caps_gain, verdict: r.verdict })),
+      caps_gain: r.caps_gain, verdict: r.verdict,
+      meta_prior: r.meta_prior, meta_solo: r.meta_solo, meta_pair: r.meta_pair,
+      meta_partner: r.meta_partner, meta_raise: r.meta_raise })),
     pick_report: c.refine_pool.length
       ? e.pickReport(c.party, c.refine_pool[0], c.combos) : null,
     analyze_bands: (() => {

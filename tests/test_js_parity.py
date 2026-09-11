@@ -224,7 +224,11 @@ def py_results(cases):
             "recommend": [{"weapon": r["weapon"], "score": r["score"],
                            "combo": r["combo"], "kit": r["kit"],
                            "caps_gain": r["caps_gain"],
-                           "verdict": r["verdict"]}
+                           "verdict": r["verdict"],
+                           "meta_prior": r["meta_prior"],
+                           "meta_solo": r["meta_solo"], "meta_pair": r["meta_pair"],
+                           "meta_partner": r["meta_partner"],
+                           "meta_raise": r["meta_raise"]}
                           for r in e.recommend(c["party"], 5)],
             "pick_report": (e.pick_report(c["party"], c["refine_pool"][0],
                                           c["combos"])
@@ -365,6 +369,15 @@ def main():
                     errs.append(f"rec verdict {ra['weapon']}: "
                                 f"py={ra['verdict']}/{ra['caps_gain']!r} "
                                 f"js={rb.get('verdict')}/{rb.get('caps_gain')!r}")
+                elif any(abs(ra[k] - rb.get(k, 9e9)) > EPS
+                         for k in ("meta_prior", "meta_solo", "meta_pair", "meta_raise"))                         or ra["meta_partner"] != rb.get("meta_partner"):
+                    # pair-aware prior (2026-09-11): the four descriptive
+                    # meta fields ride the same parity contract
+                    errs.append(f"rec meta {ra['weapon']}: "
+                                f"py={ra['meta_prior']!r}/{ra['meta_solo']!r}/{ra['meta_pair']!r}/"
+                                f"{ra['meta_partner']}/{ra['meta_raise']!r} "
+                                f"js={rb.get('meta_prior')!r}/{rb.get('meta_solo')!r}/"
+                                f"{rb.get('meta_pair')!r}/{rb.get('meta_partner')}/{rb.get('meta_raise')!r}")
         pa, pb = a["pick_report"], b.get("pick_report")
         if (pa is None) != (pb is None):
             errs.append("pick_report presence differs")
@@ -372,9 +385,11 @@ def main():
             pb = pb or {}
             if (pa["verdict"] != pb.get("verdict") or pa["combo"] != pb.get("combo")
                     or pa["kit"] != pb.get("kit")
+                    or pa["meta_partner"] != pb.get("meta_partner")
                     or any(abs(pa[k] - pb.get(k, 9e9)) > EPS
                            for k in ("score", "d_fitness", "d_synergy",
-                                     "meta_prior", "viability", "dup_penalty",
+                                     "meta_prior", "meta_solo", "meta_pair",
+                                     "meta_raise", "viability", "dup_penalty",
                                      "caps_gain"))):
                 errs.append(f"pick_report head: py={pa['verdict']}/{pa['score']!r} "
                             f"js={pb.get('verdict')}/{pb.get('score')!r}")
