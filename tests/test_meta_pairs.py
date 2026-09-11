@@ -10,7 +10,7 @@ specified, anti-affinity is omitted (never a penalty), the map is
 symmetric and the split is recorded.
 
 Part B — engine blend (engine/engine.py) on the committed dataset:
-meta_of is (1-λ)·solo + λ·best-partner, self-seat excluded, ≤ 1, and the
+meta_of is (1-lam)*solo + λ·best-partner, self-seat excluded, ≤ 1, and the
 pick score stays the EXACT comp_score delta with pair terms in play.
 
 Run:  py -3 tests/test_meta_pairs.py
@@ -126,10 +126,10 @@ def part_b():
     best = max(((w, m, s) for w, row in pairs.items() for m, s in row.items()
                 if w in e.weapons and m in e.weapons), key=lambda t: t[2])
     w, m, s = best
-    check("B2 meta_of alone = (1-λ)·solo",
+    check("B2 meta_of alone = (1-lam)*solo",
           abs(e.meta_of(w, [w], 0) - (1 - lam) * solo.get(w, 0.0)) < 1e-12,
           f"{e.meta_of(w, [w], 0)}")
-    check("B3 meta_of with its best partner = (1-λ)·solo + λ·s",
+    check("B3 meta_of with its best partner = (1-lam)*solo + lam*s",
           abs(e.meta_of(w, [m, w], 1) - ((1 - lam) * solo.get(w, 0.0) + lam * s)) < 1e-12, "")
     check("B4 self-seat excluded: a duplicate of w is not w's partner",
           abs(e.meta_of(w, [w, w], 0) - (1 - lam) * solo.get(w, 0.0)) < 1e-12, "")

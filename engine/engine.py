@@ -107,6 +107,10 @@ class Engine:
         # Headroom slope (2026-08-18): supply between target and soft cap
         # earns a small capped bonus — see scoring.yaml. 0 = legacy behavior.
         self.headroom = w.get("headroom", 0.0)
+        # Pair-aware prior (owner 2026-09-11): blend weight for the best
+        # observed partner; absent = 0 = pure solo (older dataset scores
+        # exactly as it used to).
+        self.meta_pair_w = w.get("meta_pair", 0.0)
         self.meta_prior = self.scoring.get("meta_prior", {}) or {}
         # meta_prior is either a FLAT {weapon: value} map, or SIZE-BUCKETED
         # {small|mid|large: {weapon: value}} (usage-derived, Q17). Bucketed is
@@ -114,6 +118,9 @@ class Engine:
         # by the current party size via size_bucket().
         self.meta_bucketed = bool(self.meta_prior) and \
             set(self.meta_prior) <= {"small", "mid", "large"}
+        # {bucket: {weapon: {partner: s}}}, symmetric, GENERATED with the
+        # solo prior; read only through _pair_of at roster size.
+        self.meta_pairs = self.scoring.get("meta_pairs", {}) or {}
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
@@ -2246,12 +2253,61 @@ class Engine:
         return total
 
     # ----------------------------------------------------------------- priors
-    def meta_of(self, weapon):
-        """Meta-prior value for a weapon at the current size. Flat map ->
-        direct lookup; size-bucketed map -> size_bucket()."""
+    def _solo_of(self, weapon):
+        """The weapon's own share of killer parties at the current size.
+        Flat map -> direct lookup; size-bucketed map -> size_bucket()."""
         if not self.meta_bucketed:
             return self.meta_prior.get(weapon, 0.0)
         return (self.meta_prior.get(self.size_bucket()) or {}).get(weapon, 0.0)
+
+    def _pair_of(self, weapon, party, skip=None):
+        """Best observed partner of `weapon` among the other seats of
+        `party` (seat `skip` is the weapon's own seat and never pairs with
+        itself). (score, partner) — (0.0, None) with no row: absence is
+        neutral, never a penalty. Ties break on the partner id so the
+        explanation is deterministic across the twins."""
+        if not party or not self.meta_pair_w:
+            return 0.0, None
+        rows = (self.meta_pairs.get(self.size_bucket()) or {}).get(weapon)
+        if not rows:
+            return 0.0, None
+        best, who = 0.0, None
+        for i, m in enumerate(party):
+            if i == skip:
+                continue
+            s = rows.get(m, 0.0)
+            if s > best or (s == best and who is not None and s and m < who):
+                best, who = s, m
+        return best, who
+
+    def meta_of(self, weapon, party=None, skip=None):
+        """Meta-prior value for a weapon at the current size: (1 - λ)·solo
+        + λ·best observed partner in `party` (λ = weights.meta_pair, 0 on
+        an older dataset — then exactly the 2026-09-08 solo prior)."""
+        solo = self._solo_of(weapon)
+        lam = self.meta_pair_w
+        if not lam:
+            return solo
+        pair, _who = self._pair_of(weapon, party, skip)
+        return (1.0 - lam) * solo + lam * pair
+
+    def meta_explain(self, weapon, party):
+        """Descriptive split of a CANDIDATE's meta term when it joins
+        `party`: its solo prior, its best-partner score and who, and the
+        `raise` its arrival adds to the members' own pair terms. Never a
+        scoring input — the score already carries the sum."""
+        solo = self._solo_of(weapon)
+        pair, who = self._pair_of(weapon, party or [])
+        raise_ = 0.0
+        if self.meta_pair_w and party:
+            plus = list(party) + [weapon]
+            for i, m in enumerate(party):
+                cur, _ = self._pair_of(m, party, i)
+                new, _ = self._pair_of(m, plus, i)
+                if new > cur:
+                    raise_ += new - cur
+        return {"meta_solo": solo, "meta_pair": pair, "meta_partner": who,
+                "meta_raise": raise_}
 
     def viability_of(self, weapon):
         """Expert-curated viability-tier bonus for this content+size (0 for
@@ -2270,8 +2326,8 @@ class Engine:
         pricing are properties of the weapon slot."""
         meta = 0.0
         viab = 0.0
-        for w in party:
-            meta += self.meta_of(w)
+        for i, w in enumerate(party):
+            meta += self.meta_of(w, party, i)
             viab += self.viability_of(w)
         return (self.alpha * self.fitness(party, combos, gears)
                 + self.beta * self.synergy(party, combos)
@@ -2316,7 +2372,13 @@ class Engine:
                 "counts": counts, "ns_max": ns_max,
                 # carrier quota (2026-09-03): what this roster already
                 # wears of each capped effect-carrier chest
-                "carriers": self._carrier_counts(party, gears)}
+                "carriers": self._carrier_counts(party, gears),
+                # pair-aware prior (2026-09-11): each seat's best observed
+                # partner so far, so a candidate's exact meta delta can
+                # include the raise it hands existing members
+                "party": list(party),
+                "pair_max": [self._pair_of(w, party, i)[0]
+                             for i, w in enumerate(party)]}
 
     def _marg_fit_from(self, s, extra, s_floor=None, extra_floor=None):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -2512,8 +2574,21 @@ class Engine:
 
     def _pick_tail(self, state, weapon, best):
         """The combo-independent terms of a candidate score — shared by
-        _eval_pick and _forge_eval_pick so the formula can never drift."""
-        meta = self.meta_of(weapon)
+        _eval_pick and _forge_eval_pick so the formula can never drift.
+        `meta` is the EXACT party-meta delta of adding `weapon` (2026-09-11):
+        its own blended prior plus the raise its arrival hands each
+        member's best-partner term, so the pick score stays the exact
+        comp_score delta (test_forge F1, test_meta_pairs B7)."""
+        party = state.get("party") or []
+        meta = self.meta_of(weapon, party)
+        lam = self.meta_pair_w
+        if lam and party:
+            rows = self.meta_pairs.get(self.size_bucket()) or {}
+            pmax = state["pair_max"]
+            for i, m in enumerate(party):
+                s = (rows.get(m) or {}).get(weapon, 0.0)
+                if s > pmax[i]:
+                    meta += lam * (s - pmax[i])
         dup = state["counts"].get(weapon, 0) + 1 - self._dup_free(weapon)
         score = (best[0] + self.delta * meta
                  + self.viability_w * self.viability_of(weapon)
@@ -2608,7 +2683,7 @@ class Engine:
         best loadout against bare supply `s`, with no member-level synergy
         state (J=0 — exact for an empty party). Returns (d_fit, d_syn, extra)."""
         state = {"s": s, "s_syn": s, "J": [0.0] * len(self._active_syn),
-                 "pair_vals": [], "counts": {}}
+                 "pair_vals": [], "counts": {}, "party": [], "pair_max": []}
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
             state["pair_vals"].append(self._pair_value(p, s.get(a, 0.0), s.get(b, 0.0), 0.0))
@@ -2753,6 +2828,7 @@ class Engine:
             "combo": combo, "kit": vgears or [], "score": score,
             "d_fitness": d_fit, "d_synergy": d_syn,
             "meta_prior": meta, "viability": self.viability_of(candidate),
+            **self.meta_explain(candidate, party),
             "dup_penalty": dup_penalty,
             "caps": rows, "caps_gain": caps_gain,
             "nonstack": ns_lines,
@@ -2790,6 +2866,7 @@ class Engine:
                                                r["kit"] or None)
             r["caps_gain"] = caps_gain
             r["verdict"] = self._pick_verdict(r["score"], caps_gain)
+            r.update(self.meta_explain(r["weapon"], party))
         return out
 
     def swap_review(self, party, top_n=3, pool=None, combos=None, gears=None):
