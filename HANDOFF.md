@@ -72,8 +72,11 @@ Three layers, never merged:
   0.20 synergy + 0.15 meta prior ± viability / duplicates), one player ahead,
   each candidate on its best legal Q/W/E/passive combo, DRESSED in its doctrine
   kit. Synergy is weapon-interaction only. The meta prior is GENERATED from
-  the killer-party harvest per size bucket (`out/meta_prior.json`); a hand-set
-  map fails the build. Duplicates: 1 copy by default; the one super-additive
+  the killer-party harvest per size bucket (`out/meta_prior.json`): per
+  member 0.5 x the weapon's own share + 0.5 x its best observed partner on
+  the roster (`meta_pairs`, one party one vote per pair, >=3 guild-sets,
+  log2-lift capped at 8x, shrunk; owner 2026-09-11), both tables on the
+  training split `battle % 5 != 0`; a hand-set map fails the build. Duplicates: 1 copy by default; the one super-additive
   case is `self_cost_offset_min_copies` (Demon Armor).
 - Gear scores (curated `sheets/gear/`) through `build_extra`: stat
   channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic

@@ -1,8 +1,9 @@
 # Pair-aware meta prior — design
 
-Date: 2026-09-11. Status: DRAFT, owner-approved in conversation (ruling A of
-three offered; vote unit "one party, gated by orgs"; holdout "training
-split only"). Owner ruling this implements: observed weapon PAIRINGS from
+Date: 2026-09-11. Status: SHIPPED 2026-09-11 (branch `pair-prior`).
+Deviations from the draft: none. Golden rows moved: none. Owner-approved
+in conversation (ruling A of three offered; vote unit "one party, gated
+by orgs"; holdout "training split only"). Owner ruling this implements: observed weapon PAIRINGS from
 the killer-party harvest may enter scoring, through the harvest-generated
 meta prior only (the 0.15 `delta` slot), tiebreak-sized, never through the
 synergy term, a floor, a role slot or a suggestion pool.

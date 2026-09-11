@@ -488,7 +488,15 @@ derived from a different artifact than the one on disk, and refuses a
 hand-set map anywhere in the config (fail closed, loudly). The engine
 detects the bucketed shape by its keys and reads it through
 `size_bucket()` at roster size; the recommendation weight `delta` (0.15)
-is the only dial. Explicit step, never part of a normal build:
+is the only dial. Since 2026-09-11 the same script also writes
+`meta_pairs` (one killer PARTY, one vote per distinct pair it fields; a
+row only across >= 3 guild-sets and >= 5 parties; `s = clamp(log2 lift,
+0, 3) / 3 x n / (n + 8)`, lift <= 1 reads 0) and BOTH tables learn from
+`battle % 5 != 0` only — the `% 5 == 0` fifth is `tier2_blindtest v4h`'s
+holdout; `--all-battles` writes an audit copy `build_dataset` refuses.
+The engine blends per member under `weights.meta_pair` (0.5): solo share
+and best observed partner on the roster. Explicit step, never part of a
+normal build:
 
 ```text
 py -3 pipeline/derive_meta_prior.py

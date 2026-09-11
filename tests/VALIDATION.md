@@ -42,7 +42,10 @@ index rows where the owner's words are.
 7. **Popularity is not effectiveness**: the killboard, cohort families and
    reference builds are display/evidence only; effectiveness claims are
    reserved for win-lift evidence (kill-vs-death contrast needs a ruling before
-   it orders anything, 2026-09-08).
+   it orders anything, 2026-09-08). The ONE empirical scoring input is the
+   harvest-generated meta prior — solo (2026-09-08) and best-observed-partner
+   (2026-09-11) — tiebreak-sized under `delta`, derived on the training split
+   (`battle % 5 != 0`), never a floor, a seat, a pool place or a penalty.
 8. **Unknowns stay explicit** (2026-08-12 catches, 2026-08-28 gear): records store
    `unknown`; quarantined records never become defaults; only verified
    interaction records score.
@@ -234,6 +237,7 @@ column is the archive file and the section title to search for.
 | 09-10 | "no one uses the cleric cowl for its knockback ability regardless of content" — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
 | 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
 | 09-10 | "the data should come from the harvest median" / four stages "red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much" — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest checkout; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
+| 09-11 | "wouldnt it be cool to add synergy to comps based on what weapons are often seen playing together with real data ?" — ruling A of three: observed pairings enter through the meta prior ONLY (never the synergy term, a floor, a seat or a pool); one killer party one vote per distinct pair, a row only across >=3 guild-sets and >=5 parties, s = clamp(log2 lift, 0, 3)/3 x n/(n+8), lift <= 1 reads 0; both prior tables learn from `battle % 5 != 0` only; meta = 0.5 solo + 0.5 best partner on the roster, pick score stays the exact comp_score delta. Standing rule 7 amended. Golden moved: none | derive_meta_prior (meta_pairs), build_dataset gate, both ports, why-panel line | test_meta_pairs A1-A13 / B1-B8, parity meta fields, F1 | 09b, Pair-aware meta prior |
 
 ## Open questions
 
