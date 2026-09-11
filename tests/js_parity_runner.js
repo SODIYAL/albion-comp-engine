@@ -38,9 +38,15 @@ const out = cases.map((c, i) => {
     const lgears = even ? c.gears.slice(0, 2) : null;
     const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
                       undefined, lgears);
+    // the next-best alternative (2026-09-11 `avoid`; mirrors test_js_parity.py)
+    const r2 = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
+                       undefined, lgears, [r.party]);
     forged = { party: r.party, combos: r.combos, gears: r.gears,
                score: r.score,
-               feasible: r.feasible, filler: r.filler, held: r.held };
+               feasible: r.feasible, filler: r.filler, held: r.held,
+               exhausted: r.exhausted,
+               next: { party: r2.party, gears: r2.gears, score: r2.score,
+                       exhausted: r2.exhausted } };
   }
   // V3-W parity (2026-08-27): dressing OFF while incumbents keep their case
   // gears — candidates must evaluate naked (mirrors test_js_parity.py).
@@ -63,6 +69,11 @@ const out = cases.map((c, i) => {
     target_min: (() => { const o = {}; for (const cap in e.reqs) o[cap] = e.targetMin(cap); return o; })(),
     constraint_band: e._band,
     forge: forged,
+    // replaceOptions (2026-09-11; mirrors test_js_parity.py)
+    replace: (sp === null || sp.length < 2) ? null
+      : e.replaceOptions(sp, 0, c.combos.slice(0, sp.length),
+                         c.gears.slice(0, sp.length), 5, c.refine_pool).map((o) => ({
+          weapon: o.weapon, score: o.score, delta: o.delta, combo: o.combo, kit: o.kit })),
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
       weapon: m.weapon, score: m.score, rank: m.rank, off_comp: m.off_comp,
       off_style: m.off_style, caps_gain: m.caps_gain, verdict: m.verdict,

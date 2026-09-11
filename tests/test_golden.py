@@ -1635,6 +1635,32 @@ def run():
     check("T46 derive_meta_prior.bucket_of mirrors Engine.size_bucket for "
           "party sizes 2-40", bucket_ok, "")
 
+    # T48 - ONE HEALER AT SEVEN (owner 2026-09-11: castle_outpost clap 7
+    # "keeps giving 2 healers and leaving damage lacking"; "go ahead").
+    # The heal_sustain target at 7 (4.5) is one dressed Redemption Staff;
+    # with a 2.9-unit healer locked (Nature Staff / Hallowfall, the
+    # planner's picks) only another healer body closed the gap, riders
+    # tipped it, no overstack cost, and burst_aoe stayed at 15 of 22.
+    # Ruling: a body beyond the TYPICAL count for its role (harvest p50,
+    # derive_role_counts.py: one healer in 67% of 658 fully-known 7-man
+    # killer parties; 3/3 published 7-man comps) is generated only when a
+    # minimum only that role can meet still demands it. Manual parties
+    # score anything.
+    e7 = Engine(content="castle_outpost", size=7, style="clap")
+    t47 = []
+    for nm in ("Nature Staff", "Hallowfall"):
+        wk = next(k for k, w in e7.weapons.items() if w["display_name"] == nm)
+        r7 = e7.forge(7, locked=[wk])
+        t47.append((nm, sum(1 for w in r7["party"] if e7.role_of(w) == "healer"),
+                    round(e7.effective_supply(r7["party"], r7["combos"],
+                                              r7["gears"]).get("burst_aoe", 0), 1),
+                    r7["feasible"], len(r7["party"])))
+    check("T48 castle_outpost clap 7 with a full healer locked forges ONE "
+          "healer and keeps the dps bodies (typical role count, harvest p50)",
+          all(h == 1 and f and n == 7 for _nm, h, _b, f, n in t47),
+          "; ".join(f"{nm}: healers={h} burst_aoe={b} feasible={f} party={n}"
+                    for nm, h, b, f, n in t47))
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

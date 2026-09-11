@@ -15421,13 +15421,13 @@
   },
   "main_healer": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_AVALON", 1402, 3645],
-    "cape": ["CAPEITEM_FW_LYMHURST", 139, 217],
-    "food": ["T7_MEAL_OMELETTE", 25, 92],
-    "head": ["HEAD_LEATHER_SET3", 479, 1405],
-    "offhand": ["OFF_HORN_KEEPER", 47, 139],
-    "potion": ["T7_POTION_REVIVE", 91, 100],
-    "shoes": ["SHOES_LEATHER_MORGANA", 216, 480]
+    "armor": ["ARMOR_CLOTH_AVALON", 1494, 3890],
+    "cape": ["CAPEITEM_FW_LYMHURST", 174, 263],
+    "food": ["T7_MEAL_OMELETTE", 33, 121],
+    "head": ["HEAD_LEATHER_SET3", 559, 1500],
+    "offhand": ["OFF_HORN_KEEPER", 47, 174],
+    "potion": ["T7_POTION_REVIVE", 120, 135],
+    "shoes": ["SHOES_LEATHER_MORGANA", 261, 561]
    },
    "by_weapon": {
     "2H_DIVINESTAFF": {
@@ -15523,6 +15523,222 @@
       {
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
+       "players": 2,
+       "sources": ["killboard (2x/2p)"]
+      }
+     ]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": [
+      {
+       "count": 98,
+       "id": "ARMOR_CLOTH_AVALON",
+       "players": 95,
+       "sources": ["albioncompo_kite_deff_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "deadlyhooker_large_scale_2026_08 (party_1:9; party_2:6; party_3:6)", "killboard (92x/95p)"]
+      },
+      {
+       "count": 53,
+       "id": "ARMOR_PLATE_KEEPER",
+       "players": 56,
+       "sources": ["killboard (53x/56p)"]
+      },
+      {
+       "count": 36,
+       "id": "ARMOR_PLATE_ROYAL",
+       "players": 41,
+       "sources": ["killboard (36x/41p)"]
+      },
+      {
+       "count": 10,
+       "id": "ARMOR_CLOTH_FEY",
+       "players": 10,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "killboard (9x/10p)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_CLOTH_SET2",
+       "players": 7,
+       "sources": ["killboard (6x/7p)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 160,
+       "id": "CAPEITEM_FW_LYMHURST",
+       "players": 161,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:15)", "albioncompo_bus_bomb_2026_08 (comp:12)", "albioncompo_kite_deff_2026_08 (comp:13)", "albioncompo_party_2_2026_03 (comp:19)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "killboard (154x/161p)"]
+      },
+      {
+       "count": 80,
+       "id": "CAPEITEM_SMUGGLER",
+       "players": 82,
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:16)", "deadlyhooker_large_scale_2026_08 (party_1:9; party_2:6; party_3:6)", "killboard (76x/82p)"]
+      },
+      {
+       "count": 5,
+       "id": "CAPEITEM_MORGANA",
+       "players": 5,
+       "sources": ["killboard (5x/5p)"]
+      },
+      {
+       "count": 4,
+       "id": "CAPEITEM_FW_CAERLEON",
+       "players": 4,
+       "sources": ["killboard (4x/4p)"]
+      },
+      {
+       "count": 4,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "players": 5,
+       "sources": ["killboard (4x/5p)"]
+      },
+      {
+       "count": 3,
+       "id": "CAPEITEM_FW_FORTSTERLING",
+       "players": 2,
+       "sources": ["albioncompo_ranged_bomb_2026_07 (comp:8)", "killboard (2x/2p)"]
+      }
+     ],
+     "food": [
+      {
+       "count": 81,
+       "id": "T7_MEAL_OMELETTE",
+       "players": 99,
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:12)", "albioncompo_kite_deff_2026_08 (comp:13)", "killboard (79x/99p)"]
+      },
+      {
+       "count": 68,
+       "id": "T7_MEAL_OMELETTE_AVALON",
+       "players": 82,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_hdcp_bomb_2026_06 (comp:16)", "albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "killboard (64x/82p)"]
+      },
+      {
+       "count": 0,
+       "id": "T8_MEAL_STEW",
+       "players": 2,
+       "sources": ["killboard (0x/2p)"]
+      }
+     ],
+     "head": [
+      {
+       "count": 213,
+       "id": "HEAD_LEATHER_SET3",
+       "players": 210,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:15)", "albioncompo_bus_bomb_2026_08 (comp:12)", "albioncompo_kite_deff_2026_08 (comp:13)", "albioncompo_party_2_2026_03 (comp:19)", "deadlyhooker_large_scale_2026_08 (party_2:6; party_3:6)", "killboard (206x/210p)"]
+      },
+      {
+       "count": 10,
+       "id": "HEAD_CLOTH_KEEPER",
+       "players": 9,
+       "sources": ["albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "killboard (8x/9p)"]
+      },
+      {
+       "count": 9,
+       "id": "HEAD_PLATE_SET1",
+       "players": 9,
+       "sources": ["killboard (9x/9p)"]
+      },
+      {
+       "count": 7,
+       "id": "HEAD_PLATE_SET3",
+       "players": 7,
+       "sources": ["killboard (7x/7p)"]
+      },
+      {
+       "count": 4,
+       "id": "HEAD_CLOTH_SET2",
+       "players": 5,
+       "sources": ["killboard (4x/5p)"]
+      },
+      {
+       "count": 4,
+       "id": "HEAD_PLATE_SET2",
+       "players": 4,
+       "sources": ["killboard (4x/4p)"]
+      },
+      {
+       "count": 2,
+       "id": "HEAD_LEATHER_SET1",
+       "players": 3,
+       "sources": ["killboard (2x/3p)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:16)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_HELL",
+       "sources": ["deadlyhooker_large_scale_2026_08 (party_1:9)"]
+      }
+     ],
+     "potion": [
+      {
+       "count": 230,
+       "id": "T7_POTION_REVIVE",
+       "players": 227,
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:15)", "albioncompo_hdcp_bomb_2026_06 (comp:16)", "albioncompo_party_2_2026_03 (comp:19)", "albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "killboard (225x/227p)"]
+      },
+      {
+       "count": 17,
+       "id": "T7_POTION_CLEANSE2",
+       "players": 15,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_bus_bomb_2026_08 (comp:12)", "albioncompo_kite_deff_2026_08 (comp:13)", "killboard (14x/15p)"]
+      },
+      {
+       "count": 2,
+       "id": "T7_POTION_STONESKIN",
+       "players": 2,
+       "sources": ["killboard (2x/2p)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 102,
+       "id": "SHOES_LEATHER_MORGANA",
+       "players": 105,
+       "sources": ["albioncompo_ranged_bomb_2026_07 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_1:9; party_2:6; party_3:6)", "killboard (98x/105p)"]
+      },
+      {
+       "count": 88,
+       "id": "SHOES_LEATHER_SET1",
+       "players": 96,
+       "sources": ["killboard (88x/96p)"]
+      },
+      {
+       "count": 40,
+       "id": "SHOES_LEATHER_ROYAL",
+       "players": 42,
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_hdcp_bomb_2026_06 (comp:16)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "killboard (37x/42p)"]
+      },
+      {
+       "count": 10,
+       "id": "SHOES_CLOTH_SET2",
+       "players": 10,
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:12)", "albioncompo_kite_deff_2026_08 (comp:13)", "killboard (8x/10p)"]
+      },
+      {
+       "count": 4,
+       "id": "SHOES_CLOTH_SET1",
+       "players": 2,
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:15)", "albioncompo_party_2_2026_03 (comp:19)", "killboard (2x/2p)"]
+      },
+      {
+       "count": 4,
+       "id": "SHOES_PLATE_UNDEAD",
+       "players": 4,
+       "sources": ["killboard (4x/4p)"]
+      },
+      {
+       "count": 3,
+       "id": "SHOES_PLATE_AVALON",
+       "players": 3,
+       "sources": ["killboard (3x/3p)"]
+      },
+      {
+       "count": 2,
+       "id": "SHOES_LEATHER_SET2",
        "players": 2,
        "sources": ["killboard (2x/2p)"]
       }
@@ -18117,9 +18333,19 @@
      "weapon": "2H_WILDSTAFF"
     },
     {
+     "build": "albioncompo_builds_for_brawl_bomb_2026_06:comp:15",
+     "id": "ARMOR_LEATHER_AVALON",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
+    },
+    {
      "build": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:17",
      "id": "ARMOR_LEATHER_AVALON",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_hdcp_bomb_2026_06:comp:16",
+     "id": "ARMOR_LEATHER_AVALON",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
     },
     {
      "build": "albioncompo_party_1_2026_03:comp:17",
@@ -18130,6 +18356,11 @@
      "build": "albioncompo_push_monkey_7_2026_05:comp:6",
      "id": "ARMOR_LEATHER_AVALON",
      "weapon": "2H_HOLYSTAFF_UNDEAD"
+    },
+    {
+     "build": "killboard:10x/11p",
+     "id": "ARMOR_LEATHER_AVALON",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:10x/11p",
@@ -18177,6 +18408,11 @@
      "weapon": "2H_HOLYSTAFF_HELL"
     },
     {
+     "build": "killboard:13x/15p",
+     "id": "ARMOR_LEATHER_FEY",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
+    },
+    {
      "build": "killboard:1x/1p",
      "id": "ARMOR_LEATHER_FEY",
      "weapon": "MAIN_HOLYSTAFF"
@@ -18215,6 +18451,11 @@
      "build": "killboard:0x/1p",
      "id": "ARMOR_LEATHER_HELL",
      "weapon": "2H_DIVINESTAFF"
+    },
+    {
+     "build": "killboard:1x/1p",
+     "id": "ARMOR_LEATHER_HELL",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:2x/2p",
@@ -18257,6 +18498,11 @@
      "weapon": "MAIN_HOLYSTAFF_AVALON"
     },
     {
+     "build": "albioncompo_bus_bomb_2026_08:comp:12",
+     "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
+    },
+    {
      "build": "cb_clonepeek_zvz20_2026_03:comp:8",
      "id": "ARMOR_LEATHER_ROYAL",
      "weapon": "2H_HOLYSTAFF_HELL"
@@ -18265,6 +18511,11 @@
      "build": "killboard:10x/17p",
      "id": "ARMOR_LEATHER_ROYAL",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "killboard:18x/22p",
+     "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:1x/1p",
@@ -18347,6 +18598,11 @@
      "weapon": "2H_HOLYSTAFF_HELL"
     },
     {
+     "build": "albioncompo_party_2_2026_03:comp:19",
+     "id": "ARMOR_LEATHER_SET3",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
+    },
+    {
      "build": "killboard:12x/18p",
      "id": "ARMOR_LEATHER_SET3",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
@@ -18385,6 +18641,11 @@
      "build": "killboard:9x/9p",
      "id": "ARMOR_LEATHER_SET3",
      "weapon": "MAIN_HOLYSTAFF"
+    },
+    {
+     "build": "killboard:0x/1p",
+     "id": "ARMOR_LEATHER_UNDEAD",
+     "weapon": "2H_HOLYSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:2x/2p",
@@ -18520,32 +18781,32 @@
    "slots": {
     "armor": [
      {
-      "count": 1437,
+      "count": 1535,
       "id": "ARMOR_CLOTH_AVALON",
-      "kb": 1402,
-      "players": 1412,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_c_2026_07 (comp:12)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:8,10)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_new_composition_2026_08 (comp:5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:7)", "albioncompo_party_1_2026_03 (comp:18)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:6,7,9)", "deadlyhooker_large_scale_2026_08 (party_2:7)", "killboard (1402x/1412p)", "metabattle (7667:8978; 7741:9075; 7771:8976)"]
+      "kb": 1494,
+      "players": 1478,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_c_2026_07 (comp:12)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:8,10)", "albioncompo_kite_deff_2026_08 (comp:11,13)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_new_composition_2026_08 (comp:5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:7)", "albioncompo_party_1_2026_03 (comp:18)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_ranged_bomb_2026_07 (comp:7,8)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:5,19)", "cb_clonepeek_zvz20_2026_03 (comp:6,7,9)", "deadlyhooker_large_scale_2026_08 (party_1:9; party_2:6,7; party_3:6)", "killboard (1494x/1478p)", "metabattle (7667:8978; 7741:9075; 7771:8976)"]
      },
      {
-      "count": 826,
+      "count": 833,
       "id": "ARMOR_CLOTH_SET2",
-      "kb": 818,
-      "players": 810,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "deadlyhooker_large_scale_2026_08 (party_3:4)", "killboard (818x/810p)", "metabattle (7641:8979; 7662:8977)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
+      "kb": 825,
+      "players": 814,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "deadlyhooker_large_scale_2026_08 (party_3:4)", "killboard (825x/814p)", "metabattle (7641:8979; 7662:8977)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
      },
      {
-      "count": 109,
+      "count": 119,
       "id": "ARMOR_CLOTH_FEY",
-      "kb": 98,
-      "players": 113,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "albioncompo_brawl_by_lattex_2026_05 (comp:17)", "albioncompo_new_composition_2026_08 (comp:4)", "albioncompo_party_1_2026_03 (comp:19)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5; party_3:5)", "killboard (98x/113p)"]
+      "kb": 107,
+      "players": 122,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10,11)", "albioncompo_brawl_by_lattex_2026_05 (comp:17)", "albioncompo_new_composition_2026_08 (comp:4)", "albioncompo_party_1_2026_03 (comp:19)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5; party_3:5)", "killboard (107x/122p)"]
      },
      {
-      "count": 21,
+      "count": 22,
       "id": "ARMOR_CLOTH_SET3",
-      "kb": 20,
-      "players": 22,
-      "sources": ["albioncompo_brawl_clap_2026_05 (comp:18)", "killboard (20x/22p)"]
+      "kb": 21,
+      "players": 23,
+      "sources": ["albioncompo_brawl_clap_2026_05 (comp:18)", "killboard (21x/23p)"]
      },
      {
       "count": 13,
@@ -18585,39 +18846,39 @@
     ],
     "cape": [
      {
-      "count": 2374,
+      "count": 2534,
       "id": "CAPEITEM_FW_LYMHURST",
-      "kb": 2318,
-      "players": 2197,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:17,18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14)", "albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_c_2026_07 (comp:10,12)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:10)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "killboard (2318x/2197p)", "metabattle (7641:8979; 7662:8977; 7667:8978; 7741:9075; 7771:8976)"]
+      "kb": 2472,
+      "players": 2286,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10,11)", "albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:17,18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14,15)", "albioncompo_bus_bomb_2026_08 (comp:12,13)", "albioncompo_c_2026_07 (comp:10,12)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:10)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18)", "albioncompo_kite_deff_2026_08 (comp:11,13)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18,19)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:5,19)", "killboard (2472x/2286p)", "metabattle (7641:8979; 7662:8977; 7667:8978; 7741:9075; 7771:8976)"]
      },
      {
-      "count": 931,
+      "count": 1010,
       "id": "CAPEITEM_SMUGGLER",
-      "kb": 907,
-      "players": 915,
-      "sources": ["albioncompo_c_2026_07 (comp:7)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:19)", "albioncompo_hdcp_bomb_2026_06 (comp:15)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_ss_kite_20_2026_06 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5,7; party_3:4,5)", "killboard (907x/915p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
+      "kb": 982,
+      "players": 962,
+      "sources": ["albioncompo_c_2026_07 (comp:7)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:19)", "albioncompo_hdcp_bomb_2026_06 (comp:15,16)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_ss_kite_20_2026_06 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8,9; party_2:5,6,7; party_3:4,5,6)", "killboard (982x/962p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
      },
      {
-      "count": 125,
+      "count": 129,
       "id": "CAPEITEM_FW_CAERLEON",
-      "kb": 125,
-      "players": 142,
-      "sources": ["killboard (125x/142p)"]
+      "kb": 129,
+      "players": 145,
+      "sources": ["killboard (129x/145p)"]
      },
      {
-      "count": 117,
+      "count": 121,
       "id": "CAPEITEM_FW_MARTLOCK",
-      "kb": 117,
-      "players": 122,
-      "sources": ["killboard (117x/122p)"]
+      "kb": 121,
+      "players": 127,
+      "sources": ["killboard (121x/127p)"]
      },
      {
-      "count": 37,
+      "count": 40,
       "id": "CAPEITEM_FW_FORTSTERLING",
-      "kb": 35,
-      "players": 41,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "killboard (35x/41p)"]
+      "kb": 37,
+      "players": 43,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_ranged_bomb_2026_07 (comp:7,8)", "killboard (37x/43p)"]
      },
      {
       "count": 14,
@@ -18627,18 +18888,18 @@
       "sources": ["albioncompo_bus_bomb_2026_08 (comp:8)", "killboard (13x/14p)"]
      },
      {
+      "count": 9,
+      "id": "CAPEITEM_MORGANA",
+      "kb": 9,
+      "players": 9,
+      "sources": ["killboard (9x/9p)"]
+     },
+     {
       "count": 5,
       "id": "CAPEITEM_FW_BRIDGEWATCH",
       "kb": 5,
       "players": 5,
       "sources": ["killboard (5x/5p)"]
-     },
-     {
-      "count": 4,
-      "id": "CAPEITEM_MORGANA",
-      "kb": 4,
-      "players": 4,
-      "sources": ["killboard (4x/4p)"]
      },
      {
       "count": 3,
@@ -18664,25 +18925,25 @@
     ],
     "food": [
      {
-      "count": 1332,
+      "count": 1414,
       "id": "T7_MEAL_OMELETTE",
-      "kb": 1306,
-      "players": 1459,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)", "albioncompo_bus_bomb_2026_08 (comp:8,13)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,10,12)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "cb_clonepeek_zvz20_2026_03 (comp:7,8)", "cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (1306x/1459p)", "metabattle (7641:8979; 7662:8977; 7667:8978; 7741:9075; 7771:8976)"]
+      "kb": 1386,
+      "players": 1524,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)", "albioncompo_bus_bomb_2026_08 (comp:8,12,13)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,10,12)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_kite_deff_2026_08 (comp:11,13)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "cb_clonepeek_zvz20_2026_03 (comp:7,8)", "cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (1386x/1524p)", "metabattle (7641:8979; 7662:8977; 7667:8978; 7741:9075; 7771:8976)"]
      },
      {
-      "count": 732,
+      "count": 800,
       "id": "T7_MEAL_OMELETTE_AVALON",
-      "kb": 695,
-      "players": 852,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "albioncompo_bist_roam15_2026_01 (comp:7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_party_1_2026_03 (comp:16,17)", "albioncompo_party_2_2026_03 (comp:16,17)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:7,19)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (695x/852p)"]
+      "kb": 759,
+      "players": 904,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10,11)", "albioncompo_bist_roam15_2026_01 (comp:7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15,16)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_party_1_2026_03 (comp:16,17)", "albioncompo_party_2_2026_03 (comp:16,17)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_ranged_bomb_2026_07 (comp:7,8)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:5,7,19)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (759x/904p)"]
      },
      {
-      "count": 28,
+      "count": 29,
       "id": "T8_MEAL_STEW",
-      "kb": 28,
-      "players": 38,
-      "sources": ["killboard (28x/38p)"]
+      "kb": 29,
+      "players": 40,
+      "sources": ["killboard (29x/40p)"]
      },
      {
       "count": 6,
@@ -18694,60 +18955,60 @@
     ],
     "head": [
      {
-      "count": 1218,
+      "count": 1431,
       "id": "HEAD_LEATHER_SET3",
-      "kb": 1188,
-      "players": 1200,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:7)", "albioncompo_brawl_by_lattex_2026_05 (comp:17)", "albioncompo_brawl_clap_2026_05 (comp:15)", "albioncompo_brawl_hit_20_2026_01 (comp:9,11)", "albioncompo_bus_bomb_2026_08 (comp:8)", "albioncompo_c_2026_07 (comp:10)", "albioncompo_gold_portal_hold_2026_05 (comp:10)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_new_composition_2026_08 (comp:4,5)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:18,19)", "albioncompo_party_2_2026_03 (comp:18)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:18,19)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_2:7; party_3:4)", "killboard (1188x/1200p)", "metabattle (7662:8977; 7667:8978)"]
+      "kb": 1394,
+      "players": 1345,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,11)", "albioncompo_bist_roam15_2026_01 (comp:7)", "albioncompo_brawl_by_lattex_2026_05 (comp:17)", "albioncompo_brawl_clap_2026_05 (comp:15)", "albioncompo_brawl_hit_20_2026_01 (comp:9,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:15)", "albioncompo_bus_bomb_2026_08 (comp:8,12)", "albioncompo_c_2026_07 (comp:10)", "albioncompo_gold_portal_hold_2026_05 (comp:10)", "albioncompo_kite_deff_2026_08 (comp:13)", "albioncompo_new_composition_2026_04 (comp:8)", "albioncompo_new_composition_2026_08 (comp:4,5)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:18,19)", "albioncompo_party_2_2026_03 (comp:18,19)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:18,19)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_2:6,7; party_3:4,6)", "killboard (1394x/1345p)", "metabattle (7662:8977; 7667:8978)"]
      },
      {
-      "count": 717,
+      "count": 723,
       "id": "HEAD_PLATE_SET3",
-      "kb": 706,
-      "players": 764,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18)", "albioncompo_brawl_clap_2026_05 (comp:13,18)", "albioncompo_brawl_hit_20_2026_01 (comp:10)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "deadlyhooker_large_scale_2026_08 (party_1:6; party_2:5; party_3:5)", "killboard (706x/764p)", "timothy_blap_blackzone_roam_2026_08 (blap:17)"]
+      "kb": 712,
+      "players": 770,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18)", "albioncompo_brawl_clap_2026_05 (comp:13,18)", "albioncompo_brawl_hit_20_2026_01 (comp:10)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "deadlyhooker_large_scale_2026_08 (party_1:6; party_2:5; party_3:5)", "killboard (712x/770p)", "timothy_blap_blackzone_roam_2026_08 (blap:17)"]
      },
      {
-      "count": 510,
+      "count": 520,
       "id": "HEAD_CLOTH_KEEPER",
-      "kb": 499,
-      "players": 533,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)", "albioncompo_brawl_by_lattex_2026_05 (comp:19)", "albioncompo_c_2026_07 (comp:12)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_08 (comp:6)", "albioncompo_perma_comp_a_2026_08 (comp:15)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:8,9)", "killboard (499x/533p)"]
+      "kb": 507,
+      "players": 538,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)", "albioncompo_brawl_by_lattex_2026_05 (comp:19)", "albioncompo_c_2026_07 (comp:12)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_08 (comp:6)", "albioncompo_perma_comp_a_2026_08 (comp:15)", "albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5,19)", "cb_clonepeek_zvz20_2026_03 (comp:8,9)", "killboard (507x/538p)"]
      },
      {
-      "count": 355,
+      "count": 364,
       "id": "HEAD_PLATE_SET1",
-      "kb": 350,
-      "players": 368,
-      "sources": ["albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (350x/368p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
+      "kb": 359,
+      "players": 374,
+      "sources": ["albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (359x/374p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
      },
      {
-      "count": 183,
+      "count": 188,
       "id": "HEAD_CLOTH_SET2",
-      "kb": 175,
-      "players": 187,
-      "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:13,14)", "albioncompo_party_1_2026_03 (comp:16,17)", "albioncompo_party_2_2026_03 (comp:16,17)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17)", "killboard (175x/187p)"]
+      "kb": 180,
+      "players": 190,
+      "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:13,14)", "albioncompo_party_1_2026_03 (comp:16,17)", "albioncompo_party_2_2026_03 (comp:16,17)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17)", "killboard (180x/190p)"]
      },
      {
-      "count": 179,
+      "count": 181,
       "id": "HEAD_LEATHER_SET1",
-      "kb": 175,
-      "players": 202,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)", "albioncompo_brawl_hit_20_2026_01 (comp:8)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_perma_comp_a_2026_08 (comp:14)", "killboard (175x/202p)"]
+      "kb": 177,
+      "players": 203,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)", "albioncompo_brawl_hit_20_2026_01 (comp:8)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_perma_comp_a_2026_08 (comp:14)", "killboard (177x/203p)"]
      },
      {
-      "count": 152,
+      "count": 156,
       "id": "HEAD_PLATE_SET2",
-      "kb": 150,
-      "players": 174,
-      "sources": ["killboard (150x/174p)", "metabattle (7641:8979; 7741:9075)"]
+      "kb": 154,
+      "players": 177,
+      "sources": ["killboard (154x/177p)", "metabattle (7641:8979; 7741:9075)"]
      },
      {
-      "count": 101,
+      "count": 102,
       "id": "HEAD_CLOTH_ROYAL",
-      "kb": 99,
-      "players": 104,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (99x/104p)"]
+      "kb": 100,
+      "players": 105,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (100x/105p)"]
      },
      {
       "count": 94,
@@ -18757,32 +19018,32 @@
       "sources": ["albioncompo_c_2026_07 (comp:7)", "killboard (92x/98p)", "metabattle (7771:8976)"]
      },
      {
-      "count": 62,
+      "count": 63,
       "id": "HEAD_LEATHER_SET2",
-      "kb": 62,
+      "kb": 63,
       "players": 72,
-      "sources": ["killboard (62x/72p)"]
+      "sources": ["killboard (63x/72p)"]
      },
      {
-      "count": 57,
+      "count": 58,
       "id": "HEAD_LEATHER_AVALON",
       "kb": 48,
       "players": 61,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "killboard (48x/61p)"]
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15,16)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "killboard (48x/61p)"]
      },
      {
-      "count": 27,
+      "count": 28,
       "id": "HEAD_PLATE_UNDEAD",
-      "kb": 27,
+      "kb": 28,
       "players": 28,
-      "sources": ["killboard (27x/28p)"]
+      "sources": ["killboard (28x/28p)"]
      },
      {
-      "count": 19,
+      "count": 20,
       "id": "HEAD_LEATHER_UNDEAD",
-      "kb": 18,
+      "kb": 19,
       "players": 25,
-      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (18x/25p)"]
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (19x/25p)"]
      },
      {
       "count": 13,
@@ -18792,11 +19053,11 @@
       "sources": ["killboard (13x/17p)"]
      },
      {
-      "count": 11,
+      "count": 12,
       "id": "HEAD_LEATHER_HELL",
       "kb": 8,
       "players": 10,
-      "sources": ["deadlyhooker_large_scale_2026_08 (party_1:7,8)", "killboard (8x/10p)", "timothy_blap_blackzone_roam_2026_08 (blap:18)"]
+      "sources": ["deadlyhooker_large_scale_2026_08 (party_1:7,8,9)", "killboard (8x/10p)", "timothy_blap_blackzone_roam_2026_08 (blap:18)"]
      },
      {
       "count": 9,
@@ -18950,25 +19211,25 @@
     ],
     "potion": [
      {
-      "count": 3270,
+      "count": 3501,
       "id": "T7_POTION_REVIVE",
-      "kb": 3213,
-      "players": 2890,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:17,18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,10,12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_ss_kite_20_2026_06 (comp:7,19)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (3213x/2890p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 3439,
+      "players": 3001,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:17,18,19)", "albioncompo_brawl_clap_2026_05 (comp:12,13,15,18)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14,15)", "albioncompo_gold_portal_hold_2026_05 (comp:6,8,10,12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_hdcp_bomb_2026_06 (comp:15,16)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18,19)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17,18,19)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7,8)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_ss_kite_20_2026_06 (comp:5,7,19)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "killboard (3439x/3001p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 207,
+      "count": 209,
       "id": "T7_POTION_STONESKIN",
-      "kb": 197,
-      "players": 206,
-      "sources": ["albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7,9)", "killboard (197x/206p)", "metabattle (7641:8979; 7662:8977; 7667:8978)"]
+      "kb": 199,
+      "players": 208,
+      "sources": ["albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7,9)", "killboard (199x/208p)", "metabattle (7641:8979; 7662:8977; 7667:8978)"]
      },
      {
-      "count": 40,
+      "count": 57,
       "id": "T7_POTION_CLEANSE2",
-      "kb": 35,
-      "players": 38,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)", "albioncompo_bus_bomb_2026_08 (comp:8,13)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_kite_deff_2026_08 (comp:11)", "killboard (35x/38p)"]
+      "kb": 49,
+      "players": 48,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10,11)", "albioncompo_bus_bomb_2026_08 (comp:8,12,13)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_kite_deff_2026_08 (comp:11,13)", "killboard (49x/48p)"]
      },
      {
       "count": 29,
@@ -19015,46 +19276,46 @@
     ],
     "shoes": [
      {
-      "count": 1755,
+      "count": 1843,
       "id": "SHOES_LEATHER_SET1",
-      "kb": 1733,
-      "players": 1658,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_c_2026_07 (comp:10,12)", "albioncompo_gold_portal_hold_2026_05 (comp:6,12)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:6,7,9)", "killboard (1733x/1658p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 1821,
+      "players": 1706,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,7,8)", "albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10,11)", "albioncompo_c_2026_07 (comp:10,12)", "albioncompo_gold_portal_hold_2026_05 (comp:6,12)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,7,8)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:6,7,9)", "killboard (1821x/1706p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 1121,
+      "count": 1223,
       "id": "SHOES_LEATHER_MORGANA",
-      "kb": 1096,
-      "players": 1090,
-      "sources": ["albioncompo_brawl_clap_2026_05 (comp:18)", "albioncompo_bus_bomb_2026_08 (comp:8)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5,7; party_3:4,5)", "killboard (1096x/1090p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
+      "kb": 1194,
+      "players": 1158,
+      "sources": ["albioncompo_brawl_clap_2026_05 (comp:18)", "albioncompo_bus_bomb_2026_08 (comp:8)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:17,18,19)", "albioncompo_new_composition_2026_04 (comp:2,8)", "albioncompo_new_composition_2026_08 (comp:4,5,6)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17)", "albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:7,8)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8,9; party_2:5,6,7; party_3:4,5,6)", "killboard (1194x/1158p)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
      },
      {
-      "count": 342,
+      "count": 381,
       "id": "SHOES_LEATHER_ROYAL",
-      "kb": 323,
-      "players": 340,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:13,15)", "albioncompo_c_2026_07 (comp:7)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:8,10)", "albioncompo_hdcp_bomb_2026_06 (comp:15)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:8)", "killboard (323x/340p)"]
+      "kb": 359,
+      "players": 366,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10,11)", "albioncompo_brawl_by_lattex_2026_05 (comp:18,19)", "albioncompo_brawl_clap_2026_05 (comp:13,15)", "albioncompo_c_2026_07 (comp:7)", "albioncompo_comp_5_v2_2026_04 (comp:6)", "albioncompo_f2b_2026_06 (comp:6)", "albioncompo_gold_portal_hold_2026_05 (comp:8,10)", "albioncompo_hdcp_bomb_2026_06 (comp:15,16)", "albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_ss_kite_20_2026_06 (comp:5,19)", "cb_clonepeek_zvz20_2026_03 (comp:8)", "killboard (359x/366p)"]
      },
      {
-      "count": 115,
+      "count": 124,
       "id": "SHOES_CLOTH_SET2",
-      "kb": 111,
-      "players": 121,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "killboard (111x/121p)"]
+      "kb": 118,
+      "players": 129,
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:12,13)", "albioncompo_kite_deff_2026_08 (comp:11,13)", "albioncompo_perma_comp_a_2026_08 (comp:14,15)", "killboard (118x/129p)"]
      },
      {
-      "count": 91,
+      "count": 94,
       "id": "SHOES_CLOTH_SET1",
-      "kb": 76,
-      "players": 80,
-      "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:18,19)", "killboard (76x/80p)", "metabattle (7641:8979; 7662:8977; 7667:8978)"]
+      "kb": 77,
+      "players": 81,
+      "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:12,13,14,15)", "albioncompo_party_1_2026_03 (comp:16,17,18,19)", "albioncompo_party_2_2026_03 (comp:16,17,18,19)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:18,19)", "killboard (77x/81p)", "metabattle (7641:8979; 7662:8977; 7667:8978)"]
      },
      {
-      "count": 49,
+      "count": 53,
       "id": "SHOES_PLATE_UNDEAD",
-      "kb": 49,
-      "players": 56,
-      "sources": ["killboard (49x/56p)"]
+      "kb": 53,
+      "players": 60,
+      "sources": ["killboard (53x/60p)"]
      },
      {
       "count": 46,
@@ -19064,18 +19325,18 @@
       "sources": ["killboard (46x/48p)"]
      },
      {
-      "count": 40,
+      "count": 43,
       "id": "SHOES_PLATE_AVALON",
-      "kb": 39,
-      "players": 47,
-      "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:17)", "killboard (39x/47p)"]
+      "kb": 42,
+      "players": 50,
+      "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:17)", "killboard (42x/50p)"]
      },
      {
-      "count": 35,
+      "count": 37,
       "id": "SHOES_LEATHER_SET2",
-      "kb": 35,
-      "players": 37,
-      "sources": ["killboard (35x/37p)"]
+      "kb": 37,
+      "players": 39,
+      "sources": ["killboard (37x/39p)"]
      },
      {
       "count": 20,
@@ -19092,18 +19353,18 @@
       "sources": ["killboard (18x/22p)"]
      },
      {
-      "count": 14,
+      "count": 15,
       "id": "SHOES_CLOTH_SET3",
-      "kb": 14,
-      "players": 16,
-      "sources": ["killboard (14x/16p)"]
+      "kb": 15,
+      "players": 17,
+      "sources": ["killboard (15x/17p)"]
      },
      {
-      "count": 12,
+      "count": 13,
       "id": "SHOES_CLOTH_AVALON",
-      "kb": 12,
-      "players": 14,
-      "sources": ["killboard (12x/14p)"]
+      "kb": 13,
+      "players": 15,
+      "sources": ["killboard (13x/15p)"]
      },
      {
       "count": 12,
@@ -19135,17 +19396,17 @@
      },
      {
       "count": 4,
+      "id": "SHOES_CLOTH_FEY",
+      "kb": 4,
+      "players": 5,
+      "sources": ["killboard (4x/5p)"]
+     },
+     {
+      "count": 4,
       "id": "SHOES_LEATHER_UNDEAD",
       "kb": 4,
       "players": 4,
       "sources": ["killboard (4x/4p)"]
-     },
-     {
-      "count": 3,
-      "id": "SHOES_CLOTH_FEY",
-      "kb": 3,
-      "players": 4,
-      "sources": ["killboard (3x/4p)"]
      },
      {
       "count": 2,
@@ -19157,6 +19418,15 @@
     ]
    },
    "uniform_extended": {
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "builds": 636,
+     "classes": ["cloth", "plate"],
+     "n": 245,
+     "share": {
+      "cloth": 0.441,
+      "plate": 0.371
+     }
+    },
     "MAIN_HOLYSTAFF_AVALON": {
      "builds": 5387,
      "classes": ["cloth", "plate"],
@@ -19191,6 +19461,14 @@
      "armor": ["ARMOR_CLOTH_SET2", 10, 16],
      "cape": ["CAPEITEM_FW_LYMHURST", 7, 10],
      "potion": ["T7_POTION_REVIVE", 4, 8]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": ["ARMOR_CLOTH_AVALON", 92, 245],
+     "cape": ["CAPEITEM_FW_LYMHURST", 35, 46],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 8, 29],
+     "head": ["HEAD_LEATHER_SET3", 80, 95],
+     "potion": ["T7_POTION_REVIVE", 29, 35],
+     "shoes": ["SHOES_LEATHER_MORGANA", 45, 81]
     },
     "2H_HOLYSTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET2", 112, 299],
@@ -55864,11 +56142,11 @@
   },
   "main_healer": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_SET2", 933, 1896],
-    "cape": ["CAPEITEM_FW_LYMHURST", 408, 579],
+    "armor": ["ARMOR_CLOTH_SET2", 934, 1936],
+    "cape": ["CAPEITEM_FW_LYMHURST", 408, 580],
     "food": ["T7_MEAL_OMELETTE", 116, 239],
     "potion": ["T7_POTION_REVIVE", 217, 437],
-    "shoes": ["SHOES_LEATHER_SET1", 570, 938]
+    "shoes": ["SHOES_LEATHER_SET1", 571, 939]
    },
    "by_weapon": {
     "2H_DIVINESTAFF": {
@@ -55972,6 +56250,122 @@
        "id": "SHOES_CLOTH_SET2",
        "players": 2,
        "sources": ["killboard (2x/2p)"]
+      }
+     ]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": [
+      {
+       "count": 11,
+       "id": "ARMOR_CLOTH_AVALON",
+       "players": 11,
+       "sources": ["killboard (11x/11p)"]
+      },
+      {
+       "count": 9,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "players": 9,
+       "sources": ["killboard (9x/9p)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_PLATE_KEEPER",
+       "players": 9,
+       "sources": ["killboard (8x/9p)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_PLATE_ROYAL",
+       "players": 5,
+       "sources": ["killboard (5x/5p)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_FEY",
+       "players": 2,
+       "sources": ["killboard (2x/2p)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_AVALON",
+       "players": 2,
+       "sources": ["killboard (2x/2p)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 30,
+       "id": "CAPEITEM_FW_LYMHURST",
+       "players": 30,
+       "sources": ["killboard (30x/30p)"]
+      },
+      {
+       "count": 10,
+       "id": "CAPEITEM_SMUGGLER",
+       "players": 10,
+       "sources": ["killboard (10x/10p)"]
+      }
+     ],
+     "food": [
+      {
+       "count": 16,
+       "id": "T7_MEAL_OMELETTE_AVALON",
+       "players": 18,
+       "sources": ["killboard (16x/18p)"]
+      },
+      {
+       "count": 10,
+       "id": "T7_MEAL_OMELETTE",
+       "players": 12,
+       "sources": ["killboard (10x/12p)"]
+      }
+     ],
+     "head": [
+      {
+       "count": 33,
+       "id": "HEAD_LEATHER_SET3",
+       "players": 33,
+       "sources": ["killboard (33x/33p)"]
+      },
+      {
+       "count": 2,
+       "id": "HEAD_CLOTH_KEEPER",
+       "players": 2,
+       "sources": ["killboard (2x/2p)"]
+      }
+     ],
+     "potion": [
+      {
+       "count": 37,
+       "id": "T7_POTION_REVIVE",
+       "players": 37,
+       "sources": ["killboard (37x/37p)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 20,
+       "id": "SHOES_LEATHER_SET1",
+       "players": 20,
+       "sources": ["killboard (20x/20p)"]
+      },
+      {
+       "count": 9,
+       "id": "SHOES_LEATHER_MORGANA",
+       "players": 9,
+       "sources": ["killboard (9x/9p)"]
+      },
+      {
+       "count": 6,
+       "id": "SHOES_LEATHER_ROYAL",
+       "players": 6,
+       "sources": ["killboard (6x/6p)"]
+      },
+      {
+       "count": 3,
+       "id": "SHOES_CLOTH_SET2",
+       "players": 3,
+       "sources": ["killboard (3x/3p)"]
       }
      ]
     },
@@ -58756,18 +59150,25 @@
    "slots": {
     "armor": [
      {
-      "count": 935,
+      "count": 936,
       "id": "ARMOR_CLOTH_SET2",
-      "kb": 933,
-      "players": 901,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (933x/901p)"]
+      "kb": 934,
+      "players": 902,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (934x/902p)"]
      },
      {
-      "count": 442,
+      "count": 453,
       "id": "ARMOR_CLOTH_AVALON",
-      "kb": 438,
-      "players": 446,
-      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (438x/446p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 449,
+      "players": 457,
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (449x/457p)", "metabattle (7741:9075; 7771:8976)"]
+     },
+     {
+      "count": 27,
+      "id": "ARMOR_CLOTH_FEY",
+      "kb": 27,
+      "players": 28,
+      "sources": ["killboard (27x/28p)"]
      },
      {
       "count": 27,
@@ -58784,18 +59185,11 @@
       "sources": ["killboard (26x/27p)"]
      },
      {
-      "count": 25,
-      "id": "ARMOR_CLOTH_FEY",
-      "kb": 25,
-      "players": 26,
-      "sources": ["killboard (25x/26p)"]
-     },
-     {
-      "count": 13,
+      "count": 14,
       "id": "ARMOR_CLOTH_KEEPER",
-      "kb": 13,
-      "players": 13,
-      "sources": ["killboard (13x/13p)"]
+      "kb": 14,
+      "players": 14,
+      "sources": ["killboard (14x/14p)"]
      },
      {
       "count": 12,
@@ -58821,18 +59215,18 @@
     ],
     "cape": [
      {
-      "count": 1253,
+      "count": 1283,
       "id": "CAPEITEM_FW_LYMHURST",
-      "kb": 1247,
-      "players": 1210,
-      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (1247x/1210p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 1277,
+      "players": 1238,
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (1277x/1238p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 234,
+      "count": 244,
       "id": "CAPEITEM_SMUGGLER",
-      "kb": 234,
-      "players": 235,
-      "sources": ["killboard (234x/235p)"]
+      "kb": 244,
+      "players": 245,
+      "sources": ["killboard (244x/245p)"]
      },
      {
       "count": 124,
@@ -58886,18 +59280,18 @@
     ],
     "food": [
      {
-      "count": 832,
+      "count": 842,
       "id": "T7_MEAL_OMELETTE",
-      "kb": 828,
-      "players": 851,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (828x/851p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 838,
+      "players": 861,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (838x/861p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 254,
+      "count": 270,
       "id": "T7_MEAL_OMELETTE_AVALON",
-      "kb": 253,
-      "players": 283,
-      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (253x/283p)"]
+      "kb": 269,
+      "players": 299,
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (269x/299p)"]
      },
      {
       "count": 33,
@@ -58909,18 +59303,18 @@
     ],
     "head": [
      {
-      "count": 428,
+      "count": 429,
       "id": "HEAD_PLATE_SET3",
-      "kb": 428,
-      "players": 430,
-      "sources": ["killboard (428x/430p)"]
+      "kb": 429,
+      "players": 431,
+      "sources": ["killboard (429x/431p)"]
      },
      {
-      "count": 339,
+      "count": 372,
       "id": "HEAD_LEATHER_SET3",
-      "kb": 337,
-      "players": 344,
-      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (337x/344p)"]
+      "kb": 370,
+      "players": 375,
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (370x/375p)"]
      },
      {
       "count": 218,
@@ -58930,6 +59324,13 @@
       "sources": ["killboard (217x/215p)", "metabattle (7771:8976)"]
      },
      {
+      "count": 180,
+      "id": "HEAD_PLATE_SET1",
+      "kb": 180,
+      "players": 186,
+      "sources": ["killboard (180x/186p)"]
+     },
+     {
       "count": 179,
       "id": "HEAD_CLOTH_ROYAL",
       "kb": 177,
@@ -58937,32 +59338,25 @@
       "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (177x/177p)"]
      },
      {
-      "count": 179,
-      "id": "HEAD_PLATE_SET1",
-      "kb": 179,
-      "players": 185,
-      "sources": ["killboard (179x/185p)"]
-     },
-     {
-      "count": 172,
+      "count": 174,
       "id": "HEAD_CLOTH_KEEPER",
-      "kb": 172,
-      "players": 178,
-      "sources": ["killboard (172x/178p)"]
+      "kb": 174,
+      "players": 180,
+      "sources": ["killboard (174x/180p)"]
      },
      {
-      "count": 113,
+      "count": 114,
       "id": "HEAD_PLATE_UNDEAD",
-      "kb": 113,
-      "players": 113,
-      "sources": ["killboard (113x/113p)"]
+      "kb": 114,
+      "players": 114,
+      "sources": ["killboard (114x/114p)"]
      },
      {
-      "count": 76,
+      "count": 77,
       "id": "HEAD_CLOTH_SET2",
-      "kb": 76,
-      "players": 77,
-      "sources": ["killboard (76x/77p)"]
+      "kb": 77,
+      "players": 78,
+      "sources": ["killboard (77x/78p)"]
      },
      {
       "count": 69,
@@ -58993,11 +59387,11 @@
       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "killboard (17x/19p)"]
      },
      {
-      "count": 15,
+      "count": 17,
       "id": "HEAD_LEATHER_UNDEAD",
-      "kb": 14,
-      "players": 15,
-      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (14x/15p)"]
+      "kb": 16,
+      "players": 16,
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:0)", "killboard (16x/16p)"]
      },
      {
       "count": 10,
@@ -59151,18 +59545,18 @@
     ],
     "potion": [
      {
-      "count": 1129,
+      "count": 1166,
       "id": "T7_POTION_REVIVE",
-      "kb": 1126,
-      "players": 1093,
-      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "killboard (1126x/1093p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 1163,
+      "players": 1127,
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "killboard (1163x/1127p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 486,
+      "count": 487,
       "id": "T7_POTION_STONESKIN",
-      "kb": 483,
-      "players": 474,
-      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (483x/474p)"]
+      "kb": 484,
+      "players": 475,
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (484x/475p)"]
      },
      {
       "count": 33,
@@ -59216,25 +59610,25 @@
     ],
     "shoes": [
      {
-      "count": 1017,
+      "count": 1037,
       "id": "SHOES_LEATHER_SET1",
-      "kb": 1014,
-      "players": 974,
-      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (1014x/974p)", "metabattle (7741:9075; 7771:8976)"]
+      "kb": 1034,
+      "players": 993,
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "killboard (1034x/993p)", "metabattle (7741:9075; 7771:8976)"]
      },
      {
-      "count": 335,
+      "count": 344,
       "id": "SHOES_LEATHER_MORGANA",
-      "kb": 334,
-      "players": 334,
-      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "killboard (334x/334p)"]
+      "kb": 343,
+      "players": 343,
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "killboard (343x/343p)"]
      },
      {
-      "count": 112,
+      "count": 117,
       "id": "SHOES_LEATHER_ROYAL",
-      "kb": 109,
-      "players": 112,
-      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (109x/112p)"]
+      "kb": 114,
+      "players": 117,
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "killboard (114x/117p)"]
      },
      {
       "count": 72,
@@ -59244,11 +59638,11 @@
       "sources": ["killboard (72x/73p)"]
      },
      {
-      "count": 60,
+      "count": 63,
       "id": "SHOES_CLOTH_SET2",
-      "kb": 60,
-      "players": 62,
-      "sources": ["killboard (60x/62p)"]
+      "kb": 63,
+      "players": 65,
+      "sources": ["killboard (63x/65p)"]
      },
      {
       "count": 48,
@@ -59265,11 +59659,11 @@
       "sources": ["killboard (35x/36p)"]
      },
      {
-      "count": 31,
+      "count": 32,
       "id": "SHOES_CLOTH_SET3",
-      "kb": 31,
-      "players": 29,
-      "sources": ["killboard (31x/29p)"]
+      "kb": 32,
+      "players": 30,
+      "sources": ["killboard (32x/30p)"]
      },
      {
       "count": 28,
@@ -59279,11 +59673,11 @@
       "sources": ["killboard (28x/28p)"]
      },
      {
-      "count": 23,
+      "count": 24,
       "id": "SHOES_LEATHER_SET2",
-      "kb": 23,
-      "players": 25,
-      "sources": ["killboard (23x/25p)"]
+      "kb": 24,
+      "players": 26,
+      "sources": ["killboard (24x/26p)"]
      },
      {
       "count": 22,
@@ -59308,17 +59702,17 @@
      },
      {
       "count": 12,
+      "id": "SHOES_CLOTH_ROYAL",
+      "kb": 12,
+      "players": 13,
+      "sources": ["killboard (12x/13p)"]
+     },
+     {
+      "count": 12,
       "id": "SHOES_PLATE_AVALON",
       "kb": 12,
       "players": 12,
       "sources": ["killboard (12x/12p)"]
-     },
-     {
-      "count": 11,
-      "id": "SHOES_CLOTH_ROYAL",
-      "kb": 11,
-      "players": 12,
-      "sources": ["killboard (11x/12p)"]
      },
      {
       "count": 9,
@@ -59378,9 +59772,28 @@
      }
     ]
    },
+   "uniform_extended": {
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "builds": 53,
+     "classes": ["cloth", "leather", "plate"],
+     "n": 40,
+     "share": {
+      "cloth": 0.375,
+      "leather": 0.3,
+      "plate": 0.325
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_DIVINESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 6, 15]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": ["ARMOR_CLOTH_AVALON", 11, 40],
+     "cape": ["CAPEITEM_FW_LYMHURST", 8, 8],
+     "head": ["HEAD_LEATHER_SET3", 11, 11],
+     "potion": ["T7_POTION_REVIVE", 7, 8],
+     "shoes": ["SHOES_LEATHER_SET1", 8, 11]
     },
     "2H_HOLYSTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET2", 36, 96],
@@ -91407,6 +91820,110 @@
    },
    "main_healer": {
     "by_weapon": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": [
+       {
+        "count": 17,
+        "id": "ARMOR_PLATE_ROYAL",
+        "players": 19,
+        "sources": ["killboard (17x/19p)"]
+       },
+       {
+        "count": 7,
+        "id": "ARMOR_PLATE_KEEPER",
+        "players": 7,
+        "sources": ["killboard (7x/7p)"]
+       },
+       {
+        "count": 6,
+        "id": "ARMOR_LEATHER_AVALON",
+        "players": 6,
+        "sources": ["killboard (6x/6p)"]
+       },
+       {
+        "count": 6,
+        "id": "ARMOR_LEATHER_FEY",
+        "players": 6,
+        "sources": ["killboard (6x/6p)"]
+       },
+       {
+        "count": 6,
+        "id": "ARMOR_LEATHER_ROYAL",
+        "players": 7,
+        "sources": ["killboard (6x/7p)"]
+       },
+       {
+        "count": 4,
+        "id": "ARMOR_CLOTH_AVALON",
+        "players": 4,
+        "sources": ["killboard (4x/4p)"]
+       }
+      ],
+      "cape": [
+       {
+        "count": 27,
+        "id": "CAPEITEM_FW_LYMHURST",
+        "players": 28,
+        "sources": ["killboard (27x/28p)"]
+       },
+       {
+        "count": 20,
+        "id": "CAPEITEM_SMUGGLER",
+        "players": 20,
+        "sources": ["killboard (20x/20p)"]
+       }
+      ],
+      "food": [
+       {
+        "count": 15,
+        "id": "T7_MEAL_OMELETTE_AVALON",
+        "players": 20,
+        "sources": ["killboard (15x/20p)"]
+       },
+       {
+        "count": 9,
+        "id": "T7_MEAL_OMELETTE",
+        "players": 11,
+        "sources": ["killboard (9x/11p)"]
+       }
+      ],
+      "head": [
+       {
+        "count": 46,
+        "id": "HEAD_LEATHER_SET3",
+        "players": 46,
+        "sources": ["killboard (46x/46p)"]
+       }
+      ],
+      "potion": [
+       {
+        "count": 47,
+        "id": "T7_POTION_REVIVE",
+        "players": 47,
+        "sources": ["killboard (47x/47p)"]
+       }
+      ],
+      "shoes": [
+       {
+        "count": 23,
+        "id": "SHOES_LEATHER_SET1",
+        "players": 25,
+        "sources": ["killboard (23x/25p)"]
+       },
+       {
+        "count": 11,
+        "id": "SHOES_LEATHER_MORGANA",
+        "players": 11,
+        "sources": ["killboard (11x/11p)"]
+       },
+       {
+        "count": 11,
+        "id": "SHOES_LEATHER_ROYAL",
+        "players": 12,
+        "sources": ["killboard (11x/12p)"]
+       }
+      ]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": [
        {
@@ -92623,6 +93140,7 @@
      }
     },
     "cell_voters": {
+     "2H_HOLYSTAFF_CRYSTAL": 48,
      "2H_HOLYSTAFF_HELL": 45,
      "2H_HOLYSTAFF_UNDEAD": 53,
      "2H_NATURESTAFF_HELL": 119,
@@ -92817,18 +93335,18 @@
     "slots": {
      "armor": [
       {
-       "count": 217,
+       "count": 221,
        "id": "ARMOR_CLOTH_AVALON",
-       "kb": 217,
-       "players": 226,
-       "sources": ["killboard (217x/226p)"]
+       "kb": 221,
+       "players": 229,
+       "sources": ["killboard (221x/229p)"]
       },
       {
-       "count": 126,
+       "count": 127,
        "id": "ARMOR_CLOTH_SET2",
-       "kb": 126,
-       "players": 126,
-       "sources": ["killboard (126x/126p)"]
+       "kb": 127,
+       "players": 127,
+       "sources": ["killboard (127x/127p)"]
       },
       {
        "count": 6,
@@ -92854,25 +93372,25 @@
      ],
      "cape": [
       {
-       "count": 550,
+       "count": 577,
        "id": "CAPEITEM_FW_LYMHURST",
-       "kb": 550,
-       "players": 538,
-       "sources": ["killboard (550x/538p)"]
+       "kb": 577,
+       "players": 560,
+       "sources": ["killboard (577x/560p)"]
       },
       {
-       "count": 237,
+       "count": 257,
        "id": "CAPEITEM_SMUGGLER",
-       "kb": 237,
-       "players": 234,
-       "sources": ["killboard (237x/234p)"]
+       "kb": 257,
+       "players": 244,
+       "sources": ["killboard (257x/244p)"]
       },
       {
-       "count": 36,
+       "count": 37,
        "id": "CAPEITEM_FW_MARTLOCK",
-       "kb": 36,
-       "players": 39,
-       "sources": ["killboard (36x/39p)"]
+       "kb": 37,
+       "players": 40,
+       "sources": ["killboard (37x/40p)"]
       },
       {
        "count": 24,
@@ -92905,18 +93423,18 @@
      ],
      "food": [
       {
-       "count": 251,
+       "count": 260,
        "id": "T7_MEAL_OMELETTE",
-       "kb": 251,
-       "players": 279,
-       "sources": ["killboard (251x/279p)"]
+       "kb": 260,
+       "players": 290,
+       "sources": ["killboard (260x/290p)"]
       },
       {
-       "count": 231,
+       "count": 246,
        "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 231,
-       "players": 263,
-       "sources": ["killboard (231x/263p)"]
+       "kb": 246,
+       "players": 278,
+       "sources": ["killboard (246x/278p)"]
       },
       {
        "count": 8,
@@ -92928,25 +93446,25 @@
      ],
      "head": [
       {
-       "count": 316,
+       "count": 361,
        "id": "HEAD_LEATHER_SET3",
-       "kb": 316,
-       "players": 323,
-       "sources": ["killboard (316x/323p)"]
+       "kb": 361,
+       "players": 356,
+       "sources": ["killboard (361x/356p)"]
       },
       {
-       "count": 206,
+       "count": 207,
        "id": "HEAD_PLATE_SET3",
-       "kb": 206,
-       "players": 219,
-       "sources": ["killboard (206x/219p)"]
+       "kb": 207,
+       "players": 220,
+       "sources": ["killboard (207x/220p)"]
       },
       {
-       "count": 96,
+       "count": 97,
        "id": "HEAD_PLATE_SET1",
-       "kb": 96,
-       "players": 97,
-       "sources": ["killboard (96x/97p)"]
+       "kb": 97,
+       "players": 98,
+       "sources": ["killboard (97x/98p)"]
       },
       {
        "count": 51,
@@ -92956,11 +93474,11 @@
        "sources": ["killboard (51x/55p)"]
       },
       {
-       "count": 38,
+       "count": 39,
        "id": "HEAD_LEATHER_SET1",
-       "kb": 38,
-       "players": 45,
-       "sources": ["killboard (38x/45p)"]
+       "kb": 39,
+       "players": 46,
+       "sources": ["killboard (39x/46p)"]
       },
       {
        "count": 34,
@@ -93114,11 +93632,11 @@
      ],
      "potion": [
       {
-       "count": 787,
+       "count": 834,
        "id": "T7_POTION_REVIVE",
-       "kb": 787,
-       "players": 749,
-       "sources": ["killboard (787x/749p)"]
+       "kb": 834,
+       "players": 775,
+       "sources": ["killboard (834x/775p)"]
       },
       {
        "count": 48,
@@ -93151,32 +93669,39 @@
      ],
      "shoes": [
       {
-       "count": 429,
+       "count": 452,
        "id": "SHOES_LEATHER_SET1",
-       "kb": 429,
-       "players": 424,
-       "sources": ["killboard (429x/424p)"]
+       "kb": 452,
+       "players": 438,
+       "sources": ["killboard (452x/438p)"]
       },
       {
-       "count": 247,
+       "count": 258,
        "id": "SHOES_LEATHER_MORGANA",
-       "kb": 247,
-       "players": 256,
-       "sources": ["killboard (247x/256p)"]
+       "kb": 258,
+       "players": 264,
+       "sources": ["killboard (258x/264p)"]
       },
       {
-       "count": 98,
+       "count": 109,
        "id": "SHOES_LEATHER_ROYAL",
-       "kb": 98,
-       "players": 99,
-       "sources": ["killboard (98x/99p)"]
+       "kb": 109,
+       "players": 106,
+       "sources": ["killboard (109x/106p)"]
       },
       {
-       "count": 23,
+       "count": 24,
        "id": "SHOES_CLOTH_SET2",
-       "kb": 23,
-       "players": 24,
-       "sources": ["killboard (23x/24p)"]
+       "kb": 24,
+       "players": 25,
+       "sources": ["killboard (24x/25p)"]
+      },
+      {
+       "count": 15,
+       "id": "SHOES_PLATE_AVALON",
+       "kb": 15,
+       "players": 17,
+       "sources": ["killboard (15x/17p)"]
       },
       {
        "count": 14,
@@ -93184,13 +93709,6 @@
        "kb": 14,
        "players": 14,
        "sources": ["killboard (14x/14p)"]
-      },
-      {
-       "count": 14,
-       "id": "SHOES_PLATE_AVALON",
-       "kb": 14,
-       "players": 16,
-       "sources": ["killboard (14x/16p)"]
       },
       {
        "count": 9,
@@ -93207,11 +93725,11 @@
        "sources": ["killboard (8x/8p)"]
       },
       {
-       "count": 5,
+       "count": 6,
        "id": "SHOES_PLATE_UNDEAD",
-       "kb": 5,
-       "players": 6,
-       "sources": ["killboard (5x/6p)"]
+       "kb": 6,
+       "players": 7,
+       "sources": ["killboard (6x/7p)"]
       },
       {
        "count": 4,
@@ -93251,6 +93769,15 @@
      ]
     },
     "uniform_extended": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "builds": 89,
+      "classes": ["leather", "plate"],
+      "n": 48,
+      "share": {
+       "leather": 0.389,
+       "plate": 0.507
+      }
+     },
      "2H_HOLYSTAFF_HELL": {
       "builds": 67,
       "classes": ["cloth", "plate"],
@@ -93297,6 +93824,12 @@
      }
     },
     "weapon_archetypes": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": ["ARMOR_PLATE_ROYAL", 17, 48],
+      "cape": ["CAPEITEM_SMUGGLER", 7, 10],
+      "head": ["HEAD_LEATHER_SET3", 16, 17],
+      "shoes": ["SHOES_LEATHER_SET1", 10, 16]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET2", 12, 45],
       "head": ["HEAD_PLATE_SET1", 5, 12]
@@ -103099,6 +103632,38 @@
    },
    "main_healer": {
     "by_weapon": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "cape": [
+       {
+        "count": 5,
+        "id": "CAPEITEM_FW_LYMHURST",
+        "players": 5,
+        "sources": ["killboard (5x/5p)"]
+       },
+       {
+        "count": 3,
+        "id": "CAPEITEM_SMUGGLER",
+        "players": 4,
+        "sources": ["killboard (3x/4p)"]
+       }
+      ],
+      "head": [
+       {
+        "count": 6,
+        "id": "HEAD_LEATHER_SET3",
+        "players": 6,
+        "sources": ["killboard (6x/6p)"]
+       }
+      ],
+      "potion": [
+       {
+        "count": 8,
+        "id": "T7_POTION_REVIVE",
+        "players": 8,
+        "sources": ["killboard (8x/8p)"]
+       }
+      ]
+     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": [
        {
@@ -103335,6 +103900,7 @@
      }
     },
     "cell_voters": {
+     "2H_HOLYSTAFF_CRYSTAL": 8,
      "2H_HOLYSTAFF_UNDEAD": 5,
      "MAIN_HOLYSTAFF_AVALON": 61,
      "MAIN_NATURESTAFF": 13
@@ -103366,6 +103932,11 @@
       "weapon": "2H_HOLYSTAFF_UNDEAD"
      },
      {
+      "build": "killboard:2x/2p",
+      "id": "ARMOR_PLATE_KEEPER",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:4x/4p",
       "id": "ARMOR_PLATE_KEEPER",
       "weapon": "MAIN_NATURESTAFF"
@@ -103374,6 +103945,11 @@
       "build": "killboard:0x/1p",
       "id": "ARMOR_PLATE_ROYAL",
       "weapon": "2H_HOLYSTAFF_UNDEAD"
+     },
+     {
+      "build": "killboard:6x/6p",
+      "id": "ARMOR_PLATE_ROYAL",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:9x/9p",
@@ -103400,50 +103976,50 @@
      ],
      "cape": [
       {
-       "count": 45,
+       "count": 50,
        "id": "CAPEITEM_FW_LYMHURST",
-       "kb": 45,
-       "players": 42,
-       "sources": ["killboard (45x/42p)"]
+       "kb": 50,
+       "players": 46,
+       "sources": ["killboard (50x/46p)"]
       },
       {
-       "count": 31,
+       "count": 35,
        "id": "CAPEITEM_SMUGGLER",
-       "kb": 31,
-       "players": 32,
-       "sources": ["killboard (31x/32p)"]
+       "kb": 35,
+       "players": 36,
+       "sources": ["killboard (35x/36p)"]
       }
      ],
      "food": [
       {
-       "count": 25,
+       "count": 27,
        "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 25,
-       "players": 28,
-       "sources": ["killboard (25x/28p)"]
+       "kb": 27,
+       "players": 29,
+       "sources": ["killboard (27x/29p)"]
       },
       {
-       "count": 12,
+       "count": 14,
        "id": "T7_MEAL_OMELETTE",
-       "kb": 12,
-       "players": 14,
-       "sources": ["killboard (12x/14p)"]
+       "kb": 14,
+       "players": 16,
+       "sources": ["killboard (14x/16p)"]
       }
      ],
      "head": [
       {
-       "count": 35,
+       "count": 41,
        "id": "HEAD_LEATHER_SET3",
-       "kb": 35,
-       "players": 33,
-       "sources": ["killboard (35x/33p)"]
+       "kb": 41,
+       "players": 38,
+       "sources": ["killboard (41x/38p)"]
       },
       {
-       "count": 16,
+       "count": 18,
        "id": "HEAD_PLATE_SET3",
-       "kb": 16,
-       "players": 17,
-       "sources": ["killboard (16x/17p)"]
+       "kb": 18,
+       "players": 18,
+       "sources": ["killboard (18x/18p)"]
       },
       {
        "count": 9,
@@ -103513,34 +104089,34 @@
      ],
      "potion": [
       {
-       "count": 76,
+       "count": 84,
        "id": "T7_POTION_REVIVE",
-       "kb": 76,
-       "players": 72,
-       "sources": ["killboard (76x/72p)"]
+       "kb": 84,
+       "players": 79,
+       "sources": ["killboard (84x/79p)"]
       }
      ],
      "shoes": [
       {
-       "count": 43,
+       "count": 46,
        "id": "SHOES_LEATHER_SET1",
-       "kb": 43,
-       "players": 40,
-       "sources": ["killboard (43x/40p)"]
+       "kb": 46,
+       "players": 43,
+       "sources": ["killboard (46x/43p)"]
       },
       {
-       "count": 18,
+       "count": 22,
        "id": "SHOES_LEATHER_MORGANA",
-       "kb": 18,
-       "players": 18,
-       "sources": ["killboard (18x/18p)"]
+       "kb": 22,
+       "players": 21,
+       "sources": ["killboard (22x/21p)"]
       },
       {
-       "count": 10,
+       "count": 11,
        "id": "SHOES_LEATHER_ROYAL",
-       "kb": 10,
+       "kb": 11,
        "players": 11,
-       "sources": ["killboard (10x/11p)"]
+       "sources": ["killboard (11x/11p)"]
       },
       {
        "count": 3,
@@ -112254,12 +112830,12 @@
    },
    "main_healer": {
     "archetype": {
-     "armor": ["ARMOR_CLOTH_AVALON", 818, 1972],
-     "cape": ["CAPEITEM_FW_LYMHURST", 81, 120],
-     "food": ["T7_MEAL_OMELETTE", 25, 78],
-     "head": ["HEAD_LEATHER_SET3", 263, 818],
-     "potion": ["T7_POTION_REVIVE", 76, 81],
-     "shoes": ["SHOES_LEATHER_SET1", 120, 263]
+     "armor": ["ARMOR_CLOTH_AVALON", 864, 2100],
+     "cape": ["CAPEITEM_FW_LYMHURST", 89, 135],
+     "food": ["T7_MEAL_OMELETTE", 26, 86],
+     "head": ["HEAD_LEATHER_SET3", 301, 866],
+     "potion": ["T7_POTION_REVIVE", 84, 89],
+     "shoes": ["SHOES_LEATHER_SET1", 134, 302]
     },
     "by_weapon": {
      "2H_DIVINESTAFF": {
@@ -112297,6 +112873,176 @@
        {
         "count": 2,
         "id": "T8_POTION_TORNADO",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ]
+     },
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": [
+       {
+        "count": 46,
+        "id": "ARMOR_CLOTH_AVALON",
+        "players": 47,
+        "sources": ["killboard (46x/47p)"]
+       },
+       {
+        "count": 33,
+        "id": "ARMOR_PLATE_KEEPER",
+        "players": 35,
+        "sources": ["killboard (33x/35p)"]
+       },
+       {
+        "count": 16,
+        "id": "ARMOR_PLATE_ROYAL",
+        "players": 18,
+        "sources": ["killboard (16x/18p)"]
+       },
+       {
+        "count": 5,
+        "id": "ARMOR_CLOTH_SET2",
+        "players": 5,
+        "sources": ["killboard (5x/5p)"]
+       },
+       {
+        "count": 4,
+        "id": "ARMOR_CLOTH_FEY",
+        "players": 4,
+        "sources": ["killboard (4x/4p)"]
+       }
+      ],
+      "cape": [
+       {
+        "count": 78,
+        "id": "CAPEITEM_FW_LYMHURST",
+        "players": 80,
+        "sources": ["killboard (78x/80p)"]
+       },
+       {
+        "count": 40,
+        "id": "CAPEITEM_SMUGGLER",
+        "players": 43,
+        "sources": ["killboard (40x/43p)"]
+       },
+       {
+        "count": 5,
+        "id": "CAPEITEM_FW_MARTLOCK",
+        "players": 5,
+        "sources": ["killboard (5x/5p)"]
+       },
+       {
+        "count": 2,
+        "id": "CAPEITEM_FW_CAERLEON",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "food": [
+       {
+        "count": 43,
+        "id": "T7_MEAL_OMELETTE",
+        "players": 52,
+        "sources": ["killboard (43x/52p)"]
+       },
+       {
+        "count": 33,
+        "id": "T7_MEAL_OMELETTE_AVALON",
+        "players": 38,
+        "sources": ["killboard (33x/38p)"]
+       },
+       {
+        "count": 2,
+        "id": "T8_MEAL_STEW",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "head": [
+       {
+        "count": 100,
+        "id": "HEAD_LEATHER_SET3",
+        "players": 101,
+        "sources": ["killboard (100x/101p)"]
+       },
+       {
+        "count": 9,
+        "id": "HEAD_PLATE_SET1",
+        "players": 9,
+        "sources": ["killboard (9x/9p)"]
+       },
+       {
+        "count": 4,
+        "id": "HEAD_CLOTH_KEEPER",
+        "players": 5,
+        "sources": ["killboard (4x/5p)"]
+       },
+       {
+        "count": 4,
+        "id": "HEAD_PLATE_SET3",
+        "players": 4,
+        "sources": ["killboard (4x/4p)"]
+       },
+       {
+        "count": 3,
+        "id": "HEAD_CLOTH_SET2",
+        "players": 3,
+        "sources": ["killboard (3x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "HEAD_PLATE_SET2",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "potion": [
+       {
+        "count": 116,
+        "id": "T7_POTION_REVIVE",
+        "players": 117,
+        "sources": ["killboard (116x/117p)"]
+       },
+       {
+        "count": 8,
+        "id": "T7_POTION_CLEANSE2",
+        "players": 9,
+        "sources": ["killboard (8x/9p)"]
+       }
+      ],
+      "shoes": [
+       {
+        "count": 50,
+        "id": "SHOES_LEATHER_MORGANA",
+        "players": 52,
+        "sources": ["killboard (50x/52p)"]
+       },
+       {
+        "count": 46,
+        "id": "SHOES_LEATHER_SET1",
+        "players": 48,
+        "sources": ["killboard (46x/48p)"]
+       },
+       {
+        "count": 21,
+        "id": "SHOES_LEATHER_ROYAL",
+        "players": 24,
+        "sources": ["killboard (21x/24p)"]
+       },
+       {
+        "count": 2,
+        "id": "SHOES_CLOTH_SET2",
+        "players": 3,
+        "sources": ["killboard (2x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "SHOES_PLATE_AVALON",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       },
+       {
+        "count": 2,
+        "id": "SHOES_PLATE_UNDEAD",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -114263,6 +115009,7 @@
     },
     "cell_voters": {
      "2H_DIVINESTAFF": 11,
+     "2H_HOLYSTAFF_CRYSTAL": 128,
      "2H_HOLYSTAFF_HELL": 184,
      "2H_HOLYSTAFF_UNDEAD": 138,
      "2H_NATURESTAFF_HELL": 319,
@@ -114288,6 +115035,11 @@
       "build": "killboard:3x/3p",
       "id": "ARMOR_LEATHER_AVALON",
       "weapon": "2H_HOLYSTAFF_HELL"
+     },
+     {
+      "build": "killboard:3x/4p",
+      "id": "ARMOR_LEATHER_AVALON",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:3x/4p",
@@ -114330,6 +115082,11 @@
       "weapon": "2H_HOLYSTAFF_HELL"
      },
      {
+      "build": "killboard:7x/8p",
+      "id": "ARMOR_LEATHER_FEY",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:0x/1p",
       "id": "ARMOR_LEATHER_HELL",
       "weapon": "2H_DIVINESTAFF"
@@ -114368,6 +115125,11 @@
       "build": "killboard:10x/12p",
       "id": "ARMOR_LEATHER_ROYAL",
       "weapon": "2H_HOLYSTAFF_HELL"
+     },
+     {
+      "build": "killboard:11x/12p",
+      "id": "ARMOR_LEATHER_ROYAL",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:11x/13p",
@@ -114465,6 +115227,11 @@
       "weapon": "2H_NATURESTAFF_HELL"
      },
      {
+      "build": "killboard:0x/1p",
+      "id": "ARMOR_LEATHER_UNDEAD",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:1x/1p",
       "id": "ARMOR_LEATHER_UNDEAD",
       "weapon": "2H_NATURESTAFF_KEEPER"
@@ -114553,32 +115320,32 @@
     "slots": {
      "armor": [
       {
-       "count": 818,
+       "count": 864,
        "id": "ARMOR_CLOTH_AVALON",
-       "kb": 818,
-       "players": 814,
-       "sources": ["killboard (818x/814p)"]
+       "kb": 864,
+       "players": 849,
+       "sources": ["killboard (864x/849p)"]
       },
       {
-       "count": 460,
+       "count": 465,
        "id": "ARMOR_CLOTH_SET2",
-       "kb": 460,
-       "players": 446,
-       "sources": ["killboard (460x/446p)"]
+       "kb": 465,
+       "players": 448,
+       "sources": ["killboard (465x/448p)"]
       },
       {
-       "count": 60,
+       "count": 63,
        "id": "ARMOR_CLOTH_FEY",
-       "kb": 60,
-       "players": 65,
-       "sources": ["killboard (60x/65p)"]
+       "kb": 63,
+       "players": 69,
+       "sources": ["killboard (63x/69p)"]
       },
       {
-       "count": 12,
+       "count": 13,
        "id": "ARMOR_CLOTH_SET3",
-       "kb": 12,
-       "players": 13,
-       "sources": ["killboard (12x/13p)"]
+       "kb": 13,
+       "players": 14,
+       "sources": ["killboard (13x/14p)"]
       },
       {
        "count": 6,
@@ -114618,39 +115385,39 @@
      ],
      "cape": [
       {
-       "count": 1291,
+       "count": 1369,
        "id": "CAPEITEM_FW_LYMHURST",
-       "kb": 1291,
-       "players": 1242,
-       "sources": ["killboard (1291x/1242p)"]
+       "kb": 1369,
+       "players": 1300,
+       "sources": ["killboard (1369x/1300p)"]
       },
       {
-       "count": 478,
+       "count": 519,
        "id": "CAPEITEM_SMUGGLER",
-       "kb": 478,
-       "players": 488,
-       "sources": ["killboard (478x/488p)"]
+       "kb": 519,
+       "players": 523,
+       "sources": ["killboard (519x/523p)"]
       },
       {
-       "count": 83,
+       "count": 85,
        "id": "CAPEITEM_FW_CAERLEON",
-       "kb": 83,
-       "players": 91,
-       "sources": ["killboard (83x/91p)"]
+       "kb": 85,
+       "players": 92,
+       "sources": ["killboard (85x/92p)"]
       },
       {
-       "count": 52,
+       "count": 57,
        "id": "CAPEITEM_FW_MARTLOCK",
-       "kb": 52,
-       "players": 53,
-       "sources": ["killboard (52x/53p)"]
+       "kb": 57,
+       "players": 58,
+       "sources": ["killboard (57x/58p)"]
       },
       {
-       "count": 17,
+       "count": 18,
        "id": "CAPEITEM_FW_FORTSTERLING",
-       "kb": 17,
-       "players": 18,
-       "sources": ["killboard (17x/18p)"]
+       "kb": 18,
+       "players": 19,
+       "sources": ["killboard (18x/19p)"]
       },
       {
        "count": 4,
@@ -114662,25 +115429,25 @@
      ],
      "food": [
       {
-       "count": 698,
+       "count": 742,
        "id": "T7_MEAL_OMELETTE",
-       "kb": 698,
-       "players": 771,
-       "sources": ["killboard (698x/771p)"]
+       "kb": 742,
+       "players": 809,
+       "sources": ["killboard (742x/809p)"]
       },
       {
-       "count": 377,
+       "count": 411,
        "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 377,
-       "players": 448,
-       "sources": ["killboard (377x/448p)"]
+       "kb": 411,
+       "players": 479,
+       "sources": ["killboard (411x/479p)"]
       },
       {
-       "count": 7,
+       "count": 9,
        "id": "T8_MEAL_STEW",
-       "kb": 7,
-       "players": 10,
-       "sources": ["killboard (7x/10p)"]
+       "kb": 9,
+       "players": 12,
+       "sources": ["killboard (9x/12p)"]
       },
       {
        "count": 3,
@@ -114692,60 +115459,60 @@
      ],
      "head": [
       {
-       "count": 615,
+       "count": 715,
        "id": "HEAD_LEATHER_SET3",
-       "kb": 615,
-       "players": 622,
-       "sources": ["killboard (615x/622p)"]
+       "kb": 715,
+       "players": 706,
+       "sources": ["killboard (715x/706p)"]
       },
       {
-       "count": 380,
+       "count": 384,
        "id": "HEAD_PLATE_SET3",
-       "kb": 380,
-       "players": 395,
-       "sources": ["killboard (380x/395p)"]
+       "kb": 384,
+       "players": 398,
+       "sources": ["killboard (384x/398p)"]
       },
       {
-       "count": 317,
+       "count": 321,
        "id": "HEAD_CLOTH_KEEPER",
-       "kb": 317,
-       "players": 318,
-       "sources": ["killboard (317x/318p)"]
+       "kb": 321,
+       "players": 322,
+       "sources": ["killboard (321x/322p)"]
       },
       {
-       "count": 191,
+       "count": 200,
        "id": "HEAD_PLATE_SET1",
-       "kb": 191,
-       "players": 198,
-       "sources": ["killboard (191x/198p)"]
+       "kb": 200,
+       "players": 204,
+       "sources": ["killboard (200x/204p)"]
       },
       {
-       "count": 95,
+       "count": 97,
        "id": "HEAD_PLATE_SET2",
-       "kb": 95,
-       "players": 104,
-       "sources": ["killboard (95x/104p)"]
+       "kb": 97,
+       "players": 105,
+       "sources": ["killboard (97x/105p)"]
       },
       {
-       "count": 89,
+       "count": 92,
        "id": "HEAD_CLOTH_SET2",
-       "kb": 89,
-       "players": 89,
-       "sources": ["killboard (89x/89p)"]
+       "kb": 92,
+       "players": 92,
+       "sources": ["killboard (92x/92p)"]
       },
       {
-       "count": 89,
+       "count": 90,
        "id": "HEAD_LEATHER_SET1",
-       "kb": 89,
-       "players": 98,
-       "sources": ["killboard (89x/98p)"]
+       "kb": 90,
+       "players": 99,
+       "sources": ["killboard (90x/99p)"]
       },
       {
-       "count": 59,
+       "count": 60,
        "id": "HEAD_CLOTH_ROYAL",
-       "kb": 59,
-       "players": 61,
-       "sources": ["killboard (59x/61p)"]
+       "kb": 60,
+       "players": 62,
+       "sources": ["killboard (60x/62p)"]
       },
       {
        "count": 35,
@@ -114769,11 +115536,11 @@
        "sources": ["killboard (26x/32p)"]
       },
       {
-       "count": 14,
+       "count": 15,
        "id": "HEAD_PLATE_UNDEAD",
-       "kb": 14,
+       "kb": 15,
        "players": 15,
-       "sources": ["killboard (14x/15p)"]
+       "sources": ["killboard (15x/15p)"]
       },
       {
        "count": 12,
@@ -114783,11 +115550,11 @@
        "sources": ["killboard (12x/13p)"]
       },
       {
-       "count": 8,
+       "count": 9,
        "id": "HEAD_LEATHER_UNDEAD",
-       "kb": 8,
-       "players": 9,
-       "sources": ["killboard (8x/9p)"]
+       "kb": 9,
+       "players": 10,
+       "sources": ["killboard (9x/10p)"]
       },
       {
        "count": 4,
@@ -114906,11 +115673,11 @@
      ],
      "potion": [
       {
-       "count": 1763,
+       "count": 1880,
        "id": "T7_POTION_REVIVE",
-       "kb": 1763,
-       "players": 1641,
-       "sources": ["killboard (1763x/1641p)"]
+       "kb": 1880,
+       "players": 1719,
+       "sources": ["killboard (1880x/1719p)"]
       },
       {
        "count": 91,
@@ -114920,11 +115687,11 @@
        "sources": ["killboard (91x/92p)"]
       },
       {
-       "count": 22,
+       "count": 31,
        "id": "T7_POTION_CLEANSE2",
-       "kb": 22,
-       "players": 22,
-       "sources": ["killboard (22x/22p)"]
+       "kb": 31,
+       "players": 30,
+       "sources": ["killboard (31x/30p)"]
       },
       {
        "count": 16,
@@ -114964,39 +115731,46 @@
      ],
      "shoes": [
       {
-       "count": 966,
+       "count": 1012,
        "id": "SHOES_LEATHER_SET1",
-       "kb": 966,
-       "players": 940,
-       "sources": ["killboard (966x/940p)"]
+       "kb": 1012,
+       "players": 974,
+       "sources": ["killboard (1012x/974p)"]
       },
       {
-       "count": 592,
+       "count": 642,
        "id": "SHOES_LEATHER_MORGANA",
-       "kb": 592,
-       "players": 580,
-       "sources": ["killboard (592x/580p)"]
+       "kb": 642,
+       "players": 620,
+       "sources": ["killboard (642x/620p)"]
       },
       {
-       "count": 181,
+       "count": 202,
        "id": "SHOES_LEATHER_ROYAL",
-       "kb": 181,
-       "players": 188,
-       "sources": ["killboard (181x/188p)"]
+       "kb": 202,
+       "players": 209,
+       "sources": ["killboard (202x/209p)"]
       },
       {
-       "count": 52,
+       "count": 54,
        "id": "SHOES_CLOTH_SET2",
-       "kb": 52,
-       "players": 55,
-       "sources": ["killboard (52x/55p)"]
+       "kb": 54,
+       "players": 58,
+       "sources": ["killboard (54x/58p)"]
       },
       {
-       "count": 41,
+       "count": 42,
        "id": "SHOES_CLOTH_SET1",
-       "kb": 41,
-       "players": 44,
-       "sources": ["killboard (41x/44p)"]
+       "kb": 42,
+       "players": 45,
+       "sources": ["killboard (42x/45p)"]
+      },
+      {
+       "count": 26,
+       "id": "SHOES_PLATE_UNDEAD",
+       "kb": 26,
+       "players": 29,
+       "sources": ["killboard (26x/29p)"]
       },
       {
        "count": 25,
@@ -115006,25 +115780,18 @@
        "sources": ["killboard (25x/24p)"]
       },
       {
-       "count": 24,
-       "id": "SHOES_PLATE_UNDEAD",
-       "kb": 24,
-       "players": 27,
-       "sources": ["killboard (24x/27p)"]
-      },
-      {
-       "count": 17,
+       "count": 19,
        "id": "SHOES_PLATE_AVALON",
-       "kb": 17,
-       "players": 20,
-       "sources": ["killboard (17x/20p)"]
+       "kb": 19,
+       "players": 22,
+       "sources": ["killboard (19x/22p)"]
       },
       {
-       "count": 12,
+       "count": 13,
        "id": "SHOES_LEATHER_SET2",
-       "kb": 12,
-       "players": 13,
-       "sources": ["killboard (12x/13p)"]
+       "kb": 13,
+       "players": 14,
+       "sources": ["killboard (13x/14p)"]
       },
       {
        "count": 10,
@@ -115041,11 +115808,11 @@
        "sources": ["killboard (10x/11p)"]
       },
       {
-       "count": 8,
+       "count": 9,
        "id": "SHOES_CLOTH_SET3",
-       "kb": 8,
-       "players": 8,
-       "sources": ["killboard (8x/8p)"]
+       "kb": 9,
+       "players": 9,
+       "sources": ["killboard (9x/9p)"]
       },
       {
        "count": 7,
@@ -115078,6 +115845,15 @@
      ]
     },
     "uniform_extended": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "builds": 266,
+      "classes": ["cloth", "plate"],
+      "n": 128,
+      "share": {
+       "cloth": 0.437,
+       "plate": 0.383
+      }
+     },
      "MAIN_HOLYSTAFF_AVALON": {
       "builds": 2250,
       "classes": ["cloth", "plate"],
@@ -115102,6 +115878,11 @@
       "armor": ["ARMOR_CLOTH_SET2", 8, 11],
       "cape": ["CAPEITEM_FW_LYMHURST", 5, 8],
       "food": ["T7_MEAL_OMELETTE", 4, 6]
+     },
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": ["ARMOR_CLOTH_AVALON", 46, 128],
+      "head": ["HEAD_LEATHER_SET3", 37, 48],
+      "shoes": ["SHOES_LEATHER_MORGANA", 18, 38]
      },
      "2H_HOLYSTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET2", 73, 184],
@@ -130925,15 +131706,125 @@
    },
    "main_healer": {
     "archetype": {
-     "armor": ["ARMOR_CLOTH_AVALON", 440, 642],
-     "cape": ["CAPEITEM_FW_LYMHURST", 48, 84],
-     "food": ["T7_MEAL_OMELETTE", 10, 28],
-     "head": ["HEAD_LEATHER_SET3", 161, 441],
-     "offhand": ["OFF_HORN_KEEPER", 20, 48],
-     "potion": ["T7_POTION_REVIVE", 28, 30],
-     "shoes": ["SHOES_LEATHER_MORGANA", 84, 161]
+     "armor": ["ARMOR_CLOTH_AVALON", 487, 712],
+     "cape": ["CAPEITEM_FW_LYMHURST", 71, 115],
+     "food": ["T7_MEAL_OMELETTE", 14, 47],
+     "head": ["HEAD_LEATHER_SET3", 205, 488],
+     "offhand": ["OFF_HORN_KEEPER", 20, 71],
+     "potion": ["T7_POTION_REVIVE", 47, 53],
+     "shoes": ["SHOES_LEATHER_MORGANA", 115, 205]
     },
     "by_weapon": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": [
+       {
+        "count": 47,
+        "id": "ARMOR_CLOTH_AVALON",
+        "players": 48,
+        "sources": ["killboard (47x/48p)"]
+       },
+       {
+        "count": 2,
+        "id": "ARMOR_CLOTH_FEY",
+        "players": 3,
+        "sources": ["killboard (2x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "ARMOR_CLOTH_SET2",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "cape": [
+       {
+        "count": 53,
+        "id": "CAPEITEM_FW_LYMHURST",
+        "players": 55,
+        "sources": ["killboard (53x/55p)"]
+       },
+       {
+        "count": 16,
+        "id": "CAPEITEM_SMUGGLER",
+        "players": 17,
+        "sources": ["killboard (16x/17p)"]
+       }
+      ],
+      "food": [
+       {
+        "count": 31,
+        "id": "T7_MEAL_OMELETTE",
+        "players": 36,
+        "sources": ["killboard (31x/36p)"]
+       },
+       {
+        "count": 14,
+        "id": "T7_MEAL_OMELETTE_AVALON",
+        "players": 15,
+        "sources": ["killboard (14x/15p)"]
+       }
+      ],
+      "head": [
+       {
+        "count": 64,
+        "id": "HEAD_LEATHER_SET3",
+        "players": 64,
+        "sources": ["killboard (64x/64p)"]
+       },
+       {
+        "count": 3,
+        "id": "HEAD_PLATE_SET3",
+        "players": 3,
+        "sources": ["killboard (3x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "HEAD_LEATHER_SET1",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "potion": [
+       {
+        "count": 62,
+        "id": "T7_POTION_REVIVE",
+        "players": 63,
+        "sources": ["killboard (62x/63p)"]
+       },
+       {
+        "count": 6,
+        "id": "T7_POTION_CLEANSE2",
+        "players": 6,
+        "sources": ["killboard (6x/6p)"]
+       }
+      ],
+      "shoes": [
+       {
+        "count": 39,
+        "id": "SHOES_LEATHER_MORGANA",
+        "players": 41,
+        "sources": ["killboard (39x/41p)"]
+       },
+       {
+        "count": 25,
+        "id": "SHOES_LEATHER_SET1",
+        "players": 27,
+        "sources": ["killboard (25x/27p)"]
+       },
+       {
+        "count": 3,
+        "id": "SHOES_CLOTH_SET2",
+        "players": 3,
+        "sources": ["killboard (3x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "SHOES_LEATHER_ROYAL",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": [
        {
@@ -131752,6 +132643,7 @@
      }
     },
     "cell_voters": {
+     "2H_HOLYSTAFF_CRYSTAL": 70,
      "2H_HOLYSTAFF_HELL": 46,
      "2H_HOLYSTAFF_UNDEAD": 14,
      "2H_NATURESTAFF_HELL": 56,
@@ -131771,6 +132663,11 @@
       "build": "killboard:1x/1p",
       "id": "ARMOR_LEATHER_FEY",
       "weapon": "2H_NATURESTAFF_KEEPER"
+     },
+     {
+      "build": "killboard:2x/2p",
+      "id": "ARMOR_LEATHER_FEY",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:2x/3p",
@@ -131803,6 +132700,11 @@
       "weapon": "2H_NATURESTAFF_KEEPER"
      },
      {
+      "build": "killboard:7x/7p",
+      "id": "ARMOR_LEATHER_ROYAL",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:1x/1p",
       "id": "ARMOR_LEATHER_SET3",
       "weapon": "MAIN_HOLYSTAFF_AVALON"
@@ -131816,6 +132718,11 @@
       "build": "killboard:1x/1p",
       "id": "ARMOR_LEATHER_UNDEAD",
       "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "build": "killboard:10x/10p",
+      "id": "ARMOR_PLATE_KEEPER",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:1x/1p",
@@ -131856,25 +132763,25 @@
     "slots": {
      "armor": [
       {
-       "count": 440,
+       "count": 487,
        "id": "ARMOR_CLOTH_AVALON",
-       "kb": 440,
-       "players": 430,
-       "sources": ["killboard (440x/430p)"]
+       "kb": 487,
+       "players": 472,
+       "sources": ["killboard (487x/472p)"]
       },
       {
-       "count": 76,
+       "count": 78,
        "id": "ARMOR_CLOTH_SET2",
-       "kb": 76,
-       "players": 78,
-       "sources": ["killboard (76x/78p)"]
+       "kb": 78,
+       "players": 79,
+       "sources": ["killboard (78x/79p)"]
       },
       {
-       "count": 42,
+       "count": 44,
        "id": "ARMOR_CLOTH_FEY",
-       "kb": 42,
-       "players": 43,
-       "sources": ["killboard (42x/43p)"]
+       "kb": 44,
+       "players": 46,
+       "sources": ["killboard (44x/46p)"]
       },
       {
        "count": 3,
@@ -131886,18 +132793,18 @@
      ],
      "cape": [
       {
-       "count": 381,
+       "count": 434,
        "id": "CAPEITEM_FW_LYMHURST",
-       "kb": 381,
-       "players": 378,
-       "sources": ["killboard (381x/378p)"]
+       "kb": 434,
+       "players": 424,
+       "sources": ["killboard (434x/424p)"]
       },
       {
-       "count": 213,
+       "count": 229,
        "id": "CAPEITEM_SMUGGLER",
-       "kb": 213,
-       "players": 210,
-       "sources": ["killboard (213x/210p)"]
+       "kb": 229,
+       "players": 224,
+       "sources": ["killboard (229x/224p)"]
       },
       {
        "count": 27,
@@ -131923,41 +132830,41 @@
      ],
      "food": [
       {
-       "count": 275,
+       "count": 307,
        "id": "T7_MEAL_OMELETTE",
-       "kb": 275,
-       "players": 294,
-       "sources": ["killboard (275x/294p)"]
+       "kb": 307,
+       "players": 322,
+       "sources": ["killboard (307x/322p)"]
       },
       {
-       "count": 85,
+       "count": 98,
        "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 85,
-       "players": 102,
-       "sources": ["killboard (85x/102p)"]
+       "kb": 98,
+       "players": 116,
+       "sources": ["killboard (98x/116p)"]
       }
      ],
      "head": [
       {
-       "count": 228,
+       "count": 292,
        "id": "HEAD_LEATHER_SET3",
-       "kb": 228,
-       "players": 232,
-       "sources": ["killboard (228x/232p)"]
+       "kb": 292,
+       "players": 289,
+       "sources": ["killboard (292x/289p)"]
       },
       {
-       "count": 164,
+       "count": 165,
        "id": "HEAD_CLOTH_KEEPER",
-       "kb": 164,
+       "kb": 165,
        "players": 173,
-       "sources": ["killboard (164x/173p)"]
+       "sources": ["killboard (165x/173p)"]
       },
       {
-       "count": 89,
+       "count": 92,
        "id": "HEAD_PLATE_SET3",
-       "kb": 89,
-       "players": 98,
-       "sources": ["killboard (89x/98p)"]
+       "kb": 92,
+       "players": 100,
+       "sources": ["killboard (92x/100p)"]
       },
       {
        "count": 51,
@@ -131967,11 +132874,11 @@
        "sources": ["killboard (51x/54p)"]
       },
       {
-       "count": 39,
+       "count": 41,
        "id": "HEAD_LEATHER_SET1",
-       "kb": 39,
-       "players": 43,
-       "sources": ["killboard (39x/43p)"]
+       "kb": 41,
+       "players": 44,
+       "sources": ["killboard (41x/44p)"]
       },
       {
        "count": 30,
@@ -132083,55 +132990,55 @@
      ],
      "potion": [
       {
-       "count": 605,
+       "count": 668,
        "id": "T7_POTION_REVIVE",
-       "kb": 605,
-       "players": 577,
-       "sources": ["killboard (605x/577p)"]
+       "kb": 668,
+       "players": 625,
+       "sources": ["killboard (668x/625p)"]
       },
       {
-       "count": 14,
-       "id": "T7_POTION_STONESKIN",
-       "kb": 14,
-       "players": 15,
-       "sources": ["killboard (14x/15p)"]
-      },
-      {
-       "count": 9,
+       "count": 15,
        "id": "T7_POTION_CLEANSE2",
-       "kb": 9,
-       "players": 9,
-       "sources": ["killboard (9x/9p)"]
+       "kb": 15,
+       "players": 14,
+       "sources": ["killboard (15x/14p)"]
+      },
+      {
+       "count": 15,
+       "id": "T7_POTION_STONESKIN",
+       "kb": 15,
+       "players": 16,
+       "sources": ["killboard (15x/16p)"]
       }
      ],
      "shoes": [
       {
-       "count": 279,
-       "id": "SHOES_LEATHER_SET1",
-       "kb": 279,
-       "players": 273,
-       "sources": ["killboard (279x/273p)"]
-      },
-      {
-       "count": 268,
+       "count": 307,
        "id": "SHOES_LEATHER_MORGANA",
-       "kb": 268,
-       "players": 261,
-       "sources": ["killboard (268x/261p)"]
+       "kb": 307,
+       "players": 297,
+       "sources": ["killboard (307x/297p)"]
       },
       {
-       "count": 43,
+       "count": 304,
+       "id": "SHOES_LEATHER_SET1",
+       "kb": 304,
+       "players": 294,
+       "sources": ["killboard (304x/294p)"]
+      },
+      {
+       "count": 44,
        "id": "SHOES_LEATHER_ROYAL",
-       "kb": 43,
-       "players": 44,
-       "sources": ["killboard (43x/44p)"]
+       "kb": 44,
+       "players": 46,
+       "sources": ["killboard (44x/46p)"]
       },
       {
-       "count": 26,
+       "count": 29,
        "id": "SHOES_CLOTH_SET2",
-       "kb": 26,
-       "players": 26,
-       "sources": ["killboard (26x/26p)"]
+       "kb": 29,
+       "players": 28,
+       "sources": ["killboard (29x/28p)"]
       },
       {
        "count": 13,
@@ -132157,6 +133064,14 @@
      ]
     },
     "weapon_archetypes": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": ["ARMOR_CLOTH_AVALON", 47, 70],
+      "cape": ["CAPEITEM_FW_LYMHURST", 23, 31],
+      "food": ["T7_MEAL_OMELETTE_AVALON", 6, 19],
+      "head": ["HEAD_LEATHER_SET3", 44, 47],
+      "potion": ["T7_POTION_REVIVE", 19, 23],
+      "shoes": ["SHOES_LEATHER_MORGANA", 31, 44]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_AVALON", 17, 46],
       "head": ["HEAD_CLOTH_KEEPER", 6, 17]
@@ -141933,14 +142848,119 @@
    },
    "main_healer": {
     "archetype": {
-     "armor": ["ARMOR_CLOTH_AVALON", 224, 491],
-     "cape": ["CAPEITEM_FW_LYMHURST", 24, 41],
-     "head": ["HEAD_LEATHER_SET3", 92, 225],
-     "offhand": ["OFF_HORN_KEEPER", 11, 24],
-     "potion": ["T7_POTION_REVIVE", 17, 20],
-     "shoes": ["SHOES_LEATHER_MORGANA", 41, 92]
+     "armor": ["ARMOR_CLOTH_AVALON", 250, 540],
+     "cape": ["CAPEITEM_FW_LYMHURST", 34, 54],
+     "food": ["T7_MEAL_OMELETTE", 8, 26],
+     "head": ["HEAD_LEATHER_SET3", 117, 251],
+     "offhand": ["OFF_HORN_KEEPER", 11, 34],
+     "potion": ["T7_POTION_REVIVE", 25, 30],
+     "shoes": ["SHOES_LEATHER_MORGANA", 54, 117]
     },
     "by_weapon": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": [
+       {
+        "count": 26,
+        "id": "ARMOR_CLOTH_AVALON",
+        "players": 26,
+        "sources": ["killboard (26x/26p)"]
+       },
+       {
+        "count": 5,
+        "id": "ARMOR_CLOTH_FEY",
+        "players": 5,
+        "sources": ["killboard (5x/5p)"]
+       }
+      ],
+      "cape": [
+       {
+        "count": 29,
+        "id": "CAPEITEM_FW_LYMHURST",
+        "players": 29,
+        "sources": ["killboard (29x/29p)"]
+       },
+       {
+        "count": 16,
+        "id": "CAPEITEM_SMUGGLER",
+        "players": 16,
+        "sources": ["killboard (16x/16p)"]
+       },
+       {
+        "count": 2,
+        "id": "CAPEITEM_MORGANA",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "food": [
+       {
+        "count": 18,
+        "id": "T7_MEAL_OMELETTE",
+        "players": 20,
+        "sources": ["killboard (18x/20p)"]
+       },
+       {
+        "count": 12,
+        "id": "T7_MEAL_OMELETTE_AVALON",
+        "players": 12,
+        "sources": ["killboard (12x/12p)"]
+       }
+      ],
+      "head": [
+       {
+        "count": 46,
+        "id": "HEAD_LEATHER_SET3",
+        "players": 46,
+        "sources": ["killboard (46x/46p)"]
+       },
+       {
+        "count": 2,
+        "id": "HEAD_CLOTH_KEEPER",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ],
+      "potion": [
+       {
+        "count": 45,
+        "id": "T7_POTION_REVIVE",
+        "players": 45,
+        "sources": ["killboard (45x/45p)"]
+       },
+       {
+        "count": 4,
+        "id": "T7_POTION_CLEANSE2",
+        "players": 4,
+        "sources": ["killboard (4x/4p)"]
+       }
+      ],
+      "shoes": [
+       {
+        "count": 23,
+        "id": "SHOES_LEATHER_MORGANA",
+        "players": 23,
+        "sources": ["killboard (23x/23p)"]
+       },
+       {
+        "count": 18,
+        "id": "SHOES_LEATHER_SET1",
+        "players": 19,
+        "sources": ["killboard (18x/19p)"]
+       },
+       {
+        "count": 3,
+        "id": "SHOES_LEATHER_ROYAL",
+        "players": 3,
+        "sources": ["killboard (3x/3p)"]
+       },
+       {
+        "count": 2,
+        "id": "SHOES_CLOTH_SET2",
+        "players": 2,
+        "sources": ["killboard (2x/2p)"]
+       }
+      ]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": [
        {
@@ -143021,6 +144041,7 @@
      }
     },
     "cell_voters": {
+     "2H_HOLYSTAFF_CRYSTAL": 49,
      "2H_HOLYSTAFF_HELL": 39,
      "2H_HOLYSTAFF_UNDEAD": 30,
      "2H_NATURESTAFF_HELL": 78,
@@ -143071,6 +144092,11 @@
       "build": "killboard:4x/4p",
       "id": "ARMOR_LEATHER_ROYAL",
       "weapon": "2H_HOLYSTAFF_HELL"
+     },
+     {
+      "build": "killboard:7x/7p",
+      "id": "ARMOR_LEATHER_ROYAL",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:1x/1p",
@@ -143148,14 +144174,29 @@
       "weapon": "MAIN_HOLYSTAFF_AVALON"
      },
      {
+      "build": "killboard:7x/7p",
+      "id": "ARMOR_PLATE_KEEPER",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:1x/1p",
       "id": "ARMOR_PLATE_ROYAL",
       "weapon": "MAIN_NATURESTAFF_CRYSTAL"
      },
      {
+      "build": "killboard:2x/2p",
+      "id": "ARMOR_PLATE_ROYAL",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
+     },
+     {
       "build": "killboard:8x/8p",
       "id": "ARMOR_PLATE_ROYAL",
       "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "build": "killboard:1x/1p",
+      "id": "ARMOR_PLATE_SET2",
+      "weapon": "2H_HOLYSTAFF_CRYSTAL"
      },
      {
       "build": "killboard:1x/1p",
@@ -143181,25 +144222,25 @@
     "slots": {
      "armor": [
       {
-       "count": 224,
+       "count": 250,
        "id": "ARMOR_CLOTH_AVALON",
-       "kb": 224,
-       "players": 225,
-       "sources": ["killboard (224x/225p)"]
+       "kb": 250,
+       "players": 249,
+       "sources": ["killboard (250x/249p)"]
       },
       {
-       "count": 144,
+       "count": 145,
        "id": "ARMOR_CLOTH_SET2",
-       "kb": 144,
-       "players": 138,
-       "sources": ["killboard (144x/138p)"]
+       "kb": 145,
+       "players": 139,
+       "sources": ["killboard (145x/139p)"]
       },
       {
-       "count": 29,
+       "count": 34,
        "id": "ARMOR_CLOTH_FEY",
-       "kb": 29,
-       "players": 30,
-       "sources": ["killboard (29x/30p)"]
+       "kb": 34,
+       "players": 35,
+       "sources": ["killboard (34x/35p)"]
       },
       {
        "count": 4,
@@ -143218,32 +144259,32 @@
      ],
      "cape": [
       {
-       "count": 287,
+       "count": 316,
        "id": "CAPEITEM_FW_LYMHURST",
-       "kb": 287,
-       "players": 283,
-       "sources": ["killboard (287x/283p)"]
+       "kb": 316,
+       "players": 311,
+       "sources": ["killboard (316x/311p)"]
       },
       {
-       "count": 132,
+       "count": 148,
        "id": "CAPEITEM_SMUGGLER",
-       "kb": 132,
-       "players": 130,
-       "sources": ["killboard (132x/130p)"]
+       "kb": 148,
+       "players": 145,
+       "sources": ["killboard (148x/145p)"]
       },
       {
-       "count": 18,
+       "count": 20,
        "id": "CAPEITEM_FW_CAERLEON",
-       "kb": 18,
-       "players": 19,
-       "sources": ["killboard (18x/19p)"]
+       "kb": 20,
+       "players": 20,
+       "sources": ["killboard (20x/20p)"]
       },
       {
-       "count": 13,
+       "count": 14,
        "id": "CAPEITEM_FW_MARTLOCK",
-       "kb": 13,
-       "players": 14,
-       "sources": ["killboard (13x/14p)"]
+       "kb": 14,
+       "players": 15,
+       "sources": ["killboard (14x/15p)"]
       },
       {
        "count": 8,
@@ -143251,38 +144292,45 @@
        "kb": 8,
        "players": 8,
        "sources": ["killboard (8x/8p)"]
+      },
+      {
+       "count": 3,
+       "id": "CAPEITEM_MORGANA",
+       "kb": 3,
+       "players": 3,
+       "sources": ["killboard (3x/3p)"]
       }
      ],
      "food": [
       {
-       "count": 183,
+       "count": 201,
        "id": "T7_MEAL_OMELETTE",
-       "kb": 183,
-       "players": 194,
-       "sources": ["killboard (183x/194p)"]
+       "kb": 201,
+       "players": 211,
+       "sources": ["killboard (201x/211p)"]
       },
       {
-       "count": 70,
+       "count": 82,
        "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 70,
-       "players": 80,
-       "sources": ["killboard (70x/80p)"]
+       "kb": 82,
+       "players": 92,
+       "sources": ["killboard (82x/92p)"]
       }
      ],
      "head": [
       {
-       "count": 162,
+       "count": 208,
        "id": "HEAD_LEATHER_SET3",
-       "kb": 162,
-       "players": 166,
-       "sources": ["killboard (162x/166p)"]
+       "kb": 208,
+       "players": 208,
+       "sources": ["killboard (208x/208p)"]
       },
       {
-       "count": 95,
+       "count": 97,
        "id": "HEAD_CLOTH_KEEPER",
-       "kb": 95,
-       "players": 99,
-       "sources": ["killboard (95x/99p)"]
+       "kb": 97,
+       "players": 101,
+       "sources": ["killboard (97x/101p)"]
       },
       {
        "count": 75,
@@ -143306,11 +144354,11 @@
        "sources": ["killboard (30x/31p)"]
       },
       {
-       "count": 28,
+       "count": 29,
        "id": "HEAD_PLATE_SET2",
-       "kb": 28,
-       "players": 29,
-       "sources": ["killboard (28x/29p)"]
+       "kb": 29,
+       "players": 30,
+       "sources": ["killboard (29x/30p)"]
       },
       {
        "count": 20,
@@ -143422,11 +144470,11 @@
      ],
      "potion": [
       {
-       "count": 429,
+       "count": 474,
        "id": "T7_POTION_REVIVE",
-       "kb": 429,
-       "players": 418,
-       "sources": ["killboard (429x/418p)"]
+       "kb": 474,
+       "players": 456,
+       "sources": ["killboard (474x/456p)"]
       },
       {
        "count": 21,
@@ -143436,11 +144484,11 @@
        "sources": ["killboard (21x/22p)"]
       },
       {
-       "count": 6,
+       "count": 10,
        "id": "T7_POTION_CLEANSE2",
-       "kb": 6,
-       "players": 6,
-       "sources": ["killboard (6x/6p)"]
+       "kb": 10,
+       "players": 10,
+       "sources": ["killboard (10x/10p)"]
       },
       {
        "count": 4,
@@ -143473,46 +144521,46 @@
      ],
      "shoes": [
       {
-       "count": 249,
+       "count": 267,
        "id": "SHOES_LEATHER_SET1",
-       "kb": 249,
-       "players": 248,
-       "sources": ["killboard (249x/248p)"]
+       "kb": 267,
+       "players": 265,
+       "sources": ["killboard (267x/265p)"]
       },
       {
-       "count": 131,
+       "count": 154,
        "id": "SHOES_LEATHER_MORGANA",
-       "kb": 131,
-       "players": 131,
-       "sources": ["killboard (131x/131p)"]
+       "kb": 154,
+       "players": 153,
+       "sources": ["killboard (154x/153p)"]
       },
       {
-       "count": 25,
+       "count": 28,
        "id": "SHOES_LEATHER_ROYAL",
-       "kb": 25,
-       "players": 26,
-       "sources": ["killboard (25x/26p)"]
+       "kb": 28,
+       "players": 29,
+       "sources": ["killboard (28x/29p)"]
+      },
+      {
+       "count": 18,
+       "id": "SHOES_CLOTH_SET2",
+       "kb": 18,
+       "players": 19,
+       "sources": ["killboard (18x/19p)"]
       },
       {
        "count": 16,
-       "id": "SHOES_CLOTH_SET2",
+       "id": "SHOES_CLOTH_SET1",
        "kb": 16,
-       "players": 17,
-       "sources": ["killboard (16x/17p)"]
+       "players": 16,
+       "sources": ["killboard (16x/16p)"]
       },
       {
        "count": 15,
-       "id": "SHOES_CLOTH_SET1",
-       "kb": 15,
-       "players": 15,
-       "sources": ["killboard (15x/15p)"]
-      },
-      {
-       "count": 14,
        "id": "SHOES_PLATE_UNDEAD",
-       "kb": 14,
-       "players": 15,
-       "sources": ["killboard (14x/15p)"]
+       "kb": 15,
+       "players": 16,
+       "sources": ["killboard (15x/16p)"]
       },
       {
        "count": 5,
@@ -143566,6 +144614,13 @@
      ]
     },
     "weapon_archetypes": {
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "armor": ["ARMOR_CLOTH_AVALON", 26, 49],
+      "cape": ["CAPEITEM_FW_LYMHURST", 10, 13],
+      "head": ["HEAD_LEATHER_SET3", 25, 26],
+      "potion": ["T7_POTION_REVIVE", 8, 10],
+      "shoes": ["SHOES_LEATHER_MORGANA", 13, 25]
+     },
      "2H_HOLYSTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET2", 22, 39],
       "head": ["HEAD_CLOTH_KEEPER", 11, 22],
@@ -150260,7 +151315,7 @@
   "2H_HAMMER_UNDEAD": ["engage_tank"],
   "2H_HARPOON_HELL": ["pierce", "sustained_brawler"],
   "2H_HOLYSTAFF": ["brawl_healer"],
-  "2H_HOLYSTAFF_CRYSTAL": ["shield_support"],
+  "2H_HOLYSTAFF_CRYSTAL": ["main_healer"],
   "2H_HOLYSTAFF_HELL": ["main_healer"],
   "2H_HOLYSTAFF_UNDEAD": ["main_healer"],
   "2H_ICECRYSTAL_UNDEAD": ["ranged_aoe"],
@@ -150377,6 +151432,7 @@
   "2H_HAMMER_AVALON": ["pierce", "shield_break"],
   "2H_HAMMER_CRYSTAL": ["pierce", "shield_break"],
   "2H_HAMMER_UNDEAD": ["pierce", "shield_break"],
+  "2H_HOLYSTAFF_CRYSTAL": ["shield_support"],
   "2H_ICECRYSTAL_UNDEAD": ["pierce"],
   "2H_ICEGAUNTLETS_HELL": ["pierce"],
   "2H_KNUCKLES_AVALON": ["pierce"],
@@ -150675,6 +151731,12 @@
      "tier": "primary"
     },
     {
+     "id": "2H_HOLYSTAFF_CRYSTAL",
+     "name": "Exalted Staff",
+     "source": "owner:2026-09-11 ('mostly a healer still'); killboard:party_rosters (903 builds, 318 players, cloth 45% / plate 33% / leather 23%; beside 2-3 full healers in 74% of 851 parties); group heal scale, full_healer False (primary_heal never counts it)",
+     "tier": "primary"
+    },
+    {
      "id": "MAIN_HOLYSTAFF",
      "name": "Holy Staff",
      "source": "killboard:party_rosters (36 builds, 86% cloth); single-scale healer (gang seat; the 10+ generation gate rides); owner:2026-09-01 seat-all",
@@ -150788,8 +151850,8 @@
     {
      "id": "2H_HOLYSTAFF_CRYSTAL",
      "name": "Exalted Staff",
-     "source": "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)",
-     "tier": "primary"
+     "source": "comp:deadlyhooker (support x3); the anti-zone / cleanse lane it also serves (owner 2026-09-11: 'has the anti zone support')",
+     "tier": "secondary"
     },
     {
      "id": "2H_SHAPESHIFTER_SET2",

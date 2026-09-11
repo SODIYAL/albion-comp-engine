@@ -538,6 +538,320 @@
    "group_min_radius": 3.0,
    "group_min_targets": 5
   },
+  "role_typical": {
+   "comps": {
+    "castle_outpost": {
+     "7": {
+      "frontline": 2,
+      "healer": 1
+     }
+    }
+   },
+   "pooled": {
+    "10": {
+     "frontline": 2,
+     "healer": 2,
+     "support": 1
+    },
+    "11": {
+     "frontline": 2,
+     "healer": 2,
+     "support": 1
+    },
+    "12": {
+     "frontline": 2,
+     "healer": 2,
+     "support": 1
+    },
+    "13": {
+     "frontline": 3,
+     "healer": 2,
+     "support": 1
+    },
+    "14": {
+     "frontline": 3,
+     "healer": 3,
+     "support": 2
+    },
+    "15": {
+     "frontline": 3,
+     "healer": 3,
+     "support": 2
+    },
+    "16": {
+     "frontline": 4,
+     "healer": 3,
+     "support": 2
+    },
+    "17": {
+     "frontline": 4,
+     "healer": 3,
+     "support": 3
+    },
+    "18": {
+     "frontline": 4,
+     "healer": 3,
+     "support": 3
+    },
+    "19": {
+     "frontline": 4,
+     "healer": 4,
+     "support": 3
+    },
+    "20": {
+     "frontline": 5,
+     "healer": 4,
+     "support": 3
+    },
+    "3": {
+     "healer": 1
+    },
+    "4": {
+     "healer": 1
+    },
+    "5": {
+     "healer": 1
+    },
+    "6": {
+     "healer": 1
+    },
+    "7": {
+     "healer": 1
+    },
+    "8": {
+     "healer": 1
+    },
+    "9": {
+     "healer": 1
+    }
+   },
+   "style_min_size": 10,
+   "styles": {
+    "brawl": {
+     "10": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "11": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "12": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "13": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "14": {
+      "frontline": 3,
+      "healer": 3,
+      "support": 1
+     },
+     "15": {
+      "frontline": 3,
+      "healer": 3,
+      "support": 1
+     },
+     "16": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 2
+     },
+     "17": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 2
+     },
+     "18": {
+      "frontline": 4,
+      "healer": 4,
+      "support": 2
+     },
+     "19": {
+      "frontline": 4,
+      "healer": 4,
+      "support": 2
+     },
+     "20": {
+      "frontline": 4,
+      "healer": 4,
+      "support": 3
+     }
+    },
+    "clap": {
+     "10": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "11": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "12": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "13": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "14": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "15": {
+      "frontline": 3,
+      "healer": 3,
+      "support": 2
+     },
+     "16": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 2
+     },
+     "17": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "18": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "19": {
+      "frontline": 4,
+      "healer": 4,
+      "support": 3
+     },
+     "20": {
+      "frontline": 5,
+      "healer": 4,
+      "support": 3
+     }
+    },
+    "clap_kite": {
+     "11": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 1
+     },
+     "12": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "13": {
+      "frontline": 4,
+      "healer": 2,
+      "support": 2
+     },
+     "14": {
+      "frontline": 4,
+      "healer": 2,
+      "support": 2
+     },
+     "15": {
+      "frontline": 4,
+      "healer": 2,
+      "support": 2
+     },
+     "16": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "17": {
+      "frontline": 5,
+      "healer": 3,
+      "support": 3
+     },
+     "18": {
+      "frontline": 5,
+      "healer": 3,
+      "support": 3
+     },
+     "19": {
+      "frontline": 5,
+      "healer": 3,
+      "support": 3
+     },
+     "20": {
+      "frontline": 5,
+      "healer": 4,
+      "support": 3
+     }
+    },
+    "kite": {
+     "10": {
+      "frontline": 2,
+      "healer": 1,
+      "support": 1
+     },
+     "11": {
+      "frontline": 2,
+      "healer": 2,
+      "support": 2
+     },
+     "12": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "13": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "14": {
+      "frontline": 3,
+      "healer": 2,
+      "support": 2
+     },
+     "15": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 2
+     },
+     "16": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "17": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "18": {
+      "frontline": 4,
+      "healer": 3,
+      "support": 3
+     },
+     "19": {
+      "frontline": 4,
+      "healer": 4,
+      "support": 3
+     },
+     "20": {
+      "frontline": 5,
+      "healer": 4,
+      "support": 4
+     }
+    }
+   }
+  },
   "roles": {
    "by_hint": {
     "healer": "healer",
@@ -546,9 +860,7 @@
     "support": "support",
     "tank": "frontline"
    },
-   "overrides": {
-    "2H_HOLYSTAFF_CRYSTAL": "support"
-   }
+   "overrides": {}
   },
   "size_physics": {
    "count_mult": {
@@ -51461,7 +51773,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 0 builds \u2014 thin); pull E + tank role_hint, mace/flail clump family",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Engage"
   },
   {
    "class": "frontline",
@@ -58335,7 +58648,8 @@
      "source": "owner:2026-09-02 ('stillgaze is a d tank' \u2014 resolving the 2026-08-26 Chillhowl/Stillgaze name mix-up); killboard:party_rosters (6 builds, 100% plate \u2014 thin, but unanimous)",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Stopper"
   },
   {
    "class": "frontline",
@@ -62202,7 +62516,8 @@
      "source": "killboard:party_rosters (32 builds, 81% leather); peel/disengage bruiser kit; owner:2026-09-01 seat-all",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Bruiser"
   },
   {
    "class": "healer",
@@ -62227,8 +62542,8 @@
      "CAPEITEM_FW_MARTLOCK",
      "CAPEITEM_FW_FORTSTERLING",
      "CAPEITEM_FW_BRECILIEN",
-     "CAPEITEM_FW_BRIDGEWATCH",
      "CAPEITEM_MORGANA",
+     "CAPEITEM_FW_BRIDGEWATCH",
      "CAPEITEM_DEMON",
      "CAPEITEM_FW_THETFORD",
      "CAPEITEM_UNDEAD"
@@ -62308,8 +62623,8 @@
      "SHOES_LEATHER_SET3",
      "SHOES_CLOTH_KEEPER",
      "SHOES_CLOTH_ROYAL",
-     "SHOES_LEATHER_UNDEAD",
      "SHOES_CLOTH_FEY",
+     "SHOES_LEATHER_UNDEAD",
      "SHOES_CLOTH_MORGANA"
     ]
    },
@@ -62319,9 +62634,9 @@
       "armor": [
        "ARMOR_CLOTH_SET2",
        "ARMOR_CLOTH_AVALON",
+       "ARMOR_CLOTH_FEY",
        "ARMOR_CLOTH_HELL",
        "ARMOR_CLOTH_SET3",
-       "ARMOR_CLOTH_FEY",
        "ARMOR_CLOTH_KEEPER",
        "ARMOR_CLOTH_ROYAL",
        "ARMOR_CLOTH_SET1",
@@ -62347,8 +62662,8 @@
        "HEAD_PLATE_SET3",
        "HEAD_LEATHER_SET3",
        "HEAD_CLOTH_SET1",
-       "HEAD_CLOTH_ROYAL",
        "HEAD_PLATE_SET1",
+       "HEAD_CLOTH_ROYAL",
        "HEAD_CLOTH_KEEPER",
        "HEAD_PLATE_UNDEAD",
        "HEAD_CLOTH_SET2",
@@ -62406,8 +62721,8 @@
        "SHOES_CLOTH_AVALON",
        "SHOES_PLATE_SET3",
        "SHOES_PLATE_UNDEAD",
-       "SHOES_PLATE_AVALON",
        "SHOES_CLOTH_ROYAL",
+       "SHOES_PLATE_AVALON",
        "SHOES_LEATHER_AVALON",
        "SHOES_CLOTH_KEEPER",
        "SHOES_LEATHER_UNDEAD",
@@ -62421,13 +62736,13 @@
      "kit_build": {
       "armor": [
        "ARMOR_CLOTH_SET2",
-       933,
-       1896
+       934,
+       1936
       ],
       "cape": [
        "CAPEITEM_FW_LYMHURST",
        408,
-       579
+       580
       ],
       "food": [
        "T7_MEAL_OMELETTE",
@@ -62441,8 +62756,8 @@
       ],
       "shoes": [
        "SHOES_LEATHER_SET1",
-       570,
-       938
+       571,
+       939
       ]
      },
      "kit_by_chest": {
@@ -62450,11 +62765,11 @@
        "cape": [
         [
          "CAPEITEM_FW_LYMHURST",
-         305
+         315
         ],
         [
          "CAPEITEM_SMUGGLER",
-         90
+         91
         ],
         [
          "CAPEITEM_FW_CAERLEON",
@@ -62464,21 +62779,21 @@
        "food": [
         [
          "T7_MEAL_OMELETTE",
-         212
+         214
         ],
         [
          "T7_MEAL_OMELETTE_AVALON",
-         88
+         93
         ]
        ],
        "head": [
         [
-         "HEAD_PLATE_SET3",
-         118
+         "HEAD_LEATHER_SET3",
+         125
         ],
         [
-         "HEAD_LEATHER_SET3",
-         114
+         "HEAD_PLATE_SET3",
+         118
         ],
         [
          "HEAD_PLATE_SET1",
@@ -62488,11 +62803,11 @@
        "potion": [
         [
          "T7_POTION_REVIVE",
-         356
+         366
         ],
         [
          "T7_POTION_STONESKIN",
-         58
+         59
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -62502,15 +62817,15 @@
        "shoes": [
         [
          "SHOES_LEATHER_SET1",
-         220
+         228
         ],
         [
          "SHOES_LEATHER_MORGANA",
-         129
+         130
         ],
         [
          "SHOES_LEATHER_ROYAL",
-         42
+         43
         ]
        ]
       },
@@ -62518,19 +62833,19 @@
        "cape": [
         [
          "CAPEITEM_FW_LYMHURST",
-         18
+         20
         ]
        ],
        "food": [
         [
          "T7_MEAL_OMELETTE",
-         14
+         15
         ]
        ],
        "head": [
         [
          "HEAD_LEATHER_SET3",
-         6
+         8
         ],
         [
          "HEAD_PLATE_SET3",
@@ -62544,7 +62859,7 @@
        "potion": [
         [
          "T7_POTION_REVIVE",
-         20
+         22
         ],
         [
          "T7_POTION_STONESKIN",
@@ -62554,7 +62869,7 @@
        "shoes": [
         [
          "SHOES_LEATHER_SET1",
-         13
+         14
         ]
        ]
       },
@@ -62606,19 +62921,19 @@
        "cape": [
         [
          "CAPEITEM_FW_LYMHURST",
-         8
+         9
         ]
        ],
        "food": [
         [
          "T7_MEAL_OMELETTE",
-         5
+         6
         ]
        ],
        "head": [
         [
          "HEAD_PLATE_UNDEAD",
-         5
+         6
         ]
        ],
        "potion": [
@@ -62674,13 +62989,13 @@
         ],
         [
          "CAPEITEM_SMUGGLER",
-         61
+         62
         ]
        ],
        "food": [
         [
          "T7_MEAL_OMELETTE",
-         457
+         458
         ],
         [
          "T7_MEAL_OMELETTE_AVALON",
@@ -62694,7 +63009,7 @@
        "head": [
         [
          "HEAD_PLATE_SET3",
-         220
+         221
         ],
         [
          "HEAD_CLOTH_SET1",
@@ -62708,7 +63023,7 @@
        "potion": [
         [
          "T7_POTION_REVIVE",
-         474
+         475
         ],
         [
          "T7_POTION_STONESKIN",
@@ -62722,7 +63037,7 @@
        "shoes": [
         [
          "SHOES_LEATHER_SET1",
-         553
+         554
         ],
         [
          "SHOES_LEATHER_MORGANA",
@@ -62769,17 +63084,83 @@
          6
         ]
        ]
+      },
+      "ARMOR_LEATHER_ROYAL": {
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         7
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         5
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         6
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         8
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_SET1",
+         5
+        ]
+       ]
+      },
+      "ARMOR_PLATE_KEEPER": {
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         5
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         7
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         9
+        ]
+       ]
+      },
+      "ARMOR_PLATE_ROYAL": {
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         5
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         5
+        ]
+       ]
       }
      },
      "kit_pool": {
       "cape": [
        [
         "CAPEITEM_FW_LYMHURST",
-        1210
+        1238
        ],
        [
         "CAPEITEM_SMUGGLER",
-        235
+        245
        ],
        [
         "CAPEITEM_FW_MARTLOCK",
@@ -62789,11 +63170,11 @@
       "food": [
        [
         "T7_MEAL_OMELETTE",
-        851
+        861
        ],
        [
         "T7_MEAL_OMELETTE_AVALON",
-        283
+        299
        ],
        [
         "T8_MEAL_STEW",
@@ -62803,11 +63184,11 @@
       "head": [
        [
         "HEAD_PLATE_SET3",
-        430
+        431
        ],
        [
         "HEAD_LEATHER_SET3",
-        344
+        375
        ],
        [
         "HEAD_CLOTH_SET1",
@@ -62817,11 +63198,11 @@
       "potion": [
        [
         "T7_POTION_REVIVE",
-        1093
+        1127
        ],
        [
         "T7_POTION_STONESKIN",
-        474
+        475
        ],
        [
         "T6_POTION_ENERGY",
@@ -62831,15 +63212,15 @@
       "shoes": [
        [
         "SHOES_LEATHER_SET1",
-        974
+        993
        ],
        [
         "SHOES_LEATHER_MORGANA",
-        334
+        343
        ],
        [
         "SHOES_LEATHER_ROYAL",
-        112
+        117
        ]
       ]
      },
@@ -62930,6 +63311,105 @@
          "SHOES_CLOTH_SET2",
          2,
          2
+        ]
+       ]
+      },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        [
+         "ARMOR_CLOTH_AVALON",
+         11,
+         11
+        ],
+        [
+         "ARMOR_LEATHER_ROYAL",
+         9,
+         9
+        ],
+        [
+         "ARMOR_PLATE_KEEPER",
+         8,
+         9
+        ],
+        [
+         "ARMOR_PLATE_ROYAL",
+         5,
+         5
+        ],
+        [
+         "ARMOR_CLOTH_FEY",
+         2,
+         2
+        ],
+        [
+         "ARMOR_LEATHER_AVALON",
+         2,
+         2
+        ]
+       ],
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         30,
+         30
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         10,
+         10
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         16,
+         18
+        ],
+        [
+         "T7_MEAL_OMELETTE",
+         10,
+         12
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         33,
+         33
+        ],
+        [
+         "HEAD_CLOTH_KEEPER",
+         2,
+         2
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         37,
+         37
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_SET1",
+         20,
+         20
+        ],
+        [
+         "SHOES_LEATHER_MORGANA",
+         9,
+         9
+        ],
+        [
+         "SHOES_LEATHER_ROYAL",
+         6,
+         6
+        ],
+        [
+         "SHOES_CLOTH_SET2",
+         3,
+         3
         ]
        ]
       },
@@ -64993,6 +65473,33 @@
         15
        ]
       },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        "ARMOR_CLOTH_AVALON",
+        11,
+        40
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        8,
+        8
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        11,
+        11
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        7,
+        8
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        8,
+        11
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -65181,44 +65688,51 @@
         6
        ]
       }
+     },
+     "kit_weapon_uniform": {
+      "2H_HOLYSTAFF_CRYSTAL": [
+       "cloth",
+       "leather",
+       "plate"
+      ]
      }
     }
    },
    "kit_build": {
     "armor": [
      "ARMOR_CLOTH_AVALON",
-     1402,
-     3645
+     1494,
+     3890
     ],
     "cape": [
      "CAPEITEM_FW_LYMHURST",
-     139,
-     217
+     174,
+     263
     ],
     "food": [
      "T7_MEAL_OMELETTE",
-     25,
-     92
+     33,
+     121
     ],
     "head": [
      "HEAD_LEATHER_SET3",
-     479,
-     1405
+     559,
+     1500
     ],
     "offhand": [
      "OFF_HORN_KEEPER",
      47,
-     139
+     174
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     91,
-     100
+     120,
+     135
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
-     216,
-     480
+     261,
+     561
     ]
    },
    "kit_by_chest": {
@@ -65226,71 +65740,71 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
-       942
+       990
       ],
       [
        "CAPEITEM_SMUGGLER",
-       456
+       475
       ],
       [
        "CAPEITEM_FW_CAERLEON",
-       71
+       73
       ]
      ],
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       656
+       690
       ],
       [
        "T7_MEAL_OMELETTE_AVALON",
-       350
+       370
       ],
       [
        "T8_MEAL_STEW",
-       8
+       9
       ]
      ],
      "head": [
       [
        "HEAD_LEATHER_SET3",
-       538
+       611
       ],
       [
        "HEAD_PLATE_SET3",
-       322
+       323
       ],
       [
        "HEAD_CLOTH_KEEPER",
-       269
+       273
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
-       1344
+       1403
       ],
       [
        "T7_POTION_STONESKIN",
-       46
+       48
       ],
       [
        "T7_POTION_CLEANSE2",
-       19
+       26
       ]
      ],
      "shoes": [
       [
        "SHOES_LEATHER_SET1",
-       704
+       726
       ],
       [
        "SHOES_LEATHER_MORGANA",
-       587
+       629
       ],
       [
        "SHOES_LEATHER_ROYAL",
-       116
+       121
       ]
      ]
     },
@@ -65298,11 +65812,11 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
-       66
+       73
       ],
       [
        "CAPEITEM_SMUGGLER",
-       40
+       41
       ],
       [
        "CAPEITEM_FW_CAERLEON",
@@ -65312,21 +65826,21 @@
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
-       38
+       40
       ],
       [
        "T7_MEAL_OMELETTE",
-       31
+       36
       ]
      ],
      "head": [
       [
        "HEAD_LEATHER_SET3",
-       43
+       52
       ],
       [
        "HEAD_CLOTH_KEEPER",
-       41
+       42
       ],
       [
        "HEAD_PLATE_SET3",
@@ -65336,21 +65850,25 @@
      "potion": [
       [
        "T7_POTION_REVIVE",
-       107
+       115
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       5
       ]
      ],
      "shoes": [
       [
        "SHOES_LEATHER_MORGANA",
-       56
+       60
       ],
       [
        "SHOES_LEATHER_SET1",
-       36
+       39
       ],
       [
        "SHOES_LEATHER_ROYAL",
-       20
+       21
       ]
      ]
     },
@@ -65448,25 +65966,25 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
-       558
+       561
       ],
       [
        "CAPEITEM_SMUGGLER",
-       105
+       106
       ],
       [
        "CAPEITEM_FW_MARTLOCK",
-       50
+       51
       ]
      ],
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       457
+       462
       ],
       [
        "T7_MEAL_OMELETTE_AVALON",
-       94
+       95
       ],
       [
        "T8_MEAL_STEW",
@@ -65476,7 +65994,7 @@
      "head": [
       [
        "HEAD_LEATHER_SET3",
-       193
+       195
       ],
       [
        "HEAD_PLATE_SET3",
@@ -65484,13 +66002,13 @@
       ],
       [
        "HEAD_CLOTH_KEEPER",
-       146
+       147
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
-       633
+       637
       ],
       [
        "T7_POTION_STONESKIN",
@@ -65504,11 +66022,11 @@
      "shoes": [
       [
        "SHOES_LEATHER_SET1",
-       445
+       448
       ],
       [
        "SHOES_LEATHER_MORGANA",
-       141
+       142
       ],
       [
        "SHOES_CLOTH_SET1",
@@ -65520,25 +66038,29 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
-       13
+       14
       ]
      ],
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       12
+       13
       ]
      ],
      "head": [
       [
        "HEAD_LEATHER_SET3",
        10
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       5
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
-       17
+       18
       ]
      ],
      "shoes": [
@@ -65570,45 +66092,49 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
-       354
+       383
       ],
       [
        "CAPEITEM_SMUGGLER",
-       159
+       178
       ],
       [
        "CAPEITEM_FW_CAERLEON",
-       12
+       13
       ]
      ],
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
-       190
+       208
       ],
       [
        "T7_MEAL_OMELETTE",
-       159
+       180
       ]
      ],
      "head": [
       [
        "HEAD_LEATHER_SET3",
-       171
+       215
       ],
       [
        "HEAD_PLATE_SET3",
-       156
+       159
       ],
       [
        "HEAD_PLATE_SET1",
-       43
+       47
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
-       509
+       555
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       6
       ],
       [
        "T7_POTION_STONESKIN",
@@ -65618,27 +66144,27 @@
      "shoes": [
       [
        "SHOES_LEATHER_SET1",
-       266
+       286
       ],
       [
        "SHOES_LEATHER_MORGANA",
-       178
+       197
       ],
       [
        "SHOES_LEATHER_ROYAL",
-       64
+       73
       ]
      ]
     },
     "ARMOR_PLATE_ROYAL": {
      "cape": [
       [
-       "CAPEITEM_FW_LYMHURST",
-       124
+       "CAPEITEM_SMUGGLER",
+       142
       ],
       [
-       "CAPEITEM_SMUGGLER",
-       124
+       "CAPEITEM_FW_LYMHURST",
+       135
       ],
       [
        "CAPEITEM_FW_MARTLOCK",
@@ -65648,21 +66174,21 @@
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
-       121
+       132
       ],
       [
        "T7_MEAL_OMELETTE",
-       49
+       61
       ]
      ],
      "head": [
       [
        "HEAD_LEATHER_SET3",
-       111
+       137
       ],
       [
        "HEAD_PLATE_SET3",
-       79
+       80
       ],
       [
        "HEAD_CLOTH_SET2",
@@ -65672,7 +66198,7 @@
      "potion": [
       [
        "T7_POTION_REVIVE",
-       247
+       272
       ],
       [
        "T7_POTION_STONESKIN",
@@ -65682,15 +66208,23 @@
      "shoes": [
       [
        "SHOES_LEATHER_SET1",
-       125
-      ],
-      [
-       "SHOES_LEATHER_MORGANA",
-       69
+       138
       ],
       [
        "SHOES_LEATHER_ROYAL",
-       69
+       80
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       73
+      ]
+     ]
+    },
+    "ARMOR_PLATE_SET3": {
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       5
       ]
      ]
     }
@@ -65699,71 +66233,71 @@
     "cape": [
      [
       "CAPEITEM_FW_LYMHURST",
-      2197
+      2286
      ],
      [
       "CAPEITEM_SMUGGLER",
-      915
+      962
      ],
      [
       "CAPEITEM_FW_CAERLEON",
-      142
+      145
      ]
     ],
     "food": [
      [
       "T7_MEAL_OMELETTE",
-      1459
+      1524
      ],
      [
       "T7_MEAL_OMELETTE_AVALON",
-      852
+      904
      ],
      [
       "T8_MEAL_STEW",
-      38
+      40
      ]
     ],
     "head": [
      [
       "HEAD_LEATHER_SET3",
-      1200
+      1345
      ],
      [
       "HEAD_PLATE_SET3",
-      764
+      770
      ],
      [
       "HEAD_CLOTH_KEEPER",
-      533
+      538
      ]
     ],
     "potion": [
      [
       "T7_POTION_REVIVE",
-      2890
+      3001
      ],
      [
       "T7_POTION_STONESKIN",
-      206
+      208
      ],
      [
       "T7_POTION_CLEANSE2",
-      38
+      48
      ]
     ],
     "shoes": [
      [
       "SHOES_LEATHER_SET1",
-      1658
+      1706
      ],
      [
       "SHOES_LEATHER_MORGANA",
-      1090
+      1158
      ],
      [
       "SHOES_LEATHER_ROYAL",
-      340
+      366
      ]
     ]
    },
@@ -65833,8 +66367,8 @@
        "SHOES_LEATHER_MORGANA",
        "SHOES_LEATHER_ROYAL",
        "SHOES_CLOTH_SET2",
-       "SHOES_CLOTH_SET1",
        "SHOES_PLATE_AVALON",
+       "SHOES_CLOTH_SET1",
        "SHOES_LEATHER_SET2",
        "SHOES_PLATE_SET1",
        "SHOES_PLATE_UNDEAD",
@@ -65846,6 +66380,95 @@
       ]
      },
      "kit_weapon": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        [
+         "ARMOR_PLATE_ROYAL",
+         17,
+         19
+        ],
+        [
+         "ARMOR_PLATE_KEEPER",
+         7,
+         7
+        ],
+        [
+         "ARMOR_LEATHER_AVALON",
+         6,
+         6
+        ],
+        [
+         "ARMOR_LEATHER_FEY",
+         6,
+         6
+        ],
+        [
+         "ARMOR_LEATHER_ROYAL",
+         6,
+         7
+        ],
+        [
+         "ARMOR_CLOTH_AVALON",
+         4,
+         4
+        ]
+       ],
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         27,
+         28
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         20,
+         20
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         15,
+         20
+        ],
+        [
+         "T7_MEAL_OMELETTE",
+         9,
+         11
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         46,
+         46
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         47,
+         47
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_SET1",
+         23,
+         25
+        ],
+        [
+         "SHOES_LEATHER_MORGANA",
+         11,
+         11
+        ],
+        [
+         "SHOES_LEATHER_ROYAL",
+         11,
+         12
+        ]
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         [
@@ -66877,6 +67500,28 @@
       }
      },
      "kit_weapon_build": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        "ARMOR_PLATE_ROYAL",
+        17,
+        48
+       ],
+       "cape": [
+        "CAPEITEM_SMUGGLER",
+        7,
+        10
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        16,
+        17
+       ],
+       "shoes": [
+        "SHOES_LEATHER_SET1",
+        10,
+        16
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -66966,6 +67611,11 @@
       }
      },
      "kit_weapon_uniform": {
+      "2H_HOLYSTAFF_CRYSTAL": [
+       "cloth",
+       "leather",
+       "plate"
+      ],
       "2H_HOLYSTAFF_HELL": [
        "cloth",
        "plate"
@@ -67028,6 +67678,34 @@
       ]
      },
      "kit_weapon": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         5,
+         5
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         3,
+         4
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         6,
+         6
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         8,
+         8
+        ]
+       ]
+      },
       "MAIN_HOLYSTAFF_AVALON": {
        "armor": [
         [
@@ -67327,8 +68005,8 @@
        "SHOES_LEATHER_ROYAL",
        "SHOES_CLOTH_SET2",
        "SHOES_CLOTH_SET1",
-       "SHOES_PLATE_SET1",
        "SHOES_PLATE_UNDEAD",
+       "SHOES_PLATE_SET1",
        "SHOES_PLATE_AVALON",
        "SHOES_LEATHER_SET2",
        "SHOES_PLATE_SET2",
@@ -67343,33 +68021,33 @@
      "kit_build": {
       "armor": [
        "ARMOR_CLOTH_AVALON",
-       818,
-       1972
+       864,
+       2100
       ],
       "cape": [
        "CAPEITEM_FW_LYMHURST",
-       81,
-       120
+       89,
+       135
       ],
       "food": [
        "T7_MEAL_OMELETTE",
-       25,
-       78
+       26,
+       86
       ],
       "head": [
        "HEAD_LEATHER_SET3",
-       263,
-       818
+       301,
+       866
       ],
       "potion": [
        "T7_POTION_REVIVE",
-       76,
-       81
+       84,
+       89
       ],
       "shoes": [
        "SHOES_LEATHER_SET1",
-       120,
-       263
+       134,
+       302
       ]
      },
      "kit_weapon": {
@@ -67403,6 +68081,150 @@
         ],
         [
          "T8_POTION_TORNADO",
+         2,
+         2
+        ]
+       ]
+      },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        [
+         "ARMOR_CLOTH_AVALON",
+         46,
+         47
+        ],
+        [
+         "ARMOR_PLATE_KEEPER",
+         33,
+         35
+        ],
+        [
+         "ARMOR_PLATE_ROYAL",
+         16,
+         18
+        ],
+        [
+         "ARMOR_CLOTH_SET2",
+         5,
+         5
+        ],
+        [
+         "ARMOR_CLOTH_FEY",
+         4,
+         4
+        ]
+       ],
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         78,
+         80
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         40,
+         43
+        ],
+        [
+         "CAPEITEM_FW_MARTLOCK",
+         5,
+         5
+        ],
+        [
+         "CAPEITEM_FW_CAERLEON",
+         2,
+         2
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE",
+         43,
+         52
+        ],
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         33,
+         38
+        ],
+        [
+         "T8_MEAL_STEW",
+         2,
+         2
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         100,
+         101
+        ],
+        [
+         "HEAD_PLATE_SET1",
+         9,
+         9
+        ],
+        [
+         "HEAD_CLOTH_KEEPER",
+         4,
+         5
+        ],
+        [
+         "HEAD_PLATE_SET3",
+         4,
+         4
+        ],
+        [
+         "HEAD_CLOTH_SET2",
+         3,
+         3
+        ],
+        [
+         "HEAD_PLATE_SET2",
+         2,
+         2
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         116,
+         117
+        ],
+        [
+         "T7_POTION_CLEANSE2",
+         8,
+         9
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_MORGANA",
+         50,
+         52
+        ],
+        [
+         "SHOES_LEATHER_SET1",
+         46,
+         48
+        ],
+        [
+         "SHOES_LEATHER_ROYAL",
+         21,
+         24
+        ],
+        [
+         "SHOES_CLOTH_SET2",
+         2,
+         3
+        ],
+        [
+         "SHOES_PLATE_AVALON",
+         2,
+         2
+        ],
+        [
+         "SHOES_PLATE_UNDEAD",
          2,
          2
         ]
@@ -69081,6 +69903,23 @@
         6
        ]
       },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        "ARMOR_CLOTH_AVALON",
+        46,
+        128
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        37,
+        48
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        18,
+        38
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -69249,6 +70088,10 @@
       }
      },
      "kit_weapon_uniform": {
+      "2H_HOLYSTAFF_CRYSTAL": [
+       "cloth",
+       "plate"
+      ],
       "MAIN_HOLYSTAFF_AVALON": [
        "cloth",
        "plate"
@@ -69304,12 +70147,12 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
-       "T7_POTION_STONESKIN",
-       "T7_POTION_CLEANSE2"
+       "T7_POTION_CLEANSE2",
+       "T7_POTION_STONESKIN"
       ],
       "shoes": [
-       "SHOES_LEATHER_SET1",
        "SHOES_LEATHER_MORGANA",
+       "SHOES_LEATHER_SET1",
        "SHOES_LEATHER_ROYAL",
        "SHOES_CLOTH_SET2",
        "SHOES_PLATE_UNDEAD",
@@ -69320,41 +70163,135 @@
      "kit_build": {
       "armor": [
        "ARMOR_CLOTH_AVALON",
-       440,
-       642
+       487,
+       712
       ],
       "cape": [
        "CAPEITEM_FW_LYMHURST",
-       48,
-       84
+       71,
+       115
       ],
       "food": [
        "T7_MEAL_OMELETTE",
-       10,
-       28
+       14,
+       47
       ],
       "head": [
        "HEAD_LEATHER_SET3",
-       161,
-       441
+       205,
+       488
       ],
       "offhand": [
        "OFF_HORN_KEEPER",
        20,
-       48
+       71
       ],
       "potion": [
        "T7_POTION_REVIVE",
-       28,
-       30
+       47,
+       53
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
-       84,
-       161
+       115,
+       205
       ]
      },
      "kit_weapon": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        [
+         "ARMOR_CLOTH_AVALON",
+         47,
+         48
+        ],
+        [
+         "ARMOR_CLOTH_FEY",
+         2,
+         3
+        ],
+        [
+         "ARMOR_CLOTH_SET2",
+         2,
+         2
+        ]
+       ],
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         53,
+         55
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         16,
+         17
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE",
+         31,
+         36
+        ],
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         14,
+         15
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         64,
+         64
+        ],
+        [
+         "HEAD_PLATE_SET3",
+         3,
+         3
+        ],
+        [
+         "HEAD_LEATHER_SET1",
+         2,
+         2
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         62,
+         63
+        ],
+        [
+         "T7_POTION_CLEANSE2",
+         6,
+         6
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_MORGANA",
+         39,
+         41
+        ],
+        [
+         "SHOES_LEATHER_SET1",
+         25,
+         27
+        ],
+        [
+         "SHOES_CLOTH_SET2",
+         3,
+         3
+        ],
+        [
+         "SHOES_LEATHER_ROYAL",
+         2,
+         2
+        ]
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         [
@@ -70053,6 +70990,38 @@
       }
      },
      "kit_weapon_build": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        "ARMOR_CLOTH_AVALON",
+        47,
+        70
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        23,
+        31
+       ],
+       "food": [
+        "T7_MEAL_OMELETTE_AVALON",
+        6,
+        19
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        44,
+        47
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        19,
+        23
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        31,
+        44
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_AVALON",
@@ -70166,7 +71135,8 @@
        "CAPEITEM_SMUGGLER",
        "CAPEITEM_FW_CAERLEON",
        "CAPEITEM_FW_MARTLOCK",
-       "CAPEITEM_FW_FORTSTERLING"
+       "CAPEITEM_FW_FORTSTERLING",
+       "CAPEITEM_MORGANA"
       ],
       "food": [
        "T7_MEAL_OMELETTE",
@@ -70225,36 +71195,130 @@
      "kit_build": {
       "armor": [
        "ARMOR_CLOTH_AVALON",
-       224,
-       491
+       250,
+       540
       ],
       "cape": [
        "CAPEITEM_FW_LYMHURST",
-       24,
-       41
+       34,
+       54
+      ],
+      "food": [
+       "T7_MEAL_OMELETTE",
+       8,
+       26
       ],
       "head": [
        "HEAD_LEATHER_SET3",
-       92,
-       225
+       117,
+       251
       ],
       "offhand": [
        "OFF_HORN_KEEPER",
        11,
-       24
+       34
       ],
       "potion": [
        "T7_POTION_REVIVE",
-       17,
-       20
+       25,
+       30
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
-       41,
-       92
+       54,
+       117
       ]
      },
      "kit_weapon": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        [
+         "ARMOR_CLOTH_AVALON",
+         26,
+         26
+        ],
+        [
+         "ARMOR_CLOTH_FEY",
+         5,
+         5
+        ]
+       ],
+       "cape": [
+        [
+         "CAPEITEM_FW_LYMHURST",
+         29,
+         29
+        ],
+        [
+         "CAPEITEM_SMUGGLER",
+         16,
+         16
+        ],
+        [
+         "CAPEITEM_MORGANA",
+         2,
+         2
+        ]
+       ],
+       "food": [
+        [
+         "T7_MEAL_OMELETTE",
+         18,
+         20
+        ],
+        [
+         "T7_MEAL_OMELETTE_AVALON",
+         12,
+         12
+        ]
+       ],
+       "head": [
+        [
+         "HEAD_LEATHER_SET3",
+         46,
+         46
+        ],
+        [
+         "HEAD_CLOTH_KEEPER",
+         2,
+         2
+        ]
+       ],
+       "potion": [
+        [
+         "T7_POTION_REVIVE",
+         45,
+         45
+        ],
+        [
+         "T7_POTION_CLEANSE2",
+         4,
+         4
+        ]
+       ],
+       "shoes": [
+        [
+         "SHOES_LEATHER_MORGANA",
+         23,
+         23
+        ],
+        [
+         "SHOES_LEATHER_SET1",
+         18,
+         19
+        ],
+        [
+         "SHOES_LEATHER_ROYAL",
+         3,
+         3
+        ],
+        [
+         "SHOES_CLOTH_SET2",
+         2,
+         2
+        ]
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         [
@@ -71175,6 +72239,33 @@
       }
      },
      "kit_weapon_build": {
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "armor": [
+        "ARMOR_CLOTH_AVALON",
+        26,
+        49
+       ],
+       "cape": [
+        "CAPEITEM_FW_LYMHURST",
+        10,
+        13
+       ],
+       "head": [
+        "HEAD_LEATHER_SET3",
+        25,
+        26
+       ],
+       "potion": [
+        "T7_POTION_REVIVE",
+        8,
+        10
+       ],
+       "shoes": [
+        "SHOES_LEATHER_MORGANA",
+        13,
+        25
+       ]
+      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -71399,6 +72490,188 @@
       ],
       [
        "SHOES_LEATHER_MORGANA",
+       2,
+       2
+      ]
+     ]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       98,
+       95
+      ],
+      [
+       "ARMOR_PLATE_KEEPER",
+       53,
+       56
+      ],
+      [
+       "ARMOR_PLATE_ROYAL",
+       36,
+       41
+      ],
+      [
+       "ARMOR_CLOTH_FEY",
+       10,
+       10
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       6,
+       7
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       160,
+       161
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       80,
+       82
+      ],
+      [
+       "CAPEITEM_MORGANA",
+       5,
+       5
+      ],
+      [
+       "CAPEITEM_FW_CAERLEON",
+       4,
+       4
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       4,
+       5
+      ],
+      [
+       "CAPEITEM_FW_FORTSTERLING",
+       3,
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       81,
+       99
+      ],
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       68,
+       82
+      ],
+      [
+       "T8_MEAL_STEW",
+       0,
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       213,
+       210
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       10,
+       9
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       9,
+       9
+      ],
+      [
+       "HEAD_PLATE_SET3",
+       7,
+       7
+      ],
+      [
+       "HEAD_CLOTH_SET2",
+       4,
+       5
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       4,
+       4
+      ],
+      [
+       "HEAD_LEATHER_SET1",
+       2,
+       3
+      ],
+      [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       230,
+       227
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       17,
+       15
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       2,
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       102,
+       105
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       88,
+       96
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       40,
+       42
+      ],
+      [
+       "SHOES_CLOTH_SET2",
+       10,
+       10
+      ],
+      [
+       "SHOES_CLOTH_SET1",
+       4,
+       2
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       4,
+       4
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       3,
+       3
+      ],
+      [
+       "SHOES_LEATHER_SET2",
        2,
        2
       ]
@@ -73587,6 +74860,38 @@
       8
      ]
     },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": [
+      "ARMOR_CLOTH_AVALON",
+      92,
+      245
+     ],
+     "cape": [
+      "CAPEITEM_FW_LYMHURST",
+      35,
+      46
+     ],
+     "food": [
+      "T7_MEAL_OMELETTE_AVALON",
+      8,
+      29
+     ],
+     "head": [
+      "HEAD_LEATHER_SET3",
+      80,
+      95
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      29,
+      35
+     ],
+     "shoes": [
+      "SHOES_LEATHER_MORGANA",
+      45,
+      81
+     ]
+    },
     "2H_HOLYSTAFF_HELL": {
      "armor": [
       "ARMOR_CLOTH_SET2",
@@ -73787,6 +75092,10 @@
     }
    },
    "kit_weapon_uniform": {
+    "2H_HOLYSTAFF_CRYSTAL": [
+     "cloth",
+     "plate"
+    ],
     "MAIN_HOLYSTAFF_AVALON": [
      "cloth",
      "plate"
@@ -73844,6 +75153,11 @@
      "tier": "primary"
     },
     {
+     "id": "2H_HOLYSTAFF_CRYSTAL",
+     "source": "owner:2026-09-11 ('mostly a healer still'); killboard:party_rosters (903 builds, 318 players, cloth 45% / plate 33% / leather 23%; beside 2-3 full healers in 74% of 851 parties); group heal scale, full_healer False (primary_heal never counts it)",
+     "tier": "primary"
+    },
+    {
      "id": "MAIN_HOLYSTAFF",
      "source": "killboard:party_rosters (36 builds, 86% cloth); single-scale healer (gang seat; the 10+ generation gate rides); owner:2026-09-01 seat-all",
      "tier": "primary"
@@ -73858,7 +75172,8 @@
      "source": "killboard:party_rosters (22 builds, 55% cloth); GROUP heal scale (the ruled hybrid \u2014 cost gate bars it below 30 regardless); owner:2026-09-01 seat-all",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Healer"
   },
   {
    "class": "healer",
@@ -79001,7 +80316,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 2 builds \u2014 thin); nature-family mobile healer",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Healer"
   },
   {
    "class": "healer",
@@ -83961,7 +85277,8 @@
      "source": "comp:timothy_blap (brawl comp healer x2)",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Healer"
   },
   {
    "class": "support",
@@ -90778,15 +92095,16 @@
     },
     {
      "id": "2H_HOLYSTAFF_CRYSTAL",
-     "source": "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)",
-     "tier": "primary"
+     "source": "comp:deadlyhooker (support x3); the anti-zone / cleanse lane it also serves (owner 2026-09-11: 'has the anti zone support')",
+     "tier": "secondary"
     },
     {
      "id": "2H_SHAPESHIFTER_SET2",
      "source": "comp:support x3; guide:albiononlinegrind 'Nature (Rootbound) Support'",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Support"
   },
   {
    "class": "support",
@@ -91207,7 +92525,8 @@
      "source": "derived:kit resist_shred 2",
      "tier": "secondary"
     }
-   ]
+   ],
+   "word": "pierce"
   },
   {
    "class": "support",
@@ -91243,7 +92562,8 @@
      "source": "derived:E-slot purge 4",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "purge"
   },
   {
    "class": "support",
@@ -91310,7 +92630,8 @@
      "source": "derived:kit purge 2 (spell-classified)",
      "tier": "secondary"
     }
-   ]
+   ],
+   "word": "shield break"
   },
   {
    "class": "support",
@@ -91436,7 +92757,8 @@
      "source": "derived:kit heal_reduction 2",
      "tier": "secondary"
     }
-   ]
+   ],
+   "word": "heal cut"
   },
   {
    "class": "support",
@@ -94198,7 +95520,8 @@
      "source": "owner:2026-09-03 ('support weapon like occult'); dumps: E Time Corridor = ally move+attack speed 0.6, enemy slow 0.3 (mass slow / lane control); guide:metabattle Occult Staff ZvZ Support (Royal Jacket); killboard:party_rosters (61 builds, 85% leather); sheet role_hint support",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Support"
   },
   {
    "class": "support",
@@ -100938,7 +102261,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 2 builds \u2014 thin); cursed-line staple",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Support"
   },
   {
    "class": "dps",
@@ -128041,7 +129365,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 6 builds, plate-leaning \u2014 thin); demon-form ranged AoE; round-7 solo-class exclusion rides viability",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Ranged AoE"
   },
   {
    "class": "dps",
@@ -151434,7 +152759,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 4 builds \u2014 thin); werewolf-form sustain bruiser",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Melee"
   },
   {
    "class": "dps",
@@ -154902,7 +156228,8 @@
      "source": "killboard:party_rosters (9 builds, 89% cloth \u2014 thin); teleport-burst E is the bomb pattern; owner:2026-09-01 seat-all",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Bomb"
   },
   {
    "class": "dps",
@@ -162633,7 +163960,8 @@
      "source": "owner:2026-09-01 seat-all (killboard: 3 builds \u2014 thin); stealth-cat roam/pick form",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Dive"
   },
   {
    "class": "meta",
@@ -162654,7 +163982,8 @@
      "source": "comp:deadlyhooker (battlemount x9); owner:2026-08-24 (the killboard mount-carrier artifact ruling)",
      "tier": "primary"
     }
-   ]
+   ],
+   "word": "Pilot"
   },
   {
    "class": "meta",
@@ -162664,7 +163993,8 @@
    "uniform": {
     "chest": []
    },
-   "weapons": []
+   "weapons": [],
+   "word": "Caller"
   },
   {
    "class": "meta",
@@ -162674,7 +164004,8 @@
    "uniform": {
     "chest": []
    },
-   "weapons": []
+   "weapons": [],
+   "word": "Scout"
   }
  ],
  "scoring": {
@@ -167117,6 +168448,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "shield_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -167299,6 +168639,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps",
+     "cleanse"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -167475,6 +168824,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "zone_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "buffs"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -167681,6 +169039,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut",
+     "cleanse"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -167884,6 +169251,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -168117,6 +169492,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -168309,6 +169693,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -168517,6 +169910,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -168721,6 +170123,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -168921,6 +170332,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -169151,6 +170570,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "interrupt",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -169339,6 +170767,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "shield break",
+     "root"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -169571,6 +171008,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "engage",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -169798,6 +171244,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -170028,6 +171483,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "pierce",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -170257,6 +171721,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bruiser",
+    "seat": "off_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "shield break",
+     "weaken"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -170454,6 +171927,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "pierce",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -170661,6 +172143,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "silence",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -170850,6 +172341,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps",
+     "silence"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -171045,6 +172545,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps",
+     "silence"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -171242,6 +172751,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "zone",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -171429,6 +172947,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "pierce",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -171598,6 +173125,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -171801,6 +173337,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172010,6 +173555,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bomb",
+    "seat": "bomb_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172221,6 +173775,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "knockback"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172356,6 +173919,15 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172543,6 +174115,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "disengage"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172771,6 +174352,12 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": []
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -172980,6 +174567,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -173181,6 +174777,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -173367,6 +174972,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -173624,6 +175238,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "anti-dive"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -173823,6 +175446,15 @@
    "full_healer": false,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Bruiser",
+    "seat": "off_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "buffs",
+     "root"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -174009,6 +175641,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bomb",
+    "seat": "bomb_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -174192,6 +175833,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -174406,6 +176056,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -174555,6 +176214,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "shield_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "cleanse"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -174707,6 +176374,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "shield_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "buffs",
+     "cleanse"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -174884,6 +176560,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -175044,6 +176728,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -175215,6 +176907,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -175389,6 +177090,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "root",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -175616,6 +177326,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -175846,6 +177565,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -176091,6 +177819,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "zone",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -176247,6 +177984,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "catch",
+     "knockback"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -176430,6 +178176,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bomb",
+    "seat": "bomb_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -176632,6 +178386,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -176839,6 +178601,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -177082,6 +178852,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -177331,6 +179110,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "clump",
+     "stun"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -177570,6 +179358,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bruiser",
+    "seat": "off_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -177825,6 +179622,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -178021,6 +179827,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "pierce",
+     "weaken"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -178190,6 +180005,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "brawl_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -178320,6 +180143,15 @@
    "full_healer": false,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -178356,6 +180188,9 @@
    "removed": false,
    "role_hint": "healer",
    "role_menu": [
+    "main_healer"
+   ],
+   "role_menu_secondary": [
     "shield_support"
    ],
    "source": "sheets/holy_line_rest.yaml",
@@ -178446,6 +180281,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -178565,6 +180408,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -178780,6 +180631,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -179024,6 +180884,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "zone_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -179197,6 +181066,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -179358,6 +181236,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "zone",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -179538,6 +181425,12 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "DPS",
+    "seat": null,
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": []
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -179708,6 +181601,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -179969,6 +181871,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "purge",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -180188,6 +182099,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -180440,6 +182360,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -180684,6 +182613,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -180890,6 +182828,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bomb",
+    "seat": "bomb_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "knockback",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -181125,6 +183072,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -181347,6 +183303,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -181594,6 +183559,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -181783,6 +183757,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "slow",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -181953,6 +183936,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -182148,6 +184139,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "purge",
+     "silence"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 6
@@ -182356,6 +184356,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "clump",
+     "root"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -182540,6 +184549,14 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "kite_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -182739,6 +184756,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -182939,6 +184964,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -183175,6 +185208,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -183400,6 +185442,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Bruiser",
+    "seat": "off_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "knockback",
+     "disengage"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -183621,6 +185672,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "root"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -183840,6 +185900,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -184035,6 +186104,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "zone",
+     "silence"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -184218,6 +186296,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut",
+     "slow"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -184400,6 +186487,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "engage"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -184611,6 +186707,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -184850,6 +186954,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -185085,6 +187198,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -185316,6 +187437,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "self-sustain"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -185540,6 +187669,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "self-sustain"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -185754,6 +187891,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "catch",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -185976,6 +188122,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -186203,6 +188358,14 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "shield_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "buffs"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -186436,6 +188599,12 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": []
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -186627,6 +188796,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "zone",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -186777,6 +188955,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "root",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -186982,6 +189169,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "root",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -187208,6 +189404,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -187412,6 +189617,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -187609,6 +189823,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -187799,6 +190021,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "silence",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -187968,6 +190199,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "shield_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "purge",
+     "silence"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -188181,6 +190421,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "clump",
+     "aoe burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -188390,6 +190639,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "self-sustain"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -188574,6 +190831,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "single burst",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -188755,6 +191021,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -188954,6 +191229,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -189152,6 +191436,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "curse_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "purge",
+     "zone"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -189324,6 +191617,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -189519,6 +191821,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -189708,6 +192019,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -189887,6 +192206,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "disengage",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -190048,6 +192376,14 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "sustain dps"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 4
@@ -190270,6 +192606,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Ranged AoE",
+    "seat": "ranged_aoe",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "root",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -190475,6 +192820,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "DPS",
+    "seat": null,
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "slow"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -190710,6 +193064,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Support",
+    "seat": "zone_support",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "slow"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -190932,6 +193295,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "peel"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -191083,6 +193455,15 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -191207,6 +193588,14 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -191328,6 +193717,15 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "kite_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "holy"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -191479,6 +193877,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -191686,6 +194093,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Engage",
+    "seat": "engage_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "pierce",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -191897,6 +194313,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "heal cut",
+     "weaken"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -192098,6 +194523,15 @@
    "full_healer": true,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -192276,6 +194710,14 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "kite_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -192477,6 +194919,14 @@
    "full_healer": false,
    "heal_scale": "group",
    "in_game_data": true,
+   "label": {
+    "primary": "Sustain",
+    "seat": "main_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -192646,6 +195096,15 @@
    "full_healer": false,
    "heal_scale": "single",
    "in_game_data": true,
+   "label": {
+    "primary": "Burst",
+    "seat": "kite_healer",
+    "source": "derived:heal profile + line",
+    "tags": [
+     "sustain",
+     "nature"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -192851,6 +195310,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {
      "sustained_dps": 2
@@ -193054,6 +195522,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Stopper",
+    "seat": "stopper_tank",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "peel",
+     "anti-dive"
+    ]
+   },
    "loadout": {
     "always": {
      "tankiness": 4
@@ -193267,6 +195744,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "aoe burst",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -193472,6 +195958,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Dive",
+    "seat": "dive_cleanup",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "engage"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -193684,6 +196179,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "stun",
+     "catch"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -193880,6 +196384,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "purge",
+     "mobility"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -194075,6 +196588,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [
@@ -194264,6 +196786,15 @@
    "full_healer": false,
    "heal_scale": "none",
    "in_game_data": true,
+   "label": {
+    "primary": "Melee",
+    "seat": "sustained_brawler",
+    "source": "derived:menu functions + sheet (E-first)",
+    "tags": [
+     "mobility",
+     "single burst"
+    ]
+   },
    "loadout": {
     "always": {},
     "slot_names": [

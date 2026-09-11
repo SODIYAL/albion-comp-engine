@@ -43,6 +43,7 @@ Step "audit_style_rosters"    "py" @("-3", "-u", "pipeline/audit_style_rosters.p
 Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py")
 Step "derive_party_styles"    "py" @("-3", "-u", "pipeline/derive_party_styles.py")
 Step "derive_meta_prior"      "py" @("-3", "-u", "pipeline/derive_meta_prior.py")
+Step "derive_role_counts"     "py" @("-3", "-u", "pipeline/derive_role_counts.py")
 Step "build_dataset"          "py" @("-3", "-u", "pipeline/build_dataset.py")
 Step "build_cohort_families"  "py" @("-3", "-u", "pipeline/build_cohort_families.py")
 Step "dashboard build"        "py" @("-3", "-u", "dashboard/build.py")

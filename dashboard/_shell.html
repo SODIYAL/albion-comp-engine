@@ -1006,6 +1006,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 /* removal moved onto the tiles (hover ×) — the flyout drops its button;
    the dossier is inlined below, so its button goes too */
 .pdash-fly .dm-act.dm-x{display:none}
+.pdash-fly .dm-act.dm-lock, .pdash-fly .dm-act.dm-rp, .pdash-fly .dm-act.dm-refresh{display:none}
 .pdash-fly .dm-act[data-detail]{display:none}
 /* the inlined dossier: separated from the kit block; its own header
    duplicates the flyout's (name, badges, role) and is dropped */
@@ -1013,22 +1014,50 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .pf-dossier .dt-head{display:none}
 .pf-dossier .dt-grid{grid-template-columns:1fr; gap:4px}
 
-/* hover ×: appears over the slot number on hover-capable screens; rides
-   the same delegated data-remove action the popover button used */
-.wf-x{
+/* hover controls (owner 2026-09-11): lock / replace / refresh-rest / ×
+   appear over the slot number on hover-capable screens; every button
+   rides a delegated data-* action the popover buttons share. A LOCKED
+   tile keeps its lock visible at rest. */
+.wf-ctl{
   position:absolute; top:50%; right:7px; transform:translateY(-50%);
-  width:20px; height:20px; display:none; align-items:center; justify-content:center;
+  display:none; align-items:center; gap:3px; z-index:7;
+}
+.wf-c{
+  width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;
   border-radius:50%; border:1px solid var(--rule-2); background:rgba(13,16,22,.92);
   /* above the hovered card, which climbs to z-index:6 (board hover rule) */
-  color:var(--ink-3); font-size:13px; line-height:1; padding:0; cursor:pointer; z-index:7;
+  color:var(--ink-3); font-size:12px; line-height:1; padding:0; cursor:pointer;
   transition:color .15s var(--ease), border-color .15s var(--ease);
 }
+.wf-c:hover, .wf-c.on{color:var(--brass); border-color:var(--brass-deep)}
+.wf-c.on{background:var(--brass-wash)}
+.wf-c .ui{display:block}
 .wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
+.wf-dm.locked .wf-mcard{box-shadow:inset 0 0 0 1px var(--brass-deep)}
+/* the at-rest lock mark rides inside the slot number (monoline, brass) */
+.wf-mcard .n{display:inline-flex; align-items:center; gap:3px}
+.wf-mcard .n .ui{color:var(--brass)}
+/* popover actions: icon in front of the word */
+.dm-act{display:inline-flex; align-items:center; gap:4px}
+.dm-act .ui{flex:none}
 @media (hover:hover){
   .epanel .wf-dm{position:relative}
-  .epanel .wf-dm:hover .wf-x, .epanel .wf-dm:focus-within .wf-x{display:inline-flex}
+  .epanel .wf-dm:hover .wf-ctl, .epanel .wf-dm:focus-within .wf-ctl{display:inline-flex}
   .epanel .wf-dm:hover .wf-mcard .n{opacity:0}
 }
+/* the ranked replacements inside the popover / flyout / sheet */
+.dm-replace{display:flex; flex-wrap:wrap; gap:5px; align-items:center; margin-top:8px;
+  padding-top:8px; border-top:1px solid var(--rule)}
+.dm-replace .fn{flex-basis:100%}
+.rp-opt{display:inline-flex; align-items:center; gap:5px; padding:3px 8px 3px 4px;
+  border:1px solid var(--rule-2); border-radius:14px; background:var(--surface-2);
+  color:var(--ink-1); font:inherit; font-size:12px; cursor:pointer}
+.rp-opt img{width:22px; height:22px; border-radius:5px}
+.rp-opt b{font-family:var(--mono); font-size:11px; color:var(--brass)}
+.rp-opt.neg b{color:var(--ink-3)}
+.rp-opt:hover{border-color:var(--brass-deep); color:var(--brass)}
+.prov.locked{background:var(--brass-wash); color:var(--brass); margin-left:6px}
+.dm-act.on{color:var(--brass); border-color:var(--brass-deep)}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));

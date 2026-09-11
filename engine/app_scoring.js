@@ -584,6 +584,21 @@
         }
       }
     }
+    /* TYPICAL role counts (owner ruling 2026-09-11; mirrors engine.py):
+       the harvest p50 per exact size (composition.role_typical, GENERATED
+       by derive_role_counts.py) laid onto the band as `typical`. The forge
+       generates a body beyond it only when a minimum only that role can
+       meet still demands one (_typOk). Generation-only: manual parties
+       always score. */
+    if (this._band !== null) {
+      var typRows = this._roleTypical();
+      for (var typRole in typRows) {
+        this._band = Object.assign({}, this._band);
+        var typRule = Object.assign({}, this._band[typRole] || {});
+        typRule.typical = typRows[typRole];
+        this._band[typRole] = typRule;
+      }
+    }
     /* NEED PROFILES (increment 3, owner-ruled 2026-08-26) — mirrors
        engine.py: fine-seat bands + function coverage minima for the
        FORGE, scaled by size/reference_size (half-up, the pinned
@@ -3245,7 +3260,7 @@
   CompEngine.prototype._forgeCtx = function (pool) {
     /* Static per-forge context (mirrors engine.py _forge_ctx). */
     var band = this._band || {};
-    var roleMin = {}, roleMax = {}, predMin = {};
+    var roleMin = {}, roleMax = {}, roleTyp = {}, predMin = {};
     for (var key in band) {
       if (key === "min_size" || key === "max_size") continue;
       var rule = band[key];
@@ -3256,6 +3271,7 @@
       }
       if (rule.min !== undefined) roleMin[key] = rule.min;
       if (rule.max !== undefined) roleMax[key] = rule.max;
+      if (rule.typical !== undefined) roleTyp[key] = rule.typical;
     }
     /* need-profile minima ride the predicate channel; seat maxima get
        their own key (mirrors engine.py) */
@@ -3297,6 +3313,7 @@
       predRoles[pr] = { roles: rset, n: rn };
     }
     return { pool: pool, roleMin: roleMin, roleMax: roleMax,
+             roleTyp: roleTyp,
              predMin: predMin, seatMax: seatMax, predGates: predGates,
              predRoles: predRoles, predSat: predSat };
   };
@@ -3385,6 +3402,66 @@
     return need;
   };
 
+  CompEngine.prototype._roleTypical = function () {
+    /* The typical role-count row for this content, style and size
+       (mirrors engine.py _role_typical): below the style floor the
+       content's fitted-comps median at this exact size, else the pooled
+       harvest row; at the floor and above the DECLARED identity style's
+       cell, else the pooled row (`balanced` never reads a cell). */
+    var rt = this.compCfg.role_typical || {};
+    var key = String(this.size);
+    var floor = rt.style_min_size === undefined ? 10 : rt.style_min_size;
+    var row = null;
+    if (this.size < floor) {
+      row = ((rt.comps || {})[this.content] || {})[key] || null;
+      if (row === null) row = (rt.pooled || {})[key] || null;
+    } else {
+      if (IDENTITY_STYLES[this.style])
+        row = ((rt.styles || {})[this.style] || {})[key] || null;
+      if (row === null) row = (rt.pooled || {})[key] || null;
+    }
+    return Object.assign({}, row || {});
+  };
+
+  CompEngine.prototype._predExclusive = function (ctx, pn, role) {
+    /* true when every pool satisfier of predicate `pn` sits in `role`
+       (mirrors engine.py's pred_roles == frozenset([r])) */
+    var pr = (ctx.predRoles || {})[pn];
+    return !!(pr && pr.n === 1 && pr.roles[role]);
+  };
+
+  CompEngine.prototype._typOk = function (ctx, roles, preds, w, contrib) {
+    /* May `w` join a roster whose role counts are `roles`, given the
+       TYPICAL count of its role (owner ruling 2026-09-11; mirrors
+       engine.py _typ_ok)? A body beyond the typical count is generated
+       only when a minimum only that role can meet still demands it: the
+       role's own band minimum, or an unmet predicate minimum this pick
+       contributes to whose satisfiers all sit in this role. */
+    var r = this.roleOf(w);
+    var typ = ctx.roleTyp[r];
+    if (typ === undefined) return true;
+    var have = roles[r] || 0;
+    var cap = Math.max(typ, ctx.roleMin[r] || 0);
+    var pn;
+    if (have < cap) {
+      /* within the typical slots: they must carry the role's exclusive
+         minima, so a pick that would leave more unmet exclusive need
+         than slots remain is refused (mirrors engine.py) */
+      var remaining = cap - have - 1;
+      for (pn in ctx.predMin) {
+        if (!this._predExclusive(ctx, pn, r)) continue;
+        var unmet = ctx.predMin[pn] - (preds[pn] || 0) - (contrib[pn] ? 1 : 0);
+        if (unmet > remaining) return false;
+      }
+      return true;
+    }
+    for (pn in ctx.predMin) {
+      if (contrib[pn] && (preds[pn] || 0) < ctx.predMin[pn] &&
+          this._predExclusive(ctx, pn, r)) return true;
+    }
+    return false;
+  };
+
   CompEngine.prototype._forgeFeasible = function (ctx, counts, roles, preds, groups, w, slotsLeftAfter) {
     /* May the forge add `w` here and still complete a legal roster?
        Predicate contribution is OPTIMISTIC here; _forgeEvalPick enforces
@@ -3402,6 +3479,7 @@
     if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
         (preds[p0] || 0) >= ctx.seatMax[p0]) return false;
     var contrib = this._withProfile(w, this._predPossible(w));
+    if (!this._typOk(ctx, roles, preds, w, contrib)) return false;
     if (this._forgeMinNeed(ctx, roles, preds, w, contrib) > slotsLeftAfter)
       return false;
     /* Deadlock guard (2026-08-27; mirrors engine.py): after this pick,
@@ -3419,6 +3497,12 @@
         var mx2 = ctx.roleMax[r2];
         if (mx2 !== undefined &&
             (roles[r2] || 0) + (r2 === r ? 1 : 0) >= mx2) continue;
+        /* typical (2026-09-11): the gate is open past the typical count
+           only for a predicate this role alone satisfies */
+        var ty2 = ctx.roleTyp[r2];
+        var n2 = (roles[r2] || 0) + (r2 === r ? 1 : 0);
+        if (ty2 !== undefined && n2 >= ty2 && n2 >= (ctx.roleMin[r2] || 0) &&
+            !this._predExclusive(ctx, pn, r2)) continue;
         if (s2 !== undefined && ctx.seatMax[s2] !== undefined &&
             (preds[s2] || 0) + (s2 === p0 ? 1 : 0) >= ctx.seatMax[s2])
           continue;
@@ -3447,10 +3531,13 @@
       /* predicate feasibility is per COMBO only — kit variants never
          change predicate contributions (mirrors engine.py) */
       if (hasPred) {
+        var contribI = this._withProfile(w, this._predContrib(w, i));
         var need = this._forgeMinNeed(ctx, beam.roles, beam.preds, w,
-                                      this._withProfile(
-                                        w, this._predContrib(w, i)));
+                                      contribI);
         if (need > slotsLeftAfter) continue;
+        /* a body beyond its role's typical count must ACTUALLY carry the
+           demanding predicate on this combo (2026-09-11) */
+        if (!this._typOk(ctx, beam.roles, beam.preds, w, contribI)) continue;
       }
       for (var vi = 0; vi < variants.length; vi++) {
         var vkey = variants[vi][0], vgears = variants[vi][1];
@@ -3491,13 +3578,26 @@
     return out;
   };
 
+  CompEngine.rosterKey = function (party) {
+    /* canonical multiset key of a roster's WEAPONS (mirrors engine.py
+       roster_key): combos and kits left out */
+    return party.slice().sort().join("|");
+  };
+  CompEngine.prototype.rosterKey = CompEngine.rosterKey;
+
   CompEngine.prototype.forge = function (size, locked, lockedCombos, pool,
-                                         beamWidth, lockedGears) {
+                                         beamWidth, lockedGears, avoid) {
     /* Deterministic constrained beam search over complete rosters + 1-opt
        and bounded 2-opt refinement + filler audit (mirrors engine.py forge
        — see its docstring for the contract; returns {party, combos, score,
-       feasible, filler, held, locked}). */
+       feasible, filler, held, locked, exhausted}). `avoid` (2026-09-11):
+       rosters already shown — the best roster NOT among them comes back;
+       `exhausted` when every reachable completion was shown. */
     locked = (locked || []).slice();
+    var avoidKeys = {}, hasAvoid = false;
+    for (var ai = 0; ai < (avoid || []).length; ai++) {
+      avoidKeys[CompEngine.rosterKey(avoid[ai])] = true; hasAvoid = true;
+    }
     /* normalize lockedCombos to EXACTLY locked.length: missing/short/empty
        pads with null, extras drop — mirrors engine.py (review 2026-08-18;
        an empty array used to mis-pair combos with members here). */
@@ -3509,6 +3609,7 @@
     var ctx = this._forgeCtx(candPool);
     if (beamWidth === undefined || beamWidth === null) beamWidth = 8;
     var feasible = true;
+    var exhausted = false;
 
     var fc = this._forgeCounts(locked, combos);
     /* lockedGears (owner ruling 2026-08-27): a locked member supplied
@@ -3553,6 +3654,7 @@
          difference must not order the ports differently */
       expansions.sort(function (a, b) { return qrank(b[0]) - qrank(a[0]); });
       var nextBeams = [], seen = {};
+      var finalDepth = slotsLeftAfter === 0;
       for (var xi = 0; xi < expansions.length; xi++) {
         var ex = expansions[xi];
         var src = beams[ex[1]];
@@ -3562,6 +3664,8 @@
         if (seen[key]) continue;
         seen[key] = true;
         var party2 = src.party.concat([ex[2]]);
+        if (finalDepth && hasAvoid && avoidKeys[CompEngine.rosterKey(party2)])
+          continue;   /* already shown: the next-best completes */
         var combos2 = src.combos.concat([ex[3]]);
         var gears2 = src.gears.concat([ex[5]]);
         var fc2 = this._forgeCounts(party2, combos2);
@@ -3572,6 +3676,23 @@
                          score: this.compScore(party2, combos2, gears2) });
         if (nextBeams.length >= beamWidth) break;
       }
+      if (!nextBeams.length && finalDepth && hasAvoid) {
+        /* every reachable completion was shown already: return the best
+           of them, flagged (mirrors engine.py) */
+        exhausted = true;
+        hasAvoid = false; avoidKeys = {};
+        var ex0 = expansions[0], src0 = beams[ex0[1]];
+        var partyX = src0.party.concat([ex0[2]]);
+        var combosX = src0.combos.concat([ex0[3]]);
+        var gearsX = src0.gears.concat([ex0[5]]);
+        var fcX = this._forgeCounts(partyX, combosX);
+        nextBeams.push({ party: partyX, combos: combosX, gears: gearsX,
+                         counts: fcX[0], roles: fcX[1], preds: fcX[2], groups: fcX[3],
+                         state: this.partyState(partyX, combosX, gearsX),
+                         items: this._insertSorted(src0.items,
+                                                   this._memberTag(ex0[2], ex0[3], ex0[4])),
+                         score: this.compScore(partyX, combosX, gearsX) });
+      }
       beams = nextBeams;
     }
     var best = beams[0];
@@ -3579,9 +3700,11 @@
     var fixed = locked.length;
     if (party.length > fixed) {
       /* refine -> pair-trade -> refine (mirrors engine.py forge) */
-      var rc = this._refineConstrained(ctx, party, combosOut, gearsOut, fixed);
-      rc = this._twoOpt(ctx, rc[0], rc[1], rc[2], fixed);
-      rc = this._refineConstrained(ctx, rc[0], rc[1], rc[2], fixed);
+      var av = hasAvoid ? avoidKeys : null;
+      var rc = this._refineConstrained(ctx, party, combosOut, gearsOut, fixed,
+                                       undefined, av);
+      rc = this._twoOpt(ctx, rc[0], rc[1], rc[2], fixed, undefined, undefined, av);
+      rc = this._refineConstrained(ctx, rc[0], rc[1], rc[2], fixed, undefined, av);
       party = rc[0]; combosOut = rc[1]; gearsOut = rc[2];
     }
     /* filler audit (mirrors engine.py): negative slots split into `held`
@@ -3633,7 +3756,52 @@
     }
     return { party: party, combos: combosOut, gears: gearsOut, kits: kits,
              score: base,
-             feasible: feasible, filler: filler, held: held, locked: fixed };
+             feasible: feasible, filler: filler, held: held, locked: fixed,
+             exhausted: exhausted };
+  };
+
+  CompEngine.prototype.replaceOptions = function (party, index, combos, gears,
+                                                  topN, pool) {
+    /* Ranked replacements for ONE slot — a one-slot forge (mirrors
+       engine.py replace_options): every candidate scored as a dressed
+       pick into the REST and passed through the forge's own gates with
+       no slot to spare; the slot's current weapon left out. */
+    party = party.slice();
+    var n = party.length, i;
+    var cs = [], gs = [];
+    for (i = 0; i < n; i++) {
+      cs.push(combos && i < combos.length ? combos[i] : null);
+      gs.push(gears && i < gears.length && gears[i] && gears[i].length
+              ? gears[i].slice() : null);
+    }
+    if (topN === undefined || topN === null) topN = 5;
+    var candPool = pool !== undefined && pool !== null ? pool.slice() : this.suggestPool().slice();
+    var ctx = this._forgeCtx(candPool);
+    var rest = party.slice(0, index).concat(party.slice(index + 1));
+    var restC = cs.slice(0, index).concat(cs.slice(index + 1));
+    var restG = gs.slice(0, index).concat(gs.slice(index + 1));
+    var fcr = this._forgeCounts(rest, restC);
+    var state = this.partyState(rest, restC, restG);
+    var baseRest = this.compScore(rest, restC, restG);
+    var contrib = this.compScore(party, cs, gs) - baseRest;
+    var beam = { state: state, roles: fcr[1], preds: fcr[2] };
+    var out = [];
+    for (var pi = 0; pi < candPool.length; pi++) {
+      var w = candPool[pi];
+      if (w === party[index]) continue;
+      if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
+      var pick = this._forgeEvalPick(ctx, beam, w, 0);
+      if (pick === null) continue;
+      out.push({ weapon: w, display_name: this.weapons[w].display_name,
+                 score: pick.score, delta: pick.score - contrib,
+                 combo: pick.combo, kit: (pick.vgears || []).slice() });
+    }
+    out.sort(function (a, b) {
+      var qa = qrank(a.score), qb = qrank(b.score);
+      if (qa !== qb) return qb - qa;
+      return a.weapon < b.weapon ? -1 : a.weapon > b.weapon ? 1 : 0;
+    });
+    return out.slice(0, topN);
   };
 
   CompEngine.prototype._addOk = function (ctx, counts, roles, preds, groups, w) {
@@ -3652,11 +3820,15 @@
     var p0 = this._profilePrimary[w];
     if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
         (preds[p0] || 0) + 1 > ctx.seatMax[p0]) return false;
-    return true;
+    /* typical (2026-09-11), optimistic like the prune: the exact
+       per-combo check rides _forgeEvalPick */
+    return this._typOk(ctx, roles, preds, w,
+                       this._withProfile(w, this._predPossible(w)));
   };
 
   CompEngine.prototype._refineConstrained = function (ctx, party, combos,
-                                                      gears, fixed, maxPasses) {
+                                                      gears, fixed, maxPasses,
+                                                      avoid) {
     /* Steepest-descent 1-opt over generated slots, constraint-aware:
        minima are checked against the REST roster's combo-aware counts, so
        a swap can never trade away the spells a minimum was counting on
@@ -3685,7 +3857,11 @@
           var pick = this._forgeEvalPick(ctx, beam, w, 0);
           if (pick === null) continue;
           var d = pick.score - contrib;
-          if (d > gain) { move = [i, w, pick.combo, pick.vgears]; gain = d; }
+          if (d > gain) {
+            if (avoid && w !== party[i] &&
+                avoid[CompEngine.rosterKey(rest.concat([w]))]) continue;
+            move = [i, w, pick.combo, pick.vgears]; gain = d;
+          }
         }
       }
       if (move === null) break;
@@ -3698,7 +3874,7 @@
   };
 
   CompEngine.prototype._twoOpt = function (ctx, party, combos, gears,
-                                           fixed, worstK, candM) {
+                                           fixed, worstK, candM, avoid) {
     /* Bounded 2-opt over the weakest generated slots (mirrors engine.py
        _two_opt). An accepted pair-move reorders the roster, so the pass
        restarts with freshly computed weakest slots (review 2026-08-18). */
@@ -3787,11 +3963,29 @@
                   if ((preds[pmn] || 0) < ctx.predMin[pmn]) { ok = false; break; }
                 }
               }
+              if (ok) {
+                var hasTyp = false;
+                for (var tk in ctx.roleTyp) { hasTyp = true; break; }
+                if (hasTyp) {
+                  /* typical (2026-09-11; mirrors engine.py): the pair
+                     joins the rest one body at a time, each on its exact
+                     combo - the same incremental read the beam makes */
+                  var fc0 = this._forgeCounts(rest, restC);
+                  var caSet = this._withProfile(wa, this._predContrib(wa, ca));
+                  var cbSet = this._withProfile(wb, this._predContrib(wb, pkb.combo));
+                  if (!this._typOk(ctx, fc0[1], fc0[2], wa, caSet)) ok = false;
+                  else {
+                    var fc1 = this._forgeCounts(pa, pca);
+                    if (!this._typOk(ctx, fc1[1], fc1[2], wb, cbSet)) ok = false;
+                  }
+                }
+              }
               if (!ok) continue;
               /* carrier quota (mirrors engine.py two-opt) */
               var ccaps = this.carrierCaps(), ccnt = this._carrierCounts(candParty, candGears), over = false;
               for (var ce0 in ccnt) if (ccnt[ce0] > (ccaps[ce0] === undefined ? 1e9 : ccaps[ce0])) over = true;
               if (over) continue;
+              if (avoid && avoid[CompEngine.rosterKey(candParty)]) continue;
               var d2 = this.compScore(candParty, candCombos, candGears) - best;
               if (d2 > 1e-9) {
                 party = candParty;

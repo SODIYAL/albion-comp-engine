@@ -580,7 +580,9 @@ def t_style_bands():
     for size, minimum in ((5, 1), (9, 1), (10, 2), (19, 3), (20, 4),
                           (21, 4), (24, 4), (25, 5), (29, 5), (30, 6), (60, 12)):
         ec = Engine(content="castle", size=size, style="clap")
-        if ec._band["healer"] != {"min": minimum}:
+        # `typical` (2026-09-11) rides beside the minimum and is not a
+        # cap: minima always override it. The ruling pins min and no max.
+        if ec._band["healer"].get("min") != minimum                 or "max" in ec._band["healer"]:
             ok = False
             lines.append(f"clap@{size}: {ec._band['healer']}")
     ec25 = Engine(content="castle", size=25, style="clap")
@@ -593,7 +595,7 @@ def t_style_bands():
     for st in ("brawl", "brawl_clap", "clap_kite"):
         for size, minimum in ((20, 4), (24, 4), (25, 5)):
             band = Engine(content="castle", size=size, style=st)._band["healer"]
-            if band != {"min": minimum}:
+            if band.get("min") != minimum or "max" in band:
                 ok = False
                 lines.append(f"{st}@{size}: {band}")
         eb25 = Engine(content="castle", size=25, style=st)
@@ -603,7 +605,7 @@ def t_style_bands():
             ok = False
         lines.append(f"castle {st}@25: {hb25}h")
     eb = Engine(content="castle", size=25)
-    if eb._band["healer"] != {"min": 3, "max": 5}:
+    if {k: v for k, v in eb._band["healer"].items() if k != "typical"}             != {"min": 3, "max": 5}:
         ok = False
         lines.append(f"balanced@25 band changed: {eb._band['healer']}")
     check("F16 one healer per five as a minimum on clap, brawl and both "
@@ -1118,6 +1120,256 @@ def t_min_need_disjoint_seats():
           f"feasible={f.get('feasible')} party={len(f.get('party') or [])}")
 
 
+def t_role_typical():
+    """F31 (2026-09-11, owner: "go ahead"): a body beyond the TYPICAL
+    count for its role is generated only when a minimum only that role
+    can meet still demands it. The typical count is GENERATED from the
+    committed harvest (derive_role_counts.py: p50 of fully-known killer
+    parties per size; healer only - the pooled harvest agrees with the
+    published comps for healers, size 7 = 1 in 67% of 658, and not for
+    the other roles). Before: castle_outpost clap at 7 with a Nature
+    Staff locked forged a SECOND healer (heal_sustain target 4.5 is one
+    dressed Redemption Staff; a 2.9 healer left a gap only another healer
+    body could close, riders tipped it, no overstack cost) and the roster
+    left burst_aoe at 15 of 22. Manual parties still score anything."""
+    e = Engine(content="castle_outpost", size=7, style="clap")
+    typ = ((e._band or {}).get("healer") or {}).get("typical")
+    check("F31a castle_outpost 7 carries a healer typical of 1 (the fitted "
+          "comps' median, agreeing with the harvest)",
+          typ == 1, f"band healer = {(e._band or {}).get('healer')}")
+    ns = next(k for k, w in e.weapons.items()
+              if w["display_name"] == "Nature Staff")
+    hf = next(k for k, w in e.weapons.items()
+              if w["display_name"] == "Hallowfall")
+    lines, ok = [], True
+    for lock in (ns, hf):
+        r = e.forge(7, locked=[lock])
+        n = sum(1 for w in r["party"] if e.role_of(w) == "healer")
+        full = r["feasible"] and len(r["party"]) == 7
+        if n != 1 or not full:
+            ok = False
+        lines.append(f"{e.weapons[lock]['display_name']}: healers={n} "
+                     f"feasible={r['feasible']} party={len(r['party'])}")
+    check("F31b castle_outpost clap 7 with a full healer locked forges ONE "
+          "healer and a full roster", ok, "; ".join(lines))
+    # a locked HYBRID (not a full healer) still pulls the full healer the
+    # primary_heal minimum demands - the typical count yields to a minimum
+    # only healers can meet
+    hybrid = next(k for k, w in e.weapons.items()
+                  if e.role_of(k) == "healer" and not w.get("full_healer")
+                  and k in e.suggest_pool())
+    r = e.forge(7, locked=[hybrid])
+    n = sum(1 for w in r["party"] if e.role_of(w) == "healer")
+    full_h = sum(1 for w in r["party"] if e.weapons[w].get("full_healer"))
+    check("F31c a locked hybrid healer still gets the full healer primary_heal "
+          "demands (typical yields to a minimum only that role can meet)",
+          r["feasible"] and len(r["party"]) == 7 and n == 2 and full_h >= 1,
+          f"{e.weapons[hybrid]['display_name']} locked: healers={n} "
+          f"full={full_h} feasible={r['feasible']} party={len(r['party'])}")
+    # two locked full healers are the caller's: kept verbatim, scored,
+    # nothing generated beyond
+    r = e.forge(7, locked=[ns, hf])
+    n = sum(1 for w in r["party"] if e.role_of(w) == "healer")
+    check("F31d two locked healers stay (manual picks always score), the "
+          "forge adds no third", r["feasible"] and n == 2
+          and len(r["party"]) == 7,
+          f"healers={n} feasible={r['feasible']} party={len(r['party'])}")
+    # sizes the harvest does not cover carry no typical (never invented)
+    e25 = Engine(content="castle", size=25, style="clap")
+    check("F31e no harvest rows at 25 -> no typical on the band (unknown "
+          "stays explicit)",
+          "typical" not in ((e25._band or {}).get("healer") or {}),
+          f"band healer = {(e25._band or {}).get('healer')}")
+
+    # --- tanks and supports, every size and style (owner 2026-09-11:
+    # "fix it up all for all party sizes and styles not just 7s")
+    # Below 10 the row is the content's fitted-comps median (rule 17):
+    # castle_outpost 7 = 2 frontline (2/2/3), support p50 0 -> no row;
+    # roads (1 comp) has none, so it reads the pooled harvest row: healer
+    # only, never a tank count the open-world squads would set to 1.
+    fr = ((e._band or {}).get("frontline") or {}).get("typical")
+    sp = (e._band or {}).get("support") or {}
+    er = Engine(content="roads", size=7, style="clap")
+    er_row = {k: v.get("typical") for k, v in (er._band or {}).items()
+              if isinstance(v, dict) and "typical" in v}
+    check("F31f below 10 the typical row is the content's comps median: "
+          "castle_outpost 7 frontline 2, no support row (p50 0); roads 7 "
+          "(one comp) reads the harvest healer row only",
+          fr == 2 and "typical" not in sp and er_row == {"healer": 1},
+          f"castle_outpost frontline={fr} support={sp} roads={er_row}")
+    hm = next(k for k, w in e.weapons.items() if w["display_name"] == "Heavy Mace")
+    hoj = next(k for k, w in e.weapons.items()
+               if w["display_name"] == "Hand of Justice")
+    ph = next(k for k, w in e.weapons.items() if w["display_name"] == "Polehammer")
+    lines, ok = [], True
+    for label, lock in (("Heavy Mace", [hm]), ("HM+HoJ", [hm, hoj])):
+        r = e.forge(7, locked=lock)
+        f = sum(1 for w in r["party"] if e.role_of(w) == "frontline")
+        if f != 2 or not r["feasible"] or len(r["party"]) != 7:
+            ok = False
+        lines.append(f"{label}: frontline={f} feasible={r['feasible']}")
+    r3 = e.forge(7, locked=[hm, hoj, ph])
+    f3 = sum(1 for w in r3["party"] if e.role_of(w) == "frontline")
+    h3 = sum(1 for w in r3["party"] if e.role_of(w) == "healer")
+    if f3 != 3 or h3 != 1 or not r3["feasible"]:
+        ok = False
+    lines.append(f"three locked tanks: frontline={f3} healers={h3} "
+                 f"feasible={r3['feasible']}")
+    check("F31g a locked tank at 7 no longer pulls a third (2 typical); "
+          "three locked tanks stay and get ONE full healer", ok,
+          "; ".join(lines))
+    # the typical slots carry the role's exclusive minima: the one healer
+    # slot is never spent on a hybrid that would force a second, full
+    # healer on top (balanced at 7 used to forge Great Nature + Fallen)
+    eb = Engine(content="castle_outpost", size=7, style="balanced")
+    rb = eb.forge(7)
+    hb = [w for w in rb["party"] if eb.role_of(w) == "healer"]
+    check("F31h the one typical healer slot goes to a FULL healer (the slot "
+          "must carry primary_heal), never a hybrid plus a forced second",
+          len(hb) == 1 and eb.weapons[hb[0]].get("full_healer") is True
+          and rb["feasible"],
+          f"healers={[eb.weapons[w]['display_name'] for w in hb]}")
+    # 10+: the declared style's harvest cell per exact size; balanced and
+    # a style too thin for a cell (brawl_clap) read the pooled row
+    def row(content, style, size):
+        b = Engine(content=content, size=size, style=style)._band or {}
+        return {k: v["typical"] for k, v in b.items()
+                if isinstance(v, dict) and "typical" in v}
+    b12 = row("blackzone_roam", "brawl", 12)
+    c20 = row("castle", "clap", 20)
+    bal20 = row("castle", "balanced", 20)
+    bc20 = row("castle", "brawl_clap", 20)
+    pooled20 = row("castle", "balanced", 20)
+    # (2026-09-11, Exalted re-seated as a healer: the harvest counts it as
+    # one now — clap 20 reads 4/5/3, the pooled 20 row 4/5/3)
+    check("F31i at 10+ the band carries healer / frontline / support from "
+          "the declared style's cell (brawl 12: 2/2/1; clap 20: 4/5/3); "
+          "balanced and thin brawl_clap read the pooled row (20: 4/5/3)",
+          b12 == {"healer": 2, "frontline": 2, "support": 1}
+          and c20 == {"healer": 4, "frontline": 5, "support": 3}
+          and bal20 == {"healer": 4, "frontline": 5, "support": 3}
+          and bc20 == pooled20 and "dps" not in c20,
+          f"brawl12={b12} clap20={c20} balanced20={bal20} brawl_clap20={bc20}")
+    eb12 = Engine(content="blackzone_roam", size=12, style="brawl")
+    rb12 = eb12.forge(12)
+    f12 = sum(1 for w in rb12["party"] if eb12.role_of(w) == "frontline")
+    check("F31j brawl 12 forges the typical two tanks (it fielded four, the "
+          "cell's p90) and a full roster",
+          f12 == 2 and rb12["feasible"] and len(rb12["party"]) == 12,
+          f"frontline={f12} feasible={rb12['feasible']} n={len(rb12['party'])}")
+    # every declared style forges a full, feasible roster with the rows on
+    lines, ok = [], True
+    for content, style, size in (("blackzone_roam", "brawl", 11),
+                                 ("blackzone_roam", "clap", 13),
+                                 ("castle", "clap_kite", 16),
+                                 ("castle", "kite", 18),
+                                 ("territory_defense", "brawl_clap", 20),
+                                 ("castle_outpost", "kite", 5),
+                                 ("roads", "brawl", 9)):
+        ex = Engine(content=content, size=size, style=style)
+        rx = ex.forge(size)
+        if not rx["feasible"] or len(rx["party"]) != size:
+            ok = False
+            lines.append(f"{content}/{style}@{size}: feasible={rx['feasible']} "
+                         f"n={len(rx['party'])}")
+    check("F31k every style forges a full, feasible roster under its typical "
+          "rows at 5 / 9 / 11 / 13 / 16 / 18 / 20", ok,
+          "; ".join(lines) if lines else "all full")
+
+
+def t_forge_avoid():
+    """F32 (2026-09-11, owner: "a different viable comp each press"): the
+    forge takes an `avoid` list of rosters already shown and returns the
+    best roster NOT among them - deterministic, never random. The page
+    passes every roster shown under the current locks / content / style
+    / size (the one on screen included), so a refresh always moves. When
+    every complete roster the search can reach is avoided the result
+    carries `exhausted` and the page says so instead of repeating."""
+    e = Engine(content="castle_outpost", size=7, style="clap")
+    ns = next(k for k, w in e.weapons.items() if w["display_name"] == "Nature Staff")
+    key = lambda p: "|".join(sorted(p))
+    shown, results = [], []
+    ok, lines = True, []
+    for press in range(3):
+        r = e.forge(7, locked=[ns], avoid=shown)
+        k = key(r["party"])
+        if k in {key(p) for p in shown} or not r["feasible"]                 or len(r["party"]) != 7 or r["party"][0] != ns                 or r.get("exhausted"):
+            ok = False
+        if results and r["score"] > results[-1]["score"] + 1e-9:
+            ok = False      # next-best: never better than what was avoided
+        healers = sum(1 for w in r["party"] if e.role_of(w) == "healer")
+        if healers != 1:
+            ok = False      # the typical gate holds on every alternative
+        lines.append(f"press {press + 1}: {round(r['score'], 3)} healers={healers}")
+        shown.append(list(r["party"]))
+        results.append(r)
+    # determinism: the same avoid list gives the same roster
+    again = e.forge(7, locked=[ns], avoid=shown[:2])
+    check("F32a three refreshes give three distinct, feasible, non-improving "
+          "rosters under the same locks (next-best, not random), every one "
+          "on one healer; the same avoid list reproduces the same roster",
+          ok and key(again["party"]) == key(results[2]["party"]),
+          "; ".join(lines) + f"; replay={key(again['party']) == key(results[2]['party'])}")
+    # a locked-out search: avoid EVERY roster the final beam can offer by
+    # locking six of seven and avoiding the only completion's alternatives
+    r0 = e.forge(7, locked=[ns])
+    six = r0["party"][:6]
+    pool = [w for w in e.suggest_pool()]
+    seen, ex = [], None
+    for _ in range(len(pool) + 1):
+        rr = e.forge(7, locked=six, avoid=seen)
+        if rr.get("exhausted"):
+            ex = rr
+            break
+        seen.append(list(rr["party"]))
+    check("F32b when every reachable completion is avoided the forge says "
+          "`exhausted` (and still returns a full roster) instead of "
+          "repeating silently",
+          ex is not None and ex["feasible"] and len(ex["party"]) == 7,
+          f"alternatives before exhaustion: {len(seen)}")
+
+
+def t_replace_options():
+    """F33 (2026-09-11, owner: "show ranked alternatives, I pick"): the
+    replacements for ONE slot are a one-slot forge - every candidate is
+    scored as a dressed pick into the rest of the comp and passes the
+    forge's own gates (role bands, typical counts, dup caps, minima), so
+    the list never offers what the forge would refuse: a second healer
+    into a 7-man on one, or a dps for the only full healer."""
+    e = Engine(content="castle_outpost", size=7, style="clap")
+    ns = next(k for k, w in e.weapons.items() if w["display_name"] == "Nature Staff")
+    r = e.forge(7, locked=[ns])
+    party = r["party"]
+    idx_dps = next(i for i, w in enumerate(party) if e.role_of(w) == "dps")
+    opts = e.replace_options(party, idx_dps, r["combos"], r["gears"], top_n=5)
+    roles = [e.role_of(o["weapon"]) for o in opts]
+    ok = (0 < len(opts) <= 5
+          and all(o["weapon"] != party[idx_dps] for o in opts)
+          and "healer" not in roles
+          and all(opts[i]["score"] >= opts[i + 1]["score"] - 1e-9
+                  for i in range(len(opts) - 1))
+          and all(set(o) >= {"weapon", "display_name", "score", "delta",
+                             "combo", "kit"} for o in opts))
+    check("F33a replacing a dps in a one-healer 7-man offers no healer (the "
+          "typical gate), never the same weapon, ranked by the exact "
+          "dressed marginal into the rest", ok,
+          f"{[(o['display_name'], round(o['delta'], 2)) for o in opts]}")
+    opts_h = e.replace_options(party, 0, r["combos"], r["gears"], top_n=5)
+    ok_h = bool(opts_h) and all(e.weapons[o["weapon"]].get("full_healer")
+                                for o in opts_h)
+    check("F33b replacing the only full healer offers only full healers "
+          "(primary_heal minimum must stay met with no slot to spare)",
+          ok_h, f"{[o['display_name'] for o in opts_h]}")
+    # delta is the score change of the swap: applying the top option
+    # changes comp_score by exactly that much (dressed, 1e-9)
+    top = opts[0]
+    p2 = list(party); c2 = list(r["combos"]); g2 = list(r["gears"])
+    p2[idx_dps], c2[idx_dps], g2[idx_dps] = top["weapon"], top["combo"], top["kit"]
+    d = e.comp_score(p2, c2, g2) - e.comp_score(party, r["combos"], r["gears"])
+    check("F33c an option's delta IS the comp-score change of applying it",
+          abs(d - top["delta"]) < 1e-9, f"delta={top['delta']:.6f} applied={d:.6f}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -1149,6 +1401,9 @@ if __name__ == "__main__":
     t_refine_gears()
     t_min_need_disjoint_seats()
     t_target_source()
+    t_role_typical()
+    t_forge_avoid()
+    t_replace_options()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

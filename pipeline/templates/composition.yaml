@@ -24,12 +24,13 @@
 # usage disagree.
 roles:
   by_hint: {healer: healer, tank: frontline, support: support, melee: dps, range: dps}
-  overrides:
-    # Exalted Staff is a holy line weapon (role_hint: healer) but is fielded
-    # as the standing cleanse/zone-denial slot — tagged "support" by the
-    # curator in ALL FOUR real parties (data/published_comps/). Counting it as a
-    # healer would let a forged 11-man treat Exalted as one of its 2-3 heals.
-    2H_HOLYSTAFF_CRYSTAL: support
+  # (2026-08-23 -> 2026-09-11) Exalted Staff carried a `support` override
+  # here so a forged 11-man could not count it as one of its 2-3 heals.
+  # Retired by owner ruling 2026-09-11 ("mostly a healer still"): its seat
+  # is main_healer (roles.yaml), primary_heal counts only full healers and
+  # the typical role count bounds healer bodies, so the hybrid can no
+  # longer stand in for a real heal. Role class follows the primary seat.
+  overrides: {}
 
 # Primary-healer rule (owner rulings 2026-08-23, forge-quality rounds 1+2):
 # "[a hybrid like Forgebark] is too expensive to be the only healer in the

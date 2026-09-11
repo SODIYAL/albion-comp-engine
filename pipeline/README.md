@@ -331,7 +331,8 @@ HEAD (`--base` for another revision). Review the report, then commit.
   carries the killer's party at kill time with gear → `out/party_cache/`
   and `out/party_rosters.json`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
-  derive_party_styles -> derive_meta_prior -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
+  derive_party_styles -> derive_meta_prior -> derive_role_counts ->
+  build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
   (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
@@ -467,7 +468,8 @@ script re-derives the rosters first so both agree. `build_dataset`
 validates the file (fail closed) and ships it as `style_bands`; the engine
 reads it after the content row for a declared style at 10+. Explicit step:
 `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
-`derive_party_styles` -> `derive_meta_prior` -> `build_dataset` -> gates.
+`derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
+`build_dataset` -> gates.
 
 ## The generated meta prior (2026-09-08)
 
@@ -490,6 +492,58 @@ is the only dial. Explicit step, never part of a normal build:
 
 ```text
 py -3 pipeline/derive_meta_prior.py
+```
+
+## The typical role count (2026-09-11)
+
+Owner rulings ("go ahead" on the diagnosis: castle_outpost clap at 7
+kept forging two healers and leaving damage short; then "fix it up all
+for all party sizes and styles"): a body beyond the TYPICAL count for
+its role is generated only when a minimum only that role can meet still
+demands it. The composition bands carry min / max per role;
+`derive_role_counts.py` supplies the middle line the supply rows got on
+2026-09-10 — standing rule 17 applied to bodies — in three tables in
+`out/role_counts.json` (hash-gated to `party_rosters.json` and
+`party_styles.json`), resolved by the engine's `_role_typical` for its
+content, style and size:
+
+- **below 10**: `comps[content][size]` — the median role counts of the
+  published comps the content's targets were fitted from (the dressed
+  audit's parties), where the content has >= 3 comps at that size (the
+  `stat: median` bar); healer / frontline / support. castle_outpost 7:
+  healer 1, frontline 2 (2/2/3), support p50 0 -> no row. Else the
+  pooled harvest row, HEALER ONLY: killer parties below 10 are
+  open-world squads — style-labelled or not, their frontline p50 at 7 is
+  1 (p90 2) where every published 7-man comp fields 2-3 — so tanks and
+  supports there are never derived from the harvest. Their healer count
+  agrees (one in 67% of 658 at 7).
+- **10+**: `styles[style][size]` — the DECLARED identity style's cell,
+  per exact size, from the labelled parties; a cell pools a +-1 then +-2
+  size window until it holds 40 rosters (`window` stated) and a style
+  that never reaches it at that size has no cell (brawl_clap). Else
+  `pooled[size]` — every winner at the size, any style; `balanced` never
+  reads a cell (the 2026-09-08 kit rule). healer / frontline / support.
+- dps is never gated: the residual role, and gating all four could make
+  a size infeasible (p50s do not sum to the size). A zero p50 writes
+  nothing; sizes the harvest does not reach (21+) carry no harvest row.
+
+`build_dataset` refuses a missing or stale file or a row that is not a
+positive integer count of a gated role, and ships the tables as
+`composition.role_typical`. Both ports lay `typical` onto the band, and
+the forge's prune, per-combo evaluation, 1-opt and 2-opt read one
+predicate (`_typ_ok`): WITHIN the typical slots a pick is refused when
+it would leave more unmet exclusive need (`primary_heal` -> healers; a
+seat -> its class) than slots remain — the one healer slot is never
+spent on a hybrid that forces a full healer on top; OVER the typical
+count a pick passes only while the role's own minimum is unmet or an
+unmet exclusive predicate is one this pick carries on the combo it
+equips. The per-five healer minimum (2026-09-08) stays a minimum with
+no maximum; where it exceeds the typical count the minimum wins. Manual
+parties score anything. Gates: forge F31a-k, golden T48. Explicit step,
+never part of a normal build:
+
+```text
+py -3 pipeline/derive_role_counts.py
 ```
 
 `parse_dumps` adapter 5 (same day) adds `caster_moves` to every indexed
@@ -568,4 +622,4 @@ give the item a lean. `build_dataset` validates and ships it as
 and the class rule (leather -> brawl, cloth -> ranged) where an item has
 none. Descriptive only. Because the audit writes it, the post-harvest
 order is audit -> derive_style_bands -> derive_party_styles ->
-derive_meta_prior -> build_dataset -> gates.
+derive_meta_prior -> derive_role_counts -> build_dataset -> gates.

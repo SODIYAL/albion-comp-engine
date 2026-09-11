@@ -422,22 +422,25 @@ function loadoutCount(i){
 }
 
 /* --------------------------------------------------- provenance codec
-   Slot provenance (2026-08-18): 'm' = manual / live-party, 'f' = forged.
-   Encoded into the permalink as a plain m/f string (`f=` param) so "reforge
-   all" knows which slots the engine owns even across a shared link; links
-   from before this feature decode to all-manual, which only means the first
-   reforge won't rebuild them — never a wrong comp. Trailing 'm's are
-   trimmed like the loadout codec trims empty members. */
+   Slot provenance (2026-08-18): 'm' = manual / live-party, 'f' = forged;
+   'l' = LOCKED by the user (2026-09-11) — the only state a refresh holds,
+   manual or forged alike. Encoded into the permalink as a plain m/f/l
+   string (`f=` param) so a refresh knows which slots it may rebuild even
+   across a shared link; links from before this feature decode to
+   all-manual, which only means the first refresh rebuilds them — never a
+   wrong comp. Trailing 'm's are trimmed like the loadout codec trims
+   empty members. */
+const PROV_STATES = { m: true, f: true, l: true };
 function provEncode(prov, n){
   let s = "";
-  for (let i = 0; i < n; i++) s += prov[i] === "f" ? "f" : "m";
+  for (let i = 0; i < n; i++) s += PROV_STATES[prov[i]] ? prov[i] : "m";
   s = s.replace(/m+$/, "");
   return s;
 }
 function provDecode(str, n){
   const out = [];
   for (let i = 0; i < n; i++)
-    out.push(str && str[i] === "f" ? "f" : "m");
+    out.push(str && PROV_STATES[str[i]] ? str[i] : "m");
   return out;
 }
 
