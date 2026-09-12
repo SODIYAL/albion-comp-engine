@@ -73,6 +73,7 @@ py -3 tests/test_dashboard_layout.py # generated-page layout contracts + no engi
 py -3 tests/test_cohort_families.py # observed-family artifact contracts
 py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descriptive)
 py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
+py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
 py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
@@ -106,7 +107,8 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
 - After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
   `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
-  `derive_party_styles` -> `derive_meta_prior` -> `build_dataset` -> every gate ->
+  `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
+  `build_dataset` -> every gate ->
   `compare_fold.py`; never commits). Weekly, Tuesdays.
 - After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
 - Network steps are explicit, never part of a build: `sample_parties.py`,

@@ -42,7 +42,10 @@ index rows where the owner's words are.
 7. **Popularity is not effectiveness**: the killboard, cohort families and
    reference builds are display/evidence only; effectiveness claims are
    reserved for win-lift evidence (kill-vs-death contrast needs a ruling before
-   it orders anything, 2026-09-08).
+   it orders anything, 2026-09-08). The ONE empirical scoring input is the
+   harvest-generated meta prior — solo (2026-09-08) and best-observed-partner
+   (2026-09-11) — tiebreak-sized under `delta`, derived on the training split
+   (`battle % 5 != 0`), never a floor, a seat, a pool place or a penalty.
 8. **Unknowns stay explicit** (2026-08-12 catches, 2026-08-28 gear): records store
    `unknown`; quarantined records never become defaults; only verified
    interaction records score.
@@ -75,6 +78,18 @@ index rows where the owner's words are.
     1.15 x p90. Descriptive lenses grade against the two lines (weak <
     min <= ok < typical <= strong); nothing scores `min`. A re-fit moves
     every row at once and never tightens a soft cap on a handful of comps.
+18. **Typical role count** (2026-09-11): the role bands carry `typical`
+    for healer / frontline / support (`derive_role_counts.py`; never
+    hand-set) — rule 17 applied to bodies: below 10 the median of the
+    content's fitted comps (the harvest's healer row where a content has
+    under 3 comps; tanks and supports are never read from sub-10 killer
+    parties), at 10+ the declared style's harvest cell at the exact size
+    (`balanced` reads the pooled row). The forge generates a body beyond
+    it only while a minimum only that role can meet is unmet — the band
+    minimum, or a predicate whose satisfiers all sit in that role
+    (`primary_heal`) — and never spends a typical slot on a body that
+    leaves such a minimum short. dps is never gated. Minima always win
+    over it; sizes without a row carry none; manual parties score anything.
 
 ## The method — how a round runs
 
@@ -213,10 +228,16 @@ column is the archive file and the section title to search for.
 | 09-09 | "go ahead with your recommendations" — a zero-heavy capability has no harvest minimum (`zero_share` >= 0.05 = soft-cap-only) | derive_style_bands | V7 | 09b, ruling: a zero-heavy capability |
 | 09-10 | The sweep: the page reads `ENG.reqs`; the forge's need bound made admissible; expansion sort quantized | both ports, page | L19, F28 | 09b, the sweep |
 | 09-10 | R36: a failed PICK skips its slot, only a failed POOL ends the chain; F29: the need bound discounts only provable bodies; territory_defense at 25 OPEN | build_dataset, both ports | R36/F29 | 09b, Chains reach past a slot |
+| 09-11 | "go ahead and act on your recommendations" — a body beyond the TYPICAL role count generates only when a minimum only that role can meet demands it; the page forges locked members in their on-screen kit | derive_role_counts.py, both ports, page | F31a-e/T48 | 09b, One healer at seven |
+| 09-11 | "fix it up all for all party sizes and styles" — typical for healer / frontline / support: comps median below 10, declared-style harvest cell per size at 10+, pooled for balanced; typical slots carry the exclusive minima | derive_role_counts.py, both ports | F31f-k | 09b, Tanks and supports |
+| 09-11 | Slot controls: lock is the only held state; replace = the engine's one-slot forge; refresh = next-best via `forge(avoid=)`, deterministic, `exhausted` when nothing new is reachable | both ports, page, codec | F32/F33, L21, codec | 09b, Slot controls |
+| 09-11 | Tile labels "primary role first then secondary": derived from the sheet E-first (Heavy Mace stopper · purge · silence, Great Arcane support · stun, Hallowfall burst · holy); seat moves = a ruling list, not a change | roles.yaml labels, build_dataset, page | R37, L22 | 09b, Labels |
+| 09-11 | "its a heal weapon ... mostly a healer still" — Exalted Staff seats main_healer (support lane secondary); the 2026-08-23 support override retired; typical counts re-derived | roles.yaml, composition.yaml, role_counts.json | R22, T42, F31i | 09b, Exalted |
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
 | 09-10 | "no one uses the cleric cowl for its knockback ability regardless of content" — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
 | 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
 | 09-10 | "the data should come from the harvest median" / four stages "red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much" — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest checkout; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
+| 09-11 | "wouldnt it be cool to add synergy to comps based on what weapons are often seen playing together with real data ?" — ruling A of three: observed pairings enter through the meta prior ONLY (never the synergy term, a floor, a seat or a pool); one killer party one vote per distinct pair, a row only across >=3 guild-sets and >=5 parties, s = clamp(log2 lift, 0, 3)/3 x n/(n+8), lift <= 1 reads 0; both prior tables learn from `battle % 5 != 0` only; meta = 0.5 solo + 0.5 best partner on the roster, pick score stays the exact comp_score delta. Standing rule 7 amended. Golden moved: none | derive_meta_prior (meta_pairs), build_dataset gate, both ports, why-panel line | test_meta_pairs A1-A13 / B1-B8, parity meta fields, F1 | 09b, Pair-aware meta prior |
 | 09-11 | "this file will keep growing" — the killer-party artifact is gzipped (`party_rosters.json.gz`, one loader `rosters_io.py`, hash gates on the stored bytes; 77 MB -> 4.6 MB, the 100 MB push limit was days away); the raw cache backup to a bucket goes to BACKLOG | rosters_io.py, every reader | H18 | 09b, The artifact is gzipped |
 
 ## Open questions

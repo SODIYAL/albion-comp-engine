@@ -79,9 +79,14 @@ looking at it.
 - Killboard/usage/cohort surfaces are **evidence display**, never scoring
   inputs; their fight-size bucket keys off the planned size (`usageBucket()`).
 - Roster mutations go through the central handlers (`data-add`,
-  `data-swapat`) so loadout reset, provenance, prefill, and role re-sorting
-  stay in one place; `sortPartyByRole()` applies one permutation across
-  `party`/`PROV`/`COMBO`/`LOADOUT`.
+  `data-swapat`, `data-replaceto`, `data-remove`, `applyForgeResult()`)
+  so loadout reset, provenance, prefill, and role re-sorting stay in one
+  place; `sortPartyByRole()` applies one permutation across
+  `party`/`PROV`/`COMBO`/`LOADOUT`. Provenance is `m` / `f` / `l` (locked,
+  2026-09-11); the slot controls (`data-lock`, `data-replace`,
+  `data-refresh`) and `refreshUnlocked()` never rank or score — the
+  replace list is `ENG.replaceOptions()` verbatim and a refresh hands the
+  forge the rosters already shown (`AVOID`) and takes what it returns.
 - The companion app talks to this page only over `localhost:53321` — no
   build-time coupling.
 

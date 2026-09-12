@@ -103,6 +103,15 @@ roles:
       - {id: 2H_HOLYSTAFF_HELL, source: "derived:foundation set; guide:albiononlinegrind Fallen Healer"}
       - {id: MAIN_NATURESTAFF, source: "derived:foundation set (heal_scale group + full_healer; Great Nature is the ruled single-scale sibling and stays OFF)"}
       - {id: 2H_WILDSTAFF, source: "derived:foundation set"}
+      # owner 2026-09-11 ("its a heal weapon which has the anti zone support
+      # but i would think its mostly a healer still"): the healer seat is
+      # PRIMARY; the 2026-08-23 support override is retired — primary_heal
+      # counts only full healers and the typical count bounds healer bodies,
+      # so a hybrid here can no longer stand in for a real heal. Killboard
+      # 903 builds / 318 players: cloth 45% (Robe of Purity 39%, the single
+      # most-worn chest), plate 33%, leather 23%; fielded beside 2-3 full
+      # healers in 74% of 851 parties.
+      - {id: 2H_HOLYSTAFF_CRYSTAL, source: "owner:2026-09-11 ('mostly a healer still'); killboard:party_rosters (903 builds, 318 players, cloth 45% / plate 33% / leather 23%; beside 2-3 full healers in 74% of 851 parties); group heal scale, full_healer False (primary_heal never counts it)"}
       # --- seat-all pass (owner:2026-09-01): SEAT membership only — the
       # single-ally-heal generation gate (never generated at 10+) and the
       # foundation set are untouched; these heal, so they sit a healer seat ---
@@ -156,7 +165,9 @@ roles:
       - {id: 2H_ENIGMATICORB_MORGANA, source: "comp:support x3 (deadlyhooker, timothy_blap); sheet: continuous group cleanse bubble"}
       - {id: 2H_ENIGMATICSTAFF, source: "guide:heaven-guardian shield support; sheet bubble-shield"}
       - {id: MAIN_ARCANESTAFF, source: "comp:deadlyhooker (support x3)"}
-      - {id: 2H_HOLYSTAFF_CRYSTAL, source: "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)"}
+      # secondary since owner:2026-09-11 — the healer seat above is primary;
+      # in plate the advisory still reads it here
+      - {id: 2H_HOLYSTAFF_CRYSTAL, tier: secondary, source: "comp:deadlyhooker (support x3); the anti-zone / cleanse lane it also serves (owner 2026-09-11: 'has the anti zone support')"}
       # MAIN_ARCANESTAFF_UNDEAD removed owner:2026-08-26 (grading board:
       # "witchwork does not play for cleanse, its a clump and damage
       # weapon" — its engage_tank seat stands)
@@ -533,6 +544,100 @@ kit_doctrine:
 # territory-defense shape ("add more stop tanks to really control
 # people in the terry"). Counts scale by size/reference_size
 # (half-up), arm at min_size. SEAT keys count a weapon's PRIMARY menu
+# ---------------------------------------------------------------------------
+# TILE LABELS (owner 2026-09-11, the labels round: "mace being engage is
+# fine but grovekeeper being labeled as engage is confusing ... maybe
+# items can have multiple labels but primary role first then secondary
+# role"). DISPLAY ONLY — nothing here seats a weapon, gates a kit or
+# scores. A weapon's label is `PRIMARY · tag · tag`:
+#   primary  = the seat's `word` below (healers read their heal PROFILE
+#              instead: Burst / Sustain, whichever heal score is higher;
+#              a tie reads Burst with `sustain` as the first tag)
+#   tags     = the weapon's cited FUNCTION roles on its primary menu
+#              (purge / pierce / shield break / anti-heal — a job the
+#              book seats it for) first, then the weapon's own curated
+#              capabilities at >= min_score
+#              (two supply units), at most max_tags, E-FIRST (the
+#              standing unique-ability-first rule: capabilities the E's
+#              evidence grounds outrank Q/W tools), then score, then the
+#              vocabulary order below; capabilities the primary word
+#              already says (`implied`) never repeat; healers tag their
+#              LINE word (holy / nature) instead
+#   overrides = cited owner rulings that replace a weapon's derived tags
+# build_dataset stamps `label` on every weapon and `word` on every role;
+# the board tile and popover read them. Contracts: tests/test_roles.py R37.
+labels:
+  min_score: 4
+  max_tags: 2
+  words:
+    engage_tank: Engage
+    stopper_tank: Stopper
+    off_tank: Bruiser
+    main_healer: Healer
+    kite_healer: Healer
+    brawl_healer: Healer
+    shield_support: Support
+    zone_support: Support
+    curse_support: Support
+    # function roles share their capability's word so a job never reads
+    # twice (anti_heal + heal_reduction = one "heal cut")
+    pierce: pierce
+    purge: purge
+    shield_break: shield break
+    anti_heal: heal cut
+    ranged_aoe: Ranged AoE
+    sustained_brawler: Melee
+    bomb_aoe: Bomb
+    dive_cleanup: Dive
+    battlemount_pilot: Pilot
+    caller: Caller
+    scout: Scout
+  # the fallback primary for a weapon off every seat
+  class_words: {frontline: Tank, healer: Healer, support: Support, dps: DPS}
+  # ordered: earlier wins a tie; capability -> the word on the tile
+  vocab:
+    - [silence, silence]
+    - [purge, purge]
+    - [stun, stun]
+    - [peel, peel]
+    - [root, root]
+    - [anti_dive, anti-dive]
+    - [catch, catch]
+    - [clump_create, clump]
+    - [cleanse, cleanse]
+    - [resist_shred, pierce]
+    - [heal_reduction, heal cut]
+    - [interrupt, interrupt]
+    - [knockback_displace, knockback]
+    - [slow, slow]
+    - [zone_control, zone]
+    - [disengage, disengage]
+    - [mobility, mobility]
+    - [burst_aoe, aoe burst]
+    - [sustained_dps, sustain dps]
+    - [burst_st, single burst]
+    - [execute, execute]
+    - [buff_allies, buffs]
+    - [damage_debuff, weaken]
+    - [anti_zone, anti-zone]
+    - [heal_burst, burst heal]
+    - [heal_sustain, sustain heal]
+    - [self_sustain, self-sustain]
+    - [engage, engage]
+    - [tankiness, tanky]
+  # what the primary word already says (never repeated as a tag)
+  implied:
+    frontline: [tankiness]
+    healer: [heal_burst, heal_sustain]
+    engage_tank: [engage]
+    ranged_aoe: [burst_aoe, ranged_presence]
+    sustained_brawler: [sustained_dps]
+    bomb_aoe: [burst_aoe]
+    dive_cleanup: [execute]
+  healer_lines: {holystaff: holy, naturestaff: nature}
+  # WEAPON: {tags: [...], source: "owner:YYYY-MM-DD (...)"} — cited, wins
+  overrides: {}
+
 # seat; FUNCTION keys (pierce/anti_heal/purge/shield_break) count any
 # primary or secondary membership and take `min` only.
 need_profiles:

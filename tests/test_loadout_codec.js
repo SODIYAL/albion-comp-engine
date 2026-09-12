@@ -160,6 +160,15 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
   const legacy = vm.runInContext('provDecode("", 3)', ctx);
   check("a pre-provenance link decodes to all-manual",
         JSON.stringify(legacy) === JSON.stringify(["m", "m", "m"]), JSON.stringify(legacy));
+  /* locks (2026-09-11): 'l' = locked by the user — the only state a
+     refresh holds; survives the permalink beside m / f */
+  const encL = vm.runInContext('provEncode(["l","f","m","l","m"], 5)', ctx);
+  check("locked slots encode as 'l' (trailing manuals still trimmed)",
+        encL === "lfml", `got ${JSON.stringify(encL)}`);
+  const decL = vm.runInContext('provDecode("lfml", 5)', ctx);
+  check("locked slots decode and pad to party size",
+        JSON.stringify(decL) === JSON.stringify(["l","f","m","l","m"]),
+        `got ${JSON.stringify(decL)}`);
   const junk = vm.runInContext('provDecode("zzz!@#", 4)', ctx);
   check("junk provenance degrades to manual, never throws",
         JSON.stringify(junk) === JSON.stringify(["m", "m", "m", "m"]), JSON.stringify(junk));

@@ -449,6 +449,92 @@ sync = seg(APP, "function syncEngine", "function gearsFromLoadout", "L20 sync an
 check("PLANNED = Math.max(PLANNED, party.length)" in sync,
       "L20h the SIZE stepper follows roster growth on every path")
 
+# L21 - slot controls (owner 2026-09-11): lock / replace / refresh-rest
+# beside the hover x on every tile and in the popover's action row; the
+# replace list is the ENGINE's one-slot forge (the page never ranks);
+# refresh walks the next-best comp through the forge's `avoid` list;
+# locks survive the permalink and a content switch
+tile = seg(APP, "function buildCompBoard", "function renderRoster", "L21 tile anchors")
+check(all(x in tile for x in ('data-lock="${i}"', 'data-replace="${i}"',
+                              'data-refresh="${i}"', 'data-remove="${i}"')),
+      "L21a every tile carries lock / replace / refresh-rest / remove controls")
+check('PROV[i] === "l" ? " locked" : ""' in tile,
+      "L21b a locked tile is marked at rest, not only on hover")
+pop = seg(APP, "function memberPop", "function replaceListHtml", "L21 popover anchors")
+check(all(x in pop for x in ("data-lock=", "data-replace=", "data-refresh=", "data-remove=")),
+      "L21c the popover action row carries the same four actions (touch)")
+rl = seg(APP, "function replaceListHtml", "let BOARD_HTML", "L21 replace anchors")
+check("data-replaceto=" in rl and "REPLACE_OPTS" in rl and ".sort(" not in rl,
+      "L21d the replace list renders the engine's ranked options and never ranks itself")
+handlers = seg(APP, 'const rp = e.target.closest("[data-replace]")',
+               'const rm = e.target.closest("[data-remove]")', "L21 handler anchors")
+check("ENG.replaceOptions(party, ri, COMBOS_CUR, GEARS_CUR, 5)" in handlers,
+      "L21e replace options come from the engine's one-slot forge with the roster's own combos and kits")
+check('PROV[si] = PROV[si] === "l" ? "l" : "m"' in handlers,
+      "L21f applying a replacement keeps a lock and makes a forged slot the user's pick")
+rfn = seg(APP, "function refreshUnlocked", "function render()", "L21 refresh anchors")
+check('.filter(i => PROV[i] === "l")' in rfn and "AVOID" in rfn
+      and "lockedGears, AVOID)" in rfn and "r.exhausted" in rfn,
+      "L21g refresh holds only LOCKED slots, forges in the on-screen kits, passes the shown rosters as avoid, and reports exhaustion")
+check('PROV[holdIndex] = "l"' in rfn,
+      "L21h a refresh from a tile locks that tile's weapon first")
+check("AVOID_SIG" in rfn and "lockSignature(locked, forgeSize)" in rfn,
+      "L21i the avoid list resets when the locks, content, style or size change")
+foot = seg(APP, "function renderWheelFoot", "function renderWheel(", "L21 foot anchors")
+check('PROV[i] !== "l")' in foot and "refresh unlocked" in foot,
+      "L21j the global button is 'refresh unlocked', shown while any slot is unlocked")
+codec = seg(read("_loadout.js"), "function provEncode", "function provDecode", "L21 codec anchors")
+check("PROV_STATES" in codec and "l: true" in read("_loadout.js"),
+      "L21k the permalink provenance codec carries the lock state")
+switch = seg(APP, 'if (e.target.id === "content")', 'if (e.target.id === "style")', "L21 switch anchors")
+check('PROV[i] === "l" ? "l" : "m"' in switch,
+      "L21l locks survive a content switch")
+check(".wf-ctl{" in SHELL and ".wf-dm.locked .wf-mcard{" in SHELL and ".dm-replace{" in SHELL,
+      "L21m the controls, the locked tile and the replace list are styled")
+# monoline UI icons (owner 2026-09-11, the reference set): one inline-SVG
+# helper, currentColor, no emoji or text glyphs on the controls
+uih = seg(APP, "const UI_ICONS = {", "const ROLE_LABELS", "L21 icon anchors")
+check(all(k in uih for k in ("lock:", "unlock:", "replace:", "refresh:", "close:"))
+      and 'stroke="currentColor"' in uih and 'stroke-linecap="round"' in uih,
+      "L21n the slot controls draw from one monoline SVG helper (lock / unlock / replace / refresh / close, currentColor, round caps)")
+check(all(x in tile for x in ('ui(PROV[i] === "l" ? "lock" : "unlock", 12)', 'ui("replace", 12)',
+                              'ui("refresh", 12)', 'ui("close", 12)', 'ui("lock", 10)'))
+      and not any(g in tile for g in ("&#128274;", "&#128275;", "&#8646;", "&#8635;")),
+      "L21o every tile control and the at-rest lock mark are SVG icons, never emoji or text glyphs")
+check(all(x in pop for x in ('ui(PROV[i] === "l" ? "unlock" : "lock", 11)', 'ui("replace", 11)',
+                             'ui("refresh", 11)', 'ui("close", 11)')),
+      "L21p the popover action row carries the same icons in front of the words")
+check("1F512" not in SHELL and ".wf-mcard .n .ui{" in SHELL and ".dm-act .ui{" in SHELL,
+      "L21q the emoji lock mark is gone; the icon slots are styled")
+
+# L22 - tile labels (owner 2026-09-11): PRIMARY · tag · tag composed from
+# the detected seat's word and the weapon's dataset `label.tags`; the page
+# composes and never derives a tag
+lab = seg(APP, "const fine = (id, w) =>", "const CLS = {", "L22 label anchors")
+check(".label" in lab and "L.tags" in lab and "det.word" in lab
+      and 'det.class !== "healer"' in lab and "capabilities" not in lab,
+      "L22a the tile label reads the seat word + dataset label.tags (healers keep their profile word) and never touches capabilities")
+check("fine(m.role, party[i])" in tile,
+      "L22b every tile composes its label from the member's detected seat and its own weapon")
+
+# L23 - three visual fixes (owner 2026-09-11): the picker facet never
+# overruns the controls, interaction badges are text pills, the masthead
+# size chip does not inherit the note box's margin
+check("#picker-chips, .wf-search{flex:none}" in SHELL and "#facet-slot{flex:1 1 0" in SHELL
+      and "container-type:inline-size" in SHELL and "@container (min-width:300px)" in SHELL,
+      "L23a the picker controls never shrink; the facet takes the leftover width and shows its description only when the slot has room")
+fac = seg(APP, 'const nMatch = ', 'const idx = wheelFocusIdx', "L23 facet anchors")
+check('class="facet-n"' in fac and 'class="facet-t"' in fac and 'title="showing:' in fac
+      and 'class="w"' in fac and "@container (max-width:150px){ .wf-bar .facet .w{display:none} }" in SHELL
+      and "@container (max-width:44px){ .wf-bar .facet .facet-n{display:none} }" in SHELL
+      and "overflow:hidden" in seg(SHELL, "#facet-slot{", "#facet-slot:empty", "L23 slot anchors"),
+      "L23b the facet readout is count-first, compacts by its own width (words, then the count) and clips rather than spills; the full sentence rides the tooltip")
+check(".bdg.b-int{" in SHELL and "width:auto; height:auto" in seg(SHELL, ".bdg.b-int{", "}", "L23 pill anchors")
+      and ".int-row>div:first-child{display:flex; flex-wrap:wrap" in SHELL,
+      "L23c interaction badges are text pills in a wrapping row, never the 22px icon box")
+check(".mh-bar .chip{margin:0}" in LAYOUT and ".mh-bar .sb-count{line-height:1}" in LAYOUT,
+      "L23d the masthead size chip and count centre with the controls")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

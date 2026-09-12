@@ -2035,6 +2035,88 @@ def mine_carrier_quotas(gear, effect_map):
             "buckets": out, "items": items}
 
 
+def apply_labels(weapons, book, doc, lines):
+    """TILE LABELS (owner 2026-09-11; roles.yaml `labels`): stamp every
+    role's `word` and every weapon's `label` = {primary, tags, source}.
+    Display only. Tags derive from the weapon's own curated capability
+    sheet — E-first (evidence grounded by the E outranks Q/W tools), then
+    score, then the vocabulary order — at >= min_score, at most max_tags,
+    never a capability the primary word implies; healers read their heal
+    profile as the primary and their line as the tag. Owner overrides
+    (cited) replace the derived tags. Fail closed: an override naming an
+    unknown weapon, a word outside the vocabulary or lacking a source
+    blocks the release. Returns problems."""
+    cfg = doc.get("labels") or {}
+    problems = []
+    if not cfg:
+        return problems
+    words = cfg.get("words") or {}
+    class_words = cfg.get("class_words") or {}
+    vocab = [(c, w) for c, w in (cfg.get("vocab") or [])]
+    vocab_word = dict(vocab)
+    order = {c: i for i, (c, _w) in enumerate(vocab)}
+    implied = {k: set(v or []) for k, v in (cfg.get("implied") or {}).items()}
+    healer_lines = cfg.get("healer_lines") or {}
+    min_score = cfg.get("min_score", 4)
+    max_tags = cfg.get("max_tags", 2)
+    by_id = {r["id"]: r for r in book}
+    for r in book:
+        r["word"] = words.get(r["id"]) or class_words.get(r.get("class")) or r["name"]
+    overrides = cfg.get("overrides") or {}
+    for wk, ov in overrides.items():
+        if wk not in weapons:
+            problems.append(f"labels.overrides: unknown weapon {wk}")
+            continue
+        if not (ov.get("source") or "").strip():
+            problems.append(f"labels.overrides[{wk}]: no source")
+        bad = [t for t in (ov.get("tags") or []) if t not in vocab_word.values()]
+        if bad:
+            problems.append(f"labels.overrides[{wk}]: tags outside the vocabulary {bad}")
+    for wk, w in weapons.items():
+        caps = w.get("capabilities") or {}
+        ev = w.get("evidence") or {}
+        e_spells = set((lines.get(wk) or {}).get("spells", {}).get("e") or [])
+        seat = next((rid for rid in (w.get("role_menu") or [])
+                     if ((by_id.get(rid) or {}).get("uniform") or {}).get("chest")), None)
+        seat_rec = by_id.get(seat) or {}
+        cls = seat_rec.get("class") or w.get("role_class") or "dps"
+        skip = set(implied.get(cls, ())) | set(implied.get(seat, ()))
+        if cls == "healer":
+            hb, hs = caps.get("heal_burst", 0), caps.get("heal_sustain", 0)
+            primary = "Burst" if hb >= hs else "Sustain"
+            tags = ["sustain"] if (hb == hs and hb) else []
+            line = healer_lines.get((lines.get(wk) or {}).get("subcategory") or "")
+            if line:
+                tags.append(line)
+            src = "derived:heal profile + line"
+        else:
+            primary = seat_rec.get("word") or class_words.get(cls) or cls
+            # cited function roles on the PRIMARY menu lead (a job the
+            # book seats the weapon for), then the sheet's capabilities
+            tags = []
+            for rid in (w.get("role_menu") or []):
+                rrec = by_id.get(rid) or {}
+                if rid != seat and rrec.get("class") != "meta" \
+                        and not (rrec.get("uniform") or {}).get("chest"):
+                    word = (words.get(rid) or rrec.get("name") or rid).lower()
+                    if word not in tags:
+                        tags.append(word)
+            cands = [c for c, v in caps.items()
+                     if v >= min_score and c in vocab_word and c not in skip
+                     and vocab_word[c] not in tags]
+            cands.sort(key=lambda c: (
+                0 if any(s in e_spells for s in (ev.get(c) or [])) else 1,
+                -caps[c], order[c]))
+            tags = (tags + [vocab_word[c] for c in cands])[:max_tags]
+            src = "derived:menu functions + sheet (E-first)"
+        ov = overrides.get(wk)
+        if ov and ov.get("tags") is not None:
+            tags = list(ov["tags"])
+            src = ov.get("source") or "owner"
+        w["label"] = {"primary": primary, "tags": tags, "seat": seat, "source": src}
+    return problems
+
+
 def apply_roles(weapons, gear):
     """The ROLE BOOK (pipeline/roles.yaml, roles-design.md): validate it,
     stamp each weapon's `role_menu` (the inverse index, primary first in
@@ -2356,11 +2438,15 @@ META_PRIOR_PATH = os.path.join(OUT, "meta_prior.json")
 
 def load_meta_prior(known_weapons):
     """The GENERATED, size-bucketed meta prior (derive_meta_prior.py ->
-    out/meta_prior.json; owner ruling 2026-09-08). Fail closed, loudly: a
-    missing file, a file derived from a different party_rosters.json.gz than
-    the one on disk, or a malformed bucket map blocks the build. Rows for
-    weapons the dataset does not carry are dropped; every kept value is in
-    (0, 1]. The engine detects the bucketed shape by its keys and reads it
+    out/meta_prior.json; owner ruling 2026-09-08) and, since 2026-09-11,
+    its pair table (`meta_pairs`, the best-observed-partner half of the
+    blend). Returns (solo, pairs). Fail closed, loudly: a missing file, a
+    file derived from a different party_rosters.json.gz than the one on
+    disk, an artifact not derived on the training split (battle % 5 != 0
+    -- an all-battles copy is AUDIT ONLY), a malformed bucket map, an
+    asymmetric or out-of-range pair blocks the build. Rows for weapons the
+    dataset does not carry are dropped; every kept value is in (0, 1].
+    The engine detects the bucketed shape by its keys and reads it
     through size_bucket() at roster size."""
     import hashlib
     if not os.path.exists(META_PRIOR_PATH):
@@ -2374,6 +2460,11 @@ def load_meta_prior(known_weapons):
     if want != have:
         sys.exit("out/meta_prior.json was derived from a different "
                  "party_rosters.json.gz — rerun derive_meta_prior.py")
+    split = doc.get("_split") or {}
+    if split.get("holdout_mod") != 5:
+        sys.exit("out/meta_prior.json was not derived on the training split "
+                 "(battle % 5 != 0) — an all-battles prior is AUDIT ONLY; "
+                 "rerun py -3 pipeline/derive_meta_prior.py without --all-battles")
     prior = doc.get("meta_prior") or {}
     if not prior or set(prior) - {"small", "mid", "large"}:
         sys.exit("out/meta_prior.json: meta_prior must be bucketed "
@@ -2383,6 +2474,95 @@ def load_meta_prior(known_weapons):
         rows = prior.get(bk) or {}
         out[bk] = {w: float(v) for w, v in sorted(rows.items())
                    if w in known_weapons and 0.0 < float(v) <= 1.0}
+    pairs_in = doc.get("meta_pairs")
+    if not isinstance(pairs_in, dict) or set(pairs_in) - {"small", "mid", "large"}:
+        sys.exit("out/meta_prior.json: meta_pairs missing or not bucketed — "
+                 "rerun py -3 pipeline/derive_meta_prior.py")
+    pairs = {}
+    for bk in ("small", "mid", "large"):
+        rows = pairs_in.get(bk) or {}
+        kept = {}
+        for w, row in sorted(rows.items()):
+            if w not in known_weapons:
+                continue
+            for m, v in sorted((row or {}).items()):
+                if m not in known_weapons or m == w:
+                    continue
+                v = float(v)
+                if not 0.0 < v <= 1.0:
+                    sys.exit(f"out/meta_prior.json: meta_pairs {bk} {w}|{m} = {v} "
+                             "out of (0, 1]")
+                if abs(float((rows.get(m) or {}).get(w, -1.0)) - v) > 1e-12:
+                    sys.exit(f"out/meta_prior.json: meta_pairs {bk} {w}|{m} is not "
+                             "symmetric — rerun derive_meta_prior.py")
+                kept.setdefault(w, {})[m] = v
+        pairs[bk] = kept
+    return out, pairs
+
+
+ROLE_COUNTS_PATH = os.path.join(OUT, "role_counts.json")
+
+
+def load_role_typical():
+    """The GENERATED typical role counts (derive_role_counts.py ->
+    out/role_counts.json; owner rulings 2026-09-11): the harvest p50 per
+    exact size at 10+ (pooled, and per declared style), the median of the
+    fitted published comps per content below 10, healer / frontline /
+    support (dps never — the residual role). Attached to the dataset's
+    `composition.role_typical` = {pooled: {size: {role: n}}, styles:
+    {style: {size: {...}}}, comps: {content: {size: {...}}},
+    style_min_size}; the engine resolves one row for its content, style
+    and size (`_role_typical`), lays `typical` onto the band, and the
+    forge generates a body beyond it only when a minimum only that role
+    can meet still demands one. Fail closed, loudly: a missing file, a
+    file derived from a different party_rosters.json.gz / party_styles.json
+    than the ones on disk, or a row that is not a positive integer count
+    blocks the build. A size with no row stays unconstrained (unknown is
+    explicit, never filled)."""
+    import hashlib
+    if not os.path.exists(ROLE_COUNTS_PATH):
+        sys.exit("out/role_counts.json missing — typical role counts are "
+                 "GENERATED from the committed evidence since 2026-09-11: "
+                 "run py -3 pipeline/derive_role_counts.py")
+    with open(ROLE_COUNTS_PATH, encoding="utf-8") as f:
+        doc = json.load(f) or {}
+    src = doc.get("_source") or {}
+    for art, key in ((rosters_io.NAME, "party_rosters_sha256"),
+                     ("party_styles.json", "party_styles_sha256")):
+        with open(os.path.join(OUT, art), "rb") as f:
+            have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
+        if src.get(key) != have:
+            sys.exit(f"out/role_counts.json was derived from a different "
+                     f"{art} — rerun derive_role_counts.py")
+    typ = doc.get("typical") or {}
+    if set(typ) != {"pooled", "styles", "comps"}:
+        sys.exit("out/role_counts.json: typical must carry pooled / styles "
+                 "/ comps")
+
+    def rows_of(table, where):
+        out = {}
+        for size, roles in (table or {}).items():
+            if not str(size).isdigit() or not isinstance(roles, dict):
+                sys.exit(f"out/role_counts.json: bad typical row {where}"
+                         f"[{size!r}]")
+            row = {}
+            for role, n in roles.items():
+                if role not in ("healer", "frontline", "support") \
+                        or isinstance(n, bool) or not isinstance(n, int) \
+                        or n < 1:
+                    sys.exit(f"out/role_counts.json: typical {where}[{size}]"
+                             f"[{role}] must be a positive integer count of "
+                             f"a gated role, got {n!r}")
+                row[role] = n
+            if row:
+                out[str(int(size))] = row
+        return out
+    out = {"pooled": rows_of(typ["pooled"], "pooled"),
+           "styles": {st: rows_of(rows, f"styles[{st}]")
+                      for st, rows in sorted((typ["styles"] or {}).items())},
+           "comps": {c: rows_of(rows, f"comps[{c}]")
+                     for c, rows in sorted((typ["comps"] or {}).items())},
+           "style_min_size": int(doc.get("_style_min_size") or 10)}
     return out
 
 
@@ -2462,8 +2642,8 @@ def load_templates(tune=None):
     # The meta prior is GENERATED (owner ruling 2026-09-08: one harvest
     # prior replacing both hand lists) — a hand-set map in scoring.yaml or
     # MASTERSHEET tune:scoring is a build error, never silently merged.
-    if scoring.get("meta_prior"):
-        sys.exit("scoring.meta_prior is GENERATED since 2026-09-08 "
+    if scoring.get("meta_prior") or scoring.get("meta_pairs"):
+        sys.exit("scoring.meta_prior / meta_pairs are GENERATED since 2026-09-08 "
                  "(pipeline/derive_meta_prior.py -> out/meta_prior.json); "
                  "remove the hand-set map from templates/scoring.yaml or "
                  "MASTERSHEET.md tune:scoring")
@@ -2534,10 +2714,21 @@ def main():
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
     templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
     # observed relevance (owner 2026-09-08): the generated harvest prior
-    scoring["meta_prior"] = load_meta_prior(set(weapons))
-    print("  meta prior    : generated (out/meta_prior.json), "
+    scoring["meta_prior"], scoring["meta_pairs"] = load_meta_prior(set(weapons))
+    # typical role counts (owner 2026-09-11): the generated harvest p50 per
+    # size, the middle line the composition bands never had
+    composition["role_typical"] = load_role_typical()
+    rt = composition["role_typical"]
+    print("  role typical  : generated (out/role_counts.json), "
+          f"pooled {len(rt['pooled'])} sizes, styles "
+          + ", ".join(f"{st} {len(rows)}" for st, rows in rt["styles"].items())
+          + ", comps " + ", ".join(f"{c} {len(rows)}"
+                                   for c, rows in rt["comps"].items()))
+    print("  meta prior    : generated (out/meta_prior.json, training split), "
           + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
-          + " weapon rows")
+          + " weapon rows; pairs "
+          + ", ".join(f"{bk} {sum(len(r) for r in rows.values()) // 2}"
+                      for bk, rows in scoring["meta_pairs"].items()))
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):
@@ -2698,6 +2889,11 @@ def main():
         .get("e_heal_dedicated_min", 4), nonstack_members)
     roles_book, gear_effects, roles_report, need_profiles, roles_problems = \
         apply_roles(weapons, gear)
+    # tile labels (owner 2026-09-11): display only, stamped after the
+    # menus exist; an override off the vocabulary or uncited blocks
+    roles_problems += apply_labels(
+        weapons, roles_book, _load_yaml(os.path.join(HERE, "roles.yaml")) or {},
+        weapon_lines)
     for c in sorted((need_profiles.get("overrides") or {})):
         if c not in templates:
             roles_problems.append(f"need_profiles: overrides names "

@@ -833,10 +833,15 @@ def t_role_class_from_seat():
             and e.role_of("2H_SHAPESHIFTER_CRYSTAL") == "frontline"
             and e.role_of("2H_ARCANESTAFF_HELL") == "support"
             and e.role_of("2H_FIRE_RINGPAIR_AVALON") == "dps"
-            and e.role_of("2H_HOLYSTAFF_CRYSTAL") == "support"
+            and e.role_of("2H_HOLYSTAFF_CRYSTAL") == "healer"
+            and (e.weapons["2H_HOLYSTAFF_CRYSTAL"].get("role_menu") or [None])[0]
+            == "main_healer"
+            and "shield_support" in (e.weapons["2H_HOLYSTAFF_CRYSTAL"]
+                                     .get("role_menu_secondary") or [])
             and e.role_of("2H_IRONCLADEDSTAFF") == "frontline")
     check("R22 role class = primary seat class (Grailseeker/Stillgaze "
-          "frontline, Occult support, Dawnsong dps, Exalted override holds, "
+          "frontline, Occult support, Dawnsong dps, Exalted a HEALER since "
+          "the 2026-09-11 ruling with the support lane secondary, "
           "unseated Iron-clad keeps its tank hint)",
           not bad and pins, f"bad={bad[:6]}")
 
@@ -1689,6 +1694,88 @@ def t_seat_pooling():
           bool(ok), f"chest={found['chest']} plain={found['plain']} keep={found['keep']}")
 
 
+def t_labels():
+    """R37 (owner 2026-09-11, the labels round): every weapon ships a
+    tile label {primary, tags} — PRIMARY = the seat's word (healers:
+    their heal profile), tags = cited function roles on the primary menu
+    then the sheet's capabilities at >= 4, at most two, E-first, never a
+    capability the primary implies; healers tag their line. Display only:
+    nothing in scoring reads it. Owner overrides are cited and inside the
+    vocabulary (the build blocks otherwise)."""
+    import yaml
+    e = Engine()
+    book = {r["id"]: r for r in e.data.get("roles") or []}
+    cfg = yaml.safe_load(open(os.path.join(ROOT, "pipeline", "roles.yaml"),
+                              encoding="utf-8")).get("labels") or {}
+    vocab = dict(cfg.get("vocab") or [])
+    words = set(vocab.values()) | {w.lower() for w in (cfg.get("words") or {}).values()} \
+        | set((cfg.get("healer_lines") or {}).values()) | {"sustain"}
+    implied = {k: set(v or []) for k, v in (cfg.get("implied") or {}).items()}
+    bad = []
+    for wk, w in e.weapons.items():
+        L = w.get("label")
+        if not L or not L.get("primary"):
+            bad.append(f"{wk}: no label"); continue
+        if len(L["tags"]) > cfg.get("max_tags", 2):
+            bad.append(f"{wk}: too many tags {L['tags']}")
+        if any(t not in words for t in L["tags"]):
+            bad.append(f"{wk}: tag outside vocabulary {L['tags']}")
+        seat = L.get("seat")
+        rec = book.get(seat) or {}
+        if seat and rec.get("word") and rec.get("class") != "healer" \
+                and L["primary"] != rec["word"]:
+            bad.append(f"{wk}: primary {L['primary']} != seat word {rec['word']}")
+        if rec.get("class") == "healer" and L["primary"] not in ("Burst", "Sustain"):
+            bad.append(f"{wk}: healer primary {L['primary']}")
+        skip = implied.get(rec.get("class"), set()) | implied.get(seat, set())
+        if any(vocab.get(c) in L["tags"] for c in skip):
+            bad.append(f"{wk}: implied capability repeated {L['tags']}")
+        if L["source"].startswith("derived"):
+            caps = w.get("capabilities") or {}
+            for t in L["tags"]:
+                cap = next((c for c, wd in vocab.items() if wd == t), None)
+                menu_word = any((cfg.get("words") or {}).get(rid, "").lower() == t
+                                for rid in (w.get("role_menu") or []))
+                if cap and caps.get(cap, 0) < cfg.get("min_score", 4) and not menu_word:
+                    bad.append(f"{wk}: tag {t} under min_score")
+    ok_words = all(r.get("word") for r in book.values())
+    check("R37a every weapon carries a label inside the vocabulary: seat word "
+          "primary (healers: Burst / Sustain), <= 2 tags at >= 4 or a cited "
+          "menu function, implied capabilities never repeated; every role has "
+          "a word", not bad and ok_words, f"problems={bad[:6]}")
+
+    def label(nm):
+        k = next(k for k, w in e.weapons.items() if w["display_name"] == nm)
+        L = e.weapons[k]["label"]
+        return " · ".join([L["primary"]] + L["tags"])
+    pins = {
+        "Heavy Mace": "Stopper · purge · silence",
+        "Bedrock Mace": "Stopper · peel · anti-dive",
+        "Grailseeker": "Stopper · peel · root",
+        "Great Arcane Staff": "Support · stun · peel",
+        "Hand of Justice": "Engage · clump · stun",
+        "Grovekeeper": "Engage · stun · peel",
+        "Hallowfall": "Burst · holy",
+        "Great Holy Staff": "Sustain · holy",
+        "Nature Staff": "Burst · sustain · nature",
+        "Black Monk Staff": "Bruiser · shield break · weaken",
+        "Incubus Mace": "Stopper · heal cut · weaken",
+    }
+    miss = {nm: label(nm) for nm, want in pins.items() if label(nm) != want}
+    check("R37b the owner's cases read as ruled: Heavy Mace stopper · purge · "
+          "silence, Bedrock stopper · peel, Great Arcane support · STUN (its E, "
+          "Time Freeze, leads), Grovekeeper engage · stun · peel, Hallowfall "
+          "burst · holy, Great Holy sustain · holy, Nature burst · sustain",
+          not miss, f"{miss}")
+    # descriptive: labels never touch a score
+    base = e.comp_score(["2H_MACE", "MAIN_HOLYSTAFF_AVALON", "2H_ARCANESTAFF"])
+    for w in e.weapons.values():
+        w["label"] = {"primary": "X", "tags": [], "seat": None, "source": "test"}
+    same = e.comp_score(["2H_MACE", "MAIN_HOLYSTAFF_AVALON", "2H_ARCANESTAFF"])
+    check("R37c labels are display only: comp_score is unchanged with every "
+          "label blanked", abs(base - same) < 1e-12, f"{base} vs {same}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1715,6 +1802,7 @@ if __name__ == "__main__":
     t_occult_support_seat()
     t_kit_audit_agreement()
     t_carrier_quota()
+    t_labels()
     t_observed_chest_class()
     t_one_player_one_vote()
     t_doctrine_bands()

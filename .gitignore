@@ -33,3 +33,6 @@ pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
 # the plain artifact is history: the harvest writes party_rosters.json.gz (2026-09-11)
 pipeline/out/party_rosters.json
+
+# derive_meta_prior.py --all-battles audit copy (never shipped)
+pipeline/out/meta_prior-all-battles.json

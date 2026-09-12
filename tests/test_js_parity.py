@@ -152,10 +152,18 @@ def py_results(cases):
             r = e.forge(fc["size"], locked=fc["locked"],
                         locked_combos=fc["locked_combos"], pool=fc["pool"],
                         locked_gears=fc["locked_gears"])
+            # the next-best alternative (2026-09-11 `avoid`): the roster
+            # just forged is avoided; both ports must walk to the same one
+            r2 = e.forge(fc["size"], locked=fc["locked"],
+                         locked_combos=fc["locked_combos"], pool=fc["pool"],
+                         locked_gears=fc["locked_gears"], avoid=[r["party"]])
             forged = {"party": r["party"], "combos": r["combos"],
                       "gears": r["gears"],
                       "score": r["score"], "feasible": r["feasible"],
-                      "filler": r["filler"], "held": r["held"]}
+                      "filler": r["filler"], "held": r["held"],
+                      "exhausted": r["exhausted"],
+                      "next": {"party": r2["party"], "gears": r2["gears"],
+                               "score": r2["score"], "exhausted": r2["exhausted"]}}
         # V3-W parity (2026-08-27): dressing OFF while incumbents keep their
         # case gears — candidates must evaluate naked through the identity
         # short-circuit; the toggle restores dressed state bit-identically.
@@ -184,6 +192,14 @@ def py_results(cases):
             "target_min": {cap: e.target_min(cap) for cap in e.reqs},
             "constraint_band": e._band,
             "forge": forged,
+            # replace_options (2026-09-11): the one-slot forge on the
+            # swap cadence, slot 0 of the swap party, over the case pool
+            "replace": None if sp is None or len(sp) < 2 else [
+                {"weapon": o["weapon"], "score": o["score"],
+                 "delta": o["delta"], "combo": o["combo"], "kit": o["kit"]}
+                for o in e.replace_options(sp, 0, c["combos"][:len(sp)],
+                                           c["gears"][:len(sp)], 5,
+                                           pool=c["refine_pool"])],
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
                  "off_comp": m["off_comp"], "off_style": m["off_style"],
@@ -208,7 +224,11 @@ def py_results(cases):
             "recommend": [{"weapon": r["weapon"], "score": r["score"],
                            "combo": r["combo"], "kit": r["kit"],
                            "caps_gain": r["caps_gain"],
-                           "verdict": r["verdict"]}
+                           "verdict": r["verdict"],
+                           "meta_prior": r["meta_prior"],
+                           "meta_solo": r["meta_solo"], "meta_pair": r["meta_pair"],
+                           "meta_partner": r["meta_partner"],
+                           "meta_raise": r["meta_raise"]}
                           for r in e.recommend(c["party"], 5)],
             "pick_report": (e.pick_report(c["party"], c["refine_pool"][0],
                                           c["combos"])
@@ -315,8 +335,25 @@ def main():
             elif abs(fa["score"] - fb.get("score", 1e9)) > EPS \
                     or fa["feasible"] != fb.get("feasible") \
                     or fa["filler"] != fb.get("filler") \
-                    or fa["held"] != fb.get("held"):
+                    or fa["held"] != fb.get("held") \
+                    or fa["exhausted"] != fb.get("exhausted"):
                 errs.append(f"forge result: py={fa} js={fb}")
+            na, nb = fa["next"], fb.get("next") or {}
+            if na["party"] != nb.get("party") or na["gears"] != nb.get("gears") \
+                    or abs(na["score"] - nb.get("score", 1e9)) > EPS \
+                    or na["exhausted"] != nb.get("exhausted"):
+                errs.append(f"forge next-best (avoid): py={na} js={nb}")
+        if a.get("replace") is not None:
+            ra_, rb_ = a["replace"], b.get("replace") or []
+            if [o["weapon"] for o in ra_] != [o["weapon"] for o in rb_]:
+                errs.append(f"replace_options order: py={[o['weapon'] for o in ra_]} "
+                            f"js={[o['weapon'] for o in rb_]}")
+            else:
+                for oa, ob in zip(ra_, rb_):
+                    if abs(oa["score"] - ob["score"]) > EPS \
+                            or abs(oa["delta"] - ob["delta"]) > EPS \
+                            or oa["combo"] != ob["combo"] or oa["kit"] != ob["kit"]:
+                        errs.append(f"replace_options {oa['weapon']}: py={oa} js={ob}")
         if [r["weapon"] for r in a["recommend"]] != [r["weapon"] for r in b["recommend"]]:
             errs.append(f"recommend order: py={[r['weapon'] for r in a['recommend']]} "
                         f"js={[r['weapon'] for r in b['recommend']]}")
@@ -332,6 +369,15 @@ def main():
                     errs.append(f"rec verdict {ra['weapon']}: "
                                 f"py={ra['verdict']}/{ra['caps_gain']!r} "
                                 f"js={rb.get('verdict')}/{rb.get('caps_gain')!r}")
+                elif any(abs(ra[k] - rb.get(k, 9e9)) > EPS
+                         for k in ("meta_prior", "meta_solo", "meta_pair", "meta_raise"))                         or ra["meta_partner"] != rb.get("meta_partner"):
+                    # pair-aware prior (2026-09-11): the four descriptive
+                    # meta fields ride the same parity contract
+                    errs.append(f"rec meta {ra['weapon']}: "
+                                f"py={ra['meta_prior']!r}/{ra['meta_solo']!r}/{ra['meta_pair']!r}/"
+                                f"{ra['meta_partner']}/{ra['meta_raise']!r} "
+                                f"js={rb.get('meta_prior')!r}/{rb.get('meta_solo')!r}/"
+                                f"{rb.get('meta_pair')!r}/{rb.get('meta_partner')}/{rb.get('meta_raise')!r}")
         pa, pb = a["pick_report"], b.get("pick_report")
         if (pa is None) != (pb is None):
             errs.append("pick_report presence differs")
@@ -339,9 +385,11 @@ def main():
             pb = pb or {}
             if (pa["verdict"] != pb.get("verdict") or pa["combo"] != pb.get("combo")
                     or pa["kit"] != pb.get("kit")
+                    or pa["meta_partner"] != pb.get("meta_partner")
                     or any(abs(pa[k] - pb.get(k, 9e9)) > EPS
                            for k in ("score", "d_fitness", "d_synergy",
-                                     "meta_prior", "viability", "dup_penalty",
+                                     "meta_prior", "meta_solo", "meta_pair",
+                                     "meta_raise", "viability", "dup_penalty",
                                      "caps_gain"))):
                 errs.append(f"pick_report head: py={pa['verdict']}/{pa['score']!r} "
                             f"js={pb.get('verdict')}/{pb.get('score')!r}")

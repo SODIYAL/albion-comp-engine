@@ -257,6 +257,10 @@
 .masthead .lf-sync{font-size:10px}
 /* forge and reforge are comp-level actions, so they sit with style, size
    and content rather than half in a panel and half under the wheel */
+/* the size mirror is a `chip warn`, and `.warn` is also the forge-note box
+   with a 12px top margin — in the bar the chip sat 6px low (2026-09-11 fix) */
+.mh-bar .chip{margin:0}
+.mh-bar .sb-count{line-height:1}
 .mh-forge{display:flex; gap:6px}
 .mh-forge:empty{display:none}
 .mh-forge .cb-forge{margin:0; padding:4px 10px; font-size:10px; width:auto}

@@ -41,9 +41,20 @@ Each is decidable today from evidence already in the repo.
 - **`balanced` and the one-per-five healer minimum**: it keeps the base band
   and forges 3 healers at castle 25; the guild sheet says 4 at 20+ with no
   style attached. (V: 09b, Healers per five)
-- **Healers past the minimum**: with caps gone the scorer adds a healer beyond
-  the minimum at 25 and at kite 20 (6 / 5) — the scorer's preference, to be
-  graded, not assumed right. (V: 09b, Healers per five)
+- **Role counts past the minimum at 21+**: the typical role count
+  (2026-09-11) holds the forge to the evidence through size 20 (healer /
+  frontline / support, per style at 10+); the harvest has no 21+ rows, so
+  castle 25 still forges 6 healers on clap — the scorer's preference, to be
+  graded, not assumed right. A 21+ harvest band closes it. (V: 09b, Tanks
+  and supports)
+- **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
+  4): a typical only bars bodies beyond it; the shortfall is a support
+  demand question (which support capabilities the 20-man rows under-ask
+  for), not a role-count one. (V: 09b, Tanks and supports)
+- **Sub-10 tanks and supports rest on three castle_outpost comps** (roads
+  has one, so it reads the healer row only). More sub-10 published comps,
+  or a sub-10 killboard filter that separates content comps from open-world
+  squads, would let the harvest carry them. (V: 09b, Tanks and supports)
 - **Melee instant-payload bombs in clap dps** (Spiked Gauntlets, Realmbreaker)
   generate under the standing conditional-payload ruling; the "bomb builds
   in clap" complaint has no derived rule left without a new one. (V: 09a,
@@ -206,11 +217,14 @@ Each is decidable today from evidence already in the repo.
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
 - **Honour the holdout split end to end**: `v4h` evaluates battles with
-  `id % 5 == 0`, but `derive_style_bands.py` and `derive_meta_prior.py` still
-  fit on every battle. Give both a `--exclude-mod` (or read one shared split
-  constant) so the rows and the prior are fitted on the other four fifths;
-  then `v4h` is a true holdout measurement and can be considered for a gate
-  (owner decision). Until then every styled `v4h` number is weak-form.
+  `id % 5 == 0`. `derive_meta_prior.py` honours it since 2026-09-11
+  (`HOLDOUT_MOD`, both tables); `derive_style_bands.py` and
+  `derive_role_counts.py` still fit on every battle. Give them the same
+  split constant so every harvest-derived row is fitted on the other four
+  fifths; then `v4h` is a true holdout measurement and can be considered
+  for a gate (owner decision). Until then every styled `v4h` number is
+  weak-form. Re-derive the pair prior on the harvest checkout after the
+  next fold (`fold_harvest.ps1` already runs `derive_meta_prior`).
 - **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
   `weapon_usage_v2.json`, the display strip's fight-size prevalence and the
   cohort families) and `sample_rosters.py` (`roster_cache/` ->
@@ -225,6 +239,24 @@ Each is decidable today from evidence already in the repo.
 
 ## Product features (owner-deprioritized until comp quality satisfies)
 
+Saved player profiles; enemy-comp counter drafting; fight-plan generation;
+the blind-validation workflow as a tool; the companion loot module
+(COMPANION_SCOPE.md, proposal only). (Slot locks, per-slot replace and the
+next-best refresh shipped 2026-09-11 — V: 09b, Slot controls.)
+- **Seat-vs-label ruling list** (`notes/findings/2026-09-11-labels-vs-seats.md`):
+  14 of 40 seated frontline / support weapons carry none of their seat's
+  signature capability at >= 4 (ten engage tanks without a clump tool —
+  Grovekeeper, Polehammer, Hammer, Great Hammer, Tombhammer, Morning Star,
+  Soulscythe, Dreadstorm, Earthrune, Mace; Primal / Stillgaze stoppers under
+  4 everywhere; Exalted on the shield seat; Black Monk as an off-tank). Each
+  is an owner call: a move changes the kit doctrine and the 15+ minima.
+  Great Arcane may want a 'stopper support' seat that does not exist.
+  (Exalted ruled the same day: healer, support lane secondary.)
+- **Refresh alternatives walk one swap at a time**: next-best is exact, so
+  successive refreshes under the same locks usually differ by a single
+  member. If the owner wants "more different" alternatives, a diversity
+  rule (avoid rosters sharing all but k members) is the knob — an owner
+  call, not a derivation. (V: 09b, Slot controls)
 Slot locks / constrained reforge; saved player profiles; enemy-comp counter
 drafting; fight-plan generation; the blind-validation workflow as a tool;
 the companion loot module (COMPANION_SCOPE.md, proposal only).

@@ -72,8 +72,11 @@ Three layers, never merged:
   0.20 synergy + 0.15 meta prior ± viability / duplicates), one player ahead,
   each candidate on its best legal Q/W/E/passive combo, DRESSED in its doctrine
   kit. Synergy is weapon-interaction only. The meta prior is GENERATED from
-  the killer-party harvest per size bucket (`out/meta_prior.json`); a hand-set
-  map fails the build. Duplicates: 1 copy by default; the one super-additive
+  the killer-party harvest per size bucket (`out/meta_prior.json`): per
+  member 0.5 x the weapon's own share + 0.5 x its best observed partner on
+  the roster (`meta_pairs`, one party one vote per pair, >=3 guild-sets,
+  log2-lift capped at 8x, shrunk; owner 2026-09-11), both tables on the
+  training split `battle % 5 != 0`; a hand-set map fails the build. Duplicates: 1 copy by default; the one super-additive
   case is `self_cost_offset_min_copies` (Demon Armor).
 - Gear scores (curated `sheets/gear/`) through `build_extra`: stat
   channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic
@@ -82,6 +85,17 @@ Three layers, never merged:
   and functions (pierce / purge / anti_heal / shield_break) derived E-first;
   `detect_role` / `role_advisory` descriptive; `role_class` for forge bands
   derives from the primary seat.
+- **Tile labels** (owner 2026-09-11, `roles.yaml labels`, R37): every weapon
+  ships `label = {primary, tags}` — PRIMARY is the seat's plain word (Engage /
+  Stopper / Bruiser / Support / Ranged AoE / Melee / Bomb / Dive; healers read
+  their heal profile, Burst or Sustain), tags are the cited function roles on
+  the primary menu then the weapon's own capabilities at >= 4, at most two,
+  E-first, never what the primary implies; healers tag their line (holy /
+  nature). Owner overrides are cited and inside the vocabulary. Display only;
+  the tile composes `PRIMARY · tag · tag` from the member's DETECTED seat word
+  and the weapon's tags. Seat moves the labels suggest are a ruling list
+  (`notes/findings/2026-09-11-labels-vs-seats.md`), never a change made by
+  the label layer.
 - Kits: `kit_options` is doctrine-led, observed-build-led and fail-closed.
   Every doctrine reader goes through `_seat_kit` (group band at 10+, gang band
   at <= 9, a declared style's cell laid over the band). Slots rank by observed
@@ -128,6 +142,28 @@ Constraints are combo-aware: the selected spell combination must satisfy a
 minimum, not the sheet's theoretical maximum. Generation rules (each is an
 index row in `tests/VALIDATION.md`; manual picks always score):
 
+- **Slot controls** (owner 2026-09-11): every roster tile carries lock /
+  replace / refresh-rest / remove (hover on desktop, the popover's action
+  row on touch), drawn by the monoline inline-SVG helper `ui()` (24 grid,
+  1.75 stroke, round caps, currentColor — the owner's reference set). Slot provenance is `m` manual / `f` forged / `l` LOCKED —
+  the lock is the only thing a refresh holds, manual picks included; it
+  rides the permalink (`f=` string) and survives a content switch.
+  **Replace** lists the engine's `replace_options()` — a one-slot forge:
+  every option is scored as a dressed pick into the rest of the comp and
+  passes the forge's gates with no slot to spare, so it never offers what
+  the forge would refuse; applying one lands its combo and kit and makes
+  the slot the user's pick (a locked slot stays locked). **Refresh** (a
+  tile's ↻ locks that tile first; the header's "refresh unlocked" holds
+  only locks) rebuilds every unlocked slot and gives the NEXT-BEST comp
+  each press: the page passes every roster already shown under the
+  current lock signature (the one on screen included) as `forge(avoid=)`
+  and the forge returns the best roster not among them — the final beam
+  depth drops avoided completions and the 1-opt / 2-opt refuse moves
+  onto one; deterministic, both ports, parity-carried. A changed lock,
+  content, style or size starts the list over; when nothing new is
+  reachable the roster stays and the note says so (`exhausted`). "Forge
+  the rest" still fills empty slots holding everyone present.
+
 - **Suggestion pools** go through `suggest_pool()`: viability exclusions
   (Dagger Pair / Deathgivers at 7+, Double Bladed at 10+, Chillhowl at 10+ —
   evidence-gated, lifted by a canonical large-group build), the style gate,
@@ -138,6 +174,15 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   weapons (E heal >= 6 AND group scale). One healer per five members is a
   MINIMUM on clap, brawl and both hybrids; kite keeps its minima; balanced
   keeps the base band.
+- **Typical role counts** (2026-09-11, `derive_role_counts.py`, standing
+  rule 18): the band carries `typical` for healer / frontline / support —
+  below 10 the content's fitted-comps median (harvest healer row where a
+  content has under 3 comps), at 10+ the declared style's harvest cell per
+  exact size (`balanced` and thin styles read the pooled row). The forge
+  generates a body beyond it only while a minimum only that role can meet
+  is unmet, and never spends a typical slot on a body that leaves such a
+  minimum short. dps is never gated. Sizes the harvest does not reach (21+)
+  carry none.
 - **Role bands per style** (`styles.yaml constraint_overrides`), including the
   clap / clap_kite 7-strong ranged-AoE core at 20 and kite's 5 / 4.
 - **Duplicates**: 1 copy by default; allowances cite real comps. Derived job
