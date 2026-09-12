@@ -129,8 +129,10 @@ class Cell:
         def pick(pool):
             out = []
             for p in pool:
-                if abs(p["size"] - size) > SIZE_WINDOW and not (
-                        size >= 21 and p["size"] >= 21):
+                # killer parties are capped at 20 (one in-game party), so a
+                # 21+ cell BORROWS the 18-20 rosters and says so
+                ref = min(size, 20)
+                if abs(p["size"] - ref) > SIZE_WINDOW:
                     continue
                 if style in IDENTITY_STYLES and size >= 10 \
                         and p["style"] != style:
@@ -142,6 +144,8 @@ class Cell:
             self.rosters, self.split = hold, "holdout"
         else:
             self.rosters, self.split = pick(parties), "all"
+        if size > 20:
+            self.split += ", borrowed 20"
         self.n = len(self.rosters)
         # distinct rosters (guild set + weapon multiset), the audit's unit
         distinct = {}
@@ -166,7 +170,7 @@ class Cell:
         return self.pairs.get(k, 0) >= PAIR_MIN
 
     def nearest(self, party):
-        best, bj = None, -1.0
+        best, bj = None, 0.0
         for p in self.distinct:
             j = _jaccard(party, p["weapons"])
             if j > bj:
@@ -213,6 +217,8 @@ def grade_roster(e, r, cell, rcell, rsrc, declared_style):
                                 "verdict": verdict}
     # --- identity
     ident = e.comp_identity(party, combos, gears)
+    if ident.get("style") is None:
+        ident["style"] = "split" if "split" in (ident.get("label") or "") else "forming"
     kp = e.kill_pressure(party, combos, gears)
     chain = e.fight_chain(party, combos, gears)
     weak_stages = []

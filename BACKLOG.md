@@ -37,16 +37,41 @@ Each is decidable today from evidence already in the repo.
   kite): the profile scales stopper_tank to a minimum of 3 inside a frontline
   cap of 5, and the deadlock guard checks capacity exists, not that it is
   enough. Wider band, lower stopper scale, or a counting guard. (V: 09b,
-  Chains reach past a slot)
+  Chains reach past a slot) Re-measured 2026-09-12: every territory_defense
+  25 cell now forges a full, feasible roster with no filler or held slots
+  (the sweep) — confirm on the page before closing this.
 - **`balanced` and the one-per-five healer minimum**: it keeps the base band
   and forges 3 healers at castle 25; the guild sheet says 4 at 20+ with no
   style attached. (V: 09b, Healers per five)
 - **Role counts past the minimum at 21+**: the typical role count
   (2026-09-11) holds the forge to the evidence through size 20 (healer /
-  frontline / support, per style at 10+); the harvest has no 21+ rows, so
-  castle 25 still forges 6 healers on clap — the scorer's preference, to be
-  graded, not assumed right. A 21+ harvest band closes it. (V: 09b, Tanks
-  and supports)
+  frontline / support, per style at 10+); the harvest has no 21+ rows
+  (killer parties cap at 20), so every 25 cell forges 6 healers on clap
+  and 7 on brawl and kite (castle and territory_defense alike; the
+  2026-09-12 sweep) — the scorer's preference, to be graded, not assumed
+  right. A 21+ harvest band or an owner cap closes it. (V: 09b, Tanks
+  and supports; notes/findings/2026-09-12-forge-quality-findings.md)
+- **The forge does not build a kite**: forged FOR kite, the roster reads
+  clap or clap_kite by the engine's own `comp_identity` in 10 of 13 cells
+  (brawl_clap: 0 of 10 read brawl_clap); at blackzone 20 the kite roster
+  shares 14/20 weapons with the clap one. Nothing in the kite rows
+  requires a standoff tool or evade share from the E, so catch tanks plus
+  a ranged bomb line is the scorer's best kite. Candidate mechanisms: a
+  weapon-unit floor on a standoff-class row (rule 10), or a kite pool gate
+  on `standoff_e`. Owner call; no weapon rule. (2026-09-12 sweep)
+- **Catch over-stacks in a third of forged comps** (27/72 cells past the
+  soft cap; Grailseeker 10 + Polehammer 8 + Hand of Justice 4 at
+  blackzone 20 clap) while `damage_debuff` / `anti_dive` / `tankiness` are
+  the rows most often under the bare minimum. Whether four catch tanks in
+  a clap is a comp the owner would call decides if `overstack_max` or the
+  catch-tank E derivation moves. (2026-09-12 sweep)
+- **Breadth picks the harvest never fields**: Fists of Avalon is forged
+  into 56 of 60 evidenced 10+ cells and is on at most 11.5% of the
+  rosters in any (zero in 16); Crystal Reaper, Weeping Repeater, Great
+  Holy, Carrioncaller, Kingmaker, Grailseeker follow. Its sheet carries
+  fifteen nonzero rows. Route: the magnitude review queue, E-first;
+  then the "breadth over depth" question if the sheets survive.
+  (2026-09-12 sweep)
 - **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
   4): a typical only bars bodies beyond it; the shortfall is a support
   demand question (which support capabilities the 20-man rows under-ask
@@ -232,6 +257,15 @@ Each is decidable today from evidence already in the repo.
   what `sample_parties.py` already harvests with party structure and gear.
   Re-derive both artifacts from `party_rosters.json.gz`, retire the two older
   samplers and their caches, and the overnight task feeds everything.
+- **The forge returns a local optimum**: in 25 of 72 sweep cells a
+  refresh alternative (`forge(avoid=)`) OUTSCORES the button's roster
+  (median 0.15% of comp_score, max 0.62%); the probe at blackzone 20 clap
+  is a one-weapon swap plus another member's combo — invisible to 1-opt,
+  missed by the bounded 2-opt (worst 4 x top 12). A closing pass that
+  re-resolves every generated slot's combo and kit under the final
+  roster, or a wider 2-opt, both ports, parity. Measure with
+  `py -3 pipeline/audit_forge_quality.py` (deterministic; diff the
+  summary board). (2026-09-12 sweep)
 - **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
   open with "KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md)" about the
   unit defect resolved 2026-08-29. Fix on the next engine touch (the JS
