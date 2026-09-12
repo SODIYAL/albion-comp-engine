@@ -329,7 +329,7 @@ HEAD (`--base` for another revision). Review the report, then commit.
   ends with an event-coverage line and a request-miss tally; sequential
   baseline 0.987), against the OFFICIAL gameinfo API, whose `GroupMembers`
   carries the killer's party at kill time with gear → `out/party_cache/`
-  and `out/party_rosters.json`. This is the kit-doctrine and style × size
+  and `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
   derive_party_styles -> derive_meta_prior -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
   (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
@@ -368,7 +368,7 @@ accumulated windows: the cache spans balance patches; slice by
   ports). The albionbb kill events carry `Equipment.MainHand` + `Mount`
   only, so worn kits are NOT harvestable from that endpoint — they come
   from the official API's `GroupMembers` via `sample_parties.py`
-  (`out/party_rosters.json`, 2026-09-01 onward), which is what the kit
+  (`out/party_rosters.json.gz`, 2026-09-01 onward), which is what the kit
   doctrine reads today, beside the published/reference builds.
 - ~~Usage sample is small (24 battles)~~ — superseded 2026-08-13 by
   `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
@@ -474,7 +474,7 @@ reads it after the content row for a declared style at 10+. Explicit step:
 Owner ruling ("sure" to one harvest prior replacing both hand lists):
 the seven-weapon hand-set `meta_prior` in `templates/scoring.yaml` and
 the viability `core` list in `templates/composition.yaml` are retired.
-`derive_meta_prior.py` reads the COMMITTED `out/party_rosters.json` and
+`derive_meta_prior.py` reads the COMMITTED `out/party_rosters.json.gz` and
 writes `out/meta_prior.json`: per engine size bucket (party 2-5 small,
 6-15 mid, 16+ large — `Engine.size_bucket`'s axis, mirrored by
 `bucket_of()` and pinned equal in golden T46), a weapon's share of the
@@ -501,7 +501,7 @@ standoff tool must move nothing.
 
 ## Party styles and style cells (2026-09-08)
 
-`derive_party_styles.py` reads the COMMITTED `out/party_rosters.json`,
+`derive_party_styles.py` reads the COMMITTED `out/party_rosters.json.gz`,
 labels every killer party of 10+ with `Engine.comp_identity` on its
 weapons alone (naked matched the audit's dressed read 19/20 in blind round
 4; the committed artifact carries no member kits), and writes

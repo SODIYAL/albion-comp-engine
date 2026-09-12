@@ -284,11 +284,14 @@ def main():
     print("labels:", dict(sorted(label_counts.items())))
 
     # ---- 2+3. per (size, style): dressed supply + structure
+    # EVERY roster is measured (2026-09-11): the pooled `balanced` cell
+    # (owner 2026-09-10) reads labelled and unlabelled rosters alike, and a
+    # roster's dressed supply does not depend on a style label - an
+    # unlabelled roster is dressed under `balanced`. The style cells still
+    # take labelled rosters only (the filter below matches on r["style"]).
     groups = {}
     for r in rosters:
-        if not r["style"]:
-            continue
-        groups.setdefault((r["size"], r["style"]), []).append(r)
+        groups.setdefault((r["size"], r["style"] or "balanced"), []).append(r)
     e = Engine(content=CONTENT_FOR_SUPPLY, size=20)
     for (size, style), rs in sorted(groups.items()):
         e.set_content(CONTENT_FOR_SUPPLY, size, style)

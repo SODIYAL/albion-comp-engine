@@ -54,6 +54,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 from engine import Engine  # noqa: E402
+sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+import rosters_io  # noqa: E402
+
+
+def _rosters():
+    """The committed killer-party artifact (gzipped since 2026-09-11)."""
+    return rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
 
 # Evidence-band slack (2026-09-09): the engine ranks on the INTEGER counts
 # the dataset ships (rounded player-weighted votes plus reference-build
@@ -68,6 +75,37 @@ from engine import Engine  # noqa: E402
 # often as the modal — is unchanged; a wider gap is a real bad pick.
 def band_slack(modal_votes):
     return min(3.0, max(1.0, 0.05 * modal_votes))
+
+
+def _doctrine_count(e, w, slot, gid):
+    """The engine's own merged count for an item in a weapon's doctrine
+    row at the engine's band - killboard votes plus curated reference
+    sightings, the evidence it actually ranked on (2026-09-11: Bedrock's
+    gang Keeper helmet read 18 to the engine, two curated sightings on
+    16.0 killboard votes, a fifth of a vote under the audit's slack)."""
+    seat = e.kit_options(w).get("seat")
+    if not seat:
+        return 0
+    band = e._seat_kit(e.roles[seat])
+    rows = ((band.get("kit_weapon") or {}).get(w) or {}).get(slot) or []
+    return next((r[1] for r in rows if r[0] == gid), 0)
+
+
+def _chest_admissible(e, w, gid):
+    """May the doctrine serve this chest to this weapon? The chest pool
+    hard-gates to the seat's uniform (R19) plus the weapon's ADMITTED
+    observed class (R26, >= 35 voters at >= 25%); a killboard modal outside
+    that set is excluded by owner rule, not by a bad pick (2026-09-11:
+    Spear's gang Mage Robe majority on 13 voters, below the extension)."""
+    seat = e.kit_options(w).get("seat")
+    if not seat or gid not in e.gear:
+        return True
+    rec = e.roles[seat]
+    band = e._seat_kit(rec)
+    classes = set((rec.get("uniform") or {}).get("chest") or [])
+    ext = (band.get("kit_weapon_uniform") or {}).get(w) or []
+    classes |= set(ext if isinstance(ext, list) else (ext.get("classes") or []))
+    return not classes or e.gear[gid].get("gear_class") in classes
 
 RESULTS = []
 
@@ -830,9 +868,7 @@ def t_kit_audit_agreement():
     import json as _json, random as _random
     from collections import Counter as _Counter
     e = Engine(content="territory_defense", size=20)
-    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
-                                       "party_rosters.json"),
-                          encoding="utf-8"))
+    doc = _rosters()
     by_w = {}
     # ONE PLAYER, ONE VOTE (2026-09-04): the audit counts in the miner's
     # unit — a player's builds on a weapon share one vote — so the modal
@@ -873,7 +909,8 @@ def t_kit_audit_agreement():
                 c[key] += gd["_w"]
                 who.setdefault(key, set()).add(gd["_p"])
             n = sum(c.values())
-            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            items = [(k, x) for k, x in c.most_common() if k != "-"
+                     and (slot != "armor" or _chest_admissible(e, w, k))]
             if not items or items[0][0] not in e.gear:
                 continue
             modal, mn = items[0]
@@ -883,7 +920,8 @@ def t_kit_audit_agreement():
             total += 1
             if eng == modal:
                 agree += 1
-            elif c.get(eng, 0) < 0.5 * mn - band_slack(mn):
+            elif max(c.get(eng, 0), _doctrine_count(e, w, slot, eng)) \
+                    < 0.5 * mn - band_slack(mn):
                 bad += 1
                 detail.append(f"{w}:{slot}:{eng}<{modal}")
     check("R24 kit audit: forge kits match the killboard modal item in "
@@ -933,7 +971,8 @@ def t_kit_audit_agreement():
                 c[key] += 1.0 / per_s[(w, r.get("player"))]
                 who.setdefault(key, set()).add(r.get("player"))
             n = sum(c.values())
-            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            items = [(k, x) for k, x in c.most_common() if k != "-"
+                     and (slot != "armor" or _chest_admissible(es, w, k))]
             if not items or items[0][0] not in es.gear:
                 continue
             modal, mn = items[0]
@@ -943,7 +982,8 @@ def t_kit_audit_agreement():
             total_s += 1
             if eng == modal:
                 agree_s += 1
-            elif c.get(eng, 0) < 0.5 * mn - band_slack(mn):
+            elif max(c.get(eng, 0), _doctrine_count(es, w, slot, eng)) \
+                    < 0.5 * mn - band_slack(mn):
                 bad_s += 1
                 detail_s.append(f"{w}:{slot}:{eng}<{modal}")
     check("R24b styled kit audit: under a declared clap the forge kit "
@@ -1039,9 +1079,7 @@ def t_one_player_one_vote():
     # front Morgana and Fey cannot even enter the tier on one voter.
     import json as _json
     from collections import Counter as _Counter, defaultdict as _dd
-    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
-                                       "party_rosters.json"),
-                          encoding="utf-8"))
+    doc = _rosters()
     builds = doc.get("builds") or []
     keyed = all(b.get("player") for b in builds)
     e = Engine(content="territory_defense", size=20)
@@ -1137,9 +1175,7 @@ def t_doctrine_bands():
     ships = bool(seats_kit) and len(banded) == len(seats_kit)
     reads = (e7._seat_kit(banded[0]) is banded[0]["kit_bands"]["gang"]
              and e20._seat_kit(banded[0]) is banded[0]) if banded else False
-    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
-                                       "party_rosters.json"),
-                          encoding="utf-8"))
+    doc = _rosters()
     by_w = _dd(list)
     for b in doc.get("builds") or []:
         if 4 <= (b.get("party_size") or 0) <= 9 and b.get("weapon") in e7.weapons:
@@ -1168,13 +1204,18 @@ def t_doctrine_bands():
                     who.setdefault(key, set()).add(b["player"])
             if not votes:
                 continue
-            modal, mv = votes.most_common(1)[0]
+            ranked = [(k, x) for k, x in votes.most_common()
+                      if sl != "armor" or _chest_admissible(e7, w, k)]
+            if not ranked:
+                continue
+            modal, mv = ranked[0]
             if modal not in e7.gear or not kit.get(sl):
                 continue
             if len(who.get(modal) or ()) < 5:
                 continue      # a thin modal is pooled, not matched (2026-09-08)
             tot += 1
-            if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv - band_slack(mv):
+            evid = max(votes.get(kit[sl], 0), _doctrine_count(e7, w, sl, kit[sl]))
+            if kit[sl] == modal or evid >= 0.5 * mv - band_slack(mv):
                 agree += 1
             else:
                 bad += 1
@@ -1414,8 +1455,7 @@ def t_party_link():
         _json.dump(rec, f)
     sp.CACHE, sp.OUT = cache, tmp
     sp.analyze({"2H_LONGBOW", "MAIN_MACE"})
-    out = _json.load(open(os.path.join(tmp, "party_rosters.json"),
-                          encoding="utf-8"))
+    out = rosters_io.load(rosters_io.path(tmp))
     by_w = {b["weapon"]: b for b in out["builds"]}
     idx = {tuple(p["weapons"])[0]: p.get("index") for p in out["parties"]}
     check("R31b analyzer stamps `index` on parties and `party` on builds "
@@ -1454,7 +1494,7 @@ def t_party_styles():
           and out["_min_size"] == 10,
           f"rows={ {k: v['style'] for k, v in rows.items()} }")
     ps_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
-    pr_path = os.path.join(ROOT, "pipeline", "out", "party_rosters.json")
+    pr_path = rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
     have = os.path.exists(ps_path)
     live = (_json.load(open(ps_path, encoding="utf-8")) if have else {})
     check("R32b committed party_styles.json matches the committed artifact "

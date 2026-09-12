@@ -1316,26 +1316,46 @@ def run():
     #     NOT stack on them: clap's burst_aoe target equals the row x
     #     size/ref exactly, not x1.71;
     # (c) a soft-cap-only row (p10 = 0) keeps the CONTENT target;
-    # (d) `balanced` and any size below min_size read no band; hard
-    #     floors and weights are untouched by the band.
+    # (d) `balanced` at 10+ reads the POOLED cell — every winning roster at
+    #     the size, whatever it was playing (owner 2026-09-10, target is
+    #     the median; re-pinned 2026-09-11 when the pooled cell first
+    #     existed: the audit had crashed on unlabelled rosters before) —
+    #     exactly, row x size/ref; any size below min_size reads no band;
+    #     hard floors and weights are untouched by any band. The CONTENT
+    #     comparisons below use a bands-free balanced engine (e37c) so
+    #     their meaning survives balanced becoming band-backed.
+    import json as _json37, tempfile as _tf37
     e37 = Engine(content="territory_defense", size=20, style="clap")
     e37b = Engine(content="territory_defense", size=20, style="brawl")
     e37z = Engine(content="territory_defense", size=20, style="balanced")
     e37s = Engine(content="territory_defense", size=7, style="clap")
+    d37 = _json37.loads(_json37.dumps(e37.data))
+    d37.pop("style_bands", None)
+    tmp37 = os.path.join(_tf37.gettempdir(), "bion_t37_content_only.json")
+    with open(tmp37, "w", encoding="utf-8") as fh37:
+        _json37.dump(d37, fh37)
+    e37c = Engine(dataset_path=tmp37, content="territory_defense", size=20,
+                  style="balanced")           # the content row, no band
     bands37 = e37.data.get("style_bands") or {}
     row37 = (bands37.get("bands") or {}).get("clap", {}).get("20") or {}
     reqs37 = row37.get("requirements") or {}
     ba = reqs37.get("burst_aoe") or {}
+    pooled37 = (bands37.get("bands") or {}).get("balanced", {}).get("20") or {}
+    pba = (pooled37.get("requirements") or {}).get("burst_aoe") or {}
+    pref37 = float(pooled37.get("ref_size") or 20)
     band_ok = (e37.band_key == "20" and e37b.band_key == "20"
-               and e37z.band_key is None and e37s.band_key is None
-               and e37.target("burst_aoe") > e37z.target("burst_aoe")
+               and e37z.band_key == "20" and e37s.band_key is None
+               and e37c.band_key is None
+               and pba.get("target") is not None
+               and abs(e37z.target("burst_aoe") - pba["target"] * 20 / pref37) < 1e-9
+               and e37.target("burst_aoe") > e37c.target("burst_aoe")
                and e37.target("burst_aoe") > e37b.target("burst_aoe")
                and e37b.target("tankiness") > e37.target("tankiness")
                # the movement four are IN (exclusion lifted 2026-09-04
                # once measured): their band targets sit above the content
                # row's outlier minimums (disengage 1.8x, the others 2-7x)
                and all(reqs37.get(c, {}).get("target") is not None
-                       and e37.target(c) > e37z.target(c)
+                       and e37.target(c) > e37c.target(c)
                        for c in ("engage", "mobility", "knockback_displace",
                                  "disengage")))
     ref37 = float(row37.get("ref_size") or 20)
@@ -1343,22 +1363,25 @@ def run():
                 and abs(e37.target("burst_aoe") - ba["target"] * 20 / ref37) < 1e-9
                 and abs(e37.soft_cap("burst_aoe") - ba["soft_cap"] * 20 / ref37) < 1e-9)
     soft_only = [c for c, v in reqs37.items() if v.get("target") is None
-                 and c in e37z._targets]
-    soft_ok = all(abs(e37.target(c) - e37z.target(c) * e37.target_mults.get(c, 1.0)) < 1e-9
+                 and c in e37c._targets]
+    soft_ok = all(abs(e37.target(c) - e37c.target(c) * e37.target_mults.get(c, 1.0)) < 1e-9
                   for c in soft_only) and bool(soft_only)
-    floors_ok = (e37.floors == e37z.floors
-                 and e37._floors_eff == e37z._floors_eff
-                 and all(abs(e37.weight(c) - e37z.weight(c) * e37.style_mults.get(c, 1.0)) < 1e-9
-                         for c in e37.reqs))
+    floors_ok = (e37.floors == e37c.floors and e37z.floors == e37c.floors
+                 and e37._floors_eff == e37c._floors_eff
+                 and all(abs(e37.weight(c) - e37c.weight(c) * e37.style_mults.get(c, 1.0)) < 1e-9
+                         for c in e37.reqs)
+                 and all(abs(e37z.weight(c) - e37c.weight(c)) < 1e-9
+                         for c in e37z.reqs))
     check("T37 style x size rows (owner 2026-09-04): a declared style at 10+ "
           "reads its harvest band after the content row; rows are per-style "
           "so target_mults never stack; soft-only rows keep the content "
-          "target; the movement four are in; balanced / under-10 / floors / "
-          "weights untouched",
+          "target; the movement four are in; balanced reads the POOLED cell "
+          "exactly (owner 2026-09-10); under-10 / floors / weights untouched",
           band_ok and no_stack and soft_ok and floors_ok,
           f"band={band_ok} no_stack={no_stack} soft_only={soft_ok} ({len(soft_only)} caps) "
           f"floors={floors_ok} clap@20 burst_aoe={e37.target('burst_aoe'):.1f} "
-          f"balanced={e37z.target('burst_aoe'):.1f} brawl={e37b.target('burst_aoe'):.1f}")
+          f"pooled={e37z.target('burst_aoe'):.1f} content={e37c.target('burst_aoe'):.1f} "
+          f"brawl={e37b.target('burst_aoe'):.1f}")
 
     # T38 — THE FIXTURES ARE JUDGED DRESSED (owner 2026-09-04, "go ahead with
     # your recommendation"): the style x size rows are measured on dressed

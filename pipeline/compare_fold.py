@@ -25,8 +25,11 @@ import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+sys.path.insert(0, HERE)
+import rosters_io  # noqa: E402  (the gzipped killer-party artifact)
+
 ARTIFACTS = {
-    "rosters": "pipeline/out/party_rosters.json",
+    "rosters": "pipeline/out/party_rosters.json.gz",
     "dataset": "pipeline/out/dataset-latest.json",
     "bands": "pipeline/templates/style_bands.yaml",
     "prior": "pipeline/out/meta_prior.json",
@@ -108,14 +111,22 @@ def main():
     old = {}
     for key, rel in ARTIFACTS.items():
         dest = os.path.join(tmp, os.path.basename(rel))
-        git_show(args.base, rel, dest)
+        try:
+            git_show(args.base, rel, dest)
+        except subprocess.CalledProcessError:
+            if key != "rosters":
+                raise
+            # the previous fold predates the gzipped artifact (2026-09-11)
+            rel = rel[:-3]
+            dest = os.path.join(tmp, os.path.basename(rel))
+            git_show(args.base, rel, dest)
         old[key] = dest
     new = {key: os.path.join(ROOT, rel) for key, rel in ARTIFACTS.items()}
 
     lines = [f"# Fold report {stamp} - working tree vs `{args.base}`", ""]
 
     # ---- corpus ----
-    ro, rn = load_json(old["rosters"]), load_json(new["rosters"])
+    ro, rn = rosters_io.load(old["rosters"]), rosters_io.load(new["rosters"])
     so, sn = ro["summary"], rn["summary"]
     lines += ["## Corpus", "",
               "| unit | before | after |", "|---|---|---|"]

@@ -31,3 +31,5 @@ pipeline/out/roster_cache/
 pipeline/out/party_cache/
 pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
+# the plain artifact is history: the harvest writes party_rosters.json.gz (2026-09-11)
+pipeline/out/party_rosters.json

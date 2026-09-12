@@ -44,6 +44,7 @@ import fetch_gear_lines as _gear_mod  # noqa: E402
 import fetch_item_stats as _stats_mod  # noqa: E402
 import parse_dumps as _parse_mod  # noqa: E402
 
+import rosters_io  # noqa: E402  (the gzipped killer-party artifact)
 # Every game-data input the release artifacts consume, and the adapter
 # version the CURRENT code would produce it with. verify_derived() fails the
 # release if any file is missing, hash-drifted, version-stale, or from a
@@ -1396,7 +1397,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
 
     2026-09-01 (owner: 'add seats for different gear too and base it on
     seen evidence from the data we harvested from all the battles'):
-    the KILLBOARD harvest (out/party_rosters.json builds — real fielded
+    the KILLBOARD harvest (out/party_rosters.json.gz builds — real fielded
     kits at kill time, ids pre-normalized to the catalog key space)
     joins the mining as a SECOND evidence stream. Provenance stays
     separate (rows carry a `kb` count and a killboard source token) and
@@ -1442,10 +1443,9 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                       if c in band_cfg["curated"]}
     kb_by_weapon, kb_armour = {}, {}
     cell_voters = {}   # style cells: weapon -> distinct players in the cell
-    kb_path = os.path.join(OUT, "party_rosters.json")
+    kb_path = rosters_io.path(OUT)
     if os.path.exists(kb_path):
-        with open(kb_path, encoding="utf-8") as f:
-            kb_doc = json.load(f) or {}
+        kb_doc = rosters_io.load(kb_path) or {}
         # PARTY-SIZE FLOOR (2026-09-03, owner: "this grailseeker build is
         # a ganking build not a zvz build"): only builds from KILLER
         # PARTIES of >= KB_MIN_PARTY members are group doctrine — the
@@ -1996,11 +1996,10 @@ def mine_carrier_quotas(gear, effect_map):
     kits always score. Buckets follow the harvest's own size floor:
     nothing under 20 players is sampled, so 20-59 is the nearest bucket
     for every smaller party and the engine says so."""
-    kb_path = os.path.join(OUT, "party_rosters.json")
+    kb_path = rosters_io.path(OUT)
     if not os.path.exists(kb_path) or not effect_map:
         return {}
-    with open(kb_path, encoding="utf-8") as f:
-        doc = json.load(f) or {}
+    doc = rosters_io.load(kb_path) or {}
     size_of = {b.get("battle"): (b.get("total_players") or 0)
                for b in (doc.get("battles") or [])}
     buckets = {"20-59": {"builds": 0, "wearers": {}},
@@ -2061,11 +2060,10 @@ def apply_roles(weapons, gear):
         with open(ps_path, encoding="utf-8") as f:
             ps_doc = json.load(f) or {}
         want = (ps_doc.get("_source") or {}).get("party_rosters_sha256")
-        with open(os.path.join(OUT, "party_rosters.json"), "rb") as f:
-            have = hashlib.sha256(f.read()).hexdigest()
+        have = rosters_io.sha256(rosters_io.path(OUT))
         if want != have:
             problems.append("party_styles.json was derived from a different "
-                            "party_rosters.json — rerun derive_party_styles.py")
+                            "party_rosters.json.gz — rerun derive_party_styles.py")
         else:
             party_styles = {(r["battle"], r["index"]): r.get("style")
                             for r in ps_doc.get("parties") or []
@@ -2359,7 +2357,7 @@ META_PRIOR_PATH = os.path.join(OUT, "meta_prior.json")
 def load_meta_prior(known_weapons):
     """The GENERATED, size-bucketed meta prior (derive_meta_prior.py ->
     out/meta_prior.json; owner ruling 2026-09-08). Fail closed, loudly: a
-    missing file, a file derived from a different party_rosters.json than
+    missing file, a file derived from a different party_rosters.json.gz than
     the one on disk, or a malformed bucket map blocks the build. Rows for
     weapons the dataset does not carry are dropped; every kept value is in
     (0, 1]. The engine detects the bucketed shape by its keys and reads it
@@ -2372,11 +2370,10 @@ def load_meta_prior(known_weapons):
     with open(META_PRIOR_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
     want = (doc.get("_source") or {}).get("party_rosters_sha256")
-    with open(os.path.join(OUT, "party_rosters.json"), "rb") as f:
-        have = hashlib.sha256(f.read()).hexdigest()
+    have = rosters_io.sha256(rosters_io.path(OUT))
     if want != have:
         sys.exit("out/meta_prior.json was derived from a different "
-                 "party_rosters.json — rerun derive_meta_prior.py")
+                 "party_rosters.json.gz — rerun derive_meta_prior.py")
     prior = doc.get("meta_prior") or {}
     if not prior or set(prior) - {"small", "mid", "large"}:
         sys.exit("out/meta_prior.json: meta_prior must be bucketed "

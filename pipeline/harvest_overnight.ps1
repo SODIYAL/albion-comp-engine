@@ -23,7 +23,7 @@
 # 502s are the API, 429s mean lower --workers.
 #
 # It does NOT rebuild the dataset or commit: the harvest lands in
-# pipeline/out/party_cache/ (gitignored) and pipeline/out/party_rosters.json;
+# pipeline/out/party_cache/ (gitignored) and pipeline/out/party_rosters.json.gz;
 # rebuilding, the gate list and the audit stay a reviewed, in-session step
 # (pipeline/README.md, CLAUDE.md "Kits are what winners wear").
 #
@@ -59,7 +59,7 @@
 #   Unregister-ScheduledTask -TaskName "CompForge focused harvest" -Confirm:$false
 # The cache keeps everything ever fetched and the analysis reads all of it,
 # so a focused night ADDS small-fight parties to the corpus; it never
-# narrows what party_rosters.json is derived from.
+# narrows what party_rosters.json.gz is derived from.
 
 param(
     [int]$MinPlayers = 0,   # >0 with MaxPlayers: one banded pass

@@ -1,7 +1,7 @@
 """Party style labels from the COMMITTED harvest artifact.
 
 Spec: notes/specs/2026-09-08-coherent-style-kits-design.md, section 2.
-Every killer party of MIN_SIZE+ members in out/party_rosters.json gets the
+Every killer party of MIN_SIZE+ members in out/party_rosters.json.gz gets the
 engine's WEAPONS-ONLY identity (Engine.comp_identity — the same label the
 blind rounds grade; naked matched the audit's dressed read 19/20 in round
 4). The dressed label would need member kits the committed artifact does
@@ -18,13 +18,16 @@ recorded artifact hash does not match the artifact on disk.
 """
 import datetime
 import hashlib
+
 import json
 import os
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rosters_io  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
-ARTIFACT = os.path.join(OUT, "party_rosters.json")
+ARTIFACT = rosters_io.path(OUT)
 TARGET = os.path.join(OUT, "party_styles.json")
 CONTENT = "territory_defense"   # identity is content-blind; the audit's choice
 MIN_SIZE = 10                   # the group band's party floor (KB_MIN_PARTY)
@@ -35,8 +38,7 @@ import party_link  # noqa: E402
 
 
 def sha256_of(path):
-    with open(path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
+    return rosters_io.sha256(path)   # the stored (compressed) bytes
 
 
 def derive(doc, engine_factory):
@@ -70,11 +72,10 @@ def derive(doc, engine_factory):
 
 def main():
     if not os.path.exists(ARTIFACT):
-        sys.exit("no out/party_rosters.json — run sample_parties.py first")
+        sys.exit("no out/party_rosters.json.gz — run sample_parties.py first")
     sys.path.insert(0, os.path.join(os.path.dirname(HERE), "engine"))
     from engine import Engine  # noqa: E402
-    with open(ARTIFACT, encoding="utf-8") as f:
-        doc = json.load(f)
+    doc = rosters_io.load(ARTIFACT)
     out = derive(doc, lambda size: Engine(content=CONTENT, size=size))
     out["_generated"] = datetime.date.today().isoformat()
     out["_source"]["party_rosters_sha256"] = sha256_of(ARTIFACT)

@@ -83,6 +83,9 @@ import time
 import urllib.error
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rosters_io  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 CACHE = os.path.join(OUT, "party_cache")
@@ -504,9 +507,8 @@ def analyze(known):
                 [len(battles) // 2] if battles else None),
         },
     }
-    path = os.path.join(OUT, "party_rosters.json")
-    with open(path, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(out, f, indent=1, sort_keys=True)
+    path = rosters_io.path(OUT)
+    rosters_io.dump(out, path)      # gzipped, deterministic (2026-09-11)
     s = out["summary"]
     print(f"\n{s['battles']} battles, {s['parties']} distinct parties "
           f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "
@@ -515,7 +517,7 @@ def analyze(known):
     print(f"{s['builds']} observed BUILDS ({s['builds_full_kit']} with 6+ "
           f"equipment slots), armour evidence on "
           f"{s['weapons_with_armour_evidence']} weapons")
-    print(f"wrote out/party_rosters.json")
+    print(f"wrote out/{rosters_io.NAME}")
 
 
 def main():

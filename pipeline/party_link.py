@@ -1,5 +1,5 @@
 """Build -> party linkage over the committed harvest artifact
-(out/party_rosters.json). Spec: notes/specs/2026-09-08-coherent-style-
+(out/party_rosters.json.gz). Spec: notes/specs/2026-09-08-coherent-style-
 kits-design.md, section 2 "Linkage".
 
 Two link paths, exact first, never a guess:

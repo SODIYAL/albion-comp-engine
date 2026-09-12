@@ -339,7 +339,7 @@ check("H16 the evidence gate ran (exclusion_gate list present, currently "
 # ---- H.18 the meta prior is GENERATED from the harvest, never hand-set ----------
 # Owner ruling 2026-09-08 ("sure" to one harvest prior replacing both hand
 # lists): scoring.meta_prior is the size-bucketed map derive_meta_prior.py
-# wrote from the COMMITTED party_rosters.json (hash-gated), scoring.yaml and
+# wrote from the COMMITTED party_rosters.json.gz (hash-gated), scoring.yaml and
 # MASTERSHEET carry no hand-set map, composition.yaml's viability core list is
 # empty, and the dataset embeds the aggregate only — never raw observations.
 import hashlib as _hl
@@ -348,10 +348,11 @@ scoring_yaml = yaml.safe_load(open(os.path.join(
     PIPELINE, "templates", "scoring.yaml"), encoding="utf-8"))
 prior_doc = load_json(os.path.join(OUT, "meta_prior.json"))
 mp = sc.get("meta_prior") or {}
-with open(os.path.join(OUT, "party_rosters.json"), "rb") as _f:
-    _rosters_sha = _hl.sha256(_f.read()).hexdigest()
+sys.path.insert(0, PIPELINE)
+import rosters_io  # noqa: E402
+_rosters_sha = rosters_io.sha256(rosters_io.path(OUT))
 check("H18 the scoring meta prior is the GENERATED bucketed harvest prior "
-      "(out/meta_prior.json, hash-gated to the committed party_rosters.json); "
+      "(out/meta_prior.json, hash-gated to the committed party_rosters.json.gz); "
       "scoring.yaml carries no hand-set map; every value in (0, 1] with the "
       "bucket's top weapon at 1.0",
       set(mp) == {"small", "mid", "large"}

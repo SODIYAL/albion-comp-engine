@@ -4,7 +4,7 @@ Owner ruling 2026-09-08 ("sure" to "one harvest prior replacing both hand
 lists, tiebreak-sized, capped at the current 0.15"): the seven-weapon
 hand-set `meta_prior` in templates/scoring.yaml and the hand-listed
 viability `core` in templates/composition.yaml are retired. In their place
-this script reads the committed killer-party artifact (out/party_rosters.json
+this script reads the committed killer-party artifact (out/party_rosters.json.gz
 -- the killer's party at kill time, winner-biased by construction) and
 writes out/meta_prior.json, which build_dataset attaches to the dataset's
 `scoring.meta_prior` (hash-gated to the artifact it was derived from; a
@@ -35,13 +35,16 @@ refresh. Order: sample_parties -> audit_style_rosters -> derive_style_bands
 """
 import datetime
 import hashlib
+
 import json
 import os
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rosters_io  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
-ARTIFACT = os.path.join(OUT, "party_rosters.json")
+ARTIFACT = rosters_io.path(OUT)
 TARGET = os.path.join(OUT, "meta_prior.json")
 BUCKETS = ("small", "mid", "large")
 K = 8.0            # shrinkage mass in PLAYERS (build_meta_prior's k; PROVISIONAL)
@@ -93,15 +96,13 @@ def derive(doc, k=K, min_prior=MIN_PRIOR):
 
 
 def sha256_of(path):
-    with open(path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
+    return rosters_io.sha256(path)   # the stored (compressed) bytes
 
 
 def main():
     if not os.path.exists(ARTIFACT):
-        sys.exit("no out/party_rosters.json -- run sample_parties.py first")
-    with open(ARTIFACT, encoding="utf-8") as f:
-        doc = json.load(f)
+        sys.exit("no out/party_rosters.json.gz -- run sample_parties.py first")
+    doc = rosters_io.load(ARTIFACT)
     out = derive(doc)
     out["_generated"] = datetime.date.today().isoformat()
     out["_source"]["party_rosters_sha256"] = sha256_of(ARTIFACT)

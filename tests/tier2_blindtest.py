@@ -709,12 +709,13 @@ def v4h(args):
     NOT A GATE. Prints beside v4 so the two can be compared; promotion to a
     gate is an owner decision once the holdout split is honoured end to end.
     """
-    rosters_path = os.path.join(ROOT, "pipeline", "out", "party_rosters.json")
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import rosters_io
+    rosters_path = rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
     styles_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
     if not os.path.exists(rosters_path):
         sys.exit(f"{rosters_path} missing — run the harvest fold first")
-    with open(rosters_path, encoding="utf-8") as f:
-        doc = json.load(f)
+    doc = rosters_io.load(rosters_path)
     styles = {}
     if os.path.exists(styles_path):
         with open(styles_path, encoding="utf-8") as f:

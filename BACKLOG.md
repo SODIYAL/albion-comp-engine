@@ -21,7 +21,7 @@ Each is decidable today from evidence already in the repo.
   semantic call: rule it (a fourth castle-outpost comp would settle it), or
   raise the content `min` for resist_shred by hand. (V: 09b, Target is the
   median; T25b)
-- **Repo size: `pipeline/out/party_rosters.json` is 52 MB and committed**,
+- **Repo size: `pipeline/out/party_rosters.json.gz` is 52 MB and committed**,
   growing with every fold (it was 83 KB on 2026-08-29, 4.4 MB the same day
   once builds joined). The split proposed then: commit the aggregates,
   gitignore the raw `builds` array beside the other caches. Not done because
@@ -216,7 +216,7 @@ Each is decidable today from evidence already in the repo.
   cohort families) and `sample_rosters.py` (`roster_cache/` ->
   `roster_mixes.json`, the need-profile evidence) are strictly weaker views of
   what `sample_parties.py` already harvests with party structure and gear.
-  Re-derive both artifacts from `party_rosters.json`, retire the two older
+  Re-derive both artifacts from `party_rosters.json.gz`, retire the two older
   samplers and their caches, and the overnight task feeds everything.
 - **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
   open with "KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md)" about the
@@ -228,3 +228,5 @@ Each is decidable today from evidence already in the repo.
 Slot locks / constrained reforge; saved player profiles; enemy-comp counter
 drafting; fight-plan generation; the blind-validation workflow as a tool;
 the companion loot module (COMPANION_SCOPE.md, proposal only).
+
+- **Back up the raw battle cache off this machine** (2026-09-11): `pipeline/out/party_cache/` is 157 MB of kill events, gitignored, the only copy of the harvest's evidence. A storage bucket (the owner mentioned Supabase) as a nightly upload target after each harvest — a BACKUP, never a build input, so CI and provenance stay as they are; a fresh machine pulls it down and re-derives. Not the committed artifact: that is 5 MB gzipped now.

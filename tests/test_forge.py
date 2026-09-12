@@ -286,15 +286,41 @@ def t_exclusions():
 
 # ---------------------------------------------------------- F7 floor clamp
 def t_floor_clamp():
-    e = Engine(content="territory_defense", size=10)
-    t = e.target("heal_sustain")             # 6.7 * 10/20 = 3.35
+    # Below the band's min_size the content row scales with size and sits
+    # under territory's 4.2-unit absolute heal floor, so the floor clamps
+    # to the target it guards (2026-08-18). Re-pinned 2026-09-11 at size 9:
+    # at 10+ `balanced` now reads the POOLED harvest cell (owner
+    # 2026-09-10) and the median heal_sustain of every winner at 10-14 sits
+    # ABOVE the raw floor, which is the other branch — the floor stays raw.
+    # The floor arms at 10, where balanced now reads the pooled cell; the
+    # clamp is shown on a bands-free copy of the dataset (the content row
+    # scaled to 10 sits under 4.2) and the raw branch on the real one.
+    import json as _j7, tempfile as _t7
+    e_real = Engine(content="territory_defense", size=10)
+    d7 = _j7.loads(_j7.dumps(e_real.data))
+    d7.pop("style_bands", None)
+    tmp7 = os.path.join(_t7.gettempdir(), "bion_f7_content_only.json")
+    with open(tmp7, "w", encoding="utf-8") as fh7:
+        _j7.dump(d7, fh7)
+    e = Engine(dataset_path=tmp7, content="territory_defense", size=10)
+    t = e.target("heal_sustain")             # content row x 10/20, under 4.2
     raw_floor = e.floors["heal_sustain"]["floor_units"]   # 4.2 absolute
     clamped = e._floors_eff["heal_sustain"]
     at_target_ok = not e.floor_armed("heal_sustain", t)
     below_armed = e.floor_armed("heal_sustain", 0.0)
-    check("F7 hard floor clamps to the scaled target",
-          raw_floor > t and clamped == t and at_target_ok and below_armed,
-          f"target {t:.2f}, raw floor {raw_floor}, effective {clamped:.2f}")
+    e10 = e_real
+    t10 = e10.target("heal_sustain")
+    raw_kept = (e10.band_key is not None and t10 > raw_floor
+                and e10._floors_eff["heal_sustain"] == raw_floor
+                and e10.floor_armed("heal_sustain", raw_floor - 0.01)
+                and not e10.floor_armed("heal_sustain", raw_floor))
+    check("F7 hard floor clamps to the scaled target below it, and stays raw "
+          "under a harvest target above it",
+          raw_floor > t and clamped == t and at_target_ok and below_armed
+          and raw_kept,
+          f"content-only at 10: target {t:.2f}, raw floor {raw_floor}, effective {clamped:.2f}; "
+          f"pooled at 10: target {t10:.2f}, effective "
+          f"{e10._floors_eff['heal_sustain']:.2f}")
 
 
 # --------------------------------------------------------- F8 size physics
