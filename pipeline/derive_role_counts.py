@@ -47,11 +47,19 @@ slot cannot vote on a count); role per weapon = Engine.role_of (the one
 role read). Reads committed files only; never the raw cache. Explicit step,
 never part of a normal build. Rerun order after a harvest: sample_parties
 -> audit_style_rosters -> derive_style_bands -> derive_party_styles ->
-derive_meta_prior -> derive_role_counts -> build_dataset -> gates.
-build_dataset.py refuses a role_counts.json whose recorded artifact hashes
-do not match the artifacts on disk.
+derive_meta_prior -> derive_role_counts -> derive_skeletons ->
+build_dataset -> gates. build_dataset.py refuses a role_counts.json whose
+recorded artifact hashes do not match the artifacts on disk, or that was
+not derived on the training split.
+
+HOLDOUT (2026-09-15, "honour the holdout split end to end"): the harvest
+rows learn from battles with id % HOLDOUT_MOD != 0 only — the meta prior's
+rule; the % 5 == 0 slice is tier2_blindtest v4h's evaluation set and
+nothing shipped learns from it. The published-comps rows are unaffected.
 
     py -3 pipeline/derive_role_counts.py
+    py -3 pipeline/derive_role_counts.py --all-battles   # AUDIT copy ->
+        # out/role_counts-all-battles.json (gitignored), never shipped
 """
 import datetime
 import glob
@@ -79,9 +87,11 @@ MIN_COMPS = 3       # the content fit's `stat: median` bar
 STYLE_MIN_SIZE = 10
 MIN_SIZE = 2
 WINDOWS = (0, 1, 2)
+HOLDOUT_MOD = 5    # battles with id % 5 == 0 are tier2_blindtest v4h's holdout
 
 sys.path.insert(0, HERE)
 import jsonfmt  # noqa: E402
+from derive_meta_prior import in_split  # noqa: E402  (one split rule)
 
 
 def sha256_of(path):
@@ -121,13 +131,15 @@ def _count_roles(weapons, role_of):
     return counts
 
 
-def derive_harvest(doc, labels, role_of, known):
+def derive_harvest(doc, labels, role_of, known, holdout_mod=HOLDOUT_MOD):
     """`labels` = {(battle, index): style} from party_styles.json."""
     pooled = {}
     styled = {}
     for p in doc.get("parties") or []:
         size = p.get("size") or 0
         if size < MIN_SIZE or (p.get("known_weapons") or 0) < size:
+            continue
+        if not in_split(p.get("battle"), holdout_mod):
             continue
         ws = [w for w in (p.get("weapons") or []) if w in known]
         if len(ws) < size:
@@ -225,14 +237,19 @@ def derive_comps(audit, comps, role_of, known):
     return cells, typ
 
 
-def derive(doc, labels, audit, comps, role_of, known):
+def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD):
     sizes, style_cells, typ_pooled, typ_styles = derive_harvest(
-        doc, labels, role_of, known)
+        doc, labels, role_of, known, holdout_mod)
     comp_cells, typ_comps = derive_comps(audit, comps, role_of, known)
     return {
         "_source": {"party_rosters_sha256": None,
                     "party_styles_sha256": None,
                     "dressed_template_audit_sha256": None},
+        "_split": {"holdout_mod": holdout_mod,
+                   "rule": (f"battle % {holdout_mod} != 0 (training split; "
+                            f"% {holdout_mod} == 0 is the v4h holdout)"
+                            if holdout_mod else
+                            "all battles (AUDIT ONLY, never shipped)")},
         "_unit": ("counts of each role (Engine.role_of) per party; harvest "
                   "rows = fully-known killer parties (known_weapons == "
                   "size), p10/p50/p90 per exact size (pooled) and per "
@@ -288,12 +305,16 @@ def main():
               for r in ps.get("parties") or [] if r.get("style")}
     with open(AUDIT, encoding="utf-8") as f:
         audit = json.load(f)
-    out = derive(doc, labels, audit, load_comps(), e.role_of, set(e.weapons))
+    all_battles = "--all-battles" in sys.argv[1:]
+    out = derive(doc, labels, audit, load_comps(), e.role_of, set(e.weapons),
+                 holdout_mod=None if all_battles else HOLDOUT_MOD)
     out["_generated"] = datetime.date.today().isoformat()
     out["_source"]["party_rosters_sha256"] = sha256_of(ARTIFACT)
     out["_source"]["party_styles_sha256"] = sha256_of(STYLES_ARTIFACT)
     out["_source"]["dressed_template_audit_sha256"] = sha256_of(AUDIT)
-    jsonfmt.dump(out, TARGET)
+    target = (TARGET.replace(".json", "-all-battles.json") if all_battles
+              else TARGET)
+    jsonfmt.dump(out, target)
     t = out["typical"]
     print("  pooled : " + ", ".join(
         f"{s}:" + "/".join(f"{r[0]}{v}" for r, v in row.items())
@@ -306,7 +327,8 @@ def main():
         print(f"  comps {content}: " + ", ".join(
             f"{s}:" + "/".join(f"{r[0]}{v}" for r, v in row.items())
             for s, row in sorted(rows.items(), key=lambda kv: int(kv[0]))))
-    print(f"role counts -> {os.path.relpath(TARGET, HERE)}")
+    print(f"role counts ({out['_split']['rule']}) -> "
+          f"{os.path.relpath(target, HERE)}")
 
 
 if __name__ == "__main__":

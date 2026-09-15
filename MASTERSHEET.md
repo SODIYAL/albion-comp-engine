@@ -122,9 +122,10 @@ same fail-loud promise:
 | Kit-pool and gear-affinity rulings | `pipeline/roles.yaml` `kit_doctrine.overrides`, `gear_affinity_overrides` |
 | Need profiles | `pipeline/roles.yaml` `need_profiles` |
 | Style role bands, healer minima | `pipeline/templates/styles.yaml` `constraint_overrides`, `role_min_per_players` |
-| Viability exclusions, duplicate allowances | `pipeline/templates/composition.yaml` |
+| Viability exclusions, duplicate defaults | `pipeline/templates/composition.yaml` |
 | Style-fit rulings per weapon | `pipeline/style_overrides.yaml` |
-| Style x size rows, meta prior | GENERATED from the harvest — never hand-set |
+| Style x size rows, meta prior, typical role counts | GENERATED from the harvest — never hand-set |
+| Seat skeleton, plan minima (standoff), copy allowances per style x band | GENERATED (`pipeline/derive_skeletons.py` -> `out/skeletons.json`, 2026-09-15) — a hand `per_weapon` list fails the build |
 
 ## Guild-approved builds — `tune:guild_builds`
 

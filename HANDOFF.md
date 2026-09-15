@@ -185,8 +185,37 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   carry none.
 - **Role bands per style** (`styles.yaml constraint_overrides`), including the
   clap / clap_kite 7-strong ranged-AoE core at 20 and kite's 5 / 4.
-- **Duplicates**: 1 copy by default; allowances cite real comps. Derived job
-  groups `clump_core` and `curse_pressure` max 2 each.
+- **Seat skeleton** (owner 2026-09-15, "full autonomy" on the skeleton-first
+  assessment; spec `notes/specs/2026-09-15-skeleton-first-generation-design.md`):
+  `derive_skeletons.py` -> `out/skeletons.json` (training split, distinct
+  rosters) carries per exact size at 10+, pooled and per declared style, the
+  TYPICAL count of every primary seat (`Engine.seat_of`, the first uniformed
+  menu role — the one role read). The forge closes a seat at its typical
+  (rule 18 extended): a body past it generates only for a minimum no
+  under-typical seat of its role could meet (a Great Holy may not take the
+  brawl-healer seat to cover primary_heal while main-healer seats stand
+  open; a flex bomb in the brawler seat may cover the ranged-AoE core the
+  ranged seat's pool cannot), or by SPILL once every seat of the role the
+  pool supplies stands at typical. Refinement and replace-options check the
+  roster a swap would leave (`_seat_mix_ok`), so a move never trades away
+  the seat that justified a spill. No cell for the size = no seat gate.
+- **Plan minima**: the same artifact's `plan` table — the typical count of
+  STANDOFF-tool carriers (`style_fit.standoff_e`, the fact the identity read
+  defines a kiting plan by) per style x size — rides the band as a
+  generation MINIMUM through the flag predicate `standoff` (beside
+  `primary_heal`). Kite and clap_kite winners at 15+ field two or three in
+  every roster; brawl and clap none, so they demand none. The forged kite 20
+  now reads as a kiting plan to the engine's own identity (clap_kite; it
+  read as a strong clap before).
+- **Duplicates**: 1 copy by default; penalty-free copies and the forge cap
+  are GENERATED per style x band (`skeletons.json` copies: free =
+  round(p50), max = ceil(p90) of the rosters fielding the weapon; the
+  declared style's cell laid over the pooled cell) — Hallowfall keeps a free
+  second copy (88% of 20-man winners double it), Bedrock too, Permafrost's
+  stays gone (the owner's ruling of the same morning, reproduced by the
+  evidence), Great Arcane / Rift Glaive / Wailing lose their single-comp
+  allowances. A hand `per_weapon` list fails the build. Derived job groups
+  `clump_core` and `curse_pressure` max 2 each.
 - **Need profiles** (`roles.yaml need_profiles`): fine-seat bands + function
   coverage, armed at 15+, scaled by size / 20.
 - **Carrier quota**: discretionary effect-carrier chests capped per roster at

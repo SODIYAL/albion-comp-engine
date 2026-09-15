@@ -332,7 +332,7 @@ HEAD (`--base` for another revision). Review the report, then commit.
   and `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
   derive_party_styles -> derive_meta_prior -> derive_role_counts ->
-  build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
+  derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
   (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
@@ -469,7 +469,43 @@ validates the file (fail closed) and ships it as `style_bands`; the engine
 reads it after the content row for a declared style at 10+. Explicit step:
 `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
 `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
-`build_dataset` -> gates.
+`derive_skeletons` -> `build_dataset` -> gates.
+
+## The generated seat skeleton, plan minima and copy allowances (2026-09-15)
+
+Owner ruling 2026-09-15 ("full autonomy" on the skeleton-first
+assessment; spec `notes/specs/2026-09-15-skeleton-first-generation-
+design.md`). `derive_skeletons.py` reads the COMMITTED
+`out/party_rosters.json.gz` and `out/party_styles.json` on the TRAINING
+split (`battle % 5 != 0`, the meta prior's rule), one DISTINCT fully-known
+roster (guild set + weapon multiset) one vote, and writes
+`out/skeletons.json`:
+
+- **seats**: per exact size at 10+, pooled and per declared style, the
+  p10 / p50 / p90 count of every PRIMARY SEAT (`Engine.seat_of`, the
+  first uniformed menu role — the role-class read), a cell pooling a
+  ±1 then ±2 size window until 40 rosters; `typical` = round(p50) where
+  p50 >= 1, an EMPTY row where the cell exists and the style fields none
+  (no demand) — only an ABSENT row falls back to the pooled cell;
+- **plan**: the same shape for plan tools — today `standoff`, the count
+  of `style_fit.standoff_e` carriers, the fact the identity read defines
+  a kiting plan by; the engine reads it as a generation MINIMUM;
+- **copies**: per style x band (10-14 / 15-19 / 20+) and pooled, for every
+  weapon fielded by >= 40 rosters: copies p50 / p90, the shares with 2+
+  and 3+, `free` = round(p50), `max` = ceil(p90) — the allowance the
+  forge's redundancy term and copy cap read (the declared style's row
+  laid over the pooled row at `set_content`);
+- **distinct**: distinct weapons per roster per band, a report line.
+
+`build_dataset` hash-gates it to the two artifacts, refuses an
+all-battles derivation and a hand `composition.duplication.per_weapon`,
+validates every seat against `roles.yaml` and every weapon against the
+catalogue, and ships `composition.skeleton` + `duplication.per_weapon_cells`.
+Gate: `tests/test_skeletons.py`.
+
+```text
+py -3 pipeline/derive_skeletons.py
+```
 
 ## The generated meta prior (2026-09-08)
 
@@ -630,4 +666,5 @@ give the item a lean. `build_dataset` validates and ships it as
 and the class rule (leather -> brawl, cloth -> ranged) where an item has
 none. Descriptive only. Because the audit writes it, the post-harvest
 order is audit -> derive_style_bands -> derive_party_styles ->
-derive_meta_prior -> derive_role_counts -> build_dataset -> gates.
+derive_meta_prior -> derive_role_counts -> derive_skeletons ->
+build_dataset -> gates.

@@ -46,6 +46,17 @@ Candidates always take the normal dressed path. Weapon-only reproduction
 is NOT production recommendation accuracy; the dressed sections are the
 production-faithful measurements.
 
+BASELINE (2026-09-15, spec notes/specs/2026-09-15-skeleton-first-
+generation-design.md decision 6): `v4 --baseline` and `v4h --baseline`
+also score a role-skeleton-plus-popularity recommender
+(baseline_recommend: candidates ranked by need — the role under its band
+minimum first, then under its typical — then by the meta prior's solo
+share, top-3) through the SAME leave-one-out tallies and hit rules, and
+print it as one extra row beside the engine's classes. REPORT-ONLY,
+NEVER A GATE, never an exit-code input: the capability model must beat
+it or it is not earning its complexity. Without the flag nothing else
+changes — every number and the exit code are those of the engine alone.
+
 This script does the three mechanical parts. It cannot do the human part.
 
     generate  build N partial parties and write a blind form (the form shows NO
@@ -57,8 +68,8 @@ This script does the three mechanical parts. It cannot do the human part.
 Usage:
     py -3 tests/tier2_blindtest.py generate --n 12 --out tier2_form.md
     py -3 tests/tier2_blindtest.py score tier2_form_filled.md [--mode both|w|d]
-    py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json]
-    py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5]
+    py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json] [--baseline]
+    py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5] [--baseline]
 
 Party generation is seeded and deterministic, so every expert sees the same
 parties and a re-run reproduces the same set (seed 20260812 still emits the
@@ -394,6 +405,73 @@ V4_CONTENT_MAP = {"large_scale_zvz": "territory_defense"}
 V4_CLASSES = ("weapon_only", "doctrine_inferred", "actual_gear")
 
 
+def _tally_line(label, t, width):
+    """One class row of a leave-one-out table — 'hits/total = pct' at the
+    weapon and role levels. The engine's classes and the baseline share
+    this one shape so the two read side by side."""
+    rl = (f"role-level {t['r_hits']}/{t['r_total']} = "
+          f"{t['r_hits'] / t['r_total']:.0%}" if t["r_total"] else "role-level n/a")
+    return (f"  [{label:<{width}}] weapon-level: {t['w_hits']}/{t['w_total']} = "
+            f"{t['w_hits'] / t['w_total']:.0%}   {rl}")
+
+
+# --------------------------------------------------------- baseline ----
+BASELINE_NOTE = ("  baseline = role skeleton (under band min, then under typical) "
+                 "+ meta-prior solo share, top-3; REPORT-ONLY, NEVER A GATE, "
+                 "no exit-code input — the capability model must beat it "
+                 "(spec 2026-09-15 decision 6).")
+
+
+def baseline_recommend(e, party, top_n=TOP_N):
+    """The role-skeleton-plus-popularity BASELINE (spec notes/specs/
+    2026-09-15-skeleton-first-generation-design.md decision 6): the
+    recommender the capability model must beat, or it is not earning its
+    complexity. REPORT-ONLY, NEVER A GATE; it lives in the harness, never
+    in the engine, and no scoring path may read it.
+
+    Candidates are the engine's own suggest_pool() — the pool recommend()
+    ranks — ordered by NEED, then POPULARITY, then weapon id:
+      need 2  the candidate's constraint role (role_of) has fewer members
+              in `party` than its band MINIMUM at this size and style
+              (e._band, which already carries the style's per-five healer
+              minima);
+      need 1  fewer than the role's TYPICAL count (the band row's
+              `typical`, where one exists), or the candidate's primary
+              seat (seat_of) has fewer members than its skeleton typical
+              (e._seat_typ — GENERATED; empty below the style floor, so
+              no seat is under-typical there);
+      need 0  otherwise;
+      popularity  the meta prior's SOLO share at the roster's size bucket
+              (e._solo_of; absent = 0.0) — no pair term: this is a
+              popularity table, not a partner model;
+      weapon id ascending, so ties resolve the same way every run.
+    It reads no capability, synergy, gear or fight chain: it knows what a
+    role checklist and a popularity table know, nothing more."""
+    band = e._band or {}
+    seat_typ = e._seat_typ or {}
+    role_n, seat_n = {}, {}
+    for m in party:
+        role_n[e.role_of(m)] = role_n.get(e.role_of(m), 0) + 1
+        seat = e.seat_of(m)
+        if seat is not None:
+            seat_n[seat] = seat_n.get(seat, 0) + 1
+
+    def need(w):
+        role = e.role_of(w)
+        rule = band.get(role) if isinstance(band.get(role), dict) else {}
+        have = role_n.get(role, 0)
+        if have < (rule.get("min") or 0):
+            return 2
+        seat = e.seat_of(w)
+        if (rule.get("typical") is not None and have < rule["typical"]) or (
+                seat is not None and seat_n.get(seat, 0) < seat_typ.get(seat, 0)):
+            return 1
+        return 0
+
+    ranked = sorted(e.suggest_pool(), key=lambda w: (-need(w), -e._solo_of(w), w))
+    return ranked[:top_n]
+
+
 def v4(args):
     """Meta-comp reproduction (leave-one-out) against data/published_comps/.
 
@@ -408,6 +486,11 @@ def v4(args):
     DRESSED (2026-08-27): each drop is scored under the three incumbent-gear
     classes documented in the module docstring. The exit-code gate stays on
     the legacy weapon_only role metric until an owner ruling re-bases it.
+
+    BASELINE (2026-09-15): with --baseline every drop is ALSO put to
+    baseline_recommend() under the same hit rules, tallied once (it scores
+    no gear) and printed as a `baseline` row. Report-only, never a gate —
+    the exit code reads actual_gear alone.
 
     CIRCULARITY CAVEATS (printed in the report): the 20-size templates took
     role-ratio calibration from these same comps, so treat results as a
@@ -452,7 +535,8 @@ def v4(args):
               "will resolve nothing")
 
     tallies = {cl: {"w_hits": 0, "w_total": 0, "r_hits": 0, "r_total": 0,
-                    "misses": []} for cl in V4_CLASSES}
+                    "misses": []}
+               for cl in V4_CLASSES + (("baseline",) if args.baseline else ())}
     divergences = []
     resolution = []
     for comp in comps:
@@ -501,6 +585,27 @@ def v4(args):
             resolution.append((comp.get("id", "?"), party.get("name", "?"),
                                len(members), res_n, rec_n,
                                sum(1 for a in actual if a)))
+
+            def tally(cl, slot, top):
+                """The v4 hit rules, one place for every class AND the
+                baseline: weapon-level = any listed alternative of the
+                dropped slot is in the top-N; role-level (healer / tank
+                slots) = any weapon of that role pool is."""
+                t = tallies[cl]
+                hit = any(alt in top for alt in slot["weapons"])
+                t["w_hits"] += hit
+                t["w_total"] += 1
+                pool = ROLE_POOLS.get(slot.get("role"))
+                if pool:
+                    t["r_hits"] += any(w in pool for w in top)
+                    t["r_total"] += 1
+                if not hit:
+                    t["misses"].append(
+                        f"{comp.get('id','?')}/{party.get('name','?')} "
+                        f"dropped {slot.get('raw','?')} "
+                        f"({slot.get('role','?')}) -> "
+                        f"{', '.join(e.weapons[w]['display_name'] for w in top)}")
+
             for i, (_j, slot) in enumerate(slots):
                 rest = members[:i] + members[i + 1:]
                 tops = {}
@@ -511,20 +616,11 @@ def v4(args):
                     top = [r["weapon"] for r in e.recommend(rest, TOP_N,
                                                             gears=gl)]
                     tops[cl] = top
-                    t = tallies[cl]
-                    hit = any(alt in top for alt in slot["weapons"])
-                    t["w_hits"] += hit
-                    t["w_total"] += 1
-                    pool = ROLE_POOLS.get(slot.get("role"))
-                    if pool:
-                        t["r_hits"] += any(w in pool for w in top)
-                        t["r_total"] += 1
-                    if not hit:
-                        t["misses"].append(
-                            f"{comp.get('id','?')}/{party.get('name','?')} "
-                            f"dropped {slot.get('raw','?')} "
-                            f"({slot.get('role','?')}) -> "
-                            f"{', '.join(e.weapons[w]['display_name'] for w in top)}")
+                    tally(cl, slot, top)
+                if args.baseline:
+                    # the skeleton + popularity baseline at the same drop,
+                    # one class (it scores no gear) — report-only
+                    tally("baseline", slot, baseline_recommend(e, rest, TOP_N))
                 if tops["weapon_only"] != tops["actual_gear"]:
                     divergences.append(
                         f"{comp.get('id','?')}/{party.get('name','?')} "
@@ -540,11 +636,10 @@ def v4(args):
     print(f"V4 leave-one-out over {base['w_total']} slots "
           f"(top-{TOP_N}, battlemounts excluded):")
     for cl in V4_CLASSES:
-        t = tallies[cl]
-        rl = (f"role-level {t['r_hits']}/{t['r_total']} = "
-              f"{t['r_hits'] / t['r_total']:.0%}" if t["r_total"] else "role-level n/a")
-        print(f"  [{cl:<17}] weapon-level: {t['w_hits']}/{t['w_total']} = "
-              f"{t['w_hits'] / t['w_total']:.0%}   {rl}")
+        print(_tally_line(cl, tallies[cl], 17))
+    if args.baseline:
+        print(_tally_line("baseline", tallies["baseline"], 17))
+        print(BASELINE_NOTE)
     print("  incumbent-gear resolution per party (actual_gear class):")
     for cid, pname, n_mem, res, rec, dressed_n in resolution:
         print(f"    {cid}/{pname}: {dressed_n}/{n_mem} members dressed, "
@@ -576,7 +671,7 @@ def v4(args):
           "doctrine_inferred is doubly weak-form; actual_gear incumbents "
           "avoid that, the candidate's doctrine kit does not.")
     if args.verbose:
-        for cl in V4_CLASSES:
+        for cl in tallies:
             if tallies[cl]["misses"]:
                 print(f"\n[{cl}] weapon-level misses:")
                 for m in tallies[cl]["misses"]:
@@ -596,6 +691,9 @@ def v4(args):
                             "members_dressed": d}
                            for c, p, n, res, rec, d in resolution],
         }
+        if args.baseline:
+            payload["baseline"] = dict(tallies["baseline"],
+                                       note="report-only, never a gate")
         with open(args.json, "w", encoding="utf-8", newline="\n") as f:
             json.dump(payload, f, indent=1, sort_keys=True)
         print(f"\nwrote {args.json}")
@@ -699,12 +797,20 @@ def v4h(args):
     CIRCULARITY, stated plainly: `templates/style_bands.yaml` and the meta
     prior are DERIVED from this same harvest (labelled rosters -> p10/p90
     rows; distinct players -> prior). `--holdout-mod M` evaluates only
-    battles with id % M == 0 as a deterministic slice, but
-    derive_style_bands.py does NOT yet exclude that slice when fitting —
-    until it does, every number here is weak-form on the styled rows.
+    battles with id % M == 0 as a deterministic slice. The prior, the role
+    counts and the seat skeleton learn from the other slice (2026-09-11 /
+    2026-09-15); the style board's audit has the same flag since 2026-09-15
+    but the COMMITTED board predates it (it regenerates only on the harvest
+    checkout) — until that rerun, every number here is weak-form on the
+    styled rows.
     Content is not recorded on a killer party; `--content` sets the
     template (default blackzone_roam, the ZvZ roam rows); the style is the
     party's weapons-only label (party_styles.json) or balanced.
+
+    BASELINE (2026-09-15): with --baseline every drop — and every rebuild
+    step — is ALSO put to baseline_recommend() under the same hit rules,
+    tallied once (it scores no gear) and printed as a `baseline` row.
+    Report-only like everything here.
 
     NOT A GATE. Prints beside v4 so the two can be compared; promotion to a
     gate is an owner decision once the holdout split is honoured end to end.
@@ -741,10 +847,11 @@ def v4h(args):
     sample = parties if args.n >= len(parties) else rng.sample(parties, args.n)
     sample.sort(key=lambda p: (p["battle"], p["index"]))
 
+    labels = V4H_CLASSES + (("baseline",) if args.baseline else ())
     tallies = {cl: {"w_hits": 0, "w_total": 0, "r_hits": 0, "r_total": 0}
-               for cl in V4H_CLASSES}
+               for cl in labels}
     rebuild = {cl: {"w_hits": 0, "r_hits": 0, "r_total": 0, "total": 0}
-               for cl in V4H_CLASSES}
+               for cl in labels}
     dressed_n = res_n = rec_n = members_n = 0
     by_style = {}
     engines = {}
@@ -760,6 +867,15 @@ def v4h(args):
         dressed_n += dn; res_n += res; rec_n += rec; members_n += len(ws)
         classes = {"weapon_only": None, "harvest_gear": actual,
                    "harvest_gear_doctrine": mixed}
+        # (class, incumbent gear, ranker): the engine's classes rank through
+        # recommend() dressed in that gear; the report-only baseline ranks
+        # through baseline_recommend() and wears nothing
+        runs = [(cl, gl, lambda party, g, n: [r["weapon"] for r in
+                                              e.recommend(party, n, gears=g)])
+                for cl, gl in classes.items()]
+        if args.baseline:
+            runs.append(("baseline", None,
+                         lambda party, g, n: baseline_recommend(e, party, n)))
         drops = list(range(len(ws)))
         if args.drop < len(ws):
             drops = sorted(rng.sample(drops, args.drop))
@@ -768,9 +884,9 @@ def v4h(args):
         for i in drops:
             rest = ws[:i] + ws[i + 1:]
             role = role_of(ws[i])
-            for cl, gl in classes.items():
+            for cl, gl, rank in runs:
                 g = None if gl is None else gl[:i] + gl[i + 1:]
-                top = [r["weapon"] for r in e.recommend(rest, TOP_N, gears=g)]
+                top = rank(rest, g, TOP_N)
                 t = tallies[cl]
                 t["w_hits"] += ws[i] in top
                 t["w_total"] += 1
@@ -784,7 +900,7 @@ def v4h(args):
         k = args.rebuild
         if k and k < len(ws):
             removed = ws[-k:]
-            for cl, gl in classes.items():
+            for cl, gl, rank in runs:
                 cur = list(ws[:-k])
                 g = None if gl is None else list(gl[:-k])
                 # recall per removed member: weapons still missing, and the
@@ -796,7 +912,7 @@ def v4h(args):
                 rb["total"] += len(removed)
                 rb["r_total"] += len(missing_r)
                 for _step in range(k):
-                    top = [r["weapon"] for r in e.recommend(cur, 1, gears=g)]
+                    top = rank(cur, g, 1)
                     if not top:
                         break
                     pick = top[0]
@@ -818,11 +934,10 @@ def v4h(args):
           f"seed {args.seed}), {args.drop} drops per party = {base['w_total']} drops; "
           f"content {args.content}, style = the party's weapons-only label")
     for cl in V4H_CLASSES:
-        t = tallies[cl]
-        rl = (f"role-level {t['r_hits']}/{t['r_total']} = {t['r_hits'] / t['r_total']:.0%}"
-              if t["r_total"] else "role-level n/a")
-        print(f"  [{cl:<22}] weapon-level: {t['w_hits']}/{t['w_total']} = "
-              f"{t['w_hits'] / t['w_total']:.0%}   {rl}")
+        print(_tally_line(cl, tallies[cl], 22))
+    if args.baseline:
+        print(_tally_line("baseline", tallies["baseline"], 22))
+        print(BASELINE_NOTE)
     print(f"  incumbent gear (harvest_gear class): {dressed_n}/{members_n} members "
           f"carry a linked build ({dressed_n / members_n:.0%}); {res_n}/{rec_n} recorded "
           f"pieces resolved into the curated catalog; the rest are honestly naked")
@@ -833,12 +948,14 @@ def v4h(args):
         print(f"    {sty:<11} {st['parties']:>4} parties   {rl}")
     if args.rebuild:
         print(f"  V4b rebuild of the last {args.rebuild} members (greedy top-1):")
-        for cl in V4H_CLASSES:
+        for cl in labels:
             rb = rebuild[cl]
             if rb["total"]:
                 rl = f"role {rb['r_hits']}/{rb['r_total']} = {rb['r_hits'] / rb['r_total']:.0%}" if rb["r_total"] else "role n/a"
                 print(f"    [{cl:<22}] weapon {rb['w_hits']}/{rb['total']} = "
-                      f"{rb['w_hits'] / rb['total']:.0%}   {rl}")
+                      f"{rb['w_hits'] / rb['total']:.0%}   {rl}"
+                      + ("   <- baseline: REPORT-ONLY, never a gate"
+                         if cl == "baseline" else ""))
     print("  caveat: style_bands.yaml rows and the meta prior are derived from this "
           "same harvest; the --holdout-mod slice is not yet excluded by "
           "derive_style_bands.py, so styled numbers are weak-form.")
@@ -853,6 +970,9 @@ def v4h(args):
                    "classes": tallies, "rebuild": rebuild, "by_style": by_style,
                    "gear": {"members": members_n, "dressed": dressed_n,
                             "resolved": res_n, "recorded": rec_n}}
+        if args.baseline:
+            payload["baseline"] = ("report-only, never a gate: classes.baseline "
+                                   "and rebuild.baseline")
         with open(args.json, "w", encoding="utf-8", newline="\n") as f:
             json.dump(payload, f, indent=1, sort_keys=True)
         print(f"\nwrote {args.json}")
@@ -882,6 +1002,9 @@ if __name__ == "__main__":
                    default=os.path.join(ROOT, "data", "published_comps"))
     v.add_argument("--verbose", action="store_true", help="list weapon-level misses")
     v.add_argument("--json", default=None, help="dump per-class tallies")
+    v.add_argument("--baseline", action="store_true",
+                   help="also score the role-skeleton + popularity baseline "
+                        "(report-only, never a gate)")
 
     h = sub.add_parser("v4h"); h.set_defaults(fn=v4h)
     h.add_argument("--n", type=int, default=150, help="parties to sample")
@@ -894,6 +1017,9 @@ if __name__ == "__main__":
     h.add_argument("--content", default="blackzone_roam")
     h.add_argument("--seed", type=int, default=20260910)
     h.add_argument("--json", default=None)
+    h.add_argument("--baseline", action="store_true",
+                   help="also score the role-skeleton + popularity baseline "
+                        "(report-only, never a gate)")
 
     a = ap.parse_args()
     sys.exit(a.fn(a) or 0)

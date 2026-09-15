@@ -12,6 +12,36 @@ them. Closed rulings are index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
+- **The baseline finding** (2026-09-15, `tier2_blindtest.py --baseline`,
+  report-only): ranking candidates by role need then the prior's solo share
+  names the exact missing weapon 29% of the time on the published comps
+  where the engine names it 13% (rebuild-5 on the harvest: 30% vs 14%), and
+  loses at role level (57% vs 74%; 81% vs 84-86%). Popularity carries the
+  exact-weapon signal the capability model's tiebreak-sized prior does not;
+  the capability model carries the structure. A hypothesis, never tuned on
+  (rule 16): raise `delta`, blend the ranker, or accept that the engine
+  optimises comps rather than the published pick. (V: 09b, Skeleton-first)
+- **Kite weights**: with the seat skeleton and the standoff minimum the
+  forged kite 20 reads clap_kite to the engine's own identity (it read as a
+  strong clap before); a PURE kite read needs the kite style's multipliers
+  — owner-unadjudicated since 2026-08-13 — to prefer sustained ranged
+  pressure over bombs. Blind-label a forged kite in the next round.
+- **Fill order as the beam's sequence** (healer -> frontline -> support ->
+  dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
+  END state; the greedy beam still picks its path by marginal. Ordering
+  changes many pinned first picks — an owner call, not started.
+
+- **Gap-closers and ranged_presence: should `caster_moves` deny by default?**
+  `derive_ranged_presence` grants from structure (ground/enemy target,
+  cast_range >= 9) and denies leaps only by hand in `ranged_overrides.yaml`;
+  the parser has carried `caster_moves` since 2026-09-08 and this path never
+  reads it. The 2026-09-15 round ruled the three obvious cases (Fists of
+  Avalon stays, Trinity Spear melee, Skystrider ranged) as cited overrides,
+  which leaves two unruled grants a default would flip: Rift Glaive's
+  Razor's Edge (caster moves, 17 line) and Spiked Gauntlets' Gravitational
+  Collapse (no leap - a 13 cone "in front of you"; is a brawler's long cone
+  ranged pressure?). Rule those two and the derivation can read the fact.
+  (V: 09b, Duplicates never outrank a distinct bomb)
 - **Is one unit of shred "pierce on the clump" in a 7-man?** The kill
   lights bar on the bare minimum since 2026-09-10 ("enough to kill" is a
   minimum question), and castle_outpost's refreshed three-comp fit says the
@@ -216,15 +246,35 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
-- **Honour the holdout split end to end**: `v4h` evaluates battles with
-  `id % 5 == 0`. `derive_meta_prior.py` honours it since 2026-09-11
-  (`HOLDOUT_MOD`, both tables); `derive_style_bands.py` and
-  `derive_role_counts.py` still fit on every battle. Give them the same
-  split constant so every harvest-derived row is fitted on the other four
-  fifths; then `v4h` is a true holdout measurement and can be considered
-  for a gate (owner decision). Until then every styled `v4h` number is
-  weak-form. Re-derive the pair prior on the harvest checkout after the
-  next fold (`fold_harvest.ps1` already runs `derive_meta_prior`).
+- **Honour the holdout split end to end — the style board is the last
+  piece**: `v4h` evaluates battles with `id % 5 == 0`. `derive_meta_prior.py`
+  (2026-09-11), `derive_role_counts.py` and `derive_skeletons.py`
+  (2026-09-15) learn from the training split and the build refuses an
+  all-battles artifact. `audit_style_rosters.py` has `--holdout-mod 5`
+  (default) since 2026-09-15 and records `_split`, `derive_style_bands.py`
+  carries it into the yaml header, and the build prints whether the
+  committed board honours it — but the committed board PREDATES the flag
+  and can only be regenerated on the harvest checkout (the raw cache is
+  not on this machine). Rerun the audit there after the next fold; then
+  every styled `v4h` number is a true holdout measurement and the gate
+  question is the owner's.
+- **The outcome layer**: `sample_parties.py` records per-player kills and
+  deaths in the raw cache (`rec["roster"]`), and the party artifact drops
+  them, so no derivation can read an outcome. Derive a per-party K/D and a
+  heuristic won-the-battle side on the harvest checkout (training split),
+  then win-lift per weapon, pair and copy count — report-only first, into
+  the prior only after a `v4h` A/B (rule 16). The design doc's own plan
+  (§8.6): a prior-adjuster, never the primary term. (2026-09-15 assessment)
+- **brawl_clap under the floor everywhere** (28 / 36 / 15 rosters): its seat
+  and plan rows fall back to the pooled cell, its copy rows to pooled; the
+  forged brawl_clap 20 reads as a split identity. Nothing to derive until
+  the harvest supplies the cell.
+- **An independent style labeller**: the harvest rosters are labelled by
+  the engine's own `comp_identity`, the style x size rows and the seat
+  skeleton are fitted to those labels, and the forge is judged against
+  them. ~50 owner-labelled rosters cannot beat a classifier tuned on them;
+  a labelled HOLDOUT round first, then a gear-plus-delivery labeller scored
+  on it.
 - **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
   `weapon_usage_v2.json`, the display strip's fight-size prevalence and the
   cohort families) and `sample_rosters.py` (`roster_cache/` ->

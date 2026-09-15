@@ -74,6 +74,7 @@ py -3 tests/test_cohort_families.py # observed-family artifact contracts
 py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descriptive)
 py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
 py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
+py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy allowances (forge gates)
 py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
@@ -84,7 +85,10 @@ py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on pub
 Report-only beside the gate: `py -3 tests/tier2_blindtest.py v4h --rebuild 5` —
 the same leave-one-out over ~700 harvested killer parties (holdout slice
 `battle id % 5 == 0`), plus a rebuild-the-last-5 recall. Never a gate until
-`derive_style_bands.py` honours the same holdout split.
+the committed style board honours the same holdout split (the audit has the
+flag since 2026-09-15; the board must be regenerated on the harvest checkout).
+`--baseline` on `v4` / `v4h` prints a role-need-then-popularity recommender
+beside the engine — report-only, the model the capability engine must beat.
 
 Expert-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
 generate|score` (V3 forms; `score --mode d` is the gate),
@@ -108,8 +112,10 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
   `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
   `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
-  `build_dataset` -> every gate ->
-  `compare_fold.py`; never commits). Weekly, Tuesdays.
+  `derive_skeletons` -> `build_dataset` -> every gate ->
+  `compare_fold.py`; never commits). Weekly, Tuesdays. Every harvest-derived
+  table learns from the training split (`battle % 5 != 0`); the build refuses
+  an all-battles prior, role-count or skeleton artifact.
 - After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
 - Network steps are explicit, never part of a build: `sample_parties.py`,
   `sample_battles.py`, `sample_rosters.py`, `adapters/metabattle.py fetch`. The
@@ -190,8 +196,17 @@ Rules a change must not break. The ruling behind each is in `tests/VALIDATION.md
   conversion can only raise a target; any re-fit moves every row at once.
 - **Unknowns stay explicit**: `unknown` is stored, never inferred; quarantined
   records never become defaults; only verified interaction records score.
-- **Duplicates**: 1 copy by default; the only super-additive duplicate is
-  `self_cost_offset_min_copies` (it cancels a cost, never adds supply).
+- **Duplicates**: 1 copy by default; penalty-free copies and the forge's
+  copy cap are GENERATED per style x band from the harvest (`derive_skeletons.py`,
+  free = round(p50 copies), max = ceil(p90)) — a hand allowance fails the
+  build; the only super-additive duplicate is `self_cost_offset_min_copies`
+  (it cancels a cost, never adds supply).
+- **The seat skeleton generates, the scalar ranks**: at 10+ the forge closes
+  a primary SEAT at its harvest typical (declared style's cell, else pooled)
+  and admits a body past it only for a minimum no under-typical seat of the
+  role could meet, or by spill once every seat of the role is full; plan
+  tools (standoff) are generation minima. Refinement never trades away the
+  seat that justified a spill. Generation only — manual rosters always score.
 - **One role read**: `role_class`, the comp board column, tile colour and roster
   order all derive from the weapon's primary seat. Never a second classification.
 - **Roster mutations** go through the central handlers (`data-add`, `data-swapat`).

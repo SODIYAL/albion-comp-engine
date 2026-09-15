@@ -46,6 +46,11 @@ index rows where the owner's words are.
    harvest-generated meta prior — solo (2026-09-08) and best-observed-partner
    (2026-09-11) — tiebreak-sized under `delta`, derived on the training split
    (`battle % 5 != 0`), never a floor, a seat, a pool place or a penalty.
+   Amended 2026-09-15: the copy ALLOWANCES the redundancy term reads (which
+   copy is penalty-free, `free` = round(p50 copies) per style x band) are
+   generated from the same harvest, replacing the hand list that read the
+   same term — they price a copy, never a weapon; and the seat skeleton and
+   plan minima the same artifact carries shape GENERATION only.
 8. **Unknowns stay explicit** (2026-08-12 catches, 2026-08-28 gear): records store
    `unknown`; quarantined records never become defaults; only verified
    interaction records score.
@@ -90,6 +95,23 @@ index rows where the owner's words are.
     (`primary_heal`) — and never spends a typical slot on a body that
     leaves such a minimum short. dps is never gated. Minima always win
     over it; sizes without a row carry none; manual parties score anything.
+    **Extended to seats and plan tools (2026-09-15, "full autonomy"):** at
+    10+ every PRIMARY SEAT (`Engine.seat_of`, the first uniformed menu
+    role) carries the typical of the declared style's cell (else pooled)
+    from `derive_skeletons.py`, training split only. A body past its seat's
+    typical generates only for an unmet minimum (cross-role included) that
+    no under-typical seat of its role could meet, or by SPILL once every
+    seat of the role the pool supplies stands at typical — so seat medians
+    that never add up to the role's count, and dps with no role typical,
+    always fill. Refinement never trades away the seat that justified a
+    spill (`_seat_mix_ok`). The plan table's STANDOFF typical is a
+    generation MINIMUM (flag predicate `standoff`): a kite forged without
+    its standoff tools is not the kite the engine itself would label. A
+    present-but-empty row means "fields none" (no demand); an absent row
+    falls back to the pooled cell; no cell = no seat gate. Copy allowances
+    (`free` = round(p50), `max` = ceil(p90) of the rosters fielding the
+    weapon per style x band) are GENERATED from the same artifact; a hand
+    `per_weapon` list fails the build. Generation only.
 
 ## The method — how a round runs
 
@@ -239,6 +261,8 @@ column is the archive file and the section title to search for.
 | 09-10 | "the data should come from the harvest median" / four stages "red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much" — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest checkout; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
 | 09-11 | "wouldnt it be cool to add synergy to comps based on what weapons are often seen playing together with real data ?" — ruling A of three: observed pairings enter through the meta prior ONLY (never the synergy term, a floor, a seat or a pool); one killer party one vote per distinct pair, a row only across >=3 guild-sets and >=5 parties, s = clamp(log2 lift, 0, 3)/3 x n/(n+8), lift <= 1 reads 0; both prior tables learn from `battle % 5 != 0` only; meta = 0.5 solo + 0.5 best partner on the roster, pick score stays the exact comp_score delta. Standing rule 7 amended. Golden moved: none | derive_meta_prior (meta_pairs), build_dataset gate, both ports, why-panel line | test_meta_pairs A1-A13 / B1-B8, parity meta fields, F1 | 09b, Pair-aware meta prior |
 | 09-11 | "this file will keep growing" — the killer-party artifact is gzipped (`party_rosters.json.gz`, one loader `rosters_io.py`, hash gates on the stored bytes; 77 MB -> 4.6 MB, the 100 MB push limit was days away); the raw cache backup to a bucket goes to BACKLOG | rosters_io.py, every reader | H18 | 09b, The artifact is gzipped |
+| 09-15 | "remove that free 2" / "0.25 must be too soft because there are probably a lot more aoe weapons" — Permafrost's per_weapon allowance removed, rho 0.25 -> 0.5 (smallest value at which every copy leaves the 18-man clap roster's list; distinct picks unmoved); blind on the caster-moving ranged grants: Fists of Avalon stays ("leave fists of avalon as is"), Trinity Spear denied ("most definitely a melee weapon"), Skystrider granted ("skystrider is ranged"); Rift Glaive / Spiked cone unruled | composition.yaml, scoring.yaml, ranged_overrides.yaml | T49, F4/F18 re-pinned | 09b, Duplicates never outrank a distinct bomb |
+| 09-15 | "go ahead and make changes according to your suggestions, you have full autonomy here" — the seat skeleton: every primary seat's harvest typical per style x size (`derive_skeletons.py`, training split, distinct rosters) closes a seat in the forge — a body past it only for a minimum no under-typical seat of its role could meet, or by spill once every seat of the role is full; refinement never un-justifies a spill; the standoff plan typical is a generation minimum (flag predicate); copy allowances GENERATED per style x band (free = round(p50), max = ceil(p90); a hand list fails the build); `derive_role_counts` on the training split; the audit carries `--holdout-mod` (board regeneration waits for the harvest checkout); `tier2 --baseline` report-only. Standing rule 18 extended. Golden moved: none. Forged kite 20 reads clap_kite (was a strong clap) | derive_skeletons.py, build_dataset, both ports, derive_role_counts, audit_style_rosters, derive_style_bands, tier2_blindtest | test_skeletons S1-S6, F4/F18 re-pinned | 09b, Skeleton-first generation |
 
 ## Open questions
 

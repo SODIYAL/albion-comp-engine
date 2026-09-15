@@ -35,7 +35,6 @@
    "2H_QUARTERSTAFF_AVALON",
    "2H_REPEATINGCROSSBOW_UNDEAD",
    "2H_SKULLORB_HELL",
-   "2H_TRIDENT_UNDEAD",
    "2H_TWINSCYTHE_HELL",
    "MAIN_1HCROSSBOW",
    "MAIN_ARCANESTAFF_UNDEAD",
@@ -139,12 +138,17 @@
   "2H_BOW_CRYSTAL": {
    "decisions": [
     {
-     "basis": "curated_burst_aoe+structural_range",
+     "basis": "curated_override_grant",
      "cast_range": 10.0,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
      "max_targets": null,
+     "override": {
+      "as_of": "2026-09-15",
+      "reason": "\"Leap to the targeted position and conjure a foothold in the air, becoming Untargetable\" then \"Sky Bolt: shoot a lightning-infused arrow at the targeted position\" \u2014 the wielder moves, but the payload is an arrow from an untargetable perch, ranged pressure on the clump.",
+      "source": "Spell description (ao-bin-dumps); owner ruling 2026-09-15 \u2014 \"skystrider is ranged\"."
+     },
      "radius": 1.0,
      "slot": "e",
      "spell": "AIR_RAID"
@@ -698,12 +702,17 @@
   "2H_KNUCKLES_AVALON": {
    "decisions": [
     {
-     "basis": "curated_burst_aoe+structural_range",
+     "basis": "curated_override_grant",
      "cast_range": 12.0,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
      "max_targets": null,
+     "override": {
+      "as_of": "2026-09-15",
+      "reason": "The dive kick leaps to the targeted position (caster moves), which the gap-closer rule would deny; the owner keeps the ranged grant \u2014 the combo is fielded as a 12m knock-up bomb thrown onto the clump.",
+      "source": "Owner ruling 2026-09-15 \u2014 \"leave fists of avalon as is\" (structural grant: target ground, cast_range 12)."
+     },
      "radius": null,
      "slot": "e",
      "spell": "TRIPLECOMBO_DIVEKICK"
@@ -980,18 +989,23 @@
   "2H_TRIDENT_UNDEAD": {
    "decisions": [
     {
-     "basis": "curated_burst_aoe+structural_range",
+     "basis": "curated_override_deny",
      "cast_range": 12.0,
      "cooldown": "30",
      "delivery": "ground",
-     "granted": true,
+     "granted": false,
      "max_targets": null,
+     "override": {
+      "as_of": "2026-09-15",
+      "reason": "\"Leap towards the targeted position, becoming immune to all Crowd Control effects ... until impact. Roots all enemies in a radius on impact\" \u2014 the wielder lands inside the clump; a gap-close, the same class as Realmbreaker's Lethal Cleaver.",
+      "source": "Spell description (ao-bin-dumps); owner ruling 2026-09-15 \u2014 \"trinity spear is most definitely a melee weapon\"."
+     },
      "radius": 3.0,
      "slot": "e",
      "spell": "TRIDENTTHROW"
     }
    ],
-   "status": "granted"
+   "status": "not_granted"
   },
   "2H_TWINSCYTHE_HELL": {
    "decisions": [

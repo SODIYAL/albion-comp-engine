@@ -101,3 +101,47 @@
     the melee leaps.
   source: Spell description (ao-bin-dumps 5cf2e8e9).
   as_of: 2026-08-19
+
+# Owner round 2026-09-15 (the 18-man clap roster, notes/validation/2026-09b.md):
+# the three caster-moving Es the structural rule granted were put to the
+# owner. Trinity Spear is denied; Fists of Avalon and Skystrider are recorded
+# as GRANTS so the ruling lives in data and a later gap-closer derivation
+# (caster_moves is a parsed fact since 2026-09-08) cannot flip them silently.
+
+- weapon: 2H_TRIDENT_UNDEAD
+  spell: TRIDENTTHROW
+  decision: deny
+  reason: >
+    "Leap towards the targeted position, becoming immune to all Crowd
+    Control effects ... until impact. Roots all enemies in a radius on
+    impact" — the wielder lands inside the clump; a gap-close, the same
+    class as Realmbreaker's Lethal Cleaver.
+  source: >
+    Spell description (ao-bin-dumps); owner ruling 2026-09-15 — "trinity
+    spear is most definitely a melee weapon".
+  as_of: 2026-09-15
+
+- weapon: 2H_KNUCKLES_AVALON
+  spell: TRIPLECOMBO_DIVEKICK
+  decision: grant
+  reason: >
+    The dive kick leaps to the targeted position (caster moves), which the
+    gap-closer rule would deny; the owner keeps the ranged grant — the
+    combo is fielded as a 12m knock-up bomb thrown onto the clump.
+  source: >
+    Owner ruling 2026-09-15 — "leave fists of avalon as is" (structural
+    grant: target ground, cast_range 12).
+  as_of: 2026-09-15
+
+- weapon: 2H_BOW_CRYSTAL
+  spell: AIR_RAID
+  decision: grant
+  reason: >
+    "Leap to the targeted position and conjure a foothold in the air,
+    becoming Untargetable" then "Sky Bolt: shoot a lightning-infused arrow
+    at the targeted position" — the wielder moves, but the payload is an
+    arrow from an untargetable perch, ranged pressure on the clump.
+  source: >
+    Spell description (ao-bin-dumps); owner ruling 2026-09-15 —
+    "skystrider is ranged".
+  as_of: 2026-09-15

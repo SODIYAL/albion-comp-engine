@@ -46,6 +46,7 @@ jobs:
           python3 tests/test_meta_pairs.py
           python3 tests/test_roles.py
           python3 tests/test_validation_modes.py
+          python3 tests/test_skeletons.py
           python3 tests/tier2_blindtest.py v4
 
       - name: display-layer gates

@@ -460,30 +460,1973 @@
    "free_copies_default": 1,
    "max_copies_default_large": 1,
    "max_copies_default_small": 1,
-   "per_weapon": {
-    "2H_ARCANESTAFF": {
-     "free": 2,
-     "max": 3
+   "per_weapon": {},
+   "per_weapon_cells": {
+    "bands": {
+     "10-14": [
+      10,
+      14
+     ],
+     "15-19": [
+      15,
+      19
+     ],
+     "20": [
+      20,
+      99
+     ]
     },
-    "2H_BOW_HELL": {
-     "free": 2,
-     "max": 3
+    "pooled": {
+     "10-14": {
+      "2H_ARCANESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANESTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_AXE": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_AXE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_BOW_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_BOW_HELL": {
+       "free": 1,
+       "max": 4
+      },
+      "2H_BOW_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CLAWPAIR": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_CLAYMORE_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CLEAVER_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_COMBATSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CROSSBOW": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CROSSBOW_CANNON_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CURSEDSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_DAGGERPAIR": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DAGGER_KATAR_AVALON": {
+       "free": 1,
+       "max": 4
+      },
+      "2H_DOUBLEBLADEDSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DUALAXE_KEEPER": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_DUALCROSSBOW_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_DUALHAMMER_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_DUALMACE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DUALSCIMITAR_UNDEAD": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_DUALSICKLE_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DUALSWORD": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ENIGMATICORB_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ENIGMATICSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_FIRESTAFF_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_FIRE_RINGPAIR_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_FROSTSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_GLAIVE_CRYSTAL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HALBERD": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HAMMER_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HARPOON_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ICECRYSTAL_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ICEGAUNTLETS_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_INFERNOSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_INFERNOSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_KNUCKLES_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_SET2": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_KNUCKLES_SET3": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_LONGBOW": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_LONGBOW_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_MACE_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_NATURESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_NATURESTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_POLEHAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_QUARTERSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_QUARTERSTAFF_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ROCKSTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SCYTHE_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_SET2": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_WILDSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_ARCANESTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_ARCANESTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_AXE": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_CURSEDSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_DAGGER_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_FIRESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_FROSTSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_HAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_HOLYSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_HOLYSTAFF_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_MACE_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_MACE_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_NATURESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_RAPIER_MORGANA": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_ROCKMACE_KEEPER": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_SPEAR_KEEPER": {
+       "free": 1,
+       "max": 1
+      }
+     },
+     "15-19": {
+      "2H_ARCANESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANESTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANE_RINGPAIR_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_AXE": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_AXE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_BOW_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_BOW_HELL": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_BOW_KEEPER": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_CLAYMORE_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CLEAVER_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_COMBATSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CROSSBOWLARGE_MORGANA": {
+       "free": 1,
+       "max": 5
+      },
+      "2H_CROSSBOW_CANNON_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_CURSEDSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_DAGGER_KATAR_AVALON": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_DUALAXE_KEEPER": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_DUALMACE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DUALSCIMITAR_UNDEAD": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_DUALSWORD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ENIGMATICORB_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ENIGMATICSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_FIRESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_FIRE_RINGPAIR_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_FROSTSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_GLACIALSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_GLAIVE_CRYSTAL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HALBERD": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HAMMER_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HAMMER_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HARPOON_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HOLYSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ICECRYSTAL_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ICEGAUNTLETS_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_INFERNOSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_INFERNOSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_SET2": {
+       "free": 2,
+       "max": 4
+      },
+      "2H_KNUCKLES_SET3": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_LONGBOW": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_LONGBOW_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_MACE_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_NATURESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_NATURESTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_POLEHAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_QUARTERSTAFF_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_RAM_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ROCKSTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SCYTHE_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_SHAPESHIFTER_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_SET2": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_WILDSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_ARCANESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_ARCANESTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_AXE": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_CURSEDSTAFF_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_DAGGER_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_FROSTSTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_FROSTSTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_HAMMER": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_HOLYSTAFF_AVALON": {
+       "free": 2,
+       "max": 3
+      },
+      "MAIN_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_MACE_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_MACE_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_NATURESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_NATURESTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_RAPIER_MORGANA": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_ROCKMACE_KEEPER": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_SPEAR_KEEPER": {
+       "free": 1,
+       "max": 2
+      }
+     },
+     "20": {
+      "2H_ARCANESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ARCANESTAFF_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_AXE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_CLEAVER_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CROSSBOW_CANNON_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_CURSEDSTAFF_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_DUALMACE_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_DUALSCIMITAR_UNDEAD": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_ENIGMATICORB_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ENIGMATICSTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_FIRE_RINGPAIR_AVALON": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_FROSTSTAFF": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_GLAIVE_CRYSTAL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HAMMER_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HARPOON_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_HOLYSTAFF_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_HOLYSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ICECRYSTAL_UNDEAD": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_ICEGAUNTLETS_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_INFERNOSTAFF_MORGANA": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_KNUCKLES_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_KNUCKLES_SET2": {
+       "free": 2,
+       "max": 4
+      },
+      "2H_KNUCKLES_SET3": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_LONGBOW": {
+       "free": 1,
+       "max": 3
+      },
+      "2H_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "2H_NATURESTAFF_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_NATURESTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_POLEHAMMER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_ROCKSTAFF_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_KEEPER": {
+       "free": 1,
+       "max": 1
+      },
+      "2H_SHAPESHIFTER_SET2": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_ARCANESTAFF": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_ARCANESTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_AVALON": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_CURSEDSTAFF_UNDEAD": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_DAGGER_HELL": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_HAMMER": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_HOLYSTAFF_AVALON": {
+       "free": 2,
+       "max": 4
+      },
+      "MAIN_MACE": {
+       "free": 1,
+       "max": 2
+      },
+      "MAIN_MACE_CRYSTAL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_MACE_HELL": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_NATURESTAFF": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_RAPIER_MORGANA": {
+       "free": 1,
+       "max": 1
+      },
+      "MAIN_ROCKMACE_KEEPER": {
+       "free": 2,
+       "max": 2
+      }
+     }
     },
-    "2H_GLAIVE_CRYSTAL": {
-     "free": 2,
-     "max": 3
-    },
-    "2H_ICECRYSTAL_UNDEAD": {
-     "free": 2,
-     "max": 3
-    },
-    "MAIN_HOLYSTAFF_AVALON": {
-     "free": 3,
-     "max": 4
-    },
-    "MAIN_ROCKMACE_KEEPER": {
-     "free": 2,
-     "max": 3
+    "styles": {
+     "brawl": {
+      "10-14": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_CLAWPAIR": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_CLAYMORE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CLEAVER_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DAGGERPAIR": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_DUALAXE_KEEPER": {
+        "free": 2,
+        "max": 3
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_DUALSCIMITAR_UNDEAD": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_DUALSICKLE_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_KNUCKLES_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_SET2": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_DAGGER_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_FROSTSTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 1,
+        "max": 3
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 2
+       }
+      },
+      "15-19": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ARCANESTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_CLAYMORE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CLEAVER_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CURSEDSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALAXE_KEEPER": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_DUALSCIMITAR_UNDEAD": {
+        "free": 2,
+        "max": 4
+       },
+       "2H_ENIGMATICORB_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ENIGMATICSTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_SET2": {
+        "free": 2,
+        "max": 4
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ROCKSTAFF_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_DAGGER_HELL": {
+        "free": 1,
+        "max": 3
+       },
+       "MAIN_HAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 3
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_NATURESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 3
+       }
+      },
+      "20": {
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 3,
+        "max": 4
+       }
+      }
+     },
+     "clap": {
+      "10-14": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_BOW_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_BOW_HELL": {
+        "free": 2,
+        "max": 5
+       },
+       "2H_BOW_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CLEAVER_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CROSSBOW_CANNON_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CURSEDSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ENIGMATICORB_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ENIGMATICSTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_FROSTSTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_GLAIVE_CRYSTAL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HAMMER_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_INFERNOSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_KNUCKLES_SET2": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_ARCANESTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_NATURESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 1,
+        "max": 1
+       }
+      },
+      "15-19": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_BOW_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_BOW_HELL": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_BOW_KEEPER": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_CLEAVER_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CROSSBOW_CANNON_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_CURSEDSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_DUALSCIMITAR_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ENIGMATICORB_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ENIGMATICSTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_FROSTSTAFF": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_GLAIVE_CRYSTAL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HAMMER_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HOLYSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ICEGAUNTLETS_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_INFERNOSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_SET2": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_NATURESTAFF_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ROCKSTAFF_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_WILDSTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 3
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_MACE_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_NATURESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 1,
+        "max": 1
+       }
+      },
+      "20": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_CLEAVER_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CURSEDSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ENIGMATICORB_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_FROSTSTAFF": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_GLAIVE_CRYSTAL": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_KNUCKLES_SET2": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 4
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 1,
+        "max": 1
+       }
+      }
+     },
+     "clap_kite": {
+      "10-14": {
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 2,
+        "max": 2
+       }
+      },
+      "15-19": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_CURSEDSTAFF_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ENIGMATICORB_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_GLAIVE_CRYSTAL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HAMMER_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ICEGAUNTLETS_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_SET2": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 3
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 2,
+        "max": 2
+       }
+      },
+      "20": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HAMMER_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 3
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 2,
+        "max": 2
+       }
+      }
+     },
+     "kite": {
+      "10-14": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICEGAUNTLETS_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_MACE": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 1,
+        "max": 2
+       }
+      },
+      "15-19": {
+       "2H_ARCANESTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_ARCANESTAFF_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_AXE_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_DUALMACE_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_FIRE_RINGPAIR_AVALON": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_HAMMER_AVALON": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HARPOON_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_HOLYSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICECRYSTAL_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_ICEGAUNTLETS_HELL": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_KNUCKLES_SET3": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_LONGBOW": {
+        "free": 1,
+        "max": 3
+       },
+       "2H_NATURESTAFF_HELL": {
+        "free": 1,
+        "max": 2
+       },
+       "2H_POLEHAMMER": {
+        "free": 1,
+        "max": 1
+       },
+       "2H_SHAPESHIFTER_KEEPER": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ARCANESTAFF": {
+        "free": 1,
+        "max": 2
+       },
+       "MAIN_CURSEDSTAFF_CRYSTAL": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_CURSEDSTAFF_UNDEAD": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_HOLYSTAFF_AVALON": {
+        "free": 2,
+        "max": 3
+       },
+       "MAIN_RAPIER_MORGANA": {
+        "free": 1,
+        "max": 1
+       },
+       "MAIN_ROCKMACE_KEEPER": {
+        "free": 2,
+        "max": 2
+       }
+      }
+     }
     }
    },
    "per_weapon_min_size": 10
@@ -653,9 +2596,9 @@
       "support": 1
      },
      "15": {
-      "frontline": 3,
+      "frontline": 4,
       "healer": 3,
-      "support": 2
+      "support": 1
      },
      "16": {
       "frontline": 4,
@@ -679,13 +2622,6 @@
      },
      "20": {
       "frontline": 4,
-      "healer": 4,
-      "support": 3
-     }
-    },
-    "brawl_clap": {
-     "18": {
-      "frontline": 5,
       "healer": 4,
       "support": 3
      }
@@ -776,7 +2712,7 @@
      "16": {
       "frontline": 4,
       "healer": 3,
-      "support": 3
+      "support": 2
      },
      "17": {
       "frontline": 5,
@@ -794,7 +2730,7 @@
       "support": 3
      },
      "20": {
-      "frontline": 6,
+      "frontline": 5,
       "healer": 4,
       "support": 3
      }
@@ -806,7 +2742,7 @@
       "support": 1
      },
      "11": {
-      "frontline": 3,
+      "frontline": 2,
       "healer": 2,
       "support": 1
      },
@@ -822,13 +2758,13 @@
      },
      "14": {
       "frontline": 3,
-      "healer": 3,
+      "healer": 2,
       "support": 2
      },
      "15": {
       "frontline": 4,
       "healer": 3,
-      "support": 2
+      "support": 3
      },
      "16": {
       "frontline": 4,
@@ -848,7 +2784,7 @@
      "19": {
       "frontline": 5,
       "healer": 4,
-      "support": 4
+      "support": 3
      },
      "20": {
       "frontline": 5,
@@ -894,6 +2830,625 @@
     "30": 0.2,
     "60": 0.2
    }
+  },
+  "skeleton": {
+   "plan": {
+    "pooled": {
+     "10": {},
+     "11": {},
+     "12": {},
+     "13": {},
+     "14": {},
+     "15": {},
+     "16": {
+      "standoff": 1
+     },
+     "17": {},
+     "18": {},
+     "19": {
+      "standoff": 1
+     },
+     "20": {
+      "standoff": 1
+     }
+    },
+    "styles": {
+     "brawl": {
+      "10": {},
+      "11": {},
+      "12": {},
+      "13": {},
+      "14": {},
+      "15": {},
+      "16": {},
+      "17": {},
+      "18": {},
+      "19": {},
+      "20": {}
+     },
+     "clap": {
+      "10": {},
+      "11": {},
+      "12": {},
+      "13": {},
+      "14": {},
+      "15": {},
+      "16": {},
+      "17": {},
+      "18": {},
+      "19": {},
+      "20": {}
+     },
+     "clap_kite": {
+      "11": {
+       "standoff": 2
+      },
+      "12": {
+       "standoff": 2
+      },
+      "13": {
+       "standoff": 2
+      },
+      "14": {
+       "standoff": 2
+      },
+      "15": {
+       "standoff": 2
+      },
+      "16": {
+       "standoff": 2
+      },
+      "17": {
+       "standoff": 2
+      },
+      "18": {
+       "standoff": 2
+      },
+      "19": {
+       "standoff": 2
+      },
+      "20": {
+       "standoff": 2
+      }
+     },
+     "kite": {
+      "10": {
+       "standoff": 1
+      },
+      "11": {
+       "standoff": 1
+      },
+      "12": {
+       "standoff": 1
+      },
+      "13": {
+       "standoff": 1
+      },
+      "14": {
+       "standoff": 2
+      },
+      "15": {
+       "standoff": 2
+      },
+      "16": {
+       "standoff": 2
+      },
+      "17": {
+       "standoff": 2
+      },
+      "18": {
+       "standoff": 2
+      },
+      "19": {
+       "standoff": 2
+      },
+      "20": {
+       "standoff": 2
+      }
+     }
+    }
+   },
+   "seats": {
+    "pooled": {
+     "10": {
+      "engage_tank": 1,
+      "main_healer": 1,
+      "ranged_aoe": 2,
+      "sustained_brawler": 2
+     },
+     "11": {
+      "engage_tank": 1,
+      "main_healer": 2,
+      "ranged_aoe": 2,
+      "sustained_brawler": 2
+     },
+     "12": {
+      "engage_tank": 1,
+      "main_healer": 2,
+      "ranged_aoe": 3,
+      "stopper_tank": 1,
+      "sustained_brawler": 2
+     },
+     "13": {
+      "engage_tank": 1,
+      "main_healer": 2,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 2
+     },
+     "14": {
+      "engage_tank": 2,
+      "main_healer": 2,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "15": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 3,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "16": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 3,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "17": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 3,
+      "off_tank": 1,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "18": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 3,
+      "off_tank": 1,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "19": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 4,
+      "off_tank": 1,
+      "ranged_aoe": 3,
+      "shield_support": 1,
+      "stopper_tank": 1,
+      "sustained_brawler": 3
+     },
+     "20": {
+      "curse_support": 1,
+      "engage_tank": 2,
+      "main_healer": 4,
+      "off_tank": 1,
+      "ranged_aoe": 3,
+      "shield_support": 2,
+      "stopper_tank": 2,
+      "sustained_brawler": 3
+     }
+    },
+    "styles": {
+     "brawl": {
+      "10": {
+       "dive_cleanup": 1,
+       "engage_tank": 1,
+       "main_healer": 1,
+       "ranged_aoe": 1,
+       "sustained_brawler": 3
+      },
+      "11": {
+       "dive_cleanup": 1,
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 1,
+       "sustained_brawler": 3
+      },
+      "12": {
+       "dive_cleanup": 1,
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 1,
+       "sustained_brawler": 4
+      },
+      "13": {
+       "dive_cleanup": 1,
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 4
+      },
+      "14": {
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "sustained_brawler": 4
+      },
+      "15": {
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 4
+      },
+      "16": {
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 5
+      },
+      "17": {
+       "curse_support": 1,
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 5
+      },
+      "18": {
+       "bomb_aoe": 1,
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 5
+      },
+      "19": {
+       "bomb_aoe": 1,
+       "curse_support": 1,
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 1,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 5
+      },
+      "20": {
+       "bomb_aoe": 1,
+       "curse_support": 1,
+       "dive_cleanup": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 1,
+       "shield_support": 2,
+       "stopper_tank": 1,
+       "sustained_brawler": 6
+      }
+     },
+     "clap": {
+      "10": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "sustained_brawler": 1
+      },
+      "11": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "sustained_brawler": 2
+      },
+      "12": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "sustained_brawler": 2
+      },
+      "13": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 2
+      },
+      "14": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "15": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "16": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "17": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "18": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "19": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 2,
+       "stopper_tank": 1,
+       "sustained_brawler": 3
+      },
+      "20": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 2,
+       "stopper_tank": 1,
+       "sustained_brawler": 4
+      }
+     },
+     "clap_kite": {
+      "11": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "12": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "13": {
+       "engage_tank": 2,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "14": {
+       "engage_tank": 2,
+       "main_healer": 2,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "15": {
+       "engage_tank": 2,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "16": {
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "17": {
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "18": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "19": {
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "20": {
+       "curse_support": 1,
+       "engage_tank": 3,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 4,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      }
+     },
+     "kite": {
+      "10": {
+       "engage_tank": 1,
+       "main_healer": 1,
+       "ranged_aoe": 3,
+       "stopper_tank": 1,
+       "sustained_brawler": 1
+      },
+      "11": {
+       "curse_support": 1,
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "stopper_tank": 1,
+       "sustained_brawler": 1
+      },
+      "12": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 1
+      },
+      "13": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "14": {
+       "engage_tank": 1,
+       "main_healer": 2,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "15": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 1,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "16": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 3,
+       "shield_support": 1,
+       "stopper_tank": 2,
+       "sustained_brawler": 2,
+       "zone_support": 1
+      },
+      "17": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 3,
+       "shield_support": 2,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "18": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "off_tank": 1,
+       "ranged_aoe": 3,
+       "shield_support": 2,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "19": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 3,
+       "ranged_aoe": 4,
+       "shield_support": 2,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      },
+      "20": {
+       "curse_support": 1,
+       "engage_tank": 2,
+       "main_healer": 4,
+       "off_tank": 1,
+       "ranged_aoe": 3,
+       "shield_support": 2,
+       "stopper_tank": 2,
+       "sustained_brawler": 3,
+       "zone_support": 1
+      }
+     }
+    }
+   },
+   "style_min_size": 10
   },
   "viability": {
    "core": {},
@@ -193232,7 +195787,7 @@
    "headroom": 0.1,
    "meta_pair": 0.5,
    "overstack_max": 0.5,
-   "rho": 0.25,
+   "rho": 0.5,
    "viability": 0.15
   }
  },
@@ -218440,7 +220995,6 @@
     "engage": 4,
     "mobility": 4,
     "peel": 2,
-    "ranged_presence": 2,
     "reflect": 2,
     "root": 4,
     "self_sustain": 2,
@@ -218470,9 +221024,6 @@
      "TRIDENTTHROW"
     ],
     "peel": [
-     "TRIDENTTHROW"
-    ],
-    "ranged_presence": [
      "TRIDENTTHROW"
     ],
     "reflect": [
@@ -218536,7 +221087,6 @@
        "engage": 4,
        "mobility": 4,
        "peel": 2,
-       "ranged_presence": 2,
        "root": 4
       }
      ],

@@ -42,9 +42,17 @@ weights:
   # deliberately NON-saturating — the capability over-stack penalty saturates,
   # which is exactly how a 3rd basic Cursed Staff used to become nearly free.
   # PROVISIONAL magnitude: the design doc suggested 0.10 for the weight blend;
-  # 0.25 is set so one extra copy (~0.25) outweighs the ~0.1-0.2 marginal
+  # 0.25 was set so one extra copy (~0.25) outweighs the ~0.1-0.2 marginal
   # coverage a duplicate typically adds to an already-filled comp.
-  rho: 0.25
+  # 0.25 -> 0.5 (owner ruling 2026-09-15): while a gap is OPEN a copy earns
+  # the same coverage as any distinct weapon closing it, so 0.25 let a second
+  # Spiked Gauntlets / Permafrost into the top four of an 18-man clap roster
+  # - "0.25 must be too soft because there are probably a lot more aoe
+  # weapons such as longbow, blazing staff, rift glaive, energyshaper". 0.5
+  # is the smallest value at which every copy leaves that roster's
+  # suggestion list (best copy rank 4 -> 12 of 77; 0.75 -> 31); the distinct
+  # top picks do not move. Golden T49.
+  rho: 0.5
   # Viability-tier prior weight (composition.yaml viability.core). Same scale
   # as delta: a core-listed weapon gets +viability * core_bonus. PROVISIONAL.
   viability: 0.15

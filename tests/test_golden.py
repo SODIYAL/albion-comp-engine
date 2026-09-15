@@ -1684,6 +1684,52 @@ def run():
           "; ".join(f"{nm}: healers={h} burst_aoe={b} feasible={f} party={n}"
                     for nm, h, b, f, n in t47))
 
+    # T49 - DUPLICATES NEVER OUTRANK A DISTINCT WEAPON THAT CLOSES THE SAME
+    # GAP (owner 2026-09-15). The owner's 18-man blackzone clap roster
+    # (4 tank / 4 support / 6 dps / 4 healer, judged dressed at roster
+    # size) read burst_aoe 20.6 of 25.5 and got a second Permafrost and a
+    # second Spiked Gauntlets in its top four: Permafrost's per_weapon
+    # `free: 2` made the copy cost nothing, and rho 0.25 was below the
+    # coverage one more bomb earns while the gap is open. Rulings: the
+    # Permafrost allowance goes ("remove that free 2"); rho 0.5 - "0.25
+    # must be too soft because there are probably a lot more aoe weapons
+    # such as longbow, blazing staff, rift glaive, energyshaper" - the
+    # smallest value at which every copy leaves this roster's suggestion
+    # list (best copy rank 4 -> 12 of 77; 0.75 -> 31). Distinct top picks
+    # unchanged. Same round: Fists of Avalon keeps its ranged grant ("leave
+    # fists of avalon as is"), Trinity Spear's leap is melee ("most
+    # definitely a melee weapon"), Skystrider's foothold is ranged.
+    e18 = Engine(content="blackzone_roam", size=18, style="clap")
+    own18 = ["2H_HAMMER_AVALON", "2H_POLEHAMMER", "2H_MACE", "MAIN_HAMMER",
+             "2H_ARCANESTAFF_HELL", "2H_SHAPESHIFTER_SET2",
+             "2H_ENIGMATICORB_MORGANA", "2H_ARCANESTAFF",
+             "2H_AXE_AVALON", "MAIN_CURSEDSTAFF_CRYSTAL", "2H_KNUCKLES_SET3",
+             "2H_HARPOON_HELL", "2H_FIRE_RINGPAIR_AVALON", PERMAFROST,
+             "2H_HOLYSTAFF_CRYSTAL", "2H_NATURESTAFF_KEEPER",
+             "2H_HOLYSTAFF_HELL", HALLOWFALL]
+    g18 = []
+    for i, wk in enumerate(own18):
+        ko = e18.kit_options(wk, None, own18[:i] + own18[i + 1:])
+        g18.append([c["gear"] for c in (ko.get("kit") or {}).values()
+                    if c and c.get("gear")] or None)
+    top8 = names(e18.recommend(own18, top_n=8, gears=g18))
+    have18 = {e18.weapons[wk]["display_name"] for wk in own18}
+    dup18 = [n for n in top8 if n in have18]
+    perma2 = e18.pick_report(own18, PERMAFROST, gears=g18)
+    rp = lambda k: e18.weapons[k]["capabilities"].get("ranged_presence", 0)  # noqa: E731
+    check("T49 owner 2026-09-15: no copy of a fielded weapon in the 18-man "
+          "clap roster's top 8; a 2nd Permafrost pays the duplicate cost "
+          "(allowance removed); rho 0.5; Trinity Spear's leap is melee, "
+          "Fists of Avalon and Skystrider keep ranged_presence",
+          not dup18 and perma2["dup_penalty"] > 0
+          and abs(e18.rho - 0.5) < 1e-9
+          and not rp("2H_TRIDENT_UNDEAD")
+          and rp("2H_KNUCKLES_AVALON") and rp("2H_BOW_CRYSTAL"),
+          f"dups_in_top8={dup18} top8={top8} "
+          f"perma_dup={perma2['dup_penalty']:.2f} rho={e18.rho} "
+          f"trinity_rp={rp('2H_TRIDENT_UNDEAD')} fists_rp={rp('2H_KNUCKLES_AVALON')} "
+          f"sky_rp={rp('2H_BOW_CRYSTAL')}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

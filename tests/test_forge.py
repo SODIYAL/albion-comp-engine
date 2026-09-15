@@ -150,14 +150,31 @@ def t_redundancy():
     r3 = e.redundancy([b, b, b])
     r4 = e.redundancy([b, b, b, b])
     growing = (r1 == 0.0 and r2 - r1 == 1.0 and r3 - r2 == 2.0 and r4 - r3 == 3.0)
-    p = "2H_ICECRYSTAL_UNDEAD"  # Permafrost: free 2 (Deadlyhooker P1)
-    free_ok = (e.redundancy([p, p]) == 0.0 and e.redundancy([p, p, p]) == 1.0)
-    h = "MAIN_HOLYSTAFF_AVALON"  # Hallowfall: free 3
-    hall_ok = (e.redundancy([h, h, h]) == 0.0 and e.redundancy([h, h, h, h]) == 1.0)
-    check("F4 duplicate marginal cost grows; meta duplicates stay free",
-          growing and free_ok and hall_ok,
+    # Allowances are GENERATED per style x band since 2026-09-15 (owner:
+    # "full autonomy"; derive_skeletons.py, free = round(p50 copies) of the
+    # rosters fielding the weapon at the band). The hand list is retired:
+    # Great Arcane's free 2 (one Deadlyhooker party) reads 1 at 20 (9% of
+    # winners double it), Hallowfall keeps a free second copy (88% double
+    # it), and Permafrost's free 2 — removed by the owner the same morning
+    # — stays gone (p50 one copy). Every copy beyond `free` pays rho.
+    p = "2H_ARCANESTAFF"
+    free_ok = (e._dup_free(p) == 1 and e.redundancy([p, p]) == 1.0
+               and e.redundancy([p, p, p]) == 3.0)
+    pf = "2H_ICECRYSTAL_UNDEAD"
+    perma_ok = (e._dup_free(pf) == 1 and e.redundancy([pf, pf]) == 1.0
+                and e.rho == 0.5)
+    h = "MAIN_HOLYSTAFF_AVALON"
+    fh = e._dup_free(h)
+    hall_ok = (fh >= 2 and fh == e.dup_per_weapon[h]["free"]
+               and e.redundancy([h] * fh) == 0.0
+               and e.redundancy([h] * (fh + 1)) == 1.0)
+    check("F4 duplicate marginal cost grows; generated allowances (2026-09-15): "
+          "Great Arcane free 1, Hallowfall's free second copy from the harvest, "
+          "Permafrost pays since 2026-09-15 (rho 0.5)",
+          growing and free_ok and hall_ok and perma_ok,
           f"2H_AXE copies cost {r2 - r1}/{r3 - r2}/{r4 - r3}; "
-          f"2x Permafrost {e.redundancy([p, p])}, 3x Hallowfall {e.redundancy([h, h, h])}")
+          f"Great Arcane free {e._dup_free(p)}, Permafrost free {e._dup_free(pf)}, "
+          f"Hallowfall free {fh}")
 
 
 # ------------------------------------------------------- F5 size-11 matrix
@@ -227,10 +244,12 @@ def t_size11_matrix():
             for key, rule in (e._band or {}).items():
                 if key in ("min_size", "max_size") or not isinstance(rule, dict):
                     continue
-                if key in e.pred_defs or key == e.PRIMARY_HEAL:
+                if key in e.pred_defs or key in (e.PRIMARY_HEAL, e.STANDOFF):
                     # COMBO-AWARE (review 2026-08-19): a member counts only
                     # if the spell combination the forge actually SELECTED
-                    # supplies the minima.
+                    # supplies the minima. `standoff` (2026-09-15) is the
+                    # plan-tool flag predicate, combo-independent like
+                    # primary_heal.
                     have = sum(1 for w, c in zip(party, r["combos"])
                                if key in e._pred_contrib(w, c))
                 else:
@@ -724,8 +743,16 @@ def t_dup_and_clump():
     HoJ, Camlann, Witchwork) caps generated clump tools at 2 — one
     primary plus at most one backup."""
     e = Engine(content="faction_war", size=15)
+    # generated allowances (2026-09-15): the forge cap is ceil(p90 copies)
+    # of the rosters fielding the weapon at the band, the free copies
+    # round(p50) — Earthrune keeps the default, Great Arcane's hand cap of
+    # 3 (one Deadlyhooker party) falls to what winners at 15-19 field,
+    # Permafrost's free second copy stays gone (owner, the same morning)
+    ga = e.dup_per_weapon.get("2H_ARCANESTAFF") or {}
     dup_ok = (e._dup_gen_max("2H_SHAPESHIFTER_KEEPER") == 1
-              and e._dup_gen_max("2H_ICECRYSTAL_UNDEAD") == 3)
+              and e._dup_gen_max("2H_ARCANESTAFF") == ga.get("max", 1) < 3
+              and e._dup_free("2H_ARCANESTAFF") == ga.get("free", 1) == 1
+              and e._dup_free("2H_ICECRYSTAL_UNDEAD") == 1)
     r = e.forge(15)
     allowed = set(e.dup_per_weapon)
     counts = {}

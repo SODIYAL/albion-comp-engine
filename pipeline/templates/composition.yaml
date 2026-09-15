@@ -123,17 +123,31 @@ duplication:
   # rosters still stack whatever they like — this caps GENERATION only.
   max_copies_default_large: 1
   free_copies_default: 1
-  # per_weapon allowances below are seeded EXCLUSIVELY from 20-man comps —
-  # they apply only at party size >= this (review 2026-08-18): two
-  # Permafrosts in a trio pay like any other duplicate.
+  # per_weapon allowances apply only at party size >= this (review
+  # 2026-08-18): two Permafrosts in a trio pay like any other duplicate.
   per_weapon_min_size: 10
-  per_weapon:
-    MAIN_HOLYSTAFF_AVALON: {free: 3, max: 4}  # Hallowfall x3 (Deadlyhooker P1), x2 (blap)
-    2H_ICECRYSTAL_UNDEAD:  {free: 2, max: 3}  # Permafrost x2 (Deadlyhooker P1)
-    MAIN_ROCKMACE_KEEPER:  {free: 2, max: 3}  # Bedrock x2 (Deadlyhooker P1)
-    2H_ARCANESTAFF:        {free: 2, max: 3}  # Great Arcane x2 (Deadlyhooker P2)
-    2H_GLAIVE_CRYSTAL:     {free: 2, max: 3}  # Rift Glaive x2 (Deadlyhooker P2)
-    2H_BOW_HELL:           {free: 2, max: 3}  # Wailing Bow x2 (Deadlyhooker P3, alt slots)
+  # GENERATED since 2026-09-15 (owner: "full autonomy" on the skeleton-first
+  # assessment; spec notes/specs/2026-09-15-skeleton-first-generation-
+  # design.md): pipeline/derive_skeletons.py -> out/skeletons.json carries,
+  # per style x band (10-14 / 15-19 / 20+) and pooled, for every weapon
+  # fielded by >= 40 distinct fully-known killer rosters of the cell,
+  # free = round(p50 copies) and max = ceil(p90 copies) — the typical winner
+  # convention (rule 17) applied to copies. build_dataset attaches the cells
+  # as `per_weapon_cells` and REFUSES a hand-set list here (the meta-prior
+  # precedent). The engine lays the declared style's cell over the pooled
+  # cell at set_content. The retired hand list, for the record:
+  #   MAIN_HOLYSTAFF_AVALON {free: 3, max: 4}  (Hallowfall x3 Deadlyhooker P1,
+  #       x2 blap) -> harvest 20: pooled free 2 max 4 (88% field 2+), brawl
+  #       free 3 (98% field 2+)
+  #   2H_ICECRYSTAL_UNDEAD {free: 2, max: 3} — removed by owner ruling the
+  #       same day ("remove that free 2"); the harvest agrees (p50 1 copy,
+  #       24% field 2+)
+  #   MAIN_ROCKMACE_KEEPER {free: 2, max: 3}  (Bedrock x2) -> harvest free 2
+  #       max 2 (63% field 2+; 83% in clap_kite)
+  #   2H_ARCANESTAFF {free: 2, max: 3}, 2H_GLAIVE_CRYSTAL {free: 2, max: 3},
+  #   2H_BOW_HELL {free: 2, max: 3} (each one Deadlyhooker party) -> no
+  #       harvest support at 20 (9% / 33% / 33% field 2+): default 1
+  per_weapon: {}
 
 # Non-stacking groups: at most `max` members of the group per generated
 # roster, regardless of which weapons fill it. Mechanism seeded with the one

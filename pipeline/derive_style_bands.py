@@ -129,6 +129,15 @@ def derive(ev):
         "min_size: 10",
         f"convention: {{target_of_p50: {TARGET_OF_P50}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}}}",
         f"excluded: [{', '.join(EXCLUDED)}]",   # empty list when nothing is excluded
+        # HOLDOUT (2026-09-15): the board records the split it learned from;
+        # a board generated before the audit gained --holdout-mod carries
+        # none, and the build says so — the rows stay weak-form until the
+        # audit reruns on the harvest checkout
+        ("split: {holdout_mod: %s, rule: \"%s\"}" % (
+            ev["_split"]["holdout_mod"], ev["_split"]["rule"])
+         if isinstance(ev.get("_split"), dict) and ev["_split"].get("holdout_mod")
+         else "split: none   # board generated before 2026-09-15 on every battle; "
+              "rerun audit_style_rosters.py on the harvest checkout"),
         "",
         "bands:",
     ]

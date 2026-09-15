@@ -2534,6 +2534,11 @@ def load_role_typical():
         if src.get(key) != have:
             sys.exit(f"out/role_counts.json was derived from a different "
                      f"{art} — rerun derive_role_counts.py")
+    if not (doc.get("_split") or {}).get("holdout_mod"):
+        sys.exit("out/role_counts.json was not derived on the training split "
+                 "(2026-09-15: the harvest rows never learn from the v4h "
+                 "holdout) — rerun py -3 pipeline/derive_role_counts.py "
+                 "without --all-battles")
     typ = doc.get("typical") or {}
     if set(typ) != {"pooled", "styles", "comps"}:
         sys.exit("out/role_counts.json: typical must carry pooled / styles "
@@ -2564,6 +2569,147 @@ def load_role_typical():
                      for c, rows in sorted((typ["comps"] or {}).items())},
            "style_min_size": int(doc.get("_style_min_size") or 10)}
     return out
+
+
+SKELETONS_PATH = os.path.join(OUT, "skeletons.json")
+
+
+def refuse_hand_per_weapon(dup):
+    """A hand-set duplication.per_weapon list blocks the build (owner
+    2026-09-15): copy allowances are GENERATED per style x band."""
+    if (dup or {}).get("per_weapon"):
+        sys.exit("composition.duplication.per_weapon is GENERATED since "
+                 "2026-09-15 (pipeline/derive_skeletons.py -> "
+                 "out/skeletons.json, per style x band); remove the hand-set "
+                 "allowances from templates/composition.yaml")
+
+
+def load_skeletons(known_weapons, seat_ids):
+    """The GENERATED seat skeletons and copy allowances
+    (derive_skeletons.py -> out/skeletons.json; owner ruling 2026-09-15,
+    spec notes/specs/2026-09-15-skeleton-first-generation-design.md):
+    per exact size at 10+, pooled and per declared style, the typical
+    count of every PRIMARY SEAT (round(p50) of distinct fully-known killer
+    rosters on the training split), and per style x band the copy
+    allowance of every weapon fielded by >= 40 rosters (free = round(p50),
+    max = ceil(p90)). Attached as `composition.skeleton` = {style_min_size,
+    seats: {pooled: {size: {seat: n}}, styles: {style: {size: {...}}}}}
+    and `composition.duplication.per_weapon_cells` = {bands, pooled:
+    {band: {weapon: {free, max}}}, styles: {style: {band: {...}}}}; the
+    engine resolves one seat row and one copy cell for its style and size
+    at set_content. Fail closed, loudly: a missing file, a file derived
+    from different artifacts than the ones on disk, an all-battles
+    derivation, an unknown seat or weapon, or a row that is not a
+    positive integer count blocks the build. A size with no row stays
+    unconstrained (unknown is explicit, never filled)."""
+    import hashlib
+    if not os.path.exists(SKELETONS_PATH):
+        sys.exit("out/skeletons.json missing — seat skeletons and copy "
+                 "allowances are GENERATED from the committed evidence since "
+                 "2026-09-15: run py -3 pipeline/derive_skeletons.py")
+    with open(SKELETONS_PATH, encoding="utf-8") as f:
+        doc = json.load(f) or {}
+    src = doc.get("_source") or {}
+    for art, key in ((rosters_io.NAME, "party_rosters_sha256"),
+                     ("party_styles.json", "party_styles_sha256")):
+        with open(os.path.join(OUT, art), "rb") as f:
+            have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
+        if src.get(key) != have:
+            sys.exit(f"out/skeletons.json was derived from a different "
+                     f"{art} — rerun derive_skeletons.py")
+    if not (doc.get("_split") or {}).get("holdout_mod"):
+        sys.exit("out/skeletons.json was not derived on the training split "
+                 "— rerun py -3 pipeline/derive_skeletons.py")
+    seats = (doc.get("seats") or {}).get("typical") or {}
+    if set(seats) != {"pooled", "styles"}:
+        sys.exit("out/skeletons.json: seats.typical must carry pooled / styles")
+
+    def seat_rows(table, where):
+        out = {}
+        for size, row in (table or {}).items():
+            if not str(size).isdigit() or not isinstance(row, dict):
+                sys.exit(f"out/skeletons.json: bad seat row {where}[{size!r}]")
+            clean = {}
+            for seat, n in row.items():
+                if seat not in seat_ids:
+                    sys.exit(f"out/skeletons.json: {where}[{size}]: unknown "
+                             f"seat {seat!r} (roles.yaml ids)")
+                if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+                    sys.exit(f"out/skeletons.json: {where}[{size}][{seat}] "
+                             f"must be a positive integer count, got {n!r}")
+                clean[seat] = n
+            # an EMPTY row is kept: it says the style's winners field none
+            # (no demand), where an absent row falls back to the pooled cell
+            out[str(int(size))] = clean
+        return out
+
+    def copy_rows(table, where):
+        out = {}
+        for band, rows in (table or {}).items():
+            if band not in (doc.get("bands") or {}):
+                sys.exit(f"out/skeletons.json: {where}: unknown band {band!r}")
+            cell = {}
+            for w, v in (rows or {}).items():
+                if w not in known_weapons:
+                    sys.exit(f"out/skeletons.json: {where}[{band}]: unknown "
+                             f"weapon {w!r}")
+                free, mx = v.get("free"), v.get("max")
+                if (isinstance(free, bool) or isinstance(mx, bool)
+                        or not isinstance(free, int) or not isinstance(mx, int)
+                        or free < 1 or mx < free):
+                    sys.exit(f"out/skeletons.json: {where}[{band}][{w}]: "
+                             f"need 1 <= free <= max, got {v!r}")
+                cell[w] = {"free": free, "max": mx}
+            out[band] = cell
+        return out
+
+    bands = {}
+    for bk, lim in (doc.get("bands") or {}).items():
+        if not (isinstance(lim, list) and len(lim) == 2
+                and all(type(x) is int for x in lim) and lim[0] <= lim[1]):
+            sys.exit(f"out/skeletons.json: bad band {bk!r}: {lim!r}")
+        bands[bk] = [int(lim[0]), int(lim[1])]
+    copies = doc.get("copies") or {}
+    if set(copies) != {"pooled", "styles"}:
+        sys.exit("out/skeletons.json: copies must carry pooled / styles")
+    plan = (doc.get("plan") or {}).get("typical") or {"pooled": {}, "styles": {}}
+    if set(plan) != {"pooled", "styles"}:
+        sys.exit("out/skeletons.json: plan.typical must carry pooled / styles")
+
+    def plan_rows(table, where):
+        out = {}
+        for size, row in (table or {}).items():
+            if not str(size).isdigit() or not isinstance(row, dict):
+                sys.exit(f"out/skeletons.json: bad plan row {where}[{size!r}]")
+            clean = {}
+            for tool, n in row.items():
+                if tool not in ("standoff",):
+                    sys.exit(f"out/skeletons.json: {where}[{size}]: unknown "
+                             f"plan tool {tool!r}")
+                if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+                    sys.exit(f"out/skeletons.json: {where}[{size}][{tool}] "
+                             f"must be a positive integer count, got {n!r}")
+                clean[tool] = n
+            out[str(int(size))] = clean      # empty = fields none, no demand
+        return out
+
+    skeleton = {"style_min_size": int(doc.get("_style_min_size") or 10),
+                "seats": {"pooled": seat_rows(seats["pooled"], "pooled"),
+                          "styles": {st: seat_rows(rows, f"styles[{st}]")
+                                     for st, rows in sorted(
+                                         (seats["styles"] or {}).items())}},
+                # plan tools (standoff, 2026-09-15): a generation MINIMUM
+                # per declared style and size — what the style's winners
+                # field of the tool the identity read defines the plan by
+                "plan": {"pooled": plan_rows(plan["pooled"], "plan pooled"),
+                         "styles": {st: plan_rows(rows, f"plan styles[{st}]")
+                                    for st, rows in sorted(
+                                        (plan["styles"] or {}).items())}}}
+    cells = {"bands": bands,
+             "pooled": copy_rows(copies["pooled"], "pooled"),
+             "styles": {st: copy_rows(rows, f"styles[{st}]")
+                        for st, rows in sorted((copies["styles"] or {}).items())}}
+    return skeleton, cells
 
 
 def load_templates(tune=None):
@@ -2713,17 +2859,48 @@ def main():
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
     templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
+    # HOLDOUT (2026-09-15): the style x size board records the split it
+    # learned from; a board that predates the audit's --holdout-mod is
+    # weak-form on every styled measurement and the build says so (it
+    # cannot regenerate the board: the raw cache lives on the harvest
+    # checkout)
+    sb_split = style_bands.get("split") if isinstance(style_bands, dict) else None
+    print("  style bands   : "
+          + (f"training split ({sb_split.get('rule')})"
+             if isinstance(sb_split, dict) and sb_split.get("holdout_mod")
+             else "PREDATE the holdout split — weak-form until "
+                  "audit_style_rosters.py reruns on the harvest checkout"))
     # observed relevance (owner 2026-09-08): the generated harvest prior
     scoring["meta_prior"], scoring["meta_pairs"] = load_meta_prior(set(weapons))
     # typical role counts (owner 2026-09-11): the generated harvest p50 per
     # size, the middle line the composition bands never had
     composition["role_typical"] = load_role_typical()
     rt = composition["role_typical"]
-    print("  role typical  : generated (out/role_counts.json), "
+    print("  role typical  : generated (out/role_counts.json, training split), "
           f"pooled {len(rt['pooled'])} sizes, styles "
           + ", ".join(f"{st} {len(rows)}" for st, rows in rt["styles"].items())
           + ", comps " + ", ".join(f"{c} {len(rows)}"
                                    for c, rows in rt["comps"].items()))
+    # seat skeletons + copy allowances (owner 2026-09-15): GENERATED — a
+    # hand-kept duplication.per_weapon list in composition.yaml is a build
+    # error, never silently merged (the meta-prior precedent)
+    dup = composition.setdefault("duplication", {})
+    refuse_hand_per_weapon(dup)
+    dup["per_weapon"] = {}
+    seat_ids = set()
+    for path in glob.glob(os.path.join(HERE, "roles.yaml")):
+        for rec in (_load_yaml(path).get("roles") or []):
+            if rec.get("id"):
+                seat_ids.add(rec["id"])
+    composition["skeleton"], dup["per_weapon_cells"] = load_skeletons(
+        set(weapons), seat_ids)
+    sk = composition["skeleton"]
+    print("  skeleton      : generated (out/skeletons.json, training split), "
+          f"pooled {len(sk['seats']['pooled'])} sizes, styles "
+          + ", ".join(f"{st} {len(rows)}" for st, rows in sk["seats"]["styles"].items())
+          + "; copy cells pooled "
+          + ", ".join(f"{bk} {len(rows)}"
+                      for bk, rows in dup["per_weapon_cells"]["pooled"].items()))
     print("  meta prior    : generated (out/meta_prior.json, training split), "
           + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
           + " weapon rows; pairs "

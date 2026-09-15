@@ -43,7 +43,16 @@ Anti-circularity: none of these rosters calibrated a template, so they
 are admissible evidence - but every proposal here is for the OWNER'S
 ruling; nothing in the build reads this file.
 
+HOLDOUT (2026-09-15, "honour the holdout split end to end"): the board and
+the chest leans learn from battles with id % HOLDOUT_MOD != 0 only (the
+meta prior's rule; the % 5 == 0 slice is tier2_blindtest v4h's holdout);
+the blind form still samples from every roster so graded rounds stay
+reproducible. The evidence json records `_split`, derive_style_bands.py
+carries it into the yaml header, and build_dataset says whether the
+committed board honours it.
+
 Usage: py -3 pipeline/audit_style_rosters.py [--min-size 10] [--min-known 0.8]
+       [--holdout-mod 5]   # 0 = every battle, an AUDIT copy never shipped
 """
 import argparse
 import datetime
@@ -226,15 +235,26 @@ def main():
                          "(rounds 1-2: 15+; round 3: 10 14)")
     ap.add_argument("--blind-round", type=int, default=3,
                     help="round number printed on the form")
+    ap.add_argument("--holdout-mod", type=int, default=HOLDOUT_MOD,
+                    help="the BOARD and the chest leans learn from battles "
+                         "with id %% M != 0 only (the meta prior's rule; "
+                         "%% M == 0 is tier2_blindtest v4h's holdout); 0 = "
+                         "every battle, an AUDIT copy never shipped")
     args = ap.parse_args()
     if not os.path.isdir(CACHE):
         sys.exit("no party cache - run sample_parties.py first")
 
     e_label = Engine(content=CONTENT_FOR_SUPPLY, size=20)
     known = set(e_label.weapons)
-    rosters = load_rosters(known, args.min_size, args.min_known)
+    all_rosters = load_rosters(known, args.min_size, args.min_known)
+    # HOLDOUT (2026-09-15, "honour the holdout split end to end"): every
+    # number the build reads — the style x size board and the chest leans
+    # — comes from the training split; the blind form below still samples
+    # from every roster so graded rounds stay reproducible.
+    rosters = [r for r in all_rosters if in_split(r["battle"], args.holdout_mod)]
     print(f"rosters >= {args.min_size} with >= {args.min_known:.0%} weapons "
-          f"known: {len(rosters)}")
+          f"known: {len(all_rosters)}; on the training split "
+          f"(battle % {args.holdout_mod or 'none'} != 0): {len(rosters)}")
 
     # ---- 0. PER-ITEM CHEST LEAN (2026-09-05, the kit rounds: "Royal
     # Jacket is ranged without exception, Hellion is brawl or clap" — two
@@ -427,6 +447,11 @@ def main():
     out = {"_generated": datetime.date.today().isoformat(),
            "_source": "out/party_cache (official kill-event killer parties)",
            "_filters": {"min_size": args.min_size, "min_known": args.min_known},
+           "_split": {"holdout_mod": args.holdout_mod,
+                      "rule": (f"battle % {args.holdout_mod} != 0 (training "
+                               f"split; % {args.holdout_mod} == 0 is the v4h "
+                               "holdout)" if args.holdout_mod else
+                               "all battles (AUDIT ONLY, never shipped)")},
            "_supply_content": CONTENT_FOR_SUPPLY,
            "rosters_total": len(rosters), "labels": label_counts,
            "board": board, "blind_form": blind, "blind_answers": answers}
