@@ -1,6 +1,6 @@
 # The Frontend
 
-Comp Forge's planner UI: a single self-contained HTML page, generated — never
+Comp Zaddy's planner UI: a single self-contained HTML page, generated — never
 hand-edited.
 
 - `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,

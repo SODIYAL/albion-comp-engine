@@ -561,7 +561,7 @@
       <button class="cb-add" data-add="${best.w}">Add ${nameOf(best.w)}</button>
       ${recs.length > 1 ? `<div class="dl-mini-rank">${recs.slice(1,5).map((r,i) =>
         `<span>${i+2}. ${nameOf(r.w)} <b>${r.score >= 0 ? "+" : ""}${r.score.toFixed(2)}</b></span>`).join("")}</div>` : ""}
-    </div>` : `<div class="dl-pool-best empty"><span class="dl-kicker">Best available</span><strong>Build this player's pool first</strong><p>Once you select their weapons, Comp Forge ranks only those choices for the next slot.</p></div>`;
+    </div>` : `<div class="dl-pool-best empty"><span class="dl-kicker">Best available</span><strong>Build this player's pool first</strong><p>Once you select their weapons, Comp Zaddy ranks only those choices for the next slot.</p></div>`;
 
     let swapHtml = `<div class="dl-tool-note">${party.length
       ? "Swap comparison needs a second member — or a player pool to draw candidates from."
@@ -627,7 +627,7 @@
     if (!party.length){
       host.innerHTML = `<div class="dl-status dl-empty">
         <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
-        <p>Choose the content and playstyle, then add the weapons you already have. Comp Forge will diagnose the gaps before suggesting the next slot.</p></div>
+        <p>Choose the content and playstyle, then add the weapons you already have. Comp Zaddy will diagnose the gaps before suggesting the next slot.</p></div>
       </div>`;
       renderPlayerTools(host);
       return;

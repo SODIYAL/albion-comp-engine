@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Comp Forge — a capability-model party planner for Albion Online. Pick the content, set the size, and forge a composition with evidence-backed recommendations.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9876;</text></svg>">
-<title>Comp Forge</title>
+<meta name="description" content="Comp Zaddy — a capability-model party planner for Albion Online. Pick the content, set the size, and build a composition with evidence-backed recommendations.">
+<link rel="icon" type="image/png" href="assets/brand/comp-zaddy-logo.png">
+<title>Comp Zaddy</title>
 <style>
 /* ============================================================ NEON FORGE
-   Comp Forge's committed single look (the neon reskin):
+   Comp Zaddy's committed single look (the neon reskin):
    the dashboard-kit language — near-black borderless cards, vivid neon
    data hues, rounded geometry — with the forge's soul kept as one hot
    gold accent for the machine's own voice (recommendations, actions,
@@ -112,10 +112,10 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 .brandmark{display:flex; align-items:center; gap:13px}
 .brandmark .sigil{
-  width:34px; height:34px; flex:none; display:grid; place-items:center;
-  font-size:17px; border:1px solid rgba(255,201,58,.45); border-radius:9px;
-  background:linear-gradient(160deg, rgba(255,201,58,.16), rgba(255,201,58,.03));
-  box-shadow:inset 0 1px 0 rgba(255,223,122,.18), 0 0 18px -6px rgba(255,201,58,.5);
+  width:34px; height:34px; flex:none; display:block;
+}
+.brandmark .sigil img{
+  display:block; width:100%; height:100%; object-fit:contain;
 }
 .brandmark h1{
   font-size:21px; letter-spacing:.02em;
@@ -1608,9 +1608,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 <header class="masthead">
   <div class="mh-top">
   <div class="brandmark">
-    <span class="sigil" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E5B45C" stroke-width="1.8" stroke-linecap="round"><path d="M4 4l10.5 10.5M4 4v3.5M4 4h3.5"/><path d="M20 4L9.5 14.5M20 4v3.5M20 4h-3.5"/><path d="M7 17l-2.4 2.4M17 17l2.4 2.4"/><path d="M5.2 15.2l3.6 3.6M18.8 15.2l-3.6 3.6"/></svg></span>
+    <span class="sigil" aria-hidden="true"><img src="assets/brand/comp-zaddy-logo.png" alt=""></span>
     <div>
-      <h1>Comp Forge</h1>
+      <h1>Comp Zaddy</h1>
       <span class="sub">Albion composition engine</span>
     </div>
   </div>
@@ -1621,7 +1621,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   </div>
   <div class="sb-identity" id="sb-identity"></div>
   <div class="spacer"></div>
-  <a class="about-link" href="how-it-works.html">How it works <span aria-hidden="true">→</span></a>
+  <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
   <label class="lf-sync" id="companion-sync-wrap" hidden
          title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">

@@ -59,6 +59,8 @@ SEMANTIC_ICON_FILES = {
     "hpcut": "hpcut.svg",
 }
 
+BRAND_LOGO_FILE = os.path.join("assets", "brand", "comp-zaddy-logo.png")
+
 
 def load_semantic_icons():
     icon_dir = os.path.join(DASH, "assets", "semantic-icons")
@@ -72,6 +74,16 @@ def load_semantic_icons():
             encoded = base64.b64encode(f.read()).decode("ascii")
         icons[key] = f"data:{mime};base64,{encoded}"
     return icons
+
+
+def load_brand_logo():
+    """Embed the brand asset so both local and GitHub Pages builds stay portable."""
+    path = os.path.join(DASH, BRAND_LOGO_FILE)
+    if not os.path.exists(path):
+        sys.exit(f"brand logo missing: {path}")
+    with open(path, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
 
 
 def load_loadouts(weapons):
@@ -100,6 +112,7 @@ def main():
         data = json.load(f)
     with open(os.path.join(DASH, "_shell.html"), encoding="utf-8") as f:
         shell = f.read()
+    shell = shell.replace(BRAND_LOGO_FILE.replace(os.sep, "/"), load_brand_logo())
     # Decision-first UX is part of the dashboard build,
     # not a preview page. It is deliberately a translation layer: scoring
     # remains entirely inside app_scoring.js / CompEngine.
@@ -375,9 +388,34 @@ def main():
     explainer_src = os.path.join(DASH, "_explainer.html")
     with open(explainer_src, encoding="utf-8") as f:
         explainer = f.read()
+    explainer = explainer.replace("Comp Forge", "Comp Zaddy")
     explainer_path = os.path.join(DASH, "how-it-works.html")
     with open(explainer_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(explainer)
+    welcome_src = os.path.join(DASH, "_welcome.html")
+    with open(welcome_src, encoding="utf-8") as f:
+        welcome = f.read()
+    welcome = welcome.replace(BRAND_LOGO_FILE.replace(os.sep, "/"), load_brand_logo())
+    welcome_config = {
+        "templates": [
+            {"id": key, "name": value.get("name", key),
+             "base": value.get("base_size", 7)}
+            for key, value in data["templates"].items()
+        ],
+        "styles": [
+            {"id": key, "name": value.get("name", key)}
+            for key, value in data.get("styles", {}).items()
+        ],
+        "weapons": [
+            {"id": key, "name": value.get("display_name", key)}
+            for key, value in sorted(data["weapons"].items(),
+                                     key=lambda item: item[1].get("display_name", item[0]))
+        ],
+    }
+    welcome = welcome.replace("<!-- WELCOME_CONFIG -->",
+                              f"<script>const WELCOME_CONFIG = {js(welcome_config)};</script>")
+    with open(os.path.join(DASH, "welcome.html"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(welcome)
     # GitHub Pages copy (Settings -> Pages -> main /docs): byte-for-byte the
     # same complete standards-mode document as the dashboard build.
     docs = os.path.join(ROOT, "docs")
@@ -388,11 +426,15 @@ def main():
     with open(os.path.join(docs, "how-it-works.html"), "w", encoding="utf-8",
               newline="\n") as f:
         f.write(explainer)
+    with open(os.path.join(docs, "welcome.html"), "w", encoding="utf-8",
+              newline="\n") as f:
+        f.write(welcome)
     open(os.path.join(docs, ".nojekyll"), "w").close()
 
     m = data["_meta"]
     print(f"wrote dashboard/index.html  ({len(out)/1024:.0f} KB)")
     print(f"wrote dashboard/how-it-works.html  ({len(explainer)/1024:.0f} KB)")
+    print(f"wrote dashboard/welcome.html  ({len(welcome)/1024:.0f} KB)")
     print(f"  dataset v{m['version']}: {m['weapons_curated']} curated / "
           f"{m['weapons_illustrative']} illustrative, release_clean={m['release_clean']}")
     if not m["release_clean"]:
