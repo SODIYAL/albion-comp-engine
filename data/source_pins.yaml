@@ -1,5 +1,6 @@
 # Pinned upstream inputs — the source_snapshot declaration for the evidence
-# layer (changeschapter2.md §A). Every game-data input is fetched from THIS
+# layer (pipeline/README.md, "Moving to a new game patch"). Every game-data
+# input is fetched from THIS
 # exact commit by pipeline/fetch_snapshot.py; nothing follows a moving branch.
 #
 # To move to a new game patch: update `commit`/`commit_timestamp` (from

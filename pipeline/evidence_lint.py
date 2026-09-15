@@ -9,12 +9,12 @@ Every nonzero capability score must cite an evidence spell. The lint verifies:
   3. the spell can actually GROUND the claimed capability, checked against the
      structured effect map (effect_map.yaml) rather than description keywords
 
-Rule 3 changed 2026-08-12. It used to require a prose regex flag matching the
-capability class, which missed most of the game: 100 weapon lines apply a
-movespeed debuff and the `slow` regex saw almost none of them. It now resolves
-the spell's structured effects, applies the direction-aware effect map, and
-checks the claimed capability is among the CANDIDATES — with the old prose
-flags kept as a fallback, because neither source is complete alone.
+Rule 3 used to require a prose regex flag matching the capability class,
+which missed most of the game: 100 weapon lines apply a movespeed debuff
+and the `slow` regex saw almost none of them. It now resolves the spell's
+structured effects, applies the direction-aware effect map, and checks the
+claimed capability is among the CANDIDATES — with the old prose flags kept
+as a fallback, because neither source is complete alone.
 
 Capabilities the effect layer cannot express (zone_control, burst_aoe,
 clump_create, heal_burst, anti_dive, engage-by-range ...) remain pure human
@@ -52,7 +52,7 @@ NON_SPELL_EVIDENCE = {"WEAPON_STATS", "GEAR_STATS"}
 LOOKUP = EffectLookup()
 
 # Every capability the effect map is capable of producing. A claim outside this
-# set is a judgement call the data cannot adjudicate, so we do not try.
+# set is a judgement call the data cannot adjudicate, so the lint skips it.
 CHECKABLE = set()
 for _rule in LOOKUP.map.values():
     if isinstance(_rule, dict):

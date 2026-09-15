@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Tier-2 validation harness — V3 (expert blind test) and V4 (meta-comp
+Tier-2 validation harness — V3 (shotcaller blind test) and V4 (meta-comp
 reproduction). See tests/VALIDATION.md.
 
 V3 is the project's TRUE accuracy metric: give experienced shotcallers partial
 parties, collect their next pick independently, and measure how often that pick
 appears in the engine's top-3. Gate: >=70%.
 
-DRESSED VALIDATION (2026-08-27): the production engine evaluates DRESSED
+DRESSED VALIDATION: the production engine evaluates DRESSED
 candidates (weapon + combo + doctrine kit) against the party's actual
 loadout gear, while this harness historically scored naked incumbent
 parties — an asymmetric comparison (a dressed candidate collects gap
@@ -27,7 +27,7 @@ pins the effect). Scoring now runs explicit modes:
 
 V4 leave-one-out likewise reports three incumbent-gear classes:
   weapon_only        the legacy naked-incumbent metric. REPORTED, NOT
-                     GATED since 2026-08-29: the unit re-fit moved every
+                     GATED since the unit re-fit, which moved every
                      target into PERSON units, so scoring naked
                      incumbents measures in the unit the model has left.
   doctrine_inferred  incumbents in kit_variants v0 (inferred, and labeled
@@ -37,8 +37,8 @@ V4 leave-one-out likewise reports three incumbent-gear classes:
                      actually records (builds_index join; published
                      comps carry gear on every slot). Unresolved pieces
                      stay off the member and are counted, never guessed.
-                     ** THIS IS THE EXIT-CODE GATE ** (owner ruling
-                     2026-08-29). It scores incumbents in their real
+                     ** THIS IS THE EXIT-CODE GATE ** (tests/VALIDATION.md
+                     gates). It scores incumbents in their real
                      kits — what the page does — and is the only class
                      whose incumbents are not mined from the same
                      doctrine the engine uses.
@@ -46,7 +46,7 @@ Candidates always take the normal dressed path. Weapon-only reproduction
 is NOT production recommendation accuracy; the dressed sections are the
 production-faithful measurements.
 
-BASELINE (2026-09-15, spec notes/specs/2026-09-15-skeleton-first-
+BASELINE (spec notes/specs/2026-09-15-skeleton-first-
 generation-design.md decision 6): `v4 --baseline` and `v4h --baseline`
 also score a role-skeleton-plus-popularity recommender
 (baseline_recommend: candidates ranked by need — the role under its band
@@ -71,9 +71,9 @@ Usage:
     py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json] [--baseline]
     py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5] [--baseline]
 
-Party generation is seeded and deterministic, so every expert sees the same
-parties and a re-run reproduces the same set (seed 20260812 still emits the
-round-1 parties' PARTY_KEYS unchanged).
+Party generation is seeded and deterministic, so every shotcaller sees the
+same parties and a re-run reproduces the same set (seed 20260812 still emits
+the validation-round-1 parties' PARTY_KEYS unchanged).
 """
 import glob, json, os, statistics, sys, argparse, random, re
 
@@ -84,11 +84,11 @@ sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from engine import Engine  # noqa: E402
 import gear_join  # noqa: E402
 
-TOP_N = 3          # "expert pick appears in engine top-3"
+TOP_N = 3          # "shotcaller pick appears in engine top-3"
 GATE = 0.70        # VALIDATION.md V3 gate
 FULL_RANK = 10 ** 6  # top_n large enough to return the whole ranked pool
 
-# Expert PRIMARY NEED vocabulary -> engine capability. PROVISIONAL alias
+# Shotcaller PRIMARY NEED vocabulary -> engine capability. PROVISIONAL alias
 # table; a need word that fails to map is reported, never guessed.
 NEED_CAPS = {
     "pierce": "resist_shred", "resistance reduction": "resist_shred",
@@ -128,22 +128,22 @@ def generate(args):
             parties.append(p)
 
     lines = [
-        f"# Tier-2 V3 — expert blind test  ({e.template['name']}, size {args.size})",
+        f"# Tier-2 V3 — shotcaller blind test  ({e.template['name']}, size {args.size})",
         "",
-        "For each case fill in **BEST PICK** — the next player you would add.",
-        "The other fields are optional; each one you fill makes the round",
+        "For each case fill in **BEST PICK** — the next player to add.",
+        "The other fields are optional; each one filled in makes the round",
         "count for more:",
         "",
-        "- PRIMARY NEED — what the party lacks most, in your own words",
+        "- PRIMARY NEED — what the party lacks most, in plain words",
         "- OTHER GOOD PICKS — acceptable alternatives, comma-separated",
-        "- BAD PICK — a pick you would veto if the engine suggested it",
+        "- BAD PICK — a pick to veto if the engine suggested it",
         "- CONFIDENCE — High / Medium / Low",
         "- REASON — one line on why",
         "",
-        "Answer from your own judgement — the engine's answer is deliberately",
+        "Answer from judgement alone — the engine's answer is deliberately",
         "not shown. Use weapons' common names (e.g. `Heavy Mace`, `Hallowfall`).",
         "",
-        f"Generated with seed {args.seed} — every expert must receive this same file.",
+        f"Generated with seed {args.seed} — send every shotcaller this same file.",
         "",
         f"- FORM_CONTEXT: {args.content} {args.size} {args.style} {args.seed}",
         "",
@@ -331,7 +331,7 @@ MODE_NAMES = {"w": "V3-W weapon-only (symmetric naked benchmark)",
 def score(args):
     with open(args.form, encoding="utf-8") as f:
         text = f.read()
-    # A form generated since 2026-08-27 carries its own context — scoring
+    # A form from the current generator carries its own context — scoring
     # under the wrong content/size/style silently invalidates a round.
     m = re.search(r"^-[ \t]*FORM_CONTEXT:[ \t]*(\S+)[ \t]+(\d+)[ \t]+(\S+)",
                   text, re.MULTILINE)
@@ -354,7 +354,7 @@ def score(args):
         report[mode] = {"metrics": m, "rows": rows,
                         "unresolved": unresolved}
         print(f"\n=== {MODE_NAMES[mode]} ===")
-        print(f"{'#':<4}{'expert pick':<22}{'top-3':<8}{'rank':<12}engine top-3")
+        print(f"{'#':<4}{'shotcaller pick':<22}{'top-3':<8}{'rank':<12}engine top-3")
         print("-" * 96)
         for line in case_lines:
             print(line)
@@ -366,7 +366,7 @@ def score(args):
               f"acceptable top-{TOP_N} {_fmt_pct(m['acceptable_top3'])}   "
               f"conf-weighted {_fmt_pct(m['conf_weighted_top3'])}")
         mr = "-" if m["mean_rank"] is None else f"{m['mean_rank']:.1f}"
-        print(f"expert-pick rank: mean {mr} median {m['median_rank']} "
+        print(f"shotcaller-pick rank: mean {mr} median {m['median_rank']} "
               f"(n={m['rank_n']}, outside pool {m['outside_pool']})")
         print(f"primary-need agreement {_fmt_pct(m['need_agreement'])} "
               f"(n={m['need_n']})   bad-pick-in-top3 rate "
@@ -392,9 +392,9 @@ def score(args):
     print(f"\ngate (V3-D top-{TOP_N}): {gate_rate:.0%} vs {GATE:.0%} -> "
           f"{'PASS' if gate_rate >= GATE else 'FAIL'}")
     if gate_rate < GATE:
-        print("Per VALIDATION.md: a miss where the expert is right becomes a "
-              "new golden case in tests/test_golden.py. Review misses before "
-              "retuning.")
+        print("Per VALIDATION.md: a miss where the shotcaller is right "
+              "becomes a new golden case in tests/test_golden.py. Review "
+              "misses before retuning.")
     return 0 if gate_rate >= GATE else 1
 
 
@@ -419,7 +419,7 @@ def _tally_line(label, t, width):
 BASELINE_NOTE = ("  baseline = role skeleton (under band min, then under typical) "
                  "+ meta-prior solo share, top-3; REPORT-ONLY, NEVER A GATE, "
                  "no exit-code input — the capability model must beat it "
-                 "(spec 2026-09-15 decision 6).")
+                 "(the skeleton-first generation spec, decision 6).")
 
 
 def baseline_recommend(e, party, top_n=TOP_N):
@@ -483,11 +483,11 @@ def v4(args):
                     top-N ("propose the missing member's ROLE", VALIDATION V4).
     Battlemount slots are outside the weapon model and are skipped.
 
-    DRESSED (2026-08-27): each drop is scored under the three incumbent-gear
-    classes documented in the module docstring. The exit-code gate stays on
-    the legacy weapon_only role metric until an owner ruling re-bases it.
+    DRESSED: each drop is scored under the three incumbent-gear classes
+    documented in the module docstring. The exit-code gate reads the
+    actual_gear role metric (re-based from weapon_only; VALIDATION.md gates).
 
-    BASELINE (2026-09-15): with --baseline every drop is ALSO put to
+    BASELINE: with --baseline every drop is ALSO put to
     baseline_recommend() under the same hit rules, tallied once (it scores
     no gear) and printed as a `baseline` row. Report-only, never a gate —
     the exit code reads actual_gear alone.
@@ -549,7 +549,7 @@ def v4(args):
         # `style:`, quoted from the comp's source — e.g. Timothy's blap is
         # "(brawl comp)"). Default balanced. Scoring a deliberate melee ball
         # under balanced misreads its missing ranged core as a deficiency.
-        # 2026-08-28: a record may be EXCLUDED outright (PvE content, the
+        # A record may be EXCLUDED outright (PvE content, the
         # bomb-squad archetype, or a party its own author says is not built
         # properly) — an excluded record is still evidence for other work,
         # it just never teaches the model what a comp should look like.
@@ -646,7 +646,7 @@ def v4(args):
               f"{res}/{rec} recorded pieces resolved into the curated catalog")
     print(f"  dressed-vs-naked top-3 divergence: {len(divergences)}/"
           f"{base['w_total']} slots")
-    # GATE RE-BASED to actual_gear (owner ruling 2026-08-29), and it now
+    # GATE RE-BASED to actual_gear (tests/VALIDATION.md gates), and it now
     # ENFORCES — the v4 path used to return 0 unconditionally, so the verdict
     # was printed and never checked. Why actual_gear: the unit re-fit moved
     # every target into PERSON units, which makes weapon_only — naked
@@ -660,7 +660,7 @@ def v4(args):
     gate_ok = bool(r["r_total"]) and r["r_hits"] / r["r_total"] >= GATE
     legacy = base["r_hits"] / base["r_total"] if base["r_total"] else 0.0
     print(f"  GATE {GATE:.0%} on the actual_gear ROLE metric "
-          f"(re-based from weapon_only, owner 2026-08-29) -> "
+          f"(re-based from weapon_only) -> "
           f"{'PASS' if gate_ok else 'FAIL/insufficient'}"
           f"  [{r['r_hits']}/{r['r_total']}]")
     print(f"  legacy weapon_only role metric, reported not gated: "
@@ -771,11 +771,11 @@ def _harvest_gears(party, e):
 
 
 def v4h(args):
-    """V4 on the killer-party HARVEST (report-only, 2026-09-10): the same
+    """V4 on the killer-party HARVEST (report-only): the same
     leave-one-out as v4, over harvested parties of 10+ instead of the 23
     published-comp slots. A killer party is a roster that took kills in a
     real fight — win-conditioned evidence of what gets fielded, not a
-    ruling on what should be. Three incumbent-gear classes:
+    verdict on what should be. Three incumbent-gear classes:
 
       weapon_only            naked incumbents (the pre-re-fit unit; reported
                              for continuity with v4)
@@ -798,22 +798,22 @@ def v4h(args):
     prior are DERIVED from this same harvest (labelled rosters -> p10/p90
     rows; distinct players -> prior). `--holdout-mod M` evaluates only
     battles with id % M == 0 as a deterministic slice. The prior, the role
-    counts and the seat skeleton learn from the other slice (2026-09-11 /
-    2026-09-15); the style board's audit has the same flag since 2026-09-15
-    but the COMMITTED board predates it (it regenerates only on the harvest
-    checkout) — until that rerun, every number here is weak-form on the
-    styled rows.
+    counts and the seat skeleton learn from the other slice; the style
+    board's audit carries the same flag, but the COMMITTED board predates
+    it (it regenerates only on the harvest machine) — until that rerun,
+    every number here is weak-form on the styled rows.
     Content is not recorded on a killer party; `--content` sets the
     template (default blackzone_roam, the ZvZ roam rows); the style is the
     party's weapons-only label (party_styles.json) or balanced.
 
-    BASELINE (2026-09-15): with --baseline every drop — and every rebuild
+    BASELINE: with --baseline every drop — and every rebuild
     step — is ALSO put to baseline_recommend() under the same hit rules,
     tallied once (it scores no gear) and printed as a `baseline` row.
     Report-only like everything here.
 
     NOT A GATE. Prints beside v4 so the two can be compared; promotion to a
-    gate is an owner decision once the holdout split is honoured end to end.
+    gate needs a maintainer decision once the holdout split is honoured end
+    to end.
     """
     sys.path.insert(0, os.path.join(ROOT, "pipeline"))
     import rosters_io
@@ -959,8 +959,9 @@ def v4h(args):
     print("  caveat: style_bands.yaml rows and the meta prior are derived from this "
           "same harvest; the --holdout-mod slice is not yet excluded by "
           "derive_style_bands.py, so styled numbers are weak-form.")
-    print("  caveat: a killer party is win-conditioned evidence of what is fielded, "
-          "never a ruling; NOT A GATE - reported beside v4 for the owner.")
+    print("  caveat: a killer party is win-conditioned evidence of what is "
+          "fielded, never a verdict on what should be; NOT A GATE - reported "
+          "beside v4.")
     if args.json:
         payload = {"parties": len(sample), "eligible": len(parties),
                    "filter": {"min_size": args.min_size, "max_size": args.max_size,

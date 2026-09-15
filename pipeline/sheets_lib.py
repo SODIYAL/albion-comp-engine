@@ -1,6 +1,6 @@
 """Shared sheet composition — weapon entries + tree-level spell pools.
 
-Restructure 2026-08-20 (spell-level curation, step 2 of the geometric-AoE
+Restructure (spell-level curation, step 2 of the geometric-AoE
 plan): the Q/W/passive spells a weapon tree shares are curated ONCE in
 sheets/pools/<subcategory>.yaml instead of being copy-pasted into every
 line-mate's sheet (the copy-paste drift this kills: 16 same-spell-
@@ -15,12 +15,13 @@ POOL SEMANTICS
     non-takes. Previously "this weapon doesn't play that spell that way" was
     indistinguishable from an oversight; now it is explicit and greppable.
   - A weapon's own row with the same (cap, evidence) pair OVERRIDES the pool
-    row — this is where score drift lives until the expert adjudicates it
+    row — this is where score drift lives until curation resolves it
     (magnitude audit RULE queue), visible instead of scattered.
 
 Composed row order: the weapon's own rows first (sheet order), then
-applicable pool rows in pool-file order. Measured 2026-08-20: no weapon has
-two evidence rows for one capability, so order carries no semantics.
+applicable pool rows in pool-file order. Measured at the restructure: no
+weapon has two evidence rows for one capability, so order carries no
+semantics.
 
 The consumers of per-weapon capability rows go through compose() —
 build_dataset, evidence_lint, build_magnitude_review, build_stat_chart —

@@ -20,7 +20,7 @@
   role_hint: melee
   capabilities:
     - {cap: burst_aoe,     score: 6, evidence: BLADE_AREA}        # E: 8.5m waves, charge-scaled to 320
-    - {cap: max_health_cut, score: 2, evidence: BLADE_AREA}       # -10% max/current Health for 7s amplifies focus (was execute; taxonomy ruling 2026-08-21)
+    - {cap: max_health_cut, score: 2, evidence: BLADE_AREA}       # -10% max/current Health for 7s amplifies focus (was execute; taxonomy rule)
 
 - weapon: MAIN_SCIMITAR_MORGANA      # Clarent Blade — charge-fork wave slicer
   curated_as_of: 2026-08-12
@@ -30,7 +30,7 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: slow, evidence: HAMSTRINGSWORD}
   capabilities:
-    - {cap: burst_aoe,     score: 4, evidence: MIGHTYSWING}       # E: 170 wave "piercing through all enemies" — line-delivered AREA damage, rebucketed from burst_st (owner ruling 2026-08-25: "clarent blade e is aoe damage"); charge-scaled bonus
+    - {cap: burst_aoe,     score: 4, evidence: MIGHTYSWING}       # E: 170 wave "piercing through all enemies" — line-delivered AREA damage, rebucketed from burst_st (Clarent Blade's E is AoE damage); charge-scaled bonus
     - {cap: silence,       score: 2, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
     - {cap: slow,          score: 2, evidence: MIGHTYSWING}       # 1-charge fork; W: Hamstring (QW)
     - {cap: catch,         score: 2, evidence: MIGHTYSWING}       # slow/silence forks stop escapes
@@ -47,8 +47,8 @@
     - {cap: mobility,      score: 4, evidence: MIGHTYBLOW}        # E leap + Q dash
     - {cap: engage,        score: 2, evidence: MIGHTYBLOW}        # leap-to-target with interrupt
     - {cap: catch,         score: 2, evidence: MIGHTYBLOW}
-    - {cap: execute,       score: 2, evidence: MIGHTYBLOW}        # finishing blow refunds 1s cooldown — kill reward (taxonomy ruling 2026-08-21)
-    - {cap: interrupt,     score: 2, evidence: MIGHTYBLOW}        # the leap interrupts the target's cast (interrupt taxonomy 2026-08-21)
+    - {cap: execute,       score: 2, evidence: MIGHTYBLOW}        # finishing blow refunds 1s cooldown — kill reward (taxonomy rule)
+    - {cap: interrupt,     score: 2, evidence: MIGHTYBLOW}        # the leap interrupts the target's cast (interrupt taxonomy)
 
 - weapon: MAIN_SWORD_CRYSTAL         # Infinity Blade — ramp-and-swipe duellist
   curated_as_of: 2026-08-12

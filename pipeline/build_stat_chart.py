@@ -2,13 +2,13 @@
 """
 STAT CHART — real game numbers per (weapon, capability), ranked.
 
-The expert's ask (2026-08-20): "find full stats — damage or CC numbers —
-based on real stats and create that chart, which is then used to rank each
-weapon for its purpose." This builder extracts structured MAGNITUDES from
-the pinned dumps for every curated evidence spell and lays them out per
-capability, sorted by the measured number, with the curated ordinal score
-beside — so magnitude outliers (a '2' outperforming a '3') pop out.
-It feeds rubric question 1 (raw magnitude) of the 1-7 rescore.
+Purpose: full stats — damage or CC numbers — read from the real game data
+and laid out as the chart that ranks each weapon for its purpose. This
+builder extracts structured MAGNITUDES from the pinned dumps for every
+curated evidence spell and lays them out per capability, sorted by the
+measured number, with the curated ordinal score beside — so magnitude
+outliers (a '2' outperforming a '3') pop out. It feeds rubric question 1
+(raw magnitude) of the 1-7 rescore.
 
 IP note: dump values are every spell's BASE numbers — the same reference
 for all weapons, and ability scaling by item power applies one global curve
@@ -366,7 +366,7 @@ def main():
             names[k] = f"{names[k]} [AP{c}]"
 
     # MASTERSHEET tune:sheets overrides apply here too — the judging
-    # instrument must show the scores the ENGINE uses, or rulings look
+    # instrument must show the scores the ENGINE uses, or overrides look
     # unapplied on the very board that motivated them.
     tune_sheets = mastersheet.load().get("sheets", {})
     rows = []                    # (cap, weapon, spell, score)
@@ -402,7 +402,7 @@ def main():
     extracted = {sid: extract(sid, reg) for sid in spells}
     n_ok = sum(1 for v in extracted.values() if v)
 
-    # SPELL-keyed boards (expert correction 2026-08-20): the measurement is
+    # SPELL-keyed boards: the measurement is
     # a property of the SPELL — one row per (capability, spell), with every
     # weapon that cites it listed. Where line-mates score the same spell
     # differently, the row shows the score SPREAD — that is the drift the
@@ -413,17 +413,17 @@ def main():
         g["weapons"].append(names.get(wk, wk))
         g["scores"].add(score)
     # A measured number only ranks against the SAME KIND of effect — meters
-    # never sort against seconds (expert correction 2026-08-20: "how is 18m
-    # knockback vs 2.5s stasis decided?" — it isn't, by data; the cross-type
-    # exchange rate is exactly what the 1-7 rubric's judgment sets). Rows
-    # group by unit within each board, sorted within their group only.
+    # never sort against seconds (18m of knockback against a 2.5s stasis is
+    # not decided by data; the cross-type exchange rate is exactly what the
+    # 1-7 rubric's judgment sets). Rows group by unit within each board,
+    # sorted within their group only.
     UNIT_GROUP = {"m": "displacement (m)", "s": "hard CC (s)",
                   "slow%·s": "slows (strength × duration)",
                   "dmg/cast": "damage per cast", "dmg/s": "damage per second",
                   "×AA": "auto-attack amplifiers (multiplier)",
                   "heal/cast": "healing per cast",
                   "value·s": "stat modifiers (value × duration)"}
-    # Cooldown as a first-class factor (expert, 2026-08-20): every per-cast
+    # Cooldown as a first-class factor: every per-cast
     # measurement also shows THROUGHPUT — value x 60/CD, "how much of this
     # effect one player supplies per minute". A 2.5s stasis on a 72s CD is
     # 2.1 s/min; a 1s stun on 20s CD is 3 s/min — the ranking question S6
@@ -431,9 +431,9 @@ def main():
     # window is real); the rate column sits beside it.
     # /min is only meaningful where the effect ACCUMULATES over a fight:
     # damage, healing, seconds-of-CC, slow-time, buff-time. Displacement
-    # does not accumulate (39 "meters per minute" is a nonsense unit — the
-    # expert caught it): event-answer effects show CASTS/min instead, i.e.
-    # how often the spell can answer its job.
+    # does not accumulate (39 "meters per minute" is a nonsense unit):
+    # event-answer effects show CASTS/min instead, i.e. how often the spell
+    # can answer its job.
     PER_CAST_UNITS = {"s", "slow%·s", "dmg/cast", "heal/cast", "value·s"}
     CASTS_PER_MIN_UNITS = {"m"}
     boards = {}

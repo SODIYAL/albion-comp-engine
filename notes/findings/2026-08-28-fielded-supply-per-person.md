@@ -1,10 +1,11 @@
 # What real comps actually field, per person (2026-08-28)
 
-REPORT ONLY. Per the anti-circularity rule in `tests/VALIDATION.md`, these are
-measurements and hypotheses for the owner, not fixes. No template number was
-changed to produce them.
+Findings record. REPORT ONLY: under the anti-circularity rule in
+`tests/VALIDATION.md` these are measurements and hypotheses, not fixes;
+no template number was changed to produce them. The decisions taken on
+them the same day are listed at the end.
 
-## Why this could not be measured before today
+## Context — why this could not be measured before
 
 The evidence layer was discarding most of the gear the comps record. 11 of 13
 published comps write gear as game item IDs (`ARMOR_CLOTH_AVALON`), and
@@ -14,7 +15,7 @@ fix (commit "Gear resolver: read item IDs, not just display names"), all 13
 carry gear: 0 of 1117 recorded pieces unresolved, 1086 = 97.2% reaching a
 curated record.
 
-## The measurement
+## Evidence — the measurement
 
 Each comp scored dressed, in its own content template at its own size, with
 `effective_supply(party, None, gears)`. The number shown is **fielded supply
@@ -72,7 +73,7 @@ tankiness                 4.31    5.82    5.46    5.83    5.06    6.64    5.04  
 zone_control              2.56    1.93    1.90    2.31   10.77    2.22    1.22    2.56    1.89    2.67
 ```
 
-## What it shows
+## Finding
 
 **The unit defect is real and it is not uniform.** Splitting the rows by what
 supplies them separates cleanly:
@@ -88,7 +89,7 @@ That is the defect stated precisely: targets were fitted in weapon+spell-pick
 units, supply is now measured on whole dressed people, and the gap is worst
 exactly where worn gear contributes most. tankiness is the cleanest single
 signal -- ten of ten comps, 4-7x, no exceptions -- and it is the same failure
-mode the 2026-08-12 pseudo-tankiness ruling addressed, arriving through the
+mode the 2026-08-12 pseudo-tankiness rule addressed, arriving through the
 gear stat channel.
 
 **Two template rows may be asking for something nobody fields.** `execute` is
@@ -131,31 +132,32 @@ lot" OR "this template asks for little", and only the raw per-person view
 separates them. The re-fit should be done on raw per-person supply, not on
 ratios.
 
-## Open questions for the owner
+## Open questions and decisions
 
 1. **Re-fit basis.** Re-measure every target in person units from this table
    (shared base + content/style modifiers), or keep weapon-unit targets and
-   change what counts as supply? The measurement supports the former.
-2. **execute and anti_zone -- RULED 2026-08-28, shipped.** Owner: "the anti
-   zone is only on one weapon, the crystal healing staff and it's brought [by]
-   some zvz groups but usually when party is like 30+ people. so it's fine to
-   keep those targets just maybe make some optional. as for execute keep that
-   too but optional." Confirmed against the catalogue before implementing:
-   `anti_zone` is supplied by exactly ONE item, Exalted Staff
-   (`2H_HOLYSTAFF_CRYSTAL`); `execute` by five single-target melee weapons.
-   Both rows now carry `optional: true` in all six templates. See below.
-3. **peel -- RULED 2026-08-28.** Owner: "peel is about how you are fighting."
-   The corpus neither confirms nor contradicts it: once measured per person,
-   peel is flat at ~4 everywhere, so the data shows no content effect AND no
-   style effect. My earlier claim that the corpus showed a content effect was
-   an artifact (see the correction above). The ruling stands on game knowledge,
-   and converts into per-style target modifiers during the re-fit -- there is
-   no corpus-derived number to fit them to yet.
+   change what counts as supply? The measurement supports the former. Taken
+   up 2026-08-29 by the unit re-fit (`tests/VALIDATION.md` "THE UNIT RE-FIT").
+2. **execute and anti_zone -- decided 2026-08-28, shipped.** `anti_zone` is
+   supplied by exactly ONE item, Exalted Staff (`2H_HOLYSTAFF_CRYSTAL`),
+   confirmed against the catalogue; it is fielded by some zvz groups, mostly
+   at 30+ people. `execute` is supplied by five single-target melee weapons.
+   Both rows keep their targets and become optional: `optional: true` in all
+   six templates (curation judgment on the game facts above). See below.
+3. **peel -- decided 2026-08-28.** Peel demand depends on how the party
+   fights (its style), not on the content (curation judgment). The corpus
+   neither confirms nor contradicts it: once measured per person, peel is flat
+   at ~4 everywhere, so the data shows no content effect AND no style effect.
+   The earlier claim that the corpus showed a content effect was an artifact
+   (see the correction above). The rule stands on game knowledge and converts
+   into per-style target modifiers during the re-fit -- there is no
+   corpus-derived number to fit them to yet.
 4. **Uncurated pieces.** 31 recorded pieces resolve to real items with no
    capability sheet and so supply nothing: 20x revive potion, fish meals, one
-   gatherer hood. Curate the revive potion, or rule it out of the model?
+   gatherer hood. Open (maintainer decision): curate the revive potion, or
+   exclude it from the model.
 
-## Shipped from these rulings (2026-08-28)
+## Changes shipped (2026-08-28)
 
 `optional: true` on a template requirement row. Semantics: bringing the
 capability earns its coverage exactly as before; NOT bringing it is not a hole.

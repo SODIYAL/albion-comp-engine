@@ -34,8 +34,8 @@ LOOKUP = EffectLookup()
 
 def _load_usage():
     """Sightings per weapon, summed across weapon_usage_v2.json's fight-size
-    buckets (sample_battles.py). The v1 weapon_usage.json this read until
-    2026-09-07 was a frozen 24-battle sample nothing wrote any more."""
+    buckets (sample_battles.py). The v1 weapon_usage.json this once read
+    was a frozen 24-battle sample nothing wrote any more."""
     v2 = json.load(open(os.path.join(HERE, "out", "weapon_usage_v2.json"), encoding="utf-8"))
     out = {}
     for weapons in (v2.get("buckets") or {}).values():
@@ -48,8 +48,8 @@ USAGE = _load_usage()
 
 # Never auto-seeded: these are MAGNITUDE calls (how much damage, how big a
 # clump) the effect layer can name but not size, so a machine guess would be
-# fabrication. They stay a curator's job. (`energy_drain` sat here until
-# 2026-09-07; it is not a capability — a documented fabrication, see
+# fabrication. They stay a curator's job. (`energy_drain` once sat here;
+# it is not a capability — a documented fabrication, see
 # sheets/illustrative/prototype_v0.yaml.)
 HUMAN_ONLY = {"zone_control", "burst_aoe", "burst_st", "sustained_dps", "execute",
               "clump_create", "heal_burst", "anti_dive"}

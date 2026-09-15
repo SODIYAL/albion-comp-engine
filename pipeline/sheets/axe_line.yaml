@@ -31,7 +31,7 @@
     - {cap: heal_reduction, evidence: RENDINGSTRIKE}
   capabilities:
     - {cap: heal_reduction, score: 4, evidence: SHOCKWAVE}     # E: -40% Healing Received on a piercing line, 4s —
-                                                               # the meta anti-heal axe; expert may bump to 3
+                                                               # the meta anti-heal axe; a candidate to raise
     - {cap: burst_aoe,     score: 2, evidence: SHOCKWAVE}      # 106 pierce
 
 - weapon: 2H_SCYTHE_CRYSTAL          # Crystal Reaper — dash-zone reaper

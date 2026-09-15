@@ -1,4 +1,4 @@
-# MASTERSHEET — the expert's control panel
+# MASTERSHEET — the tuning control surface
 
 The yaml blocks below marked `tune:` are read at build time and **override**
 the underlying config files — `templates/scoring.yaml`, `templates/mechanics.yaml`,
@@ -15,8 +15,8 @@ The build **fails loudly** on any mistake here — an unknown weapon, a
 capability the weapon doesn't have, a typo'd section — never silently
 ignores an edit. Whatever is set here wins, so this file is the single answer
 to "what is the engine actually using?" beyond the files themselves. It
-carries only rulings in force: each one cites the owner's words and the test
-that pins it; the history behind them is the `tests/VALIDATION.md` index.
+carries only rules in force: each one cites its evidence and the test that
+pins it; the history behind them is the `tests/VALIDATION.md` log.
 Sections: `scoring`, `mechanics`, `templates`, `sheets`, `guild_builds`
 (`pipeline/mastersheet.py`).
 
@@ -27,34 +27,32 @@ capability needs a sheet row with spell evidence — the no-score-without-proof
 rule stays intact. Keys are game unique names (`pipeline/sheets/*.yaml`).
 
 ```yaml tune:sheets
-# Expert ruling 2026-08-20 (pinned by golden T19): Bedrock Mace is THE
-# anti-dive pick at scale — Primal Slam's 18m CC-resist-ignoring throw
-# leaves a PERSISTENT WALL (an extra peel layer, fire-and-forget), on a
-# support-tank kit with Guard Rune; guild runs it double-CORE. Iron-clad's
-# whirlwind must physically contact the diver while channeling — in large
-# fights nobody uses it for this. The raw numbers alone (18m vs 12m) hid
-# the delivery nuance; this is rubric Q2 reliability + Q8 kit fit.
+# Bedrock Mace is THE anti-dive pick at scale (pinned by golden T19): Primal
+# Slam's 18m CC-resist-ignoring throw leaves a PERSISTENT WALL (an extra peel
+# layer, fire-and-forget), on a support-tank kit with Guard Rune; the recorded
+# guild source runs it double-CORE. Iron-clad's whirlwind must physically
+# contact the diver while channeling — in large fights nobody uses it for
+# this. The raw numbers alone (18m vs 12m) hide the delivery nuance; this is
+# rubric Q2 reliability + Q8 kit fit.
 MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
   anti_dive: 6
 2H_IRONCLADEDSTAFF:            # Iron-clad Staff
   anti_dive: 2
 
-# Expert ruling 2026-08-24 (round 7 E-audit follow-up): "fist of ava purge
-# can be a 4." Purifying Fist strips ALL buffs from ALL enemies hit inside
-# a 232-damage area punch — the true-purge benchmark delivered as a dive
-# bomb, above the sheet's 3.
+# Fists of Avalon purge 4 (E-audit follow-up, curation judgment): Purifying
+# Fist strips ALL buffs from ALL enemies hit inside a 232-damage area punch —
+# the true-purge benchmark delivered as a dive bomb, above the sheet's 3.
 2H_KNUCKLES_AVALON:            # Fists of Avalon
   purge: 4
 
-# Owner ruling 2026-09-08 ("sure on 3 ... you r hoarfrost ruling"): the
-# 2026-08-20 rescore HELD Avalanche's burst at 2 because +0.5 unit tipped
-# the blap tank slot in the V4 blind test (69% vs the 70% gate). Re-measured
-# 2026-09-08 with the structure that landed since (need profiles, frontline
-# floors, the dressed forge): V4 is byte-identical at 2 and at 3 (17/23
-# actual_gear, 19/23 weapon_only), so the hold was a symptom of missing
-# team structure, not a wrong rating. The evidence stands on its own:
-# Avalanche measures 280/cast, top-20% of the burst_aoe board. Pinned by
-# golden T44.
+# Hoarfrost Staff burst_aoe 3 (pinned by golden T44): an earlier rescore HELD
+# Avalanche's burst at 2 because +0.5 unit tipped the blap tank slot in the
+# V4 blind test (69% vs the 70% gate). Re-measured with the structure that
+# landed since (need profiles, frontline floors, the dressed forge): V4 is
+# byte-identical at 2 and at 3 (17/23 actual_gear, 19/23 weapon_only), so the
+# hold was a symptom of missing team structure, not a wrong rating. The
+# evidence stands on its own: Avalanche measures 280/cast, top-20% of the
+# burst_aoe board.
 MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
   burst_aoe: 3
 
@@ -80,9 +78,10 @@ GENERATED (`derive_meta_prior.py`); a hand-set map here fails the build.
 
 ## Fight physics — `tune:mechanics`
 
-Empty: `templates/mechanics.yaml` as committed (Focus Fire / Resilience and
-AoE Escalation tables owner-verified 2026-08-25; `aoe_geometry` with
-`reference_clump: 2` — raise it and AoE utility weakens everywhere).
+Empty: `templates/mechanics.yaml` as committed (the Focus Fire / Resilience
+and AoE Escalation tables match the wiki's pages; `aoe_geometry` with
+`reference_clump: 2` — raise it and AoE utility weakens everywhere). The
+mechanics layer and its question ledger: `pipeline/README.md` "Mechanics".
 
 ```yaml tune:mechanics
 # aoe_geometry:
@@ -96,15 +95,15 @@ Contents: `blackzone_roam`, `castle`, `castle_outpost`, `faction_war`,
 `roads`, `territory_defense`. Style x size rows are GENERATED
 (`templates/style_bands.yaml`) and are not overridden here.
 
-**Targets are the TYPICAL winner (harvest median, p50) since 2026-09-10**
-("the data should come from the harvest median"): style x size rows for
-every style at 10+ (`balanced` once the harvest checkout regenerates the
-pooled cell), content rows below that — re-fit to the median of their comps
-where three or more exist (`pipeline/refit_content_targets.py`; each
-template's `fit:` block says which). `min` is the least winners get away
-with (p10), `soft_cap` 1.15 x p90. A `target` set here overrides that
-number for one content and is read as a median; a `min` set here moves the
-board's red/orange line only (nothing scores it).
+**Targets are the TYPICAL winner (harvest median, p50; standing rule 17)**:
+style x size rows for every style at 10+ (`balanced` once the harvest
+machine regenerates the pooled cell), content rows below that — re-fit to
+the median of their comps where three or more exist
+(`pipeline/refit_content_targets.py`; each template's `fit:` block says
+which). `min` is the least winners get away with (p10), `soft_cap` 1.15 x
+p90. A `target` set here overrides that number for one content and is read
+as a median; a `min` set here moves the board's red/orange line only
+(nothing scores it).
 
 ```yaml tune:templates
 # castle:
@@ -119,19 +118,20 @@ same fail-loud promise:
 | Dial | Where |
 | --- | --- |
 | Role book: seats, functions, memberships | `pipeline/roles.yaml` `roles:` |
-| Kit-pool and gear-affinity rulings | `pipeline/roles.yaml` `kit_doctrine.overrides`, `gear_affinity_overrides` |
+| Kit-pool and gear-affinity overrides | `pipeline/roles.yaml` `kit_doctrine.overrides`, `gear_affinity_overrides` |
 | Need profiles | `pipeline/roles.yaml` `need_profiles` |
 | Style role bands, healer minima | `pipeline/templates/styles.yaml` `constraint_overrides`, `role_min_per_players` |
 | Viability exclusions, duplicate defaults | `pipeline/templates/composition.yaml` |
-| Style-fit rulings per weapon | `pipeline/style_overrides.yaml` |
+| Style-fit overrides per weapon (cited facts) | `pipeline/style_overrides.yaml` |
 | Style x size rows, meta prior, typical role counts | GENERATED from the harvest — never hand-set |
-| Seat skeleton, plan minima (standoff), copy allowances per style x band | GENERATED (`pipeline/derive_skeletons.py` -> `out/skeletons.json`, 2026-09-15) — a hand `per_weapon` list fails the build |
+| Seat skeleton, plan minima (standoff), copy allowances per style x band | GENERATED (`pipeline/derive_skeletons.py` -> `out/skeletons.json`) — a hand `per_weapon` list fails the build |
 
 ## Guild-approved builds — `tune:guild_builds`
 
-The guild announcement of 2026-08-20, in the guild's own words. Ships into
-the dataset verbatim as a guideline layer for display and validation — never
-a rule the scorer enforces.
+A recorded third-party source: a guild's announcement of its approved builds,
+in the guild's own words (`recorded` is the capture date). It ships into the
+dataset verbatim as a guideline layer for display and validation — never a
+rule the scorer enforces.
 
 ```yaml tune:guild_builds
 source: guild announcement — approved builds, group content

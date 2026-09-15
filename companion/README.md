@@ -10,7 +10,7 @@ same data the party UI and the inspect window already render on your screen —
 the tolerated category (like Statistics Analysis Tool), not radar. Full scope,
 event map, and legality reasoning: [../COMPANION_SCOPE.md](../COMPANION_SCOPE.md).
 
-## Status — LIVE-CONFIRMED (2026-08-23, owner's in-game run)
+## Status — LIVE-CONFIRMED (in-game run)
 
 The first live run happened, in an 11-member party on the current patch:
 
@@ -36,27 +36,26 @@ Expected-by-design behavior seen in the run (not bugs):
   inspect response, which the companion never fires itself — see "Inspect
   refresh" below.
 
-**End-to-end CONFIRMED same day (second run):** Comp Forge's **connect live
+**End-to-end CONFIRMED (second run):** Comp Forge's **connect live
 party** → **load party into comp** worked against the live companion — a
 real 7-member party listed with 7/7 known weapons and loaded into the comp
 ("This party: 7 curated, 0 illustrative"), with the observed-cohort
 affinity strip firing on the loaded roster. Known friction, by design: it
 takes a load or two plus zoning for every member's weapon to populate,
 because weapons only arrive as members become VISIBLE (the visibility
-rule). SHIPPED same day as **live sync** (owner request: "as current as
-possible"): after a load, every companion poll auto-merges into the comp —
-newly visible weapons fill in, a member's weapon swap updates their slot in
-place, and their real Q/W picks flow into the loadouts — and since
-2026-09-06 so does their WORN KIT: every curated piece the companion
-reports (head/chest/shoes/cape/off-hand/potion/food) lands in the member's
+rule). **Live sync** keeps the comp as current as the wire allows: after a
+load, every companion poll auto-merges into the comp — newly visible
+weapons fill in, a member's weapon swap updates their slot in place, and
+their real Q/W picks flow into the loadouts — and so does their WORN KIT:
+every curated piece the companion reports
+(head/chest/shoes/cape/off-hand/potion/food) lands in the member's
 loadout, so the dressed score the page shows is their real build, and an
 inspect that refreshes gear re-dresses them on the next poll. Pieces the
 catalogue does not curate (a plain cape, most food) stay unset — the page
 never invents a stand-in. The live panel shows `kit n/7` and item power
-per member. Toggle in the
-connect panel; no re-load, no re-zone. What still needs a zone/visibility
-event is the WIRE side (the companion can only report what the game
-broadcasts). The wire-side escape hatch SHIPPED 2026-09-06: the companion
+per member. Toggle in the connect panel; no re-load, no re-zone. What still
+needs a zone/visibility event is the WIRE side (the companion can only
+report what the game broadcasts). The wire-side escape hatch: the companion
 parses the INSPECT response, so a manual in-game inspect refreshes any
 party member on demand — yourself included, which closes the "own gear is
 empty until you swap" gap. Shape taken from SAT's
@@ -65,7 +64,7 @@ matched by shape like every other handler; NOT yet confirmed against a live
 capture on the current patch — the first inspect with `--debug` on is the
 confirmation (see "Inspect refresh").
 
-## Inspect refresh (on-demand, 2026-09-06)
+## Inspect refresh (on-demand)
 
 Right-click a party member in game -> **Inspect**. The server answers with
 their CURRENT loadout using real item type ids, whether or not they are

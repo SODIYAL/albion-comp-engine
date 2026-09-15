@@ -138,8 +138,8 @@ check("H8 an out-of-pool index (Enigmatic p5) is quarantined as unknown, "
 check("H8 the quarantine landed in the committed validation_result",
       any("passive: index 5" in f for q in VALIDATION["quarantined"]
           for f in q["fields"]))
-# review 2026-08-19: a quarantined record must never BE the canonical
-# default, whatever its comp-level approval says
+# Rule: a quarantined record must never BE the canonical default,
+# whatever its comp-level approval says
 bad = [(ct, w) for ct, by_w in INDEX["by_content"].items()
        for w, vs in by_w.items() for v in vs
        if v.get("canonical") and (v.get("status") == "quarantined"
@@ -287,24 +287,24 @@ check("H15 the same source within solo bounds validates",
 # ---- H.16 exact-weapon eligibility, no family-level leakage ---------------------
 excluded = ["MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON"]
 # What silently re-admits an excluded weapon is an APPROVED/CANONICAL record,
-# which is exactly what composition.yaml's documented exit path watches for
-# ("the evidence gate ... flags any excluded weapon that gains a CURRENT
-# approved canonical large-group build ... so the owner can lift the entry —
-# the data clears the gate, not a code change"). A CANDIDATE record from a
-# real published comp is not a leak and not a re-admission: it is the
-# evidence accumulating, which the design expects.
+# which is exactly what composition.yaml's documented exit path watches for:
+# the evidence gate flags any excluded weapon that gains a CURRENT approved
+# canonical large-group build, so the entry can be lifted — the data clears
+# the gate, not a code change. A CANDIDATE record from a real published comp
+# is not a leak and not a re-admission: it is the evidence accumulating,
+# which the design expects.
 #
 # This assertion used to be "no build records AT ALL", which was true only
-# while the corpus was small. The 23 albioncompo comps ingested 2026-08-29
-# brought one genuine candidate record (below), so the check now separates
+# while the corpus was small. The albioncompo ingest (23 comps) brought
+# one genuine candidate record (below), so the check now separates
 # the two cases instead of failing on expected evidence.
 KNOWN_CANDIDATE_EVIDENCE = {
-    # weapon -> build_id. OWNER-FACING: this record CONTRADICTS the stated
-    # reason for excluding the weapon ("no caller sheet, published build or
-    # observation fields them at party size >= 10"). AvA Raid is a published
+    # weapon -> build_id. OPEN QUESTION: this record CONTRADICTS the stated
+    # reason for excluding the weapon (no caller sheet, published build or
+    # observation fields them at party size >= 10). AvA Raid is a published
     # 10-man that fields it. Still candidate, so the exclusion stands and the
     # gate has not fired — but the premise is now weaker than when it was
-    # written. Flagged for a ruling, not silently lifted.
+    # written. Flagged for a maintainer decision, not silently lifted.
     "MAIN_FROSTSTAFF_AVALON": {"albioncompo_ava_raid_2026_05:comp:6"},
 }
 leaks, readmit = [], []
@@ -318,7 +318,8 @@ for w in excluded:
                 leaks.append((w, ct, bid, appr))
 check("H16 no excluded weapon carries an APPROVED/CANONICAL record — that "
       "is what would silently re-admit it; lifting goes through the "
-      "exclusion gate and an owner ruling", not readmit, str(readmit[:3]))
+      "exclusion gate and a maintainer decision", not readmit,
+      str(readmit[:3]))
 check("H16 no UNEXPECTED records on excluded weapons — cursed/frost FAMILY "
       "records never leak onto them, and new candidate evidence must be "
       "recorded deliberately", not leaks, str(leaks[:3]))
@@ -337,8 +338,8 @@ check("H16 the evidence gate ran (exclusion_gate list present, currently "
       VALIDATION.get("exclusion_gate") == [])
 
 # ---- H.18 the meta prior is GENERATED from the harvest, never hand-set ----------
-# Owner ruling 2026-09-08 ("sure" to one harvest prior replacing both hand
-# lists): scoring.meta_prior is the size-bucketed map derive_meta_prior.py
+# Rule (T46/H18): one harvest prior replaces both hand lists —
+# scoring.meta_prior is the size-bucketed map derive_meta_prior.py
 # wrote from the COMMITTED party_rosters.json.gz (hash-gated), scoring.yaml and
 # MASTERSHEET carry no hand-set map, composition.yaml's viability core list is
 # empty, and the dataset embeds the aggregate only — never raw observations.
@@ -372,7 +373,7 @@ check("H18 no raw usage/observation payload is embedded in the dataset "
       and "builds_index" not in DATASET and "buckets" not in DATASET
       and all(isinstance(v, float) for rows in mp.values() for v in rows.values()))
 
-# ---- H.21 weapon style-fit identity (owner-specified 2026-08-23) ---------------
+# ---- H.21 weapon style-fit identity (derived from the E's own payload) ---------
 FIT_REPORT = load_json(os.path.join(OUT, "style_fit_report.json"))
 STYLES_ = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 BANDS_ = ("trio", "gang", "group")
@@ -400,7 +401,7 @@ check("H21 Realmbreaker DERIVES as the all-rounder (flex delivery, group "
       and FIT_REPORT["weapons"]["2H_AXE_AVALON"]["basis"] == "derived",
       str(rb))
 ba = FIT_REPORT["weapons"]["MAIN_AXE"]
-check("H21 the Battleaxe owner ruling is applied via a CITED override "
+check("H21 the Battleaxe verdict is applied via a CITED override "
       "(unfit as a group pick >3, trio untouched)",
       ba["basis"] == "curated_override"
       and (ba.get("override") or {}).get("reason")

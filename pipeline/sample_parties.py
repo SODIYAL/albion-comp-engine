@@ -13,10 +13,10 @@ people wrote down, not parties that fought.
 The official gameinfo API carries `GroupMembers` on every kill event: the
 KILLER'S PARTY at the moment of the kill, each member with their equipment.
 That is a real party roster, which is exactly the unit the engine models.
-albionbb strips the field; the official API keeps it (verified 2026-08-29 —
-note that CLAUDE.md's "the official gameinfo events endpoint 504s
-constantly" was true on 2026-08-13 but does NOT hold today: every endpoint
-tested, list and detail, answered 200 in under a second).
+albionbb strips the field; the official API keeps it (verified: the old
+note that the official gameinfo events endpoint 504s constantly no longer
+holds — every endpoint tested, list and detail, answered 200 in under a
+second).
 
 THREE-STEP PIPELINE (each step exists because the one before it cannot
 answer the question):
@@ -37,17 +37,16 @@ WHAT THIS DATA IS — AND IS NOT.
     time. It is NOT a comp. A 300-player battle is a coalition of many
     parties; this samples the parties, which is the useful unit.
   * THE FILTER IS "SCORED AT LEAST ONE KILL", NOT "WON" — and it was
-    MEASURED (2026-08-29) rather than assumed, because "winner-biased"
-    overstates it. Of 354 captured parties: 61% dominant (2x+ K/D), 19%
-    traded roughly even, and 20% took MORE DEATHS THAN KILLS. Losing
-    parties are well represented; they only had to kill someone first.
-    What drops out is the 10% of players in no captured party at all, whose
-    combined record is 34 kills against 475 deaths (K/D 0.07) — they died
-    about once each and killed almost nothing. OWNER RULING 2026-08-29:
-    "it's okay if the losing party couldn't get a single kill it's not
-    worth having their party information." Coverage is 90% of all players
-    across the sampled battles. Prevalence is still not effectiveness —
-    that standing rule is unchanged.
+    MEASURED rather than assumed, because "winner-biased" overstates it.
+    Of 354 captured parties: 61% dominant (2x+ K/D), 19% traded roughly
+    even, and 20% took MORE DEATHS THAN KILLS. Losing parties are well
+    represented; they only had to kill someone first. What drops out is
+    the 10% of players in no captured party at all, whose combined record
+    is 34 kills against 475 deaths (K/D 0.07) — they died about once each
+    and killed almost nothing. Rule: a party that could not score a single
+    kill is not worth recording. Coverage is 90% of all players across the
+    sampled battles. Prevalence is still not effectiveness — that standing
+    rule is unchanged.
   * DEDUPLICATED per battle by member-name set. A party that gets 20 kills
     emits 20 identical GroupMembers arrays; counting those as 20 parties
     would multiply whatever that squad ran by its kill count, which is the
@@ -55,8 +54,8 @@ WHAT THIS DATA IS — AND IS NOT.
   * Equipment is as recorded at that event. Players who swap mid-fight can
     appear under two weapons; the party is keyed on names, not gear.
   * DISPLAY / EVIDENCE ONLY. Nothing here feeds scoring. Like every observed
-    layer, it may inform owner rulings; it never becomes a scoring input on
-    its own.
+    layer, it may inform a rule; it never becomes a scoring input on its
+    own.
 
 Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
                                          [--max-players 0] [--max-events 120]
@@ -66,9 +65,9 @@ Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
 FIGHT-SIZE BAND. `--min-players` is the discovery floor albionbb filters on;
 `--max-players` (0 = none) is a local ceiling on the listed `totalPlayers`,
 so a pass can be pointed at one size class — `--min-players 10
---max-players 14` walks the 5v5 / 7v7 band (owner 2026-09-08: "focus on 7v7
-fights and 5v5 fights") and spends its `--battles` budget only on fights in
-the band; everything larger is skipped, not fetched. The band is a DISCOVERY
+--max-players 14` walks the 5v5 / 7v7 band (a focused night on 7v7 and
+5v5 fights) and spends its `--battles` budget only on fights in the band;
+everything larger is skipped, not fetched. The band is a DISCOVERY
 choice: the cache keeps every battle ever fetched and `analyze()` reads all
 of it, so a banded night adds to the corpus and never narrows it.
 """
@@ -134,7 +133,7 @@ def weapon_key(t, known):
 def harvest_battle(args, known, b, bid, total, path):
     """Steps 2-3 for ONE battle: the official roster, the kill list, every
     kill event's parties and builds, written to its own cache file. Runs
-    on a worker thread (2026-09-09, `--workers`): the per-battle work is
+    on a worker thread (`--workers`): the per-battle work is
     independent — one file per battle, no shared state — so battles run
     side by side while each battle's events stay sequential, and the file
     a worker writes is byte-identical to what the old sequential loop
@@ -154,7 +153,7 @@ def harvest_battle(args, known, b, bid, total, path):
         eid = x.get("EventId")
         if not eid:
             continue
-        # three tries (2026-09-09, was two): daytime 502s ran ~4% per call
+        # three tries (was two): daytime 502s ran ~4% per call
         # and a second 502 lost the event; the third try, 4.5 s later,
         # costs nothing while other workers keep fetching
         d = get_json(f"{GAMEINFO}/events/{eid}", tries=3)
@@ -163,7 +162,7 @@ def harvest_battle(args, known, b, bid, total, path):
         ev_ok += 1
         # FULL BUILDS come from Killer / Victim / Participants, which
         # carry 7 of 8 equipment slots plus item power. GroupMembers
-        # does NOT: measured 2026-08-29, it fills MainHand only and
+        # does NOT: as measured, it fills MainHand only and
         # reports AverageItemPower 0. So party STRUCTURE comes from
         # GroupMembers and BUILDS come from the combat roles; a member
         # who never killed, died or dealt damage yields a weapon and
@@ -281,14 +280,14 @@ def fetch(args, known):
             todo.append((b, bid, total, path))
             seen_battles += 1
         page += 1
-    # FETCH IN PARALLEL (2026-09-09): the harvest's cost is the kill-event
+    # FETCH IN PARALLEL: the harvest's cost is the kill-event
     # detail fetch, ~1.8 s per event sequentially and one HTTP call each.
     # Battles are independent units of work (own cache file, own log line),
     # so a small pool runs them side by side; events within a battle stay
     # sequential. `--workers 1` is the old loop. Coverage is reported at
     # the end so a rate-limited night (429s exhaust get_json's retries and
     # the event is skipped, not raised) is visible rather than silent:
-    # the sequential baseline was 0.987 (2026-09-09 nightly).
+    # the sequential baseline was 0.987 (one nightly pass).
     import concurrent.futures as cf
     kills_total = events_total = 0
     workers = max(1, args.workers)
@@ -368,7 +367,7 @@ def analyze(known):
             else:
                 clusters.append({"names": names, "party": p,
                                  "events": p.get("seen_in_events", 1)})
-        # PARTY INDEX (2026-09-08, pipeline/party_link.py): each cluster's
+        # PARTY INDEX (pipeline/party_link.py): each cluster's
         # ordinal in this battle, stamped on the party record AND on every
         # member's build (`party`) so a build links to its party exactly —
         # the (battle, weapon) fallback in party_link is for artifacts
@@ -395,8 +394,8 @@ def analyze(known):
                 "seen_in_events": c["events"]})
     # OBSERVED BUILDS — full kits, and the weapon -> armour-class evidence
     # that role assignment can actually be tested against. Armour class is
-    # the owner's own role tell ("cloth wearing is a very good indicator"),
-    # and unlike the hand-curated role menus it is measurable.
+    # a strong role tell (curation judgment: cloth wearing is a reliable
+    # indicator), and unlike the hand-curated role menus it is measurable.
     strip = lambda t: (re.sub(r"^T\d+_", "", str(t).split("@")[0])
                        if t else None)
     def armour_class(t):
@@ -409,7 +408,7 @@ def analyze(known):
     for name in sorted(os.listdir(CACHE)):
         with open(os.path.join(CACHE, name), encoding="utf-8") as f:
             rec = json.load(f)
-        # PARTY SIZE per build (2026-09-03, the Grailseeker case): the
+        # PARTY SIZE per build (the Grailseeker case): the
         # battle floor admits 2-8 man gank parties fighting inside a
         # 20+ battle, and their kits (Hunter Shoes, Demon Cape, Poison
         # Potion) were being mined as ZvZ doctrine. The party the killer
@@ -431,7 +430,7 @@ def analyze(known):
             if not w or w not in known:
                 continue
             ac = armour_class(g.get("Armor"))
-            # PLAYER KEY (2026-09-04, distinct-player floors): a build is
+            # PLAYER KEY (distinct-player floors): a build is
             # one player in one battle, and a third of a weapon's builds
             # are repeat sightings of the same people (median 0.67
             # distinct players per build; Heavy Crossbow: one player in 7
@@ -483,7 +482,7 @@ def analyze(known):
             "61% of captured parties are dominant, 19% traded even, 20% took "
             "more deaths than kills, so losing parties ARE represented; the "
             "10% of players in no captured party hold 34 kills against 475 "
-            "deaths between them. Owner ruling 2026-08-29: a party that could "
+            "deaths between them. Rule (2026-08-29): a party that could "
             "not get a single kill is not worth recording. Coverage 90% of "
             "players across sampled battles. A party is NOT a comp: a large "
             "battle is a coalition of parties. Prevalence is not "
@@ -508,7 +507,7 @@ def analyze(known):
         },
     }
     path = rosters_io.path(OUT)
-    rosters_io.dump(out, path)      # gzipped, deterministic (2026-09-11)
+    rosters_io.dump(out, path)      # gzipped, deterministic
     s = out["summary"]
     print(f"\n{s['battles']} battles, {s['parties']} distinct parties "
           f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "

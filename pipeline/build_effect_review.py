@@ -4,8 +4,8 @@ Generate the effect -> capability reference page.
 
 This is a REVIEW-BY-EXCEPTION page, not a data-entry form. The mapping in
 pipeline/effect_map.yaml is already complete: every weapon-reachable effect is
-analysed, with capabilities per target direction. The page exists so a domain
-expert can scan it and flag what is wrong — which is expected to happen while
+analysed, with capabilities per target direction. The page exists so the
+curator can scan it and flag what is wrong — which is expected to happen while
 real comps are being built, not in one sitting.
 
 Usage:  py -3 pipeline/build_effect_review.py   ->  review/effects.html
@@ -59,14 +59,14 @@ def main():
                 return n[len(p):]
         return n
 
-    owner = {}
+    holders = {}   # spell id -> the (weapon, slot) pairs that carry it
     for wkey, line in lines_json.items():
         for slot, ids in line["spells"].items():
             for sid in ids:
-                owner.setdefault(sid, []).append((wkey, slot))
+                holders.setdefault(sid, []).append((wkey, slot))
 
     def spell_entry(sid, direct):
-        own = owner.get(sid, [])
+        own = holders.get(sid, [])
         return {"id": sid, "name": spells.get(sid, {}).get("name", sid),
                 "slot": own[0][1].upper() if own else "",
                 "weapon": wname(own[0][0]) if own else "", "direct": direct}

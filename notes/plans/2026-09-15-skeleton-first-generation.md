@@ -1,16 +1,16 @@
-# Skeleton-first generation — implementation plan
+# Skeleton-first generation — implementation plan (2026-09-15)
 
 Spec: `notes/specs/2026-09-15-skeleton-first-generation-design.md`.
-Owner ruling: 2026-09-15, "full autonomy". Every step ends with the gates
-it touches green; nothing is committed here (the owner commits).
+Every step ends with the gates it touches green; nothing was committed
+by the plan itself (the commit is a separate step).
 
 Status 2026-09-15: steps 1-11 done (step 4's regeneration of the style
-board waits for the harvest checkout; a plan-tool step — the standoff
+board waits for the harvest machine; a plan-tool step — the standoff
 minimum — was added between 8 and 9 once the seat gate alone left the
 forged kite reading as a clap). Log: `notes/validation/2026-09b.md`.
 
-1. Record the "before" gates on the tree as found (it carries the
-   uncommitted 2026-09-15 rho / Permafrost / ranged-override rulings).
+1. Record the "before" gates on the tree as found (it carried the
+   uncommitted 2026-09-15 rho / Permafrost / ranged-override decisions).
 2. `pipeline/derive_skeletons.py` → `out/skeletons.json` (training split,
    distinct rosters, seat typicals per exact size with windows, copy
    allowances per style × band, distinct-weapon stats). Print a board.
@@ -29,7 +29,10 @@ forged kite reading as a clap). Log: `notes/validation/2026-09b.md`.
 7. Engine, JS: the same, line for line where the ports already mirror.
 8. `tests/test_skeletons.py`; update `tests/test_forge.py` F18 pins to the
    generated allowances; rebuild dataset + dashboard; run every gate; fix
-   what the ruling explains, investigate what it does not.
+   what the decision explains, investigate what it does not.
+8b. Plan tools as generation minima (spec decision 7): the `plan` table in
+   the skeleton artifact, the `standoff` flag predicate, the declared
+   style's typical laid onto the band as a minimum; both ports.
 9. `tests/tier2_blindtest.py --baseline` for v4 and v4h; run both and
    record the numbers.
 10. Forge probes after: identity of the forged kite / balanced / hybrids at

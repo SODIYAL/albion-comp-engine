@@ -5,7 +5,7 @@
 # position PULLING up to 10 enemies along the path, pulse-stunning them, then
 # slams — throwing everything within 5m into the air. A drag-and-pile engine:
 # clump_create 3 (a TRUE pull — unlike Great Hammer's Tackle knockback,
-# which lost its clump score to the 2026-08-13 ruling). Shares the hammer Q/W pool
+# which lost its clump score to the drag-vs-knockback rule). Shares the hammer Q/W pool
 # with Polehammer and Great Hammer; QW-conditional scores mirror those sheets.
 
 - weapon: 2H_HAMMER_AVALON           # Hand of Justice — drag-clump tank

@@ -3,13 +3,13 @@
 # restructure; every score unchanged). A row applies to every
 # mace weapon that can equip its evidence spell (WEAPON_STATS:
 # tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending expert
-# adjudication — or lists the pair under `except:`.
+# same (cap, evidence) — a score override pending
+# validation — or lists the pair under `except:`.
 subcategory: mace
 capabilities:
   - {cap: engage, score: 2, evidence: CHARGE_ROOT}          # W: Snare Charge (QW)
   - {cap: root, score: 5, evidence: CHARGE_ROOT}            # Snare Charge
-  - {cap: interrupt, score: 2, evidence: CHARGE_ROOT}       # Snare Charge interrupts casting "if timed right" (interrupt taxonomy, owner ruling 2026-08-21)
+  - {cap: interrupt, score: 2, evidence: CHARGE_ROOT}       # Snare Charge interrupts casting "if timed right" (interrupt taxonomy)
   - {cap: peel, score: 4, evidence: GUARDRUNE}              # ally stun/knockback immunity
   - {cap: slow, score: 2, evidence: SACRED_GROUND}          # (QW)
   - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # (QW)
@@ -23,5 +23,5 @@ capabilities:
   # Camlann, 1H Mace) were scoring zero for it. Calibrated against Royal
   # Armor's 10-ally energy buff (buff_allies 3) and kept BELOW Guard Rune's
   # outright CC immunity (peel 4) — a resistance is not an immunity.
-  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # +15% resists & CCR to 10 allies (owner review)
-  - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # CCR on the backline blunts pick attempts (owner review)
+  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # +15% resists & CCR to 10 allies (provisional)
+  - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # CCR on the backline blunts pick attempts (provisional)

@@ -3,10 +3,10 @@
 Spec: notes/specs/2026-09-08-coherent-style-kits-design.md, section 2.
 Every killer party of MIN_SIZE+ members in out/party_rosters.json.gz gets the
 engine's WEAPONS-ONLY identity (Engine.comp_identity — the same label the
-blind rounds grade; naked matched the audit's dressed read 19/20 in round
-4). The dressed label would need member kits the committed artifact does
-not carry, so this runs on any machine and is byte-reproducible (only the
-`_generated` date moves across days).
+validation rounds grade; naked matched the audit's dressed read 19/20 in
+validation round 4). The dressed label would need member kits the committed
+artifact does not carry, so this runs on any machine and is
+byte-reproducible (only the `_generated` date moves across days).
 
 Reads committed files only; never the raw cache. Explicit step, never part
 of a normal build. Rerun order after a harvest: sample_parties ->

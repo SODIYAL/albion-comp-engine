@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Tankiness / frontline-floor adversarial audit (Phase 4, 2026-08-27).
-REPORT-ONLY — feeds notes/findings/ and the owner ruling on
+Tankiness / frontline-floor adversarial audit (dressed validation Phase 4).
+REPORT-ONLY — feeds notes/findings/ and the Option C rule on
 whether ordinary worn armor may satisfy a structural frontline demand.
 
 Three realistic dressed parties at castle_outpost size 7 (tankiness
@@ -105,7 +105,7 @@ def measure(e, label, party, gears, front):
             "floor_armed_at_size": bool(fl) and e.size >= fl.get(
                 "min_party_size", 10 ** 9),
             "naked": round(have_n, 4), "dressed": round(have_d, 4),
-            # Option C (owner ruling 2026-08-27): the ENGINE's structural
+            # Option C (the source-aware floor rule): the ENGINE's structural
             # floor reads the weapon+loadout supply — this is the penalty
             # fitness actually applies, dressed or not.
             "engine_floor_bites_dressed": e.floor_armed(cap, have_n),

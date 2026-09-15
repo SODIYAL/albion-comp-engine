@@ -37,7 +37,7 @@
   capabilities:
     - {cap: heal_sustain,       score: 6, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
     - {cap: buff_allies,        score: 4, evidence: HOLYHOT}           # W: Holy Blessing
-    # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): an
+    # knockback_displace REMOVED (magnitude pass): an
     # auto-attack passive knockback is trivial in group fights.
     # NO mobility — this is the deliberate contrast with Hallowfall (design doc
     # §2.3): same role, opposite mobility profile. NO cleanse (see header).

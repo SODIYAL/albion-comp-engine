@@ -1,20 +1,19 @@
-# Dashboard Density Redesign — Design
+# Dashboard Density Redesign — design (2026-09-02)
 
-**Date:** 2026-09-02
-**Status:** approved in chat ("ok go ahead")
+**Status:** implemented 2026-09-02 (`tests/test_dashboard_layout.py` pins the contracts; plan `notes/plans/2026-09-02-dashboard-density-redesign.md`)
 **Base:** branch `dashboard-density-redesign` off `origin/main` (`12b4597`)
-**Owner decisions embedded:** promote capability supply + kill pressure/roles
+**Decisions embedded:** promote capability supply + kill pressure/roles
 + caller tools (killboard stays deep); wheel shrinks to ~520px as one column
 of four; stacked edge-tab rails on BOTH viewport edges; status bar carries the
 verdict plus live setup chips; layout consolidates into a new `_layout.css`
 with `.pdash` generalised to `.epanel`.
 
-## 1. Goal
+## Problem
 
-Comp Forge's planner spends its first screen on two things — a 680px wheel
+Comp Forge's planner spent its first screen on two things — a 680px wheel
 and a tall decision stack — while five real surfaces (capability supply,
-caller tools, kill pressure, role check, forge warnings) sit below the fold or
-inside a hover tooltip. The owner's reference is a health dashboard whose
+caller tools, kill pressure, role check, forge warnings) sat below the fold or
+inside a hover tooltip. The reference layout is a health dashboard whose
 density comes from having *no* below-the-fold: a persistent verdict bar, one
 hero band of several visualizations, then a tight card grid.
 
@@ -22,7 +21,9 @@ This redesign converts the planner to that shape without changing a single
 number the engine produces. It is a **display-layer change only**: no new
 engine calls beyond the two already made, no arithmetic added to the UI.
 
-## 2. The grid
+## Decisions
+
+### 1. The grid
 
 `.shell`'s `max-width:1560px` cap is removed; the page runs full-bleed with
 edge padding, recovering ~300px of horizontal room on a 1867px viewport.
@@ -48,22 +49,20 @@ the semicircle occupies 520x393 instead of 680x513. All wheel geometry already
 derives from `--wd`, so no other wheel rule changes.
 
 `#meta-sec` (killboard) and `.livefeed` are not part of the grid — see
-sections 3 and 9.
+Decisions 2 and Deferred.
 
-### Breakpoints
-
-Deliberately additive: everything below 1251px keeps today's behaviour, which
-bounds the regression surface to wide viewports.
+**Breakpoints** — deliberately additive: everything below 1251px keeps the
+previous behaviour, which bounds the regression surface to wide viewports.
 
 - `>=1700px` — four columns (new)
 - `1400-1699px` — three columns (new). Column 4 dissolves: `.dl-kp`,
   `.dl-roles` and `#warn-slot` become one full-width row beneath the hero,
   laid out side by side within it. Columns 1-3 keep their assignments and
   their `1fr`-relative proportions.
-- `1251-1399px` — today's two-column hero grid, untouched
-- `<=1250px` — today's stacked stage rules, untouched
+- `1251-1399px` — the previous two-column hero grid, untouched
+- `<=1250px` — the previous stacked stage rules, untouched
 
-## 3. Edge panels
+### 2. Edge panels
 
 `.pdash` generalises into `.epanel[data-edge="left|right"]`, keeping its exact
 chrome: `position:fixed`, `transform:translateX(...)` on `[data-open]`, a
@@ -72,8 +71,8 @@ inside an `.epanel-rail` per edge, so a panel costs zero layout when shut and
 adding a sixth surface later is a markup line.
 
 - **Left edge:** `setup` (content type, forge full comp, share, export, clear,
-  size presets), `tools` (player pool + swap lab, today's `.dl-tools-fold`)
-- **Right edge:** `party` (today's `#pdash`, behaviour unchanged),
+  size presets), `tools` (player pool + swap lab, the former `.dl-tools-fold`)
+- **Right edge:** `party` (the former `#pdash`, behaviour unchanged),
   `live` (the companion feed, relocated from the deep boards)
 
 **Deleted:** `.rail`, `.rail-strip`, `.rail-body`, `.rail-toggle`, `.msetup`,
@@ -88,7 +87,7 @@ ignored — no migration.
 Below 960px every `.epanel` becomes a full-width bottom sheet instead of a
 side panel, matching how the rail used to stack.
 
-## 4. Status bar
+### 3. Status bar
 
 The masthead grows a second line:
 
@@ -102,12 +101,12 @@ The masthead grows a second line:
 
 Style and size are turned constantly; leaving them behind a tab would cost
 more than the space it saves. Every value shown already renders somewhere on
-the page today — nothing new is computed.
+the page — nothing new is computed.
 
-## 5. New cards: kill pressure and role check
+### 4. New cards: kill pressure and role check
 
-These do not exist as cards on main. `killPressure` and `roleAdvisory` render
-today only as lines inside the radar's hover tooltip (`_decision_layer.js`,
+These did not exist as cards. `killPressure` and `roleAdvisory` rendered
+only as lines inside the radar's hover tooltip (`_decision_layer.js`,
 `centerTipHtml`). Promoting them means extracting those two blocks into
 standalone card renderers.
 
@@ -126,13 +125,13 @@ never feed scoring — the standing invariant that `comp_identity`,
 `kill_pressure`, `fight_chain`, `pick_report` and the role layer describe
 rather than score is unaffected, because no scoring call site changes.
 
-## 6. Files
+## Data shapes (files)
 
 **New:** `dashboard/_layout.css` — registered in `build.py` and inlined
 **last** into `_shell.html`'s single `<style>` block, so it wins on source
 order without needing `!important`.
 
-Layout rules move into it from their three current homes:
+Layout rules move into it from their three former homes:
 
 - from `_shell.html`: `.shell` / `.main` grid, `.rail*`, `.wheelstage` /
   `.ws-*`, `.pdash*`, and the `@media` 960 / 1251 / 1560 layout blocks
@@ -160,11 +159,15 @@ of the refactor, and it retires the `!important` specificity war documented in
 `dashboard/how-it-works.html`, `docs/index.html`, `docs/how-it-works.html`.
 Regenerate with `py -3 dashboard/build.py`.
 
-## 7. Invariants held
+## Engine changes
+
+None. The only engine calls added are `ENG.killPressure` and
+`ENG.roleAdvisory`, both already called on the page.
+
+## Invariants held
 
 - **Display only.** No capability numbers and no scoring math enter
-  `dashboard/`. The only engine calls added are `ENG.killPressure` and
-  `ENG.roleAdvisory`, both already called on this page.
+  `dashboard/`.
 - **Three layers never merged.** Engine truth / display explanation / observed
   evidence stay separate; the killboard strip remains evidence display and is
   not promoted.
@@ -176,25 +179,26 @@ Regenerate with `py -3 dashboard/build.py`.
   semantics; the killboard bucket still keys off planned size.
 - **LF newlines.** Any new writer in `build.py` opens with `newline="\n"`.
 
-## 8. Verification
+## Tests
 
 - `py -3 dashboard/build.py` — the build embeds a parity fixture, so a clean
   build asserts the browser scoring still matches `engine.py`
 - `py -3 tests/test_js_parity.py` — Python/browser parity at 1e-9
 - `node tests/test_display_math.js` — killboard bucket + cohort math
 - `node tests/test_loadout_codec.js` — share-URL codec round-trips
-- Playwright MCP against `py -3 -m http.server --directory dashboard`, at
+- A headless browser (Playwright) against `py -3 -m http.server --directory dashboard`, at
   1867 / 1500 / 1300 / 900 px wide, confirming: four columns, three columns,
   the untouched 1251-1399 hero grid, and the mobile stack with bottom-sheet
   panels
+- `tests/test_dashboard_layout.py` — the layout contracts (added by the plan)
 
 Layout work cannot change engine output; the parity and display-math gates are
 there to prove exactly that.
 
-## 9. Out of scope
+## Deferred / out of scope
 
 - Promoting the killboard strip (`#meta-sec` stays a full-width deep board
   below the grid, unchanged)
 - Any change to scoring, forge structure, need profiles, or the role book
-- Identity-aware scoring (parked pending more blind rounds)
+- Identity-aware scoring (parked pending more validation rounds)
 - `how-it-works.html` / `_explainer.html` restyling

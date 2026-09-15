@@ -12,7 +12,7 @@
 # ---------------------------------------------------------------------------
 # Content template — Castle Fight (25-man default, the big-blob objective).
 #
-# PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Castles
+# PROVISIONAL — weights NOT validated. Castles
 # are the largest fixed-objective fights: chokes at the gates, a capture
 # point inside, multiple parties per side. Calibration leans on the same
 # evidence as territory_defense (Deadlyhooker's comp is explicitly "for
@@ -26,7 +26,7 @@ content: castle
 name: Castle Fight
 base_size: 25
 validated_sizes: [25]
-# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# FIT PROVENANCE (target is the median): how the targets
 # below were measured. stat median = min / target / soft_cap are the least,
 # the median and (raised only) 1.15 x the most of `comps` published comps in
 # the dressed audit (pipeline/refit_content_targets.py); minimum = still the
@@ -64,26 +64,24 @@ requirements:
   silence:        {target: 2.5,  weight: 5,  soft_cap: 20.09,  scales: false}
   buff_allies:    {target: 11.57,  weight: 4,  soft_cap: 33.35,  scales: false}
   disengage:      {target: 0.8,  weight: 3,  soft_cap: 9.38,  scales: false}
-  # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
+  # OPTIONAL: five single-target melee weapons carry it;
   #   9 of 10 published comps field none. Keep the target, do not require it.
   execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false, optional: true}
   # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
   # these provisional niche weights dominated tail recommendations. anti_zone
   # kept ABOVE the other contents (2, not 1): the standing Exalted slot in
   # all Deadlyhooker parties is castle/territory evidence.
-  # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
+  # OPTIONAL: supplied by ONE weapon in the catalogue
   #   (Exalted Staff, the crystal holy staff). Real target, but a comp
   #   without it is not missing anything.
-  # DEMAND RAMP (owner ruling 2026-09-07, replacing the crystal cost gate:
-  #   "that type of cleanse is not as important in small groups as the
-  #   engine values ... don't really need it at 10-14 and then need grows
-  #   slightly as numbers grows and then becomes a good requirement at like
-  #   25+"): zone removal is demand created by ENEMY ground effects, and more
-  #   enemies lay more of them. No requirement at all through 14; linear to
-  #   this row's measured value at 25; proportional beyond. Harvest (winner
-  #   parties, 2026-09-07): an Exalted in 2% of 4-9 man parties, 7% at
-  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape, the
-  #   anchors are the owner's.
+  # DEMAND RAMP (replaces the crystal cost gate): zone removal is demand
+  #   created by ENEMY ground effects, and more enemies lay more of them —
+  #   not needed at 10-14, growing slowly with numbers, a real requirement
+  #   from about 25 (curation judgment). No requirement at all through 14;
+  #   linear to this row's measured value at 25; proportional beyond.
+  #   Harvest (winner parties): an Exalted in 2% of 4-9 man parties, 7% at
+  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape; the
+  #   anchors are curation judgment.
   anti_zone:      {target: 1.8,  weight: 2,  soft_cap: 2.3,  ramp: {none_until: 14, full_at: 25}, optional: true}
   damage_debuff:  {target: 1.2,  weight: 1,  soft_cap: 6.57,  scales: false}
 

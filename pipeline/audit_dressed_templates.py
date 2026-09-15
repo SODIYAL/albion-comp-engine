@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dressed template audit (Phase 3, 2026-08-27). REPORT-ONLY.
+Dressed template audit (dressed validation Phase 3). REPORT-ONLY.
 
 For every published comp party that maps onto a fitted template, compute
 each template capability's supply under four evaluation states:
@@ -21,7 +21,7 @@ suspiciously large (>= LARGE_DELTA of target, PROVISIONAL).
 
 Nothing here scores, tunes, or gates. The output feeds the dressed
 template audit report and the tankiness/frontline finding; template
-retunes require the owner's ruling (anti-circularity, VALIDATION.md).
+retunes need a maintainer decision (anti-circularity, VALIDATION.md).
 
 Run:  py -3 pipeline/audit_dressed_templates.py
 Out:  pipeline/out/dressed_template_audit.json

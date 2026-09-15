@@ -4,25 +4,25 @@ Weapon sheets (`*.yaml`, one per weapon, carrying its E — the weapon's
 identity), tree-shared Q/W pools (`pools/`), and gear sheets (`gear/`).
 Every nonzero score cites an evidence spell the lint can ground
 (`pipeline/evidence_lint.py`); `curated_as_of` lets `patch_history` flag a
-sheet whose cited spell a later patch changed. Expert score overrides live
-in `MASTERSHEET.md` (`tune:sheets`), never edited into a sheet after the fact.
+sheet whose cited spell a later patch changed. Score overrides live in
+`MASTERSHEET.md` (`tune:sheets`), never edited into a sheet after the fact.
 
 Scale: 1–7, `score_unit: 2` — two sheet points are one supply unit. The old
 0–3 ordinals sit on the even slots (1→2, 2→4, 3→6); odd slots are for finer
-rulings (1 = weaker than anything previously scored, 7 = beyond the old top).
+judgments (1 = weaker than anything previously scored, 7 = beyond the old top).
 Coarse on purpose: finer granularity is false precision.
 
-## The rubric (canonical, 2026-08-20)
+## The rubric
 
-Sheets now grade 1–7 (the old 0–3 sits on the even slots; odd slots are
-for finer rulings, 7 = beyond the old top; `score_unit: 2` in `templates/scoring.yaml` keeps all
-calibration intact). The rubric below is how new 1–7 judgments are made,
-refined against the worked case that proved raw magnitude alone misleads:
-Bedrock's Primal Slam (18m throw + a wall that persists 4s, ground-cast
-from 18m, ignores CC resistance, on a kit with Guard Rune / Snare Charge /
-Defensive Slam) vs Iron-clad's whirlwind (12m, but the caster must
-physically contact the diver while channeling). Every line of that
-contrast is its own question.
+Sheets grade 1–7 (the old 0–3 sits on the even slots; odd slots are for
+finer judgments, 7 = beyond the old top; `score_unit: 2` in
+`templates/scoring.yaml` keeps all calibration intact). The rubric below is
+how new 1–7 judgments are made, refined against the worked case that proved
+raw magnitude alone misleads: Bedrock's Primal Slam (18m throw + a wall that
+persists 4s, ground-cast from 18m, ignores CC resistance, on a kit with Guard
+Rune / Snare Charge / Defensive Slam) vs Iron-clad's whirlwind (12m, but the
+caster must physically contact the diver while channeling). Every line of
+that contrast is its own question.
 
 Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment.
 
@@ -80,12 +80,11 @@ here would double-count. Combining: S1/S3/S7 are gates (a huge, reliable
 effect with the wrong shape is still wrong for the job); the rest are
 weighted modifiers with capability-specific weights.
 
-The judging instruments: `review/stat_chart.html` (real numbers per
-capability, spell-keyed, typed sub-groups, plus the per-spell fact line —
-persistence, delivery, cast range, counter-immunity flags) and
-`review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild after
-sheet edits: `py -3 pipeline/build_stat_chart.py`.
-
-Judging instruments: `review/stat_chart.html` (`py -3 pipeline/build_stat_chart.py`)
-and `review/magnitude.html` (`py -3 pipeline/build_magnitude_review.py`).
-Worked cases and every magnitude ruling: the `tests/VALIDATION.md` index.
+The judging instruments are boards generated locally into `review/`
+(gitignored, never committed): the stat chart
+(`py -3 pipeline/build_stat_chart.py` — real numbers per capability,
+spell-keyed, typed sub-groups, plus the per-spell fact line — persistence,
+delivery, cast range, counter-immunity flags) and the magnitude board
+(`py -3 pipeline/build_magnitude_review.py` — score-vs-dumps-text audit
+boards). Rebuild them after sheet edits. Worked cases and every magnitude
+decision: the `tests/VALIDATION.md` log.

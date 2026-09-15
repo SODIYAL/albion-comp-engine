@@ -12,7 +12,7 @@ const WEAPONS = DATASET.weapons;
 let CONTENT = Object.keys(DATASET.templates)[0];
 const ENG = new CompEngine(DATASET, CONTENT);
 /* There is no fixed party size in open-world content, and attendance is
-   FLUID (owner ruling 2026-08-21): the party is judged at the ROSTER you
+   FLUID, so the party is judged at the ROSTER you
    actually have — targets, floors and scaling follow whoever showed up.
    PLANNED is what you expect to field: it drives how many slots the forge
    fills and the cap warnings, never the judgment. Next-pick advice runs
@@ -35,7 +35,7 @@ function inPickContext(fn){
 }
 
 function syncEngine(){
-  /* the plan follows the roster (2026-09-10): the header read 7 while
+  /* the plan follows the roster: without this the header read 7 while
      eleven were seated - judgement was already at roster size, only the
      stepper lagged, and only on the manual paths */
   PLANNED = Math.max(PLANNED, party.length);
@@ -43,11 +43,11 @@ function syncEngine(){
   ENG.setContent(CONTENT, SIZE, STYLE);
   /* member combos re-resolve after every context change: the default
      loadout depends on the styled weights, and pick-derived combos map
-     through the current engine (2026-08-18) */
+     through the current engine */
   COMBOS_CUR = party.map((_, i) => comboAt(i));
-  /* equipped gear reaches scoring (dressed forge Task 1, 2026-08-27):
-     the engine has scored full builds since the 2026-08-20 gear layer —
-     the page's fitness call just never passed them. Gear edits re-render,
+  /* equipped gear reaches scoring (the dressed forge): the engine scores
+     full builds (the gear layer), so the page's fitness call has to pass
+     the worn pieces. Gear edits re-render,
      and render() lands here, so this stays fresh. */
   GEARS_CUR = party.map((_, i) =>
     gearsFromLoadout(typeof LOADOUT !== "undefined" ? LOADOUT[i] : null));
@@ -81,7 +81,7 @@ const tpl = () => DATASET.templates[CONTENT];
    sizes, and reading the template instead handed the board a cap with no
    weight or target - render() died in the capability rows on the first
    paint (empty party, size 1) at every content with a ramp row, castle
-   included, and the page stayed half-drawn (2026-09-10) */
+   included, and the page stayed half-drawn (L19) */
 const REQS = () => ENG.reqs;
 const FLOORS = () => tpl().hard_floors || {};
 const baseSize = () => tpl().base_size || 7;
@@ -90,28 +90,28 @@ const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
 /* the bare minimum winners get away with, and where the typical number
-   came from (owner 2026-09-10, target is the median) - engine reads,
+   came from (target is the median, standing rule 17) - engine reads,
    display only */
 const targetMin = cap => ENG.targetMin(cap);
 const targetSource = cap => ENG.targetSource(cap);
 /* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
    actually uses. Displaying raw sheet units next to effective-supply gap
    scores let a bar read "met" while the weakness list still charged a gap
-   for the same capability (review 2026-08-15). Raw sheet numbers stay
+   for the same capability. Raw sheet numbers stay
    visible per-weapon in the detail drawer. */
 /* Every scoring call for THE party passes the members' resolved combos
    (COMBOS_CUR) — the user's spell picks and forged loadouts reach the
    engine; ad-hoc parties (contribution what-ifs) pass their own slices. */
 const supply = p => p === party ? partyCalc().sup : ENG.effectiveSupply(p);
 const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
-/* The supremum is party-dependent since the optional ruling (2026-08-28):
+/* The supremum is party-dependent (optional template rows):
    an OPTIONAL capability the comp fields none of leaves the denominator, so
    a comp is not marked down for skipping a one-weapon tool. Same loadout and
    gear the numerator is scored with. */
 const maxFitness = (p = party) => ENG.maxFitness(
   p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
-/* DRESSED like everything else on the page (2026-09-03): the biggest-need
+/* DRESSED like everything else on the page: the biggest-need
    ranking used to read the naked roster while the pick, the "have" number
    and the radar read the worn kits, so a plate-clad 5-tank comp reported
    "Biggest need: Frontline" and then recommended a healer. */
@@ -123,14 +123,14 @@ const explain = (p, cand) => inPickContext(() =>
               p === party ? GEARS_CUR : null))
   .map(t => ({d: t.delta, ...t}));
 /* every candidate surface prices picks against the party AS EQUIPPED
-   (dressed forge 2026-08-27): the loaded comp's gear reaches the same
+   (the dressed forge): the loaded comp's gear reaches the same
    _evalPick the score uses, and each suggestion carries the kit its
    marginal assumed */
 const recommend = (p, n = 4) => inPickContext(() =>
   ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null,
                 p === party ? GEARS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
-              /* pair-aware prior (2026-09-11): descriptive split, rendered only */
+              /* pair-aware prior: descriptive split, rendered only */
               metaSolo: r.meta_solo, metaPair: r.meta_pair,
               metaPartner: r.meta_partner, metaRaise: r.meta_raise,
               viab: r.viability, combo: r.combo, kit: r.kit, score: r.score,
@@ -157,8 +157,8 @@ function swapReviewCached(){
 
 /* fitness + effective supply for the CURRENT party, computed once per state
    (renderers used to re-derive them 3-4x per render pass). supFloor is the
-   WEAPON+LOADOUT supply — the basis Option C hard floors read (owner ruling
-   2026-08-27): floor tags must quote it or display would disagree with
+   WEAPON+LOADOUT supply — the basis the structural hard floors read (Option C,
+   standing rule 10; V5, F25/F26): floor tags must quote it or display would disagree with
    scoring. */
 let calcCache = { key: null, fit: 0, sup: null, supFloor: null };
 function partyCalc(){
@@ -176,7 +176,7 @@ const capsOf = w => WEAPONS[w].capabilities || {};
 /* one home for the role-hint default and the below-floor predicate — the
    latter delegates to the engine so display can never disagree with scoring */
 /* Coarse role for tile colour and roster order. The SEAT the role book
-   gives the weapon wins over the sheet's role_hint (2026-09-03): the comp
+   gives the weapon wins over the sheet's role_hint: the comp
    board's columns already read the seat, so Grailseeker (hint melee, seat
    stopper tank) used to sit in the Tank column wearing a dps-red tile.
    Seat classes map onto the palette; a dps seat keeps the hint's
@@ -247,7 +247,7 @@ const icon = (w, s) => (typeof ICONS !== "undefined" && ICONS[w])
   ? `<img class="icon" src="${ICONS[w]}" width="${s}" height="${s}" alt="" loading="lazy">`
   : `<span class="icon ph" style="width:${s}px;height:${s}px"></span>`;
 
-/* Monoline UI icons (owner 2026-09-11, from the reference set: 24 grid,
+/* Monoline UI icons (from the reference set: 24 grid,
    1.75 stroke, round caps and joins, no fills, currentColor — so the
    brass hover / on states colour them like the toolbar's search and
    caret). Used by the slot controls; the in-game item renders above are
@@ -315,15 +315,15 @@ const CAP_PROSE = {
   burst_st:"single-target burst", burst_aoe:"AoE burst", sustained_dps:"sustained damage",
   execute:"execute pressure", mobility:"mobility", catch:"chase-down", buff_allies:"ally buffs",
   self_sustain:"self-sustain", anti_dive:"anti-dive", knockback_displace:"enemy displacement",
-  /* taxonomy ruling 2026-08-21: %-max-health cuts are their own capability —
+  /* taxonomy: %-max-health cuts are their own capability —
      an enabler, not damage; execute stays for low-HP payoffs / kill rewards */
   max_health_cut:"max-health cut",
-  /* interrupt taxonomy 2026-08-21: stopping a cast mid-channel is its own
+  /* interrupt taxonomy: stopping a cast mid-channel is its own
      thing, not silence — Badon's cloud, Snare Charge, Forbidden Stab */
   interrupt:"cast interrupts",
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
-/* User-facing short titles (owner 2026-08-21): headline surfaces speak
+/* User-facing short titles: headline surfaces speak
    player, never engine — no snake_case keys, no awkward wordings. The
    full prose stays one hover away in tooltips. */
 const CAP_LABEL = {
@@ -343,7 +343,7 @@ const capLabel = c => CAP_LABEL[c] ||
   prose(c).replace(/^./, ch => ch.toUpperCase());
 
 function roleOf(w, combo){
-  /* Role label from the SCORED loadout (2026-08-18): the top capabilities
+  /* Role label from the SCORED loadout: the top capabilities
      of the combo the engine actually resolves for this content — a Cursed
      Staff whose scored kit is sustain-dps utility no longer wears its two
      highest RAW capabilities (burst_st) as a label. Pass a member's combo
@@ -384,7 +384,7 @@ function badgeHtml(w){
 /* The ADD-WEAPON picker's chip facet (its own chip bar, plus any
    capability badge clicked on a weapon anywhere). */
 let FACET = null;
-/* mobile pass 2026-08-21: which member's popover is open as a bottom
+/* mobile: which member's popover is open as a bottom
    sheet (touch has no hover) — display state only, never in the hash */
 let SHEET_OPEN = null;
 const BADGE_KEYS = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d.caps]));
@@ -458,7 +458,7 @@ function whySentence(party, cand){
     return `Opening pick. With nothing on the board, ${nameOf(cand)} scores highest because it covers ${terms.slice(0,2).map(t => prose(t.cap)).join(" and ")} — the capabilities this template weights most heavily.`;
   const s = supply(party);
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
-  /* the lead gap is never "already covered" (2026-09-10): the card once
+  /* the lead gap is never "already covered" (L20g): the card once
      read "already covers sustained healing ... Hallowfall closes that" */
   const strong = Object.keys(REQS()).filter(c => (!lead || c !== lead.cap) && (s[c]||0)/target(c) >= 0.85)
     .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
@@ -491,11 +491,11 @@ function loadHash(){
      g / f / k decode POSITIONALLY against the ORIGINAL p= list, so unknown
      weapon keys are dropped from all four arrays TOGETHER — filtering the
      party alone used to shift loadouts and forged flags onto the wrong
-     members (review 2026-08-18). Cap at HARD_CAP like every roster path. */
+     members. Cap at HARD_CAP like every roster path. */
   const rawParty = p.p ? p.p.split(",") : [];
   const rawLoadout = p.g ? loadoutDecode(p.g) : [];
   const rawProv = provDecode(p.f || "", rawParty.length);
-  /* `k` (2026-08-18) carries explicit member combos (forge results whose
+  /* `k` carries explicit member combos (forge results whose
      E-slot use variant no spell picker can express). Optional like g/f. */
   const rawCombo = comboDecode(p.k || "", rawParty.length);
   party = []; LOADOUT = []; PROV = []; COMBO = [];
@@ -538,7 +538,7 @@ function loadStored(){
 /* ---------------------------------------------------------------- render */
 
 let party = [];
-/* Slot provenance (2026-08-18): 'm' manual / live-party, 'f' forged. "Forge
+/* Slot provenance: 'm' manual / live-party, 'f' forged. "Forge
    the rest" locks every current member; "reforge all" rebuilds only the 'f'
    slots. Without this, a slot the engine created was permanently treated as
    the user's the moment the handler returned. */
@@ -551,7 +551,7 @@ let COMBOS_CUR = [];
 let GEARS_CUR = [];
 /* The last forge's honesty report: {feasible, filler, held} or null. */
 let FORGE_NOTE = null;
-/* Slot controls (owner 2026-09-11): REPLACE_OPEN = the slot whose ranked
+/* Slot controls (F32/F33, L21): REPLACE_OPEN = the slot whose ranked
    replacements are open (REPLACE_OPTS = the engine's one-slot forge for
    it); AVOID = every roster already shown under the current lock
    signature, so "refresh" walks the next-best alternatives instead of
@@ -605,8 +605,8 @@ function renderSetup(){
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This content is blind-validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been blind-validated at this size yet.</div>`);
-  /* honesty mirror (2026-09-02): the size input lives in the masthead now,
+    `<div class="notice"><b>Extrapolated.</b> This content is validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been validated at this size yet.</div>`);
+  /* honesty mirror: the size input lives in the masthead now,
      so the caveat must surface THERE the moment an unvalidated size is set —
      the full prose stays in the setup panel this chip points at */
   const mh = $("size-notice-mh");
@@ -619,7 +619,7 @@ function renderSetup(){
       mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
     } else if (extra){
       mh.textContent = "extrapolated size";
-      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet blind-validated. Details in the setup panel`;
+      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet validated at this size. Details in the setup panel`;
     }
   }
 }
@@ -630,7 +630,7 @@ function renderSetup(){
    pieces isn't nagged; a genuinely off-comp weapon at this content + size
    gets multiple concrete options, clickable to swap in place. */
 /* Verdict thresholds live in the DATA layer (templates/scoring.yaml
-   swap_advisor block) like every other PROVISIONAL tunable, so the expert
+   swap_advisor block) like every other PROVISIONAL tunable, so a curation
    pass can find them; the fallback only covers a pre-block dataset. */
 const SWAP_CFG = (DATASET.scoring || {}).swap_advisor
   || { min_rank: 15, min_gain: 1.0, offcomp_rank: 60 };
@@ -648,8 +648,9 @@ function swapEligible(review){
   review.forEach((m, i) => {
     if (!m) return;
     /* viability-excluded and style-unfit members always get their
-       replacement advice — owner rules flag them regardless of rank
-       (2026-08-18; style gate 2026-08-23; the cost gate retired 2026-09-07) */
+       replacement advice — the generation rules flag them regardless of
+       rank (the viability exclusions and the style gate; the cost gate is
+       retired) */
     if ((m.off_comp || m.off_style) && m.options.length){ ok.add(i); return; }
     if (m.rank < SWAP_CFG.min_rank) return;
     const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
@@ -669,7 +670,7 @@ function swapHint(m, i){
   if (!opts.length) return "";
   const pool = Object.keys(WEAPONS).length;
   const label = m.off_comp
-    ? `<b class="offcomp">off-comp at this size (owner rule) — swap to</b>`
+    ? `<b class="offcomp">off-comp at this size (generation rule) — swap to</b>`
     : m.off_style
       ? `<b class="offcomp">off-style for ${esc(styleName() || STYLE)} at this size — swap to</b>`
       : m.rank >= SWAP_CFG.offcomp_rank
@@ -690,7 +691,7 @@ function memberPop(i, ctx){
     : ' · <b class="least">least load-bearing</b>';
   return `<div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
     <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — a refresh rebuilds it">forged</span>' : PROV[i] === "l" ? '<span class="prov locked" title="locked — a refresh keeps this slot">locked</span>' : ""}</div>
-    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
+    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="generation rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
     ${ctx.hintable.has(i) ? swapHint(ctx.review[i], i) : ""}
     <div class="dm-actions">
       <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
@@ -705,8 +706,8 @@ function memberPop(i, ctx){
     ${REPLACE_OPEN === i ? replaceListHtml(i) : ""}
   </div>`;
 }
-/* The ranked replacements for one slot (owner 2026-09-11, "show ranked
-   alternatives, I pick"): the engine's one-slot forge — every option is
+/* The ranked replacements for one slot (the engine ranks, the player
+   picks; F32/F33): the engine's one-slot forge — every option is
    scored as a dressed pick into the REST of the comp and passes the
    forge's own gates, so the list never offers what the forge would
    refuse. Display only: the engine ranks, the page translates. */
@@ -720,9 +721,9 @@ function replaceListHtml(i){
     ${REPLACE_OPTS.map(o => `<button class="rp-opt${o.delta < 0 ? " neg" : ""}" data-replaceat="${i}" data-replaceto="${o.weapon}" title="${esc(nameOf(o.weapon))} in this slot: ${signed(o.delta)} comp score, scored in its doctrine kit">${icon(o.weapon, 22)}<span>${esc(nameOf(o.weapon))}</span><b>${signed(o.delta)}</b></button>`).join("")}
   </div>`;
 }
-/* The wheel's comp board (owner 2026-08-27): the roster as four main-role
+/* The wheel's comp board: the roster as four main-role
    columns, each member a full dm tile with the same popover and actions
-   the retired party strip carried (owner 2026-08-27). Built
+   the retired party strip carried. Built
    during renderRoster (the render that runs exactly when roster state
    changes) and cached, so wheel spins never pay for the roster analysis. */
 let BOARD_HTML = "", NOTES_HTML = "";
@@ -739,11 +740,11 @@ function buildCompBoard(ctx){
   const adv = ENG.roleAdvisory(party, chests);
   if (!adv || !adv.members.length) return "";
   const book = ENG.rolesBook || {};
-  /* The tile label (owner 2026-09-11): PRIMARY · tag · tag. The primary
+  /* The tile label (R37, L22): PRIMARY · tag · tag. The primary
      is the DETECTED seat's word (the played role, as the tile always
      showed — a healer reads its heal profile instead), the tags are the
      weapon's dataset `label.tags` (derived at build from the sheet,
-     E-first, or the owner's cited override). The page composes; it never
+     E-first, or a cited override in roles.yaml labels). The page composes; it never
      derives a tag. */
   const fine = (id, w) => {
     const L = (DATASET.weapons[w] || {}).label || null;
@@ -753,8 +754,8 @@ function buildCompBoard(ctx){
     else if (!primary && det) primary = (det.name || id).split(" / ")[0].split(" (")[0];
     return [primary].concat(L ? L.tags : []).filter(Boolean).join(" · ");
   };
-  /* four MAIN columns only (owner: "only show main roles like tank
-     support dps and healers") — the fine played role rides each tile */
+  /* four MAIN columns only (tank, support, dps, healer) — the fine
+     played role rides each tile */
   const CLS = { frontline: ["Tank", "var(--role-tank)", 0],
                 support:   ["Support", "var(--role-support)", 1],
                 dps:       ["DPS", "var(--role-melee)", 2],
@@ -801,8 +802,8 @@ function buildCompBoard(ctx){
     </div>`).join("")}${openCol}${scrim}</div>`;
 }
 function renderRoster(){
-  /* The party's ONE dock is the wheel's comp board (owner 2026-08-27: "this
-     is meant to replace the party section below" — the old strip is gone).
+  /* The party's ONE dock is the wheel's comp board (it replaces the
+     party section that sat below — the old strip is gone).
      This render computes the roster analysis, caches the board, and caches
      the notes rail; renderWheelFoot injects both.
      contribution = fitness lost if this member left — the caller's
@@ -829,7 +830,7 @@ function renderRoster(){
       + loadoutPanel(LO_OPEN));
   NOTES_HTML = notes.join("");
 }
-/* ---------------- party-dash kit flyout (owner 2026-09-01) ----------------
+/* ---------------- party-dash kit flyout ----------------
    Hovering a member tile in the dash opens ONE surface left of the panel:
    the member's worn kit + scored spells + role on top, then the same
    popover block the tiles used to carry (fit, swap hints, kit/dossier/
@@ -838,7 +839,7 @@ function renderRoster(){
    the ≤960 tap-sheet path is untouched. Display only — reads state,
    never scores. */
 let PDASH_FLY_I = null, PDASH_FLY_ROLE = "";
-/* sticky kit editor (owner 2026-09-01): once opened from the flyout, the
+/* sticky kit editor: once opened from the flyout, the
    editor follows every member hovered until toggled shut */
 let PDASH_KIT = false;
 function pdashKitHtml(i, roleTxt){
@@ -1083,8 +1084,8 @@ function renderPickerChips(){
    updating each card's --a angle lets CSS transitions carry them around
    the rim instead of snapping. */
 /* degrees between rim cards — wider on phones so touch-sized cards never
-   overlap on the smaller radius (mobile pass 2026-08-21). Owner 2026-08-27:
-   3 per side at a wider step so the fewer, larger cards stay readable. */
+   overlap on the smaller radius. Three cards per side at a wider step,
+   so the fewer, larger cards stay readable. */
 const wheelStepDeg = () => matchMedia("(max-width:640px)").matches ? 40 : 31;
 const WHEEL_WINDOW = 3;    /* cards rendered each side of the focus */
 
@@ -1158,7 +1159,7 @@ function hubRingData(){
 function renderHubRings(rings){
   let r = 94;
   $("hub-rings").innerHTML = rings.map(g => {
-    /* SEMICIRCLE gauges (owner 2026-09-01): like the rim cards, a ring
+    /* SEMICIRCLE gauges: like the rim cards, a ring
        lives on the top arc only — 100% spans the semicircle, so the dash
        is half the pathLength (the CSS rotation starts it at 9 o'clock) */
     const v = Math.max(0, Math.min(100, 100 * g.have / g.want)) / 2;
@@ -1194,7 +1195,7 @@ const CAP_ICON = {
   damage_debuff:"weaken", max_health_cut:"hpcut",
 };
 function hubCapsHtml(w){
-  /* Ordered the way the owner reads a weapon (2026-08-21 ruling): what
+  /* Ordered E-first (unique-ability first, standing rule 5): what
      the E does comes first, then Q, then W — within one slot, the
      biggest effect leads. Sub-unit slot contributions (< 1.0 effective)
      don't claim a slot, so an E's incidental dribble can't outrank a
@@ -1315,10 +1316,10 @@ function reseatPickSearch(dash, parked){
 }
 function renderWheelFoot(keys, recs, rings){
   /* same commands as ever: "forge the rest" locks current members,
-     "reforge all" rebuilds only the generated slots (2026-08-18).
+     "reforge all" rebuilds only the generated slots.
      reforge needs no recommendation capacity — it must stay reachable at
      the hard cap (recs === null), where it used to vanish with the forge */
-  /* "refresh unlocked" (owner 2026-09-11): rebuilds every slot that is
+  /* "refresh unlocked" (F32/F33): rebuilds every slot that is
      not LOCKED — manual picks included — and walks the next-best comp on
      each press (the forge avoids every roster already shown) */
   const reforgeBtn = party.length && party.some((_, i) => PROV[i] !== "l")
@@ -1327,13 +1328,13 @@ function renderWheelFoot(keys, recs, rings){
   const forge = (recs !== null && party.length < PLAN()
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
     : "") + reforgeBtn;
-  /* the comp board lives in the right-edge party dash (owner 2026-09-01,
-     "so we can see them all much easier") — the foot keeps the compact
+  /* the comp board lives in the right-edge party dash (where the whole
+     roster reads at once) — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
      on every roster-state change), so wheel spins reuse it for free. */
   const board = BOARD_HTML;
-  /* ONE line, carrying only what is NOT already on screen (owner
-     2026-09-02). The slot number is the pick card's header, the playstyle
+  /* ONE line, carrying only what is NOT already on screen.
+     The slot number is the pick card's header, the playstyle
      is in the masthead and the radar centre, and "party n/n" appeared here
      TWICE - once on its own and again as a ring. What survives: the ring
      legend, which is colour-matched to the hub arcs it labels; the
@@ -1385,7 +1386,7 @@ function renderWheel(recs){
     : FACET.type === "badge"
       ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
       : `utility: ${FACET.v}`;
-  /* one line in the bar (2026-09-11): the count never truncates, the
+  /* one line in the bar: the count never truncates, the
      description ellipsizes, the full sentence rides the tooltip */
   const nMatch = `${keys.length} match${keys.length === 1 ? "" : "es"}`;
   /* the words compact away by the slot's own width (.w spans; see the
@@ -1463,11 +1464,11 @@ function renderGroups(){
       const have = s[c] || 0, t = target(c), soft = softCap(c), lo = targetMin(c);
       const below = floorHit(c, sfl[c] || 0);
       const over = have > soft;
-      /* four stages (owner 2026-09-10, target is the median): red under
+      /* four stages (target is the median, standing rule 17; L20): red under
          the bare minimum winners get away with, amber from there to the
          typical winner, green from typical to the soft cap, purple past it */
       const cls = over ? "over" : have < lo ? "low" : have < t ? "part" : "met";
-      /* bar ruler (owner 2026-08-27, same as the radar): 100% = the
+      /* bar ruler (the display ruler, same as the radar): 100% = the
          comp-fitted ceiling (soft cap); the brass tick marks the typical
          winner, the thin red one the bare minimum. Beyond-ceiling stacking
          shows purple, never a longer bar. */
@@ -1550,7 +1551,7 @@ function renderWeaknesses(){
     if (below || (ENG.weight(x.cap) >= 6 && ratio < 0.5)) needed.push({...x, floorHit: below});
     else nice.push(x);
   }
-  /* the fix, not the units (owner 2026-08-21): each gap leads with the
+  /* the fix, not the units: each gap leads with the
      weapons that close it — click to add. Ranked by the flat sheet score
      for that capability (the same display layer the dossier shows);
      excluded weapons never suggested; duplicates allowed (real comps
@@ -1561,7 +1562,7 @@ function renderWeaknesses(){
     .sort((a, b) => (b[1].capabilities[cap] - a[1].capabilities[cap])
                     || a[0].localeCompare(b[0]))
     .slice(0, k).map(([w]) => w);
-  /* image-first, player-voiced cards (owner 2026-08-21): the fix leads at
+  /* image-first, player-voiced cards: the fix leads at
      full size, the gap wears its short title (full prose in the tooltip),
      and priority is carried by order alone — no rank numerals, no keys */
   const row = (x, i, cls) => {
@@ -1589,7 +1590,7 @@ function renderWarning(){
        <span class="b"><b>Greedy trap.</b> ${left} slot${left>1?"s":""} left but ${unc.length} high-weight capabilities still uncovered
        (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
     : "";
-  /* The forge's honesty report (2026-08-18): an infeasible constraint set
+  /* The forge's honesty report: an infeasible constraint set
      or a slot the objective dislikes is SAID, never silently absorbed. */
   let forgeBits = "";
   if (FORGE_NOTE){
@@ -1609,12 +1610,12 @@ function renderWarning(){
         <span class="b"><b>No further alternative.</b> Every comp the search reaches under these locks has been shown (${AVOID.length} so far) — the roster stays as it is. Lock a different member, change a pick, or change the style or size to open new ground.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
-        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
+        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — structural minimums fitted from real comps, which the capability score alone does not see.</span></div>`;
   }
   $("warn-slot").innerHTML = greedy + forgeBits;
 }
 /* Names for the spells a scored combo equips — the loadout the engine
-   ACTUALLY valued, shown with the recommendation (2026-08-18). */
+   ACTUALLY valued, shown with the recommendation. */
 function scoredKitLine(w, combo){
   const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const parts = (ENG.comboSpells(w, combo) || []).map(([slot, sid]) => {
@@ -1690,7 +1691,7 @@ function renderRecDetail(recs){
         ${(() => {
           /* the score is the EXACT compScore delta: base blend + the prior
              and duplication terms. adj = viability tier − duplicate cost,
-             shown when it moves the number (2026-08-18). */
+             shown when it moves the number. */
           const blend = ENG.alpha * top.dFit + ENG.beta * top.dSyn + ENG.delta * top.meta;
           const adj = top.score - blend;
           const adjBit = Math.abs(adj) > 0.005
@@ -1726,7 +1727,7 @@ function renderFootnote(){
    the size this comp is FOR — PLAN(), not the roster judged so far: a
    20-man plan with 3 members picked must quote large-fight evidence, not
    small ganks, or the cohort strip stays invisible for the whole planning
-   phase. (The engine's meta prior IS bucketed since 2026-09-08 and reads
+   phase. (The engine's meta prior IS bucketed and reads
    ENG.sizeBucket() at roster size; this strip deliberately keys off PLAN()
    — the fights the comp is FOR — so the two axes differ by design.)
    Participant axis = 2 x party size, mirroring engine size_bucket. */
@@ -1751,7 +1752,7 @@ function usageOf(w){
            inBattles: ((USAGE.buckets_battles || {})[u.key] || {})[w] || 0,
            label: u.label };
 }
-/* ---------------- observed organization cohorts (PR #5, 2026-08-22) ----
+/* ---------------- observed organization cohorts (PR #5) ----
    sample_battles.py groups actors ONLY when the kill feed states the same
    Alliance/Guild identity; ambiguous players are excluded. Cohorts are NOT
    parties, sides, or win-rate samples — the copy says "observed together",
@@ -1808,7 +1809,7 @@ function cohortAffinity(){
     .sort((a, b) => b.cohorts - a.cohorts || b.lift - a.lift);
   return { ctx, selected, N, candidates, minOverlap };
 }
-/* Partial-roster neighbours (roadmap item 6, 2026-08-24 — the
+/* Partial-roster neighbours (roadmap item 6 — the
    KILLBOARD_AFFINITY.md "next step": show a few anonymized observed
    organization ROSTERS that overlap the selected weapons, not only the
    per-candidate aggregation above). Same rules as cohortAffinity: the
@@ -1837,7 +1838,7 @@ function cohortNeighbours(){
   rows.sort((a, b) => b.shared - a.shared || b.jaccard - a.jaccard || a.i - b.i);
   return { ctx, selected, matched: rows.length, rows: rows.slice(0, 3) };
 }
-/* Recurring observed families (roadmap item 7, 2026-08-24): mined offline
+/* Recurring observed families (roadmap item 7): mined offline
    by pipeline/build_cohort_families.py — an anchor PAIR that recurs across
    orgs and battles, plus the weapons frequently observed alongside (their
    shares). The page renders the committed artifact verbatim and marks
@@ -1873,8 +1874,8 @@ function familiesHtml(withNote){
         `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — observed with this core in ${Math.round(100 * c.share)}% of its cohorts">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
     </div>`).join("")}${note}</div>`;
 }
-/* Observed effect quotas (increment 3b, owner-ruled 2026-08-26: "yes —
-   advise quotas"). EFFECT_QUOTAS carries how many carriers of each typed
+/* Observed effect quotas (advice only, never a score; R18, display test
+   14). EFFECT_QUOTAS carries how many carriers of each typed
    gear effect (Demon/Judicator/Guardian/Royal/Hellion chests) the
    near-complete observed rosters field per 20 — mined from the
    reference-build evidence layer, scaled to PLAN(). Rows compare against
@@ -2110,8 +2111,8 @@ function statsBlock(key){
     ${ip ? `<div class="st-ip">item power — ${ip}</div>` : ""}`;
 }
 /* the dossier body — one builder serving BOTH the drawer (wheel/evidence
-   clicks) and the party dash's kit flyout (owner 2026-09-01: "combine the
-   dossier and the popout into one thing") */
+   clicks) and the party dash's kit flyout (the dossier and the pop-out
+   are one surface) */
 function detailHtml(w){
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
@@ -2173,7 +2174,7 @@ function renderDetail(w){
   $("drawer").dataset.open = "true";
   closePdash();   /* the dash overlays the drawer — never show both */
 }
-/* Per-ability facts panel (2026-08-19): every effect the game data states
+/* Per-ability facts panel: every effect the game data states
    for a spell — typed effects from the structured effect layer, the
    resolved description carrying the game's own numbers (damage, CC
    durations, radii), cooldown/range facts, and the PvP interaction record
@@ -2389,7 +2390,7 @@ function renderCompanion(live, err){
     if (cb) cb.checked = LIVE_SYNC;
   }
 }
-/* ---- live sync (2026-08-23, owner: "it should be as current as possible")
+/* ---- live sync (the comp stays as current as the companion's feed)
    After a load, companion updates keep flowing into the comp on every poll:
    a member's weapon swap updates their slot in place, a newly visible
    weapon fills in, and the member's REAL Q/W picks (spell UniqueNames off
@@ -2414,8 +2415,8 @@ function liveSpellPicks(w, spells){
   }
   return Object.keys(out).length ? out : null;
 }
-/* companion equipment -> LOADOUT gear keys (2026-09-06, "flow the worn kit
-   into the loadout"). The companion reports full game ids
+/* companion equipment -> LOADOUT gear keys (the worn kit flows into the
+   loadout). The companion reports full game ids
    (T6_HEAD_CLOTH_SET1@1); the curated catalogue keys head/armor/shoes/
    cape/offhand tier-stripped (HEAD_CLOTH_SET1) but potions and food
    TIERED (T6_POTION_HEAL) — so match exact, then tier-stripped, then by
@@ -2546,8 +2547,8 @@ function toggleCompanion(){
 /* Land a forge result on the roster (shared by "forge the rest" and every
    refresh): the kept slots keep only their EXPLICIT stored combos —
    pick-derived resolutions must keep re-resolving under future context
-   changes (review 2026-08-18) — and every generated slot lands with the
-   kit the forge actually VALUED (dressed forge 2026-08-27: r.gears[i] is
+   changes — and every generated slot lands with the
+   kit the forge actually VALUED (the dressed forge: r.gears[i] is
    the chosen doctrine-kit variant, part of the score), marked as engine
    picks, the caller reference filling only what the search left unset,
    spells from the combo the forge scored. */
@@ -2584,7 +2585,7 @@ function applyForgeResult(r, keptStored, keptLoadouts, keptProv, note){
   void wheelEl.offsetWidth;
   wheelEl.classList.add("spun");
 }
-/* "Refresh the rest" (owner 2026-09-11): hold every LOCKED slot (and the
+/* "Refresh the rest" (F32/F33): hold every LOCKED slot (and the
    slot the press came from, which it locks), rebuild the others for the
    current content, style and size, and give the NEXT-BEST comp each press
    — the forge is handed every roster already shown under this lock
@@ -2606,7 +2607,7 @@ function refreshUnlocked(holdIndex){
   const lockedStored = keep.map(i => COMBO[i]);
   const lockedProv = keep.map(() => "l");
   /* the forge evaluates the roster the board shows: on-screen kits ride
-     as locked_gears (2026-09-11); a member with no curated piece stays naked */
+     as locked_gears; a member with no curated piece stays naked */
   const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i]));
   const forgeSize = Math.max(goal, locked.length);
   const sig = lockSignature(locked, forgeSize);
@@ -2713,7 +2714,7 @@ document.addEventListener("click", e => {
   const loInFly = !!e.target.closest("#pdash-fly");
   if (loadoutHandleClick(e)){
     /* a kit toggle from the flyout makes the editor sticky there — it then
-       follows every member hovered until toggled shut (owner 2026-09-01) */
+       follows every member hovered until toggled shut */
     if (loInFly) PDASH_KIT = LO_OPEN !== null;
     render(); return;
   }
@@ -2804,7 +2805,7 @@ document.addEventListener("click", e => {
     render(); } return; }
   const fl = e.target.closest("[data-family-load]");
   if (fl){
-    /* observed-core loader (2026-08-24): the family's anchor pair joins as
+    /* observed-core loader: the family's anchor pair joins as
        MANUAL picks through the same mutation path as data-add — the engine
        scores them like any manual choice (off-style / redundancy flags
        apply as usual) and the forge completes the rest. Observed data
@@ -2824,7 +2825,7 @@ document.addEventListener("click", e => {
   }
   const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge");
   if (forgeBtn){
-    /* Deterministic constrained beam search in the engine (2026-08-18) —
+    /* Deterministic constrained beam search in the engine —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
        bodies and treated every forged slot as manual afterwards.
        "forge the rest" locks every current member; "reforge all" keeps
@@ -2840,8 +2841,8 @@ document.addEventListener("click", e => {
     const lockedProv = keep.map(i => PROV[i] || "m");
     if (locked.length >= goal){ return; }
     const lockedStored = keep.map(i => COMBO[i]);
-    /* Forge under the TARGET-size context (2026-08-24 fix): the engine is
-       normally judged at roster size (owner ruling 2026-08-21), but every
+    /* Forge under the TARGET-size context: the engine is
+       normally judged at roster size (the roster-size rule), but every
        generation gate — single-target-E, cost, style, healer, per-weapon
        dup allowances, size physics — keys off the size being BUILT. A
        2-member roster forging to 20 used to run the whole search under
@@ -2851,10 +2852,10 @@ document.addEventListener("click", e => {
        forge + parity stayed green over it). Restore mirrors inPickContext;
        render()'s syncEngine re-judges the new roster anyway. */
     const forgeSize = Math.max(goal, locked.length);
-    /* The forge evaluates the roster the board shows (2026-09-11): a
+    /* The forge evaluates the roster the board shows: a
        locked member's ON-SCREEN kit rides as locked_gears, so it is
-       scored in exactly that kit (the 2026-08-27 ruling: explicit gear
-       is scored verbatim, never re-dressed); a member with no curated
+       scored in exactly that kit (locked gear is scored verbatim, never
+       re-dressed — V5, F25/F26); a member with no curated
        piece equipped stays naked, as before. A naked lock used to read
        a 2.9-unit healer as 2.0 and widen the heal gap the forge then
        closed with a second body. */
@@ -2864,14 +2865,14 @@ document.addEventListener("click", e => {
     try { r = ENG.forge(forgeSize, locked, lockedCombos, undefined, undefined, lockedGears); }
     finally { ENG.setContent(CONTENT, SIZE, STYLE); }
     /* The search is deterministic: same manual picks, content, style and
-       size -> the same roster. Say so (2026-09-03, "reforge all not
-       working") instead of silently re-rendering an identical comp. */
+       size -> the same roster. Say so instead of silently re-rendering an
+       identical comp, which reads as the button doing nothing. */
     const unchanged = reforgeAll && party.length === r.party.length
       && [...r.party].sort().join() === [...party].sort().join();
     applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, { unchanged });
     return;
   }
-  /* slot controls (owner 2026-09-11): lock / replace / refresh the rest */
+  /* slot controls (F32/F33, L21): lock / replace / refresh the rest */
   const lk = e.target.closest("[data-lock]");
   if (lk){
     const li = +lk.dataset.lock;
@@ -2974,14 +2975,14 @@ document.addEventListener("click", e => {
 document.addEventListener("change", e => {
   if (loadoutHandleChange(e)){
     /* a user spell pick takes over the member's loadout: drop any stored
-       forge combo so scoring follows the picker (2026-08-18) */
+       forge combo so scoring follows the picker */
     const sel = e.target.closest("[data-lo-spell]");
     if (sel) COMBO[+sel.dataset.loSpell.split(":")[0]] = null;
     render(); return;
   }
   if (e.target.id === "content"){
     CONTENT = e.target.value; PLANNED = baseSize();
-    /* manual/live members SURVIVE a content switch (2026-08-18); slots the
+    /* manual/live members SURVIVE a content switch; slots the
        forge generated were built for the OLD template and are dropped —
        "reforge all" or "forge the rest" rebuilds them for the new one. */
     const keep = party.map((_, i) => i).filter(i => PROV[i] !== "f");
@@ -3079,7 +3080,7 @@ $("pick-filter").addEventListener("keydown", e => {
       if (btn) btn.click();
     }
   });
-  /* drag-to-rotate with casino momentum (owner 2026-08-21): track the
+  /* drag-to-rotate with casino momentum: track the
      pointer's angle around the wheel center; every step-angle crossed
      shifts the focus one card (clockwise drag brings the 11-o'clock card
      under the notch, focus − 1). Releasing with speed FLINGS the wheel:

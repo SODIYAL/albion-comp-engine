@@ -9,7 +9,7 @@ Windows note: use `py -3`, not `python`/`python3` — those resolve to the
 Microsoft Store stub. Requires `pyyaml` (`py -3 -m pip install pyyaml`).
 
 ```text
-data/source_pins.yaml     the ONE pinned ao-bin-dumps commit (chapter 2, §A)
+data/source_pins.yaml     the ONE pinned ao-bin-dumps commit (data/README.md "Provenance")
    │  py -3 pipeline/fetch_snapshot.py     ← the only network step for dumps
    ▼
 out/dumps_cache/<sha12>/  raw snapshot, cached BY COMMIT (gitignored)
@@ -76,29 +76,31 @@ Rule 3 used to match description keywords, which saw a fraction of the game —
 100 weapon lines apply a movespeed debuff and the `slow` regex matched almost
 none of them.
 
-## The evidence layer (chapter 2)
+## The evidence layer
 
-Build provenance lives in `data/` (see `data/README.md`): caller comps
-(`published_comps/`), MetaBattle imports (`published_builds/metabattle.yaml`,
-adapter: `py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is
-explicit and never part of a normal build; v2 since 2026-08-26 captures
-every group-PvP category — ZvZ, Hellgate 5v5/10v10, Crystal League/Arena,
-Ganking — with `content` derived from each page's own mode category),
-manual Armory imports (`armory_imports/`).
-`py -3 pipeline/build_builds.py` validates + normalizes everything into
-`out/builds_index.json` (§F selection order, canonical flags) and
-`out/builds_validation.json` (problems, quarantines, promotion decisions).
-`dashboard/build.py` inlines the index; nothing in it feeds scoring.
+Build provenance lives in `data/` — record conventions, source kinds,
+statuses, quarantine and the promotion gate are in `data/README.md`: caller
+comps (`published_comps/`), MetaBattle imports
+(`published_builds/metabattle.yaml`, adapter:
+`py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is explicit and
+never part of a normal build; adapter v2 captures every group-PvP category —
+ZvZ, Hellgate 5v5/10v10, Crystal League/Arena, Ganking — with `content`
+derived from each page's own mode category), manual Armory imports
+(`armory_imports/`). `py -3 pipeline/build_builds.py` validates + normalizes
+everything into `out/builds_index.json` (the selection order, canonical
+flags) and `out/builds_validation.json` (problems, quarantines, promotion
+decisions). `dashboard/build.py` inlines the index; nothing in it feeds
+scoring.
 
-`gear_join.py` (2026-08-27) is the shared read-side of that evidence for
-the dressed-validation layer: it reconstructs per-member ACTUAL kits from
+`gear_join.py` is the shared read-side of that evidence for the
+dressed-validation layer: it reconstructs per-member ACTUAL kits from
 `out/builds_index.json` (join key `comp_id:party_name:slot_index` over the
 FULL slot list, battlemounts included; conservative id normalization
 mirroring `build_dataset._normalize_gear_id` — unresolved pieces are
 counted, never guessed) plus `doctrine_gears` (kit_variants v0). Consumers:
 `tests/tier2_blindtest.py` (V3-D / V4 gear classes) and the dressed audits.
 
-## Dressed audits (2026-08-27, report-only — never part of a build)
+## Dressed audits (report-only — never part of a build)
 
 ```text
 py -3 pipeline/audit_validation_asymmetry.py  # legacy vs V3-W vs dressed top-3 diffs -> out/validation_asymmetry_probe.json
@@ -107,12 +109,105 @@ py -3 pipeline/audit_frontline_floor.py       # adversarial no-tank parties vs t
 py -3 pipeline/audit_gear_synergy.py          # gear-sourced synergy sides: measured + labeled hypotheticals -> out/gear_synergy_audit.json
 ```
 
-None of these writes anything a build reads. Findings and the open owner
-rulings live in `notes/findings/2026-08-27-*.md`; the tuning discipline
-(train / validation / holdout) is a standing rule in `tests/VALIDATION.md`.
-(The `calibration/` scaffold and `calibrate_scoring.py` were retired
-2026-09-10: four train cases, empty validation and holdout, nothing in
-the build or CI read them.)
+None of these writes anything a build reads. Findings and the open questions
+live in `notes/findings/2026-08-27-*.md`; the tuning discipline (train /
+validation / holdout) is a standing rule in `tests/VALIDATION.md`. (The
+`calibration/` scaffold and `calibrate_scoring.py` are retired: four train
+cases, empty validation and holdout, nothing in the build or CI read them.)
+
+## Mechanics
+
+Fight mechanics — Focus Fire / Resilience, AoE escalation, Disarray, the
+geometric AoE transform, Resilience Penetration — modify **capability supply
+vs target** in `engine/engine.py` and `engine/app_scoring.js` (change one,
+change both, rerun parity). Canonical data home:
+`pipeline/templates/mechanics.yaml` (its Focus-Fire / Resilience and
+AoE-Escalation tables match the wiki's pages — single-target damage is
+punished in large groups and AoE damage is rewarded in larger groups; balance
+patches through 31.030.1 touched none of them) and
+`pipeline/resilience_penetration.yaml` (the cited 69-row melee table).
+
+State: the three ZvZ mechanics are WIRED as supply-side effectiveness
+multipliers, per style, normalized to the balanced style (golden T11 pins the
+directions); the geometric AoE utility scaling is wired in both ports
+(T18/T18b); per-weapon Resilience Penetration is wired as a supply-side rebate
+(F20). Open mechanics work is in `BACKLOG.md` (per-spell `burst_aoe` gating
+Q9/Q10, the enemy model Q2/Q5, asymmetric numbers Q11/Q13, the dive style, the
+magnitude audit queues).
+
+### Geometric AoE utility scaling (standing rule)
+
+Implemented by `engine/engine.py` `_geo_mult` and `mechanics.yaml`
+`geometric_caps`; pinned by T18/T18b. Motivating case: Soulscythe (catch 1,
+from Tornado's 80% AoE slow) ranked level with Battleaxe (catch 1, from a
+self-haste W) as a catch alternative in a large comp. The cheap fix (bump
+Soulscythe to catch 2) was REJECTED as papering over the structural gap: the
+engine had no multi-target term for utility capabilities at all.
+
+1. **Model = geometric + escalation.** An AoE effect's supply scales with
+   expected targets hit (slowing 8 people is 8 targets' worth of work —
+   independent of any in-game bonus); escalation-eligible spells get the
+   in-game bonus ON TOP. Single-target effects stay flat. The in-game CC
+   Escalation covers only AoE root/stun/silence DURATION — slows and
+   knockbacks get no in-game bonus, but still scale geometrically.
+2. **Expected targets = style clump × spell radius.** The style/size clump
+   physics (expected_aoe_targets × count_mult) capped by what the spell's
+   actual area can plausibly hit — per-spell shape/radius from
+   `out/spell_index.json`.
+3. **Catch quality has four factors, ALL count**: AoE CC on the clump,
+   CC-resist-ignoring displacement (Tornado air-throw), dismount potential
+   (mounted Resilience column; forced-dismount immunity gone at 21+), self
+   gap-close/speed (real but flat — does not scale with fight size).
+4. **Per-spell escalation eligibility comes from ao-bin-dumps** (Q9); wiki
+   lists serve as validation, not source of truth.
+
+Implementation, both ports: AoE-delivered supply for `geometric_caps` scales
+with min(style clump, spell reach) / min(`reference_clump`, reach), with
+CC-duration escalation composing where the spell carries a dumps factor.
+`reference_clump: 2` anchors the unit at small-gang scale — the (balanced,
+base_size) anchor was measured DEAD (base clumps exceed every spell's reach,
+so it could never up-rate AoE at the calibrated sizes). Soulscythe catch:
+1.5x@roads5 → 3.0x@20+ vs Battleaxe's flat 1.0 — the motivating failure.
+
+### Deliberately not wired
+
+- Disarray: recorded in mechanics.yaml only — cancels in a mirror fight
+  (Q11); revisit if templates gain an expected-enemy-size field.
+- CC Escalation: `stun` IS wired (geometric transform + the dumps-derived
+  duration factor, Q8 — `mechanics.yaml` `cc_duration_caps`); only
+  `clump_create` stays untouched.
+- Per-spell `burst_aoe` escalation eligibility: extracted, NOT wired —
+  `BACKLOG.md`.
+- Mob HP bonus (+10% max HP per player over a per-mob-type threshold):
+  PvE, out of scope.
+
+### Mechanics questions, by number
+
+Code and yaml cite these by Q-number. Every question is closed unless
+`BACKLOG.md` lists it; the dated decisions are in `tests/VALIDATION.md`.
+
+- **Q1** form of numbers — global tables in mechanics.yaml, per-spell parts through sheets/overrides.
+- **Q2 / Q2b / Q5** the enemy model (attackers per target, expected targets hit) — OPEN, `BACKLOG.md`.
+- **Q3** which focus-fire mechanic — overkill saturation via the Resilience table, a supply-side transform, not a synergy.
+- **Q4 / Q12** Disarray numbers and table staleness — answered, recorded in mechanics.yaml, unwired.
+- **Q6** AoE escalation magnitudes — 8%/target from 2, cap 56% at 8, after buffs, bypasses the soft cap.
+- **Q7** Resilience Penetration — WIRED as a supply-side rebate on burst_st/execute at the style's grown focus count (a partial rebate: single-target damage is usually a non-pick at 20+, the rebate keeps what high penetration retains); F20 pins it. Optional: dumps cross-check of the wiki values (`BACKLOG.md`).
+- **Q8** CC Escalation duration curve — from the dumps, same per-target factor as damage (0.08; Spirit Animal 0.25); published nowhere else.
+- **Q9** per-spell escalation eligibility — extracted from the dumps, 174/559.
+- **Q10** uniform AoE-class escalation — REFUTED; per-spell gating is the open item in `BACKLOG.md`.
+- **Q11 / Q13** asymmetric numbers at 21+ — OPEN, `BACKLOG.md`; Disarray is a no-op in a mirror fight.
+- **Q14** per-style mechanics numbers — delegated to curation under the ordering rule (attackers-per-target and expected-targets-hit are style properties); the enemy model in `BACKLOG.md`.
+- **Q15** weapon playstyle affinity — derive + curate exceptions: `derive_style_fit` + `style_overrides.yaml`; audit `out/style_fit_report.json`; MetaBattle cross-check in `build_dataset.py`.
+- **Q16** content-absolute physics — the `size_physics` tables (`st_value_mult`, `count_mult`, composition.yaml) match the wiki's Resilience and AoE Escalation pages (25% ST value at 20-man, 20% at 30+; ×1.6 clump at 20, ×2.0 at 40+); F8/T15/T16 pin them. The earlier `grow()` build is superseded.
+- **Q17** usage-derived MetaPrior — SUPERSEDED: the meta prior is GENERATED from the killer-party harvest (`derive_meta_prior.py`, one player one vote, per size bucket, T46/H18); the usage_v2 build and its artifact are gone.
+- **Q18** breadth/redundancy scoring penalty — INVESTIGATED + REJECTED (a rho sweep never earned its place; the engine already de-ranks breadth picks by context). The *descriptive* decomposition shipped later as `pick_report`.
+- **Q19** one-spell-per-slot loadout model + single-target recalibration — SHIPPED (T14/T15); the Dagger-Pair-at-scale case fixed here (#3 → #33).
+- **First wiring checklist** — mechanics.yaml shipped in the dataset; supply-side multipliers per style normalized to balanced; both ports; T11 family.
+- **Magnitude RULE queue** — adjudicated wholesale, one reversal (Rotcaller keeps the line's 4: a 1H weapon adds an offhand, which can INCREASE damage — standing rule 12, no automatic 1H damage discount); `knockback_displace` ladder done earlier (T13).
+- **Gear sheets** — `pipeline/sheets/gear/core.yaml` + `combat_expansion.yaml` (129 pieces).
+- **Stage 2 — live companion** — LIVE-CONFIRMED end to end (`companion/README.md`); inspect parsing + worn kits into loadouts.
+- **Spell picks into scoring** — live sync maps real Q/W into the loadouts, worn kits too.
+- **Reliability roadmap layering** — mechanism (sheets + lint), physics (mechanics + size tables), empirics (parked, Q17), the validation loop (running: every correction becomes a golden case). Weapon tagging reliability = cross-source agreement (sheets × killboard role × MetaBattle tags), never authorship.
 
 ## Moving to a new game patch
 
@@ -155,9 +250,9 @@ unnecessary.
 The same re-check applies to the other cited-override files whose entries
 quote dumps text or spell behavior: `ranged_overrides.yaml` (gap-closer
 denies), `heal_overrides.yaml` (heal-scale sub-effect corrections — Divine
-Jump, Celestial Sphere), `style_overrides.yaml` (owner style rulings), and
-the `CURSEDOT` non-stacking record in `interactions.yaml` (the "stacks up
-to 4 times" wording it cites).
+Jump, Celestial Sphere), `style_overrides.yaml` (cited style-fit
+overrides), and the `CURSEDOT` non-stacking record in `interactions.yaml`
+(the "stacks up to 4 times" wording it cites).
 
 `patch_history.py` needs a clone WITH HISTORY:
 
@@ -203,16 +298,16 @@ mode those paths are treated as directories and the command fails. Either take
 the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
 /spells.json /localization.json /formatted/items.json`.
 
-## Status (2026-08-12, full-coverage pass)
+## Curation status
 
 - Curated: **137 of 137 combat weapons** — every line complete;
   `release_clean: True`. The other 24 catalog entries are vanity items and
   gathering tools and get no sheets.
 - Illustrative placeholders: 0 (all 8 replaced; `sheets/illustrative/` is a
   tombstone record of the §2.3 prototype numbers and their corrections).
-- Drafts: 0. All scores are lint-clean and have been through the expert
+- Drafts: 0. All scores are lint-clean and have been through the validation
   rounds recorded in `tests/VALIDATION.md`; the Tier-2 blind gate
-  (`tests/tier2_blindtest.py v4`) now enforces via exit code.
+  (`tests/tier2_blindtest.py v4`) enforces via exit code.
 
 ## The effect layer
 
@@ -222,25 +317,26 @@ py -3 pipeline/effect_catalogue.py <ao-bin-dumps path> --report
                                   (559 spells indexed: 367 weapon + 194 gear)
 pipeline/effect_map.yaml                 effect x direction -> capabilities
 pipeline/effect_lookup.py                shared: spell -> candidate capabilities
-py -3 pipeline/build_effect_review.py    -> review/effects.html
-py -3 pipeline/build_magnitude_review.py -> review/magnitude.html   (every score beside its dumps numbers)
-py -3 pipeline/build_stat_chart.py       -> review/stat_chart.html + out/stat_chart.json (needs the dumps cache)
+py -3 pipeline/build_effect_review.py    -> review/effects.html    (local board)
+py -3 pipeline/build_magnitude_review.py -> review/magnitude.html  (every score beside its dumps numbers; local board)
+py -3 pipeline/build_stat_chart.py       -> review/stat_chart.html + out/stat_chart.json (needs the dumps cache; local board)
 ```
 
-The boards are generated artifacts, not part of a build; regenerate them
-after a ruling changes what they show.
+The boards are generated locally into `review/`, which is gitignored; they
+are not part of a build. Regenerate them after a score or rule change alters
+what they show.
 
-**The catalogue covers GEAR as well as weapons** (2026-08-27). It indexed
-weapon spells only for most of the project's life, so every gear-sheet claim
-rested on prose + overrides and `evidence_lint.py` could not check a single
-one. Gear actives *and* passives are now indexed the same way; each effect
-records `gear_lines`/`gear_line_count` beside its weapon counts, and the gap
-reports (unmapped / no-prose / needs-a-call) span both sources — an effect
-that only ever appears on armor used to be invisible to all three. The first
-covered run turned the lint from silently skipping gear into six grounded
-errors, one of them a claim that was **backwards** (Demon Armor's aura buffs
-allies' resistances while reducing the wearer's own; it was recorded as the
-wearer's `tankiness`). Re-run the catalogue whenever the snapshot moves.
+**The catalogue covers GEAR as well as weapons.** It indexed weapon spells
+only for most of the project's life, so every gear-sheet claim rested on
+prose + overrides and `evidence_lint.py` could not check a single one. Gear
+actives *and* passives are indexed the same way; each effect records
+`gear_lines`/`gear_line_count` beside its weapon counts, and the gap reports
+(unmapped / no-prose / needs-a-call) span both sources — an effect that only
+ever appears on armor used to be invisible to all three. The first covered
+run turned the lint from silently skipping gear into six grounded errors, one
+of them a claim that was **backwards** (Demon Armor's aura buffs allies'
+resistances while reducing the wearer's own; it was recorded as the wearer's
+`tankiness`). Re-run the catalogue whenever the snapshot moves.
 
 Two layers, deliberately not collapsed:
 
@@ -262,11 +358,11 @@ job is only to reject capabilities the spell cannot support at all.
 When the lint rejects a claim, **the default answer is to drop or re-cite the
 claim, not to reach for `effect_overrides.yaml`.** The override channel is for
 demonstrable parser misreads with the reason written down; it is not a way to
-keep a score the data contradicts. Two 2026-08-27 cases set the precedent:
-`reveal` was refused outright (every weapon source of `remove:invisibility` is
-a purge spell — invisibility is a buff — so a reveal row would double-count
-purge on seven lines, and the only two non-purge sources are gear), and five
-gear claims were re-cited to what their effects actually support rather than
+keep a score the data contradicts. Two cases set the precedent: `reveal` was
+refused outright (every weapon source of `remove:invisibility` is a purge
+spell — invisibility is a buff — so a reveal row would double-count purge on
+seven lines, and the only two non-purge sources are gear), and five gear
+claims were re-cited to what their effects actually support rather than
 overridden (`mobility` claims on abilities with no speed component, an
 `anti_dive` claim whose only enemy effect was forced movement).
 
@@ -277,11 +373,11 @@ Hallowfall looked like it had no displacement at all).
 
 Two sources, because neither is complete: structured nodes have high precision,
 and the old prose regexes survive as a fallback in `effect_lookup.PROSE_FALLBACK`
-(they are what caught Battle Howl's purge first). Since 2026-08-12 the
-structured layer properly SUPERSEDES a prose flag when the spell has a
-structured counterpart for the same mechanic (with an ally-direction guard for
-the heal flag), and `effect_overrides.yaml` corrects the artifacts the parser
-gets wrong — both layers feed the seeder and the lint identically.
+(they are what caught Battle Howl's purge first). The structured layer
+SUPERSEDES a prose flag when the spell has a structured counterpart for the
+same mechanic (with an ally-direction guard for the heal flag), and
+`effect_overrides.yaml` corrects the artifacts the parser gets wrong — both
+layers feed the seeder and the lint identically.
 
 **What the effect layer cannot see**, and therefore never seeds or blocks: raw
 damage (`burst_st`/`burst_aoe`/`sustained_dps`/`execute` — damage is a plain
@@ -321,19 +417,19 @@ from the cache -> the derive chain -> dataset -> pages -> every gate ->
 HEAD (`--base` for another revision). Review the report, then commit.
 
 - `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
-  at 03:00 AND 15:00 (the job CLAUDE.md names; twice since 2026-09-09
-  because the 800-battle discovery list reaches back only ~13 h at the
-  8-player floor, ~60 h at 25 — one pass a day saw every ZvZ fight and
-  half the 8-24-player ones): `sample_parties.py` at the 25- and
-  8-player floors, battles fetched four at a time (`--workers`, each pass
-  ends with an event-coverage line and a request-miss tally; sequential
-  baseline 0.987), against the OFFICIAL gameinfo API, whose `GroupMembers`
-  carries the killer's party at kill time with gear → `out/party_cache/`
-  and `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
+  at 03:00 AND 15:00 (the job CLAUDE.md names; twice daily because the
+  800-battle discovery list reaches back only ~13 h at the 8-player floor,
+  ~60 h at 25 — one pass a day saw every ZvZ fight and half the
+  8-24-player ones): `sample_parties.py` at the 25- and 8-player floors,
+  battles fetched four at a time (`--workers`, each pass ends with an
+  event-coverage line and a request-miss tally; sequential baseline 0.987),
+  against the OFFICIAL gameinfo API, whose `GroupMembers` carries the
+  killer's party at kill time with gear → `out/party_cache/` and
+  `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
   derive_party_styles -> derive_meta_prior -> derive_role_counts ->
-  derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
-  (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
+  derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a
+  fight-size band (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
   in the band. The cache keeps every battle and the analysis reads all of
@@ -343,58 +439,55 @@ HEAD (`--base` for another revision). Review the report, then commit.
   (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips
   the large-bucket top-up) and then restores `weapon_usage_v2.json` to its
   pre-run bytes. That artifact (prevalence, cohorts, families) is what this
-  channel feeds. The `sample_rosters.py` sweep was dropped from the job
-  2026-09-07: `roster_mixes.json` has no code reader (the need profiles it
-  informed are owner-ruled constants); run it by hand if the evidence is
-  ever wanted again. 1v1/2v2 content
-(corrupted dungeons, mist duels) can never enter: the battles endpoint is
-only queried with a total-player floor (10 / 40), and analysis buckets by
-actual fight size besides. Log: `pipeline/out/fetch_logs/daily_fetch.log`
-(gitignored). WEEKLY CADENCE (or before a blind round): re-analyze
-offline (`sample_battles.py` re-reads `battles_cache/` without a flag;
-`sample_rosters.py --pages 0` and `sample_parties.py --pages 0` for the
-other two), review the numbers, rebuild
-dependents, run the gate list, commit — analysis is always a deliberate,
-reviewed step, never automated. Mind patch boundaries when reading
-accumulated windows: the cache spans balance patches; slice by
-`patch_history` dates before comparing metas.
+  channel feeds. The `sample_rosters.py` sweep is not part of the job:
+  `roster_mixes.json` has no code reader (the need profiles it informed are
+  curated constants); run it by hand if the evidence is ever wanted again.
+  1v1/2v2 content (corrupted dungeons, mist duels) can never enter: the
+  battles endpoint is only queried with a total-player floor (10 / 40), and
+  analysis buckets by actual fight size besides. Log:
+  `pipeline/out/fetch_logs/daily_fetch.log` (gitignored). WEEKLY CADENCE (or
+  before a validation round): re-analyze offline (`sample_battles.py`
+  re-reads `battles_cache/` without a flag; `sample_rosters.py --pages 0`
+  and `sample_parties.py --pages 0` for the other two), review the numbers,
+  rebuild dependents, run the gate list, commit — analysis is always a
+  deliberate, reviewed step, never automated. Mind patch boundaries when
+  reading accumulated windows: the cache spans balance patches; slice by
+  `patch_history` dates before comparing metas.
 
 ## Known gaps / TODO
 
 - ~~Gear items have no sheets yet~~ — closed in two steps: the full-build
-  member model shipped the curated starter set (2026-08-20,
-  `sheets/gear/core.yaml`), and the combat expansion completed the
-  combat catalog (2026-08-27, `sheets/gear/combat_expansion.yaml`; 129
-  pieces total in `dataset["gear"]`, scored by `build_extra` in both
-  ports). The albionbb kill events carry `Equipment.MainHand` + `Mount`
-  only, so worn kits are NOT harvestable from that endpoint — they come
-  from the official API's `GroupMembers` via `sample_parties.py`
-  (`out/party_rosters.json.gz`, 2026-09-01 onward), which is what the kit
-  doctrine reads today, beside the published/reference builds.
-- ~~Usage sample is small (24 battles)~~ — superseded 2026-08-13 by
-  `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
-  per-battle cache, V7 coverage stat in `out/weapon_usage_v2.json`).
-  Display-only in the dashboard until validation admits it to scoring.
-  Joined 2026-08-26 by `sample_rosters.py` (same endpoint, also explicit):
-  kill-dense battles mined for NEAR-COMPLETE fight rosters (wiped sides
-  attribute the whole roster) → `out/roster_mixes.json`, the evidence
-  behind the owner-ruled `need_profiles`; `--pages 0` re-analyzes the
-  cache offline.
+  member model shipped the curated starter set (`sheets/gear/core.yaml`),
+  and the combat expansion completed the combat catalog
+  (`sheets/gear/combat_expansion.yaml`; 129 pieces total in
+  `dataset["gear"]`, scored by `build_extra` in both ports). The albionbb
+  kill events carry `Equipment.MainHand` + `Mount` only, so worn kits are
+  NOT harvestable from that endpoint — they come from the official API's
+  `GroupMembers` via `sample_parties.py` (`out/party_rosters.json.gz`), which
+  is what the kit doctrine reads today, beside the published/reference
+  builds.
+- ~~Usage sample is small (24 battles)~~ — superseded by `sample_battles.py`
+  (~200 battles from the albionbb API, size-bucketed, per-battle cache, V7
+  coverage stat in `out/weapon_usage_v2.json`). Display-only in the
+  dashboard until validation admits it to scoring. Joined by
+  `sample_rosters.py` (same endpoint, also explicit): kill-dense battles
+  mined for NEAR-COMPLETE fight rosters (wiped sides attribute the whole
+  roster) → `out/roster_mixes.json`, the evidence behind the curated
+  `need_profiles`; `--pages 0` re-analyzes the cache offline.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
 - Six content templates exist (`blackzone_roam` 20, `territory_defense` 20,
   `castle` 25, `faction_war` 15, `castle_outpost` 7, `roads` 7) plus the playstyle
   overlays in `templates/styles.yaml` and the GENERATED style × size rows
-  in `templates/style_bands.yaml`. The content rows were comp-fitted
-  2026-08-21, re-fitted to person units 2026-08-29 and to the MEDIAN of
-  their comps 2026-09-10 (`refit_content_targets.py`, all rows together:
+  in `templates/style_bands.yaml`. The content rows were comp-fitted, then
+  re-fitted to person units (standing rule 9) and to the MEDIAN of their
+  comps (standing rule 17; `refit_content_targets.py`, all rows together:
   `min` = least comp, `target` = median, `soft_cap` raised to 1.15 x most
   where a comp exceeded it, never lowered; each template's `fit:` block
   states comps and stat); territory_defense (2 comps) and roads (1) stay
   on the old minimum and say so; castle and faction_war rest on no comps.
-  Since 2026-09-10 every target — band row or content row — is the TYPICAL
-  winner, not the least any winner fielded (owner: "the data should come
-  from the harvest median"); the band rows carry `min` (p10) beside it.
+  Every target — band row or content row — is the TYPICAL winner, not the
+  least any winner fielded; the band rows carry `min` (p10) beside it.
   Sizes off the validated list are linear extrapolation and labelled as
   such in the UI.
 - ~~Default-kit harvester not built~~ — the MetaBattle adapter (46 pages,
@@ -410,11 +503,11 @@ accumulated windows: the cache spans balance patches; slice by
   (design doc §2.2 amendment); scored on the Exalted Staff, still the sole
   supplier. Its template weight remains PROVISIONAL.
 - ~~`damage_debuff` proposed but unpromotable~~ — promoted into §2.2
-  (2026-08-12) after six poster-child weapons; template weight low/flat/
+  after six poster-child weapons; template weight low/flat/
   PROVISIONAL like anti_zone's. Small carriers (Weakening, Frost Beam,
-  Intimidating Presence) deliberately held at 0 pending expert weighting.
+  Intimidating Presence) deliberately held at 0 pending a validated weighting.
 
-- ~~Shapeshifter weapons not ingested~~ — fixed 2026-08-12. They live under
+- ~~Shapeshifter weapons not ingested~~ — fixed. They live under
   `transformationweapon` in items.json and are now merged before `by_name` is
   built (their `@reference` chains point at siblings in that category). Added 8
   lines, changed 0 existing ones. They matter: as a family they were the
@@ -430,7 +523,7 @@ accumulated windows: the cache spans balance patches; slice by
   flags knockback with direction `[enemy, self]`, which makes the lint raise its
   "verify WHO gets knocked back" warning — the exact check that caught the
   original Longbow error, now firing automatically.
-- ~~Holy cleanse uncertainty~~ — settled 2026-08-12, and it is **per weapon, not
+- ~~Holy cleanse uncertainty~~ — settled, and it is **per weapon, not
   per line**. The shared holy Q/W pool contains no cleanse, so no holy staff
   gets cleanse as a build choice. But two holy staves have it built into their
   **E**, where it is guaranteed rather than optional:
@@ -449,37 +542,35 @@ accumulated windows: the cache spans balance patches; slice by
   conditional there. `cleanse 0` on the curated holy sheets is correct, and gear
   is **not** a Tier-2 blocker.
 
-## Style x size rows (2026-09-04)
+## Style x size rows
 
 `derive_style_bands.py` reads `out/style_roster_evidence.json` (the
 `audit_style_rosters.py` board) and writes `templates/style_bands.yaml`:
-per declared playstyle x size band, target = 0.9 x p10 and soft cap =
-1.15 x p90 of the dressed capability supply winning killer parties field
-(person units). Cells with fewer than 40 distinct rosters borrow their
-nearest filled cell (`borrowed_from`); a zero p10 writes a soft-cap-only
-row (the content target stands), and so does a capability 5% or more of
-the cell's winners field none of (`zero_share`, owner 2026-09-09: p10 on
-the edge of the zero mass thrashes between folds — brawl|20 silence read
-7.5 / 1.0 / 4.6); nothing is excluded (the movement four
-were held back for an evening and admitted once measured — see
-tests/VALIDATION.md). The audit reads `out/party_cache/` directly, not
-the committed rosters artifact, so its board follows the cache; the fold
-script re-derives the rosters first so both agree. `build_dataset`
-validates the file (fail closed) and ships it as `style_bands`; the engine
-reads it after the content row for a declared style at 10+. Explicit step:
-`sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
-`derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
-`derive_skeletons` -> `build_dataset` -> gates.
+per declared playstyle x size band, `min` = p10, target = the median (p50)
+and soft cap = 1.15 x p90 of the dressed capability supply winning killer
+parties field (person units; standing rule 17). Cells with fewer than 40
+distinct rosters borrow their nearest filled cell (`borrowed_from`); a zero
+p10 writes a soft-cap-only row (the content target stands), and so does a
+capability 5% or more of the cell's winners field none of (`zero_share`:
+p10 on the edge of the zero mass thrashes between folds — brawl|20 silence
+read 7.5 / 1.0 / 4.6 across three folds); nothing is excluded (the movement
+four were admitted once measured — see tests/VALIDATION.md). The audit reads
+`out/party_cache/` directly, not the committed rosters artifact, so its
+board follows the cache; the fold script re-derives the rosters first so
+both agree. `build_dataset` validates the file (fail closed) and ships it as
+`style_bands`; the engine reads it after the content row for a declared
+style at 10+. Explicit step: `sample_parties` -> `audit_style_rosters` ->
+`derive_style_bands` -> `derive_party_styles` -> `derive_meta_prior` ->
+`derive_role_counts` -> `derive_skeletons` -> `build_dataset` -> gates.
 
-## The generated seat skeleton, plan minima and copy allowances (2026-09-15)
+## The generated seat skeleton, plan minima and copy allowances
 
-Owner ruling 2026-09-15 ("full autonomy" on the skeleton-first
-assessment; spec `notes/specs/2026-09-15-skeleton-first-generation-
-design.md`). `derive_skeletons.py` reads the COMMITTED
-`out/party_rosters.json.gz` and `out/party_styles.json` on the TRAINING
-split (`battle % 5 != 0`, the meta prior's rule), one DISTINCT fully-known
-roster (guild set + weapon multiset) one vote, and writes
-`out/skeletons.json`:
+Standing rule 18 extended to seats and plan tools; spec
+`notes/specs/2026-09-15-skeleton-first-generation-design.md`.
+`derive_skeletons.py` reads the COMMITTED `out/party_rosters.json.gz` and
+`out/party_styles.json` on the TRAINING split (`battle % 5 != 0`, the meta
+prior's rule), one DISTINCT fully-known roster (guild set + weapon multiset)
+one vote, and writes `out/skeletons.json`:
 
 - **seats**: per exact size at 10+, pooled and per declared style, the
   p10 / p50 / p90 count of every PRIMARY SEAT (`Engine.seat_of`, the
@@ -507,11 +598,11 @@ Gate: `tests/test_skeletons.py`.
 py -3 pipeline/derive_skeletons.py
 ```
 
-## The generated meta prior (2026-09-08)
+## The generated meta prior
 
-Owner ruling ("sure" to one harvest prior replacing both hand lists):
-the seven-weapon hand-set `meta_prior` in `templates/scoring.yaml` and
-the viability `core` list in `templates/composition.yaml` are retired.
+One harvest-generated prior replaces both hand lists: the seven-weapon
+hand-set `meta_prior` in `templates/scoring.yaml` and the viability `core`
+list in `templates/composition.yaml` are retired (H18 / H18b).
 `derive_meta_prior.py` reads the COMMITTED `out/party_rosters.json.gz` and
 writes `out/meta_prior.json`: per engine size bucket (party 2-5 small,
 6-15 mid, 16+ large — `Engine.size_bucket`'s axis, mirrored by
@@ -524,29 +615,27 @@ derived from a different artifact than the one on disk, and refuses a
 hand-set map anywhere in the config (fail closed, loudly). The engine
 detects the bucketed shape by its keys and reads it through
 `size_bucket()` at roster size; the recommendation weight `delta` (0.15)
-is the only dial. Since 2026-09-11 the same script also writes
-`meta_pairs` (one killer PARTY, one vote per distinct pair it fields; a
-row only across >= 3 guild-sets and >= 5 parties; `s = clamp(log2 lift,
-0, 3) / 3 x n / (n + 8)`, lift <= 1 reads 0) and BOTH tables learn from
-`battle % 5 != 0` only — the `% 5 == 0` fifth is `tier2_blindtest v4h`'s
-holdout; `--all-battles` writes an audit copy `build_dataset` refuses.
-The engine blends per member under `weights.meta_pair` (0.5): solo share
-and best observed partner on the roster. Explicit step, never part of a
-normal build:
+is the only dial. The same script also writes `meta_pairs` (one killer
+PARTY, one vote per distinct pair it fields; a row only across >= 3
+guild-sets and >= 5 parties; `s = clamp(log2 lift, 0, 3) / 3 x n / (n +
+8)`, lift <= 1 reads 0) and BOTH tables learn from `battle % 5 != 0` only
+— the `% 5 == 0` fifth is `tier2_blindtest v4h`'s holdout; `--all-battles`
+writes an audit copy `build_dataset` refuses. The engine blends per member
+under `weights.meta_pair` (0.5): solo share and best observed partner on
+the roster (standing rule 7). Explicit step, never part of a normal build:
 
 ```text
 py -3 pipeline/derive_meta_prior.py
 ```
 
-## The typical role count (2026-09-11)
+## The typical role count
 
-Owner rulings ("go ahead" on the diagnosis: castle_outpost clap at 7
-kept forging two healers and leaving damage short; then "fix it up all
-for all party sizes and styles"): a body beyond the TYPICAL count for
-its role is generated only when a minimum only that role can meet still
+Standing rule 18 (motivating case: castle_outpost clap at 7 forged two
+healers and left damage short): a body beyond the TYPICAL count for its
+role is generated only when a minimum only that role can meet still
 demands it. The composition bands carry min / max per role;
-`derive_role_counts.py` supplies the middle line the supply rows got on
-2026-09-10 — standing rule 17 applied to bodies — in three tables in
+`derive_role_counts.py` supplies the middle line the supply rows carry —
+standing rule 17 applied to bodies — in three tables in
 `out/role_counts.json` (hash-gated to `party_rosters.json` and
 `party_styles.json`), resolved by the engine's `_role_typical` for its
 content, style and size:
@@ -566,7 +655,7 @@ content, style and size:
   size window until it holds 40 rosters (`window` stated) and a style
   that never reaches it at that size has no cell (brawl_clap). Else
   `pooled[size]` — every winner at the size, any style; `balanced` never
-  reads a cell (the 2026-09-08 kit rule). healer / frontline / support.
+  reads a cell (the kit rule). healer / frontline / support.
 - dps is never gated: the residual role, and gating all four could make
   a size infeasible (p50s do not sum to the size). A zero p50 writes
   nothing; sizes the harvest does not reach (21+) carry no harvest row.
@@ -581,48 +670,46 @@ seat -> its class) than slots remain — the one healer slot is never
 spent on a hybrid that forces a full healer on top; OVER the typical
 count a pick passes only while the role's own minimum is unmet or an
 unmet exclusive predicate is one this pick carries on the combo it
-equips. The per-five healer minimum (2026-09-08) stays a minimum with
-no maximum; where it exceeds the typical count the minimum wins. Manual
-parties score anything. Gates: forge F31a-k, golden T48. Explicit step,
-never part of a normal build:
+equips. The per-five healer minimum stays a minimum with no maximum;
+where it exceeds the typical count the minimum wins. Manual parties
+score anything. Gates: forge F31a-k, golden T48. Explicit step, never
+part of a normal build:
 
 ```text
 py -3 pipeline/derive_role_counts.py
 ```
 
-`parse_dumps` adapter 5 (same day) adds `caster_moves` to every indexed
-spell — a `dash` node anywhere in the spell tree, the game's leap /
-charge primitive. `derive_style_fit` reads it as the delivery rule
-"payload reach, not travel": a caster-moving E's cast range counts toward
-flex delivery only for a flex bomb (group payload at the job bar); a
-standoff tool must move nothing.
+`parse_dumps` adapter 5 adds `caster_moves` to every indexed spell — a
+`dash` node anywhere in the spell tree, the game's leap / charge
+primitive. `derive_style_fit` reads it as the delivery rule "payload
+reach, not travel": a caster-moving E's cast range counts toward flex
+delivery only for a flex bomb (group payload at the job bar); a standoff
+tool must move nothing.
 
-## Party styles and style cells (2026-09-08)
+## Party styles and style cells
 
 `derive_party_styles.py` reads the COMMITTED `out/party_rosters.json.gz`,
 labels every killer party of 10+ with `Engine.comp_identity` on its
-weapons alone (naked matched the audit's dressed read 19/20 in blind round
-4; the committed artifact carries no member kits), and writes
+weapons alone (naked matched the audit's dressed read 19/20 in validation
+round 4; the committed artifact carries no member kits), and writes
 `out/party_styles.json` with the SHA-256 of the artifact it read.
 `build_dataset` refuses a party-styles file derived from a different
 artifact (exit 2); a missing file means no style cells that build.
 `pipeline/party_link.py` links a build to its party: exactly through the
-analyzer's `party` index (stamped since 2026-09-08 beside each party's
-`index`), else by (battle, weapon) only when exactly one 10+ party in the
-battle fields that weapon — never a guess. `derive_kit_doctrine(style=...)`
-then mines one kit cell per style under each seat's `kit_styles` from the
-linked builds, with the band's floors plus a 5-voter cell floor applied per
-weapon, per slot (the slot's modal item) and to the chain's chest step;
-thin cells and slots are absent, never filled. The engine's one doctrine
-reader `_seat_kit` lays a DECLARED style's cell over the band; `balanced`
-never reads a cell (owner 2026-09-08). Spec:
+analyzer's `party` index (stamped beside each party's `index`), else by
+(battle, weapon) only when exactly one 10+ party in the battle fields that
+weapon — never a guess. `derive_kit_doctrine(style=...)` then mines one kit
+cell per style under each seat's `kit_styles` from the linked builds, with
+the band's floors plus a 5-voter cell floor applied per weapon, per slot
+(the slot's modal item) and to the chain's chest step; thin cells and slots
+are absent, never filled. The engine's one doctrine reader `_seat_kit` lays
+a DECLARED style's cell over the band; `balanced` never reads a cell. Spec:
 `notes/specs/2026-09-08-coherent-style-kits-design.md`.
 
-**Seat pooling for thin slots** (same day, spec section 3; owner: "i leave
-it up 2 you to get the best results"). Measured first: three players'
-helmets predict a weapon's true modal 58% of the time, the seat's helmet
-among builds wearing the SAME chest 80% (boots 48% -> 72%, cape 68% ->
-81%); for potion and food the plain seat pool is right 95% / 82%. The
+**Seat pooling for thin slots** (spec section 3). Measured first: three
+players' helmets predict a weapon's true modal 58% of the time, the seat's
+helmet among builds wearing the SAME chest 80% (boots 48% -> 72%, cape 68%
+-> 81%); for potion and food the plain seat pool is right 95% / 82%. The
 miner ships `kit_pool` (plain) and `kit_by_chest` (chest-conditioned) per
 seat and band, player-counted, items with 5+ players, top 3 per slot, the
 five poolable slots only. The kit reader in both ports treats a weapon
@@ -633,7 +720,7 @@ weapon modal is never overridden. The audits (R24, R24b, R28) skip a slot
 whose killboard modal rests on fewer than 5 players — that slot is pooled,
 not matched.
 
-## One player, one vote (2026-09-04)
+## One player, one vote
 
 `sample_parties.py` stamps every harvested build with a hashed `player`
 key (sha1 prefix of the name; the name stays in the cache). In
@@ -642,11 +729,11 @@ counts are votes; the noise floors (seat 3, weapon 2, a chain step 2)
 count DISTINCT voters and the uniform extension needs 35 voters. Rows
 ship rounded votes with `players` beside them and cite
 `killboard:<votes>x/<players>p`; the compact `kit_weapon` tier rows are
-`[id, count, players]` (2026-09-09; `players` absent on a reference-only
-row) so the engine's thin-slot read counts people like every other
-floor. Re-derive with `--pages 0` after changing the build record.
+`[id, count, players]` (`players` absent on a reference-only row) so the
+engine's thin-slot read counts people like every other floor. Re-derive
+with `--pages 0` after changing the build record.
 
-## Doctrine bands (2026-09-04)
+## Doctrine bands
 
 `derive_kit_doctrine(band=...)` runs twice: `group` (killer parties of
 10+, every curated content; the seat's top-level `kit*` keys, grading
@@ -656,7 +743,7 @@ build_dataset.py is the table. The engine's `_seat_kit` picks the band by
 party size (gang at <= 9). `roles_report.json` carries the gang detail
 under `kit_doctrine_gang`.
 
-## Per-item chest lean (2026-09-05)
+## Per-item chest lean
 
 `audit_style_rosters.py` also mines `out/chest_lean.json`: for every dps
 chest, distinct wearers in WEAPONS-ONLY labelled clean cores (melee share

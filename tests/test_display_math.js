@@ -6,7 +6,7 @@
  * bucket or a wrong lift renders as a plausible strip, and exactly that
  * shipped once — the strip keyed off the judged roster size, so a 20-man
  * plan quoted small-gank cohorts and the affinity surface stayed invisible
- * for the whole planning phase (fixed 2026-08-22, usageBucket -> PLAN()).
+ * for the whole planning phase (fixed: usageBucket -> PLAN()).
  *
  * _app.js is inlined into a page, not a module, so the functions under test
  * are extracted from the source by name and evaluated in a vm context with
@@ -227,7 +227,7 @@ function setUsage(baskets) {
         `empty=${JSON.stringify(empty)} missing=${JSON.stringify(missing)}`);
 }
 
-/* 14 — observed effect quotas (increment 3b, owner-ruled 2026-08-26):
+/* 14 — observed effect quotas (increment 3b, R18):
    carried counts come from the LOADOUT chests only, quotas scale to
    PLAN, unknown gear blocks any shortfall claim, and the panel arms at
    15+ only. */
@@ -294,7 +294,7 @@ function setUsage(baskets) {
  * show its own mistakes usefully: a ring drawn outside its viewBox still
  * PAINTS (SVG overflow), so a wrong origin renders as arcs sitting on top
  * of the legend text rather than as a blank chart. That shipped once
- * (2026-09-02: cy was set to the bottom of the box instead of the top, so
+ * (cy was set to the bottom of the box instead of the top, so
  * every arc ran 92px past it and covered the labels).
  */
 {

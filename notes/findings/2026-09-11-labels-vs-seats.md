@@ -1,20 +1,24 @@
-# Labels vs. seats — the ruling list (2026-09-11)
+# Labels vs. seats — the open seat-move list (2026-09-11)
 
-Owner (labels round): "labels now; seat moves as a ruling list". The tile
-label is derived from the weapon's own sheet (E-first) and is display
-only. A SEAT is not: it picks the kit doctrine (chest uniform, observed
-builds) and counts toward the engage-tank / stopper-tank / shield-support
-minima at 15+, so a move changes forged comps. Below, every seated
-frontline / support weapon whose derived tags carry NONE of the seat's
-signature capabilities at >= 4 — the seat says one job, the sheet says
-another. Each row is a question for the owner, never a change made here.
-Signature per seat: engage = clump; stopper = peel / root / stun /
-silence / anti-dive / zone; shield support = cleanse / buffs; zone
+Findings record. Decision in force (2026-09-11): tile labels ship now;
+seat moves are listed here as open questions, one per weapon, each
+needing a maintainer decision. The tile label is derived from the
+weapon's own sheet (E-first) and is display only. A SEAT is not: it picks
+the kit doctrine (chest uniform, observed builds) and counts toward the
+engage-tank / stopper-tank / shield-support minima at 15+, so a move
+changes forged comps.
+
+## Context
+
+Below, every seated frontline / support weapon whose derived tags carry
+NONE of the seat's signature capabilities at >= 4 — the seat says one
+job, the sheet says another. Each row is an open question, never a change
+made here. Signature per seat: engage = clump; stopper = peel / root /
+stun / silence / anti-dive / zone; shield support = cleanse / buffs; zone
 support = zone / slow / root; curse support = heal cut / sustain dps /
 purge; off-tank = tanky / self-sustain.
 
-
-## Flagged (14 of 40 seated frontline / support weapons)
+## Finding — flagged (14 of 40 seated frontline / support weapons)
 
 | weapon | seat (word) | tile label | signature scores | E (dumps flags) | a move would |
 |---|---|---|---|---|---|
@@ -64,14 +68,18 @@ purge; off-tank = tanky / self-sustain.
 | Truebolt Hammer | off_tank | Bruiser · stun · peel | Hyperstatic |
 | Witchwork Staff | engage_tank | Engage · clump · aoe burst | Black Hole |
 
-## Owner's named cases
+## Named cases and decisions
 
-- **Grovekeeper** — engage_tank; sheet: engage 6, stun 4, peel 4, catch 4, no clump. Its E (Ground Pound) is flagged knockback / stun / shield in the dumps. Label now reads Engage · stun · peel. Question: keep the engage seat (it is a leap-in) or move to stopper_tank (a control tank that does not clump)? The engage_tank list carries it from the 2026-09-01 seat-all pass (killboard 10 builds, 100% plate) — thin.
-- **Great Arcane Staff** — shield_support; sheet: cleanse 4, buffs 4, peel 4, stun 4; E Time Freeze (stun, shield). Label reads Support · stun · peel. Question: is the shield seat right (its minimum is the cleanse/shield lane at 15+) or does it belong to a 'stopper support' seat that does not exist yet?
-- **Exalted Staff** — RULED the same day (owner: "its a heal weapon which
-  has the anti zone support but i would think its mostly a healer still"):
-  seats main_healer, shield_support secondary. Killboard: cloth 45% (Robe of
+- **Grovekeeper** — engage_tank; sheet: engage 6, stun 4, peel 4, catch 4, no clump. Its E (Ground Pound) is flagged knockback / stun / shield in the dumps. Label reads Engage · stun · peel. Open question: keep the engage seat (it is a leap-in) or move to stopper_tank (a control tank that does not clump)? The engage_tank list carries it from the 2026-09-01 seat-all pass (killboard 10 builds, 100% plate) — thin.
+- **Great Arcane Staff** — shield_support; sheet: cleanse 4, buffs 4, peel 4, stun 4; E Time Freeze (stun, shield). Label reads Support · stun · peel. Open question: is the shield seat right (its minimum is the cleanse/shield lane at 15+) or does it belong to a 'stopper support' seat that does not exist yet?
+- **Exalted Staff** — decided the same day: a healing weapon that also carries
+  the anti-zone support, and mostly a healer (curation judgment): seats
+  main_healer, shield_support secondary. Killboard: cloth 45% (Robe of
   Purity 39%), plate 33%, leather 23% — not tank armour by rule; beside 2-3
   full healers in 74% of parties. The 2026-08-23 support override retired.
 - **Heavy Mace, Bedrock Mace** — stopper_tank; labels read Stopper · purge · silence and Stopper · peel · anti-dive: seat and sheet agree, no move proposed.
 - **Healers** — the seats (main / kite / brawl) still pick kits and count toward the healer minima; the tile shows the heal profile + line instead of the seat word. No move proposed.
+
+## Changes
+
+Tile labels (`roles.yaml labels`, R37) shipped 2026-09-11; the Exalted Staff seat move (`roles.yaml`, the 2026-08-23 override retired). Every other row above is unchanged and open.

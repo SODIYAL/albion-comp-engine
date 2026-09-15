@@ -15,9 +15,9 @@ Run: python3 prototype_engine.py
 # Scores 0-3, per design doc §2.3 (illustrative curation, default kits assumed)
 
 WEAPONS = {
-    # CURATION FIX (user review 2026-08-12): bow-line knockback (Frost Shot W) is a
-    # SELF-knockback — repositioning for the user, not enemy displacement — and is
-    # not part of the standard group-content kit anyway. Removed knockback_displace.
+    # CURATION FIX: bow-line knockback (Frost Shot W) is a SELF-knockback —
+    # repositioning for the wielder, not enemy displacement — and is not part
+    # of the standard group-content kit anyway. Removed knockback_displace.
     # Lesson: displacement capabilities must be tagged self- vs enemy-directed.
     "Longbow":       {"burst_aoe": 2, "sustained_dps": 2, "resist_shred": 2,
                       "zone_control": 1, "catch": 1},
@@ -30,7 +30,7 @@ WEAPONS = {
     "Great Holy":    {"heal_burst": 3, "heal_sustain": 3, "cleanse": 2, "buff_allies": 1},
     "Blight Staff":  {"heal_sustain": 3, "heal_burst": 1, "sustained_dps": 1,
                       "mobility": 1, "cleanse": 1},
-    # Mace-line sheets corrected against wiki ability lists (2026-08-12):
+    # Mace-line sheets corrected against wiki ability lists:
     # Heavy Mace E = Battle Howl (AoE PURGE + SILENCE — purge is inherent to E,
     # not a W choice as previously guessed). Peel evidence: Battle Howl + Guard
     # Rune (W: ally stun/knockback immunity). Engage evidence: Snare Charge (W).
@@ -38,7 +38,7 @@ WEAPONS = {
                       "engage": 2, "zone_control": 2, "slow": 1, "sustained_dps": 1},
     "Great Hammer":  {"tankiness": 2, "engage": 3, "clump_create": 3, "stun": 2,
                       "zone_control": 2, "peel": 1},
-    # CURATION FIX (user review 2026-08-12): 1H Mace has NO purge — nothing in the
+    # CURATION FIX: 1H Mace has NO purge — nothing in the
     # mace Q/W list or its E (Deep Leap) removes buffs. Previous sheet invented it.
     # Deep Leap = leap + stun (mobility/engage bruiser per patch notes). Root via
     # Snare Charge (W). Peel via Guard Rune (W).
@@ -179,7 +179,7 @@ def run_tests():
     def check(name, cond, detail):
         results.append((name, bool(cond), detail))
 
-    # T1 — the user's worked example: 3 DPS -> must recommend a healer
+    # T1 — the worked example: 3 DPS -> must recommend a healer
     party = ["Longbow", "Witchwork", "Permafrost"]
     recs = recommend(party, T)
     top = recs[0][1]

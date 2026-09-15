@@ -4,7 +4,7 @@ kits-design.md, section 2 "Linkage".
 
 Two link paths, exact first, never a guess:
   1. the analyzer's `party` index on the build (sample_parties.analyze
-     stamps it since 2026-09-08) matched to the party's `index`;
+     stamps it) matched to the party's `index`;
   2. for artifacts harvested before the index existed: (battle, weapon)
      when EXACTLY ONE party of >= min_size members in that battle fields
      that weapon. Zero or several -> None (the build joins no style cell;

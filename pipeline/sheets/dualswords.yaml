@@ -12,11 +12,11 @@
 #     "Grants you immunity to purges" — the parser read the purge-immunity
 #     references as purges the spell performs. It removes nothing from anyone.
 #     Suppressed in effect_overrides.yaml.
-#   - Interrupt (W) scores no silence, per the Forbidden Stab ruling: an
+#   - Interrupt (W) scores no silence, per the Forbidden Stab rule: an
 #     instant interrupt is not a cast-denial window.
 #   - Weakening passive (stacking -2% enemy damage) noted, still unscored:
 #     damage_debuff was promoted into §2.2 (2026-08-12) but the small
-#     AA-stack carriers are held at 0 pending expert weighting.
+#     AA-stack carriers are held at 0 pending validation.
 # Parry's reflect is real anti-dive material but the map cannot express
 # reflect; left unscored rather than grounded on a loose candidate.
 

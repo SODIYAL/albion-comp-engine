@@ -7,10 +7,10 @@
    Owns: .shell / .main grid, .wheelstage / .ws-*, the .epanel edge-panel
    system, and every layout @media block. */
 
-/* ================= moved from _shell.html 2026-09-02 ================= */
+/* ================= moved from _shell.html ================= */
 
 /* ---------- shell ----------
-   Full-bleed since 2026-09-02: the 1560px cap and the two-column rail grid
+   Full-bleed: the 1560px cap and the two-column rail grid
    both retired when setup became an edge panel. One content region. */
 .shell{display:block; max-width:none; margin:0}
 
@@ -30,7 +30,7 @@
    entirely (display:contents in the card-grid block) so .ws-center places
    directly on .main's grid. The 3-column template, the 1560px collapse
    and the mobile order swaps placed flanks that never render — deleted
-   2026-09-02 (and the old template would have crushed the lone .ws-center
+   (the old template would have crushed the lone .ws-center
    into its 196-220px first column). */
 .wheelstage{display:block}
 .ws-flank{min-width:0}   /* the hidden right flank; renderers still fill it */
@@ -41,7 +41,7 @@
    One component for every viewport-edge flyout. Fixed, so a shut panel
    costs ZERO layout: the content grid always gets the full viewport.
    Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
-   plus one <aside>. Generalised from .pdash 2026-09-02. */
+   plus one <aside>. Generalised from .pdash. */
 /* ONE width for panel and rail — the rail's open-state transform rides
    exactly the panel's edge, so they must read the SAME value. Declared on
    :root because the rail is a fixed SIBLING, not a descendant: a copy on
@@ -125,14 +125,14 @@
     border:1px solid var(--rule-2); border-bottom:0}
 }
 
-/* ============ moved from _decision_layer.css 2026-09-02 =============
+/* ============ moved from _decision_layer.css =============
    appended AFTER the _shell.html rules so the old concatenation order
    (shell first, decision second) is preserved exactly. */
 
 /* The old right flank duplicated the exact questions answered above. Keep its
    underlying renderers alive, but remove that duplicate surface. */
 .ws-right{display:none}
-/* ================== THE CARD GRID (2026-09-02) ==================
+/* ================== THE CARD GRID ==================
    Shared across every grid band: the stage wrappers dissolve with
    display:contents so their children place directly on .main's grid, and
    the decision stack sheds slack height once it lives in a column. */
@@ -214,7 +214,7 @@
   .wheel{--wd:min(680px,100cqi)}
 }
 
-/* ---- stragglers found during the Task 2 move: layout rules that were
+/* ---- stragglers from the layout move: layout rules that were
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
   .main{padding:14px 12px 70px; gap:22px}
@@ -224,7 +224,7 @@
    Two lines: identity + verdict on top, the constantly-turned knobs below.
    Style and size change on nearly every interaction; burying them behind a
    panel tab would cost more than the space it saves. */
-/* Compacted 2026-09-02 (owner: "about 60% of that space"). It was ~105px:
+/* Compacted to roughly 60% of its former height. It was ~105px:
    a 58px top row built around a 34px sigil and a 26px figure, over a 47px
    control row on 32px inputs. Now ~64px - every control keeps a >=24px hit
    target, and the brand sub-line goes because the wordmark already says it. */
@@ -258,7 +258,7 @@
 /* forge and reforge are comp-level actions, so they sit with style, size
    and content rather than half in a panel and half under the wheel */
 /* the size mirror is a `chip warn`, and `.warn` is also the forge-note box
-   with a 12px top margin — in the bar the chip sat 6px low (2026-09-11 fix) */
+   with a 12px top margin — in the bar the chip sat 6px low without this */
 .mh-bar .chip{margin:0}
 .mh-bar .sb-count{line-height:1}
 .mh-forge{display:flex; gap:6px}

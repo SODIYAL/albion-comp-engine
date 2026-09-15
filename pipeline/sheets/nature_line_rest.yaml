@@ -11,7 +11,7 @@
   capabilities:
     - {cap: heal_sustain, score: 4, evidence: BRIEROFLIFE}     # E: heal + heal-on-damage-taken armor
     - {cap: buff_allies,  score: 4, evidence: BRIEROFLIFE}     # +13% resistances on the target; W: Protection (QW)
-    # peel 2 REMOVED (owner ruling 2026-08-28): resistances on the focused ally
+    # peel 2 REMOVED (peel touches the enemy): resistances on the focused ally
     # are protection, not peel — nothing here touches the enemy.
 
 - weapon: 2H_NATURESTAFF_KEEPER      # Rampant Staff — trail healer
@@ -49,7 +49,7 @@
   except:
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    # peel 4 REMOVED and re-homed as buff_allies (owner ruling 2026-08-28).
+    # peel 4 REMOVED and re-homed as buff_allies (peel touches the enemy).
     # Soul Link redirects half the damage off the focused ally and does nothing
     # to the enemy, so it is protection, not peel. Ironroot keeps its identity
     # as a protector — it just reads on the honest axis now, and the header

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 PvP interaction system gates (duplicate / reflect / cleanse semantics —
-the 2026-08-19 interaction-system spec, implemented in interactions.yaml +
+the interaction-system spec, implemented in interactions.yaml +
 build_interactions.py).
 
 The real seed data deliberately carries ZERO verified non-stacking scoring
@@ -182,19 +182,20 @@ check("analyzer reports strengths, cc coverage and profiles",
 inter = BASE["interactions"]
 check("all curated spells are embedded in the dataset (9 seeds + the "
       "reflect backlog incl. PUMMELING_STRIKES surfaced by the fuller "
-      "descriptions + CURSEDOT, 2026-08-24 + REFLECTAREA, the first GEAR "
-      "record, 2026-08-28)",
+      "descriptions + CURSEDOT + REFLECTAREA, the first GEAR "
+      "record)",
       len(inter) == 31 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
       and "METEOR" in inter and "THORNSAREA" in inter
       and "PUMMELING_STRIKES" in inter and "CURSEDOT" in inter
       and "REFLECTAREA" in inter)
 
-# ---- super-additive duplicates (owner ruling 2026-08-28) -----------------------
+# ---- super-additive duplicates (self_cost_offset_min_copies) -------------------
 # The mirror of the count-once rule, and deliberately the ONLY one: Demon
 # Armor's aura is applied to OTHER players, so two wearers stand in each
-# other's aura and neither pays the -0.37 self-penalty. Owner: "duplicate is
-# worth more only in special cases like demon armor" — hence verified-only,
-# scoring_note required, and it may cancel a cost but never add supply.
+# other's aura and neither pays the -0.37 self-penalty. A duplicate is worth
+# more only in special cases like Demon Armor, which is always fielded two
+# or more at a time — hence verified-only, scoring_note required, and it may
+# cancel a cost but never add supply.
 rec = inter["REFLECTAREA"]
 check("the Demon Armor record is verified, cites its source and explains "
       "the offset in a scoring_note",
@@ -219,7 +220,7 @@ check("ONE Demon Armor costs the party tankiness (the wearer pays and "
       s_one["tankiness"] < s_none["tankiness"],
       f"none={s_none['tankiness']:.2f} one={s_one['tankiness']:.2f}")
 check("TWO Demon Armors cover each other — the cost is waived, so the pair "
-      "is worth more than twice one (the owner's never-bring-just-one rule)",
+      "is worth more than twice one (the never-bring-just-one rule)",
       s_two["tankiness"] > s_none["tankiness"]
       and (s_two["tankiness"] - s_none["tankiness"])
           > 2 * (s_one["tankiness"] - s_none["tankiness"]),
@@ -238,7 +239,7 @@ check("interrupt facts derive from the descriptions' own words",
       and inter["GROWING_PUNCH"]["interrupt"]["uninterruptible"] is True
       and inter["METEOR"]["interrupt"]["uninterruptible"] is None)
 
-# ---- ability facts layer (2026-08-19): every effect visible per spell ----
+# ---- ability facts layer: every effect visible per spell -----------------
 def load_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
@@ -278,13 +279,13 @@ check("Enchanted Quiver corrected to a verified full-value self-buff",
 check("verified non-reflect badges come from the game's own descriptions",
       "NON-REFLECTABLE" in inter["FROST_ULTIMATE"]["badges"]
       and inter["FROST_ULTIMATE"]["structural_reflect_statements"])
-# REVISED 2026-08-24 (forge-quality round 4): the first verified
-# non-stacking scoring record exists — CURSEDOT. Its description states the
-# target-side 4-charge cap ("stacks up to 4 times"), DEATHCURSE2's verified
-# record reads the same pool, and the owner ruled: "the q spells … stack
-# but don't do extra damage from more people." CURSEDOT must be the ONLY
-# such record (any new one needs its own citation + a pin here), and the
-# count-once machinery must actually collapse the party's curse-Q supply.
+# Revised at validation round 4: the first verified non-stacking scoring
+# record exists — CURSEDOT. Its description states the target-side
+# 4-charge cap ("stacks up to 4 times"), DEATHCURSE2's verified record
+# reads the same pool, and the curse Q spells stack without more casters
+# adding damage (curation judgment). CURSEDOT must be the ONLY such record
+# (any new one needs its own citation + a pin here), and the count-once
+# machinery must actually collapse the party's curse-Q supply.
 check("CURSEDOT is the one verified non-stacking scoring record "
       "(sustained_dps counts once across cursed wielders)",
       [s for s, r in sorted(inter.items())

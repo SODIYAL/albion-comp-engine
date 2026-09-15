@@ -13,7 +13,7 @@ hand-edited.
 - `index.html`, `how-it-works.html` — **generated output**. Edit the sources
   and rebuild.
 
-## One home per layout rule (2026-09-02)
+## One home per layout rule
 
 `_layout.css` owns the `.shell`/`.main` grid, the wheel stage, the `.epanel`
 edge-panel system and **every** layout `@media` block. It is inlined LAST
@@ -42,7 +42,7 @@ the panel it was re-parented into. **Display geometry fails silently:** the
 CSS stays valid and the JS still runs, so the only other gate is a person
 looking at it.
 
-## The two display contracts (owner rulings 2026-08-26/27)
+## The display contracts
 
 - **The comp-status card IS the radar.** One axis per capability GROUP (the
   `GROUPS` map, "Other" guard included), the `comp_identity` glyph in the
@@ -56,18 +56,18 @@ looking at it.
   ceiling (so nothing can read above 100), stacking past it shows as the
   purple over-stack marker rather than a bigger number, and a brass tick
   marks the target minimum. Floor state reads `supplyFloor` (the
-  weapon+loadout basis) per the Option C ruling, never the dressed supply.
+  weapon+loadout basis, standing rule 10), never the dressed supply.
 - **The wheel is a semicircle and the comp board is the roster dock.**
   Frameless weapon art rides the top arc (the art is the star — no card
   boxes); the hub floats in the arc's mouth; drag-to-rotate derives the
   wheel centre from the box WIDTH, never its height. The board REPLACED
-  the old `ws-party` strip and, since the 2026-09-02 density redesign,
-  lives in the right-edge party flyout (`#pdash`, an `.epanel`), not
-  under the wheel: four main-role columns of full `dm`
-  tiles that share `memberPop()` with what the strip used to render, plus
-  the open-slots column and the notes rail (duplicate checks + kit editor).
-  The board is built inside `renderRoster` and cached in `BOARD_HTML`, so
-  spinning the wheel never pays for the roster analysis.
+  the old `ws-party` strip and, since the density redesign, lives in the
+  right-edge party flyout (`#pdash`, an `.epanel`), not under the wheel:
+  four main-role columns of full `dm` tiles that share `memberPop()` with
+  what the strip used to render, plus the open-slots column and the notes
+  rail (duplicate checks + kit editor). The board is built inside
+  `renderRoster` and cached in `BOARD_HTML`, so spinning the wheel never
+  pays for the roster analysis.
 
 ## Boundary
 
@@ -82,11 +82,11 @@ looking at it.
   `data-swapat`, `data-replaceto`, `data-remove`, `applyForgeResult()`)
   so loadout reset, provenance, prefill, and role re-sorting stay in one
   place; `sortPartyByRole()` applies one permutation across
-  `party`/`PROV`/`COMBO`/`LOADOUT`. Provenance is `m` / `f` / `l` (locked,
-  2026-09-11); the slot controls (`data-lock`, `data-replace`,
-  `data-refresh`) and `refreshUnlocked()` never rank or score — the
-  replace list is `ENG.replaceOptions()` verbatim and a refresh hands the
-  forge the rosters already shown (`AVOID`) and takes what it returns.
+  `party`/`PROV`/`COMBO`/`LOADOUT`. Provenance is `m` / `f` / `l` (locked);
+  the slot controls (`data-lock`, `data-replace`, `data-refresh`) and
+  `refreshUnlocked()` never rank or score — the replace list is
+  `ENG.replaceOptions()` verbatim and a refresh hands the forge the rosters
+  already shown (`AVOID`) and takes what it returns.
 - The companion app talks to this page only over `localhost:53321` — no
   build-time coupling.
 

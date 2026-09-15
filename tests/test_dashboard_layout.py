@@ -263,9 +263,9 @@ check("setPickSearch" in APP, "L11f search popover has a state machine")
 # an active query must stay visible - a silently narrowed wheel was the risk
 check("syncPickSearch" in APP, "L11g an active query is mirrored onto the button")
 check('id="pick-search-q"' in SHELL, "L11h the button carries the query text")
-# the bar is ONE segmented container that never wraps ON DESKTOP (owner
-# 2026-09-02); below 640px it wraps - it cannot scroll (overflow would clip
-# its own popups, see L11m) and its nowrap segments overpainted each other
+# the bar is ONE segmented container that never wraps ON DESKTOP (the
+# density redesign); below 640px it wraps - it cannot scroll (overflow would
+# clip its own popups, see L11m) and its nowrap segments overpainted each other
 _wfb = SHELL.find(".wf-bar{")
 check(_wfb >= 0 and "flex-wrap:nowrap" in SHELL[_wfb:_wfb + 400],
       "L11i the bar never wraps to a second line on desktop")
@@ -279,7 +279,7 @@ check('id="tree-menu"' in SHELL and "setTreeMenu" in APP,
 check("treeIconFor" in APP, "L11l tree options carry a weapon icon")
 # The bar hosts three absolutely-positioned popups (chip flyouts, tree menu,
 # search). Any overflow other than visible makes it a clipping context and
-# silently cuts all three off - which shipped once on 2026-09-02.
+# silently cuts all three off - which shipped once.
 bar = seg(SHELL, ".wf-bar{", "}", "L11m bar rule anchors")
 bar = re.sub(r"/\*.*?\*/", "", bar, flags=re.S)   # a comment may say the word
 check(not re.search(r"overflow[-a-z]*\s*:", bar) and bar != "",
@@ -413,7 +413,7 @@ check(".wf-actions{" not in SHELL, "L18c .wf-actions orphan gone")
 check(".wheel-foot .eyebrow{" not in SHELL, "L18d .eyebrow orphan gone")
 
 print("L19 - the page iterates the rows the ENGINE judges, never the raw template")
-# 2026-09-10: a ramp row (anti_zone, none_until 14) is dropped from ENG.reqs
+# A ramp row (anti_zone, none_until 14) is dropped from ENG.reqs
 # at small sizes; REQS() read tpl().requirements and handed the capability
 # board a cap with no weight - render() died on the first paint (empty
 # party) at castle / blackzone_roam / territory_defense / faction_war and
@@ -423,11 +423,11 @@ check("tpl().requirements" not in APP, "L19b no raw template requirement read in
 check(".requirements" not in read("_decision_layer.js"), "L19c the decision layer reads no raw template rows")
 
 print("L20 - the board shows the TYPICAL winner in four stages, and says when it cannot")
-# 2026-09-10 (target is the median): the second number on every row was the
-# least any winner fielded, labelled 'target'; every row overshot and the
-# reader concluded three healers at 15 was too many. The label now says
-# typical; the ring reads red below the bare minimum, amber up to typical,
-# green to the soft cap, purple past it (owner: "3 stages ... then purple");
+# Target is the median (standing rule 17): the second number on every row
+# was the least any winner fielded, labelled 'target'; every row overshot
+# and the reader concluded three healers at 15 was too many. The label now
+# says typical; the ring reads red below the bare minimum, amber up to
+# typical, green to the soft cap, purple past it (three stages, then purple);
 # a row whose target is not a measured median wears a chip the ENGINE
 # supplies (targetSource) - never a page-side rule.
 check("capability supply vs. typical winner" in SHELL.lower(),
@@ -449,7 +449,7 @@ sync = seg(APP, "function syncEngine", "function gearsFromLoadout", "L20 sync an
 check("PLANNED = Math.max(PLANNED, party.length)" in sync,
       "L20h the SIZE stepper follows roster growth on every path")
 
-# L21 - slot controls (owner 2026-09-11): lock / replace / refresh-rest
+# L21 - slot controls (F32/F33): lock / replace / refresh-rest
 # beside the hover x on every tile and in the popover's action row; the
 # replace list is the ENGINE's one-slot forge (the page never ranks);
 # refresh walks the next-best comp through the forge's `avoid` list;
@@ -471,7 +471,7 @@ handlers = seg(APP, 'const rp = e.target.closest("[data-replace]")',
 check("ENG.replaceOptions(party, ri, COMBOS_CUR, GEARS_CUR, 5)" in handlers,
       "L21e replace options come from the engine's one-slot forge with the roster's own combos and kits")
 check('PROV[si] = PROV[si] === "l" ? "l" : "m"' in handlers,
-      "L21f applying a replacement keeps a lock and makes a forged slot the user's pick")
+      "L21f applying a replacement keeps a lock and makes a forged slot a manual pick")
 rfn = seg(APP, "function refreshUnlocked", "function render()", "L21 refresh anchors")
 check('.filter(i => PROV[i] === "l")' in rfn and "AVOID" in rfn
       and "lockedGears, AVOID)" in rfn and "r.exhausted" in rfn,
@@ -491,7 +491,7 @@ check('PROV[i] === "l" ? "l" : "m"' in switch,
       "L21l locks survive a content switch")
 check(".wf-ctl{" in SHELL and ".wf-dm.locked .wf-mcard{" in SHELL and ".dm-replace{" in SHELL,
       "L21m the controls, the locked tile and the replace list are styled")
-# monoline UI icons (owner 2026-09-11, the reference set): one inline-SVG
+# monoline UI icons (the reference set): one inline-SVG
 # helper, currentColor, no emoji or text glyphs on the controls
 uih = seg(APP, "const UI_ICONS = {", "const ROLE_LABELS", "L21 icon anchors")
 check(all(k in uih for k in ("lock:", "unlock:", "replace:", "refresh:", "close:"))
@@ -507,7 +507,7 @@ check(all(x in pop for x in ('ui(PROV[i] === "l" ? "unlock" : "lock", 11)', 'ui(
 check("1F512" not in SHELL and ".wf-mcard .n .ui{" in SHELL and ".dm-act .ui{" in SHELL,
       "L21q the emoji lock mark is gone; the icon slots are styled")
 
-# L22 - tile labels (owner 2026-09-11): PRIMARY · tag · tag composed from
+# L22 - tile labels (R37): PRIMARY · tag · tag composed from
 # the detected seat's word and the weapon's dataset `label.tags`; the page
 # composes and never derives a tag
 lab = seg(APP, "const fine = (id, w) =>", "const CLS = {", "L22 label anchors")
@@ -517,7 +517,7 @@ check(".label" in lab and "L.tags" in lab and "det.word" in lab
 check("fine(m.role, party[i])" in tile,
       "L22b every tile composes its label from the member's detected seat and its own weapon")
 
-# L23 - three visual fixes (owner 2026-09-11): the picker facet never
+# L23 - three visual fixes: the picker facet never
 # overruns the controls, interaction badges are text pills, the masthead
 # size chip does not inherit the note box's margin
 check("#picker-chips, .wf-search{flex:none}" in SHELL and "#facet-slot{flex:1 1 0" in SHELL

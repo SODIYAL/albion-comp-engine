@@ -1,5 +1,5 @@
-# Daily killboard fetch — CACHE ONLY (owner directive 2026-08-27:
-# accumulate group-fight evidence daily; analyze + commit deliberately).
+# Daily killboard fetch — CACHE ONLY: accumulate group-fight evidence
+# daily; analyze + commit deliberately.
 #
 # What this does:  grow the local battle caches (gitignored) with fresh
 #                  GROUP fights from api.albionbb.com, politely.
@@ -14,9 +14,9 @@
 # with gear, out/party_cache/). This job feeds weapon_usage_v2.json
 # (prevalence, cohorts, families); that one feeds the kit doctrine.
 #
-# GROUP-FIGHT GUARANTEE (owner 2026-08-27: "not smallscale like corrupted
-# 1v1"): the battles endpoint aggregates kills into battles and is only
-# ever queried with a total-player floor — sample_battles here at
+# GROUP-FIGHT GUARANTEE (group fights only, never small scale such as a
+# corrupted 1v1): the battles endpoint aggregates kills into battles and
+# is only ever queried with a total-player floor — sample_battles here at
 # minPlayers=10 (group fights; the repo default 6 remains for manual
 # runs), sample_rosters hardcoded at minPlayers=40 + a kill-density gate.
 # A 1v1/2v2 (corrupted dungeon, mists duel) is a 2-4 player battle and

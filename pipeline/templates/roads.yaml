@@ -12,7 +12,7 @@
 # ---------------------------------------------------------------------------
 # Content template — Roads of Avalon (small-group roaming, party cap 7).
 #
-# PROVISIONAL — created 2026-08-15, weights NOT expert-adjudicated. Roads
+# PROVISIONAL — weights NOT validated. Roads
 # parties are hard-capped at 7 by the game; real groups run anywhere from 2
 # (gank pair) to the full 7 (chest-fight squad). Sizes above 7 are not
 # meaningful for this content — the UI should treat 7 as the ceiling.
@@ -64,7 +64,7 @@ st_full_value: true
 name: Roads of Avalon
 base_size: 7
 validated_sizes: [7]
-# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# FIT PROVENANCE (target is the median): how the targets
 # below were measured. stat median = min / target / soft_cap are the least,
 # the median and (raised only) 1.15 x the most of `comps` published comps in
 # the dressed audit (pipeline/refit_content_targets.py); minimum = still the
@@ -101,7 +101,7 @@ requirements:
   silence:        {target: 0.9, weight: 5,  soft_cap: 12.44, scales: false}
   cleanse:        {target: 2.7, weight: 5,  soft_cap: 3.9, scales: false}
   purge:          {target: 0.9, weight: 4,  soft_cap: 6.93, scales: false}
-  # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
+  # OPTIONAL: five single-target melee weapons carry it;
   #   9 of 10 published comps field none. Keep the target, do not require it.
   execute:        {target: 1.7, weight: 4,  soft_cap: 3.4, scales: false, optional: true}
   resist_shred:   {target: 1.76, weight: 4,  soft_cap: 3.09, scales: false}
@@ -112,13 +112,13 @@ requirements:
   # capabilities must never dominate a recommendation on unvalidated numbers.
   # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
   # these provisional niche weights dominated tail recommendations.
-  # anti_zone — NO ROW (owner ruling 2026-09-07, replacing the crystal cost
-  #   gate). Its sole supplier is the Exalted Staff; no 7-man comp in the
+  # anti_zone — NO ROW (replaces the crystal cost gate). Its sole supplier
+  #   is the Exalted Staff; no 7-man comp in the
   #   corpus fields one (push_monkey_7, sob_blaze_os, sortasaucy_7man do
   #   not) and the harvest sees one in 2% of 4-9 man winner parties. The
   #   old target here (2.02) was a fossil of the pre-2026-08-27 anti_zone
-  #   meaning. "Never invent a number to fill a hole": we do not know what a
-  #   7-man needs of it, so nothing is scored.
+  #   meaning. "Never invent a number to fill a hole": what a 7-man needs
+  #   of it is unknown, so nothing is scored.
   damage_debuff:  {target: 1.35, weight: 1,  soft_cap: 6.57, scales: false}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale.
   # WEAKEST evidence of the four fitted contents: roads has ONE comp in the

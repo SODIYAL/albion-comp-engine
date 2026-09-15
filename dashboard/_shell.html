@@ -9,7 +9,7 @@
 <title>Comp Forge</title>
 <style>
 /* ============================================================ NEON FORGE
-   Comp Forge's committed single look (2026-08-21 reskin, owner-directed):
+   Comp Forge's committed single look (the neon reskin):
    the dashboard-kit language — near-black borderless cards, vivid neon
    data hues, rounded geometry — with the forge's soul kept as one hot
    gold accent for the machine's own voice (recommendations, actions,
@@ -487,7 +487,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .int-row{margin:0 0 10px; font-size:12.5px}
 .int-row>div:first-child{display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px}
 /* interaction badges carry WORDS (pull, duplicate:full), not a semantic
-   icon — the 22px icon box overlapped them (2026-09-11 fix): a text pill */
+   icon — the 22px icon box overlapped them, so they wear a text pill */
 .bdg.b-int{
   width:auto; height:auto; padding:2px 7px; margin-left:0; border-radius:99px;
   font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
@@ -502,8 +502,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* ---------- weapon wheel: filters above the wheel ---------- */
 /* ---- the add-weapon bar ----
-   ONE container on ONE line (owner 2026-09-02: "tight single row", modelled
-   on a segmented status bar). Segments are divided by rules, not by their
+   ONE container on ONE line (a tight single row, modelled on a segmented
+   status bar). Segments are divided by rules, not by their
    own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
    it can never scroll (any overflow would clip its own popups, see below)
    and its nowrap segments overpainted each other on phones. */
@@ -554,7 +554,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border:0; border-radius:0; padding:8px 4px; white-space:nowrap;
 }
 .wf-bar .pgroup-t[aria-pressed="true"]{box-shadow:none; color:var(--brass)}
-/* the facet readout takes the width the controls leave (2026-09-11 fix:
+/* the facet readout takes the width the controls leave (without this rule
    #picker-chips could shrink under its nowrap triggers and the facet's
    wrapped text overran UTILITY, while "× clear" broke into two lines) */
 #picker-chips, .wf-search{flex:none}
@@ -632,7 +632,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .prov.curated{background:var(--brass-wash); color:var(--brass)}
 .prov.draft{background:var(--surface-2); color:var(--ink-3)}
-/* forge provenance chip (2026-08-18): marks slots the engine generated —
+/* forge provenance chip: marks slots the engine generated —
    "reforge all" owns these; manual picks never wear it */
 .prov.forged{background:var(--surface-2); color:var(--brass); margin-left:6px}
 /* off-comp flag outside swap hints too (roster role line, picker rows) */
@@ -699,7 +699,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   --card-w:clamp(76px, calc(var(--wd)*.185), 134px);
   --card-h:clamp(80px, calc(var(--wd)*.175), 128px);
   --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
-  /* SEMICIRCLE stage (owner 2026-08-27, reference wheels): the box is no
+  /* SEMICIRCLE stage (modelled on reference wheels): the box is no
      longer square — cards ride the top arc of a virtual --wd circle whose
      center sits at (50%, --wd/2), and the hub is a smaller circle in the
      arc's open mouth. Height = top arc + the hub's lower half; the width
@@ -743,7 +743,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 @keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
 /* rim cards ride the wheel: rotate to their angle, push out to the rim,
    and stay tilted with it — like chest segments on a fortune wheel */
-/* frameless rim cards (owner 2026-08-27: the weapon art is the star, no
+/* frameless rim cards (the weapon art is the star, no
    box) — the card is an invisible hit area; the icon carries the weight
    and the focused weapon glows instead of wearing a border */
 .wseg{
@@ -837,7 +837,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15);
   width:min(88px, calc(var(--wd)*0.15)); height:min(88px, calc(var(--wd)*0.15))}
 /* the weapon art stands on its own — the old elemental aura halo read as
-   a smeared square behind the icon and was removed (owner 2026-09-01);
+   a smeared square behind the icon and was removed;
    renderHub still stamps data-aura on the hub if a future skin wants it */
 .hub-art-slot{position:relative; display:grid; place-items:center}
 .hub-nm{
@@ -899,7 +899,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
 .wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .wf-ring b{color:var(--ink); font-weight:600}
-/* the comp board (owner 2026-08-27): roster under the wheel, one column
+/* the comp board: roster under the wheel, one column
    per main role — equal columns filling the wheel column's full width,
    entries sized to read (the semicircle handed this row its space) */
 .wf-comp{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
@@ -950,8 +950,8 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   text-align:left}
 
 /* ---------- party dash: the comp board in a right-edge pop-out ----------
-   (owner 2026-09-01: "make a clean dash on the right side which pops in
-   and out and put the party members there so we can see them all"). One
+   A clean panel that slides in and out and holds every party member, so
+   the whole roster reads at once. One
    role section per row, every member a full dm tile with the same popover
    and kit/dossier/remove actions — renderWheelFoot fills #pdash-body. */
 /* one column per role section — full-width tiles read in one scan, and
@@ -979,7 +979,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 
 /* -- the kit flyout: ONE hover surface left of the dash — worn kit,
    scored spells, role and fit on top, then the member's FULL dossier
-   (owner 2026-09-01: "combine the dossier and the popout into one thing").
+   (the dossier and the pop-out are one surface).
    Near full height, scrolls; the drawer stays for non-party dossiers. -- */
 .pdash-fly{
   position:absolute; right:calc(100% + 10px); top:10px; bottom:10px;
@@ -1040,7 +1040,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .pf-dossier .dt-head{display:none}
 .pf-dossier .dt-grid{grid-template-columns:1fr; gap:4px}
 
-/* hover controls (owner 2026-09-11): lock / replace / refresh-rest / ×
+/* hover controls (slot controls; F32/F33, L21): lock / replace / refresh-rest / ×
    appear over the slot number on hover-capable screens; every button
    rides a delegated data-* action the popover buttons share. A LOCKED
    tile keeps its lock visible at rest. */
@@ -1105,9 +1105,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
 .cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
-/* ---- capability RINGS (2026-09-02) ----
+/* ---- capability RINGS ----
    Nested semicircles, one per capability, faceted one panel per group.
-   Same ruler as the bars they replace and as the radar (owner 2026-08-27):
+   Same ruler as the bars they replace and as the radar (the display ruler):
    100% = the comp-fitted ceiling, the brass tick marks the target minimum,
    and beyond-ceiling stacking shows as a pip, never as a longer arc.
    Arc colour is the reserved STATUS palette (met/part/none/over), never a
@@ -1118,7 +1118,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
 .cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
-/* four stages (owner 2026-09-10, target is the median): low = under the
+/* four stages (target is the median, standing rule 17; L20): low = under the
    bare minimum winners get away with (red), part = above it but under the
    typical winner (amber), met = typical to the soft cap (green), over =
    past the soft cap (purple). The brass tick marks typical, the thin one
@@ -1157,7 +1157,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   color:var(--gap); margin:2px 0 -2px;
 }
 .weak-sub.nice{color:var(--brass)}
-/* image-first cards (owner 2026-08-21): the weapons that close the gap
+/* image-first cards: the weapons that close the gap
    lead at full size, the gap wears a short player-voiced title, order
    alone carries priority */
 .weak{
@@ -1399,7 +1399,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .ev-empty{font-size:13px; color:var(--ink-2); padding:6px 0}
 .scroll-x{overflow-x:auto}
 
-/* .foot-chips retired 2026-09-02 — the parity and dataset chips moved up
+/* .foot-chips retired — the parity and dataset chips moved up
    into the status bar's second line */
 .footnote{
   font-size:12px; line-height:1.65; color:var(--ink-3);
@@ -1513,7 +1513,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .st-ip b{ color:var(--ink-2); font-weight:600; }
 
 /* ==================================================== MOBILE PASS ======
-   Owner-approved design 2026-08-21: tuned wheel, tap -> bottom sheet for
+   The mobile design: tuned wheel, tap -> bottom sheet for
    member details, setup collapsed to a summary bar, party as a
    horizontal snap strip. Placed LAST so equal-specificity overrides of
    the desktop rules win by order. */
@@ -1653,11 +1653,11 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
-      <!-- the party dock RETIRED 2026-08-27 (owner: the wheel's comp board
-           "is meant to replace the party section below") — the roster,
+      <!-- the party dock is RETIRED: the wheel's comp board replaces the
+           party section that sat below — the roster,
            its notes and the kit editor all live in the wheel foot now -->
       <div class="ws-center">
-        <!-- ONE tight row (owner 2026-09-02): kicker, tree, search, facets.
+        <!-- ONE tight row: kicker, tree, search, facets.
              The text filter lives behind the search icon, but an active
              query stays ON the button - a silently narrowed wheel with no
              visible cause was the thing to avoid. -->
@@ -1713,7 +1713,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     </section>
 
     <!-- Forge honesty reports + lookahead warnings: never hidden (rehomed
-         2026-08-22 from the analysis flank; owner 2026-08-23: it lives
+         from the analysis flank; it lives
          UNDER THE WHEEL — the hero grid pins it to the wheel column, and
          stacked layouts read it right after the stage). Empty when quiet. -->
     <div id="warn-slot"></div>

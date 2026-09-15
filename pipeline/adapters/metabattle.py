@@ -7,7 +7,7 @@ scraping.
     fetch   EXPLICIT network step (never part of normal builds or CI):
             capture the member lists of every group-PvP build category
             (CATEGORIES — ZvZ, Hellgate 5v5/10v10, Crystal League/Arena,
-            Ganking; owner sample-growth request 2026-08-26), the wiki's
+            Ganking: every group-PvP mode, for sample size), the wiki's
             license info, and every build page's wikitext + revision
             id/timestamp, as raw API responses under
             pipeline/tests/fixtures/metabattle/. The captures are
@@ -50,8 +50,8 @@ sys.path.insert(0, PIPELINE)
 import builds_lib as bl  # noqa: E402
 
 API = "https://metabattle.com/albion/api.php"
-# Group-PvP build categories (owner 2026-08-26: "increasing the sample
-# even more so we get more accurate stats"). Solo/PvE categories
+# Group-PvP build categories (all of them: a wider sample gives more
+# accurate statistics). Solo/PvE categories
 # (Corrupted, Mists, Dungeons, Gathering) stay out — the engine models
 # party composition.
 CATEGORIES = ["Category:ZvZ builds",

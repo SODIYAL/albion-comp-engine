@@ -1,23 +1,20 @@
 # Albion Online Dynamic Composition Engine — Feasibility & Design
 
-> **STATUS: HISTORICAL (banner added 2026-08-24).** This is the project's
-> original feasibility/design document, last substantively amended
-> 2026-08-13. It is kept for design rationale and because code comments
-> cite its section numbers (`engine/engine.py` "design doc §3.2, §4.1",
+> **STATUS: HISTORICAL.** This is the project's original feasibility/design
+> document. It is kept for design rationale and because code comments cite
+> its section numbers (`engine/engine.py` "design doc §3.2, §4.1",
 > `composition.yaml` "§4.1 rho", the greedy-trap §4.4.1) — **do not
 > renumber sections.** For current state read `HANDOFF.md` (product/engine
 > state), `CLAUDE.md` (architecture + invariants), and
-> `tests/VALIDATION.md` (rulings history). Known statements below that
-> LATER RULINGS OVERRULED are flagged inline with `[SUPERSEDED]` notes —
-> most importantly the `max(planned, roster)` sizing in §6.1 and the 0–3
-> score scale in §2.2. Not reflected here at all (by design): the forge
-> constraint rework (2026-08-18), the identity system and playstyle #5
-> (2026-08-23), the forge-quality generation gates (2026-08-23/24), the
-> role layer and kit doctrine (2026-08-25 → 09-04), the dressed forge and
-> Option C floors (2026-08-27), the unit re-fit (2026-08-29), the
-> style × size rows (2026-09-04) and the planner redesign (2026-09-02).
+> `tests/VALIDATION.md` (the decision log). Statements below that LATER
+> DECISIONS OVERRULED are flagged inline with `[SUPERSEDED]` notes — most
+> importantly the `max(planned, roster)` sizing in §6.1 and the 0–3 score
+> scale in §2.2. Not reflected here at all (by design): the forge constraint
+> rework, the identity system and playstyle #5, the forge-quality generation
+> gates, the role layer and kit doctrine, the dressed forge and Option C
+> floors, the unit re-fit, the style × size rows and the planner redesign.
 
-*Research date: 2026-08-12. All API claims below were verified by live requests on this date unless marked otherwise.*
+*Research as of 2026-08-12. All API claims below were verified by live requests on that date unless marked otherwise.*
 
 ---
 
@@ -45,7 +42,7 @@ Key endpoints (all verified returning JSON):
 
 **What a kill event contains (verified):** full killer + victim equipment — MainHand, OffHand, Head, Armor, Shoes, Cape, Bag, Mount, **Potion, Food** — each with item `Type` (e.g. `T8_MAIN_FIRESTAFF_KEEPER`, `T5_2H_SPEAR@1`), Quality, enchantment as `@N` suffix. Plus `AverageItemPower`, a `Participants[]` array where each assisting player carries **`DamageDone` and `SupportHealingDone`**, `GroupMembers[]`, `BattleId`, and `KillArea` (e.g. `OPEN_WORLD`).
 
-**Critical limitation (verified at scale, 2026-08-12):** `ActiveSpells` and `PassiveSpells` arrays are **always empty** — 0 populated out of ~2,000 fields scanned across ~45 events on the Europe and Asia servers, identical on both the list and single-event endpoints, and no community record (wrappers, forums, code search) of the field ever carrying data. Caveats: Americas endpoint returned empty bodies the day of testing, and historical absence is an argument from silence. Practical conclusion stands: the killboard exposes *items only*; any capability that depends on ability choice is invisible in battle data and must come from default kits (§2.4).
+**Critical limitation (verified at scale):** `ActiveSpells` and `PassiveSpells` arrays are **always empty** — 0 populated out of ~2,000 fields scanned across ~45 events on the Europe and Asia servers, identical on both the list and single-event endpoints, and no community record (wrappers, forums, code search) of the field ever carrying data. Caveats: Americas endpoint returned empty bodies the day of testing, and historical absence is an argument from silence. Practical conclusion stands: the killboard exposes *items only*; any capability that depends on ability choice is invisible in battle data and must come from default kits (§2.4).
 
 **What this enables:**
 
@@ -73,7 +70,7 @@ This is essentially the historical dataset this project needs, per battle, alrea
 
 ### 1.4 Static game data — ao-bin-dumps (github.com/ao-data/ao-bin-dumps) — VERIFIED
 
-Actively maintained per patch (last push 2026-06-30). No license (dumped game data; community use tolerated under SBI's long-standing "look and analyze is OK" stance).
+Actively maintained per patch. No license (dumped game data; community use tolerated under SBI's long-standing "look and analyze is OK" stance).
 
 - `formatted/items.json` / `items.txt` — canonical `UniqueName ↔ localized name` mapping, including `@N` enchantment variants. Killboard `Type` strings join to these exactly (strip `@N` to get the base item; enchantments don't change abilities).
 - `items.json` — each weapon carries `@activespellslots` and a `craftingspelllist` of `craftspell` entries: **the full set of Q/W/E abilities equippable on that weapon**. This is the weapon→abilities linkage every community tool uses.
@@ -110,12 +107,12 @@ Battle data tells us *what* people wear and *whether* they won — it cannot tel
 
 1. **Capabilities, not roles.** A weapon is a vector of functional scores, not a "tank/healer/DPS" label. Roles fall out of the vector (a "tank" is anything scoring high on Frontline + Engage/Peel).
 2. **Provenance on every score.** Each nonzero score is tagged with *where it comes from*: `E` (inherent to the weapon's unique E), `QW` (available via a common Q/W choice), `GEAR` (typically supplied by standard armor pairing), `PASSIVE`. Since killboard data can't see ability choices, provenance encodes confidence: `E` scores are certain; `QW`/`GEAR` scores are "available if built for."
-3. **Scores are 0–3**, not booleans: 0 = none, 1 = minor/situational, 2 = solid, 3 = defining strength. Coarse on purpose — finer granularity is false precision and makes curation contentious. *[SUPERSEDED 2026-08-20: the scale migrated to **1–7** with `score_unit: 2` (2 sheet points = 1 supply unit) so magnitude rulings fit between the old integers; thresholds and predicates speak 1–7. The coarseness philosophy stands, the numbers here don't.]*
+3. **Scores are 0–3**, not booleans: 0 = none, 1 = minor/situational, 2 = solid, 3 = defining strength. Coarse on purpose — finer granularity is false precision and makes curation contentious. *[SUPERSEDED: the scale migrated to **1–7** with `score_unit: 2` (2 sheet points = 1 supply unit) so finer magnitude judgments fit between the old integers; thresholds and predicates speak 1–7. The coarseness philosophy stands, the numbers here don't.]*
 4. **Evidence rule (added after review caught two fabricated scores).** Every nonzero score must cite the specific ability that provides it — the spell's UniqueName from ao-bin-dumps (or the gear item, see below). A *weapon's* sheet may only contain capabilities delivered by the weapon's own Q/W/E/passives (its `craftingspelllist`). Capabilities provided by helmets, armor, boots, capes, potions or food live on *those items'* sheets — never smuggled onto a weapon. The two error classes this kills, both found in review: attributing a gear capability to a weapon (1H Mace "purge" — no mace Q/W/E removes buffs), and misattributing effect direction (Longbow "knockback" — bow Frost Shot displaces the *user*, not enemies). An uncited score is invalid by definition; the pipeline enforces this mechanically (§6.3).
 
 ### 2.2 The capability set (v1: 27 capabilities, 6 groups — now 29 after the two amendments below)
 
-*Added 2026-08-12: `anti_zone`. The Crystal Holy Staff's E (`HOLY_DISPEL`,
+*Added: `anti_zone`. The Crystal Holy Staff's E (`HOLY_DISPEL`,
 "Sanctify") removes enemy-placed ground areas. That is neither `purge` (which
 strips buffs off enemy **units**) nor `cleanse` (which strips CC and debuffs off
 **allies**) — three different mechanics that happen to share the verb "remove".
@@ -123,7 +120,7 @@ It is the counter to `zone_control`, not an instance of it, and folding it into
 `purge` would let a comp look purge-covered when it has no answer to a Frost
 comp's zones.*
 
-*Added 2026-08-12 (full-coverage curation): `damage_debuff` — reducing the
+*Added (full-coverage curation): `damage_debuff` — reducing the
 enemy's damage OUTPUT. Promoted from the effect map's proposed list after
 curation found six weapons whose value is partly or mostly this axis and
 nothing else can express it: Cripple (-25% all damage), Forceful Swing (-50%
@@ -132,8 +129,8 @@ Mace's Shrinking Curse (-40%), Evensong's Dark Aura (-15%), and the sword
 line's Weakening passive. Distinct from `resist_shred` (raises damage the
 enemy TAKES) and from `tankiness` (your own durability): it is
 group-defensive utility delivered onto the enemy. Template weight starts low
-and flat, like `anti_zone`, until the expert tunes it. The map's remaining
-proposed capability (`reveal`) stays unpromoted.*
+and flat, like `anti_zone`, until a validated weighting replaces it. The
+map's remaining proposed capability (`reveal`) stays unpromoted.*
 
 | Group | Capabilities |
 | --- | --- |
@@ -162,7 +159,7 @@ Scores shown as `value(provenance)`; omitted = 0.
 
 (Illustrative, not final — final numbers come from the curation pass in Phase 1.)
 
-*Status 2026-08-12: the curation pass is COMPLETE — all 137 combat weapons
+*Status: the curation pass is COMPLETE — all 137 combat weapons
 have evidence-linted sheets and every illustrative block above has been
 replaced. Three of these hand-sketched numbers turned out to be fabricated
 against the game data (Hallowfall's cleanse, Spirithunter's heal_reduction,
@@ -177,7 +174,7 @@ Sheets exist at the **item** level — weapons *and* gear pieces each carry thei
 
 Each weapon gets a **default kit** per content type: assumed Q/W choices + canonical armor pairing. The capability vector used in scoring = weapon E/passives + the kit's selected Q/W spells + the kit's gear items' sheets.
 
-**Where default kits come from (researched 2026-08-12).** Battle data can never supply them (§1.1), but two editorial/community sources publish exact per-slot spell choices tagged by content type, and both are harvestable:
+**Where default kits come from.** Battle data can never supply them (§1.1), but two editorial/community sources publish exact per-slot spell choices tagged by content type, and both are harvestable:
 
 - **Metabattle** (metabattle.com/albion) — ~120 curated builds via an *open MediaWiki API*; each page's `{{Build equipment}}` template lists Q/W/E + armor actives/passives per slot with game-mode tags. CC BY-SA licensed. Fully automatable (one API call per build).
 - **Albion Free Market** (albionfreemarket.com/builds) — 4,478 community builds using *game-native spell IDs* that join directly onto our ao-bin-dumps parser output; six tag axes incl. content and group size; upvotes as quality filter. Server-side-rendered pages, scrapeable via filter URLs; ask their Discord before bulk harvest.
@@ -248,7 +245,7 @@ For each candidate weapon w (with its default kit for this content):
   Score(w) = α·Δ(w) + β·Synergy(w, party) + δ·MetaPrior(w, content) − ρ·Redundancy(w, party)
 ```
 
-Suggested v1 weights: α = 0.55, β = 0.20, δ = 0.15, ρ = 0.10. (The user's proposed 35/25/20/10/10 split is directionally right; "historical performance" and "meta usage" are merged into MetaPrior until we have enough of our own battle data to separate them — see §8.)
+Suggested v1 weights: α = 0.55, β = 0.20, δ = 0.15, ρ = 0.10. (The originally proposed 35/25/20/10/10 split is directionally right; "historical performance" and "meta usage" are merged into MetaPrior until we have enough of our own battle data to separate them — see §8.)
 
 - **Δ(w)** is inherently explainable: it decomposes into per-capability contributions ("+ heals a comp with 0 healing: +9.2; + cleanse: +2.1"). These per-capability terms *are* the "why" text, generated, not templated.
 - **Synergy(w, party)** — pairwise bonus matrix (§4.2).
@@ -266,13 +263,13 @@ Two mechanisms, kept separate:
 
 Overlapping roles are handled by the math, not special cases: a Nature Staff in a comp that already has a Great Holy contributes its healing into a near-capped `heal_sustain` (small Δ) but its `sustained_dps`/utility still counts — so it naturally ranks as a *second-support flex*, not a "healer".
 
-### 4.3 Worked example (user's scenario)
+### 4.3 Worked example (the motivating scenario)
 
 Party: Longbow, Witchwork, Permafrost. Content: Castle Outpost, size 7. Using §2.3 sheets and §3.1 template:
 
 Supply so far: burst_aoe 7, zone_control 5, clump_create 4, slow/CC moderate, resist_shred 2, energy_drain 2 — vs. heal 0, tankiness ~1, peel 0, cleanse 0, purge 0, engage 0, disengage 0.
 
-Weighted unmet need ranks: `heal_sustain` (10 × fully unmet) > `tankiness` > `peel` > `engage` > `purge`. Candidate deltas: Hallowfall Δ ≈ heal(large) + cleanse + mobility; Great Holy Δ ≈ heal(large) + cleanse, no mobility; Heavy Mace Δ ≈ tankiness + peel + silence + purge, no heal. Healing's weight and total absence make any healer dominate → **recommend Healer; options Hallowfall / Great Holy / Blight**, reason auto-generated from the Δ terms ("your comp has strong AoE damage and zone control but zero sustain…"). After adding Hallowfall, `heal_sustain` is near target; the next argmax flips to Heavy Mace-class weapons (tankiness+peel+purge in one slot beats splitting them). This reproduces the user's intended UX exactly — from the model, not from scripted rules.
+Weighted unmet need ranks: `heal_sustain` (10 × fully unmet) > `tankiness` > `peel` > `engage` > `purge`. Candidate deltas: Hallowfall Δ ≈ heal(large) + cleanse + mobility; Great Holy Δ ≈ heal(large) + cleanse, no mobility; Heavy Mace Δ ≈ tankiness + peel + silence + purge, no heal. Healing's weight and total absence make any healer dominate → **recommend Healer; options Hallowfall / Great Holy / Blight**, reason auto-generated from the Δ terms ("your comp has strong AoE damage and zone control but zero sustain…"). After adding Hallowfall, `heal_sustain` is near target; the next argmax flips to Heavy Mace-class weapons (tankiness+peel+purge in one slot beats splitting them). This reproduces the intended UX exactly — from the model, not from scripted rules.
 
 ### 4.4 Edge cases where naive recommendation fails (and mitigations)
 
@@ -297,7 +294,7 @@ Weighted unmet need ranks: `heal_sustain` (10 × fully unmet) > `tankiness` > `p
 - IN: 3–4 content types (Castle Outpost, Hellgate 5v5, Roads 7, open-world 5–10), party sizes 2–10, full capability engine + recommendations + explanations, ~60 most-played weapons (covers >90% of actual usage — verify against albionbb frequency data), curated synergy/meta lists, static client-side app.
 - OUT (later phases): ZvZ-scale templates, equipment/ability customization, live battle-data ingestion, enemy-comp counter-picking, accounts/sharing.
 
-*Amendment 2026-08-12: the "~60 weapons cover >90%" assumption was measured
+*Amendment: the "~60 weapons cover >90%" assumption was measured
 and falsified (top-30 covers 62% of the first albionbb sample; 97 distinct
 weapons appeared in 359 observations) — and then mooted: curating tree-by-tree
 turned out to be cheap because line-mates share their whole Q/W pool, so ALL
@@ -325,14 +322,14 @@ scoring in client    curation UI (internal)      win-rate lift → MetaPrior JSO
 
 The stats service never serves user traffic — it *compiles* statistics into the same static JSON the SPA consumes. User-facing latency stays zero; API fragility (gameinfo 504s/outages) never touches users.
 
-*Status 2026-08-12: Phase 2 is effectively built — dumps parser, effect
+*Status: Phase 2 is effectively built — dumps parser, effect
 layer, seeder, evidence lint, versioned dataset builder, patch-history
 staleness, and the generated dashboard all exist and run green. The
 "curation UI" turned out to be unnecessary: YAML sheets in git (reviewable,
 diffable) plus `curate_helper.py` worksheets did the job for all 137 weapons.
 Phase 1's React SPA and Phase 3 remain.*
 
-*Amendment 2026-08-13: Phase 1 shipped WITHOUT React — the "static SPA"
+*Amendment: Phase 1 shipped WITHOUT React — the "static SPA"
 became Comp Forge (`dashboard/index.html`), a generated single-file page
 whose in-browser engine (`engine/app_scoring.js`) is a parity-tested port
 of `engine/engine.py` (60/60 random parties at 1e-9 + a build-time fixture
@@ -341,25 +338,25 @@ on every load). Scope grew past the MVP cut line: five content templates
 castle outpost 7), playstyle overlays (`templates/styles.yaml` — brawl /
 clap / kite / brawl-clap as weight multipliers; floors and over-stack stay
 on base weight), free-form adaptive party size (effective size =
-max(planned, roster), 2–60) *[SUPERSEDED — owner ruling, attendance is
-fluid: the roster is judged at its ACTUAL size and PLANNED only steers
-forge fill and warnings; `max(planned, roster)` scoring is now a
-forbidden pattern, see CLAUDE.md invariants and HANDOFF.md]*, greedy
-auto-forge *[superseded 2026-08-18 by the constraint-aware beam forge]*, weapon detail drawer with
-real spell pools and caller loadouts, embedded item renders, Discord
-export, and share-link/localStorage state. The "OUT: ZvZ-scale templates"
-line is obsolete — real 20-man caller comps arrived (tests/meta_comps.yaml)
-and made the 20-size templates the calibration-rich ones. Phase 3 got its
-first real piece early: `pipeline/sample_battles.py` (albionbb; the
-official gameinfo events endpoint 504s at sampling scale) feeds size-
-bucketed usage "field reports" into the page as DISPLAY-ONLY evidence —
+max(planned, roster), 2–60) *[SUPERSEDED — attendance is fluid: the roster
+is judged at its ACTUAL size and PLANNED only steers forge fill and
+warnings; `max(planned, roster)` scoring is now a forbidden pattern, see
+CLAUDE.md invariants and HANDOFF.md]*, greedy auto-forge *[superseded by the
+constraint-aware beam forge]*, weapon detail drawer with real spell pools
+and caller loadouts, embedded item renders, Discord export, and
+share-link/localStorage state. The "OUT: ZvZ-scale templates" line is
+obsolete — real 20-man caller comps arrived (tests/meta_comps.yaml) and made
+the 20-size templates the calibration-rich ones. Phase 3 got its first real
+piece early: `pipeline/sample_battles.py` (albionbb; the official gameinfo
+events endpoint 504ed at sampling scale when this was written) feeds
+size-bucketed usage "field reports" into the page as DISPLAY-ONLY evidence —
 149 battles / 1,252 players / 99.4% weapon attribution, so V7's ≥85%
 attribution gate passed. MetaPrior still hand-set pending validation. The
 first V4 leave-one-out baseline exists: role-level 69% (n=26), with the
 saturation-degeneracy and support-undervaluation findings recorded in
 `tests/VALIDATION.md`.*
 
-*Amendment 2026-08-13 (later): a game-mechanics layer was added. Global
+*Amendment (mechanics layer): a game-mechanics layer was added. Global
 combat mechanics now live in `pipeline/templates/mechanics.yaml` (wiki
 numbers, post-Realm-Divided: Focus Fire/Resilience damage-reduction tables,
 the AoE Escalation curve — 8%/target, cap 56% at 8 — and Disarray, recorded
@@ -374,21 +371,22 @@ weight multipliers (weights = what a style VALUES, mechanics = what its
 delivery makes EFFECTIVE). `sustained_dps` is deliberately in neither
 family (spread damage fits neither curve cleanly). Wired identically in
 `engine/engine.py` and `app_scoring.js` (parity 60/60); golden T11 pins the
-directions; per-style parameter magnitudes are PROVISIONAL pending expert
-sign-off (`MECHANICS_TODO.md` Q14). Not yet modeled: Resilience Penetration
-per weapon (Q7), CC-escalation durations (Q8), per-spell escalation
-eligibility (Q9).* **[SUPERSEDED: all three closed — Q7 wired 2026-08-25,
-Q8/Q9 from the dumps 2026-08-20; MECHANICS_TODO.md "Closed".]**
+directions; per-style parameter magnitudes are PROVISIONAL (mechanics
+question Q14, `pipeline/README.md` "Mechanics"). Not yet modeled:
+Resilience Penetration per weapon (Q7), CC-escalation durations (Q8),
+per-spell escalation eligibility (Q9).* **[SUPERSEDED: all three closed —
+Q7 wired, Q8/Q9 extracted from the dumps; `pipeline/README.md` "Mechanics
+questions, by number".]**
 
-*Amendment 2026-08-13 (expert correction): the §2.2/§2.3 "Great Hammer
+*Amendment (correction): the §2.2/§2.3 "Great Hammer
 clumps, Heavy Mace peels" example is half wrong — Great Hammer's Tackle is
 a dash-through KNOCKBACK ("knocking back all enemies you pass through"),
 which displaces but does not compress; its `clump_create 3` was removed
-(kept: `knockback_displace 2`, engage/stun). The drag/pull ruling stands
+(kept: `knockback_displace 2`, engage/stun). The drag/pull rule stands
 with the corrected example set: Hand of Justice's Onslaught, Camlann's
 Vendetta, Black Hole, Triple Kick's kidnap. Golden T12 pins it.*
 
-*Amendment 2026-08-13 (expert magnitude pass): `knockback_displace` now
+*Amendment (magnitude pass): `knockback_displace` now
 scores repositioning MAGNITUDE, not existence — 3 battle-shaping (≥12m /
 kit-wide, CC-resist-ignoring), 2 real AoE travel, 1 minor/incidental
 (explicitly including ALL knock-ups/air-throws: no travel, control value
@@ -400,7 +398,7 @@ unified with line-mates at 1. Removed: the holy W Sacred Pulse knockback
 line-wide and Redemption's AA-passive knockback. Golden T13 pins the
 ladder. Note: no template requires `knockback_displace` yet, so rankings
 are unchanged today — this pass makes the data safe to value later.*
-**[SUPERSEDED 2026-08-27: `knockback_displace` was promoted with the five
+**[SUPERSEDED: `knockback_displace` was promoted with the five
 other orphans and carries rows where real comps supply the measurement.]**
 
 ### 6.2 Data model (works as SQLite/Postgres in the pipeline, exported to JSON for the client)
@@ -435,7 +433,7 @@ weapon_content_stats(weapon_id, content_id, window, usage_rate, win_lift, sample
 4. **Evidence lint (mandatory CI gate).** For every nonzero capability score, verify mechanically: (a) the cited `evidence_spell` exists in that item's `craftingspelllist` in ao-bin-dumps — kills gear-capability-on-weapon errors like "1H Mace purge"; (b) the spell's `[cc]/[heal]/[dmg]/[buff]/[debuff]/[mobility]` localization tags and description keywords are consistent with the claimed capability class (a `purge` claim requires buff-removal language; a `knockback_displace` claim requires an enemy-targeted effect) — kills direction errors like "Longbow knockback"; (c) every archetype's kit references only spells its weapon can equip and items that exist. Lint failures block the data release.
 5. Release as versioned JSON (`data-v2026.08.1.json`); the SPA pins a version.
 
-*Amendment 2026-08-12: step 4(b) as written — keyword/tag consistency checks —
+*Amendment: step 4(b) as written — keyword/tag consistency checks —
 is superseded. The implemented lint resolves each cited spell's STRUCTURED
 effects with target direction through `effect_map.yaml` and rejects
 capabilities the spell cannot ground at all; the old prose keywords survive
@@ -447,7 +445,7 @@ discovered during curation are corrected in `pipeline/effect_overrides.yaml`
 
 ## 7. Dashboard
 
-Single-page flow matching the user's sketch, with these behaviors specified:
+Single-page flow matching the original sketch, with these behaviors specified:
 
 1. **Setup:** content type + target size. 2. **Party builder:** add weapons via search (icons from render.albiononline.com); each row shows the weapon's top-2 capability contributions as its "primary function". 3. **Analysis panel:** capability bars = `supply/target` per capability, grouped by the 6 groups; bars past soft-cap render in a warning color (over-stacking is a real failure mode, show it). 4. **Weaknesses:** top-3 by weighted unmet need, in plain language. 5. **Recommendation card:** top archetype + reason bullets generated from Δ terms, 2–3 alternatives, conditional capabilities marked ("cleanse if running X"), one-click add → instant recalculation (all client-side, no latency). 6. **Lookahead warning** when the greedy trap (§4.4.1) is detected. 7. Shareable URL encoding content+party (compare comps by sharing links; later, save/vote à la albioncompo).
 
@@ -472,6 +470,6 @@ Suggested order of work:
 
 1. Build the ao-bin-dumps parser → weapon catalog + auto-seeded capability suggestions.
 2. Curate capability sheets for the top ~60 weapons (validate the top-60 list against albionbb usage frequencies) + 3 content templates.
-3. Implement scoring + the worked-example test cases as unit tests (§4.3 is test #1). *Update 2026-08-12: a throwaway prototype of the scoring model now exists and passes 9/9 golden cases — see `tests/VALIDATION.md` and `tests/prototype_engine.py`. Note: hard floors (§3.1) proved load-bearing; without them, breadth weapons out-rank critical healers.*
+3. Implement scoring + the worked-example test cases as unit tests (§4.3 is test #1). *Update: a throwaway prototype of the scoring model now exists and passes 9/9 golden cases — see `tests/VALIDATION.md` and `tests/prototype_engine.py`. Note: hard floors (§3.1) proved load-bearing; without them, breadth weapons out-rank critical healers.*
 4. Ship the static SPA MVP.
 5. Then, and only then, the stats pipeline.

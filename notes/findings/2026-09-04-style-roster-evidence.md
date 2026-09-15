@@ -1,10 +1,10 @@
-> Superseded as the CURRENT board by `2026-09-05-style-roster-evidence.md` (same generator, larger sample). Kept because it is the board the 2026-09-04 style × band ruling was made against, and its blind round 3 form was graded in `tests/VALIDATION.md` (T39).
+> Superseded as the CURRENT board by `2026-09-05-style-roster-evidence.md` (same generator, larger sample). Kept because it is the board the 2026-09-04 style × band rows were decided against, and its validation round 3 form was graded in `tests/VALIDATION.md` (T39).
 
 # Style x size roster evidence (2026-09-04)
 
 Report-only (`pipeline/audit_style_rosters.py`). Source: killer-party rosters of 10+ from the official kill-event harvest, 1690 rosters with >= 80% weapons known; labelled by the engine's `comp_identity`; supply measured DRESSED (kits joined by player name, doctrine v0 where a member has no kit record) under `territory_defense` physics at the roster's size and labelled style. Counts below are by DISTINCT roster (guild set + weapon multiset).
 
-**Read before ruling:** kill events carry no zone (content-agnostic evidence); rosters are winner-biased by construction; spells are unknown (default combos); identity thresholds were calibrated on six comps — grade the blind round at the bottom before trusting the label split. Nothing in the build reads this. Proposals follow the standing convention (target 0.9 x p10, soft cap 1.15 x p90) and are for the owner's ruling only (anti-circularity).
+**Caveats:** kill events carry no zone (content-agnostic evidence); rosters are winner-biased by construction; spells are unknown (default combos); identity thresholds were calibrated on six comps — the validation round at the bottom grades the label split, and the split is trusted only after grading. Nothing in the build reads this. Proposals follow the standing convention (target 0.9 x p10, soft cap 1.15 x p90) and are hypotheses for a maintainer decision, never applied automatically (anti-circularity).
 
 ## Label distribution
 
@@ -586,7 +586,7 @@ Per style x band: harvest p10 / p50 / p90 (person units, dressed), the conventio
 | tankiness | 59.47 / 62.05 / 65.38 | 53.52 -> 75.19 | 44.96 -> 88.67 (x1.4) | 44.96 -> 88.67 (x1.4) | 44.96 -> 88.67 (x1.4) | 44.96 -> 88.67 (x1.4) | 44.96 -> 88.67 (x1.4) | 44.96 -> 88.67 (x1.4) |
 | zone_control | 12.0 / 14.0 / 19.0 | 10.8 -> 21.85 | 11.65 -> 25.71 (x1.2) | 11.65 -> 25.71 (x1.2) | 11.65 -> 25.71 (x1.2) | 11.65 -> 25.71 (x1.2) | 11.65 -> 25.71 (x1.2) | 11.65 -> 25.71 (x1.2) |
 
-## Blind round 3 (owner: call the style BEFORE reading the engine's)
+## Validation round 3 (the caller's style call is recorded before the engine's label is read)
 
 Twenty harvested rosters of 10-14 players (every graded battle excluded), weapons only. Answers are in `out/style_roster_evidence.json` under `blind_answers`; do not open them before calling.
 

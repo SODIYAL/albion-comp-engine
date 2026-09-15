@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-Role layer contracts (increment 1 of roles-design.md, owner-approved
-2026-08-25).
+Role layer contracts (increment 1 of roles-design.md).
 
   R1  role book ships in the dataset: every role has a known class, every
       weapon/item membership resolves to a catalog id, every membership
       carries an evidence source; per-weapon role_menu is the exact
       inverse index of role membership (evidence-ordered).
-  R2  ruled memberships hold: Grailseeker menus stopper_tank (owner
-      2026-08-25), Realmbreaker menus both a dps role and aura_support
+  R2  curated memberships hold: Grailseeker menus stopper_tank (curation
+      judgment), Realmbreaker menus both a dps role and aura_support
       (comp + research evidence), Lifecurse menus curse_support, Longbow
       menus ranged_aoe.
   R3  detection reads the kit: a Longbow in a plate chest detects with a
       kit mismatch (no Longbow role wears plate); a Longbow in cloth does
       not; a weapon with no menu falls back to its coarse class with no
       flag.
-  R4  the owner's comp flag: three Heavy Maces and no clump maker at 20
+  R4  the comp flag case: three Heavy Maces and no clump maker at 20
       raises the no-engage-tank advisory; adding Hand of Justice clears
       it.
   R5  the advisory layer is DESCRIPTIVE: computing it never moves
@@ -23,9 +22,8 @@ Role layer contracts (increment 1 of roles-design.md, owner-approved
   R6  the original bug case: Incubus Mace / Grailseeker wearing Hellion
       Jacket (leather) flag off-role kit — their menu roles wear plate.
 
-Increment 2 (kit doctrine, owner-approved 2026-08-25: "yes its the whole
-build. infact we might even need to include food, potion and capes and
-you are right about passive defaults"):
+Increment 2 (kit doctrine: the kit is the whole build — food, potion and
+cape included — with passive defaults):
 
   R12 generated kits wear the seat's uniform: Incubus/Grailseeker chest
       options are plate only under role="auto" (the everyone-gets-Hellion
@@ -35,7 +33,7 @@ you are right about passive defaults"):
       CC-duration stat ships in the dataset and multiplies the wearer's
       own CC caps, so the cane is worth something on Incubus (root 5)
       and exactly nothing on Great Fire (no CC).
-  R14 passive doctrine (owner defaults): cloth pieces resolve the damage
+  R14 passive doctrine (curated defaults): cloth pieces resolve the damage
       passive for every seat class, plate resolves CC-duration for
       frontline and CCR otherwise — dumps-cited ids and magnitudes
       stamped per piece; build_extra(role=) applies the stat channel.
@@ -59,10 +57,10 @@ import rosters_io  # noqa: E402
 
 
 def _rosters():
-    """The committed killer-party artifact (gzipped since 2026-09-11)."""
+    """The committed killer-party artifact (gzipped)."""
     return rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
 
-# Evidence-band slack (2026-09-09): the engine ranks on the INTEGER counts
+# Evidence-band slack: the engine ranks on the INTEGER counts
 # the dataset ships (rounded player-weighted votes plus reference-build
 # sightings) while these audits re-measure fractional votes from the
 # killboard alone, so a pick sitting exactly on the half-line can read as
@@ -80,9 +78,9 @@ def band_slack(modal_votes):
 def _doctrine_count(e, w, slot, gid):
     """The engine's own merged count for an item in a weapon's doctrine
     row at the engine's band - killboard votes plus curated reference
-    sightings, the evidence it actually ranked on (2026-09-11: Bedrock's
-    gang Keeper helmet read 18 to the engine, two curated sightings on
-    16.0 killboard votes, a fifth of a vote under the audit's slack)."""
+    sightings, the evidence it actually ranked on (Bedrock's gang Keeper
+    helmet read 18 to the engine, two curated sightings on 16.0 killboard
+    votes, a fifth of a vote under the audit's slack)."""
     seat = e.kit_options(w).get("seat")
     if not seat:
         return 0
@@ -95,8 +93,8 @@ def _chest_admissible(e, w, gid):
     """May the doctrine serve this chest to this weapon? The chest pool
     hard-gates to the seat's uniform (R19) plus the weapon's ADMITTED
     observed class (R26, >= 35 voters at >= 25%); a killboard modal outside
-    that set is excluded by owner rule, not by a bad pick (2026-09-11:
-    Spear's gang Mage Robe majority on 13 voters, below the extension)."""
+    that set is excluded by the admission rule, not by a bad pick (Spear's
+    gang Mage Robe majority on 13 voters, below the extension floor)."""
     seat = e.kit_options(w).get("seat")
     if not seat or gid not in e.gear:
         return True
@@ -154,7 +152,7 @@ def t_role_book():
 
 
 def t_ruled_memberships():
-    # Function-named roles (owner correction 2026-08-25): the function is
+    # Function-named roles: the function is
     # the role, never the weapon tree — Lifecurse sits in PURGE, Damnation
     # and Spirithunter share PIERCE, the heal-cut roster shares ANTI_HEAL;
     # aura support dissolved into gear_effects (Realmbreaker is a
@@ -241,8 +239,8 @@ def t_original_bug_case():
     adv = e.role_advisory(party, chests={0: "ARMOR_LEATHER_HELL",
                                          1: "ARMOR_LEATHER_HELL"})
     m0, m1 = adv["members"][0], adv["members"][1]
-    # 2026-09-05 re-pin (owner: "grailseeker can be kite or d tank.
-    # accept"): the first overnight harvest put Grailseeker at 52 builds /
+    # Re-pin: Grailseeker reads as kite or defensive tank (curation
+    # judgment); the first overnight harvest put it at 52 builds /
     # 35 voters with leather at 34% (Assassin Jacket its most-worn chest
     # in both bands), so leather is admitted to ITS tier and a Grailseeker
     # in Hellion Jacket reads on-uniform. Incubus (0% leather) is the
@@ -250,14 +248,14 @@ def t_original_bug_case():
     check("R6 the reproduced bug: Incubus in Hellion Jacket flags off-role "
           "kit (its SEAT wears plate; the anti-heal FUNCTION rides along, "
           "never excuses the chest); Grailseeker's harvest-admitted leather "
-          "reads on-uniform (owner 2026-09-05)",
+          "reads on-uniform",
           m0.get("kit_match") is False and m1.get("kit_match") is True
           and "anti_heal" in (m0.get("functions") or []),
           f"incubus={m0} grailseeker={m1}")
 
 
 def t_gear_effects():
-    # Typed gear-carried effects (owner 2026-08-25): each aura/active is
+    # Typed gear-carried effects: each aura/active is
     # its own effect, attached to whatever role wears it — the advisory
     # reports "role + carrying".
     e = Engine(content="blackzone_roam", size=20, style="brawl")
@@ -278,10 +276,10 @@ def t_gear_effects():
 
 
 def t_tiered_sweep():
-    # E-first tiered sweep (owner 2026-08-25): "the primary roles for a
-    # weapon should come from its e spell"; Q/W abilities are "a
-    # secondary level role". Derived from the sheets' slot structure
-    # across ALL weapons — the owner's own examples pinned:
+    # E-first tiered sweep: a weapon's primary roles come from its E
+    # spell; Q/W abilities carry secondary-level roles. Derived from the
+    # sheets' slot structure across ALL weapons — the recorded examples
+    # pinned:
     e = Engine()
     menu = lambda w: e.weapons[w].get("role_menu") or []
     menu2 = lambda w: e.weapons[w].get("role_menu_secondary") or []
@@ -308,9 +306,9 @@ def t_tiered_sweep():
 
 
 def t_shield_break_split():
-    # Owner 2026-08-25: "hammers i think only break shield on q, it isnt
-    # really a purge. shield break is like the primary role of black
-    # monk" — the shield_break role claims its evidence spells
+    # Hammers break shields on their Q only, which is not a purge; shield
+    # break is Black Monk's primary role (curation judgment) — the
+    # shield_break role claims its evidence spells
     # (Iron Breaker / Black Monk's E / Claws' E) away from true purge.
     e = Engine()
     menu = lambda w: e.weapons[w].get("role_menu") or []
@@ -334,9 +332,9 @@ def t_shield_break_split():
 
 
 def t_gear_classification():
-    # Equipment classification (owner 2026-08-25): tree stats carry the
-    # class identity — "you need to pull numbers to classify items" —
-    # and the numbers must agree with the tree id wherever stats exist.
+    # Equipment classification: tree stats carry the class identity —
+    # items are classified from their pulled numbers — and the numbers
+    # must agree with the tree id wherever stats exist.
     import json as _json
     rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
                                        "roles_report.json"),
@@ -355,8 +353,8 @@ def t_gear_classification():
                 and "stopper_tank" not in hellion["role_affinity"])
     plate = next(it for it in items if it["id"] == "ARMOR_PLATE_KEEPER")
     plate_ok = "stopper_tank" in plate["role_affinity"]
-    # tree passives count toward the class identity (owner: "most cloth
-    # users will take the damage passive")
+    # tree passives count toward the class identity (most cloth wearers
+    # take the damage passive; curation judgment)
     cloth = next(it for it in items if it["id"] == "ARMOR_CLOTH_FEY")
     passives = ("PASSIVE_ARMOR_INCREASED_DAMAGE" in cloth["tree_passives"]
                 and len(next(it for it in items
@@ -373,10 +371,10 @@ def t_gear_classification():
 
 
 def t_offhand_profiles():
-    # Owner 2026-08-25: "for offhands, they have no active ability, their
-    # usefulness comes from the stats. so to properly classify them, you
-    # have to get the stats" — the bank had them all along; the dataset
-    # now carries the identity fields and classification reads them.
+    # Off-hands have no active ability; their usefulness is their stats,
+    # so classification must read the stats — the bank had them all
+    # along; the dataset now carries the identity fields and
+    # classification reads them.
     e = Engine()
     horn = e.gear["OFF_HORN_KEEPER"].get("stats") or {}
     cdr = horn.get("magiccooldownreduction", 0) > 0
@@ -397,21 +395,21 @@ def t_kit_uniform_gate():
     # R12 — increment 2's kill shot for the original bug: a GENERATED kit
     # starts from the seat's uniform; the comp-marginal only ranks within
     # it. Manual picks still score anything (role_advisory flags them).
-    # BAND contract at `balanced` (2026-09-08: under a DECLARED style the
-    # style cell speaks — see below — so the harvest-admission ruling is
-    # pinned where the band is what the engine reads)
+    # BAND contract at `balanced` (under a DECLARED style the style cell
+    # speaks — see below — so the harvest-admission rule is pinned where
+    # the band is what the engine reads)
     e = Engine(content="blackzone_roam", size=20)
     classes = lambda ko: {e.gear[o["gear"]].get("gear_class")
                           for o in ko["options"].get("armor", [])}
     inc = e.kit_options("MAIN_MACE_HELL", top_n=300)
     grail = e.kit_options("2H_QUARTERSTAFF_AVALON", top_n=300)
     inc_ids = [o["gear"] for o in inc["options"]["armor"]]
-    # Grailseeker's tier admits leather since the 2026-09-05 harvest
-    # (owner accepted); Incubus stays plate-only
+    # Grailseeker's tier admits leather since the first overnight harvest
+    # (accepted); Incubus stays plate-only
     gated = (classes(inc) == {"plate"} and classes(grail) == {"leather", "plate"}
              and "ARMOR_LEATHER_HELL" not in inc_ids)
     # under a declared brawl the brawl CELL's armor tier is what the
-    # options serve where the cell has one (2026-09-08 style cells): the
+    # options serve where the cell has one (style cells, R30): the
     # classes offered are exactly the classes the cell's tier carries
     eb = Engine(content="blackzone_roam", size=20, style="brawl")
     cell_tier = ((((eb.roles.get("stopper_tank") or {}).get("kit_styles")
@@ -441,10 +439,11 @@ def t_kit_uniform_gate():
 
 
 def t_cc_duration_pairing():
-    # R13 — the owner's Leering Cane ruling ("incubus is mostly paired
-    # with leering cane for its +cc duration"), wired as PHYSICS: the
-    # stat multiplies the wearer's own CC caps, so the pairing emerges
-    # for every CC weapon and never for a CC-less one. No hand list.
+    # R13 — the Leering Cane rule (Incubus is mostly paired with Leering
+    # Cane for its +CC duration; curation judgment), wired as PHYSICS:
+    # the stat multiplies the wearer's own CC caps, so the pairing
+    # emerges for every CC weapon and never for a CC-less one. No hand
+    # list.
     e = Engine()
     cane = e.gear["OFF_JESTERCANE_HELL"].get("stats") or {}
     shipped = cane.get("bonusccdurationvsplayers", 0) > 0
@@ -461,7 +460,7 @@ def t_cc_duration_pairing():
 
 
 def t_passive_doctrine():
-    # R14 — owner-confirmed defaults (2026-08-25): cloth = the damage
+    # R14 — curated passive defaults: cloth = the damage
     # passive (Aggression, +8% damage & healing cast), plate = CC
     # duration for tanks (Authority) and CCR otherwise (Tenacity),
     # leather = cooldown rate (Quick Thinker, display-only channel).
@@ -489,7 +488,7 @@ def t_passive_doctrine():
     dmg = lambda x: x.get("burst_aoe", 0.0) + x.get("sustained_dps", 0.0)
     channel = dmg(with_role) > dmg(without) + 1e-9
     # frontline plate: Authority multiplies the wearer's own CC caps —
-    # Incubus's DEFAULT combo carries slow (Snare Charge, the owner's
+    # Incubus's DEFAULT combo carries slow (Snare Charge, the curated
     # doctrine pick), so slow is the cap the channel must move
     tank_role = e.build_extra("MAIN_MACE_HELL", None, ["ARMOR_PLATE_KEEPER"],
                               role="stopper_tank")
@@ -544,7 +543,8 @@ def t_kit_annotations():
     # R16 — variants surface where the evidence says they live: Royal
     # Jacket (leather, uniform-legal for the brawler seat) appears in
     # Realmbreaker's chest options carrying cooldown_banner — the
-    # owner's "royal jacket for extra cooldowns if team needs" example.
+    # recorded example (Royal Jacket for extra cooldowns when the team
+    # needs them).
     # Options carry doctrine/carries keys; a slot with doctrine evidence
     # picks its kit from the doctrine tier.
     e = Engine(content="blackzone_roam", size=20, style="brawl")
@@ -570,8 +570,8 @@ def t_kit_annotations():
 
 
 def t_grading_rulings():
-    # R17 — the 2026-08-26 owner grading pass (15 rulings, the first full
-    # roles_report board review): memberships corrected in roles.yaml,
+    # R17 — the first full roles_report board validation round (15
+    # corrections): memberships corrected in roles.yaml,
     # kit-doctrine drop/add overrides applied on the mined pools, the
     # Leering Cane affinity override, and the dive-dagger 7+ viability
     # exclusion. Pins the whole batch so a rebuild can never regress it.
@@ -581,16 +581,16 @@ def t_grading_rulings():
     memb = (
         menus.get("MAIN_ARCANESTAFF_UNDEAD") == ["engage_tank"]        # Witchwork: clump, not cleanse
         # Black Monk: purges ENEMY shields (never shield_support); the
-        # seat-all pass (owner:2026-09-01) added its off_tank SEAT — the
-        # 2026-08-26 ruling's substance (function, not support seat) holds
+        # seat-all pass added its off_tank SEAT — the earlier rule's
+        # substance (function, not support seat) holds
         and menus.get("2H_COMBATSTAFF_MORGANA") == ["off_tank", "shield_break"]
         and menus.get("2H_HOLYSTAFF") == ["brawl_healer"]              # Great Holy: brawl anchor only
         and menus.get("2H_GLACIALSTAFF") == ["ranged_aoe"]             # Glacial: dps, not support
         and menus.get("2H_ICECRYSTAL_UNDEAD") == ["ranged_aoe"]        # Permafrost: dps
-        # NAME MIX-UP resolved owner:2026-09-02 — this id is STILLGAZE
-        # ("a d tank" -> stopper_tank; killboard 6/6 plate), not
+        # NAME MIX-UP resolved — this id is STILLGAZE
+        # (a defensive tank -> stopper_tank; killboard 6/6 plate), not
         # Chillhowl; Chillhowl is MAIN_FROSTSTAFF_AVALON, now off every
-        # menu ("mostly a corrupted dungeon weapon") beside its standing
+        # menu (mostly a corrupted-dungeon weapon) beside its standing
         # >=10 exclusion
         and menus.get("2H_SHAPESHIFTER_CRYSTAL") == ["stopper_tank"]
         and not menus.get("MAIN_FROSTSTAFF_AVALON")
@@ -620,7 +620,7 @@ def t_grading_rulings():
     dag = (not (daggers & set(e7.suggest_pool()))
            and daggers <= set(e3.suggest_pool())
            and daggers <= e7._excluded)
-    check("R17 owner grading 2026-08-26: eight menu corrections, five "
+    check("R17 board validation round: eight menu corrections, five "
           "kit-doctrine overrides, Leering Cane is stopper kit, dive "
           "daggers excluded at 7+ (trio stays open)",
           memb and kits and cane == ["stopper_tank"] and dag,
@@ -630,8 +630,8 @@ def t_grading_rulings():
 
 
 def t_weapon_doctrine():
-    # R18 — per-weapon doctrine + effect quotas (owner design 2026-08-26,
-    # the Demon-Armor-on-Hand-of-Justice case): a weapon's OWN observed
+    # R18 — per-weapon doctrine + effect quotas (the
+    # Demon-Armor-on-Hand-of-Justice case): a weapon's OWN observed
     # kit outranks the seat aggregate (Polehammer wears Knight in 5 of
     # its 6 builds); chests granting a typed gear effect are comp-level
     # allocations — excluded from the per-weapon tier, tagged in the
@@ -642,19 +642,19 @@ def t_weapon_doctrine():
     ko = e.kit_options("2H_POLEHAMMER", top_n=5)
     top = ko["kit"]["armor"]
     # doctrine_n TRACKS CORPUS SIZE — [5, 5] until the 23 albioncompo comps
-    # (2026-08-29), [9, 12] until the killboard stream joined the mining
-    # (2026-09-01, owner: "base it on seen evidence from the data we
-    # harvested"), [63, 95] now. The MECHANISM is what this pins:
+    # joined, [9, 12] until the killboard stream joined the mining
+    # (kits rest on the evidence the harvest has seen), [63, 95] now.
+    # The MECHANISM is what this pins:
     # Polehammer's own observed kit (weapon-level doctrine) outranks the
     # seat aggregate, and it still resolves to Knight by a clear majority.
     # A change here after an evidence import is expected; a change in
     # `gear` or `doctrine` is not.
-    # [63, 144] since the 2026-09-03 kit audit: effect-carrier chests
+    # [63, 144] since the kit audit: effect-carrier chests
     # COUNT as weapon evidence (Judicator/Guardian were the modal 1H-Mace
     # chests and the exclusion left Graveguard), so slot totals grew;
-    # [35, 82] once the same day's PARTY-SIZE FLOOR kept only builds from
+    # [35, 82] once the PARTY-SIZE FLOOR kept only builds from
     # killer parties of 10+ (the Grailseeker gank-kit case); [45, 103]
-    # then [88, 186] across the 2026-09-04 harvests. With the harvest now
+    # then [88, 186] across the following harvests. With the harvest now
     # an overnight task the exact pair is no longer pinned: the MECHANISM
     # is — Knight from the weapon tier, a clear plurality (>= 40% of the
     # slot's builds) over a real sample (>= 35).
@@ -687,7 +687,7 @@ def t_weapon_doctrine():
              and (q["summary"]["reflect_shell"]["with_any"] or 0) >= 6)
     check("R18 per-weapon doctrine: Polehammer wears its own observed "
           "Knight; Demon Armor on HoJ is weapon evidence carrying "
-          "reflect_shell (2026-09-03 re-pin); quotas mined per roster",
+          "reflect_shell (re-pinned); quotas mined per roster",
           ph and dem and clean and quota,
           f"pole_top={top['gear']}/{top['doctrine']}/{top['doctrine_n']} "
           f"demon={demon and (demon['doctrine'], demon['carries'])} "
@@ -695,18 +695,17 @@ def t_weapon_doctrine():
 
 
 def t_fail_closed_generation():
-    # R19 — FAIL-CLOSED GENERATION (owner ruling 2026-09-01, "fix the
-    # underlying issue which allows these items and builds and kits to
-    # slide into the team comp"): the kit-suggestion channel only speaks
-    # evidence. (a) A seatless weapon gets NO kit and NO options — the
-    # old ungated fallback marginal-ranked the whole catalog, and in any
-    # full comp the one uncovered capability (usually silence) handed
+    # R19 — FAIL-CLOSED GENERATION (the fix for off-role items, builds
+    # and kits sliding into the comp): the kit-suggestion channel only
+    # speaks evidence. (a) A seatless weapon gets NO kit and NO options —
+    # the old ungated fallback marginal-ranked the whole catalog, and in
+    # any full comp the one uncovered capability (usually silence) handed
     # the same off-role helm (Hellion Hood) to every seatless member.
     # (b) A seated slot with no doctrine tier stays UNSET. (c) role=None
     # stays the explicit diagnostic escape. (d) Manual builds still
     # score anything — the gate is suggestion-layer only.
     e = Engine(content="faction_war", size=15, style="brawl")
-    # since the seat-all pass (owner:2026-09-01) every weapon holds a seat,
+    # since the seat-all pass every weapon holds a seat,
     # so the seatless fixture is SYNTHESIZED: strip one weapon's menu
     # in-memory — the fail-closed mechanism itself is what this pins
     seatless = "MAIN_1HCROSSBOW"
@@ -736,9 +735,8 @@ def t_fail_closed_generation():
 
 
 def t_observed_build_overlay():
-    # R20 — THE OBSERVED-BUILD OVERLAY (owner ruling 2026-09-01: "i want
-    # gear that each seat is wearing to actually be based on what real
-    # people wear. the engine keeps making up some random builds"): the
+    # R20 — THE OBSERVED-BUILD OVERLAY (each seat's gear rests on what
+    # real players wear, never on invented builds): the
     # KIT pick follows the conditional-modal build mined from killboard
     # builds — a coherent fielded combination, never per-slot marginal
     # assembly. (a) archetypes ship in the book with step counts;
@@ -757,7 +755,7 @@ def t_observed_build_overlay():
          and top.get("observed_build") == wb["armor"][1:3])   # [n, of]
     # (c) every kit slot is either archetype-annotated or plain-ranked —
     # and at least one slot of a thin-basket weapon uses the fallback
-    # (c) re-pinned 2026-09-03: with carriers admitted the 1H-crossbow
+    # (c) re-pinned: with carriers admitted the 1H-crossbow
     # chain now covers every slot, so the fallback is shown on a weapon
     # whose archetype chain STOPPED early (the chain-guard: pool < 5 or
     # pick share < 25%) — such weapons exist, and their kit still fills
@@ -787,7 +785,7 @@ def t_observed_build_overlay():
 
 
 def t_two_handed_no_offhand():
-    # R21 (owner 2026-09-03, "it adds an offhand to two handed weapons"):
+    # R21 (the off-hand-on-a-two-hander defect):
     # the dataset carries the dumps' hands fact and no suggestion or
     # dressing path proposes an off-hand for a two-hander — the seat
     # doctrine pool is mined from one-handers too, so without the gate
@@ -819,7 +817,7 @@ def t_two_handed_no_offhand():
 
 
 def t_role_class_from_seat():
-    # R22 (2026-09-03): the coarse role class the bands count follows the
+    # R22: the coarse role class the bands count follows the
     # weapon's primary SEAT — the same resolution the comp board's columns
     # use — so a tile can no longer wear one class in another's column.
     # Function-first menus (Dawnsong: anti_heal then ranged_aoe) keep the
@@ -840,14 +838,14 @@ def t_role_class_from_seat():
                                      .get("role_menu_secondary") or [])
             and e.role_of("2H_IRONCLADEDSTAFF") == "frontline")
     check("R22 role class = primary seat class (Grailseeker/Stillgaze "
-          "frontline, Occult support, Dawnsong dps, Exalted a HEALER since "
-          "the 2026-09-11 ruling with the support lane secondary, "
+          "frontline, Occult support, Dawnsong dps, Exalted a HEALER with "
+          "the support lane secondary, "
           "unseated Iron-clad keeps its tank hint)",
           not bad and pins, f"bad={bad[:6]}")
 
 
 def t_occult_support_seat():
-    # R23 (owner 2026-09-03, "support weapon like occult into dps column"):
+    # R23 (the Occult-Staff-in-the-dps-column defect):
     # Occult Staff seats zone_support (E Time Corridor = ally speed, enemy
     # slow), is off dive_cleanup, and its observed leather kit reads
     # on-uniform there.
@@ -862,8 +860,8 @@ def t_occult_support_seat():
 
 
 def t_kit_audit_agreement():
-    # R24 (owner 2026-09-03, "build fixes until engine agrees or mostly
-    # agrees with the real data of people who win fights"): on ten
+    # R24 (the forge's kits must agree, or mostly agree, with what
+    # winning players actually wear): on ten
     # seeded-random weapons with >= 30 harvested builds, the kit the forge
     # dresses (kit_variants v0) matches the killboard's modal item in at
     # least 85% of slots, and NO slot picks an item worn less than half
@@ -875,9 +873,9 @@ def t_kit_audit_agreement():
     e = Engine(content="territory_defense", size=20)
     doc = _rosters()
     by_w = {}
-    # ONE PLAYER, ONE VOTE (2026-09-04): the audit counts in the miner's
+    # ONE PLAYER, ONE VOTE (R27): the audit counts in the miner's
     # unit — a player's builds on a weapon share one vote — so the modal
-    # here is the modal the doctrine ranks by (2026-09-05 harvest refresh:
+    # here is the modal the doctrine ranks by (first overnight harvest:
     # Fists of Avalon's Assassin Hood was 12 sightings from 6 voters and
     # a sightings audit called the 4-vote Soldier Helmet a bad pick)
     per = {}
@@ -920,7 +918,7 @@ def t_kit_audit_agreement():
                 continue
             modal, mn = items[0]
             if len(who.get(modal) or ()) < 5:
-                continue      # a thin modal is pooled, not matched (2026-09-08)
+                continue      # a thin modal is pooled, not matched (R34b)
             eng = v0.get(slot)
             total += 1
             if eng == modal:
@@ -934,7 +932,7 @@ def t_kit_audit_agreement():
           "worn < half as often as the modal",
           total >= 50 and agree >= 0.85 * total and bad == 0,
           f"agree={agree}/{total} bad={bad} {detail[:4]}")
-    # R24b (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-
+    # R24b (spec notes/specs/2026-09-08-coherent-style-kits-
     # design.md "Tests"): under a DECLARED style the modal the forge must
     # match is the STYLE CELL's — the modal among the weapon's builds
     # linked to parties labelled that style — wherever the cell exists
@@ -999,7 +997,7 @@ def t_kit_audit_agreement():
 
 
 def t_carrier_quota():
-    # R25 (2026-09-03, increment 3b): effect-carrier chests are capped per
+    # R25 (increment 3b): effect-carrier chests are capped per
     # roster at the killboard share x size — a generation constraint in
     # party_state/_eval_pick (kit variants past the cap are skipped, the
     # carrier weapon gets a non-carrier alternative), never a scoring
@@ -1011,7 +1009,7 @@ def t_carrier_quota():
     r = e.forge(20)
     worn = e._carrier_counts(r["party"], r["gears"])
     within = all(worn.get(k, 0) <= v for k, v in caps.items())
-    # identity chests are exempt (owner 2026-09-03, the Lifecurse case):
+    # identity chests are exempt (the Lifecurse case):
     # a kite-20 fielding Bedrock Mace AND Lifecurse — both >= 50% Demon
     # wearers — dresses BOTH in Demon Armor; the cap rations only the
     # discretionary wearer
@@ -1048,13 +1046,13 @@ def t_carrier_quota():
 
 
 def t_observed_chest_class():
-    # R26 (2026-09-03): a weapon's observed chest class (>= 25% of >= 50
+    # R26: a weapon's observed chest class (>= 25% of >= 50
     # harvested builds) is admitted to its own weapon tier and kit_match
     # even outside the seat's book uniform — Galatine Pair wears plate in
     # 81% of 145 winning builds under a cloth/leather bomb seat. Grailseeker
     # was the thin-sample example (32 builds, extends nothing) until the
-    # first overnight harvest (2026-09-05: 52 builds, 35 voters, leather
-    # 34%) and the owner's acceptance — it now extends leather.
+    # first overnight harvest (52 builds, 35 voters, leather 34%) — it
+    # now extends leather (accepted).
     e = Engine(content="territory_defense", size=20)
     ko = e.kit_options("2H_DUALSCIMITAR_UNDEAD")
     top = (ko["kit"].get("armor") or {}).get("gear")
@@ -1065,14 +1063,14 @@ def t_observed_chest_class():
              or {}).get("2H_QUARTERSTAFF_AVALON")
     check("R26 observed chest class: Galatine Pair is dressed in Soldier "
           "Armor (plate admitted on 145 builds) and reads on-uniform in "
-          "plate; Grailseeker extends leather at 35 voters (owner 2026-09-05)",
+          "plate; Grailseeker extends leather at 35 voters",
           top == "ARMOR_PLATE_SET1" and d["kit_match"] is True
           and "plate" in ext and grail == ["leather", "plate"],
           f"top={top} match={d['kit_match']} ext={ext} grail={grail}")
 
 
 def t_one_player_one_vote():
-    # R27 (2026-09-04, distinct-player floors): a build is one player in
+    # R27 (distinct-player floors): a build is one player in
     # one battle and a third of a weapon's builds are repeat sightings of
     # the same people (median 0.67 voters per build), so doctrine counts
     # ONE PLAYER, ONE VOTE per weapon — every harvested build carries a
@@ -1148,7 +1146,7 @@ def t_one_player_one_vote():
     ext_n = {w: ext.get("n") for d in kd.values() if isinstance(d, dict)
              for w, ext in (d.get("uniform_extended") or {}).items()}
     galatine = ext_n.get("2H_DUALSCIMITAR_UNDEAD")
-    grail = ext_n.get("2H_QUARTERSTAFF_AVALON")   # 35 voters since 2026-09-05
+    grail = ext_n.get("2H_QUARTERSTAFF_AVALON")   # 35 voters, harvest-admitted
     check("R27 one player, one vote: every harvested build carries a player "
           "key; a single voter's repeat sightings never front a tier (the "
           "Heavy Crossbow Fey Shoes case); rows carry players beside votes; "
@@ -1162,10 +1160,10 @@ def t_one_player_one_vote():
 
 
 def t_doctrine_bands():
-    # R28 (2026-09-04, kit doctrine per size band): every seat with a kit
+    # R28 (kit doctrine per size band): every seat with a kit
     # ships a GANG band (`kit_bands.gang`, mined from 4-9 man killer
     # parties and the small-scale curated contents, one player one vote,
-    # no grading overrides); the engine reads it at <= 9 members and the
+    # no drop/add overrides); the engine reads it at <= 9 members and the
     # group band at 10+; the gang kit is the gang MODAL — on every weapon
     # with >= 30 gang builds the size-7 kit matches the small-party
     # modal item (or one worn >= half as often) in >= 85% of slots and
@@ -1217,7 +1215,7 @@ def t_doctrine_bands():
             if modal not in e7.gear or not kit.get(sl):
                 continue
             if len(who.get(modal) or ()) < 5:
-                continue      # a thin modal is pooled, not matched (2026-09-08)
+                continue      # a thin modal is pooled, not matched (R34b)
             tot += 1
             evid = max(votes.get(kit[sl], 0), _doctrine_count(e7, w, sl, kit[sl]))
             if kit[sl] == modal or evid >= 0.5 * mv - band_slack(mv):
@@ -1243,7 +1241,7 @@ def t_doctrine_bands():
 
 
 def t_chain_guard():
-    # R29 (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-design.md
+    # R29 (spec notes/specs/2026-09-08-coherent-style-kits-design.md
     # section 1): the archetype chain's "rare pocket" guard compares SHARES,
     # never a conditional count against an unconditional count, and a pocket
     # continues only while it holds >= 20% of the population or 20 votes.
@@ -1271,7 +1269,7 @@ def t_chain_guard():
         pop_a.append(({"Armor": ch, "Head": "HELM_X", "Shoes": "SHOES_X"},
                       1.0, f"x{i}"))
     sel_a = bd._modal_build_chain(pop_a, {"plate"}, {}, gear, ident)
-    # B: the 2026-09-04 Greataxe shape — the chain narrows to a 13-build
+    # B: the harvested Greataxe shape — the chain narrows to a 13-build
     # pocket by the shoes step (13 of 74 = 18% < 20%, < 20 votes): the
     # 7-of-13 cape inside it is never picked. Every step before it passes
     # the share guard (HELM_B 24/44 vs HELM_Z 50/74; SHOES_B 13/24 vs
@@ -1311,7 +1309,7 @@ def t_chain_guard():
 
 
 def t_chain_step_voters():
-    # R35 (owner 2026-09-08, "ok on arcane helmet"): every archetype chain
+    # R35 (the Arcane Staff helmet case): every archetype chain
     # step's pick must be worn by CHAIN_STEP_MIN_VOTERS (5) DISTINCT
     # players — the same floor the tier modal and the cell chest step carry.
     # The case: Arcane Staff's clap cell chained Knight Armor (10 voters)
@@ -1347,7 +1345,7 @@ def t_chain_step_voters():
           f"thin={sel_thin} ok={sel_ok}")
 
 def t_chain_skips_thin_slot():
-    # R36 (2026-09-10): a failed PICK skips its own slot; only a failed POOL
+    # R36: a failed PICK skips its own slot; only a failed POOL
     # ends the chain. Five guards used to `break` alike, so one diffuse slot
     # killed every slot after it — and the fixed slot order puts the most
     # concentrated slots (potion, food) last. Measured on the 4,283-battle
@@ -1403,7 +1401,7 @@ def t_chain_skips_thin_slot():
 
 
 def t_party_link():
-    # R31 (2026-09-08, spec section 2 "Linkage"): a build links to its party
+    # R31 (spec section 2 "Linkage"): a build links to its party
     # exactly through the analyzer's `party` index, and — for artifacts
     # harvested before the index existed — through (battle, weapon) only
     # when exactly one 10+ party in that battle fields that weapon.
@@ -1472,7 +1470,7 @@ def t_party_link():
 
 
 def t_party_styles():
-    # R32 (2026-09-08, spec section 2 "Labels"): parties of 10+ in the
+    # R32 (spec section 2 "Labels"): parties of 10+ in the
     # committed artifact are labelled with the engine's weapons-only
     # identity; smaller parties are skipped, forming rosters get null; the
     # file records the artifact hash it was derived from.
@@ -1483,7 +1481,7 @@ def t_party_styles():
             "2H_HOLYSTAFF_CRYSTAL", "MAIN_CURSEDSTAFF_UNDEAD", "2H_LONGBOW",
             "2H_BOW_AVALON", "MAIN_NATURESTAFF", "2H_DUALMACE_AVALON",
             "2H_ICECRYSTAL_UNDEAD", "2H_AXE_AVALON", "2H_HOLYSTAFF_UNDEAD",
-            "2H_HARPOON_HELL", "2H_BOW_HELL"]        # round-4 roster 16
+            "2H_HARPOON_HELL", "2H_BOW_HELL"]  # validation round 4, roster 16
     doc = {"parties": [
         {"battle": 5, "size": 13, "weapons": sorted(clap)},
         {"battle": 5, "size": 4, "weapons": ["MAIN_MACE"] * 4},
@@ -1510,7 +1508,7 @@ def t_party_styles():
 
 
 def t_style_cells():
-    # R30 (2026-09-08, spec section 2 "Doctrine"): the group band carries
+    # R30 (spec section 2 "Doctrine"): the group band carries
     # per-style kit cells mined from builds linked to labelled parties with
     # the band's own floors plus a 5-voter cell floor; a cell is absent,
     # never filled; the gang band carries none.
@@ -1545,7 +1543,7 @@ def t_style_cells():
 
 
 def t_style_cell_reader():
-    # R33 (2026-09-08, spec section 2 "Engine"): a DECLARED style dresses a
+    # R33 (spec section 2 "Engine"): a DECLARED style dresses a
     # weapon from its style cell where one exists; balanced and a missing
     # cell fall back to the band; the option names its style. Pinned on
     # mechanism: the fixture is whichever weapon's clap and brawl cells both
@@ -1592,7 +1590,7 @@ def t_style_cell_reader():
 
 
 def t_seat_pools():
-    # R34a (2026-09-08, spec section 3 "Seat pooling"): every seat with a
+    # R34a (spec section 3 "Seat pooling"): every seat with a
     # kit ships two player-counted pools per band — the plain seat pool per
     # slot and the CHEST-CONDITIONED pool (the seat's items among builds
     # wearing each chest) — for the five poolable slots only, items with
@@ -1638,7 +1636,7 @@ def t_seat_pools():
 
 
 def t_seat_pooling():
-    # R34b (2026-09-08, spec section 3): where a weapon's slot evidence is
+    # R34b (spec section 3): where a weapon's slot evidence is
     # THIN (its weapon-tier modal under POOL_MIN_VOTES votes) the kit reader
     # fronts the seat's chest-conditioned pool item (helmet/boots/cape) or
     # the plain seat pool item (potion/food) when that item has 5+ players,
@@ -1662,7 +1660,7 @@ def t_seat_pooling():
             wslot = wdoc.get(slot) or []
             # THIN is judged on the modal row's distinct PEOPLE (third
             # element) where the build shipped them, votes otherwise —
-            # the engine's read since 2026-09-09 (R27: floors count people)
+            # the engine's read (R27: floors count people)
             modal = max(wslot, key=lambda p: (p[1], p[0]), default=None)
             top_w = (modal[2] if modal and len(modal) > 2 else
                      modal[1] if modal else 0)
@@ -1695,12 +1693,12 @@ def t_seat_pooling():
 
 
 def t_labels():
-    """R37 (owner 2026-09-11, the labels round): every weapon ships a
+    """R37 (the tile-label validation round): every weapon ships a
     tile label {primary, tags} — PRIMARY = the seat's word (healers:
     their heal profile), tags = cited function roles on the primary menu
     then the sheet's capabilities at >= 4, at most two, E-first, never a
     capability the primary implies; healers tag their line. Display only:
-    nothing in scoring reads it. Owner overrides are cited and inside the
+    nothing in scoring reads it. Label overrides are cited and inside the
     vocabulary (the build blocks otherwise)."""
     import yaml
     e = Engine()
@@ -1762,7 +1760,7 @@ def t_labels():
         "Incubus Mace": "Stopper · heal cut · weaken",
     }
     miss = {nm: label(nm) for nm, want in pins.items() if label(nm) != want}
-    check("R37b the owner's cases read as ruled: Heavy Mace stopper · purge · "
+    check("R37b the recorded label cases hold: Heavy Mace stopper · purge · "
           "silence, Bedrock stopper · peel, Great Arcane support · STUN (its E, "
           "Time Freeze, leads), Grovekeeper engage · stun · peel, Hallowfall "
           "burst · holy, Great Holy sustain · holy, Nature burst · sustain",

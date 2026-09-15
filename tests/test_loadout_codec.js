@@ -148,7 +148,7 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
         `${enc.length} chars`);
 }
 
-/* 7 — provenance codec (2026-08-18): forged-slot flags survive the permalink;
+/* 7 — provenance codec: forged-slot flags survive the permalink;
    pre-provenance links decode to all-manual */
 {
   const enc = vm.runInContext('provEncode(["m","f","f","m","m"], 5)', ctx);
@@ -160,7 +160,7 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
   const legacy = vm.runInContext('provDecode("", 3)', ctx);
   check("a pre-provenance link decodes to all-manual",
         JSON.stringify(legacy) === JSON.stringify(["m", "m", "m"]), JSON.stringify(legacy));
-  /* locks (2026-09-11): 'l' = locked by the user — the only state a
+  /* locks: 'l' = a hand-locked slot — the only state a
      refresh holds; survives the permalink beside m / f */
   const encL = vm.runInContext('provEncode(["l","f","m","l","m"], 5)', ctx);
   check("locked slots encode as 'l' (trailing manuals still trimmed)",
@@ -207,7 +207,7 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
         L.q === 1 && L.w === 0 && L.p === 1 && !("e" in L), JSON.stringify(L));
 }
 
-/* 10 — combo permalink codec (2026-08-18): explicit forge combos (E-slot use
+/* 10 — combo permalink codec: explicit forge combos (E-slot use
    variants no picker can express) survive the k= param */
 {
   const enc = vm.runInContext("comboEncode([null, 3, 0, null, null], 5)", ctx);

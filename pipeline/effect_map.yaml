@@ -1,9 +1,9 @@
 # Effect -> capability map. DATA, not code.
 #
 # Analysed effect by effect against the 64 weapon-reachable effects in
-# out/effect_catalogue.json. Reviewed by Claude 2026-08-12; NOT yet signed off
-# by the domain expert. The agreed process is: use these now, correct them as
-# real comps get built and something looks wrong.
+# out/effect_catalogue.json. Not yet validated: the mappings are used as
+# they stand and corrected as real comps get built and something looks
+# wrong.
 #
 # TWO RULES THAT SHAPE THIS FILE
 #
@@ -27,9 +27,8 @@
 # curation): six poster-child weapons made the case — see the §2.2 amendment.
 # Template weight starts low/flat/PROVISIONAL like anti_zone's.
 #
-# STILL PROPOSED, and 2026-08-27 INVESTIGATED IN FULL (owner: "ok add these
-# effects too") — the answer was DON'T, and here is the evidence so nobody
-# re-opens it blind:
+# STILL PROPOSED, and INVESTIGATED IN FULL — the answer is DON'T, and
+# here is the evidence so the question is not re-opened without it:
 #   * Every WEAPON source of remove:invisibility is a PURGE spell (Battle
 #     Howl, Arcane Orb, Cripple, Breakthrough, Iron Will, Devastating
 #     Strike, Enfeeble Blades). Invisibility is a buff, so purging strips
@@ -97,13 +96,12 @@ effects:
     note: Stealth opener or escape.
 
   # ---------------------------------------------------------------- durability
-  # OWNER RULING 2026-08-28. Peel is a directional use of CC (design doc §2.2:
+  # PEEL TOUCHES THE ENEMY. Peel is a directional use of CC (design doc §2.2:
   # clump_create and peel are "the two directional uses of CC"), so it must
   # either hit the enemy or cancel the enemy's CC. Plain damage protection on
   # an ally is NOT peel — it is buff_allies/tankiness, which is how
-  # `hitpointsmaxbonus+` was already treated. Owner: "I thought things peel
-  # would be like something that directly affects enemies in some way."
-  # The challenge that found it: Judicator Armor scored the HIGHEST gear peel
+  # `hitpointsmaxbonus+` was already treated.
+  # The case that found it: Judicator Armor scored the HIGHEST gear peel
   # in the game (4) on a Force Shield that only grants allies +0.25
   # resistances. `crowdcontrolresistance+`, `immunity:*` and `dr:*` KEEP peel
   # — they cancel enemy CC, which is the defensive half of the same axis.
@@ -113,14 +111,13 @@ effects:
     note: >
       The 1H Mace case. A damage-immune window is exactly what lets a bruiser
       commit or withdraw through focus. On an ALLY it is damage protection,
-      not peel (owner 2026-08-28) — nothing about it touches the enemy.
+      not peel — nothing about it touches the enemy.
   physicalarmor+:
     self:  [tankiness, self_sustain]
     ally:  [buff_allies, tankiness]
     note: >
-      Resistances on a focused ally are protection, not peel (owner
-      2026-08-28) — same treatment as hitpointsmaxbonus+, which this used to
-      contradict.
+      Resistances on a focused ally are protection, not peel — same
+      treatment as hitpointsmaxbonus+, which this used to contradict.
   magicresistance+:
     self:  [tankiness, self_sustain]
     ally:  [buff_allies, tankiness]

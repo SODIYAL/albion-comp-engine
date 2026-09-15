@@ -62,7 +62,7 @@ import builds_lib as bl  # noqa: E402
 CONTENT_COVERS = {
     "large_scale_zvz": ["castle", "territory_defense", "faction_war"],
     "zvz": ["castle", "territory_defense", "faction_war"],
-    # Size-matched extensions (owner 2026-08-21): a 7-man fight comp is
+    # Size-matched extensions (curation judgment): a 7-man fight comp is
     # evidence for the 7-man templates; 20-man roam/organized comps are
     # evidence for the 20-size templates. Displayed builds always carry
     # fallback_from, so the borrow stays visible (§F).
@@ -172,12 +172,12 @@ def variant_of(rec):
         "patch": rec.get("patch"),
         "party_size": rec.get("party_size"),
         "style": rec.get("style"),
-        # Owner style rulings 2026-08-28. `archetype` is NOT a style (the
+        # Style rules (curation judgment). `archetype` is NOT a style (the
         # bomb squad is its own shape); `fit_exclude` marks a record — or a
         # single party of one — that must never teach the model what a comp
         # should look like (PvE content, an archetype, or a party its own
         # author says is not built properly). Both travel with the evidence
-        # so every consumer sees the ruling rather than re-deriving it.
+        # so every consumer sees the rule rather than re-deriving it.
         "archetype": rec.get("archetype"),
         "fit_exclude": rec.get("fit_exclude"),
         # which content templates this comp may serve as evidence for when
@@ -268,7 +268,7 @@ def main():
             variants = [variant_of(r) for r in ordered]
             # the default is the first PROMOTABLE record — a quarantined
             # record is never a default, no matter its comp-level approval
-            # (review 2026-08-19: the Enigmatic p5 build shipped as
+            # (found in review: the Enigmatic p5 build shipped as
             # canonical through exactly this gap). A pin cannot rescue a
             # quarantined record either.
             first_ok = next((i for i, r in enumerate(ordered)
@@ -292,8 +292,8 @@ def main():
     # dashboard derives fallback offerings at runtime and labels them
     # explicitly (§F) — no silent merging, no payload duplication.
     # Evidence gate for composition exclusions (§F): an excluded weapon that
-    # gains a CURRENT approved canonical large-group build is surfaced so the
-    # owner can lift the entry — eligibility follows the evidence, the code
+    # gains a CURRENT approved canonical large-group build is surfaced so
+    # the entry can be lifted — eligibility follows the evidence, the code
     # never hardcodes the ban's fate.
     comp_path = os.path.join(HERE, "templates", "composition.yaml")
     gate_notes = []

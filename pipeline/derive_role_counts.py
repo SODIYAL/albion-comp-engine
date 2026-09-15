@@ -1,13 +1,13 @@
 """Role counts of the typical winner, GENERATED from the committed evidence.
 
-Owner rulings 2026-09-11 (castle_outpost clap 7 kept forging two healers;
-"go ahead", then "fix it up all for all party sizes and styles"): a body
-beyond the TYPICAL count for its role is generated only when a minimum
-only that role can meet still demands it. The composition bands
-(templates/composition.yaml) carry min / max per role; this script
-supplies the middle line the supply rows got on 2026-09-10 (standing
-rule 17, applied to bodies): the harvest p50 at 10+, the median of the
-fitted published comps below 10.
+Rule (F31, T48; every party size and style): a body beyond the TYPICAL
+count for its role is generated only when a minimum only that role can
+meet still demands it. The case behind it: castle_outpost clap 7 kept
+forging two healers and left the damage seats short. The composition
+bands (templates/composition.yaml) carry min / max per role; this script
+supplies the middle line the supply rows carry (standing rule 17, target
+is the median, applied to bodies): the harvest p50 at 10+, the median of
+the fitted published comps below 10.
 
 Three tables, resolved by the engine in this order (both ports,
 `_role_typical`):
@@ -29,7 +29,8 @@ Three tables, resolved by the engine in this order (both ports,
                                      harvest.
   size >= 10  styles[style][size]    DECLARED style's cell (party_styles.json
                                      labels, MIN_SIZE 10); `balanced` never
-                                     reads a cell (owner 2026-09-08, kits).
+                                     reads a cell (as for kits: `balanced`
+                                     declares no style).
                                      A cell pools a +-1 then +-2 size window
                                      until it holds >= MIN_DISTINCT rosters
                                      (`window` stated); a style that never
@@ -52,7 +53,7 @@ build_dataset -> gates. build_dataset.py refuses a role_counts.json whose
 recorded artifact hashes do not match the artifacts on disk, or that was
 not derived on the training split.
 
-HOLDOUT (2026-09-15, "honour the holdout split end to end"): the harvest
+HOLDOUT (the split is honoured end to end): the harvest
 rows learn from battles with id % HOLDOUT_MOD != 0 only — the meta prior's
 rule; the % 5 == 0 slice is tier2_blindtest v4h's evaluation set and
 nothing shipped learns from it. The published-comps rows are unaffected.

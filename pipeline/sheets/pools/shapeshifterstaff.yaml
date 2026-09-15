@@ -3,8 +3,8 @@
 # restructure; every score unchanged). A row applies to every
 # shapeshifterstaff weapon that can equip its evidence spell (WEAPON_STATS:
 # tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending expert
-# adjudication — or lists the pair under `except:`.
+# same (cap, evidence) — a score override pending
+# validation — or lists the pair under `except:`.
 subcategory: shapeshifterstaff
 capabilities:
   - {cap: self_sustain, score: 2, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}  # Altered Beast HP stacks
@@ -16,7 +16,7 @@ capabilities:
   - {cap: slow, score: 2, evidence: SHAPE_W_DAMAGE_AOE}                      # -10% inside the cloud — weak (QW)
   - {cap: zone_control, score: 2, evidence: SHAPE_W_DAMAGE_AOE}              # W: Distortion cloud, 3s DoT + slow (QW)
   - {cap: mobility, score: 2, evidence: SHAPE_W_TETHERBEAM}                  # W: dash-to-enemy tether (QW)
-  # RE-CITED 2026-08-28 (owner peel ruling). This row used to cite Tether Shift
+  # RE-CITED (peel touches the enemy). This row used to cite Tether Shift
   # on the strength of "tether-pull a party ally OUT" — but Tether Shift shields
   # and repositions the ALLY and never touches an enemy, so it cannot ground
   # peel. The row's own comment named the real source: Polymorph, which turns a

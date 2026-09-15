@@ -3,8 +3,8 @@
  * SINGLE SOURCE OF MATH: engine/engine.py is authoritative; this file must
  * mirror it exactly and tests/test_js_parity.py verifies that it does
  * (same fitness, same rankings, same forged rosters, across all templates,
- * on random parties). If you change one, change both, then run the parity
- * test.
+ * on random parties). A change to one is a change to both, followed by the
+ * parity test.
  *
  * Used two ways:
  *   - inlined into dashboard/index.html by dashboard/build.py (browser —
@@ -13,10 +13,10 @@
  *
  * TWO SUPPLIES (mirrors engine.py): coverage / headroom / over-stack read the
  * DRESSED supply (weapon + loadout + worn gear), while the hard-floor term
- * reads the weapon+loadout supply only — Option C, owner ruling 2026-08-27,
- * so worn gear can never buy its way past a structural floor.
+ * reads the weapon+loadout supply only — Option C (F25/F26), so worn gear
+ * can never buy its way past a structural floor.
  *
- * KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md): dataset targets and
+ * KNOWN OPEN DEFECT (decision pending, see HANDOFF.md): dataset targets and
  * soft caps were fitted in WEAPON+spell-pick units while supply is measured
  * on whole dressed people. The math is unaffected; the two sides of every
  * comparison are currently in different units.
@@ -54,13 +54,13 @@
     this.delta = w.delta; this.gamma = w.gamma;
     /* Over-stack asymptote (scoring.yaml); defaulted for older datasets. */
     this.overstackMax = (w.overstack_max === undefined) ? 0.5 : w.overstack_max;
-    /* Redundancy weight (rho), viability prior weight and headroom slope
-       (2026-08-18) — all default 0 so an older dataset scores as it used to.
+    /* Redundancy weight (rho), viability prior weight and headroom slope —
+       all default 0 so an older dataset scores as it used to.
        Mirrors engine.py __init__. */
     this.rho = w.rho || 0.0;
     this.viabilityW = w.viability || 0.0;
     this.headroom = w.headroom || 0.0;
-    /* pair-aware prior (owner 2026-09-11, mirrors engine.py): blend weight
+    /* pair-aware prior (weights.meta_pair; mirrors engine.py): blend weight
        for the best observed partner; absent = 0 = pure solo */
     this.metaPairW = w.meta_pair || 0.0;
     this.metaPairs = this.scoring.meta_pairs || {};
@@ -104,7 +104,7 @@
       }
     }
     this.hasNonstack = Object.keys(this.nonstack).length > 0;
-    /* SUPER-ADDITIVE DUPLICATES (2026-08-28, mirrors engine.py): gear key ->
+    /* SUPER-ADDITIVE DUPLICATES (mirrors engine.py): gear key ->
        minimum copies that cover each other's SELF-COST, resolved from the
        cost's evidence spell through a VERIFIED interaction record declaring
        self_cost_offset_min_copies. Cancels a cost, never adds supply. */
@@ -132,14 +132,14 @@
     var overrides = rolesCfg.overrides || {};
     /* The ROLE BOOK (roles-design.md, mirrors engine.py): fine roles with
        evidence-cited membership; weapons carry role_menu. Feeds
-       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and, since
-       2026-09-03, the coarse role class below. */
+       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and the coarse
+       role class below. */
     this.rolesBook = {};
     var rb = data.roles || [];
     for (var ri = 0; ri < rb.length; ri++) this.rolesBook[rb[ri].id] = rb[ri];
     /* Coarse role class: composition override > the class of the primary
        SEAT (first uniformed menu role, the detectRole resolution) > the
-       sheet's role_hint. Mirrors engine.py (2026-09-03). */
+       sheet's role_hint. Mirrors engine.py. */
     this.roleClass = {};
     var k;
     for (k in this.weapons) {
@@ -165,7 +165,7 @@
         }
       }
     }
-    /* Capability predicates — COMBO-AWARE since 2026-08-19 (mirrors
+    /* Capability predicates — COMBO-AWARE (mirrors
        engine.py): predMembers keeps the flat could-qualify view; every
        forge constraint counts through _predContrib(weapon, combo). */
     this.predDefs = comp.predicates || {};
@@ -181,7 +181,7 @@
       }
       this.predMembers[pn] = members;
     }
-    /* Flag predicate `primary_heal` (owner ruling 2026-08-23, mirrors
+    /* Flag predicate `primary_heal` (mirrors
        engine.py): band minima counted from the static per-weapon
        full_healer flag (high healing on the E; the E is combo-independent,
        so every combo of a full healer qualifies). Routed through the same
@@ -192,7 +192,7 @@
       if (this.weapons[k].full_healer) phMembers[k] = true;
     }
     this.predMembers[this.PRIMARY_HEAL] = phMembers;
-    /* plan-tool flag predicate (skeletons 2026-09-15; mirrors engine.py
+    /* plan-tool flag predicate (seat skeleton; mirrors engine.py
        STANDOFF): the E is a standoff tool, combo-independent */
     this.STANDOFF = "standoff";
     var soMembers = {};
@@ -209,7 +209,7 @@
     this.dupPerWeapon = dup.per_weapon || {};
     this.dupPwMinSize = (dup.per_weapon_min_size === undefined) ? 10 : dup.per_weapon_min_size;
     /* GENERATED copy allowances per style x band and the seat skeleton
-       (derive_skeletons.py, owner 2026-09-15; mirrors engine.py): setContent
+       (derive_skeletons.py; mirrors engine.py): setContent
        resolves one copy cell into dupPerWeapon and one seat row into
        _seatTyp; a dataset without them keeps the hand list and no gate. */
     this._dupPerWeaponBase = this.dupPerWeapon;
@@ -220,7 +220,7 @@
     this.groupsOf = {};
     /* members of derived NON-STACKING groups (shared kit priced
        count-once — the cursed line): their group-band slots are EARNED
-       (owner ruling 2026-08-25; see the generation-fit gate) */
+       (see the generation-fit gate) */
     this.nonstackMembers = {};
     for (var gi = 0; gi < this.groups.length; gi++) {
       var gw = this.groups[gi].weapons || [];
@@ -260,7 +260,7 @@
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
     this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
-    /* DEMAND RAMP (owner ruling 2026-09-07; mirrors engine.py set_content):
+    /* DEMAND RAMP (mirrors engine.py set_content):
        a row with ramp {none_until, full_at} is dropped at sizes <=
        none_until, grows linearly to its measured value at full_at, and
        proportionally beyond. */
@@ -291,7 +291,7 @@
     var multNow = this._countMult(this.size);
     var multBase = this._countMult(this.baseSize);
     var grown = function (p, m) { return p ? p * m : p; };
-    /* Clump anchors + AoE geometry config (2026-08-20, mirrors engine.py
+    /* Clump anchors + AoE geometry config (mirrors engine.py
        set_content — the geometric utility transform). */
     this._clumpNow = grown(styleMech.expected_aoe_targets, multNow);
     this._clumpBase = grown(baseMech.expected_aoe_targets, multBase);
@@ -325,7 +325,7 @@
       if (this.size > this.stBoostMaxSize && sizeFactor > 1.0) sizeFactor = 1.0;
       this.mechMults[RESILIENCE_CAPS[i]] = styleFactor * sizeFactor;
     }
-    /* Resilience-Penetration context (owner ruling 2026-08-25, mirrors
+    /* Resilience-Penetration context (a partial rebate; mirrors
        engine.py): the Focus-Fire DR at this style's grown focus count; a
        weapon with resil_pen p is rebated (1 - DR*(1-p)) / (1 - DR) on its
        burst_st/execute supply in _eff. */
@@ -337,7 +337,7 @@
        multipliers say what a style VALUES, these say HOW MUCH OF IT it
        needs. Target and soft cap scale together so the headroom band keeps
        its shape; hard floors do NOT scale. Default is identity — every
-       style ships {} until the owner rules a value. */
+       style ships {} until a value is set (curation judgment). */
     this.targetMults = (styles[this.style] || {}).target_mults || {};
     this._targets = {}; this._softs = {}; this._weights = {}; this._mins = {};
     for (var cap2 in this.reqs) {
@@ -348,7 +348,7 @@
         : (r.scales ? this.size / this.baseSize : 1.0);
       this._targets[cap2] = tm * r.target * sz2;
       this._softs[cap2] = tm * r.soft_cap * sz2;
-      /* BARE MINIMUM beside the target (owner 2026-09-10, the four-stage
+      /* BARE MINIMUM beside the target (target is the median: the four-stage
          board; mirrors engine.py _mins): a median-fitted content row
          carries `min`, a row still on the old 0.9 x least fit IS its
          minimum. Display only — no scoring term reads it. */
@@ -356,8 +356,8 @@
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
-    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; TARGET IS
-       THE MEDIAN, owner 2026-09-10; mirrors engine.py set_content): at
+    /* STYLE x SIZE ROWS (style_bands.yaml; TARGET IS THE MEDIAN; mirrors
+       engine.py set_content): at
        min_size+ the harvest's per-band target (the TYPICAL winner, p50),
        min (p10) and soft cap replace the content row's, scaled from
        ref_size; a soft-cap-only row keeps the content target; rows are
@@ -397,7 +397,7 @@
         }
       }
     }
-    /* OPTIONAL capabilities (owner ruling 2026-08-28) — mirrors engine.py
+    /* OPTIONAL capabilities — mirrors engine.py
        set_content. Bringing one still earns its coverage; not bringing it is
        not a hole. Every fitness term is already zero at zero supply, so this
        is a DENOMINATOR-only rule: it can only leave maxFitness(), never
@@ -452,13 +452,13 @@
       }
     }
     this._excluded = excl;
-    /* No cost gate (owner ruling 2026-09-07, mirrors engine.py): the
+    /* No cost gate (mirrors engine.py): the
        crystal gate is retired; anti_zone demand carries the physics. */
     this._suggest = [];
     for (i = 0; i < this.pool.length; i++) {
       if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
-    /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
+    /* Style-fit suggestion gate (mirrors engine.py:
        style selection IS build intent; unfit weapons leave suggestions,
        never scoring; balanced gates nothing). */
     this._styleUnfit = {};
@@ -483,7 +483,7 @@
         this._suggest = kept;
       }
     }
-    /* Generation-fit gate (owner ruling 2026-08-23 round 3, mirrors
+    /* Generation-fit gate (validation round 3, mirrors
        engine.py): a DEFAULT generated comp fields damage picks the
        derivation says FIT — "situational" stays a manual pick (scores
        normally, never flagged). DPS role only; balanced requires fits for
@@ -512,7 +512,7 @@
             }
           }
         } else if (gRole === "healer" && gBand === "group") {
-          /* owner round 4: a healer unfit at group for EVERY style (the
+          /* validation round 4: a healer unfit at group for EVERY style (the
              single-ally-heal-E class) never generates, balanced included;
              gang slots stay open (mirrors engine.py). */
           gOk = false;
@@ -523,10 +523,10 @@
             }
           }
         } else if (this.nonstackMembers[gw] && gBand === "group") {
-          /* owner ruling 2026-08-25: a non-stacking budget slot (the
-             cursed line — its shared Q priced count-once) is EARNED at
-             group scale: "the only weapon i see in any party bigger than
-             15 people is the lifecurse, damnation, or rotcaller." The
+          /* a non-stacking budget slot (the cursed line — its shared Q
+             priced count-once) is EARNED at group scale: above 15 the
+             cursed weapons fielded are Lifecurse, Damnation and Rotcaller
+             (curation judgment on the observed comps). The
              derivation demotes debuff-less members to situational at
              group for every style; the dps fits-rule then bars them from
              DEFAULT generation, balanced included. Manual picks score
@@ -572,7 +572,7 @@
         break;
       }
     }
-    /* Style role-band overrides (owner ruling 2026-08-23, styles.yaml
+    /* Style role-band overrides (styles.yaml
        constraint_overrides — mirrors engine.py): a listed key REPLACES the
        base band's entry; unlisted keys keep the base band. First matching
        row wins. */
@@ -592,9 +592,10 @@
         }
       }
     }
-    /* Size-based style minima, mirrored in engine.py (owner 2026-09-08).
-       Floor(size / per), with no inherited maximum. Small parties keep
-       their existing band until they reach one complete group. */
+    /* Size-based style minima (styles.yaml role_min_per_players; mirrors
+       engine.py). Floor(size / per), with no inherited maximum. Small
+       parties keep their existing band until they reach one complete
+       group. */
     if (this._band !== null) {
       var rolePer = (styles[this.style] || {}).role_min_per_players || {};
       for (var ratioRole in rolePer) {
@@ -604,7 +605,7 @@
         }
       }
     }
-    /* TYPICAL role counts (owner ruling 2026-09-11; mirrors engine.py):
+    /* TYPICAL role counts (F31; mirrors engine.py):
        the harvest p50 per exact size (composition.role_typical, GENERATED
        by derive_role_counts.py) laid onto the band as `typical`. The forge
        generates a body beyond it only when a minimum only that role can
@@ -619,14 +620,14 @@
         this._band[typRole] = typRule;
       }
     }
-    /* SEAT SKELETON (owner 2026-09-15; mirrors engine.py set_content): the
+    /* SEAT SKELETON (mirrors engine.py set_content): the
        typical count of every PRIMARY SEAT for this style and size and the
        copy-allowance cell for this style and band (composition.skeleton /
        duplication.per_weapon_cells, GENERATED by derive_skeletons.py).
        Generation-only: manual parties always score. */
     this._seatTyp = this._seatTypical();
     this.dupPerWeapon = this._dupCell();
-    /* PLAN TOOLS (2026-09-15; mirrors engine.py): the typical standoff
+    /* PLAN TOOLS (mirrors engine.py): the typical standoff
        count of the declared style's winners is a generation MINIMUM */
     if (this._band !== null) {
       var planRows = this._planTypical();
@@ -635,7 +636,7 @@
         this._band[planTool] = { min: planRows[planTool] };
       }
     }
-    /* NEED PROFILES (increment 3, owner-ruled 2026-08-26) — mirrors
+    /* NEED PROFILES (dataset need_profiles) — mirrors
        engine.py: fine-seat bands + function coverage minima for the
        FORGE, scaled by size/reference_size (half-up, the pinned
        rounding rule) and armed at min_size. SEAT keys count a weapon's
@@ -694,7 +695,7 @@
   };
 
   CompEngine.prototype.setDressing = function (enabled) {
-    /* Validation affordance (V3-W, 2026-08-27; mirrors engine.py
+    /* Validation affordance (V3-W; mirrors engine.py
        set_dressing): when OFF, every CANDIDATE evaluates naked —
        kitVariants yields [["v0", null]] for all weapons, _dressedExtras
        aliases the weapon-only combo vectors, and _comboScoreDressed's
@@ -769,10 +770,9 @@
   };
 
   CompEngine.prototype.sizeBucket = function () {
-    /* Participant axis = 2 x party size (mirrors engine.py size_bucket,
-       corrected 2026-08-18). Keys the GENERATED meta prior (admitted
-       2026-09-08) through metaOf() at ROSTER size; the dashboard's usage
-       strip keys off PLAN() instead, deliberately. */
+    /* Participant axis = 2 x party size (mirrors engine.py size_bucket).
+       Keys the GENERATED meta prior through metaOf() at ROSTER size; the
+       dashboard's usage strip keys off PLAN() instead, deliberately. */
     var n = 2 * this.size;
     return n < 12 ? "small" : n <= 30 ? "mid" : "large";
   };
@@ -786,8 +786,8 @@
   };
 
   /* the bare minimum winners get away with (harvest p10 / least fitted
-     comp), scaled like the target — the board's red/orange line (owner
-     2026-09-10). Mirrors engine.py target_min. Display only. */
+     comp), scaled like the target — the board's red/orange line (target
+     is the median). Mirrors engine.py target_min. Display only. */
   CompEngine.prototype.targetMin = function (cap) {
     return this._mins[cap];
   };
@@ -823,8 +823,8 @@
     return null;
   };
   /* the weapon's PRIMARY SEAT: the first role_menu entry with a chest
-     uniform, the read roleClass derives from (mirrors engine.py seat_of;
-     skeletons 2026-09-15); null when the book seats it nowhere. */
+     uniform, the read roleClass derives from (mirrors engine.py seat_of);
+     null when the book seats it nowhere. */
   CompEngine.prototype.seatOf = function (weapon) {
     var menu = (this.weapons[weapon] || {}).role_menu || [];
     for (var i = 0; i < menu.length; i++) {
@@ -834,7 +834,7 @@
     return null;
   };
 
-  /* Role layer (roles-design.md increment 1; mirrors engine.py) —
+  /* Role layer (roles-design.md; mirrors engine.py) —
      DESCRIPTIVE: no scoring or generation path reads it. */
   CompEngine.prototype._chestClass = function (gearId) {
     if (!gearId) return null;
@@ -1076,7 +1076,7 @@
   CompEngine.prototype.comboChoices = function (weapon, combo) {
     /* [(original slot index, bundle index)] for a combo index; out-of-range
        falls back to the default combo exactly like memberExtra (mirrors
-       engine.py combo_choices, review 2026-08-18). */
+       engine.py combo_choices). */
     var dims = this._comboDims(weapon);
     var total = 1, i;
     for (i = 0; i < dims.length; i++) total *= dims[i][1];
@@ -1155,10 +1155,10 @@
     return bestI;
   };
 
-  /* ---- gear (full-build members, 2026-08-20; mirrors engine.py) ---- */
+  /* ---- gear (full-build members; mirrors engine.py) ---- */
   CompEngine.prototype.gearKey = function (key) {
-    /* The CURATED key for a worn item, ignoring tier (owner ruling
-       2026-08-28; mirrors engine.py gear_key). Consumables are curated at one
+    /* The CURATED key for a worn item, ignoring tier (mirrors engine.py
+       gear_key). Consumables are curated at one
        representative tier while comps record whatever tier they ran, so an
        exact-key lookup scored 20 real Gigantify potions as nothing. Exact
        keys win; an ambiguous tier-stripped form resolves to nothing rather
@@ -1232,7 +1232,7 @@
                                               waiveCosts) {
     /* Full-build member: weapon loadout + gear abilities + the STAT
        channel (mirrors engine.py build_extra — same float order).
-       CC-duration % (increment 2, owner 2026-08-25) multiplies the
+       CC-duration % multiplies the
        wearer's own duration-bearing CC — the Leering-Cane pairing as
        physics. `role` (a seat id) additionally applies the DOCTRINE
        PASSIVE picks — generation/display only; scoring never passes
@@ -1308,8 +1308,8 @@
   };
 
   /* Gear keys whose self-cost this party has offset — the ONLY
-     super-additive duplicate rule in the model, deliberately narrow (owner
-     2026-08-28). Mirrors engine.py _self_cost_waivers: a VERIFIED
+     super-additive duplicate rule in the model, deliberately narrow.
+     Mirrors engine.py _self_cost_waivers: a VERIFIED
      interaction record on the cost's evidence spell declares
      self_cost_offset_min_copies, and the party fields that many. Cancels a
      cost, never adds supply. */
@@ -1336,8 +1336,7 @@
     /* the seat's doctrine for THIS party size and DECLARED style (mirrors
        engine.py _seat_kit): the gang band below 10 members; else a declared
        style's cell (kit_styles.<style>) laid over the band -- the band
-       fills what the cell lacks; `balanced` never reads a cell (owner
-       2026-09-08). */
+       fills what the cell lacks; `balanced` never reads a cell. */
     if (this.size <= DOCTRINE_GANG_MAX) {
       var gang = (rec.kit_bands || {}).gang;
       if (gang) return gang;
@@ -1400,9 +1399,8 @@
   CompEngine.prototype.kitOptions = function (weapon, combo, party, topN,
                                               role) {
     /* IDEAL KIT per weapon, per content/style, per comp — mirrors
-       engine.py kit_options (2026-08-20; JS mirror 2026-08-21;
-       DOCTRINE-LED since increment 2, owner 2026-08-25 "yes its the
-       whole build"): ranked gear options per slot. No party ->
+       engine.py kit_options (DOCTRINE-LED: the kit is the whole build):
+       ranked gear options per slot. No party ->
        context-free weighted-delta value with the DOCTRINE TIER first;
        with `party` -> comp-aware exact fitness delta outranks tier
        membership (doctrine stays annotation + tie-break). `role`:
@@ -1410,7 +1408,7 @@
        explicit diagnostic escape (ungated pool), a seat id uses that
        seat. With a seat the CHEST pool hard-gates to the uniform
        classes; options carry doctrine/carries/passive.
-       FAIL-CLOSED GENERATION (owner ruling 2026-09-01, mirrors
+       FAIL-CLOSED GENERATION (mirrors
        engine.py): the suggestion channel only speaks evidence — no
        seat -> empty kit/options (`seat: null` says why); a seated
        slot with no doctrine tier stays unset, never catalog-filled.
@@ -1423,18 +1421,18 @@
       return { kit: {}, options: {}, seat: null };
     var seatRec = this.rolesBook[seat] || {};
     /* book uniform widened by THIS weapon's observed majority class
-       (kit_weapon_uniform, 2026-09-03) -- mirrors engine.py */
+       (kit_weapon_uniform) -- mirrors engine.py */
     var uniform = this._chestUniform(seat, weapon);
     var seatClass = seatRec["class"] || null;
     seatRec = this._seatKit(seatRec);   /* the size band's doctrine */
     var doctrine = seatRec.kit || {};
-    /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
+    /* Per-weapon doctrine tier: this weapon's
        own observed items (effect carriers excluded at the build) outrank
        the seat aggregate; `doctrine` is "weapon" / "seat" / false and
        weapon-tier options carry doctrine_n = [count, slot total].
        Mirrors engine.py. */
     var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
-    /* observed-build archetype (2026-09-01, mirrors engine.py): the KIT
+    /* observed-build archetype (mirrors engine.py): the KIT
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
@@ -1446,7 +1444,7 @@
       for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
       for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
       /* which archetype slots came from the declared style's cell
-         (2026-09-08, mirrors engine.py): the option carries observed_style */
+         (kit_styles; mirrors engine.py): the option carries observed_style */
       var styledArch = seatRec._style_arch || { weapons: [], seat: false };
       for (aslot in arch) {
         if ((wbArch[aslot] && styledArch.weapons.indexOf(weapon) >= 0)
@@ -1468,10 +1466,9 @@
       });
       if (gated.length) bySlot.armor = gated;
     }
-    /* Style-fit gear gate (identity Phase C, owner 2026-08-23): under a
-       DECLARED brawl, cloth never gets SUGGESTED for a non-healer —
-       mirrors engine.py (drift closed 2026-08-25: the JS port had
-       skipped this gate). */
+    /* Style-fit gear gate: under a DECLARED brawl, cloth never gets
+       SUGGESTED for a non-healer — mirrors engine.py (a closed drift: the
+       JS port had skipped this gate). */
     if ((this.style === "brawl" || this.style === "brawl_clap")
         && this.roleOf(weapon) !== "healer") {
       var unclothed = (bySlot.armor || []).filter(function (g) {
@@ -1498,7 +1495,7 @@
         if (wp[wi].length > 2) wpeople[wp[wi][0]] = wp[wi][2];
       }
       if (role !== null) {
-        /* fail-closed generation (ruling 2026-09-01): only doctrine
+        /* fail-closed generation: only doctrine
            tiers may be suggested; an evidence-less slot stays unset */
         keys = keys.filter(function (g) {
           return Object.prototype.hasOwnProperty.call(wslot, g)
@@ -1543,8 +1540,8 @@
                       carries: (this.itemEffects[k] || []).slice(),
                       passive: passive, why: why });
       }
-      /* DOCTRINE-TIER-FIRST in both modes (owner ruling 2026-08-27,
-         evidence-first): the observed tier bounds the suggestion;
+      /* DOCTRINE-TIER-FIRST in both modes (evidence-first): the observed
+         tier bounds the suggestion;
          context-free ranks by count then value within a tier,
          comp-aware by the exact marginal — mirrors engine.py. */
       var gearCmp = function (a, b) {
@@ -1554,7 +1551,7 @@
         return r.doctrine === "weapon" ? 0 : r.doctrine === "seat" ? 1 : 2;
       };
       var wCount = function (r) { return wslot[r.gear] || 0; };
-      /* EVIDENCE-FIRST (2026-09-03, mirrors engine.py): count leads the
+      /* EVIDENCE-FIRST (the kit audit; mirrors engine.py): count leads the
          weapon tier; comp-aware may reorder only the evidence band (items
          worn >= half as often as the modal one) by the marginal; the seat
          tier keeps the seat pool's count order; value breaks ties. */
@@ -1584,9 +1581,9 @@
       });
       var av = arch[slot];
       /* seat archetype = fallback only where the weapon has no counts
-         (mirrors engine.py, 2026-09-04) */
+         (mirrors engine.py) */
       if (av && (topCount === 0 || (!archSeat[slot] && inBand(av[0])))) {
-        /* the observed build leads the slot (overlay ruling) -- never
+        /* the observed build leads the slot (the overlay rule) -- never
            from outside the evidence band */
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
@@ -1597,7 +1594,7 @@
           }
         }
       }
-      /* SEAT POOLING (2026-09-08, mirrors engine.py): a THIN slot (the
+      /* SEAT POOLING (R34a/b; mirrors engine.py): a THIN slot (the
          weapon's own modal under POOL_MIN_VOTES votes) is dressed from the
          seat's pool — helmet/boots/cape from the seat's builds wearing the
          chest this kit wears (armor is ranked first), potion/food from the
@@ -1606,7 +1603,7 @@
       if (role !== null && POOLED_SLOTS[slot]) {
         /* THIN counts distinct PEOPLE where the row carries them (every
            doctrine floor counts people, R27), votes on a reference-only
-           row -- mirrors engine.py 2026-09-09 */
+           row -- mirrors engine.py */
         var topW = 0, modalW = null, tw;
         for (tw in wslot) {
           if (wslot[tw] > topW || (wslot[tw] === topW && (modalW === null || tw > modalW))) {
@@ -1861,7 +1858,7 @@
                                                haveFloor, gainFloor) {
     /* [coverage delta (incl. headroom), floor-lift delta] — two terms so
        callers accumulate in their original order (mirrors engine.py).
-       Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+       Option C: STRUCTURAL hard floors read the
        weapon+loadout basis — dressed callers pass haveFloor/gainFloor so
        worn gear never buys floor relief; defaults keep the naked path
        bit-identical. */
@@ -1878,7 +1875,7 @@
   /* ---------------------------------------------------------------- fitness */
   CompEngine.prototype.fitness = function (party, combos, gears) {
     var s = this.effectiveSupply(party, combos, gears);
-    /* Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+    /* Option C: STRUCTURAL hard floors read the
        weapon+loadout supply — worn gear improves coverage/headroom/
        overstack but can never satisfy a structural floor (mirrors
        engine.py fitness). Naked parties keep the single-supply path. */
@@ -1902,9 +1899,9 @@
 
   CompEngine.prototype.maxFitness = function (party, combos, gears) {
     /* Supremum of fitness(): full coverage + the headroom band maxed
-       (mirrors engine.py max_fitness, review 2026-08-18). Given a party,
-       OPTIONAL capabilities it fields none of drop out of the supremum
-       (owner ruling 2026-08-28) — a comp is not marked down for skipping a
+       (mirrors engine.py max_fitness). Given a party, OPTIONAL
+       capabilities it fields none of drop out of the supremum — a comp is
+       not marked down for skipping a
        tool that lives on one weapon in the game. No party = the
        every-capability supremum, so legacy callers are unchanged. */
     var t = 0, s = null, cap;
@@ -1962,7 +1959,7 @@
   /* ------------------------------------------------------------- redundancy */
   CompEngine.prototype._dupFree = function (weapon) {
     /* Per-weapon allowances are LARGE-group evidence — size-gated (mirrors
-       engine.py _dup_free, review 2026-08-18). */
+       engine.py _dup_free). */
     var pw = this.dupPerWeapon[weapon];
     if (pw && pw.free !== undefined && this.size >= this.dupPwMinSize) return pw.free;
     return this.dupFreeDefault;
@@ -2060,7 +2057,7 @@
   /* ------------------------------------------------ candidate evaluation */
   CompEngine.prototype.partyState = function (party, combos, gears) {
     /* Everything a candidate marginal needs (mirrors engine.py).
-       Dressed forge 2026-08-27: `s` is the FIT supply (gear-inclusive
+       The dressed forge: `s` is the FIT supply (gear-inclusive
        when gears are given), `sSyn` the weapon-only supply every synergy
        term reads — comp_score's own seams. gears absent keeps both the
        same object (bit-identical to the pre-gears state). */
@@ -2095,9 +2092,9 @@
     }
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
              nsMax: nsMax,
-             /* carrier quota (2026-09-03): what this roster already wears */
+             /* carrier quota: what this roster already wears */
              carriers: this._carrierCounts(party, gears),
-             /* pair-aware prior (2026-09-11): each seat's best observed
+             /* pair-aware prior: each seat's best observed
                 partner so far, so a candidate's exact meta delta can include
                 the raise it hands existing members */
              party: party.slice(),
@@ -2196,7 +2193,7 @@
 
   CompEngine.prototype._pickTail = function (state, weapon, best) {
     /* Combo-independent candidate-score terms (mirrors engine.py
-       _pick_tail). `meta` is the EXACT party-meta delta (2026-09-11): the
+       _pick_tail). `meta` is the EXACT party-meta delta: the
        candidate's blended prior plus the raise it hands each member's
        best-partner term — same seat order as Python, same bits. */
     var party = state.party || [];
@@ -2216,10 +2213,10 @@
   };
 
   CompEngine.prototype.kitVariants = function (weapon) {
-    /* Doctrine kit variants for GENERATION (dressed forge 2026-08-27,
-       mirrors engine.py kit_variants): v0 = the seat's context-free
-       doctrine kit (off-tier slots stay unset), plus ONE divergent
-       single-slot swap (variant cap 2 — perf ruling); [["v0", null]]
+    /* Doctrine kit variants for GENERATION (the dressed forge; mirrors
+       engine.py kit_variants): v0 = the seat's context-free doctrine kit
+       (off-tier slots stay unset), plus ONE divergent single-slot swap
+       (variant cap 2 — a performance bound); [["v0", null]]
        for weapons with no doctrine gear. NO doctrine passives anywhere
        in this path. */
     if (!this.dressCandidates) return [["v0", null]];  /* V3-W switch */
@@ -2271,7 +2268,7 @@
       out = [["v0", null]];
     } else {
       out = [["v0", gl(v0)]];
-      /* carrier quota (2026-09-03, mirrors engine.py): a carrier modal
+      /* carrier quota (mirrors engine.py): a carrier modal
          chest gets the best NON-carrier chest as its one alternative */
       var caps = this.carrierCaps(), chest = v0.armor, carrier = false, ce;
       if (chest) {
@@ -2354,8 +2351,8 @@
 
   CompEngine.prototype._evalPick = function (state, weapon) {
     /* THE candidate score — the exact compScore delta of adding `weapon`
-       with its best loadout AND doctrine-kit variant (dressed forge
-       2026-08-27; mirrors engine.py _eval_pick). Returns
+       with its best loadout AND doctrine-kit variant (the dressed forge;
+       mirrors engine.py _eval_pick). Returns
        {score, dFit, dSyn, meta, combo, variant, vgears}. */
     var best = null;
     var extras = this._comboExtras(weapon);
@@ -2479,7 +2476,7 @@
   };
 
   /* ------------------------------------- negative recs / redundancy lens
-     (roadmap item 3, 2026-08-24 — mirrors engine.py.) A DESCRIPTIVE
+     (mirrors engine.py.) A DESCRIPTIVE
      decomposition of the same exact marginal _evalPick scores — the
      "why not" counterpart of explain(). A scoring-side redundancy penalty
      was investigated and REJECTED (MECHANICS_TODO Q18); nothing here
@@ -2614,7 +2611,7 @@
         score: ps.score,
       });
     }
-    /* Deterministic ranking (mirrors engine.py recommend, 2026-09-08):
+    /* Deterministic ranking (mirrors engine.py recommend):
        score quantized to the parity tolerance first, then weapon id -
        an exact tie must not fall to pool order plus last-bit noise. */
     out = out.sort(function (x, y) {
@@ -2655,7 +2652,7 @@
       var self = this;
       var curPick = this._evalPick(state, cur);
       var curScore = curPick.score;
-      /* redundancy lens (roadmap item 3, mirrors engine.py): the member
+      /* redundancy lens (mirrors engine.py): the member
          valued exactly as a pick into the rest — does it still close any
          gap, or are its jobs already covered without it? Flag only. */
       var curPc = this._pickCaps(state, cur, curPick.combo, curPick.vgears);
@@ -2718,8 +2715,8 @@
   };
 
   /* ----------------------------------------------- interaction analysis
-     (mirrors engine.py duplicate_conflicts / analyze — "new prompt" spec
-     §7/§9). Severity high/warning only on VERIFIED non-stacking records;
+     (mirrors engine.py duplicate_conflicts / analyze). Severity
+     high/warning only on VERIFIED non-stacking records;
      verified full and shared stacks are info; anything the game data does
      not state is 'verify', never an invented penalty. */
   var DAMAGE_CAPS_PROFILE = ["burst_aoe", "burst_st", "sustained_dps", "execute"];
@@ -2781,7 +2778,7 @@
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap);
       var soft = this.softCap(cap);
-      /* saturation band (roadmap item 3, mirrors engine.py analyze):
+      /* saturation band (mirrors engine.py analyze):
          gap below target, headroom to soft cap, overstacked past it */
       var band = have < target ? "gap"
                : have <= soft ? "headroom" : "overstacked";
@@ -2827,20 +2824,20 @@
   };
 
   /* Identity thresholds (descriptive layer, F-V3-2) — mirrors engine.py
-     comp_identity, thresholds calibrated 2026-08-23 against every
-     style-declared comp on file (see VALIDATION.md, V3 round 1). */
+     comp_identity, thresholds calibrated against every style-declared
+     comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
       IDENTITY_BC_AOE = 0.45,
       IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, blind round 2 */
-      IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members (2026-09-04) */
+      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, validation round 2 */
+      IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members */
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
       IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
-  /* SEAT POOLING (2026-09-08, mirrors engine.py POOL_MIN_VOTES /
+  /* SEAT POOLING (R34a/b; mirrors engine.py POOL_MIN_VOTES /
      POOLED_SLOTS / CHEST_POOLED_SLOTS): a thin weapon slot is dressed from
      the seat's pool (same-chest for helmet/boots/cape, plain for
      potion/food) when the pool item has 5+ players */
@@ -2893,8 +2890,8 @@
   };
   CompEngine.prototype.compIdentity = function (party, combos, gears) {
     /* What this comp is BECOMING, in playstyle vocabulary — v2: built up
-       from MEMBER identities (weapon style_fit: E-first delivery + owner
-       overrides). DESCRIPTIVE ONLY: nothing here feeds fitness,
+       from MEMBER identities (weapon style_fit: E-first delivery +
+       style_overrides.yaml). DESCRIPTIVE ONLY: nothing here feeds fitness,
        recommendation order, or the forge (mirrors engine.py
        comp_identity). */
     var n = party.length;
@@ -2914,7 +2911,7 @@
         dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
       var sf0 = this._styleFitOf(w) || {};
       /* clap half: a ramp-dependent bomb counts as sustained; standoff
-         E = kite tool (owner 2026-09-04, mirrors engine.py) */
+         E = kite tool (mirrors engine.py) */
       if (sf0.conditional_payload) sus += caps.burst_aoe || 0;
       else {
         aoe += caps.burst_aoe || 0;
@@ -2946,15 +2943,15 @@
       carrierCount[w] = (carrierCount[w] || 0) + 1;
       nCarrierMembers += 1;
     }
-    /* flex bombs join the rigid core (owner, blind rounds 1+2 2026-09-04;
-       mirrors engine.py comp_identity) */
+    /* flex bombs join the rigid core (validation rounds 1 and 2; mirrors
+       engine.py comp_identity) */
     var rigidMelee = 0.0, rigidRanged = 0.0, pi;
     for (pi = 0; pi < pending.length; pi++) {
       if (pending[pi][3] === "melee") rigidMelee += pending[pi][2];
       else if (pending[pi][3] === "ranged") rigidRanged += pending[pi][2];
     }
     /* a flex bomb goes home to melee only when the rigid core is CLEARLY
-       melee (blind round 3; mirrors engine.py) */
+       melee (validation round 3; mirrors engine.py) */
     var flexSide = (rigidMelee >= IDENTITY_FLEX_HOME * Math.max(rigidRanged, 1e-9)
                     && rigidRanged < rigidMelee) ? "melee" : "ranged";
     for (pi = 0; pi < pending.length; pi++) {
@@ -2975,7 +2972,8 @@
     var kiteMin = Math.max(2, perTen);
     var kiteHalf = kiteTools >= kiteMin;                 /* hybrid: tools at scale */
     /* a lone standoff body below the hybrid floor only makes a kite of a
-       comp that is not bombing (blind round 3, roster 4; mirrors engine.py) */
+       comp that is not bombing (validation round 3, roster 4; mirrors
+       engine.py) */
     var kiteAny = kiteTools >= kiteMin ||
                   (kiteTools >= Math.max(1, perTen) && mode.aoe < IDENTITY_LONE_TOOL_AOE);
     var bcBomb = aoe ? meleeBomb / aoe : 0.0;
@@ -2996,7 +2994,7 @@
       out.label = "still forming";
     } else if (mel >= IDENTITY_MELEE_CORE) {
       if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
-        /* the ball itself carries the bomb (round 2 roster 11) */
+        /* the ball itself carries the bomb (validation round 2, roster 11) */
         out.style = "brawl_clap";
         out.strength = "leaning";
         out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
@@ -3006,13 +3004,13 @@
         out.label = sname("brawl", "Brawl") + " — melee ball";
       }
     } else if (mel <= IDENTITY_RANGED_CORE) {
-      /* a ranged core with no standoff tools must commit: clap (owner
-         2026-09-04, mirrors engine.py) */
+      /* a ranged core with no standoff tools must commit: clap (mirrors
+         engine.py) */
       clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
-      /* Bomb-squad archetype + clap-kite hybrid (owner, blind label
-         rounds 2026-08-23) — mirrors engine.py comp_identity. */
+      /* Bomb-squad archetype + clap-kite hybrid (V3 round 1) — mirrors
+         engine.py comp_identity. */
       var topCarrier = 0;
       for (var tc in carrierCount) {
         if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
@@ -3031,7 +3029,7 @@
       }
     } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
       /* mid band with standoff tools: kite half outranks the posture
-         tiebreak (mirrors engine.py, blind round 1 roster 7) */
+         tiebreak (mirrors engine.py, validation round 1 roster 7) */
       out.style = "clap_kite";
       out.strength = "leaning";
       out.label = sname("clap_kite", "Clap-Kite") +
@@ -3041,7 +3039,7 @@
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
     } else if (mode.aoe >= IDENTITY_HYBRID_AOE) {
-      /* the bomb's delivery names the mid band (blind round 3, roster 8;
+      /* the bomb's delivery names the mid band (validation round 3, roster 8;
          mirrors engine.py) */
       out.style = "clap";
       out.strength = "leaning";
@@ -3054,7 +3052,7 @@
         ? "melee" : "ranged";
       var majority = minority === "melee" ? "ranged" : "melee";
       /* flex and utility-carrier weapons never anchor a damage-identity
-         split (mirrors engine.py — blind-label ruling 2026-08-23). */
+         split (mirrors engine.py — V3 round 1). */
       var rigid = [];
       for (var ri = 0; ri < carriers[minority].length; ri++) {
         var rw = carriers[minority][ri];
@@ -3092,7 +3090,7 @@
                   "core — commit to one side or cover the seam",
           });
         }
-        /* the kits decide a split (owner 2026-09-04; mirrors engine.py) */
+        /* the kits decide a split (mirrors engine.py) */
         var kit = this._kitLean(party, gears);
         if (kit === "brawl") {
           out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
@@ -3112,8 +3110,8 @@
         }
       }
     }
-    /* leather dps are a brawl whatever the weapons say (owner 2026-09-05;
-       the bomb-squad archetype is the exception) -- mirrors engine.py */
+    /* leather dps are a brawl whatever the weapons say (the bomb-squad
+       archetype is the exception) -- mirrors engine.py */
     if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "brawl") {
       out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
       out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: brawl chests, bombs or not)";
@@ -3166,7 +3164,7 @@
         var c = caps[i];
         if (!(c in self.reqs)) continue;
         used.push(c);
-        /* the bar is the BARE MINIMUM (owner 2026-09-10; mirrors
+        /* the bar is the BARE MINIMUM (target is the median; mirrors
            engine.py kill_pressure): "enough to kill" is a minimum question */
         bar += self.targetMin(c);
         have += s[c] || 0.0;
@@ -3184,7 +3182,7 @@
     return out;
   };
 
-  /* verdicts read the board's stages (owner 2026-09-10; mirrors
+  /* verdicts read the board's stages (target is the median; mirrors
        engine.py fight_chain): weak under the bare minimum (targetMin),
        ok up to the typical winner (target), strong at/above it */
 
@@ -3197,7 +3195,7 @@
     var chain = style && styles[style] ? styles[style].chain : null;
     if (!chain) return null;
     var s = this.effectiveSupply(party, combos, gears);
-    /* spell-level sources (2026-08-24, mirrors engine.py): which equipped
+    /* spell-level sources (mirrors engine.py): which equipped
        buttons ARE each stage — resolved loadouts attributed back to the
        slot/spell carrying each stage capability; spell null = the weapon's
        always-on kit. Units are per-member, before the party-level
@@ -3281,7 +3279,7 @@
       /* only claim the connection when that stage holds a real share of
          the pick's explained value (mirrors the 0.3 rule) */
       if (bestStage !== null && total > 0 && bestGain >= 0.3 * total) {
-        /* name the terms behind the claim (2026-08-24, mirrors engine.py):
+        /* name the terms behind the claim (mirrors engine.py):
            a stage can win on SUMMED caps none of which is the pick's
            single top term */
         var impTerms = [];
@@ -3300,7 +3298,7 @@
                                           gears) {
     /* Steepest-descent 1-opt over compScore, UNCONSTRAINED (mirrors
        engine.py refine; the forge runs its own constraint-aware pass).
-       gears (owner ruling 2026-08-27): with a parallel kit list the
+       gears (the dressed forge): with a parallel kit list the
        search optimizes the SAME dressed compScore used everywhere else
        — incumbent kits preserved, replacements tried in each doctrine
        kit variant, result {party, gears}. gears null keeps the legacy
@@ -3309,7 +3307,7 @@
     fixed = fixed || 0;
     var candidates;
     /* empty array falls back to the full pool like Python's `pool or
-       self.pool` — [] is truthy in JS (review 2026-08-18) */
+       self.pool` — [] is truthy in JS */
     if (pool && pool.length) { candidates = pool.slice(); }
     else { candidates = this.pool.slice(); }
     if (maxPasses === undefined || maxPasses === null) maxPasses = 8;
@@ -3391,8 +3389,8 @@
     var pk, seatMax = {};
     for (pk in this._profileMin) predMin[pk] = this._profileMin[pk];
     for (pk in this._profileMax) seatMax[pk] = this._profileMax[pk];
-    /* Capacity gates per predicate minimum (deadlock guard, 2026-08-27;
-       mirrors engine.py _forge_ctx): the [role, seat] pairs of every pool
+    /* Capacity gates per predicate minimum (the deadlock guard; mirrors
+       engine.py _forge_ctx): the [role, seat] pairs of every pool
        weapon that could satisfy the predicate — _forgeFeasible refuses a
        pick that would strand an unmet minimum behind full bands. */
     var predGates = {}, predSat = {};
@@ -3414,8 +3412,8 @@
       predGates[pn2] = gates;
       predSat[pn2] = sats;
     }
-    /* the ROLES a predicate's satisfiers span (2026-09-10; mirrors
-       engine.py): the admissible minimum-need bound nests a single-role
+    /* the ROLES a predicate's satisfiers span (mirrors engine.py): the
+       admissible minimum-need bound nests a single-role
        predicate in its role family */
     var predRoles = {};
     for (var pr in predGates) {
@@ -3425,7 +3423,7 @@
       }
       predRoles[pr] = { roles: rset, n: rn };
     }
-    /* SEAT SKELETON (2026-09-15; mirrors engine.py _forge_ctx): each seat's
+    /* SEAT SKELETON (mirrors engine.py _forge_ctx): each seat's
        typical clipped to what the pool can generate for it, the seats of
        the pool's weapons per role (the set spill inspects) and the seats
        that can satisfy each predicate minimum. */
@@ -3458,8 +3456,7 @@
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
     /* [weapon counts, role counts, predicate counts, group counts].
-       Predicate counts are COMBO-AWARE (mirrors engine.py _forge_counts,
-       review 2026-08-19). */
+       Predicate counts are COMBO-AWARE (mirrors engine.py _forge_counts). */
     var counts = {}, roles = {}, preds = {}, groups = {};
     for (var i = 0; i < party.length; i++) {
       var w = party[i];
@@ -3470,8 +3467,8 @@
       for (var pn in contrib) preds[pn] = (preds[pn] || 0) + 1;
       var pmC = this._profileMembers[w];
       if (pmC) for (var pk2 in pmC) preds[pk2] = (preds[pk2] || 0) + 1;
-      /* primary-seat tally for the seat skeleton (2026-09-15), under its
-         own namespace (mirrors engine.py _forge_counts) */
+      /* primary-seat tally for the seat skeleton, under its own namespace
+         (mirrors engine.py _forge_counts) */
       var seatK = this.seatOf(w);
       if (seatK !== null) preds["seat:" + seatK] = (preds["seat:" + seatK] || 0) + 1;
       var gs = this.groupsOf[w] || [];
@@ -3482,7 +3479,7 @@
 
   CompEngine.prototype._forgeMinNeed = function (ctx, roles, preds, w, predContrib) {
     /* Bodies still required for unmet minima after adding `w` - the
-       ADMISSIBLE bound (2026-09-10; mirrors engine.py _forge_min_need):
+       ADMISSIBLE bound (F28; mirrors engine.py _forge_min_need):
        per role band the largest of the unmet band minimum, the unmet
        SEAT minima nested in it and any single-role non-seat predicate;
        a cross-role predicate adds only what those counted bodies cannot
@@ -3521,8 +3518,8 @@
     }
     /* A cross-role predicate is discounted only against bodies that COULD
        carry it. A body committed to a nested SEAT minimum no satisfier of
-       the predicate can fill is proof of a SECOND body (F29, 2026-09-10;
-       mirrors engine.py): territory_defense needs one more stopper tank
+       the predicate can fill is proof of a SECOND body (F29; mirrors
+       engine.py): territory_defense needs one more stopper tank
        and one more ranged-AoE body, and no stopper delivers ranged AoE,
        so the whole-role discount read 1 where two are required and the
        roster died one short. Admissible means never MORE than a legal
@@ -3631,10 +3628,10 @@
 
   CompEngine.prototype._typOk = function (ctx, roles, preds, w, contrib) {
     /* May `w` join a roster whose role counts are `roles`, given the
-       TYPICAL count of its role (owner ruling 2026-09-11; mirrors
-       engine.py _typ_ok)? A body beyond the typical count is generated
-       only when a minimum only that role can meet still demands it.
-       SEAT branch (owner 2026-09-15): once the role allows the body its
+       TYPICAL count of its role (F31; mirrors engine.py _typ_ok)? A body
+       beyond the typical count is generated only when a minimum only
+       that role can meet still demands it.
+       SEAT branch (the seat skeleton): once the role allows the body its
        PRIMARY SEAT must too - a seat at its typical admits another body
        only when an unmet minimum this pick meets could not be met by an
        under-typical seat of the role (minima win, cross-role ones
@@ -3704,7 +3701,7 @@
     if (!this._typOk(ctx, roles, preds, w, contrib)) return false;
     if (this._forgeMinNeed(ctx, roles, preds, w, contrib) > slotsLeftAfter)
       return false;
-    /* Deadlock guard (2026-08-27; mirrors engine.py): after this pick,
+    /* Deadlock guard (mirrors engine.py): after this pick,
        every UNMET predicate minimum must keep a satisfier whose role band
        AND fine seat still have capacity — else the pick strands the
        minimum and the beam dies short. */
@@ -3719,7 +3716,7 @@
         var mx2 = ctx.roleMax[r2];
         if (mx2 !== undefined &&
             (roles[r2] || 0) + (r2 === r ? 1 : 0) >= mx2) continue;
-        /* typical (2026-09-11): the gate is open past the typical count
+        /* typical (F31): the gate is open past the typical count
            only for a predicate this role alone satisfies */
         var ty2 = ctx.roleTyp[r2];
         var n2 = (roles[r2] || 0) + (r2 === r ? 1 : 0);
@@ -3758,7 +3755,7 @@
                                       contribI);
         if (need > slotsLeftAfter) continue;
         /* a body beyond its role's typical count must ACTUALLY carry the
-           demanding predicate on this combo (2026-09-11) */
+           demanding predicate on this combo (F31) */
         if (!this._typOk(ctx, beam.roles, beam.preds, w, contribI)) continue;
       }
       for (var vi = 0; vi < variants.length; vi++) {
@@ -3781,7 +3778,7 @@
 
   CompEngine.prototype._memberTag = function (w, combo, vkey) {
     /* Canonical member key for beam dedup — the kit-variant id is part
-       of the identity (dressed forge 2026-08-27; mirrors engine.py). */
+       of the identity (the dressed forge; mirrors engine.py). */
     return w + "#" + (combo === null || combo === undefined ? "d" : String(combo))
              + "#" + (vkey === undefined || vkey === null ? "-" : vkey);
   };
@@ -3812,7 +3809,7 @@
     /* Deterministic constrained beam search over complete rosters + 1-opt
        and bounded 2-opt refinement + filler audit (mirrors engine.py forge
        — see its docstring for the contract; returns {party, combos, score,
-       feasible, filler, held, locked, exhausted}). `avoid` (2026-09-11):
+       feasible, filler, held, locked, exhausted}). `avoid`:
        rosters already shown — the best roster NOT among them comes back;
        `exhausted` when every reachable completion was shown. */
     locked = (locked || []).slice();
@@ -3821,8 +3818,8 @@
       avoidKeys[CompEngine.rosterKey(avoid[ai])] = true; hasAvoid = true;
     }
     /* normalize lockedCombos to EXACTLY locked.length: missing/short/empty
-       pads with null, extras drop — mirrors engine.py (review 2026-08-18;
-       an empty array used to mis-pair combos with members here). */
+       pads with null, extras drop — mirrors engine.py (an empty array
+       mis-paired combos with members here). */
     var lc = lockedCombos || [];
     var combos = [];
     for (var ci = 0; ci < locked.length; ci++)
@@ -3834,7 +3831,7 @@
     var exhausted = false;
 
     var fc = this._forgeCounts(locked, combos);
-    /* lockedGears (owner ruling 2026-08-27): a locked member supplied
+    /* lockedGears: a locked member supplied
        with explicit gear is scored in EXACTLY that kit and never
        re-dressed; one without stays naked — the forge never invents gear
        for a lock (mirrors engine.py; normalized like lockedCombos). */
@@ -3872,7 +3869,7 @@
          order — deterministic in both engines. The canonical multiset key
          is computed LAZILY, only for candidates actually considered for
          the beam (mirrors engine.py). */
-      /* QUANTIZED score (2026-09-10; mirrors engine.py): a last-bit
+      /* QUANTIZED score (mirrors engine.py): a last-bit
          difference must not order the ports differently */
       expansions.sort(function (a, b) { return qrank(b[0]) - qrank(a[0]); });
       var nextBeams = [], seen = {};
@@ -4012,7 +4009,7 @@
       var w = candPool[pi];
       if (w === party[index]) continue;
       if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
-      if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill (2026-09-15) */
+      if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill */
       var pick = this._forgeEvalPick(ctx, beam, w, 0);
       if (pick === null) continue;
       out.push({ weapon: w, display_name: this.weapons[w].display_name,
@@ -4029,7 +4026,7 @@
 
   CompEngine.prototype._seatMixOk = function (ctx, party) {
     /* The seat-skeleton invariant on a WHOLE roster (mirrors engine.py
-       _seat_mix_ok, 2026-09-15): in every role, a seat past its typical
+       _seat_mix_ok): in every role, a seat past its typical
        while another seat of the role stands under its typical is carried
        only by bodies that satisfy a predicate minimum none of the
        under-typical seats could meet. Refinement and replaceOptions check
@@ -4085,7 +4082,7 @@
     var p0 = this._profilePrimary[w];
     if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
         (preds[p0] || 0) + 1 > ctx.seatMax[p0]) return false;
-    /* typical (2026-09-11), optimistic like the prune: the exact
+    /* typical (F31), optimistic like the prune: the exact
        per-combo check rides _forgeEvalPick */
     return this._typOk(ctx, roles, preds, w,
                        this._withProfile(w, this._predPossible(w)));
@@ -4097,7 +4094,7 @@
     /* Steepest-descent 1-opt over generated slots, constraint-aware:
        minima are checked against the REST roster's combo-aware counts, so
        a swap can never trade away the spells a minimum was counting on
-       (mirrors engine.py _refine_constrained, review 2026-08-19). */
+       (mirrors engine.py _refine_constrained). */
     party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (maxPasses === undefined) maxPasses = 8;
     var best = this.compScore(party, combos, gears);
@@ -4114,12 +4111,12 @@
         var beam = { state: state, roles: fcr[1], preds: fcr[2] };
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
-          /* w === party[i] deliberately NOT skipped (dressed forge
-             2026-08-27, mirrors engine.py): re-resolving the SAME
+          /* w === party[i] deliberately NOT skipped (the dressed forge;
+             mirrors engine.py): re-resolving the SAME
              weapon's combo+kit can be the best move — identical picks
              price d == 0 and are never taken. */
           if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
-          if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill (2026-09-15) */
+          if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill */
           var pick = this._forgeEvalPick(ctx, beam, w, 0);
           if (pick === null) continue;
           var d = pick.score - contrib;
@@ -4143,7 +4140,7 @@
                                            fixed, worstK, candM, avoid) {
     /* Bounded 2-opt over the weakest generated slots (mirrors engine.py
        _two_opt). An accepted pair-move reorders the roster, so the pass
-       restarts with freshly computed weakest slots (review 2026-08-18). */
+       restarts with freshly computed weakest slots. */
     party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (worstK === undefined) worstK = 4;
     if (candM === undefined) candM = 12;
@@ -4233,7 +4230,7 @@
                 var hasTyp = false;
                 for (var tk in ctx.roleTyp) { hasTyp = true; break; }
                 if (hasTyp || ctx.seatGate) {
-                  /* typical (2026-09-11; mirrors engine.py): the pair
+                  /* typical (F31; mirrors engine.py): the pair
                      joins the rest one body at a time, each on its exact
                      combo - the same incremental read the beam makes */
                   var fc0 = this._forgeCounts(rest, restC);

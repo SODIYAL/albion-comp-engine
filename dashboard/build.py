@@ -29,8 +29,8 @@ DASH = HERE
 PIPE = os.path.join(ROOT, "pipeline")               # data artifacts live there
 DATASET = os.path.join(PIPE, "out", "dataset-latest.json")
 
-# Role/effect glyphs drawn for the dashboard: flat geometric SVGs (2026-08-21
-# neon reskin; the retired painterly *-96.png renders remain beside them).
+# Role/effect glyphs drawn for the dashboard: flat geometric SVGs (the neon
+# reskin; the retired painterly *-96.png renders remain beside them).
 # The builder embeds them as data URIs so the generated page keeps its
 # file:// / strict-artifact-host guarantee; SVG stays crisp at every chip size.
 SEMANTIC_ICON_FILES = {
@@ -44,7 +44,7 @@ SEMANTIC_ICON_FILES = {
     "aoe": "aoe.svg",
     "st": "st.svg",
     "dps": "dps.svg",
-    # effect glyphs (2026-08-22): the caps CAP_ICON previously dropped to
+    # effect glyphs: the caps CAP_ICON previously dropped to
     # text chips; same flat style, hues stay in the established families
     # (cyan movement, blue defense, violet enemy-manipulation, green heal,
     # pink damage/health)
@@ -100,7 +100,7 @@ def main():
         data = json.load(f)
     with open(os.path.join(DASH, "_shell.html"), encoding="utf-8") as f:
         shell = f.read()
-    # Decision-first UX is part of the REAL dashboard build on this branch,
+    # Decision-first UX is part of the dashboard build,
     # not a preview page. It is deliberately a translation layer: scoring
     # remains entirely inside app_scoring.js / CompEngine.
     with open(os.path.join(DASH, "_decision_layer.css"), encoding="utf-8") as f:
@@ -205,7 +205,7 @@ def main():
     # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
     # shoes, cape, offhand, potion, food. This is the full PICKER catalogue;
     # it is distinct from dataset["gear"], the CURATED capability sheet
-    # (sheets/gear/core.yaml, 2026-08-20 full-build layer) that build_extra
+    # (sheets/gear/core.yaml, the full-build layer) that build_extra
     # scores. Picker items outside the curated sheet contribute no
     # capabilities yet — they render, equip, and carry stats only.
     gear_path = os.path.join(PIPE, "out", "gear_lines.json")
@@ -219,7 +219,7 @@ def main():
     # render -> neutral empty tile, so an artless entry degrades gracefully
     # instead of silently vanishing from the picker.
     gear = gear_all
-    # Tile names (2026-09-03, "Novice's Soldier Boots"): gear_lines names a
+    # Tile names: gear_lines names a
     # line by its lowest-tier example item, so a T2-first line wore a
     # "Novice's" prefix beside "Adept's" everywhere else. The curated
     # catalog's tier-free display_name wins where the key is curated;
@@ -283,8 +283,8 @@ def main():
                            for w in (fam.get("anchor") or []))]
                 for b, fams in fam_doc["buckets"].items()}
 
-    # Observed effect quotas (increment 3b, owner-ruled 2026-08-26 "yes —
-    # advise quotas"): per typed gear effect, the carriers near-complete
+    # Observed effect quotas (advice only, never a score; R18): per typed
+    # gear effect, the carriers near-complete
     # observed rosters field per 20 (roles_report effect_quotas — the
     # reference-build evidence layer). typical = median across rosters
     # that field it at all; fielded = share of rosters with >= 1.

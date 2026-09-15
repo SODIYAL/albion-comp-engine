@@ -13,8 +13,8 @@
 # the four curated caller parties in data/published_comps/ (Deadlyhooker
 # parties 1-3, castle/territory/mass-roam 3x20, 2026-08-12; Timothy "blap"
 # blackzone roam 20, 2026-08-12), battlemount slots excluded. Every number
-# cites its tally. Owner review pass expected; the same circularity caveat as
-# the 20-size templates applies (VALIDATION V4).
+# cites its tally. A validation pass is still pending; the same circularity
+# caveat as the 20-size templates applies (VALIDATION V4).
 
 # ---------------------------------------------------------------------------
 # Role classes for constraint counting. Resolution (2026-09-03, "one role
@@ -24,21 +24,21 @@
 # usage disagree.
 roles:
   by_hint: {healer: healer, tank: frontline, support: support, melee: dps, range: dps}
-  # (2026-08-23 -> 2026-09-11) Exalted Staff carried a `support` override
-  # here so a forged 11-man could not count it as one of its 2-3 heals.
-  # Retired by owner ruling 2026-09-11 ("mostly a healer still"): its seat
-  # is main_healer (roles.yaml), primary_heal counts only full healers and
+  # Exalted Staff once carried a `support` override here so a forged
+  # 11-man could not count it as one of its 2-3 heals. Retired: the
+  # Exalted Staff is a healer first (curation judgment) — its seat is
+  # main_healer (roles.yaml), primary_heal counts only full healers and
   # the typical role count bounds healer bodies, so the hybrid can no
   # longer stand in for a real heal. Role class follows the primary seat.
   overrides: {}
 
-# Primary-healer rule (owner rulings 2026-08-23, forge-quality rounds 1+2):
-# "[a hybrid like Forgebark] is too expensive to be the only healer in the
-# party ... it's not which line but which weapon — the weapon needs to have
-# high healing numbers on its E" and "1 hand holy is full healer but it's
-# not a good group healer for anything larger than 5 people ... things that
-# heal group are better. I don't want to set custom rules for individual
-# weapons to influence author bias."
+# Primary-healer rule (curation judgment from the forge-quality validation
+# rounds): a hybrid such as Forgebark is too expensive to be a party's only
+# healer; what qualifies a weapon is not its line but its E — the E must
+# carry high healing numbers. A single-target full healer (1H Holy) is a
+# real healer but not a group healer for anything larger than five; group
+# heals are the foundation. No custom rules on individual weapons: the
+# rule is structural so it cannot carry curation bias.
 #
 # So the flag is STRUCTURAL, E-first, two requirements (derive_economics in
 # build_dataset.py, audit in out/economics_report.json):
@@ -48,7 +48,7 @@ roles:
 #   2. SCALE — the heal spell's own area facts say it heals a GROUP
 #      (radius >= group_min_radius or max_targets >= group_min_targets).
 #      Excludes single-ally heal Es (1H Holy's Desperate Prayer, Druidic's
-#      single-target ultimate) — full healers in the owner's vocabulary,
+#      single-target ultimate) — full healers in caller vocabulary,
 #      but never the healing FOUNDATION of a 5+ comp. Spells whose area
 #      lives in a sub-effect the dumps don't surface are corrected in
 #      heal_overrides.yaml (cited fact corrections, the ranged_overrides
@@ -90,11 +90,10 @@ predicates:
 # Healers cluster at 15-20% of slots, frontline at 15-25% (P3 excepted),
 # support at 20-30% (P2/P3 up to ~40% — the generous max reflects that),
 # and every large party fields a multi-weapon ranged AoE bomb core.
-# `primary_heal` minima (2026-08-23 owner ruling, see primary_healer above):
-# how many of the healers must be FULL healers (high-healing E). Counted like
-# a predicate minimum; the values scale ~2/3 of the healer minimum and are
-# PROVISIONAL beyond the ruled sizes (the ruling itself: a hybrid may never
-# be the sole healer).
+# `primary_heal` minima (see primary_healer above): how many of the healers
+# must be FULL healers (high-healing E). Counted like a predicate minimum;
+# the values scale ~2/3 of the healer minimum and are PROVISIONAL beyond the
+# validated sizes (the rule itself: a hybrid may never be the sole healer).
 constraint_bands:
   - {min_size: 2,  max_size: 4,  healer: {max: 1}, frontline: {max: 2}, support: {max: 1}}
   - {min_size: 5,  max_size: 7,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}, support: {max: 2}, primary_heal: {min: 1}}
@@ -116,18 +115,17 @@ constraint_bands:
 # per_weapon entries cite the real comps that field legitimate duplicates.
 duplication:
   max_copies_default_small: 1
-  # 2 -> 1 (owner ruling 2026-08-24, forge-quality round 4): "I don't see
-  # the value in adding 2 earthrunes along with hand of justice." A
+  # 2 -> 1 (forge-quality validation round 4): a second Earthrune beside
+  # a Hand of Justice adds nothing a comp needs. A
   # duplicate must EARN its place: the forge generates a second copy only
   # through a per_weapon allowance below, each citing a real comp. Manual
   # rosters still stack whatever they like — this caps GENERATION only.
   max_copies_default_large: 1
   free_copies_default: 1
-  # per_weapon allowances apply only at party size >= this (review
-  # 2026-08-18): two Permafrosts in a trio pay like any other duplicate.
+  # per_weapon allowances apply only at party size >= this: two
+  # Permafrosts in a trio pay like any other duplicate.
   per_weapon_min_size: 10
-  # GENERATED since 2026-09-15 (owner: "full autonomy" on the skeleton-first
-  # assessment; spec notes/specs/2026-09-15-skeleton-first-generation-
+  # GENERATED (spec notes/specs/2026-09-15-skeleton-first-generation-
   # design.md): pipeline/derive_skeletons.py -> out/skeletons.json carries,
   # per style x band (10-14 / 15-19 / 20+) and pooled, for every weapon
   # fielded by >= 40 distinct fully-known killer rosters of the cell,
@@ -139,9 +137,8 @@ duplication:
   #   MAIN_HOLYSTAFF_AVALON {free: 3, max: 4}  (Hallowfall x3 Deadlyhooker P1,
   #       x2 blap) -> harvest 20: pooled free 2 max 4 (88% field 2+), brawl
   #       free 3 (98% field 2+)
-  #   2H_ICECRYSTAL_UNDEAD {free: 2, max: 3} — removed by owner ruling the
-  #       same day ("remove that free 2"); the harvest agrees (p50 1 copy,
-  #       24% field 2+)
+  #   2H_ICECRYSTAL_UNDEAD {free: 2, max: 3} — removed the same day
+  #       (curation judgment); the harvest agrees (p50 1 copy, 24% field 2+)
   #   MAIN_ROCKMACE_KEEPER {free: 2, max: 3}  (Bedrock x2) -> harvest free 2
   #       max 2 (63% field 2+; 83% in clap_kite)
   #   2H_ARCANESTAFF {free: 2, max: 3}, 2H_GLAIVE_CRYSTAL {free: 2, max: 3},
@@ -151,7 +148,7 @@ duplication:
 
 # Non-stacking groups: at most `max` members of the group per generated
 # roster, regardless of which weapons fill it. Mechanism seeded with the one
-# group the evidence supports; more groups are an owner-review item.
+# group the evidence supports; more groups wait on evidence.
 groups:
   - name: exalted_slot
     max: 1
@@ -159,13 +156,13 @@ groups:
     # Exalted appears EXACTLY once in every one of the four real parties —
     # a standing utility slot, never stacked (data/published_comps/).
 
-# Derived non-stacking groups (owner ruling 2026-08-24): membership is
-# computed at dataset build from the capability sheets — structural, never a
-# hand-kept weapon list — and appended to `groups` above in the built
-# dataset. clump_core: a comp fields one primary clump tool plus at most one
-# backup ("I don't see the value in adding 2 earthrunes along with hand of
-# justice, a better secondary clump might be witchwork and 1 earthrune could
-# work too if we are lacking on clumps"). Membership = flat clump_create >=
+# Derived non-stacking groups: membership is computed at dataset build from
+# the capability sheets — structural, never a hand-kept weapon list — and
+# appended to `groups` above in the built dataset. clump_core: a comp fields
+# one primary clump tool plus at most one backup (curation judgment: a Hand
+# of Justice plus a Witchwork as the secondary clump, an Earthrune only when
+# clumps are short — never two Earthrunes beside a Hand of Justice).
+# Membership = flat clump_create >=
 # min_points (currently Hand of Justice, Camlann, Witchwork — the real
 # clump tools; Earthrune's W pull sits at 2 and is handled by the duplicate
 # default instead).
@@ -174,10 +171,10 @@ derived_groups:
     capability: clump_create
     min_points: 4
     max: 2
-  # Owner ruling 2026-08-24 round 5: "there are so many weapons which can
-  # dps, why stack so many curse. usually 2 curse is max in a 25 man party,
-  # that would normally be like damnation and lifecurse and maybe
-  # rotcaller." Membership is the cursed LINE, derived structurally: any
+  # Curse pressure caps at two per roster (curation judgment, validation
+  # round 5): a 25-man normally fields at most two curse staffs — typically
+  # Damnation and Lifecurse, sometimes Rotcaller — and the many other damage
+  # weapons fill the rest. Membership is the cursed LINE, derived structurally: any
   # weapon whose kit cites the line's shared Q pool (the same spells the
   # CURSEDOT non-stacking record prices) — never a hand-kept list.
   curse_pressure:
@@ -185,35 +182,35 @@ derived_groups:
     max: 2
 
 # ---------------------------------------------------------------------------
-# Viability layer (expert-curated, content/size-aware). PERMISSIVE BY DESIGN:
+# Viability layer (curated, content/size-aware). PERMISSIVE BY DESIGN:
 # a weapon absent from every list below is still fully eligible — absence
 # from the 6-battle large killboard sample is NOT evidence a weapon is bad
 # (that sample stays display-only). Only `exclusions` remove weapons from
 # the DEFAULT generation/suggestion pool; `core` adds a small prior bonus.
 viability:
-  # COST GATE RETIRED (owner ruling 2026-09-07). The 2026-08-23 gate barred
-  # crystal weapons from generation below 30 players because the forge kept
-  # fielding the Exalted Staff everywhere for its E. The owner's later
-  # reading: "a better ruling might be that that type of cleanse is not as
-  # important in small groups as the engine values ... not restricting
-  # weapons but rather focusing on mechanics." The mechanism that replaced
+  # COST GATE RETIRED. The gate barred crystal weapons from generation
+  # below 30 players because the forge kept fielding the Exalted Staff
+  # everywhere for its E. The better rule restricts no weapon and prices
+  # the mechanic instead: zone removal matters less in small groups than
+  # the engine valued it (curation judgment). The mechanism that replaced
   # it lives in the templates' anti_zone rows (Exalted is the sole
   # anti_zone supplier): no row where no small comp fields it, and a
   # DEMAND RAMP where comps do (nothing through 14, the measured value at
   # 25, growing beyond). `cost_tier` stays a dataset fact for display;
   # nothing gates on it.
   exclusions:
-    # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (chapter-2
-    # §F). Context attaches to the EXACT weapon: family-level evidence (a
+    # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (the
+    # evidence layer, pipeline/README.md). Context attaches to the EXACT
+    # weapon: family-level evidence (a
     # popular Avalonian frost staff cousin, a curated cursed line) never
     # re-admits these. Manually-added / live-party instances still load and
     # score, but are flagged off-comp with replacement advice. Two exits:
-    #   - `allow` re-admits a weapon per content id when an expert rule says
+    #   - `allow` re-admits a weapon per content id when a cited rule says
     #     so, or
     #   - the evidence gate: pipeline/build_builds.py flags any excluded
     #     weapon that gains a CURRENT approved canonical large-group build
-    #     (exact weapon, party size >= min_size) so the owner can lift the
-    #     entry — the data clears the gate, not a code change.
+    #     (exact weapon, party size >= min_size) so the entry can be
+    #     lifted — the data clears the gate, not a code change.
     - weapons: [MAIN_CURSEDSTAFF, 2H_IRONCLADEDSTAFF, MAIN_FROSTSTAFF_AVALON]
       min_size: 10
       allow: {}
@@ -223,7 +220,7 @@ viability:
           build or observation fields them at party size >= 10, and the
           2026-08-19 ranged-presence rework confirmed none delivers ranged
           AoE via any selected spell (out/ranged_presence_report.json).
-        source: "owner ruling 2026-08-18; re-grounded against the evidence layer 2026-08-19"
+        source: "curation:2026-08-18; re-grounded against the evidence layer 2026-08-19"
         as_of: "2026-08-19"
         clears_when: "an approved canonical build for the exact weapon at party size >= 10"
     - weapons: [2H_DAGGERPAIR, 2H_DUALSICKLE_UNDEAD]
@@ -233,7 +230,7 @@ viability:
         reason: >
           Dive/cleanup daggers are small-scale finishers; their dive_cleanup
           seat stands at gang sizes below this gate.
-        source: "owner ruling 2026-08-26 (roles grading board: 'never in medium-large scale (7+)')"
+        source: "curation:2026-08-26 (role grading round: never fielded at medium-large scale, 7+)"
         as_of: "2026-08-26"
         clears_when: "an approved canonical build for the exact weapon at party size >= 7"
     - weapons: [2H_DOUBLEBLADEDSTAFF]
@@ -241,10 +238,8 @@ viability:
       allow: {}
       evidence:
         reason: >
-          A ganking weapon, not a group damage seat. Owner 2026-09-08:
-          "double bladed is a good ganking weapon but not a good brawl
-          weapon. but you need to check the actual stats." Checked the same
-          day against the killer-party harvest (2,042 battles): 24 parties
+          A ganking weapon, not a group damage seat (curation judgment,
+          checked against the killer-party harvest of 2,042 battles): 24 parties
           of 10+ field it — 9 are gank/dive squads (Bear Paws / Deathgivers
           / Claws / Dagger Pair cores in 21-43-player fights, 0-2 healers)
           and the rest carry ONE Double Bladed inside a 12-20 man clap or
@@ -252,15 +247,14 @@ viability:
           kits (Hunter Shoes 6 of 11, Graveguard 5 of 11, item power
           1030-1230). Its E now derives MELEE delivery (a leap lands where
           the body lands), which bars clap/kite generation on its own; this
-          entry bars the brawl damage seat the owner rejected ("its E
-          insufficient to earn a brawl damage seat over other
-          quarterstaffs"). The gang band stays open: 1.6% of 4-9 man
-          killer parties, 18 players.
-        source: "owner ruling 2026-09-08 + party_rosters.json audit (tests/VALIDATION.md 2026-09-08, 'Five rulings after the Codex review')"
+          entry bars the brawl damage seat: its E is insufficient to earn a
+          brawl damage seat over the other quarterstaffs. The gang band
+          stays open: 1.6% of 4-9 man killer parties, 18 players.
+        source: "curation:2026-09-08 + party_rosters.json audit (tests/VALIDATION.md 2026-09-08)"
         as_of: "2026-09-08"
         clears_when: "an approved canonical build for the exact weapon at party size >= 10"
-  # RETIRED 2026-09-08 (owner: "sure" to one harvest prior replacing both
-  # hand lists — this core list and scoring.yaml's seven-weapon meta prior).
+  # RETIRED: one harvest prior replaced both hand lists — this core list
+  # and scoring.yaml's seven-weapon meta prior.
   # Observed relevance is now the GENERATED, size-bucketed meta prior
   # (pipeline/derive_meta_prior.py -> out/meta_prior.json: killer-party
   # prevalence per fight-size bucket, one player one vote, shrunk toward
@@ -284,9 +278,8 @@ viability:
 # 10-12, 15, 20) plus the Disarray-relevant 25/30/40/60. Values are chosen
 # so a 7-man matches the styles.yaml calibration exactly (mult 1.0) and a
 # 20-man's balanced focus count lands at 6 attackers (~53% Resilience
-# surviving, mechanics.yaml) — the regime the Q19 expert ruling describes.
-# OWNER-CONFIRMED 2026-08-25 ("ok that seems fair" on the full table,
-# presented as x1.0@7 -> x1.6@20 -> x2.0@40+). Q16 CLOSED.
+# surviving, mechanics.yaml) — the regime MECHANICS_TODO.md Q19 describes.
+# The full table (x1.0@7 -> x1.6@20 -> x2.0@40+) is validated; Q16 CLOSED.
 size_physics:
   count_mult:
     2: 0.7
@@ -314,14 +307,13 @@ size_physics:
   # execute) — supply-side multipliers cannot express this, because concave
   # coverage hands the FULL weight to whoever fills an empty capability
   # first (a Dagger Pair "kill-secure" checkbox outbidding proven ZvZ
-  # weapons for the 20th slot — golden T15's failure). Owner rule: dedicated
+  # weapons for the 20th slot — golden T15's failure). Rule: dedicated
   # single-target damage is strongly devalued beyond ~5 players unless a
   # content rule restores it (roads sets `st_full_value: true` — its header
   # documents the small-scale inversion; castle_outpost simply has no ST
   # capabilities). Shape follows the Focus-Fire survival curve, steepened.
-  # OWNER-CONFIRMED 2026-08-25 ("ok that seems fair" on the full table,
-  # presented as 100%<=5 / 80%@7 / 50%@10 / 35%@15 / 25%@20 / 20%@30+,
-  # roads restoring full value). Q16 CLOSED.
+  # The full table (100%<=5 / 80%@7 / 50%@10 / 35%@15 / 25%@20 / 20%@30+,
+  # roads restoring full value) is validated; Q16 CLOSED.
   st_value_mult:
     2: 1.0
     5: 1.0

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Shared gear-evidence join helpers (dressed validation, 2026-08-27).
+Shared gear-evidence join helpers (dressed validation).
 
 Published-comp slots carry the gear their sources actually recorded
 (data/published_comps: 201/201 slots have a gear: block), and

@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# COMP-FITTED RECALIBRATION 2026-08-21 (owner directive: real comps set the
+# COMP-FITTED RECALIBRATION 2026-08-21 (the rule: real comps set the
 # numbers). Targets/soft caps below marked (comp-fit) were re-fitted from the
 # TWO independent real blackzone brawl comps measured in CURRENT engine units
 # (geometric AoE included): Timothy's blap (20) + Bist's "Roam 15" (15,
@@ -26,7 +26,7 @@
 # ---------------------------------------------------------------------------
 # Content template — Blackzone Roaming (20-man open-world brawl).
 #
-# PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
+# PROVISIONAL — weights NOT yet validated.
 # Role-ratio calibration comes from the first real comp for this content:
 # Timothy's "blap" (data/published_comps/, 1×20 — 5 tank, 4 support, 7 dps
 # incl. dedicated heal-cut / hp-cut / pierce / purge slots, 4 healers).
@@ -51,7 +51,7 @@ content: blackzone_roam
 name: Blackzone Roam
 base_size: 20
 validated_sizes: [20]
-# FIT PROVENANCE (owner 2026-09-10, target is the median): how the targets
+# FIT PROVENANCE (target is the median): how the targets
 # below were measured. stat median = min / target / soft_cap are the least,
 # the median and (raised only) 1.15 x the most of `comps` published comps in
 # the dressed audit (pipeline/refit_content_targets.py); minimum = still the
@@ -73,10 +73,10 @@ requirements:
   burst_aoe:      {min: 7.94, target: 19.69, weight: 8,  soft_cap: 38.26, scales: true}
   sustained_dps:  {min: 56.92, target: 63.24,  weight: 5,  soft_cap: 102.58, scales: true}  # (comp-fit 2026-08-21)
   # Resilience (focus-fire damage reduction) overpower damage piled on one
-  # player, so a dedicated single-target slot buys little (expert ruling
-  # 2026-08-14, "single-target dive isn't needed past ~5 players"). Kept a
+  # player, so a dedicated single-target slot buys little (single-target
+  # dive is not needed past ~5 players; MECHANICS_TODO.md Q16). Kept a
   # token weight (kill-secure still happens) — not zeroed like castle_outpost.
-  burst_st:       {min: 0, target: 4.39,  weight: 1,  soft_cap: 29.08,  scales: true}  # NOT comp-fit: blap's 7.0 is incidental melee cleave; golden T15's expert scale ruling outranks the fitting rule
+  burst_st:       {min: 0, target: 4.39,  weight: 1,  soft_cap: 29.08,  scales: true}  # NOT comp-fit: blap's 7.0 is incidental melee cleave; the golden T15 scale rule outranks the fitting rule
   stun:           {min: 6.06, target: 12.88,  weight: 4,  soft_cap: 49.88, scales: true}  # (comp-fit 2026-08-21)
   zone_control:   {min: 11, target: 17.17,  weight: 3,  soft_cap: 46,  scales: true}  # (comp-fit 2026-08-21)
   # Since 2026-08-19 derived per spell bundle from the curated burst_aoe
@@ -98,14 +98,14 @@ requirements:
   heal_reduction: {min: 1, target: 5.5,  weight: 6,  soft_cap: 32.86,  scales: false}
   resist_shred:   {min: 5, target: 9.5,  weight: 5,  soft_cap: 16.1,  scales: false}  # (comp-fit 2026-08-21)
   disengage:      {min: 10, target: 25,  weight: 5,  soft_cap: 41.97,  scales: false}  # (comp-fit 2026-08-21)
-  # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
+  # OPTIONAL: five single-target melee weapons carry it;
   #   9 of 10 published comps field none. Keep the target, do not require it.
   execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false, optional: true}  # NOT comp-fit: same T15 guard as burst_st
   buff_allies:    {min: 8, target: 19.25,  weight: 4,  soft_cap: 33.35,  scales: false}
   cleanse:        {min: 0, target: 6,  weight: 4,  soft_cap: 16.1,  scales: false}  # (comp-fit 2026-08-21)
   silence:        {min: 4.35, target: 13.39,  weight: 4,  soft_cap: 48.79,  scales: false}  # (comp-fit 2026-08-21)
   # ---------------------------------------------------------------------
-  # PROMOTED 2026-08-27 (owner: "first let's add those missing items").
+  # PROMOTED 2026-08-27.
   # These six were curated on every weapon sheet and carried by the fight
   # chain, but NO template scored them — a weapon's AoE root earned zero.
   # Fitted from the four real blackzone comps by the standing 2026-08-21
@@ -114,7 +114,7 @@ requirements:
   # above. WEIGHT 1 is the documented low-and-flat start for a newly
   # promoted capability (design doc; anti_zone/damage_debuff precedent) —
   # an unvalidated number must never dominate a recommendation. Raising
-  # them is an owner ruling once the effect on real picks is seen.
+  # them is a validation-round decision once the effect on real picks is seen.
   # slow/root/knockback scale with fight size (mechanics.yaml
   # geometric_caps); the dedicated-slot tools do not.
   slow:               {min: 5.9, target: 18.57, weight: 1, soft_cap: 32.69, scales: true}
@@ -129,20 +129,18 @@ requirements:
   # from-zero coverage hands the FULL weight to a sole supplier, so weight 3
   # was a +3.0 windfall that made the damage_debuff carriers (Incubus Mace,
   # Black Monk, Evensong) the constant top pick for every tail slot of a
-  # 20-man. Lowered to actually honor the rule; the expert pass owns finals.
-  # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
+  # 20-man. Lowered to actually honor the rule; finals wait on a validation round.
+  # OPTIONAL: supplied by ONE weapon in the catalogue
   #   (Exalted Staff, the crystal holy staff). Real target, but a comp
   #   without it is not missing anything.
-  # DEMAND RAMP (owner ruling 2026-09-07, replacing the crystal cost gate:
-  #   "that type of cleanse is not as important in small groups as the
-  #   engine values ... don't really need it at 10-14 and then need grows
-  #   slightly as numbers grows and then becomes a good requirement at like
-  #   25+"): zone removal is demand created by ENEMY ground effects, and more
-  #   enemies lay more of them. No requirement at all through 14; linear to
-  #   this row's measured value at 25; proportional beyond. Harvest (winner
-  #   parties, 2026-09-07): an Exalted in 2% of 4-9 man parties, 7% at
-  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape, the
-  #   anchors are the owner's.
+  # DEMAND RAMP (replaces the crystal cost gate): zone removal is demand
+  #   created by ENEMY ground effects, and more enemies lay more of them —
+  #   not needed at 10-14, growing slowly with numbers, a real requirement
+  #   from about 25 (curation judgment). No requirement at all through 14;
+  #   linear to this row's measured value at 25; proportional beyond.
+  #   Harvest (winner parties): an Exalted in 2% of 4-9 man parties, 7% at
+  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape; the
+  #   anchors are curation judgment.
   anti_zone:      {target: 1.8,  weight: 1,  soft_cap: 2.3,  ramp: {none_until: 14, full_at: 25}, optional: true}
   damage_debuff:  {min: 0, target: 5,  weight: 1,  soft_cap: 18.97,  scales: false}
 

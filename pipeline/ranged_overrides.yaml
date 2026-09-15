@@ -1,4 +1,5 @@
-# Curated overrides for the ranged_presence derivation (changeschapter2.md §B).
+# Curated overrides for the ranged_presence derivation (the evidence layer,
+# pipeline/README.md).
 #
 # The structural rule in build_dataset.py grants ranged_presence to a loadout
 # bundle when its curated burst_aoe evidence spell is ground/enemy-delivered
@@ -37,7 +38,7 @@
     outside it. (burst_st reclassified to burst_aoe in the 2026-08-21
     taxonomy pass; this entry keeps that edit from granting ranged_presence.)
   source: >
-    Spell description (ao-bin-dumps 5cf2e8e9); owner ruling 2026-08-21 —
+    Spell description (ao-bin-dumps 5cf2e8e9); curation:2026-08-21 —
     Daybreaker is fielded as a leather-archetype melee purge lance.
   as_of: 2026-08-21
 
@@ -102,11 +103,11 @@
   source: Spell description (ao-bin-dumps 5cf2e8e9).
   as_of: 2026-08-19
 
-# Owner round 2026-09-15 (the 18-man clap roster, notes/validation/2026-09b.md):
-# the three caster-moving Es the structural rule granted were put to the
-# owner. Trinity Spear is denied; Fists of Avalon and Skystrider are recorded
-# as GRANTS so the ruling lives in data and a later gap-closer derivation
-# (caster_moves is a parsed fact since 2026-09-08) cannot flip them silently.
+# Validation round on the 18-man clap roster (notes/validation/2026-09b.md):
+# the three caster-moving Es the structural rule granted were judged one by
+# one. Trinity Spear is denied; Fists of Avalon and Skystrider are recorded
+# as GRANTS so the decision lives in data and a later gap-closer derivation
+# (caster_moves is a parsed fact) cannot flip them silently.
 
 - weapon: 2H_TRIDENT_UNDEAD
   spell: TRIDENTTHROW
@@ -117,8 +118,8 @@
     impact" — the wielder lands inside the clump; a gap-close, the same
     class as Realmbreaker's Lethal Cleaver.
   source: >
-    Spell description (ao-bin-dumps); owner ruling 2026-09-15 — "trinity
-    spear is most definitely a melee weapon".
+    Spell description (ao-bin-dumps); curation:2026-09-15 — Trinity Spear
+    is a melee weapon.
   as_of: 2026-09-15
 
 - weapon: 2H_KNUCKLES_AVALON
@@ -126,11 +127,12 @@
   decision: grant
   reason: >
     The dive kick leaps to the targeted position (caster moves), which the
-    gap-closer rule would deny; the owner keeps the ranged grant — the
-    combo is fielded as a 12m knock-up bomb thrown onto the clump.
+    gap-closer rule would deny; the ranged grant stands (curation
+    judgment) — the combo is fielded as a 12m knock-up bomb thrown onto
+    the clump.
   source: >
-    Owner ruling 2026-09-15 — "leave fists of avalon as is" (structural
-    grant: target ground, cast_range 12).
+    curation:2026-09-15 — Fists of Avalon keeps its structural grant
+    (target ground, cast_range 12).
   as_of: 2026-09-15
 
 - weapon: 2H_BOW_CRYSTAL
@@ -142,6 +144,6 @@
     at the targeted position" — the wielder moves, but the payload is an
     arrow from an untargetable perch, ranged pressure on the clump.
   source: >
-    Spell description (ao-bin-dumps); owner ruling 2026-09-15 —
-    "skystrider is ranged".
+    Spell description (ao-bin-dumps); curation:2026-09-15 — Skystrider
+    is ranged.
   as_of: 2026-09-15

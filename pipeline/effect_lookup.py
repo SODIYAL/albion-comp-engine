@@ -19,8 +19,8 @@ parser output — direction bugs, reference-chain artifacts, prose-flag
 misfires, and additions for mechanics outside the structured vocabulary).
 
 Prose flags from spell_index.json survive as a fallback where the structured
-layer is silent — but since 2026-08-12 a structured entry for the same
-mechanic SUPERSEDES the direction-blind prose flag (PROSE_SUPERSEDED_BY),
+layer is silent — but a structured entry for the same mechanic SUPERSEDES
+the direction-blind prose flag (PROSE_SUPERSEDED_BY),
 with an ally-direction guard for the heal flag: a spell's self healing-cast
 buff must not mask the prose flag standing in for its structurally invisible
 direct ally heal (the Desperate Prayer case).
@@ -56,7 +56,7 @@ PROSE_FALLBACK = {
 # resist-SHRED spell offered tankiness via its noisy prose `shield` flag.
 # A prose flag now fires only when the spell has NO structured counterpart;
 # when a counterpart exists, its direction-resolved mapping is the answer.
-# (Found in batch-2 curation review, 2026-08-12.)
+# (Found in the batch-2 curation review.)
 PROSE_SUPERSEDED_BY = {
     "stun": {"stun"}, "root": {"root"}, "silence": {"silence"},
     "slow": {"movespeedbonus-"},

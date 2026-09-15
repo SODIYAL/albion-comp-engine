@@ -3,9 +3,9 @@
 Print a curation worksheet for one or more weapons: every equippable spell with
 its parsed function flags, target direction, and description text.
 
-This is the reference a human (or Claude) reads while assigning structural
+This is the reference the curator reads while assigning structural
 capability scores. Nothing here decides scores — it exists so that no score is
-ever assigned without its evidence text in front of you.
+ever assigned without its evidence text in view.
 
 Usage:
     py -3 pipeline/curate_helper.py 2H_POLEHAMMER MAIN_HOLYSTAFF_AVALON
@@ -23,8 +23,8 @@ SPELLS = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8")
 def load_usage():
     """Sightings per weapon from weapon_usage_v2.json (sample_battles.py),
     summed across the fight-size buckets, with the per-bucket split kept.
-    The v1 file this used to read was a frozen 24-battle sample from
-    2026-08-12 that nothing wrote any more."""
+    The v1 file this used to read was a frozen 24-battle sample that
+    nothing wrote any more."""
     v2 = json.load(open(os.path.join(OUT, "weapon_usage_v2.json"), encoding="utf-8"))
     out = {}
     for bucket, weapons in (v2.get("buckets") or {}).items():
@@ -44,7 +44,7 @@ PATCHES = (json.load(open(_PH, encoding="utf-8"))["patches"]
            if os.path.exists(_PH) else [])
 
 # The capabilities the seeder never proposes (seed_sheets.HUMAN_ONLY: the
-# magnitude is a human call) plus, derived at runtime, everything in the
+# magnitude is a curation judgment) plus, derived at runtime, everything in the
 # dataset taxonomy the effect layer cannot express at all. Never a hand list
 # of the whole taxonomy — the 2026-08 copy of that list still carried
 # `energy_drain`, a documented fabrication.

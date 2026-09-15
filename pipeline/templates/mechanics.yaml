@@ -13,9 +13,9 @@
 # Focus Fire (aka Resilience): percentage damage reduction applied to a
 # player being attacked by multiple enemy players. Diminishing returns on
 # stacked single-target damage.
-# OWNER-CONFIRMED CURRENT 2026-08-25: the owner pasted the live wiki table
-# (post-Realm-Divided) and every cell below matches it exactly — both
-# columns, both caps, lookback and buff durations.
+# VERIFIED CURRENT against the live wiki table (post-Realm-Divided): every
+# cell below matches it exactly — both columns, both caps, lookback and
+# buff durations.
 focus_fire:
   lookback_seconds: 10      # window used to count attackers on the target
   buff_duration_seconds: 5
@@ -80,9 +80,9 @@ focus_fire:
 # AoE Escalation: AoE damage spells (designed to hit 3+ players) deal bonus
 # damage per player hit. AoE root/stun/silence spells get increased CC
 # duration instead ("CC Escalation").
-# OWNER-CONFIRMED CURRENT 2026-08-25: the owner pasted the live wiki table
-# and every value below matches it exactly (8%/target from 2, 56% cap at
-# 8+, applied after buffs, bypasses the ~150% soft cap).
+# VERIFIED CURRENT against the live wiki table: every value below matches
+# it exactly (8%/target from 2, 56% cap at 8+, applied after buffs,
+# bypasses the ~150% soft cap).
 aoe_escalation:
   starts_at_targets: 2
   bonus_per_extra_target: 0.08   # bonus = 0.08 * (targets_hit - 1)
@@ -111,8 +111,8 @@ aoe_escalation:
   cc_escalation_duration_curve: same_factor_per_target_as_damage
 
 # ---------------------------------------------------------------------------
-# AoE GEOMETRY (2026-08-20, geometric-AoE step 1 — expert ruling in
-# MECHANICS_TODO.md): an area effect does one target's worth of WORK per
+# AoE GEOMETRY (geometric-AoE step 1 — the rule in MECHANICS_TODO.md): an
+# area effect does one target's worth of WORK per
 # enemy it actually affects. Utility supply delivered by an AoE spell
 # (weapon cap_delivery, from the evidence spell's structural footprint)
 # scales with expected targets affected — normalized to (balanced,
@@ -122,7 +122,7 @@ aoe_escalation:
 aoe_geometry:
   # Expected enemies AFFECTED when an area of the given radius sweeps the
   # style's clump: step table radius -> targets (largest breakpoint <= r).
-  # PROVISIONAL shape — expert to tune; travel-distance (Tornado's 25m line)
+  # PROVISIONAL shape — tunable; travel-distance (Tornado's 25m line)
   # deliberately not yet counted, radius only.
   radius_targets:
     0: 1
@@ -131,8 +131,8 @@ aoe_geometry:
     5: 4
     6.5: 6
     8: 8
-  # The utility capabilities that scale geometrically (the expert-ruled CC/
-  # utility family). Damage families keep the existing escalation/Resilience
+  # The utility capabilities that scale geometrically (the CC/utility
+  # family). Damage families keep the existing escalation/Resilience
   # physics; zone_control is EXCLUDED (area is already its identity — scaling
   # it by area would double-count).
   geometric_caps: [catch, peel, slow, stun, root, silence, knockback_displace]
@@ -146,20 +146,20 @@ aoe_geometry:
   #   null  -> (balanced, base_size) clump: calibration-preserving, but the
   #            base clumps (6.4-7) already exceed every spell's reach, so AoE
   #            utility can only be DE-rated at small sizes, never up-rated
-  #            at the calibrated scale — cannot express the expert's ruling.
+  #            at the calibrated scale — cannot express the rule.
   #   N     -> a fixed reference clump: the ordinal unit is "one cast's worth
   #            at a small gang of N-target clumps"; above it, AoE utility
   #            supply grows toward min(clump, spell reach)/min(N, reach).
   # 2 = the ordinal curation intuition (a skirmish where an AoE slow catches
   # ~2). Measured 2026-08-20: V4 role 73% and all golden cases hold with 2.
-  # PROVISIONAL — expert may retune; template targets for the geometric caps
+  # PROVISIONAL — tunable; template targets for the geometric caps
   # were calibrated on flat supply and absorb the change via the same
   # measurement gates.
   reference_clump: 2
 
 # ---------------------------------------------------------------------------
 # BUILD STATS (full-build members, 2026-08-20): item base stats modify the
-# PERSON, exactly as the expert framed it — a +50% damage chest multiplies
+# PERSON — a +50% damage chest multiplies
 # the weapon's damage capabilities (it adds nothing on a control tank with
 # no damage caps: "Heavy Mace on cloth defeats its purpose" is now a
 # computable statement), while absolute defensive stats add tankiness.
@@ -186,10 +186,10 @@ build_stats:
   # counted bodies rather than damage, so healers holding holy staffs voted
   # "magical" while supplying none. Corrected same day.
   # Splitting would therefore double every durability row for no correction
-  # at all — and nothing could act on it regardless: the owner ruled
-  # 2026-08-28 that the app models no enemy ("out playstyle dictates how we
-  # fight regardless of who or where"), so there is no damage type to
-  # resolve a split against. Revisit only if an enemy-composition input is
+  # at all — and nothing could act on it regardless: the app models no
+  # enemy (the declared playstyle dictates how the party fights, regardless
+  # of who or where), so there is no damage type to resolve a split
+  # against. Revisit only if an enemy-composition input is
   # ever added, or if the meta shifts far off 50/50.
   tankiness_per_armor_point: 0.004
   # crowd-control resistance -> tankiness units (plate 50 ccr ~ 0.15 units)
@@ -197,21 +197,21 @@ build_stats:
   # % item stats MULTIPLY the member's capability supply
   damage_mult_caps: [burst_st, burst_aoe, sustained_dps, execute]
   heal_mult_caps: [heal_sustain, heal_burst]
-  # CC-duration % (increment 2, owner 2026-08-25: "incubus is mostly
-  # paired with leering cane for its +cc duration") multiplies the
+  # CC-duration % (increment 2; the reference case is the Incubus Mace,
+  # mostly paired with a Leering Cane for its +CC duration) multiplies the
   # wearer's own DURATION-BEARING CC — the pairing emerges from physics
   # for every CC carrier and never for a CC-less build. Knockbacks are
   # instantaneous displacement and stay out.
   cc_mult_caps: [stun, root, slow, silence]
 
 # ---------------------------------------------------------------------------
-# KILL PRESSURE (identity Phase D, owner checklist 2026-08-23): "did we
-# bring pierce on the clump, did we give heal cuts so they don't heal up
-# instantly, did we do enough damage within a short span to actually kill."
+# KILL PRESSURE (identity Phase D, the caller's checklist): pierce on the
+# clump, heal cuts so they do not heal back up, and enough damage in a
+# short span to actually kill.
 # The three lights are a LENS over the comp-fitted template targets — the
 # enemy-toughness baseline is deliberately NOT a new physics model: the
 # damage / pierce / heal-cut targets were fitted from what real comps field
-# to kill things (VALIDATION.md, 2026-08-21 recalibration ruling), so
+# to kill things (VALIDATION.md, the 2026-08-21 recalibration), so
 # "enough" is defined by the same evidence that calibrated everything else,
 # and the focus-fire / escalation physics are already inside
 # effective_supply. Deeper modeling (gear tier / IP, buffs, exact enemy
@@ -224,11 +224,11 @@ kill_pressure:
   burst_caps: [burst_aoe, burst_st, execute]
   # a light is green at >= this share of its bar: the sum of the caps'
   # size-scaled BARE MINIMUMS (target_min — the least winners get away
-  # with; owner 2026-09-10, target is the median: "enough to kill" is a
+  # with; under the target-is-the-median rule "enough to kill" is a
   # minimum question, and half of real winners sit under the typical
   # number and still killed), over caps the content actually requires; a
   # content that demands none of a light's caps passes that light free
-  pass_ratio: 0.85   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
+  pass_ratio: 0.85   # PROVISIONAL — tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
 # NEGATIVE RECOMMENDATIONS / REDUNDANCY WARNINGS (roadmap item 3,
@@ -245,12 +245,12 @@ negative_recs:
   # remaining score is meta prior / viability, not gap-closing value.
   # Was 0.05 (explain()'s term floor) while targets were the least any
   # winner fielded — a bar every real party cleared, so "closes no gap"
-  # was nearly literal. TARGET IS THE MEDIAN (owner 2026-09-10): the bar
+  # was nearly literal. TARGET IS THE MEDIAN: the bar
   # is the typical winner now and almost any body closes SOMETHING, so
   # the lens reads "under one weighted unit of coverage" — the same
   # min_gain the swap advisor already calls noise. A third healer into
   # two (castle_outpost 7) gains 0.59, all of it peel: redundant.
-  redundant_gain_max: 1.0   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
+  redundant_gain_max: 1.0   # PROVISIONAL — tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated

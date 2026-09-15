@@ -1,25 +1,26 @@
-# Pair-aware meta prior — design
+# Pair-aware meta prior — design (2026-09-11)
 
-Date: 2026-09-11. Status: SHIPPED 2026-09-11 (branch `pair-prior`).
-Deviations from the draft: none. Golden rows moved: none. Owner-approved
-in conversation (ruling A of three offered; vote unit "one party, gated
-by orgs"; holdout "training split only"). Owner ruling this implements: observed weapon PAIRINGS from
-the killer-party harvest may enter scoring, through the harvest-generated
-meta prior only (the 0.15 `delta` slot), tiebreak-sized, never through the
-synergy term, a floor, a role slot or a suggestion pool.
+Status: implemented 2026-09-11 (branch `pair-prior`, merged to main as
+42265fa; plan `notes/plans/2026-09-11-pair-meta-prior.md`). Deviations from
+the draft: none. Golden rows moved: none. Decision implemented: observed
+weapon PAIRINGS from the killer-party harvest may enter scoring, through
+the harvest-generated meta prior only (the 0.15 `delta` slot),
+tiebreak-sized, never through the synergy term, a floor, a role slot or a
+suggestion pool. Of the three options considered — A inside the meta
+prior, B inside the synergy term (rejected: only verified interaction
+records score), C pool ordering only — A was chosen; vote unit "one party,
+gated by orgs"; holdout "training split only".
 
-## Problem (owner's words)
+## Problem
 
-> wouldnt it be cool to add synergy to comps based on what weapons are
-> often seen playing together with real data ?
-
-Today the harvest reaches scoring only per WEAPON: `derive_meta_prior.py`
-counts distinct players per weapon per size bucket and the engine adds
-`delta * prior_w` per member. Which weapons winning parties field
-TOGETHER is mined (`build_cohort_families.py`, the "recurring observed
-cores" and "observed rosters most like yours" panels) but display-only,
-by standing rule 7 ("popularity is not effectiveness") and
-`KILLBOARD_AFFINITY.md` "still parked behind review". A throwaway probe
+Which weapons are often seen playing together in real data is synergy
+evidence the score did not use. The harvest reached scoring only per
+WEAPON: `derive_meta_prior.py` counts distinct players per weapon per size
+bucket and the engine adds `delta * prior_w` per member. Which weapons
+winning parties field TOGETHER is mined (`build_cohort_families.py`, the
+"recurring observed cores" and "observed rosters most like yours" panels)
+but display-only, by standing rule 7 ("popularity is not effectiveness")
+and `KILLBOARD_AFFINITY.md` "still parked behind review". A throwaway probe
 on the committed artifact (2026-09-11) shows the pairing signal is real
 and mechanistic — the top small-fight pair is Arcane + Brimstone (24x
 over chance across 18 guilds), then Bow of Badon + Locus (15x, 40 guilds):
@@ -27,7 +28,7 @@ the interactions the engine already prices from spell facts.
 
 ## Decisions
 
-1. **Where**: inside the meta prior. `scoring.meta_prior` (solo, as today)
+1. **Where**: inside the meta prior. `scoring.meta_prior` (solo, as before)
    gains a sibling `scoring.meta_pairs`. The `delta = 0.15` weight, the
    size-bucket axis and the "top = 1.0, never a penalty" semantics are
    unchanged. The synergy term (`beta`, verified interaction records only)
@@ -62,9 +63,10 @@ the interactions the engine already prices from spell facts.
    0 with no partner row;
    `meta(w, P) = 0.5 * solo(w) + 0.5 * pair(w, P)`.
    Always the blend, also for a roster of one (pair = 0): continuous, the
-   first-pick RANKING is exactly today's, the magnitude halves. `max`, not
-   mean: a member is credited for its best observed partner, which the
-   why-panel can name. Both inputs in [0, 1] so `delta` remains the cap.
+   first-pick RANKING is exactly the previous one, the magnitude halves.
+   `max`, not mean: a member is credited for its best observed partner,
+   which the why-panel can name. Both inputs in [0, 1] so `delta` remains
+   the cap.
 7. **Exact marginal**: `comp_score` sums `meta(w, P)` over the party; a
    candidate's pick score stays the exact `comp_score` delta (test_forge
    F1): `0.5 * solo(c) + 0.5 * pair(c, P) + 0.5 * sum over m in P of
@@ -77,7 +79,7 @@ the interactions the engine already prices from spell facts.
 9. **Not in scope**: pool ordering, forge objective, style bands / role
    counts holdout (BACKLOG follow-up), win-lift, the cohort panels.
 
-## Components
+## Components (engine changes)
 
 - `pipeline/derive_meta_prior.py` — `derive(doc, holdout_mod=5, ...)`
   returns `meta_prior` (solo, players) AND `meta_pairs`, `pairs_n`
@@ -96,13 +98,13 @@ the interactions the engine already prices from spell facts.
   `partyState`, `compScore`, `_pickTail`).
 - `dashboard/_app.js` — carry the three fields through `recommend()`;
   one translation line in the why-panel; updated prose.
-- Docs: `tests/VALIDATION.md` rule 7 + ruling row, `notes/validation/`
+- Docs: `tests/VALIDATION.md` rule 7 + index row, `notes/validation/`
   dated entry, `KILLBOARD_AFFINITY.md` "still parked" paragraph,
   `HANDOFF.md` engine section, `pipeline/README.md` derive docstring
   reference, `BACKLOG.md` (style_bands/role_counts holdout follow-up;
-  re-derive on the harvest checkout).
+  re-derive on the harvest machine).
 
-## Data flow
+## Data shapes and flow
 
 party_rosters.json (committed harvest) -> derive_meta_prior.py (training
 split) -> out/meta_prior.json {meta_prior, meta_pairs} -> build_dataset.py
@@ -110,7 +112,12 @@ split) -> out/meta_prior.json {meta_prior, meta_pairs} -> build_dataset.py
 meta_pairs} -> engine meta_of(w, party) -> comp_score / pick score ->
 dashboard translation.
 
-## Testing
+`meta_pairs`: `{bucket: {weapon: {partner: float}}}`, symmetric; `pairs_n`:
+`{bucket: {"A|B": int}}` with A < B; `_split`: `{"holdout_mod": 5, "rule":
+"battle % 5 != 0 ..."}`; `scoring.weights.meta_pair = 0.5` (absent on an
+older dataset = 0 = pure solo, bit-identical to the 2026-09-08 prior).
+
+## Tests
 
 - `tests/test_meta_pairs.py` (new, script-style): derivation contracts on
   a synthetic doc — holdout split honoured, org gate, party-set votes, no
@@ -121,8 +128,8 @@ dashboard translation.
 - `tests/test_forge.py` F1 pick-score invariant — must hold unchanged.
 - `tests/test_js_parity.py` — the 60 random parties cover the new path;
   `meta_prior` field parity at 1e-9 plus the three new fields.
-- `tests/test_golden.py` — every case whose ranking moves is listed for
-  the owner; none re-pinned silently (anti-circularity).
+- `tests/test_golden.py` — every case whose ranking moves is listed for a
+  maintainer decision; none re-pinned silently (anti-circularity).
 - `tests/tier2_blindtest.py v4` — gate >= 70% must hold; `v4h --rebuild 5`
   reported before/after (report-only).
 - `tests/test_provenance.py` / byte-identical rebuild — artifact written
@@ -135,3 +142,9 @@ Fail closed, loudly: missing artifact, hash drift, an all-battles
 artifact, a non-bucketed / asymmetric / out-of-range pair map, or an
 unknown weapon in a pair all `sys.exit` the build. A weapon or pair with
 no row reads 0 in the engine (neutral). No network step.
+
+## Deferred
+
+Pool ordering, the forge objective, the style-bands / role-counts holdout
+(BACKLOG), win-lift evidence (kill-vs-death contrast needs its own decision
+before it orders anything), the cohort panels.

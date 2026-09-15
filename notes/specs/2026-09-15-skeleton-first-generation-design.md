@@ -1,24 +1,23 @@
-# Skeleton-first generation — design
+# Skeleton-first generation — design (2026-09-15)
 
-Date: 2026-09-15. Status: BUILT 2026-09-15, uncommitted (the owner commits).
-Deviations from the draft: the seat read is the first UNIFORMED menu role
-(the role-class read), not `role_menu[0]` — a function-role primary
-(purge, pierce) would otherwise sit a support seat in a dps body; the
-minimum exception admits cross-role minima too but never a minimum an
-under-typical seat of the same role could meet (brawl 20 died two short
-and Great Holy took the brawl-healer seat before both refinements); a
-whole-roster invariant guards refinement (a swap un-justified a spill);
-a present-but-empty typical row means "fields none, no demand" and only
-an absent row falls back to the pooled cell; decision 7 (plan tools) was
-added after the seat gate alone left the forged kite reading as a clap.
-Golden rows moved: none (75/75). Forge pins re-based: F4, F18 (the hand
-allowances). Owner ruling this implements: "go
-ahead and make changes according to your suggestions, you have full
-autonomy here" — given after the assessment of the same day (the forge
+Status: implemented 2026-09-15 (working tree, not yet committed; plan
+`notes/plans/2026-09-15-skeleton-first-generation.md`). Deviations from
+the draft: the seat read is the first UNIFORMED menu role (the role-class
+read), not `role_menu[0]` — a function-role primary (purge, pierce) would
+otherwise sit a support seat in a dps body; the minimum exception admits
+cross-role minima too but never a minimum an under-typical seat of the
+same role could meet (brawl 20 died two short and Great Holy took the
+brawl-healer seat before both refinements); a whole-roster invariant
+guards refinement (a swap un-justified a spill); a present-but-empty
+typical row means "fields none, no demand" and only an absent row falls
+back to the pooled cell; decision 7 (plan tools) was added after the seat
+gate alone left the forged kite reading as a clap. Golden rows moved: none
+(75/75). Forge pins re-based: F4, F18 (the hand allowances). Decision
+implemented: act in full on the assessment of the same day (the forge
 fields 20 distinct weapons in 20 seats where 20-man winners field a median
-16; four of six style forges read `clap` to the engine's own identity;
-the forged kite shares 7 of 20 weapons with the real kite 20 and 14 with
-the forged clap; every empirical input is prevalence).
+16; four of six style forges read `clap` to the engine's own identity; the
+forged kite shares 7 of 20 weapons with the real kite 20 and 14 with the
+forged clap; every empirical input is prevalence).
 
 ## Problem
 
@@ -27,16 +26,15 @@ things real comps are made of:
 
 1. **The skeleton.** Real rosters have a seat shape — how many engage
    tanks, stoppers, main healers, shield supports, ranged-AoE bodies — that
-   differs by style. The forge constrains only the coarse role classes
+   differs by style. The forge constrained only the coarse role classes
    (healer / frontline / support) with a typical count, so every style
-   forges the same seat mix with different weights on top: kite 20 forged
+   forged the same seat mix with different weights on top: kite 20 forged
    three engage tanks and read as a strong clap.
 2. **Copies.** Which weapons winners stack is a per-weapon fact the
    harvest measures (Hallowfall is doubled in 87% of the 20-man winners
    that field it; Bedrock in 66%; Permafrost in 24%; Great Arcane in 9%),
-   yet the allowance table was hand-kept from single comps and the owner
-   was ruling on it one weapon at a time (Permafrost `free: 2` removed
-   2026-09-15).
+   yet the allowance table was hand-kept from single comps and adjusted
+   one weapon at a time (Permafrost `free: 2` removed 2026-09-15).
 
 ## Decisions
 
@@ -78,15 +76,17 @@ things real comps are made of:
    precedent, 2026-09-08). The engine resolves the cell for its declared
    style and band at `set_content` into the same `{weapon: {free, max}}`
    shape `_dup_free` / `_dup_gen_max` already read; `per_weapon_min_size`
-   (10) and every default are unchanged. The owner's 2026-09-15 Permafrost
-   ruling is reproduced by the evidence (p50 1 copy), Hallowfall keeps its
-   free second copy, Great Arcane / Rift Glaive / Wailing Bow lose the
-   single-comp allowances the harvest does not support at 20.
+   (10) and every default are unchanged. The 2026-09-15 Permafrost
+   decision (one copy) is reproduced by the evidence (p50 1 copy),
+   Hallowfall keeps its free second copy, Great Arcane / Rift Glaive /
+   Wailing Bow lose the single-comp allowances the harvest does not
+   support at 20.
 4. **Nothing forces copies.** The concave utility curve's preference for a
-   distinct weapon over a second copy stands: the owner's rulings of
-   2026-08-24 and 2026-09-15 want distinct bombs over stacked ones, and
-   rule 7 keeps the harvest out of the objective beyond the tiebreak-sized
-   prior. The allowance table only decides where a copy is penalty-free.
+   distinct weapon over a second copy stands: the 2026-08-24 and
+   2026-09-15 decisions prefer distinct bombs over stacked ones (curation
+   judgment), and rule 7 keeps the harvest out of the objective beyond the
+   tiebreak-sized prior. The allowance table only decides where a copy is
+   penalty-free.
 5. **The holdout split is honoured by every derivation that can honour it
    here.** `derive_role_counts.py` learns from the training split (was:
    every battle) and records `_split`; `build_dataset.py` refuses a
@@ -94,7 +94,7 @@ things real comps are made of:
    same `--holdout-mod` (default 5) and records `_split`, and
    `derive_style_bands.py` carries it into the yaml header — but the
    committed board was generated before this change on the harvest
-   checkout (the raw cache is not on this machine), so the shipped style
+   machine (the raw cache is not on this machine), so the shipped style
    rows stay weak-form until the next fold and the build says so.
 6. **A baseline to beat.** `tests/tier2_blindtest.py v4 --baseline` and
    `v4h --baseline` score a role-skeleton-plus-popularity recommender
@@ -103,7 +103,6 @@ things real comps are made of:
    the meta prior's solo share, top-3. Report-only, printed beside the
    engine; the capability model must beat it or it is not earning its
    complexity.
-
 7. **Plan tools as generation minima.** The identity read defines a
    kiting plan by its STANDOFF tools (`style_fit.standoff_e`: Bedrock,
    Grailseeker, Icicle, Hoarfrost, Arctic, Brimstone ... eleven weapons),
@@ -177,17 +176,18 @@ seats sum below its minimum; every style × size 10–20 forges a full
 feasible roster), the refused hand allowance, and the copy resolution.
 Existing pins that encode the hand allowances (F18) move to the generated
 values with the reason. Parity on the forge cases. Golden rows that move
-are re-pinned only where this ruling explains the move.
+are re-pinned only where this decision explains the move.
 
 ## Deferred, with reasons
 
 - Fill order (healer → frontline → support → dps as the beam's sequence):
-  changes many pinned first picks; ordering-only, owner call.
+  changes many pinned first picks; ordering-only, needs a maintainer
+  decision.
 - Outcome layer (win-lift from per-player kills/deaths): the raw cache is
-  on the harvest checkout, not this machine; the derivation is specified
+  on the harvest machine, not this one; the derivation is specified
   in BACKLOG and must be built where it can be run.
 - Opposition blocks per content, small-scale templates (hellgate,
   crystal, mists): every number would be invented — rule 3.
-- Independent style labeller: ~50 owner-labelled rosters cannot beat a
+- Independent style labeller: ~50 caller-labelled rosters cannot beat a
   classifier tuned on them; needs a labelled holdout first.
 - Spec / item-power inputs: BACKLOG item 8's five open questions.

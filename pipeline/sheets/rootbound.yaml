@@ -7,8 +7,8 @@
 # the payload, per the Hellspawn precedent. Shares the shapeshifter Q/W pool
 # with Hellspawn; QW-conditional scores mirror that sheet.
 # heal_sustain held at 1: the DESCRIBED evidence is the current-health grant;
-# the form's healing abilities are not separately equippable text. Expert may
-# bump if Sylvian healing throughput reads stronger in practice.
+# the form's healing abilities are not separately equippable text. Raise it
+# if Sylvian healing throughput reads stronger in practice.
 
 - weapon: 2H_SHAPESHIFTER_SET2       # Rootbound Staff — group-sustain shapeshifter
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json

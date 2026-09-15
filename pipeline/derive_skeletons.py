@@ -1,7 +1,7 @@
 """Seat skeletons and copy allowances of the typical winner, GENERATED
-from the committed evidence (owner ruling 2026-09-15, "full autonomy" on
-the skeleton-first assessment; spec
-notes/specs/2026-09-15-skeleton-first-generation-design.md).
+from the committed evidence (skeleton-first generation; spec
+notes/specs/2026-09-15-skeleton-first-generation-design.md; contracts
+S1-S6 in tests/test_skeletons.py).
 
 Two tables the forge reads, both from the TRAINING split only (battles
 with id % HOLDOUT_MOD != 0 — the meta prior's rule; the % 5 == 0 slice is
@@ -26,7 +26,7 @@ tier2_blindtest v4h's holdout and nothing shipped learns from it):
             (never below 1), max = ceil(p90) (never below free). A weapon
             under the floor has no row and keeps the composition defaults.
             This REPLACES the hand-kept composition.yaml `per_weapon` list
-            (build_dataset refuses a hand-set one since 2026-09-15).
+            (build_dataset refuses a hand-set one).
   distinct  per style x band: distinct weapons per roster (p10/p50/p90) —
             a report line, nothing reads it.
 

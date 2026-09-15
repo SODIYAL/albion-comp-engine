@@ -5,8 +5,8 @@ Build the versioned dataset the engine and the SPA both consume
 
     sheets/*.yaml              curated, evidence-linted        (authoritative)
     sheets/illustrative/*.yaml design-doc §2.3 placeholders    (NOT a release;
-                               empty since 2026-08-12 — all weapons curated,
-                               the file is a tombstone record)
+                               empty — all weapons curated, the file is a
+                               tombstone record)
     templates/*.yaml           content templates + scoring config
         │
         ▼
@@ -81,7 +81,7 @@ def display_name(line, key):
 
 
 def load_gear_sheets(gear_lines, gear_spells):
-    """The FULL-BUILD member model's gear layer (2026-08-20): curated gear
+    """The FULL-BUILD member model's gear layer: curated gear
     capability sheets (sheets/gear/*.yaml), same evidence discipline as
     weapons. A gear item's loadout has ONE active-ability slot (the player
     picks one D/R/F per piece); GEAR_STATS-evidenced rows are always-on
@@ -110,7 +110,7 @@ def load_gear_sheets(gear_lines, gear_spells):
             menu = gear_spells.get(key) or {}
             pseudo_line = {"spells": {"active": menu.get("actives") or [],
                                       "passive": menu.get("passives") or []}}
-            # SELF-COSTS (2026-08-28, the Demon Armor case): what wearing
+            # SELF-COSTS (the Demon Armor case): what wearing
             # this item costs its OWN wearer. Demon Armor's aura buys the
             # group 0.43 resistances by spending 0.37 of the wearer's — the
             # model recorded only the upside, which is how a backwards
@@ -168,9 +168,9 @@ def build_loadout(caps, evidence, line, uses=None):
              "slot_spells": [[spell id per bundle], ...]} where each bundle is
     one spell-use's {cap: score} and each inner list is the mutually-exclusive
     choices for one slot. slot_names/slot_spells let the dashboard map a
-    player's actual Q/W/passive picks onto the scored bundles. Measured
-    2026-08-14: 1278/1319 cap-entries resolve to exactly one slot, 0 span
-    multiple slots, 41 are WEAPON_STATS."""
+    player's actual Q/W/passive picks onto the scored bundles. Measured on
+    the curated sheets: 1278/1319 cap-entries resolve to exactly one slot,
+    0 span multiple slots, 41 are WEAPON_STATS."""
     spell_slot = {}
     for slot, ids in ((line or {}).get("spells", {}) or {}).items():
         for sid in ids:
@@ -200,7 +200,7 @@ def load_sheets(weapon_lines, tune_sheets=None):
     Rows are COMPOSED (sheets_lib): the weapon's own rows plus the shared
     tree-pool rows from sheets/pools/<subcategory>.yaml that apply to it.
 
-    tune_sheets (MASTERSHEET.md tune:sheets): {WEAPON: {cap: score}} expert
+    tune_sheets (MASTERSHEET.md tune:sheets): {WEAPON: {cap: score}} curated
     score overrides, applied at the ROW level so they flow into caps AND
     loadout bundles. An override may re-rank or remove (score 0) a
     capability the composed sheet already grounds — it may NOT invent a new
@@ -252,8 +252,8 @@ def load_sheets(weapon_lines, tune_sheets=None):
                 # hands fact (dumps `twohanded`, parse_dumps `two_handed`):
                 # a two-handed weapon has no off-hand slot, so kit
                 # suggestion and forge dressing must never propose one
-                # (2026-09-03: seat-aggregate kits handed every 2H a torch
-                # or shield mined from the seat's one-handers)
+                # (seat-aggregate kits once handed every 2H a torch or
+                # shield mined from the seat's one-handers)
                 "two_handed": (bool(line.get("two_handed")) if line
                                else key.startswith("2H_")),
                 # retired by the game: still scoreable (old permalinks must
@@ -288,7 +288,7 @@ def load_sheets(weapon_lines, tune_sheets=None):
     return weapons
 
 
-# Positioning capability (§B rework, 2026-08-19). The capability model needs
+# Positioning capability (§B rework). The capability model needs
 # to know WHERE damage comes from: a Galatine spin at 3m and a Frost bomb at
 # 20m supply identical `burst_aoe`, and a "clap" comp needs the bomb, not the
 # spin. Two earlier derivations shipped and were replaced: role_hint
@@ -421,10 +421,10 @@ def derive_ranged_presence(weapons, spell_index, overrides):
 
 
 # ---------------------------------------------------------------- style fit
-# Per-weapon playstyle identity (owner-specified 2026-08-23): a weapon's
+# Per-weapon playstyle identity (identity Phase C, F13 / T24): a weapon's
 # identity comes from its E spell FIRST (the E is the weapon's identity —
 # the same rule the sheets are structured around), then its kit and role.
-# Derived structurally, overridable with cited owner rulings
+# Derived structurally, overridable with cited fact corrections
 # (style_overrides.yaml), audited in out/style_fit_report.json.
 # DESCRIPTIVE layer: comp_identity() reads it; no scoring path does.
 STYLE_FIT_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
@@ -435,8 +435,8 @@ DAMAGE_CAPS = ("burst_st", "burst_aoe", "sustained_dps", "execute")
 # does not scale (the Dagger Pair case — golden T15: its value at scale is
 # utility, not kill damage). A single-scale damage carrier with at least
 # UTILITY_EXEMPT_MIN of these points degrades to 'situational', not 'unfit'.
-# resist_shred + damage_debuff added by owner ruling 2026-08-23 (the
-# Harpoon review-queue case): pierce on the clump and damage amps are
+# resist_shred + damage_debuff belong here (the Harpoon review-queue
+# case, T23e): pierce on the clump and damage amps are
 # group jobs in their own right — the exact tools the kill checklist
 # names — so a pierce-bot carries a slot without group-scale damage.
 UTILITY_EXEMPT_CAPS = ("catch", "clump_create", "engage", "peel", "purge",
@@ -450,61 +450,61 @@ DMG_CARRIER_MIN = 4                              # flat damage points
 # Staff's 5-radius Flame Tornado is a DoT zone — still a group tool).
 # Battleaxe's 1.5-radius Axe Throw stays single.
 GROUP_AOE_MIN_RADIUS = 3.0
-# Weak-group-E rule (owner ruling 2026-08-24, round 7): "dps weapons that
-# have low damage AND add nothing to the group" are trio-class even when
-# the E's footprint is technically an area — "the AND is important, like
-# heavy mace has low damage on its e but it silences enemy group so is
-# really useful in group setting." A group-scale dps E does its job when
-# its damage reaches E_DMG_JOB_MIN sheet points (owner-calibrated:
-# Energy Shaper "super high damage ... great in large group fights" and
-# Greataxe "its e can hit everyone in its vicinity ... it's okay" both sit
-# at 4 and stay), OR when the E carries one REAL group tool — a
-# UTILITY_EXEMPT/interrupt cap at E_UTILITY_TOOL_MIN+ (Carrioncaller's
-# heal cut 4, Frost Staff's root 6; scattered 2-point dabs do not rescue,
-# the Double-Bladed-Staff class the owner graded below the mace standard).
+# Weak-group-E rule (validation round 7, T31): dps weapons with low
+# damage AND nothing for the group are trio-class even when the E's
+# footprint is technically an area — the AND matters: Heavy Mace's E has
+# low damage but silences the enemy group, so it is a real group tool. A
+# group-scale dps E does its job when its damage reaches E_DMG_JOB_MIN
+# sheet points (calibrated by curation judgment: Energy Shaper, graded
+# high-damage and strong in large fights, and Greataxe, whose E hits
+# everyone around it, both sit at 4 and stay), OR when the E carries one
+# REAL group tool — a UTILITY_EXEMPT/interrupt cap at E_UTILITY_TOOL_MIN+
+# (Carrioncaller's heal cut 4, Frost Staff's root 6; scattered 2-point
+# dabs do not rescue: the Double-Bladed-Staff class graded below the
+# mace standard).
 # Self-only effects (mobility, disengage, self_sustain) never rescue.
 # PROVISIONAL — both constants reviewable in out/style_fit_report.json.
 E_DMG_JOB_MIN = 4
 E_UTILITY_TOOL_MIN = 4
 E_GROUP_UTILITY_CAPS = UTILITY_EXEMPT_CAPS + ("interrupt",)
-# Non-stacking budget slots are EARNED (owner rulings 2026-08-24/25): a
-# member of a derived NON-STACKING group (the cursed line — its shared Q
-# pool is priced count-once by the CURSEDOT record) brings damage the
-# budget already discounts, so a GROUP-band (10+) slot is earned by the
-# E's enemy-DEBUFF tool: "the only weapon i see in any party bigger than
-# 15 people is the lifecurse, damnation, or rotcaller" — purge, pierce,
-# heal-cut. Displacement/CC is NOT a debuff and does not earn the slot
-# ("demonic staff is not a true brawl weapon at larger than 7 people" —
-# its fear peels but denies nothing). Members whose best E debuff sits
+# Non-stacking budget slots are EARNED (F18b, F19): a member of a
+# derived NON-STACKING group (the cursed line — its shared Q pool is
+# priced count-once by the CURSEDOT record) brings damage the budget
+# already discounts, so a GROUP-band (10+) slot is earned by the E's
+# enemy-DEBUFF tool: the cursed staves fielded in parties above 15 are
+# Lifecurse, Damnation and Rotcaller — purge, pierce, heal-cut.
+# Displacement/CC is NOT a debuff and does not earn the slot (Demonic
+# Staff is not a brawl weapon above 7 people — its fear peels but denies
+# nothing). Members whose best E debuff sits
 # below E_UTILITY_TOOL_MIN demote to situational at group for EVERY
 # style — a legitimate manual pick, never generated. Trio/gang untouched
 # (Shadowcaller stays a real small-gang pick).
 E_DEBUFF_CAPS = ("purge", "resist_shred", "heal_reduction",
                  "max_health_cut", "damage_debuff")
-# Conditional-payload rule (owner rulings 2026-08-26, the melee-heavy clap
-# radar round): clap wants "naturally high damage that can be delivered
-# almost instantly" — damage that lands from ONE action. A GROUP damage
+# Conditional-payload rule (T32; the melee-heavy clap radar validation
+# round): clap wants naturally high damage delivered almost instantly —
+# damage that lands from ONE action. A GROUP damage
 # carrier whose every damage E is CONDITIONAL leaves clap/clap_kite
 # generation at gang/group (fits -> situational; manual picks always score):
 #   - ramp-dependent: the E consumes charges/stacks other spells must build
-#     first (Clarent "Consumes Heroic Charges" — "stacking q might not be so
-#     easy in a clap comp or if defending terry where enemy is over the
-#     wall"). Detected in the E's resolved dump description — the charge
+#     first (Clarent "Consumes Heroic Charges" — stacking the Q is not
+#     practical in a clap comp or when defending a territory with the
+#     enemy over the wall). Detected in the E's resolved dump description — the charge
 #     spend hides in a generic removeactivespell node, so no structural
 #     marker exists.
 #   - channel-delivered from a non-ranged weapon: the payload ticks over a
 #     held channel the body must stand through (Ursine Maulers' Hundred
 #     Striking Fists — structural `channel` fact from parse_dumps). RANGED
-#     channels stay: "Longbow is nice clap over wall because the dps it
-#     does"; Energy Shaper "is good damage" (26-range beam).
+#     channels stay: Longbow is a clap-over-the-wall tool on its dps alone;
+#     Energy Shaper's 26-range beam is real damage.
 # Support/utility/tank seats are untouched by construction — the rule reads
-# only group-scale DAMAGE carriers, so Earthrune ("very meta clump tank
-# weapon"), Malevolent Locus ("good support weapon") and Enigmatic/
-# Lifecurse/Blight ("all fine supportive weapons") never enter it
-# (damage_scale none). Brawl keeps the demoted weapons ("clarent and
-# ursine are both nice melee brawl weapons"). Extended to KITE 2026-08-26
-# (same session, the kite-forge round): the melee-heavy kite forge read
-# "split identity" at 65% melee, and the one real kite 20-man (ss_kite_20)
+# only group-scale DAMAGE carriers, so Earthrune (the meta clump tank),
+# Malevolent Locus (a support weapon) and Enigmatic/Lifecurse/Blight
+# (supportive weapons) never enter it (damage_scale none). Brawl keeps
+# the demoted weapons (Clarent and Ursine Maulers are melee brawl
+# weapons). Extended to KITE (T33, the kite-forge validation round): the
+# melee-heavy kite forge read "split identity" at 65% melee, and the one
+# real kite 20-man (ss_kite_20)
 # fields ZERO ramp/channel bruisers — "never take the fight" is even less
 # compatible with stack-then-dive than clap is. style_overrides.yaml
 # still wins.
@@ -533,14 +533,14 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
     Structural rules (all PROVISIONAL, reviewable in the audit report):
     - delivery side: autoattack range >= RANGED_MIN_CASTRANGE -> ranged;
       melee autoattack whose E damage still lands at that range -> flex;
-      otherwise melee. REACH IS PAYLOAD REACH, NOT TRAVEL (owner
-      2026-09-08: "when an e lands the caster should read as melee
-      delivery"): an E that moves the caster (the dumps' `dash` node,
-      spell_index `caster_moves`) lands where the body lands, so its cast
-      range counts toward flex only for a FLEX BOMB — an unconditional
-      group payload at the job bar, the exception the owner named first
-      (2026-09-04: Realmbreaker, Rift Glaive — "the damage arrives at
-      range even though the body follows"). Every other leap / charge is
+      otherwise melee. REACH IS PAYLOAD REACH, NOT TRAVEL (T45): an E
+      whose caster lands with it reads as melee delivery — an E that
+      moves the caster (the dumps' `dash` node, spell_index
+      `caster_moves`) lands where the body lands, so its cast range
+      counts toward flex only for a FLEX BOMB — an unconditional group
+      payload at the job bar, the recorded exception (Realmbreaker, Rift
+      Glaive: the damage arrives at range even though the body follows).
+      Every other leap / charge is
       melee delivery with a gap closer (Double Bladed, Carving Sword,
       Daybreaker). Thrown and projected payloads carry no dash node.
     - damage scale: the E decides (E-first identity) — an E bundle claiming
@@ -612,19 +612,19 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 if cr is not None:
                     reach = float(cr)
                     e_reach = max(e_reach, reach)
-                    # DELIVERED reach (owner 2026-09-08): a leap's cast
-                    # range is travel — the payload lands where the body
-                    # lands — so it counts toward flex delivery only for a
-                    # FLEX BOMB (group payload at the job bar; the owner's
-                    # 2026-09-04 exception: Realmbreaker, Rift Glaive).
+                    # DELIVERED reach (T45): a leap's cast range is
+                    # travel — the payload lands where the body lands —
+                    # so it counts toward flex delivery only for a FLEX
+                    # BOMB (group payload at the job bar; the recorded
+                    # exception: Realmbreaker, Rift Glaive).
                     if not moves or (bundle_group and bd >= E_DMG_JOB_MIN):
                         e_reach_delivered = max(e_reach_delivered, reach)
         if not slots and caps.get(AOE_CLAIM):
             e_group = True                       # flat-sheet fallback
-        # STANDOFF E (owner ruling 2026-09-04, blind round 1: "what makes
-        # a comp kite is basically them having tanks which can throw
-        # enemies away, bedrock mace, hoarfrost staff, without having to
-        # commit their body into a fight"): an E, damage-bearing or not,
+        # STANDOFF E (validation round 1, T34): a comp reads kite when
+        # its tanks can throw enemies away — Bedrock Mace, Hoarfrost
+        # Staff — without committing their bodies into the fight. So: an
+        # E, damage-bearing or not,
         # that is delivered at range (ground/enemy target, cast range >=
         # RANGED_MIN_CASTRANGE), DISPLACES (knockback_displace >= 2) and
         # commits nothing — no engage / clump / pull-catch, no self-move,
@@ -633,16 +633,16 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         # old evade-points read that misfired both ways in the round).
         # Bedrock Mace's E is a utility E, so the damage-only e_reach
         # above never saw its 18 m reach — this pass reads every bundle.
-        # Round 2 (2026-09-04, "occult staff to increase team movement ...
-        # icicle staff to slow"): a SLOW FIELD laid at range is the same
+        # Validation round 2 (T36; Occult Staff for team movement, Icicle
+        # Staff to slow): a SLOW FIELD laid at range is the same
         # standoff job — slow >= 4 whose E is not itself a bomb (burst_aoe
         # < 4: Longbow's rain and Spiked Gauntlets are bombs that happen to
         # slow). An E claimed as ENGAGE still disqualifies: Occult's
         # corridor speeds the team INTO a fight as readily as out of one,
-        # and the owner's own clap10 fields it beside a Bedrock as a pure
+        # and the recorded clap10 comp fields it beside a Bedrock as a pure
         # clap — so the slow fields are Icicle, Arctic, Glacial, Chillhowl.
-        # ROOT FIELDS (owner 2026-09-05, "grailseeker can be kite or d
-        # tank"): a root laid at range holds them where they are and
+        # ROOT FIELDS (Grailseeker reads as kite or defensive tank; T39):
+        # a root laid at range holds them where they are and
         # commits nothing — the same standoff job. A root's own `catch`
         # claim is the hold itself, not a pull, so the catch >= 4 clause
         # does not disqualify a root field (it still keeps pull-ins such
@@ -686,15 +686,15 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         # A single-scale carrier whose kit clears the utility exemption is
         # a UTILITY CARRIER (Harpoon the pierce-bot, Dagger Pair the catch
         # bot): its damage is incidental to its job, so it can hold a
-        # group slot — and (blind-label ruling 2026-08-23, the 20v20 comp)
-        # it never anchors a damage-identity split in comp_identity.
+        # group slot — and (the 20v20 comp, T23f) it never anchors a
+        # damage-identity split in comp_identity.
         utility_carrier = (carrier and scale == "single"
                           and util_pts >= UTILITY_EXEMPT_MIN)
 
-        # Weak-group-E (round 7): technically-area E, but its damage is
-        # below the job bar AND no single E tool reaches the rescue bar —
-        # trio-class like a single-scale carrier ("low damage and adds
-        # nothing to the group"; the AND protects Heavy-Mace-style
+        # Weak-group-E (validation round 7): technically-area E, but its
+        # damage is below the job bar AND no single E tool reaches the
+        # rescue bar — trio-class like a single-scale carrier (low damage
+        # and nothing for the group; the AND protects Heavy-Mace-style
         # utility Es and every real tool carrier)
         weak_group_e = (scale == "group"
                         and e_dmg_pts < E_DMG_JOB_MIN
@@ -717,22 +717,21 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                     fit[s]["group"] = deep
             # clap_kite serves whichever half a weapon serves: its verdict
             # is the BEST of the weapon's clap and kite verdicts per band
-            # (owner 2026-08-23: the hybrid fields bomb pieces AND kite
-            # pieces). Overrides still win afterwards ('*' covers it).
+            # (the hybrid fields bomb pieces AND kite pieces). Overrides
+            # still win afterwards ('*' covers it).
             rank = {"fits": 0, "situational": 1, "unfit": 2}
             for b in STYLE_FIT_BANDS:
                 best = min((fit["clap"][b], fit["kite"][b]),
                            key=lambda v: rank[v])
                 fit["clap_kite"][b] = best
 
-        # E-first for HEALERS too (owner ruling 2026-08-23 round 2: "it's
-        # not which line but which weapon ... it should all be based on
-        # what the weapon does and its effect"): a dedicated heal E that
-        # heals a SINGLE ally does not scale to group play any more than
-        # single-scale damage does — "1 hand holy is full healer but it's
-        # not a good group healer for anything larger than 5 people. I
-        # would use it at 3 people and very rarely at 5 but never above
-        # that." Same ladder as the single-scale damage carrier:
+        # E-first for HEALERS too (validation round 2, T27c / T28b): not
+        # the line but the weapon — identity follows what the weapon's
+        # spells do. A dedicated heal E that heals a SINGLE ally does not
+        # scale to group play any more than single-scale damage does: 1H
+        # Holy is a full healer but not a group healer above 5 people —
+        # a trio pick, rarely 5, never above. Same ladder as the
+        # single-scale damage carrier:
         # situational at gang, unfit at group. Derived facts only — an
         # unknown heal scale never degrades anything (heal_scale semantics
         # in derive_economics; overrides below still win).
@@ -743,8 +742,8 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 fit[s]["gang"] = "situational"
                 fit[s]["group"] = "unfit"
 
-        # Non-stacking budget slots are EARNED (owner ruling 2026-08-25,
-        # see E_DEBUFF_CAPS): a non-stacking-group member whose E carries
+        # Non-stacking budget slots are EARNED (F19, see E_DEBUFF_CAPS):
+        # a non-stacking-group member whose E carries
         # no real enemy-debuff tool demotes to situational at GROUP for
         # every style — never unfit (manual picks stay legitimate), never
         # below group band. Overrides below still win.
@@ -754,12 +753,12 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 if fit[s]["group"] == "fits":
                     fit[s]["group"] = "situational"
 
-        # Conditional-payload rule (owner 2026-08-26, E_RAMP_RX block above):
+        # Conditional-payload rule (T32, E_RAMP_RX block above):
         # every damage-bearing E needs ramp or a held non-ranged channel ->
         # not an instant bomb -> out of clap/clap_kite generation at
         # gang/group. Only ever downgrades "fits"; overrides below still win.
-        # FREE RAMP (owner 2026-09-04: "glaive can be clap because you can
-        # stack it easily without hitting anything using q"): a charge the
+        # FREE RAMP (T35: Rift Glaive can clap because its Q stacks the
+        # charge without hitting anything): a charge the
         # weapon's Q applies to the CASTER unconditionally (self-target,
         # no hit / enemy condition in the sentence — Rift Glaive's Spirit
         # Spear) makes the E's ramp free, so it is not conditional. A
@@ -830,14 +829,14 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
 
         w["style_fit"] = {"delivery": delivery, "damage_scale": scale,
                           "utility_carrier": utility_carrier, "fit": fit,
-                          # identity facts (owner 2026-09-04): a ramp-
-                          # dependent bomb is not a clap bomb (Galatine
-                          # "needs to charge its q stacks before it hits"),
+                          # identity facts (T34): a ramp-dependent bomb
+                          # is not a clap bomb (Galatine must charge its
+                          # Q stacks before the E hits),
                           # a standoff E is a kite tool
                           "conditional_payload": conditional_payload,
                           "standoff_e": standoff_e,
                           # the E moves the caster (dumps dash node): its
-                          # reach is travel, not payload reach (2026-09-08)
+                          # reach is travel, not payload reach (T45)
                           "caster_moves": caster_moves}
         rec = {"delivery": delivery, "damage_scale": scale,
                "utility_carrier": utility_carrier,
@@ -864,10 +863,10 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
 
 
 # ---------------------------------------------------------------------------
-# Weapon economics + primary-healer derivation (owner rulings 2026-08-23,
-# forge-quality blind round; config and the rulings' own words live in
-# composition.yaml — `primary_healer`; the crystal cost gate that once sat
-# beside it was retired 2026-09-07, so `cost_tier` is a display fact only).
+# Weapon economics + primary-healer derivation (the forge-quality
+# validation round, T27; config lives in composition.yaml —
+# `primary_healer`; the crystal cost gate that once sat beside it was
+# retired (F14 / T42), so `cost_tier` is a display fact only).
 #
 # cost_tier reads the unique_name's line suffix — the game's own naming:
 # ..._CRYSTAL crystal-artifact, ..._AVALON avalonian, the four faction
@@ -877,8 +876,8 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
 # 2H_ICECRYSTAL_UNDEAD — "CRYSTAL" in the family, _UNDEAD the suffix.
 #
 # full_healer: a weapon whose E-slot bundle supplies >= e_heal_min summed
-# heal points (owner: "the weapon needs to have high healing numbers on its
-# e"). The E is combo-independent (E-first identity), so the flag is static.
+# heal points (a full healer carries high healing numbers on its E). The
+# E is combo-independent (E-first identity), so the flag is static.
 COST_TIER_SUFFIXES = (("_CRYSTAL", "crystal"), ("_AVALON", "avalonian"),
                       ("_UNDEAD", "artifact"), ("_KEEPER", "artifact"),
                       ("_HELL", "artifact"), ("_MORGANA", "artifact"))
@@ -900,8 +899,8 @@ def apply_resilience_penetration(weapons):
     """Stamp per-weapon `resil_pen` from pipeline/resilience_penetration.yaml
     (cited wiki table, post-Realm-Divided; a MELEE-ONLY stat — weapons
     absent from the table carry none, which the wiki states categorically
-    for ranged/magic lines). Owner ruling 2026-08-25 wires it as a partial
-    rebate on the Focus-Fire ST tax (engine `_eff`); both ports read the
+    for ranged/magic lines). It is wired as a partial rebate on the
+    Focus-Fire ST tax (engine `_eff`, F20); both ports read the
     stamped field. Wiki rows outside the combat catalog are reported,
     never guessed."""
     path = os.path.join(HERE, "resilience_penetration.yaml")
@@ -926,9 +925,8 @@ def apply_resilience_penetration(weapons):
 
 
 ROLE_CLASSES = ("frontline", "healer", "support", "dps", "meta")
-# E-first tiered function sweep (owner 2026-08-25: "the primary roles for
-# a weapon should come from its e spell ... certain weapons have these
-# abilities on their q, or w ... but it would be a secondary level role").
+# E-first tiered function sweep (R8): a weapon's primary roles come from
+# its E spell; the same ability on a Q or W makes a secondary-level role.
 # Membership in the FUNCTION roles derives from the sheets' own slot
 # structure across ALL weapons: an E-slot cap at PRIMARY_MIN+ makes the
 # function a primary role (Carving Sword's E cuts resistances 20% —
@@ -946,8 +944,8 @@ FUNCTION_SECONDARY_MIN = 2
 def _slot_cap_values(w, cap, only=None, exclude=None):
     """(e_val, qw_val): the cap's best E-slot bundle value vs its best
     Q/W ABILITY value. Passive procs and always-on stats are deliberately
-    excluded from the secondary read — the owner's rule names "abilities
-    on their q, or w" (a 2-point passive proc is a token, not a role);
+    excluded from the secondary read — the rule names abilities on the
+    Q or W (a 2-point passive proc is a token, not a role);
     weapons without loadout data derive nothing (hand entries only).
     `only`/`exclude` filter by the bundle's evidence spell — the
     spell-classified split (a role may claim specific spells, e.g.
@@ -975,20 +973,18 @@ def _slot_cap_values(w, cap, only=None, exclude=None):
 
 def classify_gear(gear, book, aff_overrides=None):
     """Equipment-role classification under the UNIQUE-ABILITY-FIRST law
-    (owner 2026-08-25 — the general form of the weapons' E-first rule:
-    gear actives sit on D/F/R, so 'it should be something like unique
-    ability first law'): 'just like weapons, the identity of the
-    equipment is derived from its unique spell' and 'damage and
-    tankiness is based on which tree the equipment belongs to. you need
-    to pull numbers to classify'. The tree's PASSIVE choices count too
-    (owner: 'most cloth users will take the damage passive on equipment
-    to increase damage even higher') — per-item `tree_passives` come
+    (the general form of the weapons' E-first rule: gear actives sit on
+    D/F/R): just like weapons, the identity of a piece of equipment
+    derives from its unique spell, and its damage and tankiness from the
+    tree it belongs to — pulled from the numbers, never assumed. The
+    tree's PASSIVE choices count too (cloth wearers take the damage
+    passive to push damage higher) — per-item `tree_passives` come
     from gear_spells.json (dumps): cloth +8% damage/heal / cast speed /
     energy; leather balance / AA speed / CD reduction; plate resists /
     CC duration / CCR / threat.
     Chest class derives from the item's own STAT NUMBERS (cloth 54-68
     armor / +40-50% damage-heal; leather 92-100 / +25-30%; plate 152-161
-    / +0-5% — measured 2026-08-25) with the tree id as cross-check;
+    / +0-5% — measured on the item bank) with the tree id as cross-check;
     statless slots (head/shoes/offhand — the stats bank carries zeros, a
     recorded gap) fall back to the tree id. `role_affinity` = the seat
     roles whose uniform admits the item's class. Items whose unique
@@ -1023,8 +1019,8 @@ def classify_gear(gear, book, aff_overrides=None):
                                              .get("chest") or []))
         if g.get("slot") == "offhand":
             # Offhands have no active — identity is the STAT PROFILE
-            # (owner 2026-08-25: "their usefulness comes from the stats
-            # ... to properly classify them, you have to get the stats").
+            # (their usefulness comes from the stats, so the stats
+            # classify them).
             # Structural mapping, PROVISIONAL: defense/threat -> tank
             # seats; heal output -> healer seats; damage output -> dps
             # seats; cooldown/cast/energy utility -> the caster-support
@@ -1062,7 +1058,7 @@ def classify_gear(gear, book, aff_overrides=None):
                                 f"or empty role list {bad}")
             else:
                 affinity = sorted(ov["affinity"])
-                aff_src = " ".join((ov.get("source") or "owner").split())
+                aff_src = " ".join((ov.get("source") or "curation").split())
         g["role_affinity"] = affinity
         g["tree_passives"] = (gear_spells.get(k) or {}).get("passives") or []
         entry = {"id": k, "name": g.get("display_name"),
@@ -1100,13 +1096,13 @@ KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
                 "potion": "potion", "offhand": "offhand",
                 "secondhand": "offhand"}
 
-# Chain pocket floor (2026-09-08, spec notes/specs/2026-09-08-coherent-
-# style-kits-design.md): the conditional pool keeps chaining only while it
-# holds CHAIN_POCKET_SHARE of the weapon's population or CHAIN_POCKET_VOTES
-# votes — the 2026-09-04 Greataxe pocket (8 of ~74) stops, a 311-vote
-# Keeper pocket carries its helmet and boots.
+# Chain pocket floor (spec notes/specs/2026-09-08-coherent-style-kits-
+# design.md): the conditional pool keeps chaining only while it holds
+# CHAIN_POCKET_SHARE of the weapon's population or CHAIN_POCKET_VOTES
+# votes — the deep-harvest audit's Greataxe pocket (8 of ~74) stops, a
+# 311-vote Keeper pocket carries its helmet and boots.
 CHAIN_POCKET_SHARE, CHAIN_POCKET_VOTES = 0.20, 20
-# Chain STEP voter floor (owner 2026-09-08, "ok on arcane helmet"): every
+# Chain STEP voter floor (R35, the Arcane Staff helmet case): every
 # step's pick must be worn by this many DISTINCT players — the same 5-voter
 # floor the tier modal and the cell's chest step already carry. The Arcane
 # Staff case: the clap cell's chest step (Knight Armor, 10 voters) chained
@@ -1119,8 +1115,8 @@ POOL_MIN_PLAYERS, POOL_TOP_N = 5, 3   # seat pools: shipped items per slot (spec
 
 
 def resolve_passive_doctrine(doc, gear, problems):
-    """Increment 2 (owner 2026-08-25: 'you are right about passive
-    defaults'): stamp each armor/head/shoes piece with its doctrine
+    """Increment 2 (passive defaults, R14): stamp each armor/head/shoes
+    piece with its doctrine
     passive PICK per wearer seat class. roles.yaml names only the
     FAMILY (an id substring) per gear class; the actual passive id
     resolves from the piece's OWN dumps menu (gear_spells.json) and the
@@ -1216,14 +1212,14 @@ def _fold_sources(bids):
 
 
 def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
-    """The observed BUILD ARCHETYPE (owner ruling 2026-09-01: 'i want
-    gear that each seat is wearing to actually be based on what real
-    people wear'): a CONDITIONAL MODAL chain over real fielded builds —
+    """The observed BUILD ARCHETYPE (R20: the gear each seat wears is
+    based on what real people wear): a CONDITIONAL MODAL chain over
+    real fielded builds —
     the most-observed chest first (uniform-gated), then the
     most-observed head AMONG BUILDS WEARING THAT CHEST, and so on — so
     the result is a coherent combination people actually field
     together, never a per-slot Frankenstein. Effect-carrier chests COUNT
-    (2026-09-03 kit audit: excluding them chained Oathkeepers into a
+    (the kit audit: excluding them chained Oathkeepers into a
     14-build pocket and fronted Hunter Hood over an Assassin Hood worn
     by 131 of 149 — the comp-level quota now lives in the FORGE, see
     Engine._allocate_carriers, not in the evidence). Builds missing a
@@ -1232,7 +1228,7 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     size at that step.
 
     POOL VERDICTS END THE CHAIN, PICK VERDICTS SKIP THEIR SLOT
-    (2026-09-10, R36). The chain STOPS once the conditional pool falls
+    (R36). The chain STOPS once the conditional pool falls
     under CHAIN_MIN_POOL votes or the pocket holds too rare a slice of
     the population — past either, no further conditional pick is
     trustworthy. But a slot whose own modal fails (too few distinct
@@ -1249,7 +1245,7 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     47 -> 57, mean depth 2.96 -> 3.51. A chain may now have GAPS; both
     ports already read it per slot, never as a prefix.
 
-    THE 2026-09-08 RESCALE (spec notes/specs/2026-09-08-coherent-style-
+    THE SHARE RESCALE (spec notes/specs/2026-09-08-coherent-style-
     kits-design.md): the "rare pocket" guard used to compare a conditional
     COUNT inside the shrinking pocket with the unconditional modal's COUNT
     over the whole population — once the chest pocket was under half the
@@ -1260,11 +1256,11 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     modal's SHARE of the population. Measured on the 2,042-battle harvest:
     weapons reaching 4+ slots 6 -> 37, mean depth 1.77 -> 2.62.
 
-    ONE PLAYER, ONE VOTE (2026-09-04): `build_dicts` entries are
+    ONE PLAYER, ONE VOTE (R27): `build_dicts` entries are
     (gear, weight, player) — a player's builds on the weapon share one
     vote between them — so counts and pool sizes are VOTES (rounded for
     shipping) and a step's pick must be worn by CHAIN_STEP_MIN_VOTERS
-    DIFFERENT players (5 since 2026-09-08, was 2 — the Arcane Staff
+    DIFFERENT players (5, raised from 2 after the Arcane Staff
     Judicator Helmet pocket), never one very active player twice."""
     SLOT_ORDER = ("armor", "head", "shoes", "cape", "offhand",
                   "potion", "food")
@@ -1282,10 +1278,10 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     # unconditional modal SHARE per slot over the WHOLE pool: a chain step
     # may only pick an item whose share of the pocket is at least half the
     # slot modal's share of the population — shares against shares
-    # (2026-09-08; the old count-against-count form failed by construction
+    # (the old count-against-count form failed by construction
     # once the pocket was under half the population). The rare-pocket
     # defence (a 7-of-8 cape inside one chest's pocket must not outrank a
-    # 36-of-74 slot modal — 2026-09-04 deep-harvest audit: Greataxe, Great
+    # 36-of-74 slot modal — the deep-harvest audit: Greataxe, Great
     # Hammer) is the POCKET FLOOR below: that pocket was 8 of ~74.
     uncond = {}
     for b, wgt, _p in pool:
@@ -1322,7 +1318,7 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
         if (len(players[gid]) < CHAIN_STEP_MIN_VOTERS
                 or n < CHAIN_MIN_SHARE * pool_w
                 or n / pool_w < 0.5 * uncond_share.get(slot, 0.0)):
-            # A failed PICK skips ITS OWN SLOT (2026-09-10, R36) — only a
+            # A failed PICK skips ITS OWN SLOT (R36) — only a
             # failed POOL ends the chain. All five guards used to break
             # alike, so one diffuse slot killed every slot after it, and
             # the fixed order puts the most concentrated slots (potion,
@@ -1352,14 +1348,14 @@ def _normalize_gear_id(v, gear):
     return cands.pop() if len(cands) == 1 else None
 
 
-# DOCTRINE BANDS (2026-09-04, "kit doctrine per size band"): the group
+# DOCTRINE BANDS (kit doctrine per size band): the group
 # band (killer parties of 10+, every curated content) is the doctrine the
 # seat ships at top level; the GANG band (killer parties of 4-9, curated
 # small-scale contents only) ships under `kit_bands.gang` and the engine
 # reads it below 10 members, so a 5-man planner gets gank-scale kits
 # instead of ZvZ kits scaled down (Hunter Shoes and Demon Cape are gang
-# doctrine, not noise). Owner grading overrides apply to the group band
-# only (they were ruled on ZvZ kits). Trios (<= 3) read the gang band.
+# doctrine, not noise). Grading overrides apply to the group band
+# only (they were graded on ZvZ kits). Trios (<= 3) read the gang band.
 DOCTRINE_BANDS = {
     "group": {"party": (10, 10 ** 6), "curated": None},
     "gang": {"party": (4, 9),
@@ -1379,24 +1375,24 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     + citations + off-uniform sightings) goes to roles_report. The
     CHEST admits only uniform classes — an observed off-uniform chest
     is reported, never admitted. Derived, never hand-listed — except
-    `overrides` (roles.yaml kit_doctrine.overrides, the 2026-08-26
-    grading rulings): cited drop/add per seat+slot — or per
+    `overrides` (roles.yaml kit_doctrine.overrides, the kit grading
+    validation round, R17): cited drop/add per seat+slot — or per
     seat+weapon+slot under a `weapons:` key — applied on top of the
     mined pools. A drop must name a mined item and an add a cataloged,
     uniform-legal, not-already-observed one — anything else is a stale
-    ruling and blocks the release.
+    override and blocks the release.
 
-    2026-08-26 (owner design, the Demon-Armor-on-Hand-of-Justice case):
+    Per-weapon tier (R18, the Demon-Armor-on-Hand-of-Justice case):
     pools also ship PER WEAPON (`kit_weapon`, report `by_weapon`) so a
     weapon's own observed kit ranks ahead of the seat aggregate — but
     items granting a typed gear effect (`effect_map`) are EXCLUDED from
-    the per-weapon tier: effect carriers are comp-level allocations
-    ('maybe the composition didnt have enough demon armors so the
-    engage tank has to take one'), tagged `effect:` in the seat pool
-    and quota-mined separately (mine_effect_quotas).
+    the per-weapon tier: effect carriers are comp-level allocations (a
+    composition short of Demon Armors hands one to the engage tank),
+    tagged `effect:` in the seat pool and quota-mined separately
+    (mine_effect_quotas).
 
-    2026-09-01 (owner: 'add seats for different gear too and base it on
-    seen evidence from the data we harvested from all the battles'):
+    Killboard stream (R20: seats are based on the evidence harvested
+    from the battles):
     the KILLBOARD harvest (out/party_rosters.json.gz builds — real fielded
     kits at kill time, ids pre-normalized to the catalog key space)
     joins the mining as a SECOND evidence stream. Provenance stays
@@ -1404,7 +1400,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     a NOISE FLOOR applies: a killboard-only item needs KB_MIN_SEAT
     DISTINCT PLAYERS to enter a seat pool and KB_MIN_WEAPON to enter a
     weapon tier — an item the curated corpus already cites merges its
-    killboard count regardless. ONE PLAYER, ONE VOTE (2026-09-04): a
+    killboard count regardless. ONE PLAYER, ONE VOTE (R27): a
     build is one player in one battle and a third of a weapon's builds
     are repeat sightings of the same people (median 0.67 distinct
     players per build; Heavy Crossbow: one player in 7 of 20), so every
@@ -1414,17 +1410,18 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     the same off_uniform report (never admitted); winner bias is the
     harvest's documented property and rides the citation.
 
-    STYLE CELLS (2026-09-08, spec notes/specs/2026-09-08-coherent-style-
-    kits-design.md): with `style` set (group band only) the killboard
+    STYLE CELLS (spec notes/specs/2026-09-08-coherent-style-kits-
+    design.md): with `style` set (group band only) the killboard
     builds are filtered to those linked (party_link) to a party labelled
     that style (`party_styles` = {(battle, index): style} from
     out/party_styles.json), curated reference builds drop out (they
     carry no style), a weapon needs STYLE_CELL_MIN_VOTERS distinct
-    players in the cell, overrides do not apply (ruled on the band), and
+    players in the cell, overrides do not apply (graded on the band), and
     everything the miner ships lands under the seat's
     `kit_styles.<style>` — absent where thin, never filled from the band
     or another style. The engine lays a DECLARED style's cell over the
-    band (`_seat_kit`); `balanced` never reads one (owner 2026-09-08)."""
+    band (`_seat_kit`); `balanced` never reads one (it declares no
+    style)."""
     effect_map = effect_map or {}
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path):
@@ -1446,8 +1443,8 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     kb_path = rosters_io.path(OUT)
     if os.path.exists(kb_path):
         kb_doc = rosters_io.load(kb_path) or {}
-        # PARTY-SIZE FLOOR (2026-09-03, owner: "this grailseeker build is
-        # a ganking build not a zvz build"): only builds from KILLER
+        # PARTY-SIZE FLOOR (the Grailseeker case: a ganking build is not
+        # a ZvZ build): only builds from KILLER
         # PARTIES of >= KB_MIN_PARTY members are group doctrine — the
         # engine's group band starts at 10. Smaller parties inside a
         # big battle are gankers/roamers (Grailseeker: Hunter Shoes 20
@@ -1499,13 +1496,13 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             if ac in e:
                 e[ac] += wgt
         kb_armour = cls_counts
-    # OBSERVED CHEST CLASS (2026-09-03 kit audit; owner: "lockdown what
-    # people are actually wearing"): a weapon whose fielded builds wear
+    # OBSERVED CHEST CLASS (the kit audit: lock down what people are
+    # actually wearing; R26): a weapon whose fielded builds wear
     # an armour class in >= KB_UNI_SHARE of >= KB_UNI_MIN fielded builds
     # has that class ADMITTED to its own weapon tier (thin samples never
     # overturn a book uniform; Grailseeker sat under the floor at 32
     # builds until the first overnight harvest lifted it to 35 voters
-    # with leather at 34%, and the owner accepted — 2026-09-05)
+    # with leather at 34%; accepted, R26)
     # and archetype even where the seat's book uniform disagrees —
     # Galatine Pair wears plate in 81% of 145 winning builds while its
     # bomb seat reads cloth/leather, and the old gate threw the modal
@@ -1516,12 +1513,12 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     # (not only the majority): Witchwork splits cloth 33% / leather 25%
     # under a plate engage seat, and a majority-only rule left it gated
     # to the 2% plate chest.
-    # KB_UNI_MIN is VOTERS since 2026-09-04 (one player, one vote): 35
+    # KB_UNI_MIN is VOTERS (one player, one vote, R27): 35
     # voters is the old 50-build floor re-expressed in the new unit (the
     # median weapon has 0.67 voters per build; 61 weapons clear it vs 60
     # before), so a thin sample still never overturns a book uniform;
-    # a weapon that reaches the floor is evidence the owner rules on, not
-    # a ruling to defend (Grailseeker, 2026-09-05: accepted)
+    # a weapon that reaches the floor is evidence to decide on, not a
+    # rule to defend (Grailseeker: accepted)
     KB_UNI_SHARE, KB_UNI_MIN = 0.25, 35
     uni_ext = {}
     for wk, wa in sorted(kb_armour.items()):
@@ -1582,14 +1579,14 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                             gid, {"id": gid, "count": 0, "sources": set()})
                         ent["count"] += 1
                         ent["sources"].add(bid)
-                    # effect carriers count like any other piece since
-                    # 2026-09-03 (the comp-level quota moved to the forge)
+                    # effect carriers count like any other piece (the
+                    # comp-level quota moved to the forge)
                     went = wpools.setdefault(wk_id, {}).setdefault(
                         slot, {}).setdefault(
                         gid, {"id": gid, "count": 0, "sources": set()})
                     went["count"] += 1
                     went["sources"].add(bid)
-        # ---- killboard stream (2026-09-01): mine separately, then merge
+        # ---- killboard stream: mine separately, then merge
         # above the noise floor with its own provenance token ----
         kb_pools, kb_off, kb_wonly = {}, {}, {}
         # each entry: votes (player-weighted) + the set of distinct players
@@ -1623,8 +1620,8 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                                 player)
                     _vote(ent.setdefault("weapons", {}), wk_id, wgt, player)
 
-        # SEAT POOLS (2026-09-08, spec notes/specs/2026-09-08-coherent-
-        # style-kits-design.md section 3): player-counted items per slot,
+        # SEAT POOLS (spec notes/specs/2026-09-08-coherent-style-kits-
+        # design.md section 3): player-counted items per slot,
         # plain and CONDITIONED ON THE BUILD'S OWN CHEST, for the five
         # poolable slots. The engine's kit reader serves them where a
         # weapon's slot evidence is thin (under POOL_MIN_VOTES): measured
@@ -1715,7 +1712,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             off_uniform.append({"id": gid, "weapon": wk_id,
                                 "build": _cite(kb_off[(gid, wk_id)])})
         if style is not None:
-            # CELL SLOT FLOOR (2026-09-08, measured the same day: 39 of 63
+            # CELL SLOT FLOOR (measured on the same harvest: 39 of 63
             # cells whose modal chest differed from the band's fronted an
             # item with < 5 votes over a 70-90 vote band modal): a cell's
             # slot exists only where its MODAL item has
@@ -1730,7 +1727,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             for wk_id in list(wpools):
                 if not wpools[wk_id]:
                     del wpools[wk_id]
-        # ---- observed build archetypes (owner ruling 2026-09-01): the
+        # ---- observed build archetypes (R20): the
         # coherent modal build per weapon (>= 3 observed builds), with a
         # seat-level archetype over all member builds as the fallback ----
         seat_builds, kit_weapon_build = [], {}
@@ -1787,7 +1784,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                 # [id, count, players]: the third element is the distinct
                 # people behind a killboard-fed row (absent on a reference-
                 # only row), so the engine's thin-slot read can count
-                # PEOPLE like every other doctrine floor (R27; 2026-09-09:
+                # PEOPLE like every other doctrine floor (R27; the case:
                 # a 5-person Hunter Hood at 4.5 votes rounded to 4 and was
                 # pooled away under a declared clap)
                 kit_weapon.setdefault(wk_id, {})[slot] = [
@@ -1848,27 +1845,27 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     if style is None:
         for rid in sorted(set(overrides or {}) - seats_seen):
             problems.append(f"kit override: {rid} is not a seat role with "
-                            f"a chest uniform — ruling cannot apply")
+                            f"a chest uniform — override cannot apply")
     return detail
 
 
 def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
                          rules, problems):
-    """Apply one seat's cited drop/add rulings to its mined kit pools.
+    """Apply one seat's cited drop/add overrides to its mined kit pools.
     Seat-slot rules mutate kit/det (a drop cascades into every member
-    weapon's pool — a seat-wide ruling can't be resurrected by the
+    weapon's pool — a seat-wide drop can't be resurrected by the
     per-weapon tier); `weapons:` rules target one member's pool. Returns
     the audit list for roles_report."""
     applied = []
 
     def _add_ok(slot, gid, tag, det_rows):
-        """Validate one add ruling; True when it may apply."""
+        """Validate one add override; True when it may apply."""
         if gid not in gear:
             problems.append(f"kit override: {rid}/{tag}: add of "
                             f"unknown item {gid}")
         elif gid in [e["id"] for e in det_rows.get(slot) or []]:
             problems.append(f"kit override: {rid}/{tag}: add of "
-                            f"{gid} already observed — redundant ruling")
+                            f"{gid} already observed — redundant override")
         elif slot == "armor" and \
                 (gear[gid].get("gear_class") or "") not in uni:
             problems.append(f"kit override: {rid}/{tag}: add of "
@@ -1885,7 +1882,7 @@ def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
             if gid not in [e["id"] for e in det.get(slot) or []]:
                 problems.append(f"kit override: {rid}/{slot}: drop of "
                                 f"{gid} not in the mined pool (stale "
-                                f"ruling — re-check against the board)")
+                                f"override — re-check against the board)")
                 continue
             det[slot] = [e for e in det[slot] if e["id"] != gid]
             kit[slot] = [i for i in kit[slot] if i != gid]
@@ -1902,7 +1899,7 @@ def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
             if _add_ok(slot, gid, slot, det):
                 det.setdefault(slot, []).append(
                     {"id": gid, "count": 0,
-                     "sources": [a.get("source") or "owner"]})
+                     "sources": [a.get("source") or "curation"]})
                 kit.setdefault(slot, []).append(gid)
                 applied.append({"slot": slot, "op": "add", "id": gid,
                                 "source": a.get("source")})
@@ -1915,7 +1912,7 @@ def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
                 if gid not in [e["id"] for e in wd.get(slot) or []]:
                     problems.append(f"kit override: {rid}/{wk_id}/{slot}: "
                                     f"drop of {gid} not in the weapon's "
-                                    f"mined pool (stale ruling)")
+                                    f"mined pool (stale override)")
                     continue
                 wd[slot] = [e for e in wd[slot] if e["id"] != gid]
                 kw[slot] = [p for p in kw[slot] if p[0] != gid]
@@ -1927,7 +1924,7 @@ def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
                 if _add_ok(slot, gid, f"{wk_id}/{slot}", wd):
                     wd.setdefault(slot, []).append(
                         {"id": gid, "count": 0,
-                         "sources": [a.get("source") or "owner"]})
+                         "sources": [a.get("source") or "curation"]})
                     kw.setdefault(slot, []).append([gid, 0])
                     applied.append({"weapon": wk_id, "slot": slot,
                                     "op": "add", "id": gid,
@@ -1936,14 +1933,13 @@ def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
 
 
 def mine_effect_quotas(gear, effect_map, problems):
-    """Observed per-comp COPIES of each typed gear effect (owner design
-    2026-08-26, the Demon-Armor-on-Hand-of-Justice case: 'maybe the
-    composition didnt have enough demon armors so the engage tank has
-    to take one' — effect-carrier chests are comp-level allocations,
-    not weapon doctrine). Groups builds_index records by their comp
-    prefix; only near-complete rosters (>= 10 recorded seats) evidence
-    a quota. DISPLAY-ONLY: ships on the grading board and never
-    advises until the owner grades it."""
+    """Observed per-comp COPIES of each typed gear effect (R18, the
+    Demon-Armor-on-Hand-of-Justice case: a composition short of Demon
+    Armors hands one to the engage tank — effect-carrier chests are
+    comp-level allocations, not weapon doctrine). Groups builds_index
+    records by their comp prefix; only near-complete rosters (>= 10
+    recorded seats) evidence a quota. DISPLAY-ONLY: ships on the
+    grading board and never advises until graded."""
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path) or not effect_map:
         return {}
@@ -1978,14 +1974,14 @@ def mine_effect_quotas(gear, effect_map, problems):
                         "copies": counts}
     return {"note": ("copies of each typed gear effect per observed "
                      "near-complete roster (>= 10 recorded seats); "
-                     "display-only until owner-graded"),
+                     "display-only until graded"),
             "comps": rows, "summary": summary}
 
 
 def mine_carrier_quotas(gear, effect_map):
-    """CARRIER QUOTAS from the killboard harvest (2026-09-03 kit audit;
-    owner: "lockdown what people are actually wearing ... people who win
-    fights"): per fight-size bucket, the share of fielded builds whose
+    """CARRIER QUOTAS from the killboard harvest (the kit audit: lock
+    down what the people who win fights actually wear; R25): per
+    fight-size bucket, the share of fielded builds whose
     chest grants each typed gear effect. Demon / Judicator / Guardian /
     Royal-Jacket / Hellion chests are worn by a handful of a roster, not
     by every tank whose own weapon favours them — Judicator is the modal
@@ -2036,14 +2032,14 @@ def mine_carrier_quotas(gear, effect_map):
 
 
 def apply_labels(weapons, book, doc, lines):
-    """TILE LABELS (owner 2026-09-11; roles.yaml `labels`): stamp every
+    """TILE LABELS (R37; roles.yaml `labels`): stamp every
     role's `word` and every weapon's `label` = {primary, tags, source}.
     Display only. Tags derive from the weapon's own curated capability
     sheet — E-first (evidence grounded by the E outranks Q/W tools), then
     score, then the vocabulary order — at >= min_score, at most max_tags,
     never a capability the primary word implies; healers read their heal
-    profile as the primary and their line as the tag. Owner overrides
-    (cited) replace the derived tags. Fail closed: an override naming an
+    profile as the primary and their line as the tag. Cited overrides
+    replace the derived tags. Fail closed: an override naming an
     unknown weapon, a word outside the vocabulary or lacking a source
     blocks the release. Returns problems."""
     cfg = doc.get("labels") or {}
@@ -2112,7 +2108,7 @@ def apply_labels(weapons, book, doc, lines):
         ov = overrides.get(wk)
         if ov and ov.get("tags") is not None:
             tags = list(ov["tags"])
-            src = ov.get("source") or "owner"
+            src = ov.get("source") or "curation"
         w["label"] = {"primary": primary, "tags": tags, "seat": seat, "source": src}
     return problems
 
@@ -2131,8 +2127,8 @@ def apply_roles(weapons, gear):
     book = doc.get("roles") or []
     effects = doc.get("gear_effects") or []
     problems, seen = [], set()
-    # party style labels (derive_party_styles.py -> out/party_styles.json,
-    # 2026-09-08): optional; a file derived from a DIFFERENT artifact than
+    # party style labels (derive_party_styles.py -> out/party_styles.json):
+    # optional; a file derived from a DIFFERENT artifact than
     # the one on disk blocks the release (fail closed, loudly); a missing
     # file means no style cells this build
     party_styles = {}
@@ -2153,7 +2149,7 @@ def apply_roles(weapons, gear):
     else:
         print("party_styles.json missing — no style cells this build "
               "(run derive_party_styles.py after a harvest)")
-    # gear effects (owner 2026-08-25): typed gear-carried auras/actives —
+    # gear effects (R7): typed gear-carried auras/actives —
     # items grant them (id = catalog-modeled, named = documented but not
     # yet curated); carriers are weapons evidenced to take that seat.
     for ge in effects:
@@ -2196,8 +2192,8 @@ def apply_roles(weapons, gear):
             if not (m.get("source") or "").strip():
                 problems.append(f"roles: {rid}: item {m.get('id')} no source")
     # E-first tiered sweep over every weapon (see FUNCTION_ROLE_CAPS).
-    # Spell-classified split (owner 2026-08-25: hammers "only break
-    # shields on q, it isnt really a purge"): a role's `spells:` list
+    # Spell-classified split (R9: hammers break shields on the Q, which
+    # is not a purge): a role's `spells:` list
     # claims those evidence spells for ITSELF; the unfiltered role on
     # the same cap never counts them.
     all_spells = set()
@@ -2251,7 +2247,7 @@ def apply_roles(weapons, gear):
     gear_board, gear_problems = classify_gear(
         gear, book, doc.get("gear_affinity_overrides") or {})
     problems += gear_problems
-    # increment 2 (owner 2026-08-25): passive doctrine picks per piece,
+    # increment 2 (R14): passive doctrine picks per piece,
     # and evidence-led per-seat kit pools — both AFTER classify_gear
     # (they read the stamped gear_class)
     resolve_passive_doctrine(doc.get("kit_doctrine"), gear, problems)
@@ -2262,10 +2258,10 @@ def apply_roles(weapons, gear):
         (doc.get("kit_doctrine") or {}).get("overrides") or {},
         effect_map)
     # the GANG band (4-9 man killer parties + small-scale curated
-    # contents; no grading overrides — those were ruled on ZvZ kits)
+    # contents; no grading overrides — those were graded on ZvZ kits)
     kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
                                           effect_map, band="gang")
-    # STYLE CELLS (2026-09-08): one cell per declared style on the group
+    # STYLE CELLS: one cell per declared style on the group
     # band, from builds linked to labelled parties; absent where thin
     kit_detail_styles = {}
     if party_styles:
@@ -2278,7 +2274,7 @@ def apply_roles(weapons, gear):
     effect_quotas = mine_effect_quotas(gear, effect_map, problems)
     carrier_quotas = mine_carrier_quotas(gear, effect_map)
     # unique actives that buff allies but sit in no gear_effect yet —
-    # candidates for the effects catalog (owner grading)
+    # candidates for the effects catalog (pending grading)
     effect_items = {it.get("id") for ge in effects
                     for it in (ge.get("items") or []) if it.get("id")}
     effect_candidates = sorted(
@@ -2306,7 +2302,7 @@ def apply_roles(weapons, gear):
         "menus_secondary": {k: w.get("role_menu_secondary", [])
                             for k, w in sorted(weapons.items())
                             if w.get("role_menu_secondary")}}
-    # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
+    # NEED PROFILES (increment 3, F21): fine-seat
     # bands + function coverage minima for the forge. Validated
     # fail-closed: keys must be role ids, function roles take min only,
     # min <= max. Shipped verbatim; the engine scales by size at
@@ -2341,8 +2337,8 @@ def derive_economics(weapons, composition, spell_index, overrides):
     malformed override, or one naming a weapon/spell that is not that
     weapon's E heal).
 
-    Heal identity is STRUCTURAL, E-first (owner ruling 2026-08-23 round 2:
-    no per-weapon taste rules): the E bundle with the highest summed heal
+    Heal identity is STRUCTURAL, E-first (validation round 2, T27c: no
+    per-weapon taste rules): the E bundle with the highest summed heal
     points names the heal spell; the spell's own area facts decide the
     scale (area -> group; facts without area -> single; no facts ->
     unknown, never inferred). heal_overrides.yaml corrects spells whose
@@ -2438,9 +2434,9 @@ META_PRIOR_PATH = os.path.join(OUT, "meta_prior.json")
 
 def load_meta_prior(known_weapons):
     """The GENERATED, size-bucketed meta prior (derive_meta_prior.py ->
-    out/meta_prior.json; owner ruling 2026-09-08) and, since 2026-09-11,
-    its pair table (`meta_pairs`, the best-observed-partner half of the
-    blend). Returns (solo, pairs). Fail closed, loudly: a missing file, a
+    out/meta_prior.json; H18) and its pair table (`meta_pairs`, the
+    best-observed-partner half of the blend, A1-A13). Returns (solo,
+    pairs). Fail closed, loudly: a missing file, a
     file derived from a different party_rosters.json.gz than the one on
     disk, an artifact not derived on the training split (battle % 5 != 0
     -- an all-battles copy is AUDIT ONLY), a malformed bucket map, an
@@ -2451,7 +2447,7 @@ def load_meta_prior(known_weapons):
     import hashlib
     if not os.path.exists(META_PRIOR_PATH):
         sys.exit("out/meta_prior.json missing — the meta prior is GENERATED "
-                 "from the committed harvest since 2026-09-08: run "
+                 "from the committed harvest: run "
                  "py -3 pipeline/derive_meta_prior.py")
     with open(META_PRIOR_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
@@ -2505,7 +2501,7 @@ ROLE_COUNTS_PATH = os.path.join(OUT, "role_counts.json")
 
 def load_role_typical():
     """The GENERATED typical role counts (derive_role_counts.py ->
-    out/role_counts.json; owner rulings 2026-09-11): the harvest p50 per
+    out/role_counts.json; F31 / T48): the harvest p50 per
     exact size at 10+ (pooled, and per declared style), the median of the
     fitted published comps per content below 10, healer / frontline /
     support (dps never — the residual role). Attached to the dataset's
@@ -2522,7 +2518,7 @@ def load_role_typical():
     import hashlib
     if not os.path.exists(ROLE_COUNTS_PATH):
         sys.exit("out/role_counts.json missing — typical role counts are "
-                 "GENERATED from the committed evidence since 2026-09-11: "
+                 "GENERATED from the committed evidence: "
                  "run py -3 pipeline/derive_role_counts.py")
     with open(ROLE_COUNTS_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
@@ -2536,8 +2532,8 @@ def load_role_typical():
                      f"{art} — rerun derive_role_counts.py")
     if not (doc.get("_split") or {}).get("holdout_mod"):
         sys.exit("out/role_counts.json was not derived on the training split "
-                 "(2026-09-15: the harvest rows never learn from the v4h "
-                 "holdout) — rerun py -3 pipeline/derive_role_counts.py "
+                 "(the harvest rows never learn from the v4h holdout) — "
+                 "rerun py -3 pipeline/derive_role_counts.py "
                  "without --all-battles")
     typ = doc.get("typical") or {}
     if set(typ) != {"pooled", "styles", "comps"}:
@@ -2575,19 +2571,19 @@ SKELETONS_PATH = os.path.join(OUT, "skeletons.json")
 
 
 def refuse_hand_per_weapon(dup):
-    """A hand-set duplication.per_weapon list blocks the build (owner
-    2026-09-15): copy allowances are GENERATED per style x band."""
+    """A hand-set duplication.per_weapon list blocks the build: copy
+    allowances are GENERATED per style x band (S1-S6)."""
     if (dup or {}).get("per_weapon"):
-        sys.exit("composition.duplication.per_weapon is GENERATED since "
-                 "2026-09-15 (pipeline/derive_skeletons.py -> "
+        sys.exit("composition.duplication.per_weapon is GENERATED "
+                 "(pipeline/derive_skeletons.py -> "
                  "out/skeletons.json, per style x band); remove the hand-set "
                  "allowances from templates/composition.yaml")
 
 
 def load_skeletons(known_weapons, seat_ids):
     """The GENERATED seat skeletons and copy allowances
-    (derive_skeletons.py -> out/skeletons.json; owner ruling 2026-09-15,
-    spec notes/specs/2026-09-15-skeleton-first-generation-design.md):
+    (derive_skeletons.py -> out/skeletons.json; S1-S6, spec
+    notes/specs/2026-09-15-skeleton-first-generation-design.md):
     per exact size at 10+, pooled and per declared style, the typical
     count of every PRIMARY SEAT (round(p50) of distinct fully-known killer
     rosters on the training split), and per style x band the copy
@@ -2605,8 +2601,8 @@ def load_skeletons(known_weapons, seat_ids):
     import hashlib
     if not os.path.exists(SKELETONS_PATH):
         sys.exit("out/skeletons.json missing — seat skeletons and copy "
-                 "allowances are GENERATED from the committed evidence since "
-                 "2026-09-15: run py -3 pipeline/derive_skeletons.py")
+                 "allowances are GENERATED from the committed evidence: "
+                 "run py -3 pipeline/derive_skeletons.py")
     with open(SKELETONS_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
     src = doc.get("_source") or {}
@@ -2698,7 +2694,7 @@ def load_skeletons(known_weapons, seat_ids):
                           "styles": {st: seat_rows(rows, f"styles[{st}]")
                                      for st, rows in sorted(
                                          (seats["styles"] or {}).items())}},
-                # plan tools (standoff, 2026-09-15): a generation MINIMUM
+                # plan tools (standoff): a generation MINIMUM
                 # per declared style and size — what the style's winners
                 # field of the tool the identity read defines the plan by
                 "plan": {"pooled": plan_rows(plan["pooled"], "plan pooled"),
@@ -2725,7 +2721,7 @@ def load_templates(tune=None):
         elif base == "styles.yaml":
             styles = doc.get("styles", {})
         elif base == "style_bands.yaml":
-            # style x size rows (derive_style_bands.py, owner 2026-09-04):
+            # style x size rows (derive_style_bands.py, T37):
             # per declared style x band, target/soft per capability read
             # AFTER the content row at 10+. Validated here, fail closed.
             style_bands = doc
@@ -2751,7 +2747,7 @@ def load_templates(tune=None):
         elif base == "composition.yaml":
             composition = doc
         else:
-            # FIT PROVENANCE (owner 2026-09-10, target is the median): every
+            # FIT PROVENANCE (target is the median, V7): every
             # content states how its targets were measured; the engine
             # reports it as target_source() and the board labels thin rows.
             # A row may carry `min` (the least fitted comp) beside target
@@ -2761,7 +2757,7 @@ def load_templates(tune=None):
                     and fit.get("stat") in ("median", "minimum", "none")
                     and type(fit.get("comps")) is int and fit["comps"] >= 0):
                 sys.exit(f"{base}: needs fit: {{comps: N, stat: median|minimum"
-                         f"|none}} (target provenance, owner 2026-09-10), "
+                         f"|none}} (target provenance, V7), "
                          f"got {fit!r}")
             for cap, v in (doc.get("requirements") or {}).items():
                 lo = v.get("min", v.get("target"))
@@ -2780,16 +2776,16 @@ def load_templates(tune=None):
                 sys.exit(f"styles.yaml: {style}: invalid role_min_per_players "
                          f"entry {role}={per!r}")
 
-    # MASTERSHEET overrides (the expert's single control surface): scoring
+    # MASTERSHEET overrides (the single override surface): scoring
     # and mechanics deep-merge; template overrides address one content's
     # requirement caps. Unknown keys fail the build — never silent.
     tune = tune or {}
     scoring = mastersheet.deep_merge(scoring, tune.get("scoring", {}))
-    # The meta prior is GENERATED (owner ruling 2026-09-08: one harvest
-    # prior replacing both hand lists) — a hand-set map in scoring.yaml or
+    # The meta prior is GENERATED (H18: one harvest prior replaces both
+    # hand lists) — a hand-set map in scoring.yaml or
     # MASTERSHEET tune:scoring is a build error, never silently merged.
     if scoring.get("meta_prior") or scoring.get("meta_pairs"):
-        sys.exit("scoring.meta_prior / meta_pairs are GENERATED since 2026-09-08 "
+        sys.exit("scoring.meta_prior / meta_pairs are GENERATED "
                  "(pipeline/derive_meta_prior.py -> out/meta_prior.json); "
                  "remove the hand-set map from templates/scoring.yaml or "
                  "MASTERSHEET.md tune:scoring")
@@ -2847,7 +2843,7 @@ def main():
                          "exit 0 (release_clean still goes false)")
     args = ap.parse_args()
 
-    # MASTERSHEET.md — the expert's single control surface. Parse errors and
+    # MASTERSHEET.md — the single override surface. Parse errors and
     # unknown keys fail the build (never silent).
     try:
         tune = mastersheet.load()
@@ -2859,20 +2855,19 @@ def main():
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
     templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
-    # HOLDOUT (2026-09-15): the style x size board records the split it
-    # learned from; a board that predates the audit's --holdout-mod is
-    # weak-form on every styled measurement and the build says so (it
-    # cannot regenerate the board: the raw cache lives on the harvest
-    # checkout)
+    # HOLDOUT: the style x size board records the split it learned
+    # from; a board that predates the audit's --holdout-mod is weak-form
+    # on every styled measurement and the build says so (it cannot
+    # regenerate the board: the raw cache lives on the harvest machine)
     sb_split = style_bands.get("split") if isinstance(style_bands, dict) else None
     print("  style bands   : "
           + (f"training split ({sb_split.get('rule')})"
              if isinstance(sb_split, dict) and sb_split.get("holdout_mod")
              else "PREDATE the holdout split — weak-form until "
-                  "audit_style_rosters.py reruns on the harvest checkout"))
-    # observed relevance (owner 2026-09-08): the generated harvest prior
+                  "audit_style_rosters.py reruns on the harvest machine"))
+    # observed relevance (H18): the generated harvest prior
     scoring["meta_prior"], scoring["meta_pairs"] = load_meta_prior(set(weapons))
-    # typical role counts (owner 2026-09-11): the generated harvest p50 per
+    # typical role counts (F31): the generated harvest p50 per
     # size, the middle line the composition bands never had
     composition["role_typical"] = load_role_typical()
     rt = composition["role_typical"]
@@ -2881,7 +2876,7 @@ def main():
           + ", ".join(f"{st} {len(rows)}" for st, rows in rt["styles"].items())
           + ", comps " + ", ".join(f"{c} {len(rows)}"
                                    for c, rows in rt["comps"].items()))
-    # seat skeletons + copy allowances (owner 2026-09-15): GENERATED — a
+    # seat skeletons + copy allowances (S1-S6): GENERATED — a
     # hand-kept duplication.per_weapon list in composition.yaml is a build
     # error, never silently merged (the meta-prior precedent)
     dup = composition.setdefault("duplication", {})
@@ -2948,8 +2943,8 @@ def main():
     # from the item bank (T4-flat reference; IP scales them in game). The
     # engine turns absolute defense into tankiness units and % stats into
     # capability multipliers (mechanics.yaml build_stats).
-    # 2026-08-25 (owner: "for offhands, they have no active ability,
-    # their usefulness comes from the stats"): the copy list widened
+    # Offhands have no active ability — their usefulness comes from
+    # the stats — so the copy list widened
     # beyond the chest-centric eight — offhand identity lives in the
     # percent-modifier fields (defense bonus, threat, cooldown/cast-time
     # reduction, energy, HP). The engine's build_stats channel still
@@ -2965,7 +2960,7 @@ def main():
                        "energymax", "energyregenerationbonus",
                        "energycostreduction", "hitpointsmax",
                        "hitpointsregenerationbonus", "healmodifier",
-                       # increment 2 (owner 2026-08-25): CC duration is an
+                       # increment 2: CC duration is an
                        # identity stat — Leering Cane's whole reason to
                        # exist; feeds the cc_mult_caps build channel so
                        # CC-offhand pairing is physics, not a hand list
@@ -2974,7 +2969,7 @@ def main():
         bank = (item_stats.get(gk) or {}).get("stats") or {}
         g["stats"] = {s: bank[s] for s in BUILD_STAT_KEYS if bank.get(s)}
 
-    # Per-capability DELIVERY facts (2026-08-20, geometric-AoE step 3):
+    # Per-capability DELIVERY facts (geometric-AoE step 3):
     # from each capability's evidence spell, the structural area geometry and
     # the game's own per-effect escalation factors (parse_dumps v4). Absent =
     # the spell tree carries no area — "unknown", never "not AoE". This is
@@ -3017,7 +3012,7 @@ def main():
                               if r["status"] == "unknown"),
         }, "weapons": ranged_report}, f, indent=1, sort_keys=True)
 
-    # Derived non-stacking groups (owner ruling 2026-08-24): membership
+    # Derived non-stacking groups (F18b): membership
     # computed from the sheets per composition.yaml `derived_groups` —
     # structural, never a hand list — appended to the groups the forge
     # already enforces. Both engine ports read groups from the dataset, so
@@ -3046,7 +3041,7 @@ def main():
         # evidence_spells membership == a shared NON-STACKING kit (the
         # pool a verified count-once interaction record prices): flagged
         # so the style-fit derivation and the engines' generation gate can
-        # require such a slot to be EARNED (owner ruling 2026-08-25).
+        # require such a slot to be EARNED (F19).
         composition.setdefault("groups", []).append({
             "name": g_name, "max": g_cfg.get("max", 2), "weapons": members,
             "derived": True, "nonstacking": bool(ev_spells),
@@ -3066,7 +3061,7 @@ def main():
         .get("e_heal_dedicated_min", 4), nonstack_members)
     roles_book, gear_effects, roles_report, need_profiles, roles_problems = \
         apply_roles(weapons, gear)
-    # tile labels (owner 2026-09-11): display only, stamped after the
+    # tile labels (R37): display only, stamped after the
     # menus exist; an override off the vocabulary or uncited blocks
     roles_problems += apply_labels(
         weapons, roles_book, _load_yaml(os.path.join(HERE, "roles.yaml")) or {},
@@ -3077,8 +3072,8 @@ def main():
                                   f"unknown content {c}")
     jsonfmt.dump(roles_report, os.path.join(OUT, "roles_report.json"))
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
-    # field must not derive group-band all-unfit — disagreements are the
-    # owner's review queue, never silent fixes.
+    # field must not derive group-band all-unfit — disagreements go to
+    # the review queue (`metabattle_review_queue`), never silent fixes.
     review_queue = []
     mb_path = os.path.join(HERE, os.pardir, "data", "published_builds",
                            "metabattle.yaml")
@@ -3116,7 +3111,7 @@ def main():
         json.dump({"_meta": {
             "rule": ("cost_tier from the unique_name's line suffix "
                      "(crystal/avalonian/artifact/base; a display fact — "
-                     "no tier is gated since 2026-09-07). full_healer (healing "
+                     "no tier is gated). full_healer (healing "
                      "FOUNDATION) requires an E bundle with >= "
                      "primary_healer.e_heal_min summed heal points AND a "
                      "GROUP-scale heal (the spell's own radius/max_targets "
@@ -3124,7 +3119,7 @@ def main():
                      "the dumps do not surface, with citation; unknown "
                      "never grants). Single-scale dedicated heal Es grade "
                      "gang situational / group unfit in style_fit — the "
-                     "E-first ladder. Owner rulings 2026-08-23."),
+                     "E-first ladder."),
             "crystal": sorted(k for k, r in econ_report.items()
                               if r["cost_tier"] == "crystal"),
             "full_healers": sorted(k for k, r in econ_report.items()
@@ -3176,8 +3171,8 @@ def main():
                      if not provenance_ok else "release candidate"),
             "illustrative_weapons": illustrative,
             "unknown_to_game_data": unknown,
-            # MASTERSHEET.md override layer — what the expert's control
-            # surface changed in THIS build (human summary; the values
+            # MASTERSHEET.md override layer — what the override surface
+            # changed in THIS build (human summary; the values
             # themselves are already merged into the sections below).
             "mastersheet": mastersheet.describe(tune),
             # Source provenance (§A): the one pinned snapshot every game-data
@@ -3217,14 +3212,14 @@ def main():
         "scoring": scoring,
         "styles": styles,
         # Style x size rows (templates/style_bands.yaml, derive_style_bands.py,
-        # owner 2026-09-04): target/soft per declared style x band, read by
+        # T37): target/soft per declared style x band, read by
         # set_content AFTER the content row at 10+. Hard floors and weights
         # stay content/style facts; `balanced` never reads a band.
         "style_bands": style_bands,
-        # Per-item chest lean (out/chest_lean.json, audit_style_rosters.py,
-        # 2026-09-05): the style side a dps chest ITEM is worn on in clean
+        # Per-item chest lean (out/chest_lean.json, audit_style_rosters.py):
+        # the style side a dps chest ITEM is worn on in clean
         # weapons-only cores — the kit tie-break reads the item's lean
-        # first and the owner's class rule where an item has none.
+        # first and the class rule where an item has none.
         # Descriptive only (comp_identity); never a scoring input.
         "chest_lean": chest_lean,
         "mechanics": mechanics,
@@ -3232,7 +3227,7 @@ def main():
         # — what the FORGE may generate; never a bar to scoring a manual party.
         "composition": composition,
         # Guild-approved builds (MASTERSHEET.md tune:guild_builds) — the
-        # expert's guild guideline layer, shipped VERBATIM for display and
+        # recorded guild guideline layer, shipped VERBATIM for display and
         # future prior/validation layers. A guideline, never a hard rule:
         # nothing in the scoring path reads it.
         "guild_builds": tune.get("guild_builds") or {},
@@ -3241,17 +3236,17 @@ def main():
         # derived `role_menu` inverse index. Detection/advisory layer —
         # DESCRIPTIVE; nothing in the scoring path reads it.
         "roles": roles_book,
-        # Typed gear-carried effects (owner 2026-08-25): auras/actives
+        # Typed gear-carried effects (R7): auras/actives
         # attach to whatever role wears them; detection reports
         # "role + carrying". Display layer only.
         "gear_effects": gear_effects,
-        # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
+        # NEED PROFILES (increment 3, F21): fine-seat
         # bands + function coverage the FORGE must field — a generation
         # constraint like the composition bands, never a bar to scoring
         # a manual party. Counts scale by size/reference_size, arm at
         # min_size.
         "need_profiles": need_profiles,
-        # CARRIER QUOTAS (2026-09-03): killboard share of builds wearing
+        # CARRIER QUOTAS (R25): killboard share of builds wearing
         # each effect-carrier chest per fight-size bucket; the forge caps
         # generated rosters at share x size (see mine_carrier_quotas).
         # Generation-only; manual kits always score.
@@ -3261,7 +3256,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     # One artifact: the version is a field inside it. The versioned copy
     # that used to sit beside it was byte-identical, read by nothing and
-    # re-churned 1.8 MB on every rebuild (removed 2026-09-07).
+    # re-churned 1.8 MB on every rebuild (removed).
     with open(os.path.join(OUT, "dataset-latest.json"), "w", encoding="utf-8",
               newline="\n") as f:
         json.dump(dataset, f, indent=1, sort_keys=True)

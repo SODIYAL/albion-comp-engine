@@ -48,9 +48,9 @@ SOURCE_KINDS = ("caller_sheet", "metabattle", "armory_manual", "companion",
 ONE_V_ONE_KINDS = ("murderledger", "solo_1v1")
 ONE_V_ONE_MAX_SIZE = 2
 # The engine's content templates — the legal values for a record's
-# `content_candidates` (owner ruling 2026-08-28: one comp can be evidence for
-# several contents). Listed literally so this validator stays independent of
-# a built dataset; must track pipeline/templates/*.yaml.
+# `content_candidates` (one comp can be evidence for several contents).
+# Listed literally so this validator stays independent of a built dataset;
+# must track pipeline/templates/*.yaml.
 KNOWN_CONTENTS = ("blackzone_roam", "castle", "castle_outpost",
                   "faction_war", "roads", "territory_defense")
 
@@ -67,31 +67,31 @@ SPELL_SLOTS = ("q", "w", "e", "passive")
 TIER_WORDS = (r"(?:adept's|expert's|master's|grandmaster's|elder's|minor|"
               r"major|beginner's|novice's|journeyman's)")
 
-# CALLER SHORTHAND (2026-08-28). Caller sheets are written for players, not
+# CALLER SHORTHAND. Caller sheets are written for players, not
 # parsers: they abbreviate ("RoP"), typo ("Smugglar"), shorten the catalogue
 # word ("Guardian Helm" for Helmet), and — most often — name the ABILITY they
 # want rather than the item that carries it ("Blink" boots, "GG"). Every entry
-# below is either a spelling fact or an owner ruling, and each is slot-scoped
-# so a word can mean different items in different slots. This is a
-# VOCABULARY, not a guesser: anything not listed still falls through to the
-# matcher and stays raw text if it cannot be resolved (the §C rule).
-# Owner rulings 2026-08-28, verbatim:
-#   "GG might be graveguard boots if it's on boot slot"
-#   "blink would be stalker shoes most likely for their double blink ability"
-#   "cleanse might be any leather helm with second ability"
+# below is either a spelling fact or a curation judgment, and each is
+# slot-scoped so a word can mean different items in different slots. This
+# is a VOCABULARY, not a guesser: anything not listed still falls through
+# to the matcher and stays raw text if it cannot be resolved (the §C rule).
+# Slot spellings (curation judgment):
+#   GG in the boot slot is Graveguard Boots
+#   blink boots are Stalker Shoes (the double blink)
+#   cleanse on a helm is a leather helm whose second ability cleanses
 GEAR_ALIASES = {
     # (slot, shorthand) -> catalogue name
     ("armor", "rop"): "Robe of Purity",
     ("cape", "smugglar"): "Smuggler Cape",          # typo in Timothy's sheet
-    ("shoes", "gg"): "Graveguard Boots",            # owner ruling
-    ("shoes", "blink"): "Stalker Shoes",            # owner ruling: double blink
-    ("head", "cleanse"): "Hellion Hood",            # owner: a leather helm whose
-    ("head", "leather hood cleanse"): "Hellion Hood",  # 2nd ability cleanses
+    ("shoes", "gg"): "Graveguard Boots",            # curation judgment
+    ("shoes", "blink"): "Stalker Shoes",            # curation judgment: double blink
+    ("head", "cleanse"): "Hellion Hood",            # curation judgment: leather
+    ("head", "leather hood cleanse"): "Hellion Hood",  # helm, 2nd ability cleanses
     # Food. A bare "omelette" is ambiguous in the catalogue (Pork Omelette /
-    # Avalonian Pork Omelette, both T7), so it needs a listed ruling rather
+    # Avalonian Pork Omelette, both T7), so it needs a listed spelling rather
     # than a matcher tiebreak. Callers name the Avalonian line explicitly
     # ("ava pork omelette") — an unqualified "omelette" is the plain one.
-    # INFERRED, not an owner ruling: flag for confirmation.
+    # INFERRED, not a recorded call: pending confirmation.
     ("food", "omelette"): "Pork Omelette",
 }
 # Callers prefix a tier.enchant marker ("7.1 omelette", "8.1 beef stew",
@@ -427,23 +427,23 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
     if ps and not (isinstance(ps, dict) and "min" in ps and "max" in ps):
         problems.append(f"{ident}: party_size must be {{min, max}}")
     # style is optional (identity Phase C: styles key stored builds to the
-    # caller's declared intent) but when stated it must be a real style
-    # 2026-08-28: `clap_kite` was missing — the list predates it (the owner
-    # identified the fifth playstyle 2026-08-23) and nothing caught the gap
-    # until real comps were labelled with it. Kept as a literal tuple rather
-    # than read from styles.yaml so this validator stays independent of the
-    # dataset build, but it must track styles.yaml: five playstyles plus
-    # `balanced`, which declares no intent.
+    # caller's declared intent) but when stated it must be a real style.
+    # `clap_kite` was once missing here — the list predated the fifth
+    # playstyle and nothing caught the gap until real comps were labelled
+    # with it. Kept as a literal tuple rather than read from styles.yaml so
+    # this validator stays independent of the dataset build, but it must
+    # track styles.yaml: five playstyles plus `balanced`, which declares no
+    # intent.
     style = doc.get("style")
     if style and style not in ("balanced", "brawl", "clap", "kite",
                                "brawl_clap", "clap_kite"):
         problems.append(f"{ident}: unknown style {style!r}")
-    # CONTENT CANDIDATES (owner ruling 2026-08-28): a record's `content` may
+    # CONTENT CANDIDATES (curation judgment): a record's `content` may
     # name a FORMAT ("zvz_20man") rather than one of the engine's content
-    # templates, and one comp can legitimately serve several — "zvz 20man can
-    # be blackzone roaming or castle outposts or castle defense ... any comp
-    # doing outposts or castles or roaming in blackzone could do so in
-    # faction aswell". Validated against the real template list so a typo or
+    # templates, and one comp can legitimately serve several — a 20-man ZvZ
+    # comp fits blackzone roaming, castle outposts and castle defense, and
+    # any comp doing outposts, castles or blackzone roaming serves faction
+    # warfare too. Validated against the real template list so a typo or
     # a renamed template surfaces here instead of silently dropping the comp
     # out of every fit.
     cands = doc.get("content_candidates")
@@ -456,7 +456,7 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
                     problems.append(
                         f"{ident}: content_candidate {_c!r} is not a content "
                         f"template ({sorted(KNOWN_CONTENTS)})")
-    # per-party style/exclusion (owner rulings 2026-08-28): one record's
+    # per-party style/exclusion (curation judgment): one record's
     # parties are not always one comp shape, and a party its own author says
     # is not built properly must never teach the model what a comp looks like
     for _p in (doc.get("parties") or []):
@@ -489,7 +489,7 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
 
 def independent_families(records):
     """The set of genuinely independent source families across records.
-    Families are PER-AUTHOR (owner ruling 2026-08-21): `site:author` for
+    Families are PER-AUTHOR (curation judgment): `site:author` for
     ingested comps (albioncompo:bist, character_builder:clonepeek),
     `caller:<name>` for caller sheets. Two authors on the same site count
     as two families; copies of one author's build still count once.
@@ -502,7 +502,7 @@ def promotable(record):
     """A record may back or become a canonical default only when its OWN
     normalization is clean: a quarantined record (invalid spell index, bad
     reference) or a rejected one is evidence that needs fixing, not a
-    default to ship (review 2026-08-19 — the quarantined Enigmatic p5 build
+    default to ship (found in review — the quarantined Enigmatic p5 build
     was reaching the dashboard as canonical through its comp-level
     approval)."""
     return record.get("status") not in ("quarantined", "rejected")

@@ -113,8 +113,8 @@ def main():
         for pool in (line.get("spells") or {}).values():
             for sid in pool:
                 equippable_on.setdefault(sid, []).append(wk)
-    # GEAR equippability (2026-08-28): this layer was weapon-only "until gear
-    # records exist" — they do now (the first is Demon Armor's group reflect
+    # GEAR equippability: this layer was weapon-only until gear records
+    # existed — they do now (the first is Demon Armor's group reflect
     # aura), so a gear ability is a legal record subject. Kept as its own map
     # so the curation-backlog split below stays weapon-vs-gear.
     gear_equippable_on = {}
@@ -191,16 +191,16 @@ def main():
                 f"{where}: verified non_reflectable cites the description, "
                 "but the description carries no reflect statement")
 
-        # SUPER-ADDITIVE DUPLICATES (2026-08-28) — the mirror of
+        # SUPER-ADDITIVE DUPLICATES — the mirror of
         # nonstacking_caps, and held to the same bar. `self_cost_offset_min_
         # copies: N` says that once N members equip this spell, the item's
         # curated self_costs stop being charged, because the copies cover
         # each other (Demon Armor: each wearer stands in the others' aura).
         # It can only ever CANCEL A COST — it never adds supply — so a
         # duplicate still cannot out-earn two independent first copies.
-        # Owner 2026-08-28: "duplicate is worth more only in special cases
-        # like demon armor", so this is verified-only and must justify
-        # itself in a scoring_note like every other scoring coupling.
+        # Rule: a duplicate is worth more only in special cases like Demon
+        # Armor (curation judgment), so this is verified-only and must
+        # justify itself in a scoring_note like every other scoring coupling.
         off = e.get("self_cost_offset_min_copies")
         if off is not None:
             if conf != "verified":

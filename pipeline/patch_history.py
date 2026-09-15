@@ -12,7 +12,7 @@ Output: out/patch_history.json — per patch: date, changed weapon-relevant
 spells, the attribute-level before/after values, and which weapon lines each
 change reaches. Commit dates match the forum "Combat Balance Changes" threads
 one-for-one (e.g. 2026-06-29 ↔ "[29. June 2026] Radiant Wilds Patch 3"), so
-the date is a stable join key to the human prose if you ever want to read it.
+the date is a stable join key to the forum's own prose.
 
 Consumers:
   evidence_lint.py    warns when a sheet's cited evidence spell changed in a

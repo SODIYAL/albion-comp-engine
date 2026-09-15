@@ -1,7 +1,7 @@
 """Observed relevance: the GENERATED meta prior, from the COMMITTED harvest.
 
-Owner ruling 2026-09-08 ("sure" to "one harvest prior replacing both hand
-lists, tiebreak-sized, capped at the current 0.15"): the seven-weapon
+Rule (H18): one harvest prior replaces both hand lists, tiebreak-sized,
+capped at the standing 0.15. The seven-weapon
 hand-set `meta_prior` in templates/scoring.yaml and the hand-listed
 viability `core` in templates/composition.yaml are retired. In their place
 this script reads the committed killer-party artifact (out/party_rosters.json.gz
@@ -27,8 +27,8 @@ enters the recommendation score as delta * prior (delta = 0.15 in
 scoring.yaml), so it can reorder otherwise-close candidates and nothing
 else -- it never buys a floor, a role slot or a suggestion-pool place.
 
-PAIRS (owner ruling 2026-09-11, spec notes/specs/2026-09-11-pair-meta-
-prior-design.md): the same artifact's `parties[]` (the killer's party
+PAIRS (spec notes/specs/2026-09-11-pair-meta-prior-design.md; contracts
+A1-A13 in tests/test_meta_pairs.py): the same artifact's `parties[]` (the killer's party
 with its full known weapon list and guilds) yields `meta_pairs`, per
 bucket, symmetric:
 
@@ -178,7 +178,7 @@ def derive(doc, k=K, min_prior=MIN_PRIOR, holdout_mod=HOLDOUT_MOD,
                   "normalized so the bucket's top weapon is 1.0; rows under "
                   "min_prior omitted (no signal, never a penalty)"),
         "_pair_unit": ("one killer PARTY, one vote per distinct weapon pair it "
-                       "fields (2026-09-11); a pair needs min_pair_parties "
+                       "fields; a pair needs min_pair_parties "
                        "parties across min_pair_orgs distinct guild-sets; "
                        "s = clamp(log2 lift, 0, log_cap)/log_cap * n/(n+K); "
                        "lift <= 1 reads 0 (anti-affinity is never a penalty)"),

@@ -147,7 +147,7 @@
      "override": {
       "as_of": "2026-09-15",
       "reason": "\"Leap to the targeted position and conjure a foothold in the air, becoming Untargetable\" then \"Sky Bolt: shoot a lightning-infused arrow at the targeted position\" \u2014 the wielder moves, but the payload is an arrow from an untargetable perch, ranged pressure on the clump.",
-      "source": "Spell description (ao-bin-dumps); owner ruling 2026-09-15 \u2014 \"skystrider is ranged\"."
+      "source": "Spell description (ao-bin-dumps); curation:2026-09-15 \u2014 Skystrider is ranged."
      },
      "radius": 1.0,
      "slot": "e",
@@ -710,8 +710,8 @@
      "max_targets": null,
      "override": {
       "as_of": "2026-09-15",
-      "reason": "The dive kick leaps to the targeted position (caster moves), which the gap-closer rule would deny; the owner keeps the ranged grant \u2014 the combo is fielded as a 12m knock-up bomb thrown onto the clump.",
-      "source": "Owner ruling 2026-09-15 \u2014 \"leave fists of avalon as is\" (structural grant: target ground, cast_range 12)."
+      "reason": "The dive kick leaps to the targeted position (caster moves), which the gap-closer rule would deny; the ranged grant stands (curation judgment) \u2014 the combo is fielded as a 12m knock-up bomb thrown onto the clump.",
+      "source": "curation:2026-09-15 \u2014 Fists of Avalon keeps its structural grant (target ground, cast_range 12)."
      },
      "radius": null,
      "slot": "e",
@@ -998,7 +998,7 @@
      "override": {
       "as_of": "2026-09-15",
       "reason": "\"Leap towards the targeted position, becoming immune to all Crowd Control effects ... until impact. Roots all enemies in a radius on impact\" \u2014 the wielder lands inside the clump; a gap-close, the same class as Realmbreaker's Lethal Cleaver.",
-      "source": "Spell description (ao-bin-dumps); owner ruling 2026-09-15 \u2014 \"trinity spear is most definitely a melee weapon\"."
+      "source": "Spell description (ao-bin-dumps); curation:2026-09-15 \u2014 Trinity Spear is a melee weapon."
      },
      "radius": 3.0,
      "slot": "e",
@@ -1264,7 +1264,7 @@
      "override": {
       "as_of": "2026-08-21",
       "reason": "\"Dash toward the targeted position ... Deals 222 physical damage\" to all enemies passed through \u2014 the line AoE is the wielder's own dash path, a gap-close that ends inside the enemy clump, not ranged pressure from outside it. (burst_st reclassified to burst_aoe in the 2026-08-21 taxonomy pass; this entry keeps that edit from granting ranged_presence.)",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9); owner ruling 2026-08-21 \u2014 Daybreaker is fielded as a leather-archetype melee purge lance."
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9); curation:2026-08-21 \u2014 Daybreaker is fielded as a leather-archetype melee purge lance."
      },
      "radius": null,
      "slot": "e",

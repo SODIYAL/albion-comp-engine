@@ -1,7 +1,7 @@
 """The killer-party artifact on disk: out/party_rosters.json.gz.
 
-One loader for every reader and the one writer (2026-09-11, owner: "this
-file will keep growing"). The artifact is the harvest's derived evidence -
+One loader for every reader and the one writer (the file keeps
+growing). The artifact is the harvest's derived evidence -
 every build, party and battle summary the doctrine, the style rows and
 the meta prior are mined from - and it grows ~10 KB per harvested battle:
 77 MB raw at 7,652 battles, past GitHub's 100 MB per-file push limit at
@@ -23,7 +23,7 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 NAME = "party_rosters.json.gz"
-LEGACY_NAME = "party_rosters.json"   # pre-2026-09-11 plain artifact
+LEGACY_NAME = "party_rosters.json"   # the pre-gzip plain artifact
 
 
 def path(out_dir=None):

@@ -1,9 +1,9 @@
 """Style x size template rows from the harvested winner rosters.
 
-Owner ruling 2026-09-04 ("ok do it", after blind rounds 1 and 2): the
-content templates judge every style against the same row, while winning
-brawls and winning claps at 20 field measurably different things. This
-step turns the evidence board (`audit_style_rosters.py` ->
+The content templates judge every style against the same row, while
+winning brawls and winning claps at 20 field measurably different things
+(validation rounds 1 and 2 on harvested rosters, T34 / T36; rows pinned
+by T37). This step turns the evidence board (`audit_style_rosters.py` ->
 `out/style_roster_evidence.json`) into `templates/style_bands.yaml`: per
 playstyle x size band, a target and soft cap per capability under the
 standing convention (target = p50, the TYPICAL winner; soft cap 1.15 x
@@ -11,34 +11,32 @@ p90 of the dressed supply winning rosters field, person units), read by
 the engine AFTER the content row at 10+ (hard floors stay content facts
 in weapon units).
 
-TARGET IS THE MEDIAN (owner ruling 2026-09-10, "the data should come from
-the harvest median"): until then the target was 0.9 x p10 — the LEAST any
+TARGET IS THE MEDIAN (V7, T37): the target comes from the harvest median.
+Under the earlier convention the target was 0.9 x p10 — the LEAST any
 winner fielded — and the score gave full credit there, so every row on
-the board overshot ("if someone sees heal burst at 12/4 they will think
-they have too many healers, but 3 healers in a party of 15 is totally
-normal and standard to try to reach") and one healer "covered" fifteen
-people in the forge's eyes. The median is what winners cluster around —
-the number to aim for. The score curve is unchanged; only the number it
-aims at moved, on every row at once.
+the board overshot (a heal_burst reading of 12/4 says "too many healers"
+where three healers in a party of 15 is the normal count to reach) and
+one healer "covered" fifteen people in the forge's eyes. The median is
+what winners cluster around — the number to aim for. The score curve is
+unchanged; only the number it aims at moved, on every row at once.
 
-Four owner-ruled rules:
+Four rules:
   1. a layer BESIDE the content templates, never a replacement;
   2. only cells with >= MIN_DISTINCT distinct rosters carry their own
      numbers — a thin cell BORROWS its nearest filled cell (same style,
      nearest band; else the parent style at the same band) and says so;
   3. the standing convention for the numbers. Engage / mobility /
-     knockback_displace / disengage were EXCLUDED at first ("5-11x the
-     content targets because every boot carries a claim") and ADMITTED the
-     same evening once measured (owner: "go ahead with your
-     recommendation"): on 300 winning rosters of 15+ the WEAPON-ONLY
+     knockback_displace / disengage were EXCLUDED at first (5-11x the
+     content targets, since every boot carries a claim) and ADMITTED once
+     measured: on 300 winning rosters of 15+ the WEAPON-ONLY
      supply already runs 3-4x the content targets (engage 12.8, mobility
      16.8, knockback 11.3, disengage 8.8 at 20 vs targets of 4.0 / 4.0 /
      3.3 / 6.3) and boots add about a third on top; the published comps
      that fitted those targets carry boots on 509 of 579 slots. The old
      targets are outlier minimums off single comps (the unit re-fit's own
      note), not a kit-claim inflation. EXCLUDED stays as a mechanism, empty.
-  4. golden re-pins + tier2 follow; the blind-round loop keeps validating
-     the labels these rows are keyed on.
+  4. golden re-pins + tier2 follow; the validation-round loop keeps
+     validating the labels these rows are keyed on.
 
 Explicit step, never part of a normal build (like the samplers): rerun it
 after a harvest + audit refresh, then rebuild the dataset and run the gates.
@@ -46,15 +44,15 @@ A capability whose p90 is zero in a cell gets NO row (the content row
 stands) — never invent a number to fill a hole. A capability whose p50 is
 zero (most winners field none) carries the soft cap only and the content
 target stands (the engine divides by the target, and zero is not a
-target). The 2026-09-09 zero-share rule is retired with the p10
+target). The earlier zero-share rule is retired with the p10
 convention it protected: p10 sat on the edge of the zero mass and
 thrashed between folds; the median does not (kite|10-14 heal_burst: 10%
 zeros, p50 5.8, stable across folds).
 
 `balanced` reads a POOLED cell — every winning roster at the size, any
-style — written by audit_style_rosters.py (2026-09-10). Before the audit
-runs on the harvest checkout the cell is absent and balanced keeps the
-content row; this script emits whatever cells the board carries.
+style — written by audit_style_rosters.py. Before the audit runs on the
+harvest machine the cell is absent and balanced keeps the content row;
+this script emits whatever cells the board carries.
 
     py -3 pipeline/derive_style_bands.py
 """
@@ -71,8 +69,8 @@ STYLES = ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite")
 BANDS = (("10-14", 10, 14, 12), ("15-19", 15, 19, 17), ("20", 20, 99, 20))
 PARENT = {"brawl_clap": "brawl", "clap_kite": "clap"}
 MIN_DISTINCT = 40
-EXCLUDED = ()   # none since 2026-09-04 (see docstring, rule 3)
-TARGET_OF_P50 = 1.0     # target IS the median (owner 2026-09-10)
+EXCLUDED = ()   # none (see docstring, rule 3)
+TARGET_OF_P50 = 1.0     # target IS the median (V7, T37)
 SOFT_OF_P90 = 1.15
 
 
@@ -102,42 +100,41 @@ def derive(ev):
         f"# from out/style_roster_evidence.json (board generated {ev.get('_generated')},",
         f"# {ev.get('rosters_total')} harvested killer-party rosters of 10+, labelled by",
         "# comp_identity, supply measured dressed in person units). Do not hand-edit:",
-        "# rerun the audit, then this script. Owner ruling 2026-09-04 (four parts, see",
-        "# the script docstring and tests/VALIDATION.md 'Style x band rows').",
+        "# rerun the audit, then this script. Four rules (see the script docstring",
+        "# and tests/VALIDATION.md 'Style x band rows').",
         "#",
         "# Read by the engine AFTER the content row, at 10+: target/soft_cap replace",
         "# the content template's for the capabilities listed, scaled linearly from",
-        "# ref_size (person units, like the content rows since the 2026-08-29 unit",
-        "# re-fit). Hard floors are untouched (weapon units, content facts); weights",
-        "# are untouched (styles.yaml). `balanced` reads the POOLED cell (every winner",
+        "# ref_size (person units, like the content rows since the unit re-fit).",
+        "# Hard floors are untouched (weapon units, content facts); weights are",
+        "# untouched (styles.yaml). `balanced` reads the POOLED cell (every winner",
         "# at the size, any style) when the audit has written one. A capability absent",
-        "# from a cell keeps the content row - a zero p90 is 'we do not know', never a",
+        "# from a cell keeps the content row - a zero p90 is unknown, never a",
         "# number; a zero p50 (most winners field none) writes the soft cap only and",
         "# the content target stands.",
-        "# Convention (owner 2026-09-10, 'the data should come from the harvest",
-        f"# median'): target = {TARGET_OF_P50} x p50 - the TYPICAL winner, the number to",
-        f"# aim for - and soft_cap = {SOFT_OF_P90} x p90; `min` = p10, the bare minimum",
-        "# winners get away with (the board's red/orange line, never scored). Until",
-        "# 2026-09-10 the target was",
-        "# 0.9 x p10, the LEAST any winner fielded: every row overshot and the score",
-        "# gave full credit at the floor (one healer 'covered' 15 people).",
+        f"# Convention (target is the median, V7 / T37): target = {TARGET_OF_P50} x p50 -",
+        f"# the TYPICAL winner, the number to aim for - and soft_cap = {SOFT_OF_P90} x p90;",
+        "# `min` = p10, the bare minimum winners get away with (the board's",
+        "# red/orange line, never scored). Under the earlier convention the target",
+        "# was 0.9 x p10, the LEAST any winner fielded: every row overshot and the",
+        "# score gave full credit at the floor (one healer 'covered' 15 people).",
         f"# Cells with fewer than {MIN_DISTINCT} distinct rosters borrow their nearest",
         "# filled cell (same style, nearest band; else the parent style) - stated per",
         f"# cell as `borrowed_from`. Excluded capabilities: "
-        f"{', '.join(EXCLUDED) if EXCLUDED else 'none (the 2026-09-04 movement exclusion was lifted the same day once measured)'}.",
+        f"{', '.join(EXCLUDED) if EXCLUDED else 'none (the movement exclusion was lifted once measured)'}.",
         "",
         "min_size: 10",
         f"convention: {{target_of_p50: {TARGET_OF_P50}, soft_of_p90: {SOFT_OF_P90}, min_distinct: {MIN_DISTINCT}}}",
         f"excluded: [{', '.join(EXCLUDED)}]",   # empty list when nothing is excluded
-        # HOLDOUT (2026-09-15): the board records the split it learned from;
-        # a board generated before the audit gained --holdout-mod carries
-        # none, and the build says so — the rows stay weak-form until the
-        # audit reruns on the harvest checkout
+        # HOLDOUT: the board records the split it learned from; a board
+        # generated before the audit gained --holdout-mod carries none, and
+        # the build says so — the rows stay weak-form until the audit
+        # reruns on the harvest machine
         ("split: {holdout_mod: %s, rule: \"%s\"}" % (
             ev["_split"]["holdout_mod"], ev["_split"]["rule"])
          if isinstance(ev.get("_split"), dict) and ev["_split"].get("holdout_mod")
-         else "split: none   # board generated before 2026-09-15 on every battle; "
-              "rerun audit_style_rosters.py on the harvest checkout"),
+         else "split: none   # board generated on every battle, before the audit "
+              "gained --holdout-mod; rerun audit_style_rosters.py on the harvest machine"),
         "",
         "bands:",
     ]
@@ -177,10 +174,10 @@ def derive(ev):
                     continue
                 if target > 0:
                     # `min` = p10, the bare minimum winners get away with:
-                    # the board's red/orange boundary (owner 2026-09-10,
-                    # "red below the bare minimum for winning, orange above
-                    # it but not yet ideal, green at ideal, purple too
-                    # much"). Display provenance only; nothing scores it.
+                    # the board's red/orange boundary (four stages: red
+                    # below the bare minimum for winning, orange above it
+                    # but not yet ideal, green at ideal, purple past the
+                    # soft cap). Display provenance only; nothing scores it.
                     lo_min = round(p10, 2)
                     lines.append(f"        {cap + ':':<20}{{min: {lo_min:>7.2f}, target: {target:>7.2f}, soft_cap: {soft:>7.2f}}}"
                                  f"   # p10/p50/p90 {p10:.1f}/{p50:.1f}/{p90:.1f}")

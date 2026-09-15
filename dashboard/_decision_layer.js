@@ -4,7 +4,7 @@
    floors, weaknesses, recommendation ordering and marginal terms into the
    order a caller needs them: status -> biggest need -> next pick -> why ->
    what is still missing.
-   Plus two on-demand caller workflows (PR #6, 2026-08-22), folded shut by
+   Plus two on-demand caller workflows (PR #6), folded shut by
    default so the party dock keeps its above-the-fold seat:
    - a player weapon pool that feeds CompEngine.recommend(pool)
    - a swap lab comparing exact roster replacements, applied through the
@@ -35,7 +35,7 @@
     return {tone, label, critical, weak, excess};
   }
 
-  /* ================= COMP-STATUS RADAR (owner 2026-08-26) =================
+  /* ======================== COMP-STATUS RADAR ========================
      The status card IS the diagram: one axis per capability GROUP (the same
      taxonomy the deep board's renderGroups uses, "Other" guard included),
      plotted as supply vs template target, with everything textual living in
@@ -107,13 +107,13 @@
     return `<g transform="translate(${x - size/2},${y - size/2}) scale(${size/24})"><path d="${DL_ICONS[key]}" fill="${DL_ICON_FILL[key] ? col : "none"}" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   }
 
-  /* THE RULER (owner 2026-08-27: "we should never ever be above 100 for
-     anything but this 0-100 has to be based on ground facts"): 100% = the
+  /* THE RULER (the display ruler: nothing reads above 100, and the 0-100
+     scale rests on measured comps): 100% = the
      comp-fitted CEILING — the soft cap, fitted at 1.15x the MOST any good
-     comp fields (2026-08-21 recalibration). The ceiling is style-neutral,
+     comp fields (standing rules 2 and 17). The ceiling is style-neutral,
      so playstyle tradeoffs read directly: a real brawl ball pushes toward
      100% Frontline while sitting low on ranged Damage, a clap the
-     opposite — "these tradeoffs are what define the playstyle". Per-cap
+     opposite — those tradeoffs are what define the playstyle. Per-cap
      supply is counted up to its own soft cap, so coverage can never
      exceed 100 and one overstacked capability can't mask its siblings'
      gaps; beyond-ceiling stacking shows as the purple marker, never as a
@@ -121,8 +121,8 @@
      (Σ target / Σ soft). */
   function radarAxes(){
     const s = supply(party);
-    const sfl = supplyFloor(party);   /* Option C floor basis (owner
-      2026-08-27): coverage quotes the DRESSED supply, but the below-floor
+    const sfl = supplyFloor(party);   /* Option C floor basis (standing
+      rule 10): coverage quotes the DRESSED supply, but the below-floor
       predicate reads the weapon+loadout basis the structural floors use */
     const grouped = new Set(Object.values(GROUPS).flat());
     const other = Object.keys(REQS()).filter(c => !grouped.has(c));
@@ -133,8 +133,8 @@
         const have = s[c] || 0, t = target(c), soft = softCap(c);
         return {cap: c, have, t, soft, floor: floorHit(c, sfl[c] || 0),
                 over: have > soft, optional: !!REQS()[c].optional};
-      /* An OPTIONAL capability the comp fields none of is not a gap (owner
-         2026-08-28) — it leaves the axis entirely, exactly as it leaves
+      /* An OPTIONAL capability the comp fields none of is not a gap
+         (optional template rows) — it leaves the axis entirely, exactly as it leaves
          max_fitness. Brought, it counts normally. */
       }).filter(r => !(r.optional && r.have <= 0));
       if (!rows.length) continue;
@@ -344,10 +344,10 @@
     return s;
   }
 
-  /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
+  /* Fight chain (roadmap item 1): the fight as the caller's
      playstyle sequences it, stage by stage — ENG.fightChain rendered
      verbatim, gradings from the comp-fitted targets, display only.
-     2026-08-24: stages are clickable — the fold lists WHICH equipped
+     Stages are clickable — the fold lists WHICH equipped
      spells supply each stage (engine `sources`, the same resolved
      loadouts scoring sums), and the improves line names its terms so a
      stage that wins on summed caps is reconcilable with the gain tiles. */
@@ -408,8 +408,8 @@
     return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${openStage ? chainSources(openStage) : ""}${imp}</div>`;
   }
 
-  /* Negative recommendations / redundancy warnings (roadmap item 3,
-     2026-08-24): the "why not" behind the pick — ENG.pickReport is the
+  /* Negative recommendations / redundancy warnings (roadmap item 3):
+     the "why not" behind the pick — ENG.pickReport is the
      SIGNED decomposition of the same exact marginal the score already is
      (its terms reconstruct the score at 1e-9, parity-pinned). This
      renders it verbatim: saturated capabilities, over-stack costs, the
@@ -465,7 +465,7 @@
     const combos = COMBOS_CUR.concat([rec.combo === undefined ? null : rec.combo]);
     /* the candidate joins in the kit the engine valued it with; existing
        members keep their worn gear — the same dressed basis the pick score
-       and the biggest-need row use (2026-09-03) */
+       and the biggest-need row use */
     const gears = GEARS_CUR.concat([rec.kit && rec.kit.length ? rec.kit : null]);
     return inPickContext(() => {
       const sup = ENG.effectiveSupply(next, combos, gears);
@@ -585,7 +585,7 @@
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
-    /* the fold lives in the left-edge tools panel (2026-09-02): it is an
+    /* the fold lives in the left-edge tools panel: it is an
        interactive workflow, not glance-info, so it costs the grid nothing */
     const old = document.getElementById("dl-tools-fold");
     if (old) old.remove();
@@ -642,7 +642,7 @@
 
     const terms = explain(party, top.w).slice(0,3);
     const remaining = afterPickGaps(top);
-    /* need + pick are ONE card (owner 2026-08-22): the biggest need is the
+    /* need + pick are ONE card: the biggest need is the
        question, the pick is the answer — the need renders as the card's
        header line, runner-up gaps as inline chips. The reclaimed column
        goes to the wheel. */
@@ -679,7 +679,7 @@
     /* observed killboard context (PR #5 integration): _app.js owns the
        cohort math; the note appears only when cohorts echo this pick */
     const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
-    /* alternatives, rehomed (2026-08-22): the hidden flank carried the
+    /* alternatives, rehomed: the hidden flank carried the
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
@@ -692,7 +692,7 @@
           <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
-    /* three cards, not one stack (owner 2026-09-02): the diagnosis, the
+    /* three cards, not one stack: the diagnosis, the
        fight chain and the pick each get their own frame. They ride a single
        column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `

@@ -12,7 +12,7 @@
 #     charges, and the parser credited the E with those spells' effects.
 #     The E buffs no ally and shreds nothing. Suppressed in overrides;
 #     resist_shred re-grounds on Q: Sunder Armor at the W-option score.
-#   - tankiness 1 via Chain Slash iframes REMOVED (Bloodletter ruling).
+#   - tankiness 1 via Chain Slash iframes REMOVED (Bloodletter rule).
 # No execute: health-threshold damage is the Bloodletter E's mechanic, not
 # this kit's. Burst here is flat and stealth-delivered.
 

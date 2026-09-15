@@ -1,16 +1,16 @@
-"""Kit blind round: a weapon's real fielded builds, shown without labels.
+"""Kit validation round: a weapon's real fielded builds, shown without labels.
 
-The roster blind rounds test the identity labels; this one tests the
-KIT-to-style link the owner reads by eye (2026-09-05: "give me different
-builds for a weapon and I tell you what playstyle it might be part of").
+The roster validation rounds test the identity labels; this one tests
+the KIT-to-style link read by eye: for a weapon's distinct builds, name
+the playstyle each build is likely part of.
 For one weapon it lists the most-worn chest / helmet / boots combinations
 from labelled killer-party rosters of 10+ (one line per distinct build,
 ordered by DISTINCT PLAYERS), and keeps the answer — the styles of the
 rosters each build was actually worn in — off the form.
 
-Grading convention (owner, same day): "one build can be part of multiple
-styles", so the answer is a distribution, not a label, and a call agrees
-when it names the styles that carry the build's players.
+Grading convention: one build can be part of multiple styles, so the
+answer is a distribution, not a label, and a call agrees when it names
+the styles that carry the build's players.
 
 Report-only, network-free; reads out/party_cache through the audit's
 loader and labels with the engine's comp_identity (worn chests passed).

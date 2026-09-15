@@ -1,13 +1,13 @@
-"""Before/after report for a harvest fold (2026-09-09, owner: "set it up").
+"""Before/after report for a harvest fold.
 
 Compares the artifacts in the working tree (the fold just derived) with
 the ones at a git revision (default HEAD - the previous fold) and writes
-the tables the owner reads before committing: style-board cell sizes,
+the tables to review before committing: style-board cell sizes,
 style-band target movement, kit churn split by how thin the evidence was,
 weapons crossing the uniform-extension line, meta-prior rows, pooled
 slots. REPORT ONLY - nothing here feeds a build or a score; it answers
-"did this fold give better information" with the same measurements used
-on 2026-09-09 (VALIDATION.md). Usage:
+whether this fold gave better information, with the same measurements
+the first fold was judged on (VALIDATION.md). Usage:
 
     py -3 pipeline/compare_fold.py [--base HEAD] [--out notes/findings/<date>-fold-report.md]
 """
@@ -35,7 +35,7 @@ ARTIFACTS = {
     "prior": "pipeline/out/meta_prior.json",
     "board": "pipeline/out/style_roster_evidence.json",
 }
-UNIFORM_VOTERS = 35   # KB_UNI_MIN in build_dataset.py (voters, 2026-09-04)
+UNIFORM_VOTERS = 35   # KB_UNI_MIN in build_dataset.py (distinct-player voters)
 
 KIT_DUMP = r'''
 import sys, json
@@ -116,7 +116,7 @@ def main():
         except subprocess.CalledProcessError:
             if key != "rosters":
                 raise
-            # the previous fold predates the gzipped artifact (2026-09-11)
+            # the previous fold predates the gzipped artifact
             rel = rel[:-3]
             dest = os.path.join(tmp, os.path.basename(rel))
             git_show(args.base, rel, dest)

@@ -7,7 +7,7 @@
 # Permafrost Prism sheet, so the QW-conditional scores mirror that sheet;
 # differences are all in slot E.
 #
-# Rulings carried over from the Permafrost curation for consistency:
+# Rules carried over from the Permafrost curation for consistency:
 #   - Frost Nova's teleport files as disengage, not mobility.
 #   - tankiness NOT scored (Frost Nova's 0.2s immunity is trivial; nothing
 #     else in the kit is defensive).
@@ -15,7 +15,7 @@
 #     not this kit's job.
 # Frost Beam's AA-speed debuff noted, still unscored: damage_debuff was
 # promoted into §2.2 (2026-08-12) but the small W-option carriers are held
-# at 0 pending expert weighting.
+# at 0 pending validation.
 
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json

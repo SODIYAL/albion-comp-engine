@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Forge rework regression suite (2026-08-18).
+Forge rework regression suite.
 
 Pins the structural contracts of the reworked engine:
   F1  pick-score invariant: a candidate's reported score EXACTLY equals
@@ -31,17 +31,17 @@ Pins the structural contracts of the reworked engine:
   F12 predicate minima are combo-aware: locked non-qualifying kits are kept
       verbatim but never counted toward the ranged-AoE core.
   F13 style gate: unfit weapons leave suggestions/forge only.
-  F14 no cost gate (owner ruling 2026-09-07, retiring the 2026-08-23 crystal
-      gate): every cost tier sits in every suggest pool, swap_review carries
-      no off_budget flag, and the anti_zone rows carry the physics instead —
-      no row in the 7-man templates, a DEMAND RAMP elsewhere (nothing
-      through 14, the measured value at 25, proportional beyond).
-  F15 primary-heal minimum (owner ruling 2026-08-23): a hybrid healer can
-      never be the comp's sole healing foundation — every forge fields the
-      band's full-healer minimum in addition to the healer role band.
-  F16 style role bands (owner ruling 2026-08-23): the declared style
-      overrides the brawl-calibrated bands — at 20, brawl 3-4 healers,
-      clap one healer per five (floor, no max); kite retains minima only.
+  F14 no cost gate (retiring the crystal gate): every cost tier sits in
+      every suggest pool, swap_review carries no off_budget flag, and the
+      anti_zone rows carry the physics instead — no row in the 7-man
+      templates, a DEMAND RAMP elsewhere (nothing through 14, the
+      measured value at 25, proportional beyond).
+  F15 primary-heal minimum: a hybrid healer can never be the comp's sole
+      healing foundation — every forge fields the band's full-healer
+      minimum in addition to the healer role band.
+  F16 style role bands: the declared style overrides the brawl-calibrated
+      bands — at 20, brawl 3-4 healers, clap one healer per five (floor,
+      no max); kite retains minima only.
 
 Run:  py -3 tests/test_forge.py
 """
@@ -89,7 +89,7 @@ def t_invariant():
                 base = e.comp_score(party, combos)
                 for _ in range(6):
                     cand = pool[rng.randrange(len(pool))]
-                    # dressed forge 2026-08-27: the invariant now covers
+                    # dressed forge: the invariant now covers
                     # the chosen kit variant — the delta includes vgears
                     score, _df, _ds, _meta, combo, _var, vg = \
                         e._eval_pick(state, cand)
@@ -150,13 +150,13 @@ def t_redundancy():
     r3 = e.redundancy([b, b, b])
     r4 = e.redundancy([b, b, b, b])
     growing = (r1 == 0.0 and r2 - r1 == 1.0 and r3 - r2 == 2.0 and r4 - r3 == 3.0)
-    # Allowances are GENERATED per style x band since 2026-09-15 (owner:
-    # "full autonomy"; derive_skeletons.py, free = round(p50 copies) of the
-    # rosters fielding the weapon at the band). The hand list is retired:
-    # Great Arcane's free 2 (one Deadlyhooker party) reads 1 at 20 (9% of
-    # winners double it), Hallowfall keeps a free second copy (88% double
-    # it), and Permafrost's free 2 — removed by the owner the same morning
-    # — stays gone (p50 one copy). Every copy beyond `free` pays rho.
+    # Allowances are GENERATED per style x band (derive_skeletons.py,
+    # free = round(p50 copies) of the rosters fielding the weapon at the
+    # band). The hand list is retired: Great Arcane's free 2 (one
+    # Deadlyhooker party) reads 1 at 20 (9% of winners double it),
+    # Hallowfall keeps a free second copy (88% double it), and
+    # Permafrost's free 2 — already removed — stays gone (p50 one copy).
+    # Every copy beyond `free` pays rho.
     p = "2H_ARCANESTAFF"
     free_ok = (e._dup_free(p) == 1 and e.redundancy([p, p]) == 1.0
                and e.redundancy([p, p, p]) == 3.0)
@@ -168,9 +168,9 @@ def t_redundancy():
     hall_ok = (fh >= 2 and fh == e.dup_per_weapon[h]["free"]
                and e.redundancy([h] * fh) == 0.0
                and e.redundancy([h] * (fh + 1)) == 1.0)
-    check("F4 duplicate marginal cost grows; generated allowances (2026-09-15): "
+    check("F4 duplicate marginal cost grows; generated allowances: "
           "Great Arcane free 1, Hallowfall's free second copy from the harvest, "
-          "Permafrost pays since 2026-09-15 (rho 0.5)",
+          "Permafrost pays (rho 0.5)",
           growing and free_ok and hall_ok and perma_ok,
           f"2H_AXE copies cost {r2 - r1}/{r3 - r2}/{r4 - r3}; "
           f"Great Arcane free {e._dup_free(p)}, Permafrost free {e._dup_free(pf)}, "
@@ -194,14 +194,14 @@ def t_size11_matrix():
                 problems.append(f"size {len(party)}")
             if r["filler"]:
                 # Saturation filler is legal ONLY when irreducible: the
-                # owner rulings that shrink group-band pools (F19) can
+                # rules that shrink group-band pools (F19) can
                 # leave a matrix cell where EVERY remaining candidate is
                 # negative — the forge must field the least-bad body and
                 # surface it (the docstring's "structural saturation").
                 # A filler slot with a strictly better legal replacement
                 # is still a refinement failure.
                 for fi in r["filler"]:
-                    # dressed forge 2026-08-27: the forge audits DRESSED —
+                    # dressed forge: the forge audits DRESSED —
                     # this checker prices the same rosters with gears, and
                     # 'better pick available' means a LEGAL one (the
                     # comment always said legal): a replacement _add_ok
@@ -235,9 +235,9 @@ def t_size11_matrix():
                 problems.append(f"excluded weapon {hit}")
             # Validate against the engine's EFFECTIVE band — the base
             # composition.yaml row merged with the declared style's
-            # constraint_overrides (2026-08-23: bands are style-aware, so
+            # constraint_overrides (bands are style-aware, so
             # the old hardcoded 2-3 healers no longer holds for every
-            # style; F16 pins the owner-ruled style values explicitly).
+            # style; F16 pins the style values explicitly).
             roles = {}
             for w in party:
                 roles[e.role_of(w)] = roles.get(e.role_of(w), 0) + 1
@@ -245,9 +245,9 @@ def t_size11_matrix():
                 if key in ("min_size", "max_size") or not isinstance(rule, dict):
                     continue
                 if key in e.pred_defs or key in (e.PRIMARY_HEAL, e.STANDOFF):
-                    # COMBO-AWARE (review 2026-08-19): a member counts only
+                    # COMBO-AWARE (F12): a member counts only
                     # if the spell combination the forge actually SELECTED
-                    # supplies the minima. `standoff` (2026-09-15) is the
+                    # supplies the minima. `standoff` is the
                     # plan-tool flag predicate, combo-independent like
                     # primary_heal.
                     have = sum(1 for w, c in zip(party, r["combos"])
@@ -307,10 +307,10 @@ def t_exclusions():
 def t_floor_clamp():
     # Below the band's min_size the content row scales with size and sits
     # under territory's 4.2-unit absolute heal floor, so the floor clamps
-    # to the target it guards (2026-08-18). Re-pinned 2026-09-11 at size 9:
-    # at 10+ `balanced` now reads the POOLED harvest cell (owner
-    # 2026-09-10) and the median heal_sustain of every winner at 10-14 sits
-    # ABOVE the raw floor, which is the other branch — the floor stays raw.
+    # to the target it guards. Re-pinned at size 9: at 10+ `balanced` now
+    # reads the POOLED harvest cell (target is the median, F30) and the
+    # median heal_sustain of every winner at 10-14 sits ABOVE the raw
+    # floor, which is the other branch — the floor stays raw.
     # The floor arms at 10, where balanced now reads the pooled cell; the
     # clamp is shown on a bands-free copy of the dataset (the content row
     # scaled to 10 sits under 4.2) and the raw branch on the real one.
@@ -377,12 +377,12 @@ def t_headroom():
 
 # ---------------------------------------------------- F30 target provenance
 def t_target_source():
-    """Target is the median (owner 2026-09-10). At 10+ a style reads the
-    harvest cell (balanced its pooled cell, once the board carries one);
-    every row says where its target came from and carries the bare
-    minimum beside it — display provenance for the board's four stages
-    (red < min < orange < typical < green < soft cap < purple), never a
-    scoring input."""
+    """Target is the median (the typical winner, p50). At 10+ a style
+    reads the harvest cell (balanced its pooled cell, once the board
+    carries one); every row says where its target came from and carries
+    the bare minimum beside it — display provenance for the board's four
+    stages (red < min < orange < typical < green < soft cap < purple),
+    never a scoring input."""
     e = Engine(content="castle_outpost", size=15, style="kite")
     srcs = {c: e.target_source(c) for c in e.reqs}
     check("F30a a harvest-targeted row reports 'harvest'",
@@ -459,7 +459,7 @@ def t_locked_forge():
 
 
 def t_pred_combo_aware():
-    """Review 2026-08-19: the ranged-AoE minimum must be met by the spell
+    """F12: the ranged-AoE minimum must be met by the spell
     combinations the forge actually SELECTS — the flat sheet count marked a
     member as core even when its equipped kit supplied nothing. A member
     locked with a non-qualifying spell pick must not count, and the forge
@@ -494,15 +494,15 @@ def t_pred_combo_aware():
 
 
 def t_style_gate():
-    """F13 (identity Phase C, owner ruling 2026-08-23): a weapon UNFIT for
-    the declared style at this size band leaves suggestions and generation
-    exactly like a viability exclusion — manual and locked picks still
-    score, swap_review flags off_style, and trio sizes gate nothing.
-    REVISED same day (round 3, generation-fit gate): balanced still
+    """F13 (identity Phase C): a weapon UNFIT for the declared style at
+    this size band leaves suggestions and generation exactly like a
+    viability exclusion — manual and locked picks still score,
+    swap_review flags off_style, and trio sizes gate nothing.
+    REVISED at validation round 3 (generation-fit gate): balanced still
     declares no style intent, but a dps weapon that fits NOTHING at this
-    band (Battleaxe at 20 — "doesn't fit in most group play styles bigger
-    than 3") now leaves balanced generation too: that is size fitness,
-    not style intent. Trio remains fully open."""
+    band (Battleaxe at 20 fits no group playstyle above 3) now leaves
+    balanced generation too: that is size fitness, not style intent.
+    Trio remains fully open."""
     e = Engine(content="blackzone_roam", size=20, style="clap")
     barred = "MAIN_AXE" not in set(e.suggest_pool())
     not_rec = all(r["weapon"] != "MAIN_AXE"
@@ -529,16 +529,15 @@ def t_style_gate():
 
 
 def t_cost_gate():
-    """F14 (owner ruling 2026-09-07, retiring the 2026-08-23 crystal gate):
-    "remove the cost gate for weapons ... a better ruling might be that
-    that type of cleanse is not as important in small groups as the engine
-    values. this would follow in line with us not restricting weapons but
-    rather focusing on mechanics." No cost tier is barred anywhere;
+    """F14 (retiring the crystal cost gate): weapons are never restricted
+    by cost; the better rule is that this type of cleanse matters less in
+    small groups than the engine valued it — mechanics, not weapon
+    restrictions (curation judgment). No cost tier is barred anywhere;
     swap_review carries no off_budget flag; the Exalted Staff (sole
     anti_zone supplier) is judged by the anti_zone rows — none in the
-    7-man templates, and a DEMAND RAMP in the rest (owner, same day:
-    "don't really need it at 10-14 and then need grows slightly as
-    numbers grows and then becomes a good requirement at like 25+")."""
+    7-man templates, and a DEMAND RAMP in the rest (not needed at 10-14,
+    a need that grows slightly with numbers and becomes a real
+    requirement at 25+)."""
     CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL",
                "2H_DUALCROSSBOW_CRYSTAL")
     pools = [set(Engine(content=c, size=n).suggest_pool())
@@ -568,9 +567,9 @@ def t_cost_gate():
 
 
 def t_primary_heal():
-    """F15 (owner ruling 2026-08-23): "[Forgebark] is too expensive to be
-    the only healer ... it's not which line but which weapon — the weapon
-    needs to have high healing numbers on its E." The primary_heal band
+    """F15: Forgebark is too expensive to be the only healer — it is not
+    the line but the weapon that decides, and the weapon needs high
+    healing numbers on its E (curation judgment). The primary_heal band
     minimum counts only full healers (dataset full_healer flag); a locked
     hybrid healer is kept verbatim but never satisfies it alone."""
     e = Engine(content="castle_outpost", size=7)
@@ -595,9 +594,8 @@ def t_primary_heal():
 
 def t_style_bands():
     """F16: one healer per five members, floor-rounded MINIMUM, no maximum
-    (owner 2026-09-08; extended the same day to brawl and both hybrids -
-    "sure on healers at 25"). Kite keeps its lower minima without a cap;
-    balanced keeps the base band."""
+    (extended to brawl and both hybrids; five healers at 25). Kite keeps
+    its lower minima without a cap; balanced keeps the base band."""
     ok = True
     lines = []
     for style, lo, hi in (("brawl", 4, 20), ("clap", 4, 20), ("kite", 2, 20),
@@ -625,8 +623,8 @@ def t_style_bands():
     for size, minimum in ((5, 1), (9, 1), (10, 2), (19, 3), (20, 4),
                           (21, 4), (24, 4), (25, 5), (29, 5), (30, 6), (60, 12)):
         ec = Engine(content="castle", size=size, style="clap")
-        # `typical` (2026-09-11) rides beside the minimum and is not a
-        # cap: minima always override it. The ruling pins min and no max.
+        # `typical` (F31) rides beside the minimum and is not a
+        # cap: minima always override it. The rule pins min and no max.
         if ec._band["healer"].get("min") != minimum                 or "max" in ec._band["healer"]:
             ok = False
             lines.append(f"clap@{size}: {ec._band['healer']}")
@@ -636,7 +634,7 @@ def t_style_bands():
     if not rc25["feasible"] or len(rc25["party"]) != 25 or hc25 < 5:
         ok = False
     lines.append(f"castle clap@25: {hc25}h, feasible={rc25['feasible']}")
-    # the per-five minimum on brawl and both hybrids (owner 2026-09-08)
+    # the per-five minimum on brawl and both hybrids
     for st in ("brawl", "brawl_clap", "clap_kite"):
         for size, minimum in ((20, 4), (24, 4), (25, 5)):
             band = Engine(content="castle", size=size, style=st)._band["healer"]
@@ -660,14 +658,14 @@ def t_style_bands():
 
 
 def t_double_bladed_gank():
-    """F27 (owner 2026-09-08: "double bladed is a good ganking weapon but
-    not a good brawl weapon. but you need to check the actual stats").
-    Checked against the killer-party harvest the same day: 24 parties of
-    10+ field it, 9 of them gank/dive squads, the rest carrying ONE inside
-    a clap roster; 11 distinct wearers at 10+ (gank kits: Hunter Shoes,
-    Graveguard), none at 20+. The exclusion (composition.yaml, evidence-
-    gated) bars 10+ generation; the gang band stays open (1.6% of 4-9 man
-    killer parties); manual picks still score."""
+    """F27: Double Bladed is a ganking weapon, not a brawl weapon
+    (curation judgment, checked against the killer-party harvest): 24
+    parties of 10+ field it, 9 of them gank/dive squads, the rest
+    carrying ONE inside a clap roster; 11 distinct wearers at 10+ (gank
+    kits: Hunter Shoes, Graveguard), none at 20+. The exclusion
+    (composition.yaml, evidence-gated) bars 10+ generation; the gang band
+    stays open (1.6% of 4-9 man killer parties); manual picks still
+    score."""
     dbs = "2H_DOUBLEBLADEDSTAFF"
     e25 = Engine(content="castle", size=25, style="brawl")
     r = e25.forge(25)
@@ -675,7 +673,7 @@ def t_double_bladed_gank():
     e7 = Engine(content="castle_outpost", size=7)
     manual = e25.comp_score(["MAIN_HOLYSTAFF_AVALON", "2H_MACE", dbs])
     check("F27 Double Bladed is barred from 10+ generation (gank weapon, "
-          "owner 2026-09-08 + harvest audit), open at 7; the castle-25 brawl "
+          "harvest audit), open at 7; the castle-25 brawl "
           "forge fields none; a manual Double Bladed still scores",
           dbs not in set(e25.suggest_pool()) and dbs not in set(e10.suggest_pool())
           and dbs in set(e7.suggest_pool()) and dbs not in r["party"]
@@ -685,15 +683,14 @@ def t_double_bladed_gank():
 
 
 def t_generation_fit():
-    """F17 (owner ruling 2026-08-23, round 3 gradings): a DEFAULT generated
-    comp fields damage picks the derivation says FIT. "faction war comp is
-    bad because it has dagger and boltcaster, both of which can only damage
-    1 person at a time with e and that's not good for anything higher than
-    3v3, heavy crossbow at least can do damage through people with e" —
-    and the 25-brawl's Permafrost/Wailing/single-target tail. Situational
-    damage picks stay manual (score normally, never flagged off_style);
-    healers/frontline/support keep their standing rules; trio gates
-    nothing."""
+    """F17 (validation round 3): a DEFAULT generated comp fields damage
+    picks the derivation says FIT. The faction-war comp failed on Dagger
+    and Boltcasters, whose E damages one person at a time — no use above
+    3v3, where Heavy Crossbow at least damages through people with its E
+    — and the 25-brawl's Permafrost/Wailing/single-target tail.
+    Situational damage picks stay manual (score normally, never flagged
+    off_style); healers/frontline/support keep their standing rules; trio
+    gates nothing."""
     def by_name(e, name):
         return next(k for k, w in e.weapons.items()
                     if w["display_name"] == name)
@@ -720,8 +717,8 @@ def t_generation_fit():
     named_bad = {dagger, bolt, perma, wail, by_name(eb, "Whispering Bow"),
                  by_name(eb, "Light Crossbow"), by_name(eb, "Glaive")}
     forge_ok = not (named_bad & set(r["party"]))
-    # trio open; healers untouched (Druidic keeps its gang slot — the
-    # "leave it, keep everything consistent" ruling)
+    # trio open; healers untouched (Druidic keeps its gang slot — left
+    # as is, so the gang band stays consistent)
     trio_ok = dagger in set(Engine(content="roads", size=3).suggest_pool())
     e7 = Engine(content="castle_outpost", size=7)
     druidic_ok = by_name(e7, "Druidic Staff") in set(e7.suggest_pool())
@@ -735,19 +732,18 @@ def t_generation_fit():
 
 
 def t_dup_and_clump():
-    """F18 (owner ruling 2026-08-24, round 4): "I don't see the value in
-    adding 2 earthrunes along with hand of justice." A duplicate must EARN
-    its place — the generation default is 1 copy at every size; a second
-    copy comes only from a per-weapon allowance citing a real comp. And
-    the derived clump_core group (clump_create >= 4 on the flat sheet:
-    HoJ, Camlann, Witchwork) caps generated clump tools at 2 — one
-    primary plus at most one backup."""
+    """F18 (validation round 4): two Earthrunes beside a Hand of Justice
+    add nothing. A duplicate must EARN its place — the generation default
+    is 1 copy at every size; a second copy comes only from a per-weapon
+    allowance citing a real comp. And the derived clump_core group
+    (clump_create >= 4 on the flat sheet: HoJ, Camlann, Witchwork) caps
+    generated clump tools at 2 — one primary plus at most one backup."""
     e = Engine(content="faction_war", size=15)
-    # generated allowances (2026-09-15): the forge cap is ceil(p90 copies)
+    # generated allowances: the forge cap is ceil(p90 copies)
     # of the rosters fielding the weapon at the band, the free copies
     # round(p50) — Earthrune keeps the default, Great Arcane's hand cap of
     # 3 (one Deadlyhooker party) falls to what winners at 15-19 field,
-    # Permafrost's free second copy stays gone (owner, the same morning)
+    # Permafrost's free second copy stays gone
     ga = e.dup_per_weapon.get("2H_ARCANESTAFF") or {}
     dup_ok = (e._dup_gen_max("2H_SHAPESHIFTER_KEEPER") == 1
               and e._dup_gen_max("2H_ARCANESTAFF") == ga.get("max", 1) < 3
@@ -774,9 +770,10 @@ def t_dup_and_clump():
           ["2H_HAMMER_AVALON", "2H_MACE_MORGANA"] and not gen_clump,
           f"dupes={dupes}, group={grp and grp['weapons']}, "
           f"generated_clump={gen_clump}")
-    # F18b (round 5): "usually 2 curse is max in a 25 man party" — the
-    # curse_pressure group is the whole cursed line, derived from the
-    # shared Q pool the CURSEDOT record prices, capped at 2 generated.
+    # F18b (validation round 5): two curses are the usual maximum in a
+    # 25-man party — the curse_pressure group is the whole cursed line,
+    # derived from the shared Q pool the CURSEDOT record prices, capped
+    # at 2 generated.
     cg = next((g for g in e.groups if g.get("name") == "curse_pressure"),
               None)
     e25 = Engine(content="castle", size=25, style="brawl")
@@ -793,13 +790,13 @@ def t_dup_and_clump():
 
 # ---------------------------------------------- F19 curse slots are earned
 def t_curse_slot_earned():
-    # Owner ruling 2026-08-25: "the only weapon i see in any party bigger
-    # than 15 people is the lifecurse, damnation, or rotcaller" — within a
-    # non-stacking budget (the cursed line, its shared Q priced count-once)
-    # a GROUP-band slot is earned by the E's enemy-DEBUFF tool
-    # (pierce/purge/heal-cut at the tool bar). Fear is displacement, not a
-    # debuff: "demonic staff is not a true brawl weapon at larger than 7
-    # people". Derived structurally from the sheets — no hand list.
+    # The only curses seen in parties above 15 are Lifecurse, Damnation
+    # and Rotcaller (curation judgment) — within a non-stacking budget
+    # (the cursed line, its shared Q priced count-once) a GROUP-band slot
+    # is earned by the E's enemy-DEBUFF tool (pierce/purge/heal-cut at
+    # the tool bar). Fear is displacement, not a debuff: Demonic Staff is
+    # not a true brawl weapon above 7 people. Derived structurally from
+    # the sheets — no hand list.
     DEBUFF_E = {"2H_CURSEDSTAFF_MORGANA",      # Damnation — pierce aura
                 "MAIN_CURSEDSTAFF_UNDEAD",     # Lifecurse — purge blades
                 "MAIN_CURSEDSTAFF_CRYSTAL"}    # Rotcaller — heal negate
@@ -843,9 +840,9 @@ def t_curse_slot_earned():
 
 # ---------------------------------------------- F20 resilience penetration
 def t_resil_pen():
-    # Owner ruling 2026-08-25: "single target is just a non pick at 20+
-    # usually because enemy will have too many defensives ... you can wire
-    # it as partial rebate" — per-weapon Resilience Penetration (wiki
+    # Single target is a non-pick at 20+, since the enemy fields too many
+    # defensives; penetration is wired as a partial rebate (curation
+    # judgment) — per-weapon Resilience Penetration (wiki
     # post-Realm-Divided table, cited in pipeline/resilience_penetration
     # .yaml; a melee-only stat, ranged/magic weapons carry none) rebates
     # the weapon's burst_st/execute SUPPLY by the physics ratio
@@ -877,8 +874,8 @@ def t_resil_pen():
 
 # ---------------------------------------------- F21 need profiles (incr. 3)
 def t_need_profiles():
-    # Owner-ruled 2026-08-26 (blind round + 139 killboard rosters +
-    # 8 curated comps + Wardergrip): fine-seat bands + function coverage
+    # Validation round (139 killboard rosters + 8 curated comps +
+    # Wardergrip): fine-seat bands + function coverage
     # gate GENERATION at 15+ — engage-leaning default (engage 2-3 /
     # stopper 1-2), stopper-heavy is the territory-defense shape, zone
     # and off-tank capped, pierce + heal-cut always fielded. Below
@@ -909,7 +906,7 @@ def t_need_profiles():
     ft = et.forge(20)
     st, _fnt = mix(et, ft["party"])
     terry_ok = ft["feasible"] and 2 <= st.get("stopper_tank", 0) <= 4
-    # owner-ruled 2026-08-26 follow-up: ranged styles at 20 field a
+    # follow-up rule: ranged styles at 20 field a
     # 7-strong ranged-AoE core (combo-aware — the members' SELECTED
     # spells deliver it), killing the melee-heavy clap_kite defect
     ek = Engine(content="blackzone_roam", size=20, style="clap_kite")
@@ -946,7 +943,7 @@ def t_dressed_state():
           st_naked["s"] == st_old["s"] and st_naked["s_syn"] == st_old["s"])
     st = e.party_state(p, None, g)
     extra = e.member_extra("2H_HAMMER")
-    # Option C (owner ruling 2026-08-27): on a dressed party the floor
+    # Option C (source-aware floors): on a dressed party the floor
     # terms read the weapon+loadout basis — the marginal helper takes the
     # naked supply and the candidate's weapon-only gains, exactly as
     # _combo_score calls it.
@@ -1027,7 +1024,7 @@ def t_dressed_eval():
 
 
 def t_locked_gears():
-    """F25 (owner ruling 2026-08-27): a locked member supplied with
+    """F25 (locked gears): a locked member supplied with
     explicit gear keeps EXACTLY that gear — scored with it, never
     re-dressed; a locked member without gear stays naked (no invented
     kit). Existing `locked` calls are untouched (F23 still pins the
@@ -1054,7 +1051,7 @@ def t_locked_gears():
 
 
 def t_refine_gears():
-    """F26 (owner ruling 2026-08-27): refine() is gear-aware. With gears,
+    """F26: refine() is gear-aware. With gears,
     it optimizes the SAME dressed comp_score everything else uses —
     incumbent kits preserved, replacements arrive in their best doctrine
     variant, result returns {party, gears}, converged output admits no
@@ -1100,7 +1097,7 @@ def t_refine_gears():
 
 
 def t_forge_every_band_size():
-    """F28 (2026-09-10): every declared style forges a full, feasible roster
+    """F28: every declared style forges a full, feasible roster
     at every size the bands cover, including the band EDGES. The forge's
     minimum-need precheck used to sum seat minima on top of the role bands
     they sit inside and cross-role predicates on top of the bodies that
@@ -1133,9 +1130,9 @@ def t_forge_every_band_size():
 
 
 def t_min_need_disjoint_seats():
-    """F29 (2026-09-10): the minimum-need bound may discount a CROSS-ROLE
+    """F29: the minimum-need bound may discount a CROSS-ROLE
     predicate against bodies already counted in a role only where those
-    bodies could actually carry it. The 2026-09-10 bound subtracted the
+    bodies could actually carry it. The earlier bound subtracted the
     whole of a role's counted need, including bodies committed to a nested
     SEAT minimum whose satisfiers cannot satisfy the predicate at all: at
     territory_defense no stopper tank delivers ranged AoE, so a state
@@ -1174,7 +1171,7 @@ def t_min_need_disjoint_seats():
 
 
 def t_role_typical():
-    """F31 (2026-09-11, owner: "go ahead"): a body beyond the TYPICAL
+    """F31 typical role count: a body beyond the TYPICAL
     count for its role is generated only when a minimum only that role
     can meet still demands it. The typical count is GENERATED from the
     committed harvest (derive_role_counts.py: p50 of fully-known killer
@@ -1234,8 +1231,8 @@ def t_role_typical():
           "typical" not in ((e25._band or {}).get("healer") or {}),
           f"band healer = {(e25._band or {}).get('healer')}")
 
-    # --- tanks and supports, every size and style (owner 2026-09-11:
-    # "fix it up all for all party sizes and styles not just 7s")
+    # --- tanks and supports, every size and style (the typical rows
+    # cover every party size and style, not just 7s)
     # Below 10 the row is the content's fitted-comps median (rule 17):
     # castle_outpost 7 = 2 frontline (2/2/3), support p50 0 -> no row;
     # roads (1 comp) has none, so it reads the pooled harvest row: healer
@@ -1293,7 +1290,7 @@ def t_role_typical():
     bal20 = row("castle", "balanced", 20)
     bc20 = row("castle", "brawl_clap", 20)
     pooled20 = row("castle", "balanced", 20)
-    # (2026-09-11, Exalted re-seated as a healer: the harvest counts it as
+    # (Exalted re-seated as a healer: the harvest counts it as
     # one now — clap 20 reads 4/5/3, the pooled 20 row 4/5/3)
     check("F31i at 10+ the band carries healer / frontline / support from "
           "the declared style's cell (brawl 12: 2/2/1; clap 20: 4/5/3); "
@@ -1331,7 +1328,7 @@ def t_role_typical():
 
 
 def t_forge_avoid():
-    """F32 (2026-09-11, owner: "a different viable comp each press"): the
+    """F32 (a different viable comp on each press): the
     forge takes an `avoid` list of rosters already shown and returns the
     best roster NOT among them - deterministic, never random. The page
     passes every roster shown under the current locks / content / style
@@ -1383,7 +1380,7 @@ def t_forge_avoid():
 
 
 def t_replace_options():
-    """F33 (2026-09-11, owner: "show ranked alternatives, I pick"): the
+    """F33 (ranked alternatives to pick from): the
     replacements for ONE slot are a one-slot forge - every candidate is
     scored as a dressed pick into the rest of the comp and passes the
     forge's own gates (role bands, typical counts, dup caps, minima), so

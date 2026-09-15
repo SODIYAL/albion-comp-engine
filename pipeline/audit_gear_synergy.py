@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gear-synergy semantics audit (Phase 5, 2026-08-27). REPORT-ONLY.
+Gear-synergy semantics audit (dressed validation Phase 5). REPORT-ONLY.
 
 The scoring seam is deliberate (dressed-forge design): FITNESS prices
 weapon + gear, SYNERGY prices weapons only (`synergy()` never receives

@@ -8,7 +8,7 @@
 # was verified against. Delete an entry once the parser bug it works around is
 # fixed and the artifacts are rebuilt after the next game patch.
 #
-# Found during batch-2 curation review (2026-08-12).
+# Found during the second curation batch.
 
 # ---------------------------------------------------------------------------
 # Structured-effect direction rewrites: spell -> effect -> the CORRECT dirs.
@@ -78,13 +78,10 @@ add:
   SHAPE_Q_DAMAGE_AND_SHIELD:          # "Applies a shield to yourself and up to 5 allies that absorbs 150"
     buff_allies: "ally damage-absorb shield; absorb shields are outside the structured vocab"
   SHAPE_W_TETHERBEAM:                 # "Applies a shield that absorbs 300... if the ally is a guild/alliance/party member, pull them to your position"
-    # peel REMOVED (owner 2026-08-28, resolved on the second pass). Held back
-    # from the first pass because ally-repositioning is neither enemy CC nor
-    # damage protection, so it sat outside the letter of the ruling. Reading
-    # the full spell settles it: Tether Shift shields the ally and yanks them
-    # to you, and its enemy half only dashes YOU to them. Nothing in it touches
-    # an enemy or cancels enemy CC, so it falls the same way as the absorb-
-    # shield class.
+    # No peel: Tether Shift shields the ally and pulls the ALLY to the caster;
+    # its enemy half only dashes the caster to the target. Nothing in it
+    # touches an enemy or cancels enemy CC (the peel rule below), so it falls
+    # in the absorb-shield class.
     buff_allies: "300-absorb shield on the tethered ally; absorb shields are outside the structured vocab"
   SHAPE_W_AREA_PULL:                  # "pulling up to 5 enemies towards you, rooting them for 1.35"
     clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
@@ -94,15 +91,15 @@ add:
       The parser captured only the mob-case max-health debuff, so the
       transformation itself is invisible to the vocabulary (the map knows the
       concept only in negative form: immunity:transformationcc and
-      dr:DRTransformationCC). Re-cited here 2026-08-28: the shapeshifter pool's
+      dr:DRTransformationCC). Re-cited here: the shapeshifter pool's
       peel row used to cite Tether Shift, which shields and pulls the ALLY and
       never touches an enemy — wrong spell for a real capability.
   CURSEDHANDS_STACKUP:                # "Enchant the targeted ally's Auto-Attacks for the next 10"
     buff_allies: "ally auto-attack damage enchant; direct damage adds are outside the structured vocab"
-  # HAMMERTACKLE clump_create — REMOVED 2026-08-13 by expert correction.
-  # Dumps text: "knocking back all enemies you pass through". A knockback
-  # along the dash line displaces/scatters, it does not pull into a pile —
-  # the standing drag/pull ruling applies (Grovekeeper/Permafrost precedent).
+  # HAMMERTACKLE clump_create — REMOVED (curation). Dumps text: "knocking
+  # back all enemies you pass through". A knockback along the dash line
+  # displaces and scatters; it does not pull into a pile — the drag/pull
+  # rule applies (Grovekeeper / Permafrost precedent, T12).
   # TOMBSTONE: do NOT re-add on the post-patch override re-check; the
   # displacement is captured as knockback_displace on the sheet.
   SHAPESHIFT_ENT:                     # "Growth: Increases the Max and Current Health of up to {0} allies in a 11 radius by 0.08"
@@ -117,8 +114,8 @@ add:
   INVULNERABILITY:                    # Protective Beam — refreshing 240 absorb bubble on an ally
     buff_allies: "channeled ally absorb shield; outside the structured vocab"
   SOUL_LINK:                          # "Redirects 0.5 of the damage taken by one target to the other"
-    # peel REMOVED (owner 2026-08-28): damage redirection halves what the ally
-    # takes but does nothing to the enemy — protection, not peel.
+    # No peel: damage redirection halves what the ally takes but does nothing
+    # to the enemy — protection, not peel (the peel rule below).
     buff_allies: "damage redirection off a focused ally; redirection is outside the vocab"
   SHAPESHIFT_PANTHER:                 # "On the Prowl — you will turn invisible to players"
     engage: "stealth opener; the conditional invisibility was not parsed as an effect node"
@@ -140,11 +137,10 @@ add:
     tankiness: "a cannot-die window is the purest tankiness; health floors are outside the vocab"
   ELECTRICSHOCK:                      # Electric Discharge — expanding AoE stun around self
     anti_dive: "a self-centered AoE stun is fired at the divers on you"
-  # OWNER RULING 2026-08-28: peel must hit the enemy or cancel the enemy's CC.
-  # Pure damage protection on an ally is buff_allies/tankiness, not peel — the
-  # `peel:` lines below were REMOVED (the "ally-armor rule" and the absorb-shield
-  # class). Owner: "I thought things peel would be like something that directly
-  # affects enemies in some way." Force Shield made Judicator Armor the
+  # PEEL RULE: peel must hit the enemy or cancel the enemy's CC. Pure damage
+  # protection on an ally is buff_allies / tankiness, not peel — the `peel:`
+  # lines below were REMOVED (the ally-armor rule and the absorb-shield
+  # class). Before the rule, Force Shield made Judicator Armor the
   # highest-peel gear in the game on nothing but +0.25 ally resistances.
   EMERGENCY_SHIELD:                   # "Emergency Shield for up to 10 allies... absorbing damage"
     buff_allies: "10-ally shield grant; same class as HOLYSHIELD/CRYSTALWAVE"
@@ -222,8 +218,8 @@ add:
     engage: "an unstoppable march to the fight is the frontline walk-in"
   CHARGE_SHIELD:                      # Shield Charge — "Charge towards the target... If the target is an ally, the shield is also applied to the target"
     engage: "the charge half; dashes are outside the vocab"
-    # peel REMOVED (owner 2026-08-28): Shield Charge shields the ally and
-    # never touches the enemy — protection, not peel.
+    # No peel: Shield Charge shields the ally and never touches the enemy —
+    # protection, not peel (the peel rule above).
   MAXHEALTHBUFF:                      # Giant — "increasing your Max and Current Health by 0.25, and your Move Speed by 0.25"
     tankiness: "self max-HP grant; hitpoints grants misread via reference chain"
     mobility: "the speed half"

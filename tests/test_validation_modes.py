@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dressed-validation contracts (2026-08-27 hardening pass).
+Dressed-validation contracts.
 
 The production engine evaluates DRESSED candidates (weapon + combo +
 doctrine kit) while the validation harnesses historically built naked
@@ -203,10 +203,10 @@ def t_gear_join():
 
 
 # ------------------------------------------- V5 Option C structural floors
-# Owner ruling 2026-08-27: STRUCTURAL hard floors read the weapon+loadout
+# Option C (standing rule 10): STRUCTURAL hard floors read the weapon+loadout
 # supply only — ordinary worn gear improves coverage/headroom/overstack but
-# can never satisfy a structural floor (the 2026-08-12 pseudo-tankiness
-# ruling extended to the gear stat channel).
+# can never satisfy a structural floor (the pseudo-tankiness rule extended
+# to the gear stat channel).
 CASE_A = ["MAIN_HOLYSTAFF_AVALON", "2H_LONGBOW", "2H_ICECRYSTAL_UNDEAD",
           "2H_DUALSWORD", "2H_ARCANESTAFF_HELL", "MAIN_ARCANESTAFF",
           "2H_AXE"]   # 7-man, zero frontline-seat weapons (audit case A)
@@ -288,41 +288,41 @@ def t_structural_floors():
 
 # ------------------------------------------- V6 per-style target modifiers
 def t_target_mults():
-    """styles.yaml `target_mults` (2026-08-28): the per-style REQUIREMENT
+    """styles.yaml `target_mults`: the per-style REQUIREMENT
     overlay. Weight multipliers say what a style values; these say how much
     of it the style needs. Contract: target and soft cap scale TOGETHER,
     unlisted capabilities are untouched, hard floors never scale, and the
-    shipped set is exactly the recorded rulings.
+    shipped set is exactly the recorded values (V6).
 
     The mechanism cases inject into BRAWL, which ships no multipliers, so
     the baseline is a true identity. (They used to inject into kite; once
-    kite gained its own ruled values the baseline stopped being 1.0 and the
-    cases failed — correctly.)"""
+    kite gained its own recorded values the baseline stopped being 1.0 and
+    the cases failed — correctly.)"""
     import json, tempfile
     base = Engine(content="blackzone_roam", size=20, style="brawl")
 
     # The shipped set is PINNED: every value present must be a recorded
-    # ruling, so an accidental or undocumented one fails here. Only the
-    # ranged_aoe_core -> burst_aoe derivation survived validation
-    # (2026-08-28); the healing and tankiness derivations were run the same
+    # value (tests/VALIDATION.md V6), so an accidental or undocumented one
+    # fails here. Only the ranged_aoe_core -> burst_aoe derivation survived
+    # validation; the healing and tankiness derivations were run the same
     # way and REJECTED because they widened coverage spread instead of
     # tightening it. balanced and brawl are the reference and stay empty.
-    RULED = {"balanced": {}, "brawl": {}, "brawl_clap": {},
+    RECORDED = {"balanced": {}, "brawl": {}, "brawl_clap": {},
              "clap": {"burst_aoe": 1.71},
              "kite": {"burst_aoe": 1.29, "peel": 1.25, "disengage": 1.2},
              "clap_kite": {"burst_aoe": 1.71, "peel": 1.25}}
     styles = base.data.get("styles") or {}
     shipped = {s: (v or {}).get("target_mults") or {}
                for s, v in styles.items()}
-    check("V6a shipped target_mults are exactly the recorded rulings "
+    check("V6a shipped target_mults are exactly the recorded values "
           "(an undocumented value fails here)",
-          shipped == RULED, f"shipped={shipped}")
+          shipped == RECORDED, f"shipped={shipped}")
     check("V6a2 balanced is empty — it is the reference the others scale "
           "against", not shipped.get("balanced"))
 
     d = json.loads(json.dumps(base.data))
     d["styles"]["brawl"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
-    # The style x size rows (style_bands, owner 2026-09-04, golden T37)
+    # The style x size rows (style_bands, golden T37)
     # supersede target_mults for a declared style at 10+ — the rows are
     # measured per style, so a multiplier would double-count. V6 tests the
     # multiplier MECHANISM on its own, so the synthetic dataset carries no
@@ -356,18 +356,19 @@ def t_target_mults():
           f"base={base._floors_eff} styled={e._floors_eff}")
     # the JS port reads the same key the same way; parity covers it the
     # moment a real value ships (both ports currently see {}).
-    check("V6f balanced stays the identity even when another style is ruled",
+    check("V6f balanced stays the identity even when another style "
+          "carries multipliers",
           not (d["styles"]["balanced"].get("target_mults") or {}))
 
 
 def t_median_rows():
-    """V7 (owner 2026-09-10, "the data should come from the harvest
-    median", replacing the 2026-09-09 zero-share pin it retires): every
-    style x band row on the SHIPPED file is the harvest's p50 as target,
-    p10 as min and 1.15 x p90 as soft cap for the cell it names; a
+    """V7 (target is the median, standing rule 17, replacing the
+    zero-share pin it retires): the data comes from the harvest median —
+    every style x band row on the SHIPPED file is the harvest's p50 as
+    target, p10 as min and 1.15 x p90 as soft cap for the cell it names; a
     capability most winners field none of (p50 == 0) ships soft-cap-only
     with the content target standing; the convention line says so. The
-    old rule ("a twentieth of winners skipping it means no minimum")
+    old rule (a twentieth of winners skipping it means no minimum)
     guarded p10 thrashing on the zero mass; the median does not thrash
     there, so the guard went with the convention."""
     import json, yaml

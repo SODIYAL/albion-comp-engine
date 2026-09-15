@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "5"   # 5: caster_moves (structural <dash> fact, 2026-09-08)
+ADAPTER_VERSION = "5"   # 5: caster_moves (structural <dash> fact)
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -189,12 +189,12 @@ def spell_geometry(sid, registry, max_depth=8):
     `radius` is the largest damage/zone footprint found; None means the tree
     carries no structural area — 'unknown', never 'not AoE'.
 
-    `escalation` (2026-08-20, Q9 answered from the dumps): the game marks AoE
+    `escalation` (Q9, answered from the dumps): the game marks AoE
     Escalation PER EFFECT — `@targetcountvaluebonusfactor` (damage/value bonus
     per target hit, the wiki's 8%) and `@targetcountdurationbonusfactor` (CC
     duration bonus per target — the CC Escalation whose curve the wiki never
-    published). We record the max factor of each kind found in the spell tree;
-    absent key = the game gives this spell no escalation."""
+    published). The max factor of each kind found in the spell tree is
+    recorded; absent key = the game gives this spell no escalation."""
     best = {"radius": None, "max_targets": None}
     escal = {}
     shapes = []
@@ -315,7 +315,7 @@ def spell_channel(sid, registry, max_depth=10):
     Hundred Striking Fists; Gravitas hides its channel in a sub-spell, so
     the walk follows references like the escalation walk does). None =
     no channel node found. Structural fact, read by the style-fit
-    conditional-payload rule (owner 2026-08-26)."""
+    conditional-payload rule."""
     visited = set()
 
     def walk(node, depth):
@@ -347,12 +347,12 @@ def spell_dash(sid, registry, max_depth=10):
     """True when casting the spell MOVES THE CASTER — a `dash` node anywhere
     in the spell tree (the game's leap / charge / dive-kick primitive:
     Soaring Swipe, Vault Leap, Breakthrough, Aftershock, Lunging Stabs).
-    Structural fact behind the delivery rule (owner 2026-09-08: "when an
-    e lands the caster should read as melee delivery"): such an E lands its
-    payload where the caster lands, so its cast range is travel, not reach.
-    Thrown / projected payloads (Spear Throw, Soul Shaker, Tornado) carry no
-    dash node and keep their reach. None = no dash node found. Same
-    reference walk as spell_channel."""
+    Structural fact behind the delivery rule (an E whose cast lands the
+    caster reads as melee delivery): such an E lands its payload where the
+    caster lands, so its cast range is travel, not reach. Thrown /
+    projected payloads (Spear Throw, Soul Shaker, Tornado) carry no dash
+    node and keep their reach. None = no dash node found. Same reference
+    walk as spell_channel."""
     visited = set()
 
     def walk(node, depth):
@@ -587,9 +587,9 @@ def main(dump_dir, source_commit):
             "channel": spell_channel(sid, full_registry),
             # the cast moves the caster (structural: a dash node anywhere in
             # the spell tree) — a leap's cast range is travel, not payload
-            # reach (owner 2026-09-08). None = no dash found.
+            # reach. None = no dash found.
             "caster_moves": spell_dash(sid, full_registry),
-            # 700, not 400: the ability-detail view (2026-08-19) shows the
+            # 700, not 400: the ability-detail view shows the
             # full resolved text — 400 cut 49 spells mid-fact (ramp tables,
             # multi-component Es)
             "description": plain[:700],

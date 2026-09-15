@@ -8,10 +8,10 @@
 # Backhand Strike's wall-slam bonus damage and Counter's reflect have no
 # capability axis — noted, unscored.
 #
-# 2026-08-24 (round 7, observed-family reconciliation): the E's IMPACT
-# DAMAGE was never scored — DIVEPUNCH_RISE's own text: "Deals physical
-# damage within a 4 radius upon impact" (264 vs players). Owner: "battle
-# bracers is not single target, it damages all people it lands on."
+# Round 7 (observed-family reconciliation): the E's IMPACT DAMAGE was
+# never scored — DIVEPUNCH_RISE's own text: "Deals physical damage
+# within a 4 radius upon impact" (264 vs players). Battle Bracers is not
+# single-target: it damages everyone it lands on.
 # The gap cascaded: no E damage -> derive_style_fit read the weapon as a
 # single-scale carrier -> generation-barred at 10+, contradicting the
 # killboard (fielded in 84% of the observed ZvZ family's cohorts, 13

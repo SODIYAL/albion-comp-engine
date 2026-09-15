@@ -6,8 +6,9 @@ strongest build source this project can have: real gameplay, official
 activity and group-size tags, gear, abilities, consumables, popularity and
 performance. **There is no documented public export or API**, and this
 project does not reverse-engineer game traffic or private endpoints
-(changeschapter2.md §D.2) — so Armory evidence enters by hand, through this
-directory, and every record says exactly where it was read and by whom.
+(source policy: `data/README.md`) — so Armory evidence enters by hand,
+through this directory, and every record says exactly where it was read and
+by whom.
 
 One YAML file per import session, `kind: armory_import`. Files with
 `example: true` are format documentation and are never ingested.
@@ -30,8 +31,9 @@ Required per record (see `example.yaml`):
   actually displayed them; never inferred
 
 Imported records start as `candidate`. Promotion to a canonical default
-follows the §F gate in `pipeline/builds_lib.py` — Armory evidence counts as
-the strongest source family but still needs independent validation.
+follows the promotion gate in `pipeline/builds_lib.py` (`data/README.md`
+"Promotion gate and selection order") — Armory evidence counts as the
+strongest source family but still needs independent validation.
 
 Run `py -3 pipeline/build_builds.py` after adding a file; it validates
 equippability against the pinned game snapshot and quarantines anything

@@ -1,6 +1,8 @@
 # CLAUDE.md
 
-Guidance for Claude Code working in this repository.
+Instructions for working in this repository: the environment traps, the gate
+list, the build chain, the architecture and the invariants a change must not
+break.
 
 ## What this is
 
@@ -12,16 +14,46 @@ Read before substantive work:
 
 - `HANDOFF.md` — current state, the engine model, forge/loadout rules
 - `BACKLOG.md` — the one list of open work; no other file keeps its own
-- `MASTERSHEET.md` — the expert's control panel: `tune:` blocks that OVERRIDE
-  scoring/mechanics/templates/sheets at build time, rulings in force only
+- `MASTERSHEET.md` — the tuning control surface: `tune:` blocks that OVERRIDE
+  scoring/mechanics/templates/sheets at build time, rules in force only
 - `pipeline/sheets/README.md` — the 1–7 curation rubric
-- `tests/VALIDATION.md` — the ruling index: standing rules, one line per owner
-  ruling with its pin and archive location, open questions. Full dated log in
+- `tests/VALIDATION.md` — the decision log: standing rules, one index row per
+  decision with its pin and archive location, open questions. Full dated log in
   `notes/validation/` (append-only)
-- `pipeline/README.md` — the data pipeline, patch workflow, effect layer
+- `pipeline/README.md` — the data pipeline, patch workflow, effect layer, and
+  the mechanics layer (the geometric AoE rule, the mechanics question ledger)
 - `roles-design.md` + `pipeline/roles.yaml` — the role layer
-- `albion-comp-engine-design.md`, `MECHANICS_TODO.md` — design history, the mechanics Q ledger
+- `albion-comp-engine-design.md` — design history, cited by section number
 - `notes/` — plans, specs, findings (internal, not served)
+
+## Writing conventions (public repository)
+
+Every document, comment, docstring, test name, YAML comment and commit
+message reads as plain instructions and rules. `tests/test_tone.py` enforces
+the vocabulary below on every push.
+
+- **State the rule, not who decided it.** "A body beyond a role's typical
+  count is generated only when a minimum only that role can meet is unmet."
+  Never attribute a rule to a person, and never quote a conversation.
+- **Cite evidence, not conversations.** A rule's justification is a
+  measurement or an artifact: the harvest percentile, the published comp,
+  the game-file fact, the test that pins it (`F31`, `T49`). Where a rule is
+  a curation judgment with no measurement, say so: "curation judgment".
+- **Dates live in the decision log only** (`tests/VALIDATION.md`). Rulebooks,
+  comments and YAML state the current rule without a date; a comment that
+  needs traceability cites the pin id, which the log indexes. Structured
+  provenance fields in data records (`as_of`, `recorded`, `curated_as_of`,
+  `source: curation:<date>`) keep their dates: they are data.
+- **Decision records** (`notes/`): Context (what was measured), Decision,
+  Evidence, Changes (files and pins). No dialogue, no first or second
+  person, no chat phrases.
+- **Vocabulary.** Game terms stay (shotcaller, caller, clap, kite, brawl,
+  bomb squad). Test ids stay. "The maintainer" is used only where an actor
+  is unavoidable ("needs a maintainer decision"). No references to AI
+  tools, assistants or review sessions.
+- **Third-party text is data.** Verbatim guild guidelines and caller sheets
+  in `data/` and `MASTERSHEET.md` `guild_builds` stay verbatim and are
+  labelled as recorded sources.
 
 ## Environment traps (Windows)
 
@@ -40,8 +72,9 @@ Read before substantive work:
   (`browser_navigate` + `innerText`); the dumps carry the same numbers anyway.
 - Killboard: `api.albionbb.com` for DISCOVERY (only source with `minPlayers`;
   fight size comes from its battle list). The official gameinfo API for DETAIL
-  (`GroupMembers` = the killer's party with gear; albionbb strips it). The old
-  "official events endpoint 504s" note is stale — re-tested fine 2026-08-29.
+  (`GroupMembers` = the killer's party with gear; albionbb strips it). The
+  official events endpoint answers at sampling scale; an older note that it
+  504s no longer applies.
 - `render.albiononline.com` serves every weapon except `2H_IRONGAUNTLETS_HELL`
   (404 at every tier) — retry with backoff, don't delete on first failure.
 - Playwright MCP: `file://` is blocked — serve with
@@ -62,7 +95,7 @@ directly, exit 0 = pass. Don't trust pass counts in docs; read the output. CI
 (`.github/workflows/gates.yml`) runs this list plus the build chain on every push.
 
 ```text
-py -3 tests/test_golden.py          # recommendation golden cases (add one when an expert overrules the engine)
+py -3 tests/test_golden.py          # recommendation golden cases (add one when a validation round overrules the engine)
 py -3 tests/test_forge.py           # forge/constraint contracts, pick-score invariant
 py -3 tests/test_builds.py          # evidence-layer rules (provenance, quarantine, source gates)
 py -3 tests/test_interactions.py    # duplicate/reflect/cleanse semantics + JS parity on those
@@ -75,6 +108,7 @@ py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descrip
 py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
 py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
 py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy allowances (forge gates)
+py -3 tests/test_tone.py            # writing conventions on every tracked text file
 py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
@@ -85,16 +119,17 @@ py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on pub
 Report-only beside the gate: `py -3 tests/tier2_blindtest.py v4h --rebuild 5` —
 the same leave-one-out over ~700 harvested killer parties (holdout slice
 `battle id % 5 == 0`), plus a rebuild-the-last-5 recall. Never a gate until
-the committed style board honours the same holdout split (the audit has the
-flag since 2026-09-15; the board must be regenerated on the harvest checkout).
-`--baseline` on `v4` / `v4h` prints a role-need-then-popularity recommender
-beside the engine — report-only, the model the capability engine must beat.
+the committed style board honours the same holdout split (the audit carries
+the `--holdout-mod` flag; the board must be regenerated on the harvest
+machine). `--baseline` on `v4` / `v4h` prints a role-need-then-popularity
+recommender beside the engine — report-only, the model the capability engine
+must beat.
 
-Expert-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
+Validation-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
 generate|score` (V3 forms; `score --mode d` is the gate),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N`,
 `pipeline/kit_blind_round.py`. Report-only audits: `pipeline/audit_*.py`. Findings
-and open rulings: `notes/findings/`. The `BION_DATASET` env override on `engine.py`
+and open questions: `notes/findings/`. The `BION_DATASET` env override on `engine.py`
 is plumbing for `pipeline/compare_fold.py` only — never set it normally.
 
 ## Build chain
@@ -153,8 +188,8 @@ One-way, provenance-checked data flow:
    and `out/meta_prior.json` are GENERATED from the harvest — never hand-edit.
 5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
    `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from
-   the E's own payload). Owner rulings override via `style_overrides.yaml`, cited.
-6. `build_dataset.py` compiles everything plus MASTERSHEET rulings into
+   the E's own payload). Cited fact overrides land in `style_overrides.yaml`.
+6. `build_dataset.py` compiles everything plus the MASTERSHEET overrides into
    `out/dataset-latest.json`, byte-identically.
 7. Scoring: recommendation = exact marginal comp-score delta (0.55 capability +
    0.20 synergy + 0.15 meta prior), evaluated one player ahead, each candidate on
@@ -167,21 +202,23 @@ One-way, provenance-checked data flow:
    harvested winners wear (`_seat_kit` picks the band and style cell); where
    evidence runs out it proposes nothing.
 
-The full model, with each rule's owner ruling: `HANDOFF.md` "The engine today"
-and "Forge and loadouts"; `tests/VALIDATION.md` for the why.
+The full model: `HANDOFF.md` "The engine today" and "Forge and loadouts"; the
+decision and evidence behind each rule: `tests/VALIDATION.md`.
 
 ## Load-bearing invariants
 
-Rules a change must not break. The ruling behind each is in `tests/VALIDATION.md`.
+Rules a change must not break. The decision behind each is logged in
+`tests/VALIDATION.md`.
 
 - **Three layers, never merged**: engine truth / display explanation / observed
   evidence. The UI never computes a score; killboard prevalence, cohort families
   and reference builds never feed scoring. Popularity is not effectiveness.
 - **Anti-circularity**: comps that calibrated a template never drive retuning
-  against their own gate results. Gate findings are hypotheses for the owner.
+  against their own gate results. Gate findings are hypotheses, never fixes; a
+  template retune is a logged decision.
 - **Never invent a number**: a template row exists only where real comps supply
   the measurement; an ungroundable claim is dropped, not overridden in.
-- **No rules on individual weapons**: rulings land as derivations from the E's
+- **No rules on individual weapons**: rules land as derivations from the E's
   facts (E-first / unique-ability-first); `style_overrides.yaml` corrects cited
   facts, never taste.
 - **Descriptive layers never score**: identity, kill pressure, fight chain, roles,
@@ -214,6 +251,7 @@ Rules a change must not break. The ruling behind each is in `tests/VALIDATION.md
   the killer party of 10+, thin evidence is absent — never filled.
 - **Fail closed, loudly**: provenance, lint and MASTERSHEET parsing block the
   build on errors. Preserve that in anything you add.
-- **Validation is a blind round**: collect the owner's call BEFORE revealing the
-  engine's; every disagreement becomes a same-day ruling, override or golden pin,
-  logged in `notes/validation/` with an index row in `tests/VALIDATION.md`.
+- **Validation rounds are blind**: the human grade is recorded BEFORE the
+  engine's answer is revealed; every disagreement becomes a same-day rule
+  change, cited override or golden pin, logged in `notes/validation/` with an
+  index row in `tests/VALIDATION.md`.

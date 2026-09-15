@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Sample kill-dense battles and mine NEAR-COMPLETE fight rosters — the
-evidence layer behind the need profiles (increment 3, owner directive
-2026-08-26: "what matters is what the data says").
+evidence layer behind the need profiles (increment 3: the profiles follow
+what the data says).
 
 Source: the albionbb API (api.albionbb.com), the project's sanctioned
 battle endpoint (see sample_battles.py). EXPLICIT network step — never
@@ -20,7 +20,7 @@ Method (and its honest biases, all recorded in the output):
   - battlemount carriers show their carried weapon (the standing
     killboard mount-carrier caveat).
 DISPLAY/EVIDENCE ONLY: nothing in the scoring path reads this artifact;
-the need profiles it informed are owner-ruled constants in roles.yaml.
+the need profiles it informed are curated constants in roles.yaml.
 
 Usage:  py -3 pipeline/sample_rosters.py [--pages 60] [--server us]
         py -3 pipeline/sample_rosters.py --pages 0     (offline re-analysis)
@@ -184,7 +184,7 @@ def main():
                  "(healers/supports under-attribute on winning sides); "
                  "sides are alliance-level; mount carriers show carried "
                  "weapons. DISPLAY/EVIDENCE ONLY — the need profiles it "
-                 "informed are owner-ruled constants in roles.yaml.")}}
+                 "informed are curated constants in roles.yaml.")}}
     for band, lo, hi in BANDS:
         rows = [r for r in sides if lo <= r["n"] <= hi
                 and r["deaths_seen"] >= 0.8 * r["n"]]

@@ -49,7 +49,7 @@ def make_cases(data):
         # Sizes must LEAVE base_size: at base the mechanics growth is the
         # identity and target scaling is a no-op, so an all-base suite is
         # blind to the whole size path — a real rounding divergence shipped
-        # behind a green 60/60 that way (review 2026-08-15). The variants
+        # behind a green 60/60 that way. The variants
         # cover shrunk/grown scaling, the piecewise size-physics breakpoints
         # (10/14), and >30 for the large meta-prior bucket.
         size_opts = [base, max(2, base // 2), base + base // 2,
@@ -63,11 +63,11 @@ def make_cases(data):
         # list, identical on both sides, not a set.
         pool = weapons[(i % 7)::11]
         party = [rng.choice(weapons) for _ in range(n)]
-        # loadout locks (2026-08-18): half the members carry a pinned combo
+        # loadout locks: half the members carry a pinned combo
         # index — the archetype path must agree between engines too
         combos = [rng.randrange(_combo_count(data, w))
                   if rng.random() < 0.5 else None for w in party]
-        # full-build members (2026-08-20): a deterministic gear list per
+        # full-build members: a deterministic gear list per
         # member so the gear composition path is parity-tested too
         gear_keys = sorted(data.get("gear") or {})
         gears = None
@@ -115,7 +115,7 @@ def forge_case(i, c):
     # every second forge case passes an EMPTY locked_combos list — the
     # engines must both pad it to len(locked) with defaults (an empty array
     # is truthy in JS and falsy in Python; that divergence shipped once).
-    # locked_gears (2026-08-27): the same alternation carries the case's
+    # locked_gears: the same alternation carries the case's
     # gear for the first lock — supplied kits must be preserved verbatim
     # and scored in both ports; [] entries normalize to naked.
     combos = c["combos"][:2] if (i // FORGE_EVERY) % 2 == 0 else []
@@ -152,7 +152,7 @@ def py_results(cases):
             r = e.forge(fc["size"], locked=fc["locked"],
                         locked_combos=fc["locked_combos"], pool=fc["pool"],
                         locked_gears=fc["locked_gears"])
-            # the next-best alternative (2026-09-11 `avoid`): the roster
+            # the next-best alternative (`avoid`): the roster
             # just forged is avoided; both ports must walk to the same one
             r2 = e.forge(fc["size"], locked=fc["locked"],
                          locked_combos=fc["locked_combos"], pool=fc["pool"],
@@ -164,7 +164,7 @@ def py_results(cases):
                       "exhausted": r["exhausted"],
                       "next": {"party": r2["party"], "gears": r2["gears"],
                                "score": r2["score"], "exhausted": r2["exhausted"]}}
-        # V3-W parity (2026-08-27): dressing OFF while incumbents keep their
+        # V3-W parity: dressing OFF while incumbents keep their
         # case gears — candidates must evaluate naked through the identity
         # short-circuit; the toggle restores dressed state bit-identically.
         e.set_dressing(False)
@@ -177,7 +177,7 @@ def py_results(cases):
             "recommend_naked_cand": naked_rec,
             "refine": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
-            # gear-aware refine (owner ruling 2026-08-27): dressed local
+            # gear-aware refine (F25/F26): dressed local
             # search returns {party, gears}; incumbent kits from the case
             "refine_dressed": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"],
@@ -186,13 +186,13 @@ def py_results(cases):
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
             "size_bucket": e.size_bucket(),
-            # target provenance + the four-stage minimum (owner 2026-09-10):
+            # target provenance + the four-stage minimum (rule 17, L20):
             # display reads, parity-carried like every descriptive layer
             "target_source": {cap: e.target_source(cap) for cap in e.reqs},
             "target_min": {cap: e.target_min(cap) for cap in e.reqs},
             "constraint_band": e._band,
             "forge": forged,
-            # replace_options (2026-09-11): the one-slot forge on the
+            # replace_options: the one-slot forge on the
             # swap cadence, slot 0 of the swap party, over the case pool
             "replace": None if sp is None or len(sp) < 2 else [
                 {"weapon": o["weapon"], "score": o["score"],
@@ -217,7 +217,7 @@ def py_results(cases):
             "synergy": e.synergy(c["party"]),
             "synergy_locked": e.synergy(c["party"], c["combos"]),
             "max_fitness": e.max_fitness(),
-            # party-aware supremum (optional ruling 2026-08-28): optional
+            # party-aware supremum (the optional-capability rule): optional
             # capabilities the party fields none of leave the denominator
             "max_fitness_party": e.max_fitness(c["party"], c["combos"],
                                                c["gears"]),
@@ -371,7 +371,7 @@ def main():
                                 f"js={rb.get('verdict')}/{rb.get('caps_gain')!r}")
                 elif any(abs(ra[k] - rb.get(k, 9e9)) > EPS
                          for k in ("meta_prior", "meta_solo", "meta_pair", "meta_raise"))                         or ra["meta_partner"] != rb.get("meta_partner"):
-                    # pair-aware prior (2026-09-11): the four descriptive
+                    # pair-aware prior: the four descriptive
                     # meta fields ride the same parity contract
                     errs.append(f"rec meta {ra['weapon']}: "
                                 f"py={ra['meta_prior']!r}/{ra['meta_solo']!r}/{ra['meta_pair']!r}/"
@@ -549,7 +549,7 @@ def main():
 
     # The generated dashboard must embed THIS engine verbatim — a stale
     # build means the public page scores with different math than the source
-    # both suites verified (2026-08-18).
+    # both suites verified.
     with open(SCORING_JS, encoding="utf-8") as f:
         engine_src = f.read()
     for page in (os.path.join(ROOT, "dashboard", "index.html"),

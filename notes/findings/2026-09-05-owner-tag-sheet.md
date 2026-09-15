@@ -1,12 +1,12 @@
-# Owner tag sheet (2026-09-05) — where each weapon and armor piece sits
+# Tag sheet (2026-09-05) — where each weapon and armor piece sits
 
-Pre-filled with what the engine derives today. Fill the two `OWNER` columns; leave a cell blank where the derived reading is right. 
-`use`: the job (zvz brawl dps / clap bomb / kite / gank / small-scale only / support X / tank X / healer). `size`: where it belongs (zvz 20+, mid 10-19, gang <10, any). 
-Tags become cited rulings (style_overrides / roles.yaml); the harvest keeps checking them and disagreements are reported, never silently obeyed.
+Validation form, pre-filled with what the engine derived on 2026-09-05. The two `caller` columns collect the caller's independent tags; a cell stays blank where the derived reading is right. Status: unfilled.
+`use`: the job (zvz brawl dps / clap bomb / kite / gank / small-scale only / support X / tank X / healer). `size`: where it belongs (zvz 20+, mid 10-19, gang <10, any).
+Tags become cited rules (style_overrides / roles.yaml); the harvest keeps checking them and disagreements are reported, never silently obeyed.
 
 ## Weapons
 
-| weapon | seat (derived) | class | fits at group (derived) | small-party share | top chest in 10+ parties (voters) | OWNER use | OWNER size |
+| weapon | seat (derived) | class | fits at group (derived) | small-party share | top chest in 10+ parties (voters) | caller use | caller size |
 |---|---|---|---|---|---|---|---|
 | Arcane Staff | shield_support | support | brawl, clap, kite, brawl_clap, clap_kite | 0.30 | Knight Armor (41), Guardian Armor (20) [76] |  |  |
 | Arclight Blasters | ranged_aoe | dps | clap, kite, brawl_clap, clap_kite | 0.83 | Hellion Jacket (2), Mistwalker Jacket (1) [4] |  |  |
@@ -148,7 +148,7 @@ Tags become cited rulings (style_overrides / roles.yaml); the harvest keeps chec
 
 ## Armor (chests)
 
-| chest | class | effect | lean (derived: dps wearers brawl / ranged) | top weapons wearing it (10+ parties) | OWNER used for | OWNER which styles |
+| chest | class | effect | lean (derived: dps wearers brawl / ranged) | top weapons wearing it (10+ parties) | caller: used for | caller: which styles |
 |---|---|---|---|---|---|---|
 | Armor of Valor | plate | - | class (1 / 3) | Hand of Justice (13), Earthrune Staff (11), Mace (6) |  |  |
 | Assassin Jacket | leather | - | class (134 / 181) | Bear Paws (57), Bloodletter (52), Wailing Bow (47) |  |  |
@@ -180,7 +180,7 @@ Tags become cited rulings (style_overrides / roles.yaml); the harvest keeps chec
 
 ## Other gear (head, shoes, cape) — tag only the ones that mean something
 
-| item | slot | class | top weapons wearing it (10+ parties) | OWNER used for |
+| item | slot | class | top weapons wearing it (10+ parties) | caller: used for |
 |---|---|---|---|---|
 | Assassin Hood | head | leather | Permafrost Prism (394), Hallowfall (374), Dawnsong (338) |  |
 | Assassin Shoes | shoes | leather | Carving Sword (9), Claymore (8), Battle Bracers (7) |  |

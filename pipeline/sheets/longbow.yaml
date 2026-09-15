@@ -1,4 +1,4 @@
-# Longbow — corrected after review: no knockback_displace (Frost Shot pushes the
+# Longbow — corrected: no knockback_displace (Frost Shot pushes the
 # USER, and isn't in group kits) and no resist_shred (nothing in the bow line
 # reduces resistances — earlier draft fabricated it).
 

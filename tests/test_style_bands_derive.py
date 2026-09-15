@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""derive_style_bands contracts (2026-09-10, target is the median).
+"""derive_style_bands contracts (target is the median, standing rule 17).
 
 Script-style, NOT pytest: runs derive() on a fixture evidence board and
-exits 0 on pass. The real board needs the raw party cache (harvest
-checkout); the fixture pins the convention the script encodes.
+exits 0 on pass. The real board needs the raw party cache (the harvest
+machine); the fixture pins the convention the script encodes.
 
     py -3 tests/test_style_bands_derive.py
 """

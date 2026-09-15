@@ -14,7 +14,7 @@
 #     Rush's ally-side +20% Healing Received.
 #   - tankiness REMOVED entirely (was 2 in the draft): CC-immunity windows
 #     are personal defensives, not frontline durability — the
-#     momentary-defensive ruling (2026-08-12).
+#     momentary-defensive rule.
 
 - weapon: 2H_DUALAXE_KEEPER          # Bear Paws — diving AoE bruiser
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json

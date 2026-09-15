@@ -1,18 +1,18 @@
 /* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration.
-   One column (owner 2026-08-22): status compact on top, then the combined
+   One column: status compact on top, then the combined
    need→pick card. The layer shares the hero band with the wheel — see the
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
 .dl-status,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
-/* the radar carries the status card alone (owner 2026-08-26: "remove this
-   box around our diagram") — no panel chrome; the tone lives in the
+/* the radar carries the status card alone (no box around the diagram)
+   — no panel chrome; the tone lives in the
    diagram's own colors */
 .dl-status{display:flex;flex-direction:column;align-items:stretch;gap:8px;
   background:none;border:0;box-shadow:none;padding:0}
 .dl-status .dl-radar{margin:0 auto}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-/* comp-status radar (owner 2026-08-26): the status card is the diagram —
+/* comp-status radar: the status card is the diagram —
    axis icons in the group's color, identity glyph in the center, every
    textual detail in the shared popup (#dl-tip). Display only. */
 .dl-radar{width:min(410px,100%);height:auto;overflow:visible;display:block}
@@ -47,7 +47,7 @@
 .dl-ch-imp{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-ch-imp b{color:var(--brass-bright)}
 .dl-ch-imp small{color:var(--ink-3);font-size:9.5px}
-/* stage chips are buttons since 2026-08-24 (click -> spell sources fold);
+/* stage chips are buttons (click -> spell sources fold);
    the verdict classes above carry the visuals, this resets button chrome */
 button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;line-height:inherit}
 .dl-ch.open{outline:1px solid var(--brass);outline-offset:1px}
@@ -72,7 +72,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
-/* the pick's identity block (owner 2026-09-02): a larger icon, the role
+/* the pick's identity block: a larger icon, the role
    line tucked under the name, the gains directly beneath it, and Add moved
    inline beside the name - the full-width button is gone. */
 .dl-weapon{display:flex;align-items:flex-start;gap:13px;margin:10px 0 8px}
@@ -133,7 +133,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-alt-nm{flex:1; min-width:0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
-   the hero view keeps the party dock above the fold (standing owner rule);
+   the hero view keeps the party dock above the fold (a standing layout rule);
    the workflows are one click away, and opening is remembered per session. */
 .dl-tools-fold{margin-top:2px}
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
@@ -166,7 +166,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-search-row small{font-family:var(--mono);font-size:9px;color:var(--ink-3)}
 .dl-pool-best{margin-top:12px;border-top:1px solid var(--rule);padding-top:12px}
 /* the hero row gets its own class — a bare `>div` selector would out-rank
-   .dl-mini-rank and squeeze it into the 44px icon column (the PR masked
+   .dl-mini-rank and squeeze it into the 44px icon column (an earlier version masked
    exactly this with !important) */
 .dl-pool-hero{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;margin-top:7px}
 .dl-pool-best strong{font-family:var(--serif);font-size:19px}
@@ -194,7 +194,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
-/* ---- the column-3 split (owner 2026-09-02) ----
+/* ---- the column-3 split ----
    The pick card used to stack six answers in one frame. Now: diagnosis,
    fight chain, the pick, kill pressure and role check each get a flat
    card in ONE shared rule - four hand-kept copies drifted (.dl-need alone

@@ -1,29 +1,28 @@
 # Playstyles — caller-intent overlays on top of a content template.
 #
-# Created 2026-08-13; the weight MULTIPLIERS remain expert-unadjudicated,
-# while `mechanics` (Q14, 2026-08-25) and `constraint_overrides`
-# (2026-08-23/26) are owner-ruled. Every multiplier scales a capability's
+# The weight MULTIPLIERS remain unvalidated; `mechanics` (Q14) and
+# `constraint_overrides` are validated rules. Every multiplier scales a
+# capability's
 # WEIGHT in the chosen content template; hard floors are untouched (a kite
 # comp still needs its healers; floor penalties use the BASE weight).
 # Targets and soft caps are NOT untouched any more: `target_mults` below
 # scale them, and at 10+ a DECLARED style reads the GENERATED per-style
-# rows in templates/style_bands.yaml after the content row (owner ruling
-# 2026-09-04). A capability absent from the template's requirements is
+# rows in templates/style_bands.yaml after the content row (tests/VALIDATION.md
+# 'Style x band rows'). A capability absent from the template's requirements is
 # unaffected by its multiplier.
 #
 # Vocabulary from the shotcaller world: brawl (stand and grind), clap
 # (stack them, one bomb), kite (never take the fight, bleed them),
 # brawl-clap (grind until they clump, then bomb), clap-kite (the ranged
-# twin of brawl-clap: bomb from range, throw them back — owner-identified
-# 2026-08-23). "Balanced" is the identity — free mode, no thumb on the scale.
+# twin of brawl-clap: bomb from range, throw them back — identified in the
+# validation label rounds). "Balanced" is the identity — free mode, no thumb
+# on the scale.
 #
-# `mechanics` blocks (added 2026-08-13; Q14 CLOSED 2026-08-25): how the
-# style DELIVERS damage. The owner delegated the magnitudes — "i cant give
-# you numbers for that you have to use logic to figure that out" — under
-# one confirmed ORDERING constraint: "for clap and kite and clap kite and
-# brawl clap, the number will usually be higher than brawl" (the values
-# below satisfy it: brawl 3 is the floor). Adjust by reasoning + gate
-# evidence, keep the ordering.
+# `mechanics` blocks (Q14 CLOSED): how the style DELIVERS damage. The
+# magnitudes are reasoned, not measured; the one validated constraint is
+# the ORDERING: clap, kite, clap-kite and brawl-clap all hit more targets
+# per AoE than brawl (the values below satisfy it: brawl 3 is the floor).
+# Adjust by reasoning + gate evidence, keep the ordering.
 #   expected_aoe_targets — enemies a typical AoE hits under this style;
 #     feeds the AoE Escalation curve (mechanics.yaml) into burst_aoe supply.
 #   focus_attackers — players concentrating on one called target; feeds the
@@ -33,24 +32,22 @@
 # diverge by RELATIVE physics only. Weight multipliers say what a style
 # VALUES; mechanics say what a style's delivery makes EFFECTIVE.
 #
-# `constraint_overrides` blocks (2026-08-23 owner ruling, forge-quality
-# blind round): per-style ROLE-BAND overrides on top of composition.yaml's
-# constraint_bands — the bands were calibrated on BRAWL evidence (blap) and
-# were style-blind, so every style forged toward brawl-shaped rosters
-# ("having 5 healers in a party of 20 feels like too much, especially in
-# clap and kite. for kite you are mostly kiting so don't need as many
-# healers usually and would rather get teammates that facilitate movement").
-# Updated 2026-09-08: clap uses floor(size/5) as a healer minimum, no cap;
-# kite keeps its lower minima without its old exact-count caps. Brawl and
-# hybrid rules remain separate. Rows follow constraint_bands semantics (first
-# matching min_size/max_size row wins; a listed role key REPLACES the base
-# band's entry for that role; unlisted keys keep the base band). Frontline
-# tightenings come from the same round (20-brawl forged 6 frontline — "too
-# many tanks ... not enough damage"; blap runs 5. 10-clap kept 3 hammers —
-# "instead of a great hammer, there are better options ... more movement
-# like occult or a half tank half damage like icicle"). Values at sizes the
-# owner did not explicitly grade are PROVISIONAL interpolations awaiting
-# the next grading round. Hybrid rules are specified in their own sections.
+# `constraint_overrides` blocks (forge-quality validation round): per-style
+# ROLE-BAND overrides on top of composition.yaml's constraint_bands — the
+# bands were calibrated on BRAWL evidence (blap) and were style-blind, so
+# every style forged toward brawl-shaped rosters (five healers in a 20-man
+# is too many for clap and kite; a kite comp needs fewer healers and more
+# bodies that facilitate movement). Clap uses floor(size/5) as a healer
+# minimum, no cap; kite keeps its lower minima without its old exact-count
+# caps. Brawl and hybrid rules remain separate. Rows follow constraint_bands
+# semantics (first matching min_size/max_size row wins; a listed role key
+# REPLACES the base band's entry for that role; unlisted keys keep the base
+# band). Frontline tightenings come from the same round (a forged 20-brawl
+# fielded 6 frontline — too many tanks, not enough damage; blap runs 5. A
+# forged 10-clap kept 3 hammers where one engage tank plus movement bodies
+# such as Occult or a half-tank half-damage Icicle serve better). Values at
+# sizes no validation round graded are PROVISIONAL interpolations awaiting
+# the next round. Hybrid rules are specified in their own sections.
 # `role_min_per_players` replaces a role band after these overrides, using
 # floor(size/per) from size >= per, and removes that role's maximum.
 # Like every constraint, this shapes
@@ -62,30 +59,31 @@
 # stage against the comp-fitted template targets (the same lens the kill-
 # pressure checklist uses; capabilities a content does not require are
 # skipped) — DESCRIPTIVE only, nothing here scores. Stage names and cap
-# groupings are PROVISIONAL owner vocabulary: reword or re-map freely,
+# groupings are PROVISIONAL caller vocabulary: reword or re-map freely,
 # the engine follows the data. Balanced carries no chain — it falls back
 # to the detected identity's chain.
 #
 # `target_mults` blocks (2026-08-28) — the per-style REQUIREMENT overlay.
 # `multipliers` say what a style VALUES (weight); these say HOW MUCH OF IT it
-# NEEDS (target and soft cap). The distinction is the owner's case: "clap comp
-# would require more peel and disengage than brawl comp" — not merely that a
+# NEEDS (target and soft cap). The distinction: a clap comp REQUIRES more
+# peel and disengage than a brawl comp — not merely that a
 # clap comp values disengage more, but that it needs a larger amount before
 # it is covered. Target and soft cap scale TOGETHER so the headroom band keeps
 # its shape. Hard floors do NOT scale, for the same reason the weight overlay
 # never touched them: a kite comp still needs its healers.
 #
-# EVERY STYLE SHIPS EMPTY AND THE MECHANISM IS THE IDENTITY until the owner
-# rules a value. This is deliberate. The corpus CANNOT fit these: of the eight
+# EVERY STYLE SHIPS EMPTY AND THE MECHANISM IS THE IDENTITY until a value
+# is validated. This is deliberate. The corpus CANNOT fit these: of the eight
 # published blackzone_roam comps, brawl has 3 and kite has 2, while clap,
 # brawl_clap and clap_kite have exactly ONE each — so any per-style number
 # fitted today would be one comp's idiosyncrasy wearing a style's name. The
 # measurement that exists is recorded in
 # notes/findings/2026-08-28-fielded-supply-per-person.md; the one
 # suggestive, replicated signal is disengage (brawl 0.77/person vs kite
-# 1.64/person, kite n=2), which points the same way the owner's claim does.
-# Per "never invent a number to fill a hole": a row appears here only when the
-# owner rules it or real comps supply the measurement. The harvest DOES
+# 1.64/person, kite n=2), which points the same way the requirement claim
+# does. Per "never invent a number to fill a hole": a row appears here only
+# when a validation round sets it or real comps supply the measurement. The
+# harvest DOES
 # supply per-style measurements now — templates/style_bands.yaml, generated
 # by derive_style_bands.py, is where those rows live; nothing is hand-written
 # here.
@@ -124,25 +122,25 @@ styles:
       disengage: 0.85
       catch: 0.8
       mobility: 0.75
-    # target_mults: UNRULED (2026-08-28). Identity until the owner
-    # sets values — see the header note on why the corpus cannot fit
-    # them (this style has 3 published comps).
+    # target_mults: UNSET. Identity until a validation round sets values
+    # — see the header note on why the corpus cannot fit them (this style
+    # has 3 published comps).
     target_mults: {}
     # spread melee ball: cleaves clip ~3, damage split across whoever's in
     # reach, so few attackers stack on any one enemy
     mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
-    # Owner ruling 2026-09-08 ("sure on healers at 25", extending the clap
-    # rule to brawl and the hybrids): one healer per five members, rounded
-    # down, as a MINIMUM with no maximum — 4 at 20-24, 5 at 25-29. Harvest
-    # check the same day: 77% of full 20-man brawl killer parties field
-    # exactly 4 healers (n=22). Supersedes the 2026-08-23 3-4 band's cap.
+    # One healer per five members, rounded down, as a MINIMUM with no
+    # maximum — 4 at 20-24, 5 at 25-29 (the clap rule extended to brawl and
+    # the hybrids; F16). Harvest check: 77% of full 20-man brawl killer
+    # parties field exactly 4 healers (n=22). Supersedes the old 3-4 band's
+    # cap.
     role_min_per_players: {healer: 5}
-    # owner-ruled 2026-08-23: at 20, brawl runs ~5 frontline (blap's count;
-    # the style-blind band let 6 through — "too many tanks"); the healer
-    # entry below is replaced by role_min_per_players above.
+    # At 20, brawl runs ~5 frontline (blap's count; the style-blind band
+    # let 6 through — too many tanks); the healer entry below is replaced
+    # by role_min_per_players above.
     constraint_overrides:
       - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, frontline: {min: 4, max: 5}}
-    # owner's brawl sequence: contact -> pressure -> sustain -> denial -> secure
+    # brawl sequence: contact -> pressure -> sustain -> denial -> secure
     chain:
       - {name: Contact, caps: [engage, tankiness]}
       - {name: Pressure, caps: [sustained_dps, resist_shred]}
@@ -168,7 +166,7 @@ styles:
       mobility: 0.85
       heal_reduction: 0.8
       sustained_dps: 0.6
-    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
+    # DERIVED from the constraint rule already in this file:
     # ranged_aoe_core min 7 at 20 and min 5 at 15-19, against
     # composition.yaml's base 4 and 3 — ratios 1.75 and 1.67, mean 1.71.
     # A clap comp is REQUIRED to field ~1.7x the base burst-AoE core, so
@@ -181,22 +179,22 @@ styles:
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
-    # Owner ruling 2026-09-08 supersedes the old 2-3 healer cap:
-    # one healer per five people, rounded DOWN, as a MINIMUM (20-24 -> 4,
-    # 25-29 -> 5). Applies from five members; no healer maximum is imposed.
+    # Supersedes the old 2-3 healer cap: one healer per five people,
+    # rounded DOWN, as a MINIMUM (20-24 -> 4, 25-29 -> 5; F16). Applies
+    # from five members; no healer maximum is imposed.
     role_min_per_players: {healer: 5}
-    # owner-ruled 2026-08-23: "clap requires extreme damage and movement" —
-    # the 10-man clap forge kept three hammers, ruled one
-    # too many (engage tank + one, then damage/movement bodies). 15-19 rows
-    # are PROVISIONAL interpolation. ranged_aoe_core 7 at 20 owner-ruled
-    # 2026-08-26 (increment-3 round: the melee-heavy clap forge defect;
-    # "range large aoe damage dealers instead of melee") — the 15-19 value
-    # is the scaled interpolation (7 * 15/20, half-up).
+    # Clap fields fewer tanks and more damage and movement bodies: frontline
+    # 2 at 10-14 (F16; a forged 10-man clap kept three hammers — one too
+    # many; engage tank + one, then damage/movement bodies). 15-19 rows are
+    # PROVISIONAL interpolation. ranged_aoe_core 7 at 20 comes from the
+    # increment-3 validation round (the melee-heavy clap forge defect: a
+    # clap wants ranged large-AoE damage dealers, not melee) — the 15-19
+    # value is the scaled interpolation (7 * 15/20, half-up).
     constraint_overrides:
       - {min_size: 10, max_size: 14, frontline: {min: 2, max: 2}}
       - {min_size: 15, max_size: 19, frontline: {min: 3, max: 4}, ranged_aoe_core: {min: 5}}
       - {min_size: 20, max_size: 29, frontline: {min: 3, max: 5}, ranged_aoe_core: {min: 7}}
-    # owner's clap sequence: engage -> clump -> pierce -> burst -> secure -> reset
+    # clap sequence: engage -> clump -> pierce -> burst -> secure -> reset
     chain:
       - {name: Engage, caps: [engage, stun]}
       - {name: Clump, caps: [clump_create, catch]}
@@ -222,30 +220,29 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
-    # RULED-DERIVED + OBSERVED 2026-08-28.
-    #   burst_aoe 1.29 — from the owner's ruled ranged_aoe_core (5 at 20,
+    # DERIVED + OBSERVED.
+    #   burst_aoe 1.29 — from the validated ranged_aoe_core (5 at 20,
     #     4 at 15-19 vs base 4 and 3). An INDEPENDENT sample of 13
     #     author-labelled albioncompo comps puts kite at 1.51x brawl's
-    #     burst_aoe, so the ruled value is the conservative end of the range.
+    #     burst_aoe, so the derived value is the conservative end of the range.
     #   peel 1.25 — REPLICATED in two independent samples: 1.23x brawl in the
     #     published corpus, 1.27x in the author-labelled sample. Kite really
-    #     does peel more, which is the half of the owner's case the evidence
-    #     supports (clap does NOT — it flips sign between samples).
+    #     does peel more, which is the half of the requirement claim the
+    #     evidence supports (clap does NOT — it flips sign between samples).
     #   disengage 1.20 — direction replicated in both samples (kite above
     #     brawl in each) but the magnitude is unstable, 2.13x and 1.17x, so
     #     this takes the CONSERVATIVE end rather than the mean.
     target_mults: {burst_aoe: 1.29, peel: 1.25, disengage: 1.20}
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
-    # Owner ruling 2026-09-08: kite may use fewer healers than clap, but
-    # it must not be forced to an exact low count. Retain the existing
-    # minima and remove healer maxima so scoring can justify more.
-    # Earlier basis (2026-08-23): kite runs 1 healer at 7 and 2 at 20 ("mostly
-    # kiting so don't need as many healers usually and would rather get
-    # teammates that facilitate movement like occult staff or bedrock for
-    # safety"). Frontline tightenings + 10-19 healer rows are PROVISIONAL
-    # interpolation in the same spirit. ranged_aoe_core 5 at 20 owner-ruled
-    # 2026-08-26 (the kite-forge round: the melee-heavy kite forge read
+    # Kite may use fewer healers than clap, but it must not be forced to an
+    # exact low count: the existing minima stay and the healer maxima are
+    # removed so scoring can justify more (F16). Basis: kite runs 1 healer
+    # at 7 and 2 at 20 (a kiting comp needs fewer healers and more
+    # teammates that facilitate movement — an Occult Staff or a Bedrock for
+    # safety). Frontline tightenings + 10-19 healer rows are PROVISIONAL
+    # interpolation in the same spirit. ranged_aoe_core 5 at 20 comes from
+    # the kite-forge validation round (the melee-heavy kite forge read
     # "split identity" at 65% melee; the one real kite 20-man, ss_kite_20,
     # counts 5 predicate qualifiers — LOWER than clap's 7 because kite
     # pressure legitimately includes curse/sustained ranged damage the
@@ -256,7 +253,7 @@ styles:
       - {min_size: 10, max_size: 14, healer: {min: 1}, frontline: {min: 1, max: 3}}
       - {min_size: 15, max_size: 19, healer: {min: 2}, frontline: {min: 2, max: 4}, ranged_aoe_core: {min: 4}}
       - {min_size: 20, max_size: 29, healer: {min: 2}, frontline: {min: 2, max: 5}, ranged_aoe_core: {min: 5}}
-    # owner's kite sequence: space -> slow -> peel -> ranged pressure -> reset
+    # kite sequence: space -> slow -> peel -> ranged pressure -> reset
     chain:
       - {name: Space, caps: [mobility, disengage]}
       - {name: Slow, caps: [slow, root]}
@@ -277,14 +274,14 @@ styles:
       sustained_dps: 1.1
       catch: 0.85
       mobility: 0.85
-    # target_mults: UNRULED (2026-08-28). Identity until the owner
-    # sets values — see the header note on why the corpus cannot fit
-    # them (this style has 1 published comp).
+    # target_mults: UNSET. Identity until a validation round sets values
+    # — see the header note on why the corpus cannot fit them (this style
+    # has 1 published comp).
     target_mults: {}
     # the hybrid: grind spreads damage until the clump forms, then bomb it
     mechanics: {expected_aoe_targets: 5, focus_attackers: 3}
-    # Owner ruling 2026-09-08: the one-healer-per-five minimum applies to
-    # the hybrids too (4 at 20-24, 5 at 25-29, no maximum).
+    # The one-healer-per-five minimum applies to the hybrids too (4 at
+    # 20-24, 5 at 25-29, no maximum; F16).
     role_min_per_players: {healer: 5}
     chain:
       - {name: Contact, caps: [engage, tankiness]}
@@ -296,12 +293,12 @@ styles:
   clap_kite:
     name: Clap-Kite
     blurb: bomb from range, reset on cooldowns — kite between windows
-    # Owner-identified playstyle (2026-08-23, blind-label rounds): the
-    # ranged twin of brawl-clap. Both real 20-man comps the owner labeled
-    # (Deadlyhooker P1, albioncompo 20v20) "have both clap potential and
-    # kite potential" — bomb pieces AND the mobility to reset between
-    # windows. Multipliers are a PROVISIONAL clap/kite blend (weights not
-    # expert-adjudicated, same header rule as every style here).
+    # Playstyle identified in the validation label rounds: the ranged twin
+    # of brawl-clap. Both real 20-man comps labelled with it (Deadlyhooker
+    # P1, albioncompo 20v20) carry both clap potential and kite potential —
+    # bomb pieces AND the mobility to reset between windows. Multipliers
+    # are a PROVISIONAL clap/kite blend (weights unvalidated, same header
+    # rule as every style here).
     multipliers:
       burst_aoe: 1.45
       clump_create: 1.35
@@ -316,8 +313,8 @@ styles:
       heal_sustain: 0.95
       sustained_dps: 0.85
       tankiness: 0.8
-    # RULED-DERIVED + OBSERVED 2026-08-28.
-    #   burst_aoe 1.71 — ruled ranged_aoe_core identical to clap's; the
+    # DERIVED + OBSERVED.
+    #   burst_aoe 1.71 — validated ranged_aoe_core identical to clap's; the
     #     author-labelled sample independently puts it at 1.62x brawl.
     #   peel 1.25 — replicated: 1.17x brawl published, 1.29x declared.
     #     No disengage row: the two samples flip sign on it (0.84x, 1.10x).
@@ -325,17 +322,17 @@ styles:
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
-    # Owner ruling 2026-09-08: one healer per five members as a MINIMUM, no
-    # maximum (4 at 20-24, 5 at 25-29), extending the clap rule to the
-    # hybrids. Harvest note recorded with the ruling: 55% of full 20-man
-    # clap_kite killer parties field 3 healers and 23% field 4 (n=64) — the
-    # minimum sits above the observed mode here; owner's call, on record.
+    # One healer per five members as a MINIMUM, no maximum (4 at 20-24, 5
+    # at 25-29), extending the clap rule to the hybrids (F16). Harvest note
+    # recorded with the rule: 55% of full 20-man clap_kite killer parties
+    # field 3 healers and 23% field 4 (n=64) — the minimum sits above the
+    # observed mode here; curation judgment, on record.
     role_min_per_players: {healer: 5}
-    # owner-ruled 2026-08-24 (round 5): "clap kite at 20 doesn't need 5
-    # healers, maybe 3 or 4 max" (the healer entry below is now replaced by
-    # role_min_per_players). ranged_aoe_core 7 at 20 owner-ruled
-    # 2026-08-26 (the melee-heavy clap_kite forge was the increment-3
-    # motivating defect); 15-19 is the scaled interpolation.
+    # A 20-man clap-kite does not need 5 healers; 3-4 is the band
+    # (validation round 5; the healer entry below is now replaced by
+    # role_min_per_players). ranged_aoe_core 7 at 20 comes from the
+    # increment-3 validation round (the melee-heavy clap_kite forge was
+    # its motivating defect); 15-19 is the scaled interpolation.
     constraint_overrides:
       - {min_size: 15, max_size: 19, ranged_aoe_core: {min: 5}}
       - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, ranged_aoe_core: {min: 7}}

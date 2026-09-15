@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Validation-asymmetry probe (dressed validation Phase 1A/2, 2026-08-27).
+Validation-asymmetry probe (dressed validation Phase 1A/2).
 
 Report-only. Measures how recommendations change between the three
 incumbent-gear regimes the validation harness can run:
@@ -13,7 +13,7 @@ incumbent-gear regimes the validation harness can run:
            production regime (the page passes LOADOUT gear to every call)
 
 Two case families:
-  A. The seed-20260812 V3 blind-form parties (regenerated exactly), each
+  A. The seed-20260812 V3 validation-form parties (regenerated exactly), each
      dressed by doctrine (kit_variants v0) for the dressed regime.
   B. Every published-comp leave-one-out ROLE slot (V4's role metric),
      dressed from the comp's own recorded gear (builds_index join) —
@@ -45,7 +45,7 @@ OUT = os.path.join(HERE, "out", "validation_asymmetry_probe.json")
 
 
 def seed_parties(e):
-    """Regenerate the V3 blind-form parties byte-for-byte (the same RNG
+    """Regenerate the V3 validation-form parties byte-for-byte (the same RNG
     walk tier2_blindtest.generate performs)."""
     pool = sorted(e.weapons)
     rng = random.Random(SEED)

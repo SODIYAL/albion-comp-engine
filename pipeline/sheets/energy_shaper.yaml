@@ -14,7 +14,7 @@
 #   - engage/disengage/catch/mobility via Caltrops' trigger MS REMOVED: +30%
 #     MS only when an enemy steps on the trap is not movement tooling.
 # silence held at 1 despite the 3.83s duration: single-target skillshot W
-# option, not the Heavy Mace AoE class. Expert may bump for small-scale
+# option, not the Heavy Mace AoE class. Raise for small-scale
 # templates where deleting one healer's cast window decides fights.
 
 - weapon: 2H_CROSSBOW_CANNON_AVALON  # Energy Shaper — channeled line artillery

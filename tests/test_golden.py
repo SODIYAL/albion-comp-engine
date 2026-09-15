@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
 Golden regression suite — the permanent version of the 9 cases that
-tests/prototype_engine.py validated on 2026-08-12.
+tests/prototype_engine.py first validated.
 
 Difference from the prototype: this runs against engine/engine.py reading the
 BUILT DATASET, so it regression-tests curated sheet changes, template tuning,
 and scoring refactors all at once. The prototype kept its numbers in inline
 Python dicts and could not.
 
-Add a case whenever a human expert corrects the engine (VALIDATION.md).
+Add a case whenever a validation round overrules the engine (VALIDATION.md).
 
 Run:  py -3 tests/test_golden.py        (Windows)
       python3 tests/test_golden.py
@@ -169,7 +169,7 @@ def run():
           prefs["kite"] <= prefs["balanced"] <= prefs["clap"],
           f"kite={prefs['kite']:.2f} balanced={prefs['balanced']:.2f} clap={prefs['clap']:.2f}")
 
-    # T11 — mechanics physics (MECHANICS_TODO.md, wired 2026-08-13): AoE
+    # T11 — mechanics physics (MECHANICS_TODO.md): AoE
     # Escalation and Focus Fire/Resilience move EFFECTIVE supply, normalized
     # so balanced is the identity. Directions pinned by the wiki curves:
     # clap (7 targets) escalates AoE above balanced (4); brawl (3 targets)
@@ -199,7 +199,7 @@ def run():
           and eff > raw / e_clap.score_unit,
           f"raw={raw:.1f}pts eff={eff:.2f}u unit={e_clap.score_unit:g}")
 
-    # T12 — expert correction 2026-08-13: knockback is NOT clump creation.
+    # T12 — knockback is NOT clump creation (curation judgment).
     # Great Hammer's Tackle ("knocking back all enemies you pass through")
     # displaces; only drag/pull mechanics create clumps. The true clump
     # engines keep their scores: Hand of Justice's Onslaught (10-enemy drag),
@@ -211,11 +211,11 @@ def run():
           and E.caps_of(WITCHWORK).get("clump_create", 0) >= 4,
           f"GH caps={sorted(gh)}; camlann={E.caps_of('2H_MACE_MORGANA').get('clump_create', 0)}")
 
-    # T13 — expert magnitude pass 2026-08-13: knockback_displace scores
+    # T13 — knockback_displace magnitude (curation judgment): it scores
     # repositioning power, not existence. Ladder pinned within one role
     # family: Quarterstaff (12m CC-resist-ignoring knock-UP kit) = top >
     # Great Holy = Hallowfall = small > Holy Staff / Lifetouch / Redemption
-    # (Sacred Pulse self-peel, AA passive) = absent. Owner ruling 2026-08-21:
+    # (Sacred Pulse self-peel, AA passive) = absent. Curation judgment:
     # Great Holy's 10m radial shove is self-centred — it only matters when
     # enemies are already on top, so it is peel, not offensive displacement;
     # its knockback_displace dropped 4 -> 2 (the peel 4 carries the E's job).
@@ -229,7 +229,7 @@ def run():
           f"qs={kd('2H_QUARTERSTAFF')} great_holy={kd('2H_HOLYSTAFF')} "
           f"hallowfall={kd(HALLOWFALL)} holy_staff={kd('MAIN_HOLYSTAFF')}")
 
-    # T14 — one-spell-per-slot loadout model (2026-08-14): a weapon's sheet
+    # T14 — one-spell-per-slot loadout model: a weapon's sheet
     # lists caps across all its Q/W/E/passive options, but a player equips one
     # per slot. Dagger Pair's W is Shadow Edge (catch/stun/peel) OR Dash
     # (disengage); its Q is Deadly Swipe (mobility) OR Sunder Armor
@@ -244,22 +244,22 @@ def run():
           and {"catch", "disengage", "mobility", "resist_shred"} <= set(flat),
           f"loadout extra={sorted(extra)} (flat union has all four)")
 
-    # T15 — expert ruling 2026-08-14: single-target damage is WEAK in 20-man
-    # group content (enemy heals + Resilience overpower focused damage), so
-    # burst_st/execute are devalued in the 20-man templates.
-    # FIXTURE REVISED 2026-08-21 (comp-fitted recalibration, owner directive):
+    # T15 — single-target damage is WEAK in 20-man group content (enemy
+    # heals + Resilience overpower focused damage), so burst_st/execute are
+    # devalued in the 20-man templates.
+    # Fixture revised at the comp-fitted recalibration:
     # the old proxy compared Demonfang's vs Dagger Pair's TOTAL scores. After
     # the comp-fitted targets un-saturated catch/mobility, Dagger Pair's total
     # legitimately leads — driven by its CATCH term (0.95), with its ST terms
-    # contributing ~14% — so the proxy stopped isolating the ruling it pinned.
-    # The pin now asserts the ruling itself: whatever a pure-ST dagger is
+    # contributing ~14% — so the proxy stopped isolating the rule it pinned.
+    # The pin now asserts the rule itself: whatever a pure-ST dagger is
     # worth in a rounded 20-man, its kill-damage terms (burst_st + execute)
     # must stay a SMALL fraction of its value and below its utility terms.
     real20 = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, GREAT_HAMMER, "2H_QUARTERSTAFF",
               "MAIN_ROCKMACE_KEEPER", PERMAFROST, "2H_FIRE_RINGPAIR_AVALON",
               WITCHWORK, LONGBOW, "2H_WARBOW"]
-    # (2026-08-23 round 3: the generation-fit gate removed Dagger Pair from
-    # the DEFAULT pool at 20 — exactly the ruling's spirit — so its score is
+    # (Validation round 3: the generation-fit gate removed Dagger Pair from
+    # the DEFAULT pool at 20 — exactly the rule's spirit — so its score is
     # read through an explicit candidate pool, the manual-pick path.)
     dp_score = ez.recommend(real20, top_n=1, pool=[DAGGERS])[0]["score"]
     dp_terms = {t["cap"]: t["delta"] for t in ez.explain(real20, DAGGERS)}
@@ -269,7 +269,7 @@ def run():
           dp_st < 0.25 * dp_score and dp_st < dp_catch,
           f"DaggerPair ST terms={dp_st:.2f} of {dp_score:.2f} total; catch term={dp_catch:.2f}")
 
-    # T16 — Roads of Avalon size graduation (2026-08-15, the goal behavior):
+    # T16 — Roads of Avalon size graduation (the goal behavior):
     # a healer-less trio is a legitimate comp (floors silent, single-target
     # damage BOOSTED below base size by the Q16 physics), but the same
     # weapons read as a 7-man are broken (heal floor armed from 5) and the
@@ -289,7 +289,7 @@ def run():
           f"healer score 3->{heal_at(er3):.2f} 7->{heal_at(er7):.2f} "
           f"st_mult@3={er3.mech_mults['burst_st']:.3f}")
 
-    # T17 — per-member swap advisor (2026-08-15): each member's current
+    # T17 — per-member swap advisor: each member's current
     # weapon is valued exactly as recommend() would value it into the rest of
     # the party, ranked against all alternatives, with better options listed.
     # Pin the directions in a real-shaped roads 7-man: the ZvZ bomb axe
@@ -312,7 +312,7 @@ def run():
           f"realmbreaker rank {rb['rank']} vs heavy mace {hm['rank']}; "
           f"options={[o['display_name'] for o in rb['options']]}")
 
-    # T18 — geometric AoE utility (2026-08-20 expert ruling, MECHANICS_TODO):
+    # T18 — geometric AoE utility (MECHANICS_TODO):
     # an AoE effect does one target's worth of work PER ENEMY REACHED.
     # Soulscythe's catch is Tornado's 80% slow in a 7m circle; Battleaxe's is
     # a self-only +40% move speed (Adrenaline Boost). Identical ordinal
@@ -349,27 +349,27 @@ def run():
           f"bow={bow_root} wide={e_big._geo_mult('root', wide):.3f} "
           f"geo_only={e_big._geo_mult('root', {'radius': 7.0}):.3f}")
 
-    # T19 — expert ruling 2026-08-20 (applied via MASTERSHEET tune:sheets):
+    # T19 — curation judgment (applied via MASTERSHEET tune:sheets):
     # Bedrock Mace over Iron-clad for anti_dive. Primal Slam's 18m
     # CC-resist-ignoring throw leaves a PERSISTENT WALL — fire-and-forget
     # peel on a support-tank kit — while Iron-clad's whirlwind must
     # physically contact the diver while channeling. Raw magnitude alone
-    # (18m vs 12m) missed the delivery nuance; the ruling pins it.
+    # (18m vs 12m) missed the delivery nuance; the override pins it.
     bed = E.caps_of("MAIN_ROCKMACE_KEEPER").get("anti_dive", 0)
     iron = E.caps_of("2H_IRONCLADEDSTAFF").get("anti_dive", 0)
     check("T19 Bedrock wall > Iron-clad contact-spin for anti_dive",
           bed == 6 and iron == 2,
           f"bedrock={bed} ironclad={iron} (mastersheet override)")
 
-    # T20 — full-build members (2026-08-20): person contribution = weapon
+    # T20 — full-build members: person contribution = weapon
     # loadout + helmet/armor/shoes ability + cape + offhand + potion + food.
     # A guild-doctrine brawl support-tank build (1H Mace + Cleric Cowl +
     # Duskweaver Armor + Stalker Shoes + Caitiff Shield + Smuggler Cape +
     # Gigantify + Beef Stew) must add real supply on top of the bare weapon,
     # and the gear layer must flow through the same physics (Judicator
     # Helmet's Electric Shock carries delivery facts like any weapon AoE).
-    # Re-pinned 2026-09-10 from Cleric Cowl's Force Field, which the owner
-    # ruled nobody equips in group content (T47).
+    # Re-pinned from Cleric Cowl's Force Field, which nobody equips in
+    # group content (T47).
     BUILD = ["HEAD_PLATE_KEEPER", "ARMOR_PLATE_FEY", "SHOES_LEATHER_MORGANA",
              "OFF_SHIELD_HELL", "CAPEITEM_SMUGGLER", "T7_POTION_REVIVE",
              "T8_MEAL_STEW"]
@@ -387,9 +387,9 @@ def run():
                 .get("stun") is not None,
           f"gained={gained} fitness {f_bare:.2f}->{f_full:.2f}")
 
-    # T47 — owner ruling 2026-09-10: "no one uses the cleric cowl for its
-    # knockback ability regardless of content" (MetaBattle 4/4 run Ice
-    # Block). The engine's one-active-per-piece pick used to choose Force
+    # T47 — Cleric Cowl's knockback is never equipped, whatever the content
+    # (MetaBattle 4/4 builds run Ice Block; curation judgment). The
+    # engine's one-active-per-piece pick used to choose Force
     # Field under every template that weighs peel, crediting a 20-man's
     # cloth heads with a shove nobody equips. Cleric Cowl now supplies Ice
     # Block's tankiness and NO knockback / peel / anti_dive, at 7 and at 20.
@@ -400,15 +400,15 @@ def run():
         cc_ok = cc_ok and all(ex.get(c, 0) == 0 for c in
                               ("knockback_displace", "peel", "anti_dive"))             and ex.get("tankiness", 0) > 0
     check("T47 Cleric Cowl reads as Ice Block, never Force Field, in group "
-          "templates (owner 2026-09-10)", cc_ok,
+          "templates", cc_ok,
           f"gear_extra at 20: {Engine(content='blackzone_roam', size=20).gear_extra('HEAD_CLOTH_SET2')}")
 
-    # T21 — build-stat coherence (the expert's founding gear example): item
+    # T21 — build-stat coherence (the founding gear example): item
     # stats MODIFY the person. Robe of Purity (+50% damage/heal, thin armor)
     # multiplies a DPS's damage supply by ~1.5x but gives a control tank
     # with no damage caps almost nothing, while Judicator Armor's 287
-    # armor+MR adds tankiness either way — "Heavy Mace on cloth defeats its
-    # purpose" is now a computable statement.
+    # armor+MR adds tankiness either way — that Heavy Mace on cloth defeats
+    # its purpose is now a computable statement.
     CLOTH, PLATE = ["ARMOR_CLOTH_AVALON"], ["ARMOR_PLATE_KEEPER"]
     km = "2H_CLAYMORE_AVALON"
     km_bare = E.member_extra(km).get("burst_aoe", 0.0)
@@ -427,16 +427,16 @@ def run():
           f"{hm_plate.get('tankiness', 0):.2f} (plate), cloth dmg gain "
           f"{tank_gain_cloth:.2f}")
 
-    # T22 — kit advisor (2026-08-20; re-pinned 2026-08-27, owner ruling
-    # "search more comps to see what tanks are actually wearing"): the
+    # T22 — kit advisor (re-pinned: the tank kit follows what tanks are
+    # observed wearing across the recorded comps): the
     # comp-aware tank head must come from the OBSERVED doctrine tier (the
     # weapon's own builds, then the seat's) — never an off-tier piece the
     # exact marginal likes because its caps are scarce in this comp. The
     # full gear catalog made Mercenary Hood / Graveguard Helmet win exactly
-    # that way (the owner: nobody fields those on tanks), so comp-aware
+    # that way (nobody fields those on tanks), so comp-aware
     # ranking went doctrine-tier-first. Every slot still returns ranked
     # options with finite values for any weapon — every slot the weapon
-    # HAS: Heavy Mace is two-handed, so no off-hand is ranked (2026-09-03
+    # HAS: Heavy Mace is two-handed, so no off-hand is ranked (a later
     # re-pin; the old pin demanded one, which was the defect).
     e_kit = Engine(content="castle", size=25, style="brawl")
     kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
@@ -464,13 +464,13 @@ def run():
           f"(doctrine={tank_kit['kit']['head']['doctrine']}); "
           f"slots={sorted(tank_kit['options'])}")
 
-    # T23 — comp identity (V3 round 1 finding F-V3-2, 2026-08-23): what a
+    # T23 — comp identity (V3 round 1 finding F-V3-2): what a
     # party is BECOMING, in playstyle vocabulary — descriptive only, no
     # scoring path reads it. Pinned to the style-DECLARED evidence: blap is
-    # a brawl ball (Timothy: "(brawl comp)", 90% melee damage); the golden
-    # clap10/kite10 fixtures read their own styles; and the V3 case-6 party
-    # the expert called "clashing playstyles" reads as a split identity
-    # with the melee-minority Battleaxe flagged as the seam.
+    # a brawl ball (the Timothy sheet declares a brawl comp, 90% melee
+    # damage); the golden clap10/kite10 fixtures read their own styles; and
+    # the V3 case-6 party recorded as clashing playstyles reads as a split
+    # identity with the melee-minority Battleaxe flagged as the seam.
     id_blap = e_bz.comp_identity(blap)
     id_clap = e_bz.comp_identity(clap10)
     id_kite = e_bz.comp_identity(kite10)
@@ -479,17 +479,17 @@ def run():
           and id_clap["style"] == "clap" and id_kite["style"] == "kite",
           f"blap={id_blap['label']} ({id_blap['melee_share']:.0%} melee) "
           f"clap10={id_clap['label']} kite10={id_kite['label']}")
-    # v2 verdict for case 6 (2026-08-23, weapon-level identity): Battleaxe
+    # v2 verdict for case 6 (weapon-level identity): Battleaxe
     # derives FLEX (Axe Throw reaches 18m), so the melee-vs-ranged split
     # heuristic no longer fires — instead the comp resolves kite-leaning
-    # and Battleaxe is flagged UNFIT by the owner's own ruling ("doesn't
-    # fit group play styles bigger than 3"), which names the actual clash
+    # and Battleaxe is flagged UNFIT by its cited override (it fits no
+    # group playstyle above 3), which names the actual clash
     # more precisely than the v1 split label did.
     case6 = ["MAIN_AXE", "2H_ENIGMATICSTAFF", "2H_SHAPESHIFTER_KEEPER",
              "2H_REPEATINGCROSSBOW_UNDEAD", "2H_DUALHAMMER_HELL"]
     id6 = Engine(content="castle_outpost", size=7).comp_identity(case6)
-    check("T23b identity: the expert's 'clashing' case-6 party flags "
-          "Battleaxe as unfit at 7 (owner ruling), Battleaxe clean at 3",
+    check("T23b identity: the recorded 'clashing' case-6 party flags "
+          "Battleaxe as unfit at 7 (cited override), Battleaxe clean at 3",
           [(c["weapon"], c["kind"]) for c in id6["conflicts"]]
           == [("MAIN_AXE", "unfit")]
           and Engine(content="castle_outpost", size=3).comp_identity(
@@ -501,9 +501,9 @@ def run():
           Engine(content="roads", size=3).comp_identity(["2H_BOW_AVALON"])["style"] is None
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"fitness unchanged at {f_blap:.4f}")
-    # T24 — style-aware kits (identity Phase C, owner ruling: "a siegebow
-    # or a great axe, or longbow etc playing in brawl comp don't work if
-    # they are on cloth armor"): under a DECLARED brawl the kit advisor
+    # T24 — style-aware kits (identity Phase C; a Siegebow, Greataxe or
+    # Longbow playing in a brawl comp does not work on cloth armor —
+    # curation judgment): under a DECLARED brawl the kit advisor
     # never SUGGESTS cloth armor for a damage carrier; healers are exempt
     # (their doctrine armor is cloth); balanced declares no intent and
     # keeps the full catalogue.
@@ -536,24 +536,24 @@ def run():
                       for c in idr["conflicts"]),
           f"member={rb_m} conflicts={[c['display_name'] for c in idr['conflicts']]}")
 
-    # T23e — label round rulings (owner, 2026-08-23): a near-monoculture
-    # ranged burst comp is a BOMB SQUAD — "these guys are normally not part
-    # of main party but support main party by doing damage off timers" — a
+    # T23e — the label validation round: a near-monoculture
+    # ranged burst comp is a BOMB SQUAD — normally not part of the main
+    # party, supporting it by doing damage off timers — a
     # detachment archetype, not an ordinary clap (pinned on the real
-    # KroozLT19 6x-Wailing-Bow comp). And the Harpoon ruling: pierce +
+    # KroozLT19 6x-Wailing-Bow comp). And the Harpoon rule: pierce +
     # damage_debuff are group jobs in their own right, so the pierce-bot
-    # carries a group slot as 'situational', never 'unfit'. REFINED round 7
-    # (owner 2026-08-24): "spirithunter is great in clap and clap kite ...
-    # it has a massive pierce that enables the whole dps line" — the clap
+    # carries a group slot as 'situational', never 'unfit'. REFINED at
+    # validation round 7: Spirithunter is strong in clap and clap-kite —
+    # its massive pierce enables the whole dps line — so the clap
     # halves promote to FITS (cited override); brawl/kite keep situational.
-    # Battleaxe (the explicit owner override) stays the only weapon barred
+    # Battleaxe (the explicit cited override) stays the only weapon barred
     # from every style at group scale.
     bomb = ["2H_BOW_HELL", "MAIN_ARCANESTAFF_UNDEAD", "MAIN_CURSEDSTAFF_UNDEAD",
             "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL",
             "2H_BOW_HELL"]
     id_bomb = Engine(content="blackzone_roam", size=8).comp_identity(bomb)
     harpoon_fit = E.weapons["2H_HARPOON_HELL"]["style_fit"]["fit"]
-    check("T23e bomb-squad archetype + the Harpoon pierce ruling "
+    check("T23e bomb-squad archetype + the Harpoon pierce rule "
           "(round-7 refinement: clap halves fit, brawl/kite situational)",
           id_bomb.get("archetype") == "bomb_squad"
           and id_bomb["style"] == "clap"
@@ -565,20 +565,20 @@ def run():
           f"label={id_bomb['label']} harpoon clap="
           f"{harpoon_fit['clap']['group']} brawl={harpoon_fit['brawl']['group']}")
 
-    # T23f — blind labels 3/4 + the owner's follow-up refinement
-    # (2026-08-23): both 20-man comps "have both clap potential and kite
-    # potential" — CLAP-KITE is its own playstyle (bomb from range, reset
+    # T23f — validation labels 3/4 + the follow-up refinement: both
+    # 20-man comps carry both clap potential and kite
+    # potential — CLAP-KITE is its own playstyle (bomb from range, reset
     # on cooldowns; the ranged twin of brawl-clap). Detection: real bomb
     # share (>=0.40) AND real reset mobility (>=2 evade pts/member) in a
     # ranged core. Also pinned from the round: a pierce-bot (Spirithunter,
-    # the Harpoon ruling) never anchors a damage-identity split — that
+    # the Harpoon rule) never anchors a damage-identity split — that
     # miss is what exposed the 20v20's true read. The pure fixtures stay
     # pure: clap10 has the bombs but not the legs (1.8 evade/m), kite10
     # the legs but not the bombs.
     dh1_id = Engine(content="territory_defense", size=len(dh1)).comp_identity(dh1)
     c20 = _comp_party("albioncompo_20v20_competitive_2026_08", 0)
     c20_id = Engine(content="blackzone_roam", size=len(c20)).comp_identity(c20)
-    check("T23f both real 20-man comps read clap-kite (owner refinement); "
+    check("T23f both real 20-man comps read clap-kite (label refinement); "
           "pure clap10/kite10 stay pure; no pierce-bot split",
           dh1_id["style"] == "clap_kite" and c20_id["style"] == "clap_kite"
           and c20_id["conflicts"] == []
@@ -586,13 +586,13 @@ def run():
           f"DH={dh1_id['style']} 20v20={c20_id['style']} "
           f"({c20_id['melee_share']:.0%} melee)")
 
-    # T25 — kill pressure (identity Phase D, owner checklist 2026-08-23):
-    # "did we bring pierce on the clump, did we give heal cuts, did we do
-    # enough damage within a short span to actually kill." The lights are
+    # T25 — kill pressure (identity Phase D, the kill checklist): pierce
+    # on the clump, heal cuts given, enough damage within a short span to
+    # actually kill. The lights are
     # a lens over the comp-fitted targets. Pinned: the real blap comp is
-    # ready on all three; the owner's own counter-example — 20 tanks —
-    # is lacking on all three ("20 tanks hitting enemy tank will probably
-    # not be able to kill"); a burst-only trio shows burst green with
+    # ready on all three; the recorded counter-example — 20 tanks —
+    # is lacking on all three (20 tanks hitting an enemy tank cannot
+    # kill it); a burst-only trio shows burst green with
     # pierce/heal-cut red (the checklist separates, not just sums).
     kp_blap = e_bz.kill_pressure(blap)
     kp_tanks = e_bz.kill_pressure([HEAVY_MACE] * 20)
@@ -606,12 +606,12 @@ def run():
           f"blap={kp_blap['verdict']} tanks={kp_tanks['verdict']} "
           f"(tank burst {kp_tanks['burst']['have']:.1f}/"
           f"{kp_tanks['burst']['bar']:.1f})")
-    # RE-PINNED 2026-09-10 (target is the median): the lights read the
-    # BARE MINIMUM now ("enough to kill" is a minimum question). The
+    # RE-PINNED (target is the median): the lights read the
+    # BARE MINIMUM now (enough to kill is a minimum question). The
     # trio's one unit of shred meets castle_outpost's minimum because the
     # refreshed three-comp fit says the least winning 7-man brought
     # exactly one — so pierce turned GREEN here. Thin evidence (three
-    # comps), flagged to the owner as an open call (BACKLOG), not a
+    # comps), recorded as an open question (BACKLOG), not a
     # semantic change; the separation the pin is about (burst green,
     # heal-cut red) stands.
     check("T25b kill pressure separates the lights: a burst trio is green "
@@ -624,7 +624,7 @@ def run():
           f"'heal_cut': {kp_trio['heal_cut']['ok']}, "
           f"'burst': {kp_trio['burst']['ok']}}}")
 
-    # T26 — fight chain (roadmap item 1, owner vocabulary): the fight as
+    # T26 — fight chain (roadmap item 1, caller vocabulary): the fight as
     # the playstyle sequences it, graded against the comp-fitted targets.
     # Pinned: the real blap ball reads STRONG on every brawl stage
     # (contact -> pressure -> sustain -> denial -> secure); a healer-less
@@ -634,7 +634,7 @@ def run():
     # claimed; balanced falls back to the detected identity's chain; and
     # computing chains never touches fitness.
     e_brl20 = Engine(content="blackzone_roam", size=20, style="brawl")
-    # RE-PINNED 2026-08-29 (the unit re-fit). Targets now speak PERSON units,
+    # RE-PINNED at the unit re-fit. Targets now speak PERSON units,
     # so the chain must be graded on a DRESSED party — grading a naked one
     # against person-unit targets is the same unit error the re-fit removed,
     # and naked blap now reads weak on Contact/Pressure, correctly (a party
@@ -649,11 +649,11 @@ def run():
     fc_heal = E.fight_chain([LONGBOW, WITCHWORK, PERMAFROST],
                             candidate=HALLOWFALL)
     fc_bal = ez.fight_chain(clap10)
-    # RE-GRADED 2026-09-10 (target is the median): a stage is weak under
+    # RE-GRADED (target is the median): a stage is weak under
     # the bare minimum winners get away with, ok up to the typical winner,
     # strong at/above it — the board's own stages, no 0.85/1.15 fudge. The
     # real ball clears the typical number on every stage, as first pinned.
-    # RE-GRADED 2026-09-10 (target is the median): a stage is weak under
+    # RE-GRADED (target is the median): a stage is weak under
     # the bare minimum winners get away with, ok up to the typical winner,
     # strong at/above it — the board's own stages, no 0.85/1.15 fudge. The
     # real ball clears the typical number on four stages and sits between
@@ -676,8 +676,8 @@ def run():
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"heal_improves={fc_heal['improves']} bal_style={fc_bal['style']}")
 
-    # T26c — stage sources + named improves terms (2026-08-24, from a user
-    # not being able to reconcile "strengthens Reset" with gain tiles that
+    # T26c — stage sources + named improves terms (a page reader could
+    # not reconcile "strengthens Reset" with gain tiles that
     # led with other capabilities): every graded stage lists the equipped
     # spells that ARE it, each source citing a real spell of that weapon's
     # loadout (or its always-on kit), and the improves claim names the
@@ -707,43 +707,40 @@ def run():
           f"contact_sources={len(con['sources'])} "
           f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
 
-    # T27 — forge-quality blind round (owner rulings 2026-08-23). The
+    # T27 — the forge-quality validation round. The
     # engine's darlings were overruled on E-identity: Great Holy is
-    # brawl-only ("it has to stop moving and needs everyone to clump in
-    # place to heal with e — that's not good" for clap); a hybrid healer
-    # can never be the sole healing foundation ("too expensive to be the
-    # only healer ... the weapon needs to have high healing numbers on its
-    # e"). The same round's ECONOMICS ruling (crystal weapons out below 30)
-    # was RETIRED 2026-09-07 — see T42. Contract details are pinned in
-    # tests/test_forge.py F14-F16; this golden pins the expert calls at
-    # the suggestion surface where the blind round saw them.
+    # brawl-only (its E has to stop moving and needs everyone clumped in
+    # place to heal — wrong for clap); a hybrid healer
+    # can never be the sole healing foundation (too expensive to be the
+    # only healer; the sole healer needs high healing numbers on its
+    # E). The same round's ECONOMICS rule (crystal weapons out below 30)
+    # was RETIRED — see T42. Contract details are pinned in
+    # tests/test_forge.py F14-F16; this golden pins the recorded calls at
+    # the suggestion surface where the validation round saw them.
     e_clap10 = Engine(content="blackzone_roam", size=10, style="clap")
     clap_pool = set(e_clap10.suggest_pool())
     e_brawl20 = Engine(content="blackzone_roam", size=20, style="brawl")
     brawl_pool = set(e_brawl20.suggest_pool())
-    check("T27 owner rulings: Great Holy barred from clap suggestions yet "
+    check("T27 E-identity rules: Great Holy barred from clap suggestions yet "
           "kept for brawl",
           GREAT_HOLY not in clap_pool
           and HALLOWFALL in clap_pool
           and GREAT_HOLY in brawl_pool,
           f"clap10 has GH={GREAT_HOLY in clap_pool} "
           f"brawl20 has GH={GREAT_HOLY in brawl_pool}")
-    # T42 — the cost gate retired (owner 2026-09-07): "remove the cost gate
-    # for weapons. we had added cost gate because the engine kept putting
-    # the crystal holy staff in every comp for it's area cleanse but a
-    # better ruling might be that that type of cleanse is not as important
-    # in small groups as the engine values. this would follow in line with
-    # us not restricting weapons but rather focusing on mechanics." The
-    # Exalted Staff is the catalogue's only anti_zone supplier; the
-    # mechanism is the anti_zone row — none at the 7-man contents (no
-    # 7-man comp in the corpus fields one; 2% of 4-9 man winner parties
-    # do) and a DEMAND RAMP elsewhere (owner, same day: "don't really need
-    # it at 10-14 and then need grows slightly as numbers grows and then
-    # becomes a good requirement at like 25+"; winners: 7% at 10-14, 21%
-    # at 15-19, 32% at 20+). Pinned at both ends: a default 7-man and a
-    # default 10-man forge field no Exalted with nothing barring it, a
-    # default 25-man does, and a manual Exalted at 7 scores like any
-    # healer.
+    # T42 — the cost gate retired: the gate had been added because the
+    # engine kept putting the Exalted Staff in every comp for its area
+    # cleanse; the better rule is that area cleanse matters less in small
+    # groups than the engine valued it — no weapon restricted, mechanics
+    # carry it. The Exalted Staff is the catalogue's only anti_zone
+    # supplier; the mechanism is the anti_zone row — none at the 7-man
+    # contents (no 7-man comp in the corpus fields one; 2% of 4-9 man
+    # winner parties do) and a DEMAND RAMP elsewhere (curation judgment:
+    # not needed at 10-14, growing with numbers, a firm requirement at
+    # 25+; winners: 7% at 10-14, 21% at 15-19, 32% at 20+). Pinned at
+    # both ends: a default 7-man and a default 10-man forge field no
+    # Exalted with nothing barring it, a default 25-man does, and a
+    # manual Exalted at 7 scores like any healer.
     e_co7 = Engine(content="castle_outpost", size=7)
     p7 = e_co7.forge(7)["party"]
     p10 = Engine(content="blackzone_roam", size=10).forge(10)["party"]
@@ -759,7 +756,7 @@ def run():
           f"p7={[E.weapons[w]['display_name'] for w in p7]} "
           f"exalted@10={'2H_HOLYSTAFF_CRYSTAL' in p10} "
           f"exalted@25={'2H_HOLYSTAFF_CRYSTAL' in p25} manual={manual:.2f}")
-    check("T27b full-healer split matches the owner's named cases "
+    check("T27b full-healer split matches the recorded cases "
           "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
           E.weapons[GREAT_HOLY]["full_healer"]
           and E.weapons["2H_HOLYSTAFF_UNDEAD"]["full_healer"]
@@ -767,11 +764,10 @@ def run():
           and not E.weapons["MAIN_NATURESTAFF_CRYSTAL"]["full_healer"]
           and not E.weapons["2H_HOLYSTAFF_CRYSTAL"]["full_healer"],
           f"full={sorted(k for k, w in E.weapons.items() if w.get('full_healer'))}")
-    # T27c — round 2 refinement (owner 2026-08-23): "1 hand holy is full
-    # healer but it's not a good group healer for anything larger than 5
-    # people. I would use it at 3 people and very rarely at 5 but never
-    # above that ... it should all be based on what the weapon does and its
-    # effect — I don't want to set custom rules for individual weapons."
+    # T27c — validation round 2 refinement: 1H Holy is a full healer but
+    # not a group healer above 5 people — fielded at 3, rarely at 5, never
+    # above that — and the rule must rest on what the weapon's E does,
+    # never on a custom rule for one weapon (curation judgment).
     # STRUCTURAL: the E heal's own area facts split group from single
     # (Desperate Prayer heals one ally; Divine Jump / Celestial Sphere heal
     # areas — cited sub-effect fact-corrections in heal_overrides.yaml).
@@ -797,30 +793,30 @@ def run():
           f"group_verdict={sf_holy['brawl']['group']} "
           f"druidic_scale={E.weapons['MAIN_NATURESTAFF_KEEPER']['heal_scale']}")
 
-    # T28 — round 3 gradings (owner 2026-08-23): "faction war comp is bad
-    # because it has dagger and boltcaster, both of which can only damage 1
-    # person at a time with e and that's not good for anything higher than
-    # 3v3, heavy crossbow at least can do damage through people with e."
-    # Every weapon the owner killed derived SITUATIONAL for its context;
+    # T28 — validation round 3: the faction-war comp is bad because Dagger
+    # and Boltcasters each damage one target at a time with the E, which
+    # fails above 3v3, while Heavy Crossbow's E at least damages through
+    # bodies (curation judgment).
+    # Every weapon graded out derived SITUATIONAL for its context;
     # every weapon passed derived FITS — the generation-fit gate makes the
     # forge honor the derivation (F17 pins the mechanics; this pins the
-    # expert case at the suggestion surface).
+    # recorded case at the suggestion surface).
     e_fw = Engine(content="faction_war", size=15)
     fw_pool = set(e_fw.suggest_pool())
     fw_names = {e_fw.weapons[k]["display_name"] for k in fw_pool}
-    check("T28 owner ruling: single-target-E dps (Dagger, Boltcasters) "
+    check("T28 single-target-E dps (Dagger, Boltcasters) "
           "leave 15-man suggestions; Heavy Crossbow's pierce stays",
           "Dagger" not in fw_names and "Boltcasters" not in fw_names
           and "Heavy Crossbow" in fw_names,
           f"dagger_in={'Dagger' in fw_names} bolt_in={'Boltcasters' in fw_names} "
           f"hxbow_in={'Heavy Crossbow' in fw_names}")
-    # T28b — round 4 (owner 2026-08-23): "there is no way 1hand holy
-    # healer should be in a 15 man party when I said no way above 5 and
-    # there is no chance above 9." Single-ally-heal-E healers leave
-    # GENERATION at group sizes even under balanced; gang stays open (the
-    # Druidic ruling) and trio is untouched.
+    # T28b — validation round 4: a 1H Holy healer has no place in a 15-man
+    # party — none above 5, no chance above 9 (curation judgment).
+    # Single-ally-heal-E healers leave GENERATION at group sizes even
+    # under balanced; gang stays open (the Druidic rule) and trio is
+    # untouched.
     e7g = Engine(content="castle_outpost", size=7)
-    check("T28b owner ruling: 1H Holy never generated at 10+ (balanced "
+    check("T28b 1H Holy never generated at 10+ (balanced "
           "included); still open at gang sizes",
           "Holy Staff" not in fw_names
           and "Druidic Staff" not in fw_names
@@ -828,17 +824,17 @@ def run():
           f"holy_in_15={'Holy Staff' in fw_names} "
           f"holy_at_7={'MAIN_HOLYSTAFF' in set(e7g.suggest_pool())}")
 
-    # T29 — round 4 (owner 2026-08-24): "flex bomber like hellfire, it's
-    # usually a brawl-clap weapon and not a clap option. realmbreaker gives
-    # multiple things like health cut, range e, easy way to engage followup
-    # — that's why it can work in clap." Cited override drops Hellfire's
+    # T29 — validation round 4: a flex bomber like Hellfire is usually a
+    # brawl-clap weapon, not a clap option; Realmbreaker brings several
+    # things at once — health cut, a ranged E, an easy engage follow-up —
+    # which is why it works in clap. Cited override drops Hellfire's
     # clap verdict to situational; the generation-fit gate keeps it out of
     # DEFAULT clap comps while brawl-clap (its home) and manual picks keep
     # it; Realmbreaker stays a derived clap fit.
     e_c15 = Engine(content="blackzone_roam", size=15, style="clap")
     e_bc15 = Engine(content="blackzone_roam", size=15, style="brawl_clap")
     hell = "2H_KNUCKLES_HELL"
-    check("T29 owner ruling: Hellfire out of clap generation, home in "
+    check("T29 Hellfire out of clap generation, home in "
           "brawl-clap; Realmbreaker keeps its clap slot",
           hell not in set(e_c15.suggest_pool())
           and hell in set(e_bc15.suggest_pool())
@@ -846,13 +842,13 @@ def run():
           f"hell_clap={hell in set(e_c15.suggest_pool())} "
           f"hell_bc={hell in set(e_bc15.suggest_pool())}")
 
-    # T30 — negative recommendations / redundancy warnings (roadmap item 3,
-    # 2026-08-24). The verdict layer is a DESCRIPTIVE lens over the exact
+    # T30 — negative recommendations / redundancy warnings (roadmap item
+    # 3). The verdict layer is a DESCRIPTIVE lens over the exact
     # pick marginal — a scoring-side redundancy penalty was tried and
     # REJECTED (MECHANICS_TODO Q18), so these pins hold the lens honest:
     # the report's terms ARE the score, and computing it changes nothing.
     heal_sat = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, PERMAFROST]
-    # RE-PINNED 2026-09-01 (seat-all pass): 1H Holy now holds a main_healer
+    # RE-PINNED at the seat-all pass: 1H Holy now holds a main_healer
     # seat, so as a generation CANDIDATE it evaluates DRESSED — and against
     # this naked fixture its doctrine kit closed ~6.5 units of real gear
     # gaps and honestly read "ok" (T30c's honesty rider, same mechanism).
@@ -878,7 +874,7 @@ def run():
     rep_ok = E.pick_report([LONGBOW, WITCHWORK, PERMAFROST], HALLOWFALL)
     check("T30b verdicts: third healer into saturated heals warns (closes "
           "no gap); healer into 3 DPS reads ok",
-          # caps_gain tolerance 0.5 -> 1.0 (2026-09-10, target is the median):
+          # caps_gain tolerance 0.5 -> 1.0 (target is the median):
           # the lens threshold itself; the 0.59 here is peel, not healing
           rep["verdict"] in ("redundant", "negative") and rep["caps_gain"] < 1.0
           and rep_ok["verdict"] == "ok" and rep_ok["caps_gain"] > 5
@@ -888,7 +884,7 @@ def run():
     E.set_dressing(True)   # T30c below needs the dressed path back on
 
     # exact duplicates past the free allowance price in and go negative.
-    # RE-PINNED 2026-08-27 (dressed forge, owner ruling): the fixture
+    # RE-PINNED at the dressed forge: the fixture
     # party wears its own doctrine kits — the real-world case; against a
     # NAKED four-stack the 5th Longbow's kit closes ~28 units of real
     # gaps and the engine honestly says so (pinned below as the model's
@@ -896,11 +892,11 @@ def run():
     lb_kit = dict(E.kit_variants(LONGBOW))["v0"]
     lb4 = [LONGBOW, LONGBOW, LONGBOW, LONGBOW]
     rep_dup = E.pick_report(lb4, LONGBOW, None, [lb_kit] * 4)
-    # caps_gain tolerance re-pinned 0.05 -> 0.6 (2026-09-01): the killboard
+    # caps_gain tolerance re-pinned 0.05 -> 0.6: the killboard
     # kit-doctrine stream changed Longbow's v0, and five copies of the new
     # kit leave one capability a hair under its ceiling — the substance
     # (negative verdict, dup priced, ~zero vs the naked rider's ~18) holds
-    # RE-PINNED 2026-09-10 (target is the median): four Longbows sit far
+    # RE-PINNED (target is the median): four Longbows sit far
     # under the TYPICAL 7-man on tankiness and burst, so a 5th body of
     # anything closes some of that and the raw marginal is no longer
     # negative (1.39 dressed). The substance survives in a stronger form:
@@ -929,14 +925,14 @@ def run():
     # THIRD healer is. analyze carries the saturation band; and none of it
     # touches fitness (descriptive only).
     three_heal = [HALLOWFALL, GREAT_HOLY, "MAIN_HOLYSTAFF", HEAVY_MACE]
-    # weapon-level lens again (same 2026-09-01 re-pin as T30b above)
+    # weapon-level lens again (the same seat-all re-pin as T30b above)
     E.set_dressing(False)
     f_before = E.fitness(three_heal)
     sr2 = {m["weapon"]: m for m in E.swap_review(heal_sat)}
     sr3 = {m["weapon"]: m for m in E.swap_review(three_heal)}
     an = E.analyze(heal_sat)
     bands = {x["cap"]: x["band"] for x in an["strengths"]}
-    # RE-PINNED 2026-08-29 (the unit re-fit): the heal_sustain SOFT CAP rose
+    # RE-PINNED at the unit re-fit: the heal_sustain SOFT CAP rose
     # with every other row, so this two-healer party now sits inside the
     # headroom band instead of past it. The load-bearing judgements — which
     # is what this case is actually about — are unchanged: neither of two
@@ -957,15 +953,14 @@ def run():
           f"fitness stable at {f_before:.4f}")
     E.set_dressing(True)   # leave the shared engine in production mode
 
-    # T31 — round 7 (owner 2026-08-24): the two-prong E rule. Prong facts:
+    # T31 — validation round 7: the two-prong E rule. Prong facts:
     # Battle Bracers' Falcon Smash DOES damage everyone it lands on (dump
-    # text: 264 phys in a 4 radius — the sheet had never scored it; owner:
-    # "battle bracers is not single target") -> group scale, back in group
+    # text: 264 phys in a 4 radius — the sheet had never scored it; the E
+    # is not single-target) -> group scale, back in group
     # pools, matching its 84% share of the observed ZvZ family. Warbow /
-    # 1H Fire / Hellspawn are owner-ruled solo-class ("max effective at 3,
-    # good/okay at 5, falls off hard"): out of 5+ generation, open at trio.
-    # Energy Shaper ("super high damage ... great in large group fights")
-    # and Greataxe ("its e can hit everyone in its vicinity ... okay")
+    # 1H Fire / Hellspawn are solo-class by curation judgment (max
+    # effective at 3, okay at 5, falling off hard): out of 5+ generation,
+    # open at trio. Energy Shaper and Greataxe, both graded group-scale,
     # stay. The weak-group-E derivation (low E damage AND no real E tool)
     # demotes only the scattered-utility class; Heavy-Mace-style utility
     # Es are protected by the AND.
@@ -1003,14 +998,14 @@ def run():
           f"heavy_mace={hm_fit} carrioncaller={cc_fit} "
           f"icicle={ice['fit']['brawl']}")
 
-    # T31c — round-7 killboard cases closed (owner 2026-08-24): Spirithunter
-    # generates for clap + clap_kite at 20 ("great in clap and clap kite ...
-    # massive pierce that enables the whole dps line") while brawl stays
+    # T31c — round-7 killboard cases closed: Spirithunter
+    # generates for clap + clap_kite at 20 (its massive pierce enables the
+    # whole dps line) while brawl stays
     # gated; Bloodletter stays OUT of group generation — its killboard
     # prominence is battlemount piloting + mobility, not a comp slot
-    # ("isn't really used as fighting but as a mounted weapon"), the
+    # (a mounted weapon, not a fighting one), the
     # recorded kill-event sampling bias made real; Galatine Pair stays IN
-    # the pools with no special treatment ("great for solo bombs" — a
+    # the pools with no special treatment (a solo-bomb specialist — a
     # specialist play the templates don't demand, so the forge passing on
     # it is correct, not a gate).
     sp = "2H_HARPOON_HELL"
@@ -1027,18 +1022,18 @@ def run():
           f"sp_brawl={sp in set(e_b20.suggest_pool())} "
           f"bloodletter={BLOODLETTER in set(e20.suggest_pool())}")
 
-    # T31d — E-audit follow-up rulings (owner 2026-08-24): Fists of Avalon's
-    # purge raised to 4 via MASTERSHEET ("fist of ava purge can be a 4")
+    # T31d — E-audit follow-up rules: Fists of Avalon's
+    # purge raised to 4 via MASTERSHEET (curation judgment)
     # and it generates at 20 (the 232 area purge-punch, Battle Bracers'
-    # sibling fix); Trinity Spear ruled OUT of large-scale generation —
-    # "no one is doing auto attack damage usually so its never used in
-    # large scale ... only a swap for hitting castle gates or terry
-    # walls ... never as the main weapon in party" — group unfit by cited
-    # override, gang keeps the derived verdict (the ruling names large
+    # sibling fix); Trinity Spear is OUT of large-scale generation —
+    # auto-attack damage is never the job at large scale, so it is only
+    # a swap for hitting castle gates or territory walls, never the main
+    # weapon in a party — group unfit by cited
+    # override, gang keeps the derived verdict (the rule names large
     # scale only), manual picks score as always.
     fists, trident = "2H_KNUCKLES_AVALON", "2H_TRIDENT_UNDEAD"
     e7bz = Engine(content="blackzone_roam", size=7)
-    check("T31d E-audit rulings: Fists of Avalon purge 4 + in 20-man pools; "
+    check("T31d E-audit rules: Fists of Avalon purge 4 + in 20-man pools; "
           "Trinity Spear out of 20-man generation, open at gang",
           E.weapons[fists]["capabilities"].get("purge") == 4
           and fists in set(e20.suggest_pool())
@@ -1050,16 +1045,16 @@ def run():
           f"trident@20={trident in set(e20.suggest_pool())} "
           f"trident@7={trident in set(e7bz.suggest_pool())}")
 
-    # T32 — conditional-payload rule (owner rulings 2026-08-26, the
-    # melee-heavy clap radar round): clap wants damage delivered in ONE
+    # T32 — conditional-payload rule (the melee-heavy clap radar
+    # validation round): clap wants damage delivered in ONE
     # action. Damage carriers whose E needs ramp (Clarent/Carving consume
     # Heroic Charges) or a held non-ranged channel (Ursine) leave clap
-    # generation at 20; RANGED channels stay ("Longbow is nice clap over
-    # wall", Energy Shaper "is good damage"), and support/tank seats are
-    # untouched (Earthrune "very meta clump tank", Malevolent Locus "good
-    # support weapon", Lifecurse/Blight/Enigmatic "fine supportive
-    # weapons" — all damage_scale none). Brawl keeps the demoted melee
-    # weapons ("clarent and ursine are both nice melee brawl weapons").
+    # generation at 20; RANGED channels stay (Longbow claps over walls,
+    # Energy Shaper is real damage), and support/tank seats are
+    # untouched (Earthrune the meta clump tank, Malevolent Locus a
+    # support weapon, Lifecurse/Blight/Enigmatic supportive
+    # weapons — all damage_scale none). Brawl keeps the demoted melee
+    # weapons (Clarent and Ursine are both melee brawl weapons).
     clarent, ursine, carving = ("MAIN_SCIMITAR_MORGANA", "2H_KNUCKLES_KEEPER",
                                 "2H_CLEAVER_HELL")
     c_pool, b_pool = set(e_c20.suggest_pool()), set(e_b20.suggest_pool())
@@ -1075,7 +1070,7 @@ def run():
           f"carving={carving in c_pool} longbow={'2H_LONGBOW' in c_pool}; "
           f"brawl20 keeps: {clarent in b_pool}/{ursine in b_pool}/{carving in b_pool}")
 
-    # T33 — kite extension (owner "ok" 2026-08-26, same session): the
+    # T33 — kite extension (accepted at the T32 validation round): the
     # melee-heavy kite forge read "split identity" at 65% melee; the one
     # real kite 20-man (ss_kite_20) fields zero ramp/channel bruisers and
     # counts 5 ranged-AoE-core qualifiers. Conditional-payload now demotes
@@ -1099,22 +1094,22 @@ def run():
           f"core_min={(k20.get('ranged_aoe_core') or {}).get('min')}")
 
     # T34 — THE KITE HALF IS STANDOFF TOOLS, THE CLAP HALF IS INSTANT
-    # (owner rulings 2026-09-04, blind round 1 on harvested rosters):
-    # "what makes a comp kite is basically them having tanks which can
-    # throw enemies away, bedrock mace, hoarfrost staff, without having to
-    # commit their body into a fight"; "galatine ... needs to charge its q
-    # stacks before it hits ... realmbreaker would be part of clap".
+    # (validation round 1 on harvested rosters):
+    # what makes a comp kite is tanks that throw enemies away — Bedrock
+    # Mace, Hoarfrost Staff — without committing their body into the
+    # fight; Galatine needs to charge its Q stacks before it hits, while
+    # Realmbreaker is part of the clap.
     # Derived, no hand lists: style_fit.standoff_e = an E delivered at
     # range that displaces and commits nothing (no engage/clump/pull, no
-    # self-move, no heal); style_fit.conditional_payload = the 2026-08-26
+    # self-move, no heal); style_fit.conditional_payload = the T32
     # ramp fact. comp_identity: a ramp-dependent bomb counts as sustained;
     # the clap-kite hybrid needs standoff tools at scale (max(2, n/10
     # half-up)); a pure kite needs at least one; a ranged core with none
-    # is a clap whatever its bomb share. Pins: the five owner-graded
+    # is a clap whatever its bomb share. Pins: the five graded
     # fixtures (blap brawl, clap10 clap, kite10 kite, DH P1 + 20v20
-    # clap-kite) and the seven rosters the owner and the engine agreed on
-    # in the round (2, 4 and 8 stay recorded misses: 2 follows the owner's
-    # own Galatine ruling, 4 is kite vs clap-kite in the mid band, 8 has
+    # clap-kite) and the seven rosters the round's calls and the engine
+    # agreed on (2, 4 and 8 stay recorded misses: 2 follows the
+    # Galatine rule, 4 is kite vs clap-kite in the mid band, 8 has
     # one Bedrock where a 17-stack needs two).
     e34 = Engine(content="territory_defense", size=20)
     sf34 = lambda w: e34.weapons[w].get("style_fit") or {}
@@ -1153,26 +1148,26 @@ def run():
     fx_bad = [k for k, (p, want) in fx.items()
               if Engine(content="blackzone_roam", size=len(p))
               .comp_identity(p).get("style") != want]
-    check("T34 identity rulings 2026-09-04: standoff_e / conditional_payload "
-          "facts derive as ruled; five graded fixtures hold; the seven "
-          "agreed blind-round rosters read as the owner called them",
+    check("T34 identity rules: standoff_e / conditional_payload "
+          "facts derive as stated; five graded fixtures hold; the seven "
+          "agreed validation-round rosters read as recorded",
           facts_ok and not fx_bad and round_ok == 7,
           f"facts={facts_ok} fixtures_bad={fx_bad} round={round_ok}/7 "
           f"bad={round_bad}")
 
-    # T35 — the second batch of 2026-09-04 rulings, all derived:
-    # (a) FREE RAMP: "glaive can be clap because you can stack it easily
-    #     without hitting anything using q" — a Q that applies its charge
+    # T35 — the second batch of harvested-roster rules, all derived:
+    # (a) FREE RAMP: Rift Glaive can be clap because its Q stacks without
+    #     hitting anything — a Q that applies its charge
     #     to the caster with no hit/enemy condition (Spirit Spear, target
     #     self) makes the E's ramp free; the sword line's Heroic charges
     #     need a hit (Heroic Strike targets an enemy, Cleave grants "based
     #     on the amount of enemies hit") and stay conditional.
     # (b) Royal Armor is the energy_font item (it shipped named-only) and
-    #     Carving Sword is a cited carrier ("tanky support which pierces
-    #     with e and has royal armor"; harvest: Royal Armor 62/180 brawl,
-    #     7/29 clap appearances).
-    # (c) THE KITS DECIDE A SPLIT: "brawl is basically dps using leather
-    #     jackets while clap and kite are dps on cloth" — a split roster
+    #     Carving Sword is a cited carrier (a tanky support that pierces
+    #     with its E and wears Royal Armor; harvest: Royal Armor 62/180
+    #     brawl, 7/29 clap appearances).
+    # (c) THE KITS DECIDE A SPLIT: brawl is dps in leather jackets, clap
+    #     and kite are dps on cloth — a split roster
     #     whose dps wear leather by majority leans brawl, cloth leans the
     #     ranged read; no gears -> the weapons-only read is unchanged.
     e35 = Engine(content="territory_defense", size=20)
@@ -1202,7 +1197,7 @@ def run():
               and lean_c.get("style") in ("clap", "clap_kite", "kite")
               and lean_c.get("kit_lean") == "ranged"
               and e35.fitness(split) == e35.fitness(split))   # descriptive only
-    check("T35 rulings 2026-09-04 (2): Rift Glaive's free-charge Q makes it "
+    check("T35 roster rules, batch 2: Rift Glaive's free-charge Q makes it "
           "a clap bomb while the sword line stays conditional; Royal Armor "
           "carries the energy font with Carving cited; a split roster is "
           "decided by the dps chests (leather -> brawl, cloth -> ranged)",
@@ -1210,35 +1205,35 @@ def run():
           f"ramp={ramp_ok} royal={royal_ok} naked={naked.get('style')} "
           f"leather={lean_l.get('style')} cloth={lean_c.get('style')}")
 
-    # T36 — blind round 2 (owner, 2026-09-04, twenty harvested rosters of
-    # 15-20; owner's calls collected before the engine's were opened),
+    # T36 — validation round 2 (twenty harvested rosters of
+    # 15-20; the calls were collected before the engine's were opened),
     # three derived rules came out of it:
     # (a) FLEX BOMBS JOIN THE RIGID CORE: Realmbreaker / Spiked Gauntlets
     #     / Rift Glaive (unconditional group payload landed at range) sit
-    #     with the rigid majority — "part of clap" beside a ranged core,
+    #     with the rigid majority — part of the clap beside a ranged core,
     #     a brawl behind Oathkeepers (round 1 roster 3, five Realmbreakers);
     #     they never form a core of their own. Rosters 3/5/16/17/19 had
     #     read brawl because three flex bombs outweighed a ranged core.
-    # (b) SLOW FIELDS ARE STANDOFF TOOLS ("icicle staff to slow"): an E
+    # (b) SLOW FIELDS ARE STANDOFF TOOLS (an Icicle Staff to slow): an E
     #     laid at range with slow >= 4 that is not itself a bomb (Icicle,
     #     Arctic, Glacial, Chillhowl). Occult's corridor stays out — it is
-    #     claimed as engage and the owner's own clap10 fields it as a pure
+    #     claimed as engage and the clap10 fixture fields it as a pure
     #     clap. Tools scale one per ten members for the pure kite too
     #     (one Icicle in a 17-stack is a clap, roster 15).
     # (c) THE BALL CARRIES THE BOMB: brawl_clap is a melee core (or mid
     #     band) whose melee-delivered unconditional bombs hold half the
     #     bomb points (five Battle Bracers, roster 11); the commit-posture
     #     read is retired (three Hallowfalls' evade sank it).
-    #     Hybrid bomb-share threshold 0.40 -> 0.45 (the owner's kites with
+    #     Hybrid bomb-share threshold 0.40 -> 0.45 (the called kites with
     #     tools at scale sat at 0.39-0.44, the clap-kites at 0.46+).
     # Score: 12/16 called rosters exact (7/10 in round 1); the four misses
     # are recorded, not tuned: 3 (one Bedrock where a 16-stack needs two),
-    # 5 was called clap on weapons alone and re-ruled brawl once the owner
-    # saw the kits ("if it's leather dps mostly then it's most likely
-    # brawl") — split naked, brawl by the harvested chests, 16 and 17
+    # 5 was called clap on weapons alone and re-called brawl once the
+    # kits were shown (leather-majority dps is most likely brawl)
+    # — split naked, brawl by the harvested chests, 16 and 17
     # (Demonfang/Battle Bracers balls with flex bombs — melee core), 18
-    # (Galatine ramp bombs in a Demonfang ball: the owner's brawl-clap,
-    # the engine's brawl, consistent with the Galatine ruling).
+    # (Galatine ramp bombs in a Demonfang ball: brawl-clap by the call,
+    # brawl by the engine, consistent with the Galatine rule).
     e36 = Engine(content="territory_defense", size=20)
     sf36 = lambda w: e36.weapons[w].get("style_fit") or {}
     facts36 = (sf36("2H_ICEGAUNTLETS_HELL").get("standoff_e") is True      # Icicle
@@ -1286,7 +1281,7 @@ def run():
             r2_ok += 1
         else:
             r2_bad.append(f"r{rid}:{got}")
-    # roster 5 as re-ruled: a dead heat on weapons (split), brawl once the
+    # roster 5 as re-called: a dead heat on weapons (split), brawl once the
     # harvested chests are known (every dps in leather)
     r5_gears = [['ARMOR_LEATHER_HELL'], ['ARMOR_LEATHER_FEY'], ['ARMOR_PLATE_SET3'], None,
                 ['ARMOR_PLATE_ROYAL'], None, None, ['ARMOR_LEATHER_HELL'], ['ARMOR_LEATHER_AVALON'],
@@ -1296,19 +1291,19 @@ def run():
              and e36.comp_identity(round2[5][2], None, r5_gears).get("style") == "brawl")
     fit36 = e36.fitness(round2[11][2])
     e36.comp_identity(round2[11][2])
-    check("T36 blind round 2 (2026-09-04): flex bombs join the rigid core, "
+    check("T36 validation round 2: flex bombs join the rigid core, "
           "slow fields are standoff tools (Occult is not), the ball carries "
-          "the bomb; the eleven agreed rosters read as the owner called them "
+          "the bomb; the eleven agreed rosters read as recorded "
           "and roster 5 is brawl by its leather kits",
           facts36 and join_ok and r5_ok and r2_ok == 11
           and e36.fitness(round2[11][2]) == fit36,
           f"facts={facts36} join={join_ok} ({ci_r.get('style')}/{ci_m.get('style')}) "
           f"r5={r5_ok} round={r2_ok}/11 bad={r2_bad}")
 
-    # T37 — STYLE x SIZE ROWS (owner ruling 2026-09-04, "ok do it", four
-    # parts): templates/style_bands.yaml (derive_style_bands.py from the
-    # harvest board) is read AFTER the content row for a DECLARED style at
-    # 10+. Contract pinned here, numbers not (they move with the harvest):
+    # T37 — STYLE x SIZE ROWS (four parts): templates/style_bands.yaml
+    # (derive_style_bands.py from the harvest board) is read AFTER the
+    # content row for a DECLARED style at 10+. Contract pinned here,
+    # numbers not (they move with the harvest):
     # (a) a declared style at 20 reads its band: clap's burst_aoe target
     #     sits above balanced's and brawl's, brawl's tankiness above
     #     clap's (what winning rosters field, per style);
@@ -1317,9 +1312,9 @@ def run():
     #     size/ref exactly, not x1.71;
     # (c) a soft-cap-only row (p10 = 0) keeps the CONTENT target;
     # (d) `balanced` at 10+ reads the POOLED cell — every winning roster at
-    #     the size, whatever it was playing (owner 2026-09-10, target is
-    #     the median; re-pinned 2026-09-11 when the pooled cell first
-    #     existed: the audit had crashed on unlabelled rosters before) —
+    #     the size, whatever it was playing (target is the median;
+    #     re-pinned when the pooled cell first existed: the audit had
+    #     crashed on unlabelled rosters before) —
     #     exactly, row x size/ref; any size below min_size reads no band;
     #     hard floors and weights are untouched by any band. The CONTENT
     #     comparisons below use a bands-free balanced engine (e37c) so
@@ -1351,8 +1346,8 @@ def run():
                and e37.target("burst_aoe") > e37c.target("burst_aoe")
                and e37.target("burst_aoe") > e37b.target("burst_aoe")
                and e37b.target("tankiness") > e37.target("tankiness")
-               # the movement four are IN (exclusion lifted 2026-09-04
-               # once measured): their band targets sit above the content
+               # the movement four are IN (exclusion lifted once
+               # measured): their band targets sit above the content
                # row's outlier minimums (disengage 1.8x, the others 2-7x)
                and all(reqs37.get(c, {}).get("target") is not None
                        and e37.target(c) > e37c.target(c)
@@ -1372,26 +1367,25 @@ def run():
                          for c in e37.reqs)
                  and all(abs(e37z.weight(c) - e37c.weight(c)) < 1e-9
                          for c in e37z.reqs))
-    check("T37 style x size rows (owner 2026-09-04): a declared style at 10+ "
+    check("T37 style x size rows: a declared style at 10+ "
           "reads its harvest band after the content row; rows are per-style "
           "so target_mults never stack; soft-only rows keep the content "
           "target; the movement four are in; balanced reads the POOLED cell "
-          "exactly (owner 2026-09-10); under-10 / floors / weights untouched",
+          "exactly; under-10 / floors / weights untouched",
           band_ok and no_stack and soft_ok and floors_ok,
           f"band={band_ok} no_stack={no_stack} soft_only={soft_ok} ({len(soft_only)} caps) "
           f"floors={floors_ok} clap@20 burst_aoe={e37.target('burst_aoe'):.1f} "
           f"pooled={e37z.target('burst_aoe'):.1f} content={e37c.target('burst_aoe'):.1f} "
           f"brawl={e37b.target('burst_aoe'):.1f}")
 
-    # T38 — THE FIXTURES ARE JUDGED DRESSED (owner 2026-09-04, "go ahead with
-    # your recommendation"): the style x size rows are measured on dressed
-    # winners, so the five graded fixtures are read in their recorded kits
-    # (builds_index join) or, for the two synthetic ten-mans, their doctrine
-    # kits. Contract, not numbers: dressed fitness beats naked on every
-    # fixture; every dressed fixture clears its band's engage and mobility
-    # targets (the two the exclusion had doubted); blap's disengage /
-    # knockback shortfall is RECORDED (a deliberately committed ball) and
-    # not pinned either way.
+    # T38 — THE FIXTURES ARE JUDGED DRESSED (accepted): the style x size
+    # rows are measured on dressed winners, so the five graded fixtures
+    # are read in their recorded kits (builds_index join) or, for the two
+    # synthetic ten-mans, their doctrine kits. Contract, not numbers:
+    # dressed fitness beats naked on every fixture; every dressed fixture
+    # clears its band's engage and mobility targets (the two the exclusion
+    # had doubted); blap's disengage / knockback shortfall is RECORDED (a
+    # deliberately committed ball) and not pinned either way.
     builds_flat = gear_join.load_builds_flat(ROOT)
     def _dressed(comp_id, idx):
         comp, party = _COMPS[comp_id], _COMPS[comp_id]["parties"][idx]
@@ -1416,13 +1410,13 @@ def run():
         dressed = e38.fitness(party38, None, gears38) / e38.max_fitness(party38, None, gears38)
         sup = e38.effective_supply(party38, None, gears38)
         dressed_wins.append(dressed > naked)
-        # RE-PINNED 2026-09-10 (target is the median): the doubt was "does a
-        # real comp clear the engage/mobility rows at all" — the bare
+        # RE-PINNED (target is the median): the doubt was whether a
+        # real comp clears the engage/mobility rows at all — the bare
         # minimum winners get away with (target_min), not the typical
         # winner (target), which by definition half of real winners sit under
         clears.append(all(sup.get(c, 0.0) >= e38.target_min(c) for c in ("engage", "mobility")))
         detail38.append(f"{name}={naked:.1%}->{dressed:.1%}")
-    check("T38 the fixtures are judged dressed (owner 2026-09-04): recorded "
+    check("T38 the fixtures are judged dressed: recorded "
           "kits via the builds_index join, doctrine kits for the ten-mans; "
           "dressed beats naked on all five and every one clears its band's "
           "engage and mobility minimums",
@@ -1430,13 +1424,13 @@ def run():
           f"kits={sum(1 for _, (_p, g, _s, _c) in fx38.items() if all(g))}/5 "
           f"dressed>naked={dressed_wins} clears={clears} " + " ".join(detail38))
 
-    # T39 — blind round 3 (owner, 2026-09-05; the 10-14 band, rosters 1-11
+    # T39 — validation round 3 (the 10-14 band, rosters 1-11
     # called, 12-20 left uncalled). Two derived rules, one refinement, one
     # negative result, all scored against every earlier pin before landing:
     # (a) A LONE STANDOFF BODY below the hybrid floor only makes a kite of
     #     a comp that is NOT bombing (bomb share < 0.45): one Icicle in a
-    #     13-stack at 0.48 is the owner's clap (roster 4); kite10 with its
-    #     one Bedrock at 0.26 stays the owner's kite.
+    #     13-stack at 0.48 is a clap by the recorded call (roster 4);
+    #     kite10 with its one Bedrock at 0.26 stays a kite.
     # (b) THE BOMB'S DELIVERY NAMES THE MID BAND: a mixed roster with a
     #     real bomb share (>= 0.45) whose bombs are mostly landed from
     #     range is a clap (roster 8: Battle Bracers x2 + Demonfang against
@@ -1483,24 +1477,23 @@ def run():
                and ci4["mode"]["aoe"] >= e39.IDENTITY_LONE_TOOL_AOE)
     kite10_ok = (Engine(content="blackzone_roam", size=10)
                  .comp_identity(kite10).get("style") == "kite")
-    check("T39 blind round 3 (2026-09-05, the 10-14 band): a lone standoff body "
+    check("T39 validation round 3 (the 10-14 band): a lone standoff body "
           "only makes a kite of a comp that is not bombing; the bomb's delivery "
           "names the mid band; flex bombs go home only to a clearly melee core; "
-          "the six agreed rosters read as the owner called them",
+          "the six agreed rosters read as recorded",
           r3_ok == 6 and lone_ok and kite10_ok,
           f"round={r3_ok}/6 bad={r3_bad} lone={lone_ok} kite10={kite10_ok}")
 
-    # T43 — blind round 4 (owner, 2026-09-08; the 10-14 band, all twenty
-    # called: 1-10 on 09-05, the rest on 09-08). 9 exact / 3 half / 1 miss
-    # of 14 callable; two abstentions (2, 11), two gank calls the engine
-    # cannot make (3, 18), three uncalled (1, 4, 19). NOTHING retuned: the
-    # miss (5 — the Infernal Staff's E as a lone standoff tool at 0.36 bomb
-    # share) and the abstention (11 — Witchwork's damage points as a ranged
-    # carrier) are hypotheses for the owner, and the gank read is an open
-    # ruling that now has a mechanism in the owner's words ("claws, dagger
-    # pair, whispering bow - these are catching and dismounting the enemy
-    # type of weapons"). This pins the nine agreed rosters, weapons only,
-    # exactly as the owner called them.
+    # T43 — validation round 4 (the 10-14 band, all twenty called over
+    # two sittings). 9 exact / 3 half / 1 miss of 14 callable; two
+    # abstentions (2, 11), two gank calls the engine cannot make (3, 18),
+    # three uncalled (1, 4, 19). NOTHING retuned: the miss (5 — the
+    # Infernal Staff's E as a lone standoff tool at 0.36 bomb share) and
+    # the abstention (11 — Witchwork's damage points as a ranged carrier)
+    # are open hypotheses, and the gank read is an open question that now
+    # has a recorded mechanism (Claws, Dagger Pair and Whispering Bow are
+    # catching-and-dismounting weapons). This pins the nine agreed
+    # rosters, weapons only, exactly as recorded.
     round4 = {
         6: ('clap', ['MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_MACE', '2H_LONGBOW', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON']),
         8: ('brawl', ['2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_HOLYSTAFF_HELL', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_NATURESTAFF_KEEPER', 'MAIN_CURSEDSTAFF_AVALON', '2H_HAMMER_CRYSTAL']),
@@ -1520,23 +1513,23 @@ def run():
             r4_ok += 1
         else:
             r4_bad.append(f"r{rid}:{got}")
-    check("T43 blind round 4 (2026-09-08, the 10-14 band): the nine agreed "
-          "rosters read as the owner called them; nothing retuned",
+    check("T43 validation round 4 (the 10-14 band): the nine agreed "
+          "rosters read as recorded; nothing retuned",
           r4_ok == 9, f"round={r4_ok}/9 bad={r4_bad}")
 
-    # T40 — KIT ROUNDS (owner, 2026-09-05: builds shown without labels,
+    # T40 — THE KIT VALIDATION ROUND (builds shown without labels,
     # graded against the styles of the rosters they were worn in).
     # Realmbreaker 7/8, Hallowfall 6/8; the disagreement was the LABEL:
     # 248 of 1,020 clap-labelled rosters had leather-majority dps, and
-    # every Judicator healer and Hellion Realmbreaker "in a clap" lived
-    # there. Ruling: "for leather dps it would mostly be melee and it
-    # would be brawl. point of clap is high dps which is not possible if
-    # majority of party is wearing leather" — a clap read decided by the
-    # weapons is overruled by leather-majority dps kits; the bomb-squad
-    # detachment ("secondary parties wearing assassin jackets to be a
-    # bomb squad") keeps its archetype. Pinned on clap10 (the owner's
-    # own clap) dressed three ways: naked it is clap; every dps in
-    # Assassin Jackets it is brawl; every dps in cloth it stays clap.
+    # every Judicator healer and Hellion Realmbreaker labelled clap lived
+    # there. Rule: leather dps are mostly melee, so the comp is brawl —
+    # the point of clap is high dps, which a leather-majority party cannot
+    # deliver — so a clap read decided by the weapons is overruled by
+    # leather-majority dps kits; the bomb-squad detachment (a secondary
+    # party in Assassin Jackets) keeps its archetype. Pinned on clap10
+    # (the golden clap fixture) dressed three ways: naked it is clap;
+    # every dps in Assassin Jackets it is brawl; every dps in cloth it
+    # stays clap.
     e40 = Engine(content="blackzone_roam", size=10)
     dps40 = [i for i, w in enumerate(clap10) if e40.role_of(w) == "dps"]
     leather40 = [["ARMOR_LEATHER_SET3"] if i in dps40 else None for i in range(len(clap10))]
@@ -1553,7 +1546,7 @@ def run():
     e40.set_content("blackzone_roam", len(squad))
     sq_naked, sq_lea = e40.comp_identity(squad), e40.comp_identity(squad, None, sq_leather)
     fit40 = e40.fitness(clap10) == e40.fitness(clap10)   # descriptive only
-    check("T40 kit rounds (2026-09-05): leather-majority dps overrule a "
+    check("T40 the kit validation round: leather-majority dps overrule a "
           "weapons-decided clap to brawl; cloth keeps the clap; the "
           "bomb-squad detachment is exempt",
           naked40.get("style") == "clap" and lea40.get("style") == "brawl"
@@ -1564,13 +1557,13 @@ def run():
           f"cloth={clo40.get('style')} squad={sq_naked.get('archetype')}/"
           f"{sq_lea.get('archetype')}:{sq_lea.get('style')}")
 
-    # T41 — PER-ITEM CHEST LEAN (2026-09-05, from the kit rounds): the
+    # T41 — PER-ITEM CHEST LEAN (from the kit validation round): the
     # chest ITEM separates styles where the class cannot — Royal Jacket
     # (leather) is worn by ranged-style Realmbreakers without exception,
     # Hellion (leather) by brawl or clap, Royal Armor (plate) by either.
     # Mined by the audit from WEAPONS-ONLY labels of clean cores (no kit
     # rule in the loop), shipped as `chest_lean`, read by the kit
-    # tie-break item-first with the owner's class rule as the fallback.
+    # tie-break item-first with the T40 class rule as the fallback.
     # Pinned on clap10 with every dps in Royal Jacket: leather by class,
     # yet the split/clap override must NOT fire (ranged lean) — and the
     # same roster in Hellion (no item lean, class -> brawl) does turn.
@@ -1589,7 +1582,7 @@ def run():
     hell41 = [["ARMOR_LEATHER_HELL"] if i in dps41 else None for i in range(len(clap10))]
     ci_royal = e41.comp_identity(clap10, None, royal41)
     ci_hell = e41.comp_identity(clap10, None, hell41)
-    check("T41 per-item chest lean (2026-09-05): Royal Jacket votes ranged "
+    check("T41 per-item chest lean: Royal Jacket votes ranged "
           "though leather, Hellion falls back to the class rule; clap10 in "
           "Royal Jackets stays clap, in Hellions turns brawl",
           table_ok and ci_royal.get("style") == "clap"
@@ -1597,31 +1590,30 @@ def run():
           f"table={table_ok} royal={royal_j} hellion={hellion} "
           f"clap10 royal={ci_royal.get('style')} hellion={ci_hell.get('style')}")
 
-    # T44 - Hoarfrost Avalanche burst_aoe RULED 3 (owner 2026-09-08, "sure
-    # on 3 ... you r hoarfrost ruling"). The 2026-08-20 rescore HELD it at
-    # 2 because +0.5 unit tipped the blap tank slot in V4 (69% vs 70%);
-    # re-measured 2026-09-08 with the structure that landed since, V4 is
-    # byte-identical at 2 and 3 (17/23 actual_gear), so the hold was a
-    # symptom of missing team structure. The ruling lives in MASTERSHEET
-    # tune:sheets; the sheet still reads 2 and says so.
+    # T44 - Hoarfrost Avalanche burst_aoe SET TO 3 (curation judgment).
+    # The earlier rescore HELD it at 2 because +0.5 unit tipped the blap
+    # tank slot in V4 (69% vs 70%); re-measured with the structure that
+    # landed since, V4 is byte-identical at 2 and 3 (17/23 actual_gear),
+    # so the hold was a symptom of missing team structure. The override
+    # lives in MASTERSHEET tune:sheets; the sheet still reads 2 and says so.
     hf = "MAIN_FROSTSTAFF_KEEPER"
     e20h = Engine(content="blackzone_roam", size=20)
-    check("T44 Hoarfrost burst_aoe ruled 3 via MASTERSHEET (owner 2026-09-08); "
-          "the 2026-08-20 V4 hold is lifted",
+    check("T44 Hoarfrost burst_aoe set to 3 via MASTERSHEET; "
+          "the earlier V4 hold is lifted",
           e20h.caps_of(hf).get("burst_aoe") == 3
           and E.weapons[hf]["capabilities"]["burst_aoe"] == 3,
           f"burst_aoe={e20h.caps_of(hf).get('burst_aoe')}")
 
-    # T45 - reach is PAYLOAD reach, not travel (owner 2026-09-08: "yes when
-    # an e lands the caster should read as melee delivery"). The dumps'
+    # T45 - reach is PAYLOAD reach, not travel: when an E lands the caster,
+    # it reads as melee delivery (curation judgment). The dumps'
     # dash node (spell_index caster_moves) marks every leap / charge; such
-    # an E counts toward flex delivery only as a FLEX BOMB - the owner's
-    # 2026-09-04 exception (Realmbreaker, Rift Glaive: unconditional group
+    # an E counts toward flex delivery only as a FLEX BOMB - the T36
+    # flex-bomb exception (Realmbreaker, Rift Glaive: unconditional group
     # payload at the job bar). Double Bladed's Soaring Swipe (80 damage +
     # a slow, e_dmg 2) and Carving's dash are melee delivery; Spiked
-    # Gauntlets' arc and Grailseeker's Soul Shaker move nothing (the owner:
-    # "grailseeker e does not move the caster, its like one of the longest
-    # range snares") and keep flex / standoff. Harvest, same day:
+    # Gauntlets' arc and Grailseeker's Soul Shaker move nothing
+    # (Grailseeker's E does not move the caster; it is one of the longest
+    # range snares) and keep flex / standoff. Harvest measurement:
     # Realmbreaker in 83% of 20+ clap killer parties, Rift Glaive 25%,
     # Double Bladed 0% (11 wearers at 10+, none at 20+).
     e20d = Engine(content="castle", size=20, style="clap")
@@ -1658,13 +1650,13 @@ def run():
     check("T46 derive_meta_prior.bucket_of mirrors Engine.size_bucket for "
           "party sizes 2-40", bucket_ok, "")
 
-    # T48 - ONE HEALER AT SEVEN (owner 2026-09-11: castle_outpost clap 7
-    # "keeps giving 2 healers and leaving damage lacking"; "go ahead").
+    # T48 - ONE HEALER AT SEVEN: castle_outpost clap 7 forged two healers
+    # and left the damage seats short.
     # The heal_sustain target at 7 (4.5) is one dressed Redemption Staff;
     # with a 2.9-unit healer locked (Nature Staff / Hallowfall, the
     # planner's picks) only another healer body closed the gap, riders
     # tipped it, no overstack cost, and burst_aoe stayed at 15 of 22.
-    # Ruling: a body beyond the TYPICAL count for its role (harvest p50,
+    # Rule: a body beyond the TYPICAL count for its role (harvest p50,
     # derive_role_counts.py: one healer in 67% of 658 fully-known 7-man
     # killer parties; 3/3 published 7-man comps) is generated only when a
     # minimum only that role can meet still demands it. Manual parties
@@ -1685,20 +1677,19 @@ def run():
                     for nm, h, b, f, n in t47))
 
     # T49 - DUPLICATES NEVER OUTRANK A DISTINCT WEAPON THAT CLOSES THE SAME
-    # GAP (owner 2026-09-15). The owner's 18-man blackzone clap roster
+    # GAP. The recorded 18-man blackzone clap roster
     # (4 tank / 4 support / 6 dps / 4 healer, judged dressed at roster
     # size) read burst_aoe 20.6 of 25.5 and got a second Permafrost and a
     # second Spiked Gauntlets in its top four: Permafrost's per_weapon
     # `free: 2` made the copy cost nothing, and rho 0.25 was below the
-    # coverage one more bomb earns while the gap is open. Rulings: the
-    # Permafrost allowance goes ("remove that free 2"); rho 0.5 - "0.25
-    # must be too soft because there are probably a lot more aoe weapons
-    # such as longbow, blazing staff, rift glaive, energyshaper" - the
-    # smallest value at which every copy leaves this roster's suggestion
-    # list (best copy rank 4 -> 12 of 77; 0.75 -> 31). Distinct top picks
-    # unchanged. Same round: Fists of Avalon keeps its ranged grant ("leave
-    # fists of avalon as is"), Trinity Spear's leap is melee ("most
-    # definitely a melee weapon"), Skystrider's foothold is ranged.
+    # coverage one more bomb earns while the gap is open. Rules: the
+    # Permafrost allowance goes; rho 0.5 (0.25 is too soft with this many
+    # AoE weapons - Longbow, Blazing Staff, Rift Glaive, Energy Shaper -
+    # and 0.5 is the smallest value at which every copy leaves this
+    # roster's suggestion list; best copy rank 4 -> 12 of 77; 0.75 -> 31).
+    # Distinct top picks unchanged. The same validation round: Fists of
+    # Avalon keeps its ranged grant, Trinity Spear's leap is melee
+    # (curation judgment), Skystrider's foothold is ranged.
     e18 = Engine(content="blackzone_roam", size=18, style="clap")
     own18 = ["2H_HAMMER_AVALON", "2H_POLEHAMMER", "2H_MACE", "MAIN_HAMMER",
              "2H_ARCANESTAFF_HELL", "2H_SHAPESHIFTER_SET2",
@@ -1717,7 +1708,7 @@ def run():
     dup18 = [n for n in top8 if n in have18]
     perma2 = e18.pick_report(own18, PERMAFROST, gears=g18)
     rp = lambda k: e18.weapons[k]["capabilities"].get("ranged_presence", 0)  # noqa: E731
-    check("T49 owner 2026-09-15: no copy of a fielded weapon in the 18-man "
+    check("T49 duplicate rule: no copy of a fielded weapon in the 18-man "
           "clap roster's top 8; a 2nd Permafrost pays the duplicate cost "
           "(allowance removed); rho 0.5; Trinity Spear's leap is melee, "
           "Fists of Avalon and Skystrider keep ranged_presence",

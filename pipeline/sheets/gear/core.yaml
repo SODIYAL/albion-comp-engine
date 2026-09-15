@@ -10,9 +10,9 @@
 - gear: HEAD_CLOTH_SET2              # Cleric Cowl — "fallback, never wrong"
   slot: head
   curated_as_of: 2026-09-10
-  # OWNER RULING 2026-09-10: "no one uses the cleric cowl for its knockback
-  # ability regardless of content ... it would mostly only be used in very
-  # small scale content such as 1v1 or 3v3 or 5v5." MetaBattle agrees 4/4
+  # Nobody fields the Cleric Cowl for its knockback in group content; the
+  # Force Field is a very-small-scale pick (1v1, 3v3, 5v5) at most
+  # (curation judgment). MetaBattle agrees 4/4
   # (three ZvZ builds and the one hellgate 5v5 all run Ice Block). The
   # Force Field rows (knockback_displace 3 / peel 3 / anti_dive 2,
   # PBAOE_KNOCKBACK) are DROPPED so the engine's one-active-per-piece pick
@@ -52,7 +52,7 @@
   slot: head
   curated_as_of: 2026-08-20
   capabilities:
-    # peel 2 REMOVED (owner ruling 2026-08-28): Emergency Shield absorbs
+    # peel 2 REMOVED (peel touches the enemy): Emergency Shield absorbs
     # damage for allies and never touches the enemy. Protection, not peel.
     # The buff_allies row below already carries the same evidence.
     - {cap: buff_allies,   score: 2, evidence: EMERGENCY_SHIELD}
@@ -81,11 +81,10 @@
   slot: armor
   curated_as_of: 2026-08-20
   capabilities:
-    # peel 4 REMOVED (owner ruling 2026-08-28). This was the HIGHEST peel score
+    # peel 4 REMOVED (peel touches the enemy). This was the HIGHEST peel score
     # on any gear in the game, and it rested entirely on Force Shield granting
-    # allies +25% resistances — nothing that touches an enemy. The owner's
-    # challenge ("I thought things peel would be like something that directly
-    # affects enemies in some way") found it. buff_allies below is the honest
+    # allies +25% resistances — nothing that touches an enemy; peel must
+    # directly affect enemies. buff_allies below is the honest
     # home for the same evidence; no score was moved or invented to replace it.
     - {cap: buff_allies,   score: 3, evidence: FORCESHIELD}
     - {cap: zone_control,  score: 2, evidence: FORCESHIELD}
@@ -117,7 +116,7 @@
   # SELF-COST (new field, 2026-08-28): what the wearer PAYS. The aura cuts
   # the wearer's own damage resistances by 0.37 while it runs — the model
   # recorded only the upside before, which is how "tankiness 3" survived
-  # review for so long. Applied to the WEARER's own supply, never the team
+  # for so long. Applied to the WEARER's own supply, never the team
   # pool, and offset when the party fields 2+ (see interactions.yaml:
   # REFLECTAREA — wearers stand in each other's auras, which is the
   # mechanism behind the never-bring-just-one rule).
@@ -265,29 +264,29 @@
 - gear: OFF_HORN_KEEPER              # Mistcaller — SELF stat stick
   slot: offhand
   curated_as_of: 2026-08-25
-  # buff_allies 2 REMOVED (owner ruling 2026-08-25: "i dont think
-  # mistcaller and lymhurst capes are ally buffing effects, they are
-  # self buffing"). Dumps agree: no active, no ally-targeted spell —
+  # buff_allies 2 REMOVED: Mistcaller and the Lymhurst Cape are self
+  # buffs, not ally-buffing effects. Dumps agree: no active, no
+  # ally-targeted spell —
   # its identity is the wielder's own output stats (directionality
   # rule, V5 catch #1 class). Caps return via the stat channel once
   # the offhand stats-bank gap is filled.
   capabilities: []
 
-# ---- full offhand roster (owner 2026-08-25: "their usefulness comes
-# from the stats ... you have to get the stats for all offhands") —
+# ---- full offhand roster (an offhand's usefulness is its stats, so
+# every offhand needs its stats-bank entry) —
 # the 12 bank offhands the catalog was missing. NO capabilities by
 # design: an offhand has no active; the stats bank supplies the
 # identity profile and classify_gear derives the role affinity.
 - {gear: OFF_BOOK, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}            # Tome of Spells — cast-time reduction
 - {gear: OFF_CENSER_AVALON, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}   # Celestial Censer — +heal output, -defense
 - {gear: OFF_DEMONSKULL_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Muisak — +damage +heal output, energy tax
-- {gear: OFF_JESTERCANE_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Leering Cane — +CC duration vs players + CDR; pairs with CC-delivery weapons (owner 2026-08-25 + verified: metabattle 1H Mace ZvZ lists it PRIMARY offhand; freemarket Incubus Tank pairs it; the CC-duration-stack pattern)
+- {gear: OFF_JESTERCANE_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Leering Cane — +CC duration vs players + CDR; pairs with CC-delivery weapons (curation judgment, verified: metabattle 1H Mace ZvZ lists it PRIMARY offhand; freemarket Incubus Tank pairs it; the CC-duration-stack pattern)
 - {gear: OFF_LAMP_UNDEAD, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}     # Cryptcandle — +spell damage, -defense
 - {gear: OFF_ORB_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}     # Eye of Secrets — book class: raw item power (725 vs 700 baseline at T4)
 - {gear: OFF_SHIELD_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Unbreakable Ward — defense + threat (crystal shield)
 - {gear: OFF_SPIKEDSHIELD_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Facebreaker — defense + damage hybrid shield
 - {gear: OFF_TALISMAN_AVALON, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Sacred Scepter — book class: highest raw item power (800 at T4)
-- {gear: OFF_TOME_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Timelocked Grimoire — cast time + cooldowns (A cited Incubus support build runs it; Incubus ZvZ evidence splits Aegis/Timelocked/Leering — owner check 2026-08-25)
+- {gear: OFF_TOME_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Timelocked Grimoire — cast time + cooldowns (A cited Incubus support build runs it; Incubus ZvZ evidence splits Aegis/Timelocked/Leering)
 - {gear: OFF_TORCH, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}           # Torch — attack speed + cooldowns
 - {gear: OFF_TOTEM_KEEPER, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Taproot — book class: raw item power (775 at T4), small heal-output tax
 
@@ -301,7 +300,7 @@
 - gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — SELF energy proc
   slot: cape
   curated_as_of: 2026-08-25
-  # buff_allies 2 REMOVED (owner ruling 2026-08-25, with Mistcaller):
+  # buff_allies 2 REMOVED (with Mistcaller):
   # the cape's ability is PASSIVE_CAPE_LYMHURST, a SELF proc — nothing
   # ally-targeted in the dumps. Directionality rule: self-buffs never
   # ground buff_allies.

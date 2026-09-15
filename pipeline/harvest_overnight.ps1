@@ -1,5 +1,4 @@
-# Killboard harvest (owner 2026-09-04: "make this an overnight task";
-# 2026-09-09: "go for it" on twice daily + parallel). Runs the two
+# Killboard harvest (a scheduled task, twice daily, parallel). Runs the two
 # sample_parties.py passes back to back — the 25-player floor (ZvZ) and the
 # 8-player floor (small scale) — each walking the full reachable discovery
 # list (40 pages x 20 battles) and skipping what the per-battle cache
@@ -7,7 +6,7 @@
 # last one. Network step, never part of a build.
 #
 # TWICE A DAY, because the discovery list is only 800 battles deep and how
-# far back that reaches depends on the floor (measured 2026-09-09, US):
+# far back that reaches depends on the floor (measured on the US server):
 # 25+ spans ~60 h, 20+ ~39 h, 15+ ~20 h, 10+ ~13.5 h, 8+ ~12.6 h. One 03:00
 # pass therefore saw every ZvZ fight but missed about half of each day's
 # 8-24-player fights — the 15-19 band where kite and clap_kite rosters
@@ -39,14 +38,14 @@
 #   $t2 = New-ScheduledTaskTrigger -Daily -At 3pm
 #   $s = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Hours 6) -StartWhenAvailable
 #   Register-ScheduledTask -TaskName "CompForge overnight harvest" -Action $a -Trigger @($t1, $t2) -Settings $s -Force
-# -WindowStyle Hidden matters (2026-09-08): without it the run pops a console
+# -WindowStyle Hidden matters: without it the run pops a console
 # window on the desktop, and closing that window kills the harvest with
 # 0xC000013A — three nights were lost that way before the flag was added.
 # (schtasks.exe chokes on the space in the repo path.) Remove with:
 #   Unregister-ScheduledTask -TaskName "CompForge overnight harvest" -Confirm:$false
 # Logs: pipeline/out/fetch_logs/harvest-<date>.log (gitignored).
 #
-# FOCUSED NIGHT (owner 2026-09-08: "focus on 7v7 fights and 5v5 fights"):
+# FOCUSED NIGHT (one fight-size band, e.g. the 5v5 / 7v7 fights):
 # pass a fight-size band and the script runs ONE pass over that band instead
 # of the two floors, spending the whole budget on fights of that size —
 #   powershell -NoProfile -ExecutionPolicy Bypass -File pipeline/harvest_overnight.ps1 -MinPlayers 10 -MaxPlayers 14

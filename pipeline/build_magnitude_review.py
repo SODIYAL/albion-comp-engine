@@ -2,16 +2,16 @@
 """
 Generate the capability MAGNITUDE review page.
 
-Standing rule (expert, 2026-08-13, born from the knockback_displace pass):
+Standing rule (born from the knockback_displace curation pass):
 every capability score encodes IMPACT MAGNITUDE, not existence. This page
 lays out, per capability, every weapon's score side by side with the sheet
 comment and the evidence spell's dumps text (which carries the real numbers:
 meters, seconds, targets, percentages) so magnitude outliers pop out.
 
-REVIEW-BY-EXCEPTION, like review/effects.html: the expert scans a capability
+REVIEW-BY-EXCEPTION, like review/effects.html: the curator scans a capability
 board and flags rows whose score does not match the dumps numbers around it.
 Every correction goes through the sheet (+ golden case when it changes a
-ruling), never through this page.
+recorded call), never through this page.
 
 Auto-flags (also printed to console):
   RULE  same evidence spell grounding the same capability at different

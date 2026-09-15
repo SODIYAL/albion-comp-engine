@@ -12,7 +12,7 @@
 #   - engage/disengage/catch/mobility via the Hit and Run passive REMOVED:
 #     +20% MS for 3s every 6 spells is a kiting nicety, not movement tooling.
 # heal_reduction 2 not 3: the negate is one E application; the Spirithunter
-# class (full-kit anti-heal) holds 3. Expert may bump — in practice this E is
+# class (full-kit anti-heal) holds 3. A candidate to raise — in practice this E is
 # why the weapon gets picked.
 # Armor Piercer (-17% for 4s) is the strongest single shred curated so far but
 # is one W among five: held at the W-option ladder score of 1, flagged.
@@ -22,6 +22,6 @@
   role_hint: support
   capabilities:
     - {cap: heal_reduction, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
-    - {cap: burst_aoe,      score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # 161 magical across the miasma cone — "mostly used for its damage" (owner ruling 2026-08-21)
-    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # Rift Glaive-pattern: slight knock-AWAY = self-peel, displace dropped (owner ruling 2026-08-21; was displace 4 + peel 4)
-    - {cap: sustained_dps,  score: 4, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs — line default; the old "1H damage budget" discount was REJECTED (owner 2026-08-25: "damage comes from equipment and 1 hand allows for adding an offhand, which can INCREASE damage")
+    - {cap: burst_aoe,      score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # 161 magical across the miasma cone — fielded mostly for its damage (curation judgment)
+    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # Rift Glaive-pattern: slight knock-AWAY = self-peel, displace dropped (curation judgment; was displace 4 + peel 4)
+    - {cap: sustained_dps,  score: 4, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs — line default; the old "1H damage budget" discount was REJECTED (damage comes from equipment, and a one-hander adds an offhand that can INCREASE damage)

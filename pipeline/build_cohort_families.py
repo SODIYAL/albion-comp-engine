@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Recurring observed composition families (roadmap item 7, 2026-08-24).
+Recurring observed composition families (roadmap item 7).
 
 Reads the committed cohort sample (out/weapon_usage_v2.json) and mines the
 recurring weapon CORES per fight-size bucket into out/cohort_families.json.
@@ -35,7 +35,7 @@ The output carries COUNTS only: organization identifiers and battle ids
 stay in weapon_usage_v2.json for audit and never enter this artifact or
 the page. DISPLAY EVIDENCE ONLY — nothing here feeds scoring, suggestion
 pools, or the forge (KILLBOARD_AFFINITY.md; empirical scoring stays
-parked behind an owner ruling).
+parked behind a maintainer decision).
 
 Run:  py -3 pipeline/build_cohort_families.py
 """
@@ -50,7 +50,7 @@ USAGE = os.path.join(HERE, "out", "weapon_usage_v2.json")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
 OUT = os.path.join(HERE, "out", "cohort_families.json")
 
-# PROVISIONAL thresholds (2026-08-24) — chosen by inspection of the
+# PROVISIONAL thresholds — chosen by inspection of the
 # committed 2026-08 sample (305 cohorts): large yields 5 families incl.
 # the observed ZvZ meta core, mid 1, small 0 (honestly thin). Revisit
 # with a bigger sample, not by loosening gates until families appear.

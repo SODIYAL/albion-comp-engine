@@ -13,10 +13,10 @@ This parser normalizes that vocabulary so the evidence layer can speak it:
 
   - `data/armory_imports/*.yaml` records must cite an activity the Armory
     actually has (build_builds.py validates against this file), and
-  - content-mapping rulings can cite SBI's own activity definitions
+  - content-mapping rules can cite SBI's own activity definitions
     instead of guesswork.
 
-`planner_content_hints` is PROVISIONAL, owner-reviewable guidance only —
+`planner_content_hints` is PROVISIONAL guidance only, pending review —
 nothing downstream maps content through it automatically.
 
 Usage:  py -3 pipeline/parse_armory.py
@@ -33,9 +33,9 @@ from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E4
 ADAPTER = "parse_armory"
 ADAPTER_VERSION = "1"
 
-# PROVISIONAL activity -> planner-content hints (owner 2026-08-21). Cited
+# PROVISIONAL activity -> planner-content hints (pending review). Cited
 # from the activity's own name/tags; empty list = no planner counterpart
-# yet. The zvz / crystalleague20v20 rows mirror the CONTENT_COVERS rulings
+# yet. The zvz / crystalleague20v20 rows mirror the CONTENT_COVERS rules
 # in build_builds.py so the two vocabularies stay consistent.
 PLANNER_CONTENT_HINTS = {
     "castle": ["castle"],
@@ -136,7 +136,7 @@ def main():
             "note": ("Official in-game Armory vocabulary (activity taxonomy, "
                      "tag groups, session qualification rules). The suggested "
                      "BUILDS are server-computed and not in the dumps; "
-                     "planner_content_hints are PROVISIONAL owner guidance, "
+                     "planner_content_hints are PROVISIONAL guidance, pending review, "
                      "never an automatic mapping."),
             "snapshot_commit": commit,
         },

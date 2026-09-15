@@ -36,3 +36,6 @@ pipeline/out/party_rosters.json
 
 # derive_meta_prior.py --all-battles audit copy (never shipped)
 pipeline/out/meta_prior-all-battles.json
+
+# curation review boards (build_stat_chart.py, build_magnitude_review.py) are local
+review/

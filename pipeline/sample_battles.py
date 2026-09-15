@@ -6,10 +6,11 @@ bucketed by FIGHT size (VALIDATION V7; semantics fixed per changeschapter2.md
 
 Source: the albionbb API (api.albionbb.com) — the same community killboard
 the original V2 spike used. (The official gameinfo events endpoint 504'd
-too often to sample at scale on 2026-08-13; re-tested 2026-08-29 it answers
-200 in under a second and sample_parties.py uses it for DETAIL — albionbb
-stays the DISCOVERY source because only it filters by minPlayers.) Weapons come from kill events (killer + victim),
-so coverage is combatants, not lurkers.
+too often to sample at scale when this sampler was written; re-tested
+later it answers 200 in under a second and sample_parties.py uses it for
+DETAIL — albionbb stays the DISCOVERY source because only it filters by
+minPlayers.) Weapons come from kill events (killer + victim), so coverage
+is combatants, not lurkers.
 
 WHAT THIS DATA IS — AND IS NOT (§E). A battle's `totalPlayers` is the TOTAL
 FIGHT SIZE. It is NOT a party size: parties, side sizes and actual roster
@@ -45,7 +46,7 @@ independent samples. Battles and events are deduplicated by id.
 MainHand Type "T5_2H_SHAPESHIFTER_MORGANA@4" -> catalog key
 "2H_SHAPESHIFTER_MORGANA". Unknown keys are tallied for the coverage stat.
 
-OBSERVED ORGANIZATION COHORTS (2026-08-22, from PR #5). For display-only
+OBSERVED ORGANIZATION COHORTS (from PR #5). For display-only
 co-occurrence evidence, actors are ADDITIONALLY grouped when the kill feed
 itself states the same AllianceId/AllianceName (preferred) or GuildId/
 GuildName. These are organization cohorts, NOT parties and NOT

@@ -1,14 +1,14 @@
-# Finding: should gear-sourced capabilities trigger synergy pairs?
+# Finding: should gear-sourced capabilities trigger synergy pairs? (2026-08-27)
 
-**Date:** 2026-08-27 · **Status:** RULED 2026-08-27 — Model 2 adopted: synergy is WEAPON-INTERACTION synergy (`scoring.yaml` rule 3, HANDOFF.md ruling 3, `engine/README.md`). Kept as the measurement record.
+Decision record. **Status: decided 2026-08-27 — Model 2 adopted: synergy is WEAPON-INTERACTION synergy** (`scoring.yaml` rule 3, HANDOFF.md rule 3, `engine/README.md`). Kept as the measurement record.
 
 Evidence artifact: `pipeline/out/gear_synergy_audit.json` (report-only; the "if gear counted" numbers are labeled hypotheticals computed by mirroring the engine's own pair rule — no scoring path was touched).
 
-## 1. Current semantics (deliberate, from the dressed-forge design)
+## 1. Context — current semantics (deliberate, from the dressed-forge design)
 
 `comp_score` = alpha·fitness(party, combos, **gears**) + beta·synergy(party, combos) — fitness prices the full build, synergy prices weapons only (`synergy()` has no gears parameter; J, the largest single member's joint supply, reads `member_extra`, also weapon-only). So Hood of Tenacity's heal cut never feeds `heal_reduction × sustained_dps`, a Judicator wearer's engage never feeds `engage × catch`.
 
-## 2. What was measured
+## 2. Evidence — what was measured
 
 **Minimal constructions** (blackzone_roam, pair active, one side supplied ONLY by a worn item on a cap-neutral weapon):
 
@@ -25,17 +25,21 @@ At beta 0.20 the forgone score is **0.14–0.45** per construction — real but 
 
 ## 3. Options
 
-**Model 1 — capability synergy (gear triggers).** Philosophically consistent with the capability model, and gear actives genuinely perform these game actions. But the measurement shows it is **not a toggle**: with the current J-subtraction it produces perverse negative movement on real comps, so adopting it means redesigning J's semantics for dressed vectors (a category-3 mechanical-model change) plus recalibrating beta/bonuses — none of which has expert evidence yet.
+**Model 1 — capability synergy (gear triggers).** Philosophically consistent with the capability model, and gear actives genuinely perform these game actions. But the measurement shows it is **not a toggle**: with the current J-subtraction it produces perverse negative movement on real comps, so adopting it means redesigning J's semantics for dressed vectors (a category-3 mechanical-model change) plus recalibrating beta/bonuses — none of which has validation evidence yet.
 
-**Model 2 — weapon-interaction synergy (status quo, documented honestly).** The pairs encode *play patterns between members' jobs* (clump-maker sets up the bomber; engage sets up the catch). A member's weapon is that job; worn-gear caps are garnish with small magnitudes (the four pairs' gear suppliers are 1–8 items scoring 2–4). Keeps the seam the dressed-forge design chose deliberately. Costs nothing now; forgoes at most ~0.45 score in adversarial minimal cases and nothing (negative) on the real comp measured.
+**Model 2 — weapon-interaction synergy (status quo, documented).** The pairs encode *play patterns between members' jobs* (clump-maker sets up the bomber; engage sets up the catch). A member's weapon is that job; worn-gear caps are garnish with small magnitudes (the four pairs' gear suppliers are 1–8 items scoring 2–4). Keeps the seam the dressed-forge design chose deliberately. Costs nothing now; forgoes at most ~0.45 score in adversarial minimal cases and nothing (negative) on the real comp measured.
 
 **Model 3 — source-specific per pair.** More machinery with no mechanical justification measured today.
 
 ## 4. Recommendation
 
-**Model 2 — keep synergy weapon-only, and rename/document the concept as "weapon-interaction synergy"** (scoring.yaml comment block, engine READMEs, HANDOFF) so it is never again read as generic capability synergy. Revisit Model 1 only through the calibration path: Phase-9 discrimination cases can put "does a gear-sourced heal-cut make the sustained-damage pick better?" to experts, and any adoption must co-design the J rule for dressed vectors. No code change now; documentation lands with this pass.
+**Model 2 — keep synergy weapon-only, and document the concept as "weapon-interaction synergy"** (scoring.yaml comment block, engine READMEs, HANDOFF) so it is never again read as generic capability synergy. Revisit Model 1 only through the calibration path: Phase-9 discrimination cases can put "does a gear-sourced heal-cut make the sustained-damage pick better?" to callers in a validation round, and any adoption must co-design the J rule for dressed vectors. No code change; documentation lands with this pass.
 
-## 5. Decision needed from the owner
+## 5. Decision
 
-1. Confirm Model 2 (weapon-only synergy) as the documented semantic — or direct the Model-1 redesign onto the calibration backlog.
-2. The J-quirk noted above (self-supplied pairs swallowing genuinely paired parties on the heal-cut pair) is logged for the synergy-bonus calibration phase; no action proposed now.
+1. Model 2 (weapon-only synergy) confirmed as the documented semantic. The Model-1 redesign is not on the calibration backlog.
+2. The J-quirk noted above (self-supplied pairs swallowing genuinely paired parties on the heal-cut pair) is logged for the synergy-bonus calibration phase; no action.
+
+## Changes
+
+Documentation only: `pipeline/templates/scoring.yaml` rule 3 comment block, `engine/README.md`, HANDOFF.md rule 3. No scoring path touched.

@@ -1,10 +1,10 @@
-# Weekly fold of the harvest cache into the dataset (owner 2026-09-09:
-# "set it up"). ONE COMMAND for the in-session step the harvest task never
-# does: re-derive the rosters artifact from the whole cache, run the
-# documented chain in order, rebuild the dataset and the pages, run every
-# gate, then write the before/after report the owner reads before
-# committing. It stops at the first nonzero exit and NEVER commits -
-# review notes/findings/<date>-fold-report.md, then commit.
+# Weekly fold of the harvest cache into the dataset. ONE COMMAND for the
+# in-session step the harvest task never does: re-derive the rosters
+# artifact from the whole cache, run the documented chain in order,
+# rebuild the dataset and the pages, run every gate, then write the
+# before/after report to review before committing. It stops at the first
+# nonzero exit and NEVER commits - review
+# notes/findings/<date>-fold-report.md, then commit.
 #
 #   powershell -NoProfile -ExecutionPolicy Bypass -File pipeline/fold_harvest.ps1
 #
@@ -12,7 +12,7 @@
 # child's stdout as UTF-8 and a Git-Bash-spawned console emits cp1252
 # (CLAUDE.md "Environment traps"). Logs: pipeline/out/fetch_logs/fold-<date>.log.
 # Cadence: weekly (the corpus grows ~350 battles a day; a daily fold is
-# churn, a weekly one is a meaningful step - VALIDATION.md 2026-09-09).
+# churn, a weekly one is a meaningful step - VALIDATION.md).
 
 $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)

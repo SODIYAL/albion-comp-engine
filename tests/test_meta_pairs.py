@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pair-aware meta prior contracts (owner ruling 2026-09-11, spec
+Pair-aware meta prior contracts (standing rule 7, spec
 notes/specs/2026-09-11-pair-meta-prior-design.md).
 
 Part A — derivation (pipeline/derive_meta_prior.py) on a synthetic

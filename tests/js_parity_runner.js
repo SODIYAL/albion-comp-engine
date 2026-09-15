@@ -32,13 +32,13 @@ const out = cases.map((c, i) => {
   if (i % FORGE_EVERY === 0) {
     // mirrors forge_case in test_js_parity.py incl. the empty-locked-combos
     // alternation (the [] truthiness divergence shipped once) and the
-    // locked_gears alternation (2026-08-27)
+    // locked_gears alternation
     const even = Math.floor(i / FORGE_EVERY) % 2 === 0;
     const combos = even ? c.combos.slice(0, 2) : [];
     const lgears = even ? c.gears.slice(0, 2) : null;
     const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
                       undefined, lgears);
-    // the next-best alternative (2026-09-11 `avoid`; mirrors test_js_parity.py)
+    // the next-best alternative (`avoid`; mirrors test_js_parity.py)
     const r2 = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
                        undefined, lgears, [r.party]);
     forged = { party: r.party, combos: r.combos, gears: r.gears,
@@ -48,7 +48,7 @@ const out = cases.map((c, i) => {
                next: { party: r2.party, gears: r2.gears, score: r2.score,
                        exhausted: r2.exhausted } };
   }
-  // V3-W parity (2026-08-27): dressing OFF while incumbents keep their case
+  // V3-W parity: dressing OFF while incumbents keep their case
   // gears — candidates must evaluate naked (mirrors test_js_parity.py).
   e.setDressing(false);
   const nakedRec = e.recommend(c.party, 5, null, c.combos, c.gears).map((r) => ({
@@ -57,7 +57,7 @@ const out = cases.map((c, i) => {
   return {
     recommend_naked_cand: nakedRec,
     refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
-    // gear-aware refine (owner ruling 2026-08-27; mirrors test_js_parity.py)
+    // gear-aware refine (F25/F26; mirrors test_js_parity.py)
     refine_dressed: rp === null ? null
       : e.refine(rp, REFINE_PASSES, c.refine_pool, 0,
                  c.gears.slice(0, rp.length)),
@@ -69,7 +69,7 @@ const out = cases.map((c, i) => {
     target_min: (() => { const o = {}; for (const cap in e.reqs) o[cap] = e.targetMin(cap); return o; })(),
     constraint_band: e._band,
     forge: forged,
-    // replaceOptions (2026-09-11; mirrors test_js_parity.py)
+    // replaceOptions (mirrors test_js_parity.py)
     replace: (sp === null || sp.length < 2) ? null
       : e.replaceOptions(sp, 0, c.combos.slice(0, sp.length),
                          c.gears.slice(0, sp.length), 5, c.refine_pool).map((o) => ({

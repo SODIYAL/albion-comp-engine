@@ -78,7 +78,7 @@ check("H1 manifest records repository, commit timestamp, fetch timestamp, "
 # The manifest hashes raw bytes, and .gitattributes normalizes the repo to
 # LF — so a CRLF artifact hashes differently on disk than the checkout any
 # other machine gets, and H1 breaks everywhere but the generating machine
-# (bitten 2026-08-21: git pull rewrote spell_index.json to LF, manifest
+# (bitten once: git pull rewrote spell_index.json to LF, manifest
 # held the Windows CRLF hash, release blocked).
 crlf = [name for name in INPUTS + ["source_manifest.json"]
         if b"\r\n" in open(os.path.join(OUT, name), "rb").read()]
@@ -204,7 +204,7 @@ bi = load_json(bi_path)
 some = next(iter(bi["by_content"]["blackzone_roam"].values()))[0]
 # patch may be explicitly null — H10 pins that unknown fields are STORED,
 # never omitted (imported comps whose source states no patch, e.g. the
-# 2026-08-21 albioncompo ingests, record patch: null honestly).
+# albioncompo ingests, record patch: null honestly).
 check("H20 build variants carry source, patch and approval provenance",
       some.get("source", {}).get("kind") and "patch" in some
       and some.get("approval"))

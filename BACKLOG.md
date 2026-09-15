@@ -2,67 +2,71 @@
 
 The one list of open work. Every other document points here instead of
 keeping its own. Grouped by what each item is waiting on, because that is the
-question that gets asked: what can be ruled on now, what needs more evidence,
+question that gets asked: what can be decided now, what needs more evidence,
 what is just work. One line per item, with where the evidence or the record
 sits (`V:` = the `tests/VALIDATION.md` index / `notes/validation/`; `Q<n>` =
-`MECHANICS_TODO.md`). Shipped items are deleted, not struck through — git has
-them. Closed rulings are index rows in `tests/VALIDATION.md`, never here.
+the mechanics question ledger in `pipeline/README.md` "Mechanics"). Shipped
+items are deleted, not struck through — git has them. Closed decisions are
+index rows in `tests/VALIDATION.md`, never here.
 
-## Needs an owner ruling
+## Needs a maintainer decision
 
 Each is decidable today from evidence already in the repo.
 
-- **The baseline finding** (2026-09-15, `tier2_blindtest.py --baseline`,
-  report-only): ranking candidates by role need then the prior's solo share
-  names the exact missing weapon 29% of the time on the published comps
-  where the engine names it 13% (rebuild-5 on the harvest: 30% vs 14%), and
-  loses at role level (57% vs 74%; 81% vs 84-86%). Popularity carries the
-  exact-weapon signal the capability model's tiebreak-sized prior does not;
-  the capability model carries the structure. A hypothesis, never tuned on
-  (rule 16): raise `delta`, blend the ranker, or accept that the engine
-  optimises comps rather than the published pick. (V: 09b, Skeleton-first)
+- **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
+  ranking candidates by role need then the prior's solo share names the
+  exact missing weapon 29% of the time on the published comps where the
+  engine names it 13% (rebuild-5 on the harvest: 30% vs 14%), and loses at
+  role level (57% vs 74%; 81% vs 84-86%). Popularity carries the exact-weapon
+  signal the capability model's tiebreak-sized prior does not; the
+  capability model carries the structure. A hypothesis, never tuned on
+  (standing rule 16): raise `delta`, blend the ranker, or accept that the
+  engine optimises comps rather than the published pick. (V: 09b,
+  Skeleton-first)
 - **Kite weights**: with the seat skeleton and the standoff minimum the
   forged kite 20 reads clap_kite to the engine's own identity (it read as a
   strong clap before); a PURE kite read needs the kite style's multipliers
-  — owner-unadjudicated since 2026-08-13 — to prefer sustained ranged
-  pressure over bombs. Blind-label a forged kite in the next round.
+  — never validated — to prefer sustained ranged pressure over bombs. Label
+  a forged kite in the next validation round.
 - **Fill order as the beam's sequence** (healer -> frontline -> support ->
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering
-  changes many pinned first picks — an owner call, not started.
+  changes many pinned first picks — a maintainer decision, not started.
 
 - **Gap-closers and ranged_presence: should `caster_moves` deny by default?**
   `derive_ranged_presence` grants from structure (ground/enemy target,
   cast_range >= 9) and denies leaps only by hand in `ranged_overrides.yaml`;
-  the parser has carried `caster_moves` since 2026-09-08 and this path never
-  reads it. The 2026-09-15 round ruled the three obvious cases (Fists of
-  Avalon stays, Trinity Spear melee, Skystrider ranged) as cited overrides,
-  which leaves two unruled grants a default would flip: Rift Glaive's
-  Razor's Edge (caster moves, 17 line) and Spiked Gauntlets' Gravitational
-  Collapse (no leap - a 13 cone "in front of you"; is a brawler's long cone
-  ranged pressure?). Rule those two and the derivation can read the fact.
-  (V: 09b, Duplicates never outrank a distinct bomb)
+  the parser carries `caster_moves` and this path never reads it. The three
+  obvious cases (Fists of Avalon stays, Trinity Spear melee, Skystrider
+  ranged) are cited overrides, which leaves two undecided grants a default
+  would flip: Rift Glaive's Razor's Edge (caster moves, 17 line) and Spiked
+  Gauntlets' Gravitational Collapse (no leap - a 13 cone "in front of you";
+  is a brawler's long cone ranged pressure?). Decide those two and the
+  derivation can read the fact. (V: 09b, Duplicates never outrank a
+  distinct bomb)
 - **Is one unit of shred "pierce on the clump" in a 7-man?** The kill
-  lights bar on the bare minimum since 2026-09-10 ("enough to kill" is a
-  minimum question), and castle_outpost's refreshed three-comp fit says the
+  lights bar on the bare minimum ("enough to kill" is a minimum question,
+  standing rule 17), and castle_outpost's refreshed three-comp fit says the
   least winning 7-man brought exactly one unit of resist_shred — so the
-  owner's burst trio (Longbow / Witchwork / Permafrost, one unit) now reads
-  pierce GREEN where the 2026-08-23 pin said red. Thin evidence, not a
-  semantic call: rule it (a fourth castle-outpost comp would settle it), or
-  raise the content `min` for resist_shred by hand. (V: 09b, Target is the
-  median; T25b)
+  burst trio (Longbow / Witchwork / Permafrost, one unit) now reads pierce
+  GREEN where the earlier pin (T25b) said red. Thin evidence, not a
+  semantic call: decide it (a fourth castle-outpost comp would settle it),
+  or raise the content `min` for resist_shred by hand. (V: 09b, Target is
+  the median; T25b)
 - **Repo size: `pipeline/out/party_rosters.json.gz` is 52 MB and committed**,
-  growing with every fold (it was 83 KB on 2026-08-29, 4.4 MB the same day
-  once builds joined). The split proposed then: commit the aggregates,
-  gitignore the raw `builds` array beside the other caches. Not done because
-  the raw builds are the evidence. Decide. (V: 08, Observed BUILDS)
+  growing with every fold (it was 83 KB before builds joined the artifact
+  and 4.4 MB the same day they did). The split proposed then: commit the
+  aggregates, gitignore the raw `builds` array beside the other caches. Not
+  done because the raw builds are the evidence. Decide. (V: 08, Observed
+  BUILDS)
 - **The Armory import path** (`data/armory_imports/`, `pipeline/parse_armory.py`,
-  `out/armory_activities.json`, the H-test fixture): built 2026-08-19, never
-  fed — the Armory has no export and the harvest now supplies the same class
-  of evidence at scale. Keep the door or remove it.
+  `out/armory_activities.json`, the H-test fixture): built, never fed — the
+  Armory has no export and the harvest now supplies the same class of
+  evidence at scale. Keep the door or remove it.
 - **EU server in the harvest**: would double the 25+ corpus but mixes a second
-  server's meta into rows meant to describe the owner's fights. Review was
-  set for 2026-09-23. (V: 09b, Coverage, not speed)
+  server's meta into rows meant to describe the maintainer's own fights.
+  Review deferred to the date the log entry records. (V: 09b, Coverage, not
+  speed)
 - **territory_defense at 25** forges one to two members short (brawl / clap /
   kite): the profile scales stopper_tank to a minimum of 3 inside a frontline
   cap of 5, and the deadlock guard checks capacity exists, not that it is
@@ -71,8 +75,8 @@ Each is decidable today from evidence already in the repo.
 - **`balanced` and the one-per-five healer minimum**: it keeps the base band
   and forges 3 healers at castle 25; the guild sheet says 4 at 20+ with no
   style attached. (V: 09b, Healers per five)
-- **Role counts past the minimum at 21+**: the typical role count
-  (2026-09-11) holds the forge to the evidence through size 20 (healer /
+- **Role counts past the minimum at 21+**: the typical role count (standing
+  rule 18) holds the forge to the evidence through size 20 (healer /
   frontline / support, per style at 10+); the harvest has no 21+ rows, so
   castle 25 still forges 6 healers on clap — the scorer's preference, to be
   graded, not assumed right. A 21+ harvest band closes it. (V: 09b, Tanks
@@ -86,26 +90,26 @@ Each is decidable today from evidence already in the repo.
   or a sub-10 killboard filter that separates content comps from open-world
   squads, would let the harvest carry them. (V: 09b, Tanks and supports)
 - **Melee instant-payload bombs in clap dps** (Spiked Gauntlets, Realmbreaker)
-  generate under the standing conditional-payload ruling; the "bomb builds
+  generate under the standing conditional-payload rule; the "bomb builds
   in clap" complaint has no derived rule left without a new one. (V: 09a,
-  Owner bug round)
+  bug round)
 - **A descriptive `gank` read at <= 14**: catch-and-execute damage core with
-  no bomb share, in the owner's words ("claws, dagger pair, whispering bow —
-  catching and dismounting"); would label the board, stay OUT of the style
-  rows, never be a forge style. Until ruled those rosters vote into brawl /
-  clap at 10-14. (V: 09b, Blind round 4)
+  no bomb share (claws, dagger pair, whispering bow — catching and
+  dismounting); would label the board, stay OUT of the style rows, never be
+  a forge style. Until decided those rosters vote into brawl / clap at
+  10-14. (V: 09b, validation round 4)
 - **Is the Infernal Staff's E a standoff tool** (it alone made a kite of
   round-4 roster 5), and should one tool out-vote five ranged dealers at bomb
-  share 0.36. (V: 09b, Blind round 4)
+  share 0.36. (V: 09b, validation round 4)
 - **A frontline's damage points making a ranged carrier** (Witchwork, round-4
   roster 11) — same shape as the rejected utility-carrier rule. (V: 09b)
 - **Carrier FLOORS**: which of the six gear effects are needs. The harvest has
   Royal Armor on 3.65% of builds at 20-59 (~0.7 per 20) against the guild's
   "2 Royals per 10". Increment 3b's second half; then mechanism pairing rules
   for effect carriers. (V: 09b, Other numbers; roles-design.md)
-- **Kill-vs-death contrast** in kit doctrine: needs a win-lift ruling before
-  it orders anything (effectiveness claims are reserved for win-lift). (V:
-  09b, Coherent builds)
+- **Kill-vs-death contrast** in kit doctrine: needs a win-lift decision before
+  it orders anything (effectiveness claims are reserved for win-lift,
+  standing rule 7). (V: 09b, Coherent builds)
 - **Item-power gating**: the harvest's `item_power` is the API's average; the
   per-slot tier lives only in the raw cache. Five questions: which slot
   decides "geared", tier line or relative, per size band, quality, doctrine
@@ -119,12 +123,12 @@ Each is decidable today from evidence already in the repo.
   ("no build fields it at 10+") is weaker since "AvA Raid" (10 players)
   fields one; the record is candidate, the exclusion stands. (V: 08, Corpus
   ingestion)
-- **Chillhowl / Stillgaze / Iron-clad menus**: off every seat pending a word
-  (Stillgaze got stopper_tank 2026-09-02; the other two stay out).
+- **Chillhowl / Stillgaze / Iron-clad menus**: off every seat pending a
+  decision (Stillgaze has stopper_tank; the other two stay out).
 - **Hellfire Hands in kite generation**: its E is unconditional so the derived
   rule passes it; the clap exclusion is a clap-scoped override. (V: 08, KITE
   EXTENSION)
-- **`brawl_clap` target_mults**: unruled, n=3 declared; every clap row beyond
+- **`brawl_clap` target_mults**: undecided, n=3 declared; every clap row beyond
   burst_aoe likewise (peel / disengage flipped sign between samples). (V:
   08, Per-style targets round 2)
 - **Whether 10-14 should field the Exalted Staff** (7% of winners do; one
@@ -132,20 +136,20 @@ Each is decidable today from evidence already in the repo.
   (V: 09b, Cost gate retired)
 - **Per-spell `burst_aoe` escalation gating** (Q10 refuted the uniform AoE
   class; factors are extracted on `cap_delivery.escalation`, not wired).
-  Stated precondition was "after a styled expert pass" — rounds 1-4 have run.
-  Also PROVISIONAL: `radius_targets`, `reference_clump: 2`, travel-distance
-  footprints uncounted. (Q9 / Q10)
+  Its stated precondition — a styled validation pass — is met: rounds 1-4
+  have run. Also PROVISIONAL: `radius_targets`, `reference_clump: 2`,
+  travel-distance footprints uncounted. (Q9 / Q10)
 - **The enemy model** (Q2 / Q2b / Q5): attackers-per-target and
-  expected-targets-hit are style properties, owner-delegated with the Q14
-  ordering rule; no public numeric source exists. Open inside it: the
+  expected-targets-hit are style properties, delegated to curation under the
+  Q14 ordering rule; no public numeric source exists. Open inside it: the
   unit-scale of one dedicated attacker, expected targets per content size
-  for the escalation curve (caps at 8).
+  for the escalation curve (caps at 8). (Q14)
 - **Asymmetric numbers at 21+** (Q11 / Q13): Disarray is a no-op in a mirror
   fight; CC Escalation vs Disarray vs forced-dismount immunity removed at 21+
   need netting together. Parked until templates gain an enemy-size field;
-  the app currently models no enemy by ruling.
-- **A dive / assassination style**: "sure but only if we have more than 20
-  people" — a 20+-size style if ever. Not started.
+  the app models no enemy (standing rule 11).
+- **A dive / assassination style**: only as a 20+-size style, if ever
+  (curation judgment). Not started.
 
 ## Needs evidence a round would produce
 
@@ -153,13 +157,14 @@ Each is decidable today from evidence already in the repo.
   (seed 20260827) and `tests/tier2_form_r2_blackzone20.md` (seed 20260828),
   richer fields, engine output hidden. Score with
   `tests/tier2_blindtest.py score --mode both`. These create the first
-  uncontaminated validation / holdout cases. (V: 08, FIVE RULINGS, ruling 4)
-- **Harvest V4 findings** (`tier2_blindtest.py v4h`, 2026-09-10, weak-form):
+  uncontaminated validation / holdout cases. (V: 08, the dressed-forge
+  decisions, item 4)
+- **Harvest V4 findings** (`tier2_blindtest.py v4h`, weak-form):
   leave-one-out role-level 64-65% over 150 holdout killer parties against the
   published-comp gate's 74% on 23 slots; kite parties 38% (n=10); rebuild-5
-  role recall 82-87%. Hypotheses for the owner, nothing retuned. (V: 09b,
-  Harvest V4)
-- **The 20+ identity band**: no blind round yet; kite|20 still borrows
+  role recall 82-87%. Hypotheses only (standing rule 1), nothing retuned.
+  (V: 09b, Harvest V4)
+- **The 20+ identity band**: no validation round yet; kite|20 still borrows
   kite|15-19 (31 distinct rosters) and brawl_clap borrows brawl in every band.
   A round once the harvest can stand it. (V: 09b)
 - **Blap's escape**: winning brawls at 20 carry more disengage / knockback in
@@ -167,36 +172,36 @@ Each is decidable today from evidence already in the repo.
   round should ask whether the escape is real. (V: 09a, The movement four)
 - **Calibration sharpening**: targets stay conservative (median coverage
   ~1.8x); tier2 has saturated as a discriminator for per-style targets at
-  this corpus size, so sharpening needs held-out labelled comps or expert
-  rounds under the train / validation / holdout rule, not another sweep.
-  Watch: castle-25's saturated tail. (V: 08, Re-derivation; THE UNIT RE-FIT)
+  this corpus size, so sharpening needs held-out labelled comps or
+  validation rounds under the train / validation / holdout rule, not another
+  sweep. Watch: castle-25's saturated tail. (V: 08, Re-derivation; THE UNIT
+  RE-FIT)
 - **More caller sheets** in `data/published_comps/` remain the highest-value
   growth per observation: they are the only source of whole comps with roles,
   which calibration and the V4 gate need.
 
 ## Engineering work, unblocked
 
-- **Regenerate the evidence board on the harvest checkout** so `balanced`
+- **Regenerate the evidence board on the harvest machine** so `balanced`
   gets its pooled median rows: `py -3 pipeline/audit_style_rosters.py`
-  (needs the raw party cache, D: checkout only) -> `derive_style_bands.py`
-  -> `build_dataset.py` -> the gates. Target-is-the-median (2026-09-10)
-  shipped the pooled `balanced|<band>` cell in the audit and the engine
-  reads it like any style, but the committed board predates it, so
-  balanced at 10+ still reads the content row (labelled `content` /
-  `min` on the board) until the audit reruns there. (V: 09b, Target is
-  the median)
+  (needs the raw party cache, harvest machine only) -> `derive_style_bands.py`
+  -> `build_dataset.py` -> the gates. Target-is-the-median shipped the pooled
+  `balanced|<band>` cell in the audit and the engine reads it like any
+  style, but the committed board predates it, so balanced at 10+ still reads
+  the content row (labelled `content` / `min` on the board) until the audit
+  reruns there. (V: 09b, Target is the median)
 - **Gear-active doctrine — pick the ability people equip, not the one that
   scores best.** `default_gear_choice()` takes the sheet option worth most
   under the template's weights; where a strong-on-paper ability is never
-  taken (Cleric Cowl's Force Field: owner 2026-09-10, MetaBattle 4/4 Ice
-  Block) that credits phantom supply. Mine an observed active per item (and
-  per size band where the evidence splits) from every source that records
-  gear abilities — MetaBattle `gear_spells_raw`, caller sheets, the
-  companion's spell array if it carries armor actives (verify) — the engine
-  prefers the evidenced active, keeps the argmax as a labelled `assumed`
-  fallback, and the UI exposes the pick like Q/W/E. Do this BEFORE the gear
-  pools below, which would otherwise spread the Force Field over-credit to
-  all ten cloth heads. (V: 09b, Cleric Cowl)
+  taken (Cleric Cowl's Force Field: MetaBattle 4/4 Ice Block) that credits
+  phantom supply. Mine an observed active per item (and per size band where
+  the evidence splits) from every source that records gear abilities —
+  MetaBattle `gear_spells_raw`, caller sheets, the companion's spell array if
+  it carries armor actives (verify) — the engine prefers the evidenced
+  active, keeps the argmax as a labelled `assumed` fallback, and the UI
+  exposes the pick like Q/W/E. Do this BEFORE the gear pools below, which
+  would otherwise spread the Force Field over-credit to all ten cloth heads.
+  (V: 09b, Cleric Cowl)
 - **Gear pools — the tree-shared actives are uncurated.** Every cloth head
   carries Energy Barrier + Force Field as its first two actives and only the
   third is unique, yet only Cleric Cowl's sheet cites Force Field; a Fiend
@@ -204,15 +209,15 @@ Each is decidable today from evidence already in the repo.
   and slot. Give gear the weapon sheets' pool structure (`sheets/gear/pools/`
   per tree x slot, each item's sheet keeping its unique active), so the
   engine's one-active-per-piece pick chooses among what the item can really
-  equip. Recorded as pending 2026-08-25 ("the tree-shared first two abilities
-  await curation"); do it BEFORE any gear magnitude review. (V: 08, Fourth
-  pass)
-- **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py` ->
-  `review/magnitude.html`): the PASV queue (39 rows where a passive / stat
-  sentinel grounds a score >= 2 — each needs a justification or a downgrade)
-  and the TOP review (44 score-3 rows, the top of every ladder, against the
-  dumps numbers). After each capability: sheet corrections, a golden case
-  where a ruling changes, rebuild, gates.
+  equip. Recorded as pending (the tree-shared first two abilities await
+  curation); do it BEFORE any gear magnitude review. (V: 08, Fourth pass)
+- **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py`,
+  a board generated locally into the gitignored `review/`): the PASV queue
+  (39 rows where a passive / stat sentinel grounds a score >= 2 — each needs
+  a justification or a downgrade) and the TOP review (44 score-3 rows, the
+  top of every ladder, against the dumps numbers). After each capability:
+  sheet corrections, a golden case where a score decision changes, rebuild,
+  gates.
 - **Food curation**: the fish meals (`T8_MEAL_STEW_FISH`, `T7_MEAL_OMELETTE_FISH`)
   have no sheet at any tier and the pipeline carries no meal nutrition; needs
   the real bonuses (wiki via Playwright, or a dumps re-parse) — ~10 pieces.
@@ -225,7 +230,7 @@ Each is decidable today from evidence already in the repo.
   name -> per-player recent MainHand distribution by fight-size bucket ->
   auto-fill slots with confidence and click-to-override; enables constrained
   forging over player weapon pools. Decide the CORS route: Worker proxy vs a
-  local helper JSON (the gameinfo API sends no CORS header). Owner-deprioritized
+  local helper JSON (the gameinfo API sends no CORS header). Deprioritized
   with the product items below until comp quality satisfies.
 - **Close the loop, stage 3**: post-fight battle ingestion labels the fielded
   comp + outcome -> V6 content labels, V8 win-lift.
@@ -247,24 +252,23 @@ Each is decidable today from evidence already in the repo.
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
 - **Honour the holdout split end to end — the style board is the last
-  piece**: `v4h` evaluates battles with `id % 5 == 0`. `derive_meta_prior.py`
-  (2026-09-11), `derive_role_counts.py` and `derive_skeletons.py`
-  (2026-09-15) learn from the training split and the build refuses an
-  all-battles artifact. `audit_style_rosters.py` has `--holdout-mod 5`
-  (default) since 2026-09-15 and records `_split`, `derive_style_bands.py`
-  carries it into the yaml header, and the build prints whether the
-  committed board honours it — but the committed board PREDATES the flag
-  and can only be regenerated on the harvest checkout (the raw cache is
-  not on this machine). Rerun the audit there after the next fold; then
-  every styled `v4h` number is a true holdout measurement and the gate
-  question is the owner's.
+  piece**: `v4h` evaluates battles with `id % 5 == 0`. `derive_meta_prior.py`,
+  `derive_role_counts.py` and `derive_skeletons.py` learn from the training
+  split and the build refuses an all-battles artifact.
+  `audit_style_rosters.py` has `--holdout-mod 5` (default) and records
+  `_split`, `derive_style_bands.py` carries it into the yaml header, and the
+  build prints whether the committed board honours it — but the committed
+  board PREDATES the flag and can only be regenerated on the harvest machine
+  (the raw cache is not on this machine). Rerun the audit there after the
+  next fold; then every styled `v4h` number is a true holdout measurement
+  and whether it becomes a gate is a maintainer decision.
 - **The outcome layer**: `sample_parties.py` records per-player kills and
   deaths in the raw cache (`rec["roster"]`), and the party artifact drops
   them, so no derivation can read an outcome. Derive a per-party K/D and a
-  heuristic won-the-battle side on the harvest checkout (training split),
+  heuristic won-the-battle side on the harvest machine (training split),
   then win-lift per weapon, pair and copy count — report-only first, into
-  the prior only after a `v4h` A/B (rule 16). The design doc's own plan
-  (§8.6): a prior-adjuster, never the primary term. (2026-09-15 assessment)
+  the prior only after a `v4h` A/B (standing rule 16). The design doc's own
+  plan (§8.6): a prior-adjuster, never the primary term.
 - **brawl_clap under the floor everywhere** (28 / 36 / 15 rosters): its seat
   and plan rows fall back to the pooled cell, its copy rows to pooled; the
   forged brawl_clap 20 reads as a split identity. Nothing to derive until
@@ -272,7 +276,7 @@ Each is decidable today from evidence already in the repo.
 - **An independent style labeller**: the harvest rosters are labelled by
   the engine's own `comp_identity`, the style x size rows and the seat
   skeleton are fitted to those labels, and the forge is judged against
-  them. ~50 owner-labelled rosters cannot beat a classifier tuned on them;
+  them. ~50 hand-labelled rosters cannot beat a classifier tuned on them;
   a labelled HOLDOUT round first, then a gear-plus-delivery labeller scored
   on it.
 - **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
@@ -283,32 +287,36 @@ Each is decidable today from evidence already in the repo.
   Re-derive both artifacts from `party_rosters.json.gz`, retire the two older
   samplers and their caches, and the overnight task feeds everything.
 - **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
-  open with "KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md)" about the
-  unit defect resolved 2026-08-29. Fix on the next engine touch (the JS
+  open with a "KNOWN OPEN DEFECT" note about the unit defect, which the unit
+  re-fit resolved (standing rule 9). Fix on the next engine touch (the JS
   change requires a dashboard rebuild).
+- **Cross-check the Resilience Penetration table**
+  (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
+  wiki values) against the dumps. Optional. (Q7)
 
-## Product features (owner-deprioritized until comp quality satisfies)
+## Product features (deprioritized until comp quality satisfies)
 
 Saved player profiles; enemy-comp counter drafting; fight-plan generation;
 the blind-validation workflow as a tool; the companion loot module
-(COMPANION_SCOPE.md, proposal only). (Slot locks, per-slot replace and the
-next-best refresh shipped 2026-09-11 — V: 09b, Slot controls.)
-- **Seat-vs-label ruling list** (`notes/findings/2026-09-11-labels-vs-seats.md`):
+(COMPANION_SCOPE.md, proposal only).
+
+- **Seat-vs-label open list** (`notes/findings/2026-09-11-labels-vs-seats.md`):
   14 of 40 seated frontline / support weapons carry none of their seat's
   signature capability at >= 4 (ten engage tanks without a clump tool —
   Grovekeeper, Polehammer, Hammer, Great Hammer, Tombhammer, Morning Star,
   Soulscythe, Dreadstorm, Earthrune, Mace; Primal / Stillgaze stoppers under
   4 everywhere; Exalted on the shield seat; Black Monk as an off-tank). Each
-  is an owner call: a move changes the kit doctrine and the 15+ minima.
-  Great Arcane may want a 'stopper support' seat that does not exist.
-  (Exalted ruled the same day: healer, support lane secondary.)
+  is a maintainer decision: a move changes the kit doctrine and the 15+
+  minima. Great Arcane may want a 'stopper support' seat that does not
+  exist. (Exalted is decided: healer, support lane secondary.)
 - **Refresh alternatives walk one swap at a time**: next-best is exact, so
   successive refreshes under the same locks usually differ by a single
-  member. If the owner wants "more different" alternatives, a diversity
-  rule (avoid rosters sharing all but k members) is the knob — an owner
-  call, not a derivation. (V: 09b, Slot controls)
-Slot locks / constrained reforge; saved player profiles; enemy-comp counter
-drafting; fight-plan generation; the blind-validation workflow as a tool;
-the companion loot module (COMPANION_SCOPE.md, proposal only).
-
-- **Back up the raw battle cache off this machine** (2026-09-11): `pipeline/out/party_cache/` is 157 MB of kill events, gitignored, the only copy of the harvest's evidence. A storage bucket (the owner mentioned Supabase) as a nightly upload target after each harvest — a BACKUP, never a build input, so CI and provenance stay as they are; a fresh machine pulls it down and re-derives. Not the committed artifact: that is 5 MB gzipped now.
+  member. If more diverse alternatives are wanted, a diversity rule (avoid
+  rosters sharing all but k members) is the knob — a maintainer decision,
+  not a derivation. (V: 09b, Slot controls)
+- **Back up the raw battle cache off this machine**: `pipeline/out/party_cache/`
+  is 157 MB of kill events, gitignored, the only copy of the harvest's
+  evidence. A storage bucket (Supabase is a candidate) as a nightly upload
+  target after each harvest — a BACKUP, never a build input, so CI and
+  provenance stay as they are; a fresh machine pulls it down and re-derives.
+  Not the committed artifact (5 MB gzipped when this was written, 52 MB now).

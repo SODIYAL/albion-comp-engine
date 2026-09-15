@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Seat skeletons and copy allowances (owner ruling 2026-09-15, "full
-autonomy" on the skeleton-first assessment; spec
+"""Seat skeletons and copy allowances (standing rule 18, skeleton-first
+generation; spec
 notes/specs/2026-09-15-skeleton-first-generation-design.md).
 
   S1  derive_skeletons.derive on a synthetic harvest: the training split
@@ -200,7 +200,7 @@ def t_resolution(doc):
     perma = "2H_ICECRYSTAL_UNDEAD"
     perma_row = kite.get(perma) or pooled.get(perma) or {"free": 1, "max": 1}
     check("S3f a weapon in no row keeps the defaults (free 1, max 1 at 20); "
-          "Permafrost's free second copy stays gone (owner 2026-09-15, now the "
+          "Permafrost's free second copy stays gone (now the "
           "harvest's p50 of one copy); Hallowfall keeps its harvest allowance",
           unrowed and all(ek._dup_free(w) == 1 and ek._dup_gen_max(w) == 1
                           for w in unrowed[:10])

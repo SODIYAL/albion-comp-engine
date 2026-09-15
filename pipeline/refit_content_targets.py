@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Re-fit content template TARGETS to the median of their fitted comps.
 
-Owner ruling 2026-09-10 ("the data should come from the harvest median"):
+Rule (the target is the median, read from the harvest):
 a target is what the TYPICAL good comp fields, not the least any comp got
 away with. The hand-fitted content rows were written under "0.9 x the
 least" from the dressed audit (audit_dressed_templates.py, person units);
@@ -10,7 +10,7 @@ as `target` and the LEAST as `min` (the board's red/orange line).
 
 The soft cap is only ever RAISED here, to 1.15 x the most any comp
 fielded (the harvest's own convention, 1.15 x p90), whenever that sits
-above the old cap: the dressed supply has grown since the 2026-08-29
+above the old cap: the dressed supply has grown since the previous
 fit (kit doctrine, gear actives) and several medians sat above their
 old caps (castle_outpost peel 20.5 vs 7.84) — a target above its cap is
 incoherent, and a real comp above the cap is evidence the cap was

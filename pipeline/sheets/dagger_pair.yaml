@@ -28,7 +28,7 @@
     - {cap: sustained_dps,  score: 4, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
     - {cap: catch,          score: 4, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
     - {cap: heal_reduction, score: 2, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
-    # execute 4 REMOVED (taxonomy ruling 2026-08-21): Slit Throat scales with
+    # execute 4 REMOVED (taxonomy rule): Slit Throat scales with
     # charges, not target health, and grants no killing-blow reward — the
     # burst_st 6 already carries the finisher damage. execute is reserved for
     # low-HP payoffs (Bloodletter, Infernal Scythe) and kill rewards

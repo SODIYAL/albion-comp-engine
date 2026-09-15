@@ -1,4 +1,5 @@
-# Production caller-comp record (changeschapter2.md §C/§D.3) — migrated from
+# Production caller-comp record (pipeline/README.md, "The evidence layer") —
+# migrated from
 # tests/meta_comps.yaml 2026-08-19. Slot rows are VERBATIM source data; never
 # invent an entry. Normalization to exact spell/gear UniqueNames is GENERATED
 # by pipeline/build_builds.py (out/builds_index.json), never hand-written here.

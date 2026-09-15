@@ -2,7 +2,7 @@
 # Usage: 12 sightings, top uncurated at batch-2 start.
 #
 # Replaces the illustrative §2.3 block (burst_aoe 3, zone_control 3, slow 2,
-# clump_create 2, root 1, mobility 1, tankiness 1). Differences, for expert review:
+# clump_create 2, root 1, mobility 1, tankiness 1). Differences, pending validation:
 #   - clump_create DROPPED: nothing in the kit pulls or stacks enemies — the E
 #     holds an existing clump still (stun); that is filed as stun/peel, not
 #     clump creation. If shotcallers treat "frozen in place for the bomb" as
@@ -15,9 +15,9 @@
 #   - stun/peel/catch ADDED: the E is a large-radius AoE stun the illustrative
 #     block never scored as CC.
 # Draft's `damage_debuff` (Frost Beam AA-speed debuff) held at 0: the cap was
-# promoted into §2.2 (2026-08-12) but small W-option carriers await expert weighting.
+# promoted into §2.2 (2026-08-12) but small W-option carriers await validation.
 # No engage scored: a ranged stun can start a fight, but initiation-by-dive is
-# not this kit's job — flag for expert if the templates disagree.
+# not this kit's job — revisit if the templates disagree.
 
 - weapon: 2H_ICECRYSTAL_UNDEAD       # Permafrost Prism — AoE stun-bomb mage
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json

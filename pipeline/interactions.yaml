@@ -1,4 +1,4 @@
-# PvP interaction records — curated, spell-keyed ("new prompt" spec §1-§4).
+# PvP interaction records — curated, spell-keyed (interaction-record spec §1-§4).
 #
 # Identity is the SPELL UniqueName, not the weapon: two different bows running
 # the same W share one named effect, and two different weapons with
@@ -25,7 +25,7 @@
 #                    verified   = the game's own data states it
 #                    likely     = baseline game behavior (e.g. independent
 #                                 damage instances), not individually stated
-#   source, as_of, verified_patch — chapter-2 provenance conventions
+#   source, as_of, verified_patch — the evidence-layer provenance conventions
 #
 # Every non-unknown claim cites its source. Missing facts stay unknown —
 # never guessed (§12).
@@ -50,8 +50,8 @@
   verified_patch: "2026-07-21"
   scoring_note: >
     self_cost_offset_min_copies 2 — the ONLY super-additive duplicate rule in
-    the model, and deliberately narrow (owner 2026-08-28: "duplicate is worth
-    more only in special cases like demon armor"). With one wearer the
+    the model, and deliberately narrow (a duplicate is worth more only in
+    special cases such as Demon Armor). With one wearer the
     self-penalty stands; with two or more the wearers cover each other, so
     the penalty is not charged. Corroborated by the observed effect quotas:
     reflect shells appear 3,3,4,3,3 across the five near-complete 20-man
@@ -213,8 +213,8 @@
     (stacks up to 4 times)" — the charges live ON THE TARGET and cap at 4
     regardless of who applied them (DEATHCURSE2's verified record reads
     the same pool: "damage based on the amount of Vile Curse Charges on
-    the target"). Owner ruling 2026-08-24, forge-quality round 4: "the q
-    spells … stack but don't do extra damage from more people."
+    the target"). Curation (forge-quality validation round 4): the Q
+    spells stack, but more casters add no extra damage.
   as_of: 2026-08-24
   verified_patch: "2026-07-21"
   nonstacking_caps: [sustained_dps]

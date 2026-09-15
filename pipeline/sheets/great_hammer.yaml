@@ -7,11 +7,11 @@
 # cooldown refunded per enemy player hit — engage, displacement and stun in
 # one spammable button.
 #
-# EXPERT CORRECTION 2026-08-13: clump_create 3 REMOVED. Dumps text says
+# CORRECTION: clump_create 3 REMOVED. Dumps text says
 # "knocking back all enemies you pass through" — a knockback along the dash
 # line DISPLACES enemies, it does not compress them to a point the way a
 # drag/pull does (Hand of Justice's Onslaught, Camlann's Vendetta, Black
-# Hole). Same ruling that stripped Grovekeeper and Permafrost: knock-ups/
+# Hole). Same rule that stripped Grovekeeper and Permafrost: knock-ups/
 # knockbacks/stuns HOLD or SCATTER, only drag/pull mechanics CREATE clumps.
 # The displacement stays scored as knockback_displace 2; the stun holds
 # clumps others make. This overrules the design doc's §2.3-era "Great
@@ -22,7 +22,7 @@
 # scores (slow/anti_dive/zone via Inertia Ring, purge/shred via Iron Breaker,
 # knock-up via Power Geyser, Life Leech) mirror it exactly.
 #
-# Differences vs the illustrative block, for expert review:
+# Differences vs the illustrative block, pending validation:
 #   - zone_control 2 -> 1: same W pool as Polehammer (scored 1); nothing in
 #     the kit denies ground beyond the Inertia Ring.
 #   - peel 1 -> 2: Tackle + Power Geyser + Knockout + the ring is more
@@ -40,7 +40,7 @@
     - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 6, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
-    # clump_create removed 2026-08-13 (expert): knockback != pull — see header
+    # clump_create removed: knockback != pull — see header
     - {cap: stun,          score: 4, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
     - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters) — minor; W: Geyser knock-up (magnitude pass 2026-08-13)
     - {cap: peel,          score: 4, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring

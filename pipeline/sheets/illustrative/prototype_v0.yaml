@@ -47,7 +47,7 @@
 
 # 2H_RAM_KEEPER (Grovekeeper) — CURATED 2026-08-12, see ../grovekeeper.yaml.
 # clump_create 2 removed (air-throw holds a clump, it does not create one —
-# the Permafrost/Kingmaker ruling); peel upgraded to 2; knockback_displace
+# the Permafrost/Kingmaker rule); peel upgraded to 2; knockback_displace
 # added (scaling CC-resist-ignoring air-throw, structured, verified).
 
 # 2H_DAGGERPAIR (Dagger Pair) — CURATED 2026-08-12, see ../dagger_pair.yaml.

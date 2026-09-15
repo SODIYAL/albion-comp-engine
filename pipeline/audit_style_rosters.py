@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-STYLE x SIZE ROSTER EVIDENCE (owner 2026-09-04: "Style-labelled rosters as
-the evidence for style x size templates ... this gives thousands").
+STYLE x SIZE ROSTER EVIDENCE: style-labelled harvested rosters are the
+evidence for the style x size templates — thousands of rosters where the
+content rows were fitted from six published comps.
 
 Report-only audit, never part of a build. Reads the killboard party cache
 (out/party_cache/, the official kill-event harvest) and, for every
@@ -26,7 +27,8 @@ Output per style x size band (10-14 / 15-19 / 20):
 For each capability the board shows the harvest's 10th / 50th / 90th
 percentile beside every content template's CURRENT target and soft cap at
 the band's reference size, plus what the standing convention would
-produce from the harvest (VALIDATION.md 2026-08-21: target = 0.9 x the
+produce from the harvest (the original fit convention, VALIDATION.md:
+target = 0.9 x the
 least a good comp fields, soft cap = 1.15 x the most - with thousands of
 rosters "least" and "most" are the 10th and 90th percentiles).
 
@@ -36,17 +38,17 @@ evidence is content-agnostic; rosters are winner-biased by construction
 comp recurs across nights, so counts are by DISTINCT roster (guild set +
 weapon multiset) as well as by sighting; spells are unknown, so supply
 uses each weapon's default combo; identity thresholds were calibrated on
-six comps and must be validated in a blind round before the numbers are
-ruled on (the board ships ten unlabelled rosters for that round).
+six comps and must be validated in a validation round before the numbers
+are adopted (the board ships ten unlabelled rosters for that round).
 
 Anti-circularity: none of these rosters calibrated a template, so they
-are admissible evidence - but every proposal here is for the OWNER'S
-ruling; nothing in the build reads this file.
+are admissible evidence - but every proposal here is a hypothesis for a
+maintainer decision; nothing in the build reads this file.
 
-HOLDOUT (2026-09-15, "honour the holdout split end to end"): the board and
+HOLDOUT (the split is honoured end to end): the board and
 the chest leans learn from battles with id % HOLDOUT_MOD != 0 only (the
 meta prior's rule; the % 5 == 0 slice is tier2_blindtest v4h's holdout);
-the blind form still samples from every roster so graded rounds stay
+the validation form still samples from every roster so graded rounds stay
 reproducible. The evidence json records `_split`, derive_style_bands.py
 carries it into the yaml header, and build_dataset says whether the
 committed board honours it.
@@ -79,15 +81,15 @@ SEATS = ("engage_tank", "stopper_tank", "off_tank", "shield_support",
          "dive_cleanup")
 PREDS = ("ranged_aoe_core", "primary_heal", "pierce", "anti_heal",
          "engage_tank", "stopper_tank", "shield_support")
-# blind round 1 (ten rosters) + round 2 (twenty, 2026-09-04): both graded by
-# the owner and pinned in test_golden T34 / T36; never re-sampled into a form
+# validation round 1 (ten rosters) + round 2 (twenty): both graded and
+# pinned in test_golden T34 / T36; never re-sampled into a form
 GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088,
                   1439323062, 1439423672, 1442916379, 1442381572, 1443149032, 1442340579, 1443089499, 1439330397,
                   1439163242, 1442365275, 1442813939, 1443067935, 1443196794, 1442359908, 1442270050, 1442373560,
                   1439247869, 1439330979, 1439276629,
-                  # round 3 (2026-09-05, the 10-14 band, rosters 1-11 called)
+                  # round 3 (the 10-14 band, rosters 1-11 called; T39)
                   1439331464, 1442240282, 1442879983, 1442360406, 1443108045, 1442343192, 1442339162, 1443074329, 1439338826, 1439172287, 1442358198,
-                  # round 4 (2026-09-08, the 10-14 band, all twenty seen by the owner)
+                  # round 4 (the 10-14 band, all twenty graded; T43)
                   1439334286, 1442250301, 1442972989, 1442398268, 1443176864, 1442349353, 1442348698, 1443926164, 1443148724, 1439351476,
                   1439174574, 1443907529, 1442378155, 1443767342, 1442865547, 1443867507, 1443110811, 1443257154, 1442366915, 1442294064]
 
@@ -106,7 +108,7 @@ def pct(xs, q):
 
 
 def stats(xs):
-    # zero_share (2026-09-09): the share of rosters fielding NONE of the
+    # zero_share: the share of rosters fielding NONE of the
     # capability. When it approaches a tenth, p10 sits on the edge of the
     # zero mass and flips between ~0 and a real value as a few rosters
     # enter (brawl|20 silence read 7.5 / 1.0 / 4.6 across three folds);
@@ -164,7 +166,7 @@ def load_rosters(known, min_size, min_known):
                 "guilds": tuple(sorted({m.get("guild") for m in members
                                         if m.get("guild")})),
                 # `name` stays in memory for player-distinct counts (the
-                # kit blind rounds); nothing writes it out
+                # kit validation rounds); nothing writes it out
                 "members": [{"weapon": w, "kit": kits.get(n), "name": n}
                             for w, n in ws],
             })
@@ -231,7 +233,7 @@ def main():
     ap.add_argument("--seed", type=int, default=20260904)
     ap.add_argument("--blind-sizes", type=int, nargs=2, default=(15, 99),
                     metavar=("LO", "HI"),
-                    help="roster size range the blind form samples from "
+                    help="roster size range the validation form samples from "
                          "(rounds 1-2: 15+; round 3: 10 14)")
     ap.add_argument("--blind-round", type=int, default=3,
                     help="round number printed on the form")
@@ -247,26 +249,26 @@ def main():
     e_label = Engine(content=CONTENT_FOR_SUPPLY, size=20)
     known = set(e_label.weapons)
     all_rosters = load_rosters(known, args.min_size, args.min_known)
-    # HOLDOUT (2026-09-15, "honour the holdout split end to end"): every
-    # number the build reads — the style x size board and the chest leans
-    # — comes from the training split; the blind form below still samples
-    # from every roster so graded rounds stay reproducible.
+    # HOLDOUT (honoured end to end): every number the build reads — the
+    # style x size board and the chest leans — comes from the training
+    # split; the validation form below still samples from every roster so
+    # graded rounds stay reproducible.
     rosters = [r for r in all_rosters if in_split(r["battle"], args.holdout_mod)]
     print(f"rosters >= {args.min_size} with >= {args.min_known:.0%} weapons "
           f"known: {len(all_rosters)}; on the training split "
           f"(battle % {args.holdout_mod or 'none'} != 0): {len(rosters)}")
 
-    # ---- 0. PER-ITEM CHEST LEAN (2026-09-05, the kit rounds: "Royal
-    # Jacket is ranged without exception, Hellion is brawl or clap" — two
-    # leather chests, opposite signals, so the chest ITEM separates styles
-    # where the class cannot). Mined WITHOUT the kit rules in the loop:
+    # ---- 0. PER-ITEM CHEST LEAN (the kit validation rounds: Royal Jacket
+    # is ranged without exception, Hellion is brawl or clap — two leather
+    # chests, opposite signals, so the chest ITEM separates styles where
+    # the class cannot). Mined WITHOUT the kit rules in the loop:
     # rosters are read weapons-only (gears=None) and only CLEAN cores
     # count — a melee core (melee share >= IDENTITY_MELEE_CORE) votes
     # "brawl", a ranged core (<= IDENTITY_RANGED_CORE) votes "ranged";
     # the mid band and every kit-decided read stay out. A dps chest with
     # >= LEAN_MIN_WEARERS distinct wearers and >= LEAN_SHARE of them on
     # one side carries that lean; everything else falls back to the
-    # class rule the owner ruled (leather -> brawl, cloth -> ranged).
+    # class rule (leather -> brawl, cloth -> ranged; curation judgment).
     # Written to out/chest_lean.json for build_dataset, and applied to
     # the labelling engine here so one audit pass labels with it.
     gk = e_label.gear_key
@@ -304,8 +306,8 @@ def main():
     print("labels:", dict(sorted(label_counts.items())))
 
     # ---- 2+3. per (size, style): dressed supply + structure
-    # EVERY roster is measured (2026-09-11): the pooled `balanced` cell
-    # (owner 2026-09-10) reads labelled and unlabelled rosters alike, and a
+    # EVERY roster is measured: the pooled `balanced` cell (target is the
+    # median, V7) reads labelled and unlabelled rosters alike, and a
     # roster's dressed supply does not depend on a style label - an
     # unlabelled roster is dressed under `balanced`. The style cells still
     # take labelled rosters only (the filter below matches on r["style"]).
@@ -364,7 +366,7 @@ def main():
 
     # ---- aggregate per style x band, by sighting and by distinct roster
     styles = sorted({r["style"] for r in rosters if r["style"]})
-    # POOLED cell (owner 2026-09-10, target is the median): `balanced` is
+    # POOLED cell (target is the median, V7 / T37): `balanced` is
     # "every winner at this size, whatever it was playing" — labelled and
     # unlabelled rosters alike. Same dedupe, same stats, same MIN_DISTINCT
     # downstream; derive_style_bands emits it like any style, and the
@@ -422,10 +424,11 @@ def main():
                 for c in caps}
             board[f"{style}|{band_key}"] = entry
 
-    # ---- blind-round form: unlabelled rosters, answers kept apart.
+    # ---- validation-round form: unlabelled rosters, answers kept apart.
     # Sampled from EVERY roster of 15+ in a deterministic order (never from
     # the labelled subset — round 1's form silently re-sampled when the
-    # rulings changed the labels, and the pin had to be restored from git).
+    # identity rules changed the labels, and the pin had to be restored
+    # from git).
     # Every graded battle is excluded; the size range is an argument
     # (rounds 1-2 drew from 15+, round 3 from the 10-14 band).
     rng = random.Random(args.seed)
@@ -472,13 +475,13 @@ def main():
           f"record) under `{CONTENT_FOR_SUPPLY}` physics at the roster's size and "
           "labelled style. Counts below are by DISTINCT roster (guild set + "
           "weapon multiset).", "",
-          "**Read before ruling:** kill events carry no zone (content-agnostic "
+          "**Read before deciding:** kill events carry no zone (content-agnostic "
           "evidence); rosters are winner-biased by construction; spells are "
           "unknown (default combos); identity thresholds were calibrated on six "
-          "comps — grade the blind round at the bottom before trusting the "
+          "comps — grade the validation round at the bottom before trusting the "
           "label split. Nothing in the build reads this. Proposals follow the "
           "standing convention (target 0.9 x p10, soft cap 1.15 x p90) and are "
-          "for the owner's ruling only (anti-circularity).", "",
+          "hypotheses for a maintainer decision only (anti-circularity).", "",
           "## Label distribution", "",
           "| label | rosters |", "|---|---|"]
     for k, v in sorted(label_counts.items()):
@@ -530,7 +533,7 @@ def main():
                       f"{en['proposal'][c]['target']} -> {en['proposal'][c]['soft']} | "
                       + " | ".join(cells) + " |")
         md.append("")
-    md += [f"## Blind round {args.blind_round} (owner: call the style BEFORE reading the engine's)", "",
+    md += [f"## Validation round {args.blind_round} (call the style BEFORE reading the engine's)", "",
            f"Twenty harvested rosters of {lo_b}-{hi_b} players (every graded battle excluded), weapons only. Answers are in "
            "`out/style_roster_evidence.json` under `blind_answers`; do not open "
            "them before calling.", ""]

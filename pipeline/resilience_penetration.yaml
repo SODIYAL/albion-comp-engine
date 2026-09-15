@@ -8,10 +8,10 @@
 # (revision oldid=84609, page last edited 2026-08-25; values are
 # post-Realm-Divided 30.000.1 — the general resil-pen reduction pass —
 # unchanged through 31.030.1). Retrieved 2026-08-25, transcribed verbatim,
-# nothing interpolated. Owner ruling wiring these (2026-08-25): "single
-# target is just a non pick at 20+ usually because enemy will have too
-# many defensives to protect that one person, you can wire it as partial
-# rebate."
+# nothing interpolated. Wired as a PARTIAL rebate on the Resilience
+# curve (curation judgment): single-target damage is a non-pick at 20+
+# because the enemy has too many defensives protecting one person, so
+# penetration only softens the tax.
 #
 # `name` matches the catalog display_name; build_dataset resolves to ids
 # and prints unmatched rows (a wiki weapon outside our combat catalog is

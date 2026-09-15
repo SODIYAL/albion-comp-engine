@@ -1,4 +1,4 @@
-"""MASTERSHEET.md — the expert's single control surface (2026-08-20).
+"""MASTERSHEET.md — the single control surface for curation overrides.
 
 The repo-root MASTERSHEET.md is a literate config: prose explains the
 system in plain language, and fenced yaml blocks tagged `tune:<section>`
@@ -16,7 +16,7 @@ lists replace):
     mechanics   -> templates/mechanics.yaml (aoe_geometry, ...)
     templates   -> {content: {cap: {target/weight/soft_cap/scales}}}
                    merged into each content template's requirements
-    sheets      -> {WEAPON: {cap: score}} — expert score overrides applied
+    sheets      -> {WEAPON: {cap: score}} — curated score overrides applied
                    to the composed rows BEFORE loadout bundling, so they
                    flow into caps, bundles and the JS engine identically
     guild_builds-> free-form data, shipped verbatim into the dataset for
@@ -74,7 +74,7 @@ def load(path=PATH):
 
 
 def _jsonify(node):
-    """yaml parses bare dates (2026-08-20) into datetime objects, which
+    """yaml parses bare dates (YYYY-MM-DD) into datetime objects, which
     json.dump rejects — normalize them (and any other non-JSON scalar) to
     strings so a mastersheet edit can never crash the dataset write."""
     if isinstance(node, dict):

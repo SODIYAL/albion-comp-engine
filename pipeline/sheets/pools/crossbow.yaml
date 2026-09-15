@@ -3,8 +3,8 @@
 # restructure; every score unchanged). A row applies to every
 # crossbow weapon that can equip its evidence spell (WEAPON_STATS:
 # tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending expert
-# adjudication — or lists the pair under `except:`.
+# same (cap, evidence) — a score override pending
+# validation — or lists the pair under `except:`.
 subcategory: crossbow
 capabilities:
   - {cap: burst_aoe, score: 2, evidence: BOLTSHOT}                 # Q: 130 in 3m; W: Explosive Salvo (QW)

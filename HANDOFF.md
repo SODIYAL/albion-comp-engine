@@ -5,12 +5,13 @@ research tool, live at <https://sodiyal.github.io/albion-comp-engine/>.
 
 This file is the current state: what the product is, how the engine and the
 planner work today, the rules that shape generation, and what is open. It
-carries no history — every ruling's date, the owner's words and the pin are
-one line in `tests/VALIDATION.md`; the full log is `notes/validation/`.
-`MASTERSHEET.md` is the LIVE expert control surface (its `tune:` blocks
+carries no history — every decision's date, evidence and pin are one index
+row in `tests/VALIDATION.md`; the full log is `notes/validation/`.
+`MASTERSHEET.md` is the LIVE tuning control surface (its `tune:` blocks
 override everything at build time — read it first for what the engine
 actually uses). `CLAUDE.md` has the environment traps, the gate list and the
-invariants. `pipeline/README.md` has the pipeline and the patch workflow.
+invariants. `pipeline/README.md` has the pipeline, the patch workflow and the
+mechanics layer.
 
 ## What the product is
 
@@ -32,8 +33,8 @@ Three layers, never merged:
   (`dashboard/_decision_layer.js` is translation only). No second scoring
   system in the UI.
 - **Empirical evidence** — killboard prevalence, observed pairings, reference
-  comps, build sources, expert results. They never alter ranking unless a
-  calibration decision promotes them into scoring and is validated.
+  comps, build sources, validation-round results. They never alter ranking
+  unless a calibration decision promotes them into scoring and is validated.
   Popularity is not effectiveness. Semantics and caveats:
   `KILLBOARD_AFFINITY.md`.
 
@@ -47,16 +48,16 @@ Three layers, never merged:
   brawl_clap / clap_kite) carrying weight multipliers, `target_mults`,
   constraint overrides and a fight chain; GENERATED style x size rows beside
   the content rows (`templates/style_bands.yaml`, from harvested winners,
-  read at 10+; `balanced` reads a pooled cell once the harvest checkout
+  read at 10+; `balanced` reads a pooled cell once the harvest machine
   regenerates the board — BACKLOG).
-- **Target is the median (owner 2026-09-10).** Every row carries three
+- **Target is the median (standing rule 17).** Every row carries three
   measured lines: `min` = the least winners get away with (harvest p10 /
   least fitted comp), `target` = the TYPICAL winner (p50 / median of the
   fitted comps) — the point of full credit and the board's second number
-  — and `soft_cap` = 1.15 x p90. Until then the target was 0.9 x p10 and
-  the score gave full credit at the floor (one healer "covered" fifteen).
-  The curve did not change; the number it aims at did, on every row at
-  once. `target_min(cap)` / `target_source(cap)` (harvest / harvest_borrowed
+  — and `soft_cap` = 1.15 x p90. Before this rule the target was 0.9 x p10
+  and the score gave full credit at the floor (one healer "covered" fifteen).
+  The utility curve is unchanged; the number it aims at moved, on every row
+  at once. `target_min(cap)` / `target_source(cap)` (harvest / harvest_borrowed
   / content / content_min, from each template's `fit:` block) are display
   provenance, parity-carried, never scored. Kill-pressure lights bar on the
   minimum ("enough to kill"); fight-chain stages grade weak < min <= ok <
@@ -75,9 +76,10 @@ Three layers, never merged:
   the killer-party harvest per size bucket (`out/meta_prior.json`): per
   member 0.5 x the weapon's own share + 0.5 x its best observed partner on
   the roster (`meta_pairs`, one party one vote per pair, >=3 guild-sets,
-  log2-lift capped at 8x, shrunk; owner 2026-09-11), both tables on the
-  training split `battle % 5 != 0`; a hand-set map fails the build. Duplicates: 1 copy by default; the one super-additive
-  case is `self_cost_offset_min_copies` (Demon Armor).
+  log2-lift capped at 8x, shrunk; standing rule 7), both tables on the
+  training split `battle % 5 != 0`; a hand-set map fails the build.
+  Duplicates: 1 copy by default; the one super-additive case is
+  `self_cost_offset_min_copies` (Demon Armor).
 - Gear scores (curated `sheets/gear/`) through `build_extra`: stat
   channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic
   lookup (`gear_key()`).
@@ -85,17 +87,17 @@ Three layers, never merged:
   and functions (pierce / purge / anti_heal / shield_break) derived E-first;
   `detect_role` / `role_advisory` descriptive; `role_class` for forge bands
   derives from the primary seat.
-- **Tile labels** (owner 2026-09-11, `roles.yaml labels`, R37): every weapon
+- **Tile labels** (`roles.yaml labels`, R37): every weapon
   ships `label = {primary, tags}` — PRIMARY is the seat's plain word (Engage /
   Stopper / Bruiser / Support / Ranged AoE / Melee / Bomb / Dive; healers read
   their heal profile, Burst or Sustain), tags are the cited function roles on
   the primary menu then the weapon's own capabilities at >= 4, at most two,
   E-first, never what the primary implies; healers tag their line (holy /
-  nature). Owner overrides are cited and inside the vocabulary. Display only;
+  nature). Label overrides are cited and inside the vocabulary. Display only;
   the tile composes `PRIMARY · tag · tag` from the member's DETECTED seat word
-  and the weapon's tags. Seat moves the labels suggest are a ruling list
-  (`notes/findings/2026-09-11-labels-vs-seats.md`), never a change made by
-  the label layer.
+  and the weapon's tags. Seat moves the labels suggest are an open list
+  (`notes/findings/2026-09-11-labels-vs-seats.md`, BACKLOG), never a change
+  made by the label layer.
 - Kits: `kit_options` is doctrine-led, observed-build-led and fail-closed.
   Every doctrine reader goes through `_seat_kit` (group band at 10+, gang band
   at <= 9, a declared style's cell laid over the band). Slots rank by observed
@@ -142,10 +144,10 @@ Constraints are combo-aware: the selected spell combination must satisfy a
 minimum, not the sheet's theoretical maximum. Generation rules (each is an
 index row in `tests/VALIDATION.md`; manual picks always score):
 
-- **Slot controls** (owner 2026-09-11): every roster tile carries lock /
-  replace / refresh-rest / remove (hover on desktop, the popover's action
-  row on touch), drawn by the monoline inline-SVG helper `ui()` (24 grid,
-  1.75 stroke, round caps, currentColor — the owner's reference set). Slot provenance is `m` manual / `f` forged / `l` LOCKED —
+- **Slot controls**: every roster tile carries lock / replace / refresh-rest /
+  remove (hover on desktop, the popover's action row on touch), drawn by the
+  monoline inline-SVG helper `ui()` (24 grid, 1.75 stroke, round caps,
+  currentColor). Slot provenance is `m` manual / `f` forged / `l` LOCKED —
   the lock is the only thing a refresh holds, manual picks included; it
   rides the permalink (`f=` string) and survives a content switch.
   **Replace** lists the engine's `replace_options()` — a one-slot forge:
@@ -174,48 +176,47 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   weapons (E heal >= 6 AND group scale). One healer per five members is a
   MINIMUM on clap, brawl and both hybrids; kite keeps its minima; balanced
   keeps the base band.
-- **Typical role counts** (2026-09-11, `derive_role_counts.py`, standing
-  rule 18): the band carries `typical` for healer / frontline / support —
-  below 10 the content's fitted-comps median (harvest healer row where a
-  content has under 3 comps), at 10+ the declared style's harvest cell per
-  exact size (`balanced` and thin styles read the pooled row). The forge
-  generates a body beyond it only while a minimum only that role can meet
-  is unmet, and never spends a typical slot on a body that leaves such a
-  minimum short. dps is never gated. Sizes the harvest does not reach (21+)
-  carry none.
+- **Typical role counts** (`derive_role_counts.py`, standing rule 18): the
+  band carries `typical` for healer / frontline / support — below 10 the
+  content's fitted-comps median (harvest healer row where a content has
+  under 3 comps), at 10+ the declared style's harvest cell per exact size
+  (`balanced` and thin styles read the pooled row). The forge generates a
+  body beyond it only while a minimum only that role can meet is unmet, and
+  never spends a typical slot on a body that leaves such a minimum short.
+  dps is never gated. Sizes the harvest does not reach (21+) carry none.
 - **Role bands per style** (`styles.yaml constraint_overrides`), including the
   clap / clap_kite 7-strong ranged-AoE core at 20 and kite's 5 / 4.
-- **Seat skeleton** (owner 2026-09-15, "full autonomy" on the skeleton-first
-  assessment; spec `notes/specs/2026-09-15-skeleton-first-generation-design.md`):
+- **Seat skeleton** (standing rule 18 extended to seats; spec
+  `notes/specs/2026-09-15-skeleton-first-generation-design.md`):
   `derive_skeletons.py` -> `out/skeletons.json` (training split, distinct
   rosters) carries per exact size at 10+, pooled and per declared style, the
   TYPICAL count of every primary seat (`Engine.seat_of`, the first uniformed
-  menu role — the one role read). The forge closes a seat at its typical
-  (rule 18 extended): a body past it generates only for a minimum no
-  under-typical seat of its role could meet (a Great Holy may not take the
-  brawl-healer seat to cover primary_heal while main-healer seats stand
-  open; a flex bomb in the brawler seat may cover the ranged-AoE core the
-  ranged seat's pool cannot), or by SPILL once every seat of the role the
-  pool supplies stands at typical. Refinement and replace-options check the
-  roster a swap would leave (`_seat_mix_ok`), so a move never trades away
-  the seat that justified a spill. No cell for the size = no seat gate.
+  menu role — the one role read). The forge closes a seat at its typical: a
+  body past it generates only for a minimum no under-typical seat of its role
+  could meet (a Great Holy may not take the brawl-healer seat to cover
+  primary_heal while main-healer seats stand open; a flex bomb in the brawler
+  seat may cover the ranged-AoE core the ranged seat's pool cannot), or by
+  SPILL once every seat of the role the pool supplies stands at typical.
+  Refinement and replace-options check the roster a swap would leave
+  (`_seat_mix_ok`), so a move never trades away the seat that justified a
+  spill. No cell for the size = no seat gate.
 - **Plan minima**: the same artifact's `plan` table — the typical count of
   STANDOFF-tool carriers (`style_fit.standoff_e`, the fact the identity read
   defines a kiting plan by) per style x size — rides the band as a
   generation MINIMUM through the flag predicate `standoff` (beside
   `primary_heal`). Kite and clap_kite winners at 15+ field two or three in
   every roster; brawl and clap none, so they demand none. The forged kite 20
-  now reads as a kiting plan to the engine's own identity (clap_kite; it
-  read as a strong clap before).
+  reads as a kiting plan to the engine's own identity (clap_kite; it read as
+  a strong clap before the plan minimum).
 - **Duplicates**: 1 copy by default; penalty-free copies and the forge cap
   are GENERATED per style x band (`skeletons.json` copies: free =
   round(p50), max = ceil(p90) of the rosters fielding the weapon; the
   declared style's cell laid over the pooled cell) — Hallowfall keeps a free
   second copy (88% of 20-man winners double it), Bedrock too, Permafrost's
-  stays gone (the owner's ruling of the same morning, reproduced by the
-  evidence), Great Arcane / Rift Glaive / Wailing lose their single-comp
-  allowances. A hand `per_weapon` list fails the build. Derived job groups
-  `clump_core` and `curse_pressure` max 2 each.
+  stays gone (the evidence reproduces the earlier decision to remove it),
+  Great Arcane / Rift Glaive / Wailing lose their single-comp allowances. A
+  hand `per_weapon` list fails the build. Derived job groups `clump_core`
+  and `curse_pressure` max 2 each.
 - **Need profiles** (`roles.yaml need_profiles`): fine-seat bands + function
   coverage, armed at 15+, scaled by size / 20.
 - **Carrier quota**: discretionary effect-carrier chests capped per roster at
@@ -250,7 +251,7 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   comp-fitted CEILING (100% = soft cap, nothing above 100; a brass tick marks
   the typical winner; purple = over-ceiling stacking; pink = under a hard
   floor); `comp_identity` in the hub; all prose in hovers.
-- **Capability board = four stages** (owner 2026-09-10): red below the bare
+- **Capability board = four stages** (standing rule 17): red below the bare
   minimum winners get away with, orange from there to the typical winner,
   green from typical to the soft cap, purple past it. The legend reads
   `have / typical`; a `min` chip (from `targetSource`) marks a content row
@@ -288,7 +289,8 @@ Gates for the page: `tests/test_dashboard_layout.py` (L1–L19),
 - Generated artifacts are provenance-checked; the release fails closed on
   mismatch. Every writer of a committed artifact opens with `newline="\n"`.
 - Reference build records carry source / provenance / confidence; quarantined
-  records never become defaults; `unknown` stays `unknown`.
+  records never become defaults; `unknown` stays `unknown`. Record conventions
+  (source kinds, statuses, the promotion gate): `data/README.md`.
 - Evidence is harvested on a schedule (the overnight task, 03:00 and 15:00)
   and folded weekly with `pipeline/fold_harvest.ps1` (never commits; writes
   `notes/findings/<date>-fold-report.md`). Because the corpus grows daily,
@@ -305,15 +307,16 @@ move the snapshot silently or bypass the fail-closed gates.
 
 ## Open work
 
-`BACKLOG.md` — the one list, grouped by what each item waits on (an owner
-ruling, evidence a round would produce, plain engineering, deprioritized
-product features). No other document keeps its own list.
+`BACKLOG.md` — the one list, grouped by what each item waits on (a maintainer
+decision, evidence a validation round would produce, plain engineering,
+deprioritized product features). No other document keeps its own list.
 
 
 ## Files to read before major changes
 
 Scoring / mechanics: `albion-comp-engine-design.md`, `MASTERSHEET.md`,
-`MECHANICS_TODO.md`, `engine/engine.py`, `engine/app_scoring.js`,
+`pipeline/README.md` ("Mechanics"), `pipeline/templates/mechanics.yaml`,
+`engine/engine.py`, `engine/app_scoring.js`,
 `pipeline/templates/composition.yaml`, `styles.yaml`, `style_bands.yaml`
 (generated), `pipeline/style_overrides.yaml`, `roles-design.md` +
 `pipeline/roles.yaml`, `tests/test_golden.py`, `test_forge.py`,

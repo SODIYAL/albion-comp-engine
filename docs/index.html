@@ -9,7 +9,7 @@
 <title>Comp Forge</title>
 <style>
 /* ============================================================ NEON FORGE
-   Comp Forge's committed single look (2026-08-21 reskin, owner-directed):
+   Comp Forge's committed single look (the neon reskin):
    the dashboard-kit language — near-black borderless cards, vivid neon
    data hues, rounded geometry — with the forge's soul kept as one hot
    gold accent for the machine's own voice (recommendations, actions,
@@ -487,7 +487,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .int-row{margin:0 0 10px; font-size:12.5px}
 .int-row>div:first-child{display:flex; flex-wrap:wrap; align-items:center; gap:4px 6px}
 /* interaction badges carry WORDS (pull, duplicate:full), not a semantic
-   icon — the 22px icon box overlapped them (2026-09-11 fix): a text pill */
+   icon — the 22px icon box overlapped them, so they wear a text pill */
 .bdg.b-int{
   width:auto; height:auto; padding:2px 7px; margin-left:0; border-radius:99px;
   font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
@@ -502,8 +502,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* ---------- weapon wheel: filters above the wheel ---------- */
 /* ---- the add-weapon bar ----
-   ONE container on ONE line (owner 2026-09-02: "tight single row", modelled
-   on a segmented status bar). Segments are divided by rules, not by their
+   ONE container on ONE line (a tight single row, modelled on a segmented
+   status bar). Segments are divided by rules, not by their
    own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
    it can never scroll (any overflow would clip its own popups, see below)
    and its nowrap segments overpainted each other on phones. */
@@ -554,7 +554,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border:0; border-radius:0; padding:8px 4px; white-space:nowrap;
 }
 .wf-bar .pgroup-t[aria-pressed="true"]{box-shadow:none; color:var(--brass)}
-/* the facet readout takes the width the controls leave (2026-09-11 fix:
+/* the facet readout takes the width the controls leave (without this rule
    #picker-chips could shrink under its nowrap triggers and the facet's
    wrapped text overran UTILITY, while "× clear" broke into two lines) */
 #picker-chips, .wf-search{flex:none}
@@ -632,7 +632,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .prov.curated{background:var(--brass-wash); color:var(--brass)}
 .prov.draft{background:var(--surface-2); color:var(--ink-3)}
-/* forge provenance chip (2026-08-18): marks slots the engine generated —
+/* forge provenance chip: marks slots the engine generated —
    "reforge all" owns these; manual picks never wear it */
 .prov.forged{background:var(--surface-2); color:var(--brass); margin-left:6px}
 /* off-comp flag outside swap hints too (roster role line, picker rows) */
@@ -699,7 +699,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   --card-w:clamp(76px, calc(var(--wd)*.185), 134px);
   --card-h:clamp(80px, calc(var(--wd)*.175), 128px);
   --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
-  /* SEMICIRCLE stage (owner 2026-08-27, reference wheels): the box is no
+  /* SEMICIRCLE stage (modelled on reference wheels): the box is no
      longer square — cards ride the top arc of a virtual --wd circle whose
      center sits at (50%, --wd/2), and the hub is a smaller circle in the
      arc's open mouth. Height = top arc + the hub's lower half; the width
@@ -743,7 +743,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 @keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
 /* rim cards ride the wheel: rotate to their angle, push out to the rim,
    and stay tilted with it — like chest segments on a fortune wheel */
-/* frameless rim cards (owner 2026-08-27: the weapon art is the star, no
+/* frameless rim cards (the weapon art is the star, no
    box) — the card is an invisible hit area; the icon carries the weight
    and the focused weapon glows instead of wearing a border */
 .wseg{
@@ -837,7 +837,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15);
   width:min(88px, calc(var(--wd)*0.15)); height:min(88px, calc(var(--wd)*0.15))}
 /* the weapon art stands on its own — the old elemental aura halo read as
-   a smeared square behind the icon and was removed (owner 2026-09-01);
+   a smeared square behind the icon and was removed;
    renderHub still stamps data-aura on the hub if a future skin wants it */
 .hub-art-slot{position:relative; display:grid; place-items:center}
 .hub-nm{
@@ -899,7 +899,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
 .wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .wf-ring b{color:var(--ink); font-weight:600}
-/* the comp board (owner 2026-08-27): roster under the wheel, one column
+/* the comp board: roster under the wheel, one column
    per main role — equal columns filling the wheel column's full width,
    entries sized to read (the semicircle handed this row its space) */
 .wf-comp{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
@@ -950,8 +950,8 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   text-align:left}
 
 /* ---------- party dash: the comp board in a right-edge pop-out ----------
-   (owner 2026-09-01: "make a clean dash on the right side which pops in
-   and out and put the party members there so we can see them all"). One
+   A clean panel that slides in and out and holds every party member, so
+   the whole roster reads at once. One
    role section per row, every member a full dm tile with the same popover
    and kit/dossier/remove actions — renderWheelFoot fills #pdash-body. */
 /* one column per role section — full-width tiles read in one scan, and
@@ -979,7 +979,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 
 /* -- the kit flyout: ONE hover surface left of the dash — worn kit,
    scored spells, role and fit on top, then the member's FULL dossier
-   (owner 2026-09-01: "combine the dossier and the popout into one thing").
+   (the dossier and the pop-out are one surface).
    Near full height, scrolls; the drawer stays for non-party dossiers. -- */
 .pdash-fly{
   position:absolute; right:calc(100% + 10px); top:10px; bottom:10px;
@@ -1040,7 +1040,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .pf-dossier .dt-head{display:none}
 .pf-dossier .dt-grid{grid-template-columns:1fr; gap:4px}
 
-/* hover controls (owner 2026-09-11): lock / replace / refresh-rest / ×
+/* hover controls (slot controls; F32/F33, L21): lock / replace / refresh-rest / ×
    appear over the slot number on hover-capable screens; every button
    rides a delegated data-* action the popover buttons share. A LOCKED
    tile keeps its lock visible at rest. */
@@ -1105,9 +1105,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
 .cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
-/* ---- capability RINGS (2026-09-02) ----
+/* ---- capability RINGS ----
    Nested semicircles, one per capability, faceted one panel per group.
-   Same ruler as the bars they replace and as the radar (owner 2026-08-27):
+   Same ruler as the bars they replace and as the radar (the display ruler):
    100% = the comp-fitted ceiling, the brass tick marks the target minimum,
    and beyond-ceiling stacking shows as a pip, never as a longer arc.
    Arc colour is the reserved STATUS palette (met/part/none/over), never a
@@ -1118,7 +1118,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
 .cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
-/* four stages (owner 2026-09-10, target is the median): low = under the
+/* four stages (target is the median, standing rule 17; L20): low = under the
    bare minimum winners get away with (red), part = above it but under the
    typical winner (amber), met = typical to the soft cap (green), over =
    past the soft cap (purple). The brass tick marks typical, the thin one
@@ -1157,7 +1157,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   color:var(--gap); margin:2px 0 -2px;
 }
 .weak-sub.nice{color:var(--brass)}
-/* image-first cards (owner 2026-08-21): the weapons that close the gap
+/* image-first cards: the weapons that close the gap
    lead at full size, the gap wears a short player-voiced title, order
    alone carries priority */
 .weak{
@@ -1399,7 +1399,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .ev-empty{font-size:13px; color:var(--ink-2); padding:6px 0}
 .scroll-x{overflow-x:auto}
 
-/* .foot-chips retired 2026-09-02 — the parity and dataset chips moved up
+/* .foot-chips retired — the parity and dataset chips moved up
    into the status bar's second line */
 .footnote{
   font-size:12px; line-height:1.65; color:var(--ink-3);
@@ -1513,7 +1513,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .st-ip b{ color:var(--ink-2); font-weight:600; }
 
 /* ==================================================== MOBILE PASS ======
-   Owner-approved design 2026-08-21: tuned wheel, tap -> bottom sheet for
+   The mobile design: tuned wheel, tap -> bottom sheet for
    member details, setup collapsed to a summary bar, party as a
    horizontal snap strip. Placed LAST so equal-specificity overrides of
    the desktop rules win by order. */
@@ -1602,20 +1602,20 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 /* desktop: the mobile add bar stays out of the way */
 @media (min-width:641px){ .wf-add-mobile{display:none} }
 /* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration.
-   One column (owner 2026-08-22): status compact on top, then the combined
+   One column: status compact on top, then the combined
    need→pick card. The layer shares the hero band with the wheel — see the
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
 .dl-status,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
-/* the radar carries the status card alone (owner 2026-08-26: "remove this
-   box around our diagram") — no panel chrome; the tone lives in the
+/* the radar carries the status card alone (no box around the diagram)
+   — no panel chrome; the tone lives in the
    diagram's own colors */
 .dl-status{display:flex;flex-direction:column;align-items:stretch;gap:8px;
   background:none;border:0;box-shadow:none;padding:0}
 .dl-status .dl-radar{margin:0 auto}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-/* comp-status radar (owner 2026-08-26): the status card is the diagram —
+/* comp-status radar: the status card is the diagram —
    axis icons in the group's color, identity glyph in the center, every
    textual detail in the shared popup (#dl-tip). Display only. */
 .dl-radar{width:min(410px,100%);height:auto;overflow:visible;display:block}
@@ -1650,7 +1650,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .dl-ch-imp{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-ch-imp b{color:var(--brass-bright)}
 .dl-ch-imp small{color:var(--ink-3);font-size:9.5px}
-/* stage chips are buttons since 2026-08-24 (click -> spell sources fold);
+/* stage chips are buttons (click -> spell sources fold);
    the verdict classes above carry the visuals, this resets button chrome */
 button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;line-height:inherit}
 .dl-ch.open{outline:1px solid var(--brass);outline-offset:1px}
@@ -1675,7 +1675,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
-/* the pick's identity block (owner 2026-09-02): a larger icon, the role
+/* the pick's identity block: a larger icon, the role
    line tucked under the name, the gains directly beneath it, and Add moved
    inline beside the name - the full-width button is gone. */
 .dl-weapon{display:flex;align-items:flex-start;gap:13px;margin:10px 0 8px}
@@ -1736,7 +1736,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-alt-nm{flex:1; min-width:0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
-   the hero view keeps the party dock above the fold (standing owner rule);
+   the hero view keeps the party dock above the fold (a standing layout rule);
    the workflows are one click away, and opening is remembered per session. */
 .dl-tools-fold{margin-top:2px}
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
@@ -1769,7 +1769,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-search-row small{font-family:var(--mono);font-size:9px;color:var(--ink-3)}
 .dl-pool-best{margin-top:12px;border-top:1px solid var(--rule);padding-top:12px}
 /* the hero row gets its own class — a bare `>div` selector would out-rank
-   .dl-mini-rank and squeeze it into the 44px icon column (the PR masked
+   .dl-mini-rank and squeeze it into the 44px icon column (an earlier version masked
    exactly this with !important) */
 .dl-pool-hero{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;margin-top:7px}
 .dl-pool-best strong{font-family:var(--serif);font-size:19px}
@@ -1797,7 +1797,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
-/* ---- the column-3 split (owner 2026-09-02) ----
+/* ---- the column-3 split ----
    The pick card used to stack six answers in one frame. Now: diagnosis,
    fight chain, the pick, kill pressure and role check each get a flat
    card in ONE shared rule - four hand-kept copies drifted (.dl-need alone
@@ -1835,10 +1835,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    Owns: .shell / .main grid, .wheelstage / .ws-*, the .epanel edge-panel
    system, and every layout @media block. */
 
-/* ================= moved from _shell.html 2026-09-02 ================= */
+/* ================= moved from _shell.html ================= */
 
 /* ---------- shell ----------
-   Full-bleed since 2026-09-02: the 1560px cap and the two-column rail grid
+   Full-bleed: the 1560px cap and the two-column rail grid
    both retired when setup became an edge panel. One content region. */
 .shell{display:block; max-width:none; margin:0}
 
@@ -1858,7 +1858,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    entirely (display:contents in the card-grid block) so .ws-center places
    directly on .main's grid. The 3-column template, the 1560px collapse
    and the mobile order swaps placed flanks that never render — deleted
-   2026-09-02 (and the old template would have crushed the lone .ws-center
+   (the old template would have crushed the lone .ws-center
    into its 196-220px first column). */
 .wheelstage{display:block}
 .ws-flank{min-width:0}   /* the hidden right flank; renderers still fill it */
@@ -1869,7 +1869,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    One component for every viewport-edge flyout. Fixed, so a shut panel
    costs ZERO layout: the content grid always gets the full viewport.
    Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
-   plus one <aside>. Generalised from .pdash 2026-09-02. */
+   plus one <aside>. Generalised from .pdash. */
 /* ONE width for panel and rail — the rail's open-state transform rides
    exactly the panel's edge, so they must read the SAME value. Declared on
    :root because the rail is a fixed SIBLING, not a descendant: a copy on
@@ -1953,14 +1953,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     border:1px solid var(--rule-2); border-bottom:0}
 }
 
-/* ============ moved from _decision_layer.css 2026-09-02 =============
+/* ============ moved from _decision_layer.css =============
    appended AFTER the _shell.html rules so the old concatenation order
    (shell first, decision second) is preserved exactly. */
 
 /* The old right flank duplicated the exact questions answered above. Keep its
    underlying renderers alive, but remove that duplicate surface. */
 .ws-right{display:none}
-/* ================== THE CARD GRID (2026-09-02) ==================
+/* ================== THE CARD GRID ==================
    Shared across every grid band: the stage wrappers dissolve with
    display:contents so their children place directly on .main's grid, and
    the decision stack sheds slack height once it lives in a column. */
@@ -2042,7 +2042,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .wheel{--wd:min(680px,100cqi)}
 }
 
-/* ---- stragglers found during the Task 2 move: layout rules that were
+/* ---- stragglers from the layout move: layout rules that were
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
   .main{padding:14px 12px 70px; gap:22px}
@@ -2052,7 +2052,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    Two lines: identity + verdict on top, the constantly-turned knobs below.
    Style and size change on nearly every interaction; burying them behind a
    panel tab would cost more than the space it saves. */
-/* Compacted 2026-09-02 (owner: "about 60% of that space"). It was ~105px:
+/* Compacted to roughly 60% of its former height. It was ~105px:
    a 58px top row built around a 34px sigil and a 26px figure, over a 47px
    control row on 32px inputs. Now ~64px - every control keeps a >=24px hit
    target, and the brand sub-line goes because the wordmark already says it. */
@@ -2086,7 +2086,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* forge and reforge are comp-level actions, so they sit with style, size
    and content rather than half in a panel and half under the wheel */
 /* the size mirror is a `chip warn`, and `.warn` is also the forge-note box
-   with a 12px top margin — in the bar the chip sat 6px low (2026-09-11 fix) */
+   with a 12px top margin — in the bar the chip sat 6px low without this */
 .mh-bar .chip{margin:0}
 .mh-bar .sb-count{line-height:1}
 .mh-forge{display:flex; gap:6px}
@@ -2156,11 +2156,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
-      <!-- the party dock RETIRED 2026-08-27 (owner: the wheel's comp board
-           "is meant to replace the party section below") — the roster,
+      <!-- the party dock is RETIRED: the wheel's comp board replaces the
+           party section that sat below — the roster,
            its notes and the kit editor all live in the wheel foot now -->
       <div class="ws-center">
-        <!-- ONE tight row (owner 2026-09-02): kicker, tree, search, facets.
+        <!-- ONE tight row: kicker, tree, search, facets.
              The text filter lives behind the search icon, but an active
              query stays ON the button - a silently narrowed wheel with no
              visible cause was the thing to avoid. -->
@@ -2216,7 +2216,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     </section>
 
     <!-- Forge honesty reports + lookahead warnings: never hidden (rehomed
-         2026-08-22 from the analysis flank; owner 2026-08-23: it lives
+         from the analysis flank; it lives
          UNDER THE WHEEL — the hero grid pins it to the wheel column, and
          stacked layouts read it right after the stage). Empty when quiet. -->
     <div id="warn-slot"></div>
@@ -2313,8 +2313,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
  * SINGLE SOURCE OF MATH: engine/engine.py is authoritative; this file must
  * mirror it exactly and tests/test_js_parity.py verifies that it does
  * (same fitness, same rankings, same forged rosters, across all templates,
- * on random parties). If you change one, change both, then run the parity
- * test.
+ * on random parties). A change to one is a change to both, followed by the
+ * parity test.
  *
  * Used two ways:
  *   - inlined into dashboard/index.html by dashboard/build.py (browser —
@@ -2323,10 +2323,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
  *
  * TWO SUPPLIES (mirrors engine.py): coverage / headroom / over-stack read the
  * DRESSED supply (weapon + loadout + worn gear), while the hard-floor term
- * reads the weapon+loadout supply only — Option C, owner ruling 2026-08-27,
- * so worn gear can never buy its way past a structural floor.
+ * reads the weapon+loadout supply only — Option C (F25/F26), so worn gear
+ * can never buy its way past a structural floor.
  *
- * KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md): dataset targets and
+ * KNOWN OPEN DEFECT (decision pending, see HANDOFF.md): dataset targets and
  * soft caps were fitted in WEAPON+spell-pick units while supply is measured
  * on whole dressed people. The math is unaffected; the two sides of every
  * comparison are currently in different units.
@@ -2364,13 +2364,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     this.delta = w.delta; this.gamma = w.gamma;
     /* Over-stack asymptote (scoring.yaml); defaulted for older datasets. */
     this.overstackMax = (w.overstack_max === undefined) ? 0.5 : w.overstack_max;
-    /* Redundancy weight (rho), viability prior weight and headroom slope
-       (2026-08-18) — all default 0 so an older dataset scores as it used to.
+    /* Redundancy weight (rho), viability prior weight and headroom slope —
+       all default 0 so an older dataset scores as it used to.
        Mirrors engine.py __init__. */
     this.rho = w.rho || 0.0;
     this.viabilityW = w.viability || 0.0;
     this.headroom = w.headroom || 0.0;
-    /* pair-aware prior (owner 2026-09-11, mirrors engine.py): blend weight
+    /* pair-aware prior (weights.meta_pair; mirrors engine.py): blend weight
        for the best observed partner; absent = 0 = pure solo */
     this.metaPairW = w.meta_pair || 0.0;
     this.metaPairs = this.scoring.meta_pairs || {};
@@ -2414,7 +2414,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
     }
     this.hasNonstack = Object.keys(this.nonstack).length > 0;
-    /* SUPER-ADDITIVE DUPLICATES (2026-08-28, mirrors engine.py): gear key ->
+    /* SUPER-ADDITIVE DUPLICATES (mirrors engine.py): gear key ->
        minimum copies that cover each other's SELF-COST, resolved from the
        cost's evidence spell through a VERIFIED interaction record declaring
        self_cost_offset_min_copies. Cancels a cost, never adds supply. */
@@ -2442,14 +2442,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var overrides = rolesCfg.overrides || {};
     /* The ROLE BOOK (roles-design.md, mirrors engine.py): fine roles with
        evidence-cited membership; weapons carry role_menu. Feeds
-       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and, since
-       2026-09-03, the coarse role class below. */
+       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and the coarse
+       role class below. */
     this.rolesBook = {};
     var rb = data.roles || [];
     for (var ri = 0; ri < rb.length; ri++) this.rolesBook[rb[ri].id] = rb[ri];
     /* Coarse role class: composition override > the class of the primary
        SEAT (first uniformed menu role, the detectRole resolution) > the
-       sheet's role_hint. Mirrors engine.py (2026-09-03). */
+       sheet's role_hint. Mirrors engine.py. */
     this.roleClass = {};
     var k;
     for (k in this.weapons) {
@@ -2475,7 +2475,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         }
       }
     }
-    /* Capability predicates — COMBO-AWARE since 2026-08-19 (mirrors
+    /* Capability predicates — COMBO-AWARE (mirrors
        engine.py): predMembers keeps the flat could-qualify view; every
        forge constraint counts through _predContrib(weapon, combo). */
     this.predDefs = comp.predicates || {};
@@ -2491,7 +2491,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
       this.predMembers[pn] = members;
     }
-    /* Flag predicate `primary_heal` (owner ruling 2026-08-23, mirrors
+    /* Flag predicate `primary_heal` (mirrors
        engine.py): band minima counted from the static per-weapon
        full_healer flag (high healing on the E; the E is combo-independent,
        so every combo of a full healer qualifies). Routed through the same
@@ -2502,7 +2502,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       if (this.weapons[k].full_healer) phMembers[k] = true;
     }
     this.predMembers[this.PRIMARY_HEAL] = phMembers;
-    /* plan-tool flag predicate (skeletons 2026-09-15; mirrors engine.py
+    /* plan-tool flag predicate (seat skeleton; mirrors engine.py
        STANDOFF): the E is a standoff tool, combo-independent */
     this.STANDOFF = "standoff";
     var soMembers = {};
@@ -2519,7 +2519,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     this.dupPerWeapon = dup.per_weapon || {};
     this.dupPwMinSize = (dup.per_weapon_min_size === undefined) ? 10 : dup.per_weapon_min_size;
     /* GENERATED copy allowances per style x band and the seat skeleton
-       (derive_skeletons.py, owner 2026-09-15; mirrors engine.py): setContent
+       (derive_skeletons.py; mirrors engine.py): setContent
        resolves one copy cell into dupPerWeapon and one seat row into
        _seatTyp; a dataset without them keeps the hand list and no gate. */
     this._dupPerWeaponBase = this.dupPerWeapon;
@@ -2530,7 +2530,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     this.groupsOf = {};
     /* members of derived NON-STACKING groups (shared kit priced
        count-once — the cursed line): their group-band slots are EARNED
-       (owner ruling 2026-08-25; see the generation-fit gate) */
+       (see the generation-fit gate) */
     this.nonstackMembers = {};
     for (var gi = 0; gi < this.groups.length; gi++) {
       var gw = this.groups[gi].weapons || [];
@@ -2570,7 +2570,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
     this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
-    /* DEMAND RAMP (owner ruling 2026-09-07; mirrors engine.py set_content):
+    /* DEMAND RAMP (mirrors engine.py set_content):
        a row with ramp {none_until, full_at} is dropped at sizes <=
        none_until, grows linearly to its measured value at full_at, and
        proportionally beyond. */
@@ -2601,7 +2601,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var multNow = this._countMult(this.size);
     var multBase = this._countMult(this.baseSize);
     var grown = function (p, m) { return p ? p * m : p; };
-    /* Clump anchors + AoE geometry config (2026-08-20, mirrors engine.py
+    /* Clump anchors + AoE geometry config (mirrors engine.py
        set_content — the geometric utility transform). */
     this._clumpNow = grown(styleMech.expected_aoe_targets, multNow);
     this._clumpBase = grown(baseMech.expected_aoe_targets, multBase);
@@ -2635,7 +2635,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       if (this.size > this.stBoostMaxSize && sizeFactor > 1.0) sizeFactor = 1.0;
       this.mechMults[RESILIENCE_CAPS[i]] = styleFactor * sizeFactor;
     }
-    /* Resilience-Penetration context (owner ruling 2026-08-25, mirrors
+    /* Resilience-Penetration context (a partial rebate; mirrors
        engine.py): the Focus-Fire DR at this style's grown focus count; a
        weapon with resil_pen p is rebated (1 - DR*(1-p)) / (1 - DR) on its
        burst_st/execute supply in _eff. */
@@ -2647,7 +2647,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
        multipliers say what a style VALUES, these say HOW MUCH OF IT it
        needs. Target and soft cap scale together so the headroom band keeps
        its shape; hard floors do NOT scale. Default is identity — every
-       style ships {} until the owner rules a value. */
+       style ships {} until a value is set (curation judgment). */
     this.targetMults = (styles[this.style] || {}).target_mults || {};
     this._targets = {}; this._softs = {}; this._weights = {}; this._mins = {};
     for (var cap2 in this.reqs) {
@@ -2658,7 +2658,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         : (r.scales ? this.size / this.baseSize : 1.0);
       this._targets[cap2] = tm * r.target * sz2;
       this._softs[cap2] = tm * r.soft_cap * sz2;
-      /* BARE MINIMUM beside the target (owner 2026-09-10, the four-stage
+      /* BARE MINIMUM beside the target (target is the median: the four-stage
          board; mirrors engine.py _mins): a median-fitted content row
          carries `min`, a row still on the old 0.9 x least fit IS its
          minimum. Display only — no scoring term reads it. */
@@ -2666,8 +2666,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
-    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; TARGET IS
-       THE MEDIAN, owner 2026-09-10; mirrors engine.py set_content): at
+    /* STYLE x SIZE ROWS (style_bands.yaml; TARGET IS THE MEDIAN; mirrors
+       engine.py set_content): at
        min_size+ the harvest's per-band target (the TYPICAL winner, p50),
        min (p10) and soft cap replace the content row's, scaled from
        ref_size; a soft-cap-only row keeps the content target; rows are
@@ -2707,7 +2707,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         }
       }
     }
-    /* OPTIONAL capabilities (owner ruling 2026-08-28) — mirrors engine.py
+    /* OPTIONAL capabilities — mirrors engine.py
        set_content. Bringing one still earns its coverage; not bringing it is
        not a hole. Every fitness term is already zero at zero supply, so this
        is a DENOMINATOR-only rule: it can only leave maxFitness(), never
@@ -2762,13 +2762,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
     }
     this._excluded = excl;
-    /* No cost gate (owner ruling 2026-09-07, mirrors engine.py): the
+    /* No cost gate (mirrors engine.py): the
        crystal gate is retired; anti_zone demand carries the physics. */
     this._suggest = [];
     for (i = 0; i < this.pool.length; i++) {
       if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
-    /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
+    /* Style-fit suggestion gate (mirrors engine.py:
        style selection IS build intent; unfit weapons leave suggestions,
        never scoring; balanced gates nothing). */
     this._styleUnfit = {};
@@ -2793,7 +2793,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         this._suggest = kept;
       }
     }
-    /* Generation-fit gate (owner ruling 2026-08-23 round 3, mirrors
+    /* Generation-fit gate (validation round 3, mirrors
        engine.py): a DEFAULT generated comp fields damage picks the
        derivation says FIT — "situational" stays a manual pick (scores
        normally, never flagged). DPS role only; balanced requires fits for
@@ -2822,7 +2822,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
             }
           }
         } else if (gRole === "healer" && gBand === "group") {
-          /* owner round 4: a healer unfit at group for EVERY style (the
+          /* validation round 4: a healer unfit at group for EVERY style (the
              single-ally-heal-E class) never generates, balanced included;
              gang slots stay open (mirrors engine.py). */
           gOk = false;
@@ -2833,10 +2833,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
             }
           }
         } else if (this.nonstackMembers[gw] && gBand === "group") {
-          /* owner ruling 2026-08-25: a non-stacking budget slot (the
-             cursed line — its shared Q priced count-once) is EARNED at
-             group scale: "the only weapon i see in any party bigger than
-             15 people is the lifecurse, damnation, or rotcaller." The
+          /* a non-stacking budget slot (the cursed line — its shared Q
+             priced count-once) is EARNED at group scale: above 15 the
+             cursed weapons fielded are Lifecurse, Damnation and Rotcaller
+             (curation judgment on the observed comps). The
              derivation demotes debuff-less members to situational at
              group for every style; the dps fits-rule then bars them from
              DEFAULT generation, balanced included. Manual picks score
@@ -2882,7 +2882,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         break;
       }
     }
-    /* Style role-band overrides (owner ruling 2026-08-23, styles.yaml
+    /* Style role-band overrides (styles.yaml
        constraint_overrides — mirrors engine.py): a listed key REPLACES the
        base band's entry; unlisted keys keep the base band. First matching
        row wins. */
@@ -2902,9 +2902,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         }
       }
     }
-    /* Size-based style minima, mirrored in engine.py (owner 2026-09-08).
-       Floor(size / per), with no inherited maximum. Small parties keep
-       their existing band until they reach one complete group. */
+    /* Size-based style minima (styles.yaml role_min_per_players; mirrors
+       engine.py). Floor(size / per), with no inherited maximum. Small
+       parties keep their existing band until they reach one complete
+       group. */
     if (this._band !== null) {
       var rolePer = (styles[this.style] || {}).role_min_per_players || {};
       for (var ratioRole in rolePer) {
@@ -2914,7 +2915,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         }
       }
     }
-    /* TYPICAL role counts (owner ruling 2026-09-11; mirrors engine.py):
+    /* TYPICAL role counts (F31; mirrors engine.py):
        the harvest p50 per exact size (composition.role_typical, GENERATED
        by derive_role_counts.py) laid onto the band as `typical`. The forge
        generates a body beyond it only when a minimum only that role can
@@ -2929,14 +2930,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         this._band[typRole] = typRule;
       }
     }
-    /* SEAT SKELETON (owner 2026-09-15; mirrors engine.py set_content): the
+    /* SEAT SKELETON (mirrors engine.py set_content): the
        typical count of every PRIMARY SEAT for this style and size and the
        copy-allowance cell for this style and band (composition.skeleton /
        duplication.per_weapon_cells, GENERATED by derive_skeletons.py).
        Generation-only: manual parties always score. */
     this._seatTyp = this._seatTypical();
     this.dupPerWeapon = this._dupCell();
-    /* PLAN TOOLS (2026-09-15; mirrors engine.py): the typical standoff
+    /* PLAN TOOLS (mirrors engine.py): the typical standoff
        count of the declared style's winners is a generation MINIMUM */
     if (this._band !== null) {
       var planRows = this._planTypical();
@@ -2945,7 +2946,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         this._band[planTool] = { min: planRows[planTool] };
       }
     }
-    /* NEED PROFILES (increment 3, owner-ruled 2026-08-26) — mirrors
+    /* NEED PROFILES (dataset need_profiles) — mirrors
        engine.py: fine-seat bands + function coverage minima for the
        FORGE, scaled by size/reference_size (half-up, the pinned
        rounding rule) and armed at min_size. SEAT keys count a weapon's
@@ -3004,7 +3005,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   CompEngine.prototype.setDressing = function (enabled) {
-    /* Validation affordance (V3-W, 2026-08-27; mirrors engine.py
+    /* Validation affordance (V3-W; mirrors engine.py
        set_dressing): when OFF, every CANDIDATE evaluates naked —
        kitVariants yields [["v0", null]] for all weapons, _dressedExtras
        aliases the weapon-only combo vectors, and _comboScoreDressed's
@@ -3079,10 +3080,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   CompEngine.prototype.sizeBucket = function () {
-    /* Participant axis = 2 x party size (mirrors engine.py size_bucket,
-       corrected 2026-08-18). Keys the GENERATED meta prior (admitted
-       2026-09-08) through metaOf() at ROSTER size; the dashboard's usage
-       strip keys off PLAN() instead, deliberately. */
+    /* Participant axis = 2 x party size (mirrors engine.py size_bucket).
+       Keys the GENERATED meta prior through metaOf() at ROSTER size; the
+       dashboard's usage strip keys off PLAN() instead, deliberately. */
     var n = 2 * this.size;
     return n < 12 ? "small" : n <= 30 ? "mid" : "large";
   };
@@ -3096,8 +3096,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   /* the bare minimum winners get away with (harvest p10 / least fitted
-     comp), scaled like the target — the board's red/orange line (owner
-     2026-09-10). Mirrors engine.py target_min. Display only. */
+     comp), scaled like the target — the board's red/orange line (target
+     is the median). Mirrors engine.py target_min. Display only. */
   CompEngine.prototype.targetMin = function (cap) {
     return this._mins[cap];
   };
@@ -3133,8 +3133,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     return null;
   };
   /* the weapon's PRIMARY SEAT: the first role_menu entry with a chest
-     uniform, the read roleClass derives from (mirrors engine.py seat_of;
-     skeletons 2026-09-15); null when the book seats it nowhere. */
+     uniform, the read roleClass derives from (mirrors engine.py seat_of);
+     null when the book seats it nowhere. */
   CompEngine.prototype.seatOf = function (weapon) {
     var menu = (this.weapons[weapon] || {}).role_menu || [];
     for (var i = 0; i < menu.length; i++) {
@@ -3144,7 +3144,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     return null;
   };
 
-  /* Role layer (roles-design.md increment 1; mirrors engine.py) —
+  /* Role layer (roles-design.md; mirrors engine.py) —
      DESCRIPTIVE: no scoring or generation path reads it. */
   CompEngine.prototype._chestClass = function (gearId) {
     if (!gearId) return null;
@@ -3386,7 +3386,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   CompEngine.prototype.comboChoices = function (weapon, combo) {
     /* [(original slot index, bundle index)] for a combo index; out-of-range
        falls back to the default combo exactly like memberExtra (mirrors
-       engine.py combo_choices, review 2026-08-18). */
+       engine.py combo_choices). */
     var dims = this._comboDims(weapon);
     var total = 1, i;
     for (i = 0; i < dims.length; i++) total *= dims[i][1];
@@ -3465,10 +3465,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     return bestI;
   };
 
-  /* ---- gear (full-build members, 2026-08-20; mirrors engine.py) ---- */
+  /* ---- gear (full-build members; mirrors engine.py) ---- */
   CompEngine.prototype.gearKey = function (key) {
-    /* The CURATED key for a worn item, ignoring tier (owner ruling
-       2026-08-28; mirrors engine.py gear_key). Consumables are curated at one
+    /* The CURATED key for a worn item, ignoring tier (mirrors engine.py
+       gear_key). Consumables are curated at one
        representative tier while comps record whatever tier they ran, so an
        exact-key lookup scored 20 real Gigantify potions as nothing. Exact
        keys win; an ambiguous tier-stripped form resolves to nothing rather
@@ -3542,7 +3542,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                                               waiveCosts) {
     /* Full-build member: weapon loadout + gear abilities + the STAT
        channel (mirrors engine.py build_extra — same float order).
-       CC-duration % (increment 2, owner 2026-08-25) multiplies the
+       CC-duration % multiplies the
        wearer's own duration-bearing CC — the Leering-Cane pairing as
        physics. `role` (a seat id) additionally applies the DOCTRINE
        PASSIVE picks — generation/display only; scoring never passes
@@ -3618,8 +3618,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   /* Gear keys whose self-cost this party has offset — the ONLY
-     super-additive duplicate rule in the model, deliberately narrow (owner
-     2026-08-28). Mirrors engine.py _self_cost_waivers: a VERIFIED
+     super-additive duplicate rule in the model, deliberately narrow.
+     Mirrors engine.py _self_cost_waivers: a VERIFIED
      interaction record on the cost's evidence spell declares
      self_cost_offset_min_copies, and the party fields that many. Cancels a
      cost, never adds supply. */
@@ -3646,8 +3646,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     /* the seat's doctrine for THIS party size and DECLARED style (mirrors
        engine.py _seat_kit): the gang band below 10 members; else a declared
        style's cell (kit_styles.<style>) laid over the band -- the band
-       fills what the cell lacks; `balanced` never reads a cell (owner
-       2026-09-08). */
+       fills what the cell lacks; `balanced` never reads a cell. */
     if (this.size <= DOCTRINE_GANG_MAX) {
       var gang = (rec.kit_bands || {}).gang;
       if (gang) return gang;
@@ -3710,9 +3709,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   CompEngine.prototype.kitOptions = function (weapon, combo, party, topN,
                                               role) {
     /* IDEAL KIT per weapon, per content/style, per comp — mirrors
-       engine.py kit_options (2026-08-20; JS mirror 2026-08-21;
-       DOCTRINE-LED since increment 2, owner 2026-08-25 "yes its the
-       whole build"): ranked gear options per slot. No party ->
+       engine.py kit_options (DOCTRINE-LED: the kit is the whole build):
+       ranked gear options per slot. No party ->
        context-free weighted-delta value with the DOCTRINE TIER first;
        with `party` -> comp-aware exact fitness delta outranks tier
        membership (doctrine stays annotation + tie-break). `role`:
@@ -3720,7 +3718,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
        explicit diagnostic escape (ungated pool), a seat id uses that
        seat. With a seat the CHEST pool hard-gates to the uniform
        classes; options carry doctrine/carries/passive.
-       FAIL-CLOSED GENERATION (owner ruling 2026-09-01, mirrors
+       FAIL-CLOSED GENERATION (mirrors
        engine.py): the suggestion channel only speaks evidence — no
        seat -> empty kit/options (`seat: null` says why); a seated
        slot with no doctrine tier stays unset, never catalog-filled.
@@ -3733,18 +3731,18 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       return { kit: {}, options: {}, seat: null };
     var seatRec = this.rolesBook[seat] || {};
     /* book uniform widened by THIS weapon's observed majority class
-       (kit_weapon_uniform, 2026-09-03) -- mirrors engine.py */
+       (kit_weapon_uniform) -- mirrors engine.py */
     var uniform = this._chestUniform(seat, weapon);
     var seatClass = seatRec["class"] || null;
     seatRec = this._seatKit(seatRec);   /* the size band's doctrine */
     var doctrine = seatRec.kit || {};
-    /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
+    /* Per-weapon doctrine tier: this weapon's
        own observed items (effect carriers excluded at the build) outrank
        the seat aggregate; `doctrine` is "weapon" / "seat" / false and
        weapon-tier options carry doctrine_n = [count, slot total].
        Mirrors engine.py. */
     var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
-    /* observed-build archetype (2026-09-01, mirrors engine.py): the KIT
+    /* observed-build archetype (mirrors engine.py): the KIT
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
@@ -3756,7 +3754,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
       for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
       /* which archetype slots came from the declared style's cell
-         (2026-09-08, mirrors engine.py): the option carries observed_style */
+         (kit_styles; mirrors engine.py): the option carries observed_style */
       var styledArch = seatRec._style_arch || { weapons: [], seat: false };
       for (aslot in arch) {
         if ((wbArch[aslot] && styledArch.weapons.indexOf(weapon) >= 0)
@@ -3778,10 +3776,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       });
       if (gated.length) bySlot.armor = gated;
     }
-    /* Style-fit gear gate (identity Phase C, owner 2026-08-23): under a
-       DECLARED brawl, cloth never gets SUGGESTED for a non-healer —
-       mirrors engine.py (drift closed 2026-08-25: the JS port had
-       skipped this gate). */
+    /* Style-fit gear gate: under a DECLARED brawl, cloth never gets
+       SUGGESTED for a non-healer — mirrors engine.py (a closed drift: the
+       JS port had skipped this gate). */
     if ((this.style === "brawl" || this.style === "brawl_clap")
         && this.roleOf(weapon) !== "healer") {
       var unclothed = (bySlot.armor || []).filter(function (g) {
@@ -3808,7 +3805,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         if (wp[wi].length > 2) wpeople[wp[wi][0]] = wp[wi][2];
       }
       if (role !== null) {
-        /* fail-closed generation (ruling 2026-09-01): only doctrine
+        /* fail-closed generation: only doctrine
            tiers may be suggested; an evidence-less slot stays unset */
         keys = keys.filter(function (g) {
           return Object.prototype.hasOwnProperty.call(wslot, g)
@@ -3853,8 +3850,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                       carries: (this.itemEffects[k] || []).slice(),
                       passive: passive, why: why });
       }
-      /* DOCTRINE-TIER-FIRST in both modes (owner ruling 2026-08-27,
-         evidence-first): the observed tier bounds the suggestion;
+      /* DOCTRINE-TIER-FIRST in both modes (evidence-first): the observed
+         tier bounds the suggestion;
          context-free ranks by count then value within a tier,
          comp-aware by the exact marginal — mirrors engine.py. */
       var gearCmp = function (a, b) {
@@ -3864,7 +3861,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         return r.doctrine === "weapon" ? 0 : r.doctrine === "seat" ? 1 : 2;
       };
       var wCount = function (r) { return wslot[r.gear] || 0; };
-      /* EVIDENCE-FIRST (2026-09-03, mirrors engine.py): count leads the
+      /* EVIDENCE-FIRST (the kit audit; mirrors engine.py): count leads the
          weapon tier; comp-aware may reorder only the evidence band (items
          worn >= half as often as the modal one) by the marginal; the seat
          tier keeps the seat pool's count order; value breaks ties. */
@@ -3894,9 +3891,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       });
       var av = arch[slot];
       /* seat archetype = fallback only where the weapon has no counts
-         (mirrors engine.py, 2026-09-04) */
+         (mirrors engine.py) */
       if (av && (topCount === 0 || (!archSeat[slot] && inBand(av[0])))) {
-        /* the observed build leads the slot (overlay ruling) -- never
+        /* the observed build leads the slot (the overlay rule) -- never
            from outside the evidence band */
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
@@ -3907,7 +3904,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
           }
         }
       }
-      /* SEAT POOLING (2026-09-08, mirrors engine.py): a THIN slot (the
+      /* SEAT POOLING (R34a/b; mirrors engine.py): a THIN slot (the
          weapon's own modal under POOL_MIN_VOTES votes) is dressed from the
          seat's pool — helmet/boots/cape from the seat's builds wearing the
          chest this kit wears (armor is ranked first), potion/food from the
@@ -3916,7 +3913,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       if (role !== null && POOLED_SLOTS[slot]) {
         /* THIN counts distinct PEOPLE where the row carries them (every
            doctrine floor counts people, R27), votes on a reference-only
-           row -- mirrors engine.py 2026-09-09 */
+           row -- mirrors engine.py */
         var topW = 0, modalW = null, tw;
         for (tw in wslot) {
           if (wslot[tw] > topW || (wslot[tw] === topW && (modalW === null || tw > modalW))) {
@@ -4171,7 +4168,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                                                haveFloor, gainFloor) {
     /* [coverage delta (incl. headroom), floor-lift delta] — two terms so
        callers accumulate in their original order (mirrors engine.py).
-       Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+       Option C: STRUCTURAL hard floors read the
        weapon+loadout basis — dressed callers pass haveFloor/gainFloor so
        worn gear never buys floor relief; defaults keep the naked path
        bit-identical. */
@@ -4188,7 +4185,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   /* ---------------------------------------------------------------- fitness */
   CompEngine.prototype.fitness = function (party, combos, gears) {
     var s = this.effectiveSupply(party, combos, gears);
-    /* Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+    /* Option C: STRUCTURAL hard floors read the
        weapon+loadout supply — worn gear improves coverage/headroom/
        overstack but can never satisfy a structural floor (mirrors
        engine.py fitness). Naked parties keep the single-supply path. */
@@ -4212,9 +4209,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype.maxFitness = function (party, combos, gears) {
     /* Supremum of fitness(): full coverage + the headroom band maxed
-       (mirrors engine.py max_fitness, review 2026-08-18). Given a party,
-       OPTIONAL capabilities it fields none of drop out of the supremum
-       (owner ruling 2026-08-28) — a comp is not marked down for skipping a
+       (mirrors engine.py max_fitness). Given a party, OPTIONAL
+       capabilities it fields none of drop out of the supremum — a comp is
+       not marked down for skipping a
        tool that lives on one weapon in the game. No party = the
        every-capability supremum, so legacy callers are unchanged. */
     var t = 0, s = null, cap;
@@ -4272,7 +4269,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   /* ------------------------------------------------------------- redundancy */
   CompEngine.prototype._dupFree = function (weapon) {
     /* Per-weapon allowances are LARGE-group evidence — size-gated (mirrors
-       engine.py _dup_free, review 2026-08-18). */
+       engine.py _dup_free). */
     var pw = this.dupPerWeapon[weapon];
     if (pw && pw.free !== undefined && this.size >= this.dupPwMinSize) return pw.free;
     return this.dupFreeDefault;
@@ -4370,7 +4367,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   /* ------------------------------------------------ candidate evaluation */
   CompEngine.prototype.partyState = function (party, combos, gears) {
     /* Everything a candidate marginal needs (mirrors engine.py).
-       Dressed forge 2026-08-27: `s` is the FIT supply (gear-inclusive
+       The dressed forge: `s` is the FIT supply (gear-inclusive
        when gears are given), `sSyn` the weapon-only supply every synergy
        term reads — comp_score's own seams. gears absent keeps both the
        same object (bit-identical to the pre-gears state). */
@@ -4405,9 +4402,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     }
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
              nsMax: nsMax,
-             /* carrier quota (2026-09-03): what this roster already wears */
+             /* carrier quota: what this roster already wears */
              carriers: this._carrierCounts(party, gears),
-             /* pair-aware prior (2026-09-11): each seat's best observed
+             /* pair-aware prior: each seat's best observed
                 partner so far, so a candidate's exact meta delta can include
                 the raise it hands existing members */
              party: party.slice(),
@@ -4506,7 +4503,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._pickTail = function (state, weapon, best) {
     /* Combo-independent candidate-score terms (mirrors engine.py
-       _pick_tail). `meta` is the EXACT party-meta delta (2026-09-11): the
+       _pick_tail). `meta` is the EXACT party-meta delta: the
        candidate's blended prior plus the raise it hands each member's
        best-partner term — same seat order as Python, same bits. */
     var party = state.party || [];
@@ -4526,10 +4523,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   CompEngine.prototype.kitVariants = function (weapon) {
-    /* Doctrine kit variants for GENERATION (dressed forge 2026-08-27,
-       mirrors engine.py kit_variants): v0 = the seat's context-free
-       doctrine kit (off-tier slots stay unset), plus ONE divergent
-       single-slot swap (variant cap 2 — perf ruling); [["v0", null]]
+    /* Doctrine kit variants for GENERATION (the dressed forge; mirrors
+       engine.py kit_variants): v0 = the seat's context-free doctrine kit
+       (off-tier slots stay unset), plus ONE divergent single-slot swap
+       (variant cap 2 — a performance bound); [["v0", null]]
        for weapons with no doctrine gear. NO doctrine passives anywhere
        in this path. */
     if (!this.dressCandidates) return [["v0", null]];  /* V3-W switch */
@@ -4581,7 +4578,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       out = [["v0", null]];
     } else {
       out = [["v0", gl(v0)]];
-      /* carrier quota (2026-09-03, mirrors engine.py): a carrier modal
+      /* carrier quota (mirrors engine.py): a carrier modal
          chest gets the best NON-carrier chest as its one alternative */
       var caps = this.carrierCaps(), chest = v0.armor, carrier = false, ce;
       if (chest) {
@@ -4664,8 +4661,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._evalPick = function (state, weapon) {
     /* THE candidate score — the exact compScore delta of adding `weapon`
-       with its best loadout AND doctrine-kit variant (dressed forge
-       2026-08-27; mirrors engine.py _eval_pick). Returns
+       with its best loadout AND doctrine-kit variant (the dressed forge;
+       mirrors engine.py _eval_pick). Returns
        {score, dFit, dSyn, meta, combo, variant, vgears}. */
     var best = null;
     var extras = this._comboExtras(weapon);
@@ -4789,7 +4786,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   /* ------------------------------------- negative recs / redundancy lens
-     (roadmap item 3, 2026-08-24 — mirrors engine.py.) A DESCRIPTIVE
+     (mirrors engine.py.) A DESCRIPTIVE
      decomposition of the same exact marginal _evalPick scores — the
      "why not" counterpart of explain(). A scoring-side redundancy penalty
      was investigated and REJECTED (MECHANICS_TODO Q18); nothing here
@@ -4924,7 +4921,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         score: ps.score,
       });
     }
-    /* Deterministic ranking (mirrors engine.py recommend, 2026-09-08):
+    /* Deterministic ranking (mirrors engine.py recommend):
        score quantized to the parity tolerance first, then weapon id -
        an exact tie must not fall to pool order plus last-bit noise. */
     out = out.sort(function (x, y) {
@@ -4965,7 +4962,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       var self = this;
       var curPick = this._evalPick(state, cur);
       var curScore = curPick.score;
-      /* redundancy lens (roadmap item 3, mirrors engine.py): the member
+      /* redundancy lens (mirrors engine.py): the member
          valued exactly as a pick into the rest — does it still close any
          gap, or are its jobs already covered without it? Flag only. */
       var curPc = this._pickCaps(state, cur, curPick.combo, curPick.vgears);
@@ -5028,8 +5025,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   /* ----------------------------------------------- interaction analysis
-     (mirrors engine.py duplicate_conflicts / analyze — "new prompt" spec
-     §7/§9). Severity high/warning only on VERIFIED non-stacking records;
+     (mirrors engine.py duplicate_conflicts / analyze). Severity
+     high/warning only on VERIFIED non-stacking records;
      verified full and shared stacks are info; anything the game data does
      not state is 'verify', never an invented penalty. */
   var DAMAGE_CAPS_PROFILE = ["burst_aoe", "burst_st", "sustained_dps", "execute"];
@@ -5091,7 +5088,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap);
       var soft = this.softCap(cap);
-      /* saturation band (roadmap item 3, mirrors engine.py analyze):
+      /* saturation band (mirrors engine.py analyze):
          gap below target, headroom to soft cap, overstacked past it */
       var band = have < target ? "gap"
                : have <= soft ? "headroom" : "overstacked";
@@ -5137,20 +5134,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
 
   /* Identity thresholds (descriptive layer, F-V3-2) — mirrors engine.py
-     comp_identity, thresholds calibrated 2026-08-23 against every
-     style-declared comp on file (see VALIDATION.md, V3 round 1). */
+     comp_identity, thresholds calibrated against every style-declared
+     comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
       IDENTITY_BC_AOE = 0.45,
       IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, blind round 2 */
-      IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members (2026-09-04) */
+      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, validation round 2 */
+      IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members */
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
       IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
-  /* SEAT POOLING (2026-09-08, mirrors engine.py POOL_MIN_VOTES /
+  /* SEAT POOLING (R34a/b; mirrors engine.py POOL_MIN_VOTES /
      POOLED_SLOTS / CHEST_POOLED_SLOTS): a thin weapon slot is dressed from
      the seat's pool (same-chest for helmet/boots/cape, plain for
      potion/food) when the pool item has 5+ players */
@@ -5203,8 +5200,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   };
   CompEngine.prototype.compIdentity = function (party, combos, gears) {
     /* What this comp is BECOMING, in playstyle vocabulary — v2: built up
-       from MEMBER identities (weapon style_fit: E-first delivery + owner
-       overrides). DESCRIPTIVE ONLY: nothing here feeds fitness,
+       from MEMBER identities (weapon style_fit: E-first delivery +
+       style_overrides.yaml). DESCRIPTIVE ONLY: nothing here feeds fitness,
        recommendation order, or the forge (mirrors engine.py
        comp_identity). */
     var n = party.length;
@@ -5224,7 +5221,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
       var sf0 = this._styleFitOf(w) || {};
       /* clap half: a ramp-dependent bomb counts as sustained; standoff
-         E = kite tool (owner 2026-09-04, mirrors engine.py) */
+         E = kite tool (mirrors engine.py) */
       if (sf0.conditional_payload) sus += caps.burst_aoe || 0;
       else {
         aoe += caps.burst_aoe || 0;
@@ -5256,15 +5253,15 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       carrierCount[w] = (carrierCount[w] || 0) + 1;
       nCarrierMembers += 1;
     }
-    /* flex bombs join the rigid core (owner, blind rounds 1+2 2026-09-04;
-       mirrors engine.py comp_identity) */
+    /* flex bombs join the rigid core (validation rounds 1 and 2; mirrors
+       engine.py comp_identity) */
     var rigidMelee = 0.0, rigidRanged = 0.0, pi;
     for (pi = 0; pi < pending.length; pi++) {
       if (pending[pi][3] === "melee") rigidMelee += pending[pi][2];
       else if (pending[pi][3] === "ranged") rigidRanged += pending[pi][2];
     }
     /* a flex bomb goes home to melee only when the rigid core is CLEARLY
-       melee (blind round 3; mirrors engine.py) */
+       melee (validation round 3; mirrors engine.py) */
     var flexSide = (rigidMelee >= IDENTITY_FLEX_HOME * Math.max(rigidRanged, 1e-9)
                     && rigidRanged < rigidMelee) ? "melee" : "ranged";
     for (pi = 0; pi < pending.length; pi++) {
@@ -5285,7 +5282,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var kiteMin = Math.max(2, perTen);
     var kiteHalf = kiteTools >= kiteMin;                 /* hybrid: tools at scale */
     /* a lone standoff body below the hybrid floor only makes a kite of a
-       comp that is not bombing (blind round 3, roster 4; mirrors engine.py) */
+       comp that is not bombing (validation round 3, roster 4; mirrors
+       engine.py) */
     var kiteAny = kiteTools >= kiteMin ||
                   (kiteTools >= Math.max(1, perTen) && mode.aoe < IDENTITY_LONE_TOOL_AOE);
     var bcBomb = aoe ? meleeBomb / aoe : 0.0;
@@ -5306,7 +5304,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       out.label = "still forming";
     } else if (mel >= IDENTITY_MELEE_CORE) {
       if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
-        /* the ball itself carries the bomb (round 2 roster 11) */
+        /* the ball itself carries the bomb (validation round 2, roster 11) */
         out.style = "brawl_clap";
         out.strength = "leaning";
         out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
@@ -5316,13 +5314,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         out.label = sname("brawl", "Brawl") + " — melee ball";
       }
     } else if (mel <= IDENTITY_RANGED_CORE) {
-      /* a ranged core with no standoff tools must commit: clap (owner
-         2026-09-04, mirrors engine.py) */
+      /* a ranged core with no standoff tools must commit: clap (mirrors
+         engine.py) */
       clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
-      /* Bomb-squad archetype + clap-kite hybrid (owner, blind label
-         rounds 2026-08-23) — mirrors engine.py comp_identity. */
+      /* Bomb-squad archetype + clap-kite hybrid (V3 round 1) — mirrors
+         engine.py comp_identity. */
       var topCarrier = 0;
       for (var tc in carrierCount) {
         if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
@@ -5341,7 +5339,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
     } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
       /* mid band with standoff tools: kite half outranks the posture
-         tiebreak (mirrors engine.py, blind round 1 roster 7) */
+         tiebreak (mirrors engine.py, validation round 1 roster 7) */
       out.style = "clap_kite";
       out.strength = "leaning";
       out.label = sname("clap_kite", "Clap-Kite") +
@@ -5351,7 +5349,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
     } else if (mode.aoe >= IDENTITY_HYBRID_AOE) {
-      /* the bomb's delivery names the mid band (blind round 3, roster 8;
+      /* the bomb's delivery names the mid band (validation round 3, roster 8;
          mirrors engine.py) */
       out.style = "clap";
       out.strength = "leaning";
@@ -5364,7 +5362,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         ? "melee" : "ranged";
       var majority = minority === "melee" ? "ranged" : "melee";
       /* flex and utility-carrier weapons never anchor a damage-identity
-         split (mirrors engine.py — blind-label ruling 2026-08-23). */
+         split (mirrors engine.py — V3 round 1). */
       var rigid = [];
       for (var ri = 0; ri < carriers[minority].length; ri++) {
         var rw = carriers[minority][ri];
@@ -5402,7 +5400,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                   "core — commit to one side or cover the seam",
           });
         }
-        /* the kits decide a split (owner 2026-09-04; mirrors engine.py) */
+        /* the kits decide a split (mirrors engine.py) */
         var kit = this._kitLean(party, gears);
         if (kit === "brawl") {
           out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
@@ -5422,8 +5420,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         }
       }
     }
-    /* leather dps are a brawl whatever the weapons say (owner 2026-09-05;
-       the bomb-squad archetype is the exception) -- mirrors engine.py */
+    /* leather dps are a brawl whatever the weapons say (the bomb-squad
+       archetype is the exception) -- mirrors engine.py */
     if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "brawl") {
       out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
       out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: brawl chests, bombs or not)";
@@ -5476,7 +5474,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         var c = caps[i];
         if (!(c in self.reqs)) continue;
         used.push(c);
-        /* the bar is the BARE MINIMUM (owner 2026-09-10; mirrors
+        /* the bar is the BARE MINIMUM (target is the median; mirrors
            engine.py kill_pressure): "enough to kill" is a minimum question */
         bar += self.targetMin(c);
         have += s[c] || 0.0;
@@ -5494,7 +5492,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     return out;
   };
 
-  /* verdicts read the board's stages (owner 2026-09-10; mirrors
+  /* verdicts read the board's stages (target is the median; mirrors
        engine.py fight_chain): weak under the bare minimum (targetMin),
        ok up to the typical winner (target), strong at/above it */
 
@@ -5507,7 +5505,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var chain = style && styles[style] ? styles[style].chain : null;
     if (!chain) return null;
     var s = this.effectiveSupply(party, combos, gears);
-    /* spell-level sources (2026-08-24, mirrors engine.py): which equipped
+    /* spell-level sources (mirrors engine.py): which equipped
        buttons ARE each stage — resolved loadouts attributed back to the
        slot/spell carrying each stage capability; spell null = the weapon's
        always-on kit. Units are per-member, before the party-level
@@ -5591,7 +5589,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       /* only claim the connection when that stage holds a real share of
          the pick's explained value (mirrors the 0.3 rule) */
       if (bestStage !== null && total > 0 && bestGain >= 0.3 * total) {
-        /* name the terms behind the claim (2026-08-24, mirrors engine.py):
+        /* name the terms behind the claim (mirrors engine.py):
            a stage can win on SUMMED caps none of which is the pick's
            single top term */
         var impTerms = [];
@@ -5610,7 +5608,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                                           gears) {
     /* Steepest-descent 1-opt over compScore, UNCONSTRAINED (mirrors
        engine.py refine; the forge runs its own constraint-aware pass).
-       gears (owner ruling 2026-08-27): with a parallel kit list the
+       gears (the dressed forge): with a parallel kit list the
        search optimizes the SAME dressed compScore used everywhere else
        — incumbent kits preserved, replacements tried in each doctrine
        kit variant, result {party, gears}. gears null keeps the legacy
@@ -5619,7 +5617,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     fixed = fixed || 0;
     var candidates;
     /* empty array falls back to the full pool like Python's `pool or
-       self.pool` — [] is truthy in JS (review 2026-08-18) */
+       self.pool` — [] is truthy in JS */
     if (pool && pool.length) { candidates = pool.slice(); }
     else { candidates = this.pool.slice(); }
     if (maxPasses === undefined || maxPasses === null) maxPasses = 8;
@@ -5701,8 +5699,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var pk, seatMax = {};
     for (pk in this._profileMin) predMin[pk] = this._profileMin[pk];
     for (pk in this._profileMax) seatMax[pk] = this._profileMax[pk];
-    /* Capacity gates per predicate minimum (deadlock guard, 2026-08-27;
-       mirrors engine.py _forge_ctx): the [role, seat] pairs of every pool
+    /* Capacity gates per predicate minimum (the deadlock guard; mirrors
+       engine.py _forge_ctx): the [role, seat] pairs of every pool
        weapon that could satisfy the predicate — _forgeFeasible refuses a
        pick that would strand an unmet minimum behind full bands. */
     var predGates = {}, predSat = {};
@@ -5724,8 +5722,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       predGates[pn2] = gates;
       predSat[pn2] = sats;
     }
-    /* the ROLES a predicate's satisfiers span (2026-09-10; mirrors
-       engine.py): the admissible minimum-need bound nests a single-role
+    /* the ROLES a predicate's satisfiers span (mirrors engine.py): the
+       admissible minimum-need bound nests a single-role
        predicate in its role family */
     var predRoles = {};
     for (var pr in predGates) {
@@ -5735,7 +5733,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       }
       predRoles[pr] = { roles: rset, n: rn };
     }
-    /* SEAT SKELETON (2026-09-15; mirrors engine.py _forge_ctx): each seat's
+    /* SEAT SKELETON (mirrors engine.py _forge_ctx): each seat's
        typical clipped to what the pool can generate for it, the seats of
        the pool's weapons per role (the set spill inspects) and the seats
        that can satisfy each predicate minimum. */
@@ -5768,8 +5766,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
     /* [weapon counts, role counts, predicate counts, group counts].
-       Predicate counts are COMBO-AWARE (mirrors engine.py _forge_counts,
-       review 2026-08-19). */
+       Predicate counts are COMBO-AWARE (mirrors engine.py _forge_counts). */
     var counts = {}, roles = {}, preds = {}, groups = {};
     for (var i = 0; i < party.length; i++) {
       var w = party[i];
@@ -5780,8 +5777,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       for (var pn in contrib) preds[pn] = (preds[pn] || 0) + 1;
       var pmC = this._profileMembers[w];
       if (pmC) for (var pk2 in pmC) preds[pk2] = (preds[pk2] || 0) + 1;
-      /* primary-seat tally for the seat skeleton (2026-09-15), under its
-         own namespace (mirrors engine.py _forge_counts) */
+      /* primary-seat tally for the seat skeleton, under its own namespace
+         (mirrors engine.py _forge_counts) */
       var seatK = this.seatOf(w);
       if (seatK !== null) preds["seat:" + seatK] = (preds["seat:" + seatK] || 0) + 1;
       var gs = this.groupsOf[w] || [];
@@ -5792,7 +5789,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._forgeMinNeed = function (ctx, roles, preds, w, predContrib) {
     /* Bodies still required for unmet minima after adding `w` - the
-       ADMISSIBLE bound (2026-09-10; mirrors engine.py _forge_min_need):
+       ADMISSIBLE bound (F28; mirrors engine.py _forge_min_need):
        per role band the largest of the unmet band minimum, the unmet
        SEAT minima nested in it and any single-role non-seat predicate;
        a cross-role predicate adds only what those counted bodies cannot
@@ -5831,8 +5828,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     }
     /* A cross-role predicate is discounted only against bodies that COULD
        carry it. A body committed to a nested SEAT minimum no satisfier of
-       the predicate can fill is proof of a SECOND body (F29, 2026-09-10;
-       mirrors engine.py): territory_defense needs one more stopper tank
+       the predicate can fill is proof of a SECOND body (F29; mirrors
+       engine.py): territory_defense needs one more stopper tank
        and one more ranged-AoE body, and no stopper delivers ranged AoE,
        so the whole-role discount read 1 where two are required and the
        roster died one short. Admissible means never MORE than a legal
@@ -5941,10 +5938,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._typOk = function (ctx, roles, preds, w, contrib) {
     /* May `w` join a roster whose role counts are `roles`, given the
-       TYPICAL count of its role (owner ruling 2026-09-11; mirrors
-       engine.py _typ_ok)? A body beyond the typical count is generated
-       only when a minimum only that role can meet still demands it.
-       SEAT branch (owner 2026-09-15): once the role allows the body its
+       TYPICAL count of its role (F31; mirrors engine.py _typ_ok)? A body
+       beyond the typical count is generated only when a minimum only
+       that role can meet still demands it.
+       SEAT branch (the seat skeleton): once the role allows the body its
        PRIMARY SEAT must too - a seat at its typical admits another body
        only when an unmet minimum this pick meets could not be met by an
        under-typical seat of the role (minima win, cross-role ones
@@ -6014,7 +6011,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     if (!this._typOk(ctx, roles, preds, w, contrib)) return false;
     if (this._forgeMinNeed(ctx, roles, preds, w, contrib) > slotsLeftAfter)
       return false;
-    /* Deadlock guard (2026-08-27; mirrors engine.py): after this pick,
+    /* Deadlock guard (mirrors engine.py): after this pick,
        every UNMET predicate minimum must keep a satisfier whose role band
        AND fine seat still have capacity — else the pick strands the
        minimum and the beam dies short. */
@@ -6029,7 +6026,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         var mx2 = ctx.roleMax[r2];
         if (mx2 !== undefined &&
             (roles[r2] || 0) + (r2 === r ? 1 : 0) >= mx2) continue;
-        /* typical (2026-09-11): the gate is open past the typical count
+        /* typical (F31): the gate is open past the typical count
            only for a predicate this role alone satisfies */
         var ty2 = ctx.roleTyp[r2];
         var n2 = (roles[r2] || 0) + (r2 === r ? 1 : 0);
@@ -6068,7 +6065,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                                       contribI);
         if (need > slotsLeftAfter) continue;
         /* a body beyond its role's typical count must ACTUALLY carry the
-           demanding predicate on this combo (2026-09-11) */
+           demanding predicate on this combo (F31) */
         if (!this._typOk(ctx, beam.roles, beam.preds, w, contribI)) continue;
       }
       for (var vi = 0; vi < variants.length; vi++) {
@@ -6091,7 +6088,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._memberTag = function (w, combo, vkey) {
     /* Canonical member key for beam dedup — the kit-variant id is part
-       of the identity (dressed forge 2026-08-27; mirrors engine.py). */
+       of the identity (the dressed forge; mirrors engine.py). */
     return w + "#" + (combo === null || combo === undefined ? "d" : String(combo))
              + "#" + (vkey === undefined || vkey === null ? "-" : vkey);
   };
@@ -6122,7 +6119,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     /* Deterministic constrained beam search over complete rosters + 1-opt
        and bounded 2-opt refinement + filler audit (mirrors engine.py forge
        — see its docstring for the contract; returns {party, combos, score,
-       feasible, filler, held, locked, exhausted}). `avoid` (2026-09-11):
+       feasible, filler, held, locked, exhausted}). `avoid`:
        rosters already shown — the best roster NOT among them comes back;
        `exhausted` when every reachable completion was shown. */
     locked = (locked || []).slice();
@@ -6131,8 +6128,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       avoidKeys[CompEngine.rosterKey(avoid[ai])] = true; hasAvoid = true;
     }
     /* normalize lockedCombos to EXACTLY locked.length: missing/short/empty
-       pads with null, extras drop — mirrors engine.py (review 2026-08-18;
-       an empty array used to mis-pair combos with members here). */
+       pads with null, extras drop — mirrors engine.py (an empty array
+       mis-paired combos with members here). */
     var lc = lockedCombos || [];
     var combos = [];
     for (var ci = 0; ci < locked.length; ci++)
@@ -6144,7 +6141,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var exhausted = false;
 
     var fc = this._forgeCounts(locked, combos);
-    /* lockedGears (owner ruling 2026-08-27): a locked member supplied
+    /* lockedGears: a locked member supplied
        with explicit gear is scored in EXACTLY that kit and never
        re-dressed; one without stays naked — the forge never invents gear
        for a lock (mirrors engine.py; normalized like lockedCombos). */
@@ -6182,7 +6179,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
          order — deterministic in both engines. The canonical multiset key
          is computed LAZILY, only for candidates actually considered for
          the beam (mirrors engine.py). */
-      /* QUANTIZED score (2026-09-10; mirrors engine.py): a last-bit
+      /* QUANTIZED score (mirrors engine.py): a last-bit
          difference must not order the ports differently */
       expansions.sort(function (a, b) { return qrank(b[0]) - qrank(a[0]); });
       var nextBeams = [], seen = {};
@@ -6322,7 +6319,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       var w = candPool[pi];
       if (w === party[index]) continue;
       if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
-      if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill (2026-09-15) */
+      if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill */
       var pick = this._forgeEvalPick(ctx, beam, w, 0);
       if (pick === null) continue;
       out.push({ weapon: w, display_name: this.weapons[w].display_name,
@@ -6339,7 +6336,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
   CompEngine.prototype._seatMixOk = function (ctx, party) {
     /* The seat-skeleton invariant on a WHOLE roster (mirrors engine.py
-       _seat_mix_ok, 2026-09-15): in every role, a seat past its typical
+       _seat_mix_ok): in every role, a seat past its typical
        while another seat of the role stands under its typical is carried
        only by bodies that satisfy a predicate minimum none of the
        under-typical seats could meet. Refinement and replaceOptions check
@@ -6395,7 +6392,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     var p0 = this._profilePrimary[w];
     if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
         (preds[p0] || 0) + 1 > ctx.seatMax[p0]) return false;
-    /* typical (2026-09-11), optimistic like the prune: the exact
+    /* typical (F31), optimistic like the prune: the exact
        per-combo check rides _forgeEvalPick */
     return this._typOk(ctx, roles, preds, w,
                        this._withProfile(w, this._predPossible(w)));
@@ -6407,7 +6404,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     /* Steepest-descent 1-opt over generated slots, constraint-aware:
        minima are checked against the REST roster's combo-aware counts, so
        a swap can never trade away the spells a minimum was counting on
-       (mirrors engine.py _refine_constrained, review 2026-08-19). */
+       (mirrors engine.py _refine_constrained). */
     party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (maxPasses === undefined) maxPasses = 8;
     var best = this.compScore(party, combos, gears);
@@ -6424,12 +6421,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
         var beam = { state: state, roles: fcr[1], preds: fcr[2] };
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
-          /* w === party[i] deliberately NOT skipped (dressed forge
-             2026-08-27, mirrors engine.py): re-resolving the SAME
+          /* w === party[i] deliberately NOT skipped (the dressed forge;
+             mirrors engine.py): re-resolving the SAME
              weapon's combo+kit can be the best move — identical picks
              price d == 0 and are never taken. */
           if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
-          if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill (2026-09-15) */
+          if (!this._seatMixOk(ctx, rest.concat([w]))) continue;   /* the swap would un-justify a spill */
           var pick = this._forgeEvalPick(ctx, beam, w, 0);
           if (pick === null) continue;
           var d = pick.score - contrib;
@@ -6453,7 +6450,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                                            fixed, worstK, candM, avoid) {
     /* Bounded 2-opt over the weakest generated slots (mirrors engine.py
        _two_opt). An accepted pair-move reorders the roster, so the pass
-       restarts with freshly computed weakest slots (review 2026-08-18). */
+       restarts with freshly computed weakest slots. */
     party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (worstK === undefined) worstK = 4;
     if (candM === undefined) candM = 12;
@@ -6543,7 +6540,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
                 var hasTyp = false;
                 for (var tk in ctx.roleTyp) { hasTyp = true; break; }
                 if (hasTyp || ctx.seatGate) {
-                  /* typical (2026-09-11; mirrors engine.py): the pair
+                  /* typical (F31; mirrors engine.py): the pair
                      joins the rest one body at a time, each on its exact
                      combo - the same incremental read the beam makes */
                   var fc0 = this._forgeCounts(rest, restC);
@@ -6609,10 +6606,10 @@ const PARITY_EXPECTED = {"party":["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICE
  * that file is rendering for the whole page already; the panel, the picker
  * and the permalink codec are a separable concern with its own state.
  *
- * Display layer. Since 2026-08-20 gear IS curated and scored engine-side
- * (dataset `gear`, engine build_extra/kit_options) — this panel's picks are
- * not yet wired into the browser scoring calls; that wiring is the next
- * step, and until then fitness shown here is weapons alone.
+ * Display layer. Gear is curated and scored engine-side (dataset `gear`,
+ * engine build_extra/kit_options); the picks made here reach scoring
+ * through _app.js (gearsFromLoadout -> GEARS_CUR), so the fitness the page
+ * shows is the dressed party.
  *
  * Reads: GEAR, ICONS, SPELLS, LOADOUTS, CONTENT, party (from _app.js).
  */
@@ -6634,7 +6631,7 @@ let LO_OPEN = null, LO_PICKING = null, LO_FILTER = "";
 
 const loGear = k => (typeof GEAR !== "undefined" && GEAR[k]) || null;
 const loName = k => (loGear(k) || {}).name || k;
-/* equipment ability tooltip (2026-08-19): the item's actives/passives from
+/* equipment ability tooltip: the item's actives/passives from
    the game's own craftingspelllist (parse_dumps gear_spells.json) */
 function loAbilityTip(k){
   const g = (typeof GEAR_SPELLS !== "undefined" && GEAR_SPELLS[k]) || null;
@@ -6652,7 +6649,7 @@ function loAbilityTip(k){
    to survive file:// and offline). If ICONS happens to carry a gear key it
    wins, so nothing breaks if that policy is reverted.
 
-   RETRY, don't remove (2026-08-20): opening a picker fires ~18 concurrent
+   RETRY, don't remove: opening a picker fires ~18 concurrent
    render-service requests and the service drops some under burst — every
    URL verified 200 individually. `onerror` used to delete the img
    permanently on the FIRST failure, which is why half the picker showed no
@@ -6740,7 +6737,7 @@ function loadoutDecode(str){
 }
 
 /* ------------------------------------------------------------- defaults */
-/* Displayed-build selection (changeschapter2.md §F). The index arrives
+/* Displayed-build selection (the §F selection rules, pipeline/build_builds.py). The index arrives
    pre-ordered by approval / patch freshness / confidence and flags canonical
    defaults with their promotion basis; at runtime we additionally require a
    matching party-size range and prefer exact-content records over explicit
@@ -6799,7 +6796,7 @@ function loadoutPrefill(i){
       if (!(s in L) && Number.isInteger(ref[s]) && ref[s] > 0) L[s] = ref[s] - 1;
     });
   }
-  /* engine fallback (owner 2026-08-21): whatever no promoted caller build
+  /* engine fallback: whatever no promoted caller build
      covers is filled by the engine — spells from the scored combo, gear
      from the comp-aware kit advisor. The kit wears the engine mark so it
      can never be mistaken for a fielded build. */
@@ -6807,12 +6804,13 @@ function loadoutPrefill(i){
   loadoutEngineGear(i);
 }
 
-/* On-open retro suggestion (owner 2026-08-21: "weapons should come with
-   suggested kits" — including members added before the feature or loaded
-   from share links). SAFE variant: merely looking at a kit must never
-   change the party's fitness, so ref SPELLS are not applied here (a
+/* On-open retro suggestion (every weapon comes with a suggested kit —
+   including members added before the feature or loaded from share
+   links). SAFE variant: opening a kit must never silently swap the
+   member's scored spell combo, so ref SPELLS are not applied here (a
    caller's picks could differ from the member's scored combo) — spells
-   seed from the member's OWN combo and gear picks are display-only. */
+   seed from the member's OWN combo; gear fills from the reference and
+   the kit advisor. */
 function loadoutSuggest(i){
   loadoutPrefillGear(i);
   loadoutEngineSpells(i);
@@ -6844,10 +6842,9 @@ function loadoutEngineSpells(i){
 }
 
 function loadoutEngineGear(i){
-  /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked
-     2026-08-21): each empty gear slot gets the top-ranked item for THIS
-     member in THIS comp. Display-only — gear picks do not feed browser
-     scoring yet. */
+  /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked):
+     each empty gear slot gets the top-ranked item for THIS member in THIS
+     comp. The picks reach scoring through gearsFromLoadout in _app.js. */
   const w = party[i];
   if (typeof ENG === "undefined" || !ENG.kitOptions) return;
   const L = LOADOUT[i] || (LOADOUT[i] = {});
@@ -6864,9 +6861,9 @@ function loadoutEngineGear(i){
     if (top && loGear(top.gear)){
       L[s] = top.gear; used = true;
       /* the engine names the DECLARED style's observed build it dressed
-         from (observed_style, 2026-09-08) — display provenance only */
+         from (observed_style) — display provenance only */
       if (top.observed_style) L._style = top.observed_style;
-      /* a thin slot dressed from the seat's pool (pooled, 2026-09-08) */
+      /* a thin slot dressed from the seat's pool (pooled) */
       if (top.pooled) (L._pooled = L._pooled || {})[s] = top.pooled;
     }
   });
@@ -6927,12 +6924,12 @@ function loPickerGrid(){
 
 /* The panel under an expanded party row. */
 function loDoctrineLine(i){
-  /* Increment 2 (kit doctrine): the member's seat + the doctrine passive
+  /* Kit doctrine: the member's seat + the doctrine passive
      for the equipped chest + any typed gear effect it carries.
      Translation-only — every fact comes straight off the engine. */
   if (typeof ENG === "undefined" || !ENG.primarySeat) return "";
   const seat = ENG.primarySeat(party[i]);
-  if (!seat) return `<div class="lo-ref" title="fail-closed generation (owner ruling 2026-09-01): kit suggestions only speak evidence — with no role-book seat there is no doctrine tier to bound them, so the engine proposes nothing rather than marginal-ranking the whole catalog. Your manual picks always score.">no role-book seat for this weapon — the engine suggests no kit; pick gear manually (it always scores)</div>`;
+  if (!seat) return `<div class="lo-ref" title="fail-closed generation: kit suggestions only speak evidence — with no role-book seat there is no doctrine tier to bound them, so the engine proposes nothing rather than marginal-ranking the whole catalog. Your manual picks always score.">no role-book seat for this weapon — the engine suggests no kit; pick gear manually (it always scores)</div>`;
   const rec = (ENG.rolesBook || {})[seat] || {};
   const chest = (LOADOUT[i] || {}).armor;
   const dp = chest ? (((ENG.gear[chest] || {}).doctrine_passives || {})[rec["class"]] || null) : null;
@@ -6967,10 +6964,9 @@ function loadoutHandleClick(e){
     const i = +tog.dataset.loOpen;
     LO_OPEN = (LO_OPEN === i) ? null : i;
     LO_PICKING = null; LO_FILTER = "";
-    /* Opening a kit fills any empty slots with SAFE suggestions (owner
-       2026-08-21): ref gear + engine gear (display-only) + spells from
-       the member's OWN scored combo — so looking at a kit still never
-       changes the party's fitness (review 2026-08-18 holds). Caller-ref
+    /* Opening a kit fills any empty slots with SAFE suggestions: ref
+       gear + engine gear + spells from the member's OWN scored combo — so
+       opening a kit never swaps the scored spell combo. Caller-ref
        SPELL prefill stays add/forge-time only, where it is announced. */
     if (LO_OPEN !== null) loadoutSuggest(LO_OPEN);
     return true;
@@ -7026,8 +7022,8 @@ function loadoutCount(i){
 }
 
 /* --------------------------------------------------- provenance codec
-   Slot provenance (2026-08-18): 'm' = manual / live-party, 'f' = forged;
-   'l' = LOCKED by the user (2026-09-11) — the only state a refresh holds,
+   Slot provenance: 'm' = manual / live-party, 'f' = forged;
+   'l' = LOCKED by the user — the only state a refresh holds,
    manual or forged alike. Encoded into the permalink as a plain m/f/l
    string (`f=` param) so a refresh knows which slots it may rebuild even
    across a shared link; links from before this feature decode to
@@ -7049,10 +7045,10 @@ function provDecode(str, n){
 }
 
 /* -------------------------------------------- spell picks <-> engine combos
-   The bridge that makes the player's REAL Q/W/passive picks reach scoring
-   (2026-08-18): picks map to the engine's curated loadout bundles via
-   spell ids; slots without a curated pick fall back to the engine's default
-   resolution. Gear stays display-only — no gear capabilities are curated. */
+   The bridge that makes the player's REAL Q/W/passive picks reach scoring:
+   picks map to the engine's curated loadout bundles via spell ids; slots
+   without a curated pick fall back to the engine's default resolution.
+   Gear reaches scoring separately (gearsFromLoadout in _app.js). */
 
 /* {engine slot name -> picked spell id} for member i, or null when the
    member has no spell picks at all. */
@@ -7105,7 +7101,7 @@ function loadoutPrefillGear(i){
 /* ------------------------------------------------------ combo permalink
    Explicit member combos (forge results — e.g. an E-slot use variant no
    picker can express) travel in the permalink `k=` param, base36 per
-   member, `-` = none (review 2026-08-18: without this a forged E-variant
+   member, `-` = none (without this a forged E-variant
    silently reverted to the default bundle on reload, changing the score).
    Combo indexes are dataset-stable (product order over the weapon's
    loadout slots), not context-dependent, so they persist safely. */
@@ -7144,7 +7140,7 @@ const WEAPONS = DATASET.weapons;
 let CONTENT = Object.keys(DATASET.templates)[0];
 const ENG = new CompEngine(DATASET, CONTENT);
 /* There is no fixed party size in open-world content, and attendance is
-   FLUID (owner ruling 2026-08-21): the party is judged at the ROSTER you
+   FLUID, so the party is judged at the ROSTER you
    actually have — targets, floors and scaling follow whoever showed up.
    PLANNED is what you expect to field: it drives how many slots the forge
    fills and the cap warnings, never the judgment. Next-pick advice runs
@@ -7167,7 +7163,7 @@ function inPickContext(fn){
 }
 
 function syncEngine(){
-  /* the plan follows the roster (2026-09-10): the header read 7 while
+  /* the plan follows the roster: without this the header read 7 while
      eleven were seated - judgement was already at roster size, only the
      stepper lagged, and only on the manual paths */
   PLANNED = Math.max(PLANNED, party.length);
@@ -7175,11 +7171,11 @@ function syncEngine(){
   ENG.setContent(CONTENT, SIZE, STYLE);
   /* member combos re-resolve after every context change: the default
      loadout depends on the styled weights, and pick-derived combos map
-     through the current engine (2026-08-18) */
+     through the current engine */
   COMBOS_CUR = party.map((_, i) => comboAt(i));
-  /* equipped gear reaches scoring (dressed forge Task 1, 2026-08-27):
-     the engine has scored full builds since the 2026-08-20 gear layer —
-     the page's fitness call just never passed them. Gear edits re-render,
+  /* equipped gear reaches scoring (the dressed forge): the engine scores
+     full builds (the gear layer), so the page's fitness call has to pass
+     the worn pieces. Gear edits re-render,
      and render() lands here, so this stays fresh. */
   GEARS_CUR = party.map((_, i) =>
     gearsFromLoadout(typeof LOADOUT !== "undefined" ? LOADOUT[i] : null));
@@ -7213,7 +7209,7 @@ const tpl = () => DATASET.templates[CONTENT];
    sizes, and reading the template instead handed the board a cap with no
    weight or target - render() died in the capability rows on the first
    paint (empty party, size 1) at every content with a ramp row, castle
-   included, and the page stayed half-drawn (2026-09-10) */
+   included, and the page stayed half-drawn (L19) */
 const REQS = () => ENG.reqs;
 const FLOORS = () => tpl().hard_floors || {};
 const baseSize = () => tpl().base_size || 7;
@@ -7222,28 +7218,28 @@ const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
 /* the bare minimum winners get away with, and where the typical number
-   came from (owner 2026-09-10, target is the median) - engine reads,
+   came from (target is the median, standing rule 17) - engine reads,
    display only */
 const targetMin = cap => ENG.targetMin(cap);
 const targetSource = cap => ENG.targetSource(cap);
 /* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
    actually uses. Displaying raw sheet units next to effective-supply gap
    scores let a bar read "met" while the weakness list still charged a gap
-   for the same capability (review 2026-08-15). Raw sheet numbers stay
+   for the same capability. Raw sheet numbers stay
    visible per-weapon in the detail drawer. */
 /* Every scoring call for THE party passes the members' resolved combos
    (COMBOS_CUR) — the user's spell picks and forged loadouts reach the
    engine; ad-hoc parties (contribution what-ifs) pass their own slices. */
 const supply = p => p === party ? partyCalc().sup : ENG.effectiveSupply(p);
 const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
-/* The supremum is party-dependent since the optional ruling (2026-08-28):
+/* The supremum is party-dependent (optional template rows):
    an OPTIONAL capability the comp fields none of leaves the denominator, so
    a comp is not marked down for skipping a one-weapon tool. Same loadout and
    gear the numerator is scored with. */
 const maxFitness = (p = party) => ENG.maxFitness(
   p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
-/* DRESSED like everything else on the page (2026-09-03): the biggest-need
+/* DRESSED like everything else on the page: the biggest-need
    ranking used to read the naked roster while the pick, the "have" number
    and the radar read the worn kits, so a plate-clad 5-tank comp reported
    "Biggest need: Frontline" and then recommended a healer. */
@@ -7255,14 +7251,14 @@ const explain = (p, cand) => inPickContext(() =>
               p === party ? GEARS_CUR : null))
   .map(t => ({d: t.delta, ...t}));
 /* every candidate surface prices picks against the party AS EQUIPPED
-   (dressed forge 2026-08-27): the loaded comp's gear reaches the same
+   (the dressed forge): the loaded comp's gear reaches the same
    _evalPick the score uses, and each suggestion carries the kit its
    marginal assumed */
 const recommend = (p, n = 4) => inPickContext(() =>
   ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null,
                 p === party ? GEARS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
-              /* pair-aware prior (2026-09-11): descriptive split, rendered only */
+              /* pair-aware prior: descriptive split, rendered only */
               metaSolo: r.meta_solo, metaPair: r.meta_pair,
               metaPartner: r.meta_partner, metaRaise: r.meta_raise,
               viab: r.viability, combo: r.combo, kit: r.kit, score: r.score,
@@ -7289,8 +7285,8 @@ function swapReviewCached(){
 
 /* fitness + effective supply for the CURRENT party, computed once per state
    (renderers used to re-derive them 3-4x per render pass). supFloor is the
-   WEAPON+LOADOUT supply — the basis Option C hard floors read (owner ruling
-   2026-08-27): floor tags must quote it or display would disagree with
+   WEAPON+LOADOUT supply — the basis the structural hard floors read (Option C,
+   standing rule 10; V5, F25/F26): floor tags must quote it or display would disagree with
    scoring. */
 let calcCache = { key: null, fit: 0, sup: null, supFloor: null };
 function partyCalc(){
@@ -7308,7 +7304,7 @@ const capsOf = w => WEAPONS[w].capabilities || {};
 /* one home for the role-hint default and the below-floor predicate — the
    latter delegates to the engine so display can never disagree with scoring */
 /* Coarse role for tile colour and roster order. The SEAT the role book
-   gives the weapon wins over the sheet's role_hint (2026-09-03): the comp
+   gives the weapon wins over the sheet's role_hint: the comp
    board's columns already read the seat, so Grailseeker (hint melee, seat
    stopper tank) used to sit in the Tank column wearing a dps-red tile.
    Seat classes map onto the palette; a dps seat keeps the hint's
@@ -7379,7 +7375,7 @@ const icon = (w, s) => (typeof ICONS !== "undefined" && ICONS[w])
   ? `<img class="icon" src="${ICONS[w]}" width="${s}" height="${s}" alt="" loading="lazy">`
   : `<span class="icon ph" style="width:${s}px;height:${s}px"></span>`;
 
-/* Monoline UI icons (owner 2026-09-11, from the reference set: 24 grid,
+/* Monoline UI icons (from the reference set: 24 grid,
    1.75 stroke, round caps and joins, no fills, currentColor — so the
    brass hover / on states colour them like the toolbar's search and
    caret). Used by the slot controls; the in-game item renders above are
@@ -7447,15 +7443,15 @@ const CAP_PROSE = {
   burst_st:"single-target burst", burst_aoe:"AoE burst", sustained_dps:"sustained damage",
   execute:"execute pressure", mobility:"mobility", catch:"chase-down", buff_allies:"ally buffs",
   self_sustain:"self-sustain", anti_dive:"anti-dive", knockback_displace:"enemy displacement",
-  /* taxonomy ruling 2026-08-21: %-max-health cuts are their own capability —
+  /* taxonomy: %-max-health cuts are their own capability —
      an enabler, not damage; execute stays for low-HP payoffs / kill rewards */
   max_health_cut:"max-health cut",
-  /* interrupt taxonomy 2026-08-21: stopping a cast mid-channel is its own
+  /* interrupt taxonomy: stopping a cast mid-channel is its own
      thing, not silence — Badon's cloud, Snare Charge, Forbidden Stab */
   interrupt:"cast interrupts",
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
-/* User-facing short titles (owner 2026-08-21): headline surfaces speak
+/* User-facing short titles: headline surfaces speak
    player, never engine — no snake_case keys, no awkward wordings. The
    full prose stays one hover away in tooltips. */
 const CAP_LABEL = {
@@ -7475,7 +7471,7 @@ const capLabel = c => CAP_LABEL[c] ||
   prose(c).replace(/^./, ch => ch.toUpperCase());
 
 function roleOf(w, combo){
-  /* Role label from the SCORED loadout (2026-08-18): the top capabilities
+  /* Role label from the SCORED loadout: the top capabilities
      of the combo the engine actually resolves for this content — a Cursed
      Staff whose scored kit is sustain-dps utility no longer wears its two
      highest RAW capabilities (burst_st) as a label. Pass a member's combo
@@ -7516,7 +7512,7 @@ function badgeHtml(w){
 /* The ADD-WEAPON picker's chip facet (its own chip bar, plus any
    capability badge clicked on a weapon anywhere). */
 let FACET = null;
-/* mobile pass 2026-08-21: which member's popover is open as a bottom
+/* mobile: which member's popover is open as a bottom
    sheet (touch has no hover) — display state only, never in the hash */
 let SHEET_OPEN = null;
 const BADGE_KEYS = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d.caps]));
@@ -7590,7 +7586,7 @@ function whySentence(party, cand){
     return `Opening pick. With nothing on the board, ${nameOf(cand)} scores highest because it covers ${terms.slice(0,2).map(t => prose(t.cap)).join(" and ")} — the capabilities this template weights most heavily.`;
   const s = supply(party);
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
-  /* the lead gap is never "already covered" (2026-09-10): the card once
+  /* the lead gap is never "already covered" (L20g): the card once
      read "already covers sustained healing ... Hallowfall closes that" */
   const strong = Object.keys(REQS()).filter(c => (!lead || c !== lead.cap) && (s[c]||0)/target(c) >= 0.85)
     .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
@@ -7623,11 +7619,11 @@ function loadHash(){
      g / f / k decode POSITIONALLY against the ORIGINAL p= list, so unknown
      weapon keys are dropped from all four arrays TOGETHER — filtering the
      party alone used to shift loadouts and forged flags onto the wrong
-     members (review 2026-08-18). Cap at HARD_CAP like every roster path. */
+     members. Cap at HARD_CAP like every roster path. */
   const rawParty = p.p ? p.p.split(",") : [];
   const rawLoadout = p.g ? loadoutDecode(p.g) : [];
   const rawProv = provDecode(p.f || "", rawParty.length);
-  /* `k` (2026-08-18) carries explicit member combos (forge results whose
+  /* `k` carries explicit member combos (forge results whose
      E-slot use variant no spell picker can express). Optional like g/f. */
   const rawCombo = comboDecode(p.k || "", rawParty.length);
   party = []; LOADOUT = []; PROV = []; COMBO = [];
@@ -7670,7 +7666,7 @@ function loadStored(){
 /* ---------------------------------------------------------------- render */
 
 let party = [];
-/* Slot provenance (2026-08-18): 'm' manual / live-party, 'f' forged. "Forge
+/* Slot provenance: 'm' manual / live-party, 'f' forged. "Forge
    the rest" locks every current member; "reforge all" rebuilds only the 'f'
    slots. Without this, a slot the engine created was permanently treated as
    the user's the moment the handler returned. */
@@ -7683,7 +7679,7 @@ let COMBOS_CUR = [];
 let GEARS_CUR = [];
 /* The last forge's honesty report: {feasible, filler, held} or null. */
 let FORGE_NOTE = null;
-/* Slot controls (owner 2026-09-11): REPLACE_OPEN = the slot whose ranked
+/* Slot controls (F32/F33, L21): REPLACE_OPEN = the slot whose ranked
    replacements are open (REPLACE_OPTS = the engine's one-slot forge for
    it); AVOID = every roster already shown under the current lock
    signature, so "refresh" walks the next-best alternatives instead of
@@ -7737,8 +7733,8 @@ function renderSetup(){
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This content is blind-validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been blind-validated at this size yet.</div>`);
-  /* honesty mirror (2026-09-02): the size input lives in the masthead now,
+    `<div class="notice"><b>Extrapolated.</b> This content is validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been validated at this size yet.</div>`);
+  /* honesty mirror: the size input lives in the masthead now,
      so the caveat must surface THERE the moment an unvalidated size is set —
      the full prose stays in the setup panel this chip points at */
   const mh = $("size-notice-mh");
@@ -7751,7 +7747,7 @@ function renderSetup(){
       mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
     } else if (extra){
       mh.textContent = "extrapolated size";
-      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet blind-validated. Details in the setup panel`;
+      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet validated at this size. Details in the setup panel`;
     }
   }
 }
@@ -7762,7 +7758,7 @@ function renderSetup(){
    pieces isn't nagged; a genuinely off-comp weapon at this content + size
    gets multiple concrete options, clickable to swap in place. */
 /* Verdict thresholds live in the DATA layer (templates/scoring.yaml
-   swap_advisor block) like every other PROVISIONAL tunable, so the expert
+   swap_advisor block) like every other PROVISIONAL tunable, so a curation
    pass can find them; the fallback only covers a pre-block dataset. */
 const SWAP_CFG = (DATASET.scoring || {}).swap_advisor
   || { min_rank: 15, min_gain: 1.0, offcomp_rank: 60 };
@@ -7780,8 +7776,9 @@ function swapEligible(review){
   review.forEach((m, i) => {
     if (!m) return;
     /* viability-excluded and style-unfit members always get their
-       replacement advice — owner rules flag them regardless of rank
-       (2026-08-18; style gate 2026-08-23; the cost gate retired 2026-09-07) */
+       replacement advice — the generation rules flag them regardless of
+       rank (the viability exclusions and the style gate; the cost gate is
+       retired) */
     if ((m.off_comp || m.off_style) && m.options.length){ ok.add(i); return; }
     if (m.rank < SWAP_CFG.min_rank) return;
     const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
@@ -7801,7 +7798,7 @@ function swapHint(m, i){
   if (!opts.length) return "";
   const pool = Object.keys(WEAPONS).length;
   const label = m.off_comp
-    ? `<b class="offcomp">off-comp at this size (owner rule) — swap to</b>`
+    ? `<b class="offcomp">off-comp at this size (generation rule) — swap to</b>`
     : m.off_style
       ? `<b class="offcomp">off-style for ${esc(styleName() || STYLE)} at this size — swap to</b>`
       : m.rank >= SWAP_CFG.offcomp_rank
@@ -7822,7 +7819,7 @@ function memberPop(i, ctx){
     : ' · <b class="least">least load-bearing</b>';
   return `<div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
     <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — a refresh rebuilds it">forged</span>' : PROV[i] === "l" ? '<span class="prov locked" title="locked — a refresh keeps this slot">locked</span>' : ""}</div>
-    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
+    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="generation rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
     ${ctx.hintable.has(i) ? swapHint(ctx.review[i], i) : ""}
     <div class="dm-actions">
       <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
@@ -7837,8 +7834,8 @@ function memberPop(i, ctx){
     ${REPLACE_OPEN === i ? replaceListHtml(i) : ""}
   </div>`;
 }
-/* The ranked replacements for one slot (owner 2026-09-11, "show ranked
-   alternatives, I pick"): the engine's one-slot forge — every option is
+/* The ranked replacements for one slot (the engine ranks, the player
+   picks; F32/F33): the engine's one-slot forge — every option is
    scored as a dressed pick into the REST of the comp and passes the
    forge's own gates, so the list never offers what the forge would
    refuse. Display only: the engine ranks, the page translates. */
@@ -7852,9 +7849,9 @@ function replaceListHtml(i){
     ${REPLACE_OPTS.map(o => `<button class="rp-opt${o.delta < 0 ? " neg" : ""}" data-replaceat="${i}" data-replaceto="${o.weapon}" title="${esc(nameOf(o.weapon))} in this slot: ${signed(o.delta)} comp score, scored in its doctrine kit">${icon(o.weapon, 22)}<span>${esc(nameOf(o.weapon))}</span><b>${signed(o.delta)}</b></button>`).join("")}
   </div>`;
 }
-/* The wheel's comp board (owner 2026-08-27): the roster as four main-role
+/* The wheel's comp board: the roster as four main-role
    columns, each member a full dm tile with the same popover and actions
-   the retired party strip carried (owner 2026-08-27). Built
+   the retired party strip carried. Built
    during renderRoster (the render that runs exactly when roster state
    changes) and cached, so wheel spins never pay for the roster analysis. */
 let BOARD_HTML = "", NOTES_HTML = "";
@@ -7871,11 +7868,11 @@ function buildCompBoard(ctx){
   const adv = ENG.roleAdvisory(party, chests);
   if (!adv || !adv.members.length) return "";
   const book = ENG.rolesBook || {};
-  /* The tile label (owner 2026-09-11): PRIMARY · tag · tag. The primary
+  /* The tile label (R37, L22): PRIMARY · tag · tag. The primary
      is the DETECTED seat's word (the played role, as the tile always
      showed — a healer reads its heal profile instead), the tags are the
      weapon's dataset `label.tags` (derived at build from the sheet,
-     E-first, or the owner's cited override). The page composes; it never
+     E-first, or a cited override in roles.yaml labels). The page composes; it never
      derives a tag. */
   const fine = (id, w) => {
     const L = (DATASET.weapons[w] || {}).label || null;
@@ -7885,8 +7882,8 @@ function buildCompBoard(ctx){
     else if (!primary && det) primary = (det.name || id).split(" / ")[0].split(" (")[0];
     return [primary].concat(L ? L.tags : []).filter(Boolean).join(" · ");
   };
-  /* four MAIN columns only (owner: "only show main roles like tank
-     support dps and healers") — the fine played role rides each tile */
+  /* four MAIN columns only (tank, support, dps, healer) — the fine
+     played role rides each tile */
   const CLS = { frontline: ["Tank", "var(--role-tank)", 0],
                 support:   ["Support", "var(--role-support)", 1],
                 dps:       ["DPS", "var(--role-melee)", 2],
@@ -7933,8 +7930,8 @@ function buildCompBoard(ctx){
     </div>`).join("")}${openCol}${scrim}</div>`;
 }
 function renderRoster(){
-  /* The party's ONE dock is the wheel's comp board (owner 2026-08-27: "this
-     is meant to replace the party section below" — the old strip is gone).
+  /* The party's ONE dock is the wheel's comp board (it replaces the
+     party section that sat below — the old strip is gone).
      This render computes the roster analysis, caches the board, and caches
      the notes rail; renderWheelFoot injects both.
      contribution = fitness lost if this member left — the caller's
@@ -7961,7 +7958,7 @@ function renderRoster(){
       + loadoutPanel(LO_OPEN));
   NOTES_HTML = notes.join("");
 }
-/* ---------------- party-dash kit flyout (owner 2026-09-01) ----------------
+/* ---------------- party-dash kit flyout ----------------
    Hovering a member tile in the dash opens ONE surface left of the panel:
    the member's worn kit + scored spells + role on top, then the same
    popover block the tiles used to carry (fit, swap hints, kit/dossier/
@@ -7970,7 +7967,7 @@ function renderRoster(){
    the ≤960 tap-sheet path is untouched. Display only — reads state,
    never scores. */
 let PDASH_FLY_I = null, PDASH_FLY_ROLE = "";
-/* sticky kit editor (owner 2026-09-01): once opened from the flyout, the
+/* sticky kit editor: once opened from the flyout, the
    editor follows every member hovered until toggled shut */
 let PDASH_KIT = false;
 function pdashKitHtml(i, roleTxt){
@@ -8215,8 +8212,8 @@ function renderPickerChips(){
    updating each card's --a angle lets CSS transitions carry them around
    the rim instead of snapping. */
 /* degrees between rim cards — wider on phones so touch-sized cards never
-   overlap on the smaller radius (mobile pass 2026-08-21). Owner 2026-08-27:
-   3 per side at a wider step so the fewer, larger cards stay readable. */
+   overlap on the smaller radius. Three cards per side at a wider step,
+   so the fewer, larger cards stay readable. */
 const wheelStepDeg = () => matchMedia("(max-width:640px)").matches ? 40 : 31;
 const WHEEL_WINDOW = 3;    /* cards rendered each side of the focus */
 
@@ -8290,7 +8287,7 @@ function hubRingData(){
 function renderHubRings(rings){
   let r = 94;
   $("hub-rings").innerHTML = rings.map(g => {
-    /* SEMICIRCLE gauges (owner 2026-09-01): like the rim cards, a ring
+    /* SEMICIRCLE gauges: like the rim cards, a ring
        lives on the top arc only — 100% spans the semicircle, so the dash
        is half the pathLength (the CSS rotation starts it at 9 o'clock) */
     const v = Math.max(0, Math.min(100, 100 * g.have / g.want)) / 2;
@@ -8326,7 +8323,7 @@ const CAP_ICON = {
   damage_debuff:"weaken", max_health_cut:"hpcut",
 };
 function hubCapsHtml(w){
-  /* Ordered the way the owner reads a weapon (2026-08-21 ruling): what
+  /* Ordered E-first (unique-ability first, standing rule 5): what
      the E does comes first, then Q, then W — within one slot, the
      biggest effect leads. Sub-unit slot contributions (< 1.0 effective)
      don't claim a slot, so an E's incidental dribble can't outrank a
@@ -8447,10 +8444,10 @@ function reseatPickSearch(dash, parked){
 }
 function renderWheelFoot(keys, recs, rings){
   /* same commands as ever: "forge the rest" locks current members,
-     "reforge all" rebuilds only the generated slots (2026-08-18).
+     "reforge all" rebuilds only the generated slots.
      reforge needs no recommendation capacity — it must stay reachable at
      the hard cap (recs === null), where it used to vanish with the forge */
-  /* "refresh unlocked" (owner 2026-09-11): rebuilds every slot that is
+  /* "refresh unlocked" (F32/F33): rebuilds every slot that is
      not LOCKED — manual picks included — and walks the next-best comp on
      each press (the forge avoids every roster already shown) */
   const reforgeBtn = party.length && party.some((_, i) => PROV[i] !== "l")
@@ -8459,13 +8456,13 @@ function renderWheelFoot(keys, recs, rings){
   const forge = (recs !== null && party.length < PLAN()
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
     : "") + reforgeBtn;
-  /* the comp board lives in the right-edge party dash (owner 2026-09-01,
-     "so we can see them all much easier") — the foot keeps the compact
+  /* the comp board lives in the right-edge party dash (where the whole
+     roster reads at once) — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
      on every roster-state change), so wheel spins reuse it for free. */
   const board = BOARD_HTML;
-  /* ONE line, carrying only what is NOT already on screen (owner
-     2026-09-02). The slot number is the pick card's header, the playstyle
+  /* ONE line, carrying only what is NOT already on screen.
+     The slot number is the pick card's header, the playstyle
      is in the masthead and the radar centre, and "party n/n" appeared here
      TWICE - once on its own and again as a ring. What survives: the ring
      legend, which is colour-matched to the hub arcs it labels; the
@@ -8517,7 +8514,7 @@ function renderWheel(recs){
     : FACET.type === "badge"
       ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
       : `utility: ${FACET.v}`;
-  /* one line in the bar (2026-09-11): the count never truncates, the
+  /* one line in the bar: the count never truncates, the
      description ellipsizes, the full sentence rides the tooltip */
   const nMatch = `${keys.length} match${keys.length === 1 ? "" : "es"}`;
   /* the words compact away by the slot's own width (.w spans; see the
@@ -8595,11 +8592,11 @@ function renderGroups(){
       const have = s[c] || 0, t = target(c), soft = softCap(c), lo = targetMin(c);
       const below = floorHit(c, sfl[c] || 0);
       const over = have > soft;
-      /* four stages (owner 2026-09-10, target is the median): red under
+      /* four stages (target is the median, standing rule 17; L20): red under
          the bare minimum winners get away with, amber from there to the
          typical winner, green from typical to the soft cap, purple past it */
       const cls = over ? "over" : have < lo ? "low" : have < t ? "part" : "met";
-      /* bar ruler (owner 2026-08-27, same as the radar): 100% = the
+      /* bar ruler (the display ruler, same as the radar): 100% = the
          comp-fitted ceiling (soft cap); the brass tick marks the typical
          winner, the thin red one the bare minimum. Beyond-ceiling stacking
          shows purple, never a longer bar. */
@@ -8682,7 +8679,7 @@ function renderWeaknesses(){
     if (below || (ENG.weight(x.cap) >= 6 && ratio < 0.5)) needed.push({...x, floorHit: below});
     else nice.push(x);
   }
-  /* the fix, not the units (owner 2026-08-21): each gap leads with the
+  /* the fix, not the units: each gap leads with the
      weapons that close it — click to add. Ranked by the flat sheet score
      for that capability (the same display layer the dossier shows);
      excluded weapons never suggested; duplicates allowed (real comps
@@ -8693,7 +8690,7 @@ function renderWeaknesses(){
     .sort((a, b) => (b[1].capabilities[cap] - a[1].capabilities[cap])
                     || a[0].localeCompare(b[0]))
     .slice(0, k).map(([w]) => w);
-  /* image-first, player-voiced cards (owner 2026-08-21): the fix leads at
+  /* image-first, player-voiced cards: the fix leads at
      full size, the gap wears its short title (full prose in the tooltip),
      and priority is carried by order alone — no rank numerals, no keys */
   const row = (x, i, cls) => {
@@ -8721,7 +8718,7 @@ function renderWarning(){
        <span class="b"><b>Greedy trap.</b> ${left} slot${left>1?"s":""} left but ${unc.length} high-weight capabilities still uncovered
        (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
     : "";
-  /* The forge's honesty report (2026-08-18): an infeasible constraint set
+  /* The forge's honesty report: an infeasible constraint set
      or a slot the objective dislikes is SAID, never silently absorbed. */
   let forgeBits = "";
   if (FORGE_NOTE){
@@ -8741,12 +8738,12 @@ function renderWarning(){
         <span class="b"><b>No further alternative.</b> Every comp the search reaches under these locks has been shown (${AVOID.length} so far) — the roster stays as it is. Lock a different member, change a pick, or change the style or size to open new ground.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
-        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
+        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — structural minimums fitted from real comps, which the capability score alone does not see.</span></div>`;
   }
   $("warn-slot").innerHTML = greedy + forgeBits;
 }
 /* Names for the spells a scored combo equips — the loadout the engine
-   ACTUALLY valued, shown with the recommendation (2026-08-18). */
+   ACTUALLY valued, shown with the recommendation. */
 function scoredKitLine(w, combo){
   const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const parts = (ENG.comboSpells(w, combo) || []).map(([slot, sid]) => {
@@ -8822,7 +8819,7 @@ function renderRecDetail(recs){
         ${(() => {
           /* the score is the EXACT compScore delta: base blend + the prior
              and duplication terms. adj = viability tier − duplicate cost,
-             shown when it moves the number (2026-08-18). */
+             shown when it moves the number. */
           const blend = ENG.alpha * top.dFit + ENG.beta * top.dSyn + ENG.delta * top.meta;
           const adj = top.score - blend;
           const adjBit = Math.abs(adj) > 0.005
@@ -8858,7 +8855,7 @@ function renderFootnote(){
    the size this comp is FOR — PLAN(), not the roster judged so far: a
    20-man plan with 3 members picked must quote large-fight evidence, not
    small ganks, or the cohort strip stays invisible for the whole planning
-   phase. (The engine's meta prior IS bucketed since 2026-09-08 and reads
+   phase. (The engine's meta prior IS bucketed and reads
    ENG.sizeBucket() at roster size; this strip deliberately keys off PLAN()
    — the fights the comp is FOR — so the two axes differ by design.)
    Participant axis = 2 x party size, mirroring engine size_bucket. */
@@ -8883,7 +8880,7 @@ function usageOf(w){
            inBattles: ((USAGE.buckets_battles || {})[u.key] || {})[w] || 0,
            label: u.label };
 }
-/* ---------------- observed organization cohorts (PR #5, 2026-08-22) ----
+/* ---------------- observed organization cohorts (PR #5) ----
    sample_battles.py groups actors ONLY when the kill feed states the same
    Alliance/Guild identity; ambiguous players are excluded. Cohorts are NOT
    parties, sides, or win-rate samples — the copy says "observed together",
@@ -8940,7 +8937,7 @@ function cohortAffinity(){
     .sort((a, b) => b.cohorts - a.cohorts || b.lift - a.lift);
   return { ctx, selected, N, candidates, minOverlap };
 }
-/* Partial-roster neighbours (roadmap item 6, 2026-08-24 — the
+/* Partial-roster neighbours (roadmap item 6 — the
    KILLBOARD_AFFINITY.md "next step": show a few anonymized observed
    organization ROSTERS that overlap the selected weapons, not only the
    per-candidate aggregation above). Same rules as cohortAffinity: the
@@ -8969,7 +8966,7 @@ function cohortNeighbours(){
   rows.sort((a, b) => b.shared - a.shared || b.jaccard - a.jaccard || a.i - b.i);
   return { ctx, selected, matched: rows.length, rows: rows.slice(0, 3) };
 }
-/* Recurring observed families (roadmap item 7, 2026-08-24): mined offline
+/* Recurring observed families (roadmap item 7): mined offline
    by pipeline/build_cohort_families.py — an anchor PAIR that recurs across
    orgs and battles, plus the weapons frequently observed alongside (their
    shares). The page renders the committed artifact verbatim and marks
@@ -9005,8 +9002,8 @@ function familiesHtml(withNote){
         `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — observed with this core in ${Math.round(100 * c.share)}% of its cohorts">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
     </div>`).join("")}${note}</div>`;
 }
-/* Observed effect quotas (increment 3b, owner-ruled 2026-08-26: "yes —
-   advise quotas"). EFFECT_QUOTAS carries how many carriers of each typed
+/* Observed effect quotas (advice only, never a score; R18, display test
+   14). EFFECT_QUOTAS carries how many carriers of each typed
    gear effect (Demon/Judicator/Guardian/Royal/Hellion chests) the
    near-complete observed rosters field per 20 — mined from the
    reference-build evidence layer, scaled to PLAN(). Rows compare against
@@ -9242,8 +9239,8 @@ function statsBlock(key){
     ${ip ? `<div class="st-ip">item power — ${ip}</div>` : ""}`;
 }
 /* the dossier body — one builder serving BOTH the drawer (wheel/evidence
-   clicks) and the party dash's kit flyout (owner 2026-09-01: "combine the
-   dossier and the popout into one thing") */
+   clicks) and the party dash's kit flyout (the dossier and the pop-out
+   are one surface) */
 function detailHtml(w){
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
@@ -9305,7 +9302,7 @@ function renderDetail(w){
   $("drawer").dataset.open = "true";
   closePdash();   /* the dash overlays the drawer — never show both */
 }
-/* Per-ability facts panel (2026-08-19): every effect the game data states
+/* Per-ability facts panel: every effect the game data states
    for a spell — typed effects from the structured effect layer, the
    resolved description carrying the game's own numbers (damage, CC
    durations, radii), cooldown/range facts, and the PvP interaction record
@@ -9521,7 +9518,7 @@ function renderCompanion(live, err){
     if (cb) cb.checked = LIVE_SYNC;
   }
 }
-/* ---- live sync (2026-08-23, owner: "it should be as current as possible")
+/* ---- live sync (the comp stays as current as the companion's feed)
    After a load, companion updates keep flowing into the comp on every poll:
    a member's weapon swap updates their slot in place, a newly visible
    weapon fills in, and the member's REAL Q/W picks (spell UniqueNames off
@@ -9546,8 +9543,8 @@ function liveSpellPicks(w, spells){
   }
   return Object.keys(out).length ? out : null;
 }
-/* companion equipment -> LOADOUT gear keys (2026-09-06, "flow the worn kit
-   into the loadout"). The companion reports full game ids
+/* companion equipment -> LOADOUT gear keys (the worn kit flows into the
+   loadout). The companion reports full game ids
    (T6_HEAD_CLOTH_SET1@1); the curated catalogue keys head/armor/shoes/
    cape/offhand tier-stripped (HEAD_CLOTH_SET1) but potions and food
    TIERED (T6_POTION_HEAL) — so match exact, then tier-stripped, then by
@@ -9678,8 +9675,8 @@ function toggleCompanion(){
 /* Land a forge result on the roster (shared by "forge the rest" and every
    refresh): the kept slots keep only their EXPLICIT stored combos —
    pick-derived resolutions must keep re-resolving under future context
-   changes (review 2026-08-18) — and every generated slot lands with the
-   kit the forge actually VALUED (dressed forge 2026-08-27: r.gears[i] is
+   changes — and every generated slot lands with the
+   kit the forge actually VALUED (the dressed forge: r.gears[i] is
    the chosen doctrine-kit variant, part of the score), marked as engine
    picks, the caller reference filling only what the search left unset,
    spells from the combo the forge scored. */
@@ -9716,7 +9713,7 @@ function applyForgeResult(r, keptStored, keptLoadouts, keptProv, note){
   void wheelEl.offsetWidth;
   wheelEl.classList.add("spun");
 }
-/* "Refresh the rest" (owner 2026-09-11): hold every LOCKED slot (and the
+/* "Refresh the rest" (F32/F33): hold every LOCKED slot (and the
    slot the press came from, which it locks), rebuild the others for the
    current content, style and size, and give the NEXT-BEST comp each press
    — the forge is handed every roster already shown under this lock
@@ -9738,7 +9735,7 @@ function refreshUnlocked(holdIndex){
   const lockedStored = keep.map(i => COMBO[i]);
   const lockedProv = keep.map(() => "l");
   /* the forge evaluates the roster the board shows: on-screen kits ride
-     as locked_gears (2026-09-11); a member with no curated piece stays naked */
+     as locked_gears; a member with no curated piece stays naked */
   const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i]));
   const forgeSize = Math.max(goal, locked.length);
   const sig = lockSignature(locked, forgeSize);
@@ -9845,7 +9842,7 @@ document.addEventListener("click", e => {
   const loInFly = !!e.target.closest("#pdash-fly");
   if (loadoutHandleClick(e)){
     /* a kit toggle from the flyout makes the editor sticky there — it then
-       follows every member hovered until toggled shut (owner 2026-09-01) */
+       follows every member hovered until toggled shut */
     if (loInFly) PDASH_KIT = LO_OPEN !== null;
     render(); return;
   }
@@ -9936,7 +9933,7 @@ document.addEventListener("click", e => {
     render(); } return; }
   const fl = e.target.closest("[data-family-load]");
   if (fl){
-    /* observed-core loader (2026-08-24): the family's anchor pair joins as
+    /* observed-core loader: the family's anchor pair joins as
        MANUAL picks through the same mutation path as data-add — the engine
        scores them like any manual choice (off-style / redundancy flags
        apply as usual) and the forge completes the rest. Observed data
@@ -9956,7 +9953,7 @@ document.addEventListener("click", e => {
   }
   const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge");
   if (forgeBtn){
-    /* Deterministic constrained beam search in the engine (2026-08-18) —
+    /* Deterministic constrained beam search in the engine —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
        bodies and treated every forged slot as manual afterwards.
        "forge the rest" locks every current member; "reforge all" keeps
@@ -9972,8 +9969,8 @@ document.addEventListener("click", e => {
     const lockedProv = keep.map(i => PROV[i] || "m");
     if (locked.length >= goal){ return; }
     const lockedStored = keep.map(i => COMBO[i]);
-    /* Forge under the TARGET-size context (2026-08-24 fix): the engine is
-       normally judged at roster size (owner ruling 2026-08-21), but every
+    /* Forge under the TARGET-size context: the engine is
+       normally judged at roster size (the roster-size rule), but every
        generation gate — single-target-E, cost, style, healer, per-weapon
        dup allowances, size physics — keys off the size being BUILT. A
        2-member roster forging to 20 used to run the whole search under
@@ -9983,10 +9980,10 @@ document.addEventListener("click", e => {
        forge + parity stayed green over it). Restore mirrors inPickContext;
        render()'s syncEngine re-judges the new roster anyway. */
     const forgeSize = Math.max(goal, locked.length);
-    /* The forge evaluates the roster the board shows (2026-09-11): a
+    /* The forge evaluates the roster the board shows: a
        locked member's ON-SCREEN kit rides as locked_gears, so it is
-       scored in exactly that kit (the 2026-08-27 ruling: explicit gear
-       is scored verbatim, never re-dressed); a member with no curated
+       scored in exactly that kit (locked gear is scored verbatim, never
+       re-dressed — V5, F25/F26); a member with no curated
        piece equipped stays naked, as before. A naked lock used to read
        a 2.9-unit healer as 2.0 and widen the heal gap the forge then
        closed with a second body. */
@@ -9996,14 +9993,14 @@ document.addEventListener("click", e => {
     try { r = ENG.forge(forgeSize, locked, lockedCombos, undefined, undefined, lockedGears); }
     finally { ENG.setContent(CONTENT, SIZE, STYLE); }
     /* The search is deterministic: same manual picks, content, style and
-       size -> the same roster. Say so (2026-09-03, "reforge all not
-       working") instead of silently re-rendering an identical comp. */
+       size -> the same roster. Say so instead of silently re-rendering an
+       identical comp, which reads as the button doing nothing. */
     const unchanged = reforgeAll && party.length === r.party.length
       && [...r.party].sort().join() === [...party].sort().join();
     applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, { unchanged });
     return;
   }
-  /* slot controls (owner 2026-09-11): lock / replace / refresh the rest */
+  /* slot controls (F32/F33, L21): lock / replace / refresh the rest */
   const lk = e.target.closest("[data-lock]");
   if (lk){
     const li = +lk.dataset.lock;
@@ -10106,14 +10103,14 @@ document.addEventListener("click", e => {
 document.addEventListener("change", e => {
   if (loadoutHandleChange(e)){
     /* a user spell pick takes over the member's loadout: drop any stored
-       forge combo so scoring follows the picker (2026-08-18) */
+       forge combo so scoring follows the picker */
     const sel = e.target.closest("[data-lo-spell]");
     if (sel) COMBO[+sel.dataset.loSpell.split(":")[0]] = null;
     render(); return;
   }
   if (e.target.id === "content"){
     CONTENT = e.target.value; PLANNED = baseSize();
-    /* manual/live members SURVIVE a content switch (2026-08-18); slots the
+    /* manual/live members SURVIVE a content switch; slots the
        forge generated were built for the OLD template and are dropped —
        "reforge all" or "forge the rest" rebuilds them for the new one. */
     const keep = party.map((_, i) => i).filter(i => PROV[i] !== "f");
@@ -10211,7 +10208,7 @@ $("pick-filter").addEventListener("keydown", e => {
       if (btn) btn.click();
     }
   });
-  /* drag-to-rotate with casino momentum (owner 2026-08-21): track the
+  /* drag-to-rotate with casino momentum: track the
      pointer's angle around the wheel center; every step-angle crossed
      shifts the focus one card (clockwise drag brings the 11-o'clock card
      under the notch, focus − 1). Releasing with speed FLINGS the wheel:
@@ -10348,7 +10345,7 @@ render();
    floors, weaknesses, recommendation ordering and marginal terms into the
    order a caller needs them: status -> biggest need -> next pick -> why ->
    what is still missing.
-   Plus two on-demand caller workflows (PR #6, 2026-08-22), folded shut by
+   Plus two on-demand caller workflows (PR #6), folded shut by
    default so the party dock keeps its above-the-fold seat:
    - a player weapon pool that feeds CompEngine.recommend(pool)
    - a swap lab comparing exact roster replacements, applied through the
@@ -10379,7 +10376,7 @@ render();
     return {tone, label, critical, weak, excess};
   }
 
-  /* ================= COMP-STATUS RADAR (owner 2026-08-26) =================
+  /* ======================== COMP-STATUS RADAR ========================
      The status card IS the diagram: one axis per capability GROUP (the same
      taxonomy the deep board's renderGroups uses, "Other" guard included),
      plotted as supply vs template target, with everything textual living in
@@ -10451,13 +10448,13 @@ render();
     return `<g transform="translate(${x - size/2},${y - size/2}) scale(${size/24})"><path d="${DL_ICONS[key]}" fill="${DL_ICON_FILL[key] ? col : "none"}" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   }
 
-  /* THE RULER (owner 2026-08-27: "we should never ever be above 100 for
-     anything but this 0-100 has to be based on ground facts"): 100% = the
+  /* THE RULER (the display ruler: nothing reads above 100, and the 0-100
+     scale rests on measured comps): 100% = the
      comp-fitted CEILING — the soft cap, fitted at 1.15x the MOST any good
-     comp fields (2026-08-21 recalibration). The ceiling is style-neutral,
+     comp fields (standing rules 2 and 17). The ceiling is style-neutral,
      so playstyle tradeoffs read directly: a real brawl ball pushes toward
      100% Frontline while sitting low on ranged Damage, a clap the
-     opposite — "these tradeoffs are what define the playstyle". Per-cap
+     opposite — those tradeoffs are what define the playstyle. Per-cap
      supply is counted up to its own soft cap, so coverage can never
      exceed 100 and one overstacked capability can't mask its siblings'
      gaps; beyond-ceiling stacking shows as the purple marker, never as a
@@ -10465,8 +10462,8 @@ render();
      (Σ target / Σ soft). */
   function radarAxes(){
     const s = supply(party);
-    const sfl = supplyFloor(party);   /* Option C floor basis (owner
-      2026-08-27): coverage quotes the DRESSED supply, but the below-floor
+    const sfl = supplyFloor(party);   /* Option C floor basis (standing
+      rule 10): coverage quotes the DRESSED supply, but the below-floor
       predicate reads the weapon+loadout basis the structural floors use */
     const grouped = new Set(Object.values(GROUPS).flat());
     const other = Object.keys(REQS()).filter(c => !grouped.has(c));
@@ -10477,8 +10474,8 @@ render();
         const have = s[c] || 0, t = target(c), soft = softCap(c);
         return {cap: c, have, t, soft, floor: floorHit(c, sfl[c] || 0),
                 over: have > soft, optional: !!REQS()[c].optional};
-      /* An OPTIONAL capability the comp fields none of is not a gap (owner
-         2026-08-28) — it leaves the axis entirely, exactly as it leaves
+      /* An OPTIONAL capability the comp fields none of is not a gap
+         (optional template rows) — it leaves the axis entirely, exactly as it leaves
          max_fitness. Brought, it counts normally. */
       }).filter(r => !(r.optional && r.have <= 0));
       if (!rows.length) continue;
@@ -10688,10 +10685,10 @@ render();
     return s;
   }
 
-  /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
+  /* Fight chain (roadmap item 1): the fight as the caller's
      playstyle sequences it, stage by stage — ENG.fightChain rendered
      verbatim, gradings from the comp-fitted targets, display only.
-     2026-08-24: stages are clickable — the fold lists WHICH equipped
+     Stages are clickable — the fold lists WHICH equipped
      spells supply each stage (engine `sources`, the same resolved
      loadouts scoring sums), and the improves line names its terms so a
      stage that wins on summed caps is reconcilable with the gain tiles. */
@@ -10752,8 +10749,8 @@ render();
     return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${openStage ? chainSources(openStage) : ""}${imp}</div>`;
   }
 
-  /* Negative recommendations / redundancy warnings (roadmap item 3,
-     2026-08-24): the "why not" behind the pick — ENG.pickReport is the
+  /* Negative recommendations / redundancy warnings (roadmap item 3):
+     the "why not" behind the pick — ENG.pickReport is the
      SIGNED decomposition of the same exact marginal the score already is
      (its terms reconstruct the score at 1e-9, parity-pinned). This
      renders it verbatim: saturated capabilities, over-stack costs, the
@@ -10809,7 +10806,7 @@ render();
     const combos = COMBOS_CUR.concat([rec.combo === undefined ? null : rec.combo]);
     /* the candidate joins in the kit the engine valued it with; existing
        members keep their worn gear — the same dressed basis the pick score
-       and the biggest-need row use (2026-09-03) */
+       and the biggest-need row use */
     const gears = GEARS_CUR.concat([rec.kit && rec.kit.length ? rec.kit : null]);
     return inPickContext(() => {
       const sup = ENG.effectiveSupply(next, combos, gears);
@@ -10929,7 +10926,7 @@ render();
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
-    /* the fold lives in the left-edge tools panel (2026-09-02): it is an
+    /* the fold lives in the left-edge tools panel: it is an
        interactive workflow, not glance-info, so it costs the grid nothing */
     const old = document.getElementById("dl-tools-fold");
     if (old) old.remove();
@@ -10986,7 +10983,7 @@ render();
 
     const terms = explain(party, top.w).slice(0,3);
     const remaining = afterPickGaps(top);
-    /* need + pick are ONE card (owner 2026-08-22): the biggest need is the
+    /* need + pick are ONE card: the biggest need is the
        question, the pick is the answer — the need renders as the card's
        header line, runner-up gaps as inline chips. The reclaimed column
        goes to the wheel. */
@@ -11023,7 +11020,7 @@ render();
     /* observed killboard context (PR #5 integration): _app.js owns the
        cohort math; the note appears only when cohorts echo this pick */
     const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
-    /* alternatives, rehomed (2026-08-22): the hidden flank carried the
+    /* alternatives, rehomed: the hidden flank carried the
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
@@ -11036,7 +11033,7 @@ render();
           <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
-    /* three cards, not one stack (owner 2026-09-02): the diagnosis, the
+    /* three cards, not one stack: the diagnosis, the
        fight chain and the pick each get their own frame. They ride a single
        column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `

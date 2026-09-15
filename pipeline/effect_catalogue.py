@@ -2,11 +2,11 @@
 """
 Enumerate every combat effect the game defines, from the structured spell data.
 
-WHY: capability scores are only as good as the list of effects we know exist.
-That list has so far been 13 hand-written prose regexes in parse_dumps.py, and
-we have twice found gaps by accident (the knockback phrasing bug; anti_zone).
-This script derives the vocabulary from the data instead of inventing it, so
-the gaps are enumerated up front.
+WHY: capability scores are only as good as the list of known effects. That
+list has so far been 13 hand-written prose regexes in parse_dumps.py, and
+gaps have twice been found by accident (the knockback phrasing bug;
+anti_zone). This script derives the vocabulary from the data instead of
+inventing it, so the gaps are enumerated up front.
 
 TWO LAYERS, deliberately not collapsed:
   effects       game mechanics (~40 combat-relevant)  -> the EVIDENCE layer
@@ -70,7 +70,7 @@ MECHANIC_NODES = {
     "spellimmunity": "spell_immunity", "cceffectimmunity": "cc_immunity",
     "notinterruptible": "uninterruptible", "aura": "aura",
     "invisibility": "invisibility", "forcedmovement": "forced_movement",
-    # damage reflect (2026-08-28): `reflectdamageactive` carries
+    # damage reflect: `reflectdamageactive` carries
     # @amountpercent (0.15 cloth shield .. 1.5 war-glove Counter) and a
     # @target that says WHO gets the reflecting buff — self for the personal
     # stances, friendall/friendotherplayers for the team ones (Hunter Hood's
@@ -93,7 +93,7 @@ COMBAT_PAT = re.compile(
 
 # Proposed effect -> capability map. UNMAPPED entries are the whole point of
 # this script: they are the anti_zone-class gaps still hiding in the data.
-# Nothing here is authoritative until a domain expert signs it off.
+# Nothing here is authoritative until curation signs it off.
 EFFECT_TO_CAPABILITY = {
     "stun": "stun", "root": "root", "silence": "silence",
     "knockback": "knockback_displace", "forced_movement": "knockback_displace",
@@ -332,12 +332,12 @@ def main():
 
     weapon_spells = {s for L in weapon_lines.values()
                      for slot in L["spells"].values() for s in slot}
-    # GEAR (2026-08-27, owner: "ok do extend the catalogue to gear"): armor,
-    # helmets, boots and capes carry abilities exactly like weapons, but only
-    # weapon spells were ever indexed — so every gear-sheet claim rested on
-    # prose + overrides and the lint could not check a single one (the reveal
-    # investigation hit this wall). Gear actives AND passives are indexed the
-    # same way; the effect walk itself is source-agnostic.
+    # GEAR: armor, helmets, boots and capes carry abilities exactly like
+    # weapons, but only weapon spells were ever indexed — so every
+    # gear-sheet claim rested on prose + overrides and the lint could not
+    # check a single one (the reveal investigation hit this wall). Gear
+    # actives AND passives are indexed the same way; the effect walk itself
+    # is source-agnostic.
     gear_spells = {s for L in gear_lines.values()
                    for kind in ("actives", "passives") for s in (L.get(kind) or [])}
     indexed_spells = weapon_spells | gear_spells

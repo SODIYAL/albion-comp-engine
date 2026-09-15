@@ -5,10 +5,10 @@
  * that file is rendering for the whole page already; the panel, the picker
  * and the permalink codec are a separable concern with its own state.
  *
- * Display layer. Since 2026-08-20 gear IS curated and scored engine-side
- * (dataset `gear`, engine build_extra/kit_options) — this panel's picks are
- * not yet wired into the browser scoring calls; that wiring is the next
- * step, and until then fitness shown here is weapons alone.
+ * Display layer. Gear is curated and scored engine-side (dataset `gear`,
+ * engine build_extra/kit_options); the picks made here reach scoring
+ * through _app.js (gearsFromLoadout -> GEARS_CUR), so the fitness the page
+ * shows is the dressed party.
  *
  * Reads: GEAR, ICONS, SPELLS, LOADOUTS, CONTENT, party (from _app.js).
  */
@@ -30,7 +30,7 @@ let LO_OPEN = null, LO_PICKING = null, LO_FILTER = "";
 
 const loGear = k => (typeof GEAR !== "undefined" && GEAR[k]) || null;
 const loName = k => (loGear(k) || {}).name || k;
-/* equipment ability tooltip (2026-08-19): the item's actives/passives from
+/* equipment ability tooltip: the item's actives/passives from
    the game's own craftingspelllist (parse_dumps gear_spells.json) */
 function loAbilityTip(k){
   const g = (typeof GEAR_SPELLS !== "undefined" && GEAR_SPELLS[k]) || null;
@@ -48,7 +48,7 @@ function loAbilityTip(k){
    to survive file:// and offline). If ICONS happens to carry a gear key it
    wins, so nothing breaks if that policy is reverted.
 
-   RETRY, don't remove (2026-08-20): opening a picker fires ~18 concurrent
+   RETRY, don't remove: opening a picker fires ~18 concurrent
    render-service requests and the service drops some under burst — every
    URL verified 200 individually. `onerror` used to delete the img
    permanently on the FIRST failure, which is why half the picker showed no
@@ -136,7 +136,7 @@ function loadoutDecode(str){
 }
 
 /* ------------------------------------------------------------- defaults */
-/* Displayed-build selection (changeschapter2.md §F). The index arrives
+/* Displayed-build selection (the §F selection rules, pipeline/build_builds.py). The index arrives
    pre-ordered by approval / patch freshness / confidence and flags canonical
    defaults with their promotion basis; at runtime we additionally require a
    matching party-size range and prefer exact-content records over explicit
@@ -195,7 +195,7 @@ function loadoutPrefill(i){
       if (!(s in L) && Number.isInteger(ref[s]) && ref[s] > 0) L[s] = ref[s] - 1;
     });
   }
-  /* engine fallback (owner 2026-08-21): whatever no promoted caller build
+  /* engine fallback: whatever no promoted caller build
      covers is filled by the engine — spells from the scored combo, gear
      from the comp-aware kit advisor. The kit wears the engine mark so it
      can never be mistaken for a fielded build. */
@@ -203,12 +203,13 @@ function loadoutPrefill(i){
   loadoutEngineGear(i);
 }
 
-/* On-open retro suggestion (owner 2026-08-21: "weapons should come with
-   suggested kits" — including members added before the feature or loaded
-   from share links). SAFE variant: merely looking at a kit must never
-   change the party's fitness, so ref SPELLS are not applied here (a
+/* On-open retro suggestion (every weapon comes with a suggested kit —
+   including members added before the feature or loaded from share
+   links). SAFE variant: opening a kit must never silently swap the
+   member's scored spell combo, so ref SPELLS are not applied here (a
    caller's picks could differ from the member's scored combo) — spells
-   seed from the member's OWN combo and gear picks are display-only. */
+   seed from the member's OWN combo; gear fills from the reference and
+   the kit advisor. */
 function loadoutSuggest(i){
   loadoutPrefillGear(i);
   loadoutEngineSpells(i);
@@ -240,10 +241,9 @@ function loadoutEngineSpells(i){
 }
 
 function loadoutEngineGear(i){
-  /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked
-     2026-08-21): each empty gear slot gets the top-ranked item for THIS
-     member in THIS comp. Display-only — gear picks do not feed browser
-     scoring yet. */
+  /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked):
+     each empty gear slot gets the top-ranked item for THIS member in THIS
+     comp. The picks reach scoring through gearsFromLoadout in _app.js. */
   const w = party[i];
   if (typeof ENG === "undefined" || !ENG.kitOptions) return;
   const L = LOADOUT[i] || (LOADOUT[i] = {});
@@ -260,9 +260,9 @@ function loadoutEngineGear(i){
     if (top && loGear(top.gear)){
       L[s] = top.gear; used = true;
       /* the engine names the DECLARED style's observed build it dressed
-         from (observed_style, 2026-09-08) — display provenance only */
+         from (observed_style) — display provenance only */
       if (top.observed_style) L._style = top.observed_style;
-      /* a thin slot dressed from the seat's pool (pooled, 2026-09-08) */
+      /* a thin slot dressed from the seat's pool (pooled) */
       if (top.pooled) (L._pooled = L._pooled || {})[s] = top.pooled;
     }
   });
@@ -323,12 +323,12 @@ function loPickerGrid(){
 
 /* The panel under an expanded party row. */
 function loDoctrineLine(i){
-  /* Increment 2 (kit doctrine): the member's seat + the doctrine passive
+  /* Kit doctrine: the member's seat + the doctrine passive
      for the equipped chest + any typed gear effect it carries.
      Translation-only — every fact comes straight off the engine. */
   if (typeof ENG === "undefined" || !ENG.primarySeat) return "";
   const seat = ENG.primarySeat(party[i]);
-  if (!seat) return `<div class="lo-ref" title="fail-closed generation (owner ruling 2026-09-01): kit suggestions only speak evidence — with no role-book seat there is no doctrine tier to bound them, so the engine proposes nothing rather than marginal-ranking the whole catalog. Your manual picks always score.">no role-book seat for this weapon — the engine suggests no kit; pick gear manually (it always scores)</div>`;
+  if (!seat) return `<div class="lo-ref" title="fail-closed generation: kit suggestions only speak evidence — with no role-book seat there is no doctrine tier to bound them, so the engine proposes nothing rather than marginal-ranking the whole catalog. Your manual picks always score.">no role-book seat for this weapon — the engine suggests no kit; pick gear manually (it always scores)</div>`;
   const rec = (ENG.rolesBook || {})[seat] || {};
   const chest = (LOADOUT[i] || {}).armor;
   const dp = chest ? (((ENG.gear[chest] || {}).doctrine_passives || {})[rec["class"]] || null) : null;
@@ -363,10 +363,9 @@ function loadoutHandleClick(e){
     const i = +tog.dataset.loOpen;
     LO_OPEN = (LO_OPEN === i) ? null : i;
     LO_PICKING = null; LO_FILTER = "";
-    /* Opening a kit fills any empty slots with SAFE suggestions (owner
-       2026-08-21): ref gear + engine gear (display-only) + spells from
-       the member's OWN scored combo — so looking at a kit still never
-       changes the party's fitness (review 2026-08-18 holds). Caller-ref
+    /* Opening a kit fills any empty slots with SAFE suggestions: ref
+       gear + engine gear + spells from the member's OWN scored combo — so
+       opening a kit never swaps the scored spell combo. Caller-ref
        SPELL prefill stays add/forge-time only, where it is announced. */
     if (LO_OPEN !== null) loadoutSuggest(LO_OPEN);
     return true;
@@ -422,8 +421,8 @@ function loadoutCount(i){
 }
 
 /* --------------------------------------------------- provenance codec
-   Slot provenance (2026-08-18): 'm' = manual / live-party, 'f' = forged;
-   'l' = LOCKED by the user (2026-09-11) — the only state a refresh holds,
+   Slot provenance: 'm' = manual / live-party, 'f' = forged;
+   'l' = LOCKED by the user — the only state a refresh holds,
    manual or forged alike. Encoded into the permalink as a plain m/f/l
    string (`f=` param) so a refresh knows which slots it may rebuild even
    across a shared link; links from before this feature decode to
@@ -445,10 +444,10 @@ function provDecode(str, n){
 }
 
 /* -------------------------------------------- spell picks <-> engine combos
-   The bridge that makes the player's REAL Q/W/passive picks reach scoring
-   (2026-08-18): picks map to the engine's curated loadout bundles via
-   spell ids; slots without a curated pick fall back to the engine's default
-   resolution. Gear stays display-only — no gear capabilities are curated. */
+   The bridge that makes the player's REAL Q/W/passive picks reach scoring:
+   picks map to the engine's curated loadout bundles via spell ids; slots
+   without a curated pick fall back to the engine's default resolution.
+   Gear reaches scoring separately (gearsFromLoadout in _app.js). */
 
 /* {engine slot name -> picked spell id} for member i, or null when the
    member has no spell picks at all. */
@@ -501,7 +500,7 @@ function loadoutPrefillGear(i){
 /* ------------------------------------------------------ combo permalink
    Explicit member combos (forge results — e.g. an E-slot use variant no
    picker can express) travel in the permalink `k=` param, base36 per
-   member, `-` = none (review 2026-08-18: without this a forged E-variant
+   member, `-` = none (without this a forged E-variant
    silently reverted to the default bundle on reload, changing the score).
    Combo indexes are dataset-stable (product order over the weapon's
    loadout slots), not context-dependent, so they persist safely. */

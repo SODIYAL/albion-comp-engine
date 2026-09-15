@@ -38,7 +38,7 @@
   "interactions.json": {
    "adapter": "build_interactions",
    "adapter_version": "1",
-   "sha256": "47a3bd76f4f857ca2018425395c1e925f2004bb7e1f75f9a2fdd0bfa0493b2ec",
+   "sha256": "0bd5ec729566cc74f1a837282936557eec92fa92a1e9042b7acead18de8eaf9b",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "interactions.yaml",

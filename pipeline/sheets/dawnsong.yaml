@@ -12,7 +12,7 @@
 #   - engage/disengage/mobility via Flame Blast's ally move speed REMOVED:
 #     +60% MS for 1.6 seconds is a cast-enabler blip, not movement tooling.
 # heal_reduction 2 not 3: one strong AoE application vs the Spirithunter
-# class of dedicated full-kit anti-heal — expert may bump to 3 if the 40%
+# class of dedicated full-kit anti-heal — raise to 3 if the 40%
 # area cut reads stronger in practice.
 
 - weapon: 2H_FIRE_RINGPAIR_AVALON    # Dawnsong — anti-heal AoE artillery
