@@ -75,6 +75,19 @@ from engine.engine import Engine  # noqa: E402
 CONTENT_FOR_SUPPLY = "territory_defense"   # ZvZ default; supply physics are style/size keyed
 BANDS = (("10-14", 10, 14, 12), ("15-19", 15, 19, 17), ("20", 20, 99, 20))
 KIT_SLOTS = ("Head", "Armor", "Shoes", "Cape", "OffHand", "Potion", "Food")
+HOLDOUT_MOD = 5    # battles with id % 5 == 0 are tier2_blindtest v4h's holdout
+
+
+def in_split(battle, holdout_mod):
+    """Training-split membership: the shipped board never learns from the
+    holdout slice tier2_blindtest v4h evaluates on (derive_meta_prior's rule)."""
+    if not holdout_mod:
+        return True
+    try:
+        return int(battle) % holdout_mod != 0
+    except (TypeError, ValueError):
+        return False
+
 SEATS = ("engage_tank", "stopper_tank", "off_tank", "shield_support",
          "zone_support", "curse_support", "main_healer", "kite_healer",
          "brawl_healer", "ranged_aoe", "sustained_brawler", "bomb_aoe",
