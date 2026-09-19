@@ -294,10 +294,10 @@
   .mh-top .brandmark{flex:1 1 auto; min-width:0; order:0}
   .mh-top .brandmark h1{font-size:17px}
   .masthead .about-link{order:0; flex:none}
-  /* the companion listens on the desktop's localhost, which a phone
-     browser cannot reach: its controls leave the phone masthead (the live
-     tab keeps its panel) */
-  .masthead .lf-btn, .masthead .lf-sync{display:none}
+  /* the live-party controls keep their place: a narrow desktop window
+     docked beside the game is the companion's own layout. They wrap under
+     the brand line, in the part of the masthead that scrolls away. */
+  .masthead .lf-btn, .masthead .lf-sync{order:0; flex:none}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

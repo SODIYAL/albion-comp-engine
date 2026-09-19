@@ -3208,6 +3208,9 @@ render();
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
+  /* a mismatch is a warning chip: phones hide the diagnostics chips but
+     never a .warn one, so the verdict reaches every screen */
+  if (chip && !ok && chip.parentElement) chip.parentElement.classList.add("warn");
   if (dot && !ok) dot.style.background = "var(--gap)";
 })();
 
@@ -3219,8 +3222,9 @@ render();
 (function pinMastheadSummary(){
   const mh = document.querySelector(".masthead");
   const sum = mh && mh.querySelector(".mh-sum");
-  if (!sum || typeof ResizeObserver === "undefined") return;
+  if (!sum) return;
   const pin = () => mh.style.setProperty("--mh-pin", sum.offsetTop + "px");
-  new ResizeObserver(pin).observe(mh);
   pin();
+  addEventListener("resize", pin);
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(pin).observe(mh);
 })();

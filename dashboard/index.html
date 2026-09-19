@@ -504,9 +504,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* ---- the add-weapon bar ----
    ONE container on ONE line (a tight single row, modelled on a segmented
    status bar). Segments are divided by rules, not by their
-   own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
-   it can never scroll (any overflow would clip its own popups, see below)
-   and its nowrap segments overpainted each other on phones. */
+   own pill borders. On desktop the bar never wraps; at and below 960px it
+   WRAPS (the mobile pass) - it can never scroll (any overflow would clip
+   its own popups, see below) and its nowrap segments overpainted each
+   other on phones. */
 .wf-bar{
   display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
   min-width:0; max-width:100%;
@@ -934,8 +935,12 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .wf-comp .dm:hover + .dm .dm-card, .wf-comp .dm:has(+ .dm:hover) .dm-card{transform:none}
 .wf-comp .dm .dm-pop{z-index:44}
-.wf-comp .dm:first-child .dm-pop{left:50%; transform:translateX(-50%)}
-.wf-comp .dm:last-child .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
+/* :where() keeps these at the phone sheet rule's specificity (.dm.sheet-open
+   .dm-pop), so the later sheet rule wins by order alone; a bare
+   :first-child/:last-child outranked it and turned an end tile's sheet into
+   a shrink-to-fit popover wider than the phone */
+.wf-comp .dm:where(:first-child) .dm-pop{left:50%; transform:translateX(-50%)}
+.wf-comp .dm:where(:last-child) .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
 /* the open-slots column: the strip's dashed next-slot card, rehomed */
 .wf-col-open{--rc:var(--brass-deep); border-style:dashed; background:transparent}
 .wf-col-open .wf-col-h{color:var(--brass)}
@@ -1532,13 +1537,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:none}
   .dm.sheet-open .dm-card{border-color:var(--brass-deep);
     box-shadow:0 0 14px -4px rgba(255,201,58,.5)}
-  /* the selector list outranks the comp board's first/last-child centering
-     (.wf-comp .dm:last-child .dm-pop sets left:50%, right:auto and a
-     translateX(-50%)), which otherwise turned the sheet of an end tile into
-     a shrink-to-fit popover wider than the phone, cut off at the left edge */
-  .dm.sheet-open .dm-pop,
-  .wf-comp .dm.sheet-open:first-child .dm-pop,
-  .wf-comp .dm.sheet-open:last-child .dm-pop{
+  /* wins over the comp board's end-tile centring by order: those rules
+     wear :where() so nothing positional outranks this one */
+  .dm.sheet-open .dm-pop{
     position:fixed; left:10px; right:10px; bottom:10px; top:auto; width:auto;
     transform:none; visibility:visible; opacity:1; z-index:70;
     border-radius:16px; padding:18px 16px 14px;
@@ -1566,6 +1567,11 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
      the end of the bar, and each group is a block (trigger over its
      wrapping chip row) divided by a rule above rather than beside it. */
   .wf-bar{flex-wrap:wrap}
+  /* only the picker wraps: the tree and search segments shrink (their
+     labels already truncate) and the facet slot has a zero basis, so no
+     other segment lands on a second line wearing its left-hand divider */
+  .wf-tree, .wf-search{flex:0 1 auto}
+  .wf-search-btn{min-width:0}
   #picker-chips{
     flex:1 1 100%; order:1; flex-direction:column; align-items:stretch; gap:0;
     padding:2px 10px 6px; border-left:0; border-top:1px solid var(--rule);
@@ -1587,10 +1593,8 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: bigger touch targets; the bar WRAPS down here - its
-     nowrap segments exceed a phone viewport and it may never scroll
-     (overflow would clip the tree menu, chip flyouts and search popover) */
-  .wf-bar{flex-wrap:wrap}
+  /* --- filters: bigger touch targets (the bar already wraps from the
+     960px block above) */
   .wf-seg{padding:0 8px}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
@@ -1601,6 +1605,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   #picker-chips .pc-row{
     flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
     margin:0 -10px; padding:3px 10px 6px; scroll-snap-type:x proximity;
+    scroll-padding-inline:10px;   /* snap to the inset, not the bleed edge */
     -webkit-overflow-scrolling:touch;
   }
   #picker-chips .pc-row::-webkit-scrollbar{display:none}
@@ -2161,10 +2166,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .mh-top .brandmark{flex:1 1 auto; min-width:0; order:0}
   .mh-top .brandmark h1{font-size:17px}
   .masthead .about-link{order:0; flex:none}
-  /* the companion listens on the desktop's localhost, which a phone
-     browser cannot reach: its controls leave the phone masthead (the live
-     tab keeps its panel) */
-  .masthead .lf-btn, .masthead .lf-sync{display:none}
+  /* the live-party controls keep their place: a narrow desktop window
+     docked beside the game is the companion's own layout. They wrap under
+     the brand line, in the part of the masthead that scrolls away. */
+  .masthead .lf-btn, .masthead .lf-sync{order:0; flex:none}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}
@@ -10421,6 +10426,9 @@ render();
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
+  /* a mismatch is a warning chip: phones hide the diagnostics chips but
+     never a .warn one, so the verdict reaches every screen */
+  if (chip && !ok && chip.parentElement) chip.parentElement.classList.add("warn");
   if (dot && !ok) dot.style.background = "var(--gap)";
 })();
 
@@ -10432,10 +10440,11 @@ render();
 (function pinMastheadSummary(){
   const mh = document.querySelector(".masthead");
   const sum = mh && mh.querySelector(".mh-sum");
-  if (!sum || typeof ResizeObserver === "undefined") return;
+  if (!sum) return;
   const pin = () => mh.style.setProperty("--mh-pin", sum.offsetTop + "px");
-  new ResizeObserver(pin).observe(mh);
   pin();
+  addEventListener("resize", pin);
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(pin).observe(mh);
 })();
 
 "use strict";
