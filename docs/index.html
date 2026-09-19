@@ -1340,6 +1340,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);
   cursor:pointer; user-select:none}
 .lf-sync input{accent-color:var(--brass)}
+/* the label's own display beat the hidden attribute, so "live sync" showed
+   before any party had loaded; the attribute wins again (as .wf-menu's) */
+.lf-sync[hidden]{display:none}
 .comp-dot{
   display:inline-block; width:7px; height:7px; border-radius:50%;
   background:var(--ink-3); margin-right:7px; vertical-align:1px;
