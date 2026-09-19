@@ -1580,12 +1580,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 
 @media (max-width:640px){
-  /* --- density --- */
-  .masthead{padding:10px 12px; gap:8px 12px}
+  /* --- density (the masthead's phone layout lives in _layout.css) --- */
   .masthead .share-btn{padding:7px 10px; font-size:10px}
-  .brandmark h1{font-size:18px}
   .brandmark .sub{display:none}
-  .ws-fit .num{font-size:34px}
   .rec-body{padding:14px 14px; gap:14px}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
@@ -1598,6 +1595,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
   .pchip{padding:8px 13px; font-size:11px}
+  /* each filter group is ONE side-scrolling chip row (the row scrolls,
+     never the page). Wrapped, the three groups spent ~430px of the phone's
+     hero height on chips alone; a cut-off chip at the edge is the cue. */
+  #picker-chips .pc-row{
+    flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+    margin:0 -10px; padding:3px 10px 6px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+  }
+  #picker-chips .pc-row::-webkit-scrollbar{display:none}
+  #picker-chips .pchip{flex:none; scroll-snap-align:start}
 
   /* --- party: one row, side-scroll with snap --- */
   .roster{
@@ -1646,12 +1653,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
       <span class="sub">Albion composition engine</span>
     </div>
   </div>
+  <!-- the summary row: on phones it is the one row that stays pinned
+       while the rest of the masthead scrolls away (_layout.css) -->
+  <div class="mh-sum">
   <div class="ws-fit sb-fit">
     <div class="sec-label">Composition fitness</div>
     <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
     <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
   </div>
   <div class="sb-identity" id="sb-identity"></div>
+  </div>
   <div class="spacer"></div>
   <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>

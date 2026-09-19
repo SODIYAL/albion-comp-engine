@@ -1580,12 +1580,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 
 @media (max-width:640px){
-  /* --- density --- */
-  .masthead{padding:10px 12px; gap:8px 12px}
+  /* --- density (the masthead's phone layout lives in _layout.css) --- */
   .masthead .share-btn{padding:7px 10px; font-size:10px}
-  .brandmark h1{font-size:18px}
   .brandmark .sub{display:none}
-  .ws-fit .num{font-size:34px}
   .rec-body{padding:14px 14px; gap:14px}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
@@ -1598,6 +1595,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
   .pchip{padding:8px 13px; font-size:11px}
+  /* each filter group is ONE side-scrolling chip row (the row scrolls,
+     never the page). Wrapped, the three groups spent ~430px of the phone's
+     hero height on chips alone; a cut-off chip at the edge is the cue. */
+  #picker-chips .pc-row{
+    flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+    margin:0 -10px; padding:3px 10px 6px; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+  }
+  #picker-chips .pc-row::-webkit-scrollbar{display:none}
+  #picker-chips .pchip{flex:none; scroll-snap-align:start}
 
   /* --- party: one row, side-scroll with snap --- */
   .roster{
@@ -2077,7 +2084,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* ---- stragglers from the layout move: layout rules that were
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
-  .main{padding:14px 12px 70px; gap:22px}
+  .main{padding:14px 16px 70px; gap:22px}
 }
 
 /* ---------- masthead / status bar ----------
@@ -2093,6 +2100,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .mh-bar{display:flex; align-items:center; gap:14px; padding:3px 34px 4px;
   border-top:1px solid var(--rule); flex-wrap:wrap}
 .mh-top .spacer, .mh-bar .spacer{flex:1}
+/* the summary row (fitness + identity verdict) is a plain wrapper on
+   desktop, where its two blocks sit in the top row as before; it becomes a
+   real row on phones (the 640px block below) */
+.mh-sum{display:contents}
 
 /* brand: the sigil and wordmark carry it; the strapline is decoration here */
 .mh-top .brandmark{gap:9px}
@@ -2133,6 +2144,44 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .mh-top, .mh-bar{padding-left:16px; padding-right:16px; gap:12px}
   .sb-fit .meter-track{width:80px}
 }
+/* phones: the masthead pins ONE row. .mh-top dissolves (display:contents)
+   so the masthead lays out its own rows: brand and the welcome link, then
+   the control row, then the summary row (identity verdict + fitness) LAST.
+   The sticky offset is the negative of the summary row's measured distance
+   from the masthead's top (--mh-pin, set by the client from a
+   ResizeObserver, so a control row that wraps to a varying line count is
+   never mis-measured): the rows above it scroll away and the summary alone
+   stays at the top of the viewport. Sticky, the whole masthead held ~385px
+   of an 844px phone screen. */
+@media (max-width:640px){
+  .masthead{flex-direction:row; flex-wrap:wrap; align-items:center; gap:0 10px;
+    padding:8px 16px 0; top:calc(-1 * var(--mh-pin, 0px))}
+  .mh-top{display:contents}
+  .mh-top .spacer{display:none}
+  .mh-top .brandmark{flex:1 1 auto; min-width:0; order:0}
+  .mh-top .brandmark h1{font-size:17px}
+  .masthead .about-link{order:0; flex:none}
+  /* the companion listens on the desktop's localhost, which a phone
+     browser cannot reach: its controls leave the phone masthead (the live
+     tab keeps its panel) */
+  .masthead .lf-btn, .masthead .lf-sync{display:none}
+  .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
+  .mh-bar .spacer{display:none}
+  .mh-bar select{max-width:100%; min-width:0}
+  .mh-bar .sb-field{min-width:0}
+  .mh-bar .sb-field:has(#content){flex:1 1 100%}
+  .mh-bar .sb-field:has(#content) select{flex:1}
+  /* the diagnostics chips (parity, dataset stamp) leave the phone bar: the
+     footnote carries the stamp; the size notice keeps its chip */
+  .mh-bar .chip:not(.warn){display:none}
+  .mh-sum{display:flex; order:2; flex:1 1 100%; align-items:center; gap:10px;
+    padding:7px 0 8px; border-top:1px solid var(--rule)}
+  .mh-sum .sb-identity{flex:1 1 auto; min-width:0}
+  .mh-sum .sb-fit{flex:none; margin-left:auto; order:1}   /* verdict reads first, the figure closes the row */
+  .sb-fit .sec-label{display:none}
+  .sb-fit .num{font-size:18px}
+  .sb-fit .meter-track{width:56px}
+}
 
 
 </style>
@@ -2148,12 +2197,16 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       <span class="sub">Albion composition engine</span>
     </div>
   </div>
+  <!-- the summary row: on phones it is the one row that stays pinned
+       while the rest of the masthead scrolls away (_layout.css) -->
+  <div class="mh-sum">
   <div class="ws-fit sb-fit">
     <div class="sec-label">Composition fitness</div>
     <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
     <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
   </div>
   <div class="sb-identity" id="sb-identity"></div>
+  </div>
   <div class="spacer"></div>
   <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
@@ -10369,6 +10422,20 @@ render();
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
   if (dot && !ok) dot.style.background = "var(--gap)";
+})();
+
+/* Phones pin only the masthead's summary row (_layout.css, the 640px
+   block): the sticky offset is the negative of the row's measured distance
+   from the masthead's top, so every row above it scrolls away. Measured on
+   every masthead resize, never fixed - the control row wraps to a varying
+   line count. On desktop the row is display:contents and measures 0. */
+(function pinMastheadSummary(){
+  const mh = document.querySelector(".masthead");
+  const sum = mh && mh.querySelector(".mh-sum");
+  if (!sum || typeof ResizeObserver === "undefined") return;
+  const pin = () => mh.style.setProperty("--mh-pin", sum.offsetTop + "px");
+  new ResizeObserver(pin).observe(mh);
+  pin();
 })();
 
 "use strict";
