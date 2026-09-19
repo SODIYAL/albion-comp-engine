@@ -264,13 +264,14 @@ check("setPickSearch" in APP, "L11f search popover has a state machine")
 check("syncPickSearch" in APP, "L11g an active query is mirrored onto the button")
 check('id="pick-search-q"' in SHELL, "L11h the button carries the query text")
 # the bar is ONE segmented container that never wraps ON DESKTOP (the
-# density redesign); below 640px it wraps - it cannot scroll (overflow would
-# clip its own popups, see L11m) and its nowrap segments overpainted each other
+# density redesign); at and below 960px it wraps - it cannot scroll (overflow
+# would clip its own popups, see L11m) and its nowrap segments overpainted
+# each other
 _wfb = SHELL.find(".wf-bar{")
 check(_wfb >= 0 and "flex-wrap:nowrap" in SHELL[_wfb:_wfb + 400],
       "L11i the bar never wraps to a second line on desktop")
 check(".wf-bar{flex-wrap:wrap}" in SHELL,
-      "L11n below 640px the bar wraps",
+      "L11n at and below 960px the bar wraps",
       "phones can neither scroll it nor fit it on one line")
 check("<select" not in seg(SHELL, 'class="wf-bar"', "</main>", "L11j bar anchors"),
       "L11j no native select in the bar - the tree menu carries icons")

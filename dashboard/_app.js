@@ -3208,5 +3208,23 @@ render();
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
+  /* a mismatch is a warning chip: phones hide the diagnostics chips but
+     never a .warn one, so the verdict reaches every screen */
+  if (chip && !ok && chip.parentElement) chip.parentElement.classList.add("warn");
   if (dot && !ok) dot.style.background = "var(--gap)";
+})();
+
+/* Phones pin only the masthead's summary row (_layout.css, the 640px
+   block): the sticky offset is the negative of the row's measured distance
+   from the masthead's top, so every row above it scrolls away. Measured on
+   every masthead resize, never fixed - the control row wraps to a varying
+   line count. On desktop the row is display:contents and measures 0. */
+(function pinMastheadSummary(){
+  const mh = document.querySelector(".masthead");
+  const sum = mh && mh.querySelector(".mh-sum");
+  if (!sum) return;
+  const pin = () => mh.style.setProperty("--mh-pin", sum.offsetTop + "px");
+  pin();
+  addEventListener("resize", pin);
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(pin).observe(mh);
 })();

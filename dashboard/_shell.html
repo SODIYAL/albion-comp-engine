@@ -504,9 +504,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* ---- the add-weapon bar ----
    ONE container on ONE line (a tight single row, modelled on a segmented
    status bar). Segments are divided by rules, not by their
-   own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
-   it can never scroll (any overflow would clip its own popups, see below)
-   and its nowrap segments overpainted each other on phones. */
+   own pill borders. On desktop the bar never wraps; at and below 960px it
+   WRAPS (the mobile pass) - it can never scroll (any overflow would clip
+   its own popups, see below) and its nowrap segments overpainted each
+   other on phones. */
 .wf-bar{
   display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
   min-width:0; max-width:100%;
@@ -934,8 +935,12 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .wf-comp .dm:hover + .dm .dm-card, .wf-comp .dm:has(+ .dm:hover) .dm-card{transform:none}
 .wf-comp .dm .dm-pop{z-index:44}
-.wf-comp .dm:first-child .dm-pop{left:50%; transform:translateX(-50%)}
-.wf-comp .dm:last-child .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
+/* :where() keeps these at the phone sheet rule's specificity (.dm.sheet-open
+   .dm-pop), so the later sheet rule wins by order alone; a bare
+   :first-child/:last-child outranked it and turned an end tile's sheet into
+   a shrink-to-fit popover wider than the phone */
+.wf-comp .dm:where(:first-child) .dm-pop{left:50%; transform:translateX(-50%)}
+.wf-comp .dm:where(:last-child) .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
 /* the open-slots column: the strip's dashed next-slot card, rehomed */
 .wf-col-open{--rc:var(--brass-deep); border-style:dashed; background:transparent}
 .wf-col-open .wf-col-h{color:var(--brass)}
@@ -1248,7 +1253,12 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   border:1px solid rgba(35,191,110,.25); color:var(--ok-bright); background:rgba(35,191,110,.07);
 }
 /* contextual killboard strip rows + footnote */
-.meta-aff .pct{min-width:150px; text-align:right}
+/* the readout keeps the row's right edge; where the column is narrower
+   than name + readout (phone-width grid cells) it drops to its own line
+   instead of running past the cell and scrolling the page sideways */
+.meta-aff{flex-wrap:wrap}
+.meta-aff .nm-btn{min-width:0}
+.meta-aff .pct{flex:1 1 150px; min-width:0; text-align:right}
 .ka-note{grid-column:1/-1; font-family:var(--mono); font-size:9px; line-height:1.5;
   color:var(--ink-3); padding:7px 2px 0; border-top:1px solid var(--rule); margin-top:3px}
 /* partial-roster neighbours (roadmap item 6): observed baskets as rosters —
@@ -1330,6 +1340,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);
   cursor:pointer; user-select:none}
 .lf-sync input{accent-color:var(--brass)}
+/* the label's own display beat the hidden attribute, so "live sync" showed
+   before any party had loaded; the attribute wins again (as .wf-menu's) */
+.lf-sync[hidden]{display:none}
 .comp-dot{
   display:inline-block; width:7px; height:7px; border-radius:50%;
   background:var(--ink-3); margin-right:7px; vertical-align:1px;
@@ -1527,6 +1540,8 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:none}
   .dm.sheet-open .dm-card{border-color:var(--brass-deep);
     box-shadow:0 0 14px -4px rgba(255,201,58,.5)}
+  /* wins over the comp board's end-tile centring by order: those rules
+     wear :where() so nothing positional outranks this one */
   .dm.sheet-open .dm-pop{
     position:fixed; left:10px; right:10px; bottom:10px; top:auto; width:auto;
     transform:none; visibility:visible; opacity:1; z-index:70;
@@ -1544,28 +1559,60 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
   }
   .dm-actions .dm-act, .dm-actions .lo-open{padding:10px 15px; font-size:11px}
+  .dm-actions{flex-wrap:wrap}   /* five actions do not fit one phone-wide line */
+
+  /* --- the add-weapon bar: filter groups stack --- */
+  /* At this width the chip flyouts are static (they render inline under
+     their trigger, see the .pc-fly rule above), yet the desktop bar still
+     laid the three groups out as ONE nowrap row with every chip beside its
+     trigger: role, provides and utility ran ~2000px wide and the whole page
+     scrolled sideways. Here the bar wraps, the picker takes a full line at
+     the end of the bar, and each group is a block (trigger over its
+     wrapping chip row) divided by a rule above rather than beside it. */
+  .wf-bar{flex-wrap:wrap}
+  /* only the picker wraps: the tree and search segments shrink (their
+     labels already truncate) and the facet slot has a zero basis, so no
+     other segment lands on a second line wearing its left-hand divider */
+  .wf-tree, .wf-search{flex:0 1 auto}
+  .wf-search-btn{min-width:0}
+  #picker-chips{
+    flex:1 1 100%; order:1; flex-direction:column; align-items:stretch; gap:0;
+    padding:2px 10px 6px; border-left:0; border-top:1px solid var(--rule);
+  }
+  #picker-chips .pgroup{flex-direction:column; align-items:flex-start; min-width:0}
+  #picker-chips .pgroup + .pgroup{border-left:0; border-top:1px solid var(--rule)}
+  #picker-chips .pgroup + .pgroup .pgroup-t{padding-left:4px}
+  .wf-bar .pgroup-t{padding-left:4px; padding-right:4px}
+  #picker-chips .pc-fly{width:100%; padding:2px 0 8px}
+  #picker-chips .pc-row{flex-wrap:wrap}
 
 }
 
 @media (max-width:640px){
-  /* --- density --- */
-  .masthead{padding:10px 12px; gap:8px 12px}
+  /* --- density (the masthead's phone layout lives in _layout.css) --- */
   .masthead .share-btn{padding:7px 10px; font-size:10px}
-  .brandmark h1{font-size:18px}
   .brandmark .sub{display:none}
-  .ws-fit .num{font-size:34px}
   .rec-body{padding:14px 14px; gap:14px}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: bigger touch targets; the bar WRAPS down here - its
-     nowrap segments exceed a phone viewport and it may never scroll
-     (overflow would clip the tree menu, chip flyouts and search popover) */
-  .wf-bar{flex-wrap:wrap}
+  /* --- filters: bigger touch targets (the bar already wraps from the
+     960px block above) */
   .wf-seg{padding:0 8px}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
   .pchip{padding:8px 13px; font-size:11px}
+  /* each filter group is ONE side-scrolling chip row (the row scrolls,
+     never the page). Wrapped, the three groups spent ~430px of the phone's
+     hero height on chips alone; a cut-off chip at the edge is the cue. */
+  #picker-chips .pc-row{
+    flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+    margin:0 -10px; padding:3px 10px 6px; scroll-snap-type:x proximity;
+    scroll-padding-inline:10px;   /* snap to the inset, not the bleed edge */
+    -webkit-overflow-scrolling:touch;
+  }
+  #picker-chips .pc-row::-webkit-scrollbar{display:none}
+  #picker-chips .pchip{flex:none; scroll-snap-align:start}
 
   /* --- party: one row, side-scroll with snap --- */
   .roster{
@@ -1614,12 +1661,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
       <span class="sub">Albion composition engine</span>
     </div>
   </div>
+  <!-- the summary row: on phones it is the one row that stays pinned
+       while the rest of the masthead scrolls away (_layout.css) -->
+  <div class="mh-sum">
   <div class="ws-fit sb-fit">
     <div class="sec-label">Composition fitness</div>
     <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
     <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
   </div>
   <div class="sb-identity" id="sb-identity"></div>
+  </div>
   <div class="spacer"></div>
   <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>

@@ -217,7 +217,7 @@
 /* ---- stragglers from the layout move: layout rules that were
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
-  .main{padding:14px 12px 70px; gap:22px}
+  .main{padding:14px 16px 70px; gap:22px}
 }
 
 /* ---------- masthead / status bar ----------
@@ -233,6 +233,10 @@
 .mh-bar{display:flex; align-items:center; gap:14px; padding:3px 34px 4px;
   border-top:1px solid var(--rule); flex-wrap:wrap}
 .mh-top .spacer, .mh-bar .spacer{flex:1}
+/* the summary row (fitness + identity verdict) is a plain wrapper on
+   desktop, where its two blocks sit in the top row as before; it becomes a
+   real row on phones (the 640px block below) */
+.mh-sum{display:contents}
 
 /* brand: the sigil and wordmark carry it; the strapline is decoration here */
 .mh-top .brandmark{gap:9px}
@@ -272,5 +276,43 @@
 @media (max-width:960px){
   .mh-top, .mh-bar{padding-left:16px; padding-right:16px; gap:12px}
   .sb-fit .meter-track{width:80px}
+}
+/* phones: the masthead pins ONE row. .mh-top dissolves (display:contents)
+   so the masthead lays out its own rows: brand and the welcome link, then
+   the control row, then the summary row (identity verdict + fitness) LAST.
+   The sticky offset is the negative of the summary row's measured distance
+   from the masthead's top (--mh-pin, set by the client from a
+   ResizeObserver, so a control row that wraps to a varying line count is
+   never mis-measured): the rows above it scroll away and the summary alone
+   stays at the top of the viewport. Sticky, the whole masthead held ~385px
+   of an 844px phone screen. */
+@media (max-width:640px){
+  .masthead{flex-direction:row; flex-wrap:wrap; align-items:center; gap:0 10px;
+    padding:8px 16px 0; top:calc(-1 * var(--mh-pin, 0px))}
+  .mh-top{display:contents}
+  .mh-top .spacer{display:none}
+  .mh-top .brandmark{flex:1 1 auto; min-width:0; order:0}
+  .mh-top .brandmark h1{font-size:17px}
+  .masthead .about-link{order:0; flex:none}
+  /* the live-party controls keep their place: a narrow desktop window
+     docked beside the game is the companion's own layout. They wrap under
+     the brand line, in the part of the masthead that scrolls away. */
+  .masthead .lf-btn, .masthead .lf-sync{order:0; flex:none}
+  .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
+  .mh-bar .spacer{display:none}
+  .mh-bar select{max-width:100%; min-width:0}
+  .mh-bar .sb-field{min-width:0}
+  .mh-bar .sb-field:has(#content){flex:1 1 100%}
+  .mh-bar .sb-field:has(#content) select{flex:1}
+  /* the diagnostics chips (parity, dataset stamp) leave the phone bar: the
+     footnote carries the stamp; the size notice keeps its chip */
+  .mh-bar .chip:not(.warn){display:none}
+  .mh-sum{display:flex; order:2; flex:1 1 100%; align-items:center; gap:10px;
+    padding:7px 0 8px; border-top:1px solid var(--rule)}
+  .mh-sum .sb-identity{flex:1 1 auto; min-width:0}
+  .mh-sum .sb-fit{flex:none; margin-left:auto; order:1}   /* verdict reads first, the figure closes the row */
+  .sb-fit .sec-label{display:none}
+  .sb-fit .num{font-size:18px}
+  .sb-fit .meter-track{width:56px}
 }
 
