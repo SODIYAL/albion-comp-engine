@@ -1248,7 +1248,12 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   border:1px solid rgba(35,191,110,.25); color:var(--ok-bright); background:rgba(35,191,110,.07);
 }
 /* contextual killboard strip rows + footnote */
-.meta-aff .pct{min-width:150px; text-align:right}
+/* the readout keeps the row's right edge; where the column is narrower
+   than name + readout (phone-width grid cells) it drops to its own line
+   instead of running past the cell and scrolling the page sideways */
+.meta-aff{flex-wrap:wrap}
+.meta-aff .nm-btn{min-width:0}
+.meta-aff .pct{flex:1 1 150px; min-width:0; text-align:right}
 .ka-note{grid-column:1/-1; font-family:var(--mono); font-size:9px; line-height:1.5;
   color:var(--ink-3); padding:7px 2px 0; border-top:1px solid var(--rule); margin-top:3px}
 /* partial-roster neighbours (roadmap item 6): observed baskets as rosters —
@@ -1527,7 +1532,13 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:none}
   .dm.sheet-open .dm-card{border-color:var(--brass-deep);
     box-shadow:0 0 14px -4px rgba(255,201,58,.5)}
-  .dm.sheet-open .dm-pop{
+  /* the selector list outranks the comp board's first/last-child centering
+     (.wf-comp .dm:last-child .dm-pop sets left:50%, right:auto and a
+     translateX(-50%)), which otherwise turned the sheet of an end tile into
+     a shrink-to-fit popover wider than the phone, cut off at the left edge */
+  .dm.sheet-open .dm-pop,
+  .wf-comp .dm.sheet-open:first-child .dm-pop,
+  .wf-comp .dm.sheet-open:last-child .dm-pop{
     position:fixed; left:10px; right:10px; bottom:10px; top:auto; width:auto;
     transform:none; visibility:visible; opacity:1; z-index:70;
     border-radius:16px; padding:18px 16px 14px;
@@ -1544,6 +1555,27 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
   }
   .dm-actions .dm-act, .dm-actions .lo-open{padding:10px 15px; font-size:11px}
+  .dm-actions{flex-wrap:wrap}   /* five actions do not fit one phone-wide line */
+
+  /* --- the add-weapon bar: filter groups stack --- */
+  /* At this width the chip flyouts are static (they render inline under
+     their trigger, see the .pc-fly rule above), yet the desktop bar still
+     laid the three groups out as ONE nowrap row with every chip beside its
+     trigger: role, provides and utility ran ~2000px wide and the whole page
+     scrolled sideways. Here the bar wraps, the picker takes a full line at
+     the end of the bar, and each group is a block (trigger over its
+     wrapping chip row) divided by a rule above rather than beside it. */
+  .wf-bar{flex-wrap:wrap}
+  #picker-chips{
+    flex:1 1 100%; order:1; flex-direction:column; align-items:stretch; gap:0;
+    padding:2px 10px 6px; border-left:0; border-top:1px solid var(--rule);
+  }
+  #picker-chips .pgroup{flex-direction:column; align-items:flex-start; min-width:0}
+  #picker-chips .pgroup + .pgroup{border-left:0; border-top:1px solid var(--rule)}
+  #picker-chips .pgroup + .pgroup .pgroup-t{padding-left:4px}
+  .wf-bar .pgroup-t{padding-left:4px; padding-right:4px}
+  #picker-chips .pc-fly{width:100%; padding:2px 0 8px}
+  #picker-chips .pc-row{flex-wrap:wrap}
 
 }
 
