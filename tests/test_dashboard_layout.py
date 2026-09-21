@@ -536,6 +536,35 @@ check(".bdg.b-int{" in SHELL and "width:auto; height:auto" in seg(SHELL, ".bdg.b
 check(".mh-bar .chip{margin:0}" in LAYOUT and ".mh-bar .sb-count{line-height:1}" in LAYOUT,
       "L23d the masthead size chip and count centre with the controls")
 
+# L24 - content and planned size are separate settings: the content
+# label carries no number, the plan sticks once set (PLAN_TOUCHED), a
+# content switch resets the plan only while it is untouched, and the
+# masthead reads the two numbers as two numbers
+opt = seg(APP, "content.innerHTML = Object.entries(DATASET.templates)", "content.dataset.built", "L24 option anchors")
+check(opt and "base" not in opt,
+      "L24a the content option label is the template name alone, never a base size")
+cswitch = seg(APP, 'if (e.target.id === "content"){', "render();", "L24 content-switch anchors")
+check("if (!PLAN_TOUCHED) PLANNED = baseSize();" in cswitch,
+      "L24b a content switch resets the plan only while the plan is untouched")
+check("let PLAN_TOUCHED = false;" in APP,
+      "L24c the touched flag starts false on a fresh page")
+sz = seg(APP, 'const sz = e.target.closest("[data-size]");', 'const cap = e.target.closest("[data-cap]");', "L24 size-control anchors")
+check(sz.count("PLAN_TOUCHED = true") == 3,
+      "L24d preset, minus and plus each mark the plan touched")
+inp = seg(APP, 'if (e.target.id === "size-input"){', "else {", "L24 size-input anchors")
+check("PLAN_TOUCHED = true" in inp,
+      "L24e the typed size marks the plan touched")
+restore = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();", "STYLE = ", "L24 restore anchors")
+check("PLAN_TOUCHED = PLANNED !== baseSize();" in restore,
+      "L24f a restored link or session counts as touched when its size is not the template's suggestion")
+check("<span>planned</span>" in SHELL and "<span>size</span>" not in SHELL,
+      "L24g the masthead field is labelled planned, not size")
+check("<label>Suggested size</label>" in SHELL and "Party size presets" not in SHELL,
+      "L24h the preset row is labelled as a suggestion")
+count = seg(APP, 'const count = `${party.length}/${PLAN()}`;', "$(\"pdash\").style", "L24 count anchors")
+check("sbc.title = " in count and "in party" in count and "planned" in count,
+      "L24i the masthead count chip carries a tooltip naming both numbers")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

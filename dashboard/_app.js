@@ -20,6 +20,12 @@ const ENG = new CompEngine(DATASET, CONTENT);
    roads heal floor at 5 — is anticipated while you are choosing, not
    after the 5th DPS already joined. */
 let PLANNED = ENG.size;
+/* Content and the plan are separate settings. Each template carries a
+   SUGGESTED size (a starting point, not a cap: an outpost fight can be 4,
+   7 or 12). Until the plan is touched, a content switch lands on the new
+   template's suggestion; once set by hand it belongs to the user and
+   survives every content switch. */
+let PLAN_TOUCHED = false;
 let SIZE = PLANNED;
 let STYLE = "balanced";
 const HARD_CAP = 60;
@@ -485,6 +491,9 @@ function loadHash(){
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
   const n = parseInt(p.n, 10);   // integers only — +"0x10"/+"7.5" slipped through
   PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();
+  /* a link or session whose size is not the template's suggestion was set
+     on purpose: it keeps that size across content switches */
+  PLAN_TOUCHED = PLANNED !== baseSize();
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
   /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
      party (saveHash omits p= when empty, so restore must mirror that).
@@ -577,7 +586,7 @@ function renderSetup(){
   const content = $("content"), styleSel = $("style");
   if (!content.dataset.built){
     content.innerHTML = Object.entries(DATASET.templates)
-      .map(([k,t]) => `<option value="${k}">${esc(t.name)} — base ${t.base_size}</option>`)
+      .map(([k,t]) => `<option value="${k}">${esc(t.name)}</option>`)
       .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
       .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
     content.dataset.built = "1";
@@ -597,9 +606,10 @@ function renderSetup(){
   const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
   $("size-presets").innerHTML = presets.map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
-  $("size-hint").textContent = party.length
+  $("size-hint").textContent = (party.length
     ? `Judged as the ${SIZE} you actually have — the forge fills toward ${PLAN()}.`
-    : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`;
+    : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`)
+    + ` ${baseSize()} is the starting point for ${tpl().name}, not a cap.`;
   $("size-notice").innerHTML =
     (tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
@@ -1367,7 +1377,10 @@ function renderWheelFoot(keys, recs, rings){
     const pc = $("pdash-count");
     if (pc) pc.textContent = count;
     const sbc = $("sb-count");
-    if (sbc) sbc.textContent = count;
+    if (sbc){
+      sbc.textContent = count;
+      sbc.title = `${party.length} in party, ${PLAN()} planned`;
+    }
     /* tile height divides the viewport by the member count (see .pdash CSS) */
     $("pdash").style.setProperty("--pdn", party.length || 1);
     /* an open flyout survives the re-render (kit edits arrive through
@@ -2951,9 +2964,9 @@ document.addEventListener("click", e => {
     return;
   }
   const sz = e.target.closest("[data-size]");
-  if (sz){ PLANNED = +sz.dataset.size; FORGE_NOTE = null; render(); return; }
-  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); FORGE_NOTE = null; render(); return; }
-  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); FORGE_NOTE = null; render(); return; }
+  if (sz){ PLANNED = +sz.dataset.size; PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
   if (e.target.closest("#share")){
@@ -2981,7 +2994,8 @@ document.addEventListener("change", e => {
     render(); return;
   }
   if (e.target.id === "content"){
-    CONTENT = e.target.value; PLANNED = baseSize();
+    CONTENT = e.target.value;
+    if (!PLAN_TOUCHED) PLANNED = baseSize();
     /* manual/live members SURVIVE a content switch; slots the
        forge generated were built for the OLD template and are dropped —
        "reforge all" or "forge the rest" rebuilds them for the new one. */
@@ -3001,7 +3015,7 @@ document.addEventListener("change", e => {
   }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
-    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; FORGE_NOTE = null; render(); }
+    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; PLAN_TOUCHED = true; FORGE_NOTE = null; render(); }
     else { e.target.value = PLANNED; }
   }
 });
