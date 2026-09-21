@@ -23,6 +23,20 @@ Each is decidable today from evidence already in the repo.
   (standing rule 16): raise `delta`, blend the ranker, or accept that the
   engine optimises comps rather than the published pick. (V: 09b,
   Skeleton-first)
+- **Healer pricing at 7** (V3 round 2, Castle Outpost 7): dressed mode
+  ranks Great Holy and Rampant above Hallowfall in every healer case
+  because the incumbents' doctrine kits already close disengage and
+  mobility and the choice falls to `heal_sustain` (weight 10, target 4.5;
+  two-handers supply 3.0 units, Hallowfall 2.0). Killer parties of 6-8
+  field Hallowfall in 29.1%, Rampant in 1.0%. Candidate causes: the
+  castle_outpost sustain : burst pricing, or worn gear closing utility
+  targets. Decide which before any golden pin. (V: 09b, V3 round 2)
+- **The V3 generator seeds from every weapon**: partial parties are drawn
+  from the whole pool, so forms carry Glaive, Druidic Staff, Spear, Pike
+  and Warbow at seven, weapons the harvest fields in under 2% of size-7
+  killer parties. Proposed: seed from harvested killer parties at the
+  form's size, members removed at random, graded battles and the holdout
+  slice excluded. Changes what a round measures. (V: 09b, V3 round 2)
 - **Kite weights**: with the seat skeleton and the standoff minimum the
   forged kite 20 reads clap_kite to the engine's own identity (it read as a
   strong clap before); a PURE kite read needs the kite style's multipliers
@@ -153,12 +167,12 @@ Each is decidable today from evidence already in the repo.
 
 ## Needs evidence a round would produce
 
-- **V3 round 2 forms are waiting for answers**: `tests/tier2_form_r2_castle7.md`
-  (seed 20260827) and `tests/tier2_form_r2_blackzone20.md` (seed 20260828),
-  richer fields, engine output hidden. Score with
-  `tests/tier2_blindtest.py score --mode both`. These create the first
-  uncontaminated validation / holdout cases. (V: 08, the dressed-forge
-  decisions, item 4)
+- **The V3 round 2 Blackzone Roam 20 form is waiting for answers**:
+  `tests/tier2_form_r2_blackzone20.md` (seed 20260828), richer fields,
+  engine output hidden. Score with `tests/tier2_blindtest.py score --mode
+  both`. Answered blind it is the first uncontaminated validation case;
+  the Castle Outpost 7 form was answered as a reviewed draft and is train.
+  (V: 08, the dressed-forge decisions, item 4; 09b, V3 round 2)
 - **Harvest V4 findings** (`tier2_blindtest.py v4h`, weak-form):
   leave-one-out role-level 64-65% over 150 holdout killer parties against the
   published-comp gate's 74% on 23 slots; kite parties 38% (n=10); rebuild-5
