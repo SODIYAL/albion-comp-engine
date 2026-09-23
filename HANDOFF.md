@@ -65,6 +65,14 @@ Three layers, never merged:
   Content rows: `pipeline/refit_content_targets.py` (median of the dressed
   audit's comps; blackzone_roam 18, castle_outpost 3; territory_defense 2 /
   roads 1 / castle 0 / faction_war 0 stay on the old minimum and say so).
+- **Capability weights.** Curation judgment on five templates. Blackzone
+  Roam's are FITTED to what training-split killer parties pick
+  (`pipeline/fit_choice_weights.py`, standing rule 7 as amended): a
+  conditional logit over the engine's own pick-score terms, pulled toward
+  the curated weights its `weight_fit` block records; the build enforces
+  the pull rule (every curated weight >= 4 keeps half or more). Revealed
+  preference, not win evidence: `audit_capability_outcomes.py` is the
+  outcome side.
 - Fitness: coverage with diminishing returns, hard floors on the
   weapon+loadout basis, headroom, overstack, Focus Fire / Resilience and AoE
   escalation, per-weapon Resilience Penetration as a rebate, optional rows,

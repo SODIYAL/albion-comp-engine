@@ -51,6 +51,13 @@ index rows where the owner's words are.
    generated from the same harvest, replacing the hand list that read the
    same term — they price a copy, never a weapon; and the seat skeleton and
    plan minima the same artifact carries shape GENERATION only.
+   Amended 2026-09-23: a template's capability WEIGHTS may be fitted to
+   what training-split killer parties pick (revealed preference, never win
+   evidence; `pipeline/fit_choice_weights.py`), pulled toward the curated
+   weights the template records in `weight_fit` by the weakest pull under
+   which every curated weight >= 4 keeps at least half of it; the build
+   enforces the rule. Blackzone Roam only (the harvest records no
+   content); `delta` stays tiebreak-sized.
 8. **Unknowns stay explicit** (2026-08-12 catches, 2026-08-28 gear): records store
    `unknown`; quarantined records never become defaults; only verified
    interaction records score.
@@ -265,6 +272,7 @@ column is the archive file and the section title to search for.
 | 09-15 | "go ahead and make changes according to your suggestions, you have full autonomy here" — the seat skeleton: every primary seat's harvest typical per style x size (`derive_skeletons.py`, training split, distinct rosters) closes a seat in the forge — a body past it only for a minimum no under-typical seat of its role could meet, or by spill once every seat of the role is full; refinement never un-justifies a spill; the standoff plan typical is a generation minimum (flag predicate); copy allowances GENERATED per style x band (free = round(p50), max = ceil(p90); a hand list fails the build); `derive_role_counts` on the training split; the audit carries `--holdout-mod` (board regeneration waits for the harvest checkout); `tier2 --baseline` report-only. Standing rule 18 extended. Golden moved: none. Forged kite 20 reads clap_kite (was a strong clap) | derive_skeletons.py, build_dataset, both ports, derive_role_counts, audit_style_rosters, derive_style_bands, tier2_blindtest | test_skeletons S1-S6, F4/F18 re-pinned | 09b, Skeleton-first generation |
 | 09-16 | The harvest minimum outranks a published comp: the weekly fold (12,824 -> 13,978 battles, first fold with every derived table on the training split) moves the clap_kite 20 engage p10 19.0 -> 21.0; the 20v20 competitive fixture fields 19.0 and is re-pinned as RECORDED under the minimum, not asserted either way; nothing retuned (standing rule 2). Fold mechanics: the audit script's holdout constant restored; a fold never straddles a 03:00 / 15:00 harvest (hash-chain gates read the rewritten artifact) | fold artifacts, audit_style_rosters.py | T38 re-pinned | 09b, The harvest minimum outranks a published comp |
 | 09-21 | V3 round 2, Castle Outpost 7, drafted then reviewed (train, not blind): V3-W top-3 67%, V3-D 0% (gate FAIL). Dressed mode demotes Hallowfall below Great Holy / Rampant in every healer case: doctrine kits already close disengage and mobility, so the choice falls to heal_sustain pricing; Rampant is fielded by 1.0% of 6-8 killer parties, Hallowfall by 29.1%. A clump tool outranks damage at 3 of 7. The generator seeds from every weapon (Glaive in 8 of 2,097 size-7 parties). Hypotheses, nothing retuned | answered form, BACKLOG | — | 09b, V3 round 2, Castle Outpost 7 |
+| 09-23 | Capability weights fitted to killer-party picks, Blackzone Roam: a conditional logit over 15,928 training drops with synergy, the meta prior and the duplicate cost as separate free terms; pull 3,000, the weakest keeping every curated weight >= 4 at half or more; heal_sustain 10 -> 13.1, heal_burst 6 -> 8.8, interrupt 1 -> 5.5, max_health_cut 1 -> 4.7, catch 7 -> 4.9, clump_create 7 -> 4.1, burst_st / root / anti_dive / damage_debuff -> 0; `v4h` role-level 59% -> 64%, MRR 0.070 -> 0.083. Outcome audit on guild-level labels (582 parties): `fitness()` AUC 0.50, nothing retuned on outcomes; `delta` and `rho` unchanged. Standing rule 7 amended. Golden moved: none; F8 re-pinned to the size multiplier | blackzone_roam.yaml `weight_fit`, build_dataset check, fit_choice_weights.py | v4 20/23, build (pull rule), F8 | 09b, Fitted capability weights |
 
 ## Open questions
 

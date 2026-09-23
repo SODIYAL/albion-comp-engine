@@ -2764,6 +2764,27 @@ def load_templates(tune=None):
                 if not (0 <= lo <= v.get("target", -1) < v.get("soft_cap", -1)):
                     sys.exit(f"{base}: {cap}: need 0 <= min <= target < "
                              f"soft_cap, got {v}")
+            # WEIGHT PROVENANCE (standing rule 7 as amended): a template
+            # whose weights are fitted to killer-party picks says so in
+            # `weight_fit`, records the curated weight of every requirement
+            # the fit was pulled toward, and keeps the pull rule — every
+            # curated weight >= 4 holds at least half of it. A template
+            # without the block keeps curated weights.
+            wf = doc.get("weight_fit")
+            if wf is not None:
+                reqs_ = doc.get("requirements") or {}
+                cur = wf.get("curated") if isinstance(wf, dict) else None
+                if not (isinstance(wf, dict) and wf.get("method") == "choice_fit"
+                        and isinstance(cur, dict) and set(cur) == set(reqs_)):
+                    sys.exit(f"{base}: weight_fit needs method: choice_fit and a "
+                             f"curated weight for every requirement, got {wf!r}")
+                for cap, v in reqs_.items():
+                    if not v["weight"] >= 0:
+                        sys.exit(f"{base}: {cap}: a fitted weight is never "
+                                 f"negative, got {v['weight']}")
+                    if cur[cap] >= 4 and v["weight"] < 0.5 * cur[cap]:
+                        sys.exit(f"{base}: {cap}: weight {v['weight']} is below "
+                                 f"half its curated {cur[cap]} (the pull rule)")
             templates[doc["content"]] = doc
     # Size-based generation minima must be safe to divide by in both ports.
     for style, config in styles.items():

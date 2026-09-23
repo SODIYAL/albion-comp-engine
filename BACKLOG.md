@@ -14,15 +14,19 @@ index rows in `tests/VALIDATION.md`, never here.
 Each is decidable today from evidence already in the repo.
 
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
-  ranking candidates by role need then the prior's solo share names the
-  exact missing weapon 29% of the time on the published comps where the
-  engine names it 13% (rebuild-5 on the harvest: 30% vs 14%), and loses at
-  role level (57% vs 74%; 81% vs 84-86%). Popularity carries the exact-weapon
-  signal the capability model's tiebreak-sized prior does not; the
-  capability model carries the structure. A hypothesis, never tuned on
-  (standing rule 16): raise `delta`, blend the ranker, or accept that the
-  engine optimises comps rather than the published pick. (V: 09b,
-  Skeleton-first)
+  ranking candidates by role need then the prior's solo share places the
+  real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
+  33%) where the engine, after the fitted Blackzone Roam weights, places it
+  at 30 (MRR 0.083, top-10 20%); the engine leads at role level (64% vs
+  55%). The choice fit locates the gap: free, the meta prior would sit at
+  about 1,180 x `delta`, and copies would be rewarded instead of charged
+  (30% of killer-party members share their weapon; the engine ranks such a
+  copy at median 53). Measured in the engine: `delta` 0.5 / 1.5 move MRR
+  0.070 -> 0.072 / 0.081 and fail T49; `delta` 5 reaches 0.112 and fails
+  T16 and T49. Raise `delta` (popularity outweighs capability), soften the
+  duplicate cost against T49, or accept that the engine optimises comps
+  rather than the published pick. (V: 09b, Skeleton-first; Fitted
+  capability weights)
 - **Healer pricing at 7** (V3 round 2, Castle Outpost 7): dressed mode
   ranks Great Holy and Rampant above Hallowfall in every healer case
   because the incumbents' doctrine kits already close disengage and
@@ -278,10 +282,24 @@ Each is decidable today from evidence already in the repo.
   deaths), fits outcome weights on the training split and compares the
   template's fitness() against them on the holdout. Planted-weight
   recovery checks: Spearman 0.94 recovered, holdout AUC 0.49 with no
-  signal planted. Any weight change it suggests is a logged decision.
-  Later: win-lift per weapon, pair and copy count, into the prior only
-  after a `v4h` A/B (standing rule 16); the design doc's plan (§8.6): a
-  prior-adjuster, never the primary term.
+  signal planted. A first read on GUILD-level labels (the daily fetch's
+  kill lists, 582 training parties of 10-20): `fitness()` AUC 0.50, no
+  capability separates wins from losses, party size alone predicts better
+  (0.61) — numbers decide these fights. Before the party-level read, add a
+  numbers control: each side's size from the battle roster's alliances.
+  Any weight change it suggests is a logged decision, and Blackzone Roam's
+  weights are now choice-fitted (standing rule 7 as amended), so the
+  outcome audit tests the fitted weights. Later: win-lift per weapon, pair
+  and copy count, into the prior only after a `v4h` A/B (standing rule
+  16); the design doc's plan (§8.6): a prior-adjuster, never the primary
+  term.
+- **Choice-fitted weights for the other templates**: the harvest records
+  no content, so `fit_choice_weights.py` reads every killer party against
+  one template (Blackzone Roam). Castle, outpost, territory, faction-war
+  and roads weights stay curation judgment until parties carry a content
+  label (battle location from the killboard) or each content has its own
+  comps. Refit Blackzone Roam after each fold that moves the training
+  split materially (`extract` then `fit`; the pull rule stays).
 - **brawl_clap under the floor everywhere** (28 / 36 / 15 rosters): its seat
   and plan rows fall back to the pooled cell, its copy rows to pooled; the
   forged brawl_clap 20 reads as a split identity. Nothing to derive until

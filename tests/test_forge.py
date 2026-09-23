@@ -348,17 +348,22 @@ def t_size_physics():
     no_boost = e11.mech_mults["burst_st"] <= 1.0 + 1e-12
     e3 = Engine(content="roads", size=3)
     small_boost = e3.mech_mults["burst_st"] > 1.0
-    # ST value devaluation: styled weight of burst_st sits well under base
+    # ST value devaluation at 20: the size multiplier sits well under 1 and
+    # the styled weight is exactly base x multiplier. Read on the multiplier,
+    # not on one template's weight: a fitted base weight may be zero
+    # (blackzone_roam's burst_st under its weight_fit).
     ez = Engine(content="blackzone_roam", size=20)
-    devalued = ez.weight("burst_st") < ez.reqs["burst_st"]["weight"] * 0.5
+    stv = ez._st_value_mult(20)
+    devalued = (stv < 0.5 and abs(ez.weight("burst_st")
+                                  - ez.reqs["burst_st"]["weight"] * stv) < 1e-12)
     er = Engine(content="roads", size=7)
     restored = er.weight("burst_st") == er.reqs["burst_st"]["weight"]
     check("F8 no ST boost at 11-in-a-20-template; small-gang inversion and "
           "content restoration intact",
           no_boost and small_boost and devalued and restored,
           f"mult@11={e11.mech_mults['burst_st']:.3f} mult@3={e3.mech_mults['burst_st']:.3f} "
-          f"w20={ez.weight('burst_st'):.2f}/base {ez.reqs['burst_st']['weight']} "
-          f"roads w={er.weight('burst_st'):.1f}")
+          f"st_value@20={stv:.3f} w20={ez.weight('burst_st'):.2f}/base "
+          f"{ez.reqs['burst_st']['weight']} roads w={er.weight('burst_st'):.1f}")
 
 
 # ------------------------------------------------------------- F9 headroom

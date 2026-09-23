@@ -1,0 +1,221 @@
+{
+ "committed": {
+  "anti_dive": 1.0,
+  "anti_zone": 1.0,
+  "buff_allies": 4.0,
+  "burst_aoe": 8.0,
+  "burst_st": 1.0,
+  "catch": 7.0,
+  "cleanse": 4.0,
+  "clump_create": 7.0,
+  "damage_debuff": 1.0,
+  "disengage": 5.0,
+  "engage": 8.0,
+  "execute": 1.0,
+  "heal_burst": 6.0,
+  "heal_reduction": 6.0,
+  "heal_sustain": 10.0,
+  "interrupt": 1.0,
+  "knockback_displace": 1.0,
+  "max_health_cut": 1.0,
+  "mobility": 6.0,
+  "peel": 8.0,
+  "purge": 6.0,
+  "ranged_presence": 4.0,
+  "resist_shred": 5.0,
+  "root": 1.0,
+  "silence": 4.0,
+  "slow": 1.0,
+  "stun": 4.0,
+  "sustained_dps": 5.0,
+  "tankiness": 9.0,
+  "zone_control": 3.0
+ },
+ "content": "blackzone_roam",
+ "curated": {
+  "anti_dive": 1.0,
+  "anti_zone": 1.0,
+  "buff_allies": 4.0,
+  "burst_aoe": 8.0,
+  "burst_st": 1.0,
+  "catch": 7.0,
+  "cleanse": 4.0,
+  "clump_create": 7.0,
+  "damage_debuff": 1.0,
+  "disengage": 5.0,
+  "engage": 8.0,
+  "execute": 1.0,
+  "heal_burst": 6.0,
+  "heal_reduction": 6.0,
+  "heal_sustain": 10.0,
+  "interrupt": 1.0,
+  "knockback_displace": 1.0,
+  "max_health_cut": 1.0,
+  "mobility": 6.0,
+  "peel": 8.0,
+  "purge": 6.0,
+  "ranged_presence": 4.0,
+  "resist_shred": 5.0,
+  "root": 1.0,
+  "silence": 4.0,
+  "slow": 1.0,
+  "stun": 4.0,
+  "sustained_dps": 5.0,
+  "tankiness": 9.0,
+  "zone_control": 3.0
+ },
+ "engine_temperature": 0.02986,
+ "fitted": {
+  "anti_dive": 0.0,
+  "anti_zone": 1.9,
+  "buff_allies": 4.4,
+  "burst_aoe": 6.4,
+  "burst_st": 0.0,
+  "catch": 4.9,
+  "cleanse": 3.7,
+  "clump_create": 4.1,
+  "damage_debuff": 0.0,
+  "disengage": 3.1,
+  "engage": 8.3,
+  "execute": 1.6,
+  "heal_burst": 8.8,
+  "heal_reduction": 6.8,
+  "heal_sustain": 13.1,
+  "interrupt": 5.5,
+  "knockback_displace": 0.3,
+  "max_health_cut": 4.7,
+  "mobility": 5.8,
+  "peel": 7.3,
+  "purge": 5.8,
+  "ranged_presence": 2.4,
+  "resist_shred": 5.4,
+  "root": 0.0,
+  "silence": 3.5,
+  "slow": 0.3,
+  "stun": 5.5,
+  "sustained_dps": 4.9,
+  "tankiness": 8.0,
+  "zone_control": 2.4
+ },
+ "grid": [
+  {
+   "kappa": 30.0,
+   "pull_rule": false,
+   "validation_ll": -3.9473,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 28.0,
+    "mrr": 0.1115,
+    "outside_pool": 354,
+    "top10": 0.2211,
+    "top3": 0.1036
+   }
+  },
+  {
+   "kappa": 100.0,
+   "pull_rule": false,
+   "validation_ll": -3.957,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 28.0,
+    "mrr": 0.1102,
+    "outside_pool": 354,
+    "top10": 0.2214,
+    "top3": 0.1042
+   }
+  },
+  {
+   "kappa": 300.0,
+   "pull_rule": false,
+   "validation_ll": -3.9662,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 28.0,
+    "mrr": 0.106,
+    "outside_pool": 354,
+    "top10": 0.2262,
+    "top3": 0.0978
+   }
+  },
+  {
+   "kappa": 1000.0,
+   "pull_rule": false,
+   "validation_ll": -3.9758,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 28.0,
+    "mrr": 0.1018,
+    "outside_pool": 354,
+    "top10": 0.2211,
+    "top3": 0.0912
+   }
+  },
+  {
+   "kappa": 3000.0,
+   "pull_rule": true,
+   "validation_ll": -3.9825,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 29.0,
+    "mrr": 0.0956,
+    "outside_pool": 354,
+    "top10": 0.2033,
+    "top3": 0.0807
+   }
+  },
+  {
+   "kappa": 10000.0,
+   "pull_rule": true,
+   "validation_ll": -3.9862,
+   "validation_ranks": {
+    "drops": 3148,
+    "median_rank": 30.0,
+    "mrr": 0.0881,
+    "outside_pool": 354,
+    "top10": 0.1925,
+    "top3": 0.0667
+   }
+  }
+ ],
+ "holdout": {
+  "committed": {
+   "drops": 4210,
+   "median_rank": 32.0,
+   "mrr": 0.0726,
+   "outside_pool": 551,
+   "top10": 0.1618,
+   "top3": 0.0544
+  },
+  "curated": {
+   "drops": 4210,
+   "median_rank": 32.0,
+   "mrr": 0.0726,
+   "outside_pool": 551,
+   "top10": 0.1618,
+   "top3": 0.0544
+  },
+  "fitted": {
+   "drops": 4210,
+   "median_rank": 29.0,
+   "mrr": 0.0938,
+   "outside_pool": 551,
+   "top10": 0.2029,
+   "top3": 0.076
+  }
+ },
+ "holdout_drops": 4210,
+ "kappa": 3000.0,
+ "nuisance": {
+  "dup": 13.2711,
+  "meta": 168.2787,
+  "syn": 4.0263
+ },
+ "pull_rule": "weakest pull keeping every curated weight >= 4 at >= 50% of it",
+ "semantics": "REPORT-ONLY proposal: weights fitted to what training-split killer parties pick (revealed preference), pulled toward the curated weights; never what makes a party win. A template changes only by a logged decision.",
+ "split": "battle % 5 != 0 (training); holdout scored only",
+ "split_half_correlation": 0.9967,
+ "train_drops": 15928,
+ "train_parties": 7964,
+ "validation_ll_committed": -4.3632,
+ "validation_ll_uniform": -4.3664
+}

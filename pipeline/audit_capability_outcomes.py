@@ -5,10 +5,11 @@ losing ones? REPORT-ONLY — a measurement for notes/findings/, never a
 scoring input. A weight change it suggests is a logged decision in
 tests/VALIDATION.md, made by hand, never written by this script.
 
-The template weights are curation judgment (every content template's
-header: "weights NOT validated"). The targets are measured from winners;
-the weights say how much each capability matters, and nothing measured
-them. This audit measures them against OUTCOMES: the harvested killer
+The template weights are curation judgment, or fitted to what killer
+parties pick (a template's `weight_fit` block, pipeline/fit_choice_weights.py).
+The targets are measured from winners; the weights say how much each
+capability matters, and neither source measures them against winning.
+This audit measures them against OUTCOMES: the harvested killer
 parties carry each party's kills and deaths (sample_parties.py analyze,
 summed over the members the official battle roster places in the fight).
 
