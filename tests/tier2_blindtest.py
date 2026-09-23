@@ -85,6 +85,7 @@ from engine import Engine  # noqa: E402
 import gear_join  # noqa: E402
 
 TOP_N = 3          # "shotcaller pick appears in engine top-3"
+FULL_RANK = 10 ** 6  # top_n that returns every candidate (the v4h rank metric)
 GATE = 0.70        # VALIDATION.md V3 gate
 FULL_RANK = 10 ** 6  # top_n large enough to return the whole ranked pool
 
@@ -413,6 +414,47 @@ def _tally_line(label, t, width):
           f"{t['r_hits'] / t['r_total']:.0%}" if t["r_total"] else "role-level n/a")
     return (f"  [{label:<{width}}] weapon-level: {t['w_hits']}/{t['w_total']} = "
             f"{t['w_hits'] / t['w_total']:.0%}   {rl}")
+
+
+def _rank_summary(ranks):
+    """Rank metrics over one class's drops. `ranks` holds each dropped
+    weapon's 1-based position in the full ranking, None when the weapon
+    sits outside the suggestion pool. MRR counts an outside-pool drop as
+    0 (the ranker never proposes it); the median rank reads in-pool drops
+    only, and the outside count is reported beside it so the two stay
+    honest together."""
+    inside = [r for r in ranks if r is not None]
+    return {
+        "drops": len(ranks),
+        "outside_pool": len(ranks) - len(inside),
+        "median_rank": statistics.median(inside) if inside else None,
+        "top10": sum(1 for r in inside if r <= 10),
+        "mrr": (round(sum(1.0 / r for r in inside) / len(ranks), 4)
+                if ranks else None),
+    }
+
+
+def _rank_line(label, ranks, width):
+    s = _rank_summary(ranks)
+    if not s["drops"]:
+        return f"  [{label:<{width}}] no drops"
+    med = "n/a" if s["median_rank"] is None else f"{s['median_rank']:g}"
+    return (f"  [{label:<{width}}] median rank {med} (in pool)   "
+            f"top-10 {s['top10']}/{s['drops']} = {s['top10'] / s['drops']:.0%}   "
+            f"MRR {s['mrr']:.3f}   outside pool {s['outside_pool']}/{s['drops']}")
+
+
+def _board_holdout_mod():
+    """The holdout_mod the committed style x size board learned under
+    (its `split` header), or None when the board predates the flag."""
+    import yaml
+    path = os.path.join(ROOT, "pipeline", "templates", "style_bands.yaml")
+    try:
+        with open(path, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+    except OSError:
+        return None
+    return (doc.get("split") or {}).get("holdout_mod")
 
 
 # --------------------------------------------------------- baseline ----
@@ -798,10 +840,13 @@ def v4h(args):
     prior are DERIVED from this same harvest (labelled rosters -> p10/p90
     rows; distinct players -> prior). `--holdout-mod M` evaluates only
     battles with id % M == 0 as a deterministic slice. The prior, the role
-    counts and the seat skeleton learn from the other slice; the style
-    board's audit carries the same flag, but the COMMITTED board predates
-    it (it regenerates only on the harvest machine) — until that rerun,
-    every number here is weak-form on the styled rows.
+    counts, the seat skeleton and the style board learn from the other
+    slice; the report reads the board's `split` header and says whether
+    the evaluated slice is unseen, or weak-form when the two disagree.
+
+    RANK METRIC: beside the top-3 hit rates, every drop records the
+    dropped weapon's position in the full ranking — median rank, top-10
+    share, MRR and the outside-pool count per class (_rank_summary).
     Content is not recorded on a killer party; `--content` sets the
     template (default blackzone_roam, the ZvZ roam rows); the style is the
     party's weapons-only label (party_styles.json) or balanced.
@@ -811,9 +856,9 @@ def v4h(args):
     tallied once (it scores no gear) and printed as a `baseline` row.
     Report-only like everything here.
 
-    NOT A GATE. Prints beside v4 so the two can be compared; promotion to a
-    gate needs a maintainer decision once the holdout split is honoured end
-    to end.
+    NOT A GATE. Prints beside v4 so the two can be compared; the holdout
+    split is honoured end to end, so promotion to a gate is a maintainer
+    decision.
     """
     sys.path.insert(0, os.path.join(ROOT, "pipeline"))
     import rosters_io
@@ -848,7 +893,12 @@ def v4h(args):
     sample.sort(key=lambda p: (p["battle"], p["index"]))
 
     labels = V4H_CLASSES + (("baseline",) if args.baseline else ())
-    tallies = {cl: {"w_hits": 0, "w_total": 0, "r_hits": 0, "r_total": 0}
+    # `ranks`: the dropped weapon's 1-based position in the FULL ranking
+    # (None = outside the suggestion pool). Top-3 hits are coarse — a pick
+    # moving from rank 40 to rank 5 reads as no change — so the rank
+    # summary (_rank_line) is printed beside every hit rate.
+    tallies = {cl: {"w_hits": 0, "w_total": 0, "r_hits": 0, "r_total": 0,
+                    "ranks": []}
                for cl in labels}
     rebuild = {cl: {"w_hits": 0, "r_hits": 0, "r_total": 0, "total": 0}
                for cl in labels}
@@ -886,10 +936,13 @@ def v4h(args):
             role = role_of(ws[i])
             for cl, gl, rank in runs:
                 g = None if gl is None else gl[:i] + gl[i + 1:]
-                top = rank(rest, g, TOP_N)
+                full = rank(rest, g, FULL_RANK)
+                top = full[:TOP_N]
                 t = tallies[cl]
                 t["w_hits"] += ws[i] in top
                 t["w_total"] += 1
+                t["ranks"].append(full.index(ws[i]) + 1 if ws[i] in full
+                                  else None)
                 if role:
                     hit = any(w in pools[role] for w in top)
                     t["r_hits"] += hit
@@ -938,6 +991,9 @@ def v4h(args):
     if args.baseline:
         print(_tally_line("baseline", tallies["baseline"], 22))
         print(BASELINE_NOTE)
+    print("  rank of the dropped weapon in the full ranking:")
+    for cl in labels:
+        print(_rank_line(cl, tallies[cl]["ranks"], 22))
     print(f"  incumbent gear (harvest_gear class): {dressed_n}/{members_n} members "
           f"carry a linked build ({dressed_n / members_n:.0%}); {res_n}/{rec_n} recorded "
           f"pieces resolved into the curated catalog; the rest are honestly naked")
@@ -956,13 +1012,22 @@ def v4h(args):
                       f"{rb['w_hits'] / rb['total']:.0%}   {rl}"
                       + ("   <- baseline: REPORT-ONLY, never a gate"
                          if cl == "baseline" else ""))
-    print("  caveat: style_bands.yaml rows and the meta prior are derived from this "
-          "same harvest; the --holdout-mod slice is not yet excluded by "
-          "derive_style_bands.py, so styled numbers are weak-form.")
+    board_mod = _board_holdout_mod()
+    if args.holdout_mod and board_mod == args.holdout_mod:
+        print(f"  holdout: the style board, meta prior, role counts and seat "
+              f"skeleton learn from battles id%{board_mod}!=0; this slice is "
+              f"unseen by every harvest-derived table.")
+    else:
+        print(f"  caveat: the committed style board records holdout_mod "
+              f"{board_mod!r}, this run evaluates "
+              f"{args.holdout_mod or 'all battles'} - styled numbers are "
+              f"weak-form (the board learned from the evaluated battles).")
     print("  caveat: a killer party is win-conditioned evidence of what is "
           "fielded, never a verdict on what should be; NOT A GATE - reported "
           "beside v4.")
     if args.json:
+        for cl in labels:
+            tallies[cl]["rank_summary"] = _rank_summary(tallies[cl]["ranks"])
         payload = {"parties": len(sample), "eligible": len(parties),
                    "filter": {"min_size": args.min_size, "max_size": args.max_size,
                               "holdout_mod": args.holdout_mod, "seed": args.seed,

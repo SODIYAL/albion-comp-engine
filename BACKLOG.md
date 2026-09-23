@@ -173,11 +173,15 @@ Each is decidable today from evidence already in the repo.
   both`. Answered blind it is the first uncontaminated validation case;
   the Castle Outpost 7 form was answered as a reviewed draft and is train.
   (V: 08, the dressed-forge decisions, item 4; 09b, V3 round 2)
-- **Harvest V4 findings** (`tier2_blindtest.py v4h`, weak-form):
-  leave-one-out role-level 64-65% over 150 holdout killer parties against the
-  published-comp gate's 74% on 23 slots; kite parties 38% (n=10); rebuild-5
-  role recall 82-87%. Hypotheses only (standing rule 1), nothing retuned.
-  (V: 09b, Harvest V4)
+- **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
+  style board learns from the training split): at `--n 500` (1,500 drops)
+  role-level 59% (harvest_gear) against the baseline's 55%, weapon top-3 5%
+  against 18%; rank metric median 31 against the baseline's 20, top-10 15%
+  against 33%, MRR 0.070 against 0.177; 173 of 1,500 dropped weapons sit
+  outside the suggestion pool. The 150-party reading (68% against 47%) was
+  sample noise. v4h stays report-only (maintainer decision) until the
+  outcome audit has run. Hypotheses only (standing rule 1), nothing
+  retuned. (V: 09b, Harvest V4)
 - **The 20+ identity band**: no validation round yet; kite|20 still borrows
   kite|15-19 (31 distinct rosters) and brawl_clap borrows brawl in every band.
   A round once the harvest can stand it. (V: 09b)
@@ -265,24 +269,19 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
-- **Honour the holdout split end to end — the style board is the last
-  piece**: `v4h` evaluates battles with `id % 5 == 0`. `derive_meta_prior.py`,
-  `derive_role_counts.py` and `derive_skeletons.py` learn from the training
-  split and the build refuses an all-battles artifact.
-  `audit_style_rosters.py` has `--holdout-mod 5` (default) and records
-  `_split`, `derive_style_bands.py` carries it into the yaml header, and the
-  build prints whether the committed board honours it — but the committed
-  board PREDATES the flag and can only be regenerated on the harvest machine
-  (the raw cache is not on this machine). Rerun the audit there after the
-  next fold; then every styled `v4h` number is a true holdout measurement
-  and whether it becomes a gate is a maintainer decision.
-- **The outcome layer**: `sample_parties.py` records per-player kills and
-  deaths in the raw cache (`rec["roster"]`), and the party artifact drops
-  them, so no derivation can read an outcome. Derive a per-party K/D and a
-  heuristic won-the-battle side on the harvest machine (training split),
-  then win-lift per weapon, pair and copy count — report-only first, into
-  the prior only after a `v4h` A/B (standing rule 16). The design doc's own
-  plan (§8.6): a prior-adjuster, never the primary term.
+- **The outcome layer — first step: test the template weights**: the
+  party artifact now carries `in_fight` / `kills` / `deaths` per party
+  (`sample_parties.py analyze`, summed over members the battle roster
+  places in the fight); the committed artifact gains them at the next
+  fold on the harvest machine. `pipeline/audit_capability_outcomes.py`
+  (report-only) then labels win (kills >= 2 x deaths) / loss (kills <
+  deaths), fits outcome weights on the training split and compares the
+  template's fitness() against them on the holdout. Planted-weight
+  recovery checks: Spearman 0.94 recovered, holdout AUC 0.49 with no
+  signal planted. Any weight change it suggests is a logged decision.
+  Later: win-lift per weapon, pair and copy count, into the prior only
+  after a `v4h` A/B (standing rule 16); the design doc's plan (§8.6): a
+  prior-adjuster, never the primary term.
 - **brawl_clap under the floor everywhere** (28 / 36 / 15 rosters): its seat
   and plan rows fall back to the pooled cell, its copy rows to pooled; the
   forged brawl_clap 20 reads as a split identity. Nothing to derive until

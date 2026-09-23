@@ -380,9 +380,20 @@ def analyze(known):
                 if nm and nm not in party_of_name:
                     party_of_name[nm] = idx
         battle_party_index[rec["battle"]] = party_of_name
+        # PARTY OUTCOME (the outcome layer): the official battle roster
+        # carries every player's kills and deaths; a party's record is the
+        # sum over its members who were in this fight. Members listed by
+        # GroupMembers but absent from the roster fought elsewhere and add
+        # nothing. A cache record with no roster yields None — unknown,
+        # never zero. EVIDENCE ONLY: pipeline/audit_capability_outcomes.py
+        # reads it report-only; nothing here is a scoring input.
+        kd_by_name = {r["name"]: r for r in (rec.get("roster") or [])
+                      if r.get("name")}
         for idx, c in enumerate(clusters):
             p = c["party"]
             ws = [m["weapon"] for m in p["members"] if m["weapon"]]
+            here = [kd_by_name[m["name"]] for m in p["members"]
+                    if m.get("name") in kd_by_name]
             parties.append({
                 "battle": rec["battle"],
                 "index": idx,
@@ -391,7 +402,12 @@ def analyze(known):
                 "weapons": sorted(ws),
                 "guilds": sorted({m["guild"] for m in p["members"]
                                   if m["guild"]}),
-                "seen_in_events": c["events"]})
+                "seen_in_events": c["events"],
+                "in_fight": len(here) if kd_by_name else None,
+                "kills": (sum(r.get("kills") or 0 for r in here)
+                          if kd_by_name else None),
+                "deaths": (sum(r.get("deaths") or 0 for r in here)
+                           if kd_by_name else None)})
     # OBSERVED BUILDS — full kits, and the weapon -> armour-class evidence
     # that role assignment can actually be tested against. Armour class is
     # a strong role tell (curation judgment: cloth wearing is a reliable
