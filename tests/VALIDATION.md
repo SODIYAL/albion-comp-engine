@@ -1,24 +1,25 @@
 # Validation — Composition Engine
 
-The index of the ruling log. Every dated round, every owner quote and every score
-lives in full under `notes/validation/` (append-only, never edited); this file
-carries what has to stay in front of anyone changing the engine: the standing
-rules, the method, and one line per ruling with its pin and where the full
-entry is. Open questions live in `BACKLOG.md`. Code and yaml cite the log as
-`VALIDATION.md <date>` or by section title — resolve them in the index below.
+The index of the decision log. Every dated round, every recorded answer and
+every score lives in full under `notes/validation/` (append-only, never
+edited); this file carries what has to stay in front of anyone changing the
+engine: the standing rules, the method, and one line per decision with its
+pin and where the full entry is. Open questions live in `BACKLOG.md`. Code
+and yaml cite the log as `VALIDATION.md <date>` or by section title —
+resolve them in the index below.
 
 Archive files (`notes/validation/`): **plan** = `2026-08-12-plan.md`,
 **08** = `2026-08.md`, **09a** = `2026-09a.md`, **09b** = `2026-09b.md`.
 
 ## Standing rules
 
-Each was ruled once and must not be re-litigated silently. Dates point at the
-index rows where the owner's words are.
+Each was decided once and must not be re-litigated silently. Dates point at
+the index rows that record the decision.
 
 1. **Anti-circularity** (from the first V4 run, 2026-08-13; disclosed 2026-08-18):
    comps that calibrated a template never drive retuning against their own gate
-   results. Findings from gate runs are hypotheses for the owner, never fixes.
-   Template retunes need the owner's ruling.
+   results. Findings from gate runs are hypotheses for a maintainer decision,
+   never fixes. A template retune is a logged decision.
 2. **Real comps set the numbers** (2026-08-21): target = 0.9x the least any good
    comp fields, soft cap = 1.15x the most; rows where comps disagree are left
    alone. Since 2026-09-04 the style x band rows apply the same convention to
@@ -28,21 +29,21 @@ index rows where the owner's words are.
    claim, drop the claim, never reach for the override channel. Say "we do not
    know" in the file.
 4. **No rules on individual weapons** (2026-08-23, restated 2026-08-24, 2026-09-01):
-   "it should all be based on what the weapon does and its effect." Rulings land
-   as derivations from the E's own facts; cited fact overrides correct the
+   every rule rests on what the weapon does and its effect. Decisions land as
+   derivations from the E's own facts; cited fact overrides correct the
    evidence, never express taste.
 5. **Unique-ability first** (2026-08-25; E-first for weapons, 2026-08-24): a
    weapon's identity is its E; a gear piece's is its unique active. Check the
-   E's effect, magnitude, radius and delivery first and bring the owner only the
-   unresolved cases.
+   E's effect, magnitude, radius and delivery first; only the unresolved cases
+   go to a maintainer decision.
 6. **Descriptive layers never score** (2026-08-23 onward): comp_identity,
    kill_pressure, fight_chain, pick_report, the role layer and every killboard
    surface describe; the one sanctioned influence is the suggestion gate, which
    bars generation POOLS only. Manual picks always score.
 7. **Popularity is not effectiveness**: the killboard, cohort families and
    reference builds are display/evidence only; effectiveness claims are
-   reserved for win-lift evidence (kill-vs-death contrast needs a ruling before
-   it orders anything, 2026-09-08). The ONE empirical scoring input is the
+   reserved for win-lift evidence (kill-vs-death contrast needs a logged
+   decision before it orders anything, 2026-09-08). The ONE empirical scoring input is the
    harvest-generated meta prior — solo (2026-09-08) and best-observed-partner
    (2026-09-11) — tiebreak-sized under `delta`, derived on the training split
    (`battle % 5 != 0`), never a floor, a seat, a pool place or a penalty.
@@ -102,7 +103,7 @@ index rows where the owner's words are.
     (`primary_heal`) — and never spends a typical slot on a body that
     leaves such a minimum short. dps is never gated. Minima always win
     over it; sizes without a row carry none; manual parties score anything.
-    **Extended to seats and plan tools (2026-09-15, "full autonomy"):** at
+    **Extended to seats and plan tools (2026-09-15):** at
     10+ every PRIMARY SEAT (`Engine.seat_of`, the first uniformed menu
     role) carries the typical of the declared style's cell (else pooled)
     from `derive_skeletons.py`, training split only. A body past its seat's
@@ -122,18 +123,17 @@ index rows where the owner's words are.
 
 ## The method — how a round runs
 
-The identity system, the role book and the kit doctrine were built by **blind
-rounds** with the owner: present cases, collect the owner's call BEFORE
+The identity system, the role book and the kit doctrine were built by
+**validation rounds**: present cases, record the human answer BEFORE
 revealing the engine's, log both, and convert every disagreement the same day
-into a ruling, a cited override, or a golden pin. Forms: `tests/tier2_blindtest.py
+into a decision, a cited override, or a golden pin. Forms: `tests/tier2_blindtest.py
 generate|score` (V3 next-pick forms; `score --mode d` is the gate),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
 rosters, weapons only), `pipeline/kit_blind_round.py` (a weapon's most-worn
 builds without labels). Graded
-battles join `GRADED_BATTLES` so no later form re-samples them. Owner
-disagreements that the data contradicts are shown the data (2026-09-04 roster 5,
-2026-09-08 Arcane helmet); the ruling then stands on the evidence, not the
-guess.
+battles join `GRADED_BATTLES` so no later form re-samples them. An answer the
+data contradicts is shown the data (2026-09-04 roster 5, 2026-09-08 Arcane
+helmet); the decision then stands on the evidence, not the guess.
 
 Gates (CI, exit code): the list in CLAUDE.md. The recommendation-quality gate is
 `tests/tier2_blindtest.py v4` — `actual_gear` role-level >= 70% on published
@@ -144,13 +144,13 @@ battles), plus a rebuild-the-last-k recall; its circularity caveats are printed
 with every run. Read the current output; historical pass counts in the log are
 history.
 
-## Rulings index
+## Decision index
 
-One line per ruling or landed finding. `Pin` names the test that holds it
+One line per decision or landed finding. `Pin` names the test that holds it
 (T golden, F forge, R roles, V validation-modes, H builds, L layout). The last
 column is the archive file and the section title to search for.
 
-| Date | Ruling / finding | Landed as | Pin | Where |
+| Date | Decision / finding | Landed as | Pin | Where |
 |---|---|---|---|---|
 | 08-12 | Hard floors are load-bearing (soft targets alone let breadth out-rank a healer) | `hard_floor` mechanic | T1–T7 | plan, V1 |
 | 08-12 | Momentary defensives ground no tankiness (pseudo-tankiness) | 41 scores removed | — | plan, V1 status |
@@ -158,124 +158,124 @@ column is the archive file and the section title to search for.
 | 08-13 | First V4 run 69%; nothing retuned — anti-circularity stated | standing rule 1 | — | 08, First V4 run |
 | 08-18 | Style-declared scoring, anti_zone/damage_debuff trims, redundancy + viability; 77% — reweights PROVISIONAL | scoring.yaml | — | 08, V4 after the forge rework; Circularity disclosure |
 | 08-18 | Chillhowl (`MAIN_FROSTSTAFF_AVALON`) excluded >= 10 | composition.yaml exclusion | H16 | 08 (cited 09-02) |
-| 08-20 | Geometric AoE utility scaling: an AoE effect's supply scales with expected targets hit (style clump x spell reach), escalation on top; catch has four factors | `_geo_mult`, mechanics.yaml `geometric_caps` | T18/T18b | MECHANICS_TODO.md, Standing ruling |
-| 08-21 | Real comps set the numbers: 0.9x least / 1.15x most; Bist's Roam 15 admitted | 31 rows re-fitted | T15 | 08, RULED + RECALIBRATED |
+| 08-20 | Geometric AoE utility scaling: an AoE effect's supply scales with expected targets hit (style clump x spell reach), escalation on top; catch has four factors | `_geo_mult`, mechanics.yaml `geometric_caps` | T18/T18b | pipeline/README.md, Geometric AoE utility scaling |
+| 08-21 | Real comps set the numbers: 0.9x least / 1.15x most; Bist's Roam 15 admitted | 31 rows re-fitted | T15 | 08, First independent comp; real comps set the numbers |
 | 08-21 | Hoarfrost scores adjudicated; shield break sits below true purge | sheets | — | 08 (cited 08-25) |
 | 08-23 | V3 round 1: 12/12 role-level; clump-first is right (case 4) | no change | — | 08, FIRST V3 ROUND |
 | 08-23 | Partial comps have an identity — `comp_identity` descriptive v1 | both ports | T23 | 08, FIRST V3 ROUND (F-V3-2) |
-| 08-23 | "It's a bomb squad ... a different play style" — new archetype | comp_identity | T23e | 08, BLIND LABEL SPOT-CHECK |
-| 08-23 | Utility carriers never anchor a damage-identity split (Harpoon) | derivation | T23e | 08, BLIND LABELS 3/4 |
-| 08-23 | "clap kite could be its own playstyle" — fifth style | styles.yaml `clap_kite` | T23f | 08, BLIND LABELS 3/4 |
-| 08-23 | Crystal weapons too expensive below 30 — cost gate (RETIRED 09-07) | viability.cost_gate | F14/T27 | 08, FORGE-QUALITY BLIND ROUND |
+| 08-23 | The bomb squad is its own archetype, a different play style | comp_identity | T23e | 08, Label spot-check |
+| 08-23 | Utility carriers never anchor a damage-identity split (Harpoon) | derivation | T23e | 08, Labels 3/4 |
+| 08-23 | clap_kite is a fifth playstyle | styles.yaml `clap_kite` | T23f | 08, Labels 3/4 |
+| 08-23 | Crystal weapons too expensive below 30 — cost gate (RETIRED 09-07) | viability.cost_gate | F14/T27 | 08, Forge-quality validation round |
 | 08-23 | A hybrid healer can never be the sole foundation — full_healer = E heal >= 6 AND group scale | `full_healer`, `heal_overrides.yaml`, primary_heal minima | F15/T27/T27c | 08, FORGE-QUALITY; ROUND 2 REFINEMENT |
 | 08-23 | Role bands per style: 20-man healers brawl 3-4 / clap 2-3 / kite 2; frontline caps | styles.yaml `constraint_overrides` | F16 | 08, FORGE-QUALITY |
-| 08-23 | Great Holy is brawl-only ("has to stop moving") | style_overrides.yaml | T27 | 08, FORGE-QUALITY |
-| 08-23 | "I don't want to make rules on individual weapons" — standing rule 4 | — | — | 08, ROUND 2 REFINEMENT |
-| 08-23 | "leave it, keep everything consistent" — bands split trio/gang/group, no 4-5 seam | — | — | 08, ROUND 2 REFINEMENT |
+| 08-23 | Great Holy is brawl-only (the caster has to stop moving) | style_overrides.yaml | T27 | 08, FORGE-QUALITY |
+| 08-23 | No rules on individual weapons — standing rule 4 | — | — | 08, ROUND 2 REFINEMENT |
+| 08-23 | Bands stay consistent: trio / gang / group, no 4-5 seam | — | — | 08, ROUND 2 REFINEMENT |
 | 08-23 | Situational never generated: the generation-fit gate (fits at band; balanced = fits somewhere) | both ports | F17/T28 | 08, ROUND 3 |
 | 08-24 | Single-ally-heal-E healers never generate at 10+ | healer gate | T28b | 08, ROUND 4 |
 | 08-24 | Duplicates earn their place: default 1 copy; allowances cite real comps; clump_core derived | composition.yaml | F18 | 08, ROUND 4 |
 | 08-24 | CURSEDOT verified non-stacking (count once) | interactions | interactions | 08, ROUND 4 |
 | 08-24 | Hellfire is brawl-clap, not clap | style_overrides.yaml | T29 | 08, ROUND 4 |
-| 08-24 | "usually 2 curse is max" — curse_pressure derived, max 2; clap_kite healers 3-4 at 20 | composition/styles | F18b/F16 | 08, ROUND 5 |
-| 08-24 | Round 6 withdrawn: no weapon-specific rule; "check first and then ask me" (E-first directive) | standing rules 4/5 | — | 08, ROUND 6 SUPERSEDED |
-| 08-24 | Two-prong E rule: single-target Es, or low damage AND nothing for the group, bar generation | `weak_group_e` derived; Warbow / 1H Fire / Hellspawn cited overrides | T31/T31b | 08, ROUND 7 RULED |
+| 08-24 | Two curse carriers is the usual maximum — curse_pressure derived, max 2; clap_kite healers 3-4 at 20 | composition/styles | F18b/F16 | 08, ROUND 5 |
+| 08-24 | Round 6 withdrawn: no weapon-specific rule; check the facts first, then bring what stays unresolved (E-first directive) | standing rules 4/5 | — | 08, Round 6: recorded, then superseded |
+| 08-24 | Two-prong E rule: single-target Es, or low damage AND nothing for the group, bar generation | `weak_group_e` derived; Warbow / 1H Fire / Hellspawn cited overrides | T31/T31b | 08, Round 7 |
 | 08-24 | Battle Bracers' E damage was never scored — curation gap fixed | sheet burst_aoe 4 | T31 | 08, ROUND 7 (C7-A) |
-| 08-24 | Spirithunter is clap ("massive pierce that enables the whole dps line") | style_overrides.yaml | T31c | 08, ROUND 7 (C7-B) |
+| 08-24 | Spirithunter is clap (a massive pierce that enables the whole dps line) | style_overrides.yaml | T31c | 08, ROUND 7 (C7-B) |
 | 08-24 | Bloodletter prominence is a mount-carrier artifact; Galatine Pair is a solo bomb | no gate change | — | 08, ROUND 7 (C7-C/D) |
 | 08-24 | Fists of Avalon purge 4; Trinity Spear group-unfit — an auto-attack steroid is not large-scale utility | MASTERSHEET; style_overrides | T31d | 08, FIRST FULL E-AUDIT |
 | 08-25 | Non-stacking slots are EARNED by an E debuff tool (Damnation / Lifecurse / Rotcaller) | derivation + gate | F19 | 08, ROUND 8 |
-| 08-25 | "bigger than 15" = the group band at 10+ (confirmed round 9) | band seam | — | 08, ROUND 8/9 |
-| 08-25 | Engine darlings stand; Evensong burst 4 -> 2, Damnation 6 -> 2 by the numbers; Clarent is AoE | sheets | — | 08, C7-E RULED; ROUND 9 |
-| 08-25 | Size-physics tables owner-confirmed (Q16) | mechanics.yaml | — | 08, Q16 SIGNED OFF |
+| 08-25 | The group band is 10+ (confirmed in round 9) | band seam | — | 08, ROUND 8/9 |
+| 08-25 | Engine darlings stand; Evensong burst 4 -> 2, Damnation 6 -> 2 by the numbers; Clarent is AoE | sheets | — | 08, C7-E; Round 9 |
+| 08-25 | Size-physics tables confirmed (Q16) | mechanics.yaml | — | 08, Q16 signed off |
 | 08-25 | Resilience penetration wired as a partial rebate; RULE batch fine; no 1H discount (Rotcaller 2 -> 4); Evensong heal-cut 3 | resilience_penetration.yaml | F20 | 08, ROUND 9 |
 | 08-25 | The role layer: roles are member-in-comp properties, weapons carry menus, roles never score | roles.yaml, roles-design.md | R1–R6 | 08, ROUND 10 |
-| 08-25 | Taxonomy is FUNCTIONS (pierce / purge / anti_heal) beside uniformed SEATS; primary from the E, secondary from Q/W | derived sweep | R7/R8 | 08, Owner grading; E-FIRST TIERED SWEEP |
+| 08-25 | Taxonomy is FUNCTIONS (pierce / purge / anti_heal) beside uniformed SEATS; primary from the E, secondary from Q/W | derived sweep | R7/R8 | 08, Grading pass 1; Grading pass 2 |
 | 08-25 | Shield break split out of purge (Black Monk primary) | `spells:` on role records | R9 | 08, Third grading pass |
 | 08-25 | Equipment identity = its unique spell; class from the numbers; offhands classified by stats; Mistcaller/Lymhurst are self buffs | `classify_gear`, role_affinity | R10/R11 | 08, Fourth–Seventh passes |
-| 08-25 | Kit doctrine covers "the whole build ... food, potion and capes"; passives per class; Leering Cane as physics (`cc_mult_caps`) | kit_options uniform gate + doctrine tiers | R12–R16 | 08, INCREMENT 2 |
-| 08-26 | Full-board grading: 15 rulings (Iron-clad off stopper, Great Holy brawl healer, Witchwork/Black Monk off shield_support, frost dps off zone_support, Great Arcane setup seat; kit overrides; Dagger Pair + Deathgivers excluded >= 7) | roles.yaml, composition.yaml | R17 | 08, FULL-BOARD GRADING |
-| 08-26 | "its fine if a weapon wears that armor once but ... find why" — per-weapon doctrine + effect quotas | `kit_weapon`, `effect_quotas` | R18 | 08, INCREMENT 2.5 |
-| 08-26 | "what matters is what the data says" — need profiles from rosters (engage > stopper) | roles.yaml `need_profiles` | F21 | 08, INCREMENT 3 |
-| 08-26 | "I dont want to set a hard rule that a weapon needs to be range or melle" — the conditional-payload rule (ramp / channel Es are situational for clap) | `channel` fact, derive_style_fit | T32 | 08, CONDITIONAL-PAYLOAD RULE |
+| 08-25 | Kit doctrine covers the whole build, food, potion and capes included; passives per class; Leering Cane as physics (`cc_mult_caps`) | kit_options uniform gate + doctrine tiers | R12–R16 | 08, INCREMENT 2 |
+| 08-26 | Full-board grading: 15 decisions (Iron-clad off stopper, Great Holy brawl healer, Witchwork/Black Monk off shield_support, frost dps off zone_support, Great Arcane setup seat; kit overrides; Dagger Pair + Deathgivers excluded >= 7) | roles.yaml, composition.yaml | R17 | 08, FULL-BOARD GRADING |
+| 08-26 | An unexpected armor on a weapon is explained, never simply admitted — per-weapon doctrine + effect quotas | `kit_weapon`, `effect_quotas` | R18 | 08, INCREMENT 2.5 |
+| 08-26 | The data decides — need profiles from rosters (engage > stopper) | roles.yaml `need_profiles` | F21 | 08, INCREMENT 3 |
+| 08-26 | No hard ranged-or-melee rule per weapon — the conditional-payload rule (ramp / channel Es are situational for clap) | `channel` fact, derive_style_fit | T32 | 08, CONDITIONAL-PAYLOAD RULE |
 | 08-26 | Kite gets the same rule plus a ranged core min 5 at 20 / 4 at 15-19 | styles.yaml | T33 | 08, KITE EXTENSION |
-| 08-27 | "never above 100 ... based on ground facts" — the display ruler: 100% = soft cap | dashboard | layout | 08, THE DISPLAY RULER |
+| 08-27 | The display ruler never reads above 100% and rests on ground facts: 100% = soft cap | dashboard | layout | 08, THE DISPLAY RULER |
 | 08-27 | Six orphan capabilities promoted with rows only where comps exist; castle / faction_war left unscored | templates | — | 08, SIX CAPABILITIES PROMOTED |
 | 08-27 | `reveal` refused (every weapon source is a purge); "reduce enemy CC resistance" retracted; Defensive Slam curated | effect_map.yaml | lint | 08, THE LAST TWO EFFECTS |
 | 08-27 | Effect catalogue covers gear; six bad claims caught, Demon Armor's tankiness was backwards | gear sheets | lint | 08, THE EFFECT CATALOGUE NOW COVERS GEAR |
-| 08-27 | "search more comps to see what tanks are actually wearing" — doctrine-tier-first kit ranking | both ports | T22 | 08, GEAR COMBAT EXPANSION |
+| 08-27 | Tank kits come from what tanks in real comps actually wear — doctrine-tier-first kit ranking | both ports | T22 | 08, GEAR COMBAT EXPANSION |
 | 08-27 | Dressed forge: candidates priced dressed; re-pin with the dressed fixture | both ports | T30c | 08, DRESSED FORGE |
-| 08-27 | Option C: structural floors read weapon+loadout only; gate re-basing deferred; synergy Model 2; next round prepared; locked_gears / dressed refine | both ports | V5, F25/F26 | 08, FIVE RULINGS DELIVERED |
-| 08-28 | "they always bring 2 or more [Demon Armor]" — reflect structural, `self_costs`, `self_cost_offset_min_copies` (the only super-additive duplicate) | sheets, interactions, build_extra | interactions | 08, REFLECT + SELF-COSTS |
+| 08-27 | Option C: structural floors read weapon+loadout only; gate re-basing deferred; synergy Model 2; next round prepared; locked_gears / dressed refine | both ports | V5, F25/F26 | 08, Five dressed-validation decisions |
+| 08-28 | Demon Armor comes in twos or more — reflect structural, `self_costs`, `self_cost_offset_min_copies` (the only super-additive duplicate) | sheets, interactions, build_extra | interactions | 08, REFLECT + SELF-COSTS |
 | 08-28 | Corpus style labels; bomb squad and the tracking comp get no style (`fit_exclude`); DH parties 2/3 excluded | published_comps | tier2 | 08, THE STYLE LABELS |
-| 08-28 | "zvz 20man can be blackzone roaming or castle outposts or ..." — `content_candidates` | builds_lib | — | 08, ONE COMP, SEVERAL CONTENTS |
+| 08-28 | A 20-player ZvZ comp can serve several contents (blackzone roaming, castle outposts, ...) — `content_candidates` | builds_lib | — | 08, ONE COMP, SEVERAL CONTENTS |
 | 08-28 | Do not split resistance; the app models no enemy | mechanics.yaml | — | 08, WIKI RESEARCH PASS |
-| 08-28 | Ranged core 7 at 20 (clap / clap_kite); Icicle stays zone_support; healers at 5-7 stay 1-2; effect quotas graduate to advice | styles.yaml, dashboard | F21, display 14 | 08, FOUR RULINGS |
+| 08-28 | Ranged core 7 at 20 (clap / clap_kite); Icicle stays zone_support; healers at 5-7 stay 1-2; effect quotas graduate to advice | styles.yaml, dashboard | F21, display 14 | 08, Four decisions |
 | 08-28 | Gear resolver: item ids, caller shorthand ("GG", "blink", "cleanse") | builds_lib | builds | 08, GEAR RESOLVER |
 | 08-28 | anti_zone and execute are OPTIONAL rows (denominator only) | templates `optional` | V | 08, Optional capabilities |
 | 08-28 | Peel = enemy CC plus cancelling enemy CC on an ally; protection is buff_allies/tankiness | effect_map, five claims removed, Polymorph re-cited | lint | 08, Peel is CC |
 | 08-28 | Ignore tier everywhere in gear lookup (Gigantify was scored zero) | `gear_key()` both ports | — | 08, Tier-agnostic gear lookup |
-| 08-28 | `target_mults` mechanism (floors never scale; balanced empty); burst_aoe 1.71 / 1.29 derived from ruled seat counts; "go with your recommendation" — kite peel 1.25, disengage 1.20 | styles.yaml | V6 | 08, Per-style target modifiers (three sections) |
-| 08-29 | "do what needs to be done" — corpus 13 -> 36 comps, author-declared styles; re-derivation changed nothing (tier2 saturated) | published_comps | H16 split | 08, Corpus ingestion; Re-derivation |
-| 08-29 | THE UNIT RE-FIT — "go ahead": 152 rows to person units; a conversion can only add; 13 gear-fed caps moved | templates | T26/T30d | 08, THE UNIT RE-FIT |
-| 08-29 | Gate re-based to actual_gear and it now enforces ("ok do that") | tier2_blindtest | exit code | 08, Gate re-based |
-| 08-29 | Killer parties from `GroupMembers`; "it's okay if the losing party couldn't get a single kill" | sample_parties.py | — | 08, Real party rosters; The party sample's bias |
+| 08-28 | `target_mults` mechanism (floors never scale; balanced empty); burst_aoe 1.71 / 1.29 derived from the decided seat counts; kite peel 1.25, disengage 1.20 adopted | styles.yaml | V6 | 08, Per-style target modifiers (three sections) |
+| 08-29 | Corpus 13 -> 36 comps, author-declared styles; re-derivation changed nothing (tier2 saturated) | published_comps | H16 split | 08, Corpus ingestion; Re-derivation |
+| 08-29 | THE UNIT RE-FIT: 152 rows to person units; a conversion can only add; 13 gear-fed caps moved | templates | T26/T30d | 08, THE UNIT RE-FIT |
+| 08-29 | Gate re-based to actual_gear and it now enforces | tier2_blindtest | exit code | 08, Gate re-based |
+| 08-29 | Killer parties from `GroupMembers`; a party that never scored a kill is not recorded | sample_parties.py | — | 08, Real party rosters; The party sample's bias |
 | 08-29 | Observed builds validate the role book (frontline 85% plate, healers 72% cloth); Nature Staff plate contradiction OPEN | — | — | 08, Observed BUILDS |
-| 09-01 | "fix the underlying issue" — fail-closed kits: no seat, no kit; no tier, slot unset | both ports | R19 | 09a, Fail-closed kit generation |
-| 09-01 | "lets fix seat for all weapons" — 135/137 seated, `curse_support` seat | roles.yaml | R17 | 09a, THE SEAT-ALL PASS |
+| 09-01 | Fail-closed kits: no seat, no kit; no tier, slot unset | both ports | R19 | 09a, Fail-closed kit generation |
+| 09-01 | Every weapon gets a seat — 135/137 seated, `curse_support` seat | roles.yaml | R17 | 09a, THE SEAT-ALL PASS |
 | 09-01 | Killboard as a doctrine stream, noise floors; Leering Cane add retired by observation | derive_kit_doctrine | R18 | 09a, KILLBOARD KIT DOCTRINE |
-| 09-01 | "based on what real people wear" — the conditional modal build chain fronts the kit | `kit_build`, both ports | R20 | 09a, THE OBSERVED-BUILD OVERLAY |
-| 09-02 | Chillhowl off every menu; Stillgaze is a d-tank; Iron-clad "some random rat weapon" | roles.yaml | R17 | 09a, The two exceptions ruled |
-| 09-03 | Bug round: need measured dressed; two-handers have no off-hand; one role read (seat); Occult is support; "reforge all" reports Unchanged | both ports, page | T22, R21–R23 | 09a, Owner bug round |
+| 09-01 | Kits follow what real players wear — the conditional modal build chain fronts the kit | `kit_build`, both ports | R20 | 09a, THE OBSERVED-BUILD OVERLAY |
+| 09-02 | Chillhowl off every menu; Stillgaze is a d-tank; Iron-clad is a small-scale weapon nobody fields in ZvZ | roles.yaml | R17 | 09a, The two exceptions decided |
+| 09-03 | Bug round: need measured dressed; two-handers have no off-hand; one role read (seat); Occult is support; "reforge all" reports Unchanged | both ports, page | T22, R21–R23 | 09a, Bug round |
 | 09-03 | THE KIT AUDIT: carriers are weapon evidence; observed chest class admitted; chain guards; count-first ranking; carrier quota; identity chest exempt; evidence band; party_size >= 10 is the evidence unit | build_dataset, both ports | R24–R26, T22 | 09a, THE KIT AUDIT (+ two addenda) |
 | 09-04 | Harvest refresh, deep harvest, the overnight task; R18 pinned as a mechanism | harvest_overnight.ps1 | R18 | 09a, Harvest refresh; Deep harvest |
-| 09-04 | Blind round 1 (4/10 -> 7/10): Galatine is not a clap bomb, Realmbreaker is; the kite half is STANDOFF TOOLS | comp_identity, `standoff_e` | T34 | 09a, Blind round 1; Rulings from blind round 1 |
-| 09-04 | Rift Glaive's ramp is FREE (`ramp_free`); Carving checked against the harvest; "brawl is dps on leather, clap and kite on cloth" — kits decide a split | derive_style_fit, comp_identity | T35 | 09a, Rulings batch 2 |
-| 09-04 | Blind round 2 (8/16 -> 12/16): flex bombs join the rigid core; slow fields are standoff tools; bomb line 0.45; THE BALL CARRIES THE BOMB; roster 5 re-ruled brawl on its kits | comp_identity | T36 | 09a, Blind round 2 |
-| 09-04 | "ok do it" — style x band rows beside the content templates, generated from winners (p10 / p90); zero p10 = soft-cap-only; target_mults never stack | derive_style_bands.py, style_bands.yaml | T37 | 09a, Style x band rows |
-| 09-04 | "go ahead with your recommendation" — the movement four admitted; fixtures judged DRESSED | derive_style_bands | T37/T38 | 09a, The movement four |
+| 09-04 | Validation round 1 (4/10 -> 7/10): Galatine is not a clap bomb, Realmbreaker is; the kite half is STANDOFF TOOLS | comp_identity, `standoff_e` | T34 | 09a, Validation round 1 on the harvested rosters; Decisions from validation round 1 |
+| 09-04 | Rift Glaive's ramp is FREE (`ramp_free`); Carving checked against the harvest; brawl dps wear leather, clap and kite dps wear cloth — kits decide a split | derive_style_fit, comp_identity | T35 | 09a, Decisions batch 2 |
+| 09-04 | Validation round 2 (8/16 -> 12/16): flex bombs join the rigid core; slow fields are standoff tools; bomb line 0.45; THE BALL CARRIES THE BOMB; roster 5 reads brawl on its kits | comp_identity | T36 | 09a, Validation round 2 |
+| 09-04 | Style x band rows beside the content templates, generated from winners (p10 / p90); zero p10 = soft-cap-only; target_mults never stack | derive_style_bands.py, style_bands.yaml | T37 | 09a, Style x band rows |
+| 09-04 | The movement four admitted; fixtures judged DRESSED | derive_style_bands | T37/T38 | 09a, The movement four |
 | 09-04 | One player, one vote — every doctrine floor counts distinct people | sample_parties, derive_kit_doctrine | R27 | 09a, One player, one vote |
 | 09-04 | Doctrine per size band: group (10+) and GANG (4-9) via `_seat_kit` | both ports | R28 | 09a, Kit doctrine per size band |
-| 09-05 | Blind round 3 (4/10 -> 8/10): a lone tool only makes a kite of a non-bombing comp; the bomb's delivery names the mid band; flex home needs 2x melee; utility-carrier exclusion REJECTED | comp_identity | T39 | 09a, Blind round 3 |
-| 09-05 | "grailseeker can be kite or d tank. accept" — leather admitted; a root field at range is a standoff tool | kit doctrine, `standoff_e` | R6/R12/R26 | 09a, Harvest refresh, first overnight run |
-| 09-05 | "point of clap is high dps which is not possible if majority ... wearing leather" — leather-majority dps overrule a weapons-decided clap to brawl; bomb squad exempt | comp_identity | T40 | 09a, Kit blind rounds 1-2 |
+| 09-05 | Validation round 3 (4/10 -> 8/10): a lone tool only makes a kite of a non-bombing comp; the bomb's delivery names the mid band; flex home needs 2x melee; utility-carrier exclusion REJECTED | comp_identity | T39 | 09a, Validation round 3 |
+| 09-05 | Grailseeker serves kite or d-tank — leather admitted; a root field at range is a standoff tool | kit doctrine, `standoff_e` | R6/R12/R26 | 09a, Harvest refresh, first overnight run |
+| 09-05 | Clap means high dps, which a leather-wearing majority cannot deliver — leather-majority dps overrule a weapons-decided clap to brawl; bomb squad exempt | comp_identity | T40 | 09a, Kit validation rounds 1-2 |
 | 09-05 | Per-item chest lean (Royal Jacket / Tenacity / Hunter Jacket lean ranged) | `chest_lean.json` | T41 | 09a, Per-item chest lean |
-| 09-07 | "not restricting weapons but rather focusing on mechanics" — THE COST GATE RETIRED; anti_zone rows deleted at 7-man contents | both ports, templates | T42/F14 | 09b, Cost gate retired |
-| 09-07 | "don't really need it at 10-14 ... a good requirement at like 25+" — `ramp: {none_until: 14, full_at: 25}` | both ports (general row mechanism) | T42/F14 | 09b, THE ANTI_ZONE DEMAND RAMP |
-| 09-08 | Blind round 4 (9 exact / 3 half / 1 miss of 14); gank tells ("claws, dagger pair, whispering bow"); Bloodletter stack = battlemount sub-party | comp_identity (nothing retuned) | T43 | 09b, Blind round 4 |
-| 09-08 | "go ahead and do 1 and 2"; "Declared style only" — chain guard by shares; style cells with the 5-voter floor per slot | build_dataset, `_seat_kit` | R29–R33, R24b | 09b, Coherent builds and style cells |
-| 09-08 | "1 healer per 5 people ... for clap" — `role_min_per_players`, a minimum with no cap | styles.yaml | F16 | 09b, mastersheet review |
-| 09-08 | "i leave it up 2 you" — seat pooling for thin slots (same-chest pool 80% vs 58%) | `kit_pool`, `kit_by_chest` | R34a/b | 09b, Seat pooling |
-| 09-08 | Double Bladed "a good ganking weapon but not a good brawl weapon" — excluded >= 10 after the stats | composition.yaml | F27 | 09b, The Double Bladed audit |
-| 09-08 | "when an e lands the caster should read as melee delivery" — payload reach, not travel (`caster_moves`); flex bombs excepted | parse_dumps, derive_style_fit | T45 | 09b, Payload reach, not travel |
-| 09-08 | "sure on 3" — the meta prior is GENERATED from the harvest; hand-set maps refused at build | derive_meta_prior.py | T46/H18 | 09b, The generated meta prior |
+| 09-07 | Price mechanics instead of restricting weapons — THE COST GATE RETIRED; anti_zone rows deleted at 7-man contents | both ports, templates | T42/F14 | 09b, Cost gate retired |
+| 09-07 | anti_zone has no demand at 10-14 and is a real requirement from about 25 — `ramp: {none_until: 14, full_at: 25}` | both ports (general row mechanism) | T42/F14 | 09b, THE ANTI_ZONE DEMAND RAMP |
+| 09-08 | Validation round 4 (9 exact / 3 half / 1 miss of 14); gank tells (claws, dagger pair, whispering bow); Bloodletter stack = battlemount sub-party | comp_identity (nothing retuned) | T43 | 09b, Validation round 4 |
+| 09-08 | Levers 1 and 2 (coherent builds, style-conditioned doctrine); balanced follows the declared style only — chain guard by shares; style cells with the 5-voter floor per slot | build_dataset, `_seat_kit` | R29–R33, R24b | 09b, Coherent builds and style cells |
+| 09-08 | One healer per five players for clap — `role_min_per_players`, a minimum with no cap | styles.yaml | F16 | 09b, mastersheet review |
+| 09-08 | Seat pooling for thin slots (same-chest pool 80% vs 58%) | `kit_pool`, `kit_by_chest` | R34a/b | 09b, Seat pooling |
+| 09-08 | Double Bladed is a ganking weapon, not a brawl weapon — excluded >= 10 after the stats | composition.yaml | F27 | 09b, The Double Bladed audit |
+| 09-08 | An E that lands its caster reads as melee delivery — payload reach, not travel (`caster_moves`); flex bombs excepted | parse_dumps, derive_style_fit | T45 | 09b, Payload reach, not travel |
+| 09-08 | The meta prior is GENERATED from the harvest; hand-set maps refused at build | derive_meta_prior.py | T46/H18 | 09b, The generated meta prior |
 | 09-08 | Healers per five on every style but kite and balanced; balanced at 25 OPEN | styles.yaml | F16 | 09b, Healers per five |
-| 09-08 | "ok on arcane helmet" — chain steps need 5 voters | CHAIN_STEP_MIN_VOTERS | R35 | 09b, Chain-step voter floor |
-| 09-08 | "you r hoarfrost ruling" — Avalanche burst_aoe 3 | MASTERSHEET | T44 | 09b, Hoarfrost burst_aoe 3 |
+| 09-08 | Chain steps need 5 voters (the Arcane helmet) | CHAIN_STEP_MIN_VOTERS | R35 | 09b, Chain-step voter floor |
+| 09-08 | Hoarfrost: Avalanche burst_aoe 3 | MASTERSHEET | T44 | 09b, Hoarfrost burst_aoe 3 |
 | 09-09 | First fold (2,042 -> 3,583 battles); `[id, count, players]` rows, THIN judged on people; audit slack at the half-line | build_dataset, both ports | R24b/R28 | 09b, first fold |
-| 09-09 | Harvest review: twice-daily task, `--workers`, three retries; second floor stays 8; EU is an OWNER CALL | harvest scripts | — | 09b, harvest review |
-| 09-09 | "go ahead with your recommendations" — a zero-heavy capability has no harvest minimum (`zero_share` >= 0.05 = soft-cap-only) | derive_style_bands | V7 | 09b, ruling: a zero-heavy capability |
+| 09-09 | Harvest review: twice-daily task, `--workers`, three retries; second floor stays 8; EU needs a maintainer decision | harvest scripts | — | 09b, harvest review |
+| 09-09 | A zero-heavy capability has no harvest minimum (`zero_share` >= 0.05 = soft-cap-only) | derive_style_bands | V7 | 09b, A zero-heavy capability has no harvest minimum |
 | 09-10 | The sweep: the page reads `ENG.reqs`; the forge's need bound made admissible; expansion sort quantized | both ports, page | L19, F28 | 09b, the sweep |
 | 09-10 | R36: a failed PICK skips its slot, only a failed POOL ends the chain; F29: the need bound discounts only provable bodies; territory_defense at 25 OPEN | build_dataset, both ports | R36/F29 | 09b, Chains reach past a slot |
-| 09-11 | "go ahead and act on your recommendations" — a body beyond the TYPICAL role count generates only when a minimum only that role can meet demands it; the page forges locked members in their on-screen kit | derive_role_counts.py, both ports, page | F31a-e/T48 | 09b, One healer at seven |
-| 09-11 | "fix it up all for all party sizes and styles" — typical for healer / frontline / support: comps median below 10, declared-style harvest cell per size at 10+, pooled for balanced; typical slots carry the exclusive minima | derive_role_counts.py, both ports | F31f-k | 09b, Tanks and supports |
+| 09-11 | A body beyond the TYPICAL role count generates only when a minimum only that role can meet demands it; the page forges locked members in their on-screen kit | derive_role_counts.py, both ports, page | F31a-e/T48 | 09b, One healer at seven |
+| 09-11 | Typical counts for every party size and style — healer / frontline / support: comps median below 10, declared-style harvest cell per size at 10+, pooled for balanced; typical slots carry the exclusive minima | derive_role_counts.py, both ports | F31f-k | 09b, Tanks and supports |
 | 09-11 | Slot controls: lock is the only held state; replace = the engine's one-slot forge; refresh = next-best via `forge(avoid=)`, deterministic, `exhausted` when nothing new is reachable | both ports, page, codec | F32/F33, L21, codec | 09b, Slot controls |
-| 09-11 | Tile labels "primary role first then secondary": derived from the sheet E-first (Heavy Mace stopper · purge · silence, Great Arcane support · stun, Hallowfall burst · holy); seat moves = a ruling list, not a change | roles.yaml labels, build_dataset, page | R37, L22 | 09b, Labels |
-| 09-11 | "its a heal weapon ... mostly a healer still" — Exalted Staff seats main_healer (support lane secondary); the 2026-08-23 support override retired; typical counts re-derived | roles.yaml, composition.yaml, role_counts.json | R22, T42, F31i | 09b, Exalted |
+| 09-11 | Tile labels read primary role first, then secondary: derived from the sheet E-first (Heavy Mace stopper · purge · silence, Great Arcane support · stun, Hallowfall burst · holy); seat moves = a decision list, not a change | roles.yaml labels, build_dataset, page | R37, L22 | 09b, Labels |
+| 09-11 | Exalted Staff is a heal weapon first — it seats main_healer (support lane secondary); the 2026-08-23 support override retired; typical counts re-derived | roles.yaml, composition.yaml, role_counts.json | R22, T42, F31i | 09b, Exalted |
 | 09-10 | Calibration scaffold retired; the tuning discipline kept as standing rule 16 | — | — | 09b, the calibration scaffold retired |
-| 09-10 | "no one uses the cleric cowl for its knockback ability regardless of content" — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
-| 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear blind cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
-| 09-10 | "the data should come from the harvest median" / four stages "red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much" — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest checkout; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
-| 09-11 | "wouldnt it be cool to add synergy to comps based on what weapons are often seen playing together with real data ?" — ruling A of three: observed pairings enter through the meta prior ONLY (never the synergy term, a floor, a seat or a pool); one killer party one vote per distinct pair, a row only across >=3 guild-sets and >=5 parties, s = clamp(log2 lift, 0, 3)/3 x n/(n+8), lift <= 1 reads 0; both prior tables learn from `battle % 5 != 0` only; meta = 0.5 solo + 0.5 best partner on the roster, pick score stays the exact comp_score delta. Standing rule 7 amended. Golden moved: none | derive_meta_prior (meta_pairs), build_dataset gate, both ports, why-panel line | test_meta_pairs A1-A13 / B1-B8, parity meta fields, F1 | 09b, Pair-aware meta prior |
-| 09-11 | "this file will keep growing" — the killer-party artifact is gzipped (`party_rosters.json.gz`, one loader `rosters_io.py`, hash gates on the stored bytes; 77 MB -> 4.6 MB, the 100 MB push limit was days away); the raw cache backup to a bucket goes to BACKLOG | rosters_io.py, every reader | H18 | 09b, The artifact is gzipped |
-| 09-15 | "remove that free 2" / "0.25 must be too soft because there are probably a lot more aoe weapons" — Permafrost's per_weapon allowance removed, rho 0.25 -> 0.5 (smallest value at which every copy leaves the 18-man clap roster's list; distinct picks unmoved); blind on the caster-moving ranged grants: Fists of Avalon stays ("leave fists of avalon as is"), Trinity Spear denied ("most definitely a melee weapon"), Skystrider granted ("skystrider is ranged"); Rift Glaive / Spiked cone unruled | composition.yaml, scoring.yaml, ranged_overrides.yaml | T49, F4/F18 re-pinned | 09b, Duplicates never outrank a distinct bomb |
-| 09-15 | "go ahead and make changes according to your suggestions, you have full autonomy here" — the seat skeleton: every primary seat's harvest typical per style x size (`derive_skeletons.py`, training split, distinct rosters) closes a seat in the forge — a body past it only for a minimum no under-typical seat of its role could meet, or by spill once every seat of the role is full; refinement never un-justifies a spill; the standoff plan typical is a generation minimum (flag predicate); copy allowances GENERATED per style x band (free = round(p50), max = ceil(p90); a hand list fails the build); `derive_role_counts` on the training split; the audit carries `--holdout-mod` (board regeneration waits for the harvest checkout); `tier2 --baseline` report-only. Standing rule 18 extended. Golden moved: none. Forged kite 20 reads clap_kite (was a strong clap) | derive_skeletons.py, build_dataset, both ports, derive_role_counts, audit_style_rosters, derive_style_bands, tier2_blindtest | test_skeletons S1-S6, F4/F18 re-pinned | 09b, Skeleton-first generation |
+| 09-10 | Nobody equips the Cleric Cowl for its knockback, in any content — Force Field rows dropped from Cleric Cowl (MetaBattle 4/4 Ice Block); the general fix (gear-active doctrine) goes to BACKLOG | sheets/gear/core.yaml | T47 (T20 re-pinned) | 09b, Cleric Cowl |
+| 09-10 | Harvest V4 (`v4h`, report-only): leave-one-out over 150 of 724 holdout killer parties — role-level 64-65% (kite 38%), rebuild-5 role recall 82-87%; the gear validation cards retired (R24 grades kits against the harvest continuously) | tier2_blindtest.py v4h | — | 09b, Harvest V4 |
+| 09-10 | Targets come from the harvest median; four board stages: red below the bare minimum for winning, orange above it but not yet ideal, green at ideal, purple too much — target = p50 on every row (bands + content re-fit), `min` = p10, soft cap 1.15 x p90, one curve below; balanced pooled cell deferred to the harvest machine; kill lights bar on the minimum, chain grades on the two lines, redundancy lens 0.05 -> 1.0; board says typical + `min` chips; SIZE stepper follows the roster. Standing rule 17. T25b pierce OPEN (thin 3-comp minimum) | derive_style_bands, refit_content_targets, both ports, page | F30, D1-D9, V7, L20; T25/T26/T30b-d re-pinned | 09b, Target is the median |
+| 09-11 | Synergy from weapons often seen together in real data — option A of three: observed pairings enter through the meta prior ONLY (never the synergy term, a floor, a seat or a pool); one killer party one vote per distinct pair, a row only across >=3 guild-sets and >=5 parties, s = clamp(log2 lift, 0, 3)/3 x n/(n+8), lift <= 1 reads 0; both prior tables learn from `battle % 5 != 0` only; meta = 0.5 solo + 0.5 best partner on the roster, pick score stays the exact comp_score delta. Standing rule 7 amended. Golden moved: none | derive_meta_prior (meta_pairs), build_dataset gate, both ports, why-panel line | test_meta_pairs A1-A13 / B1-B8, parity meta fields, F1 | 09b, Pair-aware meta prior |
+| 09-11 | The killer-party artifact is gzipped (`party_rosters.json.gz`, one loader `rosters_io.py`, hash gates on the stored bytes; 77 MB -> 4.6 MB, the 100 MB push limit was days away); the raw cache backup to a bucket goes to BACKLOG | rosters_io.py, every reader | H18 | 09b, The artifact is gzipped |
+| 09-15 | Permafrost loses its free copy; rho 0.25 is too soft with many more AoE weapons available — Permafrost's per_weapon allowance removed, rho 0.25 -> 0.5 (smallest value at which every copy leaves the 18-man clap roster's list; distinct picks unmoved); decided blind on the caster-moving ranged grants: Fists of Avalon stays, Trinity Spear denied (a melee weapon), Skystrider granted (ranged); Rift Glaive / Spiked cone undecided | composition.yaml, scoring.yaml, ranged_overrides.yaml | T49, F4/F18 re-pinned | 09b, Duplicates never outrank a distinct bomb |
+| 09-15 | The seat skeleton: every primary seat's harvest typical per style x size (`derive_skeletons.py`, training split, distinct rosters) closes a seat in the forge — a body past it only for a minimum no under-typical seat of its role could meet, or by spill once every seat of the role is full; refinement never un-justifies a spill; the standoff plan typical is a generation minimum (flag predicate); copy allowances GENERATED per style x band (free = round(p50), max = ceil(p90); a hand list fails the build); `derive_role_counts` on the training split; the audit carries `--holdout-mod` (board regeneration waits for the harvest machine); `tier2 --baseline` report-only. Standing rule 18 extended. Golden moved: none. Forged kite 20 reads clap_kite (was a strong clap) | derive_skeletons.py, build_dataset, both ports, derive_role_counts, audit_style_rosters, derive_style_bands, tier2_blindtest | test_skeletons S1-S6, F4/F18 re-pinned | 09b, Skeleton-first generation |
 | 09-16 | The harvest minimum outranks a published comp: the weekly fold (12,824 -> 13,978 battles, first fold with every derived table on the training split) moves the clap_kite 20 engage p10 19.0 -> 21.0; the 20v20 competitive fixture fields 19.0 and is re-pinned as RECORDED under the minimum, not asserted either way; nothing retuned (standing rule 2). Fold mechanics: the audit script's holdout constant restored; a fold never straddles a 03:00 / 15:00 harvest (hash-chain gates read the rewritten artifact) | fold artifacts, audit_style_rosters.py | T38 re-pinned | 09b, The harvest minimum outranks a published comp |
 | 09-21 | V3 round 2, Castle Outpost 7, drafted then reviewed (train, not blind): V3-W top-3 67%, V3-D 0% (gate FAIL). Dressed mode demotes Hallowfall below Great Holy / Rampant in every healer case: doctrine kits already close disengage and mobility, so the choice falls to heal_sustain pricing; Rampant is fielded by 1.0% of 6-8 killer parties, Hallowfall by 29.1%. A clump tool outranks damage at 3 of 7. The generator seeds from every weapon (Glaive in 8 of 2,097 size-7 parties). Hypotheses, nothing retuned | answered form, BACKLOG | — | 09b, V3 round 2, Castle Outpost 7 |
 | 09-23 | Capability weights fitted to killer-party picks, Blackzone Roam: a conditional logit over 15,928 training drops with synergy, the meta prior and the duplicate cost as separate free terms; pull 3,000, the weakest keeping every curated weight >= 4 at half or more; heal_sustain 10 -> 13.1, heal_burst 6 -> 8.8, interrupt 1 -> 5.5, max_health_cut 1 -> 4.7, catch 7 -> 4.9, clump_create 7 -> 4.1, burst_st / root / anti_dive / damage_debuff -> 0; `v4h` role-level 59% -> 64%, MRR 0.070 -> 0.083. Outcome audit on guild-level labels (582 parties): `fitness()` AUC 0.50, nothing retuned on outcomes; `delta` and `rho` unchanged. Standing rule 7 amended. Golden moved: none; F8 re-pinned to the size multiplier | blackzone_roam.yaml `weight_fit`, build_dataset check, fit_choice_weights.py | v4 20/23, build (pull rule), F8 | 09b, Fitted capability weights |
 
 ## Open questions
 
-Every question the log left for the owner is in `BACKLOG.md` ("Needs an owner
-ruling"), each with its archive pointer. Index rows above marked OPEN are the
-same items.
+Every question the log left open is in `BACKLOG.md` ("Needs a maintainer
+decision"), each with its archive pointer. Index rows above marked OPEN are
+the same items.

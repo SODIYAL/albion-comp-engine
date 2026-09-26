@@ -36,9 +36,9 @@ EXCLUDED = (
 FORBIDDEN = [
     (r"\bowner(?:'s|s)?\b", "attribution to a person"),                         # tone: allow
     (r"\brulings?\b|\bruled\b|\bre-?ruled\b", "'ruling': state the rule"),       # tone: allow
-    (r"\bexpert(?:'s)? (?:ruling|pass|round|call|adjudicat\w+|sign-?off)\b",
+    (r"\bexpert(?:'s)? (?:ruling|pass|round|call|adjudicat\w+|sign-?off)\b",  # tone: allow
      "attribution to a person"),                                                # tone: allow
-    (r"\b(?:go ahead|good to go|sure on|you r\b|ok that seems|do what needs)",
+    (r"\b(?:go ahead|good to go|sure on|you r\b|ok that seems|do what needs)",  # tone: allow
      "chat phrase"),                                                            # tone: allow
     (r"\b(?:codex|chatgpt|gpt-?\d|openai|anthropic|llm)\b", "AI tool reference"),   # tone: allow
     (r"\bclaude\b(?!\.md)", "AI tool reference"),                                # tone: allow
