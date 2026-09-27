@@ -1295,15 +1295,25 @@ def t_role_typical():
     bal20 = row("castle", "balanced", 20)
     bc20 = row("castle", "brawl_clap", 20)
     pooled20 = row("castle", "balanced", 20)
-    # (Exalted re-seated as a healer: the harvest counts it as
-    # one now — clap 20 reads 4/5/3, the pooled 20 row 4/5/3)
+    # The typicals are GENERATED (derive_role_counts.py, training split):
+    # the contract is where each cell reads from, never the numbers. A
+    # declared style reads its own cell at the exact size when the table
+    # carries one (brawl_clap 20 does at 20,718 battles; it read the
+    # pooled row while thin), balanced reads the pooled row, and dps is
+    # never a typical.
+    import json as _json
+    with open(os.path.join(ROOT, "pipeline", "out", "role_counts.json"),
+              encoding="utf-8") as fh:
+        _typ = _json.load(fh)["typical"]
+    def expect(style, size):
+        own = _typ["styles"].get(style, {}).get(str(size))
+        return own if own else _typ["pooled"][str(size)]
     check("F31i at 10+ the band carries healer / frontline / support from "
-          "the declared style's cell (brawl 12: 2/2/1; clap 20: 4/5/3); "
-          "balanced and thin brawl_clap read the pooled row (20: 4/5/3)",
-          b12 == {"healer": 2, "frontline": 2, "support": 1}
-          and c20 == {"healer": 4, "frontline": 5, "support": 3}
-          and bal20 == {"healer": 4, "frontline": 5, "support": 3}
-          and bc20 == pooled20 and "dps" not in c20,
+          "the declared style's generated cell at the exact size; balanced "
+          "reads the pooled row; a style without a cell reads pooled",
+          b12 == expect("brawl", 12) and c20 == expect("clap", 20)
+          and bal20 == _typ["pooled"]["20"] and bc20 == expect("brawl_clap", 20)
+          and "dps" not in c20,
           f"brawl12={b12} clap20={c20} balanced20={bal20} brawl_clap20={bc20}")
     eb12 = Engine(content="blackzone_roam", size=12, style="brawl")
     rb12 = eb12.forge(12)
