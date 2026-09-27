@@ -32,6 +32,9 @@ let PLAN_TOUCHED = false;
    forge slot shows the pools instead of the forge button. */
 let ASK_SIZE = false;
 let SIZE = PLANNED;
+/* a hash value with a bad % sequence throws in decodeURIComponent; a
+   pasted link must degrade to its raw text, never blank the page */
+const safeDecode = s => { try { return decodeURIComponent(s); } catch (e) { return s; } };
 let STYLE = "balanced";
 const HARD_CAP = 60;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"];
@@ -230,6 +233,8 @@ function sortPartyByRole(){
   if (LO_OPEN !== null) LO_OPEN = order.indexOf(LO_OPEN);
   if (LO_PICKING) LO_PICKING.i = order.indexOf(LO_PICKING.i);
   if (REPLACE_OPEN !== null) REPLACE_OPEN = order.indexOf(REPLACE_OPEN);
+  if (PDASH_FLY_I !== null) PDASH_FLY_I = order.indexOf(PDASH_FLY_I);
+  if (SHEET_OPEN !== null) SHEET_OPEN = order.indexOf(SHEET_OPEN);
   if (FORGE_NOTE){
     const remap = idxs => (idxs || []).map(x => order.indexOf(x))
       .sort((a, b) => a - b);
@@ -491,7 +496,7 @@ function loadHash(){
   if (!h) return false;
   const p = {};
   h.split("&").forEach(kv => { const i = kv.indexOf("=");
-    if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
+    if (i > 0) p[kv.slice(0, i)] = safeDecode(kv.slice(i + 1)); });
   /* junk hashes (#foo) are not state — returning true for them would
      suppress the localStorage restore and the seed party */
   if (!("c" in p) && !("n" in p) && !("st" in p) && !("p" in p)) return false;
@@ -527,6 +532,7 @@ function loadHash(){
   });
   FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
+  REPLACE_OPEN = null; REPLACE_OPTS = [];
   sortPartyByRole();   /* restored comps read in role order too */
   syncEngine();
   return true;
@@ -537,7 +543,10 @@ function saveHash(){
   const g = loadoutEncode();
   const f = provEncode(PROV, party.length);
   const k = comboEncode(COMBO, party.length);
-  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}${f ? "&f=" + f : ""}${k ? "&k=" + k : ""}`;
+  /* while a content's size ask is open the link carries no n=, so a
+     reload or a restored session asks again instead of answering with
+     the template's suggestion */
+  const h = `c=${CONTENT}${needSize() ? "" : "&n=" + PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}${f ? "&f=" + f : ""}${k ? "&k=" + k : ""}`;
   history.replaceState(null, "", "#" + h);
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
@@ -1674,14 +1683,22 @@ function renderRecDetail(recs){
       <p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
     return;
   }
-  const top = recs[0], terms = explain(party, top.w).slice(0,4);
+  const top = recs[0];
+  if (!top){
+    $("rec-label").textContent = "Recommendation";
+    $("rec-slot").innerHTML = `<div class="rec"><div class="rec-body">
+      <p class="why">No candidate clears the suggestion gates at this content, style and size. Manual picks still score.</p></div></div>`;
+    return;
+  }
+  const terms = explain(party, top.w).slice(0,4);
   /* one-ahead residual gaps (PR #5): what stays thin AFTER this pick joins,
      in the same resolved-loadout context the recommendation used */
   const after = inPickContext(() => {
     const next = party.concat([top.w]);
     const combos = COMBOS_CUR.concat([top.combo === undefined ? null : top.combo]);
-    const sup = ENG.effectiveSupply(next, combos);
-    return ENG.weaknesses(next, 8, combos).filter(x => x.gap >= 0.5).slice(0, 3)
+    const gears = GEARS_CUR.concat([top.kit && top.kit.length ? top.kit : null]);
+    const sup = ENG.effectiveSupply(next, combos, gears);
+    return ENG.weaknesses(next, 8, combos, gears).filter(x => x.gap >= 0.5).slice(0, 3)
       .map(x => ({...x, have: sup[x.cap] || 0, want: ENG.target(x.cap)}));
   });
   const afterHtml = `<div class="after-pick"><span class="ap-k">after this pick</span>${
@@ -2511,11 +2528,16 @@ function syncLiveComp(){
         && prev.g === sig.g)
       continue;
     const lo = liveLoadout(m);
+    if (lo) lo._guid = m.guid;   /* the slot's identity: two Hallowfalls stay two people */
     if (prev && WEAPONS[prev.w]){
       /* the member swapped weapons, picks or worn gear: update their slot
          in place (same state resets as the central data-swapat handler; no
-         kit prefill — the real kit is what just arrived) */
-      const i = party.findIndex((pw, ix) => pw === prev.w && PROV[ix] === "m");
+         kit prefill — the real kit is what just arrived). The slot is the
+         one carrying this member's guid; the weapon match is the fallback
+         for a slot restored without one. */
+      let i = party.findIndex((pw, ix) => LOADOUT[ix] && LOADOUT[ix]._guid === m.guid);
+      if (i === -1) i = party.findIndex((pw, ix) => pw === prev.w && PROV[ix] === "m"
+                                                  && !(LOADOUT[ix] && LOADOUT[ix]._guid));
       if (i !== -1){
         party[i] = m.weapon;
         COMBO[i] = null;
@@ -2532,6 +2554,8 @@ function syncLiveComp(){
   }
   if (changed){
     FORGE_NOTE = null; SHEET_OPEN = null;
+    REPLACE_OPEN = null; REPLACE_OPTS = [];
+    hidePdashFly();
     sortPartyByRole();
     PLANNED = Math.max(PLANNED, party.length);
     render();
@@ -2554,8 +2578,10 @@ function loadCompanionParty(){
      which is derived from LOADOUT on every render) */
   live.forEach((m, i) => {
     const lo = liveLoadout(m);
-    if (lo) LOADOUT[i] = lo;
+    if (lo){ lo._guid = m.guid; LOADOUT[i] = lo; }   /* the guid is the slot's identity for live sync */
   });
+  REPLACE_OPEN = null; REPLACE_OPTS = [];
+  hidePdashFly();
   LIVE_GUIDS = {};
   live.forEach(m => { if (m.guid) LIVE_GUIDS[m.guid] = liveSig(m); });
   LIVE_SYNC = true;
@@ -2633,6 +2659,7 @@ function lockSignature(locked, goal){
   return JSON.stringify([CONTENT, STYLE, goal, locked.slice().sort()]);
 }
 function refreshUnlocked(holdIndex){
+  if (needSize()) return;   /* the size ask is open: nothing forges until it is answered */
   if (holdIndex !== null && holdIndex !== undefined && party[holdIndex] !== undefined)
     PROV[holdIndex] = "l";
   const goal = Math.min(PLAN(), HARD_CAP);
@@ -2979,6 +3006,11 @@ document.addEventListener("click", e => {
     if (b.dataset.armed === "1"){
       delete b.dataset.armed; b.textContent = "clear comp";
       party = []; PROV = []; COMBO = []; FORGE_NOTE = null;
+      REPLACE_OPEN = null; REPLACE_OPTS = [];
+      /* a cleared comp no longer follows the live party: the box reads
+         what is true, and "load party" starts it again */
+      LIVE_SYNC = false;
+      const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
       b.dataset.armed = "1"; b.textContent = "really clear? click again";
@@ -3019,9 +3051,9 @@ document.addEventListener("change", e => {
   if (e.target.id === "content"){
     CONTENT = e.target.value;
     if (!PLAN_TOUCHED) PLANNED = baseSize();
-    /* a content with a size prompt asks every time it is entered */
+    /* a content with a size prompt asks every time it is entered; a
+       hand-set plan survives the switch until the ask is answered */
     ASK_SIZE = !!sizePrompt();
-    if (ASK_SIZE){ PLAN_TOUCHED = false; PLANNED = baseSize(); }
     /* manual/live members SURVIVE a content switch; slots the
        forge generated were built for the OLD template and are dropped —
        "reforge all" or "forge the rest" rebuilds them for the new one. */

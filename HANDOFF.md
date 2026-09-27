@@ -138,6 +138,19 @@ Three layers, never merged:
 
 Do not rewrite this flow in the dashboard layer.
 
+### The self-cost offset in the pick score
+
+The one super-additive duplicate (`self_cost_offset_min_copies`, Demon
+Armor) rides the pick score exactly: `party_state` carries the items the
+roster has waived and the refund pending for an item one copy short;
+`_eval_pick` / `_forge_eval_pick` price a candidate whose kit hits either
+on its exact vector (own cost waived, the wearers' refund added after the
+non-stacking adjustment, never on the floor basis) and `_pick_caps` rows
+still sum to the fitness delta. Every party-level reader (waivers,
+carrier quota, kit lean) compares worn keys in their curated form:
+`gear_key` resolves a tiered key to a tierless curated item and a
+(key, choice) pair to its key. F1d / F1e and two parity cases pin it.
+
 ### Contents without harvested evidence
 
 `ancient_lands` (Dragon Portal) ships with `fit: {stat: none, borrowed_from:
@@ -268,8 +281,14 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
 - **A content may ask for its size** (template `size_prompt`; the Dragon
   Portal's pools 3 / 5 / 7 / 20): the switch into it raises the ask, the
   forge slot shows the pools as size controls until one is picked, the
-  masthead chip names the open ask, a link's `n=` answers it. A template
-  whose `fit.stat` is `none` shows the borrowed-evidence notice.
+  masthead chip names the open ask, a link's `n=` answers it and the link
+  carries no `n=` while the ask is open; no generation path forges past
+  an open ask; a hand-set plan survives the switch. A template whose
+  `fit.stat` is `none` shows the borrowed-evidence notice.
+- **Live members are found by guid** (stamped on the member's loadout);
+  the weapon match is the fallback for a slot restored without one, so
+  two members on one weapon stay two people. Clearing the comp stops
+  live sync. Swap impact and the after-pick gaps read the DRESSED roster.
 - **Comp status is THE RADAR**: one axis per capability group against the
   comp-fitted CEILING (100% = soft cap, nothing above 100; a brass tick marks
   the typical winner; purple = over-ceiling stacking; pink = under a hard

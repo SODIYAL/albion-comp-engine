@@ -56,6 +56,13 @@ _KEY_TIER_RX = re.compile(r"^T\d+_")
 _KEY_ENCH_RX = re.compile(r"@\d+$")
 
 
+def _round2(x):
+    """Display rounding of a delta to two decimals, one rule in both
+    ports (Python's round() is ties-to-even on the binary value,
+    JavaScript's Math.round ties up; fight_chain decides on these)."""
+    return math.floor(x * 100 + 0.5) / 100
+
+
 def _key_form(key):
     """A gear key stripped of tier and enchant: 'T7_POTION_REVIVE@2' ->
     'POTION_REVIVE'. Mirrors pipeline/builds_lib.key_form — see gear_key()."""
@@ -812,8 +819,13 @@ class Engine:
         return self._weights[cap]
 
     def extrapolated(self):
-        """True when the requested size is outside the template's validated set."""
-        return self.size not in (self.template.get("validated_sizes") or [self.base_size])
+        """True when the requested size is outside the template's validated
+        set. An absent list means the base size; an EMPTY list means no
+        size has been validated (both ports)."""
+        v = self.template.get("validated_sizes")
+        if v is None:
+            v = [self.base_size]
+        return self.size not in v
 
     def size_bucket(self):
         """Usage-DISPLAY bucket. weapon_usage_v2 buckets battles by TOTAL
@@ -1252,7 +1264,15 @@ class Engine:
         guessing."""
         if key in self.gear:
             return key
-        return self._gear_alias.get(_key_form(key), key)
+        form = _key_form(key)
+        if form in self.gear:
+            return form          # curated tierless: T8_ARMOR_PLATE_HELL -> ARMOR_PLATE_HELL
+        return self._gear_alias.get(form, key)
+
+    def _gear_item_key(self, item):
+        """The curated key of one worn-gear entry (a key or a (key, choice)
+        pair): the one form every party-level reader compares on."""
+        return self.gear_key(item[0] if isinstance(item, (list, tuple)) else item)
 
     def gear_extras(self, key):
         """Every ability-choice loadout of one gear item as effective-caps
@@ -1400,11 +1420,68 @@ class Engine:
         counts = {}
         for g in gears:
             for item in (g or []):
-                key = item[0] if isinstance(item, (list, tuple)) else item
+                key = self._gear_item_key(item)
                 if key in self._cost_offsets:
                     counts[key] = counts.get(key, 0) + 1
         return frozenset(k for k, n in counts.items()
                          if n >= self._cost_offsets[k])
+
+    def _offset_pending(self, party, combos, gears, waived):
+        """The self-cost REFUND a candidate can trigger: for every offset
+        item the party fields one copy short of its waiver count, the
+        vector the existing wearers gain when the count is reached
+        (their build_extra with the item waived minus without). Empty
+        unless such an item exists, so the common path pays nothing."""
+        if not self._cost_offsets or not gears:
+            return {}
+        counts = {}
+        for g in gears:
+            for item in (g or []):
+                key = self._gear_item_key(item)
+                if key in self._cost_offsets:
+                    counts[key] = counts.get(key, 0) + 1
+        out = {}
+        for key, need in self._cost_offsets.items():
+            if counts.get(key, 0) != need - 1 or key in waived:
+                continue
+            refund = {}
+            after = waived | {key}
+            for i, g in enumerate(gears):
+                if not g or not any(self._gear_item_key(x) == key for x in g):
+                    continue
+                c = combos[i] if combos else None
+                was = self.build_extra(party[i], c, g, waive_costs=waived)
+                now = self.build_extra(party[i], c, g, waive_costs=after)
+                for cap, v in now.items():
+                    d = v - was.get(cap, 0.0)
+                    if d:
+                        refund[cap] = refund.get(cap, 0.0) + d
+            if refund:
+                out[key] = refund
+        return out
+
+    def _offset_vector(self, state, weapon, combo, vgears):
+        """(dressed extra, refund) for a candidate whose kit carries an
+        offset item the party has waived or is one copy short of: its
+        own self-cost is waived as comp_score would waive it, and the
+        pending refund to the existing wearers rides the marginal. None
+        when the kit carries no such item (the precomputed vectors are
+        exact)."""
+        if not vgears:
+            return None
+        waived, pending = state.get("waived") or frozenset(), state.get("pending") or {}
+        if not waived and not pending:
+            return None
+        keys = {self._gear_item_key(x) for x in vgears}
+        hit = [k for k in keys if k in waived or k in pending]
+        if not hit:
+            return None
+        dext = self.build_extra(weapon, combo, vgears, waive_costs=frozenset(hit) | waived)
+        refund = {}
+        for k in hit:
+            for cap, v in (pending.get(k) or {}).items():
+                refund[cap] = refund.get(cap, 0.0) + v
+        return dext, refund
 
     def kit_variants(self, weapon):
         """Doctrine kit variants for GENERATION (the dressed forge):
@@ -1707,7 +1784,8 @@ class Engine:
         if party is not None:
             joined = list(party) + [weapon]
             base_gears = [None] * len(party)
-            f_bare = self.fitness(joined, None, base_gears + [None])
+            joined_combos = [None] * len(party) + [combo]
+            f_bare = self.fitness(joined, joined_combos, base_gears + [None])
         options = {}
         for slot in sorted(by_slot):
             doc_pool = set(doctrine.get(slot) or [])
@@ -1739,7 +1817,7 @@ class Engine:
                     for c, d in deltas:
                         value += self._weights.get(c, 0.0) * d
                 else:
-                    value = self.fitness(joined, None,
+                    value = self.fitness(joined, joined_combos,
                                          base_gears + [[k]]) - f_bare
                 passive = None
                 if seat_class:
@@ -1919,7 +1997,8 @@ class Engine:
             return out
         for i, g in enumerate(gears or []):
             w = party[i] if i < len(party) else None
-            for x in g or []:
+            for item in g or []:
+                x = self._gear_item_key(item)
                 effs = [e for e in (self._item_effects.get(x) or [])
                         if e in caps]
                 if not effs or (w and self._identity_chest(w, x)):
@@ -1937,7 +2016,8 @@ class Engine:
         if not carriers or not vgears:
             return False
         caps = self.carrier_caps()
-        for x in vgears:
+        for item in vgears:
+            x = self._gear_item_key(item)
             effs = [e for e in (self._item_effects.get(x) or [])
                     if e in caps]
             if not effs or self._identity_chest(weapon, x):
@@ -2409,11 +2489,19 @@ class Engine:
                     for cap, v in contrib.items():
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
+        waived = self._self_cost_waivers(gears) if gears else frozenset()
         return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
                 "counts": counts, "ns_max": ns_max,
                 # carrier quota: what this roster already
                 # wears of each capped effect-carrier chest
                 "carriers": self._carrier_counts(party, gears),
+                # self-cost offsets: the items this roster has waived, and
+                # the refund a candidate completing a pair hands the
+                # existing wearers (_offset_vector keeps the pick score
+                # the exact comp_score delta; F1d pins it)
+                "waived": waived,
+                "pending": (self._offset_pending(party, combos, gears, waived)
+                            if gears and any(gears) else {}),
                 # pair-aware prior: each seat's best observed
                 # partner so far, so a candidate's exact meta delta can
                 # include the raise it hands existing members
@@ -2661,7 +2749,7 @@ class Engine:
         return pre
 
     def _combo_score_dressed(self, state, weapon, i, wextra, dextra,
-                             vkey=None):
+                             vkey=None, refund=None):
         """_combo_score for a DRESSED candidate: the fit half prices the
         dressed vector, the synergy half the weapon-only vector — the
         exact decomposition of comp_score-with-gears (fitness reads
@@ -2676,7 +2764,7 @@ class Engine:
         # naked) and the candidate's weapon-only gains — so its kit can
         # never buy floor relief the party's kits are denied.
         adj = self._nonstack_adjust(state, weapon, i, dextra)
-        if adj is dextra and vkey is not None:
+        if adj is dextra and vkey is not None and not refund:
             items = self._dressed_pre(weapon)[vkey][i]
             _wi, pairs = self._combo_pre(weapon)[i]
             d_fit = self._marg_fit_pre(state["s"], items, state["s_syn"],
@@ -2684,6 +2772,12 @@ class Engine:
             d_syn = self._marg_syn_pre(state, wextra, pairs)
         else:
             adj_w = self._nonstack_adjust(state, weapon, i, wextra)
+            if refund:
+                # the refund is gear-side: it joins the fit vector after
+                # the non-stacking adjustment and never the floor basis
+                adj = dict(adj)
+                for cap, v in refund.items():
+                    adj[cap] = adj.get(cap, 0.0) + v
             d_fit = self._marg_fit_from(state["s"], adj, state["s_syn"],
                                         adj_w)
             d_syn = self._marg_syn_from(state, wextra)
@@ -2709,8 +2803,13 @@ class Engine:
                 continue   # cap fallback only
             dext = dressed[vkey]
             for i in range(len(extras)):
-                val, d_fit, d_syn = self._combo_score_dressed(
-                    state, weapon, i, extras[i], dext[i], vkey)
+                ov = self._offset_vector(state, weapon, i, vgears)
+                if ov is None:
+                    val, d_fit, d_syn = self._combo_score_dressed(
+                        state, weapon, i, extras[i], dext[i], vkey)
+                else:
+                    val, d_fit, d_syn = self._combo_score_dressed(
+                        state, weapon, i, extras[i], ov[0], None, ov[1])
                 if best is None or val > best[0]:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
@@ -2755,7 +2854,7 @@ class Engine:
                                              state["s_syn"].get(cap, 0.0))
             d = cov + floor_d
             if d > 0.05:
-                terms.append({"delta": round(d, 2), "cap": cap,
+                terms.append({"delta": _round2(d), "cap": cap,
                               "before": have, "after": have + gain, "target": target})
         return sorted(terms, key=lambda t: (-_qrank(t["delta"]), t["cap"]))
 
@@ -2786,9 +2885,15 @@ class Engine:
         headroom bonus is what the engine pays a saturated depth pick, and
         counting it here would make 'redundant' unreachable exactly where
         the warning matters."""
-        extra = (self.build_extra(weapon, combo, vgears) if vgears
+        ov = self._offset_vector(state, weapon, combo, vgears) if vgears else None
+        extra = (ov[0] if ov else
+                 self.build_extra(weapon, combo, vgears) if vgears
                  else self.member_extra(weapon, combo))
         adj = self._nonstack_adjust(state, weapon, combo, extra)
+        if ov and ov[1]:
+            adj = dict(adj)
+            for cap, v in ov[1].items():
+                adj[cap] = adj.get(cap, 0.0) + v
         # Option C floor basis: floor_lift rows read the weapon-only party
         # supply and the candidate's weapon-only adjusted gains, exactly as
         # the marginal scored them (rows must still sum to d_fitness).
@@ -3160,7 +3265,8 @@ class Engine:
         known = 0
         for i in dps:
             gl = gears[i] if i < len(gears) else None
-            chest = next((g for g in (gl or []) if g.startswith("ARMOR_")), None)
+            chest = next((g for g in (self._gear_item_key(x) for x in (gl or []))
+                          if g.startswith("ARMOR_")), None)
             if not chest or not self._chest_class(chest):
                 continue
             known += 1
@@ -4157,8 +4263,13 @@ class Engine:
                     continue   # carrier quota: this chest is spoken for
                 if vkey in fallback and not v0_capped:
                     continue   # cap fallback only
-                val, d_fit, d_syn = self._combo_score_dressed(
-                    state, w, i, extras[i], dressed[vkey][i], vkey)
+                ov = self._offset_vector(state, w, i, vgears)
+                if ov is None:
+                    val, d_fit, d_syn = self._combo_score_dressed(
+                        state, w, i, extras[i], dressed[vkey][i], vkey)
+                else:
+                    val, d_fit, d_syn = self._combo_score_dressed(
+                        state, w, i, extras[i], ov[0], None, ov[1])
                 if best is None or val > best[0]:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
@@ -4606,7 +4717,7 @@ class Engine:
                         sc, _df, _ds, _meta, combo, _v, vg = \
                             self._eval_pick(state, w)
                         ranked.append((sc, w, combo, vg))
-                    ranked.sort(key=lambda t: (-t[0], t[1]))
+                    ranked.sort(key=lambda t: (-_qrank(t[0]), t[1]))
                     shortlist = ranked[:cand_m]
                     for sa, wa, ca, ga in shortlist:
                         if improved:

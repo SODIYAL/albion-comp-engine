@@ -34,16 +34,49 @@ def exists(p=None):
     return os.path.exists(p or path())
 
 
-def load(p=None):
-    """The artifact as a dict; gzip or (legacy / git-history) plain JSON."""
+def load(p=None, source="battle_list", content=None):
+    """The artifact as a dict; gzip or (legacy / git-history) plain JSON.
+
+    POPULATION (sample_parties.py "POPULATION"): battles carry `source`
+    (`battle_list`, the albionbb-discovered harvest with an official
+    roster; `events_poll`, the kill-feed poll) and `content` (a tag).
+    The default keeps the battle-list population only, the one every
+    shipped table was fitted on; parties and builds follow their battle.
+    `source="all"` keeps everything; `content` keeps one content's
+    battles (`"ancient_lands"`, `"open_world"`, ...). Records written
+    before the fields existed read as battle-list, content unknown."""
     p = p or path()
     with open(p, "rb") as f:
         head = f.read(2)
     if head == b"\x1f\x8b":
         with gzip.open(p, "rt", encoding="utf-8") as f:
-            return json.load(f)
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
+            doc = json.load(f)
+    else:
+        with open(p, encoding="utf-8") as f:
+            doc = json.load(f)
+    return select(doc, source=source, content=content)
+
+
+def select(doc, source="battle_list", content=None):
+    """The population filter `load` applies (see there), on a loaded doc."""
+    if not isinstance(doc, dict) or (source == "all" and content is None):
+        return doc
+    keep = set()
+    for b in doc.get("battles") or []:
+        src = b.get("source") or "battle_list"
+        if source != "all" and src != source:
+            continue
+        if content is not None and (b.get("content") or "unknown") != content:
+            continue
+        keep.add(b.get("battle"))
+    out = dict(doc)
+    out["battles"] = [b for b in doc.get("battles") or [] if b.get("battle") in keep]
+    for key in ("parties", "builds"):
+        out[key] = [x for x in doc.get(key) or [] if x.get("battle") in keep]
+    out["_population"] = {"source": source, "content": content,
+                          "battles": len(out["battles"]),
+                          "battles_in_file": len(doc.get("battles") or [])}
+    return out
 
 
 def dump(obj, p=None):

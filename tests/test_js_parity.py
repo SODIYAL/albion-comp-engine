@@ -79,6 +79,16 @@ def make_cases(data):
                       "style": styles[i % len(styles)],
                       "party": party, "combos": combos, "gears": gears,
                       "refine_pool": pool})
+    # the self-cost offset (Demon Armor, F1d): one wearer (a candidate
+    # completing the pair earns the refund) and two (the candidate's own
+    # cost is waived) — both ports must price the same exact marginal
+    demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
+    if "ARMOR_PLATE_HELL" in (data.get("gear") or {}):
+        for party, gears in ((["2H_CURSEDSTAFF"], [demon]),
+                             (["2H_CURSEDSTAFF", "2H_CURSEDSTAFF"], [demon, demon])):
+            cases.append({"content": "blackzone_roam", "size": 20, "style": "balanced",
+                          "party": party, "combos": [None] * len(party),
+                          "gears": gears, "refine_pool": weapons[3::11]})
     return cases
 
 
@@ -543,7 +553,7 @@ def main():
             bad += 1
             print(f"CASE {i} ({c['content']}/{c['style']}, party {len(c['party'])}): "
                   + "; ".join(errs))
-    print(f"{N_CASES - bad}/{N_CASES} parity cases identical "
+    print(f"{len(cases) - bad}/{len(cases)} parity cases identical "
           f"(tolerance {EPS}, contents: {sorted(data['templates'])}, "
           f"styles: {sorted(data.get('styles') or {})})")
 

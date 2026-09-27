@@ -101,6 +101,43 @@ def t_invariant():
                     checked += 1
     check("F1 pick score == comp_score delta (all contents x styles, 1e-9)",
           worst < 1e-9, f"{checked} candidate evaluations, worst |diff| = {worst:.2e}")
+    # F1d — the ONE super-additive duplicate (self_cost_offset_min_copies,
+    # Demon Armor): a candidate whose kit completes the pair refunds the
+    # existing wearer's self-cost and waives its own; a party past the
+    # count waives the candidate's; both ride the pick score, which stays
+    # the exact comp_score delta. Worn keys count in their curated form:
+    # a tiered key and a (key, choice) pair are the same item.
+    e = Engine(content="blackzone_roam", size=20)
+    w0, cand = "2H_CURSEDSTAFF", "2H_DUALMACE_AVALON"
+    demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
+    vg0 = dict(e.kit_variants(cand))["v0"]
+    worst_d, seen = 0.0, []
+    for party, gears in (([w0], [demon]), ([w0, w0], [demon, demon]),
+                         ([w0], [["T8_ARMOR_PLATE_HELL@2"]]),
+                         ([w0], [[("ARMOR_PLATE_HELL", 0)]])):
+        state = e.party_state(party, None, gears)
+        score, d_fit, _ds, _m, combo, _var, vg = e._eval_pick(state, cand)
+        actual = e.comp_score(party + [cand], [None] * len(party) + [combo],
+                              gears + [vg]) - e.comp_score(party, None, gears)
+        rows, _cg = e._pick_caps(state, cand, combo, vg)
+        worst_d = max(worst_d, abs(score - actual),
+                      abs(sum(r["delta"] for r in rows) - d_fit))
+        seen.append((sorted(state["pending"]), sorted(state["waived"])))
+    check("F1d the self-cost offset rides the pick score: a pair-completing "
+          "kit refunds the wearer and waives its own cost, a waived party "
+          "waives the candidate's, tiered and pair-form keys count (1e-9)",
+          worst_d < 1e-9 and "ARMOR_PLATE_HELL" in vg0
+          and seen[0] == (["ARMOR_PLATE_HELL"], []) and seen[1] == ([], ["ARMOR_PLATE_HELL"])
+          and seen[2] == seen[0] and seen[3] == seen[0],
+          f"worst |diff| = {worst_d:.2e} pending/waived per case = {seen}")
+    check("F1e gear_key resolves a tiered key to its tierless curated item "
+          "and the carrier quota reads a (key, choice) pair",
+          e.gear_key("T8_ARMOR_PLATE_HELL") == "ARMOR_PLATE_HELL"
+          and e.gear_key("T5_POTION_REVIVE") == "T7_POTION_REVIVE"
+          and e._carrier_counts([w0], [[("ARMOR_PLATE_HELL", 0)]])
+              == e._carrier_counts([w0], [["ARMOR_PLATE_HELL"]])
+          and e.comp_identity([w0, w0], None, [[("ARMOR_PLATE_HELL", 0)], ["ARMOR_PLATE_HELL"]]) is not None,
+          f"carriers={e._carrier_counts([w0], [[('ARMOR_PLATE_HELL', 0)]])}")
 
 
 # ------------------------------------------------------- F2 template gating

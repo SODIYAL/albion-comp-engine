@@ -452,7 +452,20 @@ HEAD (`--base` for another revision). Review the report, then commit.
   (`open_world`, the lower-cased KillArea of an instanced content, or
   `unknown` for records written before the tally). The tag exists so a
   derive step can select one content's parties; nothing filters on it.
-  The first portal kill observed names the label.
+  CONTENT MARKER: the API labels every Ancient Lands kill OPEN_WORLD, so
+  the tag also reads the VICTIM's inventory: the Ancient Bone
+  (`QUESTITEM_TOKEN_DRAGONS`) exists only inside the Ancient Lands, a
+  victim carrying one died there, and a battle holding one such event is
+  an `ancient_lands` battle (`content_marks` beside `kill_areas`; an
+  instanced KillArea outranks the marker). Undercounts, never invents.
+  `--retag` rebuilds every kill-feed record from its stored events when
+  a marker is added. POPULATION: `rosters_io.load()` defaults to the
+  battle-list records only, the population every shipped table was
+  fitted on; the poll's records are reached by `source="events_poll"` /
+  `"all"` and `content="ancient_lands"`. STORAGE: kill-feed records keep
+  slimmed events (tens of MB a day, not hundreds); every cache write is
+  atomic; an unreadable file is skipped and reported; a battle-list
+  harvest that finds the official record lagging keeps the poll record.
 - `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
   grows the albionbb battle caches with fresh GROUP fights
   (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips

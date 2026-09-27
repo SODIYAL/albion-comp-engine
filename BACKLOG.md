@@ -21,8 +21,12 @@ Each is decidable today from evidence already in the repo.
   small pools (a killer party of the pool's size, dominant by kills over
   deaths in its battle, is the candidate) and the floor per pool before
   `ancient_lands` rows are derived. Until then the template borrows the
-  roads rows (`fit.stat: none`). Blocked on the first observed portal
-  label: the newest 1,000 events read OPEN_WORLD at every hour sampled.
+  roads rows (`fit.stat: none`). The label is found: the Ancient Bone in
+  the victim's inventory marks a portal kill (one day: 535 solo, 101 trio,
+  28 five-man distinct portal killer parties; `rosters_io.load(source=
+  "all", content="ancient_lands")` selects them). Open: the unit and the
+  floor per pool, and whether the trio and five tables read the artifact
+  through that selector or a derive step of their own.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10

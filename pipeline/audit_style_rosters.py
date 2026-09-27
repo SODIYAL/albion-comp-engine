@@ -138,8 +138,16 @@ def load_rosters(known, min_size, min_known):
     weapons in the catalog, with member kits joined by player name."""
     rosters = []
     for name in sorted(os.listdir(CACHE)):
-        with open(os.path.join(CACHE, name), encoding="utf-8") as f:
-            rec = json.load(f)
+        try:
+            with open(os.path.join(CACHE, name), encoding="utf-8") as f:
+                rec = json.load(f)
+        except Exception:
+            continue        # mid-write by the poll or the harvest: skipped
+        # the battle-list population only (sample_parties.py "POPULATION"):
+        # a kill-feed record has no official roster and samples the
+        # whole server's small fights
+        if rec.get("source") == "events_poll":
+            continue
         kits = {}
         for bd in rec.get("builds", []):
             g = bd.get("gear") or {}

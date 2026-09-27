@@ -109,6 +109,7 @@ py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressin
 py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
 py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy allowances (forge gates)
 py -3 tests/test_tone.py            # writing conventions on every tracked text file
+py -3 tests/test_content_tag.py     # harvest content tag: KillArea tally, the marker rule, kill-feed records
 py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math

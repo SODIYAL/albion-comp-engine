@@ -1453,9 +1453,12 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         # excluded as unknown rather than guessed. Class shares for the
         # uniform extension are counted over the same filtered builds.
         cls_counts = {}
+        # the training split (every harvest-derived table learns from
+        # battle % 5 != 0; % 5 == 0 is tier2_blindtest v4h's holdout)
         kept = [b for b in (kb_doc.get("builds") or [])
                 if b.get("weapon") and b.get("gear")
-                and KB_MIN_PARTY <= (b.get("party_size") or 0) <= KB_MAX_PARTY]
+                and KB_MIN_PARTY <= (b.get("party_size") or 0) <= KB_MAX_PARTY
+                and _in_split(b.get("battle"))]
         if style is not None:
             # STYLE CELL: only builds linked to a party labelled `style`,
             # and only weapons with STYLE_CELL_MIN_VOTERS distinct players
@@ -2003,6 +2006,8 @@ def mine_carrier_quotas(gear, effect_map):
     for b in doc.get("builds") or []:
         if (b.get("party_size") or 0) < 10:
             continue   # killer parties of 10+ only (see derive_kit_doctrine)
+        if not _in_split(b.get("battle")):
+            continue   # the training split, as every harvest-derived table
         size = size_of.get(b.get("battle"), 0)
         key = "60+" if size >= 60 else "20-59"
         bk = buckets[key]
@@ -2706,6 +2711,20 @@ def load_skeletons(known_weapons, seat_ids):
              "styles": {st: copy_rows(rows, f"styles[{st}]")
                         for st, rows in sorted((copies["styles"] or {}).items())}}
     return skeleton, cells
+
+
+HOLDOUT_MOD = 5    # battles with id % 5 == 0 are tier2_blindtest v4h's holdout
+
+
+def _in_split(battle, holdout_mod=HOLDOUT_MOD):
+    """Training-split membership (derive_meta_prior.in_split's rule): a
+    shipped table never learns from the holdout slice."""
+    if not holdout_mod:
+        return True
+    try:
+        return int(battle) % holdout_mod != 0
+    except (TypeError, ValueError):
+        return False
 
 
 def load_templates(tune=None):

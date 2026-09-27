@@ -126,14 +126,29 @@ def main():
     lines = [f"# Fold report {stamp} - working tree vs `{args.base}`", ""]
 
     # ---- corpus ----
+    # the POPULATION the derive steps read (rosters_io.load's default:
+    # the battle-list records), counted from the loaded lists; the file's
+    # own totals (every source) are reported beside it
     ro, rn = rosters_io.load(old["rosters"]), rosters_io.load(new["rosters"])
-    so, sn = ro["summary"], rn["summary"]
-    lines += ["## Corpus", "",
+    so, sn = dict(ro["summary"]), dict(rn["summary"])
+    po = rosters_io.load(old["rosters"], source="all", content="ancient_lands")
+    pn = rosters_io.load(new["rosters"], source="all", content="ancient_lands")
+    for d, s_, pd in ((ro, so, po), (rn, sn, pn)):
+        s_["battles_in_file"] = s_.get("battles")
+        s_["battles"] = len(d.get("battles") or [])
+        s_["parties"] = len(d.get("parties") or [])
+        s_["builds"] = len(d.get("builds") or [])
+        s_["builds_full_kit"] = sum(1 for b in d.get("builds") or []
+                                    if (b.get("slots_filled") or 0) >= 6)
+        s_["ancient_lands_parties"] = len(pd.get("parties") or [])
+    lines += ["## Corpus (the battle-list population the derive steps read)", "",
               "| unit | before | after |", "|---|---|---|"]
-    for k, label in (("battles", "battles"), ("parties", "killer parties"),
+    for k, label in (("battles", "battles"), ("battles_in_file", "battles in the file, every source"),
+                     ("parties", "killer parties"),
                      ("builds", "observed builds"),
                      ("builds_full_kit", "builds with a full kit"),
-                     ("median_coverage", "median gear coverage")):
+                     ("median_coverage", "median gear coverage"),
+                     ("ancient_lands_parties", "Dragon Portal killer parties (kill-feed, not yet read)")):
         lines.append(f"| {label} | {so.get(k)} | {sn.get(k)} |")
     lines.append("")
 

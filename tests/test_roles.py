@@ -57,8 +57,20 @@ import rosters_io  # noqa: E402
 
 
 def _rosters():
-    """The committed killer-party artifact (gzipped)."""
-    return rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
+    """The committed killer-party artifact (gzipped), its builds on the
+    TRAINING SPLIT (battle % 5 != 0): kit doctrine and the carrier quotas
+    learn from that split, so the audits below re-measure the same
+    population (a holdout-only vote must never flip a modal against the
+    table it audits). Parties and battles stay whole."""
+    doc = rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
+    def in_split(b):
+        try:
+            return int(b) % 5 != 0
+        except (TypeError, ValueError):
+            return False
+    doc = dict(doc)
+    doc["builds"] = [b for b in doc.get("builds") or [] if in_split(b.get("battle"))]
+    return doc
 
 # Evidence-band slack: the engine ranks on the INTEGER counts
 # the dataset ships (rounded player-weighted votes plus reference-build

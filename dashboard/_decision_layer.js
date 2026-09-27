@@ -524,19 +524,24 @@
     if (!party[i] || !WEAPONS[cand]) return null;
     const rest = party.slice(0,i).concat(party.slice(i+1));
     const restCombos = COMBOS_CUR.slice(0,i).concat(COMBOS_CUR.slice(i+1));
-    const rr = ENG.recommend(rest, 1, [cand], restCombos)[0];
+    const restGears = GEARS_CUR.slice(0,i).concat(GEARS_CUR.slice(i+1));
+    const rr = ENG.recommend(rest, 1, [cand], restCombos, restGears)[0];
     if (!rr) return null;
     const np = party.slice(); np[i] = cand;
     const nc = COMBOS_CUR.slice(); nc[i] = rr.combo;
+    /* the swap lands dressed in its doctrine kit, against the roster's
+       worn kits: before and after read the same dressed basis (the
+       page's fitness number is the dressed one) */
+    const ng = GEARS_CUR.slice(); ng[i] = rr.kit && rr.kit.length ? rr.kit : null;
     const before = supply(party);
-    const after = ENG.effectiveSupply(np, nc);
+    const after = ENG.effectiveSupply(np, nc, ng);
     const capRows = Object.keys(REQS()).map(cap => ({
       cap, d:(after[cap]||0)-(before[cap]||0)
     })).filter(x => Math.abs(x.d) > .05)
       .sort((a,b) => Math.abs(b.d)*ENG.weight(b.cap)-Math.abs(a.d)*ENG.weight(a.cap));
-    const newFit = ENG.fitness(np, nc);
+    const newFit = ENG.fitness(np, nc, ng);
     return {delta:newFit-fitness(party), caps:capRows.slice(0,5),
-            newWeak:ENG.weaknesses(np, 1, nc)[0]};
+            newWeak:ENG.weaknesses(np, 1, nc, ng)[0]};
   }
 
   function renderPlayerTools(host){
