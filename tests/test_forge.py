@@ -52,8 +52,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 from engine import Engine  # noqa: E402
 
-CONTENTS = ["blackzone_roam", "castle", "castle_outpost", "faction_war",
-            "roads", "territory_defense"]
+CONTENTS = ["ancient_lands", "blackzone_roam", "castle", "castle_outpost",
+            "faction_war", "roads", "territory_defense"]
 LARGE = ["blackzone_roam", "castle", "faction_war", "territory_defense"]
 STYLES = ["balanced", "brawl", "brawl_clap", "clap", "kite"]
 EXCLUDED_TRIO = ("MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON")

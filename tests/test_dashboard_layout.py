@@ -565,6 +565,38 @@ count = seg(APP, 'const count = `${party.length}/${PLAN()}`;', "$(\"pdash\").sty
 check("sbc.title = " in count and "in party" in count and "planned" in count,
       "L24i the masthead count chip carries a tooltip naming both numbers")
 
+# L25 - a content may ask for its size before it forges (template
+# size_prompt: the Dragon Portal pools). The ask is raised on the switch
+# into such a content, cleared by every size control, answered by a
+# link's n=, and while raised the forge slot shows the pools instead of
+# the forge button and the masthead chip names it.
+check("let ASK_SIZE = false;" in APP and "const needSize = () => !!sizePrompt() && ASK_SIZE;" in APP,
+      "L25a the ask flag and its predicate exist")
+cswitch25 = seg(APP, 'if (e.target.id === "content"){', "render();", "L25 content-switch anchors")
+check("ASK_SIZE = !!sizePrompt();" in cswitch25,
+      "L25b the switch into a content raises the ask when the template prompts")
+sz25 = seg(APP, 'const sz = e.target.closest("[data-size]");', 'const cap = e.target.closest("[data-cap]");', "L25 size-control anchors")
+check(sz25.count("ASK_SIZE = false") == 3,
+      "L25c preset, minus and plus each answer the ask")
+inp25 = seg(APP, 'if (e.target.id === "size-input"){', "else {", "L25 size-input anchors")
+check("ASK_SIZE = false" in inp25, "L25d the typed size answers the ask")
+restore25 = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();", "STYLE = ", "L25 restore anchors")
+check("ASK_SIZE = !!sizePrompt() && !(n >= 2 && n <= HARD_CAP);" in restore25,
+      "L25e a link's size answers the ask, a link without one asks")
+foot = seg(APP, "function renderWheelFoot(", "const board = BOARD_HTML;", "L25 forge-slot anchors")
+check("needSize()" in foot and 'data-size="${n}"' in foot and "const forge = ask ||" in foot,
+      "L25f while the ask is open the forge slot shows the pools as data-size controls instead of the forge button")
+check('mh.textContent = "choose a portal size";' in APP,
+      "L25g the masthead chip names the open ask")
+check('fitStat !== "none" ? "" :' in APP and "No harvested evidence for this content yet" in APP,
+      "L25h a content whose fit is none shows the borrowed-evidence notice")
+import json as _json
+with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"), encoding="utf-8") as _fh:
+    tpl25 = (_json.load(_fh).get("templates") or {}).get("ancient_lands") or {}
+check(tpl25.get("size_prompt", {}).get("sizes") == [3, 5, 7, 20] and tpl25.get("validated_sizes") == []
+      and (tpl25.get("fit") or {}).get("stat") == "none",
+      "L25i the Dragon Portal template prompts for 3 / 5 / 7 / 20, validates no size and declares no evidence")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

@@ -61,6 +61,32 @@ Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
                                          [--max-players 0] [--max-events 120]
                                          [--server us] [--pages 40]
         py -3 pipeline/sample_parties.py --pages 0     (offline re-analysis)
+        py -3 pipeline/sample_parties.py --poll-events  (kill-feed poll, cache only)
+
+CONTENT TAG. Every kill event carries `KillArea` (the content classifier
+the API exposes: OPEN_WORLD, and one value per instanced content) beside
+`Location` and `Category`, which the API leaves null on current traffic.
+The cache records all three per event, a per-battle and per-party tally of
+KillArea, and the KillArea each build was captured in; `analyze()` stamps
+a `content` tag on every battle, party and build (`open_world`, or the
+lower-cased KillArea of an instanced content). The harvest never filters
+on it: the tag exists so a derive step can select one content's parties.
+Records written before the tag existed carry no tally and read `unknown`.
+
+KILL-FEED POLL (`--poll-events`). The battle list is the wrong discovery
+for the Ancient Lands portal pools of 2-3, 4-5 and 5-7 players: their
+fights are 4-14 players, albionbb lists fights by a player floor, and the
+official battle record lags the kills. The public events feed exposes the
+newest ~1,000 kills with the killer's party and every combat role's
+equipment in the list itself, so a poll every few minutes catches each
+small-bracket kill without a per-event detail fetch. Events are grouped by
+BattleId and merged into per-battle cache records (`source: events_poll`,
+deduplicated by EventId across polls); the roster of such a record is
+rebuilt from the events (kills = times named as killer, deaths = times
+named as victim), so its coverage is against the seen set, not an
+official roster. A later full harvest of the same battle replaces the poll
+record with the official one. The poll writes the cache only; the artifact
+is re-derived by the fold.
 
 FIGHT-SIZE BAND. `--min-players` is the discovery floor albionbb filters on;
 `--max-players` (0 = none) is a local ceiling on the listed `totalPlayers`,
@@ -121,6 +147,19 @@ def get_json(url, tries=4, pause=1.5):
     return None
 
 
+def content_tag(areas):
+    """The content a record belongs to, from its KillArea tally:
+    `open_world` when every event is OPEN_WORLD, the lower-cased label of
+    the dominant instanced area otherwise, `unknown` for a record written
+    before the tally existed. A tag, never a filter."""
+    if not areas:
+        return "unknown"
+    inst = {a: n for a, n in areas.items() if a and a != "OPEN_WORLD"}
+    if not inst:
+        return "open_world"
+    return max(inst.items(), key=lambda kv: (kv[1], kv[0]))[0].lower()
+
+
 def weapon_key(t, known):
     """Item id -> catalogue key, tier and enchant stripped."""
     if not t:
@@ -128,6 +167,174 @@ def weapon_key(t, known):
     k = str(t).split("@")[0]
     k = re.sub(r"^T\d+_", "", k)
     return k if k in known else None
+
+
+def ingest_event(d, known, builds, parties, participants, areas, stamps):
+    """One kill event into the per-battle sinks. FULL BUILDS come from
+    Killer / Victim / Participants, which carry 7 of 8 equipment slots
+    plus item power. GroupMembers does NOT: as measured, it fills MainHand
+    only and reports AverageItemPower 0. So party STRUCTURE comes from
+    GroupMembers and BUILDS come from the combat roles; a member who
+    never killed, died or dealt damage yields a weapon and nothing else,
+    and is recorded that way rather than guessed. Every sink also keeps
+    the event's KillArea: the tally per battle (`areas`), per party
+    (`kill_areas`) and per build (`kill_area`, the event the fullest
+    sighting came from)."""
+    area = d.get("KillArea") or "UNKNOWN"
+    areas[area] += 1
+    if d.get("TimeStamp"):
+        stamps.append(d["TimeStamp"])
+    pool = [("killer", d.get("Killer")),
+            ("victim", d.get("Victim"))]
+    pool += [("participant", m) for m in (d.get("Participants")
+                                          or [])]
+    for how, m in pool:
+        if not isinstance(m, dict) or not m.get("Name"):
+            continue
+        eq = m.get("Equipment") or {}
+        gear = {}
+        for slot in ("MainHand", "OffHand", "Head", "Armor",
+                     "Shoes", "Cape", "Potion", "Food"):
+            v = eq.get(slot)
+            gear[slot] = (v or {}).get("Type") if isinstance(
+                v, dict) else None
+        n_filled = sum(1 for v in gear.values() if v)
+        prev = builds.get(m["Name"])
+        if prev is None or n_filled > prev["slots_filled"]:
+            builds[m["Name"]] = {
+                "name": m["Name"],
+                "guild": m.get("GuildName") or None,
+                "alliance": m.get("AllianceName") or None,
+                "item_power": m.get("AverageItemPower"),
+                "seen_as": how,
+                "slots_filled": n_filled,
+                "kill_area": area,
+                "location": d.get("Location"),
+                "gear": gear}
+    for field, sink in (("GroupMembers", parties),
+                        ("Participants", participants)):
+        members = d.get(field) or []
+        if not members:
+            continue
+        named = []
+        for m in members:
+            nm = m.get("Name")
+            if not nm:
+                continue
+            w = weapon_key(
+                ((m.get("Equipment") or {}).get("MainHand")
+                 or {}).get("Type"), known)
+            named.append({
+                "name": nm, "weapon": w,
+                "guild": m.get("GuildName") or None,
+                "alliance": m.get("AllianceName") or None})
+        if not named:
+            continue
+        # DEDUPE: a party that gets 20 kills must count ONCE
+        key = "|".join(sorted(m["name"] for m in named))
+        prev = sink.get(key)
+        if prev is None or sum(
+                1 for m in named if m["weapon"]) > sum(
+                1 for m in prev["members"] if m["weapon"]):
+            sink[key] = {"members": named,
+                         "seen_in_events": (prev or {}).get("seen_in_events", 0),
+                         "kill_areas": dict((prev or {}).get("kill_areas") or {})}
+        sink[key]["seen_in_events"] += 1
+        sink[key]["kill_areas"][area] = sink[key]["kill_areas"].get(area, 0) + 1
+
+
+def poll_events(args, known):
+    """The kill-feed poll: the newest events, grouped by battle, merged
+    into per-battle cache records. Cache only. Prints the KillArea tally
+    of what it saw, which is how an instanced content's label is first
+    observed."""
+    os.makedirs(CACHE, exist_ok=True)
+    by_battle, seen_events, pages = {}, 0, 0
+    for off in range(0, max(51, args.poll_depth), 51):
+        lst = get_json(f"{GAMEINFO}/events?limit=51&offset={off}")
+        if not lst:
+            break
+        pages += 1
+        for d in lst:
+            bid, eid = d.get("BattleId"), d.get("EventId")
+            if not bid or not eid:
+                continue
+            seen_events += 1
+            by_battle.setdefault(bid, {})[eid] = d
+        if len(lst) < 51:
+            break
+    new_events, touched, tally = 0, 0, collections.Counter()
+    for bid, evs in sorted(by_battle.items()):
+        path = os.path.join(CACHE, f"{bid}.json")
+        rec = None
+        if os.path.exists(path):
+            try:
+                with open(path, encoding="utf-8") as fh:
+                    rec = json.load(fh) or {}
+            except Exception:
+                rec = None
+            if rec is not None and rec.get("source") != "events_poll":
+                continue        # the full harvest already holds this battle
+        # rebuild the sinks from the stored raw events plus the new ones:
+        # the record stays a pure function of its event set
+        raw = {e["EventId"]: e for e in (rec or {}).get("raw_events") or []}
+        fresh = [d for eid, d in evs.items() if eid not in raw]
+        if not fresh:
+            continue
+        for d in fresh:
+            raw[d["EventId"]] = d
+        new_events += len(fresh)
+        touched += 1
+        builds, parties, participants = {}, {}, {}
+        areas, stamps = collections.Counter(), []
+        kills_by, deaths_by, guild_of = collections.Counter(), collections.Counter(), {}
+        for d in sorted(raw.values(), key=lambda e: e.get("TimeStamp") or ""):
+            ingest_event(d, known, builds, parties, participants, areas, stamps)
+            k, v = d.get("Killer") or {}, d.get("Victim") or {}
+            if k.get("Name"):
+                kills_by[k["Name"]] += 1
+                guild_of[k["Name"]] = (k.get("GuildName"), k.get("AllianceName"))
+            if v.get("Name"):
+                deaths_by[v["Name"]] += 1
+                guild_of[v["Name"]] = (v.get("GuildName"), v.get("AllianceName"))
+            for m in (d.get("Participants") or []) + (d.get("GroupMembers") or []):
+                if isinstance(m, dict) and m.get("Name"):
+                    guild_of.setdefault(m["Name"], (m.get("GuildName"), m.get("AllianceName")))
+        tally.update(areas)
+        roster = [{"name": nm, "guild": g[0] or None, "alliance": g[1] or None,
+                   "kills": kills_by.get(nm, 0), "deaths": deaths_by.get(nm, 0)}
+                  for nm, g in sorted(guild_of.items())]
+        out = {
+            "schema": 2,
+            "source": "events_poll",
+            "roster_source": "events",
+            "battle": bid,
+            "builds": list(builds.values()),
+            "started_at": min(stamps) if stamps else None,
+            "total_players": len(roster),
+            "total_kills": len(raw),
+            "roster": roster,
+            "kill_events": len(raw),
+            "events_fetched": len(raw),
+            "kill_areas": dict(areas),
+            "first_event_at": min(stamps) if stamps else None,
+            "last_event_at": max(stamps) if stamps else None,
+            "parties": list(parties.values()),
+            "participant_sets": list(participants.values()),
+            "raw_events": sorted(raw.values(), key=lambda e: e["EventId"]),
+        }
+        with open(path, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(out, f, indent=1, sort_keys=True)
+    sizes = collections.Counter(
+        len(d.get("GroupMembers") or []) for evs in by_battle.values() for d in evs.values())
+    print(f"poll: {seen_events} events on {pages} page(s), {len(by_battle)} battles, "
+          f"{new_events} new events into {touched} record(s)", flush=True)
+    print("  KillArea this poll: " + (", ".join(
+        f"{a} x{n}" for a, n in tally.most_common()) or "none new"), flush=True)
+    print("  killer-party sizes seen: " + ", ".join(
+        f"{k}:{v}" for k, v in sorted(sizes.items())), flush=True)
+    errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
+    print(f"  request misses after retries: {errs}", flush=True)
 
 
 def harvest_battle(args, known, b, bid, total, path):
@@ -148,7 +355,7 @@ def harvest_battle(args, known, b, bid, total, path):
         f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
     ) or []
     parties, participants, ev_ok = {}, {}, 0
-    builds = {}
+    builds, areas, stamps = {}, collections.Counter(), []
     for x in kills[:args.max_events]:
         eid = x.get("EventId")
         if not eid:
@@ -160,66 +367,7 @@ def harvest_battle(args, known, b, bid, total, path):
         if not d:
             continue
         ev_ok += 1
-        # FULL BUILDS come from Killer / Victim / Participants, which
-        # carry 7 of 8 equipment slots plus item power. GroupMembers
-        # does NOT: as measured, it fills MainHand only and
-        # reports AverageItemPower 0. So party STRUCTURE comes from
-        # GroupMembers and BUILDS come from the combat roles; a member
-        # who never killed, died or dealt damage yields a weapon and
-        # nothing else, and is recorded that way rather than guessed.
-        pool = [("killer", d.get("Killer")),
-                ("victim", d.get("Victim"))]
-        pool += [("participant", m) for m in (d.get("Participants")
-                                              or [])]
-        for how, m in pool:
-            if not isinstance(m, dict) or not m.get("Name"):
-                continue
-            eq = m.get("Equipment") or {}
-            gear = {}
-            for slot in ("MainHand", "OffHand", "Head", "Armor",
-                         "Shoes", "Cape", "Potion", "Food"):
-                v = eq.get(slot)
-                gear[slot] = (v or {}).get("Type") if isinstance(
-                    v, dict) else None
-            n_filled = sum(1 for v in gear.values() if v)
-            prev = builds.get(m["Name"])
-            if prev is None or n_filled > prev["slots_filled"]:
-                builds[m["Name"]] = {
-                    "name": m["Name"],
-                    "guild": m.get("GuildName") or None,
-                    "alliance": m.get("AllianceName") or None,
-                    "item_power": m.get("AverageItemPower"),
-                    "seen_as": how,
-                    "slots_filled": n_filled,
-                    "gear": gear}
-        for field, sink in (("GroupMembers", parties),
-                            ("Participants", participants)):
-            members = d.get(field) or []
-            if not members:
-                continue
-            named = []
-            for m in members:
-                nm = m.get("Name")
-                if not nm:
-                    continue
-                w = weapon_key(
-                    ((m.get("Equipment") or {}).get("MainHand")
-                     or {}).get("Type"), known)
-                named.append({
-                    "name": nm, "weapon": w,
-                    "guild": m.get("GuildName") or None,
-                    "alliance": m.get("AllianceName") or None})
-            if not named:
-                continue
-            # DEDUPE: a party that gets 20 kills must count ONCE
-            key = "|".join(sorted(m["name"] for m in named))
-            prev = sink.get(key)
-            if prev is None or sum(
-                    1 for m in named if m["weapon"]) > sum(
-                    1 for m in prev["members"] if m["weapon"]):
-                sink[key] = {"members": named,
-                             "seen_in_events": 0}
-            sink[key]["seen_in_events"] += 1
+        ingest_event(d, known, builds, parties, participants, areas, stamps)
 
     rec = {
         "schema": 2,          # 2 = carries full builds; 1 did not
@@ -235,6 +383,9 @@ def harvest_battle(args, known, b, bid, total, path):
                    for p in roster],
         "kill_events": len(kills),
         "events_fetched": ev_ok,
+        "kill_areas": dict(areas),
+        "first_event_at": min(stamps) if stamps else None,
+        "last_event_at": max(stamps) if stamps else None,
         "parties": list(parties.values()),
         "participant_sets": list(participants.values()),
     }
@@ -272,9 +423,13 @@ def fetch(args, known):
                 # schema 1 cached weapons only — re-fetch it for the builds
                 try:
                     with open(path, encoding="utf-8") as fh:
-                        if (json.load(fh) or {}).get("schema", 1) >= 2:
-                            seen_battles += 1
-                            continue
+                        cached = json.load(fh) or {}
+                    # a kill-feed poll record has no official roster;
+                    # the battle-list harvest replaces it
+                    if (cached.get("schema", 1) >= 2
+                            and cached.get("source") != "events_poll"):
+                        seen_battles += 1
+                        continue
                 except Exception:
                     pass
             todo.append((b, bid, total, path))
@@ -336,8 +491,13 @@ def analyze(known):
                         if p.get("name")}
         in_fight = seen & roster_names if roster_names else set()
         outside = seen - roster_names if roster_names else set()
+        areas = rec.get("kill_areas")
+        content = content_tag(areas)
         battles.append({
             "battle": rec["battle"], "total_players": total,
+            "source": rec.get("source") or "battle_list",
+            "kill_areas": dict(areas) if areas else None,
+            "content": content,
             "roster_known": len(roster_names),
             "players_with_gear": len(in_fight),
             "coverage": (round(len(in_fight) / len(roster_names), 3)
@@ -397,6 +557,7 @@ def analyze(known):
             parties.append({
                 "battle": rec["battle"],
                 "index": idx,
+                "content": content_tag(p.get("kill_areas")) if p.get("kill_areas") else content,
                 "size": len(p["members"]),
                 "known_weapons": len(ws),
                 "weapons": sorted(ws),
@@ -432,6 +593,7 @@ def analyze(known):
         # size of the largest deduped party carrying its player name in
         # this battle. Victims are in no party record -> None (honest:
         # unknown, never guessed).
+        rec_content = content_tag(rec.get("kill_areas"))
         size_by_name = {}
         for p in rec.get("parties", []):
             n_members = len(p.get("members") or [])
@@ -456,6 +618,8 @@ def analyze(known):
             nm = bd.get("name")
             builds.append({
                 "battle": rec["battle"], "weapon": w,
+                "content": (content_tag({bd["kill_area"]: 1})
+                            if bd.get("kill_area") else rec_content),
                 "armour_class": ac,
                 "item_power": bd.get("item_power"),
                 "seen_as": bd.get("seen_as"),
@@ -507,6 +671,10 @@ def analyze(known):
         "parties": sorted(parties, key=lambda p: -p["size"]),
         "summary": {
             "battles": len(battles),
+            "battles_by_content": dict(collections.Counter(
+                b["content"] for b in battles)),
+            "parties_by_content": dict(collections.Counter(
+                p["content"] for p in parties)),
             "parties": len(parties),
             "parties_5plus": sum(1 for p in parties if p["size"] >= 5),
             "parties_full_gear": sum(1 for p in parties
@@ -552,6 +720,15 @@ def main():
     ap.add_argument("--pages", type=int, default=None,
                     help="0 = offline re-analysis, no network; N > 0 = "
                          "discovery page cap (default 40, 20 battles each)")
+    ap.add_argument("--poll-events", action="store_true",
+                    help="kill-feed poll: the newest events grouped by "
+                         "battle into the cache; no battle list, no "
+                         "artifact rewrite (add --analyze to re-derive)")
+    ap.add_argument("--poll-depth", type=int, default=1020,
+                    help="events to read per poll, newest first (51 per "
+                         "page; the feed exposes about 1,000)")
+    ap.add_argument("--analyze", action="store_true",
+                    help="with --poll-events: also rewrite the artifact")
     args = ap.parse_args()
     if args.max_players and args.max_players < args.min_players:
         sys.exit("--max-players must be >= --min-players")
@@ -560,6 +737,11 @@ def main():
     with open(ds, encoding="utf-8") as f:
         known = set(json.load(f)["weapons"])
 
+    if args.poll_events:
+        poll_events(args, known)
+        if args.analyze:
+            analyze(known)
+        return
     if args.pages != 0:
         fetch(args, known)
     analyze(known)

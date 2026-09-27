@@ -26,12 +26,19 @@ let PLANNED = ENG.size;
    template's suggestion; once set by hand it belongs to the user and
    survives every content switch. */
 let PLAN_TOUCHED = false;
+/* A content may ASK for the size before it forges (template size_prompt:
+   the Dragon Portal's matchmaking pools). ASK_SIZE is raised on the switch
+   into such a content and cleared by any size control; while raised the
+   forge slot shows the pools instead of the forge button. */
+let ASK_SIZE = false;
 let SIZE = PLANNED;
 let STYLE = "balanced";
 const HARD_CAP = 60;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"];
 
 const PLAN = () => Math.max(PLANNED, party.length);
+const sizePrompt = () => tpl().size_prompt || null;
+const needSize = () => !!sizePrompt() && ASK_SIZE;
 const pickSize = () => Math.min(Math.max(party.length + 1, 1), HARD_CAP);
 /* run fn under the ONE-AHEAD context (candidate evaluation), then restore
    the roster-judged context — every board number stays roster-sized */
@@ -494,6 +501,9 @@ function loadHash(){
   /* a link or session whose size is not the template's suggestion was set
      on purpose: it keeps that size across content switches */
   PLAN_TOUCHED = PLANNED !== baseSize();
+  /* a link into a content that asks for its size: the link's n= answers
+     it, a link without one asks */
+  ASK_SIZE = !!sizePrompt() && !(n >= 2 && n <= HARD_CAP);
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
   /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
      party (saveHash omits p= when empty, so restore must mirror that).
@@ -603,15 +613,20 @@ function renderSetup(){
   styleSel.value = STYLE;
   $("style-blurb").textContent = (styles[STYLE] || {}).blurb || "";
   $("size-input").value = PLANNED;
-  const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
+  const presets = sizePrompt() ? sizePrompt().sizes.slice()
+    : [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
   $("size-presets").innerHTML = presets.map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
   $("size-hint").textContent = (party.length
     ? `Judged as the ${SIZE} you actually have — the forge fills toward ${PLAN()}.`
     : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`)
     + ` ${baseSize()} is the starting point for ${tpl().name}, not a cap.`;
+  const fitStat = (tpl().fit || {}).stat;
+  const borrowedFrom = (tpl().fit || {}).borrowed_from;
   $("size-notice").innerHTML =
-    (tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size
+    (fitStat !== "none" ? "" :
+    `<div class="notice"><b>No harvested evidence for this content yet.</b> The targets are the ${esc((DATASET.templates[borrowedFrom] || {}).name || borrowedFrom || "sibling")} rows, borrowed until the kill-feed poll has filled this content's pools; every row reads as a thin minimum, never as what winners field. Comps and kits shown here are the engine's capability read, not yet what wins in this content.</div>`)
+    + (tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
@@ -623,8 +638,11 @@ function renderSetup(){
   if (mh){
     const overCap = tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size;
     const extra = ENG.extrapolated();
-    mh.hidden = !(overCap || extra);
-    if (overCap){
+    mh.hidden = !(overCap || extra || needSize());
+    if (needSize()){
+      mh.textContent = "choose a portal size";
+      mh.title = (sizePrompt().question || "Which size?") + " The forge waits for the answer; pick it in the forge slot or the setup panel.";
+    } else if (overCap){
       mh.textContent = "over the in-game cap";
       mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
     } else if (extra){
@@ -1335,9 +1353,14 @@ function renderWheelFoot(keys, recs, rings){
   const reforgeBtn = party.length && party.some((_, i) => PROV[i] !== "l")
     ? `<button class="cb-forge" id="reforge" title="rebuild every unlocked slot for the current content, style and size — the next-best comp each press; locked slots stay">refresh unlocked</button>`
     : "";
-  const forge = (recs !== null && party.length < PLAN()
+  /* a content that asks for its size (size_prompt) shows the pools in
+     the forge slot until one is picked; the buttons are the same
+     data-size controls as the setup panel's presets */
+  const ask = needSize() ? `<span class="size-ask"><span class="size-ask-q">${esc(sizePrompt().question || "Which size?")}</span>${
+    sizePrompt().sizes.map(n => `<button class="size-btn" data-size="${n}" title="${esc((sizePrompt().labels || {})[n] || "")}">${n}</button>`).join("")}</span>` : "";
+  const forge = ask || ((recs !== null && party.length < PLAN()
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "") + reforgeBtn;
+    : "") + reforgeBtn);
   /* the comp board lives in the right-edge party dash (where the whole
      roster reads at once) — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
@@ -2964,9 +2987,9 @@ document.addEventListener("click", e => {
     return;
   }
   const sz = e.target.closest("[data-size]");
-  if (sz){ PLANNED = +sz.dataset.size; PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
-  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
-  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); PLAN_TOUCHED = true; FORGE_NOTE = null; render(); return; }
+  if (sz){ PLANNED = +sz.dataset.size; PLAN_TOUCHED = true; ASK_SIZE = false; FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); PLAN_TOUCHED = true; ASK_SIZE = false; FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); PLAN_TOUCHED = true; ASK_SIZE = false; FORGE_NOTE = null; render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
   if (e.target.closest("#share")){
@@ -2996,6 +3019,9 @@ document.addEventListener("change", e => {
   if (e.target.id === "content"){
     CONTENT = e.target.value;
     if (!PLAN_TOUCHED) PLANNED = baseSize();
+    /* a content with a size prompt asks every time it is entered */
+    ASK_SIZE = !!sizePrompt();
+    if (ASK_SIZE){ PLAN_TOUCHED = false; PLANNED = baseSize(); }
     /* manual/live members SURVIVE a content switch; slots the
        forge generated were built for the OLD template and are dropped —
        "reforge all" or "forge the rest" rebuilds them for the new one. */
@@ -3015,7 +3041,7 @@ document.addEventListener("change", e => {
   }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
-    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; PLAN_TOUCHED = true; FORGE_NOTE = null; render(); }
+    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; PLAN_TOUCHED = true; ASK_SIZE = false; FORGE_NOTE = null; render(); }
     else { e.target.value = PLANNED; }
   }
 });

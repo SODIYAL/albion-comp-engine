@@ -434,6 +434,25 @@ HEAD (`--base` for another revision). Review the report, then commit.
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
   in the band. The cache keeps every battle and the analysis reads all of
   it, so a focused night adds to the corpus, never narrows it.
+- `pipeline/poll_events.ps1` — "CompForge kill-feed poll", every 5 minutes:
+  `sample_parties.py --poll-events` reads the newest ~1,000 kill events off
+  the official feed (the killer's party and every combat role's equipment
+  ride the list itself), groups them by battle and merges them into
+  per-battle cache records (`source: events_poll`, deduplicated by EventId
+  across polls; the roster is rebuilt from the events, so coverage is
+  against the seen set). Cache only. This is the discovery for the Ancient
+  Lands portal pools (2-3, 4-5, 5-7): their fights are 4-14 players, which
+  the battle list never surfaces, and portals open on 30 / 60 / 180 minute
+  locks, so the kills arrive in bursts. A later battle-list harvest of the
+  same battle replaces the poll record with the official-roster one.
+  CONTENT TAG: every event's `KillArea` (the content classifier the API
+  exposes; `Location` and `Category` are null on current traffic) is
+  recorded per event, tallied per battle and per party, and kept per
+  build; `analyze()` stamps `content` on every battle, party and build
+  (`open_world`, the lower-cased KillArea of an instanced content, or
+  `unknown` for records written before the tally). The tag exists so a
+  derive step can select one content's parties; nothing filters on it.
+  The first portal kill observed names the label.
 - `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
   grows the albionbb battle caches with fresh GROUP fights
   (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips

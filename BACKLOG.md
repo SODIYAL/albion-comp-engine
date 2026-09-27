@@ -13,6 +13,16 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
+- **The evidence unit for the Dragon Portal's small pools** (2-3, 4-5,
+  5-7): kit doctrine's unit is the killer party of 10+, the style cells
+  need 40 distinct rosters, and the meta prior buckets 2-5 / 6-15 / 16+
+  across every content. The kill-feed poll tags every party with its
+  `KillArea`; once portal-tagged parties exist, decide the unit for the
+  small pools (a killer party of the pool's size, dominant by kills over
+  deaths in its battle, is the candidate) and the floor per pool before
+  `ancient_lands` rows are derived. Until then the template borrows the
+  roads rows (`fit.stat: none`). Blocked on the first observed portal
+  label: the newest 1,000 events read OPEN_WORLD at every hour sampled.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10

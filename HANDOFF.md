@@ -138,6 +138,16 @@ Three layers, never merged:
 
 Do not rewrite this flow in the dashboard layer.
 
+### Contents without harvested evidence
+
+`ancient_lands` (Dragon Portal) ships with `fit: {stat: none, borrowed_from:
+roads}`: its rows are the roads rows, every target reads `content_min`,
+`validated_sizes` is empty so every size is flagged extrapolated, and the
+page shows the borrowed-evidence notice. The kill-feed poll collects the
+portal fights; the rows are replaced by measured medians once its pools
+hold 40 distinct rosters each, and the evidence unit for the 2-7 pools is
+a logged decision before that (BACKLOG).
+
 ### Roster size vs planned size
 
 Attendance is fluid. The roster is judged at its **actual size**; `PLANNED`
@@ -255,6 +265,11 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   last. Setup, caller tools, party and live party are `.epanel` edge flyouts
   (one per edge on desktop, one total on phones). The masthead is a status
   bar: fitness, identity verdict, style / size / content, forge actions.
+- **A content may ask for its size** (template `size_prompt`; the Dragon
+  Portal's pools 3 / 5 / 7 / 20): the switch into it raises the ask, the
+  forge slot shows the pools as size controls until one is picked, the
+  masthead chip names the open ask, a link's `n=` answers it. A template
+  whose `fit.stat` is `none` shows the borrowed-evidence notice.
 - **Comp status is THE RADAR**: one axis per capability group against the
   comp-fitted CEILING (100% = soft cap, nothing above 100; a brass tick marks
   the typical winner; purple = over-ceiling stacking; pink = under a hard

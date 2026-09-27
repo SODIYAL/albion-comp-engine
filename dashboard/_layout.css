@@ -316,3 +316,6 @@
   .sb-fit .meter-track{width:56px}
 }
 
+/* the size ask in the forge slot (a content with size_prompt) */
+.size-ask{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
+.size-ask-q{font-size:.82em;opacity:.85;margin-right:2px}

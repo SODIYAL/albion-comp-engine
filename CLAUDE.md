@@ -156,6 +156,12 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   `sample_battles.py`, `sample_rosters.py`, `adapters/metabattle.py fetch`. The
   scheduled task "CompForge overnight harvest" runs `harvest_overnight.ps1` at
   03:00 and 15:00 — harvest only; rebuild, gates and commit stay in-session.
+  The task "CompForge kill-feed poll" runs `poll_events.ps1` every 5 minutes
+  (`sample_parties.py --poll-events`: the newest kill events grouped by
+  battle, cache only) — the discovery for the Ancient Lands portal pools of
+  2-7, which the battle list never surfaces. Every cache record carries the
+  event's `KillArea`; `analyze()` stamps a `content` tag on every battle,
+  party and build. A tag, never a filter.
 - `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
 
 ## Architecture
