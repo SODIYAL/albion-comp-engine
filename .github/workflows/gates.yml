@@ -1,7 +1,9 @@
 # The gate list from CLAUDE.md ("Tests" + "Build chain"), run on every push
-# and pull request. Nothing here touches the network: the pinned snapshot
-# and every generated artifact are committed, so the build chain verifies
-# them (test_provenance rebuilds the dataset and checks it byte-identical).
+# and pull request. No gate reads network data: the pinned snapshot and
+# every generated artifact are committed, so the build chain verifies them
+# (test_provenance rebuilds the dataset and checks it byte-identical). The
+# network is used only to install pinned tooling (pip, and PGlite for the
+# account database test).
 name: gates
 
 on:
@@ -58,3 +60,11 @@ jobs:
           node tests/test_loadout_codec.js
           node tests/test_display_math.js
           node tests/test_live_party.js
+          node tests/test_auth_ui.js
+          node tests/test_profile.js
+
+      - name: account database gates
+        run: |
+          python3 tests/test_supabase_schema.py
+          npm install --no-save --no-audit --no-fund @electric-sql/pglite@0.5.8
+          node tests/test_supabase_rls.mjs

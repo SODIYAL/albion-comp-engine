@@ -42,3 +42,6 @@ pipeline/out/choice_fit/
 
 # curation review boards (build_stat_chart.py, build_magnitude_review.py) are local
 review/
+
+# test-only npm installs (npm install --no-save; see tests/test_supabase_rls.mjs)
+node_modules/

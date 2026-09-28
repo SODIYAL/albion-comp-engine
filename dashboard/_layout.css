@@ -298,6 +298,14 @@
      docked beside the game is the companion's own layout. They wrap under
      the brand line, in the part of the masthead that scrolls away. */
   .masthead .lf-btn, .masthead .lf-sync{order:0; flex:none}
+  /* the account button closes the brand line's run (its menu is fixed to
+     the button and closes when the button scrolls off) */
+  .masthead .acct-btn{order:0; flex:none; max-width:min(220px, 60vw)}
+  /* the account dialogs ride high: a centred dialog sits under the
+     on-screen keyboard once a field takes focus */
+  .auth-dialog{margin:max(16px, 5vh) auto auto}
+  /* the profile's two names stack */
+  .profile-names{grid-template-columns:1fr}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

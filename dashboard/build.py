@@ -5,9 +5,14 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
 
     dashboard/_shell.html          markup + core CSS
     dashboard/_decision_layer.css decision-first surface CSS
+    dashboard/_auth.css            account button, menu and sign-in dialog CSS
+    dashboard/_layout.css          every layout rule (inlined last)
     dashboard/_app.js              client (contains NO capability numbers)
     dashboard/_decision_layer.js  caller-first translation of engine output
     dashboard/_loadout.js          per-member gear + spell picks (display only)
+    dashboard/_supabase.js         the Supabase client (window.DB)
+    dashboard/_auth.js             auth helpers + the account UI + window.Account
+    dashboard/_profile.js          the profile dialog (names, weapon lists)
     out/dataset-latest.json        the single source of truth
         │
         ▼
@@ -60,6 +65,14 @@ SEMANTIC_ICON_FILES = {
 }
 
 BRAND_LOGO_FILE = os.path.join("assets", "brand", "comp-zaddy-logo.png")
+
+# Accounts: the Supabase library, then _supabase.js (the client), then
+# _auth.js (helpers + account UI), each in its OWN <script> AFTER the
+# planner's. A slow or blocked CDN never holds the planner's first paint,
+# and a script that throws (no library: _supabase.js throws) stops only
+# itself - the planner, the engine and the parity guard have already run.
+# The one network dependency of the page; everything else is inlined.
+SUPABASE_JS_CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
 
 
 def load_semantic_icons():
@@ -124,7 +137,10 @@ def main():
     # dashboard/_layout.css and tests/test_dashboard_layout.py (L1c).
     with open(os.path.join(DASH, "_layout.css"), encoding="utf-8") as f:
         layout_css = f.read()
-    shell = shell.replace("</style>", decision_css + "\n" + layout_css + "\n</style>", 1)
+    with open(os.path.join(DASH, "_auth.css"), encoding="utf-8") as f:
+        auth_css = f.read()
+    shell = shell.replace("</style>", decision_css + "\n" + auth_css + "\n"
+                          + layout_css + "\n</style>", 1)
     shell = shell.replace(
         '<main class="main">',
         '<main class="main">\n'
@@ -139,6 +155,12 @@ def main():
     # Loadout layer — inlined BEFORE _app.js, which calls into it.
     with open(os.path.join(DASH, "_loadout.js"), encoding="utf-8") as f:
         loadout_js = f.read()
+    with open(os.path.join(DASH, "_supabase.js"), encoding="utf-8") as f:
+        supabase_js = f.read()
+    with open(os.path.join(DASH, "_auth.js"), encoding="utf-8") as f:
+        auth_js = f.read()
+    with open(os.path.join(DASH, "_profile.js"), encoding="utf-8") as f:
+        profile_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     semantic_icons = load_semantic_icons()
@@ -311,14 +333,17 @@ def main():
         ge = {g["id"]: g for g in data.get("gear_effects") or []}
         effs = {}
         for eid, g in sorted(ge.items()):
-            items = [it["id"] for it in g.get("items") or [] if it.get("id")]
+            # its own name: `items` is the weapon -> render-item map that
+            # ITEMS and the account catalog embed (reusing the name here
+            # shipped this list as ITEMS, and the dossier lost its render)
+            effect_items = [it["id"] for it in g.get("items") or [] if it.get("id")]
             per20 = sorted(r["copies"].get(eid, 0) * 20.0 / r["seats"]
                            for r in comps)
             nz = [c for c in per20 if c]
-            if not items or not nz:
+            if not effect_items or not nz:
                 continue
             mid = (nz[(len(nz) - 1) // 2] + nz[len(nz) // 2]) / 2.0
-            effs[eid] = {"name": g.get("name"), "items": items,
+            effs[eid] = {"name": g.get("name"), "items": effect_items,
                          "typical": round(mid, 1),
                          "fielded": round(len(nz) / len(comps), 2)}
         if effs:
@@ -349,6 +374,20 @@ def main():
         "weaknesses": [w["cap"] for w in eng.weaknesses(seed)],
     }
 
+    # The account layer's weapon catalog (_profile.js now, sign-up pages
+    # later): per weapon line its display name, its role class - the
+    # engine's role_class, the one role read, derived here so the account
+    # scripts never call the engine - its render-service item, and whether
+    # the line left the game. Keys are the dataset's; player_weapons stores
+    # them (supabase/migrations).
+    account_catalog = {}
+    for k, w in sorted(data["weapons"].items()):
+        entry = {"name": w.get("display_name") or k, "role": eng.role_of(k),
+                 "item": items.get(k) or ""}
+        if w.get("removed"):
+            entry["removed"] = True
+        account_catalog[k] = entry
+
     # `</script>` inside a JSON string would close the tag early; escape it.
     # (Escaping happens outside the f-string: expression-part backslashes
     # need Python 3.12+, and this must build on 3.11 too.)
@@ -376,6 +415,10 @@ def main():
            f"const FAMILIES = {js(families)};\n"
            f"const EFFECT_QUOTAS = {js(effect_quotas)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
+           f'<script src="{SUPABASE_JS_CDN}"></script>\n'
+           f"<script>\n{supabase_js}\n</script>\n"
+           f"<script>\n{auth_js}\n</script>\n"
+           f"<script>\nconst ACCOUNT_CATALOG = {js(account_catalog)};\n{profile_js}\n</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     # newline="\n" on every committed page: Windows' default text mode

@@ -1,0 +1,238 @@
+/* ACCOUNTS - the masthead account button, the account menu, the sign-in
+   dialog (_auth.js) and the profile dialog (_profile.js). Component chrome
+   only: colour, type, borders, motion. Where the button and the dialogs
+   sit on a phone lives in _layout.css with the rest of the page's layout.
+   Every colour is a shell token (_shell.html :root). */
+
+/* ---------- the masthead button ---------- */
+.acct-btn{
+  display:inline-flex; align-items:center; gap:7px; max-width:220px; min-height:24px;
+  padding:3px 11px; border-radius:99px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--brass); background:var(--brass-wash);
+  border:1px solid rgba(255,201,58,.42);
+  transition:border-color .18s var(--ease), color .18s var(--ease),
+    background .18s var(--ease), opacity .18s var(--ease);
+}
+.acct-btn:hover{border-color:var(--brass); color:var(--brass-bright); background:rgba(255,201,58,.13)}
+/* the stored session is still being read */
+.acct-btn[data-state="pending"]{opacity:.55}
+/* logged in: the name keeps the player's own spelling, never upper-cased */
+.acct-btn[data-state="in"]{
+  padding-left:3px; font-size:11px; letter-spacing:.02em; text-transform:none;
+  color:var(--ink); background:rgba(18,21,28,.6); border-color:var(--rule-2);
+}
+.acct-btn[data-state="in"]:hover,
+.acct-btn[aria-expanded="true"]{border-color:var(--brass-deep); color:var(--brass-bright)}
+.acct-init{display:none}
+.acct-btn[data-state="in"] .acct-init{
+  display:grid; place-items:center; width:18px; height:18px; flex:none; border-radius:50%;
+  background:linear-gradient(180deg, var(--brass-bright), var(--brass)); color:#1A1206;
+  font-size:10px; font-weight:700; line-height:1;
+}
+.acct-name{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+/* ---------- the account menu ---------- */
+.acct-menu{
+  position:fixed; z-index:80; width:min(260px, calc(100vw - 32px));
+  padding:6px; border-radius:14px;
+  background:rgba(16,16,24,.98); border:1px solid var(--rule-2);
+  box-shadow:var(--shadow-lift);
+}
+.acct-menu[hidden]{display:none}
+.acct-menu-hd{padding:10px 10px 12px; margin-bottom:4px; border-bottom:1px solid var(--rule)}
+.acct-menu-name{font-family:var(--serif); font-size:16px; font-weight:600; line-height:1.3;
+  color:var(--ink); overflow-wrap:anywhere}
+.acct-menu-sub{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-top:3px;
+  overflow-wrap:anywhere}
+.acct-menu-sub:empty{display:none}
+.acct-item{
+  display:block; width:100%; padding:9px 10px; text-align:left;
+  background:none; border:0; border-radius:9px; font-size:13px; color:var(--ink-2);
+  transition:background .18s var(--ease), color .18s var(--ease);
+}
+.acct-item:hover, .acct-item:focus-visible{background:var(--surface-2); color:var(--ink)}
+.acct-item.danger:hover, .acct-item.danger:focus-visible{color:var(--gap)}
+.acct-item[aria-disabled="true"]{opacity:.6; cursor:progress}
+.acct-menu-err{margin:4px 10px 6px; font-size:12px; line-height:1.45; color:var(--gap)}
+.acct-menu-err:empty{display:none}
+
+/* ---------- the sign-in dialog ---------- */
+/* the dialog box is transparent and unpadded; the card inside is the
+   visible panel and the scroller, so a click with the dialog itself as
+   its target can only be a backdrop click, never a scrollbar drag */
+.auth-dialog{
+  width:min(420px, calc(100vw - 32px)); max-width:none; max-height:none;
+  padding:0; border:0; overflow:visible; background:transparent; color:var(--ink);
+}
+.auth-dialog[open]{animation:auth-in .22s var(--ease)}
+@keyframes auth-in{from{opacity:0; transform:translateY(8px) scale(.985)}}
+/* literal colours: older engines do not pass :root tokens to ::backdrop */
+.auth-dialog::backdrop{background:rgba(5,5,8,.72);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px)}
+.auth-card{
+  position:relative; padding:22px 22px 20px; border-radius:16px;
+  max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px); overflow:auto;
+  background:linear-gradient(180deg, var(--panel-hi), var(--surface) 45%);
+  border:1px solid var(--rule-2);
+  box-shadow:var(--shadow-lift), 0 0 60px -24px rgba(255,201,58,.22);
+}
+/* the masthead's ember seam, on the card's top edge */
+.auth-card::before{
+  content:""; position:absolute; left:18px; right:18px; top:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,201,58,.6) 22%,
+    rgba(255,201,58,.6) 55%, transparent);
+}
+.auth-hd{display:flex; align-items:flex-start; gap:12px; margin-bottom:16px}
+.auth-kicker{display:block; margin-bottom:4px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3)}
+.auth-hd h2{
+  font-size:23px; letter-spacing:.01em;
+  background:linear-gradient(180deg, #FFF6DC, #F2C75C);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.auth-close{
+  margin-left:auto; flex:none; width:32px; height:32px; display:grid; place-items:center;
+  background:none; border:0; border-radius:8px; color:var(--ink-3); font-size:21px; line-height:1;
+  transition:background .18s var(--ease), color .18s var(--ease);
+}
+.auth-close:hover{color:var(--ink); background:var(--surface-2)}
+
+/* every part that sets its own display gives the hidden attribute back
+   its meaning (the .lf-sync lesson in _shell.html) */
+.auth-form[hidden], .auth-info[hidden], .auth-msg[hidden],
+.auth-link[hidden], .auth-secondary[hidden]{display:none}
+
+.auth-field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px}
+.auth-field label{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.auth-field label .opt{margin-left:6px; letter-spacing:.06em; text-transform:none; color:var(--ink-3)}
+.auth-field .text-input, .auth-field select{font-size:14px; padding:10px 12px}
+.auth-field .text-input[aria-invalid="true"],
+.auth-field select[aria-invalid="true"]{border-color:var(--gap); box-shadow:0 0 0 3px var(--gap-wash)}
+.auth-hint{margin:0; font-size:11.5px; line-height:1.45; color:var(--ink-3)}
+.auth-field-err{margin:0; font-size:12px; line-height:1.45; color:var(--gap)}
+.auth-field-err:empty{display:none}
+/* a field's error replaces its hint rather than repeating it */
+.auth-field:has(.auth-field-err:not(:empty)) .auth-hint{display:none}
+
+.auth-msg{margin:0 0 14px; padding:10px 12px; border-radius:10px; font-size:13px; line-height:1.45}
+.auth-msg.err{color:var(--gap); background:var(--gap-wash); border:1px solid rgba(255,84,112,.35)}
+.auth-msg.ok{color:var(--ok-bright); background:rgba(35,191,110,.10); border:1px solid rgba(35,191,110,.35)}
+
+/* the primary action: the forge's brass, as the live-party load button */
+.auth-submit{
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  width:100%; margin-top:4px; padding:11px 16px;
+  font-family:var(--mono); font-size:11.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:#1A1206;
+  background:linear-gradient(180deg, var(--brass-bright), var(--brass));
+  border:0; border-radius:11px;
+  box-shadow:0 2px 14px -4px rgba(255,201,58,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:filter .18s var(--ease), opacity .18s var(--ease);
+}
+.auth-submit:hover{filter:brightness(1.07)}
+.auth-secondary{
+  width:100%; padding:10px 16px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-2); background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule-2); border-radius:11px;
+  transition:border-color .18s var(--ease), color .18s var(--ease);
+}
+.auth-secondary:hover{border-color:var(--brass-deep); color:var(--brass)}
+/* busy: the request is in flight; the button keeps focus but refuses */
+.auth-submit[aria-disabled="true"], .auth-secondary[aria-disabled="true"],
+.auth-link[aria-disabled="true"]{opacity:.6; cursor:progress; filter:none}
+.auth-submit[aria-busy="true"]::before{
+  content:""; width:12px; height:12px; flex:none; border-radius:50%;
+  border:2px solid rgba(26,18,6,.3); border-top-color:#1A1206;
+  animation:auth-spin .7s linear infinite;
+}
+@keyframes auth-spin{to{transform:rotate(360deg)}}
+
+.auth-link{
+  padding:2px 0; margin-left:4px; background:none; border:0; border-bottom:1px solid transparent;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--brass); transition:border-color .18s var(--ease);
+}
+.auth-link:hover{border-bottom-color:var(--brass)}
+.auth-resend{display:block; margin:12px auto 0}
+.auth-switch{
+  margin:16px 0 0; padding-top:14px; border-top:1px solid var(--rule);
+  text-align:center; font-size:12.5px; color:var(--ink-3);
+}
+
+.auth-info p{margin:0 0 10px; font-size:14px; line-height:1.55; color:var(--ink-2)}
+.auth-info p strong{color:var(--ink); font-weight:600; overflow-wrap:anywhere}
+.auth-actions{display:flex; flex-direction:column; gap:8px; margin-top:16px}
+
+/* ---------- the profile dialog (_profile.js) ---------- */
+.profile-dialog{width:min(600px, calc(100vw - 32px))}
+.profile-email{display:block; margin-top:4px; font-family:var(--mono); font-size:11px;
+  color:var(--ink-3); overflow-wrap:anywhere}
+.profile-email:empty{display:none}
+.profile-names{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; align-items:start}
+.profile-names .profile-wide{grid-column:1/-1}
+.pw-note{margin:0 0 12px}
+.pw-note[hidden]{display:none}
+
+/* a list: its label, its chips, its picker */
+.pw-group{margin:2px 0 14px; padding-top:14px; border-top:1px solid var(--rule)}
+.pw-label{margin:0 0 3px; font-family:var(--mono); font-size:10px; font-weight:400;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2)}
+.pw-list{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; padding:0; list-style:none}
+.pw-chip{
+  display:inline-flex; align-items:center; gap:7px; max-width:100%; padding:3px 3px 3px 5px;
+  border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,21,28,.6);
+  font-size:13px; color:var(--ink);
+}
+/* a key the catalog no longer holds: kept, and plainly unknown */
+.pw-chip.unknown{border-style:dashed; color:var(--ink-3)}
+.pw-art{width:26px; height:26px; flex:none; object-fit:contain}
+.pw-art.blank{display:inline-block; border-radius:6px; background:var(--surface-2)}
+.pw-name{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pw-empty{padding:4px 0; font-size:12.5px; font-style:italic; color:var(--ink-3)}
+/* role class in the planner's role hues */
+.pw-role{flex:none; padding:1px 6px; border-radius:99px; background:rgba(255,255,255,.04);
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase}
+.pw-role.frontline{color:var(--role-tank)}
+.pw-role.support{color:var(--role-support)}
+.pw-role.dps{color:var(--role-melee)}
+.pw-role.healer{color:var(--role-healer)}
+.pw-btn{
+  width:26px; height:26px; flex:none; display:grid; place-items:center; padding:0;
+  background:none; border:0; border-radius:7px; font-size:15px; line-height:1; color:var(--ink-3);
+  transition:background .18s var(--ease), color .18s var(--ease);
+}
+.pw-btn:hover{background:var(--surface-2); color:var(--brass)}
+.pw-remove:hover{color:var(--gap)}
+
+/* the picker: a combobox whose results open in the flow, never over it */
+.pw-combo .text-input{padding:8px 10px}
+.pw-combo .text-input:disabled{opacity:.5; cursor:not-allowed}
+.pw-results{margin:6px 0 0; padding:4px; list-style:none; max-height:280px; overflow:auto;
+  background:var(--sunk); border:1px solid var(--rule-2); border-radius:12px}
+.pw-results[hidden]{display:none}
+.pw-opt{display:flex; align-items:center; gap:9px; padding:6px 8px; border-radius:8px;
+  font-size:13px; color:var(--ink-2); cursor:pointer}
+.pw-opt:hover, .pw-opt[aria-selected="true"]{background:var(--surface-2); color:var(--ink)}
+.pw-opt .pw-role{margin-left:auto}
+.pw-none{padding:8px; font-size:12.5px; color:var(--ink-3)}
+
+.pw-roles{margin:0 0 14px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.pw-roles:empty{display:none}
+.profile-actions{display:flex; align-items:center; gap:14px; margin-top:4px}
+.profile-actions .auth-submit{flex:1; width:auto; margin-top:0}
+.profile-dirty{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--amber)}
+.profile-dirty[hidden]{display:none}
+
+@media (max-width:640px){
+  /* 16px fields: a smaller font makes iOS Safari zoom the page on focus */
+  .auth-field .text-input, .auth-field select, .pw-combo .text-input{font-size:16px}
+  .auth-card{padding:18px 16px 16px}
+  .auth-hd h2{font-size:21px}
+}

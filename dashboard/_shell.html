@@ -1149,11 +1149,19 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px; margin-left:5px}
 .tag.floor{background:var(--gap-wash); color:var(--gap)}
 .tag.over{background:rgba(157,92,255,.14); color:var(--over)}
-/* target provenance chip: the engine's word on where a row's "typical" came
-   from (a thin content minimum, a borrowed harvest cell) */
-.tag.src{background:transparent; color:var(--muted,#8FA7CF); border:1px dashed currentColor; opacity:.85}
+/* on a supply-board row a space precedes each tag (the wrap point), so the
+   tag's own margin shrinks to keep the gap */
+.cap-name .tag{margin-left:1px}
+/* style emphasis marks (up / down); the multiplier rides the hover */
 .tag.style-up{background:rgba(224,166,61,.14); color:var(--brand, #E0A63D)}
 .tag.style-down{background:rgba(122,135,165,.14); color:#8FA7CF}
+/* the board's visible key (L26): the rows' own swatch classes, and the two
+   ticks drawn as the rings draw them - brass typical, thin red minimum */
+.ring-key{display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px;
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin:-4px 0 12px}
+.ring-key > span{display:inline-flex; align-items:center; gap:6px}
+.k-tick{display:inline-block; width:2px; height:11px; border-radius:1px; background:var(--brass-deep)}
+.k-tick.min{width:1px; background:var(--gap); opacity:.7}
 
 /* ---------- weaknesses: needed now vs nice to have ---------- */
 .weak-list{display:flex; flex-direction:column; gap:8px}
@@ -1649,6 +1657,27 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 /* desktop: the mobile add bar stays out of the way */
 @media (min-width:641px){ .wf-add-mobile{display:none} }
 </style>
+<script>
+/* An email link (sign-up verification) returns to this page with the new
+   session in the hash (#access_token=...) or the link's error
+   (#error_description=..., on some servers in the query). The planner's
+   boot rewrites the hash with the saved comp before the account scripts
+   load (build.py places them last), so the return is set aside here,
+   before any other script runs, and its tokens leave the address bar.
+   _auth.js adopts it. */
+window.AUTH_LINK = "";
+(function(){
+  var h = location.hash, q = location.search;
+  var re = /(?:^[#?]|&)(?:access_token|error_description)=/;
+  var hit = re.test(h) ? h : re.test(q) ? q : "";
+  if (!hit) return;
+  window.AUTH_LINK = hit;
+  try {
+    history.replaceState(null, "", location.pathname
+      + (hit === q ? "" : q) + (hit === h ? "" : h));
+  } catch (e) { /* file:// may deny */ }
+})();
+</script>
 </head>
 <body>
 
@@ -1678,6 +1707,11 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   <label class="lf-sync" id="companion-sync-wrap" hidden
          title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
     <input type="checkbox" id="companion-sync"> live sync</label>
+  <!-- the account button (_auth.js): "Log in" when logged out, the
+       account's name when logged in; data-state="pending" until the stored
+       session has been read -->
+  <button class="acct-btn" id="acct-btn" type="button" data-state="pending"
+    aria-haspopup="dialog" title="log in or create an account"><span class="acct-init" aria-hidden="true"></span><span class="acct-name">Log in</span></button>
   </div>
   <div class="mh-bar">
     <label class="sb-field"><span>style</span><select id="style"></select></label>
@@ -1774,6 +1808,15 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
          section is the actual .main child -->
     <section id="supply-sec">
       <div class="sec-label">Capability supply vs. typical winner</div>
+      <div class="ring-key">
+        <span><span class="k-tick"></span>typical winner</span>
+        <span><span class="k-tick min"></span>bare minimum</span>
+        <span><span class="cap-sw low"></span>under the minimum</span>
+        <span><span class="cap-sw part"></span>under typical</span>
+        <span><span class="cap-sw met"></span>typical or more</span>
+        <span><span class="cap-sw over"></span>overstacked</span>
+        <span>a full ring is the most winners field</span>
+      </div>
       <div class="groups" id="groups"></div>
     </section>
 
@@ -1856,3 +1899,192 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   </div>
   <div class="scroll-x"><div id="drawer-body"></div></div>
 </div>
+
+<!-- Accounts (_auth.js, _auth.css). The menu sits at body level, not in
+     the masthead: the masthead's backdrop-filter would make it the menu's
+     containing block, and its z-index would put an open edge panel over
+     the menu. The dialog is a native <dialog> (showModal): the top layer,
+     an inert page behind it, Escape to close. -->
+<div class="acct-menu" id="acct-menu" hidden>
+  <div class="acct-menu-hd">
+    <div class="acct-menu-name" id="acct-menu-name"></div>
+    <div class="acct-menu-sub" id="acct-menu-albion"></div>
+    <div class="acct-menu-sub" id="acct-menu-email"></div>
+  </div>
+  <button type="button" class="acct-item" id="acct-profile">Profile</button>
+  <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
+  <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
+</div>
+
+<dialog class="auth-dialog" id="auth-dialog" aria-modal="true" aria-labelledby="auth-title" data-view="login">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="auth-title">Log in</h2>
+      </div>
+      <button type="button" class="auth-close" id="auth-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="auth-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="auth-notice" role="status" hidden></p>
+
+    <form class="auth-form" id="auth-login" novalidate>
+      <div class="auth-field">
+        <label for="login-email">Email</label>
+        <input class="text-input" id="login-email" name="email" type="email"
+          autocomplete="email" autocapitalize="off" spellcheck="false" required
+          aria-describedby="login-email-err">
+        <p class="auth-field-err" id="login-email-err"></p>
+      </div>
+      <div class="auth-field">
+        <label for="login-password">Password</label>
+        <input class="text-input" id="login-password" name="password" type="password"
+          autocomplete="current-password" required aria-describedby="login-password-err">
+        <p class="auth-field-err" id="login-password-err"></p>
+      </div>
+      <button class="auth-submit" id="login-submit" type="submit">Log in</button>
+      <button type="button" class="auth-link auth-resend" id="login-resend" hidden>Resend verification email</button>
+      <p class="auth-switch">New here?
+        <button type="button" class="auth-link" data-auth-view="signup">Create account</button></p>
+    </form>
+
+    <form class="auth-form" id="auth-signup" novalidate hidden>
+      <div class="auth-field">
+        <label for="signup-email">Email</label>
+        <input class="text-input" id="signup-email" name="email" type="email"
+          autocomplete="email" autocapitalize="off" spellcheck="false" required
+          aria-describedby="signup-email-err">
+        <p class="auth-field-err" id="signup-email-err"></p>
+      </div>
+      <div class="auth-field">
+        <label for="signup-password">Password</label>
+        <input class="text-input" id="signup-password" name="password" type="password"
+          autocomplete="new-password" required aria-describedby="signup-password-hint signup-password-err">
+        <p class="auth-hint" id="signup-password-hint">At least 6 characters.</p>
+        <p class="auth-field-err" id="signup-password-err"></p>
+      </div>
+      <div class="auth-field">
+        <label for="signup-albion">Albion character name</label>
+        <input class="text-input" id="signup-albion" maxlength="64" name="albion_name" type="text"
+          autocomplete="off" autocapitalize="off" spellcheck="false" required
+          aria-describedby="signup-albion-err">
+        <p class="auth-field-err" id="signup-albion-err"></p>
+      </div>
+      <div class="auth-field">
+        <label for="signup-server">Albion server</label>
+        <select id="signup-server" name="albion_server" required
+          aria-describedby="signup-server-hint signup-server-err">
+          <option value="">Choose your server</option>
+          <option value="americas">Americas</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+        </select>
+        <p class="auth-hint" id="signup-server-hint">Character names are unique per server.</p>
+        <p class="auth-field-err" id="signup-server-err"></p>
+      </div>
+      <div class="auth-field">
+        <label for="signup-display">Display name <span class="opt">optional</span></label>
+        <input class="text-input" id="signup-display" maxlength="64" name="display_name" type="text"
+          autocomplete="nickname" spellcheck="false" aria-describedby="signup-display-hint signup-display-err">
+        <p class="auth-hint" id="signup-display-hint">Shown on your account button. Leave it empty to show your Albion name.</p>
+        <p class="auth-field-err" id="signup-display-err"></p>
+      </div>
+      <button class="auth-submit" id="signup-submit" type="submit">Create account</button>
+      <p class="auth-switch">Already have an account?
+        <button type="button" class="auth-link" data-auth-view="login">Back to login</button></p>
+    </form>
+
+    <div class="auth-info" id="auth-info" hidden>
+      <div id="auth-info-body"></div>
+      <div class="auth-actions">
+        <button type="button" class="auth-submit" id="auth-info-primary"></button>
+        <button type="button" class="auth-secondary" id="auth-info-secondary" hidden></button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<!-- The profile dialog (_profile.js): the account's names and the weapon
+     lines its player plays. The sign-in dialog's chrome, wider for the
+     lists. Each list has its own combobox; a chip moves a weapon between
+     the lists or removes it. -->
+<dialog class="auth-dialog profile-dialog" id="profile-dialog" aria-modal="true" aria-labelledby="profile-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="profile-title">Profile</h2>
+        <span class="profile-email" id="profile-email"></span>
+      </div>
+      <button type="button" class="auth-close" id="profile-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="profile-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="profile-notice" role="status" hidden></p>
+
+    <form class="auth-form" id="profile-form" novalidate>
+      <div class="profile-names">
+        <div class="auth-field">
+          <label for="profile-albion">Albion character name</label>
+          <input class="text-input" id="profile-albion" maxlength="64" name="albion_name" type="text"
+            autocomplete="off" autocapitalize="off" spellcheck="false" required
+            aria-describedby="profile-albion-err">
+          <p class="auth-field-err" id="profile-albion-err"></p>
+        </div>
+        <div class="auth-field">
+          <label for="profile-server">Albion server</label>
+          <select id="profile-server" name="albion_server" required aria-describedby="profile-server-err">
+            <option value="">Choose your server</option>
+            <option value="americas">Americas</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+          </select>
+          <p class="auth-field-err" id="profile-server-err"></p>
+        </div>
+        <div class="auth-field profile-wide">
+          <label for="profile-display">Display name <span class="opt">optional</span></label>
+          <input class="text-input" id="profile-display" maxlength="64" name="display_name" type="text"
+            autocomplete="nickname" spellcheck="false"
+            aria-describedby="profile-display-hint profile-display-err">
+          <p class="auth-hint" id="profile-display-hint">Shown on your account button. Leave it empty to show your Albion name.</p>
+          <p class="auth-field-err" id="profile-display-err"></p>
+        </div>
+      </div>
+
+      <p class="auth-hint pw-note" id="pw-note" role="status" hidden></p>
+
+      <section class="pw-group" aria-labelledby="pw-main-label">
+        <h3 class="pw-label" id="pw-main-label">Main weapons</h3>
+        <p class="auth-hint">What you bring when the caller needs you.</p>
+        <ul class="pw-list" id="pw-main" aria-labelledby="pw-main-label"></ul>
+        <div class="pw-combo">
+          <label class="sr-only" for="pw-add-main">Add a main weapon</label>
+          <input class="text-input" id="pw-add-main" type="text" role="combobox"
+            aria-autocomplete="list" aria-expanded="false" aria-controls="pw-results-main"
+            autocomplete="off" spellcheck="false" placeholder="type a weapon name">
+          <ul class="pw-results" id="pw-results-main" role="listbox" aria-label="Main weapons to add" hidden></ul>
+        </div>
+      </section>
+
+      <section class="pw-group" aria-labelledby="pw-secondary-label">
+        <h3 class="pw-label" id="pw-secondary-label">Can also play</h3>
+        <p class="auth-hint">What you can swap to when the comp needs it.</p>
+        <ul class="pw-list" id="pw-secondary" aria-labelledby="pw-secondary-label"></ul>
+        <div class="pw-combo">
+          <label class="sr-only" for="pw-add-secondary">Add a weapon you can also play</label>
+          <input class="text-input" id="pw-add-secondary" type="text" role="combobox"
+            aria-autocomplete="list" aria-expanded="false" aria-controls="pw-results-secondary"
+            autocomplete="off" spellcheck="false" placeholder="type a weapon name">
+          <ul class="pw-results" id="pw-results-secondary" role="listbox" aria-label="Weapons you can also play to add" hidden></ul>
+        </div>
+      </section>
+
+      <p class="pw-roles" id="pw-roles"></p>
+      <p class="sr-only" id="pw-live" aria-live="polite"></p>
+
+      <div class="profile-actions">
+        <button class="auth-submit" id="profile-save" type="submit">Save profile</button>
+        <span class="profile-dirty" id="profile-dirty" hidden>Unsaved changes</span>
+      </div>
+    </form>
+  </div>
+</dialog>

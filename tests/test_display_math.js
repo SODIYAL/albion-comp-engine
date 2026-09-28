@@ -1,5 +1,6 @@
 /* Killboard display-math tests — usageBucket / cohortContext / cohortAffinity
- * in dashboard/_app.js.
+ * in dashboard/_app.js — plus the supply board's ring geometry and what its
+ * rows show a customer (renderGroups: names, numbers, chips).
  *
  * These three functions are the one display-layer computation that does NOT
  * "show its own mistakes" on screen (the codec-test rationale): a wrong
@@ -361,6 +362,147 @@ function setUsage(baskets) {
           `n=${n} sw=${sw.toFixed(2)} half=${half.toFixed(2)} tick y ${tickY.toFixed(2)} x ${tickXmin.toFixed(1)}..${tickXmax.toFixed(1)}`);
   }
 
+}
+
+/* 7 — the supply board as a customer reads it. renderGroups() runs whole in
+   a vm with the engine reads stubbed; its HTML is read for what is VISIBLE
+   (tags stripped, attributes gone) and what is one hover away (title
+   attributes). Every requirement key the shipped templates use is rendered,
+   so a new capability without a player name or a group fails here. */
+{
+  const DATASET = JSON.parse(fs.readFileSync(
+    path.join(__dirname, "..", "pipeline", "out", "dataset-latest.json"), "utf8"));
+  const KEYS = [...new Set(Object.values(DATASET.templates)
+    .flatMap(t => Object.keys(t.requirements || {})))].sort();
+  const DL = fs.readFileSync(
+    path.join(__dirname, "..", "dashboard", "_decision_layer.js"), "utf8");
+
+  const grab = (re, what) => {
+    const m = SRC.match(re);
+    if (!m) throw new Error(`could not extract ${what} from _app.js`);
+    return m[0];
+  };
+  const ctx = { Math, String, Object, Set, CASE: null };
+  vm.createContext(ctx);
+  for (const [re, what] of [
+    [/const esc = [\s\S]*?\}\[c\]\)\);/, "esc"],
+    [/const GROUP_COL = \{[\s\S]*?\n\};/, "GROUP_COL"],
+    [/const GROUPS = \{[\s\S]*?\n\};/, "GROUPS"],
+    [/const CAP_PROSE = \{[\s\S]*?\n\};/, "CAP_PROSE"],
+    [/const prose = .*;/, "prose"],
+    [/const CAP_LABEL = \{[\s\S]*?\n\};/, "CAP_LABEL"],
+    [/const capLabel = [\s\S]*?;\n/, "capLabel"],
+    [/function ringPath\([\s\S]*?\n\}\nfunction ringTick\([\s\S]*?\n\}/, "ringPath/ringTick"],
+    [/function renderGroups\(\)\{\n[\s\S]*?\n\}/, "renderGroups"],
+  ]) vm.runInContext(grab(re, what), ctx);
+  /* engine reads stubbed from CASE: reqs {cap: {target, soft_cap, min,
+     weight}}, have {cap: n}, mult {cap: style multiplier}, src {cap: source} */
+  vm.runInContext(`
+    var party = [];
+    var DOM = {};
+    function $(id){ return DOM[id] || (DOM[id] = {innerHTML: ""}); }
+    function REQS(){ return CASE.reqs; }
+    function supply(){ return CASE.have; }
+    function supplyFloor(){ return CASE.have; }
+    function target(c){ return CASE.reqs[c].target; }
+    function softCap(c){ return CASE.reqs[c].soft_cap; }
+    function targetMin(c){ return CASE.reqs[c].min; }
+    function floorHit(){ return false; }
+    function targetSource(c){ return (CASE.src && CASE.src[c]) || "harvest"; }
+    var ENG = {weight: c => CASE.reqs[c].weight * ((CASE.mult && CASE.mult[c]) || 1)};
+  `, ctx);
+  const render = c => {
+    ctx.CASE = c;
+    vm.runInContext("renderGroups()", ctx);
+    return vm.runInContext('$("groups").innerHTML', ctx);
+  };
+  const visible = html => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+  const rowsOf = html => [...html.matchAll(/<li class="cap[^"]*">([\s\S]*?)<\/li>/g)].map(m => {
+    const li = m[1];
+    const btn = li.match(/<button class="cap-name" data-cap="([^"]+)"[^>]*>([\s\S]*?)<\/button>/);
+    const val = li.match(/<span class="cap-val" title="([^"]*)">([\s\S]*?)<\/span>/);
+    const sw = li.match(/<span class="cap-sw (\w+)">/);
+    return {cap: btn && btn[1], name: btn ? visible(btn[2]) : "", nameHtml: btn ? btn[2] : "",
+            valTitle: val ? val[1] : "", val: val ? visible(val[2]) : "", cls: sw ? sw[1] : ""};
+  });
+  const groupsOf = html => [...html.matchAll(/<div class="grp"[^>]*>\s*<h3>([^<]*)<\/h3>([\s\S]*?)<\/ul>\s*<\/div>/g)]
+    .map(m => ({heading: m[1], rows: rowsOf(m[2]), titles: [...m[2].matchAll(/<title>([^<]*)<\/title>/g)].map(t => t[1])}));
+  const std = {target: 2, soft_cap: 4, min: 1, weight: 3};
+  const every = {reqs: Object.fromEntries(KEYS.map(k => [k, {...std}])),
+                 have: Object.fromEntries(KEYS.map(k => [k, 2.5]))};
+  const groups = groupsOf(render(every));
+  const allRows = groups.flatMap(g => g.rows);
+
+  check(`supply board renders every shipped requirement (${KEYS.length})`,
+        allRows.length === KEYS.length, `rendered ${allRows.length}: ${allRows.map(r => r.cap).join(",")}`);
+  const keyed = allRows.filter(r => /_/.test(r.name) || r.name === r.cap);
+  check("supply board: every row shows a player name, never an engine key",
+        keyed.length === 0, keyed.map(r => `${r.cap} -> "${r.name}"`).join(", "));
+  const keyedTitles = groups.flatMap(g => g.titles).filter(t => /\b[a-z]+_[a-z_]+\b/.test(t));
+  check("supply board: ring hover text names capabilities, never engine keys",
+        keyedTitles.length === 0, keyedTitles.slice(0, 3).join(" | "));
+  check("supply board: every shipped requirement sits in a named group (no Other fallback)",
+        !groups.some(g => g.heading === "Other"),
+        `Other holds: ${(groups.find(g => g.heading === "Other") || {rows: []}).rows.map(r => r.cap).join(",")}`);
+  const echo = groups.flatMap(g => g.rows.filter(r => r.name.toLowerCase() === g.heading.toLowerCase())
+    .map(r => `${r.cap} "${r.name}" under ${g.heading}`));
+  check("supply board: no row repeats its group heading", echo.length === 0, echo.join(", "));
+
+  const kpM = DL.match(/const KP_LABEL = \{pierce: "([^"]+)"/);
+  if (!kpM) throw new Error("could not extract KP_LABEL.pierce from _decision_layer.js");
+  const shred = allRows.find(r => r.cap === "resist_shred") || {name: ""};
+  check(`supply board: resist_shred reads "${kpM[1]}", the kill-pressure card's word`,
+        shred.name.toLowerCase() === kpM[1].toLowerCase(), `shows "${shred.name}"`);
+
+  /* THE REGRESSION GUARD for the cleanse row that read "6 / 5.6" in amber:
+     the shown pair must never contradict the colour. Under typical (red,
+     amber) the shown have is never above the shown typical; at or over it
+     (green, purple) never below. */
+  let bad = null, n = 0;
+  for (const t of [0.3, 0.8, 1.2, 1.9, 5.6, 9.9, 15.1, 53.2]){
+    for (let h = 0; h <= 2.5 * t + 0.05 && !bad; h += Math.max(0.01, t / 97)){
+      const r = rowsOf(render({reqs: {cleanse: {target: t, soft_cap: 2 * t, min: t / 2, weight: 3}},
+                               have: {cleanse: h}}))[0];
+      const m = r.val.match(/^([\d.]+) \/ ([\d.]+)$/);
+      n++;
+      if (!m){ bad = `have ${h.toFixed(3)} typical ${t}: value "${r.val}" is not "have / typical"`; break; }
+      const [a, b] = [Number(m[1]), Number(m[2])];
+      const under = r.cls === "low" || r.cls === "part";
+      if ((under && a > b) || (!under && a < b))
+        bad = `have ${h.toFixed(3)} typical ${t}: shows "${r.val}" coloured ${r.cls}`;
+    }
+  }
+  check(`supply board: the shown numbers never contradict the colour (${n} cases)`, !bad, bad || "");
+
+  const chips = {reqs: {burst_st: {...std}, engage: {...std}, anti_zone: {...std}, execute: {...std}, peel: {...std}},
+                 have: {burst_st: 3, engage: 3, anti_zone: 3, execute: 3, peel: 3},
+                 mult: {burst_st: 0.35, engage: 1.4},
+                 src: {anti_zone: "content_min", execute: "harvest_borrowed"}};
+  const cr = Object.fromEntries(rowsOf(render(chips)).map(r => [r.cap, r]));
+  const leaked = Object.values(cr).filter(r => /×\s*\d|\bmin\b|~/.test(r.name));
+  check("supply board: style weights and target provenance stay off the visible label",
+        leaked.length === 0, leaked.map(r => `${r.cap} "${r.name}"`).join(", "));
+  check("supply board: a style that leans on a capability shows an up mark with the weight on hover",
+        /▲/.test(cr.engage.name) && /×1\.4|1\.4×|3 → 4\.2/.test(cr.engage.nameHtml),
+        `"${cr.engage.name}"`);
+  check("supply board: a style that cares less shows a down mark with the weight on hover",
+        /▼/.test(cr.burst_st.name) && /0\.35|3 → 1\.1/.test(cr.burst_st.nameHtml),
+        `"${cr.burst_st.name}"`);
+  check("supply board: an unmarked row shows its name alone", cr.peel.name === "Peel", `"${cr.peel.name}"`);
+  /* a narrow column wraps a row's tags below its name instead of pushing
+     the value past the panel edge: "Silences" + "overstacked" + "14.8 / 6.0"
+     overflowed a 203px column. Wrapping needs a break opportunity (white
+     space) before every tag. */
+  const tagged = rowsOf(render({reqs: {silence: {...std}, engage: {...std}},
+                                have: {silence: 9, engage: 9}, mult: {engage: 1.4}}));
+  const glued = tagged.filter(r => /[^\s]<span class="tag/.test(r.nameHtml));
+  check("supply board: every tag on a row name can wrap below the name",
+        tagged.length === 2 && tagged.every(r => /class="tag/.test(r.nameHtml)) && glued.length === 0,
+        glued.map(r => `${r.cap}: ${r.nameHtml}`).join(" | "));
+  check("supply board: a floor-only typical says so on hover",
+        /floor/i.test(cr.anti_zone.valTitle), `title "${cr.anti_zone.valTitle}"`);
+  check("supply board: a borrowed typical says so on hover",
+        /borrowed/i.test(cr.execute.valTitle), `title "${cr.execute.valTitle}"`);
 }
 
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);

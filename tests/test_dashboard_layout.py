@@ -429,21 +429,23 @@ print("L20 - the board shows the TYPICAL winner in four stages, and says when it
 # and the reader concluded three healers at 15 was too many. The label now
 # says typical; the ring reads red below the bare minimum, amber up to
 # typical, green to the soft cap, purple past it (three stages, then purple);
-# a row whose target is not a measured median wears a chip the ENGINE
-# supplies (targetSource) - never a page-side rule.
+# a row whose target is not a measured median says so on hover, in words the
+# ENGINE's provenance picks (targetSource) - never a page-side rule, and
+# never a chip on the visible label (a customer cannot act on provenance).
 check("capability supply vs. typical winner" in SHELL.lower(),
       "L20a the section label says typical winner")
 check("const targetSource = cap => ENG.targetSource(cap);" in APP
       and "const targetMin = cap => ENG.targetMin(cap);" in APP,
       "L20b the page reads provenance and the minimum from the engine")
 board = seg(APP, "function renderGroups", "function renderWeaknesses", "L20 board anchors")
-check("targetSource(" in board and 'class="tag src' in board,
-      "L20c the board chips content_min / borrowed rows from targetSource")
+check("targetSource(" in board and 'class="tag src' not in board,
+      "L20c the board reads content_min / borrowed from targetSource and notes it on hover, not as a chip")
 check('have < lo ? "low"' in board and '"part"' in board and '"met"' in board,
       "L20d the ring has the four stages: low < min <= part < typical <= met < soft cap < over")
 check("/ typical" in board, "L20e the legend value is labelled typical")
-check(".ring.low{" in SHELL and ".cap-sw.low{" in SHELL and ".tag.src{" in SHELL,
-      "L20f the low stage and the src chip are styled")
+check(".ring.low{" in SHELL and ".cap-sw.low{" in SHELL,
+      "L20f the low stage is styled")
+check(".tag.src{" not in SHELL, "L20i the retired src chip took its selector with it")
 why = seg(APP, "function whySentence", "function loadHash", "L20 why anchors")
 check("c !== lead.cap" in why, "L20g the lead gap never appears in 'already covers'")
 sync = seg(APP, "function syncEngine", "function gearsFromLoadout", "L20 sync anchors")
@@ -596,6 +598,139 @@ with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"), encoding
 check(tpl25.get("size_prompt", {}).get("sizes") == [3, 5, 7, 20] and tpl25.get("validated_sizes") == []
       and (tpl25.get("fit") or {}).get("stat") == "none",
       "L25i the Dragon Portal template prompts for 3 / 5 / 7 / 20, validates no size and declares no evidence")
+
+print("L26 - the supply board carries a visible key for its colours and ticks")
+# The four ring stages and the two ticks were explained only in source
+# comments, and a full ring is the comp-fitted ceiling, not the typical
+# winner: a nearly full amber ring read as healthy. The key sits inside the
+# section and reuses the rows' own swatch classes, so its colours cannot
+# drift from the rows'.
+supply_sec = seg(SHELL, '<section id="supply-sec">', "</section>", "L26 supply section anchors")
+ring_key = seg(supply_sec, 'class="ring-key"', "</div>", "L26 key anchors")
+for stage in ("low", "part", "met", "over"):
+    check('class="cap-sw %s"' % stage in ring_key, "L26a the key shows the %s swatch" % stage)
+check('class="k-tick"' in ring_key and 'class="k-tick min"' in ring_key,
+      "L26b the key draws the typical tick and the minimum tick")
+check("typical" in ring_key.lower() and "minimum" in ring_key.lower() and "full ring" in ring_key.lower(),
+      "L26c the key names the typical winner, the minimum and what a full ring means")
+check(".ring-key{" in SHELL and ".k-tick{" in SHELL and ".k-tick.min{" in SHELL,
+      "L26d the key and its ticks are styled")
+
+print("L27 - accounts: the sign-in layer stands apart from the planner")
+# The account scripts rode inside the planner's <script>, and _supabase.js
+# throws when the Supabase library fails to load (a blocked CDN, a strict-CSP
+# host, offline): that one throw stopped the whole planner. The library tag
+# sat in <head>, where it held the first paint on the CDN. Now the library,
+# the client and the account UI load after the planner, each in its own
+# <script>, and the account UI reads and writes no planner state.
+AUTH_JS = read("_auth.js")
+AUTH_CSS = read("_auth.css")
+head = seg(SHELL, "<head>", "</head>", "L27 head anchors")
+check("supabase-js" not in head,
+      "L27a the Supabase library does not hold the first paint from <head>")
+check("window.AUTH_LINK" in head and "access_token" in head and "replaceState" in head,
+      "L27b <head> sets an email link's return aside before the planner rewrites the hash")
+mast = seg(SHELL, '<header class="masthead">', "</header>", "L27 masthead anchors")
+check('id="acct-btn"' in mast and ">Log in<" in mast,
+      "L27c the masthead carries the account button, reading Log in when logged out")
+dlg = seg(SHELL, '<dialog class="auth-dialog"', "</dialog>", "L27 dialog anchors")
+check('aria-modal="true"' in dlg and 'aria-labelledby="auth-title"' in dlg and 'id="auth-title"' in dlg,
+      "L27d the sign-in dialog is modal and titled")
+for fid in ("login-email", "login-password", "signup-email", "signup-password",
+            "signup-albion", "signup-server", "signup-display"):
+    check(('id="%s"' % fid) in dlg and ('for="%s"' % fid) in dlg,
+          "L27e field %s has its label" % fid)
+check('data-auth-view="signup"' in dlg and 'data-auth-view="login"' in dlg,
+      "L27f log in and create account switch to each other")
+check('role="alert"' in dlg, "L27g the dialog's errors are announced, inside the dialog")
+acct_menu = seg(SHELL, 'id="acct-menu"', 'id="acct-menu-err"', "L27 menu anchors")
+check('id="acct-profile"' in acct_menu and 'id="acct-logout"' in acct_menu,
+      "L27h the account menu offers Profile and Log out")
+check(SHELL.find('id="acct-menu"') > SHELL.find("</header>"),
+      "L27i the account menu sits outside the masthead (its backdrop-filter would contain a fixed menu)")
+ui = AUTH_JS[AUTH_JS.find("(function accountUI()"):]
+check(ui != "" and "window.DB" not in ui,
+      "L27j the account UI calls the helpers, never the Supabase client directly")
+check("createClient" not in AUTH_JS, "L27k one Supabase client: _auth.js never creates another")
+check(not re.search(r"\bENG\b|CompEngine|DATASET|\bparty\b|\brender\(|saveHash|loadHash", AUTH_JS),
+      "L27l _auth.js reads and writes no planner or engine state")
+check(not re.search(r"signInUser|signUpUser|signOutUser|getCurrentProfile|window\.DB", APP + DECISION_JS),
+      "L27m the planner never calls the account layer")
+check(all(s in AUTH_CSS for s in (".acct-btn{", ".acct-menu{", ".auth-dialog{", ".auth-dialog::backdrop{")),
+      "L27n the button, the menu and the dialog are styled in _auth.css")
+check('decision_css + "\\n" + auth_css + "\\n"' in BUILD and "+ layout_css" in BUILD,
+      "L27o _auth.css is inlined before _layout.css, so layout rules still win on order")
+PAGE = read("index.html")
+SCRIPTS = re.findall(r"<script\b([^>]*)>(.*?)</script>", PAGE, re.S)
+
+
+def script_at(pred):
+    return next((i for i, (attrs, body) in enumerate(SCRIPTS) if pred(attrs, body)), -1)
+
+
+i_app = script_at(lambda a, b: "const DATASET" in b)
+i_cdn = script_at(lambda a, b: "supabase-js" in a)
+i_client = script_at(lambda a, b: "window.supabase.createClient" in b)
+i_auth = script_at(lambda a, b: "function signInUser" in b)
+check(min(i_app, i_cdn, i_client, i_auth) >= 0,
+      "L27p the built page carries the planner, the library, the client and the account UI",
+      "script indices app=%d cdn=%d client=%d auth=%d" % (i_app, i_cdn, i_client, i_auth))
+check(0 <= i_app < i_cdn < i_client < i_auth,
+      "L27q each loads after the planner, in its own <script>: a failure there stops only itself",
+      "script indices app=%d cdn=%d client=%d auth=%d" % (i_app, i_cdn, i_client, i_auth))
+check(i_app >= 0 and "signInUser" not in SCRIPTS[i_app][1] and "createClient" not in SCRIPTS[i_app][1],
+      "L27r the planner's <script> carries no account code")
+
+print("L28 - the profile: names and weapon lists, the account layer's first data")
+# The profile is the first user-owned data (supabase/migrations) and the
+# pattern later modules follow: its own script after _auth.js, identity
+# from window.Account, the client only in its helpers, and a weapon catalog
+# derived at build - the engine's role_class, never a second role read.
+PROFILE_JS = read("_profile.js")
+pdlg = seg(SHELL, '<dialog class="auth-dialog profile-dialog"', "</dialog>", "L28 dialog anchors")
+check('aria-modal="true"' in pdlg and 'aria-labelledby="profile-title"' in pdlg and 'id="profile-title"' in pdlg,
+      "L28a the profile dialog is modal and titled")
+for fid in ("profile-albion", "profile-server", "profile-display", "pw-add-main", "pw-add-secondary"):
+    check(('id="%s"' % fid) in pdlg and ('for="%s"' % fid) in pdlg, "L28b field %s has its label" % fid)
+for where in ("main", "secondary"):
+    tag = re.search(r'<input[^>]*\bid="pw-add-%s"[^>]*>' % where, pdlg)
+    tag = tag.group(0) if tag else ""
+    check('role="combobox"' in tag and ('aria-controls="pw-results-%s"' % where) in tag
+          and 'aria-expanded="false"' in tag,
+          "L28c the %s picker is a combobox bound to its listbox" % where)
+    check(re.search(r'id="pw-results-%s" role="listbox"' % where, pdlg) is not None,
+          "L28d the %s picker's results are a listbox" % where)
+check('aria-live="polite"' in pdlg and 'role="alert"' in pdlg,
+      "L28e list changes and errors are announced")
+check(not re.search(r"\bENG\b|CompEngine|DATASET|\bparty\b|\brender\(|saveHash|loadHash", PROFILE_JS),
+      "L28f _profile.js reads and writes no planner or engine state")
+profile_ui = PROFILE_JS[PROFILE_JS.find("(function profileUI()"):]
+check(profile_ui != "" and "window.DB" not in profile_ui and "createClient" not in PROFILE_JS,
+      "L28g the profile UI calls its helpers, never the Supabase client")
+check('window.Account.registerView("profile"' in PROFILE_JS and "window.Account.subscribe(" in PROFILE_JS,
+      "L28h the profile reaches identity through window.Account")
+check(not re.search(r"saveMyProfile|loadMyWeapons|saveMyWeapons|ACCOUNT_CATALOG|window\.Account", APP + DECISION_JS),
+      "L28i the planner never calls the account layer's modules")
+check(all(s in AUTH_CSS for s in (".profile-dialog{", ".pw-chip{", ".pw-results{", ".pw-role.frontline{")),
+      "L28j the profile dialog, its chips and its picker are styled in _auth.css")
+check(".profile-names{grid-template-columns:1fr}" in LAYOUT, "L28k on a phone the two names stack (_layout.css)")
+i_profile = script_at(lambda a, b: "const ACCOUNT_CATALOG" in b)
+check(0 <= i_auth < i_profile, "L28l the profile loads after the account UI, in its own <script>",
+      "script indices auth=%d profile=%d" % (i_auth, i_profile))
+m = re.search(r"const ACCOUNT_CATALOG = (\{.*?\});\n", SCRIPTS[i_profile][1]) if i_profile >= 0 else None
+CATALOG = _json.loads(m.group(1)) if m else {}
+with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"), encoding="utf-8") as f:
+    WEAPONS = _json.load(f)["weapons"]
+check(sorted(CATALOG) == sorted(WEAPONS), "L28m the catalog carries every dataset weapon line",
+      "missing %s" % sorted(set(WEAPONS) - set(CATALOG))[:5])
+check(all(CATALOG[k]["name"] == (WEAPONS[k].get("display_name") or k)
+          and bool(CATALOG[k].get("removed")) == bool(WEAPONS[k].get("removed")) for k in CATALOG),
+      "L28n each entry's name and removed flag are the dataset's")
+sys.path.insert(0, os.path.join(ROOT, "engine"))
+from engine import Engine  # noqa: E402
+_eng = Engine()
+drift = [k for k in CATALOG if CATALOG[k]["role"] != _eng.role_of(k)]
+check(not drift, "L28o each entry's role is the engine's role_class (one role read)", str(drift[:5]))
 
 if FAILURES:
 

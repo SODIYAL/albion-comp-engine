@@ -115,6 +115,10 @@ py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, g
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
 node tests/test_live_party.js       # companion equipment -> loadout gear keys
+node tests/test_auth_ui.js          # account layer: validation, error wording, email-link return
+node tests/test_profile.js          # profile: weapon lists, search, roles, what the helpers send
+py -3 tests/test_supabase_schema.py # account database rules as text: RLS, grants, functions, client bounds = database bounds
+node tests/test_supabase_rls.mjs    # migrations in a real Postgres (needs: npm install --no-save @electric-sql/pglite@0.5.8)
 py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on published comps minus one member
 ```
 
@@ -181,6 +185,12 @@ Three applications with explicit boundaries (each directory's README is its cont
   `out/portal_stats.json`) is a killboard surface with no engine at all.
 - **Companion** — `companion/` (C# photon sniffer), talks to the page over
   `localhost:53321` only; zero build-time coupling.
+- **Accounts** — the Supabase project (schema and rules in `supabase/`,
+  migrations applied in order, never edited once applied) and the
+  dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`, each
+  its own `<script>` after the planner). Identity and persistent user data:
+  profiles and weapon lists now; guilds, comps, CTAs, sign-ups and
+  attendance next (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:
 
@@ -223,6 +233,12 @@ Rules a change must not break. The decision behind each is logged in
 - **Three layers, never merged**: engine truth / display explanation / observed
   evidence. The UI never computes a score; killboard prevalence, cohort families
   and reference builds never feed scoring. Popularity is not effectiveness.
+- **Accounts never score**: the account layer reads no planner state and the
+  planner never calls it; no account row (profile, weapon list, sign-up,
+  attendance) is a scoring input without a logged decision. Every account
+  table follows `supabase/README.md` (RLS first, anon revoked, column grants,
+  invoker functions); `test_supabase_schema.py` and `test_supabase_rls.mjs`
+  pin it.
 - **Anti-circularity**: comps that calibrated a template never drive retuning
   against their own gate results. Gate findings are hypotheses, never fixes; a
   template retune is a logged decision.

@@ -4,8 +4,8 @@ Comp Zaddy's planner UI: a single self-contained HTML page, generated — never
 hand-edited.
 
 - `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,
-  `_decision_layer.js/.css`, `_explainer.html` — the **sources** (the `_`
-  prefix marks them).
+  `_decision_layer.js/.css`, `_supabase.js`, `_auth.js/.css`, `_profile.js`,
+  `_explainer.html` — the **sources** (the `_` prefix marks them).
 - `build.py` — the bundler: inlines the dataset, the engine
   (`engine/app_scoring.js`), the sources, and a parity fixture into
   `index.html` + `how-it-works.html` here and the GitHub Pages copies in
@@ -89,6 +89,55 @@ looking at it.
   already shown (`AVOID`) and takes what it returns.
 - The companion app talks to this page only over `localhost:53321` — no
   build-time coupling.
+
+## Accounts
+
+Log in and create account run on Supabase Auth; a `profiles` row
+(`albion_name`, `display_name`) is created per account by the project's
+`handle_new_user` trigger from the sign-up metadata. The schema, its rules
+and its tests: `supabase/README.md`.
+
+- `_supabase.js` creates the one client (`window.DB`). `_auth.js` holds the
+  helpers (`signUpUser`, `signInUser`, `signOutUser`, `getCurrentUser`,
+  `getCurrentProfile`, …), the pure validation/wording functions, the UI kit
+  every account dialog shares (`acctWireDialog`, `acctBusy`/`acctIdle`,
+  `acctFlagFields`, `acctMessage`), and the account UI, which calls only the
+  helpers. `_auth.css` is the chrome of every account surface; the phone
+  placement rules live in `_layout.css`. The markup (the masthead button,
+  the account menu, the dialogs) is in `_shell.html`.
+- **`window.Account`** is the identity store feature modules use instead of
+  asking Supabase again: `current()`, `subscribe(fn)` (called at once and on
+  every identity or profile change), `updateProfile(row)` (a module saved
+  the profile; the masthead follows), `registerView(name, open)` (the
+  account menu's items, e.g. Profile).
+- **Feature modules** follow `_profile.js`: their own source file and
+  `<script>` after `_auth.js`; helpers (the only code touching `window.DB`),
+  pure functions (node-tested), and a UI that reaches identity through
+  `window.Account`. `_profile.js` edits the character (Albion name and
+  server), the display name, and the player's weapon lists (main / can also
+  play), the lists saved through `set_my_weapons` in one transaction.
+- **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
+  weapon line's display name, role class and render item. The role is the
+  engine's `role_class`, stamped at build — the account layer never calls
+  the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
+- **Isolated from the planner.** The Supabase library, `_supabase.js`,
+  `_auth.js` and `_profile.js` load after the planner, each in its own
+  `<script>`: a blocked or slow CDN never holds the first paint, and a throw
+  there stops only itself. The account layer reads and writes no planner
+  state and never scores; the planner never calls it.
+- **Email links.** A verification link returns with the session in the hash
+  (`#access_token=…`). The planner's boot rewrites the hash with the saved
+  comp, so a `<head>` script sets the return aside first (`AUTH_LINK`) and
+  strips the tokens from the address bar; `_auth.js` adopts it. The link
+  returns to the page that signed up only when that address is on the
+  Supabase project's Redirect URLs list; otherwise it goes to the Site URL.
+- The session persists in `localStorage` (supabase-js); `onAuthStateChange`
+  keeps the button in step with other tabs.
+
+`tests/test_auth_ui.js` and `tests/test_profile.js` pin validation, error
+wording, the name fallback, link parsing, the weapon lists and search, and
+what the helpers send; `test_dashboard_layout.py` L27–L28 pin the markup,
+the isolation, the boundary and the catalog.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also
 works from `file://`, but automated browsers block it).

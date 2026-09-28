@@ -316,7 +316,7 @@ const GROUPS = {
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
   Control:   ["stun","root","silence","interrupt","knockback_displace","slow","clump_create","peel"],
   Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain","damage_debuff","max_health_cut"],
-  Damage:    ["burst_st","burst_aoe","sustained_dps","execute"],
+  Damage:    ["burst_st","burst_aoe","sustained_dps","execute","ranged_presence"],
   Tempo:     ["mobility","catch","buff_allies"],
 };
 
@@ -339,23 +339,27 @@ const CAP_PROSE = {
   /* interrupt taxonomy: stopping a cast mid-channel is its own
      thing, not silence — Badon's cloud, Snare Charge, Forbidden Stab */
   interrupt:"cast interrupts",
+  /* one unit per weapon whose autoattack fights from range */
+  ranged_presence:"players fighting from range",
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
 /* User-facing short titles: headline surfaces speak
    player, never engine — no snake_case keys, no awkward wordings. The
-   full prose stays one hover away in tooltips. */
+   full prose stays one hover away in tooltips. A label never repeats its
+   supply-board group heading, and resist_shred speaks the kill-pressure
+   card's word (pierce). */
 const CAP_LABEL = {
-  tankiness:"Frontline", heal_sustain:"Sustain healing", heal_burst:"Burst healing",
+  tankiness:"Tankiness", heal_sustain:"Sustain healing", heal_burst:"Burst healing",
   cleanse:"Cleanse", self_sustain:"Self-sustain",
   engage:"Engage", disengage:"Disengage", anti_dive:"Anti-dive",
   zone_control:"Zone control", stun:"Stuns", root:"Roots", silence:"Silences",
   slow:"Slows", clump_create:"Clump", knockback_displace:"Displace", peel:"Peel",
   purge:"Purge", anti_zone:"Zone clear", heal_reduction:"Anti-heal",
-  resist_shred:"Shred", energy_drain:"Energy drain", damage_debuff:"Damage debuff",
-  max_health_cut:"Health cut", burst_st:"Single burst", burst_aoe:"AoE burst",
+  resist_shred:"Pierce", energy_drain:"Energy drain", damage_debuff:"Damage debuff",
+  max_health_cut:"Health cut", burst_st:"Single-target burst", burst_aoe:"AoE burst",
   sustained_dps:"Sustained DPS", execute:"Execute", mobility:"Mobility",
   catch:"Catch", buff_allies:"Ally buffs", interrupt:"Interrupts",
-  ranged_presence:"Ranged presence",
+  ranged_presence:"Ranged players",
 };
 const capLabel = c => CAP_LABEL[c] ||
   prose(c).replace(/^./, ch => ch.toUpperCase());
@@ -1521,23 +1525,26 @@ function renderGroups(){
       const tickPct = Math.min(100, t / Math.max(soft, .001) * 100);
       const minPct = Math.min(100, lo / Math.max(soft, .001) * 100);
       /* target provenance: the engine says whether this row's typical is
-         a measured harvest median or a thin content minimum - the chip is
-         its word, not ours */
+         a measured harvest median or a thin content minimum - the hover
+         note is its word, not ours. It stays off the visible label: a
+         customer cannot act on provenance. */
       const src = targetSource(c);
-      const srcTag = src === "content_min"
-        ? `<span class="tag src" title="no measured median for this row at this content: this is the old minimum (the least any fitted comp brought). Read it as a floor, not as what winners field.">min</span>`
+      const srcNote = src === "content_min"
+        ? " — no measured typical for this content yet: this number is the least any fitted comp brought, so read it as a floor"
         : src === "harvest_borrowed"
-        ? `<span class="tag src" title="thin harvest cell: this typical number is borrowed from the nearest band of the same style">~</span>`
+        ? " — few recorded fights at this size: this typical number is borrowed from the nearest size band of the same style"
         : "";
       /* styles multiply a capability's WEIGHT, never its target — surface
          that emphasis here so switching playstyles visibly (and truthfully)
-         changes the board: ×1.6 = this style values the cap more, ×0.7 less */
+         changes the board: an up mark = this style values the cap more, a
+         down mark less. The multiplier itself is one hover away; on the
+         label "×0.35" read as the supply being cut. */
       const baseW = REQS()[c].weight || 0;
       const styledW = ENG.weight(c);
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
-        `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); the typical number is measured per style at 10+, so it already reflects how this style fights — the weight says how much the engine cares">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
-      return {c, have, t, lo, cls, below, over, fillPct, tickPct, minPct, styleTag, srcTag};
+        ` <span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "leans on" : "cares less about"} ${esc(capLabel(c))} (weight ${baseW} → ${styledW.toFixed(1)}, ×${mult.toFixed(2)}); the typical number is measured per style at 10+, so it already reflects how this style fights — the weight says how much the planner values it">${mult > 1 ? "▲" : "▼"}</span>`;
+      return {c, have, t, lo, cls, below, over, fillPct, tickPct, minPct, styleTag, srcNote};
     });
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
@@ -1558,17 +1565,21 @@ function renderGroups(){
       const mk = ringTick(cx, cy, r, x.minPct / 100, Math.min(sw / 2, H - cy - r - 1));
       const d = ringPath(cx, cy, r, x.fillPct / 100);
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
-        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>` : "")
+        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(capLabel(x.c))} ${x.have.toFixed(1)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>` : "")
         + (x.minPct < x.tickPct - 0.5 ? `<line class="ring-tick min" x1="${mk[0]}" y1="${mk[1]}" x2="${mk[2]}" y2="${mk[3]}"/>` : "")
         + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
         + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
     }).join("");
     /* the legend is also the table view: every value stays readable without
-       hovering, and each row keeps the evidence-drawer button */
+       hovering, and each row keeps the evidence-drawer button. Both numbers
+       share one rounding: rounding is monotonic, so the shown pair can never
+       contradict the colour (a whole-number have read 6 / 5.6 in amber).
+       A space precedes every tag so a narrow column wraps the tags below
+       the name instead of pushing the value past the panel edge. */
     const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
         <span class="cap-sw ${x.cls}"></span>
-        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${x.c}${x.below ? '<span class="tag floor">below floor</span>' : ""}${x.over ? '<span class="tag over">overstacked</span>' : ""}${x.styleTag}${x.srcTag}</button>
-        <span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}">${x.have.toFixed(0)} / ${x.t.toFixed(1)}</span>
+        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${esc(capLabel(x.c))}${x.below ? ' <span class="tag floor">below floor</span>' : ""}${x.over ? ' <span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
+        <span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}${x.srcNote}">${x.have.toFixed(1)} / ${x.t.toFixed(1)}</span>
       </li>`).join("");
     return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
       <h3>${g}</h3>

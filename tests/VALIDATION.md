@@ -147,8 +147,9 @@ history.
 ## Decision index
 
 One line per decision or landed finding. `Pin` names the test that holds it
-(T golden, F forge, R roles, V validation-modes, H builds, L layout). The last
-column is the archive file and the section title to search for.
+(T golden, F forge, R roles, V validation-modes, H builds, L layout, DB account
+database schema; `rls` is tests/test_supabase_rls.mjs). The last column is the
+archive file and the section title to search for.
 
 | Date | Decision / finding | Landed as | Pin | Where |
 |---|---|---|---|---|
@@ -278,6 +279,9 @@ column is the archive file and the section title to search for.
 | 09-27 | The Ancient Bone marks a portal kill (a victim carrying `QUESTITEM_TOKEN_DRAGONS` died inside; 1,088 of 25,264 kills in a day; killer parties solo 76% / trio 14% / five 4%, IP p90 1,291); the artifact loader's default population is the battle-list records, the poll's are reached by `source` and `content`; kill-feed records store slimmed events, atomic writes, a lagging official record keeps the poll record; kits and carrier quotas learn from the training split; the self-cost offset refund rides the pick score in both ports (F1d) and every party-level reader compares on the curated key (F1e); the size ask survives the link, generation is gated on it, swap impact reads the dressed roster, live members are found by guid | sample_parties.py, rosters_io.py, build_dataset.py, engine.py, app_scoring.js, _app.js, _decision_layer.js | F1d, F1e, C1-C4, parity 62/62 | 09b, The Ancient Bone marks a portal kill |
 | 09-27 | Dragon Portal stats page: a killboard display surface per matchmaking pool (solo, 2-3, 4-5, 6-7, 15-20) from the Ancient Bone records; weapons ranked by winning parties with dominant share and K/D beside every count, the modal winning build per weapon (one player one vote, from three votes, victims excluded), comps from two sightings with every weapon known; no engine on the page, the planner never reads it | build_portal_stats.py, _portal.html, build.py | P1-P11 | 09b, Dragon Portal stats |
 | 09-27 | The two Drake shards mark a portal kill beside the Ancient Bone (shard-only victims: item power p90 1,295 against 1,442 open world, 52% in a battle that also holds a bone victim, killer parties solo 37% / trio 41% / 4-7 21%; 426 more battles, a fifth, mostly group fights); a per-item tally rides every record, every record keeps its slimmed events so a later marker is a retag away; the poll fires every three minutes | sample_parties.py, poll_events.ps1 | C2d, C3a, C4c | 09b, The Drake shards |
+| 09-28 | Accounts: log in and create account on Supabase Auth, isolated from the planner. The Supabase library, the client and the account UI load after the planner, each in its own `<script>` (inlined into the planner's script, a blocked CDN's throw stopped the whole page); an email link's session is set aside in `<head>` before the planner's boot rewrites the hash. The account layer reads no planner state and never scores | `_supabase.js`, `_auth.js`, `build.py` | L27, `test_auth_ui` | notes/specs/2026-09-28-player-platform-design.md, Architecture |
+| 09-28 | Player profile foundation (platform phase 1): the schema lives in `supabase/migrations`; every table RLS first with anon revoked (the project's default privileges grant new tables to anon), column grants follow the form (the project had granted `authenticated` UPDATE on `id` and the timestamps), names trimmed 1-64 or null, `updated_at` by trigger, `handle_new_user` without API execute (Supabase lints 0028 / 0029); `player_weapons` main / secondary, at most 50, saved through the invoker `set_my_weapons`. Applied to the project | migration `player_profile`, `_profile.js` | DB1-DB5, `rls`, L28 | notes/specs/2026-09-28-player-platform-design.md, Phase 1 decisions |
+| 09-28 | Profiles record the Albion server (americas / asia / europe): character names are unique per server, not across the game, and a guild lives on one. Required in the sign-up and profile forms; null for rows that predate it; a value off the list stored as null, never a failed sign-up | migration `albion_server` | DB5g, `rls` | notes/specs/2026-09-28-player-platform-design.md, Phase 1 decisions |
 
 ## Open questions
 

@@ -339,11 +339,32 @@ Each is decidable today from evidence already in the repo.
   (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
   wiki values) against the dumps. Optional. (Q7)
 
+## Platform: accounts, guilds and CTAs
+
+The persistent ZvZ planning, sign-up and roster platform around the engine.
+Phases, their tables and the patterns phase 1 set:
+`notes/specs/2026-09-28-player-platform-design.md`; the schema rules:
+`supabase/README.md`. Phase 1 (accounts, the editable profile, weapon
+lists) is built.
+
+- **Decide guest sign-up identity** before phase 5: a name only, a name
+  with a claim token kept in the guest's browser, or a Discord login (the
+  spec's open questions weigh each). Maintainer decision.
+- **Enable leaked-password protection** (Supabase Auth, security advisor
+  warning). Project dashboard, no code.
+- **Pin the Supabase library**: `dashboard/build.py` loads
+  `@supabase/supabase-js@2`, a floating major version; pin an exact version
+  with a subresource-integrity hash.
+- **Phase 2, guilds**: `guilds` (on one Albion server, as profiles record
+  theirs), `guild_members` (member / caller / officer / admin), guild-scoped
+  read policies on profiles and weapon lists, a guild panel. Then phases
+  3–12 in order (the spec).
+
 ## Product features (deprioritized until comp quality satisfies)
 
-Saved player profiles; enemy-comp counter drafting; fight-plan generation;
-the blind-validation workflow as a tool; the companion loot module
-(COMPANION_SCOPE.md, proposal only).
+Enemy-comp counter drafting; fight-plan generation; the blind-validation
+workflow as a tool; the companion loot module (COMPANION_SCOPE.md, proposal
+only). Saved player profiles moved to "Platform" above.
 
 - **Seat-vs-label open list** (`notes/findings/2026-09-11-labels-vs-seats.md`):
   14 of 40 seated frontline / support weapons carry none of their seat's
