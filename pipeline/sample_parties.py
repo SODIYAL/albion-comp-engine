@@ -434,6 +434,54 @@ def retag(known):
         f"{c} x{k}" for c, k in marks.most_common()) or "none"), flush=True)
 
 
+REMARK_SINCE = "2026-08-31"   # the Dragonfire update: no portal fight before it
+
+
+def remark(args, known):
+    """Battle-list records harvested before the marker existed carry no
+    `content_marks` and keep no events, so `--retag` cannot reach them:
+    re-fetch their kill events (the official detail carries the victim's
+    inventory) and rewrite them through harvest_battle. Network step; a
+    one-off after a marker lands, never part of a build."""
+    todo = []
+    for name in sorted(os.listdir(CACHE)):
+        rec = read_json(os.path.join(CACHE, name))
+        if not rec or rec.get("source") == "events_poll":
+            continue
+        if "content_marks" in rec:
+            continue
+        # the Ancient Lands opened with the Dragonfire update: a battle
+        # before it cannot hold a portal fight
+        if (rec.get("started_at") or "") < REMARK_SINCE:
+            continue
+        if args.remark_min_players and (rec.get("total_players") or 0) < args.remark_min_players:
+            continue
+        if args.remark_max_players and (rec.get("total_players") or 0) > args.remark_max_players:
+            continue
+        todo.append((rec, rec["battle"], rec.get("total_players") or 0,
+                     os.path.join(CACHE, name)))
+    todo.sort(key=lambda t: t[0].get("started_at") or "", reverse=True)   # newest first
+    print(f"remark: {len(todo)} battle-list record(s) without marks to re-fetch, "
+          f"{max(1, args.workers)} worker(s)", flush=True)
+    import concurrent.futures as cf
+    marked = 0
+    with cf.ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        futs = [pool.submit(harvest_battle, args, known, {}, bid, total, path)
+                for _rec, bid, total, path in todo]
+        for fut, (_rec, bid, _t, path) in zip(futs, todo):
+            try:
+                line, _k, _e = fut.result()
+            except Exception as ex:
+                print(f"  battle {bid} failed: {ex!r}", flush=True)
+                continue
+            new = read_json(path) or {}
+            if (new.get("content_marks") or {}).get("ancient_lands"):
+                marked += 1
+                line += "   ANCIENT LANDS"
+            print(line, flush=True)
+    print(f"remark: {marked} of {len(todo)} re-fetched battles carry a portal mark", flush=True)
+
+
 def poll_events(args, known):
     """The kill-feed poll: the newest events, grouped by battle, merged
     into per-battle cache records. Cache only. Prints the KillArea tally
@@ -558,6 +606,14 @@ def harvest_battle(args, known, b, bid, total, path):
         "parties": list(parties.values()),
         "participant_sets": list(participants.values()),
     }
+    prev = read_json(path) if os.path.exists(path) else None
+    if prev and prev.get("source") == "events_poll":
+        # the poll saw this battle first: its marks and stored events ride
+        # along, so a capped or partial event fetch can never lose a tag
+        for c, n in (prev.get("content_marks") or {}).items():
+            rec["content_marks"][c] = max(rec["content_marks"].get(c, 0), n)
+        if prev.get("raw_events"):
+            rec["raw_events"] = prev["raw_events"]
     write_json_atomic(path, rec)
     return (f"  battle {bid}: {total} players, {len(kills)} kills, "
             f"{ev_ok} events fetched, {len(parties)} distinct parties",
@@ -915,6 +971,17 @@ def main():
                          "page; the feed exposes about 1,000)")
     ap.add_argument("--analyze", action="store_true",
                     help="with --poll-events: also rewrite the artifact")
+    ap.add_argument("--remark", action="store_true",
+                    help="network: re-fetch the events of battle-list records "
+                         "that predate the content marker and rewrite them "
+                         "with marks (a one-off after a marker lands)")
+    ap.add_argument("--remark-min-players", type=int, default=0,
+                    help="with --remark: only records of this many listed "
+                         "players or more")
+    ap.add_argument("--remark-max-players", type=int, default=0,
+                    help="with --remark: only records of this many listed "
+                         "players or fewer (0 = no ceiling); 8-14 is the "
+                         "5v5 / 7v7 portal band")
     ap.add_argument("--retag", action="store_true",
                     help="offline: rebuild every kill-feed record's tallies "
                          "from its stored events (a new marker reaching "
@@ -929,6 +996,9 @@ def main():
 
     if args.retag:
         retag(known)
+        return
+    if args.remark:
+        remark(args, known)
         return
     if args.poll_events:
         poll_events(args, known)

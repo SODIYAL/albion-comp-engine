@@ -1,4 +1,4 @@
-# Kill-feed poll (a scheduled task, every 5 minutes). One pass of
+# Kill-feed poll (a scheduled task, every 3 minutes). One pass of
 # sample_parties.py --poll-events: the newest ~1,000 kill events from the
 # official gameinfo feed, grouped by battle and merged into per-battle
 # cache records (source: events_poll). Cache only: it never rewrites the
@@ -13,14 +13,17 @@
 # role's equipment in the list itself, exposes only the newest thousand
 # kills, and portals open on 30 / 60 / 180 minute locks, so the kills
 # arrive in bursts; a poll every five minutes catches each small-bracket
-# kill. Every record carries the event's KillArea, the content classifier
+# kill (measured: a five-minute poll's p90 reached 600 new events and its
+# peak 875 against the feed's cap of about 1,000, so one skipped run at
+# peak lost kills; three minutes keeps the headroom). Every record
+# carries the event's KillArea, the content classifier
 # the API exposes, so the first portal kill observed names the label the
 # derive steps then select on (sample_parties.py "CONTENT TAG").
 #
-# Registered as a Windows scheduled task (every 5 minutes, current user,
+# Registered as a Windows scheduled task (every 3 minutes, current user,
 # 4 minute limit, HIDDEN window) from PowerShell:
 #   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\poll_events.ps1"'
-#   $t = New-ScheduledTaskTrigger -Once -At (Get-Date).Date -RepetitionInterval (New-TimeSpan -Minutes 5) -RepetitionDuration (New-TimeSpan -Days 3650)
+#   $t = New-ScheduledTaskTrigger -Once -At (Get-Date).Date -RepetitionInterval (New-TimeSpan -Minutes 3) -RepetitionDuration (New-TimeSpan -Days 3650)
 #   $s = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Minutes 4) -StartWhenAvailable -MultipleInstances IgnoreNew
 #   Register-ScheduledTask -TaskName "CompForge kill-feed poll" -Action $a -Trigger $t -Settings $s -Force
 # Remove with:

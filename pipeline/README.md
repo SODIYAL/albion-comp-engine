@@ -434,7 +434,7 @@ HEAD (`--base` for another revision). Review the report, then commit.
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
   in the band. The cache keeps every battle and the analysis reads all of
   it, so a focused night adds to the corpus, never narrows it.
-- `pipeline/poll_events.ps1` — "CompForge kill-feed poll", every 5 minutes:
+- `pipeline/poll_events.ps1` — "CompForge kill-feed poll", every 3 minutes:
   `sample_parties.py --poll-events` reads the newest ~1,000 kill events off
   the official feed (the killer's party and every combat role's equipment
   ride the list itself), groups them by battle and merges them into
@@ -459,7 +459,10 @@ HEAD (`--base` for another revision). Review the report, then commit.
   an `ancient_lands` battle (`content_marks` beside `kill_areas`; an
   instanced KillArea outranks the marker). Undercounts, never invents.
   `--retag` rebuilds every kill-feed record from its stored events when
-  a marker is added. POPULATION: `rosters_io.load()` defaults to the
+  a marker is added; `--remark` re-fetches the events of battle-list
+  records harvested before the marker existed (network, a one-off). A
+  battle-list harvest that replaces a kill-feed record carries its marks
+  and stored events forward. POPULATION: `rosters_io.load()` defaults to the
   battle-list records only, the population every shipped table was
   fitted on; the poll's records are reached by `source="events_poll"` /
   `"all"` and `content="ancient_lands"`. STORAGE: kill-feed records keep
