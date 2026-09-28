@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Dragon Portal stats: the weapons, builds and comps that win inside the Ancient Lands, per matchmaking pool, from the killboard.">
+<link rel="icon" type="image/png" href="assets/brand/comp-zaddy-logo.png">
+<title>Dragon Portal Stats</title>
+<style>
+:root{color-scheme:dark;--bg:#08080D;--surface:#11111A;--surface-hi:#191927;--ink:#F2F0EB;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#29293A;--ok:#35E68A;--fire:#FF7A45;--sans:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(720px 420px at 12% -5%,rgba(255,122,69,.14),transparent 70%),radial-gradient(640px 380px at 90% 0%,rgba(157,92,255,.12),transparent 70%),var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+a{color:var(--gold-hi)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--rule)}
+.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700}
+.brand img{width:30px;height:30px;border-radius:8px}
+.top nav a{margin-left:14px;font-size:.92em;color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
+.hero .eyebrow{font-size:.78em;letter-spacing:.12em;text-transform:uppercase;color:var(--fire)}
+.hero h1{margin:6px 0 8px;font-size:clamp(26px,4vw,40px);line-height:1.1}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{margin:0;max-width:760px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.chip{padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-size:.85em;color:var(--muted)}
+.chip b{color:var(--ink);font-variant-numeric:tabular-nums}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+.tab{padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--muted);cursor:pointer;font:inherit}
+.tab[aria-selected="true"]{background:var(--surface-hi);color:var(--ink);border-color:var(--gold)}
+.tab small{display:block;font-size:.76em;color:var(--quiet)}
+.pool-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin:8px 0 12px}
+.pool-head h2{margin:0;font-size:1.35em}
+.pool-head .sub{color:var(--muted);font-size:.9em}
+section.block{margin:18px 0 28px}
+section.block h3{margin:0 0 8px;font-size:1.02em;color:var(--gold-hi)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93em}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:middle}
+th{font-size:.78em;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.row{cursor:pointer}
+tr.row:hover td{background:rgba(255,255,255,.03)}
+tr.row[aria-expanded="true"] td{background:rgba(255,201,58,.06)}
+.w{display:inline-flex;align-items:center;gap:8px}
+.w img{width:28px;height:28px;border-radius:6px;background:#1c1c28}
+.bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:#22222f;vertical-align:middle;margin-right:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar.dom i{background:var(--gold)}
+tr.detail td{background:var(--surface-hi);white-space:normal}
+.kit{display:flex;flex-wrap:wrap;gap:10px;padding:4px 0}
+.slot{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);min-width:190px}
+.slot img{width:34px;height:34px;border-radius:6px;background:#1c1c28}
+.slot .s{font-size:.72em;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet)}
+.slot .n{font-weight:600}
+.slot .v{font-size:.8em;color:var(--muted)}
+.comp{display:flex;flex-wrap:wrap;gap:6px}
+.comp .w{padding:2px 8px 2px 2px;border:1px solid var(--rule);border-radius:999px;background:var(--surface-hi);font-size:.9em}
+.comp .w img{width:22px;height:22px}
+.empty{padding:22px;border:1px dashed var(--rule);border-radius:12px;color:var(--muted)}
+.note{margin:26px 0 0;padding:16px 18px;border:1px solid var(--rule);border-radius:12px;background:var(--surface);color:var(--muted);font-size:.92em}
+.note h3{margin:0 0 6px;font-size:1em;color:var(--ink)}
+.note ul{margin:6px 0 0;padding-left:18px}
+.note li{margin:3px 0}
+@media (max-width:640px){.bar{width:54px}th,td{padding:7px 8px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><img src="assets/brand/comp-zaddy-logo.png" alt=""><span>Comp Zaddy</span></a>
+  <nav><a href="index.html">Planner</a><a href="welcome.html">Welcome</a><a href="how-it-works.html">How it works</a></nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">Dragon Portal · the Ancient Lands</div>
+    <h1>What <em>wins</em> inside the portals.</h1>
+    <p>Every killer party the killboard saw inside the Ancient Lands, sorted by matchmaking pool: the weapons that win solo, the builds they wear, and the 3v3, 5v5 and 7v7 comps that come out on top. Read from the killboard, refreshed with every fold.</p>
+    <div class="chips" id="chips"></div>
+  </section>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div id="pool"></div>
+  <aside class="note">
+    <h3>How to read this page</h3>
+    <ul>
+      <li><b>Who counts.</b> A killer party at kill time, one vote per party per battle. Solo is the lone killer. The kill is tagged as a portal kill when the victim carried an Ancient Bone, an item that only exists inside the Ancient Lands, so a kill whose victim had not yet earned one is not counted: the numbers undercount, they never invent.</li>
+      <li><b>Dominant</b> means the party took no deaths in that battle. <b>K/D</b> is the party's kills over its deaths, summed over its members. Prevalence is how often a weapon or comp appears among winners; it is not a measure of strength on its own.</li>
+      <li><b>Builds</b> are the modal item per slot over winning players of that weapon in that pool, one player one vote, shown once three players have worn the slot. Victims' gear is what died and is not shown.</li>
+      <li><b>Pools</b> follow the game's matchmaking: solo, 2 to 3, 4 to 5, 6 to 7 and 15 to 20. Small samples are marked; a pool with under 40 parties is a glimpse, not a meta.</li>
+      <li>This page is a killboard surface. The planner's recommendations do not read it.</li>
+    </ul>
+  </aside>
+</main>
+<!-- PORTAL_STATS -->
+<script>
+(() => {
+  const S = PORTAL_STATS, RENDER = "https://render.albiononline.com/v1/item/";
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const pct = x => x === null || x === undefined ? "–" : Math.round(x * 100) + "%";
+  const num = x => x === null || x === undefined ? "–" : x;
+  const icon = (id, size) => `<img src="${RENDER}${esc(id)}.png?size=${size || 64}&quality=1" width="${size ? size / 2 : 28}" height="${size ? size / 2 : 28}" alt="" loading="lazy" onerror="this.remove()">`;
+  const ORDER = ["solo", "trio", "five", "seven", "large"];
+  const chips = document.getElementById("chips");
+  chips.innerHTML = [
+    `<span class="chip">portal battles <b>${S.battles}</b></span>`,
+    `<span class="chip">killer parties <b>${S.parties}</b></span>`,
+    `<span class="chip">window <b>${esc((S.window.first || "?").replace("T", " "))}</b> to <b>${esc((S.window.last || "?").replace("T", " "))}</b> UTC</span>`,
+    `<span class="chip">as of the last fold <b>${esc(S.generated_at.replace("T", " "))}</b></span>`
+  ].join("");
+  const tabs = document.getElementById("tabs");
+  tabs.innerHTML = ORDER.map(k => { const p = S.pools[k]; return `<button class="tab" role="tab" data-pool="${k}" aria-selected="false">${esc(p.label)}<small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small></button>`; }).join("");
+  const host = document.getElementById("pool");
+  const gearIcon = id => icon(/^T\d+_/.test(id) ? id : "T6_" + id, 68);
+  function kitHtml(b){
+    const order = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+    const slots = order.filter(s => b[s]);
+    if (!slots.length) return `<div class="kit"><span class="v">Fewer than ${S.thresholds.slot_votes} winning players seen on any slot yet.</span></div>`;
+    return `<div class="kit">${slots.map(s => `<div class="slot">${gearIcon(b[s].id)}<div><div class="s">${esc(s)}</div><div class="n">${esc(b[s].name)}</div><div class="v">${b[s].votes} of ${b[s].of} players · ${pct(b[s].share)}</div></div></div>`).join("")}</div>`;
+  }
+  function weaponsTable(p){
+    if (!p.weapons.length) return `<div class="empty">No portal killer parties of this size have been seen yet. The poll keeps collecting; this page updates with the next fold.</div>`;
+    return `<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th><th class="num">Parties</th><th class="num">Share</th><th class="num">Players</th><th>Dominant</th><th class="num">K/D</th><th class="num">Median IP</th></tr></thead><tbody>${
+      p.weapons.map((w, i) => `<tr class="row" data-w="${i}" aria-expanded="false" title="click for the winning build"><td>${i + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}" hidden><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
+    }</tbody></table></div>`;
+  }
+  function compsTable(p){
+    if (p.sizes[0] < 2) return "";
+    const body = p.comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th><th class="num">Seen</th><th>Dominant</th><th class="num">K/D</th></tr></thead><tbody>${
+      p.comps.map((c, i) => `<tr><td>${i + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr>`).join("")
+    }</tbody></table></div>` : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
+    return `<section class="block"><h3>Comps that won (every member's weapon known, seen ${S.thresholds.comp_sightings}+ times)</h3>${body}</section>`;
+  }
+  function show(k){
+    const p = S.pools[k];
+    tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pool === k ? "true" : "false"));
+    host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span></div>
+      <section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>${compsTable(p)}`;
+    try { localStorage.setItem("portal-pool", k); } catch (e) {}
+  }
+  tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
+  host.addEventListener("click", e => {
+    const r = e.target.closest("tr.row"); if (!r) return;
+    const d = host.querySelector(`tr.detail[data-for="${r.dataset.w}"]`);
+    const open = r.getAttribute("aria-expanded") === "true";
+    r.setAttribute("aria-expanded", open ? "false" : "true");
+    if (d) d.hidden = open;
+  });
+  let start = "solo";
+  try { const s = localStorage.getItem("portal-pool"); if (s && S.pools[s]) start = s; } catch (e) {}
+  const fromHash = location.hash.replace("#", "");
+  if (S.pools[fromHash]) start = fromHash;
+  show(start);
+})();
+</script>
+</body>
+</html>

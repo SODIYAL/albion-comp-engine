@@ -416,6 +416,19 @@ def main():
                               f"<script>const WELCOME_CONFIG = {js(welcome_config)};</script>")
     with open(os.path.join(DASH, "welcome.html"), "w", encoding="utf-8", newline="\n") as f:
         f.write(welcome)
+    # Dragon Portal stats: a killboard DISPLAY surface (pipeline/
+    # build_portal_stats.py -> out/portal_stats.json). The page embeds the
+    # artifact and nothing else: no engine, no dataset, no scoring.
+    portal_src = os.path.join(DASH, "_portal.html")
+    with open(portal_src, encoding="utf-8") as f:
+        portal = f.read()
+    portal_stats_path = os.path.join(PIPE, "out", "portal_stats.json")
+    with open(portal_stats_path, encoding="utf-8") as f:
+        portal_stats = json.load(f)
+    portal = portal.replace("<!-- PORTAL_STATS -->",
+                            f"<script>const PORTAL_STATS = {js(portal_stats)};</script>")
+    with open(os.path.join(DASH, "portal.html"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(portal)
     # GitHub Pages copy (Settings -> Pages -> main /docs): byte-for-byte the
     # same complete standards-mode document as the dashboard build.
     docs = os.path.join(ROOT, "docs")
@@ -429,12 +442,16 @@ def main():
     with open(os.path.join(docs, "welcome.html"), "w", encoding="utf-8",
               newline="\n") as f:
         f.write(welcome)
+    with open(os.path.join(docs, "portal.html"), "w", encoding="utf-8",
+              newline="\n") as f:
+        f.write(portal)
     open(os.path.join(docs, ".nojekyll"), "w").close()
 
     m = data["_meta"]
     print(f"wrote dashboard/index.html  ({len(out)/1024:.0f} KB)")
     print(f"wrote dashboard/how-it-works.html  ({len(explainer)/1024:.0f} KB)")
     print(f"wrote dashboard/welcome.html  ({len(welcome)/1024:.0f} KB)")
+    print(f"wrote dashboard/portal.html  ({len(portal)/1024:.0f} KB)")
     print(f"  dataset v{m['version']}: {m['weapons_curated']} curated / "
           f"{m['weapons_illustrative']} illustrative, release_clean={m['release_clean']}")
     if not m["release_clean"]:

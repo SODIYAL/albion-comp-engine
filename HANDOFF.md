@@ -285,6 +285,14 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   carries no `n=` while the ask is open; no generation path forges past
   an open ask; a hand-set plan survives the switch. A template whose
   `fit.stat` is `none` shows the borrowed-evidence notice.
+- **Dragon Portal stats page** (`dashboard/_portal.html` ->
+  `portal.html`, linked from the masthead and the welcome page): the
+  killboard's own read of the Ancient Lands per matchmaking pool, from
+  `out/portal_stats.json` (`pipeline/build_portal_stats.py`). Weapons
+  ranked by winning parties with their modal winning build, comps seen
+  twice or more, dominant share and K/D beside every count, small samples
+  marked. A display surface with no engine embedded; the planner's
+  recommendations never read it (three layers, never merged).
 - **Live members are found by guid** (stamped on the member's loadout);
   the weapon match is the fallback for a slot restored without one, so
   two members on one weapon stay two people. Clearing the comp stops

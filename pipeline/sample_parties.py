@@ -672,6 +672,8 @@ def analyze(known):
         battles.append({
             "battle": rec["battle"], "total_players": total,
             "source": rec.get("source") or "battle_list",
+            "started_at": rec.get("started_at"),
+            "first_event_at": rec.get("first_event_at"),
             "kill_areas": dict(areas) if areas else None,
             "content_marks": dict(rec["content_marks"]) if rec.get("content_marks") else None,
             "content": content,

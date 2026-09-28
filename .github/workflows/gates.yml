@@ -30,6 +30,7 @@ jobs:
           python3 pipeline/build_builds.py
           python3 pipeline/build_dataset.py
           python3 pipeline/build_cohort_families.py
+          python3 pipeline/build_portal_stats.py
           python3 dashboard/build.py
 
       - name: engine and evidence gates
@@ -49,6 +50,7 @@ jobs:
           python3 tests/test_skeletons.py
           python3 tests/test_tone.py
           python3 tests/test_content_tag.py
+          python3 tests/test_portal_stats.py
           python3 tests/tier2_blindtest.py v4
 
       - name: display-layer gates

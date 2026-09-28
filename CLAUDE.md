@@ -110,6 +110,7 @@ py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contr
 py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy allowances (forge gates)
 py -3 tests/test_tone.py            # writing conventions on every tracked text file
 py -3 tests/test_content_tag.py     # harvest content tag: KillArea tally, the marker rule, kill-feed records
+py -3 tests/test_portal_stats.py    # Dragon Portal stats artifact + page contracts (display only)
 py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
@@ -141,6 +142,7 @@ py -3 pipeline/build_interactions.py    # interactions.yaml -> out/interactions.
 py -3 pipeline/build_builds.py          # data/ evidence -> out/builds_index.json
 py -3 pipeline/build_dataset.py         # single source of truth: out/dataset-latest.json (fails closed)
 py -3 pipeline/build_cohort_families.py # display-only observed cores (after build_dataset)
+py -3 pipeline/build_portal_stats.py    # display-only Dragon Portal stats (out/portal_stats.json -> portal.html)
 py -3 dashboard/build.py                # regenerates dashboard/index.html + docs/
 ```
 
@@ -175,7 +177,8 @@ Three applications with explicit boundaries (each directory's README is its cont
 - **Frontend** — `dashboard/`: `build.py` bundles the `_`-prefixed sources plus the
   dataset and engine JS into `dashboard/index.html` and `docs/`. Display only: it
   calls the embedded engine and translates; it never computes a score. **Never
-  hand-edit generated pages.**
+  hand-edit generated pages.** `portal.html` (from `_portal.html` +
+  `out/portal_stats.json`) is a killboard surface with no engine at all.
 - **Companion** — `companion/` (C# photon sniffer), talks to the page over
   `localhost:53321` only; zero build-time coupling.
 
