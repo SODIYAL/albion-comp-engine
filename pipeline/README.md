@@ -454,10 +454,15 @@ HEAD (`--base` for another revision). Review the report, then commit.
   derive step can select one content's parties; nothing filters on it.
   CONTENT MARKER: the API labels every Ancient Lands kill OPEN_WORLD, so
   the tag also reads the VICTIM's inventory: the Ancient Bone
-  (`QUESTITEM_TOKEN_DRAGONS`) exists only inside the Ancient Lands, a
-  victim carrying one died there, and a battle holding one such event is
-  an `ancient_lands` battle (`content_marks` beside `kill_areas`; an
-  instanced KillArea outranks the marker). Undercounts, never invents.
+  (`QUESTITEM_TOKEN_DRAGONS`, a quest item spent inside) and the two Drake
+  shards (measured against the bone: the same item-power profile, half of
+  them in a battle that also holds a bone victim, about a fifth more
+  portal battles and mostly group fights) mark a kill; a victim carrying
+  one died there, and a battle holding one such event is an
+  `ancient_lands` battle (`content_marks` beside `kill_areas`, with a
+  per-item tally under `content:item`; an instanced KillArea outranks the
+  marker). Undercounts, never invents. Every record keeps its slimmed
+  events, so a marker added later is a `--retag` away.
   `--retag` rebuilds every kill-feed record from its stored events when
   a marker is added; `--remark` re-fetches the events of battle-list
   records harvested before the marker existed (network, a one-off). A

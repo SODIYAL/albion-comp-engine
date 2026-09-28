@@ -79,7 +79,8 @@ one day, every one OPEN_WORLD), so KillArea alone cannot separate the
 portal fights. The kill event also carries the VICTIM's inventory, and
 the Ancient Bone (`QUESTITEM_TOKEN_DRAGONS`, "Bring it to an Ancient
 Altar") is a quest item earned from Drakes and chests inside the Ancient
-Lands and spent at its altars. A victim carrying one died inside; the
+Lands and spent at its altars, and the two Drake shards mark the same
+(CONTENT_MARKERS, with the measurement). A victim carrying one died inside; the
 killer's party on that event fought inside; a battle holding such an
 event is an Ancient Lands battle (an instance's kills form their own
 battle). Measured on the first day: victims with the bone are killed by
@@ -245,21 +246,36 @@ def read_json(path):
 # on the kill event ("CONTENT MARKER" above). An id matches as a prefix of
 # the item type with its tier and enchant stripped.
 CONTENT_MARKERS = {
-    "ancient_lands": ("QUESTITEM_TOKEN_DRAGONS",),   # Ancient Bone
+    # The Ancient Bone (a quest item spent at the altars inside) and the two
+    # Drake shards (fragments dropped by the Drakes inside; tradable, so a
+    # victim may carry one out). Measured over two days of the kill feed
+    # against the bone: shard-only victims read a killer-party mix of solo
+    # 37% / trio 41% / 4-7 21%, an item power p90 of about 1,295 against
+    # 1,442 for the open world, and 52% of them died in a battle that also
+    # holds a bone victim (2% for an untagged event). They add about a
+    # fifth more portal battles, mostly group fights, which the bone misses
+    # most. The per-item tally under "content:item" keeps the shards
+    # auditable, so they can be dropped without touching the records.
+    "ancient_lands": ("QUESTITEM_TOKEN_DRAGONS",
+                      "SHARD_RANDOM_DUNGEON_ELITE_DRAGON_TOKEN",
+                      "SHARD_FIRE_DRAGON"),
 }
 
 
-def event_marker(d):
-    """The content an event's victim inventory marks, or None."""
+def event_marker(d, item=False):
+    """The content an event's victim inventory marks, or None; with
+    `item`, the (content, marker id) pair (the first marker in table
+    order that the inventory carries)."""
     inv = ((d.get("Victim") or {}).get("Inventory") or [])
+    keys = set()
     for x in inv:
         t = (x or {}).get("Type") if isinstance(x, dict) else None
-        if not t:
-            continue
-        k = re.sub(r"^T\d+_", "", str(t).split("@")[0])
-        for content, ids in CONTENT_MARKERS.items():
-            if any(k.startswith(m) for m in ids):
-                return content
+        if t:
+            keys.add(re.sub(r"^T\d+_", "", str(t).split("@")[0]))
+    for content, ids in CONTENT_MARKERS.items():
+        for m in ids:
+            if any(k.startswith(m) for k in keys):
+                return (content, m) if item else content
     return None
 
 
@@ -275,7 +291,7 @@ def content_tag(areas, marks=None):
             and a != "UNKNOWN"}
     if inst:
         return max(inst.items(), key=lambda kv: (kv[1], kv[0]))[0].lower()
-    marked = {c: n for c, n in (marks or {}).items() if c and n}
+    marked = {c: n for c, n in (marks or {}).items() if c and n and ":" not in c}
     if marked:
         return max(marked.items(), key=lambda kv: (kv[1], kv[0]))[0]
     return "open_world"
@@ -304,9 +320,11 @@ def ingest_event(d, known, builds, parties, participants, areas, stamps,
     sighting came from)."""
     area = d.get("KillArea") or "UNKNOWN"
     areas[area] += 1
-    mark = event_marker(d)
-    if mark and marks is not None:
-        marks[mark] += 1
+    pair = event_marker(d, item=True)
+    mark = pair[0] if pair else None
+    if pair and marks is not None:
+        marks[pair[0]] += 1
+        marks[f"{pair[0]}:{pair[1]}"] += 1     # the per-item tally, audit only
     if d.get("TimeStamp"):
         stamps.append(d["TimeStamp"])
     pool = [("killer", d.get("Killer")),
@@ -423,11 +441,23 @@ def retag(known):
     for name in sorted(os.listdir(CACHE)):
         path = os.path.join(CACHE, name)
         rec = read_json(path)
-        if not rec or rec.get("source") != "events_poll" or not rec.get("raw_events"):
+        if not rec or not rec.get("raw_events"):
             continue
         raw = {e["EventId"]: e for e in rec["raw_events"] if e.get("EventId")}
-        out = rebuild_poll_record(rec["battle"], raw, known)
-        marks.update(out["content_marks"])
+        if rec.get("source") == "events_poll":
+            out = rebuild_poll_record(rec["battle"], raw, known)
+        else:
+            # a battle-list record keeps its official roster and sinks;
+            # only the tallies are recomputed from the stored events
+            mk = collections.Counter()
+            for d in raw.values():
+                pair = event_marker(d, item=True)
+                if pair:
+                    mk[pair[0]] += 1
+                    mk[f"{pair[0]}:{pair[1]}"] += 1
+            out = dict(rec)
+            out["content_marks"] = dict(mk)
+        marks.update({k: v for k, v in out["content_marks"].items() if ":" not in k})
         write_json_atomic(path, out)
         n += 1
     print(f"retag: {n} kill-feed record(s) rebuilt; content markers: " + (", ".join(
@@ -439,7 +469,8 @@ REMARK_SINCE = "2026-08-31"   # the Dragonfire update: no portal fight before it
 
 def remark(args, known):
     """Battle-list records harvested before the marker existed carry no
-    `content_marks` and keep no events, so `--retag` cannot reach them:
+    `content_marks` and keep no events (records written since keep their
+    slimmed events and are a `--retag` away), so `--retag` cannot reach them:
     re-fetch their kill events (the official detail carries the victim's
     inventory) and rewrite them through harvest_battle. Network step; a
     one-off after a marker lands, never part of a build."""
@@ -448,7 +479,7 @@ def remark(args, known):
         rec = read_json(os.path.join(CACHE, name))
         if not rec or rec.get("source") == "events_poll":
             continue
-        if "content_marks" in rec:
+        if "content_marks" in rec and rec.get("raw_events"):
             continue
         # the Ancient Lands opened with the Dragonfire update: a battle
         # before it cannot hold a portal fight
@@ -570,7 +601,7 @@ def harvest_battle(args, known, b, bid, total, path):
     ) or []
     parties, participants, ev_ok = {}, {}, 0
     builds, areas, stamps = {}, collections.Counter(), []
-    marks = collections.Counter()
+    marks, raw_kept = collections.Counter(), []
     for x in kills[:args.max_events]:
         eid = x.get("EventId")
         if not eid:
@@ -582,6 +613,7 @@ def harvest_battle(args, known, b, bid, total, path):
         if not d:
             continue
         ev_ok += 1
+        raw_kept.append(slim_event(d))
         ingest_event(d, known, builds, parties, participants, areas, stamps,
                      marks)
 
@@ -605,6 +637,9 @@ def harvest_battle(args, known, b, bid, total, path):
         "last_event_at": max(stamps) if stamps else None,
         "parties": list(parties.values()),
         "participant_sets": list(participants.values()),
+        # the slimmed events: a marker added later reaches this record
+        # through --retag, never another fetch
+        "raw_events": sorted(raw_kept, key=lambda e: e.get("EventId") or 0),
     }
     prev = read_json(path) if os.path.exists(path) else None
     if prev and prev.get("source") == "events_poll":
@@ -613,7 +648,10 @@ def harvest_battle(args, known, b, bid, total, path):
         for c, n in (prev.get("content_marks") or {}).items():
             rec["content_marks"][c] = max(rec["content_marks"].get(c, 0), n)
         if prev.get("raw_events"):
-            rec["raw_events"] = prev["raw_events"]
+            have = {e.get("EventId") for e in rec["raw_events"]}
+            rec["raw_events"] = sorted(
+                rec["raw_events"] + [e for e in prev["raw_events"] if e.get("EventId") not in have],
+                key=lambda e: e.get("EventId") or 0)
     write_json_atomic(path, rec)
     return (f"  battle {bid}: {total} players, {len(kills)} kills, "
             f"{ev_ok} events fetched, {len(parties)} distinct parties",

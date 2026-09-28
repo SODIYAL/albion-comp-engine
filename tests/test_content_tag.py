@@ -64,6 +64,10 @@ check("C2a the Ancient Bone marks ancient_lands at any tier",
       and sp.event_marker(event(1, "k", "v", ["k"], inv=["QUESTITEM_TOKEN_DRAGONS"])) == "ancient_lands")
 check("C2b dragon-named gear and mounts are not markers",
       sp.event_marker(event(1, "k", "v", ["k"], inv=["T6_SHOES_LEATHER_DRAGON@1", "T5_MOUNT_SWAMPDRAGON_FW_THETFORD"])) is None)
+check("C2d the Drake shards mark ancient_lands too, and the pair form names the item",
+      sp.event_marker(event(1, "k", "v", ["k"], inv=["T6_SHARD_FIRE_DRAGON"])) == "ancient_lands"
+      and sp.event_marker(event(1, "k", "v", ["k"], inv=["T7_SHARD_RANDOM_DUNGEON_ELITE_DRAGON_TOKEN"]), item=True)
+          == ("ancient_lands", "SHARD_RANDOM_DUNGEON_ELITE_DRAGON_TOKEN"))
 check("C2c an empty or null inventory marks nothing",
       sp.event_marker({"Victim": {"Inventory": [None]}}) is None and sp.event_marker({}) is None)
 
@@ -76,8 +80,9 @@ e2["GroupMembers"][2]["Equipment"]["MainHand"] = None     # c's weapon unknown t
 for e in (e1, e2):
     sp.ingest_event(e, KNOWN, builds, parties, parts, areas, stamps, marks)
 party = parties["a|b|c"]
-check("C3a the battle tally counts every event's KillArea and the marker once per marked event",
-      areas == {"OPEN_WORLD": 2} and marks == {"ancient_lands": 1}, f"areas={dict(areas)} marks={dict(marks)}")
+check("C3a the battle tally counts every event's KillArea, the marker once per marked event, and the item behind it",
+      areas == {"OPEN_WORLD": 2} and marks == {"ancient_lands": 1, "ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1},
+      f"areas={dict(areas)} marks={dict(marks)}")
 check("C3b a party seen twice keeps one record, both sightings counted, the fuller weapons kept",
       party["seen_in_events"] == 2 and party["kill_areas"] == {"OPEN_WORLD": 2}
       and [m["weapon"] for m in party["members"]] == ["2H_HOLYSTAFF", "MAIN_FROSTSTAFF", "MAIN_FROSTSTAFF"],
@@ -96,9 +101,11 @@ check("C4b the roster is rebuilt from the events: the killer's kills, the victim
       {r["name"]: (r["kills"], r["deaths"]) for r in r1["roster"]}
       == {"a": (2, 0), "b": (0, 0), "c": (0, 0), "x": (0, 1), "y": (0, 1)}
       and r1["total_players"] == 5 and r1["source"] == "events_poll")
-check("C4c the record carries both tallies and the tag reads the marker",
-      r1["kill_areas"] == {"OPEN_WORLD": 2} and r1["content_marks"] == {"ancient_lands": 1}
-      and sp.content_tag(r1["kill_areas"], r1["content_marks"]) == "ancient_lands")
+check("C4c the record carries both tallies and the tag reads the marker, never the per-item key",
+      r1["kill_areas"] == {"OPEN_WORLD": 2}
+      and r1["content_marks"] == {"ancient_lands": 1, "ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1}
+      and sp.content_tag(r1["kill_areas"], r1["content_marks"]) == "ancient_lands"
+      and sp.content_tag({"OPEN_WORLD": 1}, {"ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1}) == "open_world")
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")
