@@ -1,10 +1,10 @@
 {
- "_generated": "2026-09-27",
+ "_generated": "2026-09-28",
  "_min_distinct": 40,
  "_seat_read": "Engine.seat_of: the weapon's primary seat (role_menu[0]) \u2014 the one role read; a menu-less weapon counts toward no seat",
  "_source": {
-  "party_rosters_sha256": "9fb8c40530d5de3665fb67a1cb884c8627c9dcc07ae0a32e1949d72c4fb6152e",
-  "party_styles_sha256": "336f079ac56e27b7104b54bce430376225e04a7bb12c9e3690554b91eced7589"
+  "party_rosters_sha256": "f40d9a1652baa1ac05505442fedd5d13716a9a9d8ef1b5636b6c977af22d616a",
+  "party_styles_sha256": "ec083705151198e14b2d6acae6c0df3e773c625eb3216ba767b3429d617b570d"
  },
  "_split": {
   "holdout_mod": 5,
@@ -24,7 +24,7 @@
     "2H_ARCANESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 923,
+     "n": 972,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -33,7 +33,7 @@
     "2H_ARCANESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 188,
+     "n": 206,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -42,7 +42,7 @@
     "2H_ARCANESTAFF_HELL": {
      "free": 1,
      "max": 1,
-     "n": 814,
+     "n": 859,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -50,17 +50,17 @@
     },
     "2H_ARCANE_RINGPAIR_AVALON": {
      "free": 1,
-     "max": 1,
-     "n": 153,
+     "max": 2,
+     "n": 161,
      "p50": 1.0,
-     "p90": 1.0,
-     "share2": 0.1,
+     "p90": 2.0,
+     "share2": 0.11,
      "share3": 0.0
     },
     "2H_AXE": {
      "free": 1,
      "max": 2,
-     "n": 429,
+     "n": 485,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.14,
@@ -69,7 +69,7 @@
     "2H_AXE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 2151,
+     "n": 2271,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.12,
@@ -78,34 +78,34 @@
     "2H_BOW": {
      "free": 1,
      "max": 1,
-     "n": 69,
+     "n": 73,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.06,
-     "share3": 0.01
+     "share2": 0.07,
+     "share3": 0.03
     },
     "2H_BOW_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 353,
+     "n": 376,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.2,
+     "share2": 0.21,
      "share3": 0.06
     },
     "2H_BOW_HELL": {
      "free": 1,
      "max": 5,
-     "n": 438,
+     "n": 460,
      "p50": 1.0,
      "p90": 5.0,
-     "share2": 0.48,
-     "share3": 0.32
+     "share2": 0.47,
+     "share3": 0.31
     },
     "2H_BOW_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 308,
+     "n": 333,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -114,25 +114,25 @@
     "2H_CLAWPAIR": {
      "free": 1,
      "max": 2,
-     "n": 244,
+     "n": 267,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.23,
+     "share2": 0.22,
      "share3": 0.05
     },
     "2H_CLAYMORE": {
      "free": 1,
      "max": 1,
-     "n": 75,
+     "n": 81,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.0,
+     "share2": 0.02,
      "share3": 0.0
     },
     "2H_CLAYMORE_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 273,
+     "n": 284,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -141,7 +141,7 @@
     "2H_CLEAVER_HELL": {
      "free": 1,
      "max": 1,
-     "n": 761,
+     "n": 829,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -150,7 +150,7 @@
     "2H_COMBATSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 140,
+     "n": 149,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -159,16 +159,16 @@
     "2H_CROSSBOW": {
      "free": 1,
      "max": 1,
-     "n": 209,
+     "n": 226,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.08,
-     "share3": 0.0
+     "share2": 0.09,
+     "share3": 0.01
     },
     "2H_CROSSBOWLARGE": {
      "free": 1,
      "max": 1,
-     "n": 79,
+     "n": 81,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -177,16 +177,16 @@
     "2H_CROSSBOWLARGE_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 126,
+     "n": 133,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.18,
-     "share3": 0.09
+     "share2": 0.17,
+     "share3": 0.08
     },
     "2H_CROSSBOW_CANNON_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 697,
+     "n": 749,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -195,7 +195,7 @@
     "2H_CURSEDSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 574,
+     "n": 598,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -204,16 +204,16 @@
     "2H_DAGGERPAIR": {
      "free": 1,
      "max": 2,
-     "n": 331,
+     "n": 362,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.32,
-     "share3": 0.09
+     "share2": 0.31,
+     "share3": 0.08
     },
     "2H_DAGGER_KATAR_AVALON": {
      "free": 1,
      "max": 4,
-     "n": 148,
+     "n": 157,
      "p50": 1.0,
      "p90": 4.0,
      "share2": 0.28,
@@ -222,7 +222,7 @@
     "2H_DEMONICSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 41,
+     "n": 50,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -231,7 +231,7 @@
     "2H_DOUBLEBLADEDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 154,
+     "n": 167,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -240,7 +240,7 @@
     "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 57,
+     "n": 61,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -249,7 +249,7 @@
     "2H_DUALAXE_KEEPER": {
      "free": 1,
      "max": 3,
-     "n": 801,
+     "n": 872,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.38,
@@ -258,16 +258,16 @@
     "2H_DUALCROSSBOW_HELL": {
      "free": 1,
      "max": 2,
-     "n": 183,
+     "n": 193,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.15,
-     "share3": 0.04
+     "share2": 0.16,
+     "share3": 0.05
     },
     "2H_DUALHAMMER_HELL": {
      "free": 1,
      "max": 1,
-     "n": 112,
+     "n": 121,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -276,7 +276,7 @@
     "2H_DUALMACE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 1444,
+     "n": 1506,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.13,
@@ -285,34 +285,34 @@
     "2H_DUALSCIMITAR_UNDEAD": {
      "free": 1,
      "max": 3,
-     "n": 594,
+     "n": 622,
      "p50": 1.0,
      "p90": 3.0,
-     "share2": 0.3,
+     "share2": 0.31,
      "share3": 0.11
     },
     "2H_DUALSICKLE_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 244,
+     "n": 262,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
+     "share2": 0.18,
      "share3": 0.04
     },
     "2H_DUALSWORD": {
      "free": 1,
      "max": 2,
-     "n": 259,
+     "n": 271,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.12,
+     "share2": 0.13,
      "share3": 0.01
     },
     "2H_ENIGMATICORB_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 433,
+     "n": 460,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -321,7 +321,7 @@
     "2H_ENIGMATICSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 530,
+     "n": 569,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -330,7 +330,7 @@
     "2H_FIRESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 85,
+     "n": 89,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -339,7 +339,7 @@
     "2H_FIRESTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 253,
+     "n": 265,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.2,
@@ -348,7 +348,7 @@
     "2H_FIRE_RINGPAIR_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 1501,
+     "n": 1602,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
@@ -357,16 +357,16 @@
     "2H_FLAIL": {
      "free": 1,
      "max": 1,
-     "n": 44,
+     "n": 49,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.05,
+     "share2": 0.04,
      "share3": 0.0
     },
     "2H_FROSTSTAFF": {
      "free": 1,
      "max": 2,
-     "n": 537,
+     "n": 566,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.17,
@@ -375,7 +375,7 @@
     "2H_FROSTSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 48,
+     "n": 55,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -384,7 +384,7 @@
     "2H_GLACIALSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 107,
+     "n": 112,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -393,7 +393,7 @@
     "2H_GLAIVE": {
      "free": 1,
      "max": 1,
-     "n": 48,
+     "n": 49,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -402,7 +402,7 @@
     "2H_GLAIVE_CRYSTAL": {
      "free": 1,
      "max": 2,
-     "n": 415,
+     "n": 434,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.24,
@@ -411,16 +411,16 @@
     "2H_HALBERD": {
      "free": 1,
      "max": 1,
-     "n": 174,
+     "n": 186,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.04,
      "share3": 0.0
     },
     "2H_HALBERD_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 75,
+     "n": 78,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -429,7 +429,7 @@
     "2H_HAMMER": {
      "free": 1,
      "max": 1,
-     "n": 214,
+     "n": 224,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -438,16 +438,16 @@
     "2H_HAMMER_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 451,
+     "n": 473,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
-     "share3": 0.0
+     "share3": 0.01
     },
     "2H_HAMMER_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 107,
+     "n": 113,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -456,7 +456,7 @@
     "2H_HAMMER_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 55,
+     "n": 60,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -465,7 +465,7 @@
     "2H_HARPOON_HELL": {
      "free": 1,
      "max": 1,
-     "n": 1096,
+     "n": 1159,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -474,16 +474,16 @@
     "2H_HOLYSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 298,
+     "n": 324,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
-     "share3": 0.0
+     "share3": 0.01
     },
     "2H_HOLYSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 489,
+     "n": 504,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -492,7 +492,7 @@
     "2H_HOLYSTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 629,
+     "n": 666,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.1,
@@ -501,7 +501,7 @@
     "2H_HOLYSTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 695,
+     "n": 757,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -510,7 +510,7 @@
     "2H_ICECRYSTAL_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 1790,
+     "n": 1892,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -519,7 +519,7 @@
     "2H_ICEGAUNTLETS_HELL": {
      "free": 1,
      "max": 1,
-     "n": 357,
+     "n": 371,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -528,7 +528,7 @@
     "2H_INFERNOSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 163,
+     "n": 174,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -537,7 +537,7 @@
     "2H_INFERNOSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 433,
+     "n": 463,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -546,25 +546,25 @@
     "2H_IRONCLADEDSTAFF": {
      "free": 1,
      "max": 3,
-     "n": 50,
+     "n": 52,
      "p50": 1.0,
      "p90": 3.0,
-     "share2": 0.34,
-     "share3": 0.18
+     "share2": 0.35,
+     "share3": 0.19
     },
     "2H_KNUCKLES_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 122,
+     "n": 133,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.02,
+     "share2": 0.03,
      "share3": 0.01
     },
     "2H_KNUCKLES_HELL": {
      "free": 1,
      "max": 1,
-     "n": 266,
+     "n": 281,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -573,7 +573,7 @@
     "2H_KNUCKLES_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 370,
+     "n": 392,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -582,7 +582,7 @@
     "2H_KNUCKLES_SET1": {
      "free": 1,
      "max": 1,
-     "n": 77,
+     "n": 87,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -591,16 +591,16 @@
     "2H_KNUCKLES_SET2": {
      "free": 1,
      "max": 3,
-     "n": 1060,
+     "n": 1130,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.38,
-     "share3": 0.16
+     "share3": 0.15
     },
     "2H_KNUCKLES_SET3": {
      "free": 1,
      "max": 1,
-     "n": 1442,
+     "n": 1523,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -609,7 +609,7 @@
     "2H_LONGBOW": {
      "free": 1,
      "max": 2,
-     "n": 2067,
+     "n": 2193,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.3,
@@ -618,16 +618,16 @@
     "2H_LONGBOW_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 324,
+     "n": 344,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.27,
+     "share2": 0.28,
      "share3": 0.09
     },
     "2H_MACE": {
      "free": 1,
      "max": 2,
-     "n": 1418,
+     "n": 1518,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.12,
@@ -636,7 +636,7 @@
     "2H_MACE_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 201,
+     "n": 209,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -645,16 +645,16 @@
     "2H_NATURESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 101,
+     "n": 113,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.09,
+     "share2": 0.08,
      "share3": 0.0
     },
     "2H_NATURESTAFF_HELL": {
      "free": 1,
      "max": 1,
-     "n": 1424,
+     "n": 1527,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -663,7 +663,7 @@
     "2H_NATURESTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 255,
+     "n": 260,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -672,34 +672,34 @@
     "2H_POLEHAMMER": {
      "free": 1,
      "max": 1,
-     "n": 1127,
+     "n": 1209,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
-     "share3": 0.01
+     "share3": 0.0
     },
     "2H_QUARTERSTAFF": {
      "free": 1,
-     "max": 1,
-     "n": 146,
+     "max": 2,
+     "n": 158,
      "p50": 1.0,
-     "p90": 1.0,
+     "p90": 1.3,
      "share2": 0.1,
      "share3": 0.01
     },
     "2H_QUARTERSTAFF_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 243,
+     "n": 265,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.15,
+     "share2": 0.14,
      "share3": 0.02
     },
     "2H_RAM_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 82,
+     "n": 85,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -717,7 +717,7 @@
     "2H_ROCKSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 252,
+     "n": 260,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -726,7 +726,7 @@
     "2H_SCYTHE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 153,
+     "n": 167,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -735,16 +735,16 @@
     "2H_SHAPESHIFTER_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 212,
+     "n": 224,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
-     "share3": 0.0
+     "share3": 0.01
     },
     "2H_SHAPESHIFTER_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 69,
+     "n": 71,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -753,7 +753,7 @@
     "2H_SHAPESHIFTER_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 1180,
+     "n": 1248,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -762,16 +762,25 @@
     "2H_SHAPESHIFTER_SET2": {
      "free": 1,
      "max": 1,
-     "n": 793,
+     "n": 860,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
      "share3": 0.0
     },
+    "2H_SHAPESHIFTER_SET3": {
+     "free": 1,
+     "max": 1,
+     "n": 43,
+     "p50": 1.0,
+     "p90": 1.0,
+     "share2": 0.07,
+     "share3": 0.0
+    },
     "2H_SKULLORB_HELL": {
      "free": 1,
      "max": 1,
-     "n": 47,
+     "n": 52,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -780,7 +789,7 @@
     "2H_TWINSCYTHE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 89,
+     "n": 96,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -788,26 +797,26 @@
     },
     "2H_WARBOW": {
      "free": 1,
-     "max": 3,
-     "n": 124,
+     "max": 2,
+     "n": 132,
      "p50": 1.0,
-     "p90": 2.7,
+     "p90": 2.0,
      "share2": 0.18,
      "share3": 0.1
     },
     "2H_WILDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 186,
+     "n": 196,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.05,
+     "share2": 0.06,
      "share3": 0.0
     },
     "MAIN_1HCROSSBOW": {
      "free": 1,
      "max": 1,
-     "n": 84,
+     "n": 85,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -816,7 +825,7 @@
     "MAIN_ARCANESTAFF": {
      "free": 1,
      "max": 2,
-     "n": 559,
+     "n": 594,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
@@ -825,7 +834,7 @@
     "MAIN_ARCANESTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 679,
+     "n": 714,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -834,25 +843,25 @@
     "MAIN_AXE": {
      "free": 1,
      "max": 2,
-     "n": 285,
+     "n": 300,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.19,
-     "share3": 0.04
+     "share3": 0.03
     },
     "MAIN_CURSEDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 247,
+     "n": 255,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.09,
+     "share2": 0.1,
      "share3": 0.01
     },
     "MAIN_CURSEDSTAFF_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 599,
+     "n": 639,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -861,16 +870,16 @@
     "MAIN_CURSEDSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 615,
+     "n": 649,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.0,
+     "share2": 0.01,
      "share3": 0.0
     },
     "MAIN_CURSEDSTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 906,
+     "n": 959,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -879,25 +888,25 @@
     "MAIN_DAGGER": {
      "free": 1,
      "max": 2,
-     "n": 47,
+     "n": 49,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.15,
+     "share2": 0.14,
      "share3": 0.04
     },
     "MAIN_DAGGER_HELL": {
      "free": 1,
      "max": 2,
-     "n": 383,
+     "n": 413,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
+     "share2": 0.16,
      "share3": 0.02
     },
     "MAIN_FIRESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 218,
+     "n": 232,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.08,
@@ -906,7 +915,7 @@
     "MAIN_FIRESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 40,
+     "n": 43,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -915,7 +924,7 @@
     "MAIN_FIRESTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 75,
+     "n": 78,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -924,7 +933,7 @@
     "MAIN_FROSTSTAFF": {
      "free": 1,
      "max": 2,
-     "n": 388,
+     "n": 418,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.21,
@@ -933,7 +942,7 @@
     "MAIN_FROSTSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 81,
+     "n": 83,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -942,16 +951,16 @@
     "MAIN_HAMMER": {
      "free": 1,
      "max": 1,
-     "n": 563,
+     "n": 599,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.08,
+     "share2": 0.07,
      "share3": 0.0
     },
     "MAIN_HOLYSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 154,
+     "n": 165,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.08,
@@ -960,16 +969,16 @@
     "MAIN_HOLYSTAFF_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 3611,
+     "n": 3830,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.43,
-     "share3": 0.1
+     "share3": 0.09
     },
     "MAIN_MACE": {
      "free": 1,
      "max": 2,
-     "n": 2010,
+     "n": 2155,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.18,
@@ -978,16 +987,16 @@
     "MAIN_MACE_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 267,
+     "n": 287,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.02,
      "share3": 0.0
     },
     "MAIN_MACE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 421,
+     "n": 448,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -996,16 +1005,16 @@
     "MAIN_NATURESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 392,
+     "n": 429,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.07,
+     "share2": 0.06,
      "share3": 0.0
     },
     "MAIN_NATURESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 92,
+     "n": 96,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -1014,16 +1023,16 @@
     "MAIN_RAPIER_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 904,
+     "n": 971,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.16,
+     "share2": 0.15,
      "share3": 0.03
     },
     "MAIN_ROCKMACE_KEEPER": {
      "free": 1,
      "max": 2,
-     "n": 860,
+     "n": 903,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.21,
@@ -1032,7 +1041,7 @@
     "MAIN_SCIMITAR_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 68,
+     "n": 73,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1041,7 +1050,7 @@
     "MAIN_SPEAR": {
      "free": 1,
      "max": 1,
-     "n": 84,
+     "n": 91,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1050,7 +1059,7 @@
     "MAIN_SPEAR_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 274,
+     "n": 293,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1059,28 +1068,28 @@
     "MAIN_SPEAR_LANCE_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 84,
+     "n": 89,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.01,
+     "share2": 0.02,
      "share3": 0.0
     },
     "MAIN_SWORD": {
      "free": 1,
      "max": 1,
-     "n": 40,
+     "n": 42,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.02,
      "share3": 0.0
     },
     "MAIN_SWORD_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 50,
+     "n": 55,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.08,
+     "share2": 0.07,
      "share3": 0.0
     }
    },
@@ -1088,7 +1097,7 @@
     "2H_ARCANESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 2466,
+     "n": 2576,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.08,
@@ -1097,7 +1106,7 @@
     "2H_ARCANESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 336,
+     "n": 355,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1106,7 +1115,7 @@
     "2H_ARCANESTAFF_HELL": {
      "free": 1,
      "max": 1,
-     "n": 1812,
+     "n": 1899,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -1115,25 +1124,25 @@
     "2H_ARCANE_RINGPAIR_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 281,
+     "n": 301,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
-     "share3": 0.0
+     "share2": 0.16,
+     "share3": 0.01
     },
     "2H_AXE": {
      "free": 1,
      "max": 2,
-     "n": 241,
+     "n": 266,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.12,
+     "share2": 0.11,
      "share3": 0.01
     },
     "2H_AXE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 4235,
+     "n": 4436,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.15,
@@ -1141,62 +1150,62 @@
     },
     "2H_BOW": {
      "free": 1,
-     "max": 2,
-     "n": 50,
+     "max": 1,
+     "n": 51,
      "p50": 1.0,
-     "p90": 1.1,
+     "p90": 1.0,
      "share2": 0.1,
      "share3": 0.0
     },
     "2H_BOW_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 269,
+     "n": 286,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.21,
-     "share3": 0.08
+     "share2": 0.2,
+     "share3": 0.07
     },
     "2H_BOW_HELL": {
      "free": 1,
      "max": 3,
-     "n": 419,
+     "n": 443,
      "p50": 1.0,
      "p90": 3.0,
-     "share2": 0.36,
-     "share3": 0.16
+     "share2": 0.37,
+     "share3": 0.17
     },
     "2H_BOW_KEEPER": {
      "free": 1,
      "max": 2,
-     "n": 238,
+     "n": 247,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.18,
+     "share2": 0.17,
      "share3": 0.07
     },
     "2H_CLAWPAIR": {
      "free": 1,
      "max": 2,
-     "n": 92,
+     "n": 98,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.23,
+     "share2": 0.21,
      "share3": 0.04
     },
     "2H_CLAYMORE_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 246,
+     "n": 263,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.07,
+     "share2": 0.06,
      "share3": 0.0
     },
     "2H_CLEAVER_HELL": {
      "free": 1,
      "max": 1,
-     "n": 1201,
+     "n": 1258,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1205,16 +1214,16 @@
     "2H_COMBATSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 259,
+     "n": 280,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.04,
      "share3": 0.0
     },
     "2H_CROSSBOW": {
      "free": 1,
      "max": 1,
-     "n": 102,
+     "n": 104,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -1223,7 +1232,7 @@
     "2H_CROSSBOWLARGE": {
      "free": 1,
      "max": 1,
-     "n": 55,
+     "n": 59,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1232,25 +1241,25 @@
     "2H_CROSSBOWLARGE_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 115,
+     "n": 125,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.12,
-     "share3": 0.08
+     "share2": 0.13,
+     "share3": 0.09
     },
     "2H_CROSSBOW_CANNON_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 794,
+     "n": 840,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.13,
+     "share2": 0.12,
      "share3": 0.01
     },
     "2H_CURSEDSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 1509,
+     "n": 1574,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1259,25 +1268,25 @@
     "2H_DAGGERPAIR": {
      "free": 1,
      "max": 2,
-     "n": 109,
+     "n": 114,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.22,
-     "share3": 0.08
+     "share3": 0.09
     },
     "2H_DAGGER_KATAR_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 139,
+     "n": 147,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.14,
+     "share2": 0.15,
      "share3": 0.07
     },
     "2H_DEMONICSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 47,
+     "n": 48,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -1286,16 +1295,16 @@
     "2H_DOUBLEBLADEDSTAFF": {
      "free": 1,
      "max": 2,
-     "n": 77,
+     "n": 80,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.12,
+     "share2": 0.11,
      "share3": 0.0
     },
     "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 61,
+     "n": 66,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1304,7 +1313,7 @@
     "2H_DUALAXE_KEEPER": {
      "free": 1,
      "max": 3,
-     "n": 480,
+     "n": 506,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.32,
@@ -1313,25 +1322,25 @@
     "2H_DUALCROSSBOW_HELL": {
      "free": 1,
      "max": 2,
-     "n": 95,
+     "n": 97,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.12,
+     "share2": 0.11,
      "share3": 0.0
     },
     "2H_DUALHAMMER_HELL": {
      "free": 1,
      "max": 1,
-     "n": 91,
+     "n": 96,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.1,
+     "share2": 0.09,
      "share3": 0.01
     },
     "2H_DUALMACE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 3405,
+     "n": 3571,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.17,
@@ -1340,16 +1349,16 @@
     "2H_DUALSCIMITAR_UNDEAD": {
      "free": 1,
      "max": 3,
-     "n": 963,
+     "n": 1023,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.46,
-     "share3": 0.2
+     "share3": 0.21
     },
     "2H_DUALSICKLE_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 86,
+     "n": 94,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.12,
@@ -1358,16 +1367,16 @@
     "2H_DUALSWORD": {
      "free": 1,
      "max": 2,
-     "n": 153,
+     "n": 165,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.18,
+     "share2": 0.17,
      "share3": 0.02
     },
     "2H_ENIGMATICORB_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 1421,
+     "n": 1485,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1376,7 +1385,7 @@
     "2H_ENIGMATICSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 981,
+     "n": 1033,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -1385,16 +1394,16 @@
     "2H_FIRESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 81,
+     "n": 88,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.0,
+     "share2": 0.01,
      "share3": 0.0
     },
     "2H_FIRESTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 339,
+     "n": 367,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.17,
@@ -1403,7 +1412,7 @@
     "2H_FIRE_RINGPAIR_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 2838,
+     "n": 2978,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.16,
@@ -1412,7 +1421,7 @@
     "2H_FLAIL": {
      "free": 1,
      "max": 1,
-     "n": 128,
+     "n": 133,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -1421,25 +1430,25 @@
     "2H_FROSTSTAFF": {
      "free": 1,
      "max": 2,
-     "n": 1036,
+     "n": 1089,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.28,
+     "share2": 0.27,
      "share3": 0.09
     },
     "2H_FROSTSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 40,
+     "n": 42,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.05,
      "share3": 0.0
     },
     "2H_GLACIALSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 124,
+     "n": 126,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -1448,7 +1457,7 @@
     "2H_GLAIVE": {
      "free": 1,
      "max": 1,
-     "n": 68,
+     "n": 69,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -1457,7 +1466,7 @@
     "2H_GLAIVE_CRYSTAL": {
      "free": 1,
      "max": 2,
-     "n": 996,
+     "n": 1035,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.29,
@@ -1466,16 +1475,16 @@
     "2H_HALBERD": {
      "free": 1,
      "max": 1,
-     "n": 199,
+     "n": 215,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.06,
-     "share3": 0.01
+     "share2": 0.07,
+     "share3": 0.0
     },
     "2H_HALBERD_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 87,
+     "n": 93,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1484,7 +1493,7 @@
     "2H_HAMMER": {
      "free": 1,
      "max": 1,
-     "n": 227,
+     "n": 236,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1493,7 +1502,7 @@
     "2H_HAMMER_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 992,
+     "n": 1038,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1502,7 +1511,7 @@
     "2H_HAMMER_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 174,
+     "n": 181,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1511,7 +1520,7 @@
     "2H_HARPOON_HELL": {
      "free": 1,
      "max": 1,
-     "n": 2851,
+     "n": 2973,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1520,7 +1529,7 @@
     "2H_HOLYSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 193,
+     "n": 204,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.1,
@@ -1529,7 +1538,7 @@
     "2H_HOLYSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 1576,
+     "n": 1652,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1538,16 +1547,16 @@
     "2H_HOLYSTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 1096,
+     "n": 1156,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.15,
+     "share2": 0.14,
      "share3": 0.03
     },
     "2H_HOLYSTAFF_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 783,
+     "n": 816,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.13,
@@ -1556,7 +1565,7 @@
     "2H_ICECRYSTAL_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 3486,
+     "n": 3659,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.16,
@@ -1565,7 +1574,7 @@
     "2H_ICEGAUNTLETS_HELL": {
      "free": 1,
      "max": 1,
-     "n": 793,
+     "n": 826,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1574,7 +1583,7 @@
     "2H_INFERNOSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 112,
+     "n": 116,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1583,7 +1592,7 @@
     "2H_INFERNOSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 421,
+     "n": 445,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -1592,7 +1601,7 @@
     "2H_KNUCKLES_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 77,
+     "n": 79,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -1601,7 +1610,7 @@
     "2H_KNUCKLES_HELL": {
      "free": 1,
      "max": 1,
-     "n": 352,
+     "n": 364,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -1610,7 +1619,7 @@
     "2H_KNUCKLES_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 689,
+     "n": 723,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -1619,16 +1628,16 @@
     "2H_KNUCKLES_SET2": {
      "free": 2,
      "max": 4,
-     "n": 1619,
+     "n": 1674,
      "p50": 2.0,
      "p90": 4.0,
      "share2": 0.51,
-     "share3": 0.28
+     "share3": 0.27
     },
     "2H_KNUCKLES_SET3": {
      "free": 1,
      "max": 1,
-     "n": 3730,
+     "n": 3898,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1637,7 +1646,7 @@
     "2H_LONGBOW": {
      "free": 1,
      "max": 3,
-     "n": 2693,
+     "n": 2842,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.34,
@@ -1646,16 +1655,16 @@
     "2H_LONGBOW_UNDEAD": {
      "free": 1,
      "max": 5,
-     "n": 175,
+     "n": 177,
      "p50": 1.0,
-     "p90": 4.6,
-     "share2": 0.27,
+     "p90": 4.4,
+     "share2": 0.28,
      "share3": 0.16
     },
     "2H_MACE": {
      "free": 1,
      "max": 2,
-     "n": 2601,
+     "n": 2738,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.19,
@@ -1664,7 +1673,7 @@
     "2H_MACE_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 287,
+     "n": 308,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1682,7 +1691,7 @@
     "2H_NATURESTAFF_HELL": {
      "free": 1,
      "max": 1,
-     "n": 1963,
+     "n": 2067,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.08,
@@ -1691,7 +1700,7 @@
     "2H_NATURESTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 830,
+     "n": 858,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1700,7 +1709,7 @@
     "2H_POLEHAMMER": {
      "free": 1,
      "max": 1,
-     "n": 2053,
+     "n": 2168,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.08,
@@ -1709,7 +1718,7 @@
     "2H_QUARTERSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 67,
+     "n": 68,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -1718,16 +1727,16 @@
     "2H_QUARTERSTAFF_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 157,
+     "n": 166,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
+     "share2": 0.16,
      "share3": 0.03
     },
     "2H_RAM_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 144,
+     "n": 150,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1736,7 +1745,7 @@
     "2H_ROCKSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 536,
+     "n": 570,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -1745,25 +1754,25 @@
     "2H_SCYTHE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 170,
+     "n": 179,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.05,
+     "share2": 0.04,
      "share3": 0.0
     },
     "2H_SHAPESHIFTER_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 321,
+     "n": 346,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
+     "share2": 0.16,
      "share3": 0.01
     },
     "2H_SHAPESHIFTER_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 134,
+     "n": 139,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -1772,7 +1781,7 @@
     "2H_SHAPESHIFTER_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 2608,
+     "n": 2734,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1781,7 +1790,7 @@
     "2H_SHAPESHIFTER_SET2": {
      "free": 1,
      "max": 1,
-     "n": 1824,
+     "n": 1928,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -1799,10 +1808,10 @@
     "2H_TWINSCYTHE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 81,
+     "n": 88,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.0,
+     "share2": 0.02,
      "share3": 0.0
     },
     "2H_WARBOW": {
@@ -1817,7 +1826,7 @@
     "2H_WILDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 329,
+     "n": 344,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -1826,25 +1835,25 @@
     "MAIN_1HCROSSBOW": {
      "free": 1,
      "max": 1,
-     "n": 40,
+     "n": 42,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.03,
+     "share2": 0.02,
      "share3": 0.0
     },
     "MAIN_ARCANESTAFF": {
      "free": 1,
-     "max": 1,
-     "n": 1508,
+     "max": 2,
+     "n": 1568,
      "p50": 1.0,
-     "p90": 1.0,
+     "p90": 1.3,
      "share2": 0.1,
      "share3": 0.01
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 1403,
+     "n": 1471,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1853,25 +1862,25 @@
     "MAIN_AXE": {
      "free": 1,
      "max": 2,
-     "n": 123,
+     "n": 127,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.22,
+     "share2": 0.21,
      "share3": 0.01
     },
     "MAIN_CURSEDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 80,
+     "n": 81,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
-     "share3": 0.03
+     "share3": 0.02
     },
     "MAIN_CURSEDSTAFF_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 1286,
+     "n": 1351,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1880,7 +1889,7 @@
     "MAIN_CURSEDSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 1547,
+     "n": 1605,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -1889,7 +1898,7 @@
     "MAIN_CURSEDSTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 1884,
+     "n": 1967,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1898,7 +1907,7 @@
     "MAIN_DAGGER_HELL": {
      "free": 1,
      "max": 2,
-     "n": 677,
+     "n": 712,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.3,
@@ -1907,16 +1916,16 @@
     "MAIN_FIRESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 120,
+     "n": 129,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.08,
+     "share2": 0.09,
      "share3": 0.01
     },
     "MAIN_FIRESTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 71,
+     "n": 73,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -1925,7 +1934,7 @@
     "MAIN_FROSTSTAFF": {
      "free": 1,
      "max": 2,
-     "n": 247,
+     "n": 252,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.14,
@@ -1934,7 +1943,7 @@
     "MAIN_FROSTSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 193,
+     "n": 199,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -1943,7 +1952,7 @@
     "MAIN_HAMMER": {
      "free": 1,
      "max": 2,
-     "n": 1278,
+     "n": 1328,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
@@ -1952,7 +1961,7 @@
     "MAIN_HOLYSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 96,
+     "n": 102,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1961,7 +1970,7 @@
     "MAIN_HOLYSTAFF_AVALON": {
      "free": 2,
      "max": 3,
-     "n": 5798,
+     "n": 6077,
      "p50": 2.0,
      "p90": 3.0,
      "share2": 0.73,
@@ -1970,7 +1979,7 @@
     "MAIN_MACE": {
      "free": 1,
      "max": 2,
-     "n": 2621,
+     "n": 2747,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.19,
@@ -1979,16 +1988,16 @@
     "MAIN_MACE_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 608,
+     "n": 640,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.08,
+     "share2": 0.07,
      "share3": 0.0
     },
     "MAIN_MACE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 727,
+     "n": 766,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -1997,7 +2006,7 @@
     "MAIN_NATURESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 886,
+     "n": 934,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -2006,7 +2015,7 @@
     "MAIN_NATURESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 262,
+     "n": 272,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -2015,7 +2024,7 @@
     "MAIN_RAPIER_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 1044,
+     "n": 1104,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.16,
@@ -2024,16 +2033,16 @@
     "MAIN_ROCKMACE_KEEPER": {
      "free": 1,
      "max": 2,
-     "n": 2147,
+     "n": 2252,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.43,
+     "share2": 0.42,
      "share3": 0.03
     },
     "MAIN_SCIMITAR_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 78,
+     "n": 84,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -2042,7 +2051,7 @@
     "MAIN_SPEAR_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 160,
+     "n": 168,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -2051,7 +2060,7 @@
     "MAIN_SPEAR_LANCE_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 51,
+     "n": 53,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2060,7 +2069,7 @@
     "MAIN_SWORD_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 67,
+     "n": 69,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -2071,7 +2080,7 @@
     "2H_ARCANESTAFF": {
      "free": 1,
      "max": 2,
-     "n": 689,
+     "n": 716,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.1,
@@ -2080,7 +2089,7 @@
     "2H_ARCANESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 90,
+     "n": 97,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -2089,7 +2098,7 @@
     "2H_ARCANESTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 492,
+     "n": 513,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
@@ -2097,17 +2106,17 @@
     },
     "2H_ARCANE_RINGPAIR_AVALON": {
      "free": 1,
-     "max": 1,
-     "n": 54,
+     "max": 2,
+     "n": 60,
      "p50": 1.0,
-     "p90": 1.0,
-     "share2": 0.07,
+     "p90": 2.0,
+     "share2": 0.12,
      "share3": 0.02
     },
     "2H_AXE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 1099,
+     "n": 1142,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.15,
@@ -2116,25 +2125,25 @@
     "2H_BOW_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 42,
+     "n": 46,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.17,
-     "share3": 0.1
+     "share2": 0.15,
+     "share3": 0.09
     },
     "2H_BOW_HELL": {
      "free": 1,
      "max": 5,
-     "n": 73,
+     "n": 77,
      "p50": 1.0,
-     "p90": 4.8,
-     "share2": 0.37,
-     "share3": 0.18
+     "p90": 4.4,
+     "share2": 0.38,
+     "share3": 0.19
     },
     "2H_CLAYMORE_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 48,
+     "n": 51,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2143,7 +2152,7 @@
     "2H_CLEAVER_HELL": {
      "free": 1,
      "max": 1,
-     "n": 309,
+     "n": 324,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2152,7 +2161,7 @@
     "2H_COMBATSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 70,
+     "n": 75,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -2161,7 +2170,7 @@
     "2H_CROSSBOW_CANNON_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 148,
+     "n": 159,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.09,
@@ -2170,7 +2179,7 @@
     "2H_CURSEDSTAFF_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 425,
+     "n": 435,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -2178,17 +2187,17 @@
     },
     "2H_DUALAXE_KEEPER": {
      "free": 1,
-     "max": 3,
-     "n": 59,
+     "max": 2,
+     "n": 63,
      "p50": 1.0,
-     "p90": 2.2,
-     "share2": 0.27,
+     "p90": 2.0,
+     "share2": 0.29,
      "share3": 0.1
     },
     "2H_DUALMACE_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 897,
+     "n": 931,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.16,
@@ -2197,16 +2206,16 @@
     "2H_DUALSCIMITAR_UNDEAD": {
      "free": 2,
      "max": 3,
-     "n": 191,
+     "n": 199,
      "p50": 2.0,
      "p90": 3.0,
      "share2": 0.52,
-     "share3": 0.24
+     "share3": 0.25
     },
     "2H_ENIGMATICORB_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 440,
+     "n": 453,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -2215,7 +2224,7 @@
     "2H_ENIGMATICSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 205,
+     "n": 217,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -2224,7 +2233,7 @@
     "2H_FIRESTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 108,
+     "n": 110,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.14,
@@ -2233,7 +2242,7 @@
     "2H_FIRE_RINGPAIR_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 665,
+     "n": 686,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.19,
@@ -2242,16 +2251,16 @@
     "2H_FROSTSTAFF": {
      "free": 1,
      "max": 3,
-     "n": 290,
+     "n": 301,
      "p50": 1.0,
      "p90": 3.0,
-     "share2": 0.31,
-     "share3": 0.12
+     "share2": 0.32,
+     "share3": 0.13
     },
     "2H_GLAIVE_CRYSTAL": {
      "free": 1,
      "max": 3,
-     "n": 248,
+     "n": 259,
      "p50": 1.0,
      "p90": 3.0,
      "share2": 0.35,
@@ -2260,7 +2269,7 @@
     "2H_HALBERD": {
      "free": 1,
      "max": 1,
-     "n": 40,
+     "n": 44,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -2269,7 +2278,7 @@
     "2H_HAMMER": {
      "free": 1,
      "max": 1,
-     "n": 49,
+     "n": 50,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2278,7 +2287,7 @@
     "2H_HAMMER_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 268,
+     "n": 273,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2287,7 +2296,7 @@
     "2H_HARPOON_HELL": {
      "free": 1,
      "max": 1,
-     "n": 855,
+     "n": 888,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2296,25 +2305,25 @@
     "2H_HOLYSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 532,
+     "n": 553,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.04,
+     "share2": 0.05,
      "share3": 0.0
     },
     "2H_HOLYSTAFF_HELL": {
      "free": 1,
      "max": 2,
-     "n": 205,
+     "n": 215,
      "p50": 1.0,
      "p90": 2.0,
-     "share2": 0.14,
+     "share2": 0.13,
      "share3": 0.03
     },
     "2H_HOLYSTAFF_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 148,
+     "n": 154,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.12,
@@ -2323,7 +2332,7 @@
     "2H_ICECRYSTAL_UNDEAD": {
      "free": 1,
      "max": 2,
-     "n": 899,
+     "n": 934,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.19,
@@ -2332,7 +2341,7 @@
     "2H_ICEGAUNTLETS_HELL": {
      "free": 1,
      "max": 1,
-     "n": 165,
+     "n": 176,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -2341,16 +2350,16 @@
     "2H_INFERNOSTAFF_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 75,
+     "n": 82,
      "p50": 1.0,
-     "p90": 2.0,
-     "share2": 0.12,
+     "p90": 1.9,
+     "share2": 0.11,
      "share3": 0.04
     },
     "2H_KNUCKLES_HELL": {
      "free": 1,
      "max": 1,
-     "n": 83,
+     "n": 85,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -2359,7 +2368,7 @@
     "2H_KNUCKLES_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 144,
+     "n": 154,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.06,
@@ -2368,16 +2377,16 @@
     "2H_KNUCKLES_SET2": {
      "free": 2,
      "max": 4,
-     "n": 333,
+     "n": 343,
      "p50": 2.0,
      "p90": 4.0,
-     "share2": 0.58,
-     "share3": 0.35
+     "share2": 0.57,
+     "share3": 0.34
     },
     "2H_KNUCKLES_SET3": {
      "free": 1,
      "max": 1,
-     "n": 1066,
+     "n": 1106,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2386,16 +2395,16 @@
     "2H_LONGBOW": {
      "free": 1,
      "max": 3,
-     "n": 574,
+     "n": 596,
      "p50": 1.0,
      "p90": 3.0,
-     "share2": 0.36,
-     "share3": 0.11
+     "share2": 0.37,
+     "share3": 0.12
     },
     "2H_MACE": {
      "free": 1,
      "max": 2,
-     "n": 585,
+     "n": 617,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.21,
@@ -2404,7 +2413,7 @@
     "2H_MACE_MORGANA": {
      "free": 1,
      "max": 1,
-     "n": 47,
+     "n": 50,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2413,7 +2422,7 @@
     "2H_NATURESTAFF_HELL": {
      "free": 1,
      "max": 1,
-     "n": 399,
+     "n": 417,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.05,
@@ -2422,7 +2431,7 @@
     "2H_NATURESTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 228,
+     "n": 233,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -2431,7 +2440,7 @@
     "2H_POLEHAMMER": {
      "free": 1,
      "max": 1,
-     "n": 576,
+     "n": 599,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -2440,7 +2449,7 @@
     "2H_ROCKSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 117,
+     "n": 122,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -2449,7 +2458,7 @@
     "2H_SCYTHE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 49,
+     "n": 51,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2458,7 +2467,7 @@
     "2H_SHAPESHIFTER_AVALON": {
      "free": 1,
      "max": 2,
-     "n": 79,
+     "n": 86,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.13,
@@ -2467,16 +2476,16 @@
     "2H_SHAPESHIFTER_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 631,
+     "n": 655,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.01,
+     "share2": 0.02,
      "share3": 0.0
     },
     "2H_SHAPESHIFTER_SET2": {
      "free": 1,
      "max": 1,
-     "n": 440,
+     "n": 460,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -2485,16 +2494,16 @@
     "2H_WILDSTAFF": {
      "free": 1,
      "max": 1,
-     "n": 74,
+     "n": 79,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.05,
+     "share2": 0.08,
      "share3": 0.0
     },
     "MAIN_ARCANESTAFF": {
      "free": 1,
      "max": 2,
-     "n": 468,
+     "n": 480,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.12,
@@ -2503,7 +2512,7 @@
     "MAIN_ARCANESTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 407,
+     "n": 420,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2512,7 +2521,7 @@
     "MAIN_CURSEDSTAFF_AVALON": {
      "free": 1,
      "max": 1,
-     "n": 365,
+     "n": 377,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.02,
@@ -2521,7 +2530,7 @@
     "MAIN_CURSEDSTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 448,
+     "n": 467,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -2530,25 +2539,25 @@
     "MAIN_CURSEDSTAFF_UNDEAD": {
      "free": 1,
      "max": 1,
-     "n": 440,
+     "n": 463,
      "p50": 1.0,
      "p90": 1.0,
-     "share2": 0.04,
+     "share2": 0.03,
      "share3": 0.0
     },
     "MAIN_DAGGER_HELL": {
      "free": 1,
      "max": 2,
-     "n": 154,
+     "n": 165,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.38,
-     "share3": 0.09
+     "share3": 0.08
     },
     "MAIN_FROSTSTAFF_KEEPER": {
      "free": 1,
      "max": 1,
-     "n": 68,
+     "n": 69,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.04,
@@ -2557,7 +2566,7 @@
     "MAIN_HAMMER": {
      "free": 1,
      "max": 2,
-     "n": 295,
+     "n": 313,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.11,
@@ -2566,7 +2575,7 @@
     "MAIN_HOLYSTAFF_AVALON": {
      "free": 2,
      "max": 3,
-     "n": 1290,
+     "n": 1344,
      "p50": 2.0,
      "p90": 3.0,
      "share2": 0.85,
@@ -2575,7 +2584,7 @@
     "MAIN_MACE": {
      "free": 1,
      "max": 2,
-     "n": 546,
+     "n": 574,
      "p50": 1.0,
      "p90": 2.0,
      "share2": 0.2,
@@ -2584,7 +2593,7 @@
     "MAIN_MACE_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 166,
+     "n": 174,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.07,
@@ -2593,7 +2602,7 @@
     "MAIN_MACE_HELL": {
      "free": 1,
      "max": 1,
-     "n": 220,
+     "n": 227,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.01,
@@ -2602,7 +2611,7 @@
     "MAIN_NATURESTAFF": {
      "free": 1,
      "max": 1,
-     "n": 236,
+     "n": 246,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.03,
@@ -2611,7 +2620,7 @@
     "MAIN_NATURESTAFF_CRYSTAL": {
      "free": 1,
      "max": 1,
-     "n": 80,
+     "n": 81,
      "p50": 1.0,
      "p90": 1.0,
      "share2": 0.0,
@@ -2620,16 +2629,16 @@
     "MAIN_RAPIER_MORGANA": {
      "free": 1,
      "max": 2,
-     "n": 222,
+     "n": 230,
      "p50": 1.0,
-     "p90": 1.9,
+     "p90": 1.1,
      "share2": 0.1,
      "share3": 0.03
     },
     "MAIN_ROCKMACE_KEEPER": {
      "free": 2,
      "max": 2,
-     "n": 547,
+     "n": 568,
      "p50": 2.0,
      "p90": 2.0,
      "share2": 0.62,
@@ -2643,7 +2652,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 155,
+      "n": 160,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -2652,7 +2661,7 @@
      "2H_ARCANESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 54,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -2661,11 +2670,11 @@
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 42,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
-      "share3": 0.05
+      "share3": 0.04
      },
      "2H_ARCANE_RINGPAIR_AVALON": {
       "free": 1,
@@ -2679,25 +2688,25 @@
      "2H_AXE": {
       "free": 1,
       "max": 2,
-      "n": 148,
+      "n": 171,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.18,
+      "share2": 0.17,
       "share3": 0.01
      },
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 361,
+      "n": 382,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.04
      },
      "2H_CLAWPAIR": {
       "free": 1,
       "max": 2,
-      "n": 129,
+      "n": 142,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.22,
@@ -2706,25 +2715,34 @@
      "2H_CLAYMORE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 152,
+      "n": 161,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.03,
+      "share2": 0.04,
       "share3": 0.0
      },
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 297,
+      "n": 329,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
       "share3": 0.01
      },
+     "2H_COMBATSTAFF_MORGANA": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.0,
+      "share3": 0.0
+     },
      "2H_CROSSBOW": {
       "free": 1,
       "max": 1,
-      "n": 56,
+      "n": 62,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -2733,7 +2751,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 81,
+      "n": 82,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -2742,25 +2760,25 @@
      "2H_DAGGERPAIR": {
       "free": 1,
       "max": 3,
-      "n": 180,
+      "n": 203,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.41,
-      "share3": 0.14
+      "share2": 0.4,
+      "share3": 0.12
      },
      "2H_DAGGER_KATAR_AVALON": {
       "free": 2,
       "max": 5,
-      "n": 57,
+      "n": 63,
       "p50": 2.0,
       "p90": 5.0,
-      "share2": 0.58,
-      "share3": 0.47
+      "share2": 0.56,
+      "share3": 0.46
      },
      "2H_DOUBLEBLADEDSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 53,
+      "n": 57,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -2769,25 +2787,25 @@
      "2H_DUALAXE_KEEPER": {
       "free": 2,
       "max": 3,
-      "n": 391,
+      "n": 434,
       "p50": 2.0,
       "p90": 3.0,
-      "share2": 0.51,
-      "share3": 0.21
+      "share2": 0.5,
+      "share3": 0.2
      },
      "2H_DUALHAMMER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 41,
+      "n": 47,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.09,
       "share3": 0.0
      },
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 291,
+      "n": 304,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.16,
@@ -2796,7 +2814,7 @@
      "2H_DUALSCIMITAR_UNDEAD": {
       "free": 1,
       "max": 3,
-      "n": 319,
+      "n": 337,
       "p50": 1.0,
       "p90": 3.0,
       "share2": 0.47,
@@ -2805,25 +2823,25 @@
      "2H_DUALSICKLE_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 136,
+      "n": 152,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.22,
+      "share2": 0.24,
       "share3": 0.06
      },
      "2H_DUALSWORD": {
       "free": 1,
       "max": 2,
-      "n": 47,
+      "n": 51,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
+      "share2": 0.2,
       "share3": 0.02
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 92,
+      "n": 98,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -2832,7 +2850,7 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 117,
+      "n": 124,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -2841,7 +2859,7 @@
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 70,
+      "n": 72,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -2850,16 +2868,16 @@
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 60,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.0,
+      "share2": 0.02,
       "share3": 0.0
      },
      "2H_HALBERD": {
       "free": 1,
       "max": 1,
-      "n": 86,
+      "n": 94,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -2868,7 +2886,7 @@
      "2H_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 57,
+      "n": 61,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -2877,7 +2895,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 113,
+      "n": 116,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -2886,16 +2904,16 @@
      "2H_HOLYSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 54,
+      "n": 66,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.02,
+      "share2": 0.05,
       "share3": 0.0
      },
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 72,
+      "n": 77,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -2904,34 +2922,43 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 85,
+      "n": 89,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.09,
       "share3": 0.01
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 136,
+      "n": 153,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.01
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 51,
+      "n": 57,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
       "share3": 0.0
      },
+     "2H_KNUCKLES_HELL": {
+      "free": 1,
+      "max": 1,
+      "n": 43,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.02,
+      "share3": 0.02
+     },
      "2H_KNUCKLES_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 176,
+      "n": 186,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -2940,25 +2967,25 @@
      "2H_KNUCKLES_SET2": {
       "free": 1,
       "max": 3,
-      "n": 387,
+      "n": 414,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.48,
-      "share3": 0.2
+      "share2": 0.47,
+      "share3": 0.19
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 195,
+      "n": 206,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.01,
+      "share2": 0.0,
       "share3": 0.0
      },
      "2H_LONGBOW": {
       "free": 1,
       "max": 1,
-      "n": 150,
+      "n": 164,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -2967,16 +2994,16 @@
      "2H_LONGBOW_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 66,
+      "n": 71,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.14,
-      "share3": 0.02
+      "share2": 0.13,
+      "share3": 0.01
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 300,
+      "n": 325,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -2985,7 +3012,7 @@
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 308,
+      "n": 334,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -2994,25 +3021,25 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 148,
+      "n": 169,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.03,
+      "share2": 0.04,
       "share3": 0.01
      },
      "2H_QUARTERSTAFF_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 97,
+      "n": 108,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.18,
+      "share2": 0.16,
       "share3": 0.02
      },
      "2H_ROCKSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 89,
+      "n": 93,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -3021,7 +3048,7 @@
      "2H_SCYTHE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 71,
+      "n": 77,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -3030,7 +3057,7 @@
      "2H_SHAPESHIFTER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 50,
+      "n": 51,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -3039,7 +3066,7 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 139,
+      "n": 146,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -3048,43 +3075,52 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 164,
+      "n": 185,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
       "share3": 0.0
      },
+     "2H_WILDSTAFF": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.03,
+      "share3": 0.0
+     },
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 47,
+      "n": 53,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.08,
+      "share3": 0.0
+     },
+     "MAIN_AXE": {
+      "free": 1,
+      "max": 2,
+      "n": 64,
+      "p50": 1.0,
+      "p90": 2.0,
+      "share2": 0.3,
+      "share3": 0.09
+     },
+     "MAIN_CURSEDSTAFF": {
+      "free": 1,
+      "max": 1,
+      "n": 57,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
       "share3": 0.0
      },
-     "MAIN_AXE": {
-      "free": 1,
-      "max": 3,
-      "n": 59,
-      "p50": 1.0,
-      "p90": 2.2,
-      "share2": 0.29,
-      "share3": 0.1
-     },
-     "MAIN_CURSEDSTAFF": {
-      "free": 1,
-      "max": 1,
-      "n": 56,
-      "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.07,
-      "share3": 0.0
-     },
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 108,
+      "n": 109,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3093,7 +3129,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 85,
+      "n": 88,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3102,7 +3138,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 79,
+      "n": 93,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3111,16 +3147,16 @@
      "MAIN_DAGGER_HELL": {
       "free": 1,
       "max": 2,
-      "n": 187,
+      "n": 203,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
-      "share3": 0.02
+      "share2": 0.18,
+      "share3": 0.01
      },
      "MAIN_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 118,
+      "n": 132,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.17,
@@ -3129,61 +3165,61 @@
      "MAIN_HAMMER": {
       "free": 1,
       "max": 2,
-      "n": 177,
+      "n": 187,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.12,
+      "share2": 0.11,
       "share3": 0.0
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 1,
       "max": 3,
-      "n": 807,
+      "n": 863,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.49,
-      "share3": 0.13
+      "share2": 0.48,
+      "share3": 0.12
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 552,
+      "n": 602,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.2,
+      "share2": 0.21,
       "share3": 0.03
      },
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 119,
+      "n": 130,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.05,
       "share3": 0.0
      },
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 2,
-      "n": 50,
+      "n": 56,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.14,
+      "share2": 0.12,
       "share3": 0.0
      },
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 105,
+      "n": 118,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.06,
       "share3": 0.0
      },
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 282,
+      "n": 305,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.24,
@@ -3192,10 +3228,19 @@
      "MAIN_SPEAR_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 81,
+      "n": 91,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.01,
+      "share2": 0.02,
+      "share3": 0.0
+     },
+     "MAIN_SPEAR_LANCE_AVALON": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.05,
       "share3": 0.0
      }
     },
@@ -3203,7 +3248,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 316,
+      "n": 323,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -3212,7 +3257,7 @@
      "2H_ARCANESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 95,
+      "n": 101,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3221,97 +3266,97 @@
      "2H_ARCANE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 122,
+      "n": 130,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.22,
-      "share3": 0.0
+      "share3": 0.01
      },
      "2H_AXE": {
       "free": 1,
       "max": 2,
-      "n": 71,
+      "n": 77,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.03
      },
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 501,
+      "n": 520,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.25,
+      "share2": 0.24,
       "share3": 0.06
      },
      "2H_CLAWPAIR": {
       "free": 1,
       "max": 2,
-      "n": 46,
+      "n": 49,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.33,
-      "share3": 0.07
+      "share2": 0.31,
+      "share3": 0.06
      },
      "2H_CLAYMORE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 118,
+      "n": 125,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.07,
       "share3": 0.0
      },
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 364,
-      "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.01,
-      "share3": 0.0
-     },
-     "2H_COMBATSTAFF_MORGANA": {
-      "free": 1,
-      "max": 1,
-      "n": 51,
-      "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.06,
-      "share3": 0.0
-     },
-     "2H_CURSEDSTAFF_MORGANA": {
-      "free": 1,
-      "max": 1,
-      "n": 243,
+      "n": 384,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
       "share3": 0.0
      },
+     "2H_COMBATSTAFF_MORGANA": {
+      "free": 1,
+      "max": 1,
+      "n": 56,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.05,
+      "share3": 0.0
+     },
+     "2H_CURSEDSTAFF_MORGANA": {
+      "free": 1,
+      "max": 1,
+      "n": 259,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.03,
+      "share3": 0.0
+     },
      "2H_DAGGERPAIR": {
       "free": 1,
       "max": 3,
-      "n": 44,
+      "n": 48,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.34,
-      "share3": 0.14
+      "share2": 0.33,
+      "share3": 0.15
      },
      "2H_DUALAXE_KEEPER": {
       "free": 1,
       "max": 3,
-      "n": 190,
+      "n": 203,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.43,
-      "share3": 0.22
+      "share2": 0.44,
+      "share3": 0.24
      },
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 500,
+      "n": 522,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.22,
@@ -3320,16 +3365,25 @@
      "2H_DUALSCIMITAR_UNDEAD": {
       "free": 2,
       "max": 4,
-      "n": 480,
+      "n": 514,
       "p50": 2.0,
       "p90": 4.0,
       "share2": 0.62,
-      "share3": 0.34
+      "share3": 0.35
+     },
+     "2H_DUALSICKLE_UNDEAD": {
+      "free": 1,
+      "max": 2,
+      "n": 41,
+      "p50": 1.0,
+      "p90": 2.0,
+      "share2": 0.17,
+      "share3": 0.05
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 224,
+      "n": 236,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -3338,25 +3392,25 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 158,
+      "n": 165,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.05,
       "share3": 0.0
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 94,
+      "n": 100,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.0,
+      "share2": 0.01,
       "share3": 0.0
      },
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 75,
+      "n": 76,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -3365,7 +3419,7 @@
      "2H_HALBERD": {
       "free": 1,
       "max": 1,
-      "n": 99,
+      "n": 108,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -3374,7 +3428,7 @@
      "2H_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 45,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3383,7 +3437,7 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 53,
+      "n": 55,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3392,7 +3446,7 @@
      "2H_HAMMER_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3401,7 +3455,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 184,
+      "n": 185,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -3410,7 +3464,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 202,
+      "n": 214,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -3419,16 +3473,16 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 95,
+      "n": 100,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
+      "share2": 0.2,
       "share3": 0.02
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 161,
+      "n": 169,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -3437,7 +3491,7 @@
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 88,
+      "n": 93,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -3446,7 +3500,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 58,
+      "n": 61,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -3455,25 +3509,25 @@
      "2H_KNUCKLES_KEEPER": {
       "free": 1,
       "max": 2,
-      "n": 344,
+      "n": 365,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.1,
+      "share2": 0.11,
       "share3": 0.01
      },
      "2H_KNUCKLES_SET2": {
       "free": 2,
       "max": 4,
-      "n": 487,
+      "n": 499,
       "p50": 2.0,
       "p90": 4.0,
-      "share2": 0.7,
+      "share2": 0.71,
       "share3": 0.47
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 348,
+      "n": 362,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3482,7 +3536,7 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 1,
-      "n": 134,
+      "n": 140,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3491,7 +3545,7 @@
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 444,
+      "n": 463,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.18,
@@ -3500,16 +3554,16 @@
      "2H_MACE_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 71,
+      "n": 78,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.1,
+      "share2": 0.09,
       "share3": 0.0
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 284,
+      "n": 307,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -3518,7 +3572,7 @@
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 51,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3527,16 +3581,16 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 178,
+      "n": 185,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
+      "share2": 0.06,
       "share3": 0.0
      },
      "2H_ROCKSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 215,
+      "n": 235,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3545,25 +3599,25 @@
      "2H_SCYTHE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 76,
+      "n": 82,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.07,
       "share3": 0.0
      },
      "2H_SHAPESHIFTER_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 89,
+      "n": 97,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.25,
+      "share2": 0.23,
       "share3": 0.01
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 197,
+      "n": 201,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3572,7 +3626,7 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 301,
+      "n": 318,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -3581,7 +3635,7 @@
      "2H_WILDSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 64,
+      "n": 66,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.12,
@@ -3590,16 +3644,16 @@
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 133,
+      "n": 137,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.0
      },
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 178,
+      "n": 184,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -3608,7 +3662,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 109,
+      "n": 118,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -3617,7 +3671,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 175,
+      "n": 180,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3626,7 +3680,7 @@
      "MAIN_DAGGER_HELL": {
       "free": 1,
       "max": 2,
-      "n": 318,
+      "n": 337,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.41,
@@ -3635,7 +3689,7 @@
      "MAIN_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 44,
+      "n": 46,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.3,
@@ -3644,7 +3698,7 @@
      "MAIN_HAMMER": {
       "free": 1,
       "max": 2,
-      "n": 374,
+      "n": 390,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.15,
@@ -3653,7 +3707,7 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 4,
-      "n": 930,
+      "n": 977,
       "p50": 2.0,
       "p90": 4.0,
       "share2": 0.8,
@@ -3662,25 +3716,25 @@
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 590,
+      "n": 621,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.24,
+      "share2": 0.23,
       "share3": 0.04
      },
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
-      "max": 2,
-      "n": 300,
+      "max": 1,
+      "n": 324,
       "p50": 1.0,
-      "p90": 1.1,
+      "p90": 1.0,
       "share2": 0.1,
       "share3": 0.01
      },
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 75,
+      "n": 79,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3689,7 +3743,7 @@
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 233,
+      "n": 245,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3698,7 +3752,7 @@
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 307,
+      "n": 325,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.24,
@@ -3707,7 +3761,7 @@
      "MAIN_SPEAR_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 48,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3716,7 +3770,7 @@
      "MAIN_SWORD_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3727,7 +3781,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 65,
+      "n": 67,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -3736,7 +3790,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 99,
+      "n": 102,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.24,
@@ -3745,7 +3799,7 @@
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 85,
+      "n": 88,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3754,7 +3808,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 61,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3763,16 +3817,16 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 106,
+      "n": 109,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.22,
+      "share2": 0.21,
       "share3": 0.01
      },
      "2H_DUALSCIMITAR_UNDEAD": {
       "free": 2,
       "max": 4,
-      "n": 88,
+      "n": 92,
       "p50": 2.0,
       "p90": 4.0,
       "share2": 0.72,
@@ -3781,7 +3835,7 @@
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3790,7 +3844,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 45,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -3799,7 +3853,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -3808,25 +3862,25 @@
      "2H_KNUCKLES_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 65,
+      "n": 69,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.07,
       "share3": 0.03
      },
      "2H_KNUCKLES_SET2": {
       "free": 3,
       "max": 5,
-      "n": 93,
+      "n": 96,
       "p50": 3.0,
       "p90": 5.0,
-      "share2": 0.82,
-      "share3": 0.68
+      "share2": 0.8,
+      "share3": 0.67
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 80,
+      "n": 81,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -3835,7 +3889,7 @@
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 89,
+      "n": 94,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.2,
@@ -3844,7 +3898,7 @@
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 50,
+      "n": 52,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3853,16 +3907,16 @@
      "2H_ROCKSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 47,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
-      "share3": 0.05
+      "share2": 0.06,
+      "share3": 0.04
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 42,
+      "n": 43,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3871,16 +3925,16 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 56,
+      "n": 59,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.04,
+      "share2": 0.03,
       "share3": 0.0
      },
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 54,
+      "n": 56,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3889,7 +3943,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 42,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -3898,52 +3952,52 @@
      "MAIN_DAGGER_HELL": {
       "free": 1,
       "max": 3,
-      "n": 60,
+      "n": 63,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.45,
-      "share3": 0.18
+      "share2": 0.46,
+      "share3": 0.17
      },
      "MAIN_HAMMER": {
       "free": 1,
       "max": 2,
-      "n": 69,
+      "n": 75,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.14,
+      "share2": 0.16,
       "share3": 0.01
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 3,
       "max": 4,
-      "n": 160,
+      "n": 167,
       "p50": 3.0,
       "p90": 4.0,
-      "share2": 0.94,
+      "share2": 0.95,
       "share3": 0.62
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 108,
+      "n": 113,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.02
      },
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 64,
+      "n": 67,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
-      "share3": 0.02
+      "share3": 0.01
      },
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 60,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -3952,11 +4006,11 @@
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 63,
+      "n": 65,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.24,
-      "share3": 0.1
+      "share2": 0.23,
+      "share3": 0.09
      }
     }
    },
@@ -3965,25 +4019,25 @@
      "2H_KNUCKLES_SET2": {
       "free": 3,
       "max": 5,
-      "n": 67,
+      "n": 68,
       "p50": 3.0,
       "p90": 5.0,
       "share2": 0.87,
-      "share3": 0.64
+      "share3": 0.65
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 4,
-      "n": 68,
+      "n": 70,
       "p50": 2.0,
-      "p90": 3.3,
-      "share2": 0.59,
+      "p90": 3.1,
+      "share2": 0.6,
       "share3": 0.26
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 45,
+      "n": 46,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.22,
@@ -3994,25 +4048,34 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 52,
+      "n": 54,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.1,
+      "share2": 0.09,
       "share3": 0.04
      },
      "2H_DUALMACE_AVALON": {
       "free": 2,
       "max": 2,
-      "n": 67,
+      "n": 69,
       "p50": 2.0,
       "p90": 2.0,
       "share2": 0.55,
       "share3": 0.09
      },
+     "2H_ENIGMATICORB_MORGANA": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.05,
+      "share3": 0.03
+     },
      "2H_KNUCKLES_SET2": {
       "free": 4,
       "max": 6,
-      "n": 86,
+      "n": 88,
       "p50": 4.0,
       "p90": 6.0,
       "share2": 0.97,
@@ -4030,29 +4093,29 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 4,
-      "n": 87,
+      "n": 89,
       "p50": 2.0,
       "p90": 4.0,
-      "share2": 0.79,
+      "share2": 0.8,
       "share3": 0.43
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 54,
+      "n": 55,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.3,
+      "share2": 0.29,
       "share3": 0.04
      },
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 40,
+      "n": 42,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
-      "share3": 0.03
+      "share2": 0.1,
+      "share3": 0.02
      }
     }
    },
@@ -4061,7 +4124,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 432,
+      "n": 459,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -4070,34 +4133,43 @@
      "2H_ARCANESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 55,
+      "n": 62,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.06,
       "share3": 0.0
      },
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 492,
+      "n": 518,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
       "share3": 0.0
      },
+     "2H_ARCANE_RINGPAIR_AVALON": {
+      "free": 1,
+      "max": 2,
+      "n": 42,
+      "p50": 1.0,
+      "p90": 1.9,
+      "share2": 0.12,
+      "share3": 0.0
+     },
      "2H_AXE": {
       "free": 1,
       "max": 1,
-      "n": 65,
+      "n": 77,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.06,
       "share3": 0.0
      },
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 1218,
+      "n": 1288,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.13,
@@ -4106,34 +4178,34 @@
      "2H_BOW_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 214,
+      "n": 226,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.21,
+      "share2": 0.22,
       "share3": 0.07
      },
      "2H_BOW_HELL": {
       "free": 2,
       "max": 5,
-      "n": 337,
+      "n": 356,
       "p50": 2.0,
       "p90": 5.0,
       "share2": 0.55,
-      "share3": 0.4
+      "share3": 0.39
      },
      "2H_BOW_KEEPER": {
       "free": 1,
       "max": 2,
-      "n": 153,
+      "n": 165,
       "p50": 1.0,
-      "p90": 2.0,
-      "share2": 0.11,
+      "p90": 1.6,
+      "share2": 0.1,
       "share3": 0.02
      },
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 217,
+      "n": 234,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4142,7 +4214,7 @@
      "2H_COMBATSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 51,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -4159,26 +4231,26 @@
      },
      "2H_CROSSBOWLARGE_MORGANA": {
       "free": 1,
-      "max": 5,
-      "n": 89,
+      "max": 4,
+      "n": 91,
       "p50": 1.0,
-      "p90": 4.2,
+      "p90": 4.0,
       "share2": 0.22,
       "share3": 0.11
      },
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
-      "max": 1,
-      "n": 426,
+      "max": 2,
+      "n": 451,
       "p50": 1.0,
-      "p90": 1.0,
+      "p90": 2.0,
       "share2": 0.1,
-      "share3": 0.01
+      "share3": 0.02
      },
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 287,
+      "n": 304,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4187,34 +4259,34 @@
      "2H_DAGGER_KATAR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 42,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
+      "share2": 0.07,
       "share3": 0.0
      },
      "2H_DUALAXE_KEEPER": {
       "free": 1,
       "max": 2,
-      "n": 109,
+      "n": 116,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.14,
+      "share2": 0.15,
       "share3": 0.01
      },
      "2H_DUALCROSSBOW_HELL": {
       "free": 1,
       "max": 2,
-      "n": 74,
+      "n": 75,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.26,
+      "share2": 0.25,
       "share3": 0.05
      },
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 718,
+      "n": 756,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -4223,7 +4295,7 @@
      "2H_DUALSCIMITAR_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 61,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4232,61 +4304,70 @@
      "2H_DUALSWORD": {
       "free": 1,
       "max": 2,
-      "n": 81,
+      "n": 87,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.18,
       "share3": 0.01
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 196,
-      "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.04,
-      "share3": 0.0
-     },
-     "2H_ENIGMATICSTAFF": {
-      "free": 1,
-      "max": 1,
-      "n": 250,
+      "n": 213,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
       "share3": 0.0
      },
-     "2H_FIRESTAFF_HELL": {
+     "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 76,
+      "n": 267,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
-      "share3": 0.09
+      "share2": 0.03,
+      "share3": 0.0
+     },
+     "2H_FIRESTAFF": {
+      "free": 1,
+      "max": 1,
+      "n": 41,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.02,
+      "share3": 0.0
+     },
+     "2H_FIRESTAFF_HELL": {
+      "free": 1,
+      "max": 2,
+      "n": 79,
+      "p50": 1.0,
+      "p90": 1.4,
+      "share2": 0.1,
+      "share3": 0.1
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 997,
+      "n": 1070,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.14,
+      "share2": 0.13,
       "share3": 0.01
      },
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 319,
+      "n": 337,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.22,
-      "share3": 0.06
+      "share3": 0.07
      },
      "2H_GLACIALSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 69,
+      "n": 74,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -4295,7 +4376,7 @@
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 2,
-      "n": 294,
+      "n": 309,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.28,
@@ -4304,7 +4385,7 @@
      "2H_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 89,
+      "n": 92,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4313,16 +4394,16 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 272,
+      "n": 281,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
-      "share3": 0.0
+      "share3": 0.01
      },
      "2H_HAMMER_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 48,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4331,7 +4412,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 681,
+      "n": 726,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4340,16 +4421,16 @@
      "2H_HOLYSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 112,
+      "n": 116,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.0
      },
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 256,
+      "n": 263,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -4358,25 +4439,25 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 361,
+      "n": 380,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.13,
+      "share2": 0.12,
       "share3": 0.04
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 327,
+      "n": 356,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.1,
+      "share2": 0.09,
       "share3": 0.01
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 1240,
+      "n": 1316,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -4385,7 +4466,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 83,
+      "n": 88,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4394,7 +4475,7 @@
      "2H_INFERNOSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 250,
+      "n": 264,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -4403,7 +4484,7 @@
      "2H_KNUCKLES_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -4412,7 +4493,7 @@
      "2H_KNUCKLES_HELL": {
       "free": 1,
       "max": 1,
-      "n": 148,
+      "n": 155,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4421,7 +4502,7 @@
      "2H_KNUCKLES_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 51,
+      "n": 56,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4430,16 +4511,16 @@
      "2H_KNUCKLES_SET2": {
       "free": 1,
       "max": 3,
-      "n": 316,
+      "n": 331,
       "p50": 1.0,
       "p90": 3.0,
       "share2": 0.33,
-      "share3": 0.11
+      "share3": 0.1
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 896,
+      "n": 950,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -4448,7 +4529,7 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 3,
-      "n": 1208,
+      "n": 1275,
       "p50": 1.0,
       "p90": 3.0,
       "share2": 0.35,
@@ -4457,16 +4538,16 @@
      "2H_LONGBOW_UNDEAD": {
       "free": 1,
       "max": 4,
-      "n": 102,
+      "n": 108,
       "p50": 1.0,
-      "p90": 3.9,
+      "p90": 3.3,
       "share2": 0.44,
-      "share3": 0.23
+      "share3": 0.21
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 694,
+      "n": 747,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -4475,7 +4556,7 @@
      "2H_MACE_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 105,
+      "n": 108,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -4484,16 +4565,16 @@
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 626,
+      "n": 667,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.07,
       "share3": 0.01
      },
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 104,
+      "n": 106,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4502,25 +4583,25 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 583,
+      "n": 622,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.07,
       "share3": 0.01
      },
      "2H_QUARTERSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 45,
+      "n": 51,
       "p50": 1.0,
-      "p90": 1.6,
-      "share2": 0.11,
+      "p90": 2.0,
+      "share2": 0.12,
       "share3": 0.0
      },
      "2H_ROCKSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 69,
+      "n": 71,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -4529,34 +4610,34 @@
      "2H_SHAPESHIFTER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 98,
+      "n": 105,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
-      "share3": 0.01
+      "share2": 0.1,
+      "share3": 0.02
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 711,
+      "n": 748,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.02,
+      "share2": 0.01,
       "share3": 0.0
      },
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 388,
+      "n": 420,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
-      "share3": 0.01
+      "share3": 0.0
      },
      "2H_TWINSCYTHE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 53,
+      "n": 58,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4574,16 +4655,16 @@
      "2H_WILDSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 71,
+      "n": 73,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.05,
       "share3": 0.0
      },
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 262,
+      "n": 281,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.1,
@@ -4592,7 +4673,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 483,
+      "n": 508,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4601,10 +4682,10 @@
      "MAIN_AXE": {
       "free": 1,
       "max": 2,
-      "n": 71,
+      "n": 73,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.13,
+      "share2": 0.12,
       "share3": 0.01
      },
      "MAIN_CURSEDSTAFF": {
@@ -4619,7 +4700,7 @@
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 338,
+      "n": 367,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4628,16 +4709,16 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 302,
+      "n": 323,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.0,
+      "share2": 0.01,
       "share3": 0.0
      },
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 539,
+      "n": 564,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -4646,25 +4727,25 @@
      "MAIN_DAGGER_HELL": {
       "free": 1,
       "max": 2,
-      "n": 68,
+      "n": 72,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.03
      },
      "MAIN_FIRESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 79,
+      "n": 84,
       "p50": 1.0,
-      "p90": 2.0,
+      "p90": 1.7,
       "share2": 0.11,
       "share3": 0.0
      },
      "MAIN_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 215,
+      "n": 230,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4673,7 +4754,7 @@
      "MAIN_HOLYSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 64,
+      "n": 69,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -4682,16 +4763,16 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 1669,
+      "n": 1763,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.41,
-      "share3": 0.09
+      "share3": 0.08
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 817,
+      "n": 877,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.15,
@@ -4700,7 +4781,7 @@
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 67,
+      "n": 73,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4709,7 +4790,7 @@
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 219,
+      "n": 232,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -4718,7 +4799,7 @@
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 137,
+      "n": 151,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4727,7 +4808,7 @@
      "MAIN_NATURESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 47,
+      "n": 49,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4736,16 +4817,16 @@
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 229,
+      "n": 239,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
+      "share2": 0.08,
       "share3": 0.0
      },
      "MAIN_ROCKMACE_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 333,
+      "n": 348,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4754,7 +4835,7 @@
      "MAIN_SPEAR_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 93,
+      "n": 98,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -4765,7 +4846,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 1149,
+      "n": 1217,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -4774,7 +4855,7 @@
      "2H_ARCANESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 89,
+      "n": 93,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -4783,7 +4864,7 @@
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 829,
+      "n": 872,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -4792,7 +4873,7 @@
      "2H_ARCANE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 69,
+      "n": 72,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -4801,7 +4882,7 @@
      "2H_AXE": {
       "free": 1,
       "max": 1,
-      "n": 78,
+      "n": 84,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -4810,7 +4891,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 2217,
+      "n": 2326,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.17,
@@ -4819,34 +4900,34 @@
      "2H_BOW_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 173,
+      "n": 183,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.24,
+      "share2": 0.22,
       "share3": 0.09
      },
      "2H_BOW_HELL": {
       "free": 1,
       "max": 4,
-      "n": 280,
+      "n": 297,
       "p50": 1.0,
       "p90": 4.0,
-      "share2": 0.4,
+      "share2": 0.42,
       "share3": 0.21
      },
      "2H_BOW_KEEPER": {
       "free": 1,
       "max": 3,
-      "n": 130,
+      "n": 136,
       "p50": 1.0,
-      "p90": 3.0,
-      "share2": 0.25,
-      "share3": 0.11
+      "p90": 2.5,
+      "share2": 0.24,
+      "share3": 0.1
      },
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 485,
+      "n": 504,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -4855,7 +4936,7 @@
      "2H_COMBATSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 115,
+      "n": 120,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -4863,17 +4944,17 @@
      },
      "2H_CROSSBOWLARGE_MORGANA": {
       "free": 1,
-      "max": 4,
-      "n": 69,
+      "max": 5,
+      "n": 74,
       "p50": 1.0,
-      "p90": 3.2,
-      "share2": 0.19,
-      "share3": 0.13
+      "p90": 4.7,
+      "share2": 0.2,
+      "share3": 0.15
      },
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 475,
+      "n": 500,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.13,
@@ -4882,7 +4963,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 683,
+      "n": 715,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -4890,19 +4971,19 @@
      },
      "2H_DAGGER_KATAR_AVALON": {
       "free": 1,
-      "max": 1,
-      "n": 63,
+      "max": 2,
+      "n": 66,
       "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.1,
+      "p90": 1.5,
+      "share2": 0.11,
       "share3": 0.05
      },
      "2H_DUALAXE_KEEPER": {
       "free": 1,
-      "max": 2,
-      "n": 98,
+      "max": 1,
+      "n": 104,
       "p50": 1.0,
-      "p90": 1.3,
+      "p90": 1.0,
       "share2": 0.1,
       "share3": 0.02
      },
@@ -4918,34 +4999,34 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 1678,
+      "n": 1761,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.01
      },
      "2H_DUALSCIMITAR_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 152,
+      "n": 153,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
+      "share2": 0.08,
       "share3": 0.0
      },
      "2H_DUALSWORD": {
       "free": 1,
       "max": 2,
-      "n": 65,
+      "n": 70,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.12,
+      "share2": 0.11,
       "share3": 0.03
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 771,
+      "n": 809,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -4954,34 +5035,34 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 519,
+      "n": 543,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.04,
+      "share2": 0.05,
       "share3": 0.01
      },
      "2H_FIRESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 112,
+      "n": 116,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.04,
-      "share3": 0.04
+      "share2": 0.03,
+      "share3": 0.03
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 1560,
+      "n": 1640,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.18,
+      "share2": 0.19,
       "share3": 0.02
      },
      "2H_FLAIL": {
       "free": 1,
       "max": 1,
-      "n": 51,
+      "n": 53,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -4990,11 +5071,11 @@
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 3,
-      "n": 714,
+      "n": 751,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.35,
-      "share3": 0.12
+      "share2": 0.34,
+      "share3": 0.11
      },
      "2H_GLACIALSTAFF": {
       "free": 1,
@@ -5008,25 +5089,25 @@
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 3,
-      "n": 572,
+      "n": 598,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.33,
+      "share2": 0.32,
       "share3": 0.1
      },
      "2H_HALBERD_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 40,
+      "n": 42,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.03,
+      "share2": 0.02,
       "share3": 0.0
      },
      "2H_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 92,
+      "n": 95,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5035,7 +5116,7 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 455,
+      "n": 481,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5044,7 +5125,7 @@
      "2H_HAMMER_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 79,
+      "n": 81,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5053,7 +5134,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 1530,
+      "n": 1601,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5062,7 +5143,7 @@
      "2H_HOLYSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 79,
+      "n": 87,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -5071,7 +5152,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 762,
+      "n": 798,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5080,16 +5161,16 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 632,
+      "n": 671,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.04
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 363,
+      "n": 376,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.16,
@@ -5098,7 +5179,7 @@
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 2010,
+      "n": 2111,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.14,
@@ -5107,7 +5188,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 276,
+      "n": 287,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5116,7 +5197,7 @@
      "2H_INFERNOSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 256,
+      "n": 262,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -5134,7 +5215,7 @@
      "2H_KNUCKLES_HELL": {
       "free": 1,
       "max": 1,
-      "n": 202,
+      "n": 209,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -5143,7 +5224,7 @@
      "2H_KNUCKLES_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 131,
+      "n": 137,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5152,7 +5233,7 @@
      "2H_KNUCKLES_SET2": {
       "free": 1,
       "max": 3,
-      "n": 591,
+      "n": 607,
       "p50": 1.0,
       "p90": 3.0,
       "share2": 0.37,
@@ -5161,7 +5242,7 @@
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 1999,
+      "n": 2098,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5170,25 +5251,25 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 3,
-      "n": 1643,
+      "n": 1734,
       "p50": 1.0,
       "p90": 3.0,
       "share2": 0.42,
-      "share3": 0.15
+      "share3": 0.16
      },
      "2H_LONGBOW_UNDEAD": {
       "free": 1,
       "max": 6,
-      "n": 78,
+      "n": 79,
       "p50": 1.0,
       "p90": 6.0,
-      "share2": 0.47,
+      "share2": 0.48,
       "share3": 0.35
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 1416,
+      "n": 1490,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.2,
@@ -5197,16 +5278,16 @@
      "2H_MACE_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 113,
+      "n": 124,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.03,
+      "share2": 0.02,
       "share3": 0.0
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 1025,
+      "n": 1068,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -5215,7 +5296,7 @@
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 411,
+      "n": 421,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -5224,7 +5305,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 1053,
+      "n": 1123,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -5233,7 +5314,7 @@
      "2H_RAM_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 81,
+      "n": 85,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -5242,7 +5323,7 @@
      "2H_ROCKSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 162,
+      "n": 165,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5250,17 +5331,17 @@
      },
      "2H_SHAPESHIFTER_AVALON": {
       "free": 1,
-      "max": 2,
-      "n": 120,
+      "max": 1,
+      "n": 125,
       "p50": 1.0,
-      "p90": 1.1,
+      "p90": 1.0,
       "share2": 0.1,
       "share3": 0.01
      },
      "2H_SHAPESHIFTER_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 69,
+      "n": 71,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5269,7 +5350,7 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 1504,
+      "n": 1585,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5278,7 +5359,7 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 982,
+      "n": 1038,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5287,7 +5368,7 @@
      "2H_TWINSCYTHE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 51,
+      "n": 55,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5296,16 +5377,16 @@
      "2H_WILDSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 136,
+      "n": 143,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.04,
+      "share2": 0.05,
       "share3": 0.01
      },
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 712,
+      "n": 743,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -5314,7 +5395,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 651,
+      "n": 685,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5323,25 +5404,25 @@
      "MAIN_AXE": {
       "free": 1,
       "max": 2,
-      "n": 58,
+      "n": 59,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.21,
+      "share2": 0.2,
       "share3": 0.02
      },
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 833,
+      "n": 877,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.02,
+      "share2": 0.01,
       "share3": 0.0
      },
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 689,
+      "n": 713,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5350,7 +5431,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 1128,
+      "n": 1180,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5359,25 +5440,34 @@
      "MAIN_DAGGER_HELL": {
       "free": 1,
       "max": 2,
-      "n": 130,
+      "n": 133,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.22,
+      "share2": 0.21,
       "share3": 0.02
      },
      "MAIN_FIRESTAFF": {
       "free": 1,
-      "max": 2,
-      "n": 57,
+      "max": 1,
+      "n": 61,
       "p50": 1.0,
-      "p90": 1.4,
-      "share2": 0.11,
+      "p90": 1.0,
+      "share2": 0.1,
       "share3": 0.02
+     },
+     "MAIN_FIRESTAFF_KEEPER": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.0,
+      "share3": 0.0
      },
      "MAIN_FROSTSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 49,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5386,7 +5476,7 @@
      "MAIN_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 564,
+      "n": 581,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -5395,7 +5485,7 @@
      "MAIN_HOLYSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 60,
+      "n": 62,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5404,7 +5494,7 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 2748,
+      "n": 2878,
       "p50": 2.0,
       "p90": 3.0,
       "share2": 0.73,
@@ -5413,7 +5503,7 @@
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 1301,
+      "n": 1360,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.17,
@@ -5422,7 +5512,7 @@
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 146,
+      "n": 148,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5431,7 +5521,7 @@
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 433,
+      "n": 461,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5440,7 +5530,7 @@
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 379,
+      "n": 404,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -5449,7 +5539,7 @@
      "MAIN_NATURESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 104,
+      "n": 111,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5457,17 +5547,17 @@
      },
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
-      "max": 1,
-      "n": 372,
+      "max": 2,
+      "n": 391,
       "p50": 1.0,
-      "p90": 1.0,
+      "p90": 2.0,
       "share2": 0.1,
       "share3": 0.0
      },
      "MAIN_ROCKMACE_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 791,
+      "n": 840,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5476,10 +5566,10 @@
      "MAIN_SPEAR_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 61,
+      "n": 62,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.06,
       "share3": 0.02
      }
     },
@@ -5487,16 +5577,16 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 280,
+      "n": 290,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.11,
+      "share2": 0.12,
       "share3": 0.0
      },
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 139,
+      "n": 146,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -5505,7 +5595,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 472,
+      "n": 494,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.21,
@@ -5514,7 +5604,7 @@
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 116,
+      "n": 124,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5523,16 +5613,16 @@
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 71,
+      "n": 77,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.09,
       "share3": 0.03
      },
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 151,
+      "n": 157,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5541,16 +5631,16 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 389,
+      "n": 406,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
+      "share2": 0.18,
       "share3": 0.01
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 242,
+      "n": 250,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5559,7 +5649,7 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 91,
+      "n": 99,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -5568,34 +5658,34 @@
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 283,
+      "n": 293,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.26,
+      "share2": 0.25,
       "share3": 0.03
      },
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 3,
-      "n": 199,
+      "n": 208,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.36,
-      "share3": 0.16
+      "share2": 0.37,
+      "share3": 0.17
      },
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 3,
-      "n": 108,
+      "n": 112,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.44,
+      "share2": 0.43,
       "share3": 0.19
      },
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 91,
+      "n": 94,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5604,7 +5694,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 386,
+      "n": 402,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5613,7 +5703,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 209,
+      "n": 216,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -5622,38 +5712,47 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 100,
+      "n": 104,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
+      "share2": 0.18,
       "share3": 0.06
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 66,
+      "n": 69,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.06
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 411,
+      "n": 428,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.16,
+      "share2": 0.15,
       "share3": 0.01
      },
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 47,
+      "n": 49,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
       "share3": 0.0
+     },
+     "2H_INFERNOSTAFF_MORGANA": {
+      "free": 1,
+      "max": 2,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 2.0,
+      "share2": 0.15,
+      "share3": 0.05
      },
      "2H_KNUCKLES_HELL": {
       "free": 1,
@@ -5667,16 +5766,16 @@
      "2H_KNUCKLES_SET2": {
       "free": 1,
       "max": 3,
-      "n": 127,
+      "n": 131,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.42,
+      "share2": 0.41,
       "share3": 0.11
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 486,
+      "n": 507,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5685,16 +5784,16 @@
      "2H_LONGBOW": {
       "free": 2,
       "max": 3,
-      "n": 329,
+      "n": 344,
       "p50": 2.0,
       "p90": 3.0,
       "share2": 0.51,
-      "share3": 0.18
+      "share3": 0.19
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 310,
+      "n": 328,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.21,
@@ -5703,7 +5802,7 @@
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 199,
+      "n": 207,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -5712,7 +5811,7 @@
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 73,
+      "n": 74,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -5721,16 +5820,16 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 257,
+      "n": 268,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.1,
+      "share2": 0.09,
       "share3": 0.01
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 287,
+      "n": 297,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5739,7 +5838,7 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 225,
+      "n": 236,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -5748,7 +5847,7 @@
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 184,
+      "n": 189,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -5757,7 +5856,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 119,
+      "n": 124,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5766,7 +5865,7 @@
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 234,
+      "n": 242,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5775,7 +5874,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 140,
+      "n": 146,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5784,7 +5883,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 249,
+      "n": 260,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5793,7 +5892,7 @@
      "MAIN_HAMMER": {
       "free": 1,
       "max": 2,
-      "n": 140,
+      "n": 149,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.11,
@@ -5802,7 +5901,7 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 542,
+      "n": 567,
       "p50": 2.0,
       "p90": 3.0,
       "share2": 0.86,
@@ -5811,7 +5910,7 @@
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 282,
+      "n": 299,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.25,
@@ -5820,7 +5919,7 @@
      "MAIN_MACE_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 54,
+      "n": 55,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5829,7 +5928,7 @@
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 119,
+      "n": 123,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5838,7 +5937,7 @@
      "MAIN_NATURESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 115,
+      "n": 120,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -5847,7 +5946,7 @@
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 68,
+      "n": 70,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5856,7 +5955,7 @@
      "MAIN_ROCKMACE_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 128,
+      "n": 133,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5869,7 +5968,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 68,
+      "n": 71,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5878,7 +5977,7 @@
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 108,
+      "n": 110,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -5887,7 +5986,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 151,
+      "n": 155,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -5896,16 +5995,16 @@
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.09,
       "share3": 0.0
      },
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 41,
+      "n": 42,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -5914,7 +6013,7 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 77,
+      "n": 78,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.12,
@@ -5923,7 +6022,7 @@
      "2H_FIRESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 60,
+      "n": 64,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.25,
@@ -5932,10 +6031,10 @@
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 137,
+      "n": 143,
       "p50": 1.0,
-      "p90": 2.0,
-      "share2": 0.11,
+      "p90": 1.8,
+      "share2": 0.1,
       "share3": 0.01
      },
      "2H_GLAIVE_CRYSTAL": {
@@ -5950,43 +6049,52 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 47,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
+      "share2": 0.08,
       "share3": 0.0
      },
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 118,
+      "n": 120,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
       "share3": 0.0
      },
+     "2H_HOLYSTAFF_CRYSTAL": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.03,
+      "share3": 0.0
+     },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 192,
+      "n": 198,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.11,
+      "share2": 0.12,
       "share3": 0.0
      },
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 2,
-      "n": 54,
+      "n": 56,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
-      "share3": 0.06
+      "share2": 0.14,
+      "share3": 0.05
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 129,
+      "n": 134,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -5995,16 +6103,16 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 96,
+      "n": 101,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.21,
+      "share2": 0.2,
       "share3": 0.04
      },
      "2H_MACE": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6013,7 +6121,7 @@
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 63,
+      "n": 65,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -6022,7 +6130,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 67,
+      "n": 68,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -6031,7 +6139,7 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 90,
+      "n": 93,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -6049,7 +6157,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 93,
+      "n": 94,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6058,7 +6166,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 65,
+      "n": 68,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -6067,28 +6175,37 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 40,
+      "n": 42,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.03,
+      "share2": 0.02,
       "share3": 0.0
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 191,
+      "n": 196,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.41,
-      "share3": 0.06
+      "share2": 0.42,
+      "share3": 0.07
+     },
+     "MAIN_MACE": {
+      "free": 1,
+      "max": 2,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.1,
+      "share2": 0.1,
+      "share3": 0.0
      },
      "MAIN_ROCKMACE_KEEPER": {
       "free": 2,
       "max": 2,
-      "n": 208,
+      "n": 214,
       "p50": 2.0,
       "p90": 2.0,
-      "share2": 0.61,
+      "share2": 0.6,
       "share3": 0.0
      }
     },
@@ -6096,16 +6213,16 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 513,
+      "n": 530,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
+      "share2": 0.08,
       "share3": 0.0
      },
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 691,
+      "n": 726,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6114,25 +6231,25 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 840,
+      "n": 881,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.06,
       "share3": 0.0
      },
      "2H_BOW_HELL": {
       "free": 1,
       "max": 3,
-      "n": 97,
+      "n": 103,
       "p50": 1.0,
-      "p90": 2.4,
+      "p90": 2.8,
       "share2": 0.34,
-      "share3": 0.1
+      "share3": 0.11
      },
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 113,
+      "n": 120,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.14,
@@ -6141,7 +6258,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 273,
+      "n": 277,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6150,7 +6267,7 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 603,
+      "n": 637,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -6159,7 +6276,7 @@
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 127,
+      "n": 131,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6168,25 +6285,25 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 92,
+      "n": 101,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.01,
+      "share2": 0.02,
       "share3": 0.0
      },
      "2H_FIRESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 151,
+      "n": 168,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.26,
-      "share3": 0.06
+      "share2": 0.27,
+      "share3": 0.05
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 768,
+      "n": 801,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.19,
@@ -6195,25 +6312,25 @@
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 52,
+      "n": 55,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.29,
-      "share3": 0.06
+      "share2": 0.27,
+      "share3": 0.05
      },
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 2,
-      "n": 321,
+      "n": 333,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.26,
+      "share2": 0.25,
       "share3": 0.05
      },
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 323,
+      "n": 332,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6222,7 +6339,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 736,
+      "n": 773,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6231,7 +6348,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 348,
+      "n": 363,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6240,25 +6357,25 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 157,
+      "n": 167,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.01
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 65,
+      "n": 67,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
-      "share3": 0.05
+      "share2": 0.18,
+      "share3": 0.04
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 951,
+      "n": 992,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.26,
@@ -6267,7 +6384,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 226,
+      "n": 239,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -6276,25 +6393,34 @@
      "2H_INFERNOSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 40,
+      "n": 47,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
-      "share3": 0.03
+      "share2": 0.06,
+      "share3": 0.02
      },
      "2H_KNUCKLES_HELL": {
       "free": 1,
       "max": 1,
-      "n": 60,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
       "share3": 0.0
      },
+     "2H_KNUCKLES_SET2": {
+      "free": 1,
+      "max": 1,
+      "n": 43,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.09,
+      "share3": 0.05
+     },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 823,
+      "n": 855,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6303,25 +6429,25 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 359,
+      "n": 377,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.23,
+      "share2": 0.22,
       "share3": 0.04
      },
      "2H_MACE": {
       "free": 1,
       "max": 1,
-      "n": 198,
+      "n": 212,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.09,
-      "share3": 0.01
+      "share2": 0.08,
+      "share3": 0.0
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 251,
+      "n": 266,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -6330,7 +6456,7 @@
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 208,
+      "n": 214,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6339,7 +6465,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 460,
+      "n": 477,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -6348,7 +6474,7 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 536,
+      "n": 560,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6357,16 +6483,16 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 211,
+      "n": 221,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.05,
       "share3": 0.0
      },
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 353,
+      "n": 370,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -6375,7 +6501,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 578,
+      "n": 605,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6384,7 +6510,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 466,
+      "n": 479,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6393,7 +6519,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 252,
+      "n": 264,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6402,34 +6528,43 @@
      "MAIN_FROSTSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 148,
+      "n": 152,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
       "share3": 0.01
      },
+     "MAIN_HAMMER": {
+      "free": 1,
+      "max": 1,
+      "n": 40,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.0,
+      "share3": 0.0
+     },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 949,
+      "n": 997,
       "p50": 2.0,
       "p90": 3.0,
-      "share2": 0.69,
+      "share2": 0.7,
       "share3": 0.25
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 1,
-      "n": 96,
+      "n": 103,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.02
      },
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 80,
+      "n": 84,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6438,7 +6573,7 @@
      "MAIN_NATURESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 117,
+      "n": 119,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -6447,7 +6582,7 @@
      "MAIN_ROCKMACE_KEEPER": {
       "free": 2,
       "max": 2,
-      "n": 955,
+      "n": 997,
       "p50": 2.0,
       "p90": 2.0,
       "share2": 0.71,
@@ -6458,16 +6593,16 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 183,
+      "n": 190,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.06,
       "share3": 0.0
      },
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 241,
+      "n": 250,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.1,
@@ -6476,7 +6611,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 293,
+      "n": 301,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -6485,7 +6620,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 108,
+      "n": 109,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -6494,7 +6629,7 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 234,
+      "n": 241,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -6521,7 +6656,7 @@
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 246,
+      "n": 252,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.19,
@@ -6530,11 +6665,11 @@
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 2,
-      "n": 103,
+      "n": 107,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.32,
-      "share3": 0.08
+      "share2": 0.33,
+      "share3": 0.07
      },
      "2H_HAMMER_AVALON": {
       "free": 1,
@@ -6548,7 +6683,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 264,
+      "n": 272,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6557,25 +6692,25 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 162,
+      "n": 168,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.04,
+      "share2": 0.05,
       "share3": 0.0
      },
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 47,
+      "n": 49,
       "p50": 1.0,
-      "p90": 1.4,
-      "share2": 0.11,
+      "p90": 1.2,
+      "share2": 0.1,
       "share3": 0.0
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 300,
+      "n": 309,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.33,
@@ -6584,7 +6719,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 61,
+      "n": 65,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.08,
@@ -6593,7 +6728,7 @@
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 284,
+      "n": 293,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6602,25 +6737,25 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 110,
+      "n": 112,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
+      "share2": 0.2,
       "share3": 0.04
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 60,
+      "n": 63,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.02
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 49,
+      "n": 51,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6638,7 +6773,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 172,
+      "n": 176,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6647,7 +6782,7 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 174,
+      "n": 180,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6656,7 +6791,7 @@
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 68,
+      "n": 71,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -6665,16 +6800,16 @@
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 135,
+      "n": 139,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.14,
       "share3": 0.01
      },
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 203,
+      "n": 209,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6683,7 +6818,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 182,
+      "n": 188,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6692,34 +6827,34 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 65,
+      "n": 67,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.02,
+      "share2": 0.01,
       "share3": 0.0
      },
      "MAIN_FROSTSTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 54,
+      "n": 55,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.05,
       "share3": 0.0
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 300,
+      "n": 309,
       "p50": 2.0,
       "p90": 3.0,
       "share2": 0.81,
-      "share3": 0.4
+      "share3": 0.39
      },
      "MAIN_NATURESTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 46,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -6728,7 +6863,7 @@
      "MAIN_ROCKMACE_KEEPER": {
       "free": 2,
       "max": 2,
-      "n": 292,
+      "n": 301,
       "p50": 2.0,
       "p90": 2.0,
       "share2": 0.83,
@@ -6741,25 +6876,34 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 1,
-      "n": 153,
+      "n": 160,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.08,
+      "share2": 0.07,
       "share3": 0.02
      },
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 136,
+      "n": 145,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.2,
+      "share2": 0.19,
       "share3": 0.03
+     },
+     "2H_AXE": {
+      "free": 1,
+      "max": 1,
+      "n": 44,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.02,
+      "share3": 0.0
      },
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 183,
+      "n": 190,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6768,25 +6912,34 @@
      "2H_BOW_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 72,
+      "n": 79,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.29,
+      "share2": 0.28,
       "share3": 0.08
      },
      "2H_BOW_HELL": {
       "free": 1,
       "max": 2,
-      "n": 40,
+      "n": 41,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.15,
       "share3": 0.0
      },
+     "2H_BOW_KEEPER": {
+      "free": 1,
+      "max": 1,
+      "n": 43,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.07,
+      "share3": 0.0
+     },
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 55,
+      "n": 58,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6794,17 +6947,17 @@
      },
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
-      "max": 2,
-      "n": 105,
+      "max": 1,
+      "n": 114,
       "p50": 1.0,
-      "p90": 1.6,
+      "p90": 1.0,
       "share2": 0.1,
       "share3": 0.01
      },
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 77,
+      "n": 81,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -6813,19 +6966,19 @@
      "2H_DUALCROSSBOW_HELL": {
       "free": 1,
       "max": 2,
-      "n": 40,
+      "n": 46,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
-      "share3": 0.03
+      "share2": 0.17,
+      "share3": 0.07
      },
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 147,
+      "n": 148,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.06,
+      "share2": 0.07,
       "share3": 0.01
      },
      "2H_DUALSWORD": {
@@ -6840,7 +6993,7 @@
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 66,
+      "n": 67,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6849,34 +7002,34 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 66,
+      "n": 70,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
-      "share3": 0.02
+      "share2": 0.04,
+      "share3": 0.01
      },
      "2H_FIRESTAFF_HELL": {
       "free": 1,
       "max": 3,
-      "n": 86,
+      "n": 89,
       "p50": 1.0,
       "p90": 3.0,
-      "share2": 0.31,
-      "share3": 0.12
+      "share2": 0.3,
+      "share3": 0.11
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 146,
+      "n": 153,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.01
      },
      "2H_FROSTSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -6894,16 +7047,16 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 69,
+      "n": 73,
       "p50": 1.0,
-      "p90": 2.0,
-      "share2": 0.12,
+      "p90": 1.8,
+      "share2": 0.11,
       "share3": 0.01
      },
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 101,
+      "n": 109,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6912,16 +7065,16 @@
      "2H_HOLYSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 45,
+      "n": 47,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
-      "share3": 0.0
+      "share2": 0.09,
+      "share3": 0.02
      },
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 52,
+      "n": 53,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -6930,25 +7083,25 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 1,
-      "n": 89,
+      "n": 95,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
-      "share3": 0.0
+      "share3": 0.01
      },
      "2H_HOLYSTAFF_UNDEAD": {
       "free": 1,
       "max": 2,
-      "n": 78,
+      "n": 82,
       "p50": 1.0,
-      "p90": 1.3,
-      "share2": 0.1,
+      "p90": 1.9,
+      "share2": 0.11,
       "share3": 0.01
      },
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 173,
+      "n": 179,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -6957,34 +7110,34 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 132,
+      "n": 136,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
+      "share2": 0.04,
       "share3": 0.01
      },
      "2H_INFERNOSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 74,
+      "n": 76,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
+      "share2": 0.07,
       "share3": 0.0
      },
      "2H_INFERNOSTAFF_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 70,
+      "n": 75,
       "p50": 1.0,
-      "p90": 2.0,
+      "p90": 1.6,
       "share2": 0.11,
       "share3": 0.0
      },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 106,
+      "n": 110,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -6993,43 +7146,43 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 266,
+      "n": 282,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.31,
+      "share2": 0.32,
       "share3": 0.07
      },
      "2H_LONGBOW_UNDEAD": {
       "free": 1,
-      "max": 2,
-      "n": 51,
+      "max": 3,
+      "n": 57,
       "p50": 1.0,
-      "p90": 2.0,
-      "share2": 0.25,
-      "share3": 0.1
+      "p90": 3.0,
+      "share2": 0.33,
+      "share3": 0.12
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 140,
+      "n": 146,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.16,
       "share3": 0.01
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 166,
+      "n": 178,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.13,
+      "share2": 0.12,
       "share3": 0.01
      },
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 52,
+      "n": 53,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7038,7 +7191,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 2,
-      "n": 157,
+      "n": 165,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.12,
@@ -7047,25 +7200,25 @@
      "2H_QUARTERSTAFF_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 59,
+      "n": 63,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.15,
+      "share2": 0.17,
       "share3": 0.02
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 117,
+      "n": 129,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.01,
+      "share2": 0.02,
       "share3": 0.0
      },
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 82,
+      "n": 85,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7074,16 +7227,16 @@
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 148,
+      "n": 156,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.01
      },
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 62,
+      "n": 63,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7092,7 +7245,7 @@
      "MAIN_AXE": {
       "free": 1,
       "max": 2,
-      "n": 56,
+      "n": 57,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.18,
@@ -7101,7 +7254,7 @@
      "MAIN_CURSEDSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 58,
+      "n": 59,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.14,
@@ -7110,7 +7263,7 @@
      "MAIN_CURSEDSTAFF_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 41,
+      "n": 43,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7119,7 +7272,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 81,
+      "n": 82,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7128,7 +7281,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 112,
+      "n": 120,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -7137,16 +7290,16 @@
      "MAIN_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 103,
+      "n": 108,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.19,
       "share3": 0.04
      },
      "MAIN_HAMMER": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 45,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7155,7 +7308,7 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 336,
+      "n": 360,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.32,
@@ -7164,25 +7317,25 @@
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 189,
+      "n": 201,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.2,
+      "share2": 0.18,
       "share3": 0.03
      },
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 64,
+      "n": 67,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.0,
+      "share2": 0.01,
       "share3": 0.0
      },
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 153,
+      "n": 164,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.14,
@@ -7191,18 +7344,18 @@
      "MAIN_ROCKMACE_KEEPER": {
       "free": 1,
       "max": 2,
-      "n": 234,
+      "n": 246,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.19,
-      "share3": 0.03
+      "share2": 0.18,
+      "share3": 0.02
      }
     },
     "15-19": {
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 204,
+      "n": 209,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.15,
@@ -7211,7 +7364,7 @@
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 221,
+      "n": 226,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.12,
@@ -7220,7 +7373,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 238,
+      "n": 245,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -7229,7 +7382,7 @@
      "2H_CLEAVER_HELL": {
       "free": 1,
       "max": 1,
-      "n": 54,
+      "n": 55,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7238,7 +7391,7 @@
      "2H_CROSSBOW_CANNON_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 72,
+      "n": 76,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.17,
@@ -7247,7 +7400,7 @@
      "2H_CURSEDSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 95,
+      "n": 98,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7256,16 +7409,16 @@
      "2H_DUALMACE_AVALON": {
       "free": 1,
       "max": 2,
-      "n": 174,
+      "n": 178,
       "p50": 1.0,
-      "p90": 1.7,
-      "share2": 0.1,
+      "p90": 2.0,
+      "share2": 0.11,
       "share3": 0.01
      },
      "2H_ENIGMATICORB_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 89,
+      "n": 91,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7274,7 +7427,7 @@
      "2H_ENIGMATICSTAFF": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7283,16 +7436,16 @@
      "2H_FIRESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 52,
+      "n": 56,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.23,
-      "share3": 0.08
+      "share2": 0.21,
+      "share3": 0.07
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 161,
+      "n": 166,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.07,
@@ -7301,7 +7454,7 @@
      "2H_GLAIVE_CRYSTAL": {
       "free": 1,
       "max": 2,
-      "n": 80,
+      "n": 81,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.25,
@@ -7310,7 +7463,7 @@
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 104,
+      "n": 106,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7319,7 +7472,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 216,
+      "n": 221,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7328,7 +7481,7 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 105,
+      "n": 107,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.06,
@@ -7337,7 +7490,7 @@
      "2H_HOLYSTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 85,
+      "n": 86,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.16,
@@ -7346,7 +7499,7 @@
      "2H_ICECRYSTAL_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 241,
+      "n": 249,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -7355,7 +7508,7 @@
      "2H_ICEGAUNTLETS_HELL": {
       "free": 1,
       "max": 1,
-      "n": 110,
+      "n": 116,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.09,
@@ -7364,7 +7517,7 @@
      "2H_INFERNOSTAFF_MORGANA": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -7373,7 +7526,7 @@
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 227,
+      "n": 232,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7382,25 +7535,25 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 161,
+      "n": 170,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.3,
-      "share3": 0.08
+      "share3": 0.09
      },
      "2H_MACE": {
       "free": 1,
       "max": 2,
-      "n": 95,
+      "n": 101,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.2,
+      "share2": 0.19,
       "share3": 0.02
      },
      "2H_NATURESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 122,
+      "n": 129,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.19,
@@ -7409,7 +7562,7 @@
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 104,
+      "n": 107,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7418,25 +7571,25 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 162,
+      "n": 167,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.07,
+      "share2": 0.08,
       "share3": 0.0
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 165,
+      "n": 175,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.0,
+      "share2": 0.01,
       "share3": 0.0
      },
      "2H_SHAPESHIFTER_SET2": {
       "free": 1,
       "max": 1,
-      "n": 63,
+      "n": 66,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -7445,7 +7598,7 @@
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 191,
+      "n": 195,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.23,
@@ -7454,7 +7607,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 142,
+      "n": 147,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7463,7 +7616,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 149,
+      "n": 153,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7472,7 +7625,7 @@
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 125,
+      "n": 128,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.04,
@@ -7481,25 +7634,25 @@
      "MAIN_FROSTSTAFF": {
       "free": 1,
       "max": 2,
-      "n": 56,
+      "n": 57,
       "p50": 1.0,
-      "p90": 1.5,
+      "p90": 1.4,
       "share2": 0.11,
       "share3": 0.0
      },
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 341,
+      "n": 352,
       "p50": 2.0,
       "p90": 3.0,
-      "share2": 0.61,
+      "share2": 0.62,
       "share3": 0.19
      },
      "MAIN_MACE": {
       "free": 1,
       "max": 2,
-      "n": 98,
+      "n": 103,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.16,
@@ -7508,7 +7661,7 @@
      "MAIN_MACE_HELL": {
       "free": 1,
       "max": 1,
-      "n": 43,
+      "n": 44,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7517,19 +7670,19 @@
      "MAIN_RAPIER_MORGANA": {
       "free": 1,
       "max": 2,
-      "n": 115,
+      "n": 118,
       "p50": 1.0,
-      "p90": 1.6,
+      "p90": 1.3,
       "share2": 0.1,
       "share3": 0.02
      },
      "MAIN_ROCKMACE_KEEPER": {
       "free": 2,
       "max": 2,
-      "n": 321,
+      "n": 330,
       "p50": 2.0,
       "p90": 2.0,
-      "share2": 0.72,
+      "share2": 0.71,
       "share3": 0.07
      }
     },
@@ -7537,7 +7690,7 @@
      "2H_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 89,
+      "n": 95,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.2,
@@ -7546,7 +7699,7 @@
      "2H_ARCANESTAFF_HELL": {
       "free": 1,
       "max": 2,
-      "n": 99,
+      "n": 104,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.19,
@@ -7555,7 +7708,7 @@
      "2H_AXE_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 110,
+      "n": 118,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
@@ -7572,26 +7725,26 @@
      },
      "2H_DUALMACE_AVALON": {
       "free": 1,
-      "max": 1,
-      "n": 65,
+      "max": 2,
+      "n": 69,
       "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.09,
+      "p90": 2.0,
+      "share2": 0.12,
       "share3": 0.0
      },
      "2H_FIRE_RINGPAIR_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 66,
+      "n": 69,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.05,
-      "share3": 0.02
+      "share2": 0.04,
+      "share3": 0.01
      },
      "2H_HAMMER_AVALON": {
       "free": 1,
       "max": 1,
-      "n": 48,
+      "n": 50,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7600,7 +7753,7 @@
      "2H_HARPOON_HELL": {
       "free": 1,
       "max": 1,
-      "n": 107,
+      "n": 115,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.02,
@@ -7609,25 +7762,25 @@
      "2H_HOLYSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 67,
-      "p50": 1.0,
-      "p90": 1.0,
-      "share2": 0.06,
-      "share3": 0.0
-     },
-     "2H_ICECRYSTAL_UNDEAD": {
-      "free": 1,
-      "max": 1,
-      "n": 113,
+      "n": 73,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.05,
       "share3": 0.0
      },
+     "2H_ICECRYSTAL_UNDEAD": {
+      "free": 1,
+      "max": 1,
+      "n": 121,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.07,
+      "share3": 0.0
+     },
      "2H_KNUCKLES_SET3": {
       "free": 1,
       "max": 1,
-      "n": 106,
+      "n": 114,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7636,16 +7789,16 @@
      "2H_LONGBOW": {
       "free": 1,
       "max": 2,
-      "n": 42,
+      "n": 45,
       "p50": 1.0,
       "p90": 2.0,
-      "share2": 0.17,
+      "share2": 0.16,
       "share3": 0.02
      },
      "2H_NATURESTAFF_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 44,
+      "n": 48,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7654,7 +7807,7 @@
      "2H_POLEHAMMER": {
       "free": 1,
       "max": 1,
-      "n": 62,
+      "n": 68,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.03,
@@ -7663,16 +7816,16 @@
      "2H_SHAPESHIFTER_KEEPER": {
       "free": 1,
       "max": 1,
-      "n": 73,
+      "n": 79,
       "p50": 1.0,
       "p90": 1.0,
-      "share2": 0.01,
+      "share2": 0.03,
       "share3": 0.0
      },
      "MAIN_ARCANESTAFF": {
       "free": 1,
       "max": 2,
-      "n": 86,
+      "n": 89,
       "p50": 1.0,
       "p90": 2.0,
       "share2": 0.15,
@@ -7681,7 +7834,7 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "free": 1,
       "max": 1,
-      "n": 80,
+      "n": 82,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.0,
@@ -7690,7 +7843,7 @@
      "MAIN_CURSEDSTAFF_CRYSTAL": {
       "free": 1,
       "max": 1,
-      "n": 76,
+      "n": 78,
       "p50": 1.0,
       "p90": 1.0,
       "share2": 0.01,
@@ -7699,20 +7852,29 @@
      "MAIN_HOLYSTAFF_AVALON": {
       "free": 2,
       "max": 3,
-      "n": 118,
+      "n": 125,
       "p50": 2.0,
       "p90": 3.0,
-      "share2": 0.75,
-      "share3": 0.24
+      "share2": 0.76,
+      "share3": 0.22
+     },
+     "MAIN_RAPIER_MORGANA": {
+      "free": 1,
+      "max": 1,
+      "n": 41,
+      "p50": 1.0,
+      "p90": 1.0,
+      "share2": 0.02,
+      "share3": 0.0
      },
      "MAIN_ROCKMACE_KEEPER": {
       "free": 2,
       "max": 2,
-      "n": 115,
+      "n": 122,
       "p50": 2.0,
       "p90": 2.0,
-      "share2": 0.83,
-      "share3": 0.1
+      "share2": 0.82,
+      "share3": 0.09
      }
     }
    }
@@ -7721,19 +7883,19 @@
  "distinct": {
   "pooled": {
    "10-14": {
-    "n": 5324,
+    "n": 5657,
     "p10": 8.0,
     "p50": 10.0,
     "p90": 12.0
    },
    "15-19": {
-    "n": 6437,
+    "n": 6747,
     "p10": 11.0,
     "p50": 14.0,
     "p90": 17.0
    },
    "20": {
-    "n": 1356,
+    "n": 1412,
     "p10": 14.0,
     "p50": 16.0,
     "p90": 18.0
@@ -7742,19 +7904,19 @@
   "styles": {
    "brawl": {
     "10-14": {
-     "n": 1090,
+     "n": 1177,
      "p10": 7.0,
      "p50": 10.0,
      "p90": 12.0
     },
     "15-19": {
-     "n": 981,
+     "n": 1030,
      "p10": 10.0,
      "p50": 13.0,
      "p90": 16.0
     },
     "20": {
-     "n": 166,
+     "n": 173,
      "p10": 12.0,
      "p50": 15.0,
      "p90": 17.0
@@ -7762,33 +7924,33 @@
    },
    "brawl_clap": {
     "10-14": {
-     "n": 80,
+     "n": 82,
      "p10": 6.0,
      "p50": 8.0,
      "p90": 10.0
     },
     "15-19": {
-     "n": 90,
+     "n": 92,
      "p10": 9.0,
      "p50": 11.0,
-     "p90": 13.1
+     "p90": 13.0
     }
    },
    "clap": {
     "10-14": {
-     "n": 2411,
+     "n": 2553,
      "p10": 8.0,
      "p50": 10.0,
      "p90": 12.0
     },
     "15-19": {
-     "n": 3093,
+     "n": 3241,
      "p10": 12.0,
      "p50": 14.0,
      "p90": 17.0
     },
     "20": {
-     "n": 573,
+     "n": 599,
      "p10": 14.0,
      "p50": 16.0,
      "p90": 18.0
@@ -7796,19 +7958,19 @@
    },
    "clap_kite": {
     "10-14": {
-     "n": 262,
+     "n": 270,
      "p10": 9.0,
      "p50": 11.0,
      "p90": 13.0
     },
     "15-19": {
-     "n": 1035,
+     "n": 1083,
      "p10": 13.0,
      "p50": 15.0,
      "p90": 17.0
     },
     "20": {
-     "n": 311,
+     "n": 320,
      "p10": 15.0,
      "p50": 16.0,
      "p90": 18.0
@@ -7816,19 +7978,19 @@
    },
    "kite": {
     "10-14": {
-     "n": 612,
+     "n": 646,
      "p10": 8.0,
      "p50": 10.0,
      "p90": 13.0
     },
     "15-19": {
-     "n": 408,
+     "n": 422,
      "p10": 12.0,
      "p50": 15.0,
      "p90": 17.0
     },
     "20": {
-     "n": 125,
+     "n": 133,
      "p10": 15.0,
      "p50": 17.0,
      "p90": 19.0
@@ -7840,16 +8002,16 @@
   "cells": {
    "pooled": {
     "10": {
-     "n": 1222,
+     "n": 1295,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
-      "p90": 1.9
+      "p90": 1.0
      },
      "window": 0
     },
     "11": {
-     "n": 1089,
+     "n": 1156,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7858,7 +8020,7 @@
      "window": 0
     },
     "12": {
-     "n": 987,
+     "n": 1051,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7867,7 +8029,7 @@
      "window": 0
     },
     "13": {
-     "n": 1002,
+     "n": 1072,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7876,7 +8038,7 @@
      "window": 0
     },
     "14": {
-     "n": 1024,
+     "n": 1083,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7885,7 +8047,7 @@
      "window": 0
     },
     "15": {
-     "n": 1066,
+     "n": 1119,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7894,7 +8056,7 @@
      "window": 0
     },
     "16": {
-     "n": 1152,
+     "n": 1201,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7903,7 +8065,7 @@
      "window": 0
     },
     "17": {
-     "n": 1239,
+     "n": 1302,
      "standoff": {
       "p10": 0.0,
       "p50": 0.0,
@@ -7912,7 +8074,7 @@
      "window": 0
     },
     "18": {
-     "n": 1432,
+     "n": 1510,
      "standoff": {
       "p10": 0.0,
       "p50": 1.0,
@@ -7921,7 +8083,7 @@
      "window": 0
     },
     "19": {
-     "n": 1548,
+     "n": 1615,
      "standoff": {
       "p10": 0.0,
       "p50": 1.0,
@@ -7930,7 +8092,7 @@
      "window": 0
     },
     "20": {
-     "n": 1356,
+     "n": 1412,
      "standoff": {
       "p10": 0.0,
       "p50": 1.0,
@@ -7942,7 +8104,7 @@
    "styles": {
     "brawl": {
      "10": {
-      "n": 289,
+      "n": 305,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7951,7 +8113,7 @@
       "window": 0
      },
      "11": {
-      "n": 215,
+      "n": 242,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7960,7 +8122,7 @@
       "window": 0
      },
      "12": {
-      "n": 209,
+      "n": 230,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7969,7 +8131,7 @@
       "window": 0
      },
      "13": {
-      "n": 187,
+      "n": 198,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7978,7 +8140,7 @@
       "window": 0
      },
      "14": {
-      "n": 190,
+      "n": 202,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7987,7 +8149,7 @@
       "window": 0
      },
      "15": {
-      "n": 175,
+      "n": 180,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -7996,7 +8158,7 @@
       "window": 0
      },
      "16": {
-      "n": 188,
+      "n": 196,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8005,7 +8167,7 @@
       "window": 0
      },
      "17": {
-      "n": 201,
+      "n": 214,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8014,7 +8176,7 @@
       "window": 0
      },
      "18": {
-      "n": 212,
+      "n": 228,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8023,7 +8185,7 @@
       "window": 0
      },
      "19": {
-      "n": 205,
+      "n": 212,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8032,7 +8194,7 @@
       "window": 0
      },
      "20": {
-      "n": 166,
+      "n": 173,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8043,16 +8205,16 @@
     },
     "brawl_clap": {
      "10": {
-      "n": 41,
+      "n": 43,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 0.0
+       "p90": 0.8
       },
       "window": 1
      },
      "11": {
-      "n": 55,
+      "n": 57,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8097,7 +8259,7 @@
       "window": 1
      },
      "16": {
-      "n": 47,
+      "n": 49,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8106,7 +8268,7 @@
       "window": 1
      },
      "17": {
-      "n": 48,
+      "n": 50,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8115,7 +8277,7 @@
       "window": 1
      },
      "18": {
-      "n": 58,
+      "n": 60,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8144,7 +8306,7 @@
     },
     "clap": {
      "10": {
-      "n": 555,
+      "n": 591,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8153,7 +8315,7 @@
       "window": 0
      },
      "11": {
-      "n": 498,
+      "n": 518,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8162,7 +8324,7 @@
       "window": 0
      },
      "12": {
-      "n": 437,
+      "n": 460,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8171,7 +8333,7 @@
       "window": 0
      },
      "13": {
-      "n": 471,
+      "n": 510,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8180,7 +8342,7 @@
       "window": 0
      },
      "14": {
-      "n": 450,
+      "n": 474,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8189,7 +8351,7 @@
       "window": 0
      },
      "15": {
-      "n": 563,
+      "n": 595,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8198,7 +8360,7 @@
       "window": 0
      },
      "16": {
-      "n": 570,
+      "n": 597,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8207,7 +8369,7 @@
       "window": 0
      },
      "17": {
-      "n": 618,
+      "n": 640,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8216,7 +8378,7 @@
       "window": 0
      },
      "18": {
-      "n": 680,
+      "n": 712,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8225,7 +8387,7 @@
       "window": 0
      },
      "19": {
-      "n": 662,
+      "n": 697,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8234,7 +8396,7 @@
       "window": 0
      },
      "20": {
-      "n": 573,
+      "n": 599,
       "standoff": {
        "p10": 0.0,
        "p50": 0.0,
@@ -8245,7 +8407,7 @@
     },
     "clap_kite": {
      "10": {
-      "n": 60,
+      "n": 61,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8263,16 +8425,16 @@
       "window": 0
      },
      "12": {
-      "n": 48,
+      "n": 50,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
-       "p90": 2.0
+       "p90": 2.1
       },
       "window": 0
      },
      "13": {
-      "n": 64,
+      "n": 65,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8281,7 +8443,7 @@
       "window": 0
      },
      "14": {
-      "n": 90,
+      "n": 94,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8290,7 +8452,7 @@
       "window": 0
      },
      "15": {
-      "n": 100,
+      "n": 103,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8299,7 +8461,7 @@
       "window": 0
      },
      "16": {
-      "n": 148,
+      "n": 154,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8308,7 +8470,7 @@
       "window": 0
      },
      "17": {
-      "n": 188,
+      "n": 201,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8317,7 +8479,7 @@
       "window": 0
      },
      "18": {
-      "n": 256,
+      "n": 273,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8326,7 +8488,7 @@
       "window": 0
      },
      "19": {
-      "n": 343,
+      "n": 352,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8335,7 +8497,7 @@
       "window": 0
      },
      "20": {
-      "n": 311,
+      "n": 320,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8346,7 +8508,7 @@
     },
     "kite": {
      "10": {
-      "n": 134,
+      "n": 136,
       "standoff": {
        "p10": 1.0,
        "p50": 1.0,
@@ -8355,16 +8517,16 @@
       "window": 0
      },
      "11": {
-      "n": 134,
+      "n": 143,
       "standoff": {
        "p10": 1.0,
        "p50": 1.0,
-       "p90": 2.0
+       "p90": 3.0
       },
       "window": 0
      },
      "12": {
-      "n": 108,
+      "n": 114,
       "standoff": {
        "p10": 1.0,
        "p50": 1.0,
@@ -8373,7 +8535,7 @@
       "window": 0
      },
      "13": {
-      "n": 118,
+      "n": 126,
       "standoff": {
        "p10": 1.0,
        "p50": 1.0,
@@ -8382,7 +8544,7 @@
       "window": 0
      },
      "14": {
-      "n": 118,
+      "n": 127,
       "standoff": {
        "p10": 1.0,
        "p50": 1.0,
@@ -8391,7 +8553,7 @@
       "window": 0
      },
      "15": {
-      "n": 56,
+      "n": 60,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8409,7 +8571,7 @@
       "window": 0
      },
      "17": {
-      "n": 72,
+      "n": 74,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8418,7 +8580,7 @@
       "window": 0
      },
      "18": {
-      "n": 96,
+      "n": 98,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8427,7 +8589,7 @@
       "window": 0
      },
      "19": {
-      "n": 119,
+      "n": 125,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8436,7 +8598,7 @@
       "window": 0
      },
      "20": {
-      "n": 125,
+      "n": 133,
       "standoff": {
        "p10": 2.0,
        "p50": 2.0,
@@ -8581,7 +8743,7 @@
   }
  },
  "plan_keys": ["standoff"],
- "rosters": 13117,
+ "rosters": 13816,
  "seat_universe": ["bomb_aoe", "brawl_healer", "curse_support", "dive_cleanup", "engage_tank", "kite_healer", "main_healer", "off_tank", "ranged_aoe", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
  "seats": {
   "cells": {
@@ -8622,7 +8784,7 @@
       "p50": 1.0,
       "p90": 3.0
      },
-     "n": 1222,
+     "n": 1295,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -8674,12 +8836,12 @@
      "dive_cleanup": {
       "p10": 0.0,
       "p50": 0.0,
-      "p90": 1.0
+      "p90": 2.0
      },
      "engage_tank": {
       "p10": 0.0,
       "p50": 1.0,
-      "p90": 3.0
+      "p90": 2.0
      },
      "kite_healer": {
       "p10": 0.0,
@@ -8691,7 +8853,7 @@
       "p50": 2.0,
       "p90": 3.0
      },
-     "n": 1089,
+     "n": 1156,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -8699,13 +8861,13 @@
      },
      "ranged_aoe": {
       "p10": 1.0,
-      "p50": 3.0,
+      "p50": 2.0,
       "p90": 5.0
      },
      "shield_support": {
       "p10": 0.0,
       "p50": 0.0,
-      "p90": 2.0
+      "p90": 1.5
      },
      "stopper_tank": {
       "p10": 0.0,
@@ -8760,7 +8922,7 @@
       "p50": 2.0,
       "p90": 3.0
      },
-     "n": 987,
+     "n": 1051,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -8829,7 +8991,7 @@
       "p50": 2.0,
       "p90": 3.0
      },
-     "n": 1002,
+     "n": 1072,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -8898,7 +9060,7 @@
       "p50": 2.0,
       "p90": 4.0
      },
-     "n": 1024,
+     "n": 1083,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -8921,7 +9083,7 @@
      },
      "sustained_brawler": {
       "p10": 1.0,
-      "p50": 2.0,
+      "p50": 3.0,
       "p90": 5.0
      },
      "window": 0,
@@ -8950,7 +9112,7 @@
      "dive_cleanup": {
       "p10": 0.0,
       "p50": 0.0,
-      "p90": 1.0
+      "p90": 2.0
      },
      "engage_tank": {
       "p10": 1.0,
@@ -8967,7 +9129,7 @@
       "p50": 3.0,
       "p90": 4.0
      },
-     "n": 1066,
+     "n": 1119,
      "off_tank": {
       "p10": 0.0,
       "p50": 0.0,
@@ -9036,7 +9198,7 @@
       "p50": 3.0,
       "p90": 4.0
      },
-     "n": 1152,
+     "n": 1201,
      "off_tank": {
       "p10": 0.0,
       "p50": 1.0,
@@ -9105,7 +9267,7 @@
       "p50": 3.0,
       "p90": 4.0
      },
-     "n": 1239,
+     "n": 1302,
      "off_tank": {
       "p10": 0.0,
       "p50": 1.0,
@@ -9174,7 +9336,7 @@
       "p50": 3.0,
       "p90": 4.0
      },
-     "n": 1432,
+     "n": 1510,
      "off_tank": {
       "p10": 0.0,
       "p50": 1.0,
@@ -9243,7 +9405,7 @@
       "p50": 4.0,
       "p90": 5.0
      },
-     "n": 1548,
+     "n": 1615,
      "off_tank": {
       "p10": 0.0,
       "p50": 1.0,
@@ -9252,7 +9414,7 @@
      "ranged_aoe": {
       "p10": 1.0,
       "p50": 3.0,
-      "p90": 5.0
+      "p90": 5.6
      },
      "shield_support": {
       "p10": 0.0,
@@ -9312,7 +9474,7 @@
       "p50": 4.0,
       "p90": 5.0
      },
-     "n": 1356,
+     "n": 1412,
      "off_tank": {
       "p10": 0.0,
       "p50": 1.0,
@@ -9381,10 +9543,10 @@
       },
       "main_healer": {
        "p10": 0.0,
-       "p50": 2.0,
+       "p50": 1.0,
        "p90": 3.0
       },
-      "n": 289,
+      "n": 305,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -9441,7 +9603,7 @@
       "engage_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 3.0
+       "p90": 2.0
       },
       "kite_healer": {
        "p10": 0.0,
@@ -9453,7 +9615,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 215,
+      "n": 242,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -9472,7 +9634,7 @@
       "stopper_tank": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 2.0
+       "p90": 1.9
       },
       "sustained_brawler": {
        "p10": 1.0,
@@ -9490,7 +9652,7 @@
       "bomb_aoe": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 2.2
+       "p90": 2.1
       },
       "brawl_healer": {
        "p10": 0.0,
@@ -9522,7 +9684,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 209,
+      "n": 230,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -9540,7 +9702,7 @@
       },
       "stopper_tank": {
        "p10": 0.0,
-       "p50": 1.0,
+       "p50": 0.0,
        "p90": 2.0
       },
       "sustained_brawler": {
@@ -9591,7 +9753,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 187,
+      "n": 198,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -9621,7 +9783,7 @@
       "zone_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 0.4
+       "p90": 0.3
       }
      },
      "14": {
@@ -9660,7 +9822,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 190,
+      "n": 202,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -9729,11 +9891,11 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 175,
+      "n": 180,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.0
+       "p90": 1.1
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -9759,7 +9921,7 @@
       "zone_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 0.0
+       "p90": 0.1
       }
      },
      "16": {
@@ -9798,11 +9960,11 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 188,
+      "n": 196,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.3
+       "p90": 1.5
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -9834,7 +9996,7 @@
      "17": {
       "bomb_aoe": {
        "p10": 0.0,
-       "p50": 0.0,
+       "p50": 1.0,
        "p90": 3.0
       },
       "brawl_healer": {
@@ -9867,7 +10029,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 201,
+      "n": 214,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -9897,7 +10059,7 @@
       "zone_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.0
+       "p90": 0.7
       }
      },
      "18": {
@@ -9936,7 +10098,7 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 212,
+      "n": 228,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -9950,7 +10112,7 @@
       "shield_support": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.9
+       "p90": 2.0
       },
       "stopper_tank": {
        "p10": 0.0,
@@ -9973,7 +10135,7 @@
       "bomb_aoe": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 4.0
+       "p90": 3.9
       },
       "brawl_healer": {
        "p10": 0.0,
@@ -10005,7 +10167,7 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 205,
+      "n": 212,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -10074,7 +10236,7 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 166,
+      "n": 173,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -10083,7 +10245,7 @@
       "ranged_aoe": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.0
+       "p90": 3.0
       },
       "shield_support": {
        "p10": 0.0,
@@ -10145,15 +10307,15 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 41,
+      "n": 43,
       "off_tank": {
        "p10": 0.0,
-       "p50": 1.0,
+       "p50": 0.0,
        "p90": 2.0
       },
       "ranged_aoe": {
        "p10": 0.0,
-       "p50": 0.0,
+       "p50": 1.0,
        "p90": 2.0
       },
       "shield_support": {
@@ -10212,13 +10374,13 @@
       "main_healer": {
        "p10": 1.0,
        "p50": 2.0,
-       "p90": 3.6
+       "p90": 3.4
       },
-      "n": 55,
+      "n": 57,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.6
+       "p90": 2.4
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -10238,13 +10400,13 @@
       "sustained_brawler": {
        "p10": 2.0,
        "p50": 3.0,
-       "p90": 6.6
+       "p90": 6.4
       },
       "window": 1,
       "zone_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 0.6
+       "p90": 1.0
       }
      },
      "12": {
@@ -10545,7 +10707,7 @@
        "p90": 1.0
       },
       "engage_tank": {
-       "p10": 0.6,
+       "p10": 0.8,
        "p50": 2.0,
        "p90": 3.0
       },
@@ -10556,14 +10718,14 @@
       },
       "main_healer": {
        "p10": 2.0,
-       "p50": 3.0,
+       "p50": 4.0,
        "p90": 5.0
       },
-      "n": 47,
+      "n": 49,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.4
+       "p90": 2.2
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -10581,7 +10743,7 @@
        "p90": 2.0
       },
       "sustained_brawler": {
-       "p10": 3.6,
+       "p10": 3.8,
        "p50": 5.0,
        "p90": 7.0
       },
@@ -10606,7 +10768,7 @@
       "curse_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.3
+       "p90": 1.1
       },
       "dive_cleanup": {
        "p10": 0.0,
@@ -10628,11 +10790,11 @@
        "p50": 3.0,
        "p90": 5.0
       },
-      "n": 48,
+      "n": 50,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.3
+       "p90": 2.1
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -10650,7 +10812,7 @@
        "p90": 2.0
       },
       "sustained_brawler": {
-       "p10": 3.7,
+       "p10": 3.9,
        "p50": 5.0,
        "p90": 7.0
       },
@@ -10670,7 +10832,7 @@
       "brawl_healer": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 0.3
+       "p90": 0.1
       },
       "curse_support": {
        "p10": 0.0,
@@ -10697,11 +10859,11 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 58,
+      "n": 60,
       "off_tank": {
        "p10": 0.0,
        "p50": 2.0,
-       "p90": 2.3
+       "p90": 2.1
       },
       "ranged_aoe": {
        "p10": 0.0,
@@ -10906,7 +11068,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 555,
+      "n": 591,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -10975,7 +11137,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 498,
+      "n": 518,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -10999,7 +11161,7 @@
       "sustained_brawler": {
        "p10": 0.0,
        "p50": 2.0,
-       "p90": 3.3
+       "p90": 4.0
       },
       "window": 0,
       "zone_support": {
@@ -11044,7 +11206,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 437,
+      "n": 460,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11113,7 +11275,7 @@
        "p50": 2.0,
        "p90": 4.0
       },
-      "n": 471,
+      "n": 510,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11160,7 +11322,7 @@
       "curse_support": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 1.1
+       "p90": 2.0
       },
       "dive_cleanup": {
        "p10": 0.0,
@@ -11182,7 +11344,7 @@
        "p50": 2.0,
        "p90": 4.0
       },
-      "n": 450,
+      "n": 474,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11251,7 +11413,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 563,
+      "n": 595,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11320,7 +11482,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 570,
+      "n": 597,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -11377,7 +11539,7 @@
       "engage_tank": {
        "p10": 1.0,
        "p50": 2.0,
-       "p90": 3.3
+       "p90": 3.0
       },
       "kite_healer": {
        "p10": 0.0,
@@ -11389,7 +11551,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 618,
+      "n": 640,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -11456,9 +11618,9 @@
       "main_healer": {
        "p10": 2.0,
        "p50": 3.0,
-       "p90": 4.1
+       "p90": 5.0
       },
-      "n": 680,
+      "n": 712,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -11527,7 +11689,7 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 662,
+      "n": 697,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -11596,7 +11758,7 @@
        "p50": 4.0,
        "p90": 5.0
       },
-      "n": 573,
+      "n": 599,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -11665,23 +11827,23 @@
       "main_healer": {
        "p10": 0.0,
        "p50": 2.0,
-       "p90": 2.1
+       "p90": 2.0
       },
-      "n": 60,
+      "n": 61,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
        "p90": 1.0
       },
       "ranged_aoe": {
-       "p10": 1.9,
+       "p10": 2.0,
        "p50": 3.0,
        "p90": 5.0
       },
       "shield_support": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.1
+       "p90": 1.0
       },
       "stopper_tank": {
        "p10": 0.0,
@@ -11801,11 +11963,11 @@
        "p90": 0.0
       },
       "main_healer": {
-       "p10": 0.7,
+       "p10": 0.9,
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 48,
+      "n": 50,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11814,7 +11976,7 @@
       "ranged_aoe": {
        "p10": 2.0,
        "p50": 3.0,
-       "p90": 4.3
+       "p90": 5.0
       },
       "shield_support": {
        "p10": 0.0,
@@ -11822,9 +11984,9 @@
        "p90": 2.0
       },
       "stopper_tank": {
-       "p10": 0.7,
+       "p10": 0.0,
        "p50": 2.0,
-       "p90": 2.3
+       "p90": 2.1
       },
       "sustained_brawler": {
        "p10": 0.0,
@@ -11862,7 +12024,7 @@
       "engage_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.7
+       "p90": 2.6
       },
       "kite_healer": {
        "p10": 0.0,
@@ -11874,7 +12036,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 64,
+      "n": 65,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11943,7 +12105,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 90,
+      "n": 94,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -11973,7 +12135,7 @@
       "zone_support": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.0
+       "p90": 1.7
       }
      },
      "15": {
@@ -12012,7 +12174,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 100,
+      "n": 103,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12049,7 +12211,7 @@
       "bomb_aoe": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.3
+       "p90": 1.0
       },
       "brawl_healer": {
        "p10": 0.0,
@@ -12081,7 +12243,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 148,
+      "n": 154,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -12127,7 +12289,7 @@
       },
       "curse_support": {
        "p10": 0.0,
-       "p50": 1.0,
+       "p50": 0.0,
        "p90": 1.0
       },
       "dive_cleanup": {
@@ -12150,7 +12312,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 188,
+      "n": 201,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -12159,7 +12321,7 @@
       "ranged_aoe": {
        "p10": 2.0,
        "p50": 4.0,
-       "p90": 6.0
+       "p90": 5.0
       },
       "shield_support": {
        "p10": 0.0,
@@ -12174,7 +12336,7 @@
       "sustained_brawler": {
        "p10": 1.0,
        "p50": 3.0,
-       "p90": 3.3
+       "p90": 3.0
       },
       "window": 0,
       "zone_support": {
@@ -12219,7 +12381,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 256,
+      "n": 273,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -12288,7 +12450,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 343,
+      "n": 352,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -12357,7 +12519,7 @@
        "p50": 4.0,
        "p90": 4.0
       },
-      "n": 311,
+      "n": 320,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -12411,7 +12573,7 @@
       "dive_cleanup": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 2.0
+       "p90": 1.5
       },
       "engage_tank": {
        "p10": 0.0,
@@ -12428,7 +12590,7 @@
        "p50": 1.0,
        "p90": 2.0
       },
-      "n": 134,
+      "n": 136,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12480,7 +12642,7 @@
       "dive_cleanup": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.0
+       "p90": 1.8
       },
       "engage_tank": {
        "p10": 0.0,
@@ -12497,7 +12659,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 134,
+      "n": 143,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12534,7 +12696,7 @@
       "bomb_aoe": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.0
+       "p90": 0.7
       },
       "brawl_healer": {
        "p10": 0.0,
@@ -12562,11 +12724,11 @@
        "p90": 0.0
       },
       "main_healer": {
-       "p10": 1.0,
+       "p10": 0.3,
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 108,
+      "n": 114,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12608,7 +12770,7 @@
       "brawl_healer": {
        "p10": 0.0,
        "p50": 0.0,
-       "p90": 1.0
+       "p90": 0.5
       },
       "curse_support": {
        "p10": 0.0,
@@ -12635,7 +12797,7 @@
        "p50": 2.0,
        "p90": 3.0
       },
-      "n": 118,
+      "n": 126,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12654,7 +12816,7 @@
       "stopper_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.3
+       "p90": 2.5
       },
       "sustained_brawler": {
        "p10": 0.0,
@@ -12691,7 +12853,7 @@
       },
       "engage_tank": {
        "p10": 0.0,
-       "p50": 1.5,
+       "p50": 1.0,
        "p90": 3.0
       },
       "kite_healer": {
@@ -12704,10 +12866,10 @@
        "p50": 2.0,
        "p90": 4.0
       },
-      "n": 118,
+      "n": 127,
       "off_tank": {
        "p10": 0.0,
-       "p50": 0.5,
+       "p50": 0.0,
        "p90": 1.0
       },
       "ranged_aoe": {
@@ -12723,7 +12885,7 @@
       "stopper_tank": {
        "p10": 0.0,
        "p50": 1.0,
-       "p90": 2.3
+       "p90": 2.0
       },
       "sustained_brawler": {
        "p10": 0.0,
@@ -12759,7 +12921,7 @@
        "p90": 1.0
       },
       "engage_tank": {
-       "p10": 0.5,
+       "p10": 0.9,
        "p50": 2.0,
        "p90": 3.0
       },
@@ -12773,7 +12935,7 @@
        "p50": 2.0,
        "p90": 4.0
       },
-      "n": 56,
+      "n": 60,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12782,7 +12944,7 @@
       "ranged_aoe": {
        "p10": 1.0,
        "p50": 3.5,
-       "p90": 6.5
+       "p90": 6.1
       },
       "shield_support": {
        "p10": 0.0,
@@ -12792,7 +12954,7 @@
       "stopper_tank": {
        "p10": 0.0,
        "p50": 2.0,
-       "p90": 3.5
+       "p90": 3.1
       },
       "sustained_brawler": {
        "p10": 0.0,
@@ -12911,7 +13073,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 72,
+      "n": 74,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -12920,7 +13082,7 @@
       "ranged_aoe": {
        "p10": 2.0,
        "p50": 3.0,
-       "p90": 5.9
+       "p90": 6.0
       },
       "shield_support": {
        "p10": 0.0,
@@ -12980,7 +13142,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 96,
+      "n": 98,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.5,
@@ -13049,7 +13211,7 @@
        "p50": 3.0,
        "p90": 4.0
       },
-      "n": 119,
+      "n": 125,
       "off_tank": {
        "p10": 0.0,
        "p50": 0.0,
@@ -13058,7 +13220,7 @@
       "ranged_aoe": {
        "p10": 2.0,
        "p50": 3.0,
-       "p90": 5.0
+       "p90": 5.6
       },
       "shield_support": {
        "p10": 0.0,
@@ -13118,7 +13280,7 @@
        "p50": 4.0,
        "p90": 4.0
       },
-      "n": 125,
+      "n": 133,
       "off_tank": {
        "p10": 0.0,
        "p50": 1.0,
@@ -13146,7 +13308,7 @@
       },
       "window": 0,
       "zone_support": {
-       "p10": 0.0,
+       "p10": 0.2,
        "p50": 1.0,
        "p90": 2.0
       }
@@ -13165,7 +13327,7 @@
     "11": {
      "engage_tank": 1,
      "main_healer": 2,
-     "ranged_aoe": 3,
+     "ranged_aoe": 2,
      "sustained_brawler": 2
     },
     "12": {
@@ -13189,7 +13351,7 @@
      "ranged_aoe": 3,
      "shield_support": 1,
      "stopper_tank": 1,
-     "sustained_brawler": 2
+     "sustained_brawler": 3
     },
     "15": {
      "curse_support": 1,
@@ -13256,7 +13418,7 @@
      "10": {
       "dive_cleanup": 1,
       "engage_tank": 1,
-      "main_healer": 2,
+      "main_healer": 1,
       "ranged_aoe": 1,
       "sustained_brawler": 3
      },
@@ -13272,7 +13434,6 @@
       "engage_tank": 1,
       "main_healer": 2,
       "ranged_aoe": 1,
-      "stopper_tank": 1,
       "sustained_brawler": 3
      },
      "13": {
@@ -13311,6 +13472,7 @@
       "sustained_brawler": 4
      },
      "17": {
+      "bomb_aoe": 1,
       "curse_support": 1,
       "dive_cleanup": 1,
       "engage_tank": 2,
@@ -13362,7 +13524,7 @@
      "10": {
       "engage_tank": 1,
       "main_healer": 2,
-      "off_tank": 1,
+      "ranged_aoe": 1,
       "sustained_brawler": 3
      },
      "11": {
@@ -13407,7 +13569,7 @@
      },
      "16": {
       "engage_tank": 2,
-      "main_healer": 3,
+      "main_healer": 4,
       "off_tank": 1,
       "ranged_aoe": 1,
       "shield_support": 1,
@@ -13613,7 +13775,6 @@
       "zone_support": 1
      },
      "17": {
-      "curse_support": 1,
       "engage_tank": 2,
       "main_healer": 3,
       "off_tank": 1,
@@ -13690,7 +13851,7 @@
       "zone_support": 1
      },
      "14": {
-      "engage_tank": 2,
+      "engage_tank": 1,
       "main_healer": 2,
       "ranged_aoe": 3,
       "shield_support": 1,
