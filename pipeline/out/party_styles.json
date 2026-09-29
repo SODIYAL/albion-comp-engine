@@ -3,7 +3,7 @@
  "_generated": "2026-09-28",
  "_min_size": 10,
  "_source": {
-  "party_rosters_sha256": "f40d9a1652baa1ac05505442fedd5d13716a9a9d8ef1b5636b6c977af22d616a"
+  "party_rosters_sha256": "bca02f21e530884d9b28721c638430ff6a4a8fa4bd59f2a707f15c66c4b6ec72"
  },
  "parties": [
   {
@@ -32984,6 +32984,13 @@
    "style": "clap"
   },
   {
+   "battle": 1447138775,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
    "battle": 1447138842,
    "index": 0,
    "size": 16,
@@ -33831,13 +33838,6 @@
    "style": null
   },
   {
-   "battle": 1447182980,
-   "index": 0,
-   "size": 10,
-   "strength": "leaning",
-   "style": "kite"
-  },
-  {
    "battle": 1447185075,
    "index": 0,
    "size": 20,
@@ -34473,13 +34473,6 @@
    "size": 15,
    "strength": null,
    "style": null
-  },
-  {
-   "battle": 1447326605,
-   "index": 0,
-   "size": 10,
-   "strength": "leaning",
-   "style": "clap"
   },
   {
    "battle": 1447327311,
@@ -38962,13 +38955,6 @@
    "style": "clap"
   },
   {
-   "battle": 1447735358,
-   "index": 0,
-   "size": 11,
-   "strength": "leaning",
-   "style": "clap"
-  },
-  {
    "battle": 1447735686,
    "index": 0,
    "size": 12,
@@ -39184,13 +39170,6 @@
    "size": 10,
    "strength": "leaning",
    "style": "brawl"
-  },
-  {
-   "battle": 1447779107,
-   "index": 0,
-   "size": 10,
-   "strength": null,
-   "style": null
   },
   {
    "battle": 1447781294,
@@ -39814,13 +39793,6 @@
    "size": 10,
    "strength": "leaning",
    "style": "brawl"
-  },
-  {
-   "battle": 1447956513,
-   "index": 0,
-   "size": 11,
-   "strength": "leaning",
-   "style": "clap"
   },
   {
    "battle": 1447958073,
@@ -43825,13 +43797,6 @@
    "size": 10,
    "strength": "leaning",
    "style": "brawl"
-  },
-  {
-   "battle": 1448350008,
-   "index": 0,
-   "size": 10,
-   "strength": "strong",
-   "style": "clap"
   },
   {
    "battle": 1448354013,
@@ -132888,6 +132853,20 @@
    "style": "clap"
   },
   {
+   "battle": 1456602870,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456603561,
+   "index": 0,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
    "battle": 1456607219,
    "index": 0,
    "size": 20,
@@ -133007,6 +132986,27 @@
    "style": "clap"
   },
   {
+   "battle": 1456613657,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456613657,
+   "index": 1,
+   "size": 19,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1456613657,
+   "index": 2,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456613998,
    "index": 0,
    "size": 14,
@@ -133112,6 +133112,13 @@
    "style": "kite"
   },
   {
+   "battle": 1456616702,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
    "battle": 1456617561,
    "index": 0,
    "size": 14,
@@ -133186,6 +133193,13 @@
    "index": 1,
    "size": 18,
    "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456624363,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
    "style": "clap"
   },
   {
@@ -133560,6 +133574,20 @@
    "style": null
   },
   {
+   "battle": 1456632760,
+   "index": 0,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456632760,
+   "index": 1,
+   "size": 10,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
    "battle": 1456632907,
    "index": 0,
    "size": 18,
@@ -133665,6 +133693,20 @@
    "style": "clap"
   },
   {
+   "battle": 1456633386,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456633386,
+   "index": 1,
+   "size": 11,
+   "strength": null,
+   "style": null
+  },
+  {
    "battle": 1456633457,
    "index": 0,
    "size": 18,
@@ -133700,11 +133742,25 @@
    "style": "clap"
   },
   {
+   "battle": 1456634900,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
    "battle": 1456635414,
    "index": 0,
    "size": 18,
    "strength": "leaning",
    "style": "clap_kite"
+  },
+  {
+   "battle": 1456635687,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
   },
   {
    "battle": 1456636106,
@@ -133740,6 +133796,20 @@
    "size": 14,
    "strength": "strong",
    "style": "kite"
+  },
+  {
+   "battle": 1456637856,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456637856,
+   "index": 1,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
   },
   {
    "battle": 1456638008,
@@ -133987,6 +134057,13 @@
    "style": "clap_kite"
   },
   {
+   "battle": 1456660045,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456664081,
    "index": 0,
    "size": 19,
@@ -134043,6 +134120,20 @@
    "style": null
   },
   {
+   "battle": 1456667929,
+   "index": 0,
+   "size": 13,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456667929,
+   "index": 1,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456668095,
    "index": 0,
    "size": 15,
@@ -134090,6 +134181,13 @@
    "size": 12,
    "strength": "strong",
    "style": "clap"
+  },
+  {
+   "battle": 1456670013,
+   "index": 0,
+   "size": 14,
+   "strength": null,
+   "style": null
   },
   {
    "battle": 1456671037,
@@ -134160,6 +134258,34 @@
    "size": 11,
    "strength": "strong",
    "style": "brawl"
+  },
+  {
+   "battle": 1456677314,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456677314,
+   "index": 1,
+   "size": 17,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456680383,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456680383,
+   "index": 1,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap_kite"
   },
   {
    "battle": 1456680679,
@@ -134286,6 +134412,41 @@
    "size": 16,
    "strength": "strong",
    "style": "clap"
+  },
+  {
+   "battle": 1456683964,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456683964,
+   "index": 1,
+   "size": 14,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456683964,
+   "index": 2,
+   "size": 13,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456684065,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456684065,
+   "index": 1,
+   "size": 17,
+   "strength": "strong",
+   "style": "brawl"
   },
   {
    "battle": 1456685039,
@@ -134589,6 +134750,20 @@
    "style": "clap_kite"
   },
   {
+   "battle": 1456696534,
+   "index": 0,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456696534,
+   "index": 1,
+   "size": 11,
+   "strength": null,
+   "style": null
+  },
+  {
    "battle": 1456696672,
    "index": 0,
    "size": 18,
@@ -134869,6 +135044,13 @@
    "style": null
   },
   {
+   "battle": 1456707374,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
    "battle": 1456707610,
    "index": 0,
    "size": 20,
@@ -134888,6 +135070,13 @@
    "size": 11,
    "strength": "leaning",
    "style": "brawl"
+  },
+  {
+   "battle": 1456708479,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap_kite"
   },
   {
    "battle": 1456708543,
@@ -134960,6 +135149,34 @@
    "style": "clap"
   },
   {
+   "battle": 1456716629,
+   "index": 0,
+   "size": 15,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456716629,
+   "index": 1,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456716629,
+   "index": 2,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456716629,
+   "index": 3,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
    "battle": 1456719125,
    "index": 0,
    "size": 15,
@@ -134972,6 +135189,34 @@
    "size": 16,
    "strength": "leaning",
    "style": "clap_kite"
+  },
+  {
+   "battle": 1456720845,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456720845,
+   "index": 1,
+   "size": 18,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456720845,
+   "index": 2,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456721584,
+   "index": 0,
+   "size": 14,
+   "strength": "leaning",
+   "style": "brawl"
   },
   {
    "battle": 1456723516,
@@ -135051,6 +135296,41 @@
    "style": "clap_kite"
   },
   {
+   "battle": 1456725959,
+   "index": 0,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456726714,
+   "index": 0,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456726714,
+   "index": 1,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456726714,
+   "index": 2,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456726714,
+   "index": 3,
+   "size": 11,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456726986,
    "index": 0,
    "size": 11,
@@ -135084,6 +135364,34 @@
    "size": 10,
    "strength": "strong",
    "style": "clap"
+  },
+  {
+   "battle": 1456731650,
+   "index": 0,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456731784,
+   "index": 0,
+   "size": 14,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456733883,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456733883,
+   "index": 1,
+   "size": 13,
+   "strength": "leaning",
+   "style": "kite"
   },
   {
    "battle": 1456734948,
@@ -135457,6 +135765,104 @@
    "style": "brawl"
   },
   {
+   "battle": 1456749895,
+   "index": 0,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456749895,
+   "index": 1,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456750063,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750063,
+   "index": 1,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456750063,
+   "index": 2,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456750063,
+   "index": 3,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 1,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 2,
+   "size": 19,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456750379,
+   "index": 3,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 4,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 5,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 6,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456750379,
+   "index": 7,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456750640,
    "index": 0,
    "size": 10,
@@ -135492,6 +135898,34 @@
    "style": null
   },
   {
+   "battle": 1456751673,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456752257,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456752257,
+   "index": 1,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456752257,
+   "index": 2,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456752910,
    "index": 0,
    "size": 17,
@@ -135525,6 +135959,125 @@
    "size": 12,
    "strength": "leaning",
    "style": "kite"
+  },
+  {
+   "battle": 1456755390,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456755390,
+   "index": 1,
+   "size": 13,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 1,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 2,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 3,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 4,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 5,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 6,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 7,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 8,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 9,
+   "size": 15,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 10,
+   "size": 14,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456755909,
+   "index": 11,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456755909,
+   "index": 12,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 13,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456755909,
+   "index": 14,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
   },
   {
    "battle": 1456756563,
@@ -135702,6 +136255,20 @@
    "style": null
   },
   {
+   "battle": 1456762715,
+   "index": 0,
+   "size": 19,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456762715,
+   "index": 1,
+   "size": 16,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
    "battle": 1456763299,
    "index": 0,
    "size": 19,
@@ -135721,6 +136288,27 @@
    "size": 19,
    "strength": "strong",
    "style": "clap"
+  },
+  {
+   "battle": 1456763431,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456763842,
+   "index": 0,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456763842,
+   "index": 1,
+   "size": 11,
+   "strength": null,
+   "style": null
   },
   {
    "battle": 1456765333,
@@ -135842,6 +136430,13 @@
    "style": "clap"
   },
   {
+   "battle": 1456766256,
+   "index": 0,
+   "size": 18,
+   "strength": null,
+   "style": null
+  },
+  {
    "battle": 1456766671,
    "index": 0,
    "size": 10,
@@ -135919,6 +136514,13 @@
    "style": "clap_kite"
   },
   {
+   "battle": 1456767724,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
    "battle": 1456767788,
    "index": 0,
    "size": 19,
@@ -135930,6 +136532,20 @@
    "index": 1,
    "size": 14,
    "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456767811,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456767811,
+   "index": 1,
+   "size": 19,
+   "strength": "leaning",
    "style": "brawl"
   },
   {
@@ -136066,6 +136682,13 @@
    "style": "clap"
   },
   {
+   "battle": 1456774176,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
    "battle": 1456774279,
    "index": 0,
    "size": 14,
@@ -136115,11 +136738,32 @@
    "style": "clap"
   },
   {
+   "battle": 1456774745,
+   "index": 0,
+   "size": 17,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456774745,
+   "index": 1,
+   "size": 15,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
    "battle": 1456775920,
    "index": 0,
    "size": 18,
    "strength": "leaning",
    "style": "clap"
+  },
+  {
+   "battle": 1456776488,
+   "index": 0,
+   "size": 10,
+   "strength": null,
+   "style": null
   },
   {
    "battle": 1456776664,
@@ -137897,6 +138541,1700 @@
    "index": 0,
    "size": 10,
    "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456902005,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456902097,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456906691,
+   "index": 0,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456907460,
+   "index": 0,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456914478,
+   "index": 0,
+   "size": 10,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456925343,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456925426,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456929062,
+   "index": 0,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456929325,
+   "index": 0,
+   "size": 15,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456929870,
+   "index": 0,
+   "size": 16,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456933068,
+   "index": 0,
+   "size": 14,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456936326,
+   "index": 0,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456938978,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456942419,
+   "index": 0,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456943434,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456943434,
+   "index": 1,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456943578,
+   "index": 0,
+   "size": 16,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456946167,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456950009,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456950024,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456950389,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456950389,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456951524,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456954677,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456954698,
+   "index": 0,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456955495,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456956471,
+   "index": 0,
+   "size": 12,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1456958653,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456958824,
+   "index": 0,
+   "size": 12,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1456959789,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456960802,
+   "index": 0,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456960908,
+   "index": 0,
+   "size": 10,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456961161,
+   "index": 0,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456965130,
+   "index": 0,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456965855,
+   "index": 0,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456968872,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456972006,
+   "index": 0,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456974248,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456976465,
+   "index": 0,
+   "size": 12,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1456977350,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456978411,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456984908,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456986329,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456986980,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456986980,
+   "index": 1,
+   "size": 14,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456988616,
+   "index": 0,
+   "size": 13,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456989173,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456989388,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456989388,
+   "index": 1,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456989388,
+   "index": 2,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456989388,
+   "index": 3,
+   "size": 18,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456989388,
+   "index": 4,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456989388,
+   "index": 5,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456989388,
+   "index": 6,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456990729,
+   "index": 0,
+   "size": 12,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456991580,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456991580,
+   "index": 1,
+   "size": 19,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456991580,
+   "index": 2,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456991580,
+   "index": 3,
+   "size": 19,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1456991580,
+   "index": 4,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456991580,
+   "index": 5,
+   "size": 19,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456991580,
+   "index": 6,
+   "size": 19,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456991580,
+   "index": 7,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456991580,
+   "index": 8,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456991580,
+   "index": 9,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456991580,
+   "index": 10,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456991580,
+   "index": 11,
+   "size": 11,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456991582,
+   "index": 0,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456992573,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456992696,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456993222,
+   "index": 0,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456996124,
+   "index": 0,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456997111,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1456997111,
+   "index": 2,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1456997111,
+   "index": 3,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 4,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 5,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456997111,
+   "index": 6,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 7,
+   "size": 14,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 8,
+   "size": 13,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1456997111,
+   "index": 9,
+   "size": 10,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1456997351,
+   "index": 0,
+   "size": 17,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1456997689,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1456999105,
+   "index": 0,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1456999822,
+   "index": 0,
+   "size": 12,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457000897,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457001135,
+   "index": 0,
+   "size": 12,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457001307,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457001307,
+   "index": 1,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457001307,
+   "index": 2,
+   "size": 17,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457001307,
+   "index": 3,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457001307,
+   "index": 4,
+   "size": 11,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457001307,
+   "index": 5,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457001597,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457003968,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457003968,
+   "index": 1,
+   "size": 12,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457004041,
+   "index": 0,
+   "size": 15,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457004156,
+   "index": 0,
+   "size": 10,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457005108,
+   "index": 0,
+   "size": 14,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005110,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457005110,
+   "index": 1,
+   "size": 14,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457005110,
+   "index": 2,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005244,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005244,
+   "index": 1,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457005244,
+   "index": 2,
+   "size": 19,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457005244,
+   "index": 3,
+   "size": 18,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457005244,
+   "index": 4,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005244,
+   "index": 5,
+   "size": 12,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005244,
+   "index": 6,
+   "size": 11,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457005244,
+   "index": 7,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457005244,
+   "index": 8,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457005967,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457007285,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457007508,
+   "index": 0,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457007508,
+   "index": 1,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457007836,
+   "index": 0,
+   "size": 13,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457008647,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457013082,
+   "index": 0,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457015446,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457015946,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457019130,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457020925,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457022227,
+   "index": 0,
+   "size": 16,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457028348,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457028348,
+   "index": 1,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457028348,
+   "index": 2,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457030601,
+   "index": 0,
+   "size": 14,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457035023,
+   "index": 0,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457035023,
+   "index": 1,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457035338,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457035906,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457036963,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457037330,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457037877,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457037877,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457037877,
+   "index": 2,
+   "size": 14,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457037938,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457037938,
+   "index": 1,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457039031,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039031,
+   "index": 1,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039031,
+   "index": 2,
+   "size": 17,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039031,
+   "index": 3,
+   "size": 14,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457039031,
+   "index": 4,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039031,
+   "index": 5,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039160,
+   "index": 0,
+   "size": 15,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457039285,
+   "index": 0,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039828,
+   "index": 0,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039866,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457039949,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457039982,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457040044,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1457040044,
+   "index": 1,
+   "size": 20,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457040044,
+   "index": 2,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457040044,
+   "index": 3,
+   "size": 19,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457040044,
+   "index": 4,
+   "size": 18,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457040044,
+   "index": 5,
+   "size": 17,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457040044,
+   "index": 6,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041435,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457041435,
+   "index": 1,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041435,
+   "index": 2,
+   "size": 18,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457041435,
+   "index": 3,
+   "size": 16,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457041435,
+   "index": 4,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041977,
+   "index": 0,
+   "size": 20,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457041977,
+   "index": 1,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041977,
+   "index": 2,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041977,
+   "index": 3,
+   "size": 14,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457041977,
+   "index": 4,
+   "size": 14,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457041977,
+   "index": 5,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457041977,
+   "index": 6,
+   "size": 13,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457042292,
+   "index": 0,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457042579,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457042579,
+   "index": 1,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457042579,
+   "index": 2,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457042579,
+   "index": 3,
+   "size": 18,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457042579,
+   "index": 4,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457042700,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457042700,
+   "index": 1,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457044087,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457044439,
+   "index": 0,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457045380,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457045919,
+   "index": 0,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457045919,
+   "index": 1,
+   "size": 16,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457046659,
+   "index": 0,
+   "size": 17,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457046727,
+   "index": 0,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457047059,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457047059,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457047059,
+   "index": 2,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457047292,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457047292,
+   "index": 1,
+   "size": 11,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457049809,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457049809,
+   "index": 1,
+   "size": 16,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457051475,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051598,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051598,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457051598,
+   "index": 2,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457051598,
+   "index": 3,
+   "size": 18,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051598,
+   "index": 4,
+   "size": 17,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457051598,
+   "index": 5,
+   "size": 11,
+   "strength": "strong",
+   "style": "kite"
+  },
+  {
+   "battle": 1457051598,
+   "index": 6,
+   "size": 10,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457051640,
+   "index": 0,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457051640,
+   "index": 1,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051640,
+   "index": 2,
+   "size": 18,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1457051640,
+   "index": 3,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457051640,
+   "index": 4,
+   "size": 16,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051640,
+   "index": 5,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051640,
+   "index": 6,
+   "size": 13,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457051640,
+   "index": 7,
+   "size": 13,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457051640,
+   "index": 8,
+   "size": 11,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457051934,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457051934,
+   "index": 1,
+   "size": 14,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457054045,
+   "index": 0,
+   "size": 10,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457056978,
+   "index": 0,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457058466,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457058466,
+   "index": 1,
+   "size": 18,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457059770,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457059770,
+   "index": 1,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl_clap"
+  },
+  {
+   "battle": 1457061460,
+   "index": 0,
+   "size": 19,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457061460,
+   "index": 1,
+   "size": 17,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457063350,
+   "index": 0,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457064540,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457065786,
+   "index": 0,
+   "size": 11,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457071446,
+   "index": 0,
+   "size": 13,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457073003,
+   "index": 0,
+   "size": 10,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457079063,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 0,
+   "size": 20,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 1,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457079183,
+   "index": 2,
+   "size": 19,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 3,
+   "size": 18,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 4,
+   "size": 17,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457079183,
+   "index": 5,
+   "size": 15,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 6,
+   "size": 12,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 7,
+   "size": 12,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457079183,
+   "index": 8,
+   "size": 10,
+   "strength": "leaning",
+   "style": "clap"
+  },
+  {
+   "battle": 1457079183,
+   "index": 9,
+   "size": 10,
+   "strength": "leaning",
+   "style": "kite"
+  },
+  {
+   "battle": 1457079188,
+   "index": 0,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457080733,
+   "index": 0,
+   "size": 19,
+   "strength": null,
+   "style": null
+  },
+  {
+   "battle": 1457085068,
+   "index": 0,
+   "size": 11,
+   "strength": "leaning",
+   "style": "brawl"
+  },
+  {
+   "battle": 1457085264,
+   "index": 0,
+   "size": 10,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457085748,
+   "index": 0,
+   "size": 20,
+   "strength": "leaning",
+   "style": "clap_kite"
+  },
+  {
+   "battle": 1457086750,
+   "index": 0,
+   "size": 15,
+   "strength": "strong",
+   "style": "clap"
+  },
+  {
+   "battle": 1457087168,
+   "index": 0,
+   "size": 16,
+   "strength": "strong",
    "style": "brawl"
   }
  ]
