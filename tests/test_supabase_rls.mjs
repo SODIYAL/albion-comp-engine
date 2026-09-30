@@ -1146,6 +1146,88 @@ const code_ = code;
   await db.query("delete from realtime.messages");
 }
 
+/* 15 - analytics: facts over completed CTAs, computed on read as the caller */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Facts", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const SLOTS = [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: "MAIN_HOLYSTAFF_AVALON" }];
+  const T1 = "5".repeat(32);
+  const makeEvent = async (name, starts) => {
+    const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+      guild_id: g.id, name, starts_at: starts, content: "castle", status: "draft", slots: SLOTS })]))[0];
+    await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+    return ev;
+  };
+  const up = (role, sub, ev, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [ev.share_code, token, JSON.stringify(payload)]).then(r => r[0].s);
+  const add = (ev, payload) => rows("authenticated", K2, "select public.add_player($1, $2::jsonb) as a", [ev.id, JSON.stringify(payload)]).then(r => r[0].a);
+  const markOf = async (ev, name, status) => {
+    const id = (await db.query("select id from public.attendance where event_id = $1 and player_name = $2", [ev.id, name])).rows[0].id;
+    return rows("authenticated", K2, "select public.mark_attendance($1, $2)", [id, status]);
+  };
+  const complete = async ev => {
+    await run("authenticated", C, "update public.events set status = 'locked' where id = $1", [ev.id]);
+    await run("authenticated", C, "update public.events set status = 'completed' where id = $1", [ev.id]);
+  };
+
+  /* the first CTA: Gus (guest) attended in slot 1, Eff no-show in slot 2, Disc (added) attended in slot 3 */
+  const e1 = await makeEvent("Facts one", "2026-10-01T18:00:00Z");
+  await up("anon", null, e1, T1, { player_name: "Gus", position: 1 });
+  await up("authenticated", F, e1, null, { position: 2 });
+  await add(e1, { player_name: "Disc", position: 3 });
+  await complete(e1);
+  await markOf(e1, "Gus", "attended");
+  await markOf(e1, "Eff", "no_show");
+  await markOf(e1, "Disc", "attended");
+  /* the second: Gus attended in slot 1, Eff attended in slot 2, Res a reserve */
+  const e2 = await makeEvent("Facts two", "2026-10-08T18:00:00Z");
+  await up("anon", null, e2, T1, { player_name: "Gus", position: 1 });
+  await up("authenticated", F, e2, null, { position: 2 });
+  await add(e2, { player_name: "Res" });
+  await complete(e2);
+  await markOf(e2, "Gus", "attended");
+  await markOf(e2, "Eff", "attended");
+  /* a third, still open: its sign-ups are not history */
+  const e3 = await makeEvent("Facts three", "2026-10-15T18:00:00Z");
+  await up("authenticated", F, e3, null, { position: 1 });
+
+  const facts = (await rows("authenticated", F, "select public.guild_history($1) as f", [g.id]))[0].f;
+  check("a member reads the guild's totals over completed CTAs alone: two CTAs, six records, four attended, one no-show, one reserve, a show rate of four in five, a fill of five slots in six",
+        facts.totals.ctas === 2 && facts.totals.records === 6 && facts.totals.attended === 4 && facts.totals.no_show === 1
+        && facts.totals.reserve === 1 && facts.totals.unmarked === 0 && facts.totals.cancelled === 0
+        && Number(facts.totals.show_rate) === 0.8 && Number(facts.totals.fill) === 0.833, facts.totals);
+  check("the completed CTAs come latest first, each with its counts",
+        facts.ctas.length === 2 && facts.ctas[0].name === "Facts two" && facts.ctas[0].claimed === 2 && facts.ctas[0].slots === 3
+        && facts.ctas[0].attended === 2 && facts.ctas[0].reserve === 1
+        && facts.ctas[1].name === "Facts one" && facts.ctas[1].claimed === 3 && facts.ctas[1].no_show === 1, facts.ctas);
+  const names = facts.players.map(p => p.name);
+  check("the players come attended first, then CTAs, then name: Gus, Eff, Disc, Res", same(names, ["Gus", "Eff", "Disc", "Res"]), names);
+  const gus = facts.players[0], eff = facts.players[1], res = facts.players[3];
+  check("a guest is one player by name across CTAs: two CTAs, two attended, a rate of one, the Longbow played twice",
+        gus.account === false && gus.ctas === 2 && gus.attended === 2 && Number(gus.show_rate) === 1
+        && same(gus.weapons, [{ n: 2, weapon_id: "2H_LONGBOW" }]) && gus.last_attended && gus.first_seen, gus);
+  check("an account is one player by id: two CTAs, one attended, one no-show, a rate of a half, the last attended on the second CTA",
+        eff.account === true && eff.ctas === 2 && eff.attended === 1 && eff.no_show === 1 && Number(eff.show_rate) === 0.5
+        && String(eff.last_attended).startsWith("2026-10-08") && same(eff.weapons, [{ n: 1, weapon_id: "MAIN_MACE_HELL" }]), eff);
+  check("a reserve has no rate and nothing played", res.reserve === 1 && res.show_rate === null && same(res.weapons, []), res);
+  check("the weapons fielded, most played first: the Longbow twice by one player, then the two played once",
+        same(facts.weapons.map(w => `${w.weapon_id}:${w.n}:${w.players}`), ["2H_LONGBOW:2:1", "MAIN_HOLYSTAFF_AVALON:1:1", "MAIN_MACE_HELL:1:1"]), facts.weapons);
+  check("the open CTA and its sign-ups are not history", !facts.ctas.some(c => c.name === "Facts three") && facts.totals.records === 6);
+  const outside = (await rows("authenticated", X, "select public.guild_history($1) as f", [g.id]))[0].f;
+  check("an outsider gets empty facts, not a refusal: the policies show them no CTA",
+        outside.totals.ctas === 0 && outside.totals.records === 0 && outside.totals.show_rate === null && same(outside.players, []) && same(outside.ctas, []) && same(outside.weapons, []), outside);
+  check("anon cannot ask", await code_("anon", null, "select public.guild_history($1)", [g.id]) === "42501");
+  check("a guild with no completed CTA has zero facts", (await rows("authenticated", C, "select public.guild_history(gen_random_uuid()) as f"))[0].f.totals.ctas === 0);
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  await db.query("delete from realtime.messages");
+}
+
 } catch (e) {
   fail++;
   console.log("FAIL  the run stopped: " + (e.stack || e.message));

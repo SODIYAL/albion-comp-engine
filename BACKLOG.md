@@ -352,7 +352,8 @@ planner through the share hash), phase 4 (CTAs: a guild's events with a
 status, a share code and slots copied from a comp), phase 5 (sign-up:
 the sheet a link opens, for guests with a claim token and for accounts),
 phase 6 (caller management on the sheet), phase 7 (the live sheet over
-Realtime Broadcast) and phase 8 (the attendance record) are built.
+Realtime Broadcast), phase 8 (the attendance record) and phase 9 (the
+history: facts over completed CTAs) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -363,13 +364,17 @@ Realtime Broadcast) and phase 8 (the attendance record) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 9, analytics**: facts over completed CTAs from the attendance
-  record: CTAs, sign-ups, attendance and show rate, regulars, roles and
-  weapons played. No skill rating without a defined, evidenced measure.
-  Then phases 10–12 in order (the spec).
-- **A player's own history**: the record is read per CTA on the sheet;
-  a player's list of their CTAs and marks (and a guest's, by claim) is a
-  phase 9 surface.
+- **Phase 10, import and export**: a spreadsheet (Excel, CSV, Sheets)
+  to a normalized template: detect columns, map weapon, player, role,
+  party and count, match names to weapon keys through an alias table,
+  show uncertain matches for review; one-way import first. Then phases
+  11 and 12 (the spec).
+- **A player's own history across guilds**: the history dialog reads a
+  guild's facts; a player's list of their own CTAs and marks across
+  guilds (and a guest's, by claim) is a later surface.
+- **History by period**: the facts run over every completed CTA; a
+  window (the last 30 days, a season) is a later increment if callers
+  ask for it.
 - **The CTAs dialog is not live**: the calendar and the sign-up counts
   read on open; the sheet is the live surface. A channel per guild for the
   dialog is a later increment if callers ask for it.

@@ -2,9 +2,9 @@
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
 phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
-(sign-up), phase 6 (caller management), phase 7 (live updates) and phase
-8 (history) implemented 2026-09-30; phases 9–12 open (`BACKLOG.md`
-"Platform"). The schema and its rules:
+(sign-up), phase 6 (caller management), phase 7 (live updates), phase 8
+(history) and phase 9 (analytics) implemented 2026-09-30; phases 10–12
+open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -80,9 +80,10 @@ roles.
    `attended`, `no_show`, `cancelled`, `reserve`), one record per player
    per CTA, kept apart from the sign-up by its own trigger; a completed
    event keeps its slots and its record, the slot's weapon copied in.
-9. **Analytics** — facts over completed events: CTAs, sign-ups, attendance
-   and show rate, regulars, roles and weapons played ("played Heavy Mace in
-   31 CTAs"). No skill rating without a defined, evidenced measure.
+9. **Analytics** (implemented) — facts over completed events, computed
+   on read from the attendance record (`guild_history`): CTAs, records,
+   attendance and show rate, fill, regulars, weapons played ("played the
+   Longbow in 31 CTAs") and the weapons fielded. No skill rating.
 10. **Import / export** — Excel / CSV / Sheets to a normalized template:
     detect columns, map weapon / player / role / party / count, match names
     to weapon keys through an alias table, show uncertain matches for review.
@@ -416,6 +417,33 @@ roles.
   history losing that player; deleting a CTA deletes them all.
 - **Deferred**: a player's own history across CTAs (phase 9), a
   caller's note on a record, a mark's audit trail.
+
+## Phase 9 decisions
+
+- **Computed on read, as the caller.** One function returns a guild's
+  facts from the attendance record; nothing is stored, nothing is
+  summed ahead, and the caller's own policies bound what is counted (a
+  member reads the guild's CTAs; anyone else gets empty facts, not a
+  refusal). Only completed CTAs are history: a live sheet is not.
+- **Every measure is defined and shown beside the facts.** Show rate is
+  attended over attended plus no-show, with the unmarked counted apart,
+  so a caller who never marked a CTA never inflates or deflates a rate;
+  fill is the slots held at the end over the roster's slots; played is
+  the slot's weapon at completion, over attended records alone; a
+  regular attended three or more at 75% or better (a curation
+  judgment, stated in the dialog). No skill rating exists, and none is
+  offered as one.
+- **A player is an account by id, a guest by name** whatever its case.
+  The claim token that keys a guest's own sign-up would split one
+  player into many when a caller adds the same name CTA after CTA;
+  grouping guests by name makes "Disc came to six of eight" true at the
+  cost of merging two guests who share a name. A guest who wants their
+  own line makes an account.
+- **Roles are read through the catalog, on the client**, from the
+  weapons played: one role read, no second classification in the
+  database.
+- **Deferred**: a period window, a player's own history across guilds,
+  export of the facts (phase 10), a caller's leaderboard by role.
 
 ## Open questions
 

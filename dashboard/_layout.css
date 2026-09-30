@@ -319,6 +319,9 @@
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}
+  /* the history's guild pick takes the row; the tables scroll sideways */
+  .hs-guild{flex-basis:100%}
+  .hs-table{display:block; overflow-x:auto}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

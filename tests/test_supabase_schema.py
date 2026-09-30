@@ -428,6 +428,27 @@ check(all(re.search(r"create trigger \w+_attendance\s+after [\w ]+ on public\.%s
 check("function markPowers" in SIGNUP_JS and 'status !== "completed"' in SIGNUP_JS and "compPowers(myRole).write" in SIGNUP_JS,
       "DB12f the client offers marks to the caller roles and confirmation to the player before completion")
 
+print("DB13 - analytics: facts over completed CTAs, computed on read as the caller, each measure defined, no rating")
+with open(os.path.join(ROOT, "dashboard", "_history.js"), encoding="utf-8") as f:
+    HISTORY_JS = f.read()
+GH = re.search(r"create or replace function public\.guild_history\(guild_id uuid\)(.*?)\$\$;", ALL, re.S)
+gh_header, gh_body = (GH.group(1).split("$$", 1) + [""])[:2] if GH else ("", "")
+check(GH is not None and "security invoker" in gh_header and "stable" in gh_header, "DB13a guild_history runs as the caller and only reads")
+check("and e.status = 'completed'" in gh_body, "DB13b the facts are over completed CTAs alone")
+check("round(sum(p.attended)::numeric / nullif(sum(p.attended) + sum(p.no_show), 0), 3)" in gh_body
+      and "round(p.attended::numeric / nullif(p.attended + p.no_show, 0), 3)" in gh_body
+      and "in ('signed_up', 'confirmed')))::int as unmarked" in gh_body,
+      "DB13c show rate is attended over attended plus no-show, the unmarked counted apart, for the guild and per player")
+check("const a = Number(attended) || 0;" in HISTORY_JS and "return n ? a / n : null;" in HISTORY_JS,
+      "DB13d the client's show rate is the same definition (a helper for facts the database did not round)")
+check("'account:' || a.user_id::text" in gh_body and "'guest:' || lower(a.player_name)" in gh_body,
+      "DB13e a player is an account by id, a guest by name whatever its case")
+check("where r.status = 'attended' and r.weapon_id is not null" in gh_body, "DB13f played is the settled slot weapon over attended records alone")
+check(not re.search(r"skill|rating", gh_body, re.I), "DB13g no skill rating in the facts")
+check(js_const(HISTORY_JS, "REGULAR_MIN_ATTENDED") is not None and re.search(r"const REGULAR_MIN_RATE = 0\.\d+;", HISTORY_JS) is not None
+      and "None of this is a skill rating" in HISTORY_JS,
+      "DB13h the client's regular is defined by two stated constants and the definitions are shown beside the list")
+
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

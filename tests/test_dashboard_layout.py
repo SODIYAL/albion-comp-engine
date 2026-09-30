@@ -941,6 +941,42 @@ check("ATTENDANCE_NAMES[" in SIGNUP_JS and "<option" not in SIGNUP_JS and "<sele
       "L35d the marks are named through one map and built without markup strings")
 check(all(s in AUTH_CSS for s in (".su-att{", '.su-att[data-status="no_show"]', ".su-mark{", ".su-confirm{")), "L35e the record's marks are styled in _auth.css")
 
+print("L36 - history: the facts over a guild's completed CTAs, read through one function, shown with their definitions")
+# Phase 9: the seventh feature module follows the profile's pattern and
+# never touches the planner, the engine or the sheet's channel.
+HISTORY_JS = read("_history.js")
+hdlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog history-dialog"', "</dialog>", "L36 dialog anchors")
+check('aria-modal="true"' in hdlg and 'aria-labelledby="hs-title"' in hdlg and 'id="hs-title"' in hdlg,
+      "L36a the history dialog is modal and titled")
+for fid in ("hs-guild", "hs-search"):
+    check(('id="%s"' % fid) in hdlg and ('for="%s"' % fid) in hdlg, "L36b field %s has its label" % fid)
+check('role="alert"' in hdlg and 'aria-live="polite"' in hdlg, "L36c errors and changes are announced, inside the dialog")
+check('id="hs-players"' in hdlg and 'id="hs-ctas"' in hdlg and hdlg.count("<th scope=\"col\">") == 13,
+      "L36d the players table has its seven headers and the CTAs table its six")
+check('id="hs-definitions"' in hdlg and "None of this is a skill rating" in HISTORY_JS,
+      "L36e the measures are defined beside the facts, and no skill rating is offered")
+check('id="acct-history"' in SHELL[SHELL.find('id="acct-events"'):SHELL.find('id="acct-logout"')],
+      "L36f the account menu offers History between CTAs and Log out")
+check("el.historyItem" in AUTH_JS and "views.history" in AUTH_JS, "L36g the account UI shows the item once the module registered its view")
+check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT|location\.hash", HISTORY_JS),
+      "L36h _history.js reads and writes no planner or engine state and never touches the address bar")
+history_ui = HISTORY_JS[HISTORY_JS.find("(function historyUI()"):]
+check(history_ui != "" and "window.DB" not in history_ui and "createClient" not in HISTORY_JS and ".from(" not in HISTORY_JS and ".channel(" not in HISTORY_JS,
+      "L36i the history UI calls its one helper, never the Supabase client, no table and no channel")
+check('window.Account.registerView("history"' in HISTORY_JS and "window.Account.subscribe(" in HISTORY_JS,
+      "L36j the history module reaches identity through window.Account")
+check("weaponInfo(" in HISTORY_JS and "ROLE_ORDER" in HISTORY_JS and "role_class" not in HISTORY_JS,
+      "L36k roles are read through the catalog: one role read, no engine")
+check(not re.search(r"loadGuildHistory|playerRows|weaponRows|ctaRows|historyTotals|isRegular", APP + DECISION_JS),
+      "L36l the planner never calls the history module")
+check(all(s in AUTH_CSS for s in (".history-dialog{", ".hs-head{", ".hs-table td{", ".hs-regular .gd-name{")),
+      "L36m the history dialog, its head, tables and the regular's mark are styled in _auth.css")
+check(".hs-guild{flex-basis:100%}" in LAYOUT and ".hs-table{display:block; overflow-x:auto}" in LAYOUT,
+      "L36n on a phone the guild pick takes the row and the tables scroll sideways (_layout.css)")
+i_history = script_at(lambda a, b: "function loadGuildHistory" in b)
+check(0 <= i_signup < i_history, "L36o the history module loads after the sheet, in its own <script>",
+      "script indices signup=%d history=%d" % (i_signup, i_history))
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

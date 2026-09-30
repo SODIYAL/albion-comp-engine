@@ -5,8 +5,8 @@ hand-edited.
 
 - `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,
   `_decision_layer.js/.css`, `_supabase.js`, `_auth.js/.css`, `_profile.js`,
-  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, `_explainer.html` —
-  the **sources** (the `_` prefix marks them).
+  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, `_history.js`,
+  `_explainer.html` — the **sources** (the `_` prefix marks them).
 - `build.py` — the bundler: inlines the dataset, the engine
   (`engine/app_scoring.js`), the sources, and a parity fixture into
   `index.html` + `how-it-works.html` here and the GitHub Pages copies in
@@ -208,12 +208,24 @@ and its tests: `supabase/README.md`.
   record any time plus "mark everyone in a slot as attended" once the
   CTA is completed (`markPowers`; `confirm_sign_up`, `mark_attendance`,
   `mark_all_attended`).
+- **`_history.js`** (platform phase 9) shows the facts over a guild's
+  completed CTAs: one helper (`guild_history`, computed on read in the
+  database from the attendance record, as the caller); pure functions
+  for the show rate and its wording, the regular's definition
+  (`REGULAR_MIN_ATTENDED`, `REGULAR_MIN_RATE`, a stated curation
+  judgment), the player rows (attended first, the weapons played named
+  and given roles through the catalog), the name filter, the weapons
+  fielded, the completed CTAs with their fill, the totals and error
+  wording (`tests/test_history.js`); and the history dialog
+  (`registerView("history")`): the guild's totals, the players table
+  with a search, the weapons fielded, the completed CTAs, and the
+  definitions beside them. No skill rating is offered.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js` and `_signup.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js`, `_signup.js` and `_history.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -227,12 +239,13 @@ and its tests: `supabase/README.md`.
   keeps the button in step with other tabs.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
-`tests/test_comps.js`, `tests/test_events.js` and `tests/test_signup.js`
-pin validation, error wording, the name fallback, link parsing, the
-weapon lists and search, the member table and role powers, the share hash
-both ways, the statuses and their moves, the times, the calendar, the
-sheet's board and link, and what the helpers send;
-`test_dashboard_layout.py` L27–L32 pin the markup, the isolation, the
+`tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js` and
+`tests/test_history.js` pin validation, error wording, the name fallback,
+link parsing, the weapon lists and search, the member table and role
+powers, the share hash both ways, the statuses and their moves, the
+times, the calendar, the sheet's board, link, record and channel, the
+history's measures and rows, and what the helpers send;
+`test_dashboard_layout.py` L27–L36 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also

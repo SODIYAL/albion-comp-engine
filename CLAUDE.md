@@ -196,8 +196,8 @@ Three applications with explicit boundaries (each directory's README is its cont
 - **Accounts** — the Supabase project (schema and rules in `supabase/`,
   migrations applied in order, never edited once applied) and the
   dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`,
-  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, each its own
-  `<script>` after the planner). Identity and persistent user data:
+  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, `_history.js`,
+  each its own `<script>` after the planner). Identity and persistent user data:
   profiles, weapon lists, guilds (members with roles, a join code,
   guild-scoped reads), saved comps (a guild's templates, saved from and
   opened in the planner through the address bar's share hash, never a
@@ -209,7 +209,9 @@ Three applications with explicit boundaries (each directory's README is its cont
   and removing players until the CTA is completed; the sheet live over a
   Realtime broadcast that names a table and an operation, never a row;
   the attendance record kept apart from the sign-up by its own trigger,
-  confirmed by the player, marked by the caller) now; analytics next
+  confirmed by the player, marked by the caller; the history: facts over
+  completed CTAs computed on read, every measure defined, no skill
+  rating) now; import and export next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:

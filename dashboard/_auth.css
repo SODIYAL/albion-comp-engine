@@ -387,3 +387,23 @@
 .su-mark-all{margin:0 0 10px}
 .su-confirm{margin-top:10px; width:100%}
 .su-confirm[data-confirmed="yes"]{color:var(--role-healer); border-color:var(--role-healer)}
+
+/* ---- history (_history.js): the guild's facts, three sections down the card ---- */
+.history-dialog{width:min(1040px, calc(100vw - 32px))}
+.hs-head{display:flex; flex-wrap:wrap; align-items:flex-end; gap:8px 20px; margin-bottom:12px}
+.hs-guild{flex:0 0 260px; margin:0}
+.hs-totals{margin:0 0 6px}
+.hs-section{margin-top:16px; padding-top:12px; border-top:1px solid var(--rule)}
+.hs-section-hd{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.hs-section-hd .pw-label{margin:0}
+.hs-search{width:200px; padding:4px 8px; font-size:12.5px}
+.hs-table td{vertical-align:middle}
+.hs-num{font-family:var(--mono); font-size:12px; text-align:right; white-space:nowrap}
+.hs-table th:nth-child(n+2):not(:last-child){text-align:right}
+.hs-when{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
+.hs-regular .gd-name{color:var(--amber)}
+.hs-plays{display:flex; flex-wrap:wrap; gap:4px}
+.hs-play{display:inline-flex; align-items:center; gap:4px; padding:1px 6px; border:1px solid var(--rule-2); border-radius:8px; font-size:12px}
+.hs-weapons{margin:6px 0 0}
+.hs-weapons .gd-sub{margin-left:4px}
+.hs-definitions{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule)}

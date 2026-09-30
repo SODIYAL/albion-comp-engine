@@ -1915,6 +1915,7 @@ window.AUTH_LINK = "";
   <button type="button" class="acct-item" id="acct-guilds">Guilds</button>
   <button type="button" class="acct-item" id="acct-comps">Saved comps</button>
   <button type="button" class="acct-item" id="acct-events">CTAs</button>
+  <button type="button" class="acct-item" id="acct-history">History</button>
   <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
   <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
 </div>
@@ -2523,5 +2524,77 @@ window.AUTH_LINK = "";
         </form>
       </section>
     </div>
+  </div>
+</dialog>
+
+<dialog class="auth-dialog guild-dialog comp-dialog history-dialog" id="history-dialog" aria-modal="true" aria-labelledby="hs-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="hs-title">History</h2>
+      </div>
+      <button type="button" class="auth-close" id="hs-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="hs-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="hs-notice" role="status" hidden></p>
+    <p class="sr-only" id="hs-live" aria-live="polite"></p>
+
+    <div class="hs-head">
+      <div class="auth-field hs-guild">
+        <label for="hs-guild">Guild</label>
+        <select id="hs-guild"></select>
+      </div>
+      <div class="gd-coverage hs-totals" id="hs-totals" aria-label="Totals over completed CTAs"></div>
+    </div>
+    <p class="gd-empty" id="hs-empty" hidden></p>
+
+    <div id="hs-body" hidden>
+      <section class="hs-section" aria-labelledby="hs-players-label">
+        <div class="hs-section-hd">
+          <h3 class="pw-label" id="hs-players-label">Players</h3>
+          <label class="sr-only" for="hs-search">Find a player</label>
+          <input class="text-input hs-search" id="hs-search" type="search" placeholder="find a player" spellcheck="false" autocomplete="off">
+        </div>
+        <table class="gd-table hs-table">
+          <thead>
+            <tr>
+              <th scope="col">Player</th>
+              <th scope="col">CTAs</th>
+              <th scope="col">Attended</th>
+              <th scope="col">No-show</th>
+              <th scope="col">Show rate</th>
+              <th scope="col">Last attended</th>
+              <th scope="col">Played</th>
+            </tr>
+          </thead>
+          <tbody id="hs-players"></tbody>
+        </table>
+        <p class="auth-hint" id="hs-players-note" hidden></p>
+      </section>
+
+      <section class="hs-section" aria-labelledby="hs-weapons-label">
+        <h3 class="pw-label" id="hs-weapons-label">Weapons fielded</h3>
+        <ul class="gd-weapons hs-weapons" id="hs-weapons" aria-labelledby="hs-weapons-label"></ul>
+      </section>
+
+      <section class="hs-section" aria-labelledby="hs-ctas-label">
+        <h3 class="pw-label" id="hs-ctas-label">Completed CTAs</h3>
+        <table class="gd-table hs-table">
+          <thead>
+            <tr>
+              <th scope="col">CTA</th>
+              <th scope="col">When</th>
+              <th scope="col">Fill</th>
+              <th scope="col">Attended</th>
+              <th scope="col">No-show</th>
+              <th scope="col">Unmarked</th>
+            </tr>
+          </thead>
+          <tbody id="hs-ctas"></tbody>
+        </table>
+      </section>
+    </div>
+    <p class="auth-hint hs-definitions" id="hs-definitions"></p>
   </div>
 </dialog>

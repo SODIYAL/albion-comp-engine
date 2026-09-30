@@ -503,6 +503,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     guildsItem: $id("acct-guilds"),
     compsItem: $id("acct-comps"),
     eventsItem: $id("acct-events"),
+    historyItem: $id("acct-history"),
     logoutItem: $id("acct-logout"),
     title: $id("auth-title"),
     error: $id("auth-error"),
@@ -667,6 +668,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     el.guildsItem.hidden = !views.guilds;
     el.compsItem.hidden = !views.comps;
     el.eventsItem.hidden = !views.events;
+    el.historyItem.hidden = !views.history;
 
     notify();
   }
@@ -696,9 +698,9 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuItems()[0].focus();
   }
 
-  /* the items on offer: Profile, Guilds, Saved comps and CTAs show once
-     their modules registered the views */
-  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.eventsItem, el.logoutItem].filter(item => !item.hidden);
+  /* the items on offer: Profile, Guilds, Saved comps, CTAs and History
+     show once their modules registered the views */
+  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.eventsItem, el.historyItem, el.logoutItem].filter(item => !item.hidden);
 
   function closeMenu(returnFocus) {
     if (menu.hidden) return;
@@ -767,6 +769,11 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
   el.eventsItem.addEventListener("click", () => {
     closeMenu(false);
     if (views.events) views.events();
+  });
+
+  el.historyItem.addEventListener("click", () => {
+    closeMenu(false);
+    if (views.history) views.history();
   });
 
   el.logoutItem.addEventListener("click", async () => {
