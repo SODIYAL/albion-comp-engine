@@ -275,6 +275,41 @@ size_tag = re.search(r'<input[^>]*\bid="comp-size"[^>]*>', SHELL)
 check(size_tag is not None and ('min="%d"' % js_const(COMPS_JS, "COMP_SIZE_MIN")) in size_tag.group(0)
       and ('max="%d"' % slots_max) in size_tag.group(0), "DB7h the planned size field's range is the bound")
 
+print("DB8 - CTAs: the client's statuses, moves and bounds are the database's")
+with open(os.path.join(ROOT, "dashboard", "_events.js"), encoding="utf-8") as f:
+    EVENTS_JS = f.read()
+statuses_js = re.search(r"const EVENT_STATUSES = \[([^\]]+)\];", EVENTS_JS)
+statuses_sql = re.search(r"status in \(([^)]+)\)", ALL)
+check(statuses_js is not None and statuses_sql is not None and norm(statuses_js.group(1)) == norm(statuses_sql.group(1)),
+      "DB8a the client's statuses are the database's",
+      "js %s, sql %s" % (statuses_js and statuses_js.group(1), statuses_sql and statuses_sql.group(1)))
+moves_js = re.search(r"const EVENT_MOVES = \{([^}]+)\};", EVENTS_JS)
+js_moves = set()
+for frm, tos in re.findall(r"(\w+): \[([^\]]*)\]", moves_js.group(1) if moves_js else ""):
+    for to in re.findall(r"\"(\w+)\"", tos):
+        js_moves.add((frm, to))
+guard_moves = re.search(r"\(old\.status, new\.status\) not in \(((?:\s*\('\w+', '\w+'\),?)+)\s*\)", ALL)
+sql_moves = set(re.findall(r"\('(\w+)', '(\w+)'\)", guard_moves.group(1))) if guard_moves else set()
+check(bool(js_moves) and js_moves == sql_moves, "DB8b the moves the client offers are the guard's",
+      "js %s, sql %s" % (sorted(js_moves), sorted(sql_moves)))
+check(all(frm in norm(statuses_js.group(1)) and to in norm(statuses_js.group(1)) for frm, to in js_moves)
+      and not any(frm == "completed" for frm, _to in js_moves),
+      "DB8c every move joins two listed statuses and none leaves completed")
+events_max = js_const(EVENTS_JS, "EVENTS_MAX")
+sql_events = set(re.findall(r"from public\.events where guild_id = new\.guild_id\) >= (\d+)", ALL))
+check(events_max is not None and sql_events == {str(events_max)},
+      "DB8d EVENTS_MAX (_events.js) is the events bound", "js %s, sql %s" % (events_max, sorted(sql_events)))
+tag = re.search(r'<input[^>]*\bid="ev-name"[^>]*>', SHELL)
+length = tag and re.search(r'\bmaxlength="(\d+)"', tag.group(0))
+check(length is not None and int(length.group(1)) == name_max, "DB8e the CTA name field's maxlength is the account name bound")
+size_tag = re.search(r'<input[^>]*\bid="ev-size"[^>]*>', SHELL)
+check(size_tag is not None and ('min="%d"' % js_const(COMPS_JS, "COMP_SIZE_MIN")) in size_tag.group(0)
+      and ('max="%d"' % slots_max) in size_tag.group(0), "DB8f the CTA's planned size field's range is the bound")
+check("mass_at is null or mass_at <= starts_at" in ALL and "Mass time comes before the start." in EVENTS_JS,
+      "DB8g the mass time never follows the start: the check and the client's sentence")
+check("if (event.status !== \"completed\")" in EVENTS_JS and re.search(r"= 'completed' then\s+raise exception 'a completed CTA keeps its slots'", ALL) is not None,
+      "DB8h a completed CTA's slots are frozen by the guard and the client sends none")
+
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

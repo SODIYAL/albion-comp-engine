@@ -515,6 +515,158 @@ try {
   check("no API role calls the comp guard", await code("authenticated", C, "select public.comp_templates_guard()") === "42501");
 }
 
+/* 10 - CTAs: a guild's events and their slots, copied from a comp, written by caller roles */
+{
+  /* the cast: C makes a fresh guild (the last one went with section 9);
+     F (a member) and X (an outsider) from section 9; K, a new caller */
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const K = "00000000-0000-4000-8000-000000000012";
+  await signUp(K, { albion_name: "Kay" });
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy CTA", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K]);
+
+  const TPL_SLOTS = [{ position: 1, weapon_id: "2H_LONGBOW", role: "ranged", note: null },
+                     { position: 2, weapon_id: "MAIN_MACE_HELL", role: null, note: "engage first" }];
+  const tpl = (await rows("authenticated", C, "select * from public.save_comp_template($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Castle A", content: "castle", style: "clap", planned_size: 20,
+    share_hash: "c=castle&n=20&st=clap&p=2H_LONGBOW,MAIN_MACE_HELL", slots: TPL_SLOTS })]))[0];
+
+  const EV = (over = {}) => JSON.stringify(Object.assign({
+    guild_id: g.id, template_id: tpl.id, name: " Friday CTA ", starts_at: "2026-10-03T18:00:00Z",
+    mass_at: "2026-10-03T17:30:00Z", notes: "  "
+  }, over));
+  const save = (sub, payload) => rows("authenticated", sub, "select * from public.save_event($1::jsonb)", [payload]);
+  const saveCode = (sub, payload) => code("authenticated", sub, "select * from public.save_event($1::jsonb)", [payload]);
+  const slotsOf = (sub, id) => rows("authenticated", sub, "select position, weapon_id, role, note from public.event_slots where event_id = $1 order by position", [id]);
+  const tplSlots = () => rows("authenticated", C, "select position, weapon_id, role, note from public.comp_template_slots where template_id = $1 order by position", [tpl.id]);
+  const move = (sub, id, to) => code("authenticated", sub, "update public.events set status = $2 where id = $1", [id, to]);
+
+  const e = (await save(K, EV()))[0];
+  check("a caller makes a CTA from a comp: the name trimmed, empty notes null, a draft with a 10-character share code; content, style, size, share hash and slots copied from the comp",
+        e && e.name === "Friday CTA" && e.notes === null && e.status === "draft" && /^[A-Z0-9]{10}$/.test(e.share_code)
+        && e.template_id === tpl.id && e.content === "castle" && e.style === "clap" && e.planned_size === 20
+        && e.share_hash === tpl.share_hash && e.created_by === K && e.updated_by === K
+        && same(await slotsOf(K, e.id), TPL_SLOTS), e);
+  const eb = (await save(K, EV({ name: "B", content: "ancient_lands", planned_size: 7, style: "" })))[0];
+  check("a field the payload names wins over the comp's",
+        eb && eb.content === "ancient_lands" && eb.planned_size === 7 && eb.style === null && eb.template_id === tpl.id
+        && (await slotsOf(K, eb.id)).length === 2, eb);
+  const ec = (await save(K, EV({ name: "C", slots: [{ position: 1, weapon_id: "MAIN_HOLYSTAFF_AVALON" }] })))[0];
+  check("a payload with its own slots writes those instead of the comp's",
+        ec && same(await slotsOf(K, ec.id), [{ position: 1, weapon_id: "MAIN_HOLYSTAFF_AVALON", role: null, note: null }]));
+  const ed = (await save(K, EV({ name: "D", template_id: null })))[0];
+  check("a CTA without a comp or slots is an empty roster with the defaults",
+        ed && ed.template_id === null && ed.content === "territory_defense" && ed.planned_size === 20 && ed.share_hash === null
+        && (await slotsOf(K, ed.id)).length === 0, ed);
+  check("a comp the caller cannot read is not found",
+        await saveCode(K, EV({ name: "E", template_id: "00000000-0000-4000-8000-0000000000ee" })) === "P0002");
+  check("a member cannot make a CTA; an outsider cannot either, and cannot see the comp it names",
+        await saveCode(F, EV({ name: "Mine" })) === "42501" && await saveCode(X, EV({ name: "Theirs", template_id: null })) === "42501"
+        && await saveCode(X, EV({ name: "Theirs" })) === "P0002");
+  check("the checks refuse a status off the list, a mass time after the start, a size off the range, a slot off the roster and an empty name",
+        await saveCode(K, EV({ name: "E", status: "live" })) === "23514"
+        && await saveCode(K, EV({ name: "E", mass_at: "2026-10-03T18:00:01Z" })) === "23514"
+        && await saveCode(K, EV({ name: "E", planned_size: 61 })) === "23514"
+        && await saveCode(K, EV({ name: "E", slots: [{ position: 61, weapon_id: "A" }] })) === "23514"
+        && await saveCode(K, EV({ name: "  " })) === "23514");
+  check("a start is required", await saveCode(K, EV({ name: "E", starts_at: null })) === "23502");
+  check("a position listed twice or a payload that is not a list is refused",
+        await saveCode(K, EV({ name: "E", slots: [{ position: 1 }, { position: 1 }] })) === "21000"
+        && await saveCode(K, EV({ name: "E", slots: { position: 1 } })) === "22023");
+  const made = await rows("authenticated", K, "select count(*)::int as n from public.events where guild_id = $1", [g.id]);
+  check("a refused save changes nothing (one transaction)", made[0].n === 4, made);
+
+  /* editing */
+  const e2 = (await save(C, EV({ id: e.id, name: "Friday CTA v2", notes: "hold the gate", mass_at: "",
+                                  slots: [{ position: 1, weapon_id: "2H_LONGBOW", role: "kite", note: null },
+                                          { position: 3, weapon_id: null, role: "open", note: "anyone" }] })))[0];
+  check("an admin edits a CTA: renamed, notes set, the mass time cleared, updated_by follows; unlisted slots go, listed ones are added or changed",
+        e2 && e2.id === e.id && e2.name === "Friday CTA v2" && e2.notes === "hold the gate" && e2.mass_at === null
+        && e2.updated_by === C && e2.updated_at > e.updated_at
+        && same(await slotsOf(C, e.id), [{ position: 1, weapon_id: "2H_LONGBOW", role: "kite", note: null },
+                                         { position: 3, weapon_id: null, role: "open", note: "anyone" }]), e2);
+  check("editing a CTA's slots leaves the comp as it was", same(await tplSlots(), TPL_SLOTS));
+  const e3 = (await save(C, EV({ id: e.id, notes: "n2" })))[0];
+  check("an edit that names no slots leaves them alone", e3 && e3.notes === "n2" && (await slotsOf(C, e.id)).length === 2);
+  check("an edit that names a CTA the caller cannot edit is refused", await saveCode(F, EV({ id: e.id, name: "Hijack" })) === "42501");
+  check("a member cannot edit, add slots to or delete a CTA",
+        await affected("authenticated", F, "update public.events set name = 'Mine' where id = $1", [e.id]) === 0
+        && await code("authenticated", F, "insert into public.event_slots (event_id, position, weapon_id) values ($1, 9, 'A')", [e.id]) === "42501"
+        && await affected("authenticated", F, "delete from public.event_slots where event_id = $1", [e.id]) === 0
+        && await affected("authenticated", F, "delete from public.events where id = $1", [e.id]) === 0);
+  for (const col of ["guild_id = gen_random_uuid()", "template_id = null", "share_code = 'ABCDEFGHIJ'", "created_by = null",
+                     "updated_by = null", "created_at = now()", "updated_at = now()"]) {
+    check(`no caller writes ${col.split(" ")[0]} on a CTA (column grants)`,
+          await code("authenticated", C, `update public.events set ${col} where id = $1`, [e.id]) === "42501");
+  }
+  check("a caller edits a slot's role directly; nobody moves a slot's position",
+        await affected("authenticated", K, "update public.event_slots set role = 'stopper' where event_id = $1 and position = 1", [e.id]) === 1
+        && await code("authenticated", K, "update public.event_slots set position = 9 where event_id = $1 and position = 1", [e.id]) === "42501");
+
+  /* the status */
+  check("the status moves one step at a time: draft to locked is refused; draft to open, open to locked, back to open, locked to completed",
+        await move(K, e.id, "locked") === "23514" && await move(K, e.id, "open") === "ok" && await move(K, e.id, "locked") === "ok"
+        && await move(K, e.id, "open") === "ok" && await move(K, e.id, "locked") === "ok" && await move(K, e.id, "completed") === "ok");
+  check("completed is final",
+        await move(K, e.id, "open") === "23514" && await move(K, e.id, "locked") === "23514" && await move(K, e.id, "draft") === "23514");
+  check("open goes back to draft; a status off the list is refused by the check",
+        await move(K, eb.id, "open") === "ok" && await move(K, eb.id, "draft") === "ok" && await move(K, eb.id, "live") === "23514");
+  check("a completed CTA keeps its slots: none added, changed or removed, by statement or by save",
+        await code("authenticated", K, "insert into public.event_slots (event_id, position, weapon_id) values ($1, 9, 'A')", [e.id]) === "23514"
+        && await code("authenticated", K, "update public.event_slots set role = 'x' where event_id = $1 and position = 1", [e.id]) === "23514"
+        && await code("authenticated", K, "delete from public.event_slots where event_id = $1 and position = 1", [e.id]) === "23514"
+        && await saveCode(K, EV({ id: e.id, slots: [] })) === "23514"
+        && (await slotsOf(K, e.id)).length === 2);
+  check("a completed CTA's notes still change; a save that names no slots goes through",
+        await affected("authenticated", K, "update public.events set notes = 'we won' where id = $1", [e.id]) === 1
+        && await saveCode(K, EV({ id: e.id, notes: "we won, barely" })) === "ok");
+
+  /* reading */
+  const fSees = await rows("authenticated", F, "select id, share_code from public.events where guild_id = $1", [g.id]);
+  check("a member reads the guild's CTAs, their share codes and their slots",
+        fSees.length === 4 && fSees.every(r => /^[A-Z0-9]{10}$/.test(r.share_code)) && (await slotsOf(F, e.id)).length === 2, fSees);
+  check("an outsider reads no CTA and no slot; anon reads nothing",
+        (await rows("authenticated", X, "select id from public.events")).length === 0
+        && (await rows("authenticated", X, "select * from public.event_slots")).length === 0
+        && await code("anon", null, "select * from public.events") === "42501"
+        && await code("anon", null, "select * from public.event_slots") === "42501");
+
+  /* the comp goes; the CTA stays */
+  check("deleting the comp keeps the CTA, its template_id null and its slots whole",
+        await affected("authenticated", C, "delete from public.comp_templates where id = $1", [tpl.id]) === 1
+        && (await rows("authenticated", C, "select template_id from public.events where id = $1", [e.id]))[0].template_id === null
+        && (await slotsOf(C, e.id)).length === 2);
+
+  /* bounds and deletion */
+  {
+    let err = "ok";
+    for (let i = 0; i < 205 && err === "ok"; i++) {
+      err = await code("authenticated", K, "insert into public.events (guild_id, name, starts_at) values ($1, $2, now())", [g.id, `Bound ${i}`]);
+    }
+    const n = (await db.query("select count(*)::int as n from public.events where guild_id = $1", [g.id])).rows[0].n;
+    check("a guild keeps at most 200 CTAs (the guard)", n === 200 && err === "23514", { n, err });
+    check("a CTA holds at most 60 slots (the function)",
+          await saveCode(K, EV({ id: eb.id, slots: Array.from({ length: 61 }, (_, i) => ({ position: i + 1 })) })) === "23514");
+  }
+  check("a caller deletes a CTA; its slots go with it",
+        await affected("authenticated", K, "delete from public.events where id = $1", [eb.id]) === 1
+        && Number((await db.query("select count(*) from public.event_slots where event_id = $1", [eb.id])).rows[0].count) === 0);
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [K]);
+  const orphan = (await db.query("select count(*)::int as n, count(created_by)::int as by from public.events where guild_id = $1", [g.id])).rows[0];
+  check("deleting a caller's account keeps the CTAs, their created_by null", orphan.n === 199 && orphan.by === 0, orphan);
+  check("deleting the guild removes its CTAs, the completed one's frozen slots with them",
+        await affected("authenticated", C, "delete from public.guilds where id = $1", [g.id]) === 1
+        && Number((await db.query("select count(*) from public.events where guild_id = $1", [g.id])).rows[0].count) === 0
+        && Number((await db.query("select count(*) from public.event_slots where event_id = $1", [e.id])).rows[0].count) === 0);
+  check("no API role calls the CTA guards",
+        await code("authenticated", C, "select public.events_guard()") === "42501"
+        && await code("authenticated", C, "select public.event_slots_guard()") === "42501");
+}
+
 } catch (e) {
   fail++;
   console.log("FAIL  the run stopped: " + (e.stack || e.message));

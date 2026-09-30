@@ -813,6 +813,44 @@ check(sorted(CONTENTS) == sorted(_ds["templates"]) and all(CONTENTS[k] == (_ds["
 check(sorted(STYLES) == sorted(k for k in _ds.get("styles", {}) if k != "balanced"),
       "L30q the styles on offer are the dataset's, balanced being the absence of one")
 
+print("L31 - CTAs: an event is a copy of a comp, met through the address bar alone")
+# CTAs (platform phase 4): the fourth feature module. Its roster is
+# copied from a saved comp or the planner's hash and is the event's own
+# from then on; the module never writes a template, never reads planner
+# state, and opens an event in the planner by setting the share hash.
+EVENTS_JS = read("_events.js")
+edlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog event-dialog"', "</dialog>", "L31 dialog anchors")
+check('aria-modal="true"' in edlg and 'aria-labelledby="ev-title"' in edlg and 'id="ev-title"' in edlg,
+      "L31a the CTAs dialog is modal and titled")
+for fid in ("ev-guild", "ev-source", "ev-name", "ev-start", "ev-mass", "ev-size", "ev-content", "ev-style", "ev-notes"):
+    check(('id="%s"' % fid) in edlg and ('for="%s"' % fid) in edlg, "L31b field %s has its label" % fid)
+check('role="alert"' in edlg and 'aria-live="polite"' in edlg, "L31c errors and changes are announced, inside the dialog")
+check('id="ev-slots"' in edlg and edlg.count("<th scope=\"col\">") == 5, "L31d the slot table has its five column headers")
+check(edlg.count('type="datetime-local"') == 2, "L31e the start and the mass time are date-time fields")
+check('id="acct-events"' in SHELL[SHELL.find('id="acct-comps"'):SHELL.find('id="acct-logout"')],
+      "L31f the account menu offers CTAs between Saved comps and Log out")
+check("el.eventsItem" in AUTH_JS and "views.events" in AUTH_JS, "L31g the account UI shows the item once the module registered its view")
+check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT", EVENTS_JS),
+      "L31h _events.js reads and writes no planner or engine state")
+check("location.hash" in EVENTS_JS, "L31i the bridge is the share hash: the module reads and sets location.hash")
+events_ui = EVENTS_JS[EVENTS_JS.find("(function eventsUI()"):]
+check(events_ui != "" and "window.DB" not in events_ui and "createClient" not in EVENTS_JS,
+      "L31j the CTAs UI calls its helpers, never the Supabase client")
+check('window.Account.registerView("events"' in EVENTS_JS and "window.Account.subscribe(" in EVENTS_JS,
+      "L31k the CTAs module reaches identity through window.Account")
+check("weaponInfo(" in EVENTS_JS and "role_class" not in EVENTS_JS,
+      "L31l slot roles are read through the catalog: one role read, no engine")
+check(not re.search(r"from\(\"comp_template|save_comp_template|saveTemplate\(|deleteTemplate\(", EVENTS_JS),
+      "L31m the module never writes a template: an event is a copy")
+check(not re.search(r"loadGuildEvents|loadEvent|saveEvent|deleteEvent|setEventStatus|eventGroups|EVENT_STATUSES", APP + DECISION_JS),
+      "L31n the planner never calls the CTAs module")
+check(all(s in AUTH_CSS for s in (".event-dialog{", ".ev-status-row{", ".ev-group{", ".ev-status[data-status=")),
+      "L31o the CTAs dialog, its status row and its calendar are styled in _auth.css")
+check(".ev-share-wrap{margin-left:0; flex-basis:100%}" in LAYOUT, "L31p on a phone the share code drops under the status (_layout.css)")
+i_events = script_at(lambda a, b: "function loadGuildEvents" in b)
+check(0 <= i_comps < i_events, "L31q the CTAs module loads after the comps module, in its own <script>",
+      "script indices comps=%d events=%d" % (i_comps, i_events))
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

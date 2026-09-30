@@ -2200,6 +2200,24 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .cp-foot-r{margin:0}
 .cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}
 
+/* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
+.event-dialog{width:min(960px, calc(100vw - 32px))}
+.ev-group{margin:8px 0 2px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.ev-group:first-child{margin-top:0}
+.ev-when{font-size:11.5px; color:var(--ink-2)}
+.ev-status-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:0 0 12px; padding:8px 10px;
+  border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,21,28,.6)}
+.ev-status{padding:2px 9px; border-radius:999px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-2); border:1px solid var(--rule-2)}
+.ev-status[data-status="open"]{color:var(--role-healer); border-color:var(--role-healer)}
+.ev-status[data-status="locked"]{color:var(--amber); border-color:var(--amber)}
+.ev-status[data-status="completed"]{color:var(--ink-3); border-style:dashed}
+.ev-moves{display:flex; flex-wrap:wrap; gap:6px}
+.ev-moves:empty{display:none}
+.ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
+.ev-share-wrap .pw-label{margin:0}
+.ev-share{font-size:13px}
+
 /* LAYOUT — the single home for every rule that decides where things sit.
    Inlined LAST into _shell.html's <style> block by build.py, so these rules
    win on source order without needing !important. Component chrome (colour,
@@ -2513,6 +2531,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .gd-side{border-right:0; padding-right:0; padding-bottom:12px; border-bottom:1px solid var(--rule)}
   /* the saved comp's fields stack in two columns */
   .cp-fields{grid-template-columns:repeat(2, 1fr)}
+  /* the CTA's share code drops under the status */
+  .ev-share-wrap{margin-left:0; flex-basis:100%}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}
@@ -2794,6 +2814,7 @@ window.AUTH_LINK = "";
   <button type="button" class="acct-item" id="acct-profile">Profile</button>
   <button type="button" class="acct-item" id="acct-guilds">Guilds</button>
   <button type="button" class="acct-item" id="acct-comps">Saved comps</button>
+  <button type="button" class="acct-item" id="acct-events">CTAs</button>
   <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
   <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
 </div>
@@ -3163,6 +3184,116 @@ window.AUTH_LINK = "";
               <div class="profile-actions cp-foot-r">
                 <button class="auth-submit" id="comp-save" type="submit" hidden>Save comp</button>
                 <span class="profile-dirty" id="comp-dirty" hidden>Unsaved changes</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="auth-dialog guild-dialog comp-dialog event-dialog" id="event-dialog" aria-modal="true" aria-labelledby="ev-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="ev-title">CTAs</h2>
+      </div>
+      <button type="button" class="auth-close" id="ev-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="ev-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="ev-notice" role="status" hidden></p>
+    <p class="sr-only" id="ev-live" aria-live="polite"></p>
+
+    <div class="gd-grid">
+      <aside class="gd-side">
+        <div class="auth-field">
+          <label for="ev-guild">Guild</label>
+          <select id="ev-guild"></select>
+        </div>
+        <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+        <ul class="gd-list ev-list" id="ev-list" aria-labelledby="ev-list-label"></ul>
+        <p class="auth-hint" id="ev-list-note" hidden></p>
+        <button type="button" class="auth-submit" id="ev-new" hidden>New CTA</button>
+        <p class="auth-hint">A CTA copies its roster from a saved comp or the planner; the comp stays as it was.</p>
+      </aside>
+
+      <section class="gd-main">
+        <p class="gd-empty" id="ev-empty">Pick a CTA, or make a new one.</p>
+        <form class="auth-form" id="ev-form" novalidate>
+          <div id="ev-view" hidden>
+            <div class="ev-status-row">
+              <span class="ev-status" id="ev-status" data-status=""></span>
+              <span class="ev-moves" id="ev-moves"></span>
+              <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span></span>
+            </div>
+            <div class="cp-fields">
+              <div class="auth-field cp-wide" id="ev-source-wrap">
+                <label for="ev-source">Roster from</label>
+                <select id="ev-source"></select>
+              </div>
+              <div class="auth-field cp-wide">
+                <label for="ev-name">CTA name</label>
+                <input class="text-input" id="ev-name" maxlength="64" type="text" spellcheck="false"
+                  aria-describedby="ev-name-err">
+                <p class="auth-field-err" id="ev-name-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-start">Starts</label>
+                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-err">
+                <p class="auth-field-err" id="ev-start-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-mass">Mass at <span class="opt">optional</span></label>
+                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-err">
+                <p class="auth-field-err" id="ev-mass-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-size">Planned size</label>
+                <input class="text-input" id="ev-size" type="number" min="2" max="60" step="1" inputmode="numeric"
+                  aria-describedby="ev-size-err">
+                <p class="auth-field-err" id="ev-size-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-content">Content</label>
+                <select id="ev-content" aria-describedby="ev-content-err"></select>
+                <p class="auth-field-err" id="ev-content-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-style">Style</label>
+                <select id="ev-style" aria-describedby="ev-style-err"></select>
+                <p class="auth-field-err" id="ev-style-err"></p>
+              </div>
+              <div class="auth-field cp-wide">
+                <label for="ev-notes">Notes <span class="opt">optional</span></label>
+                <textarea class="text-input cp-notes" id="ev-notes" maxlength="1000" rows="2"></textarea>
+              </div>
+            </div>
+            <p class="gd-meta" id="ev-meta"></p>
+            <div class="gd-coverage" id="ev-summary" aria-label="Slots per role"></div>
+            <p class="auth-hint" id="ev-slots-note" hidden></p>
+            <table class="gd-table cp-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Weapon</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Note</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="ev-slots"></tbody>
+            </table>
+            <div class="gd-foot cp-foot">
+              <div class="cp-foot-l">
+                <button type="button" class="gd-btn" id="ev-open">Open in planner</button>
+                <button type="button" class="gd-btn" id="ev-replace" hidden>Replace slots from planner</button>
+                <button type="button" class="gd-btn danger" id="ev-delete" hidden>Delete</button>
+              </div>
+              <div class="profile-actions cp-foot-r">
+                <button class="auth-submit" id="ev-save" type="submit" hidden>Save CTA</button>
+                <span class="profile-dirty" id="ev-dirty" hidden>Unsaved changes</span>
               </div>
             </div>
           </div>
@@ -12728,6 +12859,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     profileItem: $id("acct-profile"),
     guildsItem: $id("acct-guilds"),
     compsItem: $id("acct-comps"),
+    eventsItem: $id("acct-events"),
     logoutItem: $id("acct-logout"),
     title: $id("auth-title"),
     error: $id("auth-error"),
@@ -12771,7 +12903,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
 
 
   /* ---- the account store ----
-     Feature modules (_profile.js; guilds and events after it) read the
+     Feature modules (_profile.js; guilds, comps and CTAs after it) read the
      identity here instead of asking Supabase again, hear every change, and
      offer views the account menu opens. Each module is its own <script>
      after this one (build.py). */
@@ -12891,6 +13023,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     el.profileItem.hidden = !views.profile;
     el.guildsItem.hidden = !views.guilds;
     el.compsItem.hidden = !views.comps;
+    el.eventsItem.hidden = !views.events;
 
     notify();
   }
@@ -12920,9 +13053,9 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuItems()[0].focus();
   }
 
-  /* the items on offer: Profile, Guilds and Saved comps show once their
-     modules registered the views */
-  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.logoutItem].filter(item => !item.hidden);
+  /* the items on offer: Profile, Guilds, Saved comps and CTAs show once
+     their modules registered the views */
+  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.eventsItem, el.logoutItem].filter(item => !item.hidden);
 
   function closeMenu(returnFocus) {
     if (menu.hidden) return;
@@ -12986,6 +13119,11 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
   el.compsItem.addEventListener("click", () => {
     closeMenu(false);
     if (views.comps) views.comps();
+  });
+
+  el.eventsItem.addEventListener("click", () => {
+    closeMenu(false);
+    if (views.events) views.events();
   });
 
   el.logoutItem.addEventListener("click", async () => {
@@ -15848,6 +15986,1007 @@ function compErrorMessage(err) {
   });
 
   window.Account.registerView("comps", openComps);
+})();
+
+</script>
+<script>
+"use strict";
+
+/*
+ * CTAs (platform phase 4): a guild's events. An event is a CTA a caller
+ * runs: the name, when it starts and when the guild masses, notes, a
+ * status (draft, open, locked, completed), the share code of its sign-up
+ * link (phase 5), the comp it was made from and its own slots, COPIED
+ * from that template when the event is created: editing an event never
+ * touches the template, and deleting the template leaves the event
+ * whole. Members read; callers, officers and admins write.
+ *
+ * build.py inlines this file as its own <script> after _comps.js. It
+ * reads no planner state and never calls the engine: as a saved comp, an
+ * event meets the planner through the address bar alone (its share hash
+ * opens in the planner; the planner's current comp becomes its roster).
+ * Content and style names, weapons and slots are read through the comps
+ * module's constants and pure functions.
+ *
+ * Three parts, as in _profile.js:
+ *   helpers - the only code that talks to window.DB (events, event_slots,
+ *             save_event)
+ *   pure    - the statuses and their moves, the times, the grouping of a
+ *             guild's calendar, validation, error wording
+ *             (tests/test_events.js)
+ *   UI      - the CTAs dialog the account menu opens
+ */
+
+
+/* ------------------------------------------------------------ helpers */
+
+/* a guild's events, newest start first, with who runs them and how many
+   slots they hold */
+async function loadGuildEvents(guildId) {
+  const { data, error } = await window.DB
+    .from("events")
+    .select("id, guild_id, template_id, name, content, style, planned_size, starts_at, mass_at, status, "
+            + "share_code, updated_at, "
+            + "caller:profiles!events_created_by_fkey(albion_name, display_name), "
+            + "slots:event_slots(count)")
+    .eq("guild_id", guildId)
+    .order("starts_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data || [];
+}
+
+
+/* one event with its slots in position order */
+async function loadEvent(eventId) {
+  const { data, error } = await window.DB
+    .from("events")
+    .select("id, guild_id, template_id, name, content, style, planned_size, starts_at, mass_at, notes, status, "
+            + "share_code, share_hash, updated_at, "
+            + "slots:event_slots(position, weapon_id, role, note)")
+    .eq("id", eventId)
+    .maybeSingle();
+
+  if (error) {
+    throw error;
+  }
+
+  if (data && data.slots) {
+    data.slots.sort((a, b) => a.position - b.position);
+  }
+
+  return data;
+}
+
+
+/* the event and its slots in one transaction (save_event); returns the
+   saved event row */
+async function saveEvent(event) {
+  const { data, error } = await window.DB.rpc("save_event", {
+    event: eventPayload(event)
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* one status step (the guard refuses any other move) */
+async function setEventStatus(eventId, status) {
+  const { data, error } = await window.DB
+    .from("events")
+    .update({ status })
+    .eq("id", eventId)
+    .select("id, status, updated_at");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
+}
+
+
+async function deleteEvent(eventId) {
+  const { data, error } = await window.DB
+    .from("events")
+    .delete()
+    .eq("id", eventId)
+    .select("id");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
+}
+
+
+/* --------------------------------------------------------------- pure */
+
+/* The database's statuses and the moves its guard allows
+   (supabase/migrations events; tests/test_supabase_schema.py pins that
+   they agree). Completed is final. */
+const EVENT_STATUSES = ["draft", "open", "locked", "completed"];
+const EVENT_STATUS_NAMES = { draft: "Draft", open: "Sign-up open", locked: "Locked", completed: "Completed" };
+const EVENT_MOVES = { draft: ["open"], open: ["draft", "locked"], locked: ["open", "completed"], completed: [] };
+const EVENT_MOVE_LABELS = { open: "Open sign-up", draft: "Back to draft", locked: "Lock the roster", completed: "Mark completed" };
+
+/* the database's bounds: events per guild; the slots, notes, role and
+   note bounds are the comp's (COMP_* in _comps.js) */
+const EVENTS_MAX = 200;
+
+/* an event whose start is this long gone lists with the past ones */
+const EVENT_PAST_AFTER_MS = 12 * 60 * 60 * 1000;
+
+
+/* an ISO time as a datetime-local field shows it (local time, to the
+   minute); "" when there is none */
+function toLocalInput(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+
+/* a datetime-local value (local time) as the ISO instant the database
+   stores; "" for an empty field, null for a value that is no time */
+function fromLocalInput(value) {
+  const v = String(value || "").trim();
+  if (!v) return "";
+  const d = new Date(v);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+}
+
+
+/* a start as the list shows it: the viewer's local time, and the UTC
+   time the game runs on */
+function eventTimeLabel(iso) {
+  const d = new Date(iso || "");
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  const local = d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  return `${local} (${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC)`;
+}
+
+
+/* A guild's calendar: what is ahead (soonest first) and what is past
+   (latest first). Completed events and events whose start is more than
+   EVENT_PAST_AFTER_MS gone are past. */
+function eventGroups(events, now) {
+  const t = now instanceof Date ? now.getTime() : (now ? new Date(now).getTime() : Date.now());
+  const upcoming = [];
+  const past = [];
+
+  for (const e of events || []) {
+    const start = new Date(e.starts_at || "").getTime();
+    const gone = e.status === "completed" || (Number.isFinite(start) && start < t - EVENT_PAST_AFTER_MS);
+    (gone ? past : upcoming).push(e);
+  }
+
+  const at = e => new Date(e.starts_at || "").getTime() || 0;
+  upcoming.sort((a, b) => at(a) - at(b));
+  past.sort((a, b) => at(b) - at(a));
+  return { upcoming, past };
+}
+
+
+/* a new event made from a template: the copy the database also makes,
+   shown before the caller saves */
+function eventFromTemplate(template, guildId) {
+  const slots = normalizeSlots(template.slots);
+  return {
+    id: null,
+    guild_id: guildId,
+    template_id: template.id || null,
+    name: template.name || "",
+    content: template.content || "",
+    style: template.style || "",
+    planned_size: template.planned_size || slots.length || 0,
+    starts_at: "",
+    mass_at: "",
+    notes: "",
+    status: "draft",
+    share_hash: template.share_hash || "",
+    slots
+  };
+}
+
+
+/* a new event from the planner's current comp (the share hash) */
+function eventFromHash(hash, guildId, contents, styles) {
+  const parsed = parseShareHash(hash);
+  if (!parsed || !parsed.weapons.length) return null;
+  const has = (map, key) => Object.prototype.hasOwnProperty.call(map || {}, key);
+  return {
+    id: null,
+    guild_id: guildId,
+    template_id: null,
+    name: "",
+    content: has(contents, parsed.content) ? parsed.content : "",
+    style: has(styles, parsed.style) ? parsed.style : "",
+    planned_size: parsed.size || parsed.weapons.length,
+    starts_at: "",
+    mass_at: "",
+    notes: "",
+    status: "draft",
+    share_hash: parsed.hash,
+    slots: slotsFromWeapons(parsed.weapons)
+  };
+}
+
+
+/* the comp's rules (validateTemplate), then the times: a start is
+   required, the mass time optional and never after the start */
+function validateEvent({ name, content, style, plannedSize, startsAt, massAt }, contents, styles) {
+  const errors = validateTemplate({ name, content, style, plannedSize }, contents, styles);
+  if (errors.name === "Name the comp.") errors.name = "Name the CTA.";
+
+  const start = startsAt ? new Date(startsAt).getTime() : NaN;
+  if (!startsAt) {
+    errors.startsAt = "Set when the CTA starts.";
+  } else if (!Number.isFinite(start)) {
+    errors.startsAt = "Enter a valid date and time.";
+  }
+
+  if (massAt) {
+    const mass = new Date(massAt).getTime();
+    if (!Number.isFinite(mass)) {
+      errors.massAt = "Enter a valid date and time.";
+    } else if (Number.isFinite(start) && mass > start) {
+      errors.massAt = "Mass time comes before the start.";
+    }
+  }
+
+  return errors;
+}
+
+
+/* the save_event payload; a completed event's slots are frozen, so they
+   are not sent */
+function eventPayload(event) {
+  const out = {
+    id: event.id || null,
+    guild_id: event.guild_id,
+    template_id: event.template_id || null,
+    name: String(event.name || "").trim(),
+    content: event.content,
+    style: event.style || "",
+    planned_size: Number(event.planned_size),
+    starts_at: event.starts_at || "",
+    mass_at: event.mass_at || "",
+    notes: String(event.notes || "").trim(),
+    status: event.status || "draft",
+    share_hash: event.share_hash || ""
+  };
+  if (event.status !== "completed") out.slots = normalizeSlots(event.slots);
+  return out;
+}
+
+
+/* what the caller's role may do with an event: the policies' writer
+   roles, the guard's moves, and no slot edits once completed */
+function eventPowers(myRole, event) {
+  const write = compPowers(myRole).write;
+  const status = event && event.status;
+  return {
+    write,
+    moves: write && status ? (EVENT_MOVES[status] || []) : [],
+    editSlots: write && status !== "completed"
+  };
+}
+
+
+const EVENT_MSG = {
+  network: PROFILE_MSG.network,
+  signedOut: "Log in to use CTAs.",
+  session: PROFILE_MSG.session,
+  missing: "CTAs are not available yet: the account database has not been updated for this page. Try again later.",
+  tooManyEvents: `A guild keeps at most ${EVENTS_MAX} CTAs.`,
+  tooManySlots: `A CTA holds at most ${COMP_SLOTS_MAX} slots.`,
+  duplicate: "A slot position is listed twice. Reload and try again.",
+  move: "The CTA cannot move to that status from where it is. Reload to see its current status.",
+  frozen: "A completed CTA keeps its slots.",
+  templateGone: "The comp was not found: it may have been deleted. Choose another.",
+  collision: "The generated share code collided with another. Save again.",
+  refused: "The server refused the change: your role in this guild does not edit CTAs, or the CTA has changed. Reload and try again.",
+  invalid: "The server refused a value. Check the name, content, size, times and notes, then try again.",
+  unknown: PROFILE_MSG.unknown
+};
+
+
+function eventErrorKind(err) {
+  const code = String((err && err.code) || "");
+  const message = String((err && err.message) || "");
+
+  if (authErrorKind(err) === "network") return "network";
+  if (code === "not_signed_in" || (code === "42501" && /sign in/i.test(message))) return "signedOut";
+  if (/^PGRST30\d$/.test(code) || /jwt expired/i.test(message)) return "session";
+  if (code === "PGRST202" || code === "PGRST205" || code === "42883" || code === "42P01") return "missing";
+  if (code === "23514" && /at most \d+ events/i.test(message)) return "tooManyEvents";
+  if (code === "23514" && /at most \d+ slots/i.test(message)) return "tooManySlots";
+  if (code === "23514" && /moves from/i.test(message)) return "move";
+  if (code === "23514" && /completed CTA keeps/i.test(message)) return "frozen";
+  if (code === "P0002") return "templateGone";
+  if (code === "23505") return "collision";
+  if (code === "21000") return "duplicate";
+  if (code === "42501" || code === "refused") return "refused";
+  if (code === "23514" || code === "22023" || code === "23502" || code === "22001" || code === "22P02" || code === "22003" || code === "22007" || code === "22008") return "invalid";
+
+  return "unknown";
+}
+
+
+function eventErrorMessage(err) {
+  const kind = eventErrorKind(err);
+  const message = String((err && err.message) || "").trim();
+
+  if (kind === "unknown" && message) {
+    return `Something went wrong: ${message}`;
+  }
+
+  return EVENT_MSG[kind];
+}
+
+
+/* ----------------------------------------------------------------- UI */
+
+(function eventsUI() {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const $id = id => document.getElementById(id);
+  const dialog = $id("event-dialog");
+
+  if (!dialog || typeof dialog.showModal !== "function" || !window.Account) {
+    return;
+  }
+
+  const CATALOG = typeof ACCOUNT_CATALOG !== "undefined" ? ACCOUNT_CATALOG : {};
+  const CONTENTS = typeof ACCOUNT_CONTENTS !== "undefined" ? ACCOUNT_CONTENTS : {};
+  const STYLES = typeof ACCOUNT_STYLES !== "undefined" ? ACCOUNT_STYLES : {};
+
+  const el = {
+    error: $id("ev-error"),
+    notice: $id("ev-notice"),
+    live: $id("ev-live"),
+    guild: $id("ev-guild"),
+    list: $id("ev-list"),
+    listNote: $id("ev-list-note"),
+    create: $id("ev-new"),
+    empty: $id("ev-empty"),
+    view: $id("ev-view"),
+    form: $id("ev-form"),
+    sourceWrap: $id("ev-source-wrap"),
+    source: $id("ev-source"),
+    name: $id("ev-name"),
+    content: $id("ev-content"),
+    style: $id("ev-style"),
+    size: $id("ev-size"),
+    start: $id("ev-start"),
+    mass: $id("ev-mass"),
+    notes: $id("ev-notes"),
+    status: $id("ev-status"),
+    moves: $id("ev-moves"),
+    share: $id("ev-share"),
+    meta: $id("ev-meta"),
+    summary: $id("ev-summary"),
+    slots: $id("ev-slots"),
+    slotsNote: $id("ev-slots-note"),
+    replace: $id("ev-replace"),
+    open: $id("ev-open"),
+    save: $id("ev-save"),
+    remove: $id("ev-delete"),
+    dirty: $id("ev-dirty")
+  };
+
+  const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size, startsAt: el.start, massAt: el.mass };
+
+  let account = window.Account.current();
+  let guilds = [];            /* [{guild, role}] the account belongs to */
+  let events = [];            /* the selected guild's list */
+  let templates = [];         /* the selected guild's comps, for a new event */
+  let current = null;         /* the open event: {id, guild_id, ..., slots} or a new one */
+  let slots = [];             /* the open event's slots as edited */
+  let powers = eventPowers(null, null);
+  let busy = false;
+  let openSeq = 0;
+
+  const showError = message => acctMessage(el.error, el.notice, "error", message);
+  const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
+  const clearMessages = () => acctMessage(el.error, el.notice, null, "");
+  const announce = text => { el.live.textContent = text; };
+  const guildId = () => el.guild.value || null;
+  const myRole = () => (guilds.find(g => g.guild.id === guildId()) || {}).role || null;
+
+  const fill = (select, map, first) => {
+    select.replaceChildren();
+    if (first) {
+      const o = document.createElement("option");
+      o.value = "";
+      o.textContent = first;
+      select.append(o);
+    }
+    for (const [key, name] of Object.entries(map)) {
+      const o = document.createElement("option");
+      o.value = key;
+      o.textContent = name;
+      select.append(o);
+    }
+  };
+  fill(el.content, CONTENTS, "Choose the content");
+  fill(el.style, STYLES, "Balanced (no style)");
+
+
+  /* ---- the list ---- */
+
+  function renderGuilds() {
+    el.guild.replaceChildren(...guilds.map(({ guild, role }) => {
+      const o = document.createElement("option");
+      o.value = guild.id;
+      o.textContent = `${guild.name} (${GUILD_ROLE_NAMES[role] || role})`;
+      return o;
+    }));
+    el.guild.disabled = !guilds.length;
+  }
+
+  function eventItem(e) {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "gd-item";
+    b.dataset.event = e.id;
+    b.setAttribute("aria-pressed", String(!!current && current.id === e.id));
+    const name = document.createElement("span");
+    name.className = "gd-item-name";
+    name.textContent = e.name;
+    const when = document.createElement("span");
+    when.className = "ev-when";
+    when.textContent = eventTimeLabel(e.starts_at);
+    const sub = document.createElement("span");
+    sub.className = "gd-item-sub";
+    const count = Array.isArray(e.slots) && e.slots[0] ? e.slots[0].count : 0;
+    sub.textContent = `${EVENT_STATUS_NAMES[e.status] || e.status} · ${CONTENTS[e.content] || e.content} · ${count} slot${count === 1 ? "" : "s"}`;
+    b.append(name, when, sub);
+    li.append(b);
+    return li;
+  }
+
+  function renderList() {
+    powers = eventPowers(myRole(), current);
+    el.create.hidden = !powers.write || !guildId();
+
+    if (!guildId()) {
+      const li = document.createElement("li");
+      li.className = "gd-none";
+      li.textContent = "Join or create a guild to run CTAs.";
+      el.list.replaceChildren(li);
+      return;
+    }
+
+    if (!events.length) {
+      const li = document.createElement("li");
+      li.className = "gd-none";
+      li.textContent = powers.write ? "No CTAs yet. Make one from a saved comp or the planner."
+                                    : "No CTAs yet. Callers, officers and admins make them.";
+      el.list.replaceChildren(li);
+    } else {
+      const groups = eventGroups(events);
+      const items = [];
+      for (const [label, list] of [["Ahead", groups.upcoming], ["Past", groups.past]]) {
+        if (!list.length) continue;
+        const h = document.createElement("li");
+        h.className = "ev-group";
+        h.textContent = label;
+        items.push(h, ...list.map(eventItem));
+      }
+      el.list.replaceChildren(...items);
+    }
+
+    const full = events.length >= EVENTS_MAX;
+    el.listNote.textContent = full ? `A guild keeps at most ${EVENTS_MAX} CTAs.` : "";
+    el.listNote.hidden = !full;
+    if (full) el.create.hidden = true;
+  }
+
+  el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
+
+  el.list.addEventListener("click", e => {
+    const b = e.target.closest("[data-event]");
+    if (!b || busy) return;
+    openEvent(b.dataset.event);
+  });
+
+
+  /* ---- the open event ---- */
+
+  function roleTag(role) {
+    const tag = document.createElement("span");
+    tag.className = `pw-role ${role}`;
+    tag.textContent = ROLE_NAMES[role] || role;
+    return tag;
+  }
+
+  function slotRow(slot) {
+    const tr = document.createElement("tr");
+    tr.dataset.position = String(slot.position);
+
+    const pos = document.createElement("td");
+    pos.className = "cp-pos";
+    pos.textContent = String(slot.position);
+
+    const weapon = document.createElement("td");
+    weapon.className = "cp-weapon";
+    if (slot.weapon_id) {
+      const info = weaponInfo(CATALOG, slot.weapon_id);
+      const src = (typeof ICONS !== "undefined" && ICONS[slot.weapon_id])
+        || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
+      if (src) {
+        const img = document.createElement("img");
+        img.className = "pw-art";
+        img.src = src;
+        img.alt = "";
+        img.width = 22;
+        img.height = 22;
+        img.loading = "lazy";
+        weapon.append(img);
+      }
+      const name = document.createElement("span");
+      name.className = "gd-name";
+      name.textContent = info.known ? info.name : `${slot.weapon_id} (unknown weapon)`;
+      weapon.append(name);
+      if (info.role) weapon.append(roleTag(info.role));
+    } else {
+      const open = document.createElement("span");
+      open.className = "cp-open";
+      open.textContent = "open slot";
+      weapon.append(open);
+    }
+
+    const text = (key, value, max, label) => {
+      const td = document.createElement("td");
+      const input = document.createElement("input");
+      input.className = "text-input cp-in";
+      input.type = "text";
+      input.maxLength = max;
+      input.placeholder = label;
+      input.value = value || "";
+      input.dataset[key] = String(slot.position);
+      input.setAttribute("aria-label", `slot ${slot.position}: ${label}`);
+      input.readOnly = !powers.editSlots;
+      td.append(input);
+      return td;
+    };
+
+    const act = document.createElement("td");
+    act.className = "gd-act";
+    if (powers.editSlots) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "gd-btn";
+      b.dataset.evRemove = String(slot.position);
+      b.setAttribute("aria-label", `remove slot ${slot.position}`);
+      b.textContent = "×";
+      act.append(b);
+    }
+
+    tr.append(pos, weapon, text("evRole", slot.role, COMP_ROLE_MAX, "role"), text("evNote", slot.note, COMP_NOTE_MAX, "note"), act);
+    return tr;
+  }
+
+  function renderEvent() {
+    powers = eventPowers(myRole(), current);
+    el.view.hidden = !current;
+    el.empty.hidden = !!current;
+    if (!current) return;
+
+    el.sourceWrap.hidden = !!current.id;
+    el.name.value = current.name || "";
+    el.content.value = current.content || "";
+    el.style.value = current.style || "";
+    el.size.value = current.planned_size || "";
+    el.start.value = toLocalInput(current.starts_at);
+    el.mass.value = toLocalInput(current.mass_at);
+    el.notes.value = current.notes || "";
+    for (const input of [el.name, el.content, el.style, el.size, el.start, el.mass, el.notes]) {
+      input.disabled = !powers.write;
+    }
+
+    el.status.textContent = EVENT_STATUS_NAMES[current.status] || current.status || "";
+    el.status.dataset.status = current.status || "";
+    el.share.textContent = current.share_code || "";
+    el.share.parentElement.hidden = !current.share_code;
+    el.moves.replaceChildren(...(current.id ? powers.moves : []).map(to => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "gd-btn";
+      b.dataset.evMove = to;
+      b.textContent = EVENT_MOVE_LABELS[to] || to;
+      return b;
+    }));
+
+    el.meta.textContent = current.id
+      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
+        + (current.template_id ? " · copied from a saved comp" : "")
+      : "Not saved yet.";
+
+    const s = templateSummary(slots, CATALOG);
+    el.summary.replaceChildren(...ROLE_ORDER.map(role => {
+      const cell = document.createElement("span");
+      cell.className = `gd-cov ${role}`;
+      const n = document.createElement("b");
+      n.textContent = String(s[role]);
+      cell.append(n, ` ${ROLE_NAMES[role]}`);
+      return cell;
+    }), (() => {
+      const cell = document.createElement("span");
+      cell.className = "gd-cov";
+      const n = document.createElement("b");
+      n.textContent = String(s.total);
+      cell.append(n, ` slot${s.total === 1 ? "" : "s"}`
+        + (s.open ? `, ${s.open} open` : "") + (s.unknown ? `, ${s.unknown} unknown` : ""));
+      return cell;
+    })());
+
+    el.slots.replaceChildren(...slots.map(slotRow));
+    el.slotsNote.hidden = slots.length > 0;
+    el.replace.hidden = !powers.editSlots;
+    el.save.hidden = !powers.write;
+    el.remove.hidden = !powers.write || !current.id;
+    el.open.disabled = !slots.some(s => s.weapon_id) && !current.share_hash;
+    markDirty();
+  }
+
+  function typedEvent() {
+    return Object.assign({}, current, {
+      name: el.name.value.trim(),
+      content: el.content.value,
+      style: el.style.value,
+      planned_size: Number(el.size.value),
+      starts_at: fromLocalInput(el.start.value),
+      mass_at: fromLocalInput(el.mass.value),
+      notes: el.notes.value.trim(),
+      slots
+    });
+  }
+
+  function dirty() {
+    if (!current) return false;
+    if (!current.id) return true;
+    const a = eventPayload(typedEvent());
+    const b = eventPayload(Object.assign({}, current, { slots: current.slots,
+      starts_at: fromLocalInput(toLocalInput(current.starts_at)), mass_at: fromLocalInput(toLocalInput(current.mass_at)) }));
+    return JSON.stringify(a) !== JSON.stringify(b);
+  }
+
+  function markDirty() {
+    el.dirty.hidden = !dirty();
+  }
+
+  el.form.addEventListener("input", e => {
+    const t = e.target;
+    if (t.dataset.evRole !== undefined || t.dataset.evNote !== undefined) {
+      const position = Number(t.dataset.evRole || t.dataset.evNote);
+      const slot = slots.find(s => s.position === position);
+      if (slot) {
+        if (t.dataset.evRole !== undefined) slot.role = t.value.trim() || null;
+        else slot.note = t.value.trim() || null;
+      }
+    }
+    markDirty();
+  });
+
+  el.slots.addEventListener("click", e => {
+    const b = e.target.closest("[data-ev-remove]");
+    if (!b || busy || !powers.editSlots) return;
+    const position = Number(b.dataset.evRemove);
+    slots = slots.filter(s => s.position !== position).map((s, i) => Object.assign(s, { position: i + 1 }));
+    renderEvent();
+    announce(`Slot ${position} removed.`);
+  });
+
+  async function openEvent(id) {
+    const seq = ++openSeq;
+    clearMessages();
+    acctFlagFields(FIELDS, {});
+    el.slotsNote.textContent = "Loading the CTA…";
+    el.slotsNote.hidden = false;
+
+    try {
+      const e = await loadEvent(id);
+      if (seq !== openSeq) return;
+      if (!e) { showError(EVENT_MSG.refused); return; }
+      e.slots = normalizeSlots(e.slots);
+      current = e;
+      slots = normalizeSlots(e.slots);
+      el.slotsNote.textContent = "No slots: the roster is empty.";
+    } catch (err) {
+      if (seq !== openSeq) return;
+      showError(eventErrorMessage(err));
+      return;
+    }
+
+    renderList();
+    renderEvent();
+  }
+
+  /* ---- a new event: from a saved comp, the planner, or empty ---- */
+
+  function renderSources() {
+    const options = [["", "No roster yet"], ["planner", "The planner's current comp"]]
+      .concat(templates.map(t => [t.id, `Comp: ${t.name}`]));
+    el.source.replaceChildren(...options.map(([value, label]) => {
+      const o = document.createElement("option");
+      o.value = value;
+      o.textContent = label;
+      return o;
+    }));
+  }
+
+  function blankEvent() {
+    return {
+      id: null, guild_id: guildId(), template_id: null, name: "", content: "", style: "",
+      planned_size: 20, starts_at: "", mass_at: "", notes: "", status: "draft", share_hash: "", slots: []
+    };
+  }
+
+  function startNew() {
+    current = blankEvent();
+    slots = [];
+    clearMessages();
+    acctFlagFields(FIELDS, {});
+    el.slotsNote.textContent = "";
+    renderSources();
+    el.source.value = "";
+    renderList();
+    renderEvent();
+    el.name.focus();
+  }
+
+  el.create.addEventListener("click", () => { if (!busy) startNew(); });
+
+  el.source.addEventListener("change", async () => {
+    if (busy || !current || current.id) return;
+    const value = el.source.value;
+    const keep = { name: el.name.value, starts_at: fromLocalInput(el.start.value) || "", mass_at: fromLocalInput(el.mass.value) || "", notes: el.notes.value };
+    clearMessages();
+
+    if (!value) {
+      current = Object.assign(blankEvent(), keep);
+      slots = [];
+    } else if (value === "planner") {
+      const next = eventFromHash(typeof location !== "undefined" ? location.hash : "", guildId(), CONTENTS, STYLES);
+      if (!next) {
+        showError("The planner holds no comp: add weapons in the planner first.");
+        el.source.value = "";
+        return;
+      }
+      current = Object.assign(next, keep);
+      slots = next.slots;
+    } else {
+      const seq = ++openSeq;
+      busy = true;
+      try {
+        const t = await loadTemplate(value);
+        if (seq !== openSeq) return;
+        if (!t) { showError(EVENT_MSG.templateGone); return; }
+        const next = eventFromTemplate(t, guildId());
+        current = Object.assign(next, keep, keep.name ? {} : { name: next.name });
+        slots = next.slots;
+      } catch (err) {
+        if (seq !== openSeq) return;
+        showError(eventErrorMessage(err));
+        return;
+      } finally {
+        busy = false;
+      }
+    }
+
+    renderEvent();
+    el.source.value = value;
+  });
+
+  el.replace.addEventListener("click", () => {
+    if (busy || !current || !powers.editSlots) return;
+    const parsed = parseShareHash(typeof location !== "undefined" ? location.hash : "");
+    if (!parsed || !parsed.weapons.length) {
+      showError("The planner holds no comp: add weapons in the planner first.");
+      return;
+    }
+    if (!window.confirm("Replace this CTA's slots with the planner's current comp? Role labels and notes on the slots are cleared.")) return;
+    slots = slotsFromWeapons(parsed.weapons);
+    current.share_hash = parsed.hash;
+    if (Object.prototype.hasOwnProperty.call(CONTENTS, parsed.content)) el.content.value = parsed.content;
+    if (parsed.size) el.size.value = parsed.size;
+    el.style.value = Object.prototype.hasOwnProperty.call(STYLES, parsed.style) ? parsed.style : "";
+    renderEvent();
+    showNotice("Slots replaced from the planner. Save to keep them.");
+  });
+
+  el.open.addEventListener("click", () => {
+    if (!current) return;
+    const hash = templateHash(typedEvent(), slots);
+    dialog.close();
+    location.hash = hash;
+    announce(`${current.name || "The CTA"} opened in the planner.`);
+  });
+
+  /* ---- status moves ---- */
+
+  el.moves.addEventListener("click", async e => {
+    const b = e.target.closest("[data-ev-move]");
+    if (!b || busy || !current || !current.id) return;
+    const to = b.dataset.evMove;
+    if (!powers.moves.includes(to)) return;
+    if (dirty() && !window.confirm("Unsaved changes are kept in the form. Change the status now?")) return;
+    if (to === "completed" && !window.confirm("Mark the CTA completed? Its slots are kept as they are and cannot change again.")) return;
+
+    busy = true;
+    acctBusy(b, "Changing…");
+
+    try {
+      const row = await setEventStatus(current.id, to);
+      current.status = row.status;
+      current.updated_at = row.updated_at;
+      await reloadList(current.id, true);
+      renderEvent();
+      showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
+      announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
+    } catch (err) {
+      showError(eventErrorMessage(err));
+    } finally {
+      busy = false;
+      acctIdle(b);
+    }
+  });
+
+  el.form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (busy || !current || !powers.write) return;
+    clearMessages();
+
+    const typed = typedEvent();
+    const first = acctFlagFields(FIELDS, validateEvent({
+      name: typed.name, content: typed.content, style: typed.style, plannedSize: typed.planned_size,
+      startsAt: typed.starts_at === null ? "invalid" : typed.starts_at,
+      massAt: typed.mass_at === null ? "invalid" : typed.mass_at
+    }, CONTENTS, STYLES));
+    if (first) { first.focus(); return; }
+
+    if (current.id && !dirty()) {
+      showNotice("Nothing to save: the CTA is up to date.");
+      return;
+    }
+
+    busy = true;
+    acctBusy(el.save, "Saving…");
+
+    try {
+      const row = await saveEvent(typed);
+      row.slots = normalizeSlots(slots);
+      current = row;
+      slots = normalizeSlots(row.slots);
+      await reloadList(row.id, true);
+      renderEvent();
+      showNotice("CTA saved.");
+      announce("CTA saved.");
+    } catch (err) {
+      showError(eventErrorMessage(err));
+    } finally {
+      busy = false;
+      acctIdle(el.save);
+      markDirty();
+    }
+  });
+
+  el.remove.addEventListener("click", async () => {
+    if (busy || !current || !current.id) return;
+    if (!window.confirm(`Delete ${current.name}? This cannot be undone.`)) return;
+
+    busy = true;
+    acctBusy(el.remove, "Deleting…");
+    const name = current.name;
+
+    try {
+      await deleteEvent(current.id);
+      current = null;
+      slots = [];
+      await reloadList(null, true);
+      renderEvent();
+      showNotice(`${name} was deleted.`);
+    } catch (err) {
+      showError(eventErrorMessage(err));
+    } finally {
+      busy = false;
+      acctIdle(el.remove);
+    }
+  });
+
+
+  /* ---- loading ---- */
+
+  async function reloadList(keepId, quiet) {
+    const seq = ++openSeq;
+    events = [];
+    if (!quiet) { current = null; slots = []; }
+    renderList();
+    renderEvent();
+    if (!guildId()) return;
+
+    try {
+      [events, templates] = await Promise.all([loadGuildEvents(guildId()), loadGuildTemplates(guildId())]);
+    } catch (err) {
+      if (seq !== openSeq) return;
+      showError(eventErrorMessage(err));
+      return;
+    }
+    if (seq !== openSeq) return;
+
+    renderList();
+    if (keepId && !quiet) await openEvent(keepId);
+  }
+
+  async function openEvents() {
+    if (!account.user) return;
+
+    clearMessages();
+    current = null;
+    slots = [];
+    events = [];
+    templates = [];
+    guilds = [];
+    renderGuilds();
+    renderList();
+    renderEvent();
+    if (!dialog.open) dialog.showModal();
+
+    const seq = ++openSeq;
+    try {
+      guilds = await loadMyGuilds();
+    } catch (err) {
+      if (seq !== openSeq) return;
+      showError(guildErrorMessage(err));
+      return;
+    }
+    if (seq !== openSeq) return;
+
+    renderGuilds();
+    await reloadList(null);
+  }
+
+  acctWireDialog(dialog, { canClose: () => !busy && !dirty() });
+  $id("ev-close").addEventListener("click", () => dialog.close());
+
+
+  /* ---- identity ---- */
+
+  window.Account.subscribe(state => {
+    const was = account.user ? account.user.id : null;
+    account = state;
+
+    if (dialog.open && (!state.user || state.user.id !== was)) {
+      dialog.close();
+    }
+  });
+
+  window.Account.registerView("events", openEvents);
 })();
 
 </script>

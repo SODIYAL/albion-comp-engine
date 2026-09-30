@@ -1914,6 +1914,7 @@ window.AUTH_LINK = "";
   <button type="button" class="acct-item" id="acct-profile">Profile</button>
   <button type="button" class="acct-item" id="acct-guilds">Guilds</button>
   <button type="button" class="acct-item" id="acct-comps">Saved comps</button>
+  <button type="button" class="acct-item" id="acct-events">CTAs</button>
   <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
   <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
 </div>
@@ -2283,6 +2284,116 @@ window.AUTH_LINK = "";
               <div class="profile-actions cp-foot-r">
                 <button class="auth-submit" id="comp-save" type="submit" hidden>Save comp</button>
                 <span class="profile-dirty" id="comp-dirty" hidden>Unsaved changes</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="auth-dialog guild-dialog comp-dialog event-dialog" id="event-dialog" aria-modal="true" aria-labelledby="ev-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="ev-title">CTAs</h2>
+      </div>
+      <button type="button" class="auth-close" id="ev-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="ev-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="ev-notice" role="status" hidden></p>
+    <p class="sr-only" id="ev-live" aria-live="polite"></p>
+
+    <div class="gd-grid">
+      <aside class="gd-side">
+        <div class="auth-field">
+          <label for="ev-guild">Guild</label>
+          <select id="ev-guild"></select>
+        </div>
+        <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+        <ul class="gd-list ev-list" id="ev-list" aria-labelledby="ev-list-label"></ul>
+        <p class="auth-hint" id="ev-list-note" hidden></p>
+        <button type="button" class="auth-submit" id="ev-new" hidden>New CTA</button>
+        <p class="auth-hint">A CTA copies its roster from a saved comp or the planner; the comp stays as it was.</p>
+      </aside>
+
+      <section class="gd-main">
+        <p class="gd-empty" id="ev-empty">Pick a CTA, or make a new one.</p>
+        <form class="auth-form" id="ev-form" novalidate>
+          <div id="ev-view" hidden>
+            <div class="ev-status-row">
+              <span class="ev-status" id="ev-status" data-status=""></span>
+              <span class="ev-moves" id="ev-moves"></span>
+              <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span></span>
+            </div>
+            <div class="cp-fields">
+              <div class="auth-field cp-wide" id="ev-source-wrap">
+                <label for="ev-source">Roster from</label>
+                <select id="ev-source"></select>
+              </div>
+              <div class="auth-field cp-wide">
+                <label for="ev-name">CTA name</label>
+                <input class="text-input" id="ev-name" maxlength="64" type="text" spellcheck="false"
+                  aria-describedby="ev-name-err">
+                <p class="auth-field-err" id="ev-name-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-start">Starts</label>
+                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-err">
+                <p class="auth-field-err" id="ev-start-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-mass">Mass at <span class="opt">optional</span></label>
+                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-err">
+                <p class="auth-field-err" id="ev-mass-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-size">Planned size</label>
+                <input class="text-input" id="ev-size" type="number" min="2" max="60" step="1" inputmode="numeric"
+                  aria-describedby="ev-size-err">
+                <p class="auth-field-err" id="ev-size-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-content">Content</label>
+                <select id="ev-content" aria-describedby="ev-content-err"></select>
+                <p class="auth-field-err" id="ev-content-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-style">Style</label>
+                <select id="ev-style" aria-describedby="ev-style-err"></select>
+                <p class="auth-field-err" id="ev-style-err"></p>
+              </div>
+              <div class="auth-field cp-wide">
+                <label for="ev-notes">Notes <span class="opt">optional</span></label>
+                <textarea class="text-input cp-notes" id="ev-notes" maxlength="1000" rows="2"></textarea>
+              </div>
+            </div>
+            <p class="gd-meta" id="ev-meta"></p>
+            <div class="gd-coverage" id="ev-summary" aria-label="Slots per role"></div>
+            <p class="auth-hint" id="ev-slots-note" hidden></p>
+            <table class="gd-table cp-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Weapon</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Note</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="ev-slots"></tbody>
+            </table>
+            <div class="gd-foot cp-foot">
+              <div class="cp-foot-l">
+                <button type="button" class="gd-btn" id="ev-open">Open in planner</button>
+                <button type="button" class="gd-btn" id="ev-replace" hidden>Replace slots from planner</button>
+                <button type="button" class="gd-btn danger" id="ev-delete" hidden>Delete</button>
+              </div>
+              <div class="profile-actions cp-foot-r">
+                <button class="auth-submit" id="ev-save" type="submit" hidden>Save CTA</button>
+                <span class="profile-dirty" id="ev-dirty" hidden>Unsaved changes</span>
               </div>
             </div>
           </div>

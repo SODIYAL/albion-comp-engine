@@ -5,7 +5,8 @@ hand-edited.
 
 - `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,
   `_decision_layer.js/.css`, `_supabase.js`, `_auth.js/.css`, `_profile.js`,
-  `_explainer.html` — the **sources** (the `_` prefix marks them).
+  `_guild.js`, `_comps.js`, `_events.js`, `_explainer.html` — the **sources**
+  (the `_` prefix marks them).
 - `build.py` — the bundler: inlines the dataset, the engine
   (`engine/app_scoring.js`), the sources, and a parity fixture into
   `index.html` + `how-it-works.html` here and the GitHub Pages copies in
@@ -144,12 +145,31 @@ and its tests: `supabase/README.md`.
   roster still matches the slots; a changed roster opens as a plain link.
   `ACCOUNT_CONTENTS` and `ACCOUNT_STYLES` (built beside it) are the
   dataset's content and style names, the planner's own vocabulary.
+- **`_events.js`** (platform phase 4) runs a guild's CTAs: helpers over
+  `events`, `event_slots` and `save_event`; pure functions for the
+  statuses and the moves the guard allows (draft → open → locked →
+  completed, open and locked a step back; completed final), the times
+  both ways (a date-time field in the viewer's local time, the ISO
+  instant stored, a label with the UTC time the game runs on), the
+  guild's calendar split into ahead and past, an event made from a
+  saved comp or the planner's hash, validation on top of the comp's
+  rules (a start required, the mass time never after it), who writes
+  and error wording (`tests/test_events.js`); and the CTAs dialog
+  (`registerView("events")`): the guild's calendar, a new CTA with its
+  roster from a saved comp, the planner's current comp or none, the
+  status row with the one-step moves and the share code, the slot table
+  the comps dialog uses, open in planner, replace the slots from the
+  planner, save and delete. An event's roster is COPIED from the comp
+  (by the database when the payload names a comp and no slots; the
+  dialog shows the copy first): the module never writes a template, and
+  a comp deleted later leaves the CTA whole. A completed CTA's slots are
+  frozen; the payload carries none.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js`, `_profile.js`, `_guild.js` and `_comps.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js` and `_events.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -162,11 +182,12 @@ and its tests: `supabase/README.md`.
 - The session persists in `localStorage` (supabase-js); `onAuthStateChange`
   keeps the button in step with other tabs.
 
-`tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js` and
-`tests/test_comps.js` pin validation, error wording, the name fallback,
-link parsing, the weapon lists and search, the member table and role
-powers, the share hash both ways, and what the helpers send;
-`test_dashboard_layout.py` L27–L30 pin the markup, the isolation, the
+`tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
+`tests/test_comps.js` and `tests/test_events.js` pin validation, error
+wording, the name fallback, link parsing, the weapon lists and search, the
+member table and role powers, the share hash both ways, the statuses and
+their moves, the times, the calendar, and what the helpers send;
+`test_dashboard_layout.py` L27–L31 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also

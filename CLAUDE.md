@@ -196,11 +196,13 @@ Three applications with explicit boundaries (each directory's README is its cont
 - **Accounts** — the Supabase project (schema and rules in `supabase/`,
   migrations applied in order, never edited once applied) and the
   dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`,
-  `_guild.js`, `_comps.js`, each its own `<script>` after the planner).
-  Identity and persistent user data: profiles, weapon lists, guilds
-  (members with roles, a join code, guild-scoped reads) and saved comps
-  (a guild's templates, saved from and opened in the planner through the
-  address bar's share hash, never a call) now; CTAs, sign-ups and
+  `_guild.js`, `_comps.js`, `_events.js`, each its own `<script>` after
+  the planner). Identity and persistent user data: profiles, weapon
+  lists, guilds (members with roles, a join code, guild-scoped reads),
+  saved comps (a guild's templates, saved from and opened in the planner
+  through the address bar's share hash, never a call) and CTAs (a guild's
+  events: a status the guard moves one step at a time, a share code,
+  slots COPIED from a comp and frozen once completed) now; sign-ups and
   attendance next (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:

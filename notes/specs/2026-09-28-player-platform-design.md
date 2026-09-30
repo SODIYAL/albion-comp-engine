@@ -1,8 +1,8 @@
 # Player platform — design (2026-09-28)
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
-phase 2 (guilds) and phase 3 (saved comps) implemented 2026-09-30; phases
-4–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+phase 2 (guilds), phase 3 (saved comps) and phase 4 (CTAs) implemented
+2026-09-30; phases 5–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -54,10 +54,11 @@ roles.
    planned size, style, notes, the planner's share hash) and
    `comp_template_slots` (position, weapon key, role, note). A template is
    never a live roster.
-4. **CTAs** — `events` (guild, caller, name, start, mass time, notes, status
-   draft / open / locked / completed, share code) and `event_slots`, COPIED
-   from the template at creation: editing an event never touches its
-   template.
+4. **CTAs** (implemented) — `events` (guild, the comp it was copied from,
+   name, content, style, planned size, start, mass time, notes, status
+   draft / open / locked / completed, share code, the comp's share hash)
+   and `event_slots`, COPIED from the template at creation: editing an
+   event never touches its template.
 5. **Sign-up** — `signups` (event, slot or none, user or guest name, item
    power, can-swap, the weapons declared). Claiming a slot is one conditional
    statement (`where status = 'open'`), so two claims cannot both succeed.
@@ -229,6 +230,45 @@ roles.
   bound. Storage bounds against abuse, not product rules.
 - **Deferred**: a weapon picker per slot inside the dialog, multi-party
   grouping, template versions.
+
+## Phase 4 decisions
+
+- **An event is a copy.** `save_event` copies the comp's content, style,
+  size, share hash and slots into the event when the payload names a comp
+  and no slots (a field the payload names wins); the dialog shows the
+  copy before the caller saves and sends it. The event remembers the comp
+  (`template_id`, null once the comp is deleted; the event stays whole),
+  and nothing on an event ever writes a template. The planner's current
+  comp is the other source, through the share hash, as for a comp.
+- **The status moves one step at a time, by the guard.** draft → open,
+  open → draft or locked, locked → open or completed; completed is final.
+  The client offers the guard's moves (`EVENT_MOVES`, pinned equal to the
+  guard's list by the schema test) and reads a refusal as a sentence.
+- **A completed event keeps its slots.** Phase 8 reads them as history,
+  so the slot guard refuses every add, change and removal once the event
+  is completed; the payload of a completed event carries no slots. Its
+  notes still change. A cascade from a deleted event or guild sees no
+  event and lets the slots go: the trigger reads the event under the
+  caller's own policy, and a row the statement removed is not there.
+- **Callers run CTAs.** Callers, officers and admins create, edit, move
+  and delete a guild's events; members read them, share codes included
+  (the guild's own calendar; a guest reaches an event through the code
+  in phase 5, by a function that needs no membership).
+- **The share code is generated, never chosen**, the guild join code's
+  form and generator (`new_join_code`), unique across events. It is the
+  sign-up link of phase 5; renewing it is deferred there.
+- **Times are instants.** `starts_at` (required) and `mass_at` (optional,
+  never after the start: a check and the client's sentence) are
+  `timestamptz`; the dialog reads and writes them in the viewer's local
+  time and shows the UTC time the game runs on beside each start. The
+  calendar lists ahead (soonest first) and past (latest first): completed
+  events and starts more than twelve hours gone are past.
+- **A start in the past is allowed**: a caller records a CTA that ran
+  without the tool, so phase 8 can keep its attendance.
+- **Bounds**: 200 events per guild, the slot, notes, role and note bounds
+  the comp's. Storage bounds against abuse, not product rules.
+- **Deferred**: renewing a share code, a guild-wide time zone, per-event
+  multi-party grouping, a caller-only "my CTAs" view.
 
 ## Open questions
 

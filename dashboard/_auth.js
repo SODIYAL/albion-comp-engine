@@ -502,6 +502,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     profileItem: $id("acct-profile"),
     guildsItem: $id("acct-guilds"),
     compsItem: $id("acct-comps"),
+    eventsItem: $id("acct-events"),
     logoutItem: $id("acct-logout"),
     title: $id("auth-title"),
     error: $id("auth-error"),
@@ -545,7 +546,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
 
 
   /* ---- the account store ----
-     Feature modules (_profile.js; guilds and events after it) read the
+     Feature modules (_profile.js; guilds, comps and CTAs after it) read the
      identity here instead of asking Supabase again, hear every change, and
      offer views the account menu opens. Each module is its own <script>
      after this one (build.py). */
@@ -665,6 +666,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     el.profileItem.hidden = !views.profile;
     el.guildsItem.hidden = !views.guilds;
     el.compsItem.hidden = !views.comps;
+    el.eventsItem.hidden = !views.events;
 
     notify();
   }
@@ -694,9 +696,9 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuItems()[0].focus();
   }
 
-  /* the items on offer: Profile, Guilds and Saved comps show once their
-     modules registered the views */
-  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.logoutItem].filter(item => !item.hidden);
+  /* the items on offer: Profile, Guilds, Saved comps and CTAs show once
+     their modules registered the views */
+  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.eventsItem, el.logoutItem].filter(item => !item.hidden);
 
   function closeMenu(returnFocus) {
     if (menu.hidden) return;
@@ -760,6 +762,11 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
   el.compsItem.addEventListener("click", () => {
     closeMenu(false);
     if (views.comps) views.comps();
+  });
+
+  el.eventsItem.addEventListener("click", () => {
+    closeMenu(false);
+    if (views.events) views.events();
   });
 
   el.logoutItem.addEventListener("click", async () => {

@@ -316,3 +316,21 @@
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
 .cp-foot-r{margin:0}
 .cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}
+
+/* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
+.event-dialog{width:min(960px, calc(100vw - 32px))}
+.ev-group{margin:8px 0 2px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.ev-group:first-child{margin-top:0}
+.ev-when{font-size:11.5px; color:var(--ink-2)}
+.ev-status-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:0 0 12px; padding:8px 10px;
+  border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,21,28,.6)}
+.ev-status{padding:2px 9px; border-radius:999px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-2); border:1px solid var(--rule-2)}
+.ev-status[data-status="open"]{color:var(--role-healer); border-color:var(--role-healer)}
+.ev-status[data-status="locked"]{color:var(--amber); border-color:var(--amber)}
+.ev-status[data-status="completed"]{color:var(--ink-3); border-style:dashed}
+.ev-moves{display:flex; flex-wrap:wrap; gap:6px}
+.ev-moves:empty{display:none}
+.ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
+.ev-share-wrap .pw-label{margin:0}
+.ev-share{font-size:13px}
