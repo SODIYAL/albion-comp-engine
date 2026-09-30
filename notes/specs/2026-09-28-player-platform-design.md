@@ -3,8 +3,9 @@
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
 phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
 (sign-up), phase 6 (caller management), phase 7 (live updates), phase 8
-(history), phase 9 (analytics) and phase 10 (import and export)
-implemented 2026-09-30; phases 11–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+(history), phase 9 (analytics), phase 10 (import and export) and phase
+11 (the engine on the live roster) implemented 2026-09-30; phase 12 open
+(`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -88,7 +89,7 @@ roles.
     detect columns, map weapon / player / role / party / count, match names
     to weapon keys through an alias table, show uncertain matches for review.
     One-way import first; no live sync.
-11. **Engine on the live roster** — the event's weapon keys through the
+11. **Engine on the live roster** (implemented) — the event's weapon keys through the
     engine: weaknesses, overstack, open-slot priorities, replacements; then
     beside player availability and preference. Descriptive, like every
     other analyzer: attendance and preference never enter capability
@@ -503,6 +504,47 @@ roles.
 - **Deferred**: an Excel workbook parsed in the page, a CTA with its
   players from a sheet, a party column on slots, a live link to a
   Google Sheet (phase 12).
+
+## Phase 11 decisions
+
+- **The sheet's read is the planner's engine on its own instance.** The
+  roster module makes one `CompEngine` over `DATASET` (the code the
+  parity gate runs, the data the planner embeds) and never reads the
+  planner's instance, roster, kits or address bar. The inputs are what
+  a share link carries: the CTA's content and style and the weapon
+  keys of its slots. The account layer still reads no planner state;
+  this is the one account surface that calls the engine, and it is
+  display only.
+- **The held roster is judged at its number.** A held slot counts its
+  weapon, or its claimant's first declared weapon when the slot names
+  none; a free slot never counts. Coverage is fitness over its ceiling
+  at the held size (the planner's own judgment), the next pick is
+  asked one body ahead (the planner's one-ahead rule), the plan's
+  coverage stands beside it when the plan is bigger than what is held.
+  The needs are the planner's gap cut and its needed marks (a hard
+  floor unmet, a heavy capability under half); the replacements are
+  the swap review's redundant, off-comp or off-style seats with their
+  better options; overstack is what sits past its soft cap; the
+  duplicate checks are the engine's.
+- **People are shown beside the needs, never scored.** For every next
+  pick and open slot the read names who can bring the weapon: the
+  reserves who declared it, the guild's members not on the sheet who
+  list it (main, then can also play), then reserves who can swap.
+  Members come through the guild module's helpers for a member of the
+  CTA's guild, matched to the sheet by character name whatever its
+  case; a guest sees the engine's read without them. Nothing about a
+  player reaches the engine: the parties it is handed are weapon keys
+  alone, pinned on a stub engine. Attendance and preference entering
+  capability scoring would be a logged decision, and none is made.
+- **The read rides the sheet's own event.** The sign-up module hands
+  its roster over as a `sheet-read` DOM event after every render (the
+  live sheet included) and clears it on close; the roster module
+  paints into the sheet's `rr-*` elements, which the sign-up module
+  never touches. Capability words are the planner's tables, read at
+  call time.
+- **Deferred**: the role advisory, kill pressure and the fight chain on
+  the sheet; the read on a draft CTA or a saved comp (both open in the
+  planner); a caller's own kit picks on the sheet's slots.
 
 ## Open questions
 

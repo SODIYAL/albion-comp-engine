@@ -248,16 +248,46 @@ and its tests: `supabase/README.md`.
   (`compSheetRows`, what the import reads back exactly) and copies it as
   lines for a Discord post (`compText`); the history dialog exports the
   players and the completed CTAs as CSV (`historySheetRows`).
+- **`_roster.js`** (platform phase 11) is the engine's read of a CTA's
+  live roster, on the sheet: the one account surface that reads the
+  engine. It makes its own `CompEngine` over `DATASET` (the planner's
+  engine and data, never the planner's instance, roster, kits or address
+  bar) and asks it about the weapon keys of the HELD slots (the slot's
+  weapon, else the claimant's first declared weapon) at their number,
+  the CTA's content and style: the coverage (fitness over its ceiling),
+  the biggest needs (the planner's gap cut; a hard floor unmet or a
+  heavy capability under half marked needed), the next picks one body
+  ahead with their verdict, the held seats a swap improves
+  (`swapReview`), what sits past its soft cap and the duplicate checks;
+  the plan's coverage beside it when the plan is bigger than what is
+  held. The open slots of the plan are listed with the engine's rank
+  for their weapon, and beside every pick and open slot who can bring
+  it: the reserves who declared it, the guild's members not on the
+  sheet who list it (main, then can also play), then reserves who can
+  swap; members come through the guild module's helpers, for a member
+  of the CTA's guild (matched to the sheet by name, whatever its case).
+  None of that reaches the engine: the parties it is handed are weapon
+  keys alone (`tests/test_roster.js` pins it on a stub engine and runs
+  the read on the real one). The sheet hands its roster over as a
+  `sheet-read` DOM event after every render and clears it on close; the
+  read is painted into the sheet's `rr-*` elements, which the sign-up
+  module never touches. Capability words are the planner's own tables
+  (`CAP_LABEL`, `CAP_PROSE`), read at call time. Descriptive, like
+  every analyzer in the planner: the engine ranks, the module
+  translates; the definitions stand under the read.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
   `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js`,
-  `_signup.js`, `_history.js` and `_import.js` load after the planner, each in its own
+  `_signup.js`, `_history.js`, `_import.js` and `_roster.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
-  state and never scores; the planner never calls it.
+  state and never scores; the planner never calls it. The one account
+  surface that reads the engine is the sheet's engine read
+  (`_roster.js`): its own engine instance on the roster's weapon keys,
+  display only.
 - **Email links.** A verification link returns with the session in the hash
   (`#access_token=…`). The planner's boot rewrites the hash with the saved
   comp, so a `<head>` script sets the return aside first (`AUTH_LINK`) and
@@ -269,13 +299,14 @@ and its tests: `supabase/README.md`.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
 `tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js`,
-`tests/test_history.js` and `tests/test_import.js` pin validation, error wording, the name fallback,
+`tests/test_history.js`, `tests/test_import.js` and `tests/test_roster.js` pin validation, error wording, the name fallback,
 link parsing, the weapon lists and search, the member table and role
 powers, the share hash both ways, the statuses and their moves, the
 times, the calendar, the sheet's board, link, record and channel, the
 history's measures and rows, the import's parser, matcher, columns and
-slots, the export's sheets, and what the helpers send;
-`test_dashboard_layout.py` L27–L37 pin the markup, the isolation, the
+slots, the export's sheets, the engine's read of a roster (what the
+engine is asked and handed), and what the helpers send;
+`test_dashboard_layout.py` L27–L38 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also

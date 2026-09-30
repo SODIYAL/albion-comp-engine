@@ -325,6 +325,7 @@
   .im-source{grid-template-columns:1fr}
   .im-text-field{grid-column:1}
   .im-table{display:block; overflow-x:auto}
+  .rr-grid{grid-template-columns:1fr}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

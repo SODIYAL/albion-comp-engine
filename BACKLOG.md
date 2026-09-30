@@ -353,8 +353,9 @@ status, a share code and slots copied from a comp), phase 5 (sign-up:
 the sheet a link opens, for guests with a claim token and for accounts),
 phase 6 (caller management on the sheet), phase 7 (the live sheet over
 Realtime Broadcast), phase 8 (the attendance record) and phase 9 (the
-history: facts over completed CTAs) and phase 10 (import and export: a
-spreadsheet as a saved comp, CSV out) are built.
+history: facts over completed CTAs), phase 10 (import and export: a
+spreadsheet as a saved comp, CSV out) and phase 11 (the engine's read of
+the live roster, on the sheet) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -365,10 +366,19 @@ spreadsheet as a saved comp, CSV out) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 11, the engine on the live roster** (the spec): a CTA's
-  weapon keys through the engine (weaknesses, overstack, open-slot
-  priorities, replacements), descriptive beside the sheet; then phase
-  12.
+- **Phase 12, integrations** (the spec): a Discord login and bot, a
+  Google Sheets link, automatic roster construction (an optimization
+  over the target comp, the players' declared weapons and their
+  preferences: the first place a player's preference would meet the
+  engine, a logged decision).
+- **The engine read's role check and kill pressure**: the sheet's read
+  lists needs, picks, open slots, replacements and overstack; the
+  planner's role advisory, kill-pressure lights and fight chain are a
+  later increment on the sheet if callers ask for them (open the CTA in
+  the planner meanwhile).
+- **The engine read on the CTAs and comps dialogs**: the read runs on
+  the sheet alone; a draft CTA or a saved comp is read through "Open in
+  planner".
 - **Import: an Excel workbook** (`.xlsx`) is not parsed in the page; its
   cells are pasted, or the sheet saved as CSV. A zip-and-XML reader in
   the page is a later increment if callers ask for it.

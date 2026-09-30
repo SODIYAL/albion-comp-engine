@@ -785,6 +785,16 @@ function signupErrorMessage(err) {
 
     el.open.disabled = !sheet.slots.some(s => s.weapon_id) && !ev.share_hash;
     el.link.textContent = signupLink(code, typeof location !== "undefined" ? location.href : "");
+
+    /* the engine's read is the roster module's: the roster is handed
+       over as a DOM event, never a call between modules */
+    handOver();
+  }
+
+  function handOver() {
+    document.dispatchEvent(new CustomEvent("sheet-read", { detail: sheet ? {
+      code, event: sheet.event, slots: sheet.slots, signups: sheet.signups, guild: sheet.guild || null, member: myRole !== null
+    } : null }));
   }
 
 
@@ -1213,6 +1223,8 @@ function signupErrorMessage(err) {
         el.form.hidden = true;
         el.board.replaceChildren();
         stopWatching();
+        sheet = null;
+        handOver();
       }
       return;
     }
@@ -1310,6 +1322,7 @@ function signupErrorMessage(err) {
   acctWireDialog(dialog, { canClose: () => !busy });
   $id("su-close").addEventListener("click", () => dialog.close());
   dialog.addEventListener("close", stopWatching);
+  dialog.addEventListener("close", () => { sheet = null; handOver(); });
 
   /* the CTAs dialog hands a code over */
   document.addEventListener("cta-sheet", e => {

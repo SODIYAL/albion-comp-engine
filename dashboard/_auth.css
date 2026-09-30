@@ -447,3 +447,30 @@
 .cp-import{margin-top:10px; width:100%}
 .cp-import-hint{margin-top:4px}
 .hs-export{flex:none}
+
+/* ---- the engine's read on the sheet (platform phase 11) ---- */
+.rr{margin:12px 0 6px; padding:8px 10px; border:1px solid var(--rule); border-radius:10px; background:rgba(18,21,28,.35)}
+.rr-summary{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; cursor:pointer; list-style:none}
+.rr-summary::-webkit-details-marker{display:none}
+.rr-summary::before{content:"\25B8"; font-size:11px; color:var(--ink-3)}
+.rr[open] .rr-summary::before{content:"\25BE"}
+.rr-label{margin:0}
+.rr-headline{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.rr-note{margin:8px 0 0}
+.rr-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; margin-top:8px}
+.rr-block{min-width:0}
+.rr-block-wide{grid-column:1/-1}
+.rr-block .pw-label{margin:6px 0 2px}
+.rr-list{margin:0; padding:0; list-style:none; font-size:12.5px}
+.rr-list li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 8px; padding:3px 0; border-bottom:1px solid var(--rule)}
+.rr-list li:last-child{border-bottom:0}
+.rr-list .gd-sub{display:inline; flex-basis:100%}
+.rr-list .gd-none{display:block; padding:4px 0; border-bottom:0}
+.rr-weapon{display:inline-flex; align-items:center; gap:5px}
+.rr-weapon .pw-art{margin:0}
+.rr-needed .gd-name{color:var(--gap)}
+.rr-wanted .cp-pos{color:var(--amber)}
+.rr-depth{opacity:.8}
+.rr-over .gd-name, .rr-dup-high .gd-name, .rr-dup-warning .gd-name{color:var(--amber)}
+.rr-dup-verify .gd-name, .rr-dup-info .gd-name{color:var(--ink-2)}
+.rr-definitions{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule)}

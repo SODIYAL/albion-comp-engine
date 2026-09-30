@@ -214,7 +214,10 @@ Three applications with explicit boundaries (each directory's README is its cont
   rating) and import and export (a spreadsheet as a saved comp: the
   columns detected, every name read through the catalog and the guild's
   remembered names, uncertain ones reviewed; a comp and the history out
-  as CSV) now; the engine on the live roster next
+  as CSV) and the engine's read on the sheet (`_roster.js`: its own
+  `CompEngine` on the held slots' weapon keys; needs, next picks, open
+  slots with who can fill them, replacements, overstack; display only)
+  now; integrations next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:
@@ -260,7 +263,11 @@ Rules a change must not break. The decision behind each is logged in
   and reference builds never feed scoring. Popularity is not effectiveness.
 - **Accounts never score**: the account layer reads no planner state and the
   planner never calls it; no account row (profile, weapon list, sign-up,
-  attendance) is a scoring input without a logged decision. Every account
+  attendance) is a scoring input without a logged decision. The sheet's
+  engine read (`_roster.js`) is the one account surface that calls the
+  engine: its own `CompEngine` instance over the dataset, handed weapon
+  keys alone; who signed up and what members play are shown beside its
+  needs, never handed to it. Every account
   table follows `supabase/README.md` (RLS first, anon revoked except a
   guest's listed reach through a CTA's share code, column grants, invoker
   functions); `test_supabase_schema.py` and `test_supabase_rls.mjs` pin it.

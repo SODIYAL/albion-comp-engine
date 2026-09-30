@@ -1028,6 +1028,48 @@ i_import = script_at(lambda a, b: "function loadGuildAliases" in b)
 check(0 <= i_history < i_import, "L37r the import module loads after the history module, in its own <script>",
       "script indices history=%d import=%d" % (i_history, i_import))
 
+print("L38 - the engine's read on the sheet: the planner's engine on the roster's weapon keys, display only, people beside it never scored")
+# Phase 11: the one account surface that reads the engine. The roster
+# module makes its own CompEngine over DATASET (never the planner's
+# instance or state), the sheet hands its roster over as a DOM event,
+# the read is painted into elements the sign-up module never touches,
+# and sign-ups and members are shown beside the engine's needs, never
+# handed to it.
+ROSTER_JS = read("_roster.js")
+rr = seg(sdlg, '<details class="rr" id="rr-wrap"', "</details>", "L38 read anchors")
+for rid in ("rr-headline", "rr-note", "rr-needs", "rr-picks", "rr-free", "rr-swaps", "rr-over", "rr-definitions"):
+    check(('id="%s"' % rid) in rr, "L38a the read carries %s" % rid)
+check(rr.count('aria-labelledby="rr-') == 5 and rr.count('class="pw-label" id="rr-') == 5, "L38b each of the five blocks is a labelled section")
+check(sdlg.find('id="rr-wrap"') > sdlg.find('id="su-history-wrap"') and sdlg.find('id="rr-wrap"') < sdlg.find('class="auth-hint su-link-row"'),
+      "L38c the read sits in the roster column after the record and before the link")
+check('dispatchEvent(new CustomEvent("sheet-read"' in SIGNUP_JS and 'addEventListener("sheet-read"' in ROSTER_JS,
+      "L38d the sheet hands its roster over as a DOM event; the roster module listens (no call between modules)")
+check("rr-" not in SIGNUP_JS and "rosterRead" not in SIGNUP_JS, "L38e the sign-up module never touches the read's elements or functions")
+check("function handOver" in SIGNUP_JS and SIGNUP_JS.count("handOver();") >= 3 and "sheet = null; handOver();" in SIGNUP_JS,
+      "L38f the roster is handed over after every render and cleared when the sheet closes or names no CTA")
+check("new CompEngine(DATASET" in ROSTER_JS and "engine.setContent(" in ROSTER_JS,
+      "L38g the roster module makes its own engine over the dataset and sets the CTA's content, size and style on it")
+check(not re.search(r"\bENG\b|\brender\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT|location\.hash|COMBOS_CUR|GEARS_CUR", ROSTER_JS),
+      "L38h the roster module reads and writes no planner state: never the planner's engine, roster, kits or address bar")
+planner_globals = set(re.findall(r"\b(CAP_LABEL|CAP_PROSE|ICONS|DATASET|CompEngine|SEMANTIC_ICONS|WEAPONS|TREES|ITEMS|SPELLS|GEAR|USAGE|FAMILIES)\b", ROSTER_JS))
+check(planner_globals == {"CAP_LABEL", "CAP_PROSE", "ICONS", "DATASET", "CompEngine"},
+      "L38i the planner's globals it reads are the engine, the dataset, the icons and the capability words, no other", str(sorted(planner_globals)))
+check("window.DB" not in ROSTER_JS and ".from(" not in ROSTER_JS and ".rpc(" not in ROSTER_JS and ".channel(" not in ROSTER_JS
+      and "loadGuildMembers(" in ROSTER_JS and "loadMembersWeapons(" in ROSTER_JS and "memberRows(" in ROSTER_JS,
+      "L38j the roster module reaches no table: members and their lists come through the guild module's helpers")
+check("weaponInfo(" in ROSTER_JS and "sheetBoard(" in ROSTER_JS and "role_class" not in ROSTER_JS and "<li" not in ROSTER_JS and "<span" not in ROSTER_JS,
+      "L38k weapons are read through the catalog and the board through the sheet's own function; the read is built without markup strings")
+check("never scored" in ROSTER_JS and "rosterHeadline" in ROSTER_JS and "fillersFor(" in ROSTER_JS,
+      "L38l the definitions say who signed up and what members play are shown beside the needs, never scored")
+check(not re.search(r"rosterRead|heldParty|fillersFor|sheet-read|rosterPool", APP + DECISION_JS), "L38m the planner never calls the roster module")
+check(all(s in AUTH_CSS for s in (".rr{", ".rr-grid{", ".rr-list li{", ".rr-needed .gd-name{")), "L38n the read, its grid, its rows and the needed mark are styled in _auth.css")
+check(".rr-grid{grid-template-columns:1fr}" in LAYOUT, "L38o on a phone the read's blocks stack (_layout.css)")
+i_roster = script_at(lambda a, b: "function rosterRead" in b)
+check(0 <= i_import < i_roster, "L38p the roster module loads after the import module, in its own <script>",
+      "script indices import=%d roster=%d" % (i_import, i_roster))
+check(i_roster >= 0 and SCRIPTS[i_roster][1].count("new CompEngine(") == 1 and "const ENG = new CompEngine(DATASET" in SCRIPTS[i_app][1],
+      "L38q the roster module's engine is its own one instance; the planner's is made in the planner's script alone")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

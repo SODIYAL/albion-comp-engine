@@ -2455,6 +2455,36 @@ window.AUTH_LINK = "";
           <h3 class="pw-label" id="su-history-label">Record</h3>
           <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
         </div>
+        <details class="rr" id="rr-wrap" hidden>
+          <summary class="rr-summary">
+            <span class="pw-label rr-label">Engine read</span>
+            <span class="rr-headline" id="rr-headline"></span>
+          </summary>
+          <p class="auth-hint rr-note" id="rr-note" hidden></p>
+          <div class="rr-grid">
+            <section class="rr-block" aria-labelledby="rr-needs-label">
+              <h4 class="pw-label" id="rr-needs-label">Biggest needs</h4>
+              <ul class="rr-list" id="rr-needs"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-picks-label">
+              <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
+              <ul class="rr-list" id="rr-picks"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-free-label">
+              <h4 class="pw-label" id="rr-free-label">Open slots</h4>
+              <ul class="rr-list" id="rr-free"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-swaps-label">
+              <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
+              <ul class="rr-list" id="rr-swaps"></ul>
+            </section>
+            <section class="rr-block rr-block-wide" aria-labelledby="rr-over-label">
+              <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
+              <ul class="rr-list" id="rr-over"></ul>
+            </section>
+          </div>
+          <p class="auth-hint rr-definitions" id="rr-definitions"></p>
+        </details>
         <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
