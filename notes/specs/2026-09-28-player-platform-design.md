@@ -2,8 +2,8 @@
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
 phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
-(sign-up) and phase 6 (caller management) implemented 2026-09-30; phases
-7–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+(sign-up), phase 6 (caller management) and phase 7 (live updates)
+implemented 2026-09-30; phases 8–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -71,8 +71,10 @@ roles.
    remove, add a player by name, change a slot's weapon, promote a
    reserve, lock, reopen and complete: on the sheet, under the caller's
    guild role, until the CTA is completed.
-7. **Live updates** — Supabase Realtime on slots and sign-ups; the database
-   enforces the concurrency, the channel only reports it.
+7. **Live updates** (implemented) — Realtime Broadcast on the CTA's
+   topic after every write to the sheet; the database enforces the
+   concurrency, the channel only reports it, and the sheet re-reads
+   itself under its own policies.
 8. **History** — attendance (`signed_up`, `confirmed`, `attended`,
    `no_show`, `cancelled`, `reserve`) kept apart from the sign-up; a
    completed event keeps its slots and attendance.
@@ -352,6 +354,33 @@ roles.
   player still cancels. Completed freezes the sheet for everyone.
 - **Deferred**: bulk moves, a caller's note on a player, attendance
   marks (phase 8), Realtime (phase 7).
+
+## Phase 7 decisions
+
+- **Broadcast, not Postgres Changes.** Postgres Changes checks a
+  subscriber's row-level policies outside any statement, so a guest,
+  whose policy reads the share code from the statement (rule 13), would
+  receive nothing, and an account would receive rows. The sheet instead
+  listens on a public Broadcast topic, `cta:<share code>` (the code is
+  the key), for a message that names a table and an operation and
+  nothing else, then re-reads the sheet through `event_by_code`. One
+  mechanism for guests and members; no row crosses the channel; the
+  policies still decide what is read.
+- **The broadcast trigger runs with its definer's rights** (a listed
+  exception, rule 8). Evidence: `realtime.messages` is protected by row-level security
+  with no policy for the API roles, and `realtime.send` catches the
+  refusal and drops the message, so a send as `anon` on the project
+  landed nothing. The function reads one column of one row, sends a
+  fixed-shape message, and no API role can call it. The RLS suite runs
+  beside a stand-in whose message table is protected the same way, so
+  the reason stays pinned.
+- **The channel only reports.** A swap sends a message per row changed;
+  the sheet settles a moment and reads once. A change someone else made
+  never refills the player's form; a move or removal of their own row
+  is said out loud. Without Realtime (a self-hosted database without
+  it) the trigger does nothing and the sheet keeps its Refresh.
+- **Deferred**: a live CTAs dialog (a channel per guild), presence (who
+  has the sheet open), a live planner roster from the sheet (phase 11).
 
 ## Open questions
 

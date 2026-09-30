@@ -206,8 +206,10 @@ Three applications with explicit boundaries (each directory's README is its cont
   and sign-up (the sheet a CTA's link opens; a guest's reach through the
   share code carried by the statement, their own row keyed by a claim
   token's hash; accounts under their id; the caller roles moving, adding
-  and removing players until the CTA is completed) now; live updates and
-  attendance next (`notes/specs/2026-09-28-player-platform-design.md`).
+  and removing players until the CTA is completed; the sheet live over a
+  Realtime broadcast that names a table and an operation, never a row)
+  now; attendance and history next
+  (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:
 

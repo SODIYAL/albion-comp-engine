@@ -913,6 +913,20 @@ check("weaponOptions(" in SIGNUP_JS and "role_class" not in SIGNUP_JS and "<optg
 check(all(s in AUTH_CSS for s in (".su-caller{", ".su-manage{", ".su-add{")), "L33g the caller's controls are styled in _auth.css")
 check(".su-add{flex-wrap:wrap}" in LAYOUT, "L33h on a phone the add-a-player row wraps (_layout.css)")
 
+print("L34 - live updates: the sheet listens on the CTA's channel and re-reads itself")
+# Phase 7: one Realtime broadcast per write, on cta:<code>; the sheet
+# joins when it opens, leaves when it closes, and re-reads through the
+# same function it always read through.
+check('id="su-live-state"' in sdlg and 'aria-live="polite"' in sdlg, "L34a the sheet shows whether it is live, and says so to a screen reader")
+check("function watchSheet" in SIGNUP_JS and 'window.DB.channel(sheetTopic(code))' in SIGNUP_JS and "window.DB.removeChannel(channel)" in SIGNUP_JS,
+      "L34b the channel is joined and left through one helper")
+check("startWatching()" in SIGNUP_JS and "stopWatching()" in SIGNUP_JS and 'dialog.addEventListener("close", stopWatching)' in SIGNUP_JS,
+      "L34c the sheet joins once read and leaves on close")
+check("LIVE_SETTLE_MS" in SIGNUP_JS and "reload(true, true)" in SIGNUP_JS,
+      "L34d a change settles, then the sheet re-reads through event_by_code, the player's typing kept")
+check('.on("postgres_changes"' not in SIGNUP_JS, "L34e no row data crosses the channel: broadcasts only, the policies still decide what is read")
+check(all(s in AUTH_CSS for s in (".su-live-state{", '.su-live-state[data-live="yes"]')), "L34f the live mark is styled in _auth.css")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

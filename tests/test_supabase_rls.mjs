@@ -60,6 +60,25 @@ const PLATFORM = `
   alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
   alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
   alter default privileges in schema public grant execute on functions to anon, authenticated, service_role;
+  -- the Realtime stand-in: realtime.send writes realtime.messages, which
+  -- row-level security keeps from every API role (no policy), as on the
+  -- project; the trigger that broadcasts must run with its definer's rights
+  create schema realtime;
+  create table realtime.messages (id bigserial primary key, topic text, event text, payload jsonb, private boolean, extension text,
+                                  inserted_at timestamptz default now());
+  alter table realtime.messages enable row level security;
+  create function realtime.send(payload jsonb, event text, topic text, private boolean default true) returns void
+    language plpgsql as $$
+    begin
+      begin
+        insert into realtime.messages (payload, event, topic, private, extension) values (payload, event, topic, private, 'broadcast');
+      exception when others then
+        raise warning 'ErrorSendingBroadcastMessage: %', sqlerrm;
+      end;
+    end $$;
+  grant usage on schema realtime to anon, authenticated, service_role;
+  grant execute on function realtime.send(jsonb, text, text, boolean) to anon, authenticated, service_role;
+  grant insert on realtime.messages to anon, authenticated, service_role;
 `;
 
 const A = "00000000-0000-4000-8000-00000000000a";
@@ -406,8 +425,8 @@ try {
         && await code("authenticated", C, "select public.guild_members_succession()") === "42501");
   const definers = (await db.query(
     "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname in ('public', 'private') order by 1")).rows.map(r => r.f);
-  check("the API schema holds one definer, the sign-up trigger; the helpers live in private",
-        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.handle_new_user"]), definers);
+  check("the API schema holds two definers, the sign-up trigger and the broadcast trigger; the helpers live in private",
+        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.handle_new_user", "public.sheet_changed"]), definers);
   check("anon reaches nothing in the private schema",
         await code("anon", null, "select private.guild_role_of(gen_random_uuid())") === "42501");
   const perm = (await db.query(
@@ -917,6 +936,81 @@ const code_ = code;
         await code_("anon", null, "select public.move_signup($1, 1::smallint)", [g1.id]) === "42501"
         && await code_("anon", null, "select public.add_player($1, '{}'::jsonb)", [ev.id]) === "42501");
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+}
+
+/* 13 - live updates: every write to a sheet sends one broadcast on the CTA's topic, naming the table and the operation alone */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Live", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Live CTA", starts_at: "2026-10-05T18:00:00Z", content: "castle", status: "draft",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }]
+  })]))[0];
+  const CODE = ev.share_code;
+  const TOPIC = `cta:${CODE}`;
+  const sent = async () => (await db.query("select topic, event, payload, private from realtime.messages order by id")).rows;
+  const clear = () => db.query("delete from realtime.messages");
+  const up = (role, sub, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [CODE, token, JSON.stringify(payload)]).then(r => r[0].s);
+  const says = (m, table, op) => m.topic === TOPIC && m.event === "changed" && m.private === false
+    && Object.keys(m.payload).length === 2 && m.payload.table === table && m.payload.op === op;
+
+  await clear();
+  check("a send as an API role lands nothing: the message table's row-level security keeps it (why the trigger runs with its definer's rights)",
+        await code_("anon", null, "select realtime.send('{}'::jsonb, 'x', 'cta:TEST', false)") === "ok"
+        && (await sent()).length === 0);
+
+  await clear();
+  await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+  let m = await sent();
+  check("opening the CTA sends one message on the CTA's topic: the event 'changed', the table and the operation, public",
+        m.length === 1 && says(m[0], "events", "UPDATE"), m);
+
+  await clear();
+  const g1 = await up("anon", null, "7".repeat(32), { player_name: "Gus", position: 1, item_power: 1400 });
+  m = await sent();
+  check("a guest's sign-up (as anon) sends one message; the payload carries no name, no hash, no id",
+        m.length === 1 && says(m[0], "signups", "INSERT")
+        && !JSON.stringify(m).includes("Gus") && !JSON.stringify(m).includes(g1.id), m);
+
+  const f1 = await up("authenticated", F, null, { position: 2 });
+  await clear();
+  const swapped = (await rows("authenticated", K2, "select public.move_signup($1, $2) as m", [g1.id, 2]))[0].m;
+  m = await sent();
+  check("a swap sends a message per row changed, all on the CTA's topic, none naming a player",
+        swapped.swapped === f1.id && m.length >= 3 && m.every(x => says(x, "signups", "UPDATE"))
+        && !JSON.stringify(m).includes("Gus") && !JSON.stringify(m).includes("Eff"), m);
+
+  await clear();
+  await run("authenticated", K2, "update public.event_slots set weapon_id = 'MAIN_HOLYSTAFF_AVALON' where event_id = $1 and position = 1", [ev.id]);
+  await run("authenticated", K2, "delete from public.signups where id = $1", [f1.id]);
+  m = await sent();
+  check("a slot's weapon and a removal each send one message",
+        m.length === 2 && same(m.map(x => `${x.payload.table}:${x.payload.op}`), ["event_slots:UPDATE", "signups:DELETE"]), m);
+
+  await clear();
+  await run("authenticated", C, "update public.events set name = 'Live CTA renamed' where id = $1", [ev.id]);
+  check("any change to the CTA itself sends one message", (await sent()).length === 1);
+
+  await clear();
+  await run("authenticated", C, "delete from public.events where id = $1", [ev.id]);
+  m = await sent();
+  check("deleting the CTA sends the CTA's own message and none for the rows the cascade removes (the CTA is gone before they go)",
+        m.length === 1 && says(m[0], "events", "DELETE"), m);
+
+  check("no API role calls the broadcast trigger", await code_("authenticated", C, "select public.sheet_changed()") === "42501"
+        && await code_("anon", null, "select public.sheet_changed()") === "42501");
+  const definers = (await db.query(
+    "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname = 'public' order by 1")).rows.map(r => r.f);
+  check("the API schema holds two definers: the sign-up trigger and the broadcast trigger, both triggers no role can call",
+        same(definers, ["public.handle_new_user", "public.sheet_changed"]), definers);
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  await clear();
 }
 
 } catch (e) {

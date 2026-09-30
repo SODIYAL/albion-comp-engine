@@ -341,6 +341,10 @@
 .su-status-row{margin-bottom:8px}
 .su-counts{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
 .su-status-row .gd-btn:first-of-type{margin-left:auto}
+.su-live-state{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.su-live-state:empty{display:none}
+.su-live-state[data-live="yes"]{color:var(--role-healer)}
+.su-live-state[data-live="yes"]::before{content:""; display:inline-block; width:6px; height:6px; margin-right:5px; border-radius:50%; background:currentColor; vertical-align:middle}
 .su-notes{margin:0 0 12px; padding:8px 10px; border-left:2px solid var(--rule-2); font-size:13px; color:var(--ink-2); white-space:pre-wrap}
 .su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
 .su-board-wrap{min-width:0}

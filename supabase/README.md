@@ -67,9 +67,13 @@ database, are the only thing that keeps one player's data from another's.
    caller alone, `auth.uid()` read inside), `private.guild_id_for_code`
    (the insert policy checks a join code against a guild the joiner cannot
    yet read) and `private.guild_member_count` (the member bound counts rows
-   the joiner cannot yet read). Every API function runs as the caller. A
-   trigger function has execute revoked from `public`, `anon` and
-   `authenticated`: triggers run it, the API never does.
+   the joiner cannot yet read), and `sheet_changed`, the broadcast
+   trigger (`realtime.messages` is kept from the API roles by row-level
+   security with no policy for them, so a message sent as the caller
+   lands nothing; the function sends a table name and an operation).
+   Every API function runs as the caller. A trigger function has execute
+   revoked from `public`, `anon` and `authenticated`: triggers run it,
+   the API never does.
 9. **A user-writable list is bounded** (a storage bound against abuse,
    enforced by a trigger, not a product rule).
 10. **Weapons are dataset keys.** A weapon is always the dataset's weapon-line
@@ -135,6 +139,7 @@ database, are the only thing that keeps one player's data from another's.
 | `signups_guard()` | trigger: the 120-per-CTA bound; every declared weapon a key, listed once | — | triggers |
 | `move_signup(signup_id, target)` | a player to a slot, the reserves (null) or a held slot, whose holder takes the mover's old place: a swap in one transaction. Runs as the caller: a player moves their own row while open, a caller anyone until completed; a refused move is `42501`, a completed CTA `55000` | — | signed-in users |
 | `add_player(event_id, player jsonb)` | a player the caller writes onto the sheet by name (someone signing up in Discord): a guest row with a token hash nobody holds, so callers alone change it | — | signed-in users (the policy's caller branch) |
+| `sheet_changed()` | trigger, after every write to `signups`, `event_slots` and `events` (update, delete): one Realtime broadcast on the CTA's topic `cta:<share code>`, event `changed`, payload `{table, op}` and nothing else; a cascade from a deleted CTA sends nothing beyond the CTA's own message; without Realtime it does nothing | — | triggers |
 
 **Who reads whom.** A profile and a weapon list are readable by their own
 account and by every member of a guild the two share (the own-row select
@@ -144,6 +149,15 @@ are never exposed. The join code is readable by officers and admins alone,
 through the view. A CTA's share code is readable by the guild's members
 and, through the code itself, by whoever holds it: it opens that one
 CTA, its slots, its guild's name and its sheet, to guests too (rule 13).
+
+**Live updates.** The sheet is live through Realtime Broadcast, not
+Postgres Changes: a change's row never crosses the channel. After every
+write `sheet_changed` sends `changed` on `cta:<share code>` (a public
+channel: the code is the key, rule 13), and a client on the sheet
+re-reads it through `event_by_code`, under its own policies. The
+database enforces the concurrency (the slot index); the channel only
+reports. The RLS suite runs the migrations beside a stand-in
+`realtime.send` whose message table is protected as the project's is.
 
 ## Tests
 

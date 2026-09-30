@@ -35,6 +35,11 @@ DEFINER_ALLOWED = {
     "private.guild_id_for_code": "policy helper",
     # the member bound counts rows the joiner cannot yet read
     "private.guild_member_count": "guard helper",
+    # the broadcast trigger writes realtime.messages, which row-level
+    # security keeps from the API roles (no policy for them: a send as
+    # the caller lands nothing); the message names a table and an
+    # operation, and no API role can call the function
+    "public.sheet_changed": "trigger",
 }
 
 # A guest's reach (supabase/README.md rule 13): the tables `anon` reads
@@ -383,6 +388,19 @@ check(re.search(r"function public\.move_signup\(signup_id uuid, target smallint\
       and re.search(r"function public\.add_player\(event_id uuid, player jsonb\)", ALL) is not None,
       "DB10d the caller's functions: move_signup (a swap in one transaction) and add_player")
 check("public.claim_hash(gen_random_uuid()::text)" in ALL, "DB10e a player the caller adds is a guest row nobody holds a token for")
+
+print("DB11 - live updates: the broadcast names the table and the operation, on the CTA's topic, and nothing else")
+FUNC_BODY = re.search(r"create or replace function public\.sheet_changed\(\)(.*?)\$\$;", ALL, re.S)
+body = FUNC_BODY.group(1) if FUNC_BODY else ""
+check("jsonb_build_object('table', tg_table_name, 'op', tg_op)" in body, "DB11a the payload is the table name and the operation")
+check("'cta:' || code" in body and "false);" in body, "DB11b the topic is cta:<share code>; the channel is public (the code is the key)")
+cols = set(re.findall(r"\b(?:new|old)\.(\w+)", body))
+check(cols <= {"share_code", "event_id"}, "DB11c the trigger reads the code and the event id of the row, no other column", str(sorted(cols)))
+check("to_regprocedure('realtime.send(jsonb, text, text, boolean)') is null" in body, "DB11d without Realtime the trigger does nothing (the sheet keeps its Refresh)")
+check(all(re.search(r"create trigger \w+_changed\s+after [\w ]+ on public\.%s\s+for each row execute function public\.sheet_changed\(\)" % t, ALL) for t in ("signups", "event_slots", "events")),
+      "DB11e sign-ups, slots and the CTA itself each carry the trigger, after the write")
+check("function sheetTopic" in SIGNUP_JS and 'on("broadcast", { event: "changed" }' in SIGNUP_JS and "rpc(\"event_by_code\"" in SIGNUP_JS,
+      "DB11f the client listens on the topic and re-reads through event_by_code: the channel only reports")
 
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

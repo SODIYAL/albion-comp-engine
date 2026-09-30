@@ -31,12 +31,21 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 const CALLS = [];
 const REPLY = {};
+const CHANNELS = [];
+const REMOVED = [];
 const DB = {
   auth: {
     getSession: async () => ({ data: { session: null }, error: null }),
     onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }),
   },
   from() { throw new Error("the sign-up module reaches tables through its functions alone"); },
+  channel(topic) {
+    const ch = { topic, handlers: [], status: null,
+      on(kind, filter, fn) { ch.handlers.push({ kind, filter, fn }); return ch; },
+      subscribe(fn) { ch.status = fn; CHANNELS.push(ch); return ch; } };
+    return ch;
+  },
+  removeChannel(ch) { REMOVED.push(ch); },
   rpc(fn, args) {
     CALLS.push({ rpc: fn, args });
     return Promise.resolve(REPLY[`rpc:${fn}`] || { data: null, error: null });
@@ -223,6 +232,37 @@ const run = expr => vm.runInContext(expr, ctx);
   await run("addPlayer")("e1", { playerName: " Disc ", position: "3", weapons: [] });
   check("addPlayer sends add_player with the event and the player's payload",
         CALLS[0].rpc === "add_player" && CALLS[0].args.event_id === "e1" && CALLS[0].args.player.player_name === "Disc" && CALLS[0].args.player.position === 3, CALLS[0]);
+}
+
+
+/* 7 - the live sheet (phase 7) */
+{
+  check("the CTA's topic is cta:<code>, the code cleaned", run("sheetTopic")(" a1b2c3d4e5 ") === "cta:A1B2C3D4E5");
+  const M = run("LIVE_STATE_MSG");
+  check("the channel's states read as words: live, not live, or nothing once closed",
+        M.SUBSCRIBED === "live" && /refresh/i.test(M.CHANNEL_ERROR) && /refresh/i.test(M.TIMED_OUT) && M.CLOSED === "");
+  check("the sheet settles before re-reading (a swap is several messages)", run("LIVE_SETTLE_MS") >= 100 && run("LIVE_SETTLE_MS") <= 1000);
+
+  CHANNELS.length = 0;
+  REMOVED.length = 0;
+  const seen = [];
+  const states = [];
+  const leave = run("watchSheet")("A1B2C3D4E5", p => seen.push(p), s => states.push(s));
+  const ch = CHANNELS[0];
+  check("watchSheet joins the CTA's channel and listens for 'changed' broadcasts",
+        CHANNELS.length === 1 && ch.topic === "cta:A1B2C3D4E5" && ch.handlers.length === 1
+        && ch.handlers[0].kind === "broadcast" && same(ch.handlers[0].filter, { event: "changed" }));
+  ch.handlers[0].fn({ payload: { table: "signups", op: "INSERT" } });
+  ch.handlers[0].fn({});
+  ch.status("SUBSCRIBED");
+  check("a message reaches the listener with its payload (or an empty one); the state reaches the state listener",
+        same(seen, [{ table: "signups", op: "INSERT" }, {}]) && same(states, ["SUBSCRIBED"]));
+  leave();
+  check("leaving removes the channel", REMOVED.length === 1 && REMOVED[0] === ch);
+  const src = fs.readFileSync(path.join(DASH, "_signup.js"), "utf8");
+  check("the sheet joins the channel once the sheet is read and leaves it when the dialog closes or another CTA opens",
+        /if \(sheet\) startWatching\(\);/.test(src) && /dialog\.addEventListener\("close", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+if \(!dialog\.open\)/.test(src));
+  check("a live change re-reads the sheet without refilling the player's form", /reload\(true, true\)/.test(src) && /if \(!live && \(!keepForm \|\| sheet\.mine\)\) fillForm\(\);/.test(src));
 }
 
 console.log(`\n${pass}/${pass + fail} sign-up tests passed`);

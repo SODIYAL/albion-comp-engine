@@ -24,10 +24,16 @@
  * completed. The database decides; the client offers what the policies
  * allow (callerPowers).
  *
+ * The sheet is live (phase 7): after every write the database sends
+ * 'changed' on the CTA's Realtime topic (cta:<code>; the payload names
+ * the table and the operation, nothing else) and the sheet re-reads
+ * itself through event_by_code. The channel only reports; the policies
+ * still decide what is read.
+ *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (event_by_code,
  *             sign_up, cancel_sign_up; the caller's move_signup,
- *             add_player, a removal, a slot's weapon)
+ *             add_player, a removal, a slot's weapon; the channel)
  *   pure    - the link and the code, the claim token, the board (slots
  *             with their claimants, the reserves, what is free),
  *             validation, the payload, error wording (tests/test_signup.js)
@@ -144,6 +150,21 @@ async function setSlotWeapon(eventId, position, weaponId) {
   }
 
   return data[0];
+}
+
+
+/* ---- the live sheet (phase 7) ---- */
+
+/* The CTA's channel: after every write to the sheet the database sends
+   'changed' on cta:<code> (a trigger; the payload names the table and
+   the operation, nothing else), and the client re-reads the sheet
+   through event_by_code, so what it sees is still what the policies
+   allow. Returns the function that leaves the channel. */
+function watchSheet(code, onChange, onState) {
+  const channel = window.DB.channel(sheetTopic(code));
+  channel.on("broadcast", { event: "changed" }, message => onChange((message && message.payload) || {}));
+  channel.subscribe(status => { if (onState) onState(status); });
+  return () => { window.DB.removeChannel(channel); };
 }
 
 
@@ -333,6 +354,26 @@ function weaponOptions(catalog) {
 }
 
 
+/* the CTA's channel topic: the code is the key, as everywhere on the sheet */
+function sheetTopic(code) {
+  return `cta:${cleanJoinCode(code)}`;
+}
+
+
+/* what the sheet says about its channel (the Realtime client's states) */
+const LIVE_STATE_MSG = {
+  SUBSCRIBED: "live",
+  CHANNEL_ERROR: "not live: refresh to update",
+  TIMED_OUT: "not live: refresh to update",
+  CLOSED: ""
+};
+
+
+/* how long the sheet waits after a message before re-reading, so a swap
+   (several rows, several messages) reads once */
+const LIVE_SETTLE_MS = 250;
+
+
 const SIGNUP_MSG = {
   network: PROFILE_MSG.network,
   session: PROFILE_MSG.session,
@@ -435,6 +476,7 @@ function signupErrorMessage(err) {
     refresh: $id("su-refresh"),
     open: $id("su-open"),
     link: $id("su-link"),
+    liveState: $id("su-live-state"),
     callerWrap: $id("su-caller"),
     callerMoves: $id("su-caller-moves"),
     addForm: $id("su-add-form"),
@@ -455,6 +497,8 @@ function signupErrorMessage(err) {
   let busy = false;
   let openSeq = 0;
   let booted = false;
+  let leave = null;            /* leaves the CTA's channel */
+  let liveTimer = null;
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -977,9 +1021,14 @@ function signupErrorMessage(err) {
 
   /* ---- loading ---- */
 
-  async function reload(keepForm) {
+  /* keepForm: the player's typing stays; live: a change someone else
+     made, so the form is never refilled from the server, and a move of
+     the player's own row is said out loud */
+  async function reload(keepForm, live) {
     const seq = ++openSeq;
     if (!keepForm) clearMessages();
+    const wasAt = sheet && sheet.mine ? sheet.mine.position : undefined;
+    const had = !!(sheet && sheet.mine);
 
     let next;
     try {
@@ -991,6 +1040,7 @@ function signupErrorMessage(err) {
         el.title.textContent = "No CTA";
         el.form.hidden = true;
         el.board.replaceChildren();
+        stopWatching();
       }
       return;
     }
@@ -1000,9 +1050,56 @@ function signupErrorMessage(err) {
     await readRole();
     if (seq !== openSeq) return;
     renderBoard();
-    if (!keepForm || sheet.mine) fillForm();
+    if (!live && (!keepForm || sheet.mine)) fillForm();
     renderForm();
     if (!keepForm) acctFlagFields(FIELDS, {});
+
+    if (live && had) {
+      const nowAt = sheet.mine ? sheet.mine.position : undefined;
+      if (!sheet.mine) {
+        showNotice("The caller removed your sign-up.");
+      } else if (nowAt !== wasAt) {
+        el.slot.value = nowAt != null ? String(nowAt) : "";
+        showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
+      }
+    }
+  }
+
+
+  /* ---- the live channel ---- */
+
+  function setLive(status) {
+    el.liveState.textContent = LIVE_STATE_MSG[status] || "";
+    el.liveState.dataset.live = status === "SUBSCRIBED" ? "yes" : "no";
+  }
+
+  function onSheetChanged() {
+    clearTimeout(liveTimer);
+    liveTimer = setTimeout(() => {
+      liveTimer = null;
+      if (busy) { onSheetChanged(); return; }
+      reload(true, true);
+    }, LIVE_SETTLE_MS);
+  }
+
+  function startWatching() {
+    stopWatching();
+    try {
+      leave = watchSheet(code, onSheetChanged, setLive);
+    } catch (err) {
+      leave = null;
+      setLive("CHANNEL_ERROR");
+    }
+  }
+
+  function stopWatching() {
+    clearTimeout(liveTimer);
+    liveTimer = null;
+    if (leave) {
+      try { leave(); } catch (err) { /* the channel is gone either way */ }
+      leave = null;
+    }
+    setLive("CLOSED");
   }
 
   async function openSheet(nextCode) {
@@ -1021,10 +1118,12 @@ function signupErrorMessage(err) {
     el.form.hidden = true;
     el.closed.hidden = true;
     el.callerWrap.hidden = true;
+    stopWatching();
     clearMessages();
     if (!dialog.open) dialog.showModal();
 
     await reload(false);
+    if (sheet) startWatching();
 
     /* an account's profile weapons are the first declaration */
     if (sheet && !sheet.mine && !isGuest() && sheet.event.status === "open") {
@@ -1037,6 +1136,7 @@ function signupErrorMessage(err) {
 
   acctWireDialog(dialog, { canClose: () => !busy });
   $id("su-close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", stopWatching);
 
   /* the CTAs dialog hands a code over */
   document.addEventListener("cta-sheet", e => {

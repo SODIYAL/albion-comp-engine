@@ -350,8 +350,9 @@ reads of profiles and weapon lists, the guilds dialog), phase 3 (saved
 comps: a guild's templates with slots, saved from and opened in the
 planner through the share hash), phase 4 (CTAs: a guild's events with a
 status, a share code and slots copied from a comp), phase 5 (sign-up:
-the sheet a link opens, for guests with a claim token and for accounts)
-and phase 6 (caller management on the sheet) are built.
+the sheet a link opens, for guests with a claim token and for accounts),
+phase 6 (caller management on the sheet) and phase 7 (the live sheet
+over Realtime Broadcast) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -362,11 +363,13 @@ and phase 6 (caller management on the sheet) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 7, live updates**: Supabase Realtime on `signups` and
-  `event_slots`; the database enforces the concurrency, the channel only
-  reports it. Then phases 8–12 in order (the spec).
-- **Live sheet**: the sheet refreshes on demand and after each write;
-  Supabase Realtime on `signups` (phase 7) makes it live.
+- **Phase 8, history**: attendance (`signed_up`, `confirmed`, `attended`,
+  `no_show`, `cancelled`, `reserve`) kept apart from the sign-up; a
+  completed CTA keeps its slots and attendance. Then phases 9–12 in order
+  (the spec).
+- **The CTAs dialog is not live**: the calendar and the sign-up counts
+  read on open; the sheet is the live surface. A channel per guild for the
+  dialog is a later increment if callers ask for it.
 - **Renewing a CTA's share code**: the code is generated at creation and
   never changes; a leaked link needs a new CTA. An admin's renewal (the
   guild join code's pattern) is a later increment if callers ask for it.

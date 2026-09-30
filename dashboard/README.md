@@ -192,7 +192,14 @@ and its tests: `supabase/README.md`.
   by role), add-a-player by name, and the status moves, until the CTA is
   completed. `callerPowers` offers what the policies allow; every action
   is a helper the policies bound (`move_signup`, `add_player`, a
-  removal, a slot's weapon).
+  removal, a slot's weapon). The sheet is live (phase 7): `watchSheet`
+  joins the CTA's Realtime channel (`cta:<code>`, a broadcast the
+  database sends after every write, naming the table and the operation
+  only) once the sheet is read and leaves it on close; a message
+  settles, then the sheet re-reads itself through `event_by_code`, the
+  player's typing kept, and a move or removal of the player's own row
+  is said out loud. A live mark beside the status says whether the
+  channel is up; Refresh stays for when it is not.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
