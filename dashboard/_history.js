@@ -121,6 +121,29 @@ function ctaRows(ctas) {
 }
 
 
+/* The facts as a sheet (the export, platform phase 10): the players,
+   one row each with the weapons played as "Longbow ×3; Hallowfall ×1",
+   or the completed CTAs. The same measures as the tables. */
+function historySheetRows(kind, facts, catalog) {
+  if (kind === "ctas") {
+    const rows = [["CTA", "Content", "Planned", "Starts (UTC)", "Slots", "Claimed", "Fill", "Attended", "No-show", "Unmarked", "Cancelled", "Reserve"]];
+    for (const c of ctaRows(facts && facts.ctas)) {
+      rows.push([c.name, c.content || "", c.planned_size || "", c.starts_at || "", c.slots || 0, c.claimed || 0,
+                 c.fill == null ? "" : ratePct(c.fill), c.attended || 0, c.no_show || 0, c.unmarked || 0, c.cancelled || 0, c.reserve || 0]);
+    }
+    return rows;
+  }
+  const rows = [["Player", "Account", "CTAs", "Attended", "No-show", "Cancelled", "Reserve", "Unmarked", "Show rate", "Regular",
+                 "Last attended", "First seen", "Played"]];
+  for (const p of playerRows(facts && facts.players, catalog)) {
+    rows.push([p.name, p.account ? "yes" : "guest", p.ctas || 0, p.attended || 0, p.no_show || 0, p.cancelled || 0, p.reserve || 0,
+               p.unmarked || 0, p.rate == null ? "" : ratePct(p.rate), p.regular ? "yes" : "", p.last_attended || "", p.first_seen || "",
+               (p.weapons || []).map(w => `${weaponInfo(catalog, w.weapon_id).name} ×${w.n}`).join("; ")]);
+  }
+  return rows;
+}
+
+
 /* the totals as numbers, rates included */
 function historyTotals(totals) {
   const t = totals || {};
@@ -198,7 +221,9 @@ function historyErrorMessage(err) {
     playersNote: $id("hs-players-note"),
     weapons: $id("hs-weapons"),
     ctas: $id("hs-ctas"),
-    definitions: $id("hs-definitions")
+    definitions: $id("hs-definitions"),
+    exportPlayers: $id("hs-export-players"),
+    exportCtas: $id("hs-export-ctas")
   };
 
   let account = window.Account.current();
@@ -356,6 +381,22 @@ function historyErrorMessage(err) {
   }
 
   el.search.addEventListener("input", renderPlayers);
+
+  /* the facts as CSV files (the export) */
+  const guildName = () => {
+    const g = guilds.find(x => x.guild.id === guildId());
+    return g ? g.guild.name : "guild";
+  };
+  el.exportPlayers.addEventListener("click", () => {
+    if (!facts) return;
+    acctDownloadText(acctFilename(`${guildName()} players`, "csv"), acctCsvText(historySheetRows("players", facts, CATALOG)), "text/csv");
+    announce("Players exported as CSV.");
+  });
+  el.exportCtas.addEventListener("click", () => {
+    if (!facts) return;
+    acctDownloadText(acctFilename(`${guildName()} CTAs`, "csv"), acctCsvText(historySheetRows("ctas", facts, CATALOG)), "text/csv");
+    announce("CTAs exported as CSV.");
+  });
 
   async function reload() {
     const seq = ++openSeq;

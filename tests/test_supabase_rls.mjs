@@ -1228,6 +1228,66 @@ const code_ = code;
   await db.query("delete from realtime.messages");
 }
 
+/* 16 - import: a guild's weapon aliases, the names its callers matched */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Names", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const save = (sub, list) => rows("authenticated", sub, "select public.save_weapon_aliases($1, $2::jsonb) as n", [g.id, JSON.stringify(list)]).then(r => r[0].n);
+  const saveCode = (sub, list) => code_("authenticated", sub, "select public.save_weapon_aliases($1, $2::jsonb)", [g.id, JSON.stringify(list)]);
+  const list = sub => rows("authenticated", sub, "select alias, weapon_id, created_by from public.weapon_aliases where guild_id = $1 order by alias", [g.id]);
+  const count = async () => (await db.query("select count(*)::int as n from public.weapon_aliases where guild_id = $1", [g.id])).rows[0].n;
+
+  check("a caller saves the names an import matched: three rows, the count back",
+        await save(K2, [{ alias: "perma", weapon_id: "2H_ICECRYSTAL_UNDEAD" }, { alias: "1h holy", weapon_id: "MAIN_HOLYSTAFF" }, { alias: "zaddy bow", weapon_id: "2H_LONGBOW" }]) === 3);
+  const seen = await list(F);
+  check("a member reads the guild's names, each carrying who added it",
+        seen.length === 3 && seen.every(r => r.created_by === K2) && seen[0].alias === "1h holy" && seen[2].weapon_id === "2H_LONGBOW", seen);
+  check("an outsider reads none; anon reads nothing",
+        (await list(X)).length === 0 && await code_("anon", null, "select * from public.weapon_aliases") === "42501");
+  check("a member saves none, nor an outsider: the insert policy is the caller roles'",
+        await saveCode(F, [{ alias: "bow thing", weapon_id: "2H_BOW" }]) === "42501"
+        && await saveCode(X, [{ alias: "bow thing", weapon_id: "2H_BOW" }]) === "42501" && await count() === 3);
+  check("saving a held name again changes its weapon and counts once; the same weapon again counts nothing",
+        await save(K2, [{ alias: "perma", weapon_id: "2H_FROSTSTAFF" }]) === 1
+        && (await list(K2)).find(r => r.alias === "perma").weapon_id === "2H_FROSTSTAFF"
+        && await save(K2, [{ alias: "perma", weapon_id: "2H_FROSTSTAFF" }]) === 0 && await count() === 3);
+  check("a name off the form is refused: upper case, a double space, punctuation, empty, too long; a weapon off the key form too",
+        await saveCode(K2, [{ alias: "Perma", weapon_id: "2H_FROSTSTAFF" }]) === "23514"
+        && await saveCode(K2, [{ alias: "great  arcane", weapon_id: "2H_ARCANESTAFF" }]) === "23514"
+        && await saveCode(K2, [{ alias: "iron-clad", weapon_id: "2H_IRONCLADEDSTAFF" }]) === "23514"
+        && await saveCode(K2, [{ alias: "", weapon_id: "2H_BOW" }]) === "23514"
+        && await saveCode(K2, [{ alias: "a".repeat(65), weapon_id: "2H_BOW" }]) === "23514"
+        && await saveCode(K2, [{ alias: "bow thing", weapon_id: "not a key" }]) === "23514"
+        && await saveCode(K2, [{ alias: "bow thing" }]) === "23502");
+  check("a save is bounded and must be a list", await saveCode(K2, Array.from({ length: 101 }, (_, i) => ({ alias: `n${i}`, weapon_id: "2H_BOW" }))) === "23514"
+        && await saveCode(K2, { alias: "x", weapon_id: "2H_BOW" }) === "22023");
+  check("no API role sets who added a name: created_by is the server's",
+        await code_("authenticated", K2, "insert into public.weapon_aliases (guild_id, alias, weapon_id, created_by) values ($1, 'x', '2H_BOW', $2)", [g.id, C]) === "42501"
+        && await code_("authenticated", K2, "update public.weapon_aliases set alias = 'y' where guild_id = $1 and alias = 'perma'", [g.id]) === "42501");
+  check("a caller deletes a name; a member deletes nothing",
+        (await run("authenticated", F, "delete from public.weapon_aliases where guild_id = $1 and alias = 'perma'", [g.id])).affectedRows === 0
+        && (await run("authenticated", K2, "delete from public.weapon_aliases where guild_id = $1 and alias = 'perma'", [g.id])).affectedRows === 1 && await count() === 2);
+  /* two names held; 498 more reach the bound */
+  for (let batch = 0; batch < 5; batch++) {
+    await save(K2, Array.from({ length: batch < 4 ? 100 : 98 }, (_, i) => ({ alias: `name ${batch * 100 + i}`, weapon_id: "2H_BOW" })));
+  }
+  check("a guild keeps at most 500 names; a held name still changes at the bound",
+        await count() === 500 && await saveCode(K2, [{ alias: "one more", weapon_id: "2H_BOW" }]) === "23514"
+        && await save(K2, [{ alias: "name 7", weapon_id: "2H_WARBOW" }]) === 1 && await count() === 500);
+  check("anon cannot call the save; no API role calls the guard",
+        await code_("anon", null, "select public.save_weapon_aliases($1, '[]'::jsonb)", [g.id]) === "42501"
+        && await code_("authenticated", K2, "select public.weapon_aliases_guard()") === "42501");
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  check("deleting the guild deletes its names", await count() === 0);
+}
+
 } catch (e) {
   fail++;
   console.log("FAIL  the run stopped: " + (e.stack || e.message));

@@ -977,6 +977,57 @@ i_history = script_at(lambda a, b: "function loadGuildHistory" in b)
 check(0 <= i_signup < i_history, "L36o the history module loads after the sheet, in its own <script>",
       "script indices signup=%d history=%d" % (i_signup, i_history))
 
+print("L37 - import and export: a spreadsheet as a saved comp, read on the client with uncertain names reviewed; CSV out of the comps and history dialogs")
+# Phase 10: the eighth feature module reads a sheet in the browser, reads
+# every name through the catalog and the guild's alias table, and saves
+# the comp through the comps module's helper; the comps dialog opens it
+# through a DOM event and gets the comp back the same way. The export is
+# the shared kit: each dialog shapes its own rows.
+IMPORT_JS = read("_import.js")
+idlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog import-dialog"', "</dialog>", "L37 dialog anchors")
+check('aria-modal="true"' in idlg and 'aria-labelledby="im-title"' in idlg and 'id="im-title"' in idlg,
+      "L37a the import dialog is modal and titled")
+for fid in ("im-guild", "im-text", "im-file", "im-name", "im-content", "im-style", "im-size", "im-remember", "im-players", "im-parties"):
+    check(('id="%s"' % fid) in idlg and ('for="%s"' % fid) in idlg, "L37b field %s has its label" % fid)
+check('role="alert"' in idlg and 'aria-live="polite"' in idlg, "L37c errors and changes are announced, inside the dialog")
+check('id="im-columns"' in idlg and 'id="im-rows"' in idlg and idlg.count("<th scope=\"col\">") == 8,
+      "L37d the column map and the review table with its eight headers")
+check('accept=".csv,.tsv,.txt' in idlg and "xlsx" in IMPORT_JS and "readAsText" in IMPORT_JS,
+      "L37e a CSV, TSV or text file is read in the browser; a workbook is refused with the way round")
+check('id="comp-import"' in cdlg and 'dispatchEvent(new CustomEvent("comp-import"' in COMPS_JS and 'addEventListener("comp-import"' in IMPORT_JS,
+      "L37f the comps dialog opens the import through a DOM event carrying the guild, no call between modules")
+check('dispatchEvent(new CustomEvent("comp-imported"' in IMPORT_JS and 'addEventListener("comp-imported"' in COMPS_JS,
+      "L37g the imported comp goes back the same way and the comps dialog opens it")
+check("saveTemplate(" in IMPORT_JS and "validateTemplate(" in IMPORT_JS and "save_comp_template" not in IMPORT_JS and 'from("comp_template' not in IMPORT_JS,
+      "L37h the comp is saved through the comps module's helper under its rules; the import module writes no template itself")
+check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT|location\.hash", IMPORT_JS),
+      "L37i _import.js reads and writes no planner or engine state and never touches the address bar")
+import_ui = IMPORT_JS[IMPORT_JS.find("(function importUI()"):]
+check(import_ui != "" and "window.DB" not in import_ui and "createClient" not in IMPORT_JS and ".channel(" not in IMPORT_JS
+      and sorted(set(re.findall(r'\.from\("(\w+)"', IMPORT_JS))) == ["weapon_aliases"],
+      "L37j the import UI calls its helpers; the module's one table is weapon_aliases, no channel")
+check("weaponInfo(" in IMPORT_JS and "weaponOptions(" in IMPORT_JS and "role_class" not in IMPORT_JS
+      and "<option" not in IMPORT_JS and "<select" not in IMPORT_JS and "<optgroup" not in IMPORT_JS,
+      "L37k weapons and roles are read through the catalog, the lists built without markup strings")
+check("function matchWeapon" in IMPORT_JS and '"uncertain"' in IMPORT_JS and '"likely"' in IMPORT_JS and "function learnedAliases" in IMPORT_JS
+      and "function detectColumns" in IMPORT_JS and "data-im-column" in IMPORT_JS.replace("dataset.imColumn", "data-im-column"),
+      "L37l columns are detected and the caller may reset them; a name is read through the catalog and the alias table, an uncertain one chosen, a chosen one remembered")
+check(not re.search(r"parseSheet|matchWeapon|detectColumns|sheetRows|importSlots|learnedAliases|loadGuildAliases", APP + DECISION_JS),
+      "L37m the planner never calls the import module")
+check('id="comp-export"' in cdlg and 'id="comp-copy"' in cdlg and 'id="hs-export-players"' in hdlg and 'id="hs-export-ctas"' in hdlg,
+      "L37n a comp exports as CSV and as text; the history's players and CTAs export as CSV")
+check("function acctCsvText" in AUTH_JS and "function acctDownloadText" in AUTH_JS and "function acctFilename" in AUTH_JS
+      and "compSheetRows(" in COMPS_JS and "compText(" in COMPS_JS and "historySheetRows(" in HISTORY_JS
+      and "acctDownloadText(" in COMPS_JS and "acctDownloadText(" in HISTORY_JS,
+      "L37o the CSV writer, the file name and the download are the shared kit (_auth.js); each dialog shapes its own rows")
+check(all(s in AUTH_CSS for s in (".import-dialog{", ".im-columns{", ".im-table td{", '.im-table tr[data-status="uncertain"] .im-status{')),
+      "L37p the import dialog, its column map, its table and the uncertain mark are styled in _auth.css")
+check(".im-source{grid-template-columns:1fr}" in LAYOUT and ".im-table{display:block; overflow-x:auto}" in LAYOUT,
+      "L37q on a phone the source stacks and the review table scrolls sideways (_layout.css)")
+i_import = script_at(lambda a, b: "function loadGuildAliases" in b)
+check(0 <= i_history < i_import, "L37r the import module loads after the history module, in its own <script>",
+      "script indices history=%d import=%d" % (i_history, i_import))
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

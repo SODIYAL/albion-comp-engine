@@ -220,12 +220,41 @@ and its tests: `supabase/README.md`.
   (`registerView("history")`): the guild's totals, the players table
   with a search, the weapons fielded, the completed CTAs, and the
   definitions beside them. No skill rating is offered.
+- **`_import.js`** (platform phase 10) reads a caller's spreadsheet as a
+  saved comp: helpers over `weapon_aliases` and `save_weapon_aliases`
+  (the guild's remembered names; the comp itself is saved through the
+  comps module's `saveTemplate`); pure functions for the text beside a
+  weapon (tiers, counts, list markers, a player after a dash), the
+  parser (tabs, commas, semicolons, pipes, quotes, one column), how a
+  name is read (`matchWeapon`: the key, the catalog name, an alias, then
+  the words, a prefix, word prefixes, the initials, the key's words, a
+  text inside the name, a close spelling; one candidate is likely,
+  several uncertain, none an open slot), the columns (`detectColumns`:
+  a header row where one names a kind, the cells otherwise; two weapon
+  columns are parties side by side), the rows (sections, counts, a
+  grid's parties), the slots, the names learned and error wording
+  (`tests/test_import.js`, run over the dataset's own catalog); and the
+  import dialog: the guild, the pasted cells or a CSV file, the column
+  map the caller may reset, the review table with a weapon list per row
+  (the suggestions first, then the catalog by role; open slot; skip),
+  the options (remember the names chosen; player names and party
+  labels as slot notes), the comp's fields, and the guild's remembered
+  names with a removal each. The comps dialog opens it by dispatching a
+  `comp-import` DOM event with the guild and gets the comp back through
+  `comp-imported` (no call between modules). An Excel workbook is not
+  parsed: its cells are pasted, or the sheet saved as CSV. The export
+  is the shared kit (`acctCsvText`, `acctFilename`, `acctDownloadText`
+  in `_auth.js`): the comps dialog exports a comp as CSV
+  (`compSheetRows`, what the import reads back exactly) and copies it as
+  lines for a Discord post (`compText`); the history dialog exports the
+  players and the completed CTAs as CSV (`historySheetRows`).
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js`, `_signup.js` and `_history.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js`,
+  `_signup.js`, `_history.js` and `_import.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -239,13 +268,14 @@ and its tests: `supabase/README.md`.
   keeps the button in step with other tabs.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
-`tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js` and
-`tests/test_history.js` pin validation, error wording, the name fallback,
+`tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js`,
+`tests/test_history.js` and `tests/test_import.js` pin validation, error wording, the name fallback,
 link parsing, the weapon lists and search, the member table and role
 powers, the share hash both ways, the statuses and their moves, the
 times, the calendar, the sheet's board, link, record and channel, the
-history's measures and rows, and what the helpers send;
-`test_dashboard_layout.py` L27–L36 pin the markup, the isolation, the
+history's measures and rows, the import's parser, matcher, columns and
+slots, the export's sheets, and what the helpers send;
+`test_dashboard_layout.py` L27–L37 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also

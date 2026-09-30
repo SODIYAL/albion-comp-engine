@@ -407,3 +407,43 @@
 .hs-weapons{margin:6px 0 0}
 .hs-weapons .gd-sub{margin-left:4px}
 .hs-definitions{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule)}
+
+/* ---- the import dialog (platform phase 10) ---- */
+.import-dialog{width:min(1100px, calc(100vw - 32px))}
+.im-source{display:grid; grid-template-columns:260px minmax(0,1fr); gap:0 18px; align-items:start}
+.im-guild{margin:0}
+.im-text-field{grid-column:2; margin:0}
+.im-text{resize:vertical; min-height:110px; font-family:var(--mono); font-size:12px; white-space:pre; overflow:auto}
+.im-file-row{grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:8px}
+.im-file-btn{cursor:pointer}
+.im-read{width:auto; margin:0; padding:6px 16px}
+.im-file-row .auth-hint{flex-basis:100%}
+.im-summary{margin:12px 0 0}
+.im-columns{display:flex; flex-wrap:wrap; gap:6px 10px; margin:8px 0 10px}
+.im-column{display:inline-flex; flex-direction:column; gap:2px; font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink-3)}
+.im-column-kind{padding:2px 6px; font-size:12px}
+.im-table td{vertical-align:middle; padding:4px 6px}
+.im-from{white-space:nowrap}
+.im-from .gd-name{display:inline}
+.im-status{display:inline-block; margin-left:6px; padding:0 6px; border:1px solid var(--rule-2); border-radius:99px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
+.im-table tr[data-status="likely"] .im-status{color:var(--amber); border-color:var(--amber)}
+.im-table tr[data-status="uncertain"] .im-status{color:var(--gap); border-color:var(--gap)}
+.im-table tr[data-status="skip"]{opacity:.55}
+.im-pick{white-space:nowrap}
+.im-weapon{max-width:240px; padding:2px 6px; font-size:12px}
+.im-pick .pw-role{margin-left:6px}
+.im-count{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
+.im-cell{font-size:12px; color:var(--ink-2); max-width:180px; overflow-wrap:anywhere}
+.im-options{display:flex; flex-wrap:wrap; gap:4px 20px; margin:10px 0 6px}
+.im-options .su-check{margin:0}
+.im-foot-note{margin:0; flex:1; color:var(--amber)}
+.im-aliases{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule); font-size:12.5px}
+.im-aliases summary{cursor:pointer; color:var(--ink-2)}
+.im-aliases-list{margin-top:8px}
+.im-alias .gd-sub{margin-left:4px}
+.im-alias-drop{padding:0 6px; margin-left:4px}
+.cp-import{margin-top:10px; width:100%}
+.cp-import-hint{margin-top:4px}
+.hs-export{flex:none}

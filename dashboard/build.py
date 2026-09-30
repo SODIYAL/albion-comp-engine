@@ -18,6 +18,7 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
     dashboard/_events.js           the CTAs dialog (a guild's events, copied from its comps)
     dashboard/_signup.js           the sign-up sheet (a CTA's link, guests and accounts)
     dashboard/_history.js          the history dialog (facts over a guild's completed CTAs)
+    dashboard/_import.js           the import dialog (a spreadsheet as a saved comp)
     out/dataset-latest.json        the single source of truth
         │
         ▼
@@ -176,6 +177,8 @@ def main():
         signup_js = f.read()
     with open(os.path.join(DASH, "_history.js"), encoding="utf-8") as f:
         history_js = f.read()
+    with open(os.path.join(DASH, "_import.js"), encoding="utf-8") as f:
+        import_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     semantic_icons = load_semantic_icons()
@@ -446,6 +449,7 @@ def main():
            f"<script>\n{events_js}\n</script>\n"
            f"<script>\n{signup_js}\n</script>\n"
            f"<script>\n{history_js}\n</script>\n"
+           f"<script>\n{import_js}\n</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     # newline="\n" on every committed page: Windows' default text mode

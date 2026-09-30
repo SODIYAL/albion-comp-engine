@@ -132,6 +132,26 @@ const CATALOG = {
   check("no skill rating: the module offers none", !/skill|rating/i.test(src.replace(/None of (this|these) is a skill rating[^\n]*/g, "")));
 }
 
+/* 4 - the export: the facts as a sheet */
+{
+  const facts = {
+    players: [{ name: "Gus", account: false, ctas: 3, attended: 3, no_show: 0, cancelled: 0, reserve: 0, unmarked: 0, show_rate: 1, last_attended: "2026-10-08T18:00:00Z", first_seen: "2026-10-01T18:00:00Z",
+                weapons: [{ weapon_id: "2H_LONGBOW", n: 3 }, { weapon_id: "MYSTERY", n: 1 }] },
+              { name: "Res", account: true, ctas: 1, attended: 0, no_show: 0, cancelled: 0, reserve: 1, unmarked: 0, show_rate: null, weapons: [] }],
+    ctas: [{ name: "First", content: "castle", planned_size: 20, starts_at: "2026-10-01T18:00:00Z", slots: 4, claimed: 3, attended: 2, no_show: 1, unmarked: 0, cancelled: 0, reserve: 1 }]
+  };
+  const players = run("historySheetRows")("players", facts, CATALOG);
+  check("the players sheet: a header, one row per player in the table's order with the measures, the regular mark and the weapons played",
+        same(players, [["Player", "Account", "CTAs", "Attended", "No-show", "Cancelled", "Reserve", "Unmarked", "Show rate", "Regular", "Last attended", "First seen", "Played"],
+                       ["Gus", "guest", 3, 3, 0, 0, 0, 0, "100%", "yes", "2026-10-08T18:00:00Z", "2026-10-01T18:00:00Z", "Longbow ×3; MYSTERY ×1"],
+                       ["Res", "yes", 1, 0, 0, 0, 1, 0, "", "", "", "", ""]]), players);
+  const ctas = run("historySheetRows")("ctas", facts, CATALOG);
+  check("the CTAs sheet: a header, one row per completed CTA with its fill and counts",
+        same(ctas, [["CTA", "Content", "Planned", "Starts (UTC)", "Slots", "Claimed", "Fill", "Attended", "No-show", "Unmarked", "Cancelled", "Reserve"],
+                    ["First", "castle", 20, "2026-10-01T18:00:00Z", 4, 3, "75%", 2, 1, 0, 0, 1]]), ctas);
+  check("no facts is a header alone", run("historySheetRows")("players", null, CATALOG).length === 1 && run("historySheetRows")("ctas", {}, CATALOG).length === 1);
+}
+
 console.log(`\n${pass}/${pass + fail} history tests passed`);
 process.exit(fail ? 1 : 0);
 })();

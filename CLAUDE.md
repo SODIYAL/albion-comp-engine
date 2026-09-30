@@ -211,7 +211,10 @@ Three applications with explicit boundaries (each directory's README is its cont
   the attendance record kept apart from the sign-up by its own trigger,
   confirmed by the player, marked by the caller; the history: facts over
   completed CTAs computed on read, every measure defined, no skill
-  rating) now; import and export next
+  rating) and import and export (a spreadsheet as a saved comp: the
+  columns detected, every name read through the catalog and the guild's
+  remembered names, uncertain ones reviewed; a comp and the history out
+  as CSV) now; the engine on the live roster next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:

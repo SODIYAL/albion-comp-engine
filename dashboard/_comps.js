@@ -274,6 +274,33 @@ function compPowers(myRole) {
 }
 
 
+/* The comp as a sheet (the export, platform phase 10): a header, then
+   one row per slot with the weapon's catalog name (empty for an open
+   slot), the role and the note. The import reads it back exactly. */
+function compSheetRows(slots, catalog) {
+  const rows = [["#", "Weapon", "Role", "Note"]];
+  for (const s of normalizeSlots(slots)) {
+    rows.push([s.position, s.weapon_id ? weaponInfo(catalog, s.weapon_id).name : "", s.role || "", s.note || ""]);
+  }
+  return rows;
+}
+
+
+/* the comp as lines for a Discord post: a title line, then
+   "1. Heavy Mace - tank (note)" per slot */
+function compText(template, slots, catalog, contents, styles) {
+  const t = template || {};
+  const head = [t.name || "Comp", (contents || {})[t.content] || t.content || "",
+                t.planned_size ? `${t.planned_size} planned` : "", t.style ? ((styles || {})[t.style] || t.style) : ""]
+    .filter(Boolean).join(" · ");
+  const lines = normalizeSlots(slots).map(s => {
+    const weapon = s.weapon_id ? weaponInfo(catalog, s.weapon_id).name : "open slot";
+    return `${s.position}. ${weapon}${s.role ? ` - ${s.role}` : ""}${s.note ? ` (${s.note})` : ""}`;
+  });
+  return [head, ...lines].join("\n");
+}
+
+
 const COMP_MSG = {
   network: PROFILE_MSG.network,
   signedOut: "Log in to use saved comps.",
@@ -362,7 +389,11 @@ function compErrorMessage(err) {
     open: $id("comp-open"),
     save: $id("comp-save"),
     remove: $id("comp-delete"),
-    dirty: $id("comp-dirty")
+    dirty: $id("comp-dirty"),
+    importBtn: $id("comp-import"),
+    importHint: $id("comp-import-hint"),
+    exportBtn: $id("comp-export"),
+    copyBtn: $id("comp-copy")
   };
 
   const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size };
@@ -418,6 +449,8 @@ function compErrorMessage(err) {
   function renderList() {
     canWrite = compPowers(myRole()).write;
     el.fromPlanner.hidden = !canWrite || !guildId();
+    el.importBtn.hidden = el.fromPlanner.hidden;
+    el.importHint.hidden = el.fromPlanner.hidden;
 
     if (!guildId()) {
       const li = document.createElement("li");
@@ -457,7 +490,11 @@ function compErrorMessage(err) {
     const full = templates.length >= COMP_TEMPLATES_MAX;
     el.listNote.textContent = full ? `A guild keeps at most ${COMP_TEMPLATES_MAX} comps.` : "";
     el.listNote.hidden = !full;
-    if (full) el.fromPlanner.hidden = true;
+    if (full) {
+      el.fromPlanner.hidden = true;
+      el.importBtn.hidden = true;
+      el.importHint.hidden = true;
+    }
   }
 
   el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
@@ -700,6 +737,36 @@ function compErrorMessage(err) {
 
   el.fromPlanner.addEventListener("click", () => { if (!busy) fromPlanner(); });
 
+  /* the import dialog is the import module's: the guild is handed over
+     as a DOM event, never a call between modules; the imported comp
+     comes back the same way (comp-imported, below) */
+  el.importBtn.addEventListener("click", () => {
+    if (busy || !guildId()) return;
+    if (dirty() && !window.confirm("Leave this comp's unsaved changes and import a sheet?")) return;
+    const guild = guildId();
+    dialog.close();
+    document.dispatchEvent(new CustomEvent("comp-import", { detail: { guildId: guild } }));
+  });
+
+  /* the comp as a CSV file: what the import reads back exactly */
+  el.exportBtn.addEventListener("click", () => {
+    if (!current) return;
+    const t = typedTemplate();
+    acctDownloadText(acctFilename(t.name || "comp", "csv"), acctCsvText(compSheetRows(slots, CATALOG)), "text/csv");
+    announce("Comp exported as CSV.");
+  });
+
+  /* the comp as lines for a Discord post */
+  el.copyBtn.addEventListener("click", () => {
+    if (!current) return;
+    const text = compText(typedTemplate(), slots, CATALOG, CONTENTS, STYLES);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => showNotice("Comp copied as text."), () => showNotice(text));
+    } else {
+      showNotice(text);
+    }
+  });
+
   el.replace.addEventListener("click", () => {
     if (busy || !current) return;
     const parsed = parseShareHash(typeof location !== "undefined" ? location.hash : "");
@@ -809,7 +876,7 @@ function compErrorMessage(err) {
     if (keepId && !quiet) await openTemplate(keepId);
   }
 
-  async function openComps() {
+  async function openComps(opts) {
     if (!account.user) return;
 
     clearMessages();
@@ -833,8 +900,22 @@ function compErrorMessage(err) {
     if (seq !== openSeq) return;
 
     renderGuilds();
-    await reloadList(null);
+    const want = opts || {};
+    if (want.guildId && guilds.some(g => g.guild.id === want.guildId)) el.guild.value = want.guildId;
+    await reloadList(want.templateId || null);
   }
+
+  /* an imported comp comes back from the import dialog as a DOM event:
+     the list is re-read and the comp opened */
+  document.addEventListener("comp-imported", e => {
+    const d = e.detail || {};
+    if (!d.id) return;
+    openComps({ guildId: d.guildId, templateId: d.id }).then(() => {
+      if (!dialog.open || !current || current.id !== d.id) return;
+      showNotice(`${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`
+        + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
+    });
+  });
 
   acctWireDialog(dialog, { canClose: () => !busy && !dirty() });
   $id("comp-close").addEventListener("click", () => dialog.close());

@@ -2227,6 +2227,8 @@ window.AUTH_LINK = "";
         <p class="auth-hint" id="comp-list-note" hidden></p>
         <button type="button" class="auth-submit" id="comp-from-planner" hidden>Save the planner's comp</button>
         <p class="auth-hint">Build the comp in the planner first; its kits and spell picks are kept with it.</p>
+        <button type="button" class="gd-btn cp-import" id="comp-import" hidden>Import a sheet</button>
+        <p class="auth-hint cp-import-hint" id="comp-import-hint" hidden>A spreadsheet or a Discord table: one weapon per row, or one column per party.</p>
       </aside>
 
       <section class="gd-main">
@@ -2279,6 +2281,8 @@ window.AUTH_LINK = "";
             <div class="gd-foot cp-foot">
               <div class="cp-foot-l">
                 <button type="button" class="gd-btn" id="comp-open">Open in planner</button>
+                <button type="button" class="gd-btn" id="comp-export">Export CSV</button>
+                <button type="button" class="gd-btn" id="comp-copy">Copy as text</button>
                 <button type="button" class="gd-btn" id="comp-replace" hidden>Replace slots from planner</button>
                 <button type="button" class="gd-btn danger" id="comp-delete" hidden>Delete</button>
               </div>
@@ -2555,6 +2559,7 @@ window.AUTH_LINK = "";
           <h3 class="pw-label" id="hs-players-label">Players</h3>
           <label class="sr-only" for="hs-search">Find a player</label>
           <input class="text-input hs-search" id="hs-search" type="search" placeholder="find a player" spellcheck="false" autocomplete="off">
+          <button type="button" class="gd-btn hs-export" id="hs-export-players">Export CSV</button>
         </div>
         <table class="gd-table hs-table">
           <thead>
@@ -2579,7 +2584,10 @@ window.AUTH_LINK = "";
       </section>
 
       <section class="hs-section" aria-labelledby="hs-ctas-label">
-        <h3 class="pw-label" id="hs-ctas-label">Completed CTAs</h3>
+        <div class="hs-section-hd">
+          <h3 class="pw-label" id="hs-ctas-label">Completed CTAs</h3>
+          <button type="button" class="gd-btn hs-export" id="hs-export-ctas">Export CSV</button>
+        </div>
         <table class="gd-table hs-table">
           <thead>
             <tr>
@@ -2596,5 +2604,98 @@ window.AUTH_LINK = "";
       </section>
     </div>
     <p class="auth-hint hs-definitions" id="hs-definitions"></p>
+  </div>
+</dialog>
+
+<dialog class="auth-dialog guild-dialog comp-dialog import-dialog" id="import-dialog" aria-modal="true" aria-labelledby="im-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="im-title">Import a sheet</h2>
+      </div>
+      <button type="button" class="auth-close" id="im-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="im-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="im-notice" role="status" hidden></p>
+    <p class="sr-only" id="im-live" aria-live="polite"></p>
+
+    <form class="auth-form" id="im-form" novalidate>
+      <div class="im-source">
+        <div class="auth-field im-guild">
+          <label for="im-guild">Guild</label>
+          <select id="im-guild"></select>
+          <p class="auth-hint">The comp is saved to this guild; the names you choose are remembered for it.</p>
+        </div>
+        <div class="auth-field im-text-field">
+          <label for="im-text">Paste the sheet's cells <span class="opt">from Excel, Google Sheets, a CSV or a Discord table</span></label>
+          <textarea class="text-input im-text" id="im-text" rows="6" spellcheck="false" placeholder="Weapon&#9;Player&#9;Role&#10;Heavy Mace&#9;Disc&#9;tank&#10;Hallowfall&#9;Eff&#9;healer"></textarea>
+        </div>
+        <div class="im-file-row">
+          <label class="gd-btn im-file-btn" for="im-file">Open a CSV file<input class="sr-only" id="im-file" type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"></label>
+          <button type="button" class="auth-submit im-read" id="im-read">Read the sheet</button>
+          <p class="auth-hint">An Excel or Sheets file: copy its cells and paste them, or save it as CSV first. One weapon per row (a player, a role, a party or a count beside it), or one column per party.</p>
+        </div>
+      </div>
+
+      <div id="im-result" hidden>
+        <p class="gd-meta im-summary" id="im-summary"></p>
+        <div class="im-columns" id="im-columns" aria-label="What each column holds"></div>
+        <table class="gd-table im-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">From the sheet</th>
+              <th scope="col">Weapon</th>
+              <th scope="col">Count</th>
+              <th scope="col">Player</th>
+              <th scope="col">Role</th>
+              <th scope="col">Party</th>
+              <th scope="col">Note</th>
+            </tr>
+          </thead>
+          <tbody id="im-rows"></tbody>
+        </table>
+        <div class="im-options">
+          <label class="su-check" for="im-remember"><input type="checkbox" id="im-remember" checked> Remember the names I choose, for this guild's next import</label>
+          <label class="su-check" id="im-players-wrap" for="im-players" hidden><input type="checkbox" id="im-players"> Keep player names as slot notes</label>
+          <label class="su-check" id="im-parties-wrap" for="im-parties" hidden><input type="checkbox" id="im-parties" checked> Keep party labels as slot notes</label>
+        </div>
+        <div class="cp-fields">
+          <div class="auth-field cp-wide">
+            <label for="im-name">Comp name</label>
+            <input class="text-input" id="im-name" maxlength="64" type="text" spellcheck="false" aria-describedby="im-name-err">
+            <p class="auth-field-err" id="im-name-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="im-content">Content</label>
+            <select id="im-content" aria-describedby="im-content-err"></select>
+            <p class="auth-field-err" id="im-content-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="im-style">Style</label>
+            <select id="im-style" aria-describedby="im-style-err"></select>
+            <p class="auth-field-err" id="im-style-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="im-size">Planned size</label>
+            <input class="text-input" id="im-size" type="number" min="2" max="60" step="1" inputmode="numeric" aria-describedby="im-size-err">
+            <p class="auth-field-err" id="im-size-err"></p>
+          </div>
+        </div>
+        <div class="gd-foot cp-foot">
+          <p class="auth-hint im-foot-note" id="im-foot-note" hidden></p>
+          <div class="profile-actions cp-foot-r">
+            <button class="auth-submit" id="im-save" type="submit">Import as a saved comp</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <details class="im-aliases" id="im-aliases-wrap">
+      <summary>Remembered names <span id="im-aliases-count"></span></summary>
+      <p class="auth-hint">A name this guild matched to a weapon in an earlier import. The next import reads it the same way; forget one to read it afresh.</p>
+      <ul class="gd-weapons im-aliases-list" id="im-aliases"></ul>
+    </details>
   </div>
 </dialog>

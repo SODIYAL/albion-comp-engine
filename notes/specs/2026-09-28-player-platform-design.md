@@ -3,8 +3,8 @@
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
 phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
 (sign-up), phase 6 (caller management), phase 7 (live updates), phase 8
-(history) and phase 9 (analytics) implemented 2026-09-30; phases 10–12
-open (`BACKLOG.md` "Platform"). The schema and its rules:
+(history), phase 9 (analytics) and phase 10 (import and export)
+implemented 2026-09-30; phases 11–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -84,7 +84,7 @@ roles.
    on read from the attendance record (`guild_history`): CTAs, records,
    attendance and show rate, fill, regulars, weapons played ("played the
    Longbow in 31 CTAs") and the weapons fielded. No skill rating.
-10. **Import / export** — Excel / CSV / Sheets to a normalized template:
+10. **Import / export** (implemented) — Excel / CSV / Sheets to a normalized template:
     detect columns, map weapon / player / role / party / count, match names
     to weapon keys through an alias table, show uncertain matches for review.
     One-way import first; no live sync.
@@ -443,7 +443,66 @@ roles.
   weapons played: one role read, no second classification in the
   database.
 - **Deferred**: a period window, a player's own history across guilds,
-  export of the facts (phase 10), a caller's leaderboard by role.
+  a caller's leaderboard by role. The export of the facts is phase 10.
+
+## Phase 10 decisions
+
+- **The sheet is read in the browser, never uploaded.** Pasted cells
+  (Excel and Sheets copy them tab-separated), a CSV, TSV or text file,
+  a Discord or Markdown table: the parser reads tabs, commas,
+  semicolons, pipes and quotes. An Excel workbook is not parsed: its
+  cells are pasted, or the sheet saved as CSV (a zip-and-XML reader in
+  the page is deferred). Nothing about the sheet is stored but the comp
+  it becomes and the names the caller chose.
+- **Columns are detected, then the caller's.** A header row (one of the
+  first three rows naming a kind and holding no weapon) decides where
+  it can; the cells decide the rest: mostly weapons, integers (1, 2, 3
+  in order is a slot number, anything else a count), party labels, role
+  words, short texts (a player), long ones (a note). Two weapon columns
+  are parties side by side (a grid); one is a list, in which a row with
+  one cell that is a party label or a role word opens a section. The
+  map is shown as a select per column and the rows are re-read as it is
+  changed.
+- **A name is read through the catalog, then the guild's names, then
+  derived.** The dataset key, the display name, an alias (the guild's
+  remembered names, then a short built-in list of dual-line plurals),
+  then in order: all the words, a prefix, word prefixes, the initials,
+  the key's own words, a text inside the name, a close spelling (one
+  edit, two for a long text). One candidate is likely (accepted, marked
+  for a glance); several are uncertain (the caller chooses; the plain
+  line named "X Staff" decides "arcane", "holy", "fire" among the great
+  ones); none is an open slot with the text as its note, or its role
+  when the text is a role word. "1h" and "2h" narrow the pool to a
+  hand; tier, enchantment and quality words are dropped. Removed lines
+  never match. The matcher is pinned against the dataset's own catalog
+  (`tests/test_import.js`).
+- **A chosen name is remembered per guild** (`weapon_aliases`: the
+  normalized text and the key; at most 500 per guild, 100 per save):
+  the next import reads it as an alias. A name the derivation read and
+  the caller kept is not stored (it reads the same way again); a
+  catalog name given another line is not stored (the name wins). A
+  member sees the names, the caller roles change and remove them.
+  Never a copy of the catalog (rule 10).
+- **A template has no player and no party.** The player column and the
+  party labels are shown in the review; each may ride in the slot's
+  note (players off by default, parties on when there are two or more).
+  The slots follow the sheet's order, parties in sequence. A CTA made
+  from a sheet with its players, and a party column on slots, are
+  deferred.
+- **The comp is saved through the comps module's helper** under its
+  rules (the name, the content, the size, the slot bounds); the import
+  module writes no template of its own. The comps dialog opens the
+  import through a DOM event with the guild and gets the comp back the
+  same way.
+- **The export is the shared kit**: CSV text (RFC 4180, CRLF, a
+  byte-order mark for Excel), a file name from a title, a download. A
+  comp exports as CSV (what the import reads back exactly) and as lines
+  for a Discord post; the history exports the players and the completed
+  CTAs as CSV. The same measures as the tables; nothing new is
+  computed.
+- **Deferred**: an Excel workbook parsed in the page, a CTA with its
+  players from a sheet, a party column on slots, a live link to a
+  Google Sheet (phase 12).
 
 ## Open questions
 

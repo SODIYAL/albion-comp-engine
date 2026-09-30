@@ -223,6 +223,18 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
         /location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
 }
 
+/* 6 - the export: the comp as a sheet and as lines */
+{
+  const slots = [{ position: 2, weapon_id: "2H_LONGBOW", role: "dps", note: "kite" }, { position: 1, weapon_id: "MAIN_MACE_HELL", role: "tank", note: null }, { position: 3, weapon_id: null, role: null, note: "flex" }];
+  const rows = run("compSheetRows")(slots, CATALOG);
+  check("the sheet: a header, then one row per slot in order with the catalog name, the role and the note; an open slot has no weapon",
+        same(rows, [["#", "Weapon", "Role", "Note"], [1, "Incubus Mace", "tank", ""], [2, "Longbow", "dps", "kite"], [3, "", "", "flex"]]), rows);
+  const text = run("compText")({ name: "Castle A", content: "territory_defense", planned_size: 20, style: "clap" }, slots, CATALOG, CONTENTS, STYLES);
+  check("the lines: a title with the content, the size and the style, then numbered slots with the role after a dash and the note in brackets",
+        text === "Castle A · Territory Defense · 20 planned · Clap\n1. Incubus Mace - tank\n2. Longbow - dps (kite)\n3. open slot (flex)", text);
+  check("an unknown key keeps its key; a comp with no name is Comp", run("compText")({}, [{ position: 1, weapon_id: "MYSTERY" }], CATALOG, CONTENTS, STYLES) === "Comp\n1. MYSTERY");
+}
+
 console.log(`\n${pass}/${pass + fail} saved comp tests passed`);
 process.exit(fail ? 1 : 0);
 })();

@@ -474,6 +474,47 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
 }
 
 
+/* A table as CSV text (RFC 4180): a cell holding a comma, a quote, a
+   line break or an outer space is quoted, quotes doubled; CRLF line
+   ends, which every spreadsheet reads. The export of a comp and of the
+   history (platform phase 10). */
+function acctCsvText(rows) {
+  const cell = value => {
+    const text = value == null ? "" : String(value);
+    return /[",\r\n]|^\s|\s$/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  };
+  return (rows || []).map(row => (row || []).map(cell).join(",")).join("\r\n") + "\r\n";
+}
+
+
+/* a file name from a title: letters, digits, spaces, dashes and
+   underscores, at most 60 characters, the extension appended */
+function acctFilename(title, ext) {
+  const base = String(title == null ? "" : title).normalize("NFKD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^A-Za-z0-9 _-]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 60).trim();
+  return `${base || "export"}.${ext}`;
+}
+
+
+/* hands the browser a text file to save; CSV gets a byte-order mark
+   ahead, which Excel needs to read UTF-8 names */
+function acctDownloadText(filename, text, type) {
+  if (typeof document === "undefined" || typeof Blob === "undefined" || typeof URL === "undefined") return false;
+  const mime = type || "text/plain";
+  const bom = /csv/.test(mime) ? "﻿" : "";
+  const url = URL.createObjectURL(new Blob([bom + String(text == null ? "" : text)], { type: `${mime};charset=utf-8` }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  return true;
+}
+
+
 /* ----------------------------------------------------------------- UI */
 
 (function accountUI() {

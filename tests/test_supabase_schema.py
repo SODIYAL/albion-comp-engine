@@ -449,6 +449,39 @@ check(js_const(HISTORY_JS, "REGULAR_MIN_ATTENDED") is not None and re.search(r"c
       and "None of this is a skill rating" in HISTORY_JS,
       "DB13h the client's regular is defined by two stated constants and the definitions are shown beside the list")
 
+print("DB14 - import: the guild's alias table; the client's bounds and form are the database's; the save runs as the caller")
+with open(os.path.join(ROOT, "dashboard", "_import.js"), encoding="utf-8") as f:
+    IMPORT_JS = f.read()
+alias_max = js_const(IMPORT_JS, "ALIAS_MAX")
+sql_alias = re.search(r"char_length\(alias\) <= (\d+) and alias ~ '(.+?)'", ALL)
+js_alias_re = re.search(r"const ALIAS_RE = /(.+?)/;", IMPORT_JS)
+check(alias_max is not None and sql_alias is not None and int(sql_alias.group(1)) == alias_max
+      and js_alias_re is not None and js_alias_re.group(1) == sql_alias.group(2),
+      "DB14a ALIAS_MAX and ALIAS_RE (_import.js) are the weapon_aliases bound and form",
+      "js %s %s, sql %s" % (alias_max, js_alias_re and js_alias_re.group(1), sql_alias and sql_alias.groups()))
+guard_bound = re.search(r"from public\.weapon_aliases a where a\.guild_id = new\.guild_id\) >= (\d+)", ALL)
+check(guard_bound is not None and js_const(IMPORT_JS, "ALIASES_MAX") == int(guard_bound.group(1)),
+      "DB14b ALIASES_MAX is the guard's bound per guild", guard_bound and guard_bound.group(1))
+save_bound = re.search(r"jsonb_array_length\(aliases\) > (\d+)", ALL)
+check(save_bound is not None and js_const(IMPORT_JS, "ALIAS_SAVE_MAX") == int(save_bound.group(1)),
+      "DB14c ALIAS_SAVE_MAX is the save's bound per call", save_bound and save_bound.group(1))
+check(re.search(r"function public\.save_weapon_aliases\(guild uuid, aliases jsonb\)", ALL) is not None
+      and "on conflict (guild_id, alias) do update" in ALL and "where a.weapon_id is distinct from excluded.weapon_id" in ALL,
+      "DB14d save_weapon_aliases: one import's names in one transaction, a held name taking its new weapon, an unchanged one not counted")
+check(len(re.findall(r"on public\.weapon_aliases\s+for (select|insert|update|delete) to authenticated", ALL)) == 4
+      and ALL.count("on public.weapon_aliases\n  for select to authenticated\n  using (private.guild_role_of(guild_id) is not null)") == 1
+      and len(re.findall(r"private\.guild_role_of\(guild_id\) in \('caller', 'officer', 'admin'\)", ALL[ALL.find("weapon_aliases"):])) >= 4,
+      "DB14e one policy per operation: members read, the caller roles add, change and remove")
+check(re.search(r"grant insert \(guild_id, alias, weapon_id\) on table public\.weapon_aliases to authenticated", ALL) is not None
+      and re.search(r"grant update \(weapon_id\) on table public\.weapon_aliases to authenticated", ALL) is not None,
+      "DB14f the grants: the three columns an import writes, the weapon a caller changes; created_by is the server's")
+check('from("weapon_aliases")' in IMPORT_JS and 'rpc("save_weapon_aliases"' in IMPORT_JS and "function normalizeWeaponText" in IMPORT_JS
+      and "aliases: aliasPayload(pairs)" in IMPORT_JS,
+      "DB14g the client reads the table, writes through the save, and sends every alias in its normalized form")
+check("weapon_aliases" not in GUEST_TABLES and "public.save_weapon_aliases" not in GUEST_FUNCTIONS
+      and re.search(r"to anon[^;]*weapon_aliases|weapon_aliases[^;]*to anon", ALL) is None,
+      "DB14h a guest reaches no alias: nothing on the table is granted to anon")
+
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

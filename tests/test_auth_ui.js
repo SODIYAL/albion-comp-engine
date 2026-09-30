@@ -312,6 +312,18 @@ const run = expr => vm.runInContext(expr, ctx);
   }
 }
 
+/* 8 - the export kit: CSV text, a file name, the download */
+{
+  const csv = run("acctCsvText"), name = run("acctFilename");
+  check("CSV: a plain cell as is; a comma, a quote, a line break or an outer space quoted with quotes doubled; CRLF line ends",
+        csv([["#", "Weapon", "Note"], [1, "Longbow", 'engage, then "kite"'], [2, "", " x\ny"]]) === '#,Weapon,Note\r\n1,Longbow,"engage, then ""kite"""\r\n2,," x\ny"\r\n');
+  check("CSV: null and undefined are empty cells; no rows is an empty sheet", csv([[null, undefined]]) === ",\r\n" && csv([]) === "\r\n" && csv(null) === "\r\n");
+  check("a file name keeps letters, digits, spaces, dashes and underscores, cut at 60, the extension appended; nothing becomes export",
+        name("Castle A: tanks/heals (v2)", "csv") === "Castle A tanks heals v2.csv" && name("Zaddy é", "csv") === "Zaddy e.csv"
+        && name("", "csv") === "export.csv" && name("x".repeat(80), "txt").length === 64);
+  check("the download does nothing without a document", run("acctDownloadText")("a.csv", "x", "text/csv") === false);
+}
+
 console.log(`\n${pass}/${pass + fail} account-layer tests passed`);
 process.exit(fail ? 1 : 0);
 

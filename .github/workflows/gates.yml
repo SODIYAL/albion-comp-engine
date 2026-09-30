@@ -67,6 +67,7 @@ jobs:
           node tests/test_events.js
           node tests/test_signup.js
           node tests/test_history.js
+          node tests/test_import.js
 
       - name: account database gates
         run: |

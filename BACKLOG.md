@@ -353,7 +353,8 @@ status, a share code and slots copied from a comp), phase 5 (sign-up:
 the sheet a link opens, for guests with a claim token and for accounts),
 phase 6 (caller management on the sheet), phase 7 (the live sheet over
 Realtime Broadcast), phase 8 (the attendance record) and phase 9 (the
-history: facts over completed CTAs) are built.
+history: facts over completed CTAs) and phase 10 (import and export: a
+spreadsheet as a saved comp, CSV out) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -364,11 +365,19 @@ history: facts over completed CTAs) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 10, import and export**: a spreadsheet (Excel, CSV, Sheets)
-  to a normalized template: detect columns, map weapon, player, role,
-  party and count, match names to weapon keys through an alias table,
-  show uncertain matches for review; one-way import first. Then phases
-  11 and 12 (the spec).
+- **Phase 11, the engine on the live roster** (the spec): a CTA's
+  weapon keys through the engine (weaknesses, overstack, open-slot
+  priorities, replacements), descriptive beside the sheet; then phase
+  12.
+- **Import: an Excel workbook** (`.xlsx`) is not parsed in the page; its
+  cells are pasted, or the sheet saved as CSV. A zip-and-XML reader in
+  the page is a later increment if callers ask for it.
+- **Import: a CTA from a sheet with its players**: the import makes a
+  comp (a template has no player); the player column is shown and may
+  ride in the slot notes. A CTA with those players on its sheet is a
+  later increment (phase 12's roster construction is the place).
+- **A party column on slots**: comp and CTA slots carry no party; an
+  imported sheet's parties order the slots and may ride in the notes.
 - **A player's own history across guilds**: the history dialog reads a
   guild's facts; a player's list of their own CTAs and marks across
   guilds (and a guest's, by claim) is a later surface.
