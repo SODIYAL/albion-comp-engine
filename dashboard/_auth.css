@@ -298,3 +298,21 @@
 .gd-rename .auth-submit{width:auto; margin:0 0 4px}
 .gd-rename[hidden]{display:none}
 .gd-foot{display:flex; justify-content:space-between; gap:10px; margin-top:14px; padding-top:12px; border-top:1px solid var(--rule)}
+
+/* ---- saved comps (_comps.js): the guild dialog's grid, a comp across the main column ---- */
+.comp-dialog{width:min(920px, calc(100vw - 32px))}
+.cp-fields{display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 12px; align-items:start}
+.cp-fields .cp-wide{grid-column:1/-1}
+.cp-notes{resize:vertical; min-height:38px; font-family:inherit; font-size:13px}
+.cp-table td{padding:4px 6px}
+.cp-pos{width:28px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.cp-weapon{white-space:nowrap}
+.cp-weapon .pw-art{vertical-align:middle; margin-right:5px}
+.cp-weapon .pw-role{margin-left:6px}
+.cp-open{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic}
+.cp-in{width:100%; min-width:80px; padding:3px 6px; font-size:12px}
+.cp-in:read-only{border-color:transparent; background:none; color:var(--ink-2)}
+.cp-foot{align-items:center; flex-wrap:wrap}
+.cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
+.cp-foot-r{margin:0}
+.cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}

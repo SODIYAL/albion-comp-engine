@@ -501,6 +501,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuErr: $id("acct-menu-err"),
     profileItem: $id("acct-profile"),
     guildsItem: $id("acct-guilds"),
+    compsItem: $id("acct-comps"),
     logoutItem: $id("acct-logout"),
     title: $id("auth-title"),
     error: $id("auth-error"),
@@ -663,6 +664,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     el.menuEmail.textContent = (state.user && state.user.email) || "";
     el.profileItem.hidden = !views.profile;
     el.guildsItem.hidden = !views.guilds;
+    el.compsItem.hidden = !views.comps;
 
     notify();
   }
@@ -692,9 +694,9 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuItems()[0].focus();
   }
 
-  /* the items on offer: Profile and Guilds show once their modules
-     registered the views */
-  const menuItems = () => [el.profileItem, el.guildsItem, el.logoutItem].filter(item => !item.hidden);
+  /* the items on offer: Profile, Guilds and Saved comps show once their
+     modules registered the views */
+  const menuItems = () => [el.profileItem, el.guildsItem, el.compsItem, el.logoutItem].filter(item => !item.hidden);
 
   function closeMenu(returnFocus) {
     if (menu.hidden) return;
@@ -753,6 +755,11 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
   el.guildsItem.addEventListener("click", () => {
     closeMenu(false);
     if (views.guilds) views.guilds();
+  });
+
+  el.compsItem.addEventListener("click", () => {
+    closeMenu(false);
+    if (views.comps) views.comps();
   });
 
   el.logoutItem.addEventListener("click", async () => {

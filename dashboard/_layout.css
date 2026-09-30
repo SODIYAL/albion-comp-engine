@@ -309,6 +309,8 @@
   /* the guilds dialog: the guild list above the guild, not beside it */
   .gd-grid{grid-template-columns:1fr}
   .gd-side{border-right:0; padding-right:0; padding-bottom:12px; border-bottom:1px solid var(--rule)}
+  /* the saved comp's fields stack in two columns */
+  .cp-fields{grid-template-columns:repeat(2, 1fr)}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

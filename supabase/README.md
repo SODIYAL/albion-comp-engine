@@ -105,6 +105,10 @@ database, are the only thing that keeps one player's data from another's.
 | `join_guild(code)` | the code holder becomes a member; a wrong code is `P0002`; a member joining again gets the guild. Runs as the caller: the code rides the statement (`app.join_code`) and the insert policy checks it (rule 11) | — | signed-in users |
 | `private.guild_role_of(guild)`, `private.guild_id_for_code(code)`, `private.guild_member_count(guild)` | the helpers policies and the guard call, with their definer's rights, in the schema the API does not expose (rule 8) | policies, the guard | — |
 | `new_join_code()`, `guilds_guard()`, `guild_members_guard()`, `guild_members_succession()` | the code generator (a column default); the guard triggers and the succession | — | the default expression; triggers |
+| `comp_templates` | a comp a guild keeps: `name` (trimmed, 1–64, unique in the guild whatever its case), `content` and `style` (dataset keys; the database checks the form, the client the list), `planned_size` (2–60), `notes` (≤ 1000), `share_hash` (the planner's share link at save time, ≤ 8000), `created_by` / `updated_by` (null once that account is deleted; the comp stays); at most 100 per guild | the guild's members | callers, officers and admins, through `save_comp_template` or column by column |
+| `comp_template_slots` | one slot of a comp: `position` (1–60, the planner's roster cap), `weapon_id` (a dataset key, or null for an open slot), `role` (the caller's label, ≤ 40), `note` (≤ 200) | the guild's members | callers, officers and admins (the position never moves: a slot is removed and re-added) |
+| `save_comp_template(template jsonb)` | the comp and its slots in one transaction: created without an id, updated with one; unlisted slots go, listed ones are added or changed; a comp the caller cannot edit is `42501` | — | signed-in users |
+| `comp_templates_guard()` | trigger: the 100-per-guild bound; `updated_by` follows every change | — | triggers |
 
 **Who reads whom.** A profile and a weapon list are readable by their own
 account and by every member of a guild the two share (the own-row select

@@ -1,8 +1,8 @@
 # Player platform — design (2026-09-28)
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
-phase 2 (guilds) implemented 2026-09-30; phases 3–12 open (`BACKLOG.md`
-"Platform"). The schema and its rules:
+phase 2 (guilds) and phase 3 (saved comps) implemented 2026-09-30; phases
+4–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -50,9 +50,10 @@ roles.
    created_by), `guild_members` (guild, user, role in member / caller /
    officer / admin). Guild-scoped read policies on profiles and weapon
    lists arrive here.
-3. **Saved comps** — `comp_templates` (guild, name, content, planned size,
-   style) and `comp_template_slots` (party, position, weapon key, role,
-   note). A template is never a live roster.
+3. **Saved comps** (implemented) — `comp_templates` (guild, name, content,
+   planned size, style, notes, the planner's share hash) and
+   `comp_template_slots` (position, weapon key, role, note). A template is
+   never a live roster.
 4. **CTAs** — `events` (guild, caller, name, start, mass time, notes, status
    draft / open / locked / completed, share code) and `event_slots`, COPIED
    from the template at creation: editing an event never touches its
@@ -199,6 +200,35 @@ roles.
 - **Deferred**: invitations by name or request (a profile lookup outside
   the guild), per-member privacy of lists, guild avatars, a caller-only
   power.
+
+## Phase 3 decisions
+
+- **A template is one planner roster.** Slots are positions 1–60, the
+  planner's roster cap (`HARD_CAP`, pinned equal to the slot bound by the
+  schema test); the spec's "party" column is dropped. A ZvZ of several
+  parties is several templates until CTAs need a grouping.
+- **The planner is the editor; the bridge is the address bar.** A comp is
+  saved from `location.hash`, the share link the planner already
+  publishes (the loadout codec), and opened by setting it, which the
+  planner applies as a pasted link. The account layer reads no planner
+  state and the planner never calls it (layout contract L30). The saved
+  hash is stored whole (`share_hash`), so the kits and spell picks come
+  back while the roster still matches the slots; a changed roster opens as
+  a plain `c=` / `n=` / `st=` / `p=` link built from the slots.
+- **Callers write comps.** The caller role's first power: callers,
+  officers and admins create, edit and delete a guild's templates; members
+  read them. `save_comp_template` writes the template and its slots in one
+  transaction; a slot's position never moves (a slot is removed and
+  re-added), and `updated_by` follows every change by trigger.
+- **Content and style are dataset keys.** The database checks the form,
+  the client the list (`ACCOUNT_CONTENTS`, `ACCOUNT_STYLES`, stamped at
+  build from the dataset's templates and styles; balanced is the absence of
+  a style), the same rule weapon keys follow.
+- **Bounds**: 100 templates per guild, 60 slots per template, notes ≤ 1000,
+  a role label ≤ 40, a slot note ≤ 200, the name under the account name
+  bound. Storage bounds against abuse, not product rules.
+- **Deferred**: a weapon picker per slot inside the dialog, multi-party
+  grouping, template versions.
 
 ## Open questions
 

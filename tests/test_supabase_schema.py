@@ -233,6 +233,48 @@ check(js_code is not None and sql_code is not None and js_code.group(1) == sql_c
       "DB6e the client's join code form is the database's",
       "js %s, sql %s" % (js_code and js_code.group(1), sql_code and sql_code.group(1)))
 
+print("DB7 - saved comps: the client's bounds are the database's and the planner's")
+with open(os.path.join(ROOT, "dashboard", "_comps.js"), encoding="utf-8") as f:
+    COMPS_JS = f.read()
+with open(os.path.join(ROOT, "dashboard", "_app.js"), encoding="utf-8") as f:
+    APP_JS = f.read()
+slots_max = js_const(COMPS_JS, "COMP_SLOTS_MAX")
+hard_cap = js_const(APP_JS, "HARD_CAP")
+sql_slots = set(re.findall(r"position between 1 and (\d+)", ALL)) | set(re.findall(r"jsonb_array_length\(slots\) > (\d+)", ALL))
+sql_size = re.search(r"planned_size between (\d+) and (\d+)", ALL)
+check(slots_max is not None and hard_cap == slots_max and sql_slots == {str(slots_max)},
+      "DB7a COMP_SLOTS_MAX (_comps.js) is the planner's HARD_CAP and the slot bound",
+      "js %s, planner %s, sql %s" % (slots_max, hard_cap, sorted(sql_slots)))
+check(sql_size is not None and int(sql_size.group(1)) == js_const(COMPS_JS, "COMP_SIZE_MIN")
+      and int(sql_size.group(2)) == slots_max,
+      "DB7b the planned size runs from COMP_SIZE_MIN to the slot bound", sql_size and sql_size.groups())
+for js_name, sql_pat in (("COMP_TEMPLATES_MAX", r"from public\.comp_templates where guild_id = new\.guild_id\) >= (\d+)"),
+                         ("COMP_NOTES_MAX", r"char_length\(notes\) <= (\d+)"),
+                         ("COMP_ROLE_MAX", r"char_length\(role\) between 1 and (\d+)"),
+                         ("COMP_NOTE_MAX", r"char_length\(note\) between 1 and (\d+)")):
+    js_val = js_const(COMPS_JS, js_name)
+    sql_val = set(re.findall(sql_pat, ALL))
+    check(js_val is not None and sql_val == {str(js_val)},
+          "DB7c %s (_comps.js) is the database's bound" % js_name, "js %s, sql %s" % (js_val, sorted(sql_val)))
+js_key = re.search(r"const COMP_KEY_RE = /(.+?)/;", COMPS_JS)
+sql_keys = set(re.findall(r"(?:content|style) ~ '(.+?)'", ALL))
+check(js_key is not None and sql_keys == {js_key.group(1)},
+      "DB7d the client's content and style key form is the database's",
+      "js %s, sql %s" % (js_key and js_key.group(1), sorted(sql_keys)))
+roles_js = re.search(r"const COMP_WRITER_ROLES = \[([^\]]+)\];", COMPS_JS)
+roles_sql = set(re.findall(r"in \('caller', 'officer', 'admin'\)", ALL))
+check(roles_js is not None and norm(roles_js.group(1)) == ["admin", "caller", "officer"] and len(roles_sql) == 1,
+      "DB7e the roles that write comps are the policies' caller, officer, admin",
+      roles_js and roles_js.group(1))
+comp_name_sql = set(re.findall(r"char_length\(name\) between 1 and (\d+)", ALL))
+check(comp_name_sql == {str(name_max)}, "DB7f a comp name shares the account name bound", str(sorted(comp_name_sql)))
+tag = re.search(r'<input[^>]*\bid="comp-name"[^>]*>', SHELL)
+length = tag and re.search(r'\bmaxlength="(\d+)"', tag.group(0))
+check(length is not None and int(length.group(1)) == name_max, "DB7g the comp name field's maxlength is the bound")
+size_tag = re.search(r'<input[^>]*\bid="comp-size"[^>]*>', SHELL)
+check(size_tag is not None and ('min="%d"' % js_const(COMPS_JS, "COMP_SIZE_MIN")) in size_tag.group(0)
+      and ('max="%d"' % slots_max) in size_tag.group(0), "DB7h the planned size field's range is the bound")
+
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

@@ -345,8 +345,10 @@ The persistent ZvZ planning, sign-up and roster platform around the engine.
 Phases, their tables and the patterns phase 1 set:
 `notes/specs/2026-09-28-player-platform-design.md`; the schema rules:
 `supabase/README.md`. Phase 1 (accounts, the editable profile, weapon
-lists) and phase 2 (guilds: members with roles, the join code, guild-scoped
-reads of profiles and weapon lists, the guilds dialog) are built.
+lists), phase 2 (guilds: members with roles, the join code, guild-scoped
+reads of profiles and weapon lists, the guilds dialog) and phase 3 (saved
+comps: a guild's templates with slots, saved from and opened in the
+planner through the share hash) are built.
 
 - **Decide guest sign-up identity** before phase 5: a name only, a name
   with a claim token kept in the guest's browser, or a Discord login (the
@@ -356,9 +358,16 @@ reads of profiles and weapon lists, the guilds dialog) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 3, saved comps**: `comp_templates` (guild, name, content, planned
-  size, style) and `comp_template_slots`; a template is never a live roster.
-  Then phases 4–12 in order (the spec).
+- **Phase 4, CTAs**: `events` (guild, caller, name, start, mass time, notes,
+  status draft / open / locked / completed, share code) and `event_slots`
+  COPIED from a template at creation. Then phases 5–12 in order (the spec).
+- **Slot editing inside the comps dialog**: a slot's weapon is set in the
+  planner (save, or replace the slots from the planner); the dialog edits
+  role labels and notes and removes slots. A weapon picker per slot (the
+  profile's combobox) is a later increment if callers ask for it.
+- **Multi-party comps**: a template is one planner roster of up to 60. A
+  ZvZ of several parties is several templates until CTAs (phase 4) need a
+  grouping.
 - **Guild invitations beyond the code**: a member joins only by a code an
   officer shares. An officer adding a member by Albion name, or a player
   asking to join, needs a lookup of profiles the reader is not yet allowed

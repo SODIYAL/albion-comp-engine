@@ -14,6 +14,7 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
     dashboard/_auth.js             auth helpers + the account UI + window.Account
     dashboard/_profile.js          the profile dialog (names, weapon lists)
     dashboard/_guild.js            the guilds dialog (members, roles, join code)
+    dashboard/_comps.js            the saved comps dialog (a guild's comp templates)
     out/dataset-latest.json        the single source of truth
         │
         ▼
@@ -164,6 +165,8 @@ def main():
         profile_js = f.read()
     with open(os.path.join(DASH, "_guild.js"), encoding="utf-8") as f:
         guild_js = f.read()
+    with open(os.path.join(DASH, "_comps.js"), encoding="utf-8") as f:
+        comps_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     semantic_icons = load_semantic_icons()
@@ -390,6 +393,12 @@ def main():
         if w.get("removed"):
             entry["removed"] = True
         account_catalog[k] = entry
+    # The content and style names a saved comp (_comps.js) offers: the
+    # dataset's keys, the planner's own vocabulary (a share hash's c= and
+    # st=); comp_templates stores the keys (supabase/migrations).
+    account_contents = {k: (v.get("name") or k) for k, v in sorted(data["templates"].items())}
+    account_styles = {k: (v.get("name") or k) for k, v in sorted((data.get("styles") or {}).items())
+                      if k != "balanced"}
 
     # `</script>` inside a JSON string would close the tag early; escape it.
     # (Escaping happens outside the f-string: expression-part backslashes
@@ -423,6 +432,8 @@ def main():
            f"<script>\n{auth_js}\n</script>\n"
            f"<script>\nconst ACCOUNT_CATALOG = {js(account_catalog)};\n{profile_js}\n</script>\n"
            f"<script>\n{guild_js}\n</script>\n"
+           f"<script>\nconst ACCOUNT_CONTENTS = {js(account_contents)};\n"
+           f"const ACCOUNT_STYLES = {js(account_styles)};\n{comps_js}\n</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     # newline="\n" on every committed page: Windows' default text mode

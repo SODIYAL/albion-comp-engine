@@ -415,6 +415,106 @@ try {
   check("one permissive policy per table and action (lint 0006)", perm.length === 0, perm);
 }
 
+
+/* 9 - saved comps: a guild's templates and slots, written by caller roles */
+{
+  /* the cast: C is admin of gd (succession); fresh accounts F (a member
+     of gd), H (a caller of gd), X (an outsider) */
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const H = "00000000-0000-4000-8000-000000000010";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const gd = (await db.query("select id from public.guilds where albion_server = 'europe' and lower(name) = 'zaddy guild'")).rows[0];
+  for (const [id, n] of [[F, "Eff"], [H, "Aitch"], [X, "Ex"]]) await signUp(id, { albion_name: n });
+  const gdCode2 = (await db.query("select join_code from public.guilds where id = $1", [gd.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gdCode2]);
+  await run("authenticated", H, "select * from public.join_guild($1)", [gdCode2]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [gd.id, H]);
+
+  const T = (over = {}) => JSON.stringify(Object.assign({
+    guild_id: gd.id, name: " Castle A ", content: "castle", style: "clap", planned_size: 20, notes: "  ",
+    share_hash: "c=castle&n=20&st=clap&p=2H_LONGBOW,MAIN_MACE_HELL",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW", role: " ranged ", note: "" },
+            { position: 2, weapon_id: "MAIN_MACE_HELL", role: null, note: " engage first " }]
+  }, over));
+  const save = (sub, payload) => rows("authenticated", sub, "select * from public.save_comp_template($1::jsonb)", [payload]);
+  const saveCode = (sub, payload) => code("authenticated", sub, "select * from public.save_comp_template($1::jsonb)", [payload]);
+  const slotsOf = (sub, id) => rows("authenticated", sub, "select position, weapon_id, role, note from public.comp_template_slots where template_id = $1 order by position", [id]);
+
+  const t = (await save(H, T()))[0];
+  check("a caller saves a comp: the template trimmed, empty notes null, its slots written with it",
+        t && t.name === "Castle A" && t.notes === null && t.style === "clap" && t.created_by === H && t.updated_by === H
+        && same(await slotsOf(H, t.id), [{ position: 1, weapon_id: "2H_LONGBOW", role: "ranged", note: null },
+                                         { position: 2, weapon_id: "MAIN_MACE_HELL", role: null, note: "engage first" }]), t);
+  check("a member cannot save a comp; an outsider cannot either",
+        await saveCode(F, T({ name: "Mine" })) === "42501" && await saveCode(X, T({ name: "Theirs" })) === "42501");
+  check("a comp name is unique in its guild, whatever its case", await saveCode(C, T({ name: "castle a" })) === "23505");
+  check("the checks refuse a bad content key, a size off the range, a slot off the roster and a long role",
+        await saveCode(H, T({ name: "B", content: "Castle Fight" })) === "23514"
+        && await saveCode(H, T({ name: "B", planned_size: 61 })) === "23514"
+        && await saveCode(H, T({ name: "B", slots: [{ position: 61, weapon_id: "A" }] })) === "23514"
+        && await saveCode(H, T({ name: "B", slots: [{ position: 1, role: "r".repeat(41) }] })) === "23514");
+  check("a position listed twice or a payload that is not a list is refused",
+        await saveCode(H, T({ name: "B", slots: [{ position: 1 }, { position: 1 }] })) === "21000"
+        && await saveCode(H, T({ name: "B", slots: { position: 1 } })) === "22023");
+  const unchanged = await rows("authenticated", H, "select count(*)::int as n from public.comp_templates where guild_id = $1", [gd.id]);
+  check("a refused save changes nothing (one transaction)", unchanged[0].n === 1, unchanged);
+
+  /* reading */
+  const fSees = await rows("authenticated", F, "select id, name from public.comp_templates");
+  check("a member reads the guild's comps and their slots",
+        fSees.length === 1 && fSees[0].id === t.id && (await slotsOf(F, t.id)).length === 2, fSees);
+  check("an outsider reads no comp and no slot; anon reads nothing",
+        (await rows("authenticated", X, "select id from public.comp_templates")).length === 0
+        && (await rows("authenticated", X, "select * from public.comp_template_slots")).length === 0
+        && await code("anon", null, "select * from public.comp_templates") === "42501"
+        && await code("anon", null, "select * from public.comp_template_slots") === "42501");
+  check("a member cannot edit, add slots to or delete a comp",
+        await affected("authenticated", F, "update public.comp_templates set name = 'Mine' where id = $1", [t.id]) === 0
+        && await code("authenticated", F, "insert into public.comp_template_slots (template_id, position, weapon_id) values ($1, 3, 'A')", [t.id]) === "42501"
+        && await affected("authenticated", F, "delete from public.comp_template_slots where template_id = $1", [t.id]) === 0
+        && await affected("authenticated", F, "delete from public.comp_templates where id = $1", [t.id]) === 0);
+
+  /* editing */
+  const t2 = (await save(C, T({ id: t.id, name: "Castle A v2", notes: "hold the gate", style: "",
+                                 slots: [{ position: 1, weapon_id: "2H_LONGBOW", role: "kite", note: null },
+                                         { position: 3, weapon_id: null, role: "open", note: "anyone" }] })))[0];
+  check("an admin edits a comp: renamed, notes set, the style cleared, updated_by follows; unlisted slots go, listed ones are added or changed",
+        t2 && t2.id === t.id && t2.name === "Castle A v2" && t2.notes === "hold the gate" && t2.style === null && t2.updated_by === C
+        && t2.updated_at > t.updated_at
+        && same(await slotsOf(C, t.id), [{ position: 1, weapon_id: "2H_LONGBOW", role: "kite", note: null },
+                                         { position: 3, weapon_id: null, role: "open", note: "anyone" }]), t2);
+  check("an edit that names a comp the caller cannot edit is refused", await saveCode(F, T({ id: t.id, name: "Hijack" })) === "42501");
+  for (const col of ["guild_id = gen_random_uuid()", "created_by = null", "updated_by = null", "created_at = now()", "updated_at = now()"]) {
+    check(`no caller writes ${col.split(" ")[0]} on a comp (column grants)`,
+          await code("authenticated", C, `update public.comp_templates set ${col} where id = $1`, [t.id]) === "42501");
+  }
+  check("a caller edits a slot's role directly; nobody moves a slot's position",
+        await affected("authenticated", H, "update public.comp_template_slots set role = 'stopper' where template_id = $1 and position = 1", [t.id]) === 1
+        && await code("authenticated", H, "update public.comp_template_slots set position = 9 where template_id = $1 and position = 1", [t.id]) === "42501");
+
+  /* bounds and deletion */
+  {
+    let made = 1, err = "ok";
+    for (let i = 0; i < 105 && err === "ok"; i++) {
+      err = await saveCode(H, T({ name: `Comp ${i}`, slots: [] }));
+      if (err === "ok") made++;
+    }
+    check("a guild keeps at most 100 comps (the guard)", made === 100 && err === "23514", { made, err });
+    check("a comp holds at most 60 slots (the function)",
+          await saveCode(H, T({ id: t.id, slots: Array.from({ length: 61 }, (_, i) => ({ position: i + 1 })) })) === "23514");
+  }
+  check("a caller deletes a comp; its slots go with it",
+        await affected("authenticated", H, "delete from public.comp_templates where id = $1", [t.id]) === 1
+        && Number((await db.query("select count(*) from public.comp_template_slots where template_id = $1", [t.id])).rows[0].count) === 0);
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [H]);
+  const orphan = (await db.query("select count(*)::int as n, count(created_by)::int as by from public.comp_templates where guild_id = $1", [gd.id])).rows[0];
+  check("deleting a caller's account keeps the comps, their created_by null", orphan.n === 99 && orphan.by === 0, orphan);
+  check("deleting the guild removes its comps",
+        await affected("authenticated", C, "delete from public.guilds where id = $1", [gd.id]) === 1
+        && Number((await db.query("select count(*) from public.comp_templates where guild_id = $1", [gd.id])).rows[0].count) === 0);
+  check("no API role calls the comp guard", await code("authenticated", C, "select public.comp_templates_guard()") === "42501");
+}
+
 } catch (e) {
   fail++;
   console.log("FAIL  the run stopped: " + (e.stack || e.message));

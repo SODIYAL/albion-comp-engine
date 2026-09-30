@@ -767,6 +767,52 @@ i_guild = script_at(lambda a, b: "function loadMyGuilds" in b)
 check(0 <= i_profile < i_guild, "L29n the guilds module loads after the profile, in its own <script>",
       "script indices profile=%d guild=%d" % (i_profile, i_guild))
 
+print("L30 - saved comps: the planner is reached through the address bar alone")
+# A comp template is saved from the planner's share hash and opened by
+# setting it: the account layer reads no planner state, the planner never
+# calls the account layer, and the one bridge is the link the planner
+# already publishes (the loadout codec, tests/test_loadout_codec.js).
+COMPS_JS = read("_comps.js")
+cdlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog"', "</dialog>", "L30 dialog anchors")
+check('aria-modal="true"' in cdlg and 'aria-labelledby="comp-title"' in cdlg and 'id="comp-title"' in cdlg,
+      "L30a the saved comps dialog is modal and titled")
+for fid in ("comp-guild", "comp-name", "comp-content", "comp-style", "comp-size", "comp-notes"):
+    check(('id="%s"' % fid) in cdlg and ('for="%s"' % fid) in cdlg, "L30b field %s has its label" % fid)
+check('role="alert"' in cdlg and 'aria-live="polite"' in cdlg, "L30c errors and changes are announced, inside the dialog")
+check('id="comp-slots"' in cdlg and cdlg.count("<th scope=\"col\">") == 5, "L30d the slot table has its five column headers")
+check('id="acct-comps"' in SHELL[SHELL.find('id="acct-guilds"'):SHELL.find('id="acct-logout"')],
+      "L30e the account menu offers Saved comps between Guilds and Log out")
+check("el.compsItem" in AUTH_JS and "views.comps" in AUTH_JS, "L30f the account UI shows the item once the module registered its view")
+check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT", COMPS_JS),
+      "L30g _comps.js reads and writes no planner or engine state")
+check("location.hash" in COMPS_JS and "hashchange" in APP and "loadHash()" in APP[APP.find('addEventListener("hashchange"'):],
+      "L30h the bridge is the share hash: the module reads and sets location.hash, the planner applies a hash change")
+comps_ui = COMPS_JS[COMPS_JS.find("(function compsUI()"):]
+check(comps_ui != "" and "window.DB" not in comps_ui and "createClient" not in COMPS_JS,
+      "L30i the comps UI calls its helpers, never the Supabase client")
+check('window.Account.registerView("comps"' in COMPS_JS and "window.Account.subscribe(" in COMPS_JS,
+      "L30j the comps module reaches identity through window.Account")
+check("weaponInfo(" in COMPS_JS and "role_class" not in COMPS_JS,
+      "L30k slot roles are read through the catalog: one role read, no engine")
+check(not re.search(r"loadGuildTemplates|loadTemplate|saveTemplate|deleteTemplate|parseShareHash|templateHash", APP + DECISION_JS),
+      "L30l the planner never calls the comps module")
+check(all(s in AUTH_CSS for s in (".comp-dialog{", ".cp-fields{", ".cp-table td{")),
+      "L30m the comps dialog is styled in _auth.css")
+check(".cp-fields{grid-template-columns:repeat(2, 1fr)}" in LAYOUT, "L30n on a phone the comp's fields stack in two columns (_layout.css)")
+i_comps = script_at(lambda a, b: "const ACCOUNT_CONTENTS" in b)
+check(0 <= i_guild < i_comps, "L30o the comps module loads after the guilds module, in its own <script>",
+      "script indices guild=%d comps=%d" % (i_guild, i_comps))
+m_c = re.search(r"const ACCOUNT_CONTENTS = (\{.*?\});\n", SCRIPTS[i_comps][1]) if i_comps >= 0 else None
+m_s = re.search(r"const ACCOUNT_STYLES = (\{.*?\});\n", SCRIPTS[i_comps][1]) if i_comps >= 0 else None
+with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"), encoding="utf-8") as f:
+    _ds = _json.load(f)
+CONTENTS = _json.loads(m_c.group(1)) if m_c else {}
+STYLES = _json.loads(m_s.group(1)) if m_s else {}
+check(sorted(CONTENTS) == sorted(_ds["templates"]) and all(CONTENTS[k] == (_ds["templates"][k].get("name") or k) for k in CONTENTS),
+      "L30p the contents on offer are the dataset's templates, by name")
+check(sorted(STYLES) == sorted(k for k in _ds.get("styles", {}) if k != "balanced"),
+      "L30q the styles on offer are the dataset's, balanced being the absence of one")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

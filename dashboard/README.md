@@ -129,12 +129,27 @@ and its tests: `supabase/README.md`.
   removals the caller's role allows, and the admin's rename, leave and
   delete. A write the server refused comes back as no row; the helpers
   report it (`refused`), never swallow it.
+- **`_comps.js`** (platform phase 3) keeps a guild's comp templates:
+  helpers over `comp_templates`, `comp_template_slots` and
+  `save_comp_template`; pure functions for the planner's share hash (read
+  into a template, written back as the hash the planner opens), slot
+  normalization, the role summary, validation, who writes (callers,
+  officers, admins) and error wording (`tests/test_comps.js`); and the
+  saved comps dialog (`registerView("comps")`). Its one contact with the
+  planner is the address bar: "Save the planner's comp" reads
+  `location.hash` (the share link the planner already publishes, the
+  loadout codec's `c=`, `n=`, `st=`, `p=`, `g=`, `f=`, `k=`) and "Open in
+  planner" sets it, which the planner applies as it applies a pasted link.
+  The saved hash is kept whole, so kits and spell picks come back while the
+  roster still matches the slots; a changed roster opens as a plain link.
+  `ACCOUNT_CONTENTS` and `ACCOUNT_STYLES` (built beside it) are the
+  dataset's content and style names, the planner's own vocabulary.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js`, `_profile.js` and `_guild.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js`, `_guild.js` and `_comps.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -147,11 +162,12 @@ and its tests: `supabase/README.md`.
 - The session persists in `localStorage` (supabase-js); `onAuthStateChange`
   keeps the button in step with other tabs.
 
-`tests/test_auth_ui.js`, `tests/test_profile.js` and `tests/test_guild.js`
-pin validation, error wording, the name fallback, link parsing, the weapon
-lists and search, the member table and role powers, and what the helpers
-send; `test_dashboard_layout.py` L27–L29 pin the markup, the isolation,
-the boundary and the catalog.
+`tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js` and
+`tests/test_comps.js` pin validation, error wording, the name fallback,
+link parsing, the weapon lists and search, the member table and role
+powers, the share hash both ways, and what the helpers send;
+`test_dashboard_layout.py` L27–L30 pin the markup, the isolation, the
+boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also
 works from `file://`, but automated browsers block it).

@@ -1913,6 +1913,7 @@ window.AUTH_LINK = "";
   </div>
   <button type="button" class="acct-item" id="acct-profile">Profile</button>
   <button type="button" class="acct-item" id="acct-guilds">Guilds</button>
+  <button type="button" class="acct-item" id="acct-comps">Saved comps</button>
   <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
   <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
 </div>
@@ -2190,6 +2191,102 @@ window.AUTH_LINK = "";
             <button type="button" class="gd-btn danger" id="guild-delete" hidden>Delete guild</button>
           </div>
         </div>
+      </section>
+    </div>
+  </div>
+</dialog>
+
+<!-- The saved comps dialog (_comps.js): a guild's comp templates down the
+     side, the open comp across the main column: its name, content, style,
+     size and notes, how many slots bring each role, the slot table with
+     the caller's role labels and notes, and the buttons that save it from
+     or open it in the planner through the address bar's share hash. -->
+<dialog class="auth-dialog guild-dialog comp-dialog" id="comp-dialog" aria-modal="true" aria-labelledby="comp-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="comp-title">Saved comps</h2>
+      </div>
+      <button type="button" class="auth-close" id="comp-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="comp-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="comp-notice" role="status" hidden></p>
+    <p class="sr-only" id="comp-live" aria-live="polite"></p>
+
+    <div class="gd-grid">
+      <aside class="gd-side">
+        <div class="auth-field">
+          <label for="comp-guild">Guild</label>
+          <select id="comp-guild"></select>
+        </div>
+        <h3 class="pw-label" id="comp-list-label">Comps</h3>
+        <ul class="gd-list" id="comp-list" aria-labelledby="comp-list-label"></ul>
+        <p class="auth-hint" id="comp-list-note" hidden></p>
+        <button type="button" class="auth-submit" id="comp-from-planner" hidden>Save the planner's comp</button>
+        <p class="auth-hint">Build the comp in the planner first; its kits and spell picks are kept with it.</p>
+      </aside>
+
+      <section class="gd-main">
+        <p class="gd-empty" id="comp-empty">Pick a comp, or save the planner's current one.</p>
+        <form class="auth-form" id="comp-form" novalidate>
+          <div id="comp-view" hidden>
+            <div class="cp-fields">
+              <div class="auth-field cp-wide">
+                <label for="comp-name">Comp name</label>
+                <input class="text-input" id="comp-name" maxlength="64" type="text" spellcheck="false"
+                  aria-describedby="comp-name-err">
+                <p class="auth-field-err" id="comp-name-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="comp-content">Content</label>
+                <select id="comp-content" aria-describedby="comp-content-err"></select>
+                <p class="auth-field-err" id="comp-content-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="comp-style">Style</label>
+                <select id="comp-style" aria-describedby="comp-style-err"></select>
+                <p class="auth-field-err" id="comp-style-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="comp-size">Planned size</label>
+                <input class="text-input" id="comp-size" type="number" min="2" max="60" step="1" inputmode="numeric"
+                  aria-describedby="comp-size-err">
+                <p class="auth-field-err" id="comp-size-err"></p>
+              </div>
+              <div class="auth-field cp-wide">
+                <label for="comp-notes">Notes <span class="opt">optional</span></label>
+                <textarea class="text-input cp-notes" id="comp-notes" maxlength="1000" rows="2"></textarea>
+              </div>
+            </div>
+            <p class="gd-meta" id="comp-meta"></p>
+            <div class="gd-coverage" id="comp-summary" aria-label="Slots per role"></div>
+            <p class="auth-hint" id="comp-slots-note" hidden></p>
+            <table class="gd-table cp-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Weapon</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Note</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="comp-slots"></tbody>
+            </table>
+            <div class="gd-foot cp-foot">
+              <div class="cp-foot-l">
+                <button type="button" class="gd-btn" id="comp-open">Open in planner</button>
+                <button type="button" class="gd-btn" id="comp-replace" hidden>Replace slots from planner</button>
+                <button type="button" class="gd-btn danger" id="comp-delete" hidden>Delete</button>
+              </div>
+              <div class="profile-actions cp-foot-r">
+                <button class="auth-submit" id="comp-save" type="submit" hidden>Save comp</button>
+                <span class="profile-dirty" id="comp-dirty" hidden>Unsaved changes</span>
+              </div>
+            </div>
+          </div>
+        </form>
       </section>
     </div>
   </div>
