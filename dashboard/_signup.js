@@ -17,9 +17,17 @@
  * after _events.js. It reads no planner state and never calls the engine;
  * an event opens in the planner through the share hash, as a comp does.
  *
+ * The caller runs the sheet from the same dialog (phase 6): a caller,
+ * officer or admin of the CTA's guild moves players between slots and
+ * the reserves (a held slot swaps), removes sign-ups, adds a player by
+ * name, changes a slot's weapon and moves the status, until the CTA is
+ * completed. The database decides; the client offers what the policies
+ * allow (callerPowers).
+ *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (event_by_code,
- *             sign_up, cancel_sign_up)
+ *             sign_up, cancel_sign_up; the caller's move_signup,
+ *             add_player, a removal, a slot's weapon)
  *   pure    - the link and the code, the claim token, the board (slots
  *             with their claimants, the reserves, what is free),
  *             validation, the payload, error wording (tests/test_signup.js)
@@ -65,6 +73,77 @@ async function cancelSignUp(code, token) {
   }
 
   return data === true;
+}
+
+
+/* ---- the caller's helpers (phase 6): the caller roles, until completed ---- */
+
+/* a player to a slot (swapping with its holder), or to the reserves */
+async function moveSignup(signupId, position) {
+  const { data, error } = await window.DB.rpc("move_signup", {
+    signup_id: signupId, target: position === "" || position == null ? null : Number(position)
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* a player the caller writes onto the sheet, by name */
+async function addPlayer(eventId, player) {
+  const { data, error } = await window.DB.rpc("add_player", {
+    event_id: eventId, player: signupPayload(player)
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* a sign-up removed by the caller (or the player: their own) */
+async function removeSignup(signupId) {
+  const { data, error } = await window.DB
+    .from("signups")
+    .delete()
+    .eq("id", signupId)
+    .select("id");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
+}
+
+
+/* a slot's weapon (null: any weapon) */
+async function setSlotWeapon(eventId, position, weaponId) {
+  const { data, error } = await window.DB
+    .from("event_slots")
+    .update({ weapon_id: weaponId || null })
+    .eq("event_id", eventId)
+    .eq("position", position)
+    .select("position");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
 }
 
 
@@ -211,6 +290,49 @@ function weaponsFromLists(lists) {
 }
 
 
+/* what the caller's role does with the sheet: the policies' caller
+   roles, until the CTA is completed; the status moves are the guard's */
+function callerPowers(myRole, status) {
+  const write = compPowers(myRole).write;
+  return {
+    manage: write && !!status && status !== "completed",
+    moves: eventPowers(myRole, { status }).moves
+  };
+}
+
+
+/* where a sign-up can be moved: the reserves, every other slot (a held
+   one is a swap with its holder) */
+function moveTargets(board, signup, catalog) {
+  const own = signup && signup.position != null ? signup.position : null;
+  const targets = [{ value: "", label: own == null ? "Reserve (here)" : "To the reserves" }];
+  for (const row of board.rows) {
+    if (row.position === own) continue;
+    const weapon = row.weapon_id ? weaponInfo(catalog, row.weapon_id).name : "any weapon";
+    targets.push({
+      value: String(row.position),
+      label: `${row.position} · ${weapon}` + (row.claimant ? ` · swap with ${row.claimant.player_name}` : "")
+    });
+  }
+  return targets;
+}
+
+
+/* the catalog as a slot's weapon list, one group per role (the catalog's
+   role class: one role read), names in order */
+function weaponOptions(catalog) {
+  const groups = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], weapons: [] }));
+  const other = { role: "other", name: "Other", weapons: [] };
+  for (const [key, entry] of Object.entries(catalog || {})) {
+    if (!entry || entry.removed) continue;
+    const group = groups.find(g => g.role === entry.role) || other;
+    group.weapons.push({ key, name: entry.name || key });
+  }
+  for (const group of groups.concat(other)) group.weapons.sort((a, b) => a.name.localeCompare(b.name));
+  return groups.concat(other).filter(g => g.weapons.length);
+}
+
+
 const SIGNUP_MSG = {
   network: PROFILE_MSG.network,
   session: PROFILE_MSG.session,
@@ -312,7 +434,13 @@ function signupErrorMessage(err) {
     cancel: $id("su-cancel"),
     refresh: $id("su-refresh"),
     open: $id("su-open"),
-    link: $id("su-link")
+    link: $id("su-link"),
+    callerWrap: $id("su-caller"),
+    callerMoves: $id("su-caller-moves"),
+    addForm: $id("su-add-form"),
+    addName: $id("su-add-name"),
+    addSlot: $id("su-add-slot"),
+    add: $id("su-add")
   };
 
   const FIELDS = { playerName: el.name, position: el.slot, itemPower: el.ip, note: el.note };
@@ -321,6 +449,9 @@ function signupErrorMessage(err) {
   let code = null;             /* the CTA on the sheet */
   let sheet = null;            /* event_by_code's answer */
   let weapons = [];            /* the weapons declared, as edited */
+  let myRole = null;           /* the caller's role in the CTA's guild, when signed in */
+  let roleGuild = null;        /* the guild that role was read for */
+  let caller = callerPowers(null, null);
   let busy = false;
   let openSeq = 0;
   let booted = false;
@@ -441,6 +572,8 @@ function signupErrorMessage(err) {
     el.counts.textContent = `${board.counts.claimed} of ${board.counts.slots} slot${board.counts.slots === 1 ? "" : "s"} claimed`
       + (board.counts.reserves ? `, ${board.counts.reserves} reserve${board.counts.reserves === 1 ? "" : "s"}` : "");
 
+    caller = callerPowers(myRole, ev.status);
+
     el.board.replaceChildren(...board.rows.map(row => {
       const tr = document.createElement("tr");
       if (row.claimant && row.claimant.id === mineId) tr.className = "su-mine";
@@ -449,11 +582,13 @@ function signupErrorMessage(err) {
       pos.textContent = String(row.position);
       const weapon = document.createElement("td");
       weapon.className = "cp-weapon";
-      weapon.append(weaponCell(row.weapon_id));
+      weapon.append(caller.manage ? slotWeaponSelect(row) : weaponCell(row.weapon_id));
       const role = document.createElement("td");
       role.className = "su-role";
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
-      tr.append(pos, weapon, role, playerCell(row.claimant, row.claimant && row.claimant.id === mineId));
+      const player = playerCell(row.claimant, row.claimant && row.claimant.id === mineId);
+      if (caller.manage && row.claimant) player.append(manageControls(board, row.claimant));
+      tr.append(pos, weapon, role, player);
       return tr;
     }));
 
@@ -465,8 +600,11 @@ function signupErrorMessage(err) {
         [s.item_power ? ` · ${s.item_power} IP` : "", s.can_swap ? " · can swap" : "", s.account ? "" : " · guest",
          s.weapons && s.weapons.length ? ` · ${s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ")}` : "",
          s.note ? ` · ${s.note}` : ""].join("")));
+      if (caller.manage) li.append(manageControls(board, s));
       return li;
     }));
+
+    renderCaller(board);
 
     /* the slot choice: the free slots and the player's own */
     const own = sheet.mine && sheet.mine.position != null ? sheet.mine.position : null;
@@ -666,6 +804,177 @@ function signupErrorMessage(err) {
   });
 
 
+  /* ---- the caller's controls (phase 6) ---- */
+
+  const WEAPON_GROUPS = weaponOptions(CATALOG);
+
+  function slotWeaponSelect(row) {
+    const select = document.createElement("select");
+    select.className = "su-slot-weapon";
+    select.dataset.suSlotWeapon = String(row.position);
+    select.setAttribute("aria-label", `slot ${row.position}: weapon`);
+    const any = document.createElement("option");
+    any.value = "";
+    any.textContent = "any weapon";
+    select.append(any);
+    for (const group of WEAPON_GROUPS) {
+      const og = document.createElement("optgroup");
+      og.label = group.name;
+      for (const w of group.weapons) {
+        const o = document.createElement("option");
+        o.value = w.key;
+        o.textContent = w.name;
+        og.append(o);
+      }
+      select.append(og);
+    }
+    if (row.weapon_id && !CATALOG[row.weapon_id]) {
+      const o = document.createElement("option");
+      o.value = row.weapon_id;
+      o.textContent = `${row.weapon_id} (unknown weapon)`;
+      select.append(o);
+    }
+    select.value = row.weapon_id || "";
+    return select;
+  }
+
+  function manageControls(board, s) {
+    const wrap = document.createElement("span");
+    wrap.className = "su-manage";
+    const move = document.createElement("select");
+    move.className = "su-move";
+    move.dataset.suMove = s.id;
+    move.setAttribute("aria-label", `move ${s.player_name}`);
+    for (const t of moveTargets(board, s, CATALOG)) {
+      const o = document.createElement("option");
+      o.value = t.value;
+      o.textContent = t.label;
+      move.append(o);
+    }
+    move.value = s.position != null ? String(s.position) : "";
+    if (s.position != null) {
+      /* the held slot is not a target: the first option says where the player is */
+      const here = document.createElement("option");
+      here.value = String(s.position);
+      here.textContent = `Slot ${s.position} (here)`;
+      move.prepend(here);
+      move.value = String(s.position);
+    }
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "gd-btn danger";
+    remove.dataset.suDrop = s.id;
+    remove.dataset.suName = s.player_name;
+    remove.setAttribute("aria-label", `remove ${s.player_name}`);
+    remove.textContent = "×";
+    wrap.append(move, remove);
+    return wrap;
+  }
+
+  function renderCaller(board) {
+    el.callerWrap.hidden = !caller.manage && !caller.moves.length;
+    el.callerMoves.replaceChildren(...caller.moves.map(to => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "gd-btn";
+      b.dataset.suStatus = to;
+      b.textContent = EVENT_MOVE_LABELS[to] || to;
+      return b;
+    }));
+    el.addForm.hidden = !caller.manage;
+    const chosen = el.addSlot.value;
+    el.addSlot.replaceChildren(...[["", "Reserve (no slot)"]].concat(board.rows.filter(r => !r.claimant)
+      .map(r => [String(r.position), `${r.position} · ${r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "any weapon"}`]))
+      .map(([value, label]) => {
+        const o = document.createElement("option");
+        o.value = value;
+        o.textContent = label;
+        return o;
+      }));
+    el.addSlot.value = [...el.addSlot.options].some(o => o.value === chosen) ? chosen : "";
+  }
+
+  async function act(button, label, work, done) {
+    if (busy) return;
+    busy = true;
+    if (button) acctBusy(button, label);
+    try {
+      const result = await work();
+      await reload(true);
+      if (done) showNotice(done(result));
+    } catch (err) {
+      showError(signupErrorMessage(err));
+      if (["taken", "noSlot", "refused"].includes(signupErrorKind(err))) await reload(true);
+    } finally {
+      busy = false;
+      if (button) acctIdle(button);
+    }
+  }
+
+  el.board.addEventListener("change", e => {
+    const t = e.target;
+    if (t.dataset.suMove !== undefined) {
+      const id = t.dataset.suMove;
+      const name = (sheet.signups.find(s => s.id === id) || {}).player_name || "the player";
+      act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
+    } else if (t.dataset.suSlotWeapon !== undefined) {
+      const position = Number(t.dataset.suSlotWeapon);
+      act(null, "", () => setSlotWeapon(sheet.event.id, position, t.value),
+          () => `Slot ${position}: ${t.value ? weaponInfo(CATALOG, t.value).name : "any weapon"}.`);
+    }
+  });
+  el.reserves.addEventListener("change", e => {
+    const t = e.target;
+    if (t.dataset.suMove === undefined) return;
+    const id = t.dataset.suMove;
+    const name = (sheet.signups.find(s => s.id === id) || {}).player_name || "the player";
+    act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
+  });
+  for (const list of [el.board, el.reserves]) {
+    list.addEventListener("click", e => {
+      const b = e.target.closest("[data-su-drop]");
+      if (!b || busy || !caller.manage) return;
+      if (!window.confirm(`Remove ${b.dataset.suName} from the sheet?`)) return;
+      act(b, "…", () => removeSignup(b.dataset.suDrop), () => `${b.dataset.suName} was removed.`);
+    });
+  }
+
+  el.callerMoves.addEventListener("click", e => {
+    const b = e.target.closest("[data-su-status]");
+    if (!b || busy || !sheet) return;
+    const to = b.dataset.suStatus;
+    if (!caller.moves.includes(to)) return;
+    if (to === "completed" && !window.confirm("Mark the CTA completed? The sheet is kept as it is and cannot change again.")) return;
+    act(b, "Changing…", () => setEventStatus(sheet.event.id, to), r => `${sheet.event.name}: ${EVENT_STATUS_NAMES[r.status] || r.status}.`);
+  });
+
+  el.addForm.addEventListener("submit", e => {
+    e.preventDefault();
+    if (busy || !sheet || !caller.manage) return;
+    const name = el.addName.value.trim();
+    if (!name) { acctFlagFields({ playerName: el.addName }, { playerName: "Name the player." }); el.addName.focus(); return; }
+    if (nameLength(name) > ACCOUNT_NAME_MAX) { acctFlagFields({ playerName: el.addName }, { playerName: `Use at most ${ACCOUNT_NAME_MAX} characters.` }); return; }
+    const position = el.addSlot.value;
+    act(el.add, "Adding…", () => addPlayer(sheet.event.id, { playerName: name, position, weapons: [] }), r => {
+      el.addName.value = "";
+      return r.position != null ? `${r.player_name} holds slot ${r.position}.` : `${r.player_name} is a reserve.`;
+    });
+  });
+
+  /* the caller's role in the CTA's guild, read once per guild */
+  async function readRole() {
+    if (!sheet || !sheet.guild || isGuest()) { myRole = null; roleGuild = null; return; }
+    if (roleGuild === sheet.guild.id) return;
+    try {
+      const mine = await loadMyGuilds();
+      myRole = (mine.find(g => g.guild.id === sheet.guild.id) || {}).role || null;
+    } catch (err) {
+      myRole = null;
+    }
+    roleGuild = sheet.guild.id;
+  }
+
+
   /* ---- loading ---- */
 
   async function reload(keepForm) {
@@ -688,6 +997,8 @@ function signupErrorMessage(err) {
     if (seq !== openSeq) return;
 
     sheet = next;
+    await readRole();
+    if (seq !== openSeq) return;
     renderBoard();
     if (!keepForm || sheet.mine) fillForm();
     renderForm();
@@ -709,6 +1020,7 @@ function signupErrorMessage(err) {
     el.reservesWrap.hidden = true;
     el.form.hidden = true;
     el.closed.hidden = true;
+    el.callerWrap.hidden = true;
     clearMessages();
     if (!dialog.open) dialog.showModal();
 

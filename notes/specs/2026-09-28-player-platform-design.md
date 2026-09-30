@@ -1,9 +1,9 @@
 # Player platform — design (2026-09-28)
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
-phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs) and phase 5
-(sign-up) implemented 2026-09-30; phases 6–12 open (`BACKLOG.md`
-"Platform"). The schema and its rules:
+phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
+(sign-up) and phase 6 (caller management) implemented 2026-09-30; phases
+7–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -67,9 +67,10 @@ roles.
    Guests sign up through the CTA's link; an account gets the better
    experience (named after its character, profile weapons offered,
    history kept, the guest sign-up its browser made adopted).
-6. **Caller management** — move, remove, lock, change weapon, reserves,
-   promote, close and reopen sign-up: each a function under the caller's
-   guild role.
+6. **Caller management** (implemented) — move (a held slot swaps),
+   remove, add a player by name, change a slot's weapon, promote a
+   reserve, lock, reopen and complete: on the sheet, under the caller's
+   guild role, until the CTA is completed.
 7. **Live updates** — Supabase Realtime on slots and sign-ups; the database
    enforces the concurrency, the channel only reports it.
 8. **History** — attendance (`signed_up`, `confirmed`, `attended`,
@@ -323,6 +324,34 @@ roles.
 - **Deferred**: caller controls on the sheet (phase 6), Realtime
   (phase 7), a guest's history joining an account made elsewhere, a
   guild-scoped name search for callers filling slots.
+
+## Phase 6 decisions
+
+- **The caller runs the sheet from the sheet.** The controls live in
+  the sign-up dialog, offered to a caller, officer or admin of the CTA's
+  guild (`callerPowers`: the policies' roles, until completed): a move
+  list beside every sign-up, a removal, a weapon list on every slot,
+  add-a-player, the status moves. No second surface.
+- **The policies gain a caller branch; a guard keeps the player.** The
+  sheet's insert, update and delete policies admit the caller roles
+  until the CTA is completed beside the player's own row. The caller's
+  grants on the identity columns (the phase 5 adoption needs them) buy
+  no other change: the guard refuses any change to `user_id` or the
+  hash that is not a guest row becoming the calling account's.
+- **A move onto a held slot is a swap in one transaction**
+  (`move_signup`): the holder steps to the mover's old place, through
+  the reserves, so the slot index never sees two holders. A player
+  moving their own row cannot swap another out (the holder's update is
+  refused and the transaction rolls back).
+- **A player the caller adds is a guest row nobody holds a token for**
+  (`add_player`, the hash of a random UUID): the caller alone changes
+  them, and the row reads as a guest on the sheet. A caller writing
+  from Discord needs no account for the player.
+- **Locked still lets the caller work.** Players stop signing up and
+  changing at lock; the caller still moves, adds and removes, and a
+  player still cancels. Completed freezes the sheet for everyone.
+- **Deferred**: bulk moves, a caller's note on a player, attendance
+  marks (phase 8), Realtime (phase 7).
 
 ## Open questions
 

@@ -829,6 +829,96 @@ const code_ = code;
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
 }
 
+/* 12 - caller management: moves, swaps, removals and added players, by the caller roles until completed */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const Y2 = "00000000-0000-4000-8000-000000000015";
+  await signUp(K2, { albion_name: "Kay Two" });
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Callers", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Managed CTA", starts_at: "2026-10-04T18:00:00Z", content: "castle", status: "draft",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }]
+  })]))[0];
+  await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+  const CODE = ev.share_code;
+  const T1 = "1".repeat(32);
+  const up = (role, sub, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [CODE, token, JSON.stringify(payload)]).then(r => r[0].s);
+  const move = (sub, id, target) => rows("authenticated", sub, "select public.move_signup($1, $2) as m", [id, target]).then(r => r[0].m);
+  const moveCode = (sub, id, target) => code_("authenticated", sub, "select public.move_signup($1, $2)", [id, target]);
+  const add = (sub, payload) => rows("authenticated", sub, "select public.add_player($1, $2::jsonb) as a", [ev.id, JSON.stringify(payload)]).then(r => r[0].a);
+  const addCode = (sub, payload) => code_("authenticated", sub, "select public.add_player($1, $2::jsonb)", [ev.id, JSON.stringify(payload)]);
+  const posOf = async id => (await db.query("select position from public.signups where id = $1", [id])).rows[0].position;
+
+  const g1 = await up("anon", null, T1, { player_name: "Gus", position: 1 });
+  const f1 = await up("authenticated", F, null, { position: 2 });
+  const disc = await add(K2, { player_name: " Disc ", position: 3, weapons: ["2H_HOLYSTAFF"], item_power: 1100 });
+  check("a caller adds a player by name: a guest row nobody holds a token for, on the slot named",
+        disc && disc.player_name === "Disc" && disc.position === 3 && same(disc.weapons, ["2H_HOLYSTAFF"])
+        && (await db.query("select user_id, guest_token_hash from public.signups where id = $1", [disc.id])).rows[0].user_id === null
+        && (await db.query("select guest_token_hash from public.signups where id = $1", [disc.id])).rows[0].guest_token_hash.length === 64, disc);
+  check("a player needs a name; a taken slot is refused; a member adds nobody",
+        await addCode(K2, { position: null }) === "23502" && await addCode(K2, { player_name: "Dup", position: 1 }) === "23505"
+        && await addCode(F, { player_name: "Mine" }) === "42501");
+  check("a member moves and removes nobody else's sign-up",
+        await moveCode(F, g1.id, null) === "42501" && await posOf(g1.id) === 1
+        && await affected("authenticated", F, "delete from public.signups where id = $1", [g1.id]) === 0
+        && await affected("authenticated", F, "update public.signups set item_power = 1 where id = $1", [g1.id]) === 0);
+  check("a caller moves a player to the reserves and back",
+        (await move(K2, g1.id, null)).position === null && await posOf(g1.id) === null
+        && (await move(K2, g1.id, 1)).position === 1 && await posOf(g1.id) === 1);
+  const swapped = await move(K2, g1.id, 2);
+  check("a caller moves a player onto a held slot: the two swap in one transaction",
+        swapped.position === 2 && swapped.swapped === f1.id && await posOf(g1.id) === 2 && await posOf(f1.id) === 1, swapped);
+  check("a move to the slot already held is a no-op", (await move(K2, g1.id, 2)).position === 2 && await posOf(f1.id) === 1);
+  check("a player moves their own row while open, but cannot swap another player out",
+        await moveCode(F, f1.id, 3) === "42501" && await posOf(f1.id) === 1 && await posOf(disc.id) === 3
+        && (await move(F, f1.id, null)).position === null && await posOf(f1.id) === null);
+  check("a move to a slot the roster lacks is refused; an unknown sign-up is not found",
+        await moveCode(K2, g1.id, 9) === "23503" && await moveCode(K2, "00000000-0000-4000-8000-0000000000ff", 1) === "P0002");
+  check("a caller edits a player's fields and cannot rewrite the player (the guard)",
+        await affected("authenticated", K2, "update public.signups set item_power = 1234, note = 'late' where id = $1", [disc.id]) === 1
+        && await code_("authenticated", K2, "update public.signups set user_id = $2 where id = $1", [g1.id, K2]) === "42501"
+        && await code_("authenticated", K2, "update public.signups set guest_token_hash = repeat('9', 64) where id = $1", [g1.id]) === "42501"
+        && await code_("authenticated", K2, "update public.signups set user_id = null, guest_token_hash = repeat('9', 64) where id = $1", [f1.id]) === "42501");
+  await signUp(Y2, { albion_name: "Gus" });
+  check("the adoption still passes the guard: the guest row becomes the account's",
+        (await up("authenticated", Y2, T1, {})).id === g1.id
+        && (await db.query("select user_id from public.signups where id = $1", [g1.id])).rows[0].user_id === Y2);
+  check("a caller changes a slot's weapon; a member does not",
+        await affected("authenticated", K2, "update public.event_slots set weapon_id = 'MAIN_HOLYSTAFF_AVALON' where event_id = $1 and position = 3", [ev.id]) === 1
+        && await affected("authenticated", F, "update public.event_slots set weapon_id = '2H_BOW' where event_id = $1 and position = 3", [ev.id]) === 0);
+
+  /* locked: the caller still manages, players stop */
+  await run("authenticated", C, "update public.events set status = 'locked' where id = $1", [ev.id]);
+  const late = await add(K2, { player_name: "Late" });
+  check("once locked, a caller still adds a player", late && late.position === null, late);
+  const lateMove = await move(K2, late.id, 3);
+  check("once locked, a caller still moves a player onto a held slot (a swap)", lateMove.swapped === disc.id && await posOf(disc.id) === null, lateMove);
+  check("once locked, a caller still removes a player", await affected("authenticated", K2, "delete from public.signups where id = $1", [late.id]) === 1);
+  check("once locked, a player signs up no more and moves their own row no more; a non-member without the code sees no sign-up to move",
+        await code_("authenticated", F, "select public.sign_up($1, null, '{}'::jsonb)", [CODE]) === "55000"
+        && await moveCode(F, f1.id, 1) === "42501" && await posOf(f1.id) === null
+        && await moveCode(Y2, g1.id, 1) === "P0002");
+  check("a caller removes a player", await affected("authenticated", K2, "delete from public.signups where id = $1", [disc.id]) === 1);
+
+  /* completed: history */
+  await run("authenticated", C, "update public.events set status = 'completed' where id = $1", [ev.id]);
+  check("a completed sheet is history: no move, no added player, no removal, not by the caller either",
+        await moveCode(K2, g1.id, 1) === "55000" && await addCode(K2, { player_name: "Post" }) === "42501"
+        && await affected("authenticated", K2, "delete from public.signups where id = $1", [g1.id]) === 0
+        && await affected("authenticated", K2, "update public.signups set note = 'x' where id = $1", [g1.id]) === 0);
+  check("no API role calls the caller functions as anon",
+        await code_("anon", null, "select public.move_signup($1, 1::smallint)", [g1.id]) === "42501"
+        && await code_("anon", null, "select public.add_player($1, '{}'::jsonb)", [ev.id]) === "42501");
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+}
+
 } catch (e) {
   fail++;
   console.log("FAIL  the run stopped: " + (e.stack || e.message));

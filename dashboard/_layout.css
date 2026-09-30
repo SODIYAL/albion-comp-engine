@@ -316,6 +316,9 @@
   /* the sign-up sheet: the form under the roster, not beside it */
   .su-grid{grid-template-columns:1fr}
   .su-form-wrap{border-left:0; padding-left:0; padding-top:12px; border-top:1px solid var(--rule)}
+  /* the caller's add-a-player row stacks */
+  .su-add{flex-wrap:wrap}
+  .su-add .auth-field:first-child{flex-basis:100%}
   .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
   .mh-bar .spacer{display:none}
   .mh-bar select{max-width:100%; min-width:0}

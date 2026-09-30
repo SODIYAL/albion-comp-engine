@@ -371,6 +371,19 @@ check(re.search(r"set_config\('app\.share_code', clean, true\)", ALL) is not Non
       and re.search(r"where status = 'open'|e\.status = 'open'", ALL) is not None,
       "DB9j the code and the token ride the statement; a sign-up is written only while the CTA is open")
 
+print("DB10 - caller management: the caller branch, the player kept, the functions")
+check(ALL.count("private.guild_role_of((select e.guild_id from public.events e where e.id = event_id))") >= 4,
+      "DB10a the sheet's insert, update and delete policies carry the caller branch")
+check(re.search(r"new\.user_id is distinct from old\.user_id or new\.guest_token_hash is distinct from old\.guest_token_hash", ALL) is not None
+      and "raise exception 'a sign-up keeps its player'" in ALL,
+      "DB10b the guard keeps every sign-up's player: the identity columns change only for the adoption")
+check("callerPowers" in SIGNUP_JS and "compPowers(myRole).write" in SIGNUP_JS and 'status !== "completed"' in SIGNUP_JS,
+      "DB10c the client offers the caller's controls to the policies' roles, until completed")
+check(re.search(r"function public\.move_signup\(signup_id uuid, target smallint\)", ALL) is not None
+      and re.search(r"function public\.add_player\(event_id uuid, player jsonb\)", ALL) is not None,
+      "DB10d the caller's functions: move_signup (a swap in one transaction) and add_player")
+check("public.claim_hash(gen_random_uuid()::text)" in ALL, "DB10e a player the caller adds is a guest row nobody holds a token for")
+
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

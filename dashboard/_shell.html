@@ -2446,6 +2446,24 @@ window.AUTH_LINK = "";
           <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
         </div>
         <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+        <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
+          <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
+          <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
+          <form class="su-add" id="su-add-form" novalidate hidden>
+            <div class="auth-field">
+              <label for="su-add-name">Add a player by name</label>
+              <input class="text-input" id="su-add-name" maxlength="64" type="text" spellcheck="false" autocomplete="off"
+                placeholder="someone signing up in Discord" aria-describedby="su-add-name-err">
+              <p class="auth-field-err" id="su-add-name-err"></p>
+            </div>
+            <div class="auth-field">
+              <label for="su-add-slot">Slot</label>
+              <select id="su-add-slot"></select>
+            </div>
+            <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
+          </form>
+          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
+        </section>
       </section>
 
       <section class="su-form-wrap" aria-labelledby="su-form-label">

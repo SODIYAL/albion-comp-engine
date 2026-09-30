@@ -349,28 +349,27 @@ lists), phase 2 (guilds: members with roles, the join code, guild-scoped
 reads of profiles and weapon lists, the guilds dialog), phase 3 (saved
 comps: a guild's templates with slots, saved from and opened in the
 planner through the share hash), phase 4 (CTAs: a guild's events with a
-status, a share code and slots copied from a comp) and phase 5 (sign-up:
+status, a share code and slots copied from a comp), phase 5 (sign-up:
 the sheet a link opens, for guests with a claim token and for accounts)
-are built.
+and phase 6 (caller management on the sheet) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
-  clears their browser loses the claim; the caller's removal (phase 6) is
-  the way out. A Discord login (phase 12) is the stronger identity when it
+  clears their browser loses the claim; the caller removes or moves them
+  (phase 6). A Discord login (phase 12) is the stronger identity when it
   comes.
 - **Enable leaked-password protection** (Supabase Auth, security advisor
   warning). Project dashboard, no code.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 6, caller management**: move, remove, lock, change weapon,
-  reserves, promote; each a function under the caller's guild role. The
-  sheet has no caller controls yet: a caller moves a player by asking
-  them to. Then phases 7–12 in order (the spec).
+- **Phase 7, live updates**: Supabase Realtime on `signups` and
+  `event_slots`; the database enforces the concurrency, the channel only
+  reports it. Then phases 8–12 in order (the spec).
 - **Live sheet**: the sheet refreshes on demand and after each write;
   Supabase Realtime on `signups` (phase 7) makes it live.
 - **Renewing a CTA's share code**: the code is generated at creation and
   never changes; a leaked link needs a new CTA. An admin's renewal (the
-  guild join code's pattern) lands with phase 6.
+  guild join code's pattern) is a later increment if callers ask for it.
 - **A CTA's time zone**: the dialog reads and writes times in the viewer's
   local time and shows the UTC time beside each start. A guild-wide zone,
   or the game's UTC as the field's zone, is a later increment if callers

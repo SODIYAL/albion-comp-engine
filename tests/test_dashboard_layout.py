@@ -878,7 +878,8 @@ check("location.hash" in SIGNUP_JS and "templateHash(" in SIGNUP_JS, "L32j the s
 signup_ui = SIGNUP_JS[SIGNUP_JS.find("(function signupUI()"):]
 check(signup_ui != "" and "window.DB" not in signup_ui and "createClient" not in SIGNUP_JS,
       "L32k the sheet UI calls its helpers, never the Supabase client")
-check('.from("' not in SIGNUP_JS, "L32l the helpers reach the database through functions alone: the code rides each statement")
+check(sorted(set(re.findall(r'\.from\("(\w+)"', SIGNUP_JS))) == ["event_slots", "signups"],
+      "L32l the player's helpers reach the database through functions alone (the code rides each statement); the caller's touch sign-ups and slots")
 check("window.Account.subscribe(" in SIGNUP_JS and 'registerView(' not in SIGNUP_JS,
       "L32m the sheet reads identity through window.Account and is no account-menu view: a guest has no menu")
 check("weaponInfo(" in SIGNUP_JS and "weaponSearch(" in SIGNUP_JS and "role_class" not in SIGNUP_JS,
@@ -893,6 +894,24 @@ check(0 <= i_events < i_signup, "L32r the sign-up module loads after the CTAs mo
       "script indices events=%d signup=%d" % (i_events, i_signup))
 check("localStorage" in SIGNUP_JS and "crypto.getRandomValues" in SIGNUP_JS,
       "L32s the guest's claim token is random and kept in this browser alone")
+
+print("L33 - caller management: the caller runs the sheet from the same dialog")
+# Phase 6: the caller's controls live on the sheet, offered by role and
+# status (callerPowers), and every action is a helper the policies bound.
+check('id="su-caller"' in sdlg and 'id="su-caller-moves"' in sdlg and 'id="su-add-form"' in sdlg,
+      "L33a the sheet carries the caller's section: the status moves and add-a-player")
+for fid in ("su-add-name", "su-add-slot"):
+    check(('id="%s"' % fid) in sdlg and ('for="%s"' % fid) in sdlg, "L33b field %s has its label" % fid)
+check("data-su-move" in SIGNUP_JS.replace("dataset.suMove", "data-su-move") and "dataset.suSlotWeapon" in SIGNUP_JS and "dataset.suDrop" in SIGNUP_JS,
+      "L33c each sign-up gets a move list and a removal, each slot a weapon list, for the caller alone")
+check("callerPowers(myRole, ev.status)" in SIGNUP_JS and "loadMyGuilds()" in SIGNUP_JS,
+      "L33d the caller's role is read through the guild module's helper and decides what the sheet offers")
+check("setEventStatus(" in SIGNUP_JS and "EVENT_MOVE_LABELS" in SIGNUP_JS,
+      "L33e the status moves on the sheet are the CTAs module's helper and labels")
+check("weaponOptions(" in SIGNUP_JS and "role_class" not in SIGNUP_JS and "<optgroup" not in SIGNUP_JS and "optgroup" in SIGNUP_JS,
+      "L33f the slot's weapon list is the catalog grouped by role, built without markup strings")
+check(all(s in AUTH_CSS for s in (".su-caller{", ".su-manage{", ".su-add{")), "L33g the caller's controls are styled in _auth.css")
+check(".su-add{flex-wrap:wrap}" in LAYOUT, "L33h on a phone the add-a-player row wraps (_layout.css)")
 
 if FAILURES:
 

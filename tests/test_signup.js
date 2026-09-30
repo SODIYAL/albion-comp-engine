@@ -178,11 +178,51 @@ const run = expr => vm.runInContext(expr, ctx);
   check("no sign-up to cancel is false", (await run("cancelSignUp")("A1B2C3D4E5", null)) === false);
 
   const src = fs.readFileSync(path.join(DASH, "_signup.js"), "utf8");
-  check("the module reaches the database through its three functions alone", !/\.from\("/.test(src) && /rpc\("event_by_code"/.test(src) && /rpc\("sign_up"/.test(src) && /rpc\("cancel_sign_up"/.test(src));
+  check("the player's path reaches the database through its three functions alone; the caller's touches sign-ups and slots",
+        same([...new Set(src.match(/\.from\("(\w+)"/g))].sort(), ['.from("event_slots"', '.from("signups"'])
+        && /rpc\("event_by_code"/.test(src) && /rpc\("sign_up"/.test(src) && /rpc\("cancel_sign_up"/.test(src)
+        && /rpc\("move_signup"/.test(src) && /rpc\("add_player"/.test(src));
   check("the module touches the planner through the address bar alone",
         /location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
   check("the claim token lives in localStorage and leaves the browser only inside a statement",
         /localStorage\.(getItem|setItem|removeItem)\(claimTokenKey\(/.test(src) && !/console\.log\(.*token/.test(src));
+}
+
+
+/* 6 - the caller (phase 6) */
+{
+  const powers = run("callerPowers");
+  check("a caller, officer or admin manages the sheet until the CTA is completed; a member or a guest does not",
+        powers("caller", "open").manage && powers("officer", "locked").manage && powers("admin", "draft").manage
+        && !powers("admin", "completed").manage && !powers("member", "open").manage && !powers(null, "open").manage && !powers("caller", null).manage);
+  check("the caller's status moves are the guard's", same(powers("caller", "open").moves, ["draft", "locked"]) && same(powers("member", "open").moves, []));
+
+  const CAT = { "2H_LONGBOW": { name: "Longbow", role: "dps", item: "" }, MAIN_MACE_HELL: { name: "Incubus Mace", role: "frontline", item: "" },
+                OLD_THING: { name: "Old", role: "dps", item: "", removed: true }, MYSTERY: { name: "Mystery", role: null, item: "" } };
+  const board = run("sheetBoard")([{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }],
+                                  [{ id: "s1", position: 1, player_name: "Gus" }, { id: "s2", position: null, player_name: "Gil" }]);
+  const targets = run("moveTargets");
+  check("a held player's targets: the reserves and every other slot, a held one as a swap",
+        same(targets(board, board.rows[0].claimant, CAT).map(t => `${t.value}:${t.label}`),
+             [":To the reserves", "2:2 · Incubus Mace", "3:3 · any weapon"]));
+  check("a reserve's targets: every slot, the held one as a swap with its holder",
+        same(targets(board, board.reserves[0], CAT).map(t => `${t.value}:${t.label}`),
+             [":Reserve (here)", "1:1 · Longbow · swap with Gus", "2:2 · Incubus Mace", "3:3 · any weapon"]));
+  const groups = run("weaponOptions")(CAT);
+  check("the slot's weapon list groups the catalog by role, removed lines out, a roleless line under Other",
+        same(groups.map(g => `${g.role}:${g.weapons.map(w => w.key).join(",")}`), ["frontline:MAIN_MACE_HELL", "dps:2H_LONGBOW", "other:MYSTERY"]), groups);
+
+  CALLS.length = 0;
+  REPLY["rpc:move_signup"] = { data: { id: "s1", position: 2, swapped: null }, error: null };
+  await run("moveSignup")("s1", "2");
+  await run("moveSignup")("s1", "");
+  check("moveSignup sends move_signup with a numeric target, or null for the reserves",
+        same(CALLS[0], { rpc: "move_signup", args: { signup_id: "s1", target: 2 } }) && CALLS[1].args.target === null, CALLS);
+  CALLS.length = 0;
+  REPLY["rpc:add_player"] = { data: { id: "s9", position: 3, player_name: "Disc" }, error: null };
+  await run("addPlayer")("e1", { playerName: " Disc ", position: "3", weapons: [] });
+  check("addPlayer sends add_player with the event and the player's payload",
+        CALLS[0].rpc === "add_player" && CALLS[0].args.event_id === "e1" && CALLS[0].args.player.player_name === "Disc" && CALLS[0].args.player.position === 3, CALLS[0]);
 }
 
 console.log(`\n${pass}/${pass + fail} sign-up tests passed`);

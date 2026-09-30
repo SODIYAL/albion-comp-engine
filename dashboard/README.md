@@ -184,7 +184,15 @@ and its tests: `supabase/README.md`.
   token never leaves the browser except inside the statement; the row
   keeps its hash, so this browser alone edits or cancels the sign-up,
   and an account signing up here later adopts it. The sheet is no
-  account-menu view: a guest has no menu.
+  account-menu view: a guest has no menu. The caller runs the sheet from
+  the same dialog (phase 6): a caller, officer or admin of the CTA's
+  guild (the role read through the guild module's helper) gets a move
+  list beside every sign-up (the reserves, every other slot, a held one
+  as a swap), a removal, a weapon list on every slot (the catalog grouped
+  by role), add-a-player by name, and the status moves, until the CTA is
+  completed. `callerPowers` offers what the policies allow; every action
+  is a helper the policies bound (`move_signup`, `add_player`, a
+  removal, a slot's weapon).
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
