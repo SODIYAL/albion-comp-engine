@@ -196,6 +196,8 @@ function parseSlotText(text) {
   if (split.length > 1) {
     s = split[0].trim();
     tail = split.slice(1).join(" - ").trim();
+    /* a tail that is only a tier or an enchantment ("Longbow: 8.3") names nobody */
+    if (!normalizeWeaponText(tail)) tail = "";
   }
   return { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
 }

@@ -207,7 +207,10 @@ and its tests: `supabase/README.md`.
   coming" before completion, and the caller roles get a mark list per
   record any time plus "mark everyone in a slot as attended" once the
   CTA is completed (`markPowers`; `confirm_sign_up`, `mark_attendance`,
-  `mark_all_attended`).
+  `mark_all_attended`). The caller's move list, removal and the
+  record's mark sit on one row under each player; a link naming no
+  CTA, or a CTA deleted under a live sheet, leaves the card with its
+  title and the error alone.
 - **`_history.js`** (platform phase 9) shows the facts over a guild's
   completed CTAs: one helper (`guild_history`, computed on read in the
   database from the attendance record, as the caller); pure functions
@@ -271,7 +274,10 @@ and its tests: `supabase/README.md`.
   the read on the real one). The sheet hands its roster over as a
   `sheet-read` DOM event after every render and clears it on close; the
   read is painted into the sheet's `rr-*` elements, which the sign-up
-  module never touches. Capability words are the planner's own tables
+  module never touches; it is computed again only when the roster's
+  weapons, content or style change (a mark or a note keeps it), and
+  the members' lists are forgotten when the sheet closes. Capability
+  words are the planner's own tables
   (`CAP_LABEL`, `CAP_PROSE`), read at call time. Descriptive, like
   every analyzer in the planner: the engine ranks, the module
   translates; the definitions stand under the read.

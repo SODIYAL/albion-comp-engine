@@ -2219,7 +2219,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .ev-share{font-size:13px}
 
 /* ---- sign-up (_signup.js): the sheet a link opens, the roster beside the player's form ---- */
-.signup-dialog{width:min(980px, calc(100vw - 32px))}
+.signup-dialog{width:min(1040px, calc(100vw - 32px))}
 .su-when{margin-top:4px}
 .su-status-row{margin-bottom:8px}
 .su-counts{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
@@ -2232,15 +2232,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
 .su-board-wrap{min-width:0}
 .su-form-wrap{border-left:1px solid var(--rule); padding-left:18px}
-.su-table td{vertical-align:middle}
+.su-table td{vertical-align:top}
+.su-table .cp-pos, .su-table .su-role{padding-top:9px}
+.su-table .cp-weapon{padding-top:5px}
 .su-weapon{display:inline-flex; align-items:center; gap:5px}
 .su-role{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.su-player .gd-name{display:inline}
 .su-player .gd-sub{margin-top:1px}
 .su-declared{display:block; font-size:11.5px; color:var(--ink-2)}
 .su-free{font-family:var(--mono); font-size:11px; color:var(--role-healer)}
 .su-mine{background:rgba(255,196,84,.06)}
 .su-reserves{margin:4px 0 8px; padding:0; list-style:none; font-size:12.5px}
-.su-reserves li{padding:4px 6px; border-bottom:1px solid var(--rule)}
+.su-reserves li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 10px; padding:6px; border-bottom:1px solid var(--rule)}
+.su-reserves .gd-name{display:inline}
+.su-reserves .gd-sub{display:inline; margin:0}
 .su-link-row{overflow-wrap:anywhere}
 .su-link{padding:0; border:0; background:none; font:inherit; color:var(--amber); text-decoration:underline dotted; cursor:pointer; overflow-wrap:anywhere; text-align:left}
 .su-weapons{margin:4px 0 6px}
@@ -2256,17 +2261,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-add .auth-field{margin:0}
 .su-add .auth-field:first-child{flex:1}
 .su-add-btn{margin-bottom:4px}
-.su-manage{display:flex; align-items:center; gap:6px; margin-top:4px}
+.su-manage{display:inline-flex; align-items:center; gap:6px; margin:0}
 .su-move, .su-slot-weapon{padding:2px 6px; font-size:11.5px; max-width:220px}
-.su-reserves .su-manage{display:inline-flex; margin:0 0 0 8px; vertical-align:middle}
+.su-move{max-width:140px}
+/* the caller's move and removal and the record's mark: one row under the player */
+.su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px}
+.su-reserves .su-controls{flex-basis:100%; margin-top:2px}
 /* the record: attendance marks */
 .su-att{display:inline-block; margin-left:6px; padding:0 6px; border-radius:99px; font-family:var(--mono); font-size:10px;
   letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--rule-2); vertical-align:middle}
 .su-att[data-status="confirmed"], .su-att[data-status="attended"]{color:var(--role-healer); border-color:var(--role-healer)}
 .su-att[data-status="no_show"]{color:var(--gap); border-color:var(--gap)}
 .su-att[data-status="cancelled"]{border-style:dashed}
-.su-mark{padding:2px 6px; font-size:11.5px; margin-left:6px; vertical-align:middle}
-.su-history li .gd-sub{display:inline; margin-left:6px}
+.su-mark{padding:2px 6px; font-size:11.5px; margin:0; width:auto; max-width:110px}
+.su-history li .gd-sub{display:inline; margin:0}
 .su-mark-all{margin:0 0 10px}
 .su-confirm{margin-top:10px; width:100%}
 .su-confirm[data-confirmed="yes"]{color:var(--role-healer); border-color:var(--role-healer)}
@@ -2357,6 +2365,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .rr-over .gd-name, .rr-dup-high .gd-name, .rr-dup-warning .gd-name{color:var(--amber)}
 .rr-dup-verify .gd-name, .rr-dup-info .gd-name{color:var(--ink-2)}
 .rr-definitions{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule)}
+.su-status-row[hidden], .su-controls[hidden]{display:none}
 
 /* LAYOUT — the single home for every rule that decides where things sit.
    Inlined LAST into _shell.html's <style> block by build.py, so these rules
@@ -3477,7 +3486,7 @@ window.AUTH_LINK = "";
     <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
     <p class="sr-only" id="su-live" aria-live="polite"></p>
 
-    <div class="ev-status-row su-status-row">
+    <div class="ev-status-row su-status-row" id="su-status-row">
       <span class="ev-status" id="su-status" data-status=""></span>
       <span class="su-counts" id="su-counts"></span>
       <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
@@ -3489,7 +3498,7 @@ window.AUTH_LINK = "";
     <div class="su-grid">
       <section class="su-board-wrap" aria-labelledby="su-board-label">
         <h3 class="pw-label" id="su-board-label">Roster</h3>
-        <table class="gd-table cp-table su-table">
+        <table class="gd-table cp-table su-table" id="su-board-table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -3538,7 +3547,7 @@ window.AUTH_LINK = "";
           </div>
           <p class="auth-hint rr-definitions" id="rr-definitions"></p>
         </details>
-        <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
           <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
@@ -3560,7 +3569,7 @@ window.AUTH_LINK = "";
         </section>
       </section>
 
-      <section class="su-form-wrap" aria-labelledby="su-form-label">
+      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
         <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
         <p class="auth-hint" id="su-closed" hidden></p>
         <form class="auth-form" id="su-form" novalidate hidden>
@@ -18200,7 +18209,12 @@ function signupErrorMessage(err) {
     addForm: $id("su-add-form"),
     addName: $id("su-add-name"),
     addSlot: $id("su-add-slot"),
-    add: $id("su-add")
+    add: $id("su-add"),
+    statusRow: $id("su-status-row"),
+    boardLabel: $id("su-board-label"),
+    table: $id("su-board-table"),
+    linkRow: $id("su-link-row"),
+    formWrap: $id("su-form-wrap")
   };
 
   const FIELDS = { playerName: el.name, position: el.slot, itemPower: el.ip, note: el.note };
@@ -18356,8 +18370,7 @@ function signupErrorMessage(err) {
       role.className = "su-role";
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
       const player = playerCell(row.claimant, row.claimant && row.claimant.id === mineId);
-      if (caller.manage && row.claimant) player.append(manageControls(board, row.claimant));
-      if (marks.mark && row.claimant && row.claimant.attendance_id) player.append(markSelect(row.claimant.attendance_id, row.claimant.attendance));
+      if (row.claimant) player.append(controlsRow(board, row.claimant));
       tr.append(pos, weapon, role, player);
       return tr;
     }));
@@ -18366,12 +18379,21 @@ function signupErrorMessage(err) {
     el.reserves.replaceChildren(...board.reserves.map(s => {
       const li = document.createElement("li");
       li.className = s.id === mineId ? "su-mine" : "";
-      li.append(playerCell(s, s.id === mineId).firstChild, document.createTextNode(
-        [s.item_power ? ` · ${s.item_power} IP` : "", s.can_swap ? " · can swap" : "", s.account ? "" : " · guest",
-         s.weapons && s.weapons.length ? ` · ${s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ")}` : "",
-         s.note ? ` · ${s.note}` : ""].join("")));
-      if (caller.manage) li.append(manageControls(board, s));
-      if (marks.mark && s.attendance_id) li.append(markSelect(s.attendance_id, s.attendance));
+      const name = document.createElement("span");
+      name.className = "gd-name";
+      name.textContent = s.player_name + (s.id === mineId ? " (you)" : "");
+      li.append(name);
+      if (s.attendance && s.attendance !== "signed_up") li.append(attendanceTag(s.attendance));
+      const details = [s.item_power ? `${s.item_power} IP` : "", s.can_swap ? "can swap" : "", s.account ? "" : "guest",
+                       s.weapons && s.weapons.length ? s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ") : "", s.note || ""]
+        .filter(Boolean).join(" · ");
+      if (details) {
+        const sub = document.createElement("span");
+        sub.className = "gd-sub";
+        sub.textContent = details;
+        li.append(sub);
+      }
+      li.append(controlsRow(board, s));
       return li;
     }));
 
@@ -18388,7 +18410,12 @@ function signupErrorMessage(err) {
       sub.className = "gd-sub";
       sub.textContent = [r.position != null ? `slot ${r.position}` : "", r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "", r.account ? "" : "guest"].filter(Boolean).join(" · ");
       li.append(sub);
-      if (marks.mark) li.append(markSelect(r.id, r.status));
+      if (marks.mark) {
+        const ctl = document.createElement("div");
+        ctl.className = "su-controls";
+        ctl.append(markSelect(r.id, r.status));
+        li.append(ctl);
+      }
       return li;
     }));
 
@@ -18773,6 +18800,17 @@ function signupErrorMessage(err) {
     return tag;
   }
 
+  /* the caller's move and removal and the record's mark, one compact
+     row under the player; empty (and hidden) when the viewer has neither */
+  function controlsRow(board, s) {
+    const row = document.createElement("div");
+    row.className = "su-controls";
+    if (caller.manage) row.append(manageControls(board, s));
+    if (marks.mark && s.attendance_id) row.append(markSelect(s.attendance_id, s.attendance));
+    row.hidden = !row.childNodes.length;
+    return row;
+  }
+
   function markSelect(attendanceId, status) {
     const select = document.createElement("select");
     select.className = "su-mark";
@@ -18843,14 +18881,7 @@ function signupErrorMessage(err) {
     } catch (err) {
       if (seq !== openSeq) return;
       showError(signupErrorMessage(err));
-      if (signupErrorKind(err) === "noEvent") {
-        el.title.textContent = "No CTA";
-        el.form.hidden = true;
-        el.board.replaceChildren();
-        stopWatching();
-        sheet = null;
-        handOver();
-      }
+      if (signupErrorKind(err) === "noEvent") showNoEvent();
       return;
     }
     if (seq !== openSeq) return;
@@ -18872,6 +18903,33 @@ function signupErrorMessage(err) {
         showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
       }
     }
+  }
+
+
+  /* the link names no CTA, or the CTA went while the sheet was live:
+     the card keeps its title and the error, nothing of the old sheet */
+  function showNoEvent() {
+    stopWatching();
+    sheet = null;
+    el.title.textContent = "No CTA";
+    el.kicker.textContent = "CTA";
+    el.when.textContent = "";
+    el.status.textContent = "";
+    el.status.dataset.status = "";
+    el.counts.textContent = "";
+    el.statusRow.hidden = true;
+    el.notes.hidden = true;
+    el.boardLabel.hidden = true;
+    el.table.hidden = true;
+    el.board.replaceChildren();
+    el.reservesWrap.hidden = true;
+    el.historyWrap.hidden = true;
+    el.linkRow.hidden = true;
+    el.callerWrap.hidden = true;
+    el.formWrap.hidden = true;
+    el.form.hidden = true;
+    el.closed.hidden = true;
+    handOver();
   }
 
 
@@ -18928,6 +18986,11 @@ function signupErrorMessage(err) {
     el.form.hidden = true;
     el.closed.hidden = true;
     el.callerWrap.hidden = true;
+    el.statusRow.hidden = false;
+    el.boardLabel.hidden = false;
+    el.table.hidden = false;
+    el.linkRow.hidden = false;
+    el.formWrap.hidden = false;
     stopWatching();
     clearMessages();
     if (!dialog.open) dialog.showModal();
@@ -19646,6 +19709,8 @@ function parseSlotText(text) {
   if (split.length > 1) {
     s = split[0].trim();
     tail = split.slice(1).join(" - ").trim();
+    /* a tail that is only a tier or an enchantment ("Longbow: 8.3") names nobody */
+    if (!normalizeWeaponText(tail)) tail = "";
   }
   return { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
 }
@@ -20886,6 +20951,14 @@ function rosterRead(event, board, engine) {
 }
 
 
+/* what a read is of: the content, the style, the held party and the
+   plan; a sheet change that keeps these keeps the read */
+function rosterKey(event, board) {
+  const ev = event || {};
+  return [ev.content || "", ev.style || "", heldParty(board).party.join(","), plannedParty(board).join(",")].join("|");
+}
+
+
 /* the open slots of the plan, each with its weapon and whether the
    engine's next picks name it */
 function openSlots(board, picks) {
@@ -20998,6 +21071,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
   let engine = null;           /* this module's own CompEngine, made on the first read */
   let members = { guildId: null, rows: [] };   /* the CTA's guild's members with their lists */
   let last = null;             /* the last read, repainted when the members arrive */
+  let lastKey = null;          /* what the last read was of: the read is reused while it holds */
   let seq = 0;
 
   function ownEngine() {
@@ -21197,19 +21271,27 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     if (!d || !d.slots) {
       wrap.hidden = true;
       last = null;
+      lastKey = null;
+      members = { guildId: null, rows: [] };
       return;
     }
     const eng = ownEngine();
     if (!eng) { wrap.hidden = true; return; }
     const board = sheetBoard(d.slots, d.signups);
-    let read = null;
-    try {
-      read = rosterRead(d.event, board, eng);
-    } catch (err) {
-      read = null;
+    /* a mark or a move changes the sheet, not what the engine reads: the
+       read is computed again only when the roster's weapons change */
+    const key = rosterKey(d.event, board);
+    let read = last && lastKey === key ? last.read : null;
+    if (!read) {
+      try {
+        read = rosterRead(d.event, board, eng);
+      } catch (err) {
+        read = null;
+      }
     }
-    if (!read) { wrap.hidden = true; last = null; return; }
+    if (!read) { wrap.hidden = true; last = null; lastKey = null; return; }
     last = { read, board };
+    lastKey = key;
     if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id) {
       loadMembers(d.guild.id);
     } else if (!d.member) {

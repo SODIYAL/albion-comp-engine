@@ -2424,7 +2424,7 @@ window.AUTH_LINK = "";
     <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
     <p class="sr-only" id="su-live" aria-live="polite"></p>
 
-    <div class="ev-status-row su-status-row">
+    <div class="ev-status-row su-status-row" id="su-status-row">
       <span class="ev-status" id="su-status" data-status=""></span>
       <span class="su-counts" id="su-counts"></span>
       <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
@@ -2436,7 +2436,7 @@ window.AUTH_LINK = "";
     <div class="su-grid">
       <section class="su-board-wrap" aria-labelledby="su-board-label">
         <h3 class="pw-label" id="su-board-label">Roster</h3>
-        <table class="gd-table cp-table su-table">
+        <table class="gd-table cp-table su-table" id="su-board-table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -2485,7 +2485,7 @@ window.AUTH_LINK = "";
           </div>
           <p class="auth-hint rr-definitions" id="rr-definitions"></p>
         </details>
-        <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
           <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
@@ -2507,7 +2507,7 @@ window.AUTH_LINK = "";
         </section>
       </section>
 
-      <section class="su-form-wrap" aria-labelledby="su-form-label">
+      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
         <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
         <p class="auth-hint" id="su-closed" hidden></p>
         <form class="auth-form" id="su-form" novalidate hidden>

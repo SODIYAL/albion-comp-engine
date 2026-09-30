@@ -173,6 +173,14 @@ function rosterRead(event, board, engine) {
 }
 
 
+/* what a read is of: the content, the style, the held party and the
+   plan; a sheet change that keeps these keeps the read */
+function rosterKey(event, board) {
+  const ev = event || {};
+  return [ev.content || "", ev.style || "", heldParty(board).party.join(","), plannedParty(board).join(",")].join("|");
+}
+
+
 /* the open slots of the plan, each with its weapon and whether the
    engine's next picks name it */
 function openSlots(board, picks) {
@@ -285,6 +293,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
   let engine = null;           /* this module's own CompEngine, made on the first read */
   let members = { guildId: null, rows: [] };   /* the CTA's guild's members with their lists */
   let last = null;             /* the last read, repainted when the members arrive */
+  let lastKey = null;          /* what the last read was of: the read is reused while it holds */
   let seq = 0;
 
   function ownEngine() {
@@ -484,19 +493,27 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     if (!d || !d.slots) {
       wrap.hidden = true;
       last = null;
+      lastKey = null;
+      members = { guildId: null, rows: [] };
       return;
     }
     const eng = ownEngine();
     if (!eng) { wrap.hidden = true; return; }
     const board = sheetBoard(d.slots, d.signups);
-    let read = null;
-    try {
-      read = rosterRead(d.event, board, eng);
-    } catch (err) {
-      read = null;
+    /* a mark or a move changes the sheet, not what the engine reads: the
+       read is computed again only when the roster's weapons change */
+    const key = rosterKey(d.event, board);
+    let read = last && lastKey === key ? last.read : null;
+    if (!read) {
+      try {
+        read = rosterRead(d.event, board, eng);
+      } catch (err) {
+        read = null;
+      }
     }
-    if (!read) { wrap.hidden = true; last = null; return; }
+    if (!read) { wrap.hidden = true; last = null; lastKey = null; return; }
     last = { read, board };
+    lastKey = key;
     if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id) {
       loadMembers(d.guild.id);
     } else if (!d.member) {

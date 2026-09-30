@@ -575,7 +575,12 @@ function signupErrorMessage(err) {
     addForm: $id("su-add-form"),
     addName: $id("su-add-name"),
     addSlot: $id("su-add-slot"),
-    add: $id("su-add")
+    add: $id("su-add"),
+    statusRow: $id("su-status-row"),
+    boardLabel: $id("su-board-label"),
+    table: $id("su-board-table"),
+    linkRow: $id("su-link-row"),
+    formWrap: $id("su-form-wrap")
   };
 
   const FIELDS = { playerName: el.name, position: el.slot, itemPower: el.ip, note: el.note };
@@ -731,8 +736,7 @@ function signupErrorMessage(err) {
       role.className = "su-role";
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
       const player = playerCell(row.claimant, row.claimant && row.claimant.id === mineId);
-      if (caller.manage && row.claimant) player.append(manageControls(board, row.claimant));
-      if (marks.mark && row.claimant && row.claimant.attendance_id) player.append(markSelect(row.claimant.attendance_id, row.claimant.attendance));
+      if (row.claimant) player.append(controlsRow(board, row.claimant));
       tr.append(pos, weapon, role, player);
       return tr;
     }));
@@ -741,12 +745,21 @@ function signupErrorMessage(err) {
     el.reserves.replaceChildren(...board.reserves.map(s => {
       const li = document.createElement("li");
       li.className = s.id === mineId ? "su-mine" : "";
-      li.append(playerCell(s, s.id === mineId).firstChild, document.createTextNode(
-        [s.item_power ? ` · ${s.item_power} IP` : "", s.can_swap ? " · can swap" : "", s.account ? "" : " · guest",
-         s.weapons && s.weapons.length ? ` · ${s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ")}` : "",
-         s.note ? ` · ${s.note}` : ""].join("")));
-      if (caller.manage) li.append(manageControls(board, s));
-      if (marks.mark && s.attendance_id) li.append(markSelect(s.attendance_id, s.attendance));
+      const name = document.createElement("span");
+      name.className = "gd-name";
+      name.textContent = s.player_name + (s.id === mineId ? " (you)" : "");
+      li.append(name);
+      if (s.attendance && s.attendance !== "signed_up") li.append(attendanceTag(s.attendance));
+      const details = [s.item_power ? `${s.item_power} IP` : "", s.can_swap ? "can swap" : "", s.account ? "" : "guest",
+                       s.weapons && s.weapons.length ? s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ") : "", s.note || ""]
+        .filter(Boolean).join(" · ");
+      if (details) {
+        const sub = document.createElement("span");
+        sub.className = "gd-sub";
+        sub.textContent = details;
+        li.append(sub);
+      }
+      li.append(controlsRow(board, s));
       return li;
     }));
 
@@ -763,7 +776,12 @@ function signupErrorMessage(err) {
       sub.className = "gd-sub";
       sub.textContent = [r.position != null ? `slot ${r.position}` : "", r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "", r.account ? "" : "guest"].filter(Boolean).join(" · ");
       li.append(sub);
-      if (marks.mark) li.append(markSelect(r.id, r.status));
+      if (marks.mark) {
+        const ctl = document.createElement("div");
+        ctl.className = "su-controls";
+        ctl.append(markSelect(r.id, r.status));
+        li.append(ctl);
+      }
       return li;
     }));
 
@@ -1148,6 +1166,17 @@ function signupErrorMessage(err) {
     return tag;
   }
 
+  /* the caller's move and removal and the record's mark, one compact
+     row under the player; empty (and hidden) when the viewer has neither */
+  function controlsRow(board, s) {
+    const row = document.createElement("div");
+    row.className = "su-controls";
+    if (caller.manage) row.append(manageControls(board, s));
+    if (marks.mark && s.attendance_id) row.append(markSelect(s.attendance_id, s.attendance));
+    row.hidden = !row.childNodes.length;
+    return row;
+  }
+
   function markSelect(attendanceId, status) {
     const select = document.createElement("select");
     select.className = "su-mark";
@@ -1218,14 +1247,7 @@ function signupErrorMessage(err) {
     } catch (err) {
       if (seq !== openSeq) return;
       showError(signupErrorMessage(err));
-      if (signupErrorKind(err) === "noEvent") {
-        el.title.textContent = "No CTA";
-        el.form.hidden = true;
-        el.board.replaceChildren();
-        stopWatching();
-        sheet = null;
-        handOver();
-      }
+      if (signupErrorKind(err) === "noEvent") showNoEvent();
       return;
     }
     if (seq !== openSeq) return;
@@ -1247,6 +1269,33 @@ function signupErrorMessage(err) {
         showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
       }
     }
+  }
+
+
+  /* the link names no CTA, or the CTA went while the sheet was live:
+     the card keeps its title and the error, nothing of the old sheet */
+  function showNoEvent() {
+    stopWatching();
+    sheet = null;
+    el.title.textContent = "No CTA";
+    el.kicker.textContent = "CTA";
+    el.when.textContent = "";
+    el.status.textContent = "";
+    el.status.dataset.status = "";
+    el.counts.textContent = "";
+    el.statusRow.hidden = true;
+    el.notes.hidden = true;
+    el.boardLabel.hidden = true;
+    el.table.hidden = true;
+    el.board.replaceChildren();
+    el.reservesWrap.hidden = true;
+    el.historyWrap.hidden = true;
+    el.linkRow.hidden = true;
+    el.callerWrap.hidden = true;
+    el.formWrap.hidden = true;
+    el.form.hidden = true;
+    el.closed.hidden = true;
+    handOver();
   }
 
 
@@ -1303,6 +1352,11 @@ function signupErrorMessage(err) {
     el.form.hidden = true;
     el.closed.hidden = true;
     el.callerWrap.hidden = true;
+    el.statusRow.hidden = false;
+    el.boardLabel.hidden = false;
+    el.table.hidden = false;
+    el.linkRow.hidden = false;
+    el.formWrap.hidden = false;
     stopWatching();
     clearMessages();
     if (!dialog.open) dialog.showModal();

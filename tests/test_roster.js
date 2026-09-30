@@ -179,6 +179,17 @@ function stubEngine() {
   check("the fillers are bounded", fillers("2H_LONGBOW", many).length === run("ROSTER_FILLERS"));
 }
 
+/* 3b - what a read is of */
+{
+  const key = run("rosterKey");
+  const a = key(EVENT, board);
+  const moved = run("sheetBoard")(SLOTS, SIGNUPS.map(s => Object.assign({}, s, { attendance: "confirmed", note: "moved" })));
+  check("a mark or a note changes the sheet, not the key: the read is reused", key(EVENT, moved) === a);
+  const other = run("sheetBoard")(SLOTS, SIGNUPS.filter(s => s.id !== "c"));
+  check("a claim gone changes the held party and the key", key(EVENT, other) !== a);
+  check("another content or style is another key", key(Object.assign({}, EVENT, { style: "balanced" }), board) !== a);
+}
+
 /* 4 - the headline */
 {
   const headline = run("rosterHeadline");

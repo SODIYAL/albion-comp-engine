@@ -99,7 +99,8 @@ const index = run("weaponIndex")(CATALOG, []);
         same(parse("Longbow x3"), { name: "Longbow", count: 3, tail: "" }) && same(parse("3x Longbow"), { name: "Longbow", count: 3, tail: "" })
         && same(parse("Longbow (2)"), { name: "Longbow", count: 2, tail: "" }) && same(parse("Longbow (x2)"), { name: "Longbow", count: 2, tail: "" })
         && same(parse("1. Longbow - Disc"), { name: "Longbow", count: 1, tail: "Disc" }) && same(parse("- Hallowfall: Eff"), { name: "Hallowfall", count: 1, tail: "Eff" })
-        && same(parse("Heavy Crossbow"), { name: "Heavy Crossbow", count: 1, tail: "" }) && same(parse("8.3 Longbow"), { name: "8.3 Longbow", count: 1, tail: "" }));
+        && same(parse("Heavy Crossbow"), { name: "Heavy Crossbow", count: 1, tail: "" }) && same(parse("8.3 Longbow"), { name: "8.3 Longbow", count: 1, tail: "" })
+        && same(parse("Longbow: 8.3"), { name: "Longbow", count: 1, tail: "" }) && same(parse("Longbow - T8"), { name: "Longbow", count: 1, tail: "" }));
   check("a count is bounded by the roster cap", parse("99x Longbow").count === run("COMP_SLOTS_MAX"));
   check("party labels and role words are known", run("isPartyLabel")("Party 1") && run("isPartyLabel")("P2") && run("isPartyLabel")("Group A")
         && !run("isPartyLabel")("Party") && !run("isPartyLabel")("Longbow") && run("isRoleWord")("Tanks:") && run("isRoleWord")("healer") && !run("isRoleWord")("Bow"));
