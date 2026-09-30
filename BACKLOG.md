@@ -351,8 +351,8 @@ comps: a guild's templates with slots, saved from and opened in the
 planner through the share hash), phase 4 (CTAs: a guild's events with a
 status, a share code and slots copied from a comp), phase 5 (sign-up:
 the sheet a link opens, for guests with a claim token and for accounts),
-phase 6 (caller management on the sheet) and phase 7 (the live sheet
-over Realtime Broadcast) are built.
+phase 6 (caller management on the sheet), phase 7 (the live sheet over
+Realtime Broadcast) and phase 8 (the attendance record) are built.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -363,10 +363,13 @@ over Realtime Broadcast) are built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 8, history**: attendance (`signed_up`, `confirmed`, `attended`,
-  `no_show`, `cancelled`, `reserve`) kept apart from the sign-up; a
-  completed CTA keeps its slots and attendance. Then phases 9–12 in order
-  (the spec).
+- **Phase 9, analytics**: facts over completed CTAs from the attendance
+  record: CTAs, sign-ups, attendance and show rate, regulars, roles and
+  weapons played. No skill rating without a defined, evidenced measure.
+  Then phases 10–12 in order (the spec).
+- **A player's own history**: the record is read per CTA on the sheet;
+  a player's list of their CTAs and marks (and a guest's, by claim) is a
+  phase 9 surface.
 - **The CTAs dialog is not live**: the calendar and the sign-up counts
   read on open; the sheet is the live surface. A channel per guild for the
   dialog is a later increment if callers ask for it.

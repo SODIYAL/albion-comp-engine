@@ -30,10 +30,18 @@
  * itself through event_by_code. The channel only reports; the policies
  * still decide what is read.
  *
+ * The sheet carries the record (phase 8): attendance, kept apart from
+ * the sign-up. A player confirms their own sign-up before the CTA
+ * completes; the caller marks attended and no-show any time, one by
+ * one or everyone in a slot at once; a cancellation and a settled
+ * reserve stay on the record; the sheet shows the marks.
+ *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (event_by_code,
  *             sign_up, cancel_sign_up; the caller's move_signup,
- *             add_player, a removal, a slot's weapon; the channel)
+ *             add_player, a removal, a slot's weapon; the channel; the
+ *             record's confirm_sign_up, mark_attendance,
+ *             mark_all_attended)
  *   pure    - the link and the code, the claim token, the board (slots
  *             with their claimants, the reserves, what is free),
  *             validation, the payload, error wording (tests/test_signup.js)
@@ -165,6 +173,44 @@ function watchSheet(code, onChange, onState) {
   channel.on("broadcast", { event: "changed" }, message => onChange((message && message.payload) || {}));
   channel.subscribe(status => { if (onState) onState(status); });
   return () => { window.DB.removeChannel(channel); };
+}
+
+
+/* ---- the record (phase 8) ---- */
+
+/* the player's own record: signed_up <-> confirmed, before completion */
+async function confirmSignUp(code, token, confirmed) {
+  const { data, error } = await window.DB.rpc("confirm_sign_up", { code, token: token || null, confirmed: !!confirmed });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* the caller's mark on one record (any listed status, any time) */
+async function markAttendance(attendanceId, status) {
+  const { data, error } = await window.DB.rpc("mark_attendance", { attendance_id: attendanceId, mark: status });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
+/* everyone still signed up or confirmed in a slot attended; how many */
+async function markAllAttended(eventId) {
+  const { data, error } = await window.DB.rpc("mark_all_attended", { event_id: eventId });
+
+  if (error) {
+    throw error;
+  }
+
+  return Number(data) || 0;
 }
 
 
@@ -374,6 +420,49 @@ const LIVE_STATE_MSG = {
 const LIVE_SETTLE_MS = 250;
 
 
+/* The record's statuses (supabase/migrations attendance;
+   tests/test_supabase_schema.py pins that they agree) and the marks a
+   caller's list offers: cancelled and reserve are the record's own
+   findings, shown, not chosen. */
+const ATTENDANCE_STATUSES = ["signed_up", "confirmed", "attended", "no_show", "cancelled", "reserve"];
+const ATTENDANCE_NAMES = { signed_up: "signed up", confirmed: "confirmed", attended: "attended", no_show: "no-show", cancelled: "cancelled", reserve: "reserve" };
+const ATTENDANCE_MARKS = ["signed_up", "confirmed", "attended", "no_show"];
+
+
+/* how many records stand in each status */
+function attendanceSummary(records) {
+  const out = { total: 0 };
+  for (const status of ATTENDANCE_STATUSES) out[status] = 0;
+  for (const r of records || []) {
+    if (!Object.prototype.hasOwnProperty.call(out, r.status)) continue;
+    out[r.status] += 1;
+    out.total += 1;
+  }
+  return out;
+}
+
+
+/* the records with no live claim behind them (a cancellation, a
+   settled reserve), latest first */
+function historyRows(records) {
+  return (records || []).filter(r => !r.signup_id)
+    .sort((a, b) => String(b.marked_at || "").localeCompare(String(a.marked_at || "")) || a.player_name.localeCompare(b.player_name));
+}
+
+
+/* what the record offers: a caller marks (any time), marks everyone
+   once the CTA is completed; a player confirms their own sign-up before
+   completion */
+function markPowers(myRole, status, mine) {
+  const write = compPowers(myRole).write;
+  return {
+    mark: write,
+    all: write && status === "completed",
+    confirm: !!mine && !!status && status !== "completed"
+  };
+}
+
+
 const SIGNUP_MSG = {
   network: PROFILE_MSG.network,
   session: PROFILE_MSG.session,
@@ -477,6 +566,10 @@ function signupErrorMessage(err) {
     open: $id("su-open"),
     link: $id("su-link"),
     liveState: $id("su-live-state"),
+    confirm: $id("su-confirm"),
+    historyWrap: $id("su-history-wrap"),
+    history: $id("su-history"),
+    markAll: $id("su-mark-all"),
     callerWrap: $id("su-caller"),
     callerMoves: $id("su-caller-moves"),
     addForm: $id("su-add-form"),
@@ -494,6 +587,7 @@ function signupErrorMessage(err) {
   let myRole = null;           /* the caller's role in the CTA's guild, when signed in */
   let roleGuild = null;        /* the guild that role was read for */
   let caller = callerPowers(null, null);
+  let marks = markPowers(null, null, null);
   let busy = false;
   let openSeq = 0;
   let booted = false;
@@ -581,6 +675,7 @@ function signupErrorMessage(err) {
     name.className = "gd-name";
     name.textContent = s.player_name + (mine ? " (you)" : "");
     td.append(name);
+    if (s.attendance && s.attendance !== "signed_up") td.append(attendanceTag(s.attendance));
     const sub = document.createElement("span");
     sub.className = "gd-sub";
     const parts = [];
@@ -613,10 +708,15 @@ function signupErrorMessage(err) {
     el.notes.textContent = ev.notes || "";
     el.notes.hidden = !ev.notes;
 
+    const att = attendanceSummary(sheet.attendance);
     el.counts.textContent = `${board.counts.claimed} of ${board.counts.slots} slot${board.counts.slots === 1 ? "" : "s"} claimed`
-      + (board.counts.reserves ? `, ${board.counts.reserves} reserve${board.counts.reserves === 1 ? "" : "s"}` : "");
+      + (board.counts.reserves ? `, ${board.counts.reserves} reserve${board.counts.reserves === 1 ? "" : "s"}` : "")
+      + (ev.status === "completed"
+         ? ` · attended ${att.attended} · no-show ${att.no_show}` + (att.reserve ? ` · reserve ${att.reserve}` : "")
+         : (att.confirmed ? ` · ${att.confirmed} confirmed` : ""));
 
     caller = callerPowers(myRole, ev.status);
+    marks = markPowers(myRole, ev.status, sheet.mine);
 
     el.board.replaceChildren(...board.rows.map(row => {
       const tr = document.createElement("tr");
@@ -632,6 +732,7 @@ function signupErrorMessage(err) {
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
       const player = playerCell(row.claimant, row.claimant && row.claimant.id === mineId);
       if (caller.manage && row.claimant) player.append(manageControls(board, row.claimant));
+      if (marks.mark && row.claimant && row.claimant.attendance_id) player.append(markSelect(row.claimant.attendance_id, row.claimant.attendance));
       tr.append(pos, weapon, role, player);
       return tr;
     }));
@@ -645,6 +746,24 @@ function signupErrorMessage(err) {
          s.weapons && s.weapons.length ? ` · ${s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ")}` : "",
          s.note ? ` · ${s.note}` : ""].join("")));
       if (caller.manage) li.append(manageControls(board, s));
+      if (marks.mark && s.attendance_id) li.append(markSelect(s.attendance_id, s.attendance));
+      return li;
+    }));
+
+    /* the record's rows with no claim behind them */
+    const history = historyRows(sheet.attendance);
+    el.historyWrap.hidden = !history.length;
+    el.history.replaceChildren(...history.map(r => {
+      const li = document.createElement("li");
+      const name = document.createElement("span");
+      name.className = "gd-name";
+      name.textContent = r.player_name;
+      li.append(name, attendanceTag(r.status));
+      const sub = document.createElement("span");
+      sub.className = "gd-sub";
+      sub.textContent = [r.position != null ? `slot ${r.position}` : "", r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "", r.account ? "" : "guest"].filter(Boolean).join(" · ");
+      li.append(sub);
+      if (marks.mark) li.append(markSelect(r.id, r.status));
       return li;
     }));
 
@@ -689,6 +808,9 @@ function signupErrorMessage(err) {
     el.submit.hidden = !open;
     el.submit.textContent = mine ? "Update sign-up" : "Sign up";
     el.cancel.hidden = !mine || ev.status === "completed";
+    el.confirm.hidden = !marks.confirm;
+    el.confirm.textContent = mine && mine.attendance === "confirmed" ? "Unconfirm" : "Confirm I'm coming";
+    el.confirm.dataset.confirmed = mine && mine.attendance === "confirmed" ? "yes" : "no";
     renderWeapons(open);
   }
 
@@ -916,7 +1038,8 @@ function signupErrorMessage(err) {
   }
 
   function renderCaller(board) {
-    el.callerWrap.hidden = !caller.manage && !caller.moves.length;
+    el.callerWrap.hidden = !caller.manage && !caller.moves.length && !marks.all;
+    el.markAll.hidden = !marks.all;
     el.callerMoves.replaceChildren(...caller.moves.map(to => {
       const b = document.createElement("button");
       b.type = "button";
@@ -1004,6 +1127,55 @@ function signupErrorMessage(err) {
       return r.position != null ? `${r.player_name} holds slot ${r.position}.` : `${r.player_name} is a reserve.`;
     });
   });
+
+  /* ---- the record (phase 8) ---- */
+
+  function attendanceTag(status) {
+    const tag = document.createElement("span");
+    tag.className = "su-att";
+    tag.dataset.status = status;
+    tag.textContent = ATTENDANCE_NAMES[status] || status;
+    return tag;
+  }
+
+  function markSelect(attendanceId, status) {
+    const select = document.createElement("select");
+    select.className = "su-mark";
+    select.dataset.suMark = attendanceId;
+    select.setAttribute("aria-label", "attendance");
+    const options = ATTENDANCE_MARKS.includes(status) || !status ? ATTENDANCE_MARKS : [status].concat(ATTENDANCE_MARKS);
+    for (const value of options) {
+      const o = document.createElement("option");
+      o.value = value;
+      o.textContent = ATTENDANCE_NAMES[value] || value;
+      select.append(o);
+    }
+    select.value = status || "signed_up";
+    return select;
+  }
+
+  for (const list of [el.board, el.reserves, el.history]) {
+    list.addEventListener("change", e => {
+      const t = e.target;
+      if (t.dataset.suMark === undefined) return;
+      const id = t.dataset.suMark;
+      const status = t.value;
+      act(null, "", () => markAttendance(id, status), r => `Marked ${ATTENDANCE_NAMES[r.status] || r.status}.`);
+    });
+  }
+
+  el.markAll.addEventListener("click", () => {
+    if (busy || !sheet || !marks.all) return;
+    if (!window.confirm("Mark everyone still signed up or confirmed in a slot as attended? You can change single marks after.")) return;
+    act(el.markAll, "Marking…", () => markAllAttended(sheet.event.id), n => `${n} marked attended.`);
+  });
+
+  el.confirm.addEventListener("click", () => {
+    if (busy || !sheet || !sheet.mine || !marks.confirm) return;
+    const yes = el.confirm.dataset.confirmed !== "yes";
+    act(el.confirm, "…", () => confirmSignUp(code, readToken(), yes), r => r.status === "confirmed" ? "You are confirmed." : "Your confirmation is withdrawn.");
+  });
+
 
   /* the caller's role in the CTA's guild, read once per guild */
   async function readRole() {
@@ -1115,6 +1287,7 @@ function signupErrorMessage(err) {
     el.counts.textContent = "";
     el.board.replaceChildren();
     el.reservesWrap.hidden = true;
+    el.historyWrap.hidden = true;
     el.form.hidden = true;
     el.closed.hidden = true;
     el.callerWrap.hidden = true;

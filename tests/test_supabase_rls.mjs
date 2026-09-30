@@ -425,8 +425,8 @@ try {
         && await code("authenticated", C, "select public.guild_members_succession()") === "42501");
   const definers = (await db.query(
     "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname in ('public', 'private') order by 1")).rows.map(r => r.f);
-  check("the API schema holds two definers, the sign-up trigger and the broadcast trigger; the helpers live in private",
-        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.handle_new_user", "public.sheet_changed"]), definers);
+  check("the API schema holds three definers, the sign-up, broadcast and record triggers; the helpers live in private",
+        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.attendance_record", "public.handle_new_user", "public.sheet_changed"]), definers);
   check("anon reaches nothing in the private schema",
         await code("anon", null, "select private.guild_role_of(gen_random_uuid())") === "42501");
   const perm = (await db.query(
@@ -974,24 +974,24 @@ const code_ = code;
   await clear();
   const g1 = await up("anon", null, "7".repeat(32), { player_name: "Gus", position: 1, item_power: 1400 });
   m = await sent();
-  check("a guest's sign-up (as anon) sends one message; the payload carries no name, no hash, no id",
-        m.length === 1 && says(m[0], "signups", "INSERT")
+  check("a guest's sign-up (as anon) sends a message for the sign-up and one for its record (the record's trigger fires first, by name); the payloads carry no name, no hash, no id",
+        same(m.map(x => `${x.payload.table}:${x.payload.op}`).sort(), ["attendance:INSERT", "signups:INSERT"]) && m.every(x => says(x, x.payload.table, "INSERT"))
         && !JSON.stringify(m).includes("Gus") && !JSON.stringify(m).includes(g1.id), m);
 
   const f1 = await up("authenticated", F, null, { position: 2 });
   await clear();
   const swapped = (await rows("authenticated", K2, "select public.move_signup($1, $2) as m", [g1.id, 2]))[0].m;
   m = await sent();
-  check("a swap sends a message per row changed, all on the CTA's topic, none naming a player",
-        swapped.swapped === f1.id && m.length >= 3 && m.every(x => says(x, "signups", "UPDATE"))
+  check("a swap sends a message per row changed (the sign-ups and their records), all on the CTA's topic, none naming a player",
+        swapped.swapped === f1.id && m.length >= 3 && m.every(x => says(x, x.payload.table, "UPDATE") && ["signups", "attendance"].includes(x.payload.table))
         && !JSON.stringify(m).includes("Gus") && !JSON.stringify(m).includes("Eff"), m);
 
   await clear();
   await run("authenticated", K2, "update public.event_slots set weapon_id = 'MAIN_HOLYSTAFF_AVALON' where event_id = $1 and position = 1", [ev.id]);
   await run("authenticated", K2, "delete from public.signups where id = $1", [f1.id]);
   m = await sent();
-  check("a slot's weapon and a removal each send one message",
-        m.length === 2 && same(m.map(x => `${x.payload.table}:${x.payload.op}`), ["event_slots:UPDATE", "signups:DELETE"]), m);
+  check("a slot's weapon sends one message; a removal sends one for the sign-up and two for its record (the link nulled by the constraint, then the status)",
+        same(m.map(x => `${x.payload.table}:${x.payload.op}`).sort(), ["attendance:UPDATE", "attendance:UPDATE", "event_slots:UPDATE", "signups:DELETE"]), m);
 
   await clear();
   await run("authenticated", C, "update public.events set name = 'Live CTA renamed' where id = $1", [ev.id]);
@@ -1007,10 +1007,143 @@ const code_ = code;
         && await code_("anon", null, "select public.sheet_changed()") === "42501");
   const definers = (await db.query(
     "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname = 'public' order by 1")).rows.map(r => r.f);
-  check("the API schema holds two definers: the sign-up trigger and the broadcast trigger, both triggers no role can call",
-        same(definers, ["public.handle_new_user", "public.sheet_changed"]), definers);
+  check("the API schema holds three definers: the sign-up trigger, the broadcast trigger and the record's trigger, triggers no role can call",
+        same(definers, ["public.attendance_record", "public.handle_new_user", "public.sheet_changed"]), definers);
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
   await clear();
+}
+
+/* 14 - history: the attendance record, kept apart from the sign-up */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const Y3 = "00000000-0000-4000-8000-000000000016";
+  await signUp(Y3, { albion_name: "Wye" });
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy History", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "History CTA", starts_at: "2026-10-06T18:00:00Z", content: "castle", status: "draft",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: "MAIN_HOLYSTAFF_AVALON" }]
+  })]))[0];
+  await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+  const CODE = ev.share_code;
+  const T1 = "8".repeat(32), T2 = "9".repeat(32);
+  const up = (role, sub, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [CODE, token, JSON.stringify(payload)]).then(r => r[0].s);
+  const sheet = (role, sub, token) => rows(role, sub, "select public.event_by_code($1, $2) as s", [CODE, token]).then(r => r[0].s);
+  const confirm = (role, sub, token, yes) => rows(role, sub, "select public.confirm_sign_up($1, $2, $3) as c", [CODE, token, yes]).then(r => r[0].c);
+  const confirmCode = (role, sub, token, yes) => code_(role, sub, "select public.confirm_sign_up($1, $2, $3)", [CODE, token, yes]);
+  const mark = (sub, id, status) => rows("authenticated", sub, "select public.mark_attendance($1, $2) as m", [id, status]).then(r => r[0].m);
+  const markCode = (sub, id, status) => code_("authenticated", sub, "select public.mark_attendance($1, $2)", [id, status]);
+  const record = async where => (await db.query(`select id, signup_id, user_id, guest_token_hash, player_name, position, weapon_id, declared, status, marked_by, marked_at from public.attendance where event_id = $1 and ${where}`, [ev.id])).rows[0];
+  const records = async () => (await db.query("select player_name, status, position from public.attendance where event_id = $1 order by created_at", [ev.id])).rows;
+
+  const g1 = await up("anon", null, T1, { player_name: "Gus", position: 1, weapons: ["2H_LONGBOW"] });
+  const f1 = await up("authenticated", F, null, { position: 2 });
+  const disc = (await rows("authenticated", K2, "select public.add_player($1, $2::jsonb) as a", [ev.id, JSON.stringify({ player_name: "Disc" })]))[0].a;
+  const rg = await record("player_name = 'Gus'"), rf = await record("player_name = 'Eff'"), rd = await record("player_name = 'Disc'");
+  check("a sign-up makes a record: signed_up, the name, the slot, the declared weapons, the same identity as the sign-up",
+        rg && rg.status === "signed_up" && rg.position === 1 && same(rg.declared, ["2H_LONGBOW"]) && rg.signup_id === g1.id
+        && rg.guest_token_hash === (await db.query("select guest_token_hash from public.signups where id = $1", [g1.id])).rows[0].guest_token_hash
+        && rf && rf.user_id === F && rf.signup_id === f1.id && rf.position === 2
+        && rd && rd.position === null && rd.signup_id === disc.id, { rg, rf, rd });
+  await rows("authenticated", K2, "select public.move_signup($1, $2)", [g1.id, 3]);
+  check("a move keeps the record in step", (await record("player_name = 'Gus'")).position === 3);
+  check("the sheet carries the record: each sign-up's status, the record list, the player's own",
+        await (async () => { const s = await sheet("anon", null, T1);
+          return s.signups.every(r => r.attendance === "signed_up" && r.attendance_id) && s.attendance.length === 3
+            && s.mine.attendance === "signed_up" && s.attendance.every(r => !("guest_token_hash" in r) && !("user_id" in r)); })());
+
+  /* confirming */
+  check("a guest confirms with the token, and unconfirms",
+        (await confirm("anon", null, T1, true)).status === "confirmed" && (await sheet("anon", null, T1)).mine.attendance === "confirmed"
+        && (await confirm("anon", null, T1, false)).status === "signed_up");
+  check("an account confirms without a token", (await confirm("authenticated", F, null, true)).status === "confirmed");
+  check("without a token, or with one that names nobody, a guest has nothing to confirm",
+        await confirmCode("anon", null, null, true) === "P0002" && await confirmCode("anon", null, T2, true) === "P0002");
+  check("a player marks no attendance: a guest's statement without the token reaches no row, an account's own row is refused by the guard, another's by the policy; a member marks nobody's",
+        await affected("anon", null, "update public.attendance set status = 'attended' where id = $1", [rg.id]) === 0
+        && await markCode(F, rf.id, "attended") === "42501" && await markCode(F, rg.id, "attended") === "42501"
+        && await markCode(F, rd.id, "no_show") === "42501"
+        && (await record("player_name = 'Eff'")).status === "confirmed");
+  check("a guest cannot touch another's record (the token decides)",
+        await affected("anon", null, "update public.attendance set status = 'confirmed' where id = $1", [rd.id]) === 0);
+
+  /* the caller's marks */
+  const marked = await mark(K2, rf.id, "attended");
+  check("a caller marks attended: the mark carries who and when",
+        marked.status === "attended" && marked.marked_at && (await record("player_name = 'Eff'")).marked_by === K2);
+  check("a caller's mark is any listed status; a status off the list is refused by the check",
+        (await mark(K2, rd.id, "no_show")).status === "no_show" && (await mark(K2, rd.id, "signed_up")).status === "signed_up"
+        && await markCode(K2, rd.id, "late") === "23514");
+
+  /* the claim goes, the record stays */
+  await confirm("anon", null, T1, true);
+  await rows("anon", null, "select public.cancel_sign_up($1, $2)", [CODE, T1]);
+  const rgc = await record("player_name = 'Gus'");
+  check("a cancellation keeps the record as cancelled, its claim gone, its slot remembered",
+        rgc && rgc.id === rg.id && rgc.status === "cancelled" && rgc.signup_id === null && rgc.position === 3
+        && (await db.query("select count(*)::int as n from public.signups where id = $1", [g1.id])).rows[0].n === 0);
+  const g1b = await up("anon", null, T1, { player_name: "Gus", position: 3 });
+  const rgb = await record("player_name = 'Gus'");
+  check("signing up again brings the same record back to signed_up, cleared of any mark",
+        rgb.id === rg.id && rgb.status === "signed_up" && rgb.signup_id === g1b.id && rgb.marked_by === null);
+  await run("authenticated", K2, "delete from public.signups where id = $1", [disc.id]);
+  check("the caller's removal is a cancellation on the record", (await record("player_name = 'Disc'")).status === "cancelled");
+  check("a mark already made survives the claim going: Eff attended, then removed, stays attended",
+        await affected("authenticated", K2, "delete from public.signups where id = $1", [f1.id]) === 1
+        && (await record("player_name = 'Eff'")).status === "attended" && (await record("player_name = 'Eff'")).signup_id === null);
+
+  /* adoption carries the record */
+  await up("anon", null, T2, { player_name: "Wye", position: 2 });
+  const adopted = await up("authenticated", Y3, T2, { position: 2 });
+  const ry = await record("player_name = 'Wye'");
+  check("an account adopting its browser's guest sign-up takes the record with it",
+        ry && ry.user_id === Y3 && ry.guest_token_hash === null && ry.signup_id === adopted.id);
+  const res = (await rows("authenticated", K2, "select public.add_player($1, $2::jsonb) as a", [ev.id, JSON.stringify({ player_name: "Res" })]))[0].a;
+
+  /* completion settles */
+  await run("authenticated", C, "update public.events set status = 'locked' where id = $1", [ev.id]);
+  await run("authenticated", C, "update public.events set status = 'completed' where id = $1", [ev.id]);
+  const rg2 = await record("player_name = 'Gus'"), rr = await record("player_name = 'Res'"), ry2 = await record("player_name = 'Wye'");
+  check("completion settles the record: a reserve is a reserve; a slot holder keeps their status and gets the slot's weapon and their declared weapons",
+        rr.status === "reserve" && rr.position === null
+        && rg2.status === "signed_up" && rg2.weapon_id === "MAIN_HOLYSTAFF_AVALON"
+        && ry2.status === "signed_up" && ry2.weapon_id === "MAIN_MACE_HELL", { rg2, rr, ry2 });
+  check("after completion a player confirms no more; the caller still marks",
+        await confirmCode("anon", null, T1, true) === "55000"
+        && (await mark(K2, rg2.id, "attended")).status === "attended");
+  check("mark_all_attended marks everyone still signed up or confirmed in a slot, and says how many",
+        (await rows("authenticated", K2, "select public.mark_all_attended($1) as n", [ev.id]))[0].n === 1
+        && (await record("player_name = 'Wye'")).status === "attended"
+        && (await rows("authenticated", K2, "select public.mark_all_attended($1) as n", [ev.id]))[0].n === 0
+        && (await rows("authenticated", F, "select public.mark_all_attended($1) as n", [ev.id]))[0].n === 0);
+  check("the record reads through the code after completion, marks included",
+        (await sheet("anon", null, null)).attendance.filter(r => r.status === "attended").length === 3);
+
+  /* grants, broadcasts, cascades */
+  check("no API role writes a record directly: no insert, no delete, no column but the status",
+        await code_("anon", null, "insert into public.attendance (event_id, guest_token_hash, player_name) values ($1, repeat('a', 64), 'X')", [ev.id]) === "42501"
+        && await code_("authenticated", K2, "insert into public.attendance (event_id, user_id, player_name) values ($1, $2, 'X')", [ev.id, K2]) === "42501"
+        && await code_("authenticated", K2, "delete from public.attendance where id = $1", [rg.id]) === "42501"
+        && await code_("authenticated", K2, "update public.attendance set position = 1 where id = $1", [rg.id]) === "42501"
+        && await code_("authenticated", K2, "update public.attendance set marked_by = null where id = $1", [rg.id]) === "42501");
+  await db.query("delete from realtime.messages");
+  await mark(K2, rg2.id, "no_show");
+  check("a mark is a change on the sheet: one broadcast on the CTA's topic",
+        (await db.query("select payload from realtime.messages where topic = $1", [`cta:${CODE}`])).rows.map(r => `${r.payload.table}:${r.payload.op}`).join() === "attendance:UPDATE");
+  check("no API role calls the record's triggers",
+        await code_("authenticated", K2, "select public.attendance_record()") === "42501"
+        && await code_("authenticated", K2, "select public.attendance_guard()") === "42501");
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [Y3]);
+  check("deleting an account deletes its records", (await db.query("select count(*)::int as n from public.attendance where id = $1", [ry.id])).rows[0].n === 0);
+  await run("authenticated", C, "delete from public.events where id = $1", [ev.id]);
+  check("deleting the CTA deletes its records", (await records()).length === 0);
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  await db.query("delete from realtime.messages");
 }
 
 } catch (e) {

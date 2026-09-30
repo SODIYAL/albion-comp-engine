@@ -927,6 +927,20 @@ check("LIVE_SETTLE_MS" in SIGNUP_JS and "reload(true, true)" in SIGNUP_JS,
 check('.on("postgres_changes"' not in SIGNUP_JS, "L34e no row data crosses the channel: broadcasts only, the policies still decide what is read")
 check(all(s in AUTH_CSS for s in (".su-live-state{", '.su-live-state[data-live="yes"]')), "L34f the live mark is styled in _auth.css")
 
+print("L35 - history: the sheet carries the record, the player confirms, the caller marks")
+# Phase 8: attendance on the sheet, apart from the sign-up. The player's
+# confirmation and the caller's marks are helpers the policies bound;
+# the record's rows with no claim behind them are listed as history.
+check('id="su-confirm"' in sdlg and 'id="su-history"' in sdlg and 'id="su-mark-all"' in sdlg,
+      "L35a the sheet carries the confirm button, the record list and mark-everyone")
+check("attendanceTag(" in SIGNUP_JS and "markSelect(" in SIGNUP_JS and "dataset.suMark" in SIGNUP_JS,
+      "L35b each sign-up shows its mark; the caller gets a mark list per record")
+check("markPowers(myRole, ev.status, sheet.mine)" in SIGNUP_JS and "historyRows(sheet.attendance)" in SIGNUP_JS and "attendanceSummary(sheet.attendance)" in SIGNUP_JS,
+      "L35c what the sheet offers follows the role, the status and the player's own sign-up; the counts and the history come from the record")
+check("ATTENDANCE_NAMES[" in SIGNUP_JS and "<option" not in SIGNUP_JS and "<select" not in SIGNUP_JS,
+      "L35d the marks are named through one map and built without markup strings")
+check(all(s in AUTH_CSS for s in (".su-att{", '.su-att[data-status="no_show"]', ".su-mark{", ".su-confirm{")), "L35e the record's marks are styled in _auth.css")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

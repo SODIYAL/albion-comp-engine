@@ -40,6 +40,11 @@ DEFINER_ALLOWED = {
     # the caller lands nothing); the message names a table and an
     # operation, and no API role can call the function
     "public.sheet_changed": "trigger",
+    # the attendance record is the guild's: no API role holds an insert
+    # or delete grant on it, so the mirror from sign-ups and the
+    # settlement at completion write it with the definer's rights; no
+    # API role can call the function
+    "public.attendance_record": "trigger",
 }
 
 # A guest's reach (supabase/README.md rule 13): the tables `anon` reads
@@ -47,8 +52,8 @@ DEFINER_ALLOWED = {
 # statement, and the functions a guest calls (each running as the
 # caller). Nothing else is granted to anon, and no anon policy stands
 # without the code.
-GUEST_TABLES = {"events", "event_slots", "guilds", "signups"}
-GUEST_FUNCTIONS = {"public.claim_hash", "public.event_by_code", "public.sign_up", "public.cancel_sign_up"}
+GUEST_TABLES = {"events", "event_slots", "guilds", "signups", "attendance"}
+GUEST_FUNCTIONS = {"public.claim_hash", "public.event_by_code", "public.sign_up", "public.cancel_sign_up", "public.confirm_sign_up"}
 
 
 def check(cond, label, detail=""):
@@ -113,7 +118,7 @@ check(all(re.search(r"on table public\.(%s)\b" % "|".join(sorted(GUEST_TABLES)),
       "DB2g nothing is granted to anon beyond the guest tables and the guest functions", str(anon_grants))
 check(not any(re.search(r"grant (all|insert|update|delete)[^;]*on table public\.(events|event_slots|guilds)\b[^;]*\banon\b", g)
               for g in anon_grants),
-      "DB2g2 a guest reads the CTA, its slots and its guild, and writes only sign-ups")
+      "DB2g2 a guest reads the CTA, its slots and its guild, and writes only sign-ups and their own record's status")
 
 print("DB3 - policies read auth.uid() and current_setting() once per statement")
 # the definition in force: the last create or alter of each policy, in
@@ -397,10 +402,31 @@ check("'cta:' || code" in body and "false);" in body, "DB11b the topic is cta:<s
 cols = set(re.findall(r"\b(?:new|old)\.(\w+)", body))
 check(cols <= {"share_code", "event_id"}, "DB11c the trigger reads the code and the event id of the row, no other column", str(sorted(cols)))
 check("to_regprocedure('realtime.send(jsonb, text, text, boolean)') is null" in body, "DB11d without Realtime the trigger does nothing (the sheet keeps its Refresh)")
-check(all(re.search(r"create trigger \w+_changed\s+after [\w ]+ on public\.%s\s+for each row execute function public\.sheet_changed\(\)" % t, ALL) for t in ("signups", "event_slots", "events")),
-      "DB11e sign-ups, slots and the CTA itself each carry the trigger, after the write")
+check(all(re.search(r"create trigger \w+_changed\s+after [\w ]+ on public\.%s\s+for each row execute function public\.sheet_changed\(\)" % t, ALL) for t in ("signups", "event_slots", "events", "attendance")),
+      "DB11e sign-ups, slots, the CTA itself and the record each carry the trigger, after the write")
 check("function sheetTopic" in SIGNUP_JS and 'on("broadcast", { event: "changed" }' in SIGNUP_JS and "rpc(\"event_by_code\"" in SIGNUP_JS,
       "DB11f the client listens on the topic and re-reads through event_by_code: the channel only reports")
+
+print("DB12 - history: the record's statuses are the client's; the record is written by its trigger, marked by the caller, confirmed by the player")
+att_sql = re.search(r"constraint attendance_status_known check \(\s*status in \(([^)]+)\)", ALL)
+att_js = re.search(r"const ATTENDANCE_STATUSES = \[([^\]]+)\];", SIGNUP_JS)
+check(att_sql is not None and att_js is not None and norm(att_sql.group(1)) == norm(att_js.group(1)),
+      "DB12a the client's attendance statuses are the database's", "js %s, sql %s" % (att_js and att_js.group(1), att_sql and att_sql.group(1)))
+marks_js = re.search(r"const ATTENDANCE_MARKS = \[([^\]]+)\];", SIGNUP_JS)
+check(marks_js is not None and set(norm(marks_js.group(1))) <= set(norm(att_js.group(1))) and "cancelled" not in marks_js.group(1) and "reserve" not in marks_js.group(1),
+      "DB12b the marks a caller's list offers are listed statuses; cancelled and reserve are the record's own findings")
+check(re.search(r"grant (all|insert|delete)[^;]*on table public\.attendance\b", ALL) is None
+      and re.search(r"grant update \(status\) on table public\.attendance to anon, authenticated;", ALL) is not None,
+      "DB12c no API role inserts or deletes a record; the status is the one column the API writes")
+guard = re.search(r"create or replace function public\.attendance_guard\(\)(.*?)\$\$;", ALL, re.S)
+gbody = guard.group(1) if guard else ""
+check("pg_trigger_depth() >= 2" in gbody and "a player confirms or unconfirms; the caller marks attendance" in gbody
+      and "new.marked_by := me" in gbody and "= 'completed' then" in gbody,
+      "DB12d the guard: the record's own triggers write freely, a caller's mark carries who and when, a player moves between signed_up and confirmed before completion")
+check(all(re.search(r"create trigger \w+_attendance\s+after [\w ]+ on public\.%s\s+for each row execute function public\.attendance_record\(\)" % t, ALL) for t in ("signups", "events")),
+      "DB12e the record follows the sign-up (made, moved, gone) and the CTA's completion")
+check("function markPowers" in SIGNUP_JS and 'status !== "completed"' in SIGNUP_JS and "compPowers(myRole).write" in SIGNUP_JS,
+      "DB12f the client offers marks to the caller roles and confirmation to the player before completion")
 
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

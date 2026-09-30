@@ -70,7 +70,10 @@ database, are the only thing that keeps one player's data from another's.
    the joiner cannot yet read), and `sheet_changed`, the broadcast
    trigger (`realtime.messages` is kept from the API roles by row-level
    security with no policy for them, so a message sent as the caller
-   lands nothing; the function sends a table name and an operation).
+   lands nothing; the function sends a table name and an operation), and
+   `attendance_record`, the record's trigger (the attendance record is the
+   guild's: no API role holds an insert or delete grant on it, so the
+   mirror from sign-ups and the settlement at completion write it).
    Every API function runs as the caller. A trigger function has execute
    revoked from `public`, `anon` and `authenticated`: triggers run it,
    the API never does.
@@ -140,6 +143,10 @@ database, are the only thing that keeps one player's data from another's.
 | `move_signup(signup_id, target)` | a player to a slot, the reserves (null) or a held slot, whose holder takes the mover's old place: a swap in one transaction. Runs as the caller: a player moves their own row while open, a caller anyone until completed; a refused move is `42501`, a completed CTA `55000` | — | signed-in users |
 | `add_player(event_id, player jsonb)` | a player the caller writes onto the sheet by name (someone signing up in Discord): a guest row with a token hash nobody holds, so callers alone change it | — | signed-in users (the policy's caller branch) |
 | `sheet_changed()` | trigger, after every write to `signups`, `event_slots` and `events` (update, delete): one Realtime broadcast on the CTA's topic `cta:<share code>`, event `changed`, payload `{table, op}` and nothing else; a cascade from a deleted CTA sends nothing beyond the CTA's own message; without Realtime it does nothing | — | triggers |
+| `attendance` | the guild's record of a player on a CTA, kept apart from the live sign-up: `signup_id` (the claim it mirrors; null once the claim is gone), the player (an account, or a guest's token hash), `player_name`, `position` and `weapon_id` (the slot and its weapon at the end), `declared` (the weapons declared), `status` (`signed_up`, `confirmed`, `attended`, `no_show`, `cancelled`, `reserve`), `marked_by` / `marked_at` (the caller's mark); one record per player per CTA | the guild's members; whoever holds the code | its own trigger (made at sign-up, kept in step with moves and adoptions, `cancelled` when the claim goes unless already marked, settled at completion: a reserve stays a reserve, the slot's weapon is kept); the player's `confirm_sign_up` (`signed_up` <-> `confirmed`, before completion); the caller roles' `mark_attendance` (any listed status, any time; the guard stamps `marked_by`, `marked_at`) and `mark_all_attended` |
+| `confirm_sign_up(code, token?, confirmed)` | the player's own record, `confirmed` or back to `signed_up`, before the CTA completes (`55000` after); no sign-up of theirs is `P0002` | — | guests and signed-in users |
+| `mark_attendance(attendance_id, mark)`, `mark_all_attended(event_id)` | the caller's marks: one record to any listed status; everyone still signed up or confirmed in a slot to `attended` (returns how many) | — | signed-in users (the policy's caller branch) |
+| `attendance_record()`, `attendance_guard()` | the record's triggers: the mirror and the settlement (definer's rights, rule 8); the guard (the record's own writes pass; a caller's mark carries who and when; a player moves between `signed_up` and `confirmed` before completion) | — | triggers |
 
 **Who reads whom.** A profile and a weapon list are readable by their own
 account and by every member of a guild the two share (the own-row select

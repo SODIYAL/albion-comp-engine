@@ -2446,10 +2446,15 @@ window.AUTH_LINK = "";
           <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
           <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
         </div>
+        <div id="su-history-wrap" hidden>
+          <h3 class="pw-label" id="su-history-label">Record</h3>
+          <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
+        </div>
         <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
           <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
+          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
           <form class="su-add" id="su-add-form" novalidate hidden>
             <div class="auth-field">
               <label for="su-add-name">Add a player by name</label>
@@ -2514,6 +2519,7 @@ window.AUTH_LINK = "";
             <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
             <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
           </div>
+          <button type="button" class="gd-btn su-confirm" id="su-confirm" data-confirmed="no" hidden>Confirm I'm coming</button>
         </form>
       </section>
     </div>

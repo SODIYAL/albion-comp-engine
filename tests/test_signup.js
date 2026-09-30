@@ -190,7 +190,8 @@ const run = expr => vm.runInContext(expr, ctx);
   check("the player's path reaches the database through its three functions alone; the caller's touches sign-ups and slots",
         same([...new Set(src.match(/\.from\("(\w+)"/g))].sort(), ['.from("event_slots"', '.from("signups"'])
         && /rpc\("event_by_code"/.test(src) && /rpc\("sign_up"/.test(src) && /rpc\("cancel_sign_up"/.test(src)
-        && /rpc\("move_signup"/.test(src) && /rpc\("add_player"/.test(src));
+        && /rpc\("move_signup"/.test(src) && /rpc\("add_player"/.test(src)
+        && /rpc\("confirm_sign_up"/.test(src) && /rpc\("mark_attendance"/.test(src) && /rpc\("mark_all_attended"/.test(src));
   check("the module touches the planner through the address bar alone",
         /location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
   check("the claim token lives in localStorage and leaves the browser only inside a statement",
@@ -263,6 +264,49 @@ const run = expr => vm.runInContext(expr, ctx);
   check("the sheet joins the channel once the sheet is read and leaves it when the dialog closes or another CTA opens",
         /if \(sheet\) startWatching\(\);/.test(src) && /dialog\.addEventListener\("close", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+if \(!dialog\.open\)/.test(src));
   check("a live change re-reads the sheet without refilling the player's form", /reload\(true, true\)/.test(src) && /if \(!live && \(!keepForm \|\| sheet\.mine\)\) fillForm\(\);/.test(src));
+}
+
+
+/* 8 - the record (phase 8) */
+{
+  const S = run("ATTENDANCE_STATUSES"), N = run("ATTENDANCE_NAMES"), K = run("ATTENDANCE_MARKS");
+  check("the six statuses, each named; the caller's list offers four (cancelled and reserve are findings)",
+        same(S, ["signed_up", "confirmed", "attended", "no_show", "cancelled", "reserve"]) && S.every(s => N[s])
+        && same(K, ["signed_up", "confirmed", "attended", "no_show"]));
+  const summary = run("attendanceSummary")([{ status: "confirmed" }, { status: "attended" }, { status: "attended" }, { status: "no_show" }, { status: "reserve" }, { status: "odd" }]);
+  check("the summary counts each status, an unknown one aside",
+        summary.confirmed === 1 && summary.attended === 2 && summary.no_show === 1 && summary.reserve === 1 && summary.signed_up === 0 && summary.total === 5, summary);
+  check("an empty record counts nothing", run("attendanceSummary")(null).total === 0);
+  const history = run("historyRows")([
+    { id: "a", signup_id: "s1", player_name: "Live", status: "signed_up" },
+    { id: "b", signup_id: null, player_name: "Gone", status: "cancelled", marked_at: null },
+    { id: "c", signup_id: null, player_name: "Away", status: "no_show", marked_at: "2026-10-03T20:00:00Z" },
+    { id: "d", signup_id: null, player_name: "Bench", status: "reserve", marked_at: null },
+  ]);
+  check("the history is the records with no claim behind them, the marked ones first, then by name",
+        same(history.map(r => r.id), ["c", "d", "b"]), history.map(r => r.id));
+  const powers = run("markPowers");
+  check("a caller marks any time, marks everyone once completed; a player confirms their own sign-up before completion",
+        powers("caller", "open", { id: "m" }).mark && !powers("caller", "open", { id: "m" }).all && powers("caller", "completed", null).all
+        && powers("member", "open", { id: "m" }).confirm && !powers("member", "completed", { id: "m" }).confirm
+        && !powers("member", "open", null).confirm && !powers("member", "open", { id: "m" }).mark && !powers(null, "open", null).mark);
+
+  CALLS.length = 0;
+  REPLY["rpc:confirm_sign_up"] = { data: { id: "a1", status: "confirmed" }, error: null };
+  const c = await run("confirmSignUp")("A1B2C3D4E5", "tok", true);
+  check("confirmSignUp sends confirm_sign_up with the code, the token and the answer",
+        same(CALLS[0], { rpc: "confirm_sign_up", args: { code: "A1B2C3D4E5", token: "tok", confirmed: true } }) && c.status === "confirmed", CALLS[0]);
+  CALLS.length = 0;
+  await run("confirmSignUp")("A1B2C3D4E5", null, false);
+  check("withdrawing sends false and a null token for an account", CALLS[0].args.confirmed === false && CALLS[0].args.token === null);
+  CALLS.length = 0;
+  REPLY["rpc:mark_attendance"] = { data: { id: "a1", status: "attended", marked_at: "x" }, error: null };
+  await run("markAttendance")("a1", "attended");
+  check("markAttendance sends mark_attendance with the record and the mark", same(CALLS[0], { rpc: "mark_attendance", args: { attendance_id: "a1", mark: "attended" } }));
+  CALLS.length = 0;
+  REPLY["rpc:mark_all_attended"] = { data: 7, error: null };
+  const n = await run("markAllAttended")("e1");
+  check("markAllAttended sends mark_all_attended with the CTA and reads the count", same(CALLS[0], { rpc: "mark_all_attended", args: { event_id: "e1" } }) && n === 7);
 }
 
 console.log(`\n${pass}/${pass + fail} sign-up tests passed`);

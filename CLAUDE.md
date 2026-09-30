@@ -207,8 +207,9 @@ Three applications with explicit boundaries (each directory's README is its cont
   share code carried by the statement, their own row keyed by a claim
   token's hash; accounts under their id; the caller roles moving, adding
   and removing players until the CTA is completed; the sheet live over a
-  Realtime broadcast that names a table and an operation, never a row)
-  now; attendance and history next
+  Realtime broadcast that names a table and an operation, never a row;
+  the attendance record kept apart from the sign-up by its own trigger,
+  confirmed by the player, marked by the caller) now; analytics next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:

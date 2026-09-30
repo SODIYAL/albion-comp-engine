@@ -199,7 +199,15 @@ and its tests: `supabase/README.md`.
   settles, then the sheet re-reads itself through `event_by_code`, the
   player's typing kept, and a move or removal of the player's own row
   is said out loud. A live mark beside the status says whether the
-  channel is up; Refresh stays for when it is not.
+  channel is up; Refresh stays for when it is not. The sheet carries the
+  record (phase 8): each sign-up shows its attendance mark, the counts
+  line says how many are confirmed (and, once completed, attended,
+  no-show and reserve), a Record list keeps the players whose claim is
+  gone (a cancellation, a settled reserve), the player gets "Confirm I'm
+  coming" before completion, and the caller roles get a mark list per
+  record any time plus "mark everyone in a slot as attended" once the
+  CTA is completed (`markPowers`; `confirm_sign_up`, `mark_attendance`,
+  `mark_all_attended`).
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls

@@ -2,8 +2,9 @@
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
 phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs), phase 5
-(sign-up), phase 6 (caller management) and phase 7 (live updates)
-implemented 2026-09-30; phases 8–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+(sign-up), phase 6 (caller management), phase 7 (live updates) and phase
+8 (history) implemented 2026-09-30; phases 9–12 open (`BACKLOG.md`
+"Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -75,9 +76,10 @@ roles.
    topic after every write to the sheet; the database enforces the
    concurrency, the channel only reports it, and the sheet re-reads
    itself under its own policies.
-8. **History** — attendance (`signed_up`, `confirmed`, `attended`,
-   `no_show`, `cancelled`, `reserve`) kept apart from the sign-up; a
-   completed event keeps its slots and attendance.
+8. **History** (implemented) — `attendance` (`signed_up`, `confirmed`,
+   `attended`, `no_show`, `cancelled`, `reserve`), one record per player
+   per CTA, kept apart from the sign-up by its own trigger; a completed
+   event keeps its slots and its record, the slot's weapon copied in.
 9. **Analytics** — facts over completed events: CTAs, sign-ups, attendance
    and show rate, regulars, roles and weapons played ("played Heavy Mace in
    31 CTAs"). No skill rating without a defined, evidenced measure.
@@ -381,6 +383,39 @@ roles.
   it) the trigger does nothing and the sheet keeps its Refresh.
 - **Deferred**: a live CTAs dialog (a channel per guild), presence (who
   has the sheet open), a live planner roster from the sheet (phase 11).
+
+## Phase 8 decisions
+
+- **The record is its own table, written by its own trigger.** A
+  sign-up is a live claim: it goes when the player cancels or the
+  caller removes them, and the slot frees. The record stays: made when
+  the player signs up, kept in step with moves, renames and adoptions,
+  `cancelled` when the claim goes (unless the caller has already
+  marked it), settled at completion. Found by the player's identity,
+  never by the sign-up id (a foreign key nulls that before the trigger
+  runs). No API role holds an insert or delete grant on it, so the
+  trigger runs with its definer's rights, a listed exception to rule 8
+  beside the broadcast trigger.
+- **Who writes which status.** The player moves their own record
+  between `signed_up` and `confirmed` before completion; a caller,
+  officer or admin sets any listed status, any time, completion
+  included, and the guard stamps who and when; `cancelled` and
+  `reserve` are the record's own findings, shown in the caller's list
+  only when a row already holds them. The guard tells the record's own
+  writes apart by trigger depth (two and beyond).
+- **Completion settles, it does not guess.** A reserve becomes
+  `reserve`; a slot holder keeps `signed_up` or `confirmed` until the
+  caller marks `attended` or `no_show` (one by one, or everyone in a
+  slot at once, then the no-shows); the slot's weapon at completion is
+  what the player played, and the declared weapons are copied. An
+  unmarked row is unknown, never counted as attended (phase 9).
+- **A mark already made survives the claim going**: a player marked
+  attended and then removed stays attended. Signing up again brings
+  the same record back to `signed_up`, cleared of any mark.
+- **Deleting an account deletes its records** (rule 2), the guild's
+  history losing that player; deleting a CTA deletes them all.
+- **Deferred**: a player's own history across CTAs (phase 9), a
+  caller's note on a record, a mark's audit trail.
 
 ## Open questions
 
