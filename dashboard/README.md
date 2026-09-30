@@ -5,8 +5,8 @@ hand-edited.
 
 - `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,
   `_decision_layer.js/.css`, `_supabase.js`, `_auth.js/.css`, `_profile.js`,
-  `_guild.js`, `_comps.js`, `_events.js`, `_explainer.html` — the **sources**
-  (the `_` prefix marks them).
+  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, `_explainer.html` —
+  the **sources** (the `_` prefix marks them).
 - `build.py` — the bundler: inlines the dataset, the engine
   (`engine/app_scoring.js`), the sources, and a parity fixture into
   `index.html` + `how-it-works.html` here and the GitHub Pages copies in
@@ -164,12 +164,33 @@ and its tests: `supabase/README.md`.
   dialog shows the copy first): the module never writes a template, and
   a comp deleted later leaves the CTA whole. A completed CTA's slots are
   frozen; the payload carries none.
+- **`_signup.js`** (platform phase 5) is the sheet of a CTA, one surface
+  for guests and accounts: helpers over the three guest functions
+  (`event_by_code`, `sign_up`, `cancel_sign_up`; the module reaches no
+  table directly, since the share code rides each statement); pure
+  functions for the link (`index.html?cta=<code>`) and the code in it,
+  the claim token (16 random bytes as hex, kept per CTA in
+  `localStorage`), the board (each slot with its claimant, the
+  reserves, the free slots), validation on the database's bounds, the
+  payload, a profile's lists as the first declaration and error wording
+  (`tests/test_signup.js`); and the sheet dialog: the roster with who
+  holds what, the reserves, the player's form (a name for guests, the
+  slot among the free ones or reserve, the weapons they bring through
+  the profile's search, item power, can swap, a note), update and
+  cancel, refresh, open in planner, the link to copy. The link opens
+  the sheet once the stored session has been read, so an account signs
+  up as itself; the CTAs dialog opens it by dispatching a `cta-sheet`
+  DOM event with the code (no call between modules). A guest's claim
+  token never leaves the browser except inside the statement; the row
+  keeps its hash, so this browser alone edits or cancels the sign-up,
+  and an account signing up here later adopts it. The sheet is no
+  account-menu view: a guest has no menu.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js` and `_events.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js` and `_signup.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -183,11 +204,12 @@ and its tests: `supabase/README.md`.
   keeps the button in step with other tabs.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
-`tests/test_comps.js` and `tests/test_events.js` pin validation, error
-wording, the name fallback, link parsing, the weapon lists and search, the
-member table and role powers, the share hash both ways, the statuses and
-their moves, the times, the calendar, and what the helpers send;
-`test_dashboard_layout.py` L27–L31 pin the markup, the isolation, the
+`tests/test_comps.js`, `tests/test_events.js` and `tests/test_signup.js`
+pin validation, error wording, the name fallback, link parsing, the
+weapon lists and search, the member table and role powers, the share hash
+both ways, the statuses and their moves, the times, the calendar, the
+sheet's board and link, and what the helpers send;
+`test_dashboard_layout.py` L27–L32 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also

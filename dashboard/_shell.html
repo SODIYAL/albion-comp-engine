@@ -2326,7 +2326,9 @@ window.AUTH_LINK = "";
             <div class="ev-status-row">
               <span class="ev-status" id="ev-status" data-status=""></span>
               <span class="ev-moves" id="ev-moves"></span>
-              <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span></span>
+              <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span>
+                <button type="button" class="gd-btn" id="ev-sheet" hidden>Sign-up sheet</button>
+                <button type="button" class="gd-btn" id="ev-link" hidden>Copy link</button></span>
             </div>
             <div class="cp-fields">
               <div class="auth-field cp-wide" id="ev-source-wrap">
@@ -2396,6 +2398,102 @@ window.AUTH_LINK = "";
                 <span class="profile-dirty" id="ev-dirty" hidden>Unsaved changes</span>
               </div>
             </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="auth-dialog signup-dialog" id="signup-dialog" aria-modal="true" aria-labelledby="su-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker" id="su-kicker">CTA</span>
+        <h2 id="su-title">Sign-up sheet</h2>
+        <p class="gd-meta su-when" id="su-when"></p>
+      </div>
+      <button type="button" class="auth-close" id="su-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="su-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
+    <p class="sr-only" id="su-live" aria-live="polite"></p>
+
+    <div class="ev-status-row su-status-row">
+      <span class="ev-status" id="su-status" data-status=""></span>
+      <span class="su-counts" id="su-counts"></span>
+      <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
+      <button type="button" class="gd-btn" id="su-open">Open in planner</button>
+    </div>
+    <p class="su-notes" id="su-notes" hidden></p>
+
+    <div class="su-grid">
+      <section class="su-board-wrap" aria-labelledby="su-board-label">
+        <h3 class="pw-label" id="su-board-label">Roster</h3>
+        <table class="gd-table cp-table su-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Weapon</th>
+              <th scope="col">Role</th>
+              <th scope="col">Player</th>
+            </tr>
+          </thead>
+          <tbody id="su-board"></tbody>
+        </table>
+        <div id="su-reserves-wrap" hidden>
+          <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
+          <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
+        </div>
+        <p class="auth-hint su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+      </section>
+
+      <section class="su-form-wrap" aria-labelledby="su-form-label">
+        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
+        <p class="auth-hint" id="su-closed" hidden></p>
+        <form class="auth-form" id="su-form" novalidate hidden>
+          <p class="auth-hint" id="su-who"></p>
+          <div class="auth-field" id="su-name-wrap">
+            <label for="su-name">Your name</label>
+            <input class="text-input" id="su-name" maxlength="64" type="text" spellcheck="false" autocomplete="nickname"
+              aria-describedby="su-name-err">
+            <p class="auth-field-err" id="su-name-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-slot">Slot</label>
+            <select id="su-slot" aria-describedby="su-slot-err"></select>
+            <p class="auth-field-err" id="su-slot-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-weapon-add">Weapons you bring</label>
+            <ul class="pw-list su-weapons" id="su-weapons" aria-label="Weapons declared"></ul>
+            <div class="pw-combo">
+              <input class="text-input" id="su-weapon-add" type="text" role="combobox"
+                aria-autocomplete="list" aria-expanded="false" aria-controls="su-weapon-results"
+                autocomplete="off" spellcheck="false" placeholder="add a weapon you bring">
+              <ul class="pw-results" id="su-weapon-results" role="listbox" aria-label="Weapons to add" hidden></ul>
+            </div>
+            <p class="auth-field-err" id="su-weapons-err"></p>
+          </div>
+          <div class="su-row">
+            <div class="auth-field">
+              <label for="su-ip">Item power <span class="opt">optional</span></label>
+              <input class="text-input" id="su-ip" type="number" min="0" max="3000" step="1" inputmode="numeric"
+                aria-describedby="su-ip-err">
+              <p class="auth-field-err" id="su-ip-err"></p>
+            </div>
+            <label class="su-check" for="su-swap">
+              <input type="checkbox" id="su-swap"> Can swap to what the caller needs
+            </label>
+          </div>
+          <div class="auth-field">
+            <label for="su-note">Note <span class="opt">optional</span></label>
+            <input class="text-input" id="su-note" maxlength="200" type="text" aria-describedby="su-note-err">
+            <p class="auth-field-err" id="su-note-err"></p>
+          </div>
+          <div class="profile-actions">
+            <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
+            <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
           </div>
         </form>
       </section>

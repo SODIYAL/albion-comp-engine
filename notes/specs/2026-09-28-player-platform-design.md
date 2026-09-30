@@ -1,8 +1,9 @@
 # Player platform — design (2026-09-28)
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
-phase 2 (guilds), phase 3 (saved comps) and phase 4 (CTAs) implemented
-2026-09-30; phases 5–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+phase 2 (guilds), phase 3 (saved comps), phase 4 (CTAs) and phase 5
+(sign-up) implemented 2026-09-30; phases 6–12 open (`BACKLOG.md`
+"Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -59,11 +60,13 @@ roles.
    draft / open / locked / completed, share code, the comp's share hash)
    and `event_slots`, COPIED from the template at creation: editing an
    event never touches its template.
-5. **Sign-up** — `signups` (event, slot or none, user or guest name, item
-   power, can-swap, the weapons declared). Claiming a slot is one conditional
-   statement (`where status = 'open'`), so two claims cannot both succeed.
-   Guests stay possible; an account gets the better experience (names filled
-   in, profile weapons offered, history kept).
+5. **Sign-up** (implemented) — `signups` (event, slot or none, an account
+   or a guest's claim-token hash, the name shown, item power, can-swap,
+   the weapons declared, a note). Claiming a slot is one conditional
+   statement under a unique index, so two claims cannot both succeed.
+   Guests sign up through the CTA's link; an account gets the better
+   experience (named after its character, profile weapons offered,
+   history kept, the guest sign-up its browser made adopted).
 6. **Caller management** — move, remove, lock, change weapon, reserves,
    promote, close and reopen sign-up: each a function under the caller's
    guild role.
@@ -270,17 +273,61 @@ roles.
 - **Deferred**: renewing a share code, a guild-wide time zone, per-event
   multi-party grouping, a caller-only "my CTAs" view.
 
+## Phase 5 decisions
+
+- **Guest identity is a name and a claim token** (the open question,
+  decided). The browser makes 16 random bytes on the first sign-up and
+  keeps them per CTA in `localStorage`; the row stores their SHA-256
+  (`claim_hash`); the token rides each statement (`app.claim_token`) and
+  never lands in a column. That browser alone edits or cancels the
+  sign-up; an account signing up from it later adopts the row (the row
+  becomes the account's, the hash goes). A name alone would let anyone
+  edit anyone and tie attendance to a typed string; a login would cost
+  a guest the frictionless path the spec asks for. A cleared browser
+  loses the claim: the caller's removal (phase 6) is the way out.
+- **The share code is the guest's key, and `anon` gets a bounded
+  reach** (rule 13). Rule 1's "nothing to anon" stood while no guest
+  existed; the spec's guest needs the CTA, its slots, its guild's name
+  and its sheet, and a sign-up of their own. The code rides the
+  statement as the join code does (rule 11), policies `to anon` check it
+  or delegate to the event's policy, and the grants to `anon` are the
+  columns a guest sees (the share code among them, since the functions
+  select the CTA by it and the policy already limits a guest to that
+  one) and the sign-up columns a guest writes. Every guest function runs
+  as the caller: no definer, so the advisor's lint on definers exposed
+  to the API stays quiet and the same policies bound a guest and a
+  member. The schema test lists the reach (`GUEST_TABLES`,
+  `GUEST_FUNCTIONS`) and refuses any other grant to `anon` or any `anon`
+  policy that does not read the code.
+- **One sign-up per player per CTA, claimed in one statement.**
+  `sign_up` inserts with `ON CONFLICT` on the player's own partial
+  unique index (account, or guest hash), so a second call updates; a
+  slot already claimed is the slot index's `23505`; a slot not on the
+  roster is the foreign key's `23503`; a removed slot leaves its
+  claimant a reserve (`on delete set null (position)`).
+- **Open to sign up, not completed to cancel.** Sign-ups are written
+  while the CTA is open (a policy clause and `55000` from the function);
+  a player cancels until it is completed; a completed CTA keeps its sheet
+  (phase 8 reads it).
+- **The sheet's name is a snapshot.** `player_name` is stored for every
+  sign-up (an account's from its character, or the payload's for an
+  alt), so the sheet reads without a join to `profiles` and the history
+  keeps the name as declared.
+- **Time and identity on the link.** The link opens the sheet once the
+  stored session has been read, so an account signs up as itself and a
+  guest never makes a needless claim; the CTAs dialog opens the sheet by
+  a DOM event (`cta-sheet`), never a call between modules.
+- **Bounds**: 120 sign-ups per CTA, 10 weapons declared, item power
+  0–3000, a note ≤ 200, the name under the account name bound. Storage
+  bounds against abuse, not product rules.
+- **Deferred**: caller controls on the sheet (phase 6), Realtime
+  (phase 7), a guest's history joining an account made elsewhere, a
+  guild-scoped name search for callers filling slots.
+
 ## Open questions
 
-- **Guest identity.** What a guest sign-up records, and how a guest's
-  history joins an account created later. The candidates:
-  - a name only: the least friction, but anyone can type any name, a guest
-    cannot safely edit or cancel their own sign-up, and attendance ties to a
-    typed string (typos and duplicates split one player);
-  - a name and a claim token: a random secret kept in the guest's browser,
-    its hash in the database; that browser alone (and the caller) edits or
-    cancels the sign-up, and an account created later on the same browser
-    can take over the guest's history;
-  - a Discord login (phase 12): real identity, at a sign-in's friction.
+- **Guest identity** is decided (phase 5 decisions: a name and a claim
+  token). Open: how a guest's history joins an account made on another
+  browser (a Discord login, phase 12, is the candidate).
 - **Supabase Auth settings**: leaked-password protection is off (security
   advisor).

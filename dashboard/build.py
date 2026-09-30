@@ -16,6 +16,7 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
     dashboard/_guild.js            the guilds dialog (members, roles, join code)
     dashboard/_comps.js            the saved comps dialog (a guild's comp templates)
     dashboard/_events.js           the CTAs dialog (a guild's events, copied from its comps)
+    dashboard/_signup.js           the sign-up sheet (a CTA's link, guests and accounts)
     out/dataset-latest.json        the single source of truth
         │
         ▼
@@ -170,6 +171,8 @@ def main():
         comps_js = f.read()
     with open(os.path.join(DASH, "_events.js"), encoding="utf-8") as f:
         events_js = f.read()
+    with open(os.path.join(DASH, "_signup.js"), encoding="utf-8") as f:
+        signup_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     semantic_icons = load_semantic_icons()
@@ -438,6 +441,7 @@ def main():
            f"<script>\nconst ACCOUNT_CONTENTS = {js(account_contents)};\n"
            f"const ACCOUNT_STYLES = {js(account_styles)};\n{comps_js}\n</script>\n"
            f"<script>\n{events_js}\n</script>\n"
+           f"<script>\n{signup_js}\n</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     # newline="\n" on every committed page: Windows' default text mode

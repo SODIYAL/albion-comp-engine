@@ -851,6 +851,49 @@ i_events = script_at(lambda a, b: "function loadGuildEvents" in b)
 check(0 <= i_comps < i_events, "L31q the CTAs module loads after the comps module, in its own <script>",
       "script indices comps=%d events=%d" % (i_comps, i_events))
 
+print("L32 - sign-up: one sheet for guests and accounts, opened by a link or from the CTAs dialog")
+# Sign-up (platform phase 5): the sheet is reached by ?cta=<code> or by a
+# DOM event the CTAs dialog dispatches (never a call between modules);
+# the module reaches the database through three functions, keeps the
+# guest's claim token in localStorage, and meets the planner through the
+# address bar alone.
+SIGNUP_JS = read("_signup.js")
+sdlg = seg(SHELL, '<dialog class="auth-dialog signup-dialog"', "</dialog>", "L32 dialog anchors")
+check('aria-modal="true"' in sdlg and 'aria-labelledby="su-title"' in sdlg and 'id="su-title"' in sdlg,
+      "L32a the sheet dialog is modal and titled")
+for fid in ("su-name", "su-slot", "su-weapon-add", "su-ip", "su-swap", "su-note"):
+    check(('id="%s"' % fid) in sdlg and ('for="%s"' % fid) in sdlg, "L32b field %s has its label" % fid)
+check('role="alert"' in sdlg and 'aria-live="polite"' in sdlg, "L32c errors and changes are announced, inside the dialog")
+check('id="su-board"' in sdlg and sdlg.count("<th scope=\"col\">") == 4, "L32d the roster has its four column headers")
+check('role="combobox"' in sdlg and 'aria-controls="su-weapon-results"' in sdlg and 'id="su-weapon-results"' in sdlg and 'role="listbox"' in sdlg,
+      "L32e the weapon picker is a combobox bound to its listbox (the profile's pattern)")
+check('id="ev-sheet"' in SHELL and 'id="ev-link"' in SHELL, "L32f the CTAs dialog offers the sheet and its link")
+check('dispatchEvent(new CustomEvent("cta-sheet"' in read("_events.js") and 'addEventListener("cta-sheet"' in SIGNUP_JS,
+      "L32g the CTAs dialog hands the code over as a DOM event; the sheet listens (no call between modules)")
+check("codeFromSearch(" in SIGNUP_JS and "location.search" in SIGNUP_JS and "state.ready" in SIGNUP_JS,
+      "L32h the link opens the sheet once the stored session has been read")
+check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT", SIGNUP_JS),
+      "L32i _signup.js reads and writes no planner or engine state")
+check("location.hash" in SIGNUP_JS and "templateHash(" in SIGNUP_JS, "L32j the sheet opens a CTA in the planner through the share hash")
+signup_ui = SIGNUP_JS[SIGNUP_JS.find("(function signupUI()"):]
+check(signup_ui != "" and "window.DB" not in signup_ui and "createClient" not in SIGNUP_JS,
+      "L32k the sheet UI calls its helpers, never the Supabase client")
+check('.from("' not in SIGNUP_JS, "L32l the helpers reach the database through functions alone: the code rides each statement")
+check("window.Account.subscribe(" in SIGNUP_JS and 'registerView(' not in SIGNUP_JS,
+      "L32m the sheet reads identity through window.Account and is no account-menu view: a guest has no menu")
+check("weaponInfo(" in SIGNUP_JS and "weaponSearch(" in SIGNUP_JS and "role_class" not in SIGNUP_JS,
+      "L32n weapons are read through the catalog and the profile's search: one role read, no engine")
+check(not re.search(r"loadSheet|submitSignUp|cancelSignUp|sheetBoard|codeFromSearch|CLAIM_TOKEN_RE", APP + DECISION_JS),
+      "L32o the planner never calls the sign-up module")
+check(all(s in AUTH_CSS for s in (".signup-dialog{", ".su-grid{", ".su-mine{", ".su-free{")),
+      "L32p the sheet, its grid and its marks are styled in _auth.css")
+check(".su-grid{grid-template-columns:1fr}" in LAYOUT, "L32q on a phone the form drops under the roster (_layout.css)")
+i_signup = script_at(lambda a, b: "function loadSheet" in b)
+check(0 <= i_events < i_signup, "L32r the sign-up module loads after the CTAs module, in its own <script>",
+      "script indices events=%d signup=%d" % (i_events, i_signup))
+check("localStorage" in SIGNUP_JS and "crypto.getRandomValues" in SIGNUP_JS,
+      "L32s the guest's claim token is random and kept in this browser alone")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

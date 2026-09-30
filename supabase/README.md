@@ -34,7 +34,8 @@ database, are the only thing that keeps one player's data from another's.
    privileges grant every new `public` table and function to `anon` and
    `authenticated`, so every table starts with
    `revoke all ... from anon, authenticated` and grants back only what a
-   signed-in user needs. Nothing is granted to `anon`.
+   signed-in user needs. Nothing is granted to `anon` beyond a guest's
+   reach through a CTA's share code (rule 13).
 2. **The account column comes from the session.** A user-owned row carries
    `user_id uuid not null default auth.uid() references public.profiles (id)
    on delete cascade`. Deleting an account deletes its data.
@@ -88,6 +89,19 @@ database, are the only thing that keeps one player's data from another's.
     guild shared) instead of adding a policy. Every foreign key has a
     covering index (lint 0001). After a migration is applied the advisor
     must show no new warning.
+13. **A guest reaches one CTA through its share code.** The code is a
+    bearer key: it rides the statement as a transaction-local setting
+    (rule 11, `app.share_code`), the policies `to anon` on `events`,
+    `event_slots`, `guilds` and `signups` check it (or delegate to the
+    event's policy), and `anon` is granted exactly the columns a guest
+    sees and the sign-up a guest writes. The guest functions
+    (`event_by_code`, `sign_up`, `cancel_sign_up`, `claim_hash`) run as
+    the caller, signed in or not: the same policies bound a guest and a
+    member. A guest's own row is keyed by the SHA-256 of a claim token
+    the browser keeps (`app.claim_token` rides the statement; the token
+    is never stored). `GUEST_TABLES` and `GUEST_FUNCTIONS` in
+    `tests/test_supabase_schema.py` list the reach; nothing else is
+    granted to `anon`, and no `anon` policy stands without the code.
 
 ## Schema
 
@@ -113,13 +127,21 @@ database, are the only thing that keeps one player's data from another's.
 | `event_slots` | one slot of a CTA: `position` (1–60), `weapon_id` (a dataset key, or null for an open slot), `role` (≤ 40), `note` (≤ 200). COPIED from the comp's slots when the CTA is created; the CTA's own from then on | the guild's members | callers, officers and admins, until the CTA is completed: a completed CTA keeps its slots (the guard refuses every add, change and removal) |
 | `save_event(event jsonb)` | the CTA and its slots in one transaction: created without an id (with a comp and no slots, the comp's content, style, size, share hash and slots are copied; a field the payload names wins), updated with one; when the payload names slots, unlisted ones go and listed ones are added or changed; a comp the caller cannot read is `P0002`; a CTA the caller cannot edit is `42501` | — | signed-in users |
 | `events_guard()`, `event_slots_guard()` | triggers: the 200-per-guild bound, `updated_by` following every change, the status moves; the frozen slots of a completed CTA | — | triggers |
+| `signups` | a player on a CTA: `position` (the slot claimed, or null: a reserve; a removed slot leaves its claimant a reserve), `user_id` (an account) or `guest_token_hash` (a guest: SHA-256 of the claim token their browser keeps), one of the two, `player_name` (trimmed, 1–64), `item_power` (0–3000), `can_swap`, `weapons` (dataset keys, each once, ≤ 10), `note` (≤ 200); one claimant per slot, one sign-up per account and per guest on a CTA; at most 120 per CTA | the guild's members; whoever holds the code | the player, through `sign_up` (while the CTA is open) and `cancel_sign_up` (until it is completed); a guest under the token, an account under its id |
+| `event_by_code(code, token?)` | the CTA a share code names, with its guild, slots, sign-ups and the caller's own sign-up (by account, or by the token); `P0002` for a code that names nothing. Runs as the caller: the code rides the statement (rule 13) | — | guests and signed-in users |
+| `sign_up(code, token, signup jsonb)` | the caller's sign-up on the CTA, made or changed in one statement: an account under its id, named after its character unless the payload names it (and adopting the guest sign-up its browser's token names); a guest under the token's hash, with a name. A claimed slot is `23505`; a CTA not open is `55000` | — | guests and signed-in users |
+| `cancel_sign_up(code, token?)` | the caller's own sign-up gone, until the CTA is completed (`55000` after) | — | guests and signed-in users |
+| `claim_hash(token)` | SHA-256 as hex: the policies compare the token the statement carries with the row's hash | policies, the functions | — |
+| `signups_guard()` | trigger: the 120-per-CTA bound; every declared weapon a key, listed once | — | triggers |
 
 **Who reads whom.** A profile and a weapon list are readable by their own
 account and by every member of a guild the two share (the own-row select
 policies on `profiles` and `player_weapons` carry the guild clause): a
 caller reads what a member plays. Email addresses live in `auth.users` and
 are never exposed. The join code is readable by officers and admins alone,
-through the view.
+through the view. A CTA's share code is readable by the guild's members
+and, through the code itself, by whoever holds it: it opens that one
+CTA, its slots, its guild's name and its sheet, to guests too (rule 13).
 
 ## Tests
 
@@ -130,6 +152,7 @@ through the view.
 - `tests/test_supabase_rls.mjs` — every migration run in a real Postgres
   (PGlite) beside a stand-in for the Supabase platform, each case run as an
   API role with a user's JWT claims: own rows only, column grants, anon
-  reaches nothing, the sign-up trigger, atomic saves, the bound, cascades.
+  reaches nothing without a share code and one CTA with it, the sign-up
+  trigger, atomic saves, the bounds, the slot claim race, cascades.
   Needs `npm install --no-save @electric-sql/pglite@0.5.8` (a test-only
   install; the repository keeps no npm dependencies).

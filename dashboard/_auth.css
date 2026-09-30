@@ -334,3 +334,31 @@
 .ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
 .ev-share-wrap .pw-label{margin:0}
 .ev-share{font-size:13px}
+
+/* ---- sign-up (_signup.js): the sheet a link opens, the roster beside the player's form ---- */
+.signup-dialog{width:min(980px, calc(100vw - 32px))}
+.su-when{margin-top:4px}
+.su-status-row{margin-bottom:8px}
+.su-counts{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.su-status-row .gd-btn:first-of-type{margin-left:auto}
+.su-notes{margin:0 0 12px; padding:8px 10px; border-left:2px solid var(--rule-2); font-size:13px; color:var(--ink-2); white-space:pre-wrap}
+.su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
+.su-board-wrap{min-width:0}
+.su-form-wrap{border-left:1px solid var(--rule); padding-left:18px}
+.su-table td{vertical-align:middle}
+.su-weapon{display:inline-flex; align-items:center; gap:5px}
+.su-role{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.su-player .gd-sub{margin-top:1px}
+.su-declared{display:block; font-size:11.5px; color:var(--ink-2)}
+.su-free{font-family:var(--mono); font-size:11px; color:var(--role-healer)}
+.su-mine{background:rgba(255,196,84,.06)}
+.su-reserves{margin:4px 0 8px; padding:0; list-style:none; font-size:12.5px}
+.su-reserves li{padding:4px 6px; border-bottom:1px solid var(--rule)}
+.su-link-row{overflow-wrap:anywhere}
+.su-link{padding:0; border:0; background:none; font:inherit; color:var(--amber); text-decoration:underline dotted; cursor:pointer; overflow-wrap:anywhere; text-align:left}
+.su-weapons{margin:4px 0 6px}
+.su-weapons:empty{display:none}
+.su-row{display:flex; align-items:flex-end; gap:14px}
+.su-row .auth-field{flex:1; min-width:120px}
+.su-check{display:flex; align-items:center; gap:8px; margin:0 0 14px; font-size:13px; color:var(--ink-2); cursor:pointer}
+.su-check input{width:16px; height:16px; margin:0}

@@ -411,8 +411,8 @@ try {
   check("anon reaches nothing in the private schema",
         await code("anon", null, "select private.guild_role_of(gen_random_uuid())") === "42501");
   const perm = (await db.query(
-    "select tablename, cmd, count(*)::int as n from pg_policies where schemaname = 'public' and permissive = 'PERMISSIVE' group by 1, 2 having count(*) > 1")).rows;
-  check("one permissive policy per table and action (lint 0006)", perm.length === 0, perm);
+    "select tablename, cmd, roles::text as roles, count(*)::int as n from pg_policies where schemaname = 'public' and permissive = 'PERMISSIVE' group by 1, 2, 3 having count(*) > 1")).rows;
+  check("one permissive policy per table, action and role (lint 0006)", perm.length === 0, perm);
 }
 
 
@@ -629,11 +629,12 @@ try {
   const fSees = await rows("authenticated", F, "select id, share_code from public.events where guild_id = $1", [g.id]);
   check("a member reads the guild's CTAs, their share codes and their slots",
         fSees.length === 4 && fSees.every(r => /^[A-Z0-9]{10}$/.test(r.share_code)) && (await slotsOf(F, e.id)).length === 2, fSees);
-  check("an outsider reads no CTA and no slot; anon reads nothing",
+  check("an outsider reads no CTA and no slot; anon without a code reads none either, and never the caller column",
         (await rows("authenticated", X, "select id from public.events")).length === 0
         && (await rows("authenticated", X, "select * from public.event_slots")).length === 0
         && await code("anon", null, "select * from public.events") === "42501"
-        && await code("anon", null, "select * from public.event_slots") === "42501");
+        && (await rows("anon", null, "select id from public.events")).length === 0
+        && (await rows("anon", null, "select * from public.event_slots")).length === 0);
 
   /* the comp goes; the CTA stays */
   check("deleting the comp keeps the CTA, its template_id null and its slots whole",
@@ -665,6 +666,167 @@ try {
   check("no API role calls the CTA guards",
         await code("authenticated", C, "select public.events_guard()") === "42501"
         && await code("authenticated", C, "select public.event_slots_guard()") === "42501");
+}
+
+const code_ = code;
+/* 11 - sign-up: guests through the share code and a claim token, accounts under their id */
+{
+  /* the cast: C makes a guild and a CTA; F (a member) and X (an outsider,
+     signed in) from before; two guests known by their tokens */
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Sheet", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Sheet CTA", starts_at: "2026-10-03T18:00:00Z", content: "castle",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW", role: "ranged" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }]
+  })]))[0];
+  const CODE = ev.share_code;
+  const T1 = "a".repeat(32), T2 = "b".repeat(32);
+  const sheet = (role, sub, code, token) => rows(role, sub, "select public.event_by_code($1, $2) as s", [code, token]).then(r => r[0].s);
+  const sheetCode = (role, sub, code, token) => code_(role, sub, "select public.event_by_code($1, $2)", [code, token]);
+  const up = (role, sub, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [CODE, token, JSON.stringify(payload)]).then(r => r[0].s);
+  const upCode = (role, sub, token, payload) => code_(role, sub, "select public.sign_up($1, $2, $3::jsonb)", [CODE, token, JSON.stringify(payload)]);
+  const cancel = (role, sub, token) => rows(role, sub, "select public.cancel_sign_up($1, $2) as ok", [CODE, token]).then(r => r[0].ok);
+  const claimants = async () => (await db.query("select position, player_name, user_id is not null as account from public.signups where event_id = $1 order by position nulls last, player_name", [ev.id])).rows;
+
+  /* the sheet through the code */
+  check("a guest with the code reads the CTA: its guild, slots and an empty sheet, and nothing names them",
+        await (async () => { const s = await sheet("anon", null, CODE, null);
+          return s.event.id === ev.id && s.event.name === "Sheet CTA" && s.event.share_code === CODE && s.guild.name === "Zaddy Sheet"
+            && s.slots.length === 3 && s.slots[0].weapon_id === "2H_LONGBOW" && same(s.signups, []) && s.mine === null
+            && !("created_by" in s.event) && !("updated_by" in s.event); })());
+  check("a wrong code, a malformed code or an empty one names nothing",
+        await sheetCode("anon", null, "ZZZZZZZZZZ", null) === "P0002" && await sheetCode("anon", null, "short", null) === "P0002"
+        && await sheetCode("anon", null, "", null) === "P0002");
+  check("without the code anon reads no CTA, slot, guild or sign-up",
+        (await rows("anon", null, "select id from public.events")).length === 0
+        && (await rows("anon", null, "select event_id from public.event_slots")).length === 0
+        && (await rows("anon", null, "select id from public.guilds")).length === 0
+        && (await rows("anon", null, "select id from public.signups")).length === 0);
+  check("anon never reads the caller column or the guild's join code; the code column answers only the CTA the code opened",
+        (await rows("anon", null, "select share_code from public.events")).length === 0
+        && await code_("anon", null, "select created_by from public.events") === "42501"
+        && await code_("anon", null, "select join_code from public.guilds") === "42501");
+  check("a signed-in outsider with the code reads the sheet too; without it, nothing",
+        (await sheet("authenticated", X, CODE, null)).event.id === ev.id
+        && (await rows("authenticated", X, "select id from public.events")).length === 0);
+
+  /* not yet open */
+  check("nobody signs up on a draft: not a guest, not a member",
+        await upCode("anon", null, T1, { player_name: "Gus", position: 1 }) === "55000"
+        && await upCode("authenticated", F, null, { position: 1 }) === "55000");
+  await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+
+  /* guests */
+  const g1 = await up("anon", null, T1, { player_name: " Gus ", position: 1, item_power: 1450, can_swap: true, weapons: ["2H_LONGBOW", "2H_BOW"], note: " late 5 min " });
+  check("a guest signs up with a token: the name trimmed, the slot claimed, weapons and note kept; the token's hash keys the row and the token is not stored",
+        g1 && g1.position === 1 && g1.player_name === "Gus" && g1.item_power === 1450 && g1.can_swap === true
+        && same(g1.weapons, ["2H_LONGBOW", "2H_BOW"]) && g1.note === "late 5 min"
+        && (await db.query("select guest_token_hash, user_id from public.signups where id = $1", [g1.id])).rows[0].guest_token_hash.length === 64
+        && (await db.query("select count(*)::int as n from public.signups where guest_token_hash = $1", [T1])).rows[0].n === 0, g1);
+  check("the guest's own row comes back as mine with the token, and not without it",
+        (await sheet("anon", null, CODE, T1)).mine.id === g1.id && (await sheet("anon", null, CODE, null)).mine === null
+        && (await sheet("anon", null, CODE, T2)).mine === null);
+  check("a guest needs a token and a name",
+        await upCode("anon", null, null, { player_name: "Nobody", position: 2 }) === "42501"
+        && await upCode("anon", null, "short", { player_name: "Nobody", position: 2 }) === "42501"
+        && await upCode("anon", null, T2, { position: 2 }) === "23502");
+  check("a slot already claimed cannot be claimed again (one conditional statement, the unique index)",
+        await upCode("anon", null, T2, { player_name: "Gil", position: 1 }) === "23505");
+  const g2 = await up("anon", null, T2, { player_name: "Gil" });
+  check("a guest without a slot is a reserve", g2 && g2.position === null && g2.player_name === "Gil");
+  const g1b = await up("anon", null, T1, { player_name: "Gus", position: 2, weapons: ["MAIN_MACE_HELL"] });
+  check("a second call with the same token updates the sign-up (the slot moves, the weapons change), one row per guest",
+        g1b && g1b.id === g1.id && g1b.position === 2 && same(g1b.weapons, ["MAIN_MACE_HELL"])
+        && (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n === 2);
+  check("a guest cannot touch another guest's row: the token decides",
+        await affected("anon", null, "update public.signups set player_name = 'Hacked' where id = $1", [g2.id]) === 0
+        && await affected("anon", null, "delete from public.signups where id = $1", [g2.id]) === 0
+        && await code_("anon", null, "insert into public.signups (event_id, position, guest_token_hash, player_name) values ($1, 3, repeat('c', 64), 'Direct')", [ev.id]) === "42501");
+  check("the checks refuse a bad weapon key, a weapon twice, too many weapons, an item power off the range and a long note",
+        await upCode("anon", null, T2, { player_name: "Gil", weapons: ["not a key"] }) === "23514"
+        && await upCode("anon", null, T2, { player_name: "Gil", weapons: ["2H_BOW", "2H_BOW"] }) === "23514"
+        && await upCode("anon", null, T2, { player_name: "Gil", weapons: Array.from({ length: 11 }, (_, i) => `W${i}`) }) === "23514"
+        && await upCode("anon", null, T2, { player_name: "Gil", item_power: 3001 }) === "23514"
+        && await upCode("anon", null, T2, { player_name: "Gil", note: "n".repeat(201) }) === "23514");
+  check("a slot the CTA does not have cannot be claimed", await upCode("anon", null, T2, { player_name: "Gil", position: 9 }) === "23503");
+
+  /* accounts */
+  const f1 = await up("authenticated", F, null, { position: 3, item_power: 1300 });
+  check("a member signs up under their id, named after their character, without a token",
+        f1 && f1.position === 3 && f1.player_name === "Eff"
+        && (await db.query("select user_id, guest_token_hash from public.signups where id = $1", [f1.id])).rows[0].user_id === F
+        && (await sheet("authenticated", F, CODE, null)).mine.id === f1.id);
+  check("a payload name overrides the character's (an alt)", (await up("authenticated", F, null, { position: 3, player_name: "EffAlt" })).player_name === "EffAlt");
+  check("an account has one sign-up per CTA: a second call updates it",
+        (await db.query("select count(*)::int as n from public.signups where event_id = $1 and user_id = $2", [ev.id, F])).rows[0].n === 1);
+  check("a signed-in outsider with the code signs up as an account, as a reserve",
+        (await up("authenticated", X, null, { item_power: 1200 })).position === null
+        && (await db.query("select user_id from public.signups where event_id = $1 and user_id = $2", [ev.id, X])).rows.length === 1);
+  check("an account cannot write another player's row or claim a taken slot",
+        await affected("authenticated", X, "update public.signups set player_name = 'Hacked' where id = $1", [f1.id]) === 0
+        && await upCode("authenticated", X, null, { position: 3 }) === "23505");
+  check("a member reads the whole sheet; the guest hash never joins the sheet's JSON",
+        await (async () => { const s = await sheet("authenticated", C, CODE, null);
+          return s.signups.length === 4 && s.signups.every(r => !("guest_token_hash" in r) && !("user_id" in r))
+            && s.signups.filter(r => r.account).length === 2; })());
+
+  /* adoption: the account made in the guest's browser takes the guest's sign-up */
+  const Y = "00000000-0000-4000-8000-000000000013";
+  await signUp(Y, { albion_name: "Gil" });
+  const adopted = await up("authenticated", Y, T2, { item_power: 1500 });
+  check("an account signing up with its browser's guest token adopts that guest sign-up: same row, now the account's, the hash gone",
+        adopted && adopted.id === g2.id && adopted.item_power === 1500
+        && (await db.query("select user_id, guest_token_hash from public.signups where id = $1", [g2.id])).rows[0].user_id === Y
+        && (await db.query("select guest_token_hash from public.signups where id = $1", [g2.id])).rows[0].guest_token_hash === null
+        && (await sheet("anon", null, CODE, T2)).mine === null);
+  check("a token that names nobody adopts nothing; the account signs up fresh",
+        (await up("authenticated", Y, "d".repeat(32), { item_power: 1501 })).id === g2.id
+        && (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n === 4);
+
+  /* a removed slot, the bound */
+  await run("authenticated", C, "delete from public.event_slots where event_id = $1 and position = 2", [ev.id]);
+  check("removing a slot leaves its claimant as a reserve",
+        (await db.query("select position from public.signups where id = $1", [g1.id])).rows[0].position === null);
+  {
+    let err = "ok", i = 0;
+    for (; i < 125 && err === "ok"; i++) {
+      err = await code_("anon", null, "select public.sign_up($1, $2, $3::jsonb)", [CODE, `t${String(i).padStart(31, "0")}`, JSON.stringify({ player_name: `Guest ${i}` })]);
+    }
+    const n = (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n;
+    check("a CTA takes at most 120 sign-ups (the guard)", n === 120 && err === "23514", { n, err });
+  }
+
+  /* locking, cancelling, completing */
+  await run("authenticated", C, "update public.events set status = 'locked' where id = $1", [ev.id]);
+  check("once locked, nobody signs up or changes a sign-up, but a player still cancels",
+        await upCode("anon", null, T1, { player_name: "Gus", position: 1 }) === "55000"
+        && await upCode("authenticated", F, null, { position: 1 }) === "55000"
+        && await affected("anon", null, "update public.signups set note = 'x' where id = $1", [g1.id]) === 0
+        && await cancel("anon", null, T1) === true
+        && await cancel("anon", null, T1) === false
+        && await cancel("authenticated", X, null) === true);
+  await run("authenticated", C, "update public.events set status = 'completed' where id = $1", [ev.id]);
+  check("a completed CTA keeps its sheet: no sign-up, change or cancellation",
+        await code_("authenticated", F, "select public.cancel_sign_up($1)", [CODE]) === "55000"
+        && await affected("authenticated", F, "delete from public.signups where user_id = $1", [F]) === 0
+        && (await db.query("select count(*)::int as n from public.signups where event_id = $1 and user_id = $2", [ev.id, F])).rows[0].n === 1);
+  check("the completed sheet still reads through the code", (await sheet("anon", null, CODE, null)).signups.length === 118);
+
+  /* grants and deletion */
+  check("no caller writes a sign-up's identity: user_id and the hash are the statement's",
+        await code_("anon", null, "update public.signups set guest_token_hash = repeat('e', 64) where id = $1", [g1.id]) === "42501"
+        && await code_("authenticated", F, "update public.signups set event_id = gen_random_uuid() where user_id = $1", [F]) === "42501");
+  check("no API role calls the sign-up guard", await code_("authenticated", C, "select public.signups_guard()") === "42501");
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [Y]);
+  check("deleting an account deletes its sign-ups",
+        (await db.query("select count(*)::int as n from public.signups where id = $1", [g2.id])).rows[0].n === 0);
+  check("deleting the CTA deletes its sheet",
+        await affected("authenticated", C, "delete from public.events where id = $1", [ev.id]) === 1
+        && (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n === 0);
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
 }
 
 } catch (e) {

@@ -196,13 +196,16 @@ Three applications with explicit boundaries (each directory's README is its cont
 - **Accounts** — the Supabase project (schema and rules in `supabase/`,
   migrations applied in order, never edited once applied) and the
   dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`,
-  `_guild.js`, `_comps.js`, `_events.js`, each its own `<script>` after
-  the planner). Identity and persistent user data: profiles, weapon
-  lists, guilds (members with roles, a join code, guild-scoped reads),
-  saved comps (a guild's templates, saved from and opened in the planner
-  through the address bar's share hash, never a call) and CTAs (a guild's
-  events: a status the guard moves one step at a time, a share code,
-  slots COPIED from a comp and frozen once completed) now; sign-ups and
+  `_guild.js`, `_comps.js`, `_events.js`, `_signup.js`, each its own
+  `<script>` after the planner). Identity and persistent user data:
+  profiles, weapon lists, guilds (members with roles, a join code,
+  guild-scoped reads), saved comps (a guild's templates, saved from and
+  opened in the planner through the address bar's share hash, never a
+  call), CTAs (a guild's events: a status the guard moves one step at a
+  time, a share code, slots COPIED from a comp and frozen once completed)
+  and sign-up (the sheet a CTA's link opens; a guest's reach through the
+  share code carried by the statement, their own row keyed by a claim
+  token's hash; accounts under their id) now; caller management and
   attendance next (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:
@@ -249,9 +252,9 @@ Rules a change must not break. The decision behind each is logged in
 - **Accounts never score**: the account layer reads no planner state and the
   planner never calls it; no account row (profile, weapon list, sign-up,
   attendance) is a scoring input without a logged decision. Every account
-  table follows `supabase/README.md` (RLS first, anon revoked, column grants,
-  invoker functions); `test_supabase_schema.py` and `test_supabase_rls.mjs`
-  pin it.
+  table follows `supabase/README.md` (RLS first, anon revoked except a
+  guest's listed reach through a CTA's share code, column grants, invoker
+  functions); `test_supabase_schema.py` and `test_supabase_rls.mjs` pin it.
 - **Anti-circularity**: comps that calibrated a template never drive retuning
   against their own gate results. Gate findings are hypotheses, never fixes; a
   template retune is a logged decision.

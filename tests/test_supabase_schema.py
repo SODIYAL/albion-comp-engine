@@ -37,6 +37,14 @@ DEFINER_ALLOWED = {
     "private.guild_member_count": "guard helper",
 }
 
+# A guest's reach (supabase/README.md rule 13): the tables `anon` reads
+# through policies that check the CTA's share code carried by the
+# statement, and the functions a guest calls (each running as the
+# caller). Nothing else is granted to anon, and no anon policy stands
+# without the code.
+GUEST_TABLES = {"events", "event_slots", "guilds", "signups"}
+GUEST_FUNCTIONS = {"public.claim_hash", "public.event_by_code", "public.sign_up", "public.cancel_sign_up"}
+
 
 def check(cond, label, detail=""):
     if cond:
@@ -83,13 +91,24 @@ for t in tables:
           "default privileges grant every new public table to anon")
     policies = re.findall(r"create policy \"[^\"]+\" on public\.%s\s+for (\w+) to ([\w, ]+)" % t, ALL)
     check(bool(policies), "DB2d %s has policies" % t)
-    check(all(roles.strip() == "authenticated" for _op, roles in policies),
-          "DB2e every policy on %s is for signed-in users only" % t,
+    check(all(roles.strip() == "authenticated" or (roles.strip() == "anon" and t in GUEST_TABLES)
+              for _op, roles in policies),
+          "DB2e every policy on %s is for signed-in users, or for guests on a table a share code opens" % t,
           str(policies))
+    anon_policies = re.findall(r"create policy \"[^\"]+\" on public\.%s\s+for \w+ to anon\s+(.*?);" % t, ALL, re.S)
+    check(all(re.search(r"app\.share_code|app\.claim_token|from public\.events", body) for body in anon_policies),
+          "DB2e2 every guest policy on %s reads the share code (or the CTA it names) from the statement" % t)
     if re.search(r"create table (?:if not exists )?public\.%s \([^;]*\bupdated_at\b" % t, ALL):
         check(re.search(r"before update on public\.%s\s+for each row execute function public\.set_updated_at\(\)" % t, ALL)
               is not None, "DB2f %s keeps updated_at through set_updated_at()" % t)
-check(re.search(r"grant [^;]*\bto\b[^;]*\banon\b", ALL) is None, "DB2g nothing is granted to anon")
+anon_grants = [g for g in re.findall(r"grant [^;]*\bto\b[^;]*\banon\b[^;]*;", ALL)]
+check(all(re.search(r"on table public\.(%s)\b" % "|".join(sorted(GUEST_TABLES)), g)
+          or re.search(r"on function (%s)\(" % "|".join(re.escape(f) for f in sorted(GUEST_FUNCTIONS)), g)
+          for g in anon_grants),
+      "DB2g nothing is granted to anon beyond the guest tables and the guest functions", str(anon_grants))
+check(not any(re.search(r"grant (all|insert|update|delete)[^;]*on table public\.(events|event_slots|guilds)\b[^;]*\banon\b", g)
+              for g in anon_grants),
+      "DB2g2 a guest reads the CTA, its slots and its guild, and writes only sign-ups")
 
 print("DB3 - policies read auth.uid() and current_setting() once per statement")
 # the definition in force: the last create or alter of each policy, in
@@ -113,7 +132,7 @@ for name in names:
                     + [(m.start(), "drop", m) for m in DROP.finditer(text)])
     for _at, kind, m in events:
         schema, fname = m.group(1), m.group(2)
-        arg_types = ", ".join(a.split()[-1] for a in m.group(3).split(",") if a.strip())
+        arg_types = ", ".join(a.split(" default ")[0].split()[-1] for a in m.group(3).split(",") if a.strip())
         key = "%s.%s(%s)" % (schema, fname, arg_types)
         if kind == "drop":
             funcs.pop(key, None)
@@ -126,7 +145,7 @@ for key, m in funcs.items():
     listed = "%s.%s" % (schema, fname)
     check("set search_path = ''" in header, "DB4b %s pins an empty search_path" % sig,
           "Supabase lint 0011")
-    arg_types = ", ".join(a.split()[-1] for a in args.split(",") if a.strip())
+    arg_types = ", ".join(a.split(" default ")[0].split()[-1] for a in args.split(",") if a.strip())
     revokes = re.findall(r"revoke execute on function %s\.%s\(%s\) from ([^;]+);"
                          % (schema, fname, re.escape(arg_types)), ALL)
     revoked = {r.strip() for line in revokes for r in line.split(",")}
@@ -142,12 +161,15 @@ for key, m in funcs.items():
               "DB4e function %s is SECURITY INVOKER (policies bound it) unless listed" % sig)
         check(not definer or schema == "private",
               "DB4e2 definer helper %s lives in the private schema, out of the API's reach (lint 0029)" % sig)
-        check({"public", "anon"} <= revoked,
-              "DB4f function %s is revoked from public and anon" % sig,
+        guest = listed in GUEST_FUNCTIONS
+        check("public" in revoked and (guest or "anon" in revoked),
+              "DB4f function %s is revoked from public and anon (a guest function keeps anon)" % sig,
               "revoked from: %s" % sorted(revoked))
-        check(re.search(r"grant execute on function %s\.%s\(%s\) to authenticated;"
-                        % (schema, fname, re.escape(arg_types)), ALL) is not None,
-              "DB4g function %s is granted to authenticated" % sig)
+        check(re.search(r"grant execute on function %s\.%s\(%s\) to %s;"
+                        % (schema, fname, re.escape(arg_types), "anon, authenticated" if guest else "authenticated"), ALL) is not None,
+              "DB4g function %s is granted to %s" % (sig, "guests and signed-in users" if guest else "authenticated"))
+        check(not guest or "security invoker" in header,
+              "DB4g2 guest function %s runs as the caller: the policies bound a guest exactly" % sig)
 check(re.search(r"grant usage on schema private to authenticated", ALL) is not None
       and re.search(r"revoke all on schema private from public", ALL) is not None,
       "DB4h the private schema is usable by signed-in users and no one else")
@@ -309,6 +331,45 @@ check("mass_at is null or mass_at <= starts_at" in ALL and "Mass time comes befo
       "DB8g the mass time never follows the start: the check and the client's sentence")
 check("if (event.status !== \"completed\")" in EVENTS_JS and re.search(r"= 'completed' then\s+raise exception 'a completed CTA keeps its slots'", ALL) is not None,
       "DB8h a completed CTA's slots are frozen by the guard and the client sends none")
+
+print("DB9 - sign-up: the client's bounds are the database's; the code and the token ride the statement")
+with open(os.path.join(ROOT, "dashboard", "_signup.js"), encoding="utf-8") as f:
+    SIGNUP_JS = f.read()
+for js_name, sql_pat in (("SIGNUP_WEAPONS_MAX", r"array_length\(weapons, 1\), 0\) <= (\d+)"),
+                         ("SIGNUP_IP_MAX", r"item_power between 0 and (\d+)"),
+                         ("SIGNUPS_MAX", r"from public\.signups where event_id = new\.event_id\) >= (\d+)")):
+    js_val = js_const(SIGNUP_JS, js_name)
+    sql_val = set(re.findall(sql_pat, ALL))
+    check(js_val is not None and sql_val == {str(js_val)},
+          "DB9a %s (_signup.js) is the database's bound" % js_name, "js %s, sql %s" % (js_val, sorted(sql_val)))
+check(js_const(SIGNUP_JS, "SIGNUP_NOTE_MAX") == js_const(COMPS_JS, "COMP_NOTE_MAX"),
+      "DB9b a sign-up note shares the slot note bound (char_length(note) between 1 and N, one value across the migrations)")
+declared_form = set(re.findall(r"unnest\(new\.weapons\) as w where w !~ '(.+?)'", ALL))
+weapon_form = re.search(r"const WEAPON_KEY_RE = /(.+?)/;", PROFILE_JS)
+check(weapon_form is not None and declared_form == {weapon_form.group(1)},
+      "DB9c a declared weapon has the weapon key form (WEAPON_KEY_RE)", str(sorted(declared_form)))
+code_forms = set(re.findall(r"clean !~ '(.+?)'", ALL))
+check(js_code is not None and code_forms == {js_code.group(1)},
+      "DB9d the guest functions check the share code's form, the join code's (JOIN_CODE_RE)", str(sorted(code_forms)))
+check("WEAPON_KEY_RE.test" in SIGNUP_JS and "JOIN_CODE_RE.test" in SIGNUP_JS,
+      "DB9e the client checks weapons and the code against the same forms")
+token_hash = re.search(r"guest_token_hash ~ '(.+?)'", ALL)
+check(token_hash is not None and token_hash.group(1) == "^[a-f0-9]{64}$"
+      and re.search(r"const CLAIM_TOKEN_RE = /\^\[a-f0-9\]\{32\}\$/;", SIGNUP_JS) is not None,
+      "DB9f the row keeps a SHA-256 (64 hex) of a 32-hex claim token, never the token")
+check(re.search(r"char_length\(coalesce\(token, ''\)\) < 16", ALL) is not None
+      and "player_name = btrim(player_name) and char_length(player_name) between 1 and %d" % name_max in ALL,
+      "DB9g a short token is no token; a player's name shares the account name bound")
+tag = re.search(r'<input[^>]*\bid="su-name"[^>]*>', SHELL)
+length = tag and re.search(r'\bmaxlength="(\d+)"', tag.group(0))
+check(length is not None and int(length.group(1)) == name_max, "DB9h the guest name field's maxlength is the bound")
+ip_tag = re.search(r'<input[^>]*\bid="su-ip"[^>]*>', SHELL)
+check(ip_tag is not None and ('min="%d"' % js_const(SIGNUP_JS, "SIGNUP_IP_MIN")) in ip_tag.group(0)
+      and ('max="%d"' % js_const(SIGNUP_JS, "SIGNUP_IP_MAX")) in ip_tag.group(0), "DB9i the item power field's range is the bound")
+check(re.search(r"set_config\('app\.share_code', clean, true\)", ALL) is not None
+      and re.search(r"set_config\('app\.claim_token', coalesce\(token, ''\), true\)", ALL) is not None
+      and re.search(r"where status = 'open'|e\.status = 'open'", ALL) is not None,
+      "DB9j the code and the token ride the statement; a sign-up is written only while the CTA is open")
 
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

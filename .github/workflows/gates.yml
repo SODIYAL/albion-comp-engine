@@ -65,6 +65,7 @@ jobs:
           node tests/test_guild.js
           node tests/test_comps.js
           node tests/test_events.js
+          node tests/test_signup.js
 
       - name: account database gates
         run: |

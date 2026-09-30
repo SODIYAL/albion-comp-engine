@@ -36,7 +36,7 @@ async function loadGuildEvents(guildId) {
     .select("id, guild_id, template_id, name, content, style, planned_size, starts_at, mass_at, status, "
             + "share_code, updated_at, "
             + "caller:profiles!events_created_by_fkey(albion_name, display_name), "
-            + "slots:event_slots(count)")
+            + "slots:event_slots(count), signups:signups(count)")
     .eq("guild_id", guildId)
     .order("starts_at", { ascending: false });
 
@@ -394,6 +394,8 @@ function eventErrorMessage(err) {
     status: $id("ev-status"),
     moves: $id("ev-moves"),
     share: $id("ev-share"),
+    sheet: $id("ev-sheet"),
+    link: $id("ev-link"),
     meta: $id("ev-meta"),
     summary: $id("ev-summary"),
     slots: $id("ev-slots"),
@@ -471,7 +473,8 @@ function eventErrorMessage(err) {
     const sub = document.createElement("span");
     sub.className = "gd-item-sub";
     const count = Array.isArray(e.slots) && e.slots[0] ? e.slots[0].count : 0;
-    sub.textContent = `${EVENT_STATUS_NAMES[e.status] || e.status} · ${CONTENTS[e.content] || e.content} · ${count} slot${count === 1 ? "" : "s"}`;
+    const signed = Array.isArray(e.signups) && e.signups[0] ? e.signups[0].count : 0;
+    sub.textContent = `${EVENT_STATUS_NAMES[e.status] || e.status} · ${CONTENTS[e.content] || e.content} · ${signed}/${count} slot${count === 1 ? "" : "s"}`;
     b.append(name, when, sub);
     li.append(b);
     return li;
@@ -621,6 +624,8 @@ function eventErrorMessage(err) {
     el.status.dataset.status = current.status || "";
     el.share.textContent = current.share_code || "";
     el.share.parentElement.hidden = !current.share_code;
+    el.sheet.hidden = !current.share_code;
+    el.link.hidden = !current.share_code;
     el.moves.replaceChildren(...(current.id ? powers.moves : []).map(to => {
       const b = document.createElement("button");
       b.type = "button";
@@ -834,6 +839,24 @@ function eventErrorMessage(err) {
     dialog.close();
     location.hash = hash;
     announce(`${current.name || "The CTA"} opened in the planner.`);
+  });
+
+  /* the sheet is the sign-up module's: the code is handed over as a DOM
+     event, never a call between modules */
+  el.sheet.addEventListener("click", () => {
+    if (!current || !current.share_code) return;
+    dialog.close();
+    document.dispatchEvent(new CustomEvent("cta-sheet", { detail: { code: current.share_code } }));
+  });
+
+  el.link.addEventListener("click", () => {
+    if (!current || !current.share_code || typeof signupLink !== "function") return;
+    const link = signupLink(current.share_code, location.href);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(link).then(() => showNotice("Sign-up link copied."), () => showNotice(link));
+    } else {
+      showNotice(link);
+    }
   });
 
   /* ---- status moves ---- */

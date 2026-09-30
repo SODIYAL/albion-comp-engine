@@ -216,7 +216,7 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
   check("loadGuildEvents reads one guild's events, latest start first, with the caller and the slot count",
         has(q.ops, "eq", "guild_id", "g1") && has(q.ops, "order", "starts_at", { ascending: false })
         && q.ops.some(o => o[0] === "select" && /caller:profiles!events_created_by_fkey/.test(o[1]) && /slots:event_slots\(count\)/.test(o[1])
-                      && /share_code/.test(o[1])), q.ops);
+                      && /signups:signups\(count\)/.test(o[1]) && /share_code/.test(o[1])), q.ops);
 
   CALLS.length = 0;
   REPLY.events = { data: { id: "e1", slots: [{ position: 2, weapon_id: "B" }, { position: 1, weapon_id: "A" }] }, error: null };
