@@ -87,6 +87,12 @@ the vocabulary below on every push.
 - `tests/test_cohort_families.py` decodes a child process as UTF-8; under a
   Git-Bash console the child emits cp1252 and it dies with `UnicodeDecodeError`.
   Run it from PowerShell before suspecting the artifact.
+- The killer-party cache is ONE SQLite file, `pipeline/out/party_cache.sqlite`
+  (gitignored), read and written only through `pipeline/party_store.py`; the
+  poll task adds rows to it every 3 minutes. Never store it as files again:
+  the per-battle JSON layout it replaced reached 127k files and made every
+  workspace crawl (file watchers, VS Code Live Server, backups) take minutes.
+  Live Server must be rooted at `/dashboard` (`.vscode/settings.json`, local).
 
 ## Tests
 
@@ -152,7 +158,9 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
 
 - After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
-  `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
+  `sample_parties --pages 0` -> `sample_battles` (the fold's one network
+  step: the observed-evidence artifact from the newest group fights;
+  `-SkipUsage` keeps the fold offline) -> `audit_style_rosters` -> `derive_style_bands` ->
   `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
   `derive_skeletons` -> `build_dataset` -> every gate ->
   `compare_fold.py`; never commits). Weekly, Tuesdays. Every harvest-derived

@@ -69,18 +69,17 @@ def build(doc, weapons_meta, gear_meta, items):
     if not stamps:
         # an artifact folded before the battle summaries carried stamps:
         # read the window off the marked cache records themselves
-        cache = os.path.join(OUT, "party_cache")
-        ids = {b.get("battle") for b in battles}
-        for bid in ids:
-            rec = None
-            try:
-                with open(os.path.join(cache, f"{bid}.json"), encoding="utf-8") as fh:
-                    rec = json.load(fh)
-            except Exception:
-                continue
-            st = (rec or {}).get("first_event_at") or (rec or {}).get("started_at")
-            if st:
-                stamps.append(st)
+        import party_store
+        ids = {b.get("battle") for b in battles if b.get("battle")}
+        if ids and os.path.exists(party_store.DEFAULT):
+            with party_store.Store(party_store.DEFAULT, create=False) as store:
+                for bid in ids:
+                    meta = store.meta(bid)
+                    if not meta:
+                        continue
+                    st = (store.get(bid) or {}).get("first_event_at") or meta[2]
+                    if st:
+                        stamps.append(st)
     wname = lambda w: (weapons_meta.get(w) or {}).get("display_name") or w
     # a curated item is named by its key or, for consumables curated at one
     # representative tier (T7_POTION_REVIVE), by its tier-stripped form

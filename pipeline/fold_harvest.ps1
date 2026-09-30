@@ -13,6 +13,18 @@
 # (CLAUDE.md "Environment traps"). Logs: pipeline/out/fetch_logs/fold-<date>.log.
 # Cadence: weekly (the corpus grows ~350 battles a day; a daily fold is
 # churn, a weekly one is a meaningful step - VALIDATION.md).
+#
+# The "usage from killboard" step is the fold's ONE network call: it
+# re-analyzes the observed-evidence artifact (weapon_usage_v2.json: the
+# prevalence strip, cohorts and observed families) from the newest group
+# fights, listing them from albionbb and reading kills from the cache the
+# "AlbionCompForge Daily Fetch" task grows. Display only, never a scoring
+# input. -SkipUsage keeps the fold offline and leaves that artifact as
+# committed.
+
+param(
+    [switch]$SkipUsage
+)
 
 $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
@@ -39,6 +51,9 @@ function Step($label, $exe, $argv) {
 
 # 1. the chain, in the documented order (CLAUDE.md "After a harvest")
 Step "rosters from cache"     "py" @("-3", "-u", "pipeline/sample_parties.py", "--pages", "0")
+if (-not $SkipUsage) {
+    Step "usage from killboard"   "py" @("-3", "-u", "pipeline/sample_battles.py", "--min-players", "10", "--battles", "120")
+}
 Step "audit_style_rosters"    "py" @("-3", "-u", "pipeline/audit_style_rosters.py")
 Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py")
 Step "derive_party_styles"    "py" @("-3", "-u", "pipeline/derive_party_styles.py")

@@ -424,7 +424,10 @@ HEAD (`--base` for another revision). Review the report, then commit.
   battles fetched four at a time (`--workers`, each pass ends with an
   event-coverage line and a request-miss tally; sequential baseline 0.987),
   against the OFFICIAL gameinfo API, whose `GroupMembers` carries the
-  killer's party at kill time with gear → `out/party_cache/` and
+  killer's party at kill time with gear → `out/party_cache.sqlite` (one
+  SQLite file, one row per battle, the record zlib-compressed; the
+  `party_store.py` module is the only reader and writer, and
+  `py -3 pipeline/party_store.py` prints the count by source) and
   `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
   derive_party_styles -> derive_meta_prior -> derive_role_counts ->
@@ -496,11 +499,18 @@ HEAD (`--base` for another revision). Review the report, then commit.
   battles endpoint is only queried with a total-player floor (10 / 40), and
   analysis buckets by actual fight size besides. Log:
   `pipeline/out/fetch_logs/daily_fetch.log` (gitignored). WEEKLY CADENCE (or
-  before a validation round): re-analyze offline (`sample_battles.py`
-  re-reads `battles_cache/` without a flag; `sample_rosters.py --pages 0`
-  and `sample_parties.py --pages 0` for the other two), review the numbers,
-  rebuild dependents, run the gate list, commit — analysis is always a
-  deliberate, reviewed step, never automated. Mind patch boundaries when
+  before a validation round): `fold_harvest.ps1` runs the re-analysis as
+  its "usage from killboard" step (`sample_battles.py --min-players 10
+  --battles 120`). That run always lists the newest group fights from the
+  network and analyzes THAT window; the daily cache only spares it the
+  per-battle kill fetches, so `-SkipUsage` is the offline fold and leaves
+  the artifact as committed. `sample_rosters.py --pages 0` and
+  `sample_parties.py --pages 0` re-read their caches without the network.
+  Review the numbers, rebuild dependents, run the gate list, commit —
+  analysis is always a deliberate, reviewed step, never automated. The
+  artifact went unrefreshed for a month once when the daily task was not
+  registered on the harvest machine: `Get-ScheduledTask` should list all
+  three CompForge jobs. Mind patch boundaries when
   reading accumulated windows: the cache spans balance patches; slice by
   `patch_history` dates before comparing metas.
 
@@ -605,7 +615,7 @@ capability 5% or more of the cell's winners field none of (`zero_share`:
 p10 on the edge of the zero mass thrashes between folds — brawl|20 silence
 read 7.5 / 1.0 / 4.6 across three folds); nothing is excluded (the movement
 four were admitted once measured — see tests/VALIDATION.md). The audit reads
-`out/party_cache/` directly, not the committed rosters artifact, so its
+`out/party_cache.sqlite` directly, not the committed rosters artifact, so its
 board follows the cache; the fold script re-derives the rosters first so
 both agree. `build_dataset` validates the file (fail closed) and ships it as
 `style_bands`; the engine reads it after the content row for a declared

@@ -29,6 +29,10 @@ pipeline/out/icons/
 pipeline/out/battles_cache/
 pipeline/out/roster_cache/
 pipeline/out/party_cache/
+# the killer-party cache: one SQLite file plus its write-ahead log; the
+# per-battle JSON files it replaced are set aside by migrate_party_cache.py
+pipeline/out/party_cache.sqlite*
+pipeline/out/party_cache_files_migrated/
 pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
 # the plain artifact is history: the harvest writes party_rosters.json.gz (2026-09-11)

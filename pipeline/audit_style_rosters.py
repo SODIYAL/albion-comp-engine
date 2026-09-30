@@ -5,7 +5,7 @@ evidence for the style x size templates — thousands of rosters where the
 content rows were fitted from six published comps.
 
 Report-only audit, never part of a build. Reads the killboard party cache
-(out/party_cache/, the official kill-event harvest) and, for every
+(out/party_cache.sqlite, the official kill-event harvest) and, for every
 near-complete killer-party roster of 10+ players:
 
   1. labels its playstyle with the engine's own comp_identity (the page's
@@ -67,10 +67,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(HERE, "out")
-CACHE = os.path.join(OUT, "party_cache")
 FINDINGS = os.path.join(ROOT, "notes", "findings")
 sys.path.insert(0, ROOT)
+sys.path.insert(0, HERE)
 from engine.engine import Engine  # noqa: E402
+import party_store  # noqa: E402
+
+CACHE = party_store.DEFAULT        # the killer-party cache (one SQLite file)
 
 CONTENT_FOR_SUPPLY = "territory_defense"   # ZvZ default; supply physics are style/size keyed
 BANDS = (("10-14", 10, 14, 12), ("15-19", 15, 19, 17), ("20", 20, 99, 20))
@@ -137,17 +140,11 @@ def load_rosters(known, min_size, min_known):
     """Every killer-party roster of >= min_size with >= min_known of its
     weapons in the catalog, with member kits joined by player name."""
     rosters = []
-    for name in sorted(os.listdir(CACHE)):
-        try:
-            with open(os.path.join(CACHE, name), encoding="utf-8") as f:
-                rec = json.load(f)
-        except Exception:
-            continue        # mid-write by the poll or the harvest: skipped
-        # the battle-list population only (sample_parties.py "POPULATION"):
-        # a kill-feed record has no official roster and samples the
-        # whole server's small fights
-        if rec.get("source") == "events_poll":
-            continue
+    # the battle-list population only (sample_parties.py "POPULATION"):
+    # a kill-feed record has no official roster and samples the whole
+    # server's small fights
+    st = party_store.Store(CACHE, create=False)
+    for _bid, rec in st.iter_records(source="battle_list"):
         kits = {}
         for bd in rec.get("builds", []):
             g = bd.get("gear") or {}
@@ -191,6 +188,7 @@ def load_rosters(known, min_size, min_known):
                 "members": [{"weapon": w, "kit": kits.get(n), "name": n}
                             for w, n in ws],
             })
+    st.close()
     return rosters
 
 

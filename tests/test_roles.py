@@ -1446,8 +1446,7 @@ def t_party_link():
     sp = _ilu.module_from_spec(spec)
     spec.loader.exec_module(sp)
     tmp = tempfile.mkdtemp()
-    cache = os.path.join(tmp, "party_cache")
-    os.makedirs(cache)
+    cache = os.path.join(tmp, "party_cache.sqlite")
     members_a = [{"name": f"a{i}", "weapon": "2H_LONGBOW", "guild": "G"}
                  for i in range(10)]
     members_b = [{"name": f"b{i}", "weapon": "MAIN_MACE", "guild": "H"}
@@ -1466,8 +1465,8 @@ def t_party_link():
                        "slots_filled": 6,
                        "gear": {"MainHand": "T7_MAIN_MACE",
                                 "Armor": "T7_ARMOR_PLATE_SET2"}}]}
-    with open(os.path.join(cache, "77.json"), "w", encoding="utf-8") as f:
-        _json.dump(rec, f)
+    with sp.party_store.Store(cache) as _st:
+        _st.put(77, rec)
     sp.CACHE, sp.OUT = cache, tmp
     sp.analyze({"2H_LONGBOW", "MAIN_MACE"})
     out = rosters_io.load(rosters_io.path(tmp))

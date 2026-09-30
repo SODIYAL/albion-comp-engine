@@ -380,9 +380,10 @@ only). Saved player profiles moved to "Platform" above.
   member. If more diverse alternatives are wanted, a diversity rule (avoid
   rosters sharing all but k members) is the knob — a maintainer decision,
   not a derivation. (V: 09b, Slot controls)
-- **Back up the raw battle cache off this machine**: `pipeline/out/party_cache/`
-  is 157 MB of kill events, gitignored, the only copy of the harvest's
-  evidence. A storage bucket (Supabase is a candidate) as a nightly upload
+- **Back up the raw battle cache off this machine**: `pipeline/out/party_cache.sqlite`
+  (one file since the per-battle JSON files were folded into it; 127k
+  battles, kill events included) is gitignored, the only copy of the
+  harvest's evidence. A storage bucket (Supabase is a candidate) as a nightly upload
   target after each harvest — a BACKUP, never a build input, so CI and
   provenance stay as they are; a fresh machine pulls it down and re-derives.
   Not the committed artifact (5 MB gzipped when this was written, 52 MB now).

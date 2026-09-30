@@ -22,7 +22,7 @@
 # 502s are the API, 429s mean lower --workers.
 #
 # It does NOT rebuild the dataset or commit: the harvest lands in
-# pipeline/out/party_cache/ (gitignored) and pipeline/out/party_rosters.json.gz;
+# pipeline/out/party_cache.sqlite (gitignored) and pipeline/out/party_rosters.json.gz;
 # rebuilding, the gate list and the audit stay a reviewed, in-session step
 # (pipeline/README.md, CLAUDE.md "Kits are what winners wear").
 #
@@ -93,5 +93,5 @@ if ($MinPlayers -gt 0 -or $MaxPlayers -gt 0) {
         "--- pass exit $LASTEXITCODE ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
     }
 }
-$n = (Get-ChildItem (Join-Path $root "pipeline\out\party_cache") -File).Count
+$n = & py -3 pipeline/party_store.py --count
 "=== done: cache holds $n battles ($(Get-Date -Format s)) ===" | Out-File $log -Encoding utf8 -Append

@@ -150,11 +150,20 @@ import urllib.error
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import party_store  # noqa: E402
 import rosters_io  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
-CACHE = os.path.join(OUT, "party_cache")
+# the per-battle cache: one SQLite file (party_store.py); a test points
+# this at its own copy
+CACHE = party_store.DEFAULT
+
+
+def store():
+    """A connection to the cache. One per thread: the harvest's workers
+    each open their own."""
+    return party_store.Store(CACHE)
 UA = {"User-Agent": "bion-comp-engine/sample_parties (albion comp research)"}
 GAMEINFO = "https://gameinfo.albiononline.com/api/gameinfo"
 
@@ -221,25 +230,6 @@ def slim_event(d):
         "Participants": [x for x in (_slim_member(m) for m in (d.get("Participants") or [])) if x],
         "GroupMembers": [x for x in (_slim_member(m) for m in (d.get("GroupMembers") or [])) if x],
     }
-
-
-def write_json_atomic(path, obj):
-    """A cache record lands whole or not at all: three processes share
-    the directory (the poll, the harvest, the fold's analysis)."""
-    tmp = f"{path}.{os.getpid()}.tmp"
-    with open(tmp, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(obj, f, indent=1, sort_keys=True)
-    os.replace(tmp, path)
-
-
-def read_json(path):
-    """A cache record, or None when the file is unreadable (mid-write,
-    truncated by a task kill): reported by the caller, never fatal."""
-    try:
-        with open(path, encoding="utf-8") as fh:
-            return json.load(fh)
-    except Exception:
-        return None
 
 
 # Items that exist only inside one content, read off the VICTIM's inventory
@@ -438,14 +428,13 @@ def retag(known):
     the way a new marker or a changed tag rule reaches records already
     collected. Battle-list records keep no events and are not touched."""
     n, marks = 0, collections.Counter()
-    for name in sorted(os.listdir(CACHE)):
-        path = os.path.join(CACHE, name)
-        rec = read_json(path)
-        if not rec or not rec.get("raw_events"):
+    st = store()
+    for bid, rec in st.iter_records(ids=st.ids()):
+        if not rec.get("raw_events"):
             continue
         raw = {e["EventId"]: e for e in rec["raw_events"] if e.get("EventId")}
         if rec.get("source") == "events_poll":
-            out = rebuild_poll_record(rec["battle"], raw, known)
+            out = rebuild_poll_record(bid, raw, known)
         else:
             # a battle-list record keeps its official roster and sinks;
             # only the tallies are recomputed from the stored events
@@ -458,8 +447,9 @@ def retag(known):
             out = dict(rec)
             out["content_marks"] = dict(mk)
         marks.update({k: v for k, v in out["content_marks"].items() if ":" not in k})
-        write_json_atomic(path, out)
+        st.put(bid, out)
         n += 1
+    st.close()
     print(f"retag: {n} kill-feed record(s) rebuilt; content markers: " + (", ".join(
         f"{c} x{k}" for c, k in marks.most_common()) or "none"), flush=True)
 
@@ -475,9 +465,9 @@ def remark(args, known):
     inventory) and rewrite them through harvest_battle. Network step; a
     one-off after a marker lands, never part of a build."""
     todo = []
-    for name in sorted(os.listdir(CACHE)):
-        rec = read_json(os.path.join(CACHE, name))
-        if not rec or rec.get("source") == "events_poll":
+    st = store()
+    for bid, rec in st.iter_records(ids=st.ids(source="battle_list")):
+        if rec.get("source") == "events_poll":
             continue
         if "content_marks" in rec and rec.get("raw_events"):
             continue
@@ -489,27 +479,27 @@ def remark(args, known):
             continue
         if args.remark_max_players and (rec.get("total_players") or 0) > args.remark_max_players:
             continue
-        todo.append((rec, rec["battle"], rec.get("total_players") or 0,
-                     os.path.join(CACHE, name)))
+        todo.append((rec, bid, rec.get("total_players") or 0))
     todo.sort(key=lambda t: t[0].get("started_at") or "", reverse=True)   # newest first
     print(f"remark: {len(todo)} battle-list record(s) without marks to re-fetch, "
           f"{max(1, args.workers)} worker(s)", flush=True)
     import concurrent.futures as cf
     marked = 0
     with cf.ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
-        futs = [pool.submit(harvest_battle, args, known, {}, bid, total, path)
-                for _rec, bid, total, path in todo]
-        for fut, (_rec, bid, _t, path) in zip(futs, todo):
+        futs = [pool.submit(harvest_battle, args, known, {}, bid, total)
+                for _rec, bid, total in todo]
+        for fut, (_rec, bid, _t) in zip(futs, todo):
             try:
                 line, _k, _e = fut.result()
             except Exception as ex:
                 print(f"  battle {bid} failed: {ex!r}", flush=True)
                 continue
-            new = read_json(path) or {}
+            new = st.get(bid) or {}
             if (new.get("content_marks") or {}).get("ancient_lands"):
                 marked += 1
                 line += "   ANCIENT LANDS"
             print(line, flush=True)
+    st.close()
     print(f"remark: {marked} of {len(todo)} re-fetched battles carry a portal mark", flush=True)
 
 
@@ -518,7 +508,7 @@ def poll_events(args, known):
     into per-battle cache records. Cache only. Prints the KillArea tally
     of what it saw, which is how an instanced content's label is first
     observed."""
-    os.makedirs(CACHE, exist_ok=True)
+    st = store()
     by_battle, seen_events, pages = {}, 0, 0
     for off in range(0, max(51, args.poll_depth), 51):
         lst = get_json(f"{GAMEINFO}/events?limit=51&offset={off}")
@@ -534,17 +524,14 @@ def poll_events(args, known):
         if len(lst) < 51:
             break
     new_events, touched, tally = 0, 0, collections.Counter()
-    marks_tally, unreadable = collections.Counter(), 0
+    marks_tally = collections.Counter()
     for bid, evs in sorted(by_battle.items()):
-        path = os.path.join(CACHE, f"{bid}.json")
+        meta = st.meta(bid)
         rec = None
-        if os.path.exists(path):
-            rec = read_json(path)
-            if rec is None:
-                unreadable += 1
-                continue        # mid-write or damaged: never overwrite it
-            if rec.get("source") != "events_poll":
+        if meta:
+            if meta[0] != "events_poll":
                 continue        # the full harvest already holds this battle
+            rec = st.get(bid)
         # rebuild the sinks from the stored raw events plus the new ones:
         # the record stays a pure function of its event set
         raw = {e["EventId"]: e for e in (rec or {}).get("raw_events") or []}
@@ -558,7 +545,8 @@ def poll_events(args, known):
         out = rebuild_poll_record(bid, raw, known)
         tally.update(out["kill_areas"])
         marks_tally.update(out["content_marks"])
-        write_json_atomic(path, out)
+        st.put(bid, out)
+    st.close()
     sizes = collections.Counter(
         len(d.get("GroupMembers") or []) for evs in by_battle.values() for d in evs.values())
     print(f"poll: {seen_events} events on {pages} page(s), {len(by_battle)} battles, "
@@ -570,25 +558,25 @@ def poll_events(args, known):
     print("  killer-party sizes seen: " + ", ".join(
         f"{k}:{v}" for k, v in sorted(sizes.items())), flush=True)
     errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
-    print(f"  request misses after retries: {errs}"
-          + (f"; {unreadable} record(s) unreadable, left alone" if unreadable else ""),
-          flush=True)
+    print(f"  request misses after retries: {errs}", flush=True)
 
 
-def harvest_battle(args, known, b, bid, total, path):
+def harvest_battle(args, known, b, bid, total):
     """Steps 2-3 for ONE battle: the official roster, the kill list, every
-    kill event's parties and builds, written to its own cache file. Runs
+    kill event's parties and builds, written to its own cache row. Runs
     on a worker thread (`--workers`): the per-battle work is
-    independent — one file per battle, no shared state — so battles run
-    side by side while each battle's events stay sequential, and the file
-    a worker writes is byte-identical to what the old sequential loop
+    independent — one row per battle, no shared state — so battles run
+    side by side while each battle's events stay sequential, and the
+    record a worker writes is identical to what the old sequential loop
     wrote. Returns (log line, kills counted, events fetched)."""
     server = args.server
+    st = store()
     # step 2 — the full roster (denominator)
     detail = get_json(f"{GAMEINFO}/battles/{bid}")
-    if detail is None and os.path.exists(path):
-        prev = read_json(path)
+    if detail is None and st.has(bid):
+        prev = st.get(bid)
         if prev and prev.get("source") == "events_poll":
+            st.close()
             # the official record lags the kills: the poll record, with its
             # event-built roster, is the better one until it exists
             return (f"  battle {bid}: official record not yet available, "
@@ -641,7 +629,7 @@ def harvest_battle(args, known, b, bid, total, path):
         # through --retag, never another fetch
         "raw_events": sorted(raw_kept, key=lambda e: e.get("EventId") or 0),
     }
-    prev = read_json(path) if os.path.exists(path) else None
+    prev = st.get(bid)
     if prev and prev.get("source") == "events_poll":
         # the poll saw this battle first: its marks and stored events ride
         # along, so a capped or partial event fetch can never lose a tag
@@ -652,19 +640,20 @@ def harvest_battle(args, known, b, bid, total, path):
             rec["raw_events"] = sorted(
                 rec["raw_events"] + [e for e in prev["raw_events"] if e.get("EventId") not in have],
                 key=lambda e: e.get("EventId") or 0)
-    write_json_atomic(path, rec)
+    st.put(bid, rec)
+    st.close()
     return (f"  battle {bid}: {total} players, {len(kills)} kills, "
             f"{ev_ok} events fetched, {len(parties)} distinct parties",
             min(len(kills), args.max_events), ev_ok)
 
 
 def fetch(args, known):
-    os.makedirs(CACHE, exist_ok=True)
+    st = store()
     server = args.server
     seen_battles = 0
     page = 1
     max_pages = args.pages if args.pages and args.pages > 0 else 40
-    todo = []          # (b, bid, total, path) not yet in the cache
+    todo = []          # (b, bid, total) not yet in the cache
     while seen_battles < args.battles and page <= max_pages:
         url = (f"https://api.albionbb.com/{server}/battles"
                f"?minPlayers={args.min_players}&page={page}")
@@ -680,22 +669,21 @@ def fetch(args, known):
                 continue
             if args.max_players and total > args.max_players:
                 continue        # outside the requested size band
-            path = os.path.join(CACHE, f"{bid}.json")
-            if os.path.exists(path):
-                # schema 1 cached weapons only — re-fetch it for the builds
-                cached = read_json(path) or {}
-                # a kill-feed poll record has no official roster;
-                # the battle-list harvest replaces it
-                if (cached.get("schema", 1) >= 2
-                        and cached.get("source") != "events_poll"):
+            meta = st.meta(bid)
+            if meta:
+                # schema 1 cached weapons only — re-fetch it for the builds;
+                # a kill-feed poll record has no official roster: the
+                # battle-list harvest replaces it
+                source, schema = meta[0], meta[1] if meta[1] is not None else 1
+                if schema >= 2 and source != "events_poll":
                     seen_battles += 1
                     continue
-            todo.append((b, bid, total, path))
+            todo.append((b, bid, total))
             seen_battles += 1
         page += 1
     # FETCH IN PARALLEL: the harvest's cost is the kill-event
     # detail fetch, ~1.8 s per event sequentially and one HTTP call each.
-    # Battles are independent units of work (own cache file, own log line),
+    # Battles are independent units of work (own cache row, own log line),
     # so a small pool runs them side by side; events within a battle stay
     # sequential. `--workers 1` is the old loop. Coverage is reported at
     # the end so a rate-limited night (429s exhaust get_json's retries and
@@ -721,23 +709,22 @@ def fetch(args, known):
     errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
     print(f"event coverage this pass: {events_total}/{kills_total} = {cov:.3f}"
           f"  (request misses after retries: {errs}){flag}", flush=True)
-    print(f"cache holds {len(os.listdir(CACHE))} battles", flush=True)
+    print(f"cache holds {st.count()} battles", flush=True)
+    st.close()
 
 
 def analyze(known):
-    if not os.path.isdir(CACHE) or not os.listdir(CACHE):
+    if not os.path.exists(CACHE):
+        sys.exit("no cache — run without --pages 0 first")
+    st = store()
+    if not st.count():
         sys.exit("no cache — run without --pages 0 first")
     battles, parties = [], []
     battle_party_index = {}   # battle -> {member name: party index}
-    # one directory snapshot for both passes: the poll adds files while
-    # this runs, and a battle must not appear in builds but not in battles
-    cache_names = sorted(os.listdir(CACHE))
-    unreadable = []
-    for name in cache_names:
-        rec = read_json(os.path.join(CACHE, name))
-        if not rec:
-            unreadable.append(name)
-            continue
+    # one id snapshot for both passes: the poll adds rows while this
+    # runs, and a battle must not appear in builds but not in battles
+    cache_ids = st.ids()
+    for bid, rec in st.iter_records(ids=cache_ids):
         total = rec.get("total_players") or 0
         from_poll = rec.get("source") == "events_poll"
         seen = {m["name"] for p in rec.get("parties", [])
@@ -856,12 +843,7 @@ def analyze(known):
                 return cls.lower()
         return None
     builds, by_weapon = [], {}
-    for name in cache_names:
-        if name in unreadable:
-            continue
-        rec = read_json(os.path.join(CACHE, name))
-        if not rec:
-            continue
+    for bid, rec in st.iter_records(ids=cache_ids):
         # PARTY SIZE per build (the Grailseeker case): the
         # battle floor admits 2-8 man gank parties fighting inside a
         # 20+ battle, and their kits (Hunter Shoes, Demon Cape, Poison
@@ -964,9 +946,10 @@ def analyze(known):
                 1 for e in by_weapon.values() if e["armour_majority"]),
             "median_coverage": (lambda xs: xs[len(xs) // 2] if xs else None)(
                 sorted(b["coverage"] for b in battles if b["coverage"] is not None)),
-            "unreadable_cache_files": len(unreadable),
+            "unreadable_cache_files": 0,
         },
     }
+    st.close()
     path = rosters_io.path(OUT)
     rosters_io.dump(out, path)      # gzipped, deterministic
     s = out["summary"]
@@ -977,9 +960,6 @@ def analyze(known):
     print(f"{s['builds']} observed BUILDS ({s['builds_full_kit']} with 6+ "
           f"equipment slots), armour evidence on "
           f"{s['weapons_with_armour_evidence']} weapons")
-    if unreadable:
-        print(f"WARNING: {len(unreadable)} cache file(s) unreadable and skipped: "
-              + ", ".join(unreadable[:5]))
     print(f"wrote out/{rosters_io.NAME}")
 
 

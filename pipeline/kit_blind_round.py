@@ -12,7 +12,7 @@ Grading convention: one build can be part of multiple styles, so the
 answer is a distribution, not a label, and a call agrees when it names
 the styles that carry the build's players.
 
-Report-only, network-free; reads out/party_cache through the audit's
+Report-only, network-free; reads out/party_cache.sqlite through the audit's
 loader and labels with the engine's comp_identity (worn chests passed).
 
     py -3 pipeline/kit_blind_round.py "Realmbreaker"          # the form
