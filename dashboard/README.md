@@ -116,12 +116,25 @@ and its tests: `supabase/README.md`.
   `window.Account`. `_profile.js` edits the character (Albion name and
   server), the display name, and the player's weapon lists (main / can also
   play), the lists saved through `set_my_weapons` in one transaction.
+- **`_guild.js`** (platform phase 2) follows the same shape: helpers over
+  `guilds`, `guild_members`, the `guild_join_codes` view and the
+  `create_guild` / `join_guild` functions; pure functions for validation,
+  the member table (admins first; each member's lists and the roles they
+  cover, read through `weaponInfo` and `rolesCovered`), role coverage, what
+  the caller's own role may offer (`memberPowers`: the guard's rules, never
+  more) and error wording (`tests/test_guild.js`); and the guilds dialog
+  the account menu opens (`registerView("guilds")`): the guild list with
+  join-by-code and create, the selected guild's join code (officers and
+  admins), members per role, the member table with the role controls and
+  removals the caller's role allows, and the admin's rename, leave and
+  delete. A write the server refused comes back as no row; the helpers
+  report it (`refused`), never swallow it.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
-  `_auth.js` and `_profile.js` load after the planner, each in its own
+  `_auth.js`, `_profile.js` and `_guild.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it.
@@ -134,10 +147,11 @@ and its tests: `supabase/README.md`.
 - The session persists in `localStorage` (supabase-js); `onAuthStateChange`
   keeps the button in step with other tabs.
 
-`tests/test_auth_ui.js` and `tests/test_profile.js` pin validation, error
-wording, the name fallback, link parsing, the weapon lists and search, and
-what the helpers send; `test_dashboard_layout.py` L27–L28 pin the markup,
-the isolation, the boundary and the catalog.
+`tests/test_auth_ui.js`, `tests/test_profile.js` and `tests/test_guild.js`
+pin validation, error wording, the name fallback, link parsing, the weapon
+lists and search, the member table and role powers, and what the helpers
+send; `test_dashboard_layout.py` L27–L29 pin the markup, the isolation,
+the boundary and the catalog.
 
 To view locally: `py -3 -m http.server --directory dashboard` (the page also
 works from `file://`, but automated browsers block it).

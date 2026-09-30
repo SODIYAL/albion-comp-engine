@@ -56,11 +56,19 @@ database, are the only thing that keeps one player's data from another's.
    granted to `authenticated`. A contended write (claiming a sign-up slot)
    follows the same rule: one conditional statement, so two claims cannot
    both succeed.
-8. **`security definer` is a listed exception, never a default.** The one
-   allowed today is `handle_new_user`, the sign-up trigger, which writes the
-   new user's profile before any session exists. A trigger function has
-   execute revoked from `public`, `anon` and `authenticated`: triggers run it,
-   the API never does.
+8. **`security definer` is a listed exception, never a default.** The list
+   (`DEFINER_ALLOWED` in `tests/test_supabase_schema.py`): `handle_new_user`,
+   the sign-up trigger, which writes the new user's profile before any
+   session exists, and the helpers policies and guards call, which live in
+   the schema `private`, one the API does not expose (Supabase lint 0029):
+   `private.guild_role_of` (a policy on `guild_members` that read
+   `guild_members` under its own policy would recurse; it answers for the
+   caller alone, `auth.uid()` read inside), `private.guild_id_for_code`
+   (the insert policy checks a join code against a guild the joiner cannot
+   yet read) and `private.guild_member_count` (the member bound counts rows
+   the joiner cannot yet read). Every API function runs as the caller. A
+   trigger function has execute revoked from `public`, `anon` and
+   `authenticated`: triggers run it, the API never does.
 9. **A user-writable list is bounded** (a storage bound against abuse,
    enforced by a trigger, not a product rule).
 10. **Weapons are dataset keys.** A weapon is always the dataset's weapon-line
@@ -69,6 +77,17 @@ database, are the only thing that keeps one player's data from another's.
     it against the build's catalog and shows a key it no longer knows as
     unknown. The dataset stays the one weapon catalog: no copy of it lives in
     the database.
+11. **A write that needs a fact the caller cannot read** (a join code names a
+    guild the joiner cannot see) passes it through a transaction-local
+    setting the policy reads (`join_guild` sets `app.join_code`, the insert
+    policy checks it through the private helper): the function stays
+    `security invoker`, and a direct write, which carries no setting, is
+    refused.
+12. **One permissive policy per table and action** (Supabase lint 0006): a
+    second reader joins the existing policy's expression (own row, or a
+    guild shared) instead of adding a policy. Every foreign key has a
+    covering index (lint 0001). After a migration is applied the advisor
+    must show no new warning.
 
 ## Schema
 
@@ -79,10 +98,20 @@ database, are the only thing that keeps one player's data from another's.
 | `set_my_weapons(weapons jsonb)` | saves a player's whole list in one transaction; a weapon kept across saves keeps its `created_at` | — | signed-in users |
 | `handle_new_user()` | trigger on `auth.users`: creates the profile from the sign-up metadata, names trimmed and cut to the bound, a server off the list stored as null | — | the trigger |
 | `set_updated_at()`, `player_weapons_bound()` | trigger functions | — | triggers |
+| `guilds` | a guild on one server: `name` (trimmed, 1–64, unique per server whatever its case), `albion_server`, `join_code` (10 letters and digits, unique), `created_by` (null once that account is deleted; the guild stays) | its members; its creator | `create_guild`; admins rename it, renew its code (any written value becomes a fresh code) and delete it |
+| `guild_members` | who belongs and as what: `role` in `member` / `caller` / `officer` / `admin`; at most 500 per guild, 20 per account | the guild's members | `create_guild` (the creator as admin), `join_guild` (the code holder as member); officers set members and callers between those two roles and remove them; admins set any role and remove anyone; a member removes their own row (leaves); the last admin is refused by the guard, and when the last admin's account is deleted the longest-standing officer, else caller, else member becomes admin (a guild with no one left goes with the account) |
+| `guild_join_codes` | a view: `guild_id`, `join_code` for the guilds the caller is an officer or admin of | officers and admins | — |
+| `create_guild(name, albion_server)` | the guild and its first admin in one transaction | — | signed-in users |
+| `join_guild(code)` | the code holder becomes a member; a wrong code is `P0002`; a member joining again gets the guild. Runs as the caller: the code rides the statement (`app.join_code`) and the insert policy checks it (rule 11) | — | signed-in users |
+| `private.guild_role_of(guild)`, `private.guild_id_for_code(code)`, `private.guild_member_count(guild)` | the helpers policies and the guard call, with their definer's rights, in the schema the API does not expose (rule 8) | policies, the guard | — |
+| `new_join_code()`, `guilds_guard()`, `guild_members_guard()`, `guild_members_succession()` | the code generator (a column default); the guard triggers and the succession | — | the default expression; triggers |
 
-Profiles and weapon lists are readable by their own account alone until guilds
-exist; guild-scoped read policies arrive with the guild tables
-(`notes/specs/2026-09-28-player-platform-design.md`).
+**Who reads whom.** A profile and a weapon list are readable by their own
+account and by every member of a guild the two share (the own-row select
+policies on `profiles` and `player_weapons` carry the guild clause): a
+caller reads what a member plays. Email addresses live in `auth.users` and
+are never exposed. The join code is readable by officers and admins alone,
+through the view.
 
 ## Tests
 

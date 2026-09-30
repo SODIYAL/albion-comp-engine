@@ -345,7 +345,8 @@ The persistent ZvZ planning, sign-up and roster platform around the engine.
 Phases, their tables and the patterns phase 1 set:
 `notes/specs/2026-09-28-player-platform-design.md`; the schema rules:
 `supabase/README.md`. Phase 1 (accounts, the editable profile, weapon
-lists) is built.
+lists) and phase 2 (guilds: members with roles, the join code, guild-scoped
+reads of profiles and weapon lists, the guilds dialog) are built.
 
 - **Decide guest sign-up identity** before phase 5: a name only, a name
   with a claim token kept in the guest's browser, or a Discord login (the
@@ -355,10 +356,17 @@ lists) is built.
 - **Pin the Supabase library**: `dashboard/build.py` loads
   `@supabase/supabase-js@2`, a floating major version; pin an exact version
   with a subresource-integrity hash.
-- **Phase 2, guilds**: `guilds` (on one Albion server, as profiles record
-  theirs), `guild_members` (member / caller / officer / admin), guild-scoped
-  read policies on profiles and weapon lists, a guild panel. Then phases
-  3–12 in order (the spec).
+- **Phase 3, saved comps**: `comp_templates` (guild, name, content, planned
+  size, style) and `comp_template_slots`; a template is never a live roster.
+  Then phases 4–12 in order (the spec).
+- **Guild invitations beyond the code**: a member joins only by a code an
+  officer shares. An officer adding a member by Albion name, or a player
+  asking to join, needs a lookup of profiles the reader is not yet allowed
+  to see: a maintainer decision on what a name search may reveal.
+- **Guild-scoped reads are all or nothing**: every member reads every
+  co-member's character, display name, server and weapon lists. A member
+  who wants to keep a secondary list private has no switch (curation
+  judgment: a CTA tool exists to show a caller what members play).
 
 ## Product features (deprioritized until comp quality satisfies)
 

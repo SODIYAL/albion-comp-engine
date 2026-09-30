@@ -1,7 +1,8 @@
 # Player platform — design (2026-09-28)
 
 Status: phase 1 (accounts and the player profile) implemented 2026-09-28;
-phases 2–12 open (`BACKLOG.md` "Platform"). The schema and its rules:
+phase 2 (guilds) implemented 2026-09-30; phases 3–12 open (`BACKLOG.md`
+"Platform"). The schema and its rules:
 `supabase/README.md`. The client modules: `dashboard/README.md` "Accounts".
 
 ## Problem
@@ -45,9 +46,10 @@ roles.
 1. **Accounts and the player profile** (implemented) — `profiles` (the
    character: Albion name and server; a display name), `player_weapons`
    (weapon lines, `main` / `secondary`, order).
-2. **Guilds** — `guilds` (name, created_by), `guild_members` (guild, user,
-   role in member / caller / officer / admin). Guild-scoped read policies on
-   profiles and weapon lists arrive here.
+2. **Guilds** (implemented) — `guilds` (name, server, join code,
+   created_by), `guild_members` (guild, user, role in member / caller /
+   officer / admin). Guild-scoped read policies on profiles and weapon
+   lists arrive here.
 3. **Saved comps** — `comp_templates` (guild, name, content, planned size,
    style) and `comp_template_slots` (party, position, weapon key, role,
    note). A template is never a live roster.
@@ -142,6 +144,62 @@ roles.
 - **Deferred**: experience level, avatars (Storage), stored preferred
   roles, weapon aliases (phase 10).
 
+## Phase 2 decisions
+
+- **A guild lives on one server and its name is unique there**, whatever
+  its case (a game fact: guild names are unique per server). The creator
+  is its first admin; `created_by` goes null when that account is deleted
+  and the guild stays.
+- **Joining is by code.** A guild carries a 10-character code (40 bits of a
+  random UUID; no extension needed). Whoever holds it joins as a member
+  through `join_guild`, which runs as the caller: the code rides the
+  statement as a transaction-local setting and the insert policy checks
+  it through a private helper that reads the guild the joiner cannot yet
+  see, so a direct insert, which carries no code, is refused. Officers and
+  admins read the code through a view (`guild_join_codes`); an admin
+  renews it by writing any value, which the guard replaces with a fresh
+  code, so a code is never chosen.
+- **Roles and reach, enforced by the database.** Officers set members and
+  callers between those two roles and remove them; admins set any role and
+  remove anyone; a member leaves. The policies say who may write; a guard
+  trigger says what: an officer's reach, the four roles, and that the last
+  admin can neither step down nor leave by their own statement. Callers
+  carry no extra power in this phase (CTAs, phase 4). The client offers
+  only what the guard would allow (`memberPowers`) and reads a refusal as
+  a sentence; it never decides.
+- **Succession.** When the last admin's account is deleted, the
+  longest-standing officer, else caller, else member becomes admin; a guild
+  with no one left is deleted with the account. Evidence: without it the
+  cascade from `auth.users` hit the guard and the account deletion failed
+  (the RLS suite's first run of the case). The rule runs after the delete
+  and only ever sees a last-admin row a cascade removed, since the guard
+  refused every other path.
+- **Who sees what inside a guild** (the phase 1 open question): every
+  member reads every co-member's character name, display name, server and
+  weapon lists, through guild-scoped select policies on `profiles` and
+  `player_weapons`. Nothing else: email addresses live in `auth.users`.
+  Curation judgment: the tool exists to show a caller what members play.
+- **Definer helpers live outside the API schema.** `guild_role_of` reads
+  `guild_members` with its definer's rights because a policy on that
+  table cannot read the table under its own policy (recursion); it answers
+  for the caller alone (`auth.uid()` inside). It and the two helpers
+  beside it (the guild a code names, a guild's member count) live in the
+  schema `private`, which the API does not expose. Evidence: the security
+  advisor flagged the first migration's `guild_role_of` and `join_guild`
+  (lint 0029: a definer signed-in users can call through `/rest/v1/rpc`);
+  the second migration moved the helper and made `join_guild` an invoker.
+  The schema test lists every definer and pins that a non-trigger definer
+  lives in `private`. The performance advisor's two findings (unindexed
+  foreign keys, two permissive select policies on `profiles` and
+  `player_weapons`) landed the same way: indexes, and the guild clause
+  joined to the own-row select policies.
+- **Bounds**: 500 members per guild, 20 guilds per account, the guild name
+  under the account name bound (64). Storage bounds against abuse, not
+  product rules.
+- **Deferred**: invitations by name or request (a profile lookup outside
+  the guild), per-member privacy of lists, guild avatars, a caller-only
+  power.
+
 ## Open questions
 
 - **Guest identity.** What a guest sign-up records, and how a guest's
@@ -154,7 +212,5 @@ roles.
     cancels the sign-up, and an account created later on the same browser
     can take over the guest's history;
   - a Discord login (phase 12): real identity, at a sign-in's friction.
-- **Who sees what inside a guild**: which profile fields and weapon lists
-  members, callers and officers read.
 - **Supabase Auth settings**: leaked-password protection is off (security
   advisor).

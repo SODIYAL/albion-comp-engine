@@ -1912,6 +1912,7 @@ window.AUTH_LINK = "";
     <div class="acct-menu-sub" id="acct-menu-email"></div>
   </div>
   <button type="button" class="acct-item" id="acct-profile">Profile</button>
+  <button type="button" class="acct-item" id="acct-guilds">Guilds</button>
   <button type="button" class="acct-item danger" id="acct-logout">Log out</button>
   <p class="acct-menu-err" id="acct-menu-err" role="alert"></p>
 </div>
@@ -2086,5 +2087,110 @@ window.AUTH_LINK = "";
         <span class="profile-dirty" id="profile-dirty" hidden>Unsaved changes</span>
       </div>
     </form>
+  </div>
+</dialog>
+
+<!-- The guilds dialog (_guild.js): the account's guilds down the side
+     (join by code, create), the selected guild across the main column:
+     its join code (officers and admins), how many members bring each role,
+     the member table with role controls the caller's own role allows, and
+     the admin's rename, leave and delete. -->
+<dialog class="auth-dialog guild-dialog" id="guild-dialog" aria-modal="true" aria-labelledby="guild-title">
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker">Comp Zaddy account</span>
+        <h2 id="guild-title">Guilds</h2>
+      </div>
+      <button type="button" class="auth-close" id="guild-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="auth-msg err" id="guild-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="guild-notice" role="status" hidden></p>
+    <p class="sr-only" id="guild-live" aria-live="polite"></p>
+
+    <div class="gd-grid">
+      <aside class="gd-side">
+        <h3 class="pw-label" id="guild-list-label">Your guilds</h3>
+        <ul class="gd-list" id="guild-list" aria-labelledby="guild-list-label"></ul>
+        <p class="auth-hint" id="guild-list-note" hidden></p>
+
+        <form class="auth-form gd-form" id="guild-join" novalidate>
+          <h3 class="pw-label">Join with a code</h3>
+          <div class="auth-field">
+            <label for="guild-join-code">Join code</label>
+            <input class="text-input" id="guild-join-code" maxlength="10" type="text"
+              autocomplete="off" autocapitalize="characters" spellcheck="false"
+              aria-describedby="guild-join-code-err">
+            <p class="auth-field-err" id="guild-join-code-err"></p>
+          </div>
+          <button class="auth-submit" id="guild-join-submit" type="submit">Join guild</button>
+        </form>
+
+        <form class="auth-form gd-form" id="guild-new" novalidate>
+          <h3 class="pw-label">Create a guild</h3>
+          <div class="auth-field">
+            <label for="guild-new-name">Guild name</label>
+            <input class="text-input" id="guild-new-name" maxlength="64" type="text"
+              autocomplete="organization" spellcheck="false" aria-describedby="guild-new-name-err">
+            <p class="auth-field-err" id="guild-new-name-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="guild-new-server">Server</label>
+            <select id="guild-new-server" aria-describedby="guild-new-server-err">
+              <option value="">Choose the server</option>
+              <option value="americas">Americas</option>
+              <option value="asia">Asia</option>
+              <option value="europe">Europe</option>
+            </select>
+            <p class="auth-field-err" id="guild-new-server-err"></p>
+          </div>
+          <button class="auth-submit" id="guild-new-submit" type="submit">Create guild</button>
+          <p class="auth-hint">You become its first admin.</p>
+        </form>
+      </aside>
+
+      <section class="gd-main" aria-live="off">
+        <p class="gd-empty" id="guild-empty">Pick a guild, or create or join one.</p>
+        <div id="guild-view" hidden>
+          <div class="gd-head">
+            <h3 class="gd-title" id="guild-name"></h3>
+            <p class="gd-meta" id="guild-meta"></p>
+          </div>
+          <div class="gd-code" id="guild-code-box" hidden>
+            <span class="pw-label">Join code</span>
+            <code class="gd-code-value" id="guild-code"></code>
+            <button type="button" class="gd-btn" id="guild-code-copy">Copy</button>
+            <button type="button" class="gd-btn" id="guild-code-renew" hidden>Renew</button>
+            <p class="auth-hint">Share it with the players who should join. Officers and admins see it; renewing it stops the old code.</p>
+          </div>
+          <div class="gd-coverage" id="guild-coverage" aria-label="Members per role, by their main weapons"></div>
+          <p class="auth-hint" id="guild-members-note" hidden></p>
+          <table class="gd-table">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Plays</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="guild-members"></tbody>
+          </table>
+          <form class="auth-form gd-rename" id="guild-rename" novalidate hidden>
+            <div class="auth-field">
+              <label for="guild-rename-name">Guild name</label>
+              <input class="text-input" id="guild-rename-name" maxlength="64" type="text"
+                spellcheck="false" aria-describedby="guild-rename-name-err">
+              <p class="auth-field-err" id="guild-rename-name-err"></p>
+            </div>
+            <button class="auth-submit" id="guild-rename-submit" type="submit">Rename</button>
+          </form>
+          <div class="gd-foot">
+            <button type="button" class="gd-btn" id="guild-leave">Leave guild</button>
+            <button type="button" class="gd-btn danger" id="guild-delete" hidden>Delete guild</button>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </dialog>

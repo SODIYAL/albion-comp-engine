@@ -36,6 +36,7 @@ try {
 }
 
 let pass = 0, fail = 0;
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 function check(name, cond, detail) {
   if (cond) { pass++; console.log(`PASS  ${name}`); }
   else { fail++; console.log(`FAIL  ${name}${detail !== undefined ? "\n      " + JSON.stringify(detail) : ""}`); }
@@ -256,6 +257,162 @@ try {
     "select (select count(*) from public.profiles where id = $1) as p, (select count(*) from public.player_weapons where user_id = $1) as w", [B])).rows[0];
   check("deleting an auth user removes their profile and weapons (cascade)",
         Number(left.p) === 0 && Number(left.w) === 0, left);
+}
+
+/* 8 - guilds: creation, the join code, roles, the guard, guild-scoped reads */
+{
+  const roleOf = (sub, gid) => rows("authenticated", sub, "select private.guild_role_of($1) as r", [gid]).then(r => r[0].r);
+  const members = (sub) => rows("authenticated", sub, "select user_id, role from public.guild_members order by role, user_id");
+  const codeOf = (sub, gid) => rows("authenticated", sub, "select join_code from public.guild_join_codes where guild_id = $1", [gid]);
+
+  const g = (await rows("authenticated", A, "select * from public.create_guild($1, $2)", ["  Zaddy Guild ", "asia"]))[0];
+  check("create_guild makes the guild, trimmed, with a ten-character code, and seats its creator as admin",
+        g && g.name === "Zaddy Guild" && g.albion_server === "asia" && /^[A-Z0-9]{10}$/.test(g.join_code)
+        && g.created_by === A && await roleOf(A, g.id) === "admin", g);
+  check("a guild name is unique on its server, whatever its case",
+        await code("authenticated", D, "select * from public.create_guild($1, $2)", ["zaddy guild", "asia"]) === "23505");
+  const gd = (await rows("authenticated", D, "select * from public.create_guild($1, $2)", ["Zaddy Guild", "europe"]))[0];
+  check("the same name on another server is another guild", gd && gd.id !== g.id);
+  check("create_guild refuses a blank name and a server off the list",
+        await code("authenticated", D, "select * from public.create_guild($1, $2)", ["   ", "asia"]) === "23514"
+        && await code("authenticated", D, "select * from public.create_guild($1, $2)", ["Narnians", "narnia"]) === "23514");
+  check("anon and a sessionless caller create nothing",
+        await code("anon", null, "select * from public.create_guild('X', 'asia')") === "42501"
+        && await code("authenticated", null, "select * from public.create_guild('X', 'asia')") === "42501");
+
+  /* joining by code */
+  const joined = (await rows("authenticated", C, "select * from public.join_guild($1)", [` ${g.join_code.toLowerCase()} `]))[0];
+  check("join_guild seats the code holder as a member (the code compared trimmed, upper case)",
+        joined && joined.id === g.id && await roleOf(C, g.id) === "member", joined);
+  check("a wrong code joins nothing",
+        await code("authenticated", C, "select * from public.join_guild('NOPE000000')") === "P0002");
+  await run("authenticated", C, "select * from public.join_guild($1)", [g.join_code]);
+  check("joining again is answered with the guild, and one row stays",
+        (await members(C)).filter(m => m.user_id === C).length === 1);
+  check("anon and a sessionless caller join nothing",
+        await code("anon", null, "select * from public.join_guild($1)", [g.join_code]) === "42501"
+        && await code("authenticated", null, "select * from public.join_guild($1)", [g.join_code]) === "42501");
+  check("a member cannot seat themself directly (the creator's insert policy alone)",
+        await code("authenticated", E, "insert into public.guild_members (guild_id, role) values ($1, 'member')", [g.id]) === "42501"
+        && await code("authenticated", E, "insert into public.guild_members (guild_id, role) values ($1, 'admin')", [g.id]) === "42501");
+  check("a member cannot write the user_id column",
+        await code("authenticated", A, "insert into public.guild_members (guild_id, user_id, role) values ($1, $2, 'member')", [g.id, E]) === "42501");
+
+  /* what a member reads */
+  const cSees = await rows("authenticated", C, "select id, name from public.guilds order by name");
+  check("a member reads their guild and no other", cSees.length === 1 && cSees[0].id === g.id, cSees);
+  check("a member reads the guild's members", same((await members(C)).map(m => m.role), ["admin", "member"]));
+  const cProfiles = await rows("authenticated", C, "select id, albion_name from public.profiles order by albion_name");
+  check("a member reads co-members' profiles (the guild-scoped policy) and no one else's",
+        same(cProfiles.map(p => p.id).sort(), [A, C].sort()), cProfiles);
+  const cWeapons = await rows("authenticated", C, "select count(*)::int as n from public.player_weapons where user_id = $1", [A]);
+  check("a member reads co-members' weapon lists", cWeapons[0].n === 50, cWeapons);
+  const eSees = await rows("authenticated", E, "select id from public.guilds");
+  const eProfiles = await rows("authenticated", E, "select id from public.profiles");
+  check("an outsider reads neither the guild nor its members' profiles",
+        eSees.length === 0 && eProfiles.length === 1 && eProfiles[0].id === E);
+  check("a member cannot read the join code; an admin can",
+        (await codeOf(C, g.id)).length === 0 && (await codeOf(A, g.id))[0].join_code === g.join_code);
+  check("a member cannot rename the guild, change roles or remove others",
+        await affected("authenticated", C, "update public.guilds set name = 'Mine' where id = $1", [g.id]) === 0
+        && await affected("authenticated", C, "update public.guild_members set role = 'admin' where user_id = $1", [C]) === 0
+        && await affected("authenticated", C, "delete from public.guild_members where user_id = $1", [A]) === 0);
+  check("anon reads no guild, member or code",
+        await code("anon", null, "select * from public.guilds") === "42501"
+        && await code("anon", null, "select * from public.guild_members") === "42501"
+        && await code("anon", null, "select * from public.guild_join_codes") === "42501");
+
+  /* roles and the guard */
+  check("the last admin can neither step down nor leave",
+        await code("authenticated", A, "update public.guild_members set role = 'member' where guild_id = $1 and user_id = $2", [g.id, A]) === "23514"
+        && await code("authenticated", A, "delete from public.guild_members where guild_id = $1 and user_id = $2", [g.id, A]) === "23514");
+  check("an admin promotes a member to officer",
+        await affected("authenticated", A, "update public.guild_members set role = 'officer' where guild_id = $1 and user_id = $2", [g.id, C]) === 1
+        && await roleOf(C, g.id) === "officer");
+  await run("authenticated", D, "select * from public.join_guild($1)", [g.join_code]);
+  await run("authenticated", E, "select * from public.join_guild($1)", [g.join_code]);
+  check("an officer sets a member to caller",
+        await affected("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, D]) === 1);
+  check("an officer cannot make an officer or an admin, nor touch one",
+        await code("authenticated", C, "update public.guild_members set role = 'admin' where guild_id = $1 and user_id = $2", [g.id, D]) === "42501"
+        && await code("authenticated", C, "update public.guild_members set role = 'member' where guild_id = $1 and user_id = $2", [g.id, A]) === "42501"
+        && await code("authenticated", C, "delete from public.guild_members where guild_id = $1 and user_id = $2", [g.id, A]) === "42501");
+  check("an officer removes a member",
+        await affected("authenticated", C, "delete from public.guild_members where guild_id = $1 and user_id = $2", [g.id, E]) === 1);
+  check("the role column takes the four roles only",
+        await code("authenticated", A, "update public.guild_members set role = 'warlord' where guild_id = $1 and user_id = $2", [g.id, D]) === "23514");
+  check("a member leaves",
+        await affected("authenticated", D, "delete from public.guild_members where guild_id = $1 and user_id = $2", [g.id, D]) === 1
+        && await roleOf(D, g.id) === null);
+  const before = (await db.query("select updated_at from public.guild_members where guild_id = $1 and user_id = $2", [g.id, C])).rows[0].updated_at;
+  await run("authenticated", A, "update public.guild_members set role = 'admin' where guild_id = $1 and user_id = $2", [g.id, C]);
+  const after = (await db.query("select updated_at, role from public.guild_members where guild_id = $1 and user_id = $2", [g.id, C])).rows[0];
+  check("an admin makes a second admin; updated_at follows", after.role === "admin" && after.updated_at > before);
+  check("with a second admin the first steps down",
+        await affected("authenticated", A, "update public.guild_members set role = 'officer' where guild_id = $1 and user_id = $2", [g.id, A]) === 1);
+  check("an officer cannot delete the guild; an admin renames it",
+        await affected("authenticated", A, "delete from public.guilds where id = $1", [g.id]) === 0
+        && await affected("authenticated", C, "update public.guilds set name = 'Zaddy Guild II' where id = $1", [g.id]) === 1);
+  for (const col of ["albion_server = 'europe'", "created_by = null", "created_at = now()", "updated_at = now()"]) {
+    check(`no member writes ${col.split(" ")[0]} on a guild (column grants)`,
+          await code("authenticated", C, `update public.guilds set ${col} where id = $1`, [g.id]) === "42501");
+  }
+  check("a guild name is trimmed, 1-64 characters",
+        await code("authenticated", C, "update public.guilds set name = ' x' where id = $1", [g.id]) === "23514"
+        && await code("authenticated", C, "update public.guilds set name = $2 where id = $1", [g.id, "y".repeat(65)]) === "23514");
+
+  /* the join code */
+  const renewed = (await rows("authenticated", C, "update public.guilds set join_code = 'CHOSEN0000' where id = $1 returning join_code", [g.id]))[0];
+  check("an admin renews the code by writing any value; the guard replaces it with a fresh one",
+        renewed && renewed.join_code !== "CHOSEN0000" && renewed.join_code !== g.join_code && /^[A-Z0-9]{10}$/.test(renewed.join_code), renewed);
+  check("the old code no longer joins; the new one does",
+        await code("authenticated", D, "select * from public.join_guild($1)", [g.join_code]) === "P0002"
+        && await code("authenticated", D, "select * from public.join_guild($1)", [renewed.join_code]) === "ok");
+  check("an officer reads the code but cannot renew it",
+        (await codeOf(A, g.id))[0].join_code === renewed.join_code
+        && await affected("authenticated", A, "update public.guilds set join_code = 'X' where id = $1", [g.id]) === 0);
+
+  /* bounds */
+  {
+    let made = 0, err = "ok";
+    for (let i = 0; i < 25 && err === "ok"; i++) {
+      err = await code("authenticated", E, "select * from public.create_guild($1, 'asia')", [`E guild ${i}`]);
+      if (err === "ok") made++;
+    }
+    check("an account belongs to at most 20 guilds (the guard)", made === 20 && err === "23514", { made, err });
+  }
+
+  /* deletion and cascades */
+  check("an admin deletes the guild; its memberships go with it (the cascade passes the guard)",
+        await affected("authenticated", C, "delete from public.guilds where id = $1", [g.id]) === 1
+        && Number((await db.query("select count(*) from public.guild_members where guild_id = $1", [g.id])).rows[0].count) === 0);
+
+  /* succession: the last admin's account is deleted */
+  const gdCode = (await db.query("select join_code from public.guilds where id = $1", [gd.id])).rows[0].join_code;
+  await run("authenticated", C, "select * from public.join_guild($1)", [gdCode]);
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [D]);
+  const dGuild = (await db.query("select created_by from public.guilds where id = $1", [gd.id])).rows[0];
+  check("deleting the creator's account keeps the guild, its created_by null",
+        dGuild && dGuild.created_by === null, dGuild);
+  check("the longest-standing remaining member becomes admin (succession under the cascade)",
+        await roleOf(C, gd.id) === "admin");
+  const solo = (await rows("authenticated", A, "select * from public.create_guild($1, $2)", ["Solo", "asia"]))[0];
+  await run("supabase_auth_admin", null, "delete from auth.users where id = $1", [A]);
+  check("a guild left with no member goes with its last admin's account",
+        Number((await db.query("select count(*) from public.guilds where id = $1", [solo.id])).rows[0].count) === 0);
+  check("no API role calls the guard or succession trigger functions",
+        await code("authenticated", C, "select public.guild_members_guard()") === "42501"
+        && await code("authenticated", C, "select public.guilds_guard()") === "42501"
+        && await code("authenticated", C, "select public.guild_members_succession()") === "42501");
+  const definers = (await db.query(
+    "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname in ('public', 'private') order by 1")).rows.map(r => r.f);
+  check("the API schema holds one definer, the sign-up trigger; the helpers live in private",
+        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.handle_new_user"]), definers);
+  check("anon reaches nothing in the private schema",
+        await code("anon", null, "select private.guild_role_of(gen_random_uuid())") === "42501");
+  const perm = (await db.query(
+    "select tablename, cmd, count(*)::int as n from pg_policies where schemaname = 'public' and permissive = 'PERMISSIVE' group by 1, 2 having count(*) > 1")).rows;
+  check("one permissive policy per table and action (lint 0006)", perm.length === 0, perm);
 }
 
 } catch (e) {

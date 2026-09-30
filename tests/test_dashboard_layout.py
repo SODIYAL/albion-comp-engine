@@ -732,6 +732,41 @@ _eng = Engine()
 drift = [k for k in CATALOG if CATALOG[k]["role"] != _eng.role_of(k)]
 check(not drift, "L28o each entry's role is the engine's role_class (one role read)", str(drift[:5]))
 
+print("L29 - guilds: the second feature module follows the profile's pattern")
+# Guilds (platform phase 2): its own script after the profile, identity
+# through window.Account, the client only in its helpers, weapons read
+# through the catalog and the profile module's pure functions, and the
+# planner never calling any of it.
+GUILD_JS = read("_guild.js")
+gdlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog"', "</dialog>", "L29 dialog anchors")
+check('aria-modal="true"' in gdlg and 'aria-labelledby="guild-title"' in gdlg and 'id="guild-title"' in gdlg,
+      "L29a the guilds dialog is modal and titled")
+for fid in ("guild-join-code", "guild-new-name", "guild-new-server", "guild-rename-name"):
+    check(('id="%s"' % fid) in gdlg and ('for="%s"' % fid) in gdlg, "L29b field %s has its label" % fid)
+check('role="alert"' in gdlg and 'aria-live="polite"' in gdlg, "L29c errors and changes are announced, inside the dialog")
+check('id="guild-members"' in gdlg and "<table" in gdlg and gdlg.count("<th scope=\"col\">") == 4,
+      "L29d the member table has its four column headers")
+check('id="acct-guilds"' in acct_menu and 'id="acct-guilds"' in SHELL[SHELL.find('id="acct-profile"'):SHELL.find('id="acct-logout"')],
+      "L29e the account menu offers Guilds between Profile and Log out")
+check("el.guildsItem" in AUTH_JS and "views.guilds" in AUTH_JS, "L29f the account UI shows the item once the module registered its view")
+check(not re.search(r"\bENG\b|CompEngine|DATASET|\bparty\b|\brender\(|saveHash|loadHash", GUILD_JS),
+      "L29g _guild.js reads and writes no planner or engine state")
+guild_ui = GUILD_JS[GUILD_JS.find("(function guildUI()"):]
+check(guild_ui != "" and "window.DB" not in guild_ui and "createClient" not in GUILD_JS,
+      "L29h the guilds UI calls its helpers, never the Supabase client")
+check('window.Account.registerView("guilds"' in GUILD_JS and "window.Account.subscribe(" in GUILD_JS,
+      "L29i the guilds module reaches identity through window.Account")
+check("rolesCovered(" in GUILD_JS and "weaponInfo(" in GUILD_JS and "role_class" not in GUILD_JS,
+      "L29j member roles are read through the profile module's catalog functions: one role read, no engine")
+check(not re.search(r"loadMyGuilds|loadGuildMembers|createGuild|joinGuild|setMemberRole|GUILD_ROLES", APP + DECISION_JS),
+      "L29k the planner never calls the guild module")
+check(all(s in AUTH_CSS for s in (".guild-dialog{", ".gd-grid{", ".gd-table{", ".gd-code-value{")),
+      "L29l the guilds dialog, its grid, table and code are styled in _auth.css")
+check(".gd-grid{grid-template-columns:1fr}" in LAYOUT, "L29m on a phone the guild list stacks above the guild (_layout.css)")
+i_guild = script_at(lambda a, b: "function loadMyGuilds" in b)
+check(0 <= i_profile < i_guild, "L29n the guilds module loads after the profile, in its own <script>",
+      "script indices profile=%d guild=%d" % (i_profile, i_guild))
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

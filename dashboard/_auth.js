@@ -500,6 +500,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuEmail: $id("acct-menu-email"),
     menuErr: $id("acct-menu-err"),
     profileItem: $id("acct-profile"),
+    guildsItem: $id("acct-guilds"),
     logoutItem: $id("acct-logout"),
     title: $id("auth-title"),
     error: $id("auth-error"),
@@ -661,6 +662,7 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     el.menuAlbion.textContent = character ? `Albion: ${character}` : "";
     el.menuEmail.textContent = (state.user && state.user.email) || "";
     el.profileItem.hidden = !views.profile;
+    el.guildsItem.hidden = !views.guilds;
 
     notify();
   }
@@ -690,8 +692,9 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
     menuItems()[0].focus();
   }
 
-  /* the items on offer: Profile shows once a module registered the view */
-  const menuItems = () => [el.profileItem, el.logoutItem].filter(item => !item.hidden);
+  /* the items on offer: Profile and Guilds show once their modules
+     registered the views */
+  const menuItems = () => [el.profileItem, el.guildsItem, el.logoutItem].filter(item => !item.hidden);
 
   function closeMenu(returnFocus) {
     if (menu.hidden) return;
@@ -745,6 +748,11 @@ function acctWireDialog(dialog, { canClose = () => true } = {}) {
   el.profileItem.addEventListener("click", () => {
     closeMenu(false);
     if (views.profile) views.profile();
+  });
+
+  el.guildsItem.addEventListener("click", () => {
+    closeMenu(false);
+    if (views.guilds) views.guilds();
   });
 
   el.logoutItem.addEventListener("click", async () => {

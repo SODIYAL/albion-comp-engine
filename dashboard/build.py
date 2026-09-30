@@ -13,6 +13,7 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
     dashboard/_supabase.js         the Supabase client (window.DB)
     dashboard/_auth.js             auth helpers + the account UI + window.Account
     dashboard/_profile.js          the profile dialog (names, weapon lists)
+    dashboard/_guild.js            the guilds dialog (members, roles, join code)
     out/dataset-latest.json        the single source of truth
         │
         ▼
@@ -161,6 +162,8 @@ def main():
         auth_js = f.read()
     with open(os.path.join(DASH, "_profile.js"), encoding="utf-8") as f:
         profile_js = f.read()
+    with open(os.path.join(DASH, "_guild.js"), encoding="utf-8") as f:
+        guild_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     semantic_icons = load_semantic_icons()
@@ -419,6 +422,7 @@ def main():
            f"<script>\n{supabase_js}\n</script>\n"
            f"<script>\n{auth_js}\n</script>\n"
            f"<script>\nconst ACCOUNT_CATALOG = {js(account_catalog)};\n{profile_js}\n</script>\n"
+           f"<script>\n{guild_js}\n</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     # newline="\n" on every committed page: Windows' default text mode

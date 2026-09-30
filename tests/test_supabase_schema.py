@@ -18,9 +18,24 @@ MIGRATIONS = os.path.join(ROOT, "supabase", "migrations")
 
 FAILURES = []
 
-# The one function allowed to run with its definer's rights: the sign-up trigger writes
-# the new user's profile row before any session exists to write it.
-DEFINER_ALLOWED = {"handle_new_user"}
+# The functions allowed to run with their definer's rights, each with the
+# reason a caller's rights cannot do the job (supabase/README.md rule 8).
+# Keyed by schema: a helper that policies call lives in `private`, which
+# the API does not expose (Supabase lint 0029); the API schema keeps the
+# sign-up trigger alone, which no API role can execute.
+DEFINER_ALLOWED = {
+    # the sign-up trigger writes the new user's profile row before any
+    # session exists to write it
+    "public.handle_new_user": "trigger",
+    # a policy on guild_members that read guild_members under its own
+    # policy would recurse; the helper answers for the caller alone
+    "private.guild_role_of": "policy helper",
+    # the insert policy checks a join code against a guild the joiner
+    # cannot yet read
+    "private.guild_id_for_code": "policy helper",
+    # the member bound counts rows the joiner cannot yet read
+    "private.guild_member_count": "guard helper",
+}
 
 
 def check(cond, label, detail=""):
@@ -76,42 +91,69 @@ for t in tables:
               is not None, "DB2f %s keeps updated_at through set_updated_at()" % t)
 check(re.search(r"grant [^;]*\bto\b[^;]*\banon\b", ALL) is None, "DB2g nothing is granted to anon")
 
-print("DB3 - policies read auth.uid() once per statement")
-for stmt in re.findall(r"create policy [^;]+;", ALL):
-    bare = re.findall(r"(?<!select )auth\.uid\(\)", stmt)
-    name = re.search(r"\"([^\"]+)\"", stmt).group(1)
-    check(not bare, "DB3a %s uses (select auth.uid())" % name,
-          "a bare auth.uid() re-evaluates per row (Supabase lint 0003)")
+print("DB3 - policies read auth.uid() and current_setting() once per statement")
+# the definition in force: the last create or alter of each policy, in
+# file order (an earlier form a later migration replaced is history)
+policy_stmts = {}
+for stmt in re.findall(r"(?:create|alter) policy [^;]+;", ALL):
+    policy_stmts[re.search(r"\"([^\"]+)\"", stmt).group(1)] = stmt
+for name, stmt in policy_stmts.items():
+    bare = re.findall(r"(?<!select )(?:auth\.uid\(\)|current_setting\()", stmt)
+    check(not bare, "DB3a %s uses (select auth.uid()) and (select current_setting(...))" % name,
+          "a bare call re-evaluates per row (Supabase lint 0003)")
 
-print("DB4 - functions")
-FUNC = re.compile(r"create or replace function public\.(\w+)\(([^)]*)\)\s+returns\s+([\w.]+(?: [\w.]+)?)(.*?)\$\$(.*?)\$\$;",
+print("DB4 - functions (the definition in force: the last one in file order, dropped ones gone)")
+FUNC = re.compile(r"create or replace function (public|private)\.(\w+)\(([^)]*)\)\s+returns\s+([\w.]+(?: [\w.]+)?)(.*?)\$\$(.*?)\$\$;",
                   re.S)
-funcs = FUNC.findall(ALL)
+DROP = re.compile(r"drop function if exists (public|private)\.(\w+)\(([^)]*)\);")
+funcs = {}
+for name in names:
+    text = SQL[name]
+    events = sorted([(m.start(), "def", m) for m in FUNC.finditer(text)]
+                    + [(m.start(), "drop", m) for m in DROP.finditer(text)])
+    for _at, kind, m in events:
+        schema, fname = m.group(1), m.group(2)
+        arg_types = ", ".join(a.split()[-1] for a in m.group(3).split(",") if a.strip())
+        key = "%s.%s(%s)" % (schema, fname, arg_types)
+        if kind == "drop":
+            funcs.pop(key, None)
+        else:
+            funcs[key] = m
 check(bool(funcs), "DB4a the migrations define functions")
-for name, args, returns, header, _body in funcs:
-    sig = "%s(%s)" % (name, args.strip())
+for key, m in funcs.items():
+    schema, fname, args, returns, header, body = m.groups()
+    sig = "%s.%s(%s)" % (schema, fname, args.strip())
+    listed = "%s.%s" % (schema, fname)
     check("set search_path = ''" in header, "DB4b %s pins an empty search_path" % sig,
           "Supabase lint 0011")
     arg_types = ", ".join(a.split()[-1] for a in args.split(",") if a.strip())
-    revokes = re.findall(r"revoke execute on function public\.%s\(%s\) from ([^;]+);"
-                         % (name, re.escape(arg_types)), ALL)
+    revokes = re.findall(r"revoke execute on function %s\.%s\(%s\) from ([^;]+);"
+                         % (schema, fname, re.escape(arg_types)), ALL)
     revoked = {r.strip() for line in revokes for r in line.split(",")}
     definer = "security definer" in header
     if returns == "trigger":
         check({"public", "anon", "authenticated"} <= revoked,
               "DB4c trigger function %s is revoked from public, anon and authenticated" % sig,
               "revoked from: %s" % sorted(revoked))
-        check(not definer or name in DEFINER_ALLOWED,
+        check(not definer or listed in DEFINER_ALLOWED,
               "DB4d trigger function %s runs as the caller unless listed" % sig)
     else:
-        check("security invoker" in header and not definer,
-              "DB4e API function %s is SECURITY INVOKER (policies bound it)" % sig)
+        check(("security invoker" in header and not definer) or listed in DEFINER_ALLOWED,
+              "DB4e function %s is SECURITY INVOKER (policies bound it) unless listed" % sig)
+        check(not definer or schema == "private",
+              "DB4e2 definer helper %s lives in the private schema, out of the API's reach (lint 0029)" % sig)
         check({"public", "anon"} <= revoked,
-              "DB4f API function %s is revoked from public and anon" % sig,
+              "DB4f function %s is revoked from public and anon" % sig,
               "revoked from: %s" % sorted(revoked))
-        check(re.search(r"grant execute on function public\.%s\(%s\) to authenticated;"
-                        % (name, re.escape(arg_types)), ALL) is not None,
-              "DB4g API function %s is granted to authenticated" % sig)
+        check(re.search(r"grant execute on function %s\.%s\(%s\) to authenticated;"
+                        % (schema, fname, re.escape(arg_types)), ALL) is not None,
+              "DB4g function %s is granted to authenticated" % sig)
+check(re.search(r"grant usage on schema private to authenticated", ALL) is not None
+      and re.search(r"revoke all on schema private from public", ALL) is not None,
+      "DB4h the private schema is usable by signed-in users and no one else")
+in_force = {k.split("(")[0] for k in funcs}
+check(all(k in in_force for k in DEFINER_ALLOWED if k != "public.handle_new_user")
+      and "public.handle_new_user" in in_force, "DB4i every listed definer is defined", str(sorted(in_force)))
 
 print("DB5 - the client's bounds are the database's")
 with open(os.path.join(ROOT, "dashboard", "_profile.js"), encoding="utf-8") as f:
@@ -160,9 +202,36 @@ check(prefs_js is not None and prefs_sql is not None and norm(prefs_js.group(1))
 servers_js = re.search(r"const ALBION_SERVERS = \{([^}]+)\};", AUTH_JS)
 js_servers = sorted(re.findall(r"(\w+): \"", servers_js.group(1))) if servers_js else []
 sql_servers = [norm(m) for m in re.findall(r"albion_server'? in \(([^)]+)\)", ALL)]
-check(bool(js_servers) and len(sql_servers) >= 2 and all(l == js_servers for l in sql_servers),
-      "DB5g the client's servers are the database's: the check and the sign-up trigger",
+check(bool(js_servers) and len(sql_servers) >= 3 and all(l == js_servers for l in sql_servers),
+      "DB5g the client's servers are the database's: the profile check, the sign-up trigger, the guild check",
       "js %s, sql %s" % (js_servers, sql_servers))
+
+print("DB6 - guilds: the client's bounds are the database's")
+with open(os.path.join(ROOT, "dashboard", "_guild.js"), encoding="utf-8") as f:
+    GUILD_JS = f.read()
+roles_js = re.search(r"const GUILD_ROLES = \[([^\]]+)\];", GUILD_JS)
+roles_sql = re.search(r"role in \(([^)]+)\)\)", ALL)
+check(roles_js is not None and roles_sql is not None and norm(roles_js.group(1)) == norm(roles_sql.group(1)),
+      "DB6a the client's guild roles are the database's",
+      "js %s, sql %s" % (roles_js and roles_js.group(1), roles_sql and roles_sql.group(1)))
+guild_name_sql = set(re.findall(r"char_length\(name\) between 1 and (\d+)", ALL))
+check(guild_name_sql == {str(name_max)}, "DB6b a guild name shares the account name bound (ACCOUNT_NAME_MAX)",
+      str(sorted(guild_name_sql)))
+tag = re.search(r'<input[^>]*\bid="guild-new-name"[^>]*>', SHELL)
+length = tag and re.search(r'\bmaxlength="(\d+)"', tag.group(0))
+check(length is not None and int(length.group(1)) == name_max,
+      "DB6c the guild name field's maxlength is the bound", tag.group(0) if tag else "field missing")
+for js_name, sql_pat in (("GUILD_MEMBERS_MAX", r"private\.guild_member_count\(new\.guild_id\) >= (\d+)"),
+                         ("GUILDS_MAX", r"from public\.guild_members where user_id = new\.user_id\) >= (\d+)")):
+    js_val = js_const(GUILD_JS, js_name)
+    sql_val = set(re.findall(sql_pat, ALL))
+    check(js_val is not None and sql_val == {str(js_val)},
+          "DB6d %s (_guild.js) is the guild_members bound" % js_name, "js %s, sql %s" % (js_val, sorted(sql_val)))
+js_code = re.search(r"const JOIN_CODE_RE = /(.+?)/;", GUILD_JS)
+sql_code = re.search(r"join_code ~ '(.+?)'", ALL)
+check(js_code is not None and sql_code is not None and js_code.group(1) == sql_code.group(1),
+      "DB6e the client's join code form is the database's",
+      "js %s, sql %s" % (js_code and js_code.group(1), sql_code and sql_code.group(1)))
 
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

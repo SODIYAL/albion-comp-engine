@@ -195,9 +195,10 @@ Three applications with explicit boundaries (each directory's README is its cont
   `localhost:53321` only; zero build-time coupling.
 - **Accounts** — the Supabase project (schema and rules in `supabase/`,
   migrations applied in order, never edited once applied) and the
-  dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`, each
-  its own `<script>` after the planner). Identity and persistent user data:
-  profiles and weapon lists now; guilds, comps, CTAs, sign-ups and
+  dashboard's account layer (`_supabase.js`, `_auth.js`, `_profile.js`,
+  `_guild.js`, each its own `<script>` after the planner). Identity and
+  persistent user data: profiles, weapon lists and guilds (members with
+  roles, a join code, guild-scoped reads) now; comps, CTAs, sign-ups and
   attendance next (`notes/specs/2026-09-28-player-platform-design.md`).
 
 One-way, provenance-checked data flow:

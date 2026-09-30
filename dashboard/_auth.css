@@ -236,3 +236,65 @@
   .auth-card{padding:18px 16px 16px}
   .auth-hd h2{font-size:21px}
 }
+
+/* ---- guilds (_guild.js): the list down the side, the guild across the main column ---- */
+.guild-dialog{width:min(880px, calc(100vw - 32px))}
+.gd-grid{display:grid; grid-template-columns:230px minmax(0,1fr); gap:0 18px; align-items:start}
+.gd-side{border-right:1px solid var(--rule); padding-right:14px}
+.gd-list{display:flex; flex-direction:column; gap:4px; margin:6px 0 8px; padding:0; list-style:none}
+.gd-item{display:flex; flex-direction:column; width:100%; padding:7px 9px; text-align:left;
+  background:none; border:1px solid transparent; border-radius:9px; color:var(--ink-2); cursor:pointer;
+  transition:background .18s var(--ease), color .18s var(--ease)}
+.gd-item:hover, .gd-item:focus-visible{background:var(--surface-2); color:var(--ink)}
+.gd-item[aria-pressed="true"]{border-color:var(--rule-2); background:rgba(18,21,28,.6); color:var(--ink)}
+.gd-item-name{font-size:13px; font-weight:600; overflow-wrap:anywhere}
+.gd-item-sub{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
+.gd-none{padding:6px 2px; font-size:12.5px; color:var(--ink-3)}
+.gd-form{margin-top:12px; padding-top:12px; border-top:1px solid var(--rule)}
+.gd-form .pw-label{margin-bottom:8px}
+.gd-form .auth-submit{margin-top:2px}
+.gd-form .auth-hint{margin:6px 0 0}
+.gd-main{min-width:0}
+.gd-empty{margin:24px 0; font-size:13px; color:var(--ink-3)}
+.gd-head{margin-bottom:10px}
+.gd-title{margin:0; font-size:18px; line-height:1.2; overflow-wrap:anywhere}
+.gd-meta{margin:3px 0 0; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.gd-code{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 12px; padding:8px 10px;
+  border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,21,28,.6)}
+.gd-code .pw-label{margin:0}
+.gd-code .auth-hint{flex-basis:100%; margin:0}
+.gd-code-value{font-family:var(--mono); font-size:15px; letter-spacing:.14em; color:var(--amber); user-select:all}
+.gd-code-value:empty::before{content:"—"; color:var(--ink-3)}
+.gd-btn{padding:4px 10px; border:1px solid var(--rule-2); border-radius:8px; background:none;
+  font-size:12px; color:var(--ink-2); cursor:pointer; transition:background .18s var(--ease), color .18s var(--ease)}
+.gd-btn:hover, .gd-btn:focus-visible{background:var(--surface-2); color:var(--ink)}
+.gd-btn.danger:hover, .gd-btn.danger:focus-visible{color:var(--gap); border-color:var(--gap)}
+.gd-btn[aria-disabled="true"]{opacity:.6; cursor:progress}
+.gd-coverage{display:flex; flex-wrap:wrap; gap:6px 16px; margin:0 0 10px; font-family:var(--mono);
+  font-size:11px; color:var(--ink-3)}
+.gd-coverage:empty{display:none}
+.gd-cov b{font-size:13px; font-weight:600; color:var(--ink)}
+.gd-cov.frontline b{color:var(--role-tank)}
+.gd-cov.support b{color:var(--role-support)}
+.gd-cov.dps b{color:var(--role-melee)}
+.gd-cov.healer b{color:var(--role-healer)}
+.gd-table{width:100%; border-collapse:collapse; font-size:12.5px}
+.gd-table th{padding:4px 6px; text-align:left; font-family:var(--mono); font-size:10px; font-weight:400;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--rule)}
+.gd-table td{padding:6px; vertical-align:top; border-bottom:1px solid var(--rule)}
+.gd-name{display:block; color:var(--ink)}
+.gd-sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--ink-3)}
+.gd-role-select{padding:3px 6px; font-size:12px}
+.gd-weapons{display:flex; flex-wrap:wrap; gap:4px; margin:0; padding:0; list-style:none}
+.gd-weapon{display:inline-flex; align-items:center; gap:4px; padding:1px 6px 1px 2px;
+  border:1px solid var(--rule-2); border-radius:8px; font-size:12px; color:var(--ink)}
+.gd-weapon.unknown{color:var(--ink-3); border-style:dashed}
+.gd-also{align-self:center; font-family:var(--mono); font-size:10.5px; color:var(--ink-3)}
+.gd-covers{display:flex; flex-wrap:wrap; gap:4px; margin-top:4px}
+.gd-covers:empty{display:none}
+.gd-act{text-align:right; white-space:nowrap}
+.gd-rename{display:flex; align-items:flex-end; gap:10px; margin-top:12px}
+.gd-rename .auth-field{flex:1; margin:0}
+.gd-rename .auth-submit{width:auto; margin:0 0 4px}
+.gd-rename[hidden]{display:none}
+.gd-foot{display:flex; justify-content:space-between; gap:10px; margin-top:14px; padding-top:12px; border-top:1px solid var(--rule)}
