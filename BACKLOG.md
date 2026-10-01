@@ -419,6 +419,21 @@ the live roster, on the sheet) are built.
   co-member's character, display name, server and weapon lists. A member
   who wants to keep a secondary list private has no switch (curation
   judgment: a CTA tool exists to show a caller what members play).
+- **The account layer's type scale**: `_auth.css` uses fourteen font
+  sizes between 9.5 and 23 pixels; a five-step scale would tighten the
+  dialogs. A sweep, not a fix, once the dialogs' content settles.
+- **The caller's controls as their own column**: the sheet keeps the move
+  list and the record's mark on one line by sizing the weapon and role
+  columns; a window under the sheet's full width wraps them. A fifth
+  column for the caller's controls is the next step if callers work on
+  narrow windows.
+- **The history's dates**: a table column carries the full local time
+  with its UTC; a date alone in the cell, the time in its title, would
+  shorten the rows.
+- **The portal page's chrome**: the headings and labels follow the
+  planner; the chips, tabs and table keep their own radii and colours. A
+  shared stylesheet is the proper fix and waits for a second killboard
+  surface.
 
 ## Product features (deprioritized until comp quality satisfies)
 

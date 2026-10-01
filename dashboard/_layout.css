@@ -309,13 +309,23 @@
   /* the guilds dialog: the guild list above the guild, not beside it */
   .gd-grid{grid-template-columns:1fr}
   .gd-side{border-right:0; padding-right:0; padding-bottom:12px; border-bottom:1px solid var(--rule)}
+  /* the member and slot tables scroll sideways at their columns' own widths rather than squeeze
+     (an auto table wraps every word before it overflows: nowrap makes it overflow, and scroll) */
+  .gd-table:not(.su-table){display:block; overflow-x:auto}
+  .gd-table:not(.su-table):not(.im-table) td, .gd-table:not(.su-table):not(.im-table) th{white-space:nowrap}
+  .gd-table:not(.su-table) .gd-weapons{flex-wrap:nowrap}   /* a member's chips in one row: the table scrolls, the row stays short */
   /* the saved comp's fields stack in two columns */
-  .cp-fields{grid-template-columns:repeat(2, 1fr)}
+  .cp-fields{grid-template-columns:repeat(2, minmax(0, 1fr))}
+  .cp-fields .text-input, .cp-fields select{min-width:0}
+  /* a date field keeps its intrinsic width: it takes the row */
+  .cp-fields .auth-field:has(input[type="datetime-local"]){grid-column:1/-1}
   /* the CTA's share code drops under the status */
   .ev-share-wrap{margin-left:0; flex-basis:100%}
   /* the sign-up sheet: the form under the roster, not beside it */
   .su-grid{grid-template-columns:1fr}
   .su-form-wrap{border-left:0; padding-left:0; padding-top:12px; border-top:1px solid var(--rule)}
+  .su-table .cp-weapon, .su-table .su-role{width:auto}
+  .su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-wrap{border-top:0; padding-top:0}
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}

@@ -2103,7 +2103,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker">Comp Zaddy account</span>
-        <h2 id="guild-title">Guilds</h2>
+        <h2 id="guild-title" tabindex="-1" autofocus>Guilds</h2>
       </div>
       <button type="button" class="auth-close" id="guild-close" aria-label="Close">&times;</button>
     </div>
@@ -2126,7 +2126,7 @@ window.AUTH_LINK = "";
               aria-describedby="guild-join-code-err">
             <p class="auth-field-err" id="guild-join-code-err"></p>
           </div>
-          <button class="auth-submit" id="guild-join-submit" type="submit">Join guild</button>
+          <button class="auth-secondary" id="guild-join-submit" type="submit">Join guild</button>
         </form>
 
         <form class="auth-form gd-form" id="guild-new" novalidate>
@@ -2147,7 +2147,7 @@ window.AUTH_LINK = "";
             </select>
             <p class="auth-field-err" id="guild-new-server-err"></p>
           </div>
-          <button class="auth-submit" id="guild-new-submit" type="submit">Create guild</button>
+          <button class="auth-secondary" id="guild-new-submit" type="submit">Create guild</button>
           <p class="auth-hint">You become its first admin.</p>
         </form>
       </aside>
@@ -2186,7 +2186,7 @@ window.AUTH_LINK = "";
                 spellcheck="false" aria-describedby="guild-rename-name-err">
               <p class="auth-field-err" id="guild-rename-name-err"></p>
             </div>
-            <button class="auth-submit" id="guild-rename-submit" type="submit">Rename</button>
+            <button class="auth-secondary" id="guild-rename-submit" type="submit">Rename</button>
           </form>
           <div class="gd-foot">
             <button type="button" class="gd-btn" id="guild-leave">Leave guild</button>
@@ -2208,7 +2208,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker">Comp Zaddy account</span>
-        <h2 id="comp-title">Saved comps</h2>
+        <h2 id="comp-title" tabindex="-1" autofocus>Saved comps</h2>
       </div>
       <button type="button" class="auth-close" id="comp-close" aria-label="Close">&times;</button>
     </div>
@@ -2225,7 +2225,7 @@ window.AUTH_LINK = "";
         <h3 class="pw-label" id="comp-list-label">Comps</h3>
         <ul class="gd-list" id="comp-list" aria-labelledby="comp-list-label"></ul>
         <p class="auth-hint" id="comp-list-note" hidden></p>
-        <button type="button" class="auth-submit" id="comp-from-planner" hidden>Save the planner's comp</button>
+        <button type="button" class="auth-secondary" id="comp-from-planner" hidden>Save the planner's comp</button>
         <p class="auth-hint">Build the comp in the planner first; its kits and spell picks are kept with it.</p>
         <button type="button" class="gd-btn cp-import" id="comp-import" hidden>Import a sheet</button>
         <p class="auth-hint cp-import-hint" id="comp-import-hint" hidden>A spreadsheet or a Discord table: one weapon per row, or one column per party.</p>
@@ -2303,7 +2303,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker">Comp Zaddy account</span>
-        <h2 id="ev-title">CTAs</h2>
+        <h2 id="ev-title" tabindex="-1" autofocus>CTAs</h2>
       </div>
       <button type="button" class="auth-close" id="ev-close" aria-label="Close">&times;</button>
     </div>
@@ -2320,7 +2320,7 @@ window.AUTH_LINK = "";
         <h3 class="pw-label" id="ev-list-label">CTAs</h3>
         <ul class="gd-list ev-list" id="ev-list" aria-labelledby="ev-list-label"></ul>
         <p class="auth-hint" id="ev-list-note" hidden></p>
-        <button type="button" class="auth-submit" id="ev-new" hidden>New CTA</button>
+        <button type="button" class="auth-secondary" id="ev-new" hidden>New CTA</button>
         <p class="auth-hint">A CTA copies its roster from a saved comp or the planner; the comp stays as it was.</p>
       </aside>
 
@@ -2415,7 +2415,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker" id="su-kicker">CTA</span>
-        <h2 id="su-title">Sign-up sheet</h2>
+        <h2 id="su-title" tabindex="-1" autofocus>Sign-up sheet</h2>
         <p class="gd-meta su-when" id="su-when"></p>
       </div>
       <button type="button" class="auth-close" id="su-close" aria-label="Close">&times;</button>
@@ -2470,15 +2470,15 @@ window.AUTH_LINK = "";
               <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
               <ul class="rr-list" id="rr-picks"></ul>
             </section>
-            <section class="rr-block" aria-labelledby="rr-free-label">
+            <section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">
               <h4 class="pw-label" id="rr-free-label">Open slots</h4>
-              <ul class="rr-list" id="rr-free"></ul>
+              <ul class="rr-list rr-cols" id="rr-free"></ul>
             </section>
             <section class="rr-block" aria-labelledby="rr-swaps-label">
               <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
               <ul class="rr-list" id="rr-swaps"></ul>
             </section>
-            <section class="rr-block rr-block-wide" aria-labelledby="rr-over-label">
+            <section class="rr-block" aria-labelledby="rr-over-label">
               <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
               <ul class="rr-list" id="rr-over"></ul>
             </section>
@@ -2566,7 +2566,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker">Comp Zaddy account</span>
-        <h2 id="hs-title">History</h2>
+        <h2 id="hs-title" tabindex="-1" autofocus>History</h2>
       </div>
       <button type="button" class="auth-close" id="hs-close" aria-label="Close">&times;</button>
     </div>
@@ -2595,10 +2595,10 @@ window.AUTH_LINK = "";
           <thead>
             <tr>
               <th scope="col">Player</th>
-              <th scope="col">CTAs</th>
-              <th scope="col">Attended</th>
-              <th scope="col">No-show</th>
-              <th scope="col">Show rate</th>
+              <th scope="col" class="hs-num">CTAs</th>
+              <th scope="col" class="hs-num">Attended</th>
+              <th scope="col" class="hs-num">No-show</th>
+              <th scope="col" class="hs-num">Show rate</th>
               <th scope="col">Last attended</th>
               <th scope="col">Played</th>
             </tr>
@@ -2623,10 +2623,10 @@ window.AUTH_LINK = "";
             <tr>
               <th scope="col">CTA</th>
               <th scope="col">When</th>
-              <th scope="col">Fill</th>
-              <th scope="col">Attended</th>
-              <th scope="col">No-show</th>
-              <th scope="col">Unmarked</th>
+              <th scope="col" class="hs-num">Fill</th>
+              <th scope="col" class="hs-num">Attended</th>
+              <th scope="col" class="hs-num">No-show</th>
+              <th scope="col" class="hs-num">Unmarked</th>
             </tr>
           </thead>
           <tbody id="hs-ctas"></tbody>
@@ -2642,7 +2642,7 @@ window.AUTH_LINK = "";
     <div class="auth-hd">
       <div>
         <span class="auth-kicker">Comp Zaddy account</span>
-        <h2 id="im-title">Import a sheet</h2>
+        <h2 id="im-title" tabindex="-1" autofocus>Import a sheet</h2>
       </div>
       <button type="button" class="auth-close" id="im-close" aria-label="Close">&times;</button>
     </div>
@@ -2663,7 +2663,7 @@ window.AUTH_LINK = "";
         </div>
         <div class="im-file-row">
           <label class="gd-btn im-file-btn" for="im-file">Open a CSV file<input class="sr-only" id="im-file" type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"></label>
-          <button type="button" class="auth-submit im-read" id="im-read">Read the sheet</button>
+          <button type="button" class="auth-secondary im-read" id="im-read">Read the sheet</button>
           <p class="auth-hint">An Excel or Sheets file: copy its cells and paste them, or save it as CSV first. One weapon per row (a player, a role, a party or a count beside it), or one column per party.</p>
         </div>
       </div>

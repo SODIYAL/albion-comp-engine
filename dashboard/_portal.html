@@ -8,22 +8,24 @@
 <link rel="icon" type="image/png" href="assets/brand/comp-zaddy-logo.png">
 <title>Dragon Portal Stats</title>
 <style>
-:root{color-scheme:dark;--bg:#08080D;--surface:#11111A;--surface-hi:#191927;--ink:#F2F0EB;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#29293A;--ok:#35E68A;--fire:#FF7A45;--sans:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace}
+:root{color-scheme:dark;--bg:#08080D;--surface:#11111A;--surface-hi:#191927;--ink:#F2F0EB;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#29293A;--ok:#35E68A;--fire:#FF7A45;--sans:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:radial-gradient(720px 420px at 12% -5%,rgba(255,122,69,.14),transparent 70%),radial-gradient(640px 380px at 90% 0%,rgba(157,92,255,.12),transparent 70%),var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
 a{color:var(--gold-hi)}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--rule)}
-.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700}
+h1,h2,h3{font-family:var(--serif);font-weight:600}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--rule)}
+.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;white-space:nowrap}
 .brand img{width:30px;height:30px;border-radius:8px}
-.top nav a{margin-left:14px;font-size:.92em;color:var(--muted);text-decoration:none}
+.top nav{display:flex;flex-wrap:wrap;gap:4px 14px}
+.top nav a{font-size:.92em;color:var(--muted);text-decoration:none;white-space:nowrap}
 .top nav a:hover{color:var(--ink)}
 main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
-.hero .eyebrow{font-size:.78em;letter-spacing:.12em;text-transform:uppercase;color:var(--fire)}
+.hero .eyebrow{font-family:var(--mono);font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--fire)}
 .hero h1{margin:6px 0 8px;font-size:clamp(26px,4vw,40px);line-height:1.1}
 .hero h1 em{font-style:normal;color:var(--gold)}
 .hero p{margin:0;max-width:760px;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
-.chip{padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-size:.85em;color:var(--muted)}
+.chip{padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-family:var(--mono);font-size:.82em;color:var(--muted)}
 .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:10px}
 .tab{padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--muted);cursor:pointer;font:inherit}
@@ -37,7 +39,7 @@ section.block h3{margin:0 0 8px;font-size:1.02em;color:var(--gold-hi)}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93em}
 th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--rule);white-space:nowrap;vertical-align:middle}
-th{font-size:.78em;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet);font-weight:600}
+th{font-family:var(--mono);font-size:.76em;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet);font-weight:400}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 tr.row{cursor:pointer}
 tr.row:hover td{background:rgba(255,255,255,.03)}
@@ -51,7 +53,7 @@ tr.detail td{background:var(--surface-hi);white-space:normal}
 .kit{display:flex;flex-wrap:wrap;gap:10px;padding:4px 0}
 .slot{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);min-width:190px}
 .slot img{width:34px;height:34px;border-radius:6px;background:#1c1c28}
-.slot .s{font-size:.72em;letter-spacing:.06em;text-transform:uppercase;color:var(--quiet)}
+.slot .s{font-family:var(--mono);font-size:.72em;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
 .slot .n{font-weight:600}
 .slot .v{font-size:.8em;color:var(--muted)}
 .comp{display:flex;flex-wrap:wrap;gap:6px}
@@ -62,7 +64,11 @@ tr.detail td{background:var(--surface-hi);white-space:normal}
 .note h3{margin:0 0 6px;font-size:1em;color:var(--ink)}
 .note ul{margin:6px 0 0;padding-left:18px}
 .note li{margin:3px 0}
-@media (max-width:640px){.bar{width:54px}th,td{padding:7px 8px}}
+@media (max-width:640px){.bar{width:54px}th,td{padding:7px 8px}
+/* the table scrolls sideways; the weapon stays put over the numbers */
+th:nth-child(2),td:nth-child(2){position:sticky;left:0;z-index:1;background:var(--surface)}
+tr.row:hover td:nth-child(2){background:#181821}
+tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
 </style>
 </head>
 <body>

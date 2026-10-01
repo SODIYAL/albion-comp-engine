@@ -4,6 +4,15 @@
    sit on a phone lives in _layout.css with the rest of the page's layout.
    Every colour is a shell token (_shell.html :root). */
 
+/* the layer's own tones for small text: the shell's tertiary grey and the
+   melee hue sit under the 4.5:1 bar for 10-13px text on these surfaces
+   (4.47 and 3.92 on --surface); the planner keeps its own tokens */
+.auth-dialog, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}
+/* every part of the account layer gives the hidden attribute back its
+   meaning, whatever display its class sets (the .lf-sync lesson in
+   _shell.html; the per-class rules below predate this one) */
+.auth-dialog [hidden], .acct-menu [hidden]{display:none !important}
+
 /* ---------- the masthead button ---------- */
 .acct-btn{
   display:inline-flex; align-items:center; gap:7px; max-width:220px; min-height:24px;
@@ -92,6 +101,9 @@
   background:linear-gradient(180deg, #FFF6DC, #F2C75C);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
+/* the list dialogs open with focus on their title (tabindex -1, autofocus):
+   announced, never ringed; the sign-in and profile dialogs focus a field */
+.auth-hd h2:focus-visible{outline:none}
 .auth-close{
   margin-left:auto; flex:none; width:32px; height:32px; display:grid; place-items:center;
   background:none; border:0; border-radius:8px; color:var(--ink-3); font-size:21px; line-height:1;
@@ -152,6 +164,11 @@
   animation:auth-spin .7s linear infinite;
 }
 @keyframes auth-spin{to{transform:rotate(360deg)}}
+.auth-secondary[aria-busy="true"]::before{
+  content:""; display:inline-block; width:12px; height:12px; margin-right:9px; vertical-align:-2px;
+  border-radius:50%; border:2px solid rgba(169,173,196,.3); border-top-color:var(--ink-2);
+  animation:auth-spin .7s linear infinite;
+}
 
 .auth-link{
   padding:2px 0; margin-left:4px; background:none; border:0; border-bottom:1px solid transparent;
@@ -197,7 +214,7 @@
 .pw-empty{padding:4px 0; font-size:12.5px; font-style:italic; color:var(--ink-3)}
 /* role class in the planner's role hues */
 .pw-role{flex:none; padding:1px 6px; border-radius:99px; background:rgba(255,255,255,.04);
-  font-family:var(--mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase}
+  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .pw-role.frontline{color:var(--role-tank)}
 .pw-role.support{color:var(--role-support)}
 .pw-role.dps{color:var(--role-melee)}
@@ -252,7 +269,7 @@
 .gd-none{padding:6px 2px; font-size:12.5px; color:var(--ink-3)}
 .gd-form{margin-top:12px; padding-top:12px; border-top:1px solid var(--rule)}
 .gd-form .pw-label{margin-bottom:8px}
-.gd-form .auth-submit{margin-top:2px}
+.gd-form .auth-submit, .gd-form .auth-secondary{margin-top:2px}
 .gd-form .auth-hint{margin:6px 0 0}
 .gd-main{min-width:0}
 .gd-empty{margin:24px 0; font-size:13px; color:var(--ink-3)}
@@ -280,22 +297,24 @@
 .gd-cov.healer b{color:var(--role-healer)}
 .gd-table{width:100%; border-collapse:collapse; font-size:12.5px}
 .gd-table th{padding:4px 6px; text-align:left; font-family:var(--mono); font-size:10px; font-weight:400;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--rule)}
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--rule);
+  position:relative}   /* a hidden header label (.sr-only) is placed within its cell, never widening the card when the table scrolls */
 .gd-table td{padding:6px; vertical-align:top; border-bottom:1px solid var(--rule)}
 .gd-name{display:block; color:var(--ink)}
 .gd-sub{display:block; font-family:var(--mono); font-size:10.5px; color:var(--ink-3)}
-.gd-role-select{padding:3px 6px; font-size:12px}
-.gd-weapons{display:flex; flex-wrap:wrap; gap:4px; margin:0; padding:0; list-style:none}
+.gd-role-select{padding:3px 6px; font-size:12px; width:auto}   /* its own width: the page's full-width select would let the column collapse */
+/* a member's weapons and the role tags they cover share one line, wrapping only when the cell is short */
+.gd-weapons{display:inline-flex; flex-wrap:wrap; gap:4px; margin:0; padding:0; list-style:none; vertical-align:middle}
 .gd-weapon{display:inline-flex; align-items:center; gap:4px; padding:1px 6px 1px 2px;
   border:1px solid var(--rule-2); border-radius:8px; font-size:12px; color:var(--ink)}
 .gd-weapon.unknown{color:var(--ink-3); border-style:dashed}
 .gd-also{align-self:center; font-family:var(--mono); font-size:10.5px; color:var(--ink-3)}
-.gd-covers{display:flex; flex-wrap:wrap; gap:4px; margin-top:4px}
+.gd-covers{display:inline-flex; flex-wrap:wrap; gap:4px; margin:0 0 0 8px; vertical-align:middle}
 .gd-covers:empty{display:none}
 .gd-act{text-align:right; white-space:nowrap}
 .gd-rename{display:flex; align-items:flex-end; gap:10px; margin-top:12px}
 .gd-rename .auth-field{flex:1; margin:0}
-.gd-rename .auth-submit{width:auto; margin:0 0 4px}
+.gd-rename .auth-submit, .gd-rename .auth-secondary{width:auto; margin:0 0 4px}
 .gd-rename[hidden]{display:none}
 .gd-foot{display:flex; justify-content:space-between; gap:10px; margin-top:14px; padding-top:12px; border-top:1px solid var(--rule)}
 
@@ -307,6 +326,8 @@
 .cp-table td{padding:4px 6px}
 .cp-pos{width:28px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
 .cp-weapon{white-space:nowrap}
+/* one line per slot: icon, name and role tag (the guild table's block name would stack them) */
+.cp-weapon .gd-name{display:inline}
 .cp-weapon .pw-art{vertical-align:middle; margin-right:5px}
 .cp-weapon .pw-role{margin-left:6px}
 .cp-open{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic}
@@ -314,7 +335,7 @@
 .cp-in:read-only{border-color:transparent; background:none; color:var(--ink-2)}
 .cp-foot{align-items:center; flex-wrap:wrap}
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
-.cp-foot-r{margin:0}
+.cp-foot-r{margin:0 0 0 auto}   /* the primary action sits at the right whether or not the left group is there */
 .cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}
 
 /* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
@@ -349,9 +370,15 @@
 .su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
 .su-board-wrap{min-width:0}
 .su-form-wrap{border-left:1px solid var(--rule); padding-left:18px}
+/* a sheet that takes no sign-up (draft, locked, completed) keeps no column for the form: its note sits above the roster */
+.su-grid:has(> .su-form-wrap > #su-form[hidden]){grid-template-columns:1fr}
+.su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-wrap{order:-1; border-left:0; padding-left:0; margin-bottom:10px}
 .su-table td{vertical-align:top}
 .su-table .cp-pos, .su-table .su-role{padding-top:9px}
-.su-table .cp-weapon{padding-top:5px}
+/* the weapon and role columns are sized so the player column keeps room for the caller's
+   move list and the record's mark on one line (273px) at the sheet's full width */
+.su-table .cp-weapon{padding-top:5px; width:170px}
+.su-table .su-role{width:150px}
 .su-weapon{display:inline-flex; align-items:center; gap:5px}
 .su-role{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
 .su-player .gd-name{display:inline}
@@ -407,7 +434,7 @@
 .hs-search{width:200px; padding:4px 8px; font-size:12.5px}
 .hs-table td{vertical-align:middle}
 .hs-num{font-family:var(--mono); font-size:12px; text-align:right; white-space:nowrap}
-.hs-table th:nth-child(n+2):not(:last-child){text-align:right}
+.hs-table th.hs-num{text-align:right}   /* a numeric header is marked by class, never by position */
 .hs-when{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
 .hs-regular .gd-name{color:var(--amber)}
 .hs-plays{display:flex; flex-wrap:wrap; gap:4px}
@@ -438,6 +465,7 @@
   font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
 .im-table tr[data-status="likely"] .im-status{color:var(--amber); border-color:var(--amber)}
 .im-table tr[data-status="uncertain"] .im-status{color:var(--gap); border-color:var(--gap)}
+.im-table tr[data-status="none"] .im-status{color:var(--gap); border-color:var(--gap)}
 .im-table tr[data-status="skip"]{opacity:.55}
 .im-pick{white-space:nowrap}
 .im-weapon{max-width:240px; padding:2px 6px; font-size:12px}
@@ -472,7 +500,9 @@
 .rr-list{margin:0; padding:0; list-style:none; font-size:12.5px}
 .rr-list li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 8px; padding:3px 0; border-bottom:1px solid var(--rule)}
 .rr-list li:last-child{border-bottom:0}
-.rr-list .gd-sub{display:inline; flex-basis:100%}
+.rr-list .gd-sub{display:inline}   /* one line per item; a long line wraps on its own */
+.rr-cols{columns:2; column-gap:18px}
+.rr-cols li{break-inside:avoid}
 .rr-list .gd-none{display:block; padding:4px 0; border-bottom:0}
 .rr-weapon{display:inline-flex; align-items:center; gap:5px}
 .rr-weapon .pw-art{margin:0}

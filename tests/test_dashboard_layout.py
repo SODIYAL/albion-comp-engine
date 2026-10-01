@@ -798,7 +798,7 @@ check(not re.search(r"loadGuildTemplates|loadTemplate|saveTemplate|deleteTemplat
       "L30l the planner never calls the comps module")
 check(all(s in AUTH_CSS for s in (".comp-dialog{", ".cp-fields{", ".cp-table td{")),
       "L30m the comps dialog is styled in _auth.css")
-check(".cp-fields{grid-template-columns:repeat(2, 1fr)}" in LAYOUT, "L30n on a phone the comp's fields stack in two columns (_layout.css)")
+check(".cp-fields{grid-template-columns:repeat(2, minmax(0, 1fr))}" in LAYOUT, "L30n on a phone the comp's fields stack in two columns that shrink to the card (_layout.css)")
 i_comps = script_at(lambda a, b: "const ACCOUNT_CONTENTS" in b)
 check(0 <= i_guild < i_comps, "L30o the comps module loads after the guilds module, in its own <script>",
       "script indices guild=%d comps=%d" % (i_guild, i_comps))
@@ -951,7 +951,7 @@ check('aria-modal="true"' in hdlg and 'aria-labelledby="hs-title"' in hdlg and '
 for fid in ("hs-guild", "hs-search"):
     check(('id="%s"' % fid) in hdlg and ('for="%s"' % fid) in hdlg, "L36b field %s has its label" % fid)
 check('role="alert"' in hdlg and 'aria-live="polite"' in hdlg, "L36c errors and changes are announced, inside the dialog")
-check('id="hs-players"' in hdlg and 'id="hs-ctas"' in hdlg and hdlg.count("<th scope=\"col\">") == 13,
+check('id="hs-players"' in hdlg and 'id="hs-ctas"' in hdlg and hdlg.count("<th scope=\"col\"") == 13,
       "L36d the players table has its seven headers and the CTAs table its six")
 check('id="hs-definitions"' in hdlg and "None of this is a skill rating" in HISTORY_JS,
       "L36e the measures are defined beside the facts, and no skill rating is offered")
@@ -1069,6 +1069,45 @@ check(0 <= i_import < i_roster, "L38p the roster module loads after the import m
       "script indices import=%d roster=%d" % (i_import, i_roster))
 check(i_roster >= 0 and SCRIPTS[i_roster][1].count("new CompEngine(") == 1 and "const ENG = new CompEngine(DATASET" in SCRIPTS[i_app][1],
       "L38q the roster module's engine is its own one instance; the planner's is made in the planner's script alone")
+
+# ---------------------------------------------------------------------------
+print("L39 - the design check of the account dialogs and the portal page: hidden honoured, one line per slot, one primary per dialog, the title takes focus")
+PORTAL = read("_portal.html")
+check(".auth-dialog [hidden], .acct-menu [hidden]{display:none !important}" in AUTH_CSS,
+      "L39a every part of the account layer gives the hidden attribute its meaning, whatever display its class sets")
+check(".cp-weapon .gd-name{display:inline}" in AUTH_CSS, "L39b a comp or CTA slot is one line: icon, name and role tag inline")
+check('.cp-fields .text-input, .cp-fields select{min-width:0}' in LAYOUT and '.cp-fields .auth-field:has(input[type="datetime-local"]){grid-column:1/-1}' in LAYOUT,
+      "L39c on a phone the comp and CTA fields shrink to their columns and a date field takes the row (_layout.css)")
+check(".cp-foot-r{margin:0 0 0 auto}" in AUTH_CSS, "L39d the footer's primary action sits at the right in every dialog")
+hist = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog history-dialog"', "</dialog>", "L39e history anchors")
+check(hist.count('<th scope="col" class="hs-num">') == 8 and ".hs-table th.hs-num{text-align:right}" in AUTH_CSS and "th:nth-child" not in AUTH_CSS,
+      "L39e the history tables align a numeric header over its numbers by class, never by position")
+check(SHELL.count('tabindex="-1" autofocus') == 6
+      and all(('id="%s" tabindex="-1" autofocus' % t) in SHELL for t in ("guild-title", "comp-title", "ev-title", "su-title", "hs-title", "im-title"))
+      and 'id="auth-title" tabindex' not in SHELL and 'id="profile-title" tabindex' not in SHELL and ".auth-hd h2:focus-visible{outline:none}" in AUTH_CSS,
+      "L39f the six list dialogs open with focus on their title; the sign-in and profile dialogs focus their first field")
+check(".su-grid:has(> .su-form-wrap > #su-form[hidden]){grid-template-columns:1fr}" in AUTH_CSS,
+      "L39g a sheet that takes no sign-up keeps no column for the form")
+check('.im-table tr[data-status="none"] .im-status{color:var(--gap)' in AUTH_CSS, "L39h the import marks a name with no match as plainly as an uncertain one")
+check(".auth-dialog, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}" in AUTH_CSS and "--ink-3:#757A92" in SHELL and "--role-melee:#E00063" in SHELL,
+      "L39i the account layer's small-text tones clear 4.5:1 on its surfaces; the planner's tokens stand")
+secondary = ("guild-join-submit", "guild-new-submit", "guild-rename-submit", "comp-from-planner", "ev-new", "im-read")
+check(all(re.search(r'class="auth-secondary[^"]*" id="%s"' % i, SHELL) for i in secondary) and '.auth-secondary[aria-busy="true"]::before' in AUTH_CSS,
+      "L39j one primary per dialog: the side column's creators, the rename and the sheet read are secondary, and show busy like a primary")
+rr_css = seg(AUTH_CSS, ".rr{", ".su-status-row[hidden]", "L39k read css anchors")
+check('<section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">' in SHELL and '<ul class="rr-list rr-cols" id="rr-free">' in SHELL
+      and ".rr-cols{columns:2" in AUTH_CSS and ".rr-list .gd-sub{display:inline}" in AUTH_CSS and "flex-basis:100%" not in rr_css,
+      "L39k the read's open slots take the row in two columns and every item is one line")
+check(".gd-table:not(.su-table){display:block; overflow-x:auto}" in LAYOUT
+      and ".gd-table:not(.su-table):not(.im-table) td, .gd-table:not(.su-table):not(.im-table) th{white-space:nowrap}" in LAYOUT
+      and ".su-table .cp-weapon, .su-table .su-role{width:auto}" in LAYOUT
+      and "position:relative}" in seg(AUTH_CSS, ".gd-table th{", "\n.gd-table td", "L39l header anchors") and ".gd-role-select{padding:3px 6px; font-size:12px; width:auto}" in AUTH_CSS,
+      "L39l on a phone the member and slot tables scroll sideways at their own widths, a hidden header label never widens the card, and the sheet's columns are free again")
+check(".gd-weapons{display:inline-flex" in AUTH_CSS and ".gd-covers{display:inline-flex" in AUTH_CSS, "L39m a member's weapons and role tags share one line")
+check("--serif:" in PORTAL and "h1,h2,h3{font-family:var(--serif)" in PORTAL
+      and "white-space:nowrap" in seg(PORTAL, ".brand{", "}", "L39n brand anchors") and "flex-wrap:wrap" in seg(PORTAL, ".top{", "}", "L39n top anchors")
+      and "th:nth-child(2),td:nth-child(2){position:sticky;left:0" in PORTAL,
+      "L39n the portal page shares the planner's headings and labels, its header wraps on a phone and the weapon column stays put while the table scrolls")
 
 if FAILURES:
 

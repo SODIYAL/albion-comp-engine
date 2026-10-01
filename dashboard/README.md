@@ -294,6 +294,19 @@ and its tests: `supabase/README.md`.
   surface that reads the engine is the sheet's engine read
   (`_roster.js`): its own engine instance on the roster's weapon keys,
   display only.
+- **Dialog conventions** (the design check in the decision log): every
+  part of the account layer gives the `hidden` attribute its meaning
+  whatever display its class sets (`.auth-dialog [hidden]`, the
+  `.lf-sync` lesson); a comp or CTA slot is one line (icon, name, role
+  tag); each dialog has one primary action, the side column's creators
+  and the rename are secondary; the list dialogs open with focus on
+  their title, the sign-in and profile dialogs on their first field; a
+  sheet that takes no sign-up keeps no column for the form; a numeric
+  table header is aligned by class (`hs-num`), never by position; small
+  text inside the dialogs uses the layer's own tertiary grey and melee
+  tone, which clear 4.5:1 on its surfaces while the planner's tokens
+  stand. On a phone the member and slot tables scroll sideways and a
+  date field takes its row. `test_dashboard_layout.py` L39 pins them.
 - **Email links.** A verification link returns with the session in the hash
   (`#access_token=…`). The planner's boot rewrites the hash with the saved
   comp, so a `<head>` script sets the return aside first (`AUTH_LINK`) and
