@@ -398,13 +398,22 @@ def main():
     # The account layer's weapon catalog (_profile.js now, sign-up pages
     # later): per weapon line its display name, its role class - the
     # engine's role_class, the one role read, derived here so the account
-    # scripts never call the engine - its render-service item, and whether
-    # the line left the game. Keys are the dataset's; player_weapons stores
+    # scripts never call the engine - its render-service item, the names
+    # of its E spells, and whether the line left the game. Keys are the dataset's; player_weapons stores
     # them (supabase/migrations).
     account_catalog = {}
     for k, w in sorted(data["weapons"].items()):
         entry = {"name": w.get("display_name") or k, "role": eng.role_of(k),
                  "item": items.get(k) or ""}
+        # the names of the line's own E spells: the sheet import reads a
+        # weapon named by what its E does ("Golem" for the Earthrune Staff)
+        lo = w.get("loadout") or {}
+        names = lo.get("slot_names") or []
+        if "e" in names:
+            e_names = [spell_name(sid) for sid in (lo.get("slot_spells") or [])[names.index("e")]]
+            e_names = [n for n in e_names if n and n != n.upper()]
+            if e_names:
+                entry["e"] = e_names
         if w.get("removed"):
             entry["removed"] = True
         account_catalog[k] = entry

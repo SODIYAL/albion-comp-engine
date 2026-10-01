@@ -149,8 +149,11 @@ and its tests: `supabase/README.md`.
   `events`, `event_slots` and `save_event`; pure functions for the
   statuses and the moves the guard allows (draft → open → locked →
   completed, open and locked a step back; completed final), the times
-  both ways (a date-time field in the viewer's local time, the ISO
-  instant stored, a label with the UTC time the game runs on), the
+  both ways (a date-time field typed in UTC, the default, or in the
+  caller's own zone, each field echoing its other reading; the ISO
+  instant stored; a label with the reader's local time and the UTC time
+  the game runs on, and on the sheet the reader's zone named and a
+  countdown to the start kept current), the
   guild's calendar split into ahead and past, an event made from a
   saved comp or the planner's hash, validation on top of the comp's
   rules (a start required, the mass time never after it), who writes
@@ -227,13 +230,18 @@ and its tests: `supabase/README.md`.
   saved comp: helpers over `weapon_aliases` and `save_weapon_aliases`
   (the guild's remembered names; the comp itself is saved through the
   comps module's `saveTemplate`); pure functions for the text beside a
-  weapon (tiers, counts, list markers, a player after a dash), the
+  weapon (tiers, counts, list markers, a player after a dash, a
+  bracketed word as the caller's label for the slot: "Witchwork (DPS)"
+  is the Witchwork Staff with the role DPS), the
   parser (tabs, commas, semicolons, pipes, quotes, one column), how a
   name is read (`matchWeapon`: the key, the catalog name, an alias, then
   the words, a prefix, word prefixes, the initials, the key's words, a
-  text inside the name, a close spelling; one candidate is likely,
+  text inside the name, a word of the line's own E spell ("Golem": the
+  catalog carries each line's E names), a close spelling; one candidate
+  is likely,
   several uncertain, none an open slot), the columns (`detectColumns`:
-  a header row where one names a kind, the cells otherwise; two weapon
+  a header row where one names a kind, a gear header (head, chest,
+  boots) ignored, the cells otherwise; two weapon
   columns are parties side by side), the rows (sections, counts, a
   grid's parties), the slots, the names learned and error wording
   (`tests/test_import.js`, run over the dataset's own catalog); and the

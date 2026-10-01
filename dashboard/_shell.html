@@ -2348,13 +2348,23 @@ window.AUTH_LINK = "";
               </div>
               <div class="auth-field">
                 <label for="ev-start">Starts</label>
-                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-err">
+                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-echo ev-start-err">
+                <p class="auth-hint" id="ev-start-echo"></p>
                 <p class="auth-field-err" id="ev-start-err"></p>
               </div>
               <div class="auth-field">
                 <label for="ev-mass">Mass at <span class="opt">optional</span></label>
-                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-err">
+                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-echo ev-mass-err">
+                <p class="auth-hint" id="ev-mass-echo"></p>
                 <p class="auth-field-err" id="ev-mass-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-zone">Times typed in</label>
+                <select id="ev-zone" aria-describedby="ev-zone-hint">
+                  <option value="utc">UTC (game time)</option>
+                  <option value="local">My time</option>
+                </select>
+                <p class="auth-hint" id="ev-zone-hint">Players see their own time and UTC.</p>
               </div>
               <div class="auth-field">
                 <label for="ev-size">Planned size</label>

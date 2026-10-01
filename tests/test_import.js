@@ -75,9 +75,14 @@ const run = expr => vm.runInContext(expr, ctx);
 /* the catalog as build.py stamps it: every line's display name, the
    removed ones marked */
 const weapons = JSON.parse(fs.readFileSync(DATASET, "utf8")).weapons;
+const SPELLS = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "pipeline", "out", "spell_index.json"), "utf8"));
 const CATALOG = {};
 for (const [key, w] of Object.entries(weapons)) {
   CATALOG[key] = { name: w.display_name || key, role: null, item: "" };
+  const names = (w.loadout && w.loadout.slot_names) || [];
+  if (names.includes("e")) {
+    CATALOG[key].e = w.loadout.slot_spells[names.indexOf("e")].map(id => (SPELLS[id] || {}).name).filter(Boolean);
+  }
   if (w.removed) CATALOG[key].removed = true;
 }
 const index = run("weaponIndex")(CATALOG, []);
@@ -102,6 +107,13 @@ const index = run("weaponIndex")(CATALOG, []);
         && same(parse("Heavy Crossbow"), { name: "Heavy Crossbow", count: 1, tail: "" }) && same(parse("8.3 Longbow"), { name: "8.3 Longbow", count: 1, tail: "" })
         && same(parse("Longbow: 8.3"), { name: "Longbow", count: 1, tail: "" }) && same(parse("Longbow - T8"), { name: "Longbow", count: 1, tail: "" }));
   check("a count is bounded by the roster cap", parse("99x Longbow").count === run("COMP_SLOTS_MAX"));
+  check("a bracketed word beside the name is the label, before or after; a count and a tier in brackets are not",
+        same(parse("GA (Cleanse)"), { name: "GA", count: 1, tail: "", label: "Cleanse" })
+        && same(parse("Witchwork (DPS)"), { name: "Witchwork", count: 1, tail: "", label: "DPS" })
+        && same(parse("[Support] Rotcaller"), { name: "Rotcaller", count: 1, tail: "", label: "Support" })
+        && same(parse("Occult [Disengage]"), { name: "Occult", count: 1, tail: "", label: "Disengage" })
+        && same(parse("Longbow (2)"), { name: "Longbow", count: 2, tail: "" })
+        && same(parse("Longbow (8.3)"), { name: "Longbow", count: 1, tail: "" }), parse("GA (Cleanse)"));
   check("party labels and role words are known", run("isPartyLabel")("Party 1") && run("isPartyLabel")("P2") && run("isPartyLabel")("Group A")
         && !run("isPartyLabel")("Party") && !run("isPartyLabel")("Longbow") && run("isRoleWord")("Tanks:") && run("isRoleWord")("healer") && !run("isRoleWord")("Bow"));
   check("column letters run A..Z, AA", run("columnLetter")(0) === "A" && run("columnLetter")(25) === "Z" && run("columnLetter")(26) === "AA");
@@ -162,11 +174,58 @@ const index = run("weaponIndex")(CATALOG, []);
         match("Tank", index).status === "none" && match("Black Hands", index).status === "none" && match("", index).status === "none" && match("1h", index).status === "none");
   check("the plain line decides among the great ones: fire, frost, nature",
         match("fire", index).key === "MAIN_FIRESTAFF" && match("frost", index).key === "MAIN_FROSTSTAFF" && match("nature", index).key === "MAIN_NATURESTAFF");
-  const withAliases = run("weaponIndex")(CATALOG, [{ alias: "The Zaddy Bow", weapon_id: "2H_LONGBOW" }, { alias: "daggers", weapon_id: "2H_CLAWPAIR" }, { alias: "ghost", weapon_id: "NOT_A_LINE" }]);
+  const withAliases = run("weaponIndex")(CATALOG, [{ alias: "The Zaddy Bow", weapon_id: "2H_LONGBOW" }, { alias: "daggers", weapon_id: "2H_CLAWPAIR" }, { alias: "gizmo", weapon_id: "NOT_A_LINE" }]);
   check("a guild's remembered name reads as alias, normalized both ways; it overrides a built-in nickname; a name for an unknown key is dropped",
         same(match("the zaddy bow", withAliases), { status: "alias", key: "2H_LONGBOW", how: "alias", candidates: ["2H_LONGBOW"] })
-        && match("Daggers", withAliases).key === "2H_CLAWPAIR" && match("ghost", withAliases).status === "none");
+        && match("Daggers", withAliases).key === "2H_CLAWPAIR" && match("gizmo", withAliases).status === "none");
   check("the index leaves removed lines out and keeps the rest", !index.byKey.has("2H_IRONGAUNTLETS_HELL") && index.byKey.has("2H_LONGBOW") && index.entries.length === Object.keys(CATALOG).length - 1);
+}
+
+/* 3b - a caller's sheet: short names, a label in brackets, a weapon
+   named by its E, gear columns beside the weapon */
+{
+  const match = run("matchWeapon");
+  const want = { "GA": "2H_ARCANESTAFF", "Golem": "2H_SHAPESHIFTER_KEEPER", "Rotcaller": "MAIN_CURSEDSTAFF_CRYSTAL",
+                 "Occult": "2H_ENIGMATICSTAFF", "Witchwork": "2H_SHAPESHIFTER_MORGANA", "Bedrock": "MAIN_ROCKMACE_KEEPER",
+                 "Forge Bark": "MAIN_NATURESTAFF_CRYSTAL", "Permafrost": "2H_ICECRYSTAL_UNDEAD", "Spiked": "2H_KNUCKLES_SET3" };
+  const got = Object.fromEntries(Object.keys(want).map(t => [t, match(t, index)]));
+  const byName = n => Object.keys(CATALOG).find(k => CATALOG[k].name === n);
+  check("short names read as one line: the initials, a prefix, a split word",
+        ["GA", "Rotcaller", "Occult", "Witchwork", "Bedrock", "Forge Bark", "Permafrost", "Spiked"]
+          .every(t => got[t].status === "likely")
+        && got.GA.key === byName("Great Arcane Staff") && got.Rotcaller.key === byName("Rotcaller Staff")
+        && got.Occult.key === byName("Occult Staff") && got.Witchwork.key === byName("Witchwork Staff")
+        && got.Bedrock.key === byName("Bedrock Mace") && got["Forge Bark"].key === byName("Forgebark Staff")
+        && got.Permafrost.key === byName("Permafrost Prism") && got.Spiked.key === byName("Spiked Gauntlets"),
+        Object.fromEntries(Object.entries(got).map(([t, m]) => [t, `${m.status}:${m.key}:${m.how}`])));
+  check("a weapon named by a word of its own E spell alone is read through the spell (Golem: the Earthrune Staff)",
+        got.Golem.status === "likely" && got.Golem.how === "spell" && got.Golem.key === byName("Earthrune Staff"),
+        `${got.Golem.status}:${got.Golem.key}:${got.Golem.how}`);
+  check("a role word is never read as a spell word, and a word of no E is no weapon",
+        match("Bomb", index).how !== "spell" && match("Purge", index).how !== "spell" && match("Mystery pick", index).status === "none");
+
+  const cells = run("parseSheet")("Weapon\tPlayer\tHead\tChest\tBoots\nGolem\tAsh\tGuardian Helmet\tJudicator Armor\tKnight Boots\n"
+    + "GA (Cleanse)\tBo\tCleric Cowl\tCleric Robe\tScholar Sandals\nHeavy Mace\tCy\tSoldier Helmet\tKnight Armor\tSoldier Boots\n"
+    + "Witchwork (DPS)\tDee\tMage Cowl\tMage Robe\tMage Sandals\nHallowfall\tEff\tCleric Cowl\tPurity Robe\tCleric Sandals").cells;
+  const layout = run("detectColumns")(cells, index);
+  check("gear columns beside the weapon are ignored, not read as players",
+        same(layout.kinds, ["weapon", "player", "ignore", "ignore", "ignore"]), layout.kinds);
+  const rows = run("sheetRows")(cells, layout, index);
+  check("the bracketed word is the slot's role, the name without it is what is matched",
+        same(rows.map(r => `${r.text}|${r.role}|${r.match.status}`),
+             ["Golem||likely", "GA|Cleanse|likely", "Heavy Mace||exact", "Witchwork|DPS|likely", "Hallowfall||exact"]),
+        rows.map(r => `${r.text}|${r.role}|${r.match.status}`));
+  const built = run("importSlots")(rows, rows.map(r => run("defaultChoice")(r)), {});
+  check("the slots carry the caller's label as the role: Witchwork as DPS, the Great Arcane as Cleanse",
+        built.slots.length === 5 && built.slots[3].weapon_id === byName("Witchwork Staff") && built.slots[3].role === "DPS"
+        && built.slots[1].role === "Cleanse" && built.slots[0].weapon_id === byName("Earthrune Staff"), built.slots);
+  const withRole = run("parseSheet")("Weapon\tRole\nGA (Cleanse)\tsupport").cells;
+  const rows2 = run("sheetRows")(withRole, run("detectColumns")(withRole, index), index);
+  check("where the sheet has a role column the bracketed word rides in the note",
+        rows2.length === 1 && rows2[0].role === "support" && rows2[0].note === "Cleanse", rows2[0]);
+  const learned = run("learnedAliases")(rows, rows.map(r => run("defaultChoice")(r)), index);
+  check("a name read without the caller choosing is not remembered; the label never enters a remembered name",
+        same(learned, []), learned);
 }
 
 /* 4 - the columns and the rows */

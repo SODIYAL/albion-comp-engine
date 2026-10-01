@@ -100,6 +100,30 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
   check("no time shows an empty field; junk shows an empty field", toInput("") === "" && toInput(null) === "" && toInput("soon") === "");
   check("the label carries the UTC time the game runs on", label(iso).endsWith("(17:30 UTC)") && label(iso).length > 12, label(iso));
   check("no start, no label", label("") === "" && label(null) === "" && label("soon") === "");
+  check("the zoned label still ends in the UTC time and names the reader's zone beside the local time",
+        label(iso, true).endsWith("(17:30 UTC)") && label(iso, true).length > label(iso).length, label(iso, true));
+
+  const toZone = run("toZoneInput"), fromZone = run("fromZoneInput"), echo = run("zoneEcho"), until = run("eventCountdown");
+  check("a UTC field shows the instant's UTC minute and goes back to the same instant, whatever the machine's zone",
+        toZone(iso, "utc") === "2026-10-03T17:30" && fromZone("2026-10-03T17:30", "utc") === iso
+        && fromZone("2026-10-03T17:30:00", "utc") === iso, toZone(iso, "utc"));
+  check("the local zone is the local field: the same functions",
+        toZone(iso, "local") === toInput(iso) && fromZone(toInput(iso), "local") === iso);
+  check("an empty UTC field is no time; junk and a half-typed value are null",
+        fromZone("", "utc") === "" && fromZone("soon", "utc") === null && fromZone("2026-10-03", "utc") === null
+        && toZone("", "utc") === "" && toZone("soon", "utc") === "");
+  check("the zones are UTC first (the default) and the caller's own", same(run("EVENT_ZONES"), ["utc", "local"]));
+  check("under a UTC field the echo is the caller's own time; under a local field it is the UTC time; no time, no echo",
+        echo("2026-10-03T17:30", "utc").startsWith("your time: ") && echo(toInput(iso), "local").endsWith("17:30 UTC")
+        && echo(toInput(iso), "local").startsWith("game time: ") && echo("", "utc") === "" && echo("soon", "local") === "");
+  const now = "2026-10-03T12:00:00.000Z";
+  check("the countdown reads to the minute: days and hours, hours and minutes, minutes, now, and since the start",
+        until("2026-10-05T15:00:00Z", now) === "in 2d 3h" && until("2026-10-03T15:12:00Z", now) === "in 3h 12m"
+        && until("2026-10-03T12:12:00Z", now) === "in 12m" && until(now, now) === "starting now"
+        && until("2026-10-03T11:35:00Z", now) === "started 25m ago",
+        [until("2026-10-05T15:00:00Z", now), until("2026-10-03T15:12:00Z", now), until("2026-10-03T11:35:00Z", now)]);
+  check("no start has no countdown, and a start half a day gone has none",
+        until("", now) === "" && until("soon", now) === "" && until("2026-10-02T20:00:00Z", now) === "");
 }
 
 /* 3 - the calendar */

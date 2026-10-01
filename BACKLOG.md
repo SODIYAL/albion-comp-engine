@@ -404,10 +404,17 @@ the live roster, on the sheet) are built.
 - **Renewing a CTA's share code**: the code is generated at creation and
   never changes; a leaked link needs a new CTA. An admin's renewal (the
   guild join code's pattern) is a later increment if callers ask for it.
-- **A CTA's time zone**: the dialog reads and writes times in the viewer's
-  local time and shows the UTC time beside each start. A guild-wide zone,
-  or the game's UTC as the field's zone, is a later increment if callers
-  ask for it.
+- **A caller's role label against the weapon's seat**: an imported
+  "Witchwork (DPS)" carries DPS as the slot's role label, and the role
+  tag and the per-role counts still read the weapon's primary seat
+  (frontline: one role read). Whether a comp's counts follow the caller's
+  label where it names a role class is a maintainer decision; the same
+  weapon's seat is the open question under "A frontline's damage points
+  making a ranged carrier".
+- **Gear columns on an imported sheet**: head, chest and boots columns
+  are ignored (a comp's slot holds a weapon line; its kit is set in the
+  planner). Reading them into the planner's kit through the share hash
+  is a later increment.
 - **Slot editing inside the comps dialog**: a slot's weapon is set in the
   planner (save, or replace the slots from the planner); the dialog edits
   role labels and notes and removes slots. A weapon picker per slot (the

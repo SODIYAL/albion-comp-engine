@@ -727,6 +727,10 @@ check(sorted(CATALOG) == sorted(WEAPONS), "L28m the catalog carries every datase
 check(all(CATALOG[k]["name"] == (WEAPONS[k].get("display_name") or k)
           and bool(CATALOG[k].get("removed")) == bool(WEAPONS[k].get("removed")) for k in CATALOG),
       "L28n each entry's name and removed flag are the dataset's")
+check("Runestone Golem Transformation" in (CATALOG.get("2H_SHAPESHIFTER_KEEPER") or {}).get("e", [])
+      and all(isinstance(v.get("e", []), list) and all(isinstance(n, str) and n != n.upper() for n in v.get("e", []))
+              for v in CATALOG.values()),
+      "L28p an entry carries the names of the line's own E spells (the import reads a weapon named by its E)")
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 from engine import Engine  # noqa: E402
 _eng = Engine()
@@ -828,6 +832,14 @@ for fid in ("ev-guild", "ev-source", "ev-name", "ev-start", "ev-mass", "ev-size"
 check('role="alert"' in edlg and 'aria-live="polite"' in edlg, "L31c errors and changes are announced, inside the dialog")
 check('id="ev-slots"' in edlg and edlg.count("<th scope=\"col\">") == 5, "L31d the slot table has its five column headers")
 check(edlg.count('type="datetime-local"') == 2, "L31e the start and the mass time are date-time fields")
+check('for="ev-zone"' in edlg and 'id="ev-zone"' in edlg and '<option value="utc">' in edlg and '<option value="local">' in edlg
+      and edlg.index('value="utc"') < edlg.index('value="local"')
+      and 'id="ev-start-echo"' in edlg and 'id="ev-mass-echo"' in edlg,
+      "L31r the times are typed in UTC (the default) or the caller's own zone, each field echoing its other reading")
+check("toZoneInput(current.starts_at, zone)" in EVENTS_JS and "fromZoneInput(el.start.value, zone)" in EVENTS_JS
+      and all(x in read("_signup.js") for x in ("eventCountdown(ev.starts_at)", "eventTimeLabel(ev.starts_at, true)",
+                                                "setInterval(paintWhen", "clearInterval(whenTimer)")),
+      "L31s the form reads and writes its times through the zone; the sheet shows the reader's zone, UTC and a countdown it keeps current")
 check('id="acct-events"' in SHELL[SHELL.find('id="acct-comps"'):SHELL.find('id="acct-logout"')],
       "L31f the account menu offers CTAs between Saved comps and Log out")
 check("el.eventsItem" in AUTH_JS and "views.events" in AUTH_JS, "L31g the account UI shows the item once the module registered its view")

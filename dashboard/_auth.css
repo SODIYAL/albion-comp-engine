@@ -126,6 +126,7 @@
 .auth-field .text-input[aria-invalid="true"],
 .auth-field select[aria-invalid="true"]{border-color:var(--gap); box-shadow:0 0 0 3px var(--gap-wash)}
 .auth-hint{margin:0; font-size:11.5px; line-height:1.45; color:var(--ink-3)}
+.auth-hint:empty{display:none}
 .auth-field-err{margin:0; font-size:12px; line-height:1.45; color:var(--gap)}
 .auth-field-err:empty{display:none}
 /* a field's error replaces its hint rather than repeating it */

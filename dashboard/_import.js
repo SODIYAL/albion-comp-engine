@@ -123,7 +123,12 @@ const HEADER_WORDS = {
   party: ["party", "parties", "group", "groups", "grp", "squad", "team", "pt"],
   count: ["count", "qty", "quantity", "amount", "number", "num", "n", "x", "copies", "slots", "how many"],
   note: ["note", "notes", "comment", "comments", "remark", "remarks", "info", "description", "desc", "extra"],
-  number: ["#", "no", "nr", "idx", "index", "slot", "seat", "pos", "position"]
+  number: ["#", "no", "nr", "idx", "index", "slot", "seat", "pos", "position"],
+  /* a gear column beside the weapon: a comp's slot holds a weapon line,
+     its kit is the planner's; the caller may set the column to note */
+  ignore: ["head", "helmet", "helm", "hood", "cowl", "chest", "armor", "armour", "body", "jacket", "robe", "boots", "shoes",
+           "feet", "sandals", "cape", "cloak", "offhand", "off hand", "food", "potion", "pot", "mount", "bag", "ip",
+           "item power", "tier"]
 };
 
 /* a party label: "Party 1", "P2", "Group A", "Squad 3", "Team B" */
@@ -178,8 +183,10 @@ function normalizeWeaponText(text) {
 
 
 /* One cell's weapon text: a list marker dropped ("1. ", "- "), a count
-   read ("Longbow x3", "3x Longbow", "Longbow (2)"), and what follows a
-   dash or a colon kept apart as the tail ("Longbow - Disc"). */
+   read ("Longbow x3", "3x Longbow", "Longbow (2)"), what follows a dash
+   or a colon kept apart as the tail ("Longbow - Disc"), and a bracketed
+   word beside the name kept apart as the label, the caller's word for
+   the slot ("GA (Cleanse)", "Witchwork (DPS)", "[Support] Rotcaller"). */
 function parseSlotText(text) {
   let s = String(text == null ? "" : text).trim().replace(/^(?:\d{1,2}[.):]|[-*•>]+)\s+/, "");
   let count = 1;
@@ -199,7 +206,16 @@ function parseSlotText(text) {
     /* a tail that is only a tier or an enchantment ("Longbow: 8.3") names nobody */
     if (!normalizeWeaponText(tail)) tail = "";
   }
-  return { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
+  let label = "";
+  const after = s.match(/^(.+?)\s*[(\[]\s*([^()\[\]]+?)\s*[)\]]$/);
+  const before = after ? null : s.match(/^[(\[]\s*([^()\[\]]+?)\s*[)\]]\s*(.+)$/);
+  if (after) { s = after[1].trim(); label = after[2].trim(); }
+  else if (before) { s = before[2].trim(); label = before[1].trim(); }
+  /* a label that is only a tier or an enchantment ("Longbow (8.3)") says nothing */
+  if (label && !normalizeWeaponText(label)) label = "";
+  const out = { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
+  if (label) out.label = label;
+  return out;
 }
 
 
@@ -335,8 +351,14 @@ function weaponIndex(catalog, aliases) {
     const name = String(entry.name || key);
     const norm = normalizeWeaponText(name);
     const tokens = norm.split(" ").filter(Boolean);
+    /* the words of the line's own E spells ("Runestone Golem
+       Transformation"): a sheet often names a weapon by what its E does */
+    const spellTokens = [];
+    for (const spell of entry.e || []) {
+      for (const t of normalizeWeaponText(spell).split(" ")) if (t && !spellTokens.includes(t)) spellTokens.push(t);
+    }
     entries.push({
-      key, name, norm, tokens,
+      key, name, norm, tokens, spellTokens,
       compact: norm.replace(/ /g, ""),
       initials: tokens.length >= 2 ? tokens.map(t => t[0]).join("") : "",
       keyTokens: key.toLowerCase().split("_").filter(t => t && !KEY_FAMILY_TOKENS.has(t)),
@@ -366,7 +388,10 @@ function noMatch() {
 
 
 /* one sheet text -> { status: exact | alias | likely | uncertain | none,
-   key, how, candidates } */
+   key, how, candidates }. The tiers, first hit wins: the key, the name,
+   a remembered name, then the derivations (the words, a prefix, word
+   prefixes, the initials, the key's words, the text inside a name, the
+   words of one line's E spell, a close spelling). */
 function matchWeapon(text, index) {
   const raw = String(text == null ? "" : text).trim();
   if (!raw || !index) return noMatch();
@@ -401,6 +426,7 @@ function matchWeapon(text, index) {
                       && (e.initials === joined || (e.tokens[e.tokens.length - 1] === "staff" && e.initials.slice(0, -1) === joined))],
     ["key", e => tokens.every(t => e.keyTokens.includes(t))],
     ["inside", e => joined.length >= 4 && e.norm.includes(joined)],
+    ["spell", e => joined.length >= 4 && !ROLE_WORDS.has(joined) && tokens.every(t => e.spellTokens.includes(t))],
     ["close", e => editDistance(compact, e.compact) <= near]
   ];
 
@@ -531,19 +557,32 @@ function sheetRows(cells, layout, index) {
     const parsed = parseSlotText(text);
     let name = parsed.name;
     let tail = parsed.tail;
+    let label = parsed.label || "";
     let match = name ? matchWeapon(name, index) : noMatch();
+    const read = m => ["exact", "alias", "likely"].includes(m.status);
     if (tail && (match.status === "none" || match.status === "uncertain")) {
       const swapped = matchWeapon(tail, index);
-      if (["exact", "alias", "likely"].includes(swapped.status)) {
+      if (read(swapped)) {
         [name, tail] = [tail, name];
         match = swapped;
       }
     }
+    /* "Tank (Heavy Mace)": the weapon is the bracketed word */
+    if (label && (match.status === "none" || match.status === "uncertain")) {
+      const swapped = matchWeapon(label, index);
+      if (read(swapped)) {
+        [name, label] = [label, name];
+        match = swapped;
+      }
+    }
     const player = extra.player || (tail && !isRoleWord(tail) ? tail : "");
-    const role = extra.role || (tail && isRoleWord(tail) ? tail : "") || extra.fallbackRole || "";
+    /* the bracketed word is the caller's label for the slot: its role
+       where the sheet names none, else part of the note */
+    const role = extra.role || (tail && isRoleWord(tail) ? tail : "") || label || extra.fallbackRole || "";
+    const note = [extra.note || "", label && role !== label ? label : ""].filter(Boolean).join(" · ");
     const count = extra.count != null ? extra.count : parsed.count;
     return { row: rowIndex, col, text: name, count: clampCount(count), player, role,
-             party: extra.party || "", note: extra.note || "", match };
+             party: extra.party || "", note, match };
   };
 
   if (weaponCols.length === 1) {

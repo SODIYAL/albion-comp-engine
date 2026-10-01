@@ -598,6 +598,7 @@ function signupErrorMessage(err) {
   let booted = false;
   let leave = null;            /* leaves the CTA's channel */
   let liveTimer = null;
+  let whenTimer = null;        /* keeps the countdown to the start current */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -699,6 +700,18 @@ function signupErrorMessage(err) {
     return td;
   }
 
+  /* the start in the reader's own zone (named) and in UTC, how far off
+     it is, and the mass time; repainted while the sheet is open so the
+     countdown stays current */
+  function paintWhen() {
+    if (!sheet || !sheet.event) return;
+    const ev = sheet.event;
+    const until = ev.status === "completed" ? "" : eventCountdown(ev.starts_at);
+    el.when.textContent = [eventTimeLabel(ev.starts_at, true), until,
+                           ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : "",
+                           `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+  }
+
   function renderBoard() {
     const ev = sheet.event;
     const board = sheetBoard(sheet.slots, sheet.signups);
@@ -706,8 +719,7 @@ function signupErrorMessage(err) {
 
     el.kicker.textContent = sheet.guild ? `${sheet.guild.name}${sheet.guild.albion_server ? " · " + (ALBION_SERVERS[sheet.guild.albion_server] || sheet.guild.albion_server) : ""}` : "CTA";
     el.title.textContent = ev.name;
-    el.when.textContent = [eventTimeLabel(ev.starts_at), ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at)}` : "",
-                           `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+    paintWhen();
     el.status.textContent = EVENT_STATUS_NAMES[ev.status] || ev.status;
     el.status.dataset.status = ev.status;
     el.notes.textContent = ev.notes || "";
@@ -1317,6 +1329,7 @@ function signupErrorMessage(err) {
 
   function startWatching() {
     stopWatching();
+    whenTimer = setInterval(paintWhen, 30000);
     try {
       leave = watchSheet(code, onSheetChanged, setLive);
     } catch (err) {
@@ -1328,6 +1341,8 @@ function signupErrorMessage(err) {
   function stopWatching() {
     clearTimeout(liveTimer);
     liveTimer = null;
+    clearInterval(whenTimer);
+    whenTimer = null;
     if (leave) {
       try { leave(); } catch (err) { /* the channel is gone either way */ }
       leave = null;

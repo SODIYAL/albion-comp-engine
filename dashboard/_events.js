@@ -164,13 +164,83 @@ function fromLocalInput(value) {
 
 
 /* a start as the list shows it: the viewer's local time, and the UTC
-   time the game runs on */
-function eventTimeLabel(iso) {
+   time the game runs on; `zoned` names the viewer's zone beside the
+   local time (the sheet, where players of several zones read it) */
+function eventTimeLabel(iso, zoned) {
   const d = new Date(iso || "");
   if (Number.isNaN(d.getTime())) return "";
   const pad = n => String(n).padStart(2, "0");
-  const local = d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  const how = { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" };
+  if (zoned) how.timeZoneName = "short";
+  const local = d.toLocaleString(undefined, how);
   return `${local} (${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC)`;
+}
+
+
+/* The zone a caller types a CTA's times in: the game's clock (UTC, the
+   default: a call time is announced in UTC) or the caller's own. The
+   database stores the instant either way. */
+const EVENT_ZONES = ["utc", "local"];
+const EVENT_ZONE_KEY = "cta-time-zone";
+
+
+/* an ISO time as a datetime-local field shows it in the zone */
+function toZoneInput(iso, zone) {
+  if (zone !== "utc") return toLocalInput(iso);
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
+}
+
+
+/* a datetime-local value typed in the zone as the ISO instant; "" for an
+   empty field, null for a value that is no time */
+function fromZoneInput(value, zone) {
+  if (zone !== "utc") return fromLocalInput(value);
+  const v = String(value || "").trim();
+  if (!v) return "";
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(v)) return null;
+  const d = new Date(`${v}Z`);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+}
+
+
+/* the other reading of a field's value, shown under it: a UTC entry as
+   the caller's own time, a local entry as UTC; "" for no time */
+function zoneEcho(value, zone) {
+  const iso = fromZoneInput(value, zone);
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, "0");
+  if (zone === "utc") {
+    return "your time: " + d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "2-digit",
+                                                         minute: "2-digit", timeZoneName: "short" });
+  }
+  const day = d.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  return `game time: ${day}, ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
+}
+
+
+/* how far off a start is, to the minute: "in 2d 3h", "in 3h 12m",
+   "in 12m", "starting now", "started 25m ago"; "" for no time and once
+   the start is half a day gone */
+function eventCountdown(iso, now) {
+  const start = new Date(iso || "").getTime();
+  if (!Number.isFinite(start)) return "";
+  const t = now instanceof Date ? now.getTime() : (now ? new Date(now).getTime() : Date.now());
+  const mins = Math.round((start - t) / 60000);
+  const span = m => {
+    const d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), r = m % 60;
+    if (d) return `${d}d ${h}h`;
+    if (h) return `${h}h ${r}m`;
+    return `${r}m`;
+  };
+  if (mins === 0) return "starting now";
+  if (mins > 0) return `in ${span(mins)}`;
+  if (-mins * 60000 > EVENT_PAST_AFTER_MS) return "";
+  return `started ${span(-mins)} ago`;
 }
 
 
@@ -390,6 +460,9 @@ function eventErrorMessage(err) {
     size: $id("ev-size"),
     start: $id("ev-start"),
     mass: $id("ev-mass"),
+    zone: $id("ev-zone"),
+    startEcho: $id("ev-start-echo"),
+    massEcho: $id("ev-mass-echo"),
     notes: $id("ev-notes"),
     status: $id("ev-status"),
     moves: $id("ev-moves"),
@@ -410,6 +483,7 @@ function eventErrorMessage(err) {
   const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size, startsAt: el.start, massAt: el.mass };
 
   let account = window.Account.current();
+  let zone = storedZone();    /* the zone the time fields are typed in */
   let guilds = [];            /* [{guild, role}] the account belongs to */
   let events = [];            /* the selected guild's list */
   let templates = [];         /* the selected guild's comps, for a new event */
@@ -613,8 +687,10 @@ function eventErrorMessage(err) {
     el.content.value = current.content || "";
     el.style.value = current.style || "";
     el.size.value = current.planned_size || "";
-    el.start.value = toLocalInput(current.starts_at);
-    el.mass.value = toLocalInput(current.mass_at);
+    el.zone.value = zone;
+    el.start.value = toZoneInput(current.starts_at, zone);
+    el.mass.value = toZoneInput(current.mass_at, zone);
+    paintEchoes();
     el.notes.value = current.notes || "";
     for (const input of [el.name, el.content, el.style, el.size, el.start, el.mass, el.notes]) {
       input.disabled = !powers.write;
@@ -673,8 +749,8 @@ function eventErrorMessage(err) {
       content: el.content.value,
       style: el.style.value,
       planned_size: Number(el.size.value),
-      starts_at: fromLocalInput(el.start.value),
-      mass_at: fromLocalInput(el.mass.value),
+      starts_at: fromZoneInput(el.start.value, zone),
+      mass_at: fromZoneInput(el.mass.value, zone),
       notes: el.notes.value.trim(),
       slots
     });
@@ -685,7 +761,8 @@ function eventErrorMessage(err) {
     if (!current.id) return true;
     const a = eventPayload(typedEvent());
     const b = eventPayload(Object.assign({}, current, { slots: current.slots,
-      starts_at: fromLocalInput(toLocalInput(current.starts_at)), mass_at: fromLocalInput(toLocalInput(current.mass_at)) }));
+      starts_at: fromZoneInput(toZoneInput(current.starts_at, zone), zone),
+      mass_at: fromZoneInput(toZoneInput(current.mass_at, zone), zone) }));
     return JSON.stringify(a) !== JSON.stringify(b);
   }
 
@@ -693,8 +770,41 @@ function eventErrorMessage(err) {
     el.dirty.hidden = !dirty();
   }
 
+  /* ---- the zone the times are typed in ---- */
+
+  function storedZone() {
+    try {
+      const z = window.localStorage.getItem(EVENT_ZONE_KEY);
+      return EVENT_ZONES.includes(z) ? z : "utc";
+    } catch (err) {
+      return "utc";
+    }
+  }
+
+  /* under each time field, its other reading: a UTC entry in the
+     caller's own time, a local entry in UTC */
+  function paintEchoes() {
+    el.startEcho.textContent = zoneEcho(el.start.value, zone);
+    el.massEcho.textContent = zoneEcho(el.mass.value, zone);
+  }
+
+  /* another zone shows the same instants: the fields are rewritten, the
+     CTA is unchanged */
+  el.zone.addEventListener("change", () => {
+    const next = EVENT_ZONES.includes(el.zone.value) ? el.zone.value : "utc";
+    const start = fromZoneInput(el.start.value, zone);
+    const mass = fromZoneInput(el.mass.value, zone);
+    zone = next;
+    try { window.localStorage.setItem(EVENT_ZONE_KEY, zone); } catch (err) { /* the choice lasts the visit */ }
+    el.start.value = toZoneInput(start || "", zone);
+    el.mass.value = toZoneInput(mass || "", zone);
+    paintEchoes();
+    markDirty();
+  });
+
   el.form.addEventListener("input", e => {
     const t = e.target;
+    if (t === el.start || t === el.mass) paintEchoes();
     if (t.dataset.evRole !== undefined || t.dataset.evNote !== undefined) {
       const position = Number(t.dataset.evRole || t.dataset.evNote);
       const slot = slots.find(s => s.position === position);
@@ -778,7 +888,8 @@ function eventErrorMessage(err) {
   el.source.addEventListener("change", async () => {
     if (busy || !current || current.id) return;
     const value = el.source.value;
-    const keep = { name: el.name.value, starts_at: fromLocalInput(el.start.value) || "", mass_at: fromLocalInput(el.mass.value) || "", notes: el.notes.value };
+    const keep = { name: el.name.value, starts_at: fromZoneInput(el.start.value, zone) || "",
+                   mass_at: fromZoneInput(el.mass.value, zone) || "", notes: el.notes.value };
     clearMessages();
 
     if (!value) {

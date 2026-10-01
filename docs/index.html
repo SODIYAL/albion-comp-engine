@@ -2009,6 +2009,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .auth-field .text-input[aria-invalid="true"],
 .auth-field select[aria-invalid="true"]{border-color:var(--gap); box-shadow:0 0 0 3px var(--gap-wash)}
 .auth-hint{margin:0; font-size:11.5px; line-height:1.45; color:var(--ink-3)}
+.auth-hint:empty{display:none}
 .auth-field-err{margin:0; font-size:12px; line-height:1.45; color:var(--gap)}
 .auth-field-err:empty{display:none}
 /* a field's error replaces its hint rather than repeating it */
@@ -3450,13 +3451,23 @@ window.AUTH_LINK = "";
               </div>
               <div class="auth-field">
                 <label for="ev-start">Starts</label>
-                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-err">
+                <input class="text-input" id="ev-start" type="datetime-local" step="60" aria-describedby="ev-start-echo ev-start-err">
+                <p class="auth-hint" id="ev-start-echo"></p>
                 <p class="auth-field-err" id="ev-start-err"></p>
               </div>
               <div class="auth-field">
                 <label for="ev-mass">Mass at <span class="opt">optional</span></label>
-                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-err">
+                <input class="text-input" id="ev-mass" type="datetime-local" step="60" aria-describedby="ev-mass-echo ev-mass-err">
+                <p class="auth-hint" id="ev-mass-echo"></p>
                 <p class="auth-field-err" id="ev-mass-err"></p>
+              </div>
+              <div class="auth-field">
+                <label for="ev-zone">Times typed in</label>
+                <select id="ev-zone" aria-describedby="ev-zone-hint">
+                  <option value="utc">UTC (game time)</option>
+                  <option value="local">My time</option>
+                </select>
+                <p class="auth-hint" id="ev-zone-hint">Players see their own time and UTC.</p>
               </div>
               <div class="auth-field">
                 <label for="ev-size">Planned size</label>
@@ -14091,7 +14102,7 @@ function acctDownloadText(filename, text, type) {
 
 </script>
 <script>
-const ACCOUNT_CATALOG = {"2H_ARCANESTAFF":{"name":"Great Arcane Staff","role":"support","item":"T4_2H_ARCANESTAFF"},"2H_ARCANESTAFF_CRYSTAL":{"name":"Astral Staff","role":"dps","item":"T4_2H_ARCANESTAFF_CRYSTAL"},"2H_ARCANESTAFF_HELL":{"name":"Occult Staff","role":"support","item":"T4_2H_ARCANESTAFF_HELL"},"2H_ARCANE_RINGPAIR_AVALON":{"name":"Evensong","role":"dps","item":"T4_2H_ARCANE_RINGPAIR_AVALON"},"2H_AXE":{"name":"Greataxe","role":"dps","item":"T4_2H_AXE"},"2H_AXE_AVALON":{"name":"Realmbreaker","role":"dps","item":"T4_2H_AXE_AVALON"},"2H_BOW":{"name":"Bow","role":"dps","item":"T4_2H_BOW"},"2H_BOW_AVALON":{"name":"Mistpiercer","role":"dps","item":"T4_2H_BOW_AVALON"},"2H_BOW_CRYSTAL":{"name":"Skystrider Bow","role":"dps","item":"T4_2H_BOW_CRYSTAL"},"2H_BOW_HELL":{"name":"Wailing Bow","role":"dps","item":"T4_2H_BOW_HELL"},"2H_BOW_KEEPER":{"name":"Bow of Badon","role":"dps","item":"T4_2H_BOW_KEEPER"},"2H_CLAWPAIR":{"name":"Claws","role":"dps","item":"T4_2H_CLAWPAIR"},"2H_CLAYMORE":{"name":"Claymore","role":"dps","item":"T4_2H_CLAYMORE"},"2H_CLAYMORE_AVALON":{"name":"Kingmaker","role":"dps","item":"T4_2H_CLAYMORE_AVALON"},"2H_CLEAVER_HELL":{"name":"Carving Sword","role":"dps","item":"T4_2H_CLEAVER_HELL"},"2H_COMBATSTAFF_MORGANA":{"name":"Black Monk Staff","role":"frontline","item":"T4_2H_COMBATSTAFF_MORGANA"},"2H_CROSSBOW":{"name":"Crossbow","role":"dps","item":"T4_2H_CROSSBOW"},"2H_CROSSBOWLARGE":{"name":"Heavy Crossbow","role":"dps","item":"T4_2H_CROSSBOWLARGE"},"2H_CROSSBOWLARGE_MORGANA":{"name":"Siegebow","role":"dps","item":"T4_2H_CROSSBOWLARGE_MORGANA"},"2H_CROSSBOW_CANNON_AVALON":{"name":"Energy Shaper","role":"dps","item":"T4_2H_CROSSBOW_CANNON_AVALON"},"2H_CURSEDSTAFF":{"name":"Great Cursed Staff","role":"support","item":"T4_2H_CURSEDSTAFF"},"2H_CURSEDSTAFF_MORGANA":{"name":"Damnation Staff","role":"support","item":"T4_2H_CURSEDSTAFF_MORGANA"},"2H_DAGGERPAIR":{"name":"Dagger Pair","role":"dps","item":"T4_2H_DAGGERPAIR"},"2H_DAGGERPAIR_CRYSTAL":{"name":"Twin Slayers","role":"dps","item":"T4_2H_DAGGERPAIR_CRYSTAL"},"2H_DAGGER_KATAR_AVALON":{"name":"Bridled Fury","role":"dps","item":"T4_2H_DAGGER_KATAR_AVALON"},"2H_DEMONICSTAFF":{"name":"Demonic Staff","role":"support","item":"T4_2H_DEMONICSTAFF"},"2H_DIVINESTAFF":{"name":"Divine Staff","role":"healer","item":"T4_2H_DIVINESTAFF"},"2H_DOUBLEBLADEDSTAFF":{"name":"Double Bladed Staff","role":"dps","item":"T4_2H_DOUBLEBLADEDSTAFF"},"2H_DOUBLEBLADEDSTAFF_CRYSTAL":{"name":"Phantom Twinblade","role":"dps","item":"T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL"},"2H_DUALAXE_KEEPER":{"name":"Bear Paws","role":"dps","item":"T4_2H_DUALAXE_KEEPER"},"2H_DUALCROSSBOW_CRYSTAL":{"name":"Arclight Blasters","role":"dps","item":"T4_2H_DUALCROSSBOW_CRYSTAL"},"2H_DUALCROSSBOW_HELL":{"name":"Boltcasters","role":"dps","item":"T4_2H_DUALCROSSBOW_HELL"},"2H_DUALHAMMER_HELL":{"name":"Forge Hammers","role":"dps","item":"T4_2H_DUALHAMMER_HELL"},"2H_DUALMACE_AVALON":{"name":"Oathkeepers","role":"frontline","item":"T4_2H_DUALMACE_AVALON"},"2H_DUALSCIMITAR_UNDEAD":{"name":"Galatine Pair","role":"dps","item":"T4_2H_DUALSCIMITAR_UNDEAD"},"2H_DUALSICKLE_UNDEAD":{"name":"Deathgivers","role":"dps","item":"T4_2H_DUALSICKLE_UNDEAD"},"2H_DUALSWORD":{"name":"Dual Swords","role":"dps","item":"T4_2H_DUALSWORD"},"2H_ENIGMATICORB_MORGANA":{"name":"Malevolent Locus","role":"support","item":"T4_2H_ENIGMATICORB_MORGANA"},"2H_ENIGMATICSTAFF":{"name":"Enigmatic Staff","role":"support","item":"T4_2H_ENIGMATICSTAFF"},"2H_FIRESTAFF":{"name":"Great Fire Staff","role":"dps","item":"T4_2H_FIRESTAFF"},"2H_FIRESTAFF_HELL":{"name":"Brimstone Staff","role":"dps","item":"T4_2H_FIRESTAFF_HELL"},"2H_FIRE_RINGPAIR_AVALON":{"name":"Dawnsong","role":"dps","item":"T4_2H_FIRE_RINGPAIR_AVALON"},"2H_FLAIL":{"name":"Morning Star","role":"frontline","item":"T4_2H_FLAIL"},"2H_FROSTSTAFF":{"name":"Great Frost Staff","role":"dps","item":"T4_2H_FROSTSTAFF"},"2H_FROSTSTAFF_CRYSTAL":{"name":"Arctic Staff","role":"dps","item":"T4_2H_FROSTSTAFF_CRYSTAL"},"2H_GLACIALSTAFF":{"name":"Glacial Staff","role":"dps","item":"T4_2H_GLACIALSTAFF"},"2H_GLAIVE":{"name":"Glaive","role":"dps","item":"T4_2H_GLAIVE"},"2H_GLAIVE_CRYSTAL":{"name":"Rift Glaive","role":"dps","item":"T4_2H_GLAIVE_CRYSTAL"},"2H_HALBERD":{"name":"Halberd","role":"dps","item":"T4_2H_HALBERD"},"2H_HALBERD_MORGANA":{"name":"Carrioncaller","role":"dps","item":"T4_2H_HALBERD_MORGANA"},"2H_HAMMER":{"name":"Great Hammer","role":"frontline","item":"T4_2H_HAMMER"},"2H_HAMMER_AVALON":{"name":"Hand of Justice","role":"frontline","item":"T4_2H_HAMMER_AVALON"},"2H_HAMMER_CRYSTAL":{"name":"Truebolt Hammer","role":"frontline","item":"T4_2H_HAMMER_CRYSTAL"},"2H_HAMMER_UNDEAD":{"name":"Tombhammer","role":"frontline","item":"T4_2H_HAMMER_UNDEAD"},"2H_HARPOON_HELL":{"name":"Spirithunter","role":"dps","item":"T4_2H_HARPOON_HELL"},"2H_HOLYSTAFF":{"name":"Great Holy Staff","role":"healer","item":"T4_2H_HOLYSTAFF"},"2H_HOLYSTAFF_CRYSTAL":{"name":"Exalted Staff","role":"healer","item":"T4_2H_HOLYSTAFF_CRYSTAL"},"2H_HOLYSTAFF_HELL":{"name":"Fallen Staff","role":"healer","item":"T4_2H_HOLYSTAFF_HELL"},"2H_HOLYSTAFF_UNDEAD":{"name":"Redemption Staff","role":"healer","item":"T4_2H_HOLYSTAFF_UNDEAD"},"2H_ICECRYSTAL_UNDEAD":{"name":"Permafrost Prism","role":"dps","item":"T4_2H_ICECRYSTAL_UNDEAD"},"2H_ICEGAUNTLETS_HELL":{"name":"Icicle Staff","role":"support","item":"T4_2H_ICEGAUNTLETS_HELL"},"2H_INFERNOSTAFF":{"name":"Infernal Staff","role":"dps","item":"T4_2H_INFERNOSTAFF"},"2H_INFERNOSTAFF_MORGANA":{"name":"Blazing Staff","role":"dps","item":"T4_2H_INFERNOSTAFF_MORGANA"},"2H_IRONCLADEDSTAFF":{"name":"Iron-clad Staff","role":"frontline","item":"T4_2H_IRONCLADEDSTAFF"},"2H_IRONGAUNTLETS_HELL":{"name":"Black Hands","role":"dps","item":"T4_2H_IRONGAUNTLETS_HELL","removed":true},"2H_KNUCKLES_AVALON":{"name":"Fists of Avalon","role":"dps","item":"T4_2H_KNUCKLES_AVALON"},"2H_KNUCKLES_CRYSTAL":{"name":"Forcepulse Bracers","role":"dps","item":"T4_2H_KNUCKLES_CRYSTAL"},"2H_KNUCKLES_HELL":{"name":"Hellfire Hands","role":"dps","item":"T4_2H_KNUCKLES_HELL"},"2H_KNUCKLES_KEEPER":{"name":"Ursine Maulers","role":"dps","item":"T4_2H_KNUCKLES_KEEPER"},"2H_KNUCKLES_MORGANA":{"name":"Ravenstrike Cestus","role":"dps","item":"T4_2H_KNUCKLES_MORGANA"},"2H_KNUCKLES_SET1":{"name":"Brawler Gloves","role":"dps","item":"T4_2H_KNUCKLES_SET1"},"2H_KNUCKLES_SET2":{"name":"Battle Bracers","role":"dps","item":"T4_2H_KNUCKLES_SET2"},"2H_KNUCKLES_SET3":{"name":"Spiked Gauntlets","role":"dps","item":"T4_2H_KNUCKLES_SET3"},"2H_LONGBOW":{"name":"Longbow","role":"dps","item":"T4_2H_LONGBOW"},"2H_LONGBOW_UNDEAD":{"name":"Whispering Bow","role":"dps","item":"T4_2H_LONGBOW_UNDEAD"},"2H_MACE":{"name":"Heavy Mace","role":"frontline","item":"T4_2H_MACE"},"2H_MACE_MORGANA":{"name":"Camlann Mace","role":"frontline","item":"T4_2H_MACE_MORGANA"},"2H_NATURESTAFF":{"name":"Great Nature Staff","role":"healer","item":"T4_2H_NATURESTAFF"},"2H_NATURESTAFF_HELL":{"name":"Blight Staff","role":"healer","item":"T4_2H_NATURESTAFF_HELL"},"2H_NATURESTAFF_KEEPER":{"name":"Rampant Staff","role":"healer","item":"T4_2H_NATURESTAFF_KEEPER"},"2H_POLEHAMMER":{"name":"Polehammer","role":"frontline","item":"T4_2H_POLEHAMMER"},"2H_QUARTERSTAFF":{"name":"Quarterstaff","role":"frontline","item":"T4_2H_QUARTERSTAFF"},"2H_QUARTERSTAFF_AVALON":{"name":"Grailseeker","role":"frontline","item":"T4_2H_QUARTERSTAFF_AVALON"},"2H_RAM_KEEPER":{"name":"Grovekeeper","role":"frontline","item":"T4_2H_RAM_KEEPER"},"2H_REPEATINGCROSSBOW_UNDEAD":{"name":"Weeping Repeater","role":"dps","item":"T4_2H_REPEATINGCROSSBOW_UNDEAD"},"2H_ROCKSTAFF_KEEPER":{"name":"Staff of Balance","role":"frontline","item":"T4_2H_ROCKSTAFF_KEEPER"},"2H_SCYTHE_CRYSTAL":{"name":"Crystal Reaper","role":"dps","item":"T4_2H_SCYTHE_CRYSTAL"},"2H_SCYTHE_HELL":{"name":"Infernal Scythe","role":"dps","item":"T4_2H_SCYTHE_HELL"},"2H_SHAPESHIFTER_AVALON":{"name":"Lightcaller","role":"dps","item":"T4_2H_SHAPESHIFTER_AVALON"},"2H_SHAPESHIFTER_CRYSTAL":{"name":"Stillgaze Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_CRYSTAL"},"2H_SHAPESHIFTER_HELL":{"name":"Hellspawn Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_HELL"},"2H_SHAPESHIFTER_KEEPER":{"name":"Earthrune Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_KEEPER"},"2H_SHAPESHIFTER_MORGANA":{"name":"Bloodmoon Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_MORGANA"},"2H_SHAPESHIFTER_SET1":{"name":"Prowling Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_SET1"},"2H_SHAPESHIFTER_SET2":{"name":"Rootbound Staff","role":"support","item":"T4_2H_SHAPESHIFTER_SET2"},"2H_SHAPESHIFTER_SET3":{"name":"Primal Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_SET3"},"2H_SKULLORB_HELL":{"name":"Cursed Skull","role":"support","item":"T4_2H_SKULLORB_HELL"},"2H_SPEAR":{"name":"Pike","role":"dps","item":"T4_2H_SPEAR"},"2H_TRIDENT_UNDEAD":{"name":"Trinity Spear","role":"dps","item":"T4_2H_TRIDENT_UNDEAD"},"2H_TWINSCYTHE_HELL":{"name":"Soulscythe","role":"frontline","item":"T4_2H_TWINSCYTHE_HELL"},"2H_WARBOW":{"name":"Warbow","role":"dps","item":"T4_2H_WARBOW"},"2H_WILDSTAFF":{"name":"Wild Staff","role":"healer","item":"T4_2H_WILDSTAFF"},"MAIN_1HCROSSBOW":{"name":"Light Crossbow","role":"dps","item":"T4_MAIN_1HCROSSBOW"},"MAIN_ARCANESTAFF":{"name":"Arcane Staff","role":"support","item":"T4_MAIN_ARCANESTAFF"},"MAIN_ARCANESTAFF_UNDEAD":{"name":"Witchwork Staff","role":"frontline","item":"T4_MAIN_ARCANESTAFF_UNDEAD"},"MAIN_AXE":{"name":"Battleaxe","role":"dps","item":"T4_MAIN_AXE"},"MAIN_CURSEDSTAFF":{"name":"Cursed Staff","role":"support","item":"T4_MAIN_CURSEDSTAFF"},"MAIN_CURSEDSTAFF_AVALON":{"name":"Shadowcaller","role":"support","item":"T4_MAIN_CURSEDSTAFF_AVALON"},"MAIN_CURSEDSTAFF_CRYSTAL":{"name":"Rotcaller Staff","role":"dps","item":"T4_MAIN_CURSEDSTAFF_CRYSTAL"},"MAIN_CURSEDSTAFF_UNDEAD":{"name":"Lifecurse Staff","role":"support","item":"T4_MAIN_CURSEDSTAFF_UNDEAD"},"MAIN_DAGGER":{"name":"Dagger","role":"dps","item":"T4_MAIN_DAGGER"},"MAIN_DAGGER_HELL":{"name":"Demonfang","role":"dps","item":"T4_MAIN_DAGGER_HELL"},"MAIN_FIRESTAFF":{"name":"Fire Staff","role":"dps","item":"T4_MAIN_FIRESTAFF"},"MAIN_FIRESTAFF_CRYSTAL":{"name":"Flamewalker Staff","role":"dps","item":"T4_MAIN_FIRESTAFF_CRYSTAL"},"MAIN_FIRESTAFF_KEEPER":{"name":"Wildfire Staff","role":"dps","item":"T4_MAIN_FIRESTAFF_KEEPER"},"MAIN_FROSTSTAFF":{"name":"Frost Staff","role":"dps","item":"T4_MAIN_FROSTSTAFF"},"MAIN_FROSTSTAFF_AVALON":{"name":"Chillhowl","role":"support","item":"T4_MAIN_FROSTSTAFF_AVALON"},"MAIN_FROSTSTAFF_KEEPER":{"name":"Hoarfrost Staff","role":"support","item":"T4_MAIN_FROSTSTAFF_KEEPER"},"MAIN_HAMMER":{"name":"Hammer","role":"frontline","item":"T4_MAIN_HAMMER"},"MAIN_HOLYSTAFF":{"name":"Holy Staff","role":"healer","item":"T4_MAIN_HOLYSTAFF"},"MAIN_HOLYSTAFF_AVALON":{"name":"Hallowfall","role":"healer","item":"T4_MAIN_HOLYSTAFF_AVALON"},"MAIN_HOLYSTAFF_MORGANA":{"name":"Lifetouch Staff","role":"healer","item":"T4_MAIN_HOLYSTAFF_MORGANA"},"MAIN_MACE":{"name":"Mace","role":"frontline","item":"T4_MAIN_MACE"},"MAIN_MACE_CRYSTAL":{"name":"Dreadstorm Monarch","role":"frontline","item":"T4_MAIN_MACE_CRYSTAL"},"MAIN_MACE_HELL":{"name":"Incubus Mace","role":"frontline","item":"T4_MAIN_MACE_HELL"},"MAIN_NATURESTAFF":{"name":"Nature Staff","role":"healer","item":"T4_MAIN_NATURESTAFF"},"MAIN_NATURESTAFF_AVALON":{"name":"Ironroot Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_AVALON"},"MAIN_NATURESTAFF_CRYSTAL":{"name":"Forgebark Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_CRYSTAL"},"MAIN_NATURESTAFF_KEEPER":{"name":"Druidic Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_KEEPER"},"MAIN_RAPIER_MORGANA":{"name":"Bloodletter","role":"dps","item":"T4_MAIN_RAPIER_MORGANA"},"MAIN_ROCKMACE_KEEPER":{"name":"Bedrock Mace","role":"frontline","item":"T4_MAIN_ROCKMACE_KEEPER"},"MAIN_SCIMITAR_MORGANA":{"name":"Clarent Blade","role":"dps","item":"T4_MAIN_SCIMITAR_MORGANA"},"MAIN_SPEAR":{"name":"Spear","role":"dps","item":"T4_MAIN_SPEAR"},"MAIN_SPEAR_KEEPER":{"name":"Heron Spear","role":"dps","item":"T4_MAIN_SPEAR_KEEPER"},"MAIN_SPEAR_LANCE_AVALON":{"name":"Daybreaker","role":"dps","item":"T4_MAIN_SPEAR_LANCE_AVALON"},"MAIN_SWORD":{"name":"Broadsword","role":"dps","item":"T4_MAIN_SWORD"},"MAIN_SWORD_CRYSTAL":{"name":"Infinity Blade","role":"dps","item":"T4_MAIN_SWORD_CRYSTAL"}};
+const ACCOUNT_CATALOG = {"2H_ARCANESTAFF":{"name":"Great Arcane Staff","role":"support","item":"T4_2H_ARCANESTAFF","e":["Time Freeze"]},"2H_ARCANESTAFF_CRYSTAL":{"name":"Astral Staff","role":"dps","item":"T4_2H_ARCANESTAFF_CRYSTAL","e":["Starfall"]},"2H_ARCANESTAFF_HELL":{"name":"Occult Staff","role":"support","item":"T4_2H_ARCANESTAFF_HELL","e":["Time Corridor"]},"2H_ARCANE_RINGPAIR_AVALON":{"name":"Evensong","role":"dps","item":"T4_2H_ARCANE_RINGPAIR_AVALON","e":["Dark Sphere"]},"2H_AXE":{"name":"Greataxe","role":"dps","item":"T4_2H_AXE","e":["Whirlwind"]},"2H_AXE_AVALON":{"name":"Realmbreaker","role":"dps","item":"T4_2H_AXE_AVALON","e":["Aftershock"]},"2H_BOW":{"name":"Bow","role":"dps","item":"T4_2H_BOW","e":["Enchanted Quiver"]},"2H_BOW_AVALON":{"name":"Mistpiercer","role":"dps","item":"T4_2H_BOW_AVALON","e":["Lucent Hawk"]},"2H_BOW_CRYSTAL":{"name":"Skystrider Bow","role":"dps","item":"T4_2H_BOW_CRYSTAL","e":["Sky's Fury"]},"2H_BOW_HELL":{"name":"Wailing Bow","role":"dps","item":"T4_2H_BOW_HELL","e":["Demon Arrow"]},"2H_BOW_KEEPER":{"name":"Bow of Badon","role":"dps","item":"T4_2H_BOW_KEEPER","e":["Raging Storm"]},"2H_CLAWPAIR":{"name":"Claws","role":"dps","item":"T4_2H_CLAWPAIR","e":["Disembowel"]},"2H_CLAYMORE":{"name":"Claymore","role":"dps","item":"T4_2H_CLAYMORE","e":["Charge"]},"2H_CLAYMORE_AVALON":{"name":"Kingmaker","role":"dps","item":"T4_2H_CLAYMORE_AVALON","e":["Majestic Smash"]},"2H_CLEAVER_HELL":{"name":"Carving Sword","role":"dps","item":"T4_2H_CLEAVER_HELL","e":["Fearless Strike"]},"2H_COMBATSTAFF_MORGANA":{"name":"Black Monk Staff","role":"frontline","item":"T4_2H_COMBATSTAFF_MORGANA","e":["Fatal Blade"]},"2H_CROSSBOW":{"name":"Crossbow","role":"dps","item":"T4_2H_CROSSBOW","e":["Snipe Shot"]},"2H_CROSSBOWLARGE":{"name":"Heavy Crossbow","role":"dps","item":"T4_2H_CROSSBOWLARGE","e":["Sweeping Bolt"]},"2H_CROSSBOWLARGE_MORGANA":{"name":"Siegebow","role":"dps","item":"T4_2H_CROSSBOWLARGE_MORGANA","e":["Vicious Barrage"]},"2H_CROSSBOW_CANNON_AVALON":{"name":"Energy Shaper","role":"dps","item":"T4_2H_CROSSBOW_CANNON_AVALON","e":["Divine Engine"]},"2H_CURSEDSTAFF":{"name":"Great Cursed Staff","role":"support","item":"T4_2H_CURSEDSTAFF","e":["Area of Decay"]},"2H_CURSEDSTAFF_MORGANA":{"name":"Damnation Staff","role":"support","item":"T4_2H_CURSEDSTAFF_MORGANA","e":["Cataclysm"]},"2H_DAGGERPAIR":{"name":"Dagger Pair","role":"dps","item":"T4_2H_DAGGERPAIR","e":["Slit Throat"]},"2H_DAGGERPAIR_CRYSTAL":{"name":"Twin Slayers","role":"dps","item":"T4_2H_DAGGERPAIR_CRYSTAL","e":["Ring of Death"]},"2H_DAGGER_KATAR_AVALON":{"name":"Bridled Fury","role":"dps","item":"T4_2H_DAGGER_KATAR_AVALON","e":["Merciless Finish"]},"2H_DEMONICSTAFF":{"name":"Demonic Staff","role":"support","item":"T4_2H_DEMONICSTAFF","e":["Anguished Soul"]},"2H_DIVINESTAFF":{"name":"Divine Staff","role":"healer","item":"T4_2H_DIVINESTAFF","e":["Divine Protection"]},"2H_DOUBLEBLADEDSTAFF":{"name":"Double Bladed Staff","role":"dps","item":"T4_2H_DOUBLEBLADEDSTAFF","e":["Soaring Swipe"]},"2H_DOUBLEBLADEDSTAFF_CRYSTAL":{"name":"Phantom Twinblade","role":"dps","item":"T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL","e":["Phantom Twin"]},"2H_DUALAXE_KEEPER":{"name":"Bear Paws","role":"dps","item":"T4_2H_DUALAXE_KEEPER","e":["Razor Cut"]},"2H_DUALCROSSBOW_CRYSTAL":{"name":"Arclight Blasters","role":"dps","item":"T4_2H_DUALCROSSBOW_CRYSTAL","e":["Flickershots"]},"2H_DUALCROSSBOW_HELL":{"name":"Boltcasters","role":"dps","item":"T4_2H_DUALCROSSBOW_HELL","e":["Deathward Climax"]},"2H_DUALHAMMER_HELL":{"name":"Forge Hammers","role":"dps","item":"T4_2H_DUALHAMMER_HELL","e":["Giant Steps"]},"2H_DUALMACE_AVALON":{"name":"Oathkeepers","role":"frontline","item":"T4_2H_DUALMACE_AVALON","e":["Blessed Aurora"]},"2H_DUALSCIMITAR_UNDEAD":{"name":"Galatine Pair","role":"dps","item":"T4_2H_DUALSCIMITAR_UNDEAD","e":["Soulless Stream"]},"2H_DUALSICKLE_UNDEAD":{"name":"Deathgivers","role":"dps","item":"T4_2H_DUALSICKLE_UNDEAD","e":["Ghost Strike"]},"2H_DUALSWORD":{"name":"Dual Swords","role":"dps","item":"T4_2H_DUALSWORD","e":["Spinning Blades"]},"2H_ENIGMATICORB_MORGANA":{"name":"Malevolent Locus","role":"support","item":"T4_2H_ENIGMATICORB_MORGANA","e":["The Void"]},"2H_ENIGMATICSTAFF":{"name":"Enigmatic Staff","role":"support","item":"T4_2H_ENIGMATICSTAFF","e":["Protective Beam"]},"2H_FIRESTAFF":{"name":"Great Fire Staff","role":"dps","item":"T4_2H_FIRESTAFF","e":["Flame Pillar"]},"2H_FIRESTAFF_HELL":{"name":"Brimstone Staff","role":"dps","item":"T4_2H_FIRESTAFF_HELL","e":["Meteor"]},"2H_FIRE_RINGPAIR_AVALON":{"name":"Dawnsong","role":"dps","item":"T4_2H_FIRE_RINGPAIR_AVALON","e":["Flaming Phoenix"]},"2H_FLAIL":{"name":"Morning Star","role":"frontline","item":"T4_2H_FLAIL","e":["Gravitas"]},"2H_FROSTSTAFF":{"name":"Great Frost Staff","role":"dps","item":"T4_2H_FROSTSTAFF","e":["Hail"]},"2H_FROSTSTAFF_CRYSTAL":{"name":"Arctic Staff","role":"dps","item":"T4_2H_FROSTSTAFF_CRYSTAL","e":["Arctic Volley"]},"2H_GLACIALSTAFF":{"name":"Glacial Staff","role":"dps","item":"T4_2H_GLACIALSTAFF","e":["Ice Storm"]},"2H_GLAIVE":{"name":"Glaive","role":"dps","item":"T4_2H_GLAIVE","e":["Fling"]},"2H_GLAIVE_CRYSTAL":{"name":"Rift Glaive","role":"dps","item":"T4_2H_GLAIVE_CRYSTAL","e":["Razor's Edge"]},"2H_HALBERD":{"name":"Halberd","role":"dps","item":"T4_2H_HALBERD","e":["Tear Apart"]},"2H_HALBERD_MORGANA":{"name":"Carrioncaller","role":"dps","item":"T4_2H_HALBERD_MORGANA","e":["Morgana Raven"]},"2H_HAMMER":{"name":"Great Hammer","role":"frontline","item":"T4_2H_HAMMER","e":["Tackle"]},"2H_HAMMER_AVALON":{"name":"Hand of Justice","role":"frontline","item":"T4_2H_HAMMER_AVALON","e":["Onslaught"]},"2H_HAMMER_CRYSTAL":{"name":"Truebolt Hammer","role":"frontline","item":"T4_2H_HAMMER_CRYSTAL","e":["Hyperstatic"]},"2H_HAMMER_UNDEAD":{"name":"Tombhammer","role":"frontline","item":"T4_2H_HAMMER_UNDEAD","e":["Grasp of the Undead"]},"2H_HARPOON_HELL":{"name":"Spirithunter","role":"dps","item":"T4_2H_HARPOON_HELL","e":["Corrupting Steel"]},"2H_HOLYSTAFF":{"name":"Great Holy Staff","role":"healer","item":"T4_2H_HOLYSTAFF","e":["Holy Explosion"]},"2H_HOLYSTAFF_CRYSTAL":{"name":"Exalted Staff","role":"healer","item":"T4_2H_HOLYSTAFF_CRYSTAL","e":["Sanctify"]},"2H_HOLYSTAFF_HELL":{"name":"Fallen Staff","role":"healer","item":"T4_2H_HOLYSTAFF_HELL","e":["Salvation"]},"2H_HOLYSTAFF_UNDEAD":{"name":"Redemption Staff","role":"healer","item":"T4_2H_HOLYSTAFF_UNDEAD","e":["Celestial Sphere"]},"2H_ICECRYSTAL_UNDEAD":{"name":"Permafrost Prism","role":"dps","item":"T4_2H_ICECRYSTAL_UNDEAD","e":["Ice Crystal"]},"2H_ICEGAUNTLETS_HELL":{"name":"Icicle Staff","role":"support","item":"T4_2H_ICEGAUNTLETS_HELL","e":["Frozen Hell"]},"2H_INFERNOSTAFF":{"name":"Infernal Staff","role":"dps","item":"T4_2H_INFERNOSTAFF","e":["Combustion"]},"2H_INFERNOSTAFF_MORGANA":{"name":"Blazing Staff","role":"dps","item":"T4_2H_INFERNOSTAFF_MORGANA","e":["Flame Tornado"]},"2H_IRONCLADEDSTAFF":{"name":"Iron-clad Staff","role":"frontline","item":"T4_2H_IRONCLADEDSTAFF","e":["Hurricane"]},"2H_IRONGAUNTLETS_HELL":{"name":"Black Hands","role":"dps","item":"T4_2H_IRONGAUNTLETS_HELL","e":["Devastating Strike"],"removed":true},"2H_KNUCKLES_AVALON":{"name":"Fists of Avalon","role":"dps","item":"T4_2H_KNUCKLES_AVALON","e":["Purifying Combination"]},"2H_KNUCKLES_CRYSTAL":{"name":"Forcepulse Bracers","role":"dps","item":"T4_2H_KNUCKLES_CRYSTAL","e":["Unstoppable Rush"]},"2H_KNUCKLES_HELL":{"name":"Hellfire Hands","role":"dps","item":"T4_2H_KNUCKLES_HELL","e":["Infernal Boulder"]},"2H_KNUCKLES_KEEPER":{"name":"Ursine Maulers","role":"dps","item":"T4_2H_KNUCKLES_KEEPER","e":["Hundred Striking Fists"]},"2H_KNUCKLES_MORGANA":{"name":"Ravenstrike Cestus","role":"dps","item":"T4_2H_KNUCKLES_MORGANA","e":["Earth Crusher"]},"2H_KNUCKLES_SET1":{"name":"Brawler Gloves","role":"dps","item":"T4_2H_KNUCKLES_SET1","e":["Blazing Geyser"]},"2H_KNUCKLES_SET2":{"name":"Battle Bracers","role":"dps","item":"T4_2H_KNUCKLES_SET2","e":["Falcon Smash"]},"2H_KNUCKLES_SET3":{"name":"Spiked Gauntlets","role":"dps","item":"T4_2H_KNUCKLES_SET3","e":["Gravitational Collapse"]},"2H_LONGBOW":{"name":"Longbow","role":"dps","item":"T4_2H_LONGBOW","e":["Rain of Arrows"]},"2H_LONGBOW_UNDEAD":{"name":"Whispering Bow","role":"dps","item":"T4_2H_LONGBOW_UNDEAD","e":["Undead Arrows"]},"2H_MACE":{"name":"Heavy Mace","role":"frontline","item":"T4_2H_MACE","e":["Battle Howl"]},"2H_MACE_MORGANA":{"name":"Camlann Mace","role":"frontline","item":"T4_2H_MACE_MORGANA","e":["Vendetta"]},"2H_NATURESTAFF":{"name":"Great Nature Staff","role":"healer","item":"T4_2H_NATURESTAFF","e":["Living Armor"]},"2H_NATURESTAFF_HELL":{"name":"Blight Staff","role":"healer","item":"T4_2H_NATURESTAFF_HELL","e":["Elevated Nature"]},"2H_NATURESTAFF_KEEPER":{"name":"Rampant Staff","role":"healer","item":"T4_2H_NATURESTAFF_KEEPER","e":["Spirit Animal"]},"2H_POLEHAMMER":{"name":"Polehammer","role":"frontline","item":"T4_2H_POLEHAMMER","e":["Groundbreaker"]},"2H_QUARTERSTAFF":{"name":"Quarterstaff","role":"frontline","item":"T4_2H_QUARTERSTAFF","e":["Vault Leap"]},"2H_QUARTERSTAFF_AVALON":{"name":"Grailseeker","role":"frontline","item":"T4_2H_QUARTERSTAFF_AVALON","e":["Soul Shaker"]},"2H_RAM_KEEPER":{"name":"Grovekeeper","role":"frontline","item":"T4_2H_RAM_KEEPER","e":["Ground Pound"]},"2H_REPEATINGCROSSBOW_UNDEAD":{"name":"Weeping Repeater","role":"dps","item":"T4_2H_REPEATINGCROSSBOW_UNDEAD","e":["Explosive Mine"]},"2H_ROCKSTAFF_KEEPER":{"name":"Staff of Balance","role":"frontline","item":"T4_2H_ROCKSTAFF_KEEPER","e":["Mystic Rocks"]},"2H_SCYTHE_CRYSTAL":{"name":"Crystal Reaper","role":"dps","item":"T4_2H_SCYTHE_CRYSTAL","e":["Relentless Assault"]},"2H_SCYTHE_HELL":{"name":"Infernal Scythe","role":"dps","item":"T4_2H_SCYTHE_HELL","e":["Bloody Reap"]},"2H_SHAPESHIFTER_AVALON":{"name":"Lightcaller","role":"dps","item":"T4_2H_SHAPESHIFTER_AVALON","e":["Dawnbird Transformation"]},"2H_SHAPESHIFTER_CRYSTAL":{"name":"Stillgaze Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_CRYSTAL","e":["Crystal Cobra Transformation"]},"2H_SHAPESHIFTER_HELL":{"name":"Hellspawn Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_HELL","e":["Hellfire Imp Transformation"]},"2H_SHAPESHIFTER_KEEPER":{"name":"Earthrune Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_KEEPER","e":["Runestone Golem Transformation"]},"2H_SHAPESHIFTER_MORGANA":{"name":"Bloodmoon Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_MORGANA","e":["Werewolf Transformation"]},"2H_SHAPESHIFTER_SET1":{"name":"Prowling Staff","role":"dps","item":"T4_2H_SHAPESHIFTER_SET1","e":["Shadow Panther Transformation"]},"2H_SHAPESHIFTER_SET2":{"name":"Rootbound Staff","role":"support","item":"T4_2H_SHAPESHIFTER_SET2","e":["Sylvian Transformation"]},"2H_SHAPESHIFTER_SET3":{"name":"Primal Staff","role":"frontline","item":"T4_2H_SHAPESHIFTER_SET3","e":["Spirit Bear Transformation"]},"2H_SKULLORB_HELL":{"name":"Cursed Skull","role":"support","item":"T4_2H_SKULLORB_HELL","e":["Haunting Screams"]},"2H_SPEAR":{"name":"Pike","role":"dps","item":"T4_2H_SPEAR","e":["Rooting Smash"]},"2H_TRIDENT_UNDEAD":{"name":"Trinity Spear","role":"dps","item":"T4_2H_TRIDENT_UNDEAD","e":["Spectral Trident"]},"2H_TWINSCYTHE_HELL":{"name":"Soulscythe","role":"frontline","item":"T4_2H_TWINSCYTHE_HELL","e":["Tornado"]},"2H_WARBOW":{"name":"Warbow","role":"dps","item":"T4_2H_WARBOW","e":["Magic Arrow"]},"2H_WILDSTAFF":{"name":"Wild Staff","role":"healer","item":"T4_2H_WILDSTAFF","e":["Well Of Life"]},"MAIN_1HCROSSBOW":{"name":"Light Crossbow","role":"dps","item":"T4_MAIN_1HCROSSBOW","e":["Exploding Shot"]},"MAIN_ARCANESTAFF":{"name":"Arcane Staff","role":"support","item":"T4_MAIN_ARCANESTAFF","e":["Arcane Orb"]},"MAIN_ARCANESTAFF_UNDEAD":{"name":"Witchwork Staff","role":"frontline","item":"T4_MAIN_ARCANESTAFF_UNDEAD","e":["Black Hole"]},"MAIN_AXE":{"name":"Battleaxe","role":"dps","item":"T4_MAIN_AXE","e":["Blood Bandit"]},"MAIN_CURSEDSTAFF":{"name":"Cursed Staff","role":"support","item":"T4_MAIN_CURSEDSTAFF","e":["Death Curse"]},"MAIN_CURSEDSTAFF_AVALON":{"name":"Shadowcaller","role":"support","item":"T4_MAIN_CURSEDSTAFF_AVALON","e":["Inner Shadow"]},"MAIN_CURSEDSTAFF_CRYSTAL":{"name":"Rotcaller Staff","role":"dps","item":"T4_MAIN_CURSEDSTAFF_CRYSTAL","e":["Plaguebringer"]},"MAIN_CURSEDSTAFF_UNDEAD":{"name":"Lifecurse Staff","role":"support","item":"T4_MAIN_CURSEDSTAFF_UNDEAD","e":["Enfeeble Blades"]},"MAIN_DAGGER":{"name":"Dagger","role":"dps","item":"T4_MAIN_DAGGER","e":["Bloodthirsty Blade"]},"MAIN_DAGGER_HELL":{"name":"Demonfang","role":"dps","item":"T4_MAIN_DAGGER_HELL","e":["Blood Ritual"]},"MAIN_FIRESTAFF":{"name":"Fire Staff","role":"dps","item":"T4_MAIN_FIRESTAFF","e":["Pyroblast"]},"MAIN_FIRESTAFF_CRYSTAL":{"name":"Flamewalker Staff","role":"dps","item":"T4_MAIN_FIRESTAFF_CRYSTAL","e":["Spontaneous Combustion"]},"MAIN_FIRESTAFF_KEEPER":{"name":"Wildfire Staff","role":"dps","item":"T4_MAIN_FIRESTAFF_KEEPER","e":["Magma Sphere"]},"MAIN_FROSTSTAFF":{"name":"Frost Staff","role":"dps","item":"T4_MAIN_FROSTSTAFF","e":["Freezing Wind"]},"MAIN_FROSTSTAFF_AVALON":{"name":"Chillhowl","role":"support","item":"T4_MAIN_FROSTSTAFF_AVALON","e":["Glacial Prison","Glacial Prison"]},"MAIN_FROSTSTAFF_KEEPER":{"name":"Hoarfrost Staff","role":"support","item":"T4_MAIN_FROSTSTAFF_KEEPER","e":["Avalanche"]},"MAIN_HAMMER":{"name":"Hammer","role":"frontline","item":"T4_MAIN_HAMMER","e":["Earth Shatter"]},"MAIN_HOLYSTAFF":{"name":"Holy Staff","role":"healer","item":"T4_MAIN_HOLYSTAFF","e":["Desperate Prayer"]},"MAIN_HOLYSTAFF_AVALON":{"name":"Hallowfall","role":"healer","item":"T4_MAIN_HOLYSTAFF_AVALON","e":["Divine Intervention"]},"MAIN_HOLYSTAFF_MORGANA":{"name":"Lifetouch Staff","role":"healer","item":"T4_MAIN_HOLYSTAFF_MORGANA","e":["Holy Touch"]},"MAIN_MACE":{"name":"Mace","role":"frontline","item":"T4_MAIN_MACE","e":["Deep Leap"]},"MAIN_MACE_CRYSTAL":{"name":"Dreadstorm Monarch","role":"frontline","item":"T4_MAIN_MACE_CRYSTAL","e":["Eye of the Storm"]},"MAIN_MACE_HELL":{"name":"Incubus Mace","role":"frontline","item":"T4_MAIN_MACE_HELL","e":["Shrinking Curse"]},"MAIN_NATURESTAFF":{"name":"Nature Staff","role":"healer","item":"T4_MAIN_NATURESTAFF","e":["Circle of Life"]},"MAIN_NATURESTAFF_AVALON":{"name":"Ironroot Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_AVALON","e":["Soul Link"]},"MAIN_NATURESTAFF_CRYSTAL":{"name":"Forgebark Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_CRYSTAL","e":["Dual Nature"]},"MAIN_NATURESTAFF_KEEPER":{"name":"Druidic Staff","role":"healer","item":"T4_MAIN_NATURESTAFF_KEEPER","e":["Spiritual Seed"]},"MAIN_RAPIER_MORGANA":{"name":"Bloodletter","role":"dps","item":"T4_MAIN_RAPIER_MORGANA","e":["Lunging Stabs"]},"MAIN_ROCKMACE_KEEPER":{"name":"Bedrock Mace","role":"frontline","item":"T4_MAIN_ROCKMACE_KEEPER","e":["Force of Nature"]},"MAIN_SCIMITAR_MORGANA":{"name":"Clarent Blade","role":"dps","item":"T4_MAIN_SCIMITAR_MORGANA","e":["Crescent Slash"]},"MAIN_SPEAR":{"name":"Spear","role":"dps","item":"T4_MAIN_SPEAR","e":["Reckless Charge"]},"MAIN_SPEAR_KEEPER":{"name":"Heron Spear","role":"dps","item":"T4_MAIN_SPEAR_KEEPER","e":["Spear Throw"]},"MAIN_SPEAR_LANCE_AVALON":{"name":"Daybreaker","role":"dps","item":"T4_MAIN_SPEAR_LANCE_AVALON","e":["Breakthrough"]},"MAIN_SWORD":{"name":"Broadsword","role":"dps","item":"T4_MAIN_SWORD","e":["Mighty Blow"]},"MAIN_SWORD_CRYSTAL":{"name":"Infinity Blade","role":"dps","item":"T4_MAIN_SWORD_CRYSTAL","e":["Limitbreaker"]}};
 "use strict";
 
 /*
@@ -16854,13 +16865,83 @@ function fromLocalInput(value) {
 
 
 /* a start as the list shows it: the viewer's local time, and the UTC
-   time the game runs on */
-function eventTimeLabel(iso) {
+   time the game runs on; `zoned` names the viewer's zone beside the
+   local time (the sheet, where players of several zones read it) */
+function eventTimeLabel(iso, zoned) {
   const d = new Date(iso || "");
   if (Number.isNaN(d.getTime())) return "";
   const pad = n => String(n).padStart(2, "0");
-  const local = d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  const how = { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" };
+  if (zoned) how.timeZoneName = "short";
+  const local = d.toLocaleString(undefined, how);
   return `${local} (${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC)`;
+}
+
+
+/* The zone a caller types a CTA's times in: the game's clock (UTC, the
+   default: a call time is announced in UTC) or the caller's own. The
+   database stores the instant either way. */
+const EVENT_ZONES = ["utc", "local"];
+const EVENT_ZONE_KEY = "cta-time-zone";
+
+
+/* an ISO time as a datetime-local field shows it in the zone */
+function toZoneInput(iso, zone) {
+  if (zone !== "utc") return toLocalInput(iso);
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
+}
+
+
+/* a datetime-local value typed in the zone as the ISO instant; "" for an
+   empty field, null for a value that is no time */
+function fromZoneInput(value, zone) {
+  if (zone !== "utc") return fromLocalInput(value);
+  const v = String(value || "").trim();
+  if (!v) return "";
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(v)) return null;
+  const d = new Date(`${v}Z`);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+}
+
+
+/* the other reading of a field's value, shown under it: a UTC entry as
+   the caller's own time, a local entry as UTC; "" for no time */
+function zoneEcho(value, zone) {
+  const iso = fromZoneInput(value, zone);
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, "0");
+  if (zone === "utc") {
+    return "your time: " + d.toLocaleString(undefined, { weekday: "short", day: "numeric", month: "short", hour: "2-digit",
+                                                         minute: "2-digit", timeZoneName: "short" });
+  }
+  const day = d.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  return `game time: ${day}, ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} UTC`;
+}
+
+
+/* how far off a start is, to the minute: "in 2d 3h", "in 3h 12m",
+   "in 12m", "starting now", "started 25m ago"; "" for no time and once
+   the start is half a day gone */
+function eventCountdown(iso, now) {
+  const start = new Date(iso || "").getTime();
+  if (!Number.isFinite(start)) return "";
+  const t = now instanceof Date ? now.getTime() : (now ? new Date(now).getTime() : Date.now());
+  const mins = Math.round((start - t) / 60000);
+  const span = m => {
+    const d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), r = m % 60;
+    if (d) return `${d}d ${h}h`;
+    if (h) return `${h}h ${r}m`;
+    return `${r}m`;
+  };
+  if (mins === 0) return "starting now";
+  if (mins > 0) return `in ${span(mins)}`;
+  if (-mins * 60000 > EVENT_PAST_AFTER_MS) return "";
+  return `started ${span(-mins)} ago`;
 }
 
 
@@ -17080,6 +17161,9 @@ function eventErrorMessage(err) {
     size: $id("ev-size"),
     start: $id("ev-start"),
     mass: $id("ev-mass"),
+    zone: $id("ev-zone"),
+    startEcho: $id("ev-start-echo"),
+    massEcho: $id("ev-mass-echo"),
     notes: $id("ev-notes"),
     status: $id("ev-status"),
     moves: $id("ev-moves"),
@@ -17100,6 +17184,7 @@ function eventErrorMessage(err) {
   const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size, startsAt: el.start, massAt: el.mass };
 
   let account = window.Account.current();
+  let zone = storedZone();    /* the zone the time fields are typed in */
   let guilds = [];            /* [{guild, role}] the account belongs to */
   let events = [];            /* the selected guild's list */
   let templates = [];         /* the selected guild's comps, for a new event */
@@ -17303,8 +17388,10 @@ function eventErrorMessage(err) {
     el.content.value = current.content || "";
     el.style.value = current.style || "";
     el.size.value = current.planned_size || "";
-    el.start.value = toLocalInput(current.starts_at);
-    el.mass.value = toLocalInput(current.mass_at);
+    el.zone.value = zone;
+    el.start.value = toZoneInput(current.starts_at, zone);
+    el.mass.value = toZoneInput(current.mass_at, zone);
+    paintEchoes();
     el.notes.value = current.notes || "";
     for (const input of [el.name, el.content, el.style, el.size, el.start, el.mass, el.notes]) {
       input.disabled = !powers.write;
@@ -17363,8 +17450,8 @@ function eventErrorMessage(err) {
       content: el.content.value,
       style: el.style.value,
       planned_size: Number(el.size.value),
-      starts_at: fromLocalInput(el.start.value),
-      mass_at: fromLocalInput(el.mass.value),
+      starts_at: fromZoneInput(el.start.value, zone),
+      mass_at: fromZoneInput(el.mass.value, zone),
       notes: el.notes.value.trim(),
       slots
     });
@@ -17375,7 +17462,8 @@ function eventErrorMessage(err) {
     if (!current.id) return true;
     const a = eventPayload(typedEvent());
     const b = eventPayload(Object.assign({}, current, { slots: current.slots,
-      starts_at: fromLocalInput(toLocalInput(current.starts_at)), mass_at: fromLocalInput(toLocalInput(current.mass_at)) }));
+      starts_at: fromZoneInput(toZoneInput(current.starts_at, zone), zone),
+      mass_at: fromZoneInput(toZoneInput(current.mass_at, zone), zone) }));
     return JSON.stringify(a) !== JSON.stringify(b);
   }
 
@@ -17383,8 +17471,41 @@ function eventErrorMessage(err) {
     el.dirty.hidden = !dirty();
   }
 
+  /* ---- the zone the times are typed in ---- */
+
+  function storedZone() {
+    try {
+      const z = window.localStorage.getItem(EVENT_ZONE_KEY);
+      return EVENT_ZONES.includes(z) ? z : "utc";
+    } catch (err) {
+      return "utc";
+    }
+  }
+
+  /* under each time field, its other reading: a UTC entry in the
+     caller's own time, a local entry in UTC */
+  function paintEchoes() {
+    el.startEcho.textContent = zoneEcho(el.start.value, zone);
+    el.massEcho.textContent = zoneEcho(el.mass.value, zone);
+  }
+
+  /* another zone shows the same instants: the fields are rewritten, the
+     CTA is unchanged */
+  el.zone.addEventListener("change", () => {
+    const next = EVENT_ZONES.includes(el.zone.value) ? el.zone.value : "utc";
+    const start = fromZoneInput(el.start.value, zone);
+    const mass = fromZoneInput(el.mass.value, zone);
+    zone = next;
+    try { window.localStorage.setItem(EVENT_ZONE_KEY, zone); } catch (err) { /* the choice lasts the visit */ }
+    el.start.value = toZoneInput(start || "", zone);
+    el.mass.value = toZoneInput(mass || "", zone);
+    paintEchoes();
+    markDirty();
+  });
+
   el.form.addEventListener("input", e => {
     const t = e.target;
+    if (t === el.start || t === el.mass) paintEchoes();
     if (t.dataset.evRole !== undefined || t.dataset.evNote !== undefined) {
       const position = Number(t.dataset.evRole || t.dataset.evNote);
       const slot = slots.find(s => s.position === position);
@@ -17468,7 +17589,8 @@ function eventErrorMessage(err) {
   el.source.addEventListener("change", async () => {
     if (busy || !current || current.id) return;
     const value = el.source.value;
-    const keep = { name: el.name.value, starts_at: fromLocalInput(el.start.value) || "", mass_at: fromLocalInput(el.mass.value) || "", notes: el.notes.value };
+    const keep = { name: el.name.value, starts_at: fromZoneInput(el.start.value, zone) || "",
+                   mass_at: fromZoneInput(el.mass.value, zone) || "", notes: el.notes.value };
     clearMessages();
 
     if (!value) {
@@ -18312,6 +18434,7 @@ function signupErrorMessage(err) {
   let booted = false;
   let leave = null;            /* leaves the CTA's channel */
   let liveTimer = null;
+  let whenTimer = null;        /* keeps the countdown to the start current */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -18413,6 +18536,18 @@ function signupErrorMessage(err) {
     return td;
   }
 
+  /* the start in the reader's own zone (named) and in UTC, how far off
+     it is, and the mass time; repainted while the sheet is open so the
+     countdown stays current */
+  function paintWhen() {
+    if (!sheet || !sheet.event) return;
+    const ev = sheet.event;
+    const until = ev.status === "completed" ? "" : eventCountdown(ev.starts_at);
+    el.when.textContent = [eventTimeLabel(ev.starts_at, true), until,
+                           ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : "",
+                           `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+  }
+
   function renderBoard() {
     const ev = sheet.event;
     const board = sheetBoard(sheet.slots, sheet.signups);
@@ -18420,8 +18555,7 @@ function signupErrorMessage(err) {
 
     el.kicker.textContent = sheet.guild ? `${sheet.guild.name}${sheet.guild.albion_server ? " · " + (ALBION_SERVERS[sheet.guild.albion_server] || sheet.guild.albion_server) : ""}` : "CTA";
     el.title.textContent = ev.name;
-    el.when.textContent = [eventTimeLabel(ev.starts_at), ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at)}` : "",
-                           `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+    paintWhen();
     el.status.textContent = EVENT_STATUS_NAMES[ev.status] || ev.status;
     el.status.dataset.status = ev.status;
     el.notes.textContent = ev.notes || "";
@@ -19031,6 +19165,7 @@ function signupErrorMessage(err) {
 
   function startWatching() {
     stopWatching();
+    whenTimer = setInterval(paintWhen, 30000);
     try {
       leave = watchSheet(code, onSheetChanged, setLive);
     } catch (err) {
@@ -19042,6 +19177,8 @@ function signupErrorMessage(err) {
   function stopWatching() {
     clearTimeout(liveTimer);
     liveTimer = null;
+    clearInterval(whenTimer);
+    whenTimer = null;
     if (leave) {
       try { leave(); } catch (err) { /* the channel is gone either way */ }
       leave = null;
@@ -19716,7 +19853,12 @@ const HEADER_WORDS = {
   party: ["party", "parties", "group", "groups", "grp", "squad", "team", "pt"],
   count: ["count", "qty", "quantity", "amount", "number", "num", "n", "x", "copies", "slots", "how many"],
   note: ["note", "notes", "comment", "comments", "remark", "remarks", "info", "description", "desc", "extra"],
-  number: ["#", "no", "nr", "idx", "index", "slot", "seat", "pos", "position"]
+  number: ["#", "no", "nr", "idx", "index", "slot", "seat", "pos", "position"],
+  /* a gear column beside the weapon: a comp's slot holds a weapon line,
+     its kit is the planner's; the caller may set the column to note */
+  ignore: ["head", "helmet", "helm", "hood", "cowl", "chest", "armor", "armour", "body", "jacket", "robe", "boots", "shoes",
+           "feet", "sandals", "cape", "cloak", "offhand", "off hand", "food", "potion", "pot", "mount", "bag", "ip",
+           "item power", "tier"]
 };
 
 /* a party label: "Party 1", "P2", "Group A", "Squad 3", "Team B" */
@@ -19771,8 +19913,10 @@ function normalizeWeaponText(text) {
 
 
 /* One cell's weapon text: a list marker dropped ("1. ", "- "), a count
-   read ("Longbow x3", "3x Longbow", "Longbow (2)"), and what follows a
-   dash or a colon kept apart as the tail ("Longbow - Disc"). */
+   read ("Longbow x3", "3x Longbow", "Longbow (2)"), what follows a dash
+   or a colon kept apart as the tail ("Longbow - Disc"), and a bracketed
+   word beside the name kept apart as the label, the caller's word for
+   the slot ("GA (Cleanse)", "Witchwork (DPS)", "[Support] Rotcaller"). */
 function parseSlotText(text) {
   let s = String(text == null ? "" : text).trim().replace(/^(?:\d{1,2}[.):]|[-*•>]+)\s+/, "");
   let count = 1;
@@ -19792,7 +19936,16 @@ function parseSlotText(text) {
     /* a tail that is only a tier or an enchantment ("Longbow: 8.3") names nobody */
     if (!normalizeWeaponText(tail)) tail = "";
   }
-  return { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
+  let label = "";
+  const after = s.match(/^(.+?)\s*[(\[]\s*([^()\[\]]+?)\s*[)\]]$/);
+  const before = after ? null : s.match(/^[(\[]\s*([^()\[\]]+?)\s*[)\]]\s*(.+)$/);
+  if (after) { s = after[1].trim(); label = after[2].trim(); }
+  else if (before) { s = before[2].trim(); label = before[1].trim(); }
+  /* a label that is only a tier or an enchantment ("Longbow (8.3)") says nothing */
+  if (label && !normalizeWeaponText(label)) label = "";
+  const out = { name: s, count: Math.min(Math.max(count || 1, 1), COMP_SLOTS_MAX), tail };
+  if (label) out.label = label;
+  return out;
 }
 
 
@@ -19928,8 +20081,14 @@ function weaponIndex(catalog, aliases) {
     const name = String(entry.name || key);
     const norm = normalizeWeaponText(name);
     const tokens = norm.split(" ").filter(Boolean);
+    /* the words of the line's own E spells ("Runestone Golem
+       Transformation"): a sheet often names a weapon by what its E does */
+    const spellTokens = [];
+    for (const spell of entry.e || []) {
+      for (const t of normalizeWeaponText(spell).split(" ")) if (t && !spellTokens.includes(t)) spellTokens.push(t);
+    }
     entries.push({
-      key, name, norm, tokens,
+      key, name, norm, tokens, spellTokens,
       compact: norm.replace(/ /g, ""),
       initials: tokens.length >= 2 ? tokens.map(t => t[0]).join("") : "",
       keyTokens: key.toLowerCase().split("_").filter(t => t && !KEY_FAMILY_TOKENS.has(t)),
@@ -19959,7 +20118,10 @@ function noMatch() {
 
 
 /* one sheet text -> { status: exact | alias | likely | uncertain | none,
-   key, how, candidates } */
+   key, how, candidates }. The tiers, first hit wins: the key, the name,
+   a remembered name, then the derivations (the words, a prefix, word
+   prefixes, the initials, the key's words, the text inside a name, the
+   words of one line's E spell, a close spelling). */
 function matchWeapon(text, index) {
   const raw = String(text == null ? "" : text).trim();
   if (!raw || !index) return noMatch();
@@ -19994,6 +20156,7 @@ function matchWeapon(text, index) {
                       && (e.initials === joined || (e.tokens[e.tokens.length - 1] === "staff" && e.initials.slice(0, -1) === joined))],
     ["key", e => tokens.every(t => e.keyTokens.includes(t))],
     ["inside", e => joined.length >= 4 && e.norm.includes(joined)],
+    ["spell", e => joined.length >= 4 && !ROLE_WORDS.has(joined) && tokens.every(t => e.spellTokens.includes(t))],
     ["close", e => editDistance(compact, e.compact) <= near]
   ];
 
@@ -20124,19 +20287,32 @@ function sheetRows(cells, layout, index) {
     const parsed = parseSlotText(text);
     let name = parsed.name;
     let tail = parsed.tail;
+    let label = parsed.label || "";
     let match = name ? matchWeapon(name, index) : noMatch();
+    const read = m => ["exact", "alias", "likely"].includes(m.status);
     if (tail && (match.status === "none" || match.status === "uncertain")) {
       const swapped = matchWeapon(tail, index);
-      if (["exact", "alias", "likely"].includes(swapped.status)) {
+      if (read(swapped)) {
         [name, tail] = [tail, name];
         match = swapped;
       }
     }
+    /* "Tank (Heavy Mace)": the weapon is the bracketed word */
+    if (label && (match.status === "none" || match.status === "uncertain")) {
+      const swapped = matchWeapon(label, index);
+      if (read(swapped)) {
+        [name, label] = [label, name];
+        match = swapped;
+      }
+    }
     const player = extra.player || (tail && !isRoleWord(tail) ? tail : "");
-    const role = extra.role || (tail && isRoleWord(tail) ? tail : "") || extra.fallbackRole || "";
+    /* the bracketed word is the caller's label for the slot: its role
+       where the sheet names none, else part of the note */
+    const role = extra.role || (tail && isRoleWord(tail) ? tail : "") || label || extra.fallbackRole || "";
+    const note = [extra.note || "", label && role !== label ? label : ""].filter(Boolean).join(" · ");
     const count = extra.count != null ? extra.count : parsed.count;
     return { row: rowIndex, col, text: name, count: clampCount(count), player, role,
-             party: extra.party || "", note: extra.note || "", match };
+             party: extra.party || "", note, match };
   };
 
   if (weaponCols.length === 1) {
