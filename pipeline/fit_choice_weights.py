@@ -34,8 +34,14 @@ test: v4h, v4 and the golden suite on a dataset built with the proposal.
 
 What this measures: what winning parties bring, never what makes them
 win (standing rule 7; `audit_capability_outcomes.py` is the outcome
-side). Content is not recorded on a harvested party, so --content names
-the template whose weights and targets the harvest is read against.
+side). Content is not recorded on a battle-list party, so --content names
+the template whose weights and targets the harvest is read against. The
+kill-feed poll's records ARE tagged: `--harvest-source all
+--harvest-content ancient_lands --dominant --min-size 2 --max-size 7`
+reads the Dragon Portal pools on the unit derive_portal_rows.py fits
+their rows from (a dominant killer party of the pool's size); `--rosters`
+names the artifact to read (a git-shown copy while the poll rewrites the
+working file).
 
 Needs numpy (not in requirements.txt: report-only, never in the build or
 CI).
@@ -191,16 +197,16 @@ def price(e, mults, state, w, caps):
 def extract_shard(task):
     """One worker: the parties of one split whose ordinal % n == shard."""
     _paths()
-    content, split, shard, n, drops, lo, hi = task
+    content, split, shard, n, drops, lo, hi, rosters, source, tag, dominant = task
     from engine import Engine
     import rosters_io
     import tier2_blindtest as T
-    doc = rosters_io.load()
+    doc = rosters_io.load(rosters, source=source, content=tag)
     with open(os.path.join(OUT, "party_styles.json"), encoding="utf-8") as f:
         styles = json.load(f)
     probe = Engine(content=content)
     caps = list(probe.data["templates"][content]["requirements"])
-    parties = T._harvest_parties(doc, styles, probe, lo, hi, 0)
+    parties = T._harvest_parties(doc, styles, probe, lo, hi, 0, dominant=dominant)
     del doc
     train = split == "train"
     ps = [p for p in parties if (p["battle"] % HOLDOUT_MOD != 0) == train]
@@ -259,9 +265,10 @@ def cmd_extract(args):
         os.remove(old)
     n_train = max(1, args.workers - max(1, args.workers // 4))
     n_hold = max(1, args.workers - n_train)
-    tasks = ([(args.content, "train", i, n_train, args.drops, args.min_size, args.max_size)
+    pop = (args.rosters, args.harvest_source, args.harvest_content, args.dominant)
+    tasks = ([(args.content, "train", i, n_train, args.drops, args.min_size, args.max_size) + pop
               for i in range(n_train)]
-             + [(args.content, "hold", i, n_hold, args.drops, args.min_size, args.max_size)
+             + [(args.content, "hold", i, n_hold, args.drops, args.min_size, args.max_size) + pop
                 for i in range(n_hold)])
     t0 = time.time()
     worst = 0.0
@@ -553,6 +560,13 @@ def main():
     ex.add_argument("--min-size", type=int, default=10)
     ex.add_argument("--max-size", type=int, default=20)
     ex.add_argument("--workers", type=int, default=max(2, (os.cpu_count() or 2) - 1))
+    ex.add_argument("--rosters", default=None, help="the roster artifact to read (default: pipeline/out/party_rosters.json.gz)")
+    ex.add_argument("--harvest-source", default="battle_list", choices=["battle_list", "all"],
+                    help="which harvest population to read (all = the kill-feed poll's records too)")
+    ex.add_argument("--harvest-content", default=None,
+                    help="keep one content tag's battles (ancient_lands = the Dragon Portal pools)")
+    ex.add_argument("--dominant", action="store_true",
+                    help="killer parties with no deaths and a kill only (the portal pools' unit)")
     args = ap.parse_args()
     return args.fn(args)
 

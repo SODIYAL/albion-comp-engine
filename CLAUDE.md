@@ -161,7 +161,7 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   `sample_parties --pages 0` -> `sample_battles` (the fold's one network
   step: the observed-evidence artifact from the newest group fights;
   `-SkipUsage` keeps the fold offline) -> `audit_style_rosters` -> `derive_style_bands` ->
-  `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
+  `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
   `derive_skeletons` -> `build_dataset` -> every gate ->
   `compare_fold.py`; never commits). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
@@ -232,8 +232,10 @@ One-way, provenance-checked data flow:
    `sheets/pools/`, each weapon's E on its own sheet, gear in `sheets/gear/`.
 4. Templates: six content templates + `styles.yaml` (five playstyles with weight
    multipliers, delivery mechanics, a fight chain) + `composition.yaml` +
-   `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`
-   and `out/meta_prior.json` are GENERATED from the harvest — never hand-edit.
+   `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`,
+   `out/meta_prior.json` and the Dragon Portal's rows (`ancient_lands.yaml`: base
+   rows plus `pool_rows` per matchmaking pool, `derive_portal_rows.py`) are
+   GENERATED from the harvest — never hand-edit.
 5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
    `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from
    the E's own payload). Cited fact overrides land in `style_overrides.yaml`.

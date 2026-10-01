@@ -1431,6 +1431,69 @@ def t_forge_avoid():
           f"alternatives before exhaustion: {len(seen)}")
 
 
+def t_portal_rows():
+    """F34 — the Dragon Portal rows come from the portal harvest
+    (pipeline/derive_portal_rows.py), and a content that keeps full
+    single-target value admits single-scale carries at the gang band."""
+    import yaml
+    with open(os.path.join(ROOT, "pipeline", "templates", "ancient_lands.yaml"), encoding="utf-8") as f:
+        tpl = yaml.safe_load(f)
+    fit = tpl.get("fit") or {}
+    check("F34a the Dragon Portal rows are fitted on the portal harvest: median, "
+          "at least 40 distinct rosters, training split",
+          fit.get("stat") == "median" and fit.get("source") == "harvest"
+          and fit.get("comps", 0) >= 40 and "% 5 != 0" in str(fit.get("split")), str(fit)[:160])
+    ramps = {c: r for c, r in tpl["requirements"].items() if r.get("ramp")}
+    check("F34b a ramp row carries no scales and ends where the 6-7 pool or the style rows begin",
+          bool(ramps) and all(not r.get("scales") and r["ramp"]["full_at"] in (7, 10)
+                              for r in ramps.values()), str(sorted(ramps)))
+    fitted = {c: r for c, r in tpl["requirements"].items() if not r.get("ramp")}
+    check("F34c every fitted row carries min <= target <= soft cap with a target above zero",
+          all(0 < r["target"] <= r["soft_cap"] and r.get("min", 0) <= r["target"] for r in fitted.values()),
+          str([c for c, r in fitted.items() if not (0 < r["target"] <= r["soft_cap"])]))
+    bow = "2H_BOW"
+    e5 = Engine(content="ancient_lands", size=5)
+    e7 = Engine(content="ancient_lands", size=7)
+    e10 = Engine(content="ancient_lands", size=10)
+    r5 = Engine(content="roads", size=5)
+    c5 = Engine(content="castle_outpost", size=5)
+    check("F34d st_full_value admits a single-scale carry at the gang band (the Bow at 4-5 and 6-7, "
+          "on the portal and on roads), never at group, and a content without the flag keeps barring it",
+          bow in set(e5.suggest_pool()) and bow in set(e7.suggest_pool()) and bow in set(r5.suggest_pool())
+          and bow not in set(e10.suggest_pool()) and bow not in set(c5.suggest_pool())
+          and not e5.is_excluded(bow) and not e5.is_style_unfit(bow),
+          f"portal5={bow in set(e5.suggest_pool())} portal7={bow in set(e7.suggest_pool())} "
+          f"roads5={bow in set(r5.suggest_pool())} portal10={bow in set(e10.suggest_pool())} "
+          f"castle_outpost5={bow in set(c5.suggest_pool())}")
+    check("F34e the portal's ramped rows are no requirement at 4-5 and the fitted rows are",
+          "silence" not in e5.reqs and "cleanse" not in e5.reqs and "clump_create" not in e5.reqs
+          and "tankiness" in e5.reqs and "clump_create" in e7.reqs and "silence" in e10.reqs,
+          str(sorted(set(tpl["requirements"]) - set(e5.reqs))))
+    pools = tpl.get("pool_rows") or {}
+    check("F34f the 2-3 and 6-7 pools carry rows of their own, each at least 40 distinct rosters, "
+          "every row none or 0 <= min <= target < soft cap over the base capabilities",
+          set(pools) == {"2-3", "6-7"}
+          and all(p["comps"] >= 40 and p["ref_size"] == p["sizes"][1]
+                  and all(c in tpl["requirements"] for c in p["requirements"])
+                  and all(r.get("none") or 0 <= r.get("min", r["target"]) <= r["target"] < r["soft_cap"]
+                          for r in p["requirements"].values())
+                  for p in pools.values()), str(sorted(pools)))
+    e3 = Engine(content="ancient_lands", size=3)
+    t3 = pools.get("2-3", {}).get("requirements", {}).get("tankiness") or {}
+    check("F34g inside a pool the engine reads the pool's row at its ref size as a harvest median; "
+          "at the base size and at 20 the base rows stand",
+          e3.pool_key == "2-3" and e7.pool_key == "6-7" and e5.pool_key is None
+          and Engine(content="ancient_lands", size=20).pool_key is None
+          and t3 and abs(e3.target("tankiness") - t3["target"]) < 1e-9
+          and e3.target_source("tankiness") == "harvest" and e5.target_source("tankiness") == "content",
+          f"pool3={e3.pool_key} t3={e3.target('tankiness'):.2f} row={t3} src={e3.target_source('tankiness')}")
+    none3 = sorted(c for c, r in pools.get("2-3", {}).get("requirements", {}).items() if r.get("none"))
+    check("F34h a pool's none rows are no requirement at that pool, and its fitted rows all are",
+          bool(none3) and all(c not in e3.reqs for c in none3)
+          and all(c in e3.reqs for c, r in pools["2-3"]["requirements"].items() if not r.get("none")),
+          str(none3))
+
+
 def t_replace_options():
     """F33 (ranked alternatives to pick from): the
     replacements for ONE slot are a one-slot forge - every candidate is
@@ -1506,6 +1569,7 @@ if __name__ == "__main__":
     t_role_typical()
     t_forge_avoid()
     t_replace_options()
+    t_portal_rows()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

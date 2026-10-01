@@ -56,6 +56,7 @@ if (-not $SkipUsage) {
 }
 Step "audit_style_rosters"    "py" @("-3", "-u", "pipeline/audit_style_rosters.py")
 Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py")
+Step "derive_portal_rows"     "py" @("-3", "-u", "pipeline/derive_portal_rows.py", "--apply")
 Step "derive_party_styles"    "py" @("-3", "-u", "pipeline/derive_party_styles.py")
 Step "derive_meta_prior"      "py" @("-3", "-u", "pipeline/derive_meta_prior.py")
 Step "derive_role_counts"     "py" @("-3", "-u", "pipeline/derive_role_counts.py")

@@ -747,12 +747,14 @@ V4H_CLASSES = ("weapon_only", "harvest_gear", "harvest_gear_doctrine")
 V4H_GEAR_SLOTS = ("Head", "Armor", "Shoes", "Cape", "OffHand", "Potion", "Food")
 
 
-def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod):
+def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod, dominant=False):
     """Killer parties of [min_size, max_size] with every weapon known and in
     the catalog, each with its weapons-only style label (party_styles.json,
     the descriptive comp_identity read; `balanced` where the label is none /
     split) and its linked builds' gear. `holdout_mod` keeps only battles
-    whose id % mod == 0 — a deterministic slice, see the caveat in v4h()."""
+    whose id % mod == 0 — a deterministic slice, see the caveat in v4h().
+    `dominant` keeps the parties that took no deaths and a kill in their
+    battle (the portal pools' unit)."""
     import party_link
     by_battle = party_link.parties_by_battle(doc)
     label = {(x["battle"], x["index"]): x for x in styles.get("parties", [])}
@@ -774,6 +776,8 @@ def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod):
             if not (min_size <= n <= max_size) or p.get("known_weapons") != n:
                 continue
             if len(ws) != n or any(w not in cat for w in ws):
+                continue
+            if dominant and not ((p.get("deaths") or 0) == 0 and (p.get("kills") or 0) > 0):
                 continue
             lab = label.get((battle, p["index"]))
             style = lab["style"] if lab and lab.get("style") in (e_probe.data.get("styles") or {}) else "balanced"
@@ -859,6 +863,13 @@ def v4h(args):
     NOT A GATE. Prints beside v4 so the two can be compared; the holdout
     split is honoured end to end, so promotion to a gate is a maintainer
     decision.
+
+    THE PORTAL POOLS: `--harvest-source all --harvest-content ancient_lands
+    --dominant --min-size 2 --max-size 7 --content ancient_lands` reads
+    the kill-feed poll's portal-tagged parties on the unit
+    pipeline/derive_portal_rows.py fits the Dragon Portal rows from (a
+    dominant killer party of the pool's size, no deaths, a kill), still
+    on the holdout slice; the same report, per pool.
     """
     sys.path.insert(0, os.path.join(ROOT, "pipeline"))
     import rosters_io
@@ -866,7 +877,7 @@ def v4h(args):
     styles_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
     if not os.path.exists(rosters_path):
         sys.exit(f"{rosters_path} missing — run the harvest fold first")
-    doc = rosters_io.load(rosters_path)
+    doc = rosters_io.load(rosters_path, source=args.harvest_source, content=args.harvest_content)
     styles = {}
     if os.path.exists(styles_path):
         with open(styles_path, encoding="utf-8") as f:
@@ -885,7 +896,7 @@ def v4h(args):
         return None
 
     parties = _harvest_parties(doc, styles, probe, args.min_size, args.max_size,
-                               args.holdout_mod)
+                               args.holdout_mod, dominant=args.dominant)
     if not parties:
         sys.exit("no harvested parties match the filter")
     rng = random.Random(args.seed)
@@ -985,7 +996,8 @@ def v4h(args):
           f"of {len(parties)} eligible (size {args.min_size}-{args.max_size}, "
           f"{'battles id%' + str(args.holdout_mod) + '==0' if args.holdout_mod else 'all battles'}, "
           f"seed {args.seed}), {args.drop} drops per party = {base['w_total']} drops; "
-          f"content {args.content}, style = the party's weapons-only label")
+          f"content {args.content}, style = the party's weapons-only label; harvest {args.harvest_source}"
+          f"{' / ' + args.harvest_content if args.harvest_content else ''}{', dominant parties' if args.dominant else ''}")
     for cl in V4H_CLASSES:
         print(_tally_line(cl, tallies[cl], 22))
     if args.baseline:
@@ -1081,6 +1093,12 @@ if __name__ == "__main__":
     h.add_argument("--holdout-mod", type=int, default=5,
                    help="evaluate battles with id %% M == 0 only (0 = all)")
     h.add_argument("--content", default="blackzone_roam")
+    h.add_argument("--harvest-source", default="battle_list", choices=["battle_list", "all"],
+                   help="which harvest population to read (all = the kill-feed poll's records too)")
+    h.add_argument("--harvest-content", default=None,
+                   help="keep one content tag's battles (ancient_lands = the Dragon Portal pools)")
+    h.add_argument("--dominant", action="store_true",
+                   help="killer parties with no deaths and a kill only (the portal pools' unit)")
     h.add_argument("--seed", type=int, default=20260910)
     h.add_argument("--json", default=None)
     h.add_argument("--baseline", action="store_true",

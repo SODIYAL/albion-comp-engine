@@ -2783,6 +2783,27 @@ def load_templates(tune=None):
                 if not (0 <= lo <= v.get("target", -1) < v.get("soft_cap", -1)):
                     sys.exit(f"{base}: {cap}: need 0 <= min <= target < "
                              f"soft_cap, got {v}")
+            # MATCHMAKING POOL ROWS (derive_portal_rows.py): per pool its
+            # sizes, ref_size, comps (distinct rosters, at least the
+            # 40-roster floor) and rows over the base capabilities, each
+            # {none: true} or 0 <= min <= target < soft_cap; fail closed.
+            for pk, pool in (doc.get("pool_rows") or {}).items():
+                for fld in ("sizes", "ref_size", "comps", "requirements"):
+                    if fld not in pool:
+                        sys.exit(f"{base}: pool_rows/{pk} lacks '{fld}'")
+                if not (type(pool["comps"]) is int and pool["comps"] >= 40):
+                    sys.exit(f"{base}: pool_rows/{pk}: comps must be an int >= 40 "
+                             f"(the floor), got {pool['comps']!r}")
+                for cap, v in pool["requirements"].items():
+                    if cap not in (doc.get("requirements") or {}):
+                        sys.exit(f"{base}: pool_rows/{pk}/{cap}: not a capability "
+                                 f"of the base rows")
+                    if v.get("none"):
+                        continue
+                    lo = v.get("min", v.get("target"))
+                    if not (0 <= lo <= v.get("target", -1) < v.get("soft_cap", -1)):
+                        sys.exit(f"{base}: pool_rows/{pk}/{cap}: need 0 <= min <= "
+                                 f"target < soft_cap or none, got {v}")
             # WEIGHT PROVENANCE (standing rule 7 as amended): a template
             # whose weights are fitted to killer-party picks says so in
             # `weight_fit`, records the curated weight of every requirement

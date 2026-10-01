@@ -595,9 +595,10 @@ check('fitStat !== "none" ? "" :' in APP and "No harvested evidence for this con
 import json as _json
 with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"), encoding="utf-8") as _fh:
     tpl25 = (_json.load(_fh).get("templates") or {}).get("ancient_lands") or {}
+_fit25 = tpl25.get("fit") or {}
 check(tpl25.get("size_prompt", {}).get("sizes") == [3, 5, 7, 20] and tpl25.get("validated_sizes") == []
-      and (tpl25.get("fit") or {}).get("stat") == "none",
-      "L25i the Dragon Portal template prompts for 3 / 5 / 7 / 20, validates no size and declares no evidence")
+      and _fit25.get("stat") == "median" and _fit25.get("source") == "harvest" and _fit25.get("comps", 0) >= 40,
+      "L25i the Dragon Portal template prompts for 3 / 5 / 7 / 20, validates no size and carries the portal harvest's median rows")
 
 print("L26 - the supply board carries a visible key for its colours and ticks")
 # The four ring stages and the two ticks were explained only in source

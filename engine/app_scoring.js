@@ -269,9 +269,25 @@
        none_until, grows linearly to its measured value at full_at, and
        proportionally beyond. */
     this._ramp = {};
+    /* MATCHMAKING POOL ROWS (mirrors engine.py): rows fitted on one pool's
+       own winners replace the base row's numbers at a size inside the
+       pool, scaled from the pool's ref_size; a `none` row is no
+       requirement there; weights stay the base row's. */
+    this._rowRef = {};
+    var poolR = this._poolRows(this.size);
+    this.poolKey = poolR ? poolR.key : null;
     this.reqs = {};
     for (var capR in this.template.requirements) {
       var rowR = this.template.requirements[capR];
+      var prR = poolR ? poolR.requirements[capR] : undefined;
+      if (prR !== undefined) {
+        if (prR.none) continue;
+        var mergedR = {};
+        for (var kR in rowR) if (kR !== "ramp") mergedR[kR] = rowR[kR];
+        for (var kP in prR) if (kP !== "none") mergedR[kP] = prR[kP];
+        rowR = mergedR;
+        this._rowRef[capR] = poolR.ref_size;
+      }
       if (rowR.ramp) {
         var fR = rampFactor(rowR.ramp, this.size);
         if (fR <= 0) continue;
@@ -349,7 +365,7 @@
       var tm = this.targetMults[cap2];
       tm = (tm === undefined) ? 1.0 : tm;
       var sz2 = (cap2 in this._ramp) ? this._ramp[cap2]
-        : (r.scales ? this.size / this.baseSize : 1.0);
+        : (r.scales ? this.size / (this._rowRef[cap2] || this.baseSize) : 1.0);
       this._targets[cap2] = tm * r.target * sz2;
       this._softs[cap2] = tm * r.soft_cap * sz2;
       /* BARE MINIMUM beside the target (target is the median: the four-stage
@@ -374,6 +390,7 @@
     var contentSrc = (fitStat === "median") ? "content" : "content_min";
     this._targetSrc = {};
     for (var capS in this.reqs) this._targetSrc[capS] = contentSrc;
+    for (var capP in this._rowRef) this._targetSrc[capP] = "harvest";   /* the pool's own measured median */
     var bands = this.data.style_bands || {};
     var bstyle = (bands.bands || {})[this.style];
     if (bstyle && this.size >= (bands.min_size || 10)) {
@@ -504,12 +521,19 @@
         if (!gsf) continue;
         var gOk;
         if (gRole === "dps") {
+          /* a content that keeps full single-target value (st_full_value:
+             roads, the Dragon Portal) says single-target kill pressure is
+             a win condition at its sizes: at the gang band a single-scale
+             carry's situational verdict earns a default slot; unfit still
+             bars (mirrors engine.py). */
+          var gEarned = (gBand === "gang" && this.template.st_full_value)
+            ? { fits: true, situational: true } : { fits: true };
           if (IDS.indexOf(this.style) >= 0) {
-            gOk = gsf.fit[this.style] && gsf.fit[this.style][gBand] === "fits";
+            gOk = !!(gsf.fit[this.style] && gEarned[gsf.fit[this.style][gBand]]);
           } else {
             gOk = false;
             for (var si2 = 0; si2 < IDS.length; si2++) {
-              if (gsf.fit[IDS[si2]] && gsf.fit[IDS[si2]][gBand] === "fits") {
+              if (gsf.fit[IDS[si2]] && gEarned[gsf.fit[IDS[si2]][gBand]]) {
                 gOk = true;
                 break;
               }
@@ -2961,6 +2985,22 @@
     /* The weapon's derived style/size identity; null on pre-identity
        datasets (mirrors engine.py _style_fit_of). */
     return this.weapons[weapon].style_fit || null;
+  };
+
+  /* the matchmaking pool whose sizes cover `size` (template pool_rows,
+     derive_portal_rows.py), with its key; null without (mirrors engine.py) */
+  CompEngine.prototype._poolRows = function (size) {
+    var pools = this.template.pool_rows || {};
+    for (var key in pools) {
+      var row = pools[key];
+      if (row.sizes[0] <= size && size <= row.sizes[1]) {
+        var out = {};
+        for (var k in row) out[k] = row[k];
+        out.key = key;
+        return out;
+      }
+    }
+    return null;
   };
 
   CompEngine.prototype._fitBand = function () {

@@ -13,20 +13,24 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The evidence unit for the Dragon Portal's small pools** (2-3, 4-5,
-  5-7): kit doctrine's unit is the killer party of 10+, the style cells
-  need 40 distinct rosters, and the meta prior buckets 2-5 / 6-15 / 16+
-  across every content. The kill-feed poll tags every party with its
-  `KillArea`; once portal-tagged parties exist, decide the unit for the
-  small pools (a killer party of the pool's size, dominant by kills over
-  deaths in its battle, is the candidate) and the floor per pool before
-  `ancient_lands` rows are derived. Until then the template borrows the
-  roads rows (`fit.stat: none`). The label is found: the Ancient Bone in
-  the victim's inventory marks a portal kill (one day: 535 solo, 101 trio,
-  28 five-man distinct portal killer parties; `rosters_io.load(source=
-  "all", content="ancient_lands")` selects them). Open: the unit and the
-  floor per pool, and whether the trio and five tables read the artifact
-  through that selector or a derive step of their own.
+- **The Dragon Portal's 15-20 pool**: under the 40-roster floor (five
+  dominant rosters on the training split), so it reads the 4-5 base rows
+  scaled and the style x size rows at 10+. `derive_portal_rows.py` gives
+  it rows of its own once the poll has filled it; whether a large portal
+  party is its own pool or the ZvZ rows is the decision to take then.
+- **The popularity baseline on the portal pools**: after the rows, the
+  gate and the weights were fitted, the engine names the dropped weapon
+  in its top 3 on 10% / 14% / 12% of drops at 2-3 / 4-5 / 6-7 and the
+  role-need-then-popularity baseline on 25% / 20% / 15% (role-level the
+  engine leads or ties). The engine's within-role choice (a Great Hammer
+  where winners field the Heavy Mace, Hellfire Hands where they field the
+  Bow) is the gap; whether the small-pool meta prior should bucket by
+  content, or the Bow's sustained ranged pressure is under-credited by
+  the capability sheets, is the question to settle from evidence.
+- **A blind validation round on the portal pools**: `validated_sizes` is
+  empty for `ancient_lands`, so the page flags every size as extrapolated.
+  The rows are measured; the round (one form per pool, graded before the
+  engine's answer) is what lifts the flag.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10

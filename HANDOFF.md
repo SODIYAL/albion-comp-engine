@@ -151,15 +151,27 @@ carrier quota, kit lean) compares worn keys in their curated form:
 `gear_key` resolves a tiered key to a tierless curated item and a
 (key, choice) pair to its key. F1d / F1e and two parity cases pin it.
 
-### Contents without harvested evidence
+### The Dragon Portal: rows per matchmaking pool
 
-`ancient_lands` (Dragon Portal) ships with `fit: {stat: none, borrowed_from:
-roads}`: its rows are the roads rows, every target reads `content_min`,
-`validated_sizes` is empty so every size is flagged extrapolated, and the
-page shows the borrowed-evidence notice. The kill-feed poll collects the
-portal fights; the rows are replaced by measured medians once its pools
-hold 40 distinct rosters each, and the evidence unit for the 2-7 pools is
-a logged decision before that (BACKLOG).
+`ancient_lands` (Dragon Portal) reads rows GENERATED from the portal
+harvest (`pipeline/derive_portal_rows.py`, `fit: {stat: median, source:
+harvest}`): the unit is the dominant killer party of the pool's size on
+the training split, floor 40 distinct rosters per pool. The base rows are
+the 4-5 pool's; the 2-3 and 6-7 pools carry `pool_rows` of their own,
+read by both ports at a size inside the pool (`Engine.pool_key`,
+`target_source` says `harvest`), and a capability the median winner does
+not field is no requirement at that pool. The 15-20 pool is under the
+floor and reads the base rows scaled plus the style x size rows. The
+weights are fitted to the same winners' picks (`weight_fit`, pulled
+toward the Roads weights the template started from) and apply at every
+pool. `validated_sizes` is empty (no validation round has covered a pool), so every
+size is still flagged extrapolated. A content that keeps full
+single-target value (`st_full_value`: roads and the portal) admits a
+single-scale carry's `situational` verdict at the gang band into default
+generation (F34d). A content with no harvested evidence follows the rule
+this content used before: `fit: {stat: none, borrowed_from: <sibling>}`,
+every target read as `content_min`, the borrowed-evidence notice on the
+page.
 
 ### Roster size vs planned size
 

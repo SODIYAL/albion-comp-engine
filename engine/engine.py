@@ -301,8 +301,26 @@ class Engine:
         # same proportional rule `scales` uses). Target and soft cap move
         # together. A ramp and `scales` never sit on the same row.
         self._ramp = {}
+        # MATCHMAKING POOL ROWS (the Dragon Portal, pipeline/
+        # derive_portal_rows.py): a template may carry `pool_rows`, rows
+        # fitted on one pool's own winners (`sizes`, `ref_size`). At a
+        # size inside a pool its rows replace the base row's numbers (a
+        # base ramp gives way), scaled from the pool's ref_size, and a
+        # `none` row is no requirement at that pool (the median winner
+        # fields none). Weights stay the base row's. Outside every pool
+        # the base rows stand.
+        self._row_ref = {}
+        pool = self._pool_rows(size)
+        self.pool_key = pool["key"] if pool else None
         reqs = {}
         for c, r in self.template["requirements"].items():
+            pr = pool["requirements"].get(c) if pool else None
+            if pr is not None:
+                if pr.get("none"):
+                    continue
+                r = {k: v for k, v in r.items() if k != "ramp"}
+                r.update({k: v for k, v in pr.items() if k != "none"})
+                self._row_ref[c] = float(pool["ref_size"])
             rp = r.get("ramp")
             if rp:
                 f = self._ramp_factor(rp, size)
@@ -396,7 +414,8 @@ class Engine:
             "target_mults", {}) or {}
         _tm = lambda c: self.target_mults.get(c, 1.0)
         _sz = lambda c, r: (self._ramp[c] if c in self._ramp
-                            else (self.size / self.base_size if r.get("scales") else 1.0))
+                            else (self.size / self._row_ref.get(c, self.base_size)
+                                  if r.get("scales") else 1.0))
         self._targets = {c: _tm(c) * r["target"] * _sz(c, r)
                          for c, r in self.reqs.items()}
         self._softs = {c: _tm(c) * r["soft_cap"] * _sz(c, r)
@@ -436,6 +455,8 @@ class Engine:
         fit_stat = ((self.template.get("fit") or {}).get("stat") or "minimum")
         content_src = "content" if fit_stat == "median" else "content_min"
         self._target_src = {c: content_src for c in self.reqs}
+        for c in self._row_ref:
+            self._target_src[c] = "harvest"      # the pool's own measured median
         bands = self.data.get("style_bands") or {}
         if (style in (bands.get("bands") or {})
                 and self.size >= (bands.get("min_size") or 10)):
@@ -596,11 +617,24 @@ class Engine:
                 if not sf:
                     continue
                 if role == "dps":
+                    # a content that keeps full single-target value
+                    # (st_full_value: roads, the Dragon Portal) says
+                    # single-target kill pressure is a win condition at
+                    # its sizes, so at the gang band a single-scale
+                    # carry's `situational` verdict earns a default slot
+                    # (the trio treatment extended to 4-9); `unfit` still
+                    # bars. Measured on the portal harvest: the Bow is the
+                    # most fielded weapon of winning 4-5 parties (14%
+                    # share) and third at 6-7, barred from generation
+                    # until this rule (tests/VALIDATION.md, F34).
+                    earned = (("fits", "situational")
+                              if band == "gang" and self.template.get("st_full_value")
+                              else ("fits",))
                     if self.style in self.IDENTITY_STYLES:
                         ok = (sf["fit"].get(self.style) or {}) \
-                            .get(band) == "fits"
+                            .get(band) in earned
                     else:
-                        ok = any((sf["fit"].get(s) or {}).get(band) == "fits"
+                        ok = any((sf["fit"].get(s) or {}).get(band) in earned
                                  for s in self.IDENTITY_STYLES)
                 elif role == "healer" and band == "group":
                     # validation round 4: a one-handed Holy Staff has no
@@ -3285,6 +3319,15 @@ class Engine:
         derive_style_fit + style_overrides.yaml). Absent on pre-identity
         datasets -> None, and every consumer degrades gracefully."""
         return self.weapons[weapon].get("style_fit")
+
+    def _pool_rows(self, size):
+        """The matchmaking pool whose sizes cover `size` (the template's
+        `pool_rows`, derive_portal_rows.py), with its key; None without."""
+        for key, row in (self.template.get("pool_rows") or {}).items():
+            lo, hi = row["sizes"]
+            if lo <= size <= hi:
+                return dict(row, key=key)
+        return None
 
     def _fit_band(self):
         """Size band for style-fit verdicts: trio <=3, gang 4-9, group 10+

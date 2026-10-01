@@ -1739,6 +1739,29 @@ def run():
           f"trinity_rp={rp('2H_TRIDENT_UNDEAD')} fists_rp={rp('2H_KNUCKLES_AVALON')} "
           f"sky_rp={rp('2H_BOW_CRYSTAL')}")
 
+    # T50 — the Dragon Portal pools (the comparison against the portal
+    # harvest, tests/VALIDATION.md): on the borrowed Roads rows the forge
+    # fielded two frontlines and a healer at 3 and three frontlines at 5,
+    # where 17% of dominant trios and 66% of dominant 4-5 parties field
+    # any frontline (95% of the latter a healer). On the pools' own rows
+    # the forge fields what the median winner fields by role.
+    e3p = Engine(content="ancient_lands", size=3)
+    e5p = Engine(content="ancient_lands", size=5)
+    f3 = e3p.forge(3)["party"]
+    f5 = e5p.forge(5)["party"]
+    r3 = [e3p.role_of(w) for w in f3]
+    r5 = [e5p.role_of(w) for w in f5]
+    first5 = e5p.recommend([], 1)[0]["weapon"]
+    check("T50 Dragon Portal pools: a forged trio is a healer and two damage "
+          "dealers with no frontline; a forged five is one healer, at most one "
+          "frontline and three or more damage dealers, and its first pick is a healer",
+          r3.count("healer") == 1 and r3.count("frontline") == 0
+          and r5.count("healer") == 1 and r5.count("frontline") <= 1 and r5.count("dps") >= 3
+          and e5p.role_of(first5) == "healer",
+          f"trio={[e3p.weapons[w]['display_name'] for w in f3]} roles={r3}; "
+          f"five={[e5p.weapons[w]['display_name'] for w in f5]} roles={r5}; "
+          f"first={e5p.weapons[first5]['display_name']}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
