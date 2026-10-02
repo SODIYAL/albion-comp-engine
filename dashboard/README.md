@@ -45,18 +45,32 @@ looking at it.
 
 ## The display contracts
 
-- **The comp-status card IS the radar.** One axis per capability GROUP (the
-  `GROUPS` map, "Other" guard included), the `comp_identity` glyph in the
-  hollow centre, and *every* piece of prose in a hover popup — the card
-  carries no explainer text and no fitness number of its own. Axis hovers
-  give the per-capability breakdown; the centre hover gives triage, exact
-  fitness, kill-pressure lights, role tally and advisory flags.
+- **The masthead is one line; the comp's settings live in the setup
+  panel.** The masthead carries the brand, fitness, the identity verdict,
+  the links and the account. Content, playstyle, planned size (with the
+  party count), the suggested sizes, the size notice, the forge actions
+  (`#forge-slot`) and the build diagnostics (parity, dataset stamp) sit in
+  `#setup-panel`. While the panel is shut its tab carries a dot and a
+  tooltip for an open size notice (`data-note`); a link that arrives with
+  the size ask raised opens the panel for that visit; an empty comp shows
+  an "open setup" control; a parity mismatch shows in the masthead
+  (`#parity-alarm`) whatever the panel's state.
+- **The comp-status card is the identity headline over the radar.** The
+  headline is `comp_identity` (glyph, name, strength; brass once strong).
+  The radar has one axis per capability GROUP (the `GROUPS` map, "Other"
+  guard included) and draws the coverage shape alone: no label inside it
+  and no per-axis target mark. Every further piece of prose sits in a
+  hover popup — the card carries no explainer text and no fitness number
+  of its own. Axis hovers give the per-capability breakdown; the headline
+  hover gives triage, exact fitness, kill-pressure lights, role tally and
+  advisory flags.
 - **The ceiling ruler.** The radar and the capability board both measure
   against the comp-fitted **soft cap**, not the target: 100% means "the most
   any good comp fields", per-capability supply counts only up to its own
   ceiling (so nothing can read above 100), stacking past it shows as the
-  purple over-stack marker rather than a bigger number, and a brass tick
-  marks the target minimum. Floor state reads `supplyFloor` (the
+  purple over-stack marker rather than a bigger number. The capability
+  board's rings mark the typical winner and the bare minimum with ticks
+  (keyed above the board); the radar marks neither. Floor state reads `supplyFloor` (the
   weapon+loadout basis, standing rule 10), never the dressed supply.
 - **The wheel is a semicircle and the comp board is the roster dock.**
   Frameless weapon art rides the top arc (the art is the star — no card

@@ -149,10 +149,20 @@ check(LAYOUT.count("--epw:min(") == 1,
 print("L5 - status bar")
 
 head = seg(SHELL, '<header class="masthead">', "</header>", "L5 masthead anchors")
-for el in ['id="fit-num"', 'id="fit-of"', 'id="fit-bar"', 'id="sb-identity"',
-           'id="sb-count"', 'id="style"', 'id="size-input"', 'id="content"',
-           'id="parity-chip"', 'id="build-stamp"']:
+for el in ['id="fit-num"', 'id="fit-of"', 'id="fit-bar"', 'id="sb-identity"']:
     check(el in head, "L5a masthead carries %s" % el)
+# the comp's settings (content, playstyle, planned size), the count, the
+# forge actions and the build diagnostics live in the setup panel: one home,
+# the masthead a single line
+setup = seg(SHELL, 'id="setup-panel"', "</aside>", "L5 setup panel anchors")
+for el in ['id="content"', 'id="style"', 'id="size-input"', 'id="size-minus"',
+           'id="size-plus"', 'id="sb-count"', 'id="forge-slot"',
+           'id="parity-chip"', 'id="build-stamp"']:
+    check(el in setup, "L5a2 the setup panel carries %s" % el)
+    check(el not in head, "L5a3 the masthead no longer carries %s" % el)
+check('class="mh-bar"' not in SHELL and ".mh-bar" not in LAYOUT
+      and "sb-field" not in SHELL and "sb-field" not in LAYOUT,
+      "L5a4 the masthead's control row is retired, markup and rules both")
 check(SHELL.count('id="fit-num"') == 1, "L5b #fit-num is not duplicated")
 check(SHELL.count('id="style"') == 1, "L5c #style is not duplicated")
 check(SHELL.count('id="size-input"') == 1, "L5d #size-input is not duplicated")
@@ -161,12 +171,24 @@ check('class="foot-chips"' not in SHELL and ".foot-chips{" not in SHELL,
       "markup and rule both gone; a mention in a comment is fine")
 check('"sb-identity"' in DECISION_JS, "L5f decision layer fills #sb-identity")
 check('"sb-count"' in APP, "L5g _app.js fills #sb-count")
-# the size input lives here now; the extrapolation/over-cap honesty notice
-# must be visible where the size is SET, not only inside the shut setup panel
-check('id="size-notice-mh"' in head,
-      "L5h the size honesty notice is mirrored beside the size controls",
-      "setting an unvalidated size used to warn only inside a closed panel")
-check('"size-notice-mh"' in APP, "L5i renderSetup fills the masthead notice")
+# the size is set inside the setup panel, beside the full notice
+# (#size-notice); while the panel is shut its tab names the caveat, and a
+# parity mismatch raises an alarm in the masthead no shut panel can hide
+_sn = setup.find('id="size-input"'), setup.find('id="size-notice"'), setup.find('id="forge-slot"')
+check(0 <= _sn[0] < _sn[1] < _sn[2],
+      "L5h the size notice sits between the size controls and the forge actions",
+      "setting an unvalidated size must warn where the size is set")
+_rs = seg(APP, "function renderSetup(){", "const SWAP_CFG", "L5i renderSetup anchors")
+check('.epanel-tab[data-panel="setup-panel"]' in _rs and "tab.dataset.note = note" in _rs
+      and "delete tab.dataset.note" in _rs and ".epanel-tab[data-note]::after{" in LAYOUT,
+      "L5i the setup tab carries a dot and a tooltip while the panel holds a size notice")
+check('id="parity-alarm" hidden' in head and 'alarm.hidden = ok' in APP
+      and ".chip[hidden]{display:none}" in SHELL,
+      "L5j a parity mismatch shows in the masthead, whatever the setup panel's state")
+check('data-open-panel="setup-panel"' in DECISION_JS and 'closest("[data-open-panel]")' in APP,
+      "L5k the empty comp names the setup panel and opens it")
+check('if (needSize()) setPanel("setup-panel", true, false);' in APP,
+      "L5l a link that arrives with the size ask open shows the setup panel, the saved layout untouched")
 
 print("L6 - the in-flow rail is gone")
 
@@ -304,9 +326,9 @@ check("party <b>" not in foot and foot != "",
       "the ring legend below it already did, and so do the masthead and tab")
 check("slotLabel" not in foot, "L13b slot number left to the pick card header")
 check("esc(sn)" not in foot, "L13c playstyle left to the masthead and radar")
-check('id="forge-slot"' in SHELL, "L13d forge actions have a masthead home")
+check(SHELL.count('id="forge-slot"') == 1, "L13d forge actions have one home (the setup panel, L5a2)")
 check('id="forge-rail"' not in SHELL,
-      "L13e the setup panel's half of the forge pair is gone")
+      "L13e no second forge control beside the forge slot")
 check("#forge-rail" not in APP, "L13f and its handler with it")
 # at the hard cap recs is null; gating BOTH buttons on recs left a 60/60
 # roster with no reforge control anywhere (the deleted rail button was the
@@ -364,6 +386,14 @@ check('"#' not in meta, "L15b no second hand-stepped hex table to drift")
 _sr = seg(DECISION_JS, "function statusRadar", "let CHAIN_OPEN", "L15c anchors")
 check("sb-identity" not in _sr and _sr != "",
       "L15c statusRadar builds markup only - no hidden status-bar write")
+# the identity is a headline over the diagram, never a label inside it, and
+# the diagram draws no per-axis target mark: both read as unexplained shapes
+check('class="dl-ident' in _sr and "<strong>${esc(c.title)}</strong>" in _sr
+      and _sr.find('class="dl-ident') < _sr.find('<svg class="dl-radar"'),
+      "L15c2 the comp identity is a headline above the radar")
+check("dlr-id" not in DECISION_JS and "dlr-id" not in DECISION_CSS
+      and "stroke-dasharray" not in _sr and "brass-deep" not in _sr,
+      "L15c3 the radar carries no centre label and no target ticks")
 check("function syncSbIdentity" in DECISION_JS,
       "L15d the status-bar identity write is an explicit named step")
 check("function identityModel" in DECISION_JS,
@@ -535,8 +565,9 @@ check('class="facet-n"' in fac and 'class="facet-t"' in fac and 'title="showing:
 check(".bdg.b-int{" in SHELL and "width:auto; height:auto" in seg(SHELL, ".bdg.b-int{", "}", "L23 pill anchors")
       and ".int-row>div:first-child{display:flex; flex-wrap:wrap" in SHELL,
       "L23c interaction badges are text pills in a wrapping row, never the 22px icon box")
-check(".mh-bar .chip{margin:0}" in LAYOUT and ".mh-bar .sb-count{line-height:1}" in LAYOUT,
-      "L23d the masthead size chip and count centre with the controls")
+check(".masthead .chip{padding:3px 8px; font-size:10px; margin:0}" in LAYOUT
+      and "#setup-panel .sb-count{margin-left:6px; line-height:1}" in LAYOUT,
+      "L23d the masthead's alarm chip sheds the note box's margin; the count centres with the size controls")
 
 # L24 - content and planned size are separate settings: the content
 # label carries no number, the plan sticks once set (PLAN_TOUCHED), a
@@ -559,19 +590,19 @@ check("PLAN_TOUCHED = true" in inp,
 restore = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();", "STYLE = ", "L24 restore anchors")
 check("PLAN_TOUCHED = PLANNED !== baseSize();" in restore,
       "L24f a restored link or session counts as touched when its size is not the template's suggestion")
-check("<span>planned</span>" in SHELL and "<span>size</span>" not in SHELL,
-      "L24g the masthead field is labelled planned, not size")
+check('<label for="size-input">Planned size</label>' in SHELL and "<span>size</span>" not in SHELL,
+      "L24g the size field is labelled planned size, never size alone")
 check("<label>Suggested size</label>" in SHELL and "Party size presets" not in SHELL,
       "L24h the preset row is labelled as a suggestion")
 count = seg(APP, 'const count = `${party.length}/${PLAN()}`;', "$(\"pdash\").style", "L24 count anchors")
 check("sbc.title = " in count and "in party" in count and "planned" in count,
-      "L24i the masthead count chip carries a tooltip naming both numbers")
+      "L24i the count beside the planned size carries a tooltip naming both numbers")
 
 # L25 - a content may ask for its size before it forges (template
 # size_prompt: the Dragon Portal pools). The ask is raised on the switch
 # into such a content, cleared by every size control, answered by a
 # link's n=, and while raised the forge slot shows the pools instead of
-# the forge button and the masthead chip names it.
+# the forge button and the setup tab names it.
 check("let ASK_SIZE = false;" in APP and "const needSize = () => !!sizePrompt() && ASK_SIZE;" in APP,
       "L25a the ask flag and its predicate exist")
 cswitch25 = seg(APP, 'if (e.target.id === "content"){', "render();", "L25 content-switch anchors")
@@ -588,8 +619,8 @@ check("ASK_SIZE = !!sizePrompt() && !(n >= 2 && n <= HARD_CAP);" in restore25,
 foot = seg(APP, "function renderWheelFoot(", "const board = BOARD_HTML;", "L25 forge-slot anchors")
 check("needSize()" in foot and 'data-size="${n}"' in foot and "const forge = ask ||" in foot,
       "L25f while the ask is open the forge slot shows the pools as data-size controls instead of the forge button")
-check('mh.textContent = "choose a portal size";' in APP,
-      "L25g the masthead chip names the open ask")
+check('const note = needSize() ? "choose a portal size"' in APP,
+      "L25g the setup tab names the open ask")
 check('fitStat !== "none" ? "" :' in APP and "No harvested evidence for this content yet" in APP,
       "L25h a content whose fit is none shows the borrowed-evidence notice")
 import json as _json

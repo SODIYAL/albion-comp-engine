@@ -89,14 +89,14 @@ button{font:inherit; color:inherit; cursor:pointer}
 ::-webkit-scrollbar-thumb:hover{background:#35354C}
 
 /* ---------- masthead: an engraved plate with an ember seam ---------- */
-/* chrome only — the masthead's two-line layout lives in _layout.css */
+/* chrome only — the masthead's layout lives in _layout.css */
 .masthead{
   position:sticky; top:0; z-index:10;
   background:rgba(11,13,18,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
 }
-/* status-bar chrome: the identity verdict and the party count. A firm
-   identity reads brass; a forming one stays muted (same signal the radar's
-   dashed-vs-solid hollow center carries). */
+/* status-bar chrome: the identity verdict; the party count sits beside the
+   planned size in the setup panel. A firm identity reads brass; a forming
+   one stays muted (the same signal the comp-status headline carries). */
 .sb-identity b{
   font-family:var(--mono); font-size:12px; letter-spacing:.1em; font-weight:600;
   color:var(--ink-2);
@@ -135,8 +135,8 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 .chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok-bright); flex:none;
   box-shadow:0 0 8px var(--ok-bright)}
-/* the size honesty mirror: over-cap / extrapolated, beside the size input
-   that triggers it (the full prose lives in the setup panel) */
+.chip[hidden]{display:none}   /* the chip's own display would beat the attribute */
+/* a warning chip: the parity alarm in the masthead */
 .chip.warn{color:var(--amber); border-color:rgba(232,160,19,.4);
   text-transform:uppercase; letter-spacing:.08em; font-size:9.5px}
 .about-link{
@@ -1712,24 +1712,9 @@ window.AUTH_LINK = "";
        session has been read -->
   <button class="acct-btn" id="acct-btn" type="button" data-state="pending"
     aria-haspopup="dialog" title="log in or create an account"><span class="acct-init" aria-hidden="true"></span><span class="acct-name">Log in</span></button>
-  </div>
-  <div class="mh-bar">
-    <label class="sb-field"><span>style</span><select id="style"></select></label>
-    <label class="sb-field"><span>planned</span>
-      <span class="size-row">
-        <button class="size-btn" id="size-minus" aria-label="one fewer">&minus;</button>
-        <input class="size-input" id="size-input" type="number" min="2" max="60" inputmode="numeric">
-        <button class="size-btn" id="size-plus" aria-label="one more">+</button>
-      </span></label>
-    <label class="sb-field"><span>content</span><select id="content">
-      <option value="castle_outpost">Castle Outpost</option>
-    </select></label>
-    <span class="chip warn" id="size-notice-mh" hidden></span>
-    <span class="sb-count" id="sb-count">0/0</span>
-    <span class="mh-forge" id="forge-slot"></span>
-    <div class="spacer"></div>
-    <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
-    <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
+  <!-- the parity verdict lives in the setup panel; a MISMATCH is raised
+       here, where no shut panel can hide it -->
+  <span class="chip warn" id="parity-alarm" hidden>parity mismatch — do not trust</span>
   </div>
 </header>
 
@@ -1847,8 +1832,27 @@ window.AUTH_LINK = "";
 <aside class="epanel" data-edge="left" data-open="false" id="setup-panel" aria-label="Setup">
   <div class="epanel-body">
     <div class="sec-label">Setup</div>
+    <!-- content, playstyle and planned size: the comp's three settings,
+         with the forge actions that build for them -->
     <div class="field">
+      <label for="content">Content</label>
+      <select id="content">
+        <option value="castle_outpost">Castle Outpost</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="style">Playstyle</label>
+      <select id="style"></select>
       <div class="size-hint" id="style-blurb"></div>
+    </div>
+    <div class="field">
+      <label for="size-input">Planned size</label>
+      <span class="size-row">
+        <button class="size-btn" id="size-minus" aria-label="one fewer">&minus;</button>
+        <input class="size-input" id="size-input" type="number" min="2" max="60" inputmode="numeric">
+        <button class="size-btn" id="size-plus" aria-label="one more">+</button>
+        <span class="sb-count" id="sb-count">0/0</span>
+      </span>
     </div>
     <div class="field">
       <label>Suggested size</label>
@@ -1856,12 +1860,17 @@ window.AUTH_LINK = "";
       <div class="size-hint" id="size-hint"></div>
     </div>
     <div id="size-notice"></div>
+    <div class="setup-forge" id="forge-slot"></div>
     <div class="btn-row">
       <button class="share-btn" id="share">copy share link</button>
       <button class="share-btn" id="export">copy comp text</button>
     </div>
     <div class="btn-row">
       <button class="share-btn clear-btn" id="clear">clear comp</button>
+    </div>
+    <div class="setup-diag">
+      <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
+      <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
     </div>
   </div>
 </aside>

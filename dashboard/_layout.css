@@ -221,18 +221,13 @@
 }
 
 /* ---------- masthead / status bar ----------
-   Two lines: identity + verdict on top, the constantly-turned knobs below.
-   Style and size change on nearly every interaction; burying them behind a
-   panel tab would cost more than the space it saves. */
-/* Compacted to roughly 60% of its former height. It was ~105px:
-   a 58px top row built around a 34px sigil and a 26px figure, over a 47px
-   control row on 32px inputs. Now ~64px - every control keeps a >=24px hit
-   target, and the brand sub-line goes because the wordmark already says it. */
+   One line: the brand, the verdict (fitness and identity), the links and
+   the account. Content, playstyle, planned size, the forge actions and the
+   build diagnostics live in the setup panel (#setup-panel), the one home
+   for the comp's settings. */
 .masthead{display:flex; flex-direction:column; gap:0}
-.mh-top{display:flex; align-items:center; gap:18px; padding:4px 34px 3px; flex-wrap:wrap}
-.mh-bar{display:flex; align-items:center; gap:14px; padding:3px 34px 4px;
-  border-top:1px solid var(--rule); flex-wrap:wrap}
-.mh-top .spacer, .mh-bar .spacer{flex:1}
+.mh-top{display:flex; align-items:center; gap:18px; padding:5px 34px; flex-wrap:wrap}
+.mh-top .spacer{flex:1}
 /* the summary row (fitness + identity verdict) is a plain wrapper on
    desktop, where its two blocks sit in the top row as before; it becomes a
    real row on phones (the 640px block below) */
@@ -250,42 +245,41 @@
 .sb-fit .of{font-size:11px}
 .sb-fit .meter-track{width:96px; height:6px; margin-top:0; align-self:center}
 
-/* controls shrink to a 24px rhythm - still a real hit target, half the height */
-.mh-bar select, .mh-bar .text-input{padding:3px 8px; font-size:12px; border-radius:8px}
-.mh-bar .size-btn, .mh-bar .size-input{height:24px; font-size:12px}
-.mh-bar .size-btn{min-width:24px}
-.mh-bar .size-input{width:48px}
-.masthead .chip{padding:3px 8px; font-size:10px}
+/* `.warn` is also the forge-note box with a 12px top margin: the parity
+   alarm chip sat low in the row without the reset */
+.masthead .chip{padding:3px 8px; font-size:10px; margin:0}
 .masthead .about-link{padding:2px 0}
 .masthead .share-btn{padding:4px 10px; font-size:10px; margin-top:0; width:auto}
 .masthead .lf-sync{font-size:10px}
-/* forge and reforge are comp-level actions, so they sit with style, size
-   and content rather than half in a panel and half under the wheel */
-/* the size mirror is a `chip warn`, and `.warn` is also the forge-note box
-   with a 12px top margin — in the bar the chip sat 6px low without this */
-.mh-bar .chip{margin:0}
-.mh-bar .sb-count{line-height:1}
-.mh-forge{display:flex; gap:6px}
-.mh-forge:empty{display:none}
-.mh-forge .cb-forge{margin:0; padding:4px 10px; font-size:10px; width:auto}
 .sb-identity{display:flex; align-items:center; gap:8px}
-.sb-field{display:flex; align-items:center; gap:7px}
-.sb-field>span{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--ink-3)}
-.sb-field select, .sb-field .size-input{margin:0}
+/* ---------- the setup panel's settings ----------
+   forge and reforge are comp-level actions, so they sit with content,
+   style and size: one home, never half in a panel and half under the wheel */
+#setup-panel .sb-count{margin-left:6px; line-height:1}
+.setup-forge{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+.setup-forge:empty{display:none}
+.setup-forge .cb-forge{margin:0; flex:1 1 0}
+.setup-forge .size-ask{flex:1 1 100%}
+.setup-diag{display:flex; flex-wrap:wrap; gap:6px; margin-top:16px;
+  padding-top:12px; border-top:1px solid var(--rule)}
+/* the setup tab carries a dot while the panel holds a size notice (an open
+   size ask, an over-cap or an extrapolated size): the caveat reaches the
+   page while the panel is shut */
+.epanel-tab[data-note]::after{content:""; display:inline-block; width:6px; height:6px;
+  border-radius:50%; margin-top:7px; background:var(--amber); box-shadow:0 0 8px var(--amber)}
 @media (max-width:960px){
-  .mh-top, .mh-bar{padding-left:16px; padding-right:16px; gap:12px}
+  .mh-top{padding-left:16px; padding-right:16px; gap:12px}
   .sb-fit .meter-track{width:80px}
+  .epanel-tab[data-note]::after{margin:0 0 1px 7px}
 }
 /* phones: the masthead pins ONE row. .mh-top dissolves (display:contents)
-   so the masthead lays out its own rows: brand and the welcome link, then
-   the control row, then the summary row (identity verdict + fitness) LAST.
+   so the masthead lays out its own rows: brand, links and the account, then
+   the summary row (identity verdict + fitness) LAST.
    The sticky offset is the negative of the summary row's measured distance
    from the masthead's top (--mh-pin, set by the client from a
-   ResizeObserver, so a control row that wraps to a varying line count is
+   ResizeObserver, so a brand line that wraps to a varying line count is
    never mis-measured): the rows above it scroll away and the summary alone
-   stays at the top of the viewport. Sticky, the whole masthead held ~385px
-   of an 844px phone screen. */
+   stays at the top of the viewport. */
 @media (max-width:640px){
   .masthead{flex-direction:row; flex-wrap:wrap; align-items:center; gap:0 10px;
     padding:8px 16px 0; top:calc(-1 * var(--mh-pin, 0px))}
@@ -336,17 +330,9 @@
   .im-text-field{grid-column:1}
   .im-table{display:block; overflow-x:auto}
   .rr-grid{grid-template-columns:1fr}
-  .mh-bar{order:1; flex:1 1 100%; margin-top:6px; padding:8px 0 6px; gap:6px 10px}
-  .mh-bar .spacer{display:none}
-  .mh-bar select{max-width:100%; min-width:0}
-  .mh-bar .sb-field{min-width:0}
-  .mh-bar .sb-field:has(#content){flex:1 1 100%}
-  .mh-bar .sb-field:has(#content) select{flex:1}
-  /* the diagnostics chips (parity, dataset stamp) leave the phone bar: the
-     footnote carries the stamp; the size notice keeps its chip */
-  .mh-bar .chip:not(.warn){display:none}
+  .masthead .chip.warn{order:0; flex:none}
   .mh-sum{display:flex; order:2; flex:1 1 100%; align-items:center; gap:10px;
-    padding:7px 0 8px; border-top:1px solid var(--rule)}
+    margin-top:6px; padding:7px 0 8px; border-top:1px solid var(--rule)}
   .mh-sum .sb-identity{flex:1 1 auto; min-width:0}
   .mh-sum .sb-fit{flex:none; margin-left:auto; order:1}   /* verdict reads first, the figure closes the row */
   .sb-fit .sec-label{display:none}

@@ -289,11 +289,15 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   single flow below 1251px; fractional band bounds) in `_layout.css`, inlined
   last. Setup, caller tools, party and live party are `.epanel` edge flyouts
   (one per edge on desktop, one total on phones). The masthead is a status
-  bar: fitness, identity verdict, style / size / content, forge actions.
+  bar on one line: fitness and the identity verdict. Content, playstyle,
+  planned size, the party count, the forge actions and the build
+  diagnostics live in the setup panel; its tab carries a dot while a size
+  notice is open, and a parity mismatch raises an alarm in the masthead.
 - **A content may ask for its size** (template `size_prompt`; the Dragon
   Portal's pools 3 / 5 / 7 / 20): the switch into it raises the ask, the
   forge slot shows the pools as size controls until one is picked, the
-  masthead chip names the open ask, a link's `n=` answers it and the link
+  setup tab names the open ask (the panel opens on a link that arrives
+  with the ask raised), a link's `n=` answers it and the link
   carries no `n=` while the ask is open; no generation path forges past
   an open ask; a hand-set plan survives the switch. A template whose
   `fit.stat` is `none` shows the borrowed-evidence notice.
@@ -310,9 +314,10 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   two members on one weapon stay two people. Clearing the comp stops
   live sync. Swap impact and the after-pick gaps read the DRESSED roster.
 - **Comp status is THE RADAR**: one axis per capability group against the
-  comp-fitted CEILING (100% = soft cap, nothing above 100; a brass tick marks
-  the typical winner; purple = over-ceiling stacking; pink = under a hard
-  floor); `comp_identity` in the hub; all prose in hovers.
+  comp-fitted CEILING (100% = soft cap, nothing above 100; purple =
+  over-ceiling stacking; pink = under a hard floor); `comp_identity` as
+  the headline above the diagram (glyph, name, strength); no label inside
+  the diagram and no per-axis target mark; all further prose in hovers.
 - **Capability board = four stages** (standing rule 17): red below the bare
   minimum winners get away with, orange from there to the typical winner,
   green from typical to the soft cap, purple past it. The legend reads

@@ -644,24 +644,17 @@ function renderSetup(){
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This content is validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been validated at this size yet.</div>`);
-  /* honesty mirror: the size input lives in the masthead now,
-     so the caveat must surface THERE the moment an unvalidated size is set —
-     the full prose stays in the setup panel this chip points at */
-  const mh = $("size-notice-mh");
-  if (mh){
+  /* honesty mirror: the size is set inside the setup panel, beside the
+     full notice. While the panel is shut (a restored link, a live party)
+     its tab names the caveat: a dot (data-note) and the tooltip */
+  const tab = document.querySelector('.epanel-tab[data-panel="setup-panel"]');
+  if (tab){
     const overCap = tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size;
-    const extra = ENG.extrapolated();
-    mh.hidden = !(overCap || extra || needSize());
-    if (needSize()){
-      mh.textContent = "choose a portal size";
-      mh.title = (sizePrompt().question || "Which size?") + " The forge waits for the answer; pick it in the forge slot or the setup panel.";
-    } else if (overCap){
-      mh.textContent = "over the in-game cap";
-      mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
-    } else if (extra){
-      mh.textContent = "extrapolated size";
-      mh.title = `validated at size ${validatedSizes().join(", ")} only — the typical numbers at ${SIZE} are harvest medians / scaled content rows, not yet validated at this size. Details in the setup panel`;
-    }
+    const note = needSize() ? "choose a portal size"
+      : overCap ? "over the in-game cap"
+      : ENG.extrapolated() ? "extrapolated size" : "";
+    if (note) tab.dataset.note = note; else delete tab.dataset.note;
+    tab.title = note ? `show or hide setup — ${note}` : "show or hide setup";
   }
 }
 /* Per-member swap advice (engine swapReview): a member's weapon is valued as
@@ -1381,11 +1374,11 @@ function renderWheelFoot(keys, recs, rings){
   const board = BOARD_HTML;
   /* ONE line, carrying only what is NOT already on screen.
      The slot number is the pick card's header, the playstyle
-     is in the masthead and the radar centre, and "party n/n" appeared here
+     is in the masthead and the comp-status headline, and "party n/n" appeared here
      TWICE - once on its own and again as a ring. What survives: the ring
      legend, which is colour-matched to the hub arcs it labels; the
      over-plan warning; and the weapon count, only while a filter narrows
-     the wheel. The forge actions moved to the masthead. */
+     the wheel. The forge actions live in the setup panel. */
   const overPlan = recs !== null && party.length + 1 > PLANNED;
   const narrowed = keys.length !== WEAPONS_BY_NAME.length;
   $("wheel-foot").innerHTML = `
@@ -3008,6 +3001,10 @@ document.addEventListener("click", e => {
     setPanel(id, $(id).dataset.open !== "true");
     return;
   }
+  /* a control outside the rails that opens a panel (the empty comp's
+     "open setup") */
+  const opener = e.target.closest("[data-open-panel]");
+  if (opener){ setPanel(opener.dataset.openPanel, true); return; }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
@@ -3265,6 +3262,9 @@ if (!loadHash() && !loadStored()){
   sortPartyByRole();
 }
 restorePanels();
+/* a link that opens a content with its size ask raised (no n=) shows the
+   ask: the setup panel opens for this visit, the saved layout untouched */
+if (needSize()) setPanel("setup-panel", true, false);
 renderTreeFilter();
 syncEngine();
 render();
@@ -3272,7 +3272,8 @@ render();
 /* Parity guard. PARITY_EXPECTED is injected at build time by running
    engine/engine.py over the same seed party, so this compares the client
    against the Python engine's ACTUAL output rather than a hardcoded name that
-   goes stale the moment a sheet is curated. Reported in the masthead chip. */
+   goes stale the moment a sheet is curated. Reported in the setup panel's
+   chip; a mismatch also raises the masthead alarm. */
 (function parity(){
   if (typeof PARITY_EXPECTED === "undefined" || !SEED.length) return;
   const e2 = new CompEngine(DATASET, PARITY_EXPECTED.content || "castle_outpost",
@@ -3291,16 +3292,18 @@ render();
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
-  /* a mismatch is a warning chip: phones hide the diagnostics chips but
-     never a .warn one, so the verdict reaches every screen */
+  /* a mismatch is a warning chip, and the masthead alarm shows: the
+     verdict reaches every screen whether the setup panel is open or shut */
   if (chip && !ok && chip.parentElement) chip.parentElement.classList.add("warn");
   if (dot && !ok) dot.style.background = "var(--gap)";
+  const alarm = $("parity-alarm");
+  if (alarm) alarm.hidden = ok;
 })();
 
 /* Phones pin only the masthead's summary row (_layout.css, the 640px
    block): the sticky offset is the negative of the row's measured distance
    from the masthead's top, so every row above it scrolls away. Measured on
-   every masthead resize, never fixed - the control row wraps to a varying
+   every masthead resize, never fixed - the brand line wraps to a varying
    line count. On desktop the row is display:contents and measures 0. */
 (function pinMastheadSummary(){
   const mh = document.querySelector(".masthead");

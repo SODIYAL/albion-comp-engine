@@ -38,11 +38,13 @@
   /* ======================== COMP-STATUS RADAR ========================
      The status card IS the diagram: one axis per capability GROUP (the same
      taxonomy the deep board's renderGroups uses, "Other" guard included),
-     plotted as supply vs template target, with everything textual living in
-     hover popups. The center shows what the comp is BECOMING (comp_identity
-     verbatim: playstyle glyph, dashed ring while "leaning", solid when
-     strong); its popup carries status triage, fitness, kill pressure, and
-     the role advisory. Pure display translation of existing engine output —
+     plotted as supply vs the comp-fitted ceiling, with the detail living in
+     hover popups. The HEADLINE above the diagram says what the comp is
+     BECOMING (comp_identity verbatim: playstyle glyph and name, the
+     strength beside it, brass once strong); its popup carries status
+     triage, fitness, kill pressure, and the role advisory. The diagram
+     itself is the coverage shape alone: no centre label, no per-axis
+     target mark. Pure display translation of existing engine output —
      nothing here scores (F-V3-2, R5). */
   const DL_ICONS = {
     plus:      "M12 4v16M4 12h16",
@@ -117,8 +119,9 @@
      supply is counted up to its own soft cap, so coverage can never
      exceed 100 and one overstacked capability can't mask its siblings'
      gaps; beyond-ceiling stacking shows as the purple marker, never as a
-     bigger number. Each axis carries a brass TICK at the target minimum
-     (Σ target / Σ soft). */
+     bigger number. Each axis knows its target minimum (`tick`, Σ target /
+     Σ soft): the popup's "target met" reads it; the diagram draws no mark
+     for it. */
   function radarAxes(){
     const s = supply(party);
     const sfl = supplyFloor(party);   /* Option C floor basis (standing
@@ -156,7 +159,7 @@
     const rows = a.rows.map(r =>
       `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)} · cap ${r.soft.toFixed(1)}</span></div>`).join("");
     return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
-      + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap); the brass tick marks the target minimum</div>`;
+      + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap)</div>`;
   }
   /* Kill pressure and role check are DESCRIPTIVE — they translate engine
      output and never score. The radar tooltip and the standalone cards both
@@ -280,16 +283,18 @@
     return DL_MEMO.adv;
   }
   function identityCenter(id){
-    /* glyph + short label for the hollow center */
-    if (!id || !id.label) return {glyph: "forming", name: "FORMING", sub: "", firm: false};
-    if (id.archetype === "bomb_squad") return {glyph: "bomb", name: "BOMB SQUAD", sub: id.strength || "", firm: id.strength === "strong"};
+    /* glyph + short label: `name` for the status bar's caps, `title` for
+       the comp-status headline */
+    const forming = {glyph: "forming", name: "FORMING", title: "Forming", sub: "", firm: false};
+    if (!id || !id.label) return forming;
+    if (id.archetype === "bomb_squad") return {glyph: "bomb", name: "BOMB SQUAD", title: "Bomb squad", sub: id.strength || "", firm: id.strength === "strong"};
     if (id.style){
       const nm = ((DATASET.styles || {})[id.style] || {}).name || id.style;
-      return {glyph: DL_ICONS[id.style] ? id.style : "dot", name: nm.toUpperCase(),
+      return {glyph: DL_ICONS[id.style] ? id.style : "dot", name: nm.toUpperCase(), title: nm,
               sub: id.strength || "", firm: id.strength === "strong"};
     }
-    if (id.label.indexOf("split") === 0) return {glyph: "split", name: "SPLIT", sub: "", firm: false};
-    return {glyph: "forming", name: "FORMING", sub: "", firm: false};
+    if (id.label.indexOf("split") === 0) return {glyph: "split", name: "SPLIT", title: "Split", sub: "", firm: false};
+    return forming;
   }
   function statusRadar(state){
     DL_TIPS = [];
@@ -302,16 +307,28 @@
     const py = (a, r) => (cy + r * Math.sin(a)).toFixed(1);
     const rOf = cov => R * Math.max(0, Math.min(cov, 1));
     const ringPts = f => axes.map((_, i) => `${px(ang(i), rOf(f))},${py(ang(i), rOf(f))}`).join(" ");
-    let s = `<svg class="dl-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="Capability-group coverage versus the comp-fitted ceiling — hover the icons for detail">`;
+    /* the identity headline — the memoised model syncSbIdentity also
+       reads, so the headline and the status bar can never disagree */
+    const id = identityModel();
+    const c = identityCenter(id);
+    const f = fitness(party), max = maxFitness();
+    const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
+    const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
+    const adv = roleAdvisory();
+    const hasWarn = (id && id.conflicts.length) || (adv && adv.flags.length);
+    const gk = c.glyph, gcol = c.firm ? "var(--brass-bright)" : "var(--ink-2)";
+    let s = `<div class="dl-ident${c.firm ? " firm" : ""}" data-dltip="${ctip}">`
+      + `<svg class="dl-ident-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="${DL_ICONS[gk]}" fill="${DL_ICON_FILL[gk] ? gcol : "none"}" stroke="${gcol}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+      + `<strong>${esc(c.title)}</strong>`
+      + (c.sub ? `<span class="dl-ident-sub">${esc(c.sub)}</span>` : "")
+      + (hasWarn ? `<span class="dl-ident-warn" aria-label="warnings in the detail">⚠</span>` : "")
+      + `</div>`;
+    s += `<svg class="dl-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="Capability-group coverage versus the comp-fitted ceiling — hover the icons for detail">`;
     for (const f of [0.25, 0.5, 0.75])
       s += `<polygon points="${ringPts(f)}" fill="none" stroke="var(--rule)"/>`;
     s += `<polygon points="${ringPts(1)}" fill="none" stroke="var(--rule-2)" opacity=".9"/>`;
     axes.forEach((a, i) => {
       s += `<line x1="${cx}" y1="${cy}" x2="${px(ang(i), R)}" y2="${py(ang(i), R)}" stroke="var(--rule)" opacity=".7"/>`;
-      /* the target minimum: a brass tick across the spoke */
-      const rT = rOf(a.tick), k = 4.5;
-      const txc = cx + rT * Math.cos(ang(i)), tyc = cy + rT * Math.sin(ang(i));
-      s += `<line x1="${(txc + k * Math.sin(ang(i))).toFixed(1)}" y1="${(tyc - k * Math.cos(ang(i))).toFixed(1)}" x2="${(txc - k * Math.sin(ang(i))).toFixed(1)}" y2="${(tyc + k * Math.cos(ang(i))).toFixed(1)}" stroke="var(--brass-deep)" stroke-width="1.6"/>`;
     });
     const pts = axes.map((a, i) => [px(ang(i), rOf(a.cov)), py(ang(i), rOf(a.cov))]);
     s += `<polygon points="${pts.map(p => p.join(",")).join(" ")}" fill="rgba(35,191,110,.20)" stroke="var(--ok)" stroke-width="1.8" stroke-linejoin="round"/>`;
@@ -323,23 +340,6 @@
       s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)}`
         + `<text x="${ix}" y="${iy + 20}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
     });
-    /* identity center — the memoised model syncSbIdentity also reads, so
-       the hollow centre and the status bar can never disagree */
-    const id = identityModel();
-    const c = identityCenter(id);
-    const f = fitness(party), max = maxFitness();
-    const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
-    const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
-    const adv = roleAdvisory();
-    const hasWarn = (id && id.conflicts.length) || (adv && adv.flags.length);
-    const nameSize = c.name.length > 7 ? 7 : 8.5;
-    s += `<g data-dltip="${ctip}" class="dl-radar-hit">`
-      + `<circle cx="${cx}" cy="${cy}" r="33" fill="var(--panel-lo)" stroke="var(--brass-deep)" stroke-width="1.3"${c.firm ? "" : ' stroke-dasharray="4 4"'}/>`
-      + dlIcon(cx, cy - 9, 17, c.glyph, "var(--brass)")
-      + `<text x="${cx}" y="${cy + 12}" text-anchor="middle" class="dlr-id" font-size="${nameSize}">${esc(c.name)}</text>`
-      + (c.sub ? `<text x="${cx}" y="${cy + 22}" text-anchor="middle" class="dlr-sub">${esc(c.sub.toUpperCase())}</text>` : "")
-      + (hasWarn ? `<text x="${cx + 25}" y="${cy - 22}" text-anchor="middle" class="dlr-warn">⚠</text>` : "")
-      + `</g>`;
     s += `</svg>`;
     return s;
   }
@@ -632,7 +632,8 @@
     if (!party.length){
       host.innerHTML = `<div class="dl-status dl-empty">
         <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
-        <p>Choose the content and playstyle, then add the weapons you already have. Comp Zaddy will diagnose the gaps before suggesting the next slot.</p></div>
+        <p>Choose the content, playstyle and size in the setup panel, then add the weapons you already have or forge a full comp. Comp Zaddy will diagnose the gaps before suggesting the next slot.</p>
+        <button class="cb-forge dl-open-setup" data-open-panel="setup-panel">open setup</button></div>
       </div>`;
       renderPlayerTools(host);
       return;

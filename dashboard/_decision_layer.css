@@ -12,16 +12,22 @@
 .dl-status .dl-radar{margin:0 auto}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-/* comp-status radar: the status card is the diagram —
-   axis icons in the group's color, identity glyph in the center, every
-   textual detail in the shared popup (#dl-tip). Display only. */
+/* comp-status radar: the status card is the identity headline over the
+   diagram — axis icons in the group's color, the coverage shape, every
+   further detail in the shared popup (#dl-tip). Display only. */
 .dl-radar{width:min(410px,100%);height:auto;overflow:visible;display:block}
 .dl-radar text{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .dl-radar-hit{cursor:default}
 .dlr-pct{font-size:9px;fill:var(--ink-3)}
-.dlr-id{fill:var(--brass-bright);font-weight:700;letter-spacing:.16em}
-.dlr-sub{font-size:6.5px;fill:var(--ink-3);letter-spacing:.14em}
-.dlr-warn{font-size:11px;fill:var(--amber)}
+/* the headline: what the comp is becoming. Muted while leaning or
+   forming, brass once strong (the status bar's own signal) */
+.dl-ident{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;cursor:default}
+.dl-ident-glyph{width:20px;height:20px;flex:none;align-self:center}
+.dl-status .dl-ident strong{display:inline;margin:0;font-size:24px;line-height:1.1;color:var(--ink)}
+.dl-status .dl-ident.firm strong{color:var(--brass-bright)}
+.dl-ident-sub{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.dl-ident-warn{font-size:13px;color:var(--amber)}
+.dl-open-setup{margin-top:12px}
 #dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;max-width:300px;
   background:var(--bg-deep);border:1px solid var(--rule-2);border-radius:9px;
   padding:8px 11px;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:var(--ink-2);
