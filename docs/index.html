@@ -1767,19 +1767,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
 /* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
-   2+1 and made the orphan look like the biggest gain. One row each, and
-   each row carries its own verdict so a second box need not repeat it. */
+   2+1 and made the orphan look like the biggest gain. One LINE each (gain,
+   capability, the numbers, the verdict), and each line carries its own
+   verdict so a second box need not repeat it. */
 .dl-gains{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
 .dl-gains li{
-  display:grid;grid-template-columns:auto 1fr auto;gap:3px 9px;align-items:baseline;
-  padding:5px 0;border-top:1px solid var(--rule);font-size:12px;color:var(--ink-2);
+  display:grid;grid-template-columns:auto auto 1fr auto;gap:0 9px;align-items:baseline;
+  padding:4px 0;border-top:1px solid var(--rule);font-size:12px;color:var(--ink-2);
 }
 .dl-gains li:first-child{border-top:0}
 .dl-gains b{color:var(--ok-bright);font-family:var(--mono);font-size:12px}
 .dl-gain-cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.dl-gain-n{grid-column:3;font-family:var(--mono);font-size:10px;color:var(--ink-3);white-space:nowrap}
 .dl-gain-v{
-  grid-column:3;grid-row:1;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  grid-column:4;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
   text-transform:uppercase;padding:2px 6px;border-radius:99px;white-space:nowrap;
 }
 .dl-gains li.closes .dl-gain-v{color:var(--ok-bright);background:rgba(35,191,110,.10)}
