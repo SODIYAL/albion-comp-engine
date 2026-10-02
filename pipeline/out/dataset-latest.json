@@ -263646,6 +263646,11 @@
    "fit": {
     "comps": 927,
     "dressed": "doctrine",
+    "fielded": {
+     "min_guild_sets": 3,
+     "min_rosters": 5,
+     "share_of_top": 0.05
+    },
     "fitted_pool": "4-5",
     "floor": 40,
     "pools": {
@@ -263689,6 +263694,193 @@
    },
    "max_size": 20,
    "name": "Dragon Portal",
+   "pool_fielded": {
+    "2-3": {
+     "rosters": 962,
+     "sizes": [
+      2,
+      3
+     ],
+     "weapons": [
+      "2H_ARCANESTAFF_CRYSTAL",
+      "2H_AXE",
+      "2H_AXE_AVALON",
+      "2H_BOW",
+      "2H_BOW_AVALON",
+      "2H_BOW_CRYSTAL",
+      "2H_BOW_KEEPER",
+      "2H_CLAYMORE",
+      "2H_CLAYMORE_AVALON",
+      "2H_CLEAVER_HELL",
+      "2H_CROSSBOWLARGE",
+      "2H_CROSSBOW_CANNON_AVALON",
+      "2H_DAGGERPAIR",
+      "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+      "2H_DUALAXE_KEEPER",
+      "2H_DUALCROSSBOW_CRYSTAL",
+      "2H_DUALCROSSBOW_HELL",
+      "2H_DUALHAMMER_HELL",
+      "2H_DUALMACE_AVALON",
+      "2H_DUALSICKLE_UNDEAD",
+      "2H_DUALSWORD",
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_FROSTSTAFF_CRYSTAL",
+      "2H_HALBERD_MORGANA",
+      "2H_HAMMER",
+      "2H_HOLYSTAFF",
+      "2H_HOLYSTAFF_UNDEAD",
+      "2H_KNUCKLES_AVALON",
+      "2H_KNUCKLES_HELL",
+      "2H_KNUCKLES_SET1",
+      "2H_KNUCKLES_SET2",
+      "2H_LONGBOW",
+      "2H_LONGBOW_UNDEAD",
+      "2H_MACE",
+      "2H_NATURESTAFF",
+      "2H_NATURESTAFF_HELL",
+      "2H_POLEHAMMER",
+      "2H_QUARTERSTAFF",
+      "2H_SCYTHE_CRYSTAL",
+      "2H_SHAPESHIFTER_AVALON",
+      "2H_SHAPESHIFTER_HELL",
+      "2H_SHAPESHIFTER_MORGANA",
+      "2H_SHAPESHIFTER_SET2",
+      "MAIN_1HCROSSBOW",
+      "MAIN_ARCANESTAFF",
+      "MAIN_AXE",
+      "MAIN_CURSEDSTAFF",
+      "MAIN_CURSEDSTAFF_CRYSTAL",
+      "MAIN_FIRESTAFF",
+      "MAIN_FIRESTAFF_CRYSTAL",
+      "MAIN_FROSTSTAFF",
+      "MAIN_HOLYSTAFF",
+      "MAIN_HOLYSTAFF_AVALON",
+      "MAIN_HOLYSTAFF_MORGANA",
+      "MAIN_MACE",
+      "MAIN_NATURESTAFF",
+      "MAIN_NATURESTAFF_CRYSTAL",
+      "MAIN_SPEAR_KEEPER"
+     ]
+    },
+    "4-5": {
+     "rosters": 927,
+     "sizes": [
+      4,
+      5
+     ],
+     "weapons": [
+      "2H_ARCANESTAFF_CRYSTAL",
+      "2H_AXE",
+      "2H_AXE_AVALON",
+      "2H_BOW",
+      "2H_BOW_AVALON",
+      "2H_BOW_KEEPER",
+      "2H_CLAYMORE",
+      "2H_CLAYMORE_AVALON",
+      "2H_CLEAVER_HELL",
+      "2H_CROSSBOWLARGE",
+      "2H_CROSSBOW_CANNON_AVALON",
+      "2H_DAGGERPAIR",
+      "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+      "2H_DUALAXE_KEEPER",
+      "2H_DUALCROSSBOW_CRYSTAL",
+      "2H_DUALCROSSBOW_HELL",
+      "2H_DUALHAMMER_HELL",
+      "2H_DUALMACE_AVALON",
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_FROSTSTAFF_CRYSTAL",
+      "2H_HALBERD_MORGANA",
+      "2H_HAMMER",
+      "2H_HOLYSTAFF",
+      "2H_HOLYSTAFF_UNDEAD",
+      "2H_INFERNOSTAFF",
+      "2H_INFERNOSTAFF_MORGANA",
+      "2H_KNUCKLES_HELL",
+      "2H_LONGBOW",
+      "2H_LONGBOW_UNDEAD",
+      "2H_MACE",
+      "2H_NATURESTAFF_HELL",
+      "2H_POLEHAMMER",
+      "2H_SCYTHE_CRYSTAL",
+      "2H_SHAPESHIFTER_AVALON",
+      "2H_SHAPESHIFTER_HELL",
+      "2H_SHAPESHIFTER_MORGANA",
+      "2H_SHAPESHIFTER_SET2",
+      "2H_SHAPESHIFTER_SET3",
+      "MAIN_AXE",
+      "MAIN_CURSEDSTAFF_CRYSTAL",
+      "MAIN_FIRESTAFF",
+      "MAIN_FROSTSTAFF",
+      "MAIN_HOLYSTAFF",
+      "MAIN_HOLYSTAFF_AVALON",
+      "MAIN_MACE",
+      "MAIN_MACE_HELL",
+      "MAIN_SPEAR_KEEPER"
+     ]
+    },
+    "6-7": {
+     "rosters": 144,
+     "sizes": [
+      6,
+      7
+     ],
+     "weapons": [
+      "2H_ARCANESTAFF_CRYSTAL",
+      "2H_AXE",
+      "2H_AXE_AVALON",
+      "2H_BOW",
+      "2H_BOW_AVALON",
+      "2H_BOW_KEEPER",
+      "2H_CLAYMORE_AVALON",
+      "2H_CLEAVER_HELL",
+      "2H_CROSSBOW",
+      "2H_CROSSBOWLARGE",
+      "2H_CROSSBOW_CANNON_AVALON",
+      "2H_DAGGERPAIR",
+      "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+      "2H_DUALAXE_KEEPER",
+      "2H_DUALHAMMER_HELL",
+      "2H_DUALMACE_AVALON",
+      "2H_DUALSICKLE_UNDEAD",
+      "2H_DUALSWORD",
+      "2H_ENIGMATICSTAFF",
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_FROSTSTAFF_CRYSTAL",
+      "2H_HALBERD_MORGANA",
+      "2H_HAMMER",
+      "2H_HOLYSTAFF",
+      "2H_HOLYSTAFF_UNDEAD",
+      "2H_ICECRYSTAL_UNDEAD",
+      "2H_INFERNOSTAFF",
+      "2H_INFERNOSTAFF_MORGANA",
+      "2H_KNUCKLES_SET2",
+      "2H_LONGBOW",
+      "2H_MACE",
+      "2H_NATURESTAFF_HELL",
+      "2H_POLEHAMMER",
+      "2H_QUARTERSTAFF_AVALON",
+      "2H_SCYTHE_CRYSTAL",
+      "2H_SCYTHE_HELL",
+      "2H_SHAPESHIFTER_AVALON",
+      "2H_SHAPESHIFTER_HELL",
+      "2H_SHAPESHIFTER_KEEPER",
+      "2H_SHAPESHIFTER_MORGANA",
+      "2H_SHAPESHIFTER_SET2",
+      "2H_SHAPESHIFTER_SET3",
+      "MAIN_1HCROSSBOW",
+      "MAIN_AXE",
+      "MAIN_CURSEDSTAFF",
+      "MAIN_CURSEDSTAFF_CRYSTAL",
+      "MAIN_FIRESTAFF",
+      "MAIN_FROSTSTAFF",
+      "MAIN_HOLYSTAFF",
+      "MAIN_HOLYSTAFF_AVALON",
+      "MAIN_MACE",
+      "MAIN_MACE_HELL",
+      "MAIN_SPEAR_KEEPER"
+     ]
+    }
+   },
    "pool_rows": {
     "2-3": {
      "comps": 962,
@@ -263703,8 +263895,8 @@
       "burst_aoe": {
        "min": 1.05,
        "scales": true,
-       "soft_cap": 7.5,
-       "target": 3.77
+       "soft_cap": 7.53,
+       "target": 3.8
       },
       "burst_st": {
        "min": 0,
@@ -263713,7 +263905,7 @@
        "target": 1.45
       },
       "catch": {
-       "min": 1,
+       "min": 0,
        "scales": true,
        "soft_cap": 4.6,
        "target": 2
@@ -263776,7 +263968,7 @@
        "min": 3.5,
        "scales": true,
        "soft_cap": 9.77,
-       "target": 6
+       "target": 5.5
       },
       "peel": {
        "min": 1,
@@ -263788,10 +263980,10 @@
        "none": true
       },
       "resist_shred": {
-       "min": 0,
+       "min": 1,
        "scales": false,
-       "soft_cap": 3.45,
-       "target": 1
+       "soft_cap": 4.02,
+       "target": 2
       },
       "root": {
        "min": 0,
@@ -263851,14 +264043,14 @@
       "buff_allies": {
        "min": 1,
        "scales": false,
-       "soft_cap": 8.57,
+       "soft_cap": 8.05,
        "target": 3
       },
       "burst_aoe": {
-       "min": 5.56,
+       "min": 5.61,
        "scales": true,
-       "soft_cap": 15.42,
-       "target": 9.73
+       "soft_cap": 15.55,
+       "target": 9.75
       },
       "burst_st": {
        "min": 0,
@@ -263891,7 +264083,7 @@
        "target": 7
       },
       "engage": {
-       "min": 3.1,
+       "min": 3,
        "scales": false,
        "soft_cap": 10.35,
        "target": 6
@@ -263927,7 +264119,7 @@
        "min": 0,
        "scales": true,
        "soft_cap": 6.9,
-       "target": 2.92
+       "target": 2.77
       },
       "max_health_cut": {
        "none": true
@@ -263942,7 +264134,7 @@
        "min": 7,
        "scales": true,
        "soft_cap": 23.43,
-       "target": 12.5
+       "target": 12.38
       },
       "purge": {
        "min": 0,
@@ -263953,14 +264145,14 @@
       "resist_shred": {
        "min": 2,
        "scales": false,
-       "soft_cap": 6.84,
+       "soft_cap": 7.47,
        "target": 4
       },
       "root": {
-       "min": 1.28,
+       "min": 2.1,
        "scales": true,
-       "soft_cap": 8.71,
-       "target": 3.75
+       "soft_cap": 10.93,
+       "target": 5.42
       },
       "self_sustain": {
        "min": 2,
@@ -263974,14 +264166,14 @@
       "slow": {
        "min": 1,
        "scales": true,
-       "soft_cap": 9.06,
-       "target": 3.08
+       "soft_cap": 9.24,
+       "target": 3.14
       },
       "stun": {
        "min": 0,
        "scales": true,
-       "soft_cap": 13.99,
-       "target": 3.98
+       "soft_cap": 12.2,
+       "target": 3.7
       },
       "sustained_dps": {
        "min": 24.66,
@@ -263993,7 +264185,7 @@
        "min": 15.26,
        "scales": true,
        "soft_cap": 31.85,
-       "target": 22.02
+       "target": 22.14
       },
       "zone_control": {
        "min": 1.17,
@@ -264024,14 +264216,14 @@
      "min": 0,
      "scales": false,
      "soft_cap": 5.75,
-     "target": 2,
+     "target": 1.5,
      "weight": 1.5
     },
     "burst_aoe": {
-     "min": 2.45,
+     "min": 2.5,
      "scales": true,
-     "soft_cap": 11.15,
-     "target": 6.25,
+     "soft_cap": 11.21,
+     "target": 6.44,
      "weight": 6.4
     },
     "burst_st": {
@@ -264091,7 +264283,7 @@
     "engage": {
      "min": 2,
      "scales": false,
-     "soft_cap": 8.05,
+     "soft_cap": 6.9,
      "target": 4,
      "weight": 3.7
     },
@@ -264181,15 +264373,15 @@
     "resist_shred": {
      "min": 1,
      "scales": false,
-     "soft_cap": 4.6,
+     "soft_cap": 5.17,
      "target": 2.5,
      "weight": 4.3
     },
     "root": {
      "min": 0,
      "scales": true,
-     "soft_cap": 5,
-     "target": 2,
+     "soft_cap": 5.89,
+     "target": 2.62,
      "weight": 1.9
     },
     "self_sustain": {
@@ -264213,14 +264405,14 @@
     "slow": {
      "min": 0,
      "scales": true,
-     "soft_cap": 5.67,
+     "soft_cap": 5.75,
      "target": 2.5,
      "weight": 1
     },
     "stun": {
      "min": 0,
      "scales": true,
-     "soft_cap": 10.56,
+     "soft_cap": 8.06,
      "target": 1.65,
      "weight": 4.4
     },
@@ -264234,8 +264426,8 @@
     "tankiness": {
      "min": 11.5,
      "scales": true,
-     "soft_cap": 23.21,
-     "target": 16.15,
+     "soft_cap": 23.35,
+     "target": 16.32,
      "weight": 7.9
     },
     "zone_control": {

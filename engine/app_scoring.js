@@ -583,6 +583,22 @@
         this._suggest = kept2;
       }
     }
+    /* Pool-fielded gate (mirrors engine.py): at a size inside a
+       matchmaking pool that carries `pool_fielded`, a weapon its dominant
+       winners do not field leaves the suggestion pool; scoring is never
+       blocked. No list for the size: nothing gated. */
+    this._unfielded = {};
+    var fielded = this._poolFielded(this.size);
+    if (fielded) {
+      var kept3 = [];
+      for (i = 0; i < this.pool.length; i++) {
+        if (!fielded[this.pool[i]]) this._unfielded[this.pool[i]] = true;
+      }
+      for (i = 0; i < this._suggest.length; i++) {
+        if (!this._unfielded[this._suggest[i]]) kept3.push(this._suggest[i]);
+      }
+      this._suggest = kept3;
+    }
     this._viability = {};
     if (this.size >= ((via.core_min_size === undefined) ? 10 : via.core_min_size)) {
       var bonus = (via.core_bonus === undefined) ? 1.0 : via.core_bonus;
@@ -976,6 +992,12 @@
     /* Unfit for the DECLARED style at this size band — bars suggestions
        only, never scoring (mirrors engine.py is_style_unfit). */
     return !!this._styleUnfit[weapon];
+  };
+
+  CompEngine.prototype.isUnfielded = function (weapon) {
+    /* The size sits in a matchmaking pool whose winners do not field the
+       weapon — bars suggestions only (mirrors engine.py is_unfielded). */
+    return !!this._unfielded[weapon];
   };
 
   CompEngine.prototype.isExcluded = function (weapon) {
@@ -2985,6 +3007,22 @@
     /* The weapon's derived style/size identity; null on pre-identity
        datasets (mirrors engine.py _style_fit_of). */
     return this.weapons[weapon].style_fit || null;
+  };
+
+  /* the weapons the dominant winners of the pool covering `size` field
+     (template pool_fielded), as a lookup; null where no pool covers the
+     size (mirrors engine.py _pool_fielded) */
+  CompEngine.prototype._poolFielded = function (size) {
+    var pools = this.template.pool_fielded || {};
+    for (var key in pools) {
+      var row = pools[key];
+      if (row.sizes[0] <= size && size <= row.sizes[1]) {
+        var out = {};
+        for (var i = 0; i < row.weapons.length; i++) out[row.weapons[i]] = true;
+        return out;
+      }
+    }
+    return null;
   };
 
   /* the matchmaking pool whose sizes cover `size` (template pool_rows,

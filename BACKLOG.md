@@ -18,15 +18,25 @@ Each is decidable today from evidence already in the repo.
   scaled and the style x size rows at 10+. `derive_portal_rows.py` gives
   it rows of its own once the poll has filled it; whether a large portal
   party is its own pool or the ZvZ rows is the decision to take then.
-- **The popularity baseline on the portal pools**: after the rows, the
-  gate and the weights were fitted, the engine names the dropped weapon
-  in its top 3 on 10% / 14% / 12% of drops at 2-3 / 4-5 / 6-7 and the
-  role-need-then-popularity baseline on 25% / 20% / 15% (role-level the
-  engine leads or ties). The engine's within-role choice (a Great Hammer
-  where winners field the Heavy Mace, Hellfire Hands where they field the
-  Bow) is the gap; whether the small-pool meta prior should bucket by
-  content, or the Bow's sustained ranged pressure is under-credited by
-  the capability sheets, is the question to settle from evidence.
+- **The popularity baseline on the portal pools**: with the pool-fielded
+  gate on, the engine names the hidden member in its top 3 on 9.5% /
+  19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
+  without the gate); the pool's three most fielded weapons name it on
+  27.3% / 29.6% / 13.9%. At role level the engine leads (76% / 62% / 46%
+  against 47% / 52% / 38%). Inside the list the engine still prefers a
+  wide sheet (Battle Bracers and Crystal Reaper over the Rotcaller Staff
+  and the Longbow, which 26% and 20% of 6-7 winners field): the capability
+  score pays a first unit on many rows more than depth on one. Whether
+  the meta prior should bucket by content with a larger `delta` at the
+  portal, or the sheets under-credit sustained ranged pressure, is the
+  question to settle from evidence.
+- **The fielded gate beyond the portal**: the gate applies where a
+  matchmaking pool has its own harvest (the Dragon Portal's 2-3, 4-5 and
+  6-7). The 10+ contents generate through the seat skeleton and the
+  style bands with no weapon-level evidence gate; whether a style x band
+  fielded list (the killer party of 10+, the kit doctrine's unit) should
+  gate their generation is a decision to take from the same holdout
+  measure.
 - **A blind validation round on the portal pools**: `validated_sizes` is
   empty for `ancient_lands`, so the page flags every size as extrapolated.
   The rows are measured; the round (one form per pool, graded before the

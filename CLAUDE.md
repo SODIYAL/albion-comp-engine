@@ -234,7 +234,7 @@ One-way, provenance-checked data flow:
    multipliers, delivery mechanics, a fight chain) + `composition.yaml` +
    `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`,
    `out/meta_prior.json` and the Dragon Portal's rows (`ancient_lands.yaml`: base
-   rows plus `pool_rows` per matchmaking pool, `derive_portal_rows.py`) are
+   rows plus `pool_rows` and `pool_fielded` per matchmaking pool, `derive_portal_rows.py`) are
    GENERATED from the harvest — never hand-edit.
 5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
    `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from
@@ -247,7 +247,9 @@ One-way, provenance-checked data flow:
    descriptive analyzers (`comp_identity`, `kill_pressure`, `fight_chain`,
    `pick_report`, `analyze`, the role layer) — parity-carried, never a scoring input.
 8. Suggestion pools go through `suggest_pool()`: viability exclusions, the style
-   gate, the generation-fit gate. They bar POOLS only; manual picks always score.
+   gate, the generation-fit gate, and inside a Dragon Portal pool the
+   pool-fielded gate (the weapons the pool's dominant winners field). They
+   bar POOLS only; manual picks always score.
 9. Kits: `kit_options` is doctrine-led and fail-closed — every slot serves what
    harvested winners wear (`_seat_kit` picks the band and style cell); where
    evidence runs out it proposes nothing.

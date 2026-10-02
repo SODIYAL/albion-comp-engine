@@ -478,6 +478,11 @@ check(".ring.low{" in SHELL and ".cap-sw.low{" in SHELL,
 check(".tag.src{" not in SHELL, "L20i the retired src chip took its selector with it")
 why = seg(APP, "function whySentence", "function loadHash", "L20 why anchors")
 check("c !== lead.cap" in why, "L20g the lead gap never appears in 'already covers'")
+# the pick is explained one player ahead: its lead capability can be a
+# requirement at the next size and none at the judged one (a portal pool's
+# none row), where target(cap) has no row and the render stopped mid-pass
+check("lead.target.toFixed(1)" in why and "target(lead.cap)" not in why,
+      "L20g2 the why sentence reads the term's own typical, never a row the judged size may lack")
 sync = seg(APP, "function syncEngine", "function gearsFromLoadout", "L20 sync anchors")
 check("PLANNED = Math.max(PLANNED, party.length)" in sync,
       "L20h the SIZE stepper follows roster growth on every path")

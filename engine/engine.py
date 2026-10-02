@@ -667,6 +667,27 @@ class Engine:
             if self._gen_situational:
                 self._suggest = [w for w in self._suggest
                                  if w not in self._gen_situational]
+        # Pool-fielded gate (the Dragon Portal, pipeline/
+        # derive_portal_rows.py): a template may carry `pool_fielded`, per
+        # matchmaking pool the weapons its dominant winners field (the
+        # evidence unit of the pool's rows, training split, generated).
+        # At a size inside such a pool a weapon outside the list leaves
+        # the suggestion pool, exactly like a viability exclusion: barred
+        # from suggestions and generation, never from scoring. The kit
+        # doctrine applied to the weapon: a default comp proposes what
+        # winners of this pool field, and where the evidence names
+        # nothing it proposes nothing. Measured: the capability score
+        # ranked wide-sheet weapons no winner fields first (Claws and
+        # Hand of Justice, 1 of 162 dominant 6-7 parties each, forged in
+        # every style); on the holdout the gate lifts the hidden member's
+        # top-3 hit in every pool (tests/VALIDATION.md, F35). No list for
+        # the size: nothing gated.
+        self._unfielded = set()
+        fielded = self._pool_fielded(self.size)
+        if fielded is not None:
+            self._unfielded = {w for w in self.pool if w not in fielded}
+            self._suggest = [w for w in self._suggest
+                             if w not in self._unfielded]
         self._viability = {}
         if self.size >= via.get("core_min_size", 10):
             bonus = via.get("core_bonus", 1.0)
@@ -3328,6 +3349,23 @@ class Engine:
             if lo <= size <= hi:
                 return dict(row, key=key)
         return None
+
+    def _pool_fielded(self, size):
+        """The weapons the dominant winners of the matchmaking pool
+        covering `size` field (the template's `pool_fielded`,
+        derive_portal_rows.py), as a set; None where no pool covers the
+        size (nothing gated)."""
+        for row in (self.template.get("pool_fielded") or {}).values():
+            lo, hi = row["sizes"]
+            if lo <= size <= hi:
+                return set(row["weapons"])
+        return None
+
+    def is_unfielded(self, weapon):
+        """True when the size sits in a matchmaking pool whose winners do
+        not field the weapon (`pool_fielded`). Bars suggestions only;
+        scoring is never blocked."""
+        return weapon in self._unfielded
 
     def _fit_band(self):
         """Size band for style-fit verdicts: trio <=3, gang 4-9, group 10+

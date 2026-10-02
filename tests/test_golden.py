@@ -1762,6 +1762,23 @@ def run():
           f"five={[e5p.weapons[w]['display_name'] for w in f5]} roles={r5}; "
           f"first={e5p.weapons[first5]['display_name']}")
 
+    # T51 — a forged Dragon Portal comp fields what the pool's winners
+    # field. The forged 7 in clap carried Claws and Hand of Justice (1 of
+    # 162 dominant 6-7 parties each) and Dreadstorm Monarch (4 of 162): the
+    # capability score ranks a wide sheet first whether or not any winner
+    # fields the weapon. The pool-fielded gate (F35) keeps generation
+    # inside the pool's list; recorded from a report on the page.
+    e7c = Engine(content="ancient_lands", size=7, style="clap")
+    f7 = e7c.forge(7)["party"]
+    listed7 = set(e7c.template["pool_fielded"]["6-7"]["weapons"])
+    off7 = {"Claws", "Hand of Justice", "Dreadstorm Monarch"}
+    names7 = [e7c.weapons[w]["display_name"] for w in f7]
+    r7c = [e7c.role_of(w) for w in f7]
+    check("T51 Dragon Portal 6-7 in clap: the forged seven fields only weapons the pool's "
+          "dominant winners field (no Claws, Hand of Justice or Dreadstorm Monarch), with one healer",
+          set(f7) <= listed7 and not (off7 & set(names7)) and r7c.count("healer") == 1,
+          f"seven={names7} roles={r7c}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

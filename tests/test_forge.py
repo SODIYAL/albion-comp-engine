@@ -1494,6 +1494,68 @@ def t_portal_rows():
           str(none3))
 
 
+def t_portal_fielded():
+    """F35 — the pool-fielded gate: inside a Dragon Portal pool the
+    suggestion pool holds only weapons the pool's dominant winners field
+    (`pool_fielded`, pipeline/derive_portal_rows.py). Suggestions and
+    generation only; a manual pick always scores."""
+    import yaml
+    with open(os.path.join(ROOT, "pipeline", "templates", "ancient_lands.yaml"), encoding="utf-8") as f:
+        tpl = yaml.safe_load(f)
+    pf = tpl.get("pool_fielded") or {}
+    th = (tpl.get("fit") or {}).get("fielded") or {}
+    e5 = Engine(content="ancient_lands", size=5)
+    cat = e5.weapons
+    check("F35a the 2-3, 4-5 and 6-7 pools each list their fielded weapons: at least 40 distinct "
+          "rosters, catalog keys listed once, under the honesty gate (5 rosters, 3 guild-sets) "
+          "and the signal floor (5% of the top weapon's rosters)",
+          set(pf) == {"2-3", "4-5", "6-7"}
+          and all(p["rosters"] >= 40 and p["weapons"] and len(set(p["weapons"])) == len(p["weapons"])
+                  and all(w in cat for w in p["weapons"]) for p in pf.values())
+          and th == {"min_rosters": 5, "min_guild_sets": 3, "share_of_top": 0.05},
+          f"{ {k: len(p['weapons']) for k, p in pf.items()} } thresholds={th}")
+    classes = lambda ws: {e5.role_of(w) for w in ws}
+    check("F35b every list keeps a healer, a frontline and a damage dealer (the roles the pool's rows ask for)",
+          all({"healer", "frontline", "dps"} <= classes(p["weapons"]) for p in pf.values()),
+          str({k: sorted(classes(p["weapons"])) for k, p in pf.items()}))
+    ok, detail = True, []
+    for key, size in (("2-3", 3), ("4-5", 5), ("6-7", 7)):
+        listed = set(pf[key]["weapons"])
+        for style in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+            e = Engine(content="ancient_lands", size=size, style=style)
+            sp = set(e.suggest_pool())
+            r = e.forge(size)
+            good = (sp <= listed and bool(sp) and r["feasible"] and not r["filler"]
+                    and len(r["party"]) == size and set(r["party"]) <= listed
+                    and all(e.is_unfielded(w) == (w not in listed) for w in e.pool))
+            ok = ok and good
+            if not good:
+                detail.append(f"{key}/{style}: feasible={r['feasible']} filler={r['filler']} "
+                              f"outside={[cat[w]['display_name'] for w in r['party'] if w not in listed]}")
+    check("F35c inside a pool, in every style, the suggestion pool sits inside the pool's list and "
+          "a forged comp is feasible, complete and fields listed weapons only",
+          ok, "; ".join(detail) or "3 pools x 6 styles")
+    e7 = Engine(content="ancient_lands", size=7, style="clap")
+    claws = next(k for k, w in cat.items() if w["display_name"] == "Claws")
+    base = e7.forge(7)
+    party = base["party"][:6]
+    rec = e7.recommend(party, 1, pool=[claws])
+    check("F35d a weapon outside the list is barred from suggestions only: Claws (1 of 162 dominant "
+          "6-7 parties) is unfielded at 7, never in the pool, and still scores as a manual pick",
+          e7.is_unfielded(claws) and claws not in set(e7.suggest_pool())
+          and len(rec) == 1 and rec[0]["weapon"] == claws
+          and abs(e7.comp_score(party + [claws]) - e7.comp_score(party)) > 1e-9,
+          f"unfielded={e7.is_unfielded(claws)} manual={rec[0]['score'] if rec else None}")
+    e10 = Engine(content="ancient_lands", size=10)
+    e20 = Engine(content="ancient_lands", size=20)
+    r5 = Engine(content="roads", size=5)
+    check("F35e outside every listed pool nothing is gated: the portal at 10 and 20 and a content "
+          "without lists keep their suggestion pools",
+          not e10._unfielded and not e20._unfielded and not r5._unfielded
+          and not any(r5.is_unfielded(w) for w in r5.pool),
+          f"portal10={len(e10._unfielded)} portal20={len(e20._unfielded)} roads5={len(r5._unfielded)}")
+
+
 def t_replace_options():
     """F33 (ranked alternatives to pick from): the
     replacements for ONE slot are a one-slot forge - every candidate is
@@ -1570,6 +1632,7 @@ if __name__ == "__main__":
     t_forge_avoid()
     t_replace_options()
     t_portal_rows()
+    t_portal_fielded()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

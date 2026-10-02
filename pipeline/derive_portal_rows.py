@@ -35,6 +35,18 @@ pool fields it, else none through 7 and the former Roads value at 10,
 where the style x size rows take over). Never a number invented to fill
 a hole.
 
+THE FIELDED WEAPONS (`pool_fielded`, read by both engine ports as a
+suggestion gate at a size inside the pool): per pool at the floor, the
+weapons its dominant winners field. A weapon is listed when it stands in
+at least MIN_FIELDED_ROSTERS distinct rosters across at least
+MIN_FIELDED_ORGS distinct guild-sets (the honesty gate the pair prior and
+the cohort families use) and in at least SIGNAL_OF_TOP of the rosters of
+the pool's most fielded weapon (the meta prior's signal floor: below it a
+weapon carries no signal). The capability score ranks a wide sheet first
+whether or not any winner fields the weapon; the list keeps default comps
+inside what the pool's winners bring. A gate on suggestions and
+generation only: a manual pick always scores.
+
 WEIGHTS are not fitted here: this step carries the template's weights
 and its `weight_fit` block through unchanged (a weight changes by a
 logged decision; pipeline/fit_choice_weights.py is the measurement, and
@@ -78,6 +90,10 @@ FIT_POOL = "five"
 RAMP_POOL = "seven"
 OWN_POOLS = ("trio", "seven")   # the pools that carry rows of their own (the base rows are the 4-5 pool's)
 RAMP_TAKEOVER = 10    # where the style x size rows carry the targets
+FIELDED_POOLS = ("trio", "five", "seven")   # the pools that carry a fielded list (at the floor)
+MIN_FIELDED_ROSTERS = 5   # distinct rosters (derive_meta_prior MIN_PAIR_PARTIES, the honesty gate)
+MIN_FIELDED_ORGS = 3      # ...across this many distinct guild-sets (MIN_PAIR_ORGS)
+SIGNAL_OF_TOP = 0.05      # share of the top weapon's rosters (derive_meta_prior MIN_PRIOR)
 
 
 def load_yaml(path):
@@ -122,8 +138,30 @@ def select_parties(doc, catalog, all_battles):
             for name, lo, hi in POOLS:
                 if lo <= n <= hi:
                     pools[name].append({"battle": battle, "size": n, "weapons": list(ws),
+                                        "guilds": tuple(sorted(p.get("guilds") or [])),
                                         "at": stamps.get(battle)})
     return pools
+
+
+def fielded(parties):
+    """The weapons a pool's dominant winners field: distinct rosters and
+    distinct guild-sets per weapon, kept at the honesty gate and the
+    signal floor (module docstring). Returns (sorted keys, the top
+    weapon's roster count, {weapon: rosters})."""
+    rosters = collections.defaultdict(set)
+    orgs = collections.defaultdict(set)
+    for p in parties:
+        key = tuple(sorted(p["weapons"]))
+        for w in set(p["weapons"]):
+            rosters[w].add(key)
+            orgs[w].add(p.get("guilds") or ())
+    if not rosters:
+        return [], 0, {}
+    top = max(len(v) for v in rosters.values())
+    keep = sorted(w for w, v in rosters.items()
+                  if len(v) >= MIN_FIELDED_ROSTERS and len(v) >= SIGNAL_OF_TOP * top
+                  and len(orgs[w]) >= MIN_FIELDED_ORGS)
+    return keep, top, {w: len(v) for w, v in rosters.items()}
 
 
 def measure(parties, engines, reqs, base):
@@ -250,6 +288,13 @@ HEADER = """# Content template — Dragon Portal (the Ancient Lands).
 # curated weight of 4 or more keeping at least half); a weight changes by
 # a logged decision, never in this step.
 #
+# `pool_fielded` lists, per pool at the floor, the weapons its dominant
+# winners field (at least 5 distinct rosters across 3 guild-sets and 5%
+# of the rosters of the pool's most fielded weapon). Both engine ports
+# read it as a suggestion gate at a size inside the pool: a weapon
+# outside the list is never suggested or generated there, and always
+# scores when picked by hand.
+#
 # validated_sizes is EMPTY: no blind validation round has covered a pool
 # yet, so the page flags every size as extrapolated. size_prompt lists
 # the pools the page asks for before it forges.
@@ -268,7 +313,7 @@ hard_floors:
 """
 
 
-def render(tpl, rows, fit, shares, pools_out):
+def render(tpl, rows, fit, shares, pools_out, fielded_out):
     lines = [HEADER.rstrip("\n"), "",
              f"content: {tpl['content']}", f"name: {tpl['name']}", f"base_size: {tpl['base_size']}",
              "validated_sizes: []", f"max_size: {tpl['max_size']}", "size_prompt:"]
@@ -302,6 +347,18 @@ def render(tpl, rows, fit, shares, pools_out):
             lines.append("    requirements:")
             for cap, row in pool["requirements"].items():
                 lines.append(fmt_pool_row(cap, row))
+    if fielded_out:
+        lines.append("")
+        lines.append("# The weapons each pool's dominant winners field (`rosters`: the pool's")
+        lines.append("# distinct rosters). The suggestion gate at a size inside the pool.")
+        lines.append("pool_fielded:")
+        for key, pool in fielded_out.items():
+            lines.append(f"  \"{key}\":")
+            lines.append("    sizes: [%d, %d]" % tuple(pool["sizes"]))
+            lines.append(f"    rosters: {pool['rosters']}")
+            lines.append("    weapons:")
+            for w in pool["weapons"]:
+                lines.append(f"      - {w}")
     lines.append((FOOTER % shares).rstrip("\n"))
     return "\n".join(lines) + "\n"
 
@@ -362,11 +419,26 @@ def main():
         none = sorted(c for c, r in pool["requirements"].items() if r.get("none"))
         print(f"\npool rows {key} (ref {pool['ref_size']}, {pool['comps']} distinct rosters): "
               f"{len(pool['requirements']) - len(none)} rows, none: {', '.join(none) or '-'}")
+    role_of = engines(base).role_of
+    names = engines(base).weapons
+    fielded_out = {}
+    for name, lo, hi in POOLS:
+        if name in FIELDED_POOLS and distinct[name] >= FLOOR:
+            keep, top, counts = fielded(pools[name])
+            fielded_out[f"{lo}-{hi}"] = {"sizes": [lo, hi], "rosters": distinct[name], "weapons": keep}
+            by_role = collections.Counter(role_of(w) for w in keep)
+            cut = sorted((w for w in counts if w not in keep), key=lambda w: -counts[w])
+            print(f"\nfielded {lo}-{hi}: {len(keep)} of {len(counts)} weapons seen "
+                  f"(top weapon in {top} rosters, signal floor {SIGNAL_OF_TOP * top:.1f}); "
+                  + ", ".join(f"{r} {by_role[r]}" for r in ("healer", "frontline", "support", "dps"))
+                  + "; nearest cut: " + ", ".join(f"{names[w]['display_name']} {counts[w]}" for w in cut[:5]))
     stamps = sorted(p["at"] for name in pools for p in pools[name] if p.get("at"))
     fit = {
         "comps": distinct[FIT_POOL], "stat": "median", "source": "harvest",
         "unit": "dominant killer party in the Ancient Lands, every weapon known, training split",
         "fitted_pool": "4-5", "dressed": "doctrine", "floor": FLOOR,
+        "fielded": {"min_rosters": MIN_FIELDED_ROSTERS, "min_guild_sets": MIN_FIELDED_ORGS,
+                    "share_of_top": SIGNAL_OF_TOP},
         "pools": {name: {"parties": len(pools[name]), "distinct": distinct[name]} for name, _lo, _hi in POOLS},
         "split": "battle % 5 != 0" if not args.all_battles else "all battles (audit only)",
         "window": {"first": stamps[0][:16] if stamps else None, "last": stamps[-1][:16] if stamps else None},
@@ -376,7 +448,7 @@ def main():
         return f"{m['with_role'][role] / m['n']:.0%}" if m else "n/a"
     shares = {"h3": share("trio", "healer"), "h5": share("five", "healer"), "h7": share("seven", "healer"),
               "f3": share("trio", "frontline"), "f5": share("five", "frontline"), "f7": share("seven", "frontline")}
-    text = render(tpl, rows, fit, shares, pools_out)
+    text = render(tpl, rows, fit, shares, pools_out, fielded_out)
     if args.all_battles:
         print("\n--all-battles is audit only: the template is never written from it")
         return
@@ -384,7 +456,7 @@ def main():
         with open(TEMPLATE, "w", encoding="utf-8", newline="\n") as f:
             f.write(text)
         print(f"\nwrote {os.path.relpath(TEMPLATE, ROOT)} ({sum(1 for h in how.values() if h == 'fitted')} fitted rows, "
-              f"{sum(1 for h in how.values() if h.startswith('ramp'))} ramp rows, pools of their own: {', '.join(pools_out) or 'none'})")
+              f"{sum(1 for h in how.values() if h.startswith('ramp'))} ramp rows, pools of their own: {', '.join(pools_out) or 'none'}, fielded lists: {', '.join(fielded_out) or 'none'})")
     else:
         print("\nreport only; --apply writes the template")
 

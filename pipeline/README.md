@@ -499,8 +499,13 @@ HEAD (`--base` for another revision). Review the report, then commit.
   of the supply dressed in doctrine kits; a capability the median winner
   does not field is `none` in a pool's rows and a demand ramp in the base
   rows. A pool under the floor (15-20 today) reads the base rows scaled
-  and the style x size rows at 10+. `build_dataset` validates the pool
-  rows (fail closed); `tests/tier2_blindtest.py v4h --harvest-source all
+  and the style x size rows at 10+. The step also writes `pool_fielded`:
+  per pool at the floor, the weapons its dominant winners field (at least
+  5 distinct rosters across 3 guild-sets, the honesty gate of the pair
+  prior, and 5% of the rosters of the pool's most fielded weapon, the
+  prior's signal floor). Both engine ports read it as a suggestion gate
+  at a size inside the pool; scoring never reads it. `build_dataset`
+  validates the pool rows and the fielded lists (fail closed); `tests/tier2_blindtest.py v4h --harvest-source all
   --harvest-content ancient_lands --dominant` is the holdout read of the
   same unit, and `fit_choice_weights.py` takes the same flags. Run by the
   fold after derive_style_bands; `--rosters` names a git-shown copy of the

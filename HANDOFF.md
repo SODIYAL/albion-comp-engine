@@ -168,7 +168,15 @@ pool. `validated_sizes` is empty (no validation round has covered a pool), so ev
 size is still flagged extrapolated. A content that keeps full
 single-target value (`st_full_value`: roads and the portal) admits a
 single-scale carry's `situational` verdict at the gang band into default
-generation (F34d). A content with no harvested evidence follows the rule
+generation (F34d). The same step lists, per pool at the floor, the
+weapons its dominant winners field (`pool_fielded`: at least 5 distinct
+rosters across 3 guild-sets and 5% of the rosters of the pool's most
+fielded weapon); at a size inside the pool both ports suggest and
+generate from that list only (`is_unfielded`, F35, T51), the wheel marks
+the rest "not fielded here", and a manual pick always scores. The
+capability score alone ranked wide-sheet weapons no winner fields first
+(Claws and Hand of Justice in a forged seven, 1 of 162 dominant 6-7
+parties each). A content with no harvested evidence follows the rule
 this content used before: `fit: {stat: none, borrowed_from: <sibling>}`,
 every target read as `content_min`, the borrowed-evidence notice on the
 page.
@@ -214,7 +222,9 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   evidence-gated, lifted by a canonical large-group build), the style gate,
   and the generation-fit gate (damage picks whose derived verdict is "fits";
   single-ally-heal-E healers never at 10+; non-stacking-group members need an
-  E debuff tool at 10+). There is no cost gate.
+  E debuff tool at 10+), and inside a Dragon Portal pool the pool-fielded
+  gate (only weapons the pool's dominant winners field, generated). There
+  is no cost gate.
 - **Healing foundation**: `primary_heal` band minima need `full_healer`
   weapons (E heal >= 6 AND group scale). One healer per five members is a
   MINIMUM on clap, brawl and both hybrids; kite keeps its minima; balanced

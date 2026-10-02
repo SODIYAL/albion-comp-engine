@@ -489,8 +489,12 @@ function whySentence(party, cand){
   const floorClause = (lead && floorHit(lead.cap, sfl[lead.cap] || 0))
     ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
   /* +…toFixed(1): kit-effectiveness scaling makes supply fractional —
-     without rounding this printed "at 7.730833333333333 of 7.9 units" */
-  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? +lead.before.toFixed(1) : 0} of the typical ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
+     without rounding this printed "at 7.730833333333333 of 7.9 units".
+     The typical is the TERM's own (the pick is explained one player
+     ahead): a capability can be a requirement at the next size and none
+     at the judged one (a portal pool's `none` row, a ramp row), where
+     target(cap) has no row to read and the whole render stopped */
+  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? +lead.before.toFixed(1) : 0} of the typical ${lead ? lead.target.toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
 }
 
 /* ------------------------------------------------------- shareable state */
@@ -1311,6 +1315,10 @@ function renderHub(keys, idx, recs){
   const isTop = !!(recs && recs.length && recs[0].w === w);
   const marks = (isTop ? ' · <b>engine pick</b>' : "")
     + (ENG.isExcluded(w) ? ' · <i class="offcomp">off-comp</i>' : "")
+    /* the pool-fielded gate (engine isUnfielded): the weapon still scores
+       when picked, the engine never suggests it at this portal pool */
+    + (typeof ENG.isUnfielded === "function" && ENG.isUnfielded(w)
+      ? ' · <i class="offcomp" title="winners of this portal pool do not field it: never suggested here, scored when picked">not fielded here</i>' : "")
     + (WEAPONS[w].status === "curated" ? "" : " · illustrative");
   body.innerHTML = `
     <div class="hub-art-slot">${icon(w, 54)}</div>
