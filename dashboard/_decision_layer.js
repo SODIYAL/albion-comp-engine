@@ -4,8 +4,8 @@
    floors, weaknesses, recommendation ordering and marginal terms into the
    order a caller needs them: status -> biggest need -> next pick -> why ->
    what is still missing.
-   Plus two on-demand caller workflows (PR #6), folded shut by
-   default so the party dock keeps its above-the-fold seat:
+   Plus two on-demand caller workflows (PR #6). They live in the tools
+   panel, so the fold starts open: opening the panel shows the tools:
    - a player weapon pool that feeds CompEngine.recommend(pool)
    - a swap lab comparing exact roster replacements, applied through the
      dashboard's existing swap handler.
@@ -14,7 +14,7 @@
   const PLAYER_POOL = new Set();
   let POOL_QUERY = "";
   let SWAP_SLOT = 0;
-  let TOOLS_OPEN = false;
+  let TOOLS_OPEN = true;
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
@@ -182,7 +182,8 @@
     DL_MEMO.kp = {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
     return DL_MEMO.kp;
   }
-  const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
+  /* the capability board's own names for the same three reads */
+  const KP_LABEL = {pierce: "Pierce", heal_cut: "Anti-heal", burst: "Burst"};
   function killPressureLine(){
     const kp = killPressureModel();
     if (!kp) return "";
@@ -335,9 +336,14 @@
     axes.forEach((a, i) => {
       const tip = tipRef(groupTipHtml(a));
       const vc = a.floor ? "var(--gap)" : a.over ? "var(--over)" : "var(--ok-bright)";
-      s += `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="4" fill="${vc}" stroke="var(--panel-lo)" stroke-width="2" data-dltip="${tip}"/>`;
+      /* hit areas: an outlined icon answers the pointer on its strokes
+         only, so each axis carries a filled box over the icon and its
+         percentage, and each vertex a wider disc under the dot */
+      s += `<g data-dltip="${tip}" class="dl-radar-hit"><circle class="dlr-hitbox" cx="${pts[i][0]}" cy="${pts[i][1]}" r="10"/>`
+        + `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="4" fill="${vc}" stroke="var(--panel-lo)" stroke-width="2"/></g>`;
       const ix = +px(ang(i), R + 25), iy = +py(ang(i), R + 25) - 4;
-      s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)}`
+      s += `<g data-dltip="${tip}" class="dl-radar-hit"><rect class="dlr-hitbox" x="${(ix - 24).toFixed(1)}" y="${(iy - 14).toFixed(1)}" width="48" height="37" rx="7"/>`
+        + dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)
         + `<text x="${ix}" y="${iy + 20}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
     });
     s += `</svg>`;

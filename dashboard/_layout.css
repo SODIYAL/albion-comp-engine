@@ -51,7 +51,7 @@
   position:fixed; top:0; bottom:0; z-index:40;
   width:var(--epw);
   transition:transform .32s var(--ease);
-  background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  background:rgba(13,13,20,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   box-shadow:0 0 44px rgba(0,0,0,.5);
   display:flex; flex-direction:column;
 }
@@ -154,7 +154,7 @@
   .dl-pick{padding:14px 16px}
   .dl-nl-main strong{font-size:19px}
   .dl-weapon .nm-btn{font-size:23px}
-  .dl-pick p{margin:6px 0 8px;font-size:12.5px}
+  .dl-pick p{margin:6px 0 8px;font-size:13px}
   .dl-alts{margin-top:8px}
   /* deep boards stay full-width rows below the hero, in DOM order */
   #meta-sec, .footnote{grid-column:1/-1; grid-row:auto}
@@ -235,7 +235,7 @@
 
 /* brand: the sigil and wordmark carry it; the strapline is decoration here */
 .mh-top .brandmark{gap:9px}
-.mh-top .brandmark .sigil{width:24px; height:24px; font-size:13px; border-radius:7px}
+.mh-top .brandmark .sigil{width:24px; height:24px; font-size:13px; border-radius:8px}
 .mh-top .brandmark h1{font-size:16px; line-height:1.2}
 .mh-top .brandmark .sub{display:none}
 

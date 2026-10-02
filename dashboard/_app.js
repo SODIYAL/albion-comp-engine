@@ -647,7 +647,7 @@ function renderSetup(){
       ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This content is validated at size ${validatedSizes().join(", ")} only. At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been validated at this size yet.</div>`);
+    `<div class="notice"><b>Extrapolated.</b> ${validatedSizes().length ? `This content is validated at size ${validatedSizes().join(", ")} only.` : "No size of this content has been through a validation round yet."} At ${SIZE} the typical numbers come from the harvest median for this style (10+) or the content row scaled per person; nothing here has been validated at this size yet.</div>`);
   /* honesty mirror: the size is set inside the setup panel, beside the
      full notice. While the panel is shut (a restored link, a live party)
      its tab names the caveat: a dot (data-note) and the tooltip */
@@ -1929,7 +1929,7 @@ function familiesHtml(withNote){
   const note = withNote
     ? `<div class="ka-note">Anchor pairs observed together across distinct Alliance/Guild cohorts and battles; percentages are how often a weapon was observed with that anchor. Observation counts, not parties or win rates; never changes a score.</div>`
     : "";
-  return `<div class="ka-fam"><span class="ka-nb-label">Recurring observed cores — ${esc(USAGE_BUCKET_LABEL[usageBucket()] || usageBucket())} fights</span>${
+  return `<div class="ka-fam"><span class="ka-nb-label">Recurring observed cores — ${esc(USAGE_BUCKET_LABEL[usageBucket()] || usageBucket())} fights</span><div class="fam-grid">${
     rows.map(f => `<div class="fam-row${f.anchored ? " mine" : ""}">
       <span class="fam-anchor">${f.anchor.map(w =>
         `<button class="nb-w${f.mine.includes(w) ? " match" : ""}" data-detail="${w}" title="${esc(nameOf(w))} — family anchor">${icon(w, 26)}</button>`).join("")}</span>
@@ -1937,7 +1937,7 @@ function familiesHtml(withNote){
       ${f.anchored ? "" : `<button class="fam-load" data-family-load="${f.anchor.join(",")}" title="add this core's anchor pair to the comp as manual picks — the engine scores them like any manual choice, and the forge can complete the rest">add core</button>`}
       ${(f.cast || []).length ? `<span class="fam-cast"><i>with</i>${f.cast.map(c =>
         `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — observed with this core in ${Math.round(100 * c.share)}% of its cohorts">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
-    </div>`).join("")}${note}</div>`;
+    </div>`).join("")}</div>${note}</div>`;
 }
 /* Observed effect quotas (advice only, never a score; R18, display test
    14). EFFECT_QUOTAS carries how many carriers of each typed
@@ -2031,7 +2031,11 @@ const spellIcon = sid =>
    empty party, per content template (balanced style, base size) — the
    apples-to-apples "where does this weapon live" comparison. Computed once
    from the same engine that powers everything else, so it can never
-   disagree with the planner. */
+   disagree with the planner. The rank is a place in that content's
+   SUGGESTION POOL (recommend's default pool), so each row states the
+   pool's size: a Dragon Portal pool holds the weapons its winners field,
+   not the whole catalog. The tier is the rank's share of the pool; a
+   weapon the pool bars has no rank there. */
 let AFFINITY = null;
 function affinity(){
   if (AFFINITY) return AFFINITY;
@@ -2041,7 +2045,7 @@ function affinity(){
     const rows = e2.recommend([], Object.keys(WEAPONS).length);
     const top = rows[0].score || 1;
     const m = {};
-    rows.forEach((r, i) => { m[r.weapon] = { rank: i + 1, score: r.score, top }; });
+    rows.forEach((r, i) => { m[r.weapon] = { rank: i + 1, score: r.score, top, of: rows.length }; });
     AFFINITY[c] = m;
   }
   return AFFINITY;
@@ -2049,12 +2053,19 @@ function affinity(){
 function affinityRows(w){
   const a = affinity();
   return Object.entries(DATASET.templates).map(([c, t]) => {
-    const e = a[c][w] || { rank: 0, score: 0, top: 1 };
+    const e = a[c][w];
+    if (!e) return `<div class="aff ${c === CONTENT ? "here" : ""}">
+      <span class="aff-name">${esc(t.name)}</span>
+      <span class="aff-rank mono" title="outside this content's suggestion pool; a manual pick still scores">—</span>
+      <span class="aff-tier fringe">not suggested</span>
+      <span class="aff-bar"><i style="width:0"></i></span>
+    </div>`;
     const pct = Math.max(2, Math.round(100 * Math.max(0, e.score) / e.top));
-    const tier = e.rank <= 12 ? "prime" : e.rank <= 45 ? "solid" : e.rank <= 90 ? "situational" : "fringe";
+    const share = e.rank / e.of;
+    const tier = share <= 0.09 ? "prime" : share <= 0.33 ? "solid" : share <= 0.66 ? "situational" : "fringe";
     return `<div class="aff ${c === CONTENT ? "here" : ""}">
       <span class="aff-name">${esc(t.name)}</span>
-      <span class="aff-rank mono" title="opening-pick rank of ${Object.keys(WEAPONS).length} weapons">#${e.rank}</span>
+      <span class="aff-rank mono" title="opening-pick rank among the ${e.of} weapons suggested for this content">#${e.rank}<span class="aff-of">/${e.of}</span></span>
       <span class="aff-tier ${tier}">${tier}</span>
       <span class="aff-bar"><i style="width:${pct}%"></i></span>
     </div>`;
@@ -2089,6 +2100,20 @@ function spellAt(w, slot, idx){
   const e = pool[idx - 1];
   return e ? e[1] : `#${idx}`;
 }
+/* an evidence citation as a reader sees it: the cited spell's display name
+   when the weapon's pools carry it, the id on hover; ids the pools do not
+   carry (gear spells, WEAPON_STATS) read as written */
+function evidenceName(w, e){
+  if (e === "WEAPON_STATS") return "weapon stats";
+  const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  for (const slot of Object.keys(pools)){
+    const hit = (pools[slot] || []).find(p => p[0] === e);
+    if (hit) return hit[1];
+  }
+  return e;
+}
+const evidenceSpan = (w, e) =>
+  `<span class="sp" title="${esc(e)}">${esc(evidenceName(w, e))}</span>`;
 function spellNameById(w, slot, sid){
   const pool = ((typeof SPELLS !== "undefined" && SPELLS[w]) || {})[slot] || [];
   const hit = pool.find(p => p[0] === sid);
@@ -2200,8 +2225,8 @@ function detailHtml(w){
     return rows ? `<h4>${label}</h4><ul class="sp-list">${rows}</ul>` : "";
   };
   const caps = Object.entries(d.capabilities || {}).sort((a,b) => b[1]-a[1]).map(([c, v]) =>
-    `<tr><td><button class="cap-name" data-cap="${c}">${c}</button></td><td class="sc">${v}</td>
-     <td>${((d.evidence || {})[c] || []).map(e => `<span class="sp">${esc(e)}</span>`).join(", ")}</td></tr>`).join("");
+    `<tr><td><button class="cap-name" data-cap="${c}">${esc(capLabel(c))}</button></td><td class="sc">${v}</td>
+     <td>${((d.evidence || {})[c] || []).map(e => evidenceSpan(w, e)).join(", ")}</td></tr>`).join("");
   /* fallback copies of the same build under other contents would repeat
      here — list each build once, under its home content */
   const homeVars = vars.filter(v => !v.fallback_from);
@@ -2222,7 +2247,7 @@ function detailHtml(w){
     <div class="dt-grid dossier">
       <div>
         <h4>Where it lives — opening-pick rank per content
-          <span class="h4-note">(balanced · base size · of ${Object.keys(WEAPONS).length} weapons)</span></h4>
+          <span class="h4-note">(balanced · base size · rank among the weapons suggested there · bar = score against the best opener)</span></h4>
         <div class="aff-rows">${affinityRows(w)}</div>
         ${usageAllBuckets(w)}
         <h4>Capabilities — click one for party-wide evidence</h4>
@@ -2310,14 +2335,14 @@ function renderEvidence(cap){
   const rows = party.filter(w => capsOf(w)[cap]).map(w => {
     const ev = (WEAPONS[w].evidence || {})[cap];
     return `<tr><td>${icon(w, 20)} ${nameOf(w)}</td><td class="sc">${capsOf(w)[cap]}</td>
-      <td>${ev && ev.length ? ev.map(e => `<span class="sp">${esc(e)}</span>`).join(", ")
+      <td>${ev && ev.length ? ev.map(e => evidenceSpan(w, e)).join(", ")
             : '<span class="pend">no evidence — illustrative sheet, blocks release</span>'}</td>
       <td class="mono" style="font-size:11px;color:var(--ink-3)">${w}</td></tr>`;
   });
-  $("drawer-title").textContent = cap;
+  $("drawer-title").textContent = capLabel(cap);
   $("drawer-body").innerHTML = rows.length
     ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(cap)}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(capLabel(cap))}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
   closePdash();   /* the dash overlays the drawer — never show both */
 }

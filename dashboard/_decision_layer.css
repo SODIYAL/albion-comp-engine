@@ -11,13 +11,16 @@
   background:none;border:0;box-shadow:none;padding:0}
 .dl-status .dl-radar{margin:0 auto}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
-.dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.dl-kicker{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 /* comp-status radar: the status card is the identity headline over the
    diagram — axis icons in the group's color, the coverage shape, every
    further detail in the shared popup (#dl-tip). Display only. */
 .dl-radar{width:min(410px,100%);height:auto;overflow:visible;display:block}
 .dl-radar text{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .dl-radar-hit{cursor:default}
+/* the whole box answers the pointer, and lights while it does */
+.dlr-hitbox{fill:transparent;pointer-events:all;transition:fill .12s}
+.dl-radar-hit:hover .dlr-hitbox{fill:rgba(255,255,255,.07)}
 .dlr-pct{font-size:9px;fill:var(--ink-3)}
 /* the headline: what the comp is becoming. Muted while leaning or
    forming, brass once strong (the status bar's own signal) */
@@ -29,8 +32,8 @@
 .dl-ident-warn{font-size:13px;color:var(--amber)}
 .dl-open-setup{margin-top:12px}
 #dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;max-width:300px;
-  background:var(--bg-deep);border:1px solid var(--rule-2);border-radius:9px;
-  padding:8px 11px;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:var(--ink-2);
+  background:var(--bg-deep);border:1px solid var(--rule-2);border-radius:10px;
+  padding:8px 11px;font-family:var(--mono);font-size:11px;line-height:1.55;color:var(--ink-2);
   box-shadow:0 8px 26px rgba(0,0,0,.55)}
 #dl-tip .dlt-head{color:var(--ink);font-weight:600;letter-spacing:.04em}
 #dl-tip .dlt-line{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}
@@ -39,7 +42,7 @@
 #dl-tip .dlt-ok{color:var(--ok-bright)}#dl-tip .dlt-bad{color:var(--gap)}
 #dl-tip .dlt-over{color:var(--over)}#dl-tip .dlt-dim{color:var(--ink-3)}
 #dl-tip .dlt-warn{color:var(--amber);margin-top:2px}
-#dl-tip .dlt-note{color:var(--ink-3);margin-top:4px;font-size:9.5px}
+#dl-tip .dlt-note{color:var(--ink-3);margin-top:4px;font-size:10px}
 /* fight chain (roadmap item 1): the fight as the playstyle sequences it */
 .dl-chain{padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}
 .dl-ch-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -52,16 +55,16 @@
 .dl-ch-arrow{color:var(--ink-3);font-size:10px}
 .dl-ch-imp{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-ch-imp b{color:var(--brass-bright)}
-.dl-ch-imp small{color:var(--ink-3);font-size:9.5px}
+.dl-ch-imp small{color:var(--ink-3);font-size:10px}
 /* stage chips are buttons (click -> spell sources fold);
    the verdict classes above carry the visuals, this resets button chrome */
 button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;line-height:inherit}
 .dl-ch.open{outline:1px solid var(--brass);outline-offset:1px}
-.dl-ch-fold{margin-top:8px;padding:8px 10px;border-radius:9px;border:1px solid var(--rule-2);background:var(--sunk)}
-.dl-ch-fold em{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);margin-top:3px}
+.dl-ch-fold{margin-top:8px;padding:8px 10px;border-radius:10px;border:1px solid var(--rule-2);background:var(--sunk)}
+.dl-ch-fold em{display:block;font-style:normal;font-size:11px;color:var(--ink-3);margin-top:3px}
 .dl-ch-src{display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font-size:11px;color:var(--ink-2)}
 .dl-ch-src b{color:var(--ink-1);font-weight:600;margin-right:2px}
-.dl-ch-src>span{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:9.5px;white-space:nowrap}
+.dl-ch-src>span{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;white-space:nowrap}
 .dl-ch-src .icon{vertical-align:middle}
 .dl-ch-dot{font-style:normal;color:var(--ink-3)}
 /* the need line: the combined card's header — question above the answer */
@@ -73,7 +76,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-sub{font-size:12px;color:var(--ink-2)}
 .dl-nd-chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;align-content:flex-start;max-width:46%}
 .dl-nd-chips .dl-kicker{width:100%;text-align:right}
-.dl-nd-chips span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;
+.dl-nd-chips span:not(.dl-kicker){font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:99px;
   border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
@@ -95,12 +98,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-gains{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
 .dl-gains li{
   display:grid;grid-template-columns:auto 1fr auto;gap:3px 9px;align-items:baseline;
-  padding:5px 0;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-2);
+  padding:5px 0;border-top:1px solid var(--rule);font-size:12px;color:var(--ink-2);
 }
 .dl-gains li:first-child{border-top:0}
 .dl-gains b{color:var(--ok-bright);font-family:var(--mono);font-size:12px}
 .dl-gain-cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:9.5px;color:var(--ink-3)}
+.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:10px;color:var(--ink-3)}
 .dl-gain-v{
   grid-column:3;grid-row:1;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
   text-transform:uppercase;padding:2px 6px;border-radius:99px;white-space:nowrap;
@@ -108,10 +111,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-gains li.closes .dl-gain-v{color:var(--ok-bright);background:rgba(35,191,110,.10)}
 .dl-gains li.depth .dl-gain-v{color:var(--ink-3);background:var(--sunk)}
 .dl-gains li.depth b{color:var(--ink-2)}
-.dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
+.dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 /* why-not block (roadmap item 3): the signed decomposition's negative and
    saturated terms — amber for a depth pick, red when the pick nets a cost */
-.dl-whynot{margin-top:10px;padding:8px 10px;border-radius:9px;border:1px solid rgba(232,160,19,.30);background:rgba(232,160,19,.06)}
+.dl-whynot{margin-top:10px;padding:8px 10px;border-radius:10px;border:1px solid rgba(232,160,19,.30);background:rgba(232,160,19,.06)}
 .dl-whynot .dl-kicker{color:var(--amber)}
 .dl-whynot ul{list-style:none;margin:5px 0 0;padding:0}
 .dl-whynot li{font-size:11px;color:var(--ink-2);line-height:1.5;padding-left:12px;position:relative}
@@ -124,8 +127,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    the title it read as part of the wordmark rather than as an action. The
    name keeps its own width so the gap between them stays inert: clicking
    the whitespace must not open the evidence drawer. */
-.dl-add{flex:none;margin:0 0 0 auto;padding:6px 13px;font-size:11.5px;white-space:nowrap;align-self:center}
-.dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
+.dl-add{flex:none;margin:0 0 0 auto;padding:6px 13px;font-size:12px;white-space:nowrap;align-self:center}
+.dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:13px}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
@@ -145,7 +148,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
   padding:9px 14px;background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));
   border:1px solid var(--rule);border-radius:12px;font-family:var(--mono);font-size:10px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .dl-tools-fold summary::-webkit-details-marker{display:none}
 .dl-tools-fold summary::before{content:"\25B8";color:var(--brass);font-size:11px}
 .dl-tools-fold[open] summary::before{content:"\25BE"}
@@ -160,14 +163,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-clear-pool{background:none;border:1px solid var(--rule);color:var(--ink-3);border-radius:8px;padding:5px 8px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em}
 .dl-clear-pool:hover{border-color:var(--brass);color:var(--brass)}
 .dl-pool-chips{display:flex;gap:6px;flex-wrap:wrap;min-height:34px;align-items:center}
-.dl-pool-chip{display:flex;align-items:center;gap:7px;background:var(--sunk);border:1px solid var(--rule);color:var(--ink-2);border-radius:9px;padding:4px 7px 4px 4px;font-size:11px}
+.dl-pool-chip{display:flex;align-items:center;gap:7px;background:var(--sunk);border:1px solid var(--rule);color:var(--ink-2);border-radius:10px;padding:4px 7px 4px 4px;font-size:11px}
 .dl-pool-chip:hover{border-color:rgba(255,201,58,.45)}
 .dl-pool-chip b{color:var(--ink-3);font-weight:400}.dl-pool-chip .icon{border-radius:6px}
 .dl-pool-search{position:relative;margin:10px 0}
 .dl-pool-search input{width:100%;box-sizing:border-box;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);border-radius:10px;padding:10px 11px;font-size:12px;outline:none}
 .dl-pool-search input:focus{border-color:var(--brass-deep);box-shadow:0 0 0 2px rgba(224,166,61,.08)}
 .dl-search-results{position:absolute;z-index:8;left:0;right:0;top:calc(100% + 5px);background:var(--panel-hi);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:5px;max-height:250px;overflow:auto}
-.dl-search-row{width:100%;display:grid;grid-template-columns:28px 1fr auto;gap:9px;align-items:center;text-align:left;background:none;border:0;color:var(--ink-2);padding:7px;border-radius:7px}
+.dl-search-row{width:100%;display:grid;grid-template-columns:28px 1fr auto;gap:9px;align-items:center;text-align:left;background:none;border:0;color:var(--ink-2);padding:7px;border-radius:8px}
 .dl-search-row:hover{background:var(--surface-2);color:var(--ink)}
 .dl-search-row small{font-family:var(--mono);font-size:9px;color:var(--ink-3)}
 .dl-pool-best{margin-top:12px;border-top:1px solid var(--rule);padding-top:12px}
@@ -181,22 +184,22 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-pool-best>.cb-add{width:100%;margin-top:4px}
 .dl-pool-best.empty strong{display:block;margin-top:6px}
 .dl-mini-rank{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
-.dl-mini-rank span{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);background:var(--sunk);padding:5px 7px;border-radius:6px}
+.dl-mini-rank span{font-family:var(--mono);font-size:10px;color:var(--ink-3);background:var(--sunk);padding:5px 7px;border-radius:6px}
 .dl-mini-rank b{float:right;color:var(--ink-2)}
 .dl-tool-note{font-size:11px;color:var(--ink-3)}
 .dl-slot-label{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink-2);font-size:11px}
-.dl-slot-label select{max-width:65%;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);border-radius:8px;padding:7px 9px}
-.dl-current{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 9px;background:var(--sunk);border-radius:9px;font-size:11px}
-.dl-current span{margin-left:auto;color:var(--ink-3);font-family:var(--mono);font-size:9.5px}
+.dl-slot-label select{max-width:65%;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);border-radius:8px;padding:7px 30px 7px 9px}
+.dl-current{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 9px;background:var(--sunk);border-radius:10px;font-size:11px}
+.dl-current span{margin-left:auto;color:var(--ink-3);font-family:var(--mono);font-size:10px}
 .dl-swap-list{display:flex;flex-direction:column;gap:6px}
 .dl-swap-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--rule);border-radius:10px;padding:8px 9px}
 .dl-swap-main{display:flex;align-items:center;gap:9px;min-width:0}.dl-swap-main>div{min-width:0}
 .dl-swap-main strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dl-swap-main span,.dl-swap-main small{display:block;font-family:var(--mono);font-size:9px;color:var(--ink-3);margin-top:2px}
 .dl-swap-actions{text-align:right;flex:none}
-.dl-swap-actions>b{display:block;font-family:var(--mono);font-size:9.5px;margin-bottom:4px}
+.dl-swap-actions>b{display:block;font-family:var(--mono);font-size:10px;margin-bottom:4px}
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
-.dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
+.dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:8px;padding:5px 7px;font-size:10px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
@@ -217,14 +220,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-chain-card .dl-chain{margin:0}
 .dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
 .dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
-.dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
-.dl-kp-row.bad .dl-kp-dot{background:#E0556B; box-shadow:0 0 8px rgba(224,85,107,.6)}
+.dl-kp-row.ok .dl-kp-dot{background:var(--ok-bright); box-shadow:0 0 8px rgba(53,230,138,.6)}
+.dl-kp-row.bad .dl-kp-dot{background:var(--gap); box-shadow:0 0 8px rgba(255,84,112,.6)}
 .dl-kp-row b{font-weight:600; color:var(--ink)}
 .dl-kp-n{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
 .dl-role-tally{display:flex; flex-wrap:wrap; gap:5px; margin:8px 0 4px}
 .dl-role-chip{font-family:var(--mono); font-size:11px; color:var(--ink-2);
   background:var(--sunk); border:1px solid var(--rule); border-radius:99px; padding:3px 9px}
 .dl-role-chip b{color:var(--brass); font-weight:600}
-.dl-role-flag{font-size:12px; color:#F0A63C; margin-top:6px}
+.dl-role-flag{font-size:12px; color:var(--amber); margin-top:6px}
 .dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
 

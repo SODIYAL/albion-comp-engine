@@ -72,6 +72,10 @@ SEMANTIC_ICON_FILES = {
 }
 
 BRAND_LOGO_FILE = os.path.join("assets", "brand", "comp-zaddy-logo.png")
+# The pages show the logo at 34px: the embedded copy is the 160px render of
+# the 1254px master, so each page carries tens of kilobytes instead of 1.5 MB
+# per reference.
+BRAND_LOGO_INLINE = os.path.join("assets", "brand", "comp-zaddy-logo-160.png")
 
 # Accounts: the Supabase library, then _supabase.js (the client), then
 # _auth.js (helpers + account UI), each in its OWN <script> AFTER the
@@ -98,7 +102,7 @@ def load_semantic_icons():
 
 def load_brand_logo():
     """Embed the brand asset so both local and GitHub Pages builds stay portable."""
-    path = os.path.join(DASH, BRAND_LOGO_FILE)
+    path = os.path.join(DASH, BRAND_LOGO_INLINE)
     if not os.path.exists(path):
         sys.exit(f"brand logo missing: {path}")
     with open(path, "rb") as f:
@@ -476,6 +480,7 @@ def main():
     with open(explainer_src, encoding="utf-8") as f:
         explainer = f.read()
     explainer = explainer.replace("Comp Forge", "Comp Zaddy")
+    explainer = explainer.replace(BRAND_LOGO_FILE.replace(os.sep, "/"), load_brand_logo())
     explainer_path = os.path.join(DASH, "how-it-works.html")
     with open(explainer_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(explainer)
@@ -512,6 +517,8 @@ def main():
     portal_stats_path = os.path.join(PIPE, "out", "portal_stats.json")
     with open(portal_stats_path, encoding="utf-8") as f:
         portal_stats = json.load(f)
+    # the logo rides inline, as on every other page: docs/ ships no assets
+    portal = portal.replace(BRAND_LOGO_FILE.replace(os.sep, "/"), load_brand_logo())
     portal = portal.replace("<!-- PORTAL_STATS -->",
                             f"<script>const PORTAL_STATS = {js(portal_stats)};</script>")
     with open(os.path.join(DASH, "portal.html"), "w", encoding="utf-8", newline="\n") as f:

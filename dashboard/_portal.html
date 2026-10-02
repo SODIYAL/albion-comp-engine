@@ -8,19 +8,22 @@
 <link rel="icon" type="image/png" href="assets/brand/comp-zaddy-logo.png">
 <title>Dragon Portal Stats</title>
 <style>
-:root{color-scheme:dark;--bg:#08080D;--surface:#11111A;--surface-hi:#191927;--ink:#F2F0EB;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#29293A;--ok:#35E68A;--fire:#FF7A45;--sans:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,monospace;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+:root{color-scheme:dark;--bg:#08080D;--surface:#101018;--surface-hi:#191926;--ink:#EDEFF7;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#2E2E42;--ok:#35E68A;--sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(720px 420px at 12% -5%,rgba(255,122,69,.14),transparent 70%),radial-gradient(640px 380px at 90% 0%,rgba(157,92,255,.12),transparent 70%),var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
+body{margin:0;min-height:100vh;background:radial-gradient(1100px 700px at 12% -8%,rgba(255,201,58,.07),transparent 60%),radial-gradient(900px 700px at 105% 12%,rgba(125,92,255,.09),transparent 55%),var(--bg);color:var(--ink);font:15px/1.5 var(--sans)}
 a{color:var(--gold-hi)}
 h1,h2,h3{font-family:var(--serif);font-weight:600}
-.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--rule)}
-.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;white-space:nowrap}
-.brand img{width:30px;height:30px;border-radius:8px}
-.top nav{display:flex;flex-wrap:wrap;gap:4px 14px}
-.top nav a{font-size:.92em;color:var(--muted);text-decoration:none;white-space:nowrap}
-.top nav a:hover{color:var(--ink)}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px clamp(16px,4vw,40px);position:relative}
+/* the planner masthead's ember seam */
+.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,201,58,.55) 18%,rgba(255,201,58,.55) 42%,var(--rule) 70%,transparent)}
+.brand{display:inline-flex;align-items:center;gap:13px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand span{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.02em;background:linear-gradient(180deg,#FFF6DC,#F2C75C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand img{width:34px;height:34px}
+.top nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+.top nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;white-space:nowrap;padding:5px 0;border-bottom:1px solid transparent}
+.top nav a:hover{border-bottom-color:var(--gold)}
 main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
-.hero .eyebrow{font-family:var(--mono);font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:var(--fire)}
+.hero .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--quiet)}
 .hero h1{margin:6px 0 8px;font-size:clamp(26px,4vw,40px);line-height:1.1}
 .hero h1 em{font-style:normal;color:var(--gold)}
 .hero p{margin:0;max-width:760px;color:var(--muted)}
@@ -45,14 +48,14 @@ tr.row{cursor:pointer}
 tr.row:hover td{background:rgba(255,255,255,.03)}
 tr.row[aria-expanded="true"] td{background:rgba(255,201,58,.06)}
 .w{display:inline-flex;align-items:center;gap:8px}
-.w img{width:28px;height:28px;border-radius:6px;background:#1c1c28}
-.bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:#22222f;vertical-align:middle;margin-right:6px;overflow:hidden}
+.w img{width:28px;height:28px;border-radius:6px;background:var(--surface-hi)}
+.bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:var(--surface-hi);vertical-align:middle;margin-right:6px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--ok)}
 .bar.dom i{background:var(--gold)}
 tr.detail td{background:var(--surface-hi);white-space:normal}
 .kit{display:flex;flex-wrap:wrap;gap:10px;padding:4px 0}
 .slot{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);min-width:190px}
-.slot img{width:34px;height:34px;border-radius:6px;background:#1c1c28}
+.slot img{width:34px;height:34px;border-radius:6px;background:var(--surface-hi)}
 .slot .s{font-family:var(--mono);font-size:.72em;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
 .slot .n{font-weight:600}
 .slot .v{font-size:.8em;color:var(--muted)}
