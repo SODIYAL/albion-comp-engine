@@ -717,6 +717,12 @@ check(0 <= i_app < i_cdn < i_client < i_auth,
       "script indices app=%d cdn=%d client=%d auth=%d" % (i_app, i_cdn, i_client, i_auth))
 check(i_app >= 0 and "signInUser" not in SCRIPTS[i_app][1] and "createClient" not in SCRIPTS[i_app][1],
       "L27r the planner's <script> carries no account code")
+_cdn_attrs = SCRIPTS[i_cdn][0] if i_cdn >= 0 else ""
+check(re.search(r"supabase-js@\d+\.\d+\.\d+/dist/umd/supabase\.js", _cdn_attrs) is not None
+      and re.search(r'integrity="sha384-[A-Za-z0-9+/]{64}"', _cdn_attrs) is not None
+      and 'crossorigin="anonymous"' in _cdn_attrs,
+      "L27s the library is pinned: an exact version and file, a sha384 integrity hash, anonymous CORS",
+      _cdn_attrs.strip()[:160])
 
 print("L28 - the profile: names and weapon lists, the account layer's first data")
 # The profile is the first user-owned data (supabase/migrations) and the
@@ -1150,9 +1156,14 @@ check('<section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">'
 check(".gd-table:not(.su-table){display:block; overflow-x:auto}" in LAYOUT
       and ".gd-table:not(.su-table):not(.im-table) td, .gd-table:not(.su-table):not(.im-table) th{white-space:nowrap}" in LAYOUT
       and ".su-table .cp-weapon, .su-table .su-role{width:auto}" in LAYOUT
-      and "position:relative}" in seg(AUTH_CSS, ".gd-table th{", "\n.gd-table td", "L39l header anchors") and ".gd-role-select{padding:3px 6px; font-size:12px; width:auto}" in AUTH_CSS,
+      and "position:relative}" in seg(AUTH_CSS, ".gd-table th{", "\n.gd-table td", "L39l header anchors") and ".gd-role-select{padding:3px 6px; font-size:var(--fs-dense); width:auto}" in AUTH_CSS,
       "L39l on a phone the member and slot tables scroll sideways at their own widths, a hidden header label never widens the card, and the sheet's columns are free again")
 check(".gd-weapons{display:inline-flex" in AUTH_CSS and ".gd-covers{display:inline-flex" in AUTH_CSS, "L39m a member's weapons and role tags share one line")
+_fs = re.findall(r"font-size:\s*([^;}\s]+)", AUTH_CSS)
+check(":root{--fs-label:10px; --fs-meta:11px; --fs-dense:12px; --fs-body:13px; --fs-lead:16px; --fs-title:21px}" in AUTH_CSS
+      and _fs and all(re.fullmatch(r"var\(--fs-(label|meta|dense|body|lead|title)\)", v) for v in _fs),
+      "L39o the account layer's type is one six-step scale: every font-size is a step, none a literal",
+      str(sorted(set(v for v in _fs if not v.startswith("var(--fs-")))[:6]))
 check("--serif:" in PORTAL and "h1,h2,h3{font-family:var(--serif)" in PORTAL
       and "white-space:nowrap" in seg(PORTAL, ".brand{", "}", "L39n brand anchors") and "flex-wrap:wrap" in seg(PORTAL, ".top{", "}", "L39n top anchors")
       and "th:nth-child(2),td:nth-child(2){position:sticky;left:0" in PORTAL,

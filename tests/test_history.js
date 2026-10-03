@@ -152,6 +152,17 @@ const CATALOG = {
   check("no facts is a header alone", run("historySheetRows")("players", null, CATALOG).length === 1 && run("historySheetRows")("ctas", {}, CATALOG).length === 1);
 }
 
+/* ---- a table's date is the day alone; the time lives in the title ---- */
+{
+  const label = run("historyDateLabel");
+  const now = new Date("2026-10-03T12:00:00Z");
+  const day = label("2026-10-01T12:00:00Z", now);
+  check("a date cell reads the day alone: no clock time, no UTC, no year inside the current year",
+        day && !/\d{1,2}:\d{2}/.test(day) && !/UTC/.test(day) && !/2026/.test(day) && /1/.test(day), day);
+  check("a date in another year carries the year", /2025/.test(label("2025-06-15T12:00:00Z", now)), label("2025-06-15T12:00:00Z", now));
+  check("no date is an empty label", label("", now) === "" && label("not a date", now) === "");
+}
+
 console.log(`\n${pass}/${pass + fail} history tests passed`);
 process.exit(fail ? 1 : 0);
 })();
