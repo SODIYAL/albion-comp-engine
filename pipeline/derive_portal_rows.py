@@ -29,11 +29,24 @@ engage and disengage trio winners carry). The supply is DRESSED in the
 engine's own doctrine kits (gear_join.doctrine_gears), the unit the
 style x size rows and the content re-fit use, measured on the dataset
 the step runs against. A row whose median winner fields NONE is no
-demand at that pool: in a pool's own rows it is `none`; in the base rows
-it is a DEMAND RAMP (none through 5 and the 6-7 median at 7 where that
-pool fields it, else none through 7 and the former Roads value at 10,
-where the style x size rows take over). Never a number invented to fill
-a hole.
+requirement at that pool: in the base rows it is a DEMAND RAMP (none
+through 5 and the 6-7 median at 7 where that pool fields it, else none
+through 7 and the former Roads value at 10, where the style x size rows
+take over). In the rows of the 4-5 and 6-7 pools (OPTIONAL_POOLS) it is
+an OPTIONAL row where a minority of the pool's winners field it (the p90
+winner does: `optional_row`, target and soft cap read over the parties
+that field it, no minimum) and `none` below that. A `none` row pays a
+weapon nothing for bringing the capability; at 4-5 that priced the
+silence of the pool's most fielded frontline at zero (a fifth of
+dominant fives field silence). The fitted pool reads the base rows and
+carries only its optional rows under `pool_rows`. The 2-3 pool keeps
+`none`: measured on the holdout, optional rows there took the hidden
+weapon's top-3 from 11% to 8% (MRR 0.136 to 0.104), where at 4-5 and
+6-7 the role read rises seven points and the weapon's reciprocal rank
+holds or rises (0.142 to 0.143, 0.106 to 0.125). The
+role counts of the same pools (derive_role_counts.py `pools`) keep
+generation to the winners' shape. Never a number invented to fill a
+hole.
 
 THE FIELDED WEAPONS (`pool_fielded`, read by both engine ports as a
 suggestion gate at a size inside the pool): per pool at the floor, the
@@ -89,6 +102,7 @@ POOLS = (("trio", 2, 3), ("five", 4, 5), ("seven", 6, 7), ("large", 15, 20))
 FIT_POOL = "five"
 RAMP_POOL = "seven"
 OWN_POOLS = ("trio", "seven")   # the pools that carry rows of their own (the base rows are the 4-5 pool's)
+OPTIONAL_POOLS = ("five", "seven")   # the pools whose minority-fielded capabilities carry an optional row
 RAMP_TAKEOVER = 10    # where the style x size rows carry the targets
 FIELDED_POOLS = ("trio", "five", "seven")   # the pools that carry a fielded list (at the floor)
 MIN_FIELDED_ROSTERS = 5   # distinct rosters (derive_meta_prior MIN_PAIR_PARTIES, the honesty gate)
@@ -222,9 +236,34 @@ def fit_rows(reqs, base, m_fit, m_ramp, ramp_ok):
     return rows, how
 
 
-def pool_rows(reqs, m):
+def optional_row(values, old):
+    """The row of a capability a MINORITY of a pool's winners field, or None.
+
+    The median winner fields none, so the capability is no requirement;
+    but where the p90 winner fields it (at least one winning party in
+    ten) it is a real choice the pool's winners make, and the weapons
+    that bring it earn nothing for it under a `none` row (the 4-5 pool:
+    a fifth of dominant fives field silence, and the pool's most fielded
+    frontline is the one that brings it). Such a capability carries an
+    OPTIONAL row read over the parties that field it: the target is their
+    median (what a comp that brings it brings), the soft cap the standing
+    1.15 x their p90, and no minimum. Optional is the engine's own rule
+    (Engine.optional): bringing it earns its coverage, not bringing it
+    is not a hole."""
+    st = stats(values)
+    if st["p50"] > 0 or st["p90"] <= 0:
+        return None
+    fielders = [v for v in values if v > 0]
+    return {"min": 0.0, "target": round(pct(fielders, .5), 2),
+            "soft_cap": round(CAP_OVER_P90 * pct(fielders, .9), 2),
+            "scales": bool(old.get("scales")), "optional": True}
+
+
+def pool_rows(reqs, m, optional=True):
     """A pool's own rows: the median where the median winner fields the
-    capability, `none` where not; scales as the base row says."""
+    capability; an optional row where only a minority does (optional_row,
+    in the pools of OPTIONAL_POOLS); `none` otherwise. Scales as the base
+    row says."""
     rows = {}
     for cap, old in reqs.items():
         st = stats(m["dressed"][cap])
@@ -232,7 +271,22 @@ def pool_rows(reqs, m):
             rows[cap] = {"min": round(st["p10"], 2), "target": round(st["p50"], 2),
                          "soft_cap": round(CAP_OVER_P90 * st["p90"], 2), "scales": bool(old.get("scales"))}
         else:
-            rows[cap] = {"none": True}
+            rows[cap] = (optional_row(m["dressed"][cap], old) if optional else None) or {"none": True}
+    return rows
+
+
+def fit_pool_optional(reqs, how, m):
+    """The fitted pool's optional rows: the capabilities its base row
+    ramps in from none (the median winner of the pool fields none) and a
+    minority of its winners field. They sit under `pool_rows` for the
+    fitted pool, where a base ramp gives way; every other capability of
+    the pool reads its base row."""
+    rows = {}
+    for cap, old in reqs.items():
+        if how.get(cap, "").startswith("ramp"):
+            row = optional_row(m["dressed"][cap], old)
+            if row:
+                rows[cap] = row
     return rows
 
 
@@ -240,7 +294,8 @@ def fmt_pool_row(cap, row):
     if row.get("none"):
         return f"      {cap + ':':<20}{{none: true}}"
     return (f"      {cap + ':':<20}{{min: {row['min']:g}, target: {row['target']:g}, "
-            f"soft_cap: {row['soft_cap']:g}, scales: {'true' if row['scales'] else 'false'}}}")
+            f"soft_cap: {row['soft_cap']:g}, scales: {'true' if row['scales'] else 'false'}"
+            f"{', optional: true' if row.get('optional') else ''}}}")
 
 
 def fmt_row(cap, row):
@@ -277,11 +332,18 @@ HEADER = """# Content template — Dragon Portal (the Ancient Lands).
 # their own under `pool_rows`, read by both engine ports at a size inside
 # the pool and scaled from the pool's ref_size. Target is the median,
 # soft cap 1.15 x p90, min the p10, of the supply dressed in the engine's
-# doctrine kits. A row the median winner does not field is `none` in a
-# pool's rows and a DEMAND RAMP in the base rows (none through 5 and the
-# 6-7 median at 7 where that pool fields it, else none through 7 and the
-# former Roads value at 10, where the style x size rows carry the
-# targets). The `fit:` block records the pools, the floor and the window.
+# doctrine kits. A row the median winner does not field is no requirement:
+# in the base rows a DEMAND RAMP (none through 5 and the 6-7 median at 7
+# where that pool fields it, else none through 7 and the former Roads
+# value at 10, where the style x size rows carry the targets); in the
+# rows of the 4-5 and 6-7 pools an OPTIONAL row where the p90 winner
+# fields it (at least one winning party in ten: over the parties fielding
+# it, target their median and soft cap 1.15 x their p90, no minimum;
+# bringing it earns its coverage, not bringing it is not a hole) and
+# `none` below that; in the 2-3 pool `none` (optional rows there cost the
+# holdout read of the hidden weapon three points). The fitted 4-5 pool
+# reads the base rows and carries its optional rows alone under
+# `pool_rows`. The `fit:` block records the pools, the floor and the window.
 # Weights apply at every pool and are fitted to what the same winners
 # pick (`weight_fit`, pipeline/fit_choice_weights.py: a conditional logit
 # pulled toward the Roads weights the template started from, every
@@ -336,8 +398,9 @@ def render(tpl, rows, fit, shares, pools_out, fielded_out):
     if pools_out:
         lines.append("")
         lines.append("# The pools' own rows: fitted on the pool's dominant winners (ref_size is")
-        lines.append("# the pool's top size, comps its distinct rosters); a `none` row: the median")
-        lines.append("# winner fields none, no requirement at this pool. Weights are the base rows'.")
+        lines.append("# the size the rows are stated at, comps its distinct rosters). An `optional`")
+        lines.append("# row: a minority of the pool's winners field it; a `none` row: under one in")
+        lines.append("# ten does, no requirement at this pool. Weights are the base rows'.")
         lines.append("pool_rows:")
         for key, pool in pools_out.items():
             lines.append(f"  \"{key}\":")
@@ -414,11 +477,20 @@ def main():
     for name, lo, hi in POOLS:
         if name in OWN_POOLS and distinct[name] >= FLOOR:
             pools_out[f"{lo}-{hi}"] = {"sizes": [lo, hi], "ref_size": hi, "comps": distinct[name],
-                                       "requirements": pool_rows(reqs, own[name])}
+                                       "requirements": pool_rows(reqs, own[name], name in OPTIONAL_POOLS)}
+        elif name == FIT_POOL:
+            # the fitted pool reads the base rows; only its optional rows
+            # (the minority-fielded capabilities) sit here, at the base size
+            opt = fit_pool_optional(reqs, how, measured[name])
+            if opt:
+                pools_out[f"{lo}-{hi}"] = {"sizes": [lo, hi], "ref_size": base, "comps": distinct[name],
+                                           "requirements": opt}
     for key, pool in pools_out.items():
         none = sorted(c for c, r in pool["requirements"].items() if r.get("none"))
+        opt = sorted(c for c, r in pool["requirements"].items() if r.get("optional"))
         print(f"\npool rows {key} (ref {pool['ref_size']}, {pool['comps']} distinct rosters): "
-              f"{len(pool['requirements']) - len(none)} rows, none: {', '.join(none) or '-'}")
+              f"{len(pool['requirements']) - len(none)} rows, none: {', '.join(none) or '-'}; "
+              f"optional: " + (", ".join(f"{c} {pool['requirements'][c]['target']:g}" for c in opt) or "-"))
     role_of = engines(base).role_of
     names = engines(base).weapons
     fielded_out = {}

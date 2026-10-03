@@ -3812,16 +3812,19 @@
 
   CompEngine.prototype._roleTypical = function () {
     /* The typical role-count row for this content, style and size
-       (mirrors engine.py _role_typical): below the style floor the
-       content's fitted-comps median at this exact size, else the pooled
-       harvest row; at the floor and above the DECLARED identity style's
-       cell, else the pooled row (`balanced` never reads a cell). */
+       (mirrors engine.py _role_typical): below the style floor a
+       matchmaking pool's own row for the content at this exact size (a
+       role may be typical at ZERO), else the content's fitted-comps
+       median, else the pooled harvest row; at the floor and above the
+       DECLARED identity style's cell, else the pooled row (`balanced`
+       never reads a cell). */
     var rt = this.compCfg.role_typical || {};
     var key = String(this.size);
     var floor = rt.style_min_size === undefined ? 10 : rt.style_min_size;
     var row = null;
     if (this.size < floor) {
-      row = ((rt.comps || {})[this.content] || {})[key] || null;
+      row = ((rt.pools || {})[this.content] || {})[key] || null;
+      if (!nonEmpty(row)) row = ((rt.comps || {})[this.content] || {})[key] || null;
       if (!nonEmpty(row)) row = (rt.pooled || {})[key] || null;
     } else {
       if (IDENTITY_STYLES[this.style])

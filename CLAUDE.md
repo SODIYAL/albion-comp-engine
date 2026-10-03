@@ -240,7 +240,9 @@ One-way, provenance-checked data flow:
    multipliers, delivery mechanics, a fight chain) + `composition.yaml` +
    `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`,
    `out/meta_prior.json` and the Dragon Portal's rows (`ancient_lands.yaml`: base
-   rows plus `pool_rows` and `pool_fielded` per matchmaking pool, `derive_portal_rows.py`) are
+   rows plus `pool_rows` and `pool_fielded` per matchmaking pool, `derive_portal_rows.py`;
+   a capability a minority of a pool's winners field is an OPTIONAL row at 4-5 and 6-7)
+   and the pools' role counts (`role_counts.json` `pools`) are
    GENERATED from the harvest — never hand-edit.
 5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
    `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from

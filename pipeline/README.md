@@ -510,8 +510,17 @@ HEAD (`--base` for another revision). Review the report, then commit.
   size inside the pool, scaled from the pool's `ref_size` (weights stay
   the base rows'). Target is the median, soft cap 1.15 x p90, min the p10
   of the supply dressed in doctrine kits; a capability the median winner
-  does not field is `none` in a pool's rows and a demand ramp in the base
-  rows. A pool under the floor (15-20 today) reads the base rows scaled
+  does not field is no requirement: a demand ramp in the base rows, and in
+  a pool's rows an OPTIONAL row where the p90 winner fields it (one
+  winning party in ten: target and soft cap read over the parties that
+  field it, no minimum; bringing it earns its coverage, not bringing it is
+  not a hole) and `none` below that. The fitted 4-5 pool reads the base
+  rows and carries its optional rows alone under `pool_rows`. The pools'
+  ROLE COUNTS come from the same unit (`derive_role_counts.py` `pools`:
+  the median count of healer / frontline / support at the exact size, and
+  zero where the p75 winner fields none), so generation keeps the winners'
+  shape while the optional rows price what a frontline brings.
+  A pool under the floor (15-20 today) reads the base rows scaled
   and the style x size rows at 10+. The step also writes `pool_fielded`:
   per pool at the floor, the weapons its dominant winners field (at least
   5 distinct rosters across 3 guild-sets, the honesty gate of the pair
