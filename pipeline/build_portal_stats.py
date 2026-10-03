@@ -21,7 +21,8 @@ reported beside the counts, never folded into one number.
 BUILDS. Per weapon and pool, the modal item per slot over the WINNING
 builds (a member of a killer party: seen as killer or participant, never
 the victim), one player one vote (a player's fullest sighting per weapon),
-shown from three votes. Victims' builds are what died and are not
+shown from three votes. Beside the modal item each slot lists what else
+the winners wore there (`others`, most worn first). Victims' builds are what died and are not
 "best builds". A comp row carries the same read per member over the
 comp's own sightings (`members`): the modal item per slot, one vote per
 sighting of the member, from the comp's sighting floor, so the page can
@@ -52,6 +53,7 @@ MIN_VOTES = 3          # a slot's modal item shows from this many distinct playe
 MIN_COMP = 2           # a comp shows from this many sightings
 TOP_WEAPONS = 40
 TOP_COMPS = 40
+OTHERS = 8             # alternatives listed per slot beside the modal item
 
 
 def _pretty(gear_id):
@@ -171,8 +173,14 @@ def build(doc, weapons_meta, gear_meta, items):
                 if not cnt or total < floor:
                     continue
                 item, n = max(cnt.items(), key=lambda kv: (kv[1], kv[0]))
+                # the rest of the slot's field, most worn first, so the page
+                # can show what else the winners wore there
+                others = [{"id": g, "name": gname(g), "votes": c, "share": round(c / total, 3)}
+                          for g, c in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))
+                          if g != item][:OTHERS]
                 best[slot.lower()] = {"id": item, "name": gname(item), "votes": n,
-                                      "share": round(n / total, 3), "of": total}
+                                      "share": round(n / total, 3), "of": total,
+                                      "others": others}
             return best
 
         weapons = []

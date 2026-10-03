@@ -78,8 +78,10 @@ doc2["builds"] = doc["builds"] + [build(5, 0, "2H_BOW", "p5"), build(6, 0, "2H_B
 doc2["battles"] = doc["battles"] + [{"battle": 5}, {"battle": 6}]
 out2 = bps.build(doc2, weapons_meta, gear_meta, {})
 bow2 = next(w for w in out2["pools"]["solo"]["weapons"] if w["id"] == "2H_BOW")
-check("P4b at the vote floor the modal armor shows with its votes and share, named from the catalogue",
-      bow2["build"].get("armor") == {"id": "ARMOR_LEATHER_SET1", "name": "Mercenary Jacket", "votes": 2, "share": 0.667, "of": 3}
+check("P4b at the vote floor the modal armor shows with its votes and share, named from the catalogue, "
+      "and the rest of the slot's field beside it, most worn first",
+      bow2["build"].get("armor") == {"id": "ARMOR_LEATHER_SET1", "name": "Mercenary Jacket", "votes": 2, "share": 0.667, "of": 3,
+                                     "others": [{"id": "ARMOR_CLOTH_SET1", "name": "Armor Cloth Set1", "votes": 1, "share": 0.333}]}
       and bow2["players"] == 3 and bow2["icon"] == "T6_2H_BOW",
       json.dumps(bow2["build"]))
 check("P5 comps need every member's weapon known and the sighting floor; rows carry seen, dominant share and K/D",

@@ -53,6 +53,17 @@ th[aria-sort]{color:var(--ink)}
 .member .slot{min-width:150px;padding:4px 8px}
 .member .slot img{width:28px;height:28px}
 .slot.pool{opacity:.6;border-style:dashed}
+.slot[data-alts]{position:relative;cursor:pointer}
+.slot[data-alts]:hover,.slot.open{border-color:var(--gold)}
+.slot.open{opacity:1}
+.alts{position:absolute;left:0;top:calc(100% + 4px);z-index:5;min-width:260px;padding:8px 10px;border:1px solid var(--gold);border-radius:10px;background:var(--surface-hi);box-shadow:0 12px 32px -12px #000;cursor:default}
+.alts-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--quiet);margin-bottom:6px}
+.alt-row{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:.9em}
+.alt-row img{width:24px;height:24px;border-radius:5px;background:var(--surface-hi)}
+.alt-row.top .alt-n{color:var(--gold-hi)}
+.alt-n{flex:1;white-space:nowrap}
+.alt-v{font-family:var(--mono);font-size:.85em;color:var(--muted);font-variant-numeric:tabular-nums}
+.alts-more{margin-top:4px;font-size:.8em;color:var(--quiet)}
 section.block{margin:18px 0 28px}
 section.block h3{margin:0 0 8px;font-size:1.02em;color:var(--gold-hi)}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--surface)}
@@ -135,11 +146,20 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
   tabs.innerHTML = ORDER.map(k => { const p = S.pools[k]; return `<button class="tab" role="tab" data-pool="${k}" aria-selected="false">${esc(p.label)}<small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small></button>`; }).join("");
   const host = document.getElementById("pool");
   const gearIcon = id => icon(/^T\d+_/.test(id) ? id : "T6_" + id, 68);
+  const SLOT_ORDER = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+  /* a slot card: the modal item; a click opens the slot's whole field,
+     the modal item first, then what else the winners wore there */
+  function slotCard(s, v, unit, cls, label){
+    const rows = [{id: v.id, name: v.name, votes: v.votes, share: v.share}].concat(v.others || []);
+    const alts = `<div class="alts" hidden><div class="alts-h">${esc(s)} — ${v.of} ${unit}</div>${rows.map(r =>
+      `<div class="alt-row${r.id === v.id ? " top" : ""}">${gearIcon(r.id)}<span class="alt-n">${esc(r.name)}</span><span class="alt-v">${r.votes} · ${pct(r.share)}</span></div>`).join("")}${
+      v.of > rows.reduce((a, r) => a + r.votes, 0) ? `<div class="alts-more">and ${v.of - rows.reduce((a, r) => a + r.votes, 0)} more across rarer items</div>` : ""}</div>`;
+    return `<div class="slot${cls ? " " + cls : ""}" data-alts="1" title="${esc(label || "click for everything worn in this slot")}">${gearIcon(v.id)}<div><div class="s">${esc(s)}${cls === "pool" ? " · pool" : ""}</div><div class="n">${esc(v.name)}</div><div class="v">${v.votes} of ${v.of} ${unit}${cls ? "" : " · " + pct(v.share)}</div></div>${alts}</div>`;
+  }
   function kitHtml(b){
-    const order = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
-    const slots = order.filter(s => b[s]);
+    const slots = SLOT_ORDER.filter(s => b[s]);
     if (!slots.length) return `<div class="kit"><span class="v">Fewer than ${S.thresholds.slot_votes} winning players seen on any slot yet.</span></div>`;
-    return `<div class="kit">${slots.map(s => `<div class="slot">${gearIcon(b[s].id)}<div><div class="s">${esc(s)}</div><div class="n">${esc(b[s].name)}</div><div class="v">${b[s].votes} of ${b[s].of} players · ${pct(b[s].share)}</div></div></div>`).join("")}</div>`;
+    return `<div class="kit">${slots.map(s => slotCard(s, b[s], "players")).join("")}</div>`;
   }
   /* ---- sortable tables: click a heading to order by it, again to flip ---- */
   const SORT = {weapons: {key: "parties", dir: -1}, comps: {key: "n", dir: -1}};
@@ -170,15 +190,14 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
      sighting; a slot the comp's own sightings do not settle falls back to
      the pool-wide build of that weapon, marked as such */
   function membersHtml(p, c){
-    const order = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
     const poolBuild = id => ((p.weapons.find(w => w.id === id) || {}).build) || {};
     const members = c.members || c.weapons.map(w => ({...w, sightings: 0, build: {}}));
     return `<div class="members">${members.map(m => {
       const own = m.build || {}, pool = poolBuild(m.id);
-      const slots = order.filter(s => own[s] || pool[s]);
+      const slots = SLOT_ORDER.filter(s => own[s] || pool[s]);
       const cells = slots.map(s => own[s]
-        ? `<div class="slot">${gearIcon(own[s].id)}<div><div class="s">${esc(s)}</div><div class="n">${esc(own[s].name)}</div><div class="v">${own[s].votes} of ${own[s].of} sightings</div></div></div>`
-        : `<div class="slot pool" title="this comp's own sightings do not settle the slot; this is the pool-wide winning build for ${esc(m.name)}">${gearIcon(pool[s].id)}<div><div class="s">${esc(s)} · pool</div><div class="n">${esc(pool[s].name)}</div><div class="v">${pool[s].votes} of ${pool[s].of} players</div></div></div>`).join("");
+        ? slotCard(s, own[s], "sightings")
+        : slotCard(s, pool[s], "players", "pool", `this comp's own sightings do not settle the slot; this is the pool-wide winning build for ${m.name} — click for everything worn there`)).join("");
       return `<div class="member"><span class="w">${icon(m.icon, 44)}${esc(m.name)}</span><div class="kit">${cells || `<span class="v">no build seen on this seat yet</span>`}</div></div>`;
     }).join("")}</div>`;
   }
@@ -211,6 +230,15 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       const st = SORT[h.dataset.table];
       if (st.key === h.dataset.sort) st.dir = -st.dir; else { st.key = h.dataset.sort; st.dir = -1; }
       show(POOL, VIEW); return;
+    }
+    const sc = e.target.closest(".slot[data-alts]");
+    const wasOpen = sc && !sc.querySelector(".alts").hidden;
+    /* any click closes an open field; a click on a closed slot opens its own */
+    host.querySelectorAll(".alts").forEach(a => { a.hidden = true; });
+    host.querySelectorAll(".slot.open").forEach(a => a.classList.remove("open"));
+    if (sc){
+      if (!wasOpen){ sc.querySelector(".alts").hidden = false; sc.classList.add("open"); }
+      return;
     }
     const r = e.target.closest("tr.row"); if (!r) return;
     const d = r.dataset.c !== undefined
