@@ -80,6 +80,78 @@ def load_game_facts():
         _load("gear_lines.json")
 
 
+GEAR_SPELL_SLOTS = ("head", "armor", "shoes")   # the pieces with a CHOSEN active
+# the gear slot names the sources use for those pieces
+GEAR_SLOT_ALIASES = {"helm": "head", "head": "head", "armor": "armor",
+                     "boots": "shoes", "shoes": "shoes"}
+
+
+def load_gear_menus():
+    """gear_spells.json: every item's equippable actives and passives (the
+    dumps), the menu a recorded gear active is validated against."""
+    path = os.path.join(OUT, "gear_spells.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _spell_names(spell_index):
+    """lower-cased display name -> [spell id]; a name two spells share
+    resolves to nothing rather than a guess."""
+    names = {}
+    for sid, s in (spell_index.get("spells", spell_index)).items():
+        n = (s.get("display_name") or s.get("name") or "").strip().lower()
+        if n:
+            names.setdefault(n, []).append(sid)
+    return names
+
+
+def gear_spell_picks(rec, spell_index, gear_menus, names=None):
+    """The ACTIVE ability chosen on each worn head / armor / shoes piece,
+    as spell ids: {slot: id or None}. Two source shapes:
+
+      - a comp slot's `spells_verbatim` (the Character Builder: the game's
+        own UniqueNames per slot, actives['1'] is the one active a piece
+        carries)
+      - an import's `gear_spells_raw` (MetaBattle: "Active, Passive, ..."
+        display names; the first name is the active)
+
+    A pick is kept only when the worn item is known and the spell sits on
+    that item's dumps menu (gear_spells.json); anything else is None —
+    recorded as unknown, never inferred. None when the record carries no
+    gear-spell source at all."""
+    verbatim = rec.get("gear_spells_verbatim") or {}
+    raw = rec.get("gear_spells_raw") or {}
+    if not verbatim and not raw:
+        return None
+    names = names if names is not None else _spell_names(spell_index)
+    gear = rec.get("gear") or {}
+    worn = {}
+    for k, v in gear.items():
+        slot = GEAR_SLOT_ALIASES.get(k)
+        if slot and v:
+            worn[slot] = v
+    out = {}
+    for slot in GEAR_SPELL_SLOTS:
+        sid = None
+        v = verbatim.get(slot) or {}
+        if isinstance(v, dict) and (v.get("actives") or {}):
+            sid = (v.get("actives") or {}).get("1") or (v.get("actives") or {}).get(1)
+        elif raw.get(slot):
+            first = str(raw[slot]).split(",")[0].strip().lower()
+            hits = names.get(first) or []
+            sid = hits[0] if len(hits) == 1 else None
+        item = worn.get(slot)
+        if item and item not in gear_menus:
+            item = re.sub(r"^T\d+_", "", str(item)).split("@")[0]
+        menu = (gear_menus.get(item) or {}) if item else {}
+        if sid and sid not in (menu.get("actives") or []):
+            sid = None                   # not on the worn item's menu: unknown
+        out[slot] = sid
+    return out
+
+
 def load_docs(subdir, kind):
     docs = []
     for path in sorted(glob.glob(os.path.join(DATA, subdir, "*.yaml"))):
@@ -108,6 +180,7 @@ def comp_records(comp, weapon_lines, spell_index, gear_lines):
                                     spell_index)
             if rec:
                 rec["skills_raw"] = slot.get("skills")
+                rec["gear_spells_verbatim"] = slot.get("spells_verbatim")
                 records.append(rec)
     return records
 
@@ -157,6 +230,9 @@ def variant_of(rec):
                   (rec.get("source") or {}).get("kind"),
         "role": rec.get("role_raw") or rec.get("role") or "",
         "spells": rec.get("spells"),
+        # the active chosen on each worn head / armor / shoes / cape piece
+        # (gear_spell_picks); None where the source records none
+        "gear_spells": rec.get("gear_spells"),
         "gear": {k: v for k, v in (rec.get("gear") or {}).items() if v},
         "raw": rec.get("gear_raw") or {},
         "alternatives": {
@@ -237,7 +313,11 @@ def main():
         records += import_records(doc, weapon_lines, spell_index, gear_lines,
                                   problems) if doc.get("builds") else []
 
+    gear_menus = load_gear_menus()
+    spell_names = _spell_names(spell_index)
     for rec in records:
+        rec["gear_spells"] = gear_spell_picks(rec, spell_index, gear_menus,
+                                             spell_names)
         if rec.get("quarantined_fields"):
             quarantined.append({"build_id": rec["build_id"],
                                 "fields": rec["quarantined_fields"]})

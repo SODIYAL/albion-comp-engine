@@ -337,7 +337,26 @@ function loDoctrineLine(i){
   if (dp) bits.push(`passive: <b>${esc(dp.name || dp.id)}</b>`);
   fx.forEach(id => bits.push(
     `carries: <b>${esc(((ENG.gearEffects || {})[id] || {}).name || id)}</b>`));
-  return `<div class="lo-ref" title="the role book's doctrine read of this kit — the seat this weapon defaults to, the tree passive that seat takes on this chest, and any team effect the chest carries">${bits.join(" · ")}</div>`;
+  /* the gear-active doctrine: the ability the engine scores on each worn
+     head / armor / shoes piece, and why — the one the recording builds
+     equip (observed), the item's own (assumed), or the template's best
+     where the item carries no stamp */
+  const actives = ["head", "armor", "shoes"].map(s => {
+    const k = (LOADOUT[i] || {})[s];
+    if (!k || !ENG.gear[k] || typeof ENG.gearActiveSpell !== "function") return "";
+    const sid = ENG.gearActiveSpell(k);
+    if (!sid) return "";
+    const src = ENG.gearChoiceSource(k), da = ENG.gear[k].doctrine_active || {};
+    const hit = (((typeof GEAR_SPELLS !== "undefined" && GEAR_SPELLS[k]) || {}).a || []).find(x => x[0] === sid);
+    const name = hit ? hit[1] : (da.id === sid && da.name) || sid;
+    const empty = !Object.keys(ENG.gearExtra(k) || {}).length;
+    const basis = src === "observed" ? `worn by ${da.votes} of ${da.of} recording builds`
+      : src === "assumed" ? "the item's own active; no recording build wears this piece yet"
+      : "the template's best-scoring ability (no doctrine for this item)";
+    return `${esc(LO_SLOT_LABEL[s])} active: <b title="${esc(basis)}">${esc(name)}</b>${src === "observed" ? "" : ` <small>${src}</small>`}${empty ? ' <small title="no scored row for this ability: the slot supplies nothing to the comp">unscored</small>' : ""}`;
+  }).filter(Boolean);
+  return `<div class="lo-ref" title="the role book's doctrine read of this kit — the seat this weapon defaults to, the tree passive that seat takes on this chest, and any team effect the chest carries">${bits.join(" · ")}</div>`
+    + (actives.length ? `<div class="lo-ref" title="the gear-active doctrine: the ability scored on each piece is the one the recording published builds equip, else the item's own — never the one that would score best">${actives.join(" · ")}</div>` : "");
 }
 
 function loadoutPanel(i){

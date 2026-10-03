@@ -88,9 +88,16 @@ Three layers, never merged:
   training split `battle % 5 != 0`; a hand-set map fails the build.
   Duplicates: 1 copy by default; the one super-additive case is
   `self_cost_offset_min_copies` (Demon Armor).
-- Gear scores (curated `sheets/gear/`) through `build_extra`: stat
+- Gear scores (curated `sheets/gear/`, the tree-shared actives once in
+  `sheets/gear/pools/` and composed per item) through `build_extra`: stat
   channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic
-  lookup (`gear_key()`).
+  lookup (`gear_key()`). The active a piece scores is the gear-active
+  doctrine's (`doctrine_active`, stamped by `build_dataset`): the one the
+  recording published builds equip (two votes, by band too), else the
+  item's own active (`assumed`) — never the template-weighted argmax
+  across the menu; an active with no scored row is an empty bundle.
+  `gear_choice_source` / `gear_active_spell` name the pick for the UI
+  (VALIDATION.md 10-03).
 - The role layer (`roles-design.md`, `pipeline/roles.yaml`): seats (uniformed)
   and functions (pierce / purge / anti_heal / shield_break) derived E-first;
   `detect_role` / `role_advisory` descriptive; `role_class` for forge bands

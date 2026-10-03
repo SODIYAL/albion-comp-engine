@@ -1,0 +1,13 @@
+# Actives every plate armor shares (dumps menu: TAUNT, OUTOFCOMBATHEAL
+# beside the item's own third active). Composed into every ARMOR_PLATE
+# item.
+#
+# Neither shared active scores. Taunt is a mob-threat tool whose player
+# effect is +20% damage for -20% defences over 3s: the effect layer offers
+# no capability it can ground, and none is invented. Mend Wounds is an
+# out-of-combat channel. The pool exists so the doctrine's observed active
+# resolves against a curated menu: a plate wearer seen on Taunt supplies
+# nothing from the slot, instead of the item's own active by argmax.
+tree: ARMOR_PLATE
+curated_as_of: 2026-10-03
+capabilities: []

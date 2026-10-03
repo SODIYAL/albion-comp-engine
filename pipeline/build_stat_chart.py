@@ -388,12 +388,15 @@ def main():
     # crossbow shove, judged by the same rubric
     gear_names = {k: f"{g['display_name']} [{g.get('slot','gear')}]"
                   for k, g in (dataset.get("gear") or {}).items()}
+    gear_pools = sheets_lib.load_gear_pools()
+    gs_path = os.path.join(OUT, "gear_spells.json")
+    gear_menus = json.load(open(gs_path, encoding="utf-8")) if os.path.exists(gs_path) else {}
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
         for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
             gk = entry.get("gear")
             if not gk:
                 continue
-            for c in entry.get("capabilities", []):
+            for c in sheets_lib.compose_gear(entry, gear_menus.get(gk), gear_pools):
                 if isinstance(c, dict) and c.get("cap") and c.get("evidence") and c.get("score"):
                     rows.append((c["cap"], gk, c["evidence"], c["score"]))
     names.update(gear_names)

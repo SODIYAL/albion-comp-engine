@@ -219,10 +219,57 @@ if os.path.exists(_gs_path):
     GEAR_SPELLS = json.load(open(_gs_path, encoding="utf-8"))
 
 
+GEAR_POOLS = sheets_lib.load_gear_pools()
+
+
+def lint_gear_pools():
+    """Gear pool files (sheets/gear/pools/): every row must sit on the menu
+    of at least one item of its tree and ground its cap. compose_gear
+    applies a row only where the item's menu carries the spell, so a
+    typo'd or patch-removed spell would silently apply to NOBODY — an
+    ERROR here instead."""
+    errors, warnings = [], []
+    for tree, rows in sorted(GEAR_POOLS.items()):
+        members = [k for k in GEAR_SPELLS if sheets_lib.gear_tree(k) == tree]
+        if not members:
+            errors.append(f"gear/pools/{tree}: no item in the dumps has this tree")
+            continue
+        for r in rows:
+            cap, score, ev = r.get("cap"), r.get("score", 0), r.get("evidence")
+            where = f"gear/pools/{tree}.{cap}"
+            if not score:
+                errors.append(f"{where}: pool row without a nonzero score")
+                continue
+            if not ev:
+                errors.append(f"{where}: pool row without evidence")
+                continue
+            holders = [k for k in members
+                       if ev in set((GEAR_SPELLS[k] or {}).get("actives") or [])
+                       | set((GEAR_SPELLS[k] or {}).get("passives") or [])]
+            if not holders:
+                errors.append(
+                    f"{where}: ability '{ev}' is on NO {tree} item's menu — "
+                    f"the row applies to nobody")
+                continue
+            if cap in CHECKABLE and cap not in LOOKUP.candidates(ev):
+                name = LOOKUP.spells.get(ev, {}).get("name", ev)
+                if not LOOKUP.has_structured(ev) and not LOOKUP.spells.get(ev, {}).get("flags"):
+                    warnings.append(
+                        f"{where}: '{name}' has no structured effects and no "
+                        f"prose flags — cannot verify, review by hand")
+                else:
+                    offer = ", ".join(sorted(LOOKUP.candidates(ev))) or "nothing"
+                    errors.append(
+                        f"{where}: '{name}' cannot ground {cap}. "
+                        f"Its effects support: {offer}")
+    return errors, warnings
+
+
 def lint_gear():
     """Gear sheets (sheets/gear/): every nonzero score cites either the
     GEAR_STATS sentinel or an ability actually ON the item's menu, and the
-    cited ability must be able to ground the claimed capability."""
+    cited ability must be able to ground the claimed capability. Rows are
+    the COMPOSED list (own rows + the tree pool's), as the build reads them."""
     errors, warnings = [], []
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
         for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
@@ -231,7 +278,7 @@ def lint_gear():
                 continue
             menu = GEAR_SPELLS.get(gkey) or {}
             equippable = set(menu.get("actives") or []) | set(menu.get("passives") or [])
-            for c in entry.get("capabilities", []):
+            for c in sheets_lib.compose_gear(entry, GEAR_SPELLS.get(gkey), GEAR_POOLS):
                 cap, score, ev = c.get("cap"), c.get("score", 0), c.get("evidence")
                 where = f"gear/{gkey}.{cap}"
                 if not score:
@@ -261,7 +308,8 @@ def lint_gear():
 
 def main(paths):
     total_err = 0
-    for label, fn in (("sheets/pools/", lint_pools), ("sheets/gear/", lint_gear)):
+    for label, fn in (("sheets/pools/", lint_pools), ("sheets/gear/pools/", lint_gear_pools),
+                      ("sheets/gear/", lint_gear)):
         errors, warnings = fn()
         status = "FAIL" if errors else "OK"
         print(f"[{status}] {label}  ({len(errors)} errors, {len(warnings)} warnings)")

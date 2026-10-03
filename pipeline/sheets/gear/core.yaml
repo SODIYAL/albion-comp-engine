@@ -12,14 +12,13 @@
   curated_as_of: 2026-09-10
   # Nobody fields the Cleric Cowl for its knockback in group content; the
   # Force Field is a very-small-scale pick (1v1, 3v3, 5v5) at most
-  # (curation judgment). MetaBattle agrees 4/4
-  # (three ZvZ builds and the one hellgate 5v5 all run Ice Block). The
-  # Force Field rows (knockback_displace 3 / peel 3 / anti_dive 2,
-  # PBAOE_KNOCKBACK) are DROPPED so the engine's one-active-per-piece pick
-  # cannot credit a group comp with a shove nobody equips. The sheet
-  # cannot say "small scale only" — that is the gear-active doctrine
-  # mechanism on BACKLOG.md; until it lands, Cleric Cowl reads as Ice
-  # Block everywhere. Golden T47 pins it (T20 re-pinned onto Judicator).
+  # (curation judgment). The recording builds agree 5/5 (Ice Block in
+  # every ZvZ build and the one hellgate 5v5). The Force Field rows now
+  # live in the cloth-head pool (pools/head_cloth.yaml) and the gear-active
+  # doctrine (build_dataset resolve_active_doctrine, F36) picks the active
+  # the recording builds equip, so this sheet carries Ice Block alone and
+  # the engine never credits a group comp with a shove nobody equips.
+  # Golden T47 pins it (T20 re-pinned onto Judicator).
   capabilities:
     - {cap: tankiness,     score: 2, evidence: ICEBLOCK2}        # Ice Block: damage-immune channel, usable while CC'd
 
@@ -355,3 +354,46 @@
   curated_as_of: 2026-08-20
   capabilities:
     - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health + regen
+
+# The meals winners eat beyond the four above, each read from the dumps'
+# own description of its consume spell and scored on the line of the meal
+# it varies (curation judgment; a food row is one coarse step). Share of
+# winning builds in the harvest beside each. Cabbage Soup (regeneration
+# out of combat) and Pork Pie (load and gathering) have no row to give and
+# are not catalogued.
+- gear: T8_MEAL_STEW_AVALON          # Avalonian Beef Stew — 4.1%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # combat damage + health regeneration
+
+- gear: T8_MEAL_STEW_FISH            # Deadwater Eel Stew — 3.1%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # combat damage + cooldown reduction
+
+- gear: T7_MEAL_OMELETTE_FISH        # Dusthole Crab Omelette — 1.5%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cooldowns, cast times and energy costs
+
+- gear: T8_MEAL_SANDWICH             # Beef Sandwich — 3.0%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health
+
+- gear: T7_MEAL_ROAST                # Roast Pork — 1.6%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}       # heals by the damage dealt
+
+- gear: T7_MEAL_ROAST_FISH           # Roasted Puremist Snapper — 2.3%
+  slot: food
+  curated_as_of: 2026-10-03
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}       # heals by the damage dealt
+    - {cap: tankiness,     score: 1, evidence: GEAR_STATS}       # and raises max health, under a sandwich's

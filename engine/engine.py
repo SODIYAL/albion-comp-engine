@@ -30,12 +30,10 @@ DRESSED supply, while the hard-floor term reads `s_floor` — the weapon+loadout
 supply only (Option C, F25/F26), so worn gear can never buy its way past a
 structural floor.
 
-KNOWN OPEN DEFECT (decision pending, see HANDOFF.md): every `target` and
-`soft_cap` in the dataset was fitted in WEAPON+spell-pick units, while the
-supply above is measured on whole dressed people (~1.88x on average, ~7x on
-tankiness). The math here is unaffected — but the two sides of every
-comparison are currently in different units, and the correction must move
-every template row at once.
+ONE UNIT. Every `target` and `soft_cap` in the dataset speaks person units,
+the same unit the dressed supply above is measured in (the unit re-fit,
+standing rule 9: a conversion can only raise a target, and a re-fit moves
+every template row at once).
 """
 import json, os, itertools, re
 import math
@@ -1354,9 +1352,87 @@ class Engine:
             self._gear_cache[key] = extras
         return extras
 
+    def _gear_combo_slots(self, key):
+        """For one gear item: the spell id per combo index in its ACTIVE
+        slot (None where the loadout has no active slot), aligned with
+        gear_extras. Combos enumerate the non-empty slots in order, the
+        last varying fastest (itertools.product)."""
+        g = self.gear.get(self.gear_key(key)) or {}
+        lo = g.get("loadout") or {}
+        names, spells = lo.get("slot_names") or [], lo.get("slot_spells") or []
+        sizes, active_pos = [], None
+        for i, slot in enumerate(lo.get("slots") or []):
+            if not slot:
+                continue
+            if i < len(names) and names[i] == "active":
+                active_pos = len(sizes)
+            sizes.append((len(slot), spells[i] if i < len(spells) else []))
+        if active_pos is None:
+            return None
+        out = []
+        for combo in itertools.product(*[range(n) for n, _ in sizes]):
+            sp = sizes[active_pos][1]
+            j = combo[active_pos]
+            out.append(sp[j] if j < len(sp) else None)
+        return out
+
+    def doctrine_gear_choice(self, key):
+        """The combo index the gear-active doctrine names, or None. The
+        item's `doctrine_active` (build_dataset resolve_active_doctrine: the
+        active the recording published builds equip, else the item's own)
+        picks the ACTIVE slot's spell — the band's pick where the current
+        band has one, else the overall pick; any other slot takes the
+        argmax among the combos carrying that active."""
+        key = self.gear_key(key)
+        da = (self.gear.get(key) or {}).get("doctrine_active")
+        if not da:
+            return None
+        band = "gang" if self.size <= self.DOCTRINE_GANG_MAX else "group"
+        pick = (((da.get("bands") or {}).get(band)) or da).get("id")
+        per_combo = self._gear_combo_slots(key)
+        if not per_combo or pick not in per_combo:
+            return None
+        extras = self.gear_extras(key)
+        best_i, best_key = None, None
+        for i, extra in enumerate(extras):
+            if per_combo[i] != pick:
+                continue
+            val = units = 0.0
+            for c, v in extra.items():
+                val += self._weights.get(c, 0.0) * v
+                units += v
+            if best_key is None or (val, units) > best_key:
+                best_i, best_key = i, (val, units)
+        return best_i
+
+    def gear_active_spell(self, key, choice=None):
+        """The spell id in the item's ACTIVE slot under `choice` (the
+        default pick when None), or None where the item has no active
+        slot — what the UI names beside the piece."""
+        per_combo = self._gear_combo_slots(key)
+        if not per_combo:
+            return None
+        if choice is None or choice < 0 or choice >= len(per_combo):
+            choice = self.default_gear_choice(key)
+        return per_combo[choice]
+
+    def gear_choice_source(self, key):
+        """How the default pick for this item is settled: "observed" (the
+        recording builds' modal active), "assumed" (the item's own active,
+        no votes at the floor) or "argmax" (no doctrine stamp: the
+        template-weighted best bundle)."""
+        da = (self.gear.get(self.gear_key(key)) or {}).get("doctrine_active")
+        if da and self.doctrine_gear_choice(key) is not None:
+            return da.get("source") or "observed"
+        return "argmax"
+
     def default_gear_choice(self, key):
-        """The static ability pick under the current template weights —
-        same argmax rule as default_combo."""
+        """The static ability pick: the gear-active doctrine's combo where
+        the item carries one, else the argmax under the current template
+        weights — the same rule as default_combo."""
+        d = self.doctrine_gear_choice(key)
+        if d is not None:
+            return d
         best_i, best_key = 0, None
         for i, extra in enumerate(self.gear_extras(key)):
             val = units = 0.0

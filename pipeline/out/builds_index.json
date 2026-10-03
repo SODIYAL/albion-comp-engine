@@ -64,6 +64,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER, secondhand=None",
      "party_size": {
       "max": 15,
@@ -133,6 +134,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Press E on engage, chop people, royal armor like CRAZY",
      "p": 3,
      "party_size": {
@@ -193,6 +195,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, armor=ARMOR_LEATHER_HELL",
      "party_size": {
       "max": 15,
@@ -262,6 +265,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Pierce for engage, spam royal armor like CRAZY",
      "p": 2,
      "party_size": {
@@ -322,6 +326,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_PLATE_SET1, armor=ARMOR_PLATE_ROYAL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -391,6 +396,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "guard runes on chokes or when they engage.",
      "p": 1,
      "party_size": {
@@ -451,6 +457,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_SET3, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, armor=ARMOR_PLATE_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -518,6 +525,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "use E to guarantee our engage hits, mimic any mace for guardrune, demon for defense",
      "p": 5,
      "party_size": {
@@ -587,6 +595,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Press E on engage or low targets, chop people.",
      "p": 3,
      "party_size": {
@@ -653,6 +662,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Heal tanks or very low targets, save E for reset or big heals to be called.",
      "p": 4,
      "party_size": {
@@ -715,6 +725,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER",
      "party_size": {
       "max": 15,
@@ -784,6 +795,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "E on engage EARLY, kidnap healers or overcommitted tanks",
      "p": 4,
      "party_size": {
@@ -846,6 +858,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, helm=None, armor=ARMOR_LEATHER_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -915,6 +928,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Full monkey tank, shut down their zerg",
      "p": 1,
      "party_size": {
@@ -975,6 +989,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, cape=CAPEITEM_SMUGGLER, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_HELL",
      "party_size": {
       "max": 15,
@@ -1044,6 +1059,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Yes.",
      "p": 4,
      "party_size": {
@@ -1110,6 +1126,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Keep 2 stacks on maximum # of targets, add 3rd stack and W on W cooldown. Use E to reposition when necessary.",
      "p": 1,
      "party_size": {
@@ -1170,6 +1187,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, armor=ARMOR_CLOTH_SET2, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1235,6 +1253,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1304,6 +1323,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Full monkey tank, shut down their zerg",
      "p": 1,
      "party_size": {
@@ -1370,6 +1390,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Find their engage and E to defend it.",
      "p": 2,
      "party_size": {
@@ -1437,6 +1458,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Purge their juice as we engage",
      "p": 2,
      "party_size": {
@@ -1496,6 +1518,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=None, helm=HEAD_PLATE_SET2, armor=ARMOR_PLATE_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1565,6 +1588,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Keep dagger stacks, kill engage",
      "p": 4,
      "party_size": {
@@ -1624,6 +1648,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_LEATHER_FEY",
      "party_size": {
       "max": 15,
@@ -1687,6 +1712,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1756,6 +1782,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Heal people around you. Don't stack on other healers.",
      "p": 1,
      "party_size": {
@@ -1817,6 +1844,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Heal people around you, save W for tanks.",
      "p": 4,
      "party_size": {
@@ -1876,6 +1904,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_HORN_KEEPER",
      "party_size": {
       "max": 15,
@@ -1939,6 +1968,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=None, helm=HEAD_LEATHER_SET1, secondhand=OFF_ORB_MORGANA",
      "party_size": {
       "max": 15,
@@ -2016,6 +2046,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Full monkey tank, shut down their zerg",
      "p": 1,
      "party_size": {
@@ -2075,6 +2106,7 @@
       "offhand": "OFF_SHIELD",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, potion=None",
      "party_size": {
       "max": 15,
@@ -2152,6 +2184,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Pre-engage, catch and pierce them, spam royal armor like CRAZY",
      "p": 1,
      "party_size": {
@@ -2217,6 +2250,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Execute the engage, execute healers, execute morale, execute, execute, execute...",
      "p": 4,
      "party_size": {
@@ -2282,6 +2316,7 @@
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "E on engage, E low targets or 2nd engage in between",
      "p": 2,
      "party_size": {
@@ -2342,6 +2377,11 @@
       "armor": "ARMOR_LEATHER_SET3",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
+     },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
      },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
@@ -2406,6 +2446,11 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2468,6 +2513,11 @@
       "armor": "ARMOR_LEATHER_SET3",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
+     },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
      },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
@@ -2532,6 +2582,11 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2595,6 +2650,11 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2657,6 +2717,11 @@
       "armor": "ARMOR_LEATHER_SET3",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_AVALON"
+     },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
      },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
@@ -2724,6 +2789,11 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_AVALON"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
+     },
      "note": "BOMB TSQ BRUJERIA",
      "party_size": {
       "max": 10,
@@ -2788,6 +2858,11 @@
       "head": "HEAD_PLATE_SET1",
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_AVALON"
+     },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "BLOCK",
+      "shoes": "BLINDSPOT"
      },
      "note": "BOMB TSQ MALDICIONES DE VIDA",
      "party_size": {
@@ -2858,6 +2933,11 @@
       "potion": "T8_POTION_COOLDOWN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "PURGE_HELMET",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -2913,6 +2993,11 @@
       "head": "HEAD_PLATE_HELL",
       "potion": "T8_POTION_COOLDOWN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "SPEEDCASTER",
+      "head": null,
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -2970,6 +3055,11 @@
       "potion": "T8_POTION_COOLDOWN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "AMBUSH",
+      "head": "PURGE_HELMET",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3025,6 +3115,11 @@
       "head": "HEAD_LEATHER_SET2",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_PLATE_SET1"
+     },
+     "gear_spells": {
+      "armor": "WILD_MAGIC",
+      "head": "RETALIATE2",
+      "shoes": "SPRINTHOT"
      },
      "note": null,
      "party_size": null,
@@ -3082,6 +3177,11 @@
       "potion": "T8_POTION_COOLDOWN",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": {
+      "armor": "ARMORCHAIN",
+      "head": "BEARTRAP",
+      "shoes": "OVERSPRINT"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3138,6 +3238,11 @@
       "offhand": "OFF_HORN_KEEPER",
       "potion": "T8_POTION_COOLDOWN",
       "shoes": "SHOES_PLATE_SET1"
+     },
+     "gear_spells": {
+      "armor": "ARMORCHAIN",
+      "head": "PURGE_HELMET",
+      "shoes": "SPRINTHOT"
      },
      "note": null,
      "party_size": null,
@@ -3201,6 +3306,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "WILD_MAGIC",
+      "head": "ICEBLOCK2",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3259,6 +3369,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "WILD_MAGIC",
+      "head": "PURIFYING_SMOKE",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3311,6 +3426,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 5,
@@ -3378,6 +3494,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": {
+      "armor": "WILD_MAGIC",
+      "head": "PURIFYING_SMOKE",
+      "shoes": "DMG_BLINK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3432,6 +3553,7 @@
       "head": "HEAD_CLOTH_ROYAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 5,
@@ -3497,6 +3619,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 5,
@@ -3564,6 +3687,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": null,
+      "shoes": "CLEANSE_DASH"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3620,6 +3748,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": null,
+      "shoes": "CC_BLOCK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3674,6 +3807,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 5,
@@ -3741,6 +3875,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "PURIFYING_SMOKE",
+      "shoes": "BATTLEFRENZY"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3797,6 +3936,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "WILD_MAGIC",
+      "head": "PURIFYING_SMOKE",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3852,6 +3996,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 5,
@@ -3919,6 +4064,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "CLEANSE_DASH"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -3975,6 +4125,11 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": null,
+      "shoes": "DMG_BLINK"
      },
      "note": null,
      "party_size": null,
@@ -4034,6 +4189,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Peel/Control",
      "party_size": {
       "max": 20,
@@ -4095,6 +4251,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Peel/Control",
      "party_size": {
       "max": 20,
@@ -4156,6 +4313,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Peel/Control",
      "party_size": {
       "max": 20,
@@ -4221,6 +4379,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "Beam Spiked",
      "party_size": {
       "max": 20,
@@ -4282,6 +4441,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "2nd Occult for Tempo",
      "party_size": {
       "max": 20,
@@ -4355,6 +4515,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4420,6 +4581,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4486,6 +4648,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4552,6 +4715,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4617,6 +4781,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4682,6 +4847,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Fake if called",
      "party_size": {
       "max": 20,
@@ -4756,6 +4922,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "E+W for engage",
      "party_size": {
       "max": 20,
@@ -4817,6 +4984,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -4882,6 +5050,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Mimic Guard Rune",
      "party_size": {
       "max": 20,
@@ -4943,6 +5112,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "E on Engage",
      "party_size": {
       "max": 20,
@@ -5013,6 +5183,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5078,6 +5249,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5139,6 +5311,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5212,6 +5385,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5282,6 +5456,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5347,6 +5522,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5412,6 +5588,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Cleanse Behe/Hellion",
      "party_size": {
       "max": 20,
@@ -5473,6 +5650,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Offensive E on DPS",
      "party_size": {
       "max": 20,
@@ -5534,6 +5712,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Help us Kite",
      "party_size": {
       "max": 20,
@@ -5599,6 +5778,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5660,6 +5840,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Fake if called",
      "party_size": {
       "max": 20,
@@ -5725,6 +5906,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Big Boy Stall",
      "party_size": {
       "max": 20,
@@ -5798,6 +5980,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5863,6 +6046,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -5936,6 +6120,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "control enemy on our engage",
      "party_size": {
       "max": 20,
@@ -6005,6 +6190,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "control enemy on our engage",
      "party_size": {
       "max": 20,
@@ -6085,6 +6271,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -6150,6 +6337,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Perma ent form pls",
      "party_size": {
       "max": 20,
@@ -6211,6 +6399,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Perma Ent Form Pls",
      "party_size": {
       "max": 20,
@@ -6285,6 +6474,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Use helm to help setup",
      "party_size": {
       "max": 20,
@@ -6355,6 +6545,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Watch Bombs",
      "party_size": {
       "max": 20,
@@ -6425,6 +6616,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Watch Bombs/Stop engages",
      "party_size": {
       "max": 20,
@@ -6506,6 +6698,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "Fake if called",
      "party_size": {
       "max": 20,
@@ -6580,6 +6773,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -6650,6 +6844,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Defensive Lifecurse",
      "party_size": {
       "max": 20,
@@ -6724,6 +6919,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Offensive Obelisk",
      "party_size": {
       "max": 20,
@@ -6798,6 +6994,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Druid Cowl Swap if no Chariot",
      "party_size": {
       "max": 20,
@@ -6868,6 +7065,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Druid Cowl Swap if no Chariot",
      "party_size": {
       "max": 20,
@@ -6938,6 +7136,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -7008,6 +7207,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -7070,6 +7270,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Play with DPS to Buff",
      "party_size": {
       "max": 20,
@@ -7140,6 +7341,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -7214,6 +7416,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Guard Rune",
      "party_size": {
       "max": 20,
@@ -7284,6 +7487,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Guard Rune",
      "party_size": {
       "max": 20,
@@ -7354,6 +7558,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "Guard Rune",
      "party_size": {
       "max": 20,
@@ -7417,6 +7622,11 @@
       "armor": "ARMOR_CLOTH_KEEPER",
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "SPELLRUSH",
+      "head": "SMELLOFBLOOD",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": "Dagger Pair tracking",
      "party_size": {
@@ -7483,6 +7693,11 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "SPELLRUSH",
+      "head": "ENERGYFIELD",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": "Crystal Reaper tracking",
      "party_size": {
       "max": 5,
@@ -7547,6 +7762,11 @@
       "armor": "ARMOR_PLATE_SET1",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_CLOTH_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "ENRAGE",
+      "head": "BLOCK",
+      "shoes": "DEMONWALK"
      },
      "note": "EarthRune tracking",
      "party_size": {
@@ -7614,6 +7834,11 @@
       "offhand": "OFF_LAMP_UNDEAD",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "SPELLRUSH",
+      "head": "SMELLOFBLOOD",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": "Demon Fang Tracking",
      "party_size": {
       "max": 5,
@@ -7678,6 +7903,11 @@
       "head": "HEAD_LEATHER_UNDEAD",
       "offhand": "OFF_CENSER_AVALON",
       "shoes": "SHOES_CLOTH_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "ARMOR_CD_RESET",
+      "shoes": "DEMONWALK"
      },
      "note": "Forgebark Staff tracking",
      "party_size": {
@@ -7746,6 +7976,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -7811,6 +8042,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "GO-MORGANA-IF-CAPE-T10; alts: cape=CAPEITEM_MORGANA, armor=ARMOR_CLOTH_AVALON, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -7881,6 +8113,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -7946,6 +8179,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_PLATE_KEEPER"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 7,
@@ -8011,6 +8245,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_CLOTH_ROYAL, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -8077,6 +8312,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -8147,6 +8383,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3, potion=POTION_SLOWFIELD, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 7,
@@ -8216,6 +8453,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "ICEBLOCK2",
+      "shoes": "CC_BLOCK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8271,6 +8513,11 @@
       "head": "HEAD_PLATE_SET2",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -8328,6 +8575,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "HASTE",
+      "head": "AVALON_BEAM",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8383,6 +8635,11 @@
       "head": "HEAD_CLOTH_AVALON",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "HASTE",
+      "head": "AVALON_BEAM",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -8440,6 +8697,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "ELECTRICSHOCK",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8495,6 +8757,11 @@
       "head": "HEAD_LEATHER_FEY",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "HASTE",
+      "head": "IMMORTAL",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -8552,6 +8819,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "LIFESAVIOR",
+      "head": "AVALON_BEAM",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8607,6 +8879,11 @@
       "head": "HEAD_CLOTH_SET2",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_PLATE_AVALON"
+     },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "ICEBLOCK2",
+      "shoes": "CC_BLOCK"
      },
      "note": null,
      "party_size": null,
@@ -8664,6 +8941,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8719,6 +9001,11 @@
       "head": "HEAD_LEATHER_FEY",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_PLATE_UNDEAD"
+     },
+     "gear_spells": {
+      "armor": "DYNAMIC_DEFENSE",
+      "head": "IMMORTAL",
+      "shoes": "BATTLEFRENZY"
      },
      "note": null,
      "party_size": null,
@@ -8776,6 +9063,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "DYNAMIC_DEFENSE",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8831,6 +9123,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "MANADRAIN",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -8888,6 +9185,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": {
+      "armor": "ARMOR_WEB",
+      "head": "ELECTRICSHOCK",
+      "shoes": "CC_BLOCK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -8943,6 +9245,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -9000,6 +9307,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "LIFESAVIOR",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9056,6 +9368,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": {
+      "armor": "SPEEDCASTER",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CC_BLOCK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9111,6 +9428,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET2"
+     },
+     "gear_spells": {
+      "armor": "ARMOR_WEB",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "BLINK"
      },
      "note": null,
      "party_size": null,
@@ -9172,6 +9494,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "DYNAMIC_DEFENSE",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9227,6 +9554,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -9284,6 +9616,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9339,6 +9676,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -9396,6 +9738,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "LIFESAVIOR",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9451,6 +9798,11 @@
       "head": "HEAD_LEATHER_SET3",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
+     },
+     "gear_spells": {
+      "armor": "LIFESAVIOR",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CHANNELED_RUN"
      },
      "note": null,
      "party_size": null,
@@ -9508,6 +9860,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CHANNELED_RUN"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9563,6 +9920,11 @@
       "head": "HEAD_PLATE_KEEPER",
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_SET2"
+     },
+     "gear_spells": {
+      "armor": "ARMOR_WEB",
+      "head": "ELECTRICSHOCK",
+      "shoes": "OVERSPRINT"
      },
      "note": null,
      "party_size": null,
@@ -9620,6 +9982,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": {
+      "armor": "ARMOR_WEB",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": null
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9675,6 +10042,11 @@
       "head": "HEAD_PLATE_SET2",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "GLASS_MOVESPEED"
      },
      "note": null,
      "party_size": null,
@@ -9733,6 +10105,11 @@
       "potion": "T7_POTION_REVIVE",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "ICEBLOCK2",
+      "shoes": "CC_BLOCK"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9789,6 +10166,11 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_SET2"
+     },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "BLINK"
      },
      "note": null,
      "party_size": null,
@@ -9847,6 +10229,11 @@
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "GLASS_MOVESPEED"
+     },
      "note": null,
      "party_size": null,
      "patch": null,
@@ -9903,6 +10290,11 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "potion": "T7_POTION_STONESKIN",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "DMG_BLINK"
      },
      "note": null,
      "party_size": null,
@@ -9967,6 +10359,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 10,
@@ -10030,6 +10423,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_KEEPER, potion=POTION_TORNADO",
      "party_size": {
       "max": 10,
@@ -10097,6 +10491,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10165,6 +10560,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10230,6 +10626,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 10,
@@ -10293,6 +10690,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10358,6 +10756,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10423,6 +10822,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10493,6 +10893,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, cape=CAPEITEM_FW_LYMHURST, helm=HEAD_PLATE_SET2",
      "party_size": {
       "max": 10,
@@ -10558,6 +10959,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_HELL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_ROYAL",
      "party_size": {
       "max": 10,
@@ -10620,6 +11022,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_HELL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_ROYAL",
      "party_size": {
       "max": 10,
@@ -10683,6 +11086,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_HELL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_ROYAL",
      "party_size": {
       "max": 10,
@@ -10746,6 +11150,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_HELL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_ROYAL",
      "party_size": {
       "max": 10,
@@ -10809,6 +11214,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_HELL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_ROYAL",
      "party_size": {
       "max": 10,
@@ -10876,6 +11282,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -10939,6 +11346,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_HELL",
      "party_size": {
       "max": 10,
@@ -11009,6 +11417,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 10,
@@ -11077,6 +11486,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 10,
@@ -11142,6 +11552,7 @@
       "head": "HEAD_CLOTH_SET1",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 10,
@@ -11209,6 +11620,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -11277,6 +11689,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_ROYAL",
      "party_size": {
       "max": 10,
@@ -11344,6 +11757,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_SET1, cape=CAPEITEM_FW_LYMHURST, food=MEAL_STEW_FISH",
      "party_size": {
       "max": 10,
@@ -11407,6 +11821,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -11472,6 +11887,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -11537,6 +11953,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -11602,6 +12019,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, boot=SHOES_CLOTH_MORGANA, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -11672,6 +12090,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET3",
      "party_size": {
       "max": 10,
@@ -11737,6 +12156,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -11807,6 +12227,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER",
      "party_size": {
       "max": 10,
@@ -11872,6 +12293,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -11937,6 +12359,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -12002,6 +12425,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 10,
@@ -12067,6 +12491,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 10,
@@ -12134,6 +12559,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_FEY, food=MEAL_OMELETTE_AVALON, potion=POTION_LAVA",
      "party_size": {
       "max": 10,
@@ -12202,6 +12628,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET3, helm=HEAD_LEATHER_HELL",
      "party_size": {
       "max": 10,
@@ -12272,6 +12699,7 @@
       "head": "HEAD_CLOTH_ROYAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3, potion=POTION_COOLDOWN",
      "party_size": {
       "max": 10,
@@ -12342,6 +12770,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_CLOTH_KEEPER",
      "party_size": {
       "max": 10,
@@ -12414,6 +12843,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_CLOTH_KEEPER",
      "party_size": {
       "max": 10,
@@ -12477,6 +12907,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -12542,6 +12973,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -12607,6 +13039,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 10,
@@ -12677,6 +13110,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -12743,6 +13177,7 @@
       "offhand": "OFF_LAMP_UNDEAD",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -12813,6 +13248,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_ROYAL, helm=HEAD_CLOTH_KEEPER",
      "party_size": {
       "max": 10,
@@ -12880,6 +13316,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET3, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 10,
@@ -12942,6 +13379,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -13010,6 +13448,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST, helm=HEAD_LEATHER_UNDEAD",
      "party_size": {
       "max": 10,
@@ -13073,6 +13512,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -13136,6 +13576,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 10,
@@ -13206,6 +13647,7 @@
       "offhand": "OFF_LAMP_UNDEAD",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 10,
@@ -13278,6 +13720,7 @@
       "offhand": "OFF_ORB_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_FEY, secondhand=OFF_HORN_KEEPER",
      "party_size": {
       "max": 10,
@@ -13341,6 +13784,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -13413,6 +13857,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_KEEPER, secondhand=OFF_JESTERCANE_HELL",
      "party_size": {
       "max": 10,
@@ -13476,6 +13921,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -13541,6 +13987,7 @@
       "offhand": "OFF_SHIELD_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_COOLDOWN, secondhand=OFF_HORN_KEEPER",
      "party_size": {
       "max": 10,
@@ -13611,6 +14058,7 @@
       "offhand": "OFF_CENSER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_CLOTH_KEEPER",
      "party_size": {
       "max": 10,
@@ -13679,6 +14127,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_CLOTH_KEEPER",
      "party_size": {
       "max": 10,
@@ -13744,6 +14193,7 @@
       "offhand": "OFF_ORB_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 10,
@@ -13814,6 +14264,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST, secondhand=OFF_DEMONSKULL_HELL",
      "party_size": {
       "max": 10,
@@ -13882,6 +14333,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST, secondhand=OFF_DEMONSKULL_HELL",
      "party_size": {
       "max": 10,
@@ -13948,6 +14400,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14013,6 +14466,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14078,6 +14532,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14143,6 +14598,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 14,
@@ -14208,6 +14664,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14273,6 +14730,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14338,6 +14796,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14403,6 +14862,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14468,6 +14928,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14533,6 +14994,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14599,6 +15061,7 @@
       "offhand": "OFF_LAMP_UNDEAD",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 14,
@@ -14664,6 +15127,7 @@
       "offhand": "OFF_BOOK",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14729,6 +15193,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 14,
@@ -14794,6 +15259,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 14,
@@ -14860,6 +15326,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -14925,6 +15392,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -14990,6 +15458,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15055,6 +15524,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15120,6 +15590,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15185,6 +15656,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15250,6 +15722,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15315,6 +15788,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15380,6 +15854,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15445,6 +15920,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15510,6 +15986,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15575,6 +16052,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15641,6 +16119,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15706,6 +16185,7 @@
       "offhand": "OFF_CENSER_AVALON",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15769,6 +16249,7 @@
       "offhand": "OFF_CENSER_AVALON",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 15,
@@ -15840,6 +16321,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 19,
@@ -15905,6 +16387,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET1",
      "party_size": {
       "max": 19,
@@ -15970,6 +16453,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_AVALON, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 19,
@@ -16035,6 +16519,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 19,
@@ -16100,6 +16585,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 19,
@@ -16165,6 +16651,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 19,
@@ -16230,6 +16717,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY",
      "party_size": {
       "max": 19,
@@ -16295,6 +16783,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET1, boot=SHOES_LEATHER_ROYAL, helm=HEAD_LEATHER_SET1",
      "party_size": {
       "max": 19,
@@ -16365,6 +16854,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 19,
@@ -16430,6 +16920,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_AVALON, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 19,
@@ -16495,6 +16986,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 19,
@@ -16560,6 +17052,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER",
      "party_size": {
       "max": 19,
@@ -16626,6 +17119,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER",
      "party_size": {
       "max": 19,
@@ -16691,6 +17185,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET1, secondhand=OFF_TORCH_CRYSTAL",
      "party_size": {
       "max": 19,
@@ -16756,6 +17251,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_SHIELD_CRYSTAL",
      "party_size": {
       "max": 19,
@@ -16819,6 +17315,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2, helm=HEAD_LEATHER_SET3, secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 19,
@@ -16882,6 +17379,7 @@
       "offhand": "OFF_SHIELD_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, secondhand=OFF_TOWERSHIELD_UNDEAD",
      "party_size": {
       "max": 19,
@@ -16947,6 +17445,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 19,
@@ -17017,6 +17516,7 @@
       "offhand": "OFF_SHIELD_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 19,
@@ -17085,6 +17585,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_HELL, potion=POTION_TORNADO",
      "party_size": {
       "max": 20,
@@ -17148,6 +17649,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17211,6 +17713,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -17274,6 +17777,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17337,6 +17841,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_HELL, helm=HEAD_CLOTH_SET2, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -17400,6 +17905,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17463,6 +17969,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -17526,6 +18033,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17593,6 +18101,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_KEEPER, boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -17656,6 +18165,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17719,6 +18229,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -17780,6 +18291,11 @@
       "armor": "ARMOR_LEATHER_HELL",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CC_BLOCK"
      },
      "note": "Bast?n Astral Monkey-Brauleo [member build by Jordyson888]",
      "party_size": {
@@ -17849,6 +18365,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -17912,6 +18429,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -17975,6 +18493,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18038,6 +18557,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18101,6 +18621,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18168,6 +18689,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2, cape=CAPEITEM_SMUGGLER, potion=POTION_TORNADO",
      "party_size": {
       "max": 20,
@@ -18231,6 +18753,7 @@
       "head": "HEAD_CLOTH_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18294,6 +18817,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -18361,6 +18885,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18423,6 +18948,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18486,6 +19012,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18553,6 +19080,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_UNDEAD, helm=HEAD_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -18616,6 +19144,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18679,6 +19208,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -18742,6 +19272,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -18805,6 +19336,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18868,6 +19400,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -18931,6 +19464,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -18994,6 +19528,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -19055,6 +19590,11 @@
       "armor": "ARMOR_LEATHER_ROYAL",
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_UNDEAD"
+     },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "BATTLEFRENZY"
      },
      "note": "DD | REALMBREAKER by Lunarus [member build by Lunarus]",
      "party_size": {
@@ -19129,6 +19669,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -19197,6 +19738,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -19262,6 +19804,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -19329,6 +19872,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_CLOTH_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -19391,6 +19935,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_CLOTH_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -19454,6 +19999,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, boot=SHOES_LEATHER_MORGANA, helm=HEAD_CLOTH_SET2, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -19515,6 +20061,11 @@
       "armor": "ARMOR_PLATE_KEEPER",
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_AVALON"
+     },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "CC_BLOCK"
      },
      "note": "Small Scale - Entalhada - Suporte [member build by Machadex]",
      "party_size": {
@@ -19584,6 +20135,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -19647,6 +20199,7 @@
       "head": "HEAD_PLATE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -19710,6 +20263,7 @@
       "head": "HEAD_PLATE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -19775,6 +20329,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 20,
@@ -19842,6 +20397,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -19910,6 +20466,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, helm=HEAD_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -19973,6 +20530,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -20036,6 +20594,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20099,6 +20658,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20164,6 +20724,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -20229,6 +20790,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20296,6 +20858,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -20359,6 +20922,7 @@
       "head": "HEAD_PLATE_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20422,6 +20986,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20485,6 +21050,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -20548,6 +21114,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -20613,6 +21180,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20680,6 +21248,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_SET3",
      "party_size": {
       "max": 20,
@@ -20743,6 +21312,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20810,6 +21380,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20873,6 +21444,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -20941,6 +21513,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -21004,6 +21577,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -21067,6 +21641,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -21130,6 +21705,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -21193,6 +21769,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -21256,6 +21833,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -21324,6 +21902,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_FEY",
      "party_size": {
       "max": 20,
@@ -21387,6 +21966,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_FEY",
      "party_size": {
       "max": 20,
@@ -21450,6 +22030,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -21513,6 +22094,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -21576,6 +22158,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -21637,6 +22220,11 @@
       "armor": "ARMOR_PLATE_HELL",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
+     },
+     "gear_spells": {
+      "armor": "REFLECTAREA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "MAXHEALTHBUFF"
      },
      "note": "OathKeepers PvP [member build by Feniks360]",
      "party_size": {
@@ -21711,6 +22299,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL",
      "party_size": {
       "max": 20,
@@ -21774,6 +22363,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_FW_LYMHURST, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -21837,6 +22427,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET3, helm=HEAD_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -21905,6 +22496,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET3"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -21972,6 +22564,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22035,6 +22628,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -22098,6 +22692,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -22161,6 +22756,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22224,6 +22820,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22285,6 +22882,11 @@
       "armor": "ARMOR_PLATE_HELL",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "REFLECTAREA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "Locus ZVZ DOTH [member build by Artico6790]",
      "party_size": {
@@ -22354,6 +22956,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22416,6 +23019,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -22479,6 +23083,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22542,6 +23147,7 @@
       "head": "HEAD_CLOTH_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -22609,6 +23215,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22672,6 +23279,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -22735,6 +23343,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22802,6 +23411,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -22864,6 +23474,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -22927,6 +23538,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -22990,6 +23602,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23053,6 +23666,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23121,6 +23735,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -23184,6 +23799,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23245,6 +23861,11 @@
       "armor": "ARMOR_CLOTH_SET2",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "LIFESAVIOR",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "DMG_BLINK"
      },
      "note": "Alvorada Comp 1 [member build by xCisco]",
      "party_size": {
@@ -23312,6 +23933,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -23377,6 +23999,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23442,6 +24065,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -23509,6 +24133,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, food=MEAL_OMELETTE_AVALON",
      "party_size": {
       "max": 20,
@@ -23572,6 +24197,7 @@
       "head": "HEAD_PLATE_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23642,6 +24268,7 @@
       "head": "HEAD_PLATE_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_CLOTH_HELL, potion=POTION_SLOWFIELD",
      "party_size": {
       "max": 20,
@@ -23709,6 +24336,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -23771,6 +24399,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -23839,6 +24468,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -23900,6 +24530,11 @@
       "armor": "ARMOR_PLATE_HELL",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "REFLECTAREA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "DMG_BLINK"
      },
      "note": "Mano de justicia - kiteo [member build by TurnDark]",
      "party_size": {
@@ -23969,6 +24604,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_ROYAL, helm=HEAD_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -24032,6 +24668,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -24099,6 +24736,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -24161,6 +24799,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -24224,6 +24863,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -24287,6 +24927,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -24350,6 +24991,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -24413,6 +25055,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_AVALON",
      "party_size": {
       "max": 20,
@@ -24474,6 +25117,11 @@
       "armor": "ARMOR_PLATE_KEEPER",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "DMG_BLINK"
      },
      "note": "CA?A-ESPIRITOS [member build by Artico6790]",
      "party_size": {
@@ -24543,6 +25191,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -24606,6 +25255,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY",
      "party_size": {
       "max": 20,
@@ -24669,6 +25319,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -24732,6 +25383,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_SET3, helm=HEAD_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -24800,6 +25452,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -24867,6 +25520,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -24929,6 +25583,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: food=MEAL_SANDWICH",
      "party_size": {
       "max": 20,
@@ -24997,6 +25652,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_ROYAL, boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET3, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -25060,6 +25716,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_SET3, helm=HEAD_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -25121,6 +25778,11 @@
       "armor": "ARMOR_LEATHER_ROYAL",
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "gear_spells": {
+      "armor": "ROYAL_BANNER",
+      "head": "ENERGYFIELD",
+      "shoes": "JUMP"
      },
      "note": "??? ??? (?? ???? ????? ? ??? ????) [member build by Ironforge]",
      "party_size": {
@@ -25190,6 +25852,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, helm=HEAD_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -25251,6 +25914,11 @@
       "armor": "ARMOR_CLOTH_AVALON",
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": "ENERGYFIELD",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "HEALER HG - MORS [member build by vhfoliveira]",
      "party_size": {
@@ -25320,6 +25988,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -25382,6 +26051,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_UNDEAD",
      "party_size": {
       "max": 20,
@@ -25445,6 +26115,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -25508,6 +26179,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -25571,6 +26243,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -25634,6 +26307,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -25697,6 +26371,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_SET2, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -25760,6 +26435,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_FEY, cape=CAPEITEM_MORGANA",
      "party_size": {
       "max": 20,
@@ -25823,6 +26499,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -25884,6 +26561,11 @@
       "armor": "ARMOR_CLOTH_SET1",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "SPEEDCASTER",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "Permafrost DPS [member build by Andsy]",
      "party_size": {
@@ -25951,6 +26633,7 @@
       "head": "HEAD_PLATE_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -26016,6 +26699,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -26083,6 +26767,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_CLOTH_FEY"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_AVALON, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -26146,6 +26831,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_AVALON, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 20,
@@ -26209,6 +26895,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -26272,6 +26959,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -26339,6 +27027,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_UNDEAD",
      "party_size": {
       "max": 20,
@@ -26402,6 +27091,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -26465,6 +27155,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -26528,6 +27219,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -26595,6 +27287,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -26658,6 +27351,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 20,
@@ -26721,6 +27415,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_UNDEAD, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -26784,6 +27479,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -26847,6 +27543,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -26910,6 +27607,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -26973,6 +27671,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27036,6 +27735,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -27104,6 +27804,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -27167,6 +27868,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_AVALON, helm=HEAD_LEATHER_FEY",
      "party_size": {
       "max": 20,
@@ -27230,6 +27932,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27291,6 +27994,11 @@
       "armor": "ARMOR_LEATHER_HELL",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "gear_spells": {
+      "armor": "LIFESTEALAURA",
+      "head": "BLOCK",
+      "shoes": "DMG_BLINK"
      },
      "note": "Brawl Spiked Gauntlets [member build by forenziec]",
      "party_size": {
@@ -27360,6 +28068,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_FW_LYMHURST, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -27423,6 +28132,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -27486,6 +28196,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27547,6 +28258,11 @@
       "armor": "ARMOR_LEATHER_AVALON",
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_PLATE_UNDEAD"
+     },
+     "gear_spells": {
+      "armor": "DYNAMIC_DEFENSE",
+      "head": "DISRUPTIONIMMUNITY",
+      "shoes": "BATTLEFRENZY"
      },
      "note": "ATENEA S25 - ARCO LARGO [member build by Soulkiva]",
      "party_size": {
@@ -27616,6 +28332,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_FEY, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -27679,6 +28396,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_HELL",
      "party_size": {
       "max": 20,
@@ -27742,6 +28460,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -27805,6 +28524,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27868,6 +28588,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27931,6 +28652,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -27994,6 +28716,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_FEY",
      "party_size": {
       "max": 20,
@@ -28057,6 +28780,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28118,6 +28842,11 @@
       "armor": "ARMOR_PLATE_SET3",
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "ENFEEBLEAURA",
+      "head": "SMOKEBOMB",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "MA?A PESADA PYPELINE [member build by Robmalll]",
      "party_size": {
@@ -28187,6 +28916,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_AVALON, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -28249,6 +28979,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_OMELETTE_AVALON",
      "party_size": {
       "max": 20,
@@ -28312,6 +29043,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28375,6 +29107,7 @@
       "head": "HEAD_PLATE_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28443,6 +29176,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28504,6 +29238,11 @@
       "armor": "ARMOR_CLOTH_AVALON",
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": "BLOCK",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "Pustulento DOTH [member build by Artico6790]",
      "party_size": {
@@ -28573,6 +29312,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28641,6 +29381,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28708,6 +29449,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28770,6 +29512,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_HELL",
      "party_size": {
       "max": 20,
@@ -28833,6 +29576,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_KEEPER"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -28896,6 +29640,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -28959,6 +29704,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29022,6 +29768,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, helm=HEAD_LEATHER_HELL",
      "party_size": {
       "max": 20,
@@ -29085,6 +29832,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29148,6 +29896,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: food=MEAL_OMELETTE_AVALON, armor=ARMOR_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -29213,6 +29962,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29280,6 +30030,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29343,6 +30094,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_CLOTH_FEY"
      },
+     "gear_spells": null,
      "note": "alts: food=MEAL_OMELETTE_AVALON, potion=POTION_SLOWFIELD",
      "party_size": {
       "max": 20,
@@ -29406,6 +30158,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_FEY, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_MARTLOCK, helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -29469,6 +30222,7 @@
       "head": "HEAD_PLATE_HELL",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29532,6 +30286,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -29595,6 +30350,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29658,6 +30414,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -29721,6 +30478,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_CLOTH_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -29786,6 +30544,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 20,
@@ -29851,6 +30610,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_CLOTH_HELL",
      "party_size": {
       "max": 20,
@@ -29914,6 +30674,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_LEATHER_ROYAL, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -29981,6 +30742,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -30044,6 +30806,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -30107,6 +30870,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_SET2",
      "party_size": {
       "max": 20,
@@ -30170,6 +30934,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -30238,6 +31003,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_AVALON, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -30299,6 +31065,11 @@
       "armor": "ARMOR_PLATE_KEEPER",
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_LEATHER_SET2"
+     },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "ICEBLOCK2",
+      "shoes": "OVERSPRINT"
      },
      "note": "NeKso Build ZVZ Baston Terrunico [member build by NeKso]",
      "party_size": {
@@ -30368,6 +31139,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_SET1",
      "party_size": {
       "max": 20,
@@ -30430,6 +31202,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -30493,6 +31266,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -30556,6 +31330,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -30619,6 +31394,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -30682,6 +31458,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -30743,6 +31520,11 @@
       "armor": "ARMOR_PLATE_KEEPER",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
+     },
+     "gear_spells": {
+      "armor": "FORCESHIELD",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CC_BLOCK"
      },
      "note": "Enraizado ZvZ [member build by Jordyson888]",
      "party_size": {
@@ -30810,6 +31592,7 @@
       "head": "HEAD_CLOTH_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -30877,6 +31660,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -30940,6 +31724,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31005,6 +31790,7 @@
       "head": "HEAD_CLOTH_SET2",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER",
      "party_size": {
       "max": 20,
@@ -31073,6 +31859,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_ROYAL, boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET3, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -31141,6 +31928,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31209,6 +31997,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_UNDEAD",
      "party_size": {
       "max": 20,
@@ -31271,6 +32060,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31334,6 +32124,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -31397,6 +32188,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31460,6 +32252,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET3, helm=HEAD_CLOTH_SET2, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -31523,6 +32316,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31586,6 +32380,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: food=MEAL_OMELETTE_AVALON, helm=HEAD_LEATHER_HELL, armor=ARMOR_PLATE_SET2, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 20,
@@ -31653,6 +32448,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -31716,6 +32512,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31779,6 +32576,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31842,6 +32640,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -31909,6 +32708,7 @@
       "offhand": "OFF_TOME_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -31977,6 +32777,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_ROYAL, boot=SHOES_LEATHER_MORGANA, helm=HEAD_LEATHER_SET3, potion=POTION_STONESKIN, secondhand=OFF_TOWERSHIELD_UNDEAD",
      "party_size": {
       "max": 20,
@@ -32044,6 +32845,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST",
      "party_size": {
       "max": 20,
@@ -32107,6 +32909,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -32170,6 +32973,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -32233,6 +33037,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_PLATE_SET3"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -32296,6 +33101,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -32359,6 +33165,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -32426,6 +33233,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -32489,6 +33297,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_OMELETTE_AVALON",
      "party_size": {
       "max": 20,
@@ -32552,6 +33361,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -32615,6 +33425,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -32678,6 +33489,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -32741,6 +33553,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_PLATE_UNDEAD"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_FW_MARTLOCK, food=MEAL_SANDWICH, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -32804,6 +33617,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -32865,6 +33679,11 @@
       "head": "HEAD_LEATHER_SET3",
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_PLATE_AVALON"
+     },
+     "gear_spells": {
+      "armor": "REFLECTAREA",
+      "head": "SUMMONER_CD_REDUCTION",
+      "shoes": "CC_BLOCK"
      },
      "note": "Maldici?n de Vida ZvZ [member build by Jordyson888]",
      "party_size": {
@@ -32934,6 +33753,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_CLOTH_FEY, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 20,
@@ -32997,6 +33817,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_FW_LYMHURST, helm=HEAD_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -33060,6 +33881,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33123,6 +33945,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33191,6 +34014,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY",
      "party_size": {
       "max": 20,
@@ -33259,6 +34083,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33329,6 +34154,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33401,6 +34227,7 @@
       "offhand": "OFF_SHIELD_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_FEY",
      "party_size": {
       "max": 20,
@@ -33464,6 +34291,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_CLOTH_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33527,6 +34355,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -33590,6 +34419,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -33658,6 +34488,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -33721,6 +34552,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -33789,6 +34621,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -33852,6 +34685,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_FEY, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -33919,6 +34753,7 @@
       "offhand": "OFF_ORB_MORGANA",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_SET1",
      "party_size": {
       "max": 20,
@@ -33981,6 +34816,7 @@
       "offhand": "OFF_SHIELD_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_LEATHER_MORGANA, secondhand=OFF_DEMONSKULL_HELL",
      "party_size": {
       "max": 20,
@@ -34044,6 +34880,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_ORB_MORGANA",
      "party_size": {
       "max": 20,
@@ -34107,6 +34944,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, secondhand=OFF_ORB_MORGANA",
      "party_size": {
       "max": 20,
@@ -34170,6 +35008,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, secondhand=OFF_ORB_MORGANA",
      "party_size": {
       "max": 20,
@@ -34233,6 +35072,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 20,
@@ -34296,6 +35136,7 @@
       "offhand": "OFF_TOWERSHIELD_UNDEAD",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL",
      "party_size": {
       "max": 20,
@@ -34359,6 +35200,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_SET1",
      "party_size": {
       "max": 20,
@@ -34422,6 +35264,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -34485,6 +35328,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -34548,6 +35392,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -34611,6 +35456,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -34674,6 +35520,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -34737,6 +35584,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -34800,6 +35648,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -34863,6 +35712,7 @@
       "offhand": "OFF_CENSER_AVALON",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, potion=POTION_STONESKIN, secondhand=OFF_TORCH_CRYSTAL",
      "party_size": {
       "max": 20,
@@ -34926,6 +35776,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, cape=CAPEITEM_SMUGGLER, potion=POTION_STONESKIN, secondhand=OFF_TORCH_CRYSTAL",
      "party_size": {
       "max": 20,
@@ -34989,6 +35840,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 20,
@@ -35052,6 +35904,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_CLOTH_SET1"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 20,
@@ -35115,6 +35968,7 @@
       "offhand": "OFF_ORB_MORGANA",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -35178,6 +36032,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 20,
@@ -35241,6 +36096,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_CENSER_AVALON",
      "party_size": {
       "max": 20,
@@ -35309,6 +36165,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -35370,6 +36227,11 @@
       "head": "HEAD_LEATHER_AVALON",
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "CASTBUBBLE",
+      "head": "SELF_CLEANSE",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "SANCTI KTB/PISTES [member build by Baheera]",
      "party_size": {
@@ -35439,6 +36301,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -35502,6 +36365,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -35570,6 +36434,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_SET2"
      },
+     "gear_spells": null,
      "note": "alts: secondhand=OFF_HORN_KEEPER",
      "party_size": {
       "max": 20,
@@ -35638,6 +36503,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_AVALON, boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_KEEPER, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -35705,6 +36571,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -35768,6 +36635,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, helm=HEAD_PLATE_KEEPER",
      "party_size": {
       "max": 20,
@@ -35831,6 +36699,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, helm=HEAD_LEATHER_AVALON",
      "party_size": {
       "max": 20,
@@ -35898,6 +36767,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_FEY, boot=SHOES_CLOTH_SET2, secondhand=OFF_SHIELD_HELL",
      "party_size": {
       "max": 20,
@@ -35961,6 +36831,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -36024,6 +36895,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -36087,6 +36959,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -36150,6 +37023,7 @@
       "offhand": "OFF_TOME_CRYSTAL",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH",
      "party_size": {
       "max": 20,
@@ -36217,6 +37091,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -36280,6 +37155,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -36345,6 +37221,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -36417,6 +37294,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -36480,6 +37358,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -36543,6 +37422,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_CLOTH_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -36606,6 +37486,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, helm=HEAD_CLOTH_SET2, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 20,
@@ -36674,6 +37555,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -36741,6 +37623,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -36804,6 +37687,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_KEEPER, boot=SHOES_LEATHER_ROYAL",
      "party_size": {
       "max": 20,
@@ -36867,6 +37751,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -36930,6 +37815,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: food=MEAL_OMELETTE_AVALON",
      "party_size": {
       "max": 20,
@@ -36993,6 +37879,7 @@
       "offhand": "OFF_TOTEM_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 20,
@@ -37054,6 +37941,11 @@
       "head": "HEAD_LEATHER_HELL",
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_SET1"
+     },
+     "gear_spells": {
+      "armor": "ARMOR_WEB",
+      "head": "SMOKEBOMB",
+      "shoes": "CLEANSE_DASH"
      },
      "note": "Brawl bedrock [member build by Fliriya]",
      "party_size": {
@@ -37121,6 +38013,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_PLATE_AVALON, cape=CAPEITEM_FW_LYMHURST, helm=HEAD_PLATE_SET1",
      "party_size": {
       "max": 20,
@@ -37186,6 +38079,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 20,
@@ -37253,6 +38147,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, boot=SHOES_CLOTH_FEY, helm=HEAD_LEATHER_MORGANA, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 20,
@@ -37316,6 +38211,7 @@
       "offhand": "OFF_TORCH_CRYSTAL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_HELL, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 20,
@@ -37384,6 +38280,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_LEATHER_FEY, cape=CAPEITEM_FW_LYMHURST, potion=POTION_STONESKIN",
      "party_size": {
       "max": 20,
@@ -37452,6 +38349,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -37520,6 +38418,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -37588,6 +38487,7 @@
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -37654,6 +38554,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -37719,6 +38620,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -37784,6 +38686,7 @@
       "head": "HEAD_PLATE_SET2",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -37849,6 +38752,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -37914,6 +38818,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA, armor=ARMOR_CLOTH_FEY",
      "party_size": {
       "max": 20,
@@ -37979,6 +38884,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -38044,6 +38950,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38109,6 +39016,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -38174,6 +39082,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38237,6 +39146,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38302,6 +39212,7 @@
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38367,6 +39278,7 @@
       "head": "HEAD_PLATE_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38438,6 +39350,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_CLOTH_SET2"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_PLATE_SET2, secondhand=OFF_JESTERCANE_HELL",
      "party_size": {
       "max": 20,
@@ -38503,6 +39416,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38568,6 +39482,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_FEY"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 20,
@@ -38633,6 +39548,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -38696,6 +39612,7 @@
       "offhand": "OFF_SHIELD",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -38759,6 +39676,7 @@
       "offhand": "OFF_SHIELD",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -38824,6 +39742,7 @@
       "offhand": "OFF_TOME_CRYSTAL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -38892,6 +39811,7 @@
       "offhand": "OFF_TOME_CRYSTAL",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -38958,6 +39878,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_CLOTH_KEEPER"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 7,
@@ -39023,6 +39944,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_SLOWFIELD",
      "party_size": {
       "max": 7,
@@ -39088,6 +40010,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -39153,6 +40076,7 @@
       "head": "HEAD_PLATE_SET1",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 7,
@@ -39223,6 +40147,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_PLATE_AVALON"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_PLATE_SET1",
      "party_size": {
       "max": 7,
@@ -39293,6 +40218,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "ARTILLERY-FIRE; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -39363,6 +40289,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "LANCE-FROST; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -39428,6 +40355,7 @@
       "head": "HEAD_CLOTH_KEEPER",
       "shoes": "SHOES_CLOTH_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -39500,6 +40428,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: armor=ARMOR_CLOTH_SET2",
      "party_size": {
       "max": 7,
@@ -39563,6 +40492,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -39631,6 +40561,7 @@
       "head": "HEAD_CLOTH_ROYAL",
       "shoes": "SHOES_LEATHER_SET1"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_FORTSTERLING, food=MEAL_OMELETTE_FISH, helm=HEAD_PLATE_UNDEAD, armor=ARMOR_CLOTH_AVALON, potion=POTION_ENERGY",
      "party_size": {
       "max": 7,
@@ -39696,6 +40627,7 @@
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -39761,6 +40693,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_PLATE_FEY"
      },
+     "gear_spells": null,
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -39831,6 +40764,7 @@
       "head": "HEAD_LEATHER_MORGANA",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_FW_BRIDGEWATCH, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -39896,6 +40830,7 @@
       "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_PLATE_KEEPER"
      },
+     "gear_spells": null,
      "note": null,
      "party_size": {
       "max": 7,
@@ -39966,6 +40901,7 @@
       "head": "HEAD_LEATHER_AVALON",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "BRING-LURCHER-GIG-SWAP; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_AVALON, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -40039,6 +40975,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: cape=CAPEITEM_FW_CAERLEON",
      "party_size": {
       "max": 7,
@@ -40107,6 +41044,7 @@
       "offhand": "OFF_HORN_KEEPER",
       "shoes": "SHOES_LEATHER_ROYAL"
      },
+     "gear_spells": null,
      "note": "PIERCE/SUPPORT/MANA; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -40172,6 +41110,7 @@
       "offhand": "OFF_JESTERCANE_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_KEEPER, cape=CAPEITEM_FW_BRIDGEWATCH",
      "party_size": {
       "max": 7,
@@ -40237,6 +41176,7 @@
       "offhand": "OFF_SHIELD_AVALON",
       "shoes": "SHOES_CLOTH_HELL"
      },
+     "gear_spells": null,
      "note": "alts: helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_FEY",
      "party_size": {
       "max": 7,
@@ -40302,6 +41242,7 @@
       "offhand": "OFF_DEMONSKULL_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
+     "gear_spells": null,
      "note": "alts: boot=SHOES_CLOTH_KEEPER, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 7,

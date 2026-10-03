@@ -81,6 +81,8 @@ const out = cases.map((c, i) => {
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
     })),
     fitness: e.fitness(c.party),
+    // the gear-active doctrine's default pick per item (mirrors test_js_parity.py)
+    gear_choice: (() => { const o = {}; for (const k of Object.keys(e.gear).sort()) o[k] = [e.defaultGearChoice(k), e.gearChoiceSource(k), e.gearActiveSpell(k)]; return o; })(),
     fitness_build: ((!c.gears || !c.gears.length) ? null : e.fitness(c.party, null, c.gears)),
     comp_score_build: ((!c.gears || !c.gears.length) ? null : e.compScore(c.party, null, c.gears)),
     fitness_locked: e.fitness(c.party, c.combos),

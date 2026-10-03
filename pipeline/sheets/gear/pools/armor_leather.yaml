@@ -1,0 +1,15 @@
+# Actives every leather jacket shares (dumps menu: FLAMESHIELD,
+# OUTOFCOMBATHEAL beside the item's own third active). Composed into every
+# ARMOR_LEATHER item; an item's own row for the same pair overrides.
+#
+# Mend Wounds (OUTOFCOMBATHEAL) has no row: an out-of-combat channel
+# supplies nothing a fight can use.
+tree: ARMOR_LEATHER
+curated_as_of: 2026-10-03
+capabilities:
+  # Inferno Shield: +25% damage resistances for 6s, reflects 38% of
+  # incoming damage as magical; 40s cooldown. The reflect is more than
+  # twice Frost Shield's 15% (reflect 1), so 2; tankiness 2 as the
+  # armor-tree defensive actives read.
+  - {cap: tankiness,     score: 2, evidence: FLAMESHIELD}
+  - {cap: reflect,       score: 2, evidence: FLAMESHIELD}

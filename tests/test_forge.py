@@ -1597,7 +1597,75 @@ def t_replace_options():
           abs(d - top["delta"]) < 1e-9, f"delta={top['delta']:.6f} applied={d:.6f}")
 
 
+def t_gear_active_doctrine():
+    """F36: the gear-active doctrine — a piece's default active is the one
+    people equip (builds_index `gear_spells` votes), else the item's own
+    active; never the template-weighted argmax across the tree-shared
+    pool (sheets/gear/pools/)."""
+    e = Engine()
+    e.set_content("blackzone_roam", 20)
+    g = e.gear
+    # the pools compose: every cloth head now carries the Force Field
+    # bundle beside its own active
+    cowl = g["HEAD_CLOTH_SET2"]["loadout"]
+    ai = cowl["slot_names"].index("active")
+    check("F36a the tree pool composes into the item's loadout: Cleric Cowl offers Ice Block AND Force Field",
+          set(cowl["slot_spells"][ai]) >= {"ICEBLOCK2", "PBAOE_KNOCKBACK"},
+          str(cowl["slot_spells"][ai]))
+    da = g["HEAD_CLOTH_SET2"].get("doctrine_active") or {}
+    check("F36b the Cleric Cowl's pick is OBSERVED Ice Block (every recording build runs it)",
+          da.get("id") == "ICEBLOCK2" and da.get("source") == "observed" and da.get("votes", 0) >= 2
+          and da.get("votes") == da.get("of"), str(da))
+    ex = e.gear_extra("HEAD_CLOTH_SET2")
+    check("F36c the engine scores the observed active: Ice Block's tankiness, no Force Field shove",
+          ex.get("tankiness", 0) > 0 and not ex.get("knockback_displace") and not ex.get("peel"),
+          str(ex))
+    # an item with no recording build assumes its OWN active, even where
+    # the shared Force Field would score more under the template weights
+    sc = g["HEAD_CLOTH_SET1"].get("doctrine_active") or {}
+    ex1 = e.gear_extra("HEAD_CLOTH_SET1")
+    ff = cowl["slots"][ai][cowl["slot_spells"][ai].index("PBAOE_KNOCKBACK")]
+    ff_val = sum(e._weights.get(c, 0.0) * v for c, v in e._eff(ff, g["HEAD_CLOTH_SET2"].get("cap_delivery") or {}).items())
+    own_val = sum(e._weights.get(c, 0.0) * v for c, v in ex1.items())
+    check("F36d an unrecorded item ASSUMES its own active (Scholar Cowl: Energy Shield), not the "
+          "higher-scoring shared Force Field",
+          sc.get("source") == "assumed" and sc.get("id") == "ENERGYSHIELD2"
+          and not ex1.get("knockback_displace") and ff_val > own_val,
+          f"{sc} extra={ex1} force_field={ff_val:.3f} own={own_val:.3f}")
+    check("F36e gear_choice_source names the rule: observed / assumed, argmax only without a stamp",
+          e.gear_choice_source("HEAD_CLOTH_SET2") == "observed"
+          and e.gear_choice_source("HEAD_CLOTH_SET1") == "assumed"
+          and e.gear_choice_source("OFF_SHIELD") == "argmax",
+          f"{e.gear_choice_source('HEAD_CLOTH_SET2')} {e.gear_choice_source('HEAD_CLOTH_SET1')} "
+          f"{e.gear_choice_source('OFF_SHIELD')}")
+    # the pick holds across the bands and the templates: the doctrine is
+    # evidence, not a template preference
+    picks = set()
+    for ct, n in (("ancient_lands", 5), ("castle_outpost", 7), ("castle", 20)):
+        e.set_content(ct, n)
+        picks.add(e._gear_combo_slots("HEAD_PLATE_KEEPER")[e.default_gear_choice("HEAD_PLATE_KEEPER")])
+    check("F36f the Judicator Helmet reads Electric Shock at 5, 7 and 20 alike (observed), never Stone Skin by weights",
+          picks == {"ELECTRICSHOCK"}, str(picks))
+    # fail closed: an observed or assumed active with no scored row is an
+    # EMPTY bundle — the slot supplies nothing, never the next-best ability
+    e.set_content("blackzone_roam", 20)
+    sb = g["SHOES_PLATE_SET1"]
+    sda = sb.get("doctrine_active") or {}
+    sex = e.gear_extra("SHOES_PLATE_SET1")
+    check("F36g an active without a scored row resolves to an empty bundle (Soldier Boots on Wanderlust "
+          "supplies nothing; Rejuvenating Sprint is not credited by argmax)",
+          sda.get("id") == "WANDERLUST" and sex == {}, f"{sda} extra={sex}")
+    # every head / armor / shoes item carries a stamp whose id is on its menu
+    stamped = [k for k, v in g.items() if v.get("slot") in ("head", "armor", "shoes")]
+    bad = [k for k in stamped if not (g[k].get("doctrine_active") or {}).get("id")
+           or (g[k]["doctrine_active"]["id"] not in
+               g[k]["loadout"]["slot_spells"][g[k]["loadout"]["slot_names"].index("active")])]
+    check("F36h every head, armor and shoes item carries a doctrine_active that resolves to a bundle",
+          not bad, str(bad[:8]))
+
+
 if __name__ == "__main__":
+    t_gear_active_doctrine()
     t_invariant()
     t_synergy_gating()
     t_self_synergy()
