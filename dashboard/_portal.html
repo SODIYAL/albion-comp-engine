@@ -37,6 +37,22 @@ main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
 .pool-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin:8px 0 12px}
 .pool-head h2{margin:0;font-size:1.35em}
 .pool-head .sub{color:var(--muted);font-size:.9em}
+.views{flex-basis:100%;display:flex;gap:6px;margin-top:4px}
+.view{padding:6px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);color:var(--muted);cursor:pointer;font:10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.view[aria-selected="true"]{background:var(--surface-hi);color:var(--ink);border-color:var(--gold)}
+.view small{font-size:inherit;color:var(--quiet);margin-left:4px}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
+.sort-mark{margin-left:4px;opacity:.35}
+th[aria-sort] .sort-mark{opacity:1;color:var(--gold)}
+th[aria-sort]{color:var(--ink)}
+.members{display:flex;flex-direction:column;gap:8px}
+.member{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 14px}
+.member > .w{flex:0 0 170px;padding-top:6px;font-weight:600}
+.member .kit{flex:1 1 300px;padding:0}
+.member .slot{min-width:150px;padding:4px 8px}
+.member .slot img{width:28px;height:28px}
+.slot.pool{opacity:.6;border-style:dashed}
 section.block{margin:18px 0 28px}
 section.block h3{margin:0 0 8px;font-size:1.02em;color:var(--gold-hi)}
 .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--surface)}
@@ -125,39 +141,95 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     if (!slots.length) return `<div class="kit"><span class="v">Fewer than ${S.thresholds.slot_votes} winning players seen on any slot yet.</span></div>`;
     return `<div class="kit">${slots.map(s => `<div class="slot">${gearIcon(b[s].id)}<div><div class="s">${esc(s)}</div><div class="n">${esc(b[s].name)}</div><div class="v">${b[s].votes} of ${b[s].of} players · ${pct(b[s].share)}</div></div></div>`).join("")}</div>`;
   }
+  /* ---- sortable tables: click a heading to order by it, again to flip ---- */
+  const SORT = {weapons: {key: "parties", dir: -1}, comps: {key: "n", dir: -1}};
+  const WCOLS = [["parties", "Parties", "num"], ["share", "Share", "num"], ["players", "Players", "num"],
+                 ["dominant_share", "Dominant", ""], ["kd", "K/D", "num"], ["median_ip", "Median IP", "num"]];
+  const CCOLS = [["n", "Seen", "num"], ["dominant_share", "Dominant", ""], ["kd", "K/D", "num"]];
+  function ordered(rows, st){
+    /* a missing value sorts last whichever way; ties keep the fold's order */
+    return rows.map((r, i) => ({r, i})).sort((a, b) => {
+      const va = a.r[st.key], vb = b.r[st.key];
+      const ma = va === null || va === undefined, mb = vb === null || vb === undefined;
+      if (ma !== mb) return ma ? 1 : -1;
+      if (!ma && va !== vb) return (va < vb ? -1 : 1) * st.dir;
+      return a.i - b.i;
+    });
+  }
+  const th = (table, cols) => cols.map(([key, label, cls]) => {
+    const st = SORT[table], on = st.key === key;
+    return `<th class="${cls} sortable" data-sort="${key}" data-table="${table}" ${on ? `aria-sort="${st.dir < 0 ? "descending" : "ascending"}"` : ""} title="order by ${esc(label.toLowerCase())}">${label}<span class="sort-mark">${on && st.dir > 0 ? "&#9652;" : "&#9662;"}</span></th>`;
+  }).join("");
   function weaponsTable(p){
     if (!p.weapons.length) return `<div class="empty">No portal killer parties of this size have been seen yet. The poll keeps collecting; this page updates with the next fold.</div>`;
-    return `<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th><th class="num">Parties</th><th class="num">Share</th><th class="num">Players</th><th>Dominant</th><th class="num">K/D</th><th class="num">Median IP</th></tr></thead><tbody>${
-      p.weapons.map((w, i) => `<tr class="row" data-w="${i}" aria-expanded="false" title="click for the winning build"><td>${i + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}" hidden><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
+    return `<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th>${th("weapons", WCOLS)}</tr></thead><tbody>${
+      ordered(p.weapons, SORT.weapons).map(({r: w, i}, n) => `<tr class="row" data-w="${i}" aria-expanded="false" title="click for the winning build"><td>${n + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}" hidden><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
     }</tbody></table></div>`;
+  }
+  /* a comp's members: what the winners of THIS comp wore, one vote per
+     sighting; a slot the comp's own sightings do not settle falls back to
+     the pool-wide build of that weapon, marked as such */
+  function membersHtml(p, c){
+    const order = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+    const poolBuild = id => ((p.weapons.find(w => w.id === id) || {}).build) || {};
+    const members = c.members || c.weapons.map(w => ({...w, sightings: 0, build: {}}));
+    return `<div class="members">${members.map(m => {
+      const own = m.build || {}, pool = poolBuild(m.id);
+      const slots = order.filter(s => own[s] || pool[s]);
+      const cells = slots.map(s => own[s]
+        ? `<div class="slot">${gearIcon(own[s].id)}<div><div class="s">${esc(s)}</div><div class="n">${esc(own[s].name)}</div><div class="v">${own[s].votes} of ${own[s].of} sightings</div></div></div>`
+        : `<div class="slot pool" title="this comp's own sightings do not settle the slot; this is the pool-wide winning build for ${esc(m.name)}">${gearIcon(pool[s].id)}<div><div class="s">${esc(s)} · pool</div><div class="n">${esc(pool[s].name)}</div><div class="v">${pool[s].votes} of ${pool[s].of} players</div></div></div>`).join("");
+      return `<div class="member"><span class="w">${icon(m.icon, 44)}${esc(m.name)}</span><div class="kit">${cells || `<span class="v">no build seen on this seat yet</span>`}</div></div>`;
+    }).join("")}</div>`;
   }
   function compsTable(p){
     if (p.sizes[0] < 2) return "";
-    const body = p.comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th><th class="num">Seen</th><th>Dominant</th><th class="num">K/D</th></tr></thead><tbody>${
-      p.comps.map((c, i) => `<tr><td>${i + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr>`).join("")
+    const body = p.comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th>${th("comps", CCOLS)}</tr></thead><tbody>${
+      ordered(p.comps, SORT.comps).map(({r: c, i}, n) => `<tr class="row" data-c="${i}" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`).join("")
     }</tbody></table></div>` : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
-    return `<section class="block"><h3>Comps that won (every member's weapon known, seen ${S.thresholds.comp_sightings}+ times)</h3>${body}</section>`;
+    return `<section class="block" id="comps"><h3>Comps that won (every member's weapon known, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}</section>`;
   }
-  function show(k){
+  /* ---- the pool: one view at a time, weapons or comps ---- */
+  let POOL = "solo", VIEW = "weapons";
+  function show(k, view){
     const p = S.pools[k];
+    POOL = k;
+    const hasComps = p.sizes[0] >= 2;
+    VIEW = hasComps && (view || VIEW) === "comps" ? "comps" : "weapons";
     tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pool === k ? "true" : "false"));
-    host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span></div>
-      <section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>${compsTable(p)}`;
-    try { localStorage.setItem("portal-pool", k); } catch (e) {}
+    host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span>
+      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${p.comps.length}</small></button></div>` : ""}</div>
+      ${VIEW === "comps" ? compsTable(p) : `<section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>`}`;
+    try { localStorage.setItem("portal-pool", k); localStorage.setItem("portal-view", VIEW); } catch (e) {}
   }
   tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
   host.addEventListener("click", e => {
+    const v = e.target.closest(".view");
+    if (v){ show(POOL, v.dataset.view); return; }
+    const h = e.target.closest("th.sortable");
+    if (h){
+      const st = SORT[h.dataset.table];
+      if (st.key === h.dataset.sort) st.dir = -st.dir; else { st.key = h.dataset.sort; st.dir = -1; }
+      show(POOL, VIEW); return;
+    }
     const r = e.target.closest("tr.row"); if (!r) return;
-    const d = host.querySelector(`tr.detail[data-for="${r.dataset.w}"]`);
+    const d = r.dataset.c !== undefined
+      ? host.querySelector(`tr.detail[data-for-c="${r.dataset.c}"]`)
+      : host.querySelector(`tr.detail[data-for="${r.dataset.w}"]`);
     const open = r.getAttribute("aria-expanded") === "true";
     r.setAttribute("aria-expanded", open ? "false" : "true");
     if (d) d.hidden = open;
   });
-  let start = "solo";
-  try { const s = localStorage.getItem("portal-pool"); if (s && S.pools[s]) start = s; } catch (e) {}
-  const fromHash = location.hash.replace("#", "");
-  if (S.pools[fromHash]) start = fromHash;
-  show(start);
+  let start = "solo", startView = "weapons";
+  try {
+    const s = localStorage.getItem("portal-pool"); if (s && S.pools[s]) start = s;
+    const v = localStorage.getItem("portal-view"); if (v === "comps") startView = v;
+  } catch (e) {}
+  /* #seven or #seven/comps */
+  const [hashPool, hashView] = location.hash.replace("#", "").split("/");
+  if (S.pools[hashPool]) start = hashPool;
+  if (hashView === "comps" || hashView === "weapons") startView = hashView;
+  show(start, startView);
 })();
 </script>
 </body>

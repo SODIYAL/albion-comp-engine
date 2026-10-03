@@ -22,9 +22,15 @@ BUILDS. Per weapon and pool, the modal item per slot over the WINNING
 builds (a member of a killer party: seen as killer or participant, never
 the victim), one player one vote (a player's fullest sighting per weapon),
 shown from three votes. Victims' builds are what died and are not
-"best builds".
+"best builds". A comp row carries the same read per member over the
+comp's own sightings (`members`): the modal item per slot, one vote per
+sighting of the member, from the comp's sighting floor, so the page can
+show what the winners of THAT comp wore beside the pool-wide build of
+each weapon.
 
-Usage:  py -3 pipeline/build_portal_stats.py       -> out/portal_stats.json
+Usage:  py -3 pipeline/build_portal_stats.py [--rosters PATH]  -> out/portal_stats.json
+  --rosters names another roster artifact (a git-shown copy while the poll
+  rewrites the working file).
 """
 import collections
 import datetime
@@ -103,6 +109,7 @@ def build(doc, weapons_meta, gear_meta, items):
         comps = collections.defaultdict(lambda: {"n": 0, "dominant": 0, "scored": 0,
                                                  "kills": 0, "deaths": 0})
         kits = collections.defaultdict(lambda: collections.defaultdict(dict))  # w -> player -> build
+        comp_kits = collections.defaultdict(lambda: collections.defaultdict(dict))  # ck -> (w, player) -> build
         dom_total = scored_total = 0
         for p in ps:
             k, d = p.get("kills"), p.get("deaths")
@@ -137,24 +144,40 @@ def build(doc, weapons_meta, gear_meta, items):
                     c["dominant"] += dominant
                     c["kills"] += k or 0
                     c["deaths"] += d or 0
+                for b in members:
+                    w = b.get("weapon")
+                    if not w or not b.get("player") or w not in p["weapons"]:
+                        continue
+                    # one vote per sighting: the comp's unit is the party seen
+                    # in a battle, so the same players wearing the same kit
+                    # three times are three sightings of that kit
+                    sk = (w, b["player"], p.get("battle"))
+                    prev = comp_kits[ck].get(sk)
+                    if prev is None or (b.get("slots_filled") or 0) > (prev.get("slots_filled") or 0):
+                        comp_kits[ck][sk] = b
         n_parties = len(ps)
-        weapons = []
-        for w, st in wstat.items():
+
+        def modal_build(bs, floor):
+            """The modal item per slot over builds `bs`, one build one vote,
+            a slot shown from `floor` votes."""
             best = {}
-            votes_by_slot = {}
             for slot in SLOTS:
                 cnt = collections.Counter()
-                for b in kits[w].values():
+                for b in bs:
                     g = (b.get("gear") or {}).get(slot)
                     if g:
                         cnt[re.sub(r"@\d+$", "", g)] += 1
                 total = sum(cnt.values())
-                if not cnt or total < MIN_VOTES:
+                if not cnt or total < floor:
                     continue
                 item, n = max(cnt.items(), key=lambda kv: (kv[1], kv[0]))
                 best[slot.lower()] = {"id": item, "name": gname(item), "votes": n,
                                       "share": round(n / total, 3), "of": total}
-                votes_by_slot[slot.lower()] = total
+            return best
+
+        weapons = []
+        for w, st in wstat.items():
+            best = modal_build(kits[w].values(), MIN_VOTES)
             ips = [b.get("item_power") for b in kits[w].values() if b.get("item_power")]
             weapons.append({
                 "id": w, "name": wname(w), "icon": items.get(w) or f"T6_{w}",
@@ -173,8 +196,14 @@ def build(doc, weapons_meta, gear_meta, items):
             if c["n"] < MIN_COMP:
                 continue
             ws = ck.split("|")
+            members = []
+            for w in ws:
+                bs = [b for (bw, _pl, _bt), b in comp_kits[ck].items() if bw == w]
+                members.append({"id": w, "name": wname(w), "icon": items.get(w) or f"T6_{w}",
+                                "sightings": len(bs), "build": modal_build(bs, MIN_COMP)})
             comp_rows.append({
                 "weapons": [{"id": w, "name": wname(w), "icon": items.get(w) or f"T6_{w}"} for w in ws],
+                "members": members,
                 "n": c["n"], "scored": c["scored"],
                 "dominant_share": round(c["dominant"] / c["scored"], 3) if c["scored"] else None,
                 "kd": round(c["kills"] / max(1, c["deaths"]), 2) if c["scored"] else None,
@@ -203,7 +232,10 @@ def build(doc, weapons_meta, gear_meta, items):
 
 
 def main():
-    doc = rosters_io.load(source="all", content=CONTENT)
+    path_arg = None
+    if "--rosters" in sys.argv:
+        path_arg = sys.argv[sys.argv.index("--rosters") + 1]
+    doc = rosters_io.load(path_arg, source="all", content=CONTENT)
     with open(os.path.join(OUT, "dataset-latest.json"), encoding="utf-8") as f:
         ds = json.load(f)
     items = {}
