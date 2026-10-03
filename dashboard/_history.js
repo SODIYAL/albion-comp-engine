@@ -121,6 +121,19 @@ function ctaRows(ctas) {
 }
 
 
+/* A table cell's date: the day alone in the reader's own zone ("Fri 3 Oct",
+   the year once it is not this one), so the row stays one short line; the
+   full local time with its UTC goes in the cell's title. `now` is
+   injectable for the test. */
+function historyDateLabel(iso, now) {
+  const d = new Date(iso || "");
+  if (Number.isNaN(d.getTime())) return "";
+  const how = { weekday: "short", day: "numeric", month: "short" };
+  if (d.getFullYear() !== (now || new Date()).getFullYear()) how.year = "numeric";
+  return d.toLocaleDateString(undefined, how);
+}
+
+
 /* The facts as a sheet (the export, platform phase 10): the players,
    one row each with the weapons played as "Longbow ×3; Hallowfall ×1",
    or the completed CTAs. The same measures as the tables. */
@@ -258,6 +271,14 @@ function historyErrorMessage(err) {
     return td;
   }
 
+  /* a date cell: the day in the cell, the full local time with its UTC
+     in the title */
+  function whenCell(iso) {
+    const td = cell(iso ? historyDateLabel(iso) || "—" : "—", "hs-when");
+    if (iso) td.title = eventTimeLabel(iso, true);
+    return td;
+  }
+
   function roleTag(role) {
     const tag = document.createElement("span");
     tag.className = `pw-role ${role}`;
@@ -313,7 +334,7 @@ function historyErrorMessage(err) {
       }
       if (!p.plays.length) plays.append(document.createTextNode("—"));
       tr.append(name, cell(String(p.ctas), "hs-num"), cell(String(p.attended), "hs-num"), cell(String(p.no_show), "hs-num"),
-                cell(ratePct(p.rate), "hs-num"), cell(p.last_attended ? eventTimeLabel(p.last_attended) : "—", "hs-when"), plays);
+                cell(ratePct(p.rate), "hs-num"), whenCell(p.last_attended), plays);
       return tr;
     }));
     el.playersNote.textContent = rows.length ? (shown.length ? "" : "No player by that name.") : "No records yet: complete a CTA and mark its attendance.";
@@ -356,7 +377,7 @@ function historyErrorMessage(err) {
       sub.className = "gd-sub";
       sub.textContent = `${CONTENTS[c.content] || c.content} · ${c.planned_size} planned`;
       name.append(sub);
-      tr.append(name, cell(eventTimeLabel(c.starts_at), "hs-when"),
+      tr.append(name, whenCell(c.starts_at),
                 cell(`${c.claimed}/${c.slots} (${ratePct(c.fill)})`, "hs-num"),
                 cell(String(c.attended), "hs-num"), cell(String(c.no_show), "hs-num"), cell(String(c.unmarked), "hs-num"));
       return tr;

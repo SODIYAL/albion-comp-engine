@@ -83,7 +83,13 @@ BRAND_LOGO_INLINE = os.path.join("assets", "brand", "comp-zaddy-logo-160.png")
 # and a script that throws (no library: _supabase.js throws) stops only
 # itself - the planner, the engine and the parity guard have already run.
 # The one network dependency of the page; everything else is inlined.
-SUPABASE_JS_CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+# Pinned to an exact version and file with a subresource-integrity hash:
+# the browser refuses a bundle whose bytes differ, so a compromised or
+# re-published CDN file cannot run inside the account layer. To move the
+# version: change both constants together (the hash is sha384 of the file
+# at the new URL, base64) and run the account gates.
+SUPABASE_JS_CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"
+SUPABASE_JS_SRI = "sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok"
 
 
 def load_semantic_icons():
@@ -455,7 +461,7 @@ def main():
            f"const FAMILIES = {js(families)};\n"
            f"const EFFECT_QUOTAS = {js(effect_quotas)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
-           f'<script src="{SUPABASE_JS_CDN}"></script>\n'
+           f'<script src="{SUPABASE_JS_CDN}" integrity="{SUPABASE_JS_SRI}" crossorigin="anonymous"></script>\n'
            f"<script>\n{supabase_js}\n</script>\n"
            f"<script>\n{auth_js}\n</script>\n"
            f"<script>\nconst ACCOUNT_CATALOG = {js(account_catalog)};\n{profile_js}\n</script>\n"

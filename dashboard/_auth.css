@@ -13,11 +13,19 @@
    _shell.html; the per-class rules below predate this one) */
 .auth-dialog [hidden], .acct-menu [hidden]{display:none !important}
 
+/* the layer's type scale: six steps, every font-size below is one of them.
+   label: mono capitals and compact buttons. meta: secondary buttons and
+   small print. dense: controls and cells inside the tables. body: fields
+   and running text. lead: a name, a group title, a code. title: a dialog's
+   heading. On a phone a field takes the lead step (a smaller field makes
+   the browser zoom on focus). */
+:root{--fs-label:10px; --fs-meta:11px; --fs-dense:12px; --fs-body:13px; --fs-lead:16px; --fs-title:21px}
+
 /* ---------- the masthead button ---------- */
 .acct-btn{
   display:inline-flex; align-items:center; gap:7px; max-width:220px; min-height:24px;
   padding:3px 11px; border-radius:99px;
-  font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.08em; text-transform:uppercase;
   color:var(--brass); background:var(--brass-wash);
   border:1px solid rgba(255,201,58,.42);
   transition:border-color .18s var(--ease), color .18s var(--ease),
@@ -28,7 +36,7 @@
 .acct-btn[data-state="pending"]{opacity:.55}
 /* logged in: the name keeps the player's own spelling, never upper-cased */
 .acct-btn[data-state="in"]{
-  padding-left:3px; font-size:11px; letter-spacing:.02em; text-transform:none;
+  padding-left:3px; font-size:var(--fs-meta); letter-spacing:.02em; text-transform:none;
   color:var(--ink); background:rgba(18,18,27,.6); border-color:var(--rule-2);
 }
 .acct-btn[data-state="in"]:hover,
@@ -37,7 +45,7 @@
 .acct-btn[data-state="in"] .acct-init{
   display:grid; place-items:center; width:18px; height:18px; flex:none; border-radius:50%;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass)); color:#1A1206;
-  font-size:10px; font-weight:700; line-height:1;
+  font-size:var(--fs-label); font-weight:700; line-height:1;
 }
 .acct-name{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 
@@ -50,20 +58,20 @@
 }
 .acct-menu[hidden]{display:none}
 .acct-menu-hd{padding:10px 10px 12px; margin-bottom:4px; border-bottom:1px solid var(--rule)}
-.acct-menu-name{font-family:var(--serif); font-size:16px; font-weight:600; line-height:1.3;
+.acct-menu-name{font-family:var(--serif); font-size:var(--fs-lead); font-weight:600; line-height:1.3;
   color:var(--ink); overflow-wrap:anywhere}
-.acct-menu-sub{font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:3px;
+.acct-menu-sub{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); margin-top:3px;
   overflow-wrap:anywhere}
 .acct-menu-sub:empty{display:none}
 .acct-item{
   display:block; width:100%; padding:9px 10px; text-align:left;
-  background:none; border:0; border-radius:10px; font-size:13px; color:var(--ink-2);
+  background:none; border:0; border-radius:10px; font-size:var(--fs-body); color:var(--ink-2);
   transition:background .18s var(--ease), color .18s var(--ease);
 }
 .acct-item:hover, .acct-item:focus-visible{background:var(--surface-2); color:var(--ink)}
 .acct-item.danger:hover, .acct-item.danger:focus-visible{color:var(--gap)}
 .acct-item[aria-disabled="true"]{opacity:.6; cursor:progress}
-.acct-menu-err{margin:4px 10px 6px; font-size:12px; line-height:1.45; color:var(--gap)}
+.acct-menu-err{margin:4px 10px 6px; font-size:var(--fs-dense); line-height:1.45; color:var(--gap)}
 .acct-menu-err:empty{display:none}
 
 /* ---------- the sign-in dialog ---------- */
@@ -94,10 +102,10 @@
 }
 .auth-hd{display:flex; align-items:flex-start; gap:12px; margin-bottom:16px}
 .auth-kicker{display:block; margin-bottom:4px;
-  font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.16em; text-transform:uppercase;
   color:var(--ink-3)}
 .auth-hd h2{
-  font-size:23px; letter-spacing:.01em;
+  font-size:var(--fs-title); letter-spacing:.01em;
   background:linear-gradient(180deg, #FFF6DC, #F2C75C);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
@@ -106,7 +114,7 @@
 .auth-hd h2:focus-visible{outline:none}
 .auth-close{
   margin-left:auto; flex:none; width:32px; height:32px; display:grid; place-items:center;
-  background:none; border:0; border-radius:8px; color:var(--ink-3); font-size:21px; line-height:1;
+  background:none; border:0; border-radius:8px; color:var(--ink-3); font-size:var(--fs-title); line-height:1;
   transition:background .18s var(--ease), color .18s var(--ease);
 }
 .auth-close:hover{color:var(--ink); background:var(--surface-2)}
@@ -118,22 +126,22 @@
 
 .auth-field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px}
 .auth-field label{
-  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.14em; text-transform:uppercase;
   color:var(--ink-2);
 }
 .auth-field label .opt{margin-left:6px; letter-spacing:.06em; text-transform:none; color:var(--ink-3)}
-.auth-field .text-input, .auth-field select{font-size:14px; padding:10px 12px}
+.auth-field .text-input, .auth-field select{font-size:var(--fs-body); padding:10px 12px}
 .auth-field select{padding-right:30px}   /* room for the shell's chevron */
 .auth-field .text-input[aria-invalid="true"],
 .auth-field select[aria-invalid="true"]{border-color:var(--gap); box-shadow:0 0 0 3px var(--gap-wash)}
-.auth-hint{margin:0; font-size:12px; line-height:1.45; color:var(--ink-3)}
+.auth-hint{margin:0; font-size:var(--fs-dense); line-height:1.45; color:var(--ink-3)}
 .auth-hint:empty{display:none}
-.auth-field-err{margin:0; font-size:12px; line-height:1.45; color:var(--gap)}
+.auth-field-err{margin:0; font-size:var(--fs-dense); line-height:1.45; color:var(--gap)}
 .auth-field-err:empty{display:none}
 /* a field's error replaces its hint rather than repeating it */
 .auth-field:has(.auth-field-err:not(:empty)) .auth-hint{display:none}
 
-.auth-msg{margin:0 0 14px; padding:10px 12px; border-radius:10px; font-size:13px; line-height:1.45}
+.auth-msg{margin:0 0 14px; padding:10px 12px; border-radius:10px; font-size:var(--fs-body); line-height:1.45}
 .auth-msg.err{color:var(--gap); background:var(--gap-wash); border:1px solid rgba(255,84,112,.35)}
 .auth-msg.ok{color:var(--ok-bright); background:rgba(35,191,110,.10); border:1px solid rgba(35,191,110,.35)}
 
@@ -141,7 +149,7 @@
 .auth-submit{
   display:flex; align-items:center; justify-content:center; gap:9px;
   width:100%; margin-top:4px; padding:11px 16px;
-  font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.08em;
+  font-family:var(--mono); font-size:var(--fs-dense); font-weight:700; letter-spacing:.08em;
   text-transform:uppercase; color:#1A1206;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   border:0; border-radius:10px;
@@ -151,7 +159,7 @@
 .auth-submit:hover{filter:brightness(1.07)}
 .auth-secondary{
   width:100%; padding:10px 16px;
-  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase;
   color:var(--ink-2); background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
   border:1px solid var(--rule-2); border-radius:10px;
   transition:border-color .18s var(--ease), color .18s var(--ease);
@@ -174,23 +182,23 @@
 
 .auth-link{
   padding:2px 0; margin-left:4px; background:none; border:0; border-bottom:1px solid transparent;
-  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase;
   color:var(--brass); transition:border-color .18s var(--ease);
 }
 .auth-link:hover{border-bottom-color:var(--brass)}
 .auth-resend{display:block; margin:12px auto 0}
 .auth-switch{
   margin:16px 0 0; padding-top:14px; border-top:1px solid var(--rule);
-  text-align:center; font-size:13px; color:var(--ink-3);
+  text-align:center; font-size:var(--fs-body); color:var(--ink-3);
 }
 
-.auth-info p{margin:0 0 10px; font-size:14px; line-height:1.55; color:var(--ink-2)}
+.auth-info p{margin:0 0 10px; font-size:var(--fs-body); line-height:1.55; color:var(--ink-2)}
 .auth-info p strong{color:var(--ink); font-weight:600; overflow-wrap:anywhere}
 .auth-actions{display:flex; flex-direction:column; gap:8px; margin-top:16px}
 
 /* ---------- the profile dialog (_profile.js) ---------- */
 .profile-dialog{width:min(600px, calc(100vw - 32px))}
-.profile-email{display:block; margin-top:4px; font-family:var(--mono); font-size:11px;
+.profile-email{display:block; margin-top:4px; font-family:var(--mono); font-size:var(--fs-meta);
   color:var(--ink-3); overflow-wrap:anywhere}
 .profile-email:empty{display:none}
 .profile-names{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; align-items:start}
@@ -200,30 +208,30 @@
 
 /* a list: its label, its chips, its picker */
 .pw-group{margin:2px 0 14px; padding-top:14px; border-top:1px solid var(--rule)}
-.pw-label{margin:0 0 3px; font-family:var(--mono); font-size:10px; font-weight:400;
+.pw-label{margin:0 0 3px; font-family:var(--mono); font-size:var(--fs-label); font-weight:400;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2)}
 .pw-list{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; padding:0; list-style:none}
 .pw-chip{
   display:inline-flex; align-items:center; gap:7px; max-width:100%; padding:3px 3px 3px 5px;
   border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,18,27,.6);
-  font-size:13px; color:var(--ink);
+  font-size:var(--fs-body); color:var(--ink);
 }
 /* a key the catalog no longer holds: kept, and plainly unknown */
 .pw-chip.unknown{border-style:dashed; color:var(--ink-3)}
 .pw-art{width:26px; height:26px; flex:none; object-fit:contain}
 .pw-art.blank{display:inline-block; border-radius:6px; background:var(--surface-2)}
 .pw-name{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.pw-empty{padding:4px 0; font-size:13px; font-style:italic; color:var(--ink-3)}
+.pw-empty{padding:4px 0; font-size:var(--fs-body); font-style:italic; color:var(--ink-3)}
 /* role class in the planner's role hues */
 .pw-role{flex:none; padding:1px 6px; border-radius:99px; background:rgba(255,255,255,.04);
-  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase}
 .pw-role.frontline{color:var(--role-tank)}
 .pw-role.support{color:var(--role-support)}
 .pw-role.dps{color:var(--role-melee)}
 .pw-role.healer{color:var(--role-healer)}
 .pw-btn{
   width:26px; height:26px; flex:none; display:grid; place-items:center; padding:0;
-  background:none; border:0; border-radius:8px; font-size:15px; line-height:1; color:var(--ink-3);
+  background:none; border:0; border-radius:8px; font-size:var(--fs-lead); line-height:1; color:var(--ink-3);
   transition:background .18s var(--ease), color .18s var(--ease);
 }
 .pw-btn:hover{background:var(--surface-2); color:var(--brass)}
@@ -236,24 +244,24 @@
   background:var(--sunk); border:1px solid var(--rule-2); border-radius:12px}
 .pw-results[hidden]{display:none}
 .pw-opt{display:flex; align-items:center; gap:9px; padding:6px 8px; border-radius:8px;
-  font-size:13px; color:var(--ink-2); cursor:pointer}
+  font-size:var(--fs-body); color:var(--ink-2); cursor:pointer}
 .pw-opt:hover, .pw-opt[aria-selected="true"]{background:var(--surface-2); color:var(--ink)}
 .pw-opt .pw-role{margin-left:auto}
-.pw-none{padding:8px; font-size:13px; color:var(--ink-3)}
+.pw-none{padding:8px; font-size:var(--fs-body); color:var(--ink-3)}
 
-.pw-roles{margin:0 0 14px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.pw-roles{margin:0 0 14px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .pw-roles:empty{display:none}
 .profile-actions{display:flex; align-items:center; gap:14px; margin-top:4px}
 .profile-actions .auth-submit{flex:1; width:auto; margin-top:0}
-.profile-dirty{font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+.profile-dirty{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em;
   text-transform:uppercase; color:var(--amber)}
 .profile-dirty[hidden]{display:none}
 
 @media (max-width:640px){
   /* 16px fields: a smaller font makes iOS Safari zoom the page on focus */
-  .auth-field .text-input, .auth-field select, .pw-combo .text-input{font-size:16px}
+  .auth-field .text-input, .auth-field select, .pw-combo .text-input{font-size:var(--fs-lead)}
   .auth-card{padding:18px 16px 16px}
-  .auth-hd h2{font-size:21px}
+  .auth-hd h2{font-size:var(--fs-title)}
 }
 
 /* ---- guilds (_guild.js): the list down the side, the guild across the main column ---- */
@@ -266,53 +274,53 @@
   transition:background .18s var(--ease), color .18s var(--ease)}
 .gd-item:hover, .gd-item:focus-visible{background:var(--surface-2); color:var(--ink)}
 .gd-item[aria-pressed="true"]{border-color:var(--rule-2); background:rgba(18,18,27,.6); color:var(--ink)}
-.gd-item-name{font-size:13px; font-weight:600; overflow-wrap:anywhere}
-.gd-item-sub{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
-.gd-none{padding:6px 2px; font-size:13px; color:var(--ink-3)}
+.gd-item-name{font-size:var(--fs-body); font-weight:600; overflow-wrap:anywhere}
+.gd-item-sub{font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
+.gd-none{padding:6px 2px; font-size:var(--fs-body); color:var(--ink-3)}
 .gd-form{margin-top:12px; padding-top:12px; border-top:1px solid var(--rule)}
 .gd-form .pw-label{margin-bottom:8px}
 .gd-form .auth-submit, .gd-form .auth-secondary{margin-top:2px}
 .gd-form .auth-hint{margin:6px 0 0}
 .gd-main{min-width:0}
-.gd-empty{margin:24px 0; font-size:13px; color:var(--ink-3)}
+.gd-empty{margin:24px 0; font-size:var(--fs-body); color:var(--ink-3)}
 .gd-head{margin-bottom:10px}
-.gd-title{margin:0; font-size:18px; line-height:1.2; overflow-wrap:anywhere}
-.gd-meta{margin:3px 0 0; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.gd-title{margin:0; font-size:var(--fs-lead); line-height:1.2; overflow-wrap:anywhere}
+.gd-meta{margin:3px 0 0; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .gd-code{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 12px; padding:8px 10px;
   border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,18,27,.6)}
 .gd-code .pw-label{margin:0}
 .gd-code .auth-hint{flex-basis:100%; margin:0}
-.gd-code-value{font-family:var(--mono); font-size:15px; letter-spacing:.14em; color:var(--amber); user-select:all}
+.gd-code-value{font-family:var(--mono); font-size:var(--fs-lead); letter-spacing:.14em; color:var(--amber); user-select:all}
 .gd-code-value:empty::before{content:"—"; color:var(--ink-3)}
 .gd-btn{padding:5px 10px; border:1px solid var(--rule-2); border-radius:8px; background:none;
-  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase;
   color:var(--ink-2); cursor:pointer; transition:background .18s var(--ease), color .18s var(--ease)}
 .gd-btn:hover, .gd-btn:focus-visible{background:var(--surface-2); color:var(--ink)}
 .gd-btn.danger:hover, .gd-btn.danger:focus-visible{color:var(--gap); border-color:var(--gap)}
 .gd-btn[aria-disabled="true"]{opacity:.6; cursor:progress}
 .gd-coverage{display:flex; flex-wrap:wrap; gap:6px 16px; margin:0 0 10px; font-family:var(--mono);
-  font-size:11px; color:var(--ink-3)}
+  font-size:var(--fs-meta); color:var(--ink-3)}
 .gd-coverage:empty{display:none}
-.gd-cov b{font-size:13px; font-weight:600; color:var(--ink)}
+.gd-cov b{font-size:var(--fs-body); font-weight:600; color:var(--ink)}
 .gd-cov.frontline b{color:var(--role-tank)}
 .gd-cov.support b{color:var(--role-support)}
 .gd-cov.dps b{color:var(--role-melee)}
 .gd-cov.healer b{color:var(--role-healer)}
-.gd-table{width:100%; border-collapse:collapse; font-size:13px}
-.gd-table th{padding:4px 6px; text-align:left; font-family:var(--mono); font-size:10px; font-weight:400;
+.gd-table{width:100%; border-collapse:collapse; font-size:var(--fs-body)}
+.gd-table th{padding:4px 6px; text-align:left; font-family:var(--mono); font-size:var(--fs-label); font-weight:400;
   letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); border-bottom:1px solid var(--rule);
   position:relative}   /* a hidden header label (.sr-only) is placed within its cell, never widening the card when the table scrolls */
 .gd-table td{padding:6px; vertical-align:top; border-bottom:1px solid var(--rule)}
 .gd-name{display:block; color:var(--ink)}
-.gd-sub{display:block; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
-.gd-role-select{padding:3px 6px; font-size:12px; width:auto}   /* its own width: the page's full-width select would let the column collapse */
+.gd-sub{display:block; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
+.gd-role-select{padding:3px 6px; font-size:var(--fs-dense); width:auto}   /* its own width: the page's full-width select would let the column collapse */
 .gd-table .gd-role-select{padding-right:24px; background-position:right 7px center}
 /* a member's weapons and the role tags they cover share one line, wrapping only when the cell is short */
 .gd-weapons{display:inline-flex; flex-wrap:wrap; gap:4px; margin:0; padding:0; list-style:none; vertical-align:middle}
 .gd-weapon{display:inline-flex; align-items:center; gap:4px; padding:1px 6px 1px 2px;
-  border:1px solid var(--rule-2); border-radius:8px; font-size:12px; color:var(--ink)}
+  border:1px solid var(--rule-2); border-radius:8px; font-size:var(--fs-dense); color:var(--ink)}
 .gd-weapon.unknown{color:var(--ink-3); border-style:dashed}
-.gd-also{align-self:center; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.gd-also{align-self:center; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .gd-covers{display:inline-flex; flex-wrap:wrap; gap:4px; margin:0 0 0 8px; vertical-align:middle}
 .gd-covers:empty{display:none}
 .gd-act{text-align:right; white-space:nowrap}
@@ -326,16 +334,16 @@
 .comp-dialog{width:min(920px, calc(100vw - 32px))}
 .cp-fields{display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 12px; align-items:start}
 .cp-fields .cp-wide{grid-column:1/-1}
-.cp-notes{resize:vertical; min-height:38px; font-family:inherit; font-size:13px}
+.cp-notes{resize:vertical; min-height:38px; font-family:inherit; font-size:var(--fs-body)}
 .cp-table td{padding:4px 6px}
-.cp-pos{width:28px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.cp-pos{width:28px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .cp-weapon{white-space:nowrap}
 /* one line per slot: icon, name and role tag (the guild table's block name would stack them) */
 .cp-weapon .gd-name{display:inline}
 .cp-weapon .pw-art{vertical-align:middle; margin-right:5px}
 .cp-weapon .pw-role{margin-left:6px}
-.cp-open{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic}
-.cp-in{width:100%; min-width:80px; padding:3px 6px; font-size:12px}
+.cp-open{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); font-style:italic}
+.cp-in{width:100%; min-width:80px; padding:3px 6px; font-size:var(--fs-dense)}
 .cp-in:read-only{border-color:transparent; background:none; color:var(--ink-2)}
 .cp-foot{align-items:center; flex-wrap:wrap}
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
@@ -344,12 +352,12 @@
 
 /* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
 .event-dialog{width:min(960px, calc(100vw - 32px))}
-.ev-group{margin:8px 0 2px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.ev-group{margin:8px 0 2px; font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
 .ev-group:first-child{margin-top:0}
-.ev-when{font-size:12px; color:var(--ink-2)}
+.ev-when{font-size:var(--fs-dense); color:var(--ink-2)}
 .ev-status-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:0 0 12px; padding:8px 10px;
   border:1px solid var(--rule-2); border-radius:10px; background:rgba(18,18,27,.6)}
-.ev-status{padding:2px 9px; border-radius:999px; font-family:var(--mono); font-size:11px; letter-spacing:.1em;
+.ev-status{padding:2px 9px; border-radius:999px; font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.1em;
   text-transform:uppercase; color:var(--ink-2); border:1px solid var(--rule-2)}
 .ev-status[data-status="open"]{color:var(--role-healer); border-color:var(--role-healer)}
 .ev-status[data-status="locked"]{color:var(--amber); border-color:var(--amber)}
@@ -358,19 +366,19 @@
 .ev-moves:empty{display:none}
 .ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
 .ev-share-wrap .pw-label{margin:0}
-.ev-share{font-size:13px}
+.ev-share{font-size:var(--fs-body)}
 
 /* ---- sign-up (_signup.js): the sheet a link opens, the roster beside the player's form ---- */
 .signup-dialog{width:min(1040px, calc(100vw - 32px))}
 .su-when{margin-top:4px}
 .su-status-row{margin-bottom:8px}
-.su-counts{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.su-counts{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-status-row .gd-btn:first-of-type{margin-left:auto}
-.su-live-state{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.su-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
 .su-live-state:empty{display:none}
 .su-live-state[data-live="yes"]{color:var(--role-healer)}
 .su-live-state[data-live="yes"]::before{content:""; display:inline-block; width:6px; height:6px; margin-right:5px; border-radius:50%; background:currentColor; vertical-align:middle}
-.su-notes{margin:0 0 12px; padding:8px 10px; border-left:2px solid var(--rule-2); font-size:13px; color:var(--ink-2); white-space:pre-wrap}
+.su-notes{margin:0 0 12px; padding:8px 10px; border-left:2px solid var(--rule-2); font-size:var(--fs-body); color:var(--ink-2); white-space:pre-wrap}
 .su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
 .su-board-wrap{min-width:0}
 .su-form-wrap{border-left:1px solid var(--rule); padding-left:18px}
@@ -384,13 +392,13 @@
 .su-table .cp-weapon{padding-top:5px; width:170px}
 .su-table .su-role{width:150px}
 .su-weapon{display:inline-flex; align-items:center; gap:5px}
-.su-role{font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.su-role{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-player .gd-name{display:inline}
 .su-player .gd-sub{margin-top:1px}
-.su-declared{display:block; font-size:12px; color:var(--ink-2)}
-.su-free{font-family:var(--mono); font-size:11px; color:var(--role-healer)}
+.su-declared{display:block; font-size:var(--fs-dense); color:var(--ink-2)}
+.su-free{font-family:var(--mono); font-size:var(--fs-meta); color:var(--role-healer)}
 .su-mine{background:rgba(255,196,84,.06)}
-.su-reserves{margin:4px 0 8px; padding:0; list-style:none; font-size:13px}
+.su-reserves{margin:4px 0 8px; padding:0; list-style:none; font-size:var(--fs-body)}
 .su-reserves li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 10px; padding:6px; border-bottom:1px solid var(--rule)}
 .su-reserves .gd-name{display:inline}
 .su-reserves .gd-sub{display:inline; margin:0}
@@ -400,7 +408,7 @@
 .su-weapons:empty{display:none}
 .su-row{display:flex; align-items:flex-end; gap:14px}
 .su-row .auth-field{flex:1; min-width:120px}
-.su-check{display:flex; align-items:center; gap:8px; margin:0 0 14px; font-size:13px; color:var(--ink-2); cursor:pointer}
+.su-check{display:flex; align-items:center; gap:8px; margin:0 0 14px; font-size:var(--fs-body); color:var(--ink-2); cursor:pointer}
 .su-check input{width:16px; height:16px; margin:0}
 /* the caller's controls on the sheet */
 .su-caller{margin-top:14px; padding-top:12px; border-top:1px solid var(--rule)}
@@ -410,18 +418,18 @@
 .su-add .auth-field:first-child{flex:1}
 .su-add-btn{margin-bottom:4px}
 .su-manage{display:inline-flex; align-items:center; gap:6px; margin:0}
-.su-move, .su-slot-weapon{padding:2px 24px 2px 6px; font-size:12px; max-width:220px; background-position:right 7px center}
+.su-move, .su-slot-weapon{padding:2px 24px 2px 6px; font-size:var(--fs-dense); max-width:220px; background-position:right 7px center}
 .su-move{max-width:140px}
 /* the caller's move and removal and the record's mark: one row under the player */
 .su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px}
 .su-reserves .su-controls{flex-basis:100%; margin-top:2px}
 /* the record: attendance marks */
-.su-att{display:inline-block; margin-left:6px; padding:0 6px; border-radius:99px; font-family:var(--mono); font-size:10px;
+.su-att{display:inline-block; margin-left:6px; padding:0 6px; border-radius:99px; font-family:var(--mono); font-size:var(--fs-label);
   letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--rule-2); vertical-align:middle}
 .su-att[data-status="confirmed"], .su-att[data-status="attended"]{color:var(--role-healer); border-color:var(--role-healer)}
 .su-att[data-status="no_show"]{color:var(--gap); border-color:var(--gap)}
 .su-att[data-status="cancelled"]{border-style:dashed}
-.su-mark{padding:2px 24px 2px 6px; font-size:12px; margin:0; width:auto; max-width:120px; background-position:right 7px center}
+.su-mark{padding:2px 24px 2px 6px; font-size:var(--fs-dense); margin:0; width:auto; max-width:120px; background-position:right 7px center}
 .su-history li .gd-sub{display:inline; margin:0}
 .su-mark-all{margin:0 0 10px}
 .su-confirm{margin-top:10px; width:100%}
@@ -435,14 +443,14 @@
 .hs-section{margin-top:16px; padding-top:12px; border-top:1px solid var(--rule)}
 .hs-section-hd{display:flex; align-items:center; justify-content:space-between; gap:12px}
 .hs-section-hd .pw-label{margin:0}
-.hs-search{width:200px; padding:4px 8px; font-size:13px}
+.hs-search{width:200px; padding:4px 8px; font-size:var(--fs-body)}
 .hs-table td{vertical-align:middle}
-.hs-num{font-family:var(--mono); font-size:12px; text-align:right; white-space:nowrap}
+.hs-num{font-family:var(--mono); font-size:var(--fs-dense); text-align:right; white-space:nowrap}
 .hs-table th.hs-num{text-align:right}   /* a numeric header is marked by class, never by position */
-.hs-when{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
+.hs-when{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); white-space:nowrap}
 .hs-regular .gd-name{color:var(--amber)}
 .hs-plays{display:flex; flex-wrap:wrap; gap:4px}
-.hs-play{display:inline-flex; align-items:center; gap:4px; padding:1px 6px; border:1px solid var(--rule-2); border-radius:8px; font-size:12px}
+.hs-play{display:inline-flex; align-items:center; gap:4px; padding:1px 6px; border:1px solid var(--rule-2); border-radius:8px; font-size:var(--fs-dense)}
 .hs-weapons{margin:6px 0 0}
 .hs-weapons .gd-sub{margin-left:4px}
 .hs-definitions{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule)}
@@ -452,34 +460,34 @@
 .im-source{display:grid; grid-template-columns:260px minmax(0,1fr); gap:0 18px; align-items:start}
 .im-guild{margin:0}
 .im-text-field{grid-column:2; margin:0}
-.im-text{resize:vertical; min-height:110px; font-family:var(--mono); font-size:12px; white-space:pre; overflow:auto}
+.im-text{resize:vertical; min-height:110px; font-family:var(--mono); font-size:var(--fs-dense); white-space:pre; overflow:auto}
 .im-file-row{grid-column:1/-1; display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:8px}
 .im-file-btn{cursor:pointer}
 .im-read{width:auto; margin:0; padding:6px 16px}
 .im-file-row .auth-hint{flex-basis:100%}
 .im-summary{margin:12px 0 0}
 .im-columns{display:flex; flex-wrap:wrap; gap:6px 10px; margin:8px 0 10px}
-.im-column{display:inline-flex; flex-direction:column; gap:2px; font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+.im-column{display:inline-flex; flex-direction:column; gap:2px; font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em;
   text-transform:uppercase; color:var(--ink-3)}
-.im-column-kind{padding:2px 24px 2px 6px; font-size:12px; background-position:right 7px center}
+.im-column-kind{padding:2px 24px 2px 6px; font-size:var(--fs-dense); background-position:right 7px center}
 .im-table td{vertical-align:middle; padding:4px 6px}
 .im-from{white-space:nowrap}
 .im-from .gd-name{display:inline}
 .im-status{display:inline-block; margin-left:6px; padding:0 6px; border:1px solid var(--rule-2); border-radius:99px;
-  font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
 .im-table tr[data-status="likely"] .im-status{color:var(--amber); border-color:var(--amber)}
 .im-table tr[data-status="uncertain"] .im-status{color:var(--gap); border-color:var(--gap)}
 .im-table tr[data-status="none"] .im-status{color:var(--gap); border-color:var(--gap)}
 .im-table tr[data-status="skip"]{opacity:.55}
 .im-pick{white-space:nowrap}
-.im-weapon{max-width:240px; padding:2px 24px 2px 6px; font-size:12px; background-position:right 7px center}
+.im-weapon{max-width:240px; padding:2px 24px 2px 6px; font-size:var(--fs-dense); background-position:right 7px center}
 .im-pick .pw-role{margin-left:6px}
-.im-count{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
-.im-cell{font-size:12px; color:var(--ink-2); max-width:180px; overflow-wrap:anywhere}
+.im-count{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); white-space:nowrap}
+.im-cell{font-size:var(--fs-dense); color:var(--ink-2); max-width:180px; overflow-wrap:anywhere}
 .im-options{display:flex; flex-wrap:wrap; gap:4px 20px; margin:10px 0 6px}
 .im-options .su-check{margin:0}
 .im-foot-note{margin:0; flex:1; color:var(--amber)}
-.im-aliases{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule); font-size:13px}
+.im-aliases{margin-top:14px; padding-top:10px; border-top:1px solid var(--rule); font-size:var(--fs-body)}
 .im-aliases summary{cursor:pointer; color:var(--ink-2)}
 .im-aliases-list{margin-top:8px}
 .im-alias .gd-sub{margin-left:4px}
@@ -492,16 +500,16 @@
 .rr{margin:12px 0 6px; padding:8px 10px; border:1px solid var(--rule); border-radius:10px; background:rgba(18,18,27,.35)}
 .rr-summary{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; cursor:pointer; list-style:none}
 .rr-summary::-webkit-details-marker{display:none}
-.rr-summary::before{content:"\25B8"; font-size:11px; color:var(--ink-3)}
+.rr-summary::before{content:"\25B8"; font-size:var(--fs-meta); color:var(--ink-3)}
 .rr[open] .rr-summary::before{content:"\25BE"}
 .rr-label{margin:0}
-.rr-headline{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.rr-headline{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-2)}
 .rr-note{margin:8px 0 0}
 .rr-grid{display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; margin-top:8px}
 .rr-block{min-width:0}
 .rr-block-wide{grid-column:1/-1}
 .rr-block .pw-label{margin:6px 0 2px}
-.rr-list{margin:0; padding:0; list-style:none; font-size:13px}
+.rr-list{margin:0; padding:0; list-style:none; font-size:var(--fs-body)}
 .rr-list li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 8px; padding:3px 0; border-bottom:1px solid var(--rule)}
 .rr-list li:last-child{border-bottom:0}
 .rr-list .gd-sub{display:inline}   /* one line per item; a long line wraps on its own */
