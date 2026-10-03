@@ -1099,6 +1099,16 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .rp-opt b{font-family:var(--mono); font-size:11px; color:var(--brass)}
 .rp-opt.neg b{color:var(--ink-3)}
 .rp-opt:hover{border-color:var(--brass-deep); color:var(--brass)}
+.rp-opt.manual b{color:var(--ink-3); font-size:9px; letter-spacing:.06em; text-transform:uppercase}
+/* the replace block's search: its own line under the ranked options */
+.rp-search-row{flex-basis:100%; margin-top:3px}
+.rp-search{
+  width:100%; max-width:260px; padding:5px 9px;
+  font:400 11px/1.3 var(--mono); color:var(--ink); background:var(--sunk);
+  border:1px solid var(--rule-2); border-radius:8px;
+}
+.rp-search:focus{border-color:var(--brass-deep); outline:none}
+.rp-search::placeholder{color:var(--ink-3)}
 .prov.locked{background:var(--brass-wash); color:var(--brass); margin-left:6px}
 .dm-act.on{color:var(--brass); border-color:var(--brass-deep)}
 
@@ -9474,6 +9484,8 @@ let FORGE_NOTE = null;
    signature, so "refresh" walks the next-best alternatives instead of
    repeating (deterministic — the forge takes the list, never a seed). */
 let REPLACE_OPEN = null, REPLACE_OPTS = [];
+/* the replace block's own search: any weapon by name, beside the ranked list */
+let REPLACE_QUERY = "";
 let AVOID = [], AVOID_SIG = "";
 let pickFilter = "";
 let treeFilter = "";
@@ -9630,14 +9642,38 @@ function memberPop(i, ctx){
    scored as a dressed pick into the REST of the comp and passes the
    forge's own gates, so the list never offers what the forge would
    refuse. Display only: the engine ranks, the page translates. */
+/* one weapon valued for the slot through the same one-slot forge the
+   ranked list uses; null when the forge's gates refuse it there (a manual
+   pick still lands and scores, as every manual pick does) */
+function replaceOption(i, w){
+  const hit = REPLACE_OPTS.find(x => x.weapon === w);
+  if (hit) return hit;
+  return ENG.replaceOptions(party, i, COMBOS_CUR, GEARS_CUR, 1, [w])[0] || null;
+}
 function replaceListHtml(i){
   const w = party[i];
-  if (!REPLACE_OPTS.length)
-    return `<div class="dm-replace"><span class="fn">no replacement clears the comp's constraints for this slot — the rest of the roster holds every minimum ${nameOf(w)} covers</span></div>`;
   const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
+  const opt = o => `<button class="rp-opt${o.delta < 0 ? " neg" : ""}" data-replaceat="${i}" data-replaceto="${o.weapon}" title="${esc(nameOf(o.weapon))} in this slot: ${signed(o.delta)} comp score, scored in its doctrine kit">${icon(o.weapon, 22)}<span>${esc(nameOf(o.weapon))}</span><b>${signed(o.delta)}</b></button>`;
+  const ranked = REPLACE_OPTS.length
+    ? REPLACE_OPTS.map(opt).join("")
+    : `<span class="fn">no replacement clears the comp's constraints for this slot — the rest of the roster holds every minimum ${nameOf(w)} covers</span>`;
+  /* the search: every offerable weapon by name, the ranked ones left out;
+     a hit the forge would refuse here still lands as a manual pick */
+  const q = REPLACE_QUERY.trim().toLowerCase();
+  const ranked_keys = new Set(REPLACE_OPTS.map(o => o.weapon));
+  const hits = !q ? [] : WEAPONS_BY_NAME
+    .filter(k => k !== w && !ranked_keys.has(k) && nameOf(k).toLowerCase().includes(q)).slice(0, 8);
+  const found = hits.map(k => {
+    const o = replaceOption(i, k);
+    return o ? opt(o)
+      : `<button class="rp-opt manual" data-replaceat="${i}" data-replaceto="${k}" title="${esc(nameOf(k))} in this slot: outside the forge's gates for this comp — lands as a manual pick and scores like one">${icon(k, 22)}<span>${esc(nameOf(k))}</span><b>manual</b></button>`;
+  }).join("");
   return `<div class="dm-replace" role="group" aria-label="Replacements for ${nameOf(w)}">
     <span class="fn">replace ${nameOf(w)} with</span>
-    ${REPLACE_OPTS.map(o => `<button class="rp-opt${o.delta < 0 ? " neg" : ""}" data-replaceat="${i}" data-replaceto="${o.weapon}" title="${esc(nameOf(o.weapon))} in this slot: ${signed(o.delta)} comp score, scored in its doctrine kit">${icon(o.weapon, 22)}<span>${esc(nameOf(o.weapon))}</span><b>${signed(o.delta)}</b></button>`).join("")}
+    ${ranked}
+    <div class="rp-search-row"><input class="rp-search" type="search" autocomplete="off" spellcheck="false"
+      placeholder="or any weapon by name…" value="${esc(REPLACE_QUERY)}" aria-label="Search any weapon to replace ${esc(nameOf(w))}"></div>
+    ${q && !hits.length ? `<span class="fn">no weapon matches "${esc(REPLACE_QUERY.trim())}"</span>` : found}
   </div>`;
 }
 /* The wheel's comp board: the roster as four main-role
@@ -11867,7 +11903,7 @@ document.addEventListener("click", e => {
     const ri = +rp.dataset.replace;
     if (REPLACE_OPEN === ri){ REPLACE_OPEN = null; REPLACE_OPTS = []; }
     else {
-      REPLACE_OPEN = ri;
+      REPLACE_OPEN = ri; REPLACE_QUERY = "";
       /* the engine is synced to (CONTENT, SIZE, STYLE) by render(); the
          one-slot forge reads the roster's own combos and kits */
       REPLACE_OPTS = ENG.replaceOptions(party, ri, COMBOS_CUR, GEARS_CUR, 5);
@@ -11878,7 +11914,7 @@ document.addEventListener("click", e => {
   const rpt = e.target.closest("[data-replaceto]");
   if (rpt){
     const si = +rpt.dataset.replaceat;
-    const o = REPLACE_OPTS.find(x => x.weapon === rpt.dataset.replaceto);
+    const o = replaceOption(si, rpt.dataset.replaceto);
     party[si] = rpt.dataset.replaceto;
     /* the option lands exactly as valued: its combo and doctrine kit
        (the same landing a forged slot gets); a locked slot stays locked —
@@ -12012,6 +12048,16 @@ document.addEventListener("input", e => {
   if (e.target.id === "pick-filter"){
     pickFilter = e.target.value; renderWheel(RECS_CUR);
     renderPickHits(); syncPickSearch();
+  }
+  if (e.target.classList && e.target.classList.contains("rp-search")){
+    /* the box lives inside the replace block that render() rebuilds —
+       put the caret back where it was (the lo-filter rule above) */
+    REPLACE_QUERY = e.target.value;
+    const at = e.target.selectionStart;
+    render(); if (PDASH_FLY_I !== null) refreshPdashFly();
+    /* the block renders in the flyout and in a board popover: refocus the one on screen */
+    const box = [...document.querySelectorAll(".rp-search")].find(b => b.offsetParent !== null);
+    if (box){ box.focus(); try { box.setSelectionRange(at, at); } catch (err) { /* type=search */ } }
   }
 });
 document.addEventListener("keydown", e => {
