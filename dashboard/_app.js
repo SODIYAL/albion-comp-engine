@@ -403,9 +403,13 @@ function badgeHtml(w){
   }).join("");
 }
 
-/* The ADD-WEAPON picker's chip facet (its own chip bar, plus any
-   capability badge clicked on a weapon anywhere). */
-let FACET = null;
+/* The ADD-WEAPON picker's chip facets (its own chip bar, plus any
+   capability badge clicked on a weapon anywhere). Several chips can be
+   on at once: within a group they widen the match (any of the roles,
+   any of the provides), across groups they narrow it (a role AND a
+   provides AND a utility). */
+const FACETS = {role: new Set(), badge: new Set(), util: new Set()};
+const facetOn = () => FACETS.role.size + FACETS.badge.size + FACETS.util.size > 0;
 /* mobile: which member's popover is open as a bottom
    sheet (touch has no hover) — display state only, never in the hash */
 let SHEET_OPEN = null;
@@ -462,15 +466,20 @@ const UTIL_DEFS = [
 ];
 const UTIL_FN = Object.fromEntries(UTIL_DEFS);
 function facetOk(w){
-  if (!FACET) return true;
-  if (FACET.type === "role") return roleHint(w) === FACET.v;
-  if (FACET.type === "util") return (UTIL_FN[FACET.v] || (() => false))(w);
-  return (BADGE_KEYS[FACET.v] || []).some(k => (capsOf(w)[k] || 0) >= 2);
+  if (FACETS.role.size && !FACETS.role.has(roleHint(w))) return false;
+  if (FACETS.util.size && ![...FACETS.util].some(v => (UTIL_FN[v] || (() => false))(w))) return false;
+  if (FACETS.badge.size && ![...FACETS.badge].some(v =>
+        (BADGE_KEYS[v] || []).some(k => (capsOf(w)[k] || 0) >= 2))) return false;
+  return true;
 }
+/* toggle one chip; null clears every group */
 function setFacet(f, scroll){
-  FACET = (f && FACET && FACET.type === f.type && FACET.v === f.v) ? null : f;
+  if (!f) Object.values(FACETS).forEach(set => set.clear());
+  else if (FACETS[f.type]){
+    if (FACETS[f.type].has(f.v)) FACETS[f.type].delete(f.v); else FACETS[f.type].add(f.v);
+  }
   renderWheel(RECS_CUR);
-  if (FACET && scroll && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+  if (f && FACETS[f.type] && FACETS[f.type].has(f.v) && scroll && !matchMedia("(prefers-reduced-motion: reduce)").matches)
     $("wheel").scrollIntoView({behavior: "smooth", block: "center"});
 }
 const roleCls = w => `role-${roleHint(w)}`;
@@ -1156,15 +1165,20 @@ function renderPickerChips(){
     holder.dataset.built = "1";
   }
   holder.querySelectorAll("[data-rfilter]").forEach(el => el.setAttribute("aria-pressed",
-    String(!!FACET && FACET.type === "role" && FACET.v === el.dataset.rfilter)));
+    String(FACETS.role.has(el.dataset.rfilter))));
   holder.querySelectorAll("[data-bfilter]").forEach(el => el.setAttribute("aria-pressed",
-    String(!!FACET && FACET.type === "badge" && FACET.v === el.dataset.bfilter)));
+    String(FACETS.badge.has(el.dataset.bfilter))));
   holder.querySelectorAll("[data-ufilter]").forEach(el => el.setAttribute("aria-pressed",
-    String(!!FACET && FACET.type === "util" && FACET.v === el.dataset.ufilter)));
-  /* the trigger glows while its group holds the active facet, so the
-     collapsed row still tells you a filter is on */
-  holder.querySelectorAll(".pgroup-t").forEach(t => t.setAttribute("aria-pressed",
-    String(!!FACET && FACET.type === t.dataset.pg)));
+    String(FACETS.util.has(el.dataset.ufilter))));
+  /* the trigger glows while its group holds a facet and counts them, so
+     the collapsed row still tells you what is on */
+  holder.querySelectorAll(".pgroup-t").forEach(t => {
+    const n = (FACETS[t.dataset.pg] || new Set()).size;
+    t.setAttribute("aria-pressed", String(n > 0));
+    let c = t.querySelector(".pg-n");
+    if (!c){ c = document.createElement("span"); c.className = "pg-n"; t.insertBefore(c, t.querySelector(".pg-caret")); }
+    c.textContent = n > 1 ? String(n) : "";
+  });
 }
 /* ------------------------------------------------------- the forge wheel
    The picker as a wheel: filtered weapons ride the rim, the focused one
@@ -1482,19 +1496,21 @@ function renderWheelFoot(keys, recs, rings){
 function renderWheel(recs){
   renderPickerChips();
   const keys = filteredWeapons();
-  const facetText = !FACET ? "" : FACET.type === "role"
-    ? `${roleLabel(FACET.v)} weapons`
-    : FACET.type === "badge"
-      ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
-      : `utility: ${FACET.v}`;
+  /* the readout: each group's chips joined with "or", the groups with "·" */
+  const orList = xs => xs.join(" or ");
+  const facetText = [
+    FACETS.role.size ? `${orList([...FACETS.role].map(roleLabel))} weapons` : "",
+    FACETS.badge.size ? `provides ${orList([...FACETS.badge].map(v => (BADGE_BY_ID[v] || {label: v}).label.toLowerCase()))}` : "",
+    FACETS.util.size ? `utility: ${orList([...FACETS.util])}` : "",
+  ].filter(Boolean).join(" · ");
   /* one line in the bar: the count never truncates, the
      description ellipsizes, the full sentence rides the tooltip */
   const nMatch = `${keys.length} match${keys.length === 1 ? "" : "es"}`;
   /* the words compact away by the slot's own width (.w spans; see the
      @container rules) — the count and the × survive down to nothing */
-  $("facet-slot").innerHTML = FACET
+  $("facet-slot").innerHTML = facetOn()
     ? `<div class="facet" title="showing: ${esc(facetText)} — ${nMatch}"><span class="facet-n">${keys.length}<span class="w"> match${keys.length === 1 ? "" : "es"}</span></span><span class="facet-t">· <b>${esc(facetText)}</b></span>
-       <button class="fx" id="facet-clear" aria-label="Clear filter" title="clear the filter">&times;<span class="w"> clear</span></button></div>`
+       <button class="fx" id="facet-clear" aria-label="Clear filters" title="clear every filter">&times;<span class="w"> clear</span></button></div>`
     : "";
   const idx = wheelFocusIdx(keys, recs);
   const rings = hubRingData();
