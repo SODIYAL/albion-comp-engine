@@ -95,6 +95,44 @@ check("P7 rows are ordered by parties, then dominant share, then name (determini
       [w["id"] for w in trio["weapons"]] == ["2H_HOLYSTAFF", "2H_BOW", "2H_CLAWS", "MAIN_MACE"],
       str([w["id"] for w in trio["weapons"]]))
 
+# shapes and the roster profile (pools of six and more)
+_roles = [{"id": "tank", "class": "frontline"}, {"id": "heal", "class": "healer"}, {"id": "dd", "class": "dps"}]
+_wm = {"T": {"display_name": "Tank", "label": {"seat": "tank"}}, "H": {"display_name": "Heal", "label": {"seat": "heal"}},
+       "A": {"display_name": "Axe", "label": {"seat": "dd"}}, "B": {"display_name": "Bow", "label": {"seat": "dd"}},
+       "X": {"display_name": "Unseated"}}
+_doc = {"battles": [], "builds": [], "parties": [
+    party(1, 0, ["T", "H", "A", "A", "B", "B"], 6, 0),        # 1 / 1 / 4 dps, dominant
+    party(2, 0, ["T", "H", "A", "B", "B", "B"], 3, 3),        # the same shape, another exact comp
+    party(3, 0, ["T", "T", "H", "A", "B", "X"], 2, 1),        # its own shape, seen once
+    party(4, 0, ["T", "H", "A", "A", "B", "B"], None, None, known=5),   # an unknown member: no shape
+]}
+_o = bps.build(_doc, _wm, {}, {}, _roles)["pools"]["seven"]
+_s = _o["shapes"]
+check("P12 a shape is the count per role class through the weapon's primary seat; it shows from the "
+      "sighting floor, so two different exact comps of one shape make one row and a party with an "
+      "unknown member none",
+      len(_s) == 1 and _s[0]["counts"] == {"frontline": 1, "healer": 1, "support": 0, "dps": 4}
+      and _s[0]["n"] == 2 and _s[0]["size"] == 6 and _o["comps"] == [],
+      str(_s))
+check("P12b a shape row carries dominant share and K/D over its parties and, per class, the weapons "
+      "fielded with the parties fielding one and the median copies",
+      _s[0]["dominant_share"] == 0.5 and _s[0]["kd"] == 3.0
+      and [(w["id"], w["parties"], w["copies"]) for w in _s[0]["weapons"]["dps"]] == [("A", 2, 2), ("B", 2, 3)]
+      and _s[0]["weapons"]["healer"][0]["share"] == 1.0,
+      str(_s[0]))
+_pr = _o["profile"]
+check("P13 the profile reads every full party: the quartiles of each class's count, the distinct "
+      "shapes, and a weapon with no seat counted as `other` only where one is fielded",
+      _pr["parties"] == 3 and _pr["shapes_distinct"] == 2
+      and _pr["roles"]["frontline"] == {"p25": 1, "p50": 1, "p75": 2, "min": 1, "max": 2}
+      and _pr["roles"]["dps"]["p50"] == 4 and _pr["roles"]["other"]["max"] == 1
+      and _pr["weapons"]["frontline"][0] == {"id": "T", "name": "Tank", "icon": "T6_T", "parties": 3,
+                                             "share": 1.0, "copies": 1},
+      str(_pr["roles"]))
+check("P13b pools under six members and a build without the role book carry no shapes",
+      "shapes" not in bps.build(_doc, _wm, {}, {}, _roles)["pools"]["five"]
+      and "shapes" not in bps.build(_doc, _wm, {}, {})["pools"]["seven"])
+
 # the committed artifact and page
 path = os.path.join(ROOT, "pipeline", "out", "portal_stats.json")
 check("P8 the committed artifact exists, is LF and carries every pool",

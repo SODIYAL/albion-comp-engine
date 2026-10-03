@@ -60,6 +60,7 @@ jobs:
           node tests/test_loadout_codec.js
           node tests/test_display_math.js
           node tests/test_live_party.js
+          node tests/test_portal_page.js
           node tests/test_auth_ui.js
           node tests/test_profile.js
           node tests/test_guild.js

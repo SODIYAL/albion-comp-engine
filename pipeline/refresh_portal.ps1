@@ -43,6 +43,7 @@ Step "rosters from cache"    "py" @("-3", "-u", "pipeline/sample_parties.py", "-
 Step "build_portal_stats"    "py" @("-3", "-u", "pipeline/build_portal_stats.py")
 Step "dashboard build"       "py" @("-3", "-u", "dashboard/build.py")
 Step "test_portal_stats"     "py" @("-3", "-u", "tests/test_portal_stats.py")
+Step "test_portal_page"      "node" @("tests/test_portal_page.js")
 Step "test_dashboard_layout" "py" @("-3", "-u", "tests/test_dashboard_layout.py")
 
 "=== portal refresh complete $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append

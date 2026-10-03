@@ -1,7 +1,7 @@
 {
  "battles": 17339,
  "content": "ancient_lands",
- "generated_at": "2026-10-03T09:19Z",
+ "generated_at": "2026-10-03T15:20Z",
  "kind": "portal_stats",
  "parties": 19789,
  "pools": {
@@ -31381,7 +31381,2354 @@
    "dominant_share": 0.465,
    "label": "20v20",
    "parties": 101,
+   "profile": {
+    "parties": 95,
+    "roles": {
+     "dps": {
+      "max": 13,
+      "min": 3,
+      "p25": 7,
+      "p50": 7,
+      "p75": 9
+     },
+     "frontline": {
+      "max": 9,
+      "min": 0,
+      "p25": 3,
+      "p50": 4,
+      "p75": 5
+     },
+     "healer": {
+      "max": 6,
+      "min": 1,
+      "p25": 3,
+      "p50": 4,
+      "p75": 4
+     },
+     "support": {
+      "max": 6,
+      "min": 0,
+      "p25": 2,
+      "p50": 3,
+      "p75": 4
+     }
+    },
+    "shapes_distinct": 78,
+    "weapons": {
+     "dps": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_KNUCKLES_SET3",
+       "id": "2H_KNUCKLES_SET3",
+       "name": "Spiked Gauntlets",
+       "parties": 54,
+       "share": 0.568
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_AXE_AVALON",
+       "id": "2H_AXE_AVALON",
+       "name": "Realmbreaker",
+       "parties": 53,
+       "share": 0.558
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+       "id": "2H_FIRE_RINGPAIR_AVALON",
+       "name": "Dawnsong",
+       "parties": 51,
+       "share": 0.537
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_LONGBOW",
+       "id": "2H_LONGBOW",
+       "name": "Longbow",
+       "parties": 41,
+       "share": 0.432
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ICECRYSTAL_UNDEAD",
+       "id": "2H_ICECRYSTAL_UNDEAD",
+       "name": "Permafrost Prism",
+       "parties": 41,
+       "share": 0.432
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HARPOON_HELL",
+       "id": "2H_HARPOON_HELL",
+       "name": "Spirithunter",
+       "parties": 30,
+       "share": 0.316
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+       "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+       "name": "Rotcaller Staff",
+       "parties": 26,
+       "share": 0.274
+      },
+      {
+       "copies": 2,
+       "icon": "T4_2H_KNUCKLES_SET2",
+       "id": "2H_KNUCKLES_SET2",
+       "name": "Battle Bracers",
+       "parties": 22,
+       "share": 0.232
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+       "id": "2H_DUALSCIMITAR_UNDEAD",
+       "name": "Galatine Pair",
+       "parties": 22,
+       "share": 0.232
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_GLACIALSTAFF",
+       "id": "2H_GLACIALSTAFF",
+       "name": "Glacial Staff",
+       "parties": 21,
+       "share": 0.221
+      }
+     ],
+     "frontline": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_DUALMACE_AVALON",
+       "id": "2H_DUALMACE_AVALON",
+       "name": "Oathkeepers",
+       "parties": 51,
+       "share": 0.537
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+       "id": "2H_SHAPESHIFTER_KEEPER",
+       "name": "Earthrune Staff",
+       "parties": 47,
+       "share": 0.495
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_MACE",
+       "id": "2H_MACE",
+       "name": "Heavy Mace",
+       "parties": 42,
+       "share": 0.442
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_POLEHAMMER",
+       "id": "2H_POLEHAMMER",
+       "name": "Polehammer",
+       "parties": 32,
+       "share": 0.337
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_MACE",
+       "id": "MAIN_MACE",
+       "name": "Mace",
+       "parties": 25,
+       "share": 0.263
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_ROCKMACE_KEEPER",
+       "id": "MAIN_ROCKMACE_KEEPER",
+       "name": "Bedrock Mace",
+       "parties": 23,
+       "share": 0.242
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_HAMMER",
+       "id": "MAIN_HAMMER",
+       "name": "Hammer",
+       "parties": 20,
+       "share": 0.211
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_COMBATSTAFF_MORGANA",
+       "id": "2H_COMBATSTAFF_MORGANA",
+       "name": "Black Monk Staff",
+       "parties": 13,
+       "share": 0.137
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_MACE_CRYSTAL",
+       "id": "MAIN_MACE_CRYSTAL",
+       "name": "Dreadstorm Monarch",
+       "parties": 12,
+       "share": 0.126
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HAMMER_AVALON",
+       "id": "2H_HAMMER_AVALON",
+       "name": "Hand of Justice",
+       "parties": 12,
+       "share": 0.126
+      }
+     ],
+     "healer": [
+      {
+       "copies": 2,
+       "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+       "id": "MAIN_HOLYSTAFF_AVALON",
+       "name": "Hallowfall",
+       "parties": 85,
+       "share": 0.895
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_NATURESTAFF_HELL",
+       "id": "2H_NATURESTAFF_HELL",
+       "name": "Blight Staff",
+       "parties": 37,
+       "share": 0.389
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+       "id": "2H_HOLYSTAFF_UNDEAD",
+       "name": "Redemption Staff",
+       "parties": 31,
+       "share": 0.326
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+       "id": "2H_HOLYSTAFF_CRYSTAL",
+       "name": "Exalted Staff",
+       "parties": 22,
+       "share": 0.232
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF_HELL",
+       "id": "2H_HOLYSTAFF_HELL",
+       "name": "Fallen Staff",
+       "parties": 19,
+       "share": 0.2
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_NATURESTAFF",
+       "id": "MAIN_NATURESTAFF",
+       "name": "Nature Staff",
+       "parties": 16,
+       "share": 0.168
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_NATURESTAFF_KEEPER",
+       "id": "2H_NATURESTAFF_KEEPER",
+       "name": "Rampant Staff",
+       "parties": 9,
+       "share": 0.095
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_WILDSTAFF",
+       "id": "2H_WILDSTAFF",
+       "name": "Wild Staff",
+       "parties": 6,
+       "share": 0.063
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+       "id": "MAIN_NATURESTAFF_CRYSTAL",
+       "name": "Forgebark Staff",
+       "parties": 5,
+       "share": 0.053
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF",
+       "id": "2H_HOLYSTAFF",
+       "name": "Great Holy Staff",
+       "parties": 3,
+       "share": 0.032
+      }
+     ],
+     "support": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_SHAPESHIFTER_SET2",
+       "id": "2H_SHAPESHIFTER_SET2",
+       "name": "Rootbound Staff",
+       "parties": 41,
+       "share": 0.432
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ARCANESTAFF",
+       "id": "2H_ARCANESTAFF",
+       "name": "Great Arcane Staff",
+       "parties": 38,
+       "share": 0.4
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+       "id": "MAIN_CURSEDSTAFF_UNDEAD",
+       "name": "Lifecurse Staff",
+       "parties": 31,
+       "share": 0.326
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_ARCANESTAFF",
+       "id": "MAIN_ARCANESTAFF",
+       "name": "Arcane Staff",
+       "parties": 24,
+       "share": 0.253
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ENIGMATICSTAFF",
+       "id": "2H_ENIGMATICSTAFF",
+       "name": "Enigmatic Staff",
+       "parties": 22,
+       "share": 0.232
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+       "id": "2H_CURSEDSTAFF_MORGANA",
+       "name": "Damnation Staff",
+       "parties": 21,
+       "share": 0.221
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ENIGMATICORB_MORGANA",
+       "id": "2H_ENIGMATICORB_MORGANA",
+       "name": "Malevolent Locus",
+       "parties": 18,
+       "share": 0.189
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+       "id": "MAIN_CURSEDSTAFF_AVALON",
+       "name": "Shadowcaller",
+       "parties": 17,
+       "share": 0.179
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ARCANESTAFF_HELL",
+       "id": "2H_ARCANESTAFF_HELL",
+       "name": "Occult Staff",
+       "parties": 14,
+       "share": 0.147
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_SKULLORB_HELL",
+       "id": "2H_SKULLORB_HELL",
+       "name": "Cursed Skull",
+       "parties": 9,
+       "share": 0.095
+      }
+     ]
+    }
+   },
    "scored": 101,
+   "shapes": [
+    {
+     "counts": {
+      "dps": 9,
+      "frontline": 4,
+      "healer": 4,
+      "support": 3
+     },
+     "dominant_share": 0.8,
+     "kd": 40.0,
+     "n": 5,
+     "scored": 5,
+     "size": 20,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_GLACIALSTAFF",
+        "id": "2H_GLACIALSTAFF",
+        "name": "Glacial Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_SHAPESHIFTER_AVALON",
+        "id": "2H_SHAPESHIFTER_AVALON",
+        "name": "Lightcaller",
+        "parties": 5,
+        "share": 1.0
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_COMBATSTAFF_MORGANA",
+        "id": "2H_COMBATSTAFF_MORGANA",
+        "name": "Black Monk Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 4,
+        "share": 0.8
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 1,
+        "share": 0.2
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 5,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 5,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 4,
+        "share": 0.8
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 1,
+        "share": 0.2
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 7,
+      "frontline": 4,
+      "healer": 3,
+      "support": 4
+     },
+     "dominant_share": 0.333,
+     "kd": 0.45,
+     "n": 3,
+     "scored": 3,
+     "size": 18,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ICECRYSTAL_UNDEAD",
+        "id": "2H_ICECRYSTAL_UNDEAD",
+        "name": "Permafrost Prism",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET3",
+        "id": "2H_KNUCKLES_SET3",
+        "name": "Spiked Gauntlets",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HARPOON_HELL",
+        "id": "2H_HARPOON_HELL",
+        "name": "Spirithunter",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 2,
+        "share": 0.667
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+        "id": "2H_HOLYSTAFF_CRYSTAL",
+        "name": "Exalted Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+        "id": "2H_CURSEDSTAFF_MORGANA",
+        "name": "Damnation Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FROSTSTAFF_KEEPER",
+        "id": "MAIN_FROSTSTAFF_KEEPER",
+        "name": "Hoarfrost Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 7,
+      "frontline": 3,
+      "healer": 4,
+      "support": 3
+     },
+     "dominant_share": 0.333,
+     "kd": 2.62,
+     "n": 3,
+     "scored": 3,
+     "size": 17,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET3",
+        "id": "2H_KNUCKLES_SET3",
+        "name": "Spiked Gauntlets",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE_AVALON",
+        "id": "2H_AXE_AVALON",
+        "name": "Realmbreaker",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_COMBATSTAFF_MORGANA",
+        "id": "2H_COMBATSTAFF_MORGANA",
+        "name": "Black Monk Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+        "id": "2H_HOLYSTAFF_CRYSTAL",
+        "name": "Exalted Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_ICEGAUNTLETS_HELL",
+        "id": "2H_ICEGAUNTLETS_HELL",
+        "name": "Icicle Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 7,
+      "frontline": 4,
+      "healer": 4,
+      "support": 2
+     },
+     "dominant_share": 1.0,
+     "kd": 15.0,
+     "n": 2,
+     "scored": 2,
+     "size": 17,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_SHAPESHIFTER_AVALON",
+        "id": "2H_SHAPESHIFTER_AVALON",
+        "name": "Lightcaller",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET3",
+        "id": "2H_KNUCKLES_SET3",
+        "name": "Spiked Gauntlets",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_GLACIALSTAFF",
+        "id": "2H_GLACIALSTAFF",
+        "name": "Glacial Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_COMBATSTAFF_MORGANA",
+        "id": "2H_COMBATSTAFF_MORGANA",
+        "name": "Black Monk Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 3,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+        "id": "MAIN_NATURESTAFF_CRYSTAL",
+        "name": "Forgebark Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 12,
+      "frontline": 3,
+      "healer": 3,
+      "support": 2
+     },
+     "dominant_share": 1.0,
+     "kd": 16.0,
+     "n": 2,
+     "scored": 2,
+     "size": 20,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_CRYSTAL",
+        "id": "2H_DUALCROSSBOW_CRYSTAL",
+        "name": "Arclight Blasters",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 3,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 8,
+      "frontline": 5,
+      "healer": 4,
+      "support": 2
+     },
+     "dominant_share": 0.5,
+     "kd": 0.79,
+     "n": 2,
+     "scored": 2,
+     "size": 19,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE_AVALON",
+        "id": "2H_AXE_AVALON",
+        "name": "Realmbreaker",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+        "id": "2H_HOLYSTAFF_CRYSTAL",
+        "name": "Exalted Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 8,
+      "frontline": 4,
+      "healer": 4,
+      "support": 4
+     },
+     "dominant_share": 0.5,
+     "kd": 9.33,
+     "n": 2,
+     "scored": 2,
+     "size": 20,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 3,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE_AVALON",
+        "id": "2H_AXE_AVALON",
+        "name": "Realmbreaker",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET3",
+        "id": "2H_KNUCKLES_SET3",
+        "name": "Spiked Gauntlets",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 3,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_KEEPER",
+        "id": "2H_NATURESTAFF_KEEPER",
+        "name": "Rampant Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 7,
+      "frontline": 4,
+      "healer": 4,
+      "support": 4
+     },
+     "dominant_share": 0.5,
+     "kd": 7.0,
+     "n": 2,
+     "scored": 2,
+     "size": 19,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_RAPIER_MORGANA",
+        "id": "MAIN_RAPIER_MORGANA",
+        "name": "Bloodletter",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANE_RINGPAIR_AVALON",
+        "id": "2H_ARCANE_RINGPAIR_AVALON",
+        "name": "Evensong",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALHAMMER_HELL",
+        "id": "2H_DUALHAMMER_HELL",
+        "name": "Forge Hammers",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_GLACIALSTAFF",
+        "id": "2H_GLACIALSTAFF",
+        "name": "Glacial Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 3,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+        "id": "2H_CURSEDSTAFF_MORGANA",
+        "name": "Damnation Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 4,
+      "healer": 4,
+      "support": 4
+     },
+     "dominant_share": 0.5,
+     "kd": 0.8,
+     "n": 2,
+     "scored": 2,
+     "size": 17,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 4,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SCYTHE_HELL",
+        "id": "2H_SCYTHE_HELL",
+        "name": "Infernal Scythe",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ICECRYSTAL_UNDEAD",
+        "id": "2H_ICECRYSTAL_UNDEAD",
+        "name": "Permafrost Prism",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_AVALON",
+        "id": "2H_HAMMER_AVALON",
+        "name": "Hand of Justice",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+        "id": "2H_HOLYSTAFF_CRYSTAL",
+        "name": "Exalted Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_KEEPER",
+        "id": "2H_NATURESTAFF_KEEPER",
+        "name": "Rampant Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+        "id": "2H_CURSEDSTAFF_MORGANA",
+        "name": "Damnation Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICORB_MORGANA",
+        "id": "2H_ENIGMATICORB_MORGANA",
+        "name": "Malevolent Locus",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 8,
+      "frontline": 4,
+      "healer": 4,
+      "support": 3
+     },
+     "dominant_share": 0.5,
+     "kd": 1.56,
+     "n": 2,
+     "scored": 2,
+     "size": 19,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET3",
+        "id": "2H_KNUCKLES_SET3",
+        "name": "Spiked Gauntlets",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_GLACIALSTAFF",
+        "id": "2H_GLACIALSTAFF",
+        "name": "Glacial Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_COMBATSTAFF_MORGANA",
+        "id": "2H_COMBATSTAFF_MORGANA",
+        "name": "Black Monk Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_RAM_KEEPER",
+        "id": "2H_RAM_KEEPER",
+        "name": "Grovekeeper",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_KEEPER",
+        "id": "2H_NATURESTAFF_KEEPER",
+        "name": "Rampant Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 7,
+      "frontline": 6,
+      "healer": 4,
+      "support": 3
+     },
+     "dominant_share": 0.0,
+     "kd": 0.91,
+     "n": 2,
+     "scored": 2,
+     "size": 20,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE_AVALON",
+        "id": "2H_AXE_AVALON",
+        "name": "Realmbreaker",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 3,
+        "icon": "T4_2H_KNUCKLES_HELL",
+        "id": "2H_KNUCKLES_HELL",
+        "name": "Hellfire Hands",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_AVALON",
+        "id": "2H_BOW_AVALON",
+        "name": "Mistpiercer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_CRYSTAL",
+        "id": "2H_HOLYSTAFF_CRYSTAL",
+        "name": "Exalted Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 3,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICORB_MORGANA",
+        "id": "2H_ENIGMATICORB_MORGANA",
+        "name": "Malevolent Locus",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_HELL",
+        "id": "2H_ARCANESTAFF_HELL",
+        "name": "Occult Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 6,
+      "frontline": 5,
+      "healer": 3,
+      "support": 3
+     },
+     "dominant_share": 0.0,
+     "kd": 3.0,
+     "n": 2,
+     "scored": 2,
+     "size": 17,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_ICECRYSTAL_UNDEAD",
+        "id": "2H_ICECRYSTAL_UNDEAD",
+        "name": "Permafrost Prism",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRESTAFF_HELL",
+        "id": "2H_FIRESTAFF_HELL",
+        "name": "Brimstone Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_DAGGER_HELL",
+        "id": "MAIN_DAGGER_HELL",
+        "name": "Demonfang",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 3,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_HELL",
+        "id": "2H_ARCANESTAFF_HELL",
+        "name": "Occult Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    }
+   ],
+   "shapes_total": 12,
    "sizes": [
     15,
     20
@@ -51451,7 +53798,3970 @@
    "dominant_share": 0.91,
    "label": "7v7",
    "parties": 397,
+   "profile": {
+    "parties": 390,
+    "roles": {
+     "dps": {
+      "max": 7,
+      "min": 1,
+      "p25": 3,
+      "p50": 4,
+      "p75": 5
+     },
+     "frontline": {
+      "max": 4,
+      "min": 0,
+      "p25": 1,
+      "p50": 1,
+      "p75": 2
+     },
+     "healer": {
+      "max": 3,
+      "min": 0,
+      "p25": 1,
+      "p50": 1,
+      "p75": 1
+     },
+     "support": {
+      "max": 3,
+      "min": 0,
+      "p25": 0,
+      "p50": 0,
+      "p75": 1
+     }
+    },
+    "shapes_distinct": 46,
+    "weapons": {
+     "dps": [
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+       "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+       "name": "Rotcaller Staff",
+       "parties": 94,
+       "share": 0.241
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_LONGBOW",
+       "id": "2H_LONGBOW",
+       "name": "Longbow",
+       "parties": 91,
+       "share": 0.233
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+       "id": "2H_FIRE_RINGPAIR_AVALON",
+       "name": "Dawnsong",
+       "parties": 83,
+       "share": 0.213
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_BOW_KEEPER",
+       "id": "2H_BOW_KEEPER",
+       "name": "Bow of Badon",
+       "parties": 78,
+       "share": 0.2
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_DUALAXE_KEEPER",
+       "id": "2H_DUALAXE_KEEPER",
+       "name": "Bear Paws",
+       "parties": 63,
+       "share": 0.162
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+       "id": "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+       "name": "Phantom Twinblade",
+       "parties": 56,
+       "share": 0.144
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_BOW_AVALON",
+       "id": "2H_BOW_AVALON",
+       "name": "Mistpiercer",
+       "parties": 54,
+       "share": 0.138
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_AXE",
+       "id": "2H_AXE",
+       "name": "Greataxe",
+       "parties": 49,
+       "share": 0.126
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_CLEAVER_HELL",
+       "id": "2H_CLEAVER_HELL",
+       "name": "Carving Sword",
+       "parties": 48,
+       "share": 0.123
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HALBERD_MORGANA",
+       "id": "2H_HALBERD_MORGANA",
+       "name": "Carrioncaller",
+       "parties": 46,
+       "share": 0.118
+      }
+     ],
+     "frontline": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_MACE",
+       "id": "2H_MACE",
+       "name": "Heavy Mace",
+       "parties": 78,
+       "share": 0.2
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_MACE",
+       "id": "MAIN_MACE",
+       "name": "Mace",
+       "parties": 76,
+       "share": 0.195
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_POLEHAMMER",
+       "id": "2H_POLEHAMMER",
+       "name": "Polehammer",
+       "parties": 64,
+       "share": 0.164
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_DUALMACE_AVALON",
+       "id": "2H_DUALMACE_AVALON",
+       "name": "Oathkeepers",
+       "parties": 43,
+       "share": 0.11
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_MACE_HELL",
+       "id": "MAIN_MACE_HELL",
+       "name": "Incubus Mace",
+       "parties": 29,
+       "share": 0.074
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_SHAPESHIFTER_SET3",
+       "id": "2H_SHAPESHIFTER_SET3",
+       "name": "Primal Staff",
+       "parties": 27,
+       "share": 0.069
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HAMMER",
+       "id": "2H_HAMMER",
+       "name": "Great Hammer",
+       "parties": 24,
+       "share": 0.062
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+       "id": "2H_SHAPESHIFTER_KEEPER",
+       "name": "Earthrune Staff",
+       "parties": 17,
+       "share": 0.044
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_QUARTERSTAFF_AVALON",
+       "id": "2H_QUARTERSTAFF_AVALON",
+       "name": "Grailseeker",
+       "parties": 14,
+       "share": 0.036
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HAMMER_UNDEAD",
+       "id": "2H_HAMMER_UNDEAD",
+       "name": "Tombhammer",
+       "parties": 10,
+       "share": 0.026
+      }
+     ],
+     "healer": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+       "id": "2H_HOLYSTAFF_UNDEAD",
+       "name": "Redemption Staff",
+       "parties": 182,
+       "share": 0.467
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+       "id": "MAIN_HOLYSTAFF_AVALON",
+       "name": "Hallowfall",
+       "parties": 88,
+       "share": 0.226
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_NATURESTAFF_HELL",
+       "id": "2H_NATURESTAFF_HELL",
+       "name": "Blight Staff",
+       "parties": 56,
+       "share": 0.144
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_HOLYSTAFF",
+       "id": "MAIN_HOLYSTAFF",
+       "name": "Holy Staff",
+       "parties": 21,
+       "share": 0.054
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF_HELL",
+       "id": "2H_HOLYSTAFF_HELL",
+       "name": "Fallen Staff",
+       "parties": 11,
+       "share": 0.028
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_NATURESTAFF",
+       "id": "MAIN_NATURESTAFF",
+       "name": "Nature Staff",
+       "parties": 7,
+       "share": 0.018
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_HOLYSTAFF",
+       "id": "2H_HOLYSTAFF",
+       "name": "Great Holy Staff",
+       "parties": 6,
+       "share": 0.015
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_NATURESTAFF_KEEPER",
+       "id": "MAIN_NATURESTAFF_KEEPER",
+       "name": "Druidic Staff",
+       "parties": 5,
+       "share": 0.013
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+       "id": "MAIN_NATURESTAFF_CRYSTAL",
+       "name": "Forgebark Staff",
+       "parties": 5,
+       "share": 0.013
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_NATURESTAFF",
+       "id": "2H_NATURESTAFF",
+       "name": "Great Nature Staff",
+       "parties": 3,
+       "share": 0.008
+      }
+     ],
+     "support": [
+      {
+       "copies": 1,
+       "icon": "T4_2H_SHAPESHIFTER_SET2",
+       "id": "2H_SHAPESHIFTER_SET2",
+       "name": "Rootbound Staff",
+       "parties": 67,
+       "share": 0.172
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+       "id": "MAIN_CURSEDSTAFF_AVALON",
+       "name": "Shadowcaller",
+       "parties": 19,
+       "share": 0.049
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF",
+       "id": "MAIN_CURSEDSTAFF",
+       "name": "Cursed Staff",
+       "parties": 13,
+       "share": 0.033
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+       "id": "MAIN_CURSEDSTAFF_UNDEAD",
+       "name": "Lifecurse Staff",
+       "parties": 11,
+       "share": 0.028
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_SKULLORB_HELL",
+       "id": "2H_SKULLORB_HELL",
+       "name": "Cursed Skull",
+       "parties": 8,
+       "share": 0.021
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ENIGMATICSTAFF",
+       "id": "2H_ENIGMATICSTAFF",
+       "name": "Enigmatic Staff",
+       "parties": 8,
+       "share": 0.021
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ARCANESTAFF",
+       "id": "2H_ARCANESTAFF",
+       "name": "Great Arcane Staff",
+       "parties": 8,
+       "share": 0.021
+      },
+      {
+       "copies": 1,
+       "icon": "T4_MAIN_ARCANESTAFF",
+       "id": "MAIN_ARCANESTAFF",
+       "name": "Arcane Staff",
+       "parties": 6,
+       "share": 0.015
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_ICEGAUNTLETS_HELL",
+       "id": "2H_ICEGAUNTLETS_HELL",
+       "name": "Icicle Staff",
+       "parties": 3,
+       "share": 0.008
+      },
+      {
+       "copies": 1,
+       "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+       "id": "2H_CURSEDSTAFF_MORGANA",
+       "name": "Damnation Staff",
+       "parties": 2,
+       "share": 0.005
+      }
+     ]
+    }
+   },
    "scored": 388,
+   "shapes": [
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 1,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 0.982,
+     "kd": 45.5,
+     "n": 60,
+     "scored": 56,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "id": "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "name": "Phantom Twinblade",
+        "parties": 18,
+        "share": 0.3
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 17,
+        "share": 0.283
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 16,
+        "share": 0.267
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 16,
+        "share": 0.267
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CLEAVER_HELL",
+        "id": "2H_CLEAVER_HELL",
+        "name": "Carving Sword",
+        "parties": 13,
+        "share": 0.217
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 18,
+        "share": 0.3
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 9,
+        "share": 0.15
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 8,
+        "share": 0.133
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 7,
+        "share": 0.117
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 6,
+        "share": 0.1
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 29,
+        "share": 0.483
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 12,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 11,
+        "share": 0.183
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 5,
+        "share": 0.083
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_WILDSTAFF",
+        "id": "2H_WILDSTAFF",
+        "name": "Wild Staff",
+        "parties": 2,
+        "share": 0.033
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 1,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 0.904,
+     "kd": 10.17,
+     "n": 53,
+     "scored": 52,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_CLEAVER_HELL",
+        "id": "2H_CLEAVER_HELL",
+        "name": "Carving Sword",
+        "parties": 16,
+        "share": 0.302
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 14,
+        "share": 0.264
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 12,
+        "share": 0.226
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 12,
+        "share": 0.226
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 11,
+        "share": 0.208
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 14,
+        "share": 0.264
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 8,
+        "share": 0.151
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET3",
+        "id": "2H_SHAPESHIFTER_SET3",
+        "name": "Primal Staff",
+        "parties": 8,
+        "share": 0.151
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 7,
+        "share": 0.132
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 7,
+        "share": 0.132
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 29,
+        "share": 0.547
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 17,
+        "share": 0.321
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 5,
+        "share": 0.094
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.019
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 1,
+        "share": 0.019
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 2,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 0.929,
+     "kd": 21.89,
+     "n": 43,
+     "scored": 42,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 27,
+        "share": 0.628
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 11,
+        "share": 0.256
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_AVALON",
+        "id": "2H_BOW_AVALON",
+        "name": "Mistpiercer",
+        "parties": 10,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 9,
+        "share": 0.209
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 9,
+        "share": 0.209
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 21,
+        "share": 0.488
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 18,
+        "share": 0.419
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 10,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 7,
+        "share": 0.163
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET3",
+        "id": "2H_SHAPESHIFTER_SET3",
+        "name": "Primal Staff",
+        "parties": 7,
+        "share": 0.163
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 22,
+        "share": 0.512
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 13,
+        "share": 0.302
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 3,
+        "share": 0.07
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 2,
+        "share": 0.047
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+        "id": "MAIN_NATURESTAFF_CRYSTAL",
+        "name": "Forgebark Staff",
+        "parties": 2,
+        "share": 0.047
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 1,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 0.967,
+     "kd": 23.5,
+     "n": 30,
+     "scored": 30,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_AVALON",
+        "id": "2H_BOW_AVALON",
+        "name": "Mistpiercer",
+        "parties": 10,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_HELL",
+        "id": "2H_DUALCROSSBOW_HELL",
+        "name": "Boltcasters",
+        "parties": 7,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 7,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSWORD",
+        "id": "2H_DUALSWORD",
+        "name": "Dual Swords",
+        "parties": 7,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 7,
+        "share": 0.233
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 7,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 7,
+        "share": 0.233
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 4,
+        "share": 0.133
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 3,
+        "share": 0.1
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 2,
+        "share": 0.067
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 19,
+        "share": 0.633
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 4,
+        "share": 0.133
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 4,
+        "share": 0.133
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 2,
+        "share": 0.067
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF",
+        "id": "2H_HOLYSTAFF",
+        "name": "Great Holy Staff",
+        "parties": 1,
+        "share": 0.033
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 19,
+        "share": 0.633
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 5,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 2,
+        "share": 0.067
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 2,
+        "share": 0.067
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.033
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 2,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 0.87,
+     "kd": 16.25,
+     "n": 25,
+     "scored": 23,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 17,
+        "share": 0.68
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 14,
+        "share": 0.56
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW",
+        "id": "2H_BOW",
+        "name": "Bow",
+        "parties": 4,
+        "share": 0.16
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 4,
+        "share": 0.16
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_AVALON",
+        "id": "2H_SHAPESHIFTER_AVALON",
+        "name": "Lightcaller",
+        "parties": 4,
+        "share": 0.16
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 16,
+        "share": 0.64
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 7,
+        "share": 0.28
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 6,
+        "share": 0.24
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 5,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 5,
+        "share": 0.2
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 16,
+        "share": 0.64
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 6,
+        "share": 0.24
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.04
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_MORGANA",
+        "id": "MAIN_HOLYSTAFF_MORGANA",
+        "name": "Lifetouch Staff",
+        "parties": 1,
+        "share": 0.04
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 1,
+        "share": 0.04
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 16,
+        "share": 0.64
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 2,
+        "share": 0.08
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 2,
+        "share": 0.08
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 2,
+        "share": 0.08
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 2,
+        "share": 0.08
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 1,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 0.955,
+     "kd": 100.0,
+     "n": 22,
+     "scored": 22,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 5,
+        "share": 0.227
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 5,
+        "share": 0.227
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW",
+        "id": "2H_BOW",
+        "name": "Bow",
+        "parties": 4,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 4,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 4,
+        "share": 0.182
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 4,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 4,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE_MORGANA",
+        "id": "2H_MACE_MORGANA",
+        "name": "Camlann Mace",
+        "parties": 3,
+        "share": 0.136
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 3,
+        "share": 0.136
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_AVALON",
+        "id": "2H_HAMMER_AVALON",
+        "name": "Hand of Justice",
+        "parties": 2,
+        "share": 0.091
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 10,
+        "share": 0.455
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 8,
+        "share": 0.364
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 3,
+        "share": 0.136
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF",
+        "id": "2H_NATURESTAFF",
+        "name": "Great Nature Staff",
+        "parties": 1,
+        "share": 0.045
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 9,
+        "share": 0.409
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 5,
+        "share": 0.227
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 2,
+        "share": 0.091
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 2,
+        "share": 0.091
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 2,
+        "share": 0.091
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 6,
+      "frontline": 0,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 0.944,
+     "kd": 68.0,
+     "n": 18,
+     "scored": 18,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 11,
+        "share": 0.611
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 10,
+        "share": 0.556
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_HELL",
+        "id": "2H_DUALCROSSBOW_HELL",
+        "name": "Boltcasters",
+        "parties": 7,
+        "share": 0.389
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FIRESTAFF",
+        "id": "MAIN_FIRESTAFF",
+        "name": "Fire Staff",
+        "parties": 7,
+        "share": 0.389
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 7,
+        "share": 0.389
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 6,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 5,
+        "share": 0.278
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 4,
+        "share": 0.222
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 0.111
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.056
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 2,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 0.909,
+     "kd": 9.6,
+     "n": 11,
+     "scored": 11,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 5,
+        "share": 0.455
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 3,
+        "share": 0.273
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 3,
+        "share": 0.273
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_AVALON",
+        "id": "2H_BOW_AVALON",
+        "name": "Mistpiercer",
+        "parties": 3,
+        "share": 0.273
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 2,
+        "share": 0.182
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 4,
+        "share": 0.364
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 4,
+        "share": 0.364
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 2,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 2,
+        "share": 0.182
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.091
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 8,
+        "share": 0.727
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.091
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.091
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 1,
+        "share": 0.091
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 0,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 38.0,
+     "n": 10,
+     "scored": 10,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 5,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 5,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "id": "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "name": "Phantom Twinblade",
+        "parties": 4,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 3,
+        "share": 0.3
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 3,
+        "share": 0.3
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 6,
+        "share": 0.6
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.1
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 1,
+        "share": 0.1
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 1,
+      "healer": 1,
+      "support": 2
+     },
+     "dominant_share": 0.7,
+     "kd": 4.83,
+     "n": 10,
+     "scored": 10,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 4,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 3,
+        "share": 0.3
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW_CANNON_AVALON",
+        "id": "2H_CROSSBOW_CANNON_AVALON",
+        "name": "Energy Shaper",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_AVALON",
+        "id": "2H_SHAPESHIFTER_AVALON",
+        "name": "Lightcaller",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_GLAIVE_CRYSTAL",
+        "id": "2H_GLAIVE_CRYSTAL",
+        "name": "Rift Glaive",
+        "parties": 2,
+        "share": 0.2
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.1
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.1
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 6,
+        "share": 0.6
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.1
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.1
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 5,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 3,
+        "share": 0.3
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 2,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 2,
+        "share": 0.2
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 1,
+      "healer": 0,
+      "support": 0
+     },
+     "dominant_share": 0.889,
+     "kd": 9.5,
+     "n": 9,
+     "scored": 9,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW",
+        "id": "2H_CROSSBOW",
+        "name": "Crossbow",
+        "parties": 4,
+        "share": 0.444
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CLEAVER_HELL",
+        "id": "2H_CLEAVER_HELL",
+        "name": "Carving Sword",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 2,
+        "share": 0.222
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 5,
+        "share": 0.556
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF_AVALON",
+        "id": "2H_QUARTERSTAFF_AVALON",
+        "name": "Grailseeker",
+        "parties": 2,
+        "share": 0.222
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF",
+        "id": "2H_QUARTERSTAFF",
+        "name": "Quarterstaff",
+        "parties": 1,
+        "share": 0.111
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_UNDEAD",
+        "id": "2H_HAMMER_UNDEAD",
+        "name": "Tombhammer",
+        "parties": 1,
+        "share": 0.111
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 1,
+      "healer": 2,
+      "support": 0
+     },
+     "dominant_share": 0.875,
+     "kd": 5.86,
+     "n": 9,
+     "scored": 8,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 4,
+        "share": 0.444
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW",
+        "id": "2H_BOW",
+        "name": "Bow",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_AVALON",
+        "id": "2H_SHAPESHIFTER_AVALON",
+        "name": "Lightcaller",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 3,
+        "share": 0.333
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 4,
+        "share": 0.444
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 4,
+        "share": 0.444
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.111
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 7,
+        "share": 0.778
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 3,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 2,
+        "share": 0.222
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF",
+        "id": "2H_HOLYSTAFF",
+        "name": "Great Holy Staff",
+        "parties": 2,
+        "share": 0.222
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 2,
+        "share": 0.222
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 2,
+      "healer": 2,
+      "support": 0
+     },
+     "dominant_share": 0.875,
+     "kd": 19.0,
+     "n": 8,
+     "scored": 8,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_AXE",
+        "id": "MAIN_AXE",
+        "name": "Battleaxe",
+        "parties": 3,
+        "share": 0.375
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 3,
+        "share": 0.375
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SCYTHE_HELL",
+        "id": "2H_SCYTHE_HELL",
+        "name": "Infernal Scythe",
+        "parties": 3,
+        "share": 0.375
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.125
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.125
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_UNDEAD",
+        "id": "2H_HAMMER_UNDEAD",
+        "name": "Tombhammer",
+        "parties": 4,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF_AVALON",
+        "id": "2H_QUARTERSTAFF_AVALON",
+        "name": "Grailseeker",
+        "parties": 3,
+        "share": 0.375
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 1,
+        "share": 0.125
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 1,
+        "share": 0.125
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 1,
+        "share": 0.125
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 5,
+        "share": 0.625
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 4,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_KEEPER",
+        "id": "MAIN_NATURESTAFF_KEEPER",
+        "name": "Druidic Staff",
+        "parties": 3,
+        "share": 0.375
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 2,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.125
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 0,
+      "healer": 2,
+      "support": 0
+     },
+     "dominant_share": 0.857,
+     "kd": 6.2,
+     "n": 7,
+     "scored": 7,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 3,
+        "share": 0.429
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_INFERNOSTAFF_MORGANA",
+        "id": "2H_INFERNOSTAFF_MORGANA",
+        "name": "Blazing Staff",
+        "parties": 3,
+        "share": 0.429
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SCYTHE_CRYSTAL",
+        "id": "2H_SCYTHE_CRYSTAL",
+        "name": "Crystal Reaper",
+        "parties": 3,
+        "share": 0.429
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 3,
+        "share": 0.429
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_HELL",
+        "id": "2H_SHAPESHIFTER_HELL",
+        "name": "Hellspawn Staff",
+        "parties": 3,
+        "share": 0.429
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 5,
+        "share": 0.714
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 2,
+        "share": 0.286
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF",
+        "id": "MAIN_NATURESTAFF",
+        "name": "Nature Staff",
+        "parties": 2,
+        "share": 0.286
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 2,
+        "share": 0.286
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF",
+        "id": "2H_HOLYSTAFF",
+        "name": "Great Holy Staff",
+        "parties": 1,
+        "share": 0.143
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 0,
+      "healer": 2,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 15.0,
+     "n": 6,
+     "scored": 6,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 4,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "id": "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+        "name": "Phantom Twinblade",
+        "parties": 4,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_AXE",
+        "id": "MAIN_AXE",
+        "name": "Battleaxe",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSICKLE_UNDEAD",
+        "id": "2H_DUALSICKLE_UNDEAD",
+        "name": "Deathgivers",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_RAPIER_MORGANA",
+        "id": "MAIN_RAPIER_MORGANA",
+        "name": "Bloodletter",
+        "parties": 1,
+        "share": 0.167
+       }
+      ],
+      "healer": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 4,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+        "id": "MAIN_NATURESTAFF_CRYSTAL",
+        "name": "Forgebark Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF",
+        "id": "2H_HOLYSTAFF",
+        "name": "Great Holy Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.167
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 5,
+      "frontline": 0,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 1.0,
+     "kd": 22.0,
+     "n": 6,
+     "scored": 6,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 5,
+        "share": 0.833
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALHAMMER_HELL",
+        "id": "2H_DUALHAMMER_HELL",
+        "name": "Forge Hammers",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_HELL",
+        "id": "2H_DUALCROSSBOW_HELL",
+        "name": "Boltcasters",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_LONGBOW",
+        "id": "2H_LONGBOW",
+        "name": "Longbow",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 2,
+        "share": 0.333
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 4,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_MORGANA",
+        "id": "MAIN_HOLYSTAFF_MORGANA",
+        "name": "Lifetouch Staff",
+        "parties": 1,
+        "share": 0.167
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DEMONICSTAFF",
+        "id": "2H_DEMONICSTAFF",
+        "name": "Demonic Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ICEGAUNTLETS_HELL",
+        "id": "2H_ICEGAUNTLETS_HELL",
+        "name": "Icicle Staff",
+        "parties": 1,
+        "share": 0.167
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 2,
+      "frontline": 2,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 0.833,
+     "kd": 3.8,
+     "n": 6,
+     "scored": 6,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSWORD",
+        "id": "2H_DUALSWORD",
+        "name": "Dual Swords",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 1,
+        "share": 0.167
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 2,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_RAM_KEEPER",
+        "id": "2H_RAM_KEEPER",
+        "name": "Grovekeeper",
+        "parties": 1,
+        "share": 0.167
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 3,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_CRYSTAL",
+        "id": "MAIN_NATURESTAFF_CRYSTAL",
+        "name": "Forgebark Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_KEEPER",
+        "id": "2H_NATURESTAFF_KEEPER",
+        "name": "Rampant Staff",
+        "parties": 1,
+        "share": 0.167
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 4,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.167
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.167
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 3,
+      "healer": 1,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 19.0,
+     "n": 5,
+     "scored": 5,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_SPEAR_LANCE_AVALON",
+        "id": "MAIN_SPEAR_LANCE_AVALON",
+        "name": "Daybreaker",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_AXE",
+        "id": "2H_AXE",
+        "name": "Greataxe",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.2
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_KEEPER",
+        "id": "2H_SHAPESHIFTER_KEEPER",
+        "name": "Earthrune Staff",
+        "parties": 3,
+        "share": 0.6
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_CRYSTAL",
+        "id": "MAIN_MACE_CRYSTAL",
+        "name": "Dreadstorm Monarch",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF_AVALON",
+        "id": "2H_QUARTERSTAFF_AVALON",
+        "name": "Grailseeker",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF",
+        "id": "2H_QUARTERSTAFF",
+        "name": "Quarterstaff",
+        "parties": 2,
+        "share": 0.4
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF",
+        "id": "MAIN_HOLYSTAFF",
+        "name": "Holy Staff",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.2
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 2,
+      "healer": 0,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 11.0,
+     "n": 5,
+     "scored": 5,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 3,
+        "share": 0.6
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DAGGERPAIR",
+        "id": "2H_DAGGERPAIR",
+        "name": "Dagger Pair",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALHAMMER_HELL",
+        "id": "2H_DUALHAMMER_HELL",
+        "name": "Forge Hammers",
+        "parties": 2,
+        "share": 0.4
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET1",
+        "id": "2H_KNUCKLES_SET1",
+        "name": "Brawler Gloves",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW",
+        "id": "2H_CROSSBOW",
+        "name": "Crossbow",
+        "parties": 1,
+        "share": 0.2
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 3,
+        "share": 0.6
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_RAM_KEEPER",
+        "id": "2H_RAM_KEEPER",
+        "name": "Grovekeeper",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF",
+        "id": "2H_QUARTERSTAFF",
+        "name": "Quarterstaff",
+        "parties": 1,
+        "share": 0.2
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF_UNDEAD",
+        "id": "MAIN_ARCANESTAFF_UNDEAD",
+        "name": "Witchwork Staff",
+        "parties": 1,
+        "share": 0.2
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 2,
+      "healer": 0,
+      "support": 1
+     },
+     "dominant_share": 1.0,
+     "kd": 16.0,
+     "n": 4,
+     "scored": 4,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FIRE_RINGPAIR_AVALON",
+        "id": "2H_FIRE_RINGPAIR_AVALON",
+        "name": "Dawnsong",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF_CRYSTAL",
+        "id": "2H_ARCANESTAFF_CRYSTAL",
+        "name": "Astral Staff",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HALBERD_MORGANA",
+        "id": "2H_HALBERD_MORGANA",
+        "name": "Carrioncaller",
+        "parties": 1,
+        "share": 0.25
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF_AVALON",
+        "id": "2H_QUARTERSTAFF_AVALON",
+        "name": "Grailseeker",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALMACE_AVALON",
+        "id": "2H_DUALMACE_AVALON",
+        "name": "Oathkeepers",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_POLEHAMMER",
+        "id": "2H_POLEHAMMER",
+        "name": "Polehammer",
+        "parties": 1,
+        "share": 0.25
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.25
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 0,
+      "healer": 1,
+      "support": 1
+     },
+     "dominant_share": 1.0,
+     "kd": 13.0,
+     "n": 4,
+     "scored": 4,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CLEAVER_HELL",
+        "id": "2H_CLEAVER_HELL",
+        "name": "Carving Sword",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FIRESTAFF",
+        "id": "MAIN_FIRESTAFF",
+        "name": "Fire Staff",
+        "parties": 1,
+        "share": 0.25
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.25
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.25
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 1,
+        "share": 0.25
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 1,
+      "healer": 2,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 4.0,
+     "n": 3,
+     "scored": 3,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FROSTSTAFF_CRYSTAL",
+        "id": "2H_FROSTSTAFF_CRYSTAL",
+        "name": "Arctic Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_RAPIER_MORGANA",
+        "id": "MAIN_RAPIER_MORGANA",
+        "name": "Bloodletter",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_DAGGER_HELL",
+        "id": "MAIN_DAGGER_HELL",
+        "name": "Demonfang",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSCIMITAR_UNDEAD",
+        "id": "2H_DUALSCIMITAR_UNDEAD",
+        "name": "Galatine Pair",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HAMMER",
+        "id": "MAIN_HAMMER",
+        "name": "Hammer",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE_HELL",
+        "id": "MAIN_MACE_HELL",
+        "name": "Incubus Mace",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 3,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.333
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 1,
+      "healer": 0,
+      "support": 1
+     },
+     "dominant_share": 1.0,
+     "kd": 8.0,
+     "n": 3,
+     "scored": 3,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_FROSTSTAFF_CRYSTAL",
+        "id": "2H_FROSTSTAFF_CRYSTAL",
+        "name": "Arctic Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_KNUCKLES_SET2",
+        "id": "2H_KNUCKLES_SET2",
+        "name": "Battle Bracers",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW",
+        "id": "2H_CROSSBOW",
+        "name": "Crossbow",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DAGGERPAIR",
+        "id": "2H_DAGGERPAIR",
+        "name": "Dagger Pair",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_MACE",
+        "id": "MAIN_MACE",
+        "name": "Mace",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_CRYSTAL",
+        "id": "2H_SHAPESHIFTER_CRYSTAL",
+        "name": "Stillgaze Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CURSEDSTAFF_MORGANA",
+        "id": "2H_CURSEDSTAFF_MORGANA",
+        "name": "Damnation Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 1,
+        "share": 0.333
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 0,
+      "healer": 3,
+      "support": 0
+     },
+     "dominant_share": 0.667,
+     "kd": 2.67,
+     "n": 3,
+     "scored": 3,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_HELL",
+        "id": "2H_DUALCROSSBOW_HELL",
+        "name": "Boltcasters",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW",
+        "id": "2H_CROSSBOW",
+        "name": "Crossbow",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CROSSBOW_CANNON_AVALON",
+        "id": "2H_CROSSBOW_CANNON_AVALON",
+        "name": "Energy Shaper",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_INFERNOSTAFF",
+        "id": "2H_INFERNOSTAFF",
+        "name": "Infernal Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_1HCROSSBOW",
+        "id": "MAIN_1HCROSSBOW",
+        "name": "Light Crossbow",
+        "parties": 1,
+        "share": 0.333
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 0.667
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_NATURESTAFF_KEEPER",
+        "id": "MAIN_NATURESTAFF_KEEPER",
+        "name": "Druidic Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.333
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF",
+        "id": "2H_NATURESTAFF",
+        "name": "Great Nature Staff",
+        "parties": 1,
+        "share": 0.333
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 2,
+      "frontline": 2,
+      "healer": 2,
+      "support": 1
+     },
+     "dominant_share": 1.0,
+     "kd": 8.0,
+     "n": 2,
+     "scored": 2,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FIRESTAFF",
+        "id": "MAIN_FIRESTAFF",
+        "name": "Fire Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_AXE_AVALON",
+        "id": "2H_AXE_AVALON",
+        "name": "Realmbreaker",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+        "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+        "name": "Rotcaller Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ROCKMACE_KEEPER",
+        "id": "MAIN_ROCKMACE_KEEPER",
+        "name": "Bedrock Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_AVALON",
+        "id": "2H_HAMMER_AVALON",
+        "name": "Hand of Justice",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET3",
+        "id": "2H_SHAPESHIFTER_SET3",
+        "name": "Primal Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_NATURESTAFF_HELL",
+        "id": "2H_NATURESTAFF_HELL",
+        "name": "Blight Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_ARCANESTAFF",
+        "id": "2H_ARCANESTAFF",
+        "name": "Great Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 1,
+      "frontline": 2,
+      "healer": 1,
+      "support": 3
+     },
+     "dominant_share": 1.0,
+     "kd": 14.0,
+     "n": 2,
+     "scored": 2,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FIRESTAFF_KEEPER",
+        "id": "MAIN_FIRESTAFF_KEEPER",
+        "name": "Wildfire Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_COMBATSTAFF_MORGANA",
+        "id": "2H_COMBATSTAFF_MORGANA",
+        "name": "Black Monk Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER",
+        "id": "2H_HAMMER",
+        "name": "Great Hammer",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ICEGAUNTLETS_HELL",
+        "id": "2H_ICEGAUNTLETS_HELL",
+        "name": "Icicle Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 2,
+      "frontline": 1,
+      "healer": 1,
+      "support": 2
+     },
+     "dominant_share": 1.0,
+     "kd": 3.0,
+     "n": 2,
+     "scored": 2,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_INFERNOSTAFF_MORGANA",
+        "id": "2H_INFERNOSTAFF_MORGANA",
+        "name": "Blazing Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSICKLE_UNDEAD",
+        "id": "2H_DUALSICKLE_UNDEAD",
+        "name": "Deathgivers",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALSWORD",
+        "id": "2H_DUALSWORD",
+        "name": "Dual Swords",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_FIRESTAFF",
+        "id": "MAIN_FIRESTAFF",
+        "name": "Fire Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_QUARTERSTAFF_AVALON",
+        "id": "2H_QUARTERSTAFF_AVALON",
+        "name": "Grailseeker",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_MACE",
+        "id": "2H_MACE",
+        "name": "Heavy Mace",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_HELL",
+        "id": "2H_HOLYSTAFF_HELL",
+        "name": "Fallen Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_HOLYSTAFF_UNDEAD",
+        "id": "2H_HOLYSTAFF_UNDEAD",
+        "name": "Redemption Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_SKULLORB_HELL",
+        "id": "2H_SKULLORB_HELL",
+        "name": "Cursed Skull",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_AVALON",
+        "id": "MAIN_CURSEDSTAFF_AVALON",
+        "name": "Shadowcaller",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 4,
+      "frontline": 1,
+      "healer": 0,
+      "support": 2
+     },
+     "dominant_share": 1.0,
+     "kd": 5.0,
+     "n": 2,
+     "scored": 2,
+     "size": 7,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_CRYSTAL",
+        "id": "2H_BOW_CRYSTAL",
+        "name": "Skystrider Bow",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "frontline": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_HAMMER_CRYSTAL",
+        "id": "2H_HAMMER_CRYSTAL",
+        "name": "Truebolt Hammer",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF",
+        "id": "MAIN_CURSEDSTAFF",
+        "name": "Cursed Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_SHAPESHIFTER_SET2",
+        "id": "2H_SHAPESHIFTER_SET2",
+        "name": "Rootbound Staff",
+        "parties": 2,
+        "share": 1.0
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 3,
+      "frontline": 0,
+      "healer": 1,
+      "support": 2
+     },
+     "dominant_share": 1.0,
+     "kd": 10.0,
+     "n": 2,
+     "scored": 2,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 2,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_CLEAVER_HELL",
+        "id": "2H_CLEAVER_HELL",
+        "name": "Carving Sword",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_BOW_CRYSTAL",
+        "id": "2H_BOW_CRYSTAL",
+        "name": "Skystrider Bow",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_KNUCKLES_KEEPER",
+        "id": "2H_KNUCKLES_KEEPER",
+        "name": "Ursine Maulers",
+        "parties": 1,
+        "share": 0.5
+       }
+      ],
+      "healer": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_HOLYSTAFF_AVALON",
+        "id": "MAIN_HOLYSTAFF_AVALON",
+        "name": "Hallowfall",
+        "parties": 2,
+        "share": 1.0
+       }
+      ],
+      "support": [
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+        "id": "MAIN_CURSEDSTAFF_UNDEAD",
+        "name": "Lifecurse Staff",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_MAIN_ARCANESTAFF",
+        "id": "MAIN_ARCANESTAFF",
+        "name": "Arcane Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_ENIGMATICSTAFF",
+        "id": "2H_ENIGMATICSTAFF",
+        "name": "Enigmatic Staff",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    },
+    {
+     "counts": {
+      "dps": 6,
+      "frontline": 0,
+      "healer": 0,
+      "support": 0
+     },
+     "dominant_share": 1.0,
+     "kd": 6.0,
+     "n": 2,
+     "scored": 2,
+     "size": 6,
+     "weapons": {
+      "dps": [
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_HELL",
+        "id": "2H_DUALCROSSBOW_HELL",
+        "name": "Boltcasters",
+        "parties": 2,
+        "share": 1.0
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALCROSSBOW_CRYSTAL",
+        "id": "2H_DUALCROSSBOW_CRYSTAL",
+        "name": "Arclight Blasters",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_DUALAXE_KEEPER",
+        "id": "2H_DUALAXE_KEEPER",
+        "name": "Bear Paws",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 1,
+        "icon": "T4_2H_INFERNOSTAFF_MORGANA",
+        "id": "2H_INFERNOSTAFF_MORGANA",
+        "name": "Blazing Staff",
+        "parties": 1,
+        "share": 0.5
+       },
+       {
+        "copies": 2,
+        "icon": "T4_2H_BOW_KEEPER",
+        "id": "2H_BOW_KEEPER",
+        "name": "Bow of Badon",
+        "parties": 1,
+        "share": 0.5
+       }
+      ]
+     }
+    }
+   ],
+   "shapes_total": 32,
    "sizes": [
     6,
     7
