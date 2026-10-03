@@ -166,6 +166,11 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   `compare_fold.py`; never commits). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
   an all-battles prior, role-count or skeleton artifact.
+- Between folds, the Dragon Portal page alone: `pipeline/refresh_portal.ps1`
+  (rosters from the cache -> `build_portal_stats` -> `dashboard/build` ->
+  the portal and layout gates; never commits). Commit `out/portal_stats.json`
+  and the two `portal.html` files only; the rewritten rosters artifact
+  waits for the fold, which commits it with the tables derived from it.
 - After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
 - Network steps are explicit, never part of a build: `sample_parties.py`,
   `sample_battles.py`, `sample_rosters.py`, `adapters/metabattle.py fetch`. The
