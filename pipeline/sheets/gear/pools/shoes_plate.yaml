@@ -1,0 +1,15 @@
+# Actives every pair of plate boots shares (dumps menu: DODGE, SPRINTHOT
+# beside the item's own third active). Composed into every SHOES_PLATE
+# item; an item's own row for the same pair overrides (the Soldier Boots
+# sheet carries Rejuvenating Sprint at the same scores). Calibration as
+# shoes_cloth.yaml.
+tree: SHOES_PLATE
+curated_as_of: 2026-10-03
+capabilities:
+  # Dodge: 5m leap, immune to damage, debuffs and CC for 0.8s, +40% move
+  # speed for 5s; 20s cooldown.
+  - {cap: disengage,     score: 2, evidence: DODGE}
+  - {cap: mobility,      score: 2, evidence: DODGE}
+  # Rejuvenating Sprint: +80% move speed and a heal over 5s; 30s cooldown.
+  - {cap: mobility,      score: 2, evidence: SPRINTHOT}
+  - {cap: self_sustain,  score: 2, evidence: SPRINTHOT}

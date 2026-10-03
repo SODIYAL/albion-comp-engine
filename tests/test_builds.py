@@ -437,6 +437,62 @@ check("companion records keep unknowns explicit and never invent a weapon",
       "passive" in obs[0]["unknowns"] and obs[2]["weapon"] is None
       and set(obs[2]["unknowns"]) == {"q", "w", "e", "passive"})
 
+# ---- H.23 gear actives: the recorded choice per worn piece --------------------
+# Rule: a build's head / armor / shoes active is kept only as a spell id
+# that sits on the WORN item's dumps menu — the Character Builder's
+# UniqueNames read directly, MetaBattle's "Active, Passive" names through
+# the spell index (an ambiguous name resolves to nothing); anything else
+# is None, never a guess. The dataset's gear-active doctrine votes on it.
+import build_builds as bb  # noqa: E402
+_si = {"ICEBLOCK2": {"name": "Ice Block"}, "PBAOE_KNOCKBACK": {"name": "Force Field"},
+       "DODGE": {"name": "Dodge"}, "TWIN_A": {"name": "Twin"}, "TWIN_B": {"name": "Twin"}}
+_menus = {"HEAD_CLOTH_SET2": {"actives": ["ENERGY_BARRIER", "PBAOE_KNOCKBACK", "ICEBLOCK2"]},
+          "SHOES_CLOTH_SET1": {"actives": ["CHANNELED_RUN", "DODGE", "SPRINTEOT"]},
+          "ARMOR_CLOTH_SET1": {"actives": ["SPEEDCASTER", "FROSTSHIELD", "OUTOFCOMBATHEAL"]}}
+_cb = bb.gear_spell_picks(
+    {"gear": {"head": "HEAD_CLOTH_SET2", "armor": "ARMOR_CLOTH_SET1", "shoes": "T8_SHOES_CLOTH_SET1"},
+     "gear_spells_verbatim": {"head": {"actives": {"1": "ICEBLOCK2"}},
+                              "armor": {"actives": {"1": "FROSTSHIELD"}},
+                              "shoes": {"actives": {"1": "BLINK"}}}},
+    _si, _menus)
+check("H23 Character Builder UniqueNames read directly; a tiered worn key reads tierless; "
+      "an active NOT on the worn item's menu is None",
+      _cb == {"head": "ICEBLOCK2", "armor": "FROSTSHIELD", "shoes": None}, str(_cb))
+_mb = bb.gear_spell_picks(
+    {"gear": {"head": "HEAD_CLOTH_SET2", "shoes": "SHOES_CLOTH_SET1", "armor": "ARMOR_CLOTH_SET1"},
+     "gear_spells_raw": {"head": "Force Field, Balanced Mind", "shoes": "Dodge, Aggression",
+                         "armor": "Twin, Toughness"}},
+    _si, _menus)
+check("H23 MetaBattle names resolve through the spell index (first name is the active); "
+      "a name two spells share resolves to None",
+      _mb == {"head": "PBAOE_KNOCKBACK", "shoes": "DODGE", "armor": None}, str(_mb))
+check("H23 a record with no gear-spell source carries None, not an empty dict",
+      bb.gear_spell_picks({"gear": {"head": "HEAD_CLOTH_SET2"}}, _si, _menus) is None)
+_bi = load_json(os.path.join(OUT, "builds_index.json"))
+_recs = [v for c in _bi["by_content"].values() for w in c.values() for v in w]
+_withgs = [v for v in _recs if v.get("gear_spells")]
+_offmenu = [v["build_id"] for v in _withgs for s, sid in v["gear_spells"].items()
+            if sid and sid not in ((load_json(os.path.join(OUT, "gear_spells.json")).get(
+                v["gear"].get(s) or "") or {}).get("actives") or [])]
+check("H23 the index carries gear_spells for every recording build (the Character Builder "
+      "comps and the MetaBattle batch) and every kept id sits on the worn item's menu",
+      len(_withgs) >= 70 and not _offmenu
+      and all(set(v["gear_spells"]) == {"head", "armor", "shoes"} for v in _withgs),
+      f"recording={len(_withgs)} off_menu={_offmenu[:3]}")
+_da = {k: g.get("doctrine_active") for k, g in DATASET["gear"].items()
+       if g.get("slot") in ("head", "armor", "shoes")}
+check("H23 every head / armor / shoes item in the dataset carries doctrine_active with "
+      "source observed (votes at the floor) or assumed (the item's own active, votes under it)",
+      _da and all(d and d.get("id") and d.get("source") in ("observed", "assumed")
+                  and (d["source"] == "observed") == (d.get("votes", 0) >= 2)
+                  for d in _da.values()),
+      str([k for k, d in _da.items() if not d][:5]))
+check("H23 the Cleric Cowl's doctrine is the observed Ice Block, unanimous",
+      (_da.get("HEAD_CLOTH_SET2") or {}).get("id") == "ICEBLOCK2"
+      and _da["HEAD_CLOTH_SET2"]["source"] == "observed"
+      and _da["HEAD_CLOTH_SET2"]["votes"] == _da["HEAD_CLOTH_SET2"]["of"] >= 2,
+      str(_da.get("HEAD_CLOTH_SET2")))
+
 # ------------------------------------------------------------------ summary
 n_ok = sum(1 for _, ok in results if ok)
 print("=" * 74)

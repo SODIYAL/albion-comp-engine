@@ -88,13 +88,16 @@ def load_gear_sheets(gear_lines, gear_spells):
     (capes, offhands, potions, food). Composed by the engine into
     person contribution = weapon build + every gear slot's contribution."""
     gear = {}
+    # the tree-shared actives (sheets/gear/pools/) compose into every item
+    # whose dumps menu carries them; the item's own rows win on a tie
+    gear_pools = sheets_lib.load_gear_pools()
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
         for entry in _load_yaml(path):
             key = entry.get("gear")
             if not key:
                 continue
             caps, evidence, uses = {}, {}, {}
-            for c in entry.get("capabilities", []):
+            for c in sheets_lib.compose_gear(entry, gear_spells.get(key), gear_pools):
                 if not isinstance(c, dict):
                     continue
                 cap, score = c.get("cap"), c.get("score", 0)
@@ -1182,6 +1185,132 @@ def resolve_passive_doctrine(doc, gear, problems):
             g["doctrine_passives"] = picks
 
 
+ACTIVE_DOCTRINE_FLOOR = 2       # votes before an observed active is a pick
+ACTIVE_DOCTRINE_GANG_MAX = 9    # the kit evidence bands: gang <= 9, group 10+
+
+
+def resolve_active_doctrine(gear, problems, builds_index=None, gear_spells=None):
+    """The gear-active doctrine: the ability people EQUIP on a piece, not
+    the one that scores best. Every published build that records its gear
+    abilities (the Character Builder's UniqueNames, MetaBattle's named
+    actives; builds_index `gear_spells`) casts one vote per worn piece;
+    quarantined records never vote. Each head / armor / shoes item is
+    stamped
+
+        doctrine_active: {id, name, votes, of, source, bands: {gang, group}}
+
+    where `source` is "observed" (the modal active at ACTIVE_DOCTRINE_FLOOR
+    votes or more) or "assumed" (the item's OWN active — the one no
+    tree-mate shares; measured on the 79 recording builds: every piece is
+    worn for its own active, never a shared one). Bands tally the same
+    votes by the recording build's party size (gang <= 9, group 10+) so a
+    pick that splits by scale can be read per band.
+
+    The engine's default pick follows the stamp (Engine.default_gear_choice)
+    and the UI exposes it like a Q/W pick. An observed active with no
+    scored row gets an EMPTY bundle in the loadout's active slot, so the
+    pick resolves to that spell and the slot supplies nothing — the
+    fail-closed reading, never the next-best scored ability."""
+    gear_spells = gear_spells or {}
+    if builds_index is None:
+        bi_path = os.path.join(OUT, "builds_index.json")
+        builds_index = {}
+        if os.path.exists(bi_path):
+            with open(bi_path, encoding="utf-8") as f:
+                builds_index = json.load(f)
+    si_path = os.path.join(OUT, "spell_index.json")
+    spell_index = {}
+    if os.path.exists(si_path):
+        with open(si_path, encoding="utf-8") as f:
+            si = json.load(f)
+            spell_index = si.get("spells", si)
+    import re as _re
+    form = lambda k: _re.sub(r"^T\d+_", "", str(k)).split("@")[0]
+    # one vote per worn piece per recording build
+    votes = {}
+    for by_weapon in (builds_index.get("by_content") or {}).values():
+        for variants in by_weapon.values():
+            for v in variants:
+                gs = v.get("gear_spells")
+                if not gs or v.get("status") == "quarantined":
+                    continue
+                ps = v.get("party_size") or {}
+                size = ps.get("max") or ps.get("min")
+                band = (None if not size
+                        else "gang" if size <= ACTIVE_DOCTRINE_GANG_MAX else "group")
+                for slot, sid in gs.items():
+                    item = (v.get("gear") or {}).get(slot)
+                    if not sid or not item:
+                        continue
+                    rec = votes.setdefault(form(item), {"all": {}, "gang": {}, "group": {}})
+                    rec["all"][sid] = rec["all"].get(sid, 0) + 1
+                    if band:
+                        rec[band][sid] = rec[band].get(sid, 0) + 1
+    # an item's OWN active: the one on its menu no tree-mate carries
+    by_tree = {}
+    for k, m in gear_spells.items():
+        by_tree.setdefault(sheets_lib.gear_tree(k), []).append(set((m or {}).get("actives") or []))
+
+    def own_active(k):
+        menu = (gear_spells.get(k) or {}).get("actives") or []
+        mates = [s for s in by_tree.get(sheets_lib.gear_tree(k), []) if s != set(menu)]
+        shared = set.intersection(*mates) if mates else set()
+        own = [a for a in menu if a not in shared]
+        return own[0] if len(own) == 1 else None
+
+    def modal(tally):
+        if not tally:
+            return None, 0
+        sid = max(sorted(tally), key=lambda s: tally[s])
+        return sid, tally[sid]
+
+    name_of = lambda sid: (spell_index.get(sid) or {}).get("name") or sid
+    for k, g in sorted((gear or {}).items()):
+        if g.get("slot") not in ("armor", "head", "shoes"):
+            continue
+        menu = (gear_spells.get(k) or {}).get("actives") or []
+        tally = votes.get(k) or {"all": {}, "gang": {}, "group": {}}
+        sid, n = modal(tally["all"])
+        of = sum(tally["all"].values())
+        if sid and n >= ACTIVE_DOCTRINE_FLOOR:
+            pick = {"id": sid, "name": name_of(sid), "votes": n, "of": of,
+                    "source": "observed"}
+        else:
+            own = own_active(k)
+            if own is None:
+                continue                   # no own active to assume: argmax stays
+            pick = {"id": own, "name": name_of(own), "votes": tally["all"].get(own, 0),
+                    "of": of, "source": "assumed"}
+        bands = {}
+        for b in ("gang", "group"):
+            bsid, bn = modal(tally[b])
+            if bsid and bn >= ACTIVE_DOCTRINE_FLOOR:
+                bands[b] = {"id": bsid, "name": name_of(bsid), "votes": bn,
+                            "of": sum(tally[b].values())}
+        if bands:
+            pick["bands"] = bands
+        if menu and pick["id"] not in menu:
+            problems.append(f"gear_actives: {k}: pick {pick['id']} is not on the menu {menu}")
+            continue
+        # the pick must resolve to a bundle: an uncredited spell gets an
+        # empty one, so choosing it supplies nothing from the slot
+        lo = g.get("loadout") or {}
+        names = lo.get("slot_names") or []
+        wanted = {pick["id"]} | {b["id"] for b in bands.values()}
+        if "active" not in names:
+            lo.setdefault("slots", []).append([])
+            lo.setdefault("slot_spells", []).append([])
+            names = lo.setdefault("slot_names", names)
+            names.append("active")
+        ai = names.index("active")
+        for sid in sorted(wanted):
+            if sid not in lo["slot_spells"][ai]:
+                lo["slots"][ai].append({})
+                lo["slot_spells"][ai].append(sid)
+        g["loadout"] = lo
+        g["doctrine_active"] = pick
+
+
 def _fold_sources(bids):
     """Collapse seat-level build ids ('guide:comp:5', 'guide:party_2:14')
     into one citation per guide with the seats folded in
@@ -2256,6 +2385,11 @@ def apply_roles(weapons, gear):
     # and evidence-led per-seat kit pools — both AFTER classify_gear
     # (they read the stamped gear_class)
     resolve_passive_doctrine(doc.get("kit_doctrine"), gear, problems)
+    # the gear-active doctrine: the active people equip per piece, from
+    # the recording published builds; the item's own active where none
+    gs_path = os.path.join(OUT, "gear_spells.json")
+    with open(gs_path, encoding="utf-8") as f:
+        resolve_active_doctrine(gear, problems, gear_spells=json.load(f))
     effect_map = {it["id"]: ge["id"] for ge in effects
                   for it in (ge.get("items") or []) if it.get("id")}
     kit_detail = derive_kit_doctrine(

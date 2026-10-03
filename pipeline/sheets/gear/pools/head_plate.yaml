@@ -1,0 +1,12 @@
+# Actives every plate helmet shares (dumps menu: ENERGY_BARRIER,
+# STONESKIN beside the item's own third active). Composed into every
+# HEAD_PLATE item; an item's own row for the same pair overrides (the
+# Judicator and Guardian sheets already carry Stone Skin at 2).
+tree: HEAD_PLATE
+curated_as_of: 2026-10-03
+capabilities:
+  # Energizing Shield: 192 absorb for 3s, self only, 25s cooldown.
+  - {cap: tankiness,     score: 1, evidence: ENERGY_BARRIER}
+  # Stone Skin: +50% defence for 4s, 30s cooldown — the reading the
+  # Judicator Helmet and Guardian Helmet sheets carry.
+  - {cap: tankiness,     score: 2, evidence: STONESKIN}

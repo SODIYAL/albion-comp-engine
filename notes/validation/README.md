@@ -14,6 +14,7 @@ was condensed in the move; the files are the history.
                      style cells, the generated meta prior, the folds, R36/F29,
                      target is the median, typical role counts, slot controls,
                      labels, the pair prior, skeleton-first generation
+2026-10.md           2026-10-03 →: the gear-active doctrine and the gear pools
 ```
 
 Rules for this directory:

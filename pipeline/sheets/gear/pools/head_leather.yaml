@@ -1,0 +1,16 @@
+# Actives every leather hood shares (dumps menu: ENERGY_BARRIER,
+# SELF_CLEANSE beside the item's own third active). Composed into every
+# HEAD_LEATHER item; an item's own row for the same pair overrides.
+tree: HEAD_LEATHER
+curated_as_of: 2026-10-03
+capabilities:
+  # Energizing Shield: 192 absorb for 3s, self only, 25s cooldown.
+  - {cap: tankiness,     score: 1, evidence: ENERGY_BARRIER}
+  # Cleanse: a 4m circle at the caster's feet strips CC and debuffs from
+  # every ally inside, usable while stunned or silenced, 20s cooldown.
+  # Below the targeted ally cleanses (Purifying Smoke 3 reaches a chosen
+  # spot; the W-slot ten-ally cleanses sit at 4): the caster must stand in
+  # the clump. tankiness 2 is the Hellion Hood's own reading of the same
+  # spell (its self-cleanse under CC), kept as the pool's.
+  - {cap: cleanse,       score: 3, evidence: SELF_CLEANSE}
+  - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}

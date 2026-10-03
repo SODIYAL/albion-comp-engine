@@ -1,0 +1,16 @@
+# Actives every pair of leather shoes shares (dumps menu: DODGE,
+# SPRINT_CD_REDUCTION beside the item's own third active). Composed into
+# every SHOES_LEATHER item; an item's own row for the same pair overrides.
+# Calibration as shoes_cloth.yaml.
+tree: SHOES_LEATHER
+curated_as_of: 2026-10-03
+capabilities:
+  # Dodge: 5m leap, immune to damage, debuffs and CC for 0.8s, +40% move
+  # speed for 5s; 20s cooldown.
+  - {cap: disengage,     score: 2, evidence: DODGE}
+  - {cap: mobility,      score: 2, evidence: DODGE}
+  # Refreshing Sprint: +80% move speed and +80% cooldown rate for 5s;
+  # 32.5s cooldown. The cooldown rate is a sliver of sustained pressure
+  # beside the Assassin Hood's channel (sustained_dps 2).
+  - {cap: mobility,      score: 2, evidence: SPRINT_CD_REDUCTION}
+  - {cap: sustained_dps, score: 1, evidence: SPRINT_CD_REDUCTION}

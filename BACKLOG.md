@@ -240,27 +240,17 @@ Each is decidable today from evidence already in the repo.
   style, but the committed board predates it, so balanced at 10+ still reads
   the content row (labelled `content` / `min` on the board) until the audit
   reruns there. (V: 09b, Target is the median)
-- **Gear-active doctrine — pick the ability people equip, not the one that
-  scores best.** `default_gear_choice()` takes the sheet option worth most
-  under the template's weights; where a strong-on-paper ability is never
-  taken (Cleric Cowl's Force Field: MetaBattle 4/4 Ice Block) that credits
-  phantom supply. Mine an observed active per item (and per size band where
-  the evidence splits) from every source that records gear abilities —
-  MetaBattle `gear_spells_raw`, caller sheets, the companion's spell array if
-  it carries armor actives (verify) — the engine prefers the evidenced
-  active, keeps the argmax as a labelled `assumed` fallback, and the UI
-  exposes the pick like Q/W/E. Do this BEFORE the gear pools below, which
-  would otherwise spread the Force Field over-credit to all ten cloth heads.
-  (V: 09b, Cleric Cowl)
-- **Gear pools — the tree-shared actives are uncurated.** Every cloth head
-  carries Energy Barrier + Force Field as its first two actives and only the
-  third is unique, yet only Cleric Cowl's sheet cites Force Field; a Fiend
-  Cowl running it supplies zero knockback / peel. Same for every armor tree
-  and slot. Give gear the weapon sheets' pool structure (`sheets/gear/pools/`
-  per tree x slot, each item's sheet keeping its unique active), so the
-  engine's one-active-per-piece pick chooses among what the item can really
-  equip. Recorded as pending (the tree-shared first two abilities await
-  curation); do it BEFORE any gear magnitude review. (V: 08, Fourth pass)
+- **Gear-active doctrine, the next evidence**: the doctrine reads 79
+  recording builds (the Character Builder comps and the MetaBattle batch);
+  47 of 81 head / armor / shoes items have no vote and ASSUME their own
+  active, and Soldier Boots sits one vote under the floor on Rejuvenating
+  Sprint, so it supplies nothing until a second build records it. The
+  companion's spell array, if it carries armor actives (verify on the
+  wire), would be the volume source; so would any caller sheet that
+  records gear abilities. A gear-active OVERRIDE in the kit editor (the
+  engine already scores `(key, choice)` pairs; the share codec does not
+  carry a choice) is the UI increment if callers ask. (V: 10, Gear-active
+  doctrine)
 - **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py`,
   a board generated locally into the gitignored `review/`): the PASV queue
   (39 rows where a passive / stat sentinel grounds a score >= 2 — each needs
@@ -268,11 +258,13 @@ Each is decidable today from evidence already in the repo.
   top of every ladder, against the dumps numbers). After each capability:
   sheet corrections, a golden case where a score decision changes, rebuild,
   gates.
-- **Food curation**: the fish meals (`T8_MEAL_STEW_FISH`, `T7_MEAL_OMELETTE_FISH`)
-  have no sheet at any tier and the pipeline carries no meal nutrition; needs
-  the real bonuses (wiki via Playwright, or a dumps re-parse) — ~10 pieces.
-  Catalogue gaps in the kit audit (a plain Cape, a plain sandwich) are the
-  same class. (V: 08, Tier-agnostic gear lookup)
+- **Catalogue gaps with nothing to score**: the plain Cape (7.5% of
+  winners' capes), Cabbage Soup (4.7% of their meals), Pork Pie and a raw
+  fish eaten as food carry no combat effect, so they have no sheet and a
+  kit that wears one shows the slot uncatalogued. Whether a no-row entry
+  belongs in the catalogue (the kit doctrine would then name it) is a
+  display decision. The meals with a combat effect are curated (V: 10,
+  The meals winners eat).
 - **V4b**: leave-one-out at a full party tests "best generic 20th body", not
   "replace what was lost" (saturation degeneracy). Reconstruct the last ~5
   slots instead, where targets still bind. (V: 08, FIRST V4 RUN)
@@ -345,10 +337,6 @@ Each is decidable today from evidence already in the repo.
   what `sample_parties.py` already harvests with party structure and gear.
   Re-derive both artifacts from `party_rosters.json.gz`, retire the two older
   samplers and their caches, and the overnight task feeds everything.
-- **Stale comments**: `engine/engine.py` and `engine/app_scoring.js` still
-  open with a "KNOWN OPEN DEFECT" note about the unit defect, which the unit
-  re-fit resolved (standing rule 9). Fix on the next engine touch (the JS
-  change requires a dashboard rebuild).
 - **Cross-check the Resilience Penetration table**
   (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
   wiki values) against the dumps. Optional. (Q7)
@@ -377,9 +365,6 @@ the live roster, on the sheet) are built.
   comes.
 - **Enable leaked-password protection** (Supabase Auth, security advisor
   warning). Project dashboard, no code.
-- **Pin the Supabase library**: `dashboard/build.py` loads
-  `@supabase/supabase-js@2`, a floating major version; pin an exact version
-  with a subresource-integrity hash.
 - **Phase 12, integrations** (the spec): a Discord login and bot, a
   Google Sheets link, automatic roster construction (an optimization
   over the target comp, the players' declared weapons and their
@@ -440,21 +425,15 @@ the live roster, on the sheet) are built.
   co-member's character, display name, server and weapon lists. A member
   who wants to keep a secondary list private has no switch (curation
   judgment: a CTA tool exists to show a caller what members play).
-- **The account layer's type scale**: `_auth.css` uses fourteen font
-  sizes between 9.5 and 23 pixels; a five-step scale would tighten the
-  dialogs. A sweep, not a fix, once the dialogs' content settles.
 - **The caller's controls as their own column**: the sheet keeps the move
   list and the record's mark on one line by sizing the weapon and role
   columns; a window under the sheet's full width wraps them. A fifth
   column for the caller's controls is the next step if callers work on
   narrow windows.
-- **The history's dates**: a table column carries the full local time
-  with its UTC; a date alone in the cell, the time in its title, would
-  shorten the rows.
-- **The portal page's chrome**: the headings and labels follow the
-  planner; the chips, tabs and table keep their own radii and colours. A
-  shared stylesheet is the proper fix and waits for a second killboard
-  surface.
+- **The portal page's chrome**: the headings, labels, chips and radii
+  follow the planner (the planner's chip, its radius set). The tokens are
+  still a copy inside `_portal.html`; a shared stylesheet is the proper
+  fix and waits for a second killboard surface.
 
 ## Product features (deprioritized until comp quality satisfies)
 

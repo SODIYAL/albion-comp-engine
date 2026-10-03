@@ -28,6 +28,15 @@ build_dataset, evidence_lint, build_magnitude_review, build_stat_chart —
 so the pool layer cannot half-apply to a score. (build_interactions.py
 walks the sheets itself to build the spell -> capability DOMAIN for
 nonstacking_caps; that walk yields a superset and never scores.)
+
+GEAR POOLS (sheets/gear/pools/<tree>.yaml) are the same structure one
+layer over: the two actives every item of an armor tree x slot shares
+(every plate helmet carries Energizing Shield and Stone Skin; its third
+active is its own) are curated once per tree and composed into every
+item of the tree whose dumps menu carries the spell. An item's own row
+with the same (cap, evidence) pair overrides the pool row; `except:`
+marks a deliberate non-take. Consumers: load_gear_sheets, lint_gear,
+build_stat_chart — through compose_gear().
 """
 import glob
 import json
@@ -93,6 +102,61 @@ def compose(entry, line, pools):
             continue                      # weapon override / deliberate non-take
         ev = r.get("evidence")
         if ev in NON_SPELL_EVIDENCE or ev in equip:
+            out.append(r)
+    return out
+
+
+GEAR_POOL_DIR = os.path.join(HERE, "sheets", "gear", "pools")
+
+
+def load_gear_pools(pool_dir=GEAR_POOL_DIR):
+    """{tree: [row, ...]} from sheets/gear/pools/*.yaml.
+
+    Each pool file is one document: {tree: str, capabilities: [rows]}. The
+    tree is the item-key prefix the pool applies to (HEAD_PLATE,
+    ARMOR_CLOTH, SHOES_LEATHER ...): the slot and the armor class."""
+    pools = {}
+    for path in sorted(glob.glob(os.path.join(pool_dir, "*.yaml"))):
+        with open(path, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        tree = doc.get("tree")
+        rows = [r for r in (doc.get("capabilities") or [])
+                if isinstance(r, dict) and r.get("cap")]
+        if tree and rows:
+            pools.setdefault(tree, []).extend(rows)
+    return pools
+
+
+def gear_tree(key):
+    """The pool tree of a gear key: its first two segments (HEAD_PLATE_SET2
+    -> HEAD_PLATE). Unique and tiered keys follow the same shape."""
+    parts = str(key).split("_")
+    return "_".join(parts[:2]) if len(parts) >= 3 else None
+
+
+def compose_gear(entry, menu, pools):
+    """A gear item's full capability row list: own rows + the tree pool rows
+    whose evidence spell sits on the item's dumps menu.
+
+    entry: one gear sheet document ({gear, capabilities, except, ...}).
+    menu:  gear_spells.json[gear] (None for an item the dumps do not carry
+           — pool rows then cannot be menu-tested and are not applied).
+    pools: load_gear_pools() result.
+    """
+    own = [c for c in (entry.get("capabilities") or []) if isinstance(c, dict)]
+    pool_rows = pools.get(gear_tree(entry.get("gear")), []) if menu is not None else []
+    if not pool_rows:
+        return list(own)
+    equip = set((menu or {}).get("actives") or []) | set((menu or {}).get("passives") or [])
+    taken = {(c.get("cap"), c.get("evidence")) for c in own}
+    excepts = {(x.get("cap"), x.get("evidence"))
+               for x in (entry.get("except") or []) if isinstance(x, dict)}
+    out = list(own)
+    for r in pool_rows:
+        key = (r.get("cap"), r.get("evidence"))
+        if key in taken or key in excepts:
+            continue                      # item override / deliberate non-take
+        if r.get("evidence") in equip:
             out.append(r)
     return out
 

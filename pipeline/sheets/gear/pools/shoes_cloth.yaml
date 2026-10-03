@@ -1,0 +1,17 @@
+# Actives every pair of cloth shoes shares (dumps menu: DODGE, SPRINTEOT
+# beside the item's own third active). Composed into every SHOES_CLOTH
+# item; an item's own row for the same pair overrides.
+#
+# Calibration: the unique shoe actives read mobility 2-3 and disengage 3
+# (Mercenary Shoes' cleanse dash, Royal Shoes' immune leap). The shared
+# actives sit under them: a shorter leap without a cleanse, a sprint
+# without a dash.
+tree: SHOES_CLOTH
+curated_as_of: 2026-10-03
+capabilities:
+  # Dodge: 5m leap, immune to damage, debuffs and CC for 0.8s, +40% move
+  # speed for 5s; 20s cooldown.
+  - {cap: disengage,     score: 2, evidence: DODGE}
+  - {cap: mobility,      score: 2, evidence: DODGE}
+  # Energetic Sprint: +80% move speed for 5s and energy back; 30s cooldown.
+  - {cap: mobility,      score: 2, evidence: SPRINTEOT}

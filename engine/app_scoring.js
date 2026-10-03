@@ -16,10 +16,8 @@
  * reads the weapon+loadout supply only — Option C (F25/F26), so worn gear
  * can never buy its way past a structural floor.
  *
- * KNOWN OPEN DEFECT (decision pending, see HANDOFF.md): dataset targets and
- * soft caps were fitted in WEAPON+spell-pick units while supply is measured
- * on whole dressed people. The math is unaffected; the two sides of every
- * comparison are currently in different units.
+ * ONE UNIT: dataset targets and soft caps speak person units, the same
+ * unit the dressed supply is measured in (the unit re-fit, standing rule 9).
  */
 (function (root) {
   "use strict";
@@ -1263,7 +1261,87 @@
     return extras;
   };
 
+  CompEngine.prototype._gearComboSlots = function (key) {
+    /* the spell id per combo index in the item's ACTIVE slot (null when
+       the loadout has no active slot), aligned with gearExtras: combos
+       enumerate the non-empty slots in order, the last varying fastest
+       (mirrors engine.py _gear_combo_slots) */
+    var g = this.gear[this.gearKey(key)] || {};
+    var lo = g.loadout || {};
+    var names = lo.slot_names || [], spells = lo.slot_spells || [];
+    var raw = lo.slots || [];
+    var sizes = [], activePos = null;
+    for (var i = 0; i < raw.length; i++) {
+      if (!raw[i].length) continue;
+      if (i < names.length && names[i] === "active") activePos = sizes.length;
+      sizes.push([raw[i].length, i < spells.length ? spells[i] : []]);
+    }
+    if (activePos === null) return null;
+    var out = [];
+    (function walk(si, acc) {
+      if (si === sizes.length) {
+        var sp = sizes[activePos][1], j = acc[activePos];
+        out.push(j < sp.length ? sp[j] : null);
+        return;
+      }
+      for (var j2 = 0; j2 < sizes[si][0]; j2++) walk(si + 1, acc.concat([j2]));
+    })(0, []);
+    return out;
+  };
+
+  CompEngine.prototype.doctrineGearChoice = function (key) {
+    /* the combo index the gear-active doctrine names, or null: the item's
+       doctrine_active picks the ACTIVE slot's spell — the current band's
+       pick where it has one, else the overall pick; any other slot takes
+       the argmax among the combos carrying that active (mirrors
+       engine.py doctrine_gear_choice) */
+    key = this.gearKey(key);
+    var da = (this.gear[key] || {}).doctrine_active;
+    if (!da) return null;
+    var band = this.size <= DOCTRINE_GANG_MAX ? "gang" : "group";
+    var pick = (((da.bands || {})[band]) || da).id;
+    var perCombo = this._gearComboSlots(key);
+    if (!perCombo || perCombo.indexOf(pick) < 0) return null;
+    var extras = this.gearExtras(key);
+    var bestI = null, bestVal = null, bestUnits = null;
+    for (var i = 0; i < extras.length; i++) {
+      if (perCombo[i] !== pick) continue;
+      var val = 0.0, units = 0.0;
+      for (var c in extras[i]) {
+        val += (this._weights[c] || 0.0) * extras[i][c];
+        units += extras[i][c];
+      }
+      if (bestVal === null || val > bestVal
+          || (val === bestVal && units > bestUnits)) {
+        bestI = i; bestVal = val; bestUnits = units;
+      }
+    }
+    return bestI;
+  };
+
+  CompEngine.prototype.gearActiveSpell = function (key, choice) {
+    /* the spell id in the item's ACTIVE slot under `choice` (the default
+       pick when null), or null where the item has no active slot
+       (mirrors engine.py gear_active_spell) */
+    var perCombo = this._gearComboSlots(key);
+    if (!perCombo) return null;
+    if (choice === null || choice === undefined || choice < 0 || choice >= perCombo.length)
+      choice = this.defaultGearChoice(key);
+    return perCombo[choice];
+  };
+
+  CompEngine.prototype.gearChoiceSource = function (key) {
+    /* "observed" | "assumed" | "argmax" (mirrors engine.py gear_choice_source) */
+    var da = (this.gear[this.gearKey(key)] || {}).doctrine_active;
+    if (da && this.doctrineGearChoice(key) !== null) return da.source || "observed";
+    return "argmax";
+  };
+
   CompEngine.prototype.defaultGearChoice = function (key) {
+    /* the doctrine's combo where the item carries one, else the argmax
+       under the template weights (mirrors engine.py default_gear_choice) */
+    var d = this.doctrineGearChoice(key);
+    if (d !== null) return d;
     var extras = this.gearExtras(key);
     var bestI = 0, bestVal = null, bestUnits = null;
     for (var i = 0; i < extras.length; i++) {

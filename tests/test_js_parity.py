@@ -219,6 +219,11 @@ def py_results(cases):
                              for o in m["options"]]}
                 for m in e.swap_review(sp)],
             "fitness": e.fitness(c["party"]),
+            # the gear-active doctrine's default pick per item, at this
+            # case's content and size (the band may move the pick)
+            "gear_choice": {k: [e.default_gear_choice(k), e.gear_choice_source(k),
+                                e.gear_active_spell(k)]
+                            for k in sorted(e.gear)},
             "fitness_build": (None if not c.get("gears") else
                               e.fitness(c["party"], None, c["gears"])),
             "comp_score_build": (None if not c.get("gears") else
@@ -326,6 +331,11 @@ def main():
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
         if a["size_bucket"] != b["size_bucket"]:
             errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")
+        gb = b.get("gear_choice") or {}
+        for k, v in a["gear_choice"].items():
+            if gb.get(k) != v:
+                errs.append(f"gear_choice {k}: py={v} js={gb.get(k)}")
+                break
         if a["target_source"] != b.get("target_source"):
             errs.append(f"target_source: py={a['target_source']} "
                         f"js={b.get('target_source')}")
