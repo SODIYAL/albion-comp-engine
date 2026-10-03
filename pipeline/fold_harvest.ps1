@@ -89,6 +89,7 @@ Step "tier2_blindtest v4"     "py" @("-3", "-u", "tests/tier2_blindtest.py", "v4
 Step "test_loadout_codec"     "node" @("tests/test_loadout_codec.js")
 Step "test_display_math"      "node" @("tests/test_display_math.js")
 Step "test_live_party"        "node" @("tests/test_live_party.js")
+Step "test_portal_page"       "node" @("tests/test_portal_page.js")
 
 # 3. the before/after report against the previous fold (HEAD)
 Step "compare_fold"           "py" @("-3", "-u", "pipeline/compare_fold.py")

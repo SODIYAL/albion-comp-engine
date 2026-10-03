@@ -28,7 +28,8 @@ main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
 .hero h1 em{font-style:normal;color:var(--gold)}
 .hero p{margin:0;max-width:760px;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
-.chip{padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-family:var(--mono);font-size:.82em;color:var(--muted)}
+/* the planner's chip: mono 11px, the same tracking, ground and pill */
+.chip{padding:5px 10px;border:1px solid var(--rule);border-radius:99px;background:rgba(18,18,27,.6);font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
 .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:10px}
 .tab{padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--muted);cursor:pointer;font:inherit}
@@ -59,7 +60,7 @@ th[aria-sort]{color:var(--ink)}
 .alts{position:absolute;left:0;top:calc(100% + 4px);z-index:5;min-width:260px;padding:8px 10px;border:1px solid var(--gold);border-radius:10px;background:var(--surface-hi);box-shadow:0 12px 32px -12px #000;cursor:default}
 .alts-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--quiet);margin-bottom:6px}
 .alt-row{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:.9em}
-.alt-row img{width:24px;height:24px;border-radius:5px;background:var(--surface-hi)}
+.alt-row img{width:24px;height:24px;border-radius:6px;background:var(--surface-hi)}
 .alt-row.top .alt-n{color:var(--gold-hi)}
 .alt-n{flex:1;white-space:nowrap}
 .alt-v{font-family:var(--mono);font-size:.85em;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -76,7 +77,7 @@ tr.row:hover td{background:rgba(255,255,255,.03)}
 tr.row[aria-expanded="true"] td{background:rgba(255,201,58,.06)}
 .w{display:inline-flex;align-items:center;gap:8px}
 .w img{width:28px;height:28px;border-radius:6px;background:var(--surface-hi)}
-.bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:var(--surface-hi);vertical-align:middle;margin-right:6px;overflow:hidden}
+.bar{display:inline-block;width:90px;height:8px;border-radius:3px;background:var(--surface-hi);vertical-align:middle;margin-right:6px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--ok)}
 .bar.dom i{background:var(--gold)}
 tr.detail td{background:var(--surface-hi);white-space:normal}
@@ -87,8 +88,22 @@ tr.detail td{background:var(--surface-hi);white-space:normal}
 .slot .n{font-weight:600}
 .slot .v{font-size:.8em;color:var(--muted)}
 .comp{display:flex;flex-wrap:wrap;gap:6px}
-.comp .w{padding:2px 8px 2px 2px;border:1px solid var(--rule);border-radius:999px;background:var(--surface-hi);font-size:.9em}
+.comp .w{padding:2px 8px 2px 2px;border:1px solid var(--rule);border-radius:99px;background:var(--surface-hi);font-size:.9em}
 .comp .w img{width:22px;height:22px}
+.comp .w small{color:var(--muted);font-family:var(--mono);font-size:.82em;margin-left:2px}
+.profile{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:12px;background:var(--surface);overflow:hidden}
+tr.detail .profile{border:0;background:transparent}
+.role-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:10px 14px;border-bottom:1px solid var(--rule)}
+.role-row:last-child{border-bottom:0}
+.role-n{flex:0 0 150px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline}
+.role-n b{font-size:1.5em;font-variant-numeric:tabular-nums;color:var(--gold-hi);line-height:1.1}
+.role-n span{font-weight:600}
+.role-n small{grid-column:1 / -1;color:var(--quiet);font-family:var(--mono);font-size:.74em}
+.role-row .comp{flex:1 1 320px}
+.shape{display:flex;flex-wrap:wrap;gap:4px 14px}
+.shape-n{color:var(--muted)}
+.shape-n b{color:var(--ink);font-variant-numeric:tabular-nums}
+.fine{margin:8px 2px 0;color:var(--quiet);font-size:.86em;max-width:760px}
 .empty{padding:22px;border:1px dashed var(--rule);border-radius:12px;color:var(--muted)}
 .note{margin:26px 0 0;padding:16px 18px;border:1px solid var(--rule);border-radius:12px;background:var(--surface);color:var(--muted);font-size:.92em}
 .note h3{margin:0 0 6px;font-size:1em;color:var(--ink)}
@@ -121,6 +136,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       <li><b>Who counts.</b> A killer party at kill time, one vote per party per battle. Solo is the lone killer. The kill is tagged as a portal kill when the victim carried an Ancient Bone, an item that only exists inside the Ancient Lands, so a kill whose victim had not yet earned one is not counted: the numbers undercount, they never invent.</li>
       <li><b>Dominant</b> means the party took no deaths in that battle. <b>K/D</b> is the party's kills over its deaths, summed over its members. Prevalence is how often a weapon or comp appears among winners; it is not a measure of strength on its own.</li>
       <li><b>Builds</b> are the modal item per slot over winning players of that weapon in that pool, one player one vote, shown once three players have worn the slot. Victims' gear is what died and is not shown.</li>
+      <li><b>Shapes</b> (pools of six and more) count a party's members per role: frontline, healer, support and damage, each weapon read through the role the planner seats it in. An exact comp rarely repeats past five members, so the shape and the role-by-role roster are the reads that recur; the ranges are the middle half of the winning parties.</li>
       <li><b>Pools</b> follow the game's matchmaking: solo, 2 to 3, 4 to 5, 6 to 7 and 15 to 20. Small samples are marked; a pool with under 40 parties is a glimpse, not a meta.</li>
       <li>This page is a killboard surface. The planner's recommendations do not read it.</li>
     </ul>
@@ -162,7 +178,8 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     return `<div class="kit">${slots.map(s => slotCard(s, b[s], "players")).join("")}</div>`;
   }
   /* ---- sortable tables: click a heading to order by it, again to flip ---- */
-  const SORT = {weapons: {key: "parties", dir: -1}, comps: {key: "n", dir: -1}};
+  const SORT = {weapons: {key: "parties", dir: -1}, comps: {key: "n", dir: -1}, shapes: {key: "n", dir: -1}};
+  const SCOLS = [["size", "Size", "num"], ["n", "Seen", "num"], ["dominant_share", "Dominant", ""], ["kd", "K/D", "num"]];
   const WCOLS = [["parties", "Parties", "num"], ["share", "Share", "num"], ["players", "Players", "num"],
                  ["dominant_share", "Dominant", ""], ["kd", "K/D", "num"], ["median_ip", "Median IP", "num"]];
   const CCOLS = [["n", "Seen", "num"], ["dominant_share", "Dominant", ""], ["kd", "K/D", "num"]];
@@ -201,12 +218,44 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       return `<div class="member"><span class="w">${icon(m.icon, 44)}${esc(m.name)}</span><div class="kit">${cells || `<span class="v">no build seen on this seat yet</span>`}</div></div>`;
     }).join("")}</div>`;
   }
+  /* ---- shapes and the roster profile (pools of six and more) ----
+     an exact comp stops recurring past five members; the read that recurs
+     is the count per role class, each weapon read through its primary seat */
+  const ROLES = [["frontline", "Frontline"], ["healer", "Healer"], ["support", "Support"], ["dps", "Damage"], ["other", "Unseated"]];
+  const roleChips = (rows, of) => (rows || []).map(w =>
+    `<span class="w" title="${esc(w.name)}: ${w.parties} of ${of} parties${w.copies > 1 ? `, ${w.copies} copies where fielded` : ""}">${icon(w.icon, 44)}${esc(w.name)} <small>${pct(w.share)}${w.copies > 1 ? ` ×${w.copies}` : ""}</small></span>`).join("");
+  function profileHtml(p){
+    const pr = p.profile;
+    if (!pr) return "";
+    const rows = ROLES.filter(([k]) => pr.roles[k]).map(([k, label]) => {
+      const r = pr.roles[k];
+      const range = r.p25 === r.p75 ? `${r.p50}` : `${r.p25}–${r.p75}`;
+      return `<div class="role-row"><div class="role-n"><b>${range}</b><span>${esc(label)}</span><small title="over the ${pr.parties} parties: the middle half of the count, its median, and the extremes">median ${r.p50} · ${r.min} to ${r.max}</small></div><div class="comp">${roleChips(pr.weapons[k], pr.parties) || '<span class="v">none fielded</span>'}</div></div>`;
+    }).join("");
+    return `<section class="block" id="profile"><h3>A winning roster, role by role (${pr.parties} parties with every weapon known)</h3>
+      <div class="profile">${rows}</div>
+      <p class="fine">The count is the middle half of the winning parties; beside it, the weapons that fill the role, with the share of parties fielding one. ${pr.shapes_distinct} distinct role shapes across ${pr.parties} parties${pr.shapes_distinct > pr.parties / 2 ? ": at this size no single shape dominates, so read the ranges" : ""}.</p></section>`;
+  }
+  const shapeLabel = c => ROLES.filter(([k]) => c[k]).map(([k, label]) => `<span class="shape-n"><b>${c[k]}</b> ${esc(label.toLowerCase())}</span>`).join("");
+  function shapeDetail(s){
+    return `<div class="profile">${ROLES.filter(([k]) => (s.weapons || {})[k]).map(([k, label]) =>
+      `<div class="role-row"><div class="role-n"><b>${s.counts[k] || 0}</b><span>${esc(label)}</span></div><div class="comp">${roleChips(s.weapons[k], s.n)}</div></div>`).join("")}</div>`;
+  }
+  function shapesTable(p){
+    if (!p.shapes) return "";
+    const body = p.shapes.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Shape</th>${th("shapes", SCOLS)}</tr></thead><tbody>${
+      ordered(p.shapes, SORT.shapes).map(({r: s, i}, n) => `<tr class="row" data-s="${i}" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`).join("")
+    }</tbody></table></div>` : `<div class="empty">No role shape has been seen ${S.thresholds.comp_sightings} times yet.</div>`;
+    return `<section class="block" id="shapes"><h3>Shapes that won (members per role, seen ${S.thresholds.comp_sightings}+ times; click a row for the weapons in each role)</h3>${body}</section>`;
+  }
   function compsTable(p){
     if (p.sizes[0] < 2) return "";
     const body = p.comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th>${th("comps", CCOLS)}</tr></thead><tbody>${
       ordered(p.comps, SORT.comps).map(({r: c, i}, n) => `<tr class="row" data-c="${i}" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`).join("")
     }</tbody></table></div>` : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
-    return `<section class="block" id="comps"><h3>Comps that won (every member's weapon known, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}</section>`;
+    const exact = p.shapes ? "Exact comps that won (the same weapons copy for copy" : "Comps that won (every member's weapon known";
+    return `<section class="block" id="comps"><h3>${exact}, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}${
+      p.shapes && p.profile && p.comps.length < 10 ? `<p class="fine">An exact comp rarely repeats at this size: ${p.profile.parties} parties with every weapon known field almost as many different rosters. The roles and shapes above are the read that recurs.</p>` : ""}</section>`;
   }
   /* ---- the pool: one view at a time, weapons or comps ---- */
   let POOL = "solo", VIEW = "weapons";
@@ -217,8 +266,8 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     VIEW = hasComps && (view || VIEW) === "comps" ? "comps" : "weapons";
     tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pool === k ? "true" : "false"));
     host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span>
-      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${p.comps.length}</small></button></div>` : ""}</div>
-      ${VIEW === "comps" ? compsTable(p) : `<section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>`}`;
+      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${p.shapes ? p.shapes.length + " shapes" : p.comps.length}</small></button></div>` : ""}</div>
+      ${VIEW === "comps" ? profileHtml(p) + shapesTable(p) + compsTable(p) : `<section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>`}`;
     try { localStorage.setItem("portal-pool", k); localStorage.setItem("portal-view", VIEW); } catch (e) {}
   }
   tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
@@ -243,6 +292,8 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     const r = e.target.closest("tr.row"); if (!r) return;
     const d = r.dataset.c !== undefined
       ? host.querySelector(`tr.detail[data-for-c="${r.dataset.c}"]`)
+      : r.dataset.s !== undefined
+      ? host.querySelector(`tr.detail[data-for-s="${r.dataset.s}"]`)
       : host.querySelector(`tr.detail[data-for="${r.dataset.w}"]`);
     const open = r.getAttribute("aria-expanded") === "true";
     r.setAttribute("aria-expanded", open ? "false" : "true");

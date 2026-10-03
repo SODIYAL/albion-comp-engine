@@ -121,6 +121,7 @@ py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, g
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
 node tests/test_live_party.js       # companion equipment -> loadout gear keys
+node tests/test_portal_page.js      # Dragon Portal page: order, view switch, address hash, shapes and the roster profile
 node tests/test_auth_ui.js          # account layer: validation, error wording, email-link return
 node tests/test_profile.js          # profile: weapon lists, search, roles, what the helpers send
 py -3 tests/test_supabase_schema.py # account database rules as text: RLS, grants, functions, client bounds = database bounds

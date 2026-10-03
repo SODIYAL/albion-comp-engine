@@ -29,6 +29,19 @@ sighting of the member, from the comp's sighting floor, so the page can
 show what the winners of THAT comp wore beside the pool-wide build of
 each weapon.
 
+SHAPES AND THE ROSTER PROFILE (pools of six and more). An exact comp is
+every member's weapon, copy for copy; past five members it stops
+recurring (measured: 93 distinct comps in 95 full 15-20 parties). The
+read that recurs is the SHAPE: the party's members per role class
+(frontline / healer / support / dps), each weapon read through its
+primary seat exactly as the planner reads it (one role read). A shape
+row carries the count per class, its sightings, dominant share and K/D,
+and the weapons most fielded in each class inside that shape. Where even
+shapes are sparse (15-20: 78 distinct in 95) the `profile` states the
+pool as a whole: the quartiles of each class's count over the full
+parties and the weapons that fill each class, with the share of parties
+fielding one and the median copies where fielded.
+
 Usage:  py -3 pipeline/build_portal_stats.py [--rosters PATH]  -> out/portal_stats.json
   --rosters names another roster artifact (a git-shown copy while the poll
   rewrites the working file).
@@ -54,6 +67,17 @@ MIN_COMP = 2           # a comp shows from this many sightings
 TOP_WEAPONS = 40
 TOP_COMPS = 40
 OTHERS = 8             # alternatives listed per slot beside the modal item
+SHAPE_MIN_SIZE = 6     # pools from this size carry shapes and the roster profile
+TOP_SHAPES = 30
+ROLE_ORDER = ("frontline", "healer", "support", "dps", "other")
+SHAPE_WEAPONS = 5      # weapons listed per class inside a shape
+PROFILE_WEAPONS = 10   # weapons listed per class in the pool's profile
+
+
+def _quartile(vals, q):
+    """Nearest-rank quantile of a non-empty list."""
+    s = sorted(vals)
+    return s[min(len(s) - 1, int(q * (len(s) - 1) + 0.5))]
 
 
 def _pretty(gear_id):
@@ -68,7 +92,16 @@ def pool_of(size):
     return None
 
 
-def build(doc, weapons_meta, gear_meta, items):
+def build(doc, weapons_meta, gear_meta, items, roles=None):
+    """`roles` is the dataset's role book (a list of seats with their
+    class): with it, pools of SHAPE_MIN_SIZE and more carry shapes and the
+    roster profile; without it they carry neither."""
+    seat_class = {r.get("id"): r.get("class") for r in (roles or []) if isinstance(r, dict)}
+
+    def role_of(w):
+        seat = ((weapons_meta.get(w) or {}).get("label") or {}).get("seat")
+        return seat_class.get(seat) or "other"
+
     parties = doc.get("parties") or []
     builds = doc.get("builds") or []
     battles = doc.get("battles") or []
@@ -224,6 +257,64 @@ def build(doc, weapons_meta, gear_meta, items):
             "weapons": weapons[:TOP_WEAPONS], "weapons_total": len(weapons),
             "comps": comp_rows[:TOP_COMPS], "comps_total": len(comp_rows),
         }
+        if lo >= SHAPE_MIN_SIZE and seat_class:
+            full = [p for p in ps if p.get("known_weapons") == p.get("size") and p.get("weapons")]
+            wrow = lambda w: {"id": w, "name": wname(w), "icon": items.get(w) or f"T6_{w}"}
+
+            def class_weapons(group, top):
+                """Per class, the weapons most fielded across `group`: the
+                parties fielding one, their share of the group, and the
+                median copies where fielded."""
+                out = {}
+                for cls in ROLE_ORDER:
+                    fielded = collections.defaultdict(list)   # weapon -> copies per fielding party
+                    for p in group:
+                        for w, n in collections.Counter(p["weapons"]).items():
+                            if role_of(w) == cls:
+                                fielded[w].append(n)
+                    rows = [dict(wrow(w), parties=len(c), share=round(len(c) / len(group), 3),
+                                 copies=_quartile(c, 0.5))
+                            for w, c in fielded.items()]
+                    rows.sort(key=lambda r: (-r["parties"], r["name"]))
+                    if rows:
+                        out[cls] = rows[:top]
+                return out
+
+            by_shape = collections.defaultdict(list)
+            for p in full:
+                c = collections.Counter(role_of(w) for w in p["weapons"])
+                by_shape[tuple(c.get(k, 0) for k in ROLE_ORDER)].append(p)
+            shape_rows = []
+            for shape, group in by_shape.items():
+                if len(group) < MIN_COMP:
+                    continue
+                sc = [p for p in group if p.get("kills") is not None and p.get("deaths") is not None]
+                dom = sum(1 for p in sc if (p.get("deaths") or 0) == 0 and (p.get("kills") or 0) >= 1)
+                shape_rows.append({
+                    "counts": {k: v for k, v in zip(ROLE_ORDER, shape) if v or k != "other"},
+                    "size": sum(shape), "n": len(group), "scored": len(sc),
+                    "dominant_share": round(dom / len(sc), 3) if sc else None,
+                    "kd": (round(sum(p.get("kills") or 0 for p in sc)
+                                 / max(1, sum(p.get("deaths") or 0 for p in sc)), 2) if sc else None),
+                    "weapons": class_weapons(group, SHAPE_WEAPONS),
+                })
+            shape_rows.sort(key=lambda r: (-r["n"], -(r["dominant_share"] or 0),
+                                           [-r["counts"].get(k, 0) for k in ROLE_ORDER]))
+            profile = None
+            if full:
+                per_class = {k: [sum(1 for w in p["weapons"] if role_of(w) == k) for p in full]
+                             for k in ROLE_ORDER}
+                profile = {
+                    "parties": len(full),
+                    "shapes_distinct": len(by_shape),
+                    "roles": {k: {"p25": _quartile(v, 0.25), "p50": _quartile(v, 0.5),
+                                  "p75": _quartile(v, 0.75), "min": min(v), "max": max(v)}
+                              for k, v in per_class.items() if k != "other" or max(v)},
+                    "weapons": class_weapons(full, PROFILE_WEAPONS),
+                }
+            out_pools[key]["shapes"] = shape_rows[:TOP_SHAPES]
+            out_pools[key]["shapes_total"] = len(shape_rows)
+            out_pools[key]["profile"] = profile
     return {
         "kind": "portal_stats",
         "content": CONTENT,
@@ -253,7 +344,8 @@ def main():
             for k, v in (json.load(f) or {}).items():
                 if isinstance(v, dict) and v.get("example_item"):
                     items[k] = v["example_item"]
-    stats = build(doc, ds.get("weapons") or {}, ds.get("gear") or {}, items)
+    stats = build(doc, ds.get("weapons") or {}, ds.get("gear") or {}, items,
+                  ds.get("roles") or [])
     path = os.path.join(OUT, "portal_stats.json")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(stats, f, indent=1, sort_keys=True)
@@ -264,7 +356,8 @@ def main():
     for key, _l, _lo, _hi in POOLS:
         p = pools[key]
         print(f"  {p['label']:6s} parties {p['parties']:5d}  weapons {p['weapons_total']:3d}  "
-              f"comps {p['comps_total']:3d}  dominant {p['dominant_share']}")
+              f"comps {p['comps_total']:3d}  dominant {p['dominant_share']}"
+              + (f"  shapes {p['shapes_total']:3d}" if "shapes_total" in p else ""))
     print(f"wrote out/portal_stats.json")
 
 
