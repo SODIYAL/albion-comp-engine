@@ -1377,6 +1377,50 @@ def t_role_typical():
     check("F31k every style forges a full, feasible roster under its typical "
           "rows at 5 / 9 / 11 / 13 / 16 / 18 / 20", ok,
           "; ".join(lines) if lines else "all full")
+    # A MATCHMAKING POOL'S OWN COUNTS (derive_role_counts.py `pools`): the
+    # Dragon Portal's dominant winners at the exact size, the unit its
+    # requirement rows are fitted on. A pool's row may state ZERO (the
+    # p75 winner fields none of the role), which the open-world rows
+    # never do.
+    import json as _json
+    with open(os.path.join(ROOT, "pipeline", "out", "role_counts.json"), encoding="utf-8") as f:
+        rc = _json.load(f)
+    pools = (rc.get("typical") or {}).get("pools", {}).get("ancient_lands") or {}
+    cells = (rc.get("pool_cells") or {}).get("ancient_lands") or {}
+    check("F31l the portal pools carry role counts of their own at 2-7, each from at least 40 "
+          "distinct dominant rosters on the training split: a trio is a healer and no frontline, "
+          "four to seven one healer and one frontline, no support through five",
+          pools.get("3") == {"healer": 1, "frontline": 0, "support": 0}
+          and pools.get("5") == {"healer": 1, "frontline": 1, "support": 0}
+          and pools.get("7", {}).get("frontline") == 1 and pools.get("7", {}).get("healer") == 1
+          and all(cells[s]["distinct"] >= 40 for s in pools)
+          and (rc.get("_split") or {}).get("holdout_mod") == 5,
+          str(pools))
+    check("F31m a zero is written only where the p75 winner fields none; a role a quarter of the "
+          "winners field has no row (the support at 6 and 7)",
+          all(cells[s][r]["p75"] == 0 for s, row in pools.items() for r, n in row.items() if n == 0)
+          and "support" not in pools.get("7", {}) and cells["7"]["support"]["p75"] > 0,
+          str({s: cells[s]["support"] for s in ("5", "7")}))
+    e3 = Engine(content="ancient_lands", size=3)
+    e5 = Engine(content="ancient_lands", size=5)
+    check("F31n inside the portal the engine reads the pool's row before any other table, zero "
+          "included; another content at the same size does not",
+          e3._role_typical() == pools["3"] and e5._role_typical() == pools["5"]
+          and e3._band["frontline"]["typical"] == 0
+          and Engine(content="roads", size=5)._role_typical() != pools["5"],
+          f"{e3._role_typical()} {e5._role_typical()}")
+    shapes = {}
+    for st in STYLES:
+        for n in (3, 5, 7):
+            ex = Engine(content="ancient_lands", size=n, style=st)
+            rx = ex.forge(n)
+            roles = [ex.role_of(w) for w in rx["party"]]
+            shapes[(st, n)] = (rx["feasible"] and len(rx["party"]) == n, roles.count("frontline"), roles.count("healer"))
+    bad = {k: v for k, v in shapes.items()
+           if not v[0] or v[1] > (0 if k[1] == 3 else 1) or v[2] > 1}
+    check("F31o in every style a forged portal trio fields no frontline, a five and a seven at most "
+          "one, and each at most one healer (the pool's winners' shape), full and feasible",
+          not bad, str(bad))
 
 
 def t_forge_avoid():
@@ -1465,14 +1509,21 @@ def t_portal_rows():
           f"portal5={bow in set(e5.suggest_pool())} portal7={bow in set(e7.suggest_pool())} "
           f"roads5={bow in set(r5.suggest_pool())} portal10={bow in set(e10.suggest_pool())} "
           f"castle_outpost5={bow in set(c5.suggest_pool())}")
-    check("F34e the portal's ramped rows are no requirement at 4-5 and the fitted rows are",
-          "silence" not in e5.reqs and "cleanse" not in e5.reqs and "clump_create" not in e5.reqs
-          and "tankiness" in e5.reqs and "clump_create" in e7.reqs and "silence" in e10.reqs,
-          str(sorted(set(tpl["requirements"]) - set(e5.reqs))))
     pools = tpl.get("pool_rows") or {}
-    check("F34f the 2-3 and 6-7 pools carry rows of their own, each at least 40 distinct rosters, "
-          "every row none or 0 <= min <= target < soft cap over the base capabilities",
-          set(pools) == {"2-3", "6-7"}
+    opt5 = {c: r for c, r in pools.get("4-5", {}).get("requirements", {}).items() if r.get("optional")}
+    check("F34e at 4-5 a ramped row is no REQUIREMENT: a capability a minority of the pool's winners "
+          "field is an optional row (silence, cleanse), one under one winner in ten fields is no row "
+          "(execute); the fitted rows are requirements, and past the pools the base ramp stands",
+          "silence" in opt5 and "cleanse" in opt5 and "execute" not in e5.reqs
+          and all(c in e5.reqs and c in e5.optional for c in opt5)
+          and "tankiness" in e5.reqs and "tankiness" not in e5.optional
+          and "clump_create" in e7.reqs and "silence" in e10.reqs and "silence" not in e10.optional,
+          f"optional5={sorted(opt5)} absent5={sorted(set(tpl['requirements']) - set(e5.reqs))}")
+    check("F34f the 2-3 and 6-7 pools carry rows of their own and the fitted 4-5 pool its optional rows "
+          "alone, each at least 40 distinct rosters, every row none or 0 <= min <= target < soft cap "
+          "over the base capabilities",
+          set(pools) == {"2-3", "4-5", "6-7"}
+          and all(r.get("optional") for r in pools["4-5"]["requirements"].values())
           and all(p["comps"] >= 40 and p["ref_size"] == p["sizes"][1]
                   and all(c in tpl["requirements"] for c in p["requirements"])
                   and all(r.get("none") or 0 <= r.get("min", r["target"]) <= r["target"] < r["soft_cap"]
@@ -1481,8 +1532,8 @@ def t_portal_rows():
     e3 = Engine(content="ancient_lands", size=3)
     t3 = pools.get("2-3", {}).get("requirements", {}).get("tankiness") or {}
     check("F34g inside a pool the engine reads the pool's row at its ref size as a harvest median; "
-          "at the base size and at 20 the base rows stand",
-          e3.pool_key == "2-3" and e7.pool_key == "6-7" and e5.pool_key is None
+          "at the base size a capability without a pool row reads the base row, and at 20 the base rows stand",
+          e3.pool_key == "2-3" and e7.pool_key == "6-7" and e5.pool_key == "4-5"
           and Engine(content="ancient_lands", size=20).pool_key is None
           and t3 and abs(e3.target("tankiness") - t3["target"]) < 1e-9
           and e3.target_source("tankiness") == "harvest" and e5.target_source("tankiness") == "content",
@@ -1492,6 +1543,21 @@ def t_portal_rows():
           bool(none3) and all(c not in e3.reqs for c in none3)
           and all(c in e3.reqs for c, r in pools["2-3"]["requirements"].items() if not r.get("none")),
           str(none3))
+    # an optional row pays for what is brought and asks for nothing: the
+    # silence of a Heavy Mace earns coverage at 5, and a five without
+    # silence is not short of it (the row leaves that party's supremum)
+    core = ["MAIN_HOLYSTAFF", "2H_BOW", "2H_DUALSWORD", "2H_LONGBOW"]
+    rep = e5.pick_report(core, "2H_MACE")
+    sil = next((x for x in rep["caps"] if x["cap"] == "silence"), None)
+    row = opt5.get("silence") or {}
+    rep_h = e5.pick_report(core, "2H_HAMMER")
+    check("F34i an optional pool row pays the weapon that brings it and charges nobody: the Heavy "
+          "Mace's silence earns coverage at 5 against the fielders' median, with no minimum; a "
+          "frontline without silence carries no silence term",
+          sil is not None and sil["delta"] > 0 and row.get("min") == 0
+          and abs(e5.target("silence") - row["target"]) < 1e-9
+          and not any(x["cap"] == "silence" for x in rep_h["caps"]),
+          f"silence={sil} row={row}")
 
 
 def t_portal_fielded():

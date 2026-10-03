@@ -23,7 +23,14 @@ Each is decidable today from evidence already in the repo.
   19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
   without the gate); the pool's three most fielded weapons name it on
   27.3% / 29.6% / 13.9%. At role level the engine leads (76% / 62% / 46%
-  against 47% / 52% / 38%). Inside the list the engine still prefers a
+  against 47% / 52% / 38%). With the optional rows at 4-5 and 6-7 (V: 10,
+  Optional rows and role counts for the portal pools; a 400-party holdout
+  sample on the artifact of that day) the role read rises to 86% and 69%
+  and the weapon's top-3 stays under the baseline's (16% and 12% against
+  22% and 17%); at the frontline seat of a five Heavy Mace is the first
+  pick in 41 of 150 cases where Great Hammer still leads in 79, on stun
+  (+3.8), catch and heal_reduction, capabilities Heavy Mace's sheet does
+  not carry. Inside the list the engine still prefers a
   wide sheet (Battle Bracers and Crystal Reaper over the Rotcaller Staff
   and the Longbow, which 26% and 20% of 6-7 winners field): the capability
   score pays a first unit on many rows more than depth on one. Whether
@@ -243,8 +250,10 @@ Each is decidable today from evidence already in the repo.
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
   47 of 81 head / armor / shoes items have no vote and ASSUME their own
-  active, and Soldier Boots sits one vote under the floor on Rejuvenating
-  Sprint, so it supplies nothing until a second build records it. The
+  active. (Soldier Boots, one vote on Rejuvenating Sprint from a
+  small-scale build, assumes Wanderlust and supplies nothing from the
+  slot: the piece is a solo pick, not a group build, so the reading
+  stands; curation judgment.) The
   companion's spell array, if it carries armor actives (verify on the
   wire), would be the volume source; so would any caller sheet that
   records gear abilities. A gear-active OVERRIDE in the kit editor (the

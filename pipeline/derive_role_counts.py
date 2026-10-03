@@ -12,7 +12,13 @@ the fitted published comps below 10.
 Three tables, resolved by the engine in this order (both ports,
 `_role_typical`):
 
-  size < 10   comps[content][size]   median role counts of the published
+  size < 10   pools[content][size]   a matchmaking pool's own winners: the
+                                     dominant killer parties of the content
+                                     at the exact size (derive_pools; the
+                                     Dragon Portal). healer / frontline /
+                                     support, and ZERO where the p75 winner
+                                     fields none
+              comps[content][size]   median role counts of the published
                                      comps the content's targets were fitted
                                      from (dressed_template_audit parties),
                                      where the content has >= MIN_COMPS at
@@ -238,10 +244,71 @@ def derive_comps(audit, comps, role_of, known):
     return cells, typ
 
 
-def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD):
+def derive_pools(docs, role_of, known, holdout_mod=HOLDOUT_MOD):
+    """The matchmaking pools' own counts, per content and exact size below
+    the style floor. `docs` = {content: the artifact read with
+    source="all", content=<content>} (the kill-feed poll's tagged
+    parties). The unit is the one the pool's requirement rows are fitted
+    on (derive_portal_rows.py): a DOMINANT killer party (no deaths, a
+    kill) of the size, every weapon known, on the training split; a size
+    carries a row from MIN_DISTINCT distinct rosters.
+
+    A pool's row states ZERO as well as a count: where the p75 winner
+    fields none of a role (three winners in four do without), the typical
+    is 0 and generation fields a body of that role only for a minimum
+    that role alone can meet. The open-world rows cannot say that (a
+    squad below 10 is not a matched comp); a matched pool can: 83% of
+    dominant portal trios field no frontline, and a forged trio that
+    buys one is a comp the pool's winners do not bring."""
+    cells, typ = {}, {}
+    for content in sorted(docs):
+        by, rosters = {}, {}
+        for p in docs[content].get("parties") or []:
+            size = p.get("size") or 0
+            if size < MIN_SIZE or size >= STYLE_MIN_SIZE or (p.get("known_weapons") or 0) < size:
+                continue
+            if not in_split(p.get("battle"), holdout_mod):
+                continue
+            if p.get("kills") is None or p.get("deaths") is None \
+                    or (p.get("deaths") or 0) != 0 or (p.get("kills") or 0) < 1:
+                continue
+            ws = [w for w in (p.get("weapons") or []) if w in known]
+            if len(ws) < size:
+                continue
+            counts = _count_roles(ws, role_of)
+            rows = by.setdefault(size, {r: [] for r in ROLES})
+            for r in ROLES:
+                rows[r].append(counts[r])
+            rosters.setdefault(size, set()).add(tuple(sorted(ws)))
+        for size in sorted(by):
+            rows = by[size]
+            cell = {"n": len(rows[ROLES[0]]), "distinct": len(rosters[size])}
+            for r in ROLES:
+                cell[r] = dict(_stats(rows[r]), p75=round(percentile(rows[r], 0.75), 2))
+            cells.setdefault(content, {})[str(size)] = cell
+            if cell["distinct"] < MIN_DISTINCT:
+                continue
+            t = {}
+            for r in GATED_ROLES:
+                p50 = percentile(rows[r], 0.50)
+                if p50 >= 1:
+                    t[r] = int(round(p50))
+                elif percentile(rows[r], 0.75) == 0:
+                    t[r] = 0
+            if t:
+                typ.setdefault(content, {})[str(size)] = t
+    return cells, typ
+
+
+POOL_CONTENTS = ("ancient_lands",)   # contents fought in matchmaking pools
+
+
+def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD,
+           pool_docs=None):
     sizes, style_cells, typ_pooled, typ_styles = derive_harvest(
         doc, labels, role_of, known, holdout_mod)
     comp_cells, typ_comps = derive_comps(audit, comps, role_of, known)
+    pool_cells, typ_pools = derive_pools(pool_docs or {}, role_of, known, holdout_mod)
     return {
         "_source": {"party_rosters_sha256": None,
                     "party_styles_sha256": None,
@@ -257,11 +324,16 @@ def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD):
                   "declared style at 10+ (a cell pools a +-1 then +-2 size "
                   "window until >= _min_distinct rosters; `window` states "
                   "it); comps rows = the published comps the content's "
-                  "targets were fitted from, below 10, >= _min_comps"),
+                  "targets were fitted from, below 10, >= _min_comps; pool "
+                  "rows = the dominant killer parties of a matchmaking "
+                  "pool's content at the exact size (no deaths, a kill), "
+                  "below 10, >= _min_distinct distinct rosters"),
         "_typical": ("round(p50) where p50 >= 1; harvest below 10: healer "
                      "only; harvest at 10+ and comps: healer / frontline / "
-                     "support; dps never (the residual role). Resolution: "
-                     "size < 10 -> comps[content][size] else pooled[size]; "
+                     "support; pools: the same three, and 0 where the p75 "
+                     "winner fields none; dps never (the residual role). "
+                     "Resolution: size < 10 -> pools[content][size] else "
+                     "comps[content][size] else pooled[size]; "
                      "size >= 10 -> styles[style][size] for a declared "
                      "identity style else pooled[size]"),
         "_min_distinct": MIN_DISTINCT,
@@ -270,8 +342,9 @@ def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD):
         "sizes": sizes,
         "style_cells": style_cells,
         "comp_cells": comp_cells,
+        "pool_cells": pool_cells,
         "typical": {"pooled": typ_pooled, "styles": typ_styles,
-                    "comps": typ_comps},
+                    "comps": typ_comps, "pools": typ_pools},
     }
 
 
@@ -307,8 +380,9 @@ def main():
     with open(AUDIT, encoding="utf-8") as f:
         audit = json.load(f)
     all_battles = "--all-battles" in sys.argv[1:]
+    pool_docs = {c: rosters_io.load(ARTIFACT, source="all", content=c) for c in POOL_CONTENTS}
     out = derive(doc, labels, audit, load_comps(), e.role_of, set(e.weapons),
-                 holdout_mod=None if all_battles else HOLDOUT_MOD)
+                 holdout_mod=None if all_battles else HOLDOUT_MOD, pool_docs=pool_docs)
     out["_generated"] = datetime.date.today().isoformat()
     out["_source"]["party_rosters_sha256"] = sha256_of(ARTIFACT)
     out["_source"]["party_styles_sha256"] = sha256_of(STYLES_ARTIFACT)
@@ -326,6 +400,10 @@ def main():
             for s, row in sorted(rows.items(), key=lambda kv: int(kv[0]))))
     for content, rows in sorted(t["comps"].items()):
         print(f"  comps {content}: " + ", ".join(
+            f"{s}:" + "/".join(f"{r[0]}{v}" for r, v in row.items())
+            for s, row in sorted(rows.items(), key=lambda kv: int(kv[0]))))
+    for content, rows in sorted(t["pools"].items()):
+        print(f"  pools {content}: " + ", ".join(
             f"{s}:" + "/".join(f"{r[0]}{v}" for r, v in row.items())
             for s, row in sorted(rows.items(), key=lambda kv: int(kv[0]))))
     print(f"role counts ({out['_split']['rule']}) -> "

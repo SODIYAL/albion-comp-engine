@@ -4175,17 +4175,22 @@ class Engine:
     def _role_typical(self):
         """The typical role-count row for this content, style and size
         (standing rule 17 applied to bodies; F31): below the style
-        floor the median of the content's fitted published comps at this
-        exact size, else the harvest's pooled row (healer only there); at
-        the floor and above the DECLARED identity style's harvest cell,
-        else the pooled row (`balanced` never reads a cell). {} when no
-        table carries the size."""
+        floor a matchmaking pool's own row for the content at this exact
+        size (its dominant winners; a role may be typical at ZERO), else
+        the median of the content's fitted published comps, else the
+        harvest's pooled row (healer only there); at the floor and above
+        the DECLARED identity style's harvest cell, else the pooled row
+        (`balanced` never reads a cell). {} when no table carries the
+        size."""
         rt = self.comp_cfg.get("role_typical") or {}
         if not rt:
             return {}
         key = str(self.size)
         floor = rt.get("style_min_size", 10)
         if self.size < floor:
+            row = ((rt.get("pools") or {}).get(self.content) or {}).get(key)
+            if row:
+                return dict(row)
             row = ((rt.get("comps") or {}).get(self.content) or {}).get(key)
             if row:
                 return dict(row)

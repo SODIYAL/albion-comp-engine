@@ -1,5 +1,5 @@
 {
- "_generated": "2026-09-28",
+ "_generated": "2026-10-03",
  "_min_comps": 3,
  "_min_distinct": 40,
  "_source": {
@@ -12,8 +12,8 @@
   "rule": "battle % 5 != 0 (training split; % 5 == 0 is the v4h holdout)"
  },
  "_style_min_size": 10,
- "_typical": "round(p50) where p50 >= 1; harvest below 10: healer only; harvest at 10+ and comps: healer / frontline / support; dps never (the residual role). Resolution: size < 10 -> comps[content][size] else pooled[size]; size >= 10 -> styles[style][size] for a declared identity style else pooled[size]",
- "_unit": "counts of each role (Engine.role_of) per party; harvest rows = fully-known killer parties (known_weapons == size), p10/p50/p90 per exact size (pooled) and per declared style at 10+ (a cell pools a +-1 then +-2 size window until >= _min_distinct rosters; `window` states it); comps rows = the published comps the content's targets were fitted from, below 10, >= _min_comps",
+ "_typical": "round(p50) where p50 >= 1; harvest below 10: healer only; harvest at 10+ and comps: healer / frontline / support; pools: the same three, and 0 where the p75 winner fields none; dps never (the residual role). Resolution: size < 10 -> pools[content][size] else comps[content][size] else pooled[size]; size >= 10 -> styles[style][size] for a declared identity style else pooled[size]",
+ "_unit": "counts of each role (Engine.role_of) per party; harvest rows = fully-known killer parties (known_weapons == size), p10/p50/p90 per exact size (pooled) and per declared style at 10+ (a cell pools a +-1 then +-2 size window until >= _min_distinct rosters; `window` states it); comps rows = the published comps the content's targets were fitted from, below 10, >= _min_comps; pool rows = the dominant killer parties of a matchmaking pool's content at the exact size (no deaths, a kill), below 10, >= _min_distinct distinct rosters",
  "comp_cells": {
   "castle_outpost": {
    "7": {
@@ -63,6 +63,234 @@
     "support": {
      "p10": 1.0,
      "p50": 1.0,
+     "p90": 1.0
+    }
+   }
+  }
+ },
+ "pool_cells": {
+  "ancient_lands": {
+   "2": {
+    "distinct": 306,
+    "dps": {
+     "p10": 1.0,
+     "p50": 1.0,
+     "p75": 2.0,
+     "p90": 2.0
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 1.0
+    },
+    "healer": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "n": 395,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 0.0
+    }
+   },
+   "3": {
+    "distinct": 656,
+    "dps": {
+     "p10": 1.0,
+     "p50": 2.0,
+     "p75": 2.0,
+     "p90": 2.0
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 1.0
+    },
+    "healer": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "n": 1087,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 0.0
+    }
+   },
+   "4": {
+    "distinct": 233,
+    "dps": {
+     "p10": 2.0,
+     "p50": 3.0,
+     "p75": 3.0,
+     "p90": 3.0
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "healer": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "n": 250,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 1.0
+    }
+   },
+   "5": {
+    "distinct": 694,
+    "dps": {
+     "p10": 2.0,
+     "p50": 3.0,
+     "p75": 3.0,
+     "p90": 4.0
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "healer": {
+     "p10": 1.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "n": 996,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 0.0,
+     "p90": 1.0
+    }
+   },
+   "6": {
+    "distinct": 59,
+    "dps": {
+     "p10": 3.0,
+     "p50": 4.0,
+     "p75": 4.0,
+     "p90": 4.7
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 2.0
+    },
+    "healer": {
+     "p10": 0.3,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.0
+    },
+    "n": 64,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 1.0,
+     "p90": 1.0
+    }
+   },
+   "7": {
+    "distinct": 85,
+    "dps": {
+     "p10": 3.0,
+     "p50": 4.0,
+     "p75": 5.0,
+     "p90": 5.0
+    },
+    "frontline": {
+     "p10": 0.0,
+     "p50": 1.0,
+     "p75": 2.0,
+     "p90": 2.0
+    },
+    "healer": {
+     "p10": 1.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.3
+    },
+    "n": 98,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 1.0,
+     "p90": 1.3
+    }
+   },
+   "8": {
+    "distinct": 8,
+    "dps": {
+     "p10": 3.0,
+     "p50": 4.5,
+     "p75": 5.0,
+     "p90": 5.3
+    },
+    "frontline": {
+     "p10": 1.0,
+     "p50": 2.0,
+     "p75": 2.25,
+     "p90": 3.0
+    },
+    "healer": {
+     "p10": 1.0,
+     "p50": 1.0,
+     "p75": 1.0,
+     "p90": 1.6
+    },
+    "n": 8,
+    "support": {
+     "p10": 0.0,
+     "p50": 0.0,
+     "p75": 1.0,
+     "p90": 1.3
+    }
+   },
+   "9": {
+    "distinct": 2,
+    "dps": {
+     "p10": 4.2,
+     "p50": 5.0,
+     "p75": 5.5,
+     "p90": 5.8
+    },
+    "frontline": {
+     "p10": 1.1,
+     "p50": 1.5,
+     "p75": 1.75,
+     "p90": 1.9
+    },
+    "healer": {
+     "p10": 1.1,
+     "p50": 1.5,
+     "p75": 1.75,
+     "p90": 1.9
+    },
+    "n": 2,
+    "support": {
+     "p10": 1.0,
+     "p50": 1.0,
+     "p75": 1.0,
      "p90": 1.0
     }
    }
@@ -1924,6 +2152,37 @@
    },
    "9": {
     "healer": 1
+   }
+  },
+  "pools": {
+   "ancient_lands": {
+    "2": {
+     "frontline": 0,
+     "support": 0
+    },
+    "3": {
+     "frontline": 0,
+     "healer": 1,
+     "support": 0
+    },
+    "4": {
+     "frontline": 1,
+     "healer": 1,
+     "support": 0
+    },
+    "5": {
+     "frontline": 1,
+     "healer": 1,
+     "support": 0
+    },
+    "6": {
+     "frontline": 1,
+     "healer": 1
+    },
+    "7": {
+     "frontline": 1,
+     "healer": 1
+    }
    }
   },
   "styles": {

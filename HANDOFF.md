@@ -167,7 +167,14 @@ the training split, floor 40 distinct rosters per pool. The base rows are
 the 4-5 pool's; the 2-3 and 6-7 pools carry `pool_rows` of their own,
 read by both ports at a size inside the pool (`Engine.pool_key`,
 `target_source` says `harvest`), and a capability the median winner does
-not field is no requirement at that pool. The 15-20 pool is under the
+not field is no requirement at that pool: at 4-5 and 6-7 it is an
+OPTIONAL row where at least one winning party in ten fields it (target
+and soft cap read over the parties that field it, no minimum: the
+silence a Heavy Mace brings earns its coverage, a five without silence
+is not short of it), `none` otherwise and at 2-3 (F34e-i). The pools
+carry role counts of their own (`role_counts.json` `pools`, read before
+every other table below 10; a role may be typical at zero), so a forged
+trio fields no frontline and a five one (F31l-o, T50). The 15-20 pool is under the
 floor and reads the base rows scaled plus the style x size rows. The
 weights are fitted to the same winners' picks (`weight_fit`, pulled
 toward the Roads weights the template started from) and apply at every

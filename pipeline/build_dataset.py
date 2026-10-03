@@ -2675,11 +2675,14 @@ def load_role_typical():
                  "rerun py -3 pipeline/derive_role_counts.py "
                  "without --all-battles")
     typ = doc.get("typical") or {}
-    if set(typ) != {"pooled", "styles", "comps"}:
+    if set(typ) != {"pooled", "styles", "comps", "pools"}:
         sys.exit("out/role_counts.json: typical must carry pooled / styles "
-                 "/ comps")
+                 "/ comps / pools")
 
-    def rows_of(table, where):
+    def rows_of(table, where, zero_ok=False):
+        # a matchmaking pool's row may state ZERO (three winners in four
+        # field none of the role: derive_role_counts.py `pools`); every
+        # other table states positive counts only
         out = {}
         for size, roles in (table or {}).items():
             if not str(size).isdigit() or not isinstance(roles, dict):
@@ -2689,10 +2692,10 @@ def load_role_typical():
             for role, n in roles.items():
                 if role not in ("healer", "frontline", "support") \
                         or isinstance(n, bool) or not isinstance(n, int) \
-                        or n < 1:
+                        or n < (0 if zero_ok else 1):
                     sys.exit(f"out/role_counts.json: typical {where}[{size}]"
-                             f"[{role}] must be a positive integer count of "
-                             f"a gated role, got {n!r}")
+                             f"[{role}] must be a {'non-negative' if zero_ok else 'positive'} "
+                             f"integer count of a gated role, got {n!r}")
                 row[role] = n
             if row:
                 out[str(int(size))] = row
@@ -2702,6 +2705,8 @@ def load_role_typical():
                       for st, rows in sorted((typ["styles"] or {}).items())},
            "comps": {c: rows_of(rows, f"comps[{c}]")
                      for c, rows in sorted((typ["comps"] or {}).items())},
+           "pools": {c: rows_of(rows, f"pools[{c}]", zero_ok=True)
+                     for c, rows in sorted((typ["pools"] or {}).items())},
            "style_min_size": int(doc.get("_style_min_size") or 10)}
     return out
 
