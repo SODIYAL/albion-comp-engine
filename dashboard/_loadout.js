@@ -370,6 +370,13 @@ function loadoutHandleClick(e){
     if (LO_OPEN !== null) loadoutSuggest(LO_OPEN);
     return true;
   }
+  /* the flyout's empty kit asks for the engine's suggestion in one click */
+  const sug = e.target.closest("[data-lo-suggest]");
+  if (sug){
+    loadoutSuggest(+sug.dataset.loSuggest);
+    LO_PICKING = null; LO_FILTER = "";
+    return true;
+  }
   const pick = e.target.closest("[data-lo-pick]");
   if (pick){
     const [i, slot] = pick.dataset.loPick.split(":");
@@ -401,6 +408,7 @@ function loadoutHandleChange(e){
   const [i, s] = sel.dataset.loSpell.split(":");
   const L = LOADOUT[+i] || (LOADOUT[+i] = {});
   if (sel.value === "") delete L[s]; else L[s] = +sel.value;
+  LO_PICKING = null;   /* a flyout spell row folds back once chosen */
   delete L._eng;   /* a hand-picked spell makes the kit the player's own */
   delete L._style;
   delete L._pooled;

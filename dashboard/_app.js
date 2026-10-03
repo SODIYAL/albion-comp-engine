@@ -909,8 +909,13 @@ let PDASH_KIT = false;
 function pdashKitHtml(i, roleTxt){
   const w = party[i];
   const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || {};
-  const gear = LO_SLOTS.filter(s => L[s]).map(s =>
-    `<span class="pf-g" title="${esc(loName(L[s]) + loAbilityTip(L[s]))}">${loArt(L[s], 30)}<span>${esc(loName(L[s]))}</span></span>`).join("");
+  /* every gear slot is a button: a worn piece opens its picker, an empty
+     slot offers one — the flyout is the kit editor, no kit button needed */
+  const pickingSlot = LO_PICKING && LO_PICKING.i === i ? LO_PICKING.slot : null;
+  const gear = LO_SLOTS.map(s => L[s]
+    ? `<button class="pf-g${pickingSlot === s ? " on" : ""}" data-lo-pick="${i}:${s}" title="${esc(loName(L[s]) + loAbilityTip(L[s]))} — click to change the ${esc(LO_SLOT_LABEL[s].toLowerCase())}">${loArt(L[s], 30)}<span>${esc(loName(L[s]))}</span></button>`
+    : `<button class="pf-g empty${pickingSlot === s ? " on" : ""}" data-lo-pick="${i}:${s}" title="pick a ${esc(LO_SLOT_LABEL[s].toLowerCase())}"><span class="lo-empty"></span><span>${esc(LO_SLOT_LABEL[s])}</span></button>`).join("");
+  const gearPicker = pickingSlot && LO_SLOTS.includes(pickingSlot) ? loPickerGrid() : "";
   /* spells: the combo the engine actually scores for this member, named
      from the weapon's own pools */
   const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
@@ -918,17 +923,37 @@ function pdashKitHtml(i, roleTxt){
     const e = (pools[pool] || []).find(x => x[0] === sid);
     return e ? e[1] : null;
   };
-  const sp = (ENG.comboSpells(w, COMBOS_CUR[i] === undefined ? null : COMBOS_CUR[i]) || [])
-    .map(([slot, sid]) => {
-      const nm = spellName(slot, sid);
-      return nm ? `<div><span class="k">${slot === "passive" ? "P" : slot.toUpperCase()}</span>${spellIcon(sid)}<span class="pf-spnm">${esc(nm)}</span></div>` : "";
-    }).join("");
+  /* a spell row is a button too: it opens the slot's own select in place
+     (E is fixed per weapon and stays a plain row) */
+  const spellKey = {q: "q", w: "w", passive: "p"};
+  const combo = ENG.comboSpells(w, COMBOS_CUR[i] === undefined ? null : COMBOS_CUR[i]) || [];
+  const chosen = {};
+  combo.forEach(([slot, sid]) => { chosen[slot] = sid; });
+  const sp = ["e", "q", "w", "passive"].map(slot => {
+    let sid = chosen[slot];
+    let nm = sid ? spellName(slot, sid) : null;
+    const k = spellKey[slot];
+    const lbl = slot === "passive" ? "P" : slot.toUpperCase();
+    if (!k) return nm ? `<div><span class="k">${lbl}</span>${spellIcon(sid)}<span class="pf-spnm">${esc(nm)}</span></div>` : "";
+    const pool = pools[LO_SPELL_POOL[k]] || [];
+    if (!pool.length) return "";   /* the weapon has no such slot */
+    if (pickingSlot === k) return `<div class="pf-sp-edit">${loSpellPicker(i, k)}</div>`;
+    /* a pick the scored combo does not carry (the slot adds nothing the
+       engine counts) still shows as worn, marked unscored */
+    let unscored = false;
+    if (!nm && Number.isInteger(L[k]) && pool[L[k]]){ sid = pool[L[k]][0]; nm = pool[L[k]][1]; unscored = true; }
+    const row = nm
+      ? `<span class="k">${lbl}</span>${spellIcon(sid)}<span class="pf-spnm">${esc(nm)}</span>${unscored ? '<span class="pf-sp-none" title="this slot adds nothing the engine scores for this comp">unscored</span>' : ""}`
+      : `<span class="k">${lbl}</span><span class="pf-spnm pf-sp-none">none picked</span>`;
+    return `<button class="pf-sp" data-lo-pick="${i}:${k}" title="${esc(nm || "no " + lbl + " picked")} — click to change the ${slot === "passive" ? "passive" : lbl}">${row}</button>`;
+  }).join("");
   return `<div class="pf-head">${icon(w, 38)}
       <div class="pf-nm">${esc(nameOf(w))}${roleTxt ? `<span class="pf-role">${roleTxt}</span>` : ""}</div>
       <span class="n mono">${String(i + 1).padStart(2, "0")}</span></div>
     <div class="pf-sec">worn kit</div>
-    ${gear ? `<div class="pf-gear">${gear}</div>`
-           : `<div class="fn">no gear picked yet — the kit button below opens the editor</div>`}
+    <div class="pf-gear">${gear}</div>${gearPicker}
+    ${L._eng ? `<div class="fn" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build; click a piece to change it</div>`
+      : LO_SLOTS.some(s => L[s]) ? "" : `<div class="fn">nothing worn yet — click a slot to pick, or <button class="pf-suggest" data-lo-suggest="${i}">fill it with the engine's kit</button></div>`}
     ${sp ? `<div class="pf-sec">scored spells</div><div class="pf-spells">${sp}</div>` : ""}
     ${typeof loDoctrineLine === "function" ? loDoctrineLine(i) : ""}`;
 }
@@ -938,7 +963,6 @@ function pdashFlyFill(){
   DETAIL_W = party[i];   /* spell-facts toggles inside the flyout target it */
   fly.innerHTML = pdashKitHtml(i, PDASH_FLY_ROLE)
     + memberPop(i, BOARD_CTX)
-    + (LO_OPEN === i ? `<div class="pf-kit">${loadoutPanel(i)}</div>` : "")
     + `<div class="pf-dossier">${detailHtml(party[i])}</div>`;
 }
 function refreshPdashFly(){
@@ -957,6 +981,7 @@ function showPdashFly(i, tile){
     PDASH_FLY_I = i;
     PDASH_FLY_ROLE = tile.dataset.pfrole || "";
     DETAIL_SPELL = null;   /* fold any open spell panel from another view */
+    LO_PICKING = null;     /* a picker open on the member just left folds */
     if (PDASH_KIT){ LO_OPEN = i; LO_PICKING = null; loadoutSuggest(i); }
     fly.style.setProperty("--rc", tile.dataset.pfcolor || "var(--ink-3)");
     pdashFlyFill();

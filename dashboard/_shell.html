@@ -1025,6 +1025,21 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   font-size:12px; color:var(--ink-2); cursor:help; min-width:0}
 .pf-g img{border-radius:6px; flex:none}
 .pf-g span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+/* the chips are buttons: the editor lives on them */
+.pf-g{cursor:pointer; text-align:left; font:inherit; font-size:12px; transition:border-color .15s var(--ease), color .15s var(--ease)}
+.pf-g:hover{border-color:var(--brass-deep); color:var(--brass)}
+.pf-g.on{border-color:var(--brass); color:var(--brass-bright); background:var(--brass-wash)}
+.pf-g.empty{color:var(--ink-3); border-style:dashed}
+.pf-g .lo-empty{width:30px; height:30px; flex:none; border-radius:6px; background:var(--sunk); border:1px dashed var(--rule-2)}
+.pf-sp{display:flex; align-items:center; gap:6px; min-width:0; background:none; border:1px solid transparent;
+  border-radius:8px; padding:2px 6px 2px 2px; margin:-2px -6px -2px -2px; font:inherit; color:inherit; text-align:left; cursor:pointer}
+.pf-sp:hover{border-color:var(--brass-deep); color:var(--brass)}
+.pf-sp-edit{min-width:0}
+.pf-suggest{background:none; border:0; padding:0; font:inherit; color:var(--brass); cursor:pointer; text-decoration:underline; text-underline-offset:2px}
+.pf-suggest:hover{color:var(--brass-bright)}
+.pf-sp-none{color:var(--ink-3); font-style:italic; font-size:10px; flex:none}
+.pf-sp-edit .lo-sp select{max-width:100%}
+.pdash-fly .lo-picker{margin-top:6px}
 .pf-spells{display:grid; grid-template-columns:1fr 1fr; gap:4px 12px;
   font-size:12px; color:var(--ink-2)}
 .pf-spells > div{display:flex; align-items:center; gap:6px; min-width:0}
@@ -1050,6 +1065,8 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    the dossier is inlined below, so its button goes too */
 .pdash-fly .dm-act.dm-x{display:none}
 .pdash-fly .dm-act.dm-lock, .pdash-fly .dm-act.dm-rp, .pdash-fly .dm-act.dm-refresh{display:none}
+/* the kit button too: the worn-kit chips and spell rows above are the editor */
+.pdash-fly .lo-open{display:none}
 .pdash-fly .dm-act[data-detail]{display:none}
 /* the inlined dossier: separated from the kit block; its own header
    duplicates the flyout's (name, badges, role) and is dropped */
