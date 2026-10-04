@@ -386,6 +386,29 @@ damage (`burst_st`/`burst_aoe`/`sustained_dps`/`execute` — damage is a plain
 health change, not a typed effect), plus `zone_control`, `clump_create`,
 `heal_burst`, `anti_dive`, `energy_drain`. Those stay entirely human.
 
+**Form abilities sit behind the E.** A shapeshifter staff's E transforms the
+wielder; the form's two abilities and its passive carry their own names and
+descriptions in `spells.json` but sit on no equip menu, so neither the
+catalogue nor `curate_helper.py` reaches them. A sheet scores them on the E
+(the row cites the `SHAPESHIFT_*` spell, an `add:` entry in
+`effect_overrides.yaml` quotes the form ability's text), and
+`audit_form_abilities.py` prints every form's ability text with the numbers
+resolved beside the rows the sheet cites on the E:
+
+```text
+py -3 pipeline/audit_form_abilities.py   -> review/form_abilities.md  (report-only; needs the dumps cache)
+```
+
+A reworked ability keeps its id and points at a new description
+(`@descriptionlocatag`); the audit reads that tag first, as `parse_dumps.py`
+does. The same audit lists the ally-protection class of the anti-dive rule:
+`anti_dive` counts an effect landed on the diver (the map's enemy rows) and a
+protection placed on other allies: an absorb shield, a damage immunity or a
+damage redirection on an ally, and a protective zone or aura (an area that
+stays and raises the damage resistances of the allies inside it). Each claim
+the map does not already offer is added per spell in `effect_overrides.yaml`.
+A resistance buff on one targeted ally stays `buff_allies`.
+
 ## Where the numbers come from
 
 `parse_dumps.py` resolves the placeholder tags in spell descriptions (`{0}`,

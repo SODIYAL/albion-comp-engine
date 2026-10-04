@@ -61,6 +61,7 @@
     # the same single target — so 4 is a floor for it under this sheet's own
     # scale, not a number chosen to match the peel row it replaced.
     - {cap: buff_allies,  score: 4, evidence: SOUL_LINK}       # half the focus damage redirected off the ally
+    - {cap: anti_dive,    score: 2, evidence: SOUL_LINK}       # the redirection is placed on the dived ally (the anti-dive rule, via override)
     - {cap: heal_sustain, score: 4, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
 
 - weapon: MAIN_NATURESTAFF_CRYSTAL   # Forgebark Staff — toggle shield/root healer

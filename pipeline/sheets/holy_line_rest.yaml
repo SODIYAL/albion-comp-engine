@@ -5,7 +5,7 @@
 # amendment — still the only anti_zone supplier).
 
 - weapon: 2H_DIVINESTAFF             # Divine Staff — shield-detonate healer
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-04
   role_hint: healer
   # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
   except:
@@ -14,6 +14,7 @@
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: HOLYSHIELD}    # E: 456 ally absorb shield (via override); W: Blessing
     - {cap: heal_burst,   score: 4, evidence: HOLYSHIELD}    # E: Divinity's Grace detonation pulse; Q: Holy Flash
+    - {cap: anti_dive,    score: 2, evidence: HOLYSHIELD}    # the 456 shield is cast on the dived ally (the anti-dive rule, via override)
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_CRYSTAL       # Exalted Staff — the anti-zone healer
@@ -30,7 +31,7 @@
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_HELL          # Fallen Staff — the immunity-cleanse healer
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-04
   role_hint: healer
   # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
   except:
@@ -40,4 +41,5 @@
     - {cap: heal_burst,   score: 6, evidence: HOLY_ULTIMATE} # E: Salvation — 270 to 20 allies in one pulse
     - {cap: cleanse,      score: 4, evidence: HOLY_ULTIMATE} # inherent E cleanse incl. DoTs (settled finding)
     - {cap: peel,         score: 4, evidence: HOLY_ULTIMATE} # 2s damage IMMUNITY for everyone in the circle
+    - {cap: anti_dive,    score: 4, evidence: HOLY_ULTIMATE} # the immunity circle on the dived allies (the anti-dive rule, via override)
     # NO mobility — the 2s charge-up makes it the anchor healer's anchor.

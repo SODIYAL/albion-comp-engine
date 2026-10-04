@@ -7499,6 +7499,7 @@
   },
   "ARMOR_PLATE_HELL": {
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "reflect": 6
    },
@@ -7546,6 +7547,9 @@
     }
    },
    "evidence": {
+    "anti_dive": [
+     "REFLECTAREA"
+    ],
     "buff_allies": [
      "REFLECTAREA"
     ],
@@ -7567,6 +7571,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 3,
        "reflect": 6
       }
@@ -7614,6 +7619,11 @@
   },
   "ARMOR_PLATE_KEEPER": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "FORCESHIELD"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 7.0,
@@ -7626,6 +7636,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "zone_control": 2
    },
@@ -7673,6 +7684,9 @@
     }
    },
    "evidence": {
+    "anti_dive": [
+     "FORCESHIELD"
+    ],
     "buff_allies": [
      "FORCESHIELD"
     ],
@@ -7694,6 +7708,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 3,
        "zone_control": 2
       }
@@ -15059,6 +15074,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "disengage": 2,
     "engage": 2,
     "mobility": 2,
@@ -15100,6 +15116,9 @@
     }
    },
    "evidence": {
+    "anti_dive": [
+     "CHARGE_SHIELD"
+    ],
     "disengage": [
      "DODGE"
     ],
@@ -15130,6 +15149,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "engage": 2
       },
       {
@@ -130546,6 +130566,16 @@
     },
     {
      "id": "2H_SCYTHE_HELL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_CRYSTAL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET1",
      "source": "derived:kit heal_reduction 2",
      "tier": "secondary"
     },
@@ -273054,9 +273084,9 @@
        "none": true
       },
       "mobility": {
-       "min": 3,
+       "min": 3.5,
        "scales": true,
-       "soft_cap": 9.2,
+       "soft_cap": 9.49,
        "target": 5.5
       },
       "peel": {
@@ -273092,7 +273122,7 @@
       "slow": {
        "min": 0,
        "scales": true,
-       "soft_cap": 3.45,
+       "soft_cap": 3.56,
        "target": 1
       },
       "stun": {
@@ -273126,13 +273156,6 @@
      "comps": 927,
      "ref_size": 5,
      "requirements": {
-      "anti_dive": {
-       "min": 0,
-       "optional": true,
-       "scales": false,
-       "soft_cap": 2.88,
-       "target": 2
-      },
       "cleanse": {
        "min": 0,
        "optional": true,
@@ -273187,19 +273210,18 @@
      "requirements": {
       "anti_dive": {
        "min": 0,
-       "optional": true,
        "scales": false,
-       "soft_cap": 4.6,
-       "target": 2.5
+       "soft_cap": 6.32,
+       "target": 2
       },
       "buff_allies": {
        "min": 1,
        "scales": false,
        "soft_cap": 9.2,
-       "target": 4
+       "target": 4.5
       },
       "burst_aoe": {
-       "min": 5.61,
+       "min": 5.74,
        "scales": true,
        "soft_cap": 15.55,
        "target": 9.73
@@ -273208,7 +273230,7 @@
        "min": 0,
        "scales": true,
        "soft_cap": 9.16,
-       "target": 2.4
+       "target": 2.41
       },
       "catch": {
        "min": 2.93,
@@ -273270,7 +273292,7 @@
       "heal_sustain": {
        "min": 2.9,
        "scales": true,
-       "soft_cap": 7.76,
+       "soft_cap": 8.52,
        "target": 5.08
       },
       "interrupt": {
@@ -273283,26 +273305,26 @@
        "min": 0,
        "scales": true,
        "soft_cap": 6.9,
-       "target": 2.77
+       "target": 2.92
       },
       "max_health_cut": {
        "min": 0,
        "optional": true,
        "scales": false,
        "soft_cap": 2.3,
-       "target": 2
+       "target": 1
       },
       "mobility": {
        "min": 9.35,
        "scales": true,
        "soft_cap": 19.45,
-       "target": 12.5
+       "target": 12.83
       },
       "peel": {
-       "min": 7,
+       "min": 7.06,
        "scales": true,
        "soft_cap": 23.43,
-       "target": 12.38
+       "target": 12.5
       },
       "purge": {
        "min": 0,
@@ -273336,16 +273358,16 @@
        "target": 14.83
       },
       "slow": {
-       "min": 1,
+       "min": 1.15,
        "scales": true,
-       "soft_cap": 9.06,
-       "target": 3.08
+       "soft_cap": 10.03,
+       "target": 3.52
       },
       "stun": {
        "min": 0,
        "scales": true,
        "soft_cap": 13.99,
-       "target": 3.98
+       "target": 4.25
       },
       "sustained_dps": {
        "min": 24.38,
@@ -273374,35 +273396,31 @@
    },
    "requirements": {
     "anti_dive": {
-     "min": 7.71,
-     "ramp": {
-      "full_at": 10,
-      "none_until": 7
-     },
+     "min": 0,
      "scales": false,
-     "soft_cap": 30.42,
-     "target": 7.71,
+     "soft_cap": 4.02,
+     "target": 1,
      "weight": 1.1
     },
     "buff_allies": {
      "min": 1,
      "scales": false,
-     "soft_cap": 6.32,
+     "soft_cap": 6.9,
      "target": 2.5,
      "weight": 1.5
     },
     "burst_aoe": {
      "min": 2.48,
      "scales": true,
-     "soft_cap": 11.21,
-     "target": 6.4,
+     "soft_cap": 11.33,
+     "target": 6.44,
      "weight": 6.4
     },
     "burst_st": {
      "min": 0,
      "scales": true,
-     "soft_cap": 6.46,
-     "target": 1.45,
+     "soft_cap": 6.5,
+     "target": 1.61,
      "weight": 5.8
     },
     "catch": {
@@ -273488,7 +273506,7 @@
     "heal_sustain": {
      "min": 2.9,
      "scales": true,
-     "soft_cap": 6.25,
+     "soft_cap": 7.3,
      "target": 4.35,
      "weight": 13
     },
@@ -273525,14 +273543,14 @@
      "min": 6,
      "scales": true,
      "soft_cap": 13.8,
-     "target": 8.5,
+     "target": 8.75,
      "weight": 7.4
     },
     "peel": {
-     "min": 4,
+     "min": 4.25,
      "scales": true,
      "soft_cap": 12.94,
-     "target": 7.75,
+     "target": 8,
      "weight": 7.4
     },
     "purge": {
@@ -273577,15 +273595,15 @@
     "slow": {
      "min": 0,
      "scales": true,
-     "soft_cap": 5.67,
-     "target": 2.5,
+     "soft_cap": 6.04,
+     "target": 2.63,
      "weight": 1
     },
     "stun": {
      "min": 0,
      "scales": true,
      "soft_cap": 10.56,
-     "target": 1.65,
+     "target": 2.06,
      "weight": 4.4
     },
     "sustained_dps": {
@@ -275127,6 +275145,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_aoe": 4,
     "cleanse": 4,
@@ -275140,6 +275159,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Astral Staff",
    "evidence": {
+    "anti_dive": [
+     "SHIELDFRIENDLY"
+    ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
@@ -275222,6 +275244,7 @@
        "silence": 2
       },
       {
+       "anti_dive": 2,
        "peel": 2
       }
      ]
@@ -275308,6 +275331,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "cleanse": 4,
     "engage": 4,
@@ -275322,6 +275346,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Occult Staff",
    "evidence": {
+    "anti_dive": [
+     "SHIELDFRIENDLY"
+    ],
     "buff_allies": [
      "ARCANECORRIDOR"
     ],
@@ -275408,6 +275435,7 @@
        "silence": 2
       },
       {
+       "anti_dive": 2,
        "peel": 2
       }
      ],
@@ -275515,6 +275543,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_aoe": 2,
     "cleanse": 4,
@@ -275531,6 +275560,9 @@
    "curated_as_of": "2026-08-25",
    "display_name": "Evensong",
    "evidence": {
+    "anti_dive": [
+     "SHIELDFRIENDLY"
+    ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
@@ -275628,6 +275660,7 @@
        "silence": 2
       },
       {
+       "anti_dive": 2,
        "peel": 2
       }
      ],
@@ -280423,15 +280456,19 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "heal_burst": 4,
     "heal_sustain": 4,
     "peel": 2
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Divine Staff",
    "evidence": {
+    "anti_dive": [
+     "HOLYSHIELD"
+    ],
     "buff_allies": [
      "HOLYSHIELD"
     ],
@@ -280475,6 +280512,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 4,
        "heal_burst": 4
       }
@@ -281890,6 +281928,11 @@
   },
   "2H_DUALMACE_AVALON": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 20,
      "radius": 1.25,
@@ -281928,6 +281971,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "engage": 2,
     "heal_sustain": 2,
@@ -281942,6 +281986,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Oathkeepers",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "BLESSED_MACES",
      "DEFENSIVESLAM"
@@ -282019,6 +282066,7 @@
        "root": 5
       },
       {
+       "anti_dive": 2,
        "peel": 4
       }
      ],
@@ -282692,6 +282740,10 @@
   },
   "2H_ENIGMATICORB_MORGANA": {
    "cap_delivery": {
+    "anti_dive": {
+     "radius": 2.0,
+     "spell": "VOID"
+    },
     "cleanse": {
      "radius": 2.0,
      "spell": "VOID"
@@ -282710,6 +282762,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "cleanse": 4,
     "peel": 2,
@@ -282718,9 +282771,12 @@
     "sustained_dps": 2
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Malevolent Locus",
    "evidence": {
+    "anti_dive": [
+     "VOID"
+    ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
@@ -282777,6 +282833,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "cleanse": 4,
        "peel": 2
       }
@@ -282851,6 +282908,10 @@
   },
   "2H_ENIGMATICSTAFF": {
    "cap_delivery": {
+    "anti_dive": {
+     "radius": 6.5,
+     "spell": "INVULNERABILITY"
+    },
     "buff_allies": {
      "radius": 6.5,
      "spell": "INVULNERABILITY"
@@ -282870,6 +282931,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 4,
     "buff_allies": 4,
     "cleanse": 4,
     "peel": 2,
@@ -282878,9 +282940,12 @@
     "sustained_dps": 2
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Enigmatic Staff",
    "evidence": {
+    "anti_dive": [
+     "INVULNERABILITY"
+    ],
     "buff_allies": [
      "INVULNERABILITY"
     ],
@@ -282908,8 +282973,8 @@
     "seat": "shield_support",
     "source": "derived:menu functions + sheet (E-first)",
     "tags": [
-     "buffs",
-     "cleanse"
+     "anti-dive",
+     "buffs"
     ]
    },
    "loadout": {
@@ -282939,6 +283004,7 @@
     "slots": [
      [
       {
+       "anti_dive": 4,
        "buff_allies": 4
       }
      ],
@@ -283530,6 +283596,11 @@
   },
   "2H_FLAIL": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -283569,6 +283640,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "catch": 4,
     "engage": 4,
@@ -283584,6 +283656,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Morning Star",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -283642,7 +283717,8 @@
       "ROOTFIELD"
      ],
      [
-      "CHARGE_ROOT"
+      "CHARGE_ROOT",
+      "GUARDRUNE"
      ],
      [
       "SACRED_GROUND",
@@ -283662,6 +283738,9 @@
      [
       {
        "interrupt": 2
+      },
+      {
+       "anti_dive": 2
       }
      ],
      [
@@ -286478,6 +286557,11 @@
   },
   "2H_HOLYSTAFF": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "HOLYEXPLOSION"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 7.0,
@@ -286505,6 +286589,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "heal_burst": 4,
     "heal_sustain": 6,
@@ -286515,6 +286600,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Great Holy Staff",
    "evidence": {
+    "anti_dive": [
+     "HOLYEXPLOSION"
+    ],
     "buff_allies": [
      "HOLYEXPLOSION"
     ],
@@ -286559,6 +286647,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 4,
        "heal_sustain": 6,
        "knockback_displace": 2,
@@ -286764,6 +286853,11 @@
   },
   "2H_HOLYSTAFF_HELL": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 20,
+     "radius": 5.5,
+     "spell": "HOLY_ULTIMATE"
+    },
     "cleanse": {
      "max_targets": 20,
      "radius": 5.5,
@@ -286781,6 +286875,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 4,
     "buff_allies": 2,
     "cleanse": 4,
     "heal_burst": 6,
@@ -286788,9 +286883,12 @@
     "peel": 4
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Fallen Staff",
    "evidence": {
+    "anti_dive": [
+     "HOLY_ULTIMATE"
+    ],
     "buff_allies": [
      "HOLYHOT"
     ],
@@ -286836,6 +286934,7 @@
     "slots": [
      [
       {
+       "anti_dive": 4,
        "cleanse": 4,
        "heal_burst": 6,
        "peel": 4
@@ -290578,6 +290677,11 @@
   },
   "2H_MACE": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -290622,6 +290726,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "engage": 4,
     "interrupt": 2,
@@ -290636,6 +290741,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Mace",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -290691,7 +290799,8 @@
       "SHRIEKMACE"
      ],
      [
-      "CHARGE_ROOT"
+      "CHARGE_ROOT",
+      "GUARDRUNE"
      ],
      [
       "SACRED_GROUND",
@@ -290710,6 +290819,9 @@
       {
        "engage": 4,
        "interrupt": 2
+      },
+      {
+       "anti_dive": 2
       }
      ],
      [
@@ -290772,6 +290884,11 @@
   },
   "2H_MACE_MORGANA": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -290831,6 +290948,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "catch": 2,
     "clump_create": 6,
@@ -290847,6 +290965,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Camlann Mace",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -290931,6 +291052,7 @@
        "root": 5
       },
       {
+       "anti_dive": 2,
        "peel": 4
       }
      ],
@@ -293422,8 +293544,9 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
-    "burst_aoe": 4,
+    "burst_aoe": 5,
     "catch": 2,
     "clump_create": 2,
     "disengage": 4,
@@ -293437,9 +293560,12 @@
     "zone_control": 2
    },
    "cost_tier": "avalonian",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Lightcaller",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -293514,13 +293640,14 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
+      "SHAPE_W_TETHERBEAM",
       "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
      [
       {
-       "burst_aoe": 4,
+       "burst_aoe": 5,
        "disengage": 4,
        "engage": 2,
        "mobility": 4
@@ -293548,6 +293675,9 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "anti_dive": 2
       },
       {
        "peel": 2
@@ -293670,23 +293800,30 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_st": 4,
     "catch": 2,
     "clump_create": 2,
+    "damage_debuff": 2,
     "disengage": 2,
+    "heal_reduction": 2,
     "mobility": 2,
     "peel": 2,
     "resist_shred": 2,
     "root": 2,
     "self_sustain": 2,
     "slow": 2,
+    "stun": 4,
     "zone_control": 2
    },
    "cost_tier": "crystal",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Stillgaze Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -293699,7 +293836,13 @@
     "clump_create": [
      "SHAPE_W_AREA_PULL"
     ],
+    "damage_debuff": [
+     "SHAPESHIFT_CRYSTAL_COBRA"
+    ],
     "disengage": [
+     "SHAPESHIFT_CRYSTAL_COBRA"
+    ],
+    "heal_reduction": [
      "SHAPESHIFT_CRYSTAL_COBRA"
     ],
     "mobility": [
@@ -293720,6 +293863,9 @@
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
     ],
+    "stun": [
+     "SHAPESHIFT_CRYSTAL_COBRA"
+    ],
     "zone_control": [
      "SHAPE_W_DAMAGE_AOE"
     ]
@@ -293732,6 +293878,7 @@
     "seat": "stopper_tank",
     "source": "derived:menu functions + sheet (E-first)",
     "tags": [
+     "stun",
      "single burst"
     ]
    },
@@ -293757,6 +293904,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
+      "SHAPE_W_TETHERBEAM",
       "SHAPE_W_POLYMORPH"
      ]
     ],
@@ -293764,8 +293912,11 @@
      [
       {
        "burst_st": 4,
+       "damage_debuff": 2,
        "disengage": 2,
-       "mobility": 2
+       "heal_reduction": 2,
+       "mobility": 2,
+       "stun": 4
       }
      ],
      [
@@ -293792,6 +293943,9 @@
        "zone_control": 2
       },
       {
+       "anti_dive": 2
+      },
+      {
        "peel": 2
       }
      ]
@@ -293804,7 +293958,8 @@
     "stopper_tank"
    ],
    "role_menu_secondary": [
-    "pierce"
+    "pierce",
+    "anti_heal"
    ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -293913,8 +294068,10 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_aoe": 4,
+    "burst_st": 2,
     "catch": 2,
     "clump_create": 2,
     "mobility": 2,
@@ -293926,13 +294083,19 @@
     "zone_control": 2
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Hellspawn Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
     "burst_aoe": [
+     "SHAPESHIFT_IMP"
+    ],
+    "burst_st": [
      "SHAPESHIFT_IMP"
     ],
     "catch": [
@@ -293942,7 +294105,7 @@
      "SHAPE_W_AREA_PULL"
     ],
     "mobility": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPESHIFT_IMP"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -294000,6 +294163,8 @@
      [
       {
        "burst_aoe": 4,
+       "burst_st": 2,
+       "mobility": 2,
        "self_sustain": 4
       }
      ],
@@ -294022,7 +294187,7 @@
        "zone_control": 2
       },
       {
-       "mobility": 2
+       "anti_dive": 2
       },
       {
        "peel": 2
@@ -294096,14 +294261,6 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
-    "clump_create": {
-     "escalation": {
-      "value": 0.08
-     },
-     "max_targets": 5,
-     "radius": 6.0,
-     "spell": "SHAPE_W_AREA_PULL"
-    },
     "peel": {
      "escalation": {
       "value": 0.08
@@ -294145,22 +294302,29 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "catch": 2,
     "clump_create": 2,
     "engage": 2,
+    "knockback_displace": 2,
+    "max_health_cut": 2,
     "peel": 2,
     "resist_shred": 2,
     "root": 2,
     "self_sustain": 4,
     "slow": 2,
+    "stun": 4,
     "tankiness": 6,
     "zone_control": 2
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Earthrune Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -294168,9 +294332,15 @@
      "SHAPE_W_AREA_PULL"
     ],
     "clump_create": [
-     "SHAPE_W_AREA_PULL"
+     "SHAPESHIFT_ROCK_ELEMENTAL"
     ],
     "engage": [
+     "SHAPESHIFT_ROCK_ELEMENTAL"
+    ],
+    "knockback_displace": [
+     "SHAPESHIFT_ROCK_ELEMENTAL"
+    ],
+    "max_health_cut": [
      "SHAPESHIFT_ROCK_ELEMENTAL"
     ],
     "peel": [
@@ -294188,6 +294358,9 @@
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
     ],
+    "stun": [
+     "SHAPESHIFT_ROCK_ELEMENTAL"
+    ],
     "tankiness": [
      "SHAPESHIFT_ROCK_ELEMENTAL"
     ],
@@ -294203,6 +294376,7 @@
     "seat": "engage_tank",
     "source": "derived:menu functions + sheet (E-first)",
     "tags": [
+     "stun",
      "self-sustain"
     ]
    },
@@ -294224,14 +294398,19 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
+      "SHAPE_W_TETHERBEAM",
       "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
      [
       {
+       "clump_create": 2,
        "engage": 2,
+       "knockback_displace": 2,
+       "max_health_cut": 2,
        "self_sustain": 4,
+       "stun": 4,
        "tankiness": 6
       }
      ],
@@ -294246,12 +294425,14 @@
      [
       {
        "catch": 2,
-       "clump_create": 2,
        "root": 2
       },
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "anti_dive": 2
       },
       {
        "peel": 2
@@ -294367,6 +294548,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_st": 4,
     "catch": 4,
@@ -294383,6 +294565,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodmoon Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -294447,6 +294632,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
+      "SHAPE_W_TETHERBEAM",
       "SHAPE_W_POLYMORPH"
      ]
     ],
@@ -294475,6 +294661,9 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "anti_dive": 2
       },
       {
        "peel": 2
@@ -294590,6 +294779,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_st": 4,
     "catch": 2,
@@ -294597,6 +294787,7 @@
     "disengage": 4,
     "engage": 4,
     "execute": 2,
+    "heal_reduction": 2,
     "mobility": 2,
     "peel": 2,
     "resist_shred": 2,
@@ -294605,9 +294796,12 @@
     "slow": 2
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Prowling Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -294629,8 +294823,11 @@
     "execute": [
      "SHAPESHIFT_PANTHER"
     ],
+    "heal_reduction": [
+     "SHAPESHIFT_PANTHER"
+    ],
     "mobility": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPESHIFT_PANTHER"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -294692,7 +294889,9 @@
        "burst_st": 4,
        "disengage": 4,
        "engage": 4,
-       "execute": 2
+       "execute": 2,
+       "heal_reduction": 2,
+       "mobility": 2
       }
      ],
      [
@@ -294718,7 +294917,7 @@
        "slow": 2
       },
       {
-       "mobility": 2
+       "anti_dive": 2
       },
       {
        "peel": 2
@@ -294733,7 +294932,8 @@
     "dive_cleanup"
    ],
    "role_menu_secondary": [
-    "pierce"
+    "pierce",
+    "anti_heal"
    ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -294793,14 +294993,6 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
-    "peel": {
-     "escalation": {
-      "value": 0.08
-     },
-     "max_targets": 1,
-     "radius": 4.0,
-     "spell": "SHAPE_W_POLYMORPH"
-    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -294816,14 +295008,6 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
-    "slow": {
-     "escalation": {
-      "value": 0.08
-     },
-     "max_targets": 2,
-     "radius": 4.0,
-     "spell": "SHAPE_W_DAMAGE_AOE"
-    },
     "zone_control": {
      "escalation": {
       "value": 0.08
@@ -294834,10 +295018,11 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "catch": 2,
     "clump_create": 2,
-    "heal_sustain": 2,
+    "heal_sustain": 4,
     "mobility": 2,
     "peel": 2,
     "resist_shred": 2,
@@ -294847,9 +295032,12 @@
     "zone_control": 2
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Rootbound Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPESHIFT_ENT"
+    ],
     "buff_allies": [
      "SHAPESHIFT_ENT"
     ],
@@ -294866,7 +295054,7 @@
      "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPE_W_POLYMORPH"
+     "SHAPESHIFT_ENT"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -294878,21 +295066,22 @@
      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
-     "SHAPE_W_DAMAGE_AOE"
+     "SHAPESHIFT_ENT"
     ],
     "zone_control": [
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
    "full_healer": false,
-   "heal_scale": "single",
+   "heal_scale": "group",
    "in_game_data": true,
    "label": {
     "primary": "Support",
     "seat": "shield_support",
     "source": "derived:menu functions + sheet (E-first)",
     "tags": [
-     "buffs"
+     "buffs",
+     "sustain heal"
     ]
    },
    "loadout": {
@@ -294916,15 +295105,17 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM",
-      "SHAPE_W_POLYMORPH"
+      "SHAPE_W_TETHERBEAM"
      ]
     ],
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 4,
-       "heal_sustain": 2
+       "heal_sustain": 4,
+       "peel": 2,
+       "slow": 2
       }
      ],
      [
@@ -294944,14 +295135,10 @@
        "root": 2
       },
       {
-       "slow": 2,
        "zone_control": 2
       },
       {
        "mobility": 2
-      },
-      {
-       "peel": 2
       }
      ]
     ]
@@ -295030,21 +295217,6 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
-    "peel": {
-     "escalation": {
-      "value": 0.08
-     },
-     "max_targets": 1,
-     "radius": 4.0,
-     "spell": "SHAPE_W_POLYMORPH"
-    },
-    "resist_shred": {
-     "escalation": {
-      "value": 0.08
-     },
-     "max_targets": 2,
-     "spell": "SHAPE_Q_CONE_MELEE"
-    },
     "root": {
      "escalation": {
       "value": 0.08
@@ -295071,23 +295243,29 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_aoe": 2,
     "catch": 2,
     "clump_create": 2,
+    "mobility": 2,
     "peel": 2,
     "resist_shred": 2,
     "root": 2,
     "self_sustain": 2,
     "slow": 2,
+    "stun": 2,
     "sustained_dps": 2,
     "tankiness": 4,
     "zone_control": 2
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-04",
    "display_name": "Primal Staff",
    "evidence": {
+    "anti_dive": [
+     "SHAPE_W_TETHERBEAM"
+    ],
     "buff_allies": [
      "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
@@ -295100,11 +295278,14 @@
     "clump_create": [
      "SHAPE_W_AREA_PULL"
     ],
+    "mobility": [
+     "SHAPESHIFT_BEAR"
+    ],
     "peel": [
-     "SHAPE_W_POLYMORPH"
+     "SHAPESHIFT_BEAR"
     ],
     "resist_shred": [
-     "SHAPE_Q_CONE_MELEE"
+     "SHAPESHIFT_BEAR"
     ],
     "root": [
      "SHAPE_W_AREA_PULL"
@@ -295114,6 +295295,9 @@
     ],
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
+    ],
+    "stun": [
+     "SHAPESHIFT_BEAR"
     ],
     "sustained_dps": [
      "SHAPESHIFT_BEAR"
@@ -295148,27 +295332,27 @@
       "SHAPESHIFT_BEAR"
      ],
      [
-      "SHAPE_Q_CONE_MELEE",
       "SHAPE_Q_DAMAGE_AND_SHIELD"
      ],
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_POLYMORPH"
+      "SHAPE_W_TETHERBEAM"
      ]
     ],
     "slots": [
      [
       {
        "burst_aoe": 2,
+       "mobility": 2,
+       "peel": 2,
+       "resist_shred": 2,
        "self_sustain": 2,
+       "stun": 2,
        "sustained_dps": 2
       }
      ],
      [
-      {
-       "resist_shred": 2
-      },
       {
        "buff_allies": 2
       }
@@ -295184,7 +295368,7 @@
        "zone_control": 2
       },
       {
-       "peel": 2
+       "anti_dive": 2
       }
      ]
     ]
@@ -296682,6 +296866,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "burst_st": 2,
     "cleanse": 4,
@@ -296695,6 +296880,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Arcane Staff",
    "evidence": {
+    "anti_dive": [
+     "SHIELDFRIENDLY"
+    ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
@@ -296782,6 +296970,7 @@
      ],
      [
       {
+       "anti_dive": 2,
        "peel": 2
       }
      ]
@@ -296888,6 +297077,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "burst_aoe": 4,
     "catch": 2,
@@ -296905,6 +297095,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Witchwork Staff",
    "evidence": {
+    "anti_dive": [
+     "SHIELDFRIENDLY"
+    ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
@@ -297003,6 +297196,7 @@
      ],
      [
       {
+       "anti_dive": 2,
        "peel": 4
       },
       {
@@ -299236,6 +299430,13 @@
   },
   "MAIN_FROSTSTAFF_AVALON": {
    "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "FROZEN_CRYSTAL"
+    },
     "buff_allies": {
      "escalation": {
       "duration": 0.08,
@@ -299299,6 +299500,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 2,
     "catch": 2,
     "disengage": 2,
@@ -299313,6 +299515,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Chillhowl",
    "evidence": {
+    "anti_dive": [
+     "FROZEN_CRYSTAL"
+    ],
     "buff_allies": [
      "ICE_SCULPTURE"
     ],
@@ -299378,6 +299583,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "peel": 4
       },
       {
@@ -300327,6 +300533,11 @@
   },
   "MAIN_MACE": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -300359,6 +300570,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "engage": 4,
     "interrupt": 2,
@@ -300372,6 +300584,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Mace",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -300445,6 +300660,7 @@
        "root": 5
       },
       {
+       "anti_dive": 2,
        "peel": 4
       }
      ],
@@ -300504,6 +300720,11 @@
   },
   "MAIN_MACE_CRYSTAL": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -300563,6 +300784,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "burst_aoe": 2,
     "catch": 4,
@@ -300579,6 +300801,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Dreadstorm Monarch",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -300664,6 +300889,7 @@
        "root": 5
       },
       {
+       "anti_dive": 2,
        "peel": 4
       }
      ],
@@ -300723,6 +300949,11 @@
   },
   "MAIN_MACE_HELL": {
    "cap_delivery": {
+    "anti_dive": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
     "buff_allies": {
      "max_targets": 10,
      "radius": 8.0,
@@ -300779,6 +301010,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 3,
     "burst_st": 2,
     "damage_debuff": 4,
@@ -300796,6 +301028,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Incubus Mace",
    "evidence": {
+    "anti_dive": [
+     "GUARDRUNE"
+    ],
     "buff_allies": [
      "DEFENSIVESLAM"
     ],
@@ -300884,6 +301119,7 @@
        "root": 5
       },
       {
+       "anti_dive": 2,
        "peel": 4
       }
      ],
@@ -301192,6 +301428,7 @@
     }
    },
    "capabilities": {
+    "anti_dive": 2,
     "buff_allies": 4,
     "cleanse": 4,
     "heal_burst": 2,
@@ -301205,6 +301442,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Ironroot Staff",
    "evidence": {
+    "anti_dive": [
+     "SOUL_LINK"
+    ],
     "buff_allies": [
      "SOUL_LINK",
      "NATURERESILIENCE"
@@ -301268,6 +301508,7 @@
     "slots": [
      [
       {
+       "anti_dive": 2,
        "buff_allies": 4,
        "heal_sustain": 4
       }

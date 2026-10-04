@@ -9,6 +9,7 @@
   # deliberate non-takes of tree-pool spells (see sheets/pools/arcanestaff.yaml)
   except:
     - {cap: peel, evidence: SHIELDFRIENDLY}
+    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: stun,         score: 4, evidence: TIME_FREEZE}    # E: 2.5s AoE stasis, ignores CC resistance
     - {cap: peel,         score: 4, evidence: TIME_FREEZE}    # freeze the dive (targets are damage-immune too)
@@ -48,24 +49,31 @@
     - {cap: damage_debuff, score: 2, evidence: ARCANE_METEOR}  # Dark Aura: -15% damage dealt around 3 enemies, stacks 3x
 
 - weapon: 2H_ENIGMATICORB_MORGANA    # Malevolent Locus — the cleanse bubble
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-04
   role_hint: support
   # deliberate non-takes of tree-pool spells (see sheets/pools/arcanestaff.yaml)
   except:
     - {cap: cleanse, evidence: CLEANSESPEED2}
     - {cap: peel, evidence: SHIELDFRIENDLY}
+    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: cleanse,      score: 4, evidence: VOID}           # E: growing bubble, CONTINUOUS group cleanse
     - {cap: peel,         score: 2, evidence: VOID}           # divers lose their CC inside it
+    - {cap: anti_dive,    score: 2, evidence: VOID}           # the bubble is a protective zone for the allies inside: +30% damage
+                                                              # resistances beside the cleanse (the anti-dive rule, via override)
 
 - weapon: 2H_ENIGMATICSTAFF          # Enigmatic Staff — the bubble-shield support
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-04
   role_hint: support
   # deliberate non-takes of tree-pool spells (see sheets/pools/arcanestaff.yaml)
   except:
     - {cap: buff_allies, evidence: EMPOWERBEAM}
+    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: INVULNERABILITY}  # E: refreshing 240 absorb bubble (via override)
+    - {cap: anti_dive,    score: 4, evidence: INVULNERABILITY}  # the bubble is cast from 14m onto the dived ally and re-applies
+                                                                # every second in 6.5m around them: the dive loses its kill
+                                                                # (the anti-dive rule, via override)
 
 - weapon: MAIN_ARCANESTAFF           # Arcane Staff (1H) — the purge orb
   curated_as_of: 2026-08-12

@@ -29,5 +29,6 @@
     - {cap: knockback_displace, score: 2, evidence: HOLYEXPLOSION}  # E: 10m AoE, ignores CC resistance — but self-centred: only matters when enemies are already on top, never an engage tool (curation judgment; was 4)
     - {cap: peel,         score: 4, evidence: HOLYEXPLOSION}   # the shove clears divers off the party — the E's real job
     - {cap: buff_allies,  score: 4, evidence: HOLYEXPLOSION}   # E: +16% ally resistances; W: Holy Blessing
+    - {cap: anti_dive,    score: 2, evidence: HOLYEXPLOSION}   # the channel is an aura on the party: divers shoved 10m off it, allies' resistances up (the anti-dive rule)
     # NO cleanse (settled holy finding). NO mobility — stationary anchor,
     # the deliberate contrast with Hallowfall.

@@ -1779,6 +1779,82 @@ def run():
           set(f7) <= listed7 and not (off7 & set(names7)) and r7c.count("healer") == 1,
           f"seven={names7} roles={r7c}")
 
+    # T52 — a transform's form abilities score on the E, and anti_dive
+    # counts a protection placed on another ally (tests/VALIDATION.md, the
+    # anti-dive rule). Recorded on a Dragon Portal seven (Polehammer,
+    # Rootbound, Enigmatic, Realmbreaker, Dawnsong, Mistpiercer,
+    # Redemption) whose two supports read anti-dive 0 and whose Rootbound
+    # read one unit of sustained healing: the Sylvian form's Seedling's
+    # Bloom and Barbed Roots sit on no equip menu and had no sheet row.
+    e7p = Engine(content="ancient_lands", size=7)
+    seven = ["2H_POLEHAMMER", "2H_SHAPESHIFTER_SET2", "2H_ENIGMATICSTAFF",
+             "2H_AXE_AVALON", "2H_FIRE_RINGPAIR_AVALON", "2H_BOW_AVALON",
+             "2H_HOLYSTAFF_UNDEAD"]
+
+    def _e_bundle(w):
+        lo = e7p.weapons[w]["loadout"]
+        return lo["slots"][lo["slot_names"].index("e")][0]
+    root_e, enig_e = _e_bundle("2H_SHAPESHIFTER_SET2"), _e_bundle("2H_ENIGMATICSTAFF")
+    dive7 = e7p.effective_supply(seven).get("anti_dive", 0.0)
+    check("T52 form abilities score on the E and ally protection grounds anti-dive: "
+          "Rootbound's E carries sustained heal 4, peel 2, slow 2 and anti-dive 2, "
+          "Enigmatic's bubble anti-dive 4; neither becomes a full healer and the "
+          "seven's weapons alone supply 3.0 anti-dive units",
+          root_e.get("heal_sustain") == 4 and root_e.get("peel") == 2
+          and root_e.get("slow") == 2 and root_e.get("anti_dive") == 2
+          and "cleanse" not in root_e and enig_e.get("anti_dive") == 4
+          and not e7p.weapons["2H_SHAPESHIFTER_SET2"].get("full_healer")
+          and not e7p.weapons["2H_ENIGMATICSTAFF"].get("full_healer")
+          and abs(dive7 - 3.0) < 1e-9,
+          f"rootbound E={root_e} enigmatic E={enig_e} anti_dive={dive7:.2f}")
+
+    # T53 — the graded form abilities of the other shapeshifter staves, and
+    # the ally-protection class under the anti-dive rule: a shield, a damage
+    # immunity or a redirection placed on another ally, and a protective
+    # zone or aura (tests/VALIDATION.md, Form abilities and ally protection
+    # graded). A capability the E carries leaves the tree pool's Q/W row.
+    def _bundles(w, spell):
+        lo = e7p.weapons[w]["loadout"]
+        return [b for sl, sp in zip(lo["slots"], lo["slot_spells"])
+                for b, s in zip(sl, sp) if s == spell]
+
+    def _has(w, spell, **caps):
+        return any(all(b.get(c) == v for c, v in caps.items())
+                   for b in _bundles(w, spell))
+    forms_ok = (
+        _has("2H_SHAPESHIFTER_KEEPER", "SHAPESHIFT_ROCK_ELEMENTAL", stun=4,
+             clump_create=2, knockback_displace=2, max_health_cut=2)
+        and _has("2H_SHAPESHIFTER_CRYSTAL", "SHAPESHIFT_CRYSTAL_COBRA", stun=4,
+                 heal_reduction=2, damage_debuff=2)
+        and _has("2H_SHAPESHIFTER_SET3", "SHAPESHIFT_BEAR", stun=2,
+                 resist_shred=2, mobility=2, peel=2)
+        and _has("2H_SHAPESHIFTER_SET1", "SHAPESHIFT_PANTHER", heal_reduction=2,
+                 mobility=2)
+        and _has("2H_SHAPESHIFTER_HELL", "SHAPESHIFT_IMP", mobility=2, burst_st=2)
+        and _has("2H_SHAPESHIFTER_AVALON", "SHAPESHIFT_AVALONIAN_EAGLE", burst_aoe=5))
+    protect_ok = (
+        _has("2H_HOLYSTAFF_HELL", "HOLY_ULTIMATE", anti_dive=4)
+        and _has("2H_DIVINESTAFF", "HOLYSHIELD", anti_dive=2)
+        and _has("MAIN_FROSTSTAFF_AVALON", "FROZEN_CRYSTAL", anti_dive=2, peel=4)
+        and _has("MAIN_ARCANESTAFF", "SHIELDFRIENDLY", anti_dive=2)
+        and _has("2H_SHAPESHIFTER_SET1", "SHAPE_W_TETHERBEAM", anti_dive=2)
+        and e7p.gear["SHOES_PLATE_SET2"]["capabilities"].get("anti_dive") == 2)
+    zones_ok = (
+        _has("MAIN_MACE", "GUARDRUNE", anti_dive=2)
+        and _has("2H_ENIGMATICORB_MORGANA", "VOID", anti_dive=2)
+        and _has("2H_HOLYSTAFF", "HOLYEXPLOSION", anti_dive=2)
+        and e7p.gear["ARMOR_PLATE_KEEPER"]["capabilities"].get("anti_dive") == 2
+        and e7p.gear["ARMOR_PLATE_HELL"]["capabilities"].get("anti_dive") == 2)
+    one_slot = (
+        not any("anti_dive" in b for b in _bundles("MAIN_ROCKMACE_KEEPER", "GUARDRUNE"))
+        and not any("anti_dive" in b for b in _bundles("2H_ENIGMATICSTAFF", "SHIELDFRIENDLY"))
+        and not any("anti_dive" in b for b in _bundles("2H_SHAPESHIFTER_SET2", "SHAPE_W_TETHERBEAM")))
+    check("T53 graded form abilities sit on each staff's E; a shield, immunity or "
+          "redirection on another ally and a protective zone or aura supply anti-dive; "
+          "a weapon whose E holds anti-dive takes none from its tree pool",
+          forms_ok and protect_ok and zones_ok and one_slot,
+          f"forms={forms_ok} protection={protect_ok} zones={zones_ok} one_slot={one_slot}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

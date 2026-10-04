@@ -1,22 +1,40 @@
-# Rootbound Staff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Rootbound Staff — curated from ao-bin-dumps spell text (curate_helper.py)
+# and the Sylvian form's own ability text (audit_form_abilities.py).
 # Usage: 4 sightings, dominant role: support. Second support-class weapon.
 #
 # Identity: group-sustain shapeshifter. The E (Sylvian Transformation) grants
-# up to +8% Max AND Current Health to allies in 11m on transform (Growth) and
-# the Sylvian form carries the weapon's healing output — form abilities are
-# the payload, per the Hellspawn precedent. Shares the shapeshifter Q/W pool
-# with Hellspawn; QW-conditional scores mirror that sheet.
-# heal_sustain held at 1: the DESCRIBED evidence is the current-health grant;
-# the form's healing abilities are not separately equippable text. Raise it
-# if Sylvian healing throughput reads stronger in practice.
+# up to +8% Max AND Current Health to allies in 11m on transform (Growth).
+# The form's two abilities are the payload and are scored on the E (form
+# abilities sit on no equip menu; the Hellspawn precedent):
+#   Seedling's Bloom — a ground heal zone cast at 12m on a 3s cooldown:
+#     allies inside heal every second for 8s (7 a tick; 14 a tick and +10%
+#     Max and Current Health in the grown Bloom a Shift Charge buys).
+#   Barbed Roots — a 3s uninterruptible, damage-immune channel on a 30s
+#     cooldown (three Shift Charges, castable while stunned or silenced):
+#     allies within 11m gain a 175 absorb shield and Forced Movement
+#     immunity for 3s; enemies within 11m are slowed by 50% and take 44
+#     every 0.7s. The live description carries no cleanse (the ability's
+#     retired text did).
+# Shares the shapeshifter Q/W pool with Hellspawn; QW-conditional scores
+# mirror that sheet.
 
 - weapon: 2H_SHAPESHIFTER_SET2       # Rootbound Staff — group-sustain shapeshifter
-  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  curated_as_of: 2026-10-04   # staleness check vs out/patch_history.json
   role_hint: support
   # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  # peel, slow and anti_dive sit on the E (Barbed Roots): one slot per capability
   except:
     - {cap: buff_allies, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}
+    - {cap: peel, evidence: SHAPE_W_POLYMORPH}
+    - {cap: slow, evidence: SHAPE_W_DAMAGE_AOE}
+    - {cap: anti_dive, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: buff_allies,   score: 4, evidence: SHAPESHIFT_ENT}   # E: Growth +8% Max/Current HP, 11m (via override);
+                                                                 # Barbed Roots: 175 absorb on allies in 11m;
                                                                  # Q: Adapting Matter ally shields
-    - {cap: heal_sustain,  score: 2, evidence: SHAPESHIFT_ENT}   # the Current-Health grant; form heals beyond it
+    - {cap: heal_sustain,  score: 4, evidence: SHAPESHIFT_ENT}   # Seedling's Bloom: 8s heal zone on a 3s cooldown,
+                                                                 # +10% Max/Current HP grown; Growth's Current-Health grant
+    - {cap: peel,          score: 2, evidence: SHAPESHIFT_ENT}   # Barbed Roots: Forced Movement immunity for allies in 11m (via override)
+    - {cap: slow,          score: 2, evidence: SHAPESHIFT_ENT}   # Barbed Roots: -50% on enemies in 11m for the 3s channel (via override)
+    - {cap: anti_dive,     score: 2, evidence: SHAPESHIFT_ENT}   # Barbed Roots: the shield lands on the dived allies and the
+                                                                 # slow on the divers standing among them (via override)

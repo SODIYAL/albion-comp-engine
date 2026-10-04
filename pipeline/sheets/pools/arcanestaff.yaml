@@ -13,3 +13,4 @@ capabilities:
   - {cap: silence, score: 2, evidence: MAGICSHOCK}                            # (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave
   - {cap: peel, score: 2, evidence: SHIELDFRIENDLY}                           # (QW)
+  - {cap: anti_dive, score: 2, evidence: SHIELDFRIENDLY}                      # Q: 300 absorb for 2s on the targeted ally (the anti-dive rule)

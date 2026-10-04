@@ -107,6 +107,11 @@ def worksheet(key, width=104):
             desc = " ".join((sp.get("description") or "").split())
             for i in range(0, min(len(desc), 260), 92):
                 print(f"      | {desc[i:i+92]}")
+    if line.get("subcategory") == "shapeshifterstaff":
+        # the E transforms the wielder: the form's abilities sit on no
+        # equip menu, so the slots above do not carry them
+        print("\n  [FORM]  the form's abilities are scored on the E and are not "
+              "listed above:\n          py -3 pipeline/audit_form_abilities.py")
     rows = [(p["date"], s) for p in PATCHES for s in p["spells"]
             if key in s["lines"] and s.get("balance_relevant", True)]
     cosmetic = sum(1 for p in PATCHES for s in p["spells"]

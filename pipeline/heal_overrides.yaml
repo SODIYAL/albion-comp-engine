@@ -45,3 +45,20 @@
     Redemption heal the group, which is what makes them better; blap
     fields Redemption as a core group healer.
   as_of: 2026-08-23
+
+- weapon: 2H_SHAPESHIFTER_SET2
+  spell: SHAPESHIFT_ENT
+  scale: group
+  reason: >
+    Rootbound's E transforms the wielder; its healing lands through the
+    Sylvian form: Seedling's Bloom heals allies inside a ground area and
+    Growth raises the Current Health of allies around the wielder. The
+    form's abilities sit on no equip menu, so the dumps surface the
+    transform's cast facts (self, no area) and the structural rule
+    misreads the heal as single-ally.
+  source: >
+    ao-bin-dumps at the pinned snapshot: ENT_HEAL_AREA spelleffectarea
+    (circle radius 3, grown to 6, maxeffectareatargets 5);
+    PASSIVE_SHAPE_ENT_AURA (auraradius 11). Listed by
+    pipeline/audit_form_abilities.py.
+  as_of: 2026-10-04

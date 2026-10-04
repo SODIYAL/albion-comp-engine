@@ -239,6 +239,23 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **The style x band rows after the form-ability and anti-dive rows**: the
+  10+ rows (`templates/style_bands.yaml`) were measured on the sheets
+  before the rows added on 2026-10-04 (the shapeshifter forms; anti_dive
+  on ally shields, zones and auras, among them the Judicator Armor, Guard
+  Rune and Arcane Protection, which most comps of 10+ field).
+  `audit_style_rosters.py` reads the cache, so the rows re-derive at the
+  next fold. Until then anti_dive at 10+ reads supply on the new sheets
+  against a typical measured on the earlier ones, and reads high. The
+  content rows fitted on published comps (`refit_content_targets.py`)
+  carry the same lag. The Dragon Portal rows are re-derived (V: 10, Form
+  abilities and ally protection graded).
+- **Patch staleness cannot see a form ability**: `patch_history.py` maps
+  a changed spell to the equippable spells that reference it, and no
+  equippable spell references a form's abilities (the dumps link them in
+  a file the snapshot cache does not carry). A patch to Barbed Roots
+  raises no warning on the Rootbound sheet. The form table in
+  `audit_form_abilities.py` is the mapping `patch_history.py` needs.
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
   47 of 81 head / armor / shoes items have no vote and ASSUME their own

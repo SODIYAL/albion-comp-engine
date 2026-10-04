@@ -87,6 +87,8 @@
     # home for the same evidence; no score was moved or invented to replace it.
     - {cap: buff_allies,   score: 3, evidence: FORCESHIELD}
     - {cap: zone_control,  score: 2, evidence: FORCESHIELD}
+    - {cap: anti_dive,     score: 2, evidence: FORCESHIELD}      # a protective zone dropped on the dived allies: +25% damage
+                                                                 # resistances and Healing Received for 8s (the anti-dive rule)
 
 - gear: ARMOR_PLATE_SET2             # Knight Armor
   slot: armor
@@ -105,6 +107,8 @@
     # magicresistance-/physicalarmor- to the WEARER. Demon Armor buys the
     # group's durability with its own. Re-cited to what it actually does.
     - {cap: buff_allies,   score: 3, evidence: REFLECTAREA}      # group resistances aura (wearer pays with their own)
+    - {cap: anti_dive,     score: 2, evidence: REFLECTAREA}      # a protective aura on the allies around the wearer: +43% damage
+                                                                 # resistances, half the incoming damage reflected (the anti-dive rule)
     # THE ONLY TEAM REFLECT IN THE GAME (2026-08-28). Every other reflect in
     # the catalogue is self-only ("increasing YOUR damage resistances");
     # this one reflects 50% for the wearer AND up to 9 allies, for 6s, while

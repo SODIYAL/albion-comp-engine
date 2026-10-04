@@ -69,6 +69,7 @@
     # engine used to credit peel + catch + stun + slow simultaneously, as if
     # one E delivered the save and the catch in the same fight moment.
     - {cap: peel,          score: 4, evidence: FROZEN_CRYSTAL, use: ally_save}
+    - {cap: anti_dive,     score: 2, evidence: FROZEN_CRYSTAL, use: ally_save}     # the dived ally is frozen immune to damage for 2s (the anti-dive rule)
     - {cap: stun,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # the enemy-freeze is a 2s incapacitate
     - {cap: slow,          score: 4, evidence: FROZEN_CRYSTAL, use: enemy_control} # shatter field slow ignores CC resistance
     - {cap: catch,         score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control}

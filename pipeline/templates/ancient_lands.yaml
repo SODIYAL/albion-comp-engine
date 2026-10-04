@@ -65,16 +65,16 @@ fit: {"comps": 927, "stat": "median", "source": "harvest", "unit": "dominant kil
 st_full_value: true
 
 requirements:
-  heal_sustain:       {min: 2.9, target: 4.35, weight: 13, soft_cap: 6.25, scales: true}
+  heal_sustain:       {min: 2.9, target: 4.35, weight: 13, soft_cap: 7.3, scales: true}
   heal_burst:         {min: 1.45, target: 2.9, weight: 6.8, soft_cap: 5.17, scales: true}
   tankiness:          {min: 10.6, target: 15.22, weight: 7.9, soft_cap: 21.14, scales: true}
-  peel:               {min: 4, target: 7.75, weight: 7.4, soft_cap: 12.94, scales: true}
-  burst_st:           {min: 0, target: 1.45, weight: 5.8, soft_cap: 6.46, scales: true}
+  peel:               {min: 4.25, target: 8, weight: 7.4, soft_cap: 12.94, scales: true}
+  burst_st:           {min: 0, target: 1.61, weight: 5.8, soft_cap: 6.5, scales: true}
   sustained_dps:      {min: 17.4, target: 22.28, weight: 6.5, soft_cap: 31.56, scales: true}
-  burst_aoe:          {min: 2.48, target: 6.4, weight: 6.4, soft_cap: 11.21, scales: true}
-  mobility:           {min: 6, target: 8.5, weight: 7.4, soft_cap: 13.8, scales: true}
+  burst_aoe:          {min: 2.48, target: 6.44, weight: 6.4, soft_cap: 11.33, scales: true}
+  mobility:           {min: 6, target: 8.75, weight: 7.4, soft_cap: 13.8, scales: true}
   catch:              {min: 1, target: 3, weight: 5.9, soft_cap: 6.9, scales: true}
-  stun:               {min: 0, target: 1.65, weight: 4.4, soft_cap: 10.56, scales: true}
+  stun:               {min: 0, target: 2.06, weight: 4.4, soft_cap: 10.56, scales: true}
   self_sustain:       {min: 1, target: 3, weight: 2.9, soft_cap: 6.47, scales: true}
   engage:             {min: 2, target: 4, weight: 3.7, soft_cap: 6.9, scales: false}
   disengage:          {min: 2.5, target: 5, weight: 3.9, soft_cap: 9.77, scales: false}
@@ -86,12 +86,12 @@ requirements:
   resist_shred:       {min: 1, target: 2.5, weight: 4.3, soft_cap: 5.17, scales: false}
   clump_create:       {min: 0, target: 1, weight: 3.1, soft_cap: 2.3, ramp: {none_until: 5, full_at: 7}, scales: false}
   zone_control:       {min: 0, target: 3, weight: 1.6, soft_cap: 5.75, scales: true}
-  buff_allies:        {min: 1, target: 2.5, weight: 1.5, soft_cap: 6.32, scales: false}
+  buff_allies:        {min: 1, target: 2.5, weight: 1.5, soft_cap: 6.9, scales: false}
   damage_debuff:      {min: 1.35, target: 1.35, weight: 1.1, soft_cap: 6.57, ramp: {none_until: 7, full_at: 10}, scales: false}
-  slow:               {min: 0, target: 2.5, weight: 1, soft_cap: 5.67, scales: true}
+  slow:               {min: 0, target: 2.63, weight: 1, soft_cap: 6.04, scales: true}
   root:               {min: 0, target: 2.62, weight: 1.9, soft_cap: 5.89, scales: true}
   knockback_displace: {min: 0, target: 1.75, weight: 0.2, soft_cap: 5.17, scales: true}
-  anti_dive:          {min: 7.71, target: 7.71, weight: 1.1, soft_cap: 30.42, ramp: {none_until: 7, full_at: 10}, scales: false}
+  anti_dive:          {min: 0, target: 1, weight: 1.1, soft_cap: 4.02, scales: false}
   interrupt:          {min: 0, target: 1, weight: 1.2, soft_cap: 2.3, ramp: {none_until: 5, full_at: 7}, scales: false}
   max_health_cut:     {min: 0.9, target: 0.9, weight: 1.1, soft_cap: 2.33, ramp: {none_until: 7, full_at: 10}, scales: false}
 weight_fit: {"method": "choice_fit", "source": "out/choice_weights_ancient_lands.json", "train_drops": 5780, "pull": 1000.0, "date": "2026-09-30", "population": "dominant portal killer parties of 2-7, training split", "curated": {"anti_dive": 1, "buff_allies": 2, "burst_aoe": 5, "burst_st": 7, "catch": 7, "cleanse": 5, "clump_create": 3, "damage_debuff": 1, "disengage": 6, "engage": 5, "execute": 4, "heal_burst": 5, "heal_reduction": 7, "heal_sustain": 10, "interrupt": 1, "knockback_displace": 1, "max_health_cut": 1, "mobility": 8, "peel": 8, "purge": 4, "resist_shred": 4, "root": 1, "self_sustain": 3, "silence": 5, "slow": 1, "stun": 5, "sustained_dps": 5, "tankiness": 7, "zone_control": 2}}
@@ -113,7 +113,7 @@ pool_rows:
       burst_st:           {min: 0, target: 1.45, soft_cap: 5, scales: true}
       sustained_dps:      {min: 9.1, target: 13.2, soft_cap: 20.01, scales: true}
       burst_aoe:          {min: 1.05, target: 3.8, soft_cap: 7.53, scales: true}
-      mobility:           {min: 3, target: 5.5, soft_cap: 9.2, scales: true}
+      mobility:           {min: 3.5, target: 5.5, soft_cap: 9.49, scales: true}
       catch:              {min: 0, target: 2, soft_cap: 4.6, scales: true}
       stun:               {none: true}
       self_sustain:       {min: 1, target: 2, soft_cap: 5.17, scales: true}
@@ -129,7 +129,7 @@ pool_rows:
       zone_control:       {min: 0, target: 1, soft_cap: 3.45, scales: true}
       buff_allies:        {min: 0, target: 1, soft_cap: 3.45, scales: false}
       damage_debuff:      {none: true}
-      slow:               {min: 0, target: 1, soft_cap: 3.45, scales: true}
+      slow:               {min: 0, target: 1, soft_cap: 3.56, scales: true}
       root:               {min: 0, target: 1.1, soft_cap: 3.62, scales: true}
       knockback_displace: {min: 0, target: 1.4, soft_cap: 3.91, scales: true}
       anti_dive:          {none: true}
@@ -144,7 +144,6 @@ pool_rows:
       cleanse:            {min: 0, target: 2, soft_cap: 4.02, scales: false, optional: true}
       clump_create:       {min: 0, target: 1, soft_cap: 2.3, scales: false, optional: true}
       damage_debuff:      {min: 0, target: 2.5, soft_cap: 5.17, scales: false, optional: true}
-      anti_dive:          {min: 0, target: 2, soft_cap: 2.88, scales: false, optional: true}
       interrupt:          {min: 0, target: 1, soft_cap: 2.3, scales: false, optional: true}
       max_health_cut:     {min: 0, target: 1, soft_cap: 2.3, scales: false, optional: true}
   "6-7":
@@ -152,16 +151,16 @@ pool_rows:
     ref_size: 7
     comps: 144
     requirements:
-      heal_sustain:       {min: 2.9, target: 5.08, soft_cap: 7.76, scales: true}
+      heal_sustain:       {min: 2.9, target: 5.08, soft_cap: 8.52, scales: true}
       heal_burst:         {min: 1.45, target: 3.14, soft_cap: 6.04, scales: true}
       tankiness:          {min: 14.69, target: 21.02, soft_cap: 30.32, scales: true}
-      peel:               {min: 7, target: 12.38, soft_cap: 23.43, scales: true}
-      burst_st:           {min: 0, target: 2.4, soft_cap: 9.16, scales: true}
+      peel:               {min: 7.06, target: 12.5, soft_cap: 23.43, scales: true}
+      burst_st:           {min: 0, target: 2.41, soft_cap: 9.16, scales: true}
       sustained_dps:      {min: 24.38, target: 30.67, soft_cap: 42.89, scales: true}
-      burst_aoe:          {min: 5.61, target: 9.73, soft_cap: 15.55, scales: true}
-      mobility:           {min: 9.35, target: 12.5, soft_cap: 19.45, scales: true}
+      burst_aoe:          {min: 5.74, target: 9.73, soft_cap: 15.55, scales: true}
+      mobility:           {min: 9.35, target: 12.83, soft_cap: 19.45, scales: true}
       catch:              {min: 2.93, target: 5.83, soft_cap: 10.7, scales: true}
-      stun:               {min: 0, target: 3.98, soft_cap: 13.99, scales: true}
+      stun:               {min: 0, target: 4.25, soft_cap: 13.99, scales: true}
       self_sustain:       {min: 2, target: 4.08, soft_cap: 9.2, scales: true}
       engage:             {min: 3, target: 6, soft_cap: 10.35, scales: false}
       disengage:          {min: 3.5, target: 7, soft_cap: 12.07, scales: false}
@@ -173,14 +172,14 @@ pool_rows:
       resist_shred:       {min: 1, target: 3.5, soft_cap: 7.42, scales: false}
       clump_create:       {min: 0, target: 1, soft_cap: 2.3, scales: false}
       zone_control:       {min: 1.17, target: 4.67, soft_cap: 9.39, scales: true}
-      buff_allies:        {min: 1, target: 4, soft_cap: 9.2, scales: false}
+      buff_allies:        {min: 1, target: 4.5, soft_cap: 9.2, scales: false}
       damage_debuff:      {min: 0, target: 2.5, soft_cap: 5.17, scales: false, optional: true}
-      slow:               {min: 1, target: 3.08, soft_cap: 9.06, scales: true}
+      slow:               {min: 1.15, target: 3.52, soft_cap: 10.03, scales: true}
       root:               {min: 2.1, target: 5.42, soft_cap: 10.93, scales: true}
-      knockback_displace: {min: 0, target: 2.77, soft_cap: 6.9, scales: true}
-      anti_dive:          {min: 0, target: 2.5, soft_cap: 4.6, scales: false, optional: true}
+      knockback_displace: {min: 0, target: 2.92, soft_cap: 6.9, scales: true}
+      anti_dive:          {min: 0, target: 2, soft_cap: 6.32, scales: false}
       interrupt:          {min: 0, target: 1, soft_cap: 2.3, scales: false}
-      max_health_cut:     {min: 0, target: 2, soft_cap: 2.3, scales: false, optional: true}
+      max_health_cut:     {min: 0, target: 1, soft_cap: 2.3, scales: false, optional: true}
 
 # The weapons each pool's dominant winners field (`rosters`: the pool's
 # distinct rosters). The suggestion gate at a size inside the pool.

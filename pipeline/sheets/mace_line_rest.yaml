@@ -65,6 +65,7 @@
   # deliberate non-takes of tree-pool spells (see sheets/pools/mace.yaml)
   except:
     - {cap: peel, evidence: GUARDRUNE}
+    - {cap: anti_dive, evidence: GUARDRUNE}
     - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: PRIMALSLAM}  # E: 18m knockback jets — a knock-AWAY wall, not offensive repositioning (curation judgment; was 6)

@@ -83,6 +83,7 @@ add:
     # touches an enemy or cancels enemy CC (the peel rule below), so it falls
     # in the absorb-shield class.
     buff_allies: "300-absorb shield on the tethered ally; absorb shields are outside the structured vocab"
+    anti_dive: "a 300 absorb shield on the tethered ally, who is pulled to the caster (the anti-dive rule: absorb shield)"
   SHAPE_W_AREA_PULL:                  # "pulling up to 5 enemies towards you, rooting them for 1.35"
     clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
   SHAPE_W_POLYMORPH:                  # "transforming the first unmounted, not transformed player hit into a helpless animal for 2.5"
@@ -104,22 +105,74 @@ add:
   # displacement is captured as knockback_displace on the sheet.
   SHAPESHIFT_ENT:                     # "Growth: Increases the Max and Current Health of up to {0} allies in a 11 radius by 0.08"
     buff_allies: "group Max-HP grant on transform; HP grants are outside the structured vocab"
+    # Barbed Roots (ENT_CHANNEL_TREE, a form ability on no equip menu):
+    # "Slows all enemies within a 11 radius by 0.5... allies gain a shield
+    # that absorbs up to 175 damage during the next 3 and grants immunity
+    # to Forced Movement effects"
+    peel: "form ability Barbed Roots grants allies in 11m Forced Movement immunity; form abilities are not separately equippable spells"
+    slow: "Barbed Roots slows enemies within 11m by 50% for the channel; same gap"
+    anti_dive: "Barbed Roots shields the dived allies and slows the divers among them; same gap"
   SHOVEL:                             # Fling — "pulling them 10 behind you"
     catch: "single-target pull INTO your team is the pick tool"
     knockback_displace: "enemy-directed forced repositioning; parser captured no displacement"
   HOLYSHIELD:                         # Divine Protection — "shield absorbing up to 456.3 damage" on an ally
     buff_allies: "ally damage-absorb shield; absorb shields are outside the structured vocab"
-  CRYSTALWAVE:                        # Hyperstatic — "Allies in the area gain a Shield, absorbing up to 350"
+    anti_dive: "a 456 absorb shield cast on the dived ally (the anti-dive rule: absorb shield)"
+  CRYSTALWAVE:                       # Hyperstatic — "Allies in the area gain a Shield, absorbing up to 350"
     buff_allies: "group absorb shield; outside the structured vocab"
+  # ANTI-DIVE RULE: anti_dive is what denies a dive. It counts an effect
+  # landed on the diver (the effect map's enemy rows) and a protection
+  # placed on OTHER allies at the moment of the dive: an absorb shield, a
+  # damage immunity or a damage redirection on an ally, and a protective
+  # zone or aura (an area that stays and raises the damage resistances of
+  # the allies inside it). None of these is peel (the peel rule below: peel
+  # touches the enemy or cancels the enemy's CC). A resistance buff on one
+  # targeted ally, or an instant buff with no area that stays, remains
+  # buff_allies. Each ally-protection claim the effect map does not already
+  # offer is added here per spell; pipeline/audit_form_abilities.py lists
+  # the class.
   INVULNERABILITY:                    # Protective Beam — refreshing 240 absorb bubble on an ally
     buff_allies: "channeled ally absorb shield; outside the structured vocab"
+    anti_dive: "an absorb bubble re-applied every second around the dived ally denies the dive its kill (the anti-dive rule)"
+  SHIELDFRIENDLY:                     # Arcane Protection — "applying a shield that absorbs up to 300 damage ... during the next 2"
+    anti_dive: "a 300 absorb shield cast on the dived ally (the anti-dive rule: absorb shield)"
+  HOLY_ULTIMATE:                      # Salvation — "heals up to 20 allies for 270 Health and makes them immune to further damage for 2"
+    anti_dive: "a 2s damage immunity for the allies in the circle (the anti-dive rule: damage immunity)"
+  GUARDRUNE:                          # Guard Rune — a 5 radius rune for 5s: +6% damage resistances, Forced Movement and Stun immunity for 10 allies
+    anti_dive: "a protective zone dropped on the dived allies (the anti-dive rule: zone)"
+  REFLECTAREA:                        # Protection of the Fiends — "an aura with a 7 radius ... Increases all damage resistances of the affected allies by 0.43"
+    anti_dive: "a protective aura on the allies around the wearer (the anti-dive rule: aura)"
+  VOID:                               # The Void — an entropic bubble for the allies within: cleanse, "Increases damage resistances by 0.3"
+    anti_dive: "a protective zone for the allies inside the bubble (the anti-dive rule: zone)"
   SOUL_LINK:                          # "Redirects 0.5 of the damage taken by one target to the other"
     # No peel: damage redirection halves what the ally takes but does nothing
     # to the enemy — protection, not peel (the peel rule below).
     buff_allies: "damage redirection off a focused ally; redirection is outside the vocab"
+    anti_dive: "half the dived ally's damage moves to the linked ally (the anti-dive rule: damage redirection)"
   SHAPESHIFT_PANTHER:                 # "On the Prowl — you will turn invisible to players"
     engage: "stealth opener; the conditional invisibility was not parsed as an effect node"
     disengage: "stealth escape; same gap"
+    # form abilities (on no equip menu): Infected Scrapes "Decreases healing
+    # received by 0.04 (stacks up to 5 times)"; Sinister Swipes "Charge
+    # through the targeted enemy"; Pounce "Leap towards target position"
+    heal_reduction: "form passive Infected Scrapes cuts the target's Healing Received; form abilities are not separately equippable spells"
+    mobility: "form abilities Sinister Swipes (charges) and Pounce (leap); same gap"
+  # ---- form abilities of the other shapeshifter staves (curated with the
+  # form text of audit_form_abilities.py; none sits on an equip menu)
+  SHAPESHIFT_ROCK_ELEMENTAL:          # Boulder Crash "Stuns for 1.2"; Tectonic Shift "knocks back enemies by 2. Pulls all enemies between you and the wall towards you"; Tectonic Slam "Throws all enemies hit into the air"
+    stun: "form ability Boulder Crash stuns a 3.5 radius for 1.2s; form abilities are not separately equippable spells"
+    clump_create: "form ability Tectonic Shift pulls the enemies between the wall and the golem in; same gap"
+    knockback_displace: "Tectonic Shift's wall knocks enemies back, Tectonic Slam throws them in the air; same gap"
+  SHAPESHIFT_BEAR:                    # Feral Bash "stunning all enemies hit for 0.9"; Wild Onslaught "Dash in target direction ... Decreases damage resistances by 0.15 for 3"; Roar "Enemies hit will flee from you for 1"
+    stun: "form ability Feral Bash stuns a 4 radius for 0.9s on a Shift Charge; form abilities are not separately equippable spells"
+    resist_shred: "form ability Wild Onslaught cuts damage resistances by 15% for 3s; same gap"
+    mobility: "the Wild Onslaught dash; same gap"
+    peel: "form ability Roar makes the enemies in its cone flee for 1s: enemy CC on the divers; same gap"
+  SHAPESHIFT_CRYSTAL_COBRA:           # Crystalburst "Reduce enemies' healing received by 0.2"; Neurotoxin "Decreases all damage affected enemies deal by 0.12"
+    heal_reduction: "form ability Crystalburst cuts Healing Received by 20% in its area; form abilities are not separately equippable spells"
+    damage_debuff: "form passive Neurotoxin cuts the damage poisoned enemies deal by 12%; same gap"
+  SHAPESHIFT_IMP:                     # Fireflash Orb "Teleports you to the explosion"
+    mobility: "form ability Fireflash Orb teleports the imp to its explosion; form abilities are not separately equippable spells"
   SHAPESHIFT_WEREWOLF:                # wolf form's lunge/chase abilities are the form payload
     catch: "form abilities (Tear Open / Rip Through lunges) are not separately equippable spells"
     mobility: "same — the wolf's movement kit lives inside the form"
@@ -146,6 +199,7 @@ add:
     buff_allies: "10-ally shield grant; same class as HOLYSHIELD/CRYSTALWAVE"
   FORCESHIELD:                        # Force Shield — "Increases damage resistances by 0.25" zone for allies
     buff_allies: "group resist grant inside the zone"
+    anti_dive: "a protective zone dropped on the dived allies (the anti-dive rule: zone)"
   WINDWALL:                           # Wind Wall — "Purges... Knocks back all enemies to the wall's edge"
     peel: "the wall shoves divers out and blocks the follow-up"
     anti_dive: "same wall, cast on your backline"
@@ -220,6 +274,7 @@ add:
     engage: "the charge half; dashes are outside the vocab"
     # No peel: Shield Charge shields the ally and never touches the enemy —
     # protection, not peel (the peel rule above).
+    anti_dive: "a 250 absorb shield on the ally charged to (the anti-dive rule: absorb shield)"
   MAXHEALTHBUFF:                      # Giant — "increasing your Max and Current Health by 0.25, and your Move Speed by 0.25"
     tankiness: "self max-HP grant; hitpoints grants misread via reference chain"
     mobility: "the speed half"

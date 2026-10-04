@@ -31,6 +31,7 @@
   ],
   "overridden": [
    "2H_HOLYSTAFF_UNDEAD",
+   "2H_SHAPESHIFTER_SET2",
    "MAIN_HOLYSTAFF_AVALON"
   ],
   "rule": "cost_tier from the unique_name's line suffix (crystal/avalonian/artifact/base; a display fact \u2014 no tier is gated). full_healer (healing FOUNDATION) requires an E bundle with >= primary_healer.e_heal_min summed heal points AND a GROUP-scale heal (the spell's own radius/max_targets facts; heal_overrides.yaml corrects sub-effect areas the dumps do not surface, with citation; unknown never grants). Single-scale dedicated heal Es grade gang situational / group unfit in style_fit \u2014 the E-first ladder.",
@@ -803,12 +804,17 @@
    "heal_spell": null
   },
   "2H_SHAPESHIFTER_SET2": {
-   "basis": "derived",
+   "basis": "curated_override",
    "cost_tier": "base",
-   "e_heal_points": 2,
+   "e_heal_points": 4,
    "full_healer": false,
-   "heal_scale": "single",
-   "heal_spell": "SHAPESHIFT_ENT"
+   "heal_scale": "group",
+   "heal_spell": "SHAPESHIFT_ENT",
+   "override": {
+    "as_of": "2026-10-04",
+    "reason": "Rootbound's E transforms the wielder; its healing lands through the Sylvian form: Seedling's Bloom heals allies inside a ground area and Growth raises the Current Health of allies around the wielder. The form's abilities sit on no equip menu, so the dumps surface the transform's cast facts (self, no area) and the structural rule misreads the heal as single-ally.",
+    "source": "ao-bin-dumps at the pinned snapshot: ENT_HEAL_AREA spelleffectarea (circle radius 3, grown to 6, maxeffectareatargets 5); PASSIVE_SHAPE_ENT_AURA (auraradius 11). Listed by pipeline/audit_form_abilities.py."
+   }
   },
   "2H_SHAPESHIFTER_SET3": {
    "basis": "derived",

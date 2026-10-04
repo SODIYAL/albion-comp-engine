@@ -125,7 +125,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 7,
+   "utility_pts": 9,
    "weak_group_e": false
   },
   "2H_ARCANESTAFF_HELL": {
@@ -176,7 +176,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 11,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_ARCANE_RINGPAIR_AVALON": {
@@ -229,7 +229,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": true
   },
   "2H_AXE": {
@@ -1413,7 +1413,7 @@
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -1446,7 +1446,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 2,
+   "utility_pts": 4,
    "weak_group_e": false
   },
   "2H_DOUBLEBLADEDSTAFF": {
@@ -1815,7 +1815,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 11,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_DUALSCIMITAR_UNDEAD": {
@@ -2025,7 +2025,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 7,
+   "utility_pts": 9,
    "weak_group_e": false
   },
   "2H_ENIGMATICSTAFF": {
@@ -2043,7 +2043,7 @@
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 4,
    "fit": {
     "brawl": {
      "gang": "fits",
@@ -2076,7 +2076,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 7,
+   "utility_pts": 11,
    "weak_group_e": false
   },
   "2H_FIRESTAFF": {
@@ -2286,7 +2286,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 18,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "2H_FROSTSTAFF": {
@@ -2971,7 +2971,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 6,
+   "utility_pts": 8,
    "weak_group_e": false
   },
   "2H_HOLYSTAFF_CRYSTAL": {
@@ -3073,7 +3073,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 4,
+   "utility_pts": 8,
    "weak_group_e": false
   },
   "2H_HOLYSTAFF_UNDEAD": {
@@ -4026,7 +4026,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 22,
+   "utility_pts": 24,
    "weak_group_e": false
   },
   "2H_MACE_MORGANA": {
@@ -4077,7 +4077,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 23,
    "weak_group_e": false
   },
   "2H_NATURESTAFF": {
@@ -4656,11 +4656,11 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 4,
+   "damage_pts": 5,
    "damage_scale": "group",
    "delivery": "ranged",
    "e_channel_nonranged": false,
-   "e_damage_pts": 4,
+   "e_damage_pts": 5,
    "e_damage_spells": [
     "SHAPESHIFT_AVALONIAN_EAGLE"
    ],
@@ -4701,7 +4701,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_CRYSTAL": {
@@ -4717,11 +4717,11 @@
    "e_damage_spells": [
     "SHAPESHIFT_CRYSTAL_COBRA"
    ],
-   "e_debuff_max": 0,
+   "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 4,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -4754,7 +4754,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 10,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_HELL": {
@@ -4762,11 +4762,11 @@
    "basis": "curated_override",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 4,
+   "damage_pts": 6,
    "damage_scale": "group",
    "delivery": "ranged",
    "e_channel_nonranged": false,
-   "e_damage_pts": 4,
+   "e_damage_pts": 6,
    "e_damage_spells": [
     "SHAPESHIFT_IMP"
    ],
@@ -4812,7 +4812,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 10,
+   "utility_pts": 12,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_KEEPER": {
@@ -4826,11 +4826,11 @@
    "e_channel_nonranged": false,
    "e_damage_pts": 0,
    "e_damage_spells": [],
-   "e_debuff_max": 0,
+   "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 2,
+   "e_utility_max": 4,
    "fit": {
     "brawl": {
      "gang": "fits",
@@ -4863,7 +4863,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 22,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_MORGANA": {
@@ -4916,7 +4916,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_SET1": {
@@ -4932,7 +4932,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_PANTHER"
    ],
-   "e_debuff_max": 0,
+   "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
@@ -4969,7 +4969,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 14,
+   "utility_pts": 18,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_SET2": {
@@ -4987,7 +4987,7 @@
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "fits",
@@ -5020,7 +5020,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 10,
+   "utility_pts": 12,
    "weak_group_e": false
   },
   "2H_SHAPESHIFTER_SET3": {
@@ -5036,11 +5036,11 @@
    "e_damage_spells": [
     "SHAPESHIFT_BEAR"
    ],
-   "e_debuff_max": 0,
+   "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -5073,7 +5073,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 10,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "2H_SKULLORB_HELL": {
@@ -5503,7 +5503,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 13,
+   "utility_pts": 15,
    "weak_group_e": false
   },
   "MAIN_ARCANESTAFF_UNDEAD": {
@@ -5556,7 +5556,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 15,
+   "utility_pts": 17,
    "weak_group_e": false
   },
   "MAIN_AXE": {
@@ -6200,7 +6200,7 @@
    "role_flexible": true,
    "standoff_e": true,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "MAIN_FROSTSTAFF_KEEPER": {
@@ -6508,7 +6508,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 17,
+   "utility_pts": 19,
    "weak_group_e": false
   },
   "MAIN_MACE_CRYSTAL": {
@@ -6561,7 +6561,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 19,
+   "utility_pts": 21,
    "weak_group_e": false
   },
   "MAIN_MACE_HELL": {
@@ -6614,7 +6614,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 23,
+   "utility_pts": 25,
    "weak_group_e": false
   },
   "MAIN_NATURESTAFF": {
@@ -6683,7 +6683,7 @@
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 0,
+   "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -6716,7 +6716,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 2,
+   "utility_pts": 4,
    "weak_group_e": false
   },
   "MAIN_NATURESTAFF_CRYSTAL": {

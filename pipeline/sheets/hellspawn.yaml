@@ -22,11 +22,16 @@
 # and are not separately equippable.
 
 - weapon: 2H_SHAPESHIFTER_HELL       # Hellspawn Staff — shapeshifter AoE bomber
-  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  curated_as_of: 2026-10-04   # staleness check vs out/patch_history.json
   role_hint: range
   # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  # mobility sits on the E (Fireflash Orb's teleport): one slot per capability
   except:
     - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: SHAPESHIFT_IMP}   # E: imp-form fire AoE is the payload
     - {cap: self_sustain,  score: 4, evidence: SHAPESHIFT_IMP}   # cheat-death heal + Altered Beast health stacks
+    - {cap: mobility,      score: 2, evidence: SHAPESHIFT_IMP}   # Fireflash Orb: the recast teleports the imp to the explosion (via override)
+    - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_IMP}   # Hellfire Barrage: a single-target channel, 30 every 0.2s (12s, three Shift Charges)
+    # Melting Point's lava puddle: no row (curation judgment)
