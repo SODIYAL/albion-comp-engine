@@ -110,6 +110,7 @@ py -3 tests/test_patch_history.py   # dumps-diff staleness detection
 py -3 tests/test_js_parity.py       # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
 py -3 tests/test_dashboard_layout.py # generated-page layout contracts + no engine calls from the UI
 py -3 tests/test_cohort_families.py # observed-family artifact contracts
+py -3 tests/test_usage_derive.py    # usage derivation: the frame, fight-size and party-size axes, the even sample
 py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descriptive)
 py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
 py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
@@ -159,12 +160,12 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
 
 - After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
-  `sample_parties --pages 0` -> `sample_battles` (the fold's one network
-  step: the observed-evidence artifact from the newest group fights;
-  `-SkipUsage` keeps the fold offline) -> `audit_style_rosters` -> `derive_style_bands` ->
+  `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
   `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
-  `derive_skeletons` -> `build_dataset` -> every gate ->
-  `compare_fold.py`; never commits). Weekly, Tuesdays. Every harvest-derived
+  `derive_skeletons` -> `build_dataset` -> `derive_usage` (the
+  observed-evidence artifact: fight-size prevalence and killer-party
+  cohorts, display only) -> every gate ->
+  `compare_fold.py`; offline, never commits). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
   an all-battles prior, role-count or skeleton artifact.
 - Between folds, the Dragon Portal page alone: `pipeline/refresh_portal.ps1`
@@ -173,8 +174,8 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   and the two `portal.html` files only; the rewritten rosters artifact
   waits for the fold, which commits it with the tables derived from it.
 - After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
-- Network steps are explicit, never part of a build: `sample_parties.py`,
-  `sample_battles.py`, `sample_rosters.py`, `adapters/metabattle.py fetch`. The
+- Network steps are explicit, never part of a build: `sample_parties.py`
+  (the one killboard sampler), `adapters/metabattle.py fetch`. The
   scheduled task "CompForge overnight harvest" runs `harvest_overnight.ps1` at
   03:00 and 15:00 — harvest only; rebuild, gates and commit stay in-session.
   The task "CompForge kill-feed poll" runs `poll_events.ps1` every 3 minutes

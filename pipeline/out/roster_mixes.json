@@ -1,6 +1,7 @@
 {
  "_meta": {
   "battles_cached": 118,
+  "frozen": "The sampler that wrote this artifact is retired and nothing reads it in code. It stays as the recorded evidence the need profiles in roles.yaml cite; the party harvest records killer parties and cannot re-derive a wiped side.",
   "newest_event": "2026-08-25T06:07:00.062Z",
   "note": "near-complete = deaths seen for >= 80% of the side's attributed players (wiped sides \u2014 least-biased roster snapshots); winners reported separately, never merged (healers/supports under-attribute on winning sides); sides are alliance-level; mount carriers show carried weapons. DISPLAY/EVIDENCE ONLY \u2014 the need profiles it informed are owner-ruled constants in roles.yaml.",
   "source": "api.albionbb.com kill events (sanctioned endpoint)"

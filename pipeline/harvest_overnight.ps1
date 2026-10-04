@@ -26,9 +26,9 @@
 # rebuilding, the gate list and the audit stay a reviewed, in-session step
 # (pipeline/README.md, CLAUDE.md "Kits are what winners wear").
 #
-# SIBLING JOB: pipeline/daily_fetch.ps1 (09:30) grows the albionbb battle
-# caches behind weapon_usage_v2.json (prevalence, cohorts, families) — a
-# different API and cache; neither job subsumes the other.
+# This harvest is the ONE killboard sampler: weapon_usage_v2.json
+# (prevalence, cohorts, families) is derived from its rosters artifact by
+# pipeline/derive_usage.py at the fold.
 #
 # Registered as a Windows scheduled task (daily 03:00 AND 15:00, current
 # user, 6 h limit, runs late if the machine was asleep, HIDDEN window) from

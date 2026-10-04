@@ -14,17 +14,12 @@
 # Cadence: weekly (the corpus grows ~350 battles a day; a daily fold is
 # churn, a weekly one is a meaningful step - VALIDATION.md).
 #
-# The "usage from killboard" step is the fold's ONE network call: it
-# re-analyzes the observed-evidence artifact (weapon_usage_v2.json: the
-# prevalence strip, cohorts and observed families) from the newest group
-# fights, listing them from albionbb and reading kills from the cache the
-# "AlbionCompForge Daily Fetch" task grows. Display only, never a scoring
-# input. -SkipUsage keeps the fold offline and leaves that artifact as
-# committed.
-
-param(
-    [switch]$SkipUsage
-)
+# The fold is OFFLINE: every step reads the cache or an artifact derived
+# from it. The observed-evidence artifact (weapon_usage_v2.json: the
+# prevalence strip, the killer-party cohorts and the observed families)
+# is derived from the rosters artifact by derive_usage.py, after
+# build_dataset (weapon keys are filtered against the catalogue). Display
+# only, never a scoring input.
 
 $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
@@ -51,9 +46,6 @@ function Step($label, $exe, $argv) {
 
 # 1. the chain, in the documented order (CLAUDE.md "After a harvest")
 Step "rosters from cache"     "py" @("-3", "-u", "pipeline/sample_parties.py", "--pages", "0")
-if (-not $SkipUsage) {
-    Step "usage from killboard"   "py" @("-3", "-u", "pipeline/sample_battles.py", "--min-players", "10", "--battles", "120")
-}
 Step "audit_style_rosters"    "py" @("-3", "-u", "pipeline/audit_style_rosters.py")
 Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py")
 Step "derive_portal_rows"     "py" @("-3", "-u", "pipeline/derive_portal_rows.py", "--apply")
@@ -62,6 +54,7 @@ Step "derive_meta_prior"      "py" @("-3", "-u", "pipeline/derive_meta_prior.py"
 Step "derive_role_counts"     "py" @("-3", "-u", "pipeline/derive_role_counts.py")
 Step "derive_skeletons"       "py" @("-3", "-u", "pipeline/derive_skeletons.py")
 Step "build_dataset"          "py" @("-3", "-u", "pipeline/build_dataset.py")
+Step "derive_usage"           "py" @("-3", "-u", "pipeline/derive_usage.py")
 Step "build_cohort_families"  "py" @("-3", "-u", "pipeline/build_cohort_families.py")
 Step "build_portal_stats"     "py" @("-3", "-u", "pipeline/build_portal_stats.py")
 Step "dashboard build"        "py" @("-3", "-u", "dashboard/build.py")
@@ -76,6 +69,7 @@ Step "test_patch_history"     "py" @("-3", "-u", "tests/test_patch_history.py")
 Step "test_js_parity"         "py" @("-3", "-u", "tests/test_js_parity.py")
 Step "test_dashboard_layout"  "py" @("-3", "-u", "tests/test_dashboard_layout.py")
 Step "test_cohort_families"   "py" @("-3", "-u", "tests/test_cohort_families.py")
+Step "test_usage_derive"      "py" @("-3", "-u", "tests/test_usage_derive.py")
 Step "test_meta_pairs"        "py" @("-3", "-u", "tests/test_meta_pairs.py")
 Step "test_style_bands_derive" "py" @("-3", "-u", "tests/test_style_bands_derive.py")
 Step "test_roles"             "py" @("-3", "-u", "tests/test_roles.py")

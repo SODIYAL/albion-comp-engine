@@ -114,9 +114,9 @@ The system should still be treated as a decision-support tool rather than an aut
 
 ### Killboard affinity / observed cohorts
 
-Battle sampling goes beyond generic weapon prevalence. Because a kill feed does not reliably identify actual parties, observed players are grouped conservatively by **organization cohort** (same stated alliance, with guild fallback) rather than pretending everyone on the same battle record was on the same team.
+Battle evidence goes beyond generic weapon prevalence. A kill event lists the killer's own party, so observed players are grouped by **killer party** — the group the game itself states — never by everyone on the same battle record. A killer party scored at least one kill; the evidence says what parties fielded together, not what wins.
 
-When cohort data matches the selected party, the planner's killboard strip turns contextual — "Observed with your weapons" ranks candidates by matching cohorts with popularity-corrected pair lift, so globally popular weapons do not dominate merely because they appear everywhere — and the best-pick card notes when cohorts echo the engine's recommendation. The evidence quotes the fight-size bucket of the party size you are **planning**, not the members added so far.
+When cohort data matches the selected party, the planner's killboard strip turns contextual — "Fielded with your weapons" ranks candidates by matching parties with popularity-corrected pair lift, so globally popular weapons do not dominate merely because they appear everywhere — and the best-pick card notes when cohorts echo the engine's recommendation. The evidence quotes killer parties of the size you are **planning**, not the members added so far.
 
 All of it is **display/evidence only**; it does not modify mechanical recommendation scores. Semantics and limitations: `KILLBOARD_AFFINITY.md`.
 
@@ -168,7 +168,7 @@ py -3 tests/test_js_parity.py
 py -3 dashboard/build.py
 ```
 
-`pipeline/sample_battles.py` is optional and network-dependent. It refreshes observational battle evidence; it is not required for the mechanical scoring engine to function.
+`pipeline/sample_parties.py` (the killer-party harvest) is network-dependent and never part of a build. `pipeline/derive_usage.py` derives the observational battle evidence from its artifact offline; neither is required for the mechanical scoring engine to function.
 
 After a game patch, follow the pinned-snapshot procedure in `pipeline/README.md`: update the ao-bin-dumps source pin, rebuild the derived game-data layers, then run the complete release gates before shipping regenerated outputs.
 
@@ -195,7 +195,7 @@ pipeline/                      the engine's data layer
   roles.yaml                   the role book: seats, functions, gear effects, need profiles
   build_dataset.py             builds the release dataset (fails closed)
   sample_parties.py            killer-party roster harvest (nightly task)
-  sample_battles.py            observational battle sampler
+  derive_usage.py              observational battle evidence, derived from the harvest
   audit_*.py                   report-only audits
   out/                         generated data/evidence artifacts
 

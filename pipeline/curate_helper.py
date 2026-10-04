@@ -21,7 +21,7 @@ SPELLS = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8")
 
 
 def load_usage():
-    """Sightings per weapon from weapon_usage_v2.json (sample_battles.py),
+    """Sightings per weapon from weapon_usage_v2.json (derive_usage.py),
     summed across the fight-size buckets, with the per-bucket split kept.
     The v1 file this used to read was a frozen 24-battle sample that
     nothing wrote any more."""

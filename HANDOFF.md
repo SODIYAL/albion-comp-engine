@@ -48,8 +48,8 @@ Three layers, never merged:
   brawl_clap / clap_kite) carrying weight multipliers, `target_mults`,
   constraint overrides and a fight chain; GENERATED style x size rows beside
   the content rows (`templates/style_bands.yaml`, from harvested winners,
-  read at 10+; `balanced` reads a pooled cell once the harvest machine
-  regenerates the board — BACKLOG).
+  read at 10+; `balanced` reads the pooled cell, every winner at the
+  size, any style).
 - **Target is the median (standing rule 17).** Every row carries three
   measured lines: `min` = the least winners get away with (harvest p10 /
   least fitted comp), `target` = the TYPICAL winner (p50 / median of the
@@ -301,7 +301,7 @@ them, and every roster mutation goes through `data-add` / `data-swapat`. The
 forge handler wraps `ENG.forge(goal)` in a target-size `setContent`.
 
 Audit artifacts: `out/economics_report.json`, `out/style_fit_report.json`,
-`out/roles_report.json`, `out/roster_mixes.json`, `out/style_roster_evidence.json`.
+`out/roles_report.json`, `out/roster_mixes.json` (frozen), `out/style_roster_evidence.json`.
 
 ## The planner today
 
@@ -359,7 +359,8 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   the full capability board is the deep diagnostic on the same ruler.
 - **Observed killboard context**: affinity strip, cohort note, neighbours,
   recurring cores (`out/cohort_families.json`), observed effect quotas — all
-  display only.
+  display only. A cohort is a killer party; the strip's artifact is derived
+  from the party harvest (`derive_usage.py`), the one killboard sampler.
 - **The wheel** is a semicircle (art on the top arc, hub in the mouth); the
   **comp board** in the right-edge party flyout has four seat columns of
   member tiles sharing `memberPop()`, an open-slots column, and a notes rail

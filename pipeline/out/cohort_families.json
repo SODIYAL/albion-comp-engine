@@ -4,717 +4,545 @@
    {
     "anchor": [
      "2H_AXE_AVALON",
-     "MAIN_HOLYSTAFF_AVALON"
+     "2H_HARPOON_HELL"
     ],
-    "battles": 17,
+    "battles": 427,
     "cast": [
      {
-      "share": 0.667,
+      "share": 0.958,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "share": 0.881,
+      "weapon": "2H_KNUCKLES_SET3"
+     },
+     {
+      "share": 0.846,
       "weapon": "2H_ICECRYSTAL_UNDEAD"
      },
      {
-      "share": 0.625,
+      "share": 0.659,
+      "weapon": "2H_DUALMACE_AVALON"
+     },
+     {
+      "share": 0.6,
       "weapon": "2H_FIRE_RINGPAIR_AVALON"
      },
      {
-      "share": 0.5,
-      "weapon": "2H_KNUCKLES_SET3"
+      "share": 0.598,
+      "weapon": "MAIN_ROCKMACE_KEEPER"
      },
      {
-      "share": 0.5,
-      "weapon": "2H_MACE"
+      "share": 0.565,
+      "weapon": "2H_SHAPESHIFTER_KEEPER"
      },
      {
-      "share": 0.458,
-      "weapon": "2H_KNUCKLES_SET2"
-     }
-    ],
-    "cohorts": 24,
-    "lift": 2.53,
-    "orgs": 15
-   },
-   {
-    "anchor": [
-     "2H_GLAIVE_CRYSTAL",
-     "2H_ICECRYSTAL_UNDEAD"
-    ],
-    "battles": 12,
-    "cast": [
-     {
-      "share": 0.714,
-      "weapon": "2H_FIRE_RINGPAIR_AVALON"
+      "share": 0.516,
+      "weapon": "2H_ARCANESTAFF"
      },
      {
-      "share": 0.714,
-      "weapon": "2H_HARPOON_HELL"
+      "share": 0.477,
+      "weapon": "2H_ARCANESTAFF_HELL"
      },
      {
-      "share": 0.5,
-      "weapon": "2H_KNUCKLES_SET3"
+      "share": 0.428,
+      "weapon": "2H_POLEHAMMER"
      },
      {
-      "share": 0.5,
+      "share": 0.416,
       "weapon": "MAIN_ARCANESTAFF_UNDEAD"
      }
     ],
-    "cohorts": 14,
-    "lift": 2.8,
-    "orgs": 10
-   },
-   {
-    "anchor": [
-     "2H_ICECRYSTAL_UNDEAD",
-     "2H_LONGBOW"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 1.29,
-    "orgs": 6
-   },
-   {
-    "anchor": [
-     "2H_KNUCKLES_SET2",
-     "2H_NATURESTAFF_HELL"
-    ],
-    "battles": 5,
-    "cast": [
-     {
-      "share": 0.6,
-      "weapon": "2H_HARPOON_HELL"
-     },
-     {
-      "share": 0.6,
-      "weapon": "2H_LONGBOW"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_KNUCKLES_SET3"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_POLEHAMMER"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 3.33,
-    "orgs": 4
+    "cohorts": 428,
+    "lift": 1.21,
+    "orgs": 48
    },
    {
     "anchor": [
      "2H_AXE_AVALON",
-     "2H_KNUCKLES_SET2"
+     "2H_KNUCKLES_SET3"
     ],
-    "battles": 4,
+    "battles": 170,
     "cast": [
      {
+      "share": 0.924,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
       "share": 0.6,
-      "weapon": "2H_KNUCKLES_SET3"
+      "weapon": "2H_DUALMACE_AVALON"
      },
      {
-      "share": 0.4,
-      "weapon": "2H_CLEAVER_HELL"
+      "share": 0.588,
+      "weapon": "2H_LONGBOW"
      },
      {
-      "share": 0.4,
+      "share": 0.553,
       "weapon": "2H_ICECRYSTAL_UNDEAD"
      },
      {
-      "share": 0.4,
-      "weapon": "MAIN_CURSEDSTAFF_AVALON"
-     },
-     {
-      "share": 0.4,
-      "weapon": "MAIN_DAGGER_HELL"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 8.84,
-    "orgs": 3
-   }
-  ],
-  "mid": [
-   {
-    "anchor": [
-     "2H_DAGGERPAIR",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 17,
-    "cast": [],
-    "cohorts": 17,
-    "lift": 2.3,
-    "orgs": 13
-   },
-   {
-    "anchor": [
-     "2H_INFERNOSTAFF_MORGANA",
-     "MAIN_MACE_HELL"
-    ],
-    "battles": 11,
-    "cast": [],
-    "cohorts": 11,
-    "lift": 4.74,
-    "orgs": 11
-   },
-   {
-    "anchor": [
-     "2H_BOW_KEEPER",
-     "MAIN_HOLYSTAFF_AVALON"
-    ],
-    "battles": 10,
-    "cast": [],
-    "cohorts": 11,
-    "lift": 2.25,
-    "orgs": 10
-   },
-   {
-    "anchor": [
-     "2H_CLEAVER_HELL",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 10,
-    "cast": [],
-    "cohorts": 10,
-    "lift": 1.5,
-    "orgs": 9
-   },
-   {
-    "anchor": [
-     "2H_CLAWPAIR",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 9,
-    "cast": [],
-    "cohorts": 10,
-    "lift": 3.15,
-    "orgs": 6
-   },
-   {
-    "anchor": [
-     "MAIN_HOLYSTAFF_AVALON",
-     "MAIN_MACE"
-    ],
-    "battles": 8,
-    "cast": [],
-    "cohorts": 8,
-    "lift": 1.6,
-    "orgs": 7
-   },
-   {
-    "anchor": [
-     "2H_CLEAVER_HELL",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 8,
-    "cast": [],
-    "cohorts": 8,
-    "lift": 2.72,
-    "orgs": 6
-   },
-   {
-    "anchor": [
-     "2H_CLAWPAIR",
-     "2H_DAGGERPAIR"
-    ],
-    "battles": 8,
-    "cast": [],
-    "cohorts": 8,
-    "lift": 7.56,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_DUALAXE_KEEPER",
-     "MAIN_FROSTSTAFF"
-    ],
-    "battles": 7,
-    "cast": [
-     {
-      "share": 0.429,
-      "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
-     },
-     {
-      "share": 0.429,
+      "share": 0.529,
       "weapon": "MAIN_MACE"
-     }
-    ],
-    "cohorts": 7,
-    "lift": 2.5,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_HOLYSTAFF",
-     "2H_LONGBOW"
-    ],
-    "battles": 7,
-    "cast": [
-     {
-      "share": 0.571,
-      "weapon": "2H_SCYTHE_HELL"
      },
      {
-      "share": 0.571,
-      "weapon": "2H_SHAPESHIFTER_HELL"
-     }
-    ],
-    "cohorts": 7,
-    "lift": 2.65,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_HARPOON_HELL",
-     "2H_ICECRYSTAL_UNDEAD"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 7,
-    "lift": 5.71,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_AVALON",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 2.57,
-    "orgs": 6
-   },
-   {
-    "anchor": [
-     "2H_CLEAVER_HELL",
-     "MAIN_HOLYSTAFF_AVALON"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 2.53,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_ICECRYSTAL_UNDEAD",
-     "2H_LONGBOW"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 1.28,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_AVALON",
-     "MAIN_MACE"
-    ],
-    "battles": 5,
-    "cast": [
+      "share": 0.518,
+      "weapon": "2H_MACE"
+     },
      {
-      "share": 0.4,
-      "weapon": "2H_FIRE_RINGPAIR_AVALON"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 2.01,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_DUALAXE_KEEPER",
-     "MAIN_HOLYSTAFF_AVALON"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 1.77,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_AXE",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 5,
-    "cast": [
+      "share": 0.429,
+      "weapon": "2H_ARCANESTAFF"
+     },
      {
-      "share": 0.4,
+      "share": 0.424,
       "weapon": "2H_FIRE_RINGPAIR_AVALON"
      },
      {
-      "share": 0.4,
-      "weapon": "2H_KNUCKLES_HELL"
+      "share": 0.418,
+      "weapon": "2H_CLEAVER_HELL"
      },
-     {
-      "share": 0.4,
-      "weapon": "MAIN_SPEAR_KEEPER"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 1.89,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_AXE",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 5,
-    "cast": [
-     {
-      "share": 0.4,
-      "weapon": "2H_CLAYMORE_AVALON"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_DUALHAMMER_HELL"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 3.46,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_AVALON",
-     "2H_INFERNOSTAFF_MORGANA"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 2.65,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_DUALSICKLE_UNDEAD",
-     "2H_KNUCKLES_SET2"
-    ],
-    "battles": 5,
-    "cast": [
-     {
-      "share": 0.4,
-      "weapon": "2H_INFERNOSTAFF_MORGANA"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_QUARTERSTAFF_AVALON"
-     },
-     {
-      "share": 0.4,
-      "weapon": "MAIN_CURSEDSTAFF"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 4.04,
-    "orgs": 4
-   }
-  ],
-  "small": [
-   {
-    "anchor": [
-     "2H_INFERNOSTAFF_MORGANA",
-     "MAIN_MACE_HELL"
-    ],
-    "battles": 13,
-    "cast": [],
-    "cohorts": 13,
-    "lift": 11.04,
-    "orgs": 11
-   },
-   {
-    "anchor": [
-     "2H_HALBERD_MORGANA",
-     "MAIN_CURSEDSTAFF_CRYSTAL"
-    ],
-    "battles": 13,
-    "cast": [
-     {
-      "share": 0.538,
-      "weapon": "2H_SHAPESHIFTER_AVALON"
-     },
-     {
-      "share": 0.462,
-      "weapon": "2H_POLEHAMMER"
-     }
-    ],
-    "cohorts": 13,
-    "lift": 17.48,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_GLACIALSTAFF",
-     "2H_ROCKSTAFF_KEEPER"
-    ],
-    "battles": 9,
-    "cast": [],
-    "cohorts": 9,
-    "lift": 20.63,
-    "orgs": 3
-   },
-   {
-    "anchor": [
-     "2H_DAGGERPAIR",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 8,
-    "cast": [],
-    "cohorts": 8,
-    "lift": 2.13,
-    "orgs": 8
-   },
-   {
-    "anchor": [
-     "2H_BOW_KEEPER",
-     "MAIN_HOLYSTAFF"
-    ],
-    "battles": 8,
-    "cast": [],
-    "cohorts": 8,
-    "lift": 1.45,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_BOW_AVALON",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 7,
-    "cast": [],
-    "cohorts": 7,
-    "lift": 2.47,
-    "orgs": 7
-   },
-   {
-    "anchor": [
-     "2H_CLEAVER_HELL",
-     "MAIN_HOLYSTAFF_AVALON"
-    ],
-    "battles": 7,
-    "cast": [],
-    "cohorts": 7,
-    "lift": 1.89,
-    "orgs": 6
-   },
-   {
-    "anchor": [
-     "2H_BOW_KEEPER",
-     "2H_POLEHAMMER"
-    ],
-    "battles": 7,
-    "cast": [],
-    "cohorts": 7,
-    "lift": 1.89,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_DUALSWORD",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 1.85,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_SHAPESHIFTER_HELL",
-     "MAIN_HOLYSTAFF"
-    ],
-    "battles": 6,
-    "cast": [],
-    "cohorts": 6,
-    "lift": 4.74,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_KEEPER",
-     "MAIN_AXE"
-    ],
-    "battles": 5,
-    "cast": [
      {
       "share": 0.4,
       "weapon": "2H_NATURESTAFF_HELL"
      },
      {
       "share": 0.4,
-      "weapon": "MAIN_NATURESTAFF"
+      "weapon": "2H_SHAPESHIFTER_KEEPER"
      }
     ],
-    "cohorts": 5,
-    "lift": 1.96,
-    "orgs": 5
+    "cohorts": 170,
+    "lift": 1.22,
+    "orgs": 44
    },
    {
     "anchor": [
-     "2H_BOW_KEEPER",
-     "MAIN_HOLYSTAFF_AVALON"
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD"
     ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 1.44,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_CLAWPAIR",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 3.78,
-    "orgs": 5
-   },
-   {
-    "anchor": [
-     "2H_AXE",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 1.51,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_AVALON",
-     "2H_INFERNOSTAFF_MORGANA"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 5.41,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_BOW_KEEPER",
-     "2H_HOLYSTAFF_UNDEAD"
-    ],
-    "battles": 5,
+    "battles": 83,
     "cast": [
      {
-      "share": 0.4,
-      "weapon": "2H_GLAIVE_CRYSTAL"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 1.78,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_IRONCLADEDSTAFF",
-     "2H_NATURESTAFF_HELL"
-    ],
-    "battles": 5,
-    "cast": [],
-    "cohorts": 5,
-    "lift": 12.69,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "MAIN_CURSEDSTAFF_AVALON",
-     "MAIN_HOLYSTAFF_AVALON"
-    ],
-    "battles": 5,
-    "cast": [
-     {
-      "share": 0.4,
-      "weapon": "2H_INFERNOSTAFF_MORGANA"
+      "share": 0.88,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
      },
      {
-      "share": 0.4,
+      "share": 0.59,
+      "weapon": "2H_DUALMACE_AVALON"
+     },
+     {
+      "share": 0.554,
+      "weapon": "2H_LONGBOW"
+     },
+     {
+      "share": 0.542,
+      "weapon": "2H_SHAPESHIFTER_KEEPER"
+     },
+     {
+      "share": 0.53,
+      "weapon": "2H_KNUCKLES_SET3"
+     },
+     {
+      "share": 0.518,
+      "weapon": "MAIN_ROCKMACE_KEEPER"
+     },
+     {
+      "share": 0.458,
+      "weapon": "2H_HARPOON_HELL"
+     },
+     {
+      "share": 0.458,
+      "weapon": "2H_NATURESTAFF_HELL"
+     },
+     {
+      "share": 0.446,
+      "weapon": "2H_ARCANESTAFF_HELL"
+     },
+     {
+      "share": 0.446,
+      "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+     },
+     {
+      "share": 0.434,
+      "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+     },
+     {
+      "share": 0.422,
+      "weapon": "2H_POLEHAMMER"
+     },
+     {
+      "share": 0.41,
+      "weapon": "2H_ARCANESTAFF"
+     }
+    ],
+    "cohorts": 83,
+    "lift": 1.52,
+    "orgs": 30
+   },
+   {
+    "anchor": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_MACE"
+    ],
+    "battles": 67,
+    "cast": [
+     {
+      "share": 0.896,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "share": 0.522,
+      "weapon": "2H_DUALMACE_AVALON"
+     },
+     {
+      "share": 0.478,
+      "weapon": "2H_MACE"
+     },
+     {
+      "share": 0.403,
+      "weapon": "2H_AXE_AVALON"
+     }
+    ],
+    "cohorts": 67,
+    "lift": 1.41,
+    "orgs": 27
+   },
+   {
+    "anchor": [
+     "2H_DUALMACE_AVALON",
+     "MAIN_HAMMER"
+    ],
+    "battles": 52,
+    "cast": [
+     {
+      "share": 1.0,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "share": 0.442,
+      "weapon": "2H_DUALSCIMITAR_UNDEAD"
+     },
+     {
+      "share": 0.442,
+      "weapon": "2H_MACE"
+     },
+     {
+      "share": 0.423,
+      "weapon": "2H_NATURESTAFF_HELL"
+     },
+     {
+      "share": 0.423,
       "weapon": "MAIN_MACE"
      }
     ],
-    "cohorts": 5,
-    "lift": 3.99,
-    "orgs": 4
-   },
-   {
-    "anchor": [
-     "2H_CLAYMORE_AVALON",
-     "2H_DUALAXE_KEEPER"
-    ],
-    "battles": 5,
-    "cast": [
-     {
-      "share": 0.4,
-      "weapon": "2H_DUALHAMMER_HELL"
-     }
-    ],
-    "cohorts": 5,
-    "lift": 2.92,
-    "orgs": 3
+    "cohorts": 52,
+    "lift": 1.37,
+    "orgs": 25
    },
    {
     "anchor": [
      "2H_LONGBOW",
-     "2H_LONGBOW_UNDEAD"
+     "2H_NATURESTAFF_HELL"
     ],
-    "battles": 5,
+    "battles": 38,
     "cast": [
      {
-      "share": 0.6,
-      "weapon": "2H_HAMMER_AVALON"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_AXE"
-     },
-     {
-      "share": 0.4,
-      "weapon": "2H_HOLYSTAFF_UNDEAD"
+      "share": 0.763,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
      }
     ],
-    "cohorts": 5,
-    "lift": 3.0,
-    "orgs": 3
+    "cohorts": 38,
+    "lift": 1.28,
+    "orgs": 15
    },
    {
     "anchor": [
-     "MAIN_HOLYSTAFF",
-     "MAIN_MACE"
+     "2H_DUALSCIMITAR_UNDEAD",
+     "MAIN_MACE_CRYSTAL"
     ],
-    "battles": 5,
+    "battles": 34,
     "cast": [
      {
-      "share": 0.6,
-      "weapon": "2H_FROSTSTAFF_CRYSTAL"
+      "share": 1.0,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "share": 0.647,
+      "weapon": "2H_CURSEDSTAFF_MORGANA"
+     },
+     {
+      "share": 0.588,
+      "weapon": "MAIN_DAGGER_HELL"
+     },
+     {
+      "share": 0.471,
+      "weapon": "2H_ROCKSTAFF_KEEPER"
+     },
+     {
+      "share": 0.471,
+      "weapon": "MAIN_MACE"
+     },
+     {
+      "share": 0.441,
+      "weapon": "2H_ARCANE_RINGPAIR_AVALON"
+     },
+     {
+      "share": 0.441,
+      "weapon": "MAIN_NATURESTAFF"
+     },
+     {
+      "share": 0.412,
+      "weapon": "2H_KNUCKLES_KEEPER"
+     },
+     {
+      "share": 0.412,
+      "weapon": "MAIN_HAMMER"
      }
     ],
-    "cohorts": 5,
-    "lift": 2.6,
-    "orgs": 3
+    "cohorts": 34,
+    "lift": 2.29,
+    "orgs": 12
+   },
+   {
+    "anchor": [
+     "2H_CURSEDSTAFF_MORGANA",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 24,
+    "cast": [
+     {
+      "share": 0.583,
+      "weapon": "2H_MACE"
+     },
+     {
+      "share": 0.5,
+      "weapon": "2H_POLEHAMMER"
+     },
+     {
+      "share": 0.417,
+      "weapon": "2H_ENIGMATICORB_MORGANA"
+     },
+     {
+      "share": 0.417,
+      "weapon": "2H_SHAPESHIFTER_KEEPER"
+     },
+     {
+      "share": 0.417,
+      "weapon": "2H_SHAPESHIFTER_SET2"
+     }
+    ],
+    "cohorts": 24,
+    "lift": 1.21,
+    "orgs": 15
+   }
+  ],
+  "mid": [
+   {
+    "anchor": [
+     "2H_AXE_AVALON",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 172,
+    "cast": [
+     {
+      "share": 0.459,
+      "weapon": "2H_KNUCKLES_SET3"
+     },
+     {
+      "share": 0.43,
+      "weapon": "2H_ICECRYSTAL_UNDEAD"
+     }
+    ],
+    "cohorts": 172,
+    "lift": 1.61,
+    "orgs": 73
+   },
+   {
+    "anchor": [
+     "2H_LONGBOW",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 102,
+    "cast": [],
+    "cohorts": 102,
+    "lift": 1.21,
+    "orgs": 65
+   },
+   {
+    "anchor": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_MACE"
+    ],
+    "battles": 84,
+    "cast": [],
+    "cohorts": 84,
+    "lift": 1.39,
+    "orgs": 42
+   },
+   {
+    "anchor": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HOLYSTAFF_UNDEAD"
+    ],
+    "battles": 53,
+    "cast": [
+     {
+      "share": 0.453,
+      "weapon": "2H_BOW_AVALON"
+     },
+     {
+      "share": 0.434,
+      "weapon": "2H_POLEHAMMER"
+     }
+    ],
+    "cohorts": 53,
+    "lift": 2.09,
+    "orgs": 23
+   },
+   {
+    "anchor": [
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ],
+    "battles": 37,
+    "cast": [
+     {
+      "share": 0.568,
+      "weapon": "2H_BOW_HELL"
+     },
+     {
+      "share": 0.432,
+      "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+     }
+    ],
+    "cohorts": 37,
+    "lift": 3.0,
+    "orgs": 24
+   },
+   {
+    "anchor": [
+     "2H_DAGGERPAIR",
+     "MAIN_FROSTSTAFF"
+    ],
+    "battles": 37,
+    "cast": [
+     {
+      "share": 0.459,
+      "weapon": "2H_DUALAXE_KEEPER"
+     }
+    ],
+    "cohorts": 37,
+    "lift": 2.73,
+    "orgs": 22
+   },
+   {
+    "anchor": [
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_MACE_HELL"
+    ],
+    "battles": 35,
+    "cast": [],
+    "cohorts": 35,
+    "lift": 3.59,
+    "orgs": 29
+   },
+   {
+    "anchor": [
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE"
+    ],
+    "battles": 36,
+    "cast": [],
+    "cohorts": 36,
+    "lift": 1.21,
+    "orgs": 30
+   },
+   {
+    "anchor": [
+     "2H_LONGBOW",
+     "2H_NATURESTAFF_HELL"
+    ],
+    "battles": 31,
+    "cast": [],
+    "cohorts": 31,
+    "lift": 1.34,
+    "orgs": 24
+   },
+   {
+    "anchor": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 25,
+    "cast": [],
+    "cohorts": 25,
+    "lift": 1.48,
+    "orgs": 22
+   }
+  ],
+  "small": [
+   {
+    "anchor": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_MACE"
+    ],
+    "battles": 36,
+    "cast": [],
+    "cohorts": 36,
+    "lift": 2.34,
+    "orgs": 33
+   },
+   {
+    "anchor": [
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_MACE_HELL"
+    ],
+    "battles": 31,
+    "cast": [],
+    "cohorts": 31,
+    "lift": 11.03,
+    "orgs": 29
+   },
+   {
+    "anchor": [
+     "2H_HOLYSTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_CRYSTAL"
+    ],
+    "battles": 24,
+    "cast": [
+     {
+      "share": 0.417,
+      "weapon": "2H_POLEHAMMER"
+     }
+    ],
+    "cohorts": 24,
+    "lift": 3.2,
+    "orgs": 18
+   },
+   {
+    "anchor": [
+     "2H_AXE",
+     "2H_HOLYSTAFF_UNDEAD"
+    ],
+    "battles": 20,
+    "cast": [],
+    "cohorts": 20,
+    "lift": 1.87,
+    "orgs": 18
    }
   ]
  },
- "generated_from": "2026-08-29 11:17 UTC",
+ "generated_from": "2026-09-29T03:39:07",
  "params": {
   "cast_share": 0.4,
   "min_battles": 3,
   "min_cohorts": 5,
   "min_lift": 1.2,
-  "min_orgs": 3
+  "min_orgs": 3,
+  "min_share": 0.02
  },
- "semantics": "Recurring observed cores mined from organization cohorts: an anchor pair seen together across multiple orgs and battles, with the weapons frequently observed alongside. Cohorts are Alliance/Guild kill-feed observations, NOT parties; counts only, no identifiers; display evidence only \u2014 never a scoring input.",
- "server": "us",
+ "semantics": "Recurring observed cores mined from killer-party cohorts: an anchor pair fielded together across multiple organizations and battles, with the weapons frequently fielded alongside. A cohort is one killer party as the kill event lists it; an organization is a group of parties linked by a shared guild. Counts only, no identifiers; display evidence only \u2014 never a scoring input.",
  "unassigned": {
-  "large": 94,
-  "mid": 331,
-  "small": 584
+  "large": 104,
+  "mid": 388,
+  "small": 889
  }
 }

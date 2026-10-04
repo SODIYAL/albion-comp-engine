@@ -2,38 +2,46 @@
 """
 Recurring observed composition families (roadmap item 7).
 
-Reads the committed cohort sample (out/weapon_usage_v2.json) and mines the
-recurring weapon CORES per fight-size bucket into out/cohort_families.json.
+Reads the committed cohort sample (out/weapon_usage_v2.json, written by
+derive_usage.py: killer parties, bucketed by party size) and mines the
+recurring weapon CORES per bucket into out/cohort_families.json.
 
-Why anchor pairs, not roster clustering: the cohort baskets are PARTIAL
-observations of rosters (kill-event coverage — most baskets hold 2-5 of a
-20-man lineup), so whole-basket distance clustering measured on this
-sample separates observation noise, not comps (cross-org Jaccard median
-0.0, p90 0.17 on the 2026-08 sample; the lift-gated co-occurrence graph is
-one connected component at every threshold tried). Pairs are the largest
-itemset with real support, so a family is:
+A family is an anchor pair, not a roster cluster:
 
   anchor  — the strongest remaining recurring PAIR (support gates below),
   cohorts — every remaining cohort containing BOTH anchor weapons,
   cast    — weapons observed in >= CAST_SHARE of those cohorts (with their
             observed shares; descriptive, never a membership claim).
 
+Pairs are the largest itemset with support in every bucket: two random
+killer parties share little (Jaccard over distinct weapons, measured on
+the sample: median 0.00 / p90 0.17 at 2-5, 0.07 / 0.19 at 6-15, 0.22 /
+0.41 at 16+). Whole-roster clustering was measured and rejected on the
+earlier partial-basket sample; on full parties it is untested.
+
 Families are extracted greedily and DISJOINT (a family's cohorts leave the
 pool before the next anchor is mined), so cohort counts never double-count
 and one ubiquitous weapon cannot anchor everything. Deterministic: pure
 counting, lexicographic tie-breaks, no randomness, LF-only output.
 
-Honesty gates: an anchor needs MIN_COHORTS cohorts, MIN_ORGS distinct
-organizations and MIN_BATTLES distinct battles (one alliance spamming one
-lineup, or one battle observed many times, is not a "recurring family"),
-plus popularity-corrected pair lift >= MIN_LIFT (two globally common
-weapons co-occurring at chance rate are not a core). Weapon keys are
-filtered against the built dataset so retired keys can never anchor a
-family — run AFTER build_dataset.py.
+Honesty gates: an anchor needs max(MIN_COHORTS, MIN_SHARE of the bucket's
+usable cohorts) cohorts, MIN_ORGS distinct organizations and MIN_BATTLES
+distinct battles (one squad fielding one lineup night after night, or one
+battle observed many times, is not a "recurring family"), plus
+popularity-corrected pair lift >= MIN_LIFT (two globally common weapons
+co-occurring at chance rate are not a core). Weapon keys are filtered
+against the built dataset so retired keys can never anchor a family — run
+AFTER build_dataset.py.
 
-The output carries COUNTS only: organization identifiers and battle ids
-stay in weapon_usage_v2.json for audit and never enter this artifact or
-the page. DISPLAY EVIDENCE ONLY — nothing here feeds scoring, suggestion
+DISTINCT ORGANIZATIONS. A killer party lists the guilds of its members.
+Two cohorts sharing any guild are one organization, transitively: the
+count is the number of guild-linked groups among the anchor's cohorts. A
+guild fielding its lineup with different guests each night is one group,
+not several. A party with no guild adds a cohort and no organization.
+
+The output carries COUNTS only: guild names and battle ids stay in
+weapon_usage_v2.json for audit and never enter this artifact or the
+page. DISPLAY EVIDENCE ONLY — nothing here feeds scoring, suggestion
 pools, or the forge (KILLBOARD_AFFINITY.md; empirical scoring stays
 parked behind a maintainer decision).
 
@@ -42,6 +50,7 @@ Run:  py -3 pipeline/build_cohort_families.py
 import collections
 import itertools
 import json
+import math
 import os
 import sys
 
@@ -50,46 +59,78 @@ USAGE = os.path.join(HERE, "out", "weapon_usage_v2.json")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
 OUT = os.path.join(HERE, "out", "cohort_families.json")
 
-# PROVISIONAL thresholds — chosen by inspection of the
-# committed 2026-08 sample (305 cohorts): large yields 5 families incl.
-# the observed ZvZ meta core, mid 1, small 0 (honestly thin). Revisit
-# with a bigger sample, not by loosening gates until families appear.
-MIN_COHORTS = 5    # anchor pair must recur in this many cohorts
+# PROVISIONAL thresholds (curation judgment, by inspection of the sample).
+# The cohort floor is a SHARE of the bucket so the gate holds its meaning
+# when the sample grows: at 1,000 cohorts a bucket an absolute floor of 5
+# admits 44 / 40 / 15 families (2-5 / 6-15 / 16+), most of them noise.
+# Revisit with the sample, never by loosening gates until families appear.
+MIN_COHORTS = 5    # anchor pair must recur in this many cohorts ...
+MIN_SHARE = 0.02   # ... and in this share of the bucket's usable cohorts
 MIN_ORGS = 3       # ...across this many distinct organizations
 MIN_BATTLES = 3    # ...and this many distinct battles
 MIN_LIFT = 1.2     # pair lift both*N/(cA*cB): >= 20% over chance
 CAST_SHARE = 0.4   # cast = weapons in >= this share of the family's cohorts
 
 
+def org_groups(guild_lists):
+    """Distinct organizations among cohorts: groups linked by a shared
+    guild (union-find over guild names). Unguilded cohorts add none."""
+    parent = {}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for guilds in guild_lists:
+        if not guilds:
+            continue
+        for g in guilds:
+            parent.setdefault(g, g)
+        root = find(guilds[0])
+        for g in guilds[1:]:
+            parent[find(g)] = root
+    return len({find(g) for g in parent})
+
+
+def cohort_floor(usable):
+    """The cohort count an anchor needs in a bucket of `usable` cohorts."""
+    return max(MIN_COHORTS, math.ceil(MIN_SHARE * usable))
+
+
 def mine_bucket(rows, known):
     """Greedy disjoint anchor-pair families for one bucket."""
     remaining = [(frozenset(w for w in (r.get("weapons") or []) if w in known),
-                  r["cohort"], r["battle_id"]) for r in rows]
+                  tuple(r.get("guilds") or ()), r["battle_id"]) for r in rows]
     remaining = [x for x in remaining if len(x[0]) >= 2]
+    floor_n = cohort_floor(len(remaining))
     families = []
-    while len(remaining) >= MIN_COHORTS:
+    while len(remaining) >= floor_n:
         n_total = len(remaining)
         count = collections.Counter()
         for ws, _, _ in remaining:
             for w in ws:
                 count[w] += 1
-        stats = collections.defaultdict(lambda: [0, set(), set()])
-        for ws, org, bid in remaining:
+        stats = collections.defaultdict(lambda: [0, [], set()])
+        for ws, guilds, bid in remaining:
             for p in itertools.combinations(sorted(ws), 2):
                 st = stats[p]
                 st[0] += 1
-                st[1].add(org)
+                st[1].append(guilds)
                 st[2].add(bid)
         best = None
         for p in sorted(stats):   # lexicographic tie-break, deterministic
-            n, orgs, bats = stats[p]
-            if n < MIN_COHORTS or len(orgs) < MIN_ORGS \
-                    or len(bats) < MIN_BATTLES:
+            n, guild_lists, bats = stats[p]
+            if n < floor_n or len(bats) < MIN_BATTLES:
                 continue
             lift = n * n_total / (count[p[0]] * count[p[1]])
             if lift < MIN_LIFT:
                 continue
-            key = (n, len(orgs), len(bats))
+            n_orgs = org_groups(guild_lists)
+            if n_orgs < MIN_ORGS:
+                continue
+            key = (n, n_orgs, len(bats))
             if best is None or key > best[0]:
                 best = (key, p, lift)
         if best is None:
@@ -115,7 +156,8 @@ def mine_bucket(rows, known):
             "lift": round(lift, 2),
             "cast": cast,
         })
-        remaining = [x for x in remaining if x not in members]
+        taken = {id(x) for x in members}
+        remaining = [x for x in remaining if id(x) not in taken]
     return families, len(remaining)
 
 
@@ -134,21 +176,21 @@ def main():
     cohorts = usage.get("cohorts")
     if not isinstance(cohorts, dict):
         print("FAIL: usage sample carries no cohorts — refresh with "
-              "sample_battles.py before mining families")
+              "derive_usage.py before mining families")
         return 2
     out = {
-        "generated_from": usage.get("generated_utc"),
-        "server": usage.get("server"),
+        "generated_from": (usage.get("window") or {}).get("to"),
         "semantics": (
-            "Recurring observed cores mined from organization cohorts: an "
-            "anchor pair seen together across multiple orgs and battles, "
-            "with the weapons frequently observed alongside. Cohorts are "
-            "Alliance/Guild kill-feed observations, NOT parties; counts "
-            "only, no identifiers; display evidence only — never a "
+            "Recurring observed cores mined from killer-party cohorts: an "
+            "anchor pair fielded together across multiple organizations "
+            "and battles, with the weapons frequently fielded alongside. "
+            "A cohort is one killer party as the kill event lists it; an "
+            "organization is a group of parties linked by a shared guild. "
+            "Counts only, no identifiers; display evidence only — never a "
             "scoring input."),
-        "params": {"min_cohorts": MIN_COHORTS, "min_orgs": MIN_ORGS,
-                   "min_battles": MIN_BATTLES, "min_lift": MIN_LIFT,
-                   "cast_share": CAST_SHARE},
+        "params": {"min_cohorts": MIN_COHORTS, "min_share": MIN_SHARE,
+                   "min_orgs": MIN_ORGS, "min_battles": MIN_BATTLES,
+                   "min_lift": MIN_LIFT, "cast_share": CAST_SHARE},
         "buckets": {},
         "unassigned": {},
     }

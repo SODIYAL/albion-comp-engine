@@ -2,13 +2,14 @@
 """
 Sample REAL PARTY COMPOSITIONS from the killboard.
 
-WHY THIS EXISTS. Every other evidence layer in this project sees weapons but
-not parties. `sample_battles.py` counts weapons from kill events (killer +
-victim), so a player who neither killed nor died is invisible, and nothing
-groups players into the squads they actually fought in. `sample_rosters.py`
-reconstructs alliance-level roster MIXES but stores seat labels, not
-weapons. Meanwhile the comp corpus is 36 published compositions — plans
-people wrote down, not parties that fought.
+WHY THIS EXISTS. A kill-event weapon count (killer + victim) sees weapons
+but not parties: a player who neither killed nor died is invisible, and
+nothing groups players into the squads they actually fought in. An
+alliance-level roster mix stores seat labels, not weapons. The comp corpus
+is 36 published compositions — plans people wrote down, not parties that
+fought. This harvest is the one killboard sampler: the fight-size
+prevalence strip and the cohorts are derived from its artifact
+(derive_usage.py).
 
 The official gameinfo API carries `GroupMembers` on every kill event: the
 KILLER'S PARTY at the moment of the kill, each member with their equipment.

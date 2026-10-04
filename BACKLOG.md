@@ -239,14 +239,6 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
-- **Regenerate the evidence board on the harvest machine** so `balanced`
-  gets its pooled median rows: `py -3 pipeline/audit_style_rosters.py`
-  (needs the raw party cache, harvest machine only) -> `derive_style_bands.py`
-  -> `build_dataset.py` -> the gates. Target-is-the-median shipped the pooled
-  `balanced|<band>` cell in the audit and the engine reads it like any
-  style, but the committed board predates it, so balanced at 10+ still reads
-  the content row (labelled `content` / `min` on the board) until the audit
-  reruns there. (V: 09b, Target is the median)
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
   47 of 81 head / armor / shoes items have no vote and ASSUME their own
@@ -311,7 +303,7 @@ Each is decidable today from evidence already in the repo.
   deaths), fits outcome weights on the training split and compares the
   template's fitness() against them on the holdout. Planted-weight
   recovery checks: Spearman 0.94 recovered, holdout AUC 0.49 with no
-  signal planted. A first read on GUILD-level labels (the daily fetch's
+  signal planted. A first read on GUILD-level labels (the albionbb
   kill lists, 582 training parties of 10-20): `fitness()` AUC 0.50, no
   capability separates wins from losses, party size alone predicts better
   (0.61) — numbers decide these fights. Before the party-level read, add a
@@ -339,13 +331,14 @@ Each is decidable today from evidence already in the repo.
   them. ~50 hand-labelled rosters cannot beat a classifier tuned on them;
   a labelled HOLDOUT round first, then a gear-plus-delivery labeller scored
   on it.
-- **One killboard sampler**: `sample_battles.py` (`battles_cache/` ->
-  `weapon_usage_v2.json`, the display strip's fight-size prevalence and the
-  cohort families) and `sample_rosters.py` (`roster_cache/` ->
-  `roster_mixes.json`, the need-profile evidence) are strictly weaker views of
-  what `sample_parties.py` already harvests with party structure and gear.
-  Re-derive both artifacts from `party_rosters.json.gz`, retire the two older
-  samplers and their caches, and the overnight task feeds everything.
+- **Whole-roster clustering on killer parties**: the observed families are
+  anchor pairs; clustering was rejected on the partial alliance baskets
+  the cohorts used to be. Parties of 16+ are full rosters (random-pair
+  Jaccard median 0.22, p90 0.41), so roster clusters are untested, not
+  refuted. Display only. (V: 10, One killboard sampler)
+- **The retired samplers' caches** (`pipeline/out/battles_cache/`, 1,652
+  files; `roster_cache/`, 118): gitignored, read by nothing. Delete them
+  from the harvest machine once the derived strip has been reviewed.
 - **Cross-check the Resilience Penetration table**
   (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
   wiki values) against the dumps. Optional. (Q7)

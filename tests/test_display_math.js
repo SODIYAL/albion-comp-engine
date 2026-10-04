@@ -32,6 +32,8 @@ function extract(name) {
 }
 const label = SRC.match(/const USAGE_BUCKET_LABEL = \{.*\};/);
 if (!label) throw new Error("could not extract USAGE_BUCKET_LABEL");
+const sizeLabel = SRC.match(/const COHORT_SIZE_LABEL = \{.*\};/);
+if (!sizeLabel) throw new Error("could not extract COHORT_SIZE_LABEL");
 
 const ctx = {
   PLANNED: 20,
@@ -45,6 +47,7 @@ const ctx = {
 vm.createContext(ctx);
 vm.runInContext("PLAN = () => Math.max(PLANNED, party.length);", ctx);
 vm.runInContext(label[0], ctx);
+vm.runInContext(sizeLabel[0], ctx);
 vm.runInContext(extract("usageBucket"), ctx);
 vm.runInContext(extract("cohortContext"), ctx);
 vm.runInContext(extract("cohortAffinity"), ctx);
@@ -109,7 +112,8 @@ function setUsage(baskets) {
   const okCtx = run("cohortContext()");
   check("under 8 usable cohorts the context is null; 11 usable rows carry",
         thin === null && thinned === null
-        && okCtx && okCtx.key === "large" && okCtx.rows.length === 11,
+        && okCtx && okCtx.key === "large" && okCtx.rows.length === 11
+        && okCtx.label === "16+",   // the cohort axis is party size
         `thin=${JSON.stringify(thin)} thinned=${JSON.stringify(thinned)}`);
 }
 

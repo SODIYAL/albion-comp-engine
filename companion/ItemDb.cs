@@ -41,7 +41,7 @@ public sealed class ItemDb
         _byIndex.TryGetValue(index, out var n) ? n : $"ITEM_{index}";
 
     /// <summary>Engine unique_name: strip tier prefix and @enchant suffix —
-    /// the same normalization pipeline/sample_battles.py applies to
+    /// the same normalization pipeline/sample_parties.py applies to
     /// killboard item types ("T8_2H_MACE@3" -> "2H_MACE").</summary>
     public static string ToEngineKey(string fullName)
     {

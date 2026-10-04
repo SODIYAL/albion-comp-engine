@@ -308,7 +308,8 @@ def main():
     # stay embedded because they are on screen from the first paint and must
     # survive file:// and offline use.
     icons = {k: v for k, v in icons.items() if k in data["weapons"]}
-    # Real-usage sample (sample_battles.py). Optional; display evidence only.
+    # Real-usage sample (pipeline/derive_usage.py, from the killer-party
+    # harvest). Optional; display evidence only.
     usage_path = os.path.join(PIPE, "out", "weapon_usage_v2.json")
     usage = {}
     if os.path.exists(usage_path):
@@ -321,12 +322,20 @@ def main():
             usage["buckets"] = {b: {w: n for w, n in m.items()
                                     if w in data["weapons"]}
                                 for b, m in usage["buckets"].items()}
-        # Organization cohorts (PR #5): the page needs only the WEAPON
-        # BASKETS per bucket — organization identifiers and battle ids
-        # stay in out/weapon_usage_v2.json for audit, never in the page.
+        # Killer-party cohorts: the page needs only the WEAPON BASKETS per
+        # bucket — guild names and battle ids stay in
+        # out/weapon_usage_v2.json for audit, never in the page. A basket
+        # is embedded as indexes into `cohort_keys`: the plain keys cost
+        # ~530 KB of page weight at 1,000 parties a bucket. _app.js reads
+        # them back to weapon keys once at load.
         if isinstance(usage.get("cohorts"), dict):
+            keys = sorted({w for rows in usage["cohorts"].values()
+                           for c in rows for w in (c.get("weapons") or [])
+                           if w in data["weapons"]})
+            at = {w: i for i, w in enumerate(keys)}
+            usage["cohort_keys"] = keys
             usage["cohort_baskets"] = {
-                b: [[w for w in (c.get("weapons") or []) if w in data["weapons"]]
+                b: [[at[w] for w in (c.get("weapons") or []) if w in at]
                     for c in rows]
                 for b, rows in usage["cohorts"].items()}
             usage.pop("cohorts", None)

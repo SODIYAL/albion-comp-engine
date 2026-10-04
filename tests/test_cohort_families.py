@@ -4,10 +4,11 @@ Cohort-family artifact contracts — pipeline/build_cohort_families.py.
 
 The families feed a public display surface, so the artifact must hold the
 same honesty rules as the rest of the killboard layer: counts only (no
-organization or battle identifiers can reach the page), disjoint families
-(cohort counts never double-count), gates actually enforced, and a
-byte-identical rebuild (the LF/determinism discipline every committed
-pipeline artifact keeps).
+guild name or battle identifier can reach the page), disjoint families
+(cohort counts never double-count), gates actually enforced (the cohort
+floor is a share of the bucket; organizations are guild-linked groups),
+and a byte-identical rebuild (the LF/determinism discipline every
+committed pipeline artifact keeps).
 
 Run:  py -3 tests/test_cohort_families.py
 """
@@ -51,12 +52,41 @@ def run():
         known = set(json.load(f)["weapons"])
     p = doc["params"]
 
-    # counts only — no organization or battle identifiers in the artifact
+    # counts only — no guild name or battle identifier in the artifact
     text = first.decode("utf-8")
-    check("no org/battle identifiers leak into the artifact",
-          "alliance:" not in text and "guild:" not in text
-          and "battle_id" not in text,
-          "identifier substring found")
+    guild_names = {g for rows in usage["cohorts"].values()
+                   for r in rows for g in (r.get("guilds") or [])}
+    strings = set()
+
+    def collect(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                strings.add(k)
+                collect(v)
+        elif isinstance(o, list):
+            for v in o:
+                collect(v)
+        elif isinstance(o, str):
+            strings.add(o)
+    collect(doc["buckets"])
+    check("no guild name or battle identifier leaks into the artifact",
+          guild_names and not (guild_names & strings)
+          and "guilds" not in text and "battle_id" not in text,
+          f"{sorted(guild_names & strings)[:3]}")
+
+    # the organization count: guild-linked groups, never one per guild set
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import build_cohort_families as bcf
+    check("organizations are guild-linked groups: one guild with different "
+          "guests is one, an unguilded party adds none",
+          bcf.org_groups([("G",), ("G", "X"), ("Y", "G"), ()]) == 1
+          and bcf.org_groups([("A",), ("B", "C"), ("C", "D"), ()]) == 2
+          and bcf.org_groups([(), ()]) == 0)
+    check("the cohort floor is a share of the bucket, never under the "
+          "absolute minimum",
+          bcf.cohort_floor(40) == p["min_cohorts"]
+          and bcf.cohort_floor(1000) == 20 and p["min_share"] == 0.02,
+          f"{bcf.cohort_floor(40)} / {bcf.cohort_floor(1000)}")
 
     ok_shape, ok_gates, ok_disjoint = True, True, True
     detail = []
@@ -64,6 +94,7 @@ def run():
         usable = sum(
             1 for r in usage["cohorts"].get(bucket, [])
             if len(set(w for w in (r.get("weapons") or []) if w in known)) >= 2)
+        floor_n = bcf.cohort_floor(usable)
         claimed = sum(f["cohorts"] for f in fams)
         if claimed + doc["unassigned"][bucket] != usable:
             ok_disjoint = False
@@ -75,7 +106,7 @@ def run():
                     and all(w in known for w in a)):
                 ok_shape = False
                 detail.append(f"{bucket} anchor {a}")
-            if not (f["cohorts"] >= p["min_cohorts"]
+            if not (f["cohorts"] >= floor_n
                     and p["min_orgs"] <= f["orgs"] <= f["cohorts"]
                     and p["min_battles"] <= f["battles"] <= f["cohorts"]
                     and f["lift"] >= p["min_lift"]):
@@ -95,15 +126,15 @@ def run():
     check("every family passes the published support/org/battle/lift gates",
           ok_gates, "; ".join(detail))
 
-    # the 2026-08 sample's known yield — a canary against silent gate drift
-    # (update alongside a sample refresh, not to make a red test green)
+    # the committed sample's known yield — a canary against silent gate
+    # drift (update alongside a sample refresh, not to make a red test
+    # green). A share floor of 2% bounds a bucket at 50 families.
     check("committed sample yields families where the data supports them: the large "
           "bucket (the ZvZ meta) carries >= 3, and no bucket carries more families than "
-          "its usable cohorts could support at the published minimum",
+          "the share floor allows",
           len(doc["buckets"].get("large") or []) >= 3
-          and all(len(fams) * doc["params"]["min_cohorts"]
-                  <= sum(f["cohorts"] for f in fams) + doc["unassigned"][b]
-                  for b, fams in doc["buckets"].items()),
+          and all(len(fams) <= 1 / p["min_share"]
+                  for fams in doc["buckets"].values()),
           "  ".join(f"{b}={len(fams)}" for b, fams in doc["buckets"].items()))
 
     print("=" * 74)

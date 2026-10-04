@@ -688,8 +688,8 @@
       </li>`;
     }).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
-    /* observed killboard context (PR #5 integration): _app.js owns the
-       cohort math; the note appears only when cohorts echo this pick */
+    /* observed killboard context: _app.js owns the cohort math; the note
+       appears only when killer-party cohorts echo this pick */
     const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
     /* alternatives, rehomed: the hidden flank carried the
        click-to-add alternatives — a single take-it-or-leave-it pick is

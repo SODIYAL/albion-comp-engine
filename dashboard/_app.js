@@ -1848,10 +1848,10 @@ function renderFootnote(){
     Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.
     Item renders from the official Albion Online Render Service, © Sandbox Interactive GmbH — this tool is unofficial and not affiliated.`;
 }
-/* FIGHT-SIZE EQUIPMENT PREVALENCE (sample_battles.py, §E): how often a
-   weapon appeared on observed combatants in recent fights of roughly the
-   size this party would find itself in. The killboard states only the total
-   fight size — party size, side size and selected abilities are UNKNOWN and
+/* FIGHT-SIZE EQUIPMENT PREVALENCE (pipeline/derive_usage.py, §E): how
+   often a weapon appeared on observed combatants in recent fights of
+   roughly the size this party would find itself in. The prevalence axis is
+   the total fight size — side size and selected abilities are UNKNOWN and
    never inferred; prevalence is not effectiveness, and none of this feeds
    the scoring. */
 /* One gate for the usage sample; the min-sample rule lives here once (it
@@ -1864,6 +1864,16 @@ function renderFootnote(){
    — the fights the comp is FOR — so the two axes differ by design.)
    Participant axis = 2 x party size, mirroring engine size_bucket. */
 const USAGE_BUCKET_LABEL = { small: "small", mid: "mid-size", large: "large" };
+/* the same buckets on the cohort axis: a killer party of N keys to the
+   bucket a fight of 2N falls in (derive_usage.py party_bucket) */
+const COHORT_SIZE_LABEL = { small: "2-5", mid: "6-15", large: "16+" };
+/* the page embeds each basket as indexes into USAGE.cohort_keys (page
+   weight, dashboard/build.py); they are read back to weapon keys once */
+if (typeof USAGE !== "undefined" && USAGE.cohort_keys && USAGE.cohort_baskets){
+  for (const b of Object.keys(USAGE.cohort_baskets))
+    USAGE.cohort_baskets[b] = USAGE.cohort_baskets[b]
+      .map(row => row.map(i => USAGE.cohort_keys[i]));
+}
 function usageBucket(){
   const n = 2 * PLAN();
   return n < 12 ? "small" : n <= 30 ? "mid" : "large";
@@ -1884,20 +1894,21 @@ function usageOf(w){
            inBattles: ((USAGE.buckets_battles || {})[u.key] || {})[w] || 0,
            label: u.label };
 }
-/* ---------------- observed organization cohorts (PR #5) ----
-   sample_battles.py groups actors ONLY when the kill feed states the same
-   Alliance/Guild identity; ambiguous players are excluded. Cohorts are NOT
-   parties, sides, or win-rate samples — the copy says "observed together",
-   never "teammates" or "successful". The page embeds only the anonymous
-   weapon baskets (dashboard/build.py strips org ids and battle ids). Display
-   evidence only; nothing here can touch a score. */
+/* ---------------- observed killer-party cohorts ----
+   A cohort is one killer party as the kill event itself lists it
+   (pipeline/derive_usage.py, from the killer-party harvest), bucketed by
+   PARTY size. A killer party scored at least one kill, so the sample leans
+   to the winning side: the copy says "killer parties" and "fielded
+   together", never "winning comp" or "successful". The page embeds only
+   the anonymous weapon baskets (dashboard/build.py strips guild names and
+   battle ids). Display evidence only; nothing here can touch a score. */
 function cohortContext(){
   if (typeof USAGE === "undefined" || !USAGE.cohort_baskets) return null;
   const key = usageBucket();
   const rows = (USAGE.cohort_baskets[key] || [])
     .filter(ws => Array.isArray(ws) && ws.length >= 2);
   if (rows.length < 8) return null;   /* too thin to quote */
-  return { key, rows, label: USAGE_BUCKET_LABEL[key] || key };
+  return { key, rows, label: COHORT_SIZE_LABEL[key] || key };
 }
 function cohortAffinity(){
   const ctx = cohortContext();
@@ -1943,10 +1954,10 @@ function cohortAffinity(){
 }
 /* Partial-roster neighbours (roadmap item 6 — the
    KILLBOARD_AFFINITY.md "next step": show a few anonymized observed
-   organization ROSTERS that overlap the selected weapons, not only the
+   killer-party ROSTERS that overlap the selected weapons, not only the
    per-candidate aggregation above). Same rules as cohortAffinity: the
    anonymous baskets only, bucket keyed to the plan, a neighbour must
-   share >=2 of the selected weapons, language stays "observed together".
+   share >=2 of the selected weapons, language stays "fielded together".
    Ranked by shared count, then Jaccard similarity over unique weapons,
    then original basket order (deterministic). Display evidence only —
    nothing here can touch a score, a suggestion pool, or the forge. */
@@ -1972,12 +1983,11 @@ function cohortNeighbours(){
 }
 /* Recurring observed families (roadmap item 7): mined offline
    by pipeline/build_cohort_families.py — an anchor PAIR that recurs across
-   orgs and battles, plus the weapons frequently observed alongside (their
+   orgs and battles, plus the weapons frequently fielded alongside (their
    shares). The page renders the committed artifact verbatim and marks
    which pieces the current roster already carries. Anchor-pair families,
-   not roster clustering, BY FINDING: the baskets are partial observations
-   (most hold 2-5 weapons of a 20-man lineup), so whole-roster distance
-   clustering separates observation noise — see the builder's docstring.
+   not roster clustering: two random killer parties share little, so the
+   pair is the largest itemset with support — see the builder's docstring.
    Display evidence only; nothing here touches a score. */
 function familyRows(){
   if (typeof FAMILIES === "undefined") return null;
@@ -1994,16 +2004,16 @@ function familiesHtml(withNote){
   const rows = familyRows();
   if (!rows) return "";
   const note = withNote
-    ? `<div class="ka-note">Anchor pairs observed together across distinct Alliance/Guild cohorts and battles; percentages are how often a weapon was observed with that anchor. Observation counts, not parties or win rates; never changes a score.</div>`
+    ? `<div class="ka-note">Anchor pairs fielded together by killer parties across distinct organizations and battles; percentages are how often a weapon was fielded with that anchor. Observation counts, not win rates; never changes a score.</div>`
     : "";
-  return `<div class="ka-fam"><span class="ka-nb-label">Recurring observed cores — ${esc(USAGE_BUCKET_LABEL[usageBucket()] || usageBucket())} fights</span><div class="fam-grid">${
+  return `<div class="ka-fam"><span class="ka-nb-label">Recurring observed cores — killer parties of ${esc(COHORT_SIZE_LABEL[usageBucket()] || usageBucket())}</span><div class="fam-grid">${
     rows.map(f => `<div class="fam-row${f.anchored ? " mine" : ""}">
       <span class="fam-anchor">${f.anchor.map(w =>
         `<button class="nb-w${f.mine.includes(w) ? " match" : ""}" data-detail="${w}" title="${esc(nameOf(w))} — family anchor">${icon(w, 26)}</button>`).join("")}</span>
-      <span class="fam-meta">${f.cohorts} cohorts · ${f.orgs} orgs · ${f.battles} battles · ${f.lift}× lift${f.anchored ? ' · <b class="fam-yours">anchor in your roster</b>' : ""}</span>
+      <span class="fam-meta">${f.cohorts} parties · ${f.orgs} orgs · ${f.battles} battles · ${f.lift}× lift${f.anchored ? ' · <b class="fam-yours">anchor in your roster</b>' : ""}</span>
       ${f.anchored ? "" : `<button class="fam-load" data-family-load="${f.anchor.join(",")}" title="add this core's anchor pair to the comp as manual picks — the engine scores them like any manual choice, and the forge can complete the rest">add core</button>`}
       ${(f.cast || []).length ? `<span class="fam-cast"><i>with</i>${f.cast.map(c =>
-        `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — observed with this core in ${Math.round(100 * c.share)}% of its cohorts">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
+        `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — fielded with this core in ${Math.round(100 * c.share)}% of its parties">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
     </div>`).join("")}</div>${note}</div>`;
 }
 /* Observed effect quotas (advice only, never a score; R18, display test
@@ -2059,8 +2069,8 @@ function observedLine(w){
   if (!o) return "";
   const lift = o.lift >= 1.15 ? `${o.lift.toFixed(1)}× pair affinity` : "no strong pair lift";
   return `<div class="obs-note"><span class="obs-k">observed killboard context · display only</span>
-    <b>${o.cohorts}</b> organization cohort${o.cohorts === 1 ? "" : "s"} also fielded ${nameOf(w)} alongside ${a.minOverlap === 1 ? "your weapon" : "at least 2 of your weapons"} · ${lift}
-    <small>same stated Alliance/Guild in one ${esc(a.ctx.label)} fight — not party membership, win rate, or a scoring input</small></div>`;
+    <b>${o.cohorts}</b> killer part${o.cohorts === 1 ? "y" : "ies"} also fielded ${nameOf(w)} alongside ${a.minOverlap === 1 ? "your weapon" : "at least 2 of your weapons"} · ${lift}
+    <small>one party as the kill event lists it, parties of ${esc(a.ctx.label)} — not a win rate or a scoring input</small></div>`;
 }
 function usageLine(w){
   const u = usageOf(w);
@@ -2071,8 +2081,10 @@ function usageLine(w){
     ? `not seen in ${u.battles} recent ${u.label}-size fights`
     : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} observed combatants` +
       `${u.inBattles ? ` (in ${u.inBattles} of ${u.battles} fights)` : ` across ${u.battles} fights`}`;
+  const win = USAGE.window
+    ? `${+USAGE.window.days} days to ${esc(String(USAGE.window.to || "").slice(0, 10))}, ` : "";
   return `<div class="fieldnote">equipment prevalence, ${esc(u.label)}-size fights — ${txt}
-    <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard; fight size ≠ party size; not a build recommendation)</span></div>`;
+    <span>(${win}killboard; fight size ≠ party size; not a build recommendation)</span></div>`;
 }
 
 /* ------------------------------------------------------ weapon dossier
@@ -2415,39 +2427,39 @@ function renderEvidence(cap){
 }
 function renderMetaStrip(){
   const sec = $("meta-sec");
-  /* contextual mode (PR #5): with cohort data and a party, the strip shows
-     what was OBSERVED WITH the selected weapons instead of raw popularity;
-     old samples and thin data fall back to the prevalence strip below */
+  /* contextual mode: with cohort data and a party, the strip shows what
+     killer parties FIELDED WITH the selected weapons instead of raw
+     popularity; thin data falls back to the prevalence strip below */
   const a = cohortAffinity();
   const nb = cohortNeighbours();
   if (a && (a.candidates.length || nb)){
     const rows = a.candidates.slice(0, 12);
     $("meta-label").textContent =
-      `Observed with your weapons — ${a.ctx.label} fights (${a.N} organization cohorts; display only)`;
+      `Fielded with your weapons — killer parties of ${a.ctx.label} (${a.N} parties; display only)`;
     /* neighbour rosters (roadmap item 6): the observed baskets themselves,
        shared picks highlighted, the rest clickable as dossier links —
-       "observed together", never "party" or "winning comp" */
+       "fielded together", never "winning comp" */
     const nbHtml = !nb ? "" : `<div class="ka-nb">
-      <span class="ka-nb-label">Observed rosters most like yours — ${nb.matched} cohort${nb.matched === 1 ? "" : "s"} share${nb.matched === 1 ? "s" : ""} ≥2 of your ${nb.selected.length} weapons</span>
+      <span class="ka-nb-label">Observed rosters most like yours — ${nb.matched} part${nb.matched === 1 ? "y" : "ies"} share${nb.matched === 1 ? "s" : ""} ≥2 of your ${nb.selected.length} weapons</span>
       ${nb.rows.map(r => {
-        /* baskets are unordered sets — shared picks lead, and a huge
-           alliance basket caps at 14 icons with an honest "+N more" (the
-           full basket is evidence, not a recommended roster to copy) */
+        /* baskets are unordered sets of distinct weapons — shared picks
+           lead, and a wide basket caps at 14 icons with an honest "+N
+           more" (the basket is evidence, not a roster to copy) */
         const shown = r.basket.filter(w => nb.selected.includes(w))
           .concat(r.others).slice(0, 14);
         const more = r.basket.length - shown.length;
-        return `<div class="nb-row"><span class="nb-ov" title="${r.shared} of your ${nb.selected.length} unique weapons appear in this observed cohort of ${r.basket.length} (${Math.round(100 * r.jaccard)}% roster similarity)">${r.shared}/${nb.selected.length}</span>${
+        return `<div class="nb-row"><span class="nb-ov" title="${r.shared} of your ${nb.selected.length} unique weapons appear in this killer party's ${r.basket.length} distinct weapons (${Math.round(100 * r.jaccard)}% roster similarity)">${r.shared}/${nb.selected.length}</span>${
           shown.map(w => nb.selected.includes(w)
             ? `<span class="nb-w match" title="${esc(nameOf(w))} — also in your roster">${icon(w, 22)}</span>`
-            : `<button class="nb-w" data-detail="${w}" title="${esc(nameOf(w))} — fielded by this cohort, not in your roster">${icon(w, 22)}</button>`).join("")
+            : `<button class="nb-w" data-detail="${w}" title="${esc(nameOf(w))} — fielded by this party, not in your roster">${icon(w, 22)}</button>`).join("")
         }${more > 0 ? `<span class="nb-more">+${more} more</span>` : ""}</div>`;
       }).join("")}</div>`;
     $("meta-strip").innerHTML = rows.map((r, i) => {
       const aff = r.lift >= 1.15 ? `${r.lift.toFixed(1)}× affinity` : "baseline pairing";
       return `<div class="meta-row meta-aff"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(r.w, 20)}
         <button class="nm-btn" data-detail="${r.w}">${nameOf(r.w)}</button>
-        <span class="pct">${r.cohorts} cohorts · ${aff}</span></div>`;
-    }).join("") + nbHtml + familiesHtml(false) + effectQuotasHtml() + `<div class="ka-note">Matches need ${a.minOverlap === 1 ? "your weapon" : "≥2 of your weapons"} in the same observed Alliance/Guild cohort. Family percentages are observation shares. Not party reconstruction or effectiveness data; never changes a score.</div>`;
+        <span class="pct">${r.cohorts} parties · ${aff}</span></div>`;
+    }).join("") + nbHtml + familiesHtml(false) + effectQuotasHtml() + `<div class="ka-note">Matches need ${a.minOverlap === 1 ? "your weapon" : "≥2 of your weapons"} in the same killer party (a party that scored at least one kill). Family percentages are observation shares. Not effectiveness data; never changes a score.</div>`;
     sec.hidden = false;
     return;
   }

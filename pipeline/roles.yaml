@@ -531,7 +531,7 @@ kit_doctrine:
 #   - the validation-round calls (VALIDATION.md 2026-08-26)
 #   - 8 curated near-complete rosters (roles_report kit evidence layer)
 #   - 139 near-complete killboard fight rosters (out/roster_mixes.json,
-#     sample_rosters.py): healer mode 4/20; engage > stopper everywhere
+#     a frozen record): healer mode 4/20; engage > stopper everywhere
 #     (live 1.95 vs 1.09, curated 2.6 vs 1.8); pierce fielded by 100%
 #     of party rosters, heal-cut 92%, purge 71% (not gated — soft)
 #   - Wardergrip ZvZ guide ("4-5 tanks, 3-4 supports, 4 healers")

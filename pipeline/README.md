@@ -22,7 +22,8 @@ out/weapon_lines.json     161 weapon lines: name + full Q/W/E/passive spell list
 out/spell_index.json      367 spells: function flags, direction hints, and
                           structural AREA GEOMETRY (radius/max targets)
 out/item_stats.json       base stats + per-tier/per-enchant item power
-out/weapon_usage_v2.json  FIGHT-SIZE equipment prevalence (albionbb; display only)
+out/weapon_usage_v2.json  FIGHT-SIZE equipment prevalence + killer-party cohorts
+                          (derive_usage.py, from the party harvest; display only)
    │  py -3 pipeline/build_interactions.py   (interactions.yaml -> validated)
    ▼
 out/interactions.json     spell-keyed PvP interaction records: duplicate
@@ -532,32 +533,32 @@ HEAD (`--base` for another revision). Review the report, then commit.
   same unit, and `fit_choice_weights.py` takes the same flags. Run by the
   fold after derive_style_bands; `--rosters` names a git-shown copy of the
   artifact when the poll has rewritten the working file.
-- `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
-  grows the albionbb battle caches with fresh GROUP fights
-  (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips
-  the large-bucket top-up) and then restores `weapon_usage_v2.json` to its
-  pre-run bytes. That artifact (prevalence, cohorts, families) is what this
-  channel feeds. The `sample_rosters.py` sweep is not part of the job:
-  `roster_mixes.json` has no code reader (the need profiles it informed are
-  curated constants); run it by hand if the evidence is ever wanted again.
-  1v1/2v2 content (corrupted dungeons, mist duels) can never enter: the
-  battles endpoint is only queried with a total-player floor (10 / 40), and
-  analysis buckets by actual fight size besides. Log:
-  `pipeline/out/fetch_logs/daily_fetch.log` (gitignored). WEEKLY CADENCE (or
-  before a validation round): `fold_harvest.ps1` runs the re-analysis as
-  its "usage from killboard" step (`sample_battles.py --min-players 10
-  --battles 120`). That run always lists the newest group fights from the
-  network and analyzes THAT window; the daily cache only spares it the
-  per-battle kill fetches, so `-SkipUsage` is the offline fold and leaves
-  the artifact as committed. `sample_rosters.py --pages 0` and
-  `sample_parties.py --pages 0` re-read their caches without the network.
-  Review the numbers, rebuild dependents, run the gate list, commit —
-  analysis is always a deliberate, reviewed step, never automated. The
-  artifact went unrefreshed for a month once when the daily task was not
-  registered on the harvest machine: `Get-ScheduledTask` should list all
-  three CompForge jobs. Mind patch boundaries when
-  reading accumulated windows: the cache spans balance patches; slice by
-  `patch_history` dates before comparing metas.
+- `pipeline/derive_usage.py` — the observed-evidence artifact
+  (`out/weapon_usage_v2.json`: the prevalence strip, the cohorts, and
+  through `build_cohort_families.py` the observed families), derived
+  offline from `party_rosters.json.gz`. The party harvest is the one
+  killboard sampler; the two albionbb samplers it replaced were weaker
+  views of the same fights. The frame: every harvested battle of 6+
+  players that started in the 28 days before the NEWEST battle in the
+  artifact (anchored on the data, never on the clock, so a rebuild is
+  byte-identical). 1v1/2v2 content (corrupted dungeons, mist duels) is a
+  battle of 2-4 and never enters. Prevalence is by FIGHT size over
+  combatants with a build (killers, victims, kill participants). A cohort
+  is one KILLER PARTY as the kill event lists it, bucketed by PARTY size (a
+  party of N keys to the bucket a fight of 2N falls in), at most 1,000 per
+  bucket spread evenly over the window. WEEKLY CADENCE (or before a
+  validation round): `fold_harvest.ps1` runs it after `build_dataset`;
+  the fold has no network step. Review the numbers, rebuild dependents,
+  run the gate list, commit — analysis is always a deliberate, reviewed
+  step, never automated. `Get-ScheduledTask` should list the two CompForge
+  jobs (the overnight harvest and the kill-feed poll). Mind patch
+  boundaries when reading the window: it can span a balance patch; slice
+  by `patch_history` dates before comparing metas.
+- `out/roster_mixes.json` is FROZEN: the near-complete wiped-side rosters
+  behind the curated `need_profiles` in `roles.yaml`. Its sampler is
+  retired (the artifact has no code reader, and the party harvest records
+  killer parties, never a side that scored no kill); the record stays as
+  the evidence the profiles cite.
 
 ## Known gaps / TODO
 
@@ -571,14 +572,10 @@ HEAD (`--base` for another revision). Review the report, then commit.
   `GroupMembers` via `sample_parties.py` (`out/party_rosters.json.gz`), which
   is what the kit doctrine reads today, beside the published/reference
   builds.
-- ~~Usage sample is small (24 battles)~~ — superseded by `sample_battles.py`
-  (~200 battles from the albionbb API, size-bucketed, per-battle cache, V7
-  coverage stat in `out/weapon_usage_v2.json`). Display-only in the
-  dashboard until validation admits it to scoring. Joined by
-  `sample_rosters.py` (same endpoint, also explicit): kill-dense battles
-  mined for NEAR-COMPLETE fight rosters (wiped sides attribute the whole
-  roster) → `out/roster_mixes.json`, the evidence behind the curated
-  `need_profiles`; `--pages 0` re-analyzes the cache offline.
+- ~~Usage sample is small (24 battles)~~ — superseded by `derive_usage.py`
+  (every harvested group fight of the last 28 days, size-bucketed, in
+  `out/weapon_usage_v2.json`). Display-only in the dashboard until
+  validation admits it to scoring.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
 - Six content templates exist (`blackzone_roam` 20, `territory_defense` 20,

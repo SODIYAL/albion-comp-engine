@@ -34,7 +34,7 @@ LOOKUP = EffectLookup()
 
 def _load_usage():
     """Sightings per weapon, summed across weapon_usage_v2.json's fight-size
-    buckets (sample_battles.py). The v1 weapon_usage.json this once read
+    buckets (derive_usage.py). The v1 weapon_usage.json this once read
     was a frozen 24-battle sample nothing wrote any more."""
     v2 = json.load(open(os.path.join(HERE, "out", "weapon_usage_v2.json"), encoding="utf-8"))
     out = {}

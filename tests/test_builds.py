@@ -260,17 +260,25 @@ usage = load_json(os.path.join(OUT, "weapon_usage_v2.json"))
 check("H14 the usage sample declares fight-size semantics",
       usage.get("sampling_frame", {}).get("axis") == "fight_size"
       and "PREVALENCE" in usage.get("semantics", ""))
-check("H14 per-battle records keep party/side size explicitly unknown "
-      "and fight size + observed roster distinct",
-      usage["battles"]
-      and all(b["party_size"] is None and b["side_size"] is None
-              and isinstance(b["fight_size"], int)
-              and b["observed_roster"] <= max(b["fight_size"], b["observed_roster"])
-              for b in usage["battles"]))
-check("H14 abilities are stored as unknown, never inferred",
-      usage.get("abilities") == "unknown")
+check("H14 the cohort axis is party size, apart from the fight-size axis, "
+      "and side size stays explicitly unknown",
+      usage.get("cohort_frame", {}).get("axis") == "party_size"
+      and usage.get("side_size") == "unknown"
+      and all(isinstance(c["size"], int) and c["size"] >= 2
+              and ("small" if 2 * c["size"] < 12 else
+                   "mid" if 2 * c["size"] <= 30 else "large") == b
+              for b, rows in usage["cohorts"].items() for c in rows))
+check("H14 abilities and loadout swaps are stored as unknown, never inferred",
+      usage.get("abilities") == "unknown"
+      and usage.get("loadout_swaps") == "unknown")
 check("H14 battle-level aggregation exists beside correlated player counts",
-      "buckets_battles" in usage and usage.get("players_with_swaps") is not None)
+      "buckets_battles" in usage
+      and all(n <= usage["meta"][b]["battles"]
+              for b, m in usage["buckets_battles"].items() for n in m.values()))
+check("H14 the cohort sample states the parties it was drawn from",
+      all(m["cohorts"] == len(usage["cohorts"][b])
+          and m["cohorts"] <= m["parties_in_window"]
+          for b, m in usage["cohort_meta"].items()))
 
 # ---- H.15 1v1 evidence has zero large-group eligibility -------------------------
 ml_doc = {"kind": "published_comp", "id": "ml_test",
