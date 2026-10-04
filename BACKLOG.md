@@ -336,9 +336,6 @@ Each is decidable today from evidence already in the repo.
   the cohorts used to be. Parties of 16+ are full rosters (random-pair
   Jaccard median 0.22, p90 0.41), so roster clusters are untested, not
   refuted. Display only. (V: 10, One killboard sampler)
-- **The retired samplers' caches** (`pipeline/out/battles_cache/`, 1,652
-  files; `roster_cache/`, 118): gitignored, read by nothing. Delete them
-  from the harvest machine once the derived strip has been reviewed.
 - **Cross-check the Resilience Penetration table**
   (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
   wiki values) against the dumps. Optional. (Q7)
