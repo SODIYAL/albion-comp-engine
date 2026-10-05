@@ -1602,16 +1602,22 @@ def t_portal_fielded():
           "a forged comp is feasible, complete and fields listed weapons only",
           ok, "; ".join(detail) or "3 pools x 6 styles")
     e7 = Engine(content="ancient_lands", size=7, style="clap")
-    claws = next(k for k, w in cat.items() if w["display_name"] == "Claws")
+    # The example is read from the generated list, never named: the list
+    # grows with the pool (Claws, 1 of 162 dominant 6-7 parties when the
+    # gate landed, is listed once the pool holds 284 distinct rosters).
+    listed7 = set(pf["6-7"]["weapons"])
+    outside = next(w for w in sorted(e7.pool) if w not in listed7)
     base = e7.forge(7)
     party = base["party"][:6]
-    rec = e7.recommend(party, 1, pool=[claws])
-    check("F35d a weapon outside the list is barred from suggestions only: Claws (1 of 162 dominant "
-          "6-7 parties) is unfielded at 7, never in the pool, and still scores as a manual pick",
-          e7.is_unfielded(claws) and claws not in set(e7.suggest_pool())
-          and len(rec) == 1 and rec[0]["weapon"] == claws
-          and abs(e7.comp_score(party + [claws]) - e7.comp_score(party)) > 1e-9,
-          f"unfielded={e7.is_unfielded(claws)} manual={rec[0]['score'] if rec else None}")
+    rec = e7.recommend(party, 1, pool=[outside])
+    check("F35d a weapon outside the list is barred from suggestions only: the first catalog weapon "
+          "the 6-7 list does not carry is unfielded at 7, never in the pool, and still scores as a "
+          "manual pick",
+          e7.is_unfielded(outside) and outside not in set(e7.suggest_pool())
+          and len(rec) == 1 and rec[0]["weapon"] == outside
+          and abs(e7.comp_score(party + [outside]) - e7.comp_score(party)) > 1e-9,
+          f"weapon={cat[outside]['display_name']} unfielded={e7.is_unfielded(outside)} "
+          f"manual={rec[0]['score'] if rec else None}")
     e10 = Engine(content="ancient_lands", size=10)
     e20 = Engine(content="ancient_lands", size=20)
     r5 = Engine(content="roads", size=5)

@@ -1708,6 +1708,17 @@ def run():
     # Distinct top picks unchanged. The same validation round: Fists of
     # Avalon keeps its ranged grant, Trinity Spear's leap is melee
     # (curation judgment), Skystrider's foothold is ranged.
+    # RE-PINNED AS RECORDED at the fold that re-measured max_health_cut
+    # (tests/VALIDATION.md, the fold after the form-ability rows): the
+    # Earthrune's Rune puts the typical winner at two units of
+    # max_health_cut at 15-19, this roster fields one, and a second
+    # Realmbreaker closes that gap and part of the burst_aoe gap while
+    # paying the duplicate cost: it ranks behind Incubus Mace and ahead of
+    # Earthrune. The generated row stands (standing rule 2); the pin keeps
+    # its structural half: the two copies the round objected to stay out
+    # of the top 8, a distinct weapon leads it, and every copy in it pays
+    # the duplicate cost. Which copies appear is recorded in the detail
+    # line, not asserted either way.
     e18 = Engine(content="blackzone_roam", size=18, style="clap")
     own18 = ["2H_HAMMER_AVALON", "2H_POLEHAMMER", "2H_MACE", "MAIN_HAMMER",
              "2H_ARCANESTAFF_HELL", "2H_SHAPESHIFTER_SET2",
@@ -1726,11 +1737,19 @@ def run():
     dup18 = [n for n in top8 if n in have18]
     perma2 = e18.pick_report(own18, PERMAFROST, gears=g18)
     rp = lambda k: e18.weapons[k]["capabilities"].get("ranged_presence", 0)  # noqa: E731
-    check("T49 duplicate rule: no copy of a fielded weapon in the 18-man "
-          "clap roster's top 8; a 2nd Permafrost pays the duplicate cost "
-          "(allowance removed); rho 0.5; Trinity Spear's leap is melee, "
+    key18 = {e18.weapons[wk]["display_name"]: wk for wk in own18}
+    objected = {e18.weapons[wk]["display_name"]
+                for wk in (PERMAFROST, "2H_KNUCKLES_SET3")}
+    copies_pay = all(
+        e18.pick_report(own18, key18[n], gears=g18)["dup_penalty"] > 0
+        for n in dup18)
+    check("T49 duplicate rule: no second Permafrost or Spiked Gauntlets in "
+          "the 18-man clap roster's top 8, a distinct weapon leads it and "
+          "every copy in it pays the duplicate cost; a 2nd Permafrost pays "
+          "it (allowance removed); rho 0.5; Trinity Spear's leap is melee, "
           "Fists of Avalon and Skystrider keep ranged_presence",
-          not dup18 and perma2["dup_penalty"] > 0
+          not (objected & set(dup18)) and top8[0] not in have18
+          and copies_pay and perma2["dup_penalty"] > 0
           and abs(e18.rho - 0.5) < 1e-9
           and not rp("2H_TRIDENT_UNDEAD")
           and rp("2H_KNUCKLES_AVALON") and rp("2H_BOW_CRYSTAL"),

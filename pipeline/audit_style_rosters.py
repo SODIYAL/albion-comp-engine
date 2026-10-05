@@ -262,7 +262,7 @@ def main():
                          "%% M == 0 is tier2_blindtest v4h's holdout); 0 = "
                          "every battle, an AUDIT copy never shipped")
     args = ap.parse_args()
-    if not os.path.isdir(CACHE):
+    if not os.path.isfile(CACHE):
         sys.exit("no party cache - run sample_parties.py first")
 
     e_label = Engine(content=CONTENT_FOR_SUPPLY, size=20)

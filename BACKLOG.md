@@ -13,11 +13,12 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The Dragon Portal's 15-20 pool**: under the 40-roster floor (five
-  dominant rosters on the training split), so it reads the 4-5 base rows
-  scaled and the style x size rows at 10+. `derive_portal_rows.py` gives
-  it rows of its own once the poll has filled it; whether a large portal
-  party is its own pool or the ZvZ rows is the decision to take then.
+- **The Dragon Portal's 15-20 pool**: it reads the 4-5 base rows scaled
+  and the style x size rows at 10+. The pool reached the 40-roster floor
+  at the 2026-10-04 fold (40 dominant killer parties, 40 distinct
+  rosters, training split), so the decision is due: whether a large
+  portal party is its own pool with rows of its own
+  (`derive_portal_rows.py` `OWN_POOLS`) or keeps the ZvZ rows.
 - **The popularity baseline on the portal pools**: with the pool-fielded
   gate on, the engine names the hidden member in its top 3 on 9.5% /
   19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
@@ -239,17 +240,23 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
-- **The style x band rows after the form-ability and anti-dive rows**: the
-  10+ rows (`templates/style_bands.yaml`) were measured on the sheets
-  before the rows added on 2026-10-04 (the shapeshifter forms; anti_dive
-  on ally shields, zones and auras, among them the Judicator Armor, Guard
-  Rune and Arcane Protection, which most comps of 10+ field).
-  `audit_style_rosters.py` reads the cache, so the rows re-derive at the
-  next fold. Until then anti_dive at 10+ reads supply on the new sheets
-  against a typical measured on the earlier ones, and reads high. The
-  content rows fitted on published comps (`refit_content_targets.py`)
-  carry the same lag. The Dragon Portal rows are re-derived (V: 10, Form
-  abilities and ally protection graded).
+- **The content rows after the form-ability and anti-dive rows**: the
+  rows fitted on published comps (`refit_content_targets.py`: sizes
+  under 10 outside the Dragon Portal, and the rows no style x band cell
+  overrides) were measured on the sheets before the rows added on
+  2026-10-04 (the shapeshifter forms; anti_dive on ally shields, zones
+  and auras). Supply there reads on the new sheets against the earlier
+  typical; a re-fit is a logged decision. The style x band rows at 10+
+  and the Dragon Portal rows are re-measured (V: 10, Weekly fold).
+- **A fold that overlaps a harvest pass loses its artifact**: both write
+  `pipeline/out/party_rosters.json.gz`. A harvest pass ends by rewriting
+  it from the cache, so a fold begun while a pass is running has the
+  artifact its tables were derived from replaced under it, and
+  `build_dataset` then refuses the tree (2026-10-04: the 15:00 harvest
+  ended its first pass at 16:58 inside a fold begun at 16:19; the fold
+  was run again). `fold_harvest.ps1` should refuse to start while the
+  harvest task is running, or the harvest should leave the artifact to
+  the fold and the portal refresh.
 - **Patch staleness cannot see a form ability**: `patch_history.py` maps
   a changed spell to the equippable spells that reference it, and no
   equippable spell references a form's abilities (the dumps link them in
