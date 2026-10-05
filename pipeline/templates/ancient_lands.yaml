@@ -15,15 +15,16 @@
 # party_rosters.json.gz) and are never edited by hand. The unit is the
 # dominant killer party of the pool's size (no deaths, a kill, every
 # weapon known) on the training split. The base rows are fitted on the
-# 4-5 pool, the template's base size; the 2-3 and 6-7 pools carry rows of
-# their own under `pool_rows`, read by both engine ports at a size inside
-# the pool and scaled from the pool's ref_size. Target is the median,
+# 4-5 pool, the template's base size; the 2-3, 6-7 and 15-20 pools carry
+# rows of their own under `pool_rows`, read by both engine ports at a size
+# inside the pool and scaled from the pool's ref_size (inside the 15-20
+# pool they outrank the style x size rows). Target is the median,
 # soft cap 1.15 x p90, min the p10, of the supply dressed in the engine's
 # doctrine kits. A row the median winner does not field is no requirement:
 # in the base rows a DEMAND RAMP (none through 5 and the 6-7 median at 7
 # where that pool fields it, else none through 7 and the former Roads
 # value at 10, where the style x size rows carry the targets); in the
-# rows of the 4-5 and 6-7 pools an OPTIONAL row where the p90 winner
+# rows of the 4-5, 6-7 and 15-20 pools an OPTIONAL row where the p90 winner
 # fields it (at least one winning party in ten: over the parties fielding
 # it, target their median and soft cap 1.15 x their p90, no minimum;
 # bringing it earns its coverage, not bringing it is not a hole) and
@@ -180,6 +181,40 @@ pool_rows:
       anti_dive:          {min: 0, target: 2, soft_cap: 5.75, scales: false}
       interrupt:          {min: 0, target: 1, soft_cap: 2.3, scales: false}
       max_health_cut:     {min: 0, target: 1, soft_cap: 2.3, scales: false, optional: true}
+  "15-20":
+    sizes: [15, 20]
+    ref_size: 20
+    comps: 40
+    requirements:
+      heal_sustain:       {min: 11.71, target: 15.95, soft_cap: 23.53, scales: true}
+      heal_burst:         {min: 9.2, target: 12.45, soft_cap: 22.09, scales: true}
+      tankiness:          {min: 59.55, target: 64.31, soft_cap: 82.17, scales: true}
+      peel:               {min: 37.78, target: 56.69, soft_cap: 81.69, scales: true}
+      burst_st:           {min: 1.15, target: 2.63, soft_cap: 8.21, scales: true}
+      sustained_dps:      {min: 79.71, target: 91.02, soft_cap: 116.31, scales: true}
+      burst_aoe:          {min: 22.85, target: 28.98, soft_cap: 44.38, scales: true}
+      mobility:           {min: 34.53, target: 42.78, soft_cap: 57.62, scales: true}
+      catch:              {min: 9.45, target: 16, soft_cap: 27.18, scales: true}
+      stun:               {min: 7.74, target: 19.39, soft_cap: 51.36, scales: true}
+      self_sustain:       {min: 8.21, target: 12.65, soft_cap: 24.52, scales: true}
+      engage:             {min: 15.9, target: 21, soft_cap: 30.02, scales: false}
+      disengage:          {min: 10.5, target: 15.5, soft_cap: 24.15, scales: false}
+      heal_reduction:     {min: 2, target: 4, soft_cap: 8.62, scales: false}
+      silence:            {min: 0, target: 5.82, soft_cap: 22.34, scales: false}
+      cleanse:            {min: 2, target: 4, soft_cap: 11.5, scales: false}
+      purge:              {min: 2, target: 6, soft_cap: 10.58, scales: false}
+      execute:            {min: 0, target: 2.44, soft_cap: 2.81, scales: false, optional: true}
+      resist_shred:       {min: 5.85, target: 7.75, soft_cap: 11.56, scales: false}
+      clump_create:       {min: 0, target: 1, soft_cap: 4.6, scales: false}
+      zone_control:       {min: 9.93, target: 14.44, soft_cap: 20.7, scales: true}
+      buff_allies:        {min: 5.45, target: 12, soft_cap: 18.46, scales: false}
+      damage_debuff:      {min: 0, target: 3.5, soft_cap: 8.62, scales: false}
+      slow:               {min: 9.18, target: 16.83, soft_cap: 25.6, scales: true}
+      root:               {min: 8.94, target: 18, soft_cap: 29.62, scales: true}
+      knockback_displace: {min: 8.67, target: 13.79, soft_cap: 23.16, scales: true}
+      anti_dive:          {min: 4.45, target: 11, soft_cap: 17.94, scales: false}
+      interrupt:          {min: 0, target: 1, soft_cap: 2.42, scales: false}
+      max_health_cut:     {min: 0, target: 1, soft_cap: 4.6, scales: false}
 
 # The weapons each pool's dominant winners field (`rosters`: the pool's
 # distinct rosters). The suggestion gate at a size inside the pool.

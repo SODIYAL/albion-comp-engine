@@ -404,6 +404,9 @@
       var harvestSrc = this.bandRow.borrowed_from ? "harvest_borrowed" : "harvest";
       for (var capB in this.bandRow.requirements) {
         if (!(capB in this._targets)) continue;
+        /* a matchmaking pool's own row outranks the style x size row
+           (mirrors engine.py set_content) */
+        if (capB in this._rowRef) continue;
         var bv = this.bandRow.requirements[capB];
         if (bv.target !== undefined && bv.target !== null) {
           this._targets[capB] = bv.target * this.size / bref;

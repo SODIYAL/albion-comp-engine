@@ -544,8 +544,11 @@ HEAD (`--base` for another revision). Review the report, then commit.
   the median count of healer / frontline / support at the exact size, and
   zero where the p75 winner fields none), so generation keeps the winners'
   shape while the optional rows price what a frontline brings.
-  A pool under the floor (15-20 today) reads the base rows scaled
-  and the style x size rows at 10+. The step also writes `pool_fielded`:
+  The 15-20 pool carries rows of its own as well; inside it both engine
+  ports read them ahead of the style x size rows (a pool's own row
+  outranks the cell). A pool under the floor reads the base rows scaled
+  and the style x size rows at 10+. The step also writes `pool_fielded`
+  (not for the 15-20 pool, whose 40 rosters are too few to gate on):
   per pool at the floor, the weapons its dominant winners field (at least
   5 distinct rosters across 3 guild-sets, the honesty gate of the pair
   prior, and 5% of the rosters of the pool's most fielded weapon, the

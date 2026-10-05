@@ -291448,6 +291448,191 @@
     }
    },
    "pool_rows": {
+    "15-20": {
+     "comps": 40,
+     "ref_size": 20,
+     "requirements": {
+      "anti_dive": {
+       "min": 4.45,
+       "scales": false,
+       "soft_cap": 17.94,
+       "target": 11
+      },
+      "buff_allies": {
+       "min": 5.45,
+       "scales": false,
+       "soft_cap": 18.46,
+       "target": 12
+      },
+      "burst_aoe": {
+       "min": 22.85,
+       "scales": true,
+       "soft_cap": 44.38,
+       "target": 28.98
+      },
+      "burst_st": {
+       "min": 1.15,
+       "scales": true,
+       "soft_cap": 8.21,
+       "target": 2.63
+      },
+      "catch": {
+       "min": 9.45,
+       "scales": true,
+       "soft_cap": 27.18,
+       "target": 16
+      },
+      "cleanse": {
+       "min": 2,
+       "scales": false,
+       "soft_cap": 11.5,
+       "target": 4
+      },
+      "clump_create": {
+       "min": 0,
+       "scales": false,
+       "soft_cap": 4.6,
+       "target": 1
+      },
+      "damage_debuff": {
+       "min": 0,
+       "scales": false,
+       "soft_cap": 8.62,
+       "target": 3.5
+      },
+      "disengage": {
+       "min": 10.5,
+       "scales": false,
+       "soft_cap": 24.15,
+       "target": 15.5
+      },
+      "engage": {
+       "min": 15.9,
+       "scales": false,
+       "soft_cap": 30.02,
+       "target": 21
+      },
+      "execute": {
+       "min": 0,
+       "optional": true,
+       "scales": false,
+       "soft_cap": 2.81,
+       "target": 2.44
+      },
+      "heal_burst": {
+       "min": 9.2,
+       "scales": true,
+       "soft_cap": 22.09,
+       "target": 12.45
+      },
+      "heal_reduction": {
+       "min": 2,
+       "scales": false,
+       "soft_cap": 8.62,
+       "target": 4
+      },
+      "heal_sustain": {
+       "min": 11.71,
+       "scales": true,
+       "soft_cap": 23.53,
+       "target": 15.95
+      },
+      "interrupt": {
+       "min": 0,
+       "scales": false,
+       "soft_cap": 2.42,
+       "target": 1
+      },
+      "knockback_displace": {
+       "min": 8.67,
+       "scales": true,
+       "soft_cap": 23.16,
+       "target": 13.79
+      },
+      "max_health_cut": {
+       "min": 0,
+       "scales": false,
+       "soft_cap": 4.6,
+       "target": 1
+      },
+      "mobility": {
+       "min": 34.53,
+       "scales": true,
+       "soft_cap": 57.62,
+       "target": 42.78
+      },
+      "peel": {
+       "min": 37.78,
+       "scales": true,
+       "soft_cap": 81.69,
+       "target": 56.69
+      },
+      "purge": {
+       "min": 2,
+       "scales": false,
+       "soft_cap": 10.58,
+       "target": 6
+      },
+      "resist_shred": {
+       "min": 5.85,
+       "scales": false,
+       "soft_cap": 11.56,
+       "target": 7.75
+      },
+      "root": {
+       "min": 8.94,
+       "scales": true,
+       "soft_cap": 29.62,
+       "target": 18
+      },
+      "self_sustain": {
+       "min": 8.21,
+       "scales": true,
+       "soft_cap": 24.52,
+       "target": 12.65
+      },
+      "silence": {
+       "min": 0,
+       "scales": false,
+       "soft_cap": 22.34,
+       "target": 5.82
+      },
+      "slow": {
+       "min": 9.18,
+       "scales": true,
+       "soft_cap": 25.6,
+       "target": 16.83
+      },
+      "stun": {
+       "min": 7.74,
+       "scales": true,
+       "soft_cap": 51.36,
+       "target": 19.39
+      },
+      "sustained_dps": {
+       "min": 79.71,
+       "scales": true,
+       "soft_cap": 116.31,
+       "target": 91.02
+      },
+      "tankiness": {
+       "min": 59.55,
+       "scales": true,
+       "soft_cap": 82.17,
+       "target": 64.31
+      },
+      "zone_control": {
+       "min": 9.93,
+       "scales": true,
+       "soft_cap": 20.7,
+       "target": 14.44
+      }
+     },
+     "sizes": [
+      15,
+      20
+     ]
+    },
     "2-3": {
      "comps": 2054,
      "ref_size": 3,
@@ -292157,10 +292342,10 @@
    "name": "Blackzone Roam",
    "requirements": {
     "anti_dive": {
-     "min": 0,
+     "min": 11,
      "scales": false,
-     "soft_cap": 21.36,
-     "target": 5,
+     "soft_cap": 27.6,
+     "target": 16.5,
      "weight": 0
     },
     "anti_zone": {
@@ -292174,17 +292359,17 @@
      "weight": 1.9
     },
     "buff_allies": {
-     "min": 8,
+     "min": 10.5,
      "scales": false,
-     "soft_cap": 33.35,
-     "target": 19.25,
+     "soft_cap": 35.65,
+     "target": 19.75,
      "weight": 4.4
     },
     "burst_aoe": {
      "min": 7.94,
      "scales": true,
      "soft_cap": 38.26,
-     "target": 19.69,
+     "target": 19.7,
      "weight": 6.4
     },
     "burst_st": {
@@ -292198,14 +292383,14 @@
      "min": 6,
      "scales": true,
      "soft_cap": 24.04,
-     "target": 12,
+     "target": 12.25,
      "weight": 4.9
     },
     "cleanse": {
      "min": 0,
      "scales": false,
      "soft_cap": 16.1,
-     "target": 6,
+     "target": 4,
      "weight": 3.7
     },
     "clump_create": {
@@ -292254,13 +292439,13 @@
      "min": 1,
      "scales": false,
      "soft_cap": 32.86,
-     "target": 5.5,
+     "target": 6.25,
      "weight": 6.8
     },
     "heal_sustain": {
      "min": 4,
      "scales": true,
-     "soft_cap": 20.2,
+     "soft_cap": 21.4,
      "target": 13.45,
      "weight": 13.1
     },
@@ -292268,20 +292453,20 @@
      "min": 0,
      "scales": false,
      "soft_cap": 4.6,
-     "target": 1.5,
+     "target": 2,
      "weight": 5.5
     },
     "knockback_displace": {
      "min": 2,
      "scales": true,
      "soft_cap": 27.93,
-     "target": 8.62,
+     "target": 9.38,
      "weight": 0.3
     },
     "max_health_cut": {
      "min": 0,
      "scales": false,
-     "soft_cap": 3.45,
+     "soft_cap": 4.6,
      "target": 1,
      "weight": 4.7
     },
@@ -292296,7 +292481,7 @@
      "min": 30,
      "scales": true,
      "soft_cap": 88.76,
-     "target": 42.17,
+     "target": 41.67,
      "weight": 7.3
     },
     "purge": {
@@ -292314,16 +292499,16 @@
      "weight": 2.4
     },
     "resist_shred": {
-     "min": 5,
+     "min": 8,
      "scales": false,
-     "soft_cap": 16.1,
-     "target": 9.5,
+     "soft_cap": 20.12,
+     "target": 12.5,
      "weight": 5.4
     },
     "root": {
      "min": 2,
      "scales": true,
-     "soft_cap": 38.4,
+     "soft_cap": 41.85,
      "target": 7.38,
      "weight": 0
     },
@@ -292338,35 +292523,35 @@
      "min": 5.9,
      "scales": true,
      "soft_cap": 32.69,
-     "target": 18.57,
+     "target": 17.17,
      "weight": 0.3
     },
     "stun": {
-     "min": 6.06,
+     "min": 8.71,
      "scales": true,
      "soft_cap": 49.88,
-     "target": 12.88,
+     "target": 16.86,
      "weight": 5.5
     },
     "sustained_dps": {
-     "min": 56.92,
+     "min": 55.93,
      "scales": true,
-     "soft_cap": 102.58,
-     "target": 63.24,
+     "soft_cap": 105.74,
+     "target": 64.56,
      "weight": 4.9
     },
     "tankiness": {
-     "min": 51.09,
+     "min": 50.09,
      "scales": true,
-     "soft_cap": 101.91,
-     "target": 71.17,
+     "soft_cap": 103.58,
+     "target": 70.69,
      "weight": 8
     },
     "zone_control": {
      "min": 11,
      "scales": true,
      "soft_cap": 46,
-     "target": 17.17,
+     "target": 15,
      "weight": 2.4
     }
    },
@@ -292614,10 +292799,10 @@
    "name": "Castle Outpost",
    "requirements": {
     "anti_dive": {
-     "min": 1,
+     "min": 3,
      "scales": false,
      "soft_cap": 10.68,
-     "target": 2,
+     "target": 6,
      "weight": 1
     },
     "burst_aoe": {
@@ -292698,14 +292883,14 @@
      "min": 6,
      "scales": true,
      "soft_cap": 17.25,
-     "target": 7,
+     "target": 8,
      "weight": 3
     },
     "peel": {
      "min": 11.75,
      "scales": true,
      "soft_cap": 31.62,
-     "target": 20.5,
+     "target": 21.5,
      "weight": 8
     },
     "purge": {
@@ -292744,24 +292929,24 @@
      "weight": 1
     },
     "stun": {
-     "min": 0,
+     "min": 2.22,
      "scales": true,
-     "soft_cap": 25.97,
-     "target": 6.8,
+     "soft_cap": 27.7,
+     "target": 9.05,
      "weight": 4
     },
     "sustained_dps": {
-     "min": 21.4,
+     "min": 22.85,
      "scales": true,
-     "soft_cap": 35.82,
-     "target": 29.01,
+     "soft_cap": 37.47,
+     "target": 31.15,
      "weight": 5
     },
     "tankiness": {
-     "min": 18.16,
+     "min": 17.16,
      "scales": true,
      "soft_cap": 38.9,
-     "target": 25.59,
+     "target": 23.59,
      "weight": 9
     },
     "zone_control": {

@@ -13,12 +13,13 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The Dragon Portal's 15-20 pool**: it reads the 4-5 base rows scaled
-  and the style x size rows at 10+. The pool reached the 40-roster floor
-  at the 2026-10-04 fold (40 dominant killer parties, 40 distinct
-  rosters, training split), so the decision is due: whether a large
-  portal party is its own pool with rows of its own
-  (`derive_portal_rows.py` `OWN_POOLS`) or keeps the ZvZ rows.
+- **The Dragon Portal's 15-20 pool beyond its rows**: the pool reads
+  rows of its own, fitted at the floor (40 distinct rosters; V: 10, The
+  15-20 portal pool reads its own rows). It carries no fielded list and
+  no role counts of its own: generation at 15-20 keeps the open-world
+  seat skeleton and suggestion pool. Whether to gate and shape it on the
+  pool's winners is the decision to take once the pool holds a few
+  hundred rosters (it gains about five a day).
 - **The popularity baseline on the portal pools**: with the pool-fielded
   gate on, the engine names the hidden member in its top 3 on 9.5% /
   19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
@@ -240,14 +241,13 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
-- **The content rows after the form-ability and anti-dive rows**: the
-  rows fitted on published comps (`refit_content_targets.py`: sizes
-  under 10 outside the Dragon Portal, and the rows no style x band cell
-  overrides) were measured on the sheets before the rows added on
-  2026-10-04 (the shapeshifter forms; anti_dive on ally shields, zones
-  and auras). Supply there reads on the new sheets against the earlier
-  typical; a re-fit is a logged decision. The style x band rows at 10+
-  and the Dragon Portal rows are re-measured (V: 10, Weekly fold).
+- **Contents under three published comps keep rows fitted on earlier
+  sheets**: Roads (1 comp), Territory Defense (2), Castle and Faction
+  War read minimum rows written before the form-ability and anti-dive
+  rows of 2026-10-04; `refit_content_targets.py` leaves a content under
+  three comps alone. Blackzone Roam and Castle Outpost are re-fitted
+  (V: 10, The published-comp rows re-fitted). More caller sheets are
+  the fix (see "More caller sheets" above).
 - **A fold that overlaps a harvest pass loses its artifact**: both write
   `pipeline/out/party_rosters.json.gz`. A harvest pass ends by rewriting
   it from the cache, so a fold begun while a pass is running has the

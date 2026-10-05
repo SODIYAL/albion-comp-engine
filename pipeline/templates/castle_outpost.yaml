@@ -47,8 +47,8 @@ fit: {comps: 3, stat: median, source: dressed_template_audit, date: "2026-09-10"
 requirements:
   heal_sustain:   {min: 4.35, target: 4.5, weight: 10, soft_cap: 6.09, scales: true}
   heal_burst:     {min: 2.6, target: 2.9, weight: 6,  soft_cap: 6.21, scales: true}
-  tankiness:      {min: 18.16, target: 25.59, weight: 9,  soft_cap: 38.9, scales: true}
-  peel:           {min: 11.75, target: 20.5, weight: 8,  soft_cap: 31.62, scales: true}
+  tankiness:      {min: 17.16, target: 23.59, weight: 9,  soft_cap: 38.9, scales: true}
+  peel:           {min: 11.75, target: 21.5, weight: 8,  soft_cap: 31.62, scales: true}
   burst_aoe:      {min: 6.38, target: 12.87, weight: 8,  soft_cap: 15.44, scales: true}
   clump_create:   {target: 1.75, weight: 7,  soft_cap: 4.79, scales: false}
   engage:         {min: 4.5, target: 6.5, weight: 7,  soft_cap: 12.65, scales: false}
@@ -81,8 +81,8 @@ requirements:
   disengage:      {min: 3.5, target: 4, weight: 4,  soft_cap: 12.07, scales: false}
   zone_control:   {min: 6, target: 7, weight: 4,  soft_cap: 20, scales: true}
   silence:        {min: 0, target: 5.95, weight: 4,  soft_cap: 12.44, scales: false}
-  stun:           {min: 0, target: 6.8, weight: 4,  soft_cap: 25.97, scales: true}
-  sustained_dps:  {min: 21.4, target: 29.01, weight: 5,  soft_cap: 35.82, scales: true}
+  stun:           {min: 2.22, target: 9.05, weight: 4,  soft_cap: 27.7, scales: true}
+  sustained_dps:  {min: 22.85, target: 31.15, weight: 5,  soft_cap: 37.47, scales: true}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale
   # (curated on every sheet, carried by the fight chain, scored by nothing).
   # Fitted from the three real castle-outpost comps, same 0.9x/1.15x
@@ -92,9 +92,9 @@ requirements:
   slow:               {min: 5, target: 6.11, weight: 1, soft_cap: 13.17, scales: true}
   root:               {min: 2.25, target: 4, weight: 1, soft_cap: 16.87, scales: true}
   knockback_displace: {min: 0, target: 3, weight: 1, soft_cap: 17.21, scales: true}
-  anti_dive:          {min: 1, target: 2, weight: 1, soft_cap: 10.68, scales: false}
+  anti_dive:          {min: 3, target: 6, weight: 1, soft_cap: 10.68, scales: false}
   interrupt:          {min: 0, target: 1, weight: 1, soft_cap: 1.57, scales: false}
-  mobility:       {min: 6, target: 7, weight: 3,  soft_cap: 17.25, scales: true}
+  mobility:       {min: 6, target: 8, weight: 3,  soft_cap: 17.25, scales: true}
 
 # HARD FLOORS — capabilities where near-zero supply is catastrophic, not merely
 # suboptimal. Load-bearing: the first prototype run omitted these and failed 4/9

@@ -15,25 +15,27 @@ tag, set by the Ancient Bone marker) of the pool's size, every weapon
 known and in the catalog, DOMINANT in its battle (no deaths, at least one
 kill), on the TRAINING split (battle % 5 != 0; % 5 == 0 is the holdout
 tests/tier2_blindtest.py v4h evaluates). The floor is 40 distinct
-rosters per pool; a pool under it keeps the rows the other pools fit (the
-15-20 pool today, where the style x size rows carry the targets at 10+
-in any case).
+rosters per pool; a pool under it keeps the rows the other pools fit
+(below 10) or the style x size rows (at 10+).
 
 THE BASE ROWS are fitted on the 4-5 pool, the template's base size (5,
-the size the scaling rows are stated at). The 2-3 and 6-7 pools carry
-ROWS OF THEIR OWN (`pool_rows`, read by both engine ports at a size
+the size the scaling rows are stated at). The 2-3, 6-7 and 15-20 pools
+carry ROWS OF THEIR OWN (`pool_rows`, read by both engine ports at a size
 inside the pool, scaled from the pool's ref_size): a matchmade pool is a
 population of its own, and what a trio fields is not three fifths of
 what a five fields (a 4-5 threshold row read at 3 demanded twice the
-engage and disengage trio winners carry). The supply is DRESSED in the
+engage and disengage trio winners carry). The 15-20 pool's rows outrank
+the style x size rows inside the pool: measured at the floor, its
+winners field a quarter more sustained damage and a third fewer ally
+buffs than open-world winners of 20 (tests/VALIDATION.md). The supply is DRESSED in the
 engine's own doctrine kits (gear_join.doctrine_gears), the unit the
 style x size rows and the content re-fit use, measured on the dataset
 the step runs against. A row whose median winner fields NONE is no
 requirement at that pool: in the base rows it is a DEMAND RAMP (none
 through 5 and the 6-7 median at 7 where that pool fields it, else none
 through 7 and the former Roads value at 10, where the style x size rows
-take over). In the rows of the 4-5 and 6-7 pools (OPTIONAL_POOLS) it is
-an OPTIONAL row where a minority of the pool's winners field it (the p90
+take over). In the rows of the 4-5, 6-7 and 15-20 pools (OPTIONAL_POOLS)
+it is an OPTIONAL row where a minority of the pool's winners field it (the p90
 winner does: `optional_row`, target and soft cap read over the parties
 that field it, no minimum) and `none` below that. A `none` row pays a
 weapon nothing for bringing the capability; at 4-5 that priced the
@@ -101,10 +103,13 @@ CAP_OVER_P90 = 1.15   # the standing soft-cap convention
 POOLS = (("trio", 2, 3), ("five", 4, 5), ("seven", 6, 7), ("large", 15, 20))
 FIT_POOL = "five"
 RAMP_POOL = "seven"
-OWN_POOLS = ("trio", "seven")   # the pools that carry rows of their own (the base rows are the 4-5 pool's)
-OPTIONAL_POOLS = ("five", "seven")   # the pools whose minority-fielded capabilities carry an optional row
+OWN_POOLS = ("trio", "seven", "large")   # the pools that carry rows of their own (the base rows are the 4-5 pool's)
+OPTIONAL_POOLS = ("five", "seven", "large")   # the pools whose minority-fielded capabilities carry an optional row
 RAMP_TAKEOVER = 10    # where the style x size rows carry the targets
-FIELDED_POOLS = ("trio", "five", "seven")   # the pools that carry a fielded list (at the floor)
+# The pools that carry a fielded list (at the floor). The 15-20 pool
+# carries none: a list of the weapons in five of 40 rosters would gate
+# generation at 20 on thin evidence.
+FIELDED_POOLS = ("trio", "five", "seven")
 MIN_FIELDED_ROSTERS = 5   # distinct rosters (derive_meta_prior MIN_PAIR_PARTIES, the honesty gate)
 MIN_FIELDED_ORGS = 3      # ...across this many distinct guild-sets (MIN_PAIR_ORGS)
 SIGNAL_OF_TOP = 0.05      # share of the top weapon's rosters (derive_meta_prior MIN_PRIOR)
@@ -328,15 +333,16 @@ HEADER = """# Content template — Dragon Portal (the Ancient Lands).
 # party_rosters.json.gz) and are never edited by hand. The unit is the
 # dominant killer party of the pool's size (no deaths, a kill, every
 # weapon known) on the training split. The base rows are fitted on the
-# 4-5 pool, the template's base size; the 2-3 and 6-7 pools carry rows of
-# their own under `pool_rows`, read by both engine ports at a size inside
-# the pool and scaled from the pool's ref_size. Target is the median,
+# 4-5 pool, the template's base size; the 2-3, 6-7 and 15-20 pools carry
+# rows of their own under `pool_rows`, read by both engine ports at a size
+# inside the pool and scaled from the pool's ref_size (inside the 15-20
+# pool they outrank the style x size rows). Target is the median,
 # soft cap 1.15 x p90, min the p10, of the supply dressed in the engine's
 # doctrine kits. A row the median winner does not field is no requirement:
 # in the base rows a DEMAND RAMP (none through 5 and the 6-7 median at 7
 # where that pool fields it, else none through 7 and the former Roads
 # value at 10, where the style x size rows carry the targets); in the
-# rows of the 4-5 and 6-7 pools an OPTIONAL row where the p90 winner
+# rows of the 4-5, 6-7 and 15-20 pools an OPTIONAL row where the p90 winner
 # fields it (at least one winning party in ten: over the parties fielding
 # it, target their median and soft cap 1.15 x their p90, no minimum;
 # bringing it earns its coverage, not bringing it is not a hole) and

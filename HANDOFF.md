@@ -174,8 +174,10 @@ silence a Heavy Mace brings earns its coverage, a five without silence
 is not short of it), `none` otherwise and at 2-3 (F34e-i). The pools
 carry role counts of their own (`role_counts.json` `pools`, read before
 every other table below 10; a role may be typical at zero), so a forged
-trio fields no frontline and a five one (F31l-o, T50). The 15-20 pool is under the
-floor and reads the base rows scaled plus the style x size rows. The
+trio fields no frontline and a five one (F31l-o, T50). The 15-20 pool carries rows
+of its own from the floor of 40 distinct rosters; inside it they outrank
+the style x size rows in both engine ports (F34j), and it carries no
+fielded list. The
 weights are fitted to the same winners' picks (`weight_fit`, pulled
 toward the Roads weights the template started from) and apply at every
 pool. `validated_sizes` is empty (no validation round has covered a pool), so every

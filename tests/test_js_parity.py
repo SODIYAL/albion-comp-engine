@@ -89,6 +89,16 @@ def make_cases(data):
             cases.append({"content": "blackzone_roam", "size": 20, "style": "balanced",
                           "party": party, "combos": [None] * len(party),
                           "gears": gears, "refine_pool": weapons[3::11]})
+    # a matchmaking pool at 10+ (the Dragon Portal's 15-20 pool, F34j): the
+    # pool's own rows outrank the style x size rows, and the size variants
+    # above never reach a pool past 10 — both ports must read the same
+    # targets there
+    if "15-20" in ((data["templates"].get("ancient_lands") or {}).get("pool_rows") or {}):
+        for size, style in ((15, "brawl"), (18, "clap"), (20, "balanced")):
+            party = [rng.choice(weapons) for _ in range(10)]
+            cases.append({"content": "ancient_lands", "size": size, "style": style,
+                          "party": party, "combos": [None] * len(party),
+                          "gears": None, "refine_pool": weapons[5::11]})
     return cases
 
 

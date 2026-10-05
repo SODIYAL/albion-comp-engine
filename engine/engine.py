@@ -306,7 +306,8 @@ class Engine:
         # base ramp gives way), scaled from the pool's ref_size, and a
         # `none` row is no requirement at that pool (the median winner
         # fields none). Weights stay the base row's. Outside every pool
-        # the base rows stand.
+        # the base rows stand. A pool's own row also outranks the style
+        # x size row at 10+ (the 15-20 pool: see the band loop below).
         self._row_ref = {}
         pool = self._pool_rows(size)
         self.pool_key = pool["key"] if pool else None
@@ -469,6 +470,12 @@ class Engine:
                            else "harvest")
             for c, v in self.band_row["requirements"].items():
                 if c not in self._targets:
+                    continue
+                # A matchmaking pool's own row outranks the style x size
+                # row: inside the 15-20 portal pool the target is what
+                # that pool's winners field, not what open-world winners
+                # of the same size do.
+                if c in self._row_ref:
                     continue
                 if v.get("target") is not None:
                     self._targets[c] = v["target"] * self.size / ref

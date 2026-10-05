@@ -1519,10 +1519,10 @@ def t_portal_rows():
           and "tankiness" in e5.reqs and "tankiness" not in e5.optional
           and "clump_create" in e7.reqs and "silence" in e10.reqs and "silence" not in e10.optional,
           f"optional5={sorted(opt5)} absent5={sorted(set(tpl['requirements']) - set(e5.reqs))}")
-    check("F34f the 2-3 and 6-7 pools carry rows of their own and the fitted 4-5 pool its optional rows "
-          "alone, each at least 40 distinct rosters, every row none or 0 <= min <= target < soft cap "
-          "over the base capabilities",
-          set(pools) == {"2-3", "4-5", "6-7"}
+    check("F34f the 2-3, 6-7 and 15-20 pools carry rows of their own and the fitted 4-5 pool its "
+          "optional rows alone, each at least 40 distinct rosters, every row none or 0 <= min <= "
+          "target < soft cap over the base capabilities",
+          set(pools) == {"2-3", "4-5", "6-7", "15-20"}
           and all(r.get("optional") for r in pools["4-5"]["requirements"].values())
           and all(p["comps"] >= 40 and p["ref_size"] == p["sizes"][1]
                   and all(c in tpl["requirements"] for c in p["requirements"])
@@ -1532,9 +1532,11 @@ def t_portal_rows():
     e3 = Engine(content="ancient_lands", size=3)
     t3 = pools.get("2-3", {}).get("requirements", {}).get("tankiness") or {}
     check("F34g inside a pool the engine reads the pool's row at its ref size as a harvest median; "
-          "at the base size a capability without a pool row reads the base row, and at 20 the base rows stand",
+          "at the base size a capability without a pool row reads the base row, and between the pools "
+          "(10) no pool is read",
           e3.pool_key == "2-3" and e7.pool_key == "6-7" and e5.pool_key == "4-5"
-          and Engine(content="ancient_lands", size=20).pool_key is None
+          and Engine(content="ancient_lands", size=20).pool_key == "15-20"
+          and e10.pool_key is None
           and t3 and abs(e3.target("tankiness") - t3["target"]) < 1e-9
           and e3.target_source("tankiness") == "harvest" and e5.target_source("tankiness") == "content",
           f"pool3={e3.pool_key} t3={e3.target('tankiness'):.2f} row={t3} src={e3.target_source('tankiness')}")
@@ -1558,6 +1560,38 @@ def t_portal_rows():
           and abs(e5.target("silence") - row["target"]) < 1e-9
           and not any(x["cap"] == "silence" for x in rep_h["caps"]),
           f"silence={sil} row={row}")
+    # F34j - the 15-20 pool's own rows outrank the style x size rows: a
+    # large portal party is judged against what that pool's winners field
+    # (tests/VALIDATION.md, the 15-20 portal pool). Every other context
+    # of 10+ keeps the style x size rows.
+    large = pools.get("15-20", {}).get("requirements", {})
+    ok, detail = bool(large), []
+    for style in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+        for size in (15, 18, 20):
+            e = Engine(content="ancient_lands", size=size, style=style)
+            for c, r in large.items():
+                if r.get("none"):
+                    good = c not in e.reqs
+                else:
+                    want = (r["target"] * e.target_mults.get(c, 1.0)
+                            * (size / 20.0 if r.get("scales") else 1.0))
+                    good = (c in e.reqs and abs(e.target(c) - want) < 1e-9
+                            and e.target_source(c) == "harvest")
+                if not good:
+                    ok = False
+                    detail.append(f"{style}/{size}/{c}")
+    e12 = Engine(content="ancient_lands", size=12, style="clap")
+    r20 = Engine(content="roads", size=20, style="clap")
+    band = lambda e: [c for c, v in e.band_row["requirements"].items()   # noqa: E731
+                      if c in e.reqs and v.get("target") is not None
+                      and abs(e.target(c) - v["target"] * e.size / e.band_row["ref_size"]) < 1e-9]
+    check("F34j inside the 15-20 pool every capability reads the pool's own row in every style "
+          "(a none row is no requirement), never the style x size row; the portal at 12 and "
+          "another content at 20 keep the style x size rows",
+          ok and e12.pool_key is None and e12.band_row is not None and len(band(e12)) >= 10
+          and r20.band_row is not None and len(band(r20)) >= 10,
+          "; ".join(detail[:6]) or f"{len(large)} pool rows x 6 styles x 3 sizes; "
+          f"band rows read at portal 12: {len(band(e12))}, roads 20: {len(band(r20))}")
 
 
 def t_portal_fielded():
