@@ -189,20 +189,29 @@ and its tests: `supabase/README.md`.
   the claim token (16 random bytes as hex, kept per CTA in
   `localStorage`), the board (each slot with its claimant, the
   reserves, the free slots), validation on the database's bounds, the
-  payload, a profile's lists as the first declaration and error wording
-  (`tests/test_signup.js`); and the sheet dialog: the roster with who
-  holds what, the reserves, the player's form (a name for guests, the
-  slot among the free ones or reserve, the weapons they bring through
-  the profile's search, item power, can swap, a note), update and
-  cancel, refresh, open in planner, the link to copy. The link opens
-  the sheet once the stored session has been read, so an account signs
-  up as itself; the CTAs dialog opens it by dispatching a `cta-sheet`
-  DOM event with the code (no call between modules). A guest's claim
+  payload, a profile's lists as the first declaration, the tally (slots
+  held of slots planned per role, the open slots to fill next grouped by
+  role in the comp's order) and error wording (`tests/test_signup.js`);
+  and the sheet page: the link's page shows the sheet in place of the
+  planner (the head script sets `html[data-view="sheet"]` from the
+  address before the planner draws; `_layout.css` hides the planner's
+  shell, rails, panels and drawer and the masthead's planner-only parts;
+  the hidden planner writes neither the address nor storage). On it: the
+  roster with who holds what (every weapon with its icon; the caller's
+  weapon list carries the chosen weapon's icon beside it), the role bar
+  above the roster, the reserves, the player's form (a name for guests,
+  the slot among the free ones or reserve, the weapons they bring
+  through the profile's search, item power, can swap, a note), update
+  and cancel, refresh, open in planner (a page load of the planner's
+  address with the share hash), the link to copy. The link opens the
+  sheet once the stored session has been read, so an account signs up
+  as itself; the CTAs dialog's sheet button goes to the link (the
+  address is the one handover between the modules). A guest's claim
   token never leaves the browser except inside the statement; the row
   keeps its hash, so this browser alone edits or cancels the sign-up,
   and an account signing up here later adopts it. The sheet is no
   account-menu view: a guest has no menu. The caller runs the sheet from
-  the same dialog (phase 6): a caller, officer or admin of the CTA's
+  the same page (phase 6): a caller, officer or admin of the CTA's
   guild (the role read through the guild module's helper) gets a move
   list beside every sign-up (the reserves, every other slot, a held one
   as a swap), a removal, a weapon list on every slot (the catalog grouped
@@ -212,7 +221,7 @@ and its tests: `supabase/README.md`.
   removal, a slot's weapon). The sheet is live (phase 7): `watchSheet`
   joins the CTA's Realtime channel (`cta:<code>`, a broadcast the
   database sends after every write, naming the table and the operation
-  only) once the sheet is read and leaves it on close; a message
+  only) once the sheet is read and leaves it when the page goes; a message
   settles, then the sheet re-reads itself through `event_by_code`, the
   player's typing kept, and a move or removal of the player's own row
   is said out loud. A live mark beside the status says whether the
@@ -226,7 +235,7 @@ and its tests: `supabase/README.md`.
   CTA is completed (`markPowers`; `confirm_sign_up`, `mark_attendance`,
   `mark_all_attended`). The caller's move list, removal and the
   record's mark sit on one row under each player; a link naming no
-  CTA, or a CTA deleted under a live sheet, leaves the card with its
+  CTA, or a CTA deleted under a live sheet, leaves the page with its
   title and the error alone.
 - **`_history.js`** (platform phase 9) shows the facts over a guild's
   completed CTAs: one helper (`guild_history`, computed on read in the

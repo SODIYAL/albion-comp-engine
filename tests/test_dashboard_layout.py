@@ -906,30 +906,47 @@ i_events = script_at(lambda a, b: "function loadGuildEvents" in b)
 check(0 <= i_comps < i_events, "L31q the CTAs module loads after the comps module, in its own <script>",
       "script indices comps=%d events=%d" % (i_comps, i_events))
 
-print("L32 - sign-up: one sheet for guests and accounts, opened by a link or from the CTAs dialog")
-# Sign-up (platform phase 5): the sheet is reached by ?cta=<code> or by a
-# DOM event the CTAs dialog dispatches (never a call between modules);
-# the module reaches the database through three functions, keeps the
-# guest's claim token in localStorage, and meets the planner through the
-# address bar alone.
+print("L32 - sign-up: one sheet for guests and accounts, the page a CTA's link opens")
+# Sign-up (platform phase 5): the sheet is reached by ?cta=<code> and is
+# the page itself (the head script sets the sheet view before the planner
+# draws; the CTAs dialog's sheet button goes to the link); the module
+# reaches the database through three functions, keeps the guest's claim
+# token in localStorage, and meets the planner through the address bar
+# alone.
 SIGNUP_JS = read("_signup.js")
-sdlg = seg(SHELL, '<dialog class="auth-dialog signup-dialog"', "</dialog>", "L32 dialog anchors")
-check('aria-modal="true"' in sdlg and 'aria-labelledby="su-title"' in sdlg and 'id="su-title"' in sdlg,
-      "L32a the sheet dialog is modal and titled")
+HEAD = SHELL.split("<body>")[0]
+sdlg = seg(SHELL, '<main class="sheet-page" id="signup-page"', "</main>", "L32 page anchors")
+check('aria-labelledby="su-title"' in sdlg and 'id="su-title"' in sdlg and "<dialog" not in sdlg and "aria-modal" not in sdlg
+      and 'id="su-close"' not in sdlg and "autofocus" not in sdlg,
+      "L32a the sheet is a titled page section, no dialog: no modal attributes, no close button, no title focus")
+check('document.documentElement.dataset.view = "sheet"' in HEAD and "cta=" in HEAD
+      and SHELL.find("</header>") < SHELL.find('id="signup-page"') < SHELL.find('<div class="shell" id="shell">'),
+      "L32a2 the head script sets the sheet view from the address before the planner draws; the sheet section stands between the masthead and the planner")
+check('html[data-view="sheet"] .shell' in LAYOUT and 'html[data-view="sheet"] .sheet-only{display:inline-block}' in LAYOUT
+      and 'class="about-link sheet-only" href="index.html"' in SHELL,
+      "L32a3 in the sheet view the planner is not displayed and the masthead links back to it (_layout.css)")
+check(".sheet-page > .auth-card{max-height:none; overflow:visible}" in AUTH_CSS and ".sheet-page[hidden]{display:none}" in AUTH_CSS
+      and ".auth-dialog [hidden], .sheet-page [hidden], .acct-menu [hidden]{display:none !important}" in AUTH_CSS,
+      "L32a4 the page is the scroller (no card cap), hidden keeps its meaning on the page, and the account layer's tones apply to it")
+check("function sheetView()" in APP and "if (sheetView()) return;" in seg(APP, "function saveHash()", "}", "L32a5 save anchors")
+      and "if (sheetView()) return false;" in seg(APP, "function loadStored()", "}", "L32a5 load anchors"),
+      "L32a5 while the page shows a sheet the hidden planner writes neither the address nor storage, and loads nothing from storage")
 for fid in ("su-name", "su-slot", "su-weapon-add", "su-ip", "su-swap", "su-note"):
     check(('id="%s"' % fid) in sdlg and ('for="%s"' % fid) in sdlg, "L32b field %s has its label" % fid)
-check('role="alert"' in sdlg and 'aria-live="polite"' in sdlg, "L32c errors and changes are announced, inside the dialog")
+check('role="alert"' in sdlg and 'aria-live="polite"' in sdlg, "L32c errors and changes are announced, on the page")
 check('id="su-board"' in sdlg and sdlg.count("<th scope=\"col\">") == 4, "L32d the roster has its four column headers")
 check('role="combobox"' in sdlg and 'aria-controls="su-weapon-results"' in sdlg and 'id="su-weapon-results"' in sdlg and 'role="listbox"' in sdlg,
       "L32e the weapon picker is a combobox bound to its listbox (the profile's pattern)")
 check('id="ev-sheet"' in SHELL and 'id="ev-link"' in SHELL, "L32f the CTAs dialog offers the sheet and its link")
-check('dispatchEvent(new CustomEvent("cta-sheet"' in read("_events.js") and 'addEventListener("cta-sheet"' in SIGNUP_JS,
-      "L32g the CTAs dialog hands the code over as a DOM event; the sheet listens (no call between modules)")
+check("location.assign(signupLink(current.share_code, location.href))" in read("_events.js") and "cta-sheet" not in SIGNUP_JS
+      and "cta-sheet" not in read("_events.js"),
+      "L32g the CTAs dialog goes to the sheet's link (the address is the one handover; no call between modules)")
 check("codeFromSearch(" in SIGNUP_JS and "location.search" in SIGNUP_JS and "state.ready" in SIGNUP_JS,
       "L32h the link opens the sheet once the stored session has been read")
 check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT", SIGNUP_JS),
       "L32i _signup.js reads and writes no planner or engine state")
-check("location.hash" in SIGNUP_JS and "templateHash(" in SIGNUP_JS, "L32j the sheet opens a CTA in the planner through the share hash")
+check("location.assign(plannerLink(location.href, templateHash(sheet.event, sheet.slots)))" in SIGNUP_JS and "location.hash" not in SIGNUP_JS,
+      "L32j the sheet opens a CTA in the planner through the share hash, as a page load of the planner's address")
 signup_ui = SIGNUP_JS[SIGNUP_JS.find("(function signupUI()"):]
 check(signup_ui != "" and "window.DB" not in signup_ui and "createClient" not in SIGNUP_JS,
       "L32k the sheet UI calls its helpers, never the Supabase client")
@@ -941,8 +958,13 @@ check("weaponInfo(" in SIGNUP_JS and "weaponSearch(" in SIGNUP_JS and "role_clas
       "L32n weapons are read through the catalog and the profile's search: one role read, no engine")
 check(not re.search(r"loadSheet|submitSignUp|cancelSignUp|sheetBoard|codeFromSearch|CLAIM_TOKEN_RE", APP + DECISION_JS),
       "L32o the planner never calls the sign-up module")
-check(all(s in AUTH_CSS for s in (".signup-dialog{", ".su-grid{", ".su-mine{", ".su-free{")),
-      "L32p the sheet, its grid and its marks are styled in _auth.css")
+check(all(s in AUTH_CSS for s in (".sheet-page{", ".su-grid{", ".su-mine{", ".su-free{")) and ".signup-dialog" not in AUTH_CSS,
+      "L32p the sheet page, its grid and its marks are styled in _auth.css")
+check('id="su-roles"' in sdlg and 'id="su-next-list"' in sdlg and sdlg.find('id="su-roles"') < sdlg.find('class="su-grid"')
+      and "function sheetTally" in SIGNUP_JS and "renderRoles(board)" in SIGNUP_JS and "weaponArt(" in SIGNUP_JS
+      and "slotWeaponPick(row)" in SIGNUP_JS and "repaintPick(t)" in SIGNUP_JS
+      and all(s in AUTH_CSS for s in (".su-roles{", ".su-next{", ".su-next-slot{", ".su-weapon-pick{")),
+      "L32t the role bar (held of planned per role, the open slots to fill next with their icons) sits above the roster; the caller's weapon list carries the chosen weapon's icon")
 check(".su-grid{grid-template-columns:1fr}" in LAYOUT, "L32q on a phone the form drops under the roster (_layout.css)")
 i_signup = script_at(lambda a, b: "function loadSheet" in b)
 check(0 <= i_events < i_signup, "L32r the sign-up module loads after the CTAs module, in its own <script>",
@@ -950,7 +972,7 @@ check(0 <= i_events < i_signup, "L32r the sign-up module loads after the CTAs mo
 check("localStorage" in SIGNUP_JS and "crypto.getRandomValues" in SIGNUP_JS,
       "L32s the guest's claim token is random and kept in this browser alone")
 
-print("L33 - caller management: the caller runs the sheet from the same dialog")
+print("L33 - caller management: the caller runs the sheet from the same page")
 # Phase 6: the caller's controls live on the sheet, offered by role and
 # status (callerPowers), and every action is a helper the policies bound.
 check('id="su-caller"' in sdlg and 'id="su-caller-moves"' in sdlg and 'id="su-add-form"' in sdlg,
@@ -975,8 +997,8 @@ print("L34 - live updates: the sheet listens on the CTA's channel and re-reads i
 check('id="su-live-state"' in sdlg and 'aria-live="polite"' in sdlg, "L34a the sheet shows whether it is live, and says so to a screen reader")
 check("function watchSheet" in SIGNUP_JS and 'window.DB.channel(sheetTopic(code))' in SIGNUP_JS and "window.DB.removeChannel(channel)" in SIGNUP_JS,
       "L34b the channel is joined and left through one helper")
-check("startWatching()" in SIGNUP_JS and "stopWatching()" in SIGNUP_JS and 'dialog.addEventListener("close", stopWatching)' in SIGNUP_JS,
-      "L34c the sheet joins once read and leaves on close")
+check("startWatching()" in SIGNUP_JS and "stopWatching()" in SIGNUP_JS and 'window.addEventListener("pagehide", stopWatching)' in SIGNUP_JS,
+      "L34c the sheet joins once read and leaves when the page goes")
 check("LIVE_SETTLE_MS" in SIGNUP_JS and "reload(true, true)" in SIGNUP_JS,
       "L34d a change settles, then the sheet re-reads through event_by_code, the player's typing kept")
 check('.on("postgres_changes"' not in SIGNUP_JS, "L34e no row data crosses the channel: broadcasts only, the policies still decide what is read")
@@ -1100,8 +1122,9 @@ check(sdlg.find('id="rr-wrap"') > sdlg.find('id="su-history-wrap"') and sdlg.fin
 check('dispatchEvent(new CustomEvent("sheet-read"' in SIGNUP_JS and 'addEventListener("sheet-read"' in ROSTER_JS,
       "L38d the sheet hands its roster over as a DOM event; the roster module listens (no call between modules)")
 check("rr-" not in SIGNUP_JS and "rosterRead" not in SIGNUP_JS, "L38e the sign-up module never touches the read's elements or functions")
-check("function handOver" in SIGNUP_JS and SIGNUP_JS.count("handOver();") >= 3 and "sheet = null; handOver();" in SIGNUP_JS,
-      "L38f the roster is handed over after every render and cleared when the sheet closes or names no CTA")
+check("function handOver" in SIGNUP_JS and SIGNUP_JS.count("handOver();") >= 2
+      and "sheet = null;" in seg(SIGNUP_JS, "function showNoEvent()", "handOver();", "L38f no-event anchors"),
+      "L38f the roster is handed over after every render and cleared when the sheet names no CTA")
 check("new CompEngine(DATASET" in ROSTER_JS and "engine.setContent(" in ROSTER_JS,
       "L38g the roster module makes its own engine over the dataset and sets the CTA's content, size and style on it")
 check(not re.search(r"\bENG\b|\brender\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT|location\.hash|COMBOS_CUR|GEARS_CUR", ROSTER_JS),
@@ -1128,7 +1151,7 @@ check(i_roster >= 0 and SCRIPTS[i_roster][1].count("new CompEngine(") == 1 and "
 # ---------------------------------------------------------------------------
 print("L39 - the design check of the account dialogs and the portal page: hidden honoured, one line per slot, one primary per dialog, the title takes focus")
 PORTAL = read("_portal.html")
-check(".auth-dialog [hidden], .acct-menu [hidden]{display:none !important}" in AUTH_CSS,
+check(".auth-dialog [hidden], .sheet-page [hidden], .acct-menu [hidden]{display:none !important}" in AUTH_CSS,
       "L39a every part of the account layer gives the hidden attribute its meaning, whatever display its class sets")
 check(".cp-weapon .gd-name{display:inline}" in AUTH_CSS, "L39b a comp or CTA slot is one line: icon, name and role tag inline")
 check('.cp-fields .text-input, .cp-fields select{min-width:0}' in LAYOUT and '.cp-fields .auth-field:has(input[type="datetime-local"]){grid-column:1/-1}' in LAYOUT,
@@ -1137,14 +1160,14 @@ check(".cp-foot-r{margin:0 0 0 auto}" in AUTH_CSS, "L39d the footer's primary ac
 hist = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog history-dialog"', "</dialog>", "L39e history anchors")
 check(hist.count('<th scope="col" class="hs-num">') == 8 and ".hs-table th.hs-num{text-align:right}" in AUTH_CSS and "th:nth-child" not in AUTH_CSS,
       "L39e the history tables align a numeric header over its numbers by class, never by position")
-check(SHELL.count('tabindex="-1" autofocus') == 6
-      and all(('id="%s" tabindex="-1" autofocus' % t) in SHELL for t in ("guild-title", "comp-title", "ev-title", "su-title", "hs-title", "im-title"))
+check(SHELL.count('tabindex="-1" autofocus') == 5
+      and all(('id="%s" tabindex="-1" autofocus' % t) in SHELL for t in ("guild-title", "comp-title", "ev-title", "hs-title", "im-title"))
       and 'id="auth-title" tabindex' not in SHELL and 'id="profile-title" tabindex' not in SHELL and ".auth-hd h2:focus-visible{outline:none}" in AUTH_CSS,
-      "L39f the six list dialogs open with focus on their title; the sign-in and profile dialogs focus their first field")
+      "L39f the five list dialogs open with focus on their title; the sign-in and profile dialogs focus their first field; the sheet is a page")
 check(".su-grid:has(> .su-form-wrap > #su-form[hidden]){grid-template-columns:1fr}" in AUTH_CSS,
       "L39g a sheet that takes no sign-up keeps no column for the form")
 check('.im-table tr[data-status="none"] .im-status{color:var(--gap)' in AUTH_CSS, "L39h the import marks a name with no match as plainly as an uncertain one")
-check(".auth-dialog, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}" in AUTH_CSS and "--ink-3:#757A92" in SHELL and "--role-melee:#E00063" in SHELL,
+check(".auth-dialog, .sheet-page, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}" in AUTH_CSS and "--ink-3:#757A92" in SHELL and "--role-melee:#E00063" in SHELL,
       "L39i the account layer's small-text tones clear 4.5:1 on its surfaces; the planner's tokens stand")
 secondary = ("guild-join-submit", "guild-new-submit", "guild-rename-submit", "comp-from-planner", "ev-new", "im-read")
 check(all(re.search(r'class="auth-secondary[^"]*" id="%s"' % i, SHELL) for i in secondary) and '.auth-secondary[aria-busy="true"]::before' in AUTH_CSS,
@@ -1168,6 +1191,9 @@ check("--serif:" in PORTAL and "h1,h2,h3{font-family:var(--serif)" in PORTAL
       and "white-space:nowrap" in seg(PORTAL, ".brand{", "}", "L39n brand anchors") and "flex-wrap:wrap" in seg(PORTAL, ".top{", "}", "L39n top anchors")
       and "th:nth-child(2),td:nth-child(2){position:sticky;left:0" in PORTAL,
       "L39n the portal page shares the planner's headings and labels, its header wraps on a phone and the weapon column stays put while the table scrolls")
+check(".gd-main .cp-foot{position:sticky; bottom:0; z-index:1; background:var(--surface); box-shadow:0 20px 0 var(--surface)}" in AUTH_CSS
+      and "max-height:calc(100dvh - 32px); overflow:auto;" in seg(AUTH_CSS, ".auth-card{", "}", "L39p card anchors"),
+      "L39p the card is the scroller and a comp's and a CTA's action bar stays in view while the slots scroll under it")
 
 if FAILURES:
 

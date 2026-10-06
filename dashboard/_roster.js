@@ -21,7 +21,7 @@
  * build.py inlines this file as its own <script> after _import.js. The
  * sheet hands its roster over as a DOM event (sheet-read) after every
  * render and on close; this module paints into the rr-* elements of the
- * sheet dialog, which the sign-up module never touches. It reaches no
+ * sheet page, which the sign-up module never touches. It reaches no
  * table: members and their lists come through the guild module's
  * helpers, for a member of the CTA's guild. Two parts:
  *   pure    - the held party, the read, the fillers, the wording

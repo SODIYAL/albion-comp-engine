@@ -1722,6 +1722,10 @@ window.AUTH_LINK = "";
       + (hit === q ? "" : q) + (hit === h ? "" : h));
   } catch (e) { /* file:// may deny */ }
 })();
+/* A CTA's link (?cta=<share code>) opens the sign-up sheet as the page:
+   the view is set here, before the planner draws, so the planner never
+   shows first (_layout.css hides it; _signup.js fills the sheet). */
+if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view = "sheet";
 </script>
 </head>
 <body>
@@ -1748,6 +1752,8 @@ window.AUTH_LINK = "";
   <div class="spacer"></div>
   <a class="about-link" href="portal.html" title="what wins inside the Ancient Lands, per portal pool, from the killboard">Dragon Portal stats <span aria-hidden="true">→</span></a>
   <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
+  <!-- on the sign-up page (the sheet view) the planner is a link away -->
+  <a class="about-link sheet-only" href="index.html">Planner <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
   <label class="lf-sync" id="companion-sync-wrap" hidden
          title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
@@ -1762,6 +1768,166 @@ window.AUTH_LINK = "";
   <span class="chip warn" id="parity-alarm" hidden>parity mismatch — do not trust</span>
   </div>
 </header>
+
+<!-- The sign-up sheet (_signup.js) as the page: a CTA's link (?cta=<code>)
+     shows it in place of the planner (the head script sets the view, _layout.css
+     hides the planner). The roster with who holds what, the role bar (held of
+     planned per role, the open slots to fill next), the reserves, the record,
+     the engine's read and the player's form. -->
+<main class="sheet-page" id="signup-page" aria-labelledby="su-title" hidden>
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker" id="su-kicker">CTA</span>
+        <h2 id="su-title">Sign-up sheet</h2>
+        <p class="gd-meta su-when" id="su-when"></p>
+      </div>
+    </div>
+    <p class="auth-msg err" id="su-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
+    <p class="sr-only" id="su-live" aria-live="polite"></p>
+
+    <div class="ev-status-row su-status-row" id="su-status-row">
+      <span class="ev-status" id="su-status" data-status=""></span>
+      <span class="su-counts" id="su-counts"></span>
+      <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
+      <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
+      <button type="button" class="gd-btn" id="su-open">Open in planner</button>
+    </div>
+    <div class="gd-coverage su-roles" id="su-roles" aria-label="Slots held of slots planned, per role"></div>
+    <div class="su-next" id="su-next" hidden>
+      <span class="pw-label su-next-label" id="su-next-label">Fill next</span>
+      <ul class="su-next-list" id="su-next-list" aria-labelledby="su-next-label"></ul>
+    </div>
+    <p class="su-notes" id="su-notes" hidden></p>
+
+    <div class="su-grid">
+      <section class="su-board-wrap" aria-labelledby="su-board-label">
+        <h3 class="pw-label" id="su-board-label">Roster</h3>
+        <table class="gd-table cp-table su-table" id="su-board-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Weapon</th>
+              <th scope="col">Role</th>
+              <th scope="col">Player</th>
+            </tr>
+          </thead>
+          <tbody id="su-board"></tbody>
+        </table>
+        <div id="su-reserves-wrap" hidden>
+          <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
+          <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
+        </div>
+        <div id="su-history-wrap" hidden>
+          <h3 class="pw-label" id="su-history-label">Record</h3>
+          <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
+        </div>
+        <details class="rr" id="rr-wrap" hidden>
+          <summary class="rr-summary">
+            <span class="pw-label rr-label">Engine read</span>
+            <span class="rr-headline" id="rr-headline"></span>
+          </summary>
+          <p class="auth-hint rr-note" id="rr-note" hidden></p>
+          <div class="rr-grid">
+            <section class="rr-block" aria-labelledby="rr-needs-label">
+              <h4 class="pw-label" id="rr-needs-label">Biggest needs</h4>
+              <ul class="rr-list" id="rr-needs"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-picks-label">
+              <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
+              <ul class="rr-list" id="rr-picks"></ul>
+            </section>
+            <section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">
+              <h4 class="pw-label" id="rr-free-label">Open slots</h4>
+              <ul class="rr-list rr-cols" id="rr-free"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-swaps-label">
+              <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
+              <ul class="rr-list" id="rr-swaps"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-over-label">
+              <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
+              <ul class="rr-list" id="rr-over"></ul>
+            </section>
+          </div>
+          <p class="auth-hint rr-definitions" id="rr-definitions"></p>
+        </details>
+        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+        <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
+          <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
+          <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
+          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
+          <form class="su-add" id="su-add-form" novalidate hidden>
+            <div class="auth-field">
+              <label for="su-add-name">Add a player by name</label>
+              <input class="text-input" id="su-add-name" maxlength="64" type="text" spellcheck="false" autocomplete="off"
+                placeholder="someone signing up in Discord" aria-describedby="su-add-name-err">
+              <p class="auth-field-err" id="su-add-name-err"></p>
+            </div>
+            <div class="auth-field">
+              <label for="su-add-slot">Slot</label>
+              <select id="su-add-slot"></select>
+            </div>
+            <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
+          </form>
+          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
+        </section>
+      </section>
+
+      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
+        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
+        <p class="auth-hint" id="su-closed" hidden></p>
+        <form class="auth-form" id="su-form" novalidate hidden>
+          <p class="auth-hint" id="su-who"></p>
+          <div class="auth-field" id="su-name-wrap">
+            <label for="su-name">Your name</label>
+            <input class="text-input" id="su-name" maxlength="64" type="text" spellcheck="false" autocomplete="nickname"
+              aria-describedby="su-name-err">
+            <p class="auth-field-err" id="su-name-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-slot">Slot</label>
+            <select id="su-slot" aria-describedby="su-slot-err"></select>
+            <p class="auth-field-err" id="su-slot-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-weapon-add">Weapons you bring</label>
+            <ul class="pw-list su-weapons" id="su-weapons" aria-label="Weapons declared"></ul>
+            <div class="pw-combo">
+              <input class="text-input" id="su-weapon-add" type="text" role="combobox"
+                aria-autocomplete="list" aria-expanded="false" aria-controls="su-weapon-results"
+                autocomplete="off" spellcheck="false" placeholder="add a weapon you bring">
+              <ul class="pw-results" id="su-weapon-results" role="listbox" aria-label="Weapons to add" hidden></ul>
+            </div>
+            <p class="auth-field-err" id="su-weapons-err"></p>
+          </div>
+          <div class="su-row">
+            <div class="auth-field">
+              <label for="su-ip">Item power <span class="opt">optional</span></label>
+              <input class="text-input" id="su-ip" type="number" min="0" max="3000" step="1" inputmode="numeric"
+                aria-describedby="su-ip-err">
+              <p class="auth-field-err" id="su-ip-err"></p>
+            </div>
+            <label class="su-check" for="su-swap">
+              <input type="checkbox" id="su-swap"> Can swap to what the caller needs
+            </label>
+          </div>
+          <div class="auth-field">
+            <label for="su-note">Note <span class="opt">optional</span></label>
+            <input class="text-input" id="su-note" maxlength="200" type="text" aria-describedby="su-note-err">
+            <p class="auth-field-err" id="su-note-err"></p>
+          </div>
+          <div class="profile-actions">
+            <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
+            <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
+          </div>
+          <button type="button" class="gd-btn su-confirm" id="su-confirm" data-confirmed="no" hidden>Confirm I'm coming</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
 
 <div class="shell" id="shell">
 
@@ -2468,157 +2634,6 @@ window.AUTH_LINK = "";
               </div>
             </div>
           </div>
-        </form>
-      </section>
-    </div>
-  </div>
-</dialog>
-
-<dialog class="auth-dialog signup-dialog" id="signup-dialog" aria-modal="true" aria-labelledby="su-title">
-  <div class="auth-card">
-    <div class="auth-hd">
-      <div>
-        <span class="auth-kicker" id="su-kicker">CTA</span>
-        <h2 id="su-title" tabindex="-1" autofocus>Sign-up sheet</h2>
-        <p class="gd-meta su-when" id="su-when"></p>
-      </div>
-      <button type="button" class="auth-close" id="su-close" aria-label="Close">&times;</button>
-    </div>
-    <p class="auth-msg err" id="su-error" role="alert" hidden></p>
-    <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
-    <p class="sr-only" id="su-live" aria-live="polite"></p>
-
-    <div class="ev-status-row su-status-row" id="su-status-row">
-      <span class="ev-status" id="su-status" data-status=""></span>
-      <span class="su-counts" id="su-counts"></span>
-      <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
-      <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
-      <button type="button" class="gd-btn" id="su-open">Open in planner</button>
-    </div>
-    <p class="su-notes" id="su-notes" hidden></p>
-
-    <div class="su-grid">
-      <section class="su-board-wrap" aria-labelledby="su-board-label">
-        <h3 class="pw-label" id="su-board-label">Roster</h3>
-        <table class="gd-table cp-table su-table" id="su-board-table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Weapon</th>
-              <th scope="col">Role</th>
-              <th scope="col">Player</th>
-            </tr>
-          </thead>
-          <tbody id="su-board"></tbody>
-        </table>
-        <div id="su-reserves-wrap" hidden>
-          <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
-          <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
-        </div>
-        <div id="su-history-wrap" hidden>
-          <h3 class="pw-label" id="su-history-label">Record</h3>
-          <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
-        </div>
-        <details class="rr" id="rr-wrap" hidden>
-          <summary class="rr-summary">
-            <span class="pw-label rr-label">Engine read</span>
-            <span class="rr-headline" id="rr-headline"></span>
-          </summary>
-          <p class="auth-hint rr-note" id="rr-note" hidden></p>
-          <div class="rr-grid">
-            <section class="rr-block" aria-labelledby="rr-needs-label">
-              <h4 class="pw-label" id="rr-needs-label">Biggest needs</h4>
-              <ul class="rr-list" id="rr-needs"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-picks-label">
-              <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
-              <ul class="rr-list" id="rr-picks"></ul>
-            </section>
-            <section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">
-              <h4 class="pw-label" id="rr-free-label">Open slots</h4>
-              <ul class="rr-list rr-cols" id="rr-free"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-swaps-label">
-              <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
-              <ul class="rr-list" id="rr-swaps"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-over-label">
-              <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
-              <ul class="rr-list" id="rr-over"></ul>
-            </section>
-          </div>
-          <p class="auth-hint rr-definitions" id="rr-definitions"></p>
-        </details>
-        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
-        <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
-          <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
-          <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
-          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
-          <form class="su-add" id="su-add-form" novalidate hidden>
-            <div class="auth-field">
-              <label for="su-add-name">Add a player by name</label>
-              <input class="text-input" id="su-add-name" maxlength="64" type="text" spellcheck="false" autocomplete="off"
-                placeholder="someone signing up in Discord" aria-describedby="su-add-name-err">
-              <p class="auth-field-err" id="su-add-name-err"></p>
-            </div>
-            <div class="auth-field">
-              <label for="su-add-slot">Slot</label>
-              <select id="su-add-slot"></select>
-            </div>
-            <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
-          </form>
-          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
-        </section>
-      </section>
-
-      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
-        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
-        <p class="auth-hint" id="su-closed" hidden></p>
-        <form class="auth-form" id="su-form" novalidate hidden>
-          <p class="auth-hint" id="su-who"></p>
-          <div class="auth-field" id="su-name-wrap">
-            <label for="su-name">Your name</label>
-            <input class="text-input" id="su-name" maxlength="64" type="text" spellcheck="false" autocomplete="nickname"
-              aria-describedby="su-name-err">
-            <p class="auth-field-err" id="su-name-err"></p>
-          </div>
-          <div class="auth-field">
-            <label for="su-slot">Slot</label>
-            <select id="su-slot" aria-describedby="su-slot-err"></select>
-            <p class="auth-field-err" id="su-slot-err"></p>
-          </div>
-          <div class="auth-field">
-            <label for="su-weapon-add">Weapons you bring</label>
-            <ul class="pw-list su-weapons" id="su-weapons" aria-label="Weapons declared"></ul>
-            <div class="pw-combo">
-              <input class="text-input" id="su-weapon-add" type="text" role="combobox"
-                aria-autocomplete="list" aria-expanded="false" aria-controls="su-weapon-results"
-                autocomplete="off" spellcheck="false" placeholder="add a weapon you bring">
-              <ul class="pw-results" id="su-weapon-results" role="listbox" aria-label="Weapons to add" hidden></ul>
-            </div>
-            <p class="auth-field-err" id="su-weapons-err"></p>
-          </div>
-          <div class="su-row">
-            <div class="auth-field">
-              <label for="su-ip">Item power <span class="opt">optional</span></label>
-              <input class="text-input" id="su-ip" type="number" min="0" max="3000" step="1" inputmode="numeric"
-                aria-describedby="su-ip-err">
-              <p class="auth-field-err" id="su-ip-err"></p>
-            </div>
-            <label class="su-check" for="su-swap">
-              <input type="checkbox" id="su-swap"> Can swap to what the caller needs
-            </label>
-          </div>
-          <div class="auth-field">
-            <label for="su-note">Note <span class="opt">optional</span></label>
-            <input class="text-input" id="su-note" maxlength="200" type="text" aria-describedby="su-note-err">
-            <p class="auth-field-err" id="su-note-err"></p>
-          </div>
-          <div class="profile-actions">
-            <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
-            <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
-          </div>
-          <button type="button" class="gd-btn su-confirm" id="su-confirm" data-confirmed="no" hidden>Confirm I'm coming</button>
         </form>
       </section>
     </div>

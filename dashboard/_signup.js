@@ -10,14 +10,18 @@
  * localStorage, so this browser alone edits or cancels it, and an account
  * created here later adopts it).
  *
- * The link is index.html?cta=<share code>. The code is the key: the
+ * The link is index.html?cta=<share code>, and the sheet is the page it
+ * opens: the head script sets the sheet view from the address before the
+ * planner draws, _layout.css hides the planner, and this module fills the
+ * sheet section that stands in its place. The code is the key: the
  * database reads it from the statement (event_by_code, sign_up,
  * cancel_sign_up run as the caller, signed in or not) and its policies
  * decide what comes back. build.py inlines this file as its own <script>
  * after _events.js. It reads no planner state and never calls the engine;
- * an event opens in the planner through the share hash, as a comp does.
+ * an event opens in the planner through the share hash, as a comp does
+ * (the planner's address, no sheet parameter: a page load).
  *
- * The caller runs the sheet from the same dialog (phase 6): a caller,
+ * The caller runs the sheet from the same page (phase 6): a caller,
  * officer or admin of the CTA's guild moves players between slots and
  * the reserves (a held slot swaps), removes sign-ups, adds a player by
  * name, changes a slot's weapon and moves the status, until the CTA is
@@ -43,9 +47,12 @@
  *             record's confirm_sign_up, mark_attendance,
  *             mark_all_attended)
  *   pure    - the link and the code, the claim token, the board (slots
- *             with their claimants, the reserves, what is free),
- *             validation, the payload, error wording (tests/test_signup.js)
- *   UI      - the sheet dialog, opened by the link or from the CTAs dialog
+ *             with their claimants, the reserves, what is free), the
+ *             tally (held of planned per role, the open slots to fill
+ *             next), validation, the payload, error wording
+ *             (tests/test_signup.js)
+ *   UI      - the sheet page, opened by the link (the CTAs dialog's
+ *             sheet button goes to the link)
  */
 
 
@@ -264,6 +271,13 @@ function signupLink(code, href) {
 }
 
 
+/* the planner with a comp: this page, no sheet parameter, the share hash */
+function plannerLink(href, hash) {
+  const base = String(href || "").replace(/[?#].*$/, "");
+  return `${base}#${String(hash || "")}`;
+}
+
+
 /* The board: each slot with its claimant, the reserves (sign-ups without a
    slot), the free positions, and the counts. */
 function sheetBoard(slots, signups) {
@@ -282,6 +296,40 @@ function sheetBoard(slots, signups) {
     reserves,
     free,
     counts: { slots: rows.length, claimed: rows.length - free.length, free: free.length, reserves: reserves.length }
+  };
+}
+
+
+/* The tally: slots held of slots planned per role (the catalog's role
+   class: one role read), and the open slots to fill next, grouped by
+   role in the comp's order. A slot counts for its weapon's role; a slot
+   with no weapon is planned as "any", and held by the role of its
+   claimant's first declared weapon, else as "any". The "any" row is
+   listed only when a slot falls in it. */
+function sheetTally(board, catalog) {
+  const roles = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], held: 0, planned: 0 }));
+  const any = { role: "any", name: "Any weapon", held: 0, planned: 0 };
+  const next = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], slots: [] })).concat([{ role: "any", name: "Any weapon", slots: [] }]);
+  const row = role => roles.find(r => r.role === role) || any;
+  const roleOf = key => (key ? weaponInfo(catalog, key).role : null) || null;
+
+  for (const slot of (board && board.rows) || []) {
+    const planned = roleOf(slot.weapon_id);
+    row(planned).planned += 1;
+    if (slot.claimant) {
+      row(planned || roleOf(((slot.claimant.weapons || []).filter(Boolean))[0])).held += 1;
+    } else {
+      next.find(g => g.role === (planned || "any")).slots.push({
+        position: slot.position,
+        weapon_id: slot.weapon_id || null,
+        name: slot.weapon_id ? weaponInfo(catalog, slot.weapon_id).name : "any weapon"
+      });
+    }
+  }
+
+  return {
+    roles: roles.concat(any.planned || any.held ? [any] : []),
+    next: next.filter(g => g.slots.length)
   };
 }
 
@@ -525,9 +573,9 @@ function signupErrorMessage(err) {
   }
 
   const $id = id => document.getElementById(id);
-  const dialog = $id("signup-dialog");
+  const page = $id("signup-page");
 
-  if (!dialog || typeof dialog.showModal !== "function" || !window.Account) {
+  if (!page || !window.Account) {
     return;
   }
 
@@ -544,6 +592,9 @@ function signupErrorMessage(err) {
     notice: $id("su-notice"),
     live: $id("su-live"),
     counts: $id("su-counts"),
+    roles: $id("su-roles"),
+    next: $id("su-next"),
+    nextList: $id("su-next-list"),
     board: $id("su-board"),
     reserves: $id("su-reserves"),
     reservesWrap: $id("su-reserves-wrap"),
@@ -637,6 +688,22 @@ function signupErrorMessage(err) {
     return tag;
   }
 
+  /* the weapon's icon: the page's own, else the render service; null when neither names it */
+  function weaponArt(key) {
+    const info = weaponInfo(CATALOG, key);
+    const src = (typeof ICONS !== "undefined" && ICONS[key])
+      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
+    if (!src) return null;
+    const img = document.createElement("img");
+    img.className = "pw-art";
+    img.src = src;
+    img.alt = "";
+    img.width = 22;
+    img.height = 22;
+    img.loading = "lazy";
+    return img;
+  }
+
   function weaponCell(key) {
     const wrap = document.createElement("span");
     wrap.className = "su-weapon";
@@ -648,23 +715,49 @@ function signupErrorMessage(err) {
       return wrap;
     }
     const info = weaponInfo(CATALOG, key);
-    const src = (typeof ICONS !== "undefined" && ICONS[key])
-      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
-    if (src) {
-      const img = document.createElement("img");
-      img.className = "pw-art";
-      img.src = src;
-      img.alt = "";
-      img.width = 22;
-      img.height = 22;
-      img.loading = "lazy";
-      wrap.append(img);
-    }
+    const art = weaponArt(key);
+    if (art) wrap.append(art);
     const name = document.createElement("span");
     name.textContent = info.known ? info.name : key;
     wrap.append(name);
     if (info.role) wrap.append(roleTag(info.role));
     return wrap;
+  }
+
+  /* the role bar: slots held of slots planned per role, and the open
+     slots to fill next, each with its icon, grouped by role in the
+     comp's order */
+  function renderRoles(board) {
+    const tally = sheetTally(board, CATALOG);
+    el.roles.replaceChildren(...tally.roles.map(r => {
+      const cell = document.createElement("span");
+      cell.className = `gd-cov ${r.role}`;
+      const n = document.createElement("b");
+      n.textContent = `${r.held}/${r.planned}`;
+      cell.append(n, ` ${r.name}`);
+      return cell;
+    }));
+    el.next.hidden = !tally.next.length;
+    el.nextList.replaceChildren(...tally.next.map(group => {
+      const li = document.createElement("li");
+      li.className = "su-next-group";
+      const tag = document.createElement("span");
+      tag.className = `pw-role ${group.role}`;
+      tag.textContent = group.name;
+      li.append(tag);
+      for (const slot of group.slots) {
+        const chip = document.createElement("span");
+        chip.className = "gd-weapon su-next-slot";
+        const art = slot.weapon_id ? weaponArt(slot.weapon_id) : null;
+        if (art) chip.append(art);
+        const pos = document.createElement("span");
+        pos.className = "su-next-pos";
+        pos.textContent = `#${slot.position}`;
+        chip.append(slot.name, pos);
+        li.append(chip);
+      }
+      return li;
+    }));
   }
 
   function playerCell(s, mine) {
@@ -719,6 +812,7 @@ function signupErrorMessage(err) {
 
     el.kicker.textContent = sheet.guild ? `${sheet.guild.name}${sheet.guild.albion_server ? " · " + (ALBION_SERVERS[sheet.guild.albion_server] || sheet.guild.albion_server) : ""}` : "CTA";
     el.title.textContent = ev.name;
+    document.title = `${ev.name} · Comp Zaddy`;
     paintWhen();
     el.status.textContent = EVENT_STATUS_NAMES[ev.status] || ev.status;
     el.status.dataset.status = ev.status;
@@ -731,6 +825,7 @@ function signupErrorMessage(err) {
       + (ev.status === "completed"
          ? ` · attended ${att.attended} · no-show ${att.no_show}` + (att.reserve ? ` · reserve ${att.reserve}` : "")
          : (att.confirmed ? ` · ${att.confirmed} confirmed` : ""));
+    renderRoles(board);
 
     caller = callerPowers(myRole, ev.status);
     marks = markPowers(myRole, ev.status, sheet.mine);
@@ -743,7 +838,7 @@ function signupErrorMessage(err) {
       pos.textContent = String(row.position);
       const weapon = document.createElement("td");
       weapon.className = "cp-weapon";
-      weapon.append(caller.manage ? slotWeaponSelect(row) : weaponCell(row.weapon_id));
+      weapon.append(caller.manage ? slotWeaponPick(row) : weaponCell(row.weapon_id));
       const role = document.createElement("td");
       role.className = "su-role";
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
@@ -994,12 +1089,10 @@ function signupErrorMessage(err) {
 
   el.refresh.addEventListener("click", () => { if (!busy) reload(false); });
 
+  /* the planner is a page load: its address, the comp as the share hash */
   el.open.addEventListener("click", () => {
     if (!sheet) return;
-    const hash = templateHash(sheet.event, sheet.slots);
-    dialog.close();
-    location.hash = hash;
-    announce(`${sheet.event.name} opened in the planner.`);
+    location.assign(plannerLink(location.href, templateHash(sheet.event, sheet.slots)));
   });
 
   el.link.addEventListener("click", () => {
@@ -1042,6 +1135,26 @@ function signupErrorMessage(err) {
     }
     select.value = row.weapon_id || "";
     return select;
+  }
+
+  /* the caller's weapon list for a slot, the chosen weapon's icon beside it */
+  function slotWeaponPick(row) {
+    const wrap = document.createElement("span");
+    wrap.className = "su-weapon su-weapon-pick";
+    const art = row.weapon_id ? weaponArt(row.weapon_id) : null;
+    if (art) wrap.append(art);
+    wrap.append(slotWeaponSelect(row));
+    return wrap;
+  }
+
+  /* the icon follows the list at once; the re-read after the write draws the row again */
+  function repaintPick(select) {
+    const wrap = select.closest(".su-weapon-pick");
+    if (!wrap) return;
+    const old = wrap.querySelector(".pw-art");
+    if (old) old.remove();
+    const art = select.value ? weaponArt(select.value) : null;
+    if (art) wrap.prepend(art);
   }
 
   function manageControls(board, s) {
@@ -1126,6 +1239,7 @@ function signupErrorMessage(err) {
       act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
     } else if (t.dataset.suSlotWeapon !== undefined) {
       const position = Number(t.dataset.suSlotWeapon);
+      repaintPick(t);
       act(null, "", () => setSlotWeapon(sheet.event.id, position, t.value),
           () => `Slot ${position}: ${t.value ? weaponInfo(CATALOG, t.value).name : "any weapon"}.`);
     }
@@ -1295,6 +1409,8 @@ function signupErrorMessage(err) {
     el.status.textContent = "";
     el.status.dataset.status = "";
     el.counts.textContent = "";
+    el.roles.replaceChildren();
+    el.next.hidden = true;
     el.statusRow.hidden = true;
     el.notes.hidden = true;
     el.boardLabel.hidden = true;
@@ -1361,6 +1477,8 @@ function signupErrorMessage(err) {
     el.status.textContent = "";
     el.notes.hidden = true;
     el.counts.textContent = "";
+    el.roles.replaceChildren();
+    el.next.hidden = true;
     el.board.replaceChildren();
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
@@ -1374,7 +1492,7 @@ function signupErrorMessage(err) {
     el.formWrap.hidden = false;
     stopWatching();
     clearMessages();
-    if (!dialog.open) dialog.showModal();
+    showPage();
 
     await reload(false);
     if (sheet) startWatching();
@@ -1388,18 +1506,22 @@ function signupErrorMessage(err) {
     }
   }
 
-  acctWireDialog(dialog, { canClose: () => !busy });
-  $id("su-close").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("close", stopWatching);
-  dialog.addEventListener("close", () => { sheet = null; handOver(); });
+  /* the sheet in place of the planner: the view the head script set from
+     the address, kept here, and the section shown */
+  function showPage() {
+    document.documentElement.dataset.view = "sheet";
+    page.hidden = false;
+  }
 
-  /* the CTAs dialog hands a code over */
-  document.addEventListener("cta-sheet", e => {
-    if (e.detail && e.detail.code) openSheet(e.detail.code);
-  });
+  window.addEventListener("pagehide", stopWatching);
 
 
   /* ---- identity and the link ---- */
+
+  /* the page shows the sheet at once (its title says it is loading); the
+     sheet itself is read once the stored session is, below */
+  const fromLink = codeFromSearch(typeof location !== "undefined" ? location.search : "");
+  if (fromLink) showPage();
 
   window.Account.subscribe(state => {
     const was = account.user ? account.user.id : null;
@@ -1409,12 +1531,11 @@ function signupErrorMessage(err) {
        an account signs up as itself */
     if (state.ready && !booted) {
       booted = true;
-      const fromLink = codeFromSearch(typeof location !== "undefined" ? location.search : "");
       if (fromLink) openSheet(fromLink);
       return;
     }
 
-    if (dialog.open && code && (state.user ? state.user.id : null) !== was) {
+    if (code && (state.user ? state.user.id : null) !== was) {
       reload(false);
     }
   });

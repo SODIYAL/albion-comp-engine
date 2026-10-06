@@ -7,11 +7,11 @@
 /* the layer's own tones for small text: the shell's tertiary grey and the
    melee hue sit under the 4.5:1 bar for 10-13px text on these surfaces
    (4.47 and 3.92 on --surface); the planner keeps its own tokens */
-.auth-dialog, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}
+.auth-dialog, .sheet-page, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}
 /* every part of the account layer gives the hidden attribute back its
    meaning, whatever display its class sets (the .lf-sync lesson in
    _shell.html; the per-class rules below predate this one) */
-.auth-dialog [hidden], .acct-menu [hidden]{display:none !important}
+.auth-dialog [hidden], .sheet-page [hidden], .acct-menu [hidden]{display:none !important}
 
 /* the layer's type scale: six steps, every font-size below is one of them.
    label: mono capitals and compact buttons. meta: secondary buttons and
@@ -349,6 +349,9 @@
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
 .cp-foot-r{margin:0 0 0 auto}   /* the primary action sits at the right whether or not the left group is there */
 .cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}
+/* a comp's and a CTA's action bar stays in view while the slots scroll under it: Save never waits at the
+   end of a long roster. The shadow fills the card's bottom padding, so no row shows below the bar */
+.gd-main .cp-foot{position:sticky; bottom:0; z-index:1; background:var(--surface); box-shadow:0 20px 0 var(--surface)}
 
 /* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
 .event-dialog{width:min(960px, calc(100vw - 32px))}
@@ -368,10 +371,26 @@
 .ev-share-wrap .pw-label{margin:0}
 .ev-share{font-size:var(--fs-body)}
 
-/* ---- sign-up (_signup.js): the sheet a link opens, the roster beside the player's form ---- */
-.signup-dialog{width:min(1040px, calc(100vw - 32px))}
+/* ---- sign-up (_signup.js): the sheet a link opens as the page, the roster beside the player's form ---- */
+/* the page: the card's chrome at the page's width, the document the scroller (no cap, no inner scroll) */
+.sheet-page{display:block; width:min(1280px, calc(100vw - 32px)); margin:14px auto 40px; color:var(--ink)}
+.sheet-page[hidden]{display:none}
+.sheet-page > .auth-card{max-height:none; overflow:visible}
 .su-when{margin-top:4px}
 .su-status-row{margin-bottom:8px}
+/* the role bar under the status row: slots held of slots planned per role, then the open slots
+   to fill next as chips with their icons, grouped by role in the comp's order */
+.su-roles{margin-bottom:6px}
+.su-roles .gd-cov.any b{color:var(--ink-2)}
+.su-next{display:flex; flex-wrap:wrap; align-items:flex-start; gap:4px 10px; margin:0 0 10px}
+.su-next-label{margin:3px 0 0; flex:none}
+.su-next-list{display:flex; flex-wrap:wrap; gap:4px 12px; margin:0; padding:0; list-style:none; min-width:0}
+.su-next-group{display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px}
+.su-next-group .pw-role{margin-right:2px}
+.pw-role.any{color:var(--ink-2)}
+.su-next-slot{font-size:var(--fs-dense); color:var(--ink)}
+.su-next-slot .pw-art{width:18px; height:18px}
+.su-next-pos{font-family:var(--mono); font-size:var(--fs-label); color:var(--ink-3)}
 .su-counts{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-status-row .gd-btn:first-of-type{margin-left:auto}
 .su-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
@@ -389,9 +408,12 @@
 .su-table .cp-pos, .su-table .su-role{padding-top:9px}
 /* the weapon and role columns are sized so the player column keeps room for the caller's
    move list and the record's mark on one line (273px) at the sheet's full width */
-.su-table .cp-weapon{padding-top:5px; width:170px}
+.su-table .cp-weapon{padding-top:5px; width:200px}
 .su-table .su-role{width:150px}
 .su-weapon{display:inline-flex; align-items:center; gap:5px}
+/* the caller's weapon list with the chosen weapon's icon beside it; the icon keeps its place when the slot names no weapon */
+.su-weapon-pick{gap:6px; min-height:26px}
+.su-weapon-pick .su-slot-weapon{flex:1; min-width:0}
 .su-role{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-player .gd-name{display:inline}
 .su-player .gd-sub{margin-top:1px}

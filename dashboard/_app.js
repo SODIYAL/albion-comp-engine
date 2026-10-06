@@ -554,7 +554,13 @@ function loadHash(){
   syncEngine();
   return true;
 }
+/* While the page shows a sign-up sheet (?cta=: the head script sets the
+   view before anything draws) the address is the sheet's and the saved
+   comp stays as it was: the hidden planner writes neither the hash nor
+   storage, and loads nothing from storage. */
+function sheetView(){ return document.documentElement.dataset.view === "sheet"; }
 function saveHash(){
+  if (sheetView()) return;
   /* every optional param is omitted when empty, so a plain comp's link is
      byte-for-byte what it was before these features existed */
   const g = loadoutEncode();
@@ -568,6 +574,7 @@ function saveHash(){
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
 function loadStored(){
+  if (sheetView()) return false;
   try {
     const h = localStorage.getItem("compforge");
     if (!h) return false;

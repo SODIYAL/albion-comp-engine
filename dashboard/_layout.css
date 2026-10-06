@@ -343,3 +343,20 @@
 /* the size ask in the forge slot (a content with size_prompt) */
 .size-ask{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
 .size-ask-q{font-size:.82em;opacity:.85;margin-right:2px}
+
+/* ---------- the sheet view ----------
+   A CTA's link (?cta=<code>) shows the sign-up sheet as the page: the
+   head script sets html[data-view="sheet"] before anything draws, the
+   planner (its shell, rails, panels and drawer, and the masthead's
+   planner-only parts) is not displayed, and the sheet section after the
+   masthead takes its place. The masthead keeps the brand, the links and
+   the account button, plus a link back to the planner. */
+.sheet-only{display:none}
+html[data-view="sheet"] .shell, html[data-view="sheet"] .epanel-rail, html[data-view="sheet"] .epanel,
+html[data-view="sheet"] .drawer, html[data-view="sheet"] .masthead .mh-sum, html[data-view="sheet"] .masthead .lf-btn,
+html[data-view="sheet"] .masthead .lf-sync, html[data-view="sheet"] .masthead .chip.warn{display:none}
+html[data-view="sheet"] .sheet-only{display:inline-block}
+@media (max-width:640px){
+  /* the sheet page keeps the phone's 16px gutters */
+  .sheet-page{width:auto; margin:10px 16px 32px}
+}

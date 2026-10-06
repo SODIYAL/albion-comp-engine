@@ -1945,11 +1945,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* the layer's own tones for small text: the shell's tertiary grey and the
    melee hue sit under the 4.5:1 bar for 10-13px text on these surfaces
    (4.47 and 3.92 on --surface); the planner keeps its own tokens */
-.auth-dialog, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}
+.auth-dialog, .sheet-page, .acct-menu{--ink-3:#8A8FA8; --role-melee:#FF5C9A}
 /* every part of the account layer gives the hidden attribute back its
    meaning, whatever display its class sets (the .lf-sync lesson in
    _shell.html; the per-class rules below predate this one) */
-.auth-dialog [hidden], .acct-menu [hidden]{display:none !important}
+.auth-dialog [hidden], .sheet-page [hidden], .acct-menu [hidden]{display:none !important}
 
 /* the layer's type scale: six steps, every font-size below is one of them.
    label: mono capitals and compact buttons. meta: secondary buttons and
@@ -2287,6 +2287,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
 .cp-foot-r{margin:0 0 0 auto}   /* the primary action sits at the right whether or not the left group is there */
 .cp-foot-r .auth-submit{width:auto; padding-left:18px; padding-right:18px}
+/* a comp's and a CTA's action bar stays in view while the slots scroll under it: Save never waits at the
+   end of a long roster. The shadow fills the card's bottom padding, so no row shows below the bar */
+.gd-main .cp-foot{position:sticky; bottom:0; z-index:1; background:var(--surface); box-shadow:0 20px 0 var(--surface)}
 
 /* ---- CTAs (_events.js): the comp dialog's grid and slot table, plus the status row and the calendar ---- */
 .event-dialog{width:min(960px, calc(100vw - 32px))}
@@ -2306,10 +2309,26 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .ev-share-wrap .pw-label{margin:0}
 .ev-share{font-size:var(--fs-body)}
 
-/* ---- sign-up (_signup.js): the sheet a link opens, the roster beside the player's form ---- */
-.signup-dialog{width:min(1040px, calc(100vw - 32px))}
+/* ---- sign-up (_signup.js): the sheet a link opens as the page, the roster beside the player's form ---- */
+/* the page: the card's chrome at the page's width, the document the scroller (no cap, no inner scroll) */
+.sheet-page{display:block; width:min(1280px, calc(100vw - 32px)); margin:14px auto 40px; color:var(--ink)}
+.sheet-page[hidden]{display:none}
+.sheet-page > .auth-card{max-height:none; overflow:visible}
 .su-when{margin-top:4px}
 .su-status-row{margin-bottom:8px}
+/* the role bar under the status row: slots held of slots planned per role, then the open slots
+   to fill next as chips with their icons, grouped by role in the comp's order */
+.su-roles{margin-bottom:6px}
+.su-roles .gd-cov.any b{color:var(--ink-2)}
+.su-next{display:flex; flex-wrap:wrap; align-items:flex-start; gap:4px 10px; margin:0 0 10px}
+.su-next-label{margin:3px 0 0; flex:none}
+.su-next-list{display:flex; flex-wrap:wrap; gap:4px 12px; margin:0; padding:0; list-style:none; min-width:0}
+.su-next-group{display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px}
+.su-next-group .pw-role{margin-right:2px}
+.pw-role.any{color:var(--ink-2)}
+.su-next-slot{font-size:var(--fs-dense); color:var(--ink)}
+.su-next-slot .pw-art{width:18px; height:18px}
+.su-next-pos{font-family:var(--mono); font-size:var(--fs-label); color:var(--ink-3)}
 .su-counts{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-status-row .gd-btn:first-of-type{margin-left:auto}
 .su-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
@@ -2327,9 +2346,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-table .cp-pos, .su-table .su-role{padding-top:9px}
 /* the weapon and role columns are sized so the player column keeps room for the caller's
    move list and the record's mark on one line (273px) at the sheet's full width */
-.su-table .cp-weapon{padding-top:5px; width:170px}
+.su-table .cp-weapon{padding-top:5px; width:200px}
 .su-table .su-role{width:150px}
 .su-weapon{display:inline-flex; align-items:center; gap:5px}
+/* the caller's weapon list with the chosen weapon's icon beside it; the icon keeps its place when the slot names no weapon */
+.su-weapon-pick{gap:6px; min-height:26px}
+.su-weapon-pick .su-slot-weapon{flex:1; min-width:0}
 .su-role{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-player .gd-name{display:inline}
 .su-player .gd-sub{margin-top:1px}
@@ -2810,6 +2832,23 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .size-ask{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
 .size-ask-q{font-size:.82em;opacity:.85;margin-right:2px}
 
+/* ---------- the sheet view ----------
+   A CTA's link (?cta=<code>) shows the sign-up sheet as the page: the
+   head script sets html[data-view="sheet"] before anything draws, the
+   planner (its shell, rails, panels and drawer, and the masthead's
+   planner-only parts) is not displayed, and the sheet section after the
+   masthead takes its place. The masthead keeps the brand, the links and
+   the account button, plus a link back to the planner. */
+.sheet-only{display:none}
+html[data-view="sheet"] .shell, html[data-view="sheet"] .epanel-rail, html[data-view="sheet"] .epanel,
+html[data-view="sheet"] .drawer, html[data-view="sheet"] .masthead .mh-sum, html[data-view="sheet"] .masthead .lf-btn,
+html[data-view="sheet"] .masthead .lf-sync, html[data-view="sheet"] .masthead .chip.warn{display:none}
+html[data-view="sheet"] .sheet-only{display:inline-block}
+@media (max-width:640px){
+  /* the sheet page keeps the phone's 16px gutters */
+  .sheet-page{width:auto; margin:10px 16px 32px}
+}
+
 </style>
 <script>
 /* An email link (sign-up verification) returns to this page with the new
@@ -2831,6 +2870,10 @@ window.AUTH_LINK = "";
       + (hit === q ? "" : q) + (hit === h ? "" : h));
   } catch (e) { /* file:// may deny */ }
 })();
+/* A CTA's link (?cta=<share code>) opens the sign-up sheet as the page:
+   the view is set here, before the planner draws, so the planner never
+   shows first (_layout.css hides it; _signup.js fills the sheet). */
+if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view = "sheet";
 </script>
 </head>
 <body>
@@ -2857,6 +2900,8 @@ window.AUTH_LINK = "";
   <div class="spacer"></div>
   <a class="about-link" href="portal.html" title="what wins inside the Ancient Lands, per portal pool, from the killboard">Dragon Portal stats <span aria-hidden="true">→</span></a>
   <a class="about-link" href="welcome.html">New here? <span aria-hidden="true">→</span></a>
+  <!-- on the sign-up page (the sheet view) the planner is a link away -->
+  <a class="about-link sheet-only" href="index.html">Planner <span aria-hidden="true">→</span></a>
   <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
   <label class="lf-sync" id="companion-sync-wrap" hidden
          title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
@@ -2871,6 +2916,166 @@ window.AUTH_LINK = "";
   <span class="chip warn" id="parity-alarm" hidden>parity mismatch — do not trust</span>
   </div>
 </header>
+
+<!-- The sign-up sheet (_signup.js) as the page: a CTA's link (?cta=<code>)
+     shows it in place of the planner (the head script sets the view, _layout.css
+     hides the planner). The roster with who holds what, the role bar (held of
+     planned per role, the open slots to fill next), the reserves, the record,
+     the engine's read and the player's form. -->
+<main class="sheet-page" id="signup-page" aria-labelledby="su-title" hidden>
+  <div class="auth-card">
+    <div class="auth-hd">
+      <div>
+        <span class="auth-kicker" id="su-kicker">CTA</span>
+        <h2 id="su-title">Sign-up sheet</h2>
+        <p class="gd-meta su-when" id="su-when"></p>
+      </div>
+    </div>
+    <p class="auth-msg err" id="su-error" role="alert" hidden></p>
+    <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
+    <p class="sr-only" id="su-live" aria-live="polite"></p>
+
+    <div class="ev-status-row su-status-row" id="su-status-row">
+      <span class="ev-status" id="su-status" data-status=""></span>
+      <span class="su-counts" id="su-counts"></span>
+      <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
+      <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
+      <button type="button" class="gd-btn" id="su-open">Open in planner</button>
+    </div>
+    <div class="gd-coverage su-roles" id="su-roles" aria-label="Slots held of slots planned, per role"></div>
+    <div class="su-next" id="su-next" hidden>
+      <span class="pw-label su-next-label" id="su-next-label">Fill next</span>
+      <ul class="su-next-list" id="su-next-list" aria-labelledby="su-next-label"></ul>
+    </div>
+    <p class="su-notes" id="su-notes" hidden></p>
+
+    <div class="su-grid">
+      <section class="su-board-wrap" aria-labelledby="su-board-label">
+        <h3 class="pw-label" id="su-board-label">Roster</h3>
+        <table class="gd-table cp-table su-table" id="su-board-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Weapon</th>
+              <th scope="col">Role</th>
+              <th scope="col">Player</th>
+            </tr>
+          </thead>
+          <tbody id="su-board"></tbody>
+        </table>
+        <div id="su-reserves-wrap" hidden>
+          <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
+          <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
+        </div>
+        <div id="su-history-wrap" hidden>
+          <h3 class="pw-label" id="su-history-label">Record</h3>
+          <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
+        </div>
+        <details class="rr" id="rr-wrap" hidden>
+          <summary class="rr-summary">
+            <span class="pw-label rr-label">Engine read</span>
+            <span class="rr-headline" id="rr-headline"></span>
+          </summary>
+          <p class="auth-hint rr-note" id="rr-note" hidden></p>
+          <div class="rr-grid">
+            <section class="rr-block" aria-labelledby="rr-needs-label">
+              <h4 class="pw-label" id="rr-needs-label">Biggest needs</h4>
+              <ul class="rr-list" id="rr-needs"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-picks-label">
+              <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
+              <ul class="rr-list" id="rr-picks"></ul>
+            </section>
+            <section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">
+              <h4 class="pw-label" id="rr-free-label">Open slots</h4>
+              <ul class="rr-list rr-cols" id="rr-free"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-swaps-label">
+              <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
+              <ul class="rr-list" id="rr-swaps"></ul>
+            </section>
+            <section class="rr-block" aria-labelledby="rr-over-label">
+              <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
+              <ul class="rr-list" id="rr-over"></ul>
+            </section>
+          </div>
+          <p class="auth-hint rr-definitions" id="rr-definitions"></p>
+        </details>
+        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
+        <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
+          <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
+          <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
+          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
+          <form class="su-add" id="su-add-form" novalidate hidden>
+            <div class="auth-field">
+              <label for="su-add-name">Add a player by name</label>
+              <input class="text-input" id="su-add-name" maxlength="64" type="text" spellcheck="false" autocomplete="off"
+                placeholder="someone signing up in Discord" aria-describedby="su-add-name-err">
+              <p class="auth-field-err" id="su-add-name-err"></p>
+            </div>
+            <div class="auth-field">
+              <label for="su-add-slot">Slot</label>
+              <select id="su-add-slot"></select>
+            </div>
+            <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
+          </form>
+          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
+        </section>
+      </section>
+
+      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
+        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
+        <p class="auth-hint" id="su-closed" hidden></p>
+        <form class="auth-form" id="su-form" novalidate hidden>
+          <p class="auth-hint" id="su-who"></p>
+          <div class="auth-field" id="su-name-wrap">
+            <label for="su-name">Your name</label>
+            <input class="text-input" id="su-name" maxlength="64" type="text" spellcheck="false" autocomplete="nickname"
+              aria-describedby="su-name-err">
+            <p class="auth-field-err" id="su-name-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-slot">Slot</label>
+            <select id="su-slot" aria-describedby="su-slot-err"></select>
+            <p class="auth-field-err" id="su-slot-err"></p>
+          </div>
+          <div class="auth-field">
+            <label for="su-weapon-add">Weapons you bring</label>
+            <ul class="pw-list su-weapons" id="su-weapons" aria-label="Weapons declared"></ul>
+            <div class="pw-combo">
+              <input class="text-input" id="su-weapon-add" type="text" role="combobox"
+                aria-autocomplete="list" aria-expanded="false" aria-controls="su-weapon-results"
+                autocomplete="off" spellcheck="false" placeholder="add a weapon you bring">
+              <ul class="pw-results" id="su-weapon-results" role="listbox" aria-label="Weapons to add" hidden></ul>
+            </div>
+            <p class="auth-field-err" id="su-weapons-err"></p>
+          </div>
+          <div class="su-row">
+            <div class="auth-field">
+              <label for="su-ip">Item power <span class="opt">optional</span></label>
+              <input class="text-input" id="su-ip" type="number" min="0" max="3000" step="1" inputmode="numeric"
+                aria-describedby="su-ip-err">
+              <p class="auth-field-err" id="su-ip-err"></p>
+            </div>
+            <label class="su-check" for="su-swap">
+              <input type="checkbox" id="su-swap"> Can swap to what the caller needs
+            </label>
+          </div>
+          <div class="auth-field">
+            <label for="su-note">Note <span class="opt">optional</span></label>
+            <input class="text-input" id="su-note" maxlength="200" type="text" aria-describedby="su-note-err">
+            <p class="auth-field-err" id="su-note-err"></p>
+          </div>
+          <div class="profile-actions">
+            <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
+            <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
+          </div>
+          <button type="button" class="gd-btn su-confirm" id="su-confirm" data-confirmed="no" hidden>Confirm I'm coming</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
 
 <div class="shell" id="shell">
 
@@ -3578,157 +3783,6 @@ window.AUTH_LINK = "";
               </div>
             </div>
           </div>
-        </form>
-      </section>
-    </div>
-  </div>
-</dialog>
-
-<dialog class="auth-dialog signup-dialog" id="signup-dialog" aria-modal="true" aria-labelledby="su-title">
-  <div class="auth-card">
-    <div class="auth-hd">
-      <div>
-        <span class="auth-kicker" id="su-kicker">CTA</span>
-        <h2 id="su-title" tabindex="-1" autofocus>Sign-up sheet</h2>
-        <p class="gd-meta su-when" id="su-when"></p>
-      </div>
-      <button type="button" class="auth-close" id="su-close" aria-label="Close">&times;</button>
-    </div>
-    <p class="auth-msg err" id="su-error" role="alert" hidden></p>
-    <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
-    <p class="sr-only" id="su-live" aria-live="polite"></p>
-
-    <div class="ev-status-row su-status-row" id="su-status-row">
-      <span class="ev-status" id="su-status" data-status=""></span>
-      <span class="su-counts" id="su-counts"></span>
-      <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
-      <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
-      <button type="button" class="gd-btn" id="su-open">Open in planner</button>
-    </div>
-    <p class="su-notes" id="su-notes" hidden></p>
-
-    <div class="su-grid">
-      <section class="su-board-wrap" aria-labelledby="su-board-label">
-        <h3 class="pw-label" id="su-board-label">Roster</h3>
-        <table class="gd-table cp-table su-table" id="su-board-table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Weapon</th>
-              <th scope="col">Role</th>
-              <th scope="col">Player</th>
-            </tr>
-          </thead>
-          <tbody id="su-board"></tbody>
-        </table>
-        <div id="su-reserves-wrap" hidden>
-          <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
-          <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
-        </div>
-        <div id="su-history-wrap" hidden>
-          <h3 class="pw-label" id="su-history-label">Record</h3>
-          <ul class="su-reserves su-history" id="su-history" aria-labelledby="su-history-label"></ul>
-        </div>
-        <details class="rr" id="rr-wrap" hidden>
-          <summary class="rr-summary">
-            <span class="pw-label rr-label">Engine read</span>
-            <span class="rr-headline" id="rr-headline"></span>
-          </summary>
-          <p class="auth-hint rr-note" id="rr-note" hidden></p>
-          <div class="rr-grid">
-            <section class="rr-block" aria-labelledby="rr-needs-label">
-              <h4 class="pw-label" id="rr-needs-label">Biggest needs</h4>
-              <ul class="rr-list" id="rr-needs"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-picks-label">
-              <h4 class="pw-label" id="rr-picks-label">Next picks</h4>
-              <ul class="rr-list" id="rr-picks"></ul>
-            </section>
-            <section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">
-              <h4 class="pw-label" id="rr-free-label">Open slots</h4>
-              <ul class="rr-list rr-cols" id="rr-free"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-swaps-label">
-              <h4 class="pw-label" id="rr-swaps-label">Replacements</h4>
-              <ul class="rr-list" id="rr-swaps"></ul>
-            </section>
-            <section class="rr-block" aria-labelledby="rr-over-label">
-              <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
-              <ul class="rr-list" id="rr-over"></ul>
-            </section>
-          </div>
-          <p class="auth-hint rr-definitions" id="rr-definitions"></p>
-        </details>
-        <p class="auth-hint su-link-row" id="su-link-row">Link to this sheet: <button type="button" class="su-link" id="su-link" title="Copy the link"></button></p>
-        <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
-          <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
-          <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
-          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
-          <form class="su-add" id="su-add-form" novalidate hidden>
-            <div class="auth-field">
-              <label for="su-add-name">Add a player by name</label>
-              <input class="text-input" id="su-add-name" maxlength="64" type="text" spellcheck="false" autocomplete="off"
-                placeholder="someone signing up in Discord" aria-describedby="su-add-name-err">
-              <p class="auth-field-err" id="su-add-name-err"></p>
-            </div>
-            <div class="auth-field">
-              <label for="su-add-slot">Slot</label>
-              <select id="su-add-slot"></select>
-            </div>
-            <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
-          </form>
-          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
-        </section>
-      </section>
-
-      <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
-        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
-        <p class="auth-hint" id="su-closed" hidden></p>
-        <form class="auth-form" id="su-form" novalidate hidden>
-          <p class="auth-hint" id="su-who"></p>
-          <div class="auth-field" id="su-name-wrap">
-            <label for="su-name">Your name</label>
-            <input class="text-input" id="su-name" maxlength="64" type="text" spellcheck="false" autocomplete="nickname"
-              aria-describedby="su-name-err">
-            <p class="auth-field-err" id="su-name-err"></p>
-          </div>
-          <div class="auth-field">
-            <label for="su-slot">Slot</label>
-            <select id="su-slot" aria-describedby="su-slot-err"></select>
-            <p class="auth-field-err" id="su-slot-err"></p>
-          </div>
-          <div class="auth-field">
-            <label for="su-weapon-add">Weapons you bring</label>
-            <ul class="pw-list su-weapons" id="su-weapons" aria-label="Weapons declared"></ul>
-            <div class="pw-combo">
-              <input class="text-input" id="su-weapon-add" type="text" role="combobox"
-                aria-autocomplete="list" aria-expanded="false" aria-controls="su-weapon-results"
-                autocomplete="off" spellcheck="false" placeholder="add a weapon you bring">
-              <ul class="pw-results" id="su-weapon-results" role="listbox" aria-label="Weapons to add" hidden></ul>
-            </div>
-            <p class="auth-field-err" id="su-weapons-err"></p>
-          </div>
-          <div class="su-row">
-            <div class="auth-field">
-              <label for="su-ip">Item power <span class="opt">optional</span></label>
-              <input class="text-input" id="su-ip" type="number" min="0" max="3000" step="1" inputmode="numeric"
-                aria-describedby="su-ip-err">
-              <p class="auth-field-err" id="su-ip-err"></p>
-            </div>
-            <label class="su-check" for="su-swap">
-              <input type="checkbox" id="su-swap"> Can swap to what the caller needs
-            </label>
-          </div>
-          <div class="auth-field">
-            <label for="su-note">Note <span class="opt">optional</span></label>
-            <input class="text-input" id="su-note" maxlength="200" type="text" aria-describedby="su-note-err">
-            <p class="auth-field-err" id="su-note-err"></p>
-          </div>
-          <div class="profile-actions">
-            <button class="auth-submit" id="su-submit" type="submit">Sign up</button>
-            <button type="button" class="gd-btn danger" id="su-cancel" hidden>Cancel sign-up</button>
-          </div>
-          <button type="button" class="gd-btn su-confirm" id="su-confirm" data-confirmed="no" hidden>Confirm I'm coming</button>
         </form>
       </section>
     </div>
@@ -9583,7 +9637,13 @@ function loadHash(){
   syncEngine();
   return true;
 }
+/* While the page shows a sign-up sheet (?cta=: the head script sets the
+   view before anything draws) the address is the sheet's and the saved
+   comp stays as it was: the hidden planner writes neither the hash nor
+   storage, and loads nothing from storage. */
+function sheetView(){ return document.documentElement.dataset.view === "sheet"; }
 function saveHash(){
+  if (sheetView()) return;
   /* every optional param is omitted when empty, so a plain comp's link is
      byte-for-byte what it was before these features existed */
   const g = loadoutEncode();
@@ -9597,6 +9657,7 @@ function saveHash(){
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
 function loadStored(){
+  if (sheetView()) return false;
   try {
     const h = localStorage.getItem("compforge");
     if (!h) return false;
@@ -17995,12 +18056,12 @@ function eventErrorMessage(err) {
     announce(`${current.name || "The CTA"} opened in the planner.`);
   });
 
-  /* the sheet is the sign-up module's: the code is handed over as a DOM
-     event, never a call between modules */
+  /* the sheet is its own page: the CTA's link, the share code as its one
+     parameter (the sign-up module's link helper; no call between modules
+     past the address) */
   el.sheet.addEventListener("click", () => {
-    if (!current || !current.share_code) return;
-    dialog.close();
-    document.dispatchEvent(new CustomEvent("cta-sheet", { detail: { code: current.share_code } }));
+    if (!current || !current.share_code || typeof signupLink !== "function") return;
+    location.assign(signupLink(current.share_code, location.href));
   });
 
   el.link.addEventListener("click", () => {
@@ -18188,14 +18249,18 @@ function eventErrorMessage(err) {
  * localStorage, so this browser alone edits or cancels it, and an account
  * created here later adopts it).
  *
- * The link is index.html?cta=<share code>. The code is the key: the
+ * The link is index.html?cta=<share code>, and the sheet is the page it
+ * opens: the head script sets the sheet view from the address before the
+ * planner draws, _layout.css hides the planner, and this module fills the
+ * sheet section that stands in its place. The code is the key: the
  * database reads it from the statement (event_by_code, sign_up,
  * cancel_sign_up run as the caller, signed in or not) and its policies
  * decide what comes back. build.py inlines this file as its own <script>
  * after _events.js. It reads no planner state and never calls the engine;
- * an event opens in the planner through the share hash, as a comp does.
+ * an event opens in the planner through the share hash, as a comp does
+ * (the planner's address, no sheet parameter: a page load).
  *
- * The caller runs the sheet from the same dialog (phase 6): a caller,
+ * The caller runs the sheet from the same page (phase 6): a caller,
  * officer or admin of the CTA's guild moves players between slots and
  * the reserves (a held slot swaps), removes sign-ups, adds a player by
  * name, changes a slot's weapon and moves the status, until the CTA is
@@ -18221,9 +18286,12 @@ function eventErrorMessage(err) {
  *             record's confirm_sign_up, mark_attendance,
  *             mark_all_attended)
  *   pure    - the link and the code, the claim token, the board (slots
- *             with their claimants, the reserves, what is free),
- *             validation, the payload, error wording (tests/test_signup.js)
- *   UI      - the sheet dialog, opened by the link or from the CTAs dialog
+ *             with their claimants, the reserves, what is free), the
+ *             tally (held of planned per role, the open slots to fill
+ *             next), validation, the payload, error wording
+ *             (tests/test_signup.js)
+ *   UI      - the sheet page, opened by the link (the CTAs dialog's
+ *             sheet button goes to the link)
  */
 
 
@@ -18442,6 +18510,13 @@ function signupLink(code, href) {
 }
 
 
+/* the planner with a comp: this page, no sheet parameter, the share hash */
+function plannerLink(href, hash) {
+  const base = String(href || "").replace(/[?#].*$/, "");
+  return `${base}#${String(hash || "")}`;
+}
+
+
 /* The board: each slot with its claimant, the reserves (sign-ups without a
    slot), the free positions, and the counts. */
 function sheetBoard(slots, signups) {
@@ -18460,6 +18535,40 @@ function sheetBoard(slots, signups) {
     reserves,
     free,
     counts: { slots: rows.length, claimed: rows.length - free.length, free: free.length, reserves: reserves.length }
+  };
+}
+
+
+/* The tally: slots held of slots planned per role (the catalog's role
+   class: one role read), and the open slots to fill next, grouped by
+   role in the comp's order. A slot counts for its weapon's role; a slot
+   with no weapon is planned as "any", and held by the role of its
+   claimant's first declared weapon, else as "any". The "any" row is
+   listed only when a slot falls in it. */
+function sheetTally(board, catalog) {
+  const roles = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], held: 0, planned: 0 }));
+  const any = { role: "any", name: "Any weapon", held: 0, planned: 0 };
+  const next = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], slots: [] })).concat([{ role: "any", name: "Any weapon", slots: [] }]);
+  const row = role => roles.find(r => r.role === role) || any;
+  const roleOf = key => (key ? weaponInfo(catalog, key).role : null) || null;
+
+  for (const slot of (board && board.rows) || []) {
+    const planned = roleOf(slot.weapon_id);
+    row(planned).planned += 1;
+    if (slot.claimant) {
+      row(planned || roleOf(((slot.claimant.weapons || []).filter(Boolean))[0])).held += 1;
+    } else {
+      next.find(g => g.role === (planned || "any")).slots.push({
+        position: slot.position,
+        weapon_id: slot.weapon_id || null,
+        name: slot.weapon_id ? weaponInfo(catalog, slot.weapon_id).name : "any weapon"
+      });
+    }
+  }
+
+  return {
+    roles: roles.concat(any.planned || any.held ? [any] : []),
+    next: next.filter(g => g.slots.length)
   };
 }
 
@@ -18703,9 +18812,9 @@ function signupErrorMessage(err) {
   }
 
   const $id = id => document.getElementById(id);
-  const dialog = $id("signup-dialog");
+  const page = $id("signup-page");
 
-  if (!dialog || typeof dialog.showModal !== "function" || !window.Account) {
+  if (!page || !window.Account) {
     return;
   }
 
@@ -18722,6 +18831,9 @@ function signupErrorMessage(err) {
     notice: $id("su-notice"),
     live: $id("su-live"),
     counts: $id("su-counts"),
+    roles: $id("su-roles"),
+    next: $id("su-next"),
+    nextList: $id("su-next-list"),
     board: $id("su-board"),
     reserves: $id("su-reserves"),
     reservesWrap: $id("su-reserves-wrap"),
@@ -18815,6 +18927,22 @@ function signupErrorMessage(err) {
     return tag;
   }
 
+  /* the weapon's icon: the page's own, else the render service; null when neither names it */
+  function weaponArt(key) {
+    const info = weaponInfo(CATALOG, key);
+    const src = (typeof ICONS !== "undefined" && ICONS[key])
+      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
+    if (!src) return null;
+    const img = document.createElement("img");
+    img.className = "pw-art";
+    img.src = src;
+    img.alt = "";
+    img.width = 22;
+    img.height = 22;
+    img.loading = "lazy";
+    return img;
+  }
+
   function weaponCell(key) {
     const wrap = document.createElement("span");
     wrap.className = "su-weapon";
@@ -18826,23 +18954,49 @@ function signupErrorMessage(err) {
       return wrap;
     }
     const info = weaponInfo(CATALOG, key);
-    const src = (typeof ICONS !== "undefined" && ICONS[key])
-      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
-    if (src) {
-      const img = document.createElement("img");
-      img.className = "pw-art";
-      img.src = src;
-      img.alt = "";
-      img.width = 22;
-      img.height = 22;
-      img.loading = "lazy";
-      wrap.append(img);
-    }
+    const art = weaponArt(key);
+    if (art) wrap.append(art);
     const name = document.createElement("span");
     name.textContent = info.known ? info.name : key;
     wrap.append(name);
     if (info.role) wrap.append(roleTag(info.role));
     return wrap;
+  }
+
+  /* the role bar: slots held of slots planned per role, and the open
+     slots to fill next, each with its icon, grouped by role in the
+     comp's order */
+  function renderRoles(board) {
+    const tally = sheetTally(board, CATALOG);
+    el.roles.replaceChildren(...tally.roles.map(r => {
+      const cell = document.createElement("span");
+      cell.className = `gd-cov ${r.role}`;
+      const n = document.createElement("b");
+      n.textContent = `${r.held}/${r.planned}`;
+      cell.append(n, ` ${r.name}`);
+      return cell;
+    }));
+    el.next.hidden = !tally.next.length;
+    el.nextList.replaceChildren(...tally.next.map(group => {
+      const li = document.createElement("li");
+      li.className = "su-next-group";
+      const tag = document.createElement("span");
+      tag.className = `pw-role ${group.role}`;
+      tag.textContent = group.name;
+      li.append(tag);
+      for (const slot of group.slots) {
+        const chip = document.createElement("span");
+        chip.className = "gd-weapon su-next-slot";
+        const art = slot.weapon_id ? weaponArt(slot.weapon_id) : null;
+        if (art) chip.append(art);
+        const pos = document.createElement("span");
+        pos.className = "su-next-pos";
+        pos.textContent = `#${slot.position}`;
+        chip.append(slot.name, pos);
+        li.append(chip);
+      }
+      return li;
+    }));
   }
 
   function playerCell(s, mine) {
@@ -18897,6 +19051,7 @@ function signupErrorMessage(err) {
 
     el.kicker.textContent = sheet.guild ? `${sheet.guild.name}${sheet.guild.albion_server ? " · " + (ALBION_SERVERS[sheet.guild.albion_server] || sheet.guild.albion_server) : ""}` : "CTA";
     el.title.textContent = ev.name;
+    document.title = `${ev.name} · Comp Zaddy`;
     paintWhen();
     el.status.textContent = EVENT_STATUS_NAMES[ev.status] || ev.status;
     el.status.dataset.status = ev.status;
@@ -18909,6 +19064,7 @@ function signupErrorMessage(err) {
       + (ev.status === "completed"
          ? ` · attended ${att.attended} · no-show ${att.no_show}` + (att.reserve ? ` · reserve ${att.reserve}` : "")
          : (att.confirmed ? ` · ${att.confirmed} confirmed` : ""));
+    renderRoles(board);
 
     caller = callerPowers(myRole, ev.status);
     marks = markPowers(myRole, ev.status, sheet.mine);
@@ -18921,7 +19077,7 @@ function signupErrorMessage(err) {
       pos.textContent = String(row.position);
       const weapon = document.createElement("td");
       weapon.className = "cp-weapon";
-      weapon.append(caller.manage ? slotWeaponSelect(row) : weaponCell(row.weapon_id));
+      weapon.append(caller.manage ? slotWeaponPick(row) : weaponCell(row.weapon_id));
       const role = document.createElement("td");
       role.className = "su-role";
       role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
@@ -19172,12 +19328,10 @@ function signupErrorMessage(err) {
 
   el.refresh.addEventListener("click", () => { if (!busy) reload(false); });
 
+  /* the planner is a page load: its address, the comp as the share hash */
   el.open.addEventListener("click", () => {
     if (!sheet) return;
-    const hash = templateHash(sheet.event, sheet.slots);
-    dialog.close();
-    location.hash = hash;
-    announce(`${sheet.event.name} opened in the planner.`);
+    location.assign(plannerLink(location.href, templateHash(sheet.event, sheet.slots)));
   });
 
   el.link.addEventListener("click", () => {
@@ -19220,6 +19374,26 @@ function signupErrorMessage(err) {
     }
     select.value = row.weapon_id || "";
     return select;
+  }
+
+  /* the caller's weapon list for a slot, the chosen weapon's icon beside it */
+  function slotWeaponPick(row) {
+    const wrap = document.createElement("span");
+    wrap.className = "su-weapon su-weapon-pick";
+    const art = row.weapon_id ? weaponArt(row.weapon_id) : null;
+    if (art) wrap.append(art);
+    wrap.append(slotWeaponSelect(row));
+    return wrap;
+  }
+
+  /* the icon follows the list at once; the re-read after the write draws the row again */
+  function repaintPick(select) {
+    const wrap = select.closest(".su-weapon-pick");
+    if (!wrap) return;
+    const old = wrap.querySelector(".pw-art");
+    if (old) old.remove();
+    const art = select.value ? weaponArt(select.value) : null;
+    if (art) wrap.prepend(art);
   }
 
   function manageControls(board, s) {
@@ -19304,6 +19478,7 @@ function signupErrorMessage(err) {
       act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
     } else if (t.dataset.suSlotWeapon !== undefined) {
       const position = Number(t.dataset.suSlotWeapon);
+      repaintPick(t);
       act(null, "", () => setSlotWeapon(sheet.event.id, position, t.value),
           () => `Slot ${position}: ${t.value ? weaponInfo(CATALOG, t.value).name : "any weapon"}.`);
     }
@@ -19473,6 +19648,8 @@ function signupErrorMessage(err) {
     el.status.textContent = "";
     el.status.dataset.status = "";
     el.counts.textContent = "";
+    el.roles.replaceChildren();
+    el.next.hidden = true;
     el.statusRow.hidden = true;
     el.notes.hidden = true;
     el.boardLabel.hidden = true;
@@ -19539,6 +19716,8 @@ function signupErrorMessage(err) {
     el.status.textContent = "";
     el.notes.hidden = true;
     el.counts.textContent = "";
+    el.roles.replaceChildren();
+    el.next.hidden = true;
     el.board.replaceChildren();
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
@@ -19552,7 +19731,7 @@ function signupErrorMessage(err) {
     el.formWrap.hidden = false;
     stopWatching();
     clearMessages();
-    if (!dialog.open) dialog.showModal();
+    showPage();
 
     await reload(false);
     if (sheet) startWatching();
@@ -19566,18 +19745,22 @@ function signupErrorMessage(err) {
     }
   }
 
-  acctWireDialog(dialog, { canClose: () => !busy });
-  $id("su-close").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("close", stopWatching);
-  dialog.addEventListener("close", () => { sheet = null; handOver(); });
+  /* the sheet in place of the planner: the view the head script set from
+     the address, kept here, and the section shown */
+  function showPage() {
+    document.documentElement.dataset.view = "sheet";
+    page.hidden = false;
+  }
 
-  /* the CTAs dialog hands a code over */
-  document.addEventListener("cta-sheet", e => {
-    if (e.detail && e.detail.code) openSheet(e.detail.code);
-  });
+  window.addEventListener("pagehide", stopWatching);
 
 
   /* ---- identity and the link ---- */
+
+  /* the page shows the sheet at once (its title says it is loading); the
+     sheet itself is read once the stored session is, below */
+  const fromLink = codeFromSearch(typeof location !== "undefined" ? location.search : "");
+  if (fromLink) showPage();
 
   window.Account.subscribe(state => {
     const was = account.user ? account.user.id : null;
@@ -19587,12 +19770,11 @@ function signupErrorMessage(err) {
        an account signs up as itself */
     if (state.ready && !booted) {
       booted = true;
-      const fromLink = codeFromSearch(typeof location !== "undefined" ? location.search : "");
       if (fromLink) openSheet(fromLink);
       return;
     }
 
-    if (dialog.open && code && (state.user ? state.user.id : null) !== was) {
+    if (code && (state.user ? state.user.id : null) !== was) {
       reload(false);
     }
   });
@@ -21418,7 +21600,7 @@ function importErrorMessage(err) {
  * build.py inlines this file as its own <script> after _import.js. The
  * sheet hands its roster over as a DOM event (sheet-read) after every
  * render and on close; this module paints into the rr-* elements of the
- * sheet dialog, which the sign-up module never touches. It reaches no
+ * sheet page, which the sign-up module never touches. It reaches no
  * table: members and their lists come through the guild module's
  * helpers, for a member of the CTA's guild. Two parts:
  *   pure    - the held party, the read, the fillers, the wording

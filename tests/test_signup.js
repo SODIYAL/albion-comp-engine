@@ -73,6 +73,10 @@ const run = expr => vm.runInContext(expr, ctx);
         link("A1B2C3D4E5", "https://x.test/albion/index.html#c=castle&p=A") === "https://x.test/albion/index.html?cta=A1B2C3D4E5"
         && link(" a1b2c3d4e5 ", "https://x.test/?cta=OLD#h") === "https://x.test/?cta=A1B2C3D4E5");
   check("a link's code reads back", fromSearch(new URL(link("A1B2C3D4E5", "https://x.test/index.html")).search) === "A1B2C3D4E5");
+  const planner = run("plannerLink");
+  check("the planner's link is this page without the sheet parameter, the comp as the share hash",
+        planner("https://x.test/albion/index.html?cta=A1B2C3D4E5", "c=castle&n=20&p=A,B") === "https://x.test/albion/index.html#c=castle&n=20&p=A,B"
+        && planner("https://x.test/?cta=A1B2C3D4E5#old", "") === "https://x.test/#");
   const token = run("newClaimToken")(new Uint8Array([0, 1, 15, 16, 255, 128, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]));
   check("a claim token is 16 bytes as 32 hex characters", token === "00010f10ff80070809 0a0b0c0d0e0f10".replace(" ", "") && run("CLAIM_TOKEN_RE").test(token));
   check("the token is kept per CTA", run("claimTokenKey")("a1b2c3d4e5") === "cta-claim:A1B2C3D4E5");
@@ -95,6 +99,29 @@ const run = expr => vm.runInContext(expr, ctx);
         same(b.reserves.map(r => r.player_name), ["Ann", "Gil"]));
   check("the counts", same(b.counts, { slots: 3, claimed: 2, free: 1, reserves: 2 }), b.counts);
   check("an empty CTA is an empty board", same(board([], []), { rows: [], reserves: [], free: [], counts: { slots: 0, claimed: 0, free: 0, reserves: 0 } }));
+
+  /* the tally: held of planned per role, the open slots to fill next */
+  const tally = run("sheetTally");
+  const CAT = { "2H_LONGBOW": { name: "Longbow", role: "dps", item: "" }, MAIN_MACE_HELL: { name: "Incubus Mace", role: "frontline", item: "" },
+                "2H_HOLYSTAFF": { name: "Great Holy Staff", role: "healer", item: "" }, MYSTERY: { name: "Mystery", role: null, item: "" } };
+  const t = tally(board(
+    [{ position: 1, weapon_id: "MAIN_MACE_HELL" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: "2H_LONGBOW" },
+     { position: 4, weapon_id: "2H_HOLYSTAFF" }, { position: 5, weapon_id: null }, { position: 6, weapon_id: null }],
+    [{ id: "s1", position: 1, player_name: "Gus", weapons: ["2H_LONGBOW"] }, { id: "s2", position: 5, player_name: "Eff", weapons: ["2H_HOLYSTAFF"] },
+     { id: "s3", position: null, player_name: "Gil", weapons: ["MAIN_MACE_HELL"] }]), CAT);
+  check("a held slot counts for its weapon's role whatever the player declared; a slot with no weapon is planned as any and held by the first declared weapon's role",
+        same(t.roles.map(r => `${r.role}:${r.held}/${r.planned}`), ["frontline:1/2", "support:0/0", "dps:0/1", "healer:1/1", "any:0/2"]), t.roles);
+  check("the open slots to fill next, grouped by role in the comp's order, with their weapons; reserves fill nothing",
+        same(t.next.map(g => `${g.role}:${g.slots.map(s => `${s.position} ${s.name}`).join(",")}`),
+             ["frontline:2 Incubus Mace", "dps:3 Longbow", "healer:4 Great Holy Staff", "any:6 any weapon"]), t.next);
+  const full = tally(board([{ position: 1, weapon_id: "2H_LONGBOW" }], [{ id: "s1", position: 1, player_name: "Gus", weapons: [] }]), CAT);
+  check("a full roster of named weapons lists no any row and nothing to fill",
+        same(full.roles.map(r => r.role), ["frontline", "support", "dps", "healer"]) && same(full.next, []));
+  const odd = tally(board([{ position: 1, weapon_id: "MYSTERY" }, { position: 2, weapon_id: null }], [{ id: "s1", position: 2, player_name: "Gus", weapons: [] }]), CAT);
+  check("a roleless weapon and a held slot with nothing declared count under any",
+        same(odd.roles.map(r => `${r.role}:${r.held}/${r.planned}`), ["frontline:0/0", "support:0/0", "dps:0/0", "healer:0/0", "any:1/2"])
+        && same(odd.next.map(g => `${g.role}:${g.slots.map(s => s.position).join(",")}`), ["any:1"]), odd);
+  check("an empty board tallies nothing", same(tally(board([], []), CAT), { roles: [{ role: "frontline", name: "Tank", held: 0, planned: 0 }, { role: "support", name: "Support", held: 0, planned: 0 }, { role: "dps", name: "DPS", held: 0, planned: 0 }, { role: "healer", name: "Healer", held: 0, planned: 0 }], next: [] }));
 }
 
 /* 3 - validation and the payload */
@@ -192,8 +219,8 @@ const run = expr => vm.runInContext(expr, ctx);
         && /rpc\("event_by_code"/.test(src) && /rpc\("sign_up"/.test(src) && /rpc\("cancel_sign_up"/.test(src)
         && /rpc\("move_signup"/.test(src) && /rpc\("add_player"/.test(src)
         && /rpc\("confirm_sign_up"/.test(src) && /rpc\("mark_attendance"/.test(src) && /rpc\("mark_all_attended"/.test(src));
-  check("the module touches the planner through the address bar alone",
-        /location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
+  check("the module touches the planner through the address bar alone: a page load of the planner's link",
+        /location\.assign\(plannerLink\(/.test(src) && !/location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
   check("the claim token lives in localStorage and leaves the browser only inside a statement",
         /localStorage\.(getItem|setItem|removeItem)\(claimTokenKey\(/.test(src) && !/console\.log\(.*token/.test(src));
 }
@@ -261,8 +288,8 @@ const run = expr => vm.runInContext(expr, ctx);
   leave();
   check("leaving removes the channel", REMOVED.length === 1 && REMOVED[0] === ch);
   const src = fs.readFileSync(path.join(DASH, "_signup.js"), "utf8");
-  check("the sheet joins the channel once the sheet is read and leaves it when the dialog closes or another CTA opens",
-        /if \(sheet\) startWatching\(\);/.test(src) && /dialog\.addEventListener\("close", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+if \(!dialog\.open\)/.test(src));
+  check("the sheet joins the channel once the sheet is read and leaves it when the page goes or another CTA opens",
+        /if \(sheet\) startWatching\(\);/.test(src) && /window\.addEventListener\("pagehide", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+showPage\(\);/.test(src));
   check("a live change re-reads the sheet without refilling the player's form", /reload\(true, true\)/.test(src) && /if \(!live && \(!keepForm \|\| sheet\.mine\)\) fillForm\(\);/.test(src));
 }
 

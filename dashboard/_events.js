@@ -952,12 +952,12 @@ function eventErrorMessage(err) {
     announce(`${current.name || "The CTA"} opened in the planner.`);
   });
 
-  /* the sheet is the sign-up module's: the code is handed over as a DOM
-     event, never a call between modules */
+  /* the sheet is its own page: the CTA's link, the share code as its one
+     parameter (the sign-up module's link helper; no call between modules
+     past the address) */
   el.sheet.addEventListener("click", () => {
-    if (!current || !current.share_code) return;
-    dialog.close();
-    document.dispatchEvent(new CustomEvent("cta-sheet", { detail: { code: current.share_code } }));
+    if (!current || !current.share_code || typeof signupLink !== "function") return;
+    location.assign(signupLink(current.share_code, location.href));
   });
 
   el.link.addEventListener("click", () => {
