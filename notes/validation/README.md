@@ -29,3 +29,9 @@ Rules for this directory:
   entry and the index row says `superseded`; history is data.
 - Code and yaml cite entries as `VALIDATION.md <date>` or by section title;
   the index resolves both. Do not rename section headings.
+- **Evidence files are pruned; entries are not.** `notes/findings/` keeps
+  the last fold's report and roster evidence, and every finding a rulebook,
+  template or the backlog cites; earlier fold reports and roster-evidence
+  dumps, and `notes/plans/` (plans for work since shipped, their decisions
+  logged here), are removed once superseded. An entry that cites a removed
+  file still stands: `git log --all -- <path>` recovers the file.

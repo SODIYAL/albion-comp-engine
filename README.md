@@ -217,7 +217,7 @@ dashboard/                     THE FRONTEND — display only, never computes a s
   how-it-works.html            generated/local explainer copy
 
 docs/                          GitHub Pages root: index.html + how-it-works.html only
-notes/                         internal plans, specs and findings (not served)
+notes/                         internal specs, findings and the decision log (not served)
 
 companion/                     THE COMPANION — C# photon sniffer feeding the
                                live-party feature over localhost only

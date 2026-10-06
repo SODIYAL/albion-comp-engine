@@ -24,7 +24,9 @@ Read before substantive work:
   the mechanics layer (the geometric AoE rule, the mechanics question ledger)
 - `roles-design.md` + `pipeline/roles.yaml` — the role layer
 - `albion-comp-engine-design.md` — design history, cited by section number
-- `notes/` — plans, specs, findings (internal, not served)
+- `notes/` — specs, findings and the decision log archive (internal, not
+  served; findings are pruned to the last fold's and the cited ones, see
+  `notes/validation/README.md`)
 
 ## Writing conventions (public repository)
 

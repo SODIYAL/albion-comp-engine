@@ -110,8 +110,10 @@ py -3 pipeline/audit_frontline_floor.py       # adversarial no-tank parties vs t
 py -3 pipeline/audit_gear_synergy.py          # gear-sourced synergy sides: measured + labeled hypotheticals -> out/gear_synergy_audit.json
 ```
 
-None of these writes anything a build reads. Findings and the open questions
-live in `notes/findings/2026-08-27-*.md`; the tuning discipline (train /
+None of these writes anything a build reads. The gear-synergy finding is
+`notes/findings/2026-08-27-gear-synergy-finding.md`; the other findings of
+that audit round are logged in `notes/validation/2026-08.md` (their files
+are pruned, see `notes/validation/README.md`); the tuning discipline (train /
 validation / holdout) is a standing rule in `tests/VALIDATION.md`. (The
 `calibration/` scaffold and `calibrate_scoring.py` are retired: four train
 cases, empty validation and holdout, nothing in the build or CI read them.)
