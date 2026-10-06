@@ -337,8 +337,9 @@ check(length is not None and int(length.group(1)) == name_max, "DB8e the CTA nam
 size_tag = re.search(r'<input[^>]*\bid="ev-size"[^>]*>', SHELL)
 check(size_tag is not None and ('min="%d"' % js_const(COMPS_JS, "COMP_SIZE_MIN")) in size_tag.group(0)
       and ('max="%d"' % slots_max) in size_tag.group(0), "DB8f the CTA's planned size field's range is the bound")
-check("mass_at is null or mass_at <= starts_at" in ALL and "Mass time comes before the start." in EVENTS_JS,
-      "DB8g the mass time never follows the start: the check and the client's sentence")
+check("mass_at is null or mass_at <= starts_at" in ALL and "The mass time must come before the start." in EVENTS_JS
+      and "el.mass.max = el.start.value" in EVENTS_JS,
+      "DB8g the mass time never follows the start: the check, the client's sentence, and the field's bound")
 check("if (event.status !== \"completed\")" in EVENTS_JS and re.search(r"= 'completed' then\s+raise exception 'a completed CTA keeps its slots'", ALL) is not None,
       "DB8h a completed CTA's slots are frozen by the guard and the client sends none")
 

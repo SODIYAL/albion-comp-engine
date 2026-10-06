@@ -882,6 +882,14 @@ check("toZoneInput(current.starts_at, zone)" in EVENTS_JS and "fromZoneInput(el.
       and all(x in read("_signup.js") for x in ("eventCountdown(ev.starts_at)", "eventTimeLabel(ev.starts_at, true)",
                                                 "setInterval(paintWhen", "clearInterval(whenTimer)")),
       "L31s the form reads and writes its times through the zone; the sheet shows the reader's zone, UTC and a countdown it keeps current")
+check("function massDefault" in EVENTS_JS and "const MASS_LEAD_MINUTES = 30;" in EVENTS_JS and "function followStart" in EVENTS_JS
+      and EVENTS_JS.count("el.mass.max = el.start.value") >= 3 and 'el.mass.addEventListener("change"' in EVENTS_JS
+      and "if (t === el.mass) massFollows = false;" in EVENTS_JS,
+      "L31t the mass field is bounded by the start and follows it, the lead before, until the caller types one; a mass time past the start goes back to the lead")
+check('id="ev-source-label"' in edlg and 'id="ev-replace"' not in edlg and "Keep these slots" in EVENTS_JS
+      and "el.sourceWrap.hidden = !!current.id && !powers.editSlots;" in EVENTS_JS and "async function replaceRoster" in EVENTS_JS
+      and "function renderSlots" in EVENTS_JS and ".gd-btn:disabled{" in AUTH_CSS and "el.open.title = openable" in EVENTS_JS,
+      "L31u a saved CTA that may still change its slots replaces its roster from a saved comp or the planner through the one picker; a slot change leaves the typed fields alone; the planner button reads disabled over an empty roster and says why")
 check('id="acct-events"' in SHELL[SHELL.find('id="acct-comps"'):SHELL.find('id="acct-logout"')],
       "L31f the account menu offers CTAs between Saved comps and Log out")
 check("el.eventsItem" in AUTH_JS and "views.events" in AUTH_JS, "L31g the account UI shows the item once the module registered its view")

@@ -186,6 +186,14 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
         && !!v(Object.assign({}, ok, { massAt: "2026-10-03T18:00:01Z" }), CONTENTS, STYLES).massAt
         && same(v(Object.assign({}, ok, { massAt: "2026-10-03T18:00:00Z" }), CONTENTS, STYLES), {}));
 
+  const massDefault = run("massDefault"), lead = run("MASS_LEAD_MINUTES");
+  check("the offered mass time is the lead before the start, as an instant",
+        lead === 30 && massDefault("2026-10-03T18:00:00Z") === "2026-10-03T17:30:00.000Z"
+        && massDefault("2026-10-03T18:00:00.000Z", 45) === "2026-10-03T17:15:00.000Z"
+        && massDefault("2026-10-04T00:10:00Z") === "2026-10-03T23:40:00.000Z", massDefault("2026-10-03T18:00:00Z"));
+  check("no start, or one that is no time, offers no mass time",
+        massDefault("") === "" && massDefault(null) === "" && massDefault("soon") === "" && massDefault(undefined) === "");
+
   const payload = run("eventPayload");
   const p = payload({ id: "e1", guild_id: "g1", template_id: "t1", name: " Friday ", content: "castle", style: "", planned_size: "20",
                       starts_at: "2026-10-03T18:00:00.000Z", mass_at: "", notes: " n ", status: "open", share_hash: "c=castle&p=A",

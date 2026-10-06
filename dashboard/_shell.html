@@ -2574,7 +2574,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
             </div>
             <div class="cp-fields">
               <div class="auth-field cp-wide" id="ev-source-wrap">
-                <label for="ev-source">Roster from</label>
+                <label for="ev-source" id="ev-source-label">Roster from</label>
                 <select id="ev-source"></select>
               </div>
               <div class="auth-field cp-wide">
@@ -2642,7 +2642,6 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
             <div class="gd-foot cp-foot">
               <div class="cp-foot-l">
                 <button type="button" class="gd-btn" id="ev-open">Open in planner</button>
-                <button type="button" class="gd-btn" id="ev-replace" hidden>Replace slots from planner</button>
                 <button type="button" class="gd-btn danger" id="ev-delete" hidden>Delete</button>
               </div>
               <div class="profile-actions cp-foot-r">

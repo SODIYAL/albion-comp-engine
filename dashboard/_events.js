@@ -328,11 +328,22 @@ function validateEvent({ name, content, style, plannedSize, startsAt, massAt }, 
     if (!Number.isFinite(mass)) {
       errors.massAt = "Enter a valid date and time.";
     } else if (Number.isFinite(start) && mass > start) {
-      errors.massAt = "Mass time comes before the start.";
+      errors.massAt = "The mass time must come before the start.";
     }
   }
 
   return errors;
+}
+
+
+/* the mass time offered once a start is typed: MASS_LEAD_MINUTES before
+   it, as an ISO instant; "" for no start or one that is no time */
+const MASS_LEAD_MINUTES = 30;
+function massDefault(startsAt, minutes) {
+  const start = new Date(startsAt || "").getTime();
+  if (!Number.isFinite(start)) return "";
+  const lead = Number.isFinite(minutes) ? minutes : MASS_LEAD_MINUTES;
+  return new Date(start - lead * 60000).toISOString();
 }
 
 
@@ -453,6 +464,7 @@ function eventErrorMessage(err) {
     view: $id("ev-view"),
     form: $id("ev-form"),
     sourceWrap: $id("ev-source-wrap"),
+    sourceLabel: $id("ev-source-label"),
     source: $id("ev-source"),
     name: $id("ev-name"),
     content: $id("ev-content"),
@@ -473,7 +485,6 @@ function eventErrorMessage(err) {
     summary: $id("ev-summary"),
     slots: $id("ev-slots"),
     slotsNote: $id("ev-slots-note"),
-    replace: $id("ev-replace"),
     open: $id("ev-open"),
     save: $id("ev-save"),
     remove: $id("ev-delete"),
@@ -490,6 +501,7 @@ function eventErrorMessage(err) {
   let current = null;         /* the open event: {id, guild_id, ..., slots} or a new one */
   let slots = [];             /* the open event's slots as edited */
   let powers = eventPowers(null, null);
+  let massFollows = true;     /* the mass field follows the start until the caller types one of their own */
   let busy = false;
   let openSeq = 0;
 
@@ -682,7 +694,13 @@ function eventErrorMessage(err) {
     el.empty.hidden = !!current;
     if (!current) return;
 
-    el.sourceWrap.hidden = !!current.id;
+    /* a new CTA takes its first roster from the picker; a saved one that
+       may still change its slots replaces them from it */
+    el.sourceWrap.hidden = !!current.id && !powers.editSlots;
+    el.sourceLabel.textContent = current.id ? "Replace the roster from" : "Roster from";
+    const source = el.source.value;
+    renderSources(!!current.id);
+    el.source.value = !current.id && Array.from(el.source.options).some(o => o.value === source) ? source : "";
     el.name.value = current.name || "";
     el.content.value = current.content || "";
     el.style.value = current.style || "";
@@ -690,6 +708,8 @@ function eventErrorMessage(err) {
     el.zone.value = zone;
     el.start.value = toZoneInput(current.starts_at, zone);
     el.mass.value = toZoneInput(current.mass_at, zone);
+    el.mass.max = el.start.value;
+    massFollows = !el.mass.value || el.mass.value === toZoneInput(massDefault(current.starts_at), zone);
     paintEchoes();
     el.notes.value = current.notes || "";
     for (const input of [el.name, el.content, el.style, el.size, el.start, el.mass, el.notes]) {
@@ -716,6 +736,15 @@ function eventErrorMessage(err) {
         + (current.template_id ? " · copied from a saved comp" : "")
       : "Not saved yet.";
 
+    el.save.hidden = !powers.write;
+    el.remove.hidden = !powers.write || !current.id;
+    renderSlots();
+  }
+
+  /* the roster part alone: the summary, the table, the note under an
+     empty one, and the planner button; a slot change repaints this and
+     leaves the typed fields as they are */
+  function renderSlots() {
     const s = templateSummary(slots, CATALOG);
     el.summary.replaceChildren(...ROLE_ORDER.map(role => {
       const cell = document.createElement("span");
@@ -735,11 +764,13 @@ function eventErrorMessage(err) {
     })());
 
     el.slots.replaceChildren(...slots.map(slotRow));
+    el.slotsNote.textContent = powers.editSlots
+      ? "No slots yet: fill the roster from a saved comp or the planner's comp above."
+      : "No slots: the roster is empty.";
     el.slotsNote.hidden = slots.length > 0;
-    el.replace.hidden = !powers.editSlots;
-    el.save.hidden = !powers.write;
-    el.remove.hidden = !powers.write || !current.id;
-    el.open.disabled = !slots.some(s => s.weapon_id) && !current.share_hash;
+    const openable = slots.some(s => s.weapon_id) || !!current.share_hash;
+    el.open.disabled = !openable;
+    el.open.title = openable ? "Closes this dialog and loads the roster into the planner" : "Nothing to open: the roster is empty";
     markDirty();
   }
 
@@ -798,12 +829,45 @@ function eventErrorMessage(err) {
     try { window.localStorage.setItem(EVENT_ZONE_KEY, zone); } catch (err) { /* the choice lasts the visit */ }
     el.start.value = toZoneInput(start || "", zone);
     el.mass.value = toZoneInput(mass || "", zone);
+    el.mass.max = el.start.value;
     paintEchoes();
     markDirty();
   });
 
+  /* the mass field is bounded by the start and follows it, MASS_LEAD_MINUTES
+     before, until the caller types a mass time of their own; a mass time
+     the start has moved before is pulled back to the lead */
+  function followStart() {
+    el.mass.max = el.start.value;
+    const start = fromZoneInput(el.start.value, zone);
+    if (!start) {
+      if (massFollows) el.mass.value = "";
+      return;
+    }
+    const mass = fromZoneInput(el.mass.value, zone);
+    if (massFollows || (mass && new Date(mass).getTime() > new Date(start).getTime())) {
+      el.mass.value = toZoneInput(massDefault(start), zone);
+      massFollows = true;
+    }
+  }
+
+  /* a typed mass time past the start is not kept: it goes back to the lead */
+  el.mass.addEventListener("change", () => {
+    const start = fromZoneInput(el.start.value, zone);
+    const mass = fromZoneInput(el.mass.value, zone);
+    if (!start || !mass || new Date(mass).getTime() <= new Date(start).getTime()) return;
+    el.mass.value = toZoneInput(massDefault(start), zone);
+    massFollows = true;
+    paintEchoes();
+    markDirty();
+    showNotice(`The mass time cannot follow the start: set to ${MASS_LEAD_MINUTES} minutes before it.`);
+    announce(`Mass time set to ${MASS_LEAD_MINUTES} minutes before the start.`);
+  });
+
   el.form.addEventListener("input", e => {
     const t = e.target;
+    if (t === el.mass) massFollows = false;
+    if (t === el.start) followStart();
     if (t === el.start || t === el.mass) paintEchoes();
     if (t.dataset.evRole !== undefined || t.dataset.evNote !== undefined) {
       const position = Number(t.dataset.evRole || t.dataset.evNote);
@@ -821,7 +885,7 @@ function eventErrorMessage(err) {
     if (!b || busy || !powers.editSlots) return;
     const position = Number(b.dataset.evRemove);
     slots = slots.filter(s => s.position !== position).map((s, i) => Object.assign(s, { position: i + 1 }));
-    renderEvent();
+    renderSlots();
     announce(`Slot ${position} removed.`);
   });
 
@@ -839,7 +903,6 @@ function eventErrorMessage(err) {
       e.slots = normalizeSlots(e.slots);
       current = e;
       slots = normalizeSlots(e.slots);
-      el.slotsNote.textContent = "No slots: the roster is empty.";
     } catch (err) {
       if (seq !== openSeq) return;
       showError(eventErrorMessage(err));
@@ -850,10 +913,12 @@ function eventErrorMessage(err) {
     renderEvent();
   }
 
-  /* ---- a new event: from a saved comp, the planner, or empty ---- */
+  /* ---- the roster's sources: a saved comp, the planner, or none ----
+     a new event takes its first roster from one; a saved event that may
+     still change its slots replaces them from one */
 
-  function renderSources() {
-    const options = [["", "No roster yet"], ["planner", "The planner's current comp"]]
+  function renderSources(saved) {
+    const options = [["", saved ? "Keep these slots" : "No roster yet"], ["planner", "The planner's current comp"]]
       .concat(templates.map(t => [t.id, `Comp: ${t.name}`]));
     el.source.replaceChildren(...options.map(([value, label]) => {
       const o = document.createElement("option");
@@ -875,8 +940,6 @@ function eventErrorMessage(err) {
     slots = [];
     clearMessages();
     acctFlagFields(FIELDS, {});
-    el.slotsNote.textContent = "";
-    renderSources();
     el.source.value = "";
     renderList();
     renderEvent();
@@ -885,8 +948,53 @@ function eventErrorMessage(err) {
 
   el.create.addEventListener("click", () => { if (!busy) startNew(); });
 
+  /* the comp or the planner's comp the picker names, as a new event, with
+     the error shown and null when there is none */
+  async function sourceEvent(value) {
+    if (value === "planner") {
+      const next = eventFromHash(typeof location !== "undefined" ? location.hash : "", guildId(), CONTENTS, STYLES);
+      if (!next) showError("The planner holds no comp: add weapons in the planner first.");
+      return next;
+    }
+    const seq = ++openSeq;
+    busy = true;
+    try {
+      const t = await loadTemplate(value);
+      if (seq !== openSeq) return null;
+      if (!t) { showError(EVENT_MSG.templateGone); return null; }
+      return eventFromTemplate(t, guildId());
+    } catch (err) {
+      if (seq === openSeq) showError(eventErrorMessage(err));
+      return null;
+    } finally {
+      busy = false;
+    }
+  }
+
+  /* a saved event's slots replaced from the picker: the slots, the share
+     hash, and the source's content, style and size go into the form; Save
+     keeps them; role labels and notes on the old slots are cleared */
+  async function replaceRoster(value) {
+    el.source.value = "";
+    if (!value || !powers.editSlots) return;
+    const next = await sourceEvent(value);
+    if (!next) return;
+    const from = value === "planner" ? "the planner's current comp" : `the comp ${next.name}`;
+    if (slots.length && !window.confirm(`Replace this CTA's slots with ${from}? Role labels and notes on the slots are cleared.`)) return;
+    slots = next.slots;
+    current.share_hash = next.share_hash;
+    current.template_id = next.template_id;
+    if (next.content) el.content.value = next.content;
+    if (next.planned_size) el.size.value = next.planned_size;
+    el.style.value = next.style || "";
+    renderSlots();
+    showNotice(`Slots replaced from ${from}. Save to keep them.`);
+    announce(`Slots replaced from ${from}.`);
+  }
+
   el.source.addEventListener("change", async () => {
-    if (busy || !current || current.id) return;
+    if (busy || !current) return;
+    if (current.id) { await replaceRoster(el.source.value); return; }
     const value = el.source.value;
     const keep = { name: el.name.value, starts_at: fromZoneInput(el.start.value, zone) || "",
                    mass_at: fromZoneInput(el.mass.value, zone) || "", notes: el.notes.value };
@@ -895,53 +1003,15 @@ function eventErrorMessage(err) {
     if (!value) {
       current = Object.assign(blankEvent(), keep);
       slots = [];
-    } else if (value === "planner") {
-      const next = eventFromHash(typeof location !== "undefined" ? location.hash : "", guildId(), CONTENTS, STYLES);
-      if (!next) {
-        showError("The planner holds no comp: add weapons in the planner first.");
-        el.source.value = "";
-        return;
-      }
-      current = Object.assign(next, keep);
-      slots = next.slots;
     } else {
-      const seq = ++openSeq;
-      busy = true;
-      try {
-        const t = await loadTemplate(value);
-        if (seq !== openSeq) return;
-        if (!t) { showError(EVENT_MSG.templateGone); return; }
-        const next = eventFromTemplate(t, guildId());
-        current = Object.assign(next, keep, keep.name ? {} : { name: next.name });
-        slots = next.slots;
-      } catch (err) {
-        if (seq !== openSeq) return;
-        showError(eventErrorMessage(err));
-        return;
-      } finally {
-        busy = false;
-      }
+      const next = await sourceEvent(value);
+      if (!next) { el.source.value = ""; return; }
+      current = Object.assign(next, keep, keep.name ? {} : { name: next.name });
+      slots = next.slots;
     }
 
     renderEvent();
     el.source.value = value;
-  });
-
-  el.replace.addEventListener("click", () => {
-    if (busy || !current || !powers.editSlots) return;
-    const parsed = parseShareHash(typeof location !== "undefined" ? location.hash : "");
-    if (!parsed || !parsed.weapons.length) {
-      showError("The planner holds no comp: add weapons in the planner first.");
-      return;
-    }
-    if (!window.confirm("Replace this CTA's slots with the planner's current comp? Role labels and notes on the slots are cleared.")) return;
-    slots = slotsFromWeapons(parsed.weapons);
-    current.share_hash = parsed.hash;
-    if (Object.prototype.hasOwnProperty.call(CONTENTS, parsed.content)) el.content.value = parsed.content;
-    if (parsed.size) el.size.value = parsed.size;
-    el.style.value = Object.prototype.hasOwnProperty.call(STYLES, parsed.style) ? parsed.style : "";
-    renderEvent();
-    showNotice("Slots replaced from the planner. Save to keep them.");
   });
 
   el.open.addEventListener("click", () => {
