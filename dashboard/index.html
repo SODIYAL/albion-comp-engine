@@ -2315,11 +2315,21 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
 /* ---- sign-up (_signup.js): the sheet a link opens as the page, the roster beside the player's form ---- */
 /* the page: the card's chrome at the page's width, the document the scroller (no cap, no inner scroll) */
-.sheet-page{display:block; width:min(1280px, calc(100vw - 32px)); margin:14px auto 40px; color:var(--ink)}
+.sheet-page{display:block; width:min(1440px, calc(100vw - 32px)); margin:14px auto 40px; color:var(--ink)}
 .sheet-page[hidden]{display:none}
 .sheet-page > .auth-card{max-height:none; overflow:visible}
 .su-when{margin-top:4px}
+/* the start counted down beside the title, the calendar file under it; gone once the CTA is completed or long past */
+.su-count{display:flex; flex-direction:column; align-items:flex-end; gap:2px; margin-left:auto; padding-left:16px; text-align:right}
+.su-count[hidden]{display:none}
+.su-count-big{font-size:var(--fs-title); font-weight:600; line-height:1.1; color:var(--brass-bright); white-space:nowrap}
+.su-count-sub{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); white-space:nowrap}
+.su-ics{margin-top:3px; font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.08em; text-transform:uppercase; color:var(--brass);
+  text-decoration:none; border-bottom:1px dotted var(--brass-deep)}
+.su-ics:hover, .su-ics:focus-visible{color:var(--brass-bright); border-bottom-style:solid}
 .su-status-row{margin-bottom:8px}
+/* once completed the live mark is noise */
+.su-status-row[data-status="completed"] .su-live-state{display:none}
 /* the role bar under the status row: slots held of slots planned per role, then the open slots
    to fill next as chips with their icons, grouped by role in the comp's order */
 /* the tally reads at a glance: the held count large in the role's colour, the planned count and the role small beside it */
@@ -2329,6 +2339,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-roles .su-of{font-size:var(--fs-lead); color:var(--ink-3)}
 .su-roles .su-role-name{margin-left:3px; font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
 .su-roles .gd-cov.any b{color:var(--ink-2)}
+.su-roles .gd-cov.reserve b{color:var(--ink-2)}
 .su-next{display:flex; flex-wrap:wrap; align-items:flex-start; gap:4px 10px; margin:0 0 10px}
 .su-next-label{margin:3px 0 0; flex:none}
 .su-next-list{display:flex; flex-wrap:wrap; gap:4px 12px; margin:0; padding:0; list-style:none; min-width:0}
@@ -2340,6 +2351,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-next-pos{font-family:var(--mono); font-size:var(--fs-label); color:var(--ink-3)}
 .su-counts{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 .su-status-row .gd-btn:first-of-type{margin-left:auto}
+.su-status-row .gd-btn[aria-pressed="true"]{color:var(--brass); border-color:var(--brass-deep)}
 .su-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
 .su-live-state:empty{display:none}
 .su-live-state[data-live="yes"]{color:var(--role-healer)}
@@ -2355,6 +2367,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* the slot the form names, under the heading: the roster's pick, the player's own slot, or nothing */
 .su-taking{margin:0 0 10px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--brass)}
 .su-form-wrap .auth-hint:first-of-type{margin-bottom:10px}
+/* the record once the CTA is completed: the counts, then mark-everyone and the history */
+.su-record{margin:0 0 8px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-2)}
+.su-record-actions{display:flex; flex-wrap:wrap; gap:8px}
+.su-record-actions[hidden], .su-record[hidden]{display:none}
+.su-record-actions .su-mark-all{margin:0}
 /* a sheet that takes no sign-up (draft, locked, completed) keeps no column for the form: its note sits above the roster, unpinned and plain */
 .su-grid:has(> .su-form-wrap > #su-form[hidden]){grid-template-columns:1fr}
 .su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-wrap{position:static; order:-1; margin-bottom:12px; padding:10px 14px; border-color:var(--rule-2); background:none; box-shadow:none}
@@ -2377,8 +2394,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-band.support .su-player .gd-name{color:var(--role-support)}
 .su-band.dps .su-player .gd-name{color:var(--role-melee)}
 .su-band.healer .su-player .gd-name{color:var(--role-healer)}
-.su-band-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0 22px}
-.su-slot{min-width:0; padding:7px 0 8px; border-bottom:1px solid var(--rule)}
+.su-band-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:0 22px}
+.su-slot{position:relative; min-width:0; padding:7px 0 8px; border-bottom:1px solid var(--rule)}
 .su-slot.su-mine{background:linear-gradient(90deg, rgba(255,196,84,.07), transparent 70%)}
 /* the pick: the free slot the form names */
 .su-slot.su-pick{box-shadow:inset 3px 0 0 var(--brass); padding-left:10px}
@@ -2407,6 +2424,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-player .gd-sub{display:block; margin:0}
 .su-declared{display:block; font-size:var(--fs-dense); color:var(--ink-2)}
 .su-free{font-family:var(--mono); font-size:var(--fs-meta); color:var(--role-healer)}
+.su-free.ended{color:var(--ink-3)}
+/* a reserve's declared weapons as chips */
+.su-declared-chips{display:flex; flex-wrap:wrap; gap:4px; margin-top:3px}
+.su-declared-chips .gd-weapon{font-size:var(--fs-dense)}
+.su-declared-chips .pw-art{width:18px; height:18px}
 /* the brass button of a free slot: the page's call to sign up, one per open slot */
 .su-take{padding:3px 11px; border:1px solid rgba(255,201,58,.5); border-radius:999px; background:var(--brass-wash);
   font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.08em; text-transform:uppercase; color:var(--brass); cursor:pointer;
@@ -2457,9 +2479,13 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .su-controls .su-move:hover, .su-controls .su-mark:hover, .su-controls .su-move:focus-visible, .su-controls .su-mark:focus-visible{border-color:var(--rule-2); background-color:var(--sunk)}
 .su-controls .gd-btn{padding:2px 6px; border-color:transparent; color:var(--ink-3)}
 .su-controls .gd-btn:hover, .su-controls .gd-btn:focus-visible{border-color:var(--gap)}
+/* on a screen with a pointer the line waits for it, laid over the cell's corner so a bare cell stays
+   short; once the CTA is completed marking is the job, so the line stays in flow and in view */
 @media (hover:hover){
-  .su-slot .su-controls{opacity:0; transition:opacity .15s var(--ease)}
-  .su-slot:hover .su-controls, .su-slot:focus-within .su-controls{opacity:1}
+  .su-bands:not([data-status="completed"]) .su-slot .su-controls{position:absolute; right:0; bottom:6px; flex-basis:auto; margin:0;
+    padding:2px 0 2px 10px; background:var(--surface); opacity:0; pointer-events:none; transition:opacity .15s var(--ease)}
+  .su-bands:not([data-status="completed"]) .su-slot:hover .su-controls,
+  .su-bands:not([data-status="completed"]) .su-slot:focus-within .su-controls{opacity:1; pointer-events:auto}
 }
 .su-reserves .su-controls{margin-top:2px}
 /* the record: attendance marks */
@@ -2887,6 +2913,9 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
   .su-form-wrap{position:static; margin-top:14px}
   .su-band-grid{grid-template-columns:1fr}
   .su-slot-body, .su-build{margin-left:0}
+  /* the countdown drops under the title; the status row's buttons wrap under its counts */
+  .su-count{align-items:flex-start; margin-left:0; padding-left:0; text-align:left; flex-basis:100%}
+  .sheet-page .auth-hd{flex-wrap:wrap}
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}
@@ -3009,6 +3038,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <h2 id="su-title">Sign-up sheet</h2>
         <p class="gd-meta su-when" id="su-when"></p>
       </div>
+      <!-- the start, counted down, and the time in the reader's own calendar (.ics) -->
+      <div class="su-count" id="su-count" hidden>
+        <span class="su-count-big" id="su-count-big"></span>
+        <span class="su-count-sub" id="su-count-sub"></span>
+        <a class="su-ics" id="su-ics" download="cta.ics" href="#">Add to calendar</a>
+      </div>
     </div>
     <p class="auth-msg err" id="su-error" role="alert" hidden></p>
     <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
@@ -3018,6 +3053,9 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
       <span class="ev-status" id="su-status" data-status=""></span>
       <span class="su-counts" id="su-counts"></span>
       <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
+      <button type="button" class="gd-btn" id="su-copy" title="The roster as text, by role, for a channel">Copy roster</button>
+      <button type="button" class="gd-btn" id="su-link-top" title="The link to this sheet">Copy link</button>
+      <button type="button" class="gd-btn" id="su-builds" aria-pressed="false">Show builds</button>
       <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
       <button type="button" class="gd-btn" id="su-open">Open in planner</button>
     </div>
@@ -3079,7 +3117,6 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
           <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
-          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
           <form class="su-add" id="su-add-form" novalidate hidden>
             <div class="auth-field">
               <label for="su-add-name">Add a player by name</label>
@@ -3104,6 +3141,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <h3 class="su-form-title" id="su-form-label">Sign up</h3>
         <p class="su-taking" id="su-taking" hidden></p>
         <p class="auth-hint" id="su-closed" hidden></p>
+        <!-- once completed the panel is the record: the counts, the caller's mark-everyone, the guild's history -->
+        <p class="su-record" id="su-record" hidden></p>
+        <div class="su-record-actions" id="su-record-actions" hidden>
+          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
+          <button type="button" class="gd-btn" id="su-history-link" hidden>Guild history</button>
+        </div>
         <form class="auth-form" id="su-form" novalidate hidden>
           <p class="auth-hint" id="su-who"></p>
           <div class="auth-field" id="su-name-wrap">
@@ -14065,6 +14108,15 @@ function acctDownloadText(filename, text, type) {
       paint();
     },
 
+    /* a registered view, opened by name from a page that is not the menu
+       (the completed sheet's way to the guild's history); false when no
+       module registered it */
+    open(name) {
+      if (!views[name]) return false;
+      views[name]();
+      return true;
+    },
+
     /* open(): a view the account menu offers by name ("profile") */
     registerView(name, open) {
       views[name] = open;
@@ -18707,6 +18759,51 @@ function sheetTally(board, catalog) {
 }
 
 
+/* The roster as text for a channel: the CTA's name and start, then each
+   band with its slots held of planned and one line per slot (number,
+   weapon, the player or "free"), the reserves with what they bring, and
+   the sheet's link. Plain lines, no markup: a message, pasted. */
+function sheetText(ev, board, catalog, link) {
+  const name = key => (key ? weaponInfo(catalog, key).name : "any weapon");
+  const lines = [`${ev.name} — ${eventTimeLabel(ev.starts_at, true)}` + (ev.mass_at ? ` (mass ${eventTimeLabel(ev.mass_at, true)})` : "")];
+  for (const band of sheetBands(board, catalog)) {
+    lines.push("", `${band.name} ${band.held}/${band.planned}`);
+    for (const r of band.rows) {
+      lines.push(`${r.position}. ${name(r.weapon_id)} — ${r.claimant ? r.claimant.player_name : "free"}`);
+    }
+  }
+  if (board.reserves.length) {
+    lines.push("", "Reserves");
+    for (const s of board.reserves) {
+      lines.push(`${s.player_name}` + (s.weapons && s.weapons.length ? ` (${s.weapons.map(name).join(", ")})` : ""));
+    }
+  }
+  if (link) lines.push("", `Sign up: ${link}`);
+  return lines.join("\n");
+}
+
+
+/* The CTA as a calendar event (RFC 5545): the start in UTC, two hours
+   long (the game's fights have no end on the sheet), the name, the
+   sheet's link and the notes, and one id per CTA so a second import
+   replaces the first. Lines end in CRLF as the format asks. */
+const ICS_DEFAULT_HOURS = 2;
+
+function eventIcs(ev, link, now) {
+  const stamp = d => new Date(d).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+  const start = new Date(ev.starts_at || "");
+  if (!Number.isFinite(start.getTime())) return "";
+  const end = new Date(start.getTime() + ICS_DEFAULT_HOURS * 3600000);
+  const text = v => String(v || "").replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/[,;]/g, m => "\\" + m);
+  const description = [link ? `Sign up: ${link}` : "", ev.mass_at ? `Mass ${eventTimeLabel(ev.mass_at, true)}` : "", ev.notes || ""].filter(Boolean).join("\n");
+  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Comp Zaddy//CTA//EN", "BEGIN:VEVENT",
+          `UID:cta-${ev.share_code || ev.id || stamp(start)}@comp-zaddy`,
+          `DTSTAMP:${stamp(now || Date.now())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(end)}`,
+          `SUMMARY:${text(ev.name)}`, description ? `DESCRIPTION:${text(description)}` : "", link ? `URL:${link}` : "",
+          "END:VEVENT", "END:VCALENDAR"].filter(Boolean).join("\r\n") + "\r\n";
+}
+
+
 /* the rules the database holds, as sentences; `allowed` is the set of
    positions this player may name (the free ones and their own) */
 function validateSignup({ playerName, position, itemPower, weapons, note }, { guest, allowed }) {
@@ -18965,11 +19062,22 @@ function signupErrorMessage(err) {
     notice: $id("su-notice"),
     live: $id("su-live"),
     counts: $id("su-counts"),
+    count: $id("su-count"),
+    countBig: $id("su-count-big"),
+    countSub: $id("su-count-sub"),
+    ics: $id("su-ics"),
+    copy: $id("su-copy"),
+    linkTop: $id("su-link-top"),
+    builds: $id("su-builds"),
     roles: $id("su-roles"),
     next: $id("su-next"),
     nextList: $id("su-next-list"),
     board: $id("su-board"),
     taking: $id("su-taking"),
+    formTitle: $id("su-form-label"),
+    record: $id("su-record"),
+    recordActions: $id("su-record-actions"),
+    historyLink: $id("su-history-link"),
     reserves: $id("su-reserves"),
     reservesWrap: $id("su-reserves-wrap"),
     closed: $id("su-closed"),
@@ -19126,8 +19234,19 @@ function signupErrorMessage(err) {
       name.textContent = r.name;
       cell.append(n, of, name);
       return cell;
-    }));
-    el.next.hidden = !tally.next.length;
+    }).concat(board.reserves.length ? [(() => {
+      const cell = document.createElement("span");
+      cell.className = "gd-cov reserve";
+      const n = document.createElement("b");
+      n.textContent = `+${board.reserves.length}`;
+      const name = document.createElement("span");
+      name.className = "su-role-name";
+      name.textContent = board.reserves.length === 1 ? "reserve" : "reserves";
+      cell.append(n, name);
+      return cell;
+    })()] : []));
+    /* nothing is filled next once the CTA is completed */
+    el.next.hidden = !tally.next.length || sheet.event.status === "completed";
     const open = sheet.event.status === "open";
     el.nextList.replaceChildren(...tally.next.map(group => {
       const li = document.createElement("li");
@@ -19157,8 +19276,9 @@ function signupErrorMessage(err) {
   }
 
   /* the player in a slot or on the reserves: name, mark, the small print
-     and what they declared */
-  function playerBlock(s, mine) {
+     and what they declared (as chips with their icons for a reserve: what
+     a reserve can bring is what the caller reads them for) */
+  function playerBlock(s, mine, chips) {
     const block = document.createElement("div");
     block.className = "su-player";
     const name = document.createElement("span");
@@ -19177,7 +19297,19 @@ function signupErrorMessage(err) {
       sub.textContent = parts.join(" · ");
       block.append(sub);
     }
-    if (s.weapons && s.weapons.length) {
+    if (s.weapons && s.weapons.length && chips) {
+      const list = document.createElement("span");
+      list.className = "su-declared su-declared-chips";
+      for (const key of s.weapons) {
+        const chip = document.createElement("span");
+        chip.className = "gd-weapon";
+        const art = weaponArt(key);
+        if (art) chip.append(art);
+        chip.append(weaponInfo(CATALOG, key).name);
+        list.append(chip);
+      }
+      block.append(list);
+    } else if (s.weapons && s.weapons.length) {
       const list = document.createElement("span");
       list.className = "su-declared";
       list.textContent = "brings " + s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ");
@@ -19231,9 +19363,11 @@ function signupErrorMessage(err) {
       take.textContent = sheet.mine ? "Move here" : "Sign up";
       body.append(take);
     } else {
+      /* a slot nobody took: free while there is time, unfilled once the CTA is completed */
       const free = document.createElement("span");
-      free.className = "su-free";
-      free.textContent = "free";
+      const ended = sheet.event.status === "completed";
+      free.className = "su-free" + (ended ? " ended" : "");
+      free.textContent = ended ? "unfilled" : "free";
       body.append(free);
     }
     cell.append(body);
@@ -19276,22 +19410,29 @@ function signupErrorMessage(err) {
 
   function toggleBuild(position) {
     if (openBuilds.has(position)) openBuilds.delete(position); else openBuilds.add(position);
-    const cell = el.board.querySelector(`.su-slot[data-position="${position}"]`);
-    if (!cell) return;
-    cell.querySelector("[data-su-build-toggle]").setAttribute("aria-expanded", openBuilds.has(position) ? "true" : "false");
-    cell.querySelector("[data-su-build]").hidden = !openBuilds.has(position);
+    paintBuilds();
   }
 
   /* the start in the reader's own zone (named) and in UTC, how far off
      it is, and the mass time; repainted while the sheet is open so the
      countdown stays current */
+  /* the start as a countdown beside the title (large until the CTA is
+     completed or long past), the calendar file under it, and the start,
+     mass and content in the line under the title */
   function paintWhen() {
     if (!sheet || !sheet.event) return;
     const ev = sheet.event;
     const until = ev.status === "completed" ? "" : eventCountdown(ev.starts_at);
-    el.when.textContent = [eventTimeLabel(ev.starts_at, true), until,
+    el.when.textContent = [eventTimeLabel(ev.starts_at, true),
                            ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : "",
                            `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+    el.count.hidden = !until;
+    el.countBig.textContent = until;
+    el.countSub.textContent = until ? (ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : `starts ${eventTimeLabel(ev.starts_at, true)}`) : "";
+    const ics = until ? eventIcs(ev, signupLink(code, typeof location !== "undefined" ? location.href : "")) : "";
+    el.ics.hidden = !ics;
+    el.ics.href = ics ? `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}` : "#";
+    el.ics.download = `${String(ev.name || "cta").replace(/[^\w.-]+/g, "-").replace(/^-|-$/g, "") || "cta"}.ics`;
   }
 
   function renderBoard() {
@@ -19313,7 +19454,9 @@ function signupErrorMessage(err) {
       + (board.counts.reserves ? `, ${board.counts.reserves} reserve${board.counts.reserves === 1 ? "" : "s"}` : "")
       + (ev.status === "completed"
          ? ` · attended ${att.attended} · no-show ${att.no_show}` + (att.reserve ? ` · reserve ${att.reserve}` : "")
-         : (att.confirmed ? ` · ${att.confirmed} confirmed` : ""));
+         : (board.counts.claimed ? ` · ${att.confirmed} of ${board.counts.claimed} confirmed` : ""));
+    el.statusRow.dataset.status = ev.status;
+    el.board.dataset.status = ev.status;
     renderRoles(board);
 
     caller = callerPowers(myRole, ev.status);
@@ -19339,12 +19482,13 @@ function signupErrorMessage(err) {
       sec.append(hd, grid);
       return sec;
     }));
+    paintBuilds();
 
     el.reservesWrap.hidden = !board.reserves.length;
     el.reserves.replaceChildren(...board.reserves.map(s => {
       const li = document.createElement("li");
       li.className = s.id === mineId ? "su-mine" : "";
-      li.append(playerBlock(s, s.id === mineId), controlsRow(board, s));
+      li.append(playerBlock(s, s.id === mineId, true), controlsRow(board, s));
       return li;
     }));
 
@@ -19416,11 +19560,25 @@ function signupErrorMessage(err) {
   function renderForm() {
     const ev = sheet.event;
     const open = ev.status === "open";
+    const ended = ev.status === "completed";
     const mine = sheet.mine;
 
+    /* once completed the panel is the record: the counts, the caller's
+       mark-everyone, and the guild's history for a member */
+    el.formTitle.textContent = ended ? "Record" : "Sign up";
+    if (ended) el.taking.hidden = true;
     el.closed.textContent = SHEET_STATUS_MSG[ev.status] || "";
     el.closed.hidden = open;
-    el.form.hidden = !open && !mine;
+    el.form.hidden = (!open && !mine) || ended;
+    const att = attendanceSummary(sheet.attendance);
+    el.record.hidden = !ended;
+    el.record.textContent = ended
+      ? [`attended ${att.attended}`, `no-show ${att.no_show}`, `unmarked ${att.signed_up + att.confirmed}`,
+         att.cancelled ? `cancelled ${att.cancelled}` : "", att.reserve ? `reserve ${att.reserve}` : "",
+         mine ? `you: ${ATTENDANCE_NAMES[mine.attendance] || "unmarked"}` : ""].filter(Boolean).join(" · ")
+      : "";
+    el.historyLink.hidden = !ended || isGuest() || myRole === null;
+    el.recordActions.hidden = !ended || (el.markAll.hidden && el.historyLink.hidden);
 
     el.nameWrap.hidden = !isGuest();
     el.who.textContent = isGuest()
@@ -19578,6 +19736,47 @@ function signupErrorMessage(err) {
 
   el.refresh.addEventListener("click", () => { if (!busy) reload(false); });
 
+  /* the clipboard: the roster as text, and the link, from the status row */
+  function toClipboard(text, said) {
+    if (navigator.clipboard && text) {
+      navigator.clipboard.writeText(text).then(() => showNotice(said), () => showNotice(text));
+    } else if (text) {
+      showNotice(text);
+    }
+  }
+  el.copy.addEventListener("click", () => {
+    if (!sheet || !lastBoard) return;
+    toClipboard(sheetText(sheet.event, lastBoard, CATALOG, signupLink(code, location.href)), "Roster copied.");
+  });
+  el.linkTop.addEventListener("click", () => {
+    if (!code) return;
+    toClipboard(signupLink(code, location.href), "Link copied.");
+  });
+
+  /* every build open, or every build folded */
+  function paintBuilds() {
+    for (const cell of el.board.querySelectorAll(".su-slot")) {
+      const position = Number(cell.dataset.position);
+      cell.querySelector("[data-su-build-toggle]").setAttribute("aria-expanded", openBuilds.has(position) ? "true" : "false");
+      cell.querySelector("[data-su-build]").hidden = !openBuilds.has(position);
+    }
+    const all = lastBoard && lastBoard.rows.length && lastBoard.rows.every(r => openBuilds.has(r.position));
+    el.builds.textContent = all ? "Hide builds" : "Show builds";
+    el.builds.setAttribute("aria-pressed", all ? "true" : "false");
+  }
+  el.builds.addEventListener("click", () => {
+    if (!lastBoard) return;
+    const all = lastBoard.rows.every(r => openBuilds.has(r.position));
+    openBuilds.clear();
+    if (!all) for (const r of lastBoard.rows) openBuilds.add(r.position);
+    paintBuilds();
+  });
+
+  /* the guild's history, for a member, once the CTA is completed (the
+     account store opens the registered view; the sheet never calls the
+     history module) */
+  el.historyLink.addEventListener("click", () => { window.Account.open("history"); });
+
   /* the planner is a page load: its address, the comp as the share hash.
      Who holds each slot rides beside it for this tab alone (sessionStorage,
      never the address): the planner shows the names on its roster for that
@@ -19691,7 +19890,7 @@ function signupErrorMessage(err) {
   }
 
   function renderCaller(board) {
-    el.callerWrap.hidden = !caller.manage && !caller.moves.length && !marks.all;
+    el.callerWrap.hidden = !caller.manage && !caller.moves.length;
     el.markAll.hidden = !marks.all;
     el.callerMoves.replaceChildren(...caller.moves.map(to => {
       const b = document.createElement("button");
@@ -19801,7 +20000,7 @@ function signupErrorMessage(err) {
     const tag = document.createElement("span");
     tag.className = "su-att";
     tag.dataset.status = status;
-    tag.textContent = ATTENDANCE_NAMES[status] || status;
+    tag.textContent = (status === "confirmed" ? "✓ " : "") + (ATTENDANCE_NAMES[status] || status);
     return tag;
   }
 
@@ -19931,6 +20130,9 @@ function signupErrorMessage(err) {
     el.board.replaceChildren();
     el.taking.hidden = true;
     lastBoard = null;
+    el.count.hidden = true;
+    el.record.hidden = true;
+    el.recordActions.hidden = true;
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.linkRow.hidden = true;
@@ -19998,6 +20200,9 @@ function signupErrorMessage(err) {
     el.taking.hidden = true;
     lastBoard = null;
     openBuilds.clear();
+    el.count.hidden = true;
+    el.record.hidden = true;
+    el.recordActions.hidden = true;
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.form.hidden = true;

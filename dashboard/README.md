@@ -352,8 +352,15 @@ and its tests: `supabase/README.md`.
   Healers, Any weapon; two slots across, one on a phone), its sign-up
   panel is the page's one brass element, pinned beside the roster, and
   every free slot's button names that slot in it; the caller's line
-  under a player reads "Move to…", the mark and the removal; a
-  sheet that takes no sign-up keeps no column for the form; a numeric
+  under a player reads "Move to…", the mark and the removal, laid over
+  the cell's corner until pointed at; the start counts down beside the
+  title with an .ics to add it to a calendar; the status row copies the
+  roster as text and the link and opens every build at once; once the
+  CTA is completed the panel is the record (the counts, mark everyone,
+  the guild's history through the account store's `open`), fill-next
+  and the live mark go, a slot nobody took reads unfilled and the marks
+  stay in view; a sheet that takes no sign-up keeps no column for the
+  form; a numeric
   table header is aligned by class (`hs-num`), never by position; small
   text inside the dialogs uses the layer's own tertiary grey and melee
   tone, which clear 4.5:1 on its surfaces while the planner's tokens

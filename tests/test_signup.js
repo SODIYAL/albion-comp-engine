@@ -133,6 +133,32 @@ const run = expr => vm.runInContext(expr, ctx);
         same(bb.map(b => `${b.role}:${b.name}:${b.rows.map(r => r.position).join(",")}`), ["frontline:Tanks:2,4", "dps:DPS:1", "any:Any weapon:3,5"]), bb);
   check("a band counts its slots held of planned", same(bb.map(b => `${b.held}/${b.planned}`), ["1/2", "0/1", "1/2"]));
   check("an empty board has no band", same(bands(board([], []), CAT), []));
+
+  /* the roster as text for a channel */
+  const text = run("sheetText");
+  const ev = { name: "Castle Fight", starts_at: "2026-10-07T19:00:00Z", mass_at: "2026-10-07T18:45:00Z" };
+  const out = text(ev, board(
+    [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }],
+    [{ id: "s1", position: 2, player_name: "Gus", weapons: [] }, { id: "s2", position: null, player_name: "Gil", weapons: ["2H_LONGBOW", "MYSTERY"] }]), CAT, "https://x.test/index.html?cta=A1B2C3D4E5");
+  const lines = out.split("\n");
+  check("the text opens with the name, the start and the mass time, in the reader's zone and UTC",
+        lines[0].startsWith("Castle Fight — ") && lines[0].includes("(mass ") && lines[0].includes("UTC"), lines[0]);
+  check("then each band with its count and one line per slot, the player or free, then the reserves with what they bring, then the link",
+        same(lines.slice(1), ["", "Tanks 1/1", "2. Incubus Mace — Gus", "", "DPS 0/1", "1. Longbow — free", "", "Any weapon 0/1", "3. any weapon — free",
+                              "", "Reserves", "Gil (Longbow, Mystery)", "", "Sign up: https://x.test/index.html?cta=A1B2C3D4E5"]), lines);
+  check("no markup rides the text", !/[<>*_`]/.test(out));
+
+  /* the calendar file */
+  const ics = run("eventIcs");
+  const file = ics({ id: "e1", share_code: "A1B2C3D4E5", name: "Castle Fight; Tuesday", starts_at: "2026-10-07T19:00:00Z", mass_at: "2026-10-07T18:45:00Z", notes: "mass at HO\nbring pots" },
+                   "https://x.test/index.html?cta=A1B2C3D4E5", "2026-10-05T12:00:00Z");
+  check("an .ics event: the start in UTC, two hours long, one id per CTA, the summary escaped, CRLF lines",
+        file.startsWith("BEGIN:VCALENDAR\r\n") && file.includes("\r\nDTSTART:20261007T190000Z\r\n") && file.includes("\r\nDTEND:20261007T210000Z\r\n")
+        && file.includes("\r\nUID:cta-A1B2C3D4E5@comp-zaddy\r\n") && file.includes("\r\nSUMMARY:Castle Fight\\; Tuesday\r\n") && file.includes("DTSTAMP:20261005T120000Z")
+        && file.endsWith("END:VCALENDAR\r\n") && !/[^\r]\n/.test(file), file);
+  check("the description carries the link, the mass time and the notes, newlines escaped",
+        /DESCRIPTION:Sign up: https:\/\/x\.test\/index\.html\?cta=A1B2C3D4E5\\nMass .*\\nmass at HO\\nbring pots\r\n/.test(file) && file.includes("\r\nURL:https://x.test/index.html?cta=A1B2C3D4E5\r\n"), file);
+  check("no start, no file", ics({ name: "x", starts_at: null }, "") === "");
 }
 
 /* 3 - validation and the payload */

@@ -623,6 +623,15 @@ function acctDownloadText(filename, text, type) {
       paint();
     },
 
+    /* a registered view, opened by name from a page that is not the menu
+       (the completed sheet's way to the guild's history); false when no
+       module registered it */
+    open(name) {
+      if (!views[name]) return false;
+      views[name]();
+      return true;
+    },
+
     /* open(): a view the account menu offers by name ("profile") */
     registerView(name, open) {
       views[name] = open;

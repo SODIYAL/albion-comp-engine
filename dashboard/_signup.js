@@ -366,6 +366,51 @@ function sheetTally(board, catalog) {
 }
 
 
+/* The roster as text for a channel: the CTA's name and start, then each
+   band with its slots held of planned and one line per slot (number,
+   weapon, the player or "free"), the reserves with what they bring, and
+   the sheet's link. Plain lines, no markup: a message, pasted. */
+function sheetText(ev, board, catalog, link) {
+  const name = key => (key ? weaponInfo(catalog, key).name : "any weapon");
+  const lines = [`${ev.name} — ${eventTimeLabel(ev.starts_at, true)}` + (ev.mass_at ? ` (mass ${eventTimeLabel(ev.mass_at, true)})` : "")];
+  for (const band of sheetBands(board, catalog)) {
+    lines.push("", `${band.name} ${band.held}/${band.planned}`);
+    for (const r of band.rows) {
+      lines.push(`${r.position}. ${name(r.weapon_id)} — ${r.claimant ? r.claimant.player_name : "free"}`);
+    }
+  }
+  if (board.reserves.length) {
+    lines.push("", "Reserves");
+    for (const s of board.reserves) {
+      lines.push(`${s.player_name}` + (s.weapons && s.weapons.length ? ` (${s.weapons.map(name).join(", ")})` : ""));
+    }
+  }
+  if (link) lines.push("", `Sign up: ${link}`);
+  return lines.join("\n");
+}
+
+
+/* The CTA as a calendar event (RFC 5545): the start in UTC, two hours
+   long (the game's fights have no end on the sheet), the name, the
+   sheet's link and the notes, and one id per CTA so a second import
+   replaces the first. Lines end in CRLF as the format asks. */
+const ICS_DEFAULT_HOURS = 2;
+
+function eventIcs(ev, link, now) {
+  const stamp = d => new Date(d).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+  const start = new Date(ev.starts_at || "");
+  if (!Number.isFinite(start.getTime())) return "";
+  const end = new Date(start.getTime() + ICS_DEFAULT_HOURS * 3600000);
+  const text = v => String(v || "").replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/[,;]/g, m => "\\" + m);
+  const description = [link ? `Sign up: ${link}` : "", ev.mass_at ? `Mass ${eventTimeLabel(ev.mass_at, true)}` : "", ev.notes || ""].filter(Boolean).join("\n");
+  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Comp Zaddy//CTA//EN", "BEGIN:VEVENT",
+          `UID:cta-${ev.share_code || ev.id || stamp(start)}@comp-zaddy`,
+          `DTSTAMP:${stamp(now || Date.now())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(end)}`,
+          `SUMMARY:${text(ev.name)}`, description ? `DESCRIPTION:${text(description)}` : "", link ? `URL:${link}` : "",
+          "END:VEVENT", "END:VCALENDAR"].filter(Boolean).join("\r\n") + "\r\n";
+}
+
+
 /* the rules the database holds, as sentences; `allowed` is the set of
    positions this player may name (the free ones and their own) */
 function validateSignup({ playerName, position, itemPower, weapons, note }, { guest, allowed }) {
@@ -624,11 +669,22 @@ function signupErrorMessage(err) {
     notice: $id("su-notice"),
     live: $id("su-live"),
     counts: $id("su-counts"),
+    count: $id("su-count"),
+    countBig: $id("su-count-big"),
+    countSub: $id("su-count-sub"),
+    ics: $id("su-ics"),
+    copy: $id("su-copy"),
+    linkTop: $id("su-link-top"),
+    builds: $id("su-builds"),
     roles: $id("su-roles"),
     next: $id("su-next"),
     nextList: $id("su-next-list"),
     board: $id("su-board"),
     taking: $id("su-taking"),
+    formTitle: $id("su-form-label"),
+    record: $id("su-record"),
+    recordActions: $id("su-record-actions"),
+    historyLink: $id("su-history-link"),
     reserves: $id("su-reserves"),
     reservesWrap: $id("su-reserves-wrap"),
     closed: $id("su-closed"),
@@ -785,8 +841,19 @@ function signupErrorMessage(err) {
       name.textContent = r.name;
       cell.append(n, of, name);
       return cell;
-    }));
-    el.next.hidden = !tally.next.length;
+    }).concat(board.reserves.length ? [(() => {
+      const cell = document.createElement("span");
+      cell.className = "gd-cov reserve";
+      const n = document.createElement("b");
+      n.textContent = `+${board.reserves.length}`;
+      const name = document.createElement("span");
+      name.className = "su-role-name";
+      name.textContent = board.reserves.length === 1 ? "reserve" : "reserves";
+      cell.append(n, name);
+      return cell;
+    })()] : []));
+    /* nothing is filled next once the CTA is completed */
+    el.next.hidden = !tally.next.length || sheet.event.status === "completed";
     const open = sheet.event.status === "open";
     el.nextList.replaceChildren(...tally.next.map(group => {
       const li = document.createElement("li");
@@ -816,8 +883,9 @@ function signupErrorMessage(err) {
   }
 
   /* the player in a slot or on the reserves: name, mark, the small print
-     and what they declared */
-  function playerBlock(s, mine) {
+     and what they declared (as chips with their icons for a reserve: what
+     a reserve can bring is what the caller reads them for) */
+  function playerBlock(s, mine, chips) {
     const block = document.createElement("div");
     block.className = "su-player";
     const name = document.createElement("span");
@@ -836,7 +904,19 @@ function signupErrorMessage(err) {
       sub.textContent = parts.join(" · ");
       block.append(sub);
     }
-    if (s.weapons && s.weapons.length) {
+    if (s.weapons && s.weapons.length && chips) {
+      const list = document.createElement("span");
+      list.className = "su-declared su-declared-chips";
+      for (const key of s.weapons) {
+        const chip = document.createElement("span");
+        chip.className = "gd-weapon";
+        const art = weaponArt(key);
+        if (art) chip.append(art);
+        chip.append(weaponInfo(CATALOG, key).name);
+        list.append(chip);
+      }
+      block.append(list);
+    } else if (s.weapons && s.weapons.length) {
       const list = document.createElement("span");
       list.className = "su-declared";
       list.textContent = "brings " + s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ");
@@ -890,9 +970,11 @@ function signupErrorMessage(err) {
       take.textContent = sheet.mine ? "Move here" : "Sign up";
       body.append(take);
     } else {
+      /* a slot nobody took: free while there is time, unfilled once the CTA is completed */
       const free = document.createElement("span");
-      free.className = "su-free";
-      free.textContent = "free";
+      const ended = sheet.event.status === "completed";
+      free.className = "su-free" + (ended ? " ended" : "");
+      free.textContent = ended ? "unfilled" : "free";
       body.append(free);
     }
     cell.append(body);
@@ -935,22 +1017,29 @@ function signupErrorMessage(err) {
 
   function toggleBuild(position) {
     if (openBuilds.has(position)) openBuilds.delete(position); else openBuilds.add(position);
-    const cell = el.board.querySelector(`.su-slot[data-position="${position}"]`);
-    if (!cell) return;
-    cell.querySelector("[data-su-build-toggle]").setAttribute("aria-expanded", openBuilds.has(position) ? "true" : "false");
-    cell.querySelector("[data-su-build]").hidden = !openBuilds.has(position);
+    paintBuilds();
   }
 
   /* the start in the reader's own zone (named) and in UTC, how far off
      it is, and the mass time; repainted while the sheet is open so the
      countdown stays current */
+  /* the start as a countdown beside the title (large until the CTA is
+     completed or long past), the calendar file under it, and the start,
+     mass and content in the line under the title */
   function paintWhen() {
     if (!sheet || !sheet.event) return;
     const ev = sheet.event;
     const until = ev.status === "completed" ? "" : eventCountdown(ev.starts_at);
-    el.when.textContent = [eventTimeLabel(ev.starts_at, true), until,
+    el.when.textContent = [eventTimeLabel(ev.starts_at, true),
                            ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : "",
                            `${CONTENTS[ev.content] || ev.content} · ${ev.planned_size} planned`].filter(Boolean).join(" · ");
+    el.count.hidden = !until;
+    el.countBig.textContent = until;
+    el.countSub.textContent = until ? (ev.mass_at ? `mass ${eventTimeLabel(ev.mass_at, true)}` : `starts ${eventTimeLabel(ev.starts_at, true)}`) : "";
+    const ics = until ? eventIcs(ev, signupLink(code, typeof location !== "undefined" ? location.href : "")) : "";
+    el.ics.hidden = !ics;
+    el.ics.href = ics ? `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}` : "#";
+    el.ics.download = `${String(ev.name || "cta").replace(/[^\w.-]+/g, "-").replace(/^-|-$/g, "") || "cta"}.ics`;
   }
 
   function renderBoard() {
@@ -972,7 +1061,9 @@ function signupErrorMessage(err) {
       + (board.counts.reserves ? `, ${board.counts.reserves} reserve${board.counts.reserves === 1 ? "" : "s"}` : "")
       + (ev.status === "completed"
          ? ` · attended ${att.attended} · no-show ${att.no_show}` + (att.reserve ? ` · reserve ${att.reserve}` : "")
-         : (att.confirmed ? ` · ${att.confirmed} confirmed` : ""));
+         : (board.counts.claimed ? ` · ${att.confirmed} of ${board.counts.claimed} confirmed` : ""));
+    el.statusRow.dataset.status = ev.status;
+    el.board.dataset.status = ev.status;
     renderRoles(board);
 
     caller = callerPowers(myRole, ev.status);
@@ -998,12 +1089,13 @@ function signupErrorMessage(err) {
       sec.append(hd, grid);
       return sec;
     }));
+    paintBuilds();
 
     el.reservesWrap.hidden = !board.reserves.length;
     el.reserves.replaceChildren(...board.reserves.map(s => {
       const li = document.createElement("li");
       li.className = s.id === mineId ? "su-mine" : "";
-      li.append(playerBlock(s, s.id === mineId), controlsRow(board, s));
+      li.append(playerBlock(s, s.id === mineId, true), controlsRow(board, s));
       return li;
     }));
 
@@ -1075,11 +1167,25 @@ function signupErrorMessage(err) {
   function renderForm() {
     const ev = sheet.event;
     const open = ev.status === "open";
+    const ended = ev.status === "completed";
     const mine = sheet.mine;
 
+    /* once completed the panel is the record: the counts, the caller's
+       mark-everyone, and the guild's history for a member */
+    el.formTitle.textContent = ended ? "Record" : "Sign up";
+    if (ended) el.taking.hidden = true;
     el.closed.textContent = SHEET_STATUS_MSG[ev.status] || "";
     el.closed.hidden = open;
-    el.form.hidden = !open && !mine;
+    el.form.hidden = (!open && !mine) || ended;
+    const att = attendanceSummary(sheet.attendance);
+    el.record.hidden = !ended;
+    el.record.textContent = ended
+      ? [`attended ${att.attended}`, `no-show ${att.no_show}`, `unmarked ${att.signed_up + att.confirmed}`,
+         att.cancelled ? `cancelled ${att.cancelled}` : "", att.reserve ? `reserve ${att.reserve}` : "",
+         mine ? `you: ${ATTENDANCE_NAMES[mine.attendance] || "unmarked"}` : ""].filter(Boolean).join(" · ")
+      : "";
+    el.historyLink.hidden = !ended || isGuest() || myRole === null;
+    el.recordActions.hidden = !ended || (el.markAll.hidden && el.historyLink.hidden);
 
     el.nameWrap.hidden = !isGuest();
     el.who.textContent = isGuest()
@@ -1237,6 +1343,47 @@ function signupErrorMessage(err) {
 
   el.refresh.addEventListener("click", () => { if (!busy) reload(false); });
 
+  /* the clipboard: the roster as text, and the link, from the status row */
+  function toClipboard(text, said) {
+    if (navigator.clipboard && text) {
+      navigator.clipboard.writeText(text).then(() => showNotice(said), () => showNotice(text));
+    } else if (text) {
+      showNotice(text);
+    }
+  }
+  el.copy.addEventListener("click", () => {
+    if (!sheet || !lastBoard) return;
+    toClipboard(sheetText(sheet.event, lastBoard, CATALOG, signupLink(code, location.href)), "Roster copied.");
+  });
+  el.linkTop.addEventListener("click", () => {
+    if (!code) return;
+    toClipboard(signupLink(code, location.href), "Link copied.");
+  });
+
+  /* every build open, or every build folded */
+  function paintBuilds() {
+    for (const cell of el.board.querySelectorAll(".su-slot")) {
+      const position = Number(cell.dataset.position);
+      cell.querySelector("[data-su-build-toggle]").setAttribute("aria-expanded", openBuilds.has(position) ? "true" : "false");
+      cell.querySelector("[data-su-build]").hidden = !openBuilds.has(position);
+    }
+    const all = lastBoard && lastBoard.rows.length && lastBoard.rows.every(r => openBuilds.has(r.position));
+    el.builds.textContent = all ? "Hide builds" : "Show builds";
+    el.builds.setAttribute("aria-pressed", all ? "true" : "false");
+  }
+  el.builds.addEventListener("click", () => {
+    if (!lastBoard) return;
+    const all = lastBoard.rows.every(r => openBuilds.has(r.position));
+    openBuilds.clear();
+    if (!all) for (const r of lastBoard.rows) openBuilds.add(r.position);
+    paintBuilds();
+  });
+
+  /* the guild's history, for a member, once the CTA is completed (the
+     account store opens the registered view; the sheet never calls the
+     history module) */
+  el.historyLink.addEventListener("click", () => { window.Account.open("history"); });
+
   /* the planner is a page load: its address, the comp as the share hash.
      Who holds each slot rides beside it for this tab alone (sessionStorage,
      never the address): the planner shows the names on its roster for that
@@ -1350,7 +1497,7 @@ function signupErrorMessage(err) {
   }
 
   function renderCaller(board) {
-    el.callerWrap.hidden = !caller.manage && !caller.moves.length && !marks.all;
+    el.callerWrap.hidden = !caller.manage && !caller.moves.length;
     el.markAll.hidden = !marks.all;
     el.callerMoves.replaceChildren(...caller.moves.map(to => {
       const b = document.createElement("button");
@@ -1460,7 +1607,7 @@ function signupErrorMessage(err) {
     const tag = document.createElement("span");
     tag.className = "su-att";
     tag.dataset.status = status;
-    tag.textContent = ATTENDANCE_NAMES[status] || status;
+    tag.textContent = (status === "confirmed" ? "✓ " : "") + (ATTENDANCE_NAMES[status] || status);
     return tag;
   }
 
@@ -1590,6 +1737,9 @@ function signupErrorMessage(err) {
     el.board.replaceChildren();
     el.taking.hidden = true;
     lastBoard = null;
+    el.count.hidden = true;
+    el.record.hidden = true;
+    el.recordActions.hidden = true;
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.linkRow.hidden = true;
@@ -1657,6 +1807,9 @@ function signupErrorMessage(err) {
     el.taking.hidden = true;
     lastBoard = null;
     openBuilds.clear();
+    el.count.hidden = true;
+    el.record.hidden = true;
+    el.recordActions.hidden = true;
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.form.hidden = true;

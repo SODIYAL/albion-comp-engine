@@ -1786,6 +1786,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <h2 id="su-title">Sign-up sheet</h2>
         <p class="gd-meta su-when" id="su-when"></p>
       </div>
+      <!-- the start, counted down, and the time in the reader's own calendar (.ics) -->
+      <div class="su-count" id="su-count" hidden>
+        <span class="su-count-big" id="su-count-big"></span>
+        <span class="su-count-sub" id="su-count-sub"></span>
+        <a class="su-ics" id="su-ics" download="cta.ics" href="#">Add to calendar</a>
+      </div>
     </div>
     <p class="auth-msg err" id="su-error" role="alert" hidden></p>
     <p class="auth-msg ok" id="su-notice" role="status" hidden></p>
@@ -1795,6 +1801,9 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
       <span class="ev-status" id="su-status" data-status=""></span>
       <span class="su-counts" id="su-counts"></span>
       <span class="su-live-state" id="su-live-state" data-live="no" aria-live="polite"></span>
+      <button type="button" class="gd-btn" id="su-copy" title="The roster as text, by role, for a channel">Copy roster</button>
+      <button type="button" class="gd-btn" id="su-link-top" title="The link to this sheet">Copy link</button>
+      <button type="button" class="gd-btn" id="su-builds" aria-pressed="false">Show builds</button>
       <button type="button" class="gd-btn" id="su-refresh">Refresh</button>
       <button type="button" class="gd-btn" id="su-open">Open in planner</button>
     </div>
@@ -1856,7 +1865,6 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <section class="su-caller" id="su-caller" aria-labelledby="su-caller-label" hidden>
           <h3 class="pw-label" id="su-caller-label">Caller controls</h3>
           <div class="ev-moves su-caller-moves" id="su-caller-moves"></div>
-          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
           <form class="su-add" id="su-add-form" novalidate hidden>
             <div class="auth-field">
               <label for="su-add-name">Add a player by name</label>
@@ -1881,6 +1889,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <h3 class="su-form-title" id="su-form-label">Sign up</h3>
         <p class="su-taking" id="su-taking" hidden></p>
         <p class="auth-hint" id="su-closed" hidden></p>
+        <!-- once completed the panel is the record: the counts, the caller's mark-everyone, the guild's history -->
+        <p class="su-record" id="su-record" hidden></p>
+        <div class="su-record-actions" id="su-record-actions" hidden>
+          <button type="button" class="gd-btn su-mark-all" id="su-mark-all" hidden>Mark everyone in a slot as attended</button>
+          <button type="button" class="gd-btn" id="su-history-link" hidden>Guild history</button>
+        </div>
         <form class="auth-form" id="su-form" novalidate hidden>
           <p class="auth-hint" id="su-who"></p>
           <div class="auth-field" id="su-name-wrap">

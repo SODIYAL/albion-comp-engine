@@ -320,6 +320,9 @@
   .su-form-wrap{position:static; margin-top:14px}
   .su-band-grid{grid-template-columns:1fr}
   .su-slot-body, .su-build{margin-left:0}
+  /* the countdown drops under the title; the status row's buttons wrap under its counts */
+  .su-count{align-items:flex-start; margin-left:0; padding-left:0; text-align:left; flex-basis:100%}
+  .sheet-page .auth-hd{flex-wrap:wrap}
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}

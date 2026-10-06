@@ -976,9 +976,24 @@ check('id="su-roles"' in sdlg and 'id="su-next-list"' in sdlg and sdlg.find('id=
 check("function sheetBands" in SIGNUP_JS and "sheetBands(board, CATALOG).map(band =>" in SIGNUP_JS and "slotCell(row, board, mineId)" in SIGNUP_JS
       and 'BAND_NAMES = { frontline: "Tanks", support: "Supports", dps: "DPS", healer: "Healers", any: "Any weapon" }' in SIGNUP_JS
       and "<optgroup" not in SIGNUP_JS and 'document.createElement("optgroup")' in SIGNUP_JS
-      and all(s in AUTH_CSS for s in (".su-bands{", ".su-band-hd{", ".su-band-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr))", ".su-slot{", ".su-band.frontline .su-band-name, .su-band.frontline .su-pos{color:var(--role-tank)}"))
+      and all(s in AUTH_CSS for s in (".su-bands{", ".su-band-hd{", ".su-band-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr))", ".su-slot{", ".su-band.frontline .su-band-name, .su-band.frontline .su-pos{color:var(--role-tank)}"))
       and ".su-band-grid{grid-template-columns:1fr}" in LAYOUT,
-      "L32u the roster is grouped into role bands, Tanks, Supports, DPS, Healers, then Any weapon, two slots across (one on a phone), the role's colour on the band's name and its slot numbers; the form's slot list is grouped the same way")
+      "L32u the roster is grouped into role bands, Tanks, Supports, DPS, Healers, then Any weapon, as many slots across as 300px columns fit (one on a phone), the role's colour on the band's name and its slot numbers; the form's slot list is grouped the same way")
+check('id="su-count"' in sdlg and 'id="su-ics"' in sdlg and 'download="cta.ics"' in sdlg and "function eventIcs" in SIGNUP_JS and 'el.ics.href = ics ? `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`' in SIGNUP_JS
+      and "el.countBig.textContent = until;" in SIGNUP_JS and ".su-count{" in AUTH_CSS and ".su-count-big{font-size:var(--fs-title)" in AUTH_CSS and ".su-count{align-items:flex-start" in LAYOUT,
+      "L32x the start counts down beside the title at the title step and the reader can add it to a calendar (an .ics the page writes); on a phone the countdown drops under the title")
+check(all(('id="%s"' % i) in sdlg for i in ("su-copy", "su-link-top", "su-builds")) and "function sheetText" in SIGNUP_JS and "function toClipboard" in SIGNUP_JS
+      and 'toClipboard(sheetText(sheet.event, lastBoard, CATALOG, signupLink(code, location.href)), "Roster copied.")' in SIGNUP_JS and "function paintBuilds" in SIGNUP_JS,
+      "L32y the status row copies the roster as text and the link, and opens or folds every build at once")
+check('id="su-record"' in sdlg and 'id="su-record-actions"' in sdlg and 'id="su-mark-all"' in seg(sdlg, 'id="su-record-actions"', "</div>", "L32z record anchors") and 'id="su-history-link"' in sdlg
+      and 'el.formTitle.textContent = ended ? "Record" : "Sign up";' in SIGNUP_JS and 'el.next.hidden = !tally.next.length || sheet.event.status === "completed";' in SIGNUP_JS
+      and 'free.textContent = ended ? "unfilled" : "free";' in SIGNUP_JS and 'window.Account.open("history")' in SIGNUP_JS and "open(name) {" in read("_auth.js")
+      and '.su-status-row[data-status="completed"] .su-live-state{display:none}' in AUTH_CSS and '.su-bands:not([data-status="completed"]) .su-slot .su-controls{position:absolute' in AUTH_CSS
+      and ".su-free.ended{" in AUTH_CSS and ".su-record{" in AUTH_CSS,
+      "L32z once completed the panel is the record (counts, mark everyone, the guild's history through the account store), fill-next and the live mark go, a slot nobody took reads unfilled, and the marks stay in view; before that the caller's line waits for the pointer over the cell's corner")
+check('${att.confirmed} of ${board.counts.claimed} confirmed`' in SIGNUP_JS and '(status === "confirmed" ? "✓ " : "")' in SIGNUP_JS
+      and 'cell.className = "gd-cov reserve";' in SIGNUP_JS and "playerBlock(s, s.id === mineId, true)" in SIGNUP_JS and ".su-declared-chips{" in AUTH_CSS,
+      "L32aa confirmed reads at a glance (a tick on the name, confirmed of claimed in the status row), the reserves count in the role bar, and a reserve's weapons are chips with their icons")
 check("function takeSlot" in SIGNUP_JS and "dataset.suTake = String(row.position)" in SIGNUP_JS and "function paintPick" in SIGNUP_JS
       and 'id="su-taking"' in sdlg and '<h3 class="su-form-title" id="su-form-label">Sign up</h3>' in sdlg
       and "takeSlot(take.dataset.suTake)" in SIGNUP_JS and 'el.slot.addEventListener("change", paintPick)' in SIGNUP_JS
