@@ -946,8 +946,15 @@ check("codeFromSearch(" in SIGNUP_JS and "location.search" in SIGNUP_JS and "sta
       "L32h the link opens the sheet once the stored session has been read")
 check(not re.search(r"ENG|CompEngine|DATASET|render\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT", SIGNUP_JS),
       "L32i _signup.js reads and writes no planner or engine state")
-check("location.assign(plannerLink(location.href, templateHash(sheet.event, sheet.slots)))" in SIGNUP_JS and "location.hash" not in SIGNUP_JS,
+check("const hash = templateHash(sheet.event, sheet.slots);" in SIGNUP_JS and "location.assign(plannerLink(location.href, hash));" in SIGNUP_JS and "location.hash" not in SIGNUP_JS,
       "L32j the sheet opens a CTA in the planner through the share hash, as a page load of the planner's address")
+check('sessionStorage.setItem(SHEET_WHO_KEY, JSON.stringify(sheetWho(hash, sheetBoard(sheet.slots, sheet.signups))))' in SIGNUP_JS
+      and 'const SHEET_WHO_KEY = "compforge-who";' in SIGNUP_JS and 'const WHO_KEY = "compforge-who";' in APP
+      and "function whoFromSession" in APP and "rec.hash !== h" in APP and "function whoAt" in APP and "r.w === party[i]" in APP
+      and "WHO = order.map(i => WHO[i]);" in APP and "WHO.splice(ri, 1);" in APP
+      and not re.search(r"\bWHO\b|whoAt", seg(APP, "function syncEngine(", "\n}", "L32j2 sync anchors") + seg(APP, "function partyCalc(", "\n}", "L32j2 calc anchors"))
+      and SIGNUP_JS.count("sessionStorage.") == 1 and "&who=" not in SIGNUP_JS and "who" not in seg(APP, "function saveHash()", "\n}", "L32j2 save anchors"),
+      "L32j2 who holds each slot rides to the planner in this tab alone (sessionStorage keyed to the hash, never the address or storage), shows on the board tile while the slot keeps that weapon, follows the roster's order and removals, and is read by no scoring path")
 signup_ui = SIGNUP_JS[SIGNUP_JS.find("(function signupUI()"):]
 check(signup_ui != "" and "window.DB" not in signup_ui and "createClient" not in SIGNUP_JS,
       "L32k the sheet UI calls its helpers, never the Supabase client")

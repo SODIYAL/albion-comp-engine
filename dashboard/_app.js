@@ -230,6 +230,7 @@ function sortPartyByRole(){
   PROV = order.map(i => PROV[i]);
   COMBO = order.map(i => COMBO[i]);
   LOADOUT = order.map(i => LOADOUT[i]);
+  WHO = order.map(i => WHO[i]);
   if (LO_OPEN !== null) LO_OPEN = order.indexOf(LO_OPEN);
   if (LO_PICKING) LO_PICKING.i = order.indexOf(LO_PICKING.i);
   if (REPLACE_OPEN !== null) REPLACE_OPEN = order.indexOf(REPLACE_OPEN);
@@ -539,13 +540,15 @@ function loadHash(){
   /* `k` carries explicit member combos (forge results whose
      E-slot use variant no spell picker can express). Optional like g/f. */
   const rawCombo = comboDecode(p.k || "", rawParty.length);
-  party = []; LOADOUT = []; PROV = []; COMBO = [];
+  const rawWho = whoFromSession(h, rawParty.length);
+  party = []; LOADOUT = []; PROV = []; COMBO = []; WHO = [];
   rawParty.forEach((w, i) => {
     if (!WEAPONS[w] || party.length >= HARD_CAP) return;
     party.push(w);
     LOADOUT[party.length - 1] = rawLoadout[i];
     PROV[party.length - 1] = rawProv[i];
     COMBO[party.length - 1] = rawCombo[i];
+    WHO[party.length - 1] = rawWho[i] ? { w, name: rawWho[i] } : undefined;
   });
   FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
@@ -598,6 +601,27 @@ let PROV = [];
 /* Explicit per-member combo overrides (forge results — e.g. an E-slot use
    variant no picker can express). null/undefined = derive from picks. */
 let COMBO = [];
+/* Who holds each slot, when the comp was opened from a sign-up sheet:
+   WHO[i] = {w, name} for the weapon the name was read for, undefined
+   otherwise. A label on the board tile and nothing more: never a scoring
+   input, never in the address, never saved. The sheet leaves the names
+   in sessionStorage keyed to the hash it opens (compforge-who), so they
+   show for that comp in this tab alone and vanish once the roster is
+   another; a slot whose weapon changed shows no name. */
+let WHO = [];
+const WHO_KEY = "compforge-who";
+function whoFromSession(h, n){
+  try {
+    const rec = JSON.parse(sessionStorage.getItem(WHO_KEY) || "null");
+    if (!rec || rec.hash !== h || !Array.isArray(rec.who)) return [];
+    return rec.who.slice(0, n).map(x => String(x || "").trim());
+  } catch (e) { return []; }
+}
+/* the name on slot i, only while the slot still holds the weapon it was read for */
+function whoAt(i){
+  const r = WHO[i];
+  return r && r.w === party[i] ? r.name : "";
+}
 /* Resolved combos for the current party — recomputed in syncEngine. */
 let COMBOS_CUR = [];
 let GEARS_CUR = [];
@@ -869,7 +893,7 @@ function buildCompBoard(ctx){
         `<div class="dm wf-dm ${roleCls(party[i])}${SHEET_OPEN === i ? " sheet-open" : ""}${PROV[i] === "l" ? " locked" : ""}"
           data-pfrole="${esc(c.name)}${role ? " · " + esc(role) : ""}" data-pfcolor="${c.color}">
           <button class="dm-card wf-mcard" data-member="${i}" aria-label="${esc(nameOf(party[i]))} — slot ${i + 1}, details">
-            ${icon(party[i], 44)}<span class="wf-mnm">${esc(nameOf(party[i]))}${role ? `<small>${esc(role)}</small>` : ""}</span><span class="n mono">${PROV[i] === "l" ? ui("lock", 10) : ""}${String(i + 1).padStart(2, "0")}</span>
+            ${icon(party[i], 44)}<span class="wf-mnm">${esc(nameOf(party[i]))}${whoAt(i) ? `<span class="wf-who">${esc(whoAt(i))}</span>` : ""}${role ? `<small>${esc(role)}</small>` : ""}</span><span class="n mono">${PROV[i] === "l" ? ui("lock", 10) : ""}${String(i + 1).padStart(2, "0")}</span>
           </button>
           <span class="wf-ctl">
             <button class="wf-c wf-lock${PROV[i] === "l" ? " on" : ""}" data-lock="${i}" aria-pressed="${PROV[i] === "l"}" title="${PROV[i] === "l" ? "unlock" : "lock"} ${esc(nameOf(party[i]))}" aria-label="${PROV[i] === "l" ? "Unlock" : "Lock"} ${esc(nameOf(party[i]))}">${ui(PROV[i] === "l" ? "lock" : "unlock", 12)}</button>
@@ -3108,7 +3132,7 @@ document.addEventListener("click", e => {
   const rm = e.target.closest("[data-remove]");
   if (rm){
     const ri = +rm.dataset.remove;
-    party.splice(ri, 1); PROV.splice(ri, 1); COMBO.splice(ri, 1);
+    party.splice(ri, 1); PROV.splice(ri, 1); COMBO.splice(ri, 1); WHO.splice(ri, 1);
     FORGE_NOTE = null; SHEET_OPEN = null;
     REPLACE_OPEN = null; REPLACE_OPTS = [];
     hidePdashFly();   /* indices shift — a kept flyout would show the wrong member */
@@ -3132,7 +3156,7 @@ document.addEventListener("click", e => {
     const b = $("clear");
     if (b.dataset.armed === "1"){
       delete b.dataset.armed; b.textContent = "clear comp";
-      party = []; PROV = []; COMBO = []; FORGE_NOTE = null;
+      party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
          what is true, and "load party" starts it again */

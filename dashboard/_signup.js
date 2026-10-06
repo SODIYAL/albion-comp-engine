@@ -278,6 +278,19 @@ function plannerLink(href, hash) {
 }
 
 
+/* Who holds each member of the comp the planner opens: one name per
+   weapon of the hash's p= list (the slots with a weapon, in position
+   order, as templateHash lists them), "" for a free slot. Keyed to the
+   hash, so the planner shows the names for that comp alone. */
+const SHEET_WHO_KEY = "compforge-who";
+
+function sheetWho(hash, board) {
+  const who = ((board && board.rows) || []).filter(r => r.weapon_id)
+    .map(r => (r.claimant && r.claimant.player_name) || "");
+  return { hash: String(hash || ""), who };
+}
+
+
 /* The board: each slot with its claimant, the reserves (sign-ups without a
    slot), the free positions, and the counts. */
 function sheetBoard(slots, signups) {
@@ -1224,10 +1237,17 @@ function signupErrorMessage(err) {
 
   el.refresh.addEventListener("click", () => { if (!busy) reload(false); });
 
-  /* the planner is a page load: its address, the comp as the share hash */
+  /* the planner is a page load: its address, the comp as the share hash.
+     Who holds each slot rides beside it for this tab alone (sessionStorage,
+     never the address): the planner shows the names on its roster for that
+     hash and nothing else reads them */
   el.open.addEventListener("click", () => {
     if (!sheet) return;
-    location.assign(plannerLink(location.href, templateHash(sheet.event, sheet.slots)));
+    const hash = templateHash(sheet.event, sheet.slots);
+    try {
+      sessionStorage.setItem(SHEET_WHO_KEY, JSON.stringify(sheetWho(hash, sheetBoard(sheet.slots, sheet.signups))));
+    } catch (err) { /* a private window: the planner shows the weapons alone */ }
+    location.assign(plannerLink(location.href, hash));
   });
 
   el.link.addEventListener("click", () => {

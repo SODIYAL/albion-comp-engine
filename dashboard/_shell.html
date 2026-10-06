@@ -939,6 +939,10 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .wf-mnm small{display:block; font-family:var(--mono); font-size:9px;
   letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
   margin-top:1px; overflow:hidden; text-overflow:ellipsis}
+/* who holds the slot (a comp opened from its sign-up sheet): beside the
+   weapon, in the column's role colour, as the sheet shows it */
+.wf-who{margin-left:6px; font-size:11px; color:var(--rc, var(--ink-2))}
+.wf-who::before{content:"· "; color:var(--ink-3)}
 .wf-mcard .n{position:static; margin-left:auto; font-size:9px; color:var(--ink-3); flex:none}
 /* row tiles don't zoom like the strip's squares — highlight in place */
 .wf-comp .dm:hover .dm-card, .wf-comp .dm:focus-within .dm-card{
