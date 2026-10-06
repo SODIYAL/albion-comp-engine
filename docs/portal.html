@@ -31,10 +31,38 @@ main{max-width:1180px;margin:0 auto;padding:28px clamp(16px,4vw,40px) 60px}
 /* the planner's chip: mono 11px, the same tracking, ground and pill */
 .chip{padding:5px 10px;border:1px solid var(--rule);border-radius:99px;background:rgba(18,18,27,.6);font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
 .chip b{color:var(--ink);font-variant-numeric:tabular-nums}
-.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+/* the weapon filter: one search box; the match list opens under it with the weapons this page carries */
+.wfilter{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:22px 0 0}
+.wf-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--quiet)}
+.wf-box{position:relative;flex:0 1 360px;min-width:220px}
+.wf-in{width:100%;padding:8px 34px 8px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.wf-in::placeholder{color:var(--quiet)}
+.wf-in:focus{outline:none;border-color:var(--gold)}
+.wf-in::-webkit-search-cancel-button{display:none}
+.wfilter[data-on="1"] .wf-in{border-color:var(--gold);color:var(--gold-hi);font-weight:600}
+.wf-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:16px;line-height:1;cursor:pointer}
+.wf-clear:hover{background:var(--surface-hi);color:var(--ink)}
+.wf-clear[hidden]{display:none}
+.wf-list{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:6;margin:0;padding:4px;list-style:none;max-height:300px;overflow-y:auto;border:1px solid var(--gold);border-radius:10px;background:var(--surface-hi);box-shadow:0 12px 32px -12px #000}
+.wf-list[hidden]{display:none}
+.wf-list li{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:7px;cursor:pointer}
+.wf-list li img{width:26px;height:26px;border-radius:6px;background:var(--surface)}
+.wf-list li small{margin-left:auto;font-family:var(--mono);font-size:.8em;color:var(--quiet);white-space:nowrap}
+.wf-list li:hover,.wf-list li[aria-selected="true"]{background:rgba(255,201,58,.12);color:var(--gold-hi)}
+.wf-list .wf-none{color:var(--quiet);cursor:default}
+.wf-hint{flex-basis:100%;color:var(--quiet);font-size:.84em}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 14px;border-bottom:1px solid var(--rule);padding-bottom:10px}
 .tab{padding:8px 14px;border:1px solid var(--rule);border-radius:10px;background:var(--surface);color:var(--muted);cursor:pointer;font:inherit}
 .tab[aria-selected="true"]{background:var(--surface-hi);color:var(--ink);border-color:var(--gold)}
 .tab small{display:block;font-size:.76em;color:var(--quiet)}
+/* with a weapon chosen, each tab says how many of the pool's winning parties fielded it */
+.tab .tw{color:var(--gold);font-variant-numeric:tabular-nums}
+.tab .tw.none{color:var(--quiet)}
+/* the chosen weapon's own row and chips */
+tr.row.hit td{background:rgba(255,201,58,.06)}
+.comp .w.hit,.profile .w.hit{border-color:var(--gold);color:var(--gold-hi)}
+.wf-read{margin:0 0 10px;padding:10px 14px;border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:10px;background:var(--surface);color:var(--muted);font-size:.93em}
+.wf-read b{color:var(--ink);font-variant-numeric:tabular-nums}
 .pool-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin:8px 0 12px}
 .pool-head h2{margin:0;font-size:1.35em}
 .pool-head .sub{color:var(--muted);font-size:.9em}
@@ -110,6 +138,7 @@ tr.detail .profile{border:0;background:transparent}
 .note ul{margin:6px 0 0;padding-left:18px}
 .note li{margin:3px 0}
 @media (max-width:640px){.bar{width:54px}th,td{padding:7px 8px}
+.wf-box{flex-basis:100%}.wf-list li small{display:none}   /* the match list keeps each name on one line */
 /* the table scrolls sideways; the weapon stays put over the numbers */
 th:nth-child(2),td:nth-child(2){position:sticky;left:0;z-index:1;background:var(--surface)}
 tr.row:hover td:nth-child(2){background:#181821}
@@ -128,6 +157,16 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     <p>Every killer party the killboard saw inside the Ancient Lands, sorted by matchmaking pool: the weapons that win solo, the builds they wear, and the 3v3, 5v5 and 7v7 comps that come out on top. Read from the killboard, refreshed with every fold.</p>
     <div class="chips" id="chips"></div>
   </section>
+  <!-- the weapon filter: a player's own weapon narrows every pool to what it is in -->
+  <div class="wfilter" id="wfilter">
+    <label class="wf-label" for="wfilter-in">Your weapon</label>
+    <div class="wf-box">
+      <input class="wf-in" id="wfilter-in" type="search" autocomplete="off" spellcheck="false" placeholder="type a weapon to see where it wins" aria-describedby="wfilter-hint" aria-autocomplete="list" aria-controls="wfilter-list">
+      <button class="wf-clear" id="wfilter-clear" type="button" aria-label="clear the weapon filter" hidden>×</button>
+      <ul class="wf-list" id="wfilter-list" role="listbox" hidden></ul>
+    </div>
+    <span class="wf-hint" id="wfilter-hint">Every pool narrows to the weapon: its rank and build, the comps and shapes that fielded it.</span>
+  </div>
   <div class="tabs" id="tabs" role="tablist"></div>
   <div id="pool"></div>
   <aside class="note">
@@ -159,8 +198,45 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     `<span class="chip">as of the last fold <b>${esc(S.generated_at.replace("T", " "))}</b></span>`
   ].join("");
   const tabs = document.getElementById("tabs");
-  tabs.innerHTML = ORDER.map(k => { const p = S.pools[k]; return `<button class="tab" role="tab" data-pool="${k}" aria-selected="false">${esc(p.label)}<small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small></button>`; }).join("");
   const host = document.getElementById("pool");
+  /* ---- the weapon filter ----
+     every weapon this page carries, over every pool: the weapons table,
+     the comps, the shapes and the profile; per pool, how the weapon stands */
+  const WEAPONS = (() => {
+    const by = {};
+    /* pools[k]: the weapon's parties in the pool's table, or true where the
+       pool fields it only in a comp, a shape or the profile (past the table's top) */
+    const add = (w, k, parties) => {
+      if (!w || !w.id) return;
+      const e = by[w.id] || (by[w.id] = {id: w.id, name: w.name || w.id, icon: w.icon || "", pools: {}, total: 0});
+      if (parties !== undefined) { e.pools[k] = parties; e.total += parties; }
+      else if (e.pools[k] === undefined) e.pools[k] = true;
+    };
+    for (const k of ORDER) {
+      const p = S.pools[k];
+      (p.weapons || []).forEach(w => add(w, k, w.parties));
+      (p.comps || []).forEach(c => (c.weapons || []).forEach(w => add(w, k)));
+      (p.shapes || []).forEach(s => Object.values(s.weapons || {}).forEach(ws => ws.forEach(w => add(w, k))));
+      if (p.profile) Object.values(p.profile.weapons || {}).forEach(ws => ws.forEach(w => add(w, k)));
+    }
+    return Object.values(by).sort((a, b) => b.total - a.total || (a.name < b.name ? -1 : 1));
+  })();
+  const weaponOf = id => WEAPONS.find(w => w.id === id) || null;
+  let POOL = "solo", VIEW = "weapons";
+  let WEAPON = null;   /* the chosen weapon's id, or null for the whole page */
+  const wname = () => (weaponOf(WEAPON) || {}).name || WEAPON;
+  const inComp = c => !!WEAPON && (c.weapons || []).some(w => w.id === WEAPON);
+  const inShape = s => !!WEAPON && Object.values(s.weapons || {}).some(ws => ws.some(w => w.id === WEAPON));
+  const hit = id => (WEAPON && id === WEAPON ? " hit" : "");
+  /* each tab: the pool's size; with a weapon chosen, how many of its winning parties fielded it */
+  function renderTabs(){
+    tabs.innerHTML = ORDER.map(k => {
+      const p = S.pools[k], w = weaponOf(WEAPON), stand = w ? w.pools[k] : undefined;
+      const tw = !w ? "" : stand === undefined ? `<small class="tw none">${esc(w.name)}: not seen</small>`
+        : stand === true ? `<small class="tw">${esc(w.name)}: fielded</small>` : `<small class="tw">${esc(w.name)}: ${stand} ${stand === 1 ? "party" : "parties"}</small>`;
+      return `<button class="tab" role="tab" data-pool="${k}" aria-selected="${k === POOL}">${esc(p.label)}<small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small>${tw}</button>`;
+    }).join("");
+  }
   const gearIcon = id => icon(/^T\d+_/.test(id) ? id : "T6_" + id, 68);
   const SLOT_ORDER = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
   /* a slot card: the modal item; a click opens the slot's whole field,
@@ -197,10 +273,24 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     const st = SORT[table], on = st.key === key;
     return `<th class="${cls} sortable" data-sort="${key}" data-table="${table}" ${on ? `aria-sort="${st.dir < 0 ? "descending" : "ascending"}"` : ""} title="order by ${esc(label.toLowerCase())}">${label}<span class="sort-mark">${on && st.dir > 0 ? "&#9652;" : "&#9662;"}</span></th>`;
   }).join("");
+  /* with a weapon chosen the table holds its row alone, at its rank in the
+     current order, the build open; a read above says where it stands */
   function weaponsTable(p){
     if (!p.weapons.length) return `<div class="empty">No portal killer parties of this size have been seen yet. The poll keeps collecting; this page updates with the next fold.</div>`;
-    return `<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th>${th("weapons", WCOLS)}</tr></thead><tbody>${
-      ordered(p.weapons, SORT.weapons).map(({r: w, i}, n) => `<tr class="row" data-w="${i}" aria-expanded="false" title="click for the winning build"><td>${n + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}" hidden><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
+    const rows = ordered(p.weapons, SORT.weapons).map((x, n) => Object.assign(x, {n}));
+    const shown = WEAPON ? rows.filter(({r}) => r.id === WEAPON) : rows;
+    let read = "";
+    if (WEAPON && !shown.length) {
+      const comps = (p.comps || []).filter(inComp).length;
+      return `<div class="empty">${esc(wname())} is not among the ${p.weapons.length} weapons listed for ${esc(p.label)}${p.weapons_total > p.weapons.length ? ` (the table carries the top ${p.weapons.length} of ${p.weapons_total} seen)` : ""}.${
+        comps ? ` It is fielded in ${comps} winning comp${comps === 1 ? "" : "s"}: see Comps that won.` : ""}</div>`;
+    }
+    if (WEAPON) {
+      const by = (WCOLS.find(([k]) => k === SORT.weapons.key) || ["", "parties"])[1].toLowerCase();
+      read = `<p class="wf-read"><b>${esc(wname())}</b> is <b>#${shown[0].n + 1}</b> of ${p.weapons.length} weapons in ${esc(p.label)} by ${esc(by)}${p.weapons_total > p.weapons.length ? ` (top ${p.weapons.length} of ${p.weapons_total} seen)` : ""}. Clear the filter for the whole table.</p>`;
+    }
+    return `${read}<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th>${th("weapons", WCOLS)}</tr></thead><tbody>${
+      shown.map(({r: w, i, n}) => `<tr class="row${hit(w.id)}" data-w="${i}" aria-expanded="${WEAPON ? "true" : "false"}" title="click for the winning build"><td>${n + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}"${WEAPON ? "" : " hidden"}><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
     }</tbody></table></div>`;
   }
   /* a comp's members: what the winners of THIS comp wore, one vote per
@@ -223,7 +313,18 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
      is the count per role class, each weapon read through its primary seat */
   const ROLES = [["frontline", "Frontline"], ["healer", "Healer"], ["support", "Support"], ["dps", "Damage"], ["other", "Unseated"]];
   const roleChips = (rows, of) => (rows || []).map(w =>
-    `<span class="w" title="${esc(w.name)}: ${w.parties} of ${of} parties${w.copies > 1 ? `, ${w.copies} copies where fielded` : ""}">${icon(w.icon, 44)}${esc(w.name)} <small>${pct(w.share)}${w.copies > 1 ? ` ×${w.copies}` : ""}</small></span>`).join("");
+    `<span class="w${hit(w.id)}" title="${esc(w.name)}: ${w.parties} of ${of} parties${w.copies > 1 ? `, ${w.copies} copies where fielded` : ""}">${icon(w.icon, 44)}${esc(w.name)} <small>${pct(w.share)}${w.copies > 1 ? ` ×${w.copies}` : ""}</small></span>`).join("");
+  /* the chosen weapon's own line over the profile: the seat it fills and
+     in what share of the winning parties */
+  function profileRead(p){
+    const pr = p.profile;
+    if (!WEAPON || !pr) return "";
+    for (const [k, label] of ROLES) {
+      const w = (pr.weapons[k] || []).find(x => x.id === WEAPON);
+      if (w) return `<p class="wf-read">In ${esc(p.label)}, <b>${esc(w.name)}</b> fills the ${esc(label.toLowerCase())} seat in <b>${pct(w.share)}</b> of the ${pr.parties} winning parties with every weapon known${w.copies > 1 ? `, <b>${w.copies}</b> copies where fielded` : ""}.</p>`;
+    }
+    return `<p class="wf-read"><b>${esc(wname())}</b> is not among the weapons that most often fill a seat in ${esc(p.label)}.</p>`;
+  }
   function profileHtml(p){
     const pr = p.profile;
     if (!pr) return "";
@@ -233,7 +334,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       return `<div class="role-row"><div class="role-n"><b>${range}</b><span>${esc(label)}</span><small title="over the ${pr.parties} parties: the middle half of the count, its median, and the extremes">median ${r.p50} · ${r.min} to ${r.max}</small></div><div class="comp">${roleChips(pr.weapons[k], pr.parties) || '<span class="v">none fielded</span>'}</div></div>`;
     }).join("");
     return `<section class="block" id="profile"><h3>A winning roster, role by role (${pr.parties} parties with every weapon known)</h3>
-      <div class="profile">${rows}</div>
+      ${profileRead(p)}<div class="profile">${rows}</div>
       <p class="fine">The count is the middle half of the winning parties; beside it, the weapons that fill the role, with the share of parties fielding one. ${pr.shapes_distinct} distinct role shapes across ${pr.parties} parties${pr.shapes_distinct > pr.parties / 2 ? ": at this size no single shape dominates, so read the ranges" : ""}.</p></section>`;
   }
   const shapeLabel = c => ROLES.filter(([k]) => c[k]).map(([k, label]) => `<span class="shape-n"><b>${c[k]}</b> ${esc(label.toLowerCase())}</span>`).join("");
@@ -241,34 +342,49 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     return `<div class="profile">${ROLES.filter(([k]) => (s.weapons || {})[k]).map(([k, label]) =>
       `<div class="role-row"><div class="role-n"><b>${s.counts[k] || 0}</b><span>${esc(label)}</span></div><div class="comp">${roleChips(s.weapons[k], s.n)}</div></div>`).join("")}</div>`;
   }
+  /* with a weapon chosen, the shapes and the comps are those that fielded it */
   function shapesTable(p){
     if (!p.shapes) return "";
-    const body = p.shapes.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Shape</th>${th("shapes", SCOLS)}</tr></thead><tbody>${
-      ordered(p.shapes, SORT.shapes).map(({r: s, i}, n) => `<tr class="row" data-s="${i}" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`).join("")
-    }</tbody></table></div>` : `<div class="empty">No role shape has been seen ${S.thresholds.comp_sightings} times yet.</div>`;
-    return `<section class="block" id="shapes"><h3>Shapes that won (members per role, seen ${S.thresholds.comp_sightings}+ times; click a row for the weapons in each role)</h3>${body}</section>`;
+    const shapes = WEAPON ? p.shapes.filter(inShape) : p.shapes;
+    const body = shapes.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Shape</th>${th("shapes", SCOLS)}</tr></thead><tbody>${
+      ordered(shapes, SORT.shapes).map(({r: s}, n) => { const i = p.shapes.indexOf(s); return `<tr class="row" data-s="${i}" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`; }).join("")
+    }</tbody></table></div>` : WEAPON && p.shapes.length ? `<div class="empty">None of the ${p.shapes.length} shapes seen ${S.thresholds.comp_sightings}+ times fielded ${esc(wname())}.</div>`
+      : `<div class="empty">No role shape has been seen ${S.thresholds.comp_sightings} times yet.</div>`;
+    return `<section class="block" id="shapes"><h3>Shapes that won${WEAPON ? ` with ${esc(wname())}` : ""} (members per role, seen ${S.thresholds.comp_sightings}+ times; click a row for the weapons in each role)</h3>${body}</section>`;
   }
   function compsTable(p){
     if (p.sizes[0] < 2) return "";
-    const body = p.comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th>${th("comps", CCOLS)}</tr></thead><tbody>${
-      ordered(p.comps, SORT.comps).map(({r: c, i}, n) => `<tr class="row" data-c="${i}" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`).join("")
-    }</tbody></table></div>` : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
-    const exact = p.shapes ? "Exact comps that won (the same weapons copy for copy" : "Comps that won (every member's weapon known";
-    return `<section class="block" id="comps"><h3>${exact}, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}${
+    const comps = WEAPON ? p.comps.filter(inComp) : p.comps;
+    const body = comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th>${th("comps", CCOLS)}</tr></thead><tbody>${
+      ordered(comps, SORT.comps).map(({r: c}, n) => { const i = p.comps.indexOf(c); return `<tr class="row" data-c="${i}" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w${hit(w.id)}">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`; }).join("")
+    }</tbody></table></div>` : WEAPON && p.comps.length ? `<div class="empty">None of the ${p.comps.length} comps seen ${S.thresholds.comp_sightings}+ times in ${esc(p.label)} fielded ${esc(wname())}.</div>`
+      : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
+    const exact = p.shapes ? "Exact comps that won" : "Comps that won";
+    const known = p.shapes ? "the same weapons copy for copy" : "every member's weapon known";
+    return `<section class="block" id="comps"><h3>${exact}${WEAPON ? ` with ${esc(wname())}` : ""} (${known}, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}${
       p.shapes && p.profile && p.comps.length < 10 ? `<p class="fine">An exact comp rarely repeats at this size: ${p.profile.parties} parties with every weapon known field almost as many different rosters. The roles and shapes above are the read that recurs.</p>` : ""}</section>`;
   }
   /* ---- the pool: one view at a time, weapons or comps ---- */
-  let POOL = "solo", VIEW = "weapons";
   function show(k, view){
     const p = S.pools[k];
     POOL = k;
     const hasComps = p.sizes[0] >= 2;
     VIEW = hasComps && (view || VIEW) === "comps" ? "comps" : "weapons";
-    tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.pool === k ? "true" : "false"));
+    renderTabs();
+    const compsCount = !hasComps ? "" : p.shapes
+      ? (WEAPON ? `${p.shapes.filter(inShape).length} of ${p.shapes.length} shapes` : `${p.shapes.length} shapes`)
+      : (WEAPON ? `${p.comps.filter(inComp).length} of ${p.comps.length}` : `${p.comps.length}`);
     host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span>
-      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${p.shapes ? p.shapes.length + " shapes" : p.comps.length}</small></button></div>` : ""}</div>
+      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${compsCount}</small></button></div>` : ""}</div>
       ${VIEW === "comps" ? profileHtml(p) + shapesTable(p) + compsTable(p) : `<section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>`}`;
     try { localStorage.setItem("portal-pool", k); localStorage.setItem("portal-view", VIEW); } catch (e) {}
+    syncHash();
+  }
+  /* the address carries the pool, the view and the weapon: #seven/comps/2H_POLEHAMMER */
+  function syncHash(){
+    if (typeof history === "undefined" || !history.replaceState) return;
+    const next = "#" + [POOL, VIEW].concat(WEAPON ? [WEAPON] : []).join("/");
+    if (location.hash !== next) history.replaceState(null, "", next);
   }
   tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
   host.addEventListener("click", e => {
@@ -299,16 +415,82 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     r.setAttribute("aria-expanded", open ? "false" : "true");
     if (d) d.hidden = open;
   });
-  let start = "solo", startView = "weapons";
+  /* ---- the filter's box: type to match, pick from the list, clear ---- */
+  const wf = document.getElementById("wfilter"), wfIn = document.getElementById("wfilter-in"),
+        wfClear = document.getElementById("wfilter-clear"), wfList = document.getElementById("wfilter-list");
+  const LIST_MAX = 14;
+  const matches = q => {
+    const t = String(q || "").trim().toLowerCase();
+    return (t ? WEAPONS.filter(w => w.name.toLowerCase().includes(t) || w.id.toLowerCase().includes(t)) : WEAPONS).slice(0, LIST_MAX);
+  };
+  function renderList(q){
+    const rows = matches(q);
+    wfList.innerHTML = rows.length ? rows.map((w, n) => {
+      const pools = ORDER.filter(k => w.pools[k] !== undefined).map(k => S.pools[k].label).join(" · ");
+      return `<li role="option" data-id="${esc(w.id)}" aria-selected="${n === 0}">${icon(w.icon, 44)}${esc(w.name)}<small>${esc(pools)}</small></li>`;
+    }).join("") : `<li class="wf-none">No weapon on this page matches. The page lists the weapons seen on winning portal parties.</li>`;
+    wfList.hidden = false;
+  }
+  const hideList = () => { wfList.hidden = true; };
+  const selected = () => wfList.querySelector('li[aria-selected="true"]');
+  function setWeapon(id){
+    WEAPON = id && weaponOf(id) ? id : null;
+    wf.dataset.on = WEAPON ? "1" : "0";
+    wfIn.value = WEAPON ? wname() : "";
+    wfClear.hidden = !WEAPON;
+    hideList();
+    try { if (WEAPON) localStorage.setItem("portal-weapon", WEAPON); else localStorage.removeItem("portal-weapon"); } catch (e) {}
+    show(POOL, VIEW);
+  }
+  wfIn.addEventListener("input", () => {
+    if (WEAPON && wfIn.value !== wname()) { WEAPON = null; wf.dataset.on = "0"; wfClear.hidden = true; show(POOL, VIEW); }
+    renderList(wfIn.value);
+  });
+  wfIn.addEventListener("focus", () => { if (!WEAPON) renderList(wfIn.value); });
+  wfIn.addEventListener("click", () => { if (wfList.hidden) renderList(WEAPON ? "" : wfIn.value); });
+  wfIn.addEventListener("keydown", e => {
+    if (e.key === "Escape") { hideList(); if (!WEAPON) wfIn.value = ""; return; }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (wfList.hidden) { renderList(wfIn.value); return; }
+      const items = Array.from(wfList.querySelectorAll("li[data-id]"));
+      if (!items.length) return;
+      const at = items.indexOf(selected());
+      const next = items[(at + (e.key === "ArrowDown" ? 1 : items.length - 1)) % items.length];
+      items.forEach(li => li.setAttribute("aria-selected", li === next ? "true" : "false"));
+      e.preventDefault();
+      return;
+    }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (wfList.hidden) renderList(wfIn.value);
+      const li = selected() || wfList.querySelector("li[data-id]");
+      if (li) setWeapon(li.dataset.id);
+    }
+  });
+  /* a press on a match chooses it before the box loses focus */
+  wfList.addEventListener("mousedown", e => {
+    const li = e.target.closest("li[data-id]");
+    if (!li) return;
+    e.preventDefault();
+    setWeapon(li.dataset.id);
+  });
+  wfIn.addEventListener("blur", () => { setTimeout(() => { hideList(); if (!WEAPON && wfIn.value && !matches(wfIn.value).length) wfIn.value = ""; }, 120); });
+  wfClear.addEventListener("click", () => { setWeapon(null); wfIn.focus(); });
+
+  let start = "solo", startView = "weapons", startWeapon = null;
   try {
     const s = localStorage.getItem("portal-pool"); if (s && S.pools[s]) start = s;
     const v = localStorage.getItem("portal-view"); if (v === "comps") startView = v;
+    const w = localStorage.getItem("portal-weapon"); if (w && weaponOf(w)) startWeapon = w;
   } catch (e) {}
-  /* #seven or #seven/comps */
-  const [hashPool, hashView] = location.hash.replace("#", "").split("/");
+  /* #seven, #seven/comps or #seven/comps/2H_POLEHAMMER */
+  const [hashPool, hashView, hashWeapon] = location.hash.replace("#", "").split("/");
   if (S.pools[hashPool]) start = hashPool;
   if (hashView === "comps" || hashView === "weapons") startView = hashView;
-  show(start, startView);
+  let hw = ""; try { hw = decodeURIComponent(hashWeapon || ""); } catch (e) { /* a malformed address names no weapon */ }
+  if (hw && weaponOf(hw)) startWeapon = hw;
+  POOL = start; VIEW = startView;
+  setWeapon(startWeapon);
 })();
 </script>
 </body>

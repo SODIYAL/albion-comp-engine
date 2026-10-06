@@ -78,15 +78,15 @@ function boot(hash, stored) {
   const store = Object.assign({}, stored || {});
   const mk = () => {
     const h = {};
-    return {innerHTML: "", h, addEventListener: (t, f) => { h[t] = f; },
-            querySelectorAll: () => [], querySelector: () => null};
+    return {innerHTML: "", h, dataset: {}, value: "", hidden: false, addEventListener: (t, f) => { h[t] = f; },
+            querySelectorAll: () => [], querySelector: () => null, focus() {}};
   };
-  const els = {chips: mk(), tabs: mk(), pool: mk()};
+  const els = {chips: mk(), tabs: mk(), pool: mk(), wfilter: mk(), "wfilter-in": mk(), "wfilter-clear": mk(), "wfilter-list": mk()};
   const ctx = {
     PORTAL_STATS: STATS, console,
     document: {getElementById: id => els[id]},
     location: {hash: hash || ""},
-    localStorage: {getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }},
+    localStorage: {getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; }},
   };
   vm.createContext(ctx);
   vm.runInContext(SCRIPT, ctx);
@@ -99,6 +99,11 @@ function boot(hash, stored) {
     tab: k => els.tabs.h.click({target: target(".tab", {pool: k})}),
     view: v => els.pool.h.click({target: target(".view", {view: v})}),
     sort: (table, key) => els.pool.h.click({target: target("th.sortable", {table, sort: key})}),
+    /* the filter box: a typed query, a press on a match, the clear button */
+    type: q => { els["wfilter-in"].value = q; els["wfilter-in"].h.input(); },
+    pick: id => els["wfilter-list"].h.mousedown({target: target("li[data-id]", {id}), preventDefault() {}}),
+    clear: () => els["wfilter-clear"].h.click(),
+    list: () => els["wfilter-list"].innerHTML,
   };
 }
 /* the data rows' first cell text after the rank, in page order */
@@ -173,6 +178,49 @@ check("PP7 where no shape recurs the page says so and the profile carries the re
 p = boot("", {"portal-pool": "five", "portal-view": "comps"});
 check("PP8 a return visit opens the remembered pool and view; the address wins over memory",
       p.html().includes('id="comps"') && boot("#solo", {"portal-pool": "five"}).html().includes(">DELTA<"));
+
+/* ---- the weapon filter ---- */
+p = boot("#solo");
+p.type("alp");
+check("PP9 typing lists the matching weapons with the pools that carry them; the first is selected",
+      p.list().includes('data-id="ALPHA"') && !p.list().includes('data-id="BRAVO"') && /data-id="ALPHA" aria-selected="true"/.test(p.list())
+      && p.list().includes("Solo · 5v5 · 7v7") && !p.els["wfilter-list"].hidden, p.list());
+p.type("zzz");
+check("PP9b a query no weapon matches says so", p.list().includes("No weapon on this page matches"));
+p.pick("ALPHA");
+check("PP9c a chosen weapon narrows the weapons table to its row at its rank, the build open, the read stating where it stands; it is remembered and in the address",
+      (p.html().match(/<tr class="row/g) || []).length === 1 && p.html().includes('class="row hit"') && p.html().includes('aria-expanded="true"')
+      && p.html().includes("<b>ALPHA</b> is <b>#1</b> of 4 weapons in Solo by parties") && !p.html().includes('data-for="0" hidden')
+      && p.store["portal-weapon"] === "ALPHA" && p.els["wfilter-in"].value === "ALPHA" && p.els.wfilter.dataset.on === "1" && !p.els["wfilter-clear"].hidden,
+      p.html());
+p.sort("weapons", "kd");
+check("PP9d the rank follows the order: by K/D ALPHA is third",
+      p.html().includes("<b>ALPHA</b> is <b>#3</b> of 4 weapons in Solo by k/d"), p.html());
+check("PP9e every tab says how many of its winning parties fielded the weapon, or that it is not seen",
+      p.els.tabs.innerHTML.includes("ALPHA: 9 parties") && p.els.tabs.innerHTML.includes('class="tw none">ALPHA: not seen')
+      && p.els.tabs.innerHTML.includes("ALPHA: fielded"), p.els.tabs.innerHTML);
+p.tab("trio");
+check("PP9f a pool without the weapon says so instead of an empty table", p.html().includes("No portal killer parties of this size"));
+p.tab("five");
+check("PP9g a pool whose table lacks the weapon but whose comps field it points to the comps",
+      boot("#five/weapons/BRAVO").html().includes("BRAVO is not among the 1 weapons listed for 5v5") && boot("#five/weapons/BRAVO").html().includes("fielded in 1 winning comp:"));
+p.view("comps");
+check("PP9h the comps view narrows to the comps that fielded the weapon, its chip marked, the switch counting them",
+      (p.html().match(/<tr class="row"/g) || []).length === 1 && p.html().includes('class="w hit"') && p.html().includes(">ALPHA<") && !p.html().includes(">DELTA<")
+      && p.html().includes("Comps that won with ALPHA") && p.html().includes("<small>1 of 2</small>"), p.html());
+p = boot("#seven/comps/CHARLIE");
+check("PP9i the address opens a pool, a view and a weapon: the profile reads the weapon's seat and share; shapes without it are gone",
+      p.html().includes("<b>CHARLIE</b> fills the healer seat in <b>47%</b> of the 390 winning parties") && p.html().includes("None of the 2 shapes seen 2+ times fielded CHARLIE")
+      && p.html().includes("None of the 1 comps seen 2+ times in 7v7 fielded CHARLIE") && p.els["wfilter-in"].value === "CHARLIE", p.html());
+p = boot("#seven/comps/ALPHA");
+check("PP9j a shape that fields the weapon stays, the switch counting shapes",
+      p.html().includes("<b>5</b> damage") && !p.html().includes("<b>2</b> frontline") && p.html().includes("<small>1 of 2 shapes</small>")
+      && p.html().includes("<b>ALPHA</b> is not among the weapons that most often fill a seat in 7v7"), p.html());
+p.clear();
+check("PP9k clearing the filter restores the whole page and forgets the weapon",
+      p.html().includes("<b>2</b> frontline") && !("portal-weapon" in p.store) && p.els["wfilter-in"].value === "" && p.els["wfilter-clear"].hidden);
+check("PP9l a remembered weapon returns with the page; an unknown one in the address is ignored",
+      boot("#solo", {"portal-weapon": "BRAVO"}).html().includes("<b>BRAVO</b> is <b>#2</b>") && !boot("#solo/weapons/NOPE").html().includes("wf-read"));
 
 console.log(failed ? `\n${failed} portal-page test(s) failed` : `\nall ${passed} portal-page tests pass`);
 process.exit(failed ? 1 : 0);
