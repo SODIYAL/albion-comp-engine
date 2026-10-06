@@ -1795,6 +1795,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
       <button type="button" class="gd-btn" id="su-open">Open in planner</button>
     </div>
     <div class="gd-coverage su-roles" id="su-roles" aria-label="Slots held of slots planned, per role"></div>
+    <!-- the open slots to fill next; while sign-up is open each is a button that picks the slot in the form -->
     <div class="su-next" id="su-next" hidden>
       <span class="pw-label su-next-label" id="su-next-label">Fill next</span>
       <ul class="su-next-list" id="su-next-list" aria-labelledby="su-next-label"></ul>
@@ -1803,18 +1804,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
 
     <div class="su-grid">
       <section class="su-board-wrap" aria-labelledby="su-board-label">
-        <h3 class="pw-label" id="su-board-label">Roster</h3>
-        <table class="gd-table cp-table su-table" id="su-board-table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Weapon</th>
-              <th scope="col">Role</th>
-              <th scope="col">Player</th>
-            </tr>
-          </thead>
-          <tbody id="su-board"></tbody>
-        </table>
+        <h3 class="sr-only" id="su-board-label">Roster</h3>
+        <!-- the roster as role bands (Tanks, Supports, DPS, Healers, Any weapon),
+             each slot a cell: its number, weapon and player, a free slot's
+             Sign up button, the caller's quiet control line, and the slot's
+             build (a place the build module fills) -->
+        <div class="su-bands" id="su-board" aria-labelledby="su-board-label"></div>
         <div id="su-reserves-wrap" hidden>
           <h3 class="pw-label" id="su-reserves-label">Reserves</h3>
           <ul class="su-reserves" id="su-reserves" aria-labelledby="su-reserves-label"></ul>
@@ -1875,8 +1870,12 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         </section>
       </section>
 
+      <!-- the sign-up panel: the one brass element of the page; a free slot's
+           button fills its slot list, and the line under the heading names
+           the slot being taken -->
       <section class="su-form-wrap" id="su-form-wrap" aria-labelledby="su-form-label">
-        <h3 class="pw-label" id="su-form-label">Your sign-up</h3>
+        <h3 class="su-form-title" id="su-form-label">Sign up</h3>
+        <p class="su-taking" id="su-taking" hidden></p>
         <p class="auth-hint" id="su-closed" hidden></p>
         <form class="auth-form" id="su-form" novalidate hidden>
           <p class="auth-hint" id="su-who"></p>

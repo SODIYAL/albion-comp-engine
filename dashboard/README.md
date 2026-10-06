@@ -312,26 +312,47 @@ and its tests: `supabase/README.md`.
   (`CAP_LABEL`, `CAP_PROSE`), read at call time. Descriptive, like
   every analyzer in the planner: the engine ranks, the module
   translates; the definitions stand under the read.
+- **`_build.js`** (platform phase 12) is the build on the sheet: the
+  loadout the planner saved for each slot, named. A CTA's share hash
+  carries the comp's weapons (`p=`) and, per member, the gear and the
+  Q/W/passive picks (`g=`, the codec in `_loadout.js`); `sheetBuilds`
+  reads them for every slot and names helm, armor, boots, cape,
+  off-hand, potion and food with their art (`GEAR`, the render service
+  with the picker's retry) and the picked spells and the weapon's E
+  (`SPELLS`). A slot is the member at its position; its build holds
+  while the slot still names that member's weapon. A slot with no
+  weapon, a changed weapon and a comp saved without loadouts each say
+  so (`tests/test_sheet_build.js`). Display only: it scores nothing,
+  writes nothing and reaches no table. After every `sheet-read` it
+  fills the build place each slot cell leaves empty (folded until the
+  slot's Build toggle opens it; the open ones survive a redraw), which
+  the sign-up module never fills.
 - **`ACCOUNT_CATALOG`** (built by `build.py` beside `_profile.js`): every
   weapon line's display name, role class and render item. The role is the
   engine's `role_class`, stamped at build — the account layer never calls
   the engine, and `test_dashboard_layout.py` L28 pins the stamp against it.
 - **Isolated from the planner.** The Supabase library, `_supabase.js`,
   `_auth.js`, `_profile.js`, `_guild.js`, `_comps.js`, `_events.js`,
-  `_signup.js`, `_history.js`, `_import.js` and `_roster.js` load after the planner, each in its own
+  `_signup.js`, `_history.js`, `_import.js`, `_roster.js` and `_build.js` load after the planner, each in its own
   `<script>`: a blocked or slow CDN never holds the first paint, and a throw
   there stops only itself. The account layer reads and writes no planner
   state and never scores; the planner never calls it. The one account
   surface that reads the engine is the sheet's engine read
   (`_roster.js`): its own engine instance on the roster's weapon keys,
-  display only.
+  display only. The sheet's build read (`_build.js`) reads the
+  planner's gear and spell tables and its codec, nothing of its state.
 - **Dialog conventions** (the design check in the decision log): every
   part of the account layer gives the `hidden` attribute its meaning
   whatever display its class sets (`.auth-dialog [hidden]`, the
   `.lf-sync` lesson); a comp or CTA slot is one line (icon, name, role
   tag); each dialog has one primary action, the side column's creators
   and the rename are secondary; the list dialogs open with focus on
-  their title, the sign-in and profile dialogs on their first field; a
+  their title, the sign-in and profile dialogs on their first field; the
+  sheet page groups its slots into role bands (Tanks, Supports, DPS,
+  Healers, Any weapon; two slots across, one on a phone), its sign-up
+  panel is the page's one brass element, pinned beside the roster, and
+  every free slot's button names that slot in it; the caller's line
+  under a player reads "Move to…", the mark and the removal; a
   sheet that takes no sign-up keeps no column for the form; a numeric
   table header is aligned by class (`hs-num`), never by position; small
   text inside the dialogs uses the layer's own tertiary grey and melee
@@ -349,7 +370,7 @@ and its tests: `supabase/README.md`.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
 `tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js`,
-`tests/test_history.js`, `tests/test_import.js` and `tests/test_roster.js` pin validation, error wording, the name fallback,
+`tests/test_history.js`, `tests/test_import.js`, `tests/test_roster.js` and `tests/test_sheet_build.js` pin validation, error wording, the name fallback,
 link parsing, the weapon lists and search, the member table and role
 powers, the share hash both ways, the statuses and their moves, the
 times, the calendar, the sheet's board, link, record and channel, the

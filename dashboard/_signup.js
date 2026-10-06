@@ -300,12 +300,31 @@ function sheetBoard(slots, signups) {
 }
 
 
-/* The tally: slots held of slots planned per role (the catalog's role
-   class: one role read), and the open slots to fill next, grouped by
-   role in the comp's order. A slot counts for its weapon's role; a slot
-   with no weapon is planned as "any", and held by the role of its
-   claimant's first declared weapon, else as "any". The "any" row is
-   listed only when a slot falls in it. */
+/* The roster's bands: the slots grouped by role (the catalog's role class:
+   one role read) in the comp's order, Tanks, Supports, DPS, Healers, then
+   the slots with no weapon under "Any weapon"; each band with its slots
+   held of planned. A slot sits in its weapon's band. A band with no
+   slot is left out. */
+const BAND_NAMES = { frontline: "Tanks", support: "Supports", dps: "DPS", healer: "Healers", any: "Any weapon" };
+
+function sheetBands(board, catalog) {
+  const bands = ROLE_ORDER.concat(["any"]).map(role => ({ role, name: BAND_NAMES[role], held: 0, planned: 0, rows: [] }));
+  for (const slot of (board && board.rows) || []) {
+    const role = (slot.weapon_id ? weaponInfo(catalog, slot.weapon_id).role : null) || "any";
+    const band = bands.find(b => b.role === role);
+    band.rows.push(slot);
+    band.planned += 1;
+    if (slot.claimant) band.held += 1;
+  }
+  return bands.filter(b => b.rows.length);
+}
+
+
+/* The tally: slots held of slots planned per role, and the open slots to
+   fill next, grouped by role in the comp's order. A slot counts for its
+   weapon's role; a slot with no weapon is planned as "any", and held by
+   the role of its claimant's first declared weapon, else as "any". The
+   "any" row is listed only when a slot falls in it. */
 function sheetTally(board, catalog) {
   const roles = ROLE_ORDER.map(role => ({ role, name: ROLE_NAMES[role], held: 0, planned: 0 }));
   const any = { role: "any", name: "Any weapon", held: 0, planned: 0 };
@@ -596,6 +615,7 @@ function signupErrorMessage(err) {
     next: $id("su-next"),
     nextList: $id("su-next-list"),
     board: $id("su-board"),
+    taking: $id("su-taking"),
     reserves: $id("su-reserves"),
     reservesWrap: $id("su-reserves-wrap"),
     closed: $id("su-closed"),
@@ -629,7 +649,6 @@ function signupErrorMessage(err) {
     add: $id("su-add"),
     statusRow: $id("su-status-row"),
     boardLabel: $id("su-board-label"),
-    table: $id("su-board-table"),
     linkRow: $id("su-link-row"),
     formWrap: $id("su-form-wrap")
   };
@@ -650,6 +669,8 @@ function signupErrorMessage(err) {
   let leave = null;            /* leaves the CTA's channel */
   let liveTimer = null;
   let whenTimer = null;        /* keeps the countdown to the start current */
+  let lastBoard = null;        /* the board as last drawn: the pick line and the take buttons read it */
+  const openBuilds = new Set();   /* the slots whose build is unfolded, kept across redraws */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -704,7 +725,9 @@ function signupErrorMessage(err) {
     return img;
   }
 
-  function weaponCell(key) {
+  /* icon and name; the role tag too unless the place already says the
+     role (a band, a group of the fill-next line) */
+  function weaponCell(key, tagged) {
     const wrap = document.createElement("span");
     wrap.className = "su-weapon";
     if (!key) {
@@ -720,13 +743,20 @@ function signupErrorMessage(err) {
     const name = document.createElement("span");
     name.textContent = info.known ? info.name : key;
     wrap.append(name);
-    if (info.role) wrap.append(roleTag(info.role));
+    if (info.role && tagged !== false) wrap.append(roleTag(info.role));
     return wrap;
+  }
+
+  /* whether a slot can be taken from this page now: sign-up is open and
+     the slot is free */
+  function takeable(row) {
+    return !!(sheet && sheet.event.status === "open" && !row.claimant);
   }
 
   /* the role bar: slots held of slots planned per role, and the open
      slots to fill next, each with its icon, grouped by role in the
-     comp's order */
+     comp's order; while sign-up is open each is a button that picks the
+     slot in the form */
   function renderRoles(board) {
     const tally = sheetTally(board, CATALOG);
     el.roles.replaceChildren(...tally.roles.map(r => {
@@ -738,6 +768,7 @@ function signupErrorMessage(err) {
       return cell;
     }));
     el.next.hidden = !tally.next.length;
+    const open = sheet.event.status === "open";
     el.nextList.replaceChildren(...tally.next.map(group => {
       const li = document.createElement("li");
       li.className = "su-next-group";
@@ -746,8 +777,13 @@ function signupErrorMessage(err) {
       tag.textContent = group.name;
       li.append(tag);
       for (const slot of group.slots) {
-        const chip = document.createElement("span");
+        const chip = document.createElement(open ? "button" : "span");
         chip.className = "gd-weapon su-next-slot";
+        if (open) {
+          chip.type = "button";
+          chip.dataset.suTake = String(slot.position);
+          chip.title = `Take slot ${slot.position}`;
+        }
         const art = slot.weapon_id ? weaponArt(slot.weapon_id) : null;
         if (art) chip.append(art);
         const pos = document.createElement("span");
@@ -760,37 +796,130 @@ function signupErrorMessage(err) {
     }));
   }
 
-  function playerCell(s, mine) {
-    const td = document.createElement("td");
-    td.className = "su-player";
-    if (!s) {
-      const free = document.createElement("span");
-      free.className = "su-free";
-      free.textContent = "free";
-      td.append(free);
-      return td;
-    }
+  /* the player in a slot or on the reserves: name, mark, the small print
+     and what they declared */
+  function playerBlock(s, mine) {
+    const block = document.createElement("div");
+    block.className = "su-player";
     const name = document.createElement("span");
     name.className = "gd-name";
     name.textContent = s.player_name + (mine ? " (you)" : "");
-    td.append(name);
-    if (s.attendance && s.attendance !== "signed_up") td.append(attendanceTag(s.attendance));
-    const sub = document.createElement("span");
-    sub.className = "gd-sub";
+    block.append(name);
+    if (s.attendance && s.attendance !== "signed_up") block.append(attendanceTag(s.attendance));
     const parts = [];
     if (s.item_power) parts.push(`${s.item_power} IP`);
     if (s.can_swap) parts.push("can swap");
     if (!s.account) parts.push("guest");
     if (s.note) parts.push(s.note);
-    sub.textContent = parts.join(" · ");
-    td.append(sub);
+    if (parts.length) {
+      const sub = document.createElement("span");
+      sub.className = "gd-sub";
+      sub.textContent = parts.join(" · ");
+      block.append(sub);
+    }
     if (s.weapons && s.weapons.length) {
       const list = document.createElement("span");
       list.className = "su-declared";
-      list.textContent = s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ");
-      td.append(list);
+      list.textContent = "brings " + s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ");
+      block.append(list);
     }
-    return td;
+    return block;
+  }
+
+  /* a slot's cell in its band: number, weapon (the caller's list), the
+     slot's own label and note, the build toggle; then the player with
+     the caller's line, or the free mark with its button; then the place
+     the build module fills */
+  function slotCell(row, board, mineId) {
+    const cell = document.createElement("div");
+    cell.className = "su-slot" + (row.claimant ? "" : " free")
+      + (row.claimant && row.claimant.id === mineId ? " su-mine" : "")
+      + (takeable(row) && String(row.position) === el.slot.value ? " su-pick" : "");
+    cell.dataset.position = String(row.position);
+
+    const hd = document.createElement("div");
+    hd.className = "su-slot-hd";
+    const pos = document.createElement("span");
+    pos.className = "su-pos";
+    pos.textContent = String(row.position);
+    hd.append(pos, caller.manage ? slotWeaponPick(row) : weaponCell(row.weapon_id, false));
+    if (row.role || row.note) {
+      const note = document.createElement("span");
+      note.className = "su-slot-note";
+      note.textContent = [row.role, row.note].filter(Boolean).join(" · ");
+      hd.append(note);
+    }
+    const fold = document.createElement("button");
+    fold.type = "button";
+    fold.className = "su-build-toggle";
+    fold.dataset.suBuildToggle = String(row.position);
+    fold.setAttribute("aria-expanded", openBuilds.has(row.position) ? "true" : "false");
+    fold.textContent = "Build";
+    hd.append(fold);
+    cell.append(hd);
+
+    const body = document.createElement("div");
+    body.className = "su-slot-body";
+    if (row.claimant) {
+      body.append(playerBlock(row.claimant, row.claimant.id === mineId), controlsRow(board, row.claimant));
+    } else if (takeable(row)) {
+      /* the button is the free mark while sign-up is open */
+      const take = document.createElement("button");
+      take.type = "button";
+      take.className = "su-take";
+      take.dataset.suTake = String(row.position);
+      take.textContent = sheet.mine ? "Move here" : "Sign up";
+      body.append(take);
+    } else {
+      const free = document.createElement("span");
+      free.className = "su-free";
+      free.textContent = "free";
+      body.append(free);
+    }
+    cell.append(body);
+
+    const build = document.createElement("div");
+    build.className = "su-build";
+    build.dataset.suBuild = String(row.position);
+    build.hidden = !openBuilds.has(row.position);
+    cell.append(build);
+    return cell;
+  }
+
+  /* the line under the panel's heading: the slot the form names, or none */
+  function paintPick() {
+    const rows = (lastBoard && lastBoard.rows) || [];
+    const value = el.slot.value;
+    for (const cell of el.board.querySelectorAll(".su-slot")) {
+      cell.classList.toggle("su-pick", cell.classList.contains("free") && cell.dataset.position === value);
+    }
+    const row = rows.find(r => String(r.position) === value);
+    const own = sheet && sheet.mine && sheet.mine.position != null && String(sheet.mine.position) === value;
+    el.taking.hidden = !row;
+    el.taking.textContent = row
+      ? `${own ? "Your slot" : "Taking slot"} ${row.position} · ${row.weapon_id ? weaponInfo(CATALOG, row.weapon_id).name : "any weapon"}`
+      : "";
+  }
+
+  /* a free slot's button: the form names the slot; on a phone the form is
+     below the roster, so it scrolls into view; the first thing still to
+     type takes focus */
+  function takeSlot(position) {
+    if (!sheet || sheet.event.status !== "open") return;
+    if (![...el.slot.options].some(o => o.value === position)) return;
+    el.slot.value = position;
+    paintPick();
+    if (matchMedia("(max-width:640px)").matches) el.formWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = isGuest() && !el.name.value.trim() ? el.name : el.submit;
+    target.focus({ preventScroll: true });
+  }
+
+  function toggleBuild(position) {
+    if (openBuilds.has(position)) openBuilds.delete(position); else openBuilds.add(position);
+    const cell = el.board.querySelector(`.su-slot[data-position="${position}"]`);
+    if (!cell) return;
+    cell.querySelector("[data-su-build-toggle]").setAttribute("aria-expanded", openBuilds.has(position) ? "true" : "false");
+    cell.querySelector("[data-su-build]").hidden = !openBuilds.has(position);
   }
 
   /* the start in the reader's own zone (named) and in UTC, how far off
@@ -830,43 +959,32 @@ function signupErrorMessage(err) {
     caller = callerPowers(myRole, ev.status);
     marks = markPowers(myRole, ev.status, sheet.mine);
 
-    el.board.replaceChildren(...board.rows.map(row => {
-      const tr = document.createElement("tr");
-      if (row.claimant && row.claimant.id === mineId) tr.className = "su-mine";
-      const pos = document.createElement("td");
-      pos.className = "cp-pos";
-      pos.textContent = String(row.position);
-      const weapon = document.createElement("td");
-      weapon.className = "cp-weapon";
-      weapon.append(caller.manage ? slotWeaponPick(row) : weaponCell(row.weapon_id));
-      const role = document.createElement("td");
-      role.className = "su-role";
-      role.textContent = [row.role, row.note].filter(Boolean).join(" · ");
-      const player = playerCell(row.claimant, row.claimant && row.claimant.id === mineId);
-      if (row.claimant) player.append(controlsRow(board, row.claimant));
-      tr.append(pos, weapon, role, player);
-      return tr;
+    lastBoard = board;
+    el.board.replaceChildren(...sheetBands(board, CATALOG).map(band => {
+      const sec = document.createElement("section");
+      sec.className = `su-band ${band.role}`;
+      sec.setAttribute("aria-label", band.name);
+      const hd = document.createElement("h4");
+      hd.className = "su-band-hd";
+      const name = document.createElement("span");
+      name.className = "su-band-name";
+      name.textContent = band.name;
+      const count = document.createElement("span");
+      count.className = "su-band-count";
+      count.textContent = band.held === band.planned ? `all ${band.planned} held` : `${band.held} of ${band.planned} held`;
+      hd.append(name, count);
+      const grid = document.createElement("div");
+      grid.className = "su-band-grid";
+      grid.append(...band.rows.map(row => slotCell(row, board, mineId)));
+      sec.append(hd, grid);
+      return sec;
     }));
 
     el.reservesWrap.hidden = !board.reserves.length;
     el.reserves.replaceChildren(...board.reserves.map(s => {
       const li = document.createElement("li");
       li.className = s.id === mineId ? "su-mine" : "";
-      const name = document.createElement("span");
-      name.className = "gd-name";
-      name.textContent = s.player_name + (s.id === mineId ? " (you)" : "");
-      li.append(name);
-      if (s.attendance && s.attendance !== "signed_up") li.append(attendanceTag(s.attendance));
-      const details = [s.item_power ? `${s.item_power} IP` : "", s.can_swap ? "can swap" : "", s.account ? "" : "guest",
-                       s.weapons && s.weapons.length ? s.weapons.map(k => weaponInfo(CATALOG, k).name).join(", ") : "", s.note || ""]
-        .filter(Boolean).join(" · ");
-      if (details) {
-        const sub = document.createElement("span");
-        sub.className = "gd-sub";
-        sub.textContent = details;
-        li.append(sub);
-      }
-      li.append(controlsRow(board, s));
+      li.append(playerBlock(s, s.id === mineId), controlsRow(board, s));
       return li;
     }));
 
@@ -894,19 +1012,29 @@ function signupErrorMessage(err) {
 
     renderCaller(board);
 
-    /* the slot choice: the free slots and the player's own */
+    /* the slot choice: the free slots and the player's own, grouped by
+       role as the roster is */
     const own = sheet.mine && sheet.mine.position != null ? sheet.mine.position : null;
-    const options = [["", "Reserve (no slot)"]].concat(board.rows
-      .filter(r => !r.claimant || r.position === own)
-      .map(r => [String(r.position), `${r.position} · ${r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "any weapon"}${r.role ? " · " + r.role : ""}`]));
     const chosen = el.slot.value;
-    el.slot.replaceChildren(...options.map(([value, label]) => {
-      const o = document.createElement("option");
-      o.value = value;
-      o.textContent = label;
-      return o;
-    }));
-    el.slot.value = options.some(([v]) => v === chosen) ? chosen : (own != null ? String(own) : "");
+    const reserve = document.createElement("option");
+    reserve.value = "";
+    reserve.textContent = "Reserve (no slot)";
+    const groups = sheetBands(board, CATALOG).map(band => {
+      const og = document.createElement("optgroup");
+      og.label = band.name;
+      for (const r of band.rows) {
+        if (r.claimant && r.position !== own) continue;
+        const o = document.createElement("option");
+        o.value = String(r.position);
+        o.textContent = `${r.position} · ${r.weapon_id ? weaponInfo(CATALOG, r.weapon_id).name : "any weapon"}${r.role ? " · " + r.role : ""}`;
+        og.append(o);
+      }
+      return og;
+    }).filter(og => og.childElementCount);
+    el.slot.replaceChildren(reserve, ...groups);
+    const values = [...el.slot.options].map(o => o.value);
+    el.slot.value = values.includes(chosen) ? chosen : (own != null ? String(own) : "");
+    paintPick();
 
     el.open.disabled = !sheet.slots.some(s => s.weapon_id) && !ev.share_hash;
     el.link.textContent = signupLink(code, typeof location !== "undefined" ? location.href : "");
@@ -957,6 +1085,7 @@ function signupErrorMessage(err) {
     el.swap.checked = !!(mine && mine.can_swap);
     el.note.value = mine ? (mine.note || "") : "";
     weapons = mine ? (mine.weapons || []).slice() : weapons;
+    paintPick();
   }
 
   function renderWeapons(open) {
@@ -1157,6 +1286,11 @@ function signupErrorMessage(err) {
     if (art) wrap.prepend(art);
   }
 
+  /* the move list reads "Move to…" and offers the targets alone: the cell
+     already says where the player is, and the list reads "Move to…" again
+     once the sheet is drawn after the move */
+  const MOVE_PLACEHOLDER = "_";
+
   function manageControls(board, s) {
     const wrap = document.createElement("span");
     wrap.className = "su-manage";
@@ -1164,21 +1298,20 @@ function signupErrorMessage(err) {
     move.className = "su-move";
     move.dataset.suMove = s.id;
     move.setAttribute("aria-label", `move ${s.player_name}`);
+    const head = document.createElement("option");
+    head.value = MOVE_PLACEHOLDER;
+    head.disabled = true;
+    head.selected = true;
+    head.textContent = "Move to…";
+    move.append(head);
     for (const t of moveTargets(board, s, CATALOG)) {
+      if (s.position == null && t.value === "") continue;   /* a reserve is there already */
       const o = document.createElement("option");
       o.value = t.value;
       o.textContent = t.label;
       move.append(o);
     }
-    move.value = s.position != null ? String(s.position) : "";
-    if (s.position != null) {
-      /* the held slot is not a target: the first option says where the player is */
-      const here = document.createElement("option");
-      here.value = String(s.position);
-      here.textContent = `Slot ${s.position} (here)`;
-      move.prepend(here);
-      move.value = String(s.position);
-    }
+    move.value = MOVE_PLACEHOLDER;
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "gd-btn danger";
@@ -1231,9 +1364,22 @@ function signupErrorMessage(err) {
     }
   }
 
+  /* a free slot's button and the fill-next chips pick the slot in the form;
+     the Build toggle unfolds the slot's build */
+  for (const place of [el.board, el.nextList]) {
+    place.addEventListener("click", e => {
+      const take = e.target.closest("[data-su-take]");
+      if (take) { takeSlot(take.dataset.suTake); return; }
+      const fold = e.target.closest("[data-su-build-toggle]");
+      if (fold) toggleBuild(Number(fold.dataset.suBuildToggle));
+    });
+  }
+  el.slot.addEventListener("change", paintPick);
+
   el.board.addEventListener("change", e => {
     const t = e.target;
     if (t.dataset.suMove !== undefined) {
+      if (t.value === MOVE_PLACEHOLDER) return;
       const id = t.dataset.suMove;
       const name = (sheet.signups.find(s => s.id === id) || {}).player_name || "the player";
       act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
@@ -1246,7 +1392,7 @@ function signupErrorMessage(err) {
   });
   el.reserves.addEventListener("change", e => {
     const t = e.target;
-    if (t.dataset.suMove === undefined) return;
+    if (t.dataset.suMove === undefined || t.value === MOVE_PLACEHOLDER) return;
     const id = t.dataset.suMove;
     const name = (sheet.signups.find(s => s.id === id) || {}).player_name || "the player";
     act(null, "", () => moveSignup(id, t.value), r => r.position != null ? `${name} now holds slot ${r.position}.` : `${name} is a reserve.`);
@@ -1414,8 +1560,10 @@ function signupErrorMessage(err) {
     el.statusRow.hidden = true;
     el.notes.hidden = true;
     el.boardLabel.hidden = true;
-    el.table.hidden = true;
+    el.board.hidden = true;
     el.board.replaceChildren();
+    el.taking.hidden = true;
+    lastBoard = null;
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.linkRow.hidden = true;
@@ -1480,6 +1628,9 @@ function signupErrorMessage(err) {
     el.roles.replaceChildren();
     el.next.hidden = true;
     el.board.replaceChildren();
+    el.taking.hidden = true;
+    lastBoard = null;
+    openBuilds.clear();
     el.reservesWrap.hidden = true;
     el.historyWrap.hidden = true;
     el.form.hidden = true;
@@ -1487,7 +1638,7 @@ function signupErrorMessage(err) {
     el.callerWrap.hidden = true;
     el.statusRow.hidden = false;
     el.boardLabel.hidden = false;
-    el.table.hidden = false;
+    el.board.hidden = false;
     el.linkRow.hidden = false;
     el.formWrap.hidden = false;
     stopWatching();

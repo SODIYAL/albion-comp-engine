@@ -934,7 +934,8 @@ check("function sheetView()" in APP and "if (sheetView()) return;" in seg(APP, "
 for fid in ("su-name", "su-slot", "su-weapon-add", "su-ip", "su-swap", "su-note"):
     check(('id="%s"' % fid) in sdlg and ('for="%s"' % fid) in sdlg, "L32b field %s has its label" % fid)
 check('role="alert"' in sdlg and 'aria-live="polite"' in sdlg, "L32c errors and changes are announced, on the page")
-check('id="su-board"' in sdlg and sdlg.count("<th scope=\"col\">") == 4, "L32d the roster has its four column headers")
+check('class="su-bands" id="su-board" aria-labelledby="su-board-label"' in sdlg and "<table" not in sdlg and "<th" not in sdlg,
+      "L32d the roster is a set of role bands, labelled, no table")
 check('role="combobox"' in sdlg and 'aria-controls="su-weapon-results"' in sdlg and 'id="su-weapon-results"' in sdlg and 'role="listbox"' in sdlg,
       "L32e the weapon picker is a combobox bound to its listbox (the profile's pattern)")
 check('id="ev-sheet"' in SHELL and 'id="ev-link"' in SHELL, "L32f the CTAs dialog offers the sheet and its link")
@@ -965,6 +966,21 @@ check('id="su-roles"' in sdlg and 'id="su-next-list"' in sdlg and sdlg.find('id=
       and "slotWeaponPick(row)" in SIGNUP_JS and "repaintPick(t)" in SIGNUP_JS
       and all(s in AUTH_CSS for s in (".su-roles{", ".su-next{", ".su-next-slot{", ".su-weapon-pick{")),
       "L32t the role bar (held of planned per role, the open slots to fill next with their icons) sits above the roster; the caller's weapon list carries the chosen weapon's icon")
+check("function sheetBands" in SIGNUP_JS and "sheetBands(board, CATALOG).map(band =>" in SIGNUP_JS and "slotCell(row, board, mineId)" in SIGNUP_JS
+      and 'BAND_NAMES = { frontline: "Tanks", support: "Supports", dps: "DPS", healer: "Healers", any: "Any weapon" }' in SIGNUP_JS
+      and "<optgroup" not in SIGNUP_JS and 'document.createElement("optgroup")' in SIGNUP_JS
+      and all(s in AUTH_CSS for s in (".su-bands{", ".su-band-hd{", ".su-band-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr))", ".su-slot{", ".su-band.frontline .su-band-name, .su-band.frontline .su-pos{color:var(--role-tank)}"))
+      and ".su-band-grid{grid-template-columns:1fr}" in LAYOUT,
+      "L32u the roster is grouped into role bands, Tanks, Supports, DPS, Healers, then Any weapon, two slots across (one on a phone), the role's colour on the band's name and its slot numbers; the form's slot list is grouped the same way")
+check("function takeSlot" in SIGNUP_JS and "dataset.suTake = String(row.position)" in SIGNUP_JS and "function paintPick" in SIGNUP_JS
+      and 'id="su-taking"' in sdlg and '<h3 class="su-form-title" id="su-form-label">Sign up</h3>' in sdlg
+      and "takeSlot(take.dataset.suTake)" in SIGNUP_JS and 'el.slot.addEventListener("change", paintPick)' in SIGNUP_JS
+      and all(s in AUTH_CSS for s in (".su-take{", ".su-slot.su-pick{", ".su-form-wrap{position:sticky", ".su-taking{", ".su-form-title{"))
+      and ".su-form-wrap{position:static; margin-top:14px}" in LAYOUT,
+      "L32v a free slot's button and the fill-next chips name the slot in the form; the panel is the page's brass, pinned beside the roster (unpinned under it on a phone), and says which slot is being taken")
+check('head.value = MOVE_PLACEHOLDER' in SIGNUP_JS and 'head.textContent = "Move to…"' in SIGNUP_JS and "(here)" not in signup_ui
+      and "if (t.value === MOVE_PLACEHOLDER) return;" in SIGNUP_JS and ".su-controls .su-move, .su-controls .su-mark{" in AUTH_CSS,
+      "L32w the caller's line reads Move to…, the mark and the removal, small and under the player; a move list never names the slot the player already holds")
 check(".su-grid{grid-template-columns:1fr}" in LAYOUT, "L32q on a phone the form drops under the roster (_layout.css)")
 i_signup = script_at(lambda a, b: "function loadSheet" in b)
 check(0 <= i_events < i_signup, "L32r the sign-up module loads after the CTAs module, in its own <script>",
@@ -1148,6 +1164,36 @@ check(0 <= i_import < i_roster, "L38p the roster module loads after the import m
 check(i_roster >= 0 and SCRIPTS[i_roster][1].count("new CompEngine(") == 1 and "const ENG = new CompEngine(DATASET" in SCRIPTS[i_app][1],
       "L38q the roster module's engine is its own one instance; the planner's is made in the planner's script alone")
 
+print("L38r - the build on the sheet: the planner's saved loadout per slot, named from the page's tables, display only")
+# Phase 12: the build module reads the CTA's share hash (p= and g=, the
+# planner's own codec) and names gear and spells from GEAR and SPELLS;
+# it paints into the build place each slot cell leaves empty, after the
+# sheet's own event, and never scores, writes or reaches a table.
+BUILD_JS = read("_build.js")
+check("function sheetBuilds" in BUILD_JS and "function hashMembers" in BUILD_JS and 'params.get("g")' in BUILD_JS and 'params.get("p")' in BUILD_JS,
+      "L38r1 the build module reads the share hash's members and loadouts through the planner's codec")
+check(not re.search(r"\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine|PLANNED|\bLOADOUT\b|location\.hash|window\.DB|\.from\(|\.rpc\(|\.channel\(", BUILD_JS),
+      "L38r2 the build module reads and writes no planner state and reaches no table or channel")
+build_globals = set(re.findall(r"\b(CAP_LABEL|CAP_PROSE|ICONS|DATASET|CompEngine|SEMANTIC_ICONS|WEAPONS|TREES|ITEMS|SPELLS|GEAR|USAGE|FAMILIES|loadoutDecode|loArtRetry)\b", BUILD_JS))
+check(build_globals == {"ICONS", "SPELLS", "GEAR", "loadoutDecode", "loArtRetry"},
+      "L38r3 the planner's globals it reads are the gear and spell tables, the icons, the codec and the art retry, no other", str(sorted(build_globals)))
+check('addEventListener("sheet-read"' in BUILD_JS and "[data-su-build]" in BUILD_JS and "su-board" not in BUILD_JS and "su-form" not in BUILD_JS
+      and 'build.dataset.suBuild = String(row.position)' in SIGNUP_JS and "replaceChildren" not in seg(SIGNUP_JS, "function toggleBuild", "\n  }", "L38r4 toggle anchors")
+      and "sheetBuilds" not in SIGNUP_JS and "GEAR" not in SIGNUP_JS and "SPELLS" not in SIGNUP_JS,
+      "L38r4 the sheet leaves a build place in every slot cell and never fills it; the build module fills every place after each sheet-read")
+check("<li" not in BUILD_JS and "<span" not in BUILD_JS and "<img" not in BUILD_JS and "innerHTML" not in BUILD_JS,
+      "L38r5 the build is built without markup strings")
+check("BUILD_MSG" in BUILD_JS and all(k in BUILD_JS for k in ("none:", "changed:", "unset:")),
+      "L38r6 a slot with no weapon, a changed weapon and a comp saved without loadouts each have a sentence")
+check(all(s in AUTH_CSS for s in (".su-build{", ".su-build-gear{", ".su-gear{", ".su-build-spells{", ".su-build-toggle{", '.su-build-toggle[aria-expanded="true"]')),
+      "L38r7 the build toggle and the build's rows are styled in _auth.css")
+check("function toggleBuild" in SIGNUP_JS and "openBuilds" in SIGNUP_JS and 'setAttribute("aria-expanded"' in SIGNUP_JS,
+      "L38r8 the toggle says whether the build is open and the open builds survive a redraw")
+i_build = script_at(lambda a, b: "function sheetBuilds" in b)
+check(0 <= i_roster < i_build, "L38r9 the build module loads after the roster module, in its own <script>",
+      "script indices roster=%d build=%d" % (i_roster, i_build))
+check(not re.search(r"sheetBuilds|hashMembers|BUILD_MSG", APP + DECISION_JS), "L38r10 the planner never calls the build module")
+
 # ---------------------------------------------------------------------------
 print("L39 - the design check of the account dialogs and the portal page: hidden honoured, one line per slot, one primary per dialog, the title takes focus")
 PORTAL = read("_portal.html")
@@ -1176,11 +1222,10 @@ rr_css = seg(AUTH_CSS, ".rr{", ".su-status-row[hidden]", "L39k read css anchors"
 check('<section class="rr-block rr-block-wide" aria-labelledby="rr-free-label">' in SHELL and '<ul class="rr-list rr-cols" id="rr-free">' in SHELL
       and ".rr-cols{columns:2" in AUTH_CSS and ".rr-list .gd-sub{display:inline}" in AUTH_CSS and "flex-basis:100%" not in rr_css,
       "L39k the read's open slots take the row in two columns and every item is one line")
-check(".gd-table:not(.su-table){display:block; overflow-x:auto}" in LAYOUT
-      and ".gd-table:not(.su-table):not(.im-table) td, .gd-table:not(.su-table):not(.im-table) th{white-space:nowrap}" in LAYOUT
-      and ".su-table .cp-weapon, .su-table .su-role{width:auto}" in LAYOUT
+check(".gd-table{display:block; overflow-x:auto}" in LAYOUT
+      and ".gd-table:not(.im-table) td, .gd-table:not(.im-table) th{white-space:nowrap}" in LAYOUT and "su-table" not in LAYOUT and "su-table" not in AUTH_CSS
       and "position:relative}" in seg(AUTH_CSS, ".gd-table th{", "\n.gd-table td", "L39l header anchors") and ".gd-role-select{padding:3px 6px; font-size:var(--fs-dense); width:auto}" in AUTH_CSS,
-      "L39l on a phone the member and slot tables scroll sideways at their own widths, a hidden header label never widens the card, and the sheet's columns are free again")
+      "L39l on a phone the member and slot tables scroll sideways at their own widths and a hidden header label never widens the card; the sheet has no table")
 check(".gd-weapons{display:inline-flex" in AUTH_CSS and ".gd-covers{display:inline-flex" in AUTH_CSS, "L39m a member's weapons and role tags share one line")
 _fs = re.findall(r"font-size:\s*([^;}\s]+)", AUTH_CSS)
 check(":root{--fs-label:10px; --fs-meta:11px; --fs-dense:12px; --fs-body:13px; --fs-lead:16px; --fs-title:21px}" in AUTH_CSS

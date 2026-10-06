@@ -398,32 +398,83 @@
 .su-live-state[data-live="yes"]{color:var(--role-healer)}
 .su-live-state[data-live="yes"]::before{content:""; display:inline-block; width:6px; height:6px; margin-right:5px; border-radius:50%; background:currentColor; vertical-align:middle}
 .su-notes{margin:0 0 12px; padding:8px 10px; border-left:2px solid var(--rule-2); font-size:var(--fs-body); color:var(--ink-2); white-space:pre-wrap}
-.su-grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:0 20px; align-items:start}
+.su-grid{display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:0 22px; align-items:start}
 .su-board-wrap{min-width:0}
-.su-form-wrap{border-left:1px solid var(--rule); padding-left:18px}
-/* a sheet that takes no sign-up (draft, locked, completed) keeps no column for the form: its note sits above the roster */
+/* the sign-up panel: the page's one brass element, pinned while the roster scrolls */
+.su-form-wrap{position:sticky; top:66px; padding:14px 16px 16px; border:1px solid rgba(255,201,58,.42); border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,201,58,.07), rgba(255,201,58,.02) 60px, transparent);
+  box-shadow:0 0 0 1px rgba(255,201,58,.08), 0 0 48px -22px rgba(255,201,58,.5)}
+.su-form-title{margin:0 0 2px; font-size:var(--fs-lead); line-height:1.2; color:var(--brass-bright)}
+/* the slot the form names, under the heading: the roster's pick, the player's own slot, or nothing */
+.su-taking{margin:0 0 10px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--brass)}
+.su-form-wrap .auth-hint:first-of-type{margin-bottom:10px}
+/* a sheet that takes no sign-up (draft, locked, completed) keeps no column for the form: its note sits above the roster, unpinned and plain */
 .su-grid:has(> .su-form-wrap > #su-form[hidden]){grid-template-columns:1fr}
-.su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-wrap{order:-1; border-left:0; padding-left:0; margin-bottom:10px}
-.su-table td{vertical-align:top}
-.su-table .cp-pos, .su-table .su-role{padding-top:9px}
-/* the weapon and role columns are sized so the player column keeps room for the caller's
-   move list and the record's mark on one line (273px) at the sheet's full width */
-.su-table .cp-weapon{padding-top:5px; width:200px}
-.su-table .su-role{width:150px}
-.su-weapon{display:inline-flex; align-items:center; gap:5px}
+.su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-wrap{position:static; order:-1; margin-bottom:12px; padding:10px 14px; border-color:var(--rule-2); background:none; box-shadow:none}
+.su-grid:has(> .su-form-wrap > #su-form[hidden]) .su-form-title{color:var(--ink-2)}
+/* the roster as role bands: a band is a block headed by its role, its slots a two-column grid of
+   hairline-ruled cells (no boxes within boxes); the role's colour carries the band's name and
+   its slots' numbers, so the eye reads Tanks, Supports, DPS, Healers before any weapon */
+.su-bands{display:flex; flex-direction:column; gap:14px}
+.su-bands[hidden]{display:none}
+.su-band-hd{display:flex; align-items:baseline; gap:10px; margin:0 0 2px; padding:0 0 5px; border-bottom:1px solid var(--rule-2)}
+.su-band-name{font-size:var(--fs-body); font-weight:600; letter-spacing:.01em}
+.su-band-count{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
+.su-band.frontline .su-band-name, .su-band.frontline .su-pos{color:var(--role-tank)}
+.su-band.support .su-band-name, .su-band.support .su-pos{color:var(--role-support)}
+.su-band.dps .su-band-name, .su-band.dps .su-pos{color:var(--role-melee)}
+.su-band.healer .su-band-name, .su-band.healer .su-pos{color:var(--role-healer)}
+.su-band.any .su-band-name, .su-band.any .su-pos{color:var(--ink-2)}
+.su-band-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0 22px}
+.su-slot{min-width:0; padding:7px 0 8px; border-bottom:1px solid var(--rule)}
+.su-slot.su-mine{background:linear-gradient(90deg, rgba(255,196,84,.07), transparent 70%)}
+/* the pick: the free slot the form names */
+.su-slot.su-pick{box-shadow:inset 3px 0 0 var(--brass); padding-left:10px}
+.su-slot-hd{display:flex; align-items:center; gap:8px; min-width:0}
+.su-pos{flex:none; width:20px; font-family:var(--mono); font-size:var(--fs-meta); text-align:right}
+.su-weapon{display:inline-flex; align-items:center; gap:6px; min-width:0; font-size:var(--fs-body)}
+.su-weapon > span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.su-slot-hd .su-weapon{flex:1 1 auto}
+.su-slot-note{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
 /* the caller's weapon list with the chosen weapon's icon beside it; the icon keeps its place when the slot names no weapon */
-.su-weapon-pick{gap:6px; min-height:26px}
+.su-weapon-pick{min-height:26px}
 .su-weapon-pick .su-slot-weapon{flex:1; min-width:0}
-.su-role{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
-.su-player .gd-name{display:inline}
-.su-player .gd-sub{margin-top:1px}
+/* the build toggle: small, at the end of the slot's line, lit while open */
+.su-build-toggle{flex:none; margin-left:auto; padding:1px 7px; border:1px solid var(--rule-2); border-radius:6px; background:none;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); cursor:pointer;
+  transition:color .18s var(--ease), border-color .18s var(--ease)}
+.su-build-toggle:hover, .su-build-toggle:focus-visible{color:var(--ink); border-color:var(--ink-3)}
+.su-build-toggle[aria-expanded="true"]{color:var(--brass); border-color:var(--brass-deep)}
+/* under the line: the player, or the free mark with its button */
+.su-slot-body{display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; margin:3px 0 0 28px}
+.su-player{min-width:0; flex:1 1 160px; line-height:1.4}
+.su-player .gd-name{display:inline; color:var(--ink)}
+.su-player .gd-sub{display:block; margin:0}
 .su-declared{display:block; font-size:var(--fs-dense); color:var(--ink-2)}
 .su-free{font-family:var(--mono); font-size:var(--fs-meta); color:var(--role-healer)}
+/* the brass button of a free slot: the page's call to sign up, one per open slot */
+.su-take{padding:3px 11px; border:1px solid rgba(255,201,58,.5); border-radius:999px; background:var(--brass-wash);
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.08em; text-transform:uppercase; color:var(--brass); cursor:pointer;
+  transition:background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease)}
+.su-take:hover, .su-take:focus-visible{background:var(--brass); border-color:var(--brass); color:#1A1206}
+.su-pick .su-take{background:var(--brass); border-color:var(--brass); color:#1A1206}
+/* the fill-next chip as a button */
+button.su-next-slot{cursor:pointer; font:inherit; font-size:var(--fs-dense); color:var(--ink); transition:border-color .18s var(--ease), color .18s var(--ease)}
+button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--brass); color:var(--brass-bright)}
+/* the slot's build (_build.js fills it): the gear as a row of pieces, the spells as one line */
+.su-build{margin:7px 0 0 28px; padding:7px 0 0; border-top:1px dashed var(--rule)}
+.su-build[hidden]{display:none}
+.su-build-gear{display:flex; flex-wrap:wrap; gap:3px 12px; margin:0 0 5px; padding:0; list-style:none}
+.su-gear{display:inline-flex; align-items:center; gap:5px; font-size:var(--fs-dense); color:var(--ink-2)}
+.su-gear img{width:24px; height:24px; flex:none; object-fit:contain}
+.su-build-spells{display:flex; flex-wrap:wrap; gap:2px 12px; margin:0; font-size:var(--fs-dense); line-height:1.5; color:var(--ink-2)}
+.su-build-pick{white-space:nowrap}
+.su-build-key{display:inline-block; min-width:14px; margin-right:2px; font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; color:var(--brass)}
+.su-build-note{margin:0; font-size:var(--fs-dense); color:var(--ink-3)}
 .su-mine{background:rgba(255,196,84,.06)}
 .su-reserves{margin:4px 0 8px; padding:0; list-style:none; font-size:var(--fs-body)}
 .su-reserves li{display:flex; flex-wrap:wrap; align-items:center; gap:2px 10px; padding:6px; border-bottom:1px solid var(--rule)}
-.su-reserves .gd-name{display:inline}
-.su-reserves .gd-sub{display:inline; margin:0}
+.su-reserves .su-player{flex:1 1 220px}
 .su-link-row{overflow-wrap:anywhere}
 .su-link{padding:0; border:0; background:none; font:inherit; color:var(--amber); text-decoration:underline dotted; cursor:pointer; overflow-wrap:anywhere; text-align:left}
 .su-weapons{margin:4px 0 6px}
@@ -441,10 +492,12 @@
 .su-add-btn{margin-bottom:4px}
 .su-manage{display:inline-flex; align-items:center; gap:6px; margin:0}
 .su-move, .su-slot-weapon{padding:2px 24px 2px 6px; font-size:var(--fs-dense); max-width:220px; background-position:right 7px center}
-.su-move{max-width:140px}
-/* the caller's move and removal and the record's mark: one row under the player */
-.su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:5px}
-.su-reserves .su-controls{flex-basis:100%; margin-top:2px}
+/* the caller's line: the move list, the mark and the removal, small and grey, never on the player's own line */
+.su-move{max-width:120px; width:auto; color:var(--ink-3)}
+.su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:6px; flex-basis:100%}
+.su-controls .su-move, .su-controls .su-mark{padding-top:1px; padding-bottom:1px; font-size:var(--fs-meta); border-color:var(--rule)}
+.su-controls .gd-btn{padding:2px 7px; border-color:var(--rule)}
+.su-reserves .su-controls{margin-top:2px}
 /* the record: attendance marks */
 .su-att{display:inline-block; margin-left:6px; padding:0 6px; border-radius:99px; font-family:var(--mono); font-size:var(--fs-label);
   letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--rule-2); vertical-align:middle}

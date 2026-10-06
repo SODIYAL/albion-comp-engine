@@ -122,6 +122,17 @@ const run = expr => vm.runInContext(expr, ctx);
         same(odd.roles.map(r => `${r.role}:${r.held}/${r.planned}`), ["frontline:0/0", "support:0/0", "dps:0/0", "healer:0/0", "any:1/2"])
         && same(odd.next.map(g => `${g.role}:${g.slots.map(s => s.position).join(",")}`), ["any:1"]), odd);
   check("an empty board tallies nothing", same(tally(board([], []), CAT), { roles: [{ role: "frontline", name: "Tank", held: 0, planned: 0 }, { role: "support", name: "Support", held: 0, planned: 0 }, { role: "dps", name: "DPS", held: 0, planned: 0 }, { role: "healer", name: "Healer", held: 0, planned: 0 }], next: [] }));
+
+  /* the bands: the slots grouped by role in the comp's order */
+  const bands = run("sheetBands");
+  const bb = bands(board(
+    [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null },
+     { position: 4, weapon_id: "MAIN_MACE_HELL" }, { position: 5, weapon_id: "MYSTERY" }],
+    [{ id: "s1", position: 2, player_name: "Gus", weapons: [] }, { id: "s2", position: 3, player_name: "Eff", weapons: ["2H_HOLYSTAFF"] }]), CAT);
+  check("a band per role with a slot, Tanks before DPS, the weaponless and the roleless under Any weapon, each slot in position order",
+        same(bb.map(b => `${b.role}:${b.name}:${b.rows.map(r => r.position).join(",")}`), ["frontline:Tanks:2,4", "dps:DPS:1", "any:Any weapon:3,5"]), bb);
+  check("a band counts its slots held of planned", same(bb.map(b => `${b.held}/${b.planned}`), ["1/2", "0/1", "1/2"]));
+  check("an empty board has no band", same(bands(board([], []), CAT), []));
 }
 
 /* 3 - validation and the payload */
