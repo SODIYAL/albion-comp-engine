@@ -430,6 +430,11 @@
 .su-band.dps .su-band-name, .su-band.dps .su-pos{color:var(--role-melee)}
 .su-band.healer .su-band-name, .su-band.healer .su-pos{color:var(--role-healer)}
 .su-band.any .su-band-name, .su-band.any .su-pos{color:var(--ink-2)}
+/* a signed-up player's name takes the band's colour: a held slot reads as held from across the page */
+.su-band.frontline .su-player .gd-name{color:var(--role-tank)}
+.su-band.support .su-player .gd-name{color:var(--role-support)}
+.su-band.dps .su-player .gd-name{color:var(--role-melee)}
+.su-band.healer .su-player .gd-name{color:var(--role-healer)}
 .su-band-grid{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0 22px}
 .su-slot{min-width:0; padding:7px 0 8px; border-bottom:1px solid var(--rule)}
 .su-slot.su-mine{background:linear-gradient(90deg, rgba(255,196,84,.07), transparent 70%)}
