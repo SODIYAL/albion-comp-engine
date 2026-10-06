@@ -763,8 +763,14 @@ function signupErrorMessage(err) {
       const cell = document.createElement("span");
       cell.className = `gd-cov ${r.role}`;
       const n = document.createElement("b");
-      n.textContent = `${r.held}/${r.planned}`;
-      cell.append(n, ` ${r.name}`);
+      n.textContent = String(r.held);
+      const of = document.createElement("span");
+      of.className = "su-of";
+      of.textContent = `/${r.planned}`;
+      const name = document.createElement("span");
+      name.className = "su-role-name";
+      name.textContent = r.name;
+      cell.append(n, of, name);
       return cell;
     }));
     el.next.hidden = !tally.next.length;

@@ -2318,7 +2318,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-status-row{margin-bottom:8px}
 /* the role bar under the status row: slots held of slots planned per role, then the open slots
    to fill next as chips with their icons, grouped by role in the comp's order */
-.su-roles{margin-bottom:6px}
+/* the tally reads at a glance: the held count large in the role's colour, the planned count and the role small beside it */
+.su-roles{gap:4px 22px; margin-bottom:8px; align-items:baseline}
+.su-roles .gd-cov{display:inline-flex; align-items:baseline; gap:3px}
+.su-roles .gd-cov b{font-size:var(--fs-title); font-weight:600; line-height:1}
+.su-roles .su-of{font-size:var(--fs-lead); color:var(--ink-3)}
+.su-roles .su-role-name{margin-left:3px; font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
 .su-roles .gd-cov.any b{color:var(--ink-2)}
 .su-next{display:flex; flex-wrap:wrap; align-items:flex-start; gap:4px 10px; margin:0 0 10px}
 .su-next-label{margin:3px 0 0; flex:none}
@@ -2374,9 +2379,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .su-weapon > span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .su-slot-hd .su-weapon{flex:1 1 auto}
 .su-slot-note{min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
-/* the caller's weapon list with the chosen weapon's icon beside it; the icon keeps its place when the slot names no weapon */
+/* the caller's weapon list with the chosen weapon's icon beside it; the icon keeps its place when the slot names no weapon.
+   The list reads as the weapon's name until pointed at or focused: a roster of twenty fields is noise, a name is not */
 .su-weapon-pick{min-height:26px}
-.su-weapon-pick .su-slot-weapon{flex:1; min-width:0}
+.su-weapon-pick .su-slot-weapon{flex:1; min-width:0; padding-left:4px; font-family:var(--sans); font-size:var(--fs-body); color:var(--ink);
+  border-color:transparent; background-color:transparent; transition:border-color .18s var(--ease), background-color .18s var(--ease)}
+.su-weapon-pick .su-slot-weapon:hover, .su-weapon-pick .su-slot-weapon:focus-visible{border-color:var(--rule-2); background-color:var(--sunk)}
 /* the build toggle: small, at the end of the slot's line, lit while open */
 .su-build-toggle{flex:none; margin-left:auto; padding:1px 7px; border:1px solid var(--rule-2); border-radius:6px; background:none;
   font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); cursor:pointer;
@@ -2430,11 +2438,20 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .su-add-btn{margin-bottom:4px}
 .su-manage{display:inline-flex; align-items:center; gap:6px; margin:0}
 .su-move, .su-slot-weapon{padding:2px 24px 2px 6px; font-size:var(--fs-dense); max-width:220px; background-position:right 7px center}
-/* the caller's line: the move list, the mark and the removal, small and grey, never on the player's own line */
+/* the caller's line: the move list, the mark and the removal, small and grey, never on the player's own line.
+   Its fields read as text until pointed at or focused, and the whole line waits for the pointer on a
+   screen that has one (a touch screen shows it always) */
 .su-move{max-width:120px; width:auto; color:var(--ink-3)}
-.su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:6px; flex-basis:100%}
-.su-controls .su-move, .su-controls .su-mark{padding-top:1px; padding-bottom:1px; font-size:var(--fs-meta); border-color:var(--rule)}
-.su-controls .gd-btn{padding:2px 7px; border-color:var(--rule)}
+.su-controls{display:flex; flex-wrap:wrap; align-items:center; gap:2px 6px; flex-basis:100%}
+.su-controls .su-move, .su-controls .su-mark{padding-top:1px; padding-bottom:1px; font-size:var(--fs-meta); color:var(--ink-3);
+  border-color:transparent; background-color:transparent; transition:border-color .18s var(--ease), background-color .18s var(--ease)}
+.su-controls .su-move:hover, .su-controls .su-mark:hover, .su-controls .su-move:focus-visible, .su-controls .su-mark:focus-visible{border-color:var(--rule-2); background-color:var(--sunk)}
+.su-controls .gd-btn{padding:2px 6px; border-color:transparent; color:var(--ink-3)}
+.su-controls .gd-btn:hover, .su-controls .gd-btn:focus-visible{border-color:var(--gap)}
+@media (hover:hover){
+  .su-slot .su-controls{opacity:0; transition:opacity .15s var(--ease)}
+  .su-slot:hover .su-controls, .su-slot:focus-within .su-controls{opacity:1}
+}
 .su-reserves .su-controls{margin-top:2px}
 /* the record: attendance marks */
 .su-att{display:inline-block; margin-left:6px; padding:0 6px; border-radius:99px; font-family:var(--mono); font-size:var(--fs-label);
@@ -3067,7 +3084,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
             </div>
             <button class="gd-btn su-add-btn" id="su-add" type="submit">Add</button>
           </form>
-          <p class="auth-hint">Move a player with the list beside their name; a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
+          <p class="auth-hint">Point at a player for their move list, mark and removal (always shown on a touch screen); a move to a held slot swaps the two. A player added here has no claim of their own: only callers change them.</p>
         </section>
       </section>
 
@@ -19054,8 +19071,14 @@ function signupErrorMessage(err) {
       const cell = document.createElement("span");
       cell.className = `gd-cov ${r.role}`;
       const n = document.createElement("b");
-      n.textContent = `${r.held}/${r.planned}`;
-      cell.append(n, ` ${r.name}`);
+      n.textContent = String(r.held);
+      const of = document.createElement("span");
+      of.className = "su-of";
+      of.textContent = `/${r.planned}`;
+      const name = document.createElement("span");
+      name.className = "su-role-name";
+      name.textContent = r.name;
+      cell.append(n, of, name);
       return cell;
     }));
     el.next.hidden = !tally.next.length;
