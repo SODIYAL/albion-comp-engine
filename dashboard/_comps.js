@@ -393,7 +393,9 @@ function compErrorMessage(err) {
     importBtn: $id("comp-import"),
     importHint: $id("comp-import-hint"),
     exportBtn: $id("comp-export"),
-    copyBtn: $id("comp-copy")
+    copyBtn: $id("comp-copy"),
+    railRow: $id("save-comp-row"),     /* the rail's save button: shown to an account, opens this dialog on the planner's comp */
+    railSave: $id("save-comp")
   };
 
   const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size };
@@ -737,6 +739,10 @@ function compErrorMessage(err) {
 
   el.fromPlanner.addEventListener("click", () => { if (!busy) fromPlanner(); });
 
+  /* the rail's button: the dialog opens on the planner's comp, ready to
+     name and save; without a guild to save into, the list says so */
+  el.railSave.addEventListener("click", () => { if (!busy) openComps({ fromPlanner: true }); });
+
   /* the import dialog is the import module's: the guild is handed over
      as a DOM event, never a call between modules; the imported comp
      comes back the same way (comp-imported, below) */
@@ -903,6 +909,12 @@ function compErrorMessage(err) {
     const want = opts || {};
     if (want.guildId && guilds.some(g => g.guild.id === want.guildId)) el.guild.value = want.guildId;
     await reloadList(want.templateId || null);
+    /* still this opening: reloadList bumped the sequence once and nothing since */
+    if (want.fromPlanner && seq === openSeq - 1 && dialog.open) {
+      if (!el.fromPlanner.hidden) fromPlanner();
+      else if (!guildId()) showNotice("Join or create a guild to save comps into.");
+      else if (!canWrite) showNotice("Members read the guild's comps; callers, officers and admins save them.");
+    }
   }
 
   /* an imported comp comes back from the import dialog as a DOM event:
@@ -926,6 +938,7 @@ function compErrorMessage(err) {
   window.Account.subscribe(state => {
     const was = account.user ? account.user.id : null;
     account = state;
+    el.railRow.hidden = !state.user;
 
     if (dialog.open && (!state.user || state.user.id !== was)) {
       dialog.close();

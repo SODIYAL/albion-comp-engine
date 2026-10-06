@@ -845,6 +845,12 @@ check(not re.search(r"loadGuildTemplates|loadTemplate|saveTemplate|deleteTemplat
       "L30l the planner never calls the comps module")
 check(all(s in AUTH_CSS for s in (".comp-dialog{", ".cp-fields{", ".cp-table td{")),
       "L30m the comps dialog is styled in _auth.css")
+setup_panel = seg(SHELL, 'id="setup-panel"', "</aside>", "L30r setup panel anchors")
+check('id="save-comp-row"' in setup_panel and 'id="save-comp"' in setup_panel and setup_panel.index('id="share"') < setup_panel.index('id="save-comp"') < setup_panel.index('id="clear"')
+      and re.search(r'<div class="btn-row" id="save-comp-row" hidden>', SHELL) is not None and ".btn-row[hidden]{display:none}" in SHELL
+      and "el.railRow.hidden = !state.user;" in COMPS_JS and 'openComps({ fromPlanner: true })' in COMPS_JS and "if (!el.fromPlanner.hidden) fromPlanner();" in COMPS_JS
+      and "save-comp" not in APP and "railSave" not in APP,
+      "L30r the setup drawer's save button is the account layer's: hidden until the comps module shows it to a logged-in account, it opens the saved comps dialog on the planner's comp; the planner never references it")
 check(".cp-fields{grid-template-columns:repeat(2, minmax(0, 1fr))}" in LAYOUT, "L30n on a phone the comp's fields stack in two columns that shrink to the card (_layout.css)")
 i_comps = script_at(lambda a, b: "const ACCOUNT_CONTENTS" in b)
 check(0 <= i_guild < i_comps, "L30o the comps module loads after the guilds module, in its own <script>",
