@@ -348,6 +348,11 @@ check("styleName()" not in wf_head and "slotLabel" not in wf_head,
 check(APP.count("${party.length}/${PLAN()}") == 1,
       "L13i the party count string is built once for its two homes",
       "two adjacent copies drift the masthead count from the party tab")
+check(wf_head.count('id="forge"') == 1 and 'aria-disabled="true"' in wf_head
+      and "comp is full" in wf_head and "const fullTip" in wf_head
+      and '.cb-forge[aria-disabled="true"]' in SHELL,
+      "L13j a full comp keeps the forge button in its place, greyed, its tooltip naming the way to forge more",
+      "the button used to vanish with the last open slot; the greyed one carries no id, so no handler runs on it")
 
 print("L14 - the open slot adds to the party")
 

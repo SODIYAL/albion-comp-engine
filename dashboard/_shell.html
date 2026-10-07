@@ -902,6 +902,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   transition:background .15s var(--ease), border-color .15s var(--ease);
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
+/* a full comp: the forge button stays in its place, greyed */
+.cb-forge[aria-disabled="true"]{opacity:.4; cursor:not-allowed;
+  background:transparent; border-color:rgba(255,201,58,.5)}
 
 /* beneath the wheel: ONE status row — the colour-matched ring legend, the
    over-plan warning, and the filter count — layered above the wheel's

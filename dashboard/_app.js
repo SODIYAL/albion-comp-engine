@@ -1600,9 +1600,16 @@ function renderWheelFoot(keys, recs, rings){
      data-size controls as the setup panel's presets */
   const ask = needSize() ? `<span class="size-ask"><span class="size-ask-q">${esc(sizePrompt().question || "Which size?")}</span>${
     sizePrompt().sizes.map(n => `<button class="size-btn" data-size="${n}" title="${esc((sizePrompt().labels || {})[n] || "")}">${n}</button>`).join("")}</span>` : "";
-  const forge = ask || ((recs !== null && party.length < PLAN()
+  /* a full comp keeps the forge button in its place, greyed, its tooltip
+     naming the way to forge more: every planned slot is filled, or the
+     party seats its 20. It carries no id, so no handler runs on it */
+  const fullTip = recs === null
+    ? `Party ${PARTY_I + 1} is full: 20 is the most one party seats.${multiParty() ? " The party tabs open the next party." : ""}`
+    : "Every planned slot is filled. Raise the planned size or remove a member to forge more.";
+  const forgeAct = recs !== null && party.length < PLAN()
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "") + reforgeBtn);
+    : `<button class="cb-forge" type="button" aria-disabled="true" title="${esc(fullTip)}">comp is full</button>`;
+  const forge = ask || (forgeAct + reforgeBtn);
   /* the comp board lives in the right-edge party dash (where the whole
      roster reads at once) — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
