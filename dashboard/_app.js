@@ -2953,9 +2953,16 @@ function compText(){
   lines.push("", location.href);
   return lines.join("\n");
 }
-function flashBtn(id, text, back){
-  $(id).textContent = text;
-  setTimeout(() => { $(id).textContent = back; }, 1400);
+/* a copy confirms in place: the setup drawer's text button reads the
+   message, the party board's icon shows a check with it on hover */
+function flashBtn(btn, text, back){
+  if (btn.classList.contains("pd-act")){
+    btn.dataset.flash = "1"; btn.title = text;
+    setTimeout(() => { delete btn.dataset.flash; btn.title = back; }, 1400);
+    return;
+  }
+  btn.textContent = text;
+  setTimeout(() => { btn.textContent = back; }, 1400);
 }
 
 /* Edge panels: one state machine for every viewport-edge flyout. State is
@@ -3251,12 +3258,17 @@ document.addEventListener("click", e => {
   if (opener){ setPanel(opener.dataset.openPanel, true); return; }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
-  if (e.target.closest("#clear")){
+  const clr = e.target.closest("#clear, #pdash-clear");
+  if (clr){
     /* two-step: first click arms, second within 2.2s clears — a misclick
-       must never wipe a 20-slot comp */
-    const b = $("clear");
-    if (b.dataset.armed === "1"){
-      delete b.dataset.armed; b.textContent = "clear comp";
+       must never wipe a 20-slot comp. The setup drawer's button says so in
+       its text, the party board's icon in its colour and its label. */
+    const say = t => {
+      if (clr.id === "clear") clr.textContent = t;
+      else { clr.title = t; clr.setAttribute("aria-label", t); }
+    };
+    if (clr.dataset.armed === "1"){
+      delete clr.dataset.armed; say("clear comp");
       party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
@@ -3265,8 +3277,8 @@ document.addEventListener("click", e => {
       const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
-      b.dataset.armed = "1"; b.textContent = "really clear? click again";
-      setTimeout(() => { delete b.dataset.armed; b.textContent = "clear comp"; }, 2200);
+      clr.dataset.armed = "1"; say("really clear? click again");
+      setTimeout(() => { delete clr.dataset.armed; say("clear comp"); }, 2200);
     }
     return;
   }
@@ -3276,17 +3288,19 @@ document.addEventListener("click", e => {
   if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); PLAN_TOUCHED = true; ASK_SIZE = false; FORGE_NOTE = null; render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
-  if (e.target.closest("#share")){
+  const share = e.target.closest("#share, #pdash-share");
+  if (share){
     saveHash();
     if (navigator.clipboard && navigator.clipboard.writeText)
       navigator.clipboard.writeText(location.href).then(() =>
-        flashBtn("share", "copied", "copy share link"));
+        flashBtn(share, "copied", "copy share link"));
     return;
   }
-  if (e.target.closest("#export")){
+  const exp = e.target.closest("#export, #pdash-export");
+  if (exp){
     if (navigator.clipboard && navigator.clipboard.writeText)
       navigator.clipboard.writeText(compText()).then(() =>
-        flashBtn("export", "copied", "copy comp text"));
+        flashBtn(exp, "copied", "copy comp text"));
     return;
   }
   if (e.target.closest("#drawer-close")){ $("drawer").dataset.open = "false"; return; }

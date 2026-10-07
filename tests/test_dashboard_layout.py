@@ -1343,6 +1343,30 @@ check(bool(_retired) and _welcome_offered == set(WEAPONS) - _retired,
       "offered retired: %s; missing: %s" % (sorted(_welcome_offered & _retired),
                                             sorted(set(WEAPONS) - _retired - _welcome_offered)))
 
+print("L42 - the party board ends in the comp's actions, one row of icons")
+_pd = seg(SHELL, 'id="pdash"', "</aside>", "L42 party board anchors")
+_acts = seg(_pd, 'class="pdash-actions"', "</div>", "L42 action row anchors")
+_ids = ["pdash-share", "pdash-export", "pdash-save-comp", "pdash-clear"]
+check(all('id="%s"' % b in _acts for b in _ids)
+      and [_acts.index('id="%s"' % b) for b in _ids] == sorted(_acts.index('id="%s"' % b) for b in _ids)
+      and re.search(r'id="pdash-save-comp"[^>]*\bhidden>', _acts) is not None
+      and _acts.count("<svg") >= len(_ids)
+      and _pd.find('class="pdash-actions"') > _pd.find('id="pdash-body"') >= 0,
+      "L42a the party board ends in one row of icon buttons below the board: share link, "
+      "comp text, save to guild (hidden until an account shows it), clear")
+check('closest("#share, #pdash-share")' in APP and 'closest("#export, #pdash-export")' in APP
+      and 'closest("#clear, #pdash-clear")' in APP,
+      "L42b the board's share, comp text and clear icons run the setup drawer's own handlers, "
+      "clear arming on the first click")
+check('dashSave: $id("pdash-save-comp")' in COMPS_JS and "el.dashSave.hidden = !state.user;" in COMPS_JS
+      and "el.dashSave.addEventListener(\"click\", () => { if (!busy) openComps({ fromPlanner: true }); });" in COMPS_JS
+      and "pdash-save-comp" not in APP and "dashSave" not in APP,
+      "L42c the board's save icon is the account layer's: the comps module shows it to a "
+      "logged-in account and opens the saved comps dialog on the planner's comp; the planner "
+      "never references it")
+check(".pd-act[hidden]{display:none}" in SHELL and ".pdash-actions{padding-bottom:50px}" in LAYOUT,
+      "L42d a hidden icon stays hidden, and on a phone the row clears the tab bar over the sheet")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

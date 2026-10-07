@@ -107,6 +107,8 @@
   .epanel[data-open="true"]{z-index:40}
   /* the sheet's own content clears the tab bar that sits over its foot */
   .epanel-body{padding-bottom:44px}
+  /* the party board's action row sits at the sheet's foot: it clears the bar too */
+  .pdash-actions{padding-bottom:50px}
   /* the rails become one bottom tab bar: tap another tab to switch panels,
      tap the open one to close. They stay put — only the sheet moves. */
   .epanel-rail{top:auto; bottom:0; flex-direction:row;

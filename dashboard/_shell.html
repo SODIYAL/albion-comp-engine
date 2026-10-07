@@ -1104,6 +1104,25 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .wf-c.on{background:var(--brass-wash)}
 .wf-c .ui{display:block}
 .wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
+/* the comp's actions under the party board: one row of icon buttons (share
+   link, comp text, save to guild for an account, clear). A copy confirms
+   with a check; clear arms red on the first click. */
+.pdash-actions{display:flex; justify-content:center; gap:10px; padding:10px 12px 12px;
+  border-top:1px solid var(--rule-2)}
+.pd-act{
+  width:40px; height:34px; display:inline-flex; align-items:center; justify-content:center;
+  border-radius:9px; border:1px solid var(--rule-2); background:var(--surface);
+  color:var(--ink-3); padding:0; cursor:pointer;
+  transition:color .15s var(--ease), border-color .15s var(--ease), background .15s var(--ease);
+}
+.pd-act[hidden]{display:none}
+.pd-act:hover, .pd-act:focus-visible{color:var(--brass); border-color:var(--brass-deep); background:var(--brass-wash)}
+.pd-act .ui{display:block}
+.pd-act .pd-ok{display:none}
+.pd-act[data-flash="1"]{color:var(--ok); border-color:var(--ok)}
+.pd-act[data-flash="1"] .pd-ic{display:none}
+.pd-act[data-flash="1"] .pd-ok{display:block}
+.pd-clear:hover, .pd-clear[data-armed="1"]{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
 .wf-dm.locked .wf-mcard{box-shadow:inset 0 0 0 1px var(--brass-deep)}
 /* the at-rest lock mark rides inside the slot number (monoline, brass) */
 .wf-mcard .n{display:inline-flex; align-items:center; gap:3px}
@@ -2134,6 +2153,15 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
 <!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
 <aside class="epanel" data-edge="right" data-open="false" id="pdash" aria-label="Party board">
   <div class="epanel-body" id="pdash-body"></div>
+  <!-- the comp's actions under the board, one row of icons: share link, comp text and clear run
+       the setup drawer's own handlers (clear arms on the first click); the save icon is the
+       account layer's, hidden until the comps module shows it to a logged-in account -->
+  <div class="pdash-actions" role="toolbar" aria-label="Comp actions">
+    <button class="pd-act" id="pdash-share" type="button" title="copy share link" aria-label="copy share link"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+    <button class="pd-act" id="pdash-export" type="button" title="copy comp text" aria-label="copy comp text"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v11A1.5 1.5 0 0 0 5.5 18H8"/><path d="M11 12.5h6M11 16h4"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+    <button class="pd-act" id="pdash-save-comp" type="button" title="save comp to guild" aria-label="save comp to guild" hidden><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/><path d="M12 7.5v5M9.5 10h5"/></svg></button>
+    <button class="pd-act pd-clear" id="pdash-clear" type="button" title="clear comp" aria-label="clear comp"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 7h15"/><path d="M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/><path d="M6.5 7l1 12a1.5 1.5 0 0 0 1.5 1.4h6a1.5 1.5 0 0 0 1.5-1.4l1-12"/><path d="M10.5 11v6M13.5 11v6"/></svg></button>
+  </div>
   <!-- kit flyout: fills on hover over a member tile (showPdashFly) -->
   <div class="pdash-fly" id="pdash-fly" hidden></div>
 </aside>

@@ -395,7 +395,8 @@ function compErrorMessage(err) {
     exportBtn: $id("comp-export"),
     copyBtn: $id("comp-copy"),
     railRow: $id("save-comp-row"),     /* the rail's save button: shown to an account, opens this dialog on the planner's comp */
-    railSave: $id("save-comp")
+    railSave: $id("save-comp"),
+    dashSave: $id("pdash-save-comp")   /* the party board's save icon: the same button, in its action row */
   };
 
   const FIELDS = { name: el.name, content: el.content, style: el.style, plannedSize: el.size };
@@ -742,6 +743,7 @@ function compErrorMessage(err) {
   /* the rail's button: the dialog opens on the planner's comp, ready to
      name and save; without a guild to save into, the list says so */
   el.railSave.addEventListener("click", () => { if (!busy) openComps({ fromPlanner: true }); });
+  if (el.dashSave) el.dashSave.addEventListener("click", () => { if (!busy) openComps({ fromPlanner: true }); });
 
   /* the import dialog is the import module's: the guild is handed over
      as a DOM event, never a call between modules; the imported comp
@@ -939,6 +941,7 @@ function compErrorMessage(err) {
     const was = account.user ? account.user.id : null;
     account = state;
     el.railRow.hidden = !state.user;
+    if (el.dashSave) el.dashSave.hidden = !state.user;
 
     if (dialog.open && (!state.user || state.user.id !== was)) {
       dialog.close();
