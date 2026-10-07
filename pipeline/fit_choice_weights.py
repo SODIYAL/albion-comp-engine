@@ -9,12 +9,12 @@ The measurement. Every harvested killer party of --min-size..--max-size
 (every weapon known, style = its weapons-only label, the v4h population)
 on the TRAINING split (battle % 5 != 0) drops --drops members in turn; for
 each drop, every candidate in the engine's suggestion pool (plus the actual
-weapon) is priced exactly as `_eval_pick` prices it, and its score is split
-into one term per template capability at UNIT base weight, plus synergy,
-the meta prior, the duplicate cost and the viability bonus. The split is
-checked against the engine's own score for every candidate and the tool
-stops (exit 2) on a mismatch above 1e-9: a changed pick formula must update
-this tool, never be approximated by it.
+weapon) is priced by `_eval_pick` itself, and the winning build's score is
+split into one term per template capability at UNIT base weight, plus
+synergy, the meta prior, the duplicate cost and the viability bonus. The
+split is checked against the pick's own fitness delta and score for every
+candidate and the tool stops (exit 2) on a mismatch above 1e-9: a changed
+pick formula must update this tool, never be approximated by it.
 
 The fit. A conditional logit over each drop's candidates: capability
 weights (>= 0) and a free coefficient for each non-capability term, so the
@@ -143,45 +143,39 @@ def unit_delta(e, mult, cap, have, gain, have_floor, gain_floor):
 
 
 def price(e, mults, state, w, caps):
-    """_eval_pick's search (best combo x kit variant), then the winner's
-    per-capability unit deltas and the non-capability terms."""
-    extras = e._combo_extras(w)
-    dressed = e._dressed_extras(w)
-    variants = e.kit_variants(w)
-    v0_capped = e._variant_capped(state, w, variants[0][1])
-    fallback = e._variant_fallback.get(w) or ()
-    best = None
-    for vkey, vgears in variants:
-        if e._variant_capped(state, w, vgears):
-            continue
-        if vkey in fallback and not v0_capped:
-            continue
-        dext = dressed[vkey]
-        for i in range(len(extras)):
-            val, d_fit, d_syn = e._combo_score_dressed(
-                state, w, i, extras[i], dext[i], vkey)
-            if best is None or val > best[0]:
-                best = (val, d_fit, d_syn, i, vkey)
+    """The engine's own pick (`_eval_pick`: best combo x kit variant), then
+    the winning build's per-capability unit deltas and the non-capability
+    terms. The split reads the vectors `_combo_score` /
+    `_combo_score_dressed` price — the fit side on the count-once fit
+    basis (each share as worn), the floor side on the weapon-only basis —
+    and is checked against the pick's own d_fit and score."""
+    score, d_fit, d_syn, meta, i, vkey, vgears = e._eval_pick(state, w)
     phi = {}
-    if best is None:
-        best = (0.0, 0.0, 0.0, None, "v0")
-    else:
-        i, vkey = best[3], best[4]
-        wextra, dextra = extras[i], dressed[vkey][i]
+    if i is not None:
+        wextra = e._combo_extras(w)[i]
+        ov = e._offset_vector(state, w, i, vgears)
+        dextra = e._dressed_extras(w)[vkey][i] if ov is None else ov[0]
         s, s_syn = state["s"], state["s_syn"]
-        split = s is not s_syn
         if dextra is wextra:
-            adj = e._nonstack_adjust(state, w, i, wextra)
-            floor_s, floor_g = (s_syn, adj) if split else (s, adj)
+            floor_g = e._nonstack_adjust(state, w, i, wextra)
+            if s is s_syn:
+                adj, floor_s = floor_g, s
+            else:
+                adj = e._nonstack_adjust(state, w, i, wextra, True)
+                floor_s = s_syn
         else:
-            adj = e._nonstack_adjust(state, w, i, dextra)
+            adj = e._nonstack_adjust(state, w, i, dextra, True, vgears)
             floor_s, floor_g = s_syn, e._nonstack_adjust(state, w, i, wextra)
+            if ov is not None and ov[1]:
+                # the self-cost refund joins the fit vector, never the floor
+                adj = dict(adj)
+                for cap, v in ov[1].items():
+                    adj[cap] = adj.get(cap, 0.0) + v
         for cap, gain in adj.items():
             if cap in e.reqs and gain:
                 phi[cap] = unit_delta(e, mults[cap], cap, s.get(cap, 0.0), gain,
                                       floor_s.get(cap, 0.0),
                                       floor_g.get(cap, 0.0))
-    score, d_fit, d_syn, meta, _combo = e._pick_tail(state, w, best[:4])
     dup = state["counts"].get(w, 0) + 1 - e._dup_free(w)
     dup = dup if dup > 0 else 0
     viab = e.viability_w * e.viability_of(w)

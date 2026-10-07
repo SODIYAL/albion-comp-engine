@@ -1585,6 +1585,8 @@ class Engine:
             refund = {}
             after = waived | {key}
             for i, g in enumerate(gears):
+                if i >= len(party):
+                    break   # a gears tail past the party is worn by no member
                 if not g or not any(self._gear_item_key(x) == key for x in g):
                     continue
                 c = combos[i] if combos else None
@@ -1805,7 +1807,7 @@ class Engine:
         return None
 
     def kit_options(self, weapon, combo=None, party=None, top_n=3,
-                    role="auto"):
+                    role="auto", party_combos=None, party_gears=None):
         """IDEAL KIT per weapon, per content/style, per comp (DOCTRINE-LED:
         the kit is the whole build): ranked gear options for every slot,
         for the player of `weapon`.
@@ -1815,7 +1817,9 @@ class Engine:
         weights (the same rule default_combo uses). With `party` (the REST
         of the comp, without this member) -> comp-aware: each item valued
         by the exact fitness delta of this member joining with that item,
-        so the kit answers what THIS comp still needs.
+        so the kit answers what THIS comp still needs. `party_combos` /
+        `party_gears` (parallel to `party`) are the rest's own combos and
+        worn kits (F42); omitted, the rest reads naked at default combos.
 
         THE ROLE GATE (`role`): "auto" resolves the weapon's primary
         seat, an explicit seat id uses that seat, None is the explicit
@@ -1920,10 +1924,19 @@ class Engine:
                 by_slot["armor"] = unclothed
         bare = self.member_extra(weapon, combo)
         if party is not None:
+            n = len(party)
             joined = list(party) + [weapon]
-            base_gears = [None] * len(party)
-            joined_combos = [None] * len(party) + [combo]
-            f_bare = self.fitness(joined, joined_combos, base_gears + [None])
+            base_gears = [(list(party_gears[j]) if party_gears
+                           and j < len(party_gears) and party_gears[j]
+                           else None) for j in range(n)]
+            joined_combos = [(party_combos[j] if party_combos
+                              and j < len(party_combos) else None)
+                             for j in range(n)] + [combo]
+            # the worn rest is dressed once per waived set, not once per
+            # item (an item completing a self-cost offset dresses it again)
+            memo = {}
+            f_bare = self.fitness(joined, joined_combos, base_gears + [None],
+                                  memo)
         options = {}
         for slot in sorted(by_slot):
             doc_pool = set(doctrine.get(slot) or [])
@@ -1956,7 +1969,7 @@ class Engine:
                         value += self._weights.get(c, 0.0) * d
                 else:
                     value = self.fitness(joined, joined_combos,
-                                         base_gears + [[k]]) - f_bare
+                                         base_gears + [[k]], memo) - f_bare
                 passive = None
                 if seat_class:
                     p = ((self.gear[k].get("doctrine_passives") or {})
@@ -2289,36 +2302,94 @@ class Engine:
                 s[cap] = s.get(cap, 0) + v
         return s
 
-    def effective_supply(self, party, combos=None, gears=None):
+    def effective_supply(self, party, combos=None, gears=None, memo=None):
         """Supply after style-delivery physics AND the one-spell-per-slot
         loadout rule. ALL scoring — floors included — reads THIS.
 
         gears (optional, full-build members): per-member list of gear keys
-        or (key, choice) pairs; None = weapon-only (unchanged behavior)."""
+        or (key, choice) pairs; None = weapon-only (unchanged behavior).
+        A combos or gears list shorter than the party reads None past its
+        end (_pad), as the JS port reads a missing entry. `memo` (a dict
+        the caller keeps for one sweep in one context) reuses each dressed
+        member's build_extra, keyed by (weapon, combo, kit, waived): the
+        kit advisor prices every item against the same worn rest (F42)."""
+        combos = self._pad(combos, len(party))
+        gears = self._pad(gears, len(party))
         s = {}
         waived = self._self_cost_waivers(gears) if gears else frozenset()
         for i, w in enumerate(party):
-            extra = (self.build_extra(w, combos[i] if combos else None,
-                                      gears[i] if gears else None,
-                                      waive_costs=waived)
-                     if gears and gears[i] else
-                     self.member_extra(w, combos[i] if combos else None))
+            c = combos[i] if combos else None
+            g = gears[i] if gears else None
+            if not g:
+                extra = self.member_extra(w, c)
+            elif memo is None:
+                extra = self.build_extra(w, c, g, waive_costs=waived)
+            else:
+                mk = (w, c, tuple(x if isinstance(x, str) else tuple(x)
+                                  for x in g), waived)
+                extra = memo.get(mk)
+                if extra is None:
+                    extra = memo[mk] = self.build_extra(w, c, g,
+                                                        waive_costs=waived)
             for cap, v in extra.items():
                 s[cap] = s.get(cap, 0.0) + v
         if self.nonstack:
-            self._apply_nonstack(s, party, combos)
+            self._apply_nonstack(s, party, combos, gears)
         return s
 
-    def _apply_nonstack(self, s, party, combos):
+    @staticmethod
+    def _pad(seq, n):
+        """A per-member list (combos, gears) shorter than the party, padded
+        with None past its end: the default combo, a naked member — the JS
+        port's reading of a missing entry. An aligned or longer list, or
+        None, is returned as given."""
+        if seq and len(seq) < n:
+            return list(seq) + [None] * (n - len(seq))
+        return seq
+
+    def _ns_share(self, v, cap, gear):
+        """A count-once spell's units `v` on `cap` as a member wearing
+        `gear` supplies them: build_extra's stat channel (damage, heal and
+        CC-duration %) multiplies the spell's units exactly as it
+        multiplies the member's whole capability, in the same order. No
+        doctrine passives: scoring never passes a role. Naked: `v`."""
+        if not gear:
+            return v
+        dmg = heal = ccdur = 0.0
+        for item in gear:
+            key = self.gear_key(item[0] if isinstance(item, (list, tuple))
+                                else item)
+            st = (self.gear.get(key) or {}).get("stats") or {}
+            dmg += st.get("magicspelldamagebonus",
+                          st.get("physicalspelldamagebonus", 0.0))
+            heal += st.get("healbonus", 0.0)
+            ccdur += st.get("bonusccdurationvsplayers", 0.0)
+        bs = self.mechanics.get("build_stats") or {}
+        if dmg > 0.0 and cap in (bs.get("damage_mult_caps") or []):
+            v *= 1.0 + dmg
+        if heal > 0.0 and cap in (bs.get("heal_mult_caps") or []):
+            v *= 1.0 + heal
+        if ccdur > 0.0 and cap in (bs.get("cc_mult_caps") or []):
+            v *= 1.0 + ccdur
+        return v
+
+    def _apply_nonstack(self, s, party, combos, gears=None):
         """Count-once rule for verified non-stacking interaction spells: when
         two or more members equip the same such spell, each listed capability
-        keeps only the LARGEST single-member contribution. Deterministic
-        order (sorted spell ids, stored cap order, party order) — the JS
-        mirror must accumulate identically."""
+        keeps only the LARGEST single-member contribution. A dressed
+        member's contribution is its share AS WORN (_ns_share): the kit's
+        stat channel multiplies the spell's units with the rest of the
+        member's damage, so a duplicate keeps no part of its copy.
+        Deterministic order (sorted spell ids, stored cap order, party
+        order) — the JS mirror must accumulate identically."""
         groups = {}
         for i, w in enumerate(party):
+            g = gears[i] if gears else None
             for sid, contrib in self._nonstack_contrib(
                     w, combos[i] if combos else None).items():
+                if g:
+                    contrib = {cap: self._ns_share(v, cap, g)
+                               for cap, v in contrib.items()}
                 groups.setdefault(sid, []).append(contrib)
         for sid in sorted(groups):
             lst = groups[sid]
@@ -2398,8 +2469,8 @@ class Engine:
         return cov, self._floor_penalty(cap, hf) - self._floor_penalty(cap, hf + gf)
 
     # ---------------------------------------------------------------- fitness
-    def fitness(self, party, combos=None, gears=None):
-        s = self.effective_supply(party, combos, gears)
+    def fitness(self, party, combos=None, gears=None, memo=None):
+        s = self.effective_supply(party, combos, gears, memo)
         # Option C: STRUCTURAL hard floors read the weapon+loadout supply
         # — worn gear improves coverage/headroom/overstack but can never
         # satisfy a structural floor (the pseudo-tankiness rule extended
@@ -2458,6 +2529,7 @@ class Engine:
 
     def _syn_state(self, party, combos=None):
         """(effective supply, per-active-pair J) — the synergy inputs."""
+        combos = self._pad(combos, len(party))
         s = self.effective_supply(party, combos)
         J = [0.0] * len(self._active_syn)
         for i, w in enumerate(party):
@@ -2606,10 +2678,16 @@ class Engine:
         weapon-keyed (synergy() computes its own gears-free supply). So
         `s` is the FIT supply (dressed when gears are given) and `s_syn`
         the weapon-only supply every synergy term reads. gears=None keeps
-        both the same object — bit-identical to the pre-gears state."""
+        both the same object — bit-identical to the pre-gears state.
+        Likewise `ns_max` holds the largest count-once contribution per
+        spell on the weapon-only basis (the synergy and floor terms read
+        it) and `ns_max_fit` the largest share AS WORN (_ns_share) on the
+        fit supply — the same object on a naked party."""
+        combos = self._pad(combos, len(party))
+        gears = self._pad(gears, len(party))
         s_syn, J = self._syn_state(party, combos)
-        s = (self.effective_supply(party, combos, gears)
-             if gears and any(gears) else s_syn)
+        dressed = bool(gears) and any(gears)
+        s = self.effective_supply(party, combos, gears) if dressed else s_syn
         pair_vals = []
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
@@ -2619,17 +2697,27 @@ class Engine:
         for w in party:
             counts[w] = counts.get(w, 0) + 1
         ns_max = {}
+        ns_fit = {} if dressed else None
         if self.nonstack:
             for i, w in enumerate(party):
+                g = gears[i] if dressed else None
                 for sid, contrib in self._nonstack_contrib(
                         w, combos[i] if combos else None).items():
                     cur = ns_max.setdefault(sid, {})
                     for cap, v in contrib.items():
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
+                    if ns_fit is not None:
+                        curf = ns_fit.setdefault(sid, {})
+                        for cap, v in contrib.items():
+                            if g:
+                                v = self._ns_share(v, cap, g)
+                            if v > curf.get(cap, 0.0):
+                                curf[cap] = v
         waived = self._self_cost_waivers(gears) if gears else frozenset()
         return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
                 "counts": counts, "ns_max": ns_max,
+                "ns_max_fit": ns_max if ns_fit is None else ns_fit,
                 # carrier quota: what this roster already
                 # wears of each capped effect-carrier chest
                 "carriers": self._carrier_counts(party, gears),
@@ -2639,7 +2727,7 @@ class Engine:
                 # the exact comp_score delta; F1d pins it)
                 "waived": waived,
                 "pending": (self._offset_pending(party, combos, gears, waived)
-                            if gears and any(gears) else {}),
+                            if dressed else {}),
                 # pair-aware prior: each seat's best observed
                 # partner so far, so a candidate's exact meta delta can
                 # include the raise it hands existing members
@@ -2699,14 +2787,20 @@ class Engine:
                                       s.get(b, 0.0) + extra.get(b, 0.0), j2) - pv[p]
         return total
 
-    def _nonstack_adjust(self, state, weapon, combo, extra):
+    def _nonstack_adjust(self, state, weapon, combo, extra, fit=False,
+                         gear=None):
         """The candidate's effective caps with the count-once rule applied
-        against the CURRENT party (state.ns_max): for each verified
-        non-stacking spell the combo shares with a member, the listed caps
-        gain only max(0, candidate - party_max) — exactly what
-        effective_supply(party + candidate) would show. Returns `extra`
-        itself when nothing applies (fast path)."""
-        ns_max = state.get("ns_max")
+        against the CURRENT party: for each verified non-stacking spell the
+        combo shares with a member, the listed caps gain only
+        max(0, candidate - party_max) — exactly what
+        effective_supply(party + candidate) would show. The default prices
+        the weapon-only basis the synergy and floor terms read
+        (state.ns_max); `fit` prices the fit supply (state.ns_max_fit),
+        the candidate's share taken as worn in `gear` (_ns_share). Whether
+        anything applies depends on (weapon, combo, state) alone, never on
+        `extra` or `fit`. Returns `extra` itself when nothing applies (fast
+        path)."""
+        ns_max = state.get("ns_max_fit" if fit else "ns_max")
         if not self.nonstack or not ns_max:
             return extra
         adj = None
@@ -2720,6 +2814,8 @@ class Engine:
                 v = contrib.get(cap, 0.0)
                 if not v:
                     continue
+                if gear:
+                    v = self._ns_share(v, cap, gear)
                 gain = v - pmax.get(cap, 0.0)
                 adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
         return adj if adj is not None else extra
@@ -2833,9 +2929,15 @@ class Engine:
             d_fit = (self._marg_fit_pre(state["s"], items, state["s_syn"])
                      if split else self._marg_fit_pre(state["s"], items))
             d_syn = self._marg_syn_pre(state, extra, pairs)
+        elif split:
+            # the fit side prices the dressed members' count-once shares
+            # (ns_max_fit); the floor and synergy sides the weapon-only ones
+            adj_fit = self._nonstack_adjust(state, weapon, i, extra, True)
+            d_fit = self._marg_fit_from(state["s"], adj_fit, state["s_syn"],
+                                        adj)
+            d_syn = self._marg_syn_from(state, adj, extra)
         else:
-            d_fit = (self._marg_fit_from(state["s"], adj, state["s_syn"], adj)
-                     if split else self._marg_fit_from(state["s"], adj))
+            d_fit = self._marg_fit_from(state["s"], adj)
             d_syn = self._marg_syn_from(state, adj, extra)
         return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
 
@@ -2887,21 +2989,23 @@ class Engine:
         return pre
 
     def _combo_score_dressed(self, state, weapon, i, wextra, dextra,
-                             vkey=None, refund=None):
+                             vkey=None, refund=None, vgears=None):
         """_combo_score for a DRESSED candidate: the fit half prices the
         dressed vector, the synergy half the weapon-only vector — the
         exact decomposition of comp_score-with-gears (fitness reads
         gears, synergy does not). When the vectors
         are the same object this IS _combo_score. With `vkey` and no
         non-stacking adjustment, the precomputed _pre views evaluate the
-        same numbers faster (F1/F22b pin the equality at 1e-9)."""
+        same numbers faster (F1/F22b pin the equality at 1e-9). `vgears`
+        is the kit `dextra` wears: its count-once share is priced as worn
+        (F40)."""
         if dextra is wextra:
             return self._combo_score(state, weapon, i, wextra)
         # Option C: a DRESSED candidate's floor terms read the weapon-only
         # basis on BOTH sides — s_syn for the party (== s when the party is
         # naked) and the candidate's weapon-only gains — so its kit can
         # never buy floor relief the party's kits are denied.
-        adj = self._nonstack_adjust(state, weapon, i, dextra)
+        adj = self._nonstack_adjust(state, weapon, i, dextra, True, vgears)
         if adj is dextra and vkey is not None and not refund:
             items = self._dressed_pre(weapon)[vkey][i]
             _wi, pairs = self._combo_pre(weapon)[i]
@@ -2918,7 +3022,10 @@ class Engine:
                     adj[cap] = adj.get(cap, 0.0) + v
             d_fit = self._marg_fit_from(state["s"], adj, state["s_syn"],
                                         adj_w)
-            d_syn = self._marg_syn_from(state, wextra)
+            # synergy prices the count-once weapon supply (adj_w) with the
+            # member's unadjusted caps for J, as _combo_score does: a kit
+            # never restores supply the count-once rule removed
+            d_syn = self._marg_syn_from(state, adj_w, wextra)
         return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
 
     def _eval_pick(self, state, weapon):
@@ -2944,10 +3051,12 @@ class Engine:
                 ov = self._offset_vector(state, weapon, i, vgears)
                 if ov is None:
                     val, d_fit, d_syn = self._combo_score_dressed(
-                        state, weapon, i, extras[i], dext[i], vkey)
+                        state, weapon, i, extras[i], dext[i], vkey, None,
+                        vgears)
                 else:
                     val, d_fit, d_syn = self._combo_score_dressed(
-                        state, weapon, i, extras[i], ov[0], None, ov[1])
+                        state, weapon, i, extras[i], ov[0], None, ov[1],
+                        vgears)
                 if best is None or val > best[0]:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
@@ -2955,6 +3064,27 @@ class Engine:
         score, d_fit, d_syn, meta, combo = self._pick_tail(
             state, weapon, best[:4])
         return score, d_fit, d_syn, meta, combo, best[4], best[5]
+
+    def _as_built(self, state, weapon, combo=None, gear=None):
+        """The exact comp_score delta of adding `weapon` in ONE given build
+        — its own combo (None or out of range: the default, as
+        member_extra reads it) and kit — to the party `state` describes:
+        _eval_pick's marginal without the search (F1's identity), so no
+        carrier quota or variant fallback, as comp_score applies neither.
+        swap_review's built_score (F41)."""
+        extras = self._combo_extras(weapon)
+        if combo is None or combo < 0 or combo >= len(extras):
+            combo = self.default_combo(weapon)
+        if gear:
+            ov = self._offset_vector(state, weapon, combo, gear)
+            dext, refund = ov if ov else (self.build_extra(weapon, combo, gear),
+                                          None)
+            best = self._combo_score_dressed(state, weapon, combo,
+                                             extras[combo], dext, None,
+                                             refund, gear)
+        else:
+            best = self._combo_score(state, weapon, combo, extras[combo])
+        return self._pick_tail(state, weapon, best + (combo,))[0]
 
     def best_loadout(self, s, weapon):
         """Legacy shim (golden T14; explain callers migrated): the candidate's
@@ -2977,23 +3107,23 @@ class Engine:
         return best[1], best[2], best[3]
 
     def explain(self, party, candidate, combos=None, gears=None):
-        """Per-capability delta terms for the candidate's CHOSEN loadout —
-        these ARE the 'why' text, and they match what _eval_pick scored."""
+        """Per-capability delta terms for the candidate's CHOSEN loadout and
+        kit — these ARE the 'why' text, and they match what _eval_pick
+        scored: the gap-closing half (coverage + floor lift) of the same
+        _pick_caps rows pick_report shows, so the kit, the count-once rule
+        and the self-cost offset reach the text exactly as they reached
+        the score (T54)."""
         state = self.party_state(party, combos, gears)
-        _sc, _df, _ds, _meta, combo, _var, _vg = self._eval_pick(state, candidate)
-        extra = self.member_extra(candidate, combo)
-        s = state["s"]
+        _sc, _df, _ds, _meta, combo, _var, vgears = self._eval_pick(
+            state, candidate)
+        rows, _caps_gain = self._pick_caps(state, candidate, combo, vgears)
         terms = []
-        for cap, gain in extra.items():
-            if cap not in self.reqs or not gain:
-                continue
-            have, target = s.get(cap, 0.0), self.target(cap)
-            cov, floor_d = self._cover_terms(cap, have, gain, target,
-                                             state["s_syn"].get(cap, 0.0))
-            d = cov + floor_d
+        for r in rows:
+            d = r["coverage"] + r["floor_lift"]
             if d > 0.05:
-                terms.append({"delta": _round2(d), "cap": cap,
-                              "before": have, "after": have + gain, "target": target})
+                terms.append({"delta": _round2(d), "cap": r["cap"],
+                              "before": r["before"], "after": r["after"],
+                              "target": r["target"]})
         return sorted(terms, key=lambda t: (-_qrank(t["delta"]), t["cap"]))
 
     # ------------------------------------- negative recs / redundancy lens
@@ -3027,7 +3157,9 @@ class Engine:
         extra = (ov[0] if ov else
                  self.build_extra(weapon, combo, vgears) if vgears
                  else self.member_extra(weapon, combo))
-        adj = self._nonstack_adjust(state, weapon, combo, extra)
+        # the fit rows price the count-once rule on the fit supply, the
+        # candidate's share as worn (F40)
+        adj = self._nonstack_adjust(state, weapon, combo, extra, True, vgears)
         if ov and ov[1]:
             adj = dict(adj)
             for cap, v in ov[1].items():
@@ -3035,9 +3167,9 @@ class Engine:
         # Option C floor basis: floor_lift rows read the weapon-only party
         # supply and the candidate's weapon-only adjusted gains, exactly as
         # the marginal scored them (rows must still sum to d_fitness).
-        adj_w = (self._nonstack_adjust(
-                     state, weapon, combo, self.member_extra(weapon, combo))
-                 if vgears else adj)
+        adj_w = self._nonstack_adjust(
+            state, weapon, combo,
+            self.member_extra(weapon, combo) if vgears else extra)
         s, sf = state["s"], state["s_syn"]
         rows, caps_gain = [], 0.0
         for cap, gain in adj.items():
@@ -3080,7 +3212,8 @@ class Engine:
         alpha*d_fitness + beta*d_synergy + delta*meta + viability*viab
         - dup_penalty reconstructs the score (both pinned at 1e-9).
         `nonstack` names verified count-once spells the party already
-        carries and the units the duplicate loses to them.
+        carries and the units the duplicate loses to them on the fit
+        supply the caps rows price (each share as worn).
         DESCRIPTIVE ONLY — computing it never changes a score."""
         state = self.party_state(party, combos, gears)
         score, d_fit, d_syn, meta, combo, _var, vgears = \
@@ -3089,7 +3222,7 @@ class Engine:
         dup = state["counts"].get(candidate, 0) + 1 - self._dup_free(candidate)
         dup_penalty = self.rho * dup if dup > 0 else 0.0
         ns_lines = []
-        ns_max = state.get("ns_max") or {}
+        ns_max = state.get("ns_max_fit") or {}
         contrib = self._nonstack_contrib(candidate, combo)
         for sid in sorted(contrib):
             pmax = ns_max.get(sid)
@@ -3098,6 +3231,8 @@ class Engine:
             lost = {}
             for cap in self.nonstack[sid]:
                 v = contrib[sid].get(cap, 0.0)
+                if v and vgears:
+                    v = self._ns_share(v, cap, vgears)
                 cut = v if v < pmax.get(cap, 0.0) else pmax.get(cap, 0.0)
                 if v and cut > 0.0:
                     lost[cap] = cut
@@ -3122,7 +3257,9 @@ class Engine:
     def recommend(self, party, top_n=4, pool=None, combos=None, gears=None):
         state = self.party_state(party, combos, gears)
         out = []
-        for w in (pool or self.suggest_pool()):
+        # pool None reads suggest_pool(); a given list, empty included, is
+        # the candidate set as given (F37) — as forge and replace_options
+        for w in (self.suggest_pool() if pool is None else pool):
             score, d_fit, d_syn, meta, combo, _var, vgears = \
                 self._eval_pick(state, w)
             out.append({
@@ -3154,11 +3291,26 @@ class Engine:
         return out
 
     def swap_review(self, party, top_n=3, pool=None, combos=None, gears=None):
-        """Per-member swap advisor. Each member's CURRENT weapon is valued
-        exactly as _eval_pick would value it as a pick into the REST of the
-        party, ranked against every alternative. `off_comp` flags members the
-        viability rules bar from generated comps at this content+size —
-        loadable, scoreable, advised against."""
+        """Per-member swap advisor, a WEAPON-CHOICE read: each member's
+        CURRENT weapon is valued exactly as _eval_pick would value it as a
+        pick into the REST of the party (its combo and doctrine kit
+        re-resolved, as for every alternative) and ranked against every
+        alternative. `score`, `rank`, `verdict` and each option's `gain`
+        compare weapons at their best builds; `combo` / `kit` name the
+        build `score` assumed (T17). Beside it, the member AS BUILT:
+        `built_score` is the exact comp_score(party) - comp_score(rest)
+        in the member's own combo and kit (_as_built on the rest's
+        state), `build_gap` = score - built_score, and each option's
+        `delta` is the exact comp_score change of the swap landing in
+        that option's `combo` and `kit` (replace_options' delta for the
+        same build; F41). `pool`: None reads suggest_pool(); a given
+        list, empty included, is the candidate set as given (F37).
+        `off_comp` flags members the viability rules bar from generated
+        comps at this content+size — loadable, scoreable, advised
+        against."""
+        cand = list(self.suggest_pool() if pool is None else pool)
+        combos = self._pad(combos, len(party))
+        gears = self._pad(gears, len(party))
         out = []
         for i, cur in enumerate(party):
             rest = party[:i] + party[i + 1:]
@@ -3167,33 +3319,40 @@ class Engine:
             state = self.party_state(rest, rest_combos, rest_gears)
             cur_pick = self._eval_pick(state, cur)
             cur_score = cur_pick[0]
+            built = self._as_built(state, cur, combos[i] if combos else None,
+                                   gears[i] if gears else None)
             # redundancy lens: the member valued exactly as
             # a pick into the rest — does it still close any gap, or are its
             # jobs already covered without it? Descriptive flag only.
             _rows, caps_gain = self._pick_caps(state, cur, cur_pick[4],
                                                cur_pick[6])
             better = []
-            for w in (pool or self.suggest_pool()):
+            for w in cand:
                 if w == cur:
                     continue
-                v = self._eval_pick(state, w)[0]
-                if v > cur_score:
-                    better.append((v, w))
+                pk = self._eval_pick(state, w)
+                if pk[0] > cur_score:
+                    better.append((pk[0], w, pk[4], pk[6]))
             better.sort(key=lambda t: (-_qrank(t[0]), t[1]))
+            verdict = self._pick_verdict(cur_score, caps_gain)
             out.append({
                 "index": i, "weapon": cur,
                 "display_name": self.weapons[cur]["display_name"],
                 # rank = strictly-better alternatives + 1 (ties never demote)
                 "score": cur_score, "rank": len(better) + 1,
+                "combo": cur_pick[4], "kit": list(cur_pick[6] or []),
+                "built_score": built, "build_gap": cur_score - built,
                 "off_comp": self.is_excluded(cur),
                 "off_style": self.is_style_unfit(cur),
                 "caps_gain": caps_gain,
-                "verdict": self._pick_verdict(cur_score, caps_gain),
-                "redundant": self._pick_verdict(cur_score, caps_gain) != "ok",
+                "verdict": verdict,
+                "redundant": verdict != "ok",
                 "options": [{"weapon": w,
                              "display_name": self.weapons[w]["display_name"],
-                             "score": v, "gain": v - cur_score}
-                            for v, w in better[:top_n]],
+                             "score": v, "gain": v - cur_score,
+                             "delta": v - built,
+                             "combo": c, "kit": list(k or [])}
+                            for v, w, c, k in better[:top_n]],
             })
         return out
 
@@ -3205,10 +3364,12 @@ class Engine:
                 for cap in self.reqs]
         return sorted(gaps, key=lambda g: (-_qrank(g["gap"]), g["cap"]))[:top_n]
 
-    def uncovered_caps(self, party, combos=None):
+    def uncovered_caps(self, party, combos=None, gears=None):
         """High-weight capabilities under half-supplied — feeds the greedy-trap
-        lookahead warning (design doc §4.4.1)."""
-        s = self.effective_supply(party, combos)
+        lookahead warning (design doc §4.4.1). `gears`: the members' worn
+        kits, read like every other board number (targets speak person
+        units); None reads the roster naked."""
+        s = self.effective_supply(party, combos, gears)
         return [cap for cap in self.reqs
                 if self.weight(cap) >= 5 and s.get(cap, 0) / self.target(cap) < 0.5]
 
@@ -3233,6 +3394,7 @@ class Engine:
         honest prompt to check, never an invented penalty. Keyed by
         spell, so the same effect via two different weapons is caught and
         two different named effects on one stat are NOT."""
+        combos = self._pad(combos, len(party))
         by_spell = {}
         for i, w in enumerate(party):
             for _slot, sid in self.combo_spells(
@@ -3283,6 +3445,7 @@ class Engine:
         duplicate conflicts, CC-type coverage from interaction records, and
         the damage/utility/defense supply profiles. Returns plain data —
         callers render it."""
+        combos = self._pad(combos, len(party))
         s = self.effective_supply(party, combos)
         strengths, missing = [], []
         for cap in self.reqs:
@@ -3476,6 +3639,7 @@ class Engine:
 
         DESCRIPTIVE ONLY (F-V3-2): nothing here feeds fitness,
         recommendation order, or the forge."""
+        combos = self._pad(combos, len(party))
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
         melee_bomb = 0.0
@@ -3835,22 +3999,26 @@ class Engine:
     def fight_chain(self, party, combos=None, gears=None, candidate=None):
         """The comp as the SEQUENCE a caller thinks the fight in (the
         caller's own vocabulary): the declared style's chain from
-        styles.yaml — balanced falls back to the detected identity's
-        chain — with every stage graded against the comp-fitted template
-        targets over effective supply. Verdicts: strong / ok / weak /
-        missing; stages whose capabilities this content does not require
-        read quiet (no bar to fail).
+        styles.yaml — balanced falls back to the chain of the identity
+        comp_identity reads on the same worn kits (T35: the kits decide a
+        split; T40: leather-majority dps overrule a weapons-decided clap),
+        so the chain and the identity headline name one playstyle
+        (T26d) — with every stage graded against the comp-fitted
+        template targets over effective supply. Verdicts: strong / ok /
+        weak / missing; stages whose capabilities this content does not
+        require read quiet (no bar to fail).
 
         `candidate` (optional, a weapon key): also reports which stage
         that pick improves most, from the same explain() terms the
-        recommendation shows — connecting the engine's pick to the stage
-        it repairs.
+        recommendation shows, on the same gears — connecting the
+        engine's pick to the stage it repairs.
 
         DESCRIPTIVE ONLY: nothing here feeds scoring. Returns None when
         no chain applies (no declared style and no detected identity)."""
+        combos = self._pad(combos, len(party))
         styles = self.data.get("styles") or {}
         style = (self.style if self.style in self.IDENTITY_STYLES
-                 else self.comp_identity(party, combos)["style"])
+                 else self.comp_identity(party, combos, gears)["style"])
         chain = (styles.get(style) or {}).get("chain") if style else None
         if not chain:
             return None
@@ -3918,7 +4086,7 @@ class Engine:
             # explain() deltas are already weighted fitness terms —
             # summed per stage, never re-weighted
             deltas = {t["cap"]: t["delta"]
-                      for t in self.explain(party, candidate, combos)}
+                      for t in self.explain(party, candidate, combos, gears)}
             total = sum(deltas.values())
             best_stage, best_gain, best_caps = None, 0.0, []
             for st in stages:
@@ -3958,12 +4126,14 @@ class Engine:
         when it has none or dressing is off; same-weapon re-kitting is
         not searched, matching the legacy same-weapon skip), and the
         result returns {"party", "gears"}. gears=None keeps the legacy
-        weapon-only search bit-identical, returning the plain list."""
+        weapon-only search bit-identical, returning the plain list.
+        `pool`: None reads every non-retired weapon (self.pool); a given
+        list, empty included, is the candidate set as given (F37)."""
         party = list(party)
         if gears is None:
             if not party:
                 return party
-            candidates = list(pool or self.pool)
+            candidates = list(self.pool if pool is None else pool)
             best = self.comp_score(party)
             for _ in range(max_passes):
                 move, gain = None, 1e-9   # strictly-positive gain required
@@ -3988,7 +4158,7 @@ class Engine:
         gl = gl[:len(party)]
         if not party:
             return {"party": party, "gears": gl}
-        candidates = list(pool or self.pool)
+        candidates = list(self.pool if pool is None else pool)
         best = self.comp_score(party, None, gl)
         for _ in range(max_passes):
             move, gain = None, 1e-9   # strictly-positive gain required
@@ -4435,10 +4605,11 @@ class Engine:
                 ov = self._offset_vector(state, w, i, vgears)
                 if ov is None:
                     val, d_fit, d_syn = self._combo_score_dressed(
-                        state, w, i, extras[i], dressed[vkey][i], vkey)
+                        state, w, i, extras[i], dressed[vkey][i], vkey, None,
+                        vgears)
                 else:
                     val, d_fit, d_syn = self._combo_score_dressed(
-                        state, w, i, extras[i], ov[0], None, ov[1])
+                        state, w, i, extras[i], ov[0], None, ov[1], vgears)
                 if best is None or val > best[0]:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:

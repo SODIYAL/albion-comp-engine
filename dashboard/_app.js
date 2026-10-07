@@ -126,7 +126,8 @@ const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
    gear the numerator is scored with. */
 const maxFitness = (p = party) => ENG.maxFitness(
   p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
-const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
+const uncoveredCaps = p => ENG.uncoveredCaps(
+  p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 /* DRESSED like everything else on the page: the biggest-need
    ranking used to read the naked roster while the pick, the "have" number
    and the radar read the worn kits, so a plate-clad 5-tank comp reported
@@ -704,11 +705,17 @@ function renderSetup(){
   }
 }
 /* Per-member swap advice (engine swapReview): a member's weapon is valued as
-   if being picked into the rest of the party and ranked against every
-   alternative. Hints show only when they're worth acting on — a decent pick
-   (top ~10% rank) or marginal gains stay silent, so a 3-man missing "ideal"
-   pieces isn't nagged; a genuinely off-comp weapon at this content + size
-   gets multiple concrete options, clickable to swap in place. */
+   if being picked into the rest of the party, in its best doctrine build,
+   and ranked against every alternative — a weapon-choice read, so a build
+   shortfall never turns into weapon advice. Hints show only when they're
+   worth acting on — a decent pick (top ~10% rank) or marginal gains stay
+   silent, so a 3-man missing "ideal" pieces isn't nagged; a genuinely
+   off-comp weapon at this content + size gets multiple concrete options,
+   clickable to swap in place. The gating reads the weapon-choice gain; the
+   button shows the option's exact comp-score change against the member as
+   built (the replace list's number), and a click lands the option in the
+   combo and kit that change assumed (F41). A member short of its own best
+   build gets the build note instead, and its buttons the gain (L40g). */
 /* Verdict thresholds live in the DATA layer (templates/scoring.yaml
    swap_advisor block) like every other PROVISIONAL tunable, so a curation
    pass can find them; the fallback only covers a pre-block dataset. */
@@ -741,6 +748,18 @@ function swapEligible(review){
   Object.values(claim).forEach(c => ok.add(c.i));
   return ok;
 }
+/* A member at least min_gain short of its OWN best build (build_gap: the
+   review's combo and doctrine kit against the build it wears) is offered
+   that build in one click, the weapon kept — the shortfall is the build's,
+   never the weapon's. Lands through the swap handler like any option. */
+const buildShort = m => !!m && m.build_gap >= SWAP_CFG.min_gain;
+function buildNote(m, i){
+  if (!buildShort(m)) return "";
+  const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
+  return `<span class="fn swap"><span class="swap-lbl">short of its best build</span>
+    <button class="swap-opt" data-swapat="${i}" data-swapto="${m.weapon}"
+      title="keep ${nameOf(m.weapon)} and take its scored combo and doctrine kit: ${signed(m.build_gap)} comp score over the build it wears">best build ${signed(m.build_gap)}</button></span>`;
+}
 function swapHint(m, i){
   if (!m) return "";
   const forced = (m.off_comp || m.off_style) && m.options.length;
@@ -756,9 +775,16 @@ function swapHint(m, i){
       : m.rank >= SWAP_CFG.offcomp_rank
       ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
       : `<span class="swap-lbl">better options</span>`;
-  return `<span class="fn swap">${label} ${opts.map(o =>
-    `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
-       title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)} (+${o.gain.toFixed(1)} score)">${nameOf(o.weapon)} +${o.gain.toFixed(1)}</button>`).join(" ")}</span>`;
+  const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
+  /* the button shows the swap's exact change against the member as built;
+     when the build note shows, the build gap rides that note and the
+     button shows the weapon's own edge (delta = gain + build_gap) */
+  const short = buildShort(m);
+  return `<span class="fn swap">${label} ${opts.map(o => {
+    const d = o.delta === undefined || short ? o.gain : o.delta;
+    return `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
+       title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)}: ${signed(o.delta === undefined ? o.gain : o.delta)} comp score in its doctrine kit against ${nameOf(m.weapon)} as built (${signed(o.gain)} over ${nameOf(m.weapon)} in its own best build)">${nameOf(o.weapon)} ${signed(d)}</button>`;
+  }).join(" ")}</span>`;
 }
 /* THE member popover — served identically in the party strip and the
    wheel's comp board. ctx carries the per-render roster analysis
@@ -771,7 +797,8 @@ function memberPop(i, ctx){
     : ' · <b class="least">least load-bearing</b>';
   return `<div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
     <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — a refresh rebuilds it">forged</span>' : PROV[i] === "l" ? '<span class="prov locked" title="locked — a refresh keeps this slot">locked</span>' : ""}</div>
-    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="generation rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
+    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="generation rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party in its best doctrine build, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
+    ${buildNote(ctx.review[i], i)}
     ${ctx.hintable.has(i) ? swapHint(ctx.review[i], i) : ""}
     <div class="dm-actions">
       <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
@@ -2954,11 +2981,25 @@ document.addEventListener("click", e => {
   const sw = e.target.closest("[data-swapat]");
   if (sw){
     const si = +sw.dataset.swapat;
+    /* a swap-advice option lands exactly as the review valued it — its
+       combo and doctrine kit, as a replace-list option lands (F41); the
+       member's own weapon (the build note) lands the review's best build
+       for it. Read before the roster changes, so the review is a cache
+       hit; any other row starts like a fresh add */
+    const rv = swapReviewCached()[si] || {};
+    const o = sw.dataset.swapto === party[si]
+      ? (rv.weapon === party[si] && rv.kit ? { combo: rv.combo, kit: rv.kit } : null)
+      : (rv.options || []).find(x => x.weapon === sw.dataset.swapto) || null;
     party[si] = sw.dataset.swapto;
-    COMBO[si] = null;      /* the new weapon resolves its own loadout */
+    COMBO[si] = o ? o.combo : null;   /* else the new weapon resolves its own loadout */
     LOADOUT[si] = undefined;   /* old spell-pick indices would misread
                                   against the new weapon's pools */
-    loadoutPrefill(si);    /* same start as a fresh add: caller reference */
+    if (o && o.kit && o.kit.length){
+      const L = (LOADOUT[si] = { _eng: 1 });
+      for (const k of o.kit){ const g = ENG.gear[k]; if (g && g.slot) L[g.slot] = k; }
+    }
+    if (o){ loadoutPrefillGear(si); loadoutApplySpells(si, o.combo); }
+    else loadoutPrefill(si);    /* same start as a fresh add: caller reference */
     PROV[si] = "m";        /* an explicit user choice is manual, even in a
                               formerly forged slot */
     FORGE_NOTE = null;

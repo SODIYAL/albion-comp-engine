@@ -183,12 +183,19 @@ function loadoutReference(w){
   return loadoutSelect(w, (typeof CONTENT !== "undefined") ? CONTENT : "", size);
 }
 
+/* A two-handed weapon has no off-hand (the engine's kit_options rule): no
+   fill — caller reference or kit advisor — puts one there, so an engine-kit
+   landing (swap, replace, forge result) scores the kit the engine priced. */
+function loSlotOpen(w, slot){
+  return !(slot === "offhand" && String(w).startsWith("2H_"));
+}
+
 function loadoutPrefill(i){
   const ref = loadoutReference(party[i]);
   const L = LOADOUT[i] || (LOADOUT[i] = {});
   if (ref){
     Object.entries(ref.gear || {}).forEach(([slot, key]) => {
-      if (!(slot in L) && loGear(key)) L[slot] = key;
+      if (!(slot in L) && loSlotOpen(party[i], slot) && loGear(key)) L[slot] = key;
     });
     /* caller sheets are 1-based ("q3" = third option); the pools are 0-based */
     LO_SPELLS.forEach(s => {
@@ -216,7 +223,8 @@ function loadoutSuggest(i){
   loadoutEngineGear(i);
 }
 
-/* the combo the engine actually scores for member i (null -> default) */
+/* member i's STORED combo (null -> the engine default); the combo scoring
+   reads, which also maps a member's own spell picks, is comboAt in _app.js */
 function loComboOf(i){
   return (typeof COMBO !== "undefined" && Number.isInteger(COMBO[i]))
     ? COMBO[i] : null;
@@ -243,16 +251,27 @@ function loadoutEngineSpells(i){
 function loadoutEngineGear(i){
   /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked):
      each empty gear slot gets the top-ranked item for THIS member in THIS
-     comp. The picks reach scoring through gearsFromLoadout in _app.js. */
+     comp — the member on the combo it is scored on, the rest in their own
+     combos and worn kits (read from LOADOUT, so the lists stay aligned
+     mid-mutation; F42). The picks reach scoring through gearsFromLoadout
+     in _app.js. */
   const w = party[i];
   if (typeof ENG === "undefined" || !ENG.kitOptions) return;
   const L = LOADOUT[i] || (LOADOUT[i] = {});
-  const empty = LO_SLOTS.filter(s => !(s in L)
-    && !(s === "offhand" && w.startsWith("2H_")));  /* 2H hands are full */
+  const empty = LO_SLOTS.filter(s => !(s in L) && loSlotOpen(w, s));
   if (!empty.length) return;
+  const scored = j => typeof comboAt === "function" ? comboAt(j) : loComboOf(j);
+  const worn = j => typeof gearsFromLoadout === "function"
+    ? gearsFromLoadout(LOADOUT[j]) : null;
+  const rest = [], restCombos = [], restGears = [];
+  party.forEach((pw, j) => {
+    if (j === i) return;
+    rest.push(pw); restCombos.push(scored(j)); restGears.push(worn(j));
+  });
   let ko;
   try {
-    ko = ENG.kitOptions(w, loComboOf(i), party.filter((_, j) => j !== i));
+    ko = ENG.kitOptions(w, scored(i), rest, undefined, undefined,
+                        restCombos, restGears);
   } catch (e) { return; }
   let used = false;
   empty.forEach(s => {
@@ -520,7 +539,7 @@ function loadoutPrefillGear(i){
   if (!ref) return;
   const L = LOADOUT[i] || (LOADOUT[i] = {});
   Object.entries(ref.gear || {}).forEach(([slot, key]) => {
-    if (!(slot in L) && loGear(key)) L[slot] = key;
+    if (!(slot in L) && loSlotOpen(party[i], slot) && loGear(key)) L[slot] = key;
   });
 }
 

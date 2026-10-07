@@ -99,6 +99,48 @@ def make_cases(data):
             cases.append({"content": "ancient_lands", "size": size, "style": style,
                           "party": party, "combos": [None] * len(party),
                           "gears": None, "refine_pool": weapons[5::11]})
+    # dressed members on the paths the random gear lists rarely reach (the
+    # kits are the engine's doctrine variants, handed to both ports as
+    # data): two count-once carriers in their kits on the shared spell
+    # (F40) with a third candidate in the pool; clap10 with leather dps,
+    # which the kits turn into a brawl (T26d); short per-member lists,
+    # read as padded with None (F38)
+    ek = Engine(content="castle_outpost", size=7)
+    carriers = [w for w in weapons
+                if any(ek._nonstack_contrib(w, i)
+                       for i in range(len(ek._combo_extras(w))))]
+    if len(carriers) >= 2:
+        a, b = carriers[0], carriers[1]
+        ca = next(i for i in range(len(ek._combo_extras(a)))
+                  if ek._nonstack_contrib(a, i))
+        cb = next(i for i in range(len(ek._combo_extras(b)))
+                  if ek._nonstack_contrib(b, i))
+        cases.append({"content": "castle_outpost", "size": 7, "style": "balanced",
+                      "party": [a, b, "MAIN_HOLYSTAFF_AVALON"],
+                      "combos": [ca, cb, None],
+                      "gears": [dict(ek.kit_variants(a))["v0"],
+                                dict(ek.kit_variants(b))["v0"], None],
+                      "refine_pool": carriers, "swap": True})
+    clap10 = ["2H_HAMMER", "MAIN_ROCKMACE_KEEPER", "MAIN_HOLYSTAFF_AVALON",
+              "2H_HOLYSTAFF", "2H_ICECRYSTAL_UNDEAD", "2H_ICECRYSTAL_UNDEAD",
+              "MAIN_ARCANESTAFF_UNDEAD", "2H_ARCANESTAFF_HELL",
+              "2H_FIRE_RINGPAIR_AVALON", "2H_INFERNOSTAFF_MORGANA"]
+    if all(w in data["weapons"] for w in clap10) \
+            and "ARMOR_LEATHER_SET3" in (data.get("gear") or {}):
+        cases.append({"content": "blackzone_roam", "size": 10, "style": "balanced",
+                      "party": clap10, "combos": [None] * len(clap10),
+                      "gears": [["ARMOR_LEATHER_SET3"]
+                                if ek.role_of(w) == "dps" else None
+                                for w in clap10],
+                      "refine_pool": weapons[2::11]})
+    multi = [w for w in weapons if _combo_count(data, w) > 1]
+    gk = sorted(data.get("gear") or {})
+    short_party = [multi[(13 * k) % len(multi)] for k in range(5)]
+    cases.append({"content": "blackzone_roam", "size": 20, "style": "clap",
+                  "party": short_party,
+                  "combos": [_combo_count(data, short_party[0]) - 1, None],
+                  "gears": [gk[:3]] if gk else [],
+                  "refine_pool": weapons[3::11], "swap": True})
     return cases
 
 
@@ -107,8 +149,10 @@ def make_cases(data):
 SWAP_EVERY, SWAP_MAX_PARTY = 6, 6
 
 
-def swap_case(i, party):
-    return party[:SWAP_MAX_PARTY] if i % SWAP_EVERY == 0 else None
+def swap_case(i, party, c=None):
+    # a case flagged "swap" (the dressed and short-list cases) always runs it
+    return (party[:SWAP_MAX_PARTY]
+            if i % SWAP_EVERY == 0 or (c or {}).get("swap") else None)
 
 
 # refine() is the other full-pool sweep — same sampling deal as swap_review.
@@ -164,7 +208,8 @@ def py_results(cases):
     out = []
     for i, c in enumerate(cases):
         e = Engine(content=c["content"], size=c["size"], style=c["style"])
-        sp = swap_case(i, c["party"])
+        sp = swap_case(i, c["party"], c)
+        gl = c["gears"] or []
         rp = refine_case(i, c["party"])
         fc = forge_case(i, c)
         forged = None
@@ -290,8 +335,121 @@ def py_results(cases):
                 "comp": _kit_ser(e.kit_options(
                     c["party"][0], party=c["party"][1:1 + KIT_MAX_REST])),
                 "free": _kit_ser(e.kit_options(c["party"][0]))}),
+            # the dressed paths: every reader handed the case's own combos
+            # and kits (F38-F42, T26d, T54, T55)
+            **_dressed_results(e, c, sp, rp, i, gl),
         })
     return out
+
+
+def _dressed_results(e, c, sp, rp, i, gl):
+    """The dressed and empty-pool outputs, serialized to the fields both
+    ports must agree on (the runner's dressedResults mirrors this)."""
+    party, combos = c["party"], c["combos"]
+    gears = c["gears"]
+    cand = party[0] if party else None
+    pool0 = c["refine_pool"][0] if c["refine_pool"] else None
+    return {
+        "identity_dressed": _ser_identity(e.comp_identity(party, combos, gears)),
+        "fight_chain_dressed": _ser_chain(e.fight_chain(party, combos, gears,
+                                                        candidate=cand)),
+        "kill_pressure_dressed": _ser_kp(e.kill_pressure(party, combos, gears)),
+        "uncovered_dressed": sorted(e.uncovered_caps(party, combos, gears)),
+        "explain_dressed": (None if pool0 is None else _ser_explain(
+            e.explain(party, pool0, combos, gears))),
+        "pick_report_dressed": (None if pool0 is None else _ser_report(
+            e.pick_report(party, pool0, combos, gears))),
+        "swap_dressed": (None if sp is None else _ser_swap(e.swap_review(
+            sp, 3, None, combos[:len(sp)], gl[:len(sp)]))),
+        # an explicit empty pool is no candidates in every entry point
+        # that takes one (F37)
+        "empty_pool": {
+            "recommend": [r["weapon"] for r in e.recommend(party, 4, pool=[])],
+            "swap": None if sp is None else [
+                [m["rank"], [o["weapon"] for o in m["options"]]]
+                for m in e.swap_review(sp, pool=[])],
+            "refine": None if rp is None else e.refine(
+                rp, max_passes=REFINE_PASSES, pool=[])},
+        # the kit advisor with the rest as equipped (F42), on the kit cadence
+        "kit_rest": (None if (i % KIT_EVERY != KIT_OFFSET or not party) else
+                     _kit_ser(e.kit_options(
+                         party[0], combos[0] if combos else None,
+                         party[1:1 + KIT_MAX_REST], 3, "auto",
+                         combos[1:1 + KIT_MAX_REST],
+                         gl[1:1 + KIT_MAX_REST]))),
+    }
+
+
+def _ser_identity(ia):
+    return {"style": ia["style"], "label": ia["label"],
+            "strength": ia["strength"], "band": ia["band"],
+            "carriers": ia["carriers"], "kit_lean": ia.get("kit_lean"),
+            "conflicts": [[x["weapon"], x["kind"]] for x in ia["conflicts"]],
+            "members": [[m["weapon"], m["role"], m["side"], m["fit"]]
+                        for m in ia["members"]],
+            "melee_share": ia["melee_share"], "posture": ia["posture"],
+            "mode": ia["mode"]}
+
+
+def _ser_chain(fc):
+    if fc is None:
+        return None
+    imp = fc["improves"]
+    return {"style": fc["style"],
+            "stages": [[s["name"], s["verdict"], s["caps"], s["have"], s["bar"],
+                        s["min"],
+                        [[r["cap"], r["member"], r["weapon"], r["slot"],
+                          r["spell"], r["units"]] for r in s["sources"]]]
+                       for s in fc["stages"]],
+            "improves": None if imp is None else [
+                imp["stage"], imp["gain"],
+                [[t["cap"], t["gain"]] for t in imp["terms"]]]}
+
+
+def _ser_kp(kp):
+    if kp is None:
+        return None
+    out = {"verdict": kp["verdict"]}
+    for k in ("pierce", "heal_cut", "burst"):
+        out[k] = [kp[k]["ok"], kp[k]["have"], kp[k]["bar"]]
+    return out
+
+
+def _ser_explain(terms):
+    return [[t["cap"], t["delta"], t["before"], t["after"], t["target"]]
+            for t in terms]
+
+
+def _ser_report(pr):
+    return [pr["verdict"], pr["combo"], pr["kit"], pr["score"],
+            pr["d_fitness"], pr["d_synergy"], pr["caps_gain"],
+            [[r["cap"], r["gain"], r["coverage"], r["floor_lift"],
+              r["overstack_cost"], r["delta"]] for r in pr["caps"]],
+            [[n["spell"], n["lost"]] for n in pr["nonstack"]]]
+
+
+def _ser_swap(rev):
+    return [[m["weapon"], m["score"], m["rank"], m["built_score"],
+             m["build_gap"], m["combo"], m["kit"], m["caps_gain"],
+             m["verdict"],
+             [[o["weapon"], o["score"], o["gain"], o["delta"], o["combo"],
+               o["kit"]] for o in m["options"]]]
+            for m in rev]
+
+
+def _close(a, b, eps=EPS):
+    """Deep equality at the parity tolerance: numbers within eps, lists
+    and tuples alike (JSON has no tuples), every other value exact."""
+    if isinstance(a, bool) or isinstance(b, bool):
+        return a == b
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+        return abs(a - b) <= eps
+    if isinstance(a, dict) and isinstance(b, dict):
+        return set(a) == set(b) and all(_close(a[k], b[k], eps) for k in a)
+    if isinstance(a, (list, tuple)) and isinstance(b, (list, tuple)):
+        return len(a) == len(b) and all(_close(x, y, eps)
+                                        for x, y in zip(a, b))
+    return a == b
 
 
 def main():
@@ -569,6 +727,14 @@ def main():
                     errs.append(f"swap {ma['weapon']} option scores differ")
             if len(a["swap"]) != len(b["swap"] or []):
                 errs.append("swap member count differs")
+        # the dressed and empty-pool outputs compare whole serializations
+        for k in ("identity_dressed", "fight_chain_dressed",
+                  "kill_pressure_dressed", "uncovered_dressed",
+                  "explain_dressed", "pick_report_dressed", "swap_dressed",
+                  "empty_pool", "kit_rest"):
+            if not _close(a.get(k), b.get(k)):
+                errs.append(f"{k}: py={str(a.get(k))[:240]} "
+                            f"js={str(b.get(k))[:240]}")
         if errs:
             bad += 1
             print(f"CASE {i} ({c['content']}/{c['style']}, party {len(c['party'])}): "

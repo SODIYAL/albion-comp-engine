@@ -172,7 +172,8 @@
     if ("kp" in DL_MEMO) return DL_MEMO.kp;
     DL_MEMO.kp = null;
     if (typeof ENG.killPressure !== "function") return null;
-    const kp = ENG.killPressure(party, COMBOS_CUR);
+    /* dressed like every board number: the bars speak person units */
+    const kp = ENG.killPressure(party, COMBOS_CUR, GEARS_CUR);
     if (!kp) return null;
     const lens = k => {
       const l = kp[k];
@@ -389,7 +390,9 @@
   }
   function chainLine(top){
     if (!party.length || typeof ENG.fightChain !== "function") return "";
-    const fc = ENG.fightChain(party, COMBOS_CUR, null, top ? top.w : null);
+    /* dressed, like the identity headline: the worn kits pick a balanced
+       comp's chain and grade its stages (T26, T26d) */
+    const fc = ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, top ? top.w : null);
     if (!fc) return "";
     const styleNm = (DATASET.styles[fc.style] || {}).name || fc.style;
     const seg = fc.stages.map(s =>
@@ -487,7 +490,9 @@
   function playerPoolRecs(){
     const keys = poolKeys();
     if (!keys.length || party.length >= HARD_CAP) return [];
-    return inPickContext(() => ENG.recommend(party, keys.length, keys, COMBOS_CUR))
+    /* priced against the party as equipped, like the main pick */
+    return inPickContext(() => ENG.recommend(party, keys.length, keys, COMBOS_CUR,
+                                             GEARS_CUR))
       .map(r => ({w:r.weapon, score:r.score, combo:r.combo}));
   }
 
@@ -507,8 +512,8 @@
   function slotRanking(i){
     if (!party.length || i < 0 || i >= party.length) return null;
     const cur = party[i];
-    let keys = poolKeys().filter(w => w !== cur);
-    if (!keys.length){
+    const pool = poolKeys();
+    if (!pool.length){
       /* no pool: reuse the memoized full-pool sweep the roster popovers
          already pay for, instead of a second 40-100ms sweep per render */
       const review = swapReviewCached()[i];
@@ -516,10 +521,16 @@
       return {cur, curScore:review.score,
               rows:review.options.map(x => ({w:x.weapon, score:x.score, gain:x.gain}))};
     }
+    /* a set pool limits the candidates: one holding only this slot's
+       weapon offers no alternative */
+    const keys = pool.filter(w => w !== cur);
     const rest = party.slice(0,i).concat(party.slice(i+1));
     const restCombos = COMBOS_CUR.slice(0,i).concat(COMBOS_CUR.slice(i+1));
-    const current = ENG.recommend(rest, 1, [cur], restCombos)[0];
-    const ranked = ENG.recommend(rest, keys.length, keys, restCombos)
+    /* the rest as equipped, the basis swapImpact and the no-pool sweep read */
+    const restGears = GEARS_CUR.slice(0,i).concat(GEARS_CUR.slice(i+1));
+    const current = ENG.recommend(rest, 1, [cur], restCombos, restGears)[0];
+    const ranked = (keys.length
+      ? ENG.recommend(rest, keys.length, keys, restCombos, restGears) : [])
       .filter(r => r.weapon !== cur);
     return {cur, curScore:current ? current.score : 0,
             rows:ranked.map(r => ({w:r.weapon, score:r.score,

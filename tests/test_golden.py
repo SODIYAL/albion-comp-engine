@@ -28,7 +28,7 @@ if not os.path.exists(DATASET):
     subprocess.run([sys.executable, os.path.join(ROOT, "pipeline", "build_dataset.py")],
                    check=False)
 
-from engine import Engine  # noqa: E402
+from engine import Engine, _round2  # noqa: E402
 import gear_join  # noqa: E402  (the builds_index join that dresses published comps)
 
 E = Engine(content="castle_outpost", size=7)
@@ -715,6 +715,48 @@ def run():
           and abs(sum(t["gain"] for t in imp["terms"]) - imp["gain"]) < 1e-9,
           f"contact_sources={len(con['sources'])} "
           f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
+
+    # T26d — BALANCED FOLLOWS THE DRESSED IDENTITY: a balanced comp is
+    # graded on the chain of the identity its worn kits decide (T35: the
+    # kits decide a split; T40: leather-majority dps overrule a
+    # weapons-decided clap), on the same dressed supply (T26), so the
+    # chain strip and the identity headline name one playstyle. clap10
+    # with leather dps reads brawl and gets the brawl chain; in cloth and
+    # naked it keeps the clap chain; the T35-shape split in leather gets
+    # the brawl chain where its naked read has none.
+    e26d = Engine(content="blackzone_roam", size=10)
+    dps26d = [i for i, w in enumerate(clap10) if e26d.role_of(w) == "dps"]
+    lea26d = [["ARMOR_LEATHER_SET3"] if i in dps26d else None
+              for i in range(len(clap10))]
+    clo26d = [["ARMOR_CLOTH_SET2"] if i in dps26d else None
+              for i in range(len(clap10))]
+    f26d = e26d.fitness(clap10, None, lea26d)
+    id26d = e26d.comp_identity(clap10, None, lea26d)
+    fc26d_lea = e26d.fight_chain(clap10, None, lea26d)
+    fc26d_clo = e26d.fight_chain(clap10, None, clo26d)
+    fc26d_nak = e26d.fight_chain(clap10)
+    split26d = ["2H_MACE", "2H_HAMMER", HALLOWFALL, GREAT_HOLY, "2H_AXE",
+                "2H_KNUCKLES_SET3", "2H_CLAYMORE_AVALON", LONGBOW, "2H_WARBOW",
+                "2H_FIRESTAFF"]
+    e26s = Engine(content="territory_defense", size=20)
+    sl26d = [["ARMOR_LEATHER_SET3"] if e26s.role_of(w) == "dps" else None
+             for w in split26d]
+    fc26d_split = e26s.fight_chain(split26d, None, sl26d)
+    check("T26d balanced follows the dressed identity: clap10 in leather dps "
+          "reads brawl and gets the brawl chain, in cloth and naked the clap "
+          "chain; the split in leather gets the brawl chain (naked: none); "
+          "fitness untouched",
+          id26d["style"] == "brawl"
+          and (fc26d_lea or {}).get("style") == "brawl"
+          and (fc26d_clo or {}).get("style") == "clap"
+          and (fc26d_nak or {}).get("style") == "clap"
+          and (fc26d_split or {}).get("style") == "brawl"
+          and e26s.fight_chain(split26d) is None
+          and abs(e26d.fitness(clap10, None, lea26d) - f26d) < 1e-12,
+          f"leather={id26d['style']}/{(fc26d_lea or {}).get('style')} "
+          f"cloth={(fc26d_clo or {}).get('style')} "
+          f"naked={(fc26d_nak or {}).get('style')} "
+          f"split={(fc26d_split or {}).get('style')}")
 
     # T27 — the forge-quality validation round. The
     # engine's darlings were overruled on E-identity: Great Holy is
@@ -1873,6 +1915,76 @@ def run():
           "a weapon whose E holds anti-dive takes none from its tree pool",
           forms_ok and protect_ok and zones_ok and one_slot,
           f"forms={forms_ok} protection={protect_ok} zones={zones_ok} one_slot={one_slot}")
+
+    # T54 — THE WHY TEXT IS THE SCORED ROWS: explain() is the gap-closing
+    # half (coverage + floor lift) of the same _pick_caps rows pick_report
+    # shows, so the chosen kit, the count-once rule and the self-cost
+    # offset reach the text exactly as they reach the score, and the
+    # chain's improves terms read the same gears. Hallowfall into the T1
+    # trio: its doctrine kit's tankiness and sustained damage are terms; a
+    # second Cursed Staff on the shared curse (dressing off) shows no
+    # sustained damage the count-once rule removed; the Demon Armor
+    # refund (F1d) rides the text.
+    def _explain_is_rows(e, party, cand, combos=None, gears=None):
+        terms = {t["cap"]: t for t in e.explain(party, cand, combos, gears)}
+        rows = {r["cap"]: r for r in
+                e.pick_report(party, cand, combos, gears)["caps"]
+                if r["coverage"] + r["floor_lift"] > 0.05}
+        return set(terms) == set(rows) and all(
+            terms[c]["delta"] == _round2(rows[c]["coverage"]
+                                         + rows[c]["floor_lift"])
+            and abs(terms[c]["after"] - terms[c]["before"]
+                    - rows[c]["gain"]) < 1e-9
+            for c in rows)
+    e54 = Engine(content="castle_outpost", size=7)
+    t1 = [LONGBOW, WITCHWORK, PERMAFROST]
+    t1_kits = [dict(e54.kit_variants(w))["v0"] for w in t1]
+    hf_caps = {t["cap"] for t in e54.explain(t1, HALLOWFALL)}
+    e_ns = Engine(content="castle", size=5)
+    e_ns.set_dressing(False)
+    pr_ns = e_ns.pick_report(["2H_CURSEDSTAFF"], "2H_CURSEDSTAFF", [0])
+    ns_ok = _explain_is_rows(e_ns, ["2H_CURSEDSTAFF"], "2H_CURSEDSTAFF", [0])
+    ns_term = any(t["cap"] == "sustained_dps" for t in
+                  e_ns.explain(["2H_CURSEDSTAFF"], "2H_CURSEDSTAFF", [0]))
+    e_ns.set_dressing(True)
+    e_off = Engine(content="blackzone_roam", size=20)
+    demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
+    fc54 = e54.fight_chain(t1, None, t1_kits, candidate="2H_CLAYMORE")
+    ex54 = {t["cap"]: t["delta"]
+            for t in e54.explain(t1, "2H_CLAYMORE", None, t1_kits)}
+    check("T54 explain is the gap-closing half of pick_report's rows: the "
+          "kit, the count-once rule and the self-cost offset reach the why "
+          "text; the chain's improves terms read the same gears",
+          _explain_is_rows(e54, t1, HALLOWFALL)
+          and _explain_is_rows(e54, t1, HALLOWFALL, None, t1_kits)
+          and {"tankiness", "sustained_dps"} <= hf_caps
+          and bool(pr_ns["nonstack"]) and ns_ok and not ns_term
+          and _explain_is_rows(e_off, ["2H_CURSEDSTAFF"], "2H_DUALMACE_AVALON",
+                               None, [demon])
+          and fc54 is not None and fc54["improves"] is not None
+          and all(abs(t["gain"] - ex54.get(t["cap"], 0.0)) < 1e-9
+                  for t in fc54["improves"]["terms"]),
+          f"hallowfall caps={sorted(hf_caps)} curse_dup_term={ns_term} "
+          f"curse_lost={pr_ns['nonstack']} "
+          f"improves={fc54['improves'] if fc54 else None}")
+
+    # T55 — THE GREEDY-TRAP READ IS DRESSED: uncovered_caps reads the worn
+    # kits like every other board number (targets speak person units). The
+    # forged castle outpost seven minus its last member, in the forge's
+    # kits, reads the heavy capabilities its dressed supply leaves under
+    # half — tankiness is not among them, where the naked read lists it.
+    e55 = Engine(content="castle_outpost", size=7)
+    r55 = e55.forge(7)
+    p55, c55, g55 = r55["party"][:6], r55["combos"][:6], r55["gears"][:6]
+    s55 = e55.effective_supply(p55, c55, g55)
+    want55 = [cap for cap in e55.reqs if e55.weight(cap) >= 5
+              and s55.get(cap, 0) / e55.target(cap) < 0.5]
+    unc_d, unc_n = e55.uncovered_caps(p55, c55, g55), e55.uncovered_caps(p55, c55)
+    check("T55 the greedy-trap read is dressed: uncovered_caps with the worn "
+          "kits is the dressed supply's under-half heavy capabilities; the "
+          "forged six reads tankiness covered dressed, uncovered naked",
+          unc_d == want55 and "tankiness" in unc_n and "tankiness" not in unc_d,
+          f"dressed={unc_d} naked={unc_n}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

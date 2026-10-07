@@ -1276,6 +1276,63 @@ check(".gd-main .cp-foot{position:sticky; bottom:0; z-index:1; background:var(--
       and "max-height:calc(100dvh - 32px); overflow:auto;" in seg(AUTH_CSS, ".auth-card{", "}", "L39p card anchors"),
       "L39p the card is the scroller and a comp's and a CTA's action bar stays in view while the slots scroll under it")
 
+# L40 - every board number is dressed (T26, T26d, T55; F41, F42): the
+# kill-pressure card, the fight chain, the player pool's ranking, the swap
+# lab, the greedy-trap read and the kit advisor read the roster as
+# equipped; the swap hint gates on the weapon-choice gain, shows the
+# option's exact comp-score change, and a click lands the option in the
+# combo and kit that change assumed
+check("ENG.killPressure(party, COMBOS_CUR, GEARS_CUR)" in DECISION_JS
+      and "ENG.fightChain(party, COMBOS_CUR, GEARS_CUR," in DECISION_JS,
+      "L40a the kill-pressure card and the fight chain read the worn kits")
+pool_fn = seg(DECISION_JS, "function playerPoolRecs", "function poolSearchResults",
+              "L40 pool anchors")
+slot_fn = seg(DECISION_JS, "function slotRanking", "function swapImpact",
+              "L40 slot anchors")
+check("GEARS_CUR" in pool_fn and "restGears" in slot_fn
+      and "if (!pool.length)" in slot_fn
+      and "const keys = pool.filter(w => w !== cur)" in slot_fn,
+      "L40b the player pool and the swap lab price picks against the roster as "
+      "equipped; a pool holding only the slot's weapon offers no outside alternative")
+check("p === party ? GEARS_CUR : null"
+      in seg(APP, "const uncoveredCaps", "const weaknesses", "L40 uncovered anchors"),
+      "L40c the greedy-trap read takes the worn kits")
+hint = seg(APP, "function swapHint", "function memberPop", "L40 hint anchors")
+swh = seg(APP, 'const sw = e.target.closest("[data-swapat]")', "/* rim card click",
+          "L40 swap anchors")
+check("o.delta" in hint and "o.gain >= SWAP_CFG.min_gain" in hint
+      and "swapReviewCached()[si]" in swh
+      and "COMBO[si] = o ? o.combo : null" in swh
+      and "loadoutApplySpells(si, o.combo)" in swh,
+      "L40d the swap hint gates on the weapon-choice gain, shows the exact change, "
+      "and lands a clicked option in its valued combo and kit")
+kit_fn = seg(read("_loadout.js"), "function loadoutEngineGear", "function loadoutInsert",
+             "L40 kit anchors")
+check("restCombos, restGears" in kit_fn and "comboAt(j)" in kit_fn,
+      "L40e the kit advisor prices items against the rest as equipped, the member "
+      "on its scored combo")
+note = seg(APP, "function buildNote", "function swapHint", "L40 build-note anchors")
+check("const buildShort = m => !!m && m.build_gap >= SWAP_CFG.min_gain" in APP
+      and 'data-swapto="${m.weapon}"' in note
+      and "buildNote(ctx.review[i], i)" in seg(APP, "function memberPop", "function replaceListHtml",
+                                               "L40 popover anchors")
+      and "short ? o.gain : o.delta" in hint
+      and "sw.dataset.swapto === party[si]" in swh
+      and "{ combo: rv.combo, kit: rv.kit }" in swh,
+      "L40g a member min_gain or more short of its own best build is offered that build "
+      "in one click through the swap handler, and its swap buttons then show the weapon's "
+      "own edge, the build gap riding the note")
+LO_JS = read("_loadout.js")
+_fills = [seg(LO_JS, "function loadoutPrefill(", "function loadoutSuggest", "L40 prefill anchors"),
+          seg(LO_JS, "function loadoutPrefillGear", "function comboEncode", "L40 prefill-gear anchors"),
+          kit_fn]
+check("function loSlotOpen(w, slot)" in LO_JS
+      and all("loSlotOpen(" in f for f in _fills)
+      and 'startsWith("2H_")' in seg(LO_JS, "function loSlotOpen", "function loadoutPrefill(",
+                                     "L40 slot-open anchors"),
+      "L40f no fill hands a two-hander an off-hand: the caller reference and the kit "
+      "advisor share one rule, so an engine-kit landing scores the kit the engine priced")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

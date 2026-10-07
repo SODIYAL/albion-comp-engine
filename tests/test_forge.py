@@ -1770,6 +1770,372 @@ def t_gear_active_doctrine():
           not bad, str(bad[:8]))
 
 
+def t_empty_pool():
+    """F37: a given pool is the candidate set as given, an empty one
+    included, in every entry point that takes one; only pool=None reads
+    the default (suggest_pool() for recommend, swap_review, forge and
+    replace_options; every non-retired weapon for refine)."""
+    e = Engine(content="castle_outpost", size=7, style="balanced")
+    party = ["2H_LONGBOW", "MAIN_HOLYSTAFF_AVALON", "2H_MACE"]
+    bad = ["2H_LONGBOW"] * 3
+    rec = e.recommend(party, 4, pool=[])
+    sw = e.swap_review(party, pool=[])
+    sw_def = e.swap_review(party)
+    ref = e.refine(bad, max_passes=2, pool=[])
+    ref_d = e.refine(bad, max_passes=2, pool=[], gears=[None] * 3)
+    fg = e.forge(7, locked=["2H_MACE"], pool=[])
+    ro = e.replace_options(party, 0, pool=[])
+    check("F37a an empty pool offers nothing: recommend no rows, swap_review "
+          "every member rank 1 with no options and its own score, refine the "
+          "roster unchanged on both paths, forge infeasible on the locks, "
+          "replace_options no options",
+          rec == []
+          and all(m["rank"] == 1 and m["options"] == [] for m in sw)
+          and [m["score"] for m in sw] == [m["score"] for m in sw_def]
+          and ref == bad
+          and ref_d == {"party": bad, "gears": [None] * 3}
+          and fg["party"] == ["2H_MACE"] and not fg["feasible"]
+          and ro == [],
+          f"recommend={len(rec)} swap_options={sum(len(m['options']) for m in sw)} "
+          f"refine={ref} forge={fg['party']}/{fg['feasible']} replace={len(ro)}")
+    # rank counts every strictly better alternative in the candidate set,
+    # so the whole swap_review row tells the two defaults apart; refine
+    # needs rosters where a style-gated weapon (Great Holy Staff, unfit for
+    # kite at the group band) wins a move the suggestion pool cannot make,
+    # on the weapon-only path and on the dressed path alike
+    ek = Engine(content="blackzone_roam", size=10, style="kite")
+    kite_rosters = (["2H_HALBERD", "2H_DAGGERPAIR_CRYSTAL", "MAIN_SPEAR_KEEPER"],
+                    ["MAIN_SCIMITAR_MORGANA", "2H_TWINSCYTHE_HELL", "2H_FROSTSTAFF_CRYSTAL"],
+                    ["MAIN_FROSTSTAFF_AVALON", "2H_NATURESTAFF", "MAIN_SWORD",
+                     "2H_KNUCKLES_SET2"])
+
+    def ref_rows(dressed):
+        kw = lambda p: {"gears": [None] * len(p)} if dressed else {}
+        return [(ek.refine(list(p), max_passes=1, **kw(p)),
+                 ek.refine(list(p), max_passes=1, pool=list(ek.pool), **kw(p)),
+                 ek.refine(list(p), max_passes=1, pool=list(ek.suggest_pool()),
+                           **kw(p)))
+                for p in kite_rosters]
+    rows_w, rows_d = ref_rows(False), ref_rows(True)
+    check("F37b pool=None reads the default: recommend and swap_review the "
+          "suggestion pool, refine every non-retired weapon (weapon-only and "
+          "dressed paths)",
+          [r["weapon"] for r in e.recommend(party, 4)]
+          == [r["weapon"] for r in e.recommend(party, 4,
+                                               pool=list(e.suggest_pool()))]
+          and sw_def == e.swap_review(party, pool=list(e.suggest_pool()))
+          and sw_def != e.swap_review(party, pool=list(e.pool))
+          and all(d == full for rows in (rows_w, rows_d) for d, full, _sp in rows)
+          and any(full != sp for _d, full, sp in rows_w)
+          and any(full != sp for _d, full, sp in rows_d),
+          f"swap ranks={[m['rank'] for m in sw_def]} refine={rows_w[0]}")
+
+
+def t_short_member_lists():
+    """F38: a per-member list shorter than the party reads None past its
+    end (the default combo, a naked member): every reader answers exactly
+    as for the explicitly padded list, which is how the JS port reads a
+    missing entry; a gears tail past the party is worn by no member in the
+    self-cost refund (both ports bound that loop by the party)."""
+    e = Engine(content="blackzone_roam", size=20, style="clap")
+    pool = sorted(e.suggest_pool())
+    multi = [w for w in pool if len(e._combo_extras(w)) > 1
+             and any(g for _k, g in e.kit_variants(w))]
+    party, cand = multi[:3], multi[3]
+    c0 = (e.default_combo(party[0]) + 1) % len(e._combo_extras(party[0]))
+    kit = next(list(g) for _k, g in e.kit_variants(party[0]) if g)
+    short_c, short_g = [c0], [kit]
+    pad_c, pad_g = [c0, None, None], [kit, None, None]
+    small = pool[::9]
+    readers = {
+        "comp_score": lambda c, g: e.comp_score(party, c, g),
+        "max_fitness": lambda c, g: e.max_fitness(party, c, g),
+        "synergy": lambda c, g: e.synergy(party, c),
+        "recommend": lambda c, g: e.recommend(party, 5, small, c, g),
+        "pick_report": lambda c, g: e.pick_report(party, cand, c, g),
+        "explain": lambda c, g: e.explain(party, cand, c, g),
+        "swap_review": lambda c, g: e.swap_review(party, 3, small, c, g),
+        "comp_identity": lambda c, g: e.comp_identity(party, c, g),
+        "fight_chain": lambda c, g: e.fight_chain(party, c, g, cand),
+        "analyze": lambda c, g: e.analyze(party, c),
+        "kill_pressure": lambda c, g: e.kill_pressure(party, c, g),
+        "weaknesses": lambda c, g: e.weaknesses(party, 5, c, g),
+        "uncovered_caps": lambda c, g: e.uncovered_caps(party, c, g),
+        "duplicate_conflicts": lambda c, g: e.duplicate_conflicts(party, c),
+    }
+    bad = []
+    for name, f in readers.items():
+        try:
+            if f(short_c, short_g) != f(pad_c, pad_g):
+                bad.append(name)
+        except IndexError as ex:
+            bad.append(f"{name} ({ex})")
+    check("F38a a per-member list shorter than the party reads as padded "
+          "with None, in every reader", not bad,
+          f"differ or crash: {bad}" if bad else f"{len(readers)} readers")
+    demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
+    e2 = Engine(content="blackzone_roam", size=20, style="balanced")
+    try:
+        st = e2.party_state(["2H_CURSEDSTAFF"], None, [None, demon])
+        ok, detail = st["pending"] == {}, f"pending={st['pending']}"
+    except IndexError as ex:
+        ok, detail = False, f"IndexError: {ex}"
+    check("F38b a gears tail past the party is worn by no member in the "
+          "self-cost refund", ok, detail)
+
+
+def t_dressed_nonstack():
+    """F39/F40: the count-once rule (a verified non-stacking spell's
+    capability keeps only the largest single contribution) holds on the
+    DRESSED paths. F39: a dressed candidate duplicating the spell is paid
+    synergy on the count-once weapon supply, so its pick score stays the
+    exact comp_score delta — the weapon-only vector it was paid on gave a
+    second Rotcaller at blackzone_roam 20 clap 0.24 the comp never had.
+    F40: a dressed member's contribution is its share as worn (the kit's
+    stat channel multiplies the spell's units with the rest of its
+    damage), so a duplicate keeps no part of its copy, and every marginal
+    and pick_report row stays exact on dressed parties, for dressed and
+    naked candidates."""
+    e = Engine(content="blackzone_roam", size=20, style="clap")
+    carriers = [w for w in sorted(e.weapons)
+                if any(e._nonstack_contrib(w, i)
+                       for i in range(len(e._combo_extras(w))))]
+    worst, n = 0.0, 0
+    for content, size, style in (("blackzone_roam", 20, "clap"),
+                                 ("castle_outpost", 7, "balanced"),
+                                 ("ancient_lands", 20, "balanced"),
+                                 ("roads", 20, "kite")):
+        e.set_content(content, size, style)
+        for a in carriers:
+            for ca in range(len(e._combo_extras(a))):
+                st = e.party_state([a], [ca])
+                base = e.comp_score([a], [ca])
+                for b in carriers:
+                    sc, _df, _ds, _m, cb, _v, vg = e._eval_pick(st, b)
+                    act = e.comp_score([a, b], [ca, cb], [None, vg]) - base
+                    worst = max(worst, abs(sc - act))
+                    n += 1
+    check("F39 a dressed duplicate of a count-once spell: pick score == "
+          "exact comp_score delta, synergy included (1e-9)",
+          bool(carriers) and worst < 1e-9,
+          f"{len(carriers)} carriers, {n} evaluations, worst {worst:.2e}")
+
+    e = Engine(content="castle_outpost", size=7)
+    kits = {w: dict(e.kit_variants(w))["v0"] for w in carriers}
+    pick = None
+    for w in carriers:
+        ci = next(i for i in range(len(e._combo_extras(w)))
+                  if e._nonstack_contrib(w, i))
+        _sid, contrib = next(iter(e._nonstack_contrib(w, ci).items()))
+        cap, v = next(iter(contrib.items()))
+        if kits[w] and e._ns_share(v, cap, kits[w]) > v:
+            pick = (w, ci, cap, v)
+            break
+    w, ci, cap, v = pick
+    one = e.effective_supply([w], [ci], [kits[w]])[cap]
+    two = e.effective_supply([w, w], [ci, ci], [kits[w], kits[w]])[cap]
+    share = e._ns_share(v, cap, kits[w])
+    # the expected share from build_extra alone (not _ns_share, the rule
+    # under test): the kit's stat channel is the ratio of the built cap to
+    # the member's unmultiplied supply (weapon + the kit's flat abilities),
+    # self-costs waived so a cost on the cap cannot bend the ratio
+    keys = [e.gear_key(k) for k in kits[w]]
+    flat = sum(e.gear_extra(k).get(cap, 0.0) for k in keys)
+    built = e.build_extra(w, ci, kits[w], waive_costs=frozenset(keys))[cap]
+    exp = v * built / (e.member_extra(w, ci)[cap] + flat)
+    worst2, rows_worst = 0.0, 0.0
+    for dressing in (True, False):
+        e.set_dressing(dressing)   # False: every candidate is naked
+        for a in carriers:
+            ga = [kits[a]] if kits[a] else None
+            ca = next(i for i in range(len(e._combo_extras(a)))
+                      if e._nonstack_contrib(a, i))
+            st = e.party_state([a], [ca], ga)
+            base = e.comp_score([a], [ca], ga)
+            for b in carriers:
+                sc, d_fit, _ds, _m, cb, _v, vg = e._eval_pick(st, b)
+                act = (e.comp_score([a, b], [ca, cb], (ga or [None]) + [vg])
+                       - base)
+                rows, _cg = e._pick_caps(st, b, cb, vg)
+                worst2 = max(worst2, abs(sc - act))
+                rows_worst = max(rows_worst,
+                                 abs(sum(r["delta"] for r in rows) - d_fit))
+    e.set_dressing(True)
+    check("F40 the count-once rule reads each dressed member's share as "
+          "worn: a dressed duplicate keeps no part of its copy, and pick "
+          "scores and pick_report rows stay exact on a dressed party for "
+          "dressed and naked candidates (1e-9)",
+          abs((two - one) - (one - exp)) < 1e-9 and exp > v
+          and worst2 < 1e-9 and rows_worst < 1e-9,
+          f"{w} {cap}: one={one:.4f} two={two:.4f} share={share:.4f} "
+          f"expected={exp:.4f} worst={worst2:.2e} rows={rows_worst:.2e}")
+
+
+def t_swap_review_as_built():
+    """F41 (the swap advisor reads weapon choice and reports the member as
+    built): score, rank and each option's gain value every member exactly
+    as _eval_pick values it into the rest (T17's identity), its own combo
+    and kit re-resolved; built_score is the exact comp_score delta of the
+    member in the combo and kit it wears, and each option's delta is the
+    comp_score change of the swap landing in that option's combo and kit,
+    the delta replace_options reports for the same build. Case: the forged
+    castle_outpost 7 minus its last slot, plus a Longbow on combo 0 in its
+    doctrine kit with the chest swapped to Judicator Armor."""
+    e = Engine(content="castle_outpost", size=7, style="balanced")
+    r = e.forge(7)
+    lb = "2H_LONGBOW"
+    kit = [("ARMOR_PLATE_KEEPER" if e.gear[k]["slot"] == "armor" else k)
+           for k in dict(e.kit_variants(lb))["v0"]]
+    party = list(r["party"][:6]) + [lb]
+    combos = list(r["combos"][:6]) + [0]
+    gears = [list(g) if g else None for g in r["gears"][:6]] + [kit]
+    total = e.comp_score(party, combos, gears)
+    m = e.swap_review(party, 3, None, combos, gears)[6]
+    rest, rc, rg = party[:6], combos[:6], gears[:6]
+    built = total - e.comp_score(rest, rc, rg)
+    rec = e.recommend(rest, 1, [lb], rc, rg)[0]
+    worst, gap_err = 0.0, 0.0
+    for o in m["options"]:
+        p2, c2, g2 = list(party), list(combos), list(gears)
+        p2[6], c2[6], g2[6] = o["weapon"], o["combo"], (list(o["kit"]) or None)
+        worst = max(worst, abs(o["delta"] - (e.comp_score(p2, c2, g2) - total)))
+        gap_err = max(gap_err, abs((o["gain"] - o["delta"]) + m["build_gap"]))
+    rep_err, rep_n = 0.0, 0
+    for o in m["options"]:
+        rep = e.replace_options(party, 6, combos, gears, 1, [o["weapon"]])
+        if rep and rep[0]["combo"] == o["combo"] and rep[0]["kit"] == o["kit"]:
+            rep_err = max(rep_err, abs(rep[0]["delta"] - o["delta"]))
+            rep_n += 1
+    fr = e.swap_review(r["party"], 3, None, r["combos"], r["gears"])
+    check("F41 swap review: weapon-choice score and rank (== recommend into "
+          "the rest), the member as built beside it, option deltas exact "
+          "and equal to replace_options for the same build; a forged "
+          "roster's members are built as valued",
+          m["kit"] != kit and bool(m["options"])
+          and abs(m["score"] - rec["score"]) < 1e-9 and m["kit"] == rec["kit"]
+          and abs(m["built_score"] - built) < 1e-9
+          and abs(m["build_gap"] - (m["score"] - built)) < 1e-9
+          and worst < 1e-9 and gap_err < 1e-9 and rep_err < 1e-9
+          and all(abs(x["build_gap"]) < 1e-9 for x in fr),
+          f"score={m['score']:.4f} built={m['built_score']:.4f} "
+          f"gap={m['build_gap']:.4f} replace_checked={rep_n}")
+
+    # built_score is priced as a marginal on the rest's state (_as_built):
+    # exact on the states where a marginal can drift from the comp_score
+    # difference — Demon Armor one copy short of its offset (a pending
+    # refund) and past it (waived), dressed count-once duplicates, a None,
+    # an out-of-range and a negative combo (each on a member where reading
+    # it as anything but the default moves the score), lists shorter than
+    # the party, a naked roster
+    e2 = Engine(content="blackzone_roam", size=20, style="balanced")
+    r2 = e2.forge(20)
+    demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
+    curse = [w for w in sorted(e2.weapons)
+             if any(e2._nonstack_contrib(w, i)
+                    for i in range(len(e2._combo_extras(w))))][:3]
+    p, c = list(r2["party"]), list(r2["combos"])
+    # the forge dresses its own Demon Armor pair: strip it, then place two
+    # wearers (each one's rest one copy short) and three (each one's rest
+    # at the offset)
+    g = [([k for k in x if k != "ARMOR_PLATE_HELL"] or None) if x else None
+         for x in r2["gears"]]
+    pend = list(g)
+    pend[0] = pend[1] = demon
+    waived = list(g)
+    waived[0] = waived[1] = waived[2] = demon
+    n_of, dflt = (lambda w: len(e2._combo_extras(w))), e2.default_combo
+
+    def moves(cc, gg, k, a):
+        # combo `a` on member k scores differently from its default
+        c1, c2 = list(cc), list(cc)
+        c1[k], c2[k] = a, dflt(p[k])
+        return abs(e2.comp_score(p, c1, gg) - e2.comp_score(p, c2, gg)) > 1e-6
+    # 99: a default inside the range, so a fallback to 0 and a clamp to the
+    # last combo both move the score; None: a default other than 0; -1: on
+    # the naked roster (a dressed member's fit side re-reads -1 itself)
+    k99 = next((k for k, w in enumerate(p) if 0 < dflt(w) < n_of(w) - 1
+                and moves(c, waived, k, 0) and moves(c, waived, k, n_of(w) - 1)),
+               None)
+    k_none = next((k for k, w in enumerate(p) if k != k99 and dflt(w) != 0
+                   and moves(c, waived, k, 0)), None)
+    k_neg = next((k for k, w in enumerate(p) if dflt(w) != n_of(w) - 1
+                  and moves(c, None, k, n_of(w) - 1)), None)
+    c_odd, c_neg = list(c), list(c)
+    if k99 is not None and k_none is not None:
+        c_odd[k99], c_odd[k_none] = 99, None
+    if k_neg is not None:
+        c_neg[k_neg] = -1
+    p_ns, c_ns, g_ns = list(p), list(c), list(g)
+    for j, cw in enumerate(curse + curse[:1]):
+        p_ns[5 + j] = cw
+        c_ns[5 + j] = next(i for i in range(len(e2._combo_extras(cw)))
+                           if e2._nonstack_contrib(cw, i))
+        g_ns[5 + j] = list(dict(e2.kit_variants(cw))["v0"] or []) or None
+    cases = [(p, c, pend), (p, c_odd, waived), (p_ns, c_ns, g_ns),
+             (p, c[:7], pend[:9]), (p, c_neg, None)]
+    worst2, n2 = 0.0, 0
+    for pp, cc, gg in cases:
+        total2 = e2.comp_score(pp, cc, gg)
+        for mm in e2.swap_review(pp, 1, [], cc, gg):
+            i = mm["index"]
+            rest2 = pp[:i] + pp[i + 1:]
+            rc2 = (cc[:i] + cc[i + 1:]) if cc else None
+            rg2 = (gg[:i] + gg[i + 1:]) if gg else None
+            worst2 = max(worst2, abs(mm["built_score"]
+                                     - (total2 - e2.comp_score(rest2, rc2, rg2))))
+            n2 += 1
+    st_p = e2.party_state(p[1:], c[1:], pend[1:])
+    st_w = e2.party_state(p[1:], c[1:], waived[1:])
+    check("F41b built_score == comp_score(party) - comp_score(rest) on a "
+          "pending and a waived Demon Armor, dressed count-once duplicates, "
+          "odd combos, short lists and a naked roster (1e-9)",
+          worst2 < 1e-9 and bool(st_p["pending"]) and bool(st_w["waived"])
+          and len(curse) == 3 and None not in (k99, k_none, k_neg),
+          f"{n2} members, worst {worst2:.2e}; odd combos on "
+          f"{[p[k] if k is not None else None for k in (k99, k_none, k_neg)]}")
+
+
+def t_kit_options_rest():
+    """F42: comp-aware kit_options prices each item against the REST as
+    equipped when party_combos / party_gears are given — an option's value
+    is the exact fitness delta of the member joining in that item with the
+    rest in its own combos and kits; omitted, the rest reads naked at
+    default combos, the context the parameters replace."""
+    e = Engine(content="blackzone_roam", size=20, style="clap")
+    r = e.forge(20)
+    k = len(r["party"]) // 2
+    w, combo = r["party"][k], r["combos"][k]
+    rest = r["party"][:k] + r["party"][k + 1:]
+    rc = r["combos"][:k] + r["combos"][k + 1:]
+    rg = r["gears"][:k] + r["gears"][k + 1:]
+    ko = e.kit_options(w, combo, rest, 8, "auto", rc, rg)
+    legacy = e.kit_options(w, combo, rest, 8)
+    nn = [None] * len(rest)
+    f_bare = e.fitness(rest + [w], rc + [combo], rg + [None])
+    n_bare = e.fitness(rest + [w], nn + [combo], nn + [None])
+    worst = worst_l = 0.0
+    differs = False
+    lv = {(s, o["gear"]): o["value"]
+          for s, opts in legacy["options"].items() for o in opts}
+    for slot, opts in ko["options"].items():
+        for o in opts:
+            exact = (e.fitness(rest + [w], rc + [combo], rg + [[o["gear"]]])
+                     - f_bare)
+            worst = max(worst, abs(o["value"] - exact))
+            if abs(o["value"] - lv.get((slot, o["gear"]), o["value"])) > 1e-6:
+                differs = True
+    for slot, opts in legacy["options"].items():
+        for o in opts:
+            exact = (e.fitness(rest + [w], nn + [combo], nn + [[o["gear"]]])
+                     - n_bare)
+            worst_l = max(worst_l, abs(o["value"] - exact))
+    check("F42 comp-aware kit options price items against the rest as "
+          "equipped (exact fitness delta, 1e-9); without the rest's combos "
+          "and kits the rest reads naked at default combos",
+          bool(ko["options"]) and worst < 1e-9 and worst_l < 1e-9 and differs,
+          f"{w}: worst={worst:.2e} legacy={worst_l:.2e} differs={differs}")
+
+
 if __name__ == "__main__":
     t_gear_active_doctrine()
     t_invariant()
@@ -1807,6 +2173,11 @@ if __name__ == "__main__":
     t_replace_options()
     t_portal_rows()
     t_portal_fielded()
+    t_empty_pool()
+    t_short_member_lists()
+    t_dressed_nonstack()
+    t_swap_review_as_built()
+    t_kit_options_rest()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

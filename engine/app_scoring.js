@@ -1497,7 +1497,9 @@
       var after = {};
       for (var wk in waived) after[wk] = true;
       after[k] = true;
-      for (i = 0; i < gears.length; i++) {
+      /* a gears tail past the party is worn by no member (mirrors
+         engine.py _offset_pending) */
+      for (i = 0; i < gears.length && i < party.length; i++) {
         var gl = gears[i] || [], wears = false;
         for (j = 0; j < gl.length; j++) if (this._gearItemKey(gl[j]) === k) { wears = true; break; }
         if (!wears) continue;
@@ -1607,13 +1609,15 @@
   };
 
   CompEngine.prototype.kitOptions = function (weapon, combo, party, topN,
-                                              role) {
+                                              role, partyCombos, partyGears) {
     /* IDEAL KIT per weapon, per content/style, per comp — mirrors
        engine.py kit_options (DOCTRINE-LED: the kit is the whole build):
        ranked gear options per slot. No party ->
        context-free weighted-delta value with the DOCTRINE TIER first;
        with `party` -> comp-aware exact fitness delta outranks tier
-       membership (doctrine stays annotation + tie-break). `role`:
+       membership (doctrine stays annotation + tie-break), the rest read
+       in partyCombos / partyGears (parallel to party; omitted: naked at
+       default combos). `role`:
        undefined/"auto" resolves the weapon's primary seat, null is the
        explicit diagnostic escape (ungated pool), a seat id uses that
        seat. With a seat the CHEST pool hard-gates to the uniform
@@ -1688,11 +1692,21 @@
     }
     var bare = this.memberExtra(weapon, combo);
     var joined = null, baseGears = null, joinedCombos = null, fBare = 0.0;
+    /* the worn rest is dressed once per waived set, not once per item (an
+       item completing a self-cost offset dresses it again) */
+    var memo = {};
     if (party !== null && party !== undefined) {
       joined = party.concat([weapon]);
-      baseGears = party.map(function () { return null; });
-      joinedCombos = party.map(function () { return null; }).concat([combo]);
-      fBare = this.fitness(joined, joinedCombos, baseGears.concat([null]));
+      baseGears = party.map(function (_w, j) {
+        var g = partyGears && j < partyGears.length ? partyGears[j] : null;
+        return (g && g.length) ? g.slice() : null;
+      });
+      joinedCombos = party.map(function (_w, j) {
+        var c = partyCombos && j < partyCombos.length ? partyCombos[j] : null;
+        return c === undefined ? null : c;
+      }).concat([combo]);
+      fBare = this.fitness(joined, joinedCombos, baseGears.concat([null]),
+                           memo);
     }
     var options = {}, slots = Object.keys(bySlot).sort();
     for (var si = 0; si < slots.length; si++) {
@@ -1732,7 +1746,8 @@
           for (di = 0; di < deltas.length; di++)
             value += (this._weights[deltas[di][0]] || 0.0) * deltas[di][1];
         } else {
-          value = this.fitness(joined, joinedCombos, baseGears.concat([[k]])) - fBare;
+          value = this.fitness(joined, joinedCombos, baseGears.concat([[k]]),
+                               memo) - fBare;
         }
         var passive = null;
         if (seatClass) {
@@ -1990,30 +2005,79 @@
     return s;
   };
 
-  CompEngine.prototype.effectiveSupply = function (party, combos, gears) {
+  CompEngine.prototype.effectiveSupply = function (party, combos, gears,
+                                                   memo) {
     /* Supply after physics AND the one-spell-per-slot rule; ALL scoring
-       reads this (mirrors engine.py effective_supply). */
+       reads this (mirrors engine.py effective_supply). `memo` (an object
+       the caller keeps for one sweep in one context) reuses each dressed
+       member's buildExtra, keyed by weapon, combo, kit and waived: the
+       kit advisor prices every item against the same worn rest. */
     var s = {}, c;
-    var waived = gears ? this.selfCostWaivers(gears) : null;
+    var waived = gears ? this.selfCostWaivers(gears) : null, wkey = null;
     for (var i = 0; i < party.length; i++) {
-      var extra = (gears && gears[i] && gears[i].length)
-        ? this.buildExtra(party[i], combos ? combos[i] : null, gears[i],
-                          null, waived)
-        : this.memberExtra(party[i], combos ? combos[i] : null);
+      var ci = combos ? combos[i] : null, g = gears ? gears[i] : null;
+      var extra;
+      if (!(g && g.length)) {
+        extra = this.memberExtra(party[i], ci);
+      } else if (!memo) {
+        extra = this.buildExtra(party[i], ci, g, null, waived);
+      } else {
+        if (wkey === null) wkey = Object.keys(waived).sort().join(",");
+        var mk = party[i] + "|" + ci + "|" + g.map(function (x) {
+          return Array.isArray(x) ? x[0] + ":" + x[1] : x;
+        }).join(",") + "|" + wkey;
+        extra = memo[mk];
+        if (extra === undefined)
+          extra = memo[mk] = this.buildExtra(party[i], ci, g, null, waived);
+      }
       for (c in extra) s[c] = (s[c] || 0.0) + extra[c];
     }
-    if (this.hasNonstack) this._applyNonstack(s, party, combos);
+    if (this.hasNonstack) this._applyNonstack(s, party, combos, gears);
     return s;
   };
 
-  CompEngine.prototype._applyNonstack = function (s, party, combos) {
+  CompEngine.prototype._nsShare = function (v, cap, gear) {
+    /* A count-once spell's units on `cap` as a member wearing `gear`
+       supplies them: buildExtra's stat channel multiplies them as it
+       multiplies the member's whole capability, same order, no doctrine
+       passives (mirrors engine.py _ns_share). Naked: v. */
+    if (!gear || !gear.length) return v;
+    var dmg = 0.0, heal = 0.0, ccdur = 0.0;
+    for (var i = 0; i < gear.length; i++) {
+      var item = gear[i];
+      var key = this.gearKey(Array.isArray(item) ? item[0] : item);
+      var st = (this.gear[key] || {}).stats || {};
+      dmg += (st.magicspelldamagebonus !== undefined
+              ? st.magicspelldamagebonus
+              : (st.physicalspelldamagebonus || 0.0));
+      heal += st.healbonus || 0.0;
+      ccdur += st.bonusccdurationvsplayers || 0.0;
+    }
+    var bs = this.mechanics.build_stats || {};
+    if (dmg > 0.0 && (bs.damage_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + dmg;
+    if (heal > 0.0 && (bs.heal_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + heal;
+    if (ccdur > 0.0 && (bs.cc_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + ccdur;
+    return v;
+  };
+
+  CompEngine.prototype._applyNonstack = function (s, party, combos, gears) {
     /* Count-once rule for verified non-stacking interaction spells —
        identical accumulation ORDER to engine.py _apply_nonstack (sorted
-       spell ids, stored cap order, party order): float parity is exact. */
+       spell ids, stored cap order, party order): float parity is exact.
+       A dressed member's contribution is its share AS WORN (_nsShare). */
     var groups = {};
     for (var i = 0; i < party.length; i++) {
       var per = this._nonstackContrib(party[i], combos ? combos[i] : null);
-      for (var sid in per) (groups[sid] = groups[sid] || []).push(per[sid]);
+      var g = gears ? gears[i] : null;
+      for (var sid in per) {
+        var contrib = per[sid];
+        if (g && g.length) {
+          var scaled = {};
+          for (var sc in contrib) scaled[sc] = this._nsShare(contrib[sc], sc, g);
+          contrib = scaled;
+        }
+        (groups[sid] = groups[sid] || []).push(contrib);
+      }
     }
     var ids = Object.keys(groups).sort();
     for (var gi = 0; gi < ids.length; gi++) {
@@ -2086,8 +2150,8 @@
   };
 
   /* ---------------------------------------------------------------- fitness */
-  CompEngine.prototype.fitness = function (party, combos, gears) {
-    var s = this.effectiveSupply(party, combos, gears);
+  CompEngine.prototype.fitness = function (party, combos, gears, memo) {
+    var s = this.effectiveSupply(party, combos, gears, memo);
     /* Option C: STRUCTURAL hard floors read the
        weapon+loadout supply — worn gear improves coverage/headroom/
        overstack but can never satisfy a structural floor (mirrors
@@ -2291,21 +2355,34 @@
     for (var i = 0; i < party.length; i++) {
       counts[party[i]] = (counts[party[i]] || 0) + 1;
     }
-    var nsMax = {};
+    /* nsMax: the largest count-once contribution per spell on the
+       weapon-only basis (synergy and floor terms); nsMaxFit: the largest
+       share AS WORN on the fit supply — the same object on a naked party
+       (mirrors engine.py party_state) */
+    var nsMax = {}, nsFit = anyGear ? {} : null;
     if (this.hasNonstack) {
       for (i = 0; i < party.length; i++) {
         var per = this._nonstackContrib(party[i], combos ? combos[i] : null);
+        var mg = anyGear && gears ? gears[i] : null;
         for (var sid in per) {
           var cur = nsMax[sid] || (nsMax[sid] = {});
           for (var cap in per[sid]) {
             if (per[sid][cap] > (cur[cap] || 0.0)) cur[cap] = per[sid][cap];
+          }
+          if (nsFit !== null) {
+            var curf = nsFit[sid] || (nsFit[sid] = {});
+            for (var capf in per[sid]) {
+              var vf = per[sid][capf];
+              if (mg && mg.length) vf = this._nsShare(vf, capf, mg);
+              if (vf > (curf[capf] || 0.0)) curf[capf] = vf;
+            }
           }
         }
       }
     }
     var waived = gears ? this.selfCostWaivers(gears) : {};
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
-             nsMax: nsMax,
+             nsMax: nsMax, nsMaxFit: nsFit === null ? nsMax : nsFit,
              /* carrier quota: what this roster already wears */
              carriers: this._carrierCounts(party, gears),
              /* self-cost offsets: what this roster has waived, and the
@@ -2371,11 +2448,14 @@
     return total;
   };
 
-  CompEngine.prototype._nonstackAdjust = function (state, weapon, combo, extra) {
+  CompEngine.prototype._nonstackAdjust = function (state, weapon, combo, extra,
+                                                   fit, gear) {
     /* Candidate caps with the count-once rule applied against the current
-       party (mirrors engine.py _nonstack_adjust). Returns `extra` itself
-       when nothing applies. */
-    var nsMax = state.nsMax;
+       party (mirrors engine.py _nonstack_adjust): the default prices the
+       weapon-only basis (state.nsMax), `fit` the fit supply
+       (state.nsMaxFit) with the candidate's share as worn in `gear`.
+       Returns `extra` itself when nothing applies. */
+    var nsMax = fit ? state.nsMaxFit : state.nsMax;
     if (!this.hasNonstack || !nsMax) return extra;
     var adj = null;
     var per = this._nonstackContrib(weapon, combo);
@@ -2390,6 +2470,7 @@
       for (var cj = 0; cj < caps.length; cj++) {
         var cap = caps[cj], v = per[sid][cap] || 0.0;
         if (!v) continue;
+        if (gear && gear.length) v = this._nsShare(v, cap, gear);
         var gain = v - (pmax[cap] || 0.0);
         adj[cap] = (adj[cap] || 0.0) - v + (gain > 0.0 ? gain : 0.0);
       }
@@ -2401,11 +2482,18 @@
     /* One combo's value against a party state (mirrors engine.py
        _combo_score) — identical float-op order to the original loop.
        Option C: on a DRESSED party the floor terms read sSyn + the
-       candidate's own (naked) caps. */
+       candidate's own (naked) caps; the fit side prices the dressed
+       members' count-once shares (nsMaxFit), the floor and synergy sides
+       the weapon-only ones. */
     var adj = this._nonstackAdjust(state, weapon, i, extra);
-    var dFit = (state.s !== state.sSyn)
-      ? this._margFitFrom(state.s, adj, state.sSyn, adj)
-      : this._margFitFrom(state.s, adj);
+    var dFit;
+    if (state.s !== state.sSyn) {
+      var adjFit = adj === extra ? adj
+        : this._nonstackAdjust(state, weapon, i, extra, true);
+      dFit = this._margFitFrom(state.s, adjFit, state.sSyn, adj);
+    } else {
+      dFit = this._margFitFrom(state.s, adj);
+    }
     var dSyn = this._margSynFrom(state, adj, extra);
     return { val: this.alpha * dFit + this.beta * dSyn, dFit: dFit, dSyn: dSyn };
   };
@@ -2550,17 +2638,20 @@
   };
 
   CompEngine.prototype._comboScoreDressed = function (state, weapon, i,
-                                                     wextra, dextra, refund) {
+                                                     wextra, dextra, refund,
+                                                     vgears) {
     /* _comboScore for a DRESSED candidate: fit half prices the dressed
        vector, synergy half the weapon-only vector — the exact
        decomposition of compScore-with-gears (mirrors engine.py
-       _combo_score_dressed). Same object -> exactly _comboScore. */
+       _combo_score_dressed). Same object -> exactly _comboScore.
+       `vgears` is the kit dextra wears: its count-once share is priced
+       as worn. */
     if (dextra === wextra) return this._comboScore(state, weapon, i, wextra);
     /* Option C: a DRESSED candidate's floor terms read the weapon-only
        basis on BOTH sides — sSyn for the party and the candidate's
        weapon-only adjusted gains — so its kit can never buy floor relief
        the party's kits are denied (mirrors engine.py). */
-    var adj = this._nonstackAdjust(state, weapon, i, dextra);
+    var adj = this._nonstackAdjust(state, weapon, i, dextra, true, vgears);
     var adjW = this._nonstackAdjust(state, weapon, i, wextra);
     if (refund) {
       /* gear-side: joins the fit vector after the non-stacking
@@ -2571,7 +2662,10 @@
       adj = merged;
     }
     var dFit = this._margFitFrom(state.s, adj, state.sSyn, adjW);
-    var dSyn = this._margSynFrom(state, wextra);
+    /* synergy prices the count-once weapon supply (adjW) with the
+       member's unadjusted caps for J, as _comboScore does (mirrors
+       engine.py) */
+    var dSyn = this._margSynFrom(state, adjW, wextra);
     return { val: this.alpha * dFit + this.beta * dSyn,
              dFit: dFit, dSyn: dSyn };
   };
@@ -2595,8 +2689,10 @@
       for (var i = 0; i < extras.length; i++) {
         var ov = this._offsetVector(state, weapon, i, vgears);
         var cs = ov === null
-          ? this._comboScoreDressed(state, weapon, i, extras[i], dext[i])
-          : this._comboScoreDressed(state, weapon, i, extras[i], ov[0], ov[1]);
+          ? this._comboScoreDressed(state, weapon, i, extras[i], dext[i],
+                                    null, vgears)
+          : this._comboScoreDressed(state, weapon, i, extras[i], ov[0], ov[1],
+                                    vgears);
         if (best === null || cs.val > best.val)
           best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
                    variant: vkey, vgears: vgears };
@@ -2609,6 +2705,31 @@
     tail.variant = best.variant;
     tail.vgears = best.vgears;
     return tail;
+  };
+
+  CompEngine.prototype._asBuilt = function (state, weapon, combo, gear) {
+    /* The exact compScore delta of adding `weapon` in ONE given build —
+       its own combo (null or out of range: the default) and kit — to the
+       party `state` describes: _evalPick's marginal without the search,
+       no carrier quota or variant fallback (mirrors engine.py
+       _as_built). */
+    var extras = this._comboExtras(weapon);
+    if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
+      combo = this.defaultCombo(weapon);
+    var cs;
+    if (gear && gear.length) {
+      var ov = this._offsetVector(state, weapon, combo, gear);
+      cs = ov === null
+        ? this._comboScoreDressed(state, weapon, combo, extras[combo],
+                                  this.buildExtra(weapon, combo, gear), null,
+                                  gear)
+        : this._comboScoreDressed(state, weapon, combo, extras[combo], ov[0],
+                                  ov[1], gear);
+    } else {
+      cs = this._comboScore(state, weapon, combo, extras[combo]);
+    }
+    return this._pickTail(state, weapon, { val: cs.val, dFit: cs.dFit,
+                                           dSyn: cs.dSyn, combo: combo }).score;
   };
 
   CompEngine.prototype._rawMemberCaps = function (weapon, combo) {
@@ -2679,22 +2800,20 @@
   };
 
   CompEngine.prototype.explain = function (party, candidate, combos, gears) {
-    /* Per-capability delta terms for the candidate's CHOSEN loadout —
-       matches what _evalPick scored (mirrors engine.py explain). */
+    /* Per-capability delta terms for the candidate's CHOSEN loadout and
+       kit — the gap-closing half (coverage + floor lift) of the same
+       _pickCaps rows pickReport shows, so the kit, the count-once rule
+       and the self-cost offset reach the text exactly as they reached the
+       score (mirrors engine.py explain). */
     var state = this.partyState(party, combos, gears);
     var pick = this._evalPick(state, candidate);
-    var extra = this.memberExtra(candidate, pick.combo);
-    var s = state.s, terms = [];
-    for (var cap in extra) {
-      var gain = extra[cap];
-      if (!(cap in this.reqs) || !gain) continue;
-      var have = s[cap] || 0.0, target = this.target(cap);
-      var ct = this._coverTerms(cap, have, gain, target,
-                                state.sSyn[cap] || 0.0);
-      var d = ct[0] + ct[1];
+    var rows = this._pickCaps(state, candidate, pick.combo, pick.vgears)[0];
+    var terms = [];
+    for (var ri = 0; ri < rows.length; ri++) {
+      var r = rows[ri], d = r.coverage + r.floor_lift;
       if (d > 0.05) {
-        terms.push({ delta: round2(d), cap: cap,
-                     before: have, after: have + gain, target: target });
+        terms.push({ delta: round2(d), cap: r.cap,
+                     before: r.before, after: r.after, target: r.target });
       }
     }
     return terms.sort(function (x, y) {
@@ -2728,7 +2847,9 @@
       : (vgears && vgears.length)
         ? this.buildExtra(weapon, combo, vgears)
         : this.memberExtra(weapon, combo);
-    var adj = this._nonstackAdjust(state, weapon, combo, extra);
+    /* the fit rows price the count-once rule on the fit supply, the
+       candidate's share as worn (mirrors engine.py) */
+    var adj = this._nonstackAdjust(state, weapon, combo, extra, true, vgears);
     if (ov) {
       var mergedR = {}, rc;
       for (rc in adj) mergedR[rc] = adj[rc];
@@ -2738,10 +2859,8 @@
     /* Option C floor basis: floor_lift rows read the weapon-only party
        supply and the candidate's weapon-only adjusted gains, exactly as
        the marginal scored them (mirrors engine.py _pick_caps). */
-    var adjW = (vgears && vgears.length)
-      ? this._nonstackAdjust(state, weapon, combo,
-                             this.memberExtra(weapon, combo))
-      : adj;
+    var adjW = this._nonstackAdjust(state, weapon, combo,
+      (vgears && vgears.length) ? this.memberExtra(weapon, combo) : extra);
     var s = state.s, sf = state.sSyn, rows = [], capsGain = 0.0;
     for (var cap in adj) {
       var gain = adj[cap];
@@ -2788,8 +2907,10 @@
     var rows = pc[0], capsGain = pc[1];
     var dup = (state.counts[candidate] || 0) + 1 - this._dupFree(candidate);
     var dupPenalty = dup > 0 ? this.rho * dup : 0.0;
+    /* count-once losses on the fit supply the caps rows price, each
+       share as worn (mirrors engine.py pick_report) */
     var nsLines = [];
-    var nsMax = state.nsMax || {};
+    var nsMax = state.nsMaxFit || {};
     var contrib = this._nonstackContrib(candidate, pick.combo);
     var sids = Object.keys(contrib).sort();
     for (var si = 0; si < sids.length; si++) {
@@ -2798,6 +2919,8 @@
       var caps = this.nonstack[sid], lost = {}, any = false;
       for (var cj = 0; cj < caps.length; cj++) {
         var cap = caps[cj], v = contrib[sid][cap] || 0.0;
+        if (v && pick.vgears && pick.vgears.length)
+          v = this._nsShare(v, cap, pick.vgears);
         var cut = v < (pmax[cap] || 0.0) ? v : (pmax[cap] || 0.0);
         if (v && cut > 0.0) { lost[cap] = cut; any = true; }
       }
@@ -2823,10 +2946,11 @@
   };
 
   CompEngine.prototype._pool = function (pool) {
-    /* mirrors Python's `pool or self.suggest_pool()`: default excludes both
-       game-retired weapons and the viability exclusions for this context. */
-    if (pool && pool.length) return pool;
-    return this._suggest;
+    /* mirrors engine.py `self.suggest_pool() if pool is None else pool`:
+       no pool (null/undefined) is the suggestion pool (game-retired weapons
+       and this context's viability exclusions left out); a given list,
+       empty included, is the candidate set as given (F37) */
+    return (pool === undefined || pool === null) ? this._suggest : pool;
   };
 
   CompEngine.prototype.recommend = function (party, topN, pool, combos,
@@ -2873,11 +2997,20 @@
 
   CompEngine.prototype.swapReview = function (party, topN, pool, combos,
                                               gears) {
-    /* Per-member swap advisor (mirrors engine.py swap_review): each member
-       valued exactly as _evalPick would value it into the REST of the
-       party. `off_comp` flags viability-excluded members. */
+    /* Per-member swap advisor (mirrors engine.py swap_review), a
+       WEAPON-CHOICE read: each member valued exactly as _evalPick would
+       value it into the REST of the party, its combo and kit re-resolved
+       like every alternative's (score, rank, verdict, option gain; combo
+       and kit name the build score assumed). Beside it the member AS
+       BUILT: built_score is the exact compScore(party) - compScore(rest)
+       in its own combo and kit (_asBuilt on the rest's state), build_gap
+       = score - built_score, and each option's delta is the exact
+       compScore change of the swap landing in the option's combo and kit.
+       `off_comp` flags viability-excluded members. */
     if (topN === undefined) topN = 3;
     var out = [];
+    var keys = this._pool(pool);
+    var self = this;
     for (var i = 0; i < party.length; i++) {
       var cur = party[i];
       var rest = party.slice(0, i).concat(party.slice(i + 1));
@@ -2886,21 +3019,21 @@
       var restGears = gears
         ? gears.slice(0, i).concat(gears.slice(i + 1)) : null;
       var state = this.partyState(rest, restCombos, restGears);
-      var self = this;
       var curPick = this._evalPick(state, cur);
       var curScore = curPick.score;
+      var built = this._asBuilt(state, cur, combos ? combos[i] : null,
+                                gears ? gears[i] : null);
       /* redundancy lens (mirrors engine.py): the member
          valued exactly as a pick into the rest — does it still close any
          gap, or are its jobs already covered without it? Flag only. */
       var curPc = this._pickCaps(state, cur, curPick.combo, curPick.vgears);
       var curVerdict = this._pickVerdict(curScore, curPc[1]);
       var better = [];
-      var keys = this._pool(pool);
       for (var j = 0; j < keys.length; j++) {
         var w = keys[j];
         if (w === cur) continue;
-        var v = this._evalPick(state, w).score;
-        if (v > curScore) better.push([v, w]);
+        var pk = this._evalPick(state, w);
+        if (pk.score > curScore) better.push([pk.score, w, pk.combo, pk.vgears]);
       }
       better.sort(function (a, b) {
         var ka = qrank(a[0]), kb = qrank(b[0]);
@@ -2912,6 +3045,8 @@
         display_name: this.weapons[cur].display_name,
         /* rank = strictly-better alternatives + 1 (ties never demote) */
         score: curScore, rank: better.length + 1,
+        combo: curPick.combo, kit: (curPick.vgears || []).slice(),
+        built_score: built, build_gap: curScore - built,
         off_comp: this.isExcluded(cur),
         off_style: this.isStyleUnfit(cur),
         caps_gain: curPc[1],
@@ -2920,7 +3055,8 @@
         options: better.slice(0, topN).map(function (t) {
           return { weapon: t[1],
                    display_name: self.weapons[t[1]].display_name,
-                   score: t[0], gain: t[0] - curScore };
+                   score: t[0], gain: t[0] - curScore, delta: t[0] - built,
+                   combo: t[2], kit: (t[3] || []).slice() };
         }),
       });
     }
@@ -2943,8 +3079,10 @@
     }).slice(0, topN);
   };
 
-  CompEngine.prototype.uncoveredCaps = function (party, combos) {
-    var s = this.effectiveSupply(party, combos), out = [];
+  CompEngine.prototype.uncoveredCaps = function (party, combos, gears) {
+    /* gears: the members' worn kits, read like every other board number
+       (mirrors engine.py uncovered_caps) */
+    var s = this.effectiveSupply(party, combos, gears), out = [];
     for (var cap in this.reqs) {
       if (this.weight(cap) >= 5 && (s[cap] || 0) / this.target(cap) < 0.5) out.push(cap);
     }
@@ -3460,10 +3598,11 @@
 
   CompEngine.prototype.fightChain = function (party, combos, gears, candidate) {
     /* The comp as the caller's fight SEQUENCE, graded stage by stage —
-       DESCRIPTIVE only (mirrors engine.py fight_chain). */
+       DESCRIPTIVE only (mirrors engine.py fight_chain). Balanced reads
+       the chain of the identity the worn kits decide (T26d). */
     var styles = this.data.styles || {};
     var style = IDENTITY_STYLES[this.style]
-      ? this.style : this.compIdentity(party, combos).style;
+      ? this.style : this.compIdentity(party, combos, gears).style;
     var chain = style && styles[style] ? styles[style].chain : null;
     if (!chain) return null;
     var s = this.effectiveSupply(party, combos, gears);
@@ -3531,8 +3670,9 @@
     }
     var out = { style: style, stages: stages, improves: null };
     if (candidate && this.weapons[candidate]) {
-      /* explain() deltas are already weighted fitness terms */
-      var terms = this.explain(party, candidate, combos);
+      /* explain() deltas are already weighted fitness terms, on the
+         same gears */
+      var terms = this.explain(party, candidate, combos, gears);
       var deltas = {}, total = 0.0;
       for (var ti = 0; ti < terms.length; ti++) {
         deltas[terms[ti].cap] = terms[ti].delta;
@@ -3577,11 +3717,11 @@
        weapon-only list return bit-identically. */
     party = party.slice();
     fixed = fixed || 0;
-    var candidates;
-    /* empty array falls back to the full pool like Python's `pool or
-       self.pool` — [] is truthy in JS */
-    if (pool && pool.length) { candidates = pool.slice(); }
-    else { candidates = this.pool.slice(); }
+    /* mirrors engine.py `self.pool if pool is None else pool`: no pool
+       (null/undefined) is every non-retired weapon; a given list, empty
+       included, is the candidate set as given (F37) */
+    var candidates = (pool === undefined || pool === null)
+      ? this.pool.slice() : pool.slice();
     if (maxPasses === undefined || maxPasses === null) maxPasses = 8;
     if (gears === undefined || gears === null) {
       if (!party.length) return party;
@@ -4039,8 +4179,10 @@
         if (fallbackW[vkey] && !v0CappedW) continue;   /* cap fallback only */
         var ovw = this._offsetVector(state, w, i, vgears);
         var cs = ovw === null
-          ? this._comboScoreDressed(state, w, i, extras[i], dressed[vkey][i])
-          : this._comboScoreDressed(state, w, i, extras[i], ovw[0], ovw[1]);
+          ? this._comboScoreDressed(state, w, i, extras[i], dressed[vkey][i],
+                                    null, vgears)
+          : this._comboScoreDressed(state, w, i, extras[i], ovw[0], ovw[1],
+                                    vgears);
         if (best === null || cs.val > best.val)
           best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
                    variant: vkey, vgears: vgears };

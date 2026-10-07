@@ -227,5 +227,25 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
         JSON.stringify(junk));
 }
 
+/* 11 — neither caller-reference fill (loadoutPrefillGear, loadoutPrefill)
+   puts an off-hand on a two-hander, the engine kit's rule (L40f). A swap
+   or replace landing and a forge result land the engine's kit first and
+   take the reference only in slots it leaves unset, so they score the kit
+   the engine priced; an add starts from the caller reference */
+{
+  const off = someKey("offhand"), head = someKey("head");
+  const ref = [{ canonical: true, gear: { head, offhand: off } }];
+  ctx.LOADOUTS = { blackzone_roam: { "2H_DUALMACE_AVALON": ref, MAIN_MACE: ref } };
+  ctx.ENG = undefined;
+  ctx.party = ["2H_DUALMACE_AVALON", "MAIN_MACE"];
+  for (const fill of ["loadoutPrefillGear", "loadoutPrefill"]) {
+    vm.runInContext(`LOADOUT = [{}, {}]; ${fill}(0); ${fill}(1);`, ctx);
+    const L = vm.runInContext("LOADOUT", ctx);
+    check(`${fill}: a two-hander takes the reference's head but no off-hand; a one-hander takes both`,
+          L[0].head === head && !("offhand" in L[0])
+          && L[1].head === head && L[1].offhand === off, JSON.stringify(L));
+  }
+}
+
 console.log(`\n${pass}/${pass + fail} loadout codec tests passed`);
 process.exit(fail ? 1 : 0);

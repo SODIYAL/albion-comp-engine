@@ -13,6 +13,21 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
+- **The CTA sheet's engine read grades naked weapon keys**: `_roster.js`
+  hands the engine weapon keys alone (the account boundary, V: 09b, The
+  engine on the live roster), so its coverage, needs, overstack and next picks
+  grade NAKED rosters against person-unit targets, the unit error T26
+  names: every forged roster of 10+ reads "Tankiness — needed" (forged
+  Blackzone Roam 20 clap: 11.0 of 69.68 naked, covered dressed), where the
+  planner, every board number dressed, reads no such gap. Dressing each
+  held key in the engine's own doctrine kit (`kitVariants(w)[0][1]`,
+  engine data, not account data) would read the planner's units;
+  `tests/test_roster.js` pins "weapon keys alone" (V: 10, The dressed paths
+  read what they score).
+- **A gears list longer than the party**: both ports count a tail entry
+  past the party in the self-cost waiver and the carrier quota (the refund
+  loop stops at the party's end, F38b); no caller passes one. Whether
+  every reader should drop the tail is a both-port decision.
 - **The Dragon Portal's 15-20 pool beyond its rows**: the pool reads
   rows of its own, fitted at the floor (40 distinct rosters; V: 10, The
   15-20 portal pool reads its own rows). It carries no fielded list and
@@ -241,6 +256,38 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **A floored capability with a zero dressed gain is never priced**: the
+  dressed marginal walks the dressed vector's nonzero gains, so a
+  hard-floored capability a kit's self-cost zeroes while the weapon gain
+  stays positive loses its floor term and the pick score leaves the
+  comp_score delta (forced on a scratch dataset: -4.95). Latent: no
+  shipped kit zeroes a floored gain and the count-once capability
+  (sustained_dps) carries no floor. Fix in both ports: walk the floor
+  basis's capabilities too (`_marg_fit_from`, `_dressed_pre`).
+- **The fight chain's improves line runs at roster size**: the chain is
+  graded at the roster's size while the pick it names is explained one
+  body ahead (`inPickContext`), so a stage claim and the gain tiles can
+  read thresholds of different sizes.
+- **analyze() takes no gears**: its bands and profiles read the naked
+  supply; nothing on the page or in the pipeline calls it. An optional
+  `gears` parameter in both ports when a caller appears.
+- **Per-member rest scoring where the rest's state is built**:
+  `_refine_constrained` and replace_options build the rest's party_state
+  and still price the rest with a full comp_score; `_as_built` (F41b)
+  prices the member on that state at about a tenth of a comp_score, values
+  agreeing at 1e-13. `_two_opt`'s contribution sweep and the forge's
+  filler audit build no state, so there the marginal would first cost a
+  party_state (about one comp_score) and gains nothing.
+- **An explicit null top_n reads differently in the two ports**: Python
+  slices `[:top_n]`, so None returns every row; the JS port's recommend,
+  swapReview and weaknesses read null as zero rows, and kitOptions and
+  replaceOptions read it as their defaults (3, 5). No caller passes one.
+  One meaning in both ports (None as the default, as `pool=None` reads),
+  pinned in the parity test.
+- **Two latent parity splits on explicit empty values**: the JS port reads
+  an empty `always` dict as present in `_rawMemberCaps` and returns an
+  empty gang band from `_seatKit`, where Python treats both as absent; no
+  shipped weapon or seat carries either.
 - **Contents under three published comps keep rows fitted on earlier
   sheets**: Roads (1 comp), Territory Defense (2), Castle and Faction
   War read minimum rows written before the form-ability and anti-dive

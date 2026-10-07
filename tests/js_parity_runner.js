@@ -24,9 +24,72 @@ const kitSer = (ko) => {
   return out;
 };
 
+// the dressed and empty-pool outputs, serialized to the fields both ports
+// must agree on (mirrors _dressed_results and the _ser_* helpers in
+// test_js_parity.py)
+const serIdentity = (ia) => ({
+  style: ia.style, label: ia.label, strength: ia.strength, band: ia.band,
+  carriers: ia.carriers, kit_lean: ia.kit_lean === undefined ? null : ia.kit_lean,
+  conflicts: ia.conflicts.map((x) => [x.weapon, x.kind]),
+  members: ia.members.map((m) => [m.weapon, m.role, m.side, m.fit]),
+  melee_share: ia.melee_share, posture: ia.posture, mode: ia.mode });
+const serChain = (fc) => fc === null ? null : {
+  style: fc.style,
+  stages: fc.stages.map((s) => [s.name, s.verdict, s.caps, s.have, s.bar, s.min,
+    s.sources.map((r) => [r.cap, r.member, r.weapon, r.slot, r.spell, r.units])]),
+  improves: fc.improves === null ? null : [fc.improves.stage, fc.improves.gain,
+    fc.improves.terms.map((t) => [t.cap, t.gain])] };
+const serKp = (kp) => {
+  if (kp === null || kp === undefined) return null;
+  const out = { verdict: kp.verdict };
+  for (const k of ["pierce", "heal_cut", "burst"]) out[k] = [kp[k].ok, kp[k].have, kp[k].bar];
+  return out;
+};
+const serExplain = (terms) => terms.map((t) => [t.cap, t.delta, t.before, t.after, t.target]);
+const serReport = (pr) => [pr.verdict, pr.combo, pr.kit, pr.score, pr.d_fitness,
+  pr.d_synergy, pr.caps_gain,
+  pr.caps.map((r) => [r.cap, r.gain, r.coverage, r.floor_lift, r.overstack_cost, r.delta]),
+  pr.nonstack.map((n) => [n.spell, n.lost])];
+const serSwap = (rev) => rev.map((m) => [m.weapon, m.score, m.rank, m.built_score,
+  m.build_gap, m.combo, m.kit, m.caps_gain, m.verdict,
+  m.options.map((o) => [o.weapon, o.score, o.gain, o.delta, o.combo, o.kit])]);
+const dressedResults = (e, c, sp, rp, i, gl) => {
+  const party = c.party, combos = c.combos, gears = c.gears;
+  const cand = party.length ? party[0] : null;
+  const pool0 = c.refine_pool.length ? c.refine_pool[0] : null;
+  return {
+    identity_dressed: serIdentity(e.compIdentity(party, combos, gears)),
+    fight_chain_dressed: serChain(e.fightChain(party, combos, gears, cand)),
+    kill_pressure_dressed: serKp(e.killPressure(party, combos, gears)),
+    uncovered_dressed: e.uncoveredCaps(party, combos, gears).slice().sort(),
+    explain_dressed: pool0 === null ? null
+      : serExplain(e.explain(party, pool0, combos, gears)),
+    pick_report_dressed: pool0 === null ? null
+      : serReport(e.pickReport(party, pool0, combos, gears)),
+    swap_dressed: sp === null ? null
+      : serSwap(e.swapReview(sp, 3, null, combos.slice(0, sp.length),
+                             gl.slice(0, sp.length))),
+    // an explicit empty pool is no candidates (mirrors test_js_parity.py, F37)
+    empty_pool: {
+      recommend: e.recommend(party, 4, []).map((r) => r.weapon),
+      swap: sp === null ? null
+        : e.swapReview(sp, 3, []).map((m) => [m.rank, m.options.map((o) => o.weapon)]),
+      refine: rp === null ? null : e.refine(rp, REFINE_PASSES, []),
+    },
+    // the kit advisor with the rest as equipped (F42), on the kit cadence
+    kit_rest: (i % KIT_EVERY !== KIT_OFFSET || !party.length) ? null
+      : kitSer(e.kitOptions(party[0], combos.length ? combos[0] : null,
+                            party.slice(1, 1 + KIT_MAX_REST), 3, "auto",
+                            combos.slice(1, 1 + KIT_MAX_REST),
+                            gl.slice(1, 1 + KIT_MAX_REST))),
+  };
+};
+
 const out = cases.map((c, i) => {
   const e = new CompEngine(dataset, c.content, c.size, c.style);
-  const sp = i % SWAP_EVERY === 0 ? c.party.slice(0, SWAP_MAX_PARTY) : null;
+  // a case flagged "swap" (the dressed and short-list cases) always runs it
+  const sp = (i % SWAP_EVERY === 0 || c.swap) ? c.party.slice(0, SWAP_MAX_PARTY) : null;
+  const gl = c.gears || [];
   const rp = i % REFINE_EVERY === 0 ? c.party.slice(0, REFINE_MAX_PARTY) : null;
   let forged = null;
   if (i % FORGE_EVERY === 0) {
@@ -129,6 +192,8 @@ const out = cases.map((c, i) => {
                                 c.party.slice(1, 1 + KIT_MAX_REST))),
       free: kitSer(e.kitOptions(c.party[0])),
     },
+    // the dressed paths (mirrors test_js_parity.py _dressed_results)
+    ...dressedResults(e, c, sp, rp, i, gl),
   };
 });
 process.stdout.write(JSON.stringify(out));

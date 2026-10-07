@@ -119,8 +119,10 @@ Three layers, never merged:
   votes (one player, one vote; killer parties of 10+), the observed-build chain
   fronts a real worn combination (chains may have gaps), thin slots pool to
   the seat (`kit_pool` / `kit_by_chest`), carrier chests obey a comp-level
-  quota, two-handers get no off-hand, and where evidence runs out nothing is
-  proposed. Manual kits always score.
+  quota, two-handers get no off-hand (nor from the planner's caller-reference
+  fill, L40f), and where evidence runs out nothing is proposed. Comp-aware,
+  an item is priced against the rest as equipped, the worn rest dressed once
+  per waived set (F42). Manual kits always score.
 - Descriptive analyzers, parity-carried, never scoring inputs: `comp_identity`
   (playstyle label, per-member fit, bomb-squad archetype, kit-aware), `kill_pressure`,
   `fight_chain`, `pick_report` (signed decomposition reconstructing the pick
@@ -157,6 +159,37 @@ still sum to the fitness delta. Every party-level reader (waivers,
 carrier quota, kit lean) compares worn keys in their curated form:
 `gear_key` resolves a tiered key to a tierless curated item and a
 (key, choice) pair to its key. F1d / F1e and two parity cases pin it.
+
+### The count-once rule on dressed members
+
+A verified non-stacking spell (Vile Curse on `sustained_dps`, the one such
+record) keeps its largest single contribution. A dressed member's
+contribution is its share AS WORN (`_ns_share`: the kit's damage, heal and
+CC-duration % multiply the spell's units as `build_extra` multiplies the
+member's whole capability), so a duplicate keeps no part of its copy.
+`party_state` carries two tables: `ns_max` on the weapon-only basis, read
+by the synergy terms and the floor basis, and `ns_max_fit` on the fit
+supply; every marginal prices the fit side on the second and the synergy
+and floor sides on the first, as `comp_score` does. F39 / F40 pin the
+pick score's exactness on dressed duplicates, dressed and naked
+candidates alike.
+
+### The swap advisor
+
+`swap_review` is a weapon-choice read: each member's weapon is valued as a
+pick into the rest in its best combo and doctrine kit, like every
+alternative (`score`, `rank`, `verdict`, each option's `gain`; T17), so a
+build shortfall never turns into weapon advice. Beside it the member as
+built: `built_score` (the exact comp-score contribution in its own combo
+and kit, priced as a marginal on the rest's state like every pick,
+`_as_built`), `build_gap`, and per option the exact comp-score change of
+the swap (`delta`) with the combo and kit it assumed (F41, F41b). The
+planner's hint gates on the gain, shows the delta, and a click lands the
+option in that combo and kit, as the replace list does. A member
+`min_gain` or more short of its own best build (`build_gap`) is offered
+that build in one click, the weapon kept, and its swap buttons then show
+the gain (delta = gain + build_gap), so a build shortfall is never
+credited to another weapon (L40g).
 
 ### The Dragon Portal: rows per matchmaking pool
 

@@ -39,6 +39,30 @@ The scoring core of Comp Forge, in two parity-locked ports:
   exactly the supplied kit and never re-dresses it (naked when none —
   nothing is invented); `refine(gears=)` runs the dressed local search and
   returns `{party, gears}` (gears=None keeps the legacy weapon-only list).
+- **Inputs read alike in both ports**: `combos` / `gears` are parallel to the
+  party, and a list shorter than the party reads None past its end (the
+  default combo, a naked member; F38). `pool=None` reads the default pool;
+  a given list, empty included, is the candidate set as given, in every
+  entry point that takes one (F37).
+- **The count-once rule reads what is worn**: a verified non-stacking
+  spell's capability keeps its largest single contribution, a dressed
+  member's taken as worn (the kit's stat channel multiplies the spell's
+  units with the rest of the member's damage); synergy and the floor basis
+  keep the weapon-only shares (F39, F40).
+- **The why text is the scored rows**: `explain()` is the gap-closing half
+  of `pick_report()`'s rows, kit included (T54); `fight_chain` reads the
+  identity and the explain terms on the same gears (T26d).
+- **swapReview reads weapon choice and reports the build**: `score`, `rank`
+  and each option's `gain` value weapons at their best builds into the
+  rest (T17); `built_score`, `build_gap` and each option's `delta` (with its
+  `combo` and `kit`) are the member as built and the exact comp-score
+  change of the swap (F41), `built_score` priced as a marginal on the rest's
+  state (`_as_built`, F41b).
+- **The kit advisor reads the rest as equipped**: comp-aware `kit_options`
+  takes the rest's combos and kits (`party_combos`, `party_gears`; F42) and
+  dresses that rest once per waived set (`fitness(memo=)`; an item that
+  completes a self-cost offset dresses it once more), every item's value
+  the exact fitness delta.
 - **Never** reads UI state, killboard/usage evidence, or reference builds —
   those are display-only layers by standing rule (popularity is not
   effectiveness).
