@@ -550,5 +550,66 @@ function setUsage(baskets) {
         /borrowed/i.test(cr.execute.valTitle), `title "${cr.execute.valTitle}"`);
 }
 
+/* 8 — the evidence drawer counts what the board counts: a member's
+   EQUIPPED spells and WORN pieces, never a spell its weapon carries but
+   does not equip. Arclight Blasters carries Noise Eraser (a silence) as a
+   W option; on Explosive Salvo it supplies no silence, and the drawer
+   names Noise Eraser as carried, not equipped. The real engine and the
+   real _app.js functions run in a vm. */
+{
+  const DATASET = JSON.parse(fs.readFileSync(
+    path.join(__dirname, "..", "pipeline", "out", "dataset-latest.json"), "utf8"));
+  const engine = new CompEngine(DATASET, "castle_outpost", 7, "balanced");
+  const grab = (re, what) => {
+    const m = SRC.match(re);
+    if (!m) throw new Error(`could not extract ${what} from _app.js`);
+    return m[0];
+  };
+  const ctx = { Math, String, Object, Set, Array, ENG: engine, WEAPONS: DATASET.weapons,
+                GEAR_SPELLS: {HEAD_LEATHER_HELL: {a: [["SMOKEBOMB", "Smoke Bomb"]]}},
+                party: [], COMBOS_CUR: [], GEARS_CUR: [] };
+  vm.createContext(ctx);
+  for (const [re, what] of [
+    [/const esc = [\s\S]*?\}\[c\]\)\);/, "esc"],
+    [/function evidenceName\(w, e\)\{[\s\S]*?\n\}/, "evidenceName"],
+    [/const evidenceSpan = [\s\S]*?;\n/, "evidenceSpan"],
+    [/function evidenceRows\(cap\)\{[\s\S]*?\n\}/, "evidenceRows"],
+  ]) vm.runInContext(grab(re, what), ctx);
+  const AB = "2H_DUALCROSSBOW_CRYSTAL", HOOD = "HEAD_LEATHER_HELL";
+  const nCombos = engine._comboExtras(AB).length;
+  const comboWith = sid => [...Array(nCombos).keys()]
+    .find(c => engine.comboSpells(AB, c).some(x => x[1] === sid));
+  const salvo = comboWith("ACID_BOMB"), eraser = comboWith("SILENCINGBOLT");
+  const smoke = [0, 1, 2].find(c => engine.gearActiveSpell(HOOD, c) === "SMOKEBOMB");
+  const rowsFor = (combos, gears) => {
+    ctx.party = ["2H_MACE", AB];
+    ctx.COMBOS_CUR = combos;
+    ctx.GEARS_CUR = gears;
+    const rows = vm.runInContext('evidenceRows("silence")', ctx);
+    return {rows, ab: rows.find(r => r.w === AB),
+            total: engine.effectiveSupply(ctx.party, combos, gears).silence || 0};
+  };
+  const salvoCase = rowsFor([null, salvo], [null, null]);
+  check("evidence drawer: a carried but unequipped spell scores nothing and is named as not equipped",
+        salvo !== undefined && salvoCase.ab && salvoCase.ab.src.length === 0
+        && salvoCase.ab.units === 0 && salvoCase.ab.idle.includes("SILENCINGBOLT"),
+        JSON.stringify(salvoCase.ab));
+  const eraserCase = rowsFor([null, eraser], [null, null]);
+  check("evidence drawer: the equipped spell is counted with its sheet score",
+        eraserCase.ab && eraserCase.ab.src.some(s => s.score === 4 && /SILENCINGBOLT/.test(s.html))
+        && eraserCase.ab.units > 0 && !eraserCase.ab.idle.includes("SILENCINGBOLT"),
+        JSON.stringify(eraserCase.ab));
+  const hoodCase = rowsFor([null, salvo], [null, [[HOOD, smoke]]]);
+  check("evidence drawer: a worn piece's active is a source the board counts",
+        smoke !== undefined && hoodCase.ab
+        && hoodCase.ab.src.some(s => s.score === 3 && /Hellion Hood/.test(s.html) && /Smoke Bomb/.test(s.html))
+        && hoodCase.ab.units > 0,
+        JSON.stringify(hoodCase.ab));
+  const sums = [salvoCase, eraserCase, hoodCase].map(c =>
+    [c.rows.reduce((t, r) => t + r.units, 0), c.total]);
+  check("evidence drawer: the members' units add to the board's supply",
+        sums.every(([a, b]) => Math.abs(a - b) < 1e-9), JSON.stringify(sums));
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);

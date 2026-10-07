@@ -9503,8 +9503,9 @@ const targetSource = cap => ENG.targetSource(cap);
 /* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
    actually uses. Displaying raw sheet units next to effective-supply gap
    scores let a bar read "met" while the weakness list still charged a gap
-   for the same capability. Raw sheet numbers stay
-   visible per-weapon in the detail drawer. */
+   for the same capability. The evidence drawer shows each member's
+   equipped spells and worn pieces with their sheet scores beside the
+   units the engine counts (evidenceRows). */
 /* Every scoring call for THE party passes the members' resolved combos
    (COMBOS_CUR) — the user's spell picks and forged loadouts reach the
    engine; ad-hoc parties (contribution what-ifs) pass their own slices. */
@@ -11858,18 +11859,77 @@ function interactionBlock(w){
   }).join("");
   return `<h4>PvP interactions <span class="h4-note">(duplicate / reflect / cleanse semantics — “unknown” means the game data does not say)</span></h4>${rows}`;
 }
-function renderEvidence(cap){
-  const rows = party.filter(w => capsOf(w)[cap]).map(w => {
-    const ev = (WEAPONS[w].evidence || {})[cap];
-    return `<tr><td>${icon(w, 20)} ${nameOf(w)}</td><td class="sc">${capsOf(w)[cap]}</td>
-      <td>${ev && ev.length ? ev.map(e => evidenceSpan(w, e)).join(", ")
-            : '<span class="pend">no evidence — illustrative sheet, blocks release</span>'}</td>
-      <td class="mono" style="font-size:11px;color:var(--ink-3)">${w}</td></tr>`;
+/* The evidence drawer for one capability: what the board counts, member by
+   member. A member's sources are the spells it EQUIPS (the scored combo,
+   ENG.comboSpells over COMBOS_CUR) and the pieces it WEARS (GEARS_CUR, each
+   active as the engine picks it), each with its sheet score; "units" is
+   what the engine counts for the member (buildExtra / memberExtra, the
+   board's own inputs, before the count-once rule). A spell the weapon
+   carries but does not equip adds nothing (one spell per slot): it is
+   named apart as what a swap would bring. Reads the engine, never scores. */
+function evidenceRows(cap){
+  const worn = GEARS_CUR.some(g => g && g.length);
+  const waived = worn ? ENG.selfCostWaivers(GEARS_CUR) : null;
+  const scoreAt = (lo, slot, sid) => {
+    const k = (lo.slot_names || []).indexOf(slot);
+    const j = k < 0 ? -1 : ((lo.slot_spells || [])[k] || []).indexOf(sid);
+    return j < 0 ? 0 : ((((lo.slots || [])[k] || [])[j] || {})[cap] || 0);
+  };
+  const slotTag = slot => slot === "passive" ? "P" : slot.toUpperCase();
+  const out = [];
+  party.forEach((w, i) => {
+    const combo = COMBOS_CUR[i] === undefined ? null : COMBOS_CUR[i];
+    const gears = GEARS_CUR[i] && GEARS_CUR[i].length ? GEARS_CUR[i] : null;
+    const lo = WEAPONS[w].loadout || {};
+    const ev = (WEAPONS[w].evidence || {})[cap] || [];
+    const inSlot = e => (lo.slot_spells || []).some(list => (list || []).includes(e));
+    const src = [];
+    const always = (lo.always || {})[cap] || 0;
+    if (always) src.push({score: always,
+      html: ev.filter(e => !inSlot(e)).map(e => evidenceSpan(w, e)).join(", ") || "always on"});
+    const equipped = ENG.comboSpells(w, combo) || [];
+    for (const [slot, sid] of equipped){
+      const s = scoreAt(lo, slot, sid);
+      if (s) src.push({score: s, html: `${evidenceSpan(w, sid)} <span class="mono">${slotTag(slot)}</span>`});
+    }
+    for (const piece of gears || []){
+      const key = Array.isArray(piece) ? piece[0] : piece;
+      const g = ENG.gear[ENG.gearKey(key)] || {};
+      const glo = g.loadout || {};
+      const act = ENG.gearActiveSpell(key, Array.isArray(piece) ? piece[1] : null);
+      const s = Math.max((glo.always || {})[cap] || 0, act ? scoreAt(glo, "active", act) : 0);
+      if (!s) continue;
+      const actName = ((typeof GEAR_SPELLS !== "undefined" && GEAR_SPELLS[key]) || {}).a || [];
+      const hit = actName.find(x => x[0] === act);
+      src.push({score: s, html: `${esc(g.display_name || key)}${act ? ` · <span class="sp" title="${esc(act)}">${esc(hit ? hit[1] : act)}</span>` : ""}`});
+    }
+    const chosen = new Set(equipped.map(x => x[1]));
+    const idle = ev.filter(e => inSlot(e) && !chosen.has(e));
+    const units = ((gears ? ENG.buildExtra(w, combo, gears, null, waived)
+                          : ENG.memberExtra(w, combo)) || {})[cap] || 0;
+    if (!src.length && !idle.length && !units) return;
+    if (!src.length && units) src.push({score: null, html: "the worn kit's item stats"});
+    out.push({w, src, idle, units});
   });
+  return out;
+}
+function renderEvidence(cap){
+  const rows = evidenceRows(cap).map(r => {
+    const idleTxt = r.idle.length
+      ? `<div class="fn">carried, not equipped: ${r.idle.map(e => evidenceSpan(r.w, e)).join(", ")} — adds nothing until equipped</div>` : "";
+    const srcTxt = r.src.length
+      ? r.src.map(s => `<div>${s.html}${s.score === null ? "" : ` · <b>${s.score}</b>`}</div>`).join("")
+      : '<div class="fn">nothing equipped or worn supplies it</div>';
+    return `<tr><td>${icon(r.w, 20)} ${nameOf(r.w)}</td><td>${srcTxt}${idleTxt}</td>
+      <td class="sc">${r.units.toFixed(1)}</td>
+      <td class="mono" style="font-size:11px;color:var(--ink-3)">${r.w}</td></tr>`;
+  });
+  const have = supply(party)[cap] || 0;
   $("drawer-title").textContent = capLabel(cap);
   $("drawer-body").innerHTML = rows.length
-    ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(capLabel(cap))}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+    ? `<p class="fn">The board counts <b>${have.toFixed(1)}</b> units of ${target(cap).toFixed(1)} typical (ceiling ${softCap(cap).toFixed(1)}): each member's equipped spells and worn pieces with their sheet scores, and the units the engine counts for the member (the count-once rule applies across members).</p>
+      <table class="ev-tbl"><thead><tr><th>Member</th><th>Counted from · sheet score</th><th>Units</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
+    : `<p class="ev-empty">No member supplies <span class="mono">${esc(capLabel(cap))}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
   closePdash();   /* the dash overlays the drawer — never show both */
 }
