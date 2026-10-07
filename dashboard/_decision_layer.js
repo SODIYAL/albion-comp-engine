@@ -151,6 +151,10 @@
     }
     return axes;
   }
+  /* one popout row: a small-caps label beside its value */
+  function tipRow(k, v){
+    return `<div class="dlt-row"><span class="dlt-k">${k}</span><span class="dlt-v">${v}</span></div>`;
+  }
   function groupTipHtml(a){
     const st = a.floor ? '<span class="dlt-bad">below a hard floor</span>'
       : a.over ? '<span class="dlt-over">stacked past what any good comp fields</span>'
@@ -158,7 +162,8 @@
       : '<span class="dlt-dim">below target</span>';
     const rows = a.rows.map(r =>
       `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)} · cap ${r.soft.toFixed(1)}</span></div>`).join("");
-    return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
+    return `<span class="dlt-kick">${esc(a.g)}</span><div class="dlt-head">${Math.round(a.cov * 100)}% of ceiling</div>`
+      + `<div class="dlt-st">${st}</div>${rows}`
       + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap)</div>`;
   }
   /* Kill pressure and role check are DESCRIPTIVE — they translate engine
@@ -188,11 +193,11 @@
   function killPressureLine(){
     const kp = killPressureModel();
     if (!kp) return "";
-    const bit = k => kp[k].ok
-      ? `<b class="dlt-ok">\u2713 ${KP_LABEL[k]}</b>`
-      : `<b class="dlt-bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</b>`;
-    return `<div class="dlt-line"><span>kill pressure</span><span>${
-      bit("pierce")} ${bit("heal_cut")} ${bit("burst")}</span></div>`;
+    const chip = k => kp[k].ok
+      ? `<span class="dlt-chip ok">\u2713 ${KP_LABEL[k]}</span>`
+      : `<span class="dlt-chip bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</span>`;
+    return tipRow("kill pressure",
+      `<span class="dlt-chips">${chip("pierce")}${chip("heal_cut")}${chip("burst")}</span>`);
   }
   function killPressureCard(){
     const kp = killPressureModel();
@@ -217,13 +222,15 @@
     const adv = roleAdvisory();
     if (!adv) return "";
     let h = "";
-    const tally = Object.entries(adv.tally)
-      .map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
-    if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+    /* the role card's chips: the count in brass, the role's short name */
+    const chips = counts => Object.entries(counts).map(([k, n]) =>
+      `<span class="dlt-chip"><b>${n}</b> ${esc(roleShort(k))}</span>`).join("");
+    const tally = chips(adv.tally);
+    if (tally) h += tipRow("roles", `<span class="dlt-chips">${tally}</span>`);
     const fns = {};
     adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-    const fnTxt = Object.entries(fns).map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
-    if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+    const fnTxt = chips(fns);
+    if (fnTxt) h += tipRow("functions", `<span class="dlt-chips">${fnTxt}</span>`);
     adv.flags.forEach(f2 => { h += `<div class="dlt-warn">\u26a0 ${roleFlagText(f2)}</div>`; });
     return h;
   }
@@ -240,11 +247,14 @@
   }
 
   function centerTipHtml(state, id, pct, f, max){
-    let h = `<div class="dlt-head">${esc(state.label)}</div>`
-      + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
-      + `<div class="dlt-line"><span>fitness</span><span>${pct.toFixed(0)}% · ${f.toFixed(1)} / ${max.toFixed(0)}</span></div>`;
+    /* a count reads in its state's colour once it is nonzero */
+    const n = (v, word, cls) => `<b class="${v ? cls : "dlt-dim"}">${v} ${word}</b>`;
+    let h = `<span class="dlt-kick">Comp status</span><div class="dlt-head">${esc(state.label)}</div>`
+      + tipRow("triage", `${n(state.critical, "critical", "dlt-bad")} <span class="dlt-dim">·</span> ${
+          n(state.weak, "weak", "dlt-weak")} <span class="dlt-dim">·</span> ${n(state.excess, "overstacked", "dlt-over")}`)
+      + tipRow("fitness", `${pct.toFixed(0)}% <span class="dlt-dim">· ${f.toFixed(1)} / ${max.toFixed(0)}</span>`);
     if (id && id.label)
-      h += `<div class="dlt-line"><span>becoming</span><span>${esc(id.label)}${id.strength ? ` · ${id.strength}` : ""}</span></div>`;
+      h += tipRow("becoming", `${esc(id.label)}${id.strength ? ` <span class="dlt-dim">· ${id.strength}</span>` : ""}`);
     if (id) id.conflicts.forEach(c => {
       h += `<div class="dlt-warn">⚠ ${esc(c.display_name)}: ${c.kind === "unfit"
         ? "unfit for this playstyle at this size"

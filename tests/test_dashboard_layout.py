@@ -264,6 +264,12 @@ tip = seg(DECISION_JS, "function centerTipHtml", "function roleAdvisory",
 check("ENG.killPressure" not in tip and tip != "",
       "L9h centerTipHtml no longer calls the engine directly",
       "it must go through the shared helper so tooltip and card agree")
+check('<span class="dlt-kick">Comp status</span>' in tip and 'tipRow("kill pressure"' in DECISION_JS
+      and 'tipRow("roles"' in DECISION_JS and 'class="dlt-chip ok"' in DECISION_JS
+      and all(s in DECISION_CSS for s in ("#dl-tip .dlt-kick{", "#dl-tip .dlt-head{font-family:var(--serif)",
+                                          "#dl-tip .dlt-row{", "#dl-tip .dlt-chip{")),
+      "L9i the status popout reads in the panels' card language: a small-caps kicker, a serif "
+      "head, kicker-labelled rows, the kill-pressure and role reads as chips")
 
 print("L10 - the pick card is split into three")
 
@@ -1343,7 +1349,7 @@ check(bool(_retired) and _welcome_offered == set(WEAPONS) - _retired,
       "offered retired: %s; missing: %s" % (sorted(_welcome_offered & _retired),
                                             sorted(set(WEAPONS) - _retired - _welcome_offered)))
 
-print("L42 - the party board ends in the comp's actions, one row of icons")
+print("L42 - the party board ends in the comp's actions, one segmented bar")
 _pd = seg(SHELL, 'id="pdash"', "</aside>", "L42 party board anchors")
 _acts = seg(_pd, 'class="pdash-actions"', "</div>", "L42 action row anchors")
 _ids = ["pdash-share", "pdash-export", "pdash-save-comp", "pdash-clear"]
@@ -1351,9 +1357,13 @@ check(all('id="%s"' % b in _acts for b in _ids)
       and [_acts.index('id="%s"' % b) for b in _ids] == sorted(_acts.index('id="%s"' % b) for b in _ids)
       and re.search(r'id="pdash-save-comp"[^>]*\bhidden>', _acts) is not None
       and _acts.count("<svg") >= len(_ids)
-      and _pd.find('class="pdash-actions"') > _pd.find('id="pdash-body"') >= 0,
-      "L42a the party board ends in one row of icon buttons below the board: share link, "
-      "comp text, save to guild (hidden until an account shows it), clear")
+      and _pd.find('class="pdash-actions"') > _pd.find('id="pdash-body"') >= 0
+      and all(_acts.count("<span>%s</span>" % w) == 1 for w in ("link", "text", "save", "clear"))
+      and ".pdash-actions{display:flex; align-items:stretch; margin:10px 12px 12px;\n"
+          "  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));" in SHELL,
+      "L42a the party board ends in one segmented bar below the board, dressed like the wheel's "
+      "filter bar: share link, comp text, save to guild (hidden until an account shows it), "
+      "clear, each an icon and a short label")
 check('closest("#share, #pdash-share")' in APP and 'closest("#export, #pdash-export")' in APP
       and 'closest("#clear, #pdash-clear")' in APP,
       "L42b the board's share, comp text and clear icons run the setup drawer's own handlers, "
@@ -1364,8 +1374,10 @@ check('dashSave: $id("pdash-save-comp")' in COMPS_JS and "el.dashSave.hidden = !
       "L42c the board's save icon is the account layer's: the comps module shows it to a "
       "logged-in account and opens the saved comps dialog on the planner's comp; the planner "
       "never references it")
-check(".pd-act[hidden]{display:none}" in SHELL and ".pdash-actions{padding-bottom:50px}" in LAYOUT,
-      "L42d a hidden icon stays hidden, and on a phone the row clears the tab bar over the sheet")
+check(".pd-act[hidden]{display:none}" in SHELL and ".pdash-actions{margin-bottom:50px}" in LAYOUT
+      and ".pd-act span{display:none}" in LAYOUT,
+      "L42d a hidden segment stays hidden; on a phone the bar clears the tab bar over the sheet, "
+      "and the narrowest keep it on one line with icons only")
 
 if FAILURES:
 

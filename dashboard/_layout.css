@@ -107,8 +107,8 @@
   .epanel[data-open="true"]{z-index:40}
   /* the sheet's own content clears the tab bar that sits over its foot */
   .epanel-body{padding-bottom:44px}
-  /* the party board's action row sits at the sheet's foot: it clears the bar too */
-  .pdash-actions{padding-bottom:50px}
+  /* the party board's action bar sits at the sheet's foot: it clears the tab bar too */
+  .pdash-actions{margin-bottom:50px}
   /* the rails become one bottom tab bar: tap another tab to switch panels,
      tap the open one to close. They stay put — only the sheet moves. */
   .epanel-rail{top:auto; bottom:0; flex-direction:row;
@@ -125,6 +125,11 @@
   .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
   .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
     border:1px solid var(--rule-2); border-bottom:0}
+}
+/* the narrowest phones keep the action bar on one line: icons only, the
+   names on hover and to screen readers */
+@media (max-width:380px){
+  .pd-act span{display:none}
 }
 
 /* ============ moved from _decision_layer.css =============

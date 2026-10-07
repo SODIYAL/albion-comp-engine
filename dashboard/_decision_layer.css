@@ -31,18 +31,35 @@
 .dl-ident-sub{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .dl-ident-warn{font-size:13px;color:var(--amber)}
 .dl-open-setup{margin-top:12px}
-#dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;max-width:300px;
-  background:var(--bg-deep);border:1px solid var(--rule-2);border-radius:10px;
-  padding:8px 11px;font-family:var(--mono);font-size:11px;line-height:1.55;color:var(--ink-2);
-  box-shadow:0 8px 26px rgba(0,0,0,.55)}
-#dl-tip .dlt-head{color:var(--ink);font-weight:600;letter-spacing:.04em}
-#dl-tip .dlt-line{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}
-#dl-tip .dlt-line span:first-child{white-space:nowrap;color:var(--ink-3)}
-#dl-tip .dlt-line span:last-child{color:var(--ink);text-align:right}
-#dl-tip .dlt-ok{color:var(--ok-bright)}#dl-tip .dlt-bad{color:var(--gap)}
+/* the hover popouts (the status headline, the radar groups) in the panels'
+   card language: a small-caps kicker, a serif head, kicker-labelled rows,
+   pill chips for the reads */
+#dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;width:max-content;max-width:340px;
+  background:rgba(13,13,20,.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--rule-2);border-radius:12px;padding:12px 14px;
+  font-family:var(--sans);font-size:12.5px;line-height:1.5;color:var(--ink-2);
+  box-shadow:var(--shadow-lift)}
+#dl-tip .dlt-kick{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+#dl-tip .dlt-head{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.2;color:var(--ink);margin:3px 0 8px}
+#dl-tip .dlt-row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:baseline;
+  padding:6px 0;border-top:1px solid var(--rule)}
+#dl-tip .dlt-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+#dl-tip .dlt-v{color:var(--ink);font-variant-numeric:tabular-nums}
+#dl-tip .dlt-chips{display:flex;flex-wrap:wrap;gap:4px}
+#dl-tip .dlt-chip{font-family:var(--mono);font-size:10.5px;line-height:1.4;padding:2px 8px;border-radius:99px;
+  border:1px solid var(--rule-2);background:var(--sunk);color:var(--ink-2);white-space:nowrap}
+#dl-tip .dlt-chip b{color:var(--brass);font-weight:600}
+#dl-tip .dlt-chip.ok{color:var(--ok-bright);border-color:rgba(35,191,110,.3);background:rgba(35,191,110,.08)}
+#dl-tip .dlt-chip.bad{color:var(--gap);border-color:rgba(255,84,112,.35);background:var(--gap-wash)}
+#dl-tip .dlt-st{margin-bottom:6px}
+#dl-tip .dlt-line{display:flex;justify-content:space-between;gap:16px;padding:3px 0;border-top:1px solid var(--rule)}
+#dl-tip .dlt-line span:first-child{white-space:nowrap;color:var(--ink-2)}
+#dl-tip .dlt-line span:last-child{font-family:var(--mono);font-size:11px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+#dl-tip .dlt-ok{color:var(--ok-bright)}#dl-tip .dlt-bad{color:var(--gap)}#dl-tip .dlt-weak{color:var(--amber)}
 #dl-tip .dlt-over{color:var(--over)}#dl-tip .dlt-dim{color:var(--ink-3)}
-#dl-tip .dlt-warn{color:var(--amber);margin-top:2px}
-#dl-tip .dlt-note{color:var(--ink-3);margin-top:4px;font-size:10px}
+#dl-tip .dlt-warn{color:var(--amber);font-size:12px;margin-top:6px}
+#dl-tip .dlt-note{margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;color:var(--ink-3)}
 /* fight chain (roadmap item 1): the fight as the playstyle sequences it */
 .dl-chain{padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}
 .dl-ch-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px}

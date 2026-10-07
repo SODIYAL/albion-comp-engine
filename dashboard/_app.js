@@ -2954,11 +2954,14 @@ function compText(){
   return lines.join("\n");
 }
 /* a copy confirms in place: the setup drawer's text button reads the
-   message, the party board's icon shows a check with it on hover */
+   message, the party board's segment shows a check and reads it in its
+   short label */
 function flashBtn(btn, text, back){
   if (btn.classList.contains("pd-act")){
+    const lbl = btn.querySelector("span"), was = lbl ? lbl.textContent : "";
     btn.dataset.flash = "1"; btn.title = text;
-    setTimeout(() => { delete btn.dataset.flash; btn.title = back; }, 1400);
+    if (lbl) lbl.textContent = text;
+    setTimeout(() => { delete btn.dataset.flash; btn.title = back; if (lbl) lbl.textContent = was; }, 1400);
     return;
   }
   btn.textContent = text;
@@ -3262,13 +3265,15 @@ document.addEventListener("click", e => {
   if (clr){
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp. The setup drawer's button says so in
-       its text, the party board's icon in its colour and its label. */
-    const say = t => {
-      if (clr.id === "clear") clr.textContent = t;
-      else { clr.title = t; clr.setAttribute("aria-label", t); }
+       its text, the party board's segment in its colour and short label. */
+    const say = (t, short) => {
+      if (clr.id === "clear"){ clr.textContent = t; return; }
+      clr.title = t; clr.setAttribute("aria-label", t);
+      const lbl = clr.querySelector("span");
+      if (lbl) lbl.textContent = short;
     };
     if (clr.dataset.armed === "1"){
-      delete clr.dataset.armed; say("clear comp");
+      delete clr.dataset.armed; say("clear comp", "clear");
       party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
@@ -3277,8 +3282,8 @@ document.addEventListener("click", e => {
       const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
-      clr.dataset.armed = "1"; say("really clear? click again");
-      setTimeout(() => { delete clr.dataset.armed; say("clear comp"); }, 2200);
+      clr.dataset.armed = "1"; say("really clear? click again", "sure?");
+      setTimeout(() => { delete clr.dataset.armed; say("clear comp", "clear"); }, 2200);
     }
     return;
   }

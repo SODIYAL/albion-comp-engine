@@ -1104,25 +1104,31 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .wf-c.on{background:var(--brass-wash)}
 .wf-c .ui{display:block}
 .wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
-/* the comp's actions under the party board: one row of icon buttons (share
-   link, comp text, save to guild for an account, clear). A copy confirms
-   with a check; clear arms red on the first click. */
-.pdash-actions{display:flex; justify-content:center; gap:10px; padding:10px 12px 12px;
-  border-top:1px solid var(--rule-2)}
+/* the comp's actions under the party board: one segmented bar dressed like
+   the wheel's filter bar (share link, comp text, save to guild for an
+   account, clear), each segment an icon and a short label in the setup
+   buttons' type. A copy confirms with a check; clear arms red on the first
+   click. */
+.pdash-actions{display:flex; align-items:stretch; margin:10px 12px 12px;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule-2); border-radius:12px}
 .pd-act{
-  width:40px; height:34px; display:inline-flex; align-items:center; justify-content:center;
-  border-radius:9px; border:1px solid var(--rule-2); background:var(--surface);
-  color:var(--ink-3); padding:0; cursor:pointer;
-  transition:color .15s var(--ease), border-color .15s var(--ease), background .15s var(--ease);
+  flex:1; display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:9px 6px; background:none; border:0; border-left:1px solid var(--rule); border-radius:0;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-2); white-space:nowrap; cursor:pointer;
+  transition:color .18s var(--ease), background .18s var(--ease);
 }
+.pd-act:first-child{border-left:0; border-radius:11px 0 0 11px}
+.pd-act:last-child{border-radius:0 11px 11px 0}
 .pd-act[hidden]{display:none}
-.pd-act:hover, .pd-act:focus-visible{color:var(--brass); border-color:var(--brass-deep); background:var(--brass-wash)}
-.pd-act .ui{display:block}
+.pd-act:hover, .pd-act:focus-visible{color:var(--brass)}
+.pd-act .ui{display:block; flex:none}
 .pd-act .pd-ok{display:none}
-.pd-act[data-flash="1"]{color:var(--ok); border-color:var(--ok)}
+.pd-act[data-flash="1"]{color:var(--ok-bright)}
 .pd-act[data-flash="1"] .pd-ic{display:none}
 .pd-act[data-flash="1"] .pd-ok{display:block}
-.pd-clear:hover, .pd-clear[data-armed="1"]{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
+.pd-clear:hover, .pd-clear[data-armed="1"]{color:var(--gap); background:var(--gap-wash)}
 .wf-dm.locked .wf-mcard{box-shadow:inset 0 0 0 1px var(--brass-deep)}
 /* the at-rest lock mark rides inside the slot number (monoline, brass) */
 .wf-mcard .n{display:inline-flex; align-items:center; gap:3px}
@@ -1762,18 +1768,35 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .dl-ident-sub{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .dl-ident-warn{font-size:13px;color:var(--amber)}
 .dl-open-setup{margin-top:12px}
-#dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;max-width:300px;
-  background:var(--bg-deep);border:1px solid var(--rule-2);border-radius:10px;
-  padding:8px 11px;font-family:var(--mono);font-size:11px;line-height:1.55;color:var(--ink-2);
-  box-shadow:0 8px 26px rgba(0,0,0,.55)}
-#dl-tip .dlt-head{color:var(--ink);font-weight:600;letter-spacing:.04em}
-#dl-tip .dlt-line{display:flex;justify-content:space-between;gap:16px;font-variant-numeric:tabular-nums}
-#dl-tip .dlt-line span:first-child{white-space:nowrap;color:var(--ink-3)}
-#dl-tip .dlt-line span:last-child{color:var(--ink);text-align:right}
-#dl-tip .dlt-ok{color:var(--ok-bright)}#dl-tip .dlt-bad{color:var(--gap)}
+/* the hover popouts (the status headline, the radar groups) in the panels'
+   card language: a small-caps kicker, a serif head, kicker-labelled rows,
+   pill chips for the reads */
+#dl-tip{position:fixed;z-index:60;display:none;pointer-events:none;width:max-content;max-width:340px;
+  background:rgba(13,13,20,.98);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--rule-2);border-radius:12px;padding:12px 14px;
+  font-family:var(--sans);font-size:12.5px;line-height:1.5;color:var(--ink-2);
+  box-shadow:var(--shadow-lift)}
+#dl-tip .dlt-kick{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+#dl-tip .dlt-head{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.2;color:var(--ink);margin:3px 0 8px}
+#dl-tip .dlt-row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:baseline;
+  padding:6px 0;border-top:1px solid var(--rule)}
+#dl-tip .dlt-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+#dl-tip .dlt-v{color:var(--ink);font-variant-numeric:tabular-nums}
+#dl-tip .dlt-chips{display:flex;flex-wrap:wrap;gap:4px}
+#dl-tip .dlt-chip{font-family:var(--mono);font-size:10.5px;line-height:1.4;padding:2px 8px;border-radius:99px;
+  border:1px solid var(--rule-2);background:var(--sunk);color:var(--ink-2);white-space:nowrap}
+#dl-tip .dlt-chip b{color:var(--brass);font-weight:600}
+#dl-tip .dlt-chip.ok{color:var(--ok-bright);border-color:rgba(35,191,110,.3);background:rgba(35,191,110,.08)}
+#dl-tip .dlt-chip.bad{color:var(--gap);border-color:rgba(255,84,112,.35);background:var(--gap-wash)}
+#dl-tip .dlt-st{margin-bottom:6px}
+#dl-tip .dlt-line{display:flex;justify-content:space-between;gap:16px;padding:3px 0;border-top:1px solid var(--rule)}
+#dl-tip .dlt-line span:first-child{white-space:nowrap;color:var(--ink-2)}
+#dl-tip .dlt-line span:last-child{font-family:var(--mono);font-size:11px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+#dl-tip .dlt-ok{color:var(--ok-bright)}#dl-tip .dlt-bad{color:var(--gap)}#dl-tip .dlt-weak{color:var(--amber)}
 #dl-tip .dlt-over{color:var(--over)}#dl-tip .dlt-dim{color:var(--ink-3)}
-#dl-tip .dlt-warn{color:var(--amber);margin-top:2px}
-#dl-tip .dlt-note{color:var(--ink-3);margin-top:4px;font-size:10px}
+#dl-tip .dlt-warn{color:var(--amber);font-size:12px;margin-top:6px}
+#dl-tip .dlt-note{margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;color:var(--ink-3)}
 /* fight chain (roadmap item 1): the fight as the playstyle sequences it */
 .dl-chain{padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}
 .dl-ch-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -2727,8 +2750,8 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
   .epanel[data-open="true"]{z-index:40}
   /* the sheet's own content clears the tab bar that sits over its foot */
   .epanel-body{padding-bottom:44px}
-  /* the party board's action row sits at the sheet's foot: it clears the bar too */
-  .pdash-actions{padding-bottom:50px}
+  /* the party board's action bar sits at the sheet's foot: it clears the tab bar too */
+  .pdash-actions{margin-bottom:50px}
   /* the rails become one bottom tab bar: tap another tab to switch panels,
      tap the open one to close. They stay put — only the sheet moves. */
   .epanel-rail{top:auto; bottom:0; flex-direction:row;
@@ -2745,6 +2768,11 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
   .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
   .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
     border:1px solid var(--rule-2); border-bottom:0}
+}
+/* the narrowest phones keep the action bar on one line: icons only, the
+   names on hover and to screen readers */
+@media (max-width:380px){
+  .pd-act span{display:none}
 }
 
 /* ============ moved from _decision_layer.css =============
@@ -3411,14 +3439,15 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
 <!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
 <aside class="epanel" data-edge="right" data-open="false" id="pdash" aria-label="Party board">
   <div class="epanel-body" id="pdash-body"></div>
-  <!-- the comp's actions under the board, one row of icons: share link, comp text and clear run
-       the setup drawer's own handlers (clear arms on the first click); the save icon is the
-       account layer's, hidden until the comps module shows it to a logged-in account -->
+  <!-- the comp's actions under the board, one segmented bar like the wheel's filter bar:
+       share link, comp text and clear run the setup drawer's own handlers (clear arms on
+       the first click); the save segment is the account layer's, hidden until the comps
+       module shows it to a logged-in account -->
   <div class="pdash-actions" role="toolbar" aria-label="Comp actions">
-    <button class="pd-act" id="pdash-share" type="button" title="copy share link" aria-label="copy share link"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
-    <button class="pd-act" id="pdash-export" type="button" title="copy comp text" aria-label="copy comp text"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v11A1.5 1.5 0 0 0 5.5 18H8"/><path d="M11 12.5h6M11 16h4"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
-    <button class="pd-act" id="pdash-save-comp" type="button" title="save comp to guild" aria-label="save comp to guild" hidden><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/><path d="M12 7.5v5M9.5 10h5"/></svg></button>
-    <button class="pd-act pd-clear" id="pdash-clear" type="button" title="clear comp" aria-label="clear comp"><svg class="ui pd-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 7h15"/><path d="M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/><path d="M6.5 7l1 12a1.5 1.5 0 0 0 1.5 1.4h6a1.5 1.5 0 0 0 1.5-1.4l1-12"/><path d="M10.5 11v6M13.5 11v6"/></svg></button>
+    <button class="pd-act" id="pdash-share" type="button" title="copy share link" aria-label="copy share link"><svg class="ui pd-ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>link</span></button>
+    <button class="pd-act" id="pdash-export" type="button" title="copy comp text" aria-label="copy comp text"><svg class="ui pd-ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v11A1.5 1.5 0 0 0 5.5 18H8"/></svg><svg class="ui pd-ok" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>text</span></button>
+    <button class="pd-act" id="pdash-save-comp" type="button" title="save comp to guild" aria-label="save comp to guild" hidden><svg class="ui pd-ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z"/><path d="M12 7.5v5M9.5 10h5"/></svg><span>save</span></button>
+    <button class="pd-act pd-clear" id="pdash-clear" type="button" title="clear comp" aria-label="clear comp"><svg class="ui pd-ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 7h15"/><path d="M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2"/><path d="M6.5 7l1 12a1.5 1.5 0 0 0 1.5 1.4h6a1.5 1.5 0 0 0 1.5-1.4l1-12"/></svg><span>clear</span></button>
   </div>
   <!-- kit flyout: fills on hover over a member tile (showPdashFly) -->
   <div class="pdash-fly" id="pdash-fly" hidden></div>
@@ -12374,11 +12403,14 @@ function compText(){
   return lines.join("\n");
 }
 /* a copy confirms in place: the setup drawer's text button reads the
-   message, the party board's icon shows a check with it on hover */
+   message, the party board's segment shows a check and reads it in its
+   short label */
 function flashBtn(btn, text, back){
   if (btn.classList.contains("pd-act")){
+    const lbl = btn.querySelector("span"), was = lbl ? lbl.textContent : "";
     btn.dataset.flash = "1"; btn.title = text;
-    setTimeout(() => { delete btn.dataset.flash; btn.title = back; }, 1400);
+    if (lbl) lbl.textContent = text;
+    setTimeout(() => { delete btn.dataset.flash; btn.title = back; if (lbl) lbl.textContent = was; }, 1400);
     return;
   }
   btn.textContent = text;
@@ -12682,13 +12714,15 @@ document.addEventListener("click", e => {
   if (clr){
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp. The setup drawer's button says so in
-       its text, the party board's icon in its colour and its label. */
-    const say = t => {
-      if (clr.id === "clear") clr.textContent = t;
-      else { clr.title = t; clr.setAttribute("aria-label", t); }
+       its text, the party board's segment in its colour and short label. */
+    const say = (t, short) => {
+      if (clr.id === "clear"){ clr.textContent = t; return; }
+      clr.title = t; clr.setAttribute("aria-label", t);
+      const lbl = clr.querySelector("span");
+      if (lbl) lbl.textContent = short;
     };
     if (clr.dataset.armed === "1"){
-      delete clr.dataset.armed; say("clear comp");
+      delete clr.dataset.armed; say("clear comp", "clear");
       party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
@@ -12697,8 +12731,8 @@ document.addEventListener("click", e => {
       const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
-      clr.dataset.armed = "1"; say("really clear? click again");
-      setTimeout(() => { delete clr.dataset.armed; say("clear comp"); }, 2200);
+      clr.dataset.armed = "1"; say("really clear? click again", "sure?");
+      setTimeout(() => { delete clr.dataset.armed; say("clear comp", "clear"); }, 2200);
     }
     return;
   }
@@ -13156,6 +13190,10 @@ render();
     }
     return axes;
   }
+  /* one popout row: a small-caps label beside its value */
+  function tipRow(k, v){
+    return `<div class="dlt-row"><span class="dlt-k">${k}</span><span class="dlt-v">${v}</span></div>`;
+  }
   function groupTipHtml(a){
     const st = a.floor ? '<span class="dlt-bad">below a hard floor</span>'
       : a.over ? '<span class="dlt-over">stacked past what any good comp fields</span>'
@@ -13163,7 +13201,8 @@ render();
       : '<span class="dlt-dim">below target</span>';
     const rows = a.rows.map(r =>
       `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)} · cap ${r.soft.toFixed(1)}</span></div>`).join("");
-    return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
+    return `<span class="dlt-kick">${esc(a.g)}</span><div class="dlt-head">${Math.round(a.cov * 100)}% of ceiling</div>`
+      + `<div class="dlt-st">${st}</div>${rows}`
       + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap)</div>`;
   }
   /* Kill pressure and role check are DESCRIPTIVE — they translate engine
@@ -13193,11 +13232,11 @@ render();
   function killPressureLine(){
     const kp = killPressureModel();
     if (!kp) return "";
-    const bit = k => kp[k].ok
-      ? `<b class="dlt-ok">\u2713 ${KP_LABEL[k]}</b>`
-      : `<b class="dlt-bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</b>`;
-    return `<div class="dlt-line"><span>kill pressure</span><span>${
-      bit("pierce")} ${bit("heal_cut")} ${bit("burst")}</span></div>`;
+    const chip = k => kp[k].ok
+      ? `<span class="dlt-chip ok">\u2713 ${KP_LABEL[k]}</span>`
+      : `<span class="dlt-chip bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</span>`;
+    return tipRow("kill pressure",
+      `<span class="dlt-chips">${chip("pierce")}${chip("heal_cut")}${chip("burst")}</span>`);
   }
   function killPressureCard(){
     const kp = killPressureModel();
@@ -13222,13 +13261,15 @@ render();
     const adv = roleAdvisory();
     if (!adv) return "";
     let h = "";
-    const tally = Object.entries(adv.tally)
-      .map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
-    if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+    /* the role card's chips: the count in brass, the role's short name */
+    const chips = counts => Object.entries(counts).map(([k, n]) =>
+      `<span class="dlt-chip"><b>${n}</b> ${esc(roleShort(k))}</span>`).join("");
+    const tally = chips(adv.tally);
+    if (tally) h += tipRow("roles", `<span class="dlt-chips">${tally}</span>`);
     const fns = {};
     adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-    const fnTxt = Object.entries(fns).map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
-    if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+    const fnTxt = chips(fns);
+    if (fnTxt) h += tipRow("functions", `<span class="dlt-chips">${fnTxt}</span>`);
     adv.flags.forEach(f2 => { h += `<div class="dlt-warn">\u26a0 ${roleFlagText(f2)}</div>`; });
     return h;
   }
@@ -13245,11 +13286,14 @@ render();
   }
 
   function centerTipHtml(state, id, pct, f, max){
-    let h = `<div class="dlt-head">${esc(state.label)}</div>`
-      + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
-      + `<div class="dlt-line"><span>fitness</span><span>${pct.toFixed(0)}% · ${f.toFixed(1)} / ${max.toFixed(0)}</span></div>`;
+    /* a count reads in its state's colour once it is nonzero */
+    const n = (v, word, cls) => `<b class="${v ? cls : "dlt-dim"}">${v} ${word}</b>`;
+    let h = `<span class="dlt-kick">Comp status</span><div class="dlt-head">${esc(state.label)}</div>`
+      + tipRow("triage", `${n(state.critical, "critical", "dlt-bad")} <span class="dlt-dim">·</span> ${
+          n(state.weak, "weak", "dlt-weak")} <span class="dlt-dim">·</span> ${n(state.excess, "overstacked", "dlt-over")}`)
+      + tipRow("fitness", `${pct.toFixed(0)}% <span class="dlt-dim">· ${f.toFixed(1)} / ${max.toFixed(0)}</span>`);
     if (id && id.label)
-      h += `<div class="dlt-line"><span>becoming</span><span>${esc(id.label)}${id.strength ? ` · ${id.strength}` : ""}</span></div>`;
+      h += tipRow("becoming", `${esc(id.label)}${id.strength ? ` <span class="dlt-dim">· ${id.strength}</span>` : ""}`);
     if (id) id.conflicts.forEach(c => {
       h += `<div class="dlt-warn">⚠ ${esc(c.display_name)}: ${c.kind === "unfit"
         ? "unfit for this playstyle at this size"
