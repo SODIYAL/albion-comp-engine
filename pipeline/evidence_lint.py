@@ -53,10 +53,15 @@ the effect layer can neither confirm nor deny a damage claim). The rest is
 curation judgment and gets rules 1-2 only; the run's first line prints that
 set.
 
-Patch staleness: if out/patch_history.json exists (patch_history.py), a
-WARNING is raised for any evidence spell a weapon entry cites that a game
-patch touched after the entry's curated_as_of date; the scores resting on
-it need a re-read.
+Evidence review (pipeline/evidence_review.py): every cited evidence id —
+spells on weapon, pool and gear rows and gear self-costs, and each item's
+base stats behind a WEAPON_STATS / GEAR_STATS row — must carry, in
+sheets/reviewed_evidence.json, the fingerprint its facts had in the pinned
+snapshot when the rows citing it were last read. A changed or missing
+fingerprint is an ERROR until the rows are re-read and the facts accepted
+(`py -3 pipeline/evidence_review.py --accept ID`). Snapshot against
+snapshot, never calendar dates: a sheet curated after a patch but against
+the older pin is still stale against the new one.
 
 Usage:  py -3 pipeline/evidence_lint.py [sheets/*.yaml]
 """
@@ -206,47 +211,25 @@ def _load_pool_rows(directory, tag_key):
 POOLS = _load_pool_rows(POOL_DIR, "subcategory")
 GEAR_POOLS = _load_pool_rows(GEAR_POOL_DIR, "tree")
 
-# ---- patch staleness (warning only, never blocks) ---------------------------
-# out/patch_history.json (built by patch_history.py from ao-bin-dumps git
-# history) records which spells each game patch touched, keyed back to the
-# equippable root spells sheets cite. Every weapon entry declares
-# `curated_as_of: YYYY-MM-DD` (rule 10); if a cited evidence spell changed in
-# a LATER patch, the scores resting on it need a re-read. Without the file
-# the check is silent.
+# ---- evidence review (snapshot staleness) ---------------------------------------
 
+def lint_evidence_review():
+    """Every cited evidence id carries the fingerprint its facts had when
+    the rows citing it were last read (evidence_review.py); a changed or
+    missing one is an ERROR until the rows are re-read and accepted."""
+    import evidence_review
+    stale, unrecorded = evidence_review.check()
 
-def load_patch_index(path=os.path.join(HERE, "out", "patch_history.json")):
-    """{equippable root spell: [patch dates it changed in]}, newest last."""
-    if not os.path.exists(path):
-        return {}
-    idx = {}
-    for p in json.load(open(path, encoding="utf-8")).get("patches", []):
-        for s in p.get("spells", []):
-            # VFX/audio/controller-metadata churn can't move a score; a
-            # missing flag (older file) conservatively counts as relevant
-            if not s.get("balance_relevant", True):
-                continue
-            for root in s.get("roots", [s["id"]]):
-                idx.setdefault(root, set()).add(p["date"])
-    return {k: sorted(v) for k, v in idx.items()}
-
-
-PATCH_INDEX = load_patch_index()
-
-
-def stale_evidence(curated_as_of, spell_ids, index=None):
-    """[(spell_id, [dates])] for cited spells patched after the curation date.
-    Dates are ISO strings, so string comparison is date comparison."""
-    index = PATCH_INDEX if index is None else index
-    if not curated_as_of:
-        return []
-    d0 = str(curated_as_of)
-    out = []
-    for sid in sorted(set(spell_ids)):
-        dates = [d for d in index.get(sid, []) if d > d0]
-        if dates:
-            out.append((sid, dates))
-    return out
+    def where(ws):
+        return ", ".join(ws[:4]) + (" ..." if len(ws) > 4 else "")
+    errors = [f"{ev}: its facts changed in the pinned snapshot since the rows "
+              f"citing it were read ({where(ws)}); re-read them, then "
+              f"py -3 pipeline/evidence_review.py --accept {ev}"
+              for ev, ws in stale]
+    errors += [f"{ev}: cited ({where(ws)}) but never reviewed; read the rows, "
+               f"then py -3 pipeline/evidence_review.py --accept {ev}"
+               for ev, ws in unrecorded]
+    return errors, []
 
 
 # ---- shared checks -------------------------------------------------------------
@@ -503,7 +486,7 @@ def lint_weapon_entry(entry, path, index):
     wkey = entry.get("weapon")
     if not isinstance(wkey, str) or not wkey:
         return [f"{_rel(path)} entry {index}: no weapon key"], []
-    dated = _entry_header(wkey, entry, WEAPON_KEYS, WEAPON_REQUIRED, errors)
+    _entry_header(wkey, entry, WEAPON_KEYS, WEAPON_REQUIRED, errors)
     role = entry.get("role_hint")
     if "role_hint" in entry and (not isinstance(role, str)
                                  or role not in ROLE_HINTS):
@@ -564,13 +547,6 @@ def lint_weapon_entry(entry, path, index):
             continue
         cited.add(ev)
         ground(where, cap, ev, errors, warnings)
-    if dated:
-        for sid, dates in stale_evidence(entry.get("curated_as_of"), cited):
-            warnings.append(
-                f"{wkey}: evidence spell '{sid}' changed in patch(es) "
-                f"{', '.join(dates)}, after curated_as_of "
-                f"{entry['curated_as_of']} — re-verify the scores citing it "
-                f"(details in out/patch_history.json)")
     return errors, warnings
 
 
@@ -995,6 +971,8 @@ def run(paths):
     out.append(("weapon keys and sheet file names",) + lint_corpus(paths))
     for path in paths:
         out.append((os.path.basename(path),) + lint_sheet(path))
+    out.append(("evidence review (sheets/reviewed_evidence.json)",)
+               + lint_evidence_review())
     return out
 
 

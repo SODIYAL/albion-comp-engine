@@ -304,12 +304,13 @@ Each is decidable today from evidence already in the repo.
   was run again). `fold_harvest.ps1` should refuse to start while the
   harvest task is running, or the harvest should leave the artifact to
   the fold and the portal refresh.
-- **Patch staleness cannot see a form ability**: `patch_history.py` maps
-  a changed spell to the equippable spells that reference it, and no
-  equippable spell references a form's abilities (the dumps link them in
-  a file the snapshot cache does not carry). A patch to Barbed Roots
-  raises no warning on the Rootbound sheet. The form table in
-  `audit_form_abilities.py` is the mapping `patch_history.py` needs.
+- **Snapshot staleness cannot see a form ability's numbers**: the evidence
+  review fingerprints the cited spell's own `spell_index.json` record and
+  its structured effects; no equippable spell references a form's abilities
+  (the dumps link them in a file the snapshot cache does not carry), so a
+  numeric change to Barbed Roots leaves the Rootbound E's fingerprint as it
+  was. The form table in `audit_form_abilities.py` is the mapping a
+  fingerprint of the form's abilities needs.
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
   47 of 81 head / armor / shoes items have no vote and ASSUME their own

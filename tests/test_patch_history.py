@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Unit tests for the patch-history layer (patch_history.py + the staleness
-warning in evidence_lint.py). Pure synthetic data — no ao-bin-dumps clone and
+Unit tests for the patch-history layer (patch_history.py) and the
+snapshot staleness record (evidence_review.py). Pure synthetic data — no ao-bin-dumps clone and
 no network needed, so this runs everywhere the golden suite runs.
 
 The transitive-reach case mirrors the real bug class that motivated the
@@ -21,7 +21,6 @@ sys.path.insert(0, os.path.join(HERE, os.pardir, "pipeline"))
 
 from patch_history import (attr_changes, balance_relevant, diff_snapshots,
                            flatten, reverse_reach)  # noqa: E402
-from evidence_lint import load_patch_index, stale_evidence  # noqa: E402
 
 results = []
 
@@ -87,42 +86,73 @@ check("a change two references deep maps back to the equippable root",
 check("spells outside the reference chain map to nothing",
       "UNRELATED" not in reach)
 
-# ---- staleness: load_patch_index + stale_evidence ----------------------------
-history = {"patches": [
-    {"date": "2026-09-15", "spells": [
-        {"id": "CHILD_KNOCKBACK", "roots": ["DIVINE_JUMP"]},
-        {"id": "SHRINKINGSMASH_VFX", "roots": ["SHRINKINGSMASH"],
-         "balance_relevant": False}]},
-    {"date": "2026-05-26", "spells": [
-        {"id": "SHRINKINGSMASH_EFFECT_DEBUFF", "roots": ["SHRINKINGSMASH"]}]},
-]}
-with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
-    json.dump(history, f)
-    tmp = f.name
-try:
-    idx = load_patch_index(tmp)
-finally:
-    os.unlink(tmp)
+# ---- staleness: the evidence review record (evidence_review.py) ---------------
+# A sheet score rests on the facts of the spell it cites as the pinned
+# snapshot states them. The record (sheets/reviewed_evidence.json) keeps each
+# cited spell's fingerprint from when the rows citing it were last read; a
+# changed fingerprint fails the lint until the rows are re-read and the new
+# facts accepted. Snapshot against snapshot, never a calendar date: a sheet
+# curated after a patch but against the older pin is still stale against
+# the new one.
+import evidence_review  # noqa: E402
 
-check("patch index is keyed by equippable ROOT, not the changed child",
-      idx.get("DIVINE_JUMP") == ["2026-09-15"] and "CHILD_KNOCKBACK" not in idx,
-      f"got {idx}")
-check("cosmetic-only changes are excluded from the staleness index",
-      idx.get("SHRINKINGSMASH") == ["2026-05-26"], f"got {idx}")
 
-stale = stale_evidence("2026-08-12", ["DIVINE_JUMP", "SHRINKINGSMASH"], idx)
-check("evidence patched AFTER curated_as_of is flagged; earlier patches are not",
-      stale == [("DIVINE_JUMP", ["2026-09-15"])], f"got {stale}")
-check("no curated_as_of means no staleness check",
-      stale_evidence(None, ["DIVINE_JUMP"], idx) == [])
-check("uncited spells never flag",
-      stale_evidence("2026-08-12", ["ARROWRAIN"], idx) == [])
+class FakeFacts(evidence_review.Facts):
+    def __init__(self, spells, effects=None, items=None):
+        self.spells = spells
+        self.effects = effects or {}
+        self.items = items or {}
 
-# yaml parses an unquoted date as datetime.date — the check must survive that
-import datetime  # noqa: E402
-stale_dt = stale_evidence(datetime.date(2026, 8, 12), ["DIVINE_JUMP"], idx)
-check("curated_as_of works as a datetime.date (unquoted YAML)",
-      stale_dt == [("DIVINE_JUMP", ["2026-09-15"])], f"got {stale_dt}")
+
+cited = {"DIVINE_JUMP": ["2H_HOLYSTAFF.peel"],
+         "ARROWRAIN": ["2H_LONGBOW.burst_aoe"],
+         "WEAPON_STATS:2H_BOW": ["2H_BOW.sustained_dps"]}
+old_facts = FakeFacts(
+    {"DIVINE_JUMP": {"description": "Knocks back by 6."},
+     "ARROWRAIN": {"description": "Rains arrows on an area."}},
+    effects={"DIVINE_JUMP": [{"effect": "knockback", "dirs": ["enemy"]}]},
+    items={"2H_BOW": {"stats": {"attackdamage": 50}}})
+record = {k: old_facts.fingerprint(k) for k in cited}
+st, un = evidence_review.check(old_facts, record, cited)
+check("a record taken on the current snapshot reads clean", not st and not un,
+      f"stale={st} unrecorded={un}")
+
+new_facts = FakeFacts(
+    {"DIVINE_JUMP": {"description": "Knocks back by 8."},
+     "ARROWRAIN": {"description": "Rains arrows on an area."}},
+    effects={"DIVINE_JUMP": [{"effect": "knockback", "dirs": ["enemy"]}]},
+    items={"2H_BOW": {"stats": {"attackdamage": 55}}})
+st, un = evidence_review.check(new_facts, record, cited)
+check("a cited spell whose facts changed is stale, an unchanged one is not, "
+      "and a base-stat row is stale when the item's stats change",
+      [s for s, _w in st] == ["DIVINE_JUMP", "WEAPON_STATS:2H_BOW"] and not un,
+      f"stale={st}")
+
+fx_effect = FakeFacts(
+    dict(old_facts.spells),
+    effects={"DIVINE_JUMP": [{"effect": "knockback", "dirs": ["self"]}]},
+    items=dict(old_facts.items))
+st, _un = evidence_review.check(fx_effect, record, cited)
+check("a change in the structured effects alone makes the spell stale",
+      [s for s, _w in st] == ["DIVINE_JUMP"], f"stale={st}")
+
+cited_new = dict(cited, SNARE=["MAIN_MACE.root"])
+fx_cite = FakeFacts(dict(old_facts.spells, SNARE={"description": "Roots."}),
+                    effects=dict(old_facts.effects), items=dict(old_facts.items))
+st, un = evidence_review.check(fx_cite, record, cited_new)
+check("a spell cited for the first time is unrecorded until accepted",
+      not st and [u for u, _w in un] == ["SNARE"], f"unrecorded={un}")
+
+with tempfile.TemporaryDirectory() as td:
+    path = os.path.join(td, "reviewed_evidence.json")
+    evidence_review.write_record(record, path)
+    check("the record round-trips through its file",
+          evidence_review.load_record(path) == record)
+
+st, un = evidence_review.check()
+check("the committed record covers every cited evidence id and none is stale "
+      "on the pinned snapshot", not st and not un,
+      f"stale={[s for s, _w in st][:5]} unrecorded={[u for u, _w in un][:5]}")
 
 # ---- summary -----------------------------------------------------------------
 failed = [n for n, ok in results if not ok]

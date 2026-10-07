@@ -108,7 +108,7 @@ py -3 tests/test_forge.py           # forge/constraint contracts, pick-score inv
 py -3 tests/test_builds.py          # evidence-layer rules (provenance, quarantine, source gates), the lint contract cases
 py -3 tests/test_interactions.py    # duplicate/reflect/cleanse semantics + JS parity on those
 py -3 tests/test_provenance.py      # pinned-snapshot hash chain, byte-identical rebuilds, LF checks
-py -3 tests/test_patch_history.py   # dumps-diff staleness detection
+py -3 tests/test_patch_history.py   # dumps-diff patch history + the evidence review record (snapshot staleness)
 py -3 tests/test_js_parity.py       # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
 py -3 tests/test_dashboard_layout.py # generated-page layout contracts + no engine calls from the UI
 py -3 tests/test_cohort_families.py # observed-family artifact contracts

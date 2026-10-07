@@ -236,6 +236,9 @@ py -3 pipeline/parse_dumps.py
 py -3 pipeline/fetch_item_stats.py
 py -3 pipeline/fetch_gear_lines.py
 py -3 pipeline/fetch_icons.py       # only when the patch adds weapons/items (out/icon_data.json feeds the pages)
+py -3 pipeline/effect_catalogue.py pipeline/out/dumps_cache/<sha12> --report
+py -3 pipeline/evidence_review.py   # STALE ids: re-read every row citing each, fix the sheets,
+                                    # then --accept ID; new citations: --accept-unrecorded
 py -3 pipeline/evidence_lint.py
 py -3 pipeline/build_interactions.py
 py -3 pipeline/build_builds.py
@@ -298,9 +301,16 @@ numbers go stale silently, and this makes the staleness mechanical.
 - Changes whose every attribute path is vfx/audio/controller metadata are kept
   but flagged `balance_relevant: false` (the 2026-04-13 patch stamped gamepad
   metadata on 280 of its 311 weapon-spell changes; only 31 were real).
-- Sheets declare `curated_as_of: YYYY-MM-DD`. `evidence_lint.py` WARNS (never
-  blocks) when a cited evidence spell changed in a later patch;
-  `curate_helper.py` shows the weapon's recent patch changes on its worksheet.
+- Staleness itself is read snapshot against snapshot, not by date:
+  `pipeline/sheets/reviewed_evidence.json` keeps the fingerprint of every
+  cited evidence id's facts (its `out/spell_index.json` record and
+  structured effects; an item's `out/item_stats.json` record behind a
+  WEAPON_STATS / GEAR_STATS row) from when the rows citing it were last
+  read, for weapons, pools and gear alike (`evidence_review.py`). After a
+  snapshot move, `evidence_lint.py` FAILS on every id whose facts changed
+  until its rows are re-read and the new facts accepted. `curated_as_of`
+  records when an entry was curated; `curate_helper.py` shows the weapon's
+  recent patch changes on its worksheet.
 - Commit dates match the forum "Combat Balance Changes" threads one-for-one
   (2026-06-29 ↔ "[29. June 2026] Radiant Wilds Patch 3"), so the date joins to
   the human prose. The forum itself is Cloudflare-blocked to scripts, like the

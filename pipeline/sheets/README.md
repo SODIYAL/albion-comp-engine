@@ -3,10 +3,13 @@
 Weapon sheets (one file per weapon tree, each entry carrying its weapon's
 E — the weapon's identity), the trees' shared Q/W/passive pools (`pools/`),
 and gear sheets (`gear/`). Every nonzero score cites an evidence spell the
-lint can ground (`pipeline/evidence_lint.py`); `curated_as_of` lets
-`patch_history` flag an entry whose cited spell a later patch changed. Score
-overrides live in `MASTERSHEET.md` (`tune:sheets`), never edited into a sheet
-after the fact.
+lint can ground (`pipeline/evidence_lint.py`). `reviewed_evidence.json`
+keeps the fingerprint of every cited spell's facts (and each item's base
+stats behind a stat row) from when the rows citing it were last read; when
+the game-data snapshot moves, the lint fails on every row whose evidence
+changed until it is re-read and accepted (`pipeline/evidence_review.py`).
+`curated_as_of` records when an entry was curated. Score overrides live in
+`MASTERSHEET.md` (`tune:sheets`), never edited into a sheet after the fact.
 
 Scale: 1–7, `score_unit: 2` — two sheet points are one supply unit. The old
 0–3 ordinals sit on the even slots (1→2, 2→4, 3→6); odd slots are for finer
