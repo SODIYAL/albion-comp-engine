@@ -520,11 +520,15 @@ def main():
             {"id": key, "name": value.get("name", key)}
             for key, value in data.get("styles", {}).items()
         ],
+        # the planner's picker rule: a game-retired weapon (`removed`, Black
+        # Hands) is never offered; the planner keeps it only so an old
+        # permalink still loads
         "weapons": [
             {"id": key, "name": value.get("display_name", key),
              "tree": trees.get(key, "other"), "icon": icons.get(key, "")}
             for key, value in sorted(data["weapons"].items(),
                                      key=lambda item: item[1].get("display_name", item[0]))
+            if not value.get("removed")
         ],
     }
     welcome = welcome.replace("<!-- WELCOME_CONFIG -->",

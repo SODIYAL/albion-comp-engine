@@ -1333,6 +1333,16 @@ check("function loSlotOpen(w, slot)" in LO_JS
       "L40f no fill hands a two-hander an off-hand: the caller reference and the kit "
       "advisor share one rule, so an engine-kit landing scores the kit the engine priced")
 
+print("L41 - a game-retired weapon is never offered on the welcome page")
+m_wc = re.search(r"const WELCOME_CONFIG = (\{.*?\});</script>", read("welcome.html"), re.S)
+_welcome_offered = {w["id"] for w in (_json.loads(m_wc.group(1)) if m_wc else {}).get("weapons", [])}
+_retired = {k for k, w in WEAPONS.items() if w.get("removed")}
+check(bool(_retired) and _welcome_offered == set(WEAPONS) - _retired,
+      "L41 the welcome page offers every weapon but the game-retired ones (Black Hands), "
+      "the planner picker's rule",
+      "offered retired: %s; missing: %s" % (sorted(_welcome_offered & _retired),
+                                            sorted(set(WEAPONS) - _retired - _welcome_offered)))
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
