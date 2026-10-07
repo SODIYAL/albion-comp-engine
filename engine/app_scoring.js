@@ -44,6 +44,20 @@
       .replace(KEY_ENCH_RX, "").replace(KEY_TIER_RX, "");
   }
 
+  function mergeMax(always, bundles) {
+    /* One item's capability total for a set of chosen bundles: per
+       capability the largest of `always` and the bundles (a sheet row
+       scores the weapon's or gear item's total with its spell equipped).
+       Mirrors engine.py _merge_max. */
+    var extra = {}, c, k;
+    for (c in always) extra[c] = always[c];
+    for (k = 0; k < bundles.length; k++) {
+      var b = bundles[k];
+      for (c in b) if (!(c in extra) || b[c] > extra[c]) extra[c] = b[c];
+    }
+    return extra;
+  }
+
   function CompEngine(data, content, size, style) {
     this.data = data;
     this.weapons = data.weapons;
@@ -1086,7 +1100,8 @@
   CompEngine.prototype._comboExtras = function (weapon) {
     /* Every one-spell-per-slot loadout as a merged effective-caps object,
        in itertools.product order (first slot slowest — mirrors engine.py
-       _combo_extras; cached per setContent). */
+       _combo_extras; cached per setContent). A capability may sit in
+       several bundles; the merge keeps its largest value (_mergeMax). */
     var extras = this._extrasCache[weapon];
     if (extras) return extras;
     var le = this._loadoutEff(weapon), always = le.always, slots = le.slots;
@@ -1100,16 +1115,7 @@
       combos = next;
     }
     extras = [];
-    for (i = 0; i < combos.length; i++) {
-      var extra = {}, c0;
-      for (c0 in always) extra[c0] = always[c0];
-      var combo = combos[i];
-      for (j = 0; j < combo.length; j++) {
-        var bd = combo[j];
-        for (var c in bd) extra[c] = (extra[c] || 0.0) + bd[c];
-      }
-      extras.push(extra);
-    }
+    for (i = 0; i < combos.length; i++) extras.push(mergeMax(always, combos[i]));
     this._extrasCache[weapon] = extras;
     return extras;
   };
@@ -1250,11 +1256,7 @@
     var self = this;
     (function walk(si, acc) {
       if (si === slots.length) {
-        var extra = {}, c;
-        for (c in always) extra[c] = always[c];
-        for (var k = 0; k < acc.length; k++)
-          for (c in acc[k]) extra[c] = (extra[c] || 0.0) + acc[k][c];
-        extras.push(extra);
+        extras.push(mergeMax(always, acc));
         return;
       }
       for (var j2 = 0; j2 < slots[si].length; j2++)
@@ -1971,21 +1973,32 @@
     if (hit !== undefined) return hit;
     var lo = this.weapons[weapon].loadout || {};
     var spells = lo.slot_spells || [];
-    var le = this._loadoutEff(weapon), slotsEff = le.slots;
+    var le = this._loadoutEff(weapon), alwaysEff = le.always, slotsEff = le.slots;
     var out = {};
-    var choices = this.comboChoices(weapon, combo);
+    var choices = this.comboChoices(weapon, combo).filter(function (ch) {
+      return ch[0] < slotsEff.length && ch[1] < slotsEff[ch[0]].length;
+    });
     for (var ci = 0; ci < choices.length; ci++) {
       var oi = choices[ci][0], bi = choices[ci][1];
       if (oi >= spells.length || bi >= spells[oi].length) continue;
       var sid = spells[oi][bi];
       var caps = this.nonstack[sid];
-      if (!caps || oi >= slotsEff.length || bi >= slotsEff[oi].length) continue;
+      if (!caps) continue;
       var bundle = slotsEff[oi][bi];
       var contrib = out[sid] || (out[sid] = {});
       var any = false;
       for (var cj = 0; cj < caps.length; cj++) {
         var v = bundle[caps[cj]] || 0.0;
-        if (v) { contrib[caps[cj]] = (contrib[caps[cj]] || 0.0) + v; any = true; }
+        if (!v) continue;
+        /* the spell's share of the member's total (_mergeMax): what it
+           adds over the member's other sources of the capability */
+        var other = alwaysEff[caps[cj]] || 0.0;
+        for (var ck = 0; ck < choices.length; ck++) {
+          if (ck === ci) continue;
+          var ov = slotsEff[choices[ck][0]][choices[ck][1]][caps[cj]] || 0.0;
+          if (ov > other) other = ov;
+        }
+        if (v > other) { contrib[caps[cj]] = (contrib[caps[cj]] || 0.0) + (v - other); any = true; }
       }
       if (!any && Object.keys(contrib).length === 0) delete out[sid];
     }
@@ -2743,19 +2756,14 @@
     var lo = this.weapons[weapon].loadout || {};
     if (!((lo.slots && lo.slots.length) || lo.always))
       return this.weapons[weapon].capabilities;
-    var caps = {};
-    var alw = lo.always || {};
-    for (var c in alw) caps[c] = alw[c];
     var slots = lo.slots || [];
+    var chosen = [];
     var choices = this.comboChoices(weapon, combo);
     for (var ci = 0; ci < choices.length; ci++) {
       var oi = choices[ci][0], bi = choices[ci][1];
-      if (oi < slots.length && bi < slots[oi].length) {
-        var b = slots[oi][bi];
-        for (var c2 in b) caps[c2] = (caps[c2] || 0) + b[c2];
-      }
+      if (oi < slots.length && bi < slots[oi].length) chosen.push(slots[oi][bi]);
     }
-    return caps;
+    return mergeMax(lo.always || {}, chosen);
   };
 
   CompEngine.prototype._predContrib = function (weapon, combo) {

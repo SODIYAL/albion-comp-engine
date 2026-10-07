@@ -22,7 +22,9 @@ Sections: `scoring`, `mechanics`, `templates`, `sheets`, `guild_builds`
 
 ## Per-weapon score overrides — `tune:sheets`
 
-Re-rank a capability a weapon already has, or remove it (score 0). A NEW
+Re-rank a capability a weapon already has, or remove it (score 0). A re-rank
+lands on the weapon's own rows of that capability (its shared rows keep the
+tree's score); a zero removes the capability from every row. A NEW
 capability needs a sheet row with spell evidence — the no-score-without-proof
 rule stays intact. Keys are game unique names, as the weapon's entry in its
 tree's sheet names it (`pipeline/sheets/<tree>.yaml`).

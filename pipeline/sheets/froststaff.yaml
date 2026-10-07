@@ -3,14 +3,18 @@
 # shared row. The tree's Q/W/passive rows (Frost Bomb, Frost Nova, Frost
 # Lance, Glacial Obelisk, the Frost passive, the kite-and-poke stand-in)
 # live in pools/froststaff.yaml and compose into every weapon that can equip
-# them (sheets_lib.compose). Most `except:` entries leave off a shared row
-# whose capability the weapon's own row already carries: one slot per
-# capability (VALIDATION.md 10, Form abilities and ally protection graded).
-# An E-row comment that names a Q/W spell marks that spell's share of the E
-# row's score. Frost Nova's teleport files as disengage, never mobility,
-# and its 0.2s damage immunity grounds no tankiness. Frost Beam (a
-# channelled beam whose every tick cuts Auto-Attack Speed and slows by
-# 0.15, stacking up to 5 times) carries no row.
+# them (sheets_lib.compose). Every row scores on its own spell
+# (build_dataset.build_loadout; the WEAPON_STATS stand-in is always on): an
+# own row and a shared row of the same capability on different spells both
+# score, and the member reads the larger, never the sum (engine._merge_max,
+# F43). An `except:` entry is a deliberate non-take of a shared row
+# (curation judgment). An E-row comment that names a Q/W spell marks that
+# spell's share of the E row's score; the named spell's shared row, where it
+# has one, still scores on its own slot, and the larger reads. Frost Nova's
+# teleport files as disengage, never mobility, and its 0.2s damage immunity
+# grounds no tankiness. Frost Beam (a channelled beam whose every tick cuts
+# Auto-Attack Speed and slows by 0.15, stacking up to 5 times) carries no
+# row.
 
 - weapon: 2H_FROSTSTAFF              # Great Frost Staff — hail battery
   curated_as_of: 2026-08-12
@@ -23,10 +27,6 @@
 - weapon: 2H_FROSTSTAFF_CRYSTAL      # Arctic Staff — volley channel mage
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/froststaff.yaml)
-  except:
-    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 4, evidence: FROST_TARGETED_CHANNEL}  # E: a volley channel the caster can move during
     - {cap: slow,          score: 4, evidence: FROST_TARGETED_CHANNEL}  # 10% a volley, stacking up to 6 times
@@ -36,11 +36,6 @@
 - weapon: 2H_GLACIALSTAFF            # Glacial Staff — the roaming storm
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/froststaff.yaml)
-  except:
-    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: zone_control,  score: 6, evidence: ICESTORM2}      # E: a 5 radius storm that moves and lasts 15 SECONDS
     - {cap: slow,          score: 4, evidence: ICESTORM2}      # the storm slows by 0.3; W: Frost Bomb (QW)
@@ -60,9 +55,6 @@
 - weapon: 2H_ICECRYSTAL_UNDEAD       # Permafrost Prism — AoE stun-bomb mage
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/froststaff.yaml)
-  except:
-    - {cap: stun, evidence: FROSTNOVA}
   capabilities:
     - {cap: burst_aoe,     score: 6, evidence: FROST_ULTIMATE}      # E: Ice Crystal — AoE stun, then 173 AoE explosion
     - {cap: stun,          score: 4, evidence: FROST_ULTIMATE}      # E: 1s stun on every enemy in the crystal; W: Frost Nova stuns too
@@ -77,10 +69,6 @@
 - weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/froststaff.yaml)
-  except:
-    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
   capabilities:
     - {cap: slow,          score: 4, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
     - {cap: zone_control,  score: 4, evidence: GLACIALFIELD}   # 5s blizzard
@@ -97,9 +85,6 @@
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/froststaff.yaml)
-  except:
-    - {cap: root, evidence: PASSIVE_FROST}
   capabilities:
     - {cap: root,          score: 6, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
     - {cap: peel,          score: 4, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
@@ -111,8 +96,6 @@
   role_hint: support
   # deliberate non-takes of shared rows (pools/froststaff.yaml)
   except:
-    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: stun, evidence: FROSTNOVA}
     - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     # Glacial Prison is ONE cast with two mutually exclusive uses: freeze
@@ -133,8 +116,6 @@
   role_hint: range
   # deliberate non-takes of shared rows (pools/froststaff.yaml)
   except:
-    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
-    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
     - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knock-AWAY — Bedrock-pattern, not offensive repositioning (curation judgment)

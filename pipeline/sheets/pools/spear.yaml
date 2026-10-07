@@ -1,10 +1,14 @@
 # spear tree: the Q/W/passive rows the eight spears share. A row composes
-# into every spear that can equip its evidence spell (WEAPON_STATS:
-# tree-wide). A weapon's own row with the same (cap, evidence) is that
-# weapon's deliberate override of the shared row (magnitude RULE queue,
-# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
-# weapon. (QW): the row holds only while the player equips that Q or W
-# spell. Weapon entries: sheets/spear.yaml.
+# into every spear that can equip its evidence spell and scores while that
+# spell is equipped (build_dataset.build_loadout); a WEAPON_STATS row
+# applies tree-wide and is always on. A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9). A weapon's own row of
+# the same capability on another spell leaves the shared row standing:
+# both score, and the member reads the larger, never the sum
+# (engine._merge_max). An `except:` entry is a deliberate non-take of a
+# shared row (curation judgment). (QW): the row holds only while the
+# player equips that Q or W spell. Weapon entries: sheets/spear.yaml.
 subcategory: spear
 capabilities:
   - {cap: mobility, score: 2, evidence: CHARGINGBLADE}                   # W: Inner Focus, stacking Move Speed, then 2s of stun/root/slow immunity (QW)

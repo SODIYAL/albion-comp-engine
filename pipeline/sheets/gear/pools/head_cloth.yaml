@@ -1,7 +1,12 @@
 # Actives every cloth helmet shares (dumps menu: ENERGY_BARRIER,
 # PBAOE_KNOCKBACK beside the item's own third active). Curated once here,
-# composed into every HEAD_CLOTH item (sheets_lib.compose_gear). An item's
-# own row for the same (cap, evidence) pair overrides; `except:` opts out.
+# composed into every HEAD_CLOTH item (sheets_lib.compose_gear); each row
+# scores on its own active (build_dataset.build_loadout), beside the
+# item's own rows of the same capability: a piece equips one active, so
+# the two are alternatives, never a sum. An item's own row for the same
+# (cap, evidence) pair overrides the shared row (a repeat at the same
+# score fails evidence_lint); an `except:` entry is a deliberate non-take
+# of a shared row (curation judgment).
 #
 # Force Field scores only where a piece's gear-active doctrine pick is
 # Force Field (build_dataset resolve_active_doctrine): the pick is the

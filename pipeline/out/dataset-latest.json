@@ -6489,7 +6489,8 @@
        "tankiness": 3
       },
       {
-       "reflect": 1
+       "reflect": 1,
+       "tankiness": 2
       }
      ]
     ]
@@ -6595,7 +6596,8 @@
        "tankiness": 2
       },
       {
-       "reflect": 1
+       "reflect": 1,
+       "tankiness": 2
       }
      ]
     ]
@@ -6696,7 +6698,8 @@
        "tankiness": 2
       },
       {
-       "reflect": 2
+       "reflect": 2,
+       "tankiness": 2
       }
      ]
     ]
@@ -6803,7 +6806,8 @@
        "tankiness": 3
       },
       {
-       "reflect": 2
+       "reflect": 2,
+       "tankiness": 2
       }
      ]
     ]
@@ -9263,6 +9267,7 @@
     "slot_spells": [
      [
       "HYPER_FOCUS",
+      "ENERGY_BARRIER",
       "PBAOE_KNOCKBACK"
      ]
     ],
@@ -9271,6 +9276,9 @@
       {
        "sustained_dps": 2,
        "tankiness": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "anti_dive": 2,
@@ -9920,6 +9928,7 @@
     "slot_spells": [
      [
       "ENERGYSHIELD2",
+      "ENERGY_BARRIER",
       "PBAOE_KNOCKBACK"
      ]
     ],
@@ -9927,6 +9936,9 @@
      [
       {
        "tankiness": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "anti_dive": 2,
@@ -10043,6 +10055,7 @@
     "slot_spells": [
      [
       "ICEBLOCK2",
+      "ENERGY_BARRIER",
       "PBAOE_KNOCKBACK"
      ]
     ],
@@ -10050,6 +10063,9 @@
      [
       {
        "tankiness": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "anti_dive": 2,
@@ -10302,10 +10318,11 @@
        "heal_reduction": 3
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -10397,6 +10414,7 @@
     "slot_spells": [
      [
       "IMMORTAL",
+      "ENERGY_BARRIER",
       "SELF_CLEANSE"
      ]
     ],
@@ -10406,7 +10424,11 @@
        "tankiness": 3
       },
       {
-       "cleanse": 3
+       "tankiness": 1
+      },
+      {
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -10505,8 +10527,8 @@
      "SMOKEBOMB"
     ],
     "tankiness": [
-     "SELF_CLEANSE",
-     "ENERGY_BARRIER"
+     "ENERGY_BARRIER",
+     "SELF_CLEANSE"
     ],
     "zone_control": [
      "SMOKEBOMB"
@@ -10521,6 +10543,7 @@
     "slot_spells": [
      [
       "SMOKEBOMB",
+      "ENERGY_BARRIER",
       "SELF_CLEANSE"
      ]
     ],
@@ -10529,6 +10552,9 @@
       {
        "silence": 3,
        "zone_control": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "cleanse": 3,
@@ -10658,10 +10684,11 @@
        "sustained_dps": 2
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -10766,10 +10793,11 @@
        "sustained_dps": 2
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -10902,10 +10930,11 @@
        "slow": 2
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -11001,6 +11030,7 @@
     "slot_spells": [
      [
       "RETALIATE2",
+      "ENERGY_BARRIER",
       "SELF_CLEANSE"
      ]
     ],
@@ -11011,7 +11041,11 @@
        "tankiness": 2
       },
       {
-       "cleanse": 3
+       "tankiness": 1
+      },
+      {
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -11124,10 +11158,11 @@
        "sustained_dps": 2
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -11232,10 +11267,11 @@
        "sustained_dps": 2
       },
       {
-       "tankiness": 2
+       "tankiness": 1
       },
       {
-       "cleanse": 3
+       "cleanse": 3,
+       "tankiness": 2
       }
      ]
     ]
@@ -11330,7 +11366,8 @@
     "slot_spells": [
      [
       "PURIFYING_SMOKE",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
@@ -11338,6 +11375,9 @@
       {
        "cleanse": 3,
        "purge": 3
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -11438,7 +11478,8 @@
     "slot_spells": [
      [
       "SPIDER_THREAD",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
@@ -11446,6 +11487,9 @@
       {
        "catch": 2,
        "slow": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -11539,13 +11583,17 @@
     "slot_spells": [
      [
       "WEAPON_SILENCE",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
      [
       {
        "silence": 3
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -11637,8 +11685,8 @@
      "ELECTRICSHOCK"
     ],
     "tankiness": [
-     "STONESKIN",
-     "ENERGY_BARRIER"
+     "ENERGY_BARRIER",
+     "STONESKIN"
     ]
    },
    "gear_class": "plate",
@@ -11650,6 +11698,7 @@
     "slot_spells": [
      [
       "ELECTRICSHOCK",
+      "ENERGY_BARRIER",
       "STONESKIN"
      ]
     ],
@@ -11658,6 +11707,9 @@
       {
        "anti_dive": 2,
        "stun": 3
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -11752,13 +11804,17 @@
     "slot_spells": [
      [
       "ARTILLERY_COMMAND",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
      [
       {
        "stun": 3
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -11847,11 +11903,19 @@
     ],
     "slot_spells": [
      [
-      "BLOCK"
+      "BLOCK",
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
      [
+      {
+       "tankiness": 2
+      },
+      {
+       "tankiness": 1
+      },
       {
        "tankiness": 2
       }
@@ -11950,13 +12014,17 @@
     "slot_spells": [
      [
       "DISRUPTIONIMMUNITY",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
      [
       {
        "peel": 3
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -12035,8 +12103,8 @@
      "EMERGENCY_SHIELD"
     ],
     "tankiness": [
-     "STONESKIN",
-     "ENERGY_BARRIER"
+     "ENERGY_BARRIER",
+     "STONESKIN"
     ]
    },
    "gear_class": "plate",
@@ -12048,6 +12116,7 @@
     "slot_spells": [
      [
       "EMERGENCY_SHIELD",
+      "ENERGY_BARRIER",
       "STONESKIN"
      ]
     ],
@@ -12055,6 +12124,9 @@
      [
       {
        "buff_allies": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -12139,13 +12211,17 @@
     "slot_spells": [
      [
       "SACRIFICE_HEAL",
-      "ENERGY_BARRIER"
+      "ENERGY_BARRIER",
+      "STONESKIN"
      ]
     ],
     "slots": [
      [
       {
        "heal_burst": 2
+      },
+      {
+       "tankiness": 1
       },
       {
        "tankiness": 2
@@ -12748,13 +12824,22 @@
     ],
     "slot_spells": [
      [
-      "HOVER_SPRINT"
+      "HOVER_SPRINT",
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
        "mobility": 2
       }
      ]
@@ -12848,13 +12933,22 @@
     ],
     "slot_spells": [
      [
-      "TRANSLUCENT"
+      "TRANSLUCENT",
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 3,
+       "mobility": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
        "mobility": 2
       }
      ]
@@ -12948,13 +13042,18 @@
     "slot_spells": [
      [
       "SWAP",
-      "DODGE"
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
       },
       {
        "mobility": 2
@@ -13054,7 +13153,8 @@
     "slot_spells": [
      [
       "FROSTWALK",
-      "DODGE"
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
@@ -13064,7 +13164,11 @@
        "slow": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2
       }
      ]
     ]
@@ -13173,7 +13277,8 @@
     "slot_spells": [
      [
       "DEMONWALK",
-      "DODGE"
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
@@ -13184,7 +13289,11 @@
        "resist_shred": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2
       }
      ]
     ]
@@ -13289,7 +13398,8 @@
     "slot_spells": [
      [
       "GLASS_MOVESPEED",
-      "DODGE"
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
@@ -13299,7 +13409,11 @@
        "sustained_dps": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2
       }
      ]
     ]
@@ -13392,13 +13506,22 @@
     ],
     "slot_spells": [
      [
-      "CHANNELED_RUN"
+      "CHANNELED_RUN",
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
        "mobility": 2
       }
      ]
@@ -13492,13 +13615,22 @@
     ],
     "slot_spells": [
      [
-      "BLINK"
+      "BLINK",
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 3,
+       "mobility": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
        "mobility": 2
       }
      ]
@@ -13592,13 +13724,22 @@
     ],
     "slot_spells": [
      [
-      "DELAYED_TELEPORT"
+      "DELAYED_TELEPORT",
+      "DODGE",
+      "SPRINTEOT"
      ]
     ],
     "slots": [
      [
       {
        "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
        "mobility": 2
       }
      ]
@@ -13726,6 +13867,7 @@
        "mobility": 2
       },
       {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -13824,6 +13966,7 @@
     "slot_spells": [
      [
       "AFTER_IMAGE",
+      "DODGE",
       "SPRINT_CD_REDUCTION"
      ]
     ],
@@ -13834,6 +13977,11 @@
        "mobility": 2
       },
       {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -13953,6 +14101,7 @@
        "mobility": 2
       },
       {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14063,7 +14212,8 @@
     "slot_spells": [
      [
       "DMG_BLINK",
-      "DODGE"
+      "DODGE",
+      "SPRINT_CD_REDUCTION"
      ]
     ],
     "slots": [
@@ -14074,7 +14224,12 @@
        "sustained_dps": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2,
+       "sustained_dps": 1
       }
      ]
     ]
@@ -14172,6 +14327,7 @@
     "slot_spells": [
      [
       "JUMP",
+      "DODGE",
       "SPRINT_CD_REDUCTION"
      ]
     ],
@@ -14182,6 +14338,11 @@
        "mobility": 2
       },
       {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14288,6 +14449,7 @@
     "slot_spells": [
      [
       "CLEANSE_DASH",
+      "DODGE",
       "SPRINT_CD_REDUCTION"
      ]
     ],
@@ -14298,6 +14460,11 @@
        "mobility": 2
       },
       {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14410,9 +14577,11 @@
        "mobility": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14525,9 +14694,11 @@
        "mobility": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14635,9 +14806,11 @@
        "disengage": 2
       },
       {
+       "disengage": 2,
        "mobility": 2
       },
       {
+       "mobility": 2,
        "sustained_dps": 1
       }
      ]
@@ -14758,9 +14931,11 @@
        "tankiness": 2
       },
       {
+       "disengage": 2,
        "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -14893,9 +15068,11 @@
        "mobility": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15009,9 +15186,11 @@
        "sustained_dps": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15140,6 +15319,7 @@
        "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15253,9 +15433,11 @@
        "mobility": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15337,8 +15519,8 @@
      "DODGE"
     ],
     "mobility": [
-     "SPRINTHOT",
-     "DODGE"
+     "DODGE",
+     "SPRINTHOT"
     ],
     "self_sustain": [
      "SPRINTHOT"
@@ -15352,19 +15534,20 @@
     ],
     "slot_spells": [
      [
-      "SPRINTHOT",
       "DODGE",
+      "SPRINTHOT",
       "WANDERLUST"
      ]
     ],
     "slots": [
      [
       {
-       "mobility": 2,
-       "self_sustain": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
-       "disengage": 2
+       "mobility": 2,
+       "self_sustain": 2
       },
       {}
      ]
@@ -15485,6 +15668,7 @@
        "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15598,9 +15782,11 @@
        "tankiness": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "mobility": 2
       },
       {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -15708,6 +15894,7 @@
     "slot_spells": [
      [
       "BATTLEFRENZY",
+      "DODGE",
       "SPRINTHOT"
      ]
     ],
@@ -15718,6 +15905,11 @@
        "mobility": 2
       },
       {
+       "disengage": 2,
+       "mobility": 2
+      },
+      {
+       "mobility": 2,
        "self_sustain": 2
       }
      ]
@@ -136576,6 +136768,11 @@
     },
     {
      "id": "2H_KNUCKLES_SET3",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_LONGBOW",
      "source": "derived:kit resist_shred 2",
      "tier": "secondary"
     },
@@ -293601,7 +293798,8 @@
    "display_name": "Great Arcane Staff",
    "evidence": {
     "anti_dive": [
-     "TIME_FREEZE"
+     "TIME_FREEZE",
+     "SHIELDFRIENDLY"
     ],
     "buff_allies": [
      "EMPOWERBEAM"
@@ -293610,7 +293808,8 @@
      "CLEANSESPEED2"
     ],
     "peel": [
-     "TIME_FREEZE"
+     "TIME_FREEZE",
+     "SHIELDFRIENDLY"
     ],
     "resist_shred": [
      "FRAZZLE2"
@@ -293655,7 +293854,8 @@
       "FRAZZLE2"
      ],
      [
-      "MAGICSHOCK"
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
      ],
      [
       "PASSIVE_ATTACKBUFF_ARCANESTAFF"
@@ -293683,6 +293883,10 @@
      [
       {
        "silence": 2
+      },
+      {
+       "anti_dive": 2,
+       "peel": 2
       }
      ],
      [
@@ -293814,7 +294018,8 @@
      "MAGICSHOCK"
     ],
     "sustained_dps": [
-     "STARFALL_DOT"
+     "STARFALL_DOT",
+     "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ],
     "zone_control": [
      "STARFALL_DOT"
@@ -293837,7 +294042,8 @@
     "slot_names": [
      "e",
      "w",
-     "q"
+     "q",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -293851,6 +294057,9 @@
      [
       "MAGICSHOCK",
       "SHIELDFRIENDLY"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
      ]
     ],
     "slots": [
@@ -293879,6 +294088,11 @@
       {
        "anti_dive": 2,
        "peel": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
       }
      ]
     ]
@@ -293983,7 +294197,8 @@
      "SHIELDFRIENDLY"
     ],
     "buff_allies": [
-     "ARCANECORRIDOR"
+     "ARCANECORRIDOR",
+     "EMPOWERBEAM"
     ],
     "cleanse": [
      "CLEANSESPEED2"
@@ -294036,6 +294251,7 @@
      ],
      [
       "CLEANSESPEED2",
+      "EMPOWERBEAM",
       "FRAZZLE2"
      ],
      [
@@ -294058,6 +294274,9 @@
      [
       {
        "cleanse": 4
+      },
+      {
+       "buff_allies": 2
       },
       {
        "resist_shred": 3
@@ -294428,7 +294647,8 @@
      "RENDINGSTRIKE"
     ],
     "mobility": [
-     "AXEWHIRLWIND2"
+     "AXEWHIRLWIND2",
+     "RENDINGCOMBO"
     ],
     "resist_shred": [
      "AXESMASH"
@@ -294505,6 +294725,7 @@
      ],
      [
       {
+       "mobility": 2,
        "root": 2
       },
       {
@@ -294648,13 +294869,15 @@
      "LETHAL_CLEAVER"
     ],
     "catch": [
-     "LETHAL_CLEAVER"
+     "LETHAL_CLEAVER",
+     "AXEBOOST"
     ],
     "disengage": [
      "LETHAL_CLEAVER"
     ],
     "engage": [
-     "LETHAL_CLEAVER"
+     "LETHAL_CLEAVER",
+     "AXE_CHARGE"
     ],
     "heal_reduction": [
      "RENDINGSTRIKE"
@@ -294666,7 +294889,8 @@
      "LETHAL_CLEAVER"
     ],
     "mobility": [
-     "LETHAL_CLEAVER"
+     "LETHAL_CLEAVER",
+     "RENDINGCOMBO"
     ],
     "peel": [
      "LETHAL_CLEAVER"
@@ -294709,6 +294933,7 @@
       "LETHAL_CLEAVER"
      ],
      [
+      "AXEBOOST",
       "AXESMASH",
       "AXE_CHARGE"
      ],
@@ -294735,10 +294960,14 @@
      ],
      [
       {
+       "catch": 2
+      },
+      {
        "resist_shred": 3
       },
       {
-       "buff_allies": 2
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
@@ -294748,6 +294977,7 @@
      ],
      [
       {
+       "mobility": 2,
        "root": 2
       },
       {
@@ -294817,6 +295047,13 @@
      "radius": 3.0,
      "spell": "GROUNDARROW"
     },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
     "peel": {
      "escalation": {
       "duration": 0.08,
@@ -294864,10 +295101,12 @@
      "GROUNDARROW"
     ],
     "disengage": [
-     "SPEEDARCHER_KITE"
+     "SPEEDARCHER_KITE",
+     "JUMPSHOT2"
     ],
     "mobility": [
-     "SPEEDARCHER_KITE"
+     "SPEEDARCHER_KITE",
+     "SPEEDSHOT2"
     ],
     "peel": [
      "GROUNDARROW"
@@ -294882,7 +295121,8 @@
      "PASSIVE_SLOWPOISON"
     ],
     "sustained_dps": [
-     "SPEEDARCHER_KITE"
+     "SPEEDARCHER_KITE",
+     "WEAPON_STATS"
     ]
    },
    "full_healer": false,
@@ -294898,7 +295138,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 4
+    },
     "slot_names": [
      "e",
      "q",
@@ -294913,7 +295155,9 @@
       "DEADLYSHOT"
      ],
      [
-      "GROUNDARROW"
+      "GROUNDARROW",
+      "JUMPSHOT2",
+      "SPEEDSHOT2"
      ],
      [
       "PASSIVE_SLOWPOISON"
@@ -294938,6 +295182,12 @@
        "catch": 2,
        "peel": 2,
        "root": 2
+      },
+      {
+       "disengage": 2
+      },
+      {
+       "mobility": 2
       }
      ],
      [
@@ -295291,10 +295541,12 @@
      "GROUNDARROW"
     ],
     "disengage": [
-     "AIR_RAID"
+     "AIR_RAID",
+     "JUMPSHOT2"
     ],
     "mobility": [
-     "AIR_RAID"
+     "AIR_RAID",
+     "SPEEDSHOT2"
     ],
     "peel": [
      "GROUNDARROW"
@@ -295345,7 +295597,9 @@
       "DEADLYSHOT"
      ],
      [
-      "GROUNDARROW"
+      "GROUNDARROW",
+      "JUMPSHOT2",
+      "SPEEDSHOT2"
      ],
      [
       "PASSIVE_SLOWPOISON"
@@ -295370,6 +295624,12 @@
        "catch": 2,
        "peel": 2,
        "root": 2
+      },
+      {
+       "disengage": 2
+      },
+      {
+       "mobility": 2
       }
      ],
      [
@@ -295884,6 +296144,11 @@
   },
   "2H_CLAWPAIR": {
    "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
     "peel": {
      "max_targets": 1,
      "radius": 40.0,
@@ -295919,7 +296184,8 @@
      "DISEMBOWEL"
     ],
     "catch": [
-     "DISEMBOWEL"
+     "DISEMBOWEL",
+     "SKILLSHOT_TELEPORT"
     ],
     "disengage": [
      "GROUNDDASH"
@@ -296009,12 +296275,14 @@
      ],
      [
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "disengage": 2
       },
       {
+       "catch": 2,
        "peel": 2,
        "stun": 2
       }
@@ -296167,7 +296435,8 @@
      "CLAYMORECHARGE"
     ],
     "catch": [
-     "CLAYMORECHARGE"
+     "CLAYMORECHARGE",
+     "HAMSTRINGSWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -296176,7 +296445,8 @@
      "CLAYMORECHARGE"
     ],
     "mobility": [
-     "CLAYMORECHARGE"
+     "CLAYMORECHARGE",
+     "HEROICSTRIKE2"
     ],
     "peel": [
      "SPLITTINGSLASH"
@@ -296252,6 +296522,7 @@
        "disengage": 2
       },
       {
+       "catch": 2,
        "slow": 2
       },
       {
@@ -296264,6 +296535,7 @@
      ],
      [
       {
+       "mobility": 4,
        "sustained_dps": 4
       }
      ],
@@ -296418,7 +296690,8 @@
      "HEROICSTRIKE2"
     ],
     "peel": [
-     "MAJESTIC_SMASH"
+     "MAJESTIC_SMASH",
+     "SPLITTINGSLASH"
     ],
     "reflect": [
      "PARRY"
@@ -296499,6 +296772,7 @@
        "slow": 2
       },
       {
+       "peel": 2,
        "root": 2
       },
       {
@@ -296642,16 +296916,19 @@
      "CLAYMORESLASH"
     ],
     "catch": [
-     "CLAYMORESLASH"
+     "CLAYMORESLASH",
+     "HAMSTRINGSWORD"
     ],
     "disengage": [
-     "CLAYMORESLASH"
+     "CLAYMORESLASH",
+     "DEFENSERUN"
     ],
     "engage": [
      "CLAYMORESLASH"
     ],
     "mobility": [
-     "CLAYMORESLASH"
+     "CLAYMORESLASH",
+     "HEROICSTRIKE2"
     ],
     "peel": [
      "SPLITTINGSLASH"
@@ -296700,6 +296977,7 @@
       "CLAYMORESLASH"
      ],
      [
+      "DEFENSERUN",
       "HAMSTRINGSWORD",
       "SPLITTINGSLASH",
       "PARRY"
@@ -296724,6 +297002,10 @@
      ],
      [
       {
+       "disengage": 2
+      },
+      {
+       "catch": 2,
        "slow": 2
       },
       {
@@ -296736,6 +297018,7 @@
      ],
      [
       {
+       "mobility": 4,
        "sustained_dps": 4
       }
      ],
@@ -296883,7 +297166,8 @@
      "COMBATSTAFF_SLASH"
     ],
     "damage_debuff": [
-     "COMBATSTAFF_SLASH"
+     "COMBATSTAFF_SLASH",
+     "QS_WHIRLWIND2"
     ],
     "knockback_displace": [
      "LAUNCHER"
@@ -296965,7 +297249,8 @@
        "sustained_dps": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "damage_debuff": 2
       },
       {
        "peel": 2,
@@ -297104,7 +297389,8 @@
      "BOLTSHOT"
     ],
     "resist_shred": [
-     "SNIPESHOT_CROSSBOW"
+     "SNIPESHOT_CROSSBOW",
+     "SUNDERSHOT"
     ],
     "silence": [
      "SILENCINGBOLT"
@@ -297150,7 +297436,8 @@
      [
       "CALTROPS",
       "KNOCKBACKSHOT2",
-      "SILENCINGBOLT"
+      "SILENCINGBOLT",
+      "SUNDERSHOT"
      ]
     ],
     "slots": [
@@ -297177,6 +297464,9 @@
       },
       {
        "silence": 4
+      },
+      {
+       "resist_shred": 2
       }
      ]
     ]
@@ -297302,7 +297592,8 @@
    "display_name": "Heavy Crossbow",
    "evidence": {
     "burst_aoe": [
-     "CROSSBOW_ARMORPIERCER"
+     "CROSSBOW_ARMORPIERCER",
+     "BOLTSHOT"
     ],
     "burst_st": [
      "CROSSBOW_ARMORPIERCER"
@@ -297317,6 +297608,7 @@
      "KNOCKBACKSHOT2"
     ],
     "ranged_presence": [
+     "BOLTSHOT",
      "CROSSBOW_ARMORPIERCER"
     ],
     "resist_shred": [
@@ -297353,11 +297645,15 @@
     },
     "slot_names": [
      "e",
+     "q",
      "w"
     ],
     "slot_spells": [
      [
       "CROSSBOW_ARMORPIERCER"
+     ],
+     [
+      "BOLTSHOT"
      ],
      [
       "CALTROPS",
@@ -297372,6 +297668,12 @@
        "burst_aoe": 4,
        "burst_st": 2,
        "interrupt": 2,
+       "ranged_presence": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2,
        "ranged_presence": 2
       }
      ],
@@ -297527,7 +297829,8 @@
      "CALTROPS"
     ],
     "sustained_dps": [
-     "CROSSBOW_CONE_ULTIMATE"
+     "CROSSBOW_CONE_ULTIMATE",
+     "WEAPON_STATS"
     ],
     "zone_control": [
      "CALTROPS"
@@ -297546,7 +297849,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "q",
@@ -297731,7 +298036,8 @@
      "CALTROPS"
     ],
     "sustained_dps": [
-     "CROSSBOW_DIVINE_SHOT"
+     "CROSSBOW_DIVINE_SHOT",
+     "WEAPON_STATS"
     ],
     "zone_control": [
      "CALTROPS"
@@ -297750,7 +298056,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "q",
@@ -297940,7 +298248,8 @@
      "CURSEDOT"
     ],
     "zone_control": [
-     "AREAOFDECAY"
+     "AREAOFDECAY",
+     "CURSED_SPLAT"
     ]
    },
    "full_healer": false,
@@ -298001,7 +298310,8 @@
        "sustained_dps": 4
       },
       {
-       "slow": 2
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -298124,7 +298434,8 @@
      "CURSEULTIMATE"
     ],
     "resist_shred": [
-     "CURSEULTIMATE"
+     "CURSEULTIMATE",
+     "ARMORPIERCER"
     ],
     "root": [
      "CURSENOVA"
@@ -298163,6 +298474,7 @@
       "CURSEULTIMATE"
      ],
      [
+      "ARMORPIERCER",
       "CURSEDHANDS_STACKUP",
       "CURSENOVA"
      ],
@@ -298180,6 +298492,9 @@
       }
      ],
      [
+      {
+       "resist_shred": 2
+      },
       {
        "buff_allies": 2
       },
@@ -298293,7 +298608,8 @@
      "QDASH"
     ],
     "heal_reduction": [
-     "EXECUTEDAGGER"
+     "EXECUTEDAGGER",
+     "DEEPCUTS"
     ],
     "interrupt": [
      "DEEPCUTS"
@@ -298314,7 +298630,8 @@
      "SKILLSHOT_TELEPORT"
     ],
     "sustained_dps": [
-     "PASSIVE_AASPEEDCHANCE_DAGGER"
+     "PASSIVE_AASPEEDCHANCE_DAGGER",
+     "WEAPON_STATS"
     ]
    },
    "full_healer": false,
@@ -298330,7 +298647,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "passive",
@@ -298377,6 +298696,7 @@
        "stun": 2
       },
       {
+       "heal_reduction": 2,
        "interrupt": 2
       },
       {
@@ -298511,7 +298831,8 @@
      "DEEPCUTS"
     ],
     "mobility": [
-     "CRYSTAL_DAGGER_BLADE_RING"
+     "CRYSTAL_DAGGER_BLADE_RING",
+     "QDASH"
     ],
     "peel": [
      "SKILLSHOT_TELEPORT"
@@ -298598,7 +298919,8 @@
      ],
      [
       {
-       "engage": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
        "resist_shred": 2
@@ -298717,7 +299039,8 @@
      "SKILLSHOT_TELEPORT"
     ],
     "disengage": [
-     "BACK_SLASH"
+     "BACK_SLASH",
+     "GROUNDDASH"
     ],
     "engage": [
      "QDASH"
@@ -298729,7 +299052,8 @@
      "DEEPCUTS"
     ],
     "mobility": [
-     "BACK_SLASH"
+     "BACK_SLASH",
+     "QDASH"
     ],
     "peel": [
      "SKILLSHOT_TELEPORT"
@@ -298773,6 +299097,7 @@
      ],
      [
       "DEEPCUTS",
+      "GROUNDDASH",
       "SKILLSHOT_TELEPORT"
      ],
      [
@@ -298798,6 +299123,9 @@
        "interrupt": 2
       },
       {
+       "disengage": 2
+      },
+      {
        "catch": 2,
        "peel": 2,
        "stun": 2
@@ -298813,7 +299141,8 @@
      ],
      [
       {
-       "engage": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
        "resist_shred": 2
@@ -299080,6 +299409,11 @@
   },
   "2H_DIVINESTAFF": {
    "cap_delivery": {
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    },
     "peel": {
      "escalation": {
       "value": 0.08
@@ -299103,10 +299437,12 @@
      "HOLYSHIELD"
     ],
     "buff_allies": [
-     "HOLYSHIELD"
+     "HOLYSHIELD",
+     "HOLYHOT"
     ],
     "heal_burst": [
-     "HOLYSHIELD"
+     "HOLYSHIELD",
+     "HOLYFLASH"
     ],
     "heal_sustain": [
      "HEALINGBEAM"
@@ -299131,7 +299467,8 @@
     "always": {},
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -299139,7 +299476,11 @@
      ],
      [
       "HEALINGBEAM",
+      "HOLYHOT",
       "PULSINGHEAL"
+     ],
+     [
+      "HOLYFLASH"
      ]
     ],
     "slots": [
@@ -299155,7 +299496,15 @@
        "heal_sustain": 4
       },
       {
+       "buff_allies": 2
+      },
+      {
        "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 4
       }
      ]
     ]
@@ -299227,6 +299576,12 @@
      },
      "spell": "LAUNCHER"
     },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CARTWHEEL"
+    },
     "peel": {
      "escalation": {
       "value": 0.08
@@ -299291,7 +299646,8 @@
      "LAUNCHER"
     ],
     "mobility": [
-     "DASH_KNOCKBACK"
+     "DASH_KNOCKBACK",
+     "CARTWHEEL"
     ],
     "peel": [
      "SEPARATING_SLAM"
@@ -299329,6 +299685,7 @@
     "slot_names": [
      "e",
      "w",
+     "q",
      "passive"
     ],
     "slot_spells": [
@@ -299341,6 +299698,9 @@
       "QSTAFF_COMBO",
       "QS_WHIRLWIND2",
       "STUNRUN"
+     ],
+     [
+      "CARTWHEEL"
      ],
      [
       "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
@@ -299374,6 +299734,11 @@
       },
       {
        "stun": 2
+      }
+     ],
+     [
+      {
+       "mobility": 2
       }
      ],
      [
@@ -299519,7 +299884,8 @@
      "QS_CRYSTAL_COMBO"
     ],
     "knockback_displace": [
-     "QS_CRYSTAL_COMBO"
+     "QS_CRYSTAL_COMBO",
+     "LAUNCHER"
     ],
     "mobility": [
      "CARTWHEEL"
@@ -299563,8 +299929,8 @@
     "slot_names": [
      "e",
      "q",
-     "passive",
-     "w"
+     "w",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -299574,13 +299940,14 @@
       "CARTWHEEL"
      ],
      [
-      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
-     ],
-     [
+      "LAUNCHER",
       "QSTAFF_COMBO",
       "QS_WHIRLWIND2",
       "SEPARATING_SLAM",
       "STUNRUN"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
      ]
     ],
     "slots": [
@@ -299600,10 +299967,8 @@
      ],
      [
       {
-       "self_sustain": 2
-      }
-     ],
-     [
+       "knockback_displace": 2
+      },
       {
        "sustained_dps": 2
       },
@@ -299616,6 +299981,11 @@
       },
       {
        "stun": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 2
       }
      ]
     ]
@@ -299737,19 +300107,23 @@
      "DUALAXE_CRAWLER"
     ],
     "catch": [
-     "DUALAXE_CRAWLER"
+     "DUALAXE_CRAWLER",
+     "AXEBOOST"
     ],
     "disengage": [
      "DUALAXE_CRAWLER"
     ],
     "engage": [
-     "DUALAXE_CRAWLER"
-    ],
-    "heal_reduction": [
+     "DUALAXE_CRAWLER",
      "AXE_CHARGE"
     ],
+    "heal_reduction": [
+     "AXE_CHARGE",
+     "RENDINGSTRIKE"
+    ],
     "mobility": [
-     "DUALAXE_CRAWLER"
+     "DUALAXE_CRAWLER",
+     "RENDINGCOMBO"
     ],
     "resist_shred": [
      "AXESMASH"
@@ -299758,7 +300132,8 @@
      "RENDINGCOMBO"
     ],
     "self_sustain": [
-     "DUALAXE_CRAWLER"
+     "DUALAXE_CRAWLER",
+     "PASSIVE_HEALTHCHANCE_AXE"
     ],
     "sustained_dps": [
      "RENDINGSTRIKE"
@@ -299781,6 +300156,7 @@
     "slot_names": [
      "e",
      "w",
+     "passive",
      "q"
     ],
     "slot_spells": [
@@ -299789,7 +300165,11 @@
      ],
      [
       "AXE_CHARGE",
+      "AXEBOOST",
       "AXESMASH"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
      ],
      [
       "RENDINGCOMBO",
@@ -299810,7 +300190,11 @@
      [
       {
        "buff_allies": 2,
+       "engage": 2,
        "heal_reduction": 2
+      },
+      {
+       "catch": 2
       },
       {
        "resist_shred": 3
@@ -299818,9 +300202,16 @@
      ],
      [
       {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "mobility": 2,
        "root": 2
       },
       {
+       "heal_reduction": 2,
        "sustained_dps": 4
       }
      ]
@@ -299934,6 +300325,7 @@
     "knockback_displace": 4,
     "mobility": 4,
     "peel": 4,
+    "ranged_presence": 2,
     "resist_shred": 2,
     "silence": 4,
     "slow": 2,
@@ -299944,7 +300336,8 @@
    "display_name": "Arclight Blasters",
    "evidence": {
     "burst_aoe": [
-     "CRYSTALXBOW"
+     "CRYSTALXBOW",
+     "BOLTSHOT"
     ],
     "disengage": [
      "CRYSTALXBOW"
@@ -299960,6 +300353,9 @@
     ],
     "peel": [
      "KNOCKBACKSHOT2"
+    ],
+    "ranged_presence": [
+     "BOLTSHOT"
     ],
     "resist_shred": [
      "SUNDERSHOT"
@@ -299992,11 +300388,15 @@
     },
     "slot_names": [
      "e",
+     "q",
      "w"
     ],
     "slot_spells": [
      [
       "CRYSTALXBOW"
+     ],
+     [
+      "BOLTSHOT"
      ],
      [
       "CALTROPS",
@@ -300012,6 +300412,12 @@
        "disengage": 4,
        "engage": 2,
        "mobility": 4
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2,
+       "ranged_presence": 2
       }
      ],
      [
@@ -300163,7 +300569,8 @@
      "CALTROPS"
     ],
     "sustained_dps": [
-     "DUAL_RAPIDFIRE"
+     "DUAL_RAPIDFIRE",
+     "WEAPON_STATS"
     ],
     "zone_control": [
      "CALTROPS"
@@ -300182,7 +300589,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "q",
@@ -300390,7 +300799,8 @@
    "display_name": "Forge Hammers",
    "evidence": {
     "anti_dive": [
-     "GIANTSTEPS"
+     "GIANTSTEPS",
+     "TAR_RING"
     ],
     "catch": [
      "GIANTSTEPS"
@@ -300420,7 +300830,8 @@
      "PASSIVE_HEALTHCHANCE_HAMMER"
     ],
     "slow": [
-     "GIANTSTEPS"
+     "GIANTSTEPS",
+     "TAR_RING"
     ],
     "stun": [
      "KNOCKOUT"
@@ -300429,10 +300840,12 @@
      "GIANTSTEPS"
     ],
     "tankiness": [
-     "GIANTSTEPS"
+     "GIANTSTEPS",
+     "WEAPON_STATS"
     ],
     "zone_control": [
-     "GIANTSTEPS"
+     "GIANTSTEPS",
+     "TAR_RING"
     ]
    },
    "full_healer": false,
@@ -300448,7 +300861,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "tankiness": 4
+    },
     "slot_names": [
      "e",
      "w",
@@ -300462,7 +300877,8 @@
      [
       "KNOCKOUT",
       "CHARGESLOWAE",
-      "GEYSER"
+      "GEYSER",
+      "TAR_RING"
      ],
      [
       "IRONBREAKER"
@@ -300494,6 +300910,11 @@
       },
       {
        "knockback_displace": 3
+      },
+      {
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
@@ -300627,7 +301048,8 @@
      "DEFENSIVESLAM"
     ],
     "engage": [
-     "BLESSED_MACES"
+     "BLESSED_MACES",
+     "CHARGE_ROOT"
     ],
     "heal_sustain": [
      "BLESSED_MACES"
@@ -300682,7 +301104,8 @@
       "GUARDRUNE"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -300695,6 +301118,7 @@
      ],
      [
       {
+       "engage": 2,
        "interrupt": 2,
        "root": 5
       },
@@ -300707,6 +301131,10 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -301010,10 +301438,12 @@
      "SKILLSHOT_TELEPORT"
     ],
     "disengage": [
-     "GHOSTSTRIKE"
+     "GHOSTSTRIKE",
+     "GROUNDDASH"
     ],
     "engage": [
-     "GHOSTSTRIKE"
+     "GHOSTSTRIKE",
+     "QDASH"
     ],
     "heal_reduction": [
      "DEEPCUTS"
@@ -301022,7 +301452,8 @@
      "DEEPCUTS"
     ],
     "mobility": [
-     "GROUNDDASH"
+     "GROUNDDASH",
+     "QDASH"
     ],
     "peel": [
      "SKILLSHOT_TELEPORT"
@@ -301075,6 +301506,7 @@
       "PASSIVE_HEALTHCHANCE_DAGGER"
      ],
      [
+      "QDASH",
       "SUNDERARMOR2"
      ]
     ],
@@ -301088,6 +301520,7 @@
      ],
      [
       {
+       "disengage": 2,
        "mobility": 4
       },
       {
@@ -301106,6 +301539,10 @@
       }
      ],
      [
+      {
+       "engage": 2,
+       "mobility": 4
+      },
       {
        "resist_shred": 2
       }
@@ -301233,16 +301670,19 @@
      "SPINATTACK"
     ],
     "catch": [
-     "SPINATTACK"
+     "SPINATTACK",
+     "HAMSTRINGSWORD"
     ],
     "disengage": [
-     "SPINATTACK"
+     "SPINATTACK",
+     "DEFENSERUN"
     ],
     "engage": [
      "SPINATTACK"
     ],
     "mobility": [
-     "SPINATTACK"
+     "SPINATTACK",
+     "HEROICSTRIKE2"
     ],
     "peel": [
      "SPLITTINGSLASH"
@@ -301260,7 +301700,8 @@
      "HAMSTRINGSWORD"
     ],
     "sustained_dps": [
-     "SPINATTACK"
+     "SPINATTACK",
+     "HEROICSTRIKE2"
     ]
    },
    "full_healer": false,
@@ -301280,6 +301721,7 @@
     "slot_names": [
      "e",
      "w",
+     "q",
      "passive"
     ],
     "slot_spells": [
@@ -301287,9 +301729,13 @@
       "SPINATTACK"
      ],
      [
+      "DEFENSERUN",
       "HAMSTRINGSWORD",
       "SPLITTINGSLASH",
       "PARRY"
+     ],
+     [
+      "HEROICSTRIKE2"
      ],
      [
       "PASSIVE_ARMORCHANCE_SWORD"
@@ -301308,6 +301754,10 @@
      ],
      [
       {
+       "disengage": 2
+      },
+      {
+       "catch": 2,
        "slow": 2
       },
       {
@@ -301316,6 +301766,12 @@
       },
       {
        "reflect": 2
+      }
+     ],
+     [
+      {
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [
@@ -301408,16 +301864,19 @@
    "display_name": "Malevolent Locus",
    "evidence": {
     "anti_dive": [
-     "VOID"
+     "VOID",
+     "SHIELDFRIENDLY"
     ],
     "buff_allies": [
      "EMPOWERBEAM"
     ],
     "cleanse": [
-     "VOID"
+     "VOID",
+     "CLEANSESPEED2"
     ],
     "peel": [
-     "VOID"
+     "VOID",
+     "SHIELDFRIENDLY"
     ],
     "resist_shred": [
      "FRAZZLE2"
@@ -301453,11 +301912,13 @@
       "VOID"
      ],
      [
+      "CLEANSESPEED2",
       "EMPOWERBEAM",
       "FRAZZLE2"
      ],
      [
-      "MAGICSHOCK"
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
      ],
      [
       "PASSIVE_ATTACKBUFF_ARCANESTAFF"
@@ -301473,6 +301934,9 @@
      ],
      [
       {
+       "cleanse": 4
+      },
+      {
        "buff_allies": 2
       },
       {
@@ -301482,6 +301946,10 @@
      [
       {
        "silence": 2
+      },
+      {
+       "anti_dive": 2,
+       "peel": 2
       }
      ],
      [
@@ -301577,10 +302045,12 @@
    "display_name": "Enigmatic Staff",
    "evidence": {
     "anti_dive": [
-     "INVULNERABILITY"
+     "INVULNERABILITY",
+     "SHIELDFRIENDLY"
     ],
     "buff_allies": [
-     "INVULNERABILITY"
+     "INVULNERABILITY",
+     "EMPOWERBEAM"
     ],
     "cleanse": [
      "CLEANSESPEED2"
@@ -301624,6 +302094,7 @@
      ],
      [
       "CLEANSESPEED2",
+      "EMPOWERBEAM",
       "FRAZZLE2"
      ],
      [
@@ -301646,6 +302117,9 @@
        "cleanse": 4
       },
       {
+       "buff_allies": 2
+      },
+      {
        "resist_shred": 3
       }
      ],
@@ -301654,6 +302128,7 @@
        "silence": 2
       },
       {
+       "anti_dive": 2,
        "peel": 2
       }
      ],
@@ -301938,7 +302413,8 @@
      "METEOR"
     ],
     "knockback_displace": [
-     "METEOR"
+     "METEOR",
+     "FIRECONE"
     ],
     "peel": [
      "FIRECONE"
@@ -301992,6 +302468,7 @@
      ],
      [
       {
+       "knockback_displace": 2,
        "peel": 2
       },
       {
@@ -302129,7 +302606,8 @@
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "FIREPHOENIX"
+     "FIREPHOENIX",
+     "FIREWALL"
     ]
    },
    "full_healer": false,
@@ -302158,7 +302636,8 @@
      ],
      [
       "FIRECONE",
-      "FIRESTAFFIGNITE2_SPREAD"
+      "FIRESTAFFIGNITE2_SPREAD",
+      "FIREWALL"
      ]
     ],
     "slots": [
@@ -302177,6 +302656,9 @@
       },
       {
        "buff_allies": 2
+      },
+      {
+       "zone_control": 2
       }
      ]
     ]
@@ -302299,7 +302781,8 @@
      "ROOTFIELD"
     ],
     "engage": [
-     "ROOTFIELD"
+     "ROOTFIELD",
+     "CHARGE_ROOT"
     ],
     "interrupt": [
      "CHARGE_ROOT"
@@ -302309,10 +302792,12 @@
     ],
     "peel": [
      "ROOTFIELD",
+     "GUARDRUNE",
      "DEFENSIVESLAM"
     ],
     "root": [
-     "ROOTFIELD"
+     "ROOTFIELD",
+     "CHARGE_ROOT"
     ],
     "slow": [
      "SACRED_GROUND"
@@ -302370,10 +302855,13 @@
      ],
      [
       {
-       "interrupt": 2
+       "engage": 2,
+       "interrupt": 2,
+       "root": 5
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "peel": 4
       }
      ],
      [
@@ -302382,7 +302870,8 @@
        "zone_control": 2
       },
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -302791,13 +303280,15 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "FROST_TARGETED_CHANNEL"
+     "FROST_TARGETED_CHANNEL",
+     "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
      "FROSTNOVA"
     ],
     "sustained_dps": [
-     "FROST_TARGETED_CHANNEL"
+     "FROST_TARGETED_CHANNEL",
+     "WEAPON_STATS"
     ],
     "zone_control": [
      "FROSTBOMB_CASTSLOW"
@@ -302816,7 +303307,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "q",
@@ -302856,6 +303349,7 @@
      ],
      [
       {
+       "slow": 4,
        "zone_control": 4
       },
       {
@@ -303045,16 +303539,19 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "ICESTORM2"
+     "ICESTORM2",
+     "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
      "FROSTNOVA"
     ],
     "sustained_dps": [
-     "ICESTORM2"
+     "ICESTORM2",
+     "WEAPON_STATS"
     ],
     "zone_control": [
-     "ICESTORM2"
+     "ICESTORM2",
+     "FROSTBOMB_CASTSLOW"
     ]
    },
    "full_healer": false,
@@ -303070,7 +303567,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "w",
@@ -303081,6 +303580,7 @@
       "ICESTORM2"
      ],
      [
+      "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
       "FROST_LANCE",
       "ICE_SCULPTURE"
@@ -303102,6 +303602,10 @@
       }
      ],
      [
+      {
+       "slow": 4,
+       "zone_control": 4
+      },
       {
        "disengage": 2,
        "stun": 2
@@ -303198,7 +303702,8 @@
    "display_name": "Glaive",
    "evidence": {
     "catch": [
-     "SHOVEL"
+     "SHOVEL",
+     "LEGBREAKER"
     ],
     "knockback_displace": [
      "SHOVEL"
@@ -303249,6 +303754,7 @@
      [
       "CHARGINGBLADE",
       "GROUNDSPEAR",
+      "LEGBREAKER",
       "SKILLSHOT_PULL",
       "DEFLECTINGSTANCE"
      ],
@@ -303272,6 +303778,9 @@
       },
       {
        "slow": 2
+      },
+      {
+       "catch": 2
       },
       {
        "root": 2
@@ -303606,7 +304115,8 @@
      "AXE_CHARGE"
     ],
     "heal_reduction": [
-     "RENDINGSWING"
+     "RENDINGSWING",
+     "RENDINGSTRIKE"
     ],
     "mobility": [
      "RENDINGCOMBO"
@@ -303690,6 +304200,7 @@
        "root": 2
       },
       {
+       "heal_reduction": 2,
        "sustained_dps": 4
       }
      ]
@@ -303818,7 +304329,8 @@
      "AXE_CHARGE"
     ],
     "heal_reduction": [
-     "SHOCKWAVE"
+     "SHOCKWAVE",
+     "RENDINGSTRIKE"
     ],
     "mobility": [
      "RENDINGCOMBO"
@@ -303906,6 +304418,7 @@
        "root": 2
       },
       {
+       "heal_reduction": 2,
        "sustained_dps": 4
       }
      ]
@@ -304032,7 +304545,7 @@
     "catch": 4,
     "disengage": 4,
     "engage": 6,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
     "peel": 4,
     "purge": 2,
@@ -304054,16 +304567,20 @@
      "HAMMERTACKLE"
     ],
     "disengage": [
-     "HAMMERTACKLE"
+     "HAMMERTACKLE",
+     "CHARGESLOWAE"
     ],
     "engage": [
-     "HAMMERTACKLE"
+     "HAMMERTACKLE",
+     "CHARGESLOWAE"
     ],
     "knockback_displace": [
-     "HAMMERTACKLE"
+     "HAMMERTACKLE",
+     "GEYSER"
     ],
     "mobility": [
-     "HAMMERTACKLE"
+     "HAMMERTACKLE",
+     "CHARGESLOWAE"
     ],
     "peel": [
      "HAMMERTACKLE"
@@ -304108,22 +304625,24 @@
     },
     "slot_names": [
      "e",
+     "w",
      "q",
-     "passive",
-     "w"
+     "passive"
     ],
     "slot_spells": [
      [
       "HAMMERTACKLE"
      ],
      [
+      "CHARGESLOWAE",
+      "GEYSER",
+      "TAR_RING"
+     ],
+     [
       "IRONBREAKER"
      ],
      [
       "PASSIVE_HEALTHCHANCE_HAMMER"
-     ],
-     [
-      "TAR_RING"
      ]
     ],
     "slots": [
@@ -304140,6 +304659,21 @@
      ],
      [
       {
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
+      },
+      {
+       "knockback_displace": 3
+      },
+      {
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
        "purge": 2,
        "resist_shred": 2
       }
@@ -304147,13 +304681,6 @@
      [
       {
        "self_sustain": 2
-      }
-     ],
-     [
-      {
-       "anti_dive": 4,
-       "slow": 4,
-       "zone_control": 2
       }
      ]
     ]
@@ -304287,7 +304814,7 @@
     "clump_create": 6,
     "disengage": 4,
     "engage": 6,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
     "peel": 4,
     "purge": 2,
@@ -304312,16 +304839,20 @@
      "SPINNING_SMASH"
     ],
     "disengage": [
-     "SPINNING_SMASH"
+     "SPINNING_SMASH",
+     "CHARGESLOWAE"
     ],
     "engage": [
-     "SPINNING_SMASH"
+     "SPINNING_SMASH",
+     "CHARGESLOWAE"
     ],
     "knockback_displace": [
-     "SPINNING_SMASH"
+     "SPINNING_SMASH",
+     "GEYSER"
     ],
     "mobility": [
-     "SPINNING_SMASH"
+     "SPINNING_SMASH",
+     "CHARGESLOWAE"
     ],
     "peel": [
      "SPINNING_SMASH"
@@ -304366,22 +304897,24 @@
     },
     "slot_names": [
      "e",
+     "w",
      "q",
-     "passive",
-     "w"
+     "passive"
     ],
     "slot_spells": [
      [
       "SPINNING_SMASH"
      ],
      [
+      "CHARGESLOWAE",
+      "GEYSER",
+      "TAR_RING"
+     ],
+     [
       "IRONBREAKER"
      ],
      [
       "PASSIVE_HEALTHCHANCE_HAMMER"
-     ],
-     [
-      "TAR_RING"
      ]
     ],
     "slots": [
@@ -304399,6 +304932,21 @@
      ],
      [
       {
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
+      },
+      {
+       "knockback_displace": 3
+      },
+      {
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
        "purge": 2,
        "resist_shred": 2
       }
@@ -304406,13 +304954,6 @@
      [
       {
        "self_sustain": 2
-      }
-     ],
-     [
-      {
-       "anti_dive": 4,
-       "slow": 4,
-       "zone_control": 2
       }
      ]
     ]
@@ -305237,19 +305778,22 @@
      "HOLYEXPLOSION"
     ],
     "buff_allies": [
-     "HOLYEXPLOSION"
+     "HOLYEXPLOSION",
+     "HOLYHOT"
     ],
     "heal_burst": [
      "HOLYFLASH"
     ],
     "heal_sustain": [
-     "HOLYEXPLOSION"
+     "HOLYEXPLOSION",
+     "HEALINGBEAM"
     ],
     "knockback_displace": [
      "HOLYEXPLOSION"
     ],
     "peel": [
-     "HOLYEXPLOSION"
+     "HOLYEXPLOSION",
+     "PULSINGHEAL"
     ]
    },
    "full_healer": true,
@@ -305267,11 +305811,17 @@
     "always": {},
     "slot_names": [
      "e",
+     "w",
      "q"
     ],
     "slot_spells": [
      [
       "HOLYEXPLOSION"
+     ],
+     [
+      "HEALINGBEAM",
+      "HOLYHOT",
+      "PULSINGHEAL"
      ],
      [
       "HOLYFLASH"
@@ -305285,6 +305835,17 @@
        "heal_sustain": 6,
        "knockback_displace": 2,
        "peel": 4
+      }
+     ],
+     [
+      {
+       "heal_sustain": 4
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "peel": 2
       }
      ],
      [
@@ -305379,10 +305940,12 @@
      "HOLY_DISPEL"
     ],
     "buff_allies": [
-     "HOLY_DISPEL"
+     "HOLY_DISPEL",
+     "HOLYHOT"
     ],
     "heal_burst": [
-     "HOLY_DISPEL"
+     "HOLY_DISPEL",
+     "HOLYFLASH"
     ],
     "heal_sustain": [
      "HEALINGBEAM"
@@ -305407,7 +305970,8 @@
     "always": {},
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -305415,7 +305979,11 @@
      ],
      [
       "HEALINGBEAM",
+      "HOLYHOT",
       "PULSINGHEAL"
+     ],
+     [
+      "HOLYFLASH"
      ]
     ],
     "slots": [
@@ -305431,7 +305999,15 @@
        "heal_sustain": 4
       },
       {
+       "buff_allies": 2
+      },
+      {
        "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 4
       }
      ]
     ]
@@ -305529,13 +306105,15 @@
      "HOLY_ULTIMATE"
     ],
     "heal_burst": [
-     "HOLY_ULTIMATE"
+     "HOLY_ULTIMATE",
+     "HOLYFLASH"
     ],
     "heal_sustain": [
      "HEALINGBEAM"
     ],
     "peel": [
-     "HOLY_ULTIMATE"
+     "HOLY_ULTIMATE",
+     "PULSINGHEAL"
     ]
    },
    "full_healer": true,
@@ -305553,7 +306131,8 @@
     "always": {},
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -305561,7 +306140,11 @@
      ],
      [
       "HEALINGBEAM",
-      "HOLYHOT"
+      "HOLYHOT",
+      "PULSINGHEAL"
+     ],
+     [
+      "HOLYFLASH"
      ]
     ],
     "slots": [
@@ -305579,6 +306162,14 @@
       },
       {
        "buff_allies": 2
+      },
+      {
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 4
       }
      ]
     ]
@@ -305660,7 +306251,8 @@
      "HOLYFLASH"
     ],
     "heal_sustain": [
-     "CELESTIAL_SPHERE"
+     "CELESTIAL_SPHERE",
+     "HEALINGBEAM"
     ],
     "peel": [
      "PULSINGHEAL"
@@ -305690,6 +306282,7 @@
      ],
      [
       "HOLYHOT",
+      "HEALINGBEAM",
       "PULSINGHEAL"
      ],
      [
@@ -305705,6 +306298,9 @@
      [
       {
        "buff_allies": 4
+      },
+      {
+       "heal_sustain": 4
       },
       {
        "peel": 2
@@ -305880,7 +306476,8 @@
      "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
-     "FROST_ULTIMATE"
+     "FROST_ULTIMATE",
+     "FROSTNOVA"
     ],
     "sustained_dps": [
      "WEAPON_STATS"
@@ -305940,7 +306537,8 @@
        "zone_control": 6
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "stun": 2
       },
       {
        "resist_shred": 2
@@ -306130,7 +306728,8 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "GLACIALFIELD"
+     "GLACIALFIELD",
+     "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
      "FROSTNOVA"
@@ -306139,7 +306738,8 @@
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "GLACIALFIELD"
+     "GLACIALFIELD",
+     "FROSTBOMB_CASTSLOW"
     ]
    },
    "full_healer": false,
@@ -306169,6 +306769,7 @@
      ],
      [
       "FROSTNOVA",
+      "FROSTBOMB_CASTSLOW",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -306192,6 +306793,10 @@
        "anti_dive": 2,
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4,
+       "zone_control": 4
       },
       {
        "resist_shred": 2
@@ -306312,16 +306917,19 @@
      "HUMAN_TORCH"
     ],
     "knockback_displace": [
-     "HUMAN_TORCH"
+     "HUMAN_TORCH",
+     "FIRECONE"
     ],
     "peel": [
-     "HUMAN_TORCH"
+     "HUMAN_TORCH",
+     "FIRECONE"
     ],
     "sustained_dps": [
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "HUMAN_TORCH"
+     "HUMAN_TORCH",
+     "FIREWALL"
     ]
    },
    "full_healer": false,
@@ -306349,7 +306957,9 @@
       "HUMAN_TORCH"
      ],
      [
-      "FIRESTAFFIGNITE2_SPREAD"
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD",
+      "FIREWALL"
      ]
     ],
     "slots": [
@@ -306363,7 +306973,14 @@
      ],
      [
       {
+       "knockback_displace": 2,
+       "peel": 2
+      },
+      {
        "buff_allies": 2
+      },
+      {
+       "zone_control": 2
       }
      ]
     ]
@@ -306488,10 +307105,12 @@
      "SKILLSHOT_FIREBALL"
     ],
     "sustained_dps": [
-     "FLAMETORNADO"
+     "FLAMETORNADO",
+     "WEAPON_STATS"
     ],
     "zone_control": [
-     "FLAMETORNADO"
+     "FLAMETORNADO",
+     "FIREWALL"
     ]
    },
    "full_healer": false,
@@ -306507,7 +307126,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 4
+    },
     "slot_names": [
      "e",
      "w"
@@ -306519,7 +307140,8 @@
      [
       "SKILLSHOT_FIREBALL",
       "FIRECONE",
-      "FIRESTAFFIGNITE2_SPREAD"
+      "FIRESTAFFIGNITE2_SPREAD",
+      "FIREWALL"
      ]
     ],
     "slots": [
@@ -306540,6 +307162,9 @@
       },
       {
        "buff_allies": 2
+      },
+      {
+       "zone_control": 2
       }
      ]
     ]
@@ -306656,16 +307281,19 @@
    "display_name": "Iron-clad Staff",
    "evidence": {
     "anti_dive": [
-     "QSWHIRLWIND"
+     "QSWHIRLWIND",
+     "QS_WHIRLWIND2"
     ],
     "knockback_displace": [
-     "QSWHIRLWIND"
+     "QSWHIRLWIND",
+     "LAUNCHER"
     ],
     "mobility": [
      "CARTWHEEL"
     ],
     "peel": [
-     "QSWHIRLWIND"
+     "QSWHIRLWIND",
+     "SEPARATING_SLAM"
     ],
     "root": [
      "SEPARATING_SLAM"
@@ -306697,8 +307325,8 @@
     "slot_names": [
      "e",
      "q",
-     "passive",
-     "w"
+     "w",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -306708,12 +307336,14 @@
       "CARTWHEEL"
      ],
      [
-      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
-     ],
-     [
+      "LAUNCHER",
       "QSTAFF_COMBO",
+      "QS_WHIRLWIND2",
       "SEPARATING_SLAM",
       "STUNRUN"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
      ]
     ],
     "slots": [
@@ -306732,18 +307362,25 @@
      ],
      [
       {
-       "self_sustain": 2
-      }
-     ],
-     [
+       "knockback_displace": 2
+      },
       {
        "sustained_dps": 2
       },
       {
+       "anti_dive": 2
+      },
+      {
+       "peel": 2,
        "root": 2
       },
       {
        "stun": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 2
       }
      ]
     ]
@@ -306802,6 +307439,11 @@
      "max_targets": 1,
      "radius": 40.0,
      "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
     }
    },
    "capabilities": {
@@ -306810,6 +307452,7 @@
     "disengage": 2,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "purge": 2,
@@ -306837,6 +307480,9 @@
     "heal_reduction": [
      "DEEPCUTS"
     ],
+    "interrupt": [
+     "DEEPCUTS"
+    ],
     "mobility": [
      "QDASH"
     ],
@@ -306853,7 +307499,8 @@
      "PASSIVE_HEALTHCHANCE_DAGGER"
     ],
     "stun": [
-     "PUNCHCOMBO"
+     "PUNCHCOMBO",
+     "SKILLSHOT_TELEPORT"
     ],
     "sustained_dps": [
      "PASSIVE_AASPEEDCHANCE_DAGGER"
@@ -306875,26 +307522,26 @@
     "always": {},
     "slot_names": [
      "e",
-     "q",
      "w",
-     "passive"
+     "passive",
+     "q"
     ],
     "slot_spells": [
      [
       "PUNCHCOMBO"
      ],
      [
-      "QDASH",
-      "SUNDERARMOR2"
-     ],
-     [
-      "SKILLSHOT_TELEPORT",
+      "DEEPCUTS",
       "GROUNDDASH",
-      "DEEPCUTS"
+      "SKILLSHOT_TELEPORT"
      ],
      [
       "PASSIVE_AASPEEDCHANCE_DAGGER",
       "PASSIVE_HEALTHCHANCE_DAGGER"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
      ]
     ],
     "slots": [
@@ -306907,23 +307554,16 @@
      ],
      [
       {
-       "engage": 2,
-       "mobility": 4
-      },
-      {
-       "resist_shred": 2
-      }
-     ],
-     [
-      {
-       "catch": 2,
-       "peel": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "disengage": 2
       },
       {
-       "heal_reduction": 2
+       "catch": 2,
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
@@ -306932,6 +307572,15 @@
       },
       {
        "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "engage": 2,
+       "mobility": 4
+      },
+      {
+       "resist_shred": 2
       }
      ]
     ]
@@ -307069,7 +307718,7 @@
     "clump_create": 2,
     "disengage": 2,
     "engage": 4,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
     "peel": 3,
     "purge": 4,
@@ -307099,13 +307748,16 @@
      "TRIPLECOMBO_DIVEKICK"
     ],
     "engage": [
-     "TRIPLECOMBO_DIVEKICK"
+     "TRIPLECOMBO_DIVEKICK",
+     "DASHKICK"
     ],
     "knockback_displace": [
-     "TRIPLECOMBO_DIVEKICK"
+     "TRIPLECOMBO_DIVEKICK",
+     "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "TRIPLECOMBO_DIVEKICK"
+     "TRIPLECOMBO_DIVEKICK",
+     "DASHKICK"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -307180,6 +307832,7 @@
      ],
      [
       {
+       "knockback_displace": 3,
        "peel": 3,
        "resist_shred": 2
       },
@@ -307196,7 +307849,9 @@
      ],
      [
       {
-       "catch": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
@@ -307258,6 +307913,13 @@
   },
   "2H_KNUCKLES_CRYSTAL": {
    "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
     "catch": {
      "radius": 2.5,
      "spell": "DASHKICK"
@@ -307270,6 +307932,10 @@
      "radius": 4.0,
      "spell": "TRIPLE_KICK"
     },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
     "knockback_displace": {
      "escalation": {
       "value": 0.08
@@ -307277,6 +307943,10 @@
      "max_targets": 10,
      "radius": 4.5,
      "spell": "BACKHAND_KNOCKBACK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
     },
     "peel": {
      "escalation": {
@@ -307321,7 +307991,8 @@
    "display_name": "Forcepulse Bracers",
    "evidence": {
     "burst_st": [
-     "CONEPUNCH2"
+     "CONEPUNCH2",
+     "KNUCKLECOMBO"
     ],
     "catch": [
      "DASHKICK"
@@ -307330,7 +308001,8 @@
      "TRIPLE_KICK"
     ],
     "engage": [
-     "CONEPUNCH2"
+     "CONEPUNCH2",
+     "DASHKICK"
     ],
     "knockback_displace": [
      "BACKHAND_KNOCKBACK"
@@ -307339,7 +308011,8 @@
      "CONEPUNCH2"
     ],
     "mobility": [
-     "CONEPUNCH2"
+     "CONEPUNCH2",
+     "DASHKICK"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -307410,6 +308083,7 @@
        "resist_shred": 2
       },
       {
+       "burst_st": 2,
        "stun": 2
       },
       {
@@ -307421,7 +308095,9 @@
      ],
      [
       {
-       "catch": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
@@ -307838,7 +308514,8 @@
      "PUMMELING_STRIKES"
     ],
     "burst_st": [
-     "PUMMELING_STRIKES"
+     "PUMMELING_STRIKES",
+     "KNUCKLECOMBO"
     ],
     "catch": [
      "DASHKICK"
@@ -307868,7 +308545,8 @@
      "KNUCKLECOMBO"
     ],
     "sustained_dps": [
-     "PUMMELING_STRIKES"
+     "PUMMELING_STRIKES",
+     "PASSIVE_KNUCKLE_BRAWLER"
     ]
    },
    "full_healer": false,
@@ -307888,7 +308566,8 @@
     "slot_names": [
      "e",
      "w",
-     "q"
+     "q",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -307902,6 +308581,9 @@
      ],
      [
       "DASHKICK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER"
      ]
     ],
     "slots": [
@@ -307919,6 +308601,7 @@
        "resist_shred": 2
       },
       {
+       "burst_st": 2,
        "stun": 2
       },
       {
@@ -307933,6 +308616,11 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      }
+     ],
+     [
+      {
+       "sustained_dps": 4
       }
      ]
     ]
@@ -308011,9 +308699,25 @@
      "radius": 2.5,
      "spell": "DASHKICK"
     },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
     "mobility": {
      "radius": 2.5,
      "spell": "DASHKICK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
     },
     "resist_shred": {
      "escalation": {
@@ -308039,7 +308743,7 @@
     "engage": 2,
     "knockback_displace": 4,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "reflect": 2,
     "resist_shred": 2,
     "stun": 2,
@@ -308065,13 +308769,15 @@
      "DASHKICK"
     ],
     "knockback_displace": [
-     "GROWING_PUNCH"
+     "GROWING_PUNCH",
+     "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
      "DASHKICK"
     ],
     "peel": [
-     "GROWING_PUNCH"
+     "GROWING_PUNCH",
+     "BACKHAND_KNOCKBACK"
     ],
     "reflect": [
      "KNUCKLE_COUNTER"
@@ -308133,6 +308839,8 @@
      ],
      [
       {
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -308281,9 +308989,9 @@
     "catch": 2,
     "clump_create": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "reflect": 2,
     "resist_shred": 2,
     "stun": 2,
@@ -308309,13 +309017,15 @@
      "DASHKICK"
     ],
     "knockback_displace": [
-     "BLAZING_GEYSER"
+     "BLAZING_GEYSER",
+     "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
      "DASHKICK"
     ],
     "peel": [
-     "BLAZING_GEYSER"
+     "BLAZING_GEYSER",
+     "BACKHAND_KNOCKBACK"
     ],
     "reflect": [
      "KNUCKLE_COUNTER"
@@ -308377,6 +309087,8 @@
      ],
      [
       {
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -308462,6 +309174,10 @@
      "max_targets": 10,
      "spell": "KNUCKLECOMBO"
     },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
     "clump_create": {
      "escalation": {
       "value": 0.08
@@ -308470,6 +309186,10 @@
      "radius": 4.0,
      "spell": "TRIPLE_KICK"
     },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
     "knockback_displace": {
      "escalation": {
       "value": 0.08
@@ -308477,6 +309197,10 @@
      "max_targets": 10,
      "radius": 4.5,
      "spell": "BACKHAND_KNOCKBACK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
     },
     "peel": {
      "escalation": {
@@ -308528,7 +309252,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DIVEPUNCH_RISE"
+     "DIVEPUNCH_RISE",
+     "DASHKICK"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -308537,13 +309262,15 @@
      "DIVEPUNCH_RISE"
     ],
     "engage": [
-     "DIVEPUNCH_RISE"
+     "DIVEPUNCH_RISE",
+     "DASHKICK"
     ],
     "knockback_displace": [
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DIVEPUNCH_RISE"
+     "DIVEPUNCH_RISE",
+     "DASHKICK"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -308578,6 +309305,7 @@
     "slot_names": [
      "e",
      "w",
+     "q",
      "passive"
     ],
     "slot_spells": [
@@ -308589,6 +309317,9 @@
       "BACKHAND_KNOCKBACK",
       "TRIPLE_KICK",
       "KNUCKLE_COUNTER"
+     ],
+     [
+      "DASHKICK"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER_SPEED"
@@ -308619,6 +309350,13 @@
       },
       {
        "reflect": 2
+      }
+     ],
+     [
+      {
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
@@ -308762,7 +309500,7 @@
     "engage": 2,
     "knockback_displace": 3,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "ranged_presence": 2,
     "reflect": 2,
     "resist_shred": 2,
@@ -308781,7 +309519,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "IMPULSE_PUNCH"
+     "IMPULSE_PUNCH",
+     "DASHKICK"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -308796,7 +309535,8 @@
      "DASHKICK"
     ],
     "peel": [
-     "IMPULSE_PUNCH"
+     "IMPULSE_PUNCH",
+     "BACKHAND_KNOCKBACK"
     ],
     "ranged_presence": [
      "IMPULSE_PUNCH"
@@ -308867,6 +309607,7 @@
      [
       {
        "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -308882,6 +309623,7 @@
      ],
      [
       {
+       "catch": 2,
        "engage": 2,
        "mobility": 4
       }
@@ -308953,6 +309695,14 @@
      "radius": 5.0,
      "spell": "ARROWRAIN"
     },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
     "root": {
      "escalation": {
       "duration": 0.08,
@@ -309000,13 +309750,15 @@
      "ARROWRAIN"
     ],
     "resist_shred": [
-     "PASSIVE_ARMOR_PIERCE_STACK"
+     "PASSIVE_ARMOR_PIERCE_STACK",
+     "DEADLYSHOT"
     ],
     "root": [
      "GROUNDARROW"
     ],
     "slow": [
-     "ARROWRAIN"
+     "ARROWRAIN",
+     "PASSIVE_SLOWPOISON"
     ],
     "sustained_dps": [
      "WEAPON_STATS"
@@ -309034,6 +309786,7 @@
     "slot_names": [
      "e",
      "passive",
+     "q",
      "w"
     ],
     "slot_spells": [
@@ -309041,7 +309794,11 @@
       "ARROWRAIN"
      ],
      [
-      "PASSIVE_ARMOR_PIERCE_STACK"
+      "PASSIVE_ARMOR_PIERCE_STACK",
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
      ],
      [
       "GROUNDARROW"
@@ -309054,6 +309811,14 @@
        "ranged_presence": 2,
        "slow": 4,
        "zone_control": 4
+      }
+     ],
+     [
+      {
+       "resist_shred": 2
+      },
+      {
+       "slow": 2
       }
      ],
      [
@@ -309072,6 +309837,9 @@
    "role_hint": "range",
    "role_menu": [
     "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
    ],
    "source": "sheets/bow.yaml",
    "status": "curated",
@@ -309191,7 +309959,8 @@
      "PASSIVE_SLOWPOISON"
     ],
     "sustained_dps": [
-     "UNDEADARROWS"
+     "UNDEADARROWS",
+     "WEAPON_STATS"
     ]
    },
    "full_healer": false,
@@ -309206,7 +309975,9 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 4
+    },
     "slot_names": [
      "e",
      "q",
@@ -309388,6 +310159,7 @@
     ],
     "peel": [
      "SHRIEKMACE",
+     "GUARDRUNE",
      "DEFENSIVESLAM"
     ],
     "purge": [
@@ -309454,7 +310226,8 @@
        "interrupt": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "peel": 4
       }
      ],
      [
@@ -309463,7 +310236,8 @@
        "zone_control": 4
       },
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -309695,7 +310469,8 @@
        "zone_control": 2
       },
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -309803,7 +310578,8 @@
    "display_name": "Great Nature Staff",
    "evidence": {
     "buff_allies": [
-     "BRIEROFLIFE"
+     "BRIEROFLIFE",
+     "NATURERESILIENCE"
     ],
     "cleanse": [
      "CLEANSEHEAL"
@@ -309855,7 +310631,8 @@
      ],
      [
       "BRAMBLESEED",
-      "CLEANSEHEAL"
+      "CLEANSEHEAL",
+      "NATURERESILIENCE"
      ],
      [
       "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -309878,6 +310655,9 @@
       {
        "cleanse": 4,
        "heal_burst": 2
+      },
+      {
+       "buff_allies": 4
       }
      ],
      [
@@ -310224,7 +311004,8 @@
      "CLEANSEHEAL"
     ],
     "heal_burst": [
-     "SPIRITANIMAL"
+     "SPIRITANIMAL",
+     "CLEANSEHEAL"
     ],
     "heal_sustain": [
      "SPIRITANIMAL"
@@ -310292,7 +311073,8 @@
        "knockback_displace": 2
       },
       {
-       "cleanse": 4
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
        "buff_allies": 4
@@ -310702,10 +311484,12 @@
      "VAULT_ATTACK"
     ],
     "knockback_displace": [
-     "VAULT_ATTACK"
+     "VAULT_ATTACK",
+     "LAUNCHER"
     ],
     "mobility": [
-     "VAULT_ATTACK"
+     "VAULT_ATTACK",
+     "CARTWHEEL"
     ],
     "peel": [
      "SEPARATING_SLAM"
@@ -310742,6 +311526,7 @@
     "slot_names": [
      "e",
      "w",
+     "q",
      "passive"
     ],
     "slot_spells": [
@@ -310751,7 +311536,11 @@
      [
       "SEPARATING_SLAM",
       "STUNRUN",
-      "QS_WHIRLWIND2"
+      "QS_WHIRLWIND2",
+      "LAUNCHER"
+     ],
+     [
+      "CARTWHEEL"
      ],
      [
       "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
@@ -310779,6 +311568,14 @@
       {
        "anti_dive": 4,
        "damage_debuff": 2
+      },
+      {
+       "knockback_displace": 2
+      }
+     ],
+     [
+      {
+       "mobility": 2
       }
      ],
      [
@@ -310932,13 +311729,15 @@
      "CARTWHEEL"
     ],
     "peel": [
-     "SOULSHAKER"
+     "SOULSHAKER",
+     "SEPARATING_SLAM"
     ],
     "ranged_presence": [
      "SOULSHAKER"
     ],
     "root": [
-     "SOULSHAKER"
+     "SOULSHAKER",
+     "SEPARATING_SLAM"
     ],
     "self_sustain": [
      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
@@ -310984,6 +311783,7 @@
       "LAUNCHER",
       "QSTAFF_COMBO",
       "QS_WHIRLWIND2",
+      "SEPARATING_SLAM",
       "STUNRUN"
      ],
      [
@@ -311015,6 +311815,10 @@
       },
       {
        "anti_dive": 2
+      },
+      {
+       "peel": 2,
+       "root": 2
       },
       {
        "stun": 2
@@ -311123,7 +311927,7 @@
     "catch": 4,
     "disengage": 4,
     "engage": 6,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
     "peel": 4,
     "purge": 2,
@@ -311145,16 +311949,20 @@
      "RAM_CHARGE"
     ],
     "disengage": [
-     "RAM_CHARGE"
+     "RAM_CHARGE",
+     "CHARGESLOWAE"
     ],
     "engage": [
-     "RAM_CHARGE"
+     "RAM_CHARGE",
+     "CHARGESLOWAE"
     ],
     "knockback_displace": [
-     "RAM_CHARGE"
+     "RAM_CHARGE",
+     "GEYSER"
     ],
     "mobility": [
-     "RAM_CHARGE"
+     "RAM_CHARGE",
+     "CHARGESLOWAE"
     ],
     "peel": [
      "RAM_CHARGE"
@@ -311199,22 +312007,24 @@
     },
     "slot_names": [
      "e",
+     "w",
      "q",
-     "passive",
-     "w"
+     "passive"
     ],
     "slot_spells": [
      [
       "RAM_CHARGE"
      ],
      [
+      "CHARGESLOWAE",
+      "GEYSER",
+      "TAR_RING"
+     ],
+     [
       "IRONBREAKER"
      ],
      [
       "PASSIVE_HEALTHCHANCE_HAMMER"
-     ],
-     [
-      "TAR_RING"
      ]
     ],
     "slots": [
@@ -311231,6 +312041,21 @@
      ],
      [
       {
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
+      },
+      {
+       "knockback_displace": 3
+      },
+      {
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
        "purge": 2,
        "resist_shred": 2
       }
@@ -311238,13 +312063,6 @@
      [
       {
        "self_sustain": 2
-      }
-     ],
-     [
-      {
-       "anti_dive": 4,
-       "slow": 4,
-       "zone_control": 2
       }
      ]
     ]
@@ -311358,7 +312176,8 @@
    "display_name": "Weeping Repeater",
    "evidence": {
     "burst_aoe": [
-     "GROUNDMINE"
+     "GROUNDMINE",
+     "BOLTSHOT"
     ],
     "knockback_displace": [
      "KNOCKBACKSHOT2"
@@ -311367,6 +312186,7 @@
      "KNOCKBACKSHOT2"
     ],
     "ranged_presence": [
+     "BOLTSHOT",
      "GROUNDMINE"
     ],
     "resist_shred": [
@@ -311382,7 +312202,8 @@
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "GROUNDMINE"
+     "GROUNDMINE",
+     "CALTROPS"
     ]
    },
    "full_healer": false,
@@ -311403,11 +312224,15 @@
     },
     "slot_names": [
      "e",
+     "q",
      "w"
     ],
     "slot_spells": [
      [
       "GROUNDMINE"
+     ],
+     [
+      "BOLTSHOT"
      ],
      [
       "CALTROPS",
@@ -311426,7 +312251,14 @@
      ],
      [
       {
-       "slow": 2
+       "burst_aoe": 2,
+       "ranged_presence": 2
+      }
+     ],
+     [
+      {
+       "slow": 2,
+       "zone_control": 2
       },
       {
        "knockback_displace": 4,
@@ -311698,11 +312530,21 @@
      "radius": 5.0,
      "spell": "AXE_CHARGE"
     },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
     "heal_reduction": {
      "escalation": {
       "value": 0.08
      },
      "spell": "RENDINGSTRIKE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
     },
     "root": {
      "escalation": {
@@ -311744,13 +312586,15 @@
      "CRYSTAL_SCYTHE_DASH_ZONE"
     ],
     "engage": [
-     "CRYSTAL_SCYTHE_DASH_ZONE"
+     "CRYSTAL_SCYTHE_DASH_ZONE",
+     "AXE_CHARGE"
     ],
     "heal_reduction": [
      "RENDINGSTRIKE"
     ],
     "mobility": [
-     "CRYSTAL_SCYTHE_DASH_ZONE"
+     "CRYSTAL_SCYTHE_DASH_ZONE",
+     "RENDINGCOMBO"
     ],
     "resist_shred": [
      "AXESMASH"
@@ -311819,7 +312663,8 @@
        "resist_shred": 3
       },
       {
-       "buff_allies": 2
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
@@ -311829,6 +312674,7 @@
      ],
      [
       {
+       "mobility": 2,
        "root": 2
       },
       {
@@ -312218,7 +313064,8 @@
      "SHAPESHIFT_AVALONIAN_EAGLE"
     ],
     "mobility": [
-     "SHAPESHIFT_AVALONIAN_EAGLE"
+     "SHAPESHIFT_AVALONIAN_EAGLE",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -312310,7 +313157,8 @@
        "zone_control": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
       },
       {
        "peel": 2
@@ -312479,7 +313327,8 @@
      "SHAPESHIFT_CRYSTAL_COBRA"
     ],
     "mobility": [
-     "SHAPESHIFT_CRYSTAL_COBRA"
+     "SHAPESHIFT_CRYSTAL_COBRA",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -312576,7 +313425,8 @@
        "zone_control": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
       },
       {
        "peel": 2
@@ -312738,7 +313588,8 @@
      "SHAPE_W_AREA_PULL"
     ],
     "mobility": [
-     "SHAPESHIFT_IMP"
+     "SHAPESHIFT_IMP",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -312750,7 +313601,8 @@
      "SHAPE_W_AREA_PULL"
     ],
     "self_sustain": [
-     "SHAPESHIFT_IMP"
+     "SHAPESHIFT_IMP",
+     "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
@@ -312774,12 +313626,16 @@
     "always": {},
     "slot_names": [
      "e",
+     "passive",
      "q",
      "w"
     ],
     "slot_spells": [
      [
       "SHAPESHIFT_IMP"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
      ],
      [
       "SHAPE_Q_CONE_MELEE",
@@ -312803,6 +313659,11 @@
      ],
      [
       {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
        "resist_shred": 2
       },
       {
@@ -312820,7 +313681,8 @@
        "zone_control": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
       },
       {
        "peel": 2
@@ -312887,6 +313749,14 @@
      "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
     },
     "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
      "escalation": {
       "value": 0.08
      },
@@ -312965,7 +313835,8 @@
      "SHAPE_W_AREA_PULL"
     ],
     "clump_create": [
-     "SHAPESHIFT_ROCK_ELEMENTAL"
+     "SHAPESHIFT_ROCK_ELEMENTAL",
+     "SHAPE_W_AREA_PULL"
     ],
     "engage": [
      "SHAPESHIFT_ROCK_ELEMENTAL"
@@ -312986,7 +313857,8 @@
      "SHAPE_W_AREA_PULL"
     ],
     "self_sustain": [
-     "SHAPESHIFT_ROCK_ELEMENTAL"
+     "SHAPESHIFT_ROCK_ELEMENTAL",
+     "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
@@ -313017,12 +313889,16 @@
     "always": {},
     "slot_names": [
      "e",
+     "passive",
      "q",
      "w"
     ],
     "slot_spells": [
      [
       "SHAPESHIFT_ROCK_ELEMENTAL"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
      ],
      [
       "SHAPE_Q_CONE_MELEE",
@@ -313049,6 +313925,11 @@
      ],
      [
       {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
        "resist_shred": 2
       },
       {
@@ -313058,6 +313939,7 @@
      [
       {
        "catch": 2,
+       "clump_create": 2,
        "root": 2
       },
       {
@@ -313131,6 +314013,14 @@
      "max_targets": 5,
      "radius": 3.0,
      "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
     },
     "clump_create": {
      "escalation": {
@@ -313208,13 +314098,15 @@
      "SHAPESHIFT_WEREWOLF"
     ],
     "catch": [
-     "SHAPESHIFT_WEREWOLF"
+     "SHAPESHIFT_WEREWOLF",
+     "SHAPE_W_AREA_PULL"
     ],
     "clump_create": [
      "SHAPE_W_AREA_PULL"
     ],
     "mobility": [
-     "SHAPESHIFT_WEREWOLF"
+     "SHAPESHIFT_WEREWOLF",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -313226,7 +314118,8 @@
      "SHAPE_W_AREA_PULL"
     ],
     "self_sustain": [
-     "SHAPESHIFT_WEREWOLF"
+     "SHAPESHIFT_WEREWOLF",
+     "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
@@ -313251,12 +314144,16 @@
     "always": {},
     "slot_names": [
      "e",
+     "passive",
      "q",
      "w"
     ],
     "slot_spells": [
      [
       "SHAPESHIFT_WEREWOLF"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
      ],
      [
       "SHAPE_Q_CONE_MELEE",
@@ -313280,6 +314177,11 @@
      ],
      [
       {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
        "resist_shred": 2
       },
       {
@@ -313288,6 +314190,7 @@
      ],
      [
       {
+       "catch": 2,
        "clump_create": 2,
        "root": 2
       },
@@ -313296,7 +314199,8 @@
        "zone_control": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
       },
       {
        "peel": 2
@@ -313460,7 +314364,8 @@
      "SHAPESHIFT_PANTHER"
     ],
     "mobility": [
-     "SHAPESHIFT_PANTHER"
+     "SHAPESHIFT_PANTHER",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
      "SHAPE_W_POLYMORPH"
@@ -313550,7 +314455,8 @@
        "slow": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
       },
       {
        "peel": 2
@@ -313610,6 +314516,14 @@
   },
   "2H_SHAPESHIFTER_SET2": {
    "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
     "catch": {
      "escalation": {
       "value": 0.08
@@ -313626,6 +314540,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -313640,6 +314562,14 @@
      "max_targets": 5,
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
     },
     "zone_control": {
      "escalation": {
@@ -313669,10 +314599,12 @@
    "display_name": "Rootbound Staff",
    "evidence": {
     "anti_dive": [
-     "SHAPESHIFT_ENT"
+     "SHAPESHIFT_ENT",
+     "SHAPE_W_TETHERBEAM"
     ],
     "buff_allies": [
-     "SHAPESHIFT_ENT"
+     "SHAPESHIFT_ENT",
+     "SHAPE_Q_DAMAGE_AND_SHIELD"
     ],
     "catch": [
      "SHAPE_W_AREA_PULL"
@@ -313687,7 +314619,8 @@
      "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPESHIFT_ENT"
+     "SHAPESHIFT_ENT",
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -313699,7 +314632,8 @@
      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
-     "SHAPESHIFT_ENT"
+     "SHAPESHIFT_ENT",
+     "SHAPE_W_DAMAGE_AOE"
     ],
     "zone_control": [
      "SHAPE_W_DAMAGE_AOE"
@@ -313733,12 +314667,14 @@
       "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
      ],
      [
-      "SHAPE_Q_CONE_MELEE"
+      "SHAPE_Q_CONE_MELEE",
+      "SHAPE_Q_DAMAGE_AND_SHIELD"
      ],
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -313759,6 +314695,9 @@
      [
       {
        "resist_shred": 2
+      },
+      {
+       "buff_allies": 2
       }
      ],
      [
@@ -313768,10 +314707,15 @@
        "root": 2
       },
       {
+       "slow": 2,
        "zone_control": 2
       },
       {
+       "anti_dive": 2,
        "mobility": 2
+      },
+      {
+       "peel": 2
       }
      ]
     ]
@@ -313850,6 +314794,21 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
     "root": {
      "escalation": {
       "value": 0.08
@@ -313912,19 +314871,23 @@
      "SHAPE_W_AREA_PULL"
     ],
     "mobility": [
-     "SHAPESHIFT_BEAR"
+     "SHAPESHIFT_BEAR",
+     "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPESHIFT_BEAR"
+     "SHAPESHIFT_BEAR",
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
-     "SHAPESHIFT_BEAR"
+     "SHAPESHIFT_BEAR",
+     "SHAPE_Q_CONE_MELEE"
     ],
     "root": [
      "SHAPE_W_AREA_PULL"
     ],
     "self_sustain": [
-     "SHAPESHIFT_BEAR"
+     "SHAPESHIFT_BEAR",
+     "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
     ],
     "slow": [
      "SHAPE_W_DAMAGE_AOE"
@@ -313957,6 +314920,7 @@
     },
     "slot_names": [
      "e",
+     "passive",
      "q",
      "w"
     ],
@@ -313965,12 +314929,17 @@
       "SHAPESHIFT_BEAR"
      ],
      [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
+     ],
+     [
+      "SHAPE_Q_CONE_MELEE",
       "SHAPE_Q_DAMAGE_AND_SHIELD"
      ],
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -313987,6 +314956,14 @@
      ],
      [
       {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "resist_shred": 2
+      },
+      {
        "buff_allies": 2
       }
      ],
@@ -314001,7 +314978,11 @@
        "zone_control": 2
       },
       {
-       "anti_dive": 2
+       "anti_dive": 2,
+       "mobility": 2
+      },
+      {
+       "peel": 2
       }
      ]
     ]
@@ -314136,7 +315117,8 @@
      "CURSEDOT"
     ],
     "zone_control": [
-     "SKULLCURSE"
+     "SKULLCURSE",
+     "CURSED_SPLAT"
     ]
    },
    "full_healer": false,
@@ -314196,7 +315178,8 @@
        "sustained_dps": 4
       },
       {
-       "slow": 2
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -314251,6 +315234,11 @@
   },
   "2H_SPEAR": {
    "cap_delivery": {
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
     "slow": {
      "escalation": {
       "value": 0.08
@@ -314274,7 +315262,8 @@
    "display_name": "Pike",
    "evidence": {
     "catch": [
-     "HALBERDSMASH"
+     "HALBERDSMASH",
+     "LEGBREAKER"
     ],
     "mobility": [
      "CHARGINGBLADE"
@@ -314286,7 +315275,8 @@
      "DEFLECTINGSTANCE"
     ],
     "root": [
-     "HALBERDSMASH"
+     "HALBERDSMASH",
+     "SKILLSHOT_PULL"
     ],
     "self_sustain": [
      "PASSIVE_HEALTHCHANCE_SPEAR"
@@ -314325,6 +315315,8 @@
      [
       "CHARGINGBLADE",
       "GROUNDSPEAR",
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
       "DEFLECTINGSTANCE"
      ],
      [
@@ -314348,6 +315340,12 @@
       },
       {
        "slow": 2
+      },
+      {
+       "catch": 2
+      },
+      {
+       "root": 2
       },
       {
        "reflect": 2
@@ -314478,7 +315476,8 @@
      "TRIDENTTHROW"
     ],
     "catch": [
-     "TRIDENTTHROW"
+     "TRIDENTTHROW",
+     "LEGBREAKER"
     ],
     "disengage": [
      "TRIDENTTHROW"
@@ -314487,7 +315486,8 @@
      "TRIDENTTHROW"
     ],
     "mobility": [
-     "TRIDENTTHROW"
+     "TRIDENTTHROW",
+     "CHARGINGBLADE"
     ],
     "peel": [
      "TRIDENTTHROW"
@@ -314496,7 +315496,8 @@
      "DEFLECTINGSTANCE"
     ],
     "root": [
-     "TRIDENTTHROW"
+     "TRIDENTTHROW",
+     "SKILLSHOT_PULL"
     ],
     "self_sustain": [
      "PASSIVE_HEALTHCHANCE_SPEAR"
@@ -314533,7 +315534,10 @@
       "TRIDENTTHROW"
      ],
      [
+      "CHARGINGBLADE",
       "GROUNDSPEAR",
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
       "DEFLECTINGSTANCE"
      ],
      [
@@ -314558,7 +315562,16 @@
      ],
      [
       {
+       "mobility": 2
+      },
+      {
        "slow": 2
+      },
+      {
+       "catch": 2
+      },
+      {
+       "root": 2
       },
       {
        "reflect": 2
@@ -314715,13 +315728,15 @@
      "TORNADO"
     ],
     "knockback_displace": [
-     "TORNADO"
+     "TORNADO",
+     "LAUNCHER"
     ],
     "mobility": [
      "CARTWHEEL"
     ],
     "peel": [
-     "TORNADO"
+     "TORNADO",
+     "SEPARATING_SLAM"
     ],
     "ranged_presence": [
      "TORNADO"
@@ -314759,8 +315774,8 @@
     "slot_names": [
      "e",
      "q",
-     "passive",
-     "w"
+     "w",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -314770,13 +315785,14 @@
       "CARTWHEEL"
      ],
      [
-      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
-     ],
-     [
+      "LAUNCHER",
       "QSTAFF_COMBO",
       "QS_WHIRLWIND2",
       "SEPARATING_SLAM",
       "STUNRUN"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
      ]
     ],
     "slots": [
@@ -314797,10 +315813,8 @@
      ],
      [
       {
-       "self_sustain": 2
-      }
-     ],
-     [
+       "knockback_displace": 2
+      },
       {
        "sustained_dps": 2
       },
@@ -314808,10 +315822,16 @@
        "anti_dive": 2
       },
       {
+       "peel": 2,
        "root": 2
       },
       {
        "stun": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 2
       }
      ]
     ]
@@ -315332,7 +316352,8 @@
    "display_name": "Light Crossbow",
    "evidence": {
     "burst_aoe": [
-     "EXPLODING_SHOT"
+     "EXPLODING_SHOT",
+     "BOLTSHOT"
     ],
     "knockback_displace": [
      "KNOCKBACKSHOT2"
@@ -315341,6 +316362,7 @@
      "KNOCKBACKSHOT2"
     ],
     "ranged_presence": [
+     "BOLTSHOT",
      "EXPLODING_SHOT"
     ],
     "resist_shred": [
@@ -315377,11 +316399,15 @@
     },
     "slot_names": [
      "e",
+     "q",
      "w"
     ],
     "slot_spells": [
      [
       "EXPLODING_SHOT"
+     ],
+     [
+      "BOLTSHOT"
      ],
      [
       "CALTROPS",
@@ -315394,6 +316420,12 @@
      [
       {
        "burst_aoe": 4,
+       "ranged_presence": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2,
        "ranged_presence": 2
       }
      ],
@@ -315535,7 +316567,8 @@
      "FRAZZLE2"
     ],
     "silence": [
-     "ARCANEORB2"
+     "ARCANEORB2",
+     "MAGICSHOCK"
     ],
     "sustained_dps": [
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
@@ -315558,8 +316591,8 @@
     "slot_names": [
      "e",
      "w",
-     "passive",
-     "q"
+     "q",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -315571,10 +316604,11 @@
       "FRAZZLE2"
      ],
      [
-      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
      ],
      [
-      "SHIELDFRIENDLY"
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
      ]
     ],
     "slots": [
@@ -315598,13 +316632,16 @@
      ],
      [
       {
-       "sustained_dps": 2
+       "silence": 2
+      },
+      {
+       "anti_dive": 2,
+       "peel": 2
       }
      ],
      [
       {
-       "anti_dive": 2,
-       "peel": 2
+       "sustained_dps": 2
       }
      ]
     ]
@@ -315981,7 +317018,8 @@
      "RENDINGCOMBO"
     ],
     "self_sustain": [
-     "AXETHROW"
+     "AXETHROW",
+     "PASSIVE_HEALTHCHANCE_AXE"
     ],
     "sustained_dps": [
      "RENDINGSTRIKE"
@@ -316003,6 +317041,7 @@
     "slot_names": [
      "e",
      "w",
+     "passive",
      "q"
     ],
     "slot_spells": [
@@ -316013,6 +317052,9 @@
       "AXEBOOST",
       "AXESMASH",
       "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
      ],
      [
       "RENDINGCOMBO",
@@ -316036,6 +317078,11 @@
       {
        "buff_allies": 2,
        "engage": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 2
       }
      ],
      [
@@ -316360,10 +317407,12 @@
      "CURSENOVA"
     ],
     "slow": [
-     "DYNAMIC_CURSE"
+     "DYNAMIC_CURSE",
+     "CURSED_SPLAT"
     ],
     "sustained_dps": [
-     "DYNAMIC_CURSE"
+     "DYNAMIC_CURSE",
+     "CURSEDOT"
     ],
     "zone_control": [
      "CURSED_SPLAT"
@@ -316398,6 +317447,7 @@
       "CURSENOVA"
      ],
      [
+      "CURSEDOT",
       "CURSED_SPLAT"
      ]
     ],
@@ -316422,6 +317472,10 @@
      ],
      [
       {
+       "sustained_dps": 4
+      },
+      {
+       "slow": 2,
        "zone_control": 2
       }
      ]
@@ -316593,21 +317647,21 @@
     "always": {},
     "slot_names": [
      "e",
-     "q",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
       "CURSE_SKELETON_BARF_FDHR"
      ],
      [
-      "CURSEDOT",
-      "CURSED_SPLAT"
-     ],
-     [
       "ARMORPIERCER",
       "CURSEDHANDS_STACKUP",
       "CURSENOVA"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
      ]
     ],
     "slots": [
@@ -316620,15 +317674,6 @@
      ],
      [
       {
-       "sustained_dps": 4
-      },
-      {
-       "slow": 2,
-       "zone_control": 2
-      }
-     ],
-     [
-      {
        "resist_shred": 2
       },
       {
@@ -316636,6 +317681,15 @@
       },
       {
        "root": 3
+      }
+     ],
+     [
+      {
+       "sustained_dps": 4
+      },
+      {
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -316781,7 +317835,8 @@
      "CURSEDOT"
     ],
     "zone_control": [
-     "ENFEEBLEBLADES"
+     "ENFEEBLEBLADES",
+     "CURSED_SPLAT"
     ]
    },
    "full_healer": false,
@@ -316842,7 +317897,8 @@
        "sustained_dps": 4
       },
       {
-       "slow": 2
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -316947,7 +318003,8 @@
      "DEEPCUTS"
     ],
     "mobility": [
-     "BLOODTHIRSTYBLADE"
+     "BLOODTHIRSTYBLADE",
+     "QDASH"
     ],
     "peel": [
      "SKILLSHOT_TELEPORT"
@@ -316956,13 +318013,16 @@
      "SUNDERARMOR2"
     ],
     "self_sustain": [
-     "BLOODTHIRSTYBLADE"
+     "BLOODTHIRSTYBLADE",
+     "PASSIVE_HEALTHCHANCE_DAGGER"
     ],
     "stun": [
      "SKILLSHOT_TELEPORT"
     ],
     "sustained_dps": [
-     "BLOODTHIRSTYBLADE"
+     "BLOODTHIRSTYBLADE",
+     "PASSIVE_AASPEEDCHANCE_DAGGER",
+     "WEAPON_STATS"
     ]
    },
    "full_healer": false,
@@ -316978,10 +318038,13 @@
     ]
    },
    "loadout": {
-    "always": {},
+    "always": {
+     "sustained_dps": 2
+    },
     "slot_names": [
      "e",
      "w",
+     "passive",
      "q"
     ],
     "slot_spells": [
@@ -316992,6 +318055,10 @@
       "DEEPCUTS",
       "GROUNDDASH",
       "SKILLSHOT_TELEPORT"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
      ],
      [
       "QDASH",
@@ -317022,7 +318089,16 @@
      ],
      [
       {
-       "engage": 2
+       "sustained_dps": 2
+      },
+      {
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "engage": 2,
+       "mobility": 4
       },
       {
        "resist_shred": 2
@@ -317939,7 +319015,8 @@
      "FROST_LANCE"
     ],
     "root": [
-     "FREEZINGWIND"
+     "FREEZINGWIND",
+     "PASSIVE_FROST"
     ],
     "slow": [
      "FROSTBOMB_CASTSLOW"
@@ -317972,7 +319049,8 @@
     },
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "passive"
     ],
     "slot_spells": [
      [
@@ -317983,6 +319061,9 @@
       "FROSTNOVA",
       "FROST_LANCE",
       "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
      ]
     ],
     "slots": [
@@ -318009,6 +319090,11 @@
       },
       {
        "buff_allies": 2
+      }
+     ],
+     [
+      {
+       "root": 2
       }
      ]
     ]
@@ -318170,10 +319256,12 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "FROZEN_CRYSTAL"
+     "FROZEN_CRYSTAL",
+     "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
-     "FROZEN_CRYSTAL"
+     "FROZEN_CRYSTAL",
+     "FROSTNOVA"
     ],
     "zone_control": [
      "FROSTBOMB_CASTSLOW"
@@ -318227,10 +319315,12 @@
      ],
      [
       {
+       "slow": 4,
        "zone_control": 2
       },
       {
-       "disengage": 2
+       "disengage": 2,
+       "stun": 2
       },
       {
        "resist_shred": 2
@@ -318381,7 +319471,7 @@
     "root": 2,
     "slow": 4,
     "stun": 2,
-    "zone_control": 2
+    "zone_control": 4
    },
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
@@ -318415,13 +319505,15 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "ICEROCK_EXPLODE"
+     "ICEROCK_EXPLODE",
+     "FROSTBOMB_CASTSLOW"
     ],
     "stun": [
      "FROSTNOVA"
     ],
     "zone_control": [
-     "ICEROCK_EXPLODE"
+     "ICEROCK_EXPLODE",
+     "FROSTBOMB_CASTSLOW"
     ]
    },
    "full_healer": false,
@@ -318448,6 +319540,7 @@
       "ICEROCK_EXPLODE"
      ],
      [
+      "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
       "FROST_LANCE",
       "ICE_SCULPTURE"
@@ -318469,6 +319562,10 @@
       }
      ],
      [
+      {
+       "slow": 4,
+       "zone_control": 4
+      },
       {
        "disengage": 2,
        "stun": 2
@@ -318780,6 +319877,11 @@
   },
   "MAIN_HOLYSTAFF": {
    "cap_delivery": {
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    },
     "peel": {
      "escalation": {
       "value": 0.08
@@ -318803,7 +319905,8 @@
      "HOLYHOT"
     ],
     "heal_burst": [
-     "HOLYDESPERATEPRAYER2"
+     "HOLYDESPERATEPRAYER2",
+     "HOLYFLASH"
     ],
     "heal_sustain": [
      "HEALINGBEAM"
@@ -318831,7 +319934,8 @@
     "always": {},
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -318841,6 +319945,9 @@
       "HEALINGBEAM",
       "HOLYHOT",
       "PULSINGHEAL"
+     ],
+     [
+      "HOLYFLASH"
      ]
     ],
     "slots": [
@@ -318859,6 +319966,11 @@
       },
       {
        "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 4
       }
      ]
     ]
@@ -318909,6 +320021,20 @@
    "unique_name": "MAIN_HOLYSTAFF"
   },
   "MAIN_HOLYSTAFF_AVALON": {
+   "cap_delivery": {
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
+    }
+   },
    "capabilities": {
     "buff_allies": 4,
     "disengage": 4,
@@ -318930,7 +320056,8 @@
      "DIVINE_JUMP"
     ],
     "heal_burst": [
-     "DIVINE_JUMP"
+     "DIVINE_JUMP",
+     "HOLYFLASH"
     ],
     "heal_sustain": [
      "HEALINGBEAM"
@@ -318942,7 +320069,8 @@
      "DIVINE_JUMP"
     ],
     "peel": [
-     "DIVINE_JUMP"
+     "DIVINE_JUMP",
+     "PULSINGHEAL"
     ],
     "self_sustain": [
      "DIVINE_JUMP"
@@ -318963,7 +320091,8 @@
     "always": {},
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -318971,7 +320100,11 @@
      ],
      [
       "HOLYHOT",
-      "HEALINGBEAM"
+      "HEALINGBEAM",
+      "PULSINGHEAL"
+     ],
+     [
+      "HOLYFLASH"
      ]
     ],
     "slots": [
@@ -318991,6 +320124,14 @@
       },
       {
        "heal_sustain": 4
+      },
+      {
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 4
       }
      ]
     ]
@@ -319048,6 +320189,13 @@
      "max_targets": 10,
      "radius": 5.0,
      "spell": "HOLYFLASH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
     }
    },
    "capabilities": {
@@ -319062,7 +320210,8 @@
    "display_name": "Lifetouch Staff",
    "evidence": {
     "buff_allies": [
-     "HOLYTOUCH"
+     "HOLYTOUCH",
+     "HOLYHOT"
     ],
     "cleanse": [
      "HOLYTOUCH"
@@ -319071,10 +320220,12 @@
      "HOLYFLASH"
     ],
     "heal_sustain": [
-     "HOLYTOUCH"
+     "HOLYTOUCH",
+     "HEALINGBEAM"
     ],
     "peel": [
-     "HOLYTOUCH"
+     "HOLYTOUCH",
+     "PULSINGHEAL"
     ]
    },
    "full_healer": false,
@@ -319093,11 +320244,17 @@
     "always": {},
     "slot_names": [
      "e",
+     "w",
      "q"
     ],
     "slot_spells": [
      [
       "HOLYTOUCH"
+     ],
+     [
+      "HEALINGBEAM",
+      "HOLYHOT",
+      "PULSINGHEAL"
      ],
      [
       "HOLYFLASH"
@@ -319110,6 +320267,17 @@
        "cleanse": 4,
        "heal_sustain": 4,
        "peel": 4
+      }
+     ],
+     [
+      {
+       "heal_sustain": 4
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "peel": 2
       }
      ],
      [
@@ -319224,7 +320392,8 @@
      "DEFENSIVESLAM"
     ],
     "engage": [
-     "MACELEAP"
+     "MACELEAP",
+     "CHARGE_ROOT"
     ],
     "interrupt": [
      "CHARGE_ROOT"
@@ -319289,6 +320458,7 @@
      ],
      [
       {
+       "engage": 2,
        "interrupt": 2,
        "root": 5
       },
@@ -319299,7 +320469,8 @@
      ],
      [
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -319463,13 +320634,15 @@
      "CHARGE_ROOT"
     ],
     "slow": [
-     "MACE_CRYSTAL_FRAGMENT_STORM"
+     "MACE_CRYSTAL_FRAGMENT_STORM",
+     "SACRED_GROUND"
     ],
     "tankiness": [
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "MACE_CRYSTAL_FRAGMENT_STORM"
+     "MACE_CRYSTAL_FRAGMENT_STORM",
+     "SACRED_GROUND"
     ]
    },
    "full_healer": false,
@@ -319502,6 +320675,7 @@
       "GUARDRUNE"
      ],
      [
+      "SACRED_GROUND",
       "DEFENSIVESLAM"
      ]
     ],
@@ -319528,7 +320702,12 @@
      ],
      [
       {
-       "buff_allies": 3
+       "slow": 2,
+       "zone_control": 2
+      },
+      {
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -319762,7 +320941,8 @@
        "zone_control": 2
       },
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -319892,7 +321072,8 @@
      "CLEANSEHEAL"
     ],
     "heal_burst": [
-     "CIRCLEOFLIFE"
+     "CIRCLEOFLIFE",
+     "CLEANSEHEAL"
     ],
     "heal_sustain": [
      "CIRCLEOFLIFE"
@@ -319962,7 +321143,8 @@
        "knockback_displace": 2
       },
       {
-       "cleanse": 4
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
        "buff_allies": 4
@@ -320129,7 +321311,8 @@
      ],
      [
       "BRAMBLESEED",
-      "CLEANSEHEAL"
+      "CLEANSEHEAL",
+      "NATURERESILIENCE"
      ],
      [
       "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -320153,6 +321336,9 @@
       {
        "cleanse": 4,
        "heal_burst": 2
+      },
+      {
+       "buff_allies": 4
       }
      ],
      [
@@ -320272,7 +321458,7 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
+    "buff_allies": 4,
     "cleanse": 4,
     "heal_burst": 2,
     "heal_sustain": 4,
@@ -320287,7 +321473,8 @@
    "display_name": "Forgebark Staff",
    "evidence": {
     "buff_allies": [
-     "DUAL_NATURE"
+     "DUAL_NATURE",
+     "NATURERESILIENCE"
     ],
     "cleanse": [
      "CLEANSEHEAL"
@@ -320339,7 +321526,8 @@
      ],
      [
       "BRAMBLESEED",
-      "CLEANSEHEAL"
+      "CLEANSEHEAL",
+      "NATURERESILIENCE"
      ],
      [
       "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -320363,6 +321551,9 @@
       {
        "cleanse": 4,
        "heal_burst": 2
+      },
+      {
+       "buff_allies": 4
       }
      ],
      [
@@ -320430,6 +321621,11 @@
      "radius": 4.0,
      "spell": "CLEANSEHEAL"
     },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
     "knockback_displace": {
      "escalation": {
       "value": 0.08
@@ -320473,7 +321669,8 @@
      "CLEANSEHEAL"
     ],
     "heal_burst": [
-     "NATURE_ULTIMATE_SINGLE"
+     "NATURE_ULTIMATE_SINGLE",
+     "CLEANSEHEAL"
     ],
     "heal_sustain": [
      "NATURE_ULTIMATE_SINGLE"
@@ -320539,7 +321736,8 @@
        "knockback_displace": 2
       },
       {
-       "cleanse": 4
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
        "buff_allies": 4
@@ -320669,13 +321867,15 @@
      "RAPIERSTAB"
     ],
     "catch": [
-     "RAPIERSTAB"
+     "RAPIERSTAB",
+     "SKILLSHOT_TELEPORT"
     ],
     "disengage": [
      "GROUNDDASH"
     ],
     "engage": [
-     "RAPIERSTAB"
+     "RAPIERSTAB",
+     "QDASH"
     ],
     "execute": [
      "RAPIERSTAB"
@@ -320687,7 +321887,8 @@
      "DEEPCUTS"
     ],
     "mobility": [
-     "RAPIERSTAB"
+     "RAPIERSTAB",
+     "QDASH"
     ],
     "peel": [
      "SKILLSHOT_TELEPORT"
@@ -320740,6 +321941,7 @@
       "PASSIVE_HEALTHCHANCE_DAGGER"
      ],
      [
+      "QDASH",
       "SUNDERARMOR2"
      ]
     ],
@@ -320762,6 +321964,7 @@
        "interrupt": 2
       },
       {
+       "catch": 2,
        "peel": 2,
        "stun": 2
       }
@@ -320772,6 +321975,10 @@
       }
      ],
      [
+      {
+       "engage": 2,
+       "mobility": 4
+      },
       {
        "resist_shred": 2
       }
@@ -320886,7 +322093,8 @@
    "display_name": "Bedrock Mace",
    "evidence": {
     "anti_dive": [
-     "PRIMALSLAM"
+     "PRIMALSLAM",
+     "GUARDRUNE"
     ],
     "buff_allies": [
      "DEFENSIVESLAM"
@@ -320902,6 +322110,7 @@
     ],
     "peel": [
      "PRIMALSLAM",
+     "GUARDRUNE",
      "DEFENSIVESLAM"
     ],
     "root": [
@@ -320914,7 +322123,8 @@
      "WEAPON_STATS"
     ],
     "zone_control": [
-     "PRIMALSLAM"
+     "PRIMALSLAM",
+     "SACRED_GROUND"
     ]
    },
    "full_healer": false,
@@ -320943,7 +322153,8 @@
       "PRIMALSLAM"
      ],
      [
-      "CHARGE_ROOT"
+      "CHARGE_ROOT",
+      "GUARDRUNE"
      ],
      [
       "SACRED_GROUND",
@@ -320964,14 +322175,20 @@
        "engage": 2,
        "interrupt": 2,
        "root": 5
+      },
+      {
+       "anti_dive": 2,
+       "peel": 4
       }
      ],
      [
       {
-       "slow": 2
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "buff_allies": 3
+       "buff_allies": 3,
+       "peel": 2
       }
      ]
     ]
@@ -321106,7 +322323,8 @@
      "MIGHTYSWING"
     ],
     "catch": [
-     "MIGHTYSWING"
+     "MIGHTYSWING",
+     "HAMSTRINGSWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -321133,7 +322351,8 @@
      "MIGHTYSWING"
     ],
     "slow": [
-     "MIGHTYSWING"
+     "MIGHTYSWING",
+     "HAMSTRINGSWORD"
     ],
     "sustained_dps": [
      "HEROICSTRIKE2"
@@ -321165,6 +322384,7 @@
      ],
      [
       "DEFENSERUN",
+      "HAMSTRINGSWORD",
       "SPLITTINGSLASH",
       "PARRY"
      ],
@@ -321188,6 +322408,10 @@
      [
       {
        "disengage": 2
+      },
+      {
+       "catch": 2,
+       "slow": 2
       },
       {
        "peel": 2,
@@ -321332,7 +322556,8 @@
      "DASHDMG"
     ],
     "mobility": [
-     "DASHDMG"
+     "DASHDMG",
+     "CHARGINGBLADE"
     ],
     "peel": [
      "DASHDMG"
@@ -321378,6 +322603,7 @@
       "DASHDMG"
      ],
      [
+      "CHARGINGBLADE",
       "GROUNDSPEAR",
       "LEGBREAKER",
       "SKILLSHOT_PULL",
@@ -321401,6 +322627,9 @@
       }
      ],
      [
+      {
+       "mobility": 2
+      },
       {
        "slow": 2
       },
@@ -321544,7 +322773,8 @@
      "SPEARTHROW"
     ],
     "catch": [
-     "SPEARTHROW"
+     "SPEARTHROW",
+     "LEGBREAKER"
     ],
     "mobility": [
      "CHARGINGBLADE"
@@ -321601,6 +322831,7 @@
      [
       "CHARGINGBLADE",
       "GROUNDSPEAR",
+      "LEGBREAKER",
       "SKILLSHOT_PULL",
       "DEFLECTINGSTANCE"
      ],
@@ -321627,6 +322858,9 @@
       },
       {
        "slow": 2
+      },
+      {
+       "catch": 2
       },
       {
        "root": 2
@@ -321758,7 +322992,8 @@
      "LANCE_CHARGE"
     ],
     "mobility": [
-     "LANCE_CHARGE"
+     "LANCE_CHARGE",
+     "CHARGINGBLADE"
     ],
     "purge": [
      "LANCE_CHARGE"
@@ -321804,8 +323039,9 @@
       "LANCE_CHARGE"
      ],
      [
-      "LEGBREAKER",
+      "CHARGINGBLADE",
       "GROUNDSPEAR",
+      "LEGBREAKER",
       "SKILLSHOT_PULL",
       "DEFLECTINGSTANCE"
      ],
@@ -321827,10 +323063,13 @@
      ],
      [
       {
-       "catch": 2
+       "mobility": 2
       },
       {
        "slow": 2
+      },
+      {
+       "catch": 2
       },
       {
        "root": 2
@@ -321947,7 +323186,8 @@
      "MIGHTYBLOW"
     ],
     "catch": [
-     "MIGHTYBLOW"
+     "MIGHTYBLOW",
+     "HAMSTRINGSWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -321962,7 +323202,8 @@
      "MIGHTYBLOW"
     ],
     "mobility": [
-     "MIGHTYBLOW"
+     "MIGHTYBLOW",
+     "HEROICSTRIKE2"
     ],
     "peel": [
      "SPLITTINGSLASH"
@@ -322036,6 +323277,7 @@
        "disengage": 2
       },
       {
+       "catch": 2,
        "slow": 2
       },
       {
@@ -322048,6 +323290,7 @@
      ],
      [
       {
+       "mobility": 4,
        "sustained_dps": 4
       }
      ],
@@ -322160,7 +323403,8 @@
      "DEFENSERUN"
     ],
     "mobility": [
-     "SWORD_BERSERK_RUN_RE"
+     "SWORD_BERSERK_RUN_RE",
+     "HEROICSTRIKE2"
     ],
     "peel": [
      "SPLITTINGSLASH"
@@ -322178,7 +323422,8 @@
      "HAMSTRINGSWORD"
     ],
     "sustained_dps": [
-     "SWORD_BERSERK_RUN_RE"
+     "SWORD_BERSERK_RUN_RE",
+     "HEROICSTRIKE2"
     ]
    },
    "full_healer": false,
@@ -322198,6 +323443,7 @@
     "slot_names": [
      "e",
      "w",
+     "q",
      "passive"
     ],
     "slot_spells": [
@@ -322209,6 +323455,9 @@
       "HAMSTRINGSWORD",
       "SPLITTINGSLASH",
       "PARRY"
+     ],
+     [
+      "HEROICSTRIKE2"
      ],
      [
       "PASSIVE_ARMORCHANCE_SWORD"
@@ -322237,6 +323486,12 @@
       },
       {
        "reflect": 2
+      }
+     ],
+     [
+      {
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [

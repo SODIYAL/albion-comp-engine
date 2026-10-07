@@ -303,6 +303,9 @@ Rules a change must not break. The decision behind each is logged in
 - **Judged at roster size**: the roster scores at its actual size; `PLANNED`
   steers forge fill and warnings only. Killboard display buckets key off the plan.
 - **One spell per slot**: supply comes from resolved combos, never a kit's union.
+  Every sheet row scores on its own spell's bundle; two spells of one item
+  carrying the same capability merge by the maximum (a sheet score is the
+  item's total with that spell equipped), never by a sum.
 - **Structural floors are source-aware**: hard floors read weapon+loadout supply
   only (weapon units); worn gear never buys floor relief. Synergy is
   weapon-interaction synergy, never gear.

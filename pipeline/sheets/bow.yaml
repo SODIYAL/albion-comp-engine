@@ -2,7 +2,14 @@
 # identity) and any override of a shared row. The tree's shared Q/W/passive
 # rows (Deadly Shot; Ray of Light, Frost Shot, Speed Shot; Slow Poison; the
 # base stats) live in pools/bow.yaml and compose into every bow that can
-# equip them (sheets_lib.compose).
+# equip them (sheets_lib.compose). Every row scores on its own spell
+# (build_dataset.build_loadout; a WEAPON_STATS row is always on): an own row
+# and a shared row of the same capability on different spells both score,
+# and the member reads the larger, never the sum (engine._merge_max, F43).
+# An `except:` entry is a deliberate non-take of a shared row (curation
+# judgment). An E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score; the named spell's shared row, where it has
+# one, still scores on its own slot, and the larger reads.
 
 # Bow — the pure kiter. The E (Enchanted Quiver) is an auto-attack steroid
 # (+50% AA speed, +280% physical AA damage for 4 arrows) that punishes
@@ -13,11 +20,6 @@
 - weapon: 2H_BOW                     # Bow — the pure kiter
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/bow.yaml)
-  except:
-    - {cap: disengage, evidence: JUMPSHOT2}
-    - {cap: mobility, evidence: SPEEDSHOT2}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 6, evidence: SPEEDARCHER_KITE}  # E: AA steroid, anti-proximity kite design
     - {cap: mobility,      score: 4, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
@@ -39,10 +41,6 @@
 - weapon: 2H_BOW_CRYSTAL             # Skystrider Bow — untargetable perch artillery
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/bow.yaml)
-  except:
-    - {cap: disengage, evidence: JUMPSHOT2}
-    - {cap: mobility, evidence: SPEEDSHOT2}
   capabilities:
     - {cap: disengage,     score: 4, evidence: AIR_RAID}          # E: leap to an air foothold, UNTARGETABLE 3.75s
     - {cap: burst_aoe,     score: 4, evidence: AIR_RAID}          # 123 AoE bolts, recastable x3
@@ -81,11 +79,9 @@
                               # in the item stats bank
   # deliberate non-takes of shared rows (pools/bow.yaml)
   except:
-    - {cap: resist_shred, evidence: DEADLYSHOT}
     - {cap: catch, evidence: GROUNDARROW}    # no own catch row: withholds Ray of Light's catch (curation judgment)
     - {cap: peel, evidence: GROUNDARROW}     # no own peel row: withholds Ray of Light's peel (curation judgment)
     - {cap: disengage, evidence: JUMPSHOT2}  # no own disengage row: withholds Frost Shot's disengage (curation judgment)
-    - {cap: slow, evidence: PASSIVE_SLOWPOISON}
     - {cap: mobility, evidence: SPEEDSHOT2}  # no own mobility row: withholds Speed Shot's mobility (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: ARROWRAIN}   # Rain of Arrows (E)
@@ -93,15 +89,12 @@
     - {cap: slow,          score: 4, evidence: ARROWRAIN}
     # resist_shred 2 from the Piercing Arrows passive: each auto-attack
     # lowers the target's Defense by 2% for 3s (4 stacks); the pool's Deadly
-    # Shot row is excepted
+    # Shot row (2) scores on its own Q, and the larger reads
     - {cap: resist_shred,  score: 2, evidence: PASSIVE_ARMOR_PIERCE_STACK}
 
 - weapon: 2H_LONGBOW_UNDEAD          # Whispering Bow — glass-cannon AA bow
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/bow.yaml)
-  except:
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
     # the E also lowers the wielder's Defense by 35% (the glass side of the

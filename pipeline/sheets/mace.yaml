@@ -1,19 +1,20 @@
 # Maces: one entry per weapon of the mace tree. An entry carries the
 # weapon's own rows: its E (the weapon's identity) and any override of a
-# shared row. The shared Q/W/passive rows (Snare Charge, Guard Rune,
-# Sacred Ground, Defensive Slam, WEAPON_STATS tankiness 4) live in
-# pools/mace.yaml and compose into every mace that can equip them
-# (sheets_lib.compose). Most `except:` entries drop a shared row whose
-# capability the weapon's E row already carries, so a capability keeps
-# one row; an E-row comment that names a Q/W spell marks that spell's
-# share of the E row's score.
+# shared row. The shared Q/W/passive rows (Snare Charge, Guard Rune, Sacred
+# Ground, Defensive Slam, WEAPON_STATS tankiness 4) live in pools/mace.yaml
+# and compose into every mace that can equip them (sheets_lib.compose).
+# Every row scores on its own spell's slot, a WEAPON_STATS row on every
+# loadout (build_dataset.build_loadout): an own row and a shared row of one
+# capability on different spells both score, and the member reads the
+# larger, never the sum (engine._merge_max). An E-row comment that names a
+# Q, W or passive spell marks that spell's share of the E row's score; the
+# named spell's shared row of that capability, where the pool has one, still
+# scores on its own slot (the larger reads). An `except:` entry is a
+# deliberate non-take of a shared row (curation judgment).
 
 - weapon: 2H_DUALMACE_AVALON         # Oathkeepers — aurora support tank
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/mace.yaml)
-  except:
-    - {cap: engage, evidence: CHARGE_ROOT}
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: BLESSED_MACES}   # E: group MS aurora + 400 absorb shields + heal
     - {cap: heal_sustain, score: 2, evidence: BLESSED_MACES}   # 30 Health to 10 allies in 8m per auto-attack for 5s
@@ -22,11 +23,6 @@
 - weapon: 2H_FLAIL                   # Morning Star — the mass-root field
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/mace.yaml)
-  except:
-    - {cap: engage, evidence: CHARGE_ROOT}
-    - {cap: root, evidence: CHARGE_ROOT}
-    - {cap: peel, evidence: GUARDRUNE}
   capabilities:
     - {cap: root,         score: 6, evidence: ROOTFIELD}       # E: Gravitas — channeled 5m root IGNORING CC resistance
     - {cap: engage,       score: 4, evidence: ROOTFIELD}       # Close In dash into the field
@@ -40,7 +36,6 @@
   # deliberate non-takes of shared rows (pools/mace.yaml)
   except:
     - {cap: root, evidence: CHARGE_ROOT}  # no own root row: withholds Snare Charge's 2.56s root (curation judgment)
-    - {cap: peel, evidence: GUARDRUNE}
   capabilities:
     - {cap: tankiness,  score: 6, evidence: WEAPON_STATS}    # override of the pool's 4
     - {cap: silence,    score: 6, evidence: SHRIEKMACE}    # E: Battle Howl, a 2.33s silence on every enemy in a 6m circle
@@ -62,7 +57,6 @@
   role_hint: tank             # fielded as Tank in data/published_comps/timothy_blap_blackzone_roam_2026_08.yaml
   # deliberate non-takes of shared rows (pools/mace.yaml)
   except:
-    - {cap: engage, evidence: CHARGE_ROOT}
     - {cap: slow, evidence: SACRED_GROUND}          # no own slow row: withholds Sacred Ground's slow (curation judgment)
     - {cap: zone_control, evidence: SACRED_GROUND}  # no own zone_control row: withholds Sacred Ground's zone_control (curation judgment)
   capabilities:
@@ -74,10 +68,6 @@
 - weapon: MAIN_MACE_CRYSTAL          # Dreadstorm Monarch — storm-combo tank
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/mace.yaml)
-  except:
-    - {cap: slow, evidence: SACRED_GROUND}
-    - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
     - {cap: slow,         score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # E: the Eye of the Storm, 6-9m around the wielder for 5s, slows by 25%
     - {cap: resist_shred, score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # -18% resistances on everyone in the storm
@@ -97,13 +87,8 @@
 - weapon: MAIN_ROCKMACE_KEEPER       # Bedrock Mace — the air-jet wall
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/mace.yaml)
-  except:
-    - {cap: peel, evidence: GUARDRUNE}
-    - {cap: anti_dive, evidence: GUARDRUNE}
-    - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: PRIMALSLAM}  # E: the jets knock enemy players back 18m: a knock-away wall, not offensive repositioning (curation judgment)
     - {cap: peel,         score: 6, evidence: PRIMALSLAM}      # the 4s jet wall knocks divers off the backline and covers the retreat: that job is peel, not disengage (self-escape), and the lint grounds knockbacks as peel (curation judgment)
     - {cap: zone_control, score: 2, evidence: PRIMALSLAM}      # the jets hold the line they occupy
-    - {cap: anti_dive,    score: 2, evidence: PRIMALSLAM}      # divers get knocked 18m back; MASTERSHEET tune:sheets sets 6 (golden T19)
+    - {cap: anti_dive,    score: 2, evidence: PRIMALSLAM}      # divers get knocked 18m back; MASTERSHEET tune:sheets re-ranks this own row to 6 (golden T19); the pool's Guard Rune row keeps its 2 on the W, and the member reads the E's 6 (golden T53)

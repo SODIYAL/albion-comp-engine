@@ -576,10 +576,10 @@ for _name, _errors, _parts in (
         ("a duplicate pool row", _pool_err, ("pools/mace.peel:", "duplicate row"))):
     _check_quiet(f"lint: {_name} is an ERROR", _says(_errors, *_parts),
                  "; ".join(_errors)[:300])
-_check_quiet("lint: an own row identical to the pool row it shadows is a "
-             "WARNING, not an ERROR",
-             _says(_sheet_warn, "MAIN_MACE.peel:", "row it shadows")
-             and not _says(_sheet_err, "MAIN_MACE.peel:"), str(_sheet_warn))
+_check_quiet("lint: an own row identical to the pool row it shadows is an "
+             "ERROR (the shared row applies on its own spell)",
+             _says(_sheet_err, "MAIN_MACE.peel:", "row it shadows"),
+             "; ".join(_sheet_err)[:300])
 _legacy = el.lint_sheet(os.path.join(_fx, "bad_sheet_fixture.yaml"))[0]
 _check_quiet("lint: the grounding error classes of bad_sheet_fixture.yaml all "
              "fail (rule 2 equippability, rule 3 grounding)",

@@ -1,19 +1,22 @@
 # dagger tree: the Q/W/passive rows the eight daggers share. A row composes
 # into every dagger that can equip its evidence spell (WEAPON_STATS:
-# tree-wide). A weapon's own row with the same (cap, evidence) is that
-# weapon's deliberate override of the shared row (magnitude RULE queue,
-# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
-# weapon. (QW): the row holds only while the player equips that Q or W
-# spell. Weapon entries: sheets/dagger.yaml; Black Hands
-# (sheets/knuckles.yaml) carries the same menu under the knuckles
-# subcategory, so these rows do not reach it.
-# Not scored:
-#   - resist_shred on Assassin Spirit: it lowers the caster's own Defense
-#     (-4%), a self-debuff; resist_shred grounds on Sunder Armor.
-#   - tankiness on Chain Slash: damage immunity while charging is momentary,
-#     not frontline durability (pseudo-tankiness, VALIDATION.md).
-#   - silence on Forbidden Stab: an instant interrupt is not a cast-denial
-#     window (interrupt row below).
+# tree-wide, always on) and scores on that spell beside any own row of the
+# same capability on another spell: the member reads the larger, never the
+# sum (engine._merge_max, F43). A weapon's own row with the same (cap,
+# evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry, a
+# deliberate non-take (curation judgment), drops the row from that weapon.
+# (QW): the row holds only while the player equips that Q or W spell. Weapon
+# entries: sheets/dagger.yaml. Black Hands (sheets/knuckles.yaml) carries
+# the same menu under the knuckles subcategory: its own tree pool reaches
+# none of its menu spells, so every spell row here composes into it as well,
+# and the WEAPON_STATS row stays with the dagger tree
+# (sheets_lib.pool_rows_for, F43d). Not scored: - resist_shred on Assassin
+# Spirit: it lowers the caster's own Defense (-4%), a self-debuff;
+# resist_shred grounds on Sunder Armor. - tankiness on Chain Slash: damage
+# immunity while charging is momentary, not frontline durability
+# (pseudo-tankiness, VALIDATION.md). - silence on Forbidden Stab: an instant
+# interrupt is not a cast-denial window (interrupt row below).
 subcategory: dagger
 capabilities:
   - {cap: interrupt, score: 2, evidence: DEEPCUTS}                          # W: Forbidden Stab — "interrupting the target's spell casting" (interrupt taxonomy) (QW)

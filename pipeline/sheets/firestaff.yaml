@@ -2,13 +2,16 @@
 # weapon's own rows: its E (the weapon's identity) and any override of a
 # shared row. The tree's Q/W rows (Fire Wave, Flame Blast, Wall of Flames,
 # the ignite-stacking stand-in) live in pools/firestaff.yaml and compose
-# into every weapon that can equip them (sheets_lib.compose). Most
-# `except:` entries leave off a shared row whose capability the weapon's
-# own row already carries: one slot per capability (VALIDATION.md 10, Form
-# abilities and ally protection graded). An E-row comment that names a Q/W
-# spell or a passive marks that spell's share of the E row's score. Flame
-# Blast's +60% move speed for 1.6s on an ally is a cast-enabler blip:
-# buff_allies 2, never engage, disengage or mobility.
+# into every weapon that can equip them (sheets_lib.compose). Every row
+# scores on its own spell (build_dataset.build_loadout; the WEAPON_STATS
+# stand-in is always on): an own row and a shared row of the same capability
+# on different spells both score, and the member reads the larger, never the
+# sum (engine._merge_max, F43). An `except:` entry is a deliberate non-take
+# of a shared row (curation judgment). An E-row comment that names a Q/W
+# spell or a passive marks that spell's share of the E row's score; the
+# named spell's shared row, where it has one, still scores on its own slot,
+# and the larger reads. Flame Blast's +60% move speed for 1.6s on an ally is
+# a cast-enabler blip: buff_allies 2, never engage, disengage or mobility.
 
 - weapon: 2H_FIRESTAFF               # Great Fire Staff — pillar burst mage
   curated_as_of: 2026-08-12
@@ -19,9 +22,6 @@
 - weapon: 2H_FIRESTAFF_HELL          # Brimstone Staff — the meteor
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/firestaff.yaml)
-  except:
-    - {cap: knockback_displace, evidence: FIRECONE}
   capabilities:
     - {cap: burst_aoe,     score: 6, evidence: METEOR}         # E: 434 in a 5 radius, one impact after 1s
     - {cap: knockback_displace, score: 2, evidence: METEOR}    # the impact knocks every enemy hit back by 3
@@ -35,9 +35,6 @@
 - weapon: 2H_FIRE_RINGPAIR_AVALON    # Dawnsong — anti-heal AoE artillery
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/firestaff.yaml)
-  except:
-    - {cap: zone_control, evidence: FIREWALL}
   capabilities:
     - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 along the line, then the ground fire; W: Raging Flare, 205 in a 5 radius
     - {cap: heal_reduction, score: 4, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire; the -40/-50% one-shot class holds 4 (heal-cut ladder, VALIDATION.md 08, Round 9)
@@ -46,11 +43,6 @@
 - weapon: 2H_INFERNOSTAFF            # Infernal Staff — the fear torch
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/firestaff.yaml)
-  except:
-    - {cap: knockback_displace, evidence: FIRECONE}
-    - {cap: peel, evidence: FIRECONE}
-    - {cap: zone_control, evidence: FIREWALL}
   capabilities:
     - {cap: peel,          score: 4, evidence: HUMAN_TORCH}    # E: AoE FEAR off the burning target: it and every enemy within 4 flee for 1.5s
     - {cap: knockback_displace, score: 2, evidence: HUMAN_TORCH}  # forced flight scatters
@@ -68,10 +60,6 @@
 - weapon: 2H_INFERNOSTAFF_MORGANA    # Blazing Staff — standing-zone DoT artillery
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/firestaff.yaml)
-  except:
-    - {cap: zone_control, evidence: FIREWALL}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: zone_control,   score: 6, evidence: FLAMETORNADO}    # E: a persistent 5 radius tornado; W: Wall of Flames; Q: Burning Field
     - {cap: sustained_dps,  score: 4, evidence: FLAMETORNADO}    # tornado ticks and the burn on enemies who leave; Q: Fire Bolt's ignite stacks; passive: Burn

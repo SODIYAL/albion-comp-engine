@@ -139,6 +139,9 @@ Three layers, never merged:
 
 1. `CompEngine` loads content, effective roster size and playstyle.
 2. Members resolve to their selected / stored / default legal spell combos.
+   Every sheet row scores on its own spell's bundle; within one weapon or
+   gear item, two chosen spells carrying one capability merge by the
+   maximum (a score is the item's total with that spell equipped; F43).
 3. Effective capability supply is computed (weapon + loadout + worn gear).
 4. Fitness evaluates coverage, floors, headroom, overstack and mechanics.
 5. Candidates run one ahead (`roster + 1`) so thresholds that arm on the next

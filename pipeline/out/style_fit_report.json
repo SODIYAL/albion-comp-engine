@@ -2706,7 +2706,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 28,
+   "utility_pts": 29,
    "weak_group_e": false
   },
   "2H_HAMMER_AVALON": {
@@ -2757,7 +2757,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 34,
+   "utility_pts": 35,
    "weak_group_e": false
   },
   "2H_HAMMER_CRYSTAL": {
@@ -3493,7 +3493,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 22,
    "weak_group_e": false
   },
   "2H_KNUCKLES_CRYSTAL": {
@@ -3710,7 +3710,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 16,
+   "utility_pts": 17,
    "weak_group_e": false
   },
   "2H_KNUCKLES_SET1": {
@@ -3763,7 +3763,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 14,
+   "utility_pts": 16,
    "weak_group_e": false
   },
   "2H_KNUCKLES_SET2": {
@@ -3869,7 +3869,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 15,
+   "utility_pts": 16,
    "weak_group_e": false
   },
   "2H_LONGBOW": {
@@ -4438,7 +4438,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 28,
+   "utility_pts": 29,
    "weak_group_e": false
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {

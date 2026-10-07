@@ -11,17 +11,19 @@ POOL SEMANTICS
   - A pool row {cap, score, evidence} applies to every weapon of the pool's
     subcategory (weapon_lines.json) that can EQUIP the evidence spell in any
     slot. Evidence WEAPON_STATS (base item stats, no spell) applies tree-wide.
+  - A weapon whose own tree's pool reaches none of its menu spells takes
+    the spell rows of every pool whose spells it equips (Black Hands: the
+    knuckles subcategory, the dagger Q/W/passive menu). Base-stat rows stay
+    with the weapon's own tree. pool_rows_for() is the one reading of this.
   - A weapon entry may list `except: [{cap, evidence}, ...]` — deliberate
-    non-takes. Previously "this weapon doesn't play that spell that way" was
-    indistinguishable from an oversight; now it is explicit and greppable.
+    non-takes: a shared row this weapon does not receive.
   - A weapon's own row with the same (cap, evidence) pair OVERRIDES the pool
-    row — this is where score drift lives until curation resolves it
-    (magnitude audit RULE queue), visible instead of scattered.
+    row: that weapon's deliberate score for the shared spell.
 
 Composed row order: the weapon's own rows first (sheet order), then
-applicable pool rows in pool-file order. Measured at the restructure: no
-weapon has two evidence rows for one capability, so order carries no
-semantics.
+applicable pool rows in pool-file order. Every row scores on its own
+spell (build_dataset.build_loadout), and two rows of one capability merge
+by the maximum (engine._merge_max), so the order carries no semantics.
 
 The consumers of per-weapon capability rows go through compose() —
 build_dataset, evidence_lint, build_magnitude_review, build_stat_chart —
@@ -78,6 +80,25 @@ def equippable(line):
             for s in ids}
 
 
+def pool_rows_for(line, pools):
+    """The shared rows a weapon can receive, before its own rows and
+    excepts: its tree pool (subcategory), or — when that pool reaches none
+    of its menu spells — the spell rows of every pool whose spells it
+    equips. Base-stat rows (WEAPON_STATS) come from its own tree only."""
+    if line is None:
+        return []
+    sub = line.get("subcategory")
+    own_pool = pools.get(sub, [])
+    equip = equippable(line)
+    if any(r.get("evidence") in equip for r in own_pool):
+        return list(own_pool)
+    borrowed = [r for s, rows in sorted(pools.items()) if s != sub
+                for r in rows
+                if r.get("evidence") not in NON_SPELL_EVIDENCE
+                and r.get("evidence") in equip]
+    return list(own_pool) + borrowed
+
+
 def compose(entry, line, pools):
     """The weapon's full capability row list: own rows + applicable pool rows.
 
@@ -87,8 +108,7 @@ def compose(entry, line, pools):
     pools: load_pools() result.
     """
     own = [c for c in (entry.get("capabilities") or []) if isinstance(c, dict)]
-    sub = (line or {}).get("subcategory")
-    pool_rows = pools.get(sub, []) if line is not None else []
+    pool_rows = pool_rows_for(line, pools)
     if not pool_rows:
         return list(own)
     equip = equippable(line)

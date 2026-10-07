@@ -1,8 +1,10 @@
 # Actives every pair of plate boots shares (dumps menu: DODGE, SPRINTHOT
 # beside the item's own third active). Composed into every SHOES_PLATE
-# item; an item's own row for the same pair overrides (the Soldier Boots
-# sheet carries Rejuvenating Sprint at the same scores). Calibration as
-# shoes_cloth.yaml.
+# item; each row scores on its own active (build_dataset.build_loadout),
+# beside the item's own rows of the same capability: a pair equips one
+# active, so the two are alternatives, never a sum. An item's own row for
+# the same (cap, evidence) pair overrides the shared row; a repeat at the
+# same score fails evidence_lint. Calibration as shoes_cloth.yaml.
 tree: SHOES_PLATE
 curated_as_of: 2026-10-03
 capabilities:

@@ -4,18 +4,17 @@
 # Cleanse, Frazzle, Empowering Beam; Lingering Power) live in
 # pools/arcanestaff.yaml and compose into every arcane staff that can equip
 # them (sheets_lib.compose). The utility tree: five of its eight weapons sit
-# outside the pure_dps role set (templates/scoring.yaml). Most `except:`
-# entries leave off a shared row whose capability the weapon's own row
-# already carries (one slot per capability, T53). An E-row comment that
-# names a Q/W spell marks that spell's share of the E row's score.
+# outside the pure_dps role set (templates/scoring.yaml). Every row scores
+# on its own spell (build_dataset.build_loadout): an own row and a shared
+# row of the same capability on different spells both score, and the member
+# reads the larger, never the sum (engine._merge_max; F43, T53). An E-row
+# comment that names a Q/W spell or a passive marks that spell's share of
+# the E row's score; the named spell's shared row, where it has one, still
+# scores on its own slot, and the larger reads.
 
 - weapon: 2H_ARCANESTAFF             # Great Arcane Staff — the time-freeze support
   curated_as_of: 2026-08-12
   role_hint: support
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: peel, evidence: SHIELDFRIENDLY}
-    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: stun,         score: 4, evidence: TIME_FREEZE}    # E: 2.5s AoE stasis, ignores CC resistance
     - {cap: peel,         score: 4, evidence: TIME_FREEZE}    # freeze the dive (targets are damage-immune too)
@@ -25,9 +24,6 @@
 - weapon: 2H_ARCANESTAFF_CRYSTAL     # Astral Staff — starfall artillery
   curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: sustained_dps, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
   capabilities:
     - {cap: burst_aoe,    score: 4, evidence: STARFALL_DOT}   # E: 63/0.6s in 8m around the caster
     - {cap: zone_control, score: 2, evidence: STARFALL_DOT}   # standing in the shower is a choice
@@ -36,9 +32,6 @@
 - weapon: 2H_ARCANESTAFF_HELL        # Occult Staff — the corridor enabler
   curated_as_of: 2026-08-12
   role_hint: support
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: buff_allies, evidence: EMPOWERBEAM}
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: ARCANECORRIDOR} # E: +60% MS/AA speed corridor for the group, 8s
     - {cap: engage,       score: 4, evidence: ARCANECORRIDOR} # the corridor IS how the comp commits
@@ -64,11 +57,6 @@
 - weapon: 2H_ENIGMATICORB_MORGANA    # Malevolent Locus — the cleanse bubble
   curated_as_of: 2026-10-04
   role_hint: support
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: cleanse, evidence: CLEANSESPEED2}
-    - {cap: peel, evidence: SHIELDFRIENDLY}
-    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: cleanse,      score: 4, evidence: VOID}           # E: growing bubble, CONTINUOUS group cleanse
     - {cap: peel,         score: 2, evidence: VOID}           # the divers' CC on allies inside it is cleansed
@@ -78,10 +66,6 @@
 - weapon: 2H_ENIGMATICSTAFF          # Enigmatic Staff — the bubble-shield support
   curated_as_of: 2026-10-04
   role_hint: support
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: buff_allies, evidence: EMPOWERBEAM}
-    - {cap: anti_dive, evidence: SHIELDFRIENDLY}
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: INVULNERABILITY}  # E: refreshing 240 absorb bubble (via override)
     - {cap: anti_dive,    score: 4, evidence: INVULNERABILITY}  # the bubble is cast from 14m onto the dived ally and re-applies
@@ -91,9 +75,6 @@
 - weapon: MAIN_ARCANESTAFF           # Arcane Staff (1H) — the purge orb
   curated_as_of: 2026-08-12
   role_hint: support
-  # deliberate non-takes of shared rows (pools/arcanestaff.yaml)
-  except:
-    - {cap: silence, evidence: MAGICSHOCK}
   capabilities:
     - {cap: purge,        score: 4, evidence: ARCANEORB2}     # E: purges all buffs in 6r where the skillshot orb hits
     - {cap: silence,      score: 4, evidence: ARCANEORB2}     # 1.68s AoE on the same orb; Q: Magic Shock (QW)

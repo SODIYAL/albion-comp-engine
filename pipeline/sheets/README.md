@@ -22,8 +22,11 @@ Coarse on purpose: finer granularity is false precision.
   fields (`curated_as_of`, `role_hint`, `removed`).
 - `pools/<tree>.yaml` — the tree's shared rows, curated once and composed
   into every weapon of the tree that can equip the evidence spell
-  (`sheets_lib.compose`). An entry's own row with the same capability and
-  evidence replaces the pool row; an `except:` item declines one.
+  (`sheets_lib.compose`). A weapon whose own tree pool reaches none of its
+  menu spells takes the spell rows of the pools whose spells it equips
+  (Black Hands: knuckles subcategory, dagger menu; `sheets_lib.pool_rows_for`).
+  An entry's own row with the same capability and evidence replaces the
+  pool row (and must differ from it); an `except:` item declines one.
 - `gear/<slot>.yaml` — one file per gear slot (`head`, `armor`, `shoes`,
   `offhand`, `cape`, `potion`, `food`); the actives an armor tree shares sit
   in `gear/pools/<slot>_<class>.yaml`, composed by `sheets_lib.compose_gear`.
@@ -31,11 +34,33 @@ Coarse on purpose: finer granularity is false precision.
   (none do): a curated entry shadows one, the lint does not read them, and
   the dataset is not a release while one is present.
 
+## How rows score
+
+Every composed row scores on its OWN spell's loadout bundle
+(`build_dataset.build_loadout`): a player equips one spell per slot, and a
+row counts when its spell is equipped (base-stat rows, `WEAPON_STATS` /
+`GEAR_STATS`, are always on). A score is the weapon's (or gear item's)
+TOTAL for that capability with the spell equipped, not a per-spell
+increment, so two rows of one capability on one weapon or gear item never
+add: the item supplies the larger (`engine._merge_max`, both ports). An E
+row and a shared Q/W row of the same capability on different spells
+therefore both stand (an own row on the same spell replaces the shared
+one); an E-row
+comment that names a Q/W spell marks that spell's share of the E's score,
+and the named spell's own shared row still scores on its own slot.
+Different items and different members add as before. An `except:` item is
+a deliberate non-take: a shared row this weapon does not receive
+(curation judgment, stated in its comment). A MASTERSHEET override
+re-ranks the weapon's own rows of the capability (a weapon with no own row
+of it takes the re-rank on its shared rows); a zero removes the capability
+from every row.
+
 `evidence_lint.py` checks the layout beside the evidence (its rules 4–11;
 an error blocks the release): the schema (known keys only, a score an
 integer 1–7), the capability taxonomy (`CAPABILITIES`; the templates and the
 effect map name nothing outside it), no duplicate row or `except:` item,
 every `except:` item naming a pool row the entry would otherwise receive,
+no own row repeating the shared row it shadows at the same score,
 one definition per weapon key and per gear key, and placement (a weapon
 entry in `sheets/<its subcategory>.yaml`, a gear entry in
 `gear/<its slot>.yaml`, every `sheets/*.yaml` named after a weapon tree);

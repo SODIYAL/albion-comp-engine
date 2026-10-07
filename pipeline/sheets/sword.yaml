@@ -3,10 +3,14 @@
 # shared row. The shared Q/W/passive rows (Heroic Strike, Hamstring,
 # Splitting Slash, Iron Will, Parry Strike, Increased Defense) live in
 # pools/sword.yaml and compose into every sword that can equip them
-# (sheets_lib.compose). Most `except:` entries drop a shared row whose
-# capability the weapon's E row already carries, so a capability keeps
-# one row; an E-row comment that names a Q/W spell marks that spell's
-# share of the E row's score.
+# (sheets_lib.compose). Every row scores on its own spell's slot
+# (build_dataset.build_loadout): an own row and a shared row of one
+# capability on different spells both score, and the member reads the
+# larger, never the sum (engine._merge_max). An E-row comment that names a
+# Q, W or passive spell marks that spell's share of the E row's score; the
+# named spell's shared row of that capability, where the pool has one, still
+# scores on its own slot (the larger reads). An `except:` entry is a
+# deliberate non-take of a shared row (curation judgment).
 #
 # Iron Will grounds nothing offensive: "Grants you immunity to purges" is
 # a purge immunity, and the purge effects the parser read from it are
@@ -20,10 +24,6 @@
 - weapon: 2H_CLAYMORE                # Claymore — immune-charge duellist
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: catch, evidence: HAMSTRINGSWORD}
-    - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: engage,        score: 6, evidence: CLAYMORECHARGE}    # E: CC+debuff+damage-immune 1s charge
     - {cap: catch,         score: 4, evidence: CLAYMORECHARGE}    # charge + 0.8s CC-resist-ignoring stun
@@ -42,9 +42,6 @@
 - weapon: 2H_CLAYMORE_AVALON         # Kingmaker — AoE knock-up wombo sword
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: peel, evidence: SPLITTINGSLASH}
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: MAJESTIC_SMASH}  # E: 6m air-throw, no travel: Hallowfall's air-throw rung, 2 (T13)
     - {cap: peel,          score: 4, evidence: MAJESTIC_SMASH}   # every diver within 6m goes airborne
@@ -63,11 +60,6 @@
 - weapon: 2H_CLEAVER_HELL            # Carving Sword — shred-on-dash bruiser
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: disengage, evidence: DEFENSERUN}
-    - {cap: catch, evidence: HAMSTRINGSWORD}
-    - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: resist_shred,  score: 4, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
     - {cap: engage,        score: 4, evidence: CLAYMORESLASH}    # shred-by-initiation
@@ -94,12 +86,6 @@
 - weapon: 2H_DUALSWORD               # Dual Swords — heroic-charge skirmisher
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: disengage, evidence: DEFENSERUN}
-    - {cap: catch, evidence: HAMSTRINGSWORD}
-    - {cap: mobility, evidence: HEROICSTRIKE2}
-    - {cap: sustained_dps, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: mobility,      score: 6, evidence: SPINATTACK}       # E leap; Q: dash-to-target; W: Blade Cyclone / Heroic Leap
     - {cap: engage,        score: 4, evidence: SPINATTACK}       # CC-immune leap in
@@ -111,10 +97,6 @@
 - weapon: MAIN_SCIMITAR_MORGANA      # Clarent Blade — charge-fork wave slicer
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: catch, evidence: HAMSTRINGSWORD}
-    - {cap: slow, evidence: HAMSTRINGSWORD}
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: MIGHTYSWING}       # E: 170 wave "piercing through all enemies": line-delivered area damage; 3 Heroic Charges add a damage-over-time
     - {cap: silence,       score: 2, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
@@ -124,10 +106,6 @@
 - weapon: MAIN_SWORD                 # Broadsword — leap-interrupt bruiser
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: catch, evidence: HAMSTRINGSWORD}
-    - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: burst_st,      score: 4, evidence: MIGHTYBLOW}        # E: charge-scaled 271 + kill refund
     - {cap: mobility,      score: 4, evidence: MIGHTYBLOW}        # E leap + Q dash
@@ -139,10 +117,6 @@
 - weapon: MAIN_SWORD_CRYSTAL         # Infinity Blade — ramp-and-swipe duellist
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/sword.yaml)
-  except:
-    - {cap: mobility, evidence: HEROICSTRIKE2}
-    - {cap: sustained_dps, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: burst_st,      score: 4, evidence: SWORD_BERSERK_RUN_RE}  # E: +35% damage channel into Limitbreaker swipe
     - {cap: sustained_dps, score: 4, evidence: SWORD_BERSERK_RUN_RE}  # the ramp lasts 6s; heroic engine

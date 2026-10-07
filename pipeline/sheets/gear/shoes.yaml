@@ -1,13 +1,17 @@
 # Shoes, one entry per item. Gear follows the weapon sheets' rules: 1-7
 # scale (2 points = one supply unit), every nonzero score cites an active
-# on the item's dumps menu (out/gear_spells.json). A pair equips ONE
-# active, so rows on different actives are alternatives; the gear-active
-# doctrine (build_dataset resolve_active_doctrine, F36) picks the one that
-# scores. Every pair shares Dodge plus its class's sprint (cloth Energetic,
-# leather Refreshing, plate Rejuvenating; pools/shoes_<class>.yaml); an
-# own row with the same (cap, evidence) overrides the pool row. Anchors:
-# Blink and Evasive Jump read disengage 3; a sprint reads mobility 2.
-# Gatherer sets are not catalogued (non-combat).
+# on the item's dumps menu (out/gear_spells.json), and every row, own or
+# shared, scores on its own active (build_dataset.build_loadout). A pair
+# equips ONE active, so rows on different actives are alternatives: an
+# own row and a shared row of one capability never add
+# (engine._merge_max), and the gear-active doctrine (build_dataset
+# resolve_active_doctrine, F36) picks the one that scores. Every pair
+# shares Dodge plus its class's sprint (cloth Energetic, leather
+# Refreshing, plate Rejuvenating; pools/shoes_<class>.yaml); an own row
+# with the same (cap, evidence) overrides the pool row, and a repeat at
+# the same score fails evidence_lint. Anchors: Blink and Evasive Jump
+# read disengage 3; a sprint reads mobility 2. Gatherer sets are not
+# catalogued (non-combat).
 
 # ---------------------------------------- cloth (pools/shoes_cloth.yaml)
 - gear: SHOES_CLOTH_AVALON           # Sandals of Purity
@@ -184,13 +188,11 @@
 - gear: SHOES_PLATE_SET1             # Soldier Boots
   slot: shoes
   curated_as_of: 2026-08-20
-  # Both rows repeat pools/shoes_plate.yaml's Rejuvenating Sprint at the
-  # same scores. The item's own active, Wanderlust (+10% move speed per
-  # second, up to 8 stacks), has no row: the doctrine's assumed pick
+  # No own rows: the item reads pools/shoes_plate.yaml's Dodge and
+  # Rejuvenating Sprint rows. Its own active, Wanderlust (+10% move speed
+  # per second, up to 8 stacks), has no row: the doctrine's assumed pick
   # supplies nothing from the slot (F36g).
-  capabilities:
-    - {cap: mobility,      score: 2, evidence: SPRINTHOT}        # sprint + heal over 5s
-    - {cap: self_sustain,  score: 2, evidence: SPRINTHOT}
+  capabilities: []
 
 - gear: SHOES_PLATE_SET2             # Knight Boots — Shield Charge
   slot: shoes

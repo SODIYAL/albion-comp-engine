@@ -39,6 +39,13 @@ The scoring core of Comp Forge, in two parity-locked ports:
   exactly the supplied kit and never re-dresses it (naked when none —
   nothing is invented); `refine(gears=)` runs the dressed local search and
   returns `{party, gears}` (gears=None keeps the legacy weapon-only list).
+- **A combo is the larger, never the sum**: `_merge_max` (JS `mergeMax`)
+  merges one weapon's or gear item's always-on capabilities with its chosen
+  bundles by the maximum per capability — the build credits every sheet
+  row to its own spell, and a sheet score is the item's total with that
+  spell equipped. Different items and different members add. A
+  non-stacking spell's count-once share is what it adds over the member's
+  other sources (F43).
 - **Inputs read alike in both ports**: `combos` / `gears` are parallel to the
   party, and a list shorter than the party reads None past its end (the
   default combo, a naked member; F38). `pool=None` reads the default pool;

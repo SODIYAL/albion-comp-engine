@@ -15,6 +15,7 @@
    "2H_CURSEDSTAFF_MORGANA",
    "2H_DEMONICSTAFF",
    "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+   "2H_DUALCROSSBOW_CRYSTAL",
    "2H_DUALCROSSBOW_HELL",
    "2H_FIRESTAFF",
    "2H_FIRESTAFF_HELL",
@@ -269,6 +270,17 @@
      "radius": 11.75,
      "slot": "e",
      "spell": "CROSSBOW_ARMORPIERCER"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
     }
    ],
    "status": "granted"
@@ -434,9 +446,20 @@
      "radius": null,
      "slot": "e",
      "spell": "CRYSTALXBOW"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
     }
    ],
-   "status": "not_granted"
+   "status": "granted"
   },
   "2H_DUALCROSSBOW_HELL": {
    "decisions": [
@@ -886,6 +909,17 @@
      "radius": 7.0,
      "slot": "e",
      "spell": "GROUNDMINE"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
     }
    ],
    "status": "granted"
@@ -1035,6 +1069,17 @@
      "radius": null,
      "slot": "e",
      "spell": "EXPLODING_SHOT"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
     }
    ],
    "status": "granted"

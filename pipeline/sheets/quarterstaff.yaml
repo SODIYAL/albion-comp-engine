@@ -1,9 +1,16 @@
-# Quarterstaffs — one entry per weapon of the quarterstaff tree, carrying the
-# weapon's E (its identity) and any override of a shared row. The tree's
+# Quarterstaffs — one entry per weapon of the quarterstaff tree, carrying
+# the weapon's E (its identity) and any override of a shared row. The tree's
 # shared Q/W/passive rows (Cartwheel; Gale Dance, Stun Run, Forceful Swing,
 # Rising Blow, Separator; Life Leech) live in pools/quarterstaff.yaml and
 # compose into every quarterstaff that can equip them (sheets_lib.compose).
-# Tree identity: displacement and disruption.
+# Every row scores on its own spell (build_dataset.build_loadout; a
+# WEAPON_STATS row is always on): an own row and a shared row of the same
+# capability on different spells both score, and the member reads the
+# larger, never the sum (engine._merge_max, F43). An `except:` entry is a
+# deliberate non-take of a shared row (curation judgment). An E-row comment
+# that names a Q/W spell marks that spell's share of the E row's score; the
+# named spell's shared row, where it has one, still scores on its own slot,
+# and the larger reads. Tree identity: displacement and disruption.
 
 - weapon: 2H_COMBATSTAFF_MORGANA     # Black Monk Staff — anti-shield disruption
   curated_as_of: 2026-08-12
@@ -11,7 +18,6 @@
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
     - {cap: mobility, evidence: CARTWHEEL}  # no own mobility row: withholds Cartwheel's mobility (curation judgment)
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}
   capabilities:
     - {cap: purge,         score: 2, evidence: COMBATSTAFF_SLASH}  # E: breaks damage shields and blocks new ones in a 3s spinning zone — a shield break, ranked below Fists of Avalon's true purge (curation judgment)
     - {cap: zone_control,  score: 2, evidence: COMBATSTAFF_SLASH}  # spinning blade zone
@@ -27,9 +33,6 @@
 - weapon: 2H_DOUBLEBLADEDSTAFF       # Double Bladed Staff — skirmish bruiser
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: mobility, evidence: CARTWHEEL}
   capabilities:
     - {cap: slow,          score: 4, evidence: DASH_KNOCKBACK}   # E: 50% AoE slow for 3s — the signature
     - {cap: mobility,      score: 4, evidence: DASH_KNOCKBACK}   # E leap w/ partial CD refund; Q: Cartwheel
@@ -44,7 +47,6 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
-    - {cap: knockback_displace, evidence: LAUNCHER}
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: QS_CRYSTAL_COMBO}  # E: projections slash + slam
@@ -57,14 +59,11 @@
   role_hint: tank
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
-    - {cap: knockback_displace, evidence: LAUNCHER}
-    - {cap: anti_dive, evidence: QS_WHIRLWIND2}
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
-    - {cap: peel, evidence: SEPARATING_SLAM}
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: QSWHIRLWIND}  # E: 12m knockback ignoring CC resistance, but self-centred: a body commit, useless in the ranged territory/castle fights where displacement matters (curation judgment)
     - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # body-commit peel — of little use at large scale, where Bedrock is far better (curation judgment)
-    - {cap: anti_dive,     score: 4, evidence: QSWHIRLWIND}       # divers in the spin get knocked out; W: Forceful Swing folded in (pool row excepted). MASTERSHEET tune:sheets sets 2 (T19: Bedrock's wall over a contact spin)
+    - {cap: anti_dive,     score: 4, evidence: QSWHIRLWIND}       # divers in the spin get knocked out; W: Forceful Swing folded in (its pool row, 2, scores on its own W; the larger reads). MASTERSHEET tune:sheets re-ranks this row to 2 (T19: Bedrock's wall over a contact spin)
     # tankiness 2 (one unit): the E's +15% resistances (5s) are a momentary,
     # conditional buff, not standing frontline bulk. One unit for the
     # tank-class body plus the buff; two units equated it with Bedrock-class
@@ -86,8 +85,6 @@
   role_hint: tank
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
-    - {cap: mobility, evidence: CARTWHEEL}
-    - {cap: knockback_displace, evidence: LAUNCHER}
     - {cap: sustained_dps, evidence: QSTAFF_COMBO}  # no own sustained_dps row: withholds Gale Dance's sustained_dps (curation judgment)
   capabilities:
     - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing (T13)
@@ -106,12 +103,10 @@
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
-    - {cap: peel, evidence: SEPARATING_SLAM}
-    - {cap: root, evidence: SEPARATING_SLAM}
   capabilities:
     - {cap: root,          score: 4, evidence: SOULSHAKER}        # E: energy wall roots everyone touching it, 3.5s
     - {cap: zone_control,  score: 4, evidence: SOULSHAKER}        # the wall denies the line it stands on
-    - {cap: peel,          score: 4, evidence: SOULSHAKER}        # wall between divers and backline; W: Separator (pool row excepted)
+    - {cap: peel,          score: 4, evidence: SOULSHAKER}        # wall between divers and backline; W: Separator (its pool row, 2, scores on its own W; the larger reads)
     - {cap: catch,         score: 4, evidence: SOULSHAKER}        # cast it ahead of runners
     - {cap: burst_aoe,     score: 2, evidence: SOULSHAKER}        # 125 line
 
@@ -134,9 +129,7 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
-    - {cap: knockback_displace, evidence: LAUNCHER}
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
-    - {cap: peel, evidence: SEPARATING_SLAM}
   capabilities:
     - {cap: knockback_displace, score: 4, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel; the line knock-up is the rubric's S8 case (teammates' damage and CC land)
     - {cap: burst_aoe,     score: 4, evidence: TORNADO}           # 152 through the line

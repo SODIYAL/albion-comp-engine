@@ -1177,23 +1177,35 @@ class Engine:
 
     def _combo_extras(self, weapon):
         """Every one-spell-per-slot loadout as a merged effective-caps dict,
-        in itertools.product order (cached per set_content). Each capability
-        lives in exactly one slot's bundle (build_dataset assigns it to its
-        first evidence spell), so the merge is a plain union + sum with
-        `always`. Treat the returned dicts as read-only."""
+        in itertools.product order (cached per set_content). A capability
+        may sit in several bundles: build_dataset credits every sheet row to
+        its own spell's bundle, and a sheet score is the weapon's TOTAL for
+        that capability with the spell equipped, never a per-spell
+        increment. The merge therefore keeps the largest value per
+        capability across `always` and the chosen bundles (_merge_max).
+        Treat the returned dicts as read-only."""
         extras = self._extras_cache.get(weapon)
         if extras is None:
             always, slots = self._loadout_eff(weapon)
             choices = [slot for slot in slots if slot]
-            extras = []
-            for combo in (itertools.product(*choices) if choices else [()]):
-                extra = dict(always)
-                for b in combo:
-                    for cap, v in b.items():
-                        extra[cap] = extra.get(cap, 0.0) + v
-                extras.append(extra)
+            extras = [self._merge_max(always, combo)
+                      for combo in (itertools.product(*choices) if choices else [()])]
             self._extras_cache[weapon] = extras
         return extras
+
+    @staticmethod
+    def _merge_max(always, bundles):
+        """One item's capability total for a set of chosen bundles: per
+        capability the largest of `always` and the bundles. A sheet row
+        scores the weapon's (or gear item's) total with its spell equipped,
+        so two spells carrying one capability never add; different items
+        and different members do add (build_extra, effective_supply)."""
+        extra = dict(always)
+        for b in bundles:
+            for cap, v in b.items():
+                if cap not in extra or v > extra[cap]:
+                    extra[cap] = v
+        return extra
 
     def _combo_pre(self, weapon):
         """Precomputed hot-path views of _combo_extras (cached per
@@ -1349,13 +1361,8 @@ class Engine:
                 always = self._eff(lo.get("always", {}), dl)
                 slots = [[self._eff(b, dl) for b in slot]
                          for slot in (lo.get("slots") or []) if slot]
-                extras = []
-                for combo in (itertools.product(*slots) if slots else [()]):
-                    extra = dict(always)
-                    for b in combo:
-                        for cap, v in b.items():
-                            extra[cap] = extra.get(cap, 0.0) + v
-                    extras.append(extra)
+                extras = [self._merge_max(always, combo)
+                          for combo in (itertools.product(*slots) if slots else [()])]
             self._gear_cache[key] = extras
         return extras
 
@@ -2200,22 +2207,20 @@ class Engine:
 
     def _raw_member_caps(self, weapon, combo=None):
         """The member's RAW one-spell-per-slot capability points (loadout
-        always + the chosen bundles, sheet 1-7 scale) — content- and
-        style-independent. Weapons without loadout data fall back to the
-        flat sheet capabilities."""
+        always + the chosen bundles, merged by _merge_max, sheet 1-7 scale)
+        — content- and style-independent. Weapons without loadout data fall
+        back to the flat sheet capabilities."""
         extras = self._combo_extras(weapon)
         if combo is None or combo < 0 or combo >= len(extras):
             combo = self.default_combo(weapon)
         lo = self.weapons[weapon].get("loadout") or {}
         if not (lo.get("slots") or lo.get("always")):
             return dict(self.weapons[weapon]["capabilities"])
-        caps = dict(lo.get("always") or {})
         slots = lo.get("slots") or []
-        for oi, ci in self.combo_choices(weapon, combo):
-            if oi < len(slots) and ci < len(slots[oi]):
-                for c, v in slots[oi][ci].items():
-                    caps[c] = caps.get(c, 0) + v
-        return caps
+        return self._merge_max(
+            lo.get("always") or {},
+            [slots[oi][ci] for oi, ci in self.combo_choices(weapon, combo)
+             if oi < len(slots) and ci < len(slots[oi])])
 
     def _pred_contrib(self, weapon, combo=None):
         """frozenset of predicate names this member's SELECTED combo
@@ -2272,21 +2277,31 @@ class Engine:
             return hit
         lo = self.weapons[weapon].get("loadout") or {}
         spells = lo.get("slot_spells") or []
-        _always, slots_eff = self._loadout_eff(weapon)
+        always_eff, slots_eff = self._loadout_eff(weapon)
+        chosen = [(oi, ci) for oi, ci in self.combo_choices(weapon, combo)
+                  if oi < len(slots_eff) and ci < len(slots_eff[oi])]
         out = {}
-        for oi, ci in self.combo_choices(weapon, combo):
+        for oi, ci in chosen:
             if oi >= len(spells) or ci >= len(spells[oi]):
                 continue
             sid = spells[oi][ci]
             caps = self.nonstack.get(sid)
-            if not caps or oi >= len(slots_eff) or ci >= len(slots_eff[oi]):
+            if not caps:
                 continue
             bundle = slots_eff[oi][ci]
             contrib = out.setdefault(sid, {})
             for cap in caps:
                 v = bundle.get(cap, 0.0)
-                if v:
-                    contrib[cap] = contrib.get(cap, 0.0) + v
+                if not v:
+                    continue
+                # the spell's share of the member's total (_merge_max): what
+                # it adds over the member's other sources of the capability
+                other = always_eff.get(cap, 0.0)
+                for oj, cj in chosen:
+                    if (oj, cj) != (oi, ci):
+                        other = max(other, slots_eff[oj][cj].get(cap, 0.0))
+                if v > other:
+                    contrib[cap] = contrib.get(cap, 0.0) + (v - other)
             if not contrib:
                 del out[sid]
         self._ns_cache[(weapon, combo)] = out

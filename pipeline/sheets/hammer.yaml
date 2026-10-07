@@ -3,10 +3,15 @@
 # shared row. The shared Q/W/passive rows (Iron Breaker, Slowing Charge,
 # Power Geyser, Inertia Ring, Life Leech, WEAPON_STATS tankiness) live in
 # pools/hammer.yaml and compose into every hammer that can equip them
-# (sheets_lib.compose). Most `except:` entries drop a shared row whose
-# capability the weapon's E row already carries, so a capability keeps
-# one row; an E-row comment that names a Q/W spell marks that spell's
-# share of the E row's score.
+# (sheets_lib.compose). Every row scores on its own spell's slot, a
+# WEAPON_STATS row on every loadout (build_dataset.build_loadout): an own
+# row and a shared row of one capability on different spells both score, and
+# the member reads the larger, never the sum (engine._merge_max). An E-row
+# comment that names a Q, W or passive spell marks that spell's share of the
+# E row's score; the named spell's shared row of that capability, where the
+# pool has one, still scores on its own slot (the larger reads). An
+# `except:` entry is a deliberate non-take of a shared row (curation
+# judgment).
 #
 # Only a drag or pull creates a clump: a knockback or knock-up displaces
 # enemies or holds them where they stand (golden T12). Hand of Justice's
@@ -27,12 +32,6 @@
 - weapon: 2H_DUALHAMMER_HELL         # Forge Hammers — the walking zone
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/hammer.yaml)
-  except:
-    - {cap: anti_dive, evidence: TAR_RING}
-    - {cap: slow, evidence: TAR_RING}
-    - {cap: zone_control, evidence: TAR_RING}
-    - {cap: tankiness, evidence: WEAPON_STATS}
   capabilities:
     - {cap: tankiness,     score: 4, evidence: GIANTSTEPS}       # E: +30% resistances for 10s; tank line
     - {cap: zone_control,  score: 4, evidence: GIANTSTEPS}       # the 7m slow aura moves with the wielder
@@ -52,17 +51,11 @@
 - weapon: 2H_HAMMER                  # Great Hammer — dash-through stun tank
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/hammer.yaml)
-  except:
-    - {cap: disengage, evidence: CHARGESLOWAE}
-    - {cap: engage, evidence: CHARGESLOWAE}
-    - {cap: mobility, evidence: CHARGESLOWAE}
-    - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 6, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
     # no clump_create: a knockback is not a pull (T12)
     - {cap: stun,          score: 4, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
-    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters), minor; the pool's Power Geyser row (3) is excepted
+    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters), minor; the pool's Power Geyser row (3) scores on its own W; the larger reads
     - {cap: peel,          score: 4, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
     - {cap: catch,         score: 4, evidence: HAMMERTACKLE}     # dash + stun = caught
     - {cap: mobility,      score: 4, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge
@@ -76,12 +69,6 @@
 - weapon: 2H_HAMMER_AVALON           # Hand of Justice — drag-clump tank
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/hammer.yaml)
-  except:
-    - {cap: disengage, evidence: CHARGESLOWAE}
-    - {cap: engage, evidence: CHARGESLOWAE}
-    - {cap: mobility, evidence: CHARGESLOWAE}
-    - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 6, evidence: SPINNING_SMASH}   # E: spin INTO them, dragging the line along
     - {cap: clump_create,  score: 6, evidence: SPINNING_SMASH}   # pulls up to 10 enemies into the slam point
@@ -133,12 +120,6 @@
 - weapon: 2H_RAM_KEEPER              # Grovekeeper — immune-leap engage tank
   curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/hammer.yaml)
-  except:
-    - {cap: disengage, evidence: CHARGESLOWAE}
-    - {cap: engage, evidence: CHARGESLOWAE}
-    - {cap: mobility, evidence: CHARGESLOWAE}
-    - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 6, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
     - {cap: stun,          score: 4, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive

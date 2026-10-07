@@ -275904,6 +275904,7 @@
   "2H_KNUCKLES_SET1": ["pierce"],
   "2H_KNUCKLES_SET2": ["pierce"],
   "2H_KNUCKLES_SET3": ["pierce"],
+  "2H_LONGBOW": ["pierce"],
   "2H_LONGBOW_UNDEAD": ["pierce"],
   "2H_POLEHAMMER": ["pierce", "shield_break"],
   "2H_RAM_KEEPER": ["pierce", "shield_break"],
@@ -276624,6 +276625,12 @@
     {
      "id": "2H_KNUCKLES_SET3",
      "name": "Spiked Gauntlets",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_LONGBOW",
+     "name": "Longbow",
      "source": "derived:kit resist_shred 2",
      "tier": "secondary"
     },

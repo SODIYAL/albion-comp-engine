@@ -29,8 +29,12 @@ Contract (weapon sheets, gear sheets, both pool layers):
   7. no duplicate (cap, evidence, use) row in one entry or pool, no
      duplicate except
   8. every except names a pool row the entry would otherwise receive: the
-     pair is in the tree pool, the entry can equip the spell (or it is
-     WEAPON_STATS) and no own row of the entry already overrides it
+     pair is in the shared rows the entry receives (sheets_lib.pool_rows_for:
+     its tree pool, or the pools whose spells it equips when its own reaches
+     none of its menu), the entry can equip the spell (or it is
+     WEAPON_STATS) and no own row of the entry already overrides it; and no
+     own row repeats the shared row it shadows at the same score and use
+     (every row scores on its own spell, so the shared row already applies)
   9. one definition per weapon key and per gear key
  10. curated_as_of is an ISO date (YYYY-MM-DD); role_hint is in ROLE_HINTS;
      a gear slot is in GEAR_SLOTS and agrees with the game data
@@ -39,10 +43,8 @@ Contract (weapon sheets, gear sheets, both pool layers):
      sheets/pools/<subcategory>.yaml or sheets/gear/pools/<tree>.yaml, and
      every sheets/*.yaml is named after a weapon tree
 
-Warnings: an own row identical to the pool row it shadows (same cap,
-evidence, score, use) changes nothing; a cited spell with neither structured
-effects nor prose flags cannot be verified by rule 3; patch staleness
-(below).
+Warnings: a cited spell with neither structured effects nor prose flags
+cannot be verified by rule 3; patch staleness (below).
 
 Rule 3's boundary is computed, never listed: a capability is checked iff the
 effect map or the prose fallback can produce it at all, less the damage
@@ -435,8 +437,10 @@ def except_problems(subject, excepts, own_rows, pool_rows, can_apply,
     return out
 
 
-def shadow_warnings(subject, own_rows, pool_rows, can_apply, pool_label):
-    """An own row identical to the pool row it shadows changes nothing."""
+def shadow_problems(subject, own_rows, pool_rows, can_apply, pool_label):
+    """An own row identical to the shared row it shadows changes nothing
+    and lets the two drift apart on the next pool edit: an ERROR (every row
+    scores on its own spell, so the shared row already applies)."""
     pool = {}
     for r in pool_rows:
         pool.setdefault((r.get("cap"), r.get("evidence")), r)
@@ -448,7 +452,8 @@ def shadow_warnings(subject, own_rows, pool_rows, can_apply, pool_label):
         if r.get("score") == pr.get("score") and r.get("use") == pr.get("use"):
             out.append(f"{subject}.{r.get('cap')}: the own row repeats the "
                        f"{pool_label} row it shadows ({r.get('evidence')}, "
-                       f"score {r.get('score')}); it changes nothing")
+                       f"score {r.get('score')}); delete it, the shared row "
+                       f"applies")
     return out
 
 
@@ -524,11 +529,16 @@ def lint_weapon_entry(entry, path, index):
     def can_apply(ev):
         return ev in sheets_lib.NON_SPELL_EVIDENCE or ev in equippable
 
-    pool_rows = POOLS.get(sub, [])
-    pool_label = f"sheets/pools/{sub}.yaml"
+    # the shared rows the entry can receive: its tree pool, or the pools
+    # whose spells it equips when its own pool reaches none of its menu
+    # (sheets_lib.pool_rows_for, the build's reading)
+    pool_rows = sheets_lib.pool_rows_for(line, POOLS)
+    pool_label = (f"sheets/pools/{sub}.yaml"
+                  if all(r in POOLS.get(sub, []) for r in pool_rows)
+                  else "the pools whose spells it equips")
     errors += except_problems(wkey, excepts, rows, pool_rows, can_apply,
                               pool_label)
-    warnings += shadow_warnings(wkey, rows, pool_rows, can_apply, pool_label)
+    errors += shadow_problems(wkey, rows, pool_rows, can_apply, pool_label)
 
     cited = set()
     # composed rows: the weapon's own + applicable tree-pool rows, so a
@@ -798,7 +808,7 @@ def lint_gear_entry(entry, path, index):
                   else "any gear pool (the key names no armor tree)")
     errors += except_problems(subject, excepts, rows,
                               GEAR_POOLS.get(tree, []), can_apply, pool_label)
-    warnings += shadow_warnings(subject, rows, pool_rows, can_apply, pool_label)
+    errors += shadow_problems(subject, rows, pool_rows, can_apply, pool_label)
 
     composed = sheets_lib.compose_gear({"gear": gkey, "capabilities": rows,
                                         "except": excepts}, menu, GEAR_POOLS)

@@ -1828,17 +1828,23 @@ def run():
     # 162 dominant 6-7 parties each) and Dreadstorm Monarch (4 of 162): the
     # capability score ranks a wide sheet first whether or not any winner
     # fields the weapon. The pool-fielded gate (F35) keeps generation
-    # inside the pool's list; recorded from a report on the page.
+    # inside the pool's list; recorded from a report on the page. The list
+    # is generated per fold: Claws joined it at the 31,258-battle fold
+    # (284 dominant 6-7 parties), so a named weapon is checked while the
+    # list excludes it (VALIDATION.md, Every sheet row scores on its own
+    # spell).
     e7c = Engine(content="ancient_lands", size=7, style="clap")
     f7 = e7c.forge(7)["party"]
     listed7 = set(e7c.template["pool_fielded"]["6-7"]["weapons"])
-    off7 = {"Claws", "Hand of Justice", "Dreadstorm Monarch"}
+    off7 = {"Claws", "Hand of Justice", "Dreadstorm Monarch"} - {
+        e7c.weapons[w]["display_name"] for w in listed7 if w in e7c.weapons}
     names7 = [e7c.weapons[w]["display_name"] for w in f7]
     r7c = [e7c.role_of(w) for w in f7]
     check("T51 Dragon Portal 6-7 in clap: the forged seven fields only weapons the pool's "
-          "dominant winners field (no Claws, Hand of Justice or Dreadstorm Monarch), with one healer",
+          "dominant winners field (none of Claws, Hand of Justice or Dreadstorm Monarch "
+          "while the list excludes them), with one healer",
           set(f7) <= listed7 and not (off7 & set(names7)) and r7c.count("healer") == 1,
-          f"seven={names7} roles={r7c}")
+          f"seven={names7} roles={r7c} off-list={sorted(off7)}")
 
     # T52 — a transform's form abilities score on the E, and anti_dive
     # counts a protection placed on another ally (tests/VALIDATION.md, the
@@ -1873,7 +1879,10 @@ def run():
     # the ally-protection class under the anti-dive rule: a shield, a damage
     # immunity or a redirection placed on another ally, and a protective
     # zone or aura (tests/VALIDATION.md, Form abilities and ally protection
-    # graded). A capability the E carries leaves the tree pool's Q/W row.
+    # graded). A capability the E carries and the tree pool's Q/W row for
+    # it merge by the maximum: the Q/W keeps its own row and the member
+    # reads the E's value, never the sum (VALIDATION.md, Every sheet row
+    # scores on its own spell).
     def _bundles(w, spell):
         lo = e7p.weapons[w]["loadout"]
         return [b for sl, sp in zip(lo["slots"], lo["slot_spells"])
@@ -1906,13 +1915,18 @@ def run():
         and _has("2H_HOLYSTAFF", "HOLYEXPLOSION", anti_dive=2)
         and e7p.gear["ARMOR_PLATE_KEEPER"]["capabilities"].get("anti_dive") == 2
         and e7p.gear["ARMOR_PLATE_HELL"]["capabilities"].get("anti_dive") == 2)
-    one_slot = (
-        not any("anti_dive" in b for b in _bundles("MAIN_ROCKMACE_KEEPER", "GUARDRUNE"))
-        and not any("anti_dive" in b for b in _bundles("2H_ENIGMATICSTAFF", "SHIELDFRIENDLY"))
-        and not any("anti_dive" in b for b in _bundles("2H_SHAPESHIFTER_SET2", "SHAPE_W_TETHERBEAM")))
+    def _with(w, slot, spell):
+        return e7p._raw_member_caps(w, e7p.combo_from_picks(w, {slot: spell}))
+    one_slot = all(
+        _has(w, spell, anti_dive=2)
+        and _with(w, slot, spell).get("anti_dive") == _e_bundle(w).get("anti_dive")
+        for w, slot, spell in (("MAIN_ROCKMACE_KEEPER", "w", "GUARDRUNE"),
+                               ("2H_ENIGMATICSTAFF", "q", "SHIELDFRIENDLY"),
+                               ("2H_SHAPESHIFTER_SET2", "w", "SHAPE_W_TETHERBEAM")))
     check("T53 graded form abilities sit on each staff's E; a shield, immunity or "
           "redirection on another ally and a protective zone or aura supply anti-dive; "
-          "a weapon whose E holds anti-dive takes none from its tree pool",
+          "a weapon whose E holds anti-dive reads the E's value beside its tree pool's "
+          "row, never the sum",
           forms_ok and protect_ok and zones_ok and one_slot,
           f"forms={forms_ok} protection={protect_ok} zones={zones_ok} one_slot={one_slot}")
 

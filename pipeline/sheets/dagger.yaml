@@ -4,7 +4,15 @@
 # Edge; the AA-speed and Life Leech passives; the base stats) live in
 # pools/dagger.yaml and compose into every dagger that can equip them
 # (sheets_lib.compose). Black Hands carries the same menu under the knuckles
-# subcategory (knuckles.yaml).
+# subcategory (knuckles.yaml) and takes the pool's spell rows, the base
+# stats aside (sheets_lib.pool_rows_for). Every row scores on its own spell
+# (build_dataset.build_loadout; a WEAPON_STATS row is always on): an own row
+# and a shared row of the same capability on different spells both score,
+# and the member reads the larger, never the sum (engine._merge_max, F43).
+# An `except:` entry is a deliberate non-take of a shared row (curation
+# judgment). An E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score; the named spell's shared row, where it has
+# one, still scores on its own slot, and the larger reads.
 
 # Claws — single-target lockdown assassin. The E (Disembowel) pins the target:
 # a channeled root with repeated interrupts and a shield break, ending in a
@@ -17,7 +25,6 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/dagger.yaml)
   except:
-    - {cap: catch, evidence: SKILLSHOT_TELEPORT}
     - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: root,          score: 4, evidence: DISEMBOWEL}          # E: channeled pin, breaks if target moves 6m
@@ -39,10 +46,6 @@
 - weapon: 2H_DAGGERPAIR              # Dagger Pair — charge-burst assassin
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: heal_reduction, evidence: DEEPCUTS}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_st,       score: 6, evidence: EXECUTEDAGGER}      # E: charge-scaled devastating blow + bleed
     - {cap: sustained_dps,  score: 4, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9)
@@ -54,7 +57,6 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/dagger.yaml)
   except:
-    - {cap: mobility, evidence: QDASH}
     - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: CRYSTAL_DAGGER_BLADE_RING}  # E: 6-dagger ring, pierce + DoT ring
@@ -65,8 +67,6 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/dagger.yaml)
   except:
-    - {cap: disengage, evidence: GROUNDDASH}
-    - {cap: mobility, evidence: QDASH}
     - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: burst_st,      score: 4, evidence: BACK_SLASH}        # E: charge-scaled cone up to 238
@@ -87,10 +87,7 @@
   role_hint: melee
   # deliberate non-takes of shared rows (pools/dagger.yaml)
   except:
-    - {cap: disengage, evidence: GROUNDDASH}
     - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # no own sustained_dps row: withholds the Auto-Attack Speed passive's sustained_dps (curation judgment)
-    - {cap: engage, evidence: QDASH}
-    - {cap: mobility, evidence: QDASH}
   capabilities:
     - {cap: burst_st,      score: 4, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
     - {cap: engage,        score: 4, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
@@ -101,12 +98,6 @@
 - weapon: MAIN_DAGGER                # Dagger (1H) — lifesteal AA skirmisher
   curated_as_of: 2026-08-12
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
-    - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
-    - {cap: mobility, evidence: QDASH}
-    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 4, evidence: BLOODTHIRSTYBLADE}  # E: +50 bonus damage per AA steroid
     - {cap: self_sustain,  score: 4, evidence: BLOODTHIRSTYBLADE}  # steals health via bonus damage (self-only)
@@ -135,9 +126,6 @@
   # deliberate non-takes of shared rows (pools/dagger.yaml)
   except:
     - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # no own sustained_dps row: withholds the Auto-Attack Speed passive's sustained_dps (curation judgment)
-    - {cap: engage, evidence: QDASH}
-    - {cap: mobility, evidence: QDASH}
-    - {cap: catch, evidence: SKILLSHOT_TELEPORT}
   capabilities:
     - {cap: mobility,       score: 6, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
     - {cap: execute,        score: 4, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold

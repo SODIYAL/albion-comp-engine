@@ -96,7 +96,7 @@ def load_gear_sheets(gear_lines, gear_spells):
             key = entry.get("gear")
             if not key:
                 continue
-            caps, evidence, uses = {}, {}, {}
+            caps, evidence, rows = {}, {}, []
             for c in sheets_lib.compose_gear(entry, gear_spells.get(key), gear_pools):
                 if not isinstance(c, dict):
                     continue
@@ -108,8 +108,7 @@ def load_gear_sheets(gear_lines, gear_spells):
                     evidence.setdefault(cap, [])
                     if c["evidence"] not in evidence[cap]:
                         evidence[cap].append(c["evidence"])
-                if c.get("use"):
-                    uses[cap] = c["use"]
+                rows.append((cap, score, c.get("evidence"), c.get("use")))
             menu = gear_spells.get(key) or {}
             pseudo_line = {"spells": {"active": menu.get("actives") or [],
                                       "passive": menu.get("passives") or []}}
@@ -145,7 +144,7 @@ def load_gear_sheets(gear_lines, gear_spells):
                                   if entry.get("curated_as_of") else None),
                 "capabilities": caps,
                 "evidence": evidence,
-                "loadout": build_loadout(caps, evidence, pseudo_line, uses),
+                "loadout": build_loadout(rows, pseudo_line),
             }
             if costs:
                 gear[key]["self_costs"] = costs
@@ -153,41 +152,50 @@ def load_gear_sheets(gear_lines, gear_spells):
     return gear
 
 
-def build_loadout(caps, evidence, line, uses=None):
-    """Group a weapon's capabilities by the ability SLOT they come from, so the
-    engine can enforce one-spell-per-slot (a player equips one Q, one W, one E,
-    one passive — not the whole menu). Slot is auto-derived from each
-    capability's evidence spell via the weapon's equippable spell list
-    (weapon_lines[key]["spells"], keyed q/w/e/passive). Capabilities from base
-    stats / auto-attack (evidence WEAPON_STATS, no slot) are "always on".
+def build_loadout(rows, line):
+    """Group a weapon's (or gear item's) composed sheet rows by the ability
+    SLOT they come from, so the engine can enforce one-spell-per-slot (a
+    player equips one Q, one W, one E, one passive — not the whole menu).
+    Every row is credited to its OWN evidence spell's bundle; the slot comes
+    from the equippable spell list (weapon_lines[key]["spells"], keyed
+    q/w/e/passive; a gear item's active/passive menu). Rows from base stats
+    (evidence WEAPON_STATS / GEAR_STATS, no slot) are "always on".
+
+    A capability may therefore sit in several bundles (an E row and a pool
+    Q/W row for the same capability, or two alternative W spells). A sheet
+    score is the item's TOTAL for that capability with the spell equipped,
+    so the engine merges the chosen bundles by the maximum per capability
+    (engine._merge_max), never by a sum. Credit used to go only to the
+    bundle of a capability's first evidence spell, at the capability's
+    highest score, so the other spells lost it (VALIDATION.md, "Every sheet
+    row scores on its own spell").
 
     A sheet may split ONE spell into mutually exclusive `use:` variants
     (Chillhowl's Frozen Crystal saves an ALLY or freezes an ENEMY — never both
     in the same moment); each (spell, use) pair becomes its own bundle in the
     spell's slot, so the engine scores one use, not the union.
 
+    rows: [(cap, score, evidence, use)] — the composed rows after the
+    MASTERSHEET overrides, zero scores dropped.
+
     Returns {"always": {cap: score}, "slots": [[bundle, ...], ...],
              "slot_names": [game slot per entry in slots],
              "slot_spells": [[spell id per bundle], ...]} where each bundle is
     one spell-use's {cap: score} and each inner list is the mutually-exclusive
     choices for one slot. slot_names/slot_spells let the dashboard map a
-    player's actual Q/W/passive picks onto the scored bundles. Measured on
-    the curated sheets: 1278/1319 cap-entries resolve to exactly one slot,
-    0 span multiple slots, 41 are WEAPON_STATS."""
+    player's actual Q/W/passive picks onto the scored bundles."""
     spell_slot = {}
     for slot, ids in ((line or {}).get("spells", {}) or {}).items():
         for sid in ids:
             spell_slot.setdefault(sid, slot)
-    uses = uses or {}
     always, bundles = {}, {}
-    for cap, score in caps.items():
-        slot_spell = next(((spell_slot[sp], sp) for sp in evidence.get(cap, [])
-                           if sp in spell_slot), None)
-        if slot_spell:
-            key = slot_spell + (uses.get(cap),)
-            bundles.setdefault(key, {})[cap] = score
+    for cap, score, ev, use in rows:
+        slot = spell_slot.get(ev)
+        if slot is None:
+            always[cap] = max(always.get(cap, 0), score)
         else:
-            always[cap] = score
+            b = bundles.setdefault((slot, ev, use), {})
+            b[cap] = max(b.get(cap, 0), score)
     slots, spells = {}, {}
     for (slot, sp, _use), b in bundles.items():
         slots.setdefault(slot, []).append(b)
@@ -205,10 +213,11 @@ def load_sheets(weapon_lines, tune_sheets=None):
 
     tune_sheets (MASTERSHEET.md tune:sheets): {WEAPON: {cap: score}} curated
     score overrides, applied at the ROW level so they flow into caps AND
-    loadout bundles. An override may re-rank or remove (score 0) a
-    capability the composed sheet already grounds — it may NOT invent a new
-    one (that needs a sheet row with evidence); unmatched overrides fail
-    the build."""
+    loadout bundles: a re-rank lands on the weapon's own rows of that
+    capability (on the shared rows when it has no own row), a zero removes
+    the capability from every row. An override may NOT invent a new
+    capability (that needs a sheet row with evidence); unmatched overrides
+    fail the build."""
     weapons, sources = {}, {}
     pools = sheets_lib.load_pools()
     overrides = tune_sheets or {}
@@ -223,28 +232,40 @@ def load_sheets(weapon_lines, tune_sheets=None):
             # curated always wins; never let illustrative overwrite it
             if weapons.get(key, {}).get("status") == "curated" and status != "curated":
                 continue
-            caps, evidence, uses = {}, {}, {}
+            caps, evidence, rows = {}, {}, []
+            # an override re-ranks the weapon's OWN rows of the capability
+            # (its own judgment of its spells); a weapon with no own row of
+            # it takes the override on the shared rows it receives. Pool
+            # rows of a capability the weapon scores itself keep the tree's
+            # score for their spell. A zero removes the capability from
+            # every row.
+            own = [c for c in (entry.get("capabilities") or []) if isinstance(c, dict)]
+            own_keys = {(c.get("cap"), c.get("evidence")) for c in own}
+            own_caps = {c.get("cap") for c in own}
             for c in sheets_lib.compose(entry, weapon_lines.get(key), pools):
                 if not isinstance(c, dict):
                     continue
                 cap, score = c.get("cap"), c.get("score", 0)
                 ov = overrides.get(key)
-                if ov and cap in ov:
+                if ov and cap in ov and (ov[cap] == 0
+                                         or (cap, c.get("evidence")) in own_keys
+                                         or cap not in own_caps):
                     score = ov[cap]
                     unmatched.discard((key, cap))
                 if not cap or not score:
                     continue
-                # a sheet may cite several spells for one capability; the score
-                # is the capability's total, not a per-spell increment
+                # a sheet may cite several spells for one capability; each
+                # score is the capability's total with that spell equipped,
+                # not a per-spell increment: the flat view keeps the largest,
+                # the loadout credits each row to its own spell
                 caps[cap] = max(caps.get(cap, 0), score)
                 if c.get("evidence"):
                     evidence.setdefault(cap, [])
                     if c["evidence"] not in evidence[cap]:
                         evidence[cap].append(c["evidence"])
                 # `use:` marks mutually exclusive uses of ONE spell — the
-                # capability lands in a use-specific loadout bundle
-                if c.get("use"):
-                    uses[cap] = c["use"]
+                # row lands in a use-specific loadout bundle
+                rows.append((cap, score, c.get("evidence"), c.get("use")))
             line = weapon_lines.get(key)
             weapons[key] = {
                 "unique_name": key,
@@ -270,7 +291,7 @@ def load_sheets(weapon_lines, tune_sheets=None):
                 # one-spell-per-slot decomposition for loadout-aware scoring
                 # (engine reads this; flat `capabilities` stays for display +
                 # base-party supply). Auto-derived from evidence spell -> slot.
-                "loadout": build_loadout(caps, evidence, line, uses),
+                "loadout": build_loadout(rows, line),
             }
             sources[key] = os.path.relpath(path, HERE).replace("\\", "/")
 

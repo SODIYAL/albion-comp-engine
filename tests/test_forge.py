@@ -2136,6 +2136,132 @@ def t_kit_options_rest():
           f"{w}: worst={worst:.2e} legacy={worst_l:.2e} differs={differs}")
 
 
+# ---------------------------------------------- F43 every row scores on its own spell
+def t_per_spell_credit():
+    """F43: every composed sheet row is credited to its OWN spell's
+    bundle, and a member's capability is the largest value across its
+    always-on rows and its chosen bundles — a sheet score is the weapon's
+    total with that spell equipped, never a per-spell increment.
+    (a) every spell a capability cites carries that capability in its own
+        bundle, and the largest bundle value equals the flat capability;
+    (b) Mace: Defensive Slam keeps its peel beside Guard Rune's — Charge
+        Root + Defensive Slam has peel, Guard Rune + Defensive Slam reads
+        the larger of the two, not their sum;
+    (c) Bedrock offers Guard Rune again (its W no longer collapses into
+        the E's rows);
+    (d) a weapon whose own tree's pool reaches none of its menu spells
+        takes the spell rows of the pools whose spells it equips (Black
+        Hands: knuckles subcategory, dagger menu), never another tree's
+        base-stat row."""
+    e = Engine(content="castle", size=10)
+    bad = []
+    for w, d in e.weapons.items():
+        lo = d.get("loadout") or {}
+        names = lo.get("slot_names") or []
+        spells = lo.get("slot_spells") or []
+        slots = lo.get("slots") or []
+        by_spell = {}
+        for oi, n in enumerate(names):
+            for sp, b in zip(spells[oi], slots[oi]):
+                for c, v in b.items():
+                    key = (sp, c)
+                    by_spell[key] = max(by_spell.get(key, 0), v)
+        for cap, evs in (d.get("evidence") or {}).items():
+            top = max([v for (sp, c), v in by_spell.items() if c == cap]
+                      + [lo.get("always", {}).get(cap, 0)])
+            if top != d["capabilities"].get(cap):
+                bad.append(f"{w}.{cap} top {top} != flat {d['capabilities'].get(cap)}")
+            for sp in evs:
+                if sp in ("WEAPON_STATS",):
+                    continue
+                if any(sp in s for s in spells) and (sp, cap) not in by_spell:
+                    bad.append(f"{w}.{cap} missing from {sp}'s bundle")
+    check("F43a every cited spell carries its capability in its own bundle; "
+          "the largest bundle value is the flat capability",
+          not bad, "; ".join(bad[:4]))
+
+    lo = e.weapons["MAIN_MACE"]["loadout"]
+    names, spells = lo["slot_names"], lo["slot_spells"]
+
+    def combo_for(picks):
+        return e.combo_from_picks("MAIN_MACE", picks)
+
+    q, wslot = "q", "w"
+    c_root = combo_for({q: "DEFENSIVESLAM", wslot: "CHARGE_ROOT"})
+    c_rune = combo_for({q: "DEFENSIVESLAM", wslot: "GUARDRUNE"})
+    raw_root = e._raw_member_caps("MAIN_MACE", c_root)
+    raw_rune = e._raw_member_caps("MAIN_MACE", c_rune)
+    peel_slam = next(b.get("peel", 0) for sp, b in zip(spells[names.index(q)], lo["slots"][names.index(q)])
+                     if sp == "DEFENSIVESLAM")
+    peel_rune = next(b.get("peel", 0) for sp, b in zip(spells[names.index(wslot)], lo["slots"][names.index(wslot)])
+                     if sp == "GUARDRUNE")
+    check("F43b Mace: Defensive Slam keeps its peel beside Guard Rune's; the "
+          "pair reads the larger, never the sum",
+          peel_slam > 0 and raw_root.get("peel") == peel_slam
+          and raw_rune.get("peel") == max(peel_slam, peel_rune) < peel_slam + peel_rune,
+          f"slam={peel_slam} rune={peel_rune} root+slam={raw_root.get('peel')} "
+          f"rune+slam={raw_rune.get('peel')}")
+
+    blo = e.weapons["MAIN_ROCKMACE_KEEPER"]["loadout"]
+    w_spells = blo["slot_spells"][blo["slot_names"].index("w")]
+    check("F43c Bedrock offers Guard Rune as a W option again",
+          "GUARDRUNE" in w_spells, f"w options {w_spells}")
+
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import sheets_lib
+    lines = sheets_lib.load_weapon_lines()
+    pools = sheets_lib.load_pools()
+    bh = sheets_lib.pool_rows_for(lines["2H_IRONGAUNTLETS_HELL"], pools)
+    dagger_spell_rows = [r for r in pools.get("dagger", [])
+                         if r.get("evidence") != "WEAPON_STATS"]
+    mace = sheets_lib.pool_rows_for(lines["MAIN_MACE"], pools)
+    check("F43d Black Hands takes the dagger pool's spell rows (its menu) and "
+          "no base-stat row of another tree; an ordinary weapon reads its own "
+          "tree pool alone",
+          all(r in bh for r in dagger_spell_rows)
+          and not any(r.get("evidence") == "WEAPON_STATS" and r in pools.get("dagger", []) for r in bh)
+          and mace == pools.get("mace", []),
+          f"black hands rows={len(bh)} dagger spell rows={len(dagger_spell_rows)}")
+
+
+def t_nonstack_marginal():
+    """F43e: the count-once share of a non-stacking spell is what it adds to
+    the member's total (the max merge): Cursed Staff carries no other
+    sustained_dps source (share = the bundle value); Shadowcaller's E row
+    equals its Vile Curse (share zero); a synthetic second source above the
+    curse takes the share to zero, one below it leaves the excess."""
+    e = Engine(content="castle", size=10)
+    w = "MAIN_CURSEDSTAFF"
+    combo = e.default_combo(w)
+    base = e._nonstack_contrib(w, combo)
+    lo = e.weapons[w]["loadout"]
+    always_eff, slots_eff = e._loadout_eff(w)
+    curse = next((slots_eff[oi][ci].get("sustained_dps", 0.0)
+                  for oi, ci in e.combo_choices(w, combo)
+                  if lo["slot_spells"][oi][ci] == "CURSEDOT"), 0.0)
+    ok_base = abs(base.get("CURSEDOT", {}).get("sustained_dps", 0.0) - curse) < 1e-12
+    saved = dict(lo.get("always") or {})
+    try:
+        lo["always"] = dict(saved, sustained_dps=99)
+        e._extras_cache.clear(); e._ns_cache.clear(); e._pre_cache.clear()
+        dominated = e._nonstack_contrib(w, combo)
+        lo["always"] = dict(saved, sustained_dps=1)
+        e._extras_cache.clear(); e._ns_cache.clear(); e._pre_cache.clear()
+        below = e._nonstack_contrib(w, combo)
+    finally:
+        lo["always"] = saved
+        e._extras_cache.clear(); e._ns_cache.clear(); e._pre_cache.clear()
+    sc = "MAIN_CURSEDSTAFF_AVALON"
+    sc_share = e._nonstack_contrib(sc, e.combo_from_picks(sc, {"q": "CURSEDOT"}))
+    check("F43e count-once share = the spell's excess over the member's other "
+          "sources (the bundle value on Cursed Staff; zero on Shadowcaller, whose "
+          "E row equals the curse; zero when dominated; the excess when another "
+          "source is lower)",
+          ok_base and not dominated.get("CURSEDOT") and not sc_share.get("CURSEDOT")
+          and 0.0 < below.get("CURSEDOT", {}).get("sustained_dps", 0.0) < curse,
+          f"curse={curse:.4f} base={base} shadowcaller={sc_share} "
+          f"dominated={dominated} below={below}")
+
 if __name__ == "__main__":
     t_gear_active_doctrine()
     t_invariant()
@@ -2178,6 +2304,8 @@ if __name__ == "__main__":
     t_dressed_nonstack()
     t_swap_review_as_built()
     t_kit_options_rest()
+    t_per_spell_credit()
+    t_nonstack_marginal()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

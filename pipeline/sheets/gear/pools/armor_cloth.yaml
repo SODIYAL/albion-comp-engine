@@ -1,7 +1,10 @@
 # Actives every cloth robe shares (dumps menu: FROSTSHIELD, OUTOFCOMBATHEAL
 # beside the item's own third active). Composed into every ARMOR_CLOTH
-# item; an item's own row for the same pair overrides (the Robe of Purity
-# sheet carries Frost Shield at the same scores).
+# item; each row scores on its own active (build_dataset.build_loadout),
+# beside the item's own rows of the same capability: a robe equips one
+# active, so the two are alternatives, never a sum. An item's own row for
+# the same (cap, evidence) pair overrides the shared row; a repeat at the
+# same score fails evidence_lint.
 #
 # Mend Wounds (OUTOFCOMBATHEAL) has no row: an out-of-combat channel
 # supplies nothing a fight can use.
@@ -11,6 +14,6 @@ capabilities:
   # Frost Shield: +30% damage resistances for 8s, reflects 15% of incoming
   # damage, slows attackers 40% for 2s; 40s cooldown. tankiness 2 as the
   # armor-tree defensive actives read; reflect 1 — the smallest reflect
-  # in the game (the Robe of Purity reading).
+  # in the game (15%, self-only).
   - {cap: tankiness,     score: 2, evidence: FROSTSHIELD}
   - {cap: reflect,       score: 1, evidence: FROSTSHIELD}

@@ -1,15 +1,18 @@
 # Head pieces, one entry per item. Gear follows the weapon sheets' rules:
 # 1-7 scale (2 points = one supply unit), every nonzero score cites an
-# active on the item's dumps menu (out/gear_spells.json). A piece equips
-# ONE active, so rows on different actives are alternatives, never a sum;
-# the gear-active doctrine (build_dataset resolve_active_doctrine, F36)
-# picks the one that scores: the active the recording builds equip, else
-# the item's own (VALIDATION.md "The gear-active doctrine and the gear
-# pools"). Every hood and helmet shares Energizing Shield; cloth adds
-# Force Field, leather Cleanse, plate Stone Skin. Those rows live in
-# pools/head_<class>.yaml and compose into every item whose menu carries
-# them; an own row with the same (cap, evidence) overrides the pool row.
-# Gatherer sets are not catalogued (non-combat).
+# active on the item's dumps menu (out/gear_spells.json), and every row,
+# own or shared, scores on its own active (build_dataset.build_loadout).
+# A piece equips ONE active, so rows on different actives are
+# alternatives: an own row and a shared row of one capability never add
+# (engine._merge_max). The gear-active doctrine (build_dataset
+# resolve_active_doctrine, F36) picks the one that scores: the active the
+# recording builds equip, else the item's own (VALIDATION.md "The
+# gear-active doctrine and the gear pools"). Every hood and helmet shares
+# Energizing Shield; cloth adds Force Field, leather Cleanse, plate Stone
+# Skin. Those rows live in pools/head_<class>.yaml and compose into every
+# item whose menu carries them; an own row with the same (cap, evidence)
+# overrides the pool row, and a repeat at the same score fails
+# evidence_lint. Gatherer sets are not catalogued (non-combat).
 
 # ----------------------------------------- cloth (pools/head_cloth.yaml)
 - gear: HEAD_CLOTH_AVALON            # Cowl of Purity
@@ -93,10 +96,9 @@
   capabilities:
     - {cap: silence,       score: 3, evidence: SMOKEBOMB}        # 5s cloud silences all inside (self too)
     - {cap: zone_control,  score: 2, evidence: SMOKEBOMB}
-    - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}     # the circle includes the caster and fires under CC: a break-out
     # Cleanse is an ALLY cleanse (a 4m circle at the caster's feet, every
-    # ally inside); its cleanse row lives in pools/head_leather.yaml. The
-    # tankiness row repeats the pool's at the same score.
+    # ally inside); its cleanse and tankiness rows live in
+    # pools/head_leather.yaml.
 
 - gear: HEAD_LEATHER_MORGANA         # Stalker Hood
   slot: head
@@ -166,7 +168,6 @@
   capabilities:
     - {cap: stun,          score: 3, evidence: ELECTRICSHOCK}    # expanding AoE 1.5s stun, duration-escalates
     - {cap: anti_dive,     score: 2, evidence: ELECTRICSHOCK}
-    - {cap: tankiness,     score: 2, evidence: STONESKIN}        # +50% defense 4s (repeats the pools/head_plate.yaml row)
 
 - gear: HEAD_PLATE_ROYAL             # Royal Helmet
   slot: head
@@ -197,7 +198,6 @@
     # touches an enemy, so no peel (peel touches the enemy); a group shield
     # cast into the clump earns no anti_dive (the anti-dive rule).
     - {cap: buff_allies,   score: 2, evidence: EMERGENCY_SHIELD}
-    - {cap: tankiness,     score: 2, evidence: STONESKIN}        # +50% defense 4s (repeats the pools/head_plate.yaml row)
 
 - gear: HEAD_PLATE_UNDEAD            # Graveguard Helmet
   slot: head

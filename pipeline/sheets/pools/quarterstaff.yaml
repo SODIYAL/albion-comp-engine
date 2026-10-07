@@ -1,10 +1,13 @@
 # quarterstaff tree: the Q/W/passive rows the eight quarterstaffs share. A
 # row composes into every quarterstaff that can equip its evidence spell
-# (WEAPON_STATS: tree-wide). A weapon's own row with the same
-# (cap, evidence) is that weapon's deliberate override of the shared row
-# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
-# drops the row from that weapon. (QW): the row holds only while the player
-# equips that Q or W spell. Weapon entries: sheets/quarterstaff.yaml.
+# (WEAPON_STATS: tree-wide, always on) and scores on that spell beside any
+# own row of the same capability on another spell: the member reads the
+# larger, never the sum (engine._merge_max, F43). A weapon's own row with
+# the same (cap, evidence) is that weapon's deliberate override of the
+# shared row (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:`
+# entry, a deliberate non-take (curation judgment), drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/quarterstaff.yaml.
 subcategory: quarterstaff
 capabilities:
   - {cap: mobility, score: 2, evidence: CARTWHEEL}                              # Q: Cartwheel 8m dash (QW)

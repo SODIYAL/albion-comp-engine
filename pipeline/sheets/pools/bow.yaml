@@ -1,17 +1,17 @@
 # bow tree: the Q/W/passive rows the eight bows share. A row composes into
-# every bow that can equip its evidence spell (WEAPON_STATS: tree-wide). A
-# weapon's own row with the same (cap, evidence) is that weapon's deliberate
-# override of the shared row (magnitude RULE queue,
-# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
-# weapon. (QW): the row holds only while the player equips that Q or W
-# spell. Weapon entries: sheets/bow.yaml.
-# Not scored:
-#   - knockback_displace on Frost Shot: it knocks the CASTER back 13m, a
-#     self-reposition (disengage row below).
-#   - engage on Speed Shot: self move speed is not initiation.
-#   - tankiness / self_sustain on Deadly Shot: its prose `shield` flag
-#     misfires on the resistance shred; nothing in the bow menu shields or
-#     heals the wielder.
+# every bow that can equip its evidence spell (WEAPON_STATS: tree-wide,
+# always on) and scores on that spell beside any own row of the same
+# capability on another spell: the member reads the larger, never the sum
+# (engine._merge_max, F43). A weapon's own row with the same (cap, evidence)
+# is that weapon's deliberate override of the shared row (magnitude RULE
+# queue, VALIDATION.md 08, Round 9); an `except:` entry, a deliberate
+# non-take (curation judgment), drops the row from that weapon. (QW): the
+# row holds only while the player equips that Q or W spell. Weapon entries:
+# sheets/bow.yaml. Not scored: - knockback_displace on Frost Shot: it knocks
+# the CASTER back 13m, a self-reposition (disengage row below). - engage on
+# Speed Shot: self move speed is not initiation. - tankiness / self_sustain
+# on Deadly Shot: its prose `shield` flag misfires on the resistance shred;
+# nothing in the bow menu shields or heals the wielder.
 subcategory: bow
 capabilities:
   - {cap: resist_shred, score: 2, evidence: DEADLYSHOT}     # Q: stacking -3% x3; Piercing Arrows passive (QW)

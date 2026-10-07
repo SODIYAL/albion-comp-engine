@@ -1,7 +1,10 @@
 # Actives every leather hood shares (dumps menu: ENERGY_BARRIER,
 # SELF_CLEANSE beside the item's own third active). Composed into every
-# HEAD_LEATHER item; an item's own row for the same pair overrides (the
-# Hellion Hood sheet carries Cleanse's tankiness at the same score).
+# HEAD_LEATHER item; each row scores on its own active
+# (build_dataset.build_loadout), beside the item's own rows of the same
+# capability: a hood equips one active, so the two are alternatives,
+# never a sum. An item's own row for the same (cap, evidence) pair
+# overrides the shared row; a repeat at the same score fails evidence_lint.
 tree: HEAD_LEATHER
 curated_as_of: 2026-10-03
 capabilities:
@@ -13,6 +16,6 @@ capabilities:
   # the clump where the smoke reaches a chosen spot at 11m, but on half
   # the smoke's cooldown and castable under CC; the W-slot ten-ally
   # cleanses sit above at 4. tankiness 2 reads the caster's own break-out
-  # from CC (the circle includes the caster), the Hellion Hood's reading.
+  # from CC: the circle includes the caster and fires under CC.
   - {cap: cleanse,       score: 3, evidence: SELF_CLEANSE}
   - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}

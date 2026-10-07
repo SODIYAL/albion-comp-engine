@@ -1,14 +1,18 @@
 # Chest armor, one entry per item. Gear follows the weapon sheets' rules:
 # 1-7 scale (2 points = one supply unit), every nonzero score cites an
-# active on the item's dumps menu (out/gear_spells.json). A chest equips
-# ONE active, so rows on different actives are alternatives; the
-# gear-active doctrine (build_dataset resolve_active_doctrine, F36) picks
-# the one that scores. Every robe shares Frost Shield and every jacket
-# Inferno Shield (pools/armor_cloth.yaml, pools/armor_leather.yaml); Mend
-# Wounds, on every chest, and plate's Taunt score nothing
-# (pools/armor_plate.yaml). An own row with the same (cap, evidence)
-# overrides the pool row. `self_costs` charges what an item costs its own
-# wearer (Demon Armor). Gatherer sets are not catalogued (non-combat).
+# active on the item's dumps menu (out/gear_spells.json), and every row,
+# own or shared, scores on its own active (build_dataset.build_loadout).
+# A chest equips ONE active, so rows on different actives are
+# alternatives: an own row and a shared row of one capability never add
+# (engine._merge_max), and the gear-active doctrine (build_dataset
+# resolve_active_doctrine, F36) picks the one that scores. Every robe
+# shares Frost Shield and every jacket Inferno Shield
+# (pools/armor_cloth.yaml, pools/armor_leather.yaml); Mend Wounds, on
+# every chest, and plate's Taunt score nothing (pools/armor_plate.yaml).
+# An own row with the same (cap, evidence) overrides the pool row; a
+# repeat at the same score fails evidence_lint. `self_costs` charges what
+# an item costs its own wearer (Demon Armor). Gatherer sets are not
+# catalogued (non-combat).
 
 # ---------------------------------------- cloth (pools/armor_cloth.yaml)
 - gear: ARMOR_CLOTH_AVALON           # Robe of Purity
@@ -17,9 +21,6 @@
   capabilities:
     - {cap: knockback_displace, score: 3, evidence: CASTBUBBLE}  # bubble knocks back 12m
     - {cap: peel,          score: 3, evidence: CASTBUBBLE}
-    - {cap: tankiness,     score: 2, evidence: FROSTSHIELD}      # +30% resists 8s, reflects + slows
-    - {cap: reflect,       score: 1, evidence: FROSTSHIELD}      # 15% self-only — the smallest reflect in the game
-    # (both Frost Shield rows repeat the pools/armor_cloth.yaml rows)
 
 - gear: ARMOR_CLOTH_FEY              # Feyscale Robe
   slot: armor

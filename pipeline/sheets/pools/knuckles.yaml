@@ -1,13 +1,17 @@
 # knuckles tree: the Q/W/passive rows the eight knuckles weapons share. A
 # row composes into every knuckles weapon that can equip its evidence spell
-# (WEAPON_STATS: tree-wide). A weapon's own row with the same
-# (cap, evidence) is that weapon's deliberate override of the shared row
-# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
-# drops the row from that weapon. (QW): the row holds only while the player
-# equips that Q or W spell. Weapon entries: sheets/knuckles.yaml;
-# Black Hands, the tree's ninth weapon, carries the dagger menu and takes
-# none of these rows. Not scored: Backhand Strike's +100 damage on a wall
-# collision (no capability axis).
+# (WEAPON_STATS: tree-wide, always on) and scores on that spell beside any
+# own row of the same capability on another spell: the member reads the
+# larger, never the sum (engine._merge_max, F43). A weapon's own row with
+# the same (cap, evidence) is that weapon's deliberate override of the
+# shared row (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:`
+# entry, a deliberate non-take (curation judgment), drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/knuckles.yaml; Black Hands, the tree's ninth
+# weapon, carries the dagger menu: it takes none of these rows and composes
+# the dagger pool's spell rows instead (sheets_lib.pool_rows_for). Not
+# scored: Backhand Strike's +100 damage on a wall collision (no capability
+# axis).
 subcategory: knuckles
 capabilities:
   - {cap: knockback_displace, score: 3, evidence: BACKHAND_KNOCKBACK}        # W: Backhand Strike knocks all enemies hit 9m back (9x5 rect) (QW)
