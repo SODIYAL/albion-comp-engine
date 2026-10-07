@@ -79,6 +79,12 @@ DATASET = os.environ.get("BION_DATASET") or \
 # damage is spread across targets, so neither curve cleanly applies.
 AOE_ESCALATION_CAPS = ("burst_aoe",)
 RESILIENCE_CAPS = ("burst_st", "execute")
+# Two builds of one candidate (combo x kit variant) whose pick values
+# differ by less than this are a tie, and the earlier build in search
+# order keeps it: several combos of one weapon often merge to the same
+# capabilities, and a last-bit difference between the two ports' float
+# arithmetic must not pick a different combo (parity case 41).
+PICK_TIE_EPS = 1e-9
 
 
 class Engine:
@@ -3072,7 +3078,7 @@ class Engine:
                     val, d_fit, d_syn = self._combo_score_dressed(
                         state, weapon, i, extras[i], ov[0], None, ov[1],
                         vgears)
-                if best is None or val > best[0]:
+                if best is None or val > best[0] + PICK_TIE_EPS:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
             best = (0.0, 0.0, 0.0, None, "v0", None)
@@ -4625,7 +4631,7 @@ class Engine:
                 else:
                     val, d_fit, d_syn = self._combo_score_dressed(
                         state, w, i, extras[i], ov[0], None, ov[1], vgears)
-                if best is None or val > best[0]:
+                if best is None or val > best[0] + PICK_TIE_EPS:
                     best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
             return None

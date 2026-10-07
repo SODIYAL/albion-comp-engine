@@ -147,7 +147,8 @@ Three layers, never merged:
 5. Candidates run one ahead (`roster + 1`) so thresholds that arm on the next
    body are anticipated.
 6. Every candidate is evaluated on its best legal loadout, dressed in its
-   doctrine kit.
+   doctrine kit (builds within 1e-9 of each other tie, and the earlier in
+   search order keeps it).
 7. Score = exact marginal fitness + synergy + meta prior ± viability and
    duplicate terms.
 8. `explain()` / `pick_report()` return the per-capability deltas from the same

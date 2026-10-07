@@ -46,6 +46,11 @@ The scoring core of Comp Forge, in two parity-locked ports:
   spell equipped. Different items and different members add. A
   non-stacking spell's count-once share is what it adds over the member's
   other sources (F43).
+- **A near-tie keeps the earlier build**: a candidate's builds (combo x kit
+  variant) whose pick values differ by less than `PICK_TIE_EPS` (1e-9, the
+  parity tolerance) tie, and the earlier build in search order keeps it.
+  Several combos of one weapon often merge to the same capabilities, and a
+  last-bit float difference between the ports must not choose the combo.
 - **Inputs read alike in both ports**: `combos` / `gears` are parallel to the
   party, and a list shorter than the party reads None past its end (the
   default combo, a naked member; F38). `pool=None` reads the default pool;

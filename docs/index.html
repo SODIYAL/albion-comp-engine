@@ -4127,6 +4127,11 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
      AOE_ESCALATION_CAPS / RESILIENCE_CAPS in engine.py. */
   var AOE_ESCALATION_CAPS = ["burst_aoe"];
   var RESILIENCE_CAPS = ["burst_st", "execute"];
+  /* Two builds of one candidate whose pick values differ by less than
+     this are a tie and the earlier build keeps it (mirrors engine.py
+     PICK_TIE_EPS): a last-bit float difference must not pick another
+     combo. */
+  var PICK_TIE_EPS = 1e-9;
 
   var KEY_TIER_RX = /^T\d+_/;
   var KEY_ENCH_RX = /@\d+$/;
@@ -6799,7 +6804,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
                                     null, vgears)
           : this._comboScoreDressed(state, weapon, i, extras[i], ov[0], ov[1],
                                     vgears);
-        if (best === null || cs.val > best.val)
+        if (best === null || cs.val > best.val + PICK_TIE_EPS)
           best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
                    variant: vkey, vgears: vgears };
       }
@@ -8284,7 +8289,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
                                     null, vgears)
           : this._comboScoreDressed(state, w, i, extras[i], ovw[0], ovw[1],
                                     vgears);
-        if (best === null || cs.val > best.val)
+        if (best === null || cs.val > best.val + PICK_TIE_EPS)
           best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
                    variant: vkey, vgears: vgears };
       }

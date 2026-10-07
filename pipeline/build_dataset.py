@@ -23,7 +23,7 @@ AND the evidence lint passes.
 
 Usage:  python3 build_dataset.py [--version 2026.08.1]
 """
-import json, os, glob, argparse, re, subprocess, sys
+import json, os, glob, argparse, math, re, subprocess, sys
 
 try:
     import yaml
@@ -1433,12 +1433,14 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
                 continue
             c = uncond.setdefault(slot, {})
             c[gid] = c.get(gid, 0.0) + wgt
-    total_w = sum(wgt for _b, wgt, _p in pool)
+    # math.fsum: a correctly rounded vote total, the same on every Python
+    # (sum() of floats changed its rounding in 3.12)
+    total_w = math.fsum(wgt for _b, wgt, _p in pool)
     uncond_share = {slot: (max(c.values()) / total_w if total_w else 0.0)
                     for slot, c in uncond.items()}
     sel = {}
     for slot in SLOT_ORDER:
-        pool_w = sum(wgt for _b, wgt, _p in pool)
+        pool_w = math.fsum(wgt for _b, wgt, _p in pool)
         if pool_w < CHAIN_MIN_POOL:
             break
         if (pool_w < CHAIN_POCKET_SHARE * total_w
@@ -1880,7 +1882,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             wk_id = m.get("id")
             wb = kb_by_weapon.get(wk_id) or []
             seat_builds.extend(wb)
-            if sum(w for _g, w, _p in wb) >= 3:      # three votes, not sightings
+            if math.fsum(w for _g, w, _p in wb) >= 3:      # three votes, not sightings
                 w_uni = set(uni) | set(
                     (uni_ext.get(wk_id) or {}).get("classes") or ())
                 sel = _modal_build_chain(wb, w_uni, effect_map, gear,
