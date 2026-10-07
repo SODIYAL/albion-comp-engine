@@ -605,7 +605,7 @@ check('<label for="size-input">Planned size</label>' in SHELL and "<span>size</s
       "L24g the size field is labelled planned size, never size alone")
 check("<label>Suggested size</label>" in SHELL and "Party size presets" not in SHELL,
       "L24h the preset row is labelled as a suggestion")
-count = seg(APP, 'const count = `${party.length}/${PLAN()}`;', "$(\"pdash\").style", "L24 count anchors")
+count = seg(APP, 'const count = `${PARTIES.length > 1', "$(\"pdash\").style", "L24 count anchors")
 check("sbc.title = " in count and "in party" in count and "planned" in count,
       "L24i the count beside the planned size carries a tooltip naming both numbers")
 
@@ -1378,6 +1378,33 @@ check(".pd-act[hidden]{display:none}" in SHELL and ".pdash-actions{margin-bottom
       and ".pd-act span{display:none}" in LAYOUT,
       "L42d a hidden segment stays hidden; on a phone the bar clears the tab bar over the sheet, "
       "and the narrowest keep it on one line with icons only")
+
+print("L43 - a zerg is several parties of 20, each its own comp")
+check("const HARD_CAP = 20;" in APP and 'id="size-input" type="number" min="2" max="20"' in SHELL
+      and "const baseSize = () => Math.min(tplBase(), HARD_CAP);" in APP
+      and ".filter(n => n <= HARD_CAP)" in APP,
+      "L43a the roster cap is the game's party cap (20): the size field, a content's suggested "
+      "size and the presets stop there, a Castle's 25 becoming 20 and party 2")
+check(_pd.find('id="pdash-parties"') >= 0 and _pd.find('id="pdash-parties"') < _pd.find('id="pdash-body"')
+      and ".pdash-parties[hidden]{display:none}" in SHELL
+      and "const multiParty = () => !(tpl().max_size && tpl().max_size <= HARD_CAP);" in APP
+      and "host.hidden = !(all.length > 1 || canAdd);" in APP
+      and "multiParty() && last.party.length >= HARD_CAP" in APP,
+      "L43b the party tabs sit over the board, shown once a second party exists or the last "
+      "party is full on a content that seats more than one (never Dragon Portal or Roads)")
+_snap = seg(APP, "function partySnap(){", "function partiesNow(){", "L43 party state anchors")
+check(all(k in _snap for k in ("party", "PROV", "COMBO", "WHO", "LOADOUT", "PLANNED", "PLAN_TOUCHED", "AVOID"))
+      and 'const ptab = e.target.closest("[data-party-tab]");' in APP
+      and "if (ptab){ switchParty(+ptab.dataset.partyTab); return; }" in APP,
+      "L43c a tab switches the whole slot state: roster, locks, combos, names, kits, the plan "
+      "and the refresh memory; the engine judges and forges the open party alone")
+_save = seg(APP, "function saveHash(){", "function loadStored(){", "L43 save anchors")
+_load = seg(APP, "function loadHash(){", "function sheetView(){", "L43 load anchors")
+check("partyEncode(i + 1, s)" in _save and "`&t=${PARTY_I + 1}`" in _save
+      and "partyNumbers(p)" in _load and 'partyDecode(p, "")' in _load
+      and "if (!nums.length && open.party.length > HARD_CAP){" in _load,
+      "L43d the address carries every party (t names the open one); a one-party link is "
+      "unchanged and a roster past 20 from before the cap opens as parties of 20")
 
 if FAILURES:
 

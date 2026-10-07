@@ -41,7 +41,8 @@ const ROSTER_SWAP_OPTIONS = 3;
 /* a gap below this weight is not listed (the planner's own cut) */
 const ROSTER_GAP_MIN = 0.5;
 
-/* the roster cap the engine is asked for (the planner's HARD_CAP) */
+/* the roster cap the engine is asked for: a CTA's slot bound (the
+   database's 60, three parties of the planner's HARD_CAP) */
 const ROSTER_SIZE_MAX = 60;
 
 const ROSTER_VERDICTS = { ok: "closes a gap", redundant: "a depth pick", negative: "costs the comp" };

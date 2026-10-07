@@ -36,7 +36,9 @@ let SIZE = PLANNED;
    pasted link must degrade to its raw text, never blank the page */
 const safeDecode = s => { try { return decodeURIComponent(s); } catch (e) { return s; } };
 let STYLE = "balanced";
-const HARD_CAP = 60;
+/* The roster cap is the game's party cap: one party seats at most 20. A
+   zerg is several parties (PARTIES below), each its own comp. */
+const HARD_CAP = 20;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"];
 
 const PLAN = () => Math.max(PLANNED, party.length);
@@ -100,7 +102,10 @@ const tpl = () => DATASET.templates[CONTENT];
    included, and the page stayed half-drawn (L19) */
 const REQS = () => ENG.reqs;
 const FLOORS = () => tpl().hard_floors || {};
-const baseSize = () => tpl().base_size || 7;
+/* the template's suggested size, held to one party: a Castle's 25 is a
+   full party of 20 here, the rest in party 2 */
+const tplBase = () => tpl().base_size || 7;
+const baseSize = () => Math.min(tplBase(), HARD_CAP);
 const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 
 const target = cap => ENG.target(cap);
@@ -532,26 +537,50 @@ function loadHash(){
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
   /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
      party (saveHash omits p= when empty, so restore must mirror that).
-     g / f / k decode POSITIONALLY against the ORIGINAL p= list, so unknown
-     weapon keys are dropped from all four arrays TOGETHER — filtering the
-     party alone used to shift loadouts and forged flags onto the wrong
-     members. Cap at HARD_CAP like every roster path. */
-  const rawParty = p.p ? p.p.split(",") : [];
-  const rawLoadout = p.g ? loadoutDecode(p.g) : [];
-  const rawProv = provDecode(p.f || "", rawParty.length);
-  /* `k` carries explicit member combos (forge results whose
-     E-slot use variant no spell picker can express). Optional like g/f. */
-  const rawCombo = comboDecode(p.k || "", rawParty.length);
-  const rawWho = whoFromSession(h, rawParty.length);
-  party = []; LOADOUT = []; PROV = []; COMBO = []; WHO = [];
-  rawParty.forEach((w, i) => {
-    if (!WEAPONS[w] || party.length >= HARD_CAP) return;
-    party.push(w);
-    LOADOUT[party.length - 1] = rawLoadout[i];
-    PROV[party.length - 1] = rawProv[i];
-    COMBO[party.length - 1] = rawCombo[i];
-    WHO[party.length - 1] = rawWho[i] ? { w, name: rawWho[i] } : undefined;
-  });
+     g / f / k decode POSITIONALLY against the ORIGINAL p= list
+     (partyDecode), so unknown weapon keys are dropped from all four arrays
+     TOGETHER — filtering the party alone used to shift loadouts and forged
+     flags onto the wrong members. `k` carries explicit member combos
+     (forge results whose E-slot use variant no spell picker can express).
+     The open party rides the plain fields; in a zerg t names its number
+     and the other parties ride the suffixed fields (partyEncode). Every
+     party holds at most HARD_CAP. */
+  const open = partyDecode(p, "");
+  const rawWho = whoFromSession(h, p.p ? p.p.split(",").length : 0);
+  const nums = partyNumbers(p);
+  const t = parseInt(p.t, 10);
+  const openNo = (nums.length && t >= 1 && t <= PARTIES_MAX && !nums.includes(t)) ? t : 1;
+  const cut = (d, a, b) => ({ party: d.party.slice(a, b), PROV: d.PROV.slice(a, b),
+                              COMBO: d.COMBO.slice(a, b), LOADOUT: d.LOADOUT.slice(a, b),
+                              index: d.index.slice(a, b) });
+  const held = (d, planned, touched, who) => ({
+    party: d.party, PROV: d.PROV, COMBO: d.COMBO, LOADOUT: d.LOADOUT,
+    WHO: who ? d.party.map((w, m) => rawWho[d.index[m]] ? { w, name: rawWho[d.index[m]] } : undefined) : [],
+    PLANNED: planned, PLAN_TOUCHED: touched, AVOID: [], AVOID_SIG: "" });
+  const sized = v => (v >= 2 && v <= HARD_CAP) ? v : HARD_CAP;
+  const parties = [];
+  if (!nums.length && open.party.length > HARD_CAP){
+    /* a roster past one party, from before the party cap: parties of
+       HARD_CAP in its order, the first one open */
+    for (let a = 0; a < open.party.length; a += HARD_CAP){
+      const d = cut(open, a, a + HARD_CAP);
+      parties.push(a ? held(d, Math.max(d.party.length, sized((n || 0) - a)), true, false)
+                     : held(d, PLANNED, PLAN_TOUCHED, true));
+    }
+    PARTY_I = 0;
+  } else {
+    const count = Math.max(openNo, ...nums);
+    for (let j = 1; j <= count; j++){
+      if (j === openNo) parties.push(held(cut(open, 0, HARD_CAP), PLANNED, PLAN_TOUCHED, true));
+      else if (nums.includes(j)){
+        const d = partyDecode(p, String(j));
+        parties.push(held(cut(d, 0, HARD_CAP), sized(d.PLANNED), true, false));
+      } else parties.push(emptyParty());
+    }
+    PARTY_I = openNo - 1;
+  }
+  PARTIES = parties;
+  partyLoad(parties[PARTY_I]);
   FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   REPLACE_OPEN = null; REPLACE_OPTS = [];
@@ -574,7 +603,12 @@ function saveHash(){
   /* while a content's size ask is open the link carries no n=, so a
      reload or a restored session asks again instead of answering with
      the template's suggestion */
-  const h = `c=${CONTENT}${needSize() ? "" : "&n=" + PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}${f ? "&f=" + f : ""}${k ? "&k=" + k : ""}`;
+  /* a zerg adds t (the open party's number) and each other party's
+     suffixed fields; a one-party link carries neither */
+  const all = partiesNow();
+  const zerg = all.length > 1
+    ? `&t=${PARTY_I + 1}` + all.map((s, i) => i === PARTY_I ? "" : partyEncode(i + 1, s)).join("") : "";
+  const h = `c=${CONTENT}${needSize() ? "" : "&n=" + PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}${f ? "&f=" + f : ""}${k ? "&k=" + k : ""}${zerg}`;
   history.replaceState(null, "", "#" + h);
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
@@ -638,6 +672,74 @@ let REPLACE_OPEN = null, REPLACE_OPTS = [];
 /* the replace block's own search: any weapon by name, beside the ranked list */
 let REPLACE_QUERY = "";
 let AVOID = [], AVOID_SIG = "";
+/* A zerg is several parties: the game seats at most HARD_CAP in one.
+   Each party is its own comp — the caller decides what it fields, and the
+   engine judges and forges only the OPEN party. The planner's slot state
+   (party, PROV, COMBO, WHO, LOADOUT, PLANNED, PLAN_TOUCHED, AVOID) is
+   the open party, PARTY_I its index; PARTIES holds every party's state,
+   the open one's entry refreshed whenever it is read. Content and style
+   are the zerg's, shared by every party. */
+let PARTIES = [], PARTY_I = 0;
+/* a content capped at one party (Dragon Portal 20, Roads 7) never offers
+   a second; any other offers the next once the last party is full */
+const multiParty = () => !(tpl().max_size && tpl().max_size <= HARD_CAP);
+function partySnap(){
+  return { party, PROV, COMBO, WHO, LOADOUT, PLANNED, PLAN_TOUCHED, AVOID, AVOID_SIG };
+}
+function partyLoad(s){
+  party = s.party; PROV = s.PROV; COMBO = s.COMBO; WHO = s.WHO || [];
+  LOADOUT = s.LOADOUT || []; PLANNED = s.PLANNED; PLAN_TOUCHED = s.PLAN_TOUCHED;
+  AVOID = s.AVOID || []; AVOID_SIG = s.AVOID_SIG || "";
+}
+/* every party's state, the open one's current */
+function partiesNow(){
+  const all = PARTIES.slice();
+  all[PARTY_I] = partySnap();
+  return all;
+}
+const emptyParty = () => ({ party: [], PROV: [], COMBO: [], WHO: [], LOADOUT: [],
+                            PLANNED: HARD_CAP, PLAN_TOUCHED: true, AVOID: [], AVOID_SIG: "" });
+/* open party k (k === PARTIES.length starts the next one). A party left
+   empty at the end is dropped on the way out; the live-party sync stops,
+   so the game's party never lands in another tab. */
+function switchParty(k){
+  PARTIES = partiesNow();
+  if (k === PARTY_I || k < 0 || k > PARTIES.length || k >= PARTIES_MAX) return;
+  if (k === PARTIES.length) PARTIES.push(emptyParty());
+  if (PARTY_I > 0 && PARTY_I === PARTIES.length - 1 && !PARTIES[PARTY_I].party.length && k < PARTY_I)
+    PARTIES.pop();
+  PARTY_I = k;
+  partyLoad(PARTIES[k]);
+  FORGE_NOTE = null; SHEET_OPEN = null; REPLACE_OPEN = null; REPLACE_OPTS = []; REPLACE_QUERY = "";
+  LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
+  LIVE_SYNC = false;
+  const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
+  hidePdashFly();
+  sortPartyByRole();
+  render();
+}
+/* The party tabs over the board: shown once a zerg has two parties, or
+   when the last party is full on a content that seats more than one; the
+   "+ Party N" tab opens the next. Display only. */
+function renderPartyTabs(){
+  const host = $("pdash-parties");
+  if (!host) return;
+  const all = partiesNow();
+  const last = all[all.length - 1];
+  const canAdd = multiParty() && last.party.length >= HARD_CAP && all.length < PARTIES_MAX;
+  host.hidden = !(all.length > 1 || canAdd);
+  if (host.hidden){ host.innerHTML = ""; return; }
+  const total = all.reduce((t, s) => t + s.party.length, 0);
+  host.innerHTML = all.map((s, i) => {
+    const plan = Math.max(s.PLANNED, s.party.length);
+    return `<button class="pt-tab${i === PARTY_I ? " on" : ""}" type="button" role="tab" data-party-tab="${i}"`
+      + ` aria-selected="${i === PARTY_I}" title="party ${i + 1}: ${s.party.length} of ${plan} planned">`
+      + `Party ${i + 1}<small>${s.party.length}/${plan}</small></button>`;
+  }).join("")
+    + (canAdd ? `<button class="pt-tab pt-add" type="button" data-party-tab="${all.length}"`
+      + ` title="party ${all.length} is full — start party ${all.length + 1}">+ Party ${all.length + 1}</button>` : "")
+    + (all.length > 1 ? `<span class="pt-total" title="every party together">${total} in the zerg</span>` : "");
+}
 let pickFilter = "";
 let treeFilter = "";
 /* Forge-wheel state: the focused weapon rides at 12 o'clock. Roster changes
@@ -674,14 +776,16 @@ function renderSetup(){
   styleSel.value = STYLE;
   $("style-blurb").textContent = (styles[STYLE] || {}).blurb || "";
   $("size-input").value = PLANNED;
-  const presets = sizePrompt() ? sizePrompt().sizes.slice()
-    : [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
+  const presets = (sizePrompt() ? sizePrompt().sizes.slice()
+    : [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b)).filter(n => n <= HARD_CAP);
   $("size-presets").innerHTML = presets.map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
   $("size-hint").textContent = (party.length
     ? `Judged as the ${SIZE} you actually have — the forge fills toward ${PLAN()}.`
     : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`)
-    + ` ${baseSize()} is the starting point for ${tpl().name}, not a cap.`;
+    + (tplBase() > HARD_CAP
+      ? ` ${tplBase()} is the starting point for ${tpl().name}: a party seats ${HARD_CAP}, so the rest go in party 2 (the party board opens it once this party is full).`
+      : ` ${baseSize()} is the starting point for ${tpl().name}, not a cap.`);
   const fitStat = (tpl().fit || {}).stat;
   const borrowedFrom = (tpl().fit || {}).borrowed_from;
   $("size-notice").innerHTML =
@@ -1418,7 +1522,7 @@ function renderHub(keys, idx, recs){
   const hub = body.parentElement;   /* .wheel-hub — carries the aura */
   if (recs === null){
     delete hub.dataset.aura;
-    body.innerHTML = `<div class="hub-empty">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</div>`;
+    body.innerHTML = `<div class="hub-empty">Party ${PARTY_I + 1} is full: ${HARD_CAP} is the most one party seats. ${multiParty() ? `Open party ${PARTY_I + 2} from the party board, or remove someone to explore swaps.` : "Remove someone to explore swaps."}</div>`;
     return;
   }
   if (idx === -1){
@@ -1534,14 +1638,16 @@ function renderWheelFoot(keys, recs, rings){
       ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
       : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
     reseatPickSearch(dash, parked);
-    const count = `${party.length}/${PLAN()}`;
+    /* in a zerg the count names the open party */
+    const count = `${PARTIES.length > 1 ? `P${PARTY_I + 1} · ` : ""}${party.length}/${PLAN()}`;
     const pc = $("pdash-count");
     if (pc) pc.textContent = count;
     const sbc = $("sb-count");
     if (sbc){
       sbc.textContent = count;
-      sbc.title = `${party.length} in party, ${PLAN()} planned`;
+      sbc.title = `${party.length} in party ${PARTY_I + 1}, ${PLAN()} planned`;
     }
+    renderPartyTabs();
     /* tile height divides the viewport by the member count (see .pdash CSS) */
     $("pdash").style.setProperty("--pdn", party.length || 1);
     /* an open flyout survives the re-render (kit edits arrive through
@@ -3261,6 +3367,8 @@ document.addEventListener("click", e => {
   if (opener){ setPanel(opener.dataset.openPanel, true); return; }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
+  const ptab = e.target.closest("[data-party-tab]");
+  if (ptab){ switchParty(+ptab.dataset.partyTab); return; }
   const clr = e.target.closest("#clear, #pdash-clear");
   if (clr){
     /* two-step: first click arms, second within 2.2s clears — a misclick

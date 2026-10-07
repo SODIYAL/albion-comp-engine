@@ -247,5 +247,41 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
   }
 }
 
+/* a zerg in the address: the open party rides the plain fields and every
+   other party its suffixed fields (partyEncode); partyDecode reads one
+   party back, dropping an unknown weapon from every array together */
+{
+  ctx.WEAPONS = {"2H_HAMMER_AVALON": {}, "2H_MACE": {}, "2H_LONGBOW": {}};
+  const head = someKey("head");
+  const parse = s => {
+    const p = {};
+    s.replace(/^[#&]/, "").split("&").forEach(kv => { const i = kv.indexOf("="); if (i > 0) p[kv.slice(0, i)] = kv.slice(i + 1); });
+    return p;
+  };
+  ctx.__s = {party: ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"], PROV: ["l", "f", "m"],
+             COMBO: [2, null, 1], LOADOUT: [{head}, {}, {q: 0}], PLANNED: 18};
+  const enc = vm.runInContext("partyEncode(2, __s)", ctx);
+  ctx.__p = parse(enc);
+  const d = vm.runInContext('partyDecode(__p, "2")', ctx);
+  check("a party's suffixed fields round-trip: roster, locks, combos, kits, planned size",
+        d.party.join(",") === "2H_HAMMER_AVALON,2H_MACE,2H_LONGBOW" && d.PROV.join("") === "lfm"
+        && JSON.stringify(d.COMBO) === "[2,null,1]" && d.LOADOUT[0].head === head
+        && d.LOADOUT[2].q === 0 && d.PLANNED === 18 && !("p" in ctx.__p) && !("n" in ctx.__p), enc);
+  ctx.__q = Object.assign({}, ctx.__p, {p2: "2H_HAMMER_AVALON,NOT_A_WEAPON,2H_LONGBOW"});
+  const u = vm.runInContext('partyDecode(__q, "2")', ctx);
+  check("an unknown weapon drops from every array together: no lock, combo or kit shifts",
+        u.party.join(",") === "2H_HAMMER_AVALON,2H_LONGBOW" && u.PROV.join("") === "lm"
+        && JSON.stringify(u.COMBO) === "[2,1]" && u.LOADOUT[1].q === 0
+        && JSON.stringify(u.index) === "[0,2]", JSON.stringify(u));
+  ctx.__e = {party: [], PROV: [], COMBO: [], LOADOUT: [], PLANNED: 20};
+  const empty = vm.runInContext("partyEncode(3, __e)", ctx);
+  ctx.__z = Object.assign(parse(empty), ctx.__p, {p: "2H_MACE", n: "7", t: "1", p11: "2H_MACE", k12: "1"});
+  const nums = vm.runInContext("partyNumbers(__z)", ctx);
+  const e = vm.runInContext('partyDecode(__z, "3")', ctx);
+  check("an empty party still exists (its n alone); only parties 1 to PARTIES_MAX count, the plain fields never",
+        empty === "&n3=20" && JSON.stringify(nums) === "[2,3]" && e.party.length === 0 && e.PLANNED === 20,
+        `${empty} ${JSON.stringify(nums)}`);
+}
+
 console.log(`\n${pass}/${pass + fail} loadout codec tests passed`);
 process.exit(fail ? 1 : 0);

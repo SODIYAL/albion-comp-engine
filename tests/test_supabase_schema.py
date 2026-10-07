@@ -265,7 +265,7 @@ check(js_code is not None and sql_code is not None and js_code.group(1) == sql_c
       "DB6e the client's join code form is the database's",
       "js %s, sql %s" % (js_code and js_code.group(1), sql_code and sql_code.group(1)))
 
-print("DB7 - saved comps: the client's bounds are the database's and the planner's")
+print("DB7 - saved comps: the client's bounds are the database's, sized to the planner's parties")
 with open(os.path.join(ROOT, "dashboard", "_comps.js"), encoding="utf-8") as f:
     COMPS_JS = f.read()
 with open(os.path.join(ROOT, "dashboard", "_app.js"), encoding="utf-8") as f:
@@ -274,8 +274,10 @@ slots_max = js_const(COMPS_JS, "COMP_SLOTS_MAX")
 hard_cap = js_const(APP_JS, "HARD_CAP")
 sql_slots = set(re.findall(r"position between 1 and (\d+)", ALL)) | set(re.findall(r"jsonb_array_length\(slots\) > (\d+)", ALL))
 sql_size = re.search(r"planned_size between (\d+) and (\d+)", ALL)
-check(slots_max is not None and hard_cap == slots_max and sql_slots == {str(slots_max)},
-      "DB7a COMP_SLOTS_MAX (_comps.js) is the planner's HARD_CAP and the slot bound",
+check(slots_max is not None and hard_cap is not None and slots_max == 3 * hard_cap
+      and sql_slots == {str(slots_max)},
+      "DB7a COMP_SLOTS_MAX (_comps.js) is the slot bound and holds three full parties of the "
+      "planner's party cap (HARD_CAP)",
       "js %s, planner %s, sql %s" % (slots_max, hard_cap, sorted(sql_slots)))
 check(sql_size is not None and int(sql_size.group(1)) == js_const(COMPS_JS, "COMP_SIZE_MIN")
       and int(sql_size.group(2)) == slots_max,

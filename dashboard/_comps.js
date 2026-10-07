@@ -106,9 +106,9 @@ async function deleteTemplate(templateId) {
 /* --------------------------------------------------------------- pure */
 
 /* The database's bounds (supabase/migrations comp_templates;
-   tests/test_supabase_schema.py pins that they agree). The slot cap is
-   the planner's roster cap (HARD_CAP in _app.js, pinned by the layout
-   test). The name bound is ACCOUNT_NAME_MAX (_auth.js). */
+   tests/test_supabase_schema.py pins that they agree). The slot cap holds
+   three full parties of the planner's party cap (HARD_CAP in _app.js).
+   The name bound is ACCOUNT_NAME_MAX (_auth.js). */
 const COMP_SLOTS_MAX = 60;
 const COMP_SIZE_MIN = 2;
 const COMP_NOTES_MAX = 1000;

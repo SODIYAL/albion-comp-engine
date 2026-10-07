@@ -214,9 +214,9 @@ roles.
 
 ## Phase 3 decisions
 
-- **A template is one planner roster.** Slots are positions 1–60, the
-  planner's roster cap (`HARD_CAP`, pinned equal to the slot bound by the
-  schema test); the spec's "party" column is dropped. A ZvZ of several
+- **A template is one planner roster.** Slots are positions 1–60, three
+  full parties of the planner's party cap (`HARD_CAP`, 20; the schema test
+  pins the relation); the spec's "party" column is dropped. A ZvZ of several
   parties is several templates until CTAs need a grouping.
 - **The planner is the editor; the bridge is the address bar.** A comp is
   saved from `location.hash`, the share link the planner already

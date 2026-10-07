@@ -93,11 +93,13 @@ function loItems(slot){
    correct. Separators are chosen to avoid `_`, which appears inside keys. */
 const LO_SEP_MEMBER = "!", LO_SEP_FIELD = ".", LO_UNSET = "-";
 
-function loadoutEncode(){
+/* `list` / `kits` default to the open party (party, LOADOUT); the
+   address also encodes the other parties of a zerg (partyEncode) */
+function loadoutEncode(list = party, kits = LOADOUT){
   const dict = [], at = {};
   const idx = k => (k in at) ? at[k] : (at[k] = dict.push(k) - 1);
-  const recs = (party || []).map((_, i) => {
-    const L = LOADOUT[i] || {};
+  const recs = (list || []).map((_, i) => {
+    const L = kits[i] || {};
     const fields = LO_SLOTS.map(s => (L[s] && loGear(L[s])) ? idx(L[s]).toString(36) : LO_UNSET);
     LO_SPELLS.forEach(s => fields.push(Number.isInteger(L[s]) ? L[s].toString(36) : LO_UNSET));
     return fields.join(LO_SEP_FIELD);
@@ -568,5 +570,51 @@ function comboDecode(str, n){
     const c = parseInt(v, 36);
     out.push(Number.isInteger(c) && c >= 0 ? c : null);
   }
+  return out;
+}
+
+/* ------------------------------------------------- parties <-> the address
+   A zerg is several parties (the game seats at most 20 in one). The open
+   party rides the plain fields (p n g f k), so a one-party link is exactly
+   what it always was and every reader of p= reads the party on screen;
+   party j (1-based) of the others rides the same fields suffixed with j
+   (p2 n2 g2 f2 k2), and t names the open one. */
+const PARTIES_MAX = 10;
+/* party j's fields: n always (an empty party still exists), the rest
+   omitted when empty */
+function partyEncode(j, s){
+  const n = s.party.length;
+  const g = loadoutEncode(s.party, s.LOADOUT || []);
+  const f = provEncode(s.PROV || [], n);
+  const k = comboEncode(s.COMBO || [], n);
+  return `&n${j}=${s.PLANNED}${n ? `&p${j}=${s.party.join(",")}` : ""}`
+    + `${g ? `&g${j}=${g}` : ""}${f ? `&f${j}=${f}` : ""}${k ? `&k${j}=${k}` : ""}`;
+}
+/* the party numbers a parsed address carries besides the open one */
+function partyNumbers(p){
+  const js = new Set();
+  Object.keys(p).forEach(key => {
+    const m = /^[npgfk]([1-9][0-9]?)$/.exec(key);
+    if (m && +m[1] <= PARTIES_MAX) js.add(+m[1]);
+  });
+  return [...js].sort((a, b) => a - b);
+}
+/* one party from a parsed address: suffix "" reads the plain fields.
+   g / f / k decode POSITIONALLY against the original p= list, so an
+   unknown weapon is dropped from every array together; no cap here
+   (the planner splits a legacy roster past the party cap) */
+function partyDecode(p, suffix){
+  const raw = p["p" + suffix] ? p["p" + suffix].split(",") : [];
+  const kits = loadoutDecode(p["g" + suffix] || "");
+  const prov = provDecode(p["f" + suffix] || "", raw.length);
+  const combo = comboDecode(p["k" + suffix] || "", raw.length);
+  const n = parseInt(p["n" + suffix], 10);
+  const out = { party: [], LOADOUT: [], PROV: [], COMBO: [], index: [],
+                PLANNED: Number.isInteger(n) ? n : null };
+  raw.forEach((w, i) => {
+    if (!WEAPONS[w]) return;
+    out.party.push(w); out.LOADOUT.push(kits[i]); out.PROV.push(prov[i]);
+    out.COMBO.push(combo[i]); out.index.push(i);
+  });
   return out;
 }

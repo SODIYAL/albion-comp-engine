@@ -577,9 +577,11 @@ the live roster, on the sheet) are built.
   planner (save, or replace the slots from the planner); the dialog edits
   role labels and notes and removes slots. A weapon picker per slot (the
   profile's combobox) is a later increment if callers ask for it.
-- **Multi-party comps**: a template is one planner roster of up to 60. A
-  ZvZ of several parties is several templates, and a CTA one roster of up
-  to 60, until a grouping is needed.
+- **Multi-party comps**: the planner holds a zerg as parties of 20, one
+  tab each, every party its own comp and the address carrying all of them.
+  A saved comp keeps the open party's slots (its link carries the other
+  parties) and a CTA is one roster of up to 60; a template or sign-up sheet
+  that groups slots by party is the later increment.
 - **Guild invitations beyond the code**: a member joins only by a code an
   officer shares. An officer adding a member by Albion name, or a player
   asking to join, needs a lookup of profiles the reader is not yet allowed
