@@ -14,7 +14,9 @@ on:
 jobs:
   gates:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # test_provenance rebuilds the dataset; with the build chain it outlasts
+    # 30 minutes on a hosted runner, so the limit leaves room past a full run.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
