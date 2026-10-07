@@ -45,12 +45,14 @@
 
 - gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — Energy Reserve
   slot: cape
-  curated_as_of: 2026-08-25
-  # Energy Reserve restores the wearer's own energy over time when a cast
-  # drops it below a threshold: a self proc with nothing ally-targeted in
-  # the dumps, so no buff_allies (directionality rule). The self energy
-  # restore carries no row.
-  capabilities: []
+  curated_as_of: 2026-10-07
+  # Energy Reserve: a cast that leaves the wearer below 40% energy restores
+  # 7% of max energy a second for 10s, then the cape waits 182s at base item
+  # power. A self proc, so no buff_allies (directionality rule); the self
+  # cast economy reads sustained_dps as the Energy Potion and the Royal Cowl
+  # do (2), a step below them for the threshold and the cape cooldown.
+  capabilities:
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_CAPE_LYMHURST}
 
 - gear: CAPEITEM_FW_MARTLOCK         # Martlock Cape — Shield of Protection
   slot: cape

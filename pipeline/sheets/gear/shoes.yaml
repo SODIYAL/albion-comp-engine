@@ -88,6 +88,18 @@
     - {cap: engage,        score: 2, evidence: BLINDSPOT}        # brief invis + speed into the target
     - {cap: burst_st,      score: 2, evidence: BLINDSPOT}        # +90 bonus damage on the next hit
 
+- gear: SHOES_LEATHER_DRAGON         # Dragonslayer Shoes — Burning Momentum
+  slot: shoes
+  curated_as_of: 2026-10-07
+  capabilities:
+    # Burning Momentum: four charges, each +18% move speed for up to 6s;
+    # each of the next four ability uses within the 6s spends a charge and
+    # refunds 15% of the cooldown of every weapon ability slot; 40s
+    # cooldown. Refreshing Sprint's cooldown rate is +33% for 5s in its
+    # buffovertime node (its description repeats the 80% speed value).
+    - {cap: mobility,      score: 2, evidence: WEAPON_SPRINT}    # a sprint (Refreshing Sprint=2); the speed falls a charge per cast
+    - {cap: sustained_dps, score: 2, evidence: WEAPON_SPRINT}    # up to four 15% refunds on Q, W and E: above Refreshing Sprint's cooldown rate (=1), beside Meditation's channel (=2)
+
 - gear: SHOES_LEATHER_FEY            # Mistwalker Shoes
   slot: shoes
   curated_as_of: 2026-08-20

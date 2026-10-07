@@ -1,16 +1,16 @@
 # Axes: one entry per weapon of the axe tree. An entry carries the weapon's
 # own rows: its E (the weapon's identity) and any override of a shared row.
 # The shared Q/W/passive rows (Rending bleeds, Raging Leap, Deadly Chop,
-# Adrenaline Boost, Battle Rush, Life Leech) live in pools/axe.yaml and
-# compose into every axe that can equip them (sheets_lib.compose). Every row
-# scores on its own spell's slot (build_dataset.build_loadout): an own row
-# and a shared row of one capability on different spells both score, and the
-# member reads the larger, never the sum (engine._merge_max). An E-row
-# comment that names a Q, W or passive spell marks that spell's share of the
-# E row's score; the named spell's shared row of that capability, where the
-# pool has one, still scores on its own slot (the larger reads). An
-# `except:` entry is a deliberate non-take of a shared row (curation
-# judgment).
+# Adrenaline Boost, Battle Rush, Life Leech, Increased Defense) live in
+# pools/axe.yaml and compose into every axe that can equip them
+# (sheets_lib.compose). Every row scores on its own spell's slot
+# (build_dataset.build_loadout): an own row and a shared row of one
+# capability on different spells both score, and the member reads the
+# larger, never the sum (engine._merge_max). An E-row comment that names a
+# Q, W or passive spell marks that spell's share of the E row's score; the
+# named spell's shared row of that capability, where the pool has one, still
+# scores on its own slot (the larger reads). An `except:` entry is a
+# deliberate non-take of a shared row (curation judgment).
 #
 # Lifesteal heals the wielder only (directionality rule): Life Leech,
 # Razor Cut and Blood Bandit ground self_sustain, never an ally heal
@@ -31,8 +31,8 @@
 # amplifier, scored as max_health_cut (taxonomy rule: a %-max-health cut
 # is its own capability; execute is kept for low-HP payoffs and kill
 # rewards). The E's prose heal flag fires on that cut and is suppressed
-# (suppress_flags, effect_overrides.yaml); the weapon's heal cut is the
-# shared Rending bleed cap.
+# (suppress_flags, effect_overrides.yaml); the weapon's heal cuts are the
+# shared rows: the Rending bleed cap and Battle Rush.
 
 - weapon: 2H_AXE_AVALON              # Realmbreaker — max-HP-cut slam axe
   curated_as_of: 2026-08-12
@@ -57,7 +57,7 @@
 # ally-side +20% Healing Received (pools/axe.yaml).
 
 - weapon: 2H_DUALAXE_KEEPER          # Bear Paws — diving AoE bruiser
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
   capabilities:
     - {cap: mobility,       score: 6, evidence: DUALAXE_CRAWLER}  # E: CC-immune leap, CD refund on player hit; Q: Raging Leap
@@ -66,7 +66,6 @@
     - {cap: catch,          score: 4, evidence: DUALAXE_CRAWLER}  # repeatable gap-close
     - {cap: burst_aoe,      score: 4, evidence: DUALAXE_CRAWLER}  # 170 cone on impact; W: Internal Bleeding / Raging Blades
     - {cap: self_sustain,   score: 4, evidence: DUALAXE_CRAWLER}  # E: 15% of damage dealt as Health, AoE-fed
-    - {cap: heal_reduction, score: 2, evidence: AXE_CHARGE}       # W: Battle Rush, -20% Healing Received on enemies in 5m for 3s (QW)
 
 - weapon: 2H_HALBERD                 # Halberd — bleed-spread cleaver
   curated_as_of: 2026-08-12
@@ -84,16 +83,12 @@
     - {cap: burst_aoe,     score: 2, evidence: SHOCKWAVE}      # 106 pierce
 
 - weapon: 2H_SCYTHE_CRYSTAL          # Crystal Reaper — dash-zone reaper
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/axe.yaml)
-  except:
-    - {cap: catch, evidence: AXEBOOST}  # no own catch row: withholds Adrenaline Boost's catch (curation judgment)
   capabilities:
     - {cap: mobility,      score: 4, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # E: dash, recastable every 3s while active
     - {cap: engage,        score: 4, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # dash in, CDR zone sustains the brawl
     - {cap: disengage,     score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}
-    - {cap: zone_control,  score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # the 12s area cuts the wielder's weapon cooldowns on each hit inside it; it imposes nothing on enemies
     - {cap: burst_aoe,     score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # 105 to everything on the dash path
 
 - weapon: 2H_SCYTHE_HELL             # Infernal Scythe — the reap execute

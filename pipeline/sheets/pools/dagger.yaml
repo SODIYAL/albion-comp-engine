@@ -9,8 +9,7 @@
 # (QW): the row holds only while the player equips that Q or W spell. Weapon
 # entries: sheets/dagger.yaml. Black Hands (sheets/knuckles.yaml) carries
 # the same menu under the knuckles subcategory: its own tree pool reaches
-# none of its menu spells, so every spell row here composes into it as well,
-# and the WEAPON_STATS row stays with the dagger tree
+# none of its menu spells, so every spell row here composes into it as well
 # (sheets_lib.pool_rows_for, F43d). Not scored: - resist_shred on Assassin
 # Spirit: it lowers the caster's own Defense (-4%), a self-debuff;
 # resist_shred grounds on Sunder Armor. - tankiness on Chain Slash: damage
@@ -18,10 +17,14 @@
 # (pseudo-tankiness, VALIDATION.md). - silence on Forbidden Stab: an instant
 # interrupt is not a cast-denial window (interrupt row below).
 subcategory: dagger
+curated_as_of: 2026-10-07
 capabilities:
+  - {cap: engage, score: 2, evidence: CHAINDASH}                            # W: Chain Slash charges onto up to 3 enemies, invisible and damage-immune (QW)
+  - {cap: disengage, score: 2, evidence: CHAINDASH}                         # W: Chain Slash's invisible, damage-immune charges (QW)
   - {cap: interrupt, score: 2, evidence: DEEPCUTS}                          # W: Forbidden Stab — "interrupting the target's spell casting" (interrupt taxonomy) (QW)
   - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing Received for 1.5"; grounded via heal_flag_meaning: negate (effect_overrides.yaml) (QW)
-  - {cap: disengage, score: 2, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
+  - {cap: disengage, score: 2, evidence: GROUNDDASH}                        # W: Dash out (QW)
+  - {cap: mobility, score: 2, evidence: GROUNDDASH}                         # W: Dash, an 8m dash (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # PASSIVE: +30% AA speed for 3s every 5 AAs
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_DAGGER}    # PASSIVE: Life Leech
   - {cap: engage, score: 2, evidence: QDASH}                                # leap in (QW)
@@ -30,4 +33,3 @@ capabilities:
   - {cap: peel, score: 2, evidence: SKILLSHOT_TELEPORT}                     # the stun works defensively too (QW)
   - {cap: stun, score: 2, evidence: SKILLSHOT_TELEPORT}                     # W: Shadow Edge — 1s skillshot stun (QW)
   - {cap: resist_shred, score: 2, evidence: SUNDERARMOR2}                   # Q: stacking -4% x3 (QW)
-  - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}                  # stacking damage buffs, single-target melee pattern

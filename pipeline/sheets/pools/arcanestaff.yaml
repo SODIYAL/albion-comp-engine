@@ -9,9 +9,11 @@
 # weapon. (QW): the row holds only while the player equips that Q or W
 # spell. Weapon entries: sheets/arcanestaff.yaml.
 subcategory: arcanestaff
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: cleanse, score: 4, evidence: CLEANSESPEED2}                         # W: 10-ally cleanse + MS (QW)
   - {cap: buff_allies, score: 2, evidence: EMPOWERBEAM}                       # W: Empowering Beam, +8% ally damage per 0.25s, 10 stacks (QW)
+  - {cap: disengage, score: 2, evidence: ENIGMA_BLADE}                        # W: Enigma Blade's Flicker teleports with 0.2s damage immunity once the blade hits (QW)
   - {cap: resist_shred, score: 3, evidence: FRAZZLE2}                         # W: Frazzle, -30% Defense for 4s on one target (QW)
   - {cap: silence, score: 2, evidence: MAGICSHOCK}                            # Q: Magic Shock, 0.85s in 3r (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave

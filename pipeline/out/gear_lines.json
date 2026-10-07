@@ -79,6 +79,11 @@
   "name": "Adept's Jacket of Tenacity",
   "slot": "armor"
  },
+ "ARMOR_LEATHER_DRAGON": {
+  "example_item": "T4_ARMOR_LEATHER_DRAGON",
+  "name": "Adept's Dragonslayer Jacket",
+  "slot": "armor"
+ },
  "ARMOR_LEATHER_FEY": {
   "example_item": "T4_ARMOR_LEATHER_FEY",
   "name": "Adept's Mistwalker Jacket",
@@ -137,6 +142,11 @@
  "ARMOR_PLATE_KEEPER": {
   "example_item": "T4_ARMOR_PLATE_KEEPER",
   "name": "Adept's Judicator Armor",
+  "slot": "armor"
+ },
+ "ARMOR_PLATE_PROTOTYPE": {
+  "example_item": "T8_ARMOR_PLATE_PROTOTYPE",
+  "name": "Dragonknight Armor",
   "slot": "armor"
  },
  "ARMOR_PLATE_ROYAL": {
@@ -399,6 +409,11 @@
   "name": "Adept's Hood of Tenacity",
   "slot": "head"
  },
+ "HEAD_LEATHER_DRAGON": {
+  "example_item": "T4_HEAD_LEATHER_DRAGON",
+  "name": "Adept's Dragonslayer Hood",
+  "slot": "head"
+ },
  "HEAD_LEATHER_FEY": {
   "example_item": "T4_HEAD_LEATHER_FEY",
   "name": "Adept's Mistwalker Hood",
@@ -457,6 +472,11 @@
  "HEAD_PLATE_KEEPER": {
   "example_item": "T4_HEAD_PLATE_KEEPER",
   "name": "Adept's Judicator Helmet",
+  "slot": "head"
+ },
+ "HEAD_PLATE_PROTOTYPE": {
+  "example_item": "T8_HEAD_PLATE_PROTOTYPE",
+  "name": "Dragonknight Helmet",
   "slot": "head"
  },
  "HEAD_PLATE_ROYAL": {
@@ -654,6 +674,11 @@
   "name": "Adept's Shoes of Tenacity",
   "slot": "shoes"
  },
+ "SHOES_LEATHER_DRAGON": {
+  "example_item": "T4_SHOES_LEATHER_DRAGON",
+  "name": "Adept's Dragonslayer Shoes",
+  "slot": "shoes"
+ },
  "SHOES_LEATHER_FEY": {
   "example_item": "T4_SHOES_LEATHER_FEY",
   "name": "Adept's Mistwalker Shoes",
@@ -712,6 +737,11 @@
  "SHOES_PLATE_KEEPER": {
   "example_item": "T4_SHOES_PLATE_KEEPER",
   "name": "Adept's Judicator Boots",
+  "slot": "shoes"
+ },
+ "SHOES_PLATE_PROTOTYPE": {
+  "example_item": "T8_SHOES_PLATE_PROTOTYPE",
+  "name": "Dragonknight Boots",
   "slot": "shoes"
  },
  "SHOES_PLATE_ROYAL": {
@@ -809,6 +839,11 @@
   "name": "Whitefog Snapper",
   "slot": "food"
  },
+ "T3_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "example_item": "T3_FISH_FRESHWATER_DRAGON_AREA_RARE",
+  "name": "Carefree Leyfin",
+  "slot": "food"
+ },
  "T3_FISH_FRESHWATER_FOREST_RARE": {
   "example_item": "T3_FISH_FRESHWATER_FOREST_RARE",
   "name": "Greenriver Eel",
@@ -852,6 +887,11 @@
  "T3_MEAL_OMELETTE_AVALON": {
   "example_item": "T3_MEAL_OMELETTE_AVALON",
   "name": "Avalonian Chicken Omelette",
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_DRAGONAREA": {
+  "example_item": "T3_MEAL_OMELETTE_DRAGONAREA",
+  "name": "Carefree Leyfin Omelette",
   "slot": "food"
  },
  "T3_MEAL_OMELETTE_FISH": {
@@ -999,6 +1039,11 @@
   "name": "Minor Hellfire Potion",
   "slot": "potion"
  },
+ "T4_POTION_LIFEWARD": {
+  "example_item": "T4_POTION_LIFEWARD",
+  "name": "Minor Lifeward Potion",
+  "slot": "potion"
+ },
  "T4_POTION_TORNADO": {
   "example_item": "T4_POTION_TORNADO",
   "name": "Minor Tornado in a Bottle",
@@ -1012,6 +1057,11 @@
  "T5_FISH_FRESHWATER_AVALON_RARE": {
   "example_item": "T5_FISH_FRESHWATER_AVALON_RARE",
   "name": "Clearhaze Snapper",
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "example_item": "T5_FISH_FRESHWATER_DRAGON_AREA_RARE",
+  "name": "Brightsoul Leyfin",
   "slot": "food"
  },
  "T5_FISH_FRESHWATER_FOREST_RARE": {
@@ -1057,6 +1107,11 @@
  "T5_MEAL_OMELETTE_AVALON": {
   "example_item": "T5_MEAL_OMELETTE_AVALON",
   "name": "Avalonian Goose Omelette",
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_DRAGONAREA": {
+  "example_item": "T5_MEAL_OMELETTE_DRAGONAREA",
+  "name": "Brightsoul Leyfin Omelette",
   "slot": "food"
  },
  "T5_MEAL_OMELETTE_FISH": {
@@ -1204,6 +1259,11 @@
   "name": "Hellfire Potion",
   "slot": "potion"
  },
+ "T6_POTION_LIFEWARD": {
+  "example_item": "T6_POTION_LIFEWARD",
+  "name": "Lifeward Potion",
+  "slot": "potion"
+ },
  "T6_POTION_TORNADO": {
   "example_item": "T6_POTION_TORNADO",
   "name": "Tornado in a Bottle",
@@ -1217,6 +1277,11 @@
  "T7_FISH_FRESHWATER_AVALON_RARE": {
   "example_item": "T7_FISH_FRESHWATER_AVALON_RARE",
   "name": "Puremist Snapper",
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "example_item": "T7_FISH_FRESHWATER_DRAGON_AREA_RARE",
+  "name": "Dragonbound Leyfin",
   "slot": "food"
  },
  "T7_FISH_FRESHWATER_FOREST_RARE": {
@@ -1262,6 +1327,11 @@
  "T7_MEAL_OMELETTE_AVALON": {
   "example_item": "T7_MEAL_OMELETTE_AVALON",
   "name": "Avalonian Pork Omelette",
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_DRAGONAREA": {
+  "example_item": "T7_MEAL_OMELETTE_DRAGONAREA",
+  "name": "Dragonbound Leyfin Omelette",
   "slot": "food"
  },
  "T7_MEAL_OMELETTE_FISH": {
@@ -1344,6 +1414,11 @@
   "name": "Thunderfall Lurcher Sandwich",
   "slot": "food"
  },
+ "T8_MEAL_SPECIAL_FOOD_DRAKE_EGG": {
+  "example_item": "T8_MEAL_SPECIAL_FOOD_DRAKE_EGG",
+  "name": "Drake Egg Biscuits",
+  "slot": "food"
+ },
  "T8_MEAL_STEW": {
   "example_item": "T8_MEAL_STEW",
   "name": "Beef Stew",
@@ -1382,6 +1457,11 @@
  "T8_POTION_LAVA": {
   "example_item": "T8_POTION_LAVA",
   "name": "Major Hellfire Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_LIFEWARD": {
+  "example_item": "T8_POTION_LIFEWARD",
+  "name": "Major Lifeward Potion",
   "slot": "potion"
  },
  "T8_POTION_TORNADO": {

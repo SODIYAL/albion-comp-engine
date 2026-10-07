@@ -13,12 +13,16 @@
 # on Deadly Shot: its prose `shield` flag misfires on the resistance shred;
 # nothing in the bow menu shields or heals the wielder.
 subcategory: bow
+curated_as_of: 2026-10-07
 capabilities:
-  - {cap: resist_shred, score: 2, evidence: DEADLYSHOT}     # Q: stacking -3% x3; Piercing Arrows passive (QW)
-  - {cap: catch, score: 2, evidence: GROUNDARROW}           # W: Ray of Light (QW)
-  - {cap: peel, score: 2, evidence: GROUNDARROW}            # (QW)
-  - {cap: root, score: 2, evidence: GROUNDARROW}            # W: Ray of Light roots all enemies in 3r for 1.8s (QW)
-  - {cap: disengage, score: 2, evidence: JUMPSHOT2}         # W: Frost Shot knocks the caster back 13m (QW)
-  - {cap: slow, score: 2, evidence: PASSIVE_SLOWPOISON}     # every AA slows; Q: Multishot
-  - {cap: mobility, score: 2, evidence: SPEEDSHOT2}         # W: Speed Shot, +30% move speed for 2s (QW)
-  - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}  # bow AA pattern
+  - {cap: resist_shred, score: 2, evidence: DEADLYSHOT}                  # Q: stacking -3% x3 (QW)
+  - {cap: catch, score: 2, evidence: GROUNDARROW}                        # W: Ray of Light (QW)
+  - {cap: peel, score: 2, evidence: GROUNDARROW}                         # (QW)
+  - {cap: root, score: 2, evidence: GROUNDARROW}                         # W: Ray of Light roots all enemies in 3r for 1.8s (QW)
+  - {cap: disengage, score: 2, evidence: JUMPSHOT2}                      # W: Frost Shot knocks the caster back 13m (QW)
+  - {cap: slow, score: 2, evidence: JUMPSHOT2}                           # W: Frost Shot's explosion slows every enemy hit by 40% for 5s (QW)
+  - {cap: slow, score: 2, evidence: MULTISHOT2}                          # Q: Multishot, a cone volley slowing by 30% for 1s (QW)
+  - {cap: resist_shred, score: 2, evidence: PASSIVE_ARMOR_PIERCE_STACK}  # PASSIVE: Piercing Arrows, each Auto-Attack -2% Defense for 3s, 4 stacks
+  - {cap: slow, score: 2, evidence: PASSIVE_SLOWPOISON}                  # PASSIVE: Slow Poison, each Auto-Attack slows the target by 10% for 1s
+  - {cap: mobility, score: 2, evidence: SPEEDSHOT2}                      # W: Speed Shot, +30% move speed for 2s (QW)
+  - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}               # bow AA pattern

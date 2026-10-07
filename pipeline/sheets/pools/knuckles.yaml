@@ -13,10 +13,12 @@
 # scored: Backhand Strike's +100 damage on a wall collision (no capability
 # axis).
 subcategory: knuckles
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: knockback_displace, score: 3, evidence: BACKHAND_KNOCKBACK}        # W: Backhand Strike knocks all enemies hit 9m back (9x5 rect) (QW)
   - {cap: peel, score: 3, evidence: BACKHAND_KNOCKBACK}                      # shove a diver into a wall (QW)
-  - {cap: resist_shred, score: 2, evidence: BACKHAND_KNOCKBACK}              # W: -20% for 5s; Q: Create Opening -12% (QW)
+  - {cap: resist_shred, score: 2, evidence: BACKHAND_KNOCKBACK}              # W: -20% for 5s (QW)
+  - {cap: resist_shred, score: 2, evidence: CREATE_OPENING}                  # Q: Create Opening, the 2nd hit cuts the target's damage resistances by 12% for 3s (QW)
   - {cap: catch, score: 2, evidence: DASHKICK}                               # Q: Dragon Leap dash-and-kick (QW)
   - {cap: engage, score: 2, evidence: DASHKICK}                              # (QW)
   - {cap: mobility, score: 4, evidence: DASHKICK}                            # Q dashes (QW)

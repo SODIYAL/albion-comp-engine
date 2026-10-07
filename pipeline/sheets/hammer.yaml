@@ -1,9 +1,9 @@
 # Hammers: one entry per weapon of the hammer tree. An entry carries the
 # weapon's own rows: its E (the weapon's identity) and any override of a
 # shared row. The shared Q/W/passive rows (Iron Breaker, Slowing Charge,
-# Power Geyser, Inertia Ring, Life Leech, WEAPON_STATS tankiness) live in
-# pools/hammer.yaml and compose into every hammer that can equip them
-# (sheets_lib.compose). Every row scores on its own spell's slot, a
+# Power Geyser, Knockout, Inertia Ring, Life Leech, WEAPON_STATS tankiness)
+# live in pools/hammer.yaml and compose into every hammer that can equip
+# them (sheets_lib.compose). Every row scores on its own spell's slot, a
 # WEAPON_STATS row on every loadout (build_dataset.build_loadout): an own
 # row and a shared row of one capability on different spells both score, and
 # the member reads the larger, never the sum (engine._merge_max). An E-row
@@ -20,27 +20,27 @@
 # effect_overrides.yaml. The E air-throws (Hand of Justice's slam,
 # Grovekeeper's Ground Pound) move no one: knockback_displace on
 # Hallowfall's air-throw rung, 2 (T13); their control value lives in peel
-# and stun. Life Leech heals the wielder only (directionality rule):
-# self_sustain, never an ally heal.
+# and stun. Knockout's 5s sleep (taking damage ends it) is scored as stun
+# on the shared row, at 2 because damage breaks it. Life Leech heals the
+# wielder only (directionality rule): self_sustain, never an ally heal.
 
 # Forge Hammers: the walking zone. The E (Giant Steps) grows the wielder
 # giant for 10s: +30% damage resistances, +30% Auto-Attack Range, and a 7m
 # aura slowing every enemy in it by 35%, with Giant Smash recastable while
 # it lasts. The zone is the tank: space denial that moves with the
-# wielder. Knockout's 5s sleep (taking damage ends it) is scored as stun.
+# wielder.
 
 - weapon: 2H_DUALHAMMER_HELL         # Forge Hammers — the walking zone
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: tank
   capabilities:
     - {cap: tankiness,     score: 4, evidence: GIANTSTEPS}       # E: +30% resistances for 10s; tank line
     - {cap: zone_control,  score: 4, evidence: GIANTSTEPS}       # the 7m slow aura moves with the wielder
     - {cap: slow,          score: 4, evidence: GIANTSTEPS}       # 35% aura; W: Inertia Ring (QW)
     - {cap: anti_dive,     score: 4, evidence: GIANTSTEPS}       # divers stand in the aura; W: ring (QW)
-    - {cap: peel,          score: 4, evidence: GIANTSTEPS}       # aura + W: Geyser / Knockout (QW)
+    - {cap: peel,          score: 4, evidence: GIANTSTEPS}       # aura + W: Geyser / Knockout; the pool's Power Geyser row (4) scores on its own W (QW)
     - {cap: catch,         score: 3, evidence: GIANTSTEPS}       # the aura shears escape speed
     - {cap: sustained_dps, score: 2, evidence: GIANTSTEPS}       # repeatable Giant Smashes — modest
-    - {cap: stun,          score: 2, evidence: KNOCKOUT}         # W: 5s sleep, breaks on damage; Stunning Strike passive (QW)
 
 # Great Hammer: the engage/disrupt tank. The E (Tackle) dashes through the
 # enemy line, knocking everyone on the path back 2m and stunning them
@@ -55,8 +55,8 @@
     - {cap: engage,        score: 6, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
     # no clump_create: a knockback is not a pull (T12)
     - {cap: stun,          score: 4, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
-    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters), minor; the pool's Power Geyser row (3) scores on its own W; the larger reads
-    - {cap: peel,          score: 4, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
+    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters), minor; the pool's Power Geyser row (2) scores on its own W
+    - {cap: peel,          score: 4, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring; the pool's Power Geyser row (4) scores on its own W
     - {cap: catch,         score: 4, evidence: HAMMERTACKLE}     # dash + stun = caught
     - {cap: mobility,      score: 4, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge
     - {cap: disengage,     score: 4, evidence: HAMMERTACKLE}     # tackle OUT through the line, stunning pursuit
@@ -80,12 +80,11 @@
     - {cap: disengage,     score: 4, evidence: SPINNING_SMASH}   # spin OUT through the line
 
 - weapon: 2H_HAMMER_CRYSTAL          # Truebolt Hammer — static-shield tank
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: tank
   capabilities:
     - {cap: stun,          score: 4, evidence: CRYSTALWAVE}      # E: Static stacks, one more per direct hit taken; 5 stacks stun 3.2s
     - {cap: buff_allies,   score: 2, evidence: CRYSTALWAVE}      # 350 absorb shield on allies in the area (candidate added in effect_overrides.yaml)
-    - {cap: peel,          score: 4, evidence: GEYSER}           # W: Power Geyser throws the divers up; the E carries no peel (QW)
 
 - weapon: 2H_HAMMER_UNDEAD           # Tombhammer — delayed-stun focus tank
   curated_as_of: 2026-08-12
@@ -99,8 +98,8 @@
 # Polehammer: long-range line-stun tank. The E (Groundbreaker) splits a
 # 20m line and stuns the enemies at its centre for 2.7s: a ranged
 # initiation and a peel tool, scored on both, weighted to engage. Knockout
-# (W: a 5s single-target sleep that taking damage ends) carries no row on
-# this weapon; the peel row names it.
+# (W: a 5s single-target sleep that taking damage ends) scores stun 2 on
+# the shared row, under the E's 6; the peel row names it.
 
 - weapon: 2H_POLEHAMMER              # Polehammer — long-range line-stun tank
   curated_as_of: 2026-08-12
@@ -108,7 +107,7 @@
   capabilities:
     - {cap: stun,          score: 6, evidence: GROUNDBREAKER2}   # E: 20m line, 2.7s stun at center
     - {cap: engage,        score: 6, evidence: CHARGESLOWAE}     # the 6 credits the E's 20m line stun as the initiation; the row cites the W dash because the effect map grounds engage on dashes only, not on enemy CC; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9)
-    - {cap: peel,          score: 4, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser
+    - {cap: peel,          score: 4, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser (its pool row, 4, scores on its own W)
     - {cap: catch,         score: 4, evidence: GROUNDBREAKER2}   # 20m lockdown line
 
 # Grovekeeper: immune-leap engage tank. The E (Ground Pound) leaps,
@@ -124,7 +123,7 @@
     - {cap: engage,        score: 6, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
     - {cap: stun,          score: 4, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
     - {cap: knockback_displace, score: 2, evidence: RAM_CHARGE} # scaling air-throw, no travel: Hallowfall's air-throw rung, 2 (T13); the hold value is peel and stun
-    - {cap: peel,          score: 4, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
+    - {cap: peel,          score: 4, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout; the pool's Power Geyser row (4) scores on its own W (QW)
     - {cap: catch,         score: 4, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
     - {cap: mobility,      score: 4, evidence: RAM_CHARGE}      # the E moves the wielder; W: Slowing Charge
     - {cap: disengage,     score: 4, evidence: RAM_CHARGE}      # immune leap OUT

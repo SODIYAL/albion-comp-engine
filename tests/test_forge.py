@@ -884,21 +884,29 @@ def t_curse_slot_earned():
 def t_resil_pen():
     # Single target is a non-pick at 20+, since the enemy fields too many
     # defensives; penetration is wired as a partial rebate (curation
-    # judgment) — per-weapon Resilience Penetration (wiki
-    # post-Realm-Divided table, cited in pipeline/resilience_penetration
-    # .yaml; a melee-only stat, ranged/magic weapons carry none) rebates
-    # the weapon's burst_st/execute SUPPLY by the physics ratio
-    # (1 - DR*(1-pen)) / (1 - DR) at the style's grown focus count. The
-    # global st_value weight devaluation still applies — high-pen ST is
-    # less taxed, never good.
+    # judgment) — a weapon's Resilience Penetration, the pinned snapshot's
+    # own item stat (items.json @focusfireprotectionpenetration, read into
+    # out/item_stats.json), rebates its burst_st/execute SUPPLY by the
+    # physics ratio (1 - DR*(1-pen)) / (1 - DR) at the style's grown focus
+    # count. The global st_value weight devaluation still applies —
+    # high-pen ST is less taxed, never good. The pinned snapshot sets the
+    # stat to zero on every item (it sits on equipment traits, which the
+    # model does not read), so every stamp is checked against the snapshot
+    # and the physics on stated values.
+    import json
     e = Engine(content="blackzone_roam", size=20)
-    pen_dp = e.weapons["2H_DAGGERPAIR"].get("resil_pen")
-    pen_hm = e.weapons["2H_MACE"].get("resil_pen")
-    pen_gh = e.weapons["2H_HOLYSTAFF"].get("resil_pen", 0.0)
-    stamped = pen_dp == 0.40 and pen_hm == 0.10 and not pen_gh
+    with open(os.path.join(ROOT, "pipeline", "out", "item_stats.json"), encoding="utf-8") as f:
+        bank = json.load(f).get("items", {})
+
+    def snap(k):
+        return float(((bank.get(k) or {}).get("stats") or {})
+                     .get("focusfireprotectionpenetration") or 0.0)
+    off = [k for k, w in e.weapons.items()
+           if abs((w.get("resil_pen") or 0.0) - snap(k)) > 1e-12]
+    stamped = not off
     bundle = {"burst_st": 4}
-    dp20 = e._eff(bundle, None, pen_dp or 0.0)["burst_st"]
-    hm20 = e._eff(bundle, None, pen_hm or 0.0)["burst_st"]
+    dp20 = e._eff(bundle, None, 0.40)["burst_st"]
+    hm20 = e._eff(bundle, None, 0.10)["burst_st"]
     z20 = e._eff(bundle, None, 0.0)["burst_st"]
     ordered = dp20 > hm20 > z20      # more pen -> more ST survives at 20
     e7 = Engine(content="castle_outpost", size=7)
@@ -906,10 +914,12 @@ def t_resil_pen():
     z7 = e7._eff(bundle, None, 0.0)["burst_st"]
     # the rebate grows with scale (deeper Resilience -> more to ignore)
     monotone = (dp20 / z20) > (dp7 / z7) > 1.0
-    check("F20 resilience penetration: cited per-weapon stat (dagger .40 / "
-          "mace .10 / staff none) rebates ST supply, growing with scale",
+    carried = sum(1 for w in e.weapons.values() if w.get("resil_pen"))
+    check("F20 resilience penetration: each weapon's stamp is the pinned "
+          "snapshot's own item stat; a pen rebates ST supply (.40 above .10 "
+          "above none), growing with scale",
           stamped and ordered and monotone,
-          f"pens=({pen_dp},{pen_hm},{pen_gh}) "
+          f"off={off[:4]} carried={carried} "
           f"rebate20={dp20 / z20 if z20 else 0:.4f} "
           f"rebate7={dp7 / z7 if z7 else 0:.4f}")
 
@@ -2215,13 +2225,20 @@ def t_per_spell_credit():
     dagger_spell_rows = [r for r in pools.get("dagger", [])
                          if r.get("evidence") != "WEAPON_STATS"]
     mace = sheets_lib.pool_rows_for(lines["MAIN_MACE"], pools)
+    # a base-stat row of the borrowed tree stays with that tree: a synthetic
+    # WEAPON_STATS row on a copy of the dagger pool never reaches Black Hands
+    stat_row = {"cap": "sustained_dps", "score": 2, "evidence": "WEAPON_STATS"}
+    pools_x = dict(pools, dagger=list(pools.get("dagger", [])) + [stat_row])
+    bh_x = sheets_lib.pool_rows_for(lines["2H_IRONGAUNTLETS_HELL"], pools_x)
+    dagger_x = sheets_lib.pool_rows_for(lines["MAIN_DAGGER"], pools_x)
     check("F43d Black Hands takes the dagger pool's spell rows (its menu) and "
           "no base-stat row of another tree; an ordinary weapon reads its own "
           "tree pool alone",
           all(r in bh for r in dagger_spell_rows)
-          and not any(r.get("evidence") == "WEAPON_STATS" and r in pools.get("dagger", []) for r in bh)
+          and stat_row not in bh_x and stat_row in dagger_x
           and mace == pools.get("mace", []),
-          f"black hands rows={len(bh)} dagger spell rows={len(dagger_spell_rows)}")
+          f"black hands rows={len(bh)} dagger spell rows={len(dagger_spell_rows)} "
+          f"stat row borrowed={stat_row in bh_x}")
 
 
 def t_nonstack_marginal():

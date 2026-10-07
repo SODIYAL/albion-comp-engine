@@ -1,23 +1,21 @@
 # Quarterstaffs — one entry per weapon of the quarterstaff tree, carrying
 # the weapon's E (its identity) and any override of a shared row. The tree's
-# shared Q/W/passive rows (Cartwheel; Gale Dance, Stun Run, Forceful Swing,
-# Rising Blow, Separator; Life Leech) live in pools/quarterstaff.yaml and
-# compose into every quarterstaff that can equip them (sheets_lib.compose).
-# Every row scores on its own spell (build_dataset.build_loadout; a
-# WEAPON_STATS row is always on): an own row and a shared row of the same
-# capability on different spells both score, and the member reads the
-# larger, never the sum (engine._merge_max, F43). An `except:` entry is a
-# deliberate non-take of a shared row (curation judgment). An E-row comment
-# that names a Q/W spell marks that spell's share of the E row's score; the
-# named spell's shared row, where it has one, still scores on its own slot,
-# and the larger reads. Tree identity: displacement and disruption.
+# shared Q/W/passive rows (Concussive Combo, Cartwheel; Gale Dance, Stun
+# Run, Forceful Swing, Rising Blow, Separator; Life Leech) live in
+# pools/quarterstaff.yaml and compose into every quarterstaff that can equip
+# them (sheets_lib.compose). Every row scores on its own spell
+# (build_dataset.build_loadout; a WEAPON_STATS row is always on): an own row
+# and a shared row of the same capability on different spells both score,
+# and the member reads the larger, never the sum (engine._merge_max, F43).
+# An `except:` entry is a deliberate non-take of a shared row (curation
+# judgment). An E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score; the named spell's shared row, where it has
+# one, still scores on its own slot, and the larger reads. Tree identity:
+# displacement and disruption.
 
 - weapon: 2H_COMBATSTAFF_MORGANA     # Black Monk Staff — anti-shield disruption
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: mobility, evidence: CARTWHEEL}  # no own mobility row: withholds Cartwheel's mobility (curation judgment)
   capabilities:
     - {cap: purge,         score: 2, evidence: COMBATSTAFF_SLASH}  # E: breaks damage shields and blocks new ones in a 3s spinning zone — a shield break, ranked below Fists of Avalon's true purge (curation judgment)
     - {cap: zone_control,  score: 2, evidence: COMBATSTAFF_SLASH}  # spinning blade zone
@@ -28,7 +26,8 @@
 # that deals 80 in 5r, slows every enemy hit by 50% for 3s and refunds part
 # of its cooldown when it hits an enemy player: a skirmisher's engage/chase
 # tool rather than the Quarterstaff's peel E. Stun comes from the shared
-# rows (pool stun 2 on Stun Run, a W option), as on every quarterstaff.
+# rows (pool stun 2 on Concussive Combo, a Q option, and on Stun Run, a W
+# option), as on every quarterstaff.
 
 - weapon: 2H_DOUBLEBLADEDSTAFF       # Double Bladed Staff — skirmish bruiser
   curated_as_of: 2026-08-12
@@ -43,11 +42,8 @@
     - {cap: burst_aoe,     score: 2, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest
 
 - weapon: 2H_DOUBLEBLADEDSTAFF_CRYSTAL  # Phantom Twinblade — projection skirmisher
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: QS_CRYSTAL_COMBO}  # E: projections slash + slam
     - {cap: slow,          score: 2, evidence: QS_CRYSTAL_COMBO}
@@ -55,11 +51,8 @@
     - {cap: zone_control,  score: 2, evidence: QS_CRYSTAL_COMBO}  # moving projection areas
 
 - weapon: 2H_IRONCLADEDSTAFF         # Iron-clad Staff — mobile mass-displace tank
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: QSWHIRLWIND}  # E: 12m knockback ignoring CC resistance, but self-centred: a body commit, useless in the ranged territory/castle fights where displacement matters (curation judgment)
     - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # body-commit peel — of little use at large scale, where Bedrock is far better (curation judgment)
@@ -81,13 +74,10 @@
 # peel 6 tops the Separator ladder (pool 2, Double Bladed Staff 4).
 
 - weapon: 2H_QUARTERSTAFF            # Quarterstaff — the displacement line
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: sustained_dps, evidence: QSTAFF_COMBO}  # no own sustained_dps row: withholds Gale Dance's sustained_dps (curation judgment)
   capabilities:
-    - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing (T13)
+    - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing (T13); the pool's Rising Blow and Separator rows (2) score on their own W, the larger reads
     - {cap: peel,          score: 6, evidence: SEPARATING_SLAM}  # W: Separator's 12m CC-resist-ignoring knockback around the rooted target; override of the pool's 2 (QW)
     - {cap: engage,        score: 4, evidence: VAULT_ATTACK}     # CC+damage-immune leap in
     - {cap: mobility,      score: 4, evidence: VAULT_ATTACK}     # E leap; Q: Cartwheel dash
@@ -98,11 +88,8 @@
     - {cap: burst_aoe,     score: 2, evidence: VAULT_ATTACK}     # 161 on impact — modest
 
 - weapon: 2H_QUARTERSTAFF_AVALON     # Grailseeker — root-wall zoner
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: root,          score: 4, evidence: SOULSHAKER}        # E: energy wall roots everyone touching it, 3.5s
     - {cap: zone_control,  score: 4, evidence: SOULSHAKER}        # the wall denies the line it stands on
@@ -111,12 +98,8 @@
     - {cap: burst_aoe,     score: 2, evidence: SOULSHAKER}        # 125 line
 
 - weapon: 2H_ROCKSTAFF_KEEPER        # Staff of Balance — anti-heal aura bruiser
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: tank
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: mobility, evidence: CARTWHEEL}           # no own mobility row: withholds Cartwheel's mobility (curation judgment)
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: heal_reduction, score: 4, evidence: QS_SLOWROPE}      # E: -50% Healing Received aura (negates own healing too)
     - {cap: slow,          score: 4, evidence: QS_SLOWROPE}       # 50% aura slow
@@ -125,11 +108,8 @@
     - {cap: tankiness,     score: 4, evidence: QS_SLOWROPE}       # +20% resists while active
 
 - weapon: 2H_TWINSCYTHE_HELL         # Soulscythe — tornado displace skirmisher
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
-  except:
-    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
   capabilities:
     - {cap: knockback_displace, score: 4, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel; the line knock-up is the rubric's S8 case (teammates' damage and CC land)
     - {cap: burst_aoe,     score: 4, evidence: TORNADO}           # 152 through the line

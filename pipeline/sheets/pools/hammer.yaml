@@ -10,13 +10,16 @@
 # shared row (curation judgment). (QW): the row holds only while the
 # player equips that Q or W spell. Weapon entries: sheets/hammer.yaml.
 subcategory: hammer
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: disengage, score: 2, evidence: CHARGESLOWAE}                    # W: Slowing Charge, a 12m dash out (QW)
   - {cap: engage, score: 2, evidence: CHARGESLOWAE}                       # W: Slowing Charge, a 12m dash in, -50% slow on everyone passed through (QW)
   - {cap: mobility, score: 2, evidence: CHARGESLOWAE}                     # W: Slowing Charge's 12m dash (QW)
-  - {cap: knockback_displace, score: 3, evidence: GEYSER}                 # W: Power Geyser throws enemies in a 3m circle into the air (QW)
+  - {cap: knockback_displace, score: 2, evidence: GEYSER}                 # W: Power Geyser, a 1s knock-up in a 3m circle with no travel: Hallowfall's air-throw rung, 2 (T13) (QW)
+  - {cap: peel, score: 4, evidence: GEYSER}                               # W: Power Geyser throws the divers in a 3m circle into the air from 11m (QW)
   - {cap: purge, score: 2, evidence: IRONBREAKER}                         # Q: Iron Breaker breaks shields only (QW)
   - {cap: resist_shred, score: 2, evidence: IRONBREAKER}                  # Q: Iron Breaker, -12% resistances for 4s in 2.5m (QW)
+  - {cap: stun, score: 2, evidence: KNOCKOUT}                             # W: Knockout, a 5s single-target sleep that taking damage ends, scored as stun (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech, heals the wielder only
   - {cap: anti_dive, score: 4, evidence: TAR_RING}                        # W: Inertia Ring, the ring punishes walkers (QW)
   - {cap: slow, score: 4, evidence: TAR_RING}                             # W: Inertia Ring, -80% on crossing the ring, ignores CC resistance (QW)

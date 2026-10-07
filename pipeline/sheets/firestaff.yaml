@@ -1,6 +1,6 @@
 # Fire staffs: one entry per weapon of the firestaff tree, carrying the
 # weapon's own rows: its E (the weapon's identity) and any override of a
-# shared row. The tree's Q/W rows (Fire Wave, Flame Blast, Wall of Flames,
+# shared row. The tree's Q/W rows (Fire Wave, Wall of Flames, Raging Flare,
 # the ignite-stacking stand-in) live in pools/firestaff.yaml and compose
 # into every weapon that can equip them (sheets_lib.compose). Every row
 # scores on its own spell (build_dataset.build_loadout; the WEAPON_STATS
@@ -10,8 +10,10 @@
 # of a shared row (curation judgment). An E-row comment that names a Q/W
 # spell or a passive marks that spell's share of the E row's score; the
 # named spell's shared row, where it has one, still scores on its own slot,
-# and the larger reads. Flame Blast's +60% move speed for 1.6s on an ally is
-# a cast-enabler blip: buff_allies 2, never engage, disengage or mobility.
+# and the larger reads. Flame Blast carries no row: its +60% move speed for
+# 1.6s lands on the caster alone (the self-target case), so it buffs no
+# ally, and a 1.6s self-sprint is a cast-enabler blip, never engage,
+# disengage or mobility (curation judgment).
 
 - weapon: 2H_FIRESTAFF               # Great Fire Staff — pillar burst mage
   curated_as_of: 2026-08-12
@@ -33,10 +35,10 @@
 # Healing Received line is a heal negate, effect_overrides.yaml).
 
 - weapon: 2H_FIRE_RINGPAIR_AVALON    # Dawnsong — anti-heal AoE artillery
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 along the line, then the ground fire; W: Raging Flare, 205 in a 5 radius
+    - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 along the line, then the ground fire; W: Raging Flare, 205 in a 5 radius (its pool row, 4, scores on its own W; the larger reads)
     - {cap: heal_reduction, score: 4, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire; the -40/-50% one-shot class holds 4 (heal-cut ladder, VALIDATION.md 08, Round 9)
     - {cap: zone_control,   score: 4, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames; Q: Burning Field
 
@@ -58,12 +60,11 @@
 # pressure and nothing else.
 
 - weapon: 2H_INFERNOSTAFF_MORGANA    # Blazing Staff — standing-zone DoT artillery
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
   capabilities:
     - {cap: zone_control,   score: 6, evidence: FLAMETORNADO}    # E: a persistent 5 radius tornado; W: Wall of Flames; Q: Burning Field
     - {cap: sustained_dps,  score: 4, evidence: FLAMETORNADO}    # tornado ticks and the burn on enemies who leave; Q: Fire Bolt's ignite stacks; passive: Burn
-    - {cap: burst_aoe,      score: 4, evidence: SKILLSHOT_FIREBALL}  # W: Raging Flare, 205 in a 5 radius; E: the tornado on the same clump (QW)
 
 - weapon: MAIN_FIRESTAFF             # Fire Staff (1H) — pyroblast poker
   curated_as_of: 2026-08-12
@@ -73,11 +74,8 @@
     - {cap: burst_st,      score: 2, evidence: PYROBLAST_SKILLSHOT}
 
 - weapon: MAIN_FIRESTAFF_CRYSTAL     # Flamewalker Staff — fireball flight mage
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
-  # deliberate non-takes of shared rows (pools/firestaff.yaml)
-  except:
-    - {cap: knockback_displace, evidence: FIRECONE}  # no own knockback_displace row: withholds Fire Wave's knockback_displace (curation judgment)
   capabilities:
     - {cap: mobility,      score: 4, evidence: FLAMEDASH}      # E: 14m fireball flight immune to all effects, cooldown refund on a player hit
     - {cap: engage,        score: 4, evidence: FLAMEDASH}      # fly INTO them, 178 on impact

@@ -78,17 +78,17 @@
     - {cap: burst_aoe,     score: 2, evidence: GLACIALFIELD}
 
 # Frost Staff: the frost tree's root mage. Freezing Wind is a 200-damage
-# cone with a 2.5s root on every enemy hit, the weapon's whole reason to
+# cone with a 2s root on every enemy hit, the weapon's whole reason to
 # exist. No engage: a ranged root can open a fight, but initiation-by-dive
 # is not this kit's job (curation judgment).
 
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
   capabilities:
-    - {cap: root,          score: 6, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
+    - {cap: root,          score: 4, evidence: FREEZINGWIND}        # E: a 2s root on every enemy the widening cone hits (cast from the caster, 12m, 18s); on duration alone below the 2.65-3.5s roots at 4 and Desecrate's 2.6s at 3, held at 4 because the cone carries no structural area, so the geometric term never credits its breadth (curation judgment)
     - {cap: peel,          score: 4, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
-    - {cap: catch,         score: 4, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks to a stun
+    - {cap: catch,         score: 4, evidence: FREEZINGWIND}        # 2s root = a caught runner; Q: Frostbite stacks to a stun
     - {cap: burst_aoe,     score: 2, evidence: FREEZINGWIND}        # 200 in the cone; Q: Ice Shard
 
 - weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
@@ -112,7 +112,7 @@
     - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb at the bottom of the frost zone ladder (here 2, pool 4, Permafrost 6: RULE queue, VALIDATION.md 08, Round 9) (QW)
 
 - weapon: MAIN_FROSTSTAFF_KEEPER     # Hoarfrost Staff — snowball displacer
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
   # deliberate non-takes of shared rows (pools/froststaff.yaml)
   except:
@@ -122,5 +122,5 @@
     - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # the 4s freezing trail slows by 0.4; W: Frost Bomb (QW)
     - {cap: peel,          score: 4, evidence: ICEROCK_EXPLODE}  # wide ball knocks back MULTIPLE enemies + trail slows pursuit — weaker than Bedrock at peel but far from useless (band 4-5, held at 4 for separation from Bedrock's 6; curation judgment)
     - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
-    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # sheet 2; MASTERSHEET tune:sheets sets 3 (golden T44: the V4 gate reads the same at 2 and 3). Avalanche deals 120 to every enemy it rolls over, plus 160 in a 5 radius only when the snowball hits terrain
+    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # sheet 2; MASTERSHEET tune:sheets sets 3 (golden T44: the V4 gate reads the same at 2 and 3). Avalanche deals 160 to every enemy it rolls over, plus 160 in a 5 radius only when the snowball hits terrain
     - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

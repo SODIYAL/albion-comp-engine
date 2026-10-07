@@ -84,6 +84,20 @@
   capabilities:
     - {cap: heal_reduction, score: 3, evidence: NASTY_WOUNDS}    # swirl: -50% Healing Received AND Cast for 4s on entry
 
+- gear: HEAD_LEATHER_DRAGON          # Dragonslayer Hood — Flare
+  slot: head
+  curated_as_of: 2026-10-07
+  # No own rows: pools/head_leather.yaml's Energizing Shield and Cleanse
+  # rows apply. The item's own active, Flare (thrown up to 11m, an area
+  # growing from 4m to 7.5m over 5s: enemies inside are revealed, cannot
+  # turn invisible, an invisibility channel is interrupted, and their
+  # Cooldown Rate is cut by 0.5; 25s cooldown), has no row: `reveal`
+  # stays unpromoted (effect_map.yaml), and the effect map has no entry
+  # for an enemy cooldown-rate cut (magiccooldownratemodifier-, Flare its
+  # only carrier). The doctrine's assumed pick, Flare, supplies nothing
+  # from the slot (F36g).
+  capabilities: []
+
 - gear: HEAD_LEATHER_FEY             # Mistwalker Hood
   slot: head
   curated_as_of: 2026-08-20
@@ -183,9 +197,9 @@
 
 - gear: HEAD_PLATE_SET2              # Knight Helmet — the anti-clump tech
   slot: head
-  curated_as_of: 2026-08-20
+  curated_as_of: 2026-10-07
   capabilities:
-    - {cap: peel,          score: 3, evidence: DISRUPTIONIMMUNITY}  # 10 allies immune to forced movement 6s
+    - {cap: peel,          score: 3, evidence: DISRUPTIONIMMUNITY}  # 10 allies immune to forced movement 7s
     # No buff_allies row: the effect map routes an ally IMMUNITY to peel,
     # never buff_allies (protection AGAINST the effect).
 

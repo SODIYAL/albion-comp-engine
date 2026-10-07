@@ -10,12 +10,16 @@
 # shared row (curation judgment). (QW): the row holds only while the
 # player equips that Q or W spell. Weapon entries: sheets/mace.yaml.
 subcategory: mace
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: engage, score: 2, evidence: CHARGE_ROOT}          # W: Snare Charge, an 11m leap (QW)
   - {cap: root, score: 5, evidence: CHARGE_ROOT}            # W: Snare Charge roots everyone in 6m for 2.56s (QW)
   - {cap: interrupt, score: 2, evidence: CHARGE_ROOT}       # W: Snare Charge "Interrupts enemies' spell casting" (interrupt taxonomy) (QW)
   - {cap: peel, score: 4, evidence: GUARDRUNE}              # W: Guard Rune, up to 10 allies in 5m immune to stuns and forced movement for 5s (QW)
   - {cap: anti_dive, score: 2, evidence: GUARDRUNE}         # W: Guard Rune, a protective zone dropped on the dived allies (the anti-dive rule) (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_MACE}  # PASSIVE: Life Leech, heals the wielder only
+  - {cap: clump_create, score: 3, evidence: PBAOE_PULL}     # W: Air Compressor pulls every enemy within 7m to the wielder after 1.5s; above Positional Drift's five-target pull (2), below Black Hole's ranged pull that ignores CC resistance (4) (QW)
+  - {cap: silence, score: 2, evidence: SACRED_GROUND}       # Q: Sacred Ground silences every enemy inside its 3m circle for 3s (ignores CC resistance): level with Magic Shock (2), below Smoke Bomb's 5s cloud (3) (QW)
   - {cap: slow, score: 2, evidence: SACRED_GROUND}          # Q: Sacred Ground, -20% in a 3m circle for 3s (QW)
   - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # Q: Sacred Ground's 3m circle holds ground for 3s (QW)
   - {cap: tankiness, score: 4, evidence: WEAPON_STATS}      # tank-line weapon, played frontline

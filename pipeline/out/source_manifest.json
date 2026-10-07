@@ -6,8 +6,8 @@
   "armory_activities.json": {
    "adapter": "parse_armory",
    "adapter_version": "1",
-   "sha256": "6414bf3f570a5ab4eeecba685efc7936967265c38b37ba63973d776e5c6d6178",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "9967d605420bb07c3d1a6d7b9acb4e08c3e9a2a4e047e1f936251b0d151026f3",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "armory.json",
     "localization.json"
@@ -16,8 +16,8 @@
   "gear_lines.json": {
    "adapter": "fetch_gear_lines",
    "adapter_version": "2",
-   "sha256": "2117d3c8234f6e26799e4b1c43b5b587b7325e0173f1d59315b1c240083916d4",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "d85cd3d1c7a1cef294b4591943df576ab78460e034778790411543adb9d4e8cd",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.txt",
     "items.json"
@@ -26,8 +26,8 @@
   "gear_spells.json": {
    "adapter": "parse_dumps",
    "adapter_version": "5",
-   "sha256": "ff7e2302a8a87fbbcd1fa5edf83dbbd6c8071f3b4e87f1ade178513116682dd1",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "5a3f5950f377fc8849ae94d96297ff9eb5678126e1f7a414f11f0f10a225d664",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",
     "items.json",
@@ -38,8 +38,8 @@
   "interactions.json": {
    "adapter": "build_interactions",
    "adapter_version": "1",
-   "sha256": "0bd5ec729566cc74f1a837282936557eec92fa92a1e9042b7acead18de8eaf9b",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "0d9738d5f8ea77bb90ccd4437d899813dd26feebf6211be005a9f732303e6a48",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "interactions.yaml",
     "spells.json (via spell_index)"
@@ -48,8 +48,8 @@
   "item_stats.json": {
    "adapter": "fetch_item_stats",
    "adapter_version": "2",
-   "sha256": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "a45aa75b0d84a6c5e4825dd9e94760ff227e5918179e9d1559e3034acda6863d",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.txt",
     "items.json"
@@ -58,8 +58,8 @@
   "spell_index.json": {
    "adapter": "parse_dumps",
    "adapter_version": "5",
-   "sha256": "94a740d1776d3fd5c7171b9ca4cd37701b1ae4b4ac46feb0d1ac9eb4c357537d",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "sha256": "afcdd8515a47d9bdabbec1f4440f40bd83847e86ab0b890a670dff77ae392935",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",
     "items.json",
@@ -71,7 +71,7 @@
    "adapter": "parse_dumps",
    "adapter_version": "5",
    "sha256": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1",
-   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",
     "items.json",
@@ -82,34 +82,34 @@
  },
  "schema_version": 1,
  "sources": {
-  "commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
-  "commit_timestamp": "2026-07-27T11:31:41Z",
+  "commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
+  "commit_timestamp": "2026-09-23T11:25:19Z",
   "environment": "live",
-  "fetch_timestamp_utc": "2026-08-21T23:55:48Z",
+  "fetch_timestamp_utc": "2026-10-07T09:54:53Z",
   "files": {
    "armory.json": {
-    "bytes": 44520,
-    "sha256": "f947d5a79ab6c90f7b569317da562c40b399de1ee6d111fd01e9d82185e3fd99"
+    "bytes": 51897,
+    "sha256": "5d97ad479fbd4b79dc5effa963145c3f6087085313ab8bbaf2c7b5db891bbf68"
    },
    "formatted/items.json": {
-    "bytes": 23954341,
-    "sha256": "226a22be333c949f47021130eadce697f921bf55ad3cf740e86e254b0d89163f"
+    "bytes": 24364598,
+    "sha256": "557341a19b450b129be06f26ad02e1bee56edba67e6ec12f526beb167c4ae457"
    },
    "formatted/items.txt": {
-    "bytes": 1154622,
-    "sha256": "a0a678bb497dfb5bc89ce5ae93f27780c37be21900eb2a4fe10fe6b57ac51654"
+    "bytes": 1171393,
+    "sha256": "2a2c44eabdddfbeca2abd0f5d380cc1769510f9517430a2f1a6af9fdc4884b0c"
    },
    "items.json": {
-    "bytes": 17219057,
-    "sha256": "fc009a9fb60fb9219c9e44391a842fa6032b5a1d218d1b53e0ffdaa28f29c077"
+    "bytes": 17457120,
+    "sha256": "5bd6d2a8f529e96ba18020bcefb964fefe5f333c5e1f322285e5daeb79698b06"
    },
    "localization.json": {
-    "bytes": 91272451,
-    "sha256": "a86d1b78de570c4afaada32237d9095b729ef348f5be2311f4f0ea49ee86395f"
+    "bytes": 94207436,
+    "sha256": "dd94300d690cb56fbf1458178e2bf74610d49bbddb4630b405ba728f8336c5c3"
    },
    "spells.json": {
-    "bytes": 14461889,
-    "sha256": "382ae5d48ff177be682efcfe257472619ce6fbc899cf8e6e2df5ae1219629134"
+    "bytes": 14819183,
+    "sha256": "df23709468052e3f76c174e1b61acbe1b1f5454ed1fc41e438db4bd56eb84feb"
    }
   },
   "game_patch": {

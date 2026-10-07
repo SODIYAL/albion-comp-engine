@@ -18,6 +18,12 @@
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cooldown rate + cast speed (+ a little defense)
 
+- gear: T7_MEAL_OMELETTE_DRAGONAREA  # Dragonbound Leyfin Omelette
+  slot: food
+  curated_as_of: 2026-10-07
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cast speed + cooldown rate as the Avalonian omelette's; its +6.6% Healing Cast carries no row, as that omelette's +6.6% defense carries none
+
 - gear: T7_MEAL_OMELETTE_FISH        # Dusthole Crab Omelette
   slot: food
   curated_as_of: 2026-10-03

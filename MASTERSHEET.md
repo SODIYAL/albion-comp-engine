@@ -56,8 +56,10 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
 # landed since (need profiles, frontline floors, the dressed forge): V4 is
 # byte-identical at 2 and at 3 (17/23 actual_gear, 19/23 weapon_only), so the
 # hold was a symptom of missing team structure, not a wrong rating. The
-# evidence stands on its own: Avalanche measures 280/cast, top-20% of the
-# burst_aoe board.
+# evidence: Avalanche deals 160 to every enemy the snowball rolls over and
+# 160 more in a 5 radius when it hits terrain; the always-delivered 160 sits
+# under the burst ladder's 2-anchor (Trinity Spear 220 in 3r), so the 3 is
+# the curation judgment this pin records.
 # Sheet row: pipeline/sheets/froststaff.yaml.
 MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
   burst_aoe: 3

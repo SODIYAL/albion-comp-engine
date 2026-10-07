@@ -214,6 +214,19 @@
   ],
   "slot": "armor"
  },
+ "ARMOR_LEATHER_DRAGON": {
+  "actives": [
+   "OUTOFCOMBATHEAL",
+   "FLAMESHIELD",
+   "IMMUNEAREA"
+  ],
+  "passives": [
+   "PASSIVE_ARMOR_BALANCE",
+   "PASSIVE_ARMOR_INCREASED_AASPEED",
+   "PASSIVE_ARMOR_CD_REDUCTION"
+  ],
+  "slot": "armor"
+ },
  "ARMOR_LEATHER_FEY": {
   "actives": [
    "OUTOFCOMBATHEAL",
@@ -257,7 +270,7 @@
   "actives": [
    "OUTOFCOMBATHEAL",
    "FLAMESHIELD",
-   "PROTOTYPE_IMMUNEAREA"
+   "IMMUNEAREA"
   ],
   "passives": [
    "PASSIVE_ARMOR_BALANCE",
@@ -394,8 +407,7 @@
  "ARMOR_PLATE_PROTOTYPE": {
   "actives": [
    "OUTOFCOMBATHEAL",
-   "TAUNT",
-   "PROTOTYPE_BIDE"
+   "TAUNT"
   ],
   "passives": [
    "PASSIVE_ARMOR_MR_AR",
@@ -836,6 +848,19 @@
   ],
   "slot": "head"
  },
+ "HEAD_LEATHER_DRAGON": {
+  "actives": [
+   "ENERGY_BARRIER",
+   "SELF_CLEANSE",
+   "FLARE"
+  ],
+  "passives": [
+   "PASSIVE_BALANCE",
+   "PASSIVE_INCREASED_AASPEED",
+   "PASSIVE_CD_REDUCTION"
+  ],
+  "slot": "head"
+ },
  "HEAD_LEATHER_FEY": {
   "actives": [
    "ENERGY_BARRIER",
@@ -879,7 +904,7 @@
   "actives": [
    "ENERGY_BARRIER",
    "SELF_CLEANSE",
-   "PROTOTYPE_FLARE"
+   "FLARE"
   ],
   "passives": [
    "PASSIVE_BALANCE",
@@ -1309,6 +1334,20 @@
   ],
   "slot": "shoes"
  },
+ "SHOES_LEATHER_DRAGON": {
+  "actives": [
+   "DODGE",
+   "SPRINT_CD_REDUCTION",
+   "WEAPON_SPRINT"
+  ],
+  "passives": [
+   "PASSIVE_MAXLOAD_SHOES",
+   "PASSIVE_BALANCE",
+   "PASSIVE_INCREASED_AASPEED",
+   "PASSIVE_CD_REDUCTION"
+  ],
+  "slot": "shoes"
+ },
  "SHOES_LEATHER_FEY": {
   "actives": [
    "DODGE",
@@ -1355,7 +1394,7 @@
   "actives": [
    "DODGE",
    "SPRINT_CD_REDUCTION",
-   "PROTOTYPE_CLEAR_MIND"
+   "WEAPON_SPRINT"
   ],
   "passives": [
    "PASSIVE_MAXLOAD_SHOES",

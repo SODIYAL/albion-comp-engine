@@ -483,7 +483,7 @@ GROUP_AOE_MIN_RADIUS = 3.0
 # high-damage and strong in large fights, and Greataxe, whose E hits
 # everyone around it, both sit at 4 and stay), OR when the E carries one
 # REAL group tool — a UTILITY_EXEMPT/interrupt cap at E_UTILITY_TOOL_MIN+
-# (Carrioncaller's heal cut 4, Frost Staff's root 6; scattered 2-point
+# (Carrioncaller's heal cut 4, Frost Staff's root 4; scattered 2-point
 # dabs do not rescue: the Double-Bladed-Staff class graded below the
 # mace standard).
 # Self-only effects (mobility, disengage, self_sustain) never rescue.
@@ -919,33 +919,25 @@ def load_heal_overrides():
     return out
 
 
-def apply_resilience_penetration(weapons):
-    """Stamp per-weapon `resil_pen` from pipeline/resilience_penetration.yaml
-    (cited wiki table, post-Realm-Divided; a MELEE-ONLY stat — weapons
-    absent from the table carry none, which the wiki states categorically
-    for ranged/magic lines). It is wired as a partial rebate on the
-    Focus-Fire ST tax (engine `_eff`, F20); both ports read the
-    stamped field. Wiki rows outside the combat catalog are reported,
-    never guessed."""
-    path = os.path.join(HERE, "resilience_penetration.yaml")
-    if not os.path.exists(path):
-        return
-    rows = (_load_yaml(path) or {}).get("rows") or []
-    by_name = {}
-    for k, w in weapons.items():
-        dn = (w.get("display_name") or "").strip().lower()
-        if dn and not w.get("removed"):
-            by_name[dn] = k
-    matched, unmatched = 0, []
-    for r in rows:
-        key = by_name.get(str(r.get("name", "")).strip().lower())
-        if key is None:
-            unmatched.append(str(r.get("name")))
-            continue
-        weapons[key]["resil_pen"] = float(r["pen"])
-        matched += 1
-    note = f"; not in catalog: {', '.join(unmatched)}" if unmatched else ""
-    print(f"  resil_pen     : {matched} weapon(s) stamped{note}")
+def apply_resilience_penetration(weapons, item_stats):
+    """Stamp per-weapon `resil_pen` from the pinned snapshot's own item
+    stat (items.json @focusfireprotectionpenetration, read into
+    out/item_stats.json): the share of the Focus-Fire damage reduction the
+    wielder ignores. It is wired as a partial rebate on the Focus-Fire ST
+    tax (engine `_eff`, F20); both ports read the stamped field. A weapon
+    whose stat is absent or zero carries none; the pinned snapshot sets it
+    to zero on every item (the stat sits on equipment traits, which the
+    model does not read; VALIDATION.md, The game data moves to the newer
+    snapshot)."""
+    stamped = 0
+    for key, w in weapons.items():
+        st = (item_stats.get(key) or {}).get("stats") or {}
+        pen = float(st.get("focusfireprotectionpenetration") or 0.0)
+        if pen:
+            w["resil_pen"] = pen
+            stamped += 1
+    print(f"  resil_pen     : {stamped} weapon(s) carry Resilience Penetration "
+          f"in the pinned snapshot")
 
 
 ROLE_CLASSES = ("frontline", "healer", "support", "dps", "meta")
@@ -3314,7 +3306,7 @@ def main():
         print(f"  derived group : {g_name} (max {g_cfg.get('max', 2)}): "
               + ", ".join(members))
 
-    apply_resilience_penetration(weapons)
+    apply_resilience_penetration(weapons, item_stats)
     econ_report, econ_problems = derive_economics(
         weapons, composition, spell_index, load_heal_overrides())
     nonstack_members = {w for g in composition.get("groups", []) or []

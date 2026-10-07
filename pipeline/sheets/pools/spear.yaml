@@ -10,11 +10,14 @@
 # shared row (curation judgment). (QW): the row holds only while the
 # player equips that Q or W spell. Weapon entries: sheets/spear.yaml.
 subcategory: spear
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: mobility, score: 2, evidence: CHARGINGBLADE}                   # W: Inner Focus, stacking Move Speed, then 2s of stun/root/slow immunity (QW)
   - {cap: slow, score: 2, evidence: GROUNDSPEAR}                         # W: Impaler, -50% for 3s in 2.5m (QW)
   - {cap: catch, score: 2, evidence: LEGBREAKER}                         # W: Cripple, a single-target snare: loses catch value in larger groups (curation judgment) (QW)
+  - {cap: damage_debuff, score: 2, evidence: LEGBREAKER}                 # W: Cripple, -25% damage dealt for 4s on one target: below Howl's -30% cone and Forceful Swing's -50% area, both 2 (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech, heals the wielder only
+  - {cap: slow, score: 2, evidence: PASSIVE_SLOWPOISON}                  # PASSIVE: Slow Poison, each Auto-Attack slows the target by 10% for 1s
   - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # W: Harpoon, a 2.2s root with a Spirit Spear Charge (QW)
   - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # Q: Spirit Spear, the spear charge engine (QW)
   # Deflecting Spin reflects 100% of incoming damage, only for the spinner

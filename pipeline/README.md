@@ -139,8 +139,10 @@ change both, rerun parity). Canonical data home:
 `pipeline/templates/mechanics.yaml` (its Focus-Fire / Resilience and
 AoE-Escalation tables match the wiki's pages — single-target damage is
 punished in large groups and AoE damage is rewarded in larger groups; balance
-patches through 31.030.1 touched none of them) and
-`pipeline/resilience_penetration.yaml` (the cited 69-row melee table).
+patches through 31.030.1 touched none of them); per-weapon Resilience
+Penetration is the pinned snapshot's own item stat
+(`@focusfireprotectionpenetration`, read into `out/item_stats.json`; zero on
+every item of the pinned snapshot, F20).
 
 State: the three ZvZ mechanics are WIRED as supply-side effectiveness
 multipliers, per style, normalized to the balanced style (golden T11 pins the

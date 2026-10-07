@@ -9,8 +9,9 @@
 # weapon. (QW): the row holds only while the player equips that Q or W
 # spell. Weapon entries: sheets/holystaff.yaml.
 subcategory: holystaff
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: heal_sustain, score: 4, evidence: HEALINGBEAM}  # W: Holy Beam, a channelled single-target heal that grows each tick (QW)
-  - {cap: heal_burst, score: 4, evidence: HOLYFLASH}      # Q: Holy Flash, 117 to up to 10 allies in a 5 radius (QW)
+  - {cap: heal_burst, score: 4, evidence: HOLYFLASH}      # Q: Holy Flash, 106 to up to 10 allies in a 5 radius on a 3.5s cooldown (QW)
   - {cap: buff_allies, score: 2, evidence: HOLYHOT}       # W: Holy Blessing, +30% armor and Healing Received for 4s on one ally (QW)
   - {cap: peel, score: 2, evidence: PULSINGHEAL}          # W: Sacred Pulse knocks enemies off an ally (QW)

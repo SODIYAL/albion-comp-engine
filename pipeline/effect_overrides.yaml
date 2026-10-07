@@ -29,9 +29,6 @@ dir_overrides:
   PASSIVE_ARMOR_CASTER_NATURESTAFF:   # same text, nature line
     magicresistance+: [self]
     physicalarmor+: [self]
-  DEFENSIVESLAM:                      # "Attack the targeted enemy... Increases damage resistances" — the
-    magicresistance+: [self]          # buff lands on the CASTER; parser said ally
-    physicalarmor+: [self]
   PASSIVE_SHAPESHIFT_ATTACK_BUFF:     # "you increase your Max and Current Health" — self; parser said ally+self
     hitpointsmaxbonus+: [self]
 
@@ -69,6 +66,7 @@ suppress_flags:
   LEGBREAKER: [purge]                 # movement-buff strip maps to catch/peel by design (remove:movementbuff), not purge
   LETHAL_CLEAVER: [heal]              # "Decreases Max and current Health" — a max-HP cut, no healing
   BLOOD_BLADE: [heal]                 # Blood Ritual — "take X of your Max Health as true damage": self-COST, no heal
+  LAUNCHER: [shield]                  # "Decreases Crowd Control Resistance by 0.15" tripped the shield regex: an enemy CC-resistance cut, nothing shield-like
 
 # ---------------------------------------------------------------------------
 # Real mechanics the structured vocabulary cannot express (damage-absorb
@@ -86,6 +84,8 @@ add:
     anti_dive: "a 300 absorb shield on the tethered ally, who is pulled to the caster (the anti-dive rule: absorb shield)"
   SHAPE_W_AREA_PULL:                  # "pulling up to 5 enemies towards you, rooting them for 1.35"
     clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
+  PBAOE_PULL:                         # Air Compressor — "Create a vacuum in a 7 radius around you, pulling all enemies towards you after 1.5"
+    clump_create: "a 7m pull of every enemy to the caster stacks them for AoE; the parser captured only the self slow"
   SHAPE_W_POLYMORPH:                  # "transforming the first unmounted, not transformed player hit into a helpless animal for 2.5"
     peel: >-
       transformation CC on an ENEMY — a polymorphed diver is disabled outright.
@@ -238,6 +238,8 @@ add:
     buff_allies: "6-ally damage/heal/cast-speed rune; ally output buffs read as ally heal"
   LIFESAVIOR:                         # Everlasting Spirit — "you will become immune to further damage for 3"
     tankiness: "a triggered damage-immunity window; ICEBLOCK2 class"
+  IMMUNEAREA:                         # Wings of Fire — "While inside the area, enemies outside it cannot affect you"
+    tankiness: "untargetable by enemies outside the 5.5m landing area for 6s; untargetability is outside the vocab"
   REFLECT_CHANNEL:                    # Requite — "the shield shoots a magic orb, silencing the attacker for 2"
     anti_dive: "punishes whoever hits you while channeling; ELECTRICSHOCK class"
   HOVER_SPRINT:                       # Hover — "increasing your Move Speed... Grants immunity to Roots and Slows"

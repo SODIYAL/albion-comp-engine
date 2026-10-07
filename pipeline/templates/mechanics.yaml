@@ -70,10 +70,10 @@ focus_fire:
   caps:
     unmounted: {attackers: 26, value: 0.750}   # was 0.80 @ 25+ pre-Realm-Divided
     mounted:   {attackers: 18, value: 0.800}
-  # Resilience Penetration: per-weapon/ability stat letting an attacker ignore
-  # a % of this reduction (melee-heavy; cut across the board in Realm
-  # Divided). Per-weapon values live in pipeline/resilience_penetration.yaml
-  # (wired 2026-08-25, MECHANICS_TODO.md Q7); this slot stays null.
+  # Resilience Penetration: a per-item stat letting an attacker ignore a %
+  # of this reduction. Per-weapon values are the pinned snapshot's own item
+  # stat (build_dataset.apply_resilience_penetration, F20; zero on every item
+  # of the pinned snapshot); this slot stays null.
   resilience_penetration: null
 
 # ---------------------------------------------------------------------------

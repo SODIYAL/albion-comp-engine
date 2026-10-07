@@ -336,10 +336,8 @@ Each is decidable today from evidence already in the repo.
   sheet corrections, a golden case where a score decision changes, rebuild,
   gates.
 - **Rows marked for review when curated and never reviewed**: Defensive
-  Slam's buff_allies 3 and peel 2 (`pools/mace.yaml`; the
-  `effect_overrides.yaml` dir override makes its damage-resistance half
-  self-only while the dumps text grants it "for you and up to 10 allies in
-  a 8 radius").
+  Slam's buff_allies 3 and peel 2 (`pools/mace.yaml`; the dumps text grants
+  the buff "for you and up to 10 allies in a 8 radius").
 - **Small W and passive carriers held at no row**: the sword Weakening
   passive (`PASSIVE_REDUCE_DMG_SWORD`, every auto-attack cuts the target's
   damage dealt by 0.02 for 2s, stacking) and Frost Beam (`FROSTBEAM`,
@@ -348,13 +346,15 @@ Each is decidable today from evidence already in the repo.
   (Stillgaze's Neurotoxin 2). Grade each on the rubric and log it.
 - **The W-option discount**: some W rows sit a step below their magnitude
   as "one W among five" (Armor Piercer resist_shred 2; Desecrate root 3
-  beside Freezing Wind 6). Neither the rubric nor the decision log states
+  at 2.6s beside Freezing Wind 4 at 2s and Snare Charge 5 at 2.56s vs
+  players, the pool's 5 set on the vs-mobs 5.11s). Neither the rubric nor the decision log states
   the discount, and the loadout already charges for the W choice (one
   bundle per slot): log it as a rule or re-adjudicate the rows it held.
 - **Tree Q/W spells named as kit reinforcement carry no row**: Burning
-  Field (fire Q), Frozen Surge (frost Q), Raging Flare (every fire
-  weapon's W; an own row on Blazing only) and Holy Orb (holy W) appear in
-  comments as the reason an E row is high, and ground no row of their own.
+  Field (fire Q), Frozen Surge (frost Q) and Holy Orb (holy W) appear in
+  comments as the reason an E row is high, and ground no row of their own;
+  the E-row shares themselves (Blazing zone_control 6, Dawnsong burst_aoe 6,
+  Lifetouch buff_allies 4) read lower spell by spell.
 - **Weapon E self-costs score nothing**: `self_costs` is read from gear
   sheets only, so Whispering Bow's "Decreases your Defense by 0.35",
   Dagger's and Demonfang's max-health true damage and Staff of Balance's
@@ -363,9 +363,7 @@ Each is decidable today from evidence already in the repo.
   and both ports.
 - **Consumable rows cite GEAR_STATS, not their consume spells**: parse_dumps
   indexes no `@consumespell`, so the evidence lint never reads a potion's or
-  meal's text. Read by hand: the Poison Potion's heal_reduction 2 is not in
-  its text (the Hellfire Potion carries the healing cut). Index the consume
-  spells and re-cite the rows.
+  meal's text. Index the consume spells and re-cite the rows.
 - **Offhands follow two models**: five offhands carry hand-scored
   GEAR_STATS rows (tankiness on four shields, heal_sustain on the Blueflame
   Torch) while the build-stat channel reads no `bonusdefensevsplayers`,
@@ -373,6 +371,57 @@ Each is decidable today from evidence already in the repo.
   nothing and the shield rows run against the stats bank's order. Derive
   offhand supply from the stats (mechanics.yaml build_stats, both ports)
   and delete the five rows in the same change.
+- **Polehammer's engage cites its W**: engage 6 sits on Slowing Charge
+  (the Round 9 RULE queue as recorded: "engage 6 on Slowing Charge") while
+  the row's own comment credits the E's 20m line stun, so with every row
+  scoring on its own spell the engage exists only with that W equipped and
+  every dressed Polehammer reads Slowing Charge. Moving it to Groundbreaker
+  needs an `effect_overrides.yaml` engage candidate (the lint reads anti_dive,
+  catch, peel and stun there), a logged decision against the recorded
+  Round 9 list, and the `roles.yaml` source text ("Slowing Charge identity").
+  Needs a maintainer decision.
+- **Impaler's burst_aoe on one spear**: Spirithunter keeps Impaler's
+  burst_aoe 2 as an own row; the spear pool cannot carry it without
+  `derive_ranged_presence` granting ranged_presence to every spear's Impaler
+  bundle (a ground-cast at 12m), which moves golden T49. Whether Impaler is
+  a ranged-presence tool decides the row.
+- **Separator's knock-away**: Separator reads knockback_displace 2 on the
+  knock-away rung (Force of Nature, Hurricane, Holy Explosion); whether
+  isolating a rooted target earns more than that rung (Knockback Shot's 4
+  is a directional push) is a validation-round question.
+- **parse_dumps' prose shield pattern fires on "Crowd Control Resistance"**:
+  `\bresistance` in the shield flag matches it, so 16 spells with no
+  structured shield offer tankiness and self_sustain to the lint (FLEE,
+  GLACIALFIELD, LAUNCHER, PASSIVE_ARMOR_INCREASED_CCR,
+  PASSIVE_CAPE_BRIDGEWATCH, PASSIVE_INCREASED_CCR, PBAOE_KNOCKBACK,
+  RENDINGSWING, ROOTFIELD, SEPARATING_SLAM, SHOULDERTACKLE, SLOWSHIELD,
+  SPIDER_THREAD, SPLASHWAVE, TAR_RING, TORNADO). No row cites those
+  candidates today. Exclude the phrase from the pattern, rebuild the spell
+  index, then delete the LAUNCHER and CURSE_SKELETON_BARF_FDHR suppressions.
+- **parse_dumps resolves list references to element 0**: the tag strip
+  (`re.sub(r"\[/?\w+\]", "", desc)`) also deletes list indices such as
+  `[5]`, so an inline `$$SPELL.buffovertime[5].value$` reads element 0. On
+  the pinned snapshot 166 descriptions change when the indices are kept
+  (127 of them cited; Incubus's max-health cut read -40% where the data
+  carries -20%). The armor passives' doctrine magnitudes are read from these
+  descriptions. The fix makes the 127 cited ids stale in the evidence
+  review: re-read their rows, then accept.
+- **Curation grades deferred at the move to the newer snapshot** (each
+  needs a rubric grade and a logged decision): Oathkeepers' heal_sustain on
+  Blessed Aurora (50 per auto-attack for 5s); Hoarfrost's Avalanche at 320
+  per cast against the T44 pin; Ground Shaker (every mace's W: 219 in a 4
+  radius plus an air-throw) and the 1H Mace's Deep Leap damage, no rows;
+  Harpoon's catch; Battleaxe burst_st 2 on a rejected "1H budget"; Fleet
+  Footwork and Shockwave mobility; the damage-only shared spells (Whirling
+  Strikes, Throwing Blades, Explosive Arrows and others) and the scope of
+  the 191 = 2 burst anchor; Soulscythe's knockback 4 on an air-throw;
+  Siegebow and Energy Shaper's Bolt Shot 4 now that Explosive Salvo scores
+  its own row; Permafrost's burst_aoe 6 (173 vs players); Raging Blink's
+  missing disengage; the Smuggler Cape's tankiness on GEAR_STATS; Fallen
+  Staff's and Chillhowl's ally-save peel; the fear ladder (Demonic 4,
+  Infernal 2); Wings of Fire's engage; the Dragon omelette's Healing Cast
+  rider; Flare's enemy cooldown-rate cut and the `reveal` capability; gear
+  self-costs stated in cited texts.
 - **Black Hands' Devastating Strike knockback has no structured candidate**:
   the second hit's knockback is unscored (an `effect_overrides.yaml` add:
   entry would ground it); the weapon is retired, so only old permalinks
@@ -454,9 +503,6 @@ Each is decidable today from evidence already in the repo.
   the cohorts used to be. Parties of 16+ are full rosters (random-pair
   Jaccard median 0.22, p90 0.41), so roster clusters are untested, not
   refuted. Display only. (V: 10, One killboard sampler)
-- **Cross-check the Resilience Penetration table**
-  (`pipeline/resilience_penetration.yaml`, the cited 69-row melee table,
-  wiki values) against the dumps. Optional. (Q7)
 
 ## Platform: accounts, guilds and CTAs
 

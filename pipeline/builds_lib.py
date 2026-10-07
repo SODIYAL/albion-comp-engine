@@ -214,7 +214,9 @@ def match_gear(text, slot, catalogue):
     hit = pick([k for k, n in cands if n == want])
     if hit:
         return hit
-    hit = pick([k for k, n in cands if want in n])
+    # whole words only: "Knight" names the Knight set, never the
+    # Dragonknight one (a part-word match let a new item capture it)
+    hit = pick([k for k, n in cands if f" {want} " in f" {n} "])
     if hit:
         return hit
     toks = want.split()

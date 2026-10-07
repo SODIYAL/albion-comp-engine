@@ -87,6 +87,22 @@
   capabilities:
     - {cap: tankiness,     score: 2, evidence: DYNAMIC_DEFENSE}  # +80% resist vs the target's damage type
 
+- gear: ARMOR_LEATHER_DRAGON         # Dragonslayer Jacket — Wings of Fire
+  slot: armor
+  curated_as_of: 2026-10-07
+  capabilities:
+    # Wings of Fire: a 0.6s cast that damage does not cancel, then a 12m
+    # leap immune to CC; the landing lays a 5.5m area for 6s in which
+    # enemies outside it cannot affect the wearer, and the wearer's damage
+    # and cooldown rate rise 15% while inside; 40s cooldown. The area's
+    # protection (targetableonlyfrommarker) is outside the structured
+    # vocabulary: effect_overrides.yaml adds its tankiness candidate. It
+    # touches no ally: no buff_allies, no anti_dive.
+    - {cap: tankiness,     score: 2, evidence: IMMUNEAREA}       # untargetable from outside for 6s, but divers who step in still reach the wearer (Mist Cloud's immunity to all effects=3)
+    - {cap: sustained_dps, score: 2, evidence: IMMUNEAREA}       # +15% damage and cooldown rate for 6s (Mortal Agony's +15% damage=2)
+    - {cap: disengage,     score: 2, evidence: IMMUNEAREA}       # CC-immune 12m leap behind a 0.6s cast (Delayed Teleport's delay=2, Evasive Jump=3)
+    - {cap: mobility,      score: 2, evidence: IMMUNEAREA}       # the leap (Evasive Jump=2)
+
 - gear: ARMOR_LEATHER_FEY            # Mistwalker Jacket — Mist Cloud
   slot: armor
   curated_as_of: 2026-08-20

@@ -579,7 +579,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Release an Adrenaline Boost, increasing all your damage by 0.25, your Move Speed by 0.4 and your Auto-Attack Speed by 0.4 for up to 9.\n\nIf you deal no direct damage for 3.5, the Adrenaline Boost will end early.",
+  "description": "Release an Adrenaline Boost, increasing all your damage by 0.25, your Move Speed by 0.4 and your Auto-Attack Speed by 0.4 for up to 9.\n\nIf you deal no direct damage for 3, the Adrenaline Boost will end early.",
   "directions": [
    "self"
   ],
@@ -1026,7 +1026,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Conjure a $spelleffectarea.rectangle.width_max$ wide blessed aurora lasting 3.\nIncreases Move Speed for up to 20 allies passing through the aurora by 0.3 for 5.\nApplies a shield that absorbs up to 400 damage (before resistances) while Move Speed is increased.\n\nBless your maces, restoring 30 Health for you and up to 10 allies in a 8 radius around you with every Auto-Attack within the next 5.",
+  "description": "Conjure a $spelleffectarea.rectangle.width_max$ wide blessed aurora lasting 3.\nIncreases Move Speed for up to 20 allies passing through the aurora by 0.3 for 5.\nApplies a shield that absorbs up to 400 damage (before resistances) while Move Speed is increased.\n\nBless your maces, restoring 50 Health for you and up to 10 allies in a 8 radius around you with every Auto-Attack within the next 5.",
   "directions": [
    "ally",
    "self"
@@ -1978,7 +1978,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "26.8",
-  "description": "Throw a demonic version of your weapon at the targeted position, which lands and spins in a {0} radius for 3.\nDeals {2} physical damage over 3.\nBreaks any active damage shields on all enemies hit and prevents new damage shields from being applied.\nReduces all damage they deal by 0.4 (vs players) / 0.1 (vs mobs) every 1.25 (stacks up to 3 times).\nThe debuff lasts for 5 after leaving the radius.",
+  "description": "Throw a demonic version of your weapon at the targeted position, which lands and spins in a {0} radius for 3.\nDeals {2} physical damage over 3.\nBreaks any active damage shields on all enemies hit and prevents new damage shields from being applied.\nReduces all damage they deal by 0.4 (vs players) / 0.08 (vs mobs) every 1.25 (stacks up to 3 times).\nThe debuff lasts for 5 after leaving the radius.",
   "directions": [
    "enemy"
   ],
@@ -2673,7 +2673,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "4",
-  "description": "Combine up to two abilities. The combo resets after 2.\n\n1st Dragon Leap:\nDash towards the targeted position and kick all enemies, dealing 95 physical damage within a 2.5 radius.\nHitting at least one enemy enables the next combo ability.\n\n2nd Dragon Punch:\nLeap towards the targeted position.\nDeals 70 physical damage to all enemies within a 2.5 radius.\nThrows all enemies hit into the air for $$DASHKICK_UPPERCUT_KNOCKBACK.knockback.duration$.",
+  "description": "Combine up to two abilities. The combo resets after 1.5.\n\n1st Dragon Leap:\nDash towards the targeted position and kick all enemies, dealing 95 physical damage within a 2.5 radius.\nHitting at least one enemy enables the next combo ability.\n\n2nd Dragon Punch:\nLeap towards the targeted position.\nDeals 70 physical damage to all enemies within a 2.5 radius.\nThrows all enemies hit into the air for $$DASHKICK_UPPERCUT_KNOCKBACK.knockback.duration$.",
   "directions": [
    "enemy"
   ],
@@ -2991,7 +2991,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
-  "description": "Turn up to 10 allies within a 5 radius into immovable objects, becoming immune to Forced Movement effects for 6.",
+  "description": "Turn up to 10 allies within a 5 radius into immovable objects, becoming immune to Forced Movement effects for 7.",
   "directions": [
    "ally"
   ],
@@ -3432,7 +3432,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Create an aura in a 7 radius around you lasting for 5.\nDecreases all damage affected enemies deal by 0.6.\nSlows affected enemies by 0.15.\nInvisible enemies entering the aura will be revealed.\n\nDecreases your damage by {2}.",
+  "description": "Create an aura in a 7 radius around you lasting for 5.\nDecreases all damage affected enemies deal by 0.6 (vs. players) / 0.25 (vs. mobs).\nSlows affected enemies by 0.15.\nInvisible enemies entering the aura will be revealed.\n\nDecreases your damage by {2}.",
   "directions": [
    "enemy",
    "self"
@@ -3815,7 +3815,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "12",
-  "description": "Focus fiery energy on the target (enemy, ally or self), igniting all enemies around them in a 5 radius after 1.6, dealing 140 magical damage.\n\nIf the main target is an enemy, they will take 40 magical damage immediately.\n\nIf the main target is yourself or an ally, increase their move speed by 0.6 for 1.6.",
+  "description": "Focus fiery energy on the target (enemy, ally or self), igniting all enemies around them in a 5 radius after 1.6, dealing 140 magical damage.\n\nIf the main target is an enemy, they will take 40 magical damage immediately.\n\nIf the main target is yourself, increase your move speed by 0.6 for 1.6.",
   "directions": [
    "enemy",
    "ally",
@@ -3986,6 +3986,29 @@
   ],
   "target": "ground"
  },
+ "FLARE": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "25",
+  "description": "Shoot a flare towards the targeted position that grows from 4 to {1} over 5.\nEnemies in the area are revealed, cannot become invisible, and have their Cooldown Rate decreased by 0.5.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Flare",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
  "FLEE": {
   "area": null,
   "cast_range": "0",
@@ -4150,7 +4173,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Blow Freezing Wind in a cone in front of you, dealing 200 magical damage on impact.\nRoots all enemies hit for 2.5.",
+  "description": "Blow Freezing Wind in a cone in front of you, dealing 200 magical damage on impact.\nRoots all enemies hit for 2.",
   "directions": [
    "enemy",
    "self"
@@ -4379,7 +4402,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "8",
-  "description": "Fire a Frost Lance from the targeted position in the targeted direction.\nHitting an enemy causes the lance to explode, dealing 148 magical damage to all enemies within 3 radius.\nDecreases damage resistances of all enemies hit by 0.12 for 3.",
+  "description": "Fire a Frost Lance from the targeted position in the targeted direction.\nHitting an enemy causes the lance to explode, dealing 134 magical damage to all enemies within 3 radius.\nDecreases damage resistances of all enemies hit by 0.12 for 3.",
   "directions": [
    "enemy"
   ],
@@ -4874,6 +4897,7 @@
    "enemy"
   ],
   "escalation": {
+   "duration": 0.08,
    "value": 0.08
   },
   "flags": [
@@ -5422,7 +5446,7 @@
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "3.5",
-  "description": "Conjure a Holy Flash at the targeted position, restoring 117 Health for up to 10 allies in a 5 radius.",
+  "description": "Conjure a Holy Flash at the targeted position, restoring 106 Health for up to 10 allies in a 5 radius.",
   "directions": [
    "ally"
   ],
@@ -5496,7 +5520,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
-  "description": "Combine up to two abilities. The combo resets after 4.\n\n1st Divine Protection:\nGive the targeted ally a shield, absorbing up to 456.3 damage (before resistances) for 4.\nAs long as the shield remains unbroken, you can cast Divinity's Grace.\n\n2nd Divinity's Grace:\nDetonate the shield, releasing a healing pulse that restores 160 Health for up to 10 allies in a 5 radius around the target.",
+  "description": "Combine up to two abilities. The combo resets after 4 (elapsed time before recasting is refunded).\n\n1st Divine Protection:\nGive the targeted ally a shield, absorbing up to 456.3 damage (before resistances) for 4.\nAs long as the shield remains unbroken, you can cast Divinity's Grace.\n\n2nd Divinity's Grace:\nDetonate the shield, releasing a healing pulse that restores 160 Health for up to 10 allies in a 5 radius around the target.",
   "directions": [
    "ally",
    "self"
@@ -5670,12 +5694,13 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Release a sonic wave in a cone in front of you, dealing 62 magical damage.\nSlows all enemies hit by 0.35 for 4.\nDecreases damage dealt by 0.3 for 4.\nInterrupts enemy spell casting.",
+  "description": "Release a sonic wave in a cone in front of you, dealing 62 magical damage.\nSlows all enemies hit by 0.35 for 4.\nDecreases damage dealt by 0.3 (vs. players) / 0.2 (vs. mobs) for 4.\nInterrupts enemy spell casting.",
   "directions": [
    "enemy",
    "self"
   ],
   "escalation": {
+   "duration": 0.08,
    "value": 0.08
   },
   "flags": [
@@ -5780,7 +5805,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Launch a giant snowball in the targeted direction, rolling over all enemies.\nDeals 120 magical damage (damage cannot be reflected), knocking back all enemies hit by 10.\n\nThe snowball leaves behind a freezing trail, lasting 4.\nSlows all enemies on it by 0.4.\n\nIf the snowball collides with terrain it will explode, dealing 160 magical damage (damage cannot be reflected) within a 5 radius.",
+  "description": "Launch a giant snowball in the targeted direction, rolling over all enemies.\nDeals 160 magical damage (damage cannot be reflected). Knocks back enemy players hit by 10.\nThrows enemy mobs in the air for {6}.\n\nThe snowball leaves behind a freezing trail, lasting 4.\nSlows all enemies on it by 0.4.\n\nIf the snowball collides with terrain it will explode, dealing 160 magical damage (damage cannot be reflected) within a 5 radius.",
   "directions": [
    "enemy"
   ],
@@ -5938,6 +5963,30 @@
   ],
   "target": "self"
  },
+ "IMMUNEAREA": {
+  "area": null,
+  "cast_range": "12",
+  "caster_moves": true,
+  "casting_time": "0.6",
+  "channel": null,
+  "cooldown": "40",
+  "description": "Conjure a pair of dragon wings to fly through the air, becoming immune to CC.\nCreates an area with a 5.5 radius at the landing position for 6.\nWhile inside the area, enemies outside it cannot affect you, and your damage and cooldown rate are increased by 0.15.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Wings of Fire",
+  "preferred_target": "neutral",
+  "radius": 5.5,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "ground"
+ },
  "IMPULSE_PUNCH": {
   "area": null,
   "cast_range": "13",
@@ -5975,7 +6024,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
-  "description": "Swing your weapon in a 6 radius around you, dealing 58.59 physical damage.\nCauses all enemies hit to bleed, dealing 20 physical damage every 0.5 while the bleeding enemy is moving within the next $$INNERBLEEDING_BLEED.attributechangeovertime.time$.",
+  "description": "Swing your weapon in a 6 radius around you, dealing 58.59 physical damage.\nCauses all enemies hit to bleed, dealing 20 physical damage every 0.5 while the bleeding enemy is moving within the next $$INNERBLEEDING_BLEED.attributechangeovertime.time$ (this damage cannot be reflected).",
   "directions": [
    "enemy",
    "self"
@@ -6172,6 +6221,7 @@
    "self"
   ],
   "escalation": {
+   "duration": 0.08,
    "value": 0.08
   },
   "flags": [
@@ -6340,7 +6390,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
-  "description": "Hit all enemies in a cone in front of you, throwing them in the air for {0}.\nDeals 75 physical damage.\n\nFor every enemy player hit, the cooldown is reduced by 0.15 (stacks up to {3} times).",
+  "description": "Hit all enemies in a cone in front of you, throwing them in the air for {0}.\nDeals 75 physical damage.\nDecreases Crowd Control Resistance by 0.15 for 4.\n\nFor every enemy player hit, the cooldown is reduced by 0.15 (stacks up to {3} times).",
   "directions": [
    "enemy",
    "self"
@@ -6349,7 +6399,8 @@
    "value": 0.08
   },
   "flags": [
-   "knockback"
+   "knockback",
+   "shield"
   ],
   "max_targets": null,
   "name": "Rising Blow",
@@ -6357,6 +6408,7 @@
   "radius": null,
   "tags": [
    "cc",
+   "debuff",
    "dmg",
    "other"
   ],
@@ -7066,8 +7118,8 @@
   "caster_moves": null,
   "casting_time": "0",
   "channel": null,
-  "cooldown": "0",
-  "description": "Plant a Spiritual Seed in the targeted ally, healing the target for 208.49 Health after $$NATURE_ULTIMATE_SINGLE_PULSE.pulsingspell.time$.\n\nThe ability can be recast again within 2.5.\n\nStacking Spiritual Seed twice on the same target will override the first cast.",
+  "cooldown": "20",
+  "description": "Plant a Spiritual Seed in the targeted ally, healing the target for 208.49 Health after $$NATURE_ULTIMATE_SINGLE_PULSE.pulsingspell.time$.\n\nThe ability can be recast again within 2.5 up to 2 times, increasing its cooldown to 20 and 30.\n\nStacking Spiritual Seed twice on the same target will override the first cast.",
   "directions": [
    "ally"
   ],
@@ -10192,7 +10244,9 @@
    "enemy",
    "self"
   ],
-  "escalation": null,
+  "escalation": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -10206,34 +10260,6 @@
    "other"
   ],
   "target": "ground"
- },
- "PROTOTYPE_BIDE": {
-  "area": null,
-  "cast_range": "0",
-  "caster_moves": null,
-  "casting_time": "0",
-  "channel": true,
-  "cooldown": "50",
-  "description": "Multispell with 6 second time window.\n\n1:\nSlow down by 40% to protect your allies for up to 3 seconds while channeling (cannot be interrupted).\nAllies resistances are increased by 0.4.\nAny time any protected ally takes damage, gain an Engage Armor charge.\n\n2:\nSend out a 14m cone to sun all enemies based on how many Engage Armor charges you have.\n [#] Charges: 0 | 5 | 10 | 15 | 20+ \n [#] Stun Duration: 1s | 1.5s | 2s | 2.5s | 3s",
-  "directions": [
-   "enemy",
-   "ally",
-   "self"
-  ],
-  "escalation": null,
-  "flags": [
-   "shield",
-   "slow",
-   "stun"
-  ],
-  "max_targets": null,
-  "name": "Engage Armor",
-  "preferred_target": null,
-  "radius": 6.0,
-  "tags": [
-   "buff"
-  ],
-  "target": "self"
  },
  "PROTOTYPE_CD_PENALTY": {
   "area": [
@@ -10263,27 +10289,6 @@
   ],
   "target": "ground"
  },
- "PROTOTYPE_CLEAR_MIND": {
-  "area": null,
-  "cast_range": "0",
-  "caster_moves": null,
-  "casting_time": "0",
-  "channel": null,
-  "cooldown": "35",
-  "description": "Gain 4 stacks of 20% movement speed for up to 6s.\nThe next 4 ability uses refund 20% of the cooldown of all weapon ability slots, and remove one stack of movement speed.",
-  "directions": [],
-  "escalation": null,
-  "flags": [],
-  "max_targets": null,
-  "name": "Clear Mind",
-  "preferred_target": null,
-  "radius": null,
-  "tags": [
-   "buff",
-   "other"
-  ],
-  "target": "self"
- },
  "PROTOTYPE_DISORIENT": {
   "area": null,
   "cast_range": "0",
@@ -10310,29 +10315,6 @@
    "cc"
   ],
   "target": "self"
- },
- "PROTOTYPE_FLARE": {
-  "area": null,
-  "cast_range": "11",
-  "caster_moves": null,
-  "casting_time": "0",
-  "channel": null,
-  "cooldown": "30",
-  "description": "Shoot a flare towards the targeted position growing from 4m to 7.5m over 5s.\nEnemies in the area are revealed, cannot go invisible, and have their cooldowns paused.",
-  "directions": [
-   "enemy"
-  ],
-  "escalation": null,
-  "flags": [],
-  "max_targets": null,
-  "name": "Illuminating Flare",
-  "preferred_target": null,
-  "radius": 4.0,
-  "tags": [
-   "debuff",
-   "other"
-  ],
-  "target": "ground"
  },
  "PROTOTYPE_GLIDE": {
   "area": null,
@@ -10380,29 +10362,6 @@
    "buff",
    "cc",
    "other"
-  ],
-  "target": "ground"
- },
- "PROTOTYPE_IMMUNEAREA": {
-  "area": null,
-  "cast_range": "7",
-  "caster_moves": true,
-  "casting_time": "0.6",
-  "channel": null,
-  "cooldown": "40",
-  "description": "Place a 7m immunity field on the ground for 5s.\nWhile you are in the area, you are immune to all damage or CC from enemies outside of the area.\nWhile in the area, all damage and cooldown reduction increased by 15%.",
-  "directions": [
-   "enemy",
-   "self"
-  ],
-  "escalation": null,
-  "flags": [],
-  "max_targets": null,
-  "name": "Immunity Area",
-  "preferred_target": null,
-  "radius": 7.0,
-  "tags": [
-   "buff"
   ],
   "target": "ground"
  },
@@ -10686,7 +10645,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
-  "description": "Swing your weapon up to 3 times in the target direction, dealing 80 physical damage each hit.\nHitting an enemy with all three swings increases your Move Speed by 0.3, and Auto-Attack Damage by 0.3 for 4.",
+  "description": "Swing your weapon up to 3 times in the targeted direction, dealing 80 physical damage each hit.\nHitting an enemy with all three swings increases your Move Speed by 0.3, and Auto-Attack Damage by 0.3 for 4.",
   "directions": [
    "enemy"
   ],
@@ -10807,7 +10766,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Swing your staff in a 6 radius around you, knocking back all enemies hit by 4.26.\nDeals 51.81 physical damage.\nDecreases all damage dealt by 0.5 for 5.\n\nAffected players will be unable to Auto-Attack.\nAffected mobs will have their Auto-Attack Speed reduced by 0.5.",
+  "description": "Swing your staff in a 6 radius around you, knocking back all enemies hit by 4.26.\nDeals 51.81 physical damage.\nDecreases all damage dealt by 0.5 (vs players) / 0.5 (vs mobs) for 5.\n\nAffected players will be unable to Auto-Attack.\nAffected mobs will have their Auto-Attack Speed reduced by 0.5.",
   "directions": [
    "enemy",
    "self"
@@ -11221,7 +11180,7 @@
    "heal",
    "other"
   ],
-  "target": "knockeddownplayer"
+  "target": "knockeddownfriendplayer"
  },
  "RETALIATE2": {
   "area": null,
@@ -11997,7 +11956,7 @@
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "15",
-  "description": "Shoot an energy orb in the target direction, transforming the first unmounted, not transformed player hit into a helpless animal for 2.5.\nHitting a mob or transformed player will decrease their max and current Health by 0.15 for 5 instead.\nThe affected player becomes immune to Polymorph's non damage effects for 5.\n\nThe Orb explodes on impact, dealing 110 magical damage in a 4 radius.\n\nHitting at least one enemy will apply one Shift Charge on you.\n\nShift Charges are consumed to empower the abilities of your Shape (stacks are removed when mounting).",
+  "description": "Shoot an energy orb in the targeted direction, transforming the first unmounted, not transformed player hit into a helpless animal for 2.5.\nHitting a mob or transformed player will decrease their max and current Health by 0.15 for 5 instead.\nThe affected player becomes immune to Polymorph's non damage effects for 5.\n\nThe Orb explodes on impact, dealing 110 magical damage in a 4 radius.\n\nHitting at least one enemy will apply one Shift Charge on you.\n\nShift Charges are consumed to empower the abilities of your Shape (stacks are removed when mounting).",
   "directions": [
    "enemy",
    "self"
@@ -12282,7 +12241,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Wind up for 0.6 to perform a shrinking smash in a cone in front of you, decreasing max and current Health of all enemies hit by 0.4 and their damage dealt and Healing Cast by 0.4 for 8.\nDeals 98.28 magical damage.",
+  "description": "Wind up for 0.6 to perform a shrinking smash in a cone in front of you.\nDecreases max and current Health of all enemies hit by 0.2 for 8.\nDecreases damage dealt by 0.4 (vs. players) / 0.25 (vs. mobs) for 8.\nDecreases Healing Cast by 0.4 for 8.\nDeals 98.28 magical damage.",
   "directions": [
    "enemy",
    "self"
@@ -13020,7 +12979,7 @@
     "width": 5.0
    }
   ],
-  "cast_range": "12",
+  "cast_range": "15",
   "caster_moves": null,
   "casting_time": "0",
   "channel": null,
@@ -13213,7 +13172,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
-  "description": "Call down a shooting star shower, dealing 63 magical damage in a 8 radius around you every 0.6, while channeling for up to {1} (can't be interrupted).\nIncreases your Resilience Penetration by 0.2.\nEach 1 channeled costs 4 Energy.",
+  "description": "Call down a shooting star shower, dealing 63 magical damage in a 8 radius around you every 0.6, while channeling for up to {1} (cannot be interrupted).\nEach 1 channeled costs 4 Energy.",
   "directions": [
    "self"
   ],
@@ -13226,7 +13185,6 @@
   "preferred_target": "neutral",
   "radius": 8.0,
   "tags": [
-   "buff",
    "dmg",
    "other"
   ],
@@ -13410,7 +13368,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "0",
-  "description": "Combine up to two abilities. The combo resets 6 after the first ability has ended.\n\n1st Reach Limits:\nConcentrate your power, increasing your Move Speed by 0.3 while channeling for up to {0}. \nIncreases all damage you deal by 0.35 for 6.\nEnding the channel enables the next combo ability.\n\n2nd Limitbreaker:\nSwipe your sword twice in a cone in front of you, dealing 112 physical damage with each swipe.",
+  "description": "Combine up to two abilities. The combo resets 6 after the first ability has ended (elapsed time before recasting is refunded).\n\n1st Reach Limits:\nConcentrate your power, increasing your Move Speed by 0.3 while channeling for up to {0}. \nIncreases all damage you deal by 0.35 for 6.\nEnding the channel enables the next combo ability.\n\n2nd Limitbreaker:\nSwipe your sword twice in a cone in front of you, dealing 112 physical damage with each swipe.",
   "directions": [
    "self"
   ],
@@ -13835,7 +13793,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Leap towards the targeted position, becoming immune to all Crowd Control effects, debuffs (except damage over time effects), and damage until impact.\nRoots all enemies in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius on impact for 2.65.\nDeals 191.65 physical damage.\n\nConjure a mist of souls in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius around the impact location, lasting 0.5.\nIncreases Move Speed by 0.85 and Auto-Attack Speed by 0.85, and reduces Cast Times by 0.85, for up to $$TRIDENTTHROW_AREA.spelleffectarea.maxeffectareatargets$ allies within it.",
+  "description": "Leap towards the targeted position, becoming immune to all Crowd Control effects, debuffs (except damage over time effects), and damage until impact.\nRoots all enemies in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius on impact for 2.65.\nDeals 220 physical damage.\n\nConjure a mist of souls in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius around the impact location, lasting 0.5.\nIncreases Move Speed by 0.75 and Auto-Attack Speed by 0.75, and reduces Cast Times by 0.75, for up to $$TRIDENTTHROW_AREA.spelleffectarea.maxeffectareatargets$ allies within it.",
   "directions": [
    "enemy",
    "ally"
@@ -13963,6 +13921,7 @@
    "enemy"
   ],
   "escalation": {
+   "duration": 0.08,
    "value": 0.08
   },
   "flags": [
@@ -14888,6 +14847,27 @@
    "other"
   ],
   "target": "ground"
+ },
+ "WEAPON_SPRINT": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "40",
+  "description": "Gain 4 charges of Burning Momentum.\nEach Burning Momentum charge grants 0.18 movement speed for up to 6.\nEach of the next 4 ability uses refunds 0.15 of the cooldown of all weapon ability slots, and removes 1 charge of Burning Momentum.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Burning Momentum",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
  },
  "WELLOFLIFE2": {
   "area": [

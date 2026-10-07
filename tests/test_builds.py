@@ -624,6 +624,17 @@ _check_quiet("MASTERSHEET tune:sheets accepts 0 (removes the row) and 7, and "
              _edge_error is None and _committed_tune_error is None,
              f"{_edge_error} / {_committed_tune_error}")
 
+# free-text gear names match whole words: a caller's "Knight" names the
+# Knight set, and a newer item whose name merely contains the word (the
+# Dragonknight prototype set) never captures it
+with open(os.path.join(PIPELINE, "out", "gear_lines.json"), encoding="utf-8") as _f:
+    _gear_catalogue = json.load(_f)
+_knight = {s: bl.match_gear("Knight", s, _gear_catalogue) for s in ("armor", "head")}
+_check_quiet("gear names match whole words: 'Knight' resolves to the Knight "
+             "armor and helmet, never the Dragonknight prototype",
+             _knight == {"armor": "ARMOR_PLATE_SET2", "head": "HEAD_PLATE_SET2"},
+             str(_knight))
+
 # ------------------------------------------------------------------ summary
 n_ok = sum(1 for _, ok in results if ok)
 print("=" * 74)

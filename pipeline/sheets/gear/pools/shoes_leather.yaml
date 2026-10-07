@@ -13,8 +13,9 @@ capabilities:
   # speed for 5s; 20s cooldown.
   - {cap: disengage,     score: 2, evidence: DODGE}
   - {cap: mobility,      score: 2, evidence: DODGE}
-  # Refreshing Sprint: +80% move speed and +80% cooldown rate for 5s;
-  # 32.5s cooldown. The cooldown rate is a sliver of sustained pressure
-  # beside the Assassin Hood's channel (sustained_dps 2).
+  # Refreshing Sprint: +80% move speed and +33% cooldown rate for 5s (the
+  # buffovertime nodes; the description repeats the speed value); 32.5s
+  # cooldown. The cooldown rate is a sliver of sustained pressure beside
+  # the Assassin Hood's channel (sustained_dps 2).
   - {cap: mobility,      score: 2, evidence: SPRINT_CD_REDUCTION}
   - {cap: sustained_dps, score: 1, evidence: SPRINT_CD_REDUCTION}

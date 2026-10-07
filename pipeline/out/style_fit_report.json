@@ -1552,7 +1552,7 @@
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
-   "utility_pts": 10,
+   "utility_pts": 12,
    "weak_group_e": true
   },
   "2H_DUALAXE_KEEPER": {
@@ -1764,7 +1764,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 22,
+   "utility_pts": 21,
    "weak_group_e": false
   },
   "2H_DUALMACE_AVALON": {
@@ -1815,7 +1815,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 13,
+   "utility_pts": 18,
    "weak_group_e": false
   },
   "2H_DUALSCIMITAR_UNDEAD": {
@@ -2286,7 +2286,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 20,
+   "utility_pts": 25,
    "weak_group_e": false
   },
   "2H_FROSTSTAFF": {
@@ -2496,7 +2496,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 10,
+   "utility_pts": 12,
    "weak_group_e": false
   },
   "2H_GLAIVE_CRYSTAL": {
@@ -2549,7 +2549,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 6,
+   "utility_pts": 8,
    "weak_group_e": false
   },
   "2H_HALBERD": {
@@ -2706,7 +2706,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 29,
+   "utility_pts": 28,
    "weak_group_e": false
   },
   "2H_HAMMER_AVALON": {
@@ -2757,7 +2757,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 35,
+   "utility_pts": 34,
    "weak_group_e": false
   },
   "2H_HAMMER_CRYSTAL": {
@@ -2808,7 +2808,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "2H_HAMMER_UNDEAD": {
@@ -2859,7 +2859,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 27,
+   "utility_pts": 26,
    "weak_group_e": false
   },
   "2H_HARPOON_HELL": {
@@ -2915,7 +2915,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 12,
+   "utility_pts": 10,
    "weak_group_e": false
   },
   "2H_HOLYSTAFF": {
@@ -3238,7 +3238,7 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 6,
+   "damage_pts": 10,
    "damage_scale": "group",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -3387,7 +3387,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 10,
+   "utility_pts": 12,
    "weak_group_e": false
   },
   "2H_IRONGAUNTLETS_HELL": {
@@ -3677,7 +3677,7 @@
    "e_ramp": false,
    "e_reach": 0.0,
    "e_reach_delivered": 0.0,
-   "e_utility_max": 4,
+   "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "fits",
@@ -3710,7 +3710,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 17,
+   "utility_pts": 16,
    "weak_group_e": false
   },
   "2H_KNUCKLES_SET1": {
@@ -3922,7 +3922,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 4,
+   "utility_pts": 8,
    "weak_group_e": false
   },
   "2H_LONGBOW_UNDEAD": {
@@ -4026,7 +4026,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 24,
+   "utility_pts": 32,
    "weak_group_e": false
   },
   "2H_MACE_MORGANA": {
@@ -4077,7 +4077,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 23,
+   "utility_pts": 25,
    "weak_group_e": false
   },
   "2H_NATURESTAFF": {
@@ -4281,7 +4281,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 31,
+   "utility_pts": 30,
    "weak_group_e": false
   },
   "2H_QUARTERSTAFF": {
@@ -4289,7 +4289,7 @@
    "basis": "derived",
    "caster_moves": true,
    "conditional_payload": false,
-   "damage_pts": 2,
+   "damage_pts": 4,
    "damage_scale": "none",
    "delivery": "melee",
    "e_channel_nonranged": false,
@@ -4387,7 +4387,7 @@
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
-   "utility_pts": 18,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "2H_RAM_KEEPER": {
@@ -4438,7 +4438,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 29,
+   "utility_pts": 28,
    "weak_group_e": false
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {
@@ -4542,7 +4542,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 16,
+   "utility_pts": 18,
    "weak_group_e": false
   },
   "2H_SCYTHE_CRYSTAL": {
@@ -4595,7 +4595,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 11,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_SCYTHE_HELL": {
@@ -5177,7 +5177,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 11,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_TRIDENT_UNDEAD": {
@@ -5235,7 +5235,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 14,
+   "utility_pts": 16,
    "weak_group_e": false
   },
   "2H_TWINSCYTHE_HELL": {
@@ -5288,7 +5288,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 18,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "2H_WARBOW": {
@@ -5998,7 +5998,7 @@
    "basis": "derived",
    "caster_moves": true,
    "conditional_payload": false,
-   "damage_pts": 6,
+   "damage_pts": 8,
    "damage_scale": "group",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -6043,7 +6043,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 6,
+   "utility_pts": 8,
    "weak_group_e": false
   },
   "MAIN_FIRESTAFF_KEEPER": {
@@ -6116,7 +6116,7 @@
    "e_ramp": false,
    "e_reach": 12.0,
    "e_reach_delivered": 12.0,
-   "e_utility_max": 6,
+   "e_utility_max": 4,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -6149,7 +6149,7 @@
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
-   "utility_pts": 18,
+   "utility_pts": 16,
    "weak_group_e": false
   },
   "MAIN_FROSTSTAFF_AVALON": {
@@ -6304,7 +6304,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 20,
    "weak_group_e": false
   },
   "MAIN_HOLYSTAFF": {
@@ -6508,7 +6508,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 19,
+   "utility_pts": 24,
    "weak_group_e": false
   },
   "MAIN_MACE_CRYSTAL": {
@@ -6561,7 +6561,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 26,
    "weak_group_e": false
   },
   "MAIN_MACE_HELL": {
@@ -6614,7 +6614,7 @@
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 25,
+   "utility_pts": 29,
    "weak_group_e": false
   },
   "MAIN_NATURESTAFF": {
@@ -6622,7 +6622,7 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 0,
+   "damage_pts": 2,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -6673,7 +6673,7 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 0,
+   "damage_pts": 2,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -6724,7 +6724,7 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 0,
+   "damage_pts": 2,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -6775,7 +6775,7 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 0,
+   "damage_pts": 2,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_channel_nonranged": false,
@@ -6922,7 +6922,7 @@
    "role_flexible": true,
    "standoff_e": true,
    "utility_carrier": false,
-   "utility_pts": 21,
+   "utility_pts": 26,
    "weak_group_e": false
   },
   "MAIN_SCIMITAR_MORGANA": {
@@ -7026,7 +7026,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "MAIN_SPEAR_KEEPER": {
@@ -7079,7 +7079,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "MAIN_SPEAR_LANCE_AVALON": {
@@ -7132,7 +7132,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 14,
    "weak_group_e": false
   },
   "MAIN_SWORD": {

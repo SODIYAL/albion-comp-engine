@@ -9,9 +9,10 @@
 # weapon. (QW): the row holds only while the player equips that Q or W
 # spell. Weapon entries: sheets/firestaff.yaml.
 subcategory: firestaff
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: knockback_displace, score: 2, evidence: FIRECONE}          # W: Fire Wave, a cone that knocks enemies back by 4 (QW)
   - {cap: peel, score: 2, evidence: FIRECONE}                        # the same cone pushes a diver off the backline (QW)
-  - {cap: buff_allies, score: 2, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: Flame Blast on an ally or self, +60% move speed for 1.6s: marginal (QW)
   - {cap: zone_control, score: 2, evidence: FIREWALL}                # W: Wall of Flames, a 5s wall: enemies touching it burn and flee for 0.5s (QW)
+  - {cap: burst_aoe, score: 4, evidence: SKILLSHOT_FIREBALL}         # W: Raging Flare, 205 in a 5 radius and a 3s ignite (21.4 a second), 20s: the 232-264 rung (QW)
   - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}           # tree-wide stand-in for Fire Bolt's ignite stacking (Q, up to 5 stacks) and Fire Artillery's channel (W)

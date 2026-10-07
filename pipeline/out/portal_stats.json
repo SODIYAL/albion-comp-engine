@@ -1,7 +1,7 @@
 {
  "battles": 21926,
  "content": "ancient_lands",
- "generated_at": "2026-10-04T23:28Z",
+ "generated_at": "2026-10-07T12:17Z",
  "kind": "portal_stats",
  "parties": 24942,
  "pools": {
@@ -585,7 +585,7 @@
          "others": [
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.3,
            "votes": 6
           },
@@ -2821,7 +2821,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.077,
            "votes": 1
           }
@@ -2912,7 +2912,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.143,
            "votes": 2
           },
@@ -4713,7 +4713,7 @@
           },
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.026,
            "votes": 1
           },
@@ -4752,7 +4752,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.026,
            "votes": 1
           },
@@ -4949,7 +4949,7 @@
           },
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.026,
            "votes": 1
           },
@@ -4988,7 +4988,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.026,
            "votes": 1
           },
@@ -5185,7 +5185,7 @@
           },
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.026,
            "votes": 1
           },
@@ -5224,7 +5224,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.026,
            "votes": 1
           },
@@ -5421,7 +5421,7 @@
           },
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.026,
            "votes": 1
           },
@@ -5460,7 +5460,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.026,
            "votes": 1
           },
@@ -5891,7 +5891,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.111,
            "votes": 1
           }
@@ -6639,7 +6639,7 @@
        "build": {
         "armor": {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "of": 7,
          "others": [],
          "share": 1.0,
@@ -6849,7 +6849,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -7263,7 +7263,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -7924,7 +7924,7 @@
          "others": [
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.143,
            "votes": 1
           },
@@ -8747,7 +8747,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 7,
          "others": [],
          "share": 1.0,
@@ -11697,7 +11697,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.2,
            "votes": 1
           }
@@ -12430,7 +12430,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 5,
          "others": [
           {
@@ -13103,7 +13103,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 5,
          "others": [],
          "share": 1.0,
@@ -14904,7 +14904,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.4,
            "votes": 2
           }
@@ -16075,7 +16075,7 @@
         },
         "potion": {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "of": 4,
          "others": [],
          "share": 1.0,
@@ -16083,7 +16083,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 4,
          "others": [],
          "share": 1.0,
@@ -16424,7 +16424,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.007,
          "votes": 4
         },
@@ -16520,7 +16520,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.075,
          "votes": 32
         },
@@ -16697,7 +16697,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.01,
          "votes": 6
         }
@@ -16764,7 +16764,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.009,
          "votes": 3
         },
@@ -17082,7 +17082,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.033,
          "votes": 11
         },
@@ -17413,7 +17413,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.004,
          "votes": 1
         }
@@ -17464,7 +17464,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.015,
          "votes": 4
         },
@@ -17937,7 +17937,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.121,
          "votes": 12
         },
@@ -18081,7 +18081,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.006,
          "votes": 1
         },
@@ -18102,7 +18102,7 @@
        "others": [
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.063,
          "votes": 11
         },
@@ -18818,7 +18818,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.023,
          "votes": 4
         },
@@ -18981,7 +18981,7 @@
        "others": [
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.124,
          "votes": 22
         },
@@ -19652,7 +19652,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.037,
          "votes": 8
         },
@@ -19937,7 +19937,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.028,
          "votes": 6
         }
@@ -20232,7 +20232,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.008,
          "votes": 1
         }
@@ -20344,7 +20344,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.026,
          "votes": 4
         },
@@ -21032,7 +21032,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.026,
          "votes": 4
         },
@@ -21378,7 +21378,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.055,
          "votes": 7
         },
@@ -22137,7 +22137,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.016,
          "votes": 2
         },
@@ -22843,7 +22843,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.025,
          "votes": 3
         }
@@ -23226,7 +23226,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.011,
          "votes": 1
         },
@@ -23463,7 +23463,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.08,
          "votes": 7
         },
@@ -23764,7 +23764,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.023,
          "votes": 2
         },
@@ -23888,7 +23888,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.06,
          "votes": 4
         },
@@ -24149,7 +24149,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.06,
          "votes": 4
         },
@@ -24240,7 +24240,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.01,
          "votes": 1
         },
@@ -24324,7 +24324,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.051,
          "votes": 4
         },
@@ -25004,7 +25004,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.042,
          "votes": 3
         },
@@ -25957,7 +25957,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.045,
          "votes": 3
         },
@@ -26315,7 +26315,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.042,
          "votes": 3
         },
@@ -26622,7 +26622,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.023,
          "votes": 2
         },
@@ -26661,7 +26661,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.065,
          "votes": 6
         },
@@ -26758,7 +26758,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.017,
          "votes": 1
         }
@@ -26971,7 +26971,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.102,
          "votes": 6
         },
@@ -27062,7 +27062,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.049,
          "votes": 3
         },
@@ -27742,7 +27742,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.025,
          "votes": 2
         },
@@ -28274,7 +28274,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.018,
          "votes": 1
         }
@@ -28954,7 +28954,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.022,
          "votes": 1
         }
@@ -29032,7 +29032,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.065,
          "votes": 3
         },
@@ -29105,7 +29105,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.049,
          "votes": 3
         },
@@ -29315,7 +29315,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.018,
          "votes": 1
         },
@@ -29354,7 +29354,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.049,
          "votes": 3
         },
@@ -29625,7 +29625,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.017,
          "votes": 1
         },
@@ -29682,7 +29682,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.034,
          "votes": 2
         },
@@ -29959,7 +29959,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.022,
          "votes": 1
         }
@@ -30212,7 +30212,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.029,
          "votes": 1
         }
@@ -30251,7 +30251,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.029,
          "votes": 1
         }
@@ -30278,7 +30278,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.059,
          "votes": 2
         },
@@ -30475,7 +30475,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.5,
            "votes": 2
           }
@@ -30573,7 +30573,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.5,
            "votes": 2
           }
@@ -31354,7 +31354,7 @@
         },
         "food": {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -31424,7 +31424,7 @@
         },
         "food": {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -31654,7 +31654,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.5,
            "votes": 2
           }
@@ -31731,7 +31731,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.5,
            "votes": 2
           }
@@ -34497,7 +34497,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.125,
          "votes": 10
         },
@@ -34744,7 +34744,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.031,
          "votes": 1
         },
@@ -34909,7 +34909,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.031,
          "votes": 1
         }
@@ -35056,7 +35056,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.071,
          "votes": 2
         },
@@ -35615,7 +35615,7 @@
      "build": {
       "armor": {
        "id": "ARMOR_LEATHER_DRAGON",
-       "name": "Armor Leather Dragon",
+       "name": "Dragonslayer Jacket",
        "of": 38,
        "others": [
         {
@@ -36047,7 +36047,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.036,
          "votes": 1
         }
@@ -36403,7 +36403,7 @@
        "others": [
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.148,
          "votes": 4
         },
@@ -36526,7 +36526,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.029,
          "votes": 1
         },
@@ -36737,7 +36737,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.15,
          "votes": 3
         },
@@ -36890,7 +36890,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.036,
          "votes": 1
         }
@@ -38393,7 +38393,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.091,
          "votes": 1
         },
@@ -38576,7 +38576,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.143,
          "votes": 2
         },
@@ -40068,7 +40068,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.143,
          "votes": 2
         },
@@ -40458,7 +40458,7 @@
        "others": [
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.25,
          "votes": 3
         },
@@ -41501,7 +41501,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -41564,7 +41564,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -46973,7 +46973,7 @@
        "build": {
         "armor": {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -49343,7 +49343,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -50067,7 +50067,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -50369,7 +50369,7 @@
        "build": {
         "armor": {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -50409,7 +50409,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -52901,7 +52901,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -53603,7 +53603,7 @@
        "build": {
         "armor": {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "of": 2,
          "others": [],
          "share": 1.0,
@@ -59281,7 +59281,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.096,
          "votes": 9
         },
@@ -59501,7 +59501,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.049,
          "votes": 4
         },
@@ -59780,7 +59780,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.024,
          "votes": 2
         }
@@ -60105,7 +60105,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.046,
          "votes": 3
         },
@@ -60196,7 +60196,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.015,
          "votes": 1
         }
@@ -60256,7 +60256,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.056,
          "votes": 3
         },
@@ -60427,7 +60427,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.016,
          "votes": 1
         },
@@ -61483,7 +61483,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.036,
          "votes": 2
         }
@@ -62335,7 +62335,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.021,
          "votes": 1
         },
@@ -62576,7 +62576,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.032,
          "votes": 1
         },
@@ -62760,7 +62760,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.1,
          "votes": 3
         },
@@ -62868,7 +62868,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.047,
          "votes": 2
         },
@@ -62901,7 +62901,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.07,
          "votes": 3
         },
@@ -64177,7 +64177,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.029,
          "votes": 1
         }
@@ -64648,7 +64648,7 @@
       },
       "shoes": {
        "id": "SHOES_LEATHER_DRAGON",
-       "name": "Shoes Leather Dragon",
+       "name": "Dragonslayer Shoes",
        "of": 16,
        "others": [
         {
@@ -65048,7 +65048,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.069,
          "votes": 2
         },
@@ -65195,7 +65195,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.034,
          "votes": 1
         }
@@ -65267,7 +65267,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.069,
          "votes": 2
         },
@@ -65481,7 +65481,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.028,
          "votes": 1
         }
@@ -65644,7 +65644,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.043,
          "votes": 1
         }
@@ -66017,7 +66017,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.062,
          "votes": 1
         },
@@ -66316,7 +66316,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.136,
          "votes": 3
         },
@@ -66909,7 +66909,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.095,
          "votes": 2
         },
@@ -68970,7 +68970,7 @@
        "others": [
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.176,
          "votes": 3
         },
@@ -70496,7 +70496,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.054,
          "votes": 17
         },
@@ -70787,7 +70787,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.041,
          "votes": 13
         },
@@ -71287,7 +71287,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.016,
          "votes": 5
         }
@@ -71572,7 +71572,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.039,
          "votes": 12
         }
@@ -71639,7 +71639,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.004,
          "votes": 1
         },
@@ -71867,7 +71867,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.009,
          "votes": 2
         },
@@ -72099,7 +72099,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.023,
          "votes": 3
         },
@@ -72288,7 +72288,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.005,
          "votes": 1
         }
@@ -72418,7 +72418,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.008,
          "votes": 2
         }
@@ -72673,7 +72673,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.053,
          "votes": 13
         },
@@ -72980,7 +72980,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.005,
          "votes": 1
         },
@@ -73086,7 +73086,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.084,
          "votes": 13
         },
@@ -73377,7 +73377,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.058,
          "votes": 9
         },
@@ -73753,7 +73753,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.006,
          "votes": 1
         },
@@ -73816,7 +73816,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.027,
          "votes": 5
         }
@@ -74563,7 +74563,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.076,
          "votes": 9
         },
@@ -74791,7 +74791,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.009,
          "votes": 1
         },
@@ -74836,7 +74836,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.034,
          "votes": 4
         },
@@ -75143,7 +75143,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.008,
          "votes": 1
         }
@@ -75880,7 +75880,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.007,
          "votes": 1
         },
@@ -75992,7 +75992,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.048,
          "votes": 3
         },
@@ -76175,7 +76175,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.016,
          "votes": 1
         },
@@ -76271,7 +76271,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.032,
          "votes": 2
         },
@@ -76332,7 +76332,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.05,
          "votes": 7
         },
@@ -77252,7 +77252,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.009,
          "votes": 1
         },
@@ -77682,7 +77682,7 @@
        "others": [
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.129,
          "votes": 12
         },
@@ -77779,7 +77779,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.059,
          "votes": 3
         },
@@ -78058,7 +78058,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.044,
          "votes": 2
         },
@@ -78085,7 +78085,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.137,
          "votes": 7
         },
@@ -78308,7 +78308,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.017,
          "votes": 1
         }
@@ -78449,7 +78449,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.111,
          "votes": 9
         },
@@ -79322,7 +79322,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.054,
          "votes": 7
         },
@@ -80387,7 +80387,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.021,
          "votes": 2
         },
@@ -81124,7 +81124,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.012,
          "votes": 1
         }
@@ -81789,7 +81789,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.016,
          "votes": 1
         },
@@ -81993,7 +81993,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.017,
          "votes": 1
         }
@@ -82044,7 +82044,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.033,
          "votes": 2
         },
@@ -82123,7 +82123,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.016,
          "votes": 1
         }
@@ -83125,7 +83125,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.053,
          "votes": 3
         },
@@ -83465,7 +83465,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.024,
          "votes": 1
         }
@@ -84115,7 +84115,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.047,
          "votes": 2
         },
@@ -84301,7 +84301,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.024,
          "votes": 1
         },
@@ -84923,7 +84923,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.027,
            "votes": 2
           },
@@ -85284,7 +85284,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.16,
            "votes": 4
           }
@@ -85359,7 +85359,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.014,
            "votes": 1
           }
@@ -85562,7 +85562,7 @@
          "others": [
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.137,
            "votes": 10
           },
@@ -86098,7 +86098,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.062,
            "votes": 4
           },
@@ -86465,7 +86465,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.114,
            "votes": 4
           },
@@ -86774,7 +86774,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.017,
            "votes": 1
           },
@@ -87020,7 +87020,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.111,
            "votes": 2
           },
@@ -87335,7 +87335,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.062,
            "votes": 2
           },
@@ -87775,7 +87775,7 @@
          "others": [
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.125,
            "votes": 4
           },
@@ -88056,7 +88056,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.129,
            "votes": 4
           }
@@ -89130,7 +89130,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.222,
            "votes": 2
           }
@@ -89461,7 +89461,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.235,
            "votes": 4
           },
@@ -89569,7 +89569,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.04,
            "votes": 1
           }
@@ -89824,7 +89824,7 @@
           },
           {
            "id": "ARMOR_LEATHER_DRAGON",
-           "name": "Armor Leather Dragon",
+           "name": "Dragonslayer Jacket",
            "share": 0.077,
            "votes": 2
           },
@@ -89990,7 +89990,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 26,
          "others": [
           {
@@ -90191,7 +90191,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.04,
            "votes": 1
           }
@@ -90549,7 +90549,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.091,
            "votes": 2
           },
@@ -90620,7 +90620,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.2,
            "votes": 1
           }
@@ -91036,7 +91036,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.25,
            "votes": 2
           }
@@ -92694,7 +92694,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.077,
            "votes": 1
           },
@@ -93322,7 +93322,7 @@
           },
           {
            "id": "ARMOR_LEATHER_DRAGON",
-           "name": "Armor Leather Dragon",
+           "name": "Dragonslayer Jacket",
            "share": 0.062,
            "votes": 1
           }
@@ -93432,7 +93432,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.062,
            "votes": 1
           },
@@ -93533,7 +93533,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.143,
            "votes": 1
           }
@@ -93987,7 +93987,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.071,
            "votes": 1
           },
@@ -94076,7 +94076,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.222,
            "votes": 2
           },
@@ -94420,7 +94420,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.125,
            "votes": 2
           },
@@ -94765,7 +94765,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 16,
          "others": [
           {
@@ -94953,7 +94953,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 16,
          "others": [
           {
@@ -95431,7 +95431,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.133,
            "votes": 2
           },
@@ -95619,7 +95619,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.062,
            "votes": 1
           },
@@ -95807,7 +95807,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.062,
            "votes": 1
           }
@@ -97380,7 +97380,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.125,
            "votes": 1
           }
@@ -97646,7 +97646,7 @@
           },
           {
            "id": "SHOES_LEATHER_DRAGON",
-           "name": "Shoes Leather Dragon",
+           "name": "Dragonslayer Shoes",
            "share": 0.067,
            "votes": 1
           },
@@ -97857,7 +97857,7 @@
          "others": [
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.2,
            "votes": 1
           }
@@ -98174,7 +98174,7 @@
           },
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.077,
            "votes": 1
           },
@@ -98255,7 +98255,7 @@
         },
         "food": {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "of": 3,
          "others": [
           {
@@ -99163,7 +99163,7 @@
           },
           {
            "id": "HEAD_LEATHER_DRAGON",
-           "name": "Head Leather Dragon",
+           "name": "Dragonslayer Hood",
            "share": 0.077,
            "votes": 1
           },
@@ -99224,7 +99224,7 @@
         },
         "shoes": {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "of": 13,
          "others": [
           {
@@ -99342,7 +99342,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.143,
            "votes": 1
           },
@@ -99560,7 +99560,7 @@
         },
         "potion": {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "of": 13,
          "others": [
           {
@@ -101002,7 +101002,7 @@
           },
           {
            "id": "ARMOR_LEATHER_DRAGON",
-           "name": "Armor Leather Dragon",
+           "name": "Dragonslayer Jacket",
            "share": 0.083,
            "votes": 1
           }
@@ -101347,7 +101347,7 @@
           },
           {
            "id": "MEAL_OMELETTE_DRAGONAREA",
-           "name": "Meal Omelette Dragonarea",
+           "name": "Dragonbound Leyfin Omelette",
            "share": 0.111,
            "votes": 1
           },
@@ -101630,7 +101630,7 @@
          "others": [
           {
            "id": "POTION_LIFEWARD",
-           "name": "Potion Lifeward",
+           "name": "Lifeward Potion",
            "share": 0.273,
            "votes": 3
           },
@@ -102700,7 +102700,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.089,
          "votes": 45
         },
@@ -102889,7 +102889,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.006,
          "votes": 4
         },
@@ -103443,7 +103443,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.106,
          "votes": 22
         },
@@ -103978,7 +103978,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.061,
          "votes": 19
         },
@@ -104279,7 +104279,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.008,
          "votes": 2
         },
@@ -104857,7 +104857,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.071,
          "votes": 14
         },
@@ -105182,7 +105182,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.028,
          "votes": 6
         },
@@ -105455,7 +105455,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.069,
          "votes": 15
         },
@@ -105726,7 +105726,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.005,
          "votes": 1
         },
@@ -106084,7 +106084,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.007,
          "votes": 1
         },
@@ -106220,7 +106220,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.007,
          "votes": 1
         }
@@ -106906,7 +106906,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.022,
          "votes": 3
         },
@@ -107967,7 +107967,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.035,
          "votes": 5
         },
@@ -108046,7 +108046,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.032,
          "votes": 5
         },
@@ -108626,7 +108626,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.033,
          "votes": 3
         },
@@ -108750,7 +108750,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.07,
          "votes": 8
         },
@@ -109053,7 +109053,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.035,
          "votes": 4
         }
@@ -109393,7 +109393,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.051,
          "votes": 4
         },
@@ -109484,7 +109484,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.027,
          "votes": 2
         }
@@ -109697,7 +109697,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.027,
          "votes": 2
         },
@@ -109878,7 +109878,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.069,
          "votes": 5
         },
@@ -110037,7 +110037,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.059,
          "votes": 6
         },
@@ -111770,7 +111770,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.02,
          "votes": 1
         }
@@ -111878,7 +111878,7 @@
         },
         {
          "id": "POTION_LIFEWARD",
-         "name": "Potion Lifeward",
+         "name": "Lifeward Potion",
          "share": 0.016,
          "votes": 1
         }
@@ -111990,7 +111990,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.029,
          "votes": 2
         },
@@ -112107,7 +112107,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.029,
          "votes": 2
         },
@@ -112209,7 +112209,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.074,
          "votes": 5
         },
@@ -114276,7 +114276,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.033,
          "votes": 2
         },
@@ -114622,7 +114622,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.055,
          "votes": 3
         },
@@ -115053,7 +115053,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.021,
          "votes": 1
         }
@@ -115320,7 +115320,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.043,
          "votes": 2
         },
@@ -115666,7 +115666,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.051,
          "votes": 2
         }
@@ -115739,7 +115739,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.019,
          "votes": 1
         }
@@ -115805,7 +115805,7 @@
         },
         {
          "id": "MEAL_OMELETTE_DRAGONAREA",
-         "name": "Meal Omelette Dragonarea",
+         "name": "Dragonbound Leyfin Omelette",
          "share": 0.077,
          "votes": 3
         },
@@ -116025,7 +116025,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.191,
          "votes": 9
         },
@@ -116280,7 +116280,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.021,
          "votes": 1
         }
@@ -116323,7 +116323,7 @@
         },
         {
          "id": "ARMOR_LEATHER_DRAGON",
-         "name": "Armor Leather Dragon",
+         "name": "Dragonslayer Jacket",
          "share": 0.132,
          "votes": 5
         },
@@ -116482,7 +116482,7 @@
         },
         {
          "id": "HEAD_LEATHER_DRAGON",
-         "name": "Head Leather Dragon",
+         "name": "Dragonslayer Hood",
          "share": 0.026,
          "votes": 1
         },
@@ -116560,7 +116560,7 @@
         },
         {
          "id": "SHOES_LEATHER_DRAGON",
-         "name": "Shoes Leather Dragon",
+         "name": "Dragonslayer Shoes",
          "share": 0.105,
          "votes": 4
         },

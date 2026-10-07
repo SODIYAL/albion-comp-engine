@@ -1,8 +1,8 @@
 # Swords: one entry per weapon of the sword tree. An entry carries the
 # weapon's own rows: its E (the weapon's identity) and any override of a
 # shared row. The shared Q/W/passive rows (Heroic Strike, Hamstring,
-# Splitting Slash, Iron Will, Parry Strike, Increased Defense) live in
-# pools/sword.yaml and compose into every sword that can equip them
+# Splitting Slash, Iron Will, Parry Strike, Interrupt, Increased Defense)
+# live in pools/sword.yaml and compose into every sword that can equip them
 # (sheets_lib.compose). Every row scores on its own spell's slot
 # (build_dataset.build_loadout): an own row and a shared row of one
 # capability on different spells both score, and the member reads the

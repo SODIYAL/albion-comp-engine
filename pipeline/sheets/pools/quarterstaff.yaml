@@ -9,13 +9,17 @@
 # weapon. (QW): the row holds only while the player equips that Q or W
 # spell. Weapon entries: sheets/quarterstaff.yaml.
 subcategory: quarterstaff
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: mobility, score: 2, evidence: CARTWHEEL}                              # Q: Cartwheel 8m dash (QW)
-  - {cap: knockback_displace, score: 2, evidence: LAUNCHER}                     # W: Rising Blow cone air-throw; Separator / Forceful Swing knockbacks folded in (QW)
+  - {cap: stun, score: 2, evidence: CONCUSSIVEBLOW_MULTI_1}                     # Q: Concussive Combo, the 3rd hit stuns the target 1.43s (QW)
+  - {cap: knockback_displace, score: 2, evidence: LAUNCHER}                     # W: Rising Blow cone air-throw, no travel: Hallowfall's air-throw rung, 2 (T13) (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech
-  - {cap: sustained_dps, score: 2, evidence: QSTAFF_COMBO}                      # W: Gale Dance, +30% AA damage after three hits; Q: Whirling Strikes folded in (QW)
+  - {cap: sustained_dps, score: 2, evidence: QSTAFF_COMBO}                      # W: Gale Dance, +50% AA damage and +30% Move Speed for 4s after three hits; Q: Whirling Strikes folded in (QW)
   - {cap: anti_dive, score: 2, evidence: QS_WHIRLWIND2}                         # W: Forceful Swing shoves divers 4.26m in 6r (QW)
   - {cap: damage_debuff, score: 2, evidence: QS_WHIRLWIND2}                     # W: -50% damage dealt + AA disable (QW)
+  - {cap: peel, score: 2, evidence: QS_WHIRLWIND2}                              # W: Forceful Swing shoves every enemy within 6m back 4.26m; enemy players cannot Auto-Attack (QW)
+  - {cap: knockback_displace, score: 2, evidence: SEPARATING_SLAM}              # W: Separator knocks every enemy player within 6m of the rooted target back 12m, ignoring CC resistance: a knock-away, on the rung of Force of Nature, Hurricane and Holy Explosion (2); its job is the peel ladder 2 / 4 / 6 (QW)
   - {cap: peel, score: 2, evidence: SEPARATING_SLAM}                            # W: Separator; the ladder's base (Double Bladed Staff 4, Quarterstaff 6) (QW)
   - {cap: root, score: 2, evidence: SEPARATING_SLAM}                            # W: Separator roots the target 2.2s (QW)
-  - {cap: stun, score: 2, evidence: STUNRUN}                                    # W: Stun Run 2.11s; Q: Concussive Combo 3rd hit 1.43s; passive Stunning Strike (QW)
+  - {cap: stun, score: 2, evidence: STUNRUN}                                    # W: Stun Run 2.11s (QW)

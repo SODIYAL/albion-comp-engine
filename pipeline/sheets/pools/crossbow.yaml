@@ -13,12 +13,16 @@
 # catch / mobility on Caltrops: +30% move speed only when an enemy triggers
 # the trap is not movement tooling.
 subcategory: crossbow
+curated_as_of: 2026-10-07
 capabilities:
-  - {cap: burst_aoe, score: 2, evidence: BOLTSHOT}                 # Q: 130 in 3m; W: Explosive Salvo (QW)
+  - {cap: resist_shred, score: 2, evidence: ACID_BOMB}             # W: Explosive Salvo's fumes cut damage resistances by 14% for 3.5s in a 4.5 radius (QW)
+  - {cap: burst_aoe, score: 2, evidence: ACID_BOMB}                # W: Explosive Salvo, 135 in a 4.5 radius (QW)
+  - {cap: zone_control, score: 2, evidence: ACID_BOMB}             # W: the corrosive fume field holds its 4.5 radius for 3.5s (QW)
+  - {cap: burst_aoe, score: 2, evidence: BOLTSHOT}                 # Q: 130 in 3m (QW)
   - {cap: slow, score: 2, evidence: CALTROPS}                      # W: trap, 30% slow in 3r when triggered (QW)
-  - {cap: zone_control, score: 2, evidence: CALTROPS}              # W: 12s trap; Explosive Salvo's 3.5s fumes folded in (QW)
+  - {cap: zone_control, score: 2, evidence: CALTROPS}              # W: 12s trap (QW)
   - {cap: knockback_displace, score: 4, evidence: KNOCKBACKSHOT2}  # W: 10m bolt; Forceful Bolts passive (QW)
   - {cap: peel, score: 4, evidence: KNOCKBACKSHOT2}                # (QW)
   - {cap: silence, score: 4, evidence: SILENCINGBOLT}              # W: 3.83s on the first enemy hit — a single-target skillshot, below the Heavy Mace AoE class (QW)
-  - {cap: resist_shred, score: 2, evidence: SUNDERSHOT}            # W: stacking shred; Salvo fumes (QW)
+  - {cap: resist_shred, score: 2, evidence: SUNDERSHOT}            # W: stacking shred (QW)
   - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}         # crossbow AA pattern

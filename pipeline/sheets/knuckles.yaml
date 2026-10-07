@@ -1,16 +1,17 @@
 # War gloves — one entry per weapon of the knuckles tree, carrying the
 # weapon's E (its identity) and any override of a shared row. The tree's
-# shared Q/W/passive rows (Dragon Leap; Triple Kick, Backhand Strike,
-# Counter, Devastating Combo; the Fatal Fury passives) live in
-# pools/knuckles.yaml and compose into every knuckles weapon that can equip
-# them (sheets_lib.compose). Black Hands is the exception: a knuckles weapon
-# on the dagger menu that takes the dagger pool's spell rows (its entry says
-# how). Every row scores on its own spell (build_dataset.build_loadout): an
-# own row and a shared row of the same capability on different spells both
-# score, and the member reads the larger, never the sum (engine._merge_max,
-# F43). An E-row comment that names a Q/W spell or a passive marks that
-# spell's share of the E row's score; the named spell's shared row, where it
-# has one, still scores on its own slot, and the larger reads.
+# shared Q/W/passive rows (Create Opening, Dragon Leap; Triple Kick,
+# Backhand Strike, Counter, Devastating Combo; the Fatal Fury passives) live
+# in pools/knuckles.yaml and compose into every knuckles weapon that can
+# equip them (sheets_lib.compose). Black Hands is the exception: a knuckles
+# weapon on the dagger menu that takes the dagger pool's spell rows (its
+# entry says how). Every row scores on its own spell
+# (build_dataset.build_loadout): an own row and a shared row of the same
+# capability on different spells both score, and the member reads the
+# larger, never the sum (engine._merge_max, F43). An E-row comment that
+# names a Q/W spell or a passive marks that spell's share of the E row's
+# score; the named spell's shared row, where it has one, still scores on its
+# own slot, and the larger reads.
 
 - weapon: 2H_IRONGAUNTLETS_HELL      # Black Hands — combo striker
   curated_as_of: 2026-08-12
@@ -26,9 +27,8 @@
   # Menu: the dagger Q/W/passive set under the knuckles subcategory. Its own
   # tree pool (pools/knuckles.yaml) reaches none of its menu spells, so it
   # takes the spell rows of the pool whose spells it equips: every
-  # pools/dagger.yaml row but the dagger tree's WEAPON_STATS row (base-stat
-  # rows come from a weapon's own tree only; sheets_lib.pool_rows_for,
-  # F43d). Its own rows are the E's three.
+  # pools/dagger.yaml row (sheets_lib.pool_rows_for, F43d). Its own rows are
+  # the E's three.
   # The E's dumps description is empty: its rows rest on the structured
   # effects (stun, buff removal), which match the community description of
   # Devastating Strike as a two-hit combo (1st hit ~66% damage + purge, 2nd
@@ -78,11 +78,11 @@
     - {cap: burst_aoe,     score: 2, evidence: PUMMELING_STRIKES}  # the cone hits everyone in it
 
 - weapon: 2H_KNUCKLES_MORGANA        # Ravenstrike Cestus — charged crusher
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: GROWING_PUNCH}  # E: charge-scaled AoE crusher
-    - {cap: knockback_displace, score: 4, evidence: GROWING_PUNCH}  # a full channel throws all enemies hit in the air (no travel); Backhand Strike folded in (QW); the pool's Backhand Strike row (3) scores on its own W, the larger reads
+    - {cap: knockback_displace, score: 2, evidence: GROWING_PUNCH}  # a full channel throws all enemies hit in the air, no travel: the air-throw rung, 2 (T13), as Fists of Avalon; the pool's Backhand Strike row (3) scores on its own W, the larger reads
     - {cap: peel,          score: 2, evidence: GROWING_PUNCH}
 
 - weapon: 2H_KNUCKLES_SET1           # Brawler Gloves — geyser brawler

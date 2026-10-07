@@ -28,6 +28,7 @@
    "2H_HARPOON_HELL",
    "2H_ICECRYSTAL_UNDEAD",
    "2H_ICEGAUNTLETS_HELL",
+   "2H_INFERNOSTAFF",
    "2H_INFERNOSTAFF_MORGANA",
    "2H_KNUCKLES_AVALON",
    "2H_KNUCKLES_HELL",
@@ -41,6 +42,7 @@
    "MAIN_ARCANESTAFF_UNDEAD",
    "MAIN_CURSEDSTAFF_UNDEAD",
    "MAIN_FIRESTAFF",
+   "MAIN_FIRESTAFF_CRYSTAL",
    "MAIN_FIRESTAFF_KEEPER",
    "MAIN_FROSTSTAFF",
    "MAIN_FROSTSTAFF_KEEPER",
@@ -246,6 +248,17 @@
    "decisions": [
     {
      "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
      "cooldown": "2",
      "delivery": "ground",
@@ -273,6 +286,17 @@
     },
     {
      "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
      "cooldown": "2",
      "delivery": "ground",
@@ -297,6 +321,17 @@
      "radius": 3.0,
      "slot": "q",
      "spell": "BOLTSHOT"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
     }
    ],
    "status": "granted"
@@ -313,6 +348,17 @@
      "radius": 3.0,
      "slot": "q",
      "spell": "BOLTSHOT"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
     }
    ],
    "status": "granted"
@@ -449,6 +495,17 @@
     },
     {
      "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
      "cooldown": "2",
      "delivery": "ground",
@@ -463,6 +520,17 @@
   },
   "2H_DUALCROSSBOW_HELL": {
    "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
@@ -526,6 +594,17 @@
      "radius": 4.0,
      "slot": "e",
      "spell": "FLAMEPILLAR"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"
@@ -542,6 +621,17 @@
      "radius": 5.0,
      "slot": "e",
      "spell": "METEOR"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"
@@ -558,6 +648,17 @@
      "radius": 9.0,
      "slot": "e",
      "spell": "FIREPHOENIX"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"
@@ -702,6 +803,22 @@
      "radius": 8.0,
      "slot": "e",
      "spell": "GLACIALFIELD"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_INFERNOSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"
@@ -912,6 +1029,17 @@
     },
     {
      "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
      "cooldown": "2",
      "delivery": "ground",
@@ -1072,6 +1200,17 @@
     },
     {
      "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.5,
+     "slot": "w",
+     "spell": "ACID_BOMB"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
      "cooldown": "2",
      "delivery": "ground",
@@ -1176,6 +1315,17 @@
      "radius": null,
      "slot": "e",
      "spell": "PYROBLAST_SKILLSHOT"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"
@@ -1197,9 +1347,20 @@
      "radius": 5.0,
      "slot": "e",
      "spell": "FLAMEDASH"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
-   "status": "not_granted"
+   "status": "granted"
   },
   "MAIN_FIRESTAFF_KEEPER": {
    "decisions": [
@@ -1213,6 +1374,17 @@
      "radius": 2.0,
      "slot": "e",
      "spell": "MAGMASPHERE"
+    },
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
     }
    ],
    "status": "granted"

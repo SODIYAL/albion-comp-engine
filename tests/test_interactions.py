@@ -183,11 +183,12 @@ inter = BASE["interactions"]
 check("all curated spells are embedded in the dataset (9 seeds + the "
       "reflect backlog incl. PUMMELING_STRIKES surfaced by the fuller "
       "descriptions + CURSEDOT + REFLECTAREA, the first GEAR "
-      "record)",
-      len(inter) == 31 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
+      "record, + INNERBLEEDING, whose bleed the newer snapshot states "
+      "cannot be reflected)",
+      len(inter) == 32 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
       and "METEOR" in inter and "THORNSAREA" in inter
       and "PUMMELING_STRIKES" in inter and "CURSEDOT" in inter
-      and "REFLECTAREA" in inter)
+      and "REFLECTAREA" in inter and "INNERBLEEDING" in inter)
 
 # ---- super-additive duplicates (self_cost_offset_min_copies) -------------------
 # The mirror of the count-once rule, and deliberately the ONLY one: Demon

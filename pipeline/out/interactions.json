@@ -2,15 +2,15 @@
  "_meta": {
   "adapter": "build_interactions",
   "adapter_version": "1",
-  "entries": 31,
+  "entries": 32,
   "note": "Spell-keyed PvP interaction records. Scoring reads ONLY verified nonstacking_caps; everything else is display/analysis. unknown is a stored answer, never a guess.",
-  "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+  "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
   "structural_unclaimed": [],
   "structural_unclaimed_gear": [
    "INNER_CORRUPTION",
    "NASTY_WOUNDS"
   ],
-  "verified": 30,
+  "verified": 31,
   "with_nonstacking_caps": 1,
   "with_self_cost_offset": 1
  },
@@ -900,7 +900,7 @@
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: rolling damage \"(damage cannot be reflected)\", knockback 10, freezing trail slow, terrain explosion. Independent snowballs per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
-    "Deals 120 magical damage (damage cannot be reflected), knocking back all enemies hit by 10.",
+    "Deals 160 magical damage (damage cannot be reflected).",
     "If the snowball collides with terrain it will explode, dealing 160 magical damage (damage cannot be reflected) within a 5 radius."
    ],
    "verified_patch": "2026-07-21",
@@ -945,6 +945,59 @@
    "verified_patch": "2026-07-21",
    "weapons": [
     "2H_GLACIALSTAFF"
+   ]
+  },
+  "INNERBLEEDING": {
+   "as_of": "2026-10-07",
+   "badges": [
+    "PARTIAL REFLECT",
+    "DUPLICATE:UNKNOWN"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "swing",
+     "kind": "damage",
+     "reflect": "unknown"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "movement_bleed",
+     "kind": "dot",
+     "reflect": "non_reflectable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "unknown",
+   "effect_name": "Internal Bleeding (6m swing + movement bleed)",
+   "gear_items": [],
+   "interrupt": {
+    "can_interrupt": null,
+    "uninterruptible": null
+   },
+   "name": "Internal Bleeding",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "partial",
+   "scoring_note": null,
+   "self_cost_offset_min_copies": null,
+   "source": "Spell description @ ao-bin-dumps 47e4f5ac: a 6 radius swing dealing 58.59 physical damage; the bleed deals 20 every 0.5 while the bleeding enemy moves, \"(this damage cannot be reflected)\". The swing's reflectability and whether two casters' bleeds coexist are NOT stated.",
+   "structural_interrupt_statements": [],
+   "structural_reflect_statements": [
+    "time$ (this damage cannot be reflected)."
+   ],
+   "verified_patch": "2026-09-23",
+   "weapons": [
+    "2H_AXE",
+    "2H_AXE_AVALON",
+    "2H_DUALAXE_KEEPER",
+    "2H_HALBERD",
+    "2H_HALBERD_MORGANA",
+    "2H_SCYTHE_CRYSTAL",
+    "2H_SCYTHE_HELL",
+    "MAIN_AXE"
    ]
   },
   "LETHAL_CLEAVER": {

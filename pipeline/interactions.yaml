@@ -619,6 +619,29 @@
       reflect: non_reflectable
       duplicate: full
 
+- spell: INNERBLEEDING
+  effect_name: "Internal Bleeding (6m swing + movement bleed)"
+  duplicate: unknown
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 47e4f5ac: a 6 radius swing dealing
+    58.59 physical damage; the bleed deals 20 every 0.5 while the bleeding
+    enemy moves, "(this damage cannot be reflected)". The swing's
+    reflectability and whether two casters' bleeds coexist are NOT stated.
+  as_of: 2026-10-07
+  verified_patch: "2026-09-23"
+  badges: []
+  components:
+    - id: swing
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: movement_bleed
+      kind: dot
+      reflect: non_reflectable
+      cleanse: unknown
+      duplicate: unknown
+
 - spell: MAGMASPHERE
   effect_name: "Magma Sphere (roll + max-Health true damage vs unmounted)"
   duplicate: partial

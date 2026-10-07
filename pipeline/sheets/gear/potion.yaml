@@ -37,9 +37,10 @@
 
 - gear: T7_POTION_SLOWFIELD          # Major Sticky Potion
   slot: potion
-  curated_as_of: 2026-08-20
+  curated_as_of: 2026-10-07
   capabilities:
-    - {cap: slow,          score: 2, evidence: GEAR_STATS}       # tar puddle 7s: slows enemies 57%, cuts the damage they deal 27%
+    - {cap: slow,          score: 2, evidence: GEAR_STATS}       # tar puddle 7s: slows enemies 57%
+    - {cap: damage_debuff, score: 2, evidence: GEAR_STATS}       # -27% damage dealt in the puddle and for 5s after leaving it
 
 - gear: T7_POTION_STONESKIN          # Major Resistance Potion
   slot: potion
@@ -61,15 +62,31 @@
 
 - gear: T8_POTION_COOLDOWN           # Major Poison Potion
   slot: potion
-  curated_as_of: 2026-08-27
+  curated_as_of: 2026-10-07
   capabilities:
-    - {cap: heal_reduction, score: 2, evidence: GEAR_STATS}      # one enemy: true-damage poison, slowed 40% for 0.2s on each direct hit; no healing term
+    - {cap: slow,          score: 2, evidence: GEAR_STATS}       # one enemy: every direct hit for 4s slows it by 0.397 for 0.2s, ignoring CC resistance
+    - {cap: burst_st,      score: 2, evidence: GEAR_STATS}       # 95 true damage a second for 5s on that enemy (unmounted players)
 
 - gear: T8_POTION_LAVA               # Major Hellfire Potion
   slot: potion
-  curated_as_of: 2026-08-27
+  curated_as_of: 2026-10-07
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: GEAR_STATS}       # hellfire puddle 3s: true damage every 0.5s, -50% Healing Received
+    - {cap: burst_aoe,     score: 2, evidence: GEAR_STATS}       # hellfire puddle 3s: true damage every 0.5s
+    - {cap: heal_reduction, score: 2, evidence: GEAR_STATS}      # -50% Healing Received for 3s on every enemy the 4 radius puddle touches
+
+- gear: T8_POTION_LIFEWARD           # Major Lifeward Potion
+  slot: potion
+  curated_as_of: 2026-10-07
+  capabilities:
+    # Thrown up to 11m, a 4m circle: every allied player inside is warded
+    # for 4s. A warded ally held at 1 Health instead of dying is stunned
+    # 2.5s and recovers 26% of max Health at once and 21% over the stun,
+    # Healing Received cut 80% meanwhile; once per ally per 180s; 150s
+    # cooldown. A death floor placed on the dived allies is the
+    # damage-immunity class of the anti-dive rule: Glacial Prison's
+    # one-ally freeze reads 2, Salvation's twenty-ally immunity on a
+    # weapon cooldown 4.
+    - {cap: anti_dive,     score: 2, evidence: GEAR_STATS}
 
 - gear: T8_POTION_TORNADO            # Major Tornado in a Bottle
   slot: potion

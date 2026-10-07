@@ -1,7 +1,7 @@
 # Arcane staffs — one entry per weapon of the arcanestaff tree, carrying the
 # weapon's E (its identity) and any override of a shared row. The tree's
-# shared Q/W/passive rows (Arcane Protection, Magic Shock; Motivating
-# Cleanse, Frazzle, Empowering Beam; Lingering Power) live in
+# shared Q/W/passive rows (Arcane Protection, Magic Shock; Enigma Blade,
+# Motivating Cleanse, Frazzle, Empowering Beam; Lingering Power) live in
 # pools/arcanestaff.yaml and compose into every arcane staff that can equip
 # them (sheets_lib.compose). The utility tree: five of its eight weapons sit
 # outside the pure_dps role set (templates/scoring.yaml). Every row scores
@@ -18,7 +18,7 @@
   capabilities:
     - {cap: stun,         score: 4, evidence: TIME_FREEZE}    # E: 2.5s AoE stasis, ignores CC resistance
     - {cap: peel,         score: 4, evidence: TIME_FREEZE}    # freeze the dive (targets are damage-immune too)
-    - {cap: buff_allies,  score: 4, evidence: EMPOWERBEAM}    # W: stacking ally damage channel; override of the pool's 2 (QW)
+    - {cap: buff_allies,  score: 4, evidence: EMPOWERBEAM}    # W: stacking ally damage channel; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
     - {cap: anti_dive,    score: 2, evidence: TIME_FREEZE}    # divers get frozen out of their window
 
 - weapon: 2H_ARCANESTAFF_CRYSTAL     # Astral Staff — starfall artillery
@@ -48,7 +48,7 @@
     # heal-cut ladder, VALIDATION.md 08, Round 9; curation judgment).
     - {cap: heal_reduction, score: 3, evidence: ARCANE_METEOR}  # E: Dark Auras, -15% Healing Received, x3
     # burst_aoe 2: 112 in 5r sits below the E-damage ladder's 2-anchor
-    # (Trinity Spear 191 in 3r = 2; Bracers/Fists 264/232 = 4; VALIDATION.md
+    # (Trinity Spear 220 in 3r = 2; Bracers/Fists 264/232 = 4; VALIDATION.md
     # C7-E); the identity is the aura blanket, not the hit.
     - {cap: burst_aoe,    score: 2, evidence: ARCANE_METEOR}  # 112 in 5r
     - {cap: slow,         score: 2, evidence: ARCANE_METEOR}  # aura slow 15%, stacks 3x

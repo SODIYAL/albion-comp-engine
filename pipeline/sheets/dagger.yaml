@@ -1,11 +1,11 @@
 # Daggers — one entry per weapon of the dagger tree, carrying the weapon's E
 # (its identity) and any override of a shared row. The tree's shared
 # Q/W/passive rows (Sunder Armor, Deadly Swipe; Dash, Forbidden Stab, Shadow
-# Edge; the AA-speed and Life Leech passives; the base stats) live in
+# Edge, Chain Slash; the AA-speed and Life Leech passives) live in
 # pools/dagger.yaml and compose into every dagger that can equip them
 # (sheets_lib.compose). Black Hands carries the same menu under the knuckles
-# subcategory (knuckles.yaml) and takes the pool's spell rows, the base
-# stats aside (sheets_lib.pool_rows_for). Every row scores on its own spell
+# subcategory (knuckles.yaml) and takes the pool's spell rows
+# (sheets_lib.pool_rows_for). Every row scores on its own spell
 # (build_dataset.build_loadout; a WEAPON_STATS row is always on): an own row
 # and a shared row of the same capability on different spells both score,
 # and the member reads the larger, never the sum (engine._merge_max, F43).
@@ -21,11 +21,8 @@
 # a stationary channel, not a dash.
 
 - weapon: 2H_CLAWPAIR                # Claws — single-target lockdown assassin
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: root,          score: 4, evidence: DISEMBOWEL}          # E: channeled pin, breaks if target moves 6m
     - {cap: catch,         score: 4, evidence: DISEMBOWEL}          # the pin IS the catch; W: Shadow Edge
@@ -53,21 +50,15 @@
     - {cap: heal_reduction, score: 2, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
 
 - weapon: 2H_DAGGERPAIR_CRYSTAL      # Twin Slayers — dagger-ring AoE assassin
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: CRYSTAL_DAGGER_BLADE_RING}  # E: 6-dagger ring, pierce + DoT ring
     - {cap: mobility,      score: 4, evidence: CRYSTAL_DAGGER_BLADE_RING}  # MS on cast + dagger pool dashes
 
 - weapon: 2H_DAGGER_KATAR_AVALON     # Bridled Fury — hit-and-fade burster
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: burst_st,      score: 4, evidence: BACK_SLASH}        # E: charge-scaled cone up to 238
     - {cap: disengage,     score: 4, evidence: BACK_SLASH}        # the E leaps the wielder 8m backwards as it hits
@@ -83,16 +74,13 @@
 # burst here is flat and stealth-delivered.
 
 - weapon: 2H_DUALSICKLE_UNDEAD       # Deathgivers — stealth burst assassin
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # no own sustained_dps row: withholds the Auto-Attack Speed passive's sustained_dps (curation judgment)
   capabilities:
     - {cap: burst_st,      score: 4, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
     - {cap: engage,        score: 4, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
-    - {cap: disengage,     score: 4, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes
-    - {cap: mobility,      score: 4, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap (QW)
+    - {cap: disengage,     score: 4, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes (its pool row, 2, scores on its own W; the larger reads)
+    - {cap: mobility,      score: 4, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap; override of the pool's 2 (QW)
     - {cap: catch,         score: 4, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
 
 - weapon: MAIN_DAGGER                # Dagger (1H) — lifesteal AA skirmisher
@@ -104,11 +92,8 @@
     - {cap: mobility,      score: 4, evidence: BLOODTHIRSTYBLADE}  # +30% MS while active + pool dashes
 
 - weapon: MAIN_DAGGER_HELL           # Demonfang — blood-cone caster dagger
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: BLOOD_BLADE}       # E: 130 cone, recastable x3 (self max-HP cost)
     - {cap: burst_st,      score: 2, evidence: BLOOD_BLADE}       # three cones into one target
@@ -121,13 +106,10 @@
 # wielder only; heal_flag_meaning: self_only).
 
 - weapon: MAIN_RAPIER_MORGANA        # Bloodletter — mobile executioner
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: melee
-  # deliberate non-takes of shared rows (pools/dagger.yaml)
-  except:
-    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # no own sustained_dps row: withholds the Auto-Attack Speed passive's sustained_dps (curation judgment)
   capabilities:
-    - {cap: mobility,       score: 6, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
+    - {cap: mobility,       score: 6, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge; the pool's Dash row (2) scores on its own W, the larger reads
     - {cap: execute,        score: 4, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold
     - {cap: burst_st,       score: 4, evidence: RAPIERSTAB}         # E + stacked Assassin Spirit charges
     - {cap: catch,          score: 4, evidence: RAPIERSTAB}         # W: Chain Slash / Shadow Edge close anything (QW)

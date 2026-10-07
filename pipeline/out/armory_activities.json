@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "note": "Official in-game Armory vocabulary (activity taxonomy, tag groups, session qualification rules). The suggested BUILDS are server-computed and not in the dumps; planner_content_hints are PROVISIONAL owner guidance, never an automatic mapping.",
-  "snapshot_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4"
+  "note": "Official in-game Armory vocabulary (activity taxonomy, tag groups, session qualification rules). The suggested BUILDS are server-computed and not in the dumps; planner_content_hints are PROVISIONAL guidance, pending review, never an automatic mapping.",
+  "snapshot_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050"
  },
  "activities": [
   {
@@ -142,6 +142,73 @@
     "competitive"
    ],
    "uniquename": "crystalleague5v5"
+  },
+  {
+   "desc": "TBD",
+   "image": "Gui/Armory/ARMORY_TRACKING",
+   "name": "Ancient Lands (Large Group)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=10min AND kills>=1 AND pvpfamegained>=100000",
+    ">=10min AND pvefamegained>=200000"
+   ],
+   "tags": [
+    "large_group",
+    "pve",
+    "pvp",
+    "instanced"
+   ],
+   "uniquename": "dragonarealargegroup"
+  },
+  {
+   "desc": "TBD",
+   "image": "Gui/Armory/ARMORY_TRACKING",
+   "name": "Ancient Lands (Medium Group)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=10min AND kills>=1 AND pvpfamegained>=50000",
+    ">=10min AND pvefamegained>=200000"
+   ],
+   "tags": [
+    "medium_group",
+    "pve",
+    "pvp",
+    "instanced"
+   ],
+   "uniquename": "dragonareamediumgroup"
+  },
+  {
+   "desc": "TBD",
+   "image": "Gui/Armory/ARMORY_TRACKING",
+   "name": "Ancient Lands (Small Group)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=10min AND kills>=1 AND pvpfamegained>=25000",
+    ">=10min AND pvefamegained>=200000"
+   ],
+   "tags": [
+    "small_group",
+    "pve",
+    "pvp",
+    "instanced"
+   ],
+   "uniquename": "dragonareasmallgroup"
+  },
+  {
+   "desc": "Instanced PvE for 15-20 player groups of well-coordinated tanks, healers, and damage-dealers.",
+   "image": "Gui/Armory/ARMORY_AVALONIAN_DUNGEON",
+   "name": "Dragon Sanctuary",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND mobskilled>=20"
+   ],
+   "tags": [
+    "large_group",
+    "instanced",
+    "dungeons",
+    "pve"
+   ],
+   "uniquename": "dragondungeons"
   },
   {
    "desc": "Fight for a royal city by capturing Outposts and battling opposing Factions across the map.",

@@ -18,7 +18,7 @@
   role_hint: range
   capabilities:
     - {cap: burst_st,      score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: 386 single shot
-    - {cap: resist_shred,  score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: -15% for 4s on one target; W: Sunder Shot / Salvo stack more (the pool's Sunder Shot row, 2, scores on its own W; the larger reads)
+    - {cap: resist_shred,  score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: -15% for 4s on one target; W: Sunder Shot / Salvo stack more (the pool's Sunder Shot and Explosive Salvo rows, 2, score on their own W; the larger reads)
 
 - weapon: 2H_CROSSBOWLARGE           # Heavy Crossbow — line-pierce interrupter
   curated_as_of: 2026-08-12
@@ -41,7 +41,7 @@
   role_hint: range
   capabilities:
     - {cap: sustained_dps, score: 4, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
-    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (its pool row, 2, scores on its own W); override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
 
 # Energy Shaper — channeled line artillery. The E (Divine Engine) is an
 # uninterruptible, steerable piercing beam (106 every 0.3s): sustained line
@@ -52,14 +52,11 @@
   role_hint: range
   capabilities:
     - {cap: sustained_dps, score: 4, evidence: CROSSBOW_DIVINE_SHOT}  # E: steerable piercing beam, can't be interrupted
-    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}           # Q: 130 in 3m; W: Explosive Salvo 135 in 4.5m; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}           # Q: 130 in 3m; W: Explosive Salvo 135 in 4.5m (its pool row, 2, scores on its own W); override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
 
 - weapon: 2H_DUALCROSSBOW_CRYSTAL    # Arclight Blasters — dash-blast skirmisher
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-07
   role_hint: range
-  # deliberate non-takes of shared rows (pools/crossbow.yaml)
-  except:
-    - {cap: zone_control, evidence: CALTROPS}  # no own zone_control row: withholds Caltrops' zone_control (curation judgment)
   capabilities:
     - {cap: mobility,      score: 4, evidence: CRYSTALXBOW}       # E: dash, recastable x3
     - {cap: burst_aoe,     score: 4, evidence: CRYSTALXBOW}       # 81 in 8m per dash

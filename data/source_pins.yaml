@@ -9,25 +9,27 @@
 #   py -3 pipeline/parse_dumps.py
 #   py -3 pipeline/fetch_item_stats.py
 #   py -3 pipeline/fetch_gear_lines.py
+#   py -3 pipeline/effect_catalogue.py pipeline/out/dumps_cache/<sha12> --report
+#   py -3 pipeline/evidence_review.py   (re-read the rows of every STALE id, then --accept)
 #   py -3 pipeline/build_dataset.py
-# and re-run the full gate list in HANDOFF.md. The manifest
+# and re-run the full gate list in CLAUDE.md. The manifest
 # (pipeline/out/source_manifest.json) records what was actually fetched.
 
 ao-bin-dumps:
   repository: https://github.com/ao-data/ao-bin-dumps
-  commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
-  commit_timestamp: "2026-07-27T11:31:41Z"
+  commit: 47e4f5aca4d30b7495afa5a625ce0d5795e32050
+  commit_timestamp: "2026-09-23T11:25:19Z"
   # The server environment these dumps describe. ao-bin-dumps extracts the
   # live-server client; there is no per-server split in this repository.
   environment: live
   # Nearest game patch at/preceding the commit, from out/patch_history.json
   # (patch_history.py over the same repository's git history).
   game_patch:
-    date: "2026-07-21"
-    message: "update 20260721"
-  # Chosen 2026-08-19: master HEAD at pin time. Verified byte-identical
-  # items.json (sha256 fc009a9f…) to the inputs the committed outputs were
-  # already built from — pinning introduced zero data drift.
+    date: "2026-09-23"
+    message: "Update bin dumps 2026-09-23"
+  # The pin is master HEAD at the time it was taken; the decision log
+  # records each move (VALIDATION.md, The game data moves to the newer
+  # snapshot).
   files:
     - items.json
     - spells.json
@@ -37,5 +39,5 @@ ao-bin-dumps:
     # In-game Armory (Radiant Wilds) system config: activity taxonomy, tag
     # groups, dataset requirements. The suggested BUILDS themselves are
     # server-computed and never in the dumps — this file is the official
-    # vocabulary they hang on (parse_armory.py; owner 2026-08-21).
+    # vocabulary they hang on (parse_armory.py).
     - armory.json

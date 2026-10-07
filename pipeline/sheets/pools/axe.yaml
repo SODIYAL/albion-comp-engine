@@ -10,11 +10,14 @@
 # shared row (curation judgment). (QW): the row holds only while the
 # player equips that Q or W spell. Weapon entries: sheets/axe.yaml.
 subcategory: axe
+curated_as_of: 2026-10-07
 capabilities:
   - {cap: catch, score: 2, evidence: AXEBOOST}                         # W: Adrenaline Boost, +40% Move Speed for up to 9s (QW)
   - {cap: resist_shred, score: 3, evidence: AXESMASH}                  # W: Deadly Chop, -16% resistances for 8s on one target (QW)
   - {cap: buff_allies, score: 2, evidence: AXE_CHARGE}                 # W: Battle Rush, +20% Healing Received to allies in 5m (QW)
   - {cap: engage, score: 2, evidence: AXE_CHARGE}                      # W: Battle Rush, a 12m charge (QW)
+  - {cap: heal_reduction, score: 2, evidence: AXE_CHARGE}              # W: Battle Rush, -20% Healing Received on enemies in 5m for 3s; the bleed class of the heal-cut ladder (VALIDATION.md 08, Round 9) (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMORCHANCE_AXE}   # PASSIVE: Increased Defense, +29% own resistances for 2s every 5th auto-attack (the sword's +23% scores 2)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech, heals the wielder only
   - {cap: mobility, score: 2, evidence: RENDINGCOMBO}                  # Q: Rending Rage's third hit, the Raging Leap (QW)
   - {cap: root, score: 2, evidence: RENDINGCOMBO}                      # Q: Raging Leap roots a 5m circle for 1s (QW)
