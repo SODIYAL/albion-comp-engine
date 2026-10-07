@@ -1,28 +1,24 @@
-# mace tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# mace weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# mace tree: the Q/W/passive rows the eight maces share. A row composes into
+# every mace that can equip its evidence spell (WEAPON_STATS: tree-wide). A
+# weapon's own row with the same (cap, evidence) is that weapon's deliberate
+# override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/mace.yaml.
 subcategory: mace
 capabilities:
-  - {cap: engage, score: 2, evidence: CHARGE_ROOT}          # W: Snare Charge (QW)
-  - {cap: root, score: 5, evidence: CHARGE_ROOT}            # Snare Charge
-  - {cap: interrupt, score: 2, evidence: CHARGE_ROOT}       # Snare Charge interrupts casting "if timed right" (interrupt taxonomy)
-  - {cap: peel, score: 4, evidence: GUARDRUNE}              # ally stun/knockback immunity
-  - {cap: anti_dive, score: 2, evidence: GUARDRUNE}         # a protective zone dropped on the dived allies (the anti-dive rule)
-  - {cap: slow, score: 2, evidence: SACRED_GROUND}          # (QW)
-  - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # (QW)
-  - {cap: tankiness, score: 4, evidence: WEAPON_STATS}
-  # Defensive Slam (2026-08-27): a real GROUP defensive buff that was never
-  # curated — +0.15 damage resistances AND +0.15 Crowd Control Resistance
-  # for you and up to 10 allies in an 8m radius, for 4s, off a Q. The
-  # effect map already routes both halves (damageresistance+ /
-  # crowdcontrolresistance+, ally direction -> buff_allies, peel); nothing
-  # cited the spell, so five maces (Oathkeepers, Morning Star, Heavy Mace,
-  # Camlann, 1H Mace) were scoring zero for it. Calibrated against Royal
-  # Armor's 10-ally energy buff (buff_allies 3) and kept BELOW Guard Rune's
-  # outright CC immunity (peel 4) — a resistance is not an immunity.
-  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # +15% resists & CCR to 10 allies (provisional)
-  - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # CCR on the backline blunts pick attempts (provisional)
+  - {cap: engage, score: 2, evidence: CHARGE_ROOT}          # W: Snare Charge, an 11m leap (QW)
+  - {cap: root, score: 5, evidence: CHARGE_ROOT}            # W: Snare Charge roots everyone in 6m for 2.56s (QW)
+  - {cap: interrupt, score: 2, evidence: CHARGE_ROOT}       # W: Snare Charge "Interrupts enemies' spell casting" (interrupt taxonomy) (QW)
+  - {cap: peel, score: 4, evidence: GUARDRUNE}              # W: Guard Rune, up to 10 allies in 5m immune to stuns and forced movement for 5s (QW)
+  - {cap: anti_dive, score: 2, evidence: GUARDRUNE}         # W: Guard Rune, a protective zone dropped on the dived allies (the anti-dive rule) (QW)
+  - {cap: slow, score: 2, evidence: SACRED_GROUND}          # Q: Sacred Ground, -20% in a 3m circle for 3s (QW)
+  - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # Q: Sacred Ground's 3m circle holds ground for 3s (QW)
+  - {cap: tankiness, score: 4, evidence: WEAPON_STATS}      # tank-line weapon, played frontline
+  # Defensive Slam (Q): +0.15 damage resistances and +0.15 Crowd Control
+  # Resistance for 4s "for you and up to 10 allies in a 8 radius".
+  # Calibrated against Royal Armor's 10-ally energy buff (buff_allies 3)
+  # and kept below Guard Rune's outright CC immunity (peel 4): a resistance
+  # is not an immunity.
+  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # Q: Defensive Slam, +15% resistances and CC Resistance to 10 allies in 8m for 4s (QW)
+  - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # Q: Defensive Slam's CC Resistance on the backline blunts pick attempts (QW)

@@ -1,0 +1,108 @@
+# Crossbows — one entry per weapon of the crossbow tree, carrying the weapon's
+# E (its identity) and any override of a shared row. The tree's shared
+# Q/W/passive rows live in pools/crossbow.yaml and compose into every
+# crossbow that can equip them (sheets_lib.compose). The shared W rack is
+# utility forks: Explosive Salvo's AoE shred fumes, Sunder Shot's stacking
+# single-target shred, the Caltrops trap, Knockback Shot's 10m bolt, Noise
+# Eraser's 3.83s single-target silence.
+
+- weapon: 2H_CROSSBOW                # Crossbow — the sniper
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: resist_shred, evidence: SUNDERSHOT}
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: 386 single shot
+    - {cap: resist_shred,  score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: -15% for 4s on one target; W: Sunder Shot / Salvo stack more (Sunder Shot's pool row excepted)
+
+- weapon: 2H_CROSSBOWLARGE           # Heavy Crossbow — line-pierce interrupter
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: burst_aoe, evidence: BOLTSHOT}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: CROSSBOW_ARMORPIERCER}  # E: 225 pierce through the line
+    - {cap: burst_st,      score: 2, evidence: CROSSBOW_ARMORPIERCER}
+    - {cap: interrupt,     score: 2, evidence: CROSSBOW_ARMORPIERCER}  # the pierce interrupts every caster on the line (interrupt taxonomy)
+
+# Siegebow — anti-tank channel artillery. The E (Vicious Barrage) is a cone
+# volley channel (105 per volley) where every volley adds 3% of each enemy
+# player's CURRENT Health as true damage, with +50% Defense while channeling.
+# Current-health true damage is strongest on full-health targets: anti-tank,
+# deliberately NOT execute (the low-health finisher axis). The E's heal flag
+# ("0.03 of their Current Health as true damage") is regex noise, suppressed
+# in effect_overrides.yaml: nothing here heals.
+
+- weapon: 2H_CROSSBOWLARGE_MORGANA   # Siegebow — anti-tank channel artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: sustained_dps, score: 4, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
+    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+
+# Energy Shaper — channeled line artillery. The E (Divine Engine) is an
+# uninterruptible, steerable piercing beam (106 every 0.3s): sustained line
+# damage rather than a one-shot.
+
+- weapon: 2H_CROSSBOW_CANNON_AVALON  # Energy Shaper — channeled line artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: sustained_dps, score: 4, evidence: CROSSBOW_DIVINE_SHOT}  # E: steerable piercing beam, can't be interrupted
+    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}           # Q: 130 in 3m; W: Explosive Salvo 135 in 4.5m; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+
+- weapon: 2H_DUALCROSSBOW_CRYSTAL    # Arclight Blasters — dash-blast skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: burst_aoe, evidence: BOLTSHOT}
+    - {cap: zone_control, evidence: CALTROPS}  # no own zone_control row: withholds Caltrops' zone_control (curation judgment)
+  capabilities:
+    - {cap: mobility,      score: 4, evidence: CRYSTALXBOW}       # E: dash, recastable x3
+    - {cap: burst_aoe,     score: 4, evidence: CRYSTALXBOW}       # 81 in 8m per dash
+    - {cap: disengage,     score: 4, evidence: CRYSTALXBOW}       # three dashes out
+    - {cap: engage,        score: 2, evidence: CRYSTALXBOW}
+
+# Boltcasters — single-target melter. The E (Deathward Climax) is a ramping
+# barrage channel (30 per 0.3s, growing per hit up to 12 stacks): pure
+# focus-fire pressure.
+
+- weapon: 2H_DUALCROSSBOW_HELL       # Boltcasters — single-target melter
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: DUAL_RAPIDFIRE}    # E: ramping barrage into one target
+    - {cap: sustained_dps, score: 4, evidence: DUAL_RAPIDFIRE}    # E + Q: Auto Fire channel pattern
+
+- weapon: 2H_REPEATINGCROSSBOW_UNDEAD  # Weeping Repeater — mine zoner
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: burst_aoe, evidence: BOLTSHOT}
+    - {cap: zone_control, evidence: CALTROPS}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: GROUNDMINE}        # E: 270 mine in 7m
+    - {cap: zone_control,  score: 4, evidence: GROUNDMINE}        # the planted mine denies the ground it watches
+    - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}      # repeater AA pattern; override of the pool's 2
+
+- weapon: MAIN_1HCROSSBOW            # Light Crossbow — sticky-bomb poker
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/crossbow.yaml)
+  except:
+    - {cap: burst_aoe, evidence: BOLTSHOT}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: EXPLODING_SHOT}    # E: 180 in 5m delayed bomb

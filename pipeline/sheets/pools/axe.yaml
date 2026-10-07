@@ -1,18 +1,18 @@
-# axe tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# axe weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# axe tree: the Q/W/passive rows the eight axes share. A row composes into
+# every axe that can equip its evidence spell (WEAPON_STATS: tree-wide). A
+# weapon's own row with the same (cap, evidence) is that weapon's deliberate
+# override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/axe.yaml.
 subcategory: axe
 capabilities:
-  - {cap: catch, score: 2, evidence: AXEBOOST}                         # (QW)
-  - {cap: resist_shred, score: 3, evidence: AXESMASH}                  # (QW)
-  - {cap: buff_allies, score: 2, evidence: AXE_CHARGE}                 # (QW)
-  - {cap: engage, score: 2, evidence: AXE_CHARGE}                      # (QW)
-  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech
-  - {cap: mobility, score: 2, evidence: RENDINGCOMBO}                  # (QW)
-  - {cap: root, score: 2, evidence: RENDINGCOMBO}                      # (QW)
-  - {cap: heal_reduction, score: 2, evidence: RENDINGSTRIKE}           # bleed cap (QW)
-  - {cap: sustained_dps, score: 4, evidence: RENDINGSTRIKE}            # bleeds (QW)
+  - {cap: catch, score: 2, evidence: AXEBOOST}                         # W: Adrenaline Boost, +40% Move Speed for up to 9s (QW)
+  - {cap: resist_shred, score: 3, evidence: AXESMASH}                  # W: Deadly Chop, -16% resistances for 8s on one target (QW)
+  - {cap: buff_allies, score: 2, evidence: AXE_CHARGE}                 # W: Battle Rush, +20% Healing Received to allies in 5m (QW)
+  - {cap: engage, score: 2, evidence: AXE_CHARGE}                      # W: Battle Rush, a 12m charge (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech, heals the wielder only
+  - {cap: mobility, score: 2, evidence: RENDINGCOMBO}                  # Q: Rending Rage's third hit, the Raging Leap (QW)
+  - {cap: root, score: 2, evidence: RENDINGCOMBO}                      # Q: Raging Leap roots a 5m circle for 1s (QW)
+  - {cap: heal_reduction, score: 2, evidence: RENDINGSTRIKE}           # Q: Rending bleed cap, -12% Healing Received for 5s at 3 stacks; the bleed class of the heal-cut ladder (VALIDATION.md 08, Round 9) (QW)
+  - {cap: sustained_dps, score: 4, evidence: RENDINGSTRIKE}            # Q: stacking Rending Bleeds (QW)

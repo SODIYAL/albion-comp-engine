@@ -1,0 +1,150 @@
+# Swords: one entry per weapon of the sword tree. An entry carries the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The shared Q/W/passive rows (Heroic Strike, Hamstring,
+# Splitting Slash, Iron Will, Parry Strike, Increased Defense) live in
+# pools/sword.yaml and compose into every sword that can equip them
+# (sheets_lib.compose). Most `except:` entries drop a shared row whose
+# capability the weapon's E row already carries, so a capability keeps
+# one row; an E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score.
+#
+# Iron Will grounds nothing offensive: "Grants you immunity to purges" is
+# a purge immunity, and the purge effects the parser read from it are
+# suppressed in effect_overrides.yaml. Parry Strike grounds no tankiness
+# (momentary-defensive rule: a personal channel or dash defensive is not
+# frontline durability). The Interrupt W scores no silence: an instant
+# interrupt opens no cast-denial window (the Forbidden Stab precedent).
+# Weakening (each auto-attack cuts the target's damage dealt by 2% for
+# 2s, stacking) carries no row.
+
+- weapon: 2H_CLAYMORE                # Claymore — immune-charge duellist
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+  capabilities:
+    - {cap: engage,        score: 6, evidence: CLAYMORECHARGE}    # E: CC+debuff+damage-immune 1s charge
+    - {cap: catch,         score: 4, evidence: CLAYMORECHARGE}    # charge + 0.8s CC-resist-ignoring stun
+    - {cap: mobility,      score: 4, evidence: CLAYMORECHARGE}    # charge + Q dash
+    - {cap: stun,          score: 2, evidence: CLAYMORECHARGE}    # 0.8s on impact
+    - {cap: burst_st,      score: 4, evidence: CLAYMORECHARGE}    # charge-scaled impact, 85 to 290 on the target
+
+# Kingmaker: AoE knock-up wombo sword. The E (Majestic Smash) throws every
+# enemy within 6m into the air, then a vertical smash scaled by Heroic
+# Charges (up to 312, on a line in front and behind) lands while they
+# hang. A finishing blow on a player gives allies within 11m +20% damage
+# for 5s. Engage is 2 and cites the Q: the E is self-centred, so reaching
+# the clump rides on Heroic Strike's dash (W1 kit reinforcement), unlike
+# Carving Sword's engage on its E dash.
+
+- weapon: 2H_CLAYMORE_AVALON         # Kingmaker — AoE knock-up wombo sword
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: peel, evidence: SPLITTINGSLASH}
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: MAJESTIC_SMASH}  # E: 6m air-throw, no travel: Hallowfall's air-throw rung, 2 (T13)
+    - {cap: peel,          score: 4, evidence: MAJESTIC_SMASH}   # every diver within 6m goes airborne
+    - {cap: burst_aoe,     score: 4, evidence: MAJESTIC_SMASH}   # charge-scaled smash up to 312 in a line
+    - {cap: buff_allies,   score: 2, evidence: MAJESTIC_SMASH}   # on-kill ally damage buff, 11m
+    - {cap: execute,       score: 2, evidence: MAJESTIC_SMASH}   # finishing blow snowballs the fight (+20% ally damage) — kill reward (taxonomy rule)
+    - {cap: engage,        score: 2, evidence: HEROICSTRIKE2}    # dash in, then swing — two-step initiation
+
+# Carving Sword: the sword line's shred bruiser. The E (Fearless Strike)
+# dashes through the enemy line, dealing 135 to everyone passed through
+# and cutting their damage resistances by 5-20% for 6s with Heroic
+# Charges: group shred delivered by initiation. Its mobility 4 sits under
+# Dual Swords' 6: Fearless Strike's cooldown is 25s against Spinning
+# Blades' 15s.
+
+- weapon: 2H_CLEAVER_HELL            # Carving Sword — shred-on-dash bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: disengage, evidence: DEFENSERUN}
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+  capabilities:
+    - {cap: resist_shred,  score: 4, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
+    - {cap: engage,        score: 4, evidence: CLAYMORESLASH}    # shred-by-initiation
+    - {cap: mobility,      score: 4, evidence: CLAYMORESLASH}    # E dash; Q: Heroic Strike; W: Blade Cyclone / Heroic Leap
+    - {cap: catch,         score: 4, evidence: CLAYMORESLASH}    # dash + W: Hamstring slow-into-leap
+    - {cap: disengage,     score: 4, evidence: CLAYMORESLASH}    # same dash out; W: Iron Will sprint
+    - {cap: burst_aoe,     score: 2, evidence: CLAYMORESLASH}    # 135 on the path; modest
+
+- weapon: 2H_DUALSCIMITAR_UNDEAD     # Galatine Pair — max-HP-cut AoE bomber
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 6, evidence: BLADE_AREA}        # E: 8.5m waves, charge-scaled to 320
+    - {cap: max_health_cut, score: 2, evidence: BLADE_AREA}       # -10% max and current Health for 7s amplifies focus (taxonomy rule)
+
+# Dual Swords: heroic-charge skirmisher. The E (Spinning Blades) is a
+# leap, immune to CC until impact, into +30% Auto-Attack Speed and +65%
+# physical Auto-Attack Damage for 4s; the kit's damage is sustained melee
+# pressure, not burst. Every W is a build fork: Parry Strike (a
+# damage-immune channel reflecting 125%), Iron Will (Move Speed and
+# Defense sprint), Splitting Slash (line root), Hamstring (slow, then
+# Heroic Leap).
+
+- weapon: 2H_DUALSWORD               # Dual Swords — heroic-charge skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: disengage, evidence: DEFENSERUN}
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+    - {cap: sustained_dps, evidence: HEROICSTRIKE2}
+  capabilities:
+    - {cap: mobility,      score: 6, evidence: SPINATTACK}       # E leap; Q: dash-to-target; W: Blade Cyclone / Heroic Leap
+    - {cap: engage,        score: 4, evidence: SPINATTACK}       # CC-immune leap in
+    - {cap: disengage,     score: 4, evidence: SPINATTACK}       # same leap out; W: Iron Will sprint
+    - {cap: catch,         score: 4, evidence: SPINATTACK}       # Q: Heroic Strike dash; W: Hamstring slow-into-leap
+    - {cap: sustained_dps, score: 4, evidence: SPINATTACK}       # E: +30% AA speed +65% AA damage; heroic charges stack
+    - {cap: burst_aoe,     score: 2, evidence: SPINATTACK}       # 160 on impact in 5m; Q: Cleave — modest
+
+- weapon: MAIN_SCIMITAR_MORGANA      # Clarent Blade — charge-fork wave slicer
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: slow, evidence: HAMSTRINGSWORD}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: MIGHTYSWING}       # E: 170 wave "piercing through all enemies": line-delivered area damage; 3 Heroic Charges add a damage-over-time
+    - {cap: silence,       score: 2, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
+    - {cap: slow,          score: 2, evidence: MIGHTYSWING}       # 1-charge fork; W: Hamstring (QW)
+    - {cap: catch,         score: 2, evidence: MIGHTYSWING}       # slow/silence forks stop escapes
+
+- weapon: MAIN_SWORD                 # Broadsword — leap-interrupt bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: MIGHTYBLOW}        # E: charge-scaled 271 + kill refund
+    - {cap: mobility,      score: 4, evidence: MIGHTYBLOW}        # E leap + Q dash
+    - {cap: engage,        score: 2, evidence: MIGHTYBLOW}        # leap-to-target with interrupt
+    - {cap: catch,         score: 2, evidence: MIGHTYBLOW}
+    - {cap: execute,       score: 2, evidence: MIGHTYBLOW}        # finishing blow refunds 1s cooldown — kill reward (taxonomy rule)
+    - {cap: interrupt,     score: 2, evidence: MIGHTYBLOW}        # the leap interrupts the target's cast (interrupt taxonomy)
+
+- weapon: MAIN_SWORD_CRYSTAL         # Infinity Blade — ramp-and-swipe duellist
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/sword.yaml)
+  except:
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+    - {cap: sustained_dps, evidence: HEROICSTRIKE2}
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: SWORD_BERSERK_RUN_RE}  # E: +35% damage channel into Limitbreaker swipe
+    - {cap: sustained_dps, score: 4, evidence: SWORD_BERSERK_RUN_RE}  # the ramp lasts 6s; heroic engine
+    - {cap: mobility,      score: 4, evidence: SWORD_BERSERK_RUN_RE}  # +30% MS while channeling + Q dash
+    - {cap: burst_aoe,     score: 2, evidence: SWORD_BERSERK_RUN_RE}  # the swipe is a cone

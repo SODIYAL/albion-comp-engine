@@ -40,9 +40,14 @@ Three layers, never merged:
 
 ## The engine today
 
-- 137 combat weapons; 31 capabilities, every one scored by at least one
-  content template (`reveal` is proposed-only, refused with evidence in
-  `effect_map.yaml`). Sheets score 1–7; 2 points = one supply unit.
+- 137 combat weapons; 31 sheet capabilities (`evidence_lint.CAPABILITIES`),
+  every one but `reflect` scored by at least one template (the
+  `effect_map.yaml` reflect note); `ranged_presence` is derived by the build
+  (`reveal` is proposed-only, refused with evidence in `effect_map.yaml`).
+  Sheets score 1–7; 2 points = one supply unit. One sheet per weapon tree
+  (`pipeline/sheets/<tree>.yaml`) beside the tree's shared pool
+  (`sheets/pools/<tree>.yaml`); gear one sheet per slot
+  (`pipeline/sheets/README.md` "Layout").
 - Six content templates with comp-fitted targets and soft caps (person units)
   and hard floors (weapon units); five playstyles (brawl / clap / kite /
   brawl_clap / clap_kite) carrying weight multipliers, `target_mults`,
@@ -88,7 +93,7 @@ Three layers, never merged:
   training split `battle % 5 != 0`; a hand-set map fails the build.
   Duplicates: 1 copy by default; the one super-additive case is
   `self_cost_offset_min_copies` (Demon Armor).
-- Gear scores (curated `sheets/gear/`, the tree-shared actives once in
+- Gear scores (curated `sheets/gear/<slot>.yaml`, the tree-shared actives once in
   `sheets/gear/pools/` and composed per item) through `build_extra`: stat
   channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic
   lookup (`gear_key()`). The active a piece scores is the gear-active

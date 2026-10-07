@@ -1,17 +1,24 @@
-# bow tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# bow weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# bow tree: the Q/W/passive rows the eight bows share. A row composes into
+# every bow that can equip its evidence spell (WEAPON_STATS: tree-wide). A
+# weapon's own row with the same (cap, evidence) is that weapon's deliberate
+# override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/bow.yaml.
+# Not scored:
+#   - knockback_displace on Frost Shot: it knocks the CASTER back 13m, a
+#     self-reposition (disengage row below).
+#   - engage on Speed Shot: self move speed is not initiation.
+#   - tankiness / self_sustain on Deadly Shot: its prose `shield` flag
+#     misfires on the resistance shred; nothing in the bow menu shields or
+#     heals the wielder.
 subcategory: bow
 capabilities:
   - {cap: resist_shred, score: 2, evidence: DEADLYSHOT}     # Q: stacking -3% x3; Piercing Arrows passive (QW)
-  - {cap: catch, score: 2, evidence: GROUNDARROW}           # (QW)
+  - {cap: catch, score: 2, evidence: GROUNDARROW}           # W: Ray of Light (QW)
   - {cap: peel, score: 2, evidence: GROUNDARROW}            # (QW)
-  - {cap: root, score: 2, evidence: GROUNDARROW}            # W: Ray of Light (QW)
-  - {cap: disengage, score: 2, evidence: JUMPSHOT2}         # (QW)
+  - {cap: root, score: 2, evidence: GROUNDARROW}            # W: Ray of Light roots all enemies in 3r for 1.8s (QW)
+  - {cap: disengage, score: 2, evidence: JUMPSHOT2}         # W: Frost Shot knocks the caster back 13m (QW)
   - {cap: slow, score: 2, evidence: PASSIVE_SLOWPOISON}     # every AA slows; Q: Multishot
-  - {cap: mobility, score: 2, evidence: SPEEDSHOT2}         # (QW)
+  - {cap: mobility, score: 2, evidence: SPEEDSHOT2}         # W: Speed Shot, +30% move speed for 2s (QW)
   - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}  # bow AA pattern

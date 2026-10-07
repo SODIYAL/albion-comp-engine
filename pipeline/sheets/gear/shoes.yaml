@@ -1,0 +1,216 @@
+# Shoes, one entry per item. Gear follows the weapon sheets' rules: 1-7
+# scale (2 points = one supply unit), every nonzero score cites an active
+# on the item's dumps menu (out/gear_spells.json). A pair equips ONE
+# active, so rows on different actives are alternatives; the gear-active
+# doctrine (build_dataset resolve_active_doctrine, F36) picks the one that
+# scores. Every pair shares Dodge plus its class's sprint (cloth Energetic,
+# leather Refreshing, plate Rejuvenating; pools/shoes_<class>.yaml); an
+# own row with the same (cap, evidence) overrides the pool row. Anchors:
+# Blink and Evasive Jump read disengage 3; a sprint reads mobility 2.
+# Gatherer sets are not catalogued (non-combat).
+
+# ---------------------------------------- cloth (pools/shoes_cloth.yaml)
+- gear: SHOES_CLOTH_AVALON           # Sandals of Purity
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: HOVER_SPRINT}     # channel speed + root/slow immunity
+    - {cap: mobility,      score: 2, evidence: HOVER_SPRINT}
+
+- gear: SHOES_CLOTH_FEY              # Feyscale Sandals — Ethereal Form
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: TRANSLUCENT}      # untargetable immune form (2s windup)
+    - {cap: mobility,      score: 2, evidence: TRANSLUCENT}
+
+- gear: SHOES_CLOTH_HELL             # Fiend Sandals — Position Swap
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: SWAP}             # swap positions with target + brief immunity
+    # No mobility row: the swap's only structural effect is invincibility
+    # (self and an allied target); one repositioning trick is not group
+    # mobility.
+
+- gear: SHOES_CLOTH_KEEPER           # Druid Sandals — Frost Walk
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: FROSTWALK}        # +60% speed trail
+    - {cap: slow,          score: 2, evidence: FROSTWALK}        # 80% slow on the trail
+
+- gear: SHOES_CLOTH_MORGANA          # Cultist Sandals — Rotten Ground
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: DEMONWALK}
+    - {cap: resist_shred,  score: 2, evidence: DEMONWALK}        # -15% resists on the trail
+    - {cap: heal_reduction, score: 2, evidence: DEMONWALK}       # -15% healing received on the trail
+
+- gear: SHOES_CLOTH_ROYAL            # Royal Sandals — Defenseless Rush
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: GLASS_MOVESPEED}  # +75% speed +75% damage at -75% defense
+    - {cap: sustained_dps, score: 2, evidence: GLASS_MOVESPEED}
+
+- gear: SHOES_CLOTH_SET1             # Scholar Sandals — Focused Run
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: CHANNELED_RUN}    # stun/root/slow immunity while channeling
+    - {cap: mobility,      score: 2, evidence: CHANNELED_RUN}
+
+- gear: SHOES_CLOTH_SET2             # Cleric Sandals — Blink
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: BLINK}            # instant teleport (Evasive Jump=3)
+    - {cap: mobility,      score: 2, evidence: BLINK}
+
+- gear: SHOES_CLOTH_SET3             # Mage Sandals — Delayed Teleport
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: DELAYED_TELEPORT} # 1s delay weakens the escape
+    - {cap: mobility,      score: 2, evidence: DELAYED_TELEPORT}
+
+# ------------------------------------ leather (pools/shoes_leather.yaml)
+- gear: SHOES_LEATHER_AVALON         # Shoes of Tenacity — Blind Spot
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: BLINDSPOT}        # brief invis + speed into the target
+    - {cap: burst_st,      score: 2, evidence: BLINDSPOT}        # +90 bonus damage on the next hit
+
+- gear: SHOES_LEATHER_FEY            # Mistwalker Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: AFTER_IMAGE}      # dash leaving an After Image, then teleport back to it
+    - {cap: mobility,      score: 2, evidence: AFTER_IMAGE}
+
+- gear: SHOES_LEATHER_HELL           # Hellion Shoes — Mark of Sacrifice
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 3, evidence: DEATHMARK}        # invisible channel + dash to the marked target
+    # No mobility row: the mark's enemy effects include
+    # remove:movementbuff, so the dash-to-mark is a CATCH tool.
+    - {cap: catch,         score: 2, evidence: DEATHMARK}        # strips the target's speed buffs on arrival
+
+- gear: SHOES_LEATHER_MORGANA        # Stalker Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: mobility,      score: 3, evidence: DMG_BLINK}        # Raging Blink: teleport + stacking damage buff, recastable within 4s
+    - {cap: engage,        score: 2, evidence: DMG_BLINK}
+    - {cap: sustained_dps, score: 2, evidence: DMG_BLINK}
+
+- gear: SHOES_LEATHER_ROYAL          # Royal Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: JUMP}             # Evasive Jump: immune-while-airborne leap
+    - {cap: mobility,      score: 2, evidence: JUMP}
+
+- gear: SHOES_LEATHER_SET1           # Mercenary Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: CLEANSE_DASH}     # dash + full CC cleanse, usable while CC'd
+    - {cap: mobility,      score: 2, evidence: CLEANSE_DASH}
+
+- gear: SHOES_LEATHER_SET2           # Hunter Shoes — Rush
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: catch,         score: 2, evidence: OVERSPRINT}       # +120% speed + CC-duration window
+    - {cap: mobility,      score: 2, evidence: OVERSPRINT}
+
+- gear: SHOES_LEATHER_SET3           # Assassin Shoes — Swift Cut
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: ASSASSIN_DASH}    # dash behind the target
+    - {cap: mobility,      score: 2, evidence: ASSASSIN_DASH}
+
+- gear: SHOES_LEATHER_UNDEAD         # Specter Shoes — Spectral Run
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: INVISIBLE_WALK}   # invisible repositioning channel
+    # No mobility row: its effects are invisibility plus self energy and
+    # damage penalties, no speed component at all.
+
+# ---------------------------------------- plate (pools/shoes_plate.yaml)
+- gear: SHOES_PLATE_AVALON           # Boots of Valor — Premonition
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: CC_BLOCK}         # replaces CC with a full self-cleanse + speed burst
+    - {cap: tankiness,     score: 2, evidence: CC_BLOCK}         # forced-movement immunity
+
+- gear: SHOES_PLATE_FEY              # Duskweaver Boots
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: engage,        score: 3, evidence: CHARGE_IN}        # uninterruptible dash, knocks all passed 15m
+    - {cap: knockback_displace, score: 2, evidence: CHARGE_IN}
+    - {cap: mobility,      score: 2, evidence: CHARGE_IN}
+
+- gear: SHOES_PLATE_HELL             # Demon Boots — Vengeful Sprint
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: BERSERK_SPRINT}
+    - {cap: sustained_dps, score: 2, evidence: BERSERK_SPRINT}   # missing-HP-scaled speed + damage charges
+
+- gear: SHOES_PLATE_KEEPER           # Judicator Boots — Elbow Smash
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 3, evidence: SHOULDERTACKLE}   # dash + AoE knock-up ignoring CCR
+    - {cap: knockback_displace, score: 2, evidence: SHOULDERTACKLE}
+
+- gear: SHOES_PLATE_ROYAL            # Royal Boots — Royal March
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: ROYAL_MARCH}      # stacking march + root/slow immunity
+    - {cap: engage,        score: 2, evidence: ROYAL_MARCH}
+
+- gear: SHOES_PLATE_SET1             # Soldier Boots
+  slot: shoes
+  curated_as_of: 2026-08-20
+  # Both rows repeat pools/shoes_plate.yaml's Rejuvenating Sprint at the
+  # same scores. The item's own active, Wanderlust (+10% move speed per
+  # second, up to 8 stacks), has no row: the doctrine's assumed pick
+  # supplies nothing from the slot (F36g).
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: SPRINTHOT}        # sprint + heal over 5s
+    - {cap: self_sustain,  score: 2, evidence: SPRINTHOT}
+
+- gear: SHOES_PLATE_SET2             # Knight Boots — Shield Charge
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: CHARGE_SHIELD}    # charge to target
+    # No peel: Shield Charge charges and shields, never touching an enemy
+    # (peel touches the enemy).
+    - {cap: anti_dive,     score: 2, evidence: CHARGE_SHIELD}    # 250 absorb on the ally charged to (the anti-dive rule)
+
+- gear: SHOES_PLATE_SET3             # Guardian Boots — Giant
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: MAXHEALTHBUFF}    # +25% max/current HP, unpurgeable
+    - {cap: mobility,      score: 2, evidence: MAXHEALTHBUFF}
+
+- gear: SHOES_PLATE_UNDEAD           # Graveguard Boots — Battle Frenzy
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: BATTLEFRENZY}     # speed + stun/root/slow immunity + partial cleanse
+    - {cap: mobility,      score: 2, evidence: BATTLEFRENZY}

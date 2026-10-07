@@ -1,0 +1,111 @@
+# Spears: one entry per weapon of the spear tree. An entry carries the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The shared Q/W/passive rows (Spirit Spear charges, Inner
+# Focus, Cripple, Impaler, Harpoon, Deflecting Spin, Life Leech) live in
+# pools/spear.yaml and compose into every spear that can equip them
+# (sheets_lib.compose). Most `except:` entries drop a shared row whose
+# capability the weapon's E row already carries, so a capability keeps
+# one row; an E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score.
+
+- weapon: 2H_GLAIVE                  # Glaive — the pick weapon
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
+  capabilities:
+    - {cap: catch,         score: 4, evidence: SHOVEL}           # E: Fling pulls the target 10m behind the wielder (candidate added in effect_overrides.yaml)
+    - {cap: knockback_displace, score: 4, evidence: SHOVEL}      # enemy-directed forced repositioning
+
+- weapon: 2H_GLAIVE_CRYSTAL          # Rift Glaive — charge-dump line burster
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: SPEAR_AOE_FINISHER}  # E: charge-scaled line blast — the clap identity
+    - {cap: peel,          score: 2, evidence: SPEAR_AOE_FINISHER}  # 4m knock-away on the line: self-peel, not offensive displacement (curation judgment)
+
+# Spirithunter: shred and anti-kite skirmisher. The E (Corrupting Steel)
+# hurls a piercing spear: -12% damage resistances for 4s on everyone hit,
+# and a 4s corruption trail that cuts magic resistance by a further 4%.
+# Cripple (W) slows, purges Move Speed buffs and cuts the target's damage
+# dealt by 25% for 4s. Nothing in the kit cuts or negates healing and
+# nothing targets an ally: no heal_reduction, no buff_allies.
+
+- weapon: 2H_HARPOON_HELL            # Spirithunter — shred anti-kite skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: resist_shred,  score: 4, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + a trail adding -4% magic resistance
+    - {cap: damage_debuff, score: 4, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
+    - {cap: burst_aoe,     score: 2, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)
+
+- weapon: 2H_SPEAR                   # Pike — single-target root lancer
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
+    - {cap: root, evidence: SKILLSHOT_PULL}
+  capabilities:
+    - {cap: root,          score: 4, evidence: HALBERDSMASH}     # E: 2.79s single-target root
+    - {cap: catch,         score: 4, evidence: HALBERDSMASH}     # root + Cripple anti-kite (QW)
+    - {cap: peel,          score: 3, evidence: HALBERDSMASH}     # root the diver
+
+- weapon: 2H_TRIDENT_UNDEAD          # Trinity Spear — immune-leap AoE rooter
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+    - {cap: catch, evidence: LEGBREAKER}
+    - {cap: root, evidence: SKILLSHOT_PULL}
+  capabilities:
+    - {cap: engage,        score: 4, evidence: TRIDENTTHROW}     # E: CC+debuff+damage-immune leap
+    - {cap: root,          score: 4, evidence: TRIDENTTHROW}     # 2.65s AoE root on impact
+    - {cap: mobility,      score: 4, evidence: TRIDENTTHROW}     # the leap; Inner Focus (QW)
+    - {cap: catch,         score: 4, evidence: TRIDENTTHROW}     # leap + root
+    - {cap: buff_allies,   score: 3, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
+    - {cap: peel,          score: 2, evidence: TRIDENTTHROW}     # root the divers
+    - {cap: disengage,     score: 2, evidence: TRIDENTTHROW}     # immune leap out
+    # the impact's own damage, "Deals 191.65 physical damage" to the 3m root
+    # circle: a modest area burst, 191/r3 = 2 beside Battle Bracers' 264/r4 = 4
+    - {cap: burst_aoe,     score: 2, evidence: TRIDENTTHROW}     # 191.65 phys to the rooted radius on impact
+
+- weapon: MAIN_SPEAR                 # Spear (1H) — dash-through skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+  capabilities:
+    - {cap: engage,        score: 4, evidence: DASHDMG}          # E: dash-through air-throw
+    - {cap: knockback_displace, score: 2, evidence: DASHDMG}     # path air-throw, no travel: Hallowfall's air-throw rung, 2 (T13)
+    - {cap: mobility,      score: 4, evidence: DASHDMG}          # the dash; Inner Focus (QW)
+    - {cap: peel,          score: 2, evidence: DASHDMG}          # dash through the divers
+    - {cap: disengage,     score: 2, evidence: DASHDMG}          # dash out
+
+- weapon: MAIN_SPEAR_KEEPER          # Heron Spear — stun-skillshot skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
+  capabilities:
+    - {cap: stun,          score: 4, evidence: SPEARTHROW}       # E: 1.75s AoE shock on impact
+    - {cap: catch,         score: 4, evidence: SPEARTHROW}       # ranged stun + Cripple (QW)
+    - {cap: burst_aoe,     score: 3, evidence: SPEARTHROW}       # 210 in 4m
+    - {cap: peel,          score: 2, evidence: SPEARTHROW}       # stun the diver
+
+- weapon: MAIN_SPEAR_LANCE_AVALON    # Daybreaker — the purge lance
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+  capabilities:
+    - {cap: purge,         score: 4, evidence: LANCE_CHARGE}     # E: purges all buffs from every enemy on the dash path; 4, under Heavy Mace's 6: a line reaches fewer targets than Battle Howl's 6m circle
+    - {cap: engage,        score: 4, evidence: LANCE_CHARGE}     # CC-immune dash
+    - {cap: mobility,      score: 4, evidence: LANCE_CHARGE}     # the dash; Inner Focus (QW)
+    - {cap: burst_aoe,     score: 2, evidence: LANCE_CHARGE}     # 222 to all passed through, line AoE; 2: leather-archetype builds, modest burst (curation judgment)
+    - {cap: catch,         score: 2, evidence: LEGBREAKER}       # W: Cripple; identical to the shared row (pools/spear.yaml)

@@ -1,13 +1,13 @@
-# holystaff tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# holystaff weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# holystaff tree: the Q/W/passive rows the eight holy staffs share. A row
+# composes into every holy staff that can equip its evidence spell
+# (WEAPON_STATS: tree-wide). A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
+# drops the row from that weapon. (QW): the row holds only while the player
+# equips that Q or W spell. Weapon entries: sheets/holystaff.yaml.
 subcategory: holystaff
 capabilities:
-  - {cap: heal_sustain, score: 4, evidence: HEALINGBEAM}  # W: Holy Beam — channeled single-target sustain
-  - {cap: heal_burst, score: 4, evidence: HOLYFLASH}      # Q: 117 AoE; W: Holy Orb 135 (QW)
-  - {cap: buff_allies, score: 2, evidence: HOLYHOT}       # (QW)
-  - {cap: peel, score: 2, evidence: PULSINGHEAL}          # W: Sacred Pulse knocks enemies off an ally
+  - {cap: heal_sustain, score: 4, evidence: HEALINGBEAM}  # W: Holy Beam, a channelled single-target heal that grows each tick (QW)
+  - {cap: heal_burst, score: 4, evidence: HOLYFLASH}      # Q: Holy Flash, 117 to up to 10 allies in a 5 radius (QW)
+  - {cap: buff_allies, score: 2, evidence: HOLYHOT}       # W: Holy Blessing, +30% armor and Healing Received for 4s on one ally (QW)
+  - {cap: peel, score: 2, evidence: PULSINGHEAL}          # W: Sacred Pulse knocks enemies off an ally (QW)

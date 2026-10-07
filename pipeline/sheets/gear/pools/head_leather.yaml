@@ -1,6 +1,7 @@
 # Actives every leather hood shares (dumps menu: ENERGY_BARRIER,
 # SELF_CLEANSE beside the item's own third active). Composed into every
-# HEAD_LEATHER item; an item's own row for the same pair overrides.
+# HEAD_LEATHER item; an item's own row for the same pair overrides (the
+# Hellion Hood sheet carries Cleanse's tankiness at the same score).
 tree: HEAD_LEATHER
 curated_as_of: 2026-10-03
 capabilities:
@@ -8,9 +9,10 @@ capabilities:
   - {cap: tankiness,     score: 1, evidence: ENERGY_BARRIER}
   # Cleanse: a 4m circle at the caster's feet strips CC and debuffs from
   # every ally inside, usable while stunned or silenced, 20s cooldown.
-  # Below the targeted ally cleanses (Purifying Smoke 3 reaches a chosen
-  # spot; the W-slot ten-ally cleanses sit at 4): the caster must stand in
-  # the clump. tankiness 2 is the Hellion Hood's own reading of the same
-  # spell (its self-cleanse under CC), kept as the pool's.
+  # cleanse 3 sits beside Purifying Smoke's 3: the caster must stand in
+  # the clump where the smoke reaches a chosen spot at 11m, but on half
+  # the smoke's cooldown and castable under CC; the W-slot ten-ally
+  # cleanses sit above at 4. tankiness 2 reads the caster's own break-out
+  # from CC (the circle includes the caster), the Hellion Hood's reading.
   - {cap: cleanse,       score: 3, evidence: SELF_CLEANSE}
   - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}

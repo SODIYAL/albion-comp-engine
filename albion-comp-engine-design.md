@@ -153,7 +153,7 @@ Scores shown as `value(provenance)`; omitted = 0.
 **1H Mace** — tankiness 2, engage 2(E: Deep Leap), stun 2(E: Deep Leap), mobility 2(E: Deep Leap), peel 2(W: Guard Rune), root 1(W: Snare Charge), sustained_dps 1. *(Corrected: earlier draft listed purge — no mace Q/W nor Deep Leap removes buffs. Wiki-verified against the mace line's full ability list.)*
 **Permafrost Prism** — burst_aoe 3(E), zone_control 3(E), slow 2(QW), clump_create 2(E), root 1(QW), mobility 1(QW), tankiness 1.
 **Hallowfall** — heal_burst 3(E), heal_sustain 2(QW), mobility 2(E), cleanse 2(QW|GEAR), self_sustain 2, buff_allies 1.
-**Longbow** — burst_aoe 2(E: Rain of Arrows), zone_control 2(E), slow 2(E), sustained_dps 2, root 1(W: Ray of Light), resist_shred 1(PASSIVE: Piercing Arrows — auto-attacks stack a Defense debuff). *(Twice corrected against game data: knockback_displace removed — Frost Shot pushes the user, not enemies; and resist_shred was wrongly filed as a W ability — no bow Q/W shreds; it exists only as an auto-attack passive, hence downgraded to 1. See `pipeline/sheets/longbow.yaml` for the lint-verified sheet.)*
+**Longbow** — burst_aoe 2(E: Rain of Arrows), zone_control 2(E), slow 2(E), sustained_dps 2, root 1(W: Ray of Light), resist_shred 1(PASSIVE: Piercing Arrows — auto-attacks stack a Defense debuff). *(Twice corrected against game data: knockback_displace removed — Frost Shot pushes the user, not enemies; and resist_shred was wrongly filed as a W ability — no bow Q/W shreds; it exists only as an auto-attack passive, hence downgraded to 1. See the `2H_LONGBOW` entry in `pipeline/sheets/bow.yaml` for the lint-verified sheet.)*
 **Witchwork Staff** — burst_aoe 2(E), clump_create 2(E), energy_drain 2(QW), sustained_dps 2, heal_reduction 1(GEAR), zone_control 1.
 **Great Holy** — heal_burst 3(E), heal_sustain 3, cleanse 2(QW), buff_allies 1, mobility 0 — contrast with Hallowfall: same "healer" role, opposite mobility profile, which is exactly why roles alone are insufficient.
 
@@ -163,8 +163,9 @@ Scores shown as `value(provenance)`; omitted = 0.
 have evidence-linted sheets and every illustrative block above has been
 replaced. Three of these hand-sketched numbers turned out to be fabricated
 against the game data (Hallowfall's cleanse, Spirithunter's heal_reduction,
-Witchwork's energy_drain) — see the tombstone notes in
-`pipeline/sheets/illustrative/prototype_v0.yaml` for the full corrections.
+Witchwork's energy_drain) — the full corrections are in the git history of
+`pipeline/sheets/illustrative/prototype_v0.yaml` (`git log --all -- <path>`
+recovers the file).
 This is the strongest argument the project has produced for the evidence
 rule: even the designer's own careful sketches drift from the actual kits.*
 

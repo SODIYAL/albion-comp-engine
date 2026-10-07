@@ -1,7 +1,7 @@
 # Actives every plate helmet shares (dumps menu: ENERGY_BARRIER,
 # STONESKIN beside the item's own third active). Composed into every
 # HEAD_PLATE item; an item's own row for the same pair overrides (the
-# Judicator and Guardian sheets already carry Stone Skin at 2).
+# Judicator and Guardian Helmet sheets carry Stone Skin at the same 2).
 tree: HEAD_PLATE
 curated_as_of: 2026-10-03
 capabilities:

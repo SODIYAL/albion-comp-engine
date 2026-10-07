@@ -1,0 +1,103 @@
+# Fire staffs: one entry per weapon of the firestaff tree, carrying the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The tree's Q/W rows (Fire Wave, Flame Blast, Wall of Flames,
+# the ignite-stacking stand-in) live in pools/firestaff.yaml and compose
+# into every weapon that can equip them (sheets_lib.compose). Most
+# `except:` entries leave off a shared row whose capability the weapon's
+# own row already carries: one slot per capability (VALIDATION.md 10, Form
+# abilities and ally protection graded). An E-row comment that names a Q/W
+# spell or a passive marks that spell's share of the E row's score. Flame
+# Blast's +60% move speed for 1.6s on an ally is a cast-enabler blip:
+# buff_allies 2, never engage, disengage or mobility.
+
+- weapon: 2H_FIRESTAFF               # Great Fire Staff — pillar burst mage
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: FLAMEPILLAR}    # E: 200 in a 4 radius after 0.8s, cooldown refund on hit
+
+- weapon: 2H_FIRESTAFF_HELL          # Brimstone Staff — the meteor
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/firestaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: FIRECONE}
+  capabilities:
+    - {cap: burst_aoe,     score: 6, evidence: METEOR}         # E: 434 in a 5 radius, one impact after 1s
+    - {cap: knockback_displace, score: 2, evidence: METEOR}    # the impact knocks every enemy hit back by 3
+
+# Dawnsong: anti-heal AoE artillery. Flaming Phoenix breathes fire over a
+# long line: 200 damage, 6.5s of ground fire (11 every 0.5s) and -40%
+# Healing Received on the enemies inside: burst, zone and heal cut in one
+# cast. No heal_sustain or self_sustain: the phoenix heals nobody (its
+# Healing Received line is a heal negate, effect_overrides.yaml).
+
+- weapon: 2H_FIRE_RINGPAIR_AVALON    # Dawnsong — anti-heal AoE artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/firestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: FIREWALL}
+  capabilities:
+    - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 along the line, then the ground fire; W: Raging Flare, 205 in a 5 radius
+    - {cap: heal_reduction, score: 4, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire; the -40/-50% one-shot class holds 4 (heal-cut ladder, VALIDATION.md 08, Round 9)
+    - {cap: zone_control,   score: 4, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames; Q: Burning Field
+
+- weapon: 2H_INFERNOSTAFF            # Infernal Staff — the fear torch
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/firestaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: FIRECONE}
+    - {cap: peel, evidence: FIRECONE}
+    - {cap: zone_control, evidence: FIREWALL}
+  capabilities:
+    - {cap: peel,          score: 4, evidence: HUMAN_TORCH}    # E: AoE FEAR off the burning target: it and every enemy within 4 flee for 1.5s
+    - {cap: knockback_displace, score: 2, evidence: HUMAN_TORCH}  # forced flight scatters
+    - {cap: zone_control,  score: 2, evidence: HUMAN_TORCH}    # burning enemies leave 4.5s fire trails that fear on touch
+    - {cap: burst_st,      score: 2, evidence: HUMAN_TORCH}    # the torch DoT
+
+# Blazing Staff: standing-zone DoT artillery. Flame Tornado parks a 5 radius
+# damage zone on a point or choke (66 every 0.5s to players), and enemies
+# who leave keep burning. With Wall of Flames (W) and Burning Field (Q)
+# behind it, the most dedicated ground-denial kit in the fire tree:
+# zone_control 6, the Permafrost precedent for a full denial kit. No CC
+# beyond the W knockback, no sustain, no shred: the weapon buys zone
+# pressure and nothing else.
+
+- weapon: 2H_INFERNOSTAFF_MORGANA    # Blazing Staff — standing-zone DoT artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/firestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: FIREWALL}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: zone_control,   score: 6, evidence: FLAMETORNADO}    # E: a persistent 5 radius tornado; W: Wall of Flames; Q: Burning Field
+    - {cap: sustained_dps,  score: 4, evidence: FLAMETORNADO}    # tornado ticks and the burn on enemies who leave; Q: Fire Bolt's ignite stacks; passive: Burn
+    - {cap: burst_aoe,      score: 4, evidence: SKILLSHOT_FIREBALL}  # W: Raging Flare, 205 in a 5 radius; E: the tornado on the same clump (QW)
+
+- weapon: MAIN_FIRESTAFF             # Fire Staff (1H) — pyroblast poker
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: PYROBLAST_SKILLSHOT}  # E: charged blast in a 4 radius
+    - {cap: burst_st,      score: 2, evidence: PYROBLAST_SKILLSHOT}
+
+- weapon: MAIN_FIRESTAFF_CRYSTAL     # Flamewalker Staff — fireball flight mage
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/firestaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: FIRECONE}  # no own knockback_displace row: withholds Fire Wave's knockback_displace (curation judgment)
+  capabilities:
+    - {cap: mobility,      score: 4, evidence: FLAMEDASH}      # E: 14m fireball flight immune to all effects, cooldown refund on a player hit
+    - {cap: engage,        score: 4, evidence: FLAMEDASH}      # fly INTO them, 178 on impact
+    - {cap: disengage,     score: 4, evidence: FLAMEDASH}      # fly OUT immune to everything
+    - {cap: burst_aoe,     score: 2, evidence: FLAMEDASH}      # 178 in a 5 radius
+
+- weapon: MAIN_FIRESTAFF_KEEPER      # Wildfire Staff — anti-tank magma
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: MAGMASPHERE}    # E: 240 rolling sphere + %Max-Health true damage on unmounted players

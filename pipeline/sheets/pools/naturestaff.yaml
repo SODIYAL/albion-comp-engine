@@ -1,17 +1,17 @@
-# naturestaff tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# naturestaff weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# naturestaff tree: the Q/W/passive rows the eight nature staffs share. A
+# row composes into every nature staff that can equip its evidence spell
+# (WEAPON_STATS: tree-wide). A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
+# drops the row from that weapon. (QW): the row holds only while the player
+# equips that Q or W spell. Weapon entries: sheets/naturestaff.yaml.
 subcategory: naturestaff
 capabilities:
-  - {cap: knockback_displace, score: 2, evidence: BRAMBLESEED}                 # W: enemy-directed line knockback
-  - {cap: cleanse, score: 4, evidence: CLEANSEHEAL}                            # W: AoE removes all CC + debuffs (QW — conditional)
-  - {cap: heal_burst, score: 2, evidence: CLEANSEHEAL}                         # W: heals on cleanse, scales with charges
-  - {cap: buff_allies, score: 4, evidence: NATURERESILIENCE}                   # W: resistances + healing received
-  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}  # PASSIVE: Calmness
-  - {cap: slow, score: 2, evidence: THORNSAREA}                                # Q: Thorn Growth
-  - {cap: sustained_dps, score: 2, evidence: THORNSAREA}                       # (QW)
-  - {cap: zone_control, score: 2, evidence: THORNSAREA}                        # Q: persistent damaging area
+  - {cap: knockback_displace, score: 2, evidence: BRAMBLESEED}                 # W: Brambleseed, brambles throw every enemy on the line into the air (QW)
+  - {cap: cleanse, score: 4, evidence: CLEANSEHEAL}                            # W: Cleanse Heal, removes all CC + debuffs (except DoTs) in a 4 radius (QW — conditional)
+  - {cap: heal_burst, score: 2, evidence: CLEANSEHEAL}                         # W: heals on cleanse, scaling with Rejuvenation charges (QW)
+  - {cap: buff_allies, score: 4, evidence: NATURERESILIENCE}                   # W: Protection of Nature, +20% damage resistances and +40% Healing Received on one ally for 6s (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}  # PASSIVE: Calmness, +24% damage resistances for 3s after every 5 spells
+  - {cap: slow, score: 2, evidence: THORNSAREA}                                # Q: Thorn Growth, a 4s growth slowing by 25% (QW)
+  - {cap: sustained_dps, score: 2, evidence: THORNSAREA}                       # Q: the growth ticks 30 every 0.5s, recastable up to 3 times (QW)
+  - {cap: zone_control, score: 2, evidence: THORNSAREA}                        # Q: persistent damaging area (QW)

@@ -11,8 +11,15 @@ Scanned: every tracked .md / .py / .js / .yaml / .yml / .ps1 / .html /
 records and test fixtures (EXCLUDED below). A line that must carry a
 listed word (this file, a data field) ends with the marker `tone: allow`.
 
+Dates live in the decision log: a comment in a capability sheet
+(pipeline/sheets/**/*.yaml) carries no ISO date except as a decision-log
+citation, "VALIDATION.md <date>". Data values (curated_as_of) are not
+comments and keep their dates. Every file under pipeline/sheets/ is build
+input whether tracked or not, so that scan reads the directory itself.
+
 Script-style: exit 0 = clean.
 """
+import glob
 import os
 import re
 import subprocess
@@ -20,7 +27,10 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, os.pardir))
+SHEETS = os.path.join(ROOT, "pipeline", "sheets")
 ALLOW = "tone: allow"
+SHEET_DATE = re.compile(r"20\d\d-\d\d-\d\d")
+DATE_CITATION = "VALIDATION.md "
 EXTS = (".md", ".py", ".js", ".yaml", ".yml", ".ps1", ".html", ".txt")
 EXCLUDED = (
     "docs/",                 # generated pages
@@ -80,13 +90,59 @@ def scan():
     return hits
 
 
+def yaml_comment(line):
+    """The comment text of one YAML line, or None: what follows a '#' that
+    opens the line or follows whitespace, outside a quoted scalar."""
+    quote = None
+    i = 0
+    while i < len(line):
+        ch = line[i]
+        if quote == '"':
+            if ch == "\\":
+                i += 1                    # an escaped character
+            elif ch == '"':
+                quote = None
+        elif quote == "'":
+            if ch == "'" and line[i + 1:i + 2] == "'":
+                i += 1                    # '' is a quote inside the scalar
+            elif ch == "'":
+                quote = None
+        elif ch in "\"'" and (i == 0 or line[i - 1] in " \t[{,:"):
+            quote = ch                    # a quote opens a scalar at a token start
+        elif ch == "#" and (i == 0 or line[i - 1] in " \t"):
+            return line[i + 1:]
+        i += 1
+    return None
+
+
+def scan_sheet_dates():
+    """ISO dates in sheet comments, a decision-log citation aside."""
+    hits = []
+    what = "a date in a sheet comment: dates live in tests/VALIDATION.md"
+    for path in sorted(glob.glob(os.path.join(SHEETS, "**", "*.yaml"),
+                                 recursive=True)):
+        rel = os.path.relpath(path, ROOT).replace(os.sep, "/")
+        with open(path, encoding="utf-8", errors="replace") as f:
+            lines = f.read().split("\n")
+        for i, line in enumerate(lines, 1):
+            if ALLOW in line:
+                continue
+            comment = yaml_comment(line)
+            if comment is None:
+                continue
+            if any(not comment[:m.start()].endswith(DATE_CITATION)
+                   for m in SHEET_DATE.finditer(comment)):
+                hits.append((rel, i, what, line.strip()[:110]))
+    return hits
+
+
 def main():
     # a Windows console may not encode every character a doc line carries
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except (AttributeError, ValueError):
         pass
-    hits = scan()
+    hits = scan() + scan_sheet_dates()
     by_file = {}
     for rel, i, what, text in hits:
         by_file.setdefault(rel, []).append((i, what, text))

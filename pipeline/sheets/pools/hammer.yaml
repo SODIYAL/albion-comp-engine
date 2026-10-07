@@ -1,20 +1,20 @@
-# hammer tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# hammer weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# hammer tree: the Q/W/passive rows the eight hammers share. A row composes
+# into every hammer that can equip its evidence spell (WEAPON_STATS:
+# tree-wide). A weapon's own row with the same (cap, evidence) is that
+# weapon's deliberate override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/hammer.yaml.
 subcategory: hammer
 capabilities:
-  - {cap: disengage, score: 2, evidence: CHARGESLOWAE}                    # (QW)
-  - {cap: engage, score: 2, evidence: CHARGESLOWAE}                       # W: Slowing Charge dash (QW)
-  - {cap: mobility, score: 2, evidence: CHARGESLOWAE}                     # (QW)
-  - {cap: knockback_displace, score: 3, evidence: GEYSER}                 # W: knock-up (QW)
-  - {cap: purge, score: 2, evidence: IRONBREAKER}                         # Q: shield break only (QW)
-  - {cap: resist_shred, score: 2, evidence: IRONBREAKER}                  # Q: -12% AoE (QW)
-  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech
-  - {cap: anti_dive, score: 4, evidence: TAR_RING}                        # the ring punishes walkers (QW)
-  - {cap: slow, score: 4, evidence: TAR_RING}                             # W: 0.8 slow ring, ignores CC resistance (QW)
-  - {cap: zone_control, score: 2, evidence: TAR_RING}                     # brief self-centred denial (QW)
+  - {cap: disengage, score: 2, evidence: CHARGESLOWAE}                    # W: Slowing Charge, a 12m dash out (QW)
+  - {cap: engage, score: 2, evidence: CHARGESLOWAE}                       # W: Slowing Charge, a 12m dash in, -50% slow on everyone passed through (QW)
+  - {cap: mobility, score: 2, evidence: CHARGESLOWAE}                     # W: Slowing Charge's 12m dash (QW)
+  - {cap: knockback_displace, score: 3, evidence: GEYSER}                 # W: Power Geyser throws enemies in a 3m circle into the air (QW)
+  - {cap: purge, score: 2, evidence: IRONBREAKER}                         # Q: Iron Breaker breaks shields only (QW)
+  - {cap: resist_shred, score: 2, evidence: IRONBREAKER}                  # Q: Iron Breaker, -12% resistances for 4s in 2.5m (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech, heals the wielder only
+  - {cap: anti_dive, score: 4, evidence: TAR_RING}                        # W: Inertia Ring, the ring punishes walkers (QW)
+  - {cap: slow, score: 4, evidence: TAR_RING}                             # W: Inertia Ring, -80% on crossing the ring, ignores CC resistance (QW)
+  - {cap: zone_control, score: 2, evidence: TAR_RING}                     # W: Inertia Ring, a 4s ring around the wielder: brief denial (QW)
   - {cap: tankiness, score: 4, evidence: WEAPON_STATS}                    # tank-line weapon, played frontline

@@ -3,21 +3,20 @@
 # composed into every HEAD_CLOTH item (sheets_lib.compose_gear). An item's
 # own row for the same (cap, evidence) pair overrides; `except:` opts out.
 #
-# Force Field is the row the Cleric Cowl sheet dropped so the engine's
-# argmax could not credit a group comp with a shove nobody equips. The
-# gear-active doctrine (build_dataset resolve_active_doctrine) now picks
-# the active the published builds EQUIP, so the pool can carry the shove
-# honestly: it scores only where an item's observed active is the Force
-# Field, and the argmax labelled `assumed` elsewhere.
+# Force Field scores only where a piece's gear-active doctrine pick is
+# Force Field (build_dataset resolve_active_doctrine): the pick is the
+# active the recording builds equip, else the item's own active, so by
+# default a shared active scores only where builds are seen wearing it.
+# Group builds wear the Cleric Cowl for Ice Block (F36b-c, golden T47).
 tree: HEAD_CLOTH
 curated_as_of: 2026-10-03
 capabilities:
   # Energizing Shield: 192 absorb for 3s on a 25s cooldown, self only. The
   # smallest defensive active on any head (Stone Skin's +50% defence is 2).
   - {cap: tankiness,          score: 1, evidence: ENERGY_BARRIER}
-  # Force Field: 6m radius knockback by 9m, ignores CCR, 30s cooldown —
-  # the scores the Cleric Cowl sheet carried before the drop (curation
-  # judgment: a self-centred shove, S4 cast position inside the enemy).
+  # Force Field: 6m radius knockback by 9m, ignores CCR, 30s cooldown
+  # (curation judgment: a self-centred shove, S4 cast position inside the
+  # enemy).
   - {cap: knockback_displace, score: 3, evidence: PBAOE_KNOCKBACK}
   - {cap: peel,               score: 3, evidence: PBAOE_KNOCKBACK}
   - {cap: anti_dive,          score: 2, evidence: PBAOE_KNOCKBACK}

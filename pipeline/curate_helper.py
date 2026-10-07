@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Print a curation worksheet for one or more weapons: every equippable spell with
-its parsed function flags, target direction, and description text.
+its parsed function flags, target direction, and description text, then the
+rows the weapon scores today (its sheet entry composed with the tree pool).
 
 This is the reference the curator reads while assigning structural
 capability scores. Nothing here decides scores — it exists so that no score is
@@ -11,10 +12,23 @@ Usage:
     py -3 pipeline/curate_helper.py 2H_POLEHAMMER MAIN_HOLYSTAFF_AVALON
     py -3 pipeline/curate_helper.py --top 5        # top N by usage, uncurated first
 """
-import json, os, glob, argparse
+import argparse
+import functools
+import glob
+import json
+import os
+import sys
+
+try:
+    import yaml
+except ImportError:
+    sys.exit("pip install pyyaml")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
+sys.path.insert(0, HERE)
+import mastersheet  # noqa: E402
+import sheets_lib  # noqa: E402
 
 WEAPONS = json.load(open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8"))
 SPELLS = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8"))
@@ -38,16 +52,21 @@ def load_usage():
 USAGE = load_usage()
 
 # Optional: recent per-patch spell changes (patch_history.py). Curation context
-# only — "this E was nerfed on 2026-05-26" — never evidence for a score.
+# only (which patch changed this E, and how) — never evidence for a score.
 _PH = os.path.join(OUT, "patch_history.json")
 PATCHES = (json.load(open(_PH, encoding="utf-8"))["patches"]
            if os.path.exists(_PH) else [])
 
+
 # The capabilities the seeder never proposes (seed_sheets.HUMAN_ONLY: the
 # magnitude is a curation judgment) plus, derived at runtime, everything in the
 # dataset taxonomy the effect layer cannot express at all. Never a hand list
-# of the whole taxonomy — the 2026-08 copy of that list still carried
-# `energy_drain`, a documented fabrication.
+# of the whole taxonomy — a hand copy of that list carried `energy_drain`, a
+# documented fabrication. The taxonomy is every capability a built weapon
+# record scores (dataset "weapons" -> "capabilities") that a curated row
+# carries: a capability the build derives on its own (ranged_presence,
+# build_dataset.derive_ranged_presence) sits on no sheet and is never judged.
+@functools.lru_cache(maxsize=None)
 def structural_caps():
     from seed_sheets import HUMAN_ONLY  # noqa: E402 — sibling script
     from effect_lookup import EffectLookup  # noqa: E402
@@ -55,7 +74,11 @@ def structural_caps():
     taxonomy = set()
     if os.path.exists(ds_path):
         for w in json.load(open(ds_path, encoding="utf-8"))["weapons"].values():
-            taxonomy |= set((w.get("caps") or {}).keys())
+            taxonomy |= set((w.get("capabilities") or {}).keys())
+    curated = {c.get("cap") for entry, _ in ENTRIES.values()
+               for c in (entry.get("capabilities") or []) if isinstance(c, dict)}
+    curated |= {r.get("cap") for rows in POOLS.values() for r in rows}
+    taxonomy &= curated
     lookup = EffectLookup()
     expressible = set()
     for sid in SPELLS:
@@ -63,18 +86,70 @@ def structural_caps():
             expressible |= set(lookup.candidates(sid).keys())
         except Exception:
             pass
-    return sorted(set(HUMAN_ONLY) | (taxonomy - expressible))
+    return tuple(sorted(set(HUMAN_ONLY) | (taxonomy - expressible)))
+
+
+def load_entries():
+    """{weapon key: (sheet entry, sheet path)} over the curated sheets: one
+    file per weapon tree, sheets/<subcategory>.yaml, each a list of entries.
+    The path is relative to the repository root."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
+        with open(path, encoding="utf-8") as f:
+            docs = yaml.safe_load(f) or []
+        rel = os.path.relpath(path, os.path.join(HERE, os.pardir)).replace("\\", "/")
+        for entry in docs:
+            if isinstance(entry, dict) and entry.get("weapon"):
+                out[entry["weapon"]] = (entry, rel)
+    return out
+
+
+ENTRIES = load_entries()
+POOLS = sheets_lib.load_pools()
+TUNE_SHEETS = mastersheet.load().get("sheets") or {}
 
 
 def curated_keys():
-    keys = set()
-    for path in glob.glob(os.path.join(HERE, "sheets", "*.yaml")):
-        with open(path, encoding="utf-8") as f:
-            for line in f:
-                if line.strip().startswith("- weapon:"):
-                    # strip the trailing YAML comment: "- weapon: 2H_MACE  # Heavy Mace"
-                    keys.add(line.split(":", 1)[1].split("#")[0].strip())
-    return keys
+    return set(ENTRIES)
+
+
+def current_rows(key, line):
+    """The rows the build scores for this weapon today: its sheet entry's own
+    rows, then the tree-pool rows it can equip (sheets_lib.compose, the call
+    build_dataset makes), each with the slot of its evidence spell, its
+    origin, and the MASTERSHEET tune:sheets score where one replaces it."""
+    found = ENTRIES.get(key)
+    sub = line.get("subcategory")
+    if found is None:
+        print(f"\n  [CURRENT ROWS]  no curated entry (the tree's sheet is "
+              f"pipeline/sheets/{sub}.yaml): the weapon scores nothing")
+        return
+    entry, rel = found
+    own = {(c.get("cap"), c.get("evidence"))
+           for c in (entry.get("capabilities") or []) if isinstance(c, dict)}
+    slot_of = {}
+    for slot, ids in (line.get("spells") or {}).items():
+        for sid in ids:
+            slot_of.setdefault(sid, slot)      # build_loadout's slot rule
+    tune = TUNE_SHEETS.get(key) or {}
+    print(f"\n  [CURRENT ROWS]  {rel} entry + pipeline/sheets/pools/{sub}.yaml "
+          f"rows it can equip (sheets_lib.compose)")
+    for c in sheets_lib.compose(entry, line, POOLS):
+        cap, ev = c.get("cap") or "?", c.get("evidence") or "-"
+        if ev in slot_of:
+            slot = slot_of[ev].upper()
+        else:
+            slot = "STATS" if ev in sheets_lib.NON_SPELL_EVIDENCE else "?"
+        origin = "own" if (c.get("cap"), c.get("evidence")) in own else "pool"
+        extra = f"  use: {c['use']}" if c.get("use") else ""
+        if cap in tune:
+            extra += f"  -> {tune[cap]} (MASTERSHEET tune:sheets)"
+        score = str(c.get("score", "-"))
+        print(f"    {slot:<8} {cap:<20} {score:>2}  {ev:<30} {origin}{extra}")
+    excepts = [x for x in (entry.get("except") or []) if isinstance(x, dict)]
+    if excepts:
+        print("    except (pool rows this weapon does not take): "
+              + ", ".join(f"{x.get('cap')} <- {x.get('evidence')}" for x in excepts))
 
 
 def worksheet(key, width=104):
@@ -112,6 +187,7 @@ def worksheet(key, width=104):
         # equip menu, so the slots above do not carry them
         print("\n  [FORM]  the form's abilities are scored on the E and are not "
               "listed above:\n          py -3 pipeline/audit_form_abilities.py")
+    current_rows(key, line)
     rows = [(p["date"], s) for p in PATCHES for s in p["spells"]
             if key in s["lines"] and s.get("balance_relevant", True)]
     cosmetic = sum(1 for p in PATCHES for s in p["spells"]

@@ -5,7 +5,8 @@ Compile + validate the PvP interaction records ("new prompt" spec §1-§4).
     pipeline/interactions.yaml    curated, spell-keyed interaction records
     out/spell_index.json          pinned-snapshot spell facts (descriptions)
     out/weapon_lines.json         equippability
-    sheets/*.yaml                 capability evidence (for nonstacking_caps)
+    sheets/<tree>.yaml            capability evidence (for nonstacking_caps):
+    sheets/pools/<tree>.yaml      weapon entries and the tree-shared rows
         │
         ▼
     out/interactions.json         {spells: {SID: record}} — embedded in the
@@ -94,19 +95,27 @@ def main():
     with open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8") as f:
         weapon_lines = json.load(f)
     # capability evidence per spell (curated sheets): which caps a spell
-    # grounds — the legal domain of nonstacking_caps
+    # grounds — the legal domain of nonstacking_caps. The weapon entries
+    # (sheets/<tree>.yaml, one list of entries per weapon tree) and the
+    # tree-shared rows (sheets/pools/<tree>.yaml, one document per tree),
+    # read in sorted file order so the walk is deterministic.
     caps_by_spell = {}
-    for path in glob.glob(os.path.join(HERE, "sheets", "*.yaml")):
-        for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
-            for c in entry.get("capabilities", []):
-                if isinstance(c, dict) and c.get("evidence") and c.get("cap"):
-                    caps_by_spell.setdefault(c["evidence"], set()).add(c["cap"])
-    # tree-pool rows (sheets/pools/) — same spell->cap evidence, shared per line
-    for path in glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml")):
-        doc = yaml.safe_load(open(path, encoding="utf-8")) or {}
-        for c in doc.get("capabilities", []):
+
+    def take(rows):
+        for c in rows or []:
             if isinstance(c, dict) and c.get("evidence") and c.get("cap"):
                 caps_by_spell.setdefault(c["evidence"], set()).add(c["cap"])
+
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
+        with open(path, encoding="utf-8") as f:
+            entries = yaml.safe_load(f) or []
+        for entry in entries:
+            if isinstance(entry, dict):
+                take(entry.get("capabilities"))
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml"))):
+        with open(path, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        take(doc.get("capabilities"))
 
     equippable_on = {}
     for wk, line in weapon_lines.items():

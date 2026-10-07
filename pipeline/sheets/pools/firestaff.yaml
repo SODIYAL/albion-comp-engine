@@ -1,14 +1,14 @@
-# firestaff tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# firestaff weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# firestaff tree: the Q/W/passive rows the eight fire staffs share. A row
+# composes into every fire staff that can equip its evidence spell
+# (WEAPON_STATS: tree-wide). A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
+# drops the row from that weapon. (QW): the row holds only while the player
+# equips that Q or W spell. Weapon entries: sheets/firestaff.yaml.
 subcategory: firestaff
 capabilities:
-  - {cap: knockback_displace, score: 2, evidence: FIRECONE}          # W: Fire Wave — enemy knockback (QW)
-  - {cap: peel, score: 2, evidence: FIRECONE}                        # push a diver off the backline (QW)
-  - {cap: buff_allies, score: 2, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: +60% ally MS for 1.6s — marginal (QW)
-  - {cap: zone_control, score: 2, evidence: FIREWALL}                # (QW)
-  - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}           # ignite DoT stacking + artillery channel
+  - {cap: knockback_displace, score: 2, evidence: FIRECONE}          # W: Fire Wave, a cone that knocks enemies back by 4 (QW)
+  - {cap: peel, score: 2, evidence: FIRECONE}                        # the same cone pushes a diver off the backline (QW)
+  - {cap: buff_allies, score: 2, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: Flame Blast on an ally or self, +60% move speed for 1.6s: marginal (QW)
+  - {cap: zone_control, score: 2, evidence: FIREWALL}                # W: Wall of Flames, a 5s wall: enemies touching it burn and flee for 0.5s (QW)
+  - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}           # tree-wide stand-in for Fire Bolt's ignite stacking (Q, up to 5 stacks) and Fire Artillery's channel (W)

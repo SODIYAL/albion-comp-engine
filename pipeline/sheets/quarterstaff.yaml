@@ -1,31 +1,145 @@
-# Quarterstaff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
-# Usage: 3 sightings, dominant role: tank.
-#
-# Identity: the displacement line. The E (Vault Leap) is a CC+damage-immune
-# leap into an AoE air-throw, and the W row is wall-to-wall displacement:
-# Rising Blow (cone air-throw, CD refund per player), Separator (2.2s root +
-# 12m CC-resist-IGNORING AoE knockback), Forceful Swing (AoE shove, -50%
-# damage dealt AND disables enemy Auto-Attacks). knockback_displace 3 and
-# peel 3 — the highest displacement scores in the dataset, matching the
-# line's in-game role as the dedicated peel bruiser.
-# Forceful Swing's -50% damage-dealt debuff scored as damage_debuff since the
-# 2026-08-12 §2.2 promotion (it was a founding poster child).
+# Quarterstaffs — one entry per weapon of the quarterstaff tree, carrying the
+# weapon's E (its identity) and any override of a shared row. The tree's
+# shared Q/W/passive rows (Cartwheel; Gale Dance, Stun Run, Forceful Swing,
+# Rising Blow, Separator; Life Leech) live in pools/quarterstaff.yaml and
+# compose into every quarterstaff that can equip them (sheets_lib.compose).
+# Tree identity: displacement and disruption.
+
+- weapon: 2H_COMBATSTAFF_MORGANA     # Black Monk Staff — anti-shield disruption
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: CARTWHEEL}  # no own mobility row: withholds Cartwheel's mobility (curation judgment)
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}
+  capabilities:
+    - {cap: purge,         score: 2, evidence: COMBATSTAFF_SLASH}  # E: breaks damage shields and blocks new ones in a 3s spinning zone — a shield break, ranked below Fists of Avalon's true purge (curation judgment)
+    - {cap: zone_control,  score: 2, evidence: COMBATSTAFF_SLASH}  # spinning blade zone
+    - {cap: burst_aoe,     score: 2, evidence: COMBATSTAFF_SLASH}
+    - {cap: damage_debuff, score: 4, evidence: COMBATSTAFF_SLASH}  # E: -40% damage dealt, stacking, in the blade zone
+
+# Double Bladed Staff — skirmish bruiser. The E (Soaring Swipe) is a leap
+# that deals 80 in 5r, slows every enemy hit by 50% for 3s and refunds part
+# of its cooldown when it hits an enemy player: a skirmisher's engage/chase
+# tool rather than the Quarterstaff's peel E. Stun comes from the shared
+# rows (pool stun 2 on Stun Run, a W option), as on every quarterstaff.
+
+- weapon: 2H_DOUBLEBLADEDSTAFF       # Double Bladed Staff — skirmish bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: CARTWHEEL}
+  capabilities:
+    - {cap: slow,          score: 4, evidence: DASH_KNOCKBACK}   # E: 50% AoE slow for 3s — the signature
+    - {cap: mobility,      score: 4, evidence: DASH_KNOCKBACK}   # E leap w/ partial CD refund; Q: Cartwheel
+    - {cap: engage,        score: 4, evidence: DASH_KNOCKBACK}   # leap in, slow the clump
+    - {cap: catch,         score: 2, evidence: DASH_KNOCKBACK}   # leap + 50% slow = caught
+    - {cap: disengage,     score: 4, evidence: DASH_KNOCKBACK}   # leap out; Q: Cartwheel
+    - {cap: peel,          score: 4, evidence: SEPARATING_SLAM}  # W: Separator; override of the pool's 2: the Separator peel ladder is pool 2 / this 4 / Quarterstaff 6 (QW)
+    - {cap: burst_aoe,     score: 2, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest
+
+- weapon: 2H_DOUBLEBLADEDSTAFF_CRYSTAL  # Phantom Twinblade — projection skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: LAUNCHER}
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: QS_CRYSTAL_COMBO}  # E: projections slash + slam
+    - {cap: slow,          score: 2, evidence: QS_CRYSTAL_COMBO}
+    - {cap: knockback_displace, score: 2, evidence: QS_CRYSTAL_COMBO}  # 3rd-combo slam
+    - {cap: zone_control,  score: 2, evidence: QS_CRYSTAL_COMBO}  # moving projection areas
+
+- weapon: 2H_IRONCLADEDSTAFF         # Iron-clad Staff — mobile mass-displace tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: LAUNCHER}
+    - {cap: anti_dive, evidence: QS_WHIRLWIND2}
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
+    - {cap: peel, evidence: SEPARATING_SLAM}
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: QSWHIRLWIND}  # E: 12m knockback ignoring CC resistance, but self-centred: a body commit, useless in the ranged territory/castle fights where displacement matters (curation judgment)
+    - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # body-commit peel — of little use at large scale, where Bedrock is far better (curation judgment)
+    - {cap: anti_dive,     score: 4, evidence: QSWHIRLWIND}       # divers in the spin get knocked out; W: Forceful Swing folded in (pool row excepted). MASTERSHEET tune:sheets sets 2 (T19: Bedrock's wall over a contact spin)
+    # tankiness 2 (one unit): the E's +15% resistances (5s) are a momentary,
+    # conditional buff, not standing frontline bulk. One unit for the
+    # tank-class body plus the buff; two units equated it with Bedrock-class
+    # dedicated frontline, which is how the forge fielded it as a second
+    # frontliner in 11-mans.
+    - {cap: tankiness,     score: 2, evidence: QSWHIRLWIND}
+
+# Quarterstaff — the dedicated peel bruiser. The E (Vault Leap) is a CC- and
+# damage-immune leap into an AoE air-throw, and the shared W row is
+# displacement: Rising Blow (cone air-throw, CD refund per player hit),
+# Separator (2.2s root on the target, then every enemy player within 6m of it
+# knocked back 12m, ignoring CC resistance), Forceful Swing (6r shove, -50%
+# damage dealt, enemy Auto-Attacks disabled). knockback_displace 6 is the top
+# of its board, a kit score pinned by T13 (the E's air-throw plus the W row);
+# peel 6 tops the Separator ladder (pool 2, Double Bladed Staff 4).
 
 - weapon: 2H_QUARTERSTAFF            # Quarterstaff — the displacement line
-  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  curated_as_of: 2026-08-12
   role_hint: tank
-  # deliberate non-takes of tree-pool spells (see sheets/pools/quarterstaff.yaml)
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
   except:
     - {cap: mobility, evidence: CARTWHEEL}
     - {cap: knockback_displace, evidence: LAUNCHER}
-    - {cap: sustained_dps, evidence: QSTAFF_COMBO}
+    - {cap: sustained_dps, evidence: QSTAFF_COMBO}  # no own sustained_dps row: withholds Gale Dance's sustained_dps (curation judgment)
   capabilities:
-    - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing
-    - {cap: peel,          score: 6, evidence: SEPARATING_SLAM}  # W: 12m CC-resist-ignoring shove off a target (QW)
+    - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing (T13)
+    - {cap: peel,          score: 6, evidence: SEPARATING_SLAM}  # W: Separator's 12m CC-resist-ignoring knockback around the rooted target; override of the pool's 2 (QW)
     - {cap: engage,        score: 4, evidence: VAULT_ATTACK}     # CC+damage-immune leap in
     - {cap: mobility,      score: 4, evidence: VAULT_ATTACK}     # E leap; Q: Cartwheel dash
     - {cap: disengage,     score: 4, evidence: VAULT_ATTACK}     # immune leap out; Q: Cartwheel
     - {cap: catch,         score: 4, evidence: STUNRUN}          # W: Stun Run 2.11s opener + leap (QW)
-    - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled (QW)
-    - {cap: tankiness,     score: 4, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resists
+    - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    - {cap: tankiness,     score: 4, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resistances for 3s if hit while dashing
     - {cap: burst_aoe,     score: 2, evidence: VAULT_ATTACK}     # 161 on impact — modest
+
+- weapon: 2H_QUARTERSTAFF_AVALON     # Grailseeker — root-wall zoner
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
+    - {cap: peel, evidence: SEPARATING_SLAM}
+    - {cap: root, evidence: SEPARATING_SLAM}
+  capabilities:
+    - {cap: root,          score: 4, evidence: SOULSHAKER}        # E: energy wall roots everyone touching it, 3.5s
+    - {cap: zone_control,  score: 4, evidence: SOULSHAKER}        # the wall denies the line it stands on
+    - {cap: peel,          score: 4, evidence: SOULSHAKER}        # wall between divers and backline; W: Separator (pool row excepted)
+    - {cap: catch,         score: 4, evidence: SOULSHAKER}        # cast it ahead of runners
+    - {cap: burst_aoe,     score: 2, evidence: SOULSHAKER}        # 125 line
+
+- weapon: 2H_ROCKSTAFF_KEEPER        # Staff of Balance — anti-heal aura bruiser
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: CARTWHEEL}           # no own mobility row: withholds Cartwheel's mobility (curation judgment)
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
+  capabilities:
+    - {cap: heal_reduction, score: 4, evidence: QS_SLOWROPE}      # E: -50% Healing Received aura (negates own healing too)
+    - {cap: slow,          score: 4, evidence: QS_SLOWROPE}       # 50% aura slow
+    - {cap: zone_control,  score: 4, evidence: QS_SLOWROPE}       # 6.5m walking denial zone, up to 15s
+    - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}     # divers stand in the aura; W: Forceful Swing; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    - {cap: tankiness,     score: 4, evidence: QS_SLOWROPE}       # +20% resists while active
+
+- weapon: 2H_TWINSCYTHE_HELL         # Soulscythe — tornado displace skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/quarterstaff.yaml)
+  except:
+    - {cap: knockback_displace, evidence: LAUNCHER}
+    - {cap: damage_debuff, evidence: QS_WHIRLWIND2}  # no own damage_debuff row: withholds Forceful Swing's damage_debuff (curation judgment)
+    - {cap: peel, evidence: SEPARATING_SLAM}
+  capabilities:
+    - {cap: knockback_displace, score: 4, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel; the line knock-up is the rubric's S8 case (teammates' damage and CC land)
+    - {cap: burst_aoe,     score: 4, evidence: TORNADO}           # 152 through the line
+    - {cap: slow,          score: 4, evidence: TORNADO}           # 80% around the tornado
+    - {cap: peel,          score: 4, evidence: TORNADO}           # send it through the divers
+    - {cap: catch,         score: 4, evidence: TORNADO}           # the 80% slow shears escapes

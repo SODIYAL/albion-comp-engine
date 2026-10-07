@@ -6,13 +6,25 @@ Purpose: full stats — damage or CC numbers — read from the real game data
 and laid out as the chart that ranks each weapon for its purpose. This
 builder extracts structured MAGNITUDES from the pinned dumps for every
 curated evidence spell and lays them out per capability, sorted by the
-measured number, with the curated ordinal score beside — so magnitude
-outliers (a '2' outperforming a '3') pop out. It feeds rubric question 1
-(raw magnitude) of the 1-7 rescore.
+measured number, with the curated 1-7 score beside — so magnitude
+outliers (a '2' outperforming a '4') pop out. It feeds rubric question S1
+(raw magnitude, pipeline/sheets/README.md).
 
 IP note: dump values are every spell's BASE numbers — the same reference
 for all weapons, and ability scaling by item power applies one global curve
 on top. Comparing base numbers IS comparing at equal IP.
+
+VS PLAYERS: the engine models PvP, so every board ranks the vs-players
+number. Many spells carry a second number against mobs (Arcane Orb
+silences players 1.68s and mobs 3.36s; Ice Crystal deals players 173 and
+mobs 253.7; Inner Shadow deals players 66 a tick and mobs 32). Summing the
+two, or taking the larger, ranked a spell on a number no player ever
+meets. The dumps gate those effects two ways: a target that names
+the audience (`@target` enemyplayers / allplayers ..., enemymobs /
+allmobs ...) and an `IfTargetType` predicate (@type player / mob) on the
+node or on the reference that applies it. Each record carries the gate it
+sits under (`vs`); a board ranks the records that reach players, and shows
+the mob number in the detail column only where it differs.
 
 KNOWN EXTRACTION GAPS (honest under-measurement, never over):
   - area-pulse ticks: a channel that re-applies its area damage every N
@@ -32,8 +44,9 @@ state it, never a guess):
   mods     typed buffs/debuffs (@type vocabulary) with value and duration
   economy  cooldown, cast time, stand time, cast range (from the root)
 
-Outputs:
-  out/stat_chart.json       {spell: records} + per-capability board data
+Outputs (local boards, gitignored like every file in review/; nothing
+reads them):
+  review/stat_chart.json    {spell: records} + per-capability board data
   review/stat_chart.html    the chart, one board per capability
 
 Usage:  py -3 pipeline/build_stat_chart.py
@@ -53,6 +66,7 @@ except ImportError:
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 OUT = os.path.join(HERE, "out")
+REVIEW = os.path.join(ROOT, "review")
 
 sys.path.insert(0, HERE)
 import mastersheet  # noqa: E402
@@ -65,6 +79,59 @@ import jsonfmt  # noqa: E402
 MAX_DEPTH = 6
 
 CC_NODES = ("stun", "root", "silence")
+
+PLAYERS, MOBS = "players", "mobs"
+
+
+def _type_gate(items):
+    """'players' / 'mobs' when an IfTargetType predicate names one kind."""
+    types = {i.get("@type") for i in items if isinstance(i, dict)}
+    return {frozenset({"player"}): PLAYERS,
+            frozenset({"mob"}): MOBS}.get(frozenset(types))
+
+
+def _predicate_gate(node):
+    """The audience a node's predicate children restrict it to, or None.
+    `IfTargetType` narrows directly and inside an `and` (every condition
+    holds); a `not` whose only condition is one IfTargetType inverts it. An
+    `or` beside another condition never narrows (mob OR mounted reaches
+    players too), nor does a `not` over several conditions."""
+    for key, val in node.items():
+        items = val if isinstance(val, list) else [val]
+        k = key.lower()
+        if k == "iftargettype":
+            gate = _type_gate(items)
+            if gate:
+                return gate
+        elif k == "and":
+            for item in items:
+                if isinstance(item, dict):
+                    gate = _predicate_gate(item)
+                    if gate:
+                        return gate
+        elif k == "not" and len(items) == 1 and isinstance(items[0], dict):
+            inner = items[0]
+            if [x.lower() for x in inner] == ["or"]:
+                inner = next(iter(inner.values()))  # not { or { one predicate } }
+            if isinstance(inner, dict) and [x.lower() for x in inner] == ["iftargettype"]:
+                v = next(iter(inner.values()))
+                gate = _type_gate(v if isinstance(v, list) else [v])
+                if gate:
+                    return MOBS if gate == PLAYERS else PLAYERS
+    return None
+
+
+def audience(node):
+    """'players' / 'mobs' when a node reaches only one kind of target, else
+    None: a target naming the audience (enemyplayers, allplayers,
+    friendotherplayers ... / enemymobs, allmobs ...) or a predicate child."""
+    t = node.get("@target")
+    if isinstance(t, str):
+        if t.endswith("players"):
+            return PLAYERS
+        if t.endswith("mobs"):
+            return MOBS
+    return _predicate_gate(node)
 
 
 def fnum(v):
@@ -95,13 +162,22 @@ def extract(sid, reg):
     here: persistence (longest ground-area lifetime — Primal Slam's wall
     is spelleffectarea @time 4), delivery (root target kind + channel),
     cast position (cast range), and counter-immunity flags
-    (@ignorecrowdcontrolresistance anywhere in the tree)."""
+    (@ignorecrowdcontrolresistance anywhere in the tree).
+
+    Every damage / heal / cc / mod record carries `vs` ('players' or
+    'mobs') when an audience gate sits on it or on a node above it in the
+    reference chain (audience()); a record without `vs` reaches both."""
     rec = {"damage": [], "heals": [], "cc": [], "mods": [],
            "persist_s": None, "ignores_ccr": False, "channeled": False,
            "ignores_ap": False}
     visited = set()
 
-    def health_record(node, out_pos, out_neg):
+    def tagged(entry, vs):
+        if vs:
+            entry["vs"] = vs
+        return entry
+
+    def health_record(node, out_pos, out_neg, vs):
         val = fnum(node.get("@change")) or fnum(node.get("@value"))
         if val is None:
             return
@@ -114,20 +190,21 @@ def extract(sid, reg):
             entry["over_seconds"] = duration
         if node.get("@targetcountvaluebonusfactor"):
             entry["escalates"] = True
-        (out_neg if val < 0 else out_pos).append(entry)
+        (out_neg if val < 0 else out_pos).append(tagged(entry, vs))
 
-    def walk(key, node, depth, guarded):
+    def walk(key, node, depth, guarded, vs):
         if depth > MAX_DEPTH:
             return
         if isinstance(node, list):
             for item in node:
-                walk(key, item, depth, guarded)
+                walk(key, item, depth, guarded, vs)
             return
         if not isinstance(node, dict):
             return
         if key and CONDITION_PREFIX.match(key):
             return                          # predicate context, not an effect
         guarded = GUARD_NODES.get(key, guarded)
+        vs = audience(node) or vs           # the innermost gate wins
         if node.get("@ignorecrowdcontrolresistance") == "true":
             rec["ignores_ccr"] = True
         if node.get("@ignoreabilitypowerscaling") == "true":
@@ -140,46 +217,48 @@ def extract(sid, reg):
                 rec["persist_s"] = t
         if not guarded:
             if node.get("@attribute") == "health":
-                health_record(node, rec["heals"], rec["damage"])
+                health_record(node, rec["heals"], rec["damage"], vs)
             if key in CC_NODES:
                 d = fnum(node.get("@duration")) or fnum(node.get("@time"))
-                rec["cc"].append({"type": key, "duration": d,
-                                  "target": node.get("@target", "?")})
+                rec["cc"].append(tagged({"type": key, "duration": d,
+                                         "target": node.get("@target", "?")}, vs))
             elif key == "knockback":
-                rec["cc"].append({
+                rec["cc"].append(tagged({
                     "type": "knockback",
                     "distance": fnum(node.get("@distance")),
                     "target": node.get("@target", "?"),
                     "ignores_ccr":
-                        node.get("@ignorecrowdcontrolresistance") == "true"})
+                        node.get("@ignorecrowdcontrolresistance") == "true"}, vs))
             elif key == "forcedmovement":
-                rec["cc"].append({"type": "forced_movement",
-                                  "target": node.get("@target", "?")})
+                rec["cc"].append(tagged({"type": "forced_movement",
+                                         "target": node.get("@target", "?")}, vs))
             t = node.get("@type")
             if (t and not NON_EFFECT_TYPE.match(t)
                     and node.get("@attribute") != "health"):
                 val = fnum(node.get("@value")) or fnum(node.get("@change"))
                 if val is not None:
-                    rec["mods"].append({
+                    rec["mods"].append(tagged({
                         "type": t, "value": val,
                         "duration": fnum(node.get("@duration"))
                         or fnum(node.get("@time")),
-                        "target": node.get("@target", "?")})
+                        "target": node.get("@target", "?")}, vs))
         # follow every attribute that names a registered spell (the
-        # convention-proof rule from effect_catalogue.collect_refs)
+        # convention-proof rule from effect_catalogue.collect_refs); the
+        # reference carries this node's gate (an applyspell with an
+        # IfTargetType child applies its spell to that audience only)
         for k, v in node.items():
             if k.startswith("@"):
                 if isinstance(v, str) and v in reg and v not in visited:
                     visited.add(v)
-                    walk(None, reg[v], depth + 1, guarded)
+                    walk(None, reg[v], depth + 1, guarded, vs)
             else:
-                walk(k, v, depth + 1, guarded)
+                walk(k, v, depth + 1, guarded, vs)
 
     node = reg.get(sid)
     if node is None:
         return None
     visited.add(sid)
-    walk(None, node, 0, None)
+    walk(None, node, 0, None, None)
     rec["cooldown"] = fnum(node.get("@recastdelay"))
     rec["cast_time"] = fnum(node.get("@castingtime"))
     rec["stand_time"] = fnum(node.get("@standtime"))
@@ -249,6 +328,19 @@ def kb_distance(rec):
     ds = [c.get("distance") for c in rec["cc"]
           if c["type"] == "knockback" and c.get("distance")]
     return max(ds) if ds else None
+
+
+def view(rec, vs):
+    """The records that reach one audience: the ones gated to it plus the
+    ungated ones. view(rec, PLAYERS) is what a board ranks; view(rec, MOBS)
+    is context only."""
+    if rec is None:
+        return None
+    other = MOBS if vs == PLAYERS else PLAYERS
+    out = dict(rec)
+    for k in ("damage", "heals", "cc", "mods"):
+        out[k] = [r for r in rec[k] if r.get("vs") != other]
+    return out
 
 
 def metric_for(cap, rec):
@@ -442,7 +534,15 @@ def main():
     boards = {}
     for (cap, sid), g in grouped.items():
         rec = extracted.get(sid)
-        val, unit, detail = metric_for(cap, rec)
+        # rank on the vs-players number; a different vs-mobs number is
+        # context in the detail column, never the ranked value
+        val, unit, detail = metric_for(cap, view(rec, PLAYERS))
+        mob_val, mob_unit, _ = metric_for(cap, view(rec, MOBS))
+        if mob_val == val or mob_val is None:
+            mob_val = None
+        else:
+            detail = "; ".join(x for x in (
+                detail, f"vs mobs {mob_val:g} {mob_unit}".rstrip()) if x)
         per_min = casts_min = None
         if val is not None and rec and rec.get("cooldown"):
             if unit in PER_CAST_UNITS:
@@ -451,6 +551,7 @@ def main():
                 casts_min = round(60.0 / rec["cooldown"], 1)
         boards.setdefault(cap, []).append({
             "spell": sid, "value": val, "unit": unit, "detail": detail,
+            "value_vs_mobs": mob_val,
             "per_min": per_min, "casts_min": casts_min,
             "facts": fact_line(rec),
             "group": (UNIT_GROUP.get(unit, unit) if val is not None
@@ -464,17 +565,21 @@ def main():
             else len(group_order),
             -(r["value"] or 0)))
 
+    os.makedirs(REVIEW, exist_ok=True)
     jsonfmt.dump({"_meta": {
         "spells_extracted": n_ok, "spells_cited": len(spells),
         "note": ("base dump numbers — the same IP reference for every "
                  "weapon; equal-IP comparison equals base comparison"),
+        "audience": ("boards rank the vs-players number (records gated to "
+                     "players plus ungated ones); value_vs_mobs is context, "
+                     "set only where it differs"),
         "tier_model": {
             "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
             "source": "community-documented (wiki/forum); the dumps carry the per-effect ignoreabilitypowerscaling flags and per-family ability power",
             "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)"},
         "family_ability_power": fam_ap},
         "spells": extracted, "boards": boards},
-        os.path.join(OUT, "stat_chart.json"))
+        os.path.join(REVIEW, "stat_chart.json"))
 
     # ------------------------------------------------------------- HTML chart
     def esc(s):
@@ -498,11 +603,12 @@ p.note{color:#999;font-size:13px}
 <h1>Stat chart — the real numbers behind every capability score</h1>
 <p class="note">Measured from the pinned game files, per evidence spell,
 sorted by the number. Base dump values are the same item-power reference
-for every weapon — comparing them IS comparing at equal IP. The curated
-0&ndash;3 score sits beside each row: a low score above a high score is a
-magnitude outlier for the 1&ndash;7 rescore. &ldquo;&mdash;&rdquo; = the
-data states no measurable number for this capability (human judgment
-stays).</p>
+for every weapon — comparing them IS comparing at equal IP. Every number is
+the vs-players value (the engine models PvP); where a spell states a
+different number against mobs, the detail column shows it as context. The
+curated 1&ndash;7 score sits beside each row: a low score above a high score
+is a magnitude outlier. &ldquo;&mdash;&rdquo; = the data states no
+measurable number for this capability (human judgment stays).</p>
 <h2>Tier lens</h2>
 <p class="note">Magnitudes scale &times;1.0918 per 100 item power
 (compounding). Percentage effects, durations, distances, and rows tagged
@@ -551,13 +657,13 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
                 f"<td class='d'>{esc(r['facts'])}</td>"
                 f"<td class='d'>{esc(weapons)}</td></tr>")
         parts.append("</table>")
-    out_html = os.path.join(ROOT, "review", "stat_chart.html")
+    out_html = os.path.join(REVIEW, "stat_chart.html")
     with open(out_html, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(parts))
 
     print(f"extracted {n_ok}/{len(spells)} cited spells; "
           f"{len(boards)} capability boards -> review/stat_chart.html "
-          f"+ out/stat_chart.json")
+          f"+ review/stat_chart.json")
 
 
 if __name__ == "__main__":

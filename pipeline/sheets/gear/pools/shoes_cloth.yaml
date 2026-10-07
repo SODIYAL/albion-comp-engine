@@ -2,10 +2,10 @@
 # beside the item's own third active). Composed into every SHOES_CLOTH
 # item; an item's own row for the same pair overrides.
 #
-# Calibration: the unique shoe actives read mobility 2-3 and disengage 3
-# (Mercenary Shoes' cleanse dash, Royal Shoes' immune leap). The shared
-# actives sit under them: a shorter leap without a cleanse, a sprint
-# without a dash.
+# Calibration: the unique shoe actives read mobility 2-3 and disengage up
+# to 3 (Mercenary Shoes' cleanse dash, Royal Shoes' immune leap). The
+# shared actives sit under them: a shorter leap without a cleanse, a
+# sprint without a dash.
 tree: SHOES_CLOTH
 curated_as_of: 2026-10-03
 capabilities:

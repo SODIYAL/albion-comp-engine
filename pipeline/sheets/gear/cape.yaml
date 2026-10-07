@@ -1,0 +1,98 @@
+# Capes, one entry per item. Gear follows the weapon sheets' rules: 1-7
+# scale (2 points = one supply unit). A cape carries no active: each row
+# cites the cape's passive on its dumps menu (out/gear_spells.json), and
+# the passive needs no pick. No cape passive buffs an ally, so none
+# grounds buff_allies (directionality rule); a self-only cleanse grounds
+# tankiness, not cleanse. The plain Cape (no combat effect) is not
+# catalogued.
+
+- gear: CAPEITEM_AVALON              # Avalonian Cape — Force Pulse
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: damage_debuff, score: 2, evidence: PASSIVE_CAPE_AVALON}  # AA proc: AoE hit, -15% enemy damage 4s
+
+- gear: CAPEITEM_DEMON               # Demon Cape — lava puddle
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: PASSIVE_CAPE_DEMON}
+
+- gear: CAPEITEM_FW_BRECILIEN        # Brecilien Cape — Fey Barrier
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_FEY}     # shield + purge immunity on head-cast
+
+- gear: CAPEITEM_FW_BRIDGEWATCH      # Bridgewatch Cape — Sandstorm
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: slow,          score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}  # 40% slow + -40% CCR zone
+    - {cap: zone_control,  score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}
+
+- gear: CAPEITEM_FW_CAERLEON         # Caerleon Cape — Q reset
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_CAERLEON}
+
+- gear: CAPEITEM_FW_FORTSTERLING     # Fort Sterling Cape — Untouchable
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_FORTSTERLING}  # cleanses own CC and debuffs when stunned, silenced, transformed or rooted: a self-only cleanse
+
+- gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — Energy Reserve
+  slot: cape
+  curated_as_of: 2026-08-25
+  # Energy Reserve restores the wearer's own energy over time when a cast
+  # drops it below a threshold: a self proc with nothing ally-targeted in
+  # the dumps, so no buff_allies (directionality rule). The self energy
+  # restore carries no row.
+  capabilities: []
+
+- gear: CAPEITEM_FW_MARTLOCK         # Martlock Cape — Shield of Protection
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_MARTLOCK}  # +100% defense 5s below HP threshold, unpurgeable
+
+- gear: CAPEITEM_FW_THETFORD         # Thetford Cape — Chain Lightning
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_THETFORD}
+
+- gear: CAPEITEM_HERETIC             # Heretic Cape — Devious Trap
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: root,          score: 2, evidence: PASSIVE_CAPE_HERETIC}  # 3 root traps on shoe-cast
+
+- gear: CAPEITEM_KEEPER              # Keeper Cape — Berserk
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_KEEPER}   # +40% damage 5s below HP threshold
+
+- gear: CAPEITEM_MORGANA             # Morgana Cape — Mark of the Raven
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_MORGANA}  # -50% cast time +50% AA speed on E
+
+- gear: CAPEITEM_SMUGGLER            # Smuggler Cape — Hidden Vial
+  slot: cape
+  curated_as_of: 2026-08-20
+  # Hidden Vial (PASSIVE_CAPE_SMUGGLER, on the menu): casting the potion
+  # cuts the potion slot's cooldown by 80. The row cites GEAR_STATS; the
+  # item carries no combat stats (out/item_stats.json).
+  capabilities:
+    - {cap: tankiness,     score: 1, evidence: GEAR_STATS}
+
+- gear: CAPEITEM_UNDEAD              # Undead Cape — Vanisher
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: PASSIVE_CAPE_UNDEAD}   # invisibility 6s at low HP, at -50% damage and Healing Cast

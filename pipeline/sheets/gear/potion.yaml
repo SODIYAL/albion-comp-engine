@@ -1,0 +1,78 @@
+# Potions, one entry per item. Gear follows the weapon sheets' rules: 1-7
+# scale (2 points = one supply unit). A potion has no gear_spells menu:
+# each row cites the GEAR_STATS sentinel and reads the potion's consume
+# spell (items.json @consumespell; parse_dumps does not index it, so the
+# text is read in the pinned dumps). A self-only cleanse grounds
+# tankiness, not cleanse.
+
+- gear: T6_POTION_ENERGY             # Major Energy Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # energy restore + cooldown rate — cast economy
+
+- gear: T6_POTION_HEAL               # Major Healing Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}
+
+- gear: T7_POTION_ACID               # Major Acid Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: resist_shred,  score: 2, evidence: GEAR_STATS}       # thrown: -20% damage resistances on up to 10 enemies in 5m for 5s
+
+- gear: T7_POTION_CLEANSE2           # Major Cleansing Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # self-cleanse of DoTs, CC and debuffs, usable under CC (a self-only cleanse)
+
+- gear: T7_POTION_REVIVE             # Major Gigantify Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health up for 6s + immune to forced movement
+
+- gear: T7_POTION_SLOWFIELD          # Major Sticky Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: slow,          score: 2, evidence: GEAR_STATS}       # tar puddle 7s: slows enemies 57%, cuts the damage they deal 27%
+
+- gear: T7_POTION_STONESKIN          # Major Resistance Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+
+- gear: T8_POTION_BERSERK            # Major Berserk Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # +20% damage 5s at -10% defense
+
+- gear: T8_POTION_CLEANSE            # Invisibility Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: GEAR_STATS}       # self invisibility up to 7s — the escape consumable
+
+- gear: T8_POTION_COOLDOWN           # Major Poison Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: GEAR_STATS}      # one enemy: true-damage poison, slowed 40% for 0.2s on each direct hit; no healing term
+
+- gear: T8_POTION_LAVA               # Major Hellfire Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: GEAR_STATS}       # hellfire puddle 3s: true damage every 0.5s, -50% Healing Received
+
+- gear: T8_POTION_TORNADO            # Major Tornado in a Bottle
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: GEAR_STATS}  # tornado 4.6s: knocks back enemies touching it 8.75m, ignores CCR

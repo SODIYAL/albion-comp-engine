@@ -1,0 +1,109 @@
+# Maces: one entry per weapon of the mace tree. An entry carries the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The shared Q/W/passive rows (Snare Charge, Guard Rune,
+# Sacred Ground, Defensive Slam, WEAPON_STATS tankiness 4) live in
+# pools/mace.yaml and compose into every mace that can equip them
+# (sheets_lib.compose). Most `except:` entries drop a shared row whose
+# capability the weapon's E row already carries, so a capability keeps
+# one row; an E-row comment that names a Q/W spell marks that spell's
+# share of the E row's score.
+
+- weapon: 2H_DUALMACE_AVALON         # Oathkeepers — aurora support tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: engage, evidence: CHARGE_ROOT}
+  capabilities:
+    - {cap: buff_allies,  score: 4, evidence: BLESSED_MACES}   # E: group MS aurora + 400 absorb shields + heal
+    - {cap: heal_sustain, score: 2, evidence: BLESSED_MACES}   # 30 Health to 10 allies in 8m per auto-attack for 5s
+    - {cap: engage,       score: 2, evidence: BLESSED_MACES}   # the aurora is a group sprint lane
+
+- weapon: 2H_FLAIL                   # Morning Star — the mass-root field
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: engage, evidence: CHARGE_ROOT}
+    - {cap: root, evidence: CHARGE_ROOT}
+    - {cap: peel, evidence: GUARDRUNE}
+  capabilities:
+    - {cap: root,         score: 6, evidence: ROOTFIELD}       # E: Gravitas — channeled 5m root IGNORING CC resistance
+    - {cap: engage,       score: 4, evidence: ROOTFIELD}       # Close In dash into the field
+    - {cap: catch,        score: 4, evidence: ROOTFIELD}       # nothing leaves Gravitas
+    - {cap: peel,         score: 4, evidence: ROOTFIELD}       # cast it on the divers; W: Guard Rune (QW)
+    - {cap: mobility,     score: 2, evidence: ROOTFIELD}       # the Close In dash
+
+- weapon: 2H_MACE            # Heavy Mace — disruption tank
+  curated_as_of: 2026-08-12
+  role_hint: tank             # fielded as Tank in data/published_comps/timothy_blap_blackzone_roam_2026_08.yaml
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: root, evidence: CHARGE_ROOT}  # no own root row: withholds Snare Charge's 2.56s root (curation judgment)
+    - {cap: peel, evidence: GUARDRUNE}
+  capabilities:
+    - {cap: tankiness,  score: 6, evidence: WEAPON_STATS}    # override of the pool's 4
+    - {cap: silence,    score: 6, evidence: SHRIEKMACE}    # E: Battle Howl, a 2.33s silence on every enemy in a 6m circle
+    - {cap: purge,      score: 6, evidence: SHRIEKMACE}    # the same cast purges all their buffs
+    - {cap: peel,       score: 6, evidence: SHRIEKMACE}    # silence and purge the divers
+    - {cap: engage,     score: 4, evidence: CHARGE_ROOT}   # W: Snare Charge, an 11m leap; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9)
+    - {cap: zone_control, score: 4, evidence: SACRED_GROUND}  # Q: Sacred Ground, a 3m circle for 3s; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9)
+
+- weapon: 2H_MACE_MORGANA            # Camlann Mace — the vendetta clump
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: clump_create, score: 6, evidence: VACUUMSLASH}     # E: pulls everything in 8m onto the cursed target
+    - {cap: stun,         score: 2, evidence: VACUUMSLASH}     # 0.8s on the pile
+    - {cap: catch,        score: 2, evidence: VACUUMSLASH}
+
+- weapon: MAIN_MACE          # 1H Mace — mobility/stun bruiser-tank
+  curated_as_of: 2026-08-12
+  role_hint: tank             # fielded as Tank in data/published_comps/timothy_blap_blackzone_roam_2026_08.yaml
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: engage, evidence: CHARGE_ROOT}
+    - {cap: slow, evidence: SACRED_GROUND}          # no own slow row: withholds Sacred Ground's slow (curation judgment)
+    - {cap: zone_control, evidence: SACRED_GROUND}  # no own zone_control row: withholds Sacred Ground's zone_control (curation judgment)
+  capabilities:
+    - {cap: engage,     score: 4, evidence: MACELEAP}      # E: Deep Leap, an 11m gap-close, immune to CC, debuffs and damage until impact
+    - {cap: stun,       score: 4, evidence: MACELEAP}      # 1.8s on enemies within 3m of the impact
+    - {cap: mobility,   score: 4, evidence: MACELEAP}
+    # no purge: neither Deep Leap nor any mace Q/W removes buffs
+
+- weapon: MAIN_MACE_CRYSTAL          # Dreadstorm Monarch — storm-combo tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: slow, evidence: SACRED_GROUND}
+    - {cap: zone_control, evidence: SACRED_GROUND}
+  capabilities:
+    - {cap: slow,         score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # E: the Eye of the Storm, 6-9m around the wielder for 5s, slows by 25%
+    - {cap: resist_shred, score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # -18% resistances on everyone in the storm
+    - {cap: burst_aoe,    score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # Dreadstorm Surge 109 in 4m; the sweeps 50
+    - {cap: zone_control, score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # the storm + Q: Sacred Ground
+    - {cap: catch,        score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # the moving storm slows runners
+
+- weapon: MAIN_MACE_HELL             # Incubus Mace — the shrinking curse
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: max_health_cut, score: 4, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s in a cone, the focus call (taxonomy rule)
+    - {cap: heal_reduction, score: 4, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
+    - {cap: burst_st,     score: 2, evidence: SHRINKINGSMASH}  # 98 magical
+    - {cap: damage_debuff, score: 4, evidence: SHRINKINGSMASH}  # E: -40% damage dealt for 8s, cone
+
+- weapon: MAIN_ROCKMACE_KEEPER       # Bedrock Mace — the air-jet wall
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  # deliberate non-takes of shared rows (pools/mace.yaml)
+  except:
+    - {cap: peel, evidence: GUARDRUNE}
+    - {cap: anti_dive, evidence: GUARDRUNE}
+    - {cap: zone_control, evidence: SACRED_GROUND}
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: PRIMALSLAM}  # E: the jets knock enemy players back 18m: a knock-away wall, not offensive repositioning (curation judgment)
+    - {cap: peel,         score: 6, evidence: PRIMALSLAM}      # the 4s jet wall knocks divers off the backline and covers the retreat: that job is peel, not disengage (self-escape), and the lint grounds knockbacks as peel (curation judgment)
+    - {cap: zone_control, score: 2, evidence: PRIMALSLAM}      # the jets hold the line they occupy
+    - {cap: anti_dive,    score: 2, evidence: PRIMALSLAM}      # divers get knocked 18m back; MASTERSHEET tune:sheets sets 6 (golden T19)

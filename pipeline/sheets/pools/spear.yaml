@@ -1,20 +1,20 @@
-# spear tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# spear weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# spear tree: the Q/W/passive rows the eight spears share. A row composes
+# into every spear that can equip its evidence spell (WEAPON_STATS:
+# tree-wide). A weapon's own row with the same (cap, evidence) is that
+# weapon's deliberate override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/spear.yaml.
 subcategory: spear
 capabilities:
-  - {cap: mobility, score: 2, evidence: CHARGINGBLADE}                   # (QW)
-  - {cap: slow, score: 2, evidence: GROUNDSPEAR}                         # (QW)
-  - {cap: catch, score: 2, evidence: LEGBREAKER}                         # (QW) single-target snare — loses catch value in larger groups (curation judgment; was 4, peel 2 dropped)
-  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech
-  - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # (QW)
-  - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # spear charge engine (QW)
-  # reflect (promoted 2026-08-28): Deflecting Spin returns 100% of incoming
-  # damage — but only to the spinner, and only while channelling. A personal
-  # defensive trick, not a comp tool: 2 on the ladder where Demon Armor's
-  # team-wide aura sits at 6. (structural: reflectdamageactive 1.00)
+  - {cap: mobility, score: 2, evidence: CHARGINGBLADE}                   # W: Inner Focus, stacking Move Speed, then 2s of stun/root/slow immunity (QW)
+  - {cap: slow, score: 2, evidence: GROUNDSPEAR}                         # W: Impaler, -50% for 3s in 2.5m (QW)
+  - {cap: catch, score: 2, evidence: LEGBREAKER}                         # W: Cripple, a single-target snare: loses catch value in larger groups (curation judgment) (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech, heals the wielder only
+  - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # W: Harpoon, a 2.2s root with a Spirit Spear Charge (QW)
+  - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # Q: Spirit Spear, the spear charge engine (QW)
+  # Deflecting Spin reflects 100% of incoming damage, only for the spinner
+  # and only while channelling: a personal defensive trick, 2 on the
+  # reflect ladder where Demon Armor's team-wide aura sits at 6
+  # (reflectdamageactive 1.00).
   - {cap: reflect, score: 2, evidence: DEFLECTINGSTANCE}                 # W: self-only, channelled (QW)

@@ -1,17 +1,19 @@
-# Bow — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
-# Usage: 4 sightings, dominant role: range.
-#
-# Identity: the pure kiter. The E (Enchanted Quiver) is an auto-attack
-# steroid — +50% AA speed, +280% AA damage for 4 arrows — that PUNISHES
-# proximity (damage drops if an enemy player is within 6m) and recasts into a
-# dash with 3 more arrows. Sustained single-target pressure at maximum range;
-# the only bow scored sustained_dps 3. Shares the bow Q/W pool with Longbow /
-# Mistpiercer / Bow of Badon; QW-conditional scores mirror those sheets.
+# Bows — one entry per weapon of the bow tree, carrying the weapon's E (its
+# identity) and any override of a shared row. The tree's shared Q/W/passive
+# rows (Deadly Shot; Ray of Light, Frost Shot, Speed Shot; Slow Poison; the
+# base stats) live in pools/bow.yaml and compose into every bow that can
+# equip them (sheets_lib.compose).
+
+# Bow — the pure kiter. The E (Enchanted Quiver) is an auto-attack steroid
+# (+50% AA speed, +280% physical AA damage for 4 arrows) that punishes
+# proximity (the AA damage drops with an enemy player within 6m) and recasts
+# into a dash with 3 more arrows: sustained single-target pressure at range.
+# sustained_dps 6, with Whispering Bow the top bow score.
 
 - weapon: 2H_BOW                     # Bow — the pure kiter
-  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of tree-pool spells (see sheets/pools/bow.yaml)
+  # deliberate non-takes of shared rows (pools/bow.yaml)
   except:
     - {cap: disengage, evidence: JUMPSHOT2}
     - {cap: mobility, evidence: SPEEDSHOT2}
@@ -21,3 +23,92 @@
     - {cap: mobility,      score: 4, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
     - {cap: burst_st,      score: 2, evidence: SPEEDARCHER_KITE}  # 280% arrows front-load the window
     - {cap: disengage,     score: 2, evidence: SPEEDARCHER_KITE}  # the dash resets kite distance; W: Frost Shot
+
+# Mistpiercer — piercing line burst. The E (Lucent Hawk) fires a 178-damage
+# line-piercing hawk, recastable 4 more times within 3s: five hawks into one
+# target are single-target burst, five through a clump are line AoE; scored
+# on both (the Permafrost dual-use precedent, design doc §2.3).
+
+- weapon: 2H_BOW_AVALON              # Mistpiercer — piercing line-burst archer
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: HAWK_SHOT_MULTI1}   # E: 178 x5 recasts into one target
+    - {cap: burst_aoe,     score: 4, evidence: HAWK_SHOT_MULTI1}   # hawks pierce every enemy on the line
+
+- weapon: 2H_BOW_CRYSTAL             # Skystrider Bow — untargetable perch artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/bow.yaml)
+  except:
+    - {cap: disengage, evidence: JUMPSHOT2}
+    - {cap: mobility, evidence: SPEEDSHOT2}
+  capabilities:
+    - {cap: disengage,     score: 4, evidence: AIR_RAID}          # E: leap to an air foothold, UNTARGETABLE 3.75s
+    - {cap: burst_aoe,     score: 4, evidence: AIR_RAID}          # 123 AoE bolts, recastable x3
+    - {cap: mobility,      score: 4, evidence: AIR_RAID}          # the leap repositions; W: Speed Shot
+
+# Wailing Bow — the clump-line nuke. The E (Demon Arrow) pierces everything on
+# a line with damage RAMPING per enemy already hit (189 on the first):
+# ordinary into one target, devastating through a stacked clump. Anti-clump
+# artillery; burst_aoe 6 is the weapon's reason to exist.
+
+- weapon: 2H_BOW_HELL                # Wailing Bow — the clump-line nuke
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 6, evidence: HELL_ARROW}        # E: ramping line pierce — anti-clump payload
+
+# Bow of Badon — storm-zone bow. The E (Raging Storm) plants a 5s stormcloud
+# on the first enemy hit (21 every 0.3s, a DoT on leavers, every tick
+# interrupts): a mobile zone anchor rather than a burst tool.
+
+- weapon: 2H_BOW_KEEPER              # Bow of Badon — storm-zone bow
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: zone_control,  score: 4, evidence: LIGHTNING_ARROW}    # E: 5s stormcloud, DoT on leavers (Longbow zone parity)
+    - {cap: burst_aoe,     score: 2, evidence: LIGHTNING_ARROW}    # 21 every 0.3 in the cloud — pressure, not a bomb
+    - {cap: interrupt,     score: 4, evidence: LIGHTNING_ARROW}    # every damage tick interrupts casting — nothing channels inside the cloud for 5s (interrupt taxonomy)
+
+# Longbow — Rain of Arrows: a channeled 5r volley zone (99 per volley, 20%
+# slow). No knockback_displace: Frost Shot knocks the caster back
+# (pools/bow.yaml).
+
+- weapon: 2H_LONGBOW
+  curated_as_of: 2026-08-12
+  role_hint: range            # ranged AoE/zone DPS; attackrange 13
+                              # in the item stats bank
+  # deliberate non-takes of shared rows (pools/bow.yaml)
+  except:
+    - {cap: resist_shred, evidence: DEADLYSHOT}
+    - {cap: catch, evidence: GROUNDARROW}    # no own catch row: withholds Ray of Light's catch (curation judgment)
+    - {cap: peel, evidence: GROUNDARROW}     # no own peel row: withholds Ray of Light's peel (curation judgment)
+    - {cap: disengage, evidence: JUMPSHOT2}  # no own disengage row: withholds Frost Shot's disengage (curation judgment)
+    - {cap: slow, evidence: PASSIVE_SLOWPOISON}
+    - {cap: mobility, evidence: SPEEDSHOT2}  # no own mobility row: withholds Speed Shot's mobility (curation judgment)
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: ARROWRAIN}   # Rain of Arrows (E)
+    - {cap: zone_control,  score: 4, evidence: ARROWRAIN}   # channeled AoE slow zone
+    - {cap: slow,          score: 4, evidence: ARROWRAIN}
+    # resist_shred 2 from the Piercing Arrows passive: each auto-attack
+    # lowers the target's Defense by 2% for 3s (4 stacks); the pool's Deadly
+    # Shot row is excepted
+    - {cap: resist_shred,  score: 2, evidence: PASSIVE_ARMOR_PIERCE_STACK}
+
+- weapon: 2H_LONGBOW_UNDEAD          # Whispering Bow — glass-cannon AA bow
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/bow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
+    # the E also lowers the wielder's Defense by 35% (the glass side of the
+    # cannon); self_costs are read from gear sheets only, so it is unscored
+
+- weapon: 2H_WARBOW                  # Warbow — skillshot nuke bow
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: SKILLSHOT_STUN}    # E: Magic Arrow 232, CD refund on hit

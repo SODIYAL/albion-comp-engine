@@ -14,8 +14,8 @@ Every correction goes through the sheet (+ golden case when it changes a
 recorded call), never through this page.
 
 Auto-flags (also printed to console):
-  RULE  same evidence spell grounding the same capability at different
-        scores — violates the line-consistency rule, always a bug
+  RULE  same evidence spell (and `use:`) grounding the same capability at
+        different scores — violates the line-consistency rule, always a bug
   PASV  PASSIVE_*/WEAPON_STATS evidence grounding score >= 4 (1-7 scale) — passives are
         usually minor; each one needs an explicit justification
   TOP   score >= 6 — the top of every ladder is reviewed first
@@ -34,67 +34,106 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 OUT = os.path.join(HERE, "out")
 
-CAP_RE = re.compile(
-    r"-\s*\{cap:\s*(\w+),\s*score:\s*(\d+),\s*evidence:\s*(\w+)\s*\}"
-    r"(?:\s*#\s*(.*))?")
+try:
+    import yaml
+except ImportError:
+    sys.exit("pip install pyyaml")
+
+sys.path.insert(0, HERE)
+import sheets_lib  # noqa: E402
+
 WEAPON_RE = re.compile(r"^-\s*weapon:\s*(\w+)")
 
 
-def parse_sheets():
-    """Raw-text parse so the inline # comments (the curation 'why') survive.
+def row_comments(path):
+    """{(weapon, cap, evidence, use): comment} for the scored rows of one
+    sheet or pool file (weapon is None in a pool file).
 
-    Tree-pool rows (sheets/pools/) are EXPANDED to every weapon they apply to
-    via sheets_lib.compose, so the boards still show the full per-weapon
-    picture; their comments come from the pool file."""
-    sys.path.insert(0, HERE)
-    import yaml
-    import sheets_lib
-    rows = []
-    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
-        weapon = None
-        for line in open(path, encoding="utf-8"):
+    YAML drops comments, so the ROWS come from yaml + sheets_lib.compose and
+    only the comment text (the curation 'why') is read here: a `- {...}`
+    flow row is parsed by yaml whatever keys it carries (`use:` included),
+    the text after its closing brace is its comment, and comment-only lines
+    whose `#` sits in the same column continue that comment. A row without
+    a score (an `except:` entry) carries no comment."""
+    out = {}
+    weapon, last = None, None          # last: (key, column of its '#')
+    with open(path, encoding="utf-8") as f:
+        for raw in f:
+            line = raw.rstrip("\n")
             stripped = line.strip()
-            if stripped.startswith("#"):
-                continue
             m = WEAPON_RE.match(stripped)
             if m:
-                weapon = m.group(1)
+                weapon, last = m.group(1), None
                 continue
-            m = CAP_RE.search(stripped)
-            if m and weapon:
-                cap, score, evidence, comment = m.groups()
-                rows.append({"weapon": weapon, "cap": cap, "score": int(score),
-                             "evidence": evidence, "comment": (comment or "").strip(),
-                             "sheet": os.path.basename(path)})
-    # pool comments, keyed (subcategory, cap, evidence)
-    pool_comment = {}
-    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml"))):
-        sub = os.path.splitext(os.path.basename(path))[0]
-        for line in open(path, encoding="utf-8"):
-            m = CAP_RE.search(line.strip())
-            if m:
-                cap, _, evidence, comment = m.groups()
-                pool_comment[(sub, cap, evidence)] = (comment or "").strip()
+            if stripped.startswith("#"):
+                if last and line.index("#") == last[1]:
+                    out[last[0]] += " " + stripped.lstrip("#").strip()
+                else:
+                    last = None
+                continue
+            last = None
+            if not stripped.startswith("- {"):
+                continue
+            close = stripped.find("}")
+            if close < 0:
+                continue
+            try:
+                row = yaml.safe_load(stripped[2:close + 1])
+            except yaml.YAMLError:
+                continue
+            if not isinstance(row, dict) or "score" not in row:
+                continue
+            key = (weapon, row.get("cap"), row.get("evidence"), row.get("use"))
+            rest = stripped[close + 1:]
+            out[key] = rest.split("#", 1)[1].strip() if "#" in rest else ""
+            if "#" in rest:
+                last = (key, line.index("#", line.index("}")))
+    return out
+
+
+def parse_sheets():
+    """Every row the build composes, per weapon: yaml + sheets_lib.compose
+    over the weapon entries (sheets/<tree>.yaml, one file per weapon tree),
+    so a row the build reads is a row the board shows, `use:` variants
+    included. Tree-pool rows (sheets/pools/) are EXPANDED to every weapon
+    they apply to, so the boards show the full per-weapon picture; their
+    comment and file are the pool's."""
     lines_db = sheets_lib.load_weapon_lines(OUT)
     pools = sheets_lib.load_pools()
+    pool_comment = {}
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml"))):
+        with open(path, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        sub = doc.get("subcategory") or os.path.splitext(os.path.basename(path))[0]
+        for (_, cap, ev, use), text in row_comments(path).items():
+            pool_comment[(sub, cap, ev, use)] = text
+    rows = []
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
-        for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
-            wkey = entry.get("weapon")
-            if not wkey:
+        sheet = os.path.basename(path)
+        comments = row_comments(path)
+        with open(path, encoding="utf-8") as f:
+            entries = yaml.safe_load(f) or []
+        for entry in entries:
+            if not isinstance(entry, dict) or not entry.get("weapon"):
                 continue
+            wkey = entry["weapon"]
             own = {(c.get("cap"), c.get("evidence"))
-                   for c in entry.get("capabilities", []) if isinstance(c, dict)}
+                   for c in (entry.get("capabilities") or []) if isinstance(c, dict)}
             line = lines_db.get(wkey)
             sub = (line or {}).get("subcategory")
             for c in sheets_lib.compose(entry, line, pools):
-                key = (c.get("cap"), c.get("evidence"))
-                if key in own:
-                    continue                       # already parsed with comment
-                rows.append({"weapon": wkey, "cap": c["cap"],
-                             "score": int(c.get("score", 0)),
-                             "evidence": c.get("evidence"),
-                             "comment": pool_comment.get((sub,) + key, ""),
-                             "sheet": f"pools/{sub}.yaml"})
+                cap, ev, use = c.get("cap"), c.get("evidence"), c.get("use")
+                if not cap:
+                    continue
+                if (cap, ev) in own:
+                    comment, src = comments.get((wkey, cap, ev, use), ""), sheet
+                else:
+                    comment = pool_comment.get((sub, cap, ev, use), "")
+                    src = f"pools/{sub}.yaml"
+                rows.append({"weapon": wkey, "cap": cap,
+                             "score": int(c.get("score") or 0),
+                             "evidence": ev or "-", "use": use,
+                             "comment": comment, "sheet": src})
     return rows
 
 
@@ -108,25 +147,27 @@ def main():
     for r in rows:
         by_cap[r["cap"]].append(r)
 
-    # RULE flag: same (cap, evidence) at different scores. WEAPON_STATS is
-    # exempt — it is a per-weapon stat citation, not a shared spell, so
-    # scores legitimately differ. CAVEAT for triage: a flagged pair can be
-    # legitimate when the higher score's total includes an E-supplement on
-    # top of the shared QW spell — but then the comment MUST say so; a
-    # flagged pair with no such comment is a bug.
+    # RULE flag: same (cap, evidence, use) at different scores. WEAPON_STATS
+    # is exempt — it is a per-weapon stat citation, not a shared spell, so
+    # scores legitimately differ. Two `use:` variants of one spell are
+    # mutually exclusive uses, each its own row and loadout bundle, so a use
+    # is compared only with the same use. CAVEAT for triage: a flagged pair
+    # can be legitimate when the higher score's total includes an
+    # E-supplement on top of the shared QW spell — but then the comment MUST
+    # say so; a flagged pair with no such comment is a bug.
     rule_flags = set()
     for cap, rs in by_cap.items():
         by_ev = defaultdict(set)
         for r in rs:
             if r["evidence"] != "WEAPON_STATS":
-                by_ev[r["evidence"]].add(r["score"])
-        for ev, scores in by_ev.items():
+                by_ev[(r["evidence"], r.get("use"))].add(r["score"])
+        for (ev, use), scores in by_ev.items():
             if len(scores) > 1:
-                rule_flags.add((cap, ev))
+                rule_flags.add((cap, ev, use))
 
     def flags_of(r):
         f = []
-        if (r["cap"], r["evidence"]) in rule_flags:
+        if (r["cap"], r["evidence"], r.get("use")) in rule_flags:
             f.append("RULE")
         if (r["evidence"].startswith("PASSIVE") or r["evidence"] == "WEAPON_STATS") \
                 and r["score"] >= 4:
@@ -169,13 +210,17 @@ def main():
         for r in rs:
             fl = flags_of(r)
             cls = " ".join(f.lower() for f in fl)
+            ev = html.escape(r["evidence"])
+            if r.get("use"):                       # one use of a split spell
+                ev += "<br><small>use: %s</small>" % html.escape(str(r["use"]))
             body.append(
                 '<tr class="%s"><td class="s">%d</td><td>%s</td>'
                 '<td class="ev">%s</td><td class="fl">%s</td>'
-                '<td class="cm">%s</td><td class="dx">%s</td></tr>' % (
+                '<td class="cm">%s <small>(%s)</small></td>'
+                '<td class="dx">%s</td></tr>' % (
                     cls, r["score"], html.escape(names.get(r["weapon"], r["weapon"])),
-                    html.escape(r["evidence"]), " ".join(fl),
-                    html.escape(r["comment"]), spell_cell(r["evidence"])))
+                    ev, " ".join(fl), html.escape(r["comment"]),
+                    html.escape(r["sheet"]), spell_cell(r["evidence"])))
         sections.append(
             '<h2 id="%s">%s <small>%d weapons · %s</small></h2>'
             '<table><tr><th>score</th><th>weapon</th><th>evidence</th>'
@@ -197,10 +242,11 @@ def main():
  .legend{color:#8a92a0;margin-bottom:16px}
 </style>
 <h1>Capability magnitude review</h1>
-<p class="legend">Rule: scores encode impact MAGNITUDE, not existence.
-%d rows · flags: %d RULE (same spell, same cap, different scores — always a
-bug) · %d PASV (passive/stat evidence at 2+) · %d TOP (score-3 ladder tops,
-review first). Corrections go through the sheets, never this page.</p>
+<p class="legend">Rule: scores encode impact MAGNITUDE, not existence
+(sheet scores, 1&ndash;7). %d rows · flags: %d RULE (same spell and use, same
+cap, different scores — always a bug) · %d PASV (passive/stat evidence at 4+) ·
+%d TOP (score 6+, the ladder tops, review first). Corrections go through the
+sheets, never this page.</p>
 <p>%s</p>
 %s""" % (len(rows), n_rule, n_pasv, n_top, toc, "".join(sections))
 
@@ -212,13 +258,16 @@ review first). Corrections go through the sheets, never this page.</p>
 
     print("wrote review/magnitude.html — %d rows across %d capabilities" %
           (len(rows), len(by_cap)))
-    print("  flags: %d RULE, %d PASV, %d TOP(score-3)" % (n_rule, n_pasv, n_top))
-    for cap, ev in sorted(rule_flags):
-        scores = sorted({r["score"] for r in by_cap[cap] if r["evidence"] == ev})
-        who = sorted(names.get(r["weapon"], r["weapon"]) for r in by_cap[cap]
-                     if r["evidence"] == ev)
+    print("  flags: %d RULE, %d PASV, %d TOP (score 6+)" % (n_rule, n_pasv, n_top))
+    for cap, ev, use in sorted(rule_flags,
+                               key=lambda t: (t[0], t[1], t[2] or "")):
+        same = [r for r in by_cap[cap]
+                if r["evidence"] == ev and r.get("use") == use]
+        scores = sorted({r["score"] for r in same})
+        who = sorted(names.get(r["weapon"], r["weapon"]) for r in same)
+        label = ev + (" use %s" % use if use else "")
         print("  RULE  %-18s %-28s scores %s  (%s)" %
-              (cap, ev, scores, ", ".join(who)))
+              (cap, label, scores, ", ".join(who)))
     return 0
 
 

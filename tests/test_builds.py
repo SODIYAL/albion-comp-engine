@@ -501,6 +501,129 @@ check("H23 the Cleric Cowl's doctrine is the observed Ice Block, unanimous",
       and _da["HEAD_CLOTH_SET2"]["votes"] == _da["HEAD_CLOTH_SET2"]["of"] >= 2,
       str(_da.get("HEAD_CLOTH_SET2")))
 
+# ---- the evidence lint holds the sheets README contract, failing closed ------
+# Rule: a typo in a sheet is an ERROR, never a silent no-op. The
+# lint_contract_* fixtures under pipeline/tests/ carry the defects their
+# comments name; the lint must report every one, and the committed sheets
+# must pass the same checks.
+import glob as _glob  # noqa: E402
+import evidence_lint as el  # noqa: E402
+import mastersheet  # noqa: E402
+_fx = os.path.join(PIPELINE, "tests")
+_sheet_fx = os.path.join(_fx, "lint_contract_sheet.yaml")
+_sheet_err, _sheet_warn = el.lint_sheet(_sheet_fx)
+_sheet_err = _sheet_err + el.lint_corpus([_sheet_fx])[0]
+_gear_err = el.lint_gear([os.path.join(_fx, "lint_contract_gear.yaml")])[0]
+_pool_err = el.lint_pools([os.path.join(_fx, "lint_contract_pool.yaml")])[0]
+
+
+def _says(errors, *parts):
+    return any(all(p in e for p in parts) for e in errors)
+
+
+def _check_quiet(name, ok, detail):
+    """check() that prints the detail only when the check fails."""
+    return check(name, ok, "" if ok else detail)
+
+
+for _name, _errors, _parts in (
+        ("an unknown entry key", _sheet_err, ("2H_MACE:", "unknown key", "evidense")),
+        ("an unknown row key", _sheet_err, ("MAIN_MACE.root:", "unknown key", "scroe")),
+        ("a row without a score", _sheet_err, ("MAIN_MACE.root:", "no score")),
+        ("score 9", _sheet_err, ("MAIN_MACE.stun:", "score 9 is outside 1-7")),
+        ("score 2.5", _sheet_err, ("MAIN_MACE.engage:", "score 2.5 is not an integer")),
+        ("score 0", _sheet_err, ("MAIN_MACE.mobility:", "score 0", "tune:sheets")),
+        ("score true", _sheet_err, ("MAIN_MACE.catch:", "score True is not an integer")),
+        ("an unknown cap 'peal'", _sheet_err, ("MAIN_MACE.peal:", "unknown capability 'peal'")),
+        ("a duplicate row", _sheet_err, ("MAIN_MACE.tankiness:", "duplicate row")),
+        ("a duplicate except", _sheet_err, ("MAIN_MACE:", "duplicate except (slow, SACRED_GROUND)")),
+        ("a dead except (no such pool row)", _sheet_err,
+         ("MAIN_MACE:", "except (purge, HAMMERTACKLE) names no row")),
+        ("an inert except (the weapon cannot equip the spell)", _sheet_err,
+         ("2H_IRONGAUNTLETS_HELL:", "except (engage, DASHKICK) is inert", "cannot equip")),
+        ("an inert except (an own row already overrides the pair)", _sheet_err,
+         ("MAIN_MACE:", "except (peel, GUARDRUNE) is inert", "own row")),
+        ("a wrong-file placement", _sheet_err,
+         ("MAIN_MACE:", "belongs in sheets/mace.yaml")),
+        ("an impossible curated_as_of", _sheet_err,
+         ("2H_MACE:", "'2026-13-45' is not an ISO date")),
+        ("a curated_as_of that is not ISO", _sheet_err,
+         ("2H_IRONGAUNTLETS_HELL:", "'2026-8-1' is not an ISO date")),
+        ("a missing curated_as_of", _sheet_err, ("2H_MACE:", "missing curated_as_of")),
+        ("a bad role_hint", _sheet_err, ("2H_MACE:", "role_hint 'dps'")),
+        ("a weapon key defined twice", _sheet_err, ("2H_MACE:", "defined 2 times")),
+        ("a gear slot outside the vocabulary", _gear_err,
+         ("gear/HEAD_PLATE_KEEPER:", "slot 'helmet'")),
+        ("a gear slot the game data contradicts", _gear_err,
+         ("gear/ARMOR_PLATE_HELL:", "disagrees with the game data's slot armor")),
+        ("a gear entry in the wrong file", _gear_err,
+         ("gear/ARMOR_PLATE_HELL:", "belongs in sheets/gear/armor.yaml")),
+        ("the weapon sentinel on a gear row", _gear_err,
+         ("gear/ARMOR_PLATE_HELL.tankiness:", "WEAPON_STATS is the weapon sentinel")),
+        ("a self cost above the scale", _gear_err,
+         ("gear/ARMOR_PLATE_HELL self_costs.tankiness:", "points 9 is outside 1-7")),
+        ("a gear item the game data does not carry", _gear_err,
+         ("gear/HEAD_PLATE_UNLISTED:", "unknown gear item")),
+        ("a dead gear except", _gear_err,
+         ("gear/SHOES_CLOTH_SET2:", "except (disengage, BLINK) names no row")),
+        ("a gear key defined twice", _gear_err, ("SHOES_CLOTH_SET2:", "defined 2 times")),
+        ("an unknown pool key", _pool_err, ("unknown key", "capabilites")),
+        ("a pool outside pools/<subcategory>.yaml", _pool_err,
+         ("the mace pool belongs in sheets/pools/mace.yaml",)),
+        ("a pool score 2.5", _pool_err, ("pools/mace.root:", "score 2.5 is not an integer")),
+        ("an unknown pool cap", _pool_err, ("pools/mace.peal:", "unknown capability")),
+        ("an unknown pool row key", _pool_err, ("pools/mace.slow:", "unknown key", "evidense")),
+        ("a duplicate pool row", _pool_err, ("pools/mace.peel:", "duplicate row"))):
+    _check_quiet(f"lint: {_name} is an ERROR", _says(_errors, *_parts),
+                 "; ".join(_errors)[:300])
+_check_quiet("lint: an own row identical to the pool row it shadows is a "
+             "WARNING, not an ERROR",
+             _says(_sheet_warn, "MAIN_MACE.peel:", "row it shadows")
+             and not _says(_sheet_err, "MAIN_MACE.peel:"), str(_sheet_warn))
+_legacy = el.lint_sheet(os.path.join(_fx, "bad_sheet_fixture.yaml"))[0]
+_check_quiet("lint: the grounding error classes of bad_sheet_fixture.yaml all "
+             "fail (rule 2 equippability, rule 3 grounding)",
+             _says(_legacy, "MAIN_MACE.purge:", "cannot ground purge")
+             and _says(_legacy, "MAIN_MACE.cleanse:", "NOT equippable")
+             and _says(_legacy, "2H_LONGBOW.knockback_displace:", "cannot ground")
+             and _says(_legacy, "2H_LONGBOW.resist_shred:", "cannot ground"),
+             "; ".join(_legacy)[:300])
+_run = el.run(sorted(_glob.glob(os.path.join(PIPELINE, "sheets", "*.yaml"))))
+_committed = [e for _, errors, _ in _run for e in errors]
+_check_quiet("lint: the committed sheets, pools and templates pass every "
+             "check (0 errors)", not _committed, "; ".join(_committed[:3]))
+
+# MASTERSHEET tune:sheets: an int 0-7 under a weapon key, else the parse fails
+_tune = "```yaml tune:sheets\n{}\n```\n"
+
+
+def _tune_error(body):
+    try:
+        mastersheet.parse(_tune.format(body))
+    except ValueError as exc:
+        return str(exc)
+    return None
+
+
+for _body, _expect in (("MAIN_MACE: {stun: 9}", "MAIN_MACE.stun: 9 is outside 0-7"),
+                       ("MAIN_MACE: {stun: -1}", "MAIN_MACE.stun: -1 is outside 0-7"),
+                       ("MAIN_MACE: {stun: 2.5}", "not an integer score"),
+                       ("MAIN_MACE: {stun: true}", "not an integer score"),
+                       ("main_mace: {stun: 2}", "not a weapon key"),
+                       ("MAIN_MACE: 3", "must map capabilities to scores")):
+    _check_quiet(f"MASTERSHEET tune:sheets rejects {_body!r}",
+                 _expect in (_tune_error(_body) or ""), str(_tune_error(_body)))
+try:
+    mastersheet.load()
+    _committed_tune_error = None
+except ValueError as _exc:
+    _committed_tune_error = str(_exc)
+_edge_error = _tune_error("MAIN_MACE: {stun: 0, peel: 7}")
+_check_quiet("MASTERSHEET tune:sheets accepts 0 (removes the row) and 7, and "
+             "the committed MASTERSHEET.md parses",
+             _edge_error is None and _committed_tune_error is None,
+             f"{_edge_error} / {_committed_tune_error}")
+
 # ------------------------------------------------------------------ summary
 n_ok = sum(1 for _, ok in results if ok)
 print("=" * 74)

@@ -1,20 +1,29 @@
-# dagger tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# dagger weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# dagger tree: the Q/W/passive rows the eight daggers share. A row composes
+# into every dagger that can equip its evidence spell (WEAPON_STATS:
+# tree-wide). A weapon's own row with the same (cap, evidence) is that
+# weapon's deliberate override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/dagger.yaml; Black Hands
+# (sheets/knuckles.yaml) carries the same menu under the knuckles
+# subcategory, so these rows do not reach it.
+# Not scored:
+#   - resist_shred on Assassin Spirit: it lowers the caster's own Defense
+#     (-4%), a self-debuff; resist_shred grounds on Sunder Armor.
+#   - tankiness on Chain Slash: damage immunity while charging is momentary,
+#     not frontline durability (pseudo-tankiness, VALIDATION.md).
+#   - silence on Forbidden Stab: an instant interrupt is not a cast-denial
+#     window (interrupt row below).
 subcategory: dagger
 capabilities:
-  - {cap: interrupt, score: 2, evidence: DEEPCUTS}                          # W: Forbidden Stab — "interrupting the target's spell casting" (interrupt taxonomy)
-  - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing
+  - {cap: interrupt, score: 2, evidence: DEEPCUTS}                          # W: Forbidden Stab — "interrupting the target's spell casting" (interrupt taxonomy) (QW)
+  - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing Received for 1.5"; grounded via heal_flag_meaning: negate (effect_overrides.yaml) (QW)
   - {cap: disengage, score: 2, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
-  - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives
+  - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # PASSIVE: +30% AA speed for 3s every 5 AAs
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_DAGGER}    # PASSIVE: Life Leech
   - {cap: engage, score: 2, evidence: QDASH}                                # leap in (QW)
   - {cap: mobility, score: 4, evidence: QDASH}                              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
-  - {cap: catch, score: 2, evidence: SKILLSHOT_TELEPORT}                    # (QW)
+  - {cap: catch, score: 2, evidence: SKILLSHOT_TELEPORT}                    # W: Shadow Edge stuns the first enemy hit and pulls the caster to it (QW)
   - {cap: peel, score: 2, evidence: SKILLSHOT_TELEPORT}                     # the stun works defensively too (QW)
   - {cap: stun, score: 2, evidence: SKILLSHOT_TELEPORT}                     # W: Shadow Edge — 1s skillshot stun (QW)
   - {cap: resist_shred, score: 2, evidence: SUNDERARMOR2}                   # Q: stacking -4% x3 (QW)

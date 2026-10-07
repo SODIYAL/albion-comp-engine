@@ -1,0 +1,206 @@
+# Head pieces, one entry per item. Gear follows the weapon sheets' rules:
+# 1-7 scale (2 points = one supply unit), every nonzero score cites an
+# active on the item's dumps menu (out/gear_spells.json). A piece equips
+# ONE active, so rows on different actives are alternatives, never a sum;
+# the gear-active doctrine (build_dataset resolve_active_doctrine, F36)
+# picks the one that scores: the active the recording builds equip, else
+# the item's own (VALIDATION.md "The gear-active doctrine and the gear
+# pools"). Every hood and helmet shares Energizing Shield; cloth adds
+# Force Field, leather Cleanse, plate Stone Skin. Those rows live in
+# pools/head_<class>.yaml and compose into every item whose menu carries
+# them; an own row with the same (cap, evidence) overrides the pool row.
+# Gatherer sets are not catalogued (non-combat).
+
+# ----------------------------------------- cloth (pools/head_cloth.yaml)
+- gear: HEAD_CLOTH_AVALON            # Cowl of Purity
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: interrupt,     score: 2, evidence: AVALON_BEAM}      # line beam: damage + interrupts casting + shock DoT
+
+- gear: HEAD_CLOTH_FEY               # Feyscale Hat
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: HYPER_FOCUS}      # uninterruptible + debuff immunity up to 8s
+    - {cap: sustained_dps, score: 2, evidence: HYPER_FOCUS}      # channels/casts cannot be stopped — cast uptime
+
+- gear: HEAD_CLOTH_HELL              # Fiend Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: purge,         score: 3, evidence: PURGE_HELMET}     # single-target full purge (Windwall AoE purge=4)
+
+- gear: HEAD_CLOTH_KEEPER            # Druid Cowl — group energy battery
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: ENERGYFIELD}      # energy for 10 allies, 5s circle
+
+- gear: HEAD_CLOTH_MORGANA           # Cultist Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: INNER_CORRUPTION} # 63 dmg per enemy action for 4s — punish pressure
+
+- gear: HEAD_CLOTH_ROYAL             # Royal Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PERPETUALENERGY}  # zero energy costs 15s — cast economy window
+
+- gear: HEAD_CLOTH_SET1              # Scholar Cowl — energy-on-damage
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: ENERGYSHIELD2}    # +38% armor/MR 4s, restores energy when hit
+
+- gear: HEAD_CLOTH_SET2              # Cleric Cowl
+  slot: head
+  curated_as_of: 2026-09-10
+  # Group builds wear the Cleric Cowl for Ice Block, never for its Force
+  # Field: the shove is a very-small-scale pick (1v1 to 5v5) at most
+  # (curation judgment), and the recording builds that name the active
+  # all run Ice Block (the doctrine's observed pick, F36b). The Force Field
+  # rows live in pools/head_cloth.yaml and score only where a piece's
+  # doctrine pick is Force Field, so a group comp is never credited a
+  # shove nobody equips (F36c; golden T47).
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: ICEBLOCK2}        # Ice Block: damage-immune channel, usable while CC'd
+
+- gear: HEAD_CLOTH_SET3              # Mage Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: HELMET_FIREBREATH}  # cone DoT
+
+# --------------------------------------- leather (pools/head_leather.yaml)
+- gear: HEAD_LEATHER_AVALON          # Hood of Tenacity — anti-heal head
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_reduction, score: 3, evidence: NASTY_WOUNDS}    # swirl: -50% Healing Received AND Cast for 4s on entry
+
+- gear: HEAD_LEATHER_FEY             # Mistwalker Hood
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: IMMORTAL}         # cannot drop below 1 HP
+
+- gear: HEAD_LEATHER_HELL            # Hellion Hood
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: silence,       score: 3, evidence: SMOKEBOMB}        # 5s cloud silences all inside (self too)
+    - {cap: zone_control,  score: 2, evidence: SMOKEBOMB}
+    - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}     # the circle includes the caster and fires under CC: a break-out
+    # Cleanse is an ALLY cleanse (a 4m circle at the caster's feet, every
+    # ally inside); its cleanse row lives in pools/head_leather.yaml. The
+    # tankiness row repeats the pool's at the same score.
+
+- gear: HEAD_LEATHER_MORGANA         # Stalker Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SMELLOFBLOOD}     # 6m pulse: +15% own damage for 4s
+    - {cap: resist_shred,  score: 2, evidence: SMELLOFBLOOD}     # -35% resists on enemies below 50% HP
+    # (the pulse also reveals invisible enemies hit — `reveal` stays unpromoted, see effect_map.yaml)
+
+- gear: HEAD_LEATHER_ROYAL           # Royal Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GROWING_RAGE}     # stacking +damage while holding fire
+
+- gear: HEAD_LEATHER_SET1            # Mercenary Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: interrupt,     score: 2, evidence: HOWL}             # cone: interrupt + 35% slow + -30% damage dealt
+    - {cap: slow,          score: 2, evidence: HOWL}
+    - {cap: damage_debuff, score: 2, evidence: HOWL}
+
+- gear: HEAD_LEATHER_SET2            # Hunter Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: RETALIATE2}       # +20% resists 3s + 85% reflect
+    - {cap: reflect,       score: 2, evidence: RETALIATE2}       # 85% but self-only, 3s
+
+- gear: HEAD_LEATHER_SET3            # Assassin Hood
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SUMMONER_CD_REDUCTION}  # Meditation: +80% cooldown rate channel
+
+- gear: HEAD_LEATHER_UNDEAD          # Specter Hood — armor-ability reset
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: ARMOR_CD_RESET}   # resets the chest's cooldown, a second armor cast (curation judgment: the value rides the chest worn)
+
+# ------------------------------------------- plate (pools/head_plate.yaml)
+- gear: HEAD_PLATE_AVALON            # Helmet of Valor — cleanse + purge smoke
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: cleanse,       score: 3, evidence: PURIFYING_SMOKE}  # targeted AoE: cleanses allies inside
+    - {cap: purge,         score: 3, evidence: PURIFYING_SMOKE}  # ...and purges enemies inside
+
+- gear: HEAD_PLATE_FEY               # Duskweaver Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: slow,          score: 2, evidence: SPIDER_THREAD}    # thread: 20% slow ignoring CCR
+    - {cap: catch,         score: 2, evidence: SPIDER_THREAD}    # combo dash to the enemy hit
+
+- gear: HEAD_PLATE_HELL              # Demon Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: silence,       score: 3, evidence: WEAPON_SILENCE}   # ranged AoE silence 3.3s (Smoke Bomb=3)
+
+- gear: HEAD_PLATE_KEEPER            # Judicator Helmet
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: stun,          score: 3, evidence: ELECTRICSHOCK}    # expanding AoE 1.5s stun, duration-escalates
+    - {cap: anti_dive,     score: 2, evidence: ELECTRICSHOCK}
+    - {cap: tankiness,     score: 2, evidence: STONESKIN}        # +50% defense 4s (repeats the pools/head_plate.yaml row)
+
+- gear: HEAD_PLATE_ROYAL             # Royal Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: stun,          score: 3, evidence: ARTILLERY_COMMAND}  # ranged AoE 2.2s stun (Electric Shock=3)
+
+- gear: HEAD_PLATE_SET1              # Soldier Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: BLOCK}            # mobile damage+CC immune channel (Ice Block=2)
+
+- gear: HEAD_PLATE_SET2              # Knight Helmet — the anti-clump tech
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: peel,          score: 3, evidence: DISRUPTIONIMMUNITY}  # 10 allies immune to forced movement 6s
+    # No buff_allies row: the effect map routes an ally IMMUNITY to peel,
+    # never buff_allies (protection AGAINST the effect).
+
+- gear: HEAD_PLATE_SET3              # Guardian Helmet
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    # Emergency Shield: up to 10 allies within 5m absorb 300 (below 40%
+    # health) or 200 for 4s, damage-over-time effects cleansed. It never
+    # touches an enemy, so no peel (peel touches the enemy); a group shield
+    # cast into the clump earns no anti_dive (the anti-dive rule).
+    - {cap: buff_allies,   score: 2, evidence: EMERGENCY_SHIELD}
+    - {cap: tankiness,     score: 2, evidence: STONESKIN}        # +50% defense 4s (repeats the pools/head_plate.yaml row)
+
+- gear: HEAD_PLATE_UNDEAD            # Graveguard Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_burst,    score: 2, evidence: SACRIFICE_HEAL}   # heal ally 15% max HP at own-HP cost

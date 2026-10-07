@@ -23,9 +23,12 @@ lists replace):
                    display / future prior layers; never scored directly
 
 FAIL-CLOSED: an unknown section, an unknown content/weapon key, or a
-non-dict block is a build ERROR (exit 2) — a typo must never silently do
-nothing. build_dataset prints what was overridden and stamps the counts
-into _meta.mastersheet.
+non-dict block is a build ERROR — a typo must never silently do nothing.
+tune:sheets holds its own contract at parse time: every key is a weapon
+key (MAIN_* / 2H_*) mapping capability names to an int 0-7, where 0
+removes the composed row and 1-7 is the sheet scale; a float, a bool, a
+value outside 0-7 or an empty mapping is a build ERROR. build_dataset
+prints what was overridden and stamps the counts into _meta.mastersheet.
 """
 import datetime
 import os
@@ -46,13 +49,27 @@ _BLOCK_RE = re.compile(
     r"^```yaml[ \t]+tune:([a-z_]+)[ \t]*\r?\n(.*?)^```[ \t]*$",
     re.M | re.S)
 
+# tune:sheets contract: combat weapon keys as weapon_lines.json spells them
+# (MAIN_* / 2H_*), capability names in snake_case, the sheet scale with 0
+# as the removal.
+_WEAPON_KEY_RE = re.compile(r"^(?:MAIN|2H)_[A-Z0-9]+(?:_[A-Z0-9]+)*$")
+_CAP_NAME_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+SHEET_SCORE_MAX = 7
+
 
 def load(path=PATH):
     """{section: merged dict} from every tagged block, or {} if no file.
-    Raises ValueError on unknown sections or unparseable blocks."""
+    Raises ValueError on unknown sections, unparseable blocks or a
+    tune:sheets value outside its contract."""
     if not os.path.exists(path):
         return {}
-    text = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as f:
+        return parse(f.read())
+
+
+def parse(text):
+    """{section: merged dict} from the tagged blocks of MASTERSHEET text
+    (load() reads the file; the gate tests call this directly)."""
     out = {}
     for m in _BLOCK_RE.finditer(text):
         section, body = m.group(1), m.group(2)
@@ -62,15 +79,47 @@ def load(path=PATH):
                 f"(known: {', '.join(SECTIONS)})")
         try:
             data = yaml.safe_load(body)
-        except yaml.YAMLError as exc:
+        except (yaml.YAMLError, ValueError) as exc:
             raise ValueError(f"MASTERSHEET.md tune:{section}: bad yaml — {exc}")
         if data is None:
             continue                      # empty block = no overrides
         if not isinstance(data, dict):
             raise ValueError(
                 f"MASTERSHEET.md tune:{section}: block must be a mapping")
+        if section == "sheets":
+            problems = sheet_override_problems(data)
+            if problems:
+                raise ValueError("MASTERSHEET.md tune:sheets: "
+                                 + "; ".join(problems))
         out[section] = deep_merge(out.get(section, {}), _jsonify(data))
     return out
+
+
+def sheet_override_problems(data):
+    """Every way one tune:sheets block breaks its contract: {WEAPON: {cap:
+    score}} with WEAPON a weapon key, cap a capability name and score an
+    int 0-7 (0 removes the row, 1-7 is the sheet scale). Each block is
+    checked before the merge, so a value a later block replaces is held to
+    the contract too."""
+    problems = []
+    for weapon, caps in data.items():
+        if not isinstance(weapon, str) or not _WEAPON_KEY_RE.match(weapon):
+            problems.append(f"{weapon!r} is not a weapon key (MAIN_* or 2H_*)")
+            continue
+        if not isinstance(caps, dict) or not caps:
+            problems.append(f"{weapon} must map capabilities to scores, "
+                            f"not {caps!r}")
+            continue
+        for cap, score in caps.items():
+            if not isinstance(cap, str) or not _CAP_NAME_RE.match(cap):
+                problems.append(f"{weapon}: {cap!r} is not a capability name")
+            elif isinstance(score, bool) or not isinstance(score, int):
+                problems.append(f"{weapon}.{cap}: {score!r} is not an "
+                                f"integer score")
+            elif not 0 <= score <= SHEET_SCORE_MAX:
+                problems.append(f"{weapon}.{cap}: {score} is outside "
+                                f"0-{SHEET_SCORE_MAX}")
+    return problems
 
 
 def _jsonify(node):

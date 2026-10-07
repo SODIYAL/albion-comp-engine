@@ -1,0 +1,137 @@
+# Axes: one entry per weapon of the axe tree. An entry carries the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The shared Q/W/passive rows (Rending bleeds, Deadly Chop,
+# Adrenaline Boost, Battle Rush, Life Leech) live in pools/axe.yaml and
+# compose into every axe that can equip them (sheets_lib.compose). Most
+# `except:` entries drop a shared row whose capability the weapon's E row
+# already carries, so a capability keeps one row; an E-row comment that
+# names a Q/W spell marks that spell's share of the E row's score.
+#
+# Lifesteal heals the wielder only (directionality rule): Life Leech,
+# Razor Cut and Blood Bandit ground self_sustain, never an ally heal
+# (heal_flag_meaning self_only, effect_overrides.yaml). Increased Defense
+# raises the wielder's own resistances and grounds nothing ally-directed
+# (dir_overrides, effect_overrides.yaml).
+
+- weapon: 2H_AXE                     # Greataxe — whirlwind bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: mobility, evidence: RENDINGCOMBO}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: AXEWHIRLWIND2}  # E: mobile uninterruptible spin, ramping per hit
+    - {cap: mobility,      score: 2, evidence: AXEWHIRLWIND2}  # can move while spinning; Q: Raging Leap
+
+# Realmbreaker: max-HP-cut slam axe. The E (Aftershock) leaps, slams for
+# 212 on every enemy in its circle, throws the cone beyond it into the
+# air, and cuts Max and current Health by 15% for 5s: a focus-fire
+# amplifier, scored as max_health_cut (taxonomy rule: a %-max-health cut
+# is its own capability; execute is kept for low-HP payoffs and kill
+# rewards). The E's prose heal flag fires on that cut and is suppressed
+# (suppress_flags, effect_overrides.yaml); the weapon's heal cut is the
+# shared Rending bleed cap.
+
+- weapon: 2H_AXE_AVALON              # Realmbreaker — max-HP-cut slam axe
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: catch, evidence: AXEBOOST}
+    - {cap: engage, evidence: AXE_CHARGE}
+    - {cap: mobility, evidence: RENDINGCOMBO}
+  capabilities:
+    - {cap: burst_aoe,      score: 4, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam; the cone beyond it throws enemies up
+    - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER}  # E: cone air-throw, no travel: Hallowfall's air-throw rung, 2 (T13)
+    - {cap: engage,         score: 4, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
+    - {cap: mobility,       score: 4, evidence: LETHAL_CLEAVER}   # E leap; Q: Raging Leap
+    - {cap: max_health_cut, score: 2, evidence: LETHAL_CLEAVER}   # -15% Max and current Health for 5s amplifies the focus window (taxonomy rule)
+    - {cap: peel,           score: 2, evidence: LETHAL_CLEAVER}   # throws the divers on the backline into the air
+    - {cap: catch,          score: 2, evidence: LETHAL_CLEAVER}   # 10m leap: modest reach
+    - {cap: disengage,      score: 2, evidence: LETHAL_CLEAVER}   # leap out; no cooldown refund, unlike Bear Paws
+
+# Bear Paws: diving AoE bruiser. The E (Razor Cut) is a leap, immune to
+# CC until impact, whose cooldown drops when it hits an enemy player: 170
+# in a cone on impact, then 15% of the damage dealt returns as Health for
+# 4s. Mobility, engage, disengage and self_sustain hang off it; Rending
+# Rage's third hit (Raging Leap) is a second leap that roots on landing.
+# The CC immunity is a momentary defensive and grounds no tankiness
+# (momentary-defensive rule). buff_allies comes from Battle Rush's
+# ally-side +20% Healing Received (pools/axe.yaml).
+
+- weapon: 2H_DUALAXE_KEEPER          # Bear Paws — diving AoE bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: catch, evidence: AXEBOOST}
+    - {cap: engage, evidence: AXE_CHARGE}
+    - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_AXE}
+    - {cap: mobility, evidence: RENDINGCOMBO}
+    - {cap: heal_reduction, evidence: RENDINGSTRIKE}
+  capabilities:
+    - {cap: mobility,       score: 6, evidence: DUALAXE_CRAWLER}  # E: CC-immune leap, CD refund on player hit; Q: Raging Leap
+    - {cap: engage,         score: 4, evidence: DUALAXE_CRAWLER}  # commits into the clump CC-immune
+    - {cap: disengage,      score: 4, evidence: DUALAXE_CRAWLER}  # same leap outwards
+    - {cap: catch,          score: 4, evidence: DUALAXE_CRAWLER}  # repeatable gap-close
+    - {cap: burst_aoe,      score: 4, evidence: DUALAXE_CRAWLER}  # 170 cone on impact; W: Internal Bleeding / Raging Blades
+    - {cap: self_sustain,   score: 4, evidence: DUALAXE_CRAWLER}  # E: 15% of damage dealt as Health, AoE-fed
+    - {cap: heal_reduction, score: 2, evidence: AXE_CHARGE}       # W: Battle Rush, -20% Healing Received on enemies in 5m for 3s (QW)
+
+- weapon: 2H_HALBERD                 # Halberd — bleed-spread cleaver
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: heal_reduction, evidence: RENDINGSTRIKE}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: RENDINGSWING}   # E: 125 in a 7m cleave, copies the highest bleed count to all hit
+    - {cap: heal_reduction, score: 2, evidence: RENDINGSWING}  # spread bleeds hit the 3-stack cap on everyone
+    # the E's -20% CC Resistance maps to no capability (crowdcontrolresistance- in effect_map.yaml)
+
+- weapon: 2H_HALBERD_MORGANA         # Carrioncaller — the anti-heal raven
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: heal_reduction, evidence: RENDINGSTRIKE}
+  capabilities:
+    - {cap: heal_reduction, score: 4, evidence: SHOCKWAVE}     # E: -40% Healing Received for 4s on a piercing line; the -40/-50% one-shot class of the heal-cut ladder (VALIDATION.md 08, Round 9)
+    - {cap: burst_aoe,     score: 2, evidence: SHOCKWAVE}      # 106 pierce
+
+- weapon: 2H_SCYTHE_CRYSTAL          # Crystal Reaper — dash-zone reaper
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: catch, evidence: AXEBOOST}  # no own catch row: withholds Adrenaline Boost's catch (curation judgment)
+    - {cap: engage, evidence: AXE_CHARGE}
+    - {cap: mobility, evidence: RENDINGCOMBO}
+  capabilities:
+    - {cap: mobility,      score: 4, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # E: dash, recastable every 3s while active
+    - {cap: engage,        score: 4, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # dash in, CDR zone sustains the brawl
+    - {cap: disengage,     score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}
+    - {cap: zone_control,  score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # the 12s area cuts the wielder's weapon cooldowns on each hit inside it; it imposes nothing on enemies
+    - {cap: burst_aoe,     score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # 105 to everything on the dash path
+
+- weapon: 2H_SCYTHE_HELL             # Infernal Scythe — the reap execute
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: SCYTHESWING}    # E: double reap in 5m
+    - {cap: execute,       score: 2, evidence: SCYTHESWING}    # second swing scales on targets below 40% Health
+
+# Battleaxe (1H): bleed-and-drain skirmisher. The E (Blood Bandit combo)
+# throws two axes: Blood Draw's damage scales with the Rending Bleed
+# Charges on each enemy hit, and Blood Bandit heals the wielder per charge
+# on the first enemy hit, the axe line's lifesteal E on a 1H frame.
+
+- weapon: MAIN_AXE                   # Battleaxe — bleed-and-drain skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  # deliberate non-takes of shared rows (pools/axe.yaml)
+  except:
+    - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_AXE}
+  capabilities:
+    - {cap: self_sustain,   score: 4, evidence: AXETHROW}        # E: heals per bleed charge; Life Leech passive
+    - {cap: burst_st,       score: 2, evidence: AXETHROW}        # E: Blood Draw 160 with no charge, more per Rending Bleed Charge; Blood Bandit 110

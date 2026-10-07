@@ -1,0 +1,101 @@
+# Nature staffs: one entry per weapon of the naturestaff tree, carrying the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The tree's Q/W/passive rows (Thorn Growth, Brambleseed,
+# Protection of Nature, Cleanse Heal, the Calmness passive) live in
+# pools/naturestaff.yaml and compose into every weapon that can equip them
+# (sheets_lib.compose). Most `except:` entries leave off a shared row whose
+# capability the weapon's own row already carries: one slot per capability
+# (VALIDATION.md 10, Form abilities and ally protection graded). An E-row
+# comment that names a Q/W spell marks that spell's share of the E row's
+# score.
+# The nature cleanse is a W choice (Cleanse Heal: "Cleanses all Crowd
+# Control effects and debuffs"): it holds only while the player builds for
+# it, so it reads as "cleanse, if running Cleanse Heal", never as a
+# guaranteed capability. The holy tree, by contrast, has no Q/W cleanse.
+
+- weapon: 2H_NATURESTAFF             # Great Nature Staff — reactive-armor healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: buff_allies, evidence: NATURERESILIENCE}
+  capabilities:
+    - {cap: heal_sustain, score: 4, evidence: BRIEROFLIFE}     # E: Living Armor heals 66, then 40 each time the target takes direct damage
+    - {cap: buff_allies,  score: 4, evidence: BRIEROFLIFE}     # +13% damage resistances on the target for 4s; W: Protection of Nature (QW)
+    # no peel: resistances on the focused ally are protection, not peel;
+    # nothing here touches the enemy (the peel rule)
+
+- weapon: 2H_NATURESTAFF_HELL        # Blight Staff — mobile sustain healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  capabilities:
+    - {cap: heal_sustain,       score: 6, evidence: ROTTENVINES}    # E: Elevated Nature — channeled group heal aura
+    - {cap: mobility,           score: 2, evidence: ROTTENVINES}    # E: self move-speed while channeling
+
+- weapon: 2H_NATURESTAFF_KEEPER      # Rampant Staff — trail healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
+  capabilities:
+    - {cap: heal_sustain, score: 6, evidence: SPIRITANIMAL}    # E: healing trail, 14/s for allies standing on it
+    - {cap: heal_burst,   score: 2, evidence: SPIRITANIMAL}    # 110 on touch
+
+- weapon: 2H_WILDSTAFF               # Wild Staff — the well healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  capabilities:
+    - {cap: heal_sustain, score: 6, evidence: WELLOFLIFE2}     # E: 69/s to 20 allies inside the well
+
+- weapon: MAIN_NATURESTAFF           # Nature Staff (1H) — self-centred group healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
+    - {cap: sustained_dps, evidence: THORNSAREA}  # no own sustained_dps row: withholds Thorn Growth's sustained_dps (curation judgment)
+  capabilities:
+    - {cap: heal_burst,   score: 4, evidence: CIRCLEOFLIFE}    # E: 107 at once to up to 15 allies around the caster
+    - {cap: heal_sustain, score: 4, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
+    - {cap: root,         score: 2, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted for 2s
+
+- weapon: MAIN_NATURESTAFF_AVALON    # Ironroot Staff — the soul-link protector
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: sustained_dps, evidence: THORNSAREA}  # no own sustained_dps row: withholds Thorn Growth's sustained_dps (curation judgment)
+  capabilities:
+    # Soul Link redirects half the damage off the focused ally and does
+    # nothing to the enemy: protection, scored as buff_allies, not peel (the
+    # peel rule). The magnitude is anchored: Living Armor (2H_NATURESTAFF,
+    # this file) scores buff_allies 4 for +13% resistances on one ally;
+    # halving the incoming damage on one ally is stronger protection on the
+    # same single target, so 4 is a floor.
+    - {cap: buff_allies,  score: 4, evidence: SOUL_LINK}       # half the focus damage redirected off the ally
+    - {cap: anti_dive,    score: 2, evidence: SOUL_LINK}       # the redirection is placed on the dived ally (the anti-dive rule, via override)
+    - {cap: heal_sustain, score: 4, evidence: SOUL_LINK}       # the link also transfers 75% of the Healing Received; Q/W: the tree's heals
+
+- weapon: MAIN_NATURESTAFF_CRYSTAL   # Forgebark Staff — toggle shield/root healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: buff_allies, evidence: NATURERESILIENCE}
+    - {cap: sustained_dps, evidence: THORNSAREA}  # no own sustained_dps row: withholds Thorn Growth's sustained_dps (curation judgment)
+  capabilities:
+    - {cap: heal_sustain, score: 4, evidence: DUAL_NATURE}     # E: Fortify — shields + 32/0.85s to 10 targets
+    - {cap: buff_allies,  score: 2, evidence: DUAL_NATURE}     # 171 damage shields
+    - {cap: root,         score: 2, evidence: DUAL_NATURE}     # E: Ensnare toggle — 2.25s AoE root
+
+- weapon: MAIN_NATURESTAFF_KEEPER    # Druidic Staff — seed-burst healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
+    - {cap: sustained_dps, evidence: THORNSAREA}  # no own sustained_dps row: withholds Thorn Growth's sustained_dps (curation judgment)
+  capabilities:
+    - {cap: heal_burst,   score: 4, evidence: NATURE_ULTIMATE_SINGLE}  # E: 208 delayed seed, recastable
+    - {cap: heal_sustain, score: 4, evidence: NATURE_ULTIMATE_SINGLE}  # seeds woven into HoT rotation

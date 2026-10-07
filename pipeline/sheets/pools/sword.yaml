@@ -1,21 +1,22 @@
-# sword tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# sword weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# sword tree: the Q/W/passive rows the eight swords share. A row composes
+# into every sword that can equip its evidence spell (WEAPON_STATS:
+# tree-wide). A weapon's own row with the same (cap, evidence) is that
+# weapon's deliberate override of the shared row (magnitude RULE queue,
+# VALIDATION.md 08, Round 9); an `except:` entry drops the row from that
+# weapon. (QW): the row holds only while the player equips that Q or W
+# spell. Weapon entries: sheets/sword.yaml.
 subcategory: sword
 capabilities:
-  - {cap: disengage, score: 2, evidence: DEFENSERUN}                    # W: Iron Will sprint (QW)
-  - {cap: catch, score: 2, evidence: HAMSTRINGSWORD}                    # W: slow-into-leap combo (QW)
-  - {cap: slow, score: 2, evidence: HAMSTRINGSWORD}                     # W: -25% for 4s (QW)
-  - {cap: mobility, score: 4, evidence: HEROICSTRIKE2}                  # Q dash; W: Blade Cyclone / Heroic Leap
-  - {cap: sustained_dps, score: 4, evidence: HEROICSTRIKE2}             # heroic-charge AA stacking, same engine as Dual Swords
-  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc
-  - {cap: peel, score: 2, evidence: SPLITTINGSLASH}                     # the root defensively; W: Interrupt (QW)
-  - {cap: root, score: 2, evidence: SPLITTINGSLASH}                     # W: 1.25s line root (QW)
-  # reflect (2026-08-28): Parry returns 125% while immune to damage —
-  # self-only and brief. Same ladder rung as the other personal stances.
-  # (structural: reflectdamageactive 1.25, target self)
+  - {cap: disengage, score: 2, evidence: DEFENSERUN}                    # W: Iron Will, +35% Move Speed and Defense for 3s (QW)
+  - {cap: catch, score: 2, evidence: HAMSTRINGSWORD}                    # W: Hamstring, slow-into-leap combo (QW)
+  - {cap: slow, score: 2, evidence: HAMSTRINGSWORD}                     # W: Hamstring, -25% for 4s (QW)
+  - {cap: mobility, score: 4, evidence: HEROICSTRIKE2}                  # Q: Heroic Strike dash; W: Blade Cyclone / Heroic Leap (QW)
+  - {cap: sustained_dps, score: 4, evidence: HEROICSTRIKE2}             # heroic-charge AA stacking, same engine as Dual Swords (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: Increased Defense, +23% own resistances for 2s every 5th auto-attack
+  - {cap: peel, score: 2, evidence: SPLITTINGSLASH}                     # W: Splitting Slash's line root, used on divers (QW)
+  - {cap: root, score: 2, evidence: SPLITTINGSLASH}                     # W: Splitting Slash, a 1.25s line root (QW)
+  # Parry Strike: a damage-immune channel that reflects 125% of incoming
+  # damage, self-only and brief: a personal stance, 2 on the reflect
+  # ladder where Demon Armor's team-wide aura sits at 6
+  # (reflectdamageactive 1.25, target self).
   - {cap: reflect, score: 2, evidence: PARRY}                           # W: self-only parry stance (QW)

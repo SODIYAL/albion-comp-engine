@@ -32,15 +32,17 @@ out/interactions.json     spell-keyed PvP interaction records: duplicate
                           verified nonstacking_caps; unknown never scores.
    │  py -3 pipeline/seed_sheets.py 40
    ▼
-sheets/draft/*.yaml       auto-seeded, lint-clean drafts (effect caps only)
+sheets/draft/*.yaml       auto-seeded drafts (effect caps only; lint-clean once curated into the tree sheet)
    │  HUMAN CURATION — read the evidence first:
    │      py -3 pipeline/curate_helper.py --top 5
    │      py -3 pipeline/curate_helper.py 2H_POLEHAMMER
    │  adjust scores, add structural caps (engage/peel/clump/tankiness/...),
-   │  then move the sheet to sheets/ and delete its draft
+   │  then move the entry into its tree's sheet and delete its draft
    ▼
-sheets/*.yaml             curated sheets            (authoritative)
-sheets/illustrative/      design-doc §2.3 placeholders — NOT a release
+sheets/<tree>.yaml        curated weapon entries, one file per weapon tree (authoritative)
+sheets/pools/<tree>.yaml  the tree's shared Q/W/passive rows, composed into its entries
+sheets/gear/<slot>.yaml   curated gear, one file per slot (shared actives: gear/pools/)
+sheets/illustrative/      placeholder sheets, when any exist (none do) — NOT a release
    │  py -3 pipeline/evidence_lint.py      ← CI gate, exit 1 blocks release
    │  py -3 pipeline/build_dataset.py
    ▼
@@ -61,17 +63,27 @@ diverged (Longbow `resist_shred` was 2 in the prototype, 1 in the curated
 sheet). `dashboard/build.py` inlines the Python engine's own output as a parity
 fixture, so the browser client asserts against `engine.py` on every build.
 
-Rules enforced by `evidence_lint.py` (all born from real curation errors):
+Rules enforced by `evidence_lint.py` (all born from real curation errors),
+numbered as the lint's docstring numbers them. Every nonzero score cites an
+evidence spell, or its layer's stat sentinel (`WEAPON_STATS` on weapons,
+`GEAR_STATS` on gear), and the rows are checked as the build composes them
+(an entry's own rows plus the tree-pool rows that apply to it):
 
-1. Every nonzero score cites an evidence spell (or `WEAPON_STATS`).
-2. The spell must be equippable on that weapon — gear capabilities belong on
-   gear sheets.
+1. The weapon line (gear item) exists in the parsed game data.
+2. The spell must be equippable on that weapon (on the gear item's menu) —
+   gear capabilities belong on gear sheets.
 3. The spell must be able to GROUND the claimed capability, resolved through the
    structured effect map. Direction is built in, so an enemy-directed capability
-   cannot cite a self-targeted effect.
-4. Capabilities the effect layer cannot express get checks 1–2 only. That
-   boundary is computed, not hardcoded: a capability is checked iff the map can
-   produce it at all.
+   cannot cite a self-targeted effect. Rule 3's boundary is computed: a
+   capability is checked iff the effect map or the prose fallback can produce
+   it, less the four damage capabilities; the rest get checks 1–2 only (the
+   lint's first output line prints that set).
+
+4–11. The sheet contract: known keys only, an integer score 1–7, the
+capability taxonomy, no duplicate row or except, every except live, one
+definition per weapon and gear key, an ISO `curated_as_of`, a known
+`role_hint` and gear `slot`, placement (`pipeline/sheets/README.md`
+"Layout").
 
 Rule 3 used to match description keywords, which saw a fraction of the game —
 100 weapon lines apply a movespeed debuff and the `slow` regex matched almost
@@ -207,7 +219,7 @@ Code and yaml cite these by Q-number. Every question is closed unless
 - **Q19** one-spell-per-slot loadout model + single-target recalibration — SHIPPED (T14/T15); the Dagger-Pair-at-scale case fixed here (#3 → #33).
 - **First wiring checklist** — mechanics.yaml shipped in the dataset; supply-side multipliers per style normalized to balanced; both ports; T11 family.
 - **Magnitude RULE queue** — adjudicated wholesale, one reversal (Rotcaller keeps the line's 4: a 1H weapon adds an offhand, which can INCREASE damage — standing rule 12, no automatic 1H damage discount); `knockback_displace` ladder done earlier (T13).
-- **Gear sheets** — `pipeline/sheets/gear/core.yaml` + `combat_expansion.yaml` (129 pieces); the tree-shared actives once in `sheets/gear/pools/<tree>.yaml`, composed into every item whose dumps menu carries the spell (`sheets_lib.compose_gear`; the item's own row wins a tie, `except:` opts out; `evidence_lint` checks each pool row sits on a menu in its tree).
+- **Gear sheets** — `pipeline/sheets/gear/<slot>.yaml`, one file per slot (head, armor, shoes, offhand, cape, potion, food; 135 pieces); the tree-shared actives once in `sheets/gear/pools/<tree>.yaml`, composed into every item whose dumps menu carries the spell (`sheets_lib.compose_gear`; the item's own row wins a tie, `except:` opts out; `evidence_lint` checks each pool row sits on a menu in its tree). The layout and its lint checks: `pipeline/sheets/README.md` "Layout".
 - **Gear-active doctrine** — the active a piece SCORES is the one the recording published builds equip (`build_builds` carries each build's `gear_spells`: the Character Builder's UniqueNames and MetaBattle's named actives, kept only as ids on the worn item's menu; `build_dataset.resolve_active_doctrine` stamps `doctrine_active` at two votes, by gang/group band too), else the item's own active (`assumed`), never the template argmax across the menu; an active with no scored row is an empty bundle. Both engine ports read the stamp (`default_gear_choice`; F36, H23, VALIDATION.md 10-03).
 - **Stage 2 — live companion** — LIVE-CONFIRMED end to end (`companion/README.md`); inspect parsing + worn kits into loadouts.
 - **Spell picks into scoring** — live sync maps real Q/W into the loadouts, worn kits too.
@@ -307,8 +319,9 @@ the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
 - Curated: **137 of 137 combat weapons** — every line complete;
   `release_clean: True`. The other 24 catalog entries are vanity items and
   gathering tools and get no sheets.
-- Illustrative placeholders: 0 (all 8 replaced; `sheets/illustrative/` is a
-  tombstone record of the §2.3 prototype numbers and their corrections).
+- Illustrative placeholders: 0 (all 8 design-doc §2.3 blocks replaced; their
+  corrections are in the git history of
+  `sheets/illustrative/prototype_v0.yaml`).
 - Drafts: 0. All scores are lint-clean and have been through the validation
   rounds recorded in `tests/VALIDATION.md`; the Tier-2 blind gate
   (`tests/tier2_blindtest.py v4`) enforces via exit code.
@@ -323,7 +336,7 @@ pipeline/effect_map.yaml                 effect x direction -> capabilities
 pipeline/effect_lookup.py                shared: spell -> candidate capabilities
 py -3 pipeline/build_effect_review.py    -> review/effects.html    (local board)
 py -3 pipeline/build_magnitude_review.py -> review/magnitude.html  (every score beside its dumps numbers; local board)
-py -3 pipeline/build_stat_chart.py       -> review/stat_chart.html + out/stat_chart.json (needs the dumps cache; local board)
+py -3 pipeline/build_stat_chart.py       -> review/stat_chart.html + review/stat_chart.json (vs-players numbers; needs the dumps cache; local board)
 ```
 
 The boards are generated locally into `review/`, which is gitignored; they
@@ -347,7 +360,7 @@ Two layers, deliberately not collapsed:
 | layer | what | count | role |
 | --- | --- | --- | --- |
 | effects | game mechanics (`stun`, `movespeedbonus-`, `remove:buff`) | 51 combat effects reachable from equipment | evidence |
-| capabilities | comp-level needs (design doc §2.2) | 31 curated, all scored by at least one template (`reveal` stays proposed-only) | scoring |
+| capabilities | comp-level needs (design doc §2.2) | 31 sheet capabilities (`evidence_lint.CAPABILITIES`), every one but `reflect` scored by at least one template (the `effect_map.yaml` reflect note); `ranged_presence` is derived by the build; `reveal` stays proposed-only | scoring |
 
 **The map is many-to-many and keyed by target direction.** One effect can ground
 several capabilities: 1H Mace's Deep Leap resolves to `dash` + `invincibility` +
@@ -383,10 +396,12 @@ same mechanic (with an ally-direction guard for the heal flag), and
 `effect_overrides.yaml` corrects the artifacts the parser gets wrong — both
 layers feed the seeder and the lint identically.
 
-**What the effect layer cannot see**, and therefore never seeds or blocks: raw
-damage (`burst_st`/`burst_aoe`/`sustained_dps`/`execute` — damage is a plain
-health change, not a typed effect), plus `zone_control`, `clump_create`,
-`heal_burst`, `anti_dive`, `energy_drain`. Those stay entirely human.
+**What the effect layer cannot see**: raw damage
+(`burst_st`/`burst_aoe`/`sustained_dps`/`execute`; a plain health change, not
+a typed effect). The seeder never proposes those, nor `zone_control`,
+`clump_create`, `heal_burst` or `anti_dive` (`seed_sheets.HUMAN_ONLY`); rule 3
+cannot block the four damage capabilities, `zone_control`, `interrupt` or
+`max_health_cut` (the lint prints the computed set on its first line).
 
 **Form abilities sit behind the E.** A shapeshifter staff's E transforms the
 wielder; the form's two abilities and its passive carry their own names and
@@ -591,10 +606,10 @@ HEAD (`--base` for another revision). Review the report, then commit.
 ## Known gaps / TODO
 
 - ~~Gear items have no sheets yet~~ — closed in two steps: the full-build
-  member model shipped the curated starter set (`sheets/gear/core.yaml`),
-  and the combat expansion completed the combat catalog
-  (`sheets/gear/combat_expansion.yaml`; 129 pieces total in
-  `dataset["gear"]`, scored by `build_extra` in both ports). The albionbb
+  member model shipped a curated starter set, and the combat expansion
+  completed the combat catalog (`sheets/gear/<slot>.yaml`, one file per
+  slot; 135 pieces in `dataset["gear"]`, scored by `build_extra` in both
+  ports). The albionbb
   kill events carry `Equipment.MainHand` + `Mount` only, so worn kits are
   NOT harvestable from that endpoint — they come from the official API's
   `GroupMembers` via `sample_parties.py` (`out/party_rosters.json.gz`), which

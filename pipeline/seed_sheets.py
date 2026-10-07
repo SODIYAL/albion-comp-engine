@@ -13,12 +13,15 @@ and catch mechanically.
 
 Everything is still provisional. Every row carries `review: TODO` and a comment
 naming the effect and direction it came from, so a curator can check the
-reasoning rather than just the conclusion. Capabilities the effect layer cannot
-express — zone_control, burst_aoe, clump_create, heal_burst, anti_dive — are
-still never seeded and remain entirely human.
+reasoning rather than just the conclusion. The capabilities in HUMAN_ONLY (the
+four damage capabilities, zone_control, clump_create, heal_burst, anti_dive)
+are never seeded and remain entirely human.
 
-Curation = adjust scores, add what is missing, delete the review flags, move the
-sheet to sheets/. Re-running the seeder then skips it and deletes its draft.
+A draft fails the evidence lint as seeded (the review keys, no curated_as_of
+or role_hint) and sits outside the sheet layout. Curation = adjust scores, add
+what is missing, move the entry into sheets/<subcategory>.yaml, add
+curated_as_of and role_hint, delete the review keys. Re-running the seeder then
+skips the weapon and deletes its draft.
 
 Usage:  py -3 pipeline/seed_sheets.py [top_n]     (default 40)
 """
@@ -49,8 +52,9 @@ USAGE = _load_usage()
 # Never auto-seeded: these are MAGNITUDE calls (how much damage, how big a
 # clump) the effect layer can name but not size, so a machine guess would be
 # fabrication. They stay a curator's job. (`energy_drain` once sat here;
-# it is not a capability — a documented fabrication, see
-# sheets/illustrative/prototype_v0.yaml.)
+# it is not a capability: the design doc's §2.3 sketch gave Witchwork
+# energy_drain 2 and no spell in its kit drains energy, a fabrication the
+# §2.3 status note records.)
 HUMAN_ONLY = {"zone_control", "burst_aoe", "burst_st", "sustained_dps", "execute",
               "clump_create", "heal_burst", "anti_dive"}
 
@@ -109,17 +113,21 @@ def seed(top_n):
             continue
 
         rows = propose(line)
+        # the usage artifact carries counts only, so the draft names no role;
+        # the curator adds role_hint with curated_as_of
+        sheet = f"sheets/{line.get('subcategory') or '<subcategory>'}.yaml"
         out = [
             f"# DRAFT — auto-seeded from the structured effect map. Usage: "
-            f"{u['count']} sightings, dominant role: {u['role']}.",
+            f"{u['count']} sightings.",
             f"# Every score is provisional; the comment names the effect and target",
             f"# direction it was derived from. Humans: adjust scores, ADD what the",
-            f"# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/",
-            f"# anti_dive), then move to sheets/.",
+            f"# seeder never proposes:",
+            f"#   {', '.join(sorted(HUMAN_ONLY))};",
+            f"# then move the entry into {sheet}, add curated_as_of and role_hint,",
+            f"# delete the review keys.",
             "",
             f"- weapon: {key}",
             f"  # {line['name']}",
-            f"  role_hint: {u['role']}",
             f"  capabilities:",
         ]
         for cap, (score, sid, slot, reasons) in sorted(rows.items()):

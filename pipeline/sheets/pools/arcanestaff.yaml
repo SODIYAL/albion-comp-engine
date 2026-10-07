@@ -1,16 +1,16 @@
-# arcanestaff tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# arcanestaff weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# arcanestaff tree: the Q/W/passive rows the eight arcane staffs share. A
+# row composes into every arcane staff that can equip its evidence spell
+# (WEAPON_STATS: tree-wide). A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
+# drops the row from that weapon. (QW): the row holds only while the player
+# equips that Q or W spell. Weapon entries: sheets/arcanestaff.yaml.
 subcategory: arcanestaff
 capabilities:
   - {cap: cleanse, score: 4, evidence: CLEANSESPEED2}                         # W: 10-ally cleanse + MS (QW)
-  - {cap: buff_allies, score: 2, evidence: EMPOWERBEAM}                       # (QW)
-  - {cap: resist_shred, score: 3, evidence: FRAZZLE2}                         # (QW)
-  - {cap: silence, score: 2, evidence: MAGICSHOCK}                            # (QW)
+  - {cap: buff_allies, score: 2, evidence: EMPOWERBEAM}                       # W: Empowering Beam, +8% ally damage per 0.25s, 10 stacks (QW)
+  - {cap: resist_shred, score: 3, evidence: FRAZZLE2}                         # W: Frazzle, -30% Defense for 4s on one target (QW)
+  - {cap: silence, score: 2, evidence: MAGICSHOCK}                            # Q: Magic Shock, 0.85s in 3r (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave
-  - {cap: peel, score: 2, evidence: SHIELDFRIENDLY}                           # (QW)
-  - {cap: anti_dive, score: 2, evidence: SHIELDFRIENDLY}                      # Q: 300 absorb for 2s on the targeted ally (the anti-dive rule)
+  - {cap: peel, score: 2, evidence: SHIELDFRIENDLY}                           # Q: Arcane Protection, Forced Movement immunity on the ally (QW)
+  - {cap: anti_dive, score: 2, evidence: SHIELDFRIENDLY}                      # Q: 300 absorb for 2s on the targeted ally (the anti-dive rule) (QW)

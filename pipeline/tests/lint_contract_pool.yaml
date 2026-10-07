@@ -1,0 +1,11 @@
+# Evidence-lint contract fixture, tree pool (tests/test_builds.py). The file
+# name is not the subcategory it declares, a top-level key is misspelled,
+# and every row below carries a defect the lint must report as an ERROR.
+subcategory: mace
+capabilites: []
+capabilities:
+  - {cap: root, score: 2.5, evidence: CHARGE_ROOT}                       # not an integer
+  - {cap: peal, score: 2, evidence: GUARDRUNE}                           # not a capability
+  - {cap: slow, score: 2, evidence: SACRED_GROUND, evidense: SACRED_GROUND}  # an unknown row key
+  - {cap: peel, score: 4, evidence: GUARDRUNE}
+  - {cap: peel, score: 4, evidence: GUARDRUNE}                           # the same row twice

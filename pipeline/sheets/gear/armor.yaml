@@ -1,0 +1,227 @@
+# Chest armor, one entry per item. Gear follows the weapon sheets' rules:
+# 1-7 scale (2 points = one supply unit), every nonzero score cites an
+# active on the item's dumps menu (out/gear_spells.json). A chest equips
+# ONE active, so rows on different actives are alternatives; the
+# gear-active doctrine (build_dataset resolve_active_doctrine, F36) picks
+# the one that scores. Every robe shares Frost Shield and every jacket
+# Inferno Shield (pools/armor_cloth.yaml, pools/armor_leather.yaml); Mend
+# Wounds, on every chest, and plate's Taunt score nothing
+# (pools/armor_plate.yaml). An own row with the same (cap, evidence)
+# overrides the pool row. `self_costs` charges what an item costs its own
+# wearer (Demon Armor). Gatherer sets are not catalogued (non-combat).
+
+# ---------------------------------------- cloth (pools/armor_cloth.yaml)
+- gear: ARMOR_CLOTH_AVALON           # Robe of Purity
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: knockback_displace, score: 3, evidence: CASTBUBBLE}  # bubble knocks back 12m
+    - {cap: peel,          score: 3, evidence: CASTBUBBLE}
+    - {cap: tankiness,     score: 2, evidence: FROSTSHIELD}      # +30% resists 8s, reflects + slows
+    - {cap: reflect,       score: 1, evidence: FROSTSHIELD}      # 15% self-only — the smallest reflect in the game
+    # (both Frost Shield rows repeat the pools/armor_cloth.yaml rows)
+
+- gear: ARMOR_CLOTH_FEY              # Feyscale Robe
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: WILD_MAGIC}       # rotating ring of fire / magical effects
+    - {cap: zone_control,  score: 2, evidence: WILD_MAGIC}
+    # Wild Magic rotates three effects, a recast picks one: Ring of Fire
+    # (burn, enemies flee 1s), Storm Shield (+22% resists, shocks
+    # attackers), Frozen Fragments (bonus damage on direct hits).
+
+- gear: ARMOR_CLOTH_HELL             # Fiend Robe — the fear aura
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: peel,          score: 3, evidence: FEAR_AURA}        # 4m aura: enemies flee 2s
+    # No anti_dive: the aura's only structural enemy effect is
+    # forced_movement, which grounds displacement (knockback_displace,
+    # clump_create, peel in the effect map), not dive punishment.
+    - {cap: knockback_displace, score: 2, evidence: FEAR_AURA}   # fear physically moves them off
+
+- gear: ARMOR_CLOTH_KEEPER           # Druid Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SPELLRUSH}        # stacking +6% damage/heal per cast
+    - {cap: heal_sustain,  score: 2, evidence: SPELLRUSH}        # the same stack raises Healing Cast — healer throughput CD
+
+- gear: ARMOR_CLOTH_MORGANA          # Cultist Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: LEVITATE}         # channel: restore HP+energy, +resists
+
+- gear: ARMOR_CLOTH_ROYAL            # Royal Robe — the ground rune
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: MAGICCIRCLE}      # rune: +10% magic dmg/heal and -10% cast time per second stood on it (6 stacks), up to 6 allies (stationary; Royal Banner aura=4)
+
+- gear: ARMOR_CLOTH_SET1             # Scholar Robe
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SPEEDCASTER}      # -50% cast time, -50% energy cost 8s
+
+- gear: ARMOR_CLOTH_SET2             # Cleric Robe — Everlasting Spirit
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: LIFESAVIOR}       # next hit triggers 3s damage immunity (Mist=3)
+
+- gear: ARMOR_CLOTH_SET3             # Mage Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: purge,         score: 2, evidence: PURGINGSHIELD2}   # reactive: purges attackers while shielded
+    - {cap: tankiness,     score: 2, evidence: PURGINGSHIELD2}   # +50% defense 4s
+
+# -------------------------------------- leather (pools/armor_leather.yaml)
+- gear: ARMOR_LEATHER_AVALON         # Jacket of Tenacity
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: DYNAMIC_DEFENSE}  # +80% resist vs the target's damage type
+
+- gear: ARMOR_LEATHER_FEY            # Mistwalker Jacket — Mist Cloud
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: MIST_WALKER}      # mist: immune to ALL effects
+    - {cap: disengage,     score: 3, evidence: MIST_WALKER}      # allies inside the mist turn invisible
+
+- gear: ARMOR_LEATHER_HELL           # Hellion Jacket
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: self_sustain,  score: 3, evidence: LIFESTEALAURA}    # 7m drain, more damage at lower own health, the damage stolen back
+    - {cap: sustained_dps, score: 2, evidence: LIFESTEALAURA}
+
+- gear: ARMOR_LEATHER_MORGANA        # Stalker Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: STORMSHIELD}      # 6m pulse field (Life Steal Aura's sustained_dps=2)
+
+- gear: ARMOR_LEATHER_ROYAL          # Royal Jacket — Royal Banner
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 4, evidence: ROYAL_BANNER}     # 5m aura 7s: +30% AS, +30% cooldown rate for the wearer and up to 10 allies
+
+- gear: ARMOR_LEATHER_SET1           # Mercenary Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: BLOODLUST}        # heal per direct hit, 6s (Hellion aura=3)
+
+- gear: ARMOR_LEATHER_SET2           # Hunter Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: HASTE}            # +20% AA speed +20% damage 8s
+
+- gear: ARMOR_LEATHER_SET3           # Assassin Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: AMBUSH}           # 7s invisibility
+    - {cap: burst_st,      score: 2, evidence: AMBUSH}           # stacked opener damage out of stealth
+
+- gear: ARMOR_LEATHER_UNDEAD         # Specter Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: BURNAURA}         # true-damage aura at own-HP cost
+
+# ------------------------------------------ plate (pools/armor_plate.yaml)
+- gear: ARMOR_PLATE_AVALON           # Armor of Valor — Requite
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: REFLECT_CHANNEL}  # +40% resists channel
+    - {cap: anti_dive,     score: 2, evidence: REFLECT_CHANNEL}  # silences attackers 2s per hit taken
+
+- gear: ARMOR_PLATE_FEY              # Duskweaver Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: slow,          score: 3, evidence: ARMOR_WEB}        # 5s web zone under the wearer: 35% slow, purges move-speed buffs
+    - {cap: zone_control,  score: 2, evidence: ARMOR_WEB}
+    - {cap: anti_dive,     score: 2, evidence: ARMOR_WEB}
+
+- gear: ARMOR_PLATE_HELL             # Demon Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    # The aura grants magicresistance+/physicalarmor+ to ALLIES and applies
+    # magicresistance-/physicalarmor- to the WEARER: Demon Armor buys the
+    # group's durability with its own, so buff_allies, never tankiness.
+    - {cap: buff_allies,   score: 3, evidence: REFLECTAREA}      # group resistances aura (wearer pays with their own)
+    - {cap: anti_dive,     score: 2, evidence: REFLECTAREA}      # a protective aura on the allies around the wearer: +43% damage
+                                                                 # resistances, half the incoming damage reflected (the anti-dive rule)
+    # The only team reflect in the game: every other reflect in the
+    # catalogue is self-only (it raises the caster's own resistances); this
+    # one reflects 50% for the wearer AND up to 9 allies, for 6s, while
+    # mobile and uninterruptible. Wearers come in twos or more
+    # (interactions.yaml REFLECTAREA). Top of the reflect ladder at 6; the
+    # self-only reflects sit at 1-2.
+    - {cap: reflect,       score: 6, evidence: REFLECTAREA}      # 50% reflect on the whole ball (structural: reflectdamageactive, friendotherplayers)
+  # SELF-COST: what the wearer PAYS, charged on the wearer's own supply
+  # (engine build_extra), never the team pool. The aura cuts the wearer's
+  # damage resistances by 0.37 while it runs; with 2+ wearers each stands
+  # in the other's aura and nobody pays (interactions.yaml REFLECTAREA,
+  # self_cost_offset_min_copies 2).
+  self_costs:
+    - {cap: tankiness, points: 3, evidence: REFLECTAREA}         # -0.37 own damage resistances while channelling
+
+- gear: ARMOR_PLATE_KEEPER           # Judicator Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    # No peel: Force Shield grants allies +25% resistances and touches no
+    # enemy (peel touches the enemy); buff_allies carries the grant.
+    - {cap: buff_allies,   score: 3, evidence: FORCESHIELD}
+    - {cap: zone_control,  score: 2, evidence: FORCESHIELD}
+    - {cap: anti_dive,     score: 2, evidence: FORCESHIELD}      # a protective zone dropped on the dived allies: +25% damage
+                                                                 # resistances and Healing Received for 8s (the anti-dive rule)
+
+- gear: ARMOR_PLATE_ROYAL            # Royal Armor — the energy font chest
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: MANADRAIN}        # energy to 10 allies, scales with nearby enemies (Energy Field=3)
+
+- gear: ARMOR_PLATE_SET1             # Soldier Armor — Fury
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: ENRAGE}           # stacking +damage +CC duration when hit
+
+- gear: ARMOR_PLATE_SET2             # Knight Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: purge,         score: 4, evidence: WINDWALL}         # wall purges all buffs from enemies
+    - {cap: peel,          score: 3, evidence: WINDWALL}         # knocks back enemies touching it 8.75m
+    - {cap: anti_dive,     score: 3, evidence: WINDWALL}
+
+- gear: ARMOR_PLATE_SET3             # Guardian Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: damage_debuff, score: 5, evidence: ENFEEBLEAURA}     # -60% damage dealt, 7m aura, 5s — the top of the damage_debuff ladder
+    - {cap: peel,          score: 3, evidence: ENFEEBLEAURA}
+    # The aura also reveals invisible enemies entering it without purging
+    # them, as do Stalker Hood's Mortal Agony and the Sticky Potion: no row,
+    # `reveal` stays unpromoted (effect_map.yaml).
+
+- gear: ARMOR_PLATE_UNDEAD           # Graveguard Armor — Soul Chain
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: clump_create,  score: 3, evidence: ARMORCHAIN}       # chain the target; pulled to the wearer if within 30m after 2.1s
+    - {cap: catch,         score: 2, evidence: ARMORCHAIN}

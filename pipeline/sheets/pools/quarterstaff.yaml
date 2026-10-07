@@ -1,18 +1,18 @@
-# quarterstaff tree — shared Q/W/passive pool (8 weapons), extracted
-# 2026-08-20 from the per-weapon sheets (semantic-identity
-# restructure; every score unchanged). A row applies to every
-# quarterstaff weapon that can equip its evidence spell (WEAPON_STATS:
-# tree-wide), unless the weapon's sheet keeps its own row for the
-# same (cap, evidence) — a score override pending
-# validation — or lists the pair under `except:`.
+# quarterstaff tree: the Q/W/passive rows the eight quarterstaffs share. A
+# row composes into every quarterstaff that can equip its evidence spell
+# (WEAPON_STATS: tree-wide). A weapon's own row with the same
+# (cap, evidence) is that weapon's deliberate override of the shared row
+# (magnitude RULE queue, VALIDATION.md 08, Round 9); an `except:` entry
+# drops the row from that weapon. (QW): the row holds only while the player
+# equips that Q or W spell. Weapon entries: sheets/quarterstaff.yaml.
 subcategory: quarterstaff
 capabilities:
-  - {cap: mobility, score: 2, evidence: CARTWHEEL}                              # (QW)
-  - {cap: knockback_displace, score: 2, evidence: LAUNCHER}                     # W: Rising Blow / Separator / Forceful Swing (QW) — unified with line-mates (magnitude pass 2026-08-13)
+  - {cap: mobility, score: 2, evidence: CARTWHEEL}                              # Q: Cartwheel 8m dash (QW)
+  - {cap: knockback_displace, score: 2, evidence: LAUNCHER}                     # W: Rising Blow cone air-throw; Separator / Forceful Swing knockbacks folded in (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech
-  - {cap: sustained_dps, score: 2, evidence: QSTAFF_COMBO}                      # W: Gale Dance AA buff; Whirling Strikes (QW)
-  - {cap: anti_dive, score: 2, evidence: QS_WHIRLWIND2}                         # (QW)
+  - {cap: sustained_dps, score: 2, evidence: QSTAFF_COMBO}                      # W: Gale Dance, +30% AA damage after three hits; Q: Whirling Strikes folded in (QW)
+  - {cap: anti_dive, score: 2, evidence: QS_WHIRLWIND2}                         # W: Forceful Swing shoves divers 4.26m in 6r (QW)
   - {cap: damage_debuff, score: 2, evidence: QS_WHIRLWIND2}                     # W: -50% damage dealt + AA disable (QW)
-  - {cap: peel, score: 2, evidence: SEPARATING_SLAM}                            # (QW)
-  - {cap: root, score: 2, evidence: SEPARATING_SLAM}                            # (QW)
-  - {cap: stun, score: 2, evidence: STUNRUN}                                    # W option; Q3 combo; passive (QW)
+  - {cap: peel, score: 2, evidence: SEPARATING_SLAM}                            # W: Separator; the ladder's base (Double Bladed Staff 4, Quarterstaff 6) (QW)
+  - {cap: root, score: 2, evidence: SEPARATING_SLAM}                            # W: Separator roots the target 2.2s (QW)
+  - {cap: stun, score: 2, evidence: STUNRUN}                                    # W: Stun Run 2.11s; Q: Concussive Combo 3rd hit 1.43s; passive Stunning Strike (QW)

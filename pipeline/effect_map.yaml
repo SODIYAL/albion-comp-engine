@@ -33,11 +33,11 @@
 #     Howl, Arcane Orb, Cripple, Breakthrough, Iron Will, Devastating
 #     Strike, Enfeeble Blades). Invisibility is a buff, so purging strips
 #     it. Scoring `reveal` there would double-count purge on 7 lines.
-#   * Only TWO sources reveal WITHOUT purging — Guardian Armor's Enfeeble
-#     Aura and Stalker Hood's Mortal Agony, both GEAR. The effect catalogue
-#     indexes weapon spells only (367 entries; no gear actives), so the
-#     evidence layer cannot ground a gear-spell claim: the lint rejected
-#     both, correctly.
+#   * The sources that reveal WITHOUT purging are gear and consumables:
+#     Guardian Armor's Enfeeble Aura, Stalker Hood's Mortal Agony and the
+#     Sticky Potion's area ("Invisible enemies entering the area will be
+#     revealed"). None of them is a weapon spell, and no comp in the
+#     corpus fields them for the reveal.
 #   * No comp in the corpus fields anti-stealth, so there is no demand to
 #     fit a template row against either.
 # Promote it when a content type exists whose comps actually field it

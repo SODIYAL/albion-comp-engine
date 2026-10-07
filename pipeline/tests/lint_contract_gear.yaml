@@ -1,0 +1,41 @@
+# Evidence-lint contract fixture, gear sheet (tests/test_builds.py). Every
+# entry carries defects the lint must report as ERRORs; the file sits
+# outside pipeline/sheets/gear/, so every entry also fails the layout rule.
+
+# A slot outside the vocabulary.
+- gear: HEAD_PLATE_KEEPER
+  slot: helmet
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: stun, score: 3, evidence: ELECTRICSHOCK}
+
+# A slot the game data contradicts, the weapon sentinel on a gear row, a
+# self cost above the scale.
+- gear: ARMOR_PLATE_HELL
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: reflect,   score: 6, evidence: REFLECTAREA}
+    - {cap: tankiness, score: 2, evidence: WEAPON_STATS}
+  self_costs:
+    - {cap: tankiness, points: 9, evidence: REFLECTAREA}
+
+# An item the game data does not carry.
+- gear: HEAD_PLATE_UNLISTED
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities: []
+
+# An except naming no row of the tree pool, then the same item key again.
+- gear: SHOES_CLOTH_SET2
+  slot: shoes
+  curated_as_of: 2026-08-27
+  except:
+    - {cap: disengage, evidence: BLINK}
+  capabilities:
+    - {cap: disengage, score: 3, evidence: BLINK}
+
+- gear: SHOES_CLOTH_SET2
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities: []

@@ -16,7 +16,7 @@ Read before substantive work:
 - `BACKLOG.md` — the one list of open work; no other file keeps its own
 - `MASTERSHEET.md` — the tuning control surface: `tune:` blocks that OVERRIDE
   scoring/mechanics/templates/sheets at build time, rules in force only
-- `pipeline/sheets/README.md` — the 1–7 curation rubric
+- `pipeline/sheets/README.md` — the sheet layout and the 1–7 curation rubric
 - `tests/VALIDATION.md` — the decision log: standing rules, one index row per
   decision with its pin and archive location, open questions. Full dated log in
   `notes/validation/` (append-only)
@@ -105,7 +105,7 @@ directly, exit 0 = pass. Don't trust pass counts in docs; read the output. CI
 ```text
 py -3 tests/test_golden.py          # recommendation golden cases (add one when a validation round overrules the engine)
 py -3 tests/test_forge.py           # forge/constraint contracts, pick-score invariant
-py -3 tests/test_builds.py          # evidence-layer rules (provenance, quarantine, source gates)
+py -3 tests/test_builds.py          # evidence-layer rules (provenance, quarantine, source gates), the lint contract cases
 py -3 tests/test_interactions.py    # duplicate/reflect/cleanse semantics + JS parity on those
 py -3 tests/test_provenance.py      # pinned-snapshot hash chain, byte-identical rebuilds, LF checks
 py -3 tests/test_patch_history.py   # dumps-diff staleness detection
@@ -120,7 +120,7 @@ py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy
 py -3 tests/test_tone.py            # writing conventions on every tracked text file
 py -3 tests/test_content_tag.py     # harvest content tag: KillArea tally, the marker rule, kill-feed records
 py -3 tests/test_portal_stats.py    # Dragon Portal stats artifact + page contracts (display only)
-py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell
+py -3 pipeline/evidence_lint.py     # every nonzero score cites an equippable, grounding spell; the sheet contract (pipeline/sheets/README.md "Layout")
 node tests/test_loadout_codec.js    # share-URL codec round-trips
 node tests/test_display_math.js     # killboard bucket / cohort / family display math
 node tests/test_live_party.js       # companion equipment -> loadout gear keys
@@ -187,7 +187,8 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   2-7, which the battle list never surfaces. Every cache record carries the
   event's `KillArea`; `analyze()` stamps a `content` tag on every battle,
   party and build. A tag, never a filter.
-- `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
+- `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation,
+  with the rows the weapon scores today.
 
 ## Architecture
 
@@ -238,8 +239,10 @@ One-way, provenance-checked data flow:
    (`effect_map.yaml`, `effect_catalogue.py`) proposes capabilities — candidates for
    curation, never assertions. It indexes weapon spells AND gear actives/passives.
 3. Curation: capability sheets scored 1–7 (2 points = one supply unit), every
-   nonzero score citing an evidence spell the lint can ground. Shared Q/W pools in
-   `sheets/pools/`, each weapon's E on its own sheet, gear in `sheets/gear/`.
+   nonzero score citing an evidence spell the lint can ground. One file per weapon
+   tree (`sheets/<tree>.yaml`, each weapon's entry carrying its E and its overrides),
+   the tree's shared Q/W pool beside it in `sheets/pools/<tree>.yaml`, gear one file
+   per slot in `sheets/gear/` (`pipeline/sheets/README.md` "Layout").
 4. Templates: six content templates + `styles.yaml` (five playstyles with weight
    multipliers, delivery mechanics, a fight chain) + `composition.yaml` +
    `mechanics.yaml`. Numbers are comp-fitted from real comps. `style_bands.yaml`,

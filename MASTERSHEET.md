@@ -24,7 +24,8 @@ Sections: `scoring`, `mechanics`, `templates`, `sheets`, `guild_builds`
 
 Re-rank a capability a weapon already has, or remove it (score 0). A NEW
 capability needs a sheet row with spell evidence — the no-score-without-proof
-rule stays intact. Keys are game unique names (`pipeline/sheets/*.yaml`).
+rule stays intact. Keys are game unique names, as the weapon's entry in its
+tree's sheet names it (`pipeline/sheets/<tree>.yaml`).
 
 ```yaml tune:sheets
 # Bedrock Mace is THE anti-dive pick at scale (pinned by golden T19): Primal
@@ -34,6 +35,7 @@ rule stays intact. Keys are game unique names (`pipeline/sheets/*.yaml`).
 # contact the diver while channeling — in large fights nobody uses it for
 # this. The raw numbers alone (18m vs 12m) hide the delivery nuance; this is
 # rubric Q2 reliability + Q8 kit fit.
+# Sheet rows: pipeline/sheets/mace.yaml (Bedrock), pipeline/sheets/quarterstaff.yaml (Iron-clad).
 MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
   anti_dive: 6
 2H_IRONCLADEDSTAFF:            # Iron-clad Staff
@@ -42,6 +44,7 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
 # Fists of Avalon purge 4 (E-audit follow-up, curation judgment): Purifying
 # Fist strips ALL buffs from ALL enemies hit inside a 232-damage area punch —
 # the true-purge benchmark delivered as a dive bomb, above the sheet's 3.
+# Sheet row: pipeline/sheets/knuckles.yaml.
 2H_KNUCKLES_AVALON:            # Fists of Avalon
   purge: 4
 
@@ -53,13 +56,9 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
 # hold was a symptom of missing team structure, not a wrong rating. The
 # evidence stands on its own: Avalanche measures 280/cast, top-20% of the
 # burst_aoe board.
+# Sheet row: pipeline/sheets/froststaff.yaml.
 MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
   burst_aoe: 3
-
-# 2H_TWINSCYTHE_HELL:          # Soulscythe
-#   knockback_displace: 4      # the line knockup is undervalued at 2
-# 2H_DOUBLEBLADEDSTAFF:
-#   catch: 2                   # gank kit, not ZvZ catch — down from 4
 ```
 
 ## Scoring dials — `tune:scoring`

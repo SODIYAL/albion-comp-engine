@@ -1,16 +1,52 @@
 # pipeline/sheets — capability curation
 
-Weapon sheets (`*.yaml`, one per weapon, carrying its E — the weapon's
-identity), tree-shared Q/W pools (`pools/`), and gear sheets (`gear/`).
-Every nonzero score cites an evidence spell the lint can ground
-(`pipeline/evidence_lint.py`); `curated_as_of` lets `patch_history` flag a
-sheet whose cited spell a later patch changed. Score overrides live in
-`MASTERSHEET.md` (`tune:sheets`), never edited into a sheet after the fact.
+Weapon sheets (one file per weapon tree, each entry carrying its weapon's
+E — the weapon's identity), the trees' shared Q/W/passive pools (`pools/`),
+and gear sheets (`gear/`). Every nonzero score cites an evidence spell the
+lint can ground (`pipeline/evidence_lint.py`); `curated_as_of` lets
+`patch_history` flag an entry whose cited spell a later patch changed. Score
+overrides live in `MASTERSHEET.md` (`tune:sheets`), never edited into a sheet
+after the fact.
 
 Scale: 1–7, `score_unit: 2` — two sheet points are one supply unit. The old
 0–3 ordinals sit on the even slots (1→2, 2→4, 3→6); odd slots are for finer
 judgments (1 = weaker than anything previously scored, 7 = beyond the old top).
 Coarse on purpose: finer granularity is false precision.
+
+## Layout
+
+- `<tree>.yaml` — one file per weapon tree, named like its pool: the
+  tree's subcategory in `out/weapon_lines.json` (`mace.yaml`, `bow.yaml`,
+  `shapeshifterstaff.yaml`). A list of entries, one per weapon: its own rows
+  (the E, and any override of a shared row), its `except:` list and its
+  fields (`curated_as_of`, `role_hint`, `removed`).
+- `pools/<tree>.yaml` — the tree's shared rows, curated once and composed
+  into every weapon of the tree that can equip the evidence spell
+  (`sheets_lib.compose`). An entry's own row with the same capability and
+  evidence replaces the pool row; an `except:` item declines one.
+- `gear/<slot>.yaml` — one file per gear slot (`head`, `armor`, `shoes`,
+  `offhand`, `cape`, `potion`, `food`); the actives an armor tree shares sit
+  in `gear/pools/<slot>_<class>.yaml`, composed by `sheets_lib.compose_gear`.
+- `illustrative/` — placeholder sheets without evidence, when any exist
+  (none do): a curated entry shadows one, the lint does not read them, and
+  the dataset is not a release while one is present.
+
+`evidence_lint.py` checks the layout beside the evidence (its rules 4–11;
+an error blocks the release): the schema (known keys only, a score an
+integer 1–7), the capability taxonomy (`CAPABILITIES`; the templates and the
+effect map name nothing outside it), no duplicate row or `except:` item,
+every `except:` item naming a pool row the entry would otherwise receive,
+one definition per weapon key and per gear key, and placement (a weapon
+entry in `sheets/<its subcategory>.yaml`, a gear entry in
+`gear/<its slot>.yaml`, every `sheets/*.yaml` named after a weapon tree);
+`curated_as_of` an ISO date, `role_hint` one of melee / range / tank /
+healer / support, a gear `slot` one of the seven and the game data's own; a
+weapon entry carries `weapon`, `curated_as_of`, `role_hint` and
+`capabilities`, a gear entry `gear`, `slot`, `curated_as_of` and
+`capabilities`, for a gear key the game data carries; a pool file is named
+after its tree and has the tree's sheet beside it; each layer cites its own
+stat sentinel (`WEAPON_STATS` on weapon rows, `GEAR_STATS` on gear rows and
+self costs).
 
 ## The rubric
 
@@ -65,8 +101,9 @@ Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment
    W — the W makes the E's clump damage bigger, and the 15s E cycles the
    combo fast. Bow: the same W cannot turn a single-target AA window into
    AoE — same tree, no combo.) 1H weapons add the OFFHAND as a free
-   amplifier slot (Hallowfall + healing offhand) — judged coarsely until
-   gear sheets land. The loadout model supplies the candidates.
+   amplifier slot (Hallowfall + healing offhand); the offhand's own rows
+   sit on its gear sheet (`gear/offhand.yaml`). The loadout model supplies
+   the candidates.
 2. **W2 ● Identity density** — how many capabilities does the E cover AT
    QUALITY in one button? (Primal Slam: displacement + zone + peel
    simultaneously.)
@@ -83,8 +120,12 @@ weighted modifiers with capability-specific weights.
 The judging instruments are boards generated locally into `review/`
 (gitignored, never committed): the stat chart
 (`py -3 pipeline/build_stat_chart.py` — real numbers per capability,
-spell-keyed, typed sub-groups, plus the per-spell fact line — persistence,
-delivery, cast range, counter-immunity flags) and the magnitude board
-(`py -3 pipeline/build_magnitude_review.py` — score-vs-dumps-text audit
-boards). Rebuild them after sheet edits. Worked cases and every magnitude
-decision: the `tests/VALIDATION.md` log.
+spell-keyed, typed sub-groups, ranked on the vs-players number with a
+different vs-mobs number shown as context, plus the per-spell fact line —
+persistence, delivery, cast range, counter-immunity flags) and the
+magnitude board (`py -3 pipeline/build_magnitude_review.py` —
+score-vs-dumps-text audit boards over every composed row, `use:` variants
+included). `py -3 pipeline/curate_helper.py <WEAPON>` prints one weapon's
+evidence worksheet with the rows it scores today. Rebuild the boards after
+sheet edits. Worked cases and every magnitude decision: the
+`tests/VALIDATION.md` log.

@@ -293700,7 +293700,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -293891,7 +293891,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -294087,7 +294087,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -294313,7 +294313,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -294524,7 +294524,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/axe_line.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -294767,7 +294767,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/realmbreaker.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -295181,7 +295181,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/mistpiercer.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -295387,7 +295387,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/bow_line.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -295601,7 +295601,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/wailing_bow.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -295842,7 +295842,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/bow_of_badon.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -296049,7 +296049,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/claws.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -296280,7 +296280,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/sword_line.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -296518,7 +296518,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/kingmaker.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -296753,7 +296753,7 @@
     "pierce",
     "sustained_brawler"
    ],
-   "source": "sheets/carving_sword.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -296989,7 +296989,7 @@
     "off_tank",
     "shield_break"
    ],
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -297187,7 +297187,7 @@
     "pierce",
     "ranged_aoe"
    ],
-   "source": "sheets/crossbow_line.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -297401,7 +297401,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/crossbow_line.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -297604,7 +297604,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/siegebow.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -297808,7 +297808,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/energy_shaper.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -298015,7 +298015,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -298204,7 +298204,7 @@
     "pierce",
     "curse_support"
    ],
-   "source": "sheets/damnation.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -298404,7 +298404,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/dagger_pair.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -298616,7 +298616,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/dagger_line.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -298832,7 +298832,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/dagger_line.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -299038,7 +299038,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -299165,7 +299165,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/holy_line_rest.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -299389,7 +299389,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/double_bladed_staff.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -299626,7 +299626,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -299836,7 +299836,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/bear_paws.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -300039,7 +300039,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/crossbow_line.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -300241,7 +300241,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/boltcasters.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -300519,7 +300519,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/forge_hammers.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -300717,7 +300717,7 @@
    "role_menu": [
     "off_tank"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -300927,7 +300927,7 @@
    "role_menu": [
     "bomb_aoe"
    ],
-   "source": "sheets/sword_line.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -301122,7 +301122,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/deathgivers.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -301331,7 +301331,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/dualswords.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -301499,7 +301499,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -301672,7 +301672,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -301840,7 +301840,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -302008,7 +302008,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -302187,7 +302187,7 @@
     "anti_heal",
     "ranged_aoe"
    ],
-   "source": "sheets/dawnsong.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -302393,7 +302393,7 @@
    "role_menu": [
     "engage_tank"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -302639,7 +302639,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -302884,7 +302884,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -303128,7 +303128,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -303298,7 +303298,7 @@
    "role_menu": [
     "dive_cleanup"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -303494,7 +303494,7 @@
    "role_menu": [
     "bomb_aoe"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -303705,7 +303705,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/axe_line.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -303921,7 +303921,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/axe_line.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -304168,7 +304168,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/great_hammer.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -304427,7 +304427,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/hand_of_justice.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -304680,7 +304680,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/hammer_line.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -304945,7 +304945,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/hammer_line.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305148,7 +305148,7 @@
     "pierce",
     "sustained_brawler"
    ],
-   "source": "sheets/spirithunter.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305299,7 +305299,7 @@
    "role_menu": [
     "brawl_healer"
    ],
-   "source": "sheets/great_holy.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305444,7 +305444,7 @@
    "role_menu_secondary": [
     "shield_support"
    ],
-   "source": "sheets/holy_line_rest.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305588,7 +305588,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/holy_line_rest.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305722,7 +305722,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/holy_line.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -305964,7 +305964,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/permafrost_prism.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -306215,7 +306215,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -306373,7 +306373,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -306549,7 +306549,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/blazing_staff.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -306751,7 +306751,7 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -306941,7 +306941,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/dagger_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -307216,7 +307216,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -307440,7 +307440,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -307704,7 +307704,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -307946,7 +307946,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -308169,7 +308169,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -308413,7 +308413,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -308637,7 +308637,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/battle_bracers.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -308902,7 +308902,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/knuckles_line.yaml",
+   "source": "sheets/knuckles.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -309073,7 +309073,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/longbow.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -309268,7 +309268,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/bow_line.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -309475,7 +309475,7 @@
     "stopper_tank",
     "purge"
    ],
-   "source": "sheets/mace_line.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -309706,7 +309706,7 @@
    "role_menu": [
     "engage_tank"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -309899,7 +309899,7 @@
    "role_menu": [
     "kite_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -310110,7 +310110,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/nature_line.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -310317,7 +310317,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -310573,7 +310573,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/polehammer.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -311033,7 +311033,7 @@
    "role_menu": [
     "stopper_tank"
    ],
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -311259,7 +311259,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/grovekeeper.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -311449,7 +311449,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/crossbow_line.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -311652,7 +311652,7 @@
     "stopper_tank",
     "anti_heal"
    ],
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -311848,7 +311848,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/axe_line.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -312070,7 +312070,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/axe_line.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -312326,7 +312326,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -312594,7 +312594,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -312836,7 +312836,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/hellspawn.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -313082,7 +313082,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -313313,7 +313313,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -313568,7 +313568,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -313784,7 +313784,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/rootbound.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -314015,7 +314015,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/shapeshifter_line.yaml",
+   "source": "sheets/shapeshifterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -314209,7 +314209,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -314371,7 +314371,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -314582,7 +314582,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -314822,7 +314822,7 @@
    "role_menu": [
     "engage_tank"
    ],
-   "source": "sheets/quarterstaff_line.yaml",
+   "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -315032,7 +315032,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/bow_line.yaml",
+   "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -315234,7 +315234,7 @@
     "main_healer",
     "kite_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -315423,7 +315423,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/crossbow_line.yaml",
+   "source": "sheets/crossbow.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -315618,7 +315618,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/arcane_line.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -315851,7 +315851,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/witchwork.yaml",
+   "source": "sheets/arcanestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -316060,7 +316060,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/battleaxe.yaml",
+   "source": "sheets/axe.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -316248,7 +316248,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -316435,7 +316435,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -316649,7 +316649,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/rotcaller.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -316856,7 +316856,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/curse_line.yaml",
+   "source": "sheets/cursestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -317040,7 +317040,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/dagger_line.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -317257,7 +317257,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/dagger_line.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -317423,7 +317423,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -317611,7 +317611,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -317779,7 +317779,7 @@
    "role_menu": [
     "ranged_aoe"
    ],
-   "source": "sheets/fire_line.yaml",
+   "source": "sheets/firestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -318251,7 +318251,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -318495,7 +318495,7 @@
    "role_menu_secondary": [
     "pierce"
    ],
-   "source": "sheets/frost_line.yaml",
+   "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -318738,7 +318738,7 @@
     "pierce",
     "shield_break"
    ],
-   "source": "sheets/hammer_line.yaml",
+   "source": "sheets/hammer.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -318868,7 +318868,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/holy_staff.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319002,7 +319002,7 @@
     "kite_healer",
     "brawl_healer"
    ],
-   "source": "sheets/holy_line.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319124,7 +319124,7 @@
    "role_menu": [
     "kite_healer"
    ],
-   "source": "sheets/lifetouch.yaml",
+   "source": "sheets/holystaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319311,7 +319311,7 @@
     "engage_tank",
     "battlemount_pilot"
    ],
-   "source": "sheets/mace_line.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319540,7 +319540,7 @@
     "engage_tank",
     "pierce"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319774,7 +319774,7 @@
     "stopper_tank",
     "anti_heal"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -319986,7 +319986,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -320173,7 +320173,7 @@
    "role_menu": [
     "kite_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -320383,7 +320383,7 @@
    "role_menu": [
     "main_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -320563,7 +320563,7 @@
    "role_menu": [
     "kite_healer"
    ],
-   "source": "sheets/nature_line_rest.yaml",
+   "source": "sheets/naturestaff.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -320789,7 +320789,7 @@
     "pierce",
     "anti_heal"
    ],
-   "source": "sheets/bloodletter.yaml",
+   "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -320982,7 +320982,7 @@
    "role_menu": [
     "stopper_tank"
    ],
-   "source": "sheets/mace_line_rest.yaml",
+   "source": "sheets/mace.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -321217,7 +321217,7 @@
     "sustained_brawler",
     "dive_cleanup"
    ],
-   "source": "sheets/sword_line.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -321432,7 +321432,7 @@
    "role_menu": [
     "dive_cleanup"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -321653,7 +321653,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,
@@ -321858,7 +321858,7 @@
     "purge",
     "sustained_brawler"
    ],
-   "source": "sheets/spear_line.yaml",
+   "source": "sheets/spear.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -322064,7 +322064,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/sword_line.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": true,
@@ -322252,7 +322252,7 @@
    "role_menu": [
     "sustained_brawler"
    ],
-   "source": "sheets/sword_line.yaml",
+   "source": "sheets/sword.yaml",
    "status": "curated",
    "style_fit": {
     "caster_moves": false,

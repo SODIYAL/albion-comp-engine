@@ -273,9 +273,9 @@ def main():
         spell_facts[sid] = entry
     # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
     # shoes, cape, offhand, potion, food. This is the full PICKER catalogue;
-    # it is distinct from dataset["gear"], the CURATED capability sheet
-    # (sheets/gear/core.yaml, the full-build layer) that build_extra
-    # scores. Picker items outside the curated sheet contribute no
+    # it is distinct from dataset["gear"], the CURATED capability sheets
+    # (sheets/gear/<slot>.yaml, the full-build layer) that build_extra
+    # scores. Picker items outside the curated sheets contribute no
     # capabilities yet — they render, equip, and carry stats only.
     gear_path = os.path.join(PIPE, "out", "gear_lines.json")
     gear_all = {}

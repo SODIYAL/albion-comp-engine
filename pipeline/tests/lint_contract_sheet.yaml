@@ -1,0 +1,49 @@
+# Evidence-lint contract fixture, weapon sheet (tests/test_builds.py). Every
+# entry carries defects the lint must report as ERRORs; the file sits
+# outside pipeline/sheets/, so every entry also fails the layout rule.
+
+# Score type and range, an unknown capability, an unknown row key, a
+# duplicate row, a dead except, a duplicate except and an inert except.
+- weapon: MAIN_MACE
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  except:
+    - {cap: purge, evidence: HAMMERTACKLE}   # no such row in pools/mace.yaml
+    - {cap: slow, evidence: SACRED_GROUND}
+    - {cap: slow, evidence: SACRED_GROUND}   # the same except twice
+    - {cap: peel, evidence: GUARDRUNE}       # the own row below already overrides the pair
+  capabilities:
+    - {cap: stun,      score: 9,    evidence: MACELEAP}     # above the 1-7 scale
+    - {cap: engage,    score: 2.5,  evidence: MACELEAP}     # not an integer
+    - {cap: mobility,  score: 0,    evidence: MACELEAP}     # zero belongs in MASTERSHEET tune:sheets
+    - {cap: catch,     score: true, evidence: MACELEAP}     # a bool is no score
+    - {cap: peal,      score: 2,    evidence: MACELEAP}     # not a capability
+    - {cap: tankiness, score: 2,    evidence: MACELEAP}
+    - {cap: tankiness, score: 2,    evidence: MACELEAP}     # the same row twice
+    - {cap: root,      scroe: 4,    evidence: CHARGE_ROOT}  # a misspelled key, so no score
+    - {cap: peel,      score: 4,    evidence: GUARDRUNE}    # repeats the pool row: a warning
+
+# Entry keys: an unknown key, a date no calendar has, a role_hint outside
+# the vocabulary.
+- weapon: 2H_MACE
+  curated_as_of: "2026-13-45"
+  role_hint: dps
+  evidense: SHRIEKMACE
+  capabilities:
+    - {cap: silence, score: 6, evidence: SHRIEKMACE}
+
+# The same weapon key a second time, without curated_as_of.
+- weapon: 2H_MACE
+  role_hint: tank
+  capabilities:
+    - {cap: silence, score: 6, evidence: SHRIEKMACE}
+
+# An except naming a pool row the weapon cannot equip (Black Hands carries
+# the dagger Q/W menu, not Dash Kick), and a date string that is not ISO.
+- weapon: 2H_IRONGAUNTLETS_HELL
+  curated_as_of: "2026-8-1"
+  role_hint: melee
+  except:
+    - {cap: engage, evidence: DASHKICK}
+  capabilities:
+    - {cap: burst_st, score: 4, evidence: PUNCHCOMBO}

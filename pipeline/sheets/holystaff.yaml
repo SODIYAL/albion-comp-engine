@@ -1,0 +1,148 @@
+# Holy staffs: one entry per weapon of the holystaff tree, carrying the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The tree's Q/W rows (Holy Flash, Holy Beam, Holy Blessing,
+# Sacred Pulse) live in pools/holystaff.yaml and compose into every weapon
+# that can equip them (sheets_lib.compose). Most `except:` entries leave
+# off a shared row whose capability the weapon's own row already carries:
+# one slot per capability (VALIDATION.md 10, Form abilities and ally
+# protection graded). An E-row comment that names a Q/W spell marks that
+# spell's share of the E row's score. The staves share every Q and W and
+# differ almost entirely in slot E: one healer role, very different
+# structural contributions.
+# Tree rules: no holy Q or W cleanses (the W list is Sacred Pulse, Holy
+# Beam, Holy Blessing, Holy Orb, Reawaken; Holy Blessing's Forced Movement
+# immunity is prevention, not removal), so cleanse is per weapon: Lifetouch
+# and Fallen carry it on the E, and any other holy healer takes it from
+# gear (the gear sheets). Sacred Pulse's shove is healer self-peel, scored
+# as peel and never as knockback_displace, like the Magic Force passive's
+# auto-attack knockback (T13).
+
+- weapon: 2H_DIVINESTAFF             # Divine Staff — shield-detonate healer
+  curated_as_of: 2026-10-04
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+    - {cap: buff_allies, evidence: HOLYHOT}
+  capabilities:
+    - {cap: buff_allies,  score: 4, evidence: HOLYSHIELD}    # E: a 456 absorb shield on one ally for 4s (via override); W: Holy Blessing
+    - {cap: heal_burst,   score: 4, evidence: HOLYSHIELD}    # E: Divinity's Grace detonates the shield, 160 to up to 10 allies in a 5 radius; Q: Holy Flash
+    - {cap: anti_dive,    score: 2, evidence: HOLYSHIELD}    # the 456 shield is cast on the dived ally (the anti-dive rule, via override)
+    # no cleanse (tree rule), no mobility
+
+# Great Holy Staff: the stationary group-heal anchor. Holy Explosion
+# channels 50 Health every 0.5s to up to 10 allies, knocks every enemy in a
+# 7 radius back by 10 (ignores CC resistance) and raises the damage
+# resistances of the allies its first tick hits by 16% for 3s. Its
+# heal_burst comes from the shared Holy Flash (Q): the E is a sustain
+# channel, not burst. No cleanse (tree rule); no mobility, the deliberate
+# contrast with Hallowfall.
+
+- weapon: 2H_HOLYSTAFF               # Great Holy Staff — group-heal anchor
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_sustain, evidence: HEALINGBEAM}
+    - {cap: buff_allies, evidence: HOLYHOT}
+    - {cap: peel, evidence: PULSINGHEAL}
+  capabilities:
+    - {cap: heal_sustain, score: 6, evidence: HOLYEXPLOSION}   # E: the 10-ally channel; W: Holy Beam
+    - {cap: knockback_displace, score: 2, evidence: HOLYEXPLOSION}  # E: a knockback of 10 that ignores CC resistance, but self-centred: it only matters when enemies are already on top, never an engage tool (curation judgment, T13)
+    - {cap: peel,         score: 4, evidence: HOLYEXPLOSION}   # the shove clears divers off the party — the E's real job
+    - {cap: buff_allies,  score: 4, evidence: HOLYEXPLOSION}   # E: +16% ally damage resistances for 3s; W: Holy Blessing
+    - {cap: anti_dive,    score: 2, evidence: HOLYEXPLOSION}   # the channel is an aura on the party: divers shoved 10m off it, allies' resistances up (the anti-dive rule)
+
+- weapon: 2H_HOLYSTAFF_CRYSTAL       # Exalted Staff — the anti-zone healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+    - {cap: buff_allies, evidence: HOLYHOT}
+  capabilities:
+    - {cap: anti_zone,    score: 4, evidence: HOLY_DISPEL}   # E: removes enemy-placed ground areas — the sole anti_zone supplier
+    - {cap: heal_burst,   score: 4, evidence: HOLY_DISPEL}   # E: 138 at once to up to 20 allies in a 5 radius; Q: Holy Flash
+    - {cap: buff_allies,  score: 2, evidence: HOLY_DISPEL}   # +20% max/current Health on healed allies, 3s
+    # no cleanse (tree rule), no mobility
+
+- weapon: 2H_HOLYSTAFF_HELL          # Fallen Staff — the immunity-cleanse healer
+  curated_as_of: 2026-10-04
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+    - {cap: peel, evidence: PULSINGHEAL}
+  capabilities:
+    - {cap: heal_burst,   score: 6, evidence: HOLY_ULTIMATE} # E: Salvation — 270 to up to 20 allies in one pulse after a 2s charge
+    - {cap: cleanse,      score: 4, evidence: HOLY_ULTIMATE} # inherent E cleanse of all CC, debuffs and DoTs
+    - {cap: peel,         score: 4, evidence: HOLY_ULTIMATE} # the pulse cleanses all CC off the allies in the circle and makes them immune to damage for 2s
+    - {cap: anti_dive,    score: 4, evidence: HOLY_ULTIMATE} # the immunity circle on the dived allies (the anti-dive rule, via override)
+    # no mobility: the 2s charge-up makes it an anchor
+
+- weapon: 2H_HOLYSTAFF_UNDEAD        # Redemption Staff — stationary group healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_sustain, evidence: HEALINGBEAM}
+  capabilities:
+    - {cap: heal_sustain,       score: 6, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
+    - {cap: buff_allies,        score: 4, evidence: HOLYHOT}           # W: Holy Blessing; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    # no mobility: the same role as Hallowfall with the opposite mobility
+    # profile (design doc §2.3); no cleanse (tree rule)
+
+# Holy Staff: the clutch single-target healer. Desperate Prayer heals by
+# the target's health (100 above 40%, 220 below): the emergency save
+# button, plus a stacking +5% Healing Cast on the caster when cast on a
+# target above 40%. The 220 heal has no structured node: the prose heal
+# flag grounds it, and the E's self Healing Cast buff does not supersede
+# that flag (effect_lookup.py). No cleanse (tree rule); no mobility
+# (stationary, the Hallowfall contrast).
+
+- weapon: MAIN_HOLYSTAFF             # Holy Staff — clutch single-target healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+  capabilities:
+    - {cap: heal_burst,   score: 4, evidence: HOLYDESPERATEPRAYER2}  # E: 220 below 40% Health, the save button; Q: Holy Flash
+    - {cap: self_sustain, score: 2, evidence: HOLYDESPERATEPRAYER2}  # E's stacking Healing-Cast self buff
+
+- weapon: MAIN_HOLYSTAFF_AVALON      # Hallowfall — mobile peeling healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+    - {cap: peel, evidence: PULSINGHEAL}
+  capabilities:
+    - {cap: heal_burst,         score: 6, evidence: DIVINE_JUMP}   # E: Divine Intervention — 135 to up to 10 allies on impact
+    - {cap: mobility,           score: 6, evidence: DIVINE_JUMP}   # E: leap, immune to dmg/debuff/CC until impact
+    - {cap: disengage,          score: 4, evidence: DIVINE_JUMP}   # E: the immunity window is the escape
+    - {cap: peel,               score: 6, evidence: DIVINE_JUMP}   # E: throws all enemies in a 5 radius into the air
+    - {cap: knockback_displace, score: 2, evidence: DIVINE_JUMP}   # E: an air-throw with no travel; the control value lives in peel 6 (T13)
+    - {cap: buff_allies,        score: 4, evidence: HOLYHOT}       # W: Holy Blessing, armor + Healing Received; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
+    - {cap: self_sustain,       score: 2, evidence: DIVINE_JUMP}   # E heals the caster too
+    # no cleanse (tree rule), no purge; no damage contribution worth scoring
+
+# Lifetouch Staff: the cleanse healer. Holy Touch channels a single-ally
+# heal (55 every 0.5s) that cleanses all CC and debuffs except DoTs, grants
+# the other allies immunity to all CC while channelling, raises the
+# target's damage by 15%, and can be cast while stunned or silenced. No
+# mobility: stationary like Redemption, the Hallowfall contrast.
+
+- weapon: MAIN_HOLYSTAFF_MORGANA     # Lifetouch Staff — the cleanse healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  # deliberate non-takes of shared rows (pools/holystaff.yaml)
+  except:
+    - {cap: heal_sustain, evidence: HEALINGBEAM}
+    - {cap: buff_allies, evidence: HOLYHOT}
+    - {cap: peel, evidence: PULSINGHEAL}
+  capabilities:
+    - {cap: cleanse,      score: 4, evidence: HOLYTOUCH}    # E: strips all CC + debuffs off the ally, inherent
+    - {cap: heal_sustain, score: 4, evidence: HOLYTOUCH}    # E: 55 every 0.5s while channelling; W: Holy Beam (QW)
+    - {cap: peel,         score: 4, evidence: HOLYTOUCH}    # E: CC immunity for the other allies while channelling; W: Sacred Pulse
+    - {cap: buff_allies,  score: 4, evidence: HOLYTOUCH}    # E: +15% damage dealt by the target; W: Holy Blessing

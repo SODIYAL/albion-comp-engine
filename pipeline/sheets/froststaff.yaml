@@ -1,30 +1,145 @@
-# Frost Staff (1H) — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
-# Usage: 7 sightings, dominant role: range.
-#
-# Identity: the frost line's root mage. The E (Freezing Wind) is a 200-damage
-# cone with a 2.5s AoE ROOT — the longest AoE immobilize curated so far, and
-# the weapon's whole reason to exist. Shares the frost Q/W pool with the
-# Permafrost Prism sheet, so the QW-conditional scores mirror that sheet;
-# differences are all in slot E.
-#
-# Rules carried over from the Permafrost curation for consistency:
-#   - Frost Nova's teleport files as disengage, not mobility.
-#   - tankiness NOT scored (Frost Nova's 0.2s immunity is trivial; nothing
-#     else in the kit is defensive).
-#   - No engage: a ranged root can start a fight but initiation-by-dive is
-#     not this kit's job.
-# Frost Beam's AA-speed debuff noted, still unscored: damage_debuff was
-# promoted into §2.2 (2026-08-12) but the small W-option carriers are held
-# at 0 pending validation.
+# Frost staffs: one entry per weapon of the froststaff tree, carrying the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The tree's Q/W/passive rows (Frost Bomb, Frost Nova, Frost
+# Lance, Glacial Obelisk, the Frost passive, the kite-and-poke stand-in)
+# live in pools/froststaff.yaml and compose into every weapon that can equip
+# them (sheets_lib.compose). Most `except:` entries leave off a shared row
+# whose capability the weapon's own row already carries: one slot per
+# capability (VALIDATION.md 10, Form abilities and ally protection graded).
+# An E-row comment that names a Q/W spell marks that spell's share of the E
+# row's score. Frost Nova's teleport files as disengage, never mobility,
+# and its 0.2s damage immunity grounds no tankiness. Frost Beam (a
+# channelled beam whose every tick cuts Auto-Attack Speed and slows by
+# 0.15, stacking up to 5 times) carries no row.
+
+- weapon: 2H_FROSTSTAFF              # Great Frost Staff — hail battery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: HAIL_MULTI_1}   # E: 160 in a 5 radius, recastable within 3s
+    - {cap: catch,         score: 2, evidence: HAIL_MULTI_1}
+    - {cap: peel,          score: 2, evidence: HAIL_MULTI_1}
+
+- weapon: 2H_FROSTSTAFF_CRYSTAL      # Arctic Staff — volley channel mage
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: sustained_dps, score: 4, evidence: FROST_TARGETED_CHANNEL}  # E: a volley channel the caster can move during
+    - {cap: slow,          score: 4, evidence: FROST_TARGETED_CHANNEL}  # 10% a volley, stacking up to 6 times
+    - {cap: burst_aoe,     score: 2, evidence: FROST_TARGETED_CHANNEL}
+    - {cap: catch,         score: 2, evidence: FROST_BITE}     # Q: Frostbite, three stacks stun for 0.8s (QW)
+
+- weapon: 2H_GLACIALSTAFF            # Glacial Staff — the roaming storm
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
+  capabilities:
+    - {cap: zone_control,  score: 6, evidence: ICESTORM2}      # E: a 5 radius storm that moves and lasts 15 SECONDS
+    - {cap: slow,          score: 4, evidence: ICESTORM2}      # the storm slows by 0.3; W: Frost Bomb (QW)
+    - {cap: burst_aoe,     score: 2, evidence: ICESTORM2}      # tick damage: 25 every 0.5s in the storm
+    - {cap: sustained_dps, score: 2, evidence: ICESTORM2}
+    - {cap: catch,         score: 4, evidence: ICESTORM2}
+    - {cap: peel,          score: 4, evidence: ICESTORM2}
+
+# Permafrost Prism: AoE stun-bomb mage. Ice Crystal stuns every enemy in a 4
+# radius for 1s, then explodes for 173 in the same radius. Not scored:
+# clump_create (the E holds an existing clump still and pulls nothing; only
+# drag/pull mechanics create clumps, T12), tankiness (Frost Lance shreds
+# enemy resistances and shields nothing), mobility (the kit's only movement
+# is Frost Nova's teleport: disengage) and engage (a ranged stun can open a
+# fight, but initiation-by-dive is not this kit's job; curation judgment).
+
+- weapon: 2H_ICECRYSTAL_UNDEAD       # Permafrost Prism — AoE stun-bomb mage
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: stun, evidence: FROSTNOVA}
+  capabilities:
+    - {cap: burst_aoe,     score: 6, evidence: FROST_ULTIMATE}      # E: Ice Crystal — AoE stun, then 173 AoE explosion
+    - {cap: stun,          score: 4, evidence: FROST_ULTIMATE}      # E: 1s stun on every enemy in the crystal; W: Frost Nova stuns too
+    - {cap: peel,          score: 2, evidence: FROST_ULTIMATE}      # E on divers is real but OPPORTUNISTIC — it competes
+                                                                    # with the offensive use; dedicated peel tools (Guard
+                                                                    # Rune 4, Divine Intervention 6) sit above it
+    - {cap: catch,         score: 4, evidence: FROST_ULTIMATE}      # ranged AoE lockdown; Q: Frostbite stacks to a stun
+    - {cap: zone_control,  score: 6, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb at the top of the frost zone ladder (Chillhowl 2, pool 4,
+                                                                    # here 6: RULE queue, VALIDATION.md 08, Round 9);
+                                                                    # Q: Frozen Surge; E: Ice Crystal's area (QW)
+
+- weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
+  capabilities:
+    - {cap: slow,          score: 4, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
+    - {cap: zone_control,  score: 4, evidence: GLACIALFIELD}   # 5s blizzard
+    - {cap: anti_dive,     score: 2, evidence: FROSTNOVA}      # divers crawl in the blizzard; the Nova's stun punishes them (QW)
+    - {cap: catch,         score: 3, evidence: GLACIALFIELD}
+    - {cap: peel,          score: 3, evidence: GLACIALFIELD}
+    - {cap: burst_aoe,     score: 2, evidence: GLACIALFIELD}
+
+# Frost Staff: the frost tree's root mage. Freezing Wind is a 200-damage
+# cone with a 2.5s root on every enemy hit, the weapon's whole reason to
+# exist. No engage: a ranged root can open a fight, but initiation-by-dive
+# is not this kit's job (curation judgment).
 
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
-  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  curated_as_of: 2026-08-12
   role_hint: range
-  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
   except:
     - {cap: root, evidence: PASSIVE_FROST}
   capabilities:
     - {cap: root,          score: 6, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
     - {cap: peel,          score: 4, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
-    - {cap: catch,         score: 4, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks
-    - {cap: burst_aoe,     score: 2, evidence: FREEZINGWIND}        # 200 cone + Q: Ice Shard; 1H damage budget
+    - {cap: catch,         score: 4, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks to a stun
+    - {cap: burst_aoe,     score: 2, evidence: FREEZINGWIND}        # 200 in the cone; Q: Ice Shard
+
+- weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: stun, evidence: FROSTNOVA}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
+  capabilities:
+    # Glacial Prison is ONE cast with two mutually exclusive uses: freeze
+    # the focused ALLY at once (stunned and immune to damage for 2s, a
+    # save) OR freeze an ENEMY still in the field after 1.1s. Both uses lay
+    # a 3s field that slows enemies by 0.3 (ignores CC resistance). The
+    # `use:` variants are exclusive loadout bundles: one E never delivers
+    # the save and the catch in the same fight moment.
+    - {cap: peel,          score: 4, evidence: FROZEN_CRYSTAL, use: ally_save}     # ally use: the field around the frozen ally slows enemies by 0.3 (ignores CC resistance)
+    - {cap: anti_dive,     score: 2, evidence: FROZEN_CRYSTAL, use: ally_save}     # the dived ally is frozen immune to damage for 2s (the anti-dive rule)
+    - {cap: stun,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # the enemy-freeze is a 2s incapacitate
+    - {cap: slow,          score: 4, evidence: FROZEN_CRYSTAL, use: enemy_control} # the field's 0.3 slow ignores CC resistance
+    - {cap: catch,         score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control}
+    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb at the bottom of the frost zone ladder (here 2, pool 4, Permafrost 6: RULE queue, VALIDATION.md 08, Round 9) (QW)
+
+- weapon: MAIN_FROSTSTAFF_KEEPER     # Hoarfrost Staff — snowball displacer
+  curated_as_of: 2026-08-12
+  role_hint: range
+  # deliberate non-takes of shared rows (pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}  # no own sustained_dps row: withholds the tree-wide WEAPON_STATS row (curation judgment)
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knock-AWAY — Bedrock-pattern, not offensive repositioning (curation judgment)
+    - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # the 4s freezing trail slows by 0.4; W: Frost Bomb (QW)
+    - {cap: peel,          score: 4, evidence: ICEROCK_EXPLODE}  # wide ball knocks back MULTIPLE enemies + trail slows pursuit — weaker than Bedrock at peel but far from useless (band 4-5, held at 4 for separation from Bedrock's 6; curation judgment)
+    - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
+    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # sheet 2; MASTERSHEET tune:sheets sets 3 (golden T44: the V4 gate reads the same at 2 and 3). Avalanche deals 120 to every enemy it rolls over, plus 160 in a 5 radius only when the snowball hits terrain
+    - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

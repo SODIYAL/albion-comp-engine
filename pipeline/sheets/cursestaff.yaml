@@ -1,0 +1,105 @@
+# Cursed staffs: one entry per weapon of the cursestaff tree, carrying the
+# weapon's own rows: its E (the weapon's identity) and any override of a
+# shared row. The tree's Q/W rows (Vile Curse, Cursed Tar, Armor Piercer,
+# Grudge, Desecrate) live in pools/cursestaff.yaml and compose into every
+# weapon that can equip them (sheets_lib.compose). Most `except:` entries
+# leave off a shared row whose capability the weapon's own row already
+# carries: one slot per capability (VALIDATION.md 10, Form abilities and
+# ally protection graded). An E-row comment that names a Q/W spell marks
+# that spell's share of the E row's score. No automatic 1H damage discount
+# on any row: the offhand compensates (standing rule 12).
+
+- weapon: 2H_CURSEDSTAFF             # Great Cursed Staff — decay zone caster
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: CURSED_SPLAT}
+  capabilities:
+    - {cap: zone_control,  score: 4, evidence: AREAOFDECAY}    # E: a channelled area applying a Vile Curse charge every 0.8s
+    - {cap: heal_reduction, score: 2, evidence: AREAOFDECAY}   # purges healing-over-time effects from every enemy in the area
+    - {cap: burst_aoe,     score: 2, evidence: AREAOFDECAY}
+
+# Damnation Staff: the curse bomb. Cataclysm curses every enemy in a 13
+# radius: damage over time and -18% damage resistances while cursed. The
+# pierce is the identity and earns the weapon its non-stacking slot (F19);
+# the damage is DoT-delivered and scores by the numbers. No heal_reduction:
+# the Healing-Received negate is the Rotcaller E's mechanic.
+
+- weapon: 2H_CURSEDSTAFF_MORGANA     # Damnation Staff — the curse bomb
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: resist_shred, evidence: ARMORPIERCER}
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: CURSEULTIMATE}    # E: 24 a tick x 6 = 144 over ~6s, below the burst ladder's 191 = 2 anchor: the numbers decide the damage (VALIDATION.md 08, Round 9); the 13 radius and the escalation count through cap_delivery
+    - {cap: resist_shred,  score: 4, evidence: CURSEULTIMATE}    # E: -18% damage resistances on every cursed enemy in a 13 radius, the identity; W: Armor Piercer, -17% for 4s (QW)
+
+- weapon: 2H_DEMONICSTAFF            # Demonic Staff — the fear wave
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: CURSED_SPLAT}  # no own zone_control row: withholds Cursed Tar's zone_control (curation judgment)
+  capabilities:
+    - {cap: knockback_displace, score: 4, evidence: CURSED_WALL}  # E: Anguished Soul fears every enemy on its line for 1.25s; the forced flight scatters the clump
+    - {cap: peel,          score: 4, evidence: CURSED_WALL}    # feared divers run from the caster
+    - {cap: burst_aoe,     score: 2, evidence: CURSED_WALL}    # 160 to every enemy the soul passes through
+
+- weapon: 2H_SKULLORB_HELL           # Cursed Skull — roaming %HP zone
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: CURSED_SPLAT}
+  capabilities:
+    - {cap: zone_control,  score: 4, evidence: SKULLCURSE}     # E: haunted ground that moves for 5s
+    - {cap: burst_aoe,     score: 4, evidence: SKULLCURSE}     # 31 every 0.5s in the area; players also take %Max-Health true damage every 0.5s
+
+- weapon: MAIN_CURSEDSTAFF           # Cursed Staff (1H) — death-curse nuker
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: burst_st,      score: 4, evidence: DEATHCURSE2}    # E: delayed nuke scaled by the target's Vile Curse charges
+
+- weapon: MAIN_CURSEDSTAFF_AVALON    # Shadowcaller — armor-typed DoT aura
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: sustained_dps, evidence: CURSEDOT}
+    - {cap: slow, evidence: CURSED_SPLAT}
+  capabilities:
+    - {cap: burst_aoe,     score: 4, evidence: DYNAMIC_CURSE}  # E: Inner Shadow melts cloth clumps (66 every 0.5s for 5.2s around a cloth target)
+    - {cap: sustained_dps, score: 4, evidence: DYNAMIC_CURSE}  # the shadow ticks; Q: the Vile Curse engine (QW)
+    - {cap: slow,          score: 2, evidence: DYNAMIC_CURSE}  # plate targets: a 0.4 slow for 2.2s in the area
+
+# Rotcaller Staff: anti-heal peel support. Plaguebringer is one cast doing
+# three support jobs: a knockback of 6 that ignores CC resistance, 161
+# damage, and a 2s Healing-Received negation (6s before it can land on the
+# same target again). No tankiness or self_sustain: nothing in the text
+# shields anything (the shield flag is suppressed in effect_overrides.yaml).
+# No engage, disengage, catch or mobility from the Hit and Run passive: +20%
+# move speed for 3s after every 6 spells is a kiting nicety, not movement
+# tooling.
+
+- weapon: MAIN_CURSEDSTAFF_CRYSTAL   # Rotcaller Staff — anti-heal peel support
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: heal_reduction, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received for 2s across the miasma; the 100% negate holds 4 beside the -40/-50% one-shot class (heal-cut ladder, VALIDATION.md 08, Round 9)
+    - {cap: burst_aoe,      score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # 161 across the miasma cone; fielded mostly for its damage (curation judgment)
+    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # a knock-away of 6: self-peel, not offensive displacement (the Rift Glaive pattern; curation judgment)
+    - {cap: sustained_dps,  score: 4, evidence: CURSEDOT}           # Q: Vile Curse at the pool's 4: no automatic 1H damage discount, the offhand compensates (standing rule 12)
+
+- weapon: MAIN_CURSEDSTAFF_UNDEAD    # Lifecurse Staff — the purge blades
+  curated_as_of: 2026-08-12
+  role_hint: support
+  # deliberate non-takes of shared rows (pools/cursestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: CURSED_SPLAT}
+  capabilities:
+    - {cap: purge,         score: 4, evidence: ENFEEBLEBLADES} # E: blades spin in a 6.5 radius for 3.75s, purging every enemy buff inside: a continuous AoE purge zone
+    - {cap: zone_control,  score: 4, evidence: ENFEEBLEBLADES} # the blades hold the ground they spin on
+    - {cap: burst_aoe,     score: 2, evidence: ENFEEBLEBLADES}
