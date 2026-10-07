@@ -7,6 +7,7 @@
 <meta name="description" content="Dragon Portal stats: the weapons, builds and comps that win inside the Ancient Lands, per matchmaking pool, from the killboard.">
 <link rel="icon" type="image/png" href="assets/brand/comp-zaddy-logo.png">
 <title>Dragon Portal Stats</title>
+<script>document.documentElement.classList.add("js")</script>
 <style>
 :root{color-scheme:dark;--bg:#08080D;--surface:#101018;--surface-hi:#191926;--ink:#EDEFF7;--muted:#A9ADC4;--quiet:#757A92;--gold:#FFC93A;--gold-hi:#FFDF7A;--violet:#9D5CFF;--rule:#2E2E42;--ok:#35E68A;--sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
 *{box-sizing:border-box}
@@ -144,42 +145,88 @@ th:nth-child(2),td:nth-child(2){position:sticky;left:0;z-index:1;background:var(
 tr.row:hover td:nth-child(2){background:#181821}
 tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
 </style>
+<style>
+/* A single portal panorama gives the data page a sense of place without
+   becoming another competing dashboard surface. */
+.top{background:rgba(8,8,13,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:320px;padding:clamp(30px,5vw,52px);overflow:hidden;border:1px solid rgba(255,223,122,.2);border-radius:18px;background:#101018;box-shadow:0 30px 72px -46px #000}
+.hero-art{position:absolute;z-index:-2;inset:0}
+.hero-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:68% center}
+.hero::after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(8,8,13,.98) 0%,rgba(8,8,13,.9) 39%,rgba(8,8,13,.5) 66%,rgba(8,8,13,.12) 100%),linear-gradient(0deg,rgba(8,8,13,.82),transparent 55%)}
+.hero-content{width:min(790px,76%);text-shadow:0 2px 24px rgba(0,0,0,.82)}
+.hero .eyebrow{color:var(--gold-hi)}
+.hero h1{margin:9px 0 10px;font-size:clamp(34px,5vw,52px)}
+.hero p{color:#C9CCDA}
+.hero .chip{background:rgba(8,8,13,.72);border-color:rgba(237,239,247,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.wfilter{margin-top:26px}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+@media(max-width:640px){main{padding-top:18px}.hero{min-height:440px;padding:26px 22px}.hero-art img{object-position:66% center}.hero::after{background:linear-gradient(0deg,rgba(8,8,13,.98) 0%,rgba(8,8,13,.84) 56%,rgba(8,8,13,.28) 100%),linear-gradient(90deg,rgba(8,8,13,.46),transparent 72%)}.hero-content{width:100%}.hero h1{font-size:clamp(34px,11vw,44px)}.chips{gap:6px}.chip{white-space:normal}}
+</style>
+<style>
+/* Report surface: same restrained card language as the comp builder, with
+   the information hierarchy doing the work instead of workflow chrome. */
+body{overflow-x:hidden;background:var(--bg)}
+.top{z-index:3;background:rgba(8,8,13,.9)}
+.portal-page-art{position:fixed;z-index:0;inset:0;overflow:hidden;pointer-events:none;background:var(--bg)}
+.portal-page-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+.portal-page-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,13,.7),rgba(8,8,13,.28) 58%,rgba(8,8,13,.14)),linear-gradient(180deg,rgba(8,8,13,.08) 0%,rgba(8,8,13,.5) 38%,rgba(8,8,13,.97) 76%)}
+main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:none;padding:20px 0 70px}
+.hero{isolation:auto;min-height:360px;align-items:center;padding:48px 22px 42px;border:0;border-radius:0;background:transparent;box-shadow:none}.hero::after{display:none}.hero-art{display:none}.hero-content{width:min(1000px,100%);text-shadow:0 2px 24px rgba(0,0,0,.9)}.hero .eyebrow{color:var(--gold-hi)}.hero h1{margin:10px 0 13px;font-size:clamp(42px,5.7vw,64px);letter-spacing:-.04em}.hero p{max-width:770px;color:#C9CCDA;font-size:16px;line-height:1.65}
+.hero .chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;width:min(100%,1040px);margin-top:24px}.report-stat{min-width:0;padding:13px 14px;border:1px solid rgba(237,239,247,.18);border-radius:11px;background:rgba(8,8,13,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}.report-stat span{display:block;margin-bottom:7px;color:var(--quiet);font:9px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}.report-stat b{display:block;overflow:hidden;color:var(--ink);font:700 15px/1.3 var(--mono);font-variant-numeric:tabular-nums;text-overflow:ellipsis}.report-stat.numeric b{color:var(--gold-hi);font-size:20px}
+.portal-console{overflow:hidden;border:1px solid #2E2E42;border-radius:16px;background:rgba(10,10,16,.96);box-shadow:0 1px 2px rgba(0,0,0,.5),0 28px 80px -34px #000;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.report-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:26px 28px 23px;border-bottom:1px solid #242436;background:linear-gradient(180deg,rgba(21,21,31,.92),rgba(14,14,22,.9))}.report-kicker{margin-bottom:8px;color:var(--gold);font:700 9.5px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase}.report-head h2{margin:0 0 7px;font-size:clamp(27px,3.2vw,38px);line-height:1.06}.portal-meta{max-width:720px;margin:0;color:var(--quiet);font-size:12px}.report-context{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;max-width:360px}.pool-chip,.portal-live{min-height:30px;display:inline-flex;align-items:center;gap:7px;padding:0 10px;border:1px solid #2E2E42;border-radius:8px;background:var(--surface);font:700 9px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase}.pool-chip{color:var(--gold)}.portal-live{color:var(--muted)}.portal-live i{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}.portal-live.is-pulsing i{animation:portalStatus .42s ease}
+.report-controls{padding:16px 20px 18px;border-bottom:1px solid #242436;background:rgba(6,6,9,.58)}.portal-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:0;padding:0 0 14px;border:0;border-bottom:1px solid #1E1E2B}.portal-tabs .tab{min-width:0;min-height:58px;padding:9px 11px;border:1px solid #2E2E42;border-radius:9px;background:rgba(16,16,24,.88);color:var(--muted);text-align:left;cursor:pointer;transition:border-color .16s ease,background .16s ease,color .16s ease}.portal-tabs .tab:hover{border-color:#45455F;color:var(--ink)}.portal-tabs .tab[aria-selected="true"]{border-color:var(--gold);background:rgba(255,201,58,.09);color:var(--ink);box-shadow:0 0 16px -11px var(--gold)}.portal-tabs .tab b{display:block;font:650 15px/1.15 var(--serif)}.portal-tabs .tab small{display:block;margin-top:5px;overflow:hidden;color:var(--quiet);font:9px/1.3 var(--mono);text-overflow:ellipsis;white-space:nowrap}.portal-tabs .tab .tw{color:var(--gold);white-space:normal}
+.report-controls .wfilter{display:grid;grid-template-columns:auto minmax(260px,390px) minmax(220px,1fr);align-items:center;gap:12px;margin:14px 0 0}.report-controls .wf-label{color:var(--muted)}.report-controls .wf-box{width:100%;min-width:0}.report-controls .wf-in{min-height:40px;background:#060609}.report-controls .wf-hint{color:var(--quiet);font-size:11px;line-height:1.45}
+.report-body{padding:22px 28px 30px}.pool-head{margin:0 0 15px}.pool-head h2{font-size:24px}.pool-head .sub{font-size:12px}.views{margin-top:11px}.view{min-height:34px;background:rgba(16,16,24,.92)}section.block{margin:16px 0 24px}.block-head{margin-bottom:10px}.block-head h3,section.block h3{margin:0;color:var(--ink);font-size:18px}.section-note{margin:5px 0 0;color:var(--quiet);font-size:11.5px}.tablewrap,.profile{background:rgba(16,16,24,.94)}
+.note{background:rgba(8,8,13,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.method-note{margin-top:22px;padding:0;overflow:hidden}.method-note summary{padding:16px 18px;cursor:pointer;color:var(--ink);font:600 16px/1.3 var(--serif);list-style:none}.method-note summary::-webkit-details-marker{display:none}.method-note summary::after{content:"+";float:right;color:var(--gold);font:700 18px/1 var(--mono)}.method-note[open] summary{border-bottom:1px solid var(--rule)}.method-note[open] summary::after{content:"−"}.method-note .method-body{padding:8px 18px 17px}.method-note ul{margin-top:8px}
+.js .portal-console[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1)}.js .portal-console[data-reveal].is-visible{opacity:1;transform:none}#pool.is-entering{animation:portalPanelIn .26s cubic-bezier(.4,0,.2,1) both}@keyframes portalPanelIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes portalStatus{50%{transform:scale(1.7);box-shadow:0 0 14px var(--ok)}}
+@media(max-width:900px){.hero .chips{grid-template-columns:repeat(2,minmax(0,1fr))}.report-head{display:block}.report-context{justify-content:flex-start;max-width:none;margin-top:16px}.portal-tabs{grid-template-columns:repeat(5,minmax(130px,1fr));overflow-x:auto}.portal-tabs .tab{min-width:130px}.report-controls .wfilter{grid-template-columns:auto minmax(240px,1fr)}.report-controls .wf-hint{grid-column:2}.report-body{padding:22px}}
+@media(max-width:640px){main{width:calc(100% - 24px);padding-top:8px}.portal-page-art img{object-position:63% top}.portal-page-art::after{background:linear-gradient(180deg,rgba(8,8,13,.24) 0%,rgba(8,8,13,.66) 34%,rgba(8,8,13,.98) 70%)}.hero{min-height:440px;padding:44px 5px 34px}.hero h1{font-size:clamp(40px,13vw,54px)}.hero .chips{grid-template-columns:1fr 1fr}.report-stat{padding:11px}.report-stat b{font-size:12px}.report-stat.numeric b{font-size:18px}.report-head{padding:22px 18px}.report-controls{padding:13px 12px 15px}.report-controls .wfilter{grid-template-columns:1fr}.report-controls .wf-hint{grid-column:1}.report-body{padding:19px 14px 24px}.views{overflow-x:auto;flex-wrap:nowrap}.view{white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.js .portal-console[data-reveal]{opacity:1;transform:none;transition:none}#pool.is-entering,.portal-live.is-pulsing i{animation:none!important}.portal-tabs .tab{transition:none}}
+</style>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="index.html"><img src="assets/brand/comp-zaddy-logo.png" alt=""><span>Comp Zaddy</span></a>
   <nav><a href="index.html">Planner</a><a href="welcome.html">Welcome</a><a href="how-it-works.html">How it works</a></nav>
 </header>
+<div class="portal-page-art" aria-hidden="true"><img src="assets/artwork/portal-landscape-v3.png" alt="" width="1672" height="941" fetchpriority="high" decoding="async"></div>
 <main>
   <section class="hero">
-    <div class="eyebrow">Dragon Portal · the Ancient Lands</div>
-    <h1>What <em>wins</em> inside the portals.</h1>
-    <p>Every killer party the killboard saw inside the Ancient Lands, sorted by matchmaking pool: the weapons that win solo, the builds they wear, and the 3v3, 5v5 and 7v7 comps that come out on top. Read from the killboard, refreshed with every fold.</p>
-    <div class="chips" id="chips"></div>
-  </section>
-  <!-- the weapon filter: a player's own weapon narrows every pool to what it is in -->
-  <div class="wfilter" id="wfilter">
-    <label class="wf-label" for="wfilter-in">Your weapon</label>
-    <div class="wf-box">
-      <input class="wf-in" id="wfilter-in" type="search" autocomplete="off" spellcheck="false" placeholder="type a weapon to see where it wins" aria-describedby="wfilter-hint" aria-autocomplete="list" aria-controls="wfilter-list">
-      <button class="wf-clear" id="wfilter-clear" type="button" aria-label="clear the weapon filter" hidden>×</button>
-      <ul class="wf-list" id="wfilter-list" role="listbox" hidden></ul>
+    <div class="hero-content"><div class="eyebrow">Ancient Lands killboard report</div>
+      <h1>What <em>wins</em> in Dragon Portals.</h1>
+      <p>A descriptive read of killer parties seen inside the Ancient Lands. Compare weapons, builds, and recurring lineups by matchmaking pool; prevalence describes what appeared among winners, not what the planner recommends.</p>
+      <div class="chips" id="chips"></div>
     </div>
-    <span class="wf-hint" id="wfilter-hint">Every pool narrows to the weapon: its rank and build, the comps and shapes that fielded it.</span>
-  </div>
-  <div class="tabs" id="tabs" role="tablist"></div>
-  <div id="pool"></div>
-  <aside class="note">
-    <h3>How to read this page</h3>
-    <ul>
-      <li><b>Who counts.</b> A killer party at kill time, one vote per party per battle. Solo is the lone killer. The kill is tagged as a portal kill when the victim carried an Ancient Bone, an item that only exists inside the Ancient Lands, so a kill whose victim had not yet earned one is not counted: the numbers undercount, they never invent.</li>
-      <li><b>Dominant</b> means the party took no deaths in that battle. <b>K/D</b> is the party's kills over its deaths, summed over its members. Prevalence is how often a weapon or comp appears among winners; it is not a measure of strength on its own.</li>
-      <li><b>Builds</b> are the modal item per slot over winning players of that weapon in that pool, one player one vote, shown once three players have worn the slot. Victims' gear is what died and is not shown.</li>
-      <li><b>Shapes</b> (pools of six and more) count a party's members per role: frontline, healer, support and damage, each weapon read through the role the planner seats it in. An exact comp rarely repeats past five members, so the shape and the role-by-role roster are the reads that recur; the ranges are the middle half of the winning parties.</li>
-      <li><b>Pools</b> follow the game's matchmaking: solo, 2 to 3, 4 to 5, 6 to 7 and 15 to 20. Small samples are marked; a pool with under 40 parties is a glimpse, not a meta.</li>
-      <li>This page is a killboard surface. The planner's recommendations do not read it.</li>
-    </ul>
-  </aside>
+  </section>
+  <section class="portal-console" id="portal-console" aria-labelledby="portal-console-title" data-reveal>
+    <div class="report-head">
+      <div><div class="report-kicker">Portal meta report</div><h2 id="portal-console-title">Winning parties by matchmaking pool.</h2><p class="portal-meta" id="portal-meta-copy">All weapons across every matchmaking pool.</p></div>
+      <div class="report-context"><span class="pool-chip" id="pool-chip">Solo pool</span><div class="portal-live" id="portal-live" aria-live="polite"><i aria-hidden="true"></i><span>All weapons shown</span></div></div>
+    </div>
+    <div class="report-controls">
+      <div class="tabs portal-tabs" id="tabs" role="tablist" aria-label="Matchmaking pools"></div>
+      <!-- a player's weapon narrows every pool to what it is in -->
+      <div class="wfilter" id="wfilter">
+        <label class="wf-label" for="wfilter-in">Narrow by weapon</label>
+        <div class="wf-box">
+          <input class="wf-in" id="wfilter-in" type="search" autocomplete="off" spellcheck="false" placeholder="Search a weapon by name" aria-describedby="wfilter-hint" aria-autocomplete="list" aria-controls="wfilter-list">
+          <button class="wf-clear" id="wfilter-clear" type="button" aria-label="clear the weapon filter" hidden>×</button>
+          <ul class="wf-list" id="wfilter-list" role="listbox" hidden></ul>
+        </div>
+        <span class="wf-hint" id="wfilter-hint">Select one weapon to compare its rank, winning build, and recurring lineups within the active pool.</span>
+      </div>
+    </div>
+    <div class="report-body" id="pool"></div>
+  </section>
+  <details class="note method-note"><summary>How these portal stats are counted</summary><div class="method-body"><ul>
+    <li><b>Who counts.</b> A killer party at kill time, one vote per party per battle. Solo is the lone killer. The kill is tagged as a portal kill when the victim carried an Ancient Bone, an item that only exists inside the Ancient Lands, so a kill whose victim had not yet earned one is not counted: the numbers undercount, they never invent.</li>
+    <li><b>Dominant</b> means the party took no deaths in that battle. <b>K/D</b> is the party's kills over its deaths, summed over its members. Prevalence is how often a weapon or comp appears among winners; it is not a measure of strength on its own.</li>
+    <li><b>Builds</b> are the modal item per slot over winning players of that weapon in that pool, one player one vote, shown once three players have worn the slot. Victims' gear is what died and is not shown.</li>
+    <li><b>Shapes</b> (pools of six and more) count a party's members per role: frontline, healer, support and damage, each weapon read through the role the planner seats it in. An exact comp rarely repeats past five members, so the shape and the role-by-role roster are the reads that recur; the ranges are the middle half of the winning parties.</li>
+    <li><b>Pools</b> follow the game's matchmaking: solo, 2 to 3, 4 to 5, 6 to 7 and 15 to 20. Small samples are marked; a pool with under 40 parties is a glimpse, not a meta.</li>
+    <li>This page is a killboard surface. The planner's recommendations do not read it.</li>
+  </ul></div></details>
 </main>
 <!-- PORTAL_STATS -->
 <script>
@@ -192,13 +239,19 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
   const ORDER = ["solo", "trio", "five", "seven", "large"];
   const chips = document.getElementById("chips");
   chips.innerHTML = [
-    `<span class="chip">portal battles <b>${S.battles}</b></span>`,
-    `<span class="chip">killer parties <b>${S.parties}</b></span>`,
-    `<span class="chip">window <b>${esc((S.window.first || "?").replace("T", " "))}</b> to <b>${esc((S.window.last || "?").replace("T", " "))}</b> UTC</span>`,
-    `<span class="chip">as of the last fold <b>${esc(S.generated_at.replace("T", " "))}</b></span>`
+    `<article class="report-stat numeric"><span>Portal battles</span><b>${S.battles}</b></article>`,
+    `<article class="report-stat numeric"><span>Killer parties</span><b>${S.parties}</b></article>`,
+    `<article class="report-stat"><span>Observation window</span><b>${esc((S.window.first || "?").replace("T", " "))} → ${esc((S.window.last || "?").replace("T", " "))} UTC</b></article>`,
+    `<article class="report-stat"><span>Last refresh</span><b>${esc(S.generated_at.replace("T", " "))}</b></article>`
   ].join("");
   const tabs = document.getElementById("tabs");
   const host = document.getElementById("pool");
+  const portalConsole = document.getElementById("portal-console");
+  const portalMeta = document.getElementById("portal-meta-copy");
+  const portalLive = document.getElementById("portal-live");
+  const portalLiveText = portalLive ? portalLive.querySelector("span") : null;
+  const poolChip = document.getElementById("pool-chip");
+  const reducedMotion = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   /* ---- the weapon filter ----
      every weapon this page carries, over every pool: the weapons table,
      the comps, the shapes and the profile; per pool, how the weapon stands */
@@ -234,7 +287,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       const p = S.pools[k], w = weaponOf(WEAPON), stand = w ? w.pools[k] : undefined;
       const tw = !w ? "" : stand === undefined ? `<small class="tw none">${esc(w.name)}: not seen</small>`
         : stand === true ? `<small class="tw">${esc(w.name)}: fielded</small>` : `<small class="tw">${esc(w.name)}: ${stand} ${stand === 1 ? "party" : "parties"}</small>`;
-      return `<button class="tab" role="tab" data-pool="${k}" aria-selected="${k === POOL}">${esc(p.label)}<small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small>${tw}</button>`;
+      return `<button class="tab" role="tab" data-pool="${k}" aria-selected="${k === POOL}" tabindex="${k === POOL ? 0 : -1}"><b>${esc(p.label)}</b><small>${p.parties} parties · ${p.sizes[0] === p.sizes[1] ? p.sizes[0] : p.sizes[0] + "–" + p.sizes[1]} players</small>${tw}</button>`;
     }).join("");
   }
   const gearIcon = id => icon(/^T\d+_/.test(id) ? id : "T6_" + id, 68);
@@ -333,7 +386,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       const range = r.p25 === r.p75 ? `${r.p50}` : `${r.p25}–${r.p75}`;
       return `<div class="role-row"><div class="role-n"><b>${range}</b><span>${esc(label)}</span><small title="over the ${pr.parties} parties: the middle half of the count, its median, and the extremes">median ${r.p50} · ${r.min} to ${r.max}</small></div><div class="comp">${roleChips(pr.weapons[k], pr.parties) || '<span class="v">none fielded</span>'}</div></div>`;
     }).join("");
-    return `<section class="block" id="profile"><h3>A winning roster, role by role (${pr.parties} parties with every weapon known)</h3>
+    return `<section class="block" id="profile"><div class="block-head"><h3>Winning roster by role</h3><p class="section-note">${pr.parties} parties with every weapon known. The ranges show the middle half of winning parties.</p></div>
       ${profileRead(p)}<div class="profile">${rows}</div>
       <p class="fine">The count is the middle half of the winning parties; beside it, the weapons that fill the role, with the share of parties fielding one. ${pr.shapes_distinct} distinct role shapes across ${pr.parties} parties${pr.shapes_distinct > pr.parties / 2 ? ": at this size no single shape dominates, so read the ranges" : ""}.</p></section>`;
   }
@@ -350,7 +403,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       ordered(shapes, SORT.shapes).map(({r: s}, n) => { const i = p.shapes.indexOf(s); return `<tr class="row" data-s="${i}" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`; }).join("")
     }</tbody></table></div>` : WEAPON && p.shapes.length ? `<div class="empty">None of the ${p.shapes.length} shapes seen ${S.thresholds.comp_sightings}+ times fielded ${esc(wname())}.</div>`
       : `<div class="empty">No role shape has been seen ${S.thresholds.comp_sightings} times yet.</div>`;
-    return `<section class="block" id="shapes"><h3>Shapes that won${WEAPON ? ` with ${esc(wname())}` : ""} (members per role, seen ${S.thresholds.comp_sightings}+ times; click a row for the weapons in each role)</h3>${body}</section>`;
+    return `<section class="block" id="shapes"><div class="block-head"><h3>Recurring role shapes${WEAPON ? ` with ${esc(wname())}` : ""}</h3><p class="section-note">Seen ${S.thresholds.comp_sightings}+ times. Open a row to see which weapons filled each role.</p></div>${body}</section>`;
   }
   function compsTable(p){
     if (p.sizes[0] < 2) return "";
@@ -361,7 +414,7 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
       : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
     const exact = p.shapes ? "Exact comps that won" : "Comps that won";
     const known = p.shapes ? "the same weapons copy for copy" : "every member's weapon known";
-    return `<section class="block" id="comps"><h3>${exact}${WEAPON ? ` with ${esc(wname())}` : ""} (${known}, seen ${S.thresholds.comp_sightings}+ times; click a row for what each member wore)</h3>${body}${
+    return `<section class="block" id="comps"><div class="block-head"><h3>${exact}${WEAPON ? ` with ${esc(wname())}` : ""}</h3><p class="section-note">${known}, seen ${S.thresholds.comp_sightings}+ times. Open a row to inspect each member's build.</p></div>${body}${
       p.shapes && p.profile && p.comps.length < 10 ? `<p class="fine">An exact comp rarely repeats at this size: ${p.profile.parties} parties with every weapon known field almost as many different rosters. The roles and shapes above are the read that recurs.</p>` : ""}</section>`;
   }
   /* ---- the pool: one view at a time, weapons or comps ---- */
@@ -371,12 +424,17 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     const hasComps = p.sizes[0] >= 2;
     VIEW = hasComps && (view || VIEW) === "comps" ? "comps" : "weapons";
     renderTabs();
+    if (poolChip) poolChip.textContent = `${p.label} pool`;
+    if (portalMeta) portalMeta.textContent = `${p.label} contains ${p.parties} winning parties in this fold. ${VIEW === "weapons" ? "Ranked by weapon." : "Showing recurring lineups."}`;
+    if (portalLiveText) portalLiveText.textContent = WEAPON ? `${wname()} filter active` : "All weapons shown";
+    if (portalLive) { portalLive.classList.remove("is-pulsing"); void portalLive.offsetWidth; portalLive.classList.add("is-pulsing"); }
     const compsCount = !hasComps ? "" : p.shapes
       ? (WEAPON ? `${p.shapes.filter(inShape).length} of ${p.shapes.length} shapes` : `${p.shapes.length} shapes`)
       : (WEAPON ? `${p.comps.filter(inComp).length} of ${p.comps.length}` : `${p.comps.length}`);
     host.innerHTML = `<div class="pool-head"><h2>${esc(p.label)}</h2><span class="sub">${p.parties} killer parties · ${p.scored} with a scored battle · ${pct(p.dominant_share)} dominant${p.parties && p.parties < 40 ? " · small sample" : ""}</span>
-      ${hasComps ? `<div class="views" role="tablist"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapons that won</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Comps that won <small>${compsCount}</small></button></div>` : ""}</div>
-      ${VIEW === "comps" ? profileHtml(p) + shapesTable(p) + compsTable(p) : `<section class="block"><h3>Weapons that won (click a row for the build)</h3>${weaponsTable(p)}</section>`}`;
+      ${hasComps ? `<div class="views" role="tablist" aria-label="Portal report view"><button class="view" role="tab" data-view="weapons" aria-selected="${VIEW === "weapons"}">Weapon rankings</button><button class="view" role="tab" data-view="comps" aria-selected="${VIEW === "comps"}">Winning lineups <small>${compsCount}</small></button></div>` : ""}</div>
+      ${VIEW === "comps" ? profileHtml(p) + shapesTable(p) + compsTable(p) : `<section class="block"><div class="block-head"><h3>Weapon rankings</h3><p class="section-note">Open a row to inspect the winning build seen on that weapon.</p></div>${weaponsTable(p)}</section>`}`;
+    if (host.classList) { host.classList.remove("is-entering"); void host.offsetWidth; host.classList.add("is-entering"); }
     try { localStorage.setItem("portal-pool", k); localStorage.setItem("portal-view", VIEW); } catch (e) {}
     syncHash();
   }
@@ -387,6 +445,17 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
     if (location.hash !== next) history.replaceState(null, "", next);
   }
   tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
+  tabs.addEventListener("keydown", e => {
+    if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+    e.preventDefault();
+    const at = ORDER.indexOf(POOL);
+    const forward = e.key === "ArrowDown" || e.key === "ArrowRight";
+    let next = forward ? (at + 1) % ORDER.length : (at + ORDER.length - 1) % ORDER.length;
+    if (e.key === "Home") next = 0;
+    if (e.key === "End") next = ORDER.length - 1;
+    show(ORDER[next]);
+    requestAnimationFrame(() => tabs.querySelector(`[data-pool="${ORDER[next]}"]`)?.focus());
+  });
   host.addEventListener("click", e => {
     const v = e.target.closest(".view");
     if (v){ show(POOL, v.dataset.view); return; }
@@ -490,6 +559,8 @@ tr.row[aria-expanded="true"] td:nth-child(2){background:#1F1C1A}}
   let hw = ""; try { hw = decodeURIComponent(hashWeapon || ""); } catch (e) { /* a malformed address names no weapon */ }
   if (hw && weaponOf(hw)) startWeapon = hw;
   POOL = start; VIEW = startView;
+  if (portalConsole && typeof window !== "undefined" && "IntersectionObserver" in window) { const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }); }, {threshold:.1}); observer.observe(portalConsole); }
+  else if (portalConsole) portalConsole.classList.add("is-visible");
   setWeapon(startWeapon);
 })();
 </script>

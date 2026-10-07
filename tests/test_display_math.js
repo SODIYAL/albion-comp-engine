@@ -20,6 +20,7 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const CompEngine = require(path.join(__dirname, "..", "engine", "app_scoring.js"));
 
 const SRC = fs.readFileSync(
   path.join(__dirname, "..", "dashboard", "_app.js"), "utf8");
@@ -399,21 +400,38 @@ function setUsage(baskets) {
     [/function ringPath\([\s\S]*?\n\}\nfunction ringTick\([\s\S]*?\n\}/, "ringPath/ringTick"],
     [/function renderGroups\(\)\{\n[\s\S]*?\n\}/, "renderGroups"],
   ]) vm.runInContext(grab(re, what), ctx);
-  /* engine reads stubbed from CASE: reqs {cap: {target, soft_cap, min,
-     weight}}, have {cap: n}, mult {cap: style multiplier}, src {cap: source} */
+  /* Engine reads come from CASE. Most display-only cases use compact stubs:
+     reqs {cap: {target, soft_cap, min, weight}}, have {cap: n},
+     mult {cap: style multiplier}, src {cap: source}. Integration cases pass
+     a real CompEngine plus party/combo inputs so this same extracted renderer
+     crosses the production scoring-to-dashboard boundary. */
   vm.runInContext(`
     var party = [];
     var DOM = {};
     function $(id){ return DOM[id] || (DOM[id] = {innerHTML: ""}); }
-    function REQS(){ return CASE.reqs; }
-    function supply(){ return CASE.have; }
-    function supplyFloor(){ return CASE.have; }
-    function target(c){ return CASE.reqs[c].target; }
-    function softCap(c){ return CASE.reqs[c].soft_cap; }
-    function targetMin(c){ return CASE.reqs[c].min; }
-    function floorHit(){ return false; }
-    function targetSource(c){ return (CASE.src && CASE.src[c]) || "harvest"; }
-    var ENG = {weight: c => CASE.reqs[c].weight * ((CASE.mult && CASE.mult[c]) || 1)};
+    function REQS(){ return CASE.engine ? CASE.engine.reqs : CASE.reqs; }
+    function supply(){
+      return CASE.engine
+        ? CASE.engine.effectiveSupply(CASE.party, CASE.combos, CASE.gears)
+        : CASE.have;
+    }
+    function supplyFloor(){
+      return CASE.engine
+        ? CASE.engine.effectiveSupply(CASE.party, CASE.combos)
+        : CASE.have;
+    }
+    function target(c){ return CASE.engine ? CASE.engine.target(c) : CASE.reqs[c].target; }
+    function softCap(c){ return CASE.engine ? CASE.engine.softCap(c) : CASE.reqs[c].soft_cap; }
+    function targetMin(c){ return CASE.engine ? CASE.engine.targetMin(c) : CASE.reqs[c].min; }
+    function floorHit(c, have){ return CASE.engine ? CASE.engine.floorArmed(c, have) : false; }
+    function targetSource(c){
+      return CASE.engine
+        ? CASE.engine.targetSource(c)
+        : (CASE.src && CASE.src[c]) || "harvest";
+    }
+    var ENG = {weight: c => CASE.engine
+      ? CASE.engine.weight(c)
+      : CASE.reqs[c].weight * ((CASE.mult && CASE.mult[c]) || 1)};
   `, ctx);
   const render = c => {
     ctx.CASE = c;
@@ -451,6 +469,29 @@ function setUsage(baskets) {
   const echo = groups.flatMap(g => g.rows.filter(r => r.name.toLowerCase() === g.heading.toLowerCase())
     .map(r => `${r.cap} "${r.name}" under ${g.heading}`));
   check("supply board: no row repeats its group heading", echo.length === 0, echo.join(", "));
+
+  /* End-to-end supply regression: the SAME party and explicit spell combos
+     cross the real JS engine and the real dashboard renderer. Clap expects a
+     larger AoE clump than brawl, which changes both effective burst-AoE
+     supply and the style-fitted typical shown to the player. Pin the visible
+     values: unit-only engine tests or stub-only renderer tests cannot catch a
+     broken handoff between these layers. */
+  const fixedParty = [
+    "2H_HAMMER_AVALON", "2H_LONGBOW", "2H_ICECRYSTAL_UNDEAD",
+  ];
+  const fixedCombos = [0, 0, 0];
+  const styleRow = style => {
+    const engine = new CompEngine(DATASET, "castle_outpost", 20, style);
+    const html = render({engine, party: fixedParty, combos: fixedCombos});
+    return rowsOf(html).find(r => r.cap === "burst_aoe");
+  };
+  const brawlAoe = styleRow("brawl");
+  const clapAoe = styleRow("clap");
+  check("supply board: fixed roster renders style-specific brawl/clap AoE supply and typical",
+        brawlAoe && clapAoe
+        && brawlAoe.val === "5.3 / 20.4"
+        && clapAoe.val === "6.3 / 26.4",
+        `brawl=${JSON.stringify(brawlAoe)} clap=${JSON.stringify(clapAoe)}`);
 
   const kpM = DL.match(/const KP_LABEL = \{pierce: "([^"]+)"/);
   if (!kpM) throw new Error("could not extract KP_LABEL.pierce from _decision_layer.js");

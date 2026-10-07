@@ -34,7 +34,7 @@ scripts and closes it so development servers can safely inject reload code.
 
 Usage:  py -3 dashboard/build.py
 """
-import base64, json, os, sys
+import base64, json, os, shutil, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))   # dashboard/
 ROOT = os.path.join(HERE, os.pardir)
@@ -77,6 +77,9 @@ BRAND_LOGO_FILE = os.path.join("assets", "brand", "comp-zaddy-logo.png")
 # the 1254px master, so each page carries tens of kilobytes instead of 1.5 MB
 # per reference.
 BRAND_LOGO_INLINE = os.path.join("assets", "brand", "comp-zaddy-logo-160.png")
+# The page backgrounds (assets/artwork/README.md): served as files beside the
+# pages, never inlined.
+PUBLIC_ART_FILES = ("welcome-battle-v2.jpg", "portal-landscape-v3.png")
 
 # Accounts: the Supabase library, then _supabase.js (the client), then
 # _auth.js (helpers + account UI), each in its OWN <script> AFTER the
@@ -518,7 +521,8 @@ def main():
             for key, value in data.get("styles", {}).items()
         ],
         "weapons": [
-            {"id": key, "name": value.get("display_name", key)}
+            {"id": key, "name": value.get("display_name", key),
+             "tree": trees.get(key, "other"), "icon": icons.get(key, "")}
             for key, value in sorted(data["weapons"].items(),
                                      key=lambda item: item[1].get("display_name", item[0]))
         ],
@@ -546,6 +550,17 @@ def main():
     # same complete standards-mode document as the dashboard build.
     docs = os.path.join(ROOT, "docs")
     os.makedirs(docs, exist_ok=True)
+    # The large decorative artwork stays as ordinary files instead of being
+    # inlined into already-heavy pages. Keep the authored dashboard assets and
+    # the GitHub Pages copy in step on every build.
+    art_src = os.path.join(DASH, "assets", "artwork")
+    art_docs = os.path.join(docs, "assets", "artwork")
+    os.makedirs(art_docs, exist_ok=True)
+    for filename in PUBLIC_ART_FILES:
+        source = os.path.join(art_src, filename)
+        if not os.path.exists(source):
+            sys.exit(f"public artwork missing: {source}")
+        shutil.copy2(source, os.path.join(art_docs, filename))
     with open(os.path.join(docs, "index.html"), "w", encoding="utf-8",
               newline="\n") as f:
         f.write(out)

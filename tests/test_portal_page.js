@@ -115,7 +115,7 @@ const NAMES = ["ALPHA", "BRAVO", "CHARLIE", "DELTA"];
 let p = boot();
 check("PP1 the page opens on the solo pool, weapons ordered by parties, with no view switch (a solo has no comp)",
       order(p.html(), NAMES) === "ALPHA BRAVO CHARLIE DELTA" && !p.html().includes('class="views"')
-      && p.html().includes("Weapons that won"), order(p.html(), NAMES));
+      && p.html().includes("Weapon rankings"), order(p.html(), NAMES));
 check("PP2 the chips state the window and the tabs every pool with its size range",
       p.els.chips.innerHTML.includes("2026-10-03 06:34") && p.els.tabs.innerHTML.includes("15–20 players")
       && (p.els.tabs.innerHTML.match(/class="tab"/g) || []).length === 5);
@@ -139,7 +139,7 @@ check("PP4 a weapon under five scored parties is marked thin; a slot card carrie
 /* ---- the view switch ---- */
 p.tab("five");
 check("PP5 a pool of two and more offers the view switch and remembers the pool",
-      p.html().includes('data-view="comps"') && p.html().includes("Weapons that won") && p.store["portal-pool"] === "five");
+      p.html().includes('data-view="comps"') && p.html().includes("Weapon rankings") && p.store["portal-pool"] === "five");
 p.view("comps");
 check("PP5b the comps view replaces the weapons table, ordered by sightings, and is remembered",
       p.html().includes('id="comps"') && !p.html().includes("click a row for the build")
@@ -150,7 +150,7 @@ check("PP5d a pool under six shows no shapes and calls its comps plain comps",
       !p.html().includes('id="shapes"') && !p.html().includes('id="profile"') && p.html().includes("<h3>Comps that won"));
 p.tab("solo");
 check("PP5e the solo pool falls back to weapons whatever view was open",
-      p.html().includes("Weapons that won") && !p.html().includes('id="comps"'));
+      p.html().includes("Weapon rankings") && !p.html().includes('id="comps"'));
 
 /* ---- shapes and the roster profile ---- */
 p = boot("#seven/comps");
