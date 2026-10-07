@@ -44,7 +44,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 def _qrank(x):
     """Ranking key for a score: quantized to the parity tolerance (1e-9)
     so an exact or last-bit tie never falls to iteration order or the
-    toolchain's float noise (CI on Python 3.11 / Node 20 flipped a pair
+    toolchain's float noise (a Python 3.11 / Node 20 run flipped a pair
     that Python 3.14 / Node 24 kept). Every ranked list a caller
     sees sorts by (-_qrank(score), name). Mirrored as qrank() in
     app_scoring.js."""
@@ -3296,8 +3296,8 @@ class Engine:
         # parity tolerance (1e-9) first, then the weapon id. Two candidates
         # can tie EXACTLY (case 22 of the parity suite: Keeper Nature and
         # Wildstaff), and a bare score sort then hands the order to pool
-        # iteration plus whatever last-bit noise the toolchain adds -
-        # CI on Python 3.11 / Node 20 flipped a pair that Python 3.14 /
+        # iteration plus whatever last-bit noise the toolchain adds - a
+        # Python 3.11 / Node 20 run flipped a pair that Python 3.14 /
         # Node 24 kept. Mirrored in app_scoring.js recommend().
         out = sorted(out, key=lambda r: (-_qrank(r["score"]), r["weapon"]))[:top_n]
         # verdict lens on the returned rows only (the sweep stays lean):

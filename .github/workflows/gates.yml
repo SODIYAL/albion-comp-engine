@@ -17,14 +17,18 @@ jobs:
     # test_provenance rebuilds the dataset; with the build chain it outlasts
     # 30 minutes on a hosted runner, so the limit leaves room past a full run.
     timeout-minutes: 60
+    # The toolchain is the one the committed artifacts are built with
+    # (Python 3.14, Node 24): the byte-identical rebuild and the parity
+    # gate's 1e-9 tolerance see float results, and Python's sum() of floats
+    # changed its rounding at 3.12 (tests/VALIDATION.md, parity).
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
-          python-version: "3.11"
-      - uses: actions/setup-node@v4
+          python-version: "3.14"
+      - uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "24"
       - run: pip install -r requirements.txt
 
       - name: build chain
