@@ -82,8 +82,10 @@ function boot(hash, stored) {
             querySelectorAll: () => [], querySelector: () => null, focus() {}};
   };
   const els = {chips: mk(), tabs: mk(), pool: mk(), wfilter: mk(), "wfilter-in": mk(), "wfilter-clear": mk(), "wfilter-list": mk()};
+  const winH = {};
   const ctx = {
     PORTAL_STATS: STATS, console,
+    window: {addEventListener: (t, f) => { winH[t] = f; }},
     document: {getElementById: id => els[id]},
     location: {hash: hash || ""},
     localStorage: {getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; }},
@@ -104,6 +106,9 @@ function boot(hash, stored) {
     pick: id => els["wfilter-list"].h.mousedown({target: target("li[data-id]", {id}), preventDefault() {}}),
     clear: () => els["wfilter-clear"].h.click(),
     list: () => els["wfilter-list"].innerHTML,
+    key: k => els["wfilter-in"].h.keydown({key: k, preventDefault() {}}),
+    /* a pasted link, an edited address or Back */
+    goTo: h => { ctx.location.hash = h; winH.hashchange(); },
   };
 }
 /* the data rows' first cell text after the rank, in page order */
@@ -210,7 +215,7 @@ check("PP9h the comps view narrows to the comps that fielded the weapon, its chi
       && p.html().includes("Comps that won with ALPHA") && p.html().includes("<small>1 of 2</small>"), p.html());
 p = boot("#seven/comps/CHARLIE");
 check("PP9i the address opens a pool, a view and a weapon: the profile reads the weapon's seat and share; shapes without it are gone",
-      p.html().includes("<b>CHARLIE</b> fills the healer seat in <b>47%</b> of the 390 winning parties") && p.html().includes("None of the 2 shapes seen 2+ times fielded CHARLIE")
+      p.html().includes("<b>CHARLIE</b> fills the healer seat in <b>47%</b> of the 390 winning parties") && p.html().includes("None of the 2 shapes seen 2+ times lists CHARLIE among the weapons that fill its roles")
       && p.html().includes("None of the 1 comps seen 2+ times in 7v7 fielded CHARLIE") && p.els["wfilter-in"].value === "CHARLIE", p.html());
 p = boot("#seven/comps/ALPHA");
 check("PP9j a shape that fields the weapon stays, the switch counting shapes",
@@ -221,6 +226,30 @@ check("PP9k clearing the filter restores the whole page and forgets the weapon",
       p.html().includes("<b>2</b> frontline") && !("portal-weapon" in p.store) && p.els["wfilter-in"].value === "" && p.els["wfilter-clear"].hidden);
 check("PP9l a remembered weapon returns with the page; an unknown one in the address is ignored",
       boot("#solo", {"portal-weapon": "BRAVO"}).html().includes("<b>BRAVO</b> is <b>#2</b>") && !boot("#solo/weapons/NOPE").html().includes("wf-read"));
+
+/* ---- the filter box and the address after a first paint ---- */
+p = boot("#solo", {"portal-weapon": "ALPHA"});
+p.type("ALPH");
+check("PP10a a chosen weapon edited away in the box is forgotten: a reload never brings it back",
+      !("portal-weapon" in p.store) && p.els.wfilter.dataset.on === "0", p.store);
+p = boot("#solo");
+p.type("charlie");
+p.key("Enter");
+check("PP10b Enter takes the weapon whose name was typed", p.els["wfilter-in"].value === "CHARLIE" && p.els.wfilter.dataset.on === "1");
+p = boot("#solo/weapons");
+p.goTo("#seven/comps/ALPHA");
+check("PP10c a pasted link or Back shows the pool, the view and the weapon the address names",
+      /comps that won with ALPHA/i.test(p.html()) && p.html().includes("<h2>7v7</h2>") && p.els["wfilter-in"].value === "ALPHA", p.html().slice(0, 200));
+p.goTo("#five/weapons");
+check("PP10d an address without a weapon clears the filter", p.els.wfilter.dataset.on === "0" && p.html().includes("Weapon rankings"));
+check("PP10e an address naming an inherited key opens the default pool, never a broken one",
+      boot("#constructor").html().includes("Weapon rankings"));
+const trio = STATS.pools.trio;
+STATS.pools.trio = Object.assign({}, trio, {weapons: [W("BRAVO", 3, 1.0, 0.5)], weapons_total: 9});
+p = boot("#solo/weapons/ALPHA");
+check("PP10f a pool whose table is the top of more says a missing weapon is not in its top, never that it went unseen",
+      p.els.tabs.innerHTML.includes("ALPHA: not in the top 1") && p.els.tabs.innerHTML.includes('class="tw none">ALPHA: not seen'), p.els.tabs.innerHTML);
+STATS.pools.trio = trio;
 
 console.log(failed ? `\n${failed} portal-page test(s) failed` : `\nall ${passed} portal-page tests pass`);
 process.exit(failed ? 1 : 0);

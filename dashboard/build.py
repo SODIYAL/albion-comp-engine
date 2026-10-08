@@ -515,7 +515,10 @@ def main():
     welcome_config = {
         "templates": [
             {"id": key, "name": value.get("name", key),
-             "base": value.get("base_size", 7)}
+             "base": value.get("base_size", 7),
+             # a content capped at one party (Dragon Portal, Roads) never
+             # opens a second; the rest open past 20 as parties of 20
+             "max": value.get("max_size")}
             for key, value in data["templates"].items()
         ],
         "styles": [

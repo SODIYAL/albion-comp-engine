@@ -1438,6 +1438,16 @@ check(bool(_retired) and _welcome_offered == set(WEAPONS) - _retired,
       "offered retired: %s; missing: %s" % (sorted(_welcome_offered & _retired),
                                             sorted(set(WEAPONS) - _retired - _welcome_offered)))
 
+_wsrc = read("_welcome.html")
+_wcfg = (_json.loads(m_wc.group(1)) if m_wc else {}).get("templates", [])
+check(all("max" in x for x in _wcfg) and 'params.set(`n${j}`, String(Math.min(20, left)))' in _wsrc
+      and "const cap = item.max && item.max <= 20 ? item.max : 60;" in _wsrc
+      and "size.value === lastBase" in _wsrc and "const matches = all.slice(0, 30);" in _wsrc,
+      "L41b the welcome page's team link opens a team past 20 as parties of 20 (the planner caps a "
+      "party at 20 and dropped the rest to the content's suggestion) and a content capped at one "
+      "party at its cap; the size follows every content switch until set by hand; a search counts "
+      "every match")
+
 print("L42 - the party board ends in the comp's actions, one segmented bar")
 _pd = seg(SHELL, 'id="pdash"', "</aside>", "L42 party board anchors")
 _acts = seg(_pd, 'class="pdash-actions"', "</div>", "L42 action row anchors")
