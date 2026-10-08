@@ -1479,6 +1479,19 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     return sel
 
 
+_ROSTERS = {}
+
+
+def _load_rosters(path):
+    """The killer-party artifact, parsed once per build: the seven doctrine
+    passes and the carrier quotas read the same file, and none of them
+    changes it (party_link stamps a missing party index, the same one on
+    every pass)."""
+    if path not in _ROSTERS:
+        _ROSTERS[path] = rosters_io.load(path) or {}
+    return _ROSTERS[path]
+
+
 def _normalize_gear_id(v, gear):
     """Conservative raw-id -> catalog-id: exact, else a unique tier
     prefix away. Anything else stays unknown (never guessed)."""
@@ -1487,9 +1500,9 @@ def _normalize_gear_id(v, gear):
         return None
     if v in gear:
         return v
-    cands = {k for k in gear
-             for n in (4, 5, 6, 7, 8) if k == f"T{n}_{v}"}
-    return cands.pop() if len(cands) == 1 else None
+    # five lookups, never a scan of the catalogue (12 million calls a build)
+    cands = [k for k in (f"T{n}_{v}" for n in (4, 5, 6, 7, 8)) if k in gear]
+    return cands[0] if len(cands) == 1 else None
 
 
 # DOCTRINE BANDS (kit doctrine per size band): the group
@@ -1586,7 +1599,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     cell_voters = {}   # style cells: weapon -> distinct players in the cell
     kb_path = rosters_io.path(OUT)
     if os.path.exists(kb_path):
-        kb_doc = rosters_io.load(kb_path) or {}
+        kb_doc = _load_rosters(kb_path)
         # PARTY-SIZE FLOOR (the Grailseeker case: a ganking build is not
         # a ZvZ build): only builds from KILLER
         # PARTIES of >= KB_MIN_PARTY members are group doctrine — the
@@ -2142,7 +2155,7 @@ def mine_carrier_quotas(gear, effect_map):
     kb_path = rosters_io.path(OUT)
     if not os.path.exists(kb_path) or not effect_map:
         return {}
-    doc = rosters_io.load(kb_path) or {}
+    doc = _load_rosters(kb_path)
     size_of = {b.get("battle"): (b.get("total_players") or 0)
                for b in (doc.get("battles") or [])}
     buckets = {"20-59": {"builds": 0, "wearers": {}},

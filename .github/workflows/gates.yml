@@ -14,8 +14,9 @@ on:
 jobs:
   gates:
     runs-on: ubuntu-latest
-    # test_provenance rebuilds the dataset; with the build chain it outlasts
-    # 30 minutes on a hosted runner, so the limit leaves room past a full run.
+    # test_provenance rebuilds the dataset three times beside the build
+    # chain's build, and hosted runners differ in speed (the same commit's
+    # build chain varies by up to 1.7x): the limit leaves room for the slowest.
     timeout-minutes: 60
     # The toolchain is the one the committed artifacts are built with
     # (Python 3.14, Node 24): the byte-identical rebuild and the parity

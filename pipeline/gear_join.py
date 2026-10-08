@@ -39,9 +39,9 @@ def normalize_gear_id(v, gear):
         return None
     if v in gear:
         return v
-    cands = {k for k in gear
-             for n in (4, 5, 6, 7, 8) if k == f"T{n}_{v}"}
-    return cands.pop() if len(cands) == 1 else None
+    # five lookups, never a scan of the catalogue
+    cands = [k for k in (f"T{n}_{v}" for n in (4, 5, 6, 7, 8)) if k in gear]
+    return cands[0] if len(cands) == 1 else None
 
 
 def load_builds_flat(root):
