@@ -42,6 +42,10 @@ const HARD_CAP = 20;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"];
 
 const PLAN = () => Math.max(PLANNED, party.length);
+/* at the party cap an add control is greyed and says why (the click used
+   to do nothing) */
+const partyIsFull = () => party.length >= HARD_CAP;
+const partyFullTitle = () => `Party ${PARTY_I + 1} is full: ${HARD_CAP} is the most one party seats`;
 const sizePrompt = () => tpl().size_prompt || null;
 const needSize = () => !!sizePrompt() && ASK_SIZE;
 const pickSize = () => Math.min(Math.max(party.length + 1, 1), HARD_CAP);
@@ -268,7 +272,9 @@ function sortPartyByRole(){
                    filler: remap(FORGE_NOTE.filler),
                    held: remap(FORGE_NOTE.held),
                    unchanged: FORGE_NOTE.unchanged,
-                   exhausted: FORGE_NOTE.exhausted };
+                   exhausted: FORGE_NOTE.exhausted,
+                   askSize: FORGE_NOTE.askSize,
+                   allLocked: FORGE_NOTE.allLocked };
   }
 }
 const floorHit = (cap, have) => ENG.floorArmed(cap, have);
@@ -829,8 +835,17 @@ function renderSetup(){
   $("size-input").value = PLANNED;
   const presets = (sizePrompt() ? sizePrompt().sizes.slice()
     : [...new Set(validatedSizes().concat([partyBase(PARTY_I)]))].sort((a,b) => a-b)).filter(n => n <= HARD_CAP);
+  /* a step that cannot move the plan is greyed and says why (it used to
+     click and do nothing): the plan follows the roster, so it never goes
+     below the members on the board, and a party seats HARD_CAP */
+  const belowRoster = `the plan cannot go below the ${party.length} in party ${PARTY_I + 1}: remove a member first`;
   $("size-presets").innerHTML = presets.map(n =>
-    `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
+    `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}"${n < party.length ? ` disabled title="${esc(belowRoster)}"` : ""}>${n}</button>`).join("");
+  const minus = $("size-minus"), plus = $("size-plus");
+  minus.disabled = PLANNED <= Math.max(2, party.length);
+  minus.title = !minus.disabled ? "one fewer" : party.length > 2 ? belowRoster : "2 is the smallest plan";
+  plus.disabled = PLANNED >= HARD_CAP;
+  plus.title = plus.disabled ? `${HARD_CAP} is the most one party seats` : "one more";
   /* a later party reads its own share of the starting point (partyBase) */
   const before = PARTY_I === 1 ? "party 1" : `parties 1 to ${PARTY_I}`;
   $("size-hint").textContent = (party.length
@@ -1331,7 +1346,7 @@ function renderPickHits(){
   if (!box || !pop || pop.hidden) return;
   const keys = filteredWeapons().slice(0, 40);
   box.innerHTML = keys.length
-    ? keys.map(w => `<button class="wf-hit" data-add="${w}">${icon(w, 26)}<span>${nameOf(w)}</span></button>`).join("")
+    ? keys.map(w => `<button class="wf-hit" data-add="${w}"${partyIsFull() ? ` disabled title="${esc(partyFullTitle())}"` : ""}>${icon(w, 26)}<span>${nameOf(w)}</span></button>`).join("")
     : `<div class="wf-hit-none">no weapon matches that</div>`;
 }
 /* an active query rides the button - a narrowed wheel always shows why */
@@ -1920,7 +1935,8 @@ function renderWeaknesses(){
      and priority is carried by order alone — no rank numerals, no keys */
   const row = (x, i, cls) => {
     const picks = capSuppliers(x.cap).map(w =>
-      `<button class="weak-add" data-add="${w}" title="Add ${esc(DATASET.weapons[w].display_name)} — ${esc(capLabel(x.cap))} ${DATASET.weapons[w].capabilities[x.cap]}/7">${icon(w, 40)}</button>`).join("");
+      `<button class="weak-add" data-add="${w}"${partyIsFull() ? ` disabled title="${esc(partyFullTitle())}"`
+        : ` title="Add ${esc(DATASET.weapons[w].display_name)} — ${esc(capLabel(x.cap))} ${DATASET.weapons[w].capabilities[x.cap]}/7"`}>${icon(w, 40)}</button>`).join("");
     return `<div class="weak ${cls}">
       <span class="weak-picks">${picks}</span>
       <span class="weak-main">
@@ -1961,6 +1977,12 @@ function renderWarning(){
     if (FORGE_NOTE.exhausted)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
         <span class="b"><b>No further alternative.</b> Every comp the search reaches under these locks has been shown (${AVOID.length} so far) — the roster stays as it is. Lock a different member, change a pick, or change the style or size to open new ground.</span></div>`;
+    if (FORGE_NOTE.askSize)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Choose a size first.</b> ${esc(tpl().name)} asks for its size before it forges: pick one of the sizes in the forge slot, then refresh again.</span></div>`;
+    if (FORGE_NOTE.allLocked)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Nothing to refresh.</b> Every slot is locked and the plan is full, so the roster stays as it is. Unlock a slot, or raise the planned size, to let the forge rebuild.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
         <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — structural minimums fitted from real comps, which the capability score alone does not see.</span></div>`;
@@ -2240,7 +2262,7 @@ function familiesHtml(withNote){
       <span class="fam-anchor">${f.anchor.map(w =>
         `<button class="nb-w${f.mine.includes(w) ? " match" : ""}" data-detail="${w}" title="${esc(nameOf(w))} — family anchor">${icon(w, 26)}</button>`).join("")}</span>
       <span class="fam-meta">${f.cohorts} parties · ${f.orgs} orgs · ${f.battles} battles · ${f.lift}× lift${f.anchored ? ' · <b class="fam-yours">anchor in your roster</b>' : ""}</span>
-      ${f.anchored ? "" : `<button class="fam-load" data-family-load="${f.anchor.join(",")}" title="add this core's anchor pair to the comp as manual picks — the engine scores them like any manual choice, and the forge can complete the rest">add core</button>`}
+      ${f.anchored ? "" : `<button class="fam-load" data-family-load="${f.anchor.join(",")}"${partyIsFull() ? ` disabled title="${esc(partyFullTitle())}"` : ` title="add this core's anchor pair to the comp as manual picks — the engine scores them like any manual choice, and the forge can complete the rest"`}>add core</button>`}
       ${(f.cast || []).length ? `<span class="fam-cast"><i>with</i>${f.cast.map(c =>
         `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — fielded with this core in ${Math.round(100 * c.share)}% of its parties">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
     </div>`).join("")}</div>${note}</div>`;
@@ -3079,11 +3101,25 @@ function lockSignature(locked, goal){
   return JSON.stringify([CONTENT, STYLE, goal, locked.slice().sort()]);
 }
 function refreshUnlocked(holdIndex){
-  if (needSize()) return;   /* the size ask is open: nothing forges until it is answered */
+  /* the size ask is open: nothing forges until it is answered, and the
+     note says so (the press used to do nothing) */
+  if (needSize()){
+    FORGE_NOTE = { feasible: true, filler: [], held: [], askSize: true };
+    render(); if (PDASH_FLY_I !== null) refreshPdashFly();
+    return;
+  }
   if (holdIndex !== null && holdIndex !== undefined && party[holdIndex] !== undefined)
     PROV[holdIndex] = "l";
   const goal = Math.min(PLAN(), HARD_CAP);
   const keep = party.map((_, i) => i).filter(i => PROV[i] === "l");
+  /* every slot locked and the plan full: nothing is left to rebuild, and
+     the note says so (the press used to return the same roster unsaid) */
+  if (keep.length >= goal && keep.length === party.length){
+    FORGE_NOTE = { feasible: true, filler: [], held: [], allLocked: true };
+    REPLACE_OPEN = null; REPLACE_OPTS = [];
+    render(); if (PDASH_FLY_I !== null) refreshPdashFly();
+    return;
+  }
   const locked = keep.map(i => party[i]);
   const lockedCombos = keep.map(i => comboAt(i));
   const lockedLoadouts = keep.map(i => LOADOUT[i]);

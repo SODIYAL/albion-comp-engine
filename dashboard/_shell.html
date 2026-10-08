@@ -198,6 +198,9 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   border-color:var(--brass); color:#1A1206; font-weight:700;
   box-shadow:0 0 14px -4px rgba(255,201,58,.55);
 }
+/* a step that cannot move the plan is greyed; its title says why */
+.size-btn:disabled{opacity:.4; cursor:not-allowed}
+.size-btn:disabled:hover{border-color:var(--rule-2); color:var(--ink-2)}
 .size-input{
   font-family:var(--mono); font-size:14px; width:58px; height:32px; text-align:center;
   background:var(--sunk); color:var(--ink); border:1px solid var(--rule-2); border-radius:8px;
@@ -1299,6 +1302,11 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .weak-add:hover, .weak-add:focus-visible{border-color:var(--brass); transform:translateY(-1px); outline:none}
 .weak-add .icon{border-radius:8px; display:block}
+/* at the party cap an add control is greyed; its title says why */
+.weak-add:disabled, .fam-load:disabled, .wf-hit:disabled{opacity:.45; cursor:not-allowed; transform:none}
+.weak-add:disabled:hover{border-color:var(--rule)}
+.fam-load:disabled:hover{border-color:var(--rule-2); color:var(--ink-2)}
+.wf-hit:disabled:hover{background:transparent; color:var(--ink-2)}
 
 /* ---------- recommendation ---------- */
 .rec{

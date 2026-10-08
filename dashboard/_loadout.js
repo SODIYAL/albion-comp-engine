@@ -92,6 +92,11 @@ function loItems(slot){
    upstream patch inserts a helm — real keys in the dictionary keep old links
    correct. Separators are chosen to avoid `_`, which appears inside keys. */
 const LO_SEP_MEMBER = "!", LO_SEP_FIELD = ".", LO_UNSET = "-";
+/* a member's engine mark (_eng: the kit is the engine's scored default,
+   not a fielded build) rides as an eleventh field, so a reloaded link
+   still reads it; an older link carries none, and an older reader stops
+   at the tenth field */
+const LO_ENG_MARK = "e";
 
 /* `list` / `kits` default to the open party (party, LOADOUT); the
    address also encodes the other parties of a zerg (partyEncode) */
@@ -102,6 +107,7 @@ function loadoutEncode(list = party, kits = LOADOUT){
     const L = kits[i] || {};
     const fields = LO_SLOTS.map(s => (L[s] && loGear(L[s])) ? idx(L[s]).toString(36) : LO_UNSET);
     LO_SPELLS.forEach(s => fields.push(Number.isInteger(L[s]) ? L[s].toString(36) : LO_UNSET));
+    if (L._eng && fields.some(f => f !== LO_UNSET)) fields.push(LO_ENG_MARK);
     return fields.join(LO_SEP_FIELD);
   });
   /* trailing empty members carry no information */
@@ -132,6 +138,7 @@ function loadoutDecode(str){
       const n = parseInt(v, 36);
       if (Number.isInteger(n) && n >= 0) L[s] = n;
     });
+    if (Object.keys(L).length && f[LO_SLOTS.length + LO_SPELLS.length] === LO_ENG_MARK) L._eng = 1;
     if (Object.keys(L).length) out[i] = L;
   });
   return out;
@@ -245,8 +252,9 @@ function loadoutEngineSpells(i){
     for (let j = 0; j < pool.length; j++)
       if (pool[j][0] === sid){ L[s] = j; used = true; break; }
   }
-  /* _eng is display provenance only: the permalink codec walks the fixed
-     slot lists, so the mark never enters a share link */
+  /* _eng is display provenance only, never a scoring input; the link
+     carries it (LO_ENG_MARK), so a reloaded engine kit still reads as the
+     engine's */
   if (used) L._eng = 1;
 }
 

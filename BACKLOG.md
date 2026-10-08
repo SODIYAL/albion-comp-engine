@@ -245,20 +245,6 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
-- **Audit leftovers, planner and portal** (V: 10, The planner's core
-  controls answer on every screen and keep their state honest; The Dragon
-  Portal and welcome pages say what the data holds): "refresh the rest"
-  while the size ask is open, or on a full comp whose other slots are all
-  locked, returns without a note; the weakness and core add icons stay
-  clickable at 20 and do nothing; the size "−" and smaller presets do
-  nothing once the plan equals the roster, with nothing greyed; the
-  engine-kit mark is not carried by the link, so after a reload engine
-  kits read as fielded builds; the swap lab's slot is a bare index, so
-  after an add, a removal or its own Apply it compares another member; the
-  portal's sort headings, table rows and slot cards take no keyboard
-  focus, and a pool tab rebuilt by Enter drops the focus; a slot's
-  alternatives popover in a table's last row may be cut by the table's
-  scroll box (read from the CSS, not rendered).
 - **analyze() takes no gears**: its bands and profiles read the naked
   supply; nothing on the page or in the pipeline calls it. An optional
   `gears` parameter in both ports when a caller appears.
@@ -481,8 +467,10 @@ the live roster, on the sheet) are built.
   clears their browser loses the claim; the caller removes or moves them
   (phase 6). A Discord login (phase 12) is the stronger identity when it
   comes.
-- **Enable leaked-password protection** (Supabase Auth, security advisor
-  warning). Project dashboard, no code.
+- **Enable leaked-password protection** (Supabase Auth, the security
+  advisor's one warning): the Email provider's "Prevent use of leaked
+  passwords" in the project's Auth settings, no code. A Pro plan feature
+  (Supabase's password-security guide); on the free plan the warning stands.
 - **Phase 12, integrations** (the spec): a Discord login and bot, a
   Google Sheets link, automatic roster construction (an optimization
   over the target comp, the players' declared weapons and their

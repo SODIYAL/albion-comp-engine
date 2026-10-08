@@ -251,5 +251,31 @@ check("PP10f a pool whose table is the top of more says a missing weapon is not 
       p.els.tabs.innerHTML.includes("ALPHA: not in the top 1") && p.els.tabs.innerHTML.includes('class="tw none">ALPHA: not seen'), p.els.tabs.innerHTML);
 STATS.pools.trio = trio;
 
-console.log(failed ? `\n${failed} portal-page test(s) failed` : `\nall ${passed} portal-page tests pass`);
+/* ---- the keyboard: headings, rows and slot cards take focus and answer Enter and Space ---- */
+p = boot("#solo/weapons");
+check("PP11a the headings, the rows and the slot cards take keyboard focus; a slot card says whether its field is open",
+      /<th class="num sortable" data-sort="kd" data-table="weapons" tabindex="0"/.test(p.html())
+      && /<tr class="row[^"]*" data-w="\d+" tabindex="0"/.test(p.html())
+      && /class="slot" data-alts="1" tabindex="0" role="button" aria-expanded="false"/.test(p.html()), p.html().slice(0, 400));
+/* a focused heading: the keydown reaches the page's click path on that heading */
+const heading = {dataset: {table: "weapons", sort: "kd"}};
+heading.closest = s => (s === "th.sortable, tr.row, .slot[data-alts]" || s === "th.sortable" ? heading : null);
+heading.click = () => p.els.pool.h.click({target: heading});
+let prevented = 0;
+p.els.pool.h.keydown({key: "Enter", target: heading, preventDefault() { prevented++; }});
+check("PP11b Enter on a focused heading orders the table by it, as a click does",
+      order(p.html(), NAMES) === "BRAVO DELTA ALPHA CHARLIE" && prevented === 1, order(p.html(), NAMES));
+p.els.pool.h.keydown({key: " ", target: heading, preventDefault() { prevented++; }});
+const flipped = order(p.html(), NAMES);
+p.els.pool.h.keydown({key: "x", target: heading, preventDefault() { prevented++; }});
+check("PP11c Space flips the order as a second click would; another key does nothing",
+      flipped === "ALPHA DELTA BRAVO CHARLIE" && order(p.html(), NAMES) === flipped && prevented === 2, flipped);
+check("PP11d an open field makes room in its table's scroll box and closes on Escape; a rebuilt tab, view or heading gets its focus back "
+      + "(rendered: the last row's field was cut by the box, and Enter dropped the focus to the page)",
+      SCRIPT.includes("wrap.style.paddingBottom = (over + 8) + \"px\";") && SCRIPT.includes('if (e.key === "Escape")')
+      && SCRIPT.includes("closeAlts(); open.focus();") && SRC.includes(".alts.end{left:auto;right:0}")
+      && /refocus\(tabs, `\[data-pool=/.test(SCRIPT) && /refocus\(host, `th\.sortable\[data-table=/.test(SCRIPT)
+      && /refocus\(host, `\.view\[data-view=/.test(SCRIPT));
+
+console.log(failed ?`\n${failed} portal-page test(s) failed` : `\nall ${passed} portal-page tests pass`);
 process.exit(failed ? 1 : 0);

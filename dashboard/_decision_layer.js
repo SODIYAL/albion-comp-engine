@@ -14,6 +14,10 @@
   const PLAYER_POOL = new Set();
   let POOL_QUERY = "";
   let SWAP_SLOT = 0;
+  /* the member the swap lab compares: an add or a removal re-sorts the
+     board and an Apply lands a new weapon, so the lab follows the member,
+     never the bare index (it used to compare another member after each) */
+  let SWAP_W = null;
   let TOOLS_OPEN = true;
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
@@ -584,7 +588,14 @@
     const search = poolSearchResults();
     const recs = playerPoolRecs();
     const best = recs[0] || null;
+    if (SWAP_W !== null && party[SWAP_SLOT] !== SWAP_W){
+      /* the nearest copy of the member compared; gone, the slot it held */
+      let at = -1;
+      party.forEach((w, i) => { if (w === SWAP_W && (at < 0 || Math.abs(i - SWAP_SLOT) < Math.abs(at - SWAP_SLOT))) at = i; });
+      if (at >= 0) SWAP_SLOT = at;
+    }
     if (SWAP_SLOT >= party.length) SWAP_SLOT = Math.max(0, party.length-1);
+    SWAP_W = party.length ? party[SWAP_SLOT] : null;
     const swap = party.length ? slotRanking(SWAP_SLOT) : null;
 
     const chips = keys.length ? keys.map(w =>
@@ -783,9 +794,16 @@
   });
   document.addEventListener("change", e => {
     if (e.target && e.target.id === "dl-swap-slot"){
-      SWAP_SLOT = +e.target.value; renderDecisionLayer();
+      SWAP_SLOT = +e.target.value; SWAP_W = party[SWAP_SLOT] || null; renderDecisionLayer();
     }
   });
+  /* the lab's Apply lands the new weapon in the slot compared: the lab
+     follows it (capture, so it is set before the central swap handler
+     re-sorts and re-renders) */
+  document.addEventListener("click", e => {
+    const sw = e.target.closest && e.target.closest("#dl-tools-fold [data-swapat]");
+    if (sw) SWAP_W = sw.dataset.swapto;
+  }, true);
   document.addEventListener("click", e => {
     const ch = e.target.closest && e.target.closest("[data-chain-stage]");
     if (ch){

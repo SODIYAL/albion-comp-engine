@@ -87,6 +87,9 @@ th[aria-sort]{color:var(--ink)}
 .slot[data-alts]:hover,.slot.open{border-color:var(--gold)}
 .slot.open{opacity:1}
 .alts{position:absolute;left:0;top:calc(100% + 4px);z-index:5;min-width:260px;padding:8px 10px;border:1px solid var(--gold);border-radius:10px;background:var(--surface-hi);box-shadow:0 12px 32px -12px #000;cursor:default}
+.alts.end{left:auto;right:0}
+th.sortable:focus-visible,tr.row:focus-visible{outline-offset:-2px}
+.slot[data-alts]:focus-visible{outline-offset:2px}
 .alts-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--quiet);margin-bottom:6px}
 .alt-row{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:.9em}
 .alt-row img{width:24px;height:24px;border-radius:6px;background:var(--surface-hi)}
@@ -300,7 +303,7 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     const alts = `<div class="alts" hidden><div class="alts-h">${esc(s)} — ${v.of} ${unit}</div>${rows.map(r =>
       `<div class="alt-row${r.id === v.id ? " top" : ""}">${gearIcon(r.id)}<span class="alt-n">${esc(r.name)}</span><span class="alt-v">${r.votes} · ${pct(r.share)}</span></div>`).join("")}${
       v.of > rows.reduce((a, r) => a + r.votes, 0) ? `<div class="alts-more">and ${v.of - rows.reduce((a, r) => a + r.votes, 0)} more across rarer items</div>` : ""}</div>`;
-    return `<div class="slot${cls ? " " + cls : ""}" data-alts="1" title="${esc(label || "click for everything worn in this slot")}">${gearIcon(v.id)}<div><div class="s">${esc(s)}${cls === "pool" ? " · pool" : ""}</div><div class="n">${esc(v.name)}</div><div class="v">${v.votes} of ${v.of} ${unit}${cls ? "" : " · " + pct(v.share)}</div></div>${alts}</div>`;
+    return `<div class="slot${cls ? " " + cls : ""}" data-alts="1" tabindex="0" role="button" aria-expanded="false" title="${esc(label || "click for everything worn in this slot")}">${gearIcon(v.id)}<div><div class="s">${esc(s)}${cls === "pool" ? " · pool" : ""}</div><div class="n">${esc(v.name)}</div><div class="v">${v.votes} of ${v.of} ${unit}${cls ? "" : " · " + pct(v.share)}</div></div>${alts}</div>`;
   }
   function kitHtml(b){
     const slots = SLOT_ORDER.filter(s => b[s]);
@@ -325,7 +328,7 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
   }
   const th = (table, cols) => cols.map(([key, label, cls]) => {
     const st = SORT[table], on = st.key === key;
-    return `<th class="${cls} sortable" data-sort="${key}" data-table="${table}" ${on ? `aria-sort="${st.dir < 0 ? "descending" : "ascending"}"` : ""} title="order by ${esc(label.toLowerCase())}">${label}<span class="sort-mark">${on && st.dir > 0 ? "&#9652;" : "&#9662;"}</span></th>`;
+    return `<th class="${cls} sortable" data-sort="${key}" data-table="${table}" tabindex="0" ${on ? `aria-sort="${st.dir < 0 ? "descending" : "ascending"}"` : ""} title="order by ${esc(label.toLowerCase())}">${label}<span class="sort-mark">${on && st.dir > 0 ? "&#9652;" : "&#9662;"}</span></th>`;
   }).join("");
   /* with a weapon chosen the table holds its row alone, at its rank in the
      current order, the build open; a read above says where it stands */
@@ -344,7 +347,7 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
       read = `<p class="wf-read"><b>${esc(wname())}</b> is <b>#${shown[0].n + 1}</b> of ${p.weapons.length} weapons in ${esc(p.label)} by ${esc(by)}${SORT.weapons.dir > 0 ? ", lowest first" : ""}${p.weapons_total > p.weapons.length ? ` (top ${p.weapons.length} of ${p.weapons_total} seen)` : ""}. Clear the filter for the whole table.</p>`;
     }
     return `${read}<div class="tablewrap"><table><thead><tr><th>#</th><th>Weapon</th>${th("weapons", WCOLS)}</tr></thead><tbody>${
-      shown.map(({r: w, i, n}) => `<tr class="row${hit(w.id)}" data-w="${i}" aria-expanded="${WEAPON ? "true" : "false"}" title="click for the winning build"><td>${n + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}"${WEAPON ? "" : " hidden"}><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
+      shown.map(({r: w, i, n}) => `<tr class="row${hit(w.id)}" data-w="${i}" tabindex="0" aria-expanded="${WEAPON ? "true" : "false"}" title="click for the winning build"><td>${n + 1}</td><td><span class="w">${icon(w.icon)}${esc(w.name)}</span></td><td class="num">${w.parties}</td><td class="num"><span class="bar"><i style="width:${Math.min(100, Math.round(w.share * 100))}%"></i></span>${pct(w.share)}</td><td class="num">${w.players}</td><td><span class="bar dom"><i style="width:${Math.round((w.dominant_share || 0) * 100)}%"></i></span>${pct(w.dominant_share)}${w.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(w.kd)}</td><td class="num">${num(w.median_ip)}</td></tr><tr class="detail" data-for="${i}"${WEAPON ? "" : " hidden"}><td colspan="8">${kitHtml(w.build)}</td></tr>`).join("")
     }</tbody></table></div>`;
   }
   /* a comp's members: what the winners of THIS comp wore, one vote per
@@ -401,7 +404,7 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     if (!p.shapes) return "";
     const shapes = WEAPON ? p.shapes.filter(inShape) : p.shapes;
     const body = shapes.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Shape</th>${th("shapes", SCOLS)}</tr></thead><tbody>${
-      ordered(shapes, SORT.shapes).map(({r: s}, n) => { const i = p.shapes.indexOf(s); return `<tr class="row" data-s="${i}" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`; }).join("")
+      ordered(shapes, SORT.shapes).map(({r: s}, n) => { const i = p.shapes.indexOf(s); return `<tr class="row" data-s="${i}" tabindex="0" aria-expanded="false" title="click for the weapons that fill each role in this shape"><td>${n + 1}</td><td><span class="shape">${shapeLabel(s.counts)}</span></td><td class="num">${s.size}</td><td class="num">${s.n}</td><td><span class="bar dom"><i style="width:${Math.round((s.dominant_share || 0) * 100)}%"></i></span>${pct(s.dominant_share)}${s.scored < 5 ? ' <small title="fewer than five scored parties">(thin)</small>' : ""}</td><td class="num">${num(s.kd)}</td></tr><tr class="detail" data-for-s="${i}" hidden><td colspan="6">${shapeDetail(s)}</td></tr>`; }).join("")
     }</tbody></table></div>` : WEAPON && p.shapes.length ? `<div class="empty">None of the ${p.shapes.length}${(p.shapes_total || 0) > p.shapes.length ? ` most-seen shapes (of ${p.shapes_total})` : " shapes"} seen ${S.thresholds.comp_sightings}+ times lists ${esc(wname())} among the weapons that fill its roles.</div>`
       : `<div class="empty">No role shape has been seen ${S.thresholds.comp_sightings} times yet.</div>`;
     return `<section class="block" id="shapes"><div class="block-head"><h3>Recurring role shapes${WEAPON ? ` with ${esc(wname())}` : ""}</h3><p class="section-note">Seen ${S.thresholds.comp_sightings}+ times. Open a row to see which weapons filled each role.</p></div>${body}</section>`;
@@ -410,7 +413,7 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     if (p.sizes[0] < 2) return "";
     const comps = WEAPON ? p.comps.filter(inComp) : p.comps;
     const body = comps.length ? `<div class="tablewrap"><table><thead><tr><th>#</th><th>Comp</th>${th("comps", CCOLS)}</tr></thead><tbody>${
-      ordered(comps, SORT.comps).map(({r: c}, n) => { const i = p.comps.indexOf(c); return `<tr class="row" data-c="${i}" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w${hit(w.id)}">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`; }).join("")
+      ordered(comps, SORT.comps).map(({r: c}, n) => { const i = p.comps.indexOf(c); return `<tr class="row" data-c="${i}" tabindex="0" aria-expanded="false" title="click for what each member wore"><td>${n + 1}</td><td><span class="comp">${c.weapons.map(w => `<span class="w${hit(w.id)}">${icon(w.icon, 44)}${esc(w.name)}</span>`).join("")}</span></td><td class="num">${c.n}</td><td><span class="bar dom"><i style="width:${Math.round((c.dominant_share || 0) * 100)}%"></i></span>${pct(c.dominant_share)}</td><td class="num">${num(c.kd)}</td></tr><tr class="detail" data-for-c="${i}" hidden><td colspan="5">${membersHtml(p, c)}</td></tr>`; }).join("")
     }</tbody></table></div>` : WEAPON && p.comps.length ? `<div class="empty">None of the ${p.comps.length}${(p.comps_total || 0) > p.comps.length ? ` most-seen comps (of ${p.comps_total})` : " comps"} seen ${S.thresholds.comp_sightings}+ times in ${esc(p.label)} fielded ${esc(wname())}.</div>`
       : `<div class="empty">No comp of this size has been seen ${S.thresholds.comp_sightings} times yet with every weapon known.</div>`;
     const exact = p.shapes ? "Exact comps that won" : "Comps that won";
@@ -447,7 +450,16 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     const next = "#" + [POOL, VIEW].concat(WEAPON ? [WEAPON] : []).join("/");
     if (location.hash !== next) history.replaceState(null, "", next);
   }
-  tabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t) show(t.dataset.pool); });
+  /* a control the rebuild replaces gets its focus back (Enter on a pool
+     tab, a view or a heading used to drop the focus to the page) */
+  const refocus = (root, sel) => requestAnimationFrame(() => { const el = root.querySelector(sel); if (el) el.focus(); });
+  tabs.addEventListener("click", e => {
+    const t = e.target.closest(".tab");
+    if (!t) return;
+    const had = t === document.activeElement;
+    show(t.dataset.pool);
+    if (had) refocus(tabs, `[data-pool="${t.dataset.pool}"]`);
+  });
   tabs.addEventListener("keydown", e => {
     if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(e.key)) return;
     e.preventDefault();
@@ -459,22 +471,47 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     show(ORDER[next]);
     requestAnimationFrame(() => tabs.querySelector(`[data-pool="${ORDER[next]}"]`)?.focus());
   });
+  /* an open field: a table's scroll box grows to hold it (a field under
+     the last row was cut by the box), and one past the box's right edge
+     opens leftward */
+  function openAlts(sc){
+    const alts = sc.querySelector(".alts");
+    alts.hidden = false; sc.classList.add("open"); sc.setAttribute("aria-expanded", "true");
+    const wrap = sc.closest(".tablewrap");
+    if (!wrap) return;
+    const a = alts.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    if (a.right > w.right) alts.classList.add("end");
+    const over = Math.ceil(a.bottom - w.bottom);
+    if (over > 0){ wrap.style.paddingBottom = (over + 8) + "px"; wrap.dataset.room = "1"; }
+  }
+  function closeAlts(){
+    host.querySelectorAll(".alts").forEach(a => { a.hidden = true; a.classList.remove("end"); });
+    host.querySelectorAll(".slot.open").forEach(s => { s.classList.remove("open"); s.setAttribute("aria-expanded", "false"); });
+    host.querySelectorAll(".tablewrap[data-room]").forEach(w => { w.style.paddingBottom = ""; delete w.dataset.room; });
+  }
   host.addEventListener("click", e => {
     const v = e.target.closest(".view");
-    if (v){ show(POOL, v.dataset.view); return; }
+    if (v){
+      const had = v === document.activeElement;
+      show(POOL, v.dataset.view);
+      if (had) refocus(host, `.view[data-view="${v.dataset.view}"]`);
+      return;
+    }
     const h = e.target.closest("th.sortable");
     if (h){
       const st = SORT[h.dataset.table];
       if (st.key === h.dataset.sort) st.dir = -st.dir; else { st.key = h.dataset.sort; st.dir = -1; }
-      show(POOL, VIEW); return;
+      const had = h === document.activeElement;
+      show(POOL, VIEW);
+      if (had) refocus(host, `th.sortable[data-table="${h.dataset.table}"][data-sort="${h.dataset.sort}"]`);
+      return;
     }
     const sc = e.target.closest(".slot[data-alts]");
     const wasOpen = sc && !sc.querySelector(".alts").hidden;
     /* any click closes an open field; a click on a closed slot opens its own */
-    host.querySelectorAll(".alts").forEach(a => { a.hidden = true; });
-    host.querySelectorAll(".slot.open").forEach(a => a.classList.remove("open"));
+    closeAlts();
     if (sc){
-      if (!wasOpen){ sc.querySelector(".alts").hidden = false; sc.classList.add("open"); }
+      if (!wasOpen) openAlts(sc);
       return;
     }
     const r = e.target.closest("tr.row"); if (!r) return;
@@ -486,6 +523,20 @@ main{position:relative;z-index:1;width:min(1180px,calc(100% - 40px));max-width:n
     const open = r.getAttribute("aria-expanded") === "true";
     r.setAttribute("aria-expanded", open ? "false" : "true");
     if (d) d.hidden = open;
+  });
+  /* the headings, the rows and the slot cards take the keyboard as a click
+     (they took no focus at all); Escape closes an open field */
+  host.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      const open = host.querySelector(".slot.open");
+      if (open) { e.preventDefault(); closeAlts(); open.focus(); }
+      return;
+    }
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const t = e.target.closest && e.target.closest("th.sortable, tr.row, .slot[data-alts]");
+    if (!t || t !== e.target) return;
+    e.preventDefault();
+    t.click();
   });
   /* ---- the filter's box: type to match, pick from the list, clear ---- */
   const wf = document.getElementById("wfilter"), wfIn = document.getElementById("wfilter-in"),

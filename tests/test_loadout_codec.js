@@ -283,5 +283,25 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
         `${empty} ${JSON.stringify(nums)}`);
 }
 
+/* the engine mark: an engine kit still reads as the engine's after a reload
+   (it used to come back as a fielded build); a plain kit's record is the
+   ten fields it always was, and a mark alone carries nothing */
+{
+  const head = someKey("head"), armor = someKey("armor");
+  const engine = {head, armor, q: 1, _eng: 1};
+  const fielded = {head, armor, q: 1};
+  const {enc, dec} = roundTrip(["2H_MACE", "2H_HOLYSTAFF"], [engine, fielded]);
+  const recs = enc.slice(enc.indexOf("~") + 1).split("!");
+  check("an engine kit keeps its mark through the link; a fielded build never gains one",
+        !!dec[0] && dec[0]._eng === 1 && !!dec[1] && !("_eng" in dec[1]) && dec[0].head === head && dec[1].q === 1, enc);
+  check("the mark is an eleventh field on the marked member alone: an older link reads the same ten",
+        recs[0].split(".").length === 11 && recs[0].endsWith(".e") && recs[1].split(".").length === 10, enc);
+  const {enc: bare} = roundTrip(["2H_MACE"], [{_eng: 1}]);
+  check("a mark with no piece and no spell writes nothing", bare === "", bare);
+  ctx.__old = enc.replace(/\.e(?=!|$)/g, "");
+  const old = vm.runInContext("loadoutDecode(__old)", ctx);
+  check("a link written before the mark decodes as it did, unmarked", !!old[0] && !("_eng" in old[0]) && old[0].head === head);
+}
+
 console.log(`\n${pass}/${pass + fail} loadout codec tests passed`);
 process.exit(fail ? 1 : 0);

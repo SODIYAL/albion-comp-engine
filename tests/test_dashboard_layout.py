@@ -1603,6 +1603,33 @@ check("validatedSizes().concat([partyBase(PARTY_I)])" in APP
       "L45c a later party's size hint and presets read its own share of the starting point, "
       "never party 1's")
 
+print("L46 - the planner's last silent controls say why")
+_ru = seg(APP, "function refreshUnlocked(holdIndex){", "function render(){", "L46 refresh anchors")
+check("FORGE_NOTE = { feasible: true, filler: [], held: [], askSize: true };" in _ru
+      and "FORGE_NOTE = { feasible: true, filler: [], held: [], allLocked: true };" in _ru
+      and "if (FORGE_NOTE.askSize)" in APP and "if (FORGE_NOTE.allLocked)" in APP
+      and "askSize: FORGE_NOTE.askSize," in APP and "allLocked: FORGE_NOTE.allLocked };" in APP,
+      "L46a \"refresh the rest\" while the size ask is open, or with every slot locked and the plan full, "
+      "says why instead of returning unsaid; the note survives a re-sort")
+check("const partyIsFull = () => party.length >= HARD_CAP;" in APP
+      and APP.count("partyIsFull() ? ` disabled title=\"${esc(partyFullTitle())}\"`") == 3
+      and ".weak-add:disabled, .fam-load:disabled, .wf-hit:disabled{opacity:.45; cursor:not-allowed; transform:none}" in SHELL,
+      "L46b at the party cap the weakness, search and core add controls are greyed with the reason "
+      "(they clicked and did nothing)")
+check("minus.disabled = PLANNED <= Math.max(2, party.length);" in APP and "plus.disabled = PLANNED >= HARD_CAP;" in APP
+      and "${n < party.length ? ` disabled title=" in APP
+      and ".size-btn:disabled{opacity:.4; cursor:not-allowed}" in SHELL,
+      "L46c a size step or preset that cannot move the plan (below the roster, past the cap) is greyed "
+      "with the reason; the plan follows the roster, so it used to click and do nothing")
+check("let SWAP_W = null;" in DECISION_JS and "SWAP_W = party.length ? party[SWAP_SLOT] : null;" in DECISION_JS
+      and 'e.target.closest("#dl-tools-fold [data-swapat]");' in DECISION_JS and "}, true);" in DECISION_JS,
+      "L46d the swap lab follows the member it compares through an add, a removal and its own Apply "
+      "(a bare index compared another member after each)")
+check('const LO_ENG_MARK = "e";' in LO_JS and "if (L._eng && fields.some(f => f !== LO_UNSET)) fields.push(LO_ENG_MARK);" in LO_JS
+      and "f[LO_SLOTS.length + LO_SPELLS.length] === LO_ENG_MARK" in LO_JS,
+      "L46e the link carries the engine-kit mark, so a reloaded engine kit never reads as a fielded build "
+      "(test_loadout_codec)")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
