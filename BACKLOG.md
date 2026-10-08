@@ -13,6 +13,13 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
+- **A zerg's second party plans 20**: `emptyParty()` sets the new party's
+  plan to the party cap, so a Castle (base 25; the size hint says the rest
+  go in party 2) forges 20 more there, a 40-player zerg. The welcome page
+  opens a Castle of 25 as 20 and 5 (V: 10, The Dragon Portal and welcome
+  pages say what the data holds); the planner's own "+ Party 2" tab still
+  plans 20. Decide: party 2 plans the content's remainder when its base
+  passes 20, or keeps 20.
 - **The CTA sheet's engine read grades naked weapon keys**: `_roster.js`
   hands the engine weapon keys alone (the account boundary, V: 09b, The
   engine on the live roster), so its coverage, needs, overstack and next picks
@@ -256,6 +263,20 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
+- **Audit leftovers, planner and portal** (V: 10, The planner's core
+  controls answer on every screen and keep their state honest; The Dragon
+  Portal and welcome pages say what the data holds): "refresh the rest"
+  while the size ask is open, or on a full comp whose other slots are all
+  locked, returns without a note; the weakness and core add icons stay
+  clickable at 20 and do nothing; the size "−" and smaller presets do
+  nothing once the plan equals the roster, with nothing greyed; the
+  engine-kit mark is not carried by the link, so after a reload engine
+  kits read as fielded builds; the swap lab's slot is a bare index, so
+  after an add, a removal or its own Apply it compares another member; the
+  portal's sort headings, table rows and slot cards take no keyboard
+  focus, and a pool tab rebuilt by Enter drops the focus; a slot's
+  alternatives popover in a table's last row may be cut by the table's
+  scroll box (read from the CSS, not rendered).
 - **analyze() takes no gears**: its bands and profiles read the naked
   supply; nothing on the page or in the pipeline calls it. An optional
   `gears` parameter in both ports when a caller appears.
