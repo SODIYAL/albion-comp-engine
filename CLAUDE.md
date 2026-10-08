@@ -230,10 +230,11 @@ Three applications with explicit boundaries (each directory's README is its cont
   every weapon name read through the catalog and the guild's remembered
   names and every gear name through the gear catalog, uncertain ones
   reviewed, each slot's kit in the comp's share hash; a comp and the
-  history out as CSV) and the engine's read on the sheet (`_roster.js`: its own
-  `CompEngine` on the held slots' weapon keys; needs, next picks, open
-  slots with who can fill them, replacements, overstack, kill pressure,
-  the role check and the fight chain; display only)
+  history out as CSV) and the engine's read on the sheet and in the
+  saved comps and CTAs dialogs (`_roster.js`: its own `CompEngine` on the
+  held slots' weapon keys, a dialog's comp or CTA read as designed; needs,
+  next picks, open slots with who can fill them, replacements, overstack,
+  kill pressure, the role check and the fight chain; display only)
   now; integrations next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 
@@ -288,12 +289,13 @@ Rules a change must not break. The decision behind each is logged in
   and reference builds never feed scoring. Popularity is not effectiveness.
 - **Accounts never score**: the account layer reads no planner state and the
   planner never calls it; no account row (profile, weapon list, sign-up,
-  attendance) is a scoring input without a logged decision. The sheet's
-  engine read (`_roster.js`) is the one account surface that calls the
-  engine: its own `CompEngine` instance over the dataset, handed the
-  slots' weapon keys, each in the build the CTA's saved link holds for
-  its slot, else the engine's default kit for the weapon; who signed up
-  and what members play are shown beside its needs, never handed to it. Every account
+  attendance) is a scoring input without a logged decision. The engine
+  read (`_roster.js`, on the sheet and in the saved comps and CTAs
+  dialogs) is the one account module that calls the engine: its own
+  `CompEngine` instance over the dataset, handed the slots' weapon keys,
+  each in the build the comp's or CTA's saved link holds for its slot,
+  else the engine's default kit for the weapon; who signed up and what
+  members play are shown beside its needs, never handed to it. Every account
   table follows `supabase/README.md` (RLS first, anon revoked except a
   guest's listed reach through a CTA's share code, column grants, invoker
   functions); `test_supabase_schema.py` and `test_supabase_rls.mjs` pin it.

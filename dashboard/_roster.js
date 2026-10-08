@@ -109,6 +109,19 @@ function plannedSeats(board) {
 }
 
 
+/* A comp or a CTA read as designed, in the dialogs that edit them: no one
+   holds a slot there, so every slot naming a weapon is read as held and a
+   slot naming none is open. The rows carry a weapon and a role, never a
+   player. */
+function planBoard(slots) {
+  const rows = (slots || []).map(s => ({
+    position: s.position, weapon_id: s.weapon_id || null, role: s.role || null,
+    claimant: s.weapon_id ? { player_name: "", weapons: [] } : null
+  }));
+  return { rows, reserves: [], counts: { slots: rows.length } };
+}
+
+
 /* What the CTA's saved link holds of the comp it was made from: the
    weapons by position (p=; an empty entry is an open slot of a link
    built from a comp's slots, which keeps every later member at its
@@ -442,6 +455,41 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
   + "The same engine and rules as the planner: open the CTA in the planner for the full read.";
 
 
+/* the line a dialog's read shows before it is opened: a comp or a CTA
+   read as designed, every slot naming a weapon */
+function planHeadline(read, catalog) {
+  if (!read) return "";
+  const name = key => weaponInfo(catalog, key).name;
+  const n = read.held.count;
+  if (!n) return "no slot names a weapon yet" + (read.picks.length ? ` · first pick ${name(read.picks[0].weapon)}` : "");
+  const parts = [`${n} weapon${n === 1 ? "" : "s"}`, `coverage ${rosterPct(read.held.coverage)}`];
+  const need = read.needs.find(x => x.needed) || read.needs[0];
+  if (need) parts.push(`biggest need ${need.label}`);
+  if (read.picks.length) parts.push(`next pick ${name(read.picks[0].weapon)}`);
+  return parts.join(" · ");
+}
+
+
+/* the line that says which build a dialog's slots are read in */
+function planBuildsNote(read) {
+  const n = read && read.held ? read.held.count : 0;
+  if (!n) return "";
+  const s = read.held.saved || 0;
+  if (s === n) return n === 1 ? "The slot is read in the build the comp's link saved for it." : "Every slot is read in the build the comp's link saved for it.";
+  if (!s) return "Every slot is read in the engine's default kit for its weapon (no build saved, or the slot's weapon changed).";
+  return `${s} slot${s === 1 ? " is" : "s are"} read in the build the comp's link saved, ${n - s} in the engine's default kit for the weapon (no build saved, or the slot's weapon changed).`;
+}
+
+
+/* what a dialog's read says it is */
+function planDefinitions(what) {
+  return `The engine reads the weapons of the ${what}'s slots at their number, each in the build its saved link holds for the slot, `
+    + "else in the engine's default kit for the weapon (what winners wear in its seat); the next pick is judged one body ahead. "
+    + "Kill pressure, the role check and the fight chain are the planner's descriptive reads: they never score. "
+    + `The same engine and rules as the planner: open the ${what} in the planner for the full read.`;
+}
+
+
 /* ----------------------------------------------------------------- UI */
 
 (function rosterUI() {
@@ -450,32 +498,54 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
   }
 
   const $id = id => document.getElementById(id);
-  const wrap = $id("rr-wrap");
-
-  if (!wrap) {
-    return;
-  }
-
   const CATALOG = typeof ACCOUNT_CATALOG !== "undefined" ? ACCOUNT_CATALOG : {};
   const CONTENTS = typeof ACCOUNT_CONTENTS !== "undefined" ? ACCOUNT_CONTENTS : {};
 
-  const el = {
-    headline: $id("rr-headline"),
-    note: $id("rr-note"),
-    needs: $id("rr-needs"),
-    picks: $id("rr-picks"),
-    free: $id("rr-free"),
-    swaps: $id("rr-swaps"),
-    over: $id("rr-over"),
-    fight: $id("rr-fight"),
-    definitions: $id("rr-definitions")
+  /* The surfaces the read paints into: the sign-up sheet's (rr-*) and the
+     saved comps and CTAs dialogs' (comp-rr-*, ev-rr-*), each with its own
+     last read. A dialog reads its comp or CTA as designed (planBoard);
+     the words say what a surface reads. */
+  const SHEET_WORDS = {
+    plan: false,
+    definitions: ROSTER_DEFINITIONS,
+    noneHeld: "Nothing held yet: the needs read the plan once someone holds a slot.",
+    allHeld: "Every slot is held.",
+    swapsTwo: "Two or more held slots are needed for a swap review.",
+    swapsNone: "Every held weapon still closes a gap of its own.",
+    nothing: "Nothing held yet.",
+    what: "CTA"
   };
-  el.definitions.textContent = ROSTER_DEFINITIONS;
+  const planWords = what => ({
+    plan: true,
+    definitions: planDefinitions(what),
+    noneHeld: "No slot names a weapon yet.",
+    allHeld: "Every slot names a weapon.",
+    swapsTwo: "Two or more slots naming a weapon are needed for a swap review.",
+    swapsNone: "Every weapon still closes a gap of its own.",
+    nothing: "No slot names a weapon yet.",
+    what
+  });
 
-  let engine = null;           /* this module's own CompEngine, made on the first read */
-  let members = { guildId: null, rows: [] };   /* the CTA's guild's members with their lists */
-  let last = null;             /* the last read, repainted when the members arrive */
-  let lastKey = null;          /* what the last read was of: the read is reused while it holds */
+  function surfaceOf(prefix, words) {
+    const g = s => $id(`${prefix}-${s}`);
+    const els = { wrap: g("wrap"), headline: g("headline"), note: g("note"), needs: g("needs"), picks: g("picks"),
+                  free: g("free"), swaps: g("swaps"), over: g("over"), fight: g("fight"), definitions: g("definitions") };
+    if (!els.wrap) return null;
+    els.definitions.textContent = words.definitions;
+    return { els, words, last: null, lastKey: null };
+  }
+  const surfaces = {
+    sheet: surfaceOf("rr", SHEET_WORDS),
+    comp: surfaceOf("comp-rr", planWords("comp")),
+    cta: surfaceOf("ev-rr", planWords("CTA"))
+  };
+
+  if (!surfaces.sheet && !surfaces.comp && !surfaces.cta) {
+    return;
+  }
+
+  let engine = null;           /* this module's own CompEngine, made on the first read, one for every surface */
+  let members = { guildId: null, rows: [] };   /* the CTA's guild's members with their lists (the sheet) */
   let seq = 0;
 
   function ownEngine() {
@@ -555,10 +625,11 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     return "can bring it: " + who.map(f => `${f.name} (${ROSTER_FILLER_HOW[f.how]})`).join(", ");
   }
 
-  function paintNeeds(read) {
-    if (!read.held.count) { none(el.needs, "Nothing held yet: the needs read the plan once someone holds a slot."); return; }
-    if (!read.needs.length) { none(el.needs, "Every capability is at its typical winner's level or better."); return; }
-    el.needs.replaceChildren(...read.needs.map(n => {
+  function paintNeeds(sf, read) {
+    const { els, words } = sf;
+    if (!read.held.count) { none(els.needs, words.noneHeld); return; }
+    if (!read.needs.length) { none(els.needs, "Every capability is at its typical winner's level or better."); return; }
+    els.needs.replaceChildren(...read.needs.map(n => {
       const li = item(n.needed ? "rr-needed" : "");
       const name = document.createElement("span");
       name.className = "gd-name";
@@ -568,9 +639,10 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     }));
   }
 
-  function paintPicks(read, pool) {
-    if (!read.picks.length) { none(el.picks, "No pick to suggest."); return; }
-    el.picks.replaceChildren(...read.picks.map(p => {
+  function paintPicks(sf, read, pool) {
+    const { els } = sf;
+    if (!read.picks.length) { none(els.picks, "No pick to suggest."); return; }
+    els.picks.replaceChildren(...read.picks.map(p => {
       const li = item(p.verdict === "ok" ? "" : "rr-depth");
       const rank = document.createElement("span");
       rank.className = "cp-pos";
@@ -582,10 +654,11 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     }));
   }
 
-  function paintFree(read, board, pool) {
+  function paintFree(sf, read, board, pool) {
+    const { els, words } = sf;
     const free = openSlots(board, read.picks);
-    if (!free.length) { none(el.free, "Every slot is held."); return; }
-    el.free.replaceChildren(...free.map(f => {
+    if (!free.length) { none(els.free, words.allHeld); return; }
+    els.free.replaceChildren(...free.map(f => {
       const li = item(f.pickRank ? "rr-wanted" : "");
       const pos = document.createElement("span");
       pos.className = "cp-pos";
@@ -604,16 +677,17 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     }));
   }
 
-  function paintSwaps(read) {
-    if (read.held.count < 2) { none(el.swaps, "Two or more held slots are needed for a swap review."); return; }
-    if (!read.replacements.length) { none(el.swaps, "Every held weapon still closes a gap of its own."); return; }
-    el.swaps.replaceChildren(...read.replacements.map(r => {
+  function paintSwaps(sf, read) {
+    const { els, words } = sf;
+    if (read.held.count < 2) { none(els.swaps, words.swapsTwo); return; }
+    if (!read.replacements.length) { none(els.swaps, words.swapsNone); return; }
+    els.swaps.replaceChildren(...read.replacements.map(r => {
       const li = item("");
       const pos = document.createElement("span");
       pos.className = "cp-pos";
       pos.textContent = r.seat ? String(r.seat.position) : "";
       li.append(pos, weaponSpan(r.weapon));
-      const why = r.offComp ? "not a comp the generation rules would build here" : r.offStyle ? "unfit for the CTA's style"
+      const why = r.offComp ? "not a comp the generation rules would build here" : r.offStyle ? `unfit for the ${words.what}'s style`
                 : r.verdict === "negative" ? "costs the comp as a pick into the rest" : "its jobs are covered by the rest";
       const better = r.options.length
         ? " · better here: " + r.options.map(o => `${weaponInfo(CATALOG, o.weapon).name} (${o.gain >= 0 ? "+" : "−"}${Math.abs(o.gain).toFixed(1)})`).join(", ")
@@ -623,7 +697,8 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     }));
   }
 
-  function paintOver(read) {
+  function paintOver(sf, read) {
+    const { els, words } = sf;
     const rows = [];
     for (const o of read.over) {
       const li = item("rr-over");
@@ -642,8 +717,8 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
       li.append(name, sub(`${d.reason} · ${(d.weapons || []).map(w => weaponInfo(CATALOG, w).name).join(" + ")}`));
       rows.push(li);
     }
-    if (!rows.length) none(el.over, read.held.count ? "Nothing past its soft cap, no duplicate to check." : "Nothing held yet.");
-    else el.over.replaceChildren(...rows);
+    if (!rows.length) none(els.over, read.held.count ? "Nothing past its soft cap, no duplicate to check." : words.nothing);
+    else els.over.replaceChildren(...rows);
   }
 
   function span(cls, text, title) {
@@ -671,9 +746,10 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     return `${who}: the worn chest fights its ${(f.roleName || "seat").toLowerCase()} job`;
   }
 
-  function paintFight(read) {
+  function paintFight(sf, read) {
+    const { els, words } = sf;
     const f = read.fight;
-    if (!read.held.count || !f) { el.fight.replaceChildren(span("gd-none", "Nothing held yet.")); return; }
+    if (!read.held.count || !f) { els.fight.replaceChildren(span("gd-none", words.nothing)); return; }
     const rows = [];
     if (f.kill.length) {
       const row = fightRow("Kill pressure");
@@ -711,30 +787,64 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
       rows.push(row);
     }
     if (!rows.length) rows.push(span("gd-none", "The engine reads nothing to show here."));
-    el.fight.replaceChildren(...rows);
+    els.fight.replaceChildren(...rows);
   }
 
-  function paint(read, board) {
-    const pool = rosterPool(board, members.rows);
-    el.headline.textContent = rosterHeadline(read, board, CATALOG);
+  function paint(sf, read, board, event) {
+    const { els, words } = sf;
+    const pool = words.plan ? { reserves: [], others: [] } : rosterPool(board, members.rows);
+    els.headline.textContent = words.plan ? planHeadline(read, CATALOG) : rosterHeadline(read, board, CATALOG);
     const notes = [];
     if (read.unknown && read.unknown.length) {
       notes.push(`${read.unknown.length === 1 ? "A weapon" : `${read.unknown.length} weapons`} this build does not know `
         + `${read.unknown.length === 1 ? "is" : "are"} left out of the read: ${read.unknown.join(", ")}.`);
     }
-    if (!read.knownContent) notes.push(`The CTA's content is not in this build's templates; the read uses ${CONTENTS[read.content] || read.content}.`);
-    const builds = rosterBuildsNote(read);
+    if (!read.knownContent) {
+      notes.push(event && event.content
+        ? `The ${words.what}'s content is not in this build's templates; the read uses ${CONTENTS[read.content] || read.content}.`
+        : `The ${words.what} names no content yet; the read uses ${CONTENTS[read.content] || read.content}.`);
+    }
+    const builds = words.plan ? planBuildsNote(read) : rosterBuildsNote(read);
     if (builds) notes.push(builds);
     if (read.plan) notes.push(`The plan (${read.plan.count} slots) covers ${rosterPct(read.plan.coverage)}`
       + (read.plan.needs.length ? `; its biggest needs: ${read.plan.needs.map(n => n.label).join(", ")}.` : "."));
-    el.note.textContent = notes.join(" ");
-    el.note.hidden = !notes.length;
-    paintNeeds(read);
-    paintPicks(read, pool);
-    paintFree(read, board, pool);
-    paintSwaps(read);
-    paintOver(read);
-    paintFight(read);
+    els.note.textContent = notes.join(" ");
+    els.note.hidden = !notes.length;
+    paintNeeds(sf, read);
+    paintPicks(sf, read, pool);
+    paintFree(sf, read, board, pool);
+    paintSwaps(sf, read);
+    paintOver(sf, read);
+    paintFight(sf, read);
+  }
+
+  function hide(sf) {
+    sf.els.wrap.hidden = true;
+    sf.last = null;
+    sf.lastKey = null;
+  }
+
+  /* one surface's read: computed again only when what the engine reads
+     changes (the content, the style, the saved link, the weapons), so a
+     mark, a move or a typed note keeps it */
+  function show(sf, event, board) {
+    const eng = ownEngine();
+    if (!eng) { hide(sf); return null; }
+    const key = rosterKey(event, board);
+    let read = sf.last && sf.lastKey === key ? sf.last.read : null;
+    if (!read) {
+      try {
+        read = rosterRead(event, board, eng, tables());
+      } catch (err) {
+        read = null;
+      }
+    }
+    if (!read) { hide(sf); return null; }
+    sf.last = { read, board, event };
+    sf.lastKey = key;
+    paint(sf, read, board, event);
+    sf.els.wrap.hidden = false;
+    return read;
   }
 
   /* the guild's members with their lists, once per guild, for a member; a
@@ -756,42 +866,42 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     membersLoading = null;
     if (rows === null) return;
     members = { guildId, rows };
-    if (last) paint(last.read, last.board);
+    const sf = surfaces.sheet;
+    if (sf && sf.last) paint(sf, sf.last.read, sf.last.board, sf.last.event);
   }
 
-  document.addEventListener("sheet-read", e => {
-    const d = e.detail;
-    if (!d || !d.slots) {
-      wrap.hidden = true;
-      last = null;
-      lastKey = null;
-      members = { guildId: null, rows: [] };
-      return;
-    }
-    const eng = ownEngine();
-    if (!eng) { wrap.hidden = true; return; }
-    const board = sheetBoard(d.slots, d.signups);
-    /* a mark or a move changes the sheet, not what the engine reads: the
-       read is computed again only when the roster's weapons or the saved
-       builds change */
-    const key = rosterKey(d.event, board);
-    let read = last && lastKey === key ? last.read : null;
-    if (!read) {
-      try {
-        read = rosterRead(d.event, board, eng, tables());
-      } catch (err) {
-        read = null;
+  if (surfaces.sheet) {
+    document.addEventListener("sheet-read", e => {
+      const sf = surfaces.sheet;
+      const d = e.detail;
+      if (!d || !d.slots) {
+        hide(sf);
+        members = { guildId: null, rows: [] };
+        return;
       }
-    }
-    if (!read) { wrap.hidden = true; last = null; lastKey = null; return; }
-    last = { read, board };
-    lastKey = key;
-    if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id && membersLoading !== d.guild.id) {
-      loadMembers(d.guild.id);
-    } else if (!d.member) {
-      members = { guildId: null, rows: [] };
-    }
-    paint(read, board);
-    wrap.hidden = false;
+      const read = show(sf, d.event, sheetBoard(d.slots, d.signups));
+      if (!read) return;
+      if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id && membersLoading !== d.guild.id) {
+        loadMembers(d.guild.id);
+      } else if (!d.member) {
+        members = { guildId: null, rows: [] };
+      }
+    });
+  }
+
+  /* the saved comps and CTAs dialogs hand their open comp or CTA over as a
+     DOM event (plan-read) after every render of its slots, and an empty
+     one when none is open: the slots' weapons and roles and the record's
+     content, style and saved link, never a player */
+  const planTimers = {};
+  document.addEventListener("plan-read", e => {
+    const d = e.detail || {};
+    const sf = surfaces[d.surface];
+    if (!sf || d.surface === "sheet") return;
+    clearTimeout(planTimers[d.surface]);
+    if (!d.event || !d.slots) { hide(sf); return; }
+    /* the dialog paints first and the read follows (a roster of sixty
+       takes the engine a moment); a newer hand-over replaces a pending one */
+    planTimers[d.surface] = setTimeout(() => show(sf, d.event, planBoard(d.slots)), 0);
   });
 })();

@@ -1347,7 +1347,7 @@ check("const knows = w => !engine.weapons || !!engine.weapons[w];" in ROSTER_JS 
       "L38s a weapon key the build does not hold is left out of the read and named, never hiding it; "
       "a failed member list is tried again on the next read (test_roster)")
 check("function slotBuild(saved, seat, engine, spells) {" in ROSTER_JS
-      and "rosterRead(d.event, board, eng, tables())" in ROSTER_JS
+      and "rosterRead(event, board, eng, tables())" in ROSTER_JS
       and 'loadout: typeof loadoutDecode === "function" ? loadoutDecode : null,' in ROSTER_JS
       and "const floorSupply = engine.effectiveSupply(party, combos);" in ROSTER_JS
       and "engine.recommend(held.party, ROSTER_PICKS, null, hb.combos, hb.gears)" in ROSTER_JS
@@ -1360,10 +1360,19 @@ check("function rosterFight(engine, party, combos, gears) {" in ROSTER_JS
       and "const fight = rosterFight(engine, held.party, hb.combos, hb.gears);" in ROSTER_JS
       and "engine.fightChain(party, combos, gears, null)" in ROSTER_JS
       and "engine.roleAdvisory(party, rosterChests(engine, gears))" in ROSTER_JS
-      and "function paintFight(read)" in ROSTER_JS and "they never score" in ROSTER_JS
+      and "function paintFight(sf, read)" in ROSTER_JS and "they never score" in ROSTER_JS
       and all(s in AUTH_CSS for s in (".rr-fight{", ".rr-light.bad::before{", ".rr-stage.missing{", ".rr-chip b{")),
       "L38u the read carries the planner's kill pressure, role check and fight chain of the held slots in their "
       "builds at their size, styled in _auth.css, descriptive (test_roster)")
+check(all(('id="%s-%s"' % (p, k)) in d
+          for p, d in (("comp-rr", cdlg), ("ev-rr", edlg))
+          for k in ("wrap", "headline", "note", "needs", "picks", "free", "swaps", "over", "fight", "definitions"))
+      and 'dispatchEvent(new CustomEvent("plan-read"' in COMPS_JS and 'dispatchEvent(new CustomEvent("plan-read"' in EVENTS_JS
+      and 'addEventListener("plan-read"' in ROSTER_JS and "function planBoard(slots)" in ROSTER_JS
+      and not re.search(r"(comp|ev)-rr-|rosterRead|planBoard|CompEngine", COMPS_JS + EVENTS_JS),
+      "L38v the saved comps and CTAs dialogs carry the engine read of the comp or CTA as designed: each hands its "
+      "slots over as a DOM event and never touches the read's elements or the engine; the roster module paints "
+      "them with its one engine (test_roster)")
 
 print("L38r - the build on the sheet: the planner's saved loadout per slot, named from the page's tables, display only")
 # Phase 12: the build module reads the CTA's share hash (p= and g=, the

@@ -2607,6 +2607,40 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
               </thead>
               <tbody id="comp-slots"></tbody>
             </table>
+            <details class="rr dr" id="comp-rr-wrap" hidden>
+              <summary class="rr-summary">
+                <span class="pw-label rr-label">Engine read</span>
+                <span class="rr-headline" id="comp-rr-headline"></span>
+              </summary>
+              <p class="auth-hint rr-note" id="comp-rr-note" hidden></p>
+              <div class="rr-grid">
+                <section class="rr-block" aria-labelledby="comp-rr-needs-label">
+                  <h4 class="pw-label" id="comp-rr-needs-label">Biggest needs</h4>
+                  <ul class="rr-list" id="comp-rr-needs"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="comp-rr-picks-label">
+                  <h4 class="pw-label" id="comp-rr-picks-label">Next picks</h4>
+                  <ul class="rr-list" id="comp-rr-picks"></ul>
+                </section>
+                <section class="rr-block rr-block-wide" aria-labelledby="comp-rr-free-label">
+                  <h4 class="pw-label" id="comp-rr-free-label">Open slots</h4>
+                  <ul class="rr-list rr-cols" id="comp-rr-free"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="comp-rr-swaps-label">
+                  <h4 class="pw-label" id="comp-rr-swaps-label">Replacements</h4>
+                  <ul class="rr-list" id="comp-rr-swaps"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="comp-rr-over-label">
+                  <h4 class="pw-label" id="comp-rr-over-label">Overstack and duplicates</h4>
+                  <ul class="rr-list" id="comp-rr-over"></ul>
+                </section>
+                <section class="rr-block rr-block-wide" aria-labelledby="comp-rr-fight-label">
+                  <h4 class="pw-label" id="comp-rr-fight-label">Kill pressure, roles and the fight chain</h4>
+                  <div class="rr-fight" id="comp-rr-fight"></div>
+                </section>
+              </div>
+              <p class="auth-hint rr-definitions" id="comp-rr-definitions"></p>
+            </details>
             <div class="gd-foot cp-foot">
               <div class="cp-foot-l">
                 <button type="button" class="gd-btn" id="comp-open">Open in planner</button>
@@ -2731,6 +2765,40 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
               </thead>
               <tbody id="ev-slots"></tbody>
             </table>
+            <details class="rr dr" id="ev-rr-wrap" hidden>
+              <summary class="rr-summary">
+                <span class="pw-label rr-label">Engine read</span>
+                <span class="rr-headline" id="ev-rr-headline"></span>
+              </summary>
+              <p class="auth-hint rr-note" id="ev-rr-note" hidden></p>
+              <div class="rr-grid">
+                <section class="rr-block" aria-labelledby="ev-rr-needs-label">
+                  <h4 class="pw-label" id="ev-rr-needs-label">Biggest needs</h4>
+                  <ul class="rr-list" id="ev-rr-needs"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="ev-rr-picks-label">
+                  <h4 class="pw-label" id="ev-rr-picks-label">Next picks</h4>
+                  <ul class="rr-list" id="ev-rr-picks"></ul>
+                </section>
+                <section class="rr-block rr-block-wide" aria-labelledby="ev-rr-free-label">
+                  <h4 class="pw-label" id="ev-rr-free-label">Open slots</h4>
+                  <ul class="rr-list rr-cols" id="ev-rr-free"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="ev-rr-swaps-label">
+                  <h4 class="pw-label" id="ev-rr-swaps-label">Replacements</h4>
+                  <ul class="rr-list" id="ev-rr-swaps"></ul>
+                </section>
+                <section class="rr-block" aria-labelledby="ev-rr-over-label">
+                  <h4 class="pw-label" id="ev-rr-over-label">Overstack and duplicates</h4>
+                  <ul class="rr-list" id="ev-rr-over"></ul>
+                </section>
+                <section class="rr-block rr-block-wide" aria-labelledby="ev-rr-fight-label">
+                  <h4 class="pw-label" id="ev-rr-fight-label">Kill pressure, roles and the fight chain</h4>
+                  <div class="rr-fight" id="ev-rr-fight"></div>
+                </section>
+              </div>
+              <p class="auth-hint rr-definitions" id="ev-rr-definitions"></p>
+            </details>
             <div class="gd-foot cp-foot">
               <div class="cp-foot-l">
                 <button type="button" class="gd-btn" id="ev-open">Open in planner</button>

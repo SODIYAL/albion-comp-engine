@@ -714,7 +714,7 @@ function eventErrorMessage(err) {
     powers = eventPowers(myRole(), current);
     el.view.hidden = !current;
     el.empty.hidden = !!current;
-    if (!current) return;
+    if (!current) { handPlan(); return; }
 
     /* a new CTA takes its first roster from the picker; a saved one that
        may still change its slots replaces them from it */
@@ -794,7 +794,25 @@ function eventErrorMessage(err) {
     el.open.disabled = !openable;
     el.open.title = openable ? "Closes this dialog and loads the roster into the planner" : "Nothing to open: the roster is empty";
     markDirty();
+    handPlan();
   }
+
+  /* The open CTA as designed, handed to the roster module's engine read
+     as a DOM event (no call between modules): its slots' weapons and roles
+     and its content, style and saved link, as the form holds them; an
+     empty one when no CTA is open. Who signed up stays on the sheet. */
+  function handPlan() {
+    document.dispatchEvent(new CustomEvent("plan-read", { detail: current ? {
+      surface: "cta",
+      event: { content: el.content.value || current.content || "", style: el.style.value || current.style || "",
+               share_hash: current.share_hash || "" },
+      slots: slots.map(s => ({ position: s.position, weapon_id: s.weapon_id || null, role: s.role || null }))
+    } : { surface: "cta", event: null } }));
+  }
+
+  /* the read follows a content or style the form changes */
+  el.content.addEventListener("change", handPlan);
+  el.style.addEventListener("change", handPlan);
 
   function typedEvent() {
     return Object.assign({}, current, {

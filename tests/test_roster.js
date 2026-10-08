@@ -261,6 +261,37 @@ function stubEngine() {
         && note({ held: { count: 0, saved: 0 } }) === "");
 }
 
+/* 2d - a comp or a CTA read as designed, in the dialogs that edit them */
+{
+  const { eng, calls } = stubEngine();
+  const planSlots = [
+    { position: 1, weapon_id: "MAIN_MACE_HELL", role: "tank" }, { position: 2, weapon_id: null, role: "flex" },
+    { position: 3, weapon_id: "2H_LONGBOW", role: null }, { position: 4, weapon_id: "MAIN_HOLYSTAFF_AVALON", role: "healer" },
+  ];
+  const pb = run("planBoard")(planSlots);
+  check("a plan's board reads every slot naming a weapon as held and a slot naming none as open, with no player",
+        same(pb.rows.map(r => `${r.position}:${r.weapon_id}:${!!r.claimant}`), ["1:MAIN_MACE_HELL:true", "2:null:false", "3:2H_LONGBOW:true", "4:MAIN_HOLYSTAFF_AVALON:true"])
+        && pb.rows.every(r => !r.claimant || (r.claimant.player_name === "" && r.claimant.weapons.length === 0)) && pb.reserves.length === 0 && pb.counts.slots === 4, pb);
+  const read = run("rosterRead")({ content: "castle", style: "clap", share_hash: "" }, pb, eng);
+  check("a plan reads its weapons as the held party at their number, the open slot apart, no second plan read",
+        read.held.count === 3 && same(read.held.seats.map(s => s.weapon), ["MAIN_MACE_HELL", "2H_LONGBOW", "MAIN_HOLYSTAFF_AVALON"])
+        && read.plan === null && read.size === 3, read.held);
+  const handed = calls.filter(c => Array.isArray(c[1])).map(c => c[1]);
+  check("a plan hands the engine weapon keys alone", handed.length > 0 && handed.every(p => p.every(k => /^[A-Z0-9_]+$/.test(k))), handed);
+  check("the plan's open slot is listed with the engine's rank", same(run("openSlots")(pb, read.picks).map(f => `${f.position}:${f.weapon}`), ["2:null"]));
+  const head = run("planHeadline");
+  check("a plan's headline counts its weapons, never slots held",
+        head(read, CATALOG) === "3 weapons · coverage 60% · biggest need Heal sustain · next pick Hallowfall"
+        && head({ held: { count: 0 }, needs: [], picks: [{ weapon: "2H_LONGBOW" }] }, CATALOG) === "no slot names a weapon yet · first pick Longbow", head(read, CATALOG));
+  const pnote = run("planBuildsNote");
+  check("a plan's builds line: every slot saved, none saved, a mix",
+        pnote({ held: { count: 2, saved: 2 } }) === "Every slot is read in the build the comp's link saved for it."
+        && /^Every slot is read in the engine's default kit/.test(pnote({ held: { count: 2, saved: 0 } }))
+        && /^1 slot is read in the build the comp's link saved, 1 in the engine's default kit/.test(pnote({ held: { count: 2, saved: 1 } })));
+  check("a dialog's definitions say what it reads and that the descriptive reads never score",
+        /the CTA's slots at their number/.test(run("planDefinitions")("CTA")) && /never score/.test(run("planDefinitions")("comp")));
+}
+
 /* 3 - the open slots, the pool and the fillers */
 {
   const picks = [{ rank: 1, weapon: "MAIN_HOLYSTAFF_AVALON" }, { rank: 2, weapon: "2H_ARCANESTAFF" }];
@@ -402,6 +433,12 @@ function stubEngine() {
         savedRead.fight && { kill: savedRead.fight.kill, chain: savedRead.fight.chain && savedRead.fight.chain.stages.map(s => s.name) });
   check("the role check counts every held seat once",
         savedRead.fight.roles && savedRead.fight.roles.tally.reduce((n, t) => n + t.n, 0) === 20, savedRead.fight.roles);
+  /* the same comp in the saved comps dialog: read as designed, it reads
+     what the planner reads of the comp's saved link */
+  const planRead = run("rosterRead")(Object.assign({}, fEvent, { share_hash: share }), run("planBoard")(fSlots), eng, codec);
+  check("a saved comp read in its dialog reads what the planner reads: every slot in its saved build, the planner's fitness",
+        planRead.held.count === 20 && planRead.held.saved === 20 && Math.abs(planRead.held.fitness - plannerFit) < 1e-9 && !neededOf(planRead).includes("tankiness"),
+        { count: planRead.held.count, saved: planRead.held.saved, fitness: planRead.held.fitness, plannerFit });
   const swapped = forged.party.find(w => w !== forged.party[0]);
   const changed = run("rosterRead")(Object.assign({}, fEvent, { share_hash: share }),
                                     run("sheetBoard")(fSlots.map(s => s.position === 1 ? { position: 1, weapon_id: swapped } : s), fSignups), eng, codec);

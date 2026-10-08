@@ -370,7 +370,17 @@ and its tests: `supabase/README.md`.
   words are the planner's own tables
   (`CAP_LABEL`, `CAP_PROSE`), read at call time. Descriptive, like
   every analyzer in the planner: the engine ranks, the module
-  translates; the definitions stand under the read.
+  translates; the definitions stand under the read. The saved comps
+  and CTAs dialogs carry the same read of the comp or CTA they show,
+  read as designed (`planBoard`: every slot naming a weapon read as
+  held, a slot naming none open, no player): each dialog hands its
+  slots' weapons and roles and the record's content, style and saved
+  link over as a `plan-read` DOM event after every render of its slots
+  (the content and style as the form holds them), and an empty one when
+  none is open; the read follows one tick later, in the dialog's
+  `comp-rr-*` or `ev-rr-*` elements, which the dialogs never touch, on
+  the module's one engine. The dialogs' read lists no fillers: who can
+  bring a weapon is the sheet's question.
 - **`_build.js`** (platform phase 12) is the build on the sheet: the
   loadout the planner saved for each slot, named. A CTA's share hash
   carries the comp's weapons (`p=`) and, per member, the gear and the

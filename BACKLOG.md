@@ -478,9 +478,6 @@ weapon, each slot keeping the kit its saved link holds.
   over the target comp, the players' declared weapons and their
   preferences: the first place a player's preference would meet the
   engine, a logged decision).
-- **The engine read on the CTAs and comps dialogs**: the read runs on
-  the sheet alone; a draft CTA or a saved comp is read through "Open in
-  planner".
 - **Import: a CTA from a sheet with its players**: the import makes a
   comp (a template has no player); the player column is shown and may
   ride in the slot notes. A CTA with those players on its sheet is a

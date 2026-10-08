@@ -839,10 +839,23 @@ function compErrorMessage(err) {
     return tr;
   }
 
+  /* The open comp as designed, handed to the roster module's engine read
+     as a DOM event (no call between modules): its slots' weapons and roles
+     and its content, style and saved link, as the form holds them; an
+     empty one when no comp is open. */
+  function handPlan() {
+    document.dispatchEvent(new CustomEvent("plan-read", { detail: current ? {
+      surface: "comp",
+      event: { content: el.content.value || current.content || "", style: el.style.value || current.style || "",
+               share_hash: current.share_hash || "" },
+      slots: slots.map(s => ({ position: s.position, weapon_id: s.weapon_id || null, role: s.role || null }))
+    } : { surface: "comp", event: null } }));
+  }
+
   function renderTemplate() {
     el.view.hidden = !current;
     el.empty.hidden = !!current;
-    if (!current) return;
+    if (!current) { handPlan(); return; }
 
     el.name.value = current.name || "";
     el.content.value = current.content || "";
@@ -892,6 +905,7 @@ function compErrorMessage(err) {
     el.remove.hidden = !canWrite || !current.id;
     el.open.disabled = !slots.some(s => s.weapon_id) && !current.share_hash;
     markDirty();
+    handPlan();
   }
 
   /* the comp as typed, with the share hash a save keeps (keptHash: the
@@ -934,6 +948,10 @@ function compErrorMessage(err) {
     }
     markDirty();
   });
+
+  /* the read follows a content or style the form changes */
+  el.content.addEventListener("change", handPlan);
+  el.style.addEventListener("change", handPlan);
 
   el.slots.addEventListener("click", e => {
     const b = e.target.closest("[data-cp-remove]");
