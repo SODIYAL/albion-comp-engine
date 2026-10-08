@@ -484,10 +484,25 @@ Each is decidable today from evidence already in the repo.
   a labelled HOLDOUT round first, then a gear-plus-delivery labeller scored
   on it.
 - **Whole-roster clustering on killer parties**: the observed families are
-  anchor pairs; clustering was rejected on the partial alliance baskets
-  the cohorts used to be. Parties of 16+ are full rosters (random-pair
-  Jaccard median 0.22, p90 0.41), so roster clusters are untested, not
-  refuted. Display only. (V: 10, One killboard sampler)
+  anchor pairs. Measured on the fully-known rosters of 16-20 of the
+  training split (notes/findings/2026-10-08-roster-families.md): the
+  structure is real (nearest-neighbour distance median 0.20, 0.40 across
+  other guilds and alliances, against 0.50-0.52 under two shuffled nulls;
+  30% of holdout rosters fall inside a family against 0.3% of shuffled
+  ones) but not a partition (silhouette 0.08 or less at any k), and most of
+  it is guild repeats (72% of nearest neighbours are the same guild's
+  roster; 9 of the 14 families at cut 0.50 are one guild's lineup). One
+  family holds in every run, cut, variant and the one-roster-per-guild-a-day
+  dedupe: the meta lineup at the centre of anchor family 0 (Realmbreaker +
+  Spiked Gauntlets), 924 rosters across 85 guilds, top guild 7%, resampling
+  stability 0.75, present every week and on the holdout at its training
+  rate. Every family sits inside an existing anchor family. The one
+  addition a display would carry is that lineup with copy counts (3 x
+  Hallowfall, 2 x Bedrock Mace; Occult Staff 93%, Witchwork Staff 89% and
+  Rotcaller Staff 77% of its rosters, none in anchor 0's cast); the other
+  lineups it separates are single guilds' comps, which the anchor
+  families' organization gate keeps off the page. Display only. (V: 10,
+  One killboard sampler)
 
 ## Platform: accounts, guilds and CTAs
 
