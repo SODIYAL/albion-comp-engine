@@ -211,6 +211,22 @@ Object.assign(CATALOG.MAIN_MACE_HELL, { role: "frontline" });
         && q.ops.some(o => o[0] === "select") && q.ops.some(o => o[0] === "single"), q.ops);
   check("saveMyProfile returns the saved row", row && row.albion_name === "ZaddyAO");
 
+  /* the dialog's baseline is the row as the database holds it, read on
+     every opening, never the sign-up metadata */
+  CALLS.length = 0;
+  const fresh = await run("loadMyProfile")();
+  const pr = CALLS.find(c => c.table === "profiles");
+  check("loadMyProfile reads the caller's own row, one row, writing nothing",
+        !!pr && pr.ops.some(o => o[0] === "select") && pr.ops.some(o => o[0] === "eq" && o[1] === "id" && o[2] === "u-1")
+        && pr.ops.some(o => o[0] === "single") && !pr.ops.some(o => ["update", "insert", "upsert", "delete"].includes(o[0])), pr && pr.ops);
+  check("loadMyProfile returns the row", fresh && fresh.albion_name === "ZaddyAO");
+  REPLY.profiles = { data: null, error: { code: "PGRST301", message: "JWT expired" } };
+  let lost = null;
+  try { await run("loadMyProfile")(); } catch (e) { lost = e; }
+  check("a failed profile read throws (the dialog then locks the names), never answers with nothing",
+        !!lost && lost.code === "PGRST301");
+  REPLY.profiles = { data: { id: "u-1", albion_name: "ZaddyAO", albion_server: "europe", display_name: null }, error: null };
+
   CALLS.length = 0;
   REPLY.player_weapons = { data: [{ weapon_id: "2H_AXE", preference: "main", sort_order: 0 }], error: null };
   const got = await run("loadMyWeapons")();

@@ -125,9 +125,17 @@ const COMP_WRITER_ROLES = ["caller", "officer", "admin"];
    g=, f=, k=) as a template reads it: the content, the planned size, the
    style ("" for balanced) and the weapon keys in roster order. Keys the
    catalog does not hold stay (the planner drops them; a template keeps
-   what was saved). Null when the hash carries no comp. */
+   what was saved). Null when the hash carries no comp.
+   A zerg's address carries every party: the open one on the plain fields,
+   t naming its number and the others on suffixed fields (n2 p2 g2 f2 k2,
+   _loadout.js partyEncode). A comp is one party, so the hash it keeps is
+   the open party's alone; opening it never brings the other parties. */
 function parseShareHash(hash) {
-  const h = String(hash || "").replace(/^#/, "");
+  const h = String(hash || "").replace(/^#/, "").split("&")
+    .filter(kv => {
+      const key = kv.slice(0, Math.max(kv.indexOf("="), 0));
+      return key !== "t" && !/^[npgfk][1-9][0-9]?$/.test(key);
+    }).join("&");
   if (!h) return null;
 
   const p = {};
@@ -409,6 +417,15 @@ function compErrorMessage(err) {
   let canWrite = false;
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an action still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
+  /* bumped by every change of the open comp: a comp read still on its way
+     never replaces a comp taken from the planner or opened since */
+  let tplSeq = 0;
+  let listState = "ready";    /* the list: "loading" until the service answers, "failed" when it did not */
+  let shownGuild = null;      /* the guild whose list is shown */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -455,6 +472,18 @@ function compErrorMessage(err) {
     el.importBtn.hidden = el.fromPlanner.hidden;
     el.importHint.hidden = el.fromPlanner.hidden;
 
+    /* an unanswered list says so: "No comps saved yet" is the service's
+       answer, never the wait for it */
+    if (listState !== "ready") {
+      const li = document.createElement("li");
+      li.className = "gd-none";
+      li.textContent = listState === "loading" ? "Loading comps…"
+                                               : "The comps did not load. Close this dialog and open it again to retry.";
+      el.list.replaceChildren(li);
+      el.listNote.hidden = true;
+      return;
+    }
+
     if (!guildId()) {
       const li = document.createElement("li");
       li.className = "gd-none";
@@ -500,7 +529,11 @@ function compErrorMessage(err) {
     }
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
+  /* while an action waits, the guild stays the one whose list is shown */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadList(null);
+  });
 
   el.list.addEventListener("click", e => {
     const b = e.target.closest("[data-template]");
@@ -685,8 +718,16 @@ function compErrorMessage(err) {
     announce(`Slot ${position} removed.`);
   });
 
+  /* the note under the slots as the open comp reads it (a failed or
+     dropped read leaves no "Loading the comp…" behind) */
+  function slotsNoteNow() {
+    el.slotsNote.textContent = current && current.id ? "No slots: the comp is empty." : "";
+    el.slotsNote.hidden = !current || slots.length > 0;
+  }
+
   async function openTemplate(id) {
     const seq = ++openSeq;
+    const tpl = ++tplSeq;
     clearMessages();
     acctFlagFields(FIELDS, {});
     el.slotsNote.textContent = "Loading the comp…";
@@ -694,14 +735,15 @@ function compErrorMessage(err) {
 
     try {
       const t = await loadTemplate(id);
-      if (seq !== openSeq) return;
-      if (!t) { showError(COMP_MSG.refused); return; }
+      if (seq !== openSeq || tpl !== tplSeq) return;
+      if (!t) { slotsNoteNow(); showError(COMP_MSG.refused); return; }
       t.slots = normalizeSlots(t.slots);
       current = t;
       slots = normalizeSlots(t.slots);
       el.slotsNote.textContent = "No slots: the comp is empty.";
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq || tpl !== tplSeq) return;
+      slotsNoteNow();
       showError(compErrorMessage(err));
       return;
     }
@@ -717,6 +759,7 @@ function compErrorMessage(err) {
       showError("The planner holds no comp to save: add weapons in the planner first.");
       return;
     }
+    tplSeq++;
 
     current = {
       id: null,
@@ -816,24 +859,34 @@ function compErrorMessage(err) {
       return;
     }
 
+    /* the slots as sent: a label typed while the save runs stays in the
+       form as an unsaved change, never as saved */
+    const sent = normalizeSlots(slots);
+    typed.slots = sent;
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Saving…");
 
     try {
       const row = await saveTemplate(typed);
-      row.slots = normalizeSlots(slots);
+      if (mine !== session) return;
+      row.slots = sent;
       current = row;
-      slots = normalizeSlots(row.slots);
-      await reloadList(row.id, true);
+      const listed = await reloadList(row.id, true);
+      if (mine !== session) return;
       renderTemplate();
-      showNotice("Comp saved.");
-      announce("Comp saved.");
+      if (listed) {
+        showNotice("Comp saved.");
+        announce("Comp saved.");
+      }
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.save);
-      markDirty();
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+        markDirty();
+      }
     }
   });
 
@@ -842,55 +895,80 @@ function compErrorMessage(err) {
     if (!window.confirm(`Delete ${current.name}? This cannot be undone.`)) return;
 
     busy = true;
+    const mine = session;
     acctBusy(el.remove, "Deleting…");
     const name = current.name;
 
     try {
       await deleteTemplate(current.id);
+      if (mine !== session) return;
       current = null;
       slots = [];
-      await reloadList(null, true);
+      const listed = await reloadList(null, true);
+      if (mine !== session) return;
       renderTemplate();
-      showNotice(`${name} was deleted.`);
+      if (listed) showNotice(`${name} was deleted.`);
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.remove);
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.remove);
+      }
     }
   });
 
 
   /* ---- loading ---- */
 
+  /* true once the guild's list is on screen; false when the read failed or
+     another read took its place */
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
-    templates = [];
-    if (!quiet) { current = null; slots = []; }
+    shownGuild = guildId();
+    /* a quiet reload (after a save or a delete) keeps the list on screen
+       until the new one arrives */
+    if (!quiet) {
+      templates = [];
+      listState = guildId() ? "loading" : "ready";
+      current = null;
+      slots = [];
+      tplSeq++;
+    }
     renderList();
     renderTemplate();
-    if (!guildId()) return;
+    if (!guildId()) return true;
 
     try {
       templates = await loadGuildTemplates(guildId());
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
+      if (!quiet) { listState = "failed"; renderList(); }
       showError(compErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
+    listState = "ready";
     renderList();
     if (keepId && !quiet) await openTemplate(keepId);
+    return true;
   }
 
   async function openComps(opts) {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
+    acctIdle(el.remove);
     clearMessages();
     current = null;
     slots = [];
+    tplSeq++;
     templates = [];
+    listState = "loading";
     guilds = [];
     renderGuilds();
     renderList();
@@ -902,6 +980,8 @@ function compErrorMessage(err) {
       guilds = await loadMyGuilds();
     } catch (err) {
       if (seq !== openSeq) return;
+      listState = "failed";
+      renderList();
       showError(guildErrorMessage(err));
       return;
     }
@@ -910,9 +990,10 @@ function compErrorMessage(err) {
     renderGuilds();
     const want = opts || {};
     if (want.guildId && guilds.some(g => g.guild.id === want.guildId)) el.guild.value = want.guildId;
-    await reloadList(want.templateId || null);
-    /* still this opening: reloadList bumped the sequence once and nothing since */
-    if (want.fromPlanner && seq === openSeq - 1 && dialog.open) {
+    const listed = await reloadList(want.templateId || null);
+    /* still this opening: reloadList bumped the sequence once and nothing
+       since, and the list answered (a failed read keeps its message) */
+    if (want.fromPlanner && listed && seq === openSeq - 1 && dialog.open) {
       if (!el.fromPlanner.hidden) fromPlanner();
       else if (!guildId()) showNotice("Join or create a guild to save comps into.");
       else if (!canWrite) showNotice("Members read the guild's comps; callers, officers and admins save them.");

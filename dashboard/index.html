@@ -10263,6 +10263,19 @@ function partiesNow(){
 }
 const emptyParty = () => ({ party: [], PROV: [], COMBO: [], WHO: [], LOADOUT: [],
                             PLANNED: HARD_CAP, PLAN_TOUCHED: true, AVOID: [], AVOID_SIG: "" });
+/* a party without its forged slots (a content switch: they were built for
+   the old template); manual and live members stay with their kits, combos
+   and sign-up names, and locks survive */
+function dropForged(s){
+  const keep = s.party.map((_, i) => i).filter(i => s.PROV[i] !== "f");
+  return Object.assign({}, s, {
+    party: keep.map(i => s.party[i]),
+    LOADOUT: keep.map(i => (s.LOADOUT || [])[i]),
+    COMBO: keep.map(i => (s.COMBO || [])[i]),
+    WHO: keep.map(i => (s.WHO || [])[i]),
+    PROV: keep.map(i => s.PROV[i] === "l" ? "l" : "m")
+  });
+}
 /* open party k (k === PARTIES.length starts the next one). A party left
    empty at the end is dropped on the way out; the live-party sync stops,
    so the game's party never lands in another tab. */
@@ -10278,6 +10291,9 @@ function switchParty(k){
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   LIVE_SYNC = false;
   const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
+  const syncWrap = $("companion-sync-wrap");
+  if (syncWrap) syncWrap.hidden = LIVE_GUIDS === null || PARTY_I !== LIVE_PARTY;
+  disarmClear();
   hidePdashFly();
   sortPartyByRole();
   render();
@@ -12349,7 +12365,8 @@ function renderCompanion(live, err){
   load.hidden = false; load.disabled = known.length === 0;
   const syncWrap = $("companion-sync-wrap");
   if (syncWrap){
-    syncWrap.hidden = LIVE_GUIDS === null;   /* appears after the first load */
+    /* appears after the first load, on the party it loaded into */
+    syncWrap.hidden = LIVE_GUIDS === null || PARTY_I !== LIVE_PARTY;
     const cb = $("companion-sync");
     if (cb) cb.checked = LIVE_SYNC;
   }
@@ -12364,6 +12381,10 @@ function renderCompanion(live, err){
    user manually removed simply stops matching and stays gone. */
 let LIVE_SYNC = false;
 let LIVE_GUIDS = null;   /* guid -> {w, q, w2}: weapon + q/w spell ids */
+/* the party tab the live party was loaded into: the sync follows the game
+   there alone, and its box shows only on that tab, so a tick on another
+   party never writes the game's members into it */
+let LIVE_PARTY = null;
 
 function liveSpellPicks(w, spells){
   /* companion spell names -> picker indices (q/w only: the passive is not
@@ -12430,7 +12451,7 @@ const liveSig = m => ({ w: m.weapon,
                         g: Object.values(liveGearPicks(m.equipment) || {}).join("+") });
 
 function syncLiveComp(){
-  if (!LIVE_SYNC || !LIVE_GUIDS || !companionData) return;
+  if (!LIVE_SYNC || !LIVE_GUIDS || !companionData || PARTY_I !== LIVE_PARTY) return;
   let changed = false;
   for (const m of (companionData.members || [])){
     if (!m.guid || !m.weapon || !WEAPONS[m.weapon]) continue;
@@ -12495,6 +12516,7 @@ function loadCompanionParty(){
   hidePdashFly();
   LIVE_GUIDS = {};
   live.forEach(m => { if (m.guid) LIVE_GUIDS[m.guid] = liveSig(m); });
+  LIVE_PARTY = PARTY_I;
   LIVE_SYNC = true;
   sortPartyByRole();
   PLANNED = Math.max(PLANNED, party.length);
@@ -12614,7 +12636,7 @@ function render(){
   renderRecDetail(recs); renderMetaStrip(); renderFootnote();
 }
 
-function compText(){
+function plannerCompText(){
   const sn = styleName();
   const lines = [
     `**${tpl().name}${sn ? " · " + sn : ""}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
@@ -12635,7 +12657,11 @@ function compText(){
    short label */
 function flashBtn(btn, text, back){
   if (btn.classList.contains("pd-act")){
-    const lbl = btn.querySelector("span"), was = lbl ? lbl.textContent : "";
+    /* a second click inside the flash keeps the label from before the
+       first, never the flash text */
+    const lbl = btn.querySelector("span");
+    if (btn.dataset.flash !== "1") btn.dataset.flashWas = lbl ? lbl.textContent : "";
+    const was = btn.dataset.flashWas || "";
     btn.dataset.flash = "1"; btn.title = text;
     if (lbl) lbl.textContent = text;
     setTimeout(() => { delete btn.dataset.flash; btn.title = back; if (lbl) lbl.textContent = was; }, 1400);
@@ -12643,6 +12669,24 @@ function flashBtn(btn, text, back){
   }
   btn.textContent = text;
   setTimeout(() => { btn.textContent = back; }, 1400);
+}
+/* the two-step clear's armed state sits on its buttons; the 2.2 s timeout
+   and every party switch disarm both, so an arm on one party never clears
+   another with a single click */
+let CLEAR_TIMER = null;
+function clearSay(clr, t, short){
+  if (clr.id === "clear"){ clr.textContent = t; return; }
+  clr.title = t; clr.setAttribute("aria-label", t);
+  const lbl = clr.querySelector("span");
+  if (lbl) lbl.textContent = short;
+}
+function disarmClear(){
+  clearTimeout(CLEAR_TIMER); CLEAR_TIMER = null;
+  for (const clr of [$("clear"), $("pdash-clear")]){
+    if (!clr) continue;
+    delete clr.dataset.armed;
+    clearSay(clr, "clear comp", "clear");
+  }
 }
 
 /* Edge panels: one state machine for every viewport-edge flyout. State is
@@ -12945,14 +12989,8 @@ document.addEventListener("click", e => {
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp. The setup drawer's button says so in
        its text, the party board's segment in its colour and short label. */
-    const say = (t, short) => {
-      if (clr.id === "clear"){ clr.textContent = t; return; }
-      clr.title = t; clr.setAttribute("aria-label", t);
-      const lbl = clr.querySelector("span");
-      if (lbl) lbl.textContent = short;
-    };
     if (clr.dataset.armed === "1"){
-      delete clr.dataset.armed; say("clear comp", "clear");
+      disarmClear();
       party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
@@ -12961,8 +12999,10 @@ document.addEventListener("click", e => {
       const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
-      clr.dataset.armed = "1"; say("really clear? click again", "sure?");
-      setTimeout(() => { delete clr.dataset.armed; say("clear comp", "clear"); }, 2200);
+      clearSay(clr, "really clear? click again", "sure?");
+      clr.dataset.armed = "1";
+      clearTimeout(CLEAR_TIMER);
+      CLEAR_TIMER = setTimeout(disarmClear, 2200);
     }
     return;
   }
@@ -12983,7 +13023,7 @@ document.addEventListener("click", e => {
   const exp = e.target.closest("#export, #pdash-export");
   if (exp){
     if (navigator.clipboard && navigator.clipboard.writeText)
-      navigator.clipboard.writeText(compText()).then(() =>
+      navigator.clipboard.writeText(plannerCompText()).then(() =>
         flashBtn(exp, "copied", "copy comp text"));
     return;
   }
@@ -13005,13 +13045,11 @@ document.addEventListener("change", e => {
        hand-set plan survives the switch until the ask is answered */
     ASK_SIZE = !!sizePrompt();
     /* manual/live members SURVIVE a content switch; slots the
-       forge generated were built for the OLD template and are dropped —
-       "reforge all" or "forge the rest" rebuilds them for the new one. */
-    const keep = party.map((_, i) => i).filter(i => PROV[i] !== "f");
-    party = keep.map(i => party[i]);
-    LOADOUT = keep.map(i => LOADOUT[i]);
-    COMBO = keep.map(i => COMBO[i]);
-    PROV = keep.map(i => PROV[i] === "l" ? "l" : "m");   /* locks survive */
+       forge generated were built for the OLD template and are dropped,
+       in every party (the content is the zerg's) — "reforge all" or
+       "forge the rest" rebuilds them for the new one. */
+    PARTIES = partiesNow().map(dropForged);
+    partyLoad(PARTIES[PARTY_I]);
     REPLACE_OPEN = null; REPLACE_OPTS = [];
     FORGE_NOTE = null; LO_OPEN = null; LO_PICKING = null;
     render();
@@ -15377,6 +15415,25 @@ async function saveMyProfile({ albionName, albionServer, displayName }) {
 }
 
 
+/* The account's own row as the database holds it now: the profile form's
+   baseline. Never the sign-up metadata, which no save updates, nor a copy
+   read at page load, which a failed read leaves empty for the visit. */
+async function loadMyProfile() {
+  const id = await myUserId();
+  const { data, error } = await window.DB
+    .from("profiles")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
 async function loadMyWeapons() {
   const id = await myUserId();
   const { data, error } = await window.DB
@@ -15628,8 +15685,15 @@ function profileErrorMessage(err) {
   let saved = { albionName: null, albionServer: null, displayName: null, lists: { main: [], secondary: [] } };
   /* the list loaded: a list never shown can never be saved over */
   let weaponsReady = false;
+  /* the same for the names: read from the database when the dialog opens,
+     and editable only once read */
+  let identityReady = false;
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: a save still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
 
 
   /* ---- state -> the form ---- */
@@ -15646,8 +15710,12 @@ function profileErrorMessage(err) {
   const identityChanged = typed => IDENTITY.some(key => typed[key] !== saved[key]);
 
   function dirty() {
-    return identityChanged(typedIdentity())
+    return (identityReady && identityChanged(typedIdentity()))
       || (weaponsReady && !sameWeaponLists(lists, saved.lists));
+  }
+
+  function setIdentityEnabled(on) {
+    for (const input of Object.values(FIELDS)) input.disabled = !on;
   }
 
   /* the saved row back into the form and the baseline */
@@ -15769,7 +15837,8 @@ function profileErrorMessage(err) {
   /* ---- editing the lists ---- */
 
   function add(key, where) {
-    if (listed().has(key) || listed().size >= WEAPONS_MAX) return;
+    /* the list waits while a save runs: its answer replaces the list */
+    if (busy || listed().has(key) || listed().size >= WEAPONS_MAX) return;
     lists[where].push(key);
     renderLists();
     announce(`${weaponInfo(CATALOG, key).name} added to ${LIST_NAMES[where]}.`);
@@ -15915,9 +15984,15 @@ function profileErrorMessage(err) {
   async function openProfile() {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
     const seq = ++openSeq;
     const names = accountNames(account.profile, account.user);
 
+    /* the names the page holds show while the row is read; the row, once
+       read, is the baseline a save compares against */
     el.display.value = names.display;
     el.albion.value = names.albion;
     el.server.value = names.server;
@@ -15926,28 +16001,41 @@ function profileErrorMessage(err) {
               displayName: cleanName(names.display), lists: { main: [], secondary: [] } };
     lists = { main: [], secondary: [] };
     weaponsReady = false;
+    identityReady = false;
+    setIdentityEnabled(false);
 
     acctMessage(el.error, el.notice, null, "");
     acctFlagFields(FIELDS, {});
-    setNote("Loading your weapons…");
+    setNote("Loading your profile…");
     renderLists();
 
     if (!dialog.open) dialog.showModal();
-    el.albion.focus();
 
-    try {
-      const rows = await loadMyWeapons();
-      if (seq !== openSeq) return;
-      lists = weaponLists(rows);
+    const [p, w] = await Promise.all([
+      loadMyProfile().then(row => ({ row }), err => ({ err })),
+      loadMyWeapons().then(rows => ({ rows }), err => ({ err }))
+    ]);
+    if (seq !== openSeq) return;
+
+    const notes = [];
+    if (p.row) {
+      takeRow(p.row);
+      identityReady = true;
+      window.Account.updateProfile(p.row);
+    } else {
+      notes.push(`Your name, server and display name could not be loaded, so they cannot be edited now. ${profileErrorMessage(p.err)}`);
+    }
+    setIdentityEnabled(identityReady);
+    if (w.rows) {
+      lists = weaponLists(w.rows);
       saved.lists = copyWeaponLists(lists);
       weaponsReady = true;
-      setNote("");
-    } catch (err) {
-      if (seq !== openSeq) return;
-      setNote(`Your weapons could not be loaded, so they cannot be edited now. ${profileErrorMessage(err)}`);
+    } else {
+      notes.push(`Your weapons could not be loaded, so they cannot be edited now. ${profileErrorMessage(w.err)}`);
     }
-
+    setNote(notes.join(" "));
     renderLists();
+    if (identityReady && !el.form.contains(document.activeElement)) el.albion.focus();
   }
 
   el.form.addEventListener("input", markDirty);
@@ -15957,52 +16045,63 @@ function profileErrorMessage(err) {
     if (busy) return;
 
     acctMessage(el.error, el.notice, null, "");
-    const first = acctFlagFields(FIELDS, validateIdentity({
+    const first = identityReady ? acctFlagFields(FIELDS, validateIdentity({
       albionName: el.albion.value, albionServer: el.server.value, displayName: el.display.value
-    }));
+    })) : null;
     if (first) { first.focus(); return; }
 
     const identity = typedIdentity();
-    const identityDirty = identityChanged(identity);
-    const weaponsChanged = weaponsReady && !sameWeaponLists(lists, saved.lists);
+    const identityDirty = identityReady && identityChanged(identity);
+    /* the lists as sent, taken now: the save never reads them after a wait
+       (a reopened dialog empties them while it loads, and sending that
+       would delete every row) */
+    const sendLists = weaponsReady && !sameWeaponLists(lists, saved.lists) ? copyWeaponLists(lists) : null;
 
-    if (!identityDirty && !weaponsChanged) {
+    if (!identityDirty && !sendLists) {
       showNotice("Nothing to save: your profile is up to date.");
       return;
     }
 
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Saving…");
 
     try {
       if (identityDirty) {
         try {
           const row = await saveMyProfile(identity);
-          takeRow(row);
+          if (mine === session) takeRow(row);
           window.Account.updateProfile(row);
         } catch (err) {
-          showError(profileErrorMessage(err));
+          if (mine === session) showError(profileErrorMessage(err));
           return;
         }
       }
 
-      if (weaponsChanged) {
+      if (sendLists) {
         try {
-          lists = weaponLists(await saveMyWeapons(lists));
-          saved.lists = copyWeaponLists(lists);
-          renderLists();
+          const rows = await saveMyWeapons(sendLists);
+          if (mine === session) {
+            lists = weaponLists(rows);
+            saved.lists = copyWeaponLists(lists);
+            renderLists();
+          }
         } catch (err) {
-          showError((identityDirty ? "Your name, server and display name were saved; your weapons were not. " : "")
-                    + profileErrorMessage(err));
+          if (mine === session) {
+            showError((identityDirty ? "Your name, server and display name were saved; your weapons were not. " : "")
+                      + profileErrorMessage(err));
+          }
           return;
         }
       }
 
-      showNotice("Profile saved.");
+      if (mine === session) showNotice("Profile saved.");
     } finally {
-      busy = false;
-      acctIdle(el.save);
-      markDirty();
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+        markDirty();
+      }
     }
   });
 
@@ -16512,6 +16611,12 @@ function guildErrorMessage(err) {
   let rows = [];            /* memberRows of the selected guild */
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an action still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state (a join code renewed for one guild never lands in another's
+     panel) */
+  let session = 0;
+  let listState = "ready";  /* the list: "loading" until the service answers, "failed" when it did not */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -16523,10 +16628,14 @@ function guildErrorMessage(err) {
   /* ---- the guild list ---- */
 
   function renderList() {
-    if (!guilds.length) {
+    /* an unanswered list says so: "in no guild yet" is the service's
+       answer, never the wait for it */
+    if (listState !== "ready" || !guilds.length) {
       const li = document.createElement("li");
       li.className = "gd-none";
-      li.textContent = "You are in no guild yet. Create one, or join with a code.";
+      li.textContent = listState === "loading" ? "Loading your guilds…"
+        : listState === "failed" ? "Your guilds did not load. Close this dialog and open it again to retry."
+        : "You are in no guild yet. Create one, or join with a code.";
       el.list.replaceChildren(li);
     } else {
       el.list.replaceChildren(...guilds.map(({ guild, role }) => {
@@ -16755,23 +16864,32 @@ function guildErrorMessage(err) {
     }
   }
 
+  /* true once the list is read; false when the read failed (the panel then
+     shows no guild rather than one just left or deleted) or another read
+     took its place */
   async function reload(keep) {
     const seq = ++openSeq;
     try {
       guilds = await loadMyGuilds();
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       guilds = [];
+      current = null;
+      rows = [];
+      listState = "failed";
       renderList();
+      renderGuild();
       showError(guildErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
+    listState = "ready";
     const still = guilds.some(g => g.guild.id === keep);
     current = still ? keep : (guilds[0] ? guilds[0].guild.id : null);
     renderList();
     await select(current);
+    return true;
   }
 
 
@@ -16780,17 +16898,18 @@ function guildErrorMessage(err) {
   async function act(button, label, fn, done) {
     if (busy) return;
     busy = true;
+    const ours = session;
     clearMessages();
     if (button) acctBusy(button, label);
 
     try {
       const result = await fn();
-      await done(result);
+      if (ours === session) await done(result);
     } catch (err) {
-      showError(guildErrorMessage(err));
+      if (ours === session) showError(guildErrorMessage(err));
     } finally {
       if (button) acctIdle(button);
-      busy = false;
+      if (ours === session) busy = false;
     }
   }
 
@@ -16832,8 +16951,7 @@ function guildErrorMessage(err) {
     act(b, isMe ? "Leaving…" : "Removing…", () => removeMember(g.guild.id, userId), async () => {
       if (isMe) {
         announce(`You left ${g.guild.name}.`);
-        await reload(null);
-        showNotice(`You left ${g.guild.name}.`);
+        if (await reload(null)) showNotice(`You left ${g.guild.name}.`);
       } else {
         rows = rows.filter(r => r.userId !== userId);
         renderGuild();
@@ -16848,8 +16966,7 @@ function guildErrorMessage(err) {
     if (!g || !account.user) return;
     if (!window.confirm(`Leave ${g.guild.name}?`)) return;
     act(el.leave, "Leaving…", () => leaveGuild(g.guild.id), async () => {
-      await reload(null);
-      showNotice(`You left ${g.guild.name}.`);
+      if (await reload(null)) showNotice(`You left ${g.guild.name}.`);
     });
   });
 
@@ -16858,8 +16975,7 @@ function guildErrorMessage(err) {
     if (!g) return;
     if (!window.confirm(`Delete ${g.guild.name}? Every membership goes with it. This cannot be undone.`)) return;
     act(el.remove, "Deleting…", () => deleteGuild(g.guild.id), async () => {
-      await reload(null);
-      showNotice(`${g.guild.name} was deleted.`);
+      if (await reload(null)) showNotice(`${g.guild.name} was deleted.`);
     });
   });
 
@@ -16914,8 +17030,7 @@ function guildErrorMessage(err) {
         () => createGuild({ name: el.newName.value, albionServer: el.newServer.value }),
         async guild => {
           el.newName.value = "";
-          await reload(guild.id);
-          showNotice(`${guild.name} created. Share its join code from the guild's panel.`);
+          if (await reload(guild.id)) showNotice(`${guild.name} created. Share its join code from the guild's panel.`);
         });
   });
 
@@ -16926,8 +17041,7 @@ function guildErrorMessage(err) {
 
     act(el.joinSubmit, "Joining…", () => joinGuild(el.joinCode.value), async guild => {
       el.joinCode.value = "";
-      await reload(guild.id);
-      showNotice(`You joined ${guild.name}.`);
+      if (await reload(guild.id)) showNotice(`You joined ${guild.name}.`);
     });
   });
 
@@ -16937,6 +17051,10 @@ function guildErrorMessage(err) {
   async function openGuilds() {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    for (const b of [el.leave, el.remove, el.renew, el.renameSubmit, el.newSubmit, el.joinSubmit]) acctIdle(b);
     const names = accountNames(account.profile, account.user);
     el.newServer.value = names.server || "";
     clearMessages();
@@ -16944,6 +17062,7 @@ function guildErrorMessage(err) {
     guilds = [];
     rows = [];
     current = null;
+    listState = "loading";
     renderList();
     renderGuild();
 
@@ -17100,9 +17219,17 @@ const COMP_WRITER_ROLES = ["caller", "officer", "admin"];
    g=, f=, k=) as a template reads it: the content, the planned size, the
    style ("" for balanced) and the weapon keys in roster order. Keys the
    catalog does not hold stay (the planner drops them; a template keeps
-   what was saved). Null when the hash carries no comp. */
+   what was saved). Null when the hash carries no comp.
+   A zerg's address carries every party: the open one on the plain fields,
+   t naming its number and the others on suffixed fields (n2 p2 g2 f2 k2,
+   _loadout.js partyEncode). A comp is one party, so the hash it keeps is
+   the open party's alone; opening it never brings the other parties. */
 function parseShareHash(hash) {
-  const h = String(hash || "").replace(/^#/, "");
+  const h = String(hash || "").replace(/^#/, "").split("&")
+    .filter(kv => {
+      const key = kv.slice(0, Math.max(kv.indexOf("="), 0));
+      return key !== "t" && !/^[npgfk][1-9][0-9]?$/.test(key);
+    }).join("&");
   if (!h) return null;
 
   const p = {};
@@ -17384,6 +17511,15 @@ function compErrorMessage(err) {
   let canWrite = false;
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an action still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
+  /* bumped by every change of the open comp: a comp read still on its way
+     never replaces a comp taken from the planner or opened since */
+  let tplSeq = 0;
+  let listState = "ready";    /* the list: "loading" until the service answers, "failed" when it did not */
+  let shownGuild = null;      /* the guild whose list is shown */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -17430,6 +17566,18 @@ function compErrorMessage(err) {
     el.importBtn.hidden = el.fromPlanner.hidden;
     el.importHint.hidden = el.fromPlanner.hidden;
 
+    /* an unanswered list says so: "No comps saved yet" is the service's
+       answer, never the wait for it */
+    if (listState !== "ready") {
+      const li = document.createElement("li");
+      li.className = "gd-none";
+      li.textContent = listState === "loading" ? "Loading comps…"
+                                               : "The comps did not load. Close this dialog and open it again to retry.";
+      el.list.replaceChildren(li);
+      el.listNote.hidden = true;
+      return;
+    }
+
     if (!guildId()) {
       const li = document.createElement("li");
       li.className = "gd-none";
@@ -17475,7 +17623,11 @@ function compErrorMessage(err) {
     }
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
+  /* while an action waits, the guild stays the one whose list is shown */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadList(null);
+  });
 
   el.list.addEventListener("click", e => {
     const b = e.target.closest("[data-template]");
@@ -17660,8 +17812,16 @@ function compErrorMessage(err) {
     announce(`Slot ${position} removed.`);
   });
 
+  /* the note under the slots as the open comp reads it (a failed or
+     dropped read leaves no "Loading the comp…" behind) */
+  function slotsNoteNow() {
+    el.slotsNote.textContent = current && current.id ? "No slots: the comp is empty." : "";
+    el.slotsNote.hidden = !current || slots.length > 0;
+  }
+
   async function openTemplate(id) {
     const seq = ++openSeq;
+    const tpl = ++tplSeq;
     clearMessages();
     acctFlagFields(FIELDS, {});
     el.slotsNote.textContent = "Loading the comp…";
@@ -17669,14 +17829,15 @@ function compErrorMessage(err) {
 
     try {
       const t = await loadTemplate(id);
-      if (seq !== openSeq) return;
-      if (!t) { showError(COMP_MSG.refused); return; }
+      if (seq !== openSeq || tpl !== tplSeq) return;
+      if (!t) { slotsNoteNow(); showError(COMP_MSG.refused); return; }
       t.slots = normalizeSlots(t.slots);
       current = t;
       slots = normalizeSlots(t.slots);
       el.slotsNote.textContent = "No slots: the comp is empty.";
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq || tpl !== tplSeq) return;
+      slotsNoteNow();
       showError(compErrorMessage(err));
       return;
     }
@@ -17692,6 +17853,7 @@ function compErrorMessage(err) {
       showError("The planner holds no comp to save: add weapons in the planner first.");
       return;
     }
+    tplSeq++;
 
     current = {
       id: null,
@@ -17791,24 +17953,34 @@ function compErrorMessage(err) {
       return;
     }
 
+    /* the slots as sent: a label typed while the save runs stays in the
+       form as an unsaved change, never as saved */
+    const sent = normalizeSlots(slots);
+    typed.slots = sent;
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Saving…");
 
     try {
       const row = await saveTemplate(typed);
-      row.slots = normalizeSlots(slots);
+      if (mine !== session) return;
+      row.slots = sent;
       current = row;
-      slots = normalizeSlots(row.slots);
-      await reloadList(row.id, true);
+      const listed = await reloadList(row.id, true);
+      if (mine !== session) return;
       renderTemplate();
-      showNotice("Comp saved.");
-      announce("Comp saved.");
+      if (listed) {
+        showNotice("Comp saved.");
+        announce("Comp saved.");
+      }
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.save);
-      markDirty();
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+        markDirty();
+      }
     }
   });
 
@@ -17817,55 +17989,80 @@ function compErrorMessage(err) {
     if (!window.confirm(`Delete ${current.name}? This cannot be undone.`)) return;
 
     busy = true;
+    const mine = session;
     acctBusy(el.remove, "Deleting…");
     const name = current.name;
 
     try {
       await deleteTemplate(current.id);
+      if (mine !== session) return;
       current = null;
       slots = [];
-      await reloadList(null, true);
+      const listed = await reloadList(null, true);
+      if (mine !== session) return;
       renderTemplate();
-      showNotice(`${name} was deleted.`);
+      if (listed) showNotice(`${name} was deleted.`);
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.remove);
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.remove);
+      }
     }
   });
 
 
   /* ---- loading ---- */
 
+  /* true once the guild's list is on screen; false when the read failed or
+     another read took its place */
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
-    templates = [];
-    if (!quiet) { current = null; slots = []; }
+    shownGuild = guildId();
+    /* a quiet reload (after a save or a delete) keeps the list on screen
+       until the new one arrives */
+    if (!quiet) {
+      templates = [];
+      listState = guildId() ? "loading" : "ready";
+      current = null;
+      slots = [];
+      tplSeq++;
+    }
     renderList();
     renderTemplate();
-    if (!guildId()) return;
+    if (!guildId()) return true;
 
     try {
       templates = await loadGuildTemplates(guildId());
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
+      if (!quiet) { listState = "failed"; renderList(); }
       showError(compErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
+    listState = "ready";
     renderList();
     if (keepId && !quiet) await openTemplate(keepId);
+    return true;
   }
 
   async function openComps(opts) {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
+    acctIdle(el.remove);
     clearMessages();
     current = null;
     slots = [];
+    tplSeq++;
     templates = [];
+    listState = "loading";
     guilds = [];
     renderGuilds();
     renderList();
@@ -17877,6 +18074,8 @@ function compErrorMessage(err) {
       guilds = await loadMyGuilds();
     } catch (err) {
       if (seq !== openSeq) return;
+      listState = "failed";
+      renderList();
       showError(guildErrorMessage(err));
       return;
     }
@@ -17885,9 +18084,10 @@ function compErrorMessage(err) {
     renderGuilds();
     const want = opts || {};
     if (want.guildId && guilds.some(g => g.guild.id === want.guildId)) el.guild.value = want.guildId;
-    await reloadList(want.templateId || null);
-    /* still this opening: reloadList bumped the sequence once and nothing since */
-    if (want.fromPlanner && seq === openSeq - 1 && dialog.open) {
+    const listed = await reloadList(want.templateId || null);
+    /* still this opening: reloadList bumped the sequence once and nothing
+       since, and the list answered (a failed read keeps its message) */
+    if (want.fromPlanner && listed && seq === openSeq - 1 && dialog.open) {
       if (!el.fromPlanner.hidden) fromPlanner();
       else if (!guildId()) showNotice("Join or create a guild to save comps into.");
       else if (!canWrite) showNotice("Members read the guild's comps; callers, officers and admins save them.");
@@ -18428,6 +18628,7 @@ function eventErrorMessage(err) {
   let guilds = [];            /* [{guild, role}] the account belongs to */
   let events = [];            /* the selected guild's list */
   let listState = "ready";    /* the list: "loading" until the service answers, "failed" when it did not */
+  let shownGuild = null;      /* the guild whose list is shown */
   let templates = [];         /* the selected guild's comps, for a new event */
   let current = null;         /* the open event: {id, guild_id, ..., slots} or a new one */
   let slots = [];             /* the open event's slots as edited */
@@ -18550,7 +18751,11 @@ function eventErrorMessage(err) {
     if (full) el.create.hidden = true;
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
+  /* while an action waits, the guild stays the one whose list is shown */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadList(null);
+  });
 
   el.list.addEventListener("click", e => {
     const b = e.target.closest("[data-event]");
@@ -19007,11 +19212,13 @@ function eventErrorMessage(err) {
       if (mine !== session) return;
       current.status = row.status;
       current.updated_at = row.updated_at;
-      await reloadList(current.id, true);
+      const listed = await reloadList(current.id, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
-      announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
+      if (listed) {
+        showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
+        announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
+      }
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -19048,11 +19255,13 @@ function eventErrorMessage(err) {
       row.slots = normalizeSlots(slots);
       current = row;
       slots = normalizeSlots(row.slots);
-      await reloadList(row.id, true);
+      const listed = await reloadList(row.id, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice("CTA saved.");
-      announce("CTA saved.");
+      if (listed) {
+        showNotice("CTA saved.");
+        announce("CTA saved.");
+      }
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -19078,10 +19287,10 @@ function eventErrorMessage(err) {
       if (mine !== session) return;
       current = null;
       slots = [];
-      await reloadList(null, true);
+      const listed = await reloadList(null, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice(`${name} was deleted.`);
+      if (listed) showNotice(`${name} was deleted.`);
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -19095,8 +19304,11 @@ function eventErrorMessage(err) {
 
   /* ---- loading ---- */
 
+  /* true once the guild's list is on screen; false when the read failed or
+     another read took its place */
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
+    shownGuild = guildId();
     /* a quiet reload (after a save, a move or a delete) keeps the list on
        screen until the new one arrives */
     if (!quiet) {
@@ -19107,21 +19319,22 @@ function eventErrorMessage(err) {
     }
     renderList();
     renderEvent();
-    if (!guildId()) return;
+    if (!guildId()) return true;
 
     try {
       [events, templates] = await Promise.all([loadGuildEvents(guildId()), loadGuildTemplates(guildId())]);
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       if (!quiet) { listState = "failed"; renderList(); }
       showError(eventErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
     listState = "ready";
     renderList();
     if (keepId && !quiet) await openEvent(keepId);
+    return true;
   }
 
   async function openEvents() {

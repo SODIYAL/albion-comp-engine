@@ -91,6 +91,10 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
   check("a junk hash or none is no comp", parse("#foo") === null && parse("") === null && parse(null) === null);
   check("a hash with a content but no weapons is a comp with none",
         (() => { const q = parse("c=castle&n=20"); return q && q.weapons.length === 0 && q.size === 20; })());
+  const zerg = parse("#c=castle&n=20&st=clap&p=2H_LONGBOW,MAIN_MACE_HELL&g=abc&t=2&n1=20&p1=2H_MACE&g1=x&f1=f&k1=0&n3=20&p3=2H_BOW");
+  check("a zerg's address keeps the open party alone: no t=, no other party's fields",
+        zerg && same(zerg.weapons, ["2H_LONGBOW", "MAIN_MACE_HELL"])
+        && zerg.hash === "c=castle&n=20&st=clap&p=2H_LONGBOW,MAIN_MACE_HELL&g=abc", zerg && zerg.hash);
 
   const slotsFrom = run("slotsFromWeapons");
   check("weapons become slots from position 1",

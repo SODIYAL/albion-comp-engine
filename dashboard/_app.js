@@ -699,6 +699,19 @@ function partiesNow(){
 }
 const emptyParty = () => ({ party: [], PROV: [], COMBO: [], WHO: [], LOADOUT: [],
                             PLANNED: HARD_CAP, PLAN_TOUCHED: true, AVOID: [], AVOID_SIG: "" });
+/* a party without its forged slots (a content switch: they were built for
+   the old template); manual and live members stay with their kits, combos
+   and sign-up names, and locks survive */
+function dropForged(s){
+  const keep = s.party.map((_, i) => i).filter(i => s.PROV[i] !== "f");
+  return Object.assign({}, s, {
+    party: keep.map(i => s.party[i]),
+    LOADOUT: keep.map(i => (s.LOADOUT || [])[i]),
+    COMBO: keep.map(i => (s.COMBO || [])[i]),
+    WHO: keep.map(i => (s.WHO || [])[i]),
+    PROV: keep.map(i => s.PROV[i] === "l" ? "l" : "m")
+  });
+}
 /* open party k (k === PARTIES.length starts the next one). A party left
    empty at the end is dropped on the way out; the live-party sync stops,
    so the game's party never lands in another tab. */
@@ -714,6 +727,9 @@ function switchParty(k){
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   LIVE_SYNC = false;
   const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
+  const syncWrap = $("companion-sync-wrap");
+  if (syncWrap) syncWrap.hidden = LIVE_GUIDS === null || PARTY_I !== LIVE_PARTY;
+  disarmClear();
   hidePdashFly();
   sortPartyByRole();
   render();
@@ -2785,7 +2801,8 @@ function renderCompanion(live, err){
   load.hidden = false; load.disabled = known.length === 0;
   const syncWrap = $("companion-sync-wrap");
   if (syncWrap){
-    syncWrap.hidden = LIVE_GUIDS === null;   /* appears after the first load */
+    /* appears after the first load, on the party it loaded into */
+    syncWrap.hidden = LIVE_GUIDS === null || PARTY_I !== LIVE_PARTY;
     const cb = $("companion-sync");
     if (cb) cb.checked = LIVE_SYNC;
   }
@@ -2800,6 +2817,10 @@ function renderCompanion(live, err){
    user manually removed simply stops matching and stays gone. */
 let LIVE_SYNC = false;
 let LIVE_GUIDS = null;   /* guid -> {w, q, w2}: weapon + q/w spell ids */
+/* the party tab the live party was loaded into: the sync follows the game
+   there alone, and its box shows only on that tab, so a tick on another
+   party never writes the game's members into it */
+let LIVE_PARTY = null;
 
 function liveSpellPicks(w, spells){
   /* companion spell names -> picker indices (q/w only: the passive is not
@@ -2866,7 +2887,7 @@ const liveSig = m => ({ w: m.weapon,
                         g: Object.values(liveGearPicks(m.equipment) || {}).join("+") });
 
 function syncLiveComp(){
-  if (!LIVE_SYNC || !LIVE_GUIDS || !companionData) return;
+  if (!LIVE_SYNC || !LIVE_GUIDS || !companionData || PARTY_I !== LIVE_PARTY) return;
   let changed = false;
   for (const m of (companionData.members || [])){
     if (!m.guid || !m.weapon || !WEAPONS[m.weapon]) continue;
@@ -2931,6 +2952,7 @@ function loadCompanionParty(){
   hidePdashFly();
   LIVE_GUIDS = {};
   live.forEach(m => { if (m.guid) LIVE_GUIDS[m.guid] = liveSig(m); });
+  LIVE_PARTY = PARTY_I;
   LIVE_SYNC = true;
   sortPartyByRole();
   PLANNED = Math.max(PLANNED, party.length);
@@ -3050,7 +3072,7 @@ function render(){
   renderRecDetail(recs); renderMetaStrip(); renderFootnote();
 }
 
-function compText(){
+function plannerCompText(){
   const sn = styleName();
   const lines = [
     `**${tpl().name}${sn ? " · " + sn : ""}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
@@ -3071,7 +3093,11 @@ function compText(){
    short label */
 function flashBtn(btn, text, back){
   if (btn.classList.contains("pd-act")){
-    const lbl = btn.querySelector("span"), was = lbl ? lbl.textContent : "";
+    /* a second click inside the flash keeps the label from before the
+       first, never the flash text */
+    const lbl = btn.querySelector("span");
+    if (btn.dataset.flash !== "1") btn.dataset.flashWas = lbl ? lbl.textContent : "";
+    const was = btn.dataset.flashWas || "";
     btn.dataset.flash = "1"; btn.title = text;
     if (lbl) lbl.textContent = text;
     setTimeout(() => { delete btn.dataset.flash; btn.title = back; if (lbl) lbl.textContent = was; }, 1400);
@@ -3079,6 +3105,24 @@ function flashBtn(btn, text, back){
   }
   btn.textContent = text;
   setTimeout(() => { btn.textContent = back; }, 1400);
+}
+/* the two-step clear's armed state sits on its buttons; the 2.2 s timeout
+   and every party switch disarm both, so an arm on one party never clears
+   another with a single click */
+let CLEAR_TIMER = null;
+function clearSay(clr, t, short){
+  if (clr.id === "clear"){ clr.textContent = t; return; }
+  clr.title = t; clr.setAttribute("aria-label", t);
+  const lbl = clr.querySelector("span");
+  if (lbl) lbl.textContent = short;
+}
+function disarmClear(){
+  clearTimeout(CLEAR_TIMER); CLEAR_TIMER = null;
+  for (const clr of [$("clear"), $("pdash-clear")]){
+    if (!clr) continue;
+    delete clr.dataset.armed;
+    clearSay(clr, "clear comp", "clear");
+  }
 }
 
 /* Edge panels: one state machine for every viewport-edge flyout. State is
@@ -3381,14 +3425,8 @@ document.addEventListener("click", e => {
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp. The setup drawer's button says so in
        its text, the party board's segment in its colour and short label. */
-    const say = (t, short) => {
-      if (clr.id === "clear"){ clr.textContent = t; return; }
-      clr.title = t; clr.setAttribute("aria-label", t);
-      const lbl = clr.querySelector("span");
-      if (lbl) lbl.textContent = short;
-    };
     if (clr.dataset.armed === "1"){
-      delete clr.dataset.armed; say("clear comp", "clear");
+      disarmClear();
       party = []; PROV = []; COMBO = []; WHO = []; FORGE_NOTE = null;
       REPLACE_OPEN = null; REPLACE_OPTS = [];
       /* a cleared comp no longer follows the live party: the box reads
@@ -3397,8 +3435,10 @@ document.addEventListener("click", e => {
       const cbSync = $("companion-sync"); if (cbSync) cbSync.checked = false;
       loadoutClear(); render();
     } else {
-      clr.dataset.armed = "1"; say("really clear? click again", "sure?");
-      setTimeout(() => { delete clr.dataset.armed; say("clear comp", "clear"); }, 2200);
+      clearSay(clr, "really clear? click again", "sure?");
+      clr.dataset.armed = "1";
+      clearTimeout(CLEAR_TIMER);
+      CLEAR_TIMER = setTimeout(disarmClear, 2200);
     }
     return;
   }
@@ -3419,7 +3459,7 @@ document.addEventListener("click", e => {
   const exp = e.target.closest("#export, #pdash-export");
   if (exp){
     if (navigator.clipboard && navigator.clipboard.writeText)
-      navigator.clipboard.writeText(compText()).then(() =>
+      navigator.clipboard.writeText(plannerCompText()).then(() =>
         flashBtn(exp, "copied", "copy comp text"));
     return;
   }
@@ -3441,13 +3481,11 @@ document.addEventListener("change", e => {
        hand-set plan survives the switch until the ask is answered */
     ASK_SIZE = !!sizePrompt();
     /* manual/live members SURVIVE a content switch; slots the
-       forge generated were built for the OLD template and are dropped —
-       "reforge all" or "forge the rest" rebuilds them for the new one. */
-    const keep = party.map((_, i) => i).filter(i => PROV[i] !== "f");
-    party = keep.map(i => party[i]);
-    LOADOUT = keep.map(i => LOADOUT[i]);
-    COMBO = keep.map(i => COMBO[i]);
-    PROV = keep.map(i => PROV[i] === "l" ? "l" : "m");   /* locks survive */
+       forge generated were built for the OLD template and are dropped,
+       in every party (the content is the zerg's) — "reforge all" or
+       "forge the rest" rebuilds them for the new one. */
+    PARTIES = partiesNow().map(dropForged);
+    partyLoad(PARTIES[PARTY_I]);
     REPLACE_OPEN = null; REPLACE_OPTS = [];
     FORGE_NOTE = null; LO_OPEN = null; LO_PICKING = null;
     render();

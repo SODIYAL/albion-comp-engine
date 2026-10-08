@@ -480,6 +480,12 @@ function guildErrorMessage(err) {
   let rows = [];            /* memberRows of the selected guild */
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an action still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state (a join code renewed for one guild never lands in another's
+     panel) */
+  let session = 0;
+  let listState = "ready";  /* the list: "loading" until the service answers, "failed" when it did not */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -491,10 +497,14 @@ function guildErrorMessage(err) {
   /* ---- the guild list ---- */
 
   function renderList() {
-    if (!guilds.length) {
+    /* an unanswered list says so: "in no guild yet" is the service's
+       answer, never the wait for it */
+    if (listState !== "ready" || !guilds.length) {
       const li = document.createElement("li");
       li.className = "gd-none";
-      li.textContent = "You are in no guild yet. Create one, or join with a code.";
+      li.textContent = listState === "loading" ? "Loading your guilds…"
+        : listState === "failed" ? "Your guilds did not load. Close this dialog and open it again to retry."
+        : "You are in no guild yet. Create one, or join with a code.";
       el.list.replaceChildren(li);
     } else {
       el.list.replaceChildren(...guilds.map(({ guild, role }) => {
@@ -723,23 +733,32 @@ function guildErrorMessage(err) {
     }
   }
 
+  /* true once the list is read; false when the read failed (the panel then
+     shows no guild rather than one just left or deleted) or another read
+     took its place */
   async function reload(keep) {
     const seq = ++openSeq;
     try {
       guilds = await loadMyGuilds();
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       guilds = [];
+      current = null;
+      rows = [];
+      listState = "failed";
       renderList();
+      renderGuild();
       showError(guildErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
+    listState = "ready";
     const still = guilds.some(g => g.guild.id === keep);
     current = still ? keep : (guilds[0] ? guilds[0].guild.id : null);
     renderList();
     await select(current);
+    return true;
   }
 
 
@@ -748,17 +767,18 @@ function guildErrorMessage(err) {
   async function act(button, label, fn, done) {
     if (busy) return;
     busy = true;
+    const ours = session;
     clearMessages();
     if (button) acctBusy(button, label);
 
     try {
       const result = await fn();
-      await done(result);
+      if (ours === session) await done(result);
     } catch (err) {
-      showError(guildErrorMessage(err));
+      if (ours === session) showError(guildErrorMessage(err));
     } finally {
       if (button) acctIdle(button);
-      busy = false;
+      if (ours === session) busy = false;
     }
   }
 
@@ -800,8 +820,7 @@ function guildErrorMessage(err) {
     act(b, isMe ? "Leaving…" : "Removing…", () => removeMember(g.guild.id, userId), async () => {
       if (isMe) {
         announce(`You left ${g.guild.name}.`);
-        await reload(null);
-        showNotice(`You left ${g.guild.name}.`);
+        if (await reload(null)) showNotice(`You left ${g.guild.name}.`);
       } else {
         rows = rows.filter(r => r.userId !== userId);
         renderGuild();
@@ -816,8 +835,7 @@ function guildErrorMessage(err) {
     if (!g || !account.user) return;
     if (!window.confirm(`Leave ${g.guild.name}?`)) return;
     act(el.leave, "Leaving…", () => leaveGuild(g.guild.id), async () => {
-      await reload(null);
-      showNotice(`You left ${g.guild.name}.`);
+      if (await reload(null)) showNotice(`You left ${g.guild.name}.`);
     });
   });
 
@@ -826,8 +844,7 @@ function guildErrorMessage(err) {
     if (!g) return;
     if (!window.confirm(`Delete ${g.guild.name}? Every membership goes with it. This cannot be undone.`)) return;
     act(el.remove, "Deleting…", () => deleteGuild(g.guild.id), async () => {
-      await reload(null);
-      showNotice(`${g.guild.name} was deleted.`);
+      if (await reload(null)) showNotice(`${g.guild.name} was deleted.`);
     });
   });
 
@@ -882,8 +899,7 @@ function guildErrorMessage(err) {
         () => createGuild({ name: el.newName.value, albionServer: el.newServer.value }),
         async guild => {
           el.newName.value = "";
-          await reload(guild.id);
-          showNotice(`${guild.name} created. Share its join code from the guild's panel.`);
+          if (await reload(guild.id)) showNotice(`${guild.name} created. Share its join code from the guild's panel.`);
         });
   });
 
@@ -894,8 +910,7 @@ function guildErrorMessage(err) {
 
     act(el.joinSubmit, "Joining…", () => joinGuild(el.joinCode.value), async guild => {
       el.joinCode.value = "";
-      await reload(guild.id);
-      showNotice(`You joined ${guild.name}.`);
+      if (await reload(guild.id)) showNotice(`You joined ${guild.name}.`);
     });
   });
 
@@ -905,6 +920,10 @@ function guildErrorMessage(err) {
   async function openGuilds() {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    for (const b of [el.leave, el.remove, el.renew, el.renameSubmit, el.newSubmit, el.joinSubmit]) acctIdle(b);
     const names = accountNames(account.profile, account.user);
     el.newServer.value = names.server || "";
     clearMessages();
@@ -912,6 +931,7 @@ function guildErrorMessage(err) {
     guilds = [];
     rows = [];
     current = null;
+    listState = "loading";
     renderList();
     renderGuild();
 

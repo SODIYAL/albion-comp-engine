@@ -59,6 +59,25 @@ async function saveMyProfile({ albionName, albionServer, displayName }) {
 }
 
 
+/* The account's own row as the database holds it now: the profile form's
+   baseline. Never the sign-up metadata, which no save updates, nor a copy
+   read at page load, which a failed read leaves empty for the visit. */
+async function loadMyProfile() {
+  const id = await myUserId();
+  const { data, error } = await window.DB
+    .from("profiles")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+
 async function loadMyWeapons() {
   const id = await myUserId();
   const { data, error } = await window.DB
@@ -310,8 +329,15 @@ function profileErrorMessage(err) {
   let saved = { albionName: null, albionServer: null, displayName: null, lists: { main: [], secondary: [] } };
   /* the list loaded: a list never shown can never be saved over */
   let weaponsReady = false;
+  /* the same for the names: read from the database when the dialog opens,
+     and editable only once read */
+  let identityReady = false;
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: a save still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
 
 
   /* ---- state -> the form ---- */
@@ -328,8 +354,12 @@ function profileErrorMessage(err) {
   const identityChanged = typed => IDENTITY.some(key => typed[key] !== saved[key]);
 
   function dirty() {
-    return identityChanged(typedIdentity())
+    return (identityReady && identityChanged(typedIdentity()))
       || (weaponsReady && !sameWeaponLists(lists, saved.lists));
+  }
+
+  function setIdentityEnabled(on) {
+    for (const input of Object.values(FIELDS)) input.disabled = !on;
   }
 
   /* the saved row back into the form and the baseline */
@@ -451,7 +481,8 @@ function profileErrorMessage(err) {
   /* ---- editing the lists ---- */
 
   function add(key, where) {
-    if (listed().has(key) || listed().size >= WEAPONS_MAX) return;
+    /* the list waits while a save runs: its answer replaces the list */
+    if (busy || listed().has(key) || listed().size >= WEAPONS_MAX) return;
     lists[where].push(key);
     renderLists();
     announce(`${weaponInfo(CATALOG, key).name} added to ${LIST_NAMES[where]}.`);
@@ -597,9 +628,15 @@ function profileErrorMessage(err) {
   async function openProfile() {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
     const seq = ++openSeq;
     const names = accountNames(account.profile, account.user);
 
+    /* the names the page holds show while the row is read; the row, once
+       read, is the baseline a save compares against */
     el.display.value = names.display;
     el.albion.value = names.albion;
     el.server.value = names.server;
@@ -608,28 +645,41 @@ function profileErrorMessage(err) {
               displayName: cleanName(names.display), lists: { main: [], secondary: [] } };
     lists = { main: [], secondary: [] };
     weaponsReady = false;
+    identityReady = false;
+    setIdentityEnabled(false);
 
     acctMessage(el.error, el.notice, null, "");
     acctFlagFields(FIELDS, {});
-    setNote("Loading your weapons…");
+    setNote("Loading your profile…");
     renderLists();
 
     if (!dialog.open) dialog.showModal();
-    el.albion.focus();
 
-    try {
-      const rows = await loadMyWeapons();
-      if (seq !== openSeq) return;
-      lists = weaponLists(rows);
+    const [p, w] = await Promise.all([
+      loadMyProfile().then(row => ({ row }), err => ({ err })),
+      loadMyWeapons().then(rows => ({ rows }), err => ({ err }))
+    ]);
+    if (seq !== openSeq) return;
+
+    const notes = [];
+    if (p.row) {
+      takeRow(p.row);
+      identityReady = true;
+      window.Account.updateProfile(p.row);
+    } else {
+      notes.push(`Your name, server and display name could not be loaded, so they cannot be edited now. ${profileErrorMessage(p.err)}`);
+    }
+    setIdentityEnabled(identityReady);
+    if (w.rows) {
+      lists = weaponLists(w.rows);
       saved.lists = copyWeaponLists(lists);
       weaponsReady = true;
-      setNote("");
-    } catch (err) {
-      if (seq !== openSeq) return;
-      setNote(`Your weapons could not be loaded, so they cannot be edited now. ${profileErrorMessage(err)}`);
+    } else {
+      notes.push(`Your weapons could not be loaded, so they cannot be edited now. ${profileErrorMessage(w.err)}`);
     }
-
+    setNote(notes.join(" "));
     renderLists();
+    if (identityReady && !el.form.contains(document.activeElement)) el.albion.focus();
   }
 
   el.form.addEventListener("input", markDirty);
@@ -639,52 +689,63 @@ function profileErrorMessage(err) {
     if (busy) return;
 
     acctMessage(el.error, el.notice, null, "");
-    const first = acctFlagFields(FIELDS, validateIdentity({
+    const first = identityReady ? acctFlagFields(FIELDS, validateIdentity({
       albionName: el.albion.value, albionServer: el.server.value, displayName: el.display.value
-    }));
+    })) : null;
     if (first) { first.focus(); return; }
 
     const identity = typedIdentity();
-    const identityDirty = identityChanged(identity);
-    const weaponsChanged = weaponsReady && !sameWeaponLists(lists, saved.lists);
+    const identityDirty = identityReady && identityChanged(identity);
+    /* the lists as sent, taken now: the save never reads them after a wait
+       (a reopened dialog empties them while it loads, and sending that
+       would delete every row) */
+    const sendLists = weaponsReady && !sameWeaponLists(lists, saved.lists) ? copyWeaponLists(lists) : null;
 
-    if (!identityDirty && !weaponsChanged) {
+    if (!identityDirty && !sendLists) {
       showNotice("Nothing to save: your profile is up to date.");
       return;
     }
 
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Saving…");
 
     try {
       if (identityDirty) {
         try {
           const row = await saveMyProfile(identity);
-          takeRow(row);
+          if (mine === session) takeRow(row);
           window.Account.updateProfile(row);
         } catch (err) {
-          showError(profileErrorMessage(err));
+          if (mine === session) showError(profileErrorMessage(err));
           return;
         }
       }
 
-      if (weaponsChanged) {
+      if (sendLists) {
         try {
-          lists = weaponLists(await saveMyWeapons(lists));
-          saved.lists = copyWeaponLists(lists);
-          renderLists();
+          const rows = await saveMyWeapons(sendLists);
+          if (mine === session) {
+            lists = weaponLists(rows);
+            saved.lists = copyWeaponLists(lists);
+            renderLists();
+          }
         } catch (err) {
-          showError((identityDirty ? "Your name, server and display name were saved; your weapons were not. " : "")
-                    + profileErrorMessage(err));
+          if (mine === session) {
+            showError((identityDirty ? "Your name, server and display name were saved; your weapons were not. " : "")
+                      + profileErrorMessage(err));
+          }
           return;
         }
       }
 
-      showNotice("Profile saved.");
+      if (mine === session) showNotice("Profile saved.");
     } finally {
-      busy = false;
-      acctIdle(el.save);
-      markDirty();
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+        markDirty();
+      }
     }
   });
 

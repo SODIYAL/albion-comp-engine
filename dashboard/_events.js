@@ -498,6 +498,7 @@ function eventErrorMessage(err) {
   let guilds = [];            /* [{guild, role}] the account belongs to */
   let events = [];            /* the selected guild's list */
   let listState = "ready";    /* the list: "loading" until the service answers, "failed" when it did not */
+  let shownGuild = null;      /* the guild whose list is shown */
   let templates = [];         /* the selected guild's comps, for a new event */
   let current = null;         /* the open event: {id, guild_id, ..., slots} or a new one */
   let slots = [];             /* the open event's slots as edited */
@@ -620,7 +621,11 @@ function eventErrorMessage(err) {
     if (full) el.create.hidden = true;
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadList(null); });
+  /* while an action waits, the guild stays the one whose list is shown */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadList(null);
+  });
 
   el.list.addEventListener("click", e => {
     const b = e.target.closest("[data-event]");
@@ -1077,11 +1082,13 @@ function eventErrorMessage(err) {
       if (mine !== session) return;
       current.status = row.status;
       current.updated_at = row.updated_at;
-      await reloadList(current.id, true);
+      const listed = await reloadList(current.id, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
-      announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
+      if (listed) {
+        showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
+        announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
+      }
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -1118,11 +1125,13 @@ function eventErrorMessage(err) {
       row.slots = normalizeSlots(slots);
       current = row;
       slots = normalizeSlots(row.slots);
-      await reloadList(row.id, true);
+      const listed = await reloadList(row.id, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice("CTA saved.");
-      announce("CTA saved.");
+      if (listed) {
+        showNotice("CTA saved.");
+        announce("CTA saved.");
+      }
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -1148,10 +1157,10 @@ function eventErrorMessage(err) {
       if (mine !== session) return;
       current = null;
       slots = [];
-      await reloadList(null, true);
+      const listed = await reloadList(null, true);
       if (mine !== session) return;
       renderEvent();
-      showNotice(`${name} was deleted.`);
+      if (listed) showNotice(`${name} was deleted.`);
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
@@ -1165,8 +1174,11 @@ function eventErrorMessage(err) {
 
   /* ---- loading ---- */
 
+  /* true once the guild's list is on screen; false when the read failed or
+     another read took its place */
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
+    shownGuild = guildId();
     /* a quiet reload (after a save, a move or a delete) keeps the list on
        screen until the new one arrives */
     if (!quiet) {
@@ -1177,21 +1189,22 @@ function eventErrorMessage(err) {
     }
     renderList();
     renderEvent();
-    if (!guildId()) return;
+    if (!guildId()) return true;
 
     try {
       [events, templates] = await Promise.all([loadGuildEvents(guildId()), loadGuildTemplates(guildId())]);
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       if (!quiet) { listState = "failed"; renderList(); }
       showError(eventErrorMessage(err));
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
     listState = "ready";
     renderList();
     if (keepId && !quiet) await openEvent(keepId);
+    return true;
   }
 
   async function openEvents() {

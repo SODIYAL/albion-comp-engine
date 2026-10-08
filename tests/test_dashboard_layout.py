@@ -536,7 +536,8 @@ codec = seg(read("_loadout.js"), "function provEncode", "function provDecode", "
 check("PROV_STATES" in codec and "l: true" in read("_loadout.js"),
       "L21k the permalink provenance codec carries the lock state")
 switch = seg(APP, 'if (e.target.id === "content")', 'if (e.target.id === "style")', "L21 switch anchors")
-check('PROV[i] === "l" ? "l" : "m"' in switch,
+_drop = seg(APP, "function dropForged(s){", "/* open party k", "L21 drop anchors")
+check("partiesNow().map(dropForged)" in switch and 's.PROV[i] === "l" ? "l" : "m"' in _drop,
       "L21l locks survive a content switch")
 check(".wf-ctl{" in SHELL and ".wf-dm.locked .wf-mcard{" in SHELL and ".dm-replace{" in SHELL,
       "L21m the controls, the locked tile and the replace list are styled")
@@ -795,6 +796,14 @@ _eng = Engine()
 drift = [k for k in CATALOG if CATALOG[k]["role"] != _eng.role_of(k)]
 check(not drift, "L28o each entry's role is the engine's role_class (one role read)", str(drift[:5]))
 
+check("session++;" in seg(profile_ui, "async function openProfile()", "const [p, w] = await Promise.all", "L28q open anchors")
+      and "const sendLists = " in profile_ui and "saveMyWeapons(sendLists)" in profile_ui
+      and "saveMyWeapons(lists)" not in profile_ui and "loadMyProfile()" in profile_ui
+      and "setIdentityEnabled(identityReady);" in profile_ui and "if (busy || listed().has(key)" in profile_ui,
+      "L28q a reopened profile dialog starts idle; a save sends the lists taken at the click (a list "
+      "emptied by a reopen is never sent, which would delete every row); the names are read from "
+      "the database on opening and stay locked until read")
+
 print("L29 - guilds: the second feature module follows the profile's pattern")
 # Guilds (platform phase 2): its own script after the profile, identity
 # through window.Account, the client only in its helpers, weapons read
@@ -829,6 +838,13 @@ check(".gd-grid{grid-template-columns:1fr}" in LAYOUT, "L29m on a phone the guil
 i_guild = script_at(lambda a, b: "function loadMyGuilds" in b)
 check(0 <= i_profile < i_guild, "L29n the guilds module loads after the profile, in its own <script>",
       "script indices profile=%d guild=%d" % (i_profile, i_guild))
+
+check("session++;" in seg(guild_ui, "async function openGuilds()", "await reload(null);", "L29o open anchors")
+      and "if (ours === session) await done(result);" in guild_ui and "if (ours === session) busy = false;" in guild_ui
+      and '"Loading your guilds…"' in guild_ui and guild_ui.count("if (await reload(") == 5,
+      "L29o a reopened guild dialog starts idle and an action from before changes nothing in it (a "
+      "renewed code never lands in another guild's panel); the list reads Loading until it is "
+      "answered, and a failed re-read is never covered by a success notice")
 
 print("L30 - saved comps: the planner is reached through the address bar alone")
 # A comp template is saved from the planner's share hash and opened by
@@ -881,6 +897,16 @@ check(sorted(CONTENTS) == sorted(_ds["templates"]) and all(CONTENTS[k] == (_ds["
       "L30p the contents on offer are the dataset's templates, by name")
 check(sorted(STYLES) == sorted(k for k in _ds.get("styles", {}) if k != "balanced"),
       "L30q the styles on offer are the dataset's, balanced being the absence of one")
+
+check("session++;" in seg(comps_ui, "async function openComps(opts)", "const seq = ++openSeq;", "L30s open anchors")
+      and "const sent = normalizeSlots(slots);" in comps_ui and "row.slots = sent;" in comps_ui
+      and "if (seq !== openSeq || tpl !== tplSeq) return;" in comps_ui and '"Loading comps…"' in comps_ui
+      and "if (busy) { el.guild.value = shownGuild" in comps_ui
+      and "want.fromPlanner && listed && seq === openSeq - 1" in comps_ui,
+      "L30s a reopened comps dialog starts idle; a save keeps the slots it sent as saved (a label "
+      "typed meanwhile stays unsaved); a comp read on its way never replaces one opened or taken "
+      "from the planner since; the list reads Loading until answered; the guild cannot change "
+      "under a pending action")
 
 print("L31 - CTAs: an event is a copy of a comp, met through the address bar alone")
 # CTAs (platform phase 4): the fourth feature module. Its roster is
@@ -1404,6 +1430,21 @@ check(".pd-act[hidden]{display:none}" in SHELL and ".pdash-actions{margin-bottom
       "L42d a hidden segment stays hidden; on a phone the bar clears the tab bar over the sheet, "
       "and the narrowest keep it on one line with icons only")
 
+def _tops(js):
+    return {m.group(1) or m.group(2) for m in re.finditer(
+        r"^(?:async\s+)?function\s+([A-Za-z_$][\w$]*)|^(?:const|let|var|class)\s+([A-Za-z_$][\w$]*)", js, re.M)}
+_planner_tops = _tops(APP) | _tops(DECISION_JS) | _tops(LO_JS)
+_acct_js = {"_supabase.js": SUPABASE_JS, "_auth.js": AUTH_JS, "_profile.js": PROFILE_JS, "_guild.js": GUILD_JS,
+            "_comps.js": COMPS_JS, "_events.js": EVENTS_JS, "_signup.js": SIGNUP_JS, "_history.js": HISTORY_JS,
+            "_import.js": IMPORT_JS, "_roster.js": ROSTER_JS, "_build.js": BUILD_JS}
+_clash = sorted("%s:%s" % (f, n) for f, js in _acct_js.items() for n in _tops(js) & _planner_tops)
+_names = list(_acct_js)
+_clash += sorted("%s/%s:%s" % (a, b, n) for i, a in enumerate(_names) for b in _names[i + 1:]
+                 for n in _tops(_acct_js[a]) & _tops(_acct_js[b]))
+check(not _clash and "function plannerCompText(){" in APP and "writeText(plannerCompText())" in APP,
+      "L42e no top-level name is declared twice across the page's scripts: a later script's "
+      "function replaced the planner's comp text, so its copy button copied the word Comp", str(_clash))
+
 print("L43 - a zerg is several parties of 20, each its own comp")
 check("const HARD_CAP = 20;" in APP and 'id="size-input" type="number" min="2" max="20"' in SHELL
       and "const baseSize = () => Math.min(tplBase(), HARD_CAP);" in APP
@@ -1430,6 +1471,20 @@ check("partyEncode(i + 1, s)" in _save and "`&t=${PARTY_I + 1}`" in _save
       and "if (!nums.length && open.party.length > HARD_CAP){" in _load,
       "L43d the address carries every party (t names the open one); a one-party link is "
       "unchanged and a roster past 20 from before the cap opens as parties of 20")
+
+check("disarmClear();" in seg(APP, "function switchParty(k){", "function renderPartyTabs(){", "L43e switch anchors")
+      and "CLEAR_TIMER = setTimeout(disarmClear, 2200);" in APP,
+      "L43e the clear's arm never crosses a party: a switch disarms both buttons")
+check("let LIVE_PARTY = null;" in APP and "LIVE_PARTY = PARTY_I;" in APP
+      and "|| PARTY_I !== LIVE_PARTY) return;" in APP
+      and APP.count("LIVE_GUIDS === null || PARTY_I !== LIVE_PARTY") == 2,
+      "L43f the live sync follows the game into the party it was loaded into, and its box shows "
+      "only there: a tick on another party never writes the game's members into it")
+check("PARTIES = partiesNow().map(dropForged);" in APP and "WHO: keep.map(i => (s.WHO || [])[i])," in APP,
+      "L43g a content switch drops the forged slots of every party, keeping the sign-up names on "
+      "their members")
+check('return key !== "t" && !/^[npgfk][1-9][0-9]?$/.test(key);' in COMPS_JS,
+      "L43h a comp or CTA saved from a zerg keeps the open party's address alone (test_comps)")
 
 if FAILURES:
 
