@@ -12,11 +12,17 @@
  * The engine is the planner's own (CompEngine over DATASET, the same
  * code the parity gate runs), on an instance of this module's own, so
  * nothing of the planner's state is read or written: the inputs are
- * the CTA's content, style and the weapon keys of its slots, exactly
- * what a share link carries. Who signed up, what they declared and what
- * the guild's members play are shown BESIDE the engine's needs, never
- * scored: attendance and preference are no scoring input (a logged
- * decision would be needed for that).
+ * the CTA's content, style, the weapon keys of its slots and the build
+ * each slot is read in, exactly what a share link carries. A slot is
+ * read in the build the CTA's saved link holds for it, as the planner
+ * reads that link, else in the engine's default kit for its weapon:
+ * the engine's targets are person units, and a roster read naked fell
+ * short of them on every forged comp ("Tankiness — needed" at 10.0 of
+ * 69.7 on a forged Blackzone Roam 20 the planner reads as covered).
+ * Who signed up, what they declared and what the guild's members play
+ * are shown BESIDE the engine's needs, never scored: attendance and
+ * preference are no scoring input (a logged decision would be needed
+ * for that).
  *
  * build.py inlines this file as its own <script> after _import.js. The
  * sheet hands its roster over as a DOM event (sheet-read) after every
@@ -44,6 +50,12 @@ const ROSTER_GAP_MIN = 0.5;
 /* the roster cap the engine is asked for: a CTA's slot bound (the
    database's 60, three parties of the planner's HARD_CAP) */
 const ROSTER_SIZE_MAX = 60;
+
+/* the gear slots a saved build wears, in the codec's order (the order
+   the planner hands the engine), and the spell picks it stores with the
+   pool each indexes */
+const ROSTER_GEAR = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+const ROSTER_SPELL_POOL = { q: "q", w: "w", p: "passive" };
 
 const ROSTER_VERDICTS = { ok: "closes a gap", redundant: "a depth pick", negative: "costs the comp" };
 
@@ -85,6 +97,68 @@ function plannedParty(board) {
 }
 
 
+/* the plan's seats: every slot naming a weapon, with its position */
+function plannedSeats(board) {
+  return ((board && board.rows) || []).filter(r => r.weapon_id)
+    .map(r => ({ position: r.position, weapon: r.weapon_id, source: "slot" }));
+}
+
+
+/* What the CTA's saved link holds of the comp it was made from: the
+   weapons in order (p=), each member's saved build (g=: gear and spell
+   picks) and explicit combo (k=: a forge's E-slot use no picker holds).
+   tables.loadout and tables.combo are the planner's codec (_loadout.js);
+   without them, or without a link, nothing is saved. */
+function savedComp(shareHash, tables) {
+  const t = tables || {};
+  const params = new URLSearchParams(String(shareHash || "").replace(/^#/, ""));
+  const weapons = (params.get("p") || "").split(",").filter(Boolean);
+  if (!weapons.length || typeof t.loadout !== "function") return { weapons: [], loadouts: [], combos: [] };
+  return {
+    weapons,
+    loadouts: t.loadout(params.get("g") || "") || [],
+    combos: typeof t.combo === "function" ? t.combo(params.get("k") || "", weapons.length) : []
+  };
+}
+
+
+/* The build one seat is read in. A slot whose weapon is the saved comp's
+   member at its position reads that member's saved build as the planner
+   reads the link: its curated pieces in the codec's order (a two-handed
+   weapon's off-hand left out), its explicit combo, else its picked
+   spells. Any other seat (no build saved, the weapon changed, a slot
+   naming none) reads the engine's default kit for its weapon, the
+   doctrine kit winners wear for its seat, on the default spells.
+   spells: the planner's pools (SPELLS), which the picks index. */
+function slotBuild(saved, seat, engine, spells) {
+  const i = seat.position - 1;
+  const w = seat.weapon;
+  const mine = !!saved && seat.source === "slot" && saved.weapons[i] === w;
+  const L = mine ? saved.loadouts[i] : undefined;
+  const k = mine ? saved.combos[i] : null;
+  if (L || Number.isInteger(k)) {
+    const db = engine.gear || {};
+    const gears = ROSTER_GEAR.filter(s => L && L[s] && db[L[s]] && !(s === "offhand" && String(w).startsWith("2H_")))
+      .map(s => L[s]);
+    let combo = Number.isInteger(k) ? k : null;
+    if (combo === null && L && typeof engine.comboFromPicks === "function") {
+      const pools = (spells && spells[w]) || {};
+      const picks = {};
+      let any = false;
+      for (const [field, pool] of Object.entries(ROSTER_SPELL_POOL)) {
+        const list = pools[pool] || [];
+        if (Number.isInteger(L[field]) && list[L[field]]) { picks[pool] = list[L[field]][0]; any = true; }
+      }
+      if (any) combo = engine.comboFromPicks(w, picks);
+    }
+    return { combo, gears: gears.length ? gears : null, from: "saved" };
+  }
+  const v0 = typeof engine.kitVariants === "function" ? (engine.kitVariants(w) || [])[0] : null;
+  const kit = v0 && v0[1];
+  return { combo: null, gears: kit && kit.length ? kit.slice() : null, from: "default" };
+}
+
+
 /* the content and style the engine is asked for: the CTA's when the
    dataset has them, else the first template and balanced */
 function rosterContext(event, data) {
@@ -97,14 +171,17 @@ function rosterContext(event, data) {
 }
 
 
-/* the engine's needs of a party at its size: the gaps the planner
-   lists, each with whether it is a hard floor unmet or a heavy
-   capability under half (the planner's "needed" cut) */
-function rosterNeeds(engine, party, top) {
-  const supply = engine.effectiveSupply(party);
-  return engine.weaknesses(party, top).filter(x => x.gap >= ROSTER_GAP_MIN).map(x => {
+/* the engine's needs of a party at its size, read in its builds: the
+   gaps the planner lists, each with whether it is a hard floor unmet or
+   a heavy capability under half (the planner's "needed" cut). A hard
+   floor reads the weapon and spell supply alone: worn gear never buys
+   floor relief (the planner's supplyFloor). */
+function rosterNeeds(engine, party, top, combos, gears) {
+  const supply = engine.effectiveSupply(party, combos, gears);
+  const floorSupply = engine.effectiveSupply(party, combos);
+  return engine.weaknesses(party, top, combos, gears).filter(x => x.gap >= ROSTER_GAP_MIN).map(x => {
     const have = supply[x.cap] || 0;
-    const floor = !!engine.floorArmed(x.cap, have);
+    const floor = !!engine.floorArmed(x.cap, floorSupply[x.cap] || 0);
     const ratio = x.target ? have / x.target : 1;
     return { cap: x.cap, label: rosterCapLabel(x.cap), have, target: x.target, gap: x.gap,
              floor, needed: floor || (engine.weight(x.cap) >= 6 && ratio < 0.5) };
@@ -113,8 +190,8 @@ function rosterNeeds(engine, party, top) {
 
 
 /* what sits past its soft cap */
-function rosterOverstack(engine, party) {
-  const supply = engine.effectiveSupply(party);
+function rosterOverstack(engine, party, combos, gears) {
+  const supply = engine.effectiveSupply(party, combos, gears);
   const out = [];
   for (const cap of Object.keys(engine.reqs || {})) {
     const soft = engine.softCap(cap);
@@ -125,11 +202,14 @@ function rosterOverstack(engine, party) {
 }
 
 
-/* The read: the held roster judged at its own size, the next picks one
-   body ahead, the seats a swap improves, the overstack and the
-   duplicate checks; the plan's coverage beside it when the plan is
-   bigger than what is held. The engine is left at the held size. */
-function rosterRead(event, board, engine) {
+/* The read: the held roster judged at its own size in its builds, the
+   next picks one body ahead, the seats a swap improves, the overstack
+   and the duplicate checks; the plan's coverage beside it when the plan
+   is bigger than what is held. tables: the planner's codec and spell
+   pools ({ loadout, combo, spells }) the saved builds are read through;
+   without them every seat reads the default kit. The engine is left at
+   the held size. */
+function rosterRead(event, board, engine, tables) {
   const ctx = rosterContext(event, engine.data);
   if (!ctx.content) return null;
   /* a key this build's dataset does not hold (a stale comp, an old profile,
@@ -137,29 +217,41 @@ function rosterRead(event, board, engine) {
      allowed to stop it */
   const knows = w => !engine.weapons || !!engine.weapons[w];
   const heldAll = heldParty(board);
-  const plannedAll = plannedParty(board);
+  const plannedAll = plannedSeats(board);
   const held = { party: [], seats: [] };
   heldAll.seats.forEach(s => { if (knows(s.weapon)) { held.seats.push(s); held.party.push(s.weapon); } });
-  const planned = plannedAll.filter(knows);
-  const unknown = [...new Set(heldAll.party.concat(plannedAll).filter(w => !knows(w)))].sort();
+  const plannedKnown = plannedAll.filter(s => knows(s.weapon));
+  const planned = plannedKnown.map(s => s.weapon);
+  const unknown = [...new Set(heldAll.party.concat(plannedAll.map(s => s.weapon)).filter(w => !knows(w)))].sort();
   const size = Math.min(Math.max(held.party.length, 1), ROSTER_SIZE_MAX);
   const at = n => engine.setContent(ctx.content, Math.min(Math.max(n, 1), ROSTER_SIZE_MAX), ctx.style);
+  const saved = savedComp(event && event.share_hash, tables);
+  const spells = tables && tables.spells;
+  /* the builds are taken in the context they are judged in: the default
+     kit follows the content, the size and the style */
+  const buildsOf = seats => {
+    const b = seats.map(s => slotBuild(saved, s, engine, spells));
+    return { combos: b.map(x => x.combo), gears: b.map(x => x.gears), saved: b.filter(x => x.from === "saved").length };
+  };
 
   at(size);
-  const fitness = held.party.length ? engine.fitness(held.party) : 0;
-  const max = engine.maxFitness(held.party);
-  const needs = rosterNeeds(engine, held.party, ROSTER_NEEDS);
-  const over = rosterOverstack(engine, held.party);
-  const duplicates = held.party.length > 1 ? engine.duplicateConflicts(held.party) : [];
-  const swaps = held.party.length > 1 ? engine.swapReview(held.party, ROSTER_SWAP_OPTIONS) : [];
+  const hb = buildsOf(held.seats);
+  const fitness = held.party.length ? engine.fitness(held.party, hb.combos, hb.gears) : 0;
+  const max = engine.maxFitness(held.party, hb.combos, hb.gears);
+  const needs = rosterNeeds(engine, held.party, ROSTER_NEEDS, hb.combos, hb.gears);
+  const over = rosterOverstack(engine, held.party, hb.combos, hb.gears);
+  const duplicates = held.party.length > 1 ? engine.duplicateConflicts(held.party, hb.combos) : [];
+  const swaps = held.party.length > 1 ? engine.swapReview(held.party, ROSTER_SWAP_OPTIONS, null, hb.combos, hb.gears) : [];
   const replacements = swaps.filter(s => s.redundant || s.off_comp || s.off_style).map(s => ({
     index: s.index, weapon: s.weapon, seat: held.seats[s.index] || null, verdict: s.verdict,
     offComp: !!s.off_comp, offStyle: !!s.off_style,
     options: (s.options || []).slice(0, ROSTER_SWAP_OPTIONS).map(o => ({ weapon: o.weapon, gain: o.gain }))
   }));
 
+  /* the next pick one body ahead, the held seats in the builds they were
+     read in (the planner holds a member's kit while it prices a pick) */
   at(held.party.length + 1);
-  const picks = engine.recommend(held.party, ROSTER_PICKS).map((r, i) => ({
+  const picks = engine.recommend(held.party, ROSTER_PICKS, null, hb.combos, hb.gears).map((r, i) => ({
     rank: i + 1, weapon: r.weapon, verdict: r.verdict || "ok", score: r.score,
     capsGain: r.caps_gain || 0
   }));
@@ -167,26 +259,41 @@ function rosterRead(event, board, engine) {
   let plan = null;
   if (planned.length > held.party.length) {
     at(planned.length);
-    const pf = engine.fitness(planned);
-    const pm = engine.maxFitness(planned);
+    const pb = buildsOf(plannedKnown);
+    const pf = engine.fitness(planned, pb.combos, pb.gears);
+    const pm = engine.maxFitness(planned, pb.combos, pb.gears);
     plan = { count: planned.length, fitness: pf, max: pm, coverage: pm ? pf / pm : 0,
-             needs: rosterNeeds(engine, planned, 3) };
+             needs: rosterNeeds(engine, planned, 3, pb.combos, pb.gears) };
   }
   at(size);
 
   return {
     content: ctx.content, style: ctx.style, knownContent: ctx.known, size,
-    held: { count: held.party.length, seats: held.seats, fitness, max, coverage: max ? fitness / max : 0 },
+    held: { count: held.party.length, seats: held.seats, fitness, max, coverage: max ? fitness / max : 0, saved: hb.saved },
     needs, over, duplicates, picks, replacements, plan, unknown
   };
 }
 
 
-/* what a read is of: the content, the style, the held party and the
-   plan; a sheet change that keeps these keeps the read */
+/* what a read is of: the content, the style, the saved link (the
+   builds), the held party and the plan; a sheet change that keeps
+   these keeps the read */
 function rosterKey(event, board) {
   const ev = event || {};
-  return [ev.content || "", ev.style || "", heldParty(board).party.join(","), plannedParty(board).join(",")].join("|");
+  return [ev.content || "", ev.style || "", ev.share_hash || "", heldParty(board).party.join(","), plannedParty(board).join(",")].join("|");
+}
+
+
+/* the line that says which build the held slots are read in */
+function rosterBuildsNote(read) {
+  const n = read && read.held ? read.held.count : 0;
+  if (!n) return "";
+  const s = read.held.saved || 0;
+  if (s === n) return n === 1 ? "The held slot is read in the build the CTA's comp saved for it." : "Every held slot is read in the build the CTA's comp saved for it.";
+  if (!s) return n === 1
+    ? "The held slot is read in the engine's default kit for its weapon (no build saved for it, or its weapon changed)."
+    : "The held slots are read in the engine's default kit for each weapon (no build saved for them, or their weapons changed).";
+  return `${s} held slot${s === 1 ? " is" : "s are"} read in the build the CTA's comp saved, ${n - s} in the engine's default kit for the weapon (no build saved, or the slot's weapon changed).`;
 }
 
 
@@ -265,7 +372,8 @@ function rosterHeadline(read, board, catalog) {
 }
 
 
-const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at their number (a slot naming no weapon counts its player's first declared weapon); "
+const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at their number (a slot naming no weapon counts its player's first declared weapon), "
+  + "each in the build the CTA's comp saved for its slot, else in the engine's default kit for the weapon (what winners wear in its seat); "
   + "the next pick is judged one body ahead. Who signed up, what they declared and what members play are shown beside the engine's needs, never scored. "
   + "The same engine and rules as the planner: open the CTA in the planner for the full read.";
 
@@ -315,6 +423,14 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     }
     return engine;
   }
+
+  /* the planner's codec and spell pools the saved builds are read
+     through (the same tables the sheet's build panel reads) */
+  const tables = () => ({
+    loadout: typeof loadoutDecode === "function" ? loadoutDecode : null,
+    combo: typeof comboDecode === "function" ? comboDecode : null,
+    spells: typeof SPELLS !== "undefined" ? SPELLS : {}
+  });
 
   function art(key) {
     const info = weaponInfo(CATALOG, key);
@@ -474,6 +590,8 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
         + `${read.unknown.length === 1 ? "is" : "are"} left out of the read: ${read.unknown.join(", ")}.`);
     }
     if (!read.knownContent) notes.push(`The CTA's content is not in this build's templates; the read uses ${CONTENTS[read.content] || read.content}.`);
+    const builds = rosterBuildsNote(read);
+    if (builds) notes.push(builds);
     if (read.plan) notes.push(`The plan (${read.plan.count} slots) covers ${rosterPct(read.plan.coverage)}`
       + (read.plan.needs.length ? `; its biggest needs: ${read.plan.needs.map(n => n.label).join(", ")}.` : "."));
     el.note.textContent = notes.join(" ");
@@ -520,12 +638,13 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     if (!eng) { wrap.hidden = true; return; }
     const board = sheetBoard(d.slots, d.signups);
     /* a mark or a move changes the sheet, not what the engine reads: the
-       read is computed again only when the roster's weapons change */
+       read is computed again only when the roster's weapons or the saved
+       builds change */
     const key = rosterKey(d.event, board);
     let read = last && lastKey === key ? last.read : null;
     if (!read) {
       try {
-        read = rosterRead(d.event, board, eng);
+        read = rosterRead(d.event, board, eng, tables());
       } catch (err) {
         read = null;
       }

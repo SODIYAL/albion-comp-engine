@@ -288,7 +288,14 @@ and its tests: `supabase/README.md`.
   engine and data, never the planner's instance, roster, kits or address
   bar) and asks it about the weapon keys of the HELD slots (the slot's
   weapon, else the claimant's first declared weapon) at their number,
-  the CTA's content and style: the coverage (fitness over its ceiling),
+  the CTA's content and style, each slot in its build: the build the
+  CTA's saved link holds for it, read as the planner reads the link
+  (curated pieces, the explicit combo, else the picked spells), when the
+  slot still names that member's weapon, else the engine's default kit
+  for the weapon (`kitVariants(w)[0]`, the doctrine kit) on its default
+  spells; a hard floor reads the weapon and spell supply alone, as the
+  planner's does. The read reports how many held slots read a saved
+  build. Then the coverage (fitness over its ceiling),
   the biggest needs (the planner's gap cut; a hard floor unmet or a
   heavy capability under half marked needed), the next picks one body
   ahead with their verdict, the held seats a swap improves
@@ -301,8 +308,9 @@ and its tests: `supabase/README.md`.
   swap; members come through the guild module's helpers, for a member
   of the CTA's guild (matched to the sheet by name, whatever its case).
   None of that reaches the engine: the parties it is handed are weapon
-  keys alone (`tests/test_roster.js` pins it on a stub engine and runs
-  the read on the real one). The sheet hands its roster over as a
+  keys and their builds (`tests/test_roster.js` pins it on a stub engine
+  and runs the read on the real one, where a forged comp's saved link
+  reads the planner's fitness). The sheet hands its roster over as a
   `sheet-read` DOM event after every render and clears it on close; the
   read is painted into the sheet's `rr-*` elements, which the sign-up
   module never touches; it is computed again only when the roster's

@@ -1269,8 +1269,9 @@ check("new CompEngine(DATASET" in ROSTER_JS and "engine.setContent(" in ROSTER_J
 check(not re.search(r"\bENG\b|\brender\(|saveHash|loadHash|syncEngine|PLANNED|LOADOUT|location\.hash|COMBOS_CUR|GEARS_CUR", ROSTER_JS),
       "L38h the roster module reads and writes no planner state: never the planner's engine, roster, kits or address bar")
 planner_globals = set(re.findall(r"\b(CAP_LABEL|CAP_PROSE|ICONS|DATASET|CompEngine|SEMANTIC_ICONS|WEAPONS|TREES|ITEMS|SPELLS|GEAR|USAGE|FAMILIES)\b", ROSTER_JS))
-check(planner_globals == {"CAP_LABEL", "CAP_PROSE", "ICONS", "DATASET", "CompEngine"},
-      "L38i the planner's globals it reads are the engine, the dataset, the icons and the capability words, no other", str(sorted(planner_globals)))
+check(planner_globals == {"CAP_LABEL", "CAP_PROSE", "ICONS", "DATASET", "CompEngine", "SPELLS"},
+      "L38i the planner's globals it reads are the engine, the dataset, the icons, the capability words and "
+      "the spell pools a saved build's picks index, no other", str(sorted(planner_globals)))
 check("window.DB" not in ROSTER_JS and ".from(" not in ROSTER_JS and ".rpc(" not in ROSTER_JS and ".channel(" not in ROSTER_JS
       and "loadGuildMembers(" in ROSTER_JS and "loadMembersWeapons(" in ROSTER_JS and "memberRows(" in ROSTER_JS,
       "L38j the roster module reaches no table: members and their lists come through the guild module's helpers")
@@ -1291,6 +1292,16 @@ check("const knows = w => !engine.weapons || !!engine.weapons[w];" in ROSTER_JS 
       and "membersLoading" in ROSTER_JS,
       "L38s a weapon key the build does not hold is left out of the read and named, never hiding it; "
       "a failed member list is tried again on the next read (test_roster)")
+check("function slotBuild(saved, seat, engine, spells) {" in ROSTER_JS
+      and "rosterRead(d.event, board, eng, tables())" in ROSTER_JS
+      and 'loadout: typeof loadoutDecode === "function" ? loadoutDecode : null,' in ROSTER_JS
+      and "const floorSupply = engine.effectiveSupply(party, combos);" in ROSTER_JS
+      and "engine.recommend(held.party, ROSTER_PICKS, null, hb.combos, hb.gears)" in ROSTER_JS
+      and "ev.share_hash" in seg(ROSTER_JS, "function rosterKey(", "function rosterBuildsNote(", "L38t key anchors"),
+      "L38t the read takes each slot in the build the CTA's saved link holds for it, as the planner reads "
+      "the link, else in the engine's default kit (a naked read put \"Tankiness — needed\" on every forged "
+      "comp of 10+); a hard floor reads the weapon and spell supply alone; a CTA saved again is read again "
+      "(test_roster)")
 
 print("L38r - the build on the sheet: the planner's saved loadout per slot, named from the page's tables, display only")
 # Phase 12: the build module reads the CTA's share hash (p= and g=, the

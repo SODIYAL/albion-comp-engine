@@ -13,17 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The CTA sheet's engine read grades naked weapon keys**: `_roster.js`
-  hands the engine weapon keys alone (the account boundary, V: 09b, The
-  engine on the live roster), so its coverage, needs, overstack and next picks
-  grade NAKED rosters against person-unit targets, the unit error T26
-  names: every forged roster of 10+ reads "Tankiness — needed" (forged
-  Blackzone Roam 20 clap: 11.0 of 69.68 naked, covered dressed), where the
-  planner, every board number dressed, reads no such gap. Dressing each
-  held key in the engine's own doctrine kit (`kitVariants(w)[0][1]`,
-  engine data, not account data) would read the planner's units;
-  `tests/test_roster.js` pins "weapon keys alone" (V: 10, The dressed paths
-  read what they score).
 - **A gears list longer than the party**: both ports count a tail entry
   past the party in the self-cost waiver and the carrier quota (the refund
   loop stops at the party's end, F38b); no caller passes one. Whether

@@ -285,9 +285,10 @@ Rules a change must not break. The decision behind each is logged in
   planner never calls it; no account row (profile, weapon list, sign-up,
   attendance) is a scoring input without a logged decision. The sheet's
   engine read (`_roster.js`) is the one account surface that calls the
-  engine: its own `CompEngine` instance over the dataset, handed weapon
-  keys alone; who signed up and what members play are shown beside its
-  needs, never handed to it. Every account
+  engine: its own `CompEngine` instance over the dataset, handed the
+  slots' weapon keys, each in the build the CTA's saved link holds for
+  its slot, else the engine's default kit for the weapon; who signed up
+  and what members play are shown beside its needs, never handed to it. Every account
   table follows `supabase/README.md` (RLS first, anon revoked except a
   guest's listed reach through a CTA's share code, column grants, invoker
   functions); `test_supabase_schema.py` and `test_supabase_rls.mjs` pin it.
