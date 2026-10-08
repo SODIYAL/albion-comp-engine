@@ -9677,6 +9677,23 @@ const FLOORS = () => tpl().hard_floors || {};
 const tplBase = () => tpl().base_size || 7;
 const baseSize = () => Math.min(tplBase(), HARD_CAP);
 const validatedSizes = () => tpl().validated_sizes || [baseSize()];
+/* the plan party i (0 = party 1) starts at: party 1 the suggestion; a
+   later party what the suggestion leaves once the parties before it seat
+   HARD_CAP each (a Castle's 25 is 20 and 5), at least 2; once the
+   suggestion fits in the parties before it, a full party, held to the
+   content's in-game cap */
+function partyBase(i){
+  if (!i) return baseSize();
+  const full = Math.min(HARD_CAP, tpl().max_size || HARD_CAP);
+  const rest = tplBase() - HARD_CAP * i;
+  return rest > 0 ? Math.min(full, Math.max(2, rest)) : full;
+}
+/* a party's plan as a link states it (n2=…): a count past the party cap
+   is a full party, one under the floor of 2 is 2, and none (or junk) is
+   what the content suggests for that party */
+function partyPlanned(v, i){
+  return (Number.isInteger(v) && v >= 1) ? Math.min(HARD_CAP, Math.max(2, v)) : partyBase(i);
+}
 
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
@@ -10096,11 +10113,16 @@ function loadHash(){
      suppress the localStorage restore and the seed party */
   if (!("c" in p) && !("n" in p) && !("st" in p) && !("p" in p)) return false;
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
+  /* the open party's number first: its plan falls back to, and is read
+     against, the content's suggestion for that party (partyBase) */
+  const nums = partyNumbers(p);
+  const t = parseInt(p.t, 10);
+  const openNo = (nums.length && t >= 1 && t <= PARTIES_MAX && !nums.includes(t)) ? t : 1;
   const n = parseInt(p.n, 10);   // integers only — +"0x10"/+"7.5" slipped through
-  PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();
-  /* a link or session whose size is not the template's suggestion was set
-     on purpose: it keeps that size across content switches */
-  PLAN_TOUCHED = PLANNED !== baseSize();
+  PLANNED = (n >= 2 && n <= HARD_CAP) ? n : partyBase(openNo - 1);
+  /* a link or session whose size is not the content's suggestion for its
+     party was set on purpose: it keeps that size across content switches */
+  PLAN_TOUCHED = PLANNED !== partyBase(openNo - 1);
   /* a link into a content that asks for its size: the link's n= answers
      it, a link without one asks */
   ASK_SIZE = !!sizePrompt() && !(n >= 2 && n <= HARD_CAP);
@@ -10117,9 +10139,6 @@ function loadHash(){
      party holds at most HARD_CAP. */
   const open = partyDecode(p, "");
   const rawWho = whoFromSession(h, p.p ? p.p.split(",").length : 0);
-  const nums = partyNumbers(p);
-  const t = parseInt(p.t, 10);
-  const openNo = (nums.length && t >= 1 && t <= PARTIES_MAX && !nums.includes(t)) ? t : 1;
   const cut = (d, a, b) => ({ party: d.party.slice(a, b), PROV: d.PROV.slice(a, b),
                               COMBO: d.COMBO.slice(a, b), LOADOUT: d.LOADOUT.slice(a, b),
                               index: d.index.slice(a, b) });
@@ -10127,14 +10146,17 @@ function loadHash(){
     party: d.party, PROV: d.PROV, COMBO: d.COMBO, LOADOUT: d.LOADOUT,
     WHO: who ? d.party.map((w, m) => rawWho[d.index[m]] ? { w, name: rawWho[d.index[m]] } : undefined) : [],
     PLANNED: planned, PLAN_TOUCHED: touched, AVOID: [], AVOID_SIG: "" });
-  const sized = v => (v >= 2 && v <= HARD_CAP) ? v : HARD_CAP;
+  /* a later party's plan is touched when it is not the content's
+     suggestion for that party, the open party's rule */
+  const later = (d, planned, i) => held(d, planned, planned !== partyBase(i), false);
   const parties = [];
   if (!nums.length && open.party.length > HARD_CAP){
     /* a roster past one party, from before the party cap: parties of
-       HARD_CAP in its order, the first one open */
+       HARD_CAP in its order, the first one open; a later party plans what
+       the link's n= leaves of it (a CTA of 25 opens as 20 and 5) */
     for (let a = 0; a < open.party.length; a += HARD_CAP){
       const d = cut(open, a, a + HARD_CAP);
-      parties.push(a ? held(d, Math.max(d.party.length, sized((n || 0) - a)), true, false)
+      parties.push(a ? later(d, Math.max(d.party.length, partyPlanned((n || 0) - a, a / HARD_CAP)), a / HARD_CAP)
                      : held(d, PLANNED, PLAN_TOUCHED, true));
     }
     PARTY_I = 0;
@@ -10144,8 +10166,8 @@ function loadHash(){
       if (j === openNo) parties.push(held(cut(open, 0, HARD_CAP), PLANNED, PLAN_TOUCHED, true));
       else if (nums.includes(j)){
         const d = partyDecode(p, String(j));
-        parties.push(held(cut(d, 0, HARD_CAP), sized(d.PLANNED), true, false));
-      } else parties.push(emptyParty());
+        parties.push(later(cut(d, 0, HARD_CAP), partyPlanned(d.PLANNED, j - 1), j - 1));
+      } else parties.push(emptyParty(j - 1));
     }
     PARTY_I = openNo - 1;
   }
@@ -10276,8 +10298,11 @@ function partiesNow(){
   all[PARTY_I] = partySnap();
   return all;
 }
-const emptyParty = () => ({ party: [], PROV: [], COMBO: [], WHO: [], LOADOUT: [],
-                            PLANNED: HARD_CAP, PLAN_TOUCHED: true, AVOID: [], AVOID_SIG: "" });
+/* party i opens at the content's suggestion for it (a Castle's party 2
+   plans the 5 party 1 leaves) and follows the content, as party 1 does,
+   until its plan is set by hand */
+const emptyParty = i => ({ party: [], PROV: [], COMBO: [], WHO: [], LOADOUT: [],
+                           PLANNED: partyBase(i), PLAN_TOUCHED: false, AVOID: [], AVOID_SIG: "" });
 /* a party without its forged slots (a content switch: they were built for
    the old template); manual and live members stay with their kits, combos
    and sign-up names, and locks survive */
@@ -10297,7 +10322,7 @@ function dropForged(s){
 function switchParty(k){
   PARTIES = partiesNow();
   if (k === PARTY_I || k < 0 || k > PARTIES.length || k >= PARTIES_MAX) return;
-  if (k === PARTIES.length) PARTIES.push(emptyParty());
+  if (k === PARTIES.length) PARTIES.push(emptyParty(k));
   if (PARTY_I > 0 && PARTY_I === PARTIES.length - 1 && !PARTIES[PARTY_I].party.length && k < PARTY_I)
     PARTIES.pop();
   PARTY_I = k;
@@ -10372,14 +10397,20 @@ function renderSetup(){
   $("style-blurb").textContent = (styles[STYLE] || {}).blurb || "";
   $("size-input").value = PLANNED;
   const presets = (sizePrompt() ? sizePrompt().sizes.slice()
-    : [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b)).filter(n => n <= HARD_CAP);
+    : [...new Set(validatedSizes().concat([partyBase(PARTY_I)]))].sort((a,b) => a-b)).filter(n => n <= HARD_CAP);
   $("size-presets").innerHTML = presets.map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
+  /* a later party reads its own share of the starting point (partyBase) */
+  const before = PARTY_I === 1 ? "party 1" : `parties 1 to ${PARTY_I}`;
   $("size-hint").textContent = (party.length
     ? `Judged as the ${SIZE} you actually have — the forge fills toward ${PLAN()}.`
     : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`)
-    + (tplBase() > HARD_CAP
-      ? ` ${tplBase()} is the starting point for ${tpl().name}: a party seats ${HARD_CAP}, so the rest go in party 2 (the party board opens it once this party is full).`
+    + (PARTY_I && tplBase() > HARD_CAP * PARTY_I
+      ? ` ${tplBase()} is the starting point for ${tpl().name} and a party seats ${HARD_CAP}: party ${PARTY_I + 1} starts at the ${partyBase(PARTY_I)} ${before} ${PARTY_I === 1 ? "leaves" : "leave"}.`
+      : PARTY_I
+      ? ` ${tplBase()} is the starting point for ${tpl().name} and fits in ${before}: party ${PARTY_I + 1} starts at ${partyBase(PARTY_I)}, a full party.`
+      : tplBase() > HARD_CAP
+      ? ` ${tplBase()} is the starting point for ${tpl().name}: a party seats ${HARD_CAP}, so the rest go in party 2${PARTIES.length > 1 ? "" : " (the party board opens it once this party is full)"}.`
       : ` ${baseSize()} is the starting point for ${tpl().name}, not a cap.`);
   const fitStat = (tpl().fit || {}).stat;
   const borrowedFrom = (tpl().fit || {}).borrowed_from;
@@ -13082,7 +13113,6 @@ document.addEventListener("change", e => {
   }
   if (e.target.id === "content"){
     CONTENT = e.target.value;
-    if (!PLAN_TOUCHED) PLANNED = baseSize();
     /* a content with a size prompt asks every time it is entered; a
        hand-set plan survives the switch until the ask is answered */
     ASK_SIZE = !!sizePrompt();
@@ -13091,6 +13121,9 @@ document.addEventListener("change", e => {
        in every party (the content is the zerg's) — "reforge all" or
        "forge the rest" rebuilds them for the new one. */
     PARTIES = partiesNow().map(dropForged);
+    /* every party whose plan was never set by hand lands on the new
+       content's suggestion for it (partyBase) */
+    PARTIES.forEach((s, i) => { if (!s.PLAN_TOUCHED) s.PLANNED = partyBase(i); });
     partyLoad(PARTIES[PARTY_I]);
     REPLACE_OPEN = null; REPLACE_OPTS = [];
     FORGE_NOTE = null; LO_OPEN = null; LO_PICKING = null;

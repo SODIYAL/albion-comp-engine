@@ -619,5 +619,55 @@ function setUsage(baskets) {
         sums.every(([a, b]) => Math.abs(a - b) < 1e-9), JSON.stringify(sums));
 }
 
+/* 10 — a zerg's parties: party 1 plans the content's suggestion, a later
+   party what the suggestion leaves once the parties before it seat 20
+   each (a Castle's 25 is 20 and 5; every new party planned 20, a
+   40-player Castle), at least 2, and a full party once the suggestion
+   fits before it, held to the content's in-game cap. A link's n2=… reads
+   as a plan between 2 and 20, none as that suggestion. The real _app.js
+   functions run in a vm on the real templates. */
+{
+  const DATASET = JSON.parse(fs.readFileSync(
+    path.join(__dirname, "..", "pipeline", "out", "dataset-latest.json"), "utf8"));
+  const grab = (re, what) => {
+    const m = SRC.match(re);
+    if (!m) throw new Error(`could not extract ${what} from _app.js`);
+    return m[0];
+  };
+  const pctx = { Math, Number, TPL: null };
+  vm.createContext(pctx);
+  vm.runInContext("const tpl = () => TPL;", pctx);
+  for (const [re, what] of [
+    [/const HARD_CAP = \d+;/, "HARD_CAP"],
+    [/const tplBase = [^\n]*;/, "tplBase"],
+    [/const baseSize = [^\n]*;/, "baseSize"],
+    [/function partyBase\(i\)\{\n[\s\S]*?\n\}/, "partyBase"],
+    [/function partyPlanned\(v, i\)\{\n[\s\S]*?\n\}/, "partyPlanned"],
+  ]) vm.runInContext(grab(re, what), pctx);
+  const T = DATASET.templates;
+  const plans = (tp, k) => {
+    pctx.TPL = tp;
+    return JSON.stringify([...Array(k).keys()].map(i => vm.runInContext(`partyBase(${i})`, pctx)));
+  };
+  const read = (tp, expr) => { pctx.TPL = tp; return vm.runInContext(expr, pctx); };
+  check("party plans: a Castle of 25 is 20 and 5, and a third party a full 20",
+        plans(T.castle, 3) === "[20,5,20]", plans(T.castle, 3));
+  check("party plans: a content that fits in one party plans a full second party",
+        plans(T.territory_defense, 2) === "[20,20]" && plans(T.castle_outpost, 2) === "[7,20]",
+        plans(T.territory_defense, 2) + " / " + plans(T.castle_outpost, 2));
+  check("party plans: a content capped at one party never plans past its in-game cap",
+        plans(T.roads, 2) === "[7,7]" && plans(T.ancient_lands, 2) === "[5,20]",
+        plans(T.roads, 2) + " / " + plans(T.ancient_lands, 2));
+  check("party plans: past 40 the rest lands in party 3, at least 2",
+        plans({ base_size: 45 }, 3) === "[20,20,5]" && plans({ base_size: 41 }, 3) === "[20,20,2]"
+        && plans({ base_size: 21 }, 2) === "[20,2]",
+        plans({ base_size: 45 }, 3) + " / " + plans({ base_size: 41 }, 3) + " / " + plans({ base_size: 21 }, 2));
+  const linked = JSON.stringify(["partyPlanned(5, 1)", "partyPlanned(12, 1)", "partyPlanned(1, 1)",
+    "partyPlanned(25, 1)", "partyPlanned(null, 1)", "partyPlanned(0, 1)", "partyPlanned(-20, 1)",
+    "partyPlanned(NaN, 1)", "partyPlanned(null, 2)"].map(x => read(T.castle, x)));
+  check("party plans: a link's n2 reads between 2 and 20, and none (or junk) as the content's share",
+        linked === "[5,12,2,20,5,5,5,5,20]", linked);
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);

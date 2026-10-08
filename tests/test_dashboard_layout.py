@@ -594,8 +594,10 @@ opt = seg(APP, "content.innerHTML = Object.entries(DATASET.templates)", "content
 check(opt and "base" not in opt,
       "L24a the content option label is the template name alone, never a base size")
 cswitch = seg(APP, 'if (e.target.id === "content"){', "render();", "L24 content-switch anchors")
-check("if (!PLAN_TOUCHED) PLANNED = baseSize();" in cswitch,
-      "L24b a content switch resets the plan only while the plan is untouched")
+check("PARTIES.forEach((s, i) => { if (!s.PLAN_TOUCHED) s.PLANNED = partyBase(i); });" in cswitch
+      and "if (!PLAN_TOUCHED) PLANNED = baseSize();" not in APP,
+      "L24b a content switch resets each party's plan only while that plan is untouched, to the "
+      "new content's suggestion for that party")
 check("let PLAN_TOUCHED = false;" in APP,
       "L24c the touched flag starts false on a fresh page")
 sz = seg(APP, 'const sz = e.target.closest("[data-size]");', 'const cap = e.target.closest("[data-cap]");', "L24 size-control anchors")
@@ -604,9 +606,10 @@ check(sz.count("PLAN_TOUCHED = true") == 3,
 inp = seg(APP, 'if (e.target.id === "size-input"){', "else {", "L24 size-input anchors")
 check("PLAN_TOUCHED = true" in inp,
       "L24e the typed size marks the plan touched")
-restore = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();", "STYLE = ", "L24 restore anchors")
-check("PLAN_TOUCHED = PLANNED !== baseSize();" in restore,
-      "L24f a restored link or session counts as touched when its size is not the template's suggestion")
+restore = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : partyBase(openNo - 1);", "STYLE = ", "L24 restore anchors")
+check("PLAN_TOUCHED = PLANNED !== partyBase(openNo - 1);" in restore,
+      "L24f a restored link or session counts as touched when its size is not the content's "
+      "suggestion for the open party")
 check('<label for="size-input">Planned size</label>' in SHELL and "<span>size</span>" not in SHELL,
       "L24g the size field is labelled planned size, never size alone")
 check("<label>Suggested size</label>" in SHELL and "Party size presets" not in SHELL,
@@ -630,7 +633,7 @@ check(sz25.count("ASK_SIZE = false") == 3,
       "L25c preset, minus and plus each answer the ask")
 inp25 = seg(APP, 'if (e.target.id === "size-input"){', "else {", "L25 size-input anchors")
 check("ASK_SIZE = false" in inp25, "L25d the typed size answers the ask")
-restore25 = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();", "STYLE = ", "L25 restore anchors")
+restore25 = seg(APP, "PLANNED = (n >= 2 && n <= HARD_CAP) ? n : partyBase(openNo - 1);", "STYLE = ", "L25 restore anchors")
 check("ASK_SIZE = !!sizePrompt() && !(n >= 2 && n <= HARD_CAP);" in restore25,
       "L25e a link's size answers the ask, a link without one asks")
 foot = seg(APP, "function renderWheelFoot(", "const board = BOARD_HTML;", "L25 forge-slot anchors")
@@ -1440,13 +1443,14 @@ check(bool(_retired) and _welcome_offered == set(WEAPONS) - _retired,
 
 _wsrc = read("_welcome.html")
 _wcfg = (_json.loads(m_wc.group(1)) if m_wc else {}).get("templates", [])
-check(all("max" in x for x in _wcfg) and 'params.set(`n${j}`, String(Math.min(20, left)))' in _wsrc
+check(all("max" in x for x in _wcfg) and 'params.set(`n${j}`, String(Math.max(2, Math.min(20, left))))' in _wsrc
       and "const cap = item.max && item.max <= 20 ? item.max : 60;" in _wsrc
       and "size.value === lastBase" in _wsrc and "const matches = all.slice(0, 30);" in _wsrc,
-      "L41b the welcome page's team link opens a team past 20 as parties of 20 (the planner caps a "
-      "party at 20 and dropped the rest to the content's suggestion) and a content capped at one "
-      "party at its cap; the size follows every content switch until set by hand; a search counts "
-      "every match")
+      "L41b the welcome page's team link opens a team past 20 as parties of 20, the last at least "
+      "2 (the planner caps a party at 20 and dropped the rest to the content's suggestion; a team "
+      "of 21 sent n2=1, which the planner read as no plan) and a content capped at one party at "
+      "its cap; the size follows every content switch until set by hand; a search counts every "
+      "match")
 
 print("L42 - the party board ends in the comp's actions, one segmented bar")
 _pd = seg(SHELL, 'id="pdash"', "</aside>", "L42 party board anchors")
@@ -1565,6 +1569,28 @@ check("LO_SLOTS.filter(s => loSlotOpen(w, s))" in APP and "LO_SLOTS.filter(s => 
       "scored (test_display_math)")
 check("${party.length}/${Math.max(PLAN(), party.length)}" in APP,
       "L44i the copied comp text reads the members against the plan, never n/n")
+
+print("L45 - a zerg's later party plans what the content's starting point leaves")
+check("function partyBase(i){" in APP and "function partyPlanned(v, i){" in APP
+      and "PLANNED: partyBase(i), PLAN_TOUCHED: false" in APP
+      and "if (k === PARTIES.length) PARTIES.push(emptyParty(k));" in APP
+      and "PLANNED: HARD_CAP, PLAN_TOUCHED: true" not in APP,
+      "L45a the party board's next party plans the content's suggestion for it (a Castle's party 2 "
+      "plans the 5 party 1 leaves; every new party planned 20, a 40-player Castle) and follows "
+      "the content until set by hand (test_display_math)")
+check("later(cut(d, 0, HARD_CAP), partyPlanned(d.PLANNED, j - 1), j - 1)" in _load
+      and "} else parties.push(emptyParty(j - 1));" in _load
+      and "partyPlanned((n || 0) - a, a / HARD_CAP)" in _load
+      and "const later = (d, planned, i) => held(d, planned, planned !== partyBase(i), false);" in _load
+      and "const sized = " not in _load,
+      "L45b a link's later parties read their plan between 2 and 20, none as the content's "
+      "suggestion for that party, and count as touched against it; a roster past 20 with no "
+      "n= (a CTA opened in the planner) plans the rest of the suggestion in party 2")
+check("validatedSizes().concat([partyBase(PARTY_I)])" in APP
+      and "party ${PARTY_I + 1} starts at the ${partyBase(PARTY_I)} ${before}" in APP
+      and "party ${PARTY_I + 1} starts at ${partyBase(PARTY_I)}, a full party." in APP,
+      "L45c a later party's size hint and presets read its own share of the starting point, "
+      "never party 1's")
 
 if FAILURES:
 

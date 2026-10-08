@@ -13,13 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **A zerg's second party plans 20**: `emptyParty()` sets the new party's
-  plan to the party cap, so a Castle (base 25; the size hint says the rest
-  go in party 2) forges 20 more there, a 40-player zerg. The welcome page
-  opens a Castle of 25 as 20 and 5 (V: 10, The Dragon Portal and welcome
-  pages say what the data holds); the planner's own "+ Party 2" tab still
-  plans 20. Decide: party 2 plans the content's remainder when its base
-  passes 20, or keeps 20.
 - **The CTA sheet's engine read grades naked weapon keys**: `_roster.js`
   hands the engine weapon keys alone (the account boundary, V: 09b, The
   engine on the live roster), so its coverage, needs, overstack and next picks
