@@ -339,6 +339,8 @@
   .im-source{grid-template-columns:1fr}
   .im-text-field{grid-column:1}
   .im-table{display:block; overflow-x:auto}
+  /* the kit keeps two pieces to a line: the table scrolls sideways rather than stack them */
+  .im-kit{min-width:250px}
   .rr-grid{grid-template-columns:1fr}
   .masthead .chip.warn{order:0; flex:none}
   .mh-sum{display:flex; order:2; flex:1 1 100%; align-items:center; gap:10px;

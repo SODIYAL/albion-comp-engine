@@ -14,9 +14,15 @@
  * pipes, quotes, one column), how a name is read (a key, the name, an
  * alias, the words, a prefix, the initials, the key's words, a close
  * spelling; one candidate likely, several uncertain, none open), the
- * columns (a header, the cells, a list or a grid), the rows (sections,
- * counts, a grid's parties), the slots, the names learned, error
- * wording, and what the helpers send.
+ * columns (a header, the cells, a list or a grid, the gear slots), how a
+ * gear name is read within its slot (the gear catalog as build.py ships
+ * it: a tier the sheet writes, the highest otherwise, a city cape's
+ * short name), the rows (sections, counts, a grid's parties, the gear),
+ * the slots and their kits (an open slot and a two-hander's off-hand
+ * keep none), the share hash the kits ride in, read back by the
+ * planner's own decoder (_loadout.js partyDecode) and the sheet's build
+ * read (_build.js), the names learned, error wording, and what the
+ * helpers send. The workbook reader: tests/test_xlsx.js.
  *
  * Run:  node tests/test_import.js
  */
@@ -63,18 +69,38 @@ const DB = {
   channel() { throw new Error("the import is not live"); },
 };
 
+/* the dataset, and the gear catalog as build.py ships it to the page
+   (GEAR): gear_lines' items, named by the curated display name where
+   the item is curated, else with the tier adjective stripped */
+const DS = JSON.parse(fs.readFileSync(DATASET, "utf8"));
+const weapons = DS.weapons;
+const GEAR_LINES = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "pipeline", "out", "gear_lines.json"), "utf8"));
+const TIER_ADJ = ["Beginner's ", "Novice's ", "Journeyman's ", "Adept's ", "Expert's ", "Master's ", "Grandmaster's ", "Elder's "];
+const GEAR = {};
+for (const [key, item] of Object.entries(GEAR_LINES)) {
+  const g = Object.assign({}, item);
+  const curated = (DS.gear || {})[key] || {};
+  if (curated.display_name) g.name = curated.display_name;
+  else for (const adj of TIER_ADJ) if (String(g.name || "").startsWith(adj)) { g.name = g.name.slice(adj.length); break; }
+  GEAR[key] = g;
+}
+
 const ctx = { console, URLSearchParams, setTimeout, Promise, Proxy, Date, decodeURIComponent, encodeURIComponent };
 ctx.window = ctx;
 ctx.window.DB = DB;
+/* the planner's tables the codec and the build read reads: the gear
+   catalog, the weapons the planner holds, the spell pools */
+ctx.GEAR = GEAR;
+ctx.WEAPONS = weapons;
+ctx.ICONS = {};
 vm.createContext(ctx);
-for (const f of ["_auth.js", "_profile.js", "_guild.js", "_comps.js", "_events.js", "_signup.js", "_history.js", "_import.js"]) {
+for (const f of ["_loadout.js", "_auth.js", "_profile.js", "_guild.js", "_comps.js", "_events.js", "_signup.js", "_history.js", "_import.js", "_build.js"]) {
   vm.runInContext(fs.readFileSync(path.join(DASH, f), "utf8"), ctx, { filename: f });
 }
 const run = expr => vm.runInContext(expr, ctx);
 
 /* the catalog as build.py stamps it: every line's display name, the
    removed ones marked */
-const weapons = JSON.parse(fs.readFileSync(DATASET, "utf8")).weapons;
 const SPELLS = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "pipeline", "out", "spell_index.json"), "utf8"));
 const CATALOG = {};
 for (const [key, w] of Object.entries(weapons)) {
@@ -208,8 +234,8 @@ const index = run("weaponIndex")(CATALOG, []);
     + "GA (Cleanse)\tBo\tCleric Cowl\tCleric Robe\tScholar Sandals\nHeavy Mace\tCy\tSoldier Helmet\tKnight Armor\tSoldier Boots\n"
     + "Witchwork (DPS)\tDee\tMage Cowl\tMage Robe\tMage Sandals\nHallowfall\tEff\tCleric Cowl\tPurity Robe\tCleric Sandals").cells;
   const layout = run("detectColumns")(cells, index);
-  check("gear columns beside the weapon are ignored, not read as players",
-        same(layout.kinds, ["weapon", "player", "ignore", "ignore", "ignore"]), layout.kinds);
+  check("gear columns beside the weapon are read as their slots (helm, armor, boots), never as players",
+        same(layout.kinds, ["weapon", "player", "head", "armor", "shoes"]), layout.kinds);
   const rows = run("sheetRows")(cells, layout, index);
   check("the bracketed word is the slot's role, the name without it is what is matched",
         same(rows.map(r => `${r.text}|${r.role}|${r.match.status}`),
@@ -328,6 +354,132 @@ const index = run("weaponIndex")(CATALOG, []);
   check("the bounds: ALIAS_MAX 64, ALIASES_MAX 500, ALIAS_SAVE_MAX 100, the form", run("ALIAS_MAX") === 64 && run("ALIASES_MAX") === 500 && run("ALIAS_SAVE_MAX") === 100 && run("ALIAS_RE").test("1h holy") && !run("ALIAS_RE").test("Holy"));
 }
 
+/* 5b - how a gear name is read, within its slot, over the gear catalog
+   the page ships */
+{
+  const gearIdx = run("gearIndex")(GEAR);
+  const read = (text, slot) => run("matchGear")(text, slot, gearIdx);
+  const cases = [
+    ["Guardian Helmet", "head", "exact", "HEAD_PLATE_SET3"], ["Elder's Guardian Helmet", "head", "exact", "HEAD_PLATE_SET3"],
+    ["T8 Guardian Helmet", "head", "exact", "HEAD_PLATE_SET3"], ["HEAD_PLATE_SET3", "head", "exact", "HEAD_PLATE_SET3"],
+    ["T8_HEAD_PLATE_SET3@3", "head", "exact", "HEAD_PLATE_SET3"], ["Guardian", "head", "likely", "HEAD_PLATE_SET3"],
+    ["Guardian", "armor", "likely", "ARMOR_PLATE_SET3"], ["Judi helm", "head", "likely", "HEAD_PLATE_KEEPER"],
+    ["Guardian Helment", "head", "likely", "HEAD_PLATE_SET3"], ["Robe of Purity", "armor", "exact", "ARMOR_CLOTH_AVALON"],
+    ["Purity", "armor", "likely", "ARMOR_CLOTH_AVALON"], ["Hellion Jacket", "armor", "exact", "ARMOR_LEATHER_HELL"],
+    ["Poison Potion", "potion", "exact", "T8_POTION_COOLDOWN"], ["T6 Poison Potion", "potion", "exact", "T6_POTION_COOLDOWN"],
+    ["Poison", "potion", "likely", "T8_POTION_COOLDOWN"], ["resi pot", "potion", "likely", "T7_POTION_STONESKIN"],
+    ["cleanse", "potion", "likely", "T7_POTION_CLEANSE2"], ["Gigantify", "potion", "likely", "T7_POTION_REVIVE"],
+    ["Minor Healing Potion", "potion", "exact", "T2_POTION_HEAL"], ["Beef Stew", "food", "exact", "T8_MEAL_STEW"],
+    ["Pork Omelette", "food", "exact", "T7_MEAL_OMELETTE"], ["BW", "cape", "likely", "CAPEITEM_FW_BRIDGEWATCH"],
+    ["FS cape", "cape", "likely", "CAPEITEM_FW_FORTSTERLING"], ["Thetford", "cape", "likely", "CAPEITEM_FW_THETFORD"],
+    ["EoS", "offhand", "likely", "OFF_ORB_MORGANA"], ["Muisak", "offhand", "exact", "OFF_DEMONSKULL_HELL"],
+  ];
+  for (const [text, slot, status, key] of cases) {
+    const m = read(text, slot);
+    check(`gear: "${text}" in a ${slot} column reads as ${status} ${key}`, m.status === status && m.key === key, m);
+  }
+  const royal = read("Royal", "head");
+  check("gear: a name several items share is uncertain, one candidate per name (the Royal cowl, hood and helmet)",
+        royal.status === "uncertain" && royal.key === null && same([...royal.candidates].sort(), ["HEAD_CLOTH_ROYAL", "HEAD_LEATHER_ROYAL", "HEAD_PLATE_ROYAL"]), royal);
+  const omelette = read("Omelette", "food");
+  check("gear: a meal named by its kind alone is uncertain among the meals of that kind",
+        omelette.status === "uncertain" && omelette.candidates.includes("T7_MEAL_OMELETTE") && omelette.candidates.length <= run("IMPORT_CANDIDATES"), omelette);
+  check("gear: a name is read within its column's slot alone, and an unknown name is none",
+        read("Guardian Helmet", "armor").status !== "exact" && read("Shoes of Speed", "shoes").status === "none"
+        && read("Guardian", "potion").status === "none" && read("", "head").status === "none");
+  check("gear: the tier a sheet writes, else the highest: T6 and T8 Poison, a tier word, an enchantment",
+        run("gearTier")("T6 Poison") === 6 && run("gearTier")("Poison 8.1") === 8 && run("gearTier")("Master's Poison") === 6
+        && run("gearTier")("T8_MEAL_STEW") === 8 && run("gearTier")("Poison") === null);
+  check("gear: the index carries every slot and every item the page ships",
+        run("GEAR_KINDS").every(s => gearIdx[s].entries.length > 0)
+        && run("GEAR_KINDS").reduce((n, s) => n + gearIdx[s].entries.length, 0) === Object.values(GEAR).filter(g => run("GEAR_KINDS").includes(g.slot)).length);
+  check("gear: the gear kinds are the loadout codec's slots, in its order", same(run("GEAR_KINDS"), run("LO_SLOTS")));
+
+  /* the columns: a header names each slot; without one, cells that are
+     mostly one slot's items name it; a set's name alone names no slot */
+  const parse = run("parseSheet"), detect = run("detectColumns"), sheetRows = run("sheetRows");
+  const head = parse("Weapon\tPlayer\tHelm\tChest\tBoots\tCape\tOff-hand\tPotion\tFood\nHallowfall\tAsh\tCleric Cowl\tCleric Robe\tScholar Sandals\tBW\tMuisak\tPoison\tPork Omelette").cells;
+  check("gear: header words name the seven slots", same(detect(head, index, gearIdx).kinds, ["weapon", "player", "head", "armor", "shoes", "cape", "offhand", "potion", "food"]),
+        detect(head, index, gearIdx).kinds);
+  const bare = parse("Golem\tGuardian Helmet\tJudicator Armor\tKnight Boots\nHallowfall\tCleric Cowl\tCleric Robe\tScholar Sandals\nLongbow\tHellion Hood\tHellion Jacket\tHellion Shoes").cells;
+  check("gear: without a header the cells name the slot", same(detect(bare, index, gearIdx).kinds, ["weapon", "head", "armor", "shoes"]), detect(bare, index, gearIdx).kinds);
+  const sets = parse("Golem\tGuardian\nHallowfall\tCleric\nLongbow\tHellion").cells;
+  check("gear: a column of set names alone reads as no slot (a helm, an armor and boots equally)",
+        !run("GEAR_KINDS").includes(detect(sets, index, gearIdx).kinds[1]), detect(sets, index, gearIdx).kinds);
+  check("gear: without the gear catalog a gear header still names the slot",
+        same(detect(head, index).kinds.slice(2, 5), ["head", "armor", "shoes"]));
+  const grid = parse("Party 1\tHelm\tParty 2\tHelm\nGolem\tGuardian Helmet\tLongbow\tHellion Hood").cells;
+  const gridRows = sheetRows(grid, detect(grid, index, gearIdx), index, gearIdx);
+  check("gear: in a grid each party's gear columns are the ones to its right",
+        same(gridRows.map(r => `${r.text}|${r.party}|${(r.gear.head || {}).text}|${((r.gear.head || {}).match || {}).key}`),
+             ["Golem|Party 1|Guardian Helmet|HEAD_PLATE_SET3", "Longbow|Party 2|Hellion Hood|HEAD_LEATHER_HELL"]),
+        gridRows.map(r => r.gear));
+}
+
+/* 5c - the kits, the share hash they ride in, and the link read back by
+   the planner's own decoder and by the sheet's build read */
+{
+  const gearIdx = run("gearIndex")(GEAR);
+  const parse = run("parseSheet"), detect = run("detectColumns"), sheetRows = run("sheetRows"), importSlots = run("importSlots");
+  const text = "Weapon\tPlayer\tHelm\tChest\tBoots\tCape\tOff-hand\tPotion\tFood\n"
+    + "Hallowfall\tAsh\tCleric Cowl\tCleric Robe\tScholar Sandals\tBW\tMuisak\tPoison\tPork Omelette\n"
+    + "Mystery pick\tBo\tGuardian Helmet\t\t\t\t\t\t\n"
+    + "Golem\tCy\tGuardian Helmet\tJudicator Armor\tKnight Boots\tThetford\tMuisak\tT6 Poison Potion\tBeef Stew\n"
+    + "Longbow x2\tDee\tHellion Hood\tHellion Jacket\tRoyal\t\t\tGigantify\tOmelette\n"
+    + "Bedrock\tEff\t\t\t\t\t\t\t";
+  const cells = parse(text).cells;
+  const rows = sheetRows(cells, detect(cells, index, gearIdx), index, gearIdx);
+  const choices = rows.map(r => run("defaultChoice")(r));
+  const built = importSlots(rows, choices, {});
+  const kitOf = i => (built.slots[i].kit || {}).loadout || null;
+  check("kits: a read row's pieces in the codec's slots",
+        same(kitOf(0), { head: "HEAD_CLOTH_SET2", armor: "ARMOR_CLOTH_SET2", shoes: "SHOES_CLOTH_SET1", cape: "CAPEITEM_FW_BRIDGEWATCH",
+                         offhand: "OFF_DEMONSKULL_HELL", potion: "T8_POTION_COOLDOWN", food: "T7_MEAL_OMELETTE" }), kitOf(0));
+  check("kits: an open slot carries none, its row's gear notwithstanding", built.slots[1].weapon_id === null && !built.slots[1].kit);
+  check("kits: a two-handed weapon holds no off-hand; the sheet's T6 is the potion's tier",
+        built.slots[2].weapon_id === "2H_SHAPESHIFTER_KEEPER" && !("offhand" in kitOf(2)) && kitOf(2).potion === "T6_POTION_COOLDOWN"
+        && kitOf(2).food === "T8_MEAL_STEW" && kitOf(2).cape === "CAPEITEM_FW_THETFORD", kitOf(2));
+  check("kits: an uncertain piece is no piece until chosen; a count repeats the kit",
+        same(kitOf(3), { head: "HEAD_LEATHER_HELL", armor: "ARMOR_LEATHER_HELL", potion: "T7_POTION_REVIVE" }) && same(kitOf(4), kitOf(3))
+        && kitOf(3) !== kitOf(4), kitOf(3));
+  check("kits: a row without gear carries none, and the count of kits is the slots that carry one",
+        !built.slots[5].kit && built.kits === 4 && built.slots.length === 6);
+  const chosen = rows.map(() => ({}));
+  chosen[3] = { shoes: "SHOES_LEATHER_ROYAL", food: "" };
+  const built2 = importSlots(rows, choices, { gear: chosen });
+  check("kits: the caller's choice of an uncertain piece joins the kit", kitOf(3) && built2.slots[3].kit.loadout.shoes === "SHOES_LEATHER_ROYAL");
+  const gs = run("gearSummary")(rows, chosen, choices);
+  check("kits: the review counts the pieces kept (none of an open row, no two-hander's off-hand), the ones to check, to choose and unread",
+        same(gs, { pieces: 17, likely: 4, uncertain: 1, none: 0 }), gs);
+
+  const template = { content: "castle", style: "clap", planned_size: 20 };
+  const hash = run("kitHash")(template, built.slots);
+  const params = Object.fromEntries(hash.split("&").map(kv => [kv.slice(0, kv.indexOf("=")), kv.slice(kv.indexOf("=") + 1)]));
+  check("the share hash: the planner's fields, one p= entry per slot up to the last weapon (an open slot an empty entry), the kits in g=",
+        params.c === "castle" && params.n === "20" && params.st === "clap"
+        && params.p === "MAIN_HOLYSTAFF_AVALON,,2H_SHAPESHIFTER_KEEPER,2H_LONGBOW,2H_LONGBOW,MAIN_ROCKMACE_KEEPER"
+        && !!params.g && !("f" in params) && !("k" in params), params);
+  check("the share hash is on the database's form and under its bound",
+        /^[A-Za-z0-9_.,=&%:~!*()-]+$/.test(hash) && hash.length <= run("COMP_HASH_MAX"));
+  const opened = run("partyDecode")(params, "");
+  check("the planner reads the link as the comp: the open slot dropped with its fields, every member in its kit",
+        same(opened.party, ["MAIN_HOLYSTAFF_AVALON", "2H_SHAPESHIFTER_KEEPER", "2H_LONGBOW", "2H_LONGBOW", "MAIN_ROCKMACE_KEEPER"])
+        && same(opened.LOADOUT[0], kitOf(0)) && same(opened.LOADOUT[1], kitOf(2)) && same(opened.LOADOUT[2], kitOf(3))
+        && same(opened.LOADOUT[3], kitOf(4)) && opened.LOADOUT[4] === undefined && opened.PLANNED === 20,
+        { party: opened.party, LOADOUT: opened.LOADOUT });
+  const saved = Object.assign({}, template, { share_hash: hash });
+  check("a comp saved with the link opens with it whole (the kits ride along)", run("templateHash")(saved, built.slots) === hash);
+  const builds = run("sheetBuilds")(hash, built.slots.map(s => ({ position: s.position, weapon_id: s.weapon_id })),
+                                    { decode: run("loadoutDecode"), gear: GEAR, spells: {} });
+  check("a CTA made from it shows every slot's build at its position, a slot after the open one included",
+        builds[1].state === "set" && builds[2].state === "none" && builds[3].state === "set"
+        && same(builds[3].gear.map(g => g.key), ["HEAD_PLATE_SET3", "ARMOR_PLATE_KEEPER", "SHOES_PLATE_SET2", "CAPEITEM_FW_THETFORD", "T6_POTION_COOLDOWN", "T8_MEAL_STEW"])
+        && builds[5].state === "set" && builds[6].state === "unset", builds);
+  const payload = run("templatePayload")(Object.assign({ guild_id: "g1", name: "Castle", notes: "" }, saved, { slots: built.slots }));
+  check("the slots sent hold no kit: the kits live in the link", payload.slots.every(s => !("kit" in s)) && payload.share_hash === hash);
+  check("a sheet without gear makes no link", run("importSlots")(sheetRows(parse("Weapon\nLongbow").cells, detect(parse("Weapon\nLongbow").cells, index, gearIdx), index, gearIdx), null, {}).kits === 0);
+}
+
 /* 6 - error wording and what the helpers send */
 {
   const msg = run("importErrorMessage"), M = run("IMPORT_MSG"), importError = run("importError");
@@ -339,7 +491,9 @@ const index = run("weaponIndex")(CATALOG, []);
     ["refused by the policy", { code: "42501", message: "new row violates row-level security policy" }, M.refused],
     ["no row came back", { code: "refused", message: "the server refused the change" }, M.refused],
     ["a value the checks refuse", { code: "23514", message: "violates check constraint" }, M.invalid],
-    ["a workbook", importError("xlsx"), M.xlsx],
+    ["a workbook protected by a password", importError("xlsxLocked"), M.xlsxLocked],
+    ["an Excel 97-2003 workbook", importError("xls"), M.xls],
+    ["a damaged workbook", importError("xlsxCorrupt"), M.xlsxCorrupt],
     ["nothing pasted", importError("empty"), M.empty],
     ["unknown with its message", { code: "XX000", message: "odd" }, "Something went wrong: odd"],
   ];

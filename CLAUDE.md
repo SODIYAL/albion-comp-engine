@@ -128,6 +128,7 @@ node tests/test_portal_page.js      # Dragon Portal page: order, view switch, ad
 node tests/test_auth_ui.js          # account layer: validation, error wording, email-link return
 node tests/test_profile.js          # profile: weapon lists, search, roles, what the helpers send
 node tests/test_sheet_build.js      # the sheet's build read: a share hash's loadouts named per slot, display only
+node tests/test_xlsx.js             # the import's workbook reader: the zip, the parts, the cells, the bounds, the refusals
 py -3 tests/test_supabase_schema.py # account database rules as text: RLS, grants, functions, client bounds = database bounds
 node tests/test_supabase_rls.mjs    # migrations in a real Postgres (needs: npm install --no-save @electric-sql/pglite@0.5.8)
 py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on published comps minus one member
@@ -213,7 +214,8 @@ Three applications with explicit boundaries (each directory's README is its cont
   profiles, weapon lists, guilds (members with roles, a join code,
   guild-scoped reads), saved comps (a guild's templates, saved from and
   opened in the planner through the address bar's share hash, never a
-  call), CTAs (a guild's events: a status the guard moves one step at a
+  call; a slot's weapon set in the dialog, each slot keeping the kit its
+  saved link holds), CTAs (a guild's events: a status the guard moves one step at a
   time, a share code, slots COPIED from a comp and frozen once completed)
   and sign-up (the sheet a CTA's link opens; a guest's reach through the
   share code carried by the statement, their own row keyed by a claim
@@ -223,10 +225,12 @@ Three applications with explicit boundaries (each directory's README is its cont
   the attendance record kept apart from the sign-up by its own trigger,
   confirmed by the player, marked by the caller; the history: facts over
   completed CTAs computed on read, every measure defined, no skill
-  rating) and import and export (a spreadsheet as a saved comp: the
-  columns detected, every name read through the catalog and the guild's
-  remembered names, uncertain ones reviewed; a comp and the history out
-  as CSV) and the engine's read on the sheet (`_roster.js`: its own
+  rating) and import and export (a spreadsheet, a CSV or an Excel
+  workbook, read in the page, as a saved comp: the columns detected,
+  every weapon name read through the catalog and the guild's remembered
+  names and every gear name through the gear catalog, uncertain ones
+  reviewed, each slot's kit in the comp's share hash; a comp and the
+  history out as CSV) and the engine's read on the sheet (`_roster.js`: its own
   `CompEngine` on the held slots' weapon keys; needs, next picks, open
   slots with who can fill them, replacements, overstack, kill pressure,
   the role check and the fight chain; display only)

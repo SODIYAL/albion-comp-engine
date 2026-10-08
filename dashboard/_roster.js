@@ -110,15 +110,18 @@ function plannedSeats(board) {
 
 
 /* What the CTA's saved link holds of the comp it was made from: the
-   weapons in order (p=), each member's saved build (g=: gear and spell
+   weapons by position (p=; an empty entry is an open slot of a link
+   built from a comp's slots, which keeps every later member at its
+   slot's position), each member's saved build (g=: gear and spell
    picks) and explicit combo (k=: a forge's E-slot use no picker holds).
    tables.loadout and tables.combo are the planner's codec (_loadout.js);
    without them, or without a link, nothing is saved. */
 function savedComp(shareHash, tables) {
   const t = tables || {};
   const params = new URLSearchParams(String(shareHash || "").replace(/^#/, ""));
-  const weapons = (params.get("p") || "").split(",").filter(Boolean);
-  if (!weapons.length || typeof t.loadout !== "function") return { weapons: [], loadouts: [], combos: [] };
+  const listed = params.get("p");
+  const weapons = listed ? listed.split(",") : [];
+  if (!weapons.some(Boolean) || typeof t.loadout !== "function") return { weapons: [], loadouts: [], combos: [] };
   return {
     weapons,
     loadouts: t.loadout(params.get("g") || "") || [],

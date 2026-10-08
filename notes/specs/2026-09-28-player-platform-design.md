@@ -224,8 +224,19 @@ roles.
   planner applies as a pasted link. The account layer reads no planner
   state and the planner never calls it (layout contract L30). The saved
   hash is stored whole (`share_hash`), so the kits and spell picks come
-  back while the roster still matches the slots; a changed roster opens as
-  a plain `c=` / `n=` / `st=` / `p=` link built from the slots.
+  back while its members still match the slots position by position.
+  Each slot carries the kit the saved hash holds for it, read through the
+  loadout codec (the member at the slot's position while the slot names
+  that member's weapon, the sheet's rule); once a slot changes, the link
+  is built from the slots and their kits (`kitHash`): a changed slot
+  opens without a kit, the others keep theirs, a removed slot takes its
+  own along, and a save stores that link. A roster without any kit opens
+  as a plain `c=` / `n=` / `st=` / `p=` link built from the slots.
+- **A slot's weapon is set in the dialog too.** A writer picks it with
+  the profile's combobox on the slot's name (the profile's search, and
+  the open slot, which Enter never picks unasked), inside the slot guard:
+  a catalog key or null through `save_comp_template`, the
+  `update (weapon_id, role, note)` grant and the weapon form check.
 - **Callers write comps.** The caller role's first power: callers,
   officers and admins create, edit and delete a guild's templates; members
   read them. `save_comp_template` writes the template and its slots in one
@@ -238,8 +249,7 @@ roles.
 - **Bounds**: 100 templates per guild, 60 slots per template, notes ≤ 1000,
   a role label ≤ 40, a slot note ≤ 200, the name under the account name
   bound. Storage bounds against abuse, not product rules.
-- **Deferred**: a weapon picker per slot inside the dialog, multi-party
-  grouping, template versions.
+- **Deferred**: multi-party grouping, template versions.
 
 ## Phase 4 decisions
 
@@ -451,10 +461,24 @@ roles.
 - **The sheet is read in the browser, never uploaded.** Pasted cells
   (Excel and Sheets copy them tab-separated), a CSV, TSV or text file,
   a Discord or Markdown table: the parser reads tabs, commas,
-  semicolons, pipes and quotes. An Excel workbook is not parsed: its
-  cells are pasted, or the sheet saved as CSV (a zip-and-XML reader in
-  the page is deferred). Nothing about the sheet is stored but the comp
-  it becomes and the names the caller chose.
+  semicolons, pipes and quotes. An Excel workbook (.xlsx, .xlsm) is read
+  by the page itself, no library: the zip's directory, its parts stored
+  or deflated and checked against their size and CRC-32, the worksheets
+  in tab order, the shared strings and the chosen sheet's cells (a merge
+  read in its top-left cell, as Excel copies it); a workbook of several
+  sheets offers them, and the chosen sheet's cells take the paste's
+  path. A password, an .xls, a zip that is no workbook and a damaged
+  file are refused with the way round. Nothing about the sheet is stored
+  but the comp it becomes and the names the caller chose.
+- **Gear columns become each slot's kit.** Helm, armor, boots, cape,
+  off-hand, potion and food columns are read within their slot of the
+  gear catalog the page carries (one name over several tiers reads the
+  tier the sheet writes, else the highest); an uncertain or unread piece
+  is no piece (never guessed), a two-hander holds no off-hand and an
+  open slot no kit. The kits ride in the comp's share hash through the
+  loadout codec, an open slot an empty entry of `p=` so every slot keeps
+  its position. A gear choice is not remembered: the guild's remembered
+  names are weapon lines.
 - **Columns are detected, then the caller's.** A header row (one of the
   first three rows naming a kind and holding no weapon) decides where
   it can; the cells decide the rest: mostly weapons, integers (1, 2, 3
@@ -501,9 +525,9 @@ roles.
   for a Discord post; the history exports the players and the completed
   CTAs as CSV. The same measures as the tables; nothing new is
   computed.
-- **Deferred**: an Excel workbook parsed in the page, a CTA with its
-  players from a sheet, a party column on slots, a live link to a
-  Google Sheet (phase 12).
+- **Deferred**: a CTA with its players from a sheet, a party column on
+  slots, gear names remembered per guild, spell columns and a build
+  written in one cell, a live link to a Google Sheet (phase 12).
 
 ## Phase 11 decisions
 

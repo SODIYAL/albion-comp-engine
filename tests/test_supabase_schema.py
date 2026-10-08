@@ -285,7 +285,8 @@ check(sql_size is not None and int(sql_size.group(1)) == js_const(COMPS_JS, "COM
 for js_name, sql_pat in (("COMP_TEMPLATES_MAX", r"from public\.comp_templates where guild_id = new\.guild_id\) >= (\d+)"),
                          ("COMP_NOTES_MAX", r"char_length\(notes\) <= (\d+)"),
                          ("COMP_ROLE_MAX", r"char_length\(role\) between 1 and (\d+)"),
-                         ("COMP_NOTE_MAX", r"char_length\(note\) between 1 and (\d+)")):
+                         ("COMP_NOTE_MAX", r"char_length\(note\) between 1 and (\d+)"),
+                         ("COMP_HASH_MAX", r"char_length\(share_hash\) <= (\d+)")):
     js_val = js_const(COMPS_JS, js_name)
     sql_val = set(re.findall(sql_pat, ALL))
     check(js_val is not None and sql_val == {str(js_val)},

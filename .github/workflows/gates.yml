@@ -77,6 +77,7 @@ jobs:
           node tests/test_signup.js
           node tests/test_history.js
           node tests/test_import.js
+          node tests/test_xlsx.js
           node tests/test_roster.js
           node tests/test_sheet_build.js
 

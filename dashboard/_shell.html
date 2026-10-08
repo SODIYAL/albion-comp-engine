@@ -2557,7 +2557,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <button type="button" class="auth-secondary" id="comp-from-planner" hidden>Save the planner's comp</button>
         <p class="auth-hint">Build the comp in the planner first; its kits and spell picks are kept with it.</p>
         <button type="button" class="gd-btn cp-import" id="comp-import" hidden>Import a sheet</button>
-        <p class="auth-hint cp-import-hint" id="comp-import-hint" hidden>A spreadsheet or a Discord table: one weapon per row, or one column per party.</p>
+        <p class="auth-hint cp-import-hint" id="comp-import-hint" hidden>An Excel workbook, a CSV or a Discord table: one weapon per row with its gear beside it, or one column per party.</p>
       </aside>
 
       <section class="gd-main">
@@ -2849,21 +2849,23 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
           <textarea class="text-input im-text" id="im-text" rows="6" spellcheck="false" placeholder="Weapon&#9;Player&#9;Role&#10;Heavy Mace&#9;Disc&#9;tank&#10;Hallowfall&#9;Eff&#9;healer"></textarea>
         </div>
         <div class="im-file-row">
-          <label class="gd-btn im-file-btn" for="im-file">Open a CSV file<input class="sr-only" id="im-file" type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"></label>
+          <label class="gd-btn im-file-btn" for="im-file">Open an Excel or CSV file<input class="sr-only" id="im-file" type="file" accept=".csv,.tsv,.txt,.xlsx,.xlsm,text/csv,text/tab-separated-values,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel.sheet.macroEnabled.12"></label>
+          <span class="im-sheet" id="im-sheet-wrap" hidden><label for="im-sheet">Sheet</label><select id="im-sheet"></select></span>
           <button type="button" class="auth-secondary im-read" id="im-read">Read the sheet</button>
-          <p class="auth-hint">An Excel or Sheets file: copy its cells and paste them, or save it as CSV first. One weapon per row (a player, a role, a party or a count beside it), or one column per party.</p>
+          <p class="auth-hint">An Excel workbook (.xlsx) or a CSV file is read here; a workbook with several sheets lets you pick one. Google Sheets: File, Download, .xlsx or CSV. One weapon per row (a player, a role, a party, a count or the gear beside it), or one column per party.</p>
         </div>
       </div>
 
       <div id="im-result" hidden>
         <p class="gd-meta im-summary" id="im-summary"></p>
         <div class="im-columns" id="im-columns" aria-label="What each column holds"></div>
-        <table class="gd-table im-table">
+        <table class="gd-table im-table" id="im-table">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">From the sheet</th>
               <th scope="col">Weapon</th>
+              <th scope="col" class="im-kit">Kit</th>
               <th scope="col">Count</th>
               <th scope="col">Player</th>
               <th scope="col">Role</th>

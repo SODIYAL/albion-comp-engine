@@ -12,11 +12,15 @@
  * one role read). Like _auth.js it reads no planner state and never calls
  * the engine; identity comes from window.Account (_auth.js).
  *
- * Three parts, as in _auth.js:
+ * Three parts, as in _auth.js, and the weapon picker the other dialogs
+ * share:
  *   helpers - the only code that talks to window.DB (profiles,
  *             player_weapons, set_my_weapons)
  *   pure    - the weapon lists, search, roles, error wording
  *             (tests/test_profile.js)
+ *   UI kit  - the weapon combobox (weaponCombo) with its art and role
+ *             tag, the profile's lists' picker and the saved comps
+ *             dialog's slot picker
  *   UI      - the profile dialog the account menu opens
  *
  * Tables, policies, grants and bounds: supabase/migrations/; the rules
@@ -283,6 +287,153 @@ function profileErrorMessage(err) {
 }
 
 
+/* ------------------------------------------------------------- UI kit */
+
+/* a weapon's art: the page's icon, else the render service; a blank of
+   the same size when there is none */
+function pickerArt(info) {
+  const src = (typeof ICONS !== "undefined" && ICONS[info.key])
+    || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
+
+  if (!src) {
+    const blank = document.createElement("span");
+    blank.className = "pw-art blank";
+    blank.setAttribute("aria-hidden", "true");
+    return blank;
+  }
+
+  const img = document.createElement("img");
+  img.className = "pw-art";
+  img.src = src;
+  img.alt = "";
+  img.width = 26;
+  img.height = 26;
+  img.loading = "lazy";
+  return img;
+}
+
+
+function pickerRoleTag(role) {
+  const tag = document.createElement("span");
+  tag.className = `pw-role ${role}`;
+  tag.textContent = ROLE_NAMES[role] || role;
+  return tag;
+}
+
+
+/* The weapon combobox: the profile's picker, which the other dialogs
+   share (the saved comps dialog's slots). A text input (role combobox)
+   bound to its listbox, which opens in the flow under it, never over
+   it. Typing lists opts.options(query) (each { key, name, role, item }:
+   weaponSearch's hits, say) with their art and role tag; the first
+   weapon is marked, an extra option (extra: true, the open slot) never
+   is, and with no weapon the list says so above the extras; the arrows
+   move, Enter or a click picks (opts.onPick(option), after the list
+   closes), Enter never submits the form, the first Escape closes the
+   list and not the dialog, and a blur closes it. opts.idPrefix names
+   the options for aria-activedescendant. Returns { show, close }. */
+function weaponCombo(input, results, opts) {
+  const catalog = typeof ACCOUNT_CATALOG !== "undefined" ? ACCOUNT_CATALOG : {};
+  let hits = [];
+  let active = -1;
+
+  function close() {
+    hits = [];
+    active = -1;
+    results.hidden = true;
+    results.replaceChildren();
+    input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
+  }
+
+  function mark() {
+    [...results.querySelectorAll("[role=option]")].forEach((li, i) => {
+      li.setAttribute("aria-selected", String(i === active));
+      if (i === active) li.scrollIntoView({ block: "nearest" });
+    });
+
+    if (active >= 0) {
+      input.setAttribute("aria-activedescendant", `${opts.idPrefix}-${active}`);
+    } else {
+      input.removeAttribute("aria-activedescendant");
+    }
+  }
+
+  function show() {
+    const query = input.value.trim();
+    if (!query) { close(); return; }
+
+    hits = opts.options(query) || [];
+    /* Enter picks a weapon the caller typed for, never an extra */
+    active = hits.findIndex(hit => !hit.extra);
+
+    const items = hits.map((hit, i) => {
+      const li = document.createElement("li");
+      li.id = `${opts.idPrefix}-${i}`;
+      li.className = "pw-opt";
+      li.setAttribute("role", "option");
+      li.dataset.index = String(i);
+      const name = document.createElement("span");
+      name.className = "pw-name";
+      name.textContent = hit.name;
+      li.append(pickerArt(hit.key ? weaponInfo(catalog, hit.key) : { key: "", item: "" }), name);
+      if (hit.role) li.append(pickerRoleTag(hit.role));
+      return li;
+    });
+
+    if (active < 0) {
+      const none = document.createElement("li");
+      none.className = "pw-none";
+      none.textContent = `No weapon matches “${query}”.`;
+      items.unshift(none);
+    }
+
+    results.replaceChildren(...items);
+    results.hidden = false;
+    input.setAttribute("aria-expanded", "true");
+    mark();
+  }
+
+  function choose(i) {
+    const hit = hits[i];
+    if (!hit) return;
+    close();
+    opts.onPick(hit);
+  }
+
+  input.addEventListener("input", show);
+  input.addEventListener("blur", close);
+
+  input.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (results.hidden) { show(); return; }
+      if (!hits.length) return;
+      const step = e.key === "ArrowDown" ? 1 : -1;
+      active = (active + step + hits.length) % hits.length;
+      mark();
+    } else if (e.key === "Enter") {
+      /* Enter picks; it never submits the form */
+      e.preventDefault();
+      if (active >= 0) choose(active);
+    } else if (e.key === "Escape" && !results.hidden) {
+      /* the first Escape closes the list, not the dialog */
+      e.preventDefault();
+      close();
+    }
+  });
+
+  /* a press on a result must not blur the input before the click lands */
+  results.addEventListener("pointerdown", e => e.preventDefault());
+  results.addEventListener("click", e => {
+    const li = e.target.closest("[data-index]");
+    if (li) choose(Number(li.dataset.index));
+  });
+
+  return { show, close };
+}
+
+
 /* ----------------------------------------------------------------- UI */
 
 (function profileUI() {
@@ -376,33 +527,8 @@ function profileErrorMessage(err) {
     el.dirty.hidden = !dirty();
   }
 
-  function art(info) {
-    const src = (typeof ICONS !== "undefined" && ICONS[info.key])
-      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
-
-    if (!src) {
-      const blank = document.createElement("span");
-      blank.className = "pw-art blank";
-      blank.setAttribute("aria-hidden", "true");
-      return blank;
-    }
-
-    const img = document.createElement("img");
-    img.className = "pw-art";
-    img.src = src;
-    img.alt = "";
-    img.width = 26;
-    img.height = 26;
-    img.loading = "lazy";
-    return img;
-  }
-
-  function roleTag(role) {
-    const tag = document.createElement("span");
-    tag.className = `pw-role ${role}`;
-    tag.textContent = ROLE_NAMES[role] || role;
-    return tag;
-  }
+  const art = pickerArt;
+  const roleTag = pickerRoleTag;
 
   function chipButton(kind, glyph, label, key, where) {
     const b = document.createElement("button");
@@ -517,105 +643,18 @@ function profileErrorMessage(err) {
   });
 
 
-  /* ---- the pickers: one combobox per list ---- */
+  /* ---- the pickers: one combobox per list (weaponCombo) ---- */
 
   function wirePicker(where) {
     const { input, results } = PICKERS[where];
-    let hits = [];
-    let active = -1;
-
-    function close() {
-      hits = [];
-      active = -1;
-      results.hidden = true;
-      results.replaceChildren();
-      input.setAttribute("aria-expanded", "false");
-      input.removeAttribute("aria-activedescendant");
-    }
-
-    function mark() {
-      [...results.querySelectorAll("[role=option]")].forEach((li, i) => {
-        li.setAttribute("aria-selected", String(i === active));
-        if (i === active) li.scrollIntoView({ block: "nearest" });
-      });
-
-      if (active >= 0) {
-        input.setAttribute("aria-activedescendant", `pw-opt-${where}-${active}`);
-      } else {
-        input.removeAttribute("aria-activedescendant");
+    weaponCombo(input, results, {
+      idPrefix: `pw-opt-${where}`,
+      options: query => weaponSearch(query, CATALOG, listed()),
+      onPick: hit => {
+        add(hit.key, where);
+        input.value = "";
+        input.focus();
       }
-    }
-
-    function show() {
-      const query = input.value.trim();
-      if (!query) { close(); return; }
-
-      hits = weaponSearch(query, CATALOG, listed());
-      active = hits.length ? 0 : -1;
-
-      const items = hits.map((hit, i) => {
-        const li = document.createElement("li");
-        li.id = `pw-opt-${where}-${i}`;
-        li.className = "pw-opt";
-        li.setAttribute("role", "option");
-        li.dataset.index = String(i);
-        const name = document.createElement("span");
-        name.className = "pw-name";
-        name.textContent = hit.name;
-        li.append(art(weaponInfo(CATALOG, hit.key)), name);
-        if (hit.role) li.append(roleTag(hit.role));
-        return li;
-      });
-
-      if (!items.length) {
-        const none = document.createElement("li");
-        none.className = "pw-none";
-        none.textContent = `No weapon matches “${query}”.`;
-        items.push(none);
-      }
-
-      results.replaceChildren(...items);
-      results.hidden = false;
-      input.setAttribute("aria-expanded", "true");
-      mark();
-    }
-
-    function choose(i) {
-      const hit = hits[i];
-      if (!hit) return;
-      add(hit.key, where);
-      input.value = "";
-      close();
-      input.focus();
-    }
-
-    input.addEventListener("input", show);
-    input.addEventListener("blur", close);
-
-    input.addEventListener("keydown", e => {
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault();
-        if (results.hidden) { show(); return; }
-        if (!hits.length) return;
-        const step = e.key === "ArrowDown" ? 1 : -1;
-        active = (active + step + hits.length) % hits.length;
-        mark();
-      } else if (e.key === "Enter") {
-        /* Enter picks; it never submits the form */
-        e.preventDefault();
-        if (active >= 0) choose(active);
-      } else if (e.key === "Escape" && !results.hidden) {
-        /* the first Escape closes the list, not the dialog */
-        e.preventDefault();
-        close();
-      }
-    });
-
-    /* a press on a result must not blur the input before the click lands */
-    results.addEventListener("pointerdown", e => e.preventDefault());
-    results.addEventListener("click", e => {
-      const li = e.target.closest("[data-index]");
-      if (li) choose(Number(li.dataset.index));
     });
   }
 

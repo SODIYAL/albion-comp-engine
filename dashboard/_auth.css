@@ -348,6 +348,17 @@
 .cp-open{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); font-style:italic}
 .cp-in{width:100%; min-width:80px; padding:3px 6px; font-size:var(--fs-dense)}
 .cp-in:read-only{border-color:transparent; background:none; color:var(--ink-2)}
+/* a writer's slot: the weapon's name is its combobox (the profile's picker), read as the name until pointed
+   at; the results open in the flow under it */
+.cp-weapon-edit .cp-weapon-in{display:inline-block; width:200px; min-width:0; vertical-align:middle;
+  border-color:transparent; background:none; font-size:var(--fs-body); color:var(--ink)}
+.cp-weapon-edit .cp-weapon-in:hover, .cp-weapon-edit .cp-weapon-in:focus{border-color:var(--rule-2); background:var(--sunk)}
+.cp-weapon-edit .cp-weapon-in::placeholder{font-family:var(--mono); font-size:var(--fs-meta); font-style:italic; color:var(--ink-3)}
+.cp-results{margin-top:4px; max-height:240px; white-space:normal}
+.cp-results .pw-opt{padding:4px 8px; font-size:var(--fs-dense)}
+/* the slot keeps the kit it was saved with */
+.cp-kit{margin-left:6px; padding:1px 5px; vertical-align:middle; border:1px solid var(--rule-2); border-radius:99px;
+  font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
 .cp-foot{align-items:center; flex-wrap:wrap}
 .cp-foot-l{display:flex; flex-wrap:wrap; gap:8px}
 .cp-foot-r{margin:0 0 0 auto}   /* the primary action sits at the right whether or not the left group is there */
@@ -606,10 +617,28 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .im-table tr[data-status="none"] .im-status{color:var(--gap); border-color:var(--gap)}
 .im-table tr[data-status="skip"]{opacity:.55}
 .im-pick{white-space:nowrap}
-.im-weapon{max-width:240px; padding:2px 24px 2px 6px; font-size:var(--fs-dense); background-position:right 7px center}
+/* its own width, as the role select's: the page's full-width select let the column collapse under the
+   kit column, and the role tag rode over the kit */
+.im-weapon{width:auto; max-width:240px; padding:2px 24px 2px 6px; font-size:var(--fs-dense); background-position:right 7px center}
 .im-pick .pw-role{margin-left:6px}
 .im-count{font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3); white-space:nowrap}
-.im-cell{font-size:var(--fs-dense); color:var(--ink-2); max-width:180px; overflow-wrap:anywhere}
+.im-cell{min-width:64px; font-size:var(--fs-dense); color:var(--ink-2); max-width:180px; overflow-wrap:anywhere}   /* a role word stays whole beside the kit */
+/* the workbook's sheet picker, inline with the file button */
+.im-sheet{display:inline-flex; align-items:center; gap:6px}
+.im-sheet label{font-family:var(--mono); font-size:var(--fs-label); letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+.im-sheet select{width:auto; max-width:220px; padding:4px 24px 4px 8px; font-size:var(--fs-dense); background-position:right 7px center}
+/* a row's kit: one small chip per piece read, wrapping inside the cell; a sheet without gear hides the column */
+.im-table.im-nokit .im-kit{display:none}
+.im-kit{min-width:120px; max-width:440px; line-height:1.75}
+.im-kit[data-kept="no"]{opacity:.45}
+.im-gear{display:inline-flex; align-items:center; gap:2px; margin-right:3px; padding:0 5px 0 1px; vertical-align:middle;
+  border:1px solid var(--rule-2); border-radius:8px; font-size:var(--fs-meta); line-height:1.45; color:var(--ink); white-space:nowrap}
+.im-gear .pw-art{width:16px; height:16px}
+.im-gear[data-status="likely"]{border-color:var(--amber)}
+.im-gear[data-status="none"]{padding-left:6px; border-style:dashed; border-color:var(--gap); color:var(--ink-3)}
+.im-gear[data-status="closed"]{color:var(--ink-3); text-decoration:line-through}
+.im-gear-pick{width:auto; max-width:210px; margin-right:4px; padding:1px 22px 1px 6px; vertical-align:middle;
+  font-size:var(--fs-dense); border-color:var(--gap); background-position:right 6px center}
 .im-options{display:flex; flex-wrap:wrap; gap:4px 20px; margin:10px 0 6px}
 .im-options .su-check{margin:0}
 .im-foot-note{margin:0; flex:1; color:var(--amber)}

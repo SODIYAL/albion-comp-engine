@@ -130,7 +130,11 @@ and its tests: `supabase/README.md`.
   pure functions (node-tested), and a UI that reaches identity through
   `window.Account`. `_profile.js` edits the character (Albion name and
   server), the display name, and the player's weapon lists (main / can also
-  play), the lists saved through `set_my_weapons` in one transaction.
+  play), the lists saved through `set_my_weapons` in one transaction. Its
+  weapon combobox (`weaponCombo`: an input bound to its listbox, the
+  results opening in the flow, the arrows, Enter never submitting, the
+  first Escape closing the list) is the one picker the other dialogs
+  share: the profile's two lists and the saved comps dialog's slots.
 - **`_guild.js`** (platform phase 2) follows the same shape: helpers over
   `guilds`, `guild_members`, the `guild_join_codes` view and the
   `create_guild` / `join_guild` functions; pure functions for validation,
@@ -155,10 +159,20 @@ and its tests: `supabase/README.md`.
   `location.hash` (the share link the planner already publishes, the
   loadout codec's `c=`, `n=`, `st=`, `p=`, `g=`, `f=`, `k=`) and "Open in
   planner" sets it, which the planner applies as it applies a pasted link.
-  The saved hash is kept whole, so kits and spell picks come back while the
-  roster still matches the slots; a changed roster opens as a plain link.
-  `ACCOUNT_CONTENTS` and `ACCOUNT_STYLES` (built beside it) are the
-  dataset's content and style names, the planner's own vocabulary.
+  A writer sets a slot's weapon in the dialog (the profile's combobox on
+  the slot's name: the search, and the open slot, which Enter never picks
+  unasked), edits its role label and note, and removes it. Each slot
+  carries the kit its saved link holds for it (`slotKits`: the member at
+  the slot's position while the slot names that member's weapon, read
+  through the codec's functions, never the planner's state), marked
+  "kit". The saved hash is kept whole while its members still match the
+  slots position by position, so kits and spell picks come back; once a
+  slot changes, "Open in planner" and the save build the link from the
+  slots (`kitHash`): the changed slot without a kit, the others in
+  theirs, a removed slot taking its own along. A pick or a removal
+  repaints the slots alone, the typed fields kept. `ACCOUNT_CONTENTS` and
+  `ACCOUNT_STYLES` (built beside it) are the dataset's content and style
+  names, the planner's own vocabulary.
 - **`_events.js`** (platform phase 4) runs a guild's CTAs: helpers over
   `events`, `event_slots` and `save_event`; pure functions for the
   statuses and the moves the guard allows (draft → open → locked →
@@ -263,20 +277,51 @@ and its tests: `supabase/README.md`.
   catalog carries each line's E names), a close spelling; one candidate
   is likely,
   several uncertain, none an open slot), the columns (`detectColumns`:
-  a header row where one names a kind, a gear header (head, chest,
-  boots) ignored, the cells otherwise; two weapon
-  columns are parties side by side), the rows (sections, counts, a
-  grid's parties), the slots, the names learned and error wording
-  (`tests/test_import.js`, run over the dataset's own catalog); and the
-  import dialog: the guild, the pasted cells or a CSV file, the column
-  map the caller may reset, the review table with a weapon list per row
-  (the suggestions first, then the catalog by role; open slot; skip),
-  the options (remember the names chosen; player names and party
-  labels as slot notes), the comp's fields, and the guild's remembered
-  names with a removal each. The comps dialog opens it by dispatching a
-  `comp-import` DOM event with the guild and gets the comp back through
-  `comp-imported` (no call between modules). An Excel workbook is not
-  parsed: its cells are pasted, or the sheet saved as CSV. The export
+  a header row where one names a kind, a gear header (helm, chest,
+  boots, cape, off-hand, potion, food) naming its slot, the cells
+  otherwise, a column mostly one slot's items naming that slot; two
+  weapon columns are parties side by side), how a gear name is read
+  (`matchGear`, within its column's slot of the gear catalog the page
+  carries, `GEAR`: the key, the name, a city cape's short name, then
+  the derivations; items of one name that differ in tier are one name,
+  the tier the sheet writes picking one, else the highest; several names
+  uncertain, none unread; the guild's remembered names are weapon names
+  and do not apply), the rows (sections, counts, a grid's parties, each
+  row's gear), the slots and their kits (`importSlots`: a weapon slot
+  carries its row's pieces, a two-hander no off-hand, an open slot
+  none), the names learned and error wording (`tests/test_import.js`,
+  run over the dataset's own catalog and the gear catalog as build.py
+  ships it); and the import dialog: the guild, the pasted cells or a
+  file, the column map the caller may reset, the review table with a
+  weapon list per row (the suggestions first, then the catalog by role;
+  open slot; skip) and the row's kit beside it (a read piece with its
+  art, a likely one marked to check, an uncertain one a list of its
+  candidates that keeps no piece until one is chosen, an unread one by
+  its text; the column hidden for a sheet without gear), the options
+  (remember the names chosen; player names and party labels as slot
+  notes), the comp's fields, and the guild's remembered names with a
+  removal each. A file's bytes say what it is (`fileKind`): text is
+  read as a CSV (UTF-8, UTF-16 by its mark, else Windows-1252); an Excel
+  workbook (.xlsx, .xlsm) is read by the page itself, no library
+  (`readWorkbook`: the zip's directory, stored and deflated parts,
+  `DecompressionStream("deflate-raw")`, each checked against its size and
+  CRC-32; the package's and the workbook's relationships for the
+  worksheets in tab order, a hidden one marked, the one open when saved
+  read first; the shared strings; the chosen sheet's cells, a merged
+  range read in its top-left cell and empty in the others, as Excel
+  copies a merge; a formula as its saved result; bounded by the file,
+  the entries, a part, the paste's rows and characters and 64 columns,
+  `tests/test_xlsx.js`), a workbook of several sheets offering them, and
+  the chosen sheet's cells written into the paste box as Excel copies
+  them and read on the paste's path. A workbook protected by a password,
+  an Excel 97-2003 .xls, a zip that is no workbook (.xlsb, .ods), a zip64
+  or another compression and a damaged file are refused with the way
+  round. The import saves each slot's kit in the comp's share hash
+  through the comps module's `kitHash` (the planner's codec): "Open in
+  planner" shows each slot in its kit, and a CTA made from the comp
+  shows each slot's build on its sheet. The comps dialog opens it by
+  dispatching a `comp-import` DOM event with the guild and gets the comp
+  back through `comp-imported` (no call between modules). The export
   is the shared kit (`acctCsvText`, `acctFilename`, `acctDownloadText`
   in `_auth.js`): the comps dialog exports a comp as CSV
   (`compSheetRows`, what the import reads back exactly) and copies it as
@@ -333,8 +378,11 @@ and its tests: `supabase/README.md`.
   reads them for every slot and names helm, armor, boots, cape,
   off-hand, potion and food with their art (`GEAR`, the render service
   with the picker's retry) and the picked spells and the weapon's E
-  (`SPELLS`). A slot is the member at its position; its build holds
-  while the slot still names that member's weapon. A slot with no
+  (`SPELLS`). A slot is the member at its position (in a link built
+  from a comp's slots an open slot is an empty entry of `p=`, so every
+  later slot keeps its position; `_roster.js` reads the link the same
+  way); its build holds while the slot still names that member's
+  weapon. A slot with no
   weapon, a changed weapon and a comp saved without loadouts each say
   so (`tests/test_sheet_build.js`). Display only: it scores nothing,
   writes nothing and reaches no table. After every `sheet-read` it
@@ -354,12 +402,19 @@ and its tests: `supabase/README.md`.
   surface that reads the engine is the sheet's engine read
   (`_roster.js`): its own engine instance on the roster's weapon keys,
   display only. The sheet's build read (`_build.js`) reads the
-  planner's gear and spell tables and its codec, nothing of its state.
+  planner's gear and spell tables and its codec, nothing of its state;
+  the import reads the gear catalog (`GEAR`), the codec's slot rule
+  (`loSlotOpen`) and the art retry, and the comps module calls the
+  codec's functions (`loadoutEncode`, `loadoutDecode`, `provEncode`,
+  `provDecode`, `comboEncode`, `comboDecode`), neither any of the
+  planner's state (`test_dashboard_layout.py` L37w, `test_comps` 8).
 - **Dialog conventions** (the design check in the decision log): every
   part of the account layer gives the `hidden` attribute its meaning
   whatever display its class sets (`.auth-dialog [hidden]`, the
   `.lf-sync` lesson); a comp or CTA slot is one line (icon, name, role
-  tag); each dialog has one primary action, the side column's creators
+  tag; in the comps dialog a writer's name is the slot's combobox, read
+  as text until pointed at, with the kit mark beside the tag); each
+  dialog has one primary action, the side column's creators
   and the rename are secondary; the list dialogs open with focus on
   their title, the sign-in and profile dialogs on their first field; the
   sheet page groups its slots into role bands (Tanks, Supports, DPS,
@@ -391,13 +446,14 @@ and its tests: `supabase/README.md`.
 
 `tests/test_auth_ui.js`, `tests/test_profile.js`, `tests/test_guild.js`,
 `tests/test_comps.js`, `tests/test_events.js`, `tests/test_signup.js`,
-`tests/test_history.js`, `tests/test_import.js`, `tests/test_roster.js` and `tests/test_sheet_build.js` pin validation, error wording, the name fallback,
+`tests/test_history.js`, `tests/test_import.js`, `tests/test_xlsx.js`, `tests/test_roster.js` and `tests/test_sheet_build.js` pin validation, error wording, the name fallback,
 link parsing, the weapon lists and search, the member table and role
-powers, the share hash both ways, the statuses and their moves, the
-times, the calendar, the sheet's board, link, record and channel, the
-history's measures and rows, the import's parser, matcher, columns and
-slots, the export's sheets, the engine's read of a roster (what the
-engine is asked and handed), and what the helpers send;
+powers, the share hash both ways and the kits it carries per slot, the
+statuses and their moves, the times, the calendar, the sheet's board,
+link, record and channel, the history's measures and rows, the import's
+parser, workbook reader, matchers, columns, slots and kits, the
+export's sheets, the engine's read of a roster (what the engine is
+asked and handed), and what the helpers send;
 `test_dashboard_layout.py` L27–L38 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 

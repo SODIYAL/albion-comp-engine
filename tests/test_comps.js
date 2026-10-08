@@ -13,7 +13,12 @@
  * position in order, the summary counts roles through the catalog,
  * validation follows the database's bounds, only caller roles write,
  * database errors read as sentences, and each helper writes exactly what
- * its policy admits.
+ * its policy admits. The kits: each slot reads the kit its saved link
+ * holds at its position through the planner's codec (_loadout.js, loaded
+ * here with a stub GEAR), a slot's weapon picked in the dialog drops its
+ * kit while the others keep theirs, a removed slot takes its own along,
+ * and the link rebuilt from the slots decodes back to the same kits; the
+ * picker lists the profile's search and the open slot.
  *
  * Run:  node tests/test_comps.js
  */
@@ -62,8 +67,14 @@ const DB = {
 const ctx = { console, URLSearchParams, setTimeout, Promise, Proxy, decodeURIComponent, encodeURIComponent };
 ctx.window = ctx;
 ctx.window.DB = DB;
+/* the planner's gear catalog the codec reads (a key it does not hold is dropped) */
+ctx.GEAR = {
+  HEAD_PLATE_KEEPER: { name: "Judicator Helmet", slot: "head", example_item: "T8_HEAD_PLATE_KEEPER" },
+  ARMOR_PLATE_SET2: { name: "Knight Armor", slot: "armor", example_item: "T8_ARMOR_PLATE_SET2" },
+  T8_MEAL_SANDWICH: { name: "Beef Sandwich", slot: "food", example_item: "T8_MEAL_SANDWICH" }
+};
 vm.createContext(ctx);
-for (const f of ["_auth.js", "_profile.js", "_guild.js", "_comps.js"]) {
+for (const f of ["_loadout.js", "_auth.js", "_profile.js", "_guild.js", "_comps.js"]) {
   vm.runInContext(fs.readFileSync(path.join(DASH, f), "utf8"), ctx, { filename: f });
 }
 const run = expr => vm.runInContext(expr, ctx);
@@ -237,6 +248,84 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
   check("the lines: a title with the content, the size and the style, then numbered slots with the role after a dash and the note in brackets",
         text === "Castle A · Territory Defense · 20 planned · Clap\n1. Incubus Mace - tank\n2. Longbow - dps (kite)\n3. open slot (flex)", text);
   check("an unknown key keeps its key; a comp with no name is Comp", run("compText")({}, [{ position: 1, weapon_id: "MYSTERY" }], CATALOG, CONTENTS, STYLES) === "Comp\n1. MYSTERY");
+}
+
+/* 7 - the kit each slot carries, the slots edited in the dialog, the
+   link rebuilt through the planner's codec */
+{
+  const DICT = "HEAD_PLATE_KEEPER,ARMOR_PLATE_SET2,T8_MEAL_SANDWICH";
+  /* three members: the first locked in helm, armor, food and Q2/W1/passive 2;
+     the second forged on combo 3 with Q1; the third the engine's helm */
+  const planner = `c=castle&n=20&st=clap&p=2H_POLEHAMMER,2H_LONGBOW,MAIN_HOLYSTAFF_AVALON`
+    + `&g=${DICT}~0.1.-.-.-.-.2.1.0.1!-.-.-.-.-.-.-.0.-.-!0.-.-.-.-.-.-.-.-.-.e&f=lf&k=-.3`;
+  const t = { content: "castle", style: "clap", planned_size: 20, share_hash: planner };
+  const slots = run("slotsFromWeapons")(["2H_POLEHAMMER", "2H_LONGBOW", "MAIN_HOLYSTAFF_AVALON"]);
+  const parsed = run("parseShareHash")(planner);
+  check("the share hash keeps its members by position and every field",
+        same(parsed.members, ["2H_POLEHAMMER", "2H_LONGBOW", "MAIN_HOLYSTAFF_AVALON"]) && parsed.params.f === "lf" && parsed.params.k === "-.3"
+        && same(run("parseShareHash")("c=castle&p=A,,B,,").members, ["A", "", "B"]) && same(run("parseShareHash")("c=castle&p=A,,B,,").weapons, ["A", "B"]));
+  const kits = run("slotKits")(planner, slots);
+  check("each slot reads the kit its saved link holds at its position, through the planner's codec",
+        same(kits[1], { loadout: { head: "HEAD_PLATE_KEEPER", armor: "ARMOR_PLATE_SET2", food: "T8_MEAL_SANDWICH", q: 1, w: 0, p: 1 }, prov: "l" })
+        && same(kits[2], { loadout: { q: 0 }, prov: "f", combo: 3 }) && same(kits[3], { loadout: { head: "HEAD_PLATE_KEEPER", _eng: 1 } }), kits);
+  check("a slot whose weapon is not the member at its position reads no kit (the sheet's rule)",
+        Object.keys(run("slotKits")(planner, run("slotsFromWeapons")(["2H_POLEHAMMER", "2H_BOW", "MAIN_HOLYSTAFF_AVALON"]))).join(",") === "1,3"
+        && Object.keys(run("slotKits")("", slots)).length === 0 && Object.keys(run("slotKits")("c=castle&p=2H_POLEHAMMER", slots)).length === 0);
+  const held = run("slotsWithKits")(slots, planner);
+  check("the slots carry their kits; an unedited comp opens as saved and keeps its stored link",
+        held.every(s => s.kit) && run("templateHash")(t, held) === planner && run("keptHash")(t, held) === planner);
+
+  const picked = run("withSlotWeapon")(held, 2, "2H_BOW");
+  check("a weapon picked for a slot drops that slot's kit; the others keep theirs; the same weapon changes nothing",
+        picked[1].weapon_id === "2H_BOW" && !picked[1].kit && picked[0].kit === held[0].kit && picked[2].kit === held[2].kit
+        && run("withSlotWeapon")(held, 2, "2H_LONGBOW")[1] === held[1] && run("withSlotWeapon")(held, 3, "")[2].weapon_id === null);
+  const rebuilt = run("templateHash")(t, picked);
+  check("the comp opens through a link built from its slots: the changed slot without a kit, the others in theirs",
+        rebuilt === `c=castle&n=20&st=clap&p=2H_POLEHAMMER,2H_BOW,MAIN_HOLYSTAFF_AVALON&g=${DICT}~0.1.-.-.-.-.2.1.0.1!-.-.-.-.-.-.-.-.-.-!0.-.-.-.-.-.-.-.-.-.e&f=l`,
+        rebuilt);
+  check("a save keeps that link, so the stored link matches the stored slots again",
+        run("keptHash")(t, picked) === rebuilt && run("templateHash")(Object.assign({}, t, { share_hash: rebuilt }), picked) === rebuilt);
+  const back = run("slotKits")(rebuilt, picked);
+  check("the rebuilt link reads back to the same kits", same(back[1], kits[1]) && !back[2] && same(back[3], kits[3]), back);
+
+  const dropped = run("dropSlot")(held, 1);
+  const afterDrop = run("templateHash")(t, dropped);
+  check("a removed slot takes its kit along; the others move up with theirs",
+        same(dropped.map(s => `${s.position}:${s.weapon_id}`), ["1:2H_LONGBOW", "2:MAIN_HOLYSTAFF_AVALON"])
+        && afterDrop === "c=castle&n=20&st=clap&p=2H_LONGBOW,MAIN_HOLYSTAFF_AVALON&g=HEAD_PLATE_KEEPER~-.-.-.-.-.-.-.0.-.-!0.-.-.-.-.-.-.-.-.-.e&f=f&k=3",
+        afterDrop);
+  const opened = run("withSlotWeapon")(held, 2, null);
+  check("an open slot is an empty entry, every later slot at its position",
+        run("templateHash")(t, opened).includes("p=2H_POLEHAMMER,,MAIN_HOLYSTAFF_AVALON&")
+        && same(run("slotMembers")(opened), ["2H_POLEHAMMER", "", "MAIN_HOLYSTAFF_AVALON"])
+        && same(run("slotMembers")(run("slotsFromWeapons")(["A", null, null])), ["A"]));
+  check("with kits on the slots a changed content keeps every kit; without them the plain link stands",
+        run("templateHash")(Object.assign({}, t, { content: "ancient_lands" }), held).startsWith(`c=ancient_lands&n=20&st=clap&p=2H_POLEHAMMER,2H_LONGBOW,MAIN_HOLYSTAFF_AVALON&g=${DICT}~`)
+        && run("templateHash")(Object.assign({}, t, { content: "ancient_lands" }), slots) === "c=ancient_lands&n=20&st=clap&p=2H_POLEHAMMER,2H_LONGBOW,MAIN_HOLYSTAFF_AVALON");
+  check("a changed roster without any kit keeps the stored link as it was (the plain link is built on open)",
+        run("keptHash")(t, run("slotsFromWeapons")(["2H_BOW"])) === planner);
+  const zerg = run("slotKits")("c=castle&n=20&p=2H_POLEHAMMER&g=HEAD_PLATE_KEEPER~0&t=1&n2=20&p2=2H_LONGBOW&g2=ARMOR_PLATE_SET2~1", slots.slice(0, 1));
+  check("a zerg's link gives the open party's kits alone", same(zerg[1], { loadout: { head: "HEAD_PLATE_KEEPER" } }), zerg);
+  check("a link is on the database's form and past COMP_HASH_MAX none is built",
+        /^[A-Za-z0-9_.,=&%:~!*()-]+$/.test(rebuilt) && run("COMP_HASH_MAX") === 8000
+        && run("kitHash")(t, Array.from({ length: 60 }, (_, i) => ({ position: i + 1, weapon_id: `W${"X".repeat(150)}${i}`, kit: { loadout: { head: "HEAD_PLATE_KEEPER" } } }))) === "");
+  const options = run("slotPickOptions")("long", CATALOG, "2H_LONGBOW");
+  check("a slot's picker lists the profile's search, then the open slot while the slot holds a weapon, an extra Enter never picks unasked",
+        options[0].key === "2H_LONGBOW" && !options[0].extra && options[options.length - 1].key === "" && options[options.length - 1].role === "any"
+        && options[options.length - 1].extra === true && run("slotPickOptions")("long", CATALOG, null).every(o => o.key)
+        && same(run("slotPickOptions")("zzz", CATALOG, "2H_LONGBOW").map(o => o.extra), [true]));
+}
+
+/* 8 - the boundary: the planner is the address bar and its codec's functions */
+{
+  const src = fs.readFileSync(path.join(DASH, "_comps.js"), "utf8");
+  const calls = (src.match(/\b(loadoutEncode|loadoutDecode|provEncode|provDecode|comboEncode|comboDecode|partyDecode|partyEncode|loGear|loSlotOpen)\(/g) || [])
+    .map(c => c.slice(0, -1));
+  const tables = src.match(/\b(ICONS|GEAR|SPELLS|WEAPONS|LOADOUTS)\b/g) || [];
+  const globals = new Set(calls.concat(tables));
+  check("the comps module calls the codec's functions and reads the icons, never the planner's tables or state",
+        same([...globals].sort(), ["ICONS", "comboDecode", "comboEncode", "loadoutDecode", "loadoutEncode", "provDecode", "provEncode"]), [...globals]);
+  check("the dialog's weapon picker is the profile's combobox", /weaponCombo\(/.test(src) && /slotPickOptions\(/.test(src));
 }
 
 console.log(`\n${pass}/${pass + fail} saved comp tests passed`);

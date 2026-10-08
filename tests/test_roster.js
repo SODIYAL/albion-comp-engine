@@ -250,6 +250,10 @@ function stubEngine() {
   run("rosterRead")(event, run("sheetBoard")(slots, signups), none.eng);
   const bare = none.calls.find(c => c[0] === "fitness" && c[1].length === 5);
   check("without the codec every seat reads the default kit", bare && bare[3].every((g, i) => g && /^KIT_/.test(g[0])), bare && bare[3]);
+  const positional = run("savedComp")("c=castle&p=MAIN_MACE_HELL,,2H_HAMMER&g=G&k=K", tables);
+  check("a link built from a comp's slots keeps an open slot's empty entry, so every later member keeps its slot's position",
+        same(positional.weapons, ["MAIN_MACE_HELL", "", "2H_HAMMER"]) && positional.combos.length === 3 && positional.combos[1] === 3
+        && same(run("savedComp")("c=castle&p=,", tables), { weapons: [], loadouts: [], combos: [] }), positional);
   const note = run("rosterBuildsNote");
   check("the builds line: every held slot saved, one held slot, nothing held",
         note({ held: { count: 3, saved: 3 } }) === "Every held slot is read in the build the CTA's comp saved for it."

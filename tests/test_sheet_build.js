@@ -54,6 +54,11 @@ const tables = { decode: run("loadoutDecode"), gear: GEAR, spells: SPELLS };
         same(m.loadouts[0], { head: "HEAD_PLATE_KEEPER", armor: "ARMOR_PLATE_SET2", food: "T8_MEAL_SANDWICH", q: 1, w: 0, p: 1 }) && m.loadouts[1] === undefined, m.loadouts);
   check("a hash without a hash mark, a loadout or members reads as empty",
         same(members("c=castle", tables.decode), { weapons: [], loadouts: [] }) && same(members(null, tables.decode), { weapons: [], loadouts: [] }));
+  /* a link built from a comp's slots (_comps.js kitHash): an open slot is an empty entry */
+  const open = members("c=castle&p=2H_POLEHAMMER,,2H_LONGBOW&g=HEAD_PLATE_KEEPER~0!-.-.-.-.-.-.-.-.-.-!0", tables.decode);
+  check("an empty entry keeps its position, so the member after an open slot reads its own loadout",
+        same(open.weapons, ["2H_POLEHAMMER", "", "2H_LONGBOW"]) && open.loadouts[1] === undefined
+        && same(open.loadouts[2], { head: "HEAD_PLATE_KEEPER" }), open);
 }
 
 /* 2 - the build per slot */
@@ -81,6 +86,11 @@ const tables = { decode: run("loadoutDecode"), gear: GEAR, spells: SPELLS };
         same(builds("#p=2H_LONGBOW&g=MYSTERY_HELM~0.-.-.-.-.-.-.0.-.-", [{ position: 1, weapon_id: "2H_LONGBOW" }], tables)[1].gear, [])
         && builds("#p=2H_LONGBOW&g=MYSTERY_HELM~0.-.-.-.-.-.-.0.-.-", [{ position: 1, weapon_id: "2H_LONGBOW" }], tables)[1].state === "set");
   check("a spell index past the pool is left out", same(builds("#p=2H_LONGBOW&g=~-.-.-.-.-.-.-.9.-.-", [{ position: 1, weapon_id: "2H_LONGBOW" }], tables)[1].state, "unset"));
+  const withOpen = builds("#c=castle&p=2H_POLEHAMMER,,2H_LONGBOW&g=HEAD_PLATE_KEEPER~0!-.-.-.-.-.-.-.-.-.-!0",
+                          [{ position: 1, weapon_id: "2H_POLEHAMMER" }, { position: 2, weapon_id: null }, { position: 3, weapon_id: "2H_LONGBOW" }], tables);
+  check("a comp with an open slot: the open slot has none, the slot after it shows its own build",
+        withOpen[1].state === "set" && withOpen[2].state === "none" && withOpen[3].state === "set"
+        && same(withOpen[3].gear.map(g => g.key), ["HEAD_PLATE_KEEPER"]), withOpen);
   const M = run("BUILD_MSG");
   check("every state without a build has a sentence", !!M.none && !!M.changed && !!M.unset);
 }

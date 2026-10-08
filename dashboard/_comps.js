@@ -16,13 +16,19 @@
  * hash (location.hash, the link the planner already publishes) and opened
  * by setting it (the planner applies a hash change as it applies a pasted
  * link). Weapons are read through ACCOUNT_CATALOG and the profile
- * module's pure functions.
+ * module's pure functions; a writer sets a slot's weapon in the dialog
+ * through the profile's combobox (weaponCombo). Each slot carries the
+ * kit its saved link holds for it (slotKits, read through the planner's
+ * loadout codec, the functions alone: never the planner's state), so a
+ * slot whose weapon changes opens without a kit and the others keep
+ * theirs (kitHash).
  *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (comp_templates,
  *             comp_template_slots, save_comp_template)
- *   pure    - the share hash, the slots, the summary, what a role may do,
- *             error wording (tests/test_comps.js)
+ *   pure    - the share hash and the kits it carries, the slots and their
+ *             edits, the summary, what a role may do, error wording
+ *             (tests/test_comps.js)
  *   UI      - the comps dialog the account menu opens
  */
 
@@ -116,6 +122,8 @@ const COMP_ROLE_MAX = 40;
 const COMP_NOTE_MAX = 200;
 const COMP_TEMPLATES_MAX = 100;
 const COMP_KEY_RE = /^[a-z0-9_]{1,40}$/;
+/* a saved share hash's bound (comp_templates_share_hash_form) */
+const COMP_HASH_MAX = 8000;
 
 /* the roles that write templates: the caller's first power */
 const COMP_WRITER_ROLES = ["caller", "officer", "admin"];
@@ -123,9 +131,11 @@ const COMP_WRITER_ROLES = ["caller", "officer", "admin"];
 
 /* The planner's share hash (c=, n=, st=, p=, then the loadout codec's
    g=, f=, k=) as a template reads it: the content, the planned size, the
-   style ("" for balanced) and the weapon keys in roster order. Keys the
-   catalog does not hold stay (the planner drops them; a template keeps
-   what was saved). Null when the hash carries no comp.
+   style ("" for balanced), the weapon keys in roster order, the members
+   by position (members: p= as written, an empty entry an open slot of a
+   link built from a comp's slots, kitHash) and every field (params).
+   Keys the catalog does not hold stay (the planner drops them; a
+   template keeps what was saved). Null when the hash carries no comp.
    A zerg's address carries every party: the open one on the plain fields,
    t naming its number and the others on suffixed fields (n2 p2 g2 f2 k2,
    _loadout.js partyEncode). A comp is one party, so the hash it keeps is
@@ -151,12 +161,16 @@ function parseShareHash(hash) {
 
   const n = parseInt(p.n, 10);
   const weapons = p.p ? p.p.split(",").filter(Boolean) : [];
+  const members = p.p ? p.p.split(",") : [];
+  while (members.length && !members[members.length - 1]) members.pop();
 
   return {
     content: p.c || "",
     size: Number.isInteger(n) ? n : null,
     style: p.st || "",
     weapons,
+    members,
+    params: p,
     hash: h
   };
 }
@@ -167,6 +181,119 @@ function slotsFromWeapons(weapons) {
   return (weapons || []).slice(0, COMP_SLOTS_MAX).map((weapon_id, i) => ({
     position: i + 1, weapon_id: weapon_id || null, role: null, note: null
   }));
+}
+
+
+/* the slots as a link's members: one entry per position up to the last
+   slot that holds a weapon, an open slot an empty entry */
+function slotMembers(slots) {
+  const rows = normalizeSlots(slots);
+  let last = 0;
+  for (const s of rows) if (s.weapon_id) last = Math.max(last, s.position);
+  const out = Array.from({ length: last }, () => "");
+  for (const s of rows) if (s.weapon_id && s.position <= last) out[s.position - 1] = s.weapon_id;
+  return out;
+}
+
+
+/* The kit each slot holds in a saved link, by position: the link's
+   member at the slot's position, while the slot still names that
+   member's weapon (the sheet's rule, _build.js), decoded through the
+   planner's codec (_loadout.js): { loadout } (the gear and the Q, W and
+   passive picks), prov where the member was forged or locked, combo
+   where it carries an explicit combo. Nothing without the codec. */
+function slotKits(shareHash, slots) {
+  const out = {};
+  const saved = parseShareHash(shareHash);
+  if (!saved || !saved.members.length || typeof loadoutDecode !== "function") return out;
+  const n = saved.members.length;
+  const loadouts = loadoutDecode(saved.params.g || "") || [];
+  const provs = typeof provDecode === "function" ? provDecode(saved.params.f || "", n) : [];
+  const combos = typeof comboDecode === "function" ? comboDecode(saved.params.k || "", n) : [];
+  for (const s of normalizeSlots(slots)) {
+    const i = s.position - 1;
+    if (!s.weapon_id || saved.members[i] !== s.weapon_id) continue;
+    const kit = {};
+    if (loadouts[i]) kit.loadout = loadouts[i];
+    if (provs[i] && provs[i] !== "m") kit.prov = provs[i];
+    if (Number.isInteger(combos[i])) kit.combo = combos[i];
+    if (Object.keys(kit).length) out[s.position] = kit;
+  }
+  return out;
+}
+
+
+/* the slots, each carrying the kit a saved link holds for it (slotKits) */
+function slotsWithKits(slots, shareHash) {
+  const kits = slotKits(shareHash, slots);
+  return (slots || []).map(s => (kits[s.position] ? Object.assign({}, s, { kit: kits[s.position] }) : s));
+}
+
+
+/* A link built from the slots with each slot's kit (kit: { loadout,
+   prov, combo }, as slotKits reads it or the import builds it), through
+   the planner's codec (_loadout.js: loadoutEncode, provEncode,
+   comboEncode). p= holds one entry per slot up to the last one with a
+   weapon, an open slot an empty entry, so every slot keeps its position:
+   the sheet reads a slot's build at it (_build.js, _roster.js), and the
+   planner drops an empty entry with its fields, as it drops any key it
+   does not hold. "" without the codec, or past COMP_HASH_MAX. */
+function kitHash(template, slots) {
+  if (typeof loadoutEncode !== "function") return "";
+  const t = template || {};
+  const members = slotMembers(slots);
+  const kitAt = new Map();
+  for (const s of slots || []) {
+    const position = Number(s && s.position);
+    if (s && s.kit && !kitAt.has(position)) kitAt.set(position, s.kit);
+  }
+  const kits = members.map((w, i) => (w ? kitAt.get(i + 1) || null : null));
+  const g = loadoutEncode(members, kits.map(k => (k && k.loadout) || undefined));
+  const f = typeof provEncode === "function" ? provEncode(kits.map(k => (k && k.prov) || "m"), members.length) : "";
+  const c = typeof comboEncode === "function"
+    ? comboEncode(kits.map(k => (k && Number.isInteger(k.combo) ? k.combo : null)), members.length) : "";
+  const parts = [`c=${encodeURIComponent(t.content || "")}`];
+  if (t.planned_size) parts.push(`n=${t.planned_size}`);
+  if (t.style) parts.push(`st=${encodeURIComponent(t.style)}`);
+  if (members.length) parts.push(`p=${members.join(",")}`);
+  if (g) parts.push(`g=${g}`);
+  if (f) parts.push(`f=${f}`);
+  if (c) parts.push(`k=${c}`);
+  const out = parts.join("&");
+  return out.length <= COMP_HASH_MAX ? out : "";
+}
+
+
+/* the slots with one slot's weapon set (a key, or null for an open
+   slot); a changed weapon drops the slot's kit, its old weapon's */
+function withSlotWeapon(slots, position, key) {
+  return (slots || []).map(s => {
+    if (Number(s.position) !== Number(position)) return s;
+    const weapon_id = key || null;
+    if (weapon_id === (s.weapon_id || null)) return s;
+    const next = Object.assign({}, s, { weapon_id });
+    delete next.kit;
+    return next;
+  });
+}
+
+
+/* the slots without one, renumbered from 1; every other slot keeps its
+   kit */
+function dropSlot(slots, position) {
+  return (slots || []).filter(s => Number(s.position) !== Number(position))
+    .map((s, i) => Object.assign({}, s, { position: i + 1 }));
+}
+
+
+/* what a slot's weapon picker lists for a query: the profile's search
+   (weaponSearch), then the open slot while the slot holds a weapon, an
+   extra the combobox never marks for Enter (a name that matches nothing
+   never clears the slot) */
+function slotPickOptions(query, catalog, current) {
+  const hits = weaponSearch(query, catalog, null).map(h => ({ key: h.key, name: h.name, role: h.role, item: h.item }));
+  if (current) hits.push({ key: "", name: "Open slot (any weapon)", role: "any", item: "", extra: true });
+  return hits;
 }
 
 
@@ -195,17 +322,26 @@ function normalizeSlots(slots) {
 
 
 /* The hash the planner opens for a template: the saved share hash when
-   its roster still matches the slots (the kits and picks ride along),
-   else a plain c= / n= / st= / p= link built from the slots. */
+   its members still match the slots position by position (the kits and
+   picks ride along); else, when a slot carries its kit (the comps
+   dialog's slots, an import's), a link built from the slots with their
+   kits (kitHash), so a changed slot opens without a kit and the others
+   keep theirs; else a plain c= / n= / st= / p= link built from the
+   slots. */
 function templateHash(template, slots) {
   const rows = normalizeSlots(slots);
   const weapons = rows.map(s => s.weapon_id).filter(Boolean);
   const saved = parseShareHash(template && template.share_hash);
 
-  if (saved && saved.weapons.join(",") === weapons.join(",")
+  if (saved && saved.members.join(",") === slotMembers(rows).join(",")
       && saved.content === (template.content || "") && (saved.style || "") === (template.style || "")
       && (saved.size === null || saved.size === template.planned_size)) {
     return saved.hash;
+  }
+
+  if ((slots || []).some(s => s && s.kit)) {
+    const built = kitHash(template, slots);
+    if (built) return built;
   }
 
   const parts = [`c=${encodeURIComponent(template.content || "")}`];
@@ -213,6 +349,20 @@ function templateHash(template, slots) {
   if (template.style) parts.push(`st=${encodeURIComponent(template.style)}`);
   if (weapons.length) parts.push(`p=${weapons.join(",")}`);
   return parts.join("&");
+}
+
+
+/* The share hash a template keeps when it is saved: the stored one while
+   it still opens as saved (templateHash returns it); else, when a slot
+   carries its kit, the link built from the slots with their kits, so the
+   stored link matches the stored slots again; else the stored one as it
+   was (no kit is left to keep, and the plain link is built on open). */
+function keptHash(template, slots) {
+  const stored = (template && template.share_hash) || "";
+  const saved = parseShareHash(stored);
+  if (saved && templateHash(template, slots) === saved.hash) return stored;
+  if ((slots || []).some(s => s && s.kit)) return kitHash(template, slots) || stored;
+  return stored;
 }
 
 
@@ -551,6 +701,71 @@ function compErrorMessage(err) {
     return tag;
   }
 
+  /* the slot's weapon art, or a blank of its size for an open slot */
+  function slotArt(info) {
+    const src = info && ((typeof ICONS !== "undefined" && ICONS[info.key])
+      || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : ""));
+    if (!src) {
+      const blank = document.createElement("span");
+      blank.className = "pw-art blank";
+      blank.setAttribute("aria-hidden", "true");
+      return blank;
+    }
+    const img = document.createElement("img");
+    img.className = "pw-art";
+    img.src = src;
+    img.alt = "";
+    img.width = 22;
+    img.height = 22;
+    img.loading = "lazy";
+    return img;
+  }
+
+  /* the mark of a slot that keeps the kit it was saved with */
+  function kitMark() {
+    const tag = document.createElement("span");
+    tag.className = "cp-kit";
+    tag.textContent = "kit";
+    tag.title = canWrite ? "This slot keeps the kit it was saved with; another weapon opens without it."
+                         : "This slot keeps the kit it was saved with.";
+    return tag;
+  }
+
+  /* A writer picks a slot's weapon in place: the profile's combobox
+     (weaponCombo) on the slot's name, its search and an open slot. */
+  function weaponPicker(cell, slot, info) {
+    const label = info ? (info.known ? info.name : `${slot.weapon_id} (unknown weapon)`) : "";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "text-input cp-in cp-weapon-in";
+    input.value = label;
+    input.placeholder = "open slot: type a weapon";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.dataset.cpWeapon = String(slot.position);
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("aria-controls", `cp-results-${slot.position}`);
+    input.setAttribute("aria-label", `slot ${slot.position}: weapon`);
+    const results = document.createElement("ul");
+    results.className = "pw-results cp-results";
+    results.id = `cp-results-${slot.position}`;
+    results.setAttribute("role", "listbox");
+    results.setAttribute("aria-label", `weapons for slot ${slot.position}`);
+    results.hidden = true;
+    weaponCombo(input, results, {
+      idPrefix: `cp-opt-${slot.position}`,
+      options: query => slotPickOptions(query, CATALOG, slot.weapon_id),
+      onPick: hit => pickWeapon(slot.position, hit.key)
+    });
+    input.addEventListener("focus", () => input.select());
+    /* text typed and left unpicked is not the slot's weapon */
+    input.addEventListener("blur", () => { input.value = label; });
+    cell.append(input);
+    return results;
+  }
+
   function slotRow(slot) {
     const tr = document.createElement("tr");
     tr.dataset.position = String(slot.position);
@@ -561,25 +776,22 @@ function compErrorMessage(err) {
 
     const weapon = document.createElement("td");
     weapon.className = "cp-weapon";
-    if (slot.weapon_id) {
-      const info = weaponInfo(CATALOG, slot.weapon_id);
-      const src = (typeof ICONS !== "undefined" && ICONS[slot.weapon_id])
-        || (info.item ? `https://render.albiononline.com/v1/item/${encodeURIComponent(info.item)}.png?size=64` : "");
-      if (src) {
-        const img = document.createElement("img");
-        img.className = "pw-art";
-        img.src = src;
-        img.alt = "";
-        img.width = 22;
-        img.height = 22;
-        img.loading = "lazy";
-        weapon.append(img);
-      }
+    const info = slot.weapon_id ? weaponInfo(CATALOG, slot.weapon_id) : null;
+    if (canWrite) {
+      weapon.classList.add("cp-weapon-edit");
+      weapon.append(slotArt(info));
+      const results = weaponPicker(weapon, slot, info);
+      if (info && info.role) weapon.append(roleTag(info.role));
+      if (slot.kit) weapon.append(kitMark());
+      weapon.append(results);
+    } else if (info) {
+      weapon.append(slotArt(info));
       const name = document.createElement("span");
       name.className = "gd-name";
       name.textContent = info.known ? info.name : `${slot.weapon_id} (unknown weapon)`;
       weapon.append(name);
       if (info.role) weapon.append(roleTag(info.role));
+      if (slot.kit) weapon.append(kitMark());
     } else {
       const open = document.createElement("span");
       open.className = "cp-open";
@@ -641,10 +853,19 @@ function compErrorMessage(err) {
       input.disabled = !canWrite;
     }
 
+    renderSlots();
+  }
+
+  /* the slots' part of the open comp: the meta line, the role summary,
+     the table and the buttons that read the slots; a slot's edit
+     repaints this alone, so the fields keep what the caller typed */
+  function renderSlots() {
+    if (!current) return;
+    const kits = slots.filter(s => s.kit).length;
+    const kept = kits ? ` · ${kits} of ${slots.length} slot${slots.length === 1 ? "" : "s"} keep${kits === 1 ? "s" : ""} a kit` : "";
     el.meta.textContent = current.id
-      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
-        + (current.share_hash ? " · kits and picks kept from the planner" : "")
-      : "Not saved yet: from the planner's current comp.";
+      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}${kept}`
+      : `Not saved yet: from the planner's current comp.${kept}`;
 
     const s = templateSummary(slots, CATALOG);
     el.summary.replaceChildren(...ROLE_ORDER.map(role => {
@@ -673,8 +894,11 @@ function compErrorMessage(err) {
     markDirty();
   }
 
+  /* the comp as typed, with the share hash a save keeps (keptHash: the
+     stored link while it still opens as saved, else rebuilt from the
+     slots and their kits) */
   function typedTemplate() {
-    return Object.assign({}, current, {
+    const t = Object.assign({}, current, {
       name: el.name.value.trim(),
       content: el.content.value,
       style: el.style.value,
@@ -682,6 +906,8 @@ function compErrorMessage(err) {
       notes: el.notes.value.trim(),
       slots
     });
+    t.share_hash = keptHash(t, slots);
+    return t;
   }
 
   function dirty() {
@@ -713,10 +939,27 @@ function compErrorMessage(err) {
     const b = e.target.closest("[data-cp-remove]");
     if (!b || busy || !canWrite) return;
     const position = Number(b.dataset.cpRemove);
-    slots = slots.filter(s => s.position !== position).map((s, i) => Object.assign(s, { position: i + 1 }));
-    renderTemplate();
+    slots = dropSlot(slots, position);
+    renderSlots();
     announce(`Slot ${position} removed.`);
   });
+
+  /* a slot's weapon picked in the dialog (a key, "" for an open slot):
+     the slot drops the kit its old weapon wore */
+  function pickWeapon(position, key) {
+    if (busy || !canWrite) return;
+    const before = slots.find(s => s.position === position);
+    if (!before) return;
+    const changed = (key || null) !== (before.weapon_id || null);
+    slots = withSlotWeapon(slots, position, key);
+    renderSlots();
+    const input = el.slots.querySelector(`[data-cp-weapon="${position}"]`);
+    if (input) input.focus();
+    if (changed) {
+      const name = key ? weaponInfo(CATALOG, key).name : "an open slot";
+      announce(`Slot ${position}: ${name}${before.kit ? "; the old weapon's kit is dropped" : ""}.`);
+    }
+  }
 
   /* the note under the slots as the open comp reads it (a failed or
      dropped read leaves no "Loading the comp…" behind) */
@@ -739,7 +982,8 @@ function compErrorMessage(err) {
       if (!t) { slotsNoteNow(); showError(COMP_MSG.refused); return; }
       t.slots = normalizeSlots(t.slots);
       current = t;
-      slots = normalizeSlots(t.slots);
+      /* each slot carries the kit its saved link holds for it */
+      slots = slotsWithKits(normalizeSlots(t.slots), t.share_hash);
       el.slotsNote.textContent = "No slots: the comp is empty.";
     } catch (err) {
       if (seq !== openSeq || tpl !== tplSeq) return;
@@ -772,7 +1016,7 @@ function compErrorMessage(err) {
       share_hash: parsed.hash,
       slots: []
     };
-    slots = slotsFromWeapons(parsed.weapons);
+    slots = slotsWithKits(slotsFromWeapons(parsed.weapons), parsed.hash);
     clearMessages();
     acctFlagFields(FIELDS, {});
     el.slotsNote.textContent = "";
@@ -826,7 +1070,7 @@ function compErrorMessage(err) {
       return;
     }
     if (!window.confirm("Replace this comp's slots with the planner's current comp? Role labels and notes on the slots are cleared.")) return;
-    slots = slotsFromWeapons(parsed.weapons);
+    slots = slotsWithKits(slotsFromWeapons(parsed.weapons), parsed.hash);
     current.share_hash = parsed.hash;
     if (Object.prototype.hasOwnProperty.call(CONTENTS, parsed.content)) el.content.value = parsed.content;
     if (parsed.size) el.size.value = parsed.size;
@@ -1007,7 +1251,9 @@ function compErrorMessage(err) {
     if (!d.id) return;
     openComps({ guildId: d.guildId, templateId: d.id }).then(() => {
       if (!dialog.open || !current || current.id !== d.id) return;
-      const done = `${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`;
+      const kits = d.kits ? `, ${d.kits} of them with a kit from the sheet's gear columns`
+        : d.kitsDropped ? ", without the sheet's gear: the kits make a link longer than a comp keeps" : "";
+      const done = `${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}${kits}`;
       if (d.namesError) showError(`${done}; the names were not remembered: ${d.namesError}`);
       else showNotice(done + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
     });

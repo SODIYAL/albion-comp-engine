@@ -914,6 +914,26 @@ check("session++;" in seg(comps_ui, "async function openComps(opts)", "const seq
       "typed meanwhile stays unsaved); a comp read on its way never replaces one opened or taken "
       "from the planner since; the list reads Loading until answered; the guild cannot change "
       "under a pending action")
+_profile_src = read("_profile.js")
+check("function weaponCombo(input, results, opts)" in _profile_src and _profile_src.count("weaponCombo(") == 2
+      and "active = hits.findIndex(hit => !hit.extra);" in _profile_src
+      and "weaponCombo(input, results, {" in comps_ui and 'input.setAttribute("role", "combobox");' in comps_ui
+      and 'input.setAttribute("aria-controls", `cp-results-${slot.position}`);' in comps_ui
+      and 'results.setAttribute("role", "listbox");' in comps_ui and "function pickWeapon(position, key)" in comps_ui
+      and "slots = withSlotWeapon(slots, position, key);" in comps_ui and "if (canWrite) {" in seg(comps_ui, "function slotRow(slot)", "const role = ", "L30t row anchors"),
+      "L30t a writer sets a slot's weapon in the dialog through the profile's combobox (one implementation, "
+      "weaponCombo, the profile's lists and the slots), each slot's name a combobox bound to its own listbox, the "
+      "open slot an extra Enter never picks unasked; a member reads the name")
+check(".cp-weapon-edit .cp-weapon-in{" in AUTH_CSS and ".cp-results{" in AUTH_CSS and ".cp-kit{" in AUTH_CSS
+      and "renderSlots();" in seg(comps_ui, "function pickWeapon(position, key)", "\n  }", "L30u pick anchors")
+      and "slots = dropSlot(slots, position);\n    renderSlots();" in comps_ui,
+      "L30u a slot stays one dense line (its name is the combobox, read as text until pointed at, and the kit mark "
+      "beside the role tag); a pick or a removal repaints the slots alone, the fields keeping what was typed")
+check("slots = slotsWithKits(normalizeSlots(t.slots), t.share_hash);" in comps_ui and "t.share_hash = keptHash(t, slots);" in comps_ui
+      and "function kitHash(template, slots)" in COMPS_JS and "const COMP_HASH_MAX = 8000;" in COMPS_JS
+      and "slotsWithKits(slotsFromWeapons(parsed.weapons), parsed.hash)" in comps_ui,
+      "L30v each slot carries the kit its saved link holds; a changed slot opens and saves without one, the "
+      "others keep theirs, a removed one takes its own along (test_comps)")
 
 print("L31 - CTAs: an event is a copy of a comp, met through the address bar alone")
 # CTAs (platform phase 4): the fourth feature module. Its roster is
@@ -1194,13 +1214,15 @@ IMPORT_JS = read("_import.js")
 idlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog import-dialog"', "</dialog>", "L37 dialog anchors")
 check('aria-modal="true"' in idlg and 'aria-labelledby="im-title"' in idlg and 'id="im-title"' in idlg,
       "L37a the import dialog is modal and titled")
-for fid in ("im-guild", "im-text", "im-file", "im-name", "im-content", "im-style", "im-size", "im-remember", "im-players", "im-parties"):
+for fid in ("im-guild", "im-text", "im-file", "im-sheet", "im-name", "im-content", "im-style", "im-size", "im-remember", "im-players", "im-parties"):
     check(('id="%s"' % fid) in idlg and ('for="%s"' % fid) in idlg, "L37b field %s has its label" % fid)
 check('role="alert"' in idlg and 'aria-live="polite"' in idlg, "L37c errors and changes are announced, inside the dialog")
-check('id="im-columns"' in idlg and 'id="im-rows"' in idlg and idlg.count("<th scope=\"col\">") == 8,
-      "L37d the column map and the review table with its eight headers")
-check('accept=".csv,.tsv,.txt' in idlg and "xlsx" in IMPORT_JS and "readAsText" in IMPORT_JS,
-      "L37e a CSV, TSV or text file is read in the browser; a workbook is refused with the way round")
+check('id="im-columns"' in idlg and 'id="im-rows"' in idlg and idlg.count("<th scope=\"col\"") == 9
+      and '<th scope="col" class="im-kit">Kit</th>' in idlg,
+      "L37d the column map and the review table with its nine headers, the kit beside the weapon")
+check('accept=".csv,.tsv,.txt,.xlsx,.xlsm,' in idlg and "spreadsheetml.sheet" in idlg and "readAsArrayBuffer" in IMPORT_JS
+      and "function fileKind(bytes)" in IMPORT_JS and "if (fileKind(bytes) === \"text\")" in IMPORT_JS and "readAsText" not in IMPORT_JS,
+      "L37e a CSV, TSV, text file or Excel workbook is read in the browser, what it is read from its bytes, never its name")
 check('id="comp-import"' in cdlg and 'dispatchEvent(new CustomEvent("comp-import"' in COMPS_JS and 'addEventListener("comp-import"' in IMPORT_JS,
       "L37f the comps dialog opens the import through a DOM event carrying the guild, no call between modules")
 check('dispatchEvent(new CustomEvent("comp-imported"' in IMPORT_JS and 'addEventListener("comp-imported"' in COMPS_JS,
@@ -1229,8 +1251,9 @@ check("function acctCsvText" in AUTH_JS and "function acctDownloadText" in AUTH_
       "L37o the CSV writer, the file name and the download are the shared kit (_auth.js); each dialog shapes its own rows")
 check(all(s in AUTH_CSS for s in (".import-dialog{", ".im-columns{", ".im-table td{", '.im-table tr[data-status="uncertain"] .im-status{')),
       "L37p the import dialog, its column map, its table and the uncertain mark are styled in _auth.css")
-check(".im-source{grid-template-columns:1fr}" in LAYOUT and ".im-table{display:block; overflow-x:auto}" in LAYOUT,
-      "L37q on a phone the source stacks and the review table scrolls sideways (_layout.css)")
+check(".im-source{grid-template-columns:1fr}" in LAYOUT and ".im-table{display:block; overflow-x:auto}" in LAYOUT
+      and ".im-kit{min-width:250px}" in LAYOUT,
+      "L37q on a phone the source stacks and the review table scrolls sideways, the kit two pieces to a line (_layout.css)")
 i_import = script_at(lambda a, b: "function loadGuildAliases" in b)
 check(0 <= i_history < i_import, "L37r the import module loads after the history module, in its own <script>",
       "script indices history=%d import=%d" % (i_history, i_import))
@@ -1243,6 +1266,37 @@ check("chosen[rowKey(rows[i])] = select.value;" in import_ui and "chosen = {};" 
       "imported); a reopened import starts idle; the guild and the names to remember are taken at "
       "the click; a failed name save reaches the comps dialog's message; the names read Loading "
       "until answered")
+
+check("async function readWorkbook(bytes)" in IMPORT_JS and "async function readWorkbookSheet(book, index)" in IMPORT_JS
+      and 'new DecompressionStream("deflate-raw")' in IMPORT_JS and "function crc32(bytes)" in IMPORT_JS
+      and "function zipEntries(bytes)" in IMPORT_JS and "function xmlWalk(xml, visit)" in IMPORT_JS
+      and not re.search(r"JSZip|SheetJS|\bXLSX\.", IMPORT_JS)
+      and all(("const %s = " % c) in IMPORT_JS for c in ("IMPORT_FILE_MAX", "XLSX_ENTRIES_MAX", "XLSX_PART_MAX", "IMPORT_COLUMNS_MAX"))
+      and all(("  %s: " % k) in IMPORT_JS for k in ("xlsxCorrupt", "xlsxLocked", "xls", "notWorkbook", "xlsxUnsupported", "xlsxTooBig", "fileTooBig", "noInflate")),
+      "L37t an Excel workbook is read by the page itself, no library: the zip's directory, stored and deflated parts "
+      "checked against their size and CRC, bounded (the file, the entries, a part, the columns); a damaged, locked, "
+      "older or foreign file is refused with the way round (test_xlsx)")
+check('<span class="im-sheet" id="im-sheet-wrap" hidden>' in idlg and "el.sheetWrap.hidden = !book || book.sheets.length < 2;" in import_ui
+      and "el.text.value = cellsText(sheet.cells);" in import_ui and 'readCells(sheet, notes, "sheetEmpty");' in import_ui
+      and "readCells(parsed, parsed.cut" in import_ui,
+      "L37u a workbook of several sheets offers them; the chosen sheet's cells are written into the paste box as "
+      "Excel copies them and read on the paste's path, one detection and one review")
+_gear_kinds = re.search(r"const GEAR_KINDS = \[([^\]]+)\];", IMPORT_JS)
+_lo_slots = re.search(r"const LO_SLOTS = \[([^\]]+)\];", read("_loadout.js"))
+check(_gear_kinds is not None and _lo_slots is not None and _gear_kinds.group(1).replace(" ", "") == _lo_slots.group(1).replace(" ", "")
+      and "function matchGear(" in IMPORT_JS and "function gearIndex(" in IMPORT_JS
+      and "kitHash(typed, built.slots)" in import_ui and "loadoutEncode(members," in COMPS_JS,
+      "L37v gear columns read into each slot's kit in the loadout codec's slot order; the kits ride in the comp's "
+      "share hash through the planner's codec (the comps module's kitHash)")
+_import_globals = set(re.findall(r"\b(GEAR|ICONS|SPELLS|DATASET|WEAPONS|LOADOUTS|loSlotOpen|loArtRetry|loadoutEncode|loadoutDecode|partyDecode|loGear)\b", IMPORT_JS))
+check(_import_globals == {"GEAR", "loSlotOpen", "loArtRetry"},
+      "L37w the planner tables the import reads are the gear catalog, the codec's slot rule and the art retry, no other",
+      str(sorted(_import_globals)))
+check(".im-table.im-nokit .im-kit{display:none}" in AUTH_CSS and "function kitCell(row, i)" in import_ui
+      and "select.dataset.imGear" in import_ui and 'none.textContent = `${label}: choose`;' in import_ui
+      and "piece.dataset.status = \"none\";" in import_ui,
+      "L37x the review shows each row's kit (a sheet without gear hides the column): an uncertain piece is chosen "
+      "among its candidates, an unread one shown by its text, neither guessed")
 
 print("L38 - the engine's read on the sheet: the planner's engine on the roster's weapon keys, display only, people beside it never scored")
 # Phase 11: the one account surface that reads the engine. The roster
@@ -1340,6 +1394,11 @@ i_build = script_at(lambda a, b: "function sheetBuilds" in b)
 check(0 <= i_roster < i_build, "L38r9 the build module loads after the roster module, in its own <script>",
       "script indices roster=%d build=%d" % (i_roster, i_build))
 check(not re.search(r"sheetBuilds|hashMembers|BUILD_MSG", APP + DECISION_JS), "L38r10 the planner never calls the build module")
+check('const weapons = listed ? listed.split(",") : [];' in BUILD_JS and 'const weapons = listed ? listed.split(",") : [];' in ROSTER_JS
+      and ".filter(Boolean)" not in seg(BUILD_JS, "function hashMembers", "\n}", "L38r11 build anchors")
+      and ".filter(Boolean)" not in seg(ROSTER_JS, "function savedComp", "\n}", "L38r11 roster anchors"),
+      "L38r11 the sheet reads a saved link's members by position: an open slot's empty entry (a link built from a "
+      "comp's slots) keeps every later slot's build in place (test_sheet_build, test_roster)")
 
 # ---------------------------------------------------------------------------
 print("L39 - the design check of the account dialogs and the portal page: hidden honoured, one line per slot, one primary per dialog, the title takes focus")

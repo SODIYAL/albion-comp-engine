@@ -460,8 +460,10 @@ the sheet a link opens, for guests with a claim token and for accounts),
 phase 6 (caller management on the sheet), phase 7 (the live sheet over
 Realtime Broadcast), phase 8 (the attendance record) and phase 9 (the
 history: facts over completed CTAs), phase 10 (import and export: a
-spreadsheet as a saved comp, CSV out) and phase 11 (the engine's read of
-the live roster, on the sheet) are built.
+spreadsheet, a CSV or an Excel workbook as a saved comp, its gear columns
+read into each slot's kit, CSV out) and phase 11 (the engine's read of
+the live roster, on the sheet) are built; the comps dialog sets a slot's
+weapon, each slot keeping the kit its saved link holds.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
@@ -479,13 +481,31 @@ the live roster, on the sheet) are built.
 - **The engine read on the CTAs and comps dialogs**: the read runs on
   the sheet alone; a draft CTA or a saved comp is read through "Open in
   planner".
-- **Import: an Excel workbook** (`.xlsx`) is not parsed in the page; its
-  cells are pasted, or the sheet saved as CSV. A zip-and-XML reader in
-  the page is a later increment if callers ask for it.
 - **Import: a CTA from a sheet with its players**: the import makes a
   comp (a template has no player); the player column is shown and may
   ride in the slot notes. A CTA with those players on its sheet is a
   later increment (phase 12's roster construction is the place).
+- **Gear names remembered per guild**: a gear piece the caller chooses in
+  an import's review is not remembered (`weapon_aliases` holds weapon
+  lines, one per name: "royal" cannot name a cowl in one column and a
+  jacket in the next). A gear alias needs its slot in the key: a table of
+  its own or a slot-qualified alias, a maintainer decision with a
+  migration.
+- **Import: spells and a build in one cell**: Q, W and passive columns
+  are not read, and a cell holding a whole build ("Hallowfall - Cleric
+  Cowl, Cleric Robe") reads as one weapon text. Later increments if
+  callers ask for them.
+- **Import: what a workbook's cells do not carry**: a number reads as its
+  stored value, never in the cell's format (a date reads as its serial
+  number); an .xlsb or .ods file and a workbook protected by a password
+  are refused with the way round (save as .xlsx or CSV, remove the
+  password). Reading styles, the binary format or OpenDocument is a later
+  increment if a caller's sheet needs it.
+- **A weapon picker per slot in the CTAs dialog**: the CTAs dialog edits a
+  slot's role label and note and removes it; a slot's weapon is set on the
+  sheet by the caller roles or by replacing the slots from the planner.
+  The comps dialog's picker (the profile's combobox, the per-slot kit) is
+  the pattern if callers ask for it there.
 - **A party column on slots**: comp and CTA slots carry no party; an
   imported sheet's parties order the slots and may ride in the notes.
 - **A player's own history across guilds**: the history dialog reads a
@@ -507,14 +527,6 @@ the live roster, on the sheet) are built.
   label where it names a role class is a maintainer decision; the same
   weapon's seat is the open question under "A frontline's damage points
   making a ranged carrier".
-- **Gear columns on an imported sheet**: head, chest and boots columns
-  are ignored (a comp's slot holds a weapon line; its kit is set in the
-  planner). Reading them into the planner's kit through the share hash
-  is a later increment.
-- **Slot editing inside the comps dialog**: a slot's weapon is set in the
-  planner (save, or replace the slots from the planner); the dialog edits
-  role labels and notes and removes slots. A weapon picker per slot (the
-  profile's combobox) is a later increment if callers ask for it.
 - **Multi-party comps**: the planner holds a zerg as parties of 20, one
   tab each, every party its own comp and the address carrying all of them.
   A saved comp keeps the open party's slots (its link carries the other

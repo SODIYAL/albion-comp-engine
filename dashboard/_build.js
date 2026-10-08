@@ -41,11 +41,14 @@ const BUILD_MSG = {
 };
 
 
-/* the members and loadouts a share hash carries: the weapons in order
-   and the decoded loadout per member (an array with holes) */
+/* the members and loadouts a share hash carries: the weapons by
+   position (an empty entry is an open slot of a link built from a
+   comp's slots, which keeps every later slot at its position) and the
+   decoded loadout per member (an array with holes) */
 function hashMembers(shareHash, decode) {
   const params = new URLSearchParams(String(shareHash || "").replace(/^#/, ""));
-  const weapons = (params.get("p") || "").split(",").filter(Boolean);
+  const listed = params.get("p");
+  const weapons = listed ? listed.split(",") : [];
   const loadouts = decode(params.get("g") || "") || [];
   return { weapons, loadouts };
 }
