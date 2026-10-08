@@ -452,26 +452,27 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
-- **The outcome layer — first step: test the template weights**: the
-  party artifact now carries `in_fight` / `kills` / `deaths` per party
-  (`sample_parties.py analyze`, summed over members the battle roster
-  places in the fight); the committed artifact gains them at the next
-  fold on the harvest machine. `pipeline/audit_capability_outcomes.py`
-  (report-only) then labels win (kills >= 2 x deaths) / loss (kills <
-  deaths), fits outcome weights on the training split and compares the
-  template's fitness() against them on the holdout. Planted-weight
-  recovery checks: Spearman 0.94 recovered, holdout AUC 0.49 with no
-  signal planted. A first read on GUILD-level labels (the albionbb
-  kill lists, 582 training parties of 10-20): `fitness()` AUC 0.50, no
-  capability separates wins from losses, party size alone predicts better
-  (0.61) — numbers decide these fights. Before the party-level read, add a
-  numbers control: each side's size from the battle roster's alliances.
-  Any weight change it suggests is a logged decision, and Blackzone Roam's
-  weights are now choice-fitted (standing rule 7 as amended), so the
-  outcome audit tests the fitted weights. Later: win-lift per weapon, pair
-  and copy count, into the prior only after a `v4h` A/B (standing rule
-  16); the design doc's plan (§8.6): a prior-adjuster, never the primary
-  term.
+- **The outcome layer, after the party-level read**:
+  `pipeline/audit_capability_outcomes.py` (report-only) labels win (kills
+  >= 2 x deaths) / loss (kills < deaths) on the harvest's killer parties,
+  fits outcome weights on the training split and compares the template's
+  fitness() against them on the holdout, with each side's numbers from the
+  battle roster's alliances (the harvest cache) as a control. The read on
+  16,638 training parties of 10-20 (V: 10, Capability outcomes at party
+  level, numbers controlled): numbers decide these fights (holdout AUC, the
+  side ratio alone 0.75), fitness() adds nothing to them (numbers 0.763,
+  numbers + fitness() 0.761; fitness() alone 0.485), no capability
+  separates wins from losses alone (AUC 0.47-0.53), and the fitted
+  coefficients do not rank like the template weights (Spearman -0.04);
+  burst_aoe is the one capability whose coverage associates with winning
+  beyond numbers (+1.19 per unit of coverage, 90% interval +0.84 to
+  +1.40). Association, not cause; nothing retuned (standing rule 1), and a
+  weight change it suggests is a logged decision. Open: item power and
+  skill stay uncontrolled, a killer party with no kill is never recorded,
+  and the roster names who fought, never who fought whom. Later: win-lift
+  per weapon, pair and copy count, into the prior only after a `v4h` A/B
+  (standing rule 16); the design doc's plan (§8.6): a prior-adjuster,
+  never the primary term.
 - **Choice-fitted weights for the other templates**: the harvest records
   no content, so `fit_choice_weights.py` reads every killer party against
   one template (Blackzone Roam). Castle, outpost, territory, faction-war

@@ -77,7 +77,9 @@ Three layers, never merged:
   the curated weights its `weight_fit` block records; the build enforces
   the pull rule (every curated weight >= 4 keeps half or more). Revealed
   preference, not win evidence: `audit_capability_outcomes.py` is the
-  outcome side.
+  outcome side (its party-level read, each side's numbers from the battle
+  roster: numbers decide the outcome and fitness() adds nothing to them;
+  tests/VALIDATION.md).
 - Fitness: coverage with diminishing returns, hard floors on the
   weapon+loadout basis, headroom, overstack, Focus Fire / Resilience and AoE
   escalation, per-weapon Resilience Penetration as a rebate, optional rows,

@@ -23,29 +23,44 @@ exactly as fitness() values it: min(1, supply / target) ^ gamma, naked
   loss  kills <  deaths
   the traded-even middle is left out.
 
+THE NUMBERS CONTROL: a first read on guild-level labels found party size
+alone predicting better than fitness() (numbers decide these fights), so
+each party carries its side's numbers from the battle's roster in the
+harvest cache (out/party_cache.sqlite, party_store.py): its own side is
+every roster player in the alliances of the party's guilds (a guild with
+no alliance stands alone), the opposition the largest other alliance, and
+the control is log(own / largest other) beside the battle's log size.
+The roster says who fought, never who fought whom, so a three-way fight
+reads its biggest third party as the opposition. Without the cache the
+audit runs uncontrolled and says so.
+
 Three measurements:
 
   1. Univariate: per capability, mean coverage in winners vs losers and
      the capability's own AUC (0.5 = no separation).
   2. Fitted weights: an L2 logistic regression of win on the coverage
-     vector (+ party size), fitted on the TRAINING split (battle % M != 0,
-     the split every harvest-derived table learns from), coefficients in
-     coverage units so they read beside the template weights; a cluster
-     bootstrap over battles gives each coefficient's 90% interval.
+     vector (+ party size, + the numbers control), fitted on the TRAINING
+     split (battle % M != 0, the split every harvest-derived table learns
+     from), coefficients in coverage units so they read beside the
+     template weights; a cluster bootstrap over battles gives each
+     coefficient's 90% interval.
   3. Holdout check (battle % M == 0): the AUC of the template's own
-     fitness() score against the AUC of the fitted model. If the template
-     already separates as well as the fit, the weights are not the gap.
+     fitness() score against the AUC of the fitted model, and with the
+     numbers control the AUC of numbers alone and of numbers plus
+     fitness(): if fitness() adds nothing to numbers, the capability
+     model is not what separates these outcomes.
 
 CAVEATS, printed with the report:
   * The inclusion filter is "scored at least one kill", so the worst
     losers never enter; losses here are parties that traded and lost.
-  * Outcome is confounded with numbers, item power and skill; nothing
-    here controls for the enemy. A coefficient is association, not cause.
+  * Outcome is confounded with numbers, item power and skill; the numbers
+    control reads the roster's alliances, nothing here controls for item
+    power or skill. A coefficient is association, not cause.
   * A killer party is not a comp: large battles are coalitions.
   * Content is not recorded on a harvested party; --content sets whose
     weights and targets are tested (default blackzone_roam, as v4h).
 
-Run:  py -3 pipeline/audit_capability_outcomes.py [--content C] [--boot N]
+Run:  py -3 pipeline/audit_capability_outcomes.py [--content C] [--boot N] [--cache PATH]
 Out:  pipeline/out/capability_outcomes.json
 Needs the outcome fields (in_fight / kills / deaths) on the party records:
 rerun `sample_parties.py --pages 0` on the harvest machine (the fold does
@@ -88,6 +103,38 @@ def eligible(p, lo, hi, known):
     if (p.get("in_fight") or 0) * 2 < n:
         return False
     return all(w in known for w in p.get("weapons") or [])
+
+
+# ------------------------------------------------------- the numbers --
+def side_numbers(roster, guilds):
+    """(own side, largest opposing alliance, roster size) in players from
+    one battle's roster (party_store record `roster`: alliance, guild per
+    player); None when the party's guilds are not on it. A player with no
+    alliance stands with their guild; one with neither stands alone and
+    never counts as the opposition."""
+    def side(pl):
+        if pl.get("alliance"):
+            return "a:" + pl["alliance"]
+        return "g:" + pl["guild"] if pl.get("guild") else None
+    counts, guild_side = {}, {}
+    for pl in roster:
+        s = side(pl)
+        if s is None:
+            continue
+        counts[s] = counts.get(s, 0) + 1
+        if pl.get("guild"):
+            guild_side.setdefault(pl["guild"], s)
+    own = {guild_side[g] for g in guilds or [] if g in guild_side}
+    if not own:
+        return None
+    other = [n for s, n in counts.items() if s not in own]
+    return sum(counts[s] for s in own), max(other) if other else 0, len(roster)
+
+
+def numbers_row(nums):
+    """The control features: log(own / largest other), log(roster size)."""
+    own, enemy, total = nums
+    return [math.log(own / max(enemy, 1)), math.log(max(total, 1))]
 
 
 # ------------------------------------------------------------- features --
@@ -221,12 +268,13 @@ def predict(model, rows):
             for r in apply_std(rows, mu, sd)]
 
 
-def run(doc, content, lo, hi, mod, boot, l2, seed):
+def run(doc, content, lo, hi, mod, boot, l2, seed, store=None):
     probe = Engine(content=content)
     known = set(probe.weapons)
     caps = list(probe.reqs)
     engines, rows = {}, []
-    skipped = {"no_outcome": 0, "even": 0, "ineligible": 0}
+    skipped = {"no_outcome": 0, "even": 0, "ineligible": 0, "no_numbers": 0}
+    rosters = {}
     for p in doc.get("parties", []):
         if not eligible(p, lo, hi, known):
             skipped["ineligible"] += 1
@@ -235,13 +283,24 @@ def run(doc, content, lo, hi, mod, boot, l2, seed):
         if y is None:
             skipped["no_outcome" if p.get("kills") is None else "even"] += 1
             continue
+        nums = None
+        if store is not None:
+            b = p["battle"]
+            if b not in rosters:
+                rosters[b] = ((store.get(b) or {}).get("roster") or [])
+            nums = side_numbers(rosters[b], p.get("guilds"))
+            if nums is None:
+                skipped["no_numbers"] += 1
+                continue
         n = p["size"]
         e = engines.get(n)
         if e is None:
             e = engines[n] = Engine(content=content, size=n, style="balanced")
         rows.append({"battle": p["battle"], "y": y, "size": n,
                      "cov": coverage_row(e, caps, p["weapons"]),
-                     "fit": e.fitness(p["weapons"])})
+                     "fit": e.fitness(p["weapons"]),
+                     "num": numbers_row(nums) if nums else None})
+    controlled = store is not None
     train = [r for r in rows if not mod or r["battle"] % mod != 0]
     hold = [r for r in rows if mod and r["battle"] % mod == 0]
     if len(train) < 50 or len({r["y"] for r in train}) < 2:
@@ -258,9 +317,11 @@ def run(doc, content, lo, hi, mod, boot, l2, seed):
                   "auc": round(auc([r["cov"][j] for r in train],
                                    [r["y"] for r in train]) or 0.5, 4)}
 
-    # 2. fitted weights (+ size control), cluster bootstrap over battles
+    # 2. fitted weights (+ size and numbers controls), cluster bootstrap
+    #    over battles
     def x_of(rs):
-        return [r["cov"] + [r["size"]] for r in rs]
+        return [r["cov"] + [r["size"]] + (r["num"] if controlled else [])
+                for r in rs]
     y_tr = [r["y"] for r in train]
     coef, model = fit_raw(x_of(train), y_tr, l2)
     boots = []
@@ -295,8 +356,12 @@ def run(doc, content, lo, hi, mod, boot, l2, seed):
                      "coef": round(coef[j], 4), "ci90": interval(j),
                      **uni[c]}
     size_coef = round(coef[len(caps)], 4)
+    numbers_coef = ([round(c, 4) for c in coef[len(caps) + 1:]]
+                    if controlled else None)
 
-    # 3. holdout: template fitness vs the fitted model
+    # 3. holdout: template fitness vs the fitted model; with the numbers
+    #    control, numbers alone and numbers plus fitness() (both fitted on
+    #    the training split, as the full model)
     held = None
     if len(hold) >= 30 and len({r["y"] for r in hold}) == 2:
         y_h = [r["y"] for r in hold]
@@ -304,6 +369,14 @@ def run(doc, content, lo, hi, mod, boot, l2, seed):
                 "auc_template_fitness": round(auc([r["fit"] for r in hold], y_h), 4),
                 "auc_fitted_model": round(auc(predict(model, x_of(hold)), y_h), 4),
                 "auc_size_only": round(auc([r["size"] for r in hold], y_h), 4)}
+        if controlled:
+            def fit_auc(feat):
+                _c, m = fit_raw([feat(r) for r in train], y_tr, l2)
+                return round(auc(predict(m, [feat(r) for r in hold]), y_h), 4)
+            held["auc_numbers_ratio"] = round(auc([r["num"][0] for r in hold], y_h), 4)
+            held["auc_numbers_model"] = fit_auc(lambda r: r["num"] + [r["size"]])
+            held["auc_numbers_plus_fitness"] = fit_auc(
+                lambda r: r["num"] + [r["size"], r["fit"]])
 
     return {
         "content": content, "style": "balanced", "sizes": [lo, hi],
@@ -311,6 +384,8 @@ def run(doc, content, lo, hi, mod, boot, l2, seed):
         "labelled": len(rows), "train": len(train),
         "train_wins": sum(y_tr), "skipped": skipped,
         "size_coef": size_coef,
+        "numbers_control": controlled,
+        "numbers_coef": numbers_coef,
         "rank_agreement_spearman": round(spearman(weights, coef[:len(caps)]), 4),
         "train_auc_template_fitness": round(
             auc([r["fit"] for r in train], y_tr), 4),
@@ -339,6 +414,13 @@ def report(r):
               f"{ci:>18} {v['win_mean']:>6.3f} {v['loss_mean']:>6.3f} "
               f"{v['auc']:>6.3f}")
     print(f"  party size coefficient {r['size_coef']:+.3f} per player")
+    if r["numbers_control"]:
+        print(f"  numbers control: log(own side / largest other alliance) "
+              f"{r['numbers_coef'][0]:+.3f}, log(battle size) "
+              f"{r['numbers_coef'][1]:+.3f}")
+    else:
+        print("  numbers control OFF (no harvest cache): the coefficients "
+              "carry the numbers confound")
     print(f"  rank agreement template weight vs fitted coef (Spearman): "
           f"{r['rank_agreement_spearman']}")
     print(f"  training AUC of the template's fitness(): "
@@ -348,6 +430,10 @@ def report(r):
         print(f"  HOLDOUT ({h['parties']} parties, {h['wins']} wins): AUC "
               f"template fitness {h['auc_template_fitness']}, fitted model "
               f"{h['auc_fitted_model']}, size alone {h['auc_size_only']}")
+        if "auc_numbers_model" in h:
+            print(f"  HOLDOUT numbers: side ratio alone {h['auc_numbers_ratio']}, "
+                  f"numbers model {h['auc_numbers_model']}, numbers + fitness() "
+                  f"{h['auc_numbers_plus_fitness']}")
     else:
         print("  holdout: too few labelled parties to score")
     print("  caveat: parties with no kill are never recorded, so losses are "
@@ -368,6 +454,9 @@ def main():
     ap.add_argument("--l2", type=float, default=1.0)
     ap.add_argument("--seed", type=int, default=20260923)
     ap.add_argument("--json", default=OUT)
+    ap.add_argument("--cache", default=None,
+                    help="the harvest cache for the numbers control "
+                         "(default out/party_cache.sqlite; absent = uncontrolled)")
     args = ap.parse_args()
     if not rosters_io.exists():
         sys.exit("out/party_rosters.json.gz missing — run the harvest fold")
@@ -376,13 +465,20 @@ def main():
         sys.exit("the party artifact carries no outcome fields (kills / "
                  "deaths / in_fight): rerun `py -3 pipeline/sample_parties.py "
                  "--pages 0` on the harvest machine, then this audit")
+    import party_store
+    cache = args.cache or party_store.DEFAULT
+    store = party_store.Store(cache, create=False) if os.path.exists(cache) else None
     r = run(doc, args.content, args.min_size, args.max_size,
-            args.holdout_mod, args.boot, args.l2, args.seed)
+            args.holdout_mod, args.boot, args.l2, args.seed, store)
     report(r)
     with open(args.json, "w", encoding="utf-8", newline="\n") as f:
         json.dump(r, f, indent=1, sort_keys=True)
         f.write("\n")
-    print(f"wrote {os.path.relpath(args.json, ROOT)}")
+    try:
+        shown = os.path.relpath(args.json, ROOT)
+    except ValueError:            # a --json path on another drive
+        shown = args.json
+    print(f"wrote {shown}")
     return 0
 
 
