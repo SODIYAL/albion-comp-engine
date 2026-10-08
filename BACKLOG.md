@@ -46,10 +46,28 @@ Each is decidable today from evidence already in the repo.
 - **The fielded gate beyond the portal**: the gate applies where a
   matchmaking pool has its own harvest (the Dragon Portal's 2-3, 4-5 and
   6-7). The 10+ contents generate through the seat skeleton and the
-  style bands with no weapon-level evidence gate; whether a style x band
-  fielded list (the killer party of 10+, the kit doctrine's unit) should
-  gate their generation is a decision to take from the same holdout
-  measure.
+  style bands with no weapon-level evidence gate. Measured on the v4h
+  holdout (notes/findings/2026-10-08-fielded-gate-at-10.md): a style x
+  band fielded list from killer parties of 10+ (the portal's rule: 5
+  rosters, 3 guild-sets, 5% of the cell's top weapon) lifts the hidden
+  member's top-3 from 7.7% to 10.1% (+2.5 points, 95% CI +1.7 to +3.3,
+  replicated at +2.3), MRR 0.090 to 0.114, role-level 62.3% to 64.6%, the
+  same relative lift as the 6-7 pool; it bars 4-5% of hidden picks (2 of
+  them top-3 hits) and a quarter of the engine's committed top 3
+  (Grovekeeper, Camlann Mace, Morning Star); a pooled list lifts less;
+  brawl_clap 20 is too thin for a list. It cannot ship beside the base
+  band's `ranged_aoe_core` minimum as it stands: the gated brawl forge
+  stops at 13 of 15 and 17 of 20 (see "Forge minima above what winners
+  field"). Decide the gate, styled, once the minima are settled.
+- **Forge minima above what winners field**: the base band's
+  `ranged_aoe_core` minimum (2 / 3 / 4 at 10-14 / 15-19 / 20-29) is met by
+  17 / 5 / 0% of brawl winners (carriers per party p10 / p50 / p90 0 / 1 / 2
+  in every band) and the styles' 7 at 20 by 14% of clap and 12% of
+  clap_kite winners (p50 5); kite's 5 by 59% (holdout killer parties,
+  notes/findings/2026-10-08-fielded-gate-at-10.md). The forge meets them
+  by drafting carriers winners field rarely. A minimum per style x band
+  from the harvest (the standoff rule: round-half-up of the p50 where it is
+  1 or more) is the derivation to take.
 - **A blind validation round on the portal pools**: `validated_sizes` is
   empty for `ancient_lands`, so the page flags every size as extrapolated.
   The rows are measured; the round (one form per pool, graded before the
@@ -73,9 +91,25 @@ Each is decidable today from evidence already in the repo.
   because the incumbents' doctrine kits already close disengage and
   mobility and the choice falls to `heal_sustain` (weight 10, target 4.5;
   two-handers supply 3.0 units, Hallowfall 2.0). Killer parties of 6-8
-  field Hallowfall in 29.1%, Rampant in 1.0%. Candidate causes: the
-  castle_outpost sustain : burst pricing, or worn gear closing utility
-  targets. Decide which before any golden pin. (V: 09b, V3 round 2)
+  field Hallowfall in 29.1%, Rampant in 1.0%. Measured
+  (notes/findings/2026-10-08-castle-outpost-healers.md): worn gear is
+  the larger cause. Between naked and dressed scoring Rampant's lead over
+  Hallowfall moves 2.38 points, 1.19 from the utility rows (the
+  incumbents' kits stand the party at or past the 4.0 disengage target in
+  6 of 10 cases, and each rival's own kit brings the disengage and
+  mobility Hallowfall's weapon does) and 0.70 from the heal rows (the kit's
+  heal stat channel lifts the two-handers onto the 4.5 sustain target);
+  no heal-row retune puts Hallowfall first in more than 4 of 10 cases, each
+  hands the lead to Fallen Staff, and the sustain target at 3.0 lowers the
+  held-out 7s' top-3 from 7.5% to 5.2%. Reading disengage and mobility on
+  the weapon basis alone (the structural floors' rule extended to two
+  utility rows) makes Hallowfall the first healer in 492 of 1,508 held-out
+  healer drops (26 now) and lifts MRR 0.088 to 0.096, an engine-wide rule
+  that reshapes the default 7. Beside it: the cleanse row (target 2.7, the
+  median 6-8 winner fields none) favours Fallen Staff, and Redemption Staff,
+  46% of single-healer 7s, is named first in 2 of 1,508. Scoring every
+  member naked reads the held-out 7s better (top-3 8.9% against 7.5%).
+  (V: 09b, V3 round 2)
 - **The V3 generator seeds from every weapon**: partial parties are drawn
   from the whole pool, so forms carry Glaive, Druidic Staff, Spear, Pike
   and Warbow at seven, weapons the harvest fields in under 2% of size-7
@@ -418,9 +452,19 @@ Each is decidable today from evidence already in the repo.
   +1.40). Association, not cause; nothing retuned (standing rule 1), and a
   weight change it suggests is a logged decision. Open: item power and
   skill stay uncontrolled, a killer party with no kill is never recorded,
-  and the roster names who fought, never who fought whom. Later: win-lift
-  per weapon, pair and copy count, into the prior only after a `v4h` A/B
-  (standing rule 16); the design doc's plan (§8.6): a prior-adjuster,
+  and the roster names who fought, never who fought whom. Win-lift per
+  weapon, pair and copy count, measured
+  (notes/findings/2026-10-08-win-lift.md): the numbers-controlled lift
+  replicates (39 of 98 weapons survive Benjamini-Hochberg at 10%, all keep
+  their sign on the holdout, r = 0.81) but it is gear and guild: it tracks
+  the fielding parties' item power (r = 0.67), primary-guild fixed effects
+  leave 6 of 98 weapons, it does not transfer across disjoint guild sets,
+  and within a guild it sits at the noise floor (true spread about 1.5
+  win-rate points, one weapon's standard error about 1.5); pairs and copy
+  counts carry no reliable signal. A lift that enters the prior needs the
+  item-power and guild controls, and about four times the labelled corpus
+  to resolve per weapon; the `v4h` A/B (standing rule 16) would test that
+  controlled lift. The design doc's plan (§8.6) stands: a prior-adjuster,
   never the primary term.
 - **Choice-fitted weights for the other templates**: the harvest records
   no content, so `fit_choice_weights.py` reads every killer party against
