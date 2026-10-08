@@ -809,6 +809,7 @@ class Engine:
                 if menu:
                     self._profile_primary[wk] = menu[0]
         self._extras_cache = {}
+        self._uncharged_cache = {}
         self._pre_cache = {}
         self._default_cache = {}
         self._gear_cache = {}
@@ -1194,10 +1195,33 @@ class Engine:
         if extras is None:
             always, slots = self._loadout_eff(weapon)
             choices = [slot for slot in slots if slot]
-            extras = [self._merge_max(always, combo)
-                      for combo in (itertools.product(*choices) if choices else [()])]
+            raw = [self._merge_max(always, combo)
+                   for combo in (itertools.product(*choices) if choices else [()])]
+            # the weapon's own E self-cost is charged on every combo, so
+            # each weapon-supply reader sees it; build_extra starts from the
+            # uncharged combo and charges it on the dressed vector
+            costs = self.weapons[weapon].get("self_costs")
+            extras = [self._charge_costs(e, costs) for e in raw] if costs else raw
             self._extras_cache[weapon] = extras
+            self._uncharged_cache[weapon] = raw
         return extras
+
+    def _uncharged_extras(self, weapon):
+        """_combo_extras before the weapon's own self-cost (build_extra's
+        start: the cost is charged on the dressed vector instead). The same
+        list for a weapon without one."""
+        self._combo_extras(weapon)
+        return self._uncharged_cache[weapon]
+
+    def _charge_costs(self, extra, costs):
+        """A copy of `extra` with self-costs (sheet points) charged on the
+        capabilities it holds, floored at zero: a cost cancels the member's
+        own supply, never someone else's."""
+        out = dict(extra)
+        for cap, pts in costs.items():
+            if cap in out:
+                out[cap] = max(0.0, out[cap] - pts / self.score_unit)
+        return out
 
     @staticmethod
     def _merge_max(always, bundles):
@@ -1484,12 +1508,18 @@ class Engine:
         control tank, which is exactly the coherence the model wants.
         CC-duration % multiplies the
         wearer's own duration-bearing CC the same way — the Leering-Cane
-        pairing as physics. `role` (a seat id) additionally applies each
+        pairing as physics. An off-hand's defense % multiplies the
+        wearer's tankiness, its cooldown % the output capabilities, its
+        cast-time % the outputs the weapon casts, its attack speed the
+        sustained damage (mechanics.yaml build_stats; the off-hand's stats
+        are read at their tier-4 value). `role` (a seat id) additionally
+        applies each
         piece's DOCTRINE PASSIVE pick (kit_doctrine, dumps-resolved) —
         generation/display only; comp scoring never passes a role."""
-        out = dict(self.member_extra(weapon, combo))
+        out = dict(self._member_uncharged(weapon, combo))
         armor_pts = ccr_pts = dmg_pct = heal_pct = 0.0
         ccdur_pct = ccr_mult = 0.0
+        def_pct = cdr_pct = cast_pct = aspd_pct = 0.0
         seat_class = (self.roles.get(role) or {}).get("class") if role else None
         for item in (gear or []):
             key, choice = item if isinstance(item, (list, tuple)) else (item, None)
@@ -1503,6 +1533,10 @@ class Engine:
                               st.get("physicalspelldamagebonus", 0.0))
             heal_pct += st.get("healbonus", 0.0)
             ccdur_pct += st.get("bonusccdurationvsplayers", 0.0)
+            def_pct += st.get("bonusdefensevsplayers", 0.0)
+            cdr_pct += st.get("magiccooldownreduction", 0.0)
+            cast_pct += st.get("magiccasttimereduction", 0.0)
+            aspd_pct += st.get("attackspeedbonus", 0.0)
             if seat_class:
                 p = ((self.gear.get(key) or {}).get("doctrine_passives")
                      or {}).get(seat_class)
@@ -1521,6 +1555,8 @@ class Engine:
                 * bs.get("tankiness_per_ccr_point", 0.0))
         if tank > 0.0:
             out["tankiness"] = out.get("tankiness", 0.0) + tank
+        if def_pct != 0.0 and "tankiness" in out:
+            out["tankiness"] = max(0.0, out["tankiness"] * (1.0 + def_pct))
         if dmg_pct > 0.0:
             for cap in bs.get("damage_mult_caps") or []:
                 if cap in out:
@@ -1533,6 +1569,19 @@ class Engine:
             for cap in bs.get("cc_mult_caps") or []:
                 if cap in out:
                     out[cap] *= 1.0 + ccdur_pct
+        if cdr_pct > 0.0:
+            for cap in bs.get("cooldown_mult_caps") or []:
+                if cap in out:
+                    out[cap] *= 1.0 + cdr_pct
+        if cast_pct > 0.0:
+            casted = self.weapons[weapon].get("cast_caps") or ()
+            for cap in bs.get("cast_mult_caps") or []:
+                if cap in out and cap in casted:
+                    out[cap] *= 1.0 + cast_pct
+        if aspd_pct > 0.0:
+            for cap in bs.get("attack_speed_mult_caps") or []:
+                if cap in out:
+                    out[cap] *= 1.0 + aspd_pct
         # SELF-COSTS: what the item costs its OWN wearer, in the
         # same 1-7 sheet points as a capability score. Demon Armor's aura
         # buys the group 0.43 damage resistances by spending 0.37 of the
@@ -1555,7 +1604,20 @@ class Engine:
                              or {}).items():
                 if cap in out:
                     out[cap] = max(0.0, out[cap] - pts / self.score_unit)
+        # the weapon's own E self-cost, on the dressed vector (member_extra
+        # charges it on the naked one; build_extra started uncharged)
+        for cap, pts in (self.weapons[weapon].get("self_costs") or {}).items():
+            if cap in out:
+                out[cap] = max(0.0, out[cap] - pts / self.score_unit)
         return out
+
+    def _member_uncharged(self, weapon, combo=None):
+        """member_extra before the weapon's own self-cost (build_extra's
+        start). combo None -> the static default."""
+        extras = self._uncharged_extras(weapon)
+        if combo is None or combo < 0 or combo >= len(extras):
+            combo = self.default_combo(weapon)
+        return extras[combo]
 
     def _self_cost_waivers(self, gears):
         """Gear keys whose self-cost this party has offset. The ONLY
@@ -2362,23 +2424,29 @@ class Engine:
 
     @staticmethod
     def _pad(seq, n):
-        """A per-member list (combos, gears) shorter than the party, padded
-        with None past its end: the default combo, a naked member — the JS
-        port's reading of a missing entry. An aligned or longer list, or
-        None, is returned as given."""
+        """A per-member list (combos, gears) aligned to the party. Shorter:
+        padded with None past its end (the default combo, a naked member —
+        the JS port's reading of a missing entry). Longer: cut at the
+        party's end, so a tail entry is worn by no member and counts in no
+        reader (the self-cost waiver, the refund, the carrier quota; F38c).
+        An aligned list, or None, is returned as given."""
         if seq and len(seq) < n:
             return list(seq) + [None] * (n - len(seq))
+        if seq and len(seq) > n:
+            return list(seq[:n])
         return seq
 
-    def _ns_share(self, v, cap, gear):
-        """A count-once spell's units `v` on `cap` as a member wearing
-        `gear` supplies them: build_extra's stat channel (damage, heal and
-        CC-duration %) multiplies the spell's units exactly as it
+    def _ns_share(self, v, cap, gear, weapon):
+        """A count-once spell's units `v` on `cap` as a member holding
+        `weapon` and wearing `gear` supplies them: build_extra's stat
+        channel (defense, damage, heal, CC-duration, cooldown, cast-time and
+        attack-speed %) multiplies the spell's units exactly as it
         multiplies the member's whole capability, in the same order. No
         doctrine passives: scoring never passes a role. Naked: `v`."""
         if not gear:
             return v
         dmg = heal = ccdur = 0.0
+        dfn = cdr = cast = aspd = 0.0
         for item in gear:
             key = self.gear_key(item[0] if isinstance(item, (list, tuple))
                                 else item)
@@ -2387,13 +2455,26 @@ class Engine:
                           st.get("physicalspelldamagebonus", 0.0))
             heal += st.get("healbonus", 0.0)
             ccdur += st.get("bonusccdurationvsplayers", 0.0)
+            dfn += st.get("bonusdefensevsplayers", 0.0)
+            cdr += st.get("magiccooldownreduction", 0.0)
+            cast += st.get("magiccasttimereduction", 0.0)
+            aspd += st.get("attackspeedbonus", 0.0)
         bs = self.mechanics.get("build_stats") or {}
+        if dfn != 0.0 and cap == "tankiness":
+            v = max(0.0, v * (1.0 + dfn))
         if dmg > 0.0 and cap in (bs.get("damage_mult_caps") or []):
             v *= 1.0 + dmg
         if heal > 0.0 and cap in (bs.get("heal_mult_caps") or []):
             v *= 1.0 + heal
         if ccdur > 0.0 and cap in (bs.get("cc_mult_caps") or []):
             v *= 1.0 + ccdur
+        if cdr > 0.0 and cap in (bs.get("cooldown_mult_caps") or []):
+            v *= 1.0 + cdr
+        if cast > 0.0 and cap in (bs.get("cast_mult_caps") or []) \
+                and cap in (self.weapons[weapon].get("cast_caps") or ()):
+            v *= 1.0 + cast
+        if aspd > 0.0 and cap in (bs.get("attack_speed_mult_caps") or []):
+            v *= 1.0 + aspd
         return v
 
     def _apply_nonstack(self, s, party, combos, gears=None):
@@ -2411,7 +2492,7 @@ class Engine:
             for sid, contrib in self._nonstack_contrib(
                     w, combos[i] if combos else None).items():
                 if g:
-                    contrib = {cap: self._ns_share(v, cap, g)
+                    contrib = {cap: self._ns_share(v, cap, g, w)
                                for cap, v in contrib.items()}
                 groups.setdefault(sid, []).append(contrib)
         for sid in sorted(groups):
@@ -2493,6 +2574,7 @@ class Engine:
 
     # ---------------------------------------------------------------- fitness
     def fitness(self, party, combos=None, gears=None, memo=None):
+        gears = self._pad(gears, len(party))
         s = self.effective_supply(party, combos, gears, memo)
         # Option C: STRUCTURAL hard floors read the weapon+loadout supply
         # — worn gear improves coverage/headroom/overstack but can never
@@ -2734,7 +2816,7 @@ class Engine:
                         curf = ns_fit.setdefault(sid, {})
                         for cap, v in contrib.items():
                             if g:
-                                v = self._ns_share(v, cap, g)
+                                v = self._ns_share(v, cap, g, w)
                             if v > curf.get(cap, 0.0):
                                 curf[cap] = v
         waived = self._self_cost_waivers(gears) if gears else frozenset()
@@ -2846,7 +2928,7 @@ class Engine:
                 if not v:
                     continue
                 if gear:
-                    v = self._ns_share(v, cap, gear)
+                    v = self._ns_share(v, cap, gear, weapon)
                 gain = v - pmax.get(cap, 0.0)
                 adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
         return adj if adj is not None else extra
@@ -3285,7 +3367,7 @@ class Engine:
             for cap in self.nonstack[sid]:
                 v = contrib[sid].get(cap, 0.0)
                 if v and vgears:
-                    v = self._ns_share(v, cap, vgears)
+                    v = self._ns_share(v, cap, vgears, candidate)
                 cut = v if v < pmax.get(cap, 0.0) else pmax.get(cap, 0.0)
                 if v and cut > 0.0:
                     lost[cap] = cut

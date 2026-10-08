@@ -106,8 +106,8 @@ class Facts:
 
 def cited_evidence():
     """{evidence id: sorted list of 'where' strings} for every nonzero score
-    the build reads: composed weapon rows (own + pool), composed gear rows
-    (own + gear pool), and gear self-costs."""
+    the build reads: composed weapon rows (own + pool), weapon self-costs,
+    composed gear rows (own + gear pool), and gear self-costs."""
     lines = sheets_lib.load_weapon_lines()
     pools = sheets_lib.load_pools()
     gear_pools = sheets_lib.load_gear_pools()
@@ -129,6 +129,10 @@ def cited_evidence():
                 if not ev or not c.get("score"):
                     continue
                 add(f"WEAPON_STATS:{w}" if ev == "WEAPON_STATS" else ev, f"{w}.{c.get('cap')}")
+            for c in e.get("self_costs") or []:
+                ev = (c or {}).get("evidence")
+                if ev:
+                    add(ev, f"{w}.self_cost.{c.get('cap')}")
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
         with open(path, encoding="utf-8") as f:
             docs = yaml.safe_load(f) or []

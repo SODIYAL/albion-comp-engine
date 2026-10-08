@@ -84,12 +84,15 @@
     - {cap: slow,          score: 4, evidence: ARROWRAIN}
 
 - weapon: 2H_LONGBOW_UNDEAD          # Whispering Bow — glass-cannon AA bow
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-08
   role_hint: range
   capabilities:
     - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range, +30% AA speed, +50 bonus damage per AA
-    # the E also lowers the wielder's Defense by 35% (the glass side of the
-    # cannon); self_costs are read from gear sheets only, so it is unscored
+  # SELF-COST (the glass side of the cannon): the E lowers the wielder's
+  # Defense by 0.25 for up to 8s, charged on the wielder's own supply. The
+  # ladder is Demon Armor's: -0.37 own resistances while it runs = 3 points.
+  self_costs:
+    - {cap: tankiness, points: 2, evidence: UNDEADARROWS}         # -0.25 own Defense while the E runs
 
 - weapon: 2H_WARBOW                  # Warbow — skillshot nuke bow
   curated_as_of: 2026-08-12

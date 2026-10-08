@@ -1892,6 +1892,27 @@ def t_short_member_lists():
         ok, detail = False, f"IndexError: {ex}"
     check("F38b a gears tail past the party is worn by no member in the "
           "self-cost refund", ok, detail)
+    # F38c: a tail entry counts in no reader. One Demon wearer and a
+    # Demon tail would read as the waived pair if the tail counted.
+    one, tail = [demon], [demon, demon]
+    party = ["2H_CURSEDSTAFF"]
+    st1, st2 = e2.party_state(party, None, one), e2.party_state(party, None, tail)
+    same = {
+        "effective_supply": e2.effective_supply(party, None, tail)
+        == e2.effective_supply(party, None, one),
+        "comp_score": e2.comp_score(party, None, tail)
+        == e2.comp_score(party, None, one),
+        "waived": st2["waived"] == st1["waived"],
+        "carriers": st2["carriers"] == st1["carriers"],
+        "pending": st2["pending"] == st1["pending"],
+        "recommend": e2.recommend(party, 5, None, None, tail)
+        == e2.recommend(party, 5, None, None, one),
+    }
+    check("F38c a gears tail past the party counts in no reader: the "
+          "waiver, the refund and the carrier quota read the party's own "
+          "entries", all(same.values()),
+          f"differ: {[k for k, v in same.items() if not v]}"
+          if not all(same.values()) else f"waived={sorted(st2['waived'])}")
 
 
 def t_dressed_nonstack():
@@ -1938,13 +1959,13 @@ def t_dressed_nonstack():
                   if e._nonstack_contrib(w, i))
         _sid, contrib = next(iter(e._nonstack_contrib(w, ci).items()))
         cap, v = next(iter(contrib.items()))
-        if kits[w] and e._ns_share(v, cap, kits[w]) > v:
+        if kits[w] and e._ns_share(v, cap, kits[w], w) > v:
             pick = (w, ci, cap, v)
             break
     w, ci, cap, v = pick
     one = e.effective_supply([w], [ci], [kits[w]])[cap]
     two = e.effective_supply([w, w], [ci, ci], [kits[w], kits[w]])[cap]
-    share = e._ns_share(v, cap, kits[w])
+    share = e._ns_share(v, cap, kits[w], w)
     # the expected share from build_extra alone (not _ns_share, the rule
     # under test): the kit's stat channel is the ratio of the built cap to
     # the member's unmultiplied supply (weapon + the kit's flat abilities),

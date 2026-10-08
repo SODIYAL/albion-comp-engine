@@ -203,6 +203,45 @@ build_stats:
   # for every CC carrier and never for a CC-less build. Knockbacks are
   # instantaneous displacement and stay out.
   cc_mult_caps: [stun, root, slow, silence]
+  # OFF-HAND % STATS. An off-hand's % stats in items.json are coefficients
+  # the game scales with item power; a chest's are flat (the Adept's
+  # Soldier Armor displays its base 10% damage and healing bonus at every
+  # item power). The channel reads an off-hand's at its tier-4.0 value,
+  # the value the game displays at item power 700, by stat family (the
+  # Albion wiki's tier-4.0 Normal rows):
+  #   bonus      2.8  Adept's Shield 0.0108 -> 3% Defense vs players;
+  #                   Adept's Torch 0.0241 -> 6.8% attack speed
+  #   cooldown   6.6  Adept's Torch 0.0062 -> 4.1% cooldown modifier
+  #   cast_time  5.8  Adept's Tome of Spells 0.0208 -> 12% cast time modifier
+  # build_dataset applies the factor and records it per item
+  # (`stats_scale`). An artifact off-hand's higher item power at tier 4 is
+  # the item-power curve every item is read without (the tier-4-flat
+  # reference). The CC resistance a shield shows in game is not in the
+  # item data (crowdcontrolresistance 0) and is not read; energy and threat
+  # carry no term (the model has no energy budget; threat is a PvE stat).
+  offhand_t4_scale: {bonus: 2.8, cooldown: 6.6, cast_time: 5.8}
+  offhand_stat_family:
+    bonusdefensevsplayers: bonus
+    healbonus: bonus
+    physicalspelldamagebonus: bonus
+    magicspelldamagebonus: bonus
+    physicalattackdamagebonus: bonus
+    magicattackdamagebonus: bonus
+    bonusccdurationvsplayers: bonus
+    attackspeedbonus: bonus
+    magiccooldownreduction: cooldown
+    magiccasttimereduction: cast_time
+  # Defense vs players % multiplies the wearer's tankiness (a damage
+  # reduction scales everything that keeps the wearer standing); a negative
+  # one (Celestial Censer, Cryptcandle) lowers it the same way, floored at
+  # zero. A cooldown modifier multiplies the output capabilities (more casts
+  # per fight: more damage, healing and crowd control); a cast-time
+  # modifier multiplies those the wearer's weapon casts (a capability whose
+  # evidence spell has a cast time, the weapon's `cast_caps`); attack speed
+  # multiplies sustained damage.
+  cooldown_mult_caps: [burst_st, burst_aoe, sustained_dps, execute, heal_sustain, heal_burst, stun, root, slow, silence]
+  cast_mult_caps: [burst_st, burst_aoe, sustained_dps, execute, heal_sustain, heal_burst, stun, root, slow, silence]
+  attack_speed_mult_caps: [sustained_dps]
 
 # ---------------------------------------------------------------------------
 # KILL PRESSURE (identity Phase D, the caller's checklist): pierce on the

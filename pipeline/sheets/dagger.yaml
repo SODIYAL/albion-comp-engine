@@ -84,19 +84,30 @@
     - {cap: catch,         score: 4, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
 
 - weapon: MAIN_DAGGER                # Dagger (1H) — lifesteal AA skirmisher
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-10-08
   role_hint: melee
   capabilities:
     - {cap: sustained_dps, score: 4, evidence: BLOODTHIRSTYBLADE}  # E: +50 bonus damage per AA steroid
     - {cap: self_sustain,  score: 4, evidence: BLOODTHIRSTYBLADE}  # steals health via bonus damage (self-only)
     - {cap: mobility,      score: 4, evidence: BLOODTHIRSTYBLADE}  # +30% MS while active + pool dashes
+  # SELF-COST: the E deals 0.04 of the wielder's Max Health as true damage
+  # every 1s for up to 6s (24% of max health); the steal is scored on
+  # self_sustain. Charged on the wielder's own supply, the rung of Whispering
+  # Bow's quarter Defense cut (2).
+  self_costs:
+    - {cap: tankiness, points: 2, evidence: BLOODTHIRSTYBLADE}    # 24% of own max health over 6s, true damage
 
 - weapon: MAIN_DAGGER_HELL           # Demonfang — blood-cone caster dagger
-  curated_as_of: 2026-10-07
+  curated_as_of: 2026-10-08
   role_hint: melee
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: BLOOD_BLADE}       # E: 130 cone, recastable x3 (self max-HP cost)
     - {cap: burst_st,      score: 2, evidence: BLOOD_BLADE}       # three cones into one target
+  # SELF-COST: after the third cast the wielder takes 0.05 of its Max Health
+  # as true damage every 1s for 4s (20% of max health, BLOOD_BLADE_DOT),
+  # charged on the wielder's own supply at Whispering Bow's rung (2).
+  self_costs:
+    - {cap: tankiness, points: 2, evidence: BLOOD_BLADE}          # 20% of own max health over 4s after the third cast
 
 # Bloodletter — mobile executioner. The E (Lunging Stabs) dashes through
 # enemies for damage keyed to their current health (153 above the threshold,

@@ -159,8 +159,8 @@ reduction; plate MR-AR / CC duration / CCR / threat. `classify_gear`
 stamps `gear_class` (numbers first, tree id fallback), `role_affinity`
 (the seat roles whose uniform admits the class) and `tree_passives`;
 out/roles_report.json carries the items board + gear-effect candidates.
-Recorded gaps: the stats bank holds zeros for head/shoes/offhand pieces
-(class falls back to tree id until fetched); the gear records curate
+Recorded gaps: the stats bank holds zeros for head and shoes pieces
+(class falls back to tree id); the gear records curate
 only each item's UNIQUE active — the tree-shared first two abilities and
 the passive PICK (which passive a role's doctrine takes, e.g. cloth dps
 = the damage passive) are not yet modeled per kit.

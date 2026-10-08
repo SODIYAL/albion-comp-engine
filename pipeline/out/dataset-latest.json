@@ -12544,7 +12544,10 @@
    ],
    "slot": "offhand",
    "stats": {
-    "magiccasttimereduction": 0.0208
+    "magiccasttimereduction": 0.12064
+   },
+   "stats_scale": {
+    "magiccasttimereduction": 5.8
    },
    "tree_passives": [],
    "unique_name": "OFF_BOOK"
@@ -12568,8 +12571,12 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": -0.0128,
-    "healbonus": 0.0241
+    "bonusdefensevsplayers": -0.03584,
+    "healbonus": 0.06748
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8,
+    "healbonus": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_CENSER_AVALON"
@@ -12600,11 +12607,18 @@
    "slot": "offhand",
    "stats": {
     "energycostreduction": -0.02,
-    "healbonus": 0.0161,
-    "magicattackdamagebonus": 0.0161,
-    "magicspelldamagebonus": 0.0161,
-    "physicalattackdamagebonus": 0.0161,
-    "physicalspelldamagebonus": 0.0161
+    "healbonus": 0.045079999999999995,
+    "magicattackdamagebonus": 0.045079999999999995,
+    "magicspelldamagebonus": 0.045079999999999995,
+    "physicalattackdamagebonus": 0.045079999999999995,
+    "physicalspelldamagebonus": 0.045079999999999995
+   },
+   "stats_scale": {
+    "healbonus": 2.8,
+    "magicattackdamagebonus": 2.8,
+    "magicspelldamagebonus": 2.8,
+    "physicalattackdamagebonus": 2.8,
+    "physicalspelldamagebonus": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_DEMONSKULL_HELL"
@@ -12630,7 +12644,10 @@
    ],
    "slot": "offhand",
    "stats": {
-    "magiccooldownreduction": 0.0096
+    "magiccooldownreduction": 0.06335999999999999
+   },
+   "stats_scale": {
+    "magiccooldownreduction": 6.6
    },
    "tree_passives": [],
    "unique_name": "OFF_HORN_KEEPER"
@@ -12652,8 +12669,12 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusccdurationvsplayers": 0.0321,
-    "magiccooldownreduction": 0.0048
+    "bonusccdurationvsplayers": 0.08987999999999999,
+    "magiccooldownreduction": 0.03167999999999999
+   },
+   "stats_scale": {
+    "bonusccdurationvsplayers": 2.8,
+    "magiccooldownreduction": 6.6
    },
    "tree_passives": [],
    "unique_name": "OFF_JESTERCANE_HELL"
@@ -12678,9 +12699,14 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": -0.0128,
-    "magicspelldamagebonus": 0.0241,
-    "physicalspelldamagebonus": 0.0241
+    "bonusdefensevsplayers": -0.03584,
+    "magicspelldamagebonus": 0.06748,
+    "physicalspelldamagebonus": 0.06748
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8,
+    "magicspelldamagebonus": 2.8,
+    "physicalspelldamagebonus": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_LAMP_UNDEAD"
@@ -12704,21 +12730,13 @@
    "unique_name": "OFF_ORB_MORGANA"
   },
   "OFF_SHIELD": {
-   "capabilities": {
-    "tankiness": 2
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-10-08",
    "display_name": "Shield",
-   "evidence": {
-    "tankiness": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "gear_class": null,
    "loadout": {
-    "always": {
-     "tankiness": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -12730,28 +12748,23 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": 0.0108,
+    "bonusdefensevsplayers": 0.03024,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_SHIELD"
   },
   "OFF_SHIELD_AVALON": {
-   "capabilities": {
-    "tankiness": 2
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-10-08",
    "display_name": "Astral Aegis",
-   "evidence": {
-    "tankiness": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "gear_class": null,
    "loadout": {
-    "always": {
-     "tankiness": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -12768,9 +12781,12 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": 0.0161,
+    "bonusdefensevsplayers": 0.045079999999999995,
     "energycostreduction": -0.02,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_SHIELD_AVALON"
@@ -12794,28 +12810,23 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": 0.0048,
+    "bonusdefensevsplayers": 0.013439999999999999,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_SHIELD_CRYSTAL"
   },
   "OFF_SHIELD_HELL": {
-   "capabilities": {
-    "tankiness": 2
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-10-08",
    "display_name": "Caitiff Shield",
-   "evidence": {
-    "tankiness": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "gear_class": null,
    "loadout": {
-    "always": {
-     "tankiness": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -12827,9 +12838,13 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusccdurationvsplayers": 0.0161,
-    "bonusdefensevsplayers": 0.0096,
+    "bonusccdurationvsplayers": 0.045079999999999995,
+    "bonusdefensevsplayers": 0.026879999999999998,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusccdurationvsplayers": 2.8,
+    "bonusdefensevsplayers": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_SHIELD_HELL"
@@ -12857,12 +12872,19 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": 0.0072,
-    "magicattackdamagebonus": 0.0064,
-    "magicspelldamagebonus": 0.0064,
-    "physicalattackdamagebonus": 0.0064,
-    "physicalspelldamagebonus": 0.0064,
+    "bonusdefensevsplayers": 0.020159999999999997,
+    "magicattackdamagebonus": 0.01792,
+    "magicspelldamagebonus": 0.01792,
+    "physicalattackdamagebonus": 0.01792,
+    "physicalspelldamagebonus": 0.01792,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8,
+    "magicattackdamagebonus": 2.8,
+    "magicspelldamagebonus": 2.8,
+    "physicalattackdamagebonus": 2.8,
+    "physicalspelldamagebonus": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_SPIKEDSHIELD_MORGANA"
@@ -12906,8 +12928,12 @@
    ],
    "slot": "offhand",
    "stats": {
-    "magiccasttimereduction": 0.0177,
-    "magiccooldownreduction": 0.0048
+    "magiccasttimereduction": 0.10266,
+    "magiccooldownreduction": 0.03167999999999999
+   },
+   "stats_scale": {
+    "magiccasttimereduction": 5.8,
+    "magiccooldownreduction": 6.6
    },
    "tree_passives": [],
    "unique_name": "OFF_TOME_CRYSTAL"
@@ -12933,28 +12959,24 @@
    ],
    "slot": "offhand",
    "stats": {
-    "attackspeedbonus": 0.0241,
-    "magiccooldownreduction": 0.0062
+    "attackspeedbonus": 0.06748,
+    "magiccooldownreduction": 0.04092
+   },
+   "stats_scale": {
+    "attackspeedbonus": 2.8,
+    "magiccooldownreduction": 6.6
    },
    "tree_passives": [],
    "unique_name": "OFF_TORCH"
   },
   "OFF_TORCH_CRYSTAL": {
-   "capabilities": {
-    "heal_sustain": 2
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-10-08",
    "display_name": "Blueflame Torch",
-   "evidence": {
-    "heal_sustain": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "gear_class": null,
    "loadout": {
-    "always": {
-     "heal_sustain": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -12970,11 +12992,18 @@
    ],
    "slot": "offhand",
    "stats": {
-    "healbonus": 0.0177,
-    "magicattackdamagebonus": 0.0177,
-    "magicspelldamagebonus": 0.0177,
-    "physicalattackdamagebonus": 0.0177,
-    "physicalspelldamagebonus": 0.0177
+    "healbonus": 0.04956,
+    "magicattackdamagebonus": 0.04956,
+    "magicspelldamagebonus": 0.04956,
+    "physicalattackdamagebonus": 0.04956,
+    "physicalspelldamagebonus": 0.04956
+   },
+   "stats_scale": {
+    "healbonus": 2.8,
+    "magicattackdamagebonus": 2.8,
+    "magicspelldamagebonus": 2.8,
+    "physicalattackdamagebonus": 2.8,
+    "physicalspelldamagebonus": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_TORCH_CRYSTAL"
@@ -12998,21 +13027,13 @@
    "unique_name": "OFF_TOTEM_KEEPER"
   },
   "OFF_TOWERSHIELD_UNDEAD": {
-   "capabilities": {
-    "tankiness": 3
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-10-08",
    "display_name": "Sarcophagus",
-   "evidence": {
-    "tankiness": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "gear_class": null,
    "loadout": {
-    "always": {
-     "tankiness": 3
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13024,8 +13045,11 @@
    ],
    "slot": "offhand",
    "stats": {
-    "bonusdefensevsplayers": 0.0135,
+    "bonusdefensevsplayers": 0.0378,
     "threatbonus": 0.04
+   },
+   "stats_scale": {
+    "bonusdefensevsplayers": 2.8
    },
    "tree_passives": [],
    "unique_name": "OFF_TOWERSHIELD_UNDEAD"
@@ -47444,7 +47468,34 @@
    "reference_clump": 2
   },
   "build_stats": {
+   "attack_speed_mult_caps": [
+    "sustained_dps"
+   ],
+   "cast_mult_caps": [
+    "burst_st",
+    "burst_aoe",
+    "sustained_dps",
+    "execute",
+    "heal_sustain",
+    "heal_burst",
+    "stun",
+    "root",
+    "slow",
+    "silence"
+   ],
    "cc_mult_caps": [
+    "stun",
+    "root",
+    "slow",
+    "silence"
+   ],
+   "cooldown_mult_caps": [
+    "burst_st",
+    "burst_aoe",
+    "sustained_dps",
+    "execute",
+    "heal_sustain",
+    "heal_burst",
     "stun",
     "root",
     "slow",
@@ -47460,6 +47511,23 @@
     "heal_sustain",
     "heal_burst"
    ],
+   "offhand_stat_family": {
+    "attackspeedbonus": "bonus",
+    "bonusccdurationvsplayers": "bonus",
+    "bonusdefensevsplayers": "bonus",
+    "healbonus": "bonus",
+    "magicattackdamagebonus": "bonus",
+    "magiccasttimereduction": "cast_time",
+    "magiccooldownreduction": "cooldown",
+    "magicspelldamagebonus": "bonus",
+    "physicalattackdamagebonus": "bonus",
+    "physicalspelldamagebonus": "bonus"
+   },
+   "offhand_t4_scale": {
+    "bonus": 2.8,
+    "cast_time": 5.8,
+    "cooldown": 6.6
+   },
    "tankiness_per_armor_point": 0.004,
    "tankiness_per_ccr_point": 0.003
   },
@@ -303387,6 +303455,10 @@
     "stun": 4,
     "sustained_dps": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Arcane Staff",
@@ -303600,6 +303672,10 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Astral Staff",
@@ -303811,6 +303887,10 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Occult Staff",
@@ -304044,6 +304124,14 @@
     "slow": 2,
     "sustained_dps": 2
    },
+   "cast_caps": [
+    "burst_aoe",
+    "damage_debuff",
+    "heal_reduction",
+    "resist_shred",
+    "silence",
+    "slow"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-25",
    "display_name": "Evensong",
@@ -304268,6 +304356,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Greataxe",
@@ -304503,6 +304594,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Realmbreaker",
@@ -304750,6 +304844,10 @@
     "slow": 2,
     "sustained_dps": 6
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Bow",
@@ -304995,6 +305093,12 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "burst_st",
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Mistpiercer",
@@ -305231,6 +305335,10 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Skystrider Bow",
@@ -305471,6 +305579,10 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Wailing Bow",
@@ -305724,6 +305836,10 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bow of Badon",
@@ -306191,6 +306307,13 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_st",
+    "catch",
+    "engage",
+    "mobility",
+    "stun"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Claymore",
@@ -307191,6 +307314,11 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_st",
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Crossbow",
@@ -307425,6 +307553,10 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Crossbow",
@@ -307657,6 +307789,11 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence",
+    "sustained_dps"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Siegebow",
@@ -307880,6 +308017,11 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence",
+    "sustained_dps"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Energy Shaper",
@@ -308100,6 +308242,10 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Cursed Staff",
@@ -308301,6 +308447,12 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe",
+    "resist_shred",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Damnation Staff",
@@ -308472,6 +308624,10 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_st",
+    "heal_reduction"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Dagger Pair",
@@ -309174,6 +309330,10 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Demonic Staff",
@@ -309343,6 +309503,9 @@
     "heal_sustain": 4,
     "peel": 2
    },
+   "cast_caps": [
+    "heal_burst"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-04",
    "display_name": "Divine Staff",
@@ -310050,6 +310213,9 @@
     "self_sustain": 4,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Bear Paws",
@@ -310304,6 +310470,10 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-07",
    "display_name": "Arclight Blasters",
@@ -310533,6 +310703,10 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Boltcasters",
@@ -310798,6 +310972,11 @@
     "tankiness": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Forge Hammers",
@@ -311052,6 +311231,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-10-07",
    "display_name": "Oathkeepers",
@@ -311277,6 +311463,10 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "max_health_cut"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Galatine Pair",
@@ -311926,6 +312116,13 @@
     "silence": 2,
     "sustained_dps": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "cleanse",
+    "peel",
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-04",
    "display_name": "Malevolent Locus",
@@ -312121,6 +312318,10 @@
     "silence": 2,
     "sustained_dps": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-04",
    "display_name": "Enigmatic Staff",
@@ -312314,6 +312515,9 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Fire Staff",
@@ -312474,6 +312678,10 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe",
+    "knockback_displace"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Brimstone Staff",
@@ -312644,6 +312852,11 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "heal_reduction",
+    "zone_control"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-10-07",
    "display_name": "Dawnsong",
@@ -312842,6 +313055,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Morning Star",
@@ -313109,6 +313329,9 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cast_caps": [
+    "buff_allies"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Frost Staff",
@@ -313351,6 +313574,10 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "buff_allies",
+    "catch"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Arctic Staff",
@@ -313607,6 +313834,15 @@
     "sustained_dps": 2,
     "zone_control": 6
    },
+   "cast_caps": [
+    "buff_allies",
+    "burst_aoe",
+    "catch",
+    "peel",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Glacial Staff",
@@ -313997,6 +314233,10 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "peel"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Rift Glaive",
@@ -314215,6 +314455,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Halberd",
@@ -314435,6 +314678,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Carrioncaller",
@@ -314685,6 +314931,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Hammer",
@@ -314960,6 +315211,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Hand of Justice",
@@ -315231,6 +315487,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-07",
    "display_name": "Truebolt Hammer",
@@ -315500,6 +315761,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Tombhammer",
@@ -315930,6 +316196,9 @@
     "knockback_displace": 2,
     "peel": 4
    },
+   "cast_caps": [
+    "heal_burst"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Holy Staff",
@@ -316092,6 +316361,11 @@
     "heal_sustain": 4,
     "peel": 2
    },
+   "cast_caps": [
+    "anti_zone",
+    "buff_allies",
+    "heal_burst"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Exalted Staff",
@@ -316251,6 +316525,12 @@
     "heal_sustain": 4,
     "peel": 4
    },
+   "cast_caps": [
+    "anti_dive",
+    "cleanse",
+    "heal_burst",
+    "peel"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-04",
    "display_name": "Fallen Staff",
@@ -316400,6 +316680,10 @@
     "heal_sustain": 6,
     "peel": 2
    },
+   "cast_caps": [
+    "heal_burst",
+    "heal_sustain"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Redemption Staff",
@@ -316604,6 +316888,13 @@
     "sustained_dps": 2,
     "zone_control": 6
    },
+   "cast_caps": [
+    "buff_allies",
+    "burst_aoe",
+    "catch",
+    "peel",
+    "stun"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Permafrost Prism",
@@ -316856,6 +317147,9 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cast_caps": [
+    "buff_allies"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Icicle Staff",
@@ -317068,6 +317362,13 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe",
+    "burst_st",
+    "knockback_displace",
+    "peel",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Staff",
@@ -317243,6 +317544,11 @@
     "sustained_dps": 4,
     "zone_control": 6
    },
+   "cast_caps": [
+    "burst_aoe",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Blazing Staff",
@@ -318441,6 +318747,10 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "heal_reduction"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Hellfire Hands",
@@ -318704,6 +319014,11 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "burst_st",
+    "sustained_dps"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Ursine Maulers",
@@ -319722,6 +320037,12 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "catch",
+    "peel",
+    "slow"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Spiked Gauntlets",
@@ -319985,6 +320306,10 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Longbow",
@@ -320217,8 +320542,12 @@
     "slow": 2,
     "sustained_dps": 6
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "artifact",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-08",
    "display_name": "Whispering Bow",
    "evidence": {
     "catch": [
@@ -320335,6 +320664,12 @@
    "role_menu_secondary": [
     "pierce"
    ],
+   "self_cost_evidence": {
+    "tankiness": "UNDEADARROWS"
+   },
+   "self_costs": {
+    "tankiness": 2
+   },
    "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
@@ -320448,6 +320783,13 @@
     "tankiness": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Heavy Mace",
@@ -320705,6 +321047,16 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "catch",
+    "clump_create",
+    "peel",
+    "silence",
+    "slow",
+    "stun",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Camlann Mace",
@@ -320930,6 +321282,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Great Nature Staff",
@@ -321139,6 +321497,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Blight Staff",
@@ -321350,6 +321714,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Rampant Staff",
@@ -321581,6 +321951,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Polehammer",
@@ -321838,6 +322213,13 @@
     "sustained_dps": 2,
     "tankiness": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "disengage",
+    "engage",
+    "knockback_displace",
+    "mobility"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Quarterstaff",
@@ -322356,6 +322738,18 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "catch",
+    "disengage",
+    "engage",
+    "knockback_displace",
+    "mobility",
+    "peel",
+    "slow",
+    "stun",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Grovekeeper",
@@ -322602,6 +322996,10 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Weeping Repeater",
@@ -322835,7 +323233,7 @@
     "zone_control": 4
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-10-07",
+   "curated_as_of": "2026-10-08",
    "display_name": "Staff of Balance",
    "evidence": {
     "anti_dive": [
@@ -322971,6 +323369,12 @@
     "stopper_tank",
     "anti_heal"
    ],
+   "self_cost_evidence": {
+    "tankiness": "QS_SLOWROPE"
+   },
+   "self_costs": {
+    "tankiness": 3
+   },
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
@@ -323057,6 +323461,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-07",
    "display_name": "Crystal Reaper",
@@ -323288,6 +323695,9 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Scythe",
@@ -323536,6 +323946,12 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-10-04",
    "display_name": "Lightcaller",
@@ -323796,6 +324212,12 @@
     "stun": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-04",
    "display_name": "Stillgaze Staff",
@@ -324062,6 +324484,12 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-04",
    "display_name": "Hellspawn Staff",
@@ -324319,6 +324747,12 @@
     "tankiness": 6,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Earthrune Staff",
@@ -324585,6 +325019,12 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodmoon Staff",
@@ -324841,6 +325281,12 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Prowling Staff",
@@ -325106,6 +325552,12 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-04",
    "display_name": "Rootbound Staff",
@@ -325363,6 +325815,12 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "catch",
+    "clump_create",
+    "peel",
+    "root"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-04",
    "display_name": "Primal Staff",
@@ -325602,6 +326060,11 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Skull",
@@ -326509,6 +326972,10 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "disengage",
+    "slow"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Warbow",
@@ -326727,6 +327194,13 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "heal_sustain",
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Wild Staff",
@@ -326930,6 +327404,10 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Light Crossbow",
@@ -327142,6 +327620,10 @@
     "silence": 4,
     "sustained_dps": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Arcane Staff",
@@ -327376,6 +327858,10 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "resist_shred",
+    "silence"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Witchwork Staff",
@@ -327609,6 +328095,9 @@
     "self_sustain": 4,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "resist_shred"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Battleaxe",
@@ -327826,6 +328315,11 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_st",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Staff",
@@ -328016,6 +328510,12 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Shadowcaller",
@@ -328225,6 +328725,10 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Rotcaller Staff",
@@ -328432,6 +328936,12 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "purge",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Lifecurse Staff",
@@ -328610,7 +329120,7 @@
     "sustained_dps": 4
    },
    "cost_tier": "base",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-10-08",
    "display_name": "Dagger",
    "evidence": {
     "catch": [
@@ -328747,6 +329257,12 @@
     "pierce",
     "anti_heal"
    ],
+   "self_cost_evidence": {
+    "tankiness": "BLOODTHIRSTYBLADE"
+   },
+   "self_costs": {
+    "tankiness": 2
+   },
    "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
@@ -328833,7 +329349,7 @@
     "sustained_dps": 2
    },
    "cost_tier": "artifact",
-   "curated_as_of": "2026-10-07",
+   "curated_as_of": "2026-10-08",
    "display_name": "Demonfang",
    "evidence": {
     "burst_aoe": [
@@ -328972,6 +329488,12 @@
     "pierce",
     "anti_heal"
    ],
+   "self_cost_evidence": {
+    "tankiness": "BLOOD_BLADE"
+   },
+   "self_costs": {
+    "tankiness": 2
+   },
    "source": "sheets/dagger.yaml",
    "status": "curated",
    "style_fit": {
@@ -329053,6 +329575,9 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Fire Staff",
@@ -329241,6 +329766,9 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-07",
    "display_name": "Flamewalker Staff",
@@ -329412,6 +329940,9 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "burst_aoe"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Wildfire Staff",
@@ -329627,6 +330158,9 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cast_caps": [
+    "buff_allies"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Frost Staff",
@@ -329868,6 +330402,9 @@
     "stun": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "buff_allies"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Chillhowl",
@@ -330111,6 +330648,9 @@
     "stun": 2,
     "zone_control": 4
    },
+   "cast_caps": [
+    "buff_allies"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Hoarfrost Staff",
@@ -330346,6 +330886,11 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Hammer",
@@ -330541,6 +331086,9 @@
     "peel": 2,
     "self_sustain": 2
    },
+   "cast_caps": [
+    "heal_burst"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Holy Staff",
@@ -330689,6 +331237,9 @@
     "peel": 6,
     "self_sustain": 2
    },
+   "cast_caps": [
+    "heal_burst"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Hallowfall",
@@ -330849,6 +331400,9 @@
     "heal_sustain": 4,
     "peel": 4
    },
+   "cast_caps": [
+    "heal_burst"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Lifetouch Staff",
@@ -331046,6 +331600,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Mace",
@@ -331310,6 +331871,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Dreadstorm Monarch",
@@ -331578,6 +332146,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Incubus Mace",
@@ -331833,6 +332408,15 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "heal_burst",
+    "heal_sustain",
+    "knockback_displace",
+    "root",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "base",
    "curated_as_of": "2026-10-07",
    "display_name": "Nature Staff",
@@ -332037,6 +332621,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-10-07",
    "display_name": "Ironroot Staff",
@@ -332264,6 +332854,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "crystal",
    "curated_as_of": "2026-10-07",
    "display_name": "Forgebark Staff",
@@ -332466,6 +333062,12 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cast_caps": [
+    "knockback_displace",
+    "slow",
+    "sustained_dps",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-10-07",
    "display_name": "Druidic Staff",
@@ -332933,6 +333535,13 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cast_caps": [
+    "anti_dive",
+    "peel",
+    "silence",
+    "slow",
+    "zone_control"
+   ],
    "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bedrock Mace",
@@ -333874,6 +334483,12 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cast_caps": [
+    "burst_aoe",
+    "engage",
+    "mobility",
+    "purge"
+   ],
    "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Daybreaker",

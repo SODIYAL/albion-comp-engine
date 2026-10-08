@@ -1416,9 +1416,7 @@
    "tree_passives": []
   },
   {
-   "active_caps": {
-    "tankiness": 2
-   },
+   "active_caps": {},
    "class": null,
    "class_basis": "tree id (stats missing)",
    "id": "OFF_SHIELD",
@@ -1429,9 +1427,7 @@
    "tree_passives": []
   },
   {
-   "active_caps": {
-    "tankiness": 2
-   },
+   "active_caps": {},
    "class": null,
    "class_basis": "tree id (stats missing)",
    "id": "OFF_SHIELD_AVALON",
@@ -1453,9 +1449,7 @@
    "tree_passives": []
   },
   {
-   "active_caps": {
-    "tankiness": 2
-   },
+   "active_caps": {},
    "class": null,
    "class_basis": "tree id (stats missing)",
    "id": "OFF_SHIELD_HELL",
@@ -1510,9 +1504,7 @@
    "tree_passives": []
   },
   {
-   "active_caps": {
-    "heal_sustain": 2
-   },
+   "active_caps": {},
    "class": null,
    "class_basis": "tree id (stats missing)",
    "id": "OFF_TORCH_CRYSTAL",
@@ -1534,9 +1526,7 @@
    "tree_passives": []
   },
   {
-   "active_caps": {
-    "tankiness": 3
-   },
+   "active_caps": {},
    "class": null,
    "class_basis": "tree id (stats missing)",
    "id": "OFF_TOWERSHIELD_UNDEAD",

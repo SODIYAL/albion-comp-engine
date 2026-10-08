@@ -84,8 +84,10 @@ def make_cases(data):
     # cost is waived) — both ports must price the same exact marginal
     demon = ["HEAD_PLATE_SET3", "ARMOR_PLATE_HELL", "SHOES_PLATE_SET1"]
     if "ARMOR_PLATE_HELL" in (data.get("gear") or {}):
+        # and a gears tail past the party, read as cut at its end (F38c)
         for party, gears in ((["2H_CURSEDSTAFF"], [demon]),
-                             (["2H_CURSEDSTAFF", "2H_CURSEDSTAFF"], [demon, demon])):
+                             (["2H_CURSEDSTAFF", "2H_CURSEDSTAFF"], [demon, demon]),
+                             (["2H_CURSEDSTAFF"], [demon, demon])):
             cases.append({"content": "blackzone_roam", "size": 20, "style": "balanced",
                           "party": party, "combos": [None] * len(party),
                           "gears": gears, "refine_pool": weapons[3::11]})

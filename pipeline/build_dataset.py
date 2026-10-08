@@ -293,6 +293,24 @@ def load_sheets(weapon_lines, tune_sheets=None):
                 # base-party supply). Auto-derived from evidence spell -> slot.
                 "loadout": build_loadout(rows, line),
             }
+            # SELF-COSTS on the weapon's E (the gear rule, load_gear_sheets):
+            # what the E costs its OWN wielder, in sheet points, charged on
+            # the wielder's supply (engine member_extra / build_extra), never
+            # the team pool. The E is the weapon's one fixed spell, so the
+            # cost is always equipped; the lint holds every cost to the E.
+            costs, cost_evidence = {}, {}
+            for c in entry.get("self_costs") or []:
+                if not isinstance(c, dict):
+                    continue
+                cap, pts = c.get("cap"), c.get("points", 0)
+                if not cap or not pts:
+                    continue
+                costs[cap] = max(costs.get(cap, 0), pts)
+                if c.get("evidence"):
+                    cost_evidence[cap] = c["evidence"]
+            if costs:
+                weapons[key]["self_costs"] = costs
+                weapons[key]["self_cost_evidence"] = cost_evidence
             sources[key] = os.path.relpath(path, HERE).replace("\\", "/")
 
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "illustrative", "*.yaml"))):
@@ -3216,12 +3234,12 @@ def main():
     # engine turns absolute defense into tankiness units and % stats into
     # capability multipliers (mechanics.yaml build_stats).
     # Offhands have no active ability — their usefulness comes from
-    # the stats — so the copy list widened
-    # beyond the chest-centric eight — offhand identity lives in the
-    # percent-modifier fields (defense bonus, threat, cooldown/cast-time
-    # reduction, energy, HP). The engine's build_stats channel still
-    # reads only its documented keys; the extra fields feed
-    # classification and display.
+    # the stats — so the copy list reaches past the chest-centric eight:
+    # offhand identity lives in the percent-modifier fields (defense
+    # bonus, threat, cooldown/cast-time reduction, energy, HP). The
+    # channel reads the documented keys (mechanics.yaml build_stats:
+    # defense, damage, heal, CC duration, cooldown, cast time, attack
+    # speed); threat and energy feed classification only.
     BUILD_STAT_KEYS = ("physicalarmor", "magicresistance",
                        "crowdcontrolresistance", "physicalspelldamagebonus",
                        "magicspelldamagebonus", "physicalattackdamagebonus",
@@ -3237,9 +3255,31 @@ def main():
                        # exist; feeds the cc_mult_caps build channel so
                        # CC-offhand pairing is physics, not a hand list
                        "bonusccdurationvsplayers")
+    # An off-hand's % stats are coefficients the game scales with item
+    # power (items.json holds the base; the displayed value is base x
+    # f(item power)), where a chest's are flat (its displayed value is the
+    # base). The channel reads an off-hand's at its tier-4.0 value, the
+    # reference the chests stand at: base x mechanics build_stats
+    # `offhand_t4_scale` for its stat family. `stats_scale` records the
+    # factor each read stat carries, so the base stays recoverable.
+    scale = (mechanics.get("build_stats") or {}).get("offhand_t4_scale") or {}
+    families = (mechanics.get("build_stats") or {}).get("offhand_stat_family") or {}
     for gk, g in gear.items():
         bank = (item_stats.get(gk) or {}).get("stats") or {}
         g["stats"] = {s: bank[s] for s in BUILD_STAT_KEYS if bank.get(s)}
+        if g.get("slot") == "offhand":
+            applied = {}
+            for s in sorted(g["stats"]):
+                fam = families.get(s)
+                if fam is None:
+                    continue
+                if fam not in scale:
+                    sys.exit(f"mechanics build_stats: off-hand stat {s} names "
+                             f"family {fam!r}, which offhand_t4_scale lacks")
+                g["stats"][s] = g["stats"][s] * scale[fam]
+                applied[s] = scale[fam]
+            if applied:
+                g["stats_scale"] = applied
 
     # Per-capability DELIVERY facts (geometric-AoE step 3):
     # from each capability's evidence spell, the structural area geometry and
@@ -3267,6 +3307,23 @@ def main():
                     break                      # one evidence spell per cap
         if delivery:
             w["cap_delivery"] = delivery
+
+    # Casted capabilities (the off-hand cast-time channel, mechanics
+    # build_stats cast_mult_caps): a weapon capability whose evidence names
+    # a spell with a cast time. A cast-time cut speeds those casts.
+    for w in weapons.values():
+        casted = set()
+        for cap, spells in (w.get("evidence") or {}).items():
+            for sid in spells:
+                try:
+                    ct = float((spell_index.get(sid) or {}).get("casting_time") or 0)
+                except (TypeError, ValueError):
+                    ct = 0.0
+                if ct > 0:
+                    casted.add(cap)
+                    break
+        if casted:
+            w["cast_caps"] = sorted(casted)
 
     n_ranged, ranged_report, ranged_problems = derive_ranged_presence(
         weapons, spell_index, load_ranged_overrides())

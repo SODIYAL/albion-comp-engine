@@ -759,6 +759,7 @@
       }
     }
     this._extrasCache = {};
+    this._unchargedCache = {};
     this._gearCache = {};
     this._defaultCache = {};
     this._nsCache = {};
@@ -1128,10 +1129,38 @@
           next.push(combos[j].concat([choices[i][kk]]));
       combos = next;
     }
-    extras = [];
-    for (i = 0; i < combos.length; i++) extras.push(mergeMax(always, combos[i]));
+    var raw = [];
+    for (i = 0; i < combos.length; i++) raw.push(mergeMax(always, combos[i]));
+    /* the weapon's own E self-cost is charged on every combo, so each
+       weapon-supply reader sees it; buildExtra starts from the uncharged
+       combo and charges it on the dressed vector (mirrors engine.py) */
+    var costs = this.weapons[weapon].self_costs;
+    extras = raw;
+    if (costs) {
+      extras = [];
+      for (i = 0; i < raw.length; i++) extras.push(this._chargeCosts(raw[i], costs));
+    }
     this._extrasCache[weapon] = extras;
+    this._unchargedCache[weapon] = raw;
     return extras;
+  };
+
+  CompEngine.prototype._unchargedExtras = function (weapon) {
+    /* _comboExtras before the weapon's own self-cost (buildExtra's start);
+       the same list for a weapon without one (mirrors engine.py) */
+    this._comboExtras(weapon);
+    return this._unchargedCache[weapon];
+  };
+
+  CompEngine.prototype._chargeCosts = function (extra, costs) {
+    /* a copy of `extra` with self-costs (sheet points) charged on the
+       capabilities it holds, floored at zero (mirrors engine.py) */
+    var out = {}, c;
+    for (c in extra) out[c] = extra[c];
+    for (c in costs) {
+      if (c in out) out[c] = Math.max(0.0, out[c] - costs[c] / this.scoreUnit);
+    }
+    return out;
   };
 
   CompEngine.prototype._comboDims = function (weapon) {
@@ -1391,14 +1420,18 @@
        channel (mirrors engine.py build_extra — same float order).
        CC-duration % multiplies the
        wearer's own duration-bearing CC — the Leering-Cane pairing as
-       physics. `role` (a seat id) additionally applies the DOCTRINE
+       physics. An off-hand's defense % multiplies the wearer's
+       tankiness, its cooldown % the output capabilities, its cast-time %
+       the outputs the weapon casts, its attack speed the sustained damage.
+       `role` (a seat id) additionally applies the DOCTRINE
        PASSIVE picks — generation/display only; scoring never passes
        a role. */
     var out = {}, c;
-    var base = this.memberExtra(weapon, combo);
+    var base = this._memberUncharged(weapon, combo);
     for (c in base) out[c] = base[c];
     var armorPts = 0.0, ccrPts = 0.0, dmgPct = 0.0, healPct = 0.0;
     var ccdurPct = 0.0, ccrMult = 0.0;
+    var defPct = 0.0, cdrPct = 0.0, castPct = 0.0, aspdPct = 0.0;
     var seatClass = role ? ((this.rolesBook[role] || {})["class"] || null)
                          : null;
     for (var i = 0; i < (gear || []).length; i++) {
@@ -1415,6 +1448,10 @@
                  : (st.physicalspelldamagebonus || 0.0));
       healPct += st.healbonus || 0.0;
       ccdurPct += st.bonusccdurationvsplayers || 0.0;
+      defPct += st.bonusdefensevsplayers || 0.0;
+      cdrPct += st.magiccooldownreduction || 0.0;
+      castPct += st.magiccasttimereduction || 0.0;
+      aspdPct += st.attackspeedbonus || 0.0;
       if (seatClass) {
         var p = (((this.gear[key] || {}).doctrine_passives) || {})[seatClass];
         if (p) {
@@ -1429,6 +1466,8 @@
     var tank = armorPts * (bs.tankiness_per_armor_point || 0.0)
              + ccrPts * (1.0 + ccrMult) * (bs.tankiness_per_ccr_point || 0.0);
     if (tank > 0.0) out.tankiness = (out.tankiness || 0.0) + tank;
+    if (defPct !== 0.0 && "tankiness" in out)
+      out.tankiness = Math.max(0.0, out.tankiness * (1.0 + defPct));
     var j;
     if (dmgPct > 0.0) {
       var dc = bs.damage_mult_caps || [];
@@ -1444,6 +1483,22 @@
       var cc = bs.cc_mult_caps || [];
       for (j = 0; j < cc.length; j++)
         if (cc[j] in out) out[cc[j]] *= 1.0 + ccdurPct;
+    }
+    if (cdrPct > 0.0) {
+      var cdc = bs.cooldown_mult_caps || [];
+      for (j = 0; j < cdc.length; j++)
+        if (cdc[j] in out) out[cdc[j]] *= 1.0 + cdrPct;
+    }
+    if (castPct > 0.0) {
+      var casted = this.weapons[weapon].cast_caps || [];
+      var ctc = bs.cast_mult_caps || [];
+      for (j = 0; j < ctc.length; j++)
+        if (ctc[j] in out && casted.indexOf(ctc[j]) >= 0) out[ctc[j]] *= 1.0 + castPct;
+    }
+    if (aspdPct > 0.0) {
+      var asc = bs.attack_speed_mult_caps || [];
+      for (j = 0; j < asc.length; j++)
+        if (asc[j] in out) out[asc[j]] *= 1.0 + aspdPct;
     }
     /* SELF-COSTS (mirrors engine.py): what the item costs its OWN wearer —
        Demon Armor's aura spends 0.37 of the wearer's resistances to give
@@ -1461,7 +1516,22 @@
         }
       }
     }
+    /* the weapon's own E self-cost, on the dressed vector (memberExtra
+       charges it on the naked one; buildExtra started uncharged) */
+    var wcosts = this.weapons[weapon].self_costs || {};
+    for (var wcap in wcosts) {
+      if (wcap in out) out[wcap] = Math.max(0.0, out[wcap] - wcosts[wcap] / this.scoreUnit);
+    }
     return out;
+  };
+
+  CompEngine.prototype._memberUncharged = function (weapon, combo) {
+    /* memberExtra before the weapon's own self-cost (buildExtra's start);
+       null -> the static default (mirrors engine.py) */
+    var extras = this._unchargedExtras(weapon);
+    if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
+      combo = this.defaultCombo(weapon);
+    return extras[combo];
   };
 
   /* Gear keys whose self-cost this party has offset — the ONLY
@@ -1470,6 +1540,14 @@
      interaction record on the cost's evidence spell declares
      self_cost_offset_min_copies, and the party fields that many. Cancels a
      cost, never adds supply. */
+  /* A gears list cut at the party's end: a tail entry is worn by no member
+     and counts in no reader (the self-cost waiver, the refund, the carrier
+     quota; mirrors engine.py _pad, F38c). A missing entry already reads as
+     a naked member. */
+  CompEngine.prototype._partyGears = function (gears, n) {
+    return gears && gears.length > n ? gears.slice(0, n) : gears;
+  };
+
   CompEngine.prototype.selfCostWaivers = function (gears) {
     var out = {};
     if (!this.costOffsets || !gears) return out;
@@ -2040,6 +2118,7 @@
        member's buildExtra, keyed by weapon, combo, kit and waived: the
        kit advisor prices every item against the same worn rest. */
     var s = {}, c;
+    gears = this._partyGears(gears, party.length);
     var waived = gears ? this.selfCostWaivers(gears) : null, wkey = null;
     for (var i = 0; i < party.length; i++) {
       var ci = combos ? combos[i] : null, g = gears ? gears[i] : null;
@@ -2063,13 +2142,14 @@
     return s;
   };
 
-  CompEngine.prototype._nsShare = function (v, cap, gear) {
-    /* A count-once spell's units on `cap` as a member wearing `gear`
-       supplies them: buildExtra's stat channel multiplies them as it
-       multiplies the member's whole capability, same order, no doctrine
-       passives (mirrors engine.py _ns_share). Naked: v. */
+  CompEngine.prototype._nsShare = function (v, cap, gear, weapon) {
+    /* A count-once spell's units on `cap` as a member holding `weapon` and
+       wearing `gear` supplies them: buildExtra's stat channel multiplies
+       them as it multiplies the member's whole capability, same order, no
+       doctrine passives (mirrors engine.py _ns_share). Naked: v. */
     if (!gear || !gear.length) return v;
     var dmg = 0.0, heal = 0.0, ccdur = 0.0;
+    var dfn = 0.0, cdr = 0.0, cast = 0.0, aspd = 0.0;
     for (var i = 0; i < gear.length; i++) {
       var item = gear[i];
       var key = this.gearKey(Array.isArray(item) ? item[0] : item);
@@ -2079,11 +2159,20 @@
               : (st.physicalspelldamagebonus || 0.0));
       heal += st.healbonus || 0.0;
       ccdur += st.bonusccdurationvsplayers || 0.0;
+      dfn += st.bonusdefensevsplayers || 0.0;
+      cdr += st.magiccooldownreduction || 0.0;
+      cast += st.magiccasttimereduction || 0.0;
+      aspd += st.attackspeedbonus || 0.0;
     }
     var bs = this.mechanics.build_stats || {};
+    if (dfn !== 0.0 && cap === "tankiness") v = Math.max(0.0, v * (1.0 + dfn));
     if (dmg > 0.0 && (bs.damage_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + dmg;
     if (heal > 0.0 && (bs.heal_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + heal;
     if (ccdur > 0.0 && (bs.cc_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + ccdur;
+    if (cdr > 0.0 && (bs.cooldown_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + cdr;
+    if (cast > 0.0 && (bs.cast_mult_caps || []).indexOf(cap) >= 0
+        && ((this.weapons[weapon] || {}).cast_caps || []).indexOf(cap) >= 0) v *= 1.0 + cast;
+    if (aspd > 0.0 && (bs.attack_speed_mult_caps || []).indexOf(cap) >= 0) v *= 1.0 + aspd;
     return v;
   };
 
@@ -2100,7 +2189,7 @@
         var contrib = per[sid];
         if (g && g.length) {
           var scaled = {};
-          for (var sc in contrib) scaled[sc] = this._nsShare(contrib[sc], sc, g);
+          for (var sc in contrib) scaled[sc] = this._nsShare(contrib[sc], sc, g, party[i]);
           contrib = scaled;
         }
         (groups[sid] = groups[sid] || []).push(contrib);
@@ -2178,6 +2267,7 @@
 
   /* ---------------------------------------------------------------- fitness */
   CompEngine.prototype.fitness = function (party, combos, gears, memo) {
+    gears = this._partyGears(gears, party.length);
     var s = this.effectiveSupply(party, combos, gears, memo);
     /* Option C: STRUCTURAL hard floors read the
        weapon+loadout supply — worn gear improves coverage/headroom/
@@ -2366,6 +2456,7 @@
        term reads — comp_score's own seams. gears absent keeps both the
        same object (bit-identical to the pre-gears state). */
     var st = this._synState(party, combos), sSyn = st[0], J = st[1];
+    gears = this._partyGears(gears, party.length);
     var anyGear = false;
     if (gears) {
       for (var gi = 0; gi < gears.length; gi++) {
@@ -2400,7 +2491,7 @@
             var curf = nsFit[sid] || (nsFit[sid] = {});
             for (var capf in per[sid]) {
               var vf = per[sid][capf];
-              if (mg && mg.length) vf = this._nsShare(vf, capf, mg);
+              if (mg && mg.length) vf = this._nsShare(vf, capf, mg, party[i]);
               if (vf > (curf[capf] || 0.0)) curf[capf] = vf;
             }
           }
@@ -2506,7 +2597,7 @@
       for (var cj = 0; cj < caps.length; cj++) {
         var cap = caps[cj], v = per[sid][cap] || 0.0;
         if (!v) continue;
-        if (gear && gear.length) v = this._nsShare(v, cap, gear);
+        if (gear && gear.length) v = this._nsShare(v, cap, gear, weapon);
         var gain = v - (pmax[cap] || 0.0);
         adj[cap] = (adj[cap] || 0.0) - v + (gain > 0.0 ? gain : 0.0);
       }
@@ -2968,7 +3059,7 @@
       for (var cj = 0; cj < caps.length; cj++) {
         var cap = caps[cj], v = contrib[sid][cap] || 0.0;
         if (v && pick.vgears && pick.vgears.length)
-          v = this._nsShare(v, cap, pick.vgears);
+          v = this._nsShare(v, cap, pick.vgears, candidate);
         var cut = v < (pmax[cap] || 0.0) ? v : (pmax[cap] || 0.0);
         if (v && cut > 0.0) { lost[cap] = cut; any = true; }
       }

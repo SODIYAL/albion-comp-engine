@@ -2,12 +2,12 @@
 # 1-7 scale (2 points = one supply unit). An offhand carries no active:
 # its profile is its stats (out/item_stats.json), from which classify_gear
 # derives the role affinity and the build-stat channel (engine
-# build_extra, mechanics.yaml build_stats) reads armor, magic resistance,
-# CC resistance, spell damage, heal bonus and CC duration vs players as
-# supply. Thirteen carry no rows. Five carry hand-scored GEAR_STATS rows
-# (curation judgment): tankiness on the Shield, Astral Aegis, Caitiff
-# Shield and Sarcophagus, whose defence stat (bonusdefensevsplayers) the
-# channel does not read, and heal_sustain on the Blueflame Torch.
+# build_extra, mechanics.yaml build_stats) reads its supply: defense vs
+# players multiplies the wearer's tankiness, damage and heal % multiply the
+# wearer's output, CC duration % its crowd control, cooldown % its output,
+# cast time % the output its weapon casts, attack speed its sustained
+# damage, each read at the off-hand's tier-4 value (offhand_t4_scale). No
+# entry carries a row: an off-hand's supply is its stats alone.
 
 - {gear: OFF_BOOK, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}            # Tome of Spells — cast-time reduction
 
@@ -20,8 +20,8 @@
   curated_as_of: 2026-08-25
   # No row: no active and no ally-targeted spell, so its stat buffs the
   # wielder alone and grounds no buff_allies (directionality rule). The
-  # one stat, magic cooldown reduction, feeds classify_gear's role
-  # affinity; the build-stat channel does not read it as supply.
+  # one stat, magic cooldown reduction, multiplies the wielder's output
+  # through the build-stat channel.
   capabilities: []
 
 - {gear: OFF_JESTERCANE_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Leering Cane — +CC duration vs players + CDR; the stat channel multiplies the wielder's duration-bearing CC by it, the pairing with CC-delivery weapons (published 1H Mace and Incubus tank builds wear it)
@@ -30,25 +30,13 @@
 
 - {gear: OFF_ORB_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}     # Eye of Secrets — book class: raw item power (725 vs 700 baseline at T4)
 
-- gear: OFF_SHIELD                   # Shield
-  slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+- {gear: OFF_SHIELD, slot: offhand, curated_as_of: "2026-10-08", capabilities: []}          # Shield — defense vs players (3% at T4)
 
-- gear: OFF_SHIELD_AVALON            # Astral Aegis
-  slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+- {gear: OFF_SHIELD_AVALON, slot: offhand, curated_as_of: "2026-10-08", capabilities: []}   # Astral Aegis — the largest defense vs players, energy tax
 
 - {gear: OFF_SHIELD_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Unbreakable Ward — defense + threat (crystal shield)
 
-- gear: OFF_SHIELD_HELL              # Caitiff Shield
-  slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+- {gear: OFF_SHIELD_HELL, slot: offhand, curated_as_of: "2026-10-08", capabilities: []}     # Caitiff Shield — defense + CC duration vs players
 
 - {gear: OFF_SPIKEDSHIELD_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Facebreaker — defense + damage hybrid shield
 
@@ -58,16 +46,8 @@
 
 - {gear: OFF_TORCH, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}           # Torch — attack speed + cooldowns
 
-- gear: OFF_TORCH_CRYSTAL            # Blueflame Torch — +damage and heal output
-  slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: heal_sustain,  score: 2, evidence: GEAR_STATS}
+- {gear: OFF_TORCH_CRYSTAL, slot: offhand, curated_as_of: "2026-10-08", capabilities: []}    # Blueflame Torch — +damage and heal output
 
 - {gear: OFF_TOTEM_KEEPER, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Taproot — book class: raw item power (775 at T4), small Healing Received tax
 
-- gear: OFF_TOWERSHIELD_UNDEAD       # Sarcophagus
-  slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: tankiness,     score: 3, evidence: GEAR_STATS}
+- {gear: OFF_TOWERSHIELD_UNDEAD, slot: offhand, curated_as_of: "2026-10-08", capabilities: []}  # Sarcophagus — defense vs players

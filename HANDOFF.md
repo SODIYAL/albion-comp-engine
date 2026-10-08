@@ -97,7 +97,13 @@ Three layers, never merged:
   `self_cost_offset_min_copies` (Demon Armor).
 - Gear scores (curated `sheets/gear/<slot>.yaml`, the tree-shared actives once in
   `sheets/gear/pools/` and composed per item) through `build_extra`: stat
-  channels, doctrine passives, `cc_mult_caps`, `self_costs`. Tier-agnostic
+  channels, doctrine passives, `cc_mult_caps`, `self_costs`. An off-hand
+  carries no row: its supply is its stats, read at their tier-4 value
+  (mechanics `offhand_t4_scale`): defense vs players multiplies the
+  wearer's tankiness, damage and heal % its output, cooldown % its output,
+  cast time % the output its weapon casts (`cast_caps`), attack speed its
+  sustained damage. A weapon's E may carry `self_costs` too, charged on
+  the wielder's own supply like a gear piece's. Tier-agnostic
   lookup (`gear_key()`). The active a piece scores is the gear-active
   doctrine's (`doctrine_active`, stamped by `build_dataset`): the one the
   recording published builds equip (two votes, by band too), else the

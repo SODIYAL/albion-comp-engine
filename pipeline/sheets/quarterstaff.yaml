@@ -98,7 +98,7 @@
     - {cap: burst_aoe,     score: 2, evidence: SOULSHAKER}        # 125 line
 
 - weapon: 2H_ROCKSTAFF_KEEPER        # Staff of Balance — anti-heal aura bruiser
-  curated_as_of: 2026-10-07
+  curated_as_of: 2026-10-08
   role_hint: tank
   capabilities:
     - {cap: heal_reduction, score: 4, evidence: QS_SLOWROPE}      # E: -35% Healing Received aura (negates own healing too)
@@ -106,6 +106,11 @@
     - {cap: zone_control,  score: 4, evidence: QS_SLOWROPE}       # 6.5m walking denial zone, up to 15s
     - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}     # divers stand in the aura; W: Forceful Swing; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
     - {cap: tankiness,     score: 4, evidence: QS_SLOWROPE}       # +20% resists while active
+  # SELF-COST: the E negates all the wielder's Healing Received for up to
+  # 15s, a whole defensive layer gone while it runs: Demon Armor's rung
+  # (-0.37 own resistances = 3 points), charged on the wielder's own supply.
+  self_costs:
+    - {cap: tankiness, points: 3, evidence: QS_SLOWROPE}          # no healing received while the E runs
 
 - weapon: 2H_TWINSCYTHE_HELL         # Soulscythe — tornado displace skirmisher
   curated_as_of: 2026-10-07

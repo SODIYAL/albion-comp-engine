@@ -13,10 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **A gears list longer than the party**: both ports count a tail entry
-  past the party in the self-cost waiver and the carrier quota (the refund
-  loop stops at the party's end, F38b); no caller passes one. Whether
-  every reader should drop the tail is a both-port decision.
 - **The Dragon Portal's 15-20 pool beyond its rows**: the pool reads
   rows of its own, fitted at the floor (40 distinct rosters; V: 10, The
   15-20 portal pool reads its own rows). It carries no fielded list and
@@ -146,20 +142,19 @@ Each is decidable today from evidence already in the repo.
   server's meta into rows meant to describe the maintainer's own fights.
   Review deferred to the date the log entry records. (V: 09b, Coverage, not
   speed)
-- **territory_defense at 25** forges one to two members short (brawl / clap /
-  kite): the profile scales stopper_tank to a minimum of 3 inside a frontline
-  cap of 5, and the deadlock guard checks capacity exists, not that it is
-  enough. Wider band, lower stopper scale, or a counting guard. (V: 09b,
-  Chains reach past a slot)
-- **`balanced` and the one-per-five healer minimum**: it keeps the base band
-  and forges 3 healers at castle 25; the guild sheet says 4 at 20+ with no
-  style attached. (V: 09b, Healers per five)
-- **Role counts past the minimum at 21+**: the typical role count (standing
-  rule 18) holds the forge to the evidence through size 20 (healer /
-  frontline / support, per style at 10+); the harvest has no 21+ rows, so
-  castle 25 still forges 6 healers on clap — the scorer's preference, to be
-  graded, not assumed right. A 21+ harvest band closes it. (V: 09b, Tanks
-  and supports)
+- **Single-party forges past 20**: no page forges a party past 20 (the
+  planner forges each party of a zerg at its own plan, capped at 20; the
+  sheet's engine read recommends, it never forges), so three readings of
+  the forge at 25 concern the engine API and its tests only:
+  territory_defense at 25 forges one to two members short (the profile
+  scales stopper_tank to a minimum of 3 inside a frontline cap of 5, and the
+  deadlock guard checks capacity exists, not that it is enough; V: 09b,
+  Chains reach past a slot); `balanced` keeps the base band and forges 3
+  healers at castle 25 where the guild sheet says 4 at 20+ with no style
+  attached (V: 09b, Healers per five); and with no 21+ harvest rows the
+  typical role count (standing rule 18) stops at 20, so castle 25 forges 6
+  healers on clap (V: 09b, Tanks and supports). They return if a single
+  party past 20 does; a 21+ harvest band would settle the third.
 - **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
   4): a typical only bars bodies beyond it; the shortfall is a support
   demand question (which support capabilities the 20-man rows under-ask
@@ -342,19 +337,6 @@ Each is decidable today from evidence already in the repo.
   comments as the reason an E row is high, and ground no row of their own;
   the E-row shares themselves (Blazing zone_control 6, Dawnsong burst_aoe 6,
   Lifetouch buff_allies 4) read lower spell by spell.
-- **Weapon E self-costs score nothing**: `self_costs` is read from gear
-  sheets only, so Whispering Bow's "Decreases your Defense by 0.35",
-  Dagger's and Demonfang's max-health true damage and Staff of Balance's
-  "Negates all your Healing Received" cost nothing. Extending `self_costs`
-  to weapon entries under the same evidence rule needs a logged decision
-  and both ports.
-- **Offhands follow two models**: five offhands carry hand-scored
-  GEAR_STATS rows (tankiness on four shields, heal_sustain on the Blueflame
-  Torch) while the build-stat channel reads no `bonusdefensevsplayers`,
-  cooldown or cast-time stat, so the thirteen stat-only offhands supply
-  nothing and the shield rows run against the stats bank's order. Derive
-  offhand supply from the stats (mechanics.yaml build_stats, both ports)
-  and delete the five rows in the same change.
 - **Polehammer's engage cites its W**: engage 6 sits on Slowing Charge
   (the Round 9 RULE queue as recorded: "engage 6 on Slowing Charge") while
   the row's own comment credits the E's 20m line stun, so with every row

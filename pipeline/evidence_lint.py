@@ -140,7 +140,7 @@ SCORE_MIN, SCORE_MAX = 1, 7
 
 # ---- the sheet schema --------------------------------------------------------
 WEAPON_KEYS = frozenset({"weapon", "curated_as_of", "role_hint", "except",
-                         "capabilities", "removed"})
+                         "capabilities", "removed", "self_costs"})
 WEAPON_REQUIRED = ("weapon", "curated_as_of", "role_hint", "capabilities")
 GEAR_KEYS = frozenset({"gear", "slot", "curated_as_of", "except",
                        "capabilities", "self_costs"})
@@ -498,11 +498,26 @@ def lint_weapon_entry(entry, path, index):
             if "capabilities" in entry else [])
     excepts = (check_excepts(wkey, entry["except"], errors)
                if "except" in entry else [])
+    costs = (check_rows(f"{wkey} self_costs", entry["self_costs"], errors,
+                        keys=SELF_COST_KEYS, score_field="points",
+                        label="self_cost", field="self_costs")
+             if "self_costs" in entry else [])
 
     line = WEAPONS.get(wkey)
     if line is None:
         errors.append(f"{wkey}: unknown weapon line (not in game data)")
         return errors, warnings
+    # a weapon's self-cost cites its E: the one spell always equipped, so
+    # the cost the build charges on every combo is the one the wielder pays
+    e_spells = set((line.get("spells") or {}).get("e") or [])
+    for c in costs:
+        cap, ev = c.get("cap"), c.get("evidence")
+        if not c.get("points") or not isinstance(ev, str) or not ev:
+            continue                  # rules 4-6 already reported the row
+        if ev not in e_spells:
+            errors.append(f"{wkey} self_costs.{cap}: evidence '{ev}' is not "
+                          f"{wkey}'s E (a weapon's self-cost cites its E, the "
+                          f"spell always equipped)")
     sub = line.get("subcategory")
     if not _same_path(path, os.path.join(SHEETS, f"{sub}.yaml")):
         errors.append(f"{wkey}: a {sub} weapon belongs in sheets/{sub}.yaml, "

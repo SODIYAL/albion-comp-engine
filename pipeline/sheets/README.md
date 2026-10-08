@@ -73,7 +73,10 @@ entry in `sheets/<its subcategory>.yaml`, a gear entry in
 healer / support, a gear `slot` one of the seven and the game data's own; a
 weapon entry carries `weapon`, `curated_as_of`, `role_hint` and
 `capabilities`, a gear entry `gear`, `slot`, `curated_as_of` and
-`capabilities`, for a gear key the game data carries; a pool file is named
+`capabilities`, for a gear key the game data carries; either may carry
+`self_costs` (what the item costs its own wearer, in sheet points, each
+citing its spell: a weapon's cites its E, the one spell always equipped);
+a pool file is named
 after its tree and has the tree's sheet beside it; each layer cites its own
 stat sentinel (`WEAPON_STATS` on weapon rows, `GEAR_STATS` on gear rows and
 self costs).
@@ -131,9 +134,10 @@ Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment
    W — the W makes the E's clump damage bigger, and the 15s E cycles the
    combo fast. Bow: the same W cannot turn a single-target AA window into
    AoE — same tree, no combo.) 1H weapons add the OFFHAND as a free
-   amplifier slot (Hallowfall + healing offhand); the offhand's own rows
-   sit on its gear sheet (`gear/offhand.yaml`). The loadout model supplies
-   the candidates.
+   amplifier slot (Hallowfall + healing offhand); an off-hand carries no
+   row (`gear/offhand.yaml`): its stats are its supply, through the
+   build-stat channel (mechanics.yaml `build_stats`). The loadout model
+   supplies the candidates.
 2. **W2 ● Identity density** — how many capabilities does the E cover AT
    QUALITY in one button? (Primal Slam: displacement + zone + peel
    simultaneously.)
