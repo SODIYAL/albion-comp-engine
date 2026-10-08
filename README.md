@@ -199,7 +199,7 @@ pipeline/                      the engine's data layer
   audit_*.py                   report-only audits
   out/                         generated data/evidence artifacts
 
-data/                          published comps / builds / armory imports (evidence layer;
+data/                          published comps / builds (evidence layer;
                                record conventions in data/README.md)
 
 tests/

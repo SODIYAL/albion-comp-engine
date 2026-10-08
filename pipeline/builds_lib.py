@@ -8,8 +8,8 @@ another:
 
   game facts            pinned ao-bin-dumps snapshot (weapon_lines,
                         spell_index, gear_lines, item_stats)
-  published builds      caller sheets, MetaBattle, manual Armory imports —
-                        records under data/, each with source provenance
+  published builds      caller sheets, MetaBattle imports — records under
+                        data/, each with source provenance
   loadout observations  companion party sightings, killboard equipment
                         prevalence — observations, never recommendations
   canonical builds      human-reviewed defaults derived ONLY through the
@@ -19,7 +19,6 @@ Statuses: raw -> normalized -> (quarantined | candidate) -> approved,
 plus stale and rejected. Imported records are never born approved.
 
 A canonical default requires ONE of (§F):
-  - sanctioned/current official Armory evidence + independent validation
   - agreement across >= 2 genuinely independent source FAMILIES
     (records sharing a family — same author/site — never count twice)
   - explicit current shotcaller approval (a shotcaller-authored sheet
@@ -40,8 +39,8 @@ DATA = os.path.join(ROOT, "data")
 
 STATUSES = ("raw", "normalized", "quarantined", "candidate", "approved",
             "stale", "rejected")
-SOURCE_KINDS = ("caller_sheet", "metabattle", "armory_manual", "companion",
-                "killboard", "manual_link", "murderledger", "solo_1v1")
+SOURCE_KINDS = ("caller_sheet", "metabattle", "companion", "killboard",
+                "manual_link", "murderledger", "solo_1v1")
 # 1v1/duel sources are structurally barred from group recommendations (§D.4):
 # validation rejects any such record whose party-size range reaches past 2,
 # and selection never offers them for larger requests.
@@ -518,19 +517,14 @@ def canonical_eligible(records):
         return False, "no non-quarantined record"
     approved = [r for r in records
                 if (r.get("approval") or {}).get("status") == "approved"]
-    armory = [r for r in records
-              if (r.get("source") or {}).get("kind") == "armory_manual"]
     fams = independent_families(records)
-    if armory and (len(fams) >= 2 or approved):
-        return True, "armory evidence + independent validation"
     if len(fams) >= 2:
         return True, f"{len(fams)} independent source families agree"
     for r in approved:
         basis = (r.get("approval") or {}).get("basis", "")
         if "shotcaller" in basis:
             return True, "explicit shotcaller approval"
-    return False, ("single source family, no armory evidence, no shotcaller "
-                   "approval")
+    return False, "single source family, no shotcaller approval"
 
 
 APPROVAL_RANK = {"approved": 0, "candidate": 1, "normalized": 2,

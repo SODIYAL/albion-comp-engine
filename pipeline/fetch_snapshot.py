@@ -7,7 +7,7 @@ Fetch the PINNED game-data snapshot (changeschapter2.md §A).
         ▼
     out/dumps_cache/<sha12>/…        raw files, cached BY COMMIT
     out/source_manifest.json         repository, commit, timestamps, patch,
-                                     environment, SHA-256 per file
+                                     environment, SHA-256 per pinned file
 
 Every input — items, spells, localization, formatted names — comes from the
 same commit; nothing follows `master`. Re-running is idempotent: files already
@@ -79,7 +79,11 @@ def main():
     manifest = load_manifest() or {}
     recorded = (manifest.get("sources") or {})
     same_commit = recorded.get("commit") == pin["commit"]
-    files = recorded.get("files", {}) if same_commit else {}
+    # A pinned file must hash as this commit's record says. The manifest
+    # records the pinned files and only those: a file dropped from the pin
+    # drops its record.
+    prior_files = recorded.get("files", {}) if same_commit else {}
+    files = {}
 
     problems, fetched = [], 0
     for name in pin["files"]:
@@ -92,7 +96,7 @@ def main():
             fetch(pin, name, dest)
             fetched += 1
         digest = sha256_file(dest)
-        prior = (files.get(name) or {}).get("sha256")
+        prior = (prior_files.get(name) or {}).get("sha256")
         if prior and prior != digest:
             problems.append(
                 f"{name}: hash changed for the SAME commit "

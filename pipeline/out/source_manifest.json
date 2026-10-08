@@ -3,16 +3,6 @@
   "render_service": "https://render.albiononline.com/v1 (icons only, not pinned)"
  },
  "derived": {
-  "armory_activities.json": {
-   "adapter": "parse_armory",
-   "adapter_version": "1",
-   "sha256": "9967d605420bb07c3d1a6d7b9acb4e08c3e9a2a4e047e1f936251b0d151026f3",
-   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
-   "source_files": [
-    "armory.json",
-    "localization.json"
-   ]
-  },
   "gear_lines.json": {
    "adapter": "fetch_gear_lines",
    "adapter_version": "2",
@@ -87,10 +77,6 @@
   "environment": "live",
   "fetch_timestamp_utc": "2026-10-07T09:54:53Z",
   "files": {
-   "armory.json": {
-    "bytes": 51897,
-    "sha256": "5d97ad479fbd4b79dc5effa963145c3f6087085313ab8bbaf2c7b5db891bbf68"
-   },
    "formatted/items.json": {
     "bytes": 24364598,
     "sha256": "557341a19b450b129be06f26ad02e1bee56edba67e6ec12f526beb167c4ae457"
@@ -113,8 +99,8 @@
    }
   },
   "game_patch": {
-   "date": "2026-07-21",
-   "message": "update 20260721"
+   "date": "2026-09-23",
+   "message": "Update bin dumps 2026-09-23"
   },
   "repository": "https://github.com/ao-data/ao-bin-dumps"
  }

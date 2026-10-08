@@ -11,8 +11,8 @@
    "commit_timestamp": "2026-09-23T11:25:19Z",
    "environment": "live",
    "game_patch": {
-    "date": "2026-07-21",
-    "message": "update 20260721"
+    "date": "2026-09-23",
+    "message": "Update bin dumps 2026-09-23"
    },
    "inputs": {
     "gear_lines.json": "d85cd3d1c7a1cef294b4591943df576ab78460e034778790411543adb9d4e8cd",

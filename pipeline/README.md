@@ -93,13 +93,13 @@ none of them.
 
 Build provenance lives in `data/` — record conventions, source kinds,
 statuses, quarantine and the promotion gate are in `data/README.md`: caller
-comps (`published_comps/`), MetaBattle imports
+comps (`published_comps/`) and MetaBattle imports
 (`published_builds/metabattle.yaml`, adapter:
 `py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is explicit and
 never part of a normal build; adapter v2 captures every group-PvP category —
 ZvZ, Hellgate 5v5/10v10, Crystal League/Arena, Ganking — with `content`
-derived from each page's own mode category), manual Armory imports
-(`armory_imports/`). `py -3 pipeline/build_builds.py` validates + normalizes
+derived from each page's own mode category).
+`py -3 pipeline/build_builds.py` validates + normalizes
 everything into `out/builds_index.json` (the selection order, canonical
 flags) and `out/builds_validation.json` (problems, quarantines, promotion
 decisions). `dashboard/build.py` inlines the index; nothing in it feeds

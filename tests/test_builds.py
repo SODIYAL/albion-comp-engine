@@ -171,12 +171,10 @@ check("H9 zero-to-nonzero tier transitions are preserved, not discarded",
       (axe.get("by_tier", {}).get("masterymodifier") or {}).get("4") == 0)
 check("H9 nested enchantment item power is preserved per tier and level",
       len((axe.get("ip_ench") or {}).get("4", {})) >= 3)
-check("H9 the armory import schema stores tier, enchant, quality and IP as "
+check("H9 the MetaBattle import stores tier, enchant, quality and IP as "
       "separate fields (unknown allowed, merged never)",
-      all(f in yaml.safe_load(open(os.path.join(
-          ROOT, "data", "armory_imports", "example.yaml"),
-          encoding="utf-8"))["builds"][0] for f in
-          ("tier", "enchant", "quality", "ip")))
+      bool(mb["builds"]) and all(f in b for b in mb["builds"]
+                                 for f in ("tier", "enchant", "quality", "ip")))
 
 # ---- H.10 structured alternatives + unknown fields ----------------------------
 dh = INDEX["by_content"]["large_scale_zvz"]
@@ -214,11 +212,7 @@ check("H11 imported records begin as candidate (or quarantined), never "
       all(b["status"] in ("candidate", "quarantined") for b in mb["builds"])
       and all(b["approval"]["status"] == "candidate" for b in mb["builds"]))
 
-# ---- H.12 manual Armory / caller import validation -----------------------------
-check("H12 the Armory example file (example: true) is never ingested",
-      not any((v.get("source") or {}).get("kind") == "armory_manual"
-              for by_w in INDEX["by_content"].values()
-              for vs in by_w.values() for v in vs))
+# ---- H.12 caller import validation --------------------------------------------
 caller_doc = yaml.safe_load(open(os.path.join(
     ROOT, "data", "published_comps",
     "timothy_blap_blackzone_roam_2026_08.yaml"), encoding="utf-8"))

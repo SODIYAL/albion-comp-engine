@@ -5,7 +5,6 @@ Build the builds index — the generated, validated view of the evidence layer
 
     data/published_comps/*.yaml     caller comps (verbatim slots + provenance)
     data/published_builds/*.yaml    adapter imports (MetaBattle …), candidate
-    data/armory_imports/*.yaml      manual official-Armory imports
     data/canonical_builds/*.yaml    manual canonical pins (optional)
     out/weapon_lines.json           game facts (pinned snapshot)
     out/spell_index.json
@@ -35,11 +34,6 @@ import json
 import os
 import re
 import sys
-
-
-def _norm_label(s):
-    """Forgiving label match: 'Crystal League 20v20' == crystalleague20v20."""
-    return re.sub(r"[^a-z0-9]", "", str(s).lower())
 
 try:
     import yaml
@@ -275,7 +269,6 @@ def main():
 
     comps = load_docs("published_comps", "published_comp")
     imports = load_docs("published_builds", "published_build_batch")
-    armory = load_docs("armory_imports", "armory_import")
     pins = load_docs("canonical_builds", "canonical_build")
 
     records = []
@@ -287,31 +280,6 @@ def main():
         problems += [p for p in (doc.pop("_kind_problem", None),) if p]
         records += import_records(doc, weapon_lines, spell_index, gear_lines,
                                   problems)
-    # Armory activity labels must be the game's own (out/armory_activities
-    # .json, parse_armory.py) — a label the Armory does not have is a
-    # mis-transcription, not a new category.
-    armory_tax = set()
-    tax_path = os.path.join(OUT, "armory_activities.json")
-    if os.path.exists(tax_path):
-        with open(tax_path, encoding="utf-8") as f:
-            for a in json.load(f).get("activities", []):
-                armory_tax.add(_norm_label(a.get("uniquename") or ""))
-                armory_tax.add(_norm_label(a.get("name") or ""))
-        armory_tax.discard("")
-    for doc in armory:
-        problems += [p for p in (doc.pop("_kind_problem", None),) if p]
-        problems += bl.validate_comp_doc(doc, weapon_lines) \
-            if doc.get("parties") else []
-        if armory_tax:
-            for b in (doc.get("builds") or []):
-                act = b.get("activity")
-                if act and _norm_label(act) not in armory_tax:
-                    problems.append(
-                        f"{doc.get('id', '?')}/{b.get('build_id', '?')}: "
-                        f"activity {act!r} is not an official Armory "
-                        "activity (see out/armory_activities.json)")
-        records += import_records(doc, weapon_lines, spell_index, gear_lines,
-                                  problems) if doc.get("builds") else []
 
     gear_menus = load_gear_menus()
     spell_names = _spell_names(spell_index)

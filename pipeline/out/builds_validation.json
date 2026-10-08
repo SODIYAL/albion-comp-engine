@@ -12,7 +12,7 @@
  "problems": [],
  "promotions": [
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "blackzone_roam",
    "weapon": "2H_ARCANESTAFF"
@@ -54,7 +54,7 @@
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "blackzone_roam",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
@@ -66,7 +66,7 @@
    "weapon": "2H_KNUCKLES_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "blackzone_roam",
    "weapon": "2H_KNUCKLES_SET3"
@@ -90,7 +90,7 @@
    "weapon": "2H_NATURESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "blackzone_roam",
    "weapon": "2H_POLEHAMMER"
@@ -150,49 +150,49 @@
    "weapon": "MAIN_SCIMITAR_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "bomb_squad_10",
    "weapon": "2H_BOW_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "bomb_squad_10",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "bomb_squad_10",
    "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "ganking_smallscale",
    "weapon": "2H_CLAWPAIR"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "ganking_smallscale",
    "weapon": "2H_CROSSBOW"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "ganking_smallscale",
    "weapon": "2H_DUALAXE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "ganking_smallscale",
    "weapon": "2H_DUALCROSSBOW_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "ganking_smallscale",
    "weapon": "2H_QUARTERSTAFF_AVALON"
@@ -204,7 +204,7 @@
    "weapon": "MAIN_FROSTSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_DEMONICSTAFF"
@@ -216,67 +216,67 @@
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_FROSTSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_NATURESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_SCYTHE_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_SHAPESHIFTER_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "2H_SKULLORB_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "hellgate_5v5",
    "weapon": "MAIN_SPEAR_KEEPER"
@@ -444,169 +444,169 @@
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "openworld_tracking_5",
    "weapon": "2H_DAGGERPAIR"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "openworld_tracking_5",
    "weapon": "2H_SCYTHE_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "openworld_tracking_5",
    "weapon": "2H_SHAPESHIFTER_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "openworld_tracking_5",
    "weapon": "MAIN_DAGGER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "openworld_tracking_5",
    "weapon": "MAIN_NATURESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "2H_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "2H_BOW_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "2H_FROSTSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "2H_HAMMER_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "roads",
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_ARCANESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_AXE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_BOW_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_BOW_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_CLEAVER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_CROSSBOWLARGE_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_CROSSBOW_CANNON_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_DUALMACE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_ENIGMATICORB_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_GLAIVE_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_HALBERD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_HALBERD_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_HAMMER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_HARPOON_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_HOLYSTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
@@ -618,85 +618,85 @@
    "weapon": "2H_ICEGAUNTLETS_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_KNUCKLES_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_KNUCKLES_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_KNUCKLES_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_KNUCKLES_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_LONGBOW"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_NATURESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_NATURESTAFF_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_RAM_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_ROCKSTAFF_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_SCYTHE_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "MAIN_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "MAIN_RAPIER_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz",
    "weapon": "MAIN_SCIMITAR_MORGANA"
@@ -714,31 +714,31 @@
    "weapon": "2H_ARCANESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_AXE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_BOW_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_CLAYMORE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_CLEAVER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_CROSSBOWLARGE_MORGANA"
@@ -750,13 +750,13 @@
    "weapon": "2H_CURSEDSTAFF_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_DAGGER_KATAR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_DUALAXE_KEEPER"
@@ -774,61 +774,61 @@
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_FROSTSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_GLAIVE_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_HAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_HAMMER_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_HOLYSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_HOLYSTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_KNUCKLES_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_KNUCKLES_SET3"
@@ -840,13 +840,13 @@
    "weapon": "2H_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_REPEATINGCROSSBOW_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_SCYTHE_CRYSTAL"
@@ -858,31 +858,31 @@
    "weapon": "2H_SHAPESHIFTER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_SHAPESHIFTER_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "2H_SHAPESHIFTER_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_CURSEDSTAFF_AVALON"
@@ -900,7 +900,7 @@
    "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_FROSTSTAFF_AVALON"
@@ -918,295 +918,295 @@
    "weapon": "MAIN_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_MACE_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_NATURESTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_NATURESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_10man",
    "weapon": "MAIN_SWORD_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_ARCANESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_BOW_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_CROSSBOWLARGE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_DUALMACE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_ENIGMATICORB_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_GLAIVE_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_HAMMER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_HOLYSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "2H_KNUCKLES_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_14man",
    "weapon": "MAIN_NATURESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_ARCANESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_ARCANE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_FROSTSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_NATURESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_SHAPESHIFTER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_SHAPESHIFTER_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "2H_SKULLORB_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "MAIN_HAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_15man",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_ARCANESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_AXE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_DUALMACE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_DUALSCIMITAR_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_ENIGMATICORB_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_KNUCKLES_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_KNUCKLES_SET2"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_KNUCKLES_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "2H_ROCKSTAFF_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "MAIN_CURSEDSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "MAIN_DAGGER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "MAIN_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_19man",
    "weapon": "MAIN_NATURESTAFF"
@@ -1254,7 +1254,7 @@
    "weapon": "2H_BOW_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_CLAYMORE_AVALON"
@@ -1272,7 +1272,7 @@
    "weapon": "2H_COMBATSTAFF_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_CROSSBOWLARGE_MORGANA"
@@ -1284,13 +1284,13 @@
    "weapon": "2H_CURSEDSTAFF_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_DAGGER_KATAR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
@@ -1302,7 +1302,7 @@
    "weapon": "2H_DUALAXE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_DUALCROSSBOW_CRYSTAL"
@@ -1350,19 +1350,19 @@
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_FLAIL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_FROSTSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_GLAIVE_CRYSTAL"
@@ -1374,7 +1374,7 @@
    "weapon": "2H_HALBERD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_HAMMER"
@@ -1422,13 +1422,13 @@
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_KNUCKLES_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_KNUCKLES_HELL"
@@ -1482,7 +1482,7 @@
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_QUARTERSTAFF"
@@ -1494,13 +1494,13 @@
    "weapon": "2H_ROCKSTAFF_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_SHAPESHIFTER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_SHAPESHIFTER_CRYSTAL"
@@ -1518,7 +1518,7 @@
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_SKULLORB_HELL"
@@ -1530,7 +1530,7 @@
    "weapon": "2H_TWINSCYTHE_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "2H_WILDSTAFF"
@@ -1572,7 +1572,7 @@
    "weapon": "MAIN_DAGGER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "MAIN_FROSTSTAFF_KEEPER"
@@ -1614,7 +1614,7 @@
    "weapon": "MAIN_NATURESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "MAIN_NATURESTAFF_CRYSTAL"
@@ -1632,13 +1632,13 @@
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "MAIN_SPEAR_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
    "weapon": "MAIN_SPEAR_LANCE_AVALON"
@@ -1650,145 +1650,145 @@
    "weapon": "MAIN_SWORD_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_ARCANESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_AXE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_DUALMACE_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_HAMMER_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_HARPOON_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_HOLYSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_KNUCKLES_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "MAIN_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20v20",
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_COMBATSTAFF_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_CROSSBOW_CANNON_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_DUALAXE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_DUALHAMMER_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_FROSTSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_GLACIALSTAFF"
@@ -1800,31 +1800,31 @@
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_INFERNOSTAFF_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_ROCKSTAFF_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "2H_SHAPESHIFTER_SET3"
@@ -1836,19 +1836,19 @@
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "MAIN_MACE_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "single source family, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "MAIN_SPEAR_LANCE_AVALON"

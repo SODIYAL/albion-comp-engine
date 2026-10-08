@@ -152,10 +152,6 @@ Each is decidable today from evidence already in the repo.
   aggregates, gitignore the raw `builds` array beside the other caches. Not
   done because the raw builds are the evidence. Decide. (V: 08, Observed
   BUILDS)
-- **The Armory import path** (`data/armory_imports/`, `pipeline/parse_armory.py`,
-  `out/armory_activities.json`, the H-test fixture): built, never fed — the
-  Armory has no export and the harvest now supplies the same class of
-  evidence at scale. Keep the door or remove it.
 - **EU server in the harvest**: would double the 25+ corpus but mixes a second
   server's meta into rows meant to describe the maintainer's own fights.
   Review deferred to the date the log entry records. (V: 09b, Coverage, not
