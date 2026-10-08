@@ -1253,9 +1253,9 @@ print("L38 - the engine's read on the sheet: the planner's engine on the roster'
 # handed to it.
 ROSTER_JS = read("_roster.js")
 rr = seg(sdlg, '<details class="rr" id="rr-wrap"', "</details>", "L38 read anchors")
-for rid in ("rr-headline", "rr-note", "rr-needs", "rr-picks", "rr-free", "rr-swaps", "rr-over", "rr-definitions"):
+for rid in ("rr-headline", "rr-note", "rr-needs", "rr-picks", "rr-free", "rr-swaps", "rr-over", "rr-fight", "rr-definitions"):
     check(('id="%s"' % rid) in rr, "L38a the read carries %s" % rid)
-check(rr.count('aria-labelledby="rr-') == 5 and rr.count('class="pw-label" id="rr-') == 5, "L38b each of the five blocks is a labelled section")
+check(rr.count('aria-labelledby="rr-') == 6 and rr.count('class="pw-label" id="rr-') == 6, "L38b each of the six blocks is a labelled section")
 check(sdlg.find('id="rr-wrap"') > sdlg.find('id="su-history-wrap"') and sdlg.find('id="rr-wrap"') < sdlg.find('class="auth-hint su-link-row"'),
       "L38c the read sits in the roster column after the record and before the link")
 check('dispatchEvent(new CustomEvent("sheet-read"' in SIGNUP_JS and 'addEventListener("sheet-read"' in ROSTER_JS,
@@ -1302,6 +1302,14 @@ check("function slotBuild(saved, seat, engine, spells) {" in ROSTER_JS
       "the link, else in the engine's default kit (a naked read put \"Tankiness — needed\" on every forged "
       "comp of 10+); a hard floor reads the weapon and spell supply alone; a CTA saved again is read again "
       "(test_roster)")
+check("function rosterFight(engine, party, combos, gears) {" in ROSTER_JS
+      and "const fight = rosterFight(engine, held.party, hb.combos, hb.gears);" in ROSTER_JS
+      and "engine.fightChain(party, combos, gears, null)" in ROSTER_JS
+      and "engine.roleAdvisory(party, rosterChests(engine, gears))" in ROSTER_JS
+      and "function paintFight(read)" in ROSTER_JS and "they never score" in ROSTER_JS
+      and all(s in AUTH_CSS for s in (".rr-fight{", ".rr-light.bad::before{", ".rr-stage.missing{", ".rr-chip b{")),
+      "L38u the read carries the planner's kill pressure, role check and fight chain of the held slots in their "
+      "builds at their size, styled in _auth.css, descriptive (test_roster)")
 
 print("L38r - the build on the sheet: the planner's saved loadout per slot, named from the page's tables, display only")
 # Phase 12: the build module reads the CTA's share hash (p= and g=, the

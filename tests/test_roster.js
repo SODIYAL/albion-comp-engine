@@ -91,9 +91,13 @@ function stubEngine() {
   const calls = [];
   const copy = a => (a ? a.map(x => (Array.isArray(x) ? x.slice() : x)) : a);
   const eng = {
-    data: { templates: { castle: {}, territory_defense: {} }, styles: { balanced: {}, clap: {} } },
+    data: { templates: { castle: {}, territory_defense: {} }, styles: { balanced: {}, clap: { name: "Clap" } } },
     reqs: { tankiness: { weight: 6 }, heal_sustain: { weight: 7 }, burst_aoe: { weight: 5 }, mobility: { weight: 2 } },
-    gear: { HEAD_PLATE_SET2: {}, ARMOR_CLOTH_SET1: {}, OFF_SHIELD: {} },
+    gear: { HEAD_PLATE_SET2: { slot: "head" }, ARMOR_CLOTH_SET1: { slot: "armor" }, OFF_SHIELD: { slot: "offhand" } },
+    rolesBook: { engage_tank: { name: "Engage tank / initiator" }, main_healer: { name: "Main healer (group)" } },
+    killPressure(party, combos, gears) { calls.push(["killPressure", party.slice(), copy(combos), copy(gears)]); return { pierce: { ok: true, have: 3, bar: 2 }, heal_cut: { ok: false, have: 1, bar: 4 }, burst: { ok: true, have: 0, bar: 0 } }; },
+    roleAdvisory(party, chests) { calls.push(["roleAdvisory", party.slice(), Object.assign({}, chests)]); return { members: [], tally: { engage_tank: 1, main_healer: 2, dps: 1 }, flags: [{ kind: "off_role_kit", weapon: "2H_LONGBOW", role: "main_healer" }, { kind: "no_engage_tank" }] }; },
+    fightChain(party, combos, gears, candidate) { calls.push(["fightChain", party.slice(), copy(combos), copy(gears), candidate]); return { style: "clap", stages: [{ name: "Clump", verdict: "strong", have: 5, bar: 4, caps: ["clump_create"] }, { name: "Burst", verdict: "weak", have: 1, bar: 6, caps: ["burst_aoe"] }], improves: null }; },
     size: 0, content: null, style: null,
     setContent(content, size, style) { calls.push(["setContent", content, size, style]); this.content = content; this.size = size; this.style = style; },
     kitVariants(w) { return [["v0", ["KIT_" + w]]]; },
@@ -178,9 +182,31 @@ function stubEngine() {
   check("with the planner's table the label is its short title", run("rosterCapLabel")("heal_sustain") === "Sustain healing" && run("rosterCapLabel")("burst_aoe") === "Burst aoe");
   delete ctx.CAP_LABEL;
 
+  /* the planner's three descriptive reads, on the held roster in its builds at its size */
+  const kp = calls.find(c => c[0] === "killPressure"), fc = calls.find(c => c[0] === "fightChain"), ra = calls.find(c => c[0] === "roleAdvisory");
+  check("kill pressure and the fight chain read the held party in its builds; the chain asks for no candidate",
+        kp && same(kp[1], ["MAIN_MACE_HELL", "2H_HAMMER", "2H_LONGBOW"]) && same(kp[3], heldKits) && same(kp[2], [null, null, null])
+        && fc && same(fc[1], kp[1]) && same(fc[3], heldKits) && fc[4] === null, { kp, fc });
+  const order = calls.map(c => c[0] === "setContent" ? `set${c[2]}` : c[0]).filter(x => /^set|killPressure|fightChain|roleAdvisory/.test(x));
+  check("the three reads are taken at the held size, before the engine moves one ahead for the picks",
+        same(order.slice(0, 4), ["set3", "killPressure", "roleAdvisory", "fightChain"]), order);
+  check("the role check reads no chest for a seat whose build carries none the gear table files under armor", ra && same(ra[2], {}), ra);
+  check("the kill lights: covered, a share of the bare minimum, a light with no bar covered",
+        same(read.fight.kill.map(k => `${k.key}:${k.ok}:${k.pct}`), ["pierce:true:150", "heal_cut:false:25", "burst:true:100"])
+        && same(read.fight.kill.map(k => k.label), ["Pierce", "Anti-heal", "Burst"]), read.fight.kill);
+  check("the role check: the tally in the role book's names without their parenthetical, both halves of a paired name kept, a class standing for itself, the flags with their role",
+        same(read.fight.roles.tally.map(t => `${t.n} ${t.name}`), ["1 Engage tank / initiator", "2 Main healer", "1 dps"])
+        && same(read.fight.roles.flags.map(f => `${f.kind}:${f.weapon}:${f.roleName}`), ["off_role_kit:2H_LONGBOW:Main healer", "no_engage_tank:null:"]), read.fight.roles);
+  check("the fight chain: the style's name and every stage with its verdict and bar",
+        read.fight.chain.styleName === "Clap" && same(read.fight.chain.stages.map(s => `${s.name}:${s.verdict}:${s.have}/${s.bar}`), ["Clump:strong:5/4", "Burst:weak:1/6"]), read.fight.chain);
+  const lean = Object.assign({}, eng, { killPressure: undefined, roleAdvisory: undefined, fightChain: undefined });
+  const leanRead = run("rosterRead")(EVENT, board, lean);
+  check("an engine without the three reads leaves them out", leanRead && same(leanRead.fight.kill, []) && leanRead.fight.roles === null && leanRead.fight.chain === null, leanRead && leanRead.fight);
+
   const empty = run("rosterRead")(EVENT, run("sheetBoard")(SLOTS, []), eng);
   check("nothing held: coverage zero, the picks still one ahead of an empty party, the plan beside it",
         empty.held.count === 0 && empty.held.coverage === 0 && empty.picks.length === 2 && empty.plan.count === 5 && empty.replacements.length === 0 && empty.duplicates.length === 0);
+  check("nothing held: no kill pressure, role check or chain", empty.fight === null);
   check("a dataset without templates gives no read", run("rosterRead")(EVENT, board, Object.assign({}, eng, { data: { templates: {} } })) === null);
 }
 
@@ -217,6 +243,9 @@ function stubEngine() {
   check("the read counts the slots read in a saved build, and says so",
         read.held.saved === 2 && /^2 held slots are read in the build the CTA's comp saved, 3 in the engine's default kit/.test(run("rosterBuildsNote")(read)),
         run("rosterBuildsNote")(read));
+  const ra = calls.find(c => c[0] === "roleAdvisory");
+  check("the role check reads each seat's worn chest: the piece of its build the gear table files under armor",
+        ra && same(ra[2], { 0: "ARMOR_CLOTH_SET1", 1: "ARMOR_CLOTH_SET1" }), ra);
   const none = stubEngine();
   run("rosterRead")(event, run("sheetBoard")(slots, signups), none.eng);
   const bare = none.calls.find(c => c[0] === "fitness" && c[1].length === 5);
@@ -278,6 +307,8 @@ function stubEngine() {
   check("the verdicts and the filler words are named through one map each", run("ROSTER_VERDICTS").ok === "closes a gap" && run("ROSTER_FILLER_HOW").secondary === "can also play");
   check("the definitions say the sheet's people are never scored, and which build a slot is read in",
         /never scored/.test(run("ROSTER_DEFINITIONS")) && /saved for its slot, else in the engine's default kit/.test(run("ROSTER_DEFINITIONS")));
+  check("the definitions say kill pressure, the role check and the fight chain never score",
+        /Kill pressure, the role check and the fight chain are the planner's descriptive reads of the held slots: they never score/.test(run("ROSTER_DEFINITIONS")));
 }
 
 /* 5 - the real engine on the dataset: the read's shape on the planner's rules */
@@ -358,6 +389,15 @@ function stubEngine() {
   check("the forge's saved link reads what the planner reads: every slot in its saved build, the planner's fitness, no tankiness need",
         savedRead.held.saved === 20 && Math.abs(savedRead.held.fitness - plannerFit) < 1e-9 && !neededOf(savedRead).includes("tankiness"),
         { saved: savedRead.held.saved, fitness: savedRead.held.fitness, plannerFit, needed: neededOf(savedRead) });
+  const plannerKp = eng.killPressure(forged.party, forged.combos, forged.gears);
+  const plannerFc = eng.fightChain(forged.party, forged.combos, forged.gears, null);
+  check("the forge's saved link reads the planner's kill pressure and fight chain",
+        savedRead.fight && same(savedRead.fight.kill.map(k => [k.ok, +k.have.toFixed(9), +k.bar.toFixed(9)]),
+                                ["pierce", "heal_cut", "burst"].map(k => [plannerKp[k].ok, +plannerKp[k].have.toFixed(9), +plannerKp[k].bar.toFixed(9)]))
+        && same(savedRead.fight.chain.stages.map(s => `${s.name}:${s.verdict}`), plannerFc.stages.map(s => `${s.name}:${s.verdict}`)),
+        savedRead.fight && { kill: savedRead.fight.kill, chain: savedRead.fight.chain && savedRead.fight.chain.stages.map(s => s.name) });
+  check("the role check counts every held seat once",
+        savedRead.fight.roles && savedRead.fight.roles.tally.reduce((n, t) => n + t.n, 0) === 20, savedRead.fight.roles);
   const swapped = forged.party.find(w => w !== forged.party[0]);
   const changed = run("rosterRead")(Object.assign({}, fEvent, { share_hash: share }),
                                     run("sheetBoard")(fSlots.map(s => s.position === 1 ? { position: 1, weapon_id: swapped } : s), fSignups), eng, codec);

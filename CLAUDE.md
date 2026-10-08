@@ -228,7 +228,8 @@ Three applications with explicit boundaries (each directory's README is its cont
   remembered names, uncertain ones reviewed; a comp and the history out
   as CSV) and the engine's read on the sheet (`_roster.js`: its own
   `CompEngine` on the held slots' weapon keys; needs, next picks, open
-  slots with who can fill them, replacements, overstack; display only)
+  slots with who can fill them, replacements, overstack, kill pressure,
+  the role check and the fight chain; display only)
   now; integrations next
   (`notes/specs/2026-09-28-player-platform-design.md`).
 

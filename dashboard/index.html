@@ -2678,6 +2678,27 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .rr-depth{opacity:.8}
 .rr-over .gd-name, .rr-dup-high .gd-name, .rr-dup-warning .gd-name{color:var(--amber)}
 .rr-dup-verify .gd-name, .rr-dup-info .gd-name{color:var(--ink-2)}
+/* kill pressure, roles and the fight chain: the planner's palette (_decision_layer.css) */
+.rr-fight{display:flex; flex-direction:column; gap:4px; padding:3px 0; font-size:var(--fs-body)}
+.rr-fight-row{display:grid; grid-template-columns:minmax(96px, max-content) 1fr; align-items:start; gap:4px 10px}
+.rr-fight-k{padding-top:2px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-3)}
+.rr-fight-v{display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; min-width:0}
+.rr-light{display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:var(--fs-meta)}
+.rr-light::before{content:""; width:8px; height:8px; border-radius:50%; flex:none}
+.rr-light.ok{color:var(--ink-2)}
+.rr-light.ok::before{background:var(--ok-bright)}
+.rr-light.bad{color:var(--gap)}
+.rr-light.bad::before{background:var(--gap)}
+.rr-chip{padding:1px 7px; border:1px solid var(--rule-2); border-radius:99px; font-family:var(--mono); font-size:var(--fs-meta); color:var(--ink-2)}
+.rr-chip b{color:var(--brass); font-weight:600}
+.rr-flag{font-size:var(--fs-meta); color:var(--amber)}
+.rr-stage{padding:1px 7px; border-radius:99px; font-family:var(--mono); font-size:var(--fs-meta); white-space:nowrap; cursor:default}
+.rr-stage.strong{color:var(--ok-bright); border:1px solid rgba(35,191,110,.3); background:rgba(35,191,110,.08)}
+.rr-stage.ok{color:var(--ink-2); border:1px solid var(--rule-2); background:var(--sunk)}
+.rr-stage.weak{color:var(--amber); border:1px solid rgba(232,160,19,.3); background:rgba(232,160,19,.07)}
+.rr-stage.missing{color:var(--gap); border:1px solid rgba(255,84,112,.35); background:var(--gap-wash)}
+.rr-stage.quiet{color:var(--ink-3); border:1px dashed var(--rule); opacity:.7}
+.rr-arrow{font-size:var(--fs-meta); color:var(--ink-3)}
 .rr-definitions{margin-top:8px; padding-top:6px; border-top:1px solid var(--rule)}
 .su-status-row[hidden], .su-controls[hidden]{display:none}
 
@@ -3206,6 +3227,10 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
             <section class="rr-block" aria-labelledby="rr-over-label">
               <h4 class="pw-label" id="rr-over-label">Overstack and duplicates</h4>
               <ul class="rr-list" id="rr-over"></ul>
+            </section>
+            <section class="rr-block rr-block-wide" aria-labelledby="rr-fight-label">
+              <h4 class="pw-label" id="rr-fight-label">Kill pressure, roles and the fight chain</h4>
+              <div class="rr-fight" id="rr-fight"></div>
             </section>
           </div>
           <p class="auth-hint rr-definitions" id="rr-definitions"></p>
@@ -23390,6 +23415,11 @@ const ROSTER_VERDICTS = { ok: "closes a gap", redundant: "a depth pick", negativ
 const ROSTER_FILLER_HOW = { declared: "declared", main: "main", secondary: "can also play", swap: "can swap" };
 const ROSTER_FILLER_ORDER = ["declared", "main", "secondary", "swap"];
 
+/* the kill-pressure lights in the planner's names, and the fight chain's
+   stage verdicts in words */
+const ROSTER_KILL = [["pierce", "Pierce"], ["heal_cut", "Anti-heal"], ["burst", "Burst"]];
+const ROSTER_STAGE = { strong: "strong", ok: "ok", weak: "under the bare minimum", missing: "missing", quiet: "not asked here" };
+
 
 /* a capability in the planner's words: its short title, else its prose,
    else the key (the planner's tables are read when the page has them) */
@@ -23530,9 +23560,63 @@ function rosterOverstack(engine, party, combos, gears) {
 }
 
 
+/* {seat index: chest key}: the piece of each seat's build the gear table
+   files under armor (the role check reads the chest a member wears) */
+function rosterChests(engine, gears) {
+  const db = engine.gear || {};
+  const out = {};
+  (gears || []).forEach((g, i) => {
+    const chest = (g || []).find(k => (db[k] || {}).slot === "armor");
+    if (chest) out[i] = chest;
+  });
+  return out;
+}
+
+
+/* a role's name from the role book without its parenthetical ("Main /
+   Clump Healer", "Pierce"): both halves of a paired name stay, since
+   "Main" alone does not say healer; a class standing in for a role
+   (dps) reads as itself */
+function rosterRoleName(engine, role) {
+  const name = (((engine && engine.rolesBook) || {})[role] || {}).name || String(role || "");
+  return name.split(" (")[0];
+}
+
+
+/* The planner's three descriptive reads of the held roster, in its builds
+   at its size: the kill-pressure lights (pierce, anti-heal, burst against
+   the content's bare minimums), the role check (who is in the comp, and
+   the warnings the role book raises) and the fight chain (the stages of
+   the playstyle's fight, each graded). They translate engine output and
+   never score; an engine without one of them leaves it out. */
+function rosterFight(engine, party, combos, gears) {
+  if (!party || !party.length) return null;
+  const kp = typeof engine.killPressure === "function" ? engine.killPressure(party, combos, gears) : null;
+  const kill = kp ? ROSTER_KILL.map(([key, label]) => {
+    const l = kp[key] || {};
+    const have = l.have || 0, bar = l.bar || 0;
+    return { key, label, ok: !!l.ok, have, bar, pct: bar > 0 ? Math.round(100 * have / bar) : 100 };
+  }) : [];
+  const adv = typeof engine.roleAdvisory === "function" ? engine.roleAdvisory(party, rosterChests(engine, gears)) : null;
+  const roles = adv ? {
+    tally: Object.entries(adv.tally || {}).map(([role, n]) => ({ role, name: rosterRoleName(engine, role), n })),
+    flags: (adv.flags || []).map(f => ({ kind: f.kind, weapon: f.weapon || null, role: f.role || null,
+                                         roleName: f.role ? rosterRoleName(engine, f.role) : "" }))
+  } : null;
+  const fc = typeof engine.fightChain === "function" ? engine.fightChain(party, combos, gears, null) : null;
+  const chain = fc && (fc.stages || []).length ? {
+    style: fc.style,
+    styleName: ((((engine.data || {}).styles || {})[fc.style]) || {}).name || fc.style,
+    stages: fc.stages.map(s => ({ name: s.name, verdict: s.verdict, have: s.have || 0, bar: s.bar || 0, caps: s.caps || [] }))
+  } : null;
+  return { kill, roles, chain };
+}
+
+
 /* The read: the held roster judged at its own size in its builds, the
    next picks one body ahead, the seats a swap improves, the overstack
-   and the duplicate checks; the plan's coverage beside it when the plan
+   and the duplicate checks, the kill pressure, the role check and the
+   fight chain; the plan's coverage beside it when the plan
    is bigger than what is held. tables: the planner's codec and spell
    pools ({ loadout, combo, spells }) the saved builds are read through;
    without them every seat reads the default kit. The engine is left at
@@ -23575,6 +23659,7 @@ function rosterRead(event, board, engine, tables) {
     offComp: !!s.off_comp, offStyle: !!s.off_style,
     options: (s.options || []).slice(0, ROSTER_SWAP_OPTIONS).map(o => ({ weapon: o.weapon, gain: o.gain }))
   }));
+  const fight = rosterFight(engine, held.party, hb.combos, hb.gears);
 
   /* the next pick one body ahead, the held seats in the builds they were
      read in (the planner holds a member's kit while it prices a pick) */
@@ -23598,7 +23683,7 @@ function rosterRead(event, board, engine, tables) {
   return {
     content: ctx.content, style: ctx.style, knownContent: ctx.known, size,
     held: { count: held.party.length, seats: held.seats, fitness, max, coverage: max ? fitness / max : 0, saved: hb.saved },
-    needs, over, duplicates, picks, replacements, plan, unknown
+    needs, over, duplicates, picks, replacements, plan, unknown, fight
   };
 }
 
@@ -23702,7 +23787,8 @@ function rosterHeadline(read, board, catalog) {
 
 const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at their number (a slot naming no weapon counts its player's first declared weapon), "
   + "each in the build the CTA's comp saved for its slot, else in the engine's default kit for the weapon (what winners wear in its seat); "
-  + "the next pick is judged one body ahead. Who signed up, what they declared and what members play are shown beside the engine's needs, never scored. "
+  + "the next pick is judged one body ahead. Kill pressure, the role check and the fight chain are the planner's descriptive reads of the held slots: they never score. "
+  + "Who signed up, what they declared and what members play are shown beside the engine's needs, never scored. "
   + "The same engine and rules as the planner: open the CTA in the planner for the full read.";
 
 
@@ -23731,6 +23817,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     free: $id("rr-free"),
     swaps: $id("rr-swaps"),
     over: $id("rr-over"),
+    fight: $id("rr-fight"),
     definitions: $id("rr-definitions")
   };
   el.definitions.textContent = ROSTER_DEFINITIONS;
@@ -23909,6 +23996,74 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     else el.over.replaceChildren(...rows);
   }
 
+  function span(cls, text, title) {
+    const s = document.createElement("span");
+    if (cls) s.className = cls;
+    s.textContent = text;
+    if (title) s.title = title;
+    return s;
+  }
+
+  /* a labelled row; its values wrap in their own column */
+  function fightRow(label) {
+    const row = document.createElement("div");
+    row.className = "rr-fight-row";
+    const vals = document.createElement("div");
+    vals.className = "rr-fight-v";
+    row.append(span("rr-fight-k", label), vals);
+    row.vals = vals;
+    return row;
+  }
+
+  function flagText(f) {
+    if (f.kind === "no_engage_tank") return "no engage tank: nobody makes a clump";
+    const who = f.weapon ? weaponInfo(CATALOG, f.weapon).name : "a member";
+    return `${who}: the worn chest fights its ${(f.roleName || "seat").toLowerCase()} job`;
+  }
+
+  function paintFight(read) {
+    const f = read.fight;
+    if (!read.held.count || !f) { el.fight.replaceChildren(span("gd-none", "Nothing held yet.")); return; }
+    const rows = [];
+    if (f.kill.length) {
+      const row = fightRow("Kill pressure");
+      for (const k of f.kill) {
+        row.vals.append(span(`rr-light ${k.ok ? "ok" : "bad"}`, k.ok ? `${k.label} covered` : `${k.label} ${k.pct}%`,
+          `${k.have.toFixed(1)} of a bare minimum of ${k.bar.toFixed(1)}`));
+      }
+      rows.push(row);
+    }
+    if (f.roles && (f.roles.tally.length || f.roles.flags.length)) {
+      const row = fightRow("Roles");
+      for (const t of f.roles.tally) {
+        const chip = span("rr-chip", "");
+        const n = document.createElement("b");
+        n.textContent = String(t.n);
+        chip.append(n, ` ${t.name}`);
+        row.vals.append(chip);
+      }
+      rows.push(row);
+      for (const fl of f.roles.flags) {
+        const warn = fightRow("");
+        warn.vals.append(span("rr-flag", `⚠ ${flagText(fl)}`));
+        rows.push(warn);
+      }
+    }
+    if (f.chain) {
+      const row = fightRow(`Fight chain · ${f.chain.styleName}`);
+      f.chain.stages.forEach((s, i) => {
+        if (i) row.vals.append(span("rr-arrow", "→"));
+        const caps = s.caps.map(rosterCapLabel).join(", ");
+        row.vals.append(span(`rr-stage ${s.verdict}`, s.name, s.bar > 0
+          ? `${s.name}: ${ROSTER_STAGE[s.verdict] || s.verdict} · ${s.have.toFixed(1)} of ${s.bar.toFixed(1)} (${caps})`
+          : `${s.name}: ${ROSTER_STAGE.quiet}`));
+      });
+      rows.push(row);
+    }
+    if (!rows.length) rows.push(span("gd-none", "The engine reads nothing to show here."));
+    el.fight.replaceChildren(...rows);
+  }
+
   function paint(read, board) {
     const pool = rosterPool(board, members.rows);
     el.headline.textContent = rosterHeadline(read, board, CATALOG);
@@ -23929,6 +24084,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     paintFree(read, board, pool);
     paintSwaps(read);
     paintOver(read);
+    paintFight(read);
   }
 
   /* the guild's members with their lists, once per guild, for a member; a

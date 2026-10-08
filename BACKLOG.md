@@ -476,11 +476,6 @@ the live roster, on the sheet) are built.
   over the target comp, the players' declared weapons and their
   preferences: the first place a player's preference would meet the
   engine, a logged decision).
-- **The engine read's role check and kill pressure**: the sheet's read
-  lists needs, picks, open slots, replacements and overstack; the
-  planner's role advisory, kill-pressure lights and fight chain are a
-  later increment on the sheet if callers ask for them (open the CTA in
-  the planner meanwhile).
 - **The engine read on the CTAs and comps dialogs**: the read runs on
   the sheet alone; a draft CTA or a saved comp is read through "Open in
   planner".

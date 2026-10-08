@@ -299,7 +299,13 @@ and its tests: `supabase/README.md`.
   the biggest needs (the planner's gap cut; a hard floor unmet or a
   heavy capability under half marked needed), the next picks one body
   ahead with their verdict, the held seats a swap improves
-  (`swapReview`), what sits past its soft cap and the duplicate checks;
+  (`swapReview`), what sits past its soft cap and the duplicate checks,
+  and the planner's three descriptive reads of the held slots in their
+  builds at their number: the kill-pressure lights (`killPressure`:
+  pierce, anti-heal and burst against the content's bare minimums), the
+  role check (`roleAdvisory` on each seat's worn chest: the tally and
+  the role book's warnings) and the fight chain (`fightChain`: the
+  playstyle's stages, each graded), none of which scores;
   the plan's coverage beside it when the plan is bigger than what is
   held. The open slots of the plan are listed with the engine's rank
   for their weapon, and beside every pick and open slot who can bring
