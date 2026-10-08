@@ -276,7 +276,7 @@ function setUsage(baskets) {
    this mapping being stable (the fitness cache key embeds it). */
 {
   const mg = SRC.match(
-    /function gearsFromLoadout\(lo, gearDb\)\{\n[\s\S]*?\n\}/);
+    /function gearsFromLoadout\(lo, gearDb(?:, weapon)?\)\{\n[\s\S]*?\n\}/);
   if (!mg) throw new Error("could not extract gearsFromLoadout from _app.js");
   vm.runInContext(mg[0], ctx);
   const GEAR_FIX = JSON.stringify({ HEAD_CLOTH_SET2: 1, ARMOR_PLATE_SET2: 1 });
@@ -293,6 +293,14 @@ function setUsage(baskets) {
       gearsFromLoadout({ shoes: "SHOES_NOT_CURATED" }, ${GEAR_FIX})]`);
   check("gearsFromLoadout: empty/uncurated -> null",
         empties.every(v => v === null), JSON.stringify(empties));
+  /* a two-handed weapon wears no off-hand: one stored by an old link is
+     never handed to the engine; a one-handed weapon's is */
+  const OH_FIX = JSON.stringify({ ARMOR_PLATE_SET2: 1, OFF_SHIELD: 1 });
+  const twoHanded = run(`JSON.stringify(gearsFromLoadout({ armor: "ARMOR_PLATE_SET2", offhand: "OFF_SHIELD" }, ${OH_FIX}, "2H_MACE"))`);
+  const oneHanded = run(`JSON.stringify(gearsFromLoadout({ armor: "ARMOR_PLATE_SET2", offhand: "OFF_SHIELD" }, ${OH_FIX}, "MAIN_MACE"))`);
+  check("gearsFromLoadout scores no off-hand on a two-handed weapon, and a one-handed weapon's",
+        twoHanded === JSON.stringify(["ARMOR_PLATE_SET2"]) && oneHanded === JSON.stringify(["ARMOR_PLATE_SET2", "OFF_SHIELD"]),
+        twoHanded + " / " + oneHanded);
 }
 
 /* ---- capability-ring geometry -------------------------------------------

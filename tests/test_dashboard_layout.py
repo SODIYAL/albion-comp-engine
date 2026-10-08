@@ -1534,6 +1534,38 @@ check("PARTIES = partiesNow().map(dropForged);" in APP and "WHO: keep.map(i => (
 check('return key !== "t" && !/^[npgfk][1-9][0-9]?$/.test(key);' in COMPS_JS,
       "L43h a comp or CTA saved from a zerg keeps the open party's address alone (test_comps)")
 
+print("L44 - the planner core: no dead control, no stale state")
+check('matchMedia("(max-width:960px), (hover: none)")' in APP
+      and "@media (max-width:960px), (hover: none){" in SHELL
+      and "@media (min-width:961px) and (hover: hover){ .epanel .wf-comp .dm-pop{display:none} }" in SHELL,
+      "L44a a touch-only screen of any width (an iPad in landscape) opens the member sheet; the hover "
+      "flyout and the hidden popover left its member tiles doing nothing")
+_ev = seg(APP, "function renderEvidence(cap){", "function renderMetaStrip(){", "L44 evidence anchors")
+check("Number.isFinite(tgt)" in _ev and "target(cap).toFixed" not in _ev,
+      "L44b a capability with no target at this size explains itself in the drawer; the missing "
+      "target used to throw and leave the drawer under the wrong title")
+check('PROV[si] = PROV[si] === "l" ? "l" : "m";' in APP,
+      "L44c swap advice keeps a lock, as the replace list does")
+check("if (REPLACE_OPEN !== null && REPLACE_SIG !== replaceSig()){ REPLACE_OPEN = null; REPLACE_OPTS = []; }" in APP
+      and "REPLACE_SIG = replaceSig();" in APP,
+      "L44d the replace list closes once the roster, its kits, the plan, the content or the style "
+      "it was computed for changes: a stale option is never offered or landed")
+_lh = seg(APP, "function loadHash(){", "function sheetView(){", "L44 load anchors")
+check("LIVE_SYNC = false; LIVE_GUIDS = null; LIVE_PARTY = null;" in _lh,
+      "L44e a loaded link stops the live sync (the game party no longer maps onto it), and a "
+      "disconnect hides its box")
+check("function applyForgeResult(r, keptStored, keptLoadouts, keptProv, note, keptWho){" in APP
+      and APP.count("keep.map(i => WHO[i])") == 2,
+      "L44f a forge keeps the sign-up names on the members it keeps; forged slots carry none")
+check("const rec = (RECS_CUR || []).find(r => r.w === w" in APP and "loadoutApplySpells(at, rec.combo);" in APP,
+      "L44g a recommended pick lands in the build its card priced (its best spells and doctrine kit)")
+check("LO_SLOTS.filter(s => loSlotOpen(w, s))" in APP and "LO_SLOTS.filter(s => loSlotOpen(party[i], s))" in read("_loadout.js")
+      and 'slots[i] === "offhand" && String(weapon || "").startsWith("2H_")' in APP,
+      "L44h a two-handed weapon is never offered an off-hand, and one stored by an old link is never "
+      "scored (test_display_math)")
+check("${party.length}/${Math.max(PLAN(), party.length)}" in APP,
+      "L44i the copied comp text reads the members against the plan, never n/n")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

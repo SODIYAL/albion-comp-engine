@@ -68,20 +68,21 @@ function syncEngine(){
      the worn pieces. Gear edits re-render,
      and render() lands here, so this stays fresh. */
   GEARS_CUR = party.map((_, i) =>
-    gearsFromLoadout(typeof LOADOUT !== "undefined" ? LOADOUT[i] : null));
+    gearsFromLoadout(typeof LOADOUT !== "undefined" ? LOADOUT[i] : null, undefined, party[i]));
 }
 /* LOADOUT entry -> engine gears list: CURATED pieces only (uncurated
    picker items carry no capabilities and would churn the cache key),
    fixed slot order, null when nothing curated is equipped. `gearDb`
    is injectable for the node test; the page uses the engine's curated
    catalog. */
-function gearsFromLoadout(lo, gearDb){
+function gearsFromLoadout(lo, gearDb, weapon){
   const db = gearDb || ENG.gear;
   if (!lo) return null;
   const out = [];
   const slots = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
   for (let i = 0; i < slots.length; i++)
-    if (lo[slots[i]] && db[lo[slots[i]]]) out.push(lo[slots[i]]);
+    if (lo[slots[i]] && db[lo[slots[i]]] && !(slots[i] === "offhand" && String(weapon || "").startsWith("2H_")))
+      out.push(lo[slots[i]]);
   return out.length ? out : null;
 }
 /* The loadout combo actually scored for member i: an explicit stored combo
@@ -581,6 +582,10 @@ function loadHash(){
   }
   PARTIES = parties;
   partyLoad(parties[PARTY_I]);
+  /* a loaded link is another comp: the game party no longer maps onto it */
+  LIVE_SYNC = false; LIVE_GUIDS = null; LIVE_PARTY = null;
+  const cbSync = document.getElementById("companion-sync"); if (cbSync) cbSync.checked = false;
+  const syncBox = document.getElementById("companion-sync-wrap"); if (syncBox) syncBox.hidden = true;
   FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   REPLACE_OPEN = null; REPLACE_OPTS = [];
@@ -669,6 +674,11 @@ let FORGE_NOTE = null;
    signature, so "refresh" walks the next-best alternatives instead of
    repeating (deterministic — the forge takes the list, never a seed). */
 let REPLACE_OPEN = null, REPLACE_OPTS = [];
+/* what the open replace list was computed for: any change of the roster,
+   its kits, the plan, the content or the style closes it (render), so a
+   stale option is never offered or landed */
+let REPLACE_SIG = "";
+const replaceSig = () => JSON.stringify([party, PROV, COMBO, LOADOUT, CONTENT, STYLE, PLANNED]);
 /* the replace block's own search: any weapon by name, beside the ranked list */
 let REPLACE_QUERY = "";
 let AVOID = [], AVOID_SIG = "";
@@ -1100,7 +1110,7 @@ function pdashKitHtml(i, roleTxt){
   /* every gear slot is a button: a worn piece opens its picker, an empty
      slot offers one — the flyout is the kit editor, no kit button needed */
   const pickingSlot = LO_PICKING && LO_PICKING.i === i ? LO_PICKING.slot : null;
-  const gear = LO_SLOTS.map(s => L[s]
+  const gear = LO_SLOTS.filter(s => loSlotOpen(w, s)).map(s => L[s]
     ? `<button class="pf-g${pickingSlot === s ? " on" : ""}" data-lo-pick="${i}:${s}" title="${esc(loName(L[s]) + loAbilityTip(L[s]))} — click to change the ${esc(LO_SLOT_LABEL[s].toLowerCase())}">${loArt(L[s], 30)}<span>${esc(loName(L[s]))}</span></button>`
     : `<button class="pf-g empty${pickingSlot === s ? " on" : ""}" data-lo-pick="${i}:${s}" title="pick a ${esc(LO_SLOT_LABEL[s].toLowerCase())}"><span class="lo-empty"></span><span>${esc(LO_SLOT_LABEL[s])}</span></button>`).join("");
   const gearPicker = pickingSlot && LO_SLOTS.includes(pickingSlot) ? loPickerGrid() : "";
@@ -2664,11 +2674,17 @@ function renderEvidence(cap){
       <td class="mono" style="font-size:11px;color:var(--ink-3)">${r.w}</td></tr>`;
   });
   const have = supply(party)[cap] || 0;
+  /* a ramp or "none" row sets no target at this size: say so, never read
+     a missing number */
+  const tgt = target(cap), soft = softCap(cap);
+  const of = Number.isFinite(tgt)
+    ? `of ${tgt.toFixed(1)} typical${Number.isFinite(soft) ? ` (ceiling ${soft.toFixed(1)})` : ""}`
+    : `(this content sets no target for it at ${SIZE})`;
   $("drawer-title").textContent = capLabel(cap);
   $("drawer-body").innerHTML = rows.length
-    ? `<p class="fn">The board counts <b>${have.toFixed(1)}</b> units of ${target(cap).toFixed(1)} typical (ceiling ${softCap(cap).toFixed(1)}): each member's equipped spells and worn pieces with their sheet scores, and the units the engine counts for the member (the count-once rule applies across members).</p>
+    ? `<p class="fn">The board counts <b>${have.toFixed(1)}</b> units ${of}: each member's equipped spells and worn pieces with their sheet scores, and the units the engine counts for the member (the count-once rule applies across members).</p>
       <table class="ev-tbl"><thead><tr><th>Member</th><th>Counted from · sheet score</th><th>Units</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<p class="ev-empty">No member supplies <span class="mono">${esc(capLabel(cap))}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+    : `<p class="ev-empty">No member supplies <span class="mono">${esc(capLabel(cap))}</span>. Supply is 0 ${Number.isFinite(tgt) ? `of ${tgt.toFixed(1)} units` : of}.</p>`;
   $("drawer").dataset.open = "true";
   closePdash();   /* the dash overlays the drawer — never show both */
 }
@@ -2768,6 +2784,7 @@ function renderCompanion(live, err){
   if (!companionOn){
     status.hidden = true; members.innerHTML = ""; load.hidden = true;
     connect.textContent = "connect live party";
+    const syncBox = $("companion-sync-wrap"); if (syncBox) syncBox.hidden = true;
     return;
   }
   connect.textContent = "disconnect";
@@ -2983,12 +3000,15 @@ function toggleCompanion(){
    the chosen doctrine-kit variant, part of the score), marked as engine
    picks, the caller reference filling only what the search left unset,
    spells from the combo the forge scored. */
-function applyForgeResult(r, keptStored, keptLoadouts, keptProv, note){
+function applyForgeResult(r, keptStored, keptLoadouts, keptProv, note, keptWho){
   const fixed = keptProv.length;
   party = r.party.slice();
   COMBO = keptStored.slice();
   LOADOUT = keptLoadouts.slice();
   PROV = keptProv.slice();
+  /* the sign-up names stay on the members kept; forged slots carry none */
+  WHO = (keptWho || []).slice(0, fixed);
+  SHEET_OPEN = null;
   for (let i = fixed; i < party.length; i++){
     PROV[i] = "f";
     COMBO[i] = r.combos[i];
@@ -3040,7 +3060,7 @@ function refreshUnlocked(holdIndex){
   const lockedProv = keep.map(() => "l");
   /* the forge evaluates the roster the board shows: on-screen kits ride
      as locked_gears; a member with no curated piece stays naked */
-  const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i]));
+  const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i], undefined, party[i]));
   const forgeSize = Math.max(goal, locked.length);
   const sig = lockSignature(locked, forgeSize);
   if (sig !== AVOID_SIG){ AVOID = []; AVOID_SIG = sig; }
@@ -3058,9 +3078,10 @@ function refreshUnlocked(holdIndex){
     return;
   }
   AVOID.push(r.party.slice());
-  applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, {});
+  applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, {}, keep.map(i => WHO[i]));
 }
 function render(){
+  if (REPLACE_OPEN !== null && REPLACE_SIG !== replaceSig()){ REPLACE_OPEN = null; REPLACE_OPTS = []; }
   syncEngine(); saveHash();
   const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
   RECS_CUR = recs;
@@ -3075,7 +3096,7 @@ function render(){
 function plannerCompText(){
   const sn = styleName();
   const lines = [
-    `**${tpl().name}${sn ? " · " + sn : ""}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
+    `**${tpl().name}${sn ? " · " + sn : ""}** — ${party.length}/${Math.max(PLAN(), party.length)} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
     Object.entries(roleCounts()).sort((a,b) => b[1]-a[1]).map(([r,n]) => `${n} ${r}`).join(" · "),
     "",
   ];
@@ -3182,11 +3203,13 @@ document.addEventListener("click", e => {
     if (loInFly) PDASH_KIT = LO_OPEN !== null;
     render(); return;
   }
-  /* member bottom sheet (≤960 only — desktop keeps the hover popover).
+  /* member bottom sheet (phones, and touch-only screens of any width: an
+     iPad in landscape has no hover, so neither the hover flyout nor the
+     popover reaches it; a mouse keeps the hover surfaces).
      data-member sits on the CARD; the popover is its sibling, so taps on
      the sheet's own kit/dossier/remove buttons never re-toggle it */
   const mem = e.target.closest("[data-member]");
-  if (mem && matchMedia("(max-width:960px)").matches){
+  if (mem && matchMedia("(max-width:960px), (hover: none)").matches){
     const i = +mem.dataset.member;
     SHEET_OPEN = SHEET_OPEN === i ? null : i;
     /* the board lives in the wheel foot now — refresh it with cached recs */
@@ -3227,8 +3250,8 @@ document.addEventListener("click", e => {
     }
     if (o){ loadoutPrefillGear(si); loadoutApplySpells(si, o.combo); }
     else loadoutPrefill(si);    /* same start as a fresh add: caller reference */
-    PROV[si] = "m";        /* an explicit user choice is manual, even in a
-                              formerly forged slot */
+    PROV[si] = PROV[si] === "l" ? "l" : "m";   /* an explicit user choice is manual,
+                              even in a formerly forged slot; a lock stays */
     FORGE_NOTE = null;
     sortPartyByRole();     /* the swap may have changed the slot's role */
     render(); return;
@@ -3276,9 +3299,22 @@ document.addEventListener("click", e => {
   if (add){ /* adding from the popover dismisses it */
     if (add.closest("#pick-search-pop")) setPickSearch(false);
     if (party.length < HARD_CAP){
-    party.push(add.dataset.add);
-    PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
-    loadoutInsert(party.length - 1);   /* prefill from the caller reference */
+    const w = add.dataset.add;
+    /* a weapon the board recommends lands in the build its card priced
+       (its best spells and doctrine kit); any other add starts from the
+       caller reference */
+    const rec = (RECS_CUR || []).find(r => r.w === w && r.combo !== undefined && r.combo !== null);
+    party.push(w);
+    PROV.push("m"); COMBO.push(rec ? rec.combo : null); FORGE_NOTE = null;
+    const at = party.length - 1;
+    if (rec){
+      LOADOUT.splice(at, 0, undefined);
+      if (rec.kit && rec.kit.length){
+        const L = (LOADOUT[at] = { _eng: 1 });
+        for (const k of rec.kit){ const g = ENG.gear[k]; if (g && g.slot && loSlotOpen(w, g.slot)) L[g.slot] = k; }
+      }
+      loadoutPrefillGear(at); loadoutApplySpells(at, rec.combo);
+    } else loadoutInsert(at);   /* prefill from the caller reference */
     sortPartyByRole();    /* the new member lands in its role group */
     render(); } return; }
   const fl = e.target.closest("[data-family-load]");
@@ -3337,7 +3373,7 @@ document.addEventListener("click", e => {
        piece equipped stays naked, as before. A naked lock used to read
        a 2.9-unit healer as 2.0 and widen the heal gap the forge then
        closed with a second body. */
-    const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i]));
+    const lockedGears = keep.map(i => gearsFromLoadout(LOADOUT[i], undefined, party[i]));
     let r;
     ENG.setContent(CONTENT, forgeSize, STYLE);
     try { r = ENG.forge(forgeSize, locked, lockedCombos, undefined, undefined, lockedGears); }
@@ -3347,7 +3383,7 @@ document.addEventListener("click", e => {
        identical comp, which reads as the button doing nothing. */
     const unchanged = reforgeAll && party.length === r.party.length
       && [...r.party].sort().join() === [...party].sort().join();
-    applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, { unchanged });
+    applyForgeResult(r, lockedStored, lockedLoadouts, lockedProv, { unchanged }, keep.map(i => WHO[i]));
     return;
   }
   /* slot controls (F32/F33, L21): lock / replace / refresh the rest */
@@ -3368,6 +3404,7 @@ document.addEventListener("click", e => {
       /* the engine is synced to (CONTENT, SIZE, STYLE) by render(); the
          one-slot forge reads the roster's own combos and kits */
       REPLACE_OPTS = ENG.replaceOptions(party, ri, COMBOS_CUR, GEARS_CUR, 5);
+      REPLACE_SIG = replaceSig();
     }
     render(); if (PDASH_FLY_I !== null) refreshPdashFly();
     return;

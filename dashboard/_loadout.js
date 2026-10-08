@@ -264,7 +264,7 @@ function loadoutEngineGear(i){
   if (!empty.length) return;
   const scored = j => typeof comboAt === "function" ? comboAt(j) : loComboOf(j);
   const worn = j => typeof gearsFromLoadout === "function"
-    ? gearsFromLoadout(LOADOUT[j]) : null;
+    ? gearsFromLoadout(LOADOUT[j], undefined, party[j]) : null;
   const rest = [], restCombos = [], restGears = [];
   party.forEach((pw, j) => {
     if (j === i) return;
@@ -385,7 +385,7 @@ function loadoutPanel(i){
   const ref = loadoutReference(party[i]);
   const raw = ref && ref.raw ? Object.entries(ref.raw) : [];
   return `<div class="lo-panel">
-    <div class="lo-row">${LO_SLOTS.map(s => loTile(i, s)).join("")}</div>
+    <div class="lo-row">${LO_SLOTS.filter(s => loSlotOpen(party[i], s)).map(s => loTile(i, s)).join("")}</div>
     <div class="lo-row lo-spells">${LO_SPELLS.map(s => loSpellPicker(i, s)).join("")}</div>
     ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build${(LOADOUT[i] || {})._style ? ` · dressed from the ${esc((LOADOUT[i] || {})._style.replace("_", "-"))} build winners wear` : ""}${(LOADOUT[i] || {})._pooled ? ` · ${esc(Object.keys((LOADOUT[i] || {})._pooled).map(sl => LO_SLOT_LABEL[sl] || sl).join(", "))} from the seat's habit, this weapon's own evidence being thin` : ""}</div>` : ""}
     ${loDoctrineLine(i)}

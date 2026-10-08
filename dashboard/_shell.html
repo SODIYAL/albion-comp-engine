@@ -1004,7 +1004,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    path; on hover widths the kit flyout replaces them entirely) */
 .epanel .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
 .epanel .dm-pop::after{top:auto; bottom:100%}
-@media (min-width:961px){ .epanel .wf-comp .dm-pop{display:none} }
+@media (min-width:961px) and (hover: hover){ .epanel .wf-comp .dm-pop{display:none} }
 
 /* -- the kit flyout: ONE hover surface left of the dash — worn kit,
    scored spells, role and fit on top, then the member's FULL dossier
@@ -1646,7 +1646,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    the desktop rules win by order. */
 
 
-@media (max-width:960px){
+/* member details on touch: phones and touch-only screens of any width
+   (an iPad in landscape) open the scrimmed bottom sheet */
+@media (max-width:960px), (hover: none){
 
   /* --- member details: hover popover becomes a scrimmed bottom sheet --- */
   .dm:hover .dm-pop, .dm:focus-within .dm-pop{visibility:hidden; opacity:0}
@@ -1674,6 +1676,9 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   }
   .dm-actions .dm-act, .dm-actions .lo-open{padding:10px 15px; font-size:11px}
   .dm-actions{flex-wrap:wrap}   /* five actions do not fit one phone-wide line */
+}
+
+@media (max-width:960px){
 
   /* --- the add-weapon bar: filter groups stack --- */
   /* At this width the chip flyouts are static (they render inline under
