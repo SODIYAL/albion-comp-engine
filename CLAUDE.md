@@ -168,7 +168,8 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   `derive_skeletons` -> `build_dataset` -> `derive_usage` (the
   observed-evidence artifact: fight-size prevalence and killer-party
   cohorts, display only) -> every gate ->
-  `compare_fold.py`; offline, never commits). Weekly, Tuesdays. Every harvest-derived
+  `compare_fold.py`; offline, never commits; refuses to start while a
+  harvest runs, `pipeline/harvest_guard.ps1`). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
   an all-battles prior, role-count or skeleton artifact.
 - Between folds, the Dragon Portal page alone: `pipeline/refresh_portal.ps1`

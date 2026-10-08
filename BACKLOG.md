@@ -295,15 +295,6 @@ Each is decidable today from evidence already in the repo.
   three comps alone. Blackzone Roam and Castle Outpost are re-fitted
   (V: 10, The published-comp rows re-fitted). More caller sheets are
   the fix (see "More caller sheets" above).
-- **A fold that overlaps a harvest pass loses its artifact**: both write
-  `pipeline/out/party_rosters.json.gz`. A harvest pass ends by rewriting
-  it from the cache, so a fold begun while a pass is running has the
-  artifact its tables were derived from replaced under it, and
-  `build_dataset` then refuses the tree (2026-10-04: the 15:00 harvest
-  ended its first pass at 16:58 inside a fold begun at 16:19; the fold
-  was run again). `fold_harvest.ps1` should refuse to start while the
-  harvest task is running, or the harvest should leave the artifact to
-  the fold and the portal refresh.
 - **Snapshot staleness cannot see a form ability's numbers**: the evidence
   review fingerprints the cited spell's own `spell_index.json` record and
   its structured effects; no equippable spell references a form's abilities

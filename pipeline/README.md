@@ -469,6 +469,11 @@ from the cache -> the derive chain -> dataset -> pages -> every gate ->
 `pipeline/compare_fold.py`, which writes the before/after report to
 `notes/findings/<date>-fold-report.md` against the previous fold at
 HEAD (`--base` for another revision). Review the report, then commit.
+The fold and `refresh_portal.ps1` refuse to start while a harvest runs
+(`pipeline/harvest_guard.ps1`: a "CompForge ... harvest" task Running, or a
+`harvest_overnight.ps1` / `sample_parties.py --battles` process), since each
+harvest pass ends by rewriting `out/party_rosters.json.gz` from the cache and
+a fold would lose the artifact its tables were derived from.
 
 - `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
   at 03:00 AND 15:00 (the job CLAUDE.md names; twice daily because the

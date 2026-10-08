@@ -23,6 +23,10 @@
 
 $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
+# a harvest pass ending mid-fold replaces the rosters artifact the fold's
+# tables are derived from: refuse to start while one runs
+. (Join-Path $root "pipeline\harvest_guard.ps1")
+Assert-NoHarvest "fold"
 $logDir = Join-Path $root "pipeline\out\fetch_logs"
 New-Item -ItemType Directory -Force $logDir | Out-Null
 $stamp = Get-Date -Format "yyyy-MM-dd"
