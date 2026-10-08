@@ -306,9 +306,11 @@ numbers go stale silently, and this makes the staleness mechanical.
 - Staleness itself is read snapshot against snapshot, not by date:
   `pipeline/sheets/reviewed_evidence.json` keeps the fingerprint of every
   cited evidence id's facts (its `out/spell_index.json` record and
-  structured effects; an item's `out/item_stats.json` record behind a
-  WEAPON_STATS / GEAR_STATS row) from when the rows citing it were last
-  read, for weapons, pools and gear alike (`evidence_review.py`). After a
+  structured effects; a shapeshifter E's form abilities with it, from
+  `out/weapon_lines.json` `form_spells`; an item's `out/item_stats.json`
+  record behind a WEAPON_STATS / GEAR_STATS row) from when the rows citing
+  it were last read, for weapons, pools and gear alike
+  (`evidence_review.py`). After a
   snapshot move, `evidence_lint.py` FAILS on every id whose facts changed
   until its rows are re-read and the new facts accepted. `curated_as_of`
   records when an entry was curated; `curate_helper.py` shows the weapon's
@@ -417,10 +419,15 @@ cannot block the four damage capabilities, `zone_control`, `interrupt` or
 
 **Form abilities sit behind the E.** A shapeshifter staff's E transforms the
 wielder; the form's two abilities and its passive carry their own names and
-descriptions in `spells.json` but sit on no equip menu, so neither the
-catalogue nor `curate_helper.py` reaches them. A sheet scores them on the E
-(the row cites the `SHAPESHIFT_*` spell, an `add:` entry in
-`effect_overrides.yaml` quotes the form ability's text), and
+descriptions in `spells.json` but sit on no equip menu. `parse_dumps.py`
+records them per shapeshifter line (`weapon_lines.json` `form_spells`, by
+the form's name prefixes: the dumps link a form to its abilities in a file
+the snapshot does not carry) and indexes them, the effect catalogue maps
+their effects, and the evidence review fingerprints them into the E's
+facts, so a numeric change to a form ability stales the rows on the E. A
+sheet scores them on the E (the row cites the `SHAPESHIFT_*` spell, an
+`add:` entry in `effect_overrides.yaml` quotes the form ability's text);
+`curate_helper.py` prints equippable spells only, and
 `audit_form_abilities.py` prints every form's ability text with the numbers
 resolved beside the rows the sheet cites on the E:
 

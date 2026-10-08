@@ -40,7 +40,7 @@
   capabilities:
     - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 along the line, then the ground fire; W: Raging Flare, 205 in a 5 radius (its pool row, 4, scores on its own W; the larger reads)
     - {cap: heal_reduction, score: 4, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire; the -40/-50% one-shot class holds 4 (heal-cut ladder, VALIDATION.md 08, Round 9)
-    - {cap: zone_control,   score: 4, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames; Q: Burning Field
+    - {cap: zone_control,   score: 4, evidence: FIREPHOENIX}     # 6s ground fire; W: Wall of Flames; Q: Burning Field
 
 - weapon: 2H_INFERNOSTAFF            # Infernal Staff — the fear torch
   curated_as_of: 2026-08-12

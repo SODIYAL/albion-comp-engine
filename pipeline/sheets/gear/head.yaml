@@ -56,7 +56,7 @@
   slot: head
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: tankiness,     score: 2, evidence: ENERGYSHIELD2}    # +38% armor/MR 4s, restores energy when hit
+    - {cap: tankiness,     score: 2, evidence: ENERGYSHIELD2}    # +38% armor and +10% MR 4s, restores energy when hit
 
 - gear: HEAD_CLOTH_SET2              # Cleric Cowl
   slot: head
@@ -217,4 +217,4 @@
   slot: head
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: heal_burst,    score: 2, evidence: SACRIFICE_HEAL}   # heal ally 15% max HP at own-HP cost
+    - {cap: heal_burst,    score: 2, evidence: SACRIFICE_HEAL}   # heal ally 25% max HP at own-HP cost

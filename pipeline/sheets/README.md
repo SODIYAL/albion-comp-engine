@@ -42,7 +42,9 @@ Coarse on purpose: finer granularity is false precision.
 Every composed row scores on its OWN spell's loadout bundle
 (`build_dataset.build_loadout`): a player equips one spell per slot, and a
 row counts when its spell is equipped (base-stat rows, `WEAPON_STATS` /
-`GEAR_STATS`, are always on). A score is the weapon's (or gear item's)
+`GEAR_STATS`, are always on, and so is a potion's or meal's row, which
+cites the spell the item casts: `gear_spells.json` `consume`, on no active
+or passive menu). A score is the weapon's (or gear item's)
 TOTAL for that capability with the spell equipped, not a per-spell
 increment, so two rows of one capability on one weapon or gear item never
 add: the item supplies the larger (`engine._merge_max`, both ports). An E

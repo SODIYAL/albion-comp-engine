@@ -1614,6 +1614,1190 @@
   ],
   "slot": "shoes"
  },
+ "T1_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T1_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T1_MEAL_GRILLEDFISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_GRILLEDFISH_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T1_MEAL_SEAWEEDSALAD": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SEAWEEDSALAD_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T1_MEAL_SOUP": {
+  "actives": [],
+  "consume": [
+   "FOOD_HEALTH_REG_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T1_MEAL_SOUP_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T2_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T2_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T2_MEAL_SALAD": {
+  "actives": [],
+  "consume": [
+   "FOOD_CRAFTING_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T2_MEAL_SALAD_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T2_POTION_ENERGY": {
+  "actives": [],
+  "consume": [
+   "POTION_ENERGY_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T2_POTION_HEAL": {
+  "actives": [],
+  "consume": [
+   "POTION_HEAL_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_AVALON_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_HEALBONUS_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_FOREST_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_HIGHLANDS_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_MOUNTAIN_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_STEPPE_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_FRESHWATER_SWAMP_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_FISH_SALTWATER_ALL_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_1_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_AVALON_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_DRAGONAREA": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_PIE": {
+  "actives": [],
+  "consume": [
+   "FOOD_LOAD_GATHER_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_PIE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_ROAST": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_LIFESTEAL_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_ROAST_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_SOUP": {
+  "actives": [],
+  "consume": [
+   "FOOD_HEALTH_REG_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_MEAL_SOUP_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T3_POTION_ACID": {
+  "actives": [],
+  "consume": [
+   "POTION_ACID_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_POTION_CLEANSE2": {
+  "actives": [],
+  "consume": [
+   "POTION_CLEANSE2_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_POTION_MOB_RESET": {
+  "actives": [],
+  "consume": [
+   "POTION_MOB_RESET_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_POTION_REVIVE": {
+  "actives": [],
+  "consume": [
+   "POTION_MAXHP_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_POTION_SLOWFIELD": {
+  "actives": [],
+  "consume": [
+   "POTION_AOE_SLOW_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_POTION_STONESKIN": {
+  "actives": [],
+  "consume": [
+   "POTION_RESISTANCE_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_BLUE": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_BLUE"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_BLUE_NONTRADABLE": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_BLUE"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_GREEN": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_GREEN"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_GREEN_NONTRADABLE": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_GREEN"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_RED": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_RED"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_RED_NONTRADABLE": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_RED"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_YELLOW": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_YELLOW"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T3_VANITY_CONSUMABLE_FIREWORKS_YELLOW_NONTRADABLE": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_FIREWORKS_YELLOW"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_4_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_4_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_SALAD": {
+  "actives": [],
+  "consume": [
+   "FOOD_CRAFTING_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_SALAD_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_AVALON_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_STEW": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_STEW_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_AVALON_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_MEAL_STEW_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_P1"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T4_POTION_BERSERK": {
+  "actives": [],
+  "consume": [
+   "POTION_BERSERK_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_COOLDOWN": {
+  "actives": [],
+  "consume": [
+   "POTION_POISON_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_ENERGY": {
+  "actives": [],
+  "consume": [
+   "POTION_ENERGY_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_GATHER": {
+  "actives": [],
+  "consume": [
+   "POTION_GATHER_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_HEAL": {
+  "actives": [],
+  "consume": [
+   "POTION_HEAL_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_LAVA": {
+  "actives": [],
+  "consume": [
+   "POTION_LAVA_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_LIFEWARD": {
+  "actives": [],
+  "consume": [
+   "POTION_REVIVE_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T4_POTION_TORNADO": {
+  "actives": [],
+  "consume": [
+   "POTION_TORNADO_P1"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_5_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_AVALON_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_HEALBONUS_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_FOREST_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_HIGHLANDS_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_MOUNTAIN_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_STEPPE_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_FRESHWATER_SWAMP_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_5_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_FISH_SALTWATER_ALL_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_2_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_AVALON_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_DRAGONAREA": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_PIE": {
+  "actives": [],
+  "consume": [
+   "FOOD_LOAD_GATHER_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_PIE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_ROAST": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_LIFESTEAL_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_ROAST_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_SOUP": {
+  "actives": [],
+  "consume": [
+   "FOOD_HEALTH_REG_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_MEAL_SOUP_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T5_POTION_ACID": {
+  "actives": [],
+  "consume": [
+   "POTION_ACID_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_POTION_CLEANSE2": {
+  "actives": [],
+  "consume": [
+   "POTION_CLEANSE2_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_POTION_MOB_RESET": {
+  "actives": [],
+  "consume": [
+   "POTION_MOB_RESET_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_POTION_REVIVE": {
+  "actives": [],
+  "consume": [
+   "POTION_MAXHP_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_POTION_SLOWFIELD": {
+  "actives": [],
+  "consume": [
+   "POTION_AOE_SLOW_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T5_POTION_STONESKIN": {
+  "actives": [],
+  "consume": [
+   "POTION_RESISTANCE_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_6_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_6_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_SALAD": {
+  "actives": [],
+  "consume": [
+   "FOOD_CRAFTING_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_SALAD_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_AVALON_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_STEW": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_STEW_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_AVALON_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_MEAL_STEW_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_P3"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T6_POTION_BERSERK": {
+  "actives": [],
+  "consume": [
+   "POTION_BERSERK_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_COOLDOWN": {
+  "actives": [],
+  "consume": [
+   "POTION_POISON_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_ENERGY": {
+  "actives": [],
+  "consume": [
+   "POTION_ENERGY_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_GATHER": {
+  "actives": [],
+  "consume": [
+   "POTION_GATHER_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_HEAL": {
+  "actives": [],
+  "consume": [
+   "POTION_HEAL_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_LAVA": {
+  "actives": [],
+  "consume": [
+   "POTION_LAVA_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_LIFEWARD": {
+  "actives": [],
+  "consume": [
+   "POTION_REVIVE_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T6_POTION_TORNADO": {
+  "actives": [],
+  "consume": [
+   "POTION_TORNADO_P3"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_7_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_AVALON_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_DRAGON_AREA_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_HEALBONUS_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_FOREST_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_HIGHLANDS_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_MOUNTAIN_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_STEPPE_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_FRESHWATER_SWAMP_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_HEALTH_REG_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_7_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_FISH_SALTWATER_ALL_RARE": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_CRAFTING_3_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_AVALON_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_DRAGONAREA": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_CASTSPEED_CDR_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_PIE": {
+  "actives": [],
+  "consume": [
+   "FOOD_LOAD_GATHER_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_PIE_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_LOAD_GATHER_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_ROAST": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_LIFESTEAL_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_MEAL_ROAST_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_LIFESTEAL_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T7_POTION_ACID": {
+  "actives": [],
+  "consume": [
+   "POTION_ACID_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_POTION_CLEANSE2": {
+  "actives": [],
+  "consume": [
+   "POTION_CLEANSE2_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_POTION_MOB_RESET": {
+  "actives": [],
+  "consume": [
+   "POTION_MOB_RESET_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_POTION_REVIVE": {
+  "actives": [],
+  "consume": [
+   "POTION_MAXHP_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_POTION_SLOWFIELD": {
+  "actives": [],
+  "consume": [
+   "POTION_AOE_SLOW_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T7_POTION_STONESKIN": {
+  "actives": [],
+  "consume": [
+   "POTION_RESISTANCE_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_FISH_FRESHWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_FRESHWATER_8_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_FISH_SALTWATER_ALL_COMMON": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_SALTWATER_8_RAW"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_SANDWICH": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_SANDWICH_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_MAXHP_AVALON_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_SANDWICH_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_MAXHP_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_SPECIAL_FOOD_DRAKE_EGG": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_SPECIAL_FOOD_DRAKE_EGG_FAME"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_STEW": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_STEW_AVALON": {
+  "actives": [],
+  "consume": [
+   "FOOD_BUFF_DMG_AVALON_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_MEAL_STEW_FISH": {
+  "actives": [],
+  "consume": [
+   "FOOD_FISH_BUFF_DMG_P5"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "T8_POTION_BERSERK": {
+  "actives": [],
+  "consume": [
+   "POTION_BERSERK_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_CLEANSE": {
+  "actives": [],
+  "consume": [
+   "POTION_INVISIBILITY_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_COOLDOWN": {
+  "actives": [],
+  "consume": [
+   "POTION_POISON_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_GATHER": {
+  "actives": [],
+  "consume": [
+   "POTION_GATHER_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_LAVA": {
+  "actives": [],
+  "consume": [
+   "POTION_LAVA_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_LIFEWARD": {
+  "actives": [],
+  "consume": [
+   "POTION_REVIVE_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "T8_POTION_TORNADO": {
+  "actives": [],
+  "consume": [
+   "POTION_TORNADO_P5"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
  "UNIQUE_ARMOR_VANITY_VERY_WEALTHY_NOBLE_AJ": {
   "actives": [
    "VANITY_ARMOR_VERY_WEALTHY_NOBLE_SPELL"
@@ -1627,6 +2811,30 @@
   ],
   "passives": [],
   "slot": "armor"
+ },
+ "UNIQUE_CONSUMABLE_EVENT_EASTER_2020_CHOCOLATE": {
+  "actives": [],
+  "consume": [
+   "FOOD_EASTER_CHOCOLATE"
+  ],
+  "passives": [],
+  "slot": "food"
+ },
+ "UNIQUE_CONSUMABLE_EVENT_EASTER_2020_EGG": {
+  "actives": [],
+  "consume": [
+   "VANITY_SUMMONING_RABBIT_EASTER"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "UNIQUE_CONSUMABLE_EVENT_WINTER_2017": {
+  "actives": [],
+  "consume": [
+   "VANITY_CONSUMABLE_SNOWBALL"
+  ],
+  "passives": [],
+  "slot": "potion"
  },
  "UNIQUE_HEAD_TELLAFRIEND_BATRIDER": {
   "actives": [
@@ -1751,5 +2959,21 @@
   ],
   "passives": [],
   "slot": "shoes"
+ },
+ "UNIQUE_WEAPONMASTER_IDLE_PROTOTYPE": {
+  "actives": [],
+  "consume": [
+   "MOB_UNIQUE_WEAPONMASTER_IDLE"
+  ],
+  "passives": [],
+  "slot": "potion"
+ },
+ "UNIQUE_WEAPONMASTER_POTION_PROTOTYPE": {
+  "actives": [],
+  "consume": [
+   "MOB_UNIQUE_WEAPONMASTER_BUFF"
+  ],
+  "passives": [],
+  "slot": "potion"
  }
 }

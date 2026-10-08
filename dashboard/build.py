@@ -239,9 +239,11 @@ def main():
     if os.path.exists(gear_spells_path):
         with open(gear_spells_path, encoding="utf-8") as f:
             raw_gs = json.load(f)
+        # a potion or meal carries only its consume spell, no ability to pick
         gear_spells = {k: {"a": [[s, spell_name(s)] for s in v.get("actives", [])],
                            "p": [[s, spell_name(s)] for s in v.get("passives", [])]}
-                       for k, v in raw_gs.items()}
+                       for k, v in raw_gs.items()
+                       if v.get("actives") or v.get("passives")}
     # Per-spell FACTS for the ability-detail view: the game's own resolved
     # description (BASE numbers — in-game values scale with item power and
     # that curve is not in the public dumps, which the UI says out loud),

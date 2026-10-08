@@ -7,8 +7,14 @@
   "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
   "structural_unclaimed": [],
   "structural_unclaimed_gear": [
+   "AVALON_EAGLE_AIR_STRIKE",
+   "FLAME_ORB",
+   "FLAME_ORB_TELEPORT_EFFECT",
    "INNER_CORRUPTION",
-   "NASTY_WOUNDS"
+   "NASTY_WOUNDS",
+   "POTION_LAVA_P1",
+   "POTION_LAVA_P3",
+   "POTION_LAVA_P5"
   ],
   "verified": 31,
   "with_nonstacking_caps": 1,

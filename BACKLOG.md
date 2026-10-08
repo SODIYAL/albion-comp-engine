@@ -256,38 +256,9 @@ Each is decidable today from evidence already in the repo.
 
 ## Engineering work, unblocked
 
-- **A floored capability with a zero dressed gain is never priced**: the
-  dressed marginal walks the dressed vector's nonzero gains, so a
-  hard-floored capability a kit's self-cost zeroes while the weapon gain
-  stays positive loses its floor term and the pick score leaves the
-  comp_score delta (forced on a scratch dataset: -4.95). Latent: no
-  shipped kit zeroes a floored gain and the count-once capability
-  (sustained_dps) carries no floor. Fix in both ports: walk the floor
-  basis's capabilities too (`_marg_fit_from`, `_dressed_pre`).
-- **The fight chain's improves line runs at roster size**: the chain is
-  graded at the roster's size while the pick it names is explained one
-  body ahead (`inPickContext`), so a stage claim and the gain tiles can
-  read thresholds of different sizes.
 - **analyze() takes no gears**: its bands and profiles read the naked
   supply; nothing on the page or in the pipeline calls it. An optional
   `gears` parameter in both ports when a caller appears.
-- **Per-member rest scoring where the rest's state is built**:
-  `_refine_constrained` and replace_options build the rest's party_state
-  and still price the rest with a full comp_score; `_as_built` (F41b)
-  prices the member on that state at about a tenth of a comp_score, values
-  agreeing at 1e-13. `_two_opt`'s contribution sweep and the forge's
-  filler audit build no state, so there the marginal would first cost a
-  party_state (about one comp_score) and gains nothing.
-- **An explicit null top_n reads differently in the two ports**: Python
-  slices `[:top_n]`, so None returns every row; the JS port's recommend,
-  swapReview and weaknesses read null as zero rows, and kitOptions and
-  replaceOptions read it as their defaults (3, 5). No caller passes one.
-  One meaning in both ports (None as the default, as `pool=None` reads),
-  pinned in the parity test.
-- **Two latent parity splits on explicit empty values**: the JS port reads
-  an empty `always` dict as present in `_rawMemberCaps` and returns an
-  empty gang band from `_seatKit`, where Python treats both as absent; no
-  shipped weapon or seat carries either.
 - **Contents under three published comps keep rows fitted on earlier
   sheets**: Roads (1 comp), Territory Defense (2), Castle and Faction
   War read minimum rows written before the form-ability and anti-dive
@@ -295,13 +266,6 @@ Each is decidable today from evidence already in the repo.
   three comps alone. Blackzone Roam and Castle Outpost are re-fitted
   (V: 10, The published-comp rows re-fitted). More caller sheets are
   the fix (see "More caller sheets" above).
-- **Snapshot staleness cannot see a form ability's numbers**: the evidence
-  review fingerprints the cited spell's own `spell_index.json` record and
-  its structured effects; no equippable spell references a form's abilities
-  (the dumps link them in a file the snapshot cache does not carry), so a
-  numeric change to Barbed Roots leaves the Rootbound E's fingerprint as it
-  was. The form table in `audit_form_abilities.py` is the mapping a
-  fingerprint of the form's abilities needs.
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
   47 of 81 head / armor / shoes items have no vote and ASSUME their own
@@ -352,9 +316,6 @@ Each is decidable today from evidence already in the repo.
   "Negates all your Healing Received" cost nothing. Extending `self_costs`
   to weapon entries under the same evidence rule needs a logged decision
   and both ports.
-- **Consumable rows cite GEAR_STATS, not their consume spells**: parse_dumps
-  indexes no `@consumespell`, so the evidence lint never reads a potion's or
-  meal's text. Index the consume spells and re-cite the rows.
 - **Offhands follow two models**: five offhands carry hand-scored
   GEAR_STATS rows (tankiness on four shields, heal_sustain on the Blueflame
   Torch) while the build-stat channel reads no `bonusdefensevsplayers`,
@@ -380,23 +341,25 @@ Each is decidable today from evidence already in the repo.
   knock-away rung (Force of Nature, Hurricane, Holy Explosion); whether
   isolating a rooted target earns more than that rung (Knockback Shot's 4
   is a directional push) is a validation-round question.
-- **parse_dumps' prose shield pattern fires on "Crowd Control Resistance"**:
-  `\bresistance` in the shield flag matches it, so 16 spells with no
-  structured shield offer tankiness and self_sustain to the lint (FLEE,
-  GLACIALFIELD, LAUNCHER, PASSIVE_ARMOR_INCREASED_CCR,
-  PASSIVE_CAPE_BRIDGEWATCH, PASSIVE_INCREASED_CCR, PBAOE_KNOCKBACK,
-  RENDINGSWING, ROOTFIELD, SEPARATING_SLAM, SHOULDERTACKLE, SLOWSHIELD,
-  SPIDER_THREAD, SPLASHWAVE, TAR_RING, TORNADO). No row cites those
-  candidates today. Exclude the phrase from the pattern, rebuild the spell
-  index, then delete the LAUNCHER and CURSE_SKELETON_BARF_FDHR suppressions.
-- **parse_dumps resolves list references to element 0**: the tag strip
-  (`re.sub(r"\[/?\w+\]", "", desc)`) also deletes list indices such as
-  `[5]`, so an inline `$$SPELL.buffovertime[5].value$` reads element 0. On
-  the pinned snapshot 166 descriptions change when the indices are kept
-  (127 of them cited; Incubus's max-health cut read -40% where the data
-  carries -20%). The armor passives' doctrine magnitudes are read from these
-  descriptions. The fix makes the 127 cited ids stale in the evidence
-  review: re-read their rows, then accept.
+- **Magnitudes the list-index fix corrected, for a rubric read**: with the
+  description tags' list indices kept, 55 cited spells read their real
+  numbers (V: 10, Description numbers read the element their tag names);
+  no score crossed a rung the logged ladders state, the comments now carry
+  the real numbers, and these rows read a magnitude the score was not set
+  on (each needs a rubric grade and a logged decision): Ice Storm's tick
+  (72 every 0.5s vs players where 25 was read; both damage elements target
+  every enemy in the data) on burst_aoe 2 and sustained_dps 2; Haste's +60%
+  Auto-Attack speed (20% was read) on sustained_dps 2; the Spectral
+  Trident's soul mist, 6s (0.5s was read) of +50% Move Speed, +75%
+  Auto-Attack speed and -30% cast time for up to 10 allies, on buff_allies
+  3; Royal Banner's +50% cooldown rate for allies (30% was read) on
+  buff_allies 4; Circle of Life's 107 / 133 / 173 / 227 by Rejuvenation
+  Charges (107 flat was read) on heal_burst 4; Mystic Rocks' -35% Healing
+  Received aura (-50% was read) on heal_reduction 4, under the -40/-50%
+  rung; Magic Rune's +5% magic damage and Healing Cast a stack (10% was
+  read) on buff_allies 3; Anguished Soul's fear, 1.25s rising to 2.25s with
+  charges, on peel and knockback_displace 4; Earth Crusher's radius, 5
+  rising to 9 with charges, on burst_aoe 4.
 - **Curation grades deferred at the move to the newer snapshot** (each
   needs a rubric grade and a logged decision): Oathkeepers' heal_sustain on
   Blessed Aurora (50 per auto-attack for 5s); Hoarfrost's Avalanche at 320
@@ -424,9 +387,6 @@ Each is decidable today from evidence already in the repo.
   belongs in the catalogue (the kit doctrine would then name it) is a
   display decision. The meals with a combat effect are curated (V: 10,
   The meals winners eat).
-- **V4b**: leave-one-out at a full party tests "best generic 20th body", not
-  "replace what was lost" (saturation degeneracy). Reconstruct the last ~5
-  slots instead, where targets still bind. (V: 08, FIRST V4 RUN)
 - **Killboard roster import, stage 1** (ToS-clean): paste names or a guild
   name -> per-player recent MainHand distribution by fight-size bucket ->
   auto-fill slots with confidence and click-to-override; enables constrained

@@ -33,7 +33,7 @@
   curated_as_of: 2026-08-12
   role_hint: support
   capabilities:
-    - {cap: buff_allies,  score: 4, evidence: ARCANECORRIDOR} # E: +60% MS/AA speed corridor for the group, 8s
+    - {cap: buff_allies,  score: 4, evidence: ARCANECORRIDOR} # E: +60% MS and +45% AA speed corridor for the group, 8s
     - {cap: engage,       score: 4, evidence: ARCANECORRIDOR} # the corridor IS how the comp commits
     - {cap: slow,         score: 4, evidence: ARCANECORRIDOR} # -30% on enemies inside
     - {cap: zone_control, score: 2, evidence: ARCANECORRIDOR}
@@ -46,13 +46,13 @@
     # up to 3 enemies for 5s, stacking 3x to -45% on overlap — weaker than the
     # class that holds 4 (Rotcaller's 100% negate, the -40/-50% one-shots;
     # heal-cut ladder, VALIDATION.md 08, Round 9; curation judgment).
-    - {cap: heal_reduction, score: 3, evidence: ARCANE_METEOR}  # E: Dark Auras, -15% Healing Received, x3
+    - {cap: heal_reduction, score: 3, evidence: ARCANE_METEOR}  # E: Dark Auras, -25% Healing Received, x3
     # burst_aoe 2: 112 in 5r sits below the E-damage ladder's 2-anchor
     # (Trinity Spear 220 in 3r = 2; Bracers/Fists 264/232 = 4; VALIDATION.md
     # C7-E); the identity is the aura blanket, not the hit.
     - {cap: burst_aoe,    score: 2, evidence: ARCANE_METEOR}  # 112 in 5r
     - {cap: slow,         score: 2, evidence: ARCANE_METEOR}  # aura slow 15%, stacks 3x
-    - {cap: damage_debuff, score: 2, evidence: ARCANE_METEOR}  # Dark Aura: -15% damage dealt around 3 enemies, stacks 3x
+    - {cap: damage_debuff, score: 2, evidence: ARCANE_METEOR}  # Dark Aura: -25% damage dealt (vs players) around 3 enemies, stacks 3x
 
 - weapon: 2H_ENIGMATICORB_MORGANA    # Malevolent Locus — the cleanse bubble
   curated_as_of: 2026-10-04

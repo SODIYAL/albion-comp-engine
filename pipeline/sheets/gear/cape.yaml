@@ -28,7 +28,7 @@
   slot: cape
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: slow,          score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}  # 40% slow + -40% CCR zone
+    - {cap: slow,          score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}  # 40% slow + -30% CCR zone
     - {cap: zone_control,  score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}
 
 - gear: CAPEITEM_FW_CAERLEON         # Caerleon Cape — Q reset

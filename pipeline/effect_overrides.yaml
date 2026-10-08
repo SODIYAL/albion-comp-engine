@@ -59,14 +59,12 @@ suppress_flags:
   SHAPESHIFT_IMP: [stun]              # "While healing YOU are stunned" — a self-stun drawback, not enemy CC
   SHAPE_W_POLYMORPH: [heal]           # "decrease their max and current Health" tripped the heal regex
   DEFENSERUN: [purge]                 # "immunity to PURGES" — resists purges, performs none
-  CURSE_SKELETON_BARF_FDHR: [shield]  # nothing shield-like in the text; flag noise
   SUNDERSHOT: [heal]                  # "Health the targeted enemy has LEFT" — a shred scaler, no healing
   CHARGINGBLADE: [stun, root, slow]   # "immune to Stuns, Roots and Slows" — immunity wording, not enemy CC
   CROSSBOW_CONE_ULTIMATE: [heal]      # "0.03 of their Current Health as true damage" — no healing anywhere
   LEGBREAKER: [purge]                 # movement-buff strip maps to catch/peel by design (remove:movementbuff), not purge
   LETHAL_CLEAVER: [heal]              # "Decreases Max and current Health" — a max-HP cut, no healing
   BLOOD_BLADE: [heal]                 # Blood Ritual — "take X of your Max Health as true damage": self-COST, no heal
-  LAUNCHER: [shield]                  # "Decreases Crowd Control Resistance by 0.15" tripped the shield regex: an enemy CC-resistance cut, nothing shield-like
 
 # ---------------------------------------------------------------------------
 # Real mechanics the structured vocabulary cannot express (damage-absorb

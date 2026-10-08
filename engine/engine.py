@@ -1874,6 +1874,8 @@ class Engine:
         doctrine, carries, passive}. Greedy per slot (v1): cross-slot stat
         stacking is additive in the model, so per-slot ranking against the
         bare member is faithful."""
+        if top_n is None:
+            top_n = 3       # None reads as the default in both ports (F45)
         seat = self.primary_seat(weapon) if role == "auto" else role
         if role is not None and seat is None:
             # fail closed: no seat, no suggestion
@@ -2788,6 +2790,14 @@ class Engine:
             total += floor_d
             total -= (self._overstack(cap, have + gain, target, soft)
                       - self._overstack(cap, have, target, soft))
+        # a capability the kit zeroes (a self-cost) while the weapon still
+        # supplies it adds no coverage, but the floor reads the weapon
+        # basis, so its floor lift stands (F44)
+        for cap, gf in ef.items():
+            if not gf or extra.get(cap) or cap not in self.reqs:
+                continue
+            hf = s_floor.get(cap, 0.0)
+            total += self._floor_penalty(cap, hf) - self._floor_penalty(cap, hf + gf)
         return total
 
     def _marg_syn_from(self, state, extra, extra_j=None):
@@ -2992,11 +3002,14 @@ class Engine:
         gains. Synergy pairs are NOT duplicated here — the synergy half
         of a dressed candidate reads the weapon-only extras, so
         _combo_pre's pair lists stay the one source. The naked variant
-        aliases _combo_pre's item lists."""
+        aliases _combo_pre's item lists. A hard-floored capability the
+        kit zeroes while the weapon still supplies it rides as a zero-gain
+        item, so its floor lift (read on the weapon basis) is priced (F44)."""
         pre = self._dressed_pre_cache.get(weapon)
         if pre is None:
             wpre = self._combo_pre(weapon)
             extras = self._combo_extras(weapon)
+            fgs = self._floor_gain(weapon)
             pre = {}
             for vkey, dext in self._dressed_extras(weapon).items():
                 if dext is extras:
@@ -3005,7 +3018,9 @@ class Engine:
                     pre[vkey] = [[(cap, gain, self._cap_tab[cap])
                                   for cap, gain in extra.items()
                                   if gain and cap in self._cap_tab]
-                                 for extra in dext]
+                                 + [(cap, 0.0, self._cap_tab[cap])
+                                    for cap in fgs[i] if not extra.get(cap)]
+                                 for i, extra in enumerate(dext)]
             self._dressed_pre_cache[weapon] = pre
         return pre
 
@@ -3212,6 +3227,23 @@ class Engine:
                          "overstack_cost": over,
                          "delta": cov + floor_d - over,
                          "saturated": have >= target})
+        # a capability the kit zeroes while the weapon still supplies it:
+        # no coverage, its floor lift on the weapon basis (F44), so the
+        # rows still sum to d_fitness
+        for cap, gf in adj_w.items():
+            if not gf or adj.get(cap) or cap not in self.reqs:
+                continue
+            hf = sf.get(cap, 0.0)
+            floor_d = self._floor_penalty(cap, hf) - self._floor_penalty(cap, hf + gf)
+            if not floor_d:
+                continue
+            have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
+            caps_gain += floor_d
+            rows.append({"cap": cap, "gain": 0.0, "before": have, "after": have,
+                         "target": target, "soft_cap": soft,
+                         "coverage": 0.0, "floor_lift": floor_d,
+                         "overstack_cost": 0.0, "delta": floor_d,
+                         "saturated": have >= target})
         rows.sort(key=lambda r: (-_qrank(r["delta"]), r["cap"]))
         return rows, caps_gain
 
@@ -3276,6 +3308,8 @@ class Engine:
         }
 
     def recommend(self, party, top_n=4, pool=None, combos=None, gears=None):
+        if top_n is None:
+            top_n = 4       # None reads as the default, as pool=None does (F45)
         state = self.party_state(party, combos, gears)
         out = []
         # pool None reads suggest_pool(); a given list, empty included, is
@@ -3329,6 +3363,8 @@ class Engine:
         `off_comp` flags members the viability rules bar from generated
         comps at this content+size — loadable, scoreable, advised
         against."""
+        if top_n is None:
+            top_n = 3       # None reads as the default in both ports (F45)
         cand = list(self.suggest_pool() if pool is None else pool)
         combos = self._pad(combos, len(party))
         gears = self._pad(gears, len(party))
@@ -3378,6 +3414,8 @@ class Engine:
         return out
 
     def weaknesses(self, party, top_n=3, combos=None, gears=None):
+        if top_n is None:
+            top_n = 3       # None reads as the default in both ports (F45)
         s = self.effective_supply(party, combos, gears)
         gaps = [{"cap": cap,
                  "gap": self.weight(cap) * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
@@ -4881,6 +4919,8 @@ class Engine:
         the exact comp_score change of applying the swap; sorted by
         quantized score, then weapon id (deterministic in both ports).
         Suggestion-layer only: manual swaps always score."""
+        if top_n is None:
+            top_n = 5       # None reads as the default in both ports (F45)
         party = list(party)
         n = len(party)
         combos = [(combos[i] if combos and i < len(combos) else None)
@@ -4894,8 +4934,11 @@ class Engine:
         rest_g = gears[:index] + gears[index + 1:]
         counts_r, roles_r, preds_r, groups_r = self._forge_counts(rest, rest_c)
         state = self.party_state(rest, rest_c, rest_g)
-        base_rest = self.comp_score(rest, rest_c, rest_g)
-        contrib = self.comp_score(party, combos, gears) - base_rest
+        # the slot's member as built, priced on the rest's state: the
+        # exact comp_score(party) - comp_score(rest) without two full
+        # comp_scores (F41b, F46)
+        contrib = self._as_built(state, party[index], combos[index],
+                                 gears[index])
         beam = {"state": state, "roles": roles_r, "preds": preds_r}
         out = []
         for w in cand_pool:
@@ -4991,7 +5034,6 @@ class Engine:
         minimum was counting on."""
         party, combos = list(party), list(combos)
         gears = list(gears)
-        best = self.comp_score(party, combos, gears)
         for _ in range(max_passes):
             move, gain = None, 1e-9
             for i in range(fixed, len(party)):
@@ -5001,8 +5043,10 @@ class Engine:
                 counts_r, roles_r, preds_r, groups_r = \
                     self._forge_counts(rest, rest_c)
                 state = self.party_state(rest, rest_c, rest_g)
-                base_rest = self.comp_score(rest, rest_c, rest_g)
-                contrib = best - base_rest
+                # the slot's member as built, priced on the rest's state
+                # it already holds: the exact comp_score(party) -
+                # comp_score(rest) at a tenth of a comp_score (F46)
+                contrib = self._as_built(state, party[i], combos[i], gears[i])
                 beam = {"state": state, "roles": roles_r, "preds": preds_r}
                 for w in ctx["pool"]:
                     # w == party[i] is deliberately NOT skipped (the dressed
@@ -5029,7 +5073,6 @@ class Engine:
             party[move[0]] = move[1]
             combos[move[0]] = move[2]
             gears[move[0]] = move[3]
-            best = self.comp_score(party, combos, gears)
         return party, combos, gears
 
     def _two_opt(self, ctx, party, combos, gears, fixed, worst_k=4,

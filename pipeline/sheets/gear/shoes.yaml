@@ -50,13 +50,13 @@
   capabilities:
     - {cap: mobility,      score: 2, evidence: DEMONWALK}
     - {cap: resist_shred,  score: 2, evidence: DEMONWALK}        # -15% resists on the trail
-    - {cap: heal_reduction, score: 2, evidence: DEMONWALK}       # -15% healing received on the trail
+    - {cap: heal_reduction, score: 2, evidence: DEMONWALK}       # -20% healing received on the trail
 
 - gear: SHOES_CLOTH_ROYAL            # Royal Sandals — Defenseless Rush
   slot: shoes
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: mobility,      score: 2, evidence: GLASS_MOVESPEED}  # +75% speed +75% damage at -75% defense
+    - {cap: mobility,      score: 2, evidence: GLASS_MOVESPEED}  # +75% speed and +15% damage at -15% defense
     - {cap: sustained_dps, score: 2, evidence: GLASS_MOVESPEED}
 
 - gear: SHOES_CLOTH_SET1             # Scholar Sandals — Focused Run
@@ -219,7 +219,7 @@
   slot: shoes
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: tankiness,     score: 2, evidence: MAXHEALTHBUFF}    # +25% max/current HP, unpurgeable
+    - {cap: tankiness,     score: 2, evidence: MAXHEALTHBUFF}    # +100% max/current HP for 6s, unpurgeable (the Gigantify potion's +119% reads 2 too)
     - {cap: mobility,      score: 2, evidence: MAXHEALTHBUFF}
 
 - gear: SHOES_PLATE_UNDEAD           # Graveguard Boots — Battle Frenzy

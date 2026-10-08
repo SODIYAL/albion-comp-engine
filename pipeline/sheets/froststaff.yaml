@@ -39,7 +39,7 @@
   capabilities:
     - {cap: zone_control,  score: 6, evidence: ICESTORM2}      # E: a 5 radius storm that moves and lasts 15 SECONDS
     - {cap: slow,          score: 4, evidence: ICESTORM2}      # the storm slows by 0.3; W: Frost Bomb (QW)
-    - {cap: burst_aoe,     score: 2, evidence: ICESTORM2}      # tick damage: 25 every 0.5s in the storm
+    - {cap: burst_aoe,     score: 2, evidence: ICESTORM2}      # tick damage: 72 every 0.5s vs players (25 vs mobs) in the storm
     - {cap: sustained_dps, score: 2, evidence: ICESTORM2}
     - {cap: catch,         score: 4, evidence: ICESTORM2}
     - {cap: peel,          score: 4, evidence: ICESTORM2}

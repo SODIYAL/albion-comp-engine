@@ -18,7 +18,7 @@ capabilities:
   - {cap: damage_debuff, score: 2, evidence: LEGBREAKER}                 # W: Cripple, -25% damage dealt for 4s on one target: below Howl's -30% cone and Forceful Swing's -50% area, both 2 (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech, heals the wielder only
   - {cap: slow, score: 2, evidence: PASSIVE_SLOWPOISON}                  # PASSIVE: Slow Poison, each Auto-Attack slows the target by 10% for 1s
-  - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # W: Harpoon, a 2.2s root with a Spirit Spear Charge (QW)
+  - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # W: Harpoon, a 1.04 / 1.55 / 2.2s root with 1 / 2 / 3 Spirit Spear Charges (QW)
   - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # Q: Spirit Spear, the spear charge engine (QW)
   # Deflecting Spin reflects 100% of incoming damage, only for the spinner
   # and only while channelling: a personal defensive trick, 2 on the

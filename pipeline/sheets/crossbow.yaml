@@ -79,7 +79,7 @@
   role_hint: range
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: GROUNDMINE}        # E: 270 mine in 7m
-    - {cap: zone_control,  score: 4, evidence: GROUNDMINE}        # the planted mine denies the ground it watches
+    - {cap: zone_control,  score: 4, evidence: GROUNDMINE}        # the planted mine (12s) denies the ground it watches
     - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}      # repeater AA pattern; override of the pool's 2
 
 - weapon: MAIN_1HCROSSBOW            # Light Crossbow — sticky-bomb poker

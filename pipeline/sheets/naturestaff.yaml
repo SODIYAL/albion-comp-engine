@@ -49,7 +49,7 @@
   curated_as_of: 2026-10-07
   role_hint: healer
   capabilities:
-    - {cap: heal_burst,   score: 4, evidence: CIRCLEOFLIFE}    # E: 107 at once to up to 15 allies around the caster
+    - {cap: heal_burst,   score: 4, evidence: CIRCLEOFLIFE}    # E: 107 at once (133 / 173 / 227 with 1-3 Rejuvenation Charges) to up to 15 allies around the caster
     - {cap: heal_sustain, score: 4, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
     - {cap: root,         score: 2, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted for 2s
 

@@ -59,13 +59,13 @@
   slot: armor
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: buff_allies,   score: 3, evidence: MAGICCIRCLE}      # rune: +10% magic dmg/heal and -10% cast time per second stood on it (6 stacks), up to 6 allies (stationary; Royal Banner aura=4)
+    - {cap: buff_allies,   score: 3, evidence: MAGICCIRCLE}      # rune: +5% magic dmg/heal and -10% cast time per second stood on it (6 stacks), up to 6 allies (stationary; Royal Banner aura=4)
 
 - gear: ARMOR_CLOTH_SET1             # Scholar Robe
   slot: armor
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: SPEEDCASTER}      # -50% cast time, -50% energy cost 8s
+    - {cap: sustained_dps, score: 2, evidence: SPEEDCASTER}      # -50% cast time and -70% energy cost 8s
 
 - gear: ARMOR_CLOTH_SET2             # Cleric Robe — Everlasting Spirit
   slot: armor
@@ -127,7 +127,7 @@
   slot: armor
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: buff_allies,   score: 4, evidence: ROYAL_BANNER}     # 5m aura 7s: +30% AS, +30% cooldown rate for the wearer and up to 10 allies
+    - {cap: buff_allies,   score: 4, evidence: ROYAL_BANNER}     # 5m aura 7s: +30% AS and +30% cooldown rate for the wearer, +50% cooldown rate for up to 10 allies
 
 - gear: ARMOR_LEATHER_SET1           # Mercenary Jacket
   slot: armor
@@ -139,7 +139,7 @@
   slot: armor
   curated_as_of: 2026-08-27
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: HASTE}            # +20% AA speed +20% damage 8s
+    - {cap: sustained_dps, score: 2, evidence: HASTE}            # +60% AA speed and +20% damage 8s
 
 - gear: ARMOR_LEATHER_SET3           # Assassin Jacket
   slot: armor

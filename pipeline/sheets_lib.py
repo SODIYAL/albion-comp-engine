@@ -167,7 +167,8 @@ def compose_gear(entry, menu, pools):
     pool_rows = pools.get(gear_tree(entry.get("gear")), []) if menu is not None else []
     if not pool_rows:
         return list(own)
-    equip = set((menu or {}).get("actives") or []) | set((menu or {}).get("passives") or [])
+    equip = (set((menu or {}).get("actives") or []) | set((menu or {}).get("passives") or [])
+             | set((menu or {}).get("consume") or []))
     taken = {(c.get("cap"), c.get("evidence")) for c in own}
     excepts = {(x.get("cap"), x.get("evidence"))
                for x in (entry.get("except") or []) if isinstance(x, dict)}

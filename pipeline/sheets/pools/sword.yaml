@@ -12,7 +12,7 @@
 subcategory: sword
 curated_as_of: 2026-10-07
 capabilities:
-  - {cap: disengage, score: 2, evidence: DEFENSERUN}                    # W: Iron Will, +35% Move Speed and Defense for 3s (QW)
+  - {cap: disengage, score: 2, evidence: DEFENSERUN}                    # W: Iron Will, +30% Move Speed and +35% Defense for 3s (QW)
   - {cap: catch, score: 2, evidence: HAMSTRINGSWORD}                    # W: Hamstring, slow-into-leap combo (QW)
   - {cap: slow, score: 2, evidence: HAMSTRINGSWORD}                     # W: Hamstring, -25% for 4s (QW)
   - {cap: mobility, score: 4, evidence: HEROICSTRIKE2}                  # Q: Heroic Strike dash; W: Blade Cyclone / Heroic Leap (QW)

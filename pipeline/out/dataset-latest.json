@@ -16,11 +16,11 @@
    },
    "inputs": {
     "gear_lines.json": "d85cd3d1c7a1cef294b4591943df576ab78460e034778790411543adb9d4e8cd",
-    "gear_spells.json": "5a3f5950f377fc8849ae94d96297ff9eb5678126e1f7a414f11f0f10a225d664",
-    "interactions.json": "0d9738d5f8ea77bb90ccd4437d899813dd26feebf6211be005a9f732303e6a48",
+    "gear_spells.json": "53be86f59c33670a180be845289b06cbd6e2ed728695b8105cf60b3ccfc1de72",
+    "interactions.json": "ed6c5324bfb1123952a2e324b87e80e063c942853ba4afc780430e0e9edc4c52",
     "item_stats.json": "a45aa75b0d84a6c5e4825dd9e94760ff227e5918179e9d1559e3034acda6863d",
-    "spell_index.json": "afcdd8515a47d9bdabbec1f4440f40bd83847e86ab0b890a670dff77ae392935",
-    "weapon_lines.json": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1"
+    "spell_index.json": "516a733869bbcbacfd8eceae644eec5f9f8cc1e3cf6470a06ac3d4fc1cad7603",
+    "weapon_lines.json": "c1891f3398028a74c40606495790434324f927fab8f74ad446e317f2a504cdb9"
    },
    "problems": [],
    "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
@@ -16317,7 +16317,7 @@
    "display_name": "Energy Potion",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "POTION_ENERGY_P5"
     ]
    },
    "loadout": {
@@ -16340,7 +16340,7 @@
    "display_name": "Healing Potion",
    "evidence": {
     "self_sustain": [
-     "GEAR_STATS"
+     "POTION_HEAL_P5"
     ]
    },
    "loadout": {
@@ -16363,7 +16363,7 @@
    "display_name": "Pork Omelette",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_BUFF_CASTSPEED_CDR_P5"
     ]
    },
    "loadout": {
@@ -16386,7 +16386,7 @@
    "display_name": "Avalonian Pork Omelette",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_BUFF_CASTSPEED_CDR_AVALON_P5"
     ]
    },
    "loadout": {
@@ -16409,7 +16409,7 @@
    "display_name": "Dragonbound Leyfin Omelette",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P5"
     ]
    },
    "loadout": {
@@ -16432,7 +16432,7 @@
    "display_name": "Dusthole Crab Omelette",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_FISH_BUFF_CASTSPEED_CDR_P5"
     ]
    },
    "loadout": {
@@ -16455,7 +16455,7 @@
    "display_name": "Roast Pork",
    "evidence": {
     "self_sustain": [
-     "GEAR_STATS"
+     "FOOD_BUFF_LIFESTEAL_P5"
     ]
    },
    "loadout": {
@@ -16479,10 +16479,10 @@
    "display_name": "Roasted Puremist Snapper",
    "evidence": {
     "self_sustain": [
-     "GEAR_STATS"
+     "FOOD_FISH_BUFF_LIFESTEAL_P5"
     ],
     "tankiness": [
-     "GEAR_STATS"
+     "FOOD_FISH_BUFF_LIFESTEAL_P5"
     ]
    },
    "loadout": {
@@ -16499,6 +16499,13 @@
    "unique_name": "T7_MEAL_ROAST_FISH"
   },
   "T7_POTION_ACID": {
+   "cap_delivery": {
+    "resist_shred": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "POTION_ACID_P5"
+    }
+   },
    "capabilities": {
     "resist_shred": 2
    },
@@ -16506,7 +16513,7 @@
    "display_name": "Acid Potion",
    "evidence": {
     "resist_shred": [
-     "GEAR_STATS"
+     "POTION_ACID_P5"
     ]
    },
    "loadout": {
@@ -16529,7 +16536,7 @@
    "display_name": "Cleansing Potion",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "POTION_CLEANSE2_P5"
     ]
    },
    "loadout": {
@@ -16552,7 +16559,7 @@
    "display_name": "Gigantify Potion",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "POTION_MAXHP_P5"
     ]
    },
    "loadout": {
@@ -16568,6 +16575,16 @@
    "unique_name": "T7_POTION_REVIVE"
   },
   "T7_POTION_SLOWFIELD": {
+   "cap_delivery": {
+    "damage_debuff": {
+     "radius": 5.0,
+     "spell": "POTION_AOE_SLOW_P5"
+    },
+    "slow": {
+     "radius": 5.0,
+     "spell": "POTION_AOE_SLOW_P5"
+    }
+   },
    "capabilities": {
     "damage_debuff": 2,
     "slow": 2
@@ -16576,10 +16593,10 @@
    "display_name": "Sticky Potion",
    "evidence": {
     "damage_debuff": [
-     "GEAR_STATS"
+     "POTION_AOE_SLOW_P5"
     ],
     "slow": [
-     "GEAR_STATS"
+     "POTION_AOE_SLOW_P5"
     ]
    },
    "loadout": {
@@ -16603,7 +16620,7 @@
    "display_name": "Resistance Potion",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "POTION_RESISTANCE_P5"
     ]
    },
    "loadout": {
@@ -16626,7 +16643,7 @@
    "display_name": "Beef Sandwich",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "FOOD_BUFF_MAXHP_P5"
     ]
    },
    "loadout": {
@@ -16649,7 +16666,7 @@
    "display_name": "Avalonian Beef Sandwich",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "FOOD_BUFF_MAXHP_AVALON_P5"
     ]
    },
    "loadout": {
@@ -16672,7 +16689,7 @@
    "display_name": "Beef Stew",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_BUFF_DMG_P5"
     ]
    },
    "loadout": {
@@ -16695,7 +16712,7 @@
    "display_name": "Avalonian Beef Stew",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_BUFF_DMG_AVALON_P5"
     ]
    },
    "loadout": {
@@ -16718,7 +16735,7 @@
    "display_name": "Deadwater Eel Stew",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "FOOD_FISH_BUFF_DMG_P5"
     ]
    },
    "loadout": {
@@ -16741,7 +16758,7 @@
    "display_name": "Berserk Potion",
    "evidence": {
     "sustained_dps": [
-     "GEAR_STATS"
+     "POTION_BERSERK_P5"
     ]
    },
    "loadout": {
@@ -16764,7 +16781,7 @@
    "display_name": "Invisibility Potion",
    "evidence": {
     "disengage": [
-     "GEAR_STATS"
+     "POTION_INVISIBILITY_P5"
     ]
    },
    "loadout": {
@@ -16788,10 +16805,10 @@
    "display_name": "Poison Potion",
    "evidence": {
     "burst_st": [
-     "GEAR_STATS"
+     "POTION_POISON_P5"
     ],
     "slow": [
-     "GEAR_STATS"
+     "POTION_POISON_P5"
     ]
    },
    "loadout": {
@@ -16808,6 +16825,22 @@
    "unique_name": "T8_POTION_COOLDOWN"
   },
   "T8_POTION_LAVA": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "POTION_LAVA_P5"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "POTION_LAVA_P5"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "heal_reduction": 2
@@ -16816,10 +16849,10 @@
    "display_name": "Hellfire Potion",
    "evidence": {
     "burst_aoe": [
-     "GEAR_STATS"
+     "POTION_LAVA_P5"
     ],
     "heal_reduction": [
-     "GEAR_STATS"
+     "POTION_LAVA_P5"
     ]
    },
    "loadout": {
@@ -16836,6 +16869,12 @@
    "unique_name": "T8_POTION_LAVA"
   },
   "T8_POTION_LIFEWARD": {
+   "cap_delivery": {
+    "anti_dive": {
+     "radius": 4.0,
+     "spell": "POTION_REVIVE_P5"
+    }
+   },
    "capabilities": {
     "anti_dive": 2
    },
@@ -16843,7 +16882,7 @@
    "display_name": "Lifeward Potion",
    "evidence": {
     "anti_dive": [
-     "GEAR_STATS"
+     "POTION_REVIVE_P5"
     ]
    },
    "loadout": {
@@ -16859,6 +16898,12 @@
    "unique_name": "T8_POTION_LIFEWARD"
   },
   "T8_POTION_TORNADO": {
+   "cap_delivery": {
+    "knockback_displace": {
+     "radius": 4.0,
+     "spell": "POTION_TORNADO_P5"
+    }
+   },
    "capabilities": {
     "knockback_displace": 2
    },
@@ -16866,7 +16911,7 @@
    "display_name": "Tornado in a Bottle",
    "evidence": {
     "knockback_displace": [
-     "GEAR_STATS"
+     "POTION_TORNADO_P5"
     ]
    },
    "loadout": {

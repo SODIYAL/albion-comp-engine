@@ -109,7 +109,7 @@
     - {cap: disengage,     score: 4, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
     - {cap: catch,         score: 4, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
     - {cap: burst_st,      score: 4, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)
-    - {cap: burst_aoe,     score: 4, evidence: DIVEPUNCH_RISE}   # E impact: 264 phys in a 4 radius (T31)
+    - {cap: burst_aoe,     score: 4, evidence: DIVEPUNCH_RISE}   # E impact: 264 phys in a 4 radius, 166 out to 6 (T31)
 
 - weapon: 2H_KNUCKLES_SET3           # Spiked Gauntlets — armor-punisher cone
   curated_as_of: 2026-08-12

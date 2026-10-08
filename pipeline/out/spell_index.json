@@ -138,7 +138,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "44",
-  "description": "Create a $spelleffectarea.rectangle.height_start$ long corridor of altered time in the targeted direction, lasting for 8.\nIncreases Move Speed by 0.6 and Auto-Attack Speed by 0.6 for all allies in the corridor.\n\nSlows all enemies in the corridor by 0.3.",
+  "description": "Create a $spelleffectarea.rectangle.height_start$ long corridor of altered time in the targeted direction, lasting for 8.\nIncreases Move Speed by 0.6 and Auto-Attack Speed by 0.45 for all allies in the corridor.\n\nSlows all enemies in the corridor by 0.3.",
   "directions": [
    "enemy",
    "ally"
@@ -207,7 +207,7 @@
   "casting_time": "0.2",
   "channel": null,
   "cooldown": "3",
-  "description": "Shoot a Chain Missile in the targeted direction, dealing 132 magical damage to the first enemy hit.\nUpon hitting an enemy, it will jump to the closest enemy within 7 of the last enemy hit, dealing 132 magical damage to all following enemies (can hit up to 3 targets; can't hit the same target multiple times).\nApplies one Arcane Charge to all enemies hit.\n\nArcane Charges are consumed whenever you deal direct damage to the affected target, dealing an additional 60 magical damage (Chain Missile damage does not count as direct damage).",
+  "description": "Shoot a Chain Missile in the targeted direction, dealing 132 magical damage to the first enemy hit.\nUpon hitting an enemy, it will jump to the closest enemy within 7 of the last enemy hit, dealing 40 magical damage to all following enemies (can hit up to 3 targets; can't hit the same target multiple times).\nApplies one Arcane Charge to all enemies hit.\n\nArcane Charges are consumed whenever you deal direct damage to the affected target, dealing an additional 60 magical damage (Chain Missile damage does not count as direct damage).",
   "directions": [
    "enemy",
    "self"
@@ -236,7 +236,7 @@
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "38",
-  "description": "Call down a dark sphere, impacting after 0.4.\nDeals 112 magical damage to all enemies in a 5 radius. \nApplies a Dark Aura on up to 3 enemies hit.\n\nEach Dark Aura has a 5 radius around the affected enemy lasting for 5.\nDecreases healing received by 0.15 and all damage dealt by 0.15 (vs players) / by 0.15 (vs mobs) within the aura.\nSlows by 0.15 (all effects stack up to 3 times).",
+  "description": "Call down a dark sphere, impacting after 0.4.\nDeals 112 magical damage to all enemies in a 5 radius. \nApplies a Dark Aura on up to 3 enemies hit.\n\nEach Dark Aura has a 5 radius around the affected enemy lasting for 5.\nDecreases healing received by 0.25 and all damage dealt by 0.25 (vs players) / by 0.12 (vs mobs) within the aura.\nSlows by 0.15 (all effects stack up to 3 times).",
   "directions": [
    "enemy"
   ],
@@ -572,6 +572,82 @@
   ],
   "target": "ground"
  },
+ "AVALON_EAGLE_AIR_STRIKE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 8.0
+   },
+   {
+    "kind": "circle",
+    "radius": 8.0
+   }
+  ],
+  "cast_range": "18",
+  "caster_moves": null,
+  "casting_time": "1.5",
+  "channel": null,
+  "cooldown": "30",
+  "description": "Launch a beam of immense energy at the targeted enemy, dealing 350 magical damage in a 7 radius after 1.2 (this damage cannot be reflected).",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Judgment",
+  "preferred_target": "enemy",
+  "radius": 8.0,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "AVALON_EAGLE_LASER": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 4.0
+   }
+  ],
+  "cast_range": "19",
+  "caster_moves": null,
+  "casting_time": "0.5",
+  "channel": null,
+  "cooldown": "5",
+  "description": "Shoot a beam in the targeted direction, dealing 130 magical damage to all enemies hit.\nEnemies marked by Light Spark cause an explosion in a 4 radius that deals an additional 75 magical damage.\n\nIf at least one Shift Charge is active on you, the beam will consume it, reducing its cooldown by 0.6.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Piercing Light",
+  "preferred_target": "enemy",
+  "radius": 9.0,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
  "AXEBOOST": {
   "area": null,
   "cast_range": "0",
@@ -688,7 +764,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Charge toward the targeted position, decreasing Healing Received of all enemies in a 5 radius by 0.2 for 3.\nIncreases Healing Received of up to $$AXE_CHARGE_CONDITION.applyspell.maxeffectareatargets$ allies in a 5 radius by 0.2 for 4.",
+  "description": "Charge toward the targeted position, decreasing Healing Received of all enemies in a 5 radius by 0.2 for 3.\nIncreases Healing Received of up to 5 allies in a 5 radius by 0.2 for 4.",
   "directions": [
    "enemy",
    "ally"
@@ -831,6 +907,113 @@
   ],
   "target": "self"
  },
+ "BEAR_DASH_THROUGH": {
+  "area": null,
+  "cast_range": "14",
+  "caster_moves": true,
+  "casting_time": "0.3",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Combine up to two abilities. The combo resets after 8.\n\n1st Wild Onslaught:\nDash in targeted direction knocking back all enemies you pass through by 2.\nDeals 85 physical damage.\nDecreases damage resistances by 0.15 for 3.\n\n2nd Roar:\nUnleash a mighty roar, dealing 130 physical damage (vs players) / 200 physical damage (vs mobs) in a cone in front of you\nEnemies hit will flee from you for 1.2.\nMakes you the highest-priority target for all mobs hit.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "knockback",
+   "shield"
+  ],
+  "max_targets": null,
+  "name": "Wild Onslaught",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "debuff",
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "BEAR_GROUND_SMASH": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "5",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "5",
+  "description": "Smash the ground, dealing 130 physical damage (vs players) / 160 physical damage (vs mobs) in a 4 radius.\nIncreases your threat towards all mobs hit by 200.\n\nIf at least one Shift Charge is active on you, the smash will consume it, stunning all enemies hit for 0.9.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "duration": 0.08,
+   "value": 0.08
+  },
+  "flags": [
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Feral Bash",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "BEAR_ROAR": {
+  "area": null,
+  "cast_range": "6",
+  "caster_moves": null,
+  "casting_time": "0.6",
+  "channel": null,
+  "cooldown": "18",
+  "description": "Combine up to two abilities. The combo resets after 8.\n\n1st Wild Onslaught:\nDash in targeted direction knocking back all enemies you pass through by 2.\nDeals 85 physical damage.\nDecreases damage resistances by 0.15 for 3.\n\n2nd Roar:\nUnleash a mighty roar, dealing 130 physical damage (vs players) / 200 physical damage (vs mobs) in a cone in front of you\nEnemies hit will flee from you for 1.2.\nMakes you the highest-priority target for all mobs hit.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "knockback",
+   "shield"
+  ],
+  "max_targets": null,
+  "name": "Wild Onslaught",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "debuff",
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "ground"
+ },
  "BERSERK_SPRINT": {
   "area": null,
   "cast_range": "0",
@@ -838,7 +1021,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Motivate yourself with vengeance, applying two Vengeance Charges on you.\nApply one additional Vengeance Charge for every 0.2 Health you are missing.\n\nEach Vengeance Charge increases your Move Speed by 0.05 and your damage by 0.05 for 5 (stacks up to 5 times).",
+  "description": "Motivate yourself with vengeance, applying two Vengeance Charges on you.\nApply one additional Vengeance Charge for every 0.2 Health you are missing.\n\nEach Vengeance Charge increases your Move Speed by 0.25 and your damage by 0.05 for 5 (stacks up to 5 times).",
   "directions": [
    "self"
   ],
@@ -1148,7 +1331,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Give in to your Bloodthirsty Blade, dealing an additional 50 magical damage (vs. players) / 50 magical damage (vs. mobs) with each Auto-Attack.\nSteals 1 of the Health the enemy has lost through the bonus damage.\nIncreases your Move Speed by 0.3.\n\nDeals 0.04 of your Max Health as true damage to yourself every 1.\n\nThe ability lasts up to 6 but can be deactivated earlier.",
+  "description": "Give in to your Bloodthirsty Blade, dealing an additional 50 magical damage (vs. players) / 30 magical damage (vs. mobs) with each Auto-Attack.\nSteals 1 of the Health the enemy has lost through the bonus damage.\nIncreases your Move Speed by 0.3.\n\nDeals 0.04 of your Max Health as true damage to yourself every 1.\n\nThe ability lasts up to 6 but can be deactivated earlier.",
   "directions": [
    "enemy",
    "self"
@@ -1346,7 +1529,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Ignite yourself, dealing 0.02 true damage (vs. players) / 0.02 magical damage (vs. mobs / mounts) every 0.5 to up to 5 enemies within a 7 radius around you.\n\nTake 0.02 of your Max Health every 0.5 as true damage.\nDecreases your Healing Received by 0.5.\n\nThe ability can last up to 20 but can be deactivated earlier.",
+  "description": "Ignite yourself, dealing 0.02 true damage (vs. players) / 43.88 magical damage (vs. mobs / mounts) every 0.5 to up to 5 enemies within a 7 radius around you.\n\nTake 0.02 of your Max Health every 0.5 as true damage.\nDecreases your Healing Received by 0.5.\n\nThe ability can last up to 20 but can be deactivated earlier.",
   "directions": [
    "enemy",
    "self"
@@ -1770,7 +1953,7 @@
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "18",
-  "description": "Mend the wounds of up to 15 allies within a 11 radius around you, restoring their Health based on their number of Rejuvenation Charges.\n\n[#] Rejuvenation Charges: 0 | 1 | 2 | 3\n[#] Health: 107 | 107 | 107 | 107\n\nAny enemies hit with $applyspell.IfSpellActive.atleastcharges$ or more Thorn Charges active on them, will be rooted for 2.\nDeals 112 magical damage.",
+  "description": "Mend the wounds of up to 15 allies within a 11 radius around you, restoring their Health based on their number of Rejuvenation Charges.\n\n[#] Rejuvenation Charges: 0 | 1 | 2 | 3\n[#] Health: 107 | 133 | 173 | 227\n\nAny enemies hit with 3 or more Thorn Charges active on them, will be rooted for 2.\nDeals 112 magical damage.",
   "directions": [
    "enemy",
    "ally",
@@ -1812,7 +1995,6 @@
    "value": 0.08
   },
   "flags": [
-   "shield",
    "stun"
   ],
   "max_targets": null,
@@ -1866,7 +2048,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Revitalize up to $applyspell.maxeffectareatargets$ allies in a 4 radius of the targeted position, healing them based on the number of Rejuvenation Charges on them.\nCleanses all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).\n \n[#] Rejuvenation Charges: 0 | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$\n[#] Heal: 65 | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.value$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge",
+  "description": "Revitalize up to 10 allies in a 4 radius of the targeted position, healing them based on the number of Rejuvenation Charges on them.\nCleanses all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).\n \n[#] Rejuvenation Charges: 0 | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.mincharges$\n[#] Heal: 65 | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.value$ | $$CLEANSEHEAL_HEAL.directattributechange.valueoverride.ifcharge.value$ | $$CLEANSEHEAL_HEAL.di",
   "directions": [
    "ally"
   ],
@@ -2172,7 +2354,7 @@
   "casting_time": "0.7",
   "channel": true,
   "cooldown": "35",
-  "description": "Unleash a $channeling.spelleffectarea.rectangle.height_start$ long beam of Avalonian energy in the targeted direction, piercing through all enemies while channeling for $channeling.totalduration$ (can't be interrupted).\nDeals 106 magical damage (vs players) / 106 magical damage (vs mobs) every 0.3.\nThe beam slowly follows the cursor position.",
+  "description": "Unleash a $channeling.spelleffectarea.rectangle.height_start$ long beam of Avalonian energy in the targeted direction, piercing through all enemies while channeling for $channeling.totalduration$ (can't be interrupted).\nDeals 106 magical damage (vs players) / 70 magical damage (vs mobs) every 0.3.\nThe beam slowly follows the cursor position.",
   "directions": [
    "enemy"
   ],
@@ -2281,6 +2463,74 @@
   ],
   "target": "ground"
  },
+ "CRYSTAL_COBRA_PETRIFY": {
+  "area": null,
+  "cast_range": "12",
+  "caster_moves": null,
+  "casting_time": "0.6",
+  "channel": true,
+  "cooldown": "30",
+  "description": "Enchant your gaze to Petrify unmounted enemies while channeling for up to 3 (can't be interrupted).\nDeals {1} true damage (vs players) / {2} magical damage (vs mobs) over {3}.\n\nPetrified enemies are stunned (ignores Crowd Control Resistance, cannot be cleansed) and Immune to Forced Movement effects.\nPetrified players take 2.3333 less Damage vs. All and have their Healing Received decreased by 0.7.\n\nTargets cannot be Petrified again for 10.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "cleanse",
+   "heal",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Serpent's Gaze",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "CRYSTAL_COBRA_SPIT": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0.25",
+  "channel": null,
+  "cooldown": "4",
+  "description": "Spew concentrated magic at the targeted position, dealing 66 magical damage in a 4 radius.\n\nIf you have at least 1 Shift Charge, consume it to leave an area that deals {3} magical damage over 3.5. \nReduce enemies' healing received by 0.2.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal",
+   "heal_reduction"
+  ],
+  "max_targets": null,
+  "name": "Crystalburst",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
  "CRYSTAL_DAGGER_BLADE_RING": {
   "area": null,
   "cast_range": "7",
@@ -2370,7 +2620,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "10",
-  "description": "Concentrate a beam of vile energy at the targeted enemy, dealing 48 magical damage every 0.5, while channeling for $channeling.totalduration$.\n\nIf at least one Vile Curse Charge is active on the target, the beam will consume 1 charge every 2 ticks, dealing 48 magical damage (vs. players) / 48 magical damage (vs. mobs) in a $channeling.directattributechange.effectarearadius$ radius instead.",
+  "description": "Concentrate a beam of vile energy at the targeted enemy, dealing 48 magical damage every 0.5, while channeling for $channeling.totalduration$.\n\nIf at least one Vile Curse Charge is active on the target, the beam will consume 1 charge every 2 ticks, dealing 72 magical damage (vs. players) / 58 magical damage (vs. mobs) in a 4 radius instead.",
   "directions": [
    "enemy"
   ],
@@ -2492,7 +2742,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "25",
-  "description": "Send an Anguished Soul in the targeted direction, passing through all enemies.\nDeals 160 magical damage.\nAny enemy hit will be feared for a duration based on the amount of Vile Curse Charges on them.\n\n[#] Charges: 0 | 1| 2 | 3 | 4\n[#] Fear Duration: 1.25 | 1.25 | 1.25 | 1.25 | 1.25\n\nConsumes up to 2 Vile Curse charges on the enemy.",
+  "description": "Send an Anguished Soul in the targeted direction, passing through all enemies.\nDeals 160 magical damage.\nAny enemy hit will be feared for a duration based on the amount of Vile Curse Charges on them.\n\n[#] Charges: 0 | 1| 2 | 3 | 4\n[#] Fear Duration: 1.25 | 1.5 | 1.75 | 2 | 2.25\n\nConsumes up to 2 Vile Curse charges on the enemy.",
   "directions": [
    "enemy"
   ],
@@ -2598,8 +2848,7 @@
   },
   "flags": [
    "heal",
-   "knockback",
-   "shield"
+   "knockback"
   ],
   "max_targets": null,
   "name": "Plaguebringer",
@@ -2620,7 +2869,7 @@
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "15",
-  "description": "Cast an orb of Dark Matter at the targeted enemy.\nIt then jumps to the closest enemy within 9 of the last enemy hit, dealing 112 magical damage (vs. players) / 112 magical damage (vs. mobs) with each hit (can hit up to 7 targets; can hit the same target multiple times but not twice in a row).",
+  "description": "Cast an orb of Dark Matter at the targeted enemy.\nIt then jumps to the closest enemy within 9 of the last enemy hit, dealing 112 magical damage (vs. players) / 56 magical damage (vs. mobs) with each hit (can hit up to 7 targets; can hit the same target multiple times but not twice in a row).",
   "directions": [
    "enemy"
   ],
@@ -2643,7 +2892,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Dash towards the targeted position, throwing all enemies you pass through into the air for $$DASHDMG_KNOCKBACK.knockback.duration$.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 61 | 61 | 61 | 61\n\nConsumes all your Spirit Spear Charges.",
+  "description": "Dash towards the targeted position, throwing all enemies you pass through into the air for $$DASHDMG_KNOCKBACK.knockback.duration$.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 61 | 98 | 147 | 208\n\nConsumes all your Spirit Spear Charges.",
   "directions": [
    "enemy",
    "self"
@@ -2836,7 +3085,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Rush into battle, increasing your Move Speed by 0.35 and Defense by 0.35 for 3.\nGrants you immunity to purges while active.\nApplies one Heroic Charge on you.\n\nEach Heroic Charge increases your Auto-Attack Speed by 0.12 for 6 (stacks up to 3 times).",
+  "description": "Rush into battle, increasing your Move Speed by 0.3 and Defense by 0.35 for 3.\nGrants you immunity to purges while active.\nApplies one Heroic Charge on you.\n\nEach Heroic Charge increases your Auto-Attack Speed by 0.12 for 6 (stacks up to 3 times).",
   "directions": [
    "self"
   ],
@@ -2861,7 +3110,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
-  "description": "Attack the targeted enemy, dealing 60 physical damage.\nIncreases damage resistances by 0.15 and Crowd Control Resistance by 0.15 for 4 for you and up to 10 allies in a 8 radius",
+  "description": "Attack the targeted enemy, dealing 60 physical damage.\nIncreases damage resistances by 0.15 and Crowd Control Resistance by 0.2 for 4 for you and up to 10 allies in a 8 radius",
   "directions": [
    "enemy",
    "ally",
@@ -2937,7 +3186,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Corrupt the ground below your feet for 5.5, leaving a trail of rotten ground lasting 2.2.\nIncreases your Move Speed by 0.3.\nEnemies walking over the trail will have their damage resistances decreased by 0.15 and Healing Received decreased by 0.15, lasting 3 after they leave the trail.",
+  "description": "Corrupt the ground below your feet for 5.5, leaving a trail of rotten ground lasting 2.2.\nIncreases your Move Speed by 0.3.\nEnemies walking over the trail will have their damage resistances decreased by 0.15 and Healing Received decreased by 0.2, lasting 3 after they leave the trail.",
   "directions": [
    "enemy"
   ],
@@ -3014,7 +3263,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "0",
-  "description": "Float into the air and become immune to all Crowd Control effects for up to 3. \n\nRecast the ability to dive towards the targeted position.\nDeals physical damage within a 4 radius upon impact based on the distance of the enemy from the targeted position.\n\n[#] Distance: 4 | 4\n[#] Damage: 264 | 264",
+  "description": "Float into the air and become immune to all Crowd Control effects for up to 3. \n\nRecast the ability to dive towards the targeted position.\nDeals physical damage within a 6 radius upon impact based on the distance of the enemy from the targeted position.\n\n[#] Distance: 4 | 6\n[#] Damage: 264 | 166",
   "directions": [
    "enemy"
   ],
@@ -3246,7 +3495,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "React to the targeted enemy or ally, adapting your fighting style for 4 based on the weapon the target is wielding.\n\nIf the target is wielding a magic weapon:\nIncreases your Magic Resistance by 0.8 and all damage by 0.8.\n\nIf the target is wielding a physical weapon:\nIncreases your Armor by 0.8 and all damage by 0.8.\n\nIf the target is a mob:\nIncreases your Defense vs. mobs by 0.5 and damage vs. mobs by 0.5.",
+  "description": "React to the targeted enemy or ally, adapting your fighting style for 4 based on the weapon the target is wielding.\n\nIf the target is wielding a magic weapon:\nIncreases your Magic Resistance by 0.8 and all damage by 0.1.\n\nIf the target is wielding a physical weapon:\nIncreases your Armor by 0.8 and all damage by 0.1.\n\nIf the target is a mob:\nIncreases your Defense vs. mobs by 0.5 and damage vs. mobs by 0.25.",
   "directions": [
    "enemy",
    "ally"
@@ -3384,7 +3633,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Summon an Aegis of Energy, increasing your Armor by 0.38 and your Magic Resistance by 0.38 for 4.\nWhenever you take damage, you will restore $gainenergyondamage.energygained$ Energy.",
+  "description": "Summon an Aegis of Energy, increasing your Armor by 0.38 and your Magic Resistance by 0.1 for 4.\nWhenever you take damage, you will restore $gainenergyondamage.energygained$ Energy.",
   "directions": [
    "self"
   ],
@@ -3522,7 +3771,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "35",
-  "description": "Enter a state of empowering fury for 10.\nWhenever you take damage your fury grows, increasing all damage you deal by 0.08, and the duration of your Crowd Control effects by 0.08 (stacks up to 8 times).",
+  "description": "Enter a state of empowering fury for 10.\nWhenever you take damage your fury grows, increasing all damage you deal by 0.08, and the duration of your Crowd Control effects by 0.05 (stacks up to 8 times).",
   "directions": [
    "self"
   ],
@@ -3538,6 +3787,78 @@
   ],
   "target": "self"
  },
+ "ENT_CHANNEL_TREE": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": true,
+  "cooldown": "30",
+  "description": "Gather nature's energy, becoming immune to damage, while channeling for up to {0} (can't be interrupted; can be used while stunned or silenced).\nSlows all enemies within a 11 radius by 0.5.\nDeals 44 magical damage every 0.7.\n\nWhile in the radius, allies gain a shield (before resistances) that absorbs up to 175 damage during the next 3 and grants immunity to Forced Movement effects.",
+  "directions": [
+   "enemy",
+   "ally"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "shield",
+   "silence",
+   "slow",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Barbed Roots",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "self"
+ },
+ "ENT_HEAL_AREA": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   },
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
+  "cast_range": "12",
+  "caster_moves": null,
+  "casting_time": "0.2",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Create a Seedling's Bloom with a {0} radius at the targeted position, lasting 8.\nDeals 86 magical damage on impact.\nAllies within in the Bloom heal 7 Health every 1.\n\nIf at least one Shift Charge is active on you, the Bloom will consume it, growing up to a {5} radius over {6}. \nAllies within the empowered Bloom heal 14 Health every 1.\nIncreases Max and Current Health by 0.1.",
+  "directions": [
+   "ally",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal"
+  ],
+  "max_targets": 5,
+  "name": "Seedling's Bloom",
+  "preferred_target": "ally",
+  "radius": 6.0,
+  "tags": [
+   "buff",
+   "dmg",
+   "heal",
+   "other"
+  ],
+  "target": "ground"
+ },
  "ETHERIAL_PATH": {
   "area": null,
   "cast_range": "16",
@@ -3545,7 +3866,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "60",
-  "description": "Dash towards the targeted position, becoming invisible and immune to Forced Movement effects.\nCleanses all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).\n\nIncreases your Move Speed by 0.75 and Max Load by 0.75 for 7.\nDrop any object you are escorting.",
+  "description": "Dash towards the targeted position, becoming invisible and immune to Forced Movement effects.\nCleanses all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).\n\nIncreases your Move Speed by 0.75 and Max Load by 2 for 7.\nDrop any object you are escorting.",
   "directions": [
    "self"
   ],
@@ -3655,7 +3976,7 @@
   "casting_time": "1.5",
   "channel": true,
   "cooldown": "15",
-  "description": "Throw fiery orbs at the targeted enemy every 1.5 while channeling for $channeling.totalduration$.\n\nEach orb deals 55 magical damage in a 3 radius.\nLeaves a burning patch, igniting all enemies on it for 6.\nDeals 15 magical damage (vs. players) / 15 magical damage (vs. mobs) every 0.5 (stacks up to 4 times). (This damage cannot be reflected).",
+  "description": "Throw fiery orbs at the targeted enemy every 1.5 while channeling for $channeling.totalduration$.\n\nEach orb deals 55 magical damage in a 3 radius.\nLeaves a burning patch, igniting all enemies on it for 6.\nDeals 15 magical damage (vs. players) / 5.5 magical damage (vs. mobs) every 0.5 (stacks up to 4 times). (This damage cannot be reflected).",
   "directions": [
    "enemy"
   ],
@@ -3730,7 +4051,7 @@
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "30",
-  "description": "Summon a Flaming Phoenix that breathes fire over a $spelleffectarea.rectangle.height_max$ long area from the targeted position in the targeted direction.\nDeals 200 magical damage to all enemies hit.\nSets the ground on fire for 6.5.\nEnemies within the area take 11 magical damage every 0.5 (this damage cannot be reflected).\nAlso reduces Healing Received by 0.4.",
+  "description": "Summon a Flaming Phoenix that breathes fire over a $spelleffectarea.rectangle.height_max$ long area from the targeted position in the targeted direction.\nDeals 200 magical damage to all enemies hit.\nSets the ground on fire for 6.\nEnemies within the area take 11 magical damage every 0.5 (this damage cannot be reflected).\nAlso reduces Healing Received by 0.4.",
   "directions": [
    "enemy"
   ],
@@ -3787,7 +4108,7 @@
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "4",
-  "description": "Fire a burning orb at the targeted position, dealing 70 magical damage in a 3 radius.\nSets the ground on fire for 4.\nDeals 55 magical damage (vs players) / 55 magical damage (vs mobs) every 0.5 (this damage cannot be reflected).",
+  "description": "Fire a burning orb at the targeted position, dealing 70 magical damage in a 3 radius.\nSets the ground on fire for 4.\nDeals 55 magical damage (vs players) / 20 magical damage (vs mobs) every 0.5 (this damage cannot be reflected).",
   "directions": [],
   "escalation": {
    "value": 0.08
@@ -3986,6 +4307,65 @@
   ],
   "target": "ground"
  },
+ "FLAME_ORB": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
+  "cast_range": "18",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Shoot a Hellfire Orb in the targeted direction, burning through all enemies.\nDeals 120 magical damage to all enemies hit (this damage cannot be reflected).\nDamage increases by {5} every 0.6 while traveling (up to 4 times). \n\nIf at least 1 Shift Charges are active on you, recast the ability to consume them and detonate the orb. \nDeals 150 magical damage to all enemies in a 4 radius (this damage cannot be reflected).\nTeleports you to the explosion.\nIncreases the cooldown to 6.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Fireflash Orb",
+  "preferred_target": "enemy",
+  "radius": 2.0,
+  "tags": [
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "FLAME_ORB_TELEPORT_EFFECT": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "6",
+  "description": "Shoot a Hellfire Orb in the targeted direction, burning through all enemies.\nDeals 120 magical damage to all enemy hit (this damage cannot be reflected).\n\nIf at least 1 Shift Charges are active on you, recast the ability to consume them and detonate the orb. \nDeals 150 magical damage to all enemies in a 4 radius (this damage cannot be reflected).\nTeleports you to the explosion.\nIncreases the cooldown to 6.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Fireflash Orb",
+  "preferred_target": "neutral",
+  "radius": 4.0,
+  "tags": [
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "storedtarget"
+ },
  "FLARE": {
   "area": null,
   "cast_range": "11",
@@ -4023,7 +4403,6 @@
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "silence"
   ],
   "max_targets": null,
@@ -4043,7 +4422,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "180",
-  "description": "Run from your enemies, increasing Move Speed by 0.7 and Max Load by 0.7 for 10.\nTurns you invisible to mobs while buffed.\nDrop any object you are escorting.\n\nSilences you for 13.",
+  "description": "Run from your enemies, increasing Move Speed by 0.7 and Max Load by 2 for 10.\nTurns you invisible to mobs while buffed.\nDrop any object you are escorting.\n\nSilences you for 13.",
   "directions": [
    "enemy",
    "self"
@@ -4082,6 +4461,2153 @@
   "tags": [
    "buff",
    "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_AVALON_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.035, Cooldown Rate by 0.028 and your Defense by 0.025, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Avalonian Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_AVALON_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.067, Cooldown Rate by 0.053 and your Defense by 0.047, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Avalonian Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_AVALON_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.095, Cooldown Rate by 0.076 and your Defense by 0.066, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Avalonian Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.035, Cooldown Rate by 0.028, and your Healing Cast by 0.025, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Leyfin Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.067, Cooldown Rate by 0.053, and your Healing Cast by 0.047, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Leyfin Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.095, Cooldown Rate by 0.076, and your Healing Cast by 0.066, for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Leyfin Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.05 and Cooldown Rate by 0.04 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.095 and Cooldown Rate by 0.076 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_CASTSPEED_CDR_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.135 and Cooldown Rate by 0.108 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_AVALON_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.035, and your Health Regeneration outside of combat by 0.7, for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_AVALON_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.067, and your Health Regeneration outside of combat by 1.33, for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_AVALON_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.095, and your Health Regeneration outside of combat by 1.89, for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.05 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.095 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_DMG_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.135 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_LIFESTEAL_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Whenever you deal damage, steal 0.0263 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Meat Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_LIFESTEAL_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Whenever you deal damage, steal 0.0499 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Meat Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_LIFESTEAL_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Whenever you deal damage, steal 0.0716 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Meat Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_AVALON_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.04 and the duration of your Crowd Control effects by 0.07 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_AVALON_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.076 and the duration of your Crowd Control effects by 0.133 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_AVALON_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.109 and the duration of your Crowd Control effects by 0.189 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Avalonian Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0575 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.1093 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_MAXHP_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.1553 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_BUFF_SPECIAL_FOOD_DRAKE_EGG_FAME": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Combat and Gathering Fame increased by 0.05 for 90000.\nDoes not remove combat food buffs.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "purge"
+  ],
+  "max_targets": null,
+  "name": "FOOD_BUFF_SPECIAL_FOOD_DRAKE_EGG_FAME",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "self"
+ },
+ "FOOD_CRAFTING_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.16 and Crafting Quality by 33 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_CRAFTING_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.32 and Crafting Quality by 66 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_CRAFTING_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.48 and Crafting Quality by 99 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_EASTER_CHOCOLATE": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Makes you happy, increasing your Energy Regeneration by 0.1 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Chocolate",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Reduces your Energy Costs by 0.035 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Lowriver Crab",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Reduces your Energy Costs by 0.067 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Drybrook Crab",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Reduces your Energy Costs by 0.095 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Dusthole Crab",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.035, Cooldown Rate by 0.028 and reduces your Energy Costs by 0.042 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Crab Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.067, Cooldown Rate by 0.0532 and reduces your Energy Costs by 0.08 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Crab Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_CASTSPEED_CDR_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cast Speed by 0.095, Cooldown Rate by 0.0756 and reduces your Energy Costs by 0.113 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Crab Omelette",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cooldown Rate by 0.035 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Greenriver Eel",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cooldown Rate by 0.067 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Redspring Eel",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cooldown Rate by 0.095 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Deadwater Eel",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.035 and your Cooldown Rate by 0.028 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Eel Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.067 and your Cooldown Rate by 0.0532 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Eel Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_DMG_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases all damage you deal by 0.095 and your Cooldown Rate by 0.0756 for 1800.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Eel Stew",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_HEALBONUS_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Cast by 0.025 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "FOOD_FISH_BUFF_HEALBONUS_1_RAW",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_HEALBONUS_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Cast by 0.047 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "FOOD_FISH_BUFF_HEALBONUS_2_RAW",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_HEALBONUS_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Cast by 0.066 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "FOOD_FISH_BUFF_HEALBONUS_3_RAW",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.035 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Whitefog Snapper",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0665 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Clearhaze Snapper",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0945 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Puremist Snapper",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0403.\nWhenever you deal damage, steal 0.0184 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Snapper Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0765.\nWhenever you deal damage, steal 0.035 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Snapper Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_LIFESTEAL_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.1087.\nWhenever you deal damage, steal 0.0497 of the Health the enemy has lost for the next 1800.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Snapper Roast",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "heal",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Received by 0.035 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Stonestream Lurcher",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Received by 0.067 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Rushwater Lurcher",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Healing Received by 0.095 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Thunderfall Lurcher",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0403 and your Healing Received by 0.035 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Lurcher Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.0765 and your Healing Received by 0.067 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Lurcher Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_BUFF_MAXHP_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Max Health by 0.1087 and your Healing Received by 0.095 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Lurcher Sandwich",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.088 and Crafting Quality by 16.5 for 120.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Shallowshore Squid",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.175 and Crafting Quality by 33 for 120.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Midwater Octopus",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.263 and Crafting Quality by 49.5 for 120.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Deepwater Kraken",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.248 and Crafting Quality by 49.5 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Seafood Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.495 and Crafting Quality by 99 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Seafood Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_CRAFTING_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crafting Speed by 0.743 and Crafting Quality by 148.5 for 120.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Seafood Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.3 for 1800.\nGain 5 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Common Rudd",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.525 for 1800.\nGain 10 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Striped Carp",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.75 for 1800.\nGain 15 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Albion Perch",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_4_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.125 for 1800.\nGain 20 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Bluescale Pike",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_5_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.5 for 1800.\nGain 30 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Spotted Trout",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_6_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.875 for 1800.\nGain 40 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Brightscale Zander",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_7_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 2.25 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Danglemouth Catfish",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_FRESHWATER_8_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases the duration of your Crowd Control effects by 0.1 for 1800.\nGain 140 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "River Sturgeon",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_GRILLEDFISH_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Cooldown Rate by 0.038 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Grilled Fish",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Energy Regeneration by 0.053 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Greenmoor Clam",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Energy Regeneration by 0.1 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Murkwater Clam",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Energy Regeneration by 0.189 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Blackbog Clam",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.7 and your Energy Regeneration by 0.053 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Clam Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.33 and your Energy Regeneration by 0.1 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Clam Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_HEALTH_REG_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.89 and your Energy Regeneration by 0.142 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Clam Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crowd Control Resistance by 0.113 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Upland Coldeye",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crowd Control Resistance by 0.225 for 1800.\nGain 100 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Mountain Blindeye",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Crowd Control Resistance by 0.338 for 1800.\nGain 150 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Frostpeak Deadeye",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Gathering Yield by 0.05, your Max Load by 0.075, and your Crowd Control Resistance by 0.113 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Fish Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Gathering Yield by 0.1, your Max Load by 0.15, and your Crowd Control Resistance by 0.225 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Fish Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_LOAD_GATHER_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Gathering Yield by 0.15, your Max Load by 0.225, and your Crowd Control Resistance by 0.338 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Fish Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_1_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.3 for 1800.\nGain 5 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Common Herring",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_2_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.525 for 1800.\nGain 10 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Striped Mackerel",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_3_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 0.75 for 1800.\nGain 15 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Flatshore Plaice",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_4_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.125 for 1800.\nGain 20 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Bluescale Cod",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_5_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.5 for 1800.\nGain 30 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Spotted Wolffish",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_6_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.875 for 1800.\nGain 40 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Strongfin Salmon",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_7_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 2.25 for 1800.\nGain 50 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Bluefin Tuna",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SALTWATER_8_RAW": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases the duration of your Crowd Control effects by 0.1 for 1800.\nGain 140 Fishing Fame.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Steelscale Swordfish",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "FOOD_FISH_SEAWEEDSALAD_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Fishing Speed by 0.1 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Seaweed Salad",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_HEALTH_REG_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Vegetable Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_HEALTH_REG_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 1.9 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Vegetable Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_HEALTH_REG_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Increases your Health Regeneration outside of combat by 2.7 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Vegetable Soup",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_LOAD_GATHER_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Increases your Gathering Yield by 0.05 and your Max Load by 0.1 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_LOAD_GATHER_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Increases your Gathering Yield by 0.1 and your Max Load by 0.2 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "FOOD_LOAD_GATHER_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Increases your Gathering Yield by 0.15 and your Max Load by 0.3 for 1800.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Meat Pie",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
   ],
   "target": "self"
  },
@@ -4469,7 +6995,7 @@
   "casting_time": "0.7",
   "channel": null,
   "cooldown": "30",
-  "description": "Create an Ice Crystal with a $spelleffectarea.circle.radius_max$ radius at the targeted position, stunning all enemies hit for 1.\nAfter the stun, the crystal explodes, dealing 173 magical damage (vs. players) / 173 magical damage (vs. mobs) to all enemies within a $spelleffectarea.circle.radius_max$ radius (the damage can't be reflected).",
+  "description": "Create an Ice Crystal with a $spelleffectarea.circle.radius_max$ radius at the targeted position, stunning all enemies hit for 1.\nAfter the stun, the crystal explodes, dealing 173 magical damage (vs. players) / 253.7 magical damage (vs. mobs) to all enemies within a $spelleffectarea.circle.radius_max$ radius (the damage can't be reflected).",
   "directions": [
    "enemy"
   ],
@@ -4512,7 +7038,6 @@
   },
   "flags": [
    "heal",
-   "shield",
    "slow",
    "stun"
   ],
@@ -4620,7 +7145,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Grow to giant size, increasing your damage resistances by 0.3 and your Auto-Attack Range by 0.3 for 10.\nCreates an aura with a 7 radius around you, slowing all enemies in it by 0.35.\n\nWhile the ability is active, you can cast Giant Smash multiple times by recasting the ability.\n\nGiant Smash:\nSlam your hammers on the ground, dealing 125 physical damage to all enemies in a $$GIANTSTEPS_SMASH.spelleffectarea.circle.radius_start$ radius around the targeted position.\nThrows all enemies hit into the air for $$GIANTSTEPS_SMASH_KNOCKBACK.knockback.duration$.",
+  "description": "Grow to giant size, increasing your damage resistances by 0.3 and your Auto-Attack Range by 0.5 for 10.\nCreates an aura with a 7 radius around you, slowing all enemies in it by 0.35.\n\nWhile the ability is active, you can cast Giant Smash multiple times by recasting the ability.\n\nGiant Smash:\nSlam your hammers on the ground, dealing 125 physical damage to all enemies in a $$GIANTSTEPS_SMASH.spelleffectarea.circle.radius_start$ radius around the targeted position.\nThrows all enemies hit into the air for $$GIANTSTEPS_SMASH_KNOCKBACK.knockback.duration$.",
   "directions": [
    "enemy",
    "self"
@@ -4672,7 +7197,6 @@
    "value": 0.08
   },
   "flags": [
-   "shield",
    "slow"
   ],
   "max_targets": null,
@@ -4693,7 +7217,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Disregard the threats around you, increasing your Move Speed by 0.75 and all damage by 0.75.\n\nDecreases your Defense by 0.75.\n\nThe ability can last up to 7 but can be deactivated earlier.",
+  "description": "Disregard the threats around you, increasing your Move Speed by 0.75 and all damage by 0.15.\n\nDecreases your Defense by 0.15.\n\nThe ability can last up to 7 but can be deactivated earlier.",
   "directions": [
    "self"
   ],
@@ -4829,7 +7353,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Plant a mine with a $spelleffectarea.circle.radius_max$ radius at the targeted position, lasting 2.\nThe first player to step on the mine will activate it, dealing 270 magical damage to all enemies in a 7 radius (the damage can't be reflected).",
+  "description": "Plant a mine with a $spelleffectarea.circle.radius_max$ radius at the targeted position, lasting 12.\nThe first player to step on the mine will activate it, dealing 270 magical damage to all enemies in a 7 radius (the damage can't be reflected).",
   "directions": [
    "enemy"
   ],
@@ -4921,7 +7445,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "30",
-  "description": "Charge up the Earth Crusher, slowing yourself by 0.25 while channeling for up to $channeling.totalduration$ (can't be interrupted).\n\nDeals magical damage to all enemies in an area around you.\nThe damage and radius is based on how long you have channeled (this damage cannot be reflected; you may end the channel early).\n\n[#] Charge Up Time: 0.5s | 1s | 1.5s | 2s\n[#] Damage: 165 | 165 | 165 | 165\n[#] Radius: 5 | 5 | 5 | 5\n\nChanneling for the full duration will throw all enemies hit in the air for $$GROWING_PUNCH_KNOCKBACK.knockback.duration$.",
+  "description": "Charge up the Earth Crusher, slowing yourself by 0.25 while channeling for up to $channeling.totalduration$ (can't be interrupted).\n\nDeals magical damage to all enemies in an area around you.\nThe damage and radius is based on how long you have channeled (this damage cannot be reflected; you may end the channel early).\n\n[#] Charge Up Time: 0.5s | 1s | 1.5s | 2s\n[#] Damage: 165 | 175 | 185 | 195\n[#] Radius: 5 | 7 | 8 | 9\n\nChanneling for the full duration will throw all enemies hit in the air for $$GROWING_PUNCH_KNOCKBACK.knockback.duration$.",
   "directions": [
    "enemy",
    "self"
@@ -5040,7 +7564,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
-  "description": "Swing your pike at the targeted enemy, rooting them for 2.79.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 69.37 | 69.37 | 69.37 | 69.37",
+  "description": "Swing your pike at the targeted enemy, rooting them for 2.79.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 69.37 | 110.99 | 166.48 | 235.85",
   "directions": [
    "enemy",
    "self"
@@ -5209,7 +7733,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Hasten your attacks, increasing your Auto-Attack Speed by 0.2 and all damage you deal by 0.2 for 8.",
+  "description": "Hasten your attacks, increasing your Auto-Attack Speed by 0.6 and all damage you deal by 0.2 for 8.",
   "directions": [
    "self"
   ],
@@ -5839,7 +8363,7 @@
   "casting_time": "1.2",
   "channel": null,
   "cooldown": "0",
-  "description": "Drop an ice shard on the targeted position, exploding in a 3 radius on impact.\nDeals 130 magical damage (vs. players) / 130 magical damage (vs. mobs) to all enemies hit.",
+  "description": "Drop an ice shard on the targeted position, exploding in a 3 radius on impact.\nDeals 130 magical damage (vs. players) / 90 magical damage (vs. mobs) to all enemies hit.",
   "directions": [
    "enemy"
   ],
@@ -5873,7 +8397,7 @@
   "casting_time": "0.5",
   "channel": null,
   "cooldown": "30",
-  "description": "Summon an ice storm with a $spelleffectarea.circle.radius_start$ radius, moving from the targeted position in the targeted direction for $spelleffectarea.node.distance_max$ and lasting for 15.\nDeals 25 magical damage (vs. players) / 25 magical damage (vs. mobs) to all enemies within the storm every 0.5 (the damage can't be reflected).\nSlows by 0.3.",
+  "description": "Summon an ice storm with a $spelleffectarea.circle.radius_start$ radius, moving from the targeted position in the targeted direction for $spelleffectarea.node.distance_max$ and lasting for 15.\nDeals 72 magical damage (vs. players) / 25 magical damage (vs. mobs) to all enemies within the storm every 0.5 (the damage can't be reflected).\nSlows by 0.3.",
   "directions": [
    "enemy"
   ],
@@ -6016,6 +8540,30 @@
    "other"
   ],
   "target": "ground"
+ },
+ "IMP_BEAM": {
+  "area": null,
+  "cast_range": "12",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": true,
+  "cooldown": "12",
+  "description": "Release a Hellfire Barrage at the targeted enemy, slowing yourself by 0.3, while channeling for up to {1} (taking damage reduces the channel time).\nDeals 30 magical damage every 0.2.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Hellfire Barrage",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
  },
  "INNERBLEEDING": {
   "area": null,
@@ -6279,7 +8827,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
-  "description": "Attack the targeted enemy, dealing 56.67 physical damage.\nPuts the target to sleep for 5 (vs. players) / 5 (vs. mobs). (Taking damage wakes the enemy up.)",
+  "description": "Attack the targeted enemy, dealing 56.67 physical damage.\nPuts the target to sleep for 5 (vs. players) / 10 (vs. mobs). (Taking damage wakes the enemy up.)",
   "directions": [
    "enemy"
   ],
@@ -6399,8 +8947,7 @@
    "value": 0.08
   },
   "flags": [
-   "knockback",
-   "shield"
+   "knockback"
   ],
   "max_targets": null,
   "name": "Rising Blow",
@@ -6479,7 +9026,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "45",
-  "description": "Levitate above the ground, restoring 0.075 of your Max Health (not affected by your Healing Cast modifier) and 0.075 of your Max Energy every 1, while channeling for up to $channeling.totalduration$.\nIncreases your damage resistances by 0.4.",
+  "description": "Levitate above the ground, restoring 0.075 of your Max Health (not affected by your Healing Cast modifier) and 0.05 of your Max Energy every 1, while channeling for up to $channeling.totalduration$.\nIncreases your damage resistances by 0.4.",
   "directions": [],
   "escalation": null,
   "flags": [
@@ -6662,7 +9209,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "40",
-  "description": "Place a magic rune with a $spelleffectarea.circle.radius_start$ radius under your feet, lasting 6.\nIncreases magical damage and Healing Cast by 0.1 and reduces Cast Times by 0.1 for up to 6 allies for every 1 they stand on the rune (stacks up to 6 times).\nThe effect lasts for 5 after they leave the area of the rune (this also happens after the rune disappears).",
+  "description": "Place a magic rune with a $spelleffectarea.circle.radius_start$ radius under your feet, lasting 6.\nIncreases magical damage and Healing Cast by 0.05 and reduces Cast Times by 0.1 for up to 6 allies for every 1 they stand on the rune (stacks up to 6 times).\nThe effect lasts for 5 after they leave the area of the rune (this also happens after the rune disappears).",
   "directions": [
    "ally"
   ],
@@ -6839,7 +9386,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "40",
-  "description": "Grow to a giant form, increasing your Max and Current Health by 0.25, and your Move Speed by 0.25 for 6 (can't be purged).",
+  "description": "Grow to a giant form, increasing your Max and Current Health by 1, and your Move Speed by 0.25 for 6 (can't be purged).",
   "directions": [],
   "escalation": null,
   "flags": [
@@ -6999,6 +9546,42 @@
   ],
   "target": "self"
  },
+ "MOB_UNIQUE_WEAPONMASTER_BUFF": {
+  "area": null,
+  "cast_range": "20",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "5",
+  "description": "",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "MOB_UNIQUE_WEAPONMASTER_BUFF",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "self"
+ },
+ "MOB_UNIQUE_WEAPONMASTER_IDLE": {
+  "area": null,
+  "cast_range": "20",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "5",
+  "description": "",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "MOB_UNIQUE_WEAPONMASTER_IDLE",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "self"
+ },
  "MOVEMENTSHIELD": {
   "area": null,
   "cast_range": "0",
@@ -7006,7 +9589,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "60",
-  "description": "Surround yourself with a shield, absorbing up to 300 damage while channeling for up to $channeling.totalduration$ (can move while channeling).\nIncreases Move Speed by 0.8 and Max Load by 0.8 while the shield is active.\nDrop any object you are escorting.",
+  "description": "Surround yourself with a shield, absorbing up to 300 damage while channeling for up to $channeling.totalduration$ (can move while channeling).\nIncreases Move Speed by 0.8 and Max Load by 2 while the shield is active.\nDrop any object you are escorting.",
   "directions": [
    "self"
   ],
@@ -7169,7 +9752,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "30",
-  "description": "Rush into the fight, increasing Move Speed by 1.2 and the duration of your Crowd Control effects by 1.2 for 3.",
+  "description": "Rush into the fight, increasing Move Speed by 1.2 and the duration of your Crowd Control effects by 0.35 for 3.",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -7189,7 +9772,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "150",
-  "description": "Fight through the pain, increasing your Move Speed by 0.5 and Max Load by 0.5 for 10.\nEach time you take damage your Move Speed will be increased by 0.5 (stacks up to 3 times) \nDrop any object you are escorting.",
+  "description": "Fight through the pain, increasing your Move Speed by 0.5 and Max Load by 2 for 10.\nEach time you take damage your Move Speed will be increased by 0.5 (stacks up to 3 times) \nDrop any object you are escorting.",
   "directions": [
    "self"
   ],
@@ -7204,6 +9787,57 @@
    "other"
   ],
   "target": "self"
+ },
+ "PANTHER_CLAWS": {
+  "area": null,
+  "cast_range": "5",
+  "caster_moves": true,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Combine up to two abilities. The combo resets after 3.\n\n1st and 2nd Swipe\nCharge through the targeted enemy, dealing 90 physical damage. \nConsuming 2 Shift Charges lets you continue the combo.\n\n3rd Sinister Swipe\nCharge through the targeted enemy, dealing 90 physical damage. Additionally deal 0.25 of the target's missing health as true damage (vs. players) / 0.4 of the target's missing health as physical damage (vs. mobs).\nSets your cooldown of your transformation to 15.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Sinister Swipes",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "PANTHER_POUNCE": {
+  "area": null,
+  "cast_range": "9",
+  "caster_moves": true,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "12",
+  "description": "Leap towards target position, dealing 165 physical damage in a 4 radius upon impact.\n\nHitting an enemy player, will reduce the cooldown of this ability by 0.5.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Pounce",
+  "preferred_target": "enemy",
+  "radius": 3.0,
+  "tags": [
+   "dmg",
+   "mobility",
+   "other"
+  ],
+  "target": "ground"
  },
  "PARRY": {
   "area": null,
@@ -7347,7 +9981,7 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "Increases all your damage and your Healing Cast, by 0.04.\nIncreases Defense by 0.04.",
+  "description": "Increases all your damage and your Healing Cast, by 0.04.\nIncreases Defense by 0.02.",
   "directions": [],
   "escalation": null,
   "flags": [
@@ -7498,9 +10132,7 @@
   "description": "Increases your Crowd Control Resistance by 0.2.",
   "directions": [],
   "escalation": null,
-  "flags": [
-   "shield"
-  ],
+  "flags": [],
   "max_targets": null,
   "name": "Tenacity",
   "preferred_target": null,
@@ -7604,7 +10236,7 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "After casting any spell, increase your Auto-Attack Speed by 1.2 and your Auto-Attack Range by 1.2 for the next 3 Auto-Attacks within 3.",
+  "description": "After casting any spell, increase your Auto-Attack Speed by 1.2 and your Auto-Attack Range by 0.33 for the next 3 Auto-Attacks within 3.",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -7864,7 +10496,7 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "Increases all your damage and your Healing Cast, by 0.015.\nIncreases Defense by 0.015.",
+  "description": "Increases all your damage and your Healing Cast, by 0.015.\nIncreases Defense by 0.01.",
   "directions": [],
   "escalation": null,
   "flags": [
@@ -7977,14 +10609,13 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "Condition:\nActivates when you use your third-slot ability.\n\nEffect:\nCreate a sandstorm in a 5 radius around you, lasting 6.\nSlows all enemies within it by 0.4.\nDecreases Crowd Control Resistance by 0.4.",
+  "description": "Condition:\nActivates when you use your third-slot ability.\n\nEffect:\nCreate a sandstorm in a 5 radius around you, lasting 6.\nSlows all enemies within it by 0.4.\nDecreases Crowd Control Resistance by 0.3.",
   "directions": [
    "enemy",
    "self"
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "slow"
   ],
   "max_targets": null,
@@ -8027,7 +10658,7 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "Condition:\nActivates when you do an Auto-Attack.\n\nEffect:\nConjure a lava puddle in a $$PASSIVE_CAPE_DEMON_AREA.spelleffectarea.circle.radius_max$ radius around the targeted enemy, which lasts 5.\nDeals 55 magical damage (vs. players) / 55 magical damage (vs. mobs) every 0.5.",
+  "description": "Condition:\nActivates when you do an Auto-Attack.\n\nEffect:\nConjure a lava puddle in a $$PASSIVE_CAPE_DEMON_AREA.spelleffectarea.circle.radius_max$ radius around the targeted enemy, which lasts 5.\nDeals 55 magical damage (vs. players) / 31.9 magical damage (vs. mobs) every 0.5.",
   "directions": [
    "enemy",
    "self"
@@ -9137,9 +11768,7 @@
   "description": "Increases your Crowd Control Resistance by 0.1.",
   "directions": [],
   "escalation": null,
-  "flags": [
-   "shield"
-  ],
+  "flags": [],
   "max_targets": null,
   "name": "Tenacity",
   "preferred_target": null,
@@ -9270,7 +11899,7 @@
   "casting_time": null,
   "channel": null,
   "cooldown": null,
-  "description": "Condition:\nActivates when you cast your weapon's second-slot ability.\n\nEffect:\nIncreases your damage resistances by 0.2 and your Crowd Control Resistance by 0.2 for 3.",
+  "description": "Condition:\nActivates when you cast your weapon's second-slot ability.\n\nEffect:\nIncreases your damage resistances by 0.2 and your Crowd Control Resistance by 1 for 3.",
   "directions": [
    "self"
   ],
@@ -9587,6 +12216,255 @@
   "flags": [],
   "max_targets": null,
   "name": "Rule Bender",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_BEAR": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every Auto-Attack cleaves in a cone in front of you, dealing 30 physical damage to all enemies hit (except the targeted enemy).\nWhile at least one Shift Charge is active on you, your attacks will slow all enemies hit by 0.2 for 1.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Swipes",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_COBRA_CLEANSE_LISTENER": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Will cleanse the next stun or root.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "cleanse",
+   "root",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Slippery",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "PASSIVE_SHAPE_CRYSTAL_COBRA": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every Auto-Attack poisons the targeted enemy, dealing {0} magical damage over {1}.\nDecreases all damage affected enemies deal by 0.12.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Neurotoxin",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_EAGLE": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every Auto-Attack applies Light Spark for 10 which is consumed by Piercing Light.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Light Spark",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_ENT": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every {0} Auto-Attacks you trigger an Spore Burst with a {1} radius around the targeted enemy, poisoning all enemies hit dealing {2} magical damage (vs players) / {3} magical damage (vs mobs) over {4}.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Spore Burst",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_IMP": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every 3 Auto-Attacks create a lava puddle with a {1} radius beneath the target, lasting 3.\nDeals 50 magical damage (vs. players) / 29 magical damage (vs. mobs) every 0.5.",
+  "directions": [],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Melting Point",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_PANTHER": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every Auto-Attack, inflict a bleed on the targeted enemy dealing 8 physical damage over {1}. Starts 0.75 after you stop attacking the targeted enemy.\nDecreases healing received by 0.04 (stacks up to 5 times).",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Infected Scrapes",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_ROCK_ELEMENTAL": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "While at least one Shift Charge is active on you, your Auto-Attacks will deal 40 physical damage in a {2} radius.",
+  "directions": [
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Powerful Impact",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": null
+ },
+ "PASSIVE_SHAPE_ROCK_ELEMENTAL_AOE_CONDITION": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "While at least one Shift Charge is active on you, your Auto-Attacks will deal 40 physical damage in a {2} radius.",
+  "directions": [
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Powerful Impact",
+  "preferred_target": null,
+  "radius": 4.0,
+  "tags": [
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "PASSIVE_SHAPE_WEREWOLF": {
+  "area": null,
+  "cast_range": null,
+  "caster_moves": null,
+  "casting_time": null,
+  "channel": null,
+  "cooldown": null,
+  "description": "Every Auto-Attack, your Auto-Attack Speed is increased by 0.1 for 2 (stacks up to 5 times)",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Frenzied Slashes",
   "preferred_target": null,
   "radius": null,
   "tags": [
@@ -10134,8 +13012,7 @@
    "value": 0.08
   },
   "flags": [
-   "knockback",
-   "shield"
+   "knockback"
   ],
   "max_targets": null,
   "name": "Force Field",
@@ -10220,6 +13097,1123 @@
    "other"
   ],
   "target": "enemy"
+ },
+ "POTION_ACID_P1": {
+  "area": null,
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, decreasing the damage resistances of up to 10 enemies within a 5 radius by 0.075 for 5.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 10,
+  "name": "Acid Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_ACID_P3": {
+  "area": null,
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, decreasing the damage resistances of up to 10 enemies within a 5 radius by 0.149 for 5.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 10,
+  "name": "Acid Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_ACID_P5": {
+  "area": null,
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, decreasing the damage resistances of up to 10 enemies within a 5 radius by 0.203 for 5.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 10,
+  "name": "Acid Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_AOE_SLOW_P1": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.5
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, creating a puddle of tar with a {1} radius lasting for 7.\nSlows all enemies in it by 0.3 and decreases all damage they deal by 0.1.\nThe damage reduction lasts for 5 after they leave the puddle (this also happens after the puddle disappears).\n\nInvisible enemies entering the area will be revealed.\n\nThrowing the potion will dissolve all ally Sticky Potions in a 15 radius around your puddle.",
+  "directions": [
+   "enemy",
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Sticky Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "cc",
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_AOE_SLOW_P3": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.5
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, creating a puddle of tar with a {1} radius lasting for 7.\nSlows all enemies in it by 0.47 and decreases all damage they deal by 0.2.\nThe damage reduction lasts for 5 after they leave the puddle (this also happens after the puddle disappears).\n\nInvisible enemies entering the area will be revealed.\n\nThrowing the potion will dissolve all ally Sticky Potions in a 15 radius around your puddle.",
+  "directions": [
+   "enemy",
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Sticky Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "cc",
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_AOE_SLOW_P5": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.5
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Throw the potion at the targeted position, creating a puddle of tar with a {1} radius lasting for 7.\nSlows all enemies in it by 0.57 and decreases all damage they deal by 0.27.\nThe damage reduction lasts for 5 after they leave the puddle (this also happens after the puddle disappears).\n\nInvisible enemies entering the area will be revealed.\n\nThrowing the potion will dissolve all ally Sticky Potions in a 15 radius around your puddle.",
+  "directions": [
+   "enemy",
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Sticky Potion",
+  "preferred_target": "enemy",
+  "radius": 5.0,
+  "tags": [
+   "cc",
+   "debuff",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_BERSERK_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Increase your damage by 0.1 for 5.\n\nDecreases your Defense by 0.1.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "pierce"
+  ],
+  "max_targets": null,
+  "name": "Berserk Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_BERSERK_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Increase your damage by 0.159 for 5.\n\nDecreases your Defense by 0.1.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "pierce"
+  ],
+  "max_targets": null,
+  "name": "Berserk Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_BERSERK_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Increase your damage by 0.197 for 5.\n\nDecreases your Defense by 0.1.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "pierce"
+  ],
+  "max_targets": null,
+  "name": "Berserk Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_CLEANSE2_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Cleanse all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "cleanse",
+   "silence",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Cleansing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_CLEANSE2_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Cleanse all Crowd Control effects and debuffs (except damage over time effects; can be used while stunned or silenced).\nGrants immunity to all Crowd Control effects for 1.9.\nCleansing any effect increases your Move Speed by 0.3 for 1.9.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "cleanse",
+   "silence",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Cleansing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_CLEANSE2_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Cleanse all damage over time effects, Crowd Control effects and debuffs (can be used while stunned or silenced). \nGrants immunity to all Crowd Control effects for 2.89.\nCleansing any effect increases your Move Speed by 0.3 for 2.89.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "cleanse",
+   "silence",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Cleansing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_ENERGY_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Restores 0.189 of your Max Energy.\nRestores {1} of your Max Energy over {2}.\nIncreases your Cooldown Rate by 0.09.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Energy Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_ENERGY_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Restores 0.371 of your Max Energy.\nRestores {1} of your Max Energy over {2}.\nIncreases your Cooldown Rate by 0.17.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Energy Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_ENERGY_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Restores 0.504 of your Max Energy.\nRestores {1} of your Max Energy over {2}.\nIncreases your Cooldown Rate by 0.23.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Energy Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_GATHER_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "15",
+  "description": "Increase your Gather and Fishing Speed by 0.15 and your Gather and Fishing Yield by 0.05 for 15.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Gathering Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_GATHER_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "31",
+  "description": "Increase your Gather and Fishing Speed by 0.25 and your Gather and Fishing Yield by 0.072 for 31.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Gathering Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_GATHER_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "44",
+  "description": "Increase your Gather and Fishing Speed by 0.32 and your Gather and Fishing Yield by 0.085 for 44.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Gathering Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_HEAL_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "105",
+  "description": "Restores $attributechangeovertime.totalchange$ of your Max Health over $attributechangeovertime.time$.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Healing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "heal"
+  ],
+  "target": "self"
+ },
+ "POTION_HEAL_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "105",
+  "description": "Restores $attributechangeovertime.totalchange$ of your Max Health over $attributechangeovertime.time$.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Healing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "heal"
+  ],
+  "target": "self"
+ },
+ "POTION_HEAL_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "105",
+  "description": "Restores $attributechangeovertime.totalchange$ of your Max Health over $attributechangeovertime.time$.",
+  "directions": [],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Healing Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "heal"
+  ],
+  "target": "self"
+ },
+ "POTION_INVISIBILITY_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Turns you invisible for up to 7.\nAttacking, using abilities or taking damage reveals you.\n\nDecreases all damage you deal by 0.5 while invisible and for 2 after being revealed.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Invisibility Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff",
+   "debuff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_LAVA_P1": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Throw the potion at the targeted position, creating a puddle of Hellfire with a {1} radius lasting 3.\nDeals 36 true damage (vs. players) / 70.7 true damage (vs. mobs) every 0.5 (this damage cannot be reflected).\nReduces Healing Received by 0.5 for 3.\n\nThrowing the potion will dissolve all ally puddles in a 8 radius around your puddle.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal",
+   "heal_reduction"
+  ],
+  "max_targets": null,
+  "name": "Hellfire Potion",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_LAVA_P3": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Throw the potion at the targeted position, creating a puddle of Hellfire with a {1} radius lasting 3.\nDeals 70.1 true damage (vs. players) / 138 true damage (vs. mobs) every 0.5 (this damage cannot be reflected).\nReduces Healing Received by 0.5 for 3.\n\nThrowing the potion will dissolve all ally puddles in a 8 radius around your puddle.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal",
+   "heal_reduction"
+  ],
+  "max_targets": null,
+  "name": "Hellfire Potion",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_LAVA_P5": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "90",
+  "description": "Throw the potion at the targeted position, creating a puddle of Hellfire with a {1} radius lasting 3.\nDeals 95.2 true damage (vs. players) / 187 true damage (vs. mobs) every 0.5 (this damage cannot be reflected).\nReduces Healing Received by 0.5 for 3.\n\nThrowing the potion will dissolve all ally puddles in a 8 radius around your puddle.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal",
+   "heal_reduction"
+  ],
+  "max_targets": null,
+  "name": "Hellfire Potion",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_MAXHP_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Max Load by 8.11 and your Max Health by 0.45 for 6.\nMakes you Immune to Forced Movement effects.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Gigantify Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_MAXHP_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Max Load by 15.77 and your Max Health by 0.88 for 6.\nMakes you Immune to Forced Movement effects.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Gigantify Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_MAXHP_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Max Load by 21.49 and your Max Health by 1.19 for 6.\nMakes you Immune to Forced Movement effects.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal"
+  ],
+  "max_targets": null,
+  "name": "Gigantify Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_MOB_RESET_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Makes you invisible to mobs for 3 (excluding mobs that guard players).\nApplies a shield, absorbing 34.5 damage (before resistances) while invisible.",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 1,
+  "name": "Calming Potion",
+  "preferred_target": "neutral",
+  "radius": 15.0,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_MOB_RESET_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Turns you and up to 10 group members within a 15 radius around you invisible to mobs for 4.7 (excluding mobs that guard players).\nApplies a shield to all affected players, absorbing 66.7 damage (before resistances) while invisible.",
+  "directions": [
+   "ally",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 10,
+  "name": "Calming Potion",
+  "preferred_target": "neutral",
+  "radius": 15.0,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_MOB_RESET_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "100",
+  "description": "Turns you and up to 20 group members within a 15 radius around you invisible to mobs for 5.7 (excluding mobs that guard players).\nApplies a shield to all affected players, absorbing 90.85 damage (before resistances) while invisible.",
+  "directions": [
+   "ally",
+   "self"
+  ],
+  "escalation": null,
+  "flags": [
+   "shield"
+  ],
+  "max_targets": 20,
+  "name": "Calming Potion",
+  "preferred_target": "neutral",
+  "radius": 15.0,
+  "tags": [
+   "buff",
+   "other"
+  ],
+  "target": "self"
+ },
+ "POTION_POISON_P1": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted enemy, poisoning the target and dealing true damage over {0}.\n[#] Against players: {1} true damage\n[#] Against mounted players: {2} true damage\n[#] Against mobs: {3} true damage\n\nWhenever the poisoned, unmounted enemy takes direct damage, they will be slowed by 0.15 for 0.2.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Poison Potion",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "POTION_POISON_P3": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted enemy, poisoning the target and dealing true damage over {0}.\n[#] Against players: {1} true damage\n[#] Against mounted players: {2} true damage\n[#] Against mobs: {3} true damage\n\nWhenever the poisoned, unmounted enemy takes direct damage, they will be slowed by 0.292 for 0.2.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Poison Potion",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "POTION_POISON_P5": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted enemy, poisoning the target and dealing true damage over {0}.\n[#] Against players: {1} true damage\n[#] Against mounted players: {2} true damage\n[#] Against mobs: {3} true damage\n\nWhenever the poisoned, unmounted enemy takes direct damage, they will be slowed by 0.397 for 0.2.",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "slow"
+  ],
+  "max_targets": null,
+  "name": "Poison Potion",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "enemy"
+ },
+ "POTION_RESISTANCE_P1": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Defense by 0.33 and your Crowd Control Resistance by 0.33 for 6.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Resistance Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_RESISTANCE_P3": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Defense by 0.65 and your Crowd Control Resistance by 0.65 for 6.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Resistance Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_RESISTANCE_P5": {
+  "area": null,
+  "cast_range": "0",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "120",
+  "description": "Increases your Defense by 0.88 and your Crowd Control Resistance by 0.88 for 6.",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Resistance Potion",
+  "preferred_target": "neutral",
+  "radius": null,
+  "tags": [
+   "buff"
+  ],
+  "target": "self"
+ },
+ "POTION_REVIVE_P1": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "150",
+  "description": "Throw the potion at a targeted position, releasing leyline magic in a {0} radius.\nAllies gain Lifeward for 4.\nThe first time a Lifewarded ally reaches 1 Health, they become stunned for 2.5 and recover 0.1 Health instantly, and {4} over the duration.\nWhile reviving, their Healing Received is reduced by 0.8.\n\nRevived allies cannot gain Lifeward again for 180.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal",
+   "heal_reduction",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "POTION_REVIVE_P1",
+  "preferred_target": "ally",
+  "radius": 4.0,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_REVIVE_P3": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "150",
+  "description": "Throw the potion at a targeted position, releasing leyline magic in a {0} radius.\nAllies gain Lifeward for 4.\nThe first time a Lifewarded ally reaches 1 Health, they become stunned for 2.5 and recover 0.19 Health instantly, and {4} over the duration.\nWhile reviving, their Healing Received is reduced by 0.8.\n\nRevived allies cannot gain Lifeward again for 180.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal",
+   "heal_reduction",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "POTION_REVIVE_P3",
+  "preferred_target": "ally",
+  "radius": 4.0,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_REVIVE_P5": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "150",
+  "description": "Throw the potion at a targeted position, releasing leyline magic in a {0} radius.\nAllies gain Lifeward for 4.\nThe first time a Lifewarded ally reaches 1 Health, they become stunned for 2.5 and recover 0.26 Health instantly, and {4} over the duration.\nWhile reviving, their Healing Received is reduced by 0.8.\n\nRevived allies cannot gain Lifeward again for 180.",
+  "directions": [
+   "ally"
+  ],
+  "escalation": null,
+  "flags": [
+   "heal",
+   "heal_reduction",
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "POTION_REVIVE_P5",
+  "preferred_target": "ally",
+  "radius": 4.0,
+  "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_TORNADO_P1": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted position, releasing a tornado with a {1} radius lasting 1.75.\nKnocks back all enemies touching it by 8.75 (ignores Crowd Control Resistance).",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "knockback"
+  ],
+  "max_targets": null,
+  "name": "Tornado in a Bottle",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "cc",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_TORNADO_P3": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted position, releasing a tornado with a {1} radius lasting 3.4.\nKnocks back all enemies touching it by 8.75 (ignores Crowd Control Resistance).",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "knockback"
+  ],
+  "max_targets": null,
+  "name": "Tornado in a Bottle",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "cc",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "POTION_TORNADO_P5": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
+  "cast_range": "13",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "60",
+  "description": "Throw the potion at the targeted position, releasing a tornado with a {1} radius lasting 4.64.\nKnocks back all enemies touching it by 8.75 (ignores Crowd Control Resistance).",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [
+   "knockback"
+  ],
+  "max_targets": null,
+  "name": "Tornado in a Bottle",
+  "preferred_target": "enemy",
+  "radius": 4.0,
+  "tags": [
+   "cc",
+   "other"
+  ],
+  "target": "ground"
  },
  "PRIMALSLAM": {
   "area": [
@@ -10428,7 +14422,7 @@
   "casting_time": "0.5",
   "channel": true,
   "cooldown": "20",
-  "description": "Release a flurry of fists in a cone in front of you while channeling for up to $channeling.totalduration$ (can't be interrupted).\nDeals 36 physical damage (vs players) / 36 physical damage (vs mobs) every 0.5.\nThe cone slowly follows the cursor position.\n\n2 after the last Striking Fist hits, the enemy will take an additional 30 magical damage for each hit they received (stacks up to 10 times, damage can't be reflected).",
+  "description": "Release a flurry of fists in a cone in front of you while channeling for up to $channeling.totalduration$ (can't be interrupted).\nDeals 36 physical damage (vs players) / 24 physical damage (vs mobs) every 0.5.\nThe cone slowly follows the cursor position.\n\n2 after the last Striking Fist hits, the enemy will take an additional 30 magical damage for each hit they received (stacks up to 10 times, damage can't be reflected).",
   "directions": [
    "enemy",
    "self"
@@ -10645,7 +14639,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "12",
-  "description": "Swing your weapon up to 3 times in the targeted direction, dealing 80 physical damage each hit.\nHitting an enemy with all three swings increases your Move Speed by 0.3, and Auto-Attack Damage by 0.3 for 4.",
+  "description": "Swing your weapon up to 3 times in the targeted direction, dealing 80 physical damage each hit.\nHitting an enemy with all three swings increases your Move Speed by 0.3, and Auto-Attack Damage by 0.5 for 4.",
   "directions": [
    "enemy"
   ],
@@ -10736,7 +14730,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "37.5",
-  "description": "Conjure a cloud of Mystic Rocks in a 6.5 radius around you, slowing all enemies within it by 0.5.\nReduces their Healing Received by 0.5.\nIncreases your damage resistances by 0.2.\n\nNegates all your Healing Received.\n\nThe ability lasts up to 15 but can be deactivated sooner.",
+  "description": "Conjure a cloud of Mystic Rocks in a 6.5 radius around you, slowing all enemies within it by 0.5.\nReduces their Healing Received by 0.35.\nIncreases your damage resistances by 0.2.\n\nNegates all your Healing Received.\n\nThe ability lasts up to 15 but can be deactivated sooner.",
   "directions": [
    "enemy",
    "self"
@@ -10766,7 +14760,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Swing your staff in a 6 radius around you, knocking back all enemies hit by 4.26.\nDeals 51.81 physical damage.\nDecreases all damage dealt by 0.5 (vs players) / 0.5 (vs mobs) for 5.\n\nAffected players will be unable to Auto-Attack.\nAffected mobs will have their Auto-Attack Speed reduced by 0.5.",
+  "description": "Swing your staff in a 6 radius around you, knocking back all enemies hit by 4.26.\nDeals 51.81 physical damage.\nDecreases all damage dealt by 0.5 (vs players) / 0.2 (vs mobs) for 5.\n\nAffected players will be unable to Auto-Attack.\nAffected mobs will have their Auto-Attack Speed reduced by 0.5.",
   "directions": [
    "enemy",
    "self"
@@ -10808,7 +14802,6 @@
   "escalation": null,
   "flags": [
    "knockback",
-   "shield",
    "stun"
   ],
   "max_targets": null,
@@ -10860,7 +14853,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "7",
-  "description": "Revitalize the targeted ally, restoring 80 Health and 80 Energy every 1, while channeling for $channeling.totalduration$ (taking damage reduces the channel time).\nEach 1 channeled costs 4 Energy.",
+  "description": "Revitalize the targeted ally, restoring 80 Health and 8 Energy every 1, while channeling for $channeling.totalduration$ (taking damage reduces the channel time).\nEach 1 channeled costs 4 Energy.",
   "directions": [
    "ally"
   ],
@@ -11074,7 +15067,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "3",
-  "description": "Swing your axe in a 2.5 radius around you, dealing physical damage based on the distance from you.\nApplies one Rending Bleed Charge to all enemies hit.\n \n[#] Distance: 2.5 | 2.5\n[#] Damage: 70 | 80\n \nEach Rending Bleed Charge deals $$AXE_BLEED.attributechangeovertime.totalchange$ physical damage over $$AXE_BLEED.attributechangeovertime.time$ (stacks up to 3 times).\nIf the maximum amount of stacks is reached, the affected enemies' Healing Received is reduced by 0.12 for 5.",
+  "description": "Swing your axe in a 5 radius around you, dealing physical damage based on the distance from you.\nApplies one Rending Bleed Charge to all enemies hit.\n \n[#] Distance: 2.5 | 5\n[#] Damage: 70 | 80\n \nEach Rending Bleed Charge deals $$AXE_BLEED.attributechangeovertime.totalchange$ physical damage over $$AXE_BLEED.attributechangeovertime.time$ (stacks up to 3 times).\nIf the maximum amount of stacks is reached, the affected enemies' Healing Received is reduced by 0.12 for 5.",
   "directions": [
    "enemy",
    "self"
@@ -11143,8 +15136,7 @@
   },
   "flags": [
    "heal",
-   "heal_reduction",
-   "shield"
+   "heal_reduction"
   ],
   "max_targets": null,
   "name": "Tear Apart",
@@ -11205,6 +15197,95 @@
   ],
   "target": "self"
  },
+ "ROCK_ELEMENTAL_SPLITTING_EARTH": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 2.5,
+    "width": 9.0
+   },
+   {
+    "kind": "rect",
+    "length": 2.5,
+    "width": 8.0
+   },
+   {
+    "kind": "rect",
+    "length": 2.5,
+    "width": 8.0
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 9.0
+   }
+  ],
+  "cast_range": "8",
+  "caster_moves": null,
+  "casting_time": "0.7",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Combine up to two abilities. The combo resets after 4.\n\n1st Tectonic Shift:\nShift the ground, creating a stone wall in a cone in front of you which knocks back enemies by 2.\nPulls all enemies between you and the wall towards you.\nDeals 60 physical damage (vs players) / 140 physical damage (vs mobs) to all enemies pulled.\nMakes you the highest-priority target for all mobs hit. \n\n2nd Tectonic Slam:\nSlam the ground, dealing 120 physical damage in a 6 radius.\nThrows all enemies hit into the air for {6}.\nCreates a Rune, lasting 5 which decreases Max and current Health of all enemies within by 0.1.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal",
+   "knockback",
+   "pull"
+  ],
+  "max_targets": null,
+  "name": "Tectonic Shift",
+  "preferred_target": "enemy",
+  "radius": 4.5,
+  "tags": [
+   "cc",
+   "debuff",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "ROCK_ELEMENTAL_STONE_THROW": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.5
+   },
+   {
+    "kind": "circle",
+    "radius": 0.1
+   }
+  ],
+  "cast_range": "18",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "4",
+  "description": "Throw a boulder at target position, dealing 125 physical damage in a 3.5 radius. \nStuns for 1.2.",
+  "directions": [],
+  "escalation": {
+   "duration": 0.08,
+   "value": 0.08
+  },
+  "flags": [
+   "stun"
+  ],
+  "max_targets": null,
+  "name": "Boulder Crash",
+  "preferred_target": "enemy",
+  "radius": 3.5,
+  "tags": [
+   "cc",
+   "dmg",
+   "other"
+  ],
+  "target": "ground"
+ },
  "ROOTFIELD": {
   "area": null,
   "cast_range": "11",
@@ -11219,8 +15300,7 @@
   ],
   "escalation": null,
   "flags": [
-   "root",
-   "shield"
+   "root"
   ],
   "max_targets": null,
   "name": "Gravitas",
@@ -11271,7 +15351,7 @@
   "casting_time": "0",
   "channel": true,
   "cooldown": "25",
-  "description": "Conjure an aura with a 9 radius, increasing your Move Speed by $$ROTTENVINES_CHANNELING.buffovertime.value$ while channeling for up to $channeling.totalduration$ (can't be interrupted).\nRestores 33 Health (when used alone) / 33 Health (when healing at least one ally) every 0.8 for up to 10 allies.",
+  "description": "Conjure an aura with a 9 radius, increasing your Move Speed by $$ROTTENVINES_CHANNELING.buffovertime.value$ while channeling for up to $channeling.totalduration$ (can't be interrupted).\nRestores 33 Health (when used alone) / 39 Health (when healing at least one ally) every 0.8 for up to 10 allies.",
   "directions": [
    "ally"
   ],
@@ -11297,7 +15377,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "50",
-  "description": "Carry the Royal Banner, creating an aura with a 5 radius around you lasting 7.\nIncreases Auto-Attack Speed by 0.3.\nIncreases Cooldown Rate by 0.3 for you and by 0.3 for up to 10 allies.",
+  "description": "Carry the Royal Banner, creating an aura with a 5 radius around you lasting 7.\nIncreases Auto-Attack Speed by 0.3.\nIncreases Cooldown Rate by 0.3 for you and by 0.5 for up to 10 allies.",
   "directions": [
    "ally",
    "self"
@@ -11357,7 +15437,7 @@
   "casting_time": "0.6",
   "channel": null,
   "cooldown": "7",
-  "description": "Create a sacred circle with a $spelleffectarea.circle.radius_end$ radius that lasts 3.\nSilences and slows all enemies inside by 0.2\n\nMobs will become immune to the silence after 5.",
+  "description": "Create a sacred circle with a $spelleffectarea.circle.radius_end$ radius that lasts 3.\nSilences and slows all enemies inside by 0.2\n\nMobs will become immune to the silence after 3.",
   "directions": [
    "enemy"
   ],
@@ -11383,7 +15463,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "50",
-  "description": "Sacrifice yourself for the targeted ally (can't be cast on self), healing the target for 0.15 of their Max Health.\nTake 0.15 of your Max Health as true damage.",
+  "description": "Sacrifice yourself for the targeted ally (can't be cast on self), healing the target for 0.25 of their Max Health.\nTake 0.15 of your Max Health as true damage.",
   "directions": [
    "ally",
    "self"
@@ -11505,8 +15585,7 @@
   },
   "flags": [
    "knockback",
-   "root",
-   "shield"
+   "root"
   ],
   "max_targets": null,
   "name": "Separator",
@@ -12161,8 +16240,7 @@
   ],
   "escalation": null,
   "flags": [
-   "knockback",
-   "shield"
+   "knockback"
   ],
   "max_targets": null,
   "name": "Elbow Smash",
@@ -12182,7 +16260,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Fling the targeted enemy, pulling them 10 behind you.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 56 | 56 | 56 | 56",
+  "description": "Fling the targeted enemy, pulling them 10 behind you.\nDeals physical damage based on the amount of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Damage: 56 | 90 | 134 | 190",
   "directions": [
    "enemy",
    "self"
@@ -12339,7 +16417,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "20",
-  "description": "Throw your weapon in the targeted direction, pulling the first enemy hit towards you.\nDeals 75 physical damage.\nRoots the enemy based on the number of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Root duration: 0s | 2.2 | 2.2 | 2.2",
+  "description": "Throw your weapon in the targeted direction, pulling the first enemy hit towards you.\nDeals 75 physical damage.\nRoots the enemy based on the number of Spirit Spear Charges on you.\n\n[#] Spirit Spear Charges: 0 | 1 | 2 | 3\n[#] Root duration: 0s | 1.04 | 1.55 | 2.2",
   "directions": [
    "enemy",
    "self"
@@ -12437,7 +16515,7 @@
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "30",
-  "description": "Summon tortured souls for 5, haunting the ground in a $spelleffectarea.circle.radius_start$ radius around the targeted position and moving $spelleffectarea.node.distance_max$ in the targeted direction.\nDeals 31 magical damage every 0.5 to all enemies within the area. (the damage can't be reflected)\n\nPlayers will also take 31 of their Max Health as true damage every 0.5.",
+  "description": "Summon tortured souls for 5, haunting the ground in a $spelleffectarea.circle.radius_start$ radius around the targeted position and moving $spelleffectarea.node.distance_max$ in the targeted direction.\nDeals 31 magical damage every 0.5 to all enemies within the area. (the damage can't be reflected)\n\nPlayers will also take 0.015 of their Max Health as true damage every 0.5.",
   "directions": [
    "enemy"
   ],
@@ -12470,7 +16548,6 @@
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "slow"
   ],
   "max_targets": null,
@@ -12814,7 +16891,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Become more efficient at your casting, reducing your Cast Times by 0.5 and your Energy Costs by 0.5 for 8.",
+  "description": "Become more efficient at your casting, reducing your Cast Times by 0.5 and your Energy Costs by 0.7 for 8.",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -12895,7 +16972,6 @@
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "slow"
   ],
   "max_targets": 1,
@@ -12984,7 +17060,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Release a Spirit Animal from the targeted position in the targeted direction that heals any ally touching it by 110 and cleansing all damage over time effects, creating a $spelleffectarea.rectangle.height_max$ long trail that lasts for 9.\nHeals up to $spelleffectarea.maxeffectareatargets$ allies standing on the trail every 1 for 14 Health.\nFor each ally standing on the trail, the healing is increased by 0.25.",
+  "description": "Release a Spirit Animal from the targeted position in the targeted direction that heals any ally touching it by 110 and cleansing all damage over time effects, creating a $spelleffectarea.rectangle.height_max$ long trail that lasts for 9.\nHeals up to 20 allies standing on the trail every 1 for 14 Health.\nFor each ally standing on the trail, the healing is increased by 0.25.",
   "directions": [
    "ally"
   ],
@@ -13042,8 +17118,7 @@
   ],
   "escalation": null,
   "flags": [
-   "knockback",
-   "shield"
+   "knockback"
   ],
   "max_targets": null,
   "name": "Splash Wave",
@@ -13143,7 +17218,7 @@
   "casting_time": "0.0",
   "channel": null,
   "cooldown": "32.5",
-  "description": "Start to sprint, increasing your Move Speed by 0.8 and your Cooldown Rate by 0.8 for 5.",
+  "description": "Start to sprint, increasing your Move Speed by 0.8 and your Cooldown Rate by 0.3333 for 5.",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -13290,7 +17365,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "2",
-  "description": "Attack the targeted enemy, dealing 66.69 physical damage.\nApplies one Sunder Armor Charge.\n\nEach Sunder Armor Charge decreases damage resistances by 0.04 (vs players) / 0.04 (vs mobs) for 8 (stacks up to 3 times).",
+  "description": "Attack the targeted enemy, dealing 66.69 physical damage.\nApplies one Sunder Armor Charge.\n\nEach Sunder Armor Charge decreases damage resistances by 0.04 (vs players) / 0.06 (vs mobs) for 8 (stacks up to 3 times).",
   "directions": [
    "enemy"
   ],
@@ -13316,7 +17391,7 @@
   "casting_time": "1",
   "channel": null,
   "cooldown": "7",
-  "description": "Release a well-aimed bolt at the targeted enemy, dealing 91.41 physical damage.\nDecreases damage resistances by 0.027 for every $applyspell.IfTargetHealthPercentage.value$ Health the targeted enemy has left (stacks up to 10 times) for 4.",
+  "description": "Release a well-aimed bolt at the targeted enemy, dealing 91.41 physical damage.\nDecreases damage resistances by 0.027 for every 0.1 Health the targeted enemy has left (stacks up to 10 times) for 4.",
   "directions": [
    "enemy"
   ],
@@ -13465,7 +17540,6 @@
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "slow"
   ],
   "max_targets": null,
@@ -13516,7 +17590,7 @@
   "casting_time": "0.4",
   "channel": null,
   "cooldown": "0",
-  "description": "Conjure a Thorn Growth with a $$THORNSAREA.spelleffectarea.circle.radius_max$ radius at the targeted area, lasting 4.\nDeals 30 magical damage (vs. players) / 30 magical damage (vs. mobs) every 0.5 (this damage cannot be reflected).\nWhenever the ability deals damage, it will apply one Thorns Charge to all enemies within the growth (stacks up to 5 times).\nSlows by 0.25.\n\nThe ability can be recast again within 3 up to 3 times.\n\nThorns Charges are consumed by your Auto-Attacks and deal an additional 35 magical damage.",
+  "description": "Conjure a Thorn Growth with a $$THORNSAREA.spelleffectarea.circle.radius_max$ radius at the targeted area, lasting 4.\nDeals 30 magical damage (vs. players) / 24 magical damage (vs. mobs) every 0.5 (this damage cannot be reflected).\nWhenever the ability deals damage, it will apply one Thorns Charge to all enemies within the growth (stacks up to 5 times).\nSlows by 0.25.\n\nThe ability can be recast again within 3 up to 3 times.\n\nThorns Charges are consumed by your Auto-Attacks and deal an additional 35 magical damage.",
   "directions": [
    "enemy"
   ],
@@ -13606,7 +17680,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "15",
-  "description": "Throw three Throwing Blades in a cone in the targeted direction, piercing through all enemies and dealing 60 physical damage.\nIncreases your Move Speed by 0.1, and all damage you deal by 0.1, for each unique enemy hit (stacks up to 3 times) for 5.",
+  "description": "Throw three Throwing Blades in a cone in the targeted direction, piercing through all enemies and dealing 60 physical damage.\nIncreases your Move Speed by 0.15, and all damage you deal by 0.1, for each unique enemy hit (stacks up to 3 times) for 5.",
   "directions": [
    "enemy",
    "self"
@@ -13646,7 +17720,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "60",
-  "description": "Throw 3 rotten fish in a cone in front of you, piercing through all enemies and slowing them by 0.3 for 6.\n\nMobs hit will have all their damage reduced by 0.3.\nEnemy players hit will be unable to do Auto-Attacks.",
+  "description": "Throw 3 rotten fish in a cone in front of you, piercing through all enemies and slowing them by 0.3 for 6.\n\nMobs hit will have all their damage reduced by 0.4.\nEnemy players hit will be unable to do Auto-Attacks.",
   "directions": [
    "enemy",
    "self"
@@ -13682,7 +17756,6 @@
   ],
   "escalation": null,
   "flags": [
-   "shield",
    "stun"
   ],
   "max_targets": null,
@@ -13716,7 +17789,6 @@
   },
   "flags": [
    "knockback",
-   "shield",
    "slow"
   ],
   "max_targets": null,
@@ -13793,7 +17865,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "30",
-  "description": "Leap towards the targeted position, becoming immune to all Crowd Control effects, debuffs (except damage over time effects), and damage until impact.\nRoots all enemies in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius on impact for 2.65.\nDeals 220 physical damage.\n\nConjure a mist of souls in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius around the impact location, lasting 0.5.\nIncreases Move Speed by 0.75 and Auto-Attack Speed by 0.75, and reduces Cast Times by 0.75, for up to $$TRIDENTTHROW_AREA.spelleffectarea.maxeffectareatargets$ allies within it.",
+  "description": "Leap towards the targeted position, becoming immune to all Crowd Control effects, debuffs (except damage over time effects), and damage until impact.\nRoots all enemies in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius on impact for 2.65.\nDeals 220 physical damage.\n\nConjure a mist of souls in a $$TRIDENTTHROW_AREA.spelleffectarea.circle.radius_start$ radius around the impact location, lasting 6.\nIncreases Move Speed by 0.5 and Auto-Attack Speed by 0.75, and reduces Cast Times by 0.3, for up to 10 allies within it.",
   "directions": [
    "enemy",
    "ally"
@@ -13855,7 +17927,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "18",
-  "description": "Dash towards the targeted position, repeatedly kicking all enemies you pass through.\nDeals 85 physical damage (vs. players) / 85 physical damage (vs. mobs) up to three times.\nPulls up to 1 enemy player along with you.",
+  "description": "Dash towards the targeted position, repeatedly kicking all enemies you pass through.\nDeals 37 physical damage (vs. players) / 85 physical damage (vs. mobs) up to three times.\nPulls up to 1 enemy player along with you.",
   "directions": [
    "enemy",
    "self"
@@ -13885,7 +17957,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
-  "description": "Call upon the lost souls around you, increasing your Auto-Attack Range by 0.35 and Auto-Attack Speed by 0.35.\nDeals an extra 50 magical damage on every Auto-Attack.\n\nDecreases your Defense by 0.35.\n\nThe ability can last for up to 8 but can be deactivated earlier.",
+  "description": "Call upon the lost souls around you, increasing your Auto-Attack Range by 0.35 and Auto-Attack Speed by 0.3.\nDeals an extra 50 magical damage on every Auto-Attack.\n\nDecreases your Defense by 0.25.\n\nThe ability can last for up to 8 but can be deactivated earlier.",
   "directions": [
    "self"
   ],
@@ -14174,6 +18246,98 @@
   "tags": [],
   "target": "ground"
  },
+ "VANITY_CONSUMABLE_FIREWORKS_BLUE": {
+  "area": null,
+  "cast_range": "9",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Light up the sky with a [20C7FF]shimmering blue explosion[-].",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Blue Fireworks",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "ground"
+ },
+ "VANITY_CONSUMABLE_FIREWORKS_GREEN": {
+  "area": null,
+  "cast_range": "9",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Light up the sky with a [6ACC04]shimmering green explosion[-].",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Green Fireworks",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "ground"
+ },
+ "VANITY_CONSUMABLE_FIREWORKS_RED": {
+  "area": null,
+  "cast_range": "9",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Light up the sky with a shimmering red explosion[-].",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Red Fireworks",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "ground"
+ },
+ "VANITY_CONSUMABLE_FIREWORKS_YELLOW": {
+  "area": null,
+  "cast_range": "9",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Light up the sky with a shimmering yellow explosion[-].",
+  "directions": [],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Yellow Fireworks",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "ground"
+ },
+ "VANITY_CONSUMABLE_SNOWBALL": {
+  "area": null,
+  "cast_range": "11",
+  "caster_moves": null,
+  "casting_time": "0.8",
+  "channel": null,
+  "cooldown": "0",
+  "description": "Throw at enemies (or friends) to start a snowball fight!",
+  "directions": [
+   "enemy"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Snowball",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "all"
+ },
  "VANITY_FIREWORK_BLUE": {
   "area": null,
   "cast_range": "12",
@@ -14181,7 +18345,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
-  "description": "Light up the sky with a shimmering blue explosion[-].",
+  "description": "Light up the sky with a [20C7FF]shimmering blue explosion[-].",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -14199,7 +18363,7 @@
   "casting_time": "0",
   "channel": null,
   "cooldown": "10",
-  "description": "Light up the sky with a shimmering green explosion[-].",
+  "description": "Light up the sky with a [6ACC04]shimmering green explosion[-].",
   "directions": [],
   "escalation": null,
   "flags": [],
@@ -14485,6 +18649,26 @@
   "flags": [],
   "max_targets": null,
   "name": "Summon Bunny",
+  "preferred_target": null,
+  "radius": null,
+  "tags": [],
+  "target": "ground"
+ },
+ "VANITY_SUMMONING_RABBIT_EASTER": {
+  "area": null,
+  "cast_range": "5",
+  "caster_moves": null,
+  "casting_time": "0.32",
+  "channel": null,
+  "cooldown": "3",
+  "description": "Throw the egg and yell: \"I choose you!\"",
+  "directions": [
+   "self"
+  ],
+  "escalation": null,
+  "flags": [],
+  "max_targets": null,
+  "name": "Surprise Egg",
   "preferred_target": null,
   "radius": null,
   "tags": [],
@@ -14898,6 +19082,68 @@
   "preferred_target": "ally",
   "radius": 7.0,
   "tags": [
+   "heal",
+   "other"
+  ],
+  "target": "ground"
+ },
+ "WEREWOLF_DASH": {
+  "area": null,
+  "cast_range": "6",
+  "caster_moves": true,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "5",
+  "description": "Dash through targeted enemy, landing {0} behind them.\nDeals 160 physical damage to any enemy you pass through.\nIncreases your attack damage by 1.5 for 3.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [],
+  "max_targets": null,
+  "name": "Rip Through",
+  "preferred_target": "enemy",
+  "radius": null,
+  "tags": [
+   "buff",
+   "dmg",
+   "mobility"
+  ],
+  "target": "enemy"
+ },
+ "WEREWOLF_TEAR_APART": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.5
+   }
+  ],
+  "cast_range": "3",
+  "caster_moves": null,
+  "casting_time": "0",
+  "channel": null,
+  "cooldown": "2",
+  "description": "Tear apart everything in a cone in front of you, dealing 120 physical damage to all enemies hit.\n\nIf at least 1 Shift Charges are active on you, the ability will consume it, creating a Blood Pool behind the first enemy hit.\n\nEntering the Blood Pool will consume it, restoring you for 30 Health.\nIncrease your Move Speed by 0.4 for 3.",
+  "directions": [
+   "enemy",
+   "self"
+  ],
+  "escalation": {
+   "value": 0.08
+  },
+  "flags": [
+   "heal"
+  ],
+  "max_targets": 1,
+  "name": "Tear Open",
+  "preferred_target": "enemy",
+  "radius": 1.5,
+  "tags": [
+   "buff",
+   "dmg",
    "heal",
    "other"
   ],

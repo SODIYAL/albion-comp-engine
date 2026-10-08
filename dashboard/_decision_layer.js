@@ -401,9 +401,17 @@
   function chainLine(top){
     if (!party.length || typeof ENG.fightChain !== "function") return "";
     /* dressed, like the identity headline: the worn kits pick a balanced
-       comp's chain and grade its stages (T26, T26d) */
-    const fc = ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, top ? top.w : null);
+       comp's chain and grade its stages (T26, T26d), at roster size like
+       every board number */
+    const fc = ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, null);
     if (!fc) return "";
+    /* the pick's stage claim is read one body ahead, the context its gain
+       tiles are explained in (inPickContext), so the claim and the tiles
+       read the thresholds of one size; a chain the extra body re-sequences
+       names a stage this row does not show, and makes no claim */
+    const pickFc = top
+      ? inPickContext(() => ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, top.w)) : null;
+    const improves = pickFc && pickFc.style === fc.style ? pickFc.improves : null;
     const styleNm = (DATASET.styles[fc.style] || {}).name || fc.style;
     const seg = fc.stages.map(s =>
       `<button class="dl-ch ${s.verdict}${CHAIN_OPEN === s.name ? " open" : ""}" data-chain-stage="${esc(s.name)}" title="${esc(s.name)}: ${s.verdict}${
@@ -415,14 +423,14 @@
       ? fc.stages.find(s => s.name === CHAIN_OPEN) : null;
     /* name the terms only when they add information — a single term whose
        label echoes the stage name ("Clump (+12.1 Clump)") says nothing */
-    const it = (fc.improves && fc.improves.terms) || [];
+    const it = (improves && improves.terms) || [];
     const impTerms = (it.length > 1
         || (it.length === 1 && capLabel(it[0].cap).toLowerCase()
-            !== String(fc.improves.stage).toLowerCase()))
+            !== String(improves.stage).toLowerCase()))
       ? ` <small>(${it.map(t => `+${t.gain.toFixed(1)} ${esc(capLabel(t.cap))}`).join(", ")})</small>`
       : "";
-    const imp = (fc.improves && top)
-      ? `<span class="dl-ch-imp">this pick strengthens <b>${esc(fc.improves.stage)}</b>${impTerms}</span>`
+    const imp = (improves && top)
+      ? `<span class="dl-ch-imp">this pick strengthens <b>${esc(improves.stage)}</b>${impTerms}</span>`
       : "";
     return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${openStage ? chainSources(openStage) : ""}${imp}</div>`;
   }

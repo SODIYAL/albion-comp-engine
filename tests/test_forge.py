@@ -2279,6 +2279,111 @@ def t_nonstack_marginal():
           f"curse={curse:.4f} base={base} shadowcaller={sc_share} "
           f"dominated={dominated} below={below}")
 
+
+def t_floor_zeroed_gain():
+    """F44: a hard-floored capability a kit zeroes (a self-cost) while the
+    weapon still supplies it keeps its floor lift in the pick score. The
+    floor reads the weapon basis, so the dressed marginal walks that basis
+    even where the dressed gain is zero; the why rows carry the lift as a
+    zero-gain row. No shipped kit zeroes a floored gain, so the case is
+    forced on a scratch dataset in which every gear piece costs its wearer
+    the template's floored capabilities (before the fix the tankiness case
+    read 4.95 under the comp_score delta)."""
+    import json, tempfile
+    from engine import DATASET
+    probe = Engine(content="castle_outpost", size=7)
+    floored = sorted(c for c, row in probe._cap_tab.items() if row[4] is not None)
+    cases = []
+    for cap in floored:
+        cand = next((w for w in sorted(probe.weapons)
+                     if not probe.weapons[w].get("removed")
+                     and dict(probe.kit_variants(w)).get("v0")
+                     and all(x.get(cap, 0.0) > 0 for x in probe._combo_extras(w))),
+                    None)
+        if cand:
+            cases.append((cap, cand))
+    with open(DATASET, encoding="utf-8") as f:
+        data = json.load(f)
+    for g in data["gear"].values():
+        costs = dict(g.get("self_costs") or {})
+        for cap in floored:
+            costs[cap] = 99
+        g["self_costs"] = costs
+    tf = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
+                                     encoding="utf-8")
+    worst, seen = 0.0, []
+    try:
+        json.dump(data, tf)
+        tf.close()
+        e = Engine(tf.name, content="castle_outpost", size=7)
+        state = e.party_state([], None, None)
+        for cap, cand in cases:
+            score, d_fit, _ds, _m, combo, _v, vg = e._eval_pick(state, cand)
+            actual = e.comp_score([cand], [combo], [vg]) - e.comp_score([])
+            built = e._as_built(state, cand, combo, vg)
+            rows, _cg = e._pick_caps(state, cand, combo, vg)
+            row = next((r for r in rows if r["cap"] == cap), None)
+            worst = max(worst, abs(score - actual), abs(built - actual),
+                        abs(sum(r["delta"] for r in rows) - d_fit))
+            seen.append((cap, cand, e.build_extra(cand, combo, vg).get(cap, 0.0),
+                         row["floor_lift"] if row else None))
+    finally:
+        os.unlink(tf.name)
+    check("F44 a floored capability a kit zeroes keeps its floor lift: the "
+          "pick score, the as-built score and the why rows equal the "
+          "comp_score delta (scratch dataset, 1e-9)",
+          len(cases) >= 1 and worst < 1e-9
+          and all(d == 0.0 and fl is not None and fl > 0 for _c, _w, d, fl in seen),
+          f"worst |diff| = {worst:.2e}; (cap, candidate, dressed gain, floor lift) {seen}")
+
+
+def t_top_n_none():
+    """F45: an explicit top_n of None reads as each ranked list's default
+    (recommend 4, swap_review 3, weaknesses 3, kit_options 3,
+    replace_options 5), as pool=None reads as the suggestion pool; the
+    browser port reads null the same way (the parity test pins it)."""
+    e = Engine(content="castle_outpost", size=7)
+    party = ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"]
+    names = lambda rows: [r["weapon"] for r in rows]
+    rec = names(e.recommend(party, None))
+    swap = [names(m["options"]) for m in e.swap_review(party, None)]
+    weak = [g["cap"] for g in e.weaknesses(party, None)]
+    kit = e.kit_options(party[0], None, None, None)
+    rep = names(e.replace_options(party, 0, None, None, None))
+    check("F45 top_n None reads as the default in recommend, swap_review, "
+          "weaknesses, kit_options and replace_options",
+          rec == names(e.recommend(party)) and len(rec) == 4
+          and swap == [names(m["options"]) for m in e.swap_review(party)]
+          and weak == [g["cap"] for g in e.weaknesses(party)] and len(weak) == 3
+          and kit == e.kit_options(party[0])
+          and rep == names(e.replace_options(party, 0)),
+          f"recommend={rec} weaknesses={weak} replace={rep}")
+
+
+def t_refine_as_built():
+    """F46: the forge's refinement pass and replace_options price a slot's
+    member on the rest's state (_as_built), the exact comp_score(party) -
+    comp_score(rest) the two full comp_scores computed before: every slot
+    of a dressed forged roster agrees at 1e-9."""
+    worst, n = 0.0, 0
+    for content, size, style in (("castle_outpost", 7, "balanced"),
+                                 ("blackzone_roam", 12, "clap")):
+        e = Engine(content=content, size=size, style=style)
+        r = e.forge(size)
+        party, combos, gears = r["party"], r["combos"], r["gears"]
+        full = e.comp_score(party, combos, gears)
+        for i in range(len(party)):
+            rest = party[:i] + party[i + 1:]
+            rest_c = combos[:i] + combos[i + 1:]
+            rest_g = gears[:i] + gears[i + 1:]
+            state = e.party_state(rest, rest_c, rest_g)
+            built = e._as_built(state, party[i], combos[i], gears[i])
+            worst = max(worst, abs(built - (full - e.comp_score(rest, rest_c, rest_g))))
+            n += 1
+    check("F46 a slot's member priced on the rest's state equals "
+          "comp_score(party) - comp_score(rest) on dressed forged rosters (1e-9)",
+          n > 0 and worst < 1e-9, f"{n} slots, worst |diff| = {worst:.2e}")
+
 if __name__ == "__main__":
     t_gear_active_doctrine()
     t_invariant()
@@ -2323,6 +2428,9 @@ if __name__ == "__main__":
     t_kit_options_rest()
     t_per_spell_credit()
     t_nonstack_marginal()
+    t_floor_zeroed_gain()
+    t_top_n_none()
+    t_refine_as_built()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

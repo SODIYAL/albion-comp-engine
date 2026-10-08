@@ -1296,6 +1296,12 @@ check(".gd-main .cp-foot{position:sticky; bottom:0; z-index:1; background:var(--
 check("ENG.killPressure(party, COMBOS_CUR, GEARS_CUR)" in DECISION_JS
       and "ENG.fightChain(party, COMBOS_CUR, GEARS_CUR," in DECISION_JS,
       "L40a the kill-pressure card and the fight chain read the worn kits")
+chain_fn = seg(DECISION_JS, "function chainLine(", "function whyNotBlock(", "L40c chain anchors")
+check("ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, null)" in chain_fn
+      and "inPickContext(() => ENG.fightChain(party, COMBOS_CUR, GEARS_CUR, top.w))" in chain_fn
+      and "pickFc.style === fc.style" in chain_fn and "fc.improves" not in chain_fn,
+      "L40c the fight chain grades its stages at roster size and reads the pick's stage claim one body ahead, the context its gain tiles are explained in",
+      "the claim used to read the roster-size thresholds while the tiles beside it read the next size's")
 pool_fn = seg(DECISION_JS, "function playerPoolRecs", "function poolSearchResults",
               "L40 pool anchors")
 slot_fn = seg(DECISION_JS, "function slotRanking", "function swapImpact",

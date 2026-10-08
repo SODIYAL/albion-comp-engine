@@ -25,8 +25,8 @@
   },
   "gear_spells.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "5",
-   "sha256": "5a3f5950f377fc8849ae94d96297ff9eb5678126e1f7a414f11f0f10a225d664",
+   "adapter_version": "6",
+   "sha256": "53be86f59c33670a180be845289b06cbd6e2ed728695b8105cf60b3ccfc1de72",
    "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",
@@ -38,7 +38,7 @@
   "interactions.json": {
    "adapter": "build_interactions",
    "adapter_version": "1",
-   "sha256": "0d9738d5f8ea77bb90ccd4437d899813dd26feebf6211be005a9f732303e6a48",
+   "sha256": "ed6c5324bfb1123952a2e324b87e80e063c942853ba4afc780430e0e9edc4c52",
    "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "interactions.yaml",
@@ -57,8 +57,8 @@
   },
   "spell_index.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "5",
-   "sha256": "afcdd8515a47d9bdabbec1f4440f40bd83847e86ab0b890a670dff77ae392935",
+   "adapter_version": "6",
+   "sha256": "516a733869bbcbacfd8eceae644eec5f9f8cc1e3cf6470a06ac3d4fc1cad7603",
    "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",
@@ -69,8 +69,8 @@
   },
   "weapon_lines.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "5",
-   "sha256": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1",
+   "adapter_version": "6",
+   "sha256": "c1891f3398028a74c40606495790434324f927fab8f74ad446e317f2a504cdb9",
    "source_commit": "47e4f5aca4d30b7495afa5a625ce0d5795e32050",
    "source_files": [
     "formatted/items.json",

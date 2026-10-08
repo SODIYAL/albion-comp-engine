@@ -6,7 +6,11 @@ Parses ao-bin-dumps game data into the compact, evidence-ready dataset the
 engine and the evidence lint consume:
 
   out/weapon_lines.json   one entry per weapon line (MAIN_MACE, 2H_LONGBOW, ...):
-                          localized name + full equippable spell list by slot
+                          localized name + full equippable spell list by slot;
+                          a shapeshifter line also lists its form's abilities
+                          (`form_spells`, on no menu: the E transforms into them)
+  out/gear_spells.json    per gear line its actives and passives; per potion
+                          and meal the spell it casts (`consume`)
   out/spell_index.json    per spell: localized name/description, function tags
                           ([dmg]/[heal]/[cc]/[buff]/[debuff]/[mobility]),
                           keyword flags (purge/silence/stun/root/knockback/cleanse),
@@ -28,7 +32,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "5"   # 5: caster_moves (structural <dash> fact)
+ADAPTER_VERSION = "6"   # 6: list indices kept in description tags; CC resistance is no shield; consume spells; form spells
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -54,7 +58,9 @@ FLAG_PATTERNS = {
     "heal":      r"\bheal|\brestores?\b[^.]{0,20}\bhealth",
     "pull":      r"\bpulls?\b",
     "slow":      r"\bslow(s|ed)?\b",
-    "shield":    r"\bshield|\bdamage taken\b|\bresistance",
+    # "Crowd Control Resistance" is a CC-duration stat, nothing shield-like:
+    # it tripped this flag on 22 spells (LAUNCHER's enemy CC-resistance cut)
+    "shield":    r"\bshield|\bdamage taken\b|(?<!crowd control )\bresistance",
     "pierce":    r"\bresistance reduction|\breduc\w+[^.]{0,30}\bresist|\barmor\b[^.]{0,20}\breduc|\b(decreas|reduc)\w*[^.]{0,40}\bdefense|\bdefense\b[^.]{0,25}\b(decreas|reduc)",
     "heal_reduction": r"\breduc\w+[^.]{0,30}\bhealing\b|\bhealing received\b[^.]{0,20}\breduc|\bhealing\s+(cast|done)\b[^.]{0,20}\breduc",
 }
@@ -139,11 +145,16 @@ def resolve_description(desc, spell, registry):
         val = resolve_path(registry, spell, m.group(1))
         if val is None:
             misses += 1
-            return m.group(0)
+            # an unresolved tag shows as before, without its list indices
+            return re.sub(r"\[\d+\]", "", m.group(0))
         hits += 1
         return val
 
-    return TAG_INLINE.sub(sub, desc), hits, misses
+    out = TAG_INLINE.sub(sub, desc)
+    # a tag the text never closes (no trailing $) shows as before too
+    out = re.sub(r"\$\$?[A-Za-z_][\w.\[\]]*",
+                 lambda m: re.sub(r"\[\d+\]", "", m.group(0)), out)
+    return out, hits, misses
 
 
 def load(path):
@@ -151,6 +162,59 @@ def load(path):
     # the ANSI codepage (cp1252) and dies on the first non-Latin-1 glyph
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+# ------------------------------------------------------------ shapeshifter forms
+# A shapeshifter staff's E transforms the wielder; the form's own abilities
+# and passive carry a name and a description in the dumps but sit on no equip
+# menu, and a sheet scores them through the E. Transformation type
+# (items.json transformationweapon @transformation) -> the name prefixes of
+# that form's spells in spells.json: the dumps link a form to its abilities
+# in a file the snapshot does not carry, so the link is by name
+# (pipeline/audit_form_abilities.py lists the form spells no prefix maps).
+FORM_PREFIXES = {
+    "PANTHER": ("PANTHER_", "PASSIVE_SHAPE_PANTHER"),
+    "ENT": ("ENT_", "PASSIVE_SHAPE_ENT"),
+    "BEAR": ("BEAR_", "PASSIVE_SHAPE_BEAR"),
+    "WEREWOLF": ("WEREWOLF_", "PASSIVE_SHAPE_WEREWOLF"),
+    "IMP": ("IMP_", "FLAME_ORB", "PASSIVE_SHAPE_IMP"),
+    "ROCK_ELEMENTAL": ("ROCK_ELEMENTAL_", "PASSIVE_SHAPE_ROCK_ELEMENTAL"),
+    "AVALONIAN_EAGLE": ("AVALON_EAGLE_", "PASSIVE_SHAPE_EAGLE"),
+    "CRYSTAL_COBRA": ("CRYSTAL_COBRA_", "PASSIVE_SHAPE_CRYSTAL_COBRA",
+                      "PASSIVE_SHAPE_COBRA"),
+}
+FORM_STATBLOCK = "@SPELLS_CHARGECONSUMING_STATBLOCK"
+FORM_CHARGE = "SHAPE_FEROCITY_STACK"
+
+
+def is_form_spell(sid, spell):
+    """A form ability: a charge-consuming statblock spell, a spell spending
+    the form's charge, or a form passive (never the transformation itself,
+    nor the charge)."""
+    if sid.startswith("SHAPESHIFT_") or sid == FORM_CHARGE:
+        return False
+    return ((spell.get("@statblock") or "").startswith(FORM_STATBLOCK)
+            or spell.get("@spellchargesspell") == FORM_CHARGE
+            or sid.startswith("PASSIVE_SHAPE_"))
+
+
+def form_spell_ids(form, registry, names, equip):
+    """The spells of one shapeshifter form that carry a name and a
+    description (the spell's own tags first: a reworked ability keeps its id
+    and points at a new text), equippable spells excluded."""
+    prefixes = FORM_PREFIXES.get(form, ())
+    out = []
+    for sid, s in registry.items():
+        if not prefixes or not sid.startswith(prefixes) or sid in equip:
+            continue
+        if not is_form_spell(sid, s):
+            continue
+        name = names.get(s.get("@namelocatag") or "") or names.get("@SPELLS_" + sid)
+        desc = (names.get(s.get("@descriptionlocatag") or "")
+                or names.get("@SPELLS_" + sid + "_DESC"))
+        if name and desc:
+            out.append(sid)
+    return sorted(out)
 
 
 # ------------------------------------------------------------ area geometry
@@ -543,17 +607,53 @@ def main(dump_dir, source_commit):
         G["passives"] = [s for s in sids
                          if spell_group.get(s) == "passivespell"]
 
+    # ---- consumables: the spell a potion or meal casts -----------------------
+    # A potion or meal carries no ability menu: drinking or eating it casts
+    # its @consumespell. Recorded under `consume` (never as an active: the
+    # item offers no choice, and a sheet row citing the spell stays
+    # always-on in build_loadout) and indexed like any equippable spell, so
+    # the potion and food rows cite the spell they score and the lint reads
+    # its text and effects.
+    cons_raw = items.get("consumableitem", [])
+    for c in (cons_raw if isinstance(cons_raw, list) else [cons_raw]):
+        u, sid = c.get("@uniquename", ""), c.get("@consumespell")
+        if "@" in u or c.get("@slottype") not in ("potion", "food") or not sid:
+            continue
+        gear_spells[u] = {"slot": c["@slottype"], "actives": [], "passives": [],
+                          "consume": [sid]}
+
+    # ---- shapeshifter forms: the abilities the E transforms into -----------
+    # recorded per line as `form_spells` and indexed, so the evidence review
+    # fingerprints a form's numbers into its E's facts (a change to Barbed
+    # Roots then stales the Rootbound E's rows)
+    form_of = {line_key(w["@uniquename"]): w["@transformation"]
+               for w in items.get("transformationweapon", [])
+               if "@" not in w.get("@uniquename", "") and w.get("@transformation")}
+    equip = {s for L in lines.values() for slot in L["spells"].values() for s in slot}
+    equip |= {s for G in gear_spells.values() for s in G["actives"] + G["passives"]}
+    for key, form in sorted(form_of.items()):
+        if key in lines:
+            fs = form_spell_ids(form, full_registry, loc_map, equip)
+            if fs:
+                lines[key]["form_spells"] = fs
+
     used_spells = {s for L in lines.values() for slot in L["spells"].values() for s in slot}
-    # gear actives/passives get the same name/description/facts coverage
+    # gear actives/passives, consume spells and form spells get the same
+    # name/description/facts coverage
     used_spells |= {s for G in gear_spells.values()
-                    for s in G["actives"] + G["passives"]}
+                    for s in G["actives"] + G["passives"] + G.get("consume", [])}
+    used_spells |= {s for L in lines.values() for s in L.get("form_spells", [])}
     spell_index = {}
     resolved_hits = resolved_misses = 0
     for sid in sorted(used_spells):
         meta = spell_meta.get(sid, {})
         name = loc_map.get(meta.get("namelocatag") or f"@SPELLS_{sid}", sid)
         desc = loc_map.get(meta.get("desclocatag") or f"@SPELLS_{sid}_DESC", "")
-        plain = re.sub(r"\[/?\w+\]", "", desc)
+        # strip markup tags ([dmg], [/b]) and keep list indices: a numeric
+        # [5] inside "$$SPELL.buffovertime[5].value$" addresses element 5,
+        # and stripping it read element 0 (Incubus's max-health cut -40%
+        # where the data carries -20%)
+        plain = re.sub(r"\[/?[A-Za-z_]\w*\]", "", desc)
         plain, h, m_ = resolve_description(plain, registry.get(sid, {}), registry)
         resolved_hits += h
         resolved_misses += m_

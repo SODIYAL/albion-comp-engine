@@ -63,6 +63,15 @@
     return extra;
   }
 
+  function present(v) {
+    /* A dataset value read the way engine.py reads it: an empty object or
+       array is absent, as Python's falsy {} and []. */
+    if (!v) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    if (typeof v === "object") { for (var k in v) return true; return false; }
+    return true;
+  }
+
   function CompEngine(data, content, size, style) {
     this.data = data;
     this.weapons = data.weapons;
@@ -1558,10 +1567,10 @@
        fills what the cell lacks; `balanced` never reads a cell. */
     if (this.size <= DOCTRINE_GANG_MAX) {
       var gang = (rec.kit_bands || {}).gang;
-      if (gang) return gang;
+      if (present(gang)) return gang;   /* an empty band is no band, as in engine.py */
     }
     var cell = IDENTITY_STYLES[this.style] ? (rec.kit_styles || {})[this.style] : null;
-    if (!cell) return rec;
+    if (!present(cell)) return rec;
     var merged = {}, k;
     for (k in rec) merged[k] = rec[k];
     var kit = {};
@@ -1588,11 +1597,11 @@
       for (k in (cell[keys[ki]] || {})) perW[k] = cell[keys[ki]][k];
       merged[keys[ki]] = perW;
     }
-    if (cell.kit_build) merged.kit_build = cell.kit_build;
+    if (present(cell.kit_build)) merged.kit_build = cell.kit_build;
     var sw = [];
     for (k in (cell.kit_weapon_build || {})) sw.push(k);
     sw.sort();
-    merged._style_arch = { weapons: sw, seat: !!cell.kit_build };
+    merged._style_arch = { weapons: sw, seat: present(cell.kit_build) };
     return merged;
   };
   CompEngine.prototype._chestUniform = function (seat, weapon) {
@@ -2446,6 +2455,15 @@
       total -= (this._overstack(cap2, have2 + gain2, target2, soft2)
                 - this._overstack(cap2, have2, target2, soft2));
     }
+    /* a capability the kit zeroes (a self-cost) while the weapon still
+       supplies it adds no coverage, but the floor reads the weapon basis,
+       so its floor lift stands (mirrors engine.py, F44) */
+    for (var cap3 in ef) {
+      var gf = ef[cap3];
+      if (!gf || extra[cap3] || !(cap3 in this.reqs)) continue;
+      var hf = sFloor[cap3] || 0.0;
+      total += this._floorPenalty(cap3, hf) - this._floorPenalty(cap3, hf + gf);
+    }
     return total;
   };
 
@@ -2759,7 +2777,8 @@
     if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
       combo = this.defaultCombo(weapon);
     var lo = this.weapons[weapon].loadout || {};
-    if (!((lo.slots && lo.slots.length) || lo.always))
+    /* an empty `always` is no loadout, as in engine.py */
+    if (!(present(lo.slots) || present(lo.always)))
       return this.weapons[weapon].capabilities;
     var slots = lo.slots || [];
     var chosen = [];
@@ -2892,6 +2911,22 @@
                   coverage: cov, floor_lift: floorD, overstack_cost: over,
                   delta: cov + floorD - over, saturated: have >= target });
     }
+    /* a capability the kit zeroes while the weapon still supplies it: no
+       coverage, its floor lift on the weapon basis, so the rows still sum
+       to dFit (mirrors engine.py, F44) */
+    for (var fc in adjW) {
+      var gf = adjW[fc];
+      if (!gf || adj[fc] || !(fc in this.reqs)) continue;
+      var hf = sf[fc] || 0.0;
+      var fl = this._floorPenalty(fc, hf) - this._floorPenalty(fc, hf + gf);
+      if (!fl) continue;
+      var haveF = s[fc] || 0.0, targetF = this.target(fc);
+      capsGain += fl;
+      rows.push({ cap: fc, gain: 0.0, before: haveF, after: haveF,
+                  target: targetF, soft_cap: this.softCap(fc),
+                  coverage: 0.0, floor_lift: fl, overstack_cost: 0.0,
+                  delta: fl, saturated: haveF >= targetF });
+    }
     rows.sort(function (x, y) {
       var kx = qrank(x.delta), ky = qrank(y.delta);
       if (kx !== ky) return ky - kx;
@@ -2968,7 +3003,8 @@
 
   CompEngine.prototype.recommend = function (party, topN, pool, combos,
                                              gears) {
-    if (topN === undefined) topN = 4;
+    /* null reads as the default, as in engine.py (F45) */
+    if (topN === undefined || topN === null) topN = 4;
     var state = this.partyState(party, combos, gears);
     var out = [];
     var keys = this._pool(pool);
@@ -3020,7 +3056,7 @@
        = score - built_score, and each option's delta is the exact
        compScore change of the swap landing in the option's combo and kit.
        `off_comp` flags viability-excluded members. */
-    if (topN === undefined) topN = 3;
+    if (topN === undefined || topN === null) topN = 3;   /* F45 */
     var out = [];
     var keys = this._pool(pool);
     var self = this;
@@ -3077,7 +3113,7 @@
   };
 
   CompEngine.prototype.weaknesses = function (party, topN, combos, gears) {
-    if (topN === undefined) topN = 3;
+    if (topN === undefined || topN === null) topN = 3;   /* F45 */
     var s = this.effectiveSupply(party, combos, gears), gaps = [];
     for (var cap in this.reqs) {
       var have = s[cap] || 0;
@@ -4433,8 +4469,10 @@
     var restG = gs.slice(0, index).concat(gs.slice(index + 1));
     var fcr = this._forgeCounts(rest, restC);
     var state = this.partyState(rest, restC, restG);
-    var baseRest = this.compScore(rest, restC, restG);
-    var contrib = this.compScore(party, cs, gs) - baseRest;
+    /* the slot's member as built, priced on the rest's state: the exact
+       compScore(party) - compScore(rest) without two full compScores
+       (mirrors engine.py, F46) */
+    var contrib = this._asBuilt(state, party[index], cs[index], gs[index]);
     var beam = { state: state, roles: fcr[1], preds: fcr[2] };
     var out = [];
     for (var pi = 0; pi < candPool.length; pi++) {
@@ -4529,7 +4567,6 @@
        (mirrors engine.py _refine_constrained). */
     party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (maxPasses === undefined) maxPasses = 8;
-    var best = this.compScore(party, combos, gears);
     for (var pass = 0; pass < maxPasses; pass++) {
       var move = null, gain = 1e-9;
       for (var i = fixed; i < party.length; i++) {
@@ -4538,8 +4575,9 @@
         var restG = gears.slice(0, i).concat(gears.slice(i + 1));
         var fcr = this._forgeCounts(rest, restC);
         var state = this.partyState(rest, restC, restG);
-        var baseRest = this.compScore(rest, restC, restG);
-        var contrib = best - baseRest;
+        /* the slot's member as built, priced on the rest's state it
+           already holds (mirrors engine.py, F46) */
+        var contrib = this._asBuilt(state, party[i], combos[i], gears[i]);
         var beam = { state: state, roles: fcr[1], preds: fcr[2] };
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
@@ -4563,7 +4601,6 @@
       party[move[0]] = move[1];
       combos[move[0]] = move[2];
       gears[move[0]] = move[3];
-      best = this.compScore(party, combos, gears);
     }
     return [party, combos, gears];
   };

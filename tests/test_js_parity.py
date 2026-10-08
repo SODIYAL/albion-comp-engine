@@ -452,6 +452,100 @@ def _close(a, b, eps=EPS):
     return a == b
 
 
+SCRATCH_RUNNER = os.path.join(HERE, "js_parity_scratch.js")
+
+
+def scratch_pass(data):
+    """The latent splits the shipped dataset never reaches, read by both
+    ports on a scratch copy of it (tests/js_parity_scratch.js is the node
+    half): every gear piece costs its wearer the floored capabilities, so
+    a dressed candidate carries one at zero while its weapon supplies it
+    (F44); one weapon's loadout is an empty `always` with no slots (the
+    flat-sheet fallback); one seat's gang band is empty and its clap cell
+    carries an empty kit_build, another seat's clap cell is empty (each
+    read as absent); and top_n is an explicit null (the default, F45).
+    Returns the mismatch lines; empty means both ports agree."""
+    d = json.loads(json.dumps(data))
+    probe = Engine(content="castle_outpost", size=7)
+    floored = sorted(c for c, row in probe._cap_tab.items() if row[4] is not None)
+    floor_cases = []
+    for cap in floored:
+        cand = next((w for w in sorted(probe.weapons)
+                     if not probe.weapons[w].get("removed")
+                     and dict(probe.kit_variants(w)).get("v0")
+                     and all(x.get(cap, 0.0) > 0 for x in probe._combo_extras(w))),
+                    None)
+        if cand:
+            floor_cases.append([cap, cand])
+    for g in d["gear"].values():
+        costs = dict(g.get("self_costs") or {})
+        for cap in floored:
+            costs[cap] = 99
+        g["self_costs"] = costs
+    flat = next(w for w in sorted(d["weapons"])
+                if d["weapons"][w].get("capabilities")
+                and not d["weapons"][w].get("removed"))
+    d["weapons"][flat]["loadout"] = {"slots": [], "always": {}}
+    seats = [r for r in d["roles"] if (r.get("kit_bands") or {}).get("gang")
+             and (r.get("kit_styles") or {}).get("clap")]
+    seats[0]["kit_bands"]["gang"] = {}
+    seats[0]["kit_styles"]["clap"] = {"kit": dict(seats[0]["kit_styles"]["clap"].get("kit") or {}),
+                                      "kit_build": []}
+    seats[1]["kit_styles"]["clap"] = {}
+    spec = {"floor": floor_cases, "flat_weapon": flat, "style": "clap",
+            "seat_gang": seats[0]["id"], "seat_cell": seats[1]["id"],
+            "party": ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"]}
+    paths = []
+    try:
+        for obj in (d, spec):
+            with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
+                                             encoding="utf-8") as tf:
+                json.dump(obj, tf)
+                paths.append(tf.name)
+        proc = subprocess.run(["node", SCRATCH_RUNNER, SCORING_JS] + paths,
+                              capture_output=True, text=True, encoding="utf-8",
+                              timeout=120)
+        if proc.returncode != 0:
+            return ["scratch runner crashed: " + proc.stderr[-600:]]
+        js = json.loads(proc.stdout)
+        e7 = Engine(paths[0], content="castle_outpost", size=7)
+        gang = Engine(paths[0], content="castle_outpost", size=7, style="clap")
+        cell = Engine(paths[0], content="blackzone_roam", size=20, style="clap")
+    finally:
+        for p in paths:
+            os.unlink(p)
+    names = lambda rows: [r["weapon"] for r in rows]
+    party = spec["party"]
+    py = {"floor": [], "raw": e7._raw_member_caps(flat),
+          "seat_gang": json.loads(json.dumps(gang._seat_kit(gang.roles[spec["seat_gang"]]))),
+          "seat_cell": json.loads(json.dumps(cell._seat_kit(cell.roles[spec["seat_cell"]]))),
+          "top_null": {
+              "recommend": names(e7.recommend(party, None)),
+              "weaknesses": [g["cap"] for g in e7.weaknesses(party, None)],
+              "swap": [names(m["options"]) for m in e7.swap_review(party, None)],
+              "replace": names(e7.replace_options(party, 0, None, None, None)),
+              "kit": {s: [o["gear"] for o in opts] for s, opts in
+                      e7.kit_options(party[0], None, None, None)["options"].items()}}}
+    for _cap, cand in floor_cases:
+        pr = e7.pick_report([], cand)
+        py["floor"].append({
+            "score": pr["score"], "d_fitness": pr["d_fitness"], "combo": pr["combo"],
+            "kit": pr["kit"],
+            "rows": [[r["cap"], r["gain"], r["floor_lift"], r["delta"]] for r in pr["caps"]],
+            "actual": e7.comp_score([cand], [pr["combo"]], [pr["kit"]]) - e7.comp_score([])})
+    errs = []
+    for k in ("floor", "raw", "seat_gang", "seat_cell", "top_null"):
+        if not _close(py[k], js.get(k)):
+            errs.append(f"scratch {k}: py={str(py[k])[:240]} js={str(js.get(k))[:240]}")
+    for f in py["floor"] + js.get("floor", []):
+        if abs(f["score"] - f["actual"]) > EPS:
+            errs.append(f"scratch floor: pick score {f['score']!r} is not the "
+                        f"comp_score delta {f['actual']!r}")
+    if not floor_cases:
+        errs.append("scratch floor: no candidate supplies a floored capability")
+    return errs
+
+
 def main():
     with open(DATASET, encoding="utf-8") as f:
         data = json.load(f)
@@ -742,6 +836,14 @@ def main():
     print(f"{len(cases) - bad}/{len(cases)} parity cases identical "
           f"(tolerance {EPS}, contents: {sorted(data['templates'])}, "
           f"styles: {sorted(data.get('styles') or {})})")
+    scratch = scratch_pass(data)
+    for line in scratch:
+        print(line)
+    if scratch:
+        bad += 1
+    else:
+        print("scratch pass identical: a zeroed floored gain, an empty always, "
+              "empty doctrine cells and a null top_n read the same in both ports")
 
     # The generated dashboard must embed THIS engine verbatim — a stale
     # build means the public page scores with different math than the source

@@ -28,5 +28,5 @@ capabilities:
   # Calibrated against Royal Armor's 10-ally energy buff (buff_allies 3)
   # and kept below Guard Rune's outright CC immunity (peel 4): a resistance
   # is not an immunity.
-  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # Q: Defensive Slam, +15% resistances and CC Resistance to 10 allies in 8m for 4s (QW)
+  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # Q: Defensive Slam, +15% resistances and +20% CC Resistance to 10 allies in 8m for 4s (QW)
   - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # Q: Defensive Slam's CC Resistance on the backline blunts pick attempts (QW)

@@ -37,7 +37,7 @@
   curated_as_of: 2026-10-07
   role_hint: support
   capabilities:
-    - {cap: knockback_displace, score: 4, evidence: CURSED_WALL}  # E: Anguished Soul fears every enemy on its line for 1.25s; the forced flight scatters the clump
+    - {cap: knockback_displace, score: 4, evidence: CURSED_WALL}  # E: Anguished Soul fears every enemy on its line for 1.25s (up to 2.25s with charges); the forced flight scatters the clump
     - {cap: peel,          score: 4, evidence: CURSED_WALL}    # feared divers run from the caster
     - {cap: burst_aoe,     score: 2, evidence: CURSED_WALL}    # 160 to every enemy the soul passes through
 

@@ -395,7 +395,9 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   still on the old minimum fit, `~` a borrowed harvest cell.
 - **Biggest need** (floor failures first) -> **best next pick** with its
   engine-derived explanation, **what it fixes**, **still weak after** (one
-  ahead, on the candidate's scored combo), and the **fight chain** strip.
+  ahead, on the candidate's scored combo), and the **fight chain** strip
+  (stages graded at roster size, the pick's claim read one ahead like its
+  gain tiles).
 - **Kill pressure** (pierce · heal-cut · burst lights) and **role check**
   (seat tally, function and carried-aura chips, advisory flags) as cards —
   descriptive only.

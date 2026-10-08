@@ -48,26 +48,12 @@ sys.path.insert(0, HERE)
 import sheets_lib  # noqa: E402
 from effect_lookup import PROSE_FALLBACK  # noqa: E402
 from parse_dumps import FLAG_PATTERNS, en, line_key, load, resolve_description  # noqa: E402
+# The form table (transformation type -> its spells' name prefixes) is the
+# parser's, which records each shapeshifter line's form spells for the
+# evidence review; a form spell that matches no prefix is listed here under
+# "Unmapped" instead of vanishing.
+from parse_dumps import FORM_PREFIXES, FORM_STATBLOCK, FORM_CHARGE  # noqa: E402,F401
 from provenance import snapshot_commit, snapshot_dir  # noqa: E402
-
-# Transformation type (items.json transformationweapon @transformation) ->
-# the name prefixes of that form's spells in spells.json. The dumps link a
-# form to its abilities in a file the snapshot does not carry, so the link
-# is by name; a form spell that matches no prefix is listed under "Unmapped"
-# instead of vanishing.
-FORM_PREFIXES = {
-    "PANTHER": ("PANTHER_", "PASSIVE_SHAPE_PANTHER"),
-    "ENT": ("ENT_", "PASSIVE_SHAPE_ENT"),
-    "BEAR": ("BEAR_", "PASSIVE_SHAPE_BEAR"),
-    "WEREWOLF": ("WEREWOLF_", "PASSIVE_SHAPE_WEREWOLF"),
-    "IMP": ("IMP_", "FLAME_ORB", "PASSIVE_SHAPE_IMP"),
-    "ROCK_ELEMENTAL": ("ROCK_ELEMENTAL_", "PASSIVE_SHAPE_ROCK_ELEMENTAL"),
-    "AVALONIAN_EAGLE": ("AVALON_EAGLE_", "PASSIVE_SHAPE_EAGLE"),
-    "CRYSTAL_COBRA": ("CRYSTAL_COBRA_", "PASSIVE_SHAPE_CRYSTAL_COBRA",
-                      "PASSIVE_SHAPE_COBRA"),
-}
-FORM_STATBLOCK = "@SPELLS_CHARGECONSUMING_STATBLOCK"
-FORM_CHARGE = "SHAPE_FEROCITY_STACK"
 
 # The prose flags of parse_dumps, read as the capabilities a text can
 # support. An ally shield is buff_allies before anything else.

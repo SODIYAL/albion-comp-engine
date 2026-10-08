@@ -136,6 +136,24 @@ st, _un = evidence_review.check(fx_effect, record, cited)
 check("a change in the structured effects alone makes the spell stale",
       [s for s, _w in st] == ["DIVINE_JUMP"], f"stale={st}")
 
+# a shapeshifter E's fingerprint carries its form's abilities (the form sits
+# on no menu, so no row cites it): a change to a form ability stales the
+# E's rows, and leaves every other fingerprint as it was
+fx_form = FakeFacts(dict(old_facts.spells, ENT_HEAL_AREA={"description": "Heals 40."}),
+                    effects=dict(old_facts.effects), items=dict(old_facts.items))
+fx_form.forms = {"DIVINE_JUMP": ["ENT_HEAL_AREA"]}
+form_record = {k: fx_form.fingerprint(k) for k in cited}
+fx_form2 = FakeFacts(dict(old_facts.spells, ENT_HEAL_AREA={"description": "Heals 50."}),
+                     effects=dict(old_facts.effects), items=dict(old_facts.items))
+fx_form2.forms = fx_form.forms
+st, un = evidence_review.check(fx_form2, form_record, cited)
+check("a change to a form ability stales the E whose form it is, and no other "
+      "evidence; without forms the fingerprint is the spell's own",
+      [s for s, _w in st] == ["DIVINE_JUMP"] and not un
+      and form_record["ARROWRAIN"] == record["ARROWRAIN"]
+      and form_record["DIVINE_JUMP"] != record["DIVINE_JUMP"],
+      f"stale={st}")
+
 cited_new = dict(cited, SNARE=["MAIN_MACE.root"])
 fx_cite = FakeFacts(dict(old_facts.spells, SNARE={"description": "Roots."}),
                     effects=dict(old_facts.effects), items=dict(old_facts.items))

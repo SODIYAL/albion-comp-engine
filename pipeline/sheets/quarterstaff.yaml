@@ -101,7 +101,7 @@
   curated_as_of: 2026-10-07
   role_hint: tank
   capabilities:
-    - {cap: heal_reduction, score: 4, evidence: QS_SLOWROPE}      # E: -50% Healing Received aura (negates own healing too)
+    - {cap: heal_reduction, score: 4, evidence: QS_SLOWROPE}      # E: -35% Healing Received aura (negates own healing too)
     - {cap: slow,          score: 4, evidence: QS_SLOWROPE}       # 50% aura slow
     - {cap: zone_control,  score: 4, evidence: QS_SLOWROPE}       # 6.5m walking denial zone, up to 15s
     - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}     # divers stand in the aura; W: Forceful Swing; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9) (QW)

@@ -338,9 +338,14 @@ def main():
     # check a single one (the reveal investigation hit this wall). Gear
     # actives AND passives are indexed the same way; the effect walk itself
     # is source-agnostic.
+    # a potion's or meal's consume spell (`consume`) is indexed the same way
     gear_spells = {s for L in gear_lines.values()
-                   for kind in ("actives", "passives") for s in (L.get(kind) or [])}
-    indexed_spells = weapon_spells | gear_spells
+                   for kind in ("actives", "passives", "consume")
+                   for s in (L.get(kind) or [])}
+    # and a shapeshifter form's abilities (`form_spells`): the evidence
+    # review fingerprints their effects into the E's facts
+    form_spells = {s for L in weapon_lines.values() for s in L.get("form_spells") or []}
+    indexed_spells = weapon_spells | gear_spells | form_spells
 
     effects = defaultdict(lambda: {"occurrences": 0, "targets": defaultdict(int),
                                    "example_spells": [], "direct_spells": [],
@@ -386,7 +391,7 @@ def main():
                 for entry in spell_effects.get(sid, []):
                     effects[entry["effect"]]["weapon_lines"].add(wkey)
     for gkey, line in gear_lines.items():
-        for kind in ("actives", "passives"):
+        for kind in ("actives", "passives", "consume"):
             for sid in (line.get(kind) or []):
                 for entry in spell_effects.get(sid, []):
                     effects[entry["effect"]]["gear_lines"].add(gkey)

@@ -56,7 +56,7 @@
     - {cap: root,          score: 4, evidence: TRIDENTTHROW}     # 2.65s AoE root on impact
     - {cap: mobility,      score: 4, evidence: TRIDENTTHROW}     # the leap; Inner Focus (QW)
     - {cap: catch,         score: 4, evidence: TRIDENTTHROW}     # leap + root
-    - {cap: buff_allies,   score: 3, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
+    - {cap: buff_allies,   score: 3, evidence: TRIDENTTHROW}     # soul mist (6s) buffs up to 10 allies inside: +50% MS, +75% AA speed, -30% cast time
     - {cap: peel,          score: 2, evidence: TRIDENTTHROW}     # root the divers
     - {cap: disengage,     score: 2, evidence: TRIDENTTHROW}     # immune leap out
     # the impact's own damage, "Deals 220 physical damage" to the 3m root

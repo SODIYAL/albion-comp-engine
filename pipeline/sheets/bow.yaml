@@ -87,7 +87,7 @@
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
+    - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range, +30% AA speed, +50 bonus damage per AA
     # the E also lowers the wielder's Defense by 35% (the glass side of the
     # cannon); self_costs are read from gear sheets only, so it is unscored
 

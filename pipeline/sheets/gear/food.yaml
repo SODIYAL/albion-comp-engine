@@ -1,8 +1,9 @@
 # Food, one entry per meal. Gear follows the weapon sheets' rules: 1-7
-# scale (2 points = one supply unit). A meal has no gear_spells menu: each
-# row cites the GEAR_STATS sentinel and reads the meal's consume spell
-# (items.json @consumespell), scored on the line of the meal it varies
-# (curation judgment; a food row is one coarse step). Cabbage Soup
+# scale (2 points = one supply unit). A meal has no ability menu: each row
+# cites the spell eating it casts (items.json @consumespell, indexed by
+# parse_dumps as the item's `consume` spell in gear_spells.json), scored on
+# the line of the meal it varies (curation judgment; a food row is one
+# coarse step); the row stays always-on. Cabbage Soup
 # (out-of-combat regeneration) and Pork Pie (load and gathering) have no
 # row to give and are not catalogued.
 
@@ -10,65 +11,65 @@
   slot: food
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}
+    - {cap: sustained_dps, score: 2, evidence: FOOD_BUFF_CASTSPEED_CDR_P5}
 
 - gear: T7_MEAL_OMELETTE_AVALON      # Avalonian Pork Omelette
   slot: food
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cooldown rate + cast speed (+ a little defense)
+    - {cap: sustained_dps, score: 2, evidence: FOOD_BUFF_CASTSPEED_CDR_AVALON_P5} # cooldown rate + cast speed (+ a little defense)
 
 - gear: T7_MEAL_OMELETTE_DRAGONAREA  # Dragonbound Leyfin Omelette
   slot: food
   curated_as_of: 2026-10-07
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cast speed + cooldown rate as the Avalonian omelette's; its +6.6% Healing Cast carries no row, as that omelette's +6.6% defense carries none
+    - {cap: sustained_dps, score: 2, evidence: FOOD_BUFF_CASTSPEED_CDR_HEALBONUS_P5} # cast speed + cooldown rate as the Avalonian omelette's; its +6.6% Healing Cast carries no row, as that omelette's +6.6% defense carries none
 
 - gear: T7_MEAL_OMELETTE_FISH        # Dusthole Crab Omelette
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cooldowns, cast times and energy costs
+    - {cap: sustained_dps, score: 2, evidence: FOOD_FISH_BUFF_CASTSPEED_CDR_P5} # cooldowns, cast times and energy costs
 
 - gear: T7_MEAL_ROAST                # Roast Pork
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}       # heals by the damage dealt
+    - {cap: self_sustain,  score: 2, evidence: FOOD_BUFF_LIFESTEAL_P5} # heals by the damage dealt
 
 - gear: T7_MEAL_ROAST_FISH           # Roasted Puremist Snapper
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}       # heals by the damage dealt
-    - {cap: tankiness,     score: 1, evidence: GEAR_STATS}       # and raises max health, under the Beef Sandwich's
+    - {cap: self_sustain,  score: 2, evidence: FOOD_FISH_BUFF_LIFESTEAL_P5} # heals by the damage dealt
+    - {cap: tankiness,     score: 1, evidence: FOOD_FISH_BUFF_LIFESTEAL_P5} # and raises max health, under the Beef Sandwich's
 
 - gear: T8_MEAL_SANDWICH             # Beef Sandwich
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health
+    - {cap: tankiness,     score: 2, evidence: FOOD_BUFF_MAXHP_P5} # max health
 
 - gear: T8_MEAL_SANDWICH_AVALON      # Avalonian Beef Sandwich
   slot: food
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health + CC duration
+    - {cap: tankiness,     score: 2, evidence: FOOD_BUFF_MAXHP_AVALON_P5} # max health + CC duration
 
 - gear: T8_MEAL_STEW                 # Beef Stew
   slot: food
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # all damage dealt
+    - {cap: sustained_dps, score: 2, evidence: FOOD_BUFF_DMG_P5} # all damage dealt
 
 - gear: T8_MEAL_STEW_AVALON          # Avalonian Beef Stew
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # combat damage; its health regeneration is out of combat only
+    - {cap: sustained_dps, score: 2, evidence: FOOD_BUFF_DMG_AVALON_P5} # combat damage; its health regeneration is out of combat only
 
 - gear: T8_MEAL_STEW_FISH            # Deadwater Eel Stew
   slot: food
   curated_as_of: 2026-10-03
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # combat damage + cooldown rate
+    - {cap: sustained_dps, score: 2, evidence: FOOD_FISH_BUFF_DMG_P5} # combat damage + cooldown rate

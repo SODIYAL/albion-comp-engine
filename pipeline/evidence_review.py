@@ -18,7 +18,10 @@ Fingerprinted facts, all from committed artifacts (no dumps needed):
   spell        out/spell_index.json record (description with its numbers,
                cast range, cooldown, area, channel, flags, targets) plus
                out/effect_catalogue.json spell_effects (the structured
-               effect list the lint grounds capabilities on)
+               effect list the lint grounds capabilities on); a
+               shapeshifter staff's E also carries its form's abilities
+               (out/weapon_lines.json `form_spells`, each one's record and
+               effects), since a sheet scores the form through the E
   WEAPON_STATS out/item_stats.json record of the weapon (base stats)
   GEAR_STATS   out/item_stats.json record of the gear item
 
@@ -69,10 +72,19 @@ class Facts:
     """Fingerprints of the evidence the sheets cite, from the committed
     parse of the pinned snapshot."""
 
+    forms = {}   # a shapeshifter E -> its form's abilities; none by default
+
     def __init__(self):
         self.spells = _load("spell_index.json")
         self.effects = (_load("effect_catalogue.json") or {}).get("spell_effects", {})
         self.items = (_load("item_stats.json") or {}).get("items", {})
+        # a shapeshifter E -> its form's abilities (no menu carries them)
+        self.forms = {}
+        for line in (_load("weapon_lines.json") or {}).values():
+            for sid in (line.get("spells") or {}).get("e") or []:
+                if line.get("form_spells"):
+                    self.forms[sid] = sorted(set(self.forms.get(sid, []))
+                                             | set(line["form_spells"]))
 
     def fingerprint(self, ev_id):
         """ev_id: a spell id, or 'WEAPON_STATS:<weapon>' / 'GEAR_STATS:<item>'.
@@ -84,8 +96,12 @@ class Facts:
             return _digest(rec) if rec is not None else None
         if ev_id not in self.spells:
             return None
-        return _digest({"spell": self.spells.get(ev_id),
-                        "effects": self.effects.get(ev_id)})
+        facts = {"spell": self.spells.get(ev_id),
+                 "effects": self.effects.get(ev_id)}
+        if ev_id in self.forms:
+            facts["form"] = [[s, self.spells.get(s), self.effects.get(s)]
+                             for s in self.forms[ev_id]]
+        return _digest(facts)
 
 
 def cited_evidence():

@@ -676,8 +676,11 @@ def lint_pools(paths=None):
 
 
 def _menu(gkey):
+    """The spells a gear row may cite: the item's actives and passives, and
+    the spell a potion or meal casts (`consume`)."""
     menu = GEAR_SPELLS.get(gkey) or {}
-    return set(menu.get("actives") or []) | set(menu.get("passives") or [])
+    return (set(menu.get("actives") or []) | set(menu.get("passives") or [])
+            | set(menu.get("consume") or []))
 
 
 def lint_gear_pools(paths=None):
