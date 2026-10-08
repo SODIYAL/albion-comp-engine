@@ -3,8 +3,15 @@
 # cites the cape's passive on its dumps menu (out/gear_spells.json), and
 # the passive needs no pick. No cape passive buffs an ally, so none
 # grounds buff_allies (directionality rule); a self-only cleanse grounds
-# tankiness, not cleanse. The plain Cape (no combat effect) is not
-# catalogued.
+# tankiness, not cleanse. An item with no combat effect has an entry with
+# no rows: a kit names it where winners wear it, and it supplies nothing.
+
+- gear: CAPE                         # Cape — no passive
+  slot: cape
+  curated_as_of: 2026-10-08
+  # No row: the base cape has no passive slot and no combat stat at any
+  # tier or enchantment (items.json passivespellslots 0, no spell list).
+  capabilities: []
 
 - gear: CAPEITEM_AVALON              # Avalonian Cape — Force Pulse
   slot: cape

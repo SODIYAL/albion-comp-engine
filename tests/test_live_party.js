@@ -71,7 +71,7 @@ eq(ctx.liveGearKey("T8_ARMOR_LEATHER_HELL@3"), "ARMOR_LEATHER_HELL", "armor: hig
 eq(ctx.liveGearKey("T6_POTION_HEAL"), "T6_POTION_HEAL", "potion: exact tiered key");
 eq(ctx.liveGearKey("T8_POTION_HEAL@1"), "T6_POTION_HEAL", "potion: other tier wears the curated record by base");
 eq(ctx.liveGearKey("T7_MEAL_OMELETTE@2"), "T7_MEAL_OMELETTE", "food: enchant stripped, tier kept");
-eq(ctx.liveGearKey("T4_CAPE"), null, "uncurated item (plain cape) -> null, never a stand-in");
+eq(ctx.liveGearKey("T4_BACKPACK_GATHERER_ORE"), null, "uncurated item (a gatherer's backpack) -> null, never a stand-in");
 eq(ctx.liveGearKey("ITEM_12345"), null, "companion offline placeholder -> null");
 eq(ctx.liveGearKey(undefined), null, "missing -> null");
 
@@ -84,7 +84,7 @@ eq(ctx.liveGearPicks({
       cape: "CAPEITEM_DEMON", offhand: "OFF_BOOK", potion: "T6_POTION_HEAL", food: "T7_MEAL_OMELETTE" },
    "full kit maps every loadout slot, chest -> armor, non-loadout slots ignored");
 eq(ctx.liveGearPicks({ chest: "T6_HEAD_CLOTH_SET1" }), null, "item in the wrong slot is dropped");
-eq(ctx.liveGearPicks({ head: "T4_CAPE" }), null, "kit of only uncurated pieces -> null");
+eq(ctx.liveGearPicks({ cape: "T4_BACKPACK_GATHERER_ORE" }), null, "kit of only uncurated pieces -> null");
 eq(ctx.liveGearPicks(null), null, "no equipment -> null");
 
 /* the whole LOADOUT entry: picks + kit, no engine mark */

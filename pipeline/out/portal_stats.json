@@ -1,7 +1,7 @@
 {
  "battles": 21926,
  "content": "ancient_lands",
- "generated_at": "2026-10-07T12:17Z",
+ "generated_at": "2026-10-08T21:53Z",
  "kind": "portal_stats",
  "parties": 24942,
  "pools": {
@@ -2604,7 +2604,7 @@
          "others": [
           {
            "id": "MEAL_SOUP",
-           "name": "Meal Soup",
+           "name": "Cabbage Soup",
            "share": 0.25,
            "votes": 1
           }
@@ -17955,7 +17955,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.02,
          "votes": 2
         },
@@ -18313,7 +18313,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.022,
          "votes": 4
         },
@@ -19396,7 +19396,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.023,
          "votes": 4
         },
@@ -19414,7 +19414,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.006,
          "votes": 1
         },
@@ -19754,7 +19754,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.019,
          "votes": 3
         },
@@ -20476,7 +20476,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.009,
          "votes": 1
         }
@@ -21887,7 +21887,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.031,
          "votes": 4
         },
@@ -22257,7 +22257,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.011,
          "votes": 1
         }
@@ -23668,7 +23668,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.015,
          "votes": 1
         }
@@ -25458,7 +25458,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.015,
          "votes": 1
         }
@@ -26132,7 +26132,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.053,
          "votes": 3
         },
@@ -27152,7 +27152,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.039,
          "votes": 2
         },
@@ -27164,7 +27164,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.02,
          "votes": 1
         },
@@ -27838,7 +27838,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.032,
          "votes": 2
         }
@@ -28488,7 +28488,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.036,
          "votes": 2
         },
@@ -40183,7 +40183,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.167,
          "votes": 1
         },
@@ -41477,7 +41477,7 @@
         },
         "food": {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -41540,7 +41540,7 @@
         },
         "food": {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "of": 8,
          "others": [],
          "share": 1.0,
@@ -59609,7 +59609,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.014,
          "votes": 1
         }
@@ -59937,7 +59937,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.024,
          "votes": 1
         }
@@ -61604,7 +61604,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.067,
          "votes": 1
         },
@@ -61872,7 +61872,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.019,
          "votes": 1
         },
@@ -63374,7 +63374,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.048,
          "votes": 1
         }
@@ -64536,7 +64536,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.222,
          "votes": 2
         },
@@ -66394,7 +66394,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.059,
          "votes": 1
         },
@@ -66668,7 +66668,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.067,
          "votes": 1
         },
@@ -68859,7 +68859,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.1,
          "votes": 1
         }
@@ -70598,7 +70598,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.049,
          "votes": 13
         },
@@ -70962,7 +70962,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.102,
          "votes": 25
         },
@@ -71383,7 +71383,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.033,
          "votes": 8
         },
@@ -71723,7 +71723,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.105,
          "votes": 19
         },
@@ -72081,7 +72081,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.045,
          "votes": 6
         },
@@ -72496,7 +72496,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.132,
          "votes": 25
         },
@@ -72532,7 +72532,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.011,
          "votes": 2
         }
@@ -72842,7 +72842,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.142,
          "votes": 18
         },
@@ -73206,7 +73206,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.071,
          "votes": 9
         },
@@ -73552,7 +73552,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.108,
          "votes": 15
         },
@@ -73967,7 +73967,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.185,
          "votes": 17
         },
@@ -74313,7 +74313,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.14,
          "votes": 14
         },
@@ -74671,7 +74671,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.116,
          "votes": 10
         },
@@ -74999,7 +74999,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.148,
          "votes": 12
         },
@@ -75357,7 +75357,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.171,
          "votes": 14
         },
@@ -75748,7 +75748,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.074,
          "votes": 8
         },
@@ -76077,7 +76077,7 @@
       },
       "food": {
        "id": "MEAL_SOUP",
-       "name": "Meal Soup",
+       "name": "Cabbage Soup",
        "of": 47,
        "others": [
         {
@@ -76434,7 +76434,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.117,
          "votes": 11
         },
@@ -76768,7 +76768,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.092,
          "votes": 12
         },
@@ -76786,7 +76786,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.015,
          "votes": 2
         },
@@ -77120,7 +77120,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.203,
          "votes": 16
         },
@@ -77144,7 +77144,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.013,
          "votes": 1
         },
@@ -77472,7 +77472,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.158,
          "votes": 12
         },
@@ -78272,7 +78272,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.15,
          "votes": 9
         },
@@ -78681,7 +78681,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.137,
          "votes": 10
         },
@@ -79015,7 +79015,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.159,
          "votes": 13
         },
@@ -79051,7 +79051,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.012,
          "votes": 1
         }
@@ -79436,7 +79436,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.03,
          "votes": 3
         },
@@ -79448,7 +79448,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.03,
          "votes": 3
         },
@@ -79776,7 +79776,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.093,
          "votes": 4
         },
@@ -80081,7 +80081,7 @@
       },
       "food": {
        "id": "MEAL_SOUP",
-       "name": "Meal Soup",
+       "name": "Cabbage Soup",
        "of": 30,
        "others": [
         {
@@ -80471,7 +80471,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.143,
          "votes": 9
         },
@@ -80811,7 +80811,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.188,
          "votes": 9
         },
@@ -80853,7 +80853,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.021,
          "votes": 1
         }
@@ -81202,7 +81202,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.135,
          "votes": 7
         },
@@ -81220,7 +81220,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.019,
          "votes": 1
         },
@@ -81581,7 +81581,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.024,
          "votes": 1
         }
@@ -81879,7 +81879,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.07,
          "votes": 3
         },
@@ -82213,7 +82213,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.023,
          "votes": 1
         },
@@ -82231,7 +82231,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.023,
          "votes": 1
         }
@@ -82547,7 +82547,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.121,
          "votes": 4
         },
@@ -82869,7 +82869,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.122,
          "votes": 5
         },
@@ -82893,7 +82893,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.024,
          "votes": 1
         },
@@ -83227,7 +83227,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.094,
          "votes": 5
         },
@@ -83543,7 +83543,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.133,
          "votes": 4
         },
@@ -83555,7 +83555,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.033,
          "votes": 1
         },
@@ -83895,7 +83895,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.05,
          "votes": 2
         },
@@ -84217,7 +84217,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.061,
          "votes": 2
         }
@@ -84497,7 +84497,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.205,
          "votes": 9
         },
@@ -102730,7 +102730,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.002,
          "votes": 1
         },
@@ -103813,7 +103813,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.017,
          "votes": 4
         },
@@ -104881,7 +104881,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.005,
          "votes": 1
         },
@@ -105272,7 +105272,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.033,
          "votes": 6
         },
@@ -105618,7 +105618,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.01,
          "votes": 1
         },
@@ -105958,7 +105958,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.01,
          "votes": 1
         },
@@ -105976,7 +105976,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.01,
          "votes": 1
         }
@@ -106316,7 +106316,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.011,
          "votes": 1
         }
@@ -106656,7 +106656,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.023,
          "votes": 3
         },
@@ -107020,7 +107020,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.019,
          "votes": 2
         },
@@ -107429,7 +107429,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.011,
          "votes": 1
         }
@@ -108142,7 +108142,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.042,
          "votes": 5
         },
@@ -108160,7 +108160,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.017,
          "votes": 2
         },
@@ -108530,7 +108530,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.013,
          "votes": 1
         }
@@ -108864,13 +108864,13 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.022,
          "votes": 2
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.011,
          "votes": 1
         },
@@ -109896,7 +109896,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.014,
          "votes": 1
         },
@@ -110564,7 +110564,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.056,
          "votes": 5
         },
@@ -110588,7 +110588,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.011,
          "votes": 1
         },
@@ -110997,7 +110997,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.042,
          "votes": 2
         },
@@ -111394,7 +111394,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.033,
          "votes": 2
         },
@@ -111406,7 +111406,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.033,
          "votes": 2
         },
@@ -111746,7 +111746,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.04,
          "votes": 2
         },
@@ -112074,7 +112074,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.059,
          "votes": 3
         }
@@ -112778,7 +112778,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.02,
          "votes": 1
         }
@@ -113112,7 +113112,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.053,
          "votes": 2
         },
@@ -113744,7 +113744,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.091,
          "votes": 3
         },
@@ -114066,7 +114066,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.022,
          "votes": 1
         }
@@ -114785,7 +114785,7 @@
        "others": [
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.13,
          "votes": 6
         },
@@ -115495,7 +115495,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.038,
          "votes": 1
         },
@@ -115823,7 +115823,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.026,
          "votes": 1
         },
@@ -116139,7 +116139,7 @@
         },
         {
          "id": "MEAL_PIE",
-         "name": "Meal Pie",
+         "name": "Pork Pie",
          "share": 0.029,
          "votes": 1
         },
@@ -116431,7 +116431,7 @@
         },
         {
          "id": "MEAL_SOUP",
-         "name": "Meal Soup",
+         "name": "Cabbage Soup",
          "share": 0.071,
          "votes": 2
         },

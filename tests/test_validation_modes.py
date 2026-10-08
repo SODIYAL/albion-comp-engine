@@ -200,6 +200,42 @@ def t_gear_join():
           and gear_join.normalize_gear_id("no such item", e.gear) is None
           and gear_join.normalize_gear_id("", e.gear) is None,
           "")
+    # A worn item with no combat effect is catalogued with no rows (the
+    # plain Cape, Cabbage Soup, Pork Pie): the join resolves the harvest's
+    # tierless id, the engine maps a fielded id at any tier, and wearing
+    # one supplies nothing.
+    norow = {"CAPE": "CAPE", "MEAL_SOUP": "T5_MEAL_SOUP",
+             "MEAL_PIE": "T7_MEAL_PIE"}
+    fielded = {"T4_CAPE@2": "CAPE", "T3_MEAL_SOUP": "T5_MEAL_SOUP",
+               "T5_MEAL_PIE@1": "T7_MEAL_PIE"}
+    bare = e.member_extra(LONGBOW, None)
+    check("V4d an item with no combat effect resolves and supplies nothing: "
+          "the join and the engine reach its one entry, which has no rows "
+          "and no stats",
+          all(gear_join.normalize_gear_id(raw, e.gear) == key
+              for raw, key in norow.items())
+          and all(e.gear_key(raw) == key for raw, key in fielded.items())
+          and all(not e.gear[k]["capabilities"] and not e.gear[k]["stats"]
+                  and e.build_extra(LONGBOW, None, [k]) == bare
+                  for k in norow.values()),
+          f"join={[gear_join.normalize_gear_id(r, e.gear) for r in norow]} "
+          f"engine={[e.gear_key(r) for r in fielded]}")
+    # the kit doctrine counts it like any worn piece: the plain Cape is
+    # mined into the seat pools, and a kit that ranks it first wears it
+    e20 = Engine(content="castle", size=20)
+    pooled = sorted(r for r, rec in e20.roles.items()
+                    if "CAPE" in ((rec.get("kit") or {}).get("cape") or []))
+    named = [w for w in e20.pool
+             if "CAPE" in (dict(e20.kit_variants(w)).get("v0") or [])]
+    same = all(e20.build_extra(w, None, dict(e20.kit_variants(w))["v0"])
+               == e20.build_extra(w, None, [g for g in dict(
+                   e20.kit_variants(w))["v0"] if g != "CAPE"])
+               for w in named)
+    check("V4e the doctrine names the plain Cape where winners wear it: it "
+          "sits in the mined cape pools, a v0 kit that ranks it first wears "
+          "it, and the kit supplies what it supplies without it",
+          pooled and named and same,
+          f"seats={len(pooled)} weapons={len(named)} same={same}")
 
 
 # ------------------------------------------- V5 Option C structural floors

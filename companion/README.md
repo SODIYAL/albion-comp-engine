@@ -50,9 +50,10 @@ their real Q/W picks flow into the loadouts — and so does their WORN KIT:
 every curated piece the companion reports
 (head/chest/shoes/cape/off-hand/potion/food) lands in the member's
 loadout, so the dressed score the page shows is their real build, and an
-inspect that refreshes gear re-dresses them on the next poll. Pieces the
-catalogue does not curate (a plain cape, most food) stay unset — the page
-never invents a stand-in. The live panel shows `kit n/7` and item power
+inspect that refreshes gear re-dresses them on the next poll. A piece the
+curated sheets do not carry (a raw fish, a gatherer's backpack) is worn and
+scores nothing, and a piece the gear catalogue does not list stays unset —
+the page never invents a stand-in. The live panel shows `kit n/7` and item power
 per member. Toggle in the connect panel; no re-load, no re-zone. What still
 needs a zone/visibility event is the WIRE side (the companion can only
 report what the game broadcasts). The wire-side escape hatch: the companion

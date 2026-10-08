@@ -243,6 +243,16 @@ Each is decidable today from evidence already in the repo.
   the app models no enemy (standing rule 11).
 - **A dive / assassination style**: only as a 20+-size style, if ever
   (curation judgment). Not started.
+- **A no-row piece as the dressed forge's one alternative**: kit_variants
+  takes as v1 the first in-band piece whose top weighted capability
+  differs from v0's, and a piece with no row has none, so in 19 band x
+  style x weapon cells v1 now swaps a scored cape for the plain Cape, a
+  variant that never scores above v0 (gang band: Dagger Pair and Great
+  Nature Staff in every style, Dagger in five, its Demon Cape alternative
+  displaced; group band under kite: Great Holy Staff, Great Nature Staff).
+  No golden, forge or skeleton pin moves. Whether an alternative must
+  supply something (both ports) needs a maintainer decision (V: 10, Kits
+  name the worn items that carry no combat effect).
 
 ## Needs evidence a round would produce
 
@@ -403,13 +413,21 @@ Each is decidable today from evidence already in the repo.
   the second hit's knockback is unscored (an `effect_overrides.yaml` add:
   entry would ground it); the weapon is retired, so only old permalinks
   read it.
-- **Catalogue gaps with nothing to score**: the plain Cape (7.5% of
-  winners' capes), Cabbage Soup (4.7% of their meals), Pork Pie and a raw
-  fish eaten as food carry no combat effect, so they have no sheet and a
-  kit that wears one shows the slot uncatalogued. Whether a no-row entry
-  belongs in the catalogue (the kit doctrine would then name it) is a
-  display decision. The meals with a combat effect are curated (V: 10,
-  The meals winners eat).
+- **Worn items with an effect and no sheet**: the doctrine never counts
+  them and a kit that wears one scores the slot as nothing (V: 10, Kits
+  name the worn items that carry no combat effect). The Calming Potion
+  (1.04% of the potions in killer parties of 10+, 4.75% at 4-9) hides the
+  drinker and up to 20 group members from mobs and shields them for 90.85
+  damage over 5.7s at T7; the fish sandwich (0.66% and 0.99% of the meals) raises
+  max health 10.87% and healing received 9.5%; each needs a curated row.
+  The common raw fish (0.87% and 2.71% of the meals) is recorded without
+  its tier: T1-T7 regenerate health out of combat while the T8 fish raises
+  crowd-control duration 10% (FOOD_FISH_FRESHWATER_8_RAW,
+  FOOD_FISH_SALTWATER_8_RAW), so keeping the tier on the harvest's food
+  ids, or a curated row, decides it. Gatherer caps and boots (0.33% of
+  helmets at 10+, 0.98% at 4-9) carry combat actives (the caps' Block,
+  Self Cleanse and Emergency Shield) under the armor sheet's "not
+  catalogued (non-combat)".
 - **Killboard roster import, stage 1** (ToS-clean): paste names or a guild
   name -> per-player recent MainHand distribution by fight-size bucket ->
   auto-fill slots with confidence and click-to-override; enables constrained

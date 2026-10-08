@@ -3,9 +3,20 @@
 # cites the spell eating it casts (items.json @consumespell, indexed by
 # parse_dumps as the item's `consume` spell in gear_spells.json), scored on
 # the line of the meal it varies (curation judgment; a food row is one
-# coarse step); the row stays always-on. Cabbage Soup
-# (out-of-combat regeneration) and Pork Pie (load and gathering) have no
-# row to give and are not catalogued.
+# coarse step); the row stays always-on. The harvest records a meal
+# without its tier, so one entry stands for its whole line. A meal with no
+# combat effect has an entry with no rows: a kit names it where winners
+# eat it, and it supplies nothing. A common raw fish is not catalogued:
+# its T8 fish raises crowd-control duration (FOOD_FISH_FRESHWATER_8_RAW,
+# FOOD_FISH_SALTWATER_8_RAW) where T1-T7 regenerate health out of combat,
+# and the tierless record cannot tell them apart.
+
+- gear: T5_MEAL_SOUP                 # Cabbage Soup — no combat effect
+  slot: food
+  curated_as_of: 2026-10-08
+  # No row: FOOD_HEALTH_REG_P5 raises health regeneration out of combat
+  # only, as every soup of the line does at every enchantment (P1-P8).
+  capabilities: []
 
 - gear: T7_MEAL_OMELETTE             # Pork Omelette
   slot: food
@@ -30,6 +41,13 @@
   curated_as_of: 2026-10-03
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: FOOD_FISH_BUFF_CASTSPEED_CDR_P5} # cooldowns, cast times and energy costs
+
+- gear: T7_MEAL_PIE                  # Pork Pie — no combat effect
+  slot: food
+  curated_as_of: 2026-10-08
+  # No row: FOOD_LOAD_GATHER_P5 raises max load and gathering and fishing
+  # yield, as every pie of the line does at every enchantment (P1-P8).
+  capabilities: []
 
 - gear: T7_MEAL_ROAST                # Roast Pork
   slot: food
