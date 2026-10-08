@@ -748,10 +748,14 @@ function signupErrorMessage(err) {
   const isGuest = () => !account.user;
 
   /* the claim token this browser holds for the CTA; made on the first
-     sign-up */
+     sign-up. Kept in memory as well: where storage is blocked (a private
+     window, a strict setting) the claim lasts the visit, and the form never
+     offers a second sign-up for the same player */
+  const heldTokens = {};
   function readToken() {
-    try { const t = localStorage.getItem(claimTokenKey(code)); return CLAIM_TOKEN_RE.test(t || "") ? t : null; }
-    catch (err) { return null; }
+    try { const t = localStorage.getItem(claimTokenKey(code)); if (CLAIM_TOKEN_RE.test(t || "")) return t; }
+    catch (err) { /* storage blocked: the visit's copy below */ }
+    return heldTokens[code] || null;
   }
 
   function ensureToken() {
@@ -760,11 +764,13 @@ function signupErrorMessage(err) {
     const bytes = new Uint8Array(16);
     crypto.getRandomValues(bytes);
     token = newClaimToken(bytes);
-    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* a private window: the claim lasts the session */ }
+    heldTokens[code] = token;
+    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* storage blocked: the claim lasts the visit */ }
     return token;
   }
 
   function forgetToken() {
+    delete heldTokens[code];
     try { localStorage.removeItem(claimTokenKey(code)); } catch (err) { /* nothing kept */ }
   }
 
@@ -1308,8 +1314,11 @@ function signupErrorMessage(err) {
 
     try {
       const mine = await submitSignUp(code, token, typed);
-      await reload(true);
-      showNotice(mine.position != null ? `You hold slot ${mine.position}.` : "You are signed up as a reserve.");
+      if (await reload(true, false, true)) {
+        showNotice(mine.position != null ? `You hold slot ${mine.position}.` : "You are signed up as a reserve.");
+      } else {
+        showError("Your sign-up is saved; the sheet could not be read again. Refresh to see it.");
+      }
       announce("Sign-up saved.");
     } catch (err) {
       showError(signupErrorMessage(err));
@@ -1331,8 +1340,7 @@ function signupErrorMessage(err) {
       const gone = await cancelSignUp(code, readToken());
       if (isGuest()) forgetToken();
       weapons = [];
-      await reload(true);
-      showNotice(gone ? "Your sign-up was cancelled." : "You had no sign-up on this CTA.");
+      if (await reload(true)) showNotice(gone ? "Your sign-up was cancelled." : "You had no sign-up on this CTA.");
     } catch (err) {
       showError(signupErrorMessage(err));
     } finally {
@@ -1520,20 +1528,30 @@ function signupErrorMessage(err) {
     el.addSlot.value = [...el.addSlot.options].some(o => o.value === chosen) ? chosen : "";
   }
 
+  /* a caller's select changes (a move, a slot's weapon, a mark) made while
+     another change saves wait their turn and go in order, never dropped */
+  const queued = [];
   async function act(button, label, work, done) {
-    if (busy) return;
+    if (busy) {
+      if (!button) queued.push([work, done]);
+      return;
+    }
     busy = true;
     if (button) acctBusy(button, label);
     try {
       const result = await work();
-      await reload(true);
-      if (done) showNotice(done(result));
+      const fresh = await reload(true);
+      if (done && fresh) showNotice(done(result));
     } catch (err) {
       showError(signupErrorMessage(err));
       if (["taken", "noSlot", "refused"].includes(signupErrorKind(err))) await reload(true);
     } finally {
       busy = false;
       if (button) acctIdle(button);
+    }
+    if (queued.length) {
+      const [nextWork, nextDone] = queued.shift();
+      act(null, "", nextWork, nextDone);
     }
   }
 
@@ -1661,26 +1679,31 @@ function signupErrorMessage(err) {
   });
 
 
-  /* the caller's role in the CTA's guild, read once per guild */
+  /* the caller's role in the CTA's guild, read once per guild; a failed
+     read is said and tried again on the next read of the sheet, never kept
+     (a caller would lose every control for the visit with no word) */
   async function readRole() {
     if (!sheet || !sheet.guild || isGuest()) { myRole = null; roleGuild = null; return; }
     if (roleGuild === sheet.guild.id) return;
     try {
       const mine = await loadMyGuilds();
       myRole = (mine.find(g => g.guild.id === sheet.guild.id) || {}).role || null;
+      roleGuild = sheet.guild.id;
     } catch (err) {
       myRole = null;
+      roleGuild = null;
+      showError(`Your role in the guild could not be read, so the caller's tools are hidden; refresh to try again. ${guildErrorMessage(err)}`);
     }
-    roleGuild = sheet.guild.id;
   }
 
 
   /* ---- loading ---- */
 
   /* keepForm: the player's typing stays; live: a change someone else
-     made, so the form is never refilled from the server, and a move of
-     the player's own row is said out loud */
-  async function reload(keepForm, live) {
+     made, and a move of the player's own row is said out loud; refill: the
+     player's own save, whose saved values fill the form. Any other read
+     keeps what the player typed. True once the sheet is read. */
+  async function reload(keepForm, live, refill) {
     const seq = ++openSeq;
     if (!keepForm) clearMessages();
     const wasAt = sheet && sheet.mine ? sheet.mine.position : undefined;
@@ -1690,30 +1713,34 @@ function signupErrorMessage(err) {
     try {
       next = await loadSheet(code, readToken());
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       showError(signupErrorMessage(err));
       if (signupErrorKind(err) === "noEvent") showNoEvent();
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
     sheet = next;
     await readRole();
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
     renderBoard();
-    if (!live && (!keepForm || sheet.mine)) fillForm();
+    if (!live && (!keepForm || refill)) fillForm();
     renderForm();
     if (!keepForm) acctFlagFields(FIELDS, {});
 
-    if (live && had) {
+    if (had) {
       const nowAt = sheet.mine ? sheet.mine.position : undefined;
       if (!sheet.mine) {
-        showNotice("The caller removed your sign-up.");
+        if (live) showNotice("The caller removed your sign-up.");
       } else if (nowAt !== wasAt) {
         el.slot.value = nowAt != null ? String(nowAt) : "";
-        showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
+        if (live) showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
       }
     }
+    /* a sheet first read late (the first read failed, or an identity change
+       took its place) joins its channel now */
+    if (!leave) startWatching();
+    return true;
   }
 
 
@@ -1758,6 +1785,17 @@ function signupErrorMessage(err) {
     el.liveState.dataset.live = status === "SUBSCRIBED" ? "yes" : "no";
   }
 
+  /* the channel's state: a join after the first (the channel dropped and
+     came back) re-reads the sheet, since every change sent while it was
+     away is lost */
+  let joined = false;
+  function onLiveState(status) {
+    setLive(status);
+    if (status !== "SUBSCRIBED") return;
+    if (joined) onSheetChanged();
+    joined = true;
+  }
+
   function onSheetChanged() {
     clearTimeout(liveTimer);
     liveTimer = setTimeout(() => {
@@ -1769,9 +1807,10 @@ function signupErrorMessage(err) {
 
   function startWatching() {
     stopWatching();
+    joined = false;
     whenTimer = setInterval(paintWhen, 30000);
     try {
-      leave = watchSheet(code, onSheetChanged, setLive);
+      leave = watchSheet(code, onSheetChanged, onLiveState);
     } catch (err) {
       leave = null;
       setLive("CHANNEL_ERROR");
@@ -1825,7 +1864,6 @@ function signupErrorMessage(err) {
     showPage();
 
     await reload(false);
-    if (sheet) startWatching();
 
     /* an account's profile weapons are the first declaration */
     if (sheet && !sheet.mine && !isGuest() && sheet.event.status === "open") {
@@ -1844,6 +1882,11 @@ function signupErrorMessage(err) {
   }
 
   window.addEventListener("pagehide", stopWatching);
+  /* back from the back-forward cache (Open in planner, then Back): listen
+     again and read what changed meanwhile */
+  window.addEventListener("pageshow", e => {
+    if (e.persisted && sheet && !leave) { startWatching(); reload(true, true); }
+  });
 
 
   /* ---- identity and the link ---- */

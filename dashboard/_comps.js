@@ -1007,8 +1007,9 @@ function compErrorMessage(err) {
     if (!d.id) return;
     openComps({ guildId: d.guildId, templateId: d.id }).then(() => {
       if (!dialog.open || !current || current.id !== d.id) return;
-      showNotice(`${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`
-        + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
+      const done = `${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`;
+      if (d.namesError) showError(`${done}; the names were not remembered: ${d.namesError}`);
+      else showNotice(done + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
     });
   });
 

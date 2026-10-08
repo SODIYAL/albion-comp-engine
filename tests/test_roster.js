@@ -230,6 +230,19 @@ function stubEngine() {
   check("a read takes well under a second", ms < 1000, ms);
   const bare = run("rosterRead")({ content: "castle", style: "balanced" }, run("sheetBoard")(realSlots, []), eng);
   check("nothing held on the real engine: a first pick, the plan's read, no replacement", bare.held.count === 0 && bare.picks.length > 0 && bare.plan.count === 8 && bare.replacements.length === 0);
+  /* a key the dataset does not hold, on a slot or as a player's own
+     declaration, is left out and named: one such key used to throw inside
+     the engine and hide the whole read */
+  const oddSlots = realSlots.map(s => s.position === 3 ? { position: 3, weapon_id: "2H_RETIRED_STAFF" } : s)
+    .concat([{ position: 9, weapon_id: null }]);
+  const oddSignups = realSignups.concat([{ id: "s9", position: 9, player_name: "Guest", weapons: ["NOT_A_WEAPON"], can_swap: false, account: false, created_at: "9" }]);
+  let odd = null, oddErr = null;
+  try { odd = run("rosterRead")({ content: "castle", style: "clap", planned_size: 9, status: "open" }, run("sheetBoard")(oddSlots, oddSignups), eng); }
+  catch (e) { oddErr = e; }
+  check("unknown weapon keys are left out of the read and named, never stopping it",
+        !oddErr && odd && odd.held.count === 3 && same(odd.unknown, ["2H_RETIRED_STAFF", "NOT_A_WEAPON"])
+        && odd.held.seats.every(s => known(s.weapon)) && odd.plan && odd.plan.count === 7, oddErr ? String(oddErr) : odd && { held: odd.held.count, unknown: odd.unknown, plan: odd.plan && odd.plan.count });
+  check("a read with every key known names none", same(read.unknown, []));
 
   const src = fs.readFileSync(path.join(DASH, "_roster.js"), "utf8");
   check("the module makes its own engine over DATASET and never reads the planner's instance or state",

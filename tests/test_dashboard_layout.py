@@ -741,6 +741,10 @@ check("const ACCOUNT_FETCH_TIMEOUT_MS = 20000;" in SUPABASE_JS and "function acc
       "L27t no account request waits forever: the client's fetch fails as a network error after "
       "ACCOUNT_FETCH_TIMEOUT_MS (test_auth_ui pins the behaviour)")
 
+check("if (button.textContent === button.dataset.busyText) button.textContent = button.dataset.idle;" in AUTH_JS,
+      "L27u a busy button gets its old label back only while it still reads the busy text: a label "
+      "redrawn during the action (the sheet's Confirm turning into Unconfirm) stays (test_auth_ui)")
+
 print("L28 - the profile: names and weapon lists, the account layer's first data")
 # The profile is the first user-owned data (supabase/migrations) and the
 # pattern later modules follow: its own script after _auth.js, identity
@@ -1093,6 +1097,16 @@ check("weaponOptions(" in SIGNUP_JS and "role_class" not in SIGNUP_JS and "<optg
 check(all(s in AUTH_CSS for s in (".su-caller{", ".su-manage{", ".su-add{")), "L33g the caller's controls are styled in _auth.css")
 check(".su-add{flex-wrap:wrap}" in LAYOUT, "L33h on a phone the add-a-player row wraps (_layout.css)")
 
+check("if (!button) queued.push([work, done]);" in signup_ui and "roleGuild = null;" in signup_ui
+      and "Your role in the guild could not be read" in signup_ui,
+      "L33i a caller's change made while another saves is queued, never dropped; a failed role read "
+      "is said and tried again, never kept for the visit (test_signup)")
+check("heldTokens[code] = token;" in signup_ui and "if (!live && (!keepForm || refill)) fillForm();" in signup_ui
+      and "reload(true, false, true)" in signup_ui,
+      "L33j a guest's claim lives in memory beside storage (a blocked storage never offers a second "
+      "sign-up); only the player's own save refills the form, so a caller's action never wipes "
+      "what the player is typing")
+
 print("L34 - live updates: the sheet listens on the CTA's channel and re-reads itself")
 # Phase 7: one Realtime broadcast per write, on cta:<code>; the sheet
 # joins when it opens, leaves when it closes, and re-reads through the
@@ -1106,6 +1120,11 @@ check("LIVE_SETTLE_MS" in SIGNUP_JS and "reload(true, true)" in SIGNUP_JS,
       "L34d a change settles, then the sheet re-reads through event_by_code, the player's typing kept")
 check('.on("postgres_changes"' not in SIGNUP_JS, "L34e no row data crosses the channel: broadcasts only, the policies still decide what is read")
 check(all(s in AUTH_CSS for s in (".su-live-state{", '.su-live-state[data-live="yes"]')), "L34f the live mark is styled in _auth.css")
+
+check("if (!leave) startWatching();" in signup_ui and "if (joined) onSheetChanged();" in signup_ui
+      and 'window.addEventListener("pageshow"' in signup_ui,
+      "L34g the sheet joins its channel on the first read that succeeds, re-reads after the channel "
+      "drops and rejoins, and listens again when restored from the back-forward cache (test_signup)")
 
 print("L35 - history: the sheet carries the record, the player confirms, the caller marks")
 # Phase 8: attendance on the sheet, apart from the sign-up. The player's
@@ -1156,6 +1175,11 @@ check(".hs-guild{flex-basis:100%}" in LAYOUT and ".hs-table{display:block; overf
 i_history = script_at(lambda a, b: "function loadGuildHistory" in b)
 check(0 <= i_signup < i_history, "L36o the history module loads after the sheet, in its own <script>",
       "script indices signup=%d history=%d" % (i_signup, i_history))
+
+check("if (!has) el.totals.replaceChildren();" in history_ui and '"Loading the guild\'s history…"' in history_ui
+      and 'state = "failed";' in history_ui,
+      "L36p the totals never show the last guild's: a guild without facts, or one loading, clears "
+      "them; the dialog reads Loading until answered and says when the read failed")
 
 print("L37 - import and export: a spreadsheet as a saved comp, read on the client with uncertain names reviewed; CSV out of the comps and history dialogs")
 # Phase 10: the eighth feature module reads a sheet in the browser, reads
@@ -1208,6 +1232,15 @@ i_import = script_at(lambda a, b: "function loadGuildAliases" in b)
 check(0 <= i_history < i_import, "L37r the import module loads after the history module, in its own <script>",
       "script indices history=%d import=%d" % (i_history, i_import))
 
+check("chosen[rowKey(rows[i])] = select.value;" in import_ui and "chosen = {};" in import_ui
+      and "const gid = guildId();" in import_ui and "if (mine !== session) return;" in import_ui
+      and '"Loading the remembered names…"' in import_ui and "namesError" in import_ui
+      and "d.namesError" in COMPS_JS,
+      "L37s a re-read of the rows keeps the caller's own choices (a skipped row is never reset to "
+      "imported); a reopened import starts idle; the guild and the names to remember are taken at "
+      "the click; a failed name save reaches the comps dialog's message; the names read Loading "
+      "until answered")
+
 print("L38 - the engine's read on the sheet: the planner's engine on the roster's weapon keys, display only, people beside it never scored")
 # Phase 11: the one account surface that reads the engine. The roster
 # module makes its own CompEngine over DATASET (never the planner's
@@ -1250,6 +1283,11 @@ check(0 <= i_import < i_roster, "L38p the roster module loads after the import m
       "script indices import=%d roster=%d" % (i_import, i_roster))
 check(i_roster >= 0 and SCRIPTS[i_roster][1].count("new CompEngine(") == 1 and "const ENG = new CompEngine(DATASET" in SCRIPTS[i_app][1],
       "L38q the roster module's engine is its own one instance; the planner's is made in the planner's script alone")
+
+check("const knows = w => !engine.weapons || !!engine.weapons[w];" in ROSTER_JS and "unknown" in ROSTER_JS
+      and "membersLoading" in ROSTER_JS,
+      "L38s a weapon key the build does not hold is left out of the read and named, never hiding it; "
+      "a failed member list is tried again on the next read (test_roster)")
 
 print("L38r - the build on the sheet: the planner's saved loadout per slot, named from the page's tables, display only")
 # Phase 12: the build module reads the CTA's share hash (p= and g=, the

@@ -864,9 +864,20 @@ function importErrorMessage(err) {
   let layout = null;        /* the columns' kinds */
   let rows = [];            /* the slot rows */
   let choices = [];         /* the caller's choice per row */
+  /* the caller's own choices by the row's cell: a re-read of the rows (a
+     name forgotten, the guild's names arriving) keeps them, never resets a
+     skipped row to imported */
+  let chosen = {};
   let sourceName = "";      /* the file's name, for the comp's name */
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an import still waiting on the
+     service from before neither closes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
+  let aliasState = "ready"; /* the remembered names: "loading" until read, "failed" when not */
+  let shownGuild = null;    /* the guild whose names are shown */
+  const rowKey = r => `${r.row}:${r.col}:${r.text}`;
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -930,7 +941,9 @@ function importErrorMessage(err) {
     if (!aliases.length) {
       const li = document.createElement("li");
       li.className = "gd-none";
-      li.textContent = "No remembered names yet. A name you choose during an import is kept here.";
+      li.textContent = aliasState === "loading" ? "Loading the remembered names…"
+        : aliasState === "failed" ? "The remembered names did not load: names are read without them. Close this dialog and open it again to retry."
+        : "No remembered names yet. A name you choose during an import is kept here.";
       el.aliases.append(li);
     }
   }
@@ -958,7 +971,9 @@ function importErrorMessage(err) {
 
   async function reloadAliases() {
     const seq = ++openSeq;
+    shownGuild = guildId();
     aliases = [];
+    aliasState = guildId() ? "loading" : "ready";
     index = weaponIndex(CATALOG, aliases);
     paintAliases();
     if (!guildId()) return;
@@ -966,16 +981,23 @@ function importErrorMessage(err) {
       aliases = await loadGuildAliases(guildId());
     } catch (err) {
       if (seq !== openSeq) return;
+      aliasState = "failed";
+      paintAliases();
       showError(importErrorMessage(err));
       return;
     }
     if (seq !== openSeq) return;
+    aliasState = "ready";
     index = weaponIndex(CATALOG, aliases);
     paintAliases();
     if (cells.length) rereadRows();
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadAliases(); });
+  /* while an import waits, the guild stays the one it imports into */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadAliases();
+  });
 
 
   /* ---- reading the sheet ---- */
@@ -994,6 +1016,7 @@ function importErrorMessage(err) {
     }
     cells = parsed.cells;
     layout = detectColumns(cells, index);
+    chosen = {};
     rereadRows();
     if (parsed.cut) showNotice(`The sheet was cut at ${IMPORT_ROWS_MAX} rows.`);
     const s = importSummary(rows);
@@ -1003,7 +1026,7 @@ function importErrorMessage(err) {
 
   function rereadRows() {
     rows = layout ? sheetRows(cells, layout, index) : [];
-    choices = rows.map(defaultChoice);
+    choices = rows.map(r => Object.prototype.hasOwnProperty.call(chosen, rowKey(r)) ? chosen[rowKey(r)] : defaultChoice(r));
     if (!el.size.value || el.size.dataset.auto === "yes") {
       el.size.value = String(Math.min(Math.max(importSummary(rows).slots, COMP_SIZE_MIN), COMP_SLOTS_MAX));
       el.size.dataset.auto = "yes";
@@ -1143,7 +1166,9 @@ function importErrorMessage(err) {
   el.rows.addEventListener("change", e => {
     const select = e.target.closest("[data-im-row]");
     if (!select || busy) return;
-    choices[Number(select.dataset.imRow)] = select.value;
+    const i = Number(select.dataset.imRow);
+    choices[i] = select.value;
+    if (rows[i]) chosen[rowKey(rows[i])] = select.value;
     paintRows();
     paintSummary();
   });
@@ -1180,8 +1205,14 @@ function importErrorMessage(err) {
 
   el.form.addEventListener("submit", async e => {
     e.preventDefault();
-    if (busy || !rows.length || !guildId()) return;
+    if (busy) return;
     clearMessages();
+    if (!guildId()) {
+      showError(guilds.length ? "Choose the guild to import into."
+                              : "No guild to import into: the guild list did not load. Close this dialog and open it again to retry.");
+      return;
+    }
+    if (!rows.length) { showError("Nothing to import yet: paste a sheet or choose a file, then read it."); return; }
 
     const built = importSlots(rows, choices, { players: el.players.checked, parties: el.parties.checked });
     if (built.unresolved) { showError(IMPORT_MSG.unresolved); return; }
@@ -1197,29 +1228,37 @@ function importErrorMessage(err) {
     }, CONTENTS, STYLES));
     if (first) { first.focus(); return; }
 
+    /* the guild and the names to remember, taken now: the import never
+       reads the dialog after a wait */
+    const gid = guildId();
+    const pairs = el.remember.checked ? learnedAliases(rows, choices, index) : [];
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Importing…");
     try {
       const row = await saveTemplate(typed);
       let learned = 0;
-      const pairs = el.remember.checked ? learnedAliases(rows, choices, index) : [];
+      let namesError = "";
       if (pairs.length) {
         try {
-          learned = await saveGuildAliases(guildId(), pairs);
+          learned = await saveGuildAliases(gid, pairs);
         } catch (err) {
-          learned = -1;
-          showNotice(`The comp was imported; the names were not remembered: ${importErrorMessage(err)}`);
+          namesError = importErrorMessage(err);
         }
       }
+      if (mine !== session) return;
       announce(`${row.name} imported with ${built.slots.length} slots.`);
-      const opened = { id: row.id, guildId: guildId(), slots: built.slots.length, learned: Math.max(learned, 0) };
+      /* a name save that failed rides along: the comps dialog says so */
+      const opened = { id: row.id, guildId: gid, slots: built.slots.length, learned, namesError };
       dialog.close();
       document.dispatchEvent(new CustomEvent("comp-imported", { detail: opened }));
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.save);
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+      }
     }
   });
 
@@ -1233,6 +1272,7 @@ function importErrorMessage(err) {
     layout = null;
     rows = [];
     choices = [];
+    chosen = {};
     sourceName = "";
     el.text.value = "";
     el.file.value = "";
@@ -1250,9 +1290,14 @@ function importErrorMessage(err) {
 
   async function openImport(preferredGuild) {
     if (!account.user) return;
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
     reset();
     guilds = [];
     aliases = [];
+    aliasState = "loading";
     index = weaponIndex(CATALOG, aliases);
     paintGuilds();
     paintAliases();
@@ -1263,6 +1308,8 @@ function importErrorMessage(err) {
       guilds = (await loadMyGuilds()).filter(g => compPowers(g.role).write);
     } catch (err) {
       if (seq !== openSeq) return;
+      aliasState = "failed";
+      paintAliases();
       showError(guildErrorMessage(err));
       return;
     }
@@ -1270,6 +1317,8 @@ function importErrorMessage(err) {
 
     paintGuilds();
     if (!guilds.length) {
+      aliasState = "ready";
+      paintAliases();
       showError("Your role in no guild imports comps: callers, officers and admins do.");
       return;
     }

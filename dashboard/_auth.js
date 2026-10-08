@@ -391,16 +391,22 @@ function parseAuthLink(link) {
    second submit. */
 function acctBusy(button, text) {
   button.dataset.idle = button.textContent;
+  button.dataset.busyText = text;
   button.textContent = text;
   button.setAttribute("aria-busy", "true");
   button.setAttribute("aria-disabled", "true");
 }
 
 
+/* the label from before comes back only while the button still reads the
+   busy text: a redraw during the action (the sheet's Confirm turning into
+   Unconfirm) has written the label that is true now, and putting the old
+   one back would offer the opposite of what a click does */
 function acctIdle(button) {
   if (button.dataset.idle === undefined) return;
-  button.textContent = button.dataset.idle;
+  if (button.textContent === button.dataset.busyText) button.textContent = button.dataset.idle;
   delete button.dataset.idle;
+  delete button.dataset.busyText;
   button.removeAttribute("aria-busy");
   button.removeAttribute("aria-disabled");
 }

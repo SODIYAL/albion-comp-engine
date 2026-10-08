@@ -244,6 +244,7 @@ function historyErrorMessage(err) {
   let facts = null;
   let rows = [];
   let openSeq = 0;
+  let state = "ready";       /* the read: "loading" until the service answers, "failed" when it did not */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const clearMessages = () => acctMessage(el.error, el.notice, null, "");
@@ -388,6 +389,17 @@ function historyErrorMessage(err) {
     const has = !!(facts && historyTotals(facts.totals).ctas);
     el.empty.hidden = has || !guildId();
     el.body.hidden = !has;
+    /* the totals sit outside the body: a guild without facts, or one still
+       loading, never shows the last guild's */
+    if (!has) el.totals.replaceChildren();
+    /* an unanswered read says so: "No completed CTA yet" and "Join or create
+       a guild" are the service's answers, never the wait for them */
+    if (state !== "ready") {
+      el.empty.textContent = state === "loading" ? "Loading the guild's history…"
+                                                 : "The history did not load. Close this dialog and open it again to retry.";
+      el.empty.hidden = false;
+      return;
+    }
     if (!guildId()) {
       el.empty.textContent = "Join or create a guild to see its history.";
       el.empty.hidden = false;
@@ -423,6 +435,7 @@ function historyErrorMessage(err) {
     const seq = ++openSeq;
     facts = null;
     rows = [];
+    state = guildId() ? "loading" : "ready";
     clearMessages();
     paint();
     if (!guildId()) return;
@@ -431,11 +444,14 @@ function historyErrorMessage(err) {
       facts = await loadGuildHistory(guildId());
     } catch (err) {
       if (seq !== openSeq) return;
+      state = "failed";
+      paint();
       showError(historyErrorMessage(err));
       return;
     }
     if (seq !== openSeq) return;
 
+    state = "ready";
     rows = playerRows(facts.players, CATALOG);
     paint();
     announce(`${historyTotals(facts.totals).ctas} completed CTAs.`);
@@ -450,6 +466,7 @@ function historyErrorMessage(err) {
     facts = null;
     rows = [];
     guilds = [];
+    state = "loading";
     el.search.value = "";
     renderGuilds();
     paint();
@@ -460,6 +477,8 @@ function historyErrorMessage(err) {
       guilds = await loadMyGuilds();
     } catch (err) {
       if (seq !== openSeq) return;
+      state = "failed";
+      paint();
       showError(guildErrorMessage(err));
       return;
     }

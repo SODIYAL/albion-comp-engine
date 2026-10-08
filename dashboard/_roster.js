@@ -132,8 +132,16 @@ function rosterOverstack(engine, party) {
 function rosterRead(event, board, engine) {
   const ctx = rosterContext(event, engine.data);
   if (!ctx.content) return null;
-  const held = heldParty(board);
-  const planned = plannedParty(board);
+  /* a key this build's dataset does not hold (a stale comp, an old profile,
+     a guest's own declaration) is left out of the read and named, never
+     allowed to stop it */
+  const knows = w => !engine.weapons || !!engine.weapons[w];
+  const heldAll = heldParty(board);
+  const plannedAll = plannedParty(board);
+  const held = { party: [], seats: [] };
+  heldAll.seats.forEach(s => { if (knows(s.weapon)) { held.seats.push(s); held.party.push(s.weapon); } });
+  const planned = plannedAll.filter(knows);
+  const unknown = [...new Set(heldAll.party.concat(plannedAll).filter(w => !knows(w)))].sort();
   const size = Math.min(Math.max(held.party.length, 1), ROSTER_SIZE_MAX);
   const at = n => engine.setContent(ctx.content, Math.min(Math.max(n, 1), ROSTER_SIZE_MAX), ctx.style);
 
@@ -169,7 +177,7 @@ function rosterRead(event, board, engine) {
   return {
     content: ctx.content, style: ctx.style, knownContent: ctx.known, size,
     held: { count: held.party.length, seats: held.seats, fitness, max, coverage: max ? fitness / max : 0 },
-    needs, over, duplicates, picks, replacements, plan
+    needs, over, duplicates, picks, replacements, plan, unknown
   };
 }
 
@@ -461,6 +469,10 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     const pool = rosterPool(board, members.rows);
     el.headline.textContent = rosterHeadline(read, board, CATALOG);
     const notes = [];
+    if (read.unknown && read.unknown.length) {
+      notes.push(`${read.unknown.length === 1 ? "A weapon" : `${read.unknown.length} weapons`} this build does not know `
+        + `${read.unknown.length === 1 ? "is" : "are"} left out of the read: ${read.unknown.join(", ")}.`);
+    }
     if (!read.knownContent) notes.push(`The CTA's content is not in this build's templates; the read uses ${CONTENTS[read.content] || read.content}.`);
     if (read.plan) notes.push(`The plan (${read.plan.count} slots) covers ${rosterPct(read.plan.coverage)}`
       + (read.plan.needs.length ? `; its biggest needs: ${read.plan.needs.map(n => n.label).join(", ")}.` : "."));
@@ -473,18 +485,24 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     paintOver(read);
   }
 
-  /* the guild's members with their lists, once per guild, for a member */
+  /* the guild's members with their lists, once per guild, for a member; a
+     read in flight is not started again, and a failed one is tried again
+     on the next sheet read, never kept for the visit */
+  let membersLoading = null;
   async function loadMembers(guildId) {
     const mySeq = ++seq;
-    let rows = [];
+    membersLoading = guildId;
+    let rows = null;
     try {
       const list = await loadGuildMembers(guildId);
       const weapons = await loadMembersWeapons(list.map(m => m.user_id));
       rows = memberRows(list, weapons, CATALOG);
     } catch (err) {
-      rows = [];
+      rows = null;
     }
     if (mySeq !== seq) return;
+    membersLoading = null;
+    if (rows === null) return;
     members = { guildId, rows };
     if (last) paint(last.read, last.board);
   }
@@ -515,7 +533,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     if (!read) { wrap.hidden = true; last = null; lastKey = null; return; }
     last = { read, board };
     lastKey = key;
-    if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id) {
+    if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id && membersLoading !== d.guild.id) {
       loadMembers(d.guild.id);
     } else if (!d.member) {
       members = { guildId: null, rows: [] };

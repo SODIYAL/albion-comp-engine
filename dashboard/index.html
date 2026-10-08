@@ -14570,16 +14570,22 @@ function parseAuthLink(link) {
    second submit. */
 function acctBusy(button, text) {
   button.dataset.idle = button.textContent;
+  button.dataset.busyText = text;
   button.textContent = text;
   button.setAttribute("aria-busy", "true");
   button.setAttribute("aria-disabled", "true");
 }
 
 
+/* the label from before comes back only while the button still reads the
+   busy text: a redraw during the action (the sheet's Confirm turning into
+   Unconfirm) has written the label that is true now, and putting the old
+   one back would offer the opposite of what a click does */
 function acctIdle(button) {
   if (button.dataset.idle === undefined) return;
-  button.textContent = button.dataset.idle;
+  if (button.textContent === button.dataset.busyText) button.textContent = button.dataset.idle;
   delete button.dataset.idle;
+  delete button.dataset.busyText;
   button.removeAttribute("aria-busy");
   button.removeAttribute("aria-disabled");
 }
@@ -18101,8 +18107,9 @@ function compErrorMessage(err) {
     if (!d.id) return;
     openComps({ guildId: d.guildId, templateId: d.id }).then(() => {
       if (!dialog.open || !current || current.id !== d.id) return;
-      showNotice(`${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`
-        + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
+      const done = `${current.name} imported with ${d.slots} slot${d.slots === 1 ? "" : "s"}`;
+      if (d.namesError) showError(`${done}; the names were not remembered: ${d.namesError}`);
+      else showNotice(done + (d.learned ? `; ${d.learned} name${d.learned === 1 ? "" : "s"} remembered for the next import` : "") + ".");
     });
   });
 
@@ -20143,10 +20150,14 @@ function signupErrorMessage(err) {
   const isGuest = () => !account.user;
 
   /* the claim token this browser holds for the CTA; made on the first
-     sign-up */
+     sign-up. Kept in memory as well: where storage is blocked (a private
+     window, a strict setting) the claim lasts the visit, and the form never
+     offers a second sign-up for the same player */
+  const heldTokens = {};
   function readToken() {
-    try { const t = localStorage.getItem(claimTokenKey(code)); return CLAIM_TOKEN_RE.test(t || "") ? t : null; }
-    catch (err) { return null; }
+    try { const t = localStorage.getItem(claimTokenKey(code)); if (CLAIM_TOKEN_RE.test(t || "")) return t; }
+    catch (err) { /* storage blocked: the visit's copy below */ }
+    return heldTokens[code] || null;
   }
 
   function ensureToken() {
@@ -20155,11 +20166,13 @@ function signupErrorMessage(err) {
     const bytes = new Uint8Array(16);
     crypto.getRandomValues(bytes);
     token = newClaimToken(bytes);
-    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* a private window: the claim lasts the session */ }
+    heldTokens[code] = token;
+    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* storage blocked: the claim lasts the visit */ }
     return token;
   }
 
   function forgetToken() {
+    delete heldTokens[code];
     try { localStorage.removeItem(claimTokenKey(code)); } catch (err) { /* nothing kept */ }
   }
 
@@ -20703,8 +20716,11 @@ function signupErrorMessage(err) {
 
     try {
       const mine = await submitSignUp(code, token, typed);
-      await reload(true);
-      showNotice(mine.position != null ? `You hold slot ${mine.position}.` : "You are signed up as a reserve.");
+      if (await reload(true, false, true)) {
+        showNotice(mine.position != null ? `You hold slot ${mine.position}.` : "You are signed up as a reserve.");
+      } else {
+        showError("Your sign-up is saved; the sheet could not be read again. Refresh to see it.");
+      }
       announce("Sign-up saved.");
     } catch (err) {
       showError(signupErrorMessage(err));
@@ -20726,8 +20742,7 @@ function signupErrorMessage(err) {
       const gone = await cancelSignUp(code, readToken());
       if (isGuest()) forgetToken();
       weapons = [];
-      await reload(true);
-      showNotice(gone ? "Your sign-up was cancelled." : "You had no sign-up on this CTA.");
+      if (await reload(true)) showNotice(gone ? "Your sign-up was cancelled." : "You had no sign-up on this CTA.");
     } catch (err) {
       showError(signupErrorMessage(err));
     } finally {
@@ -20915,20 +20930,30 @@ function signupErrorMessage(err) {
     el.addSlot.value = [...el.addSlot.options].some(o => o.value === chosen) ? chosen : "";
   }
 
+  /* a caller's select changes (a move, a slot's weapon, a mark) made while
+     another change saves wait their turn and go in order, never dropped */
+  const queued = [];
   async function act(button, label, work, done) {
-    if (busy) return;
+    if (busy) {
+      if (!button) queued.push([work, done]);
+      return;
+    }
     busy = true;
     if (button) acctBusy(button, label);
     try {
       const result = await work();
-      await reload(true);
-      if (done) showNotice(done(result));
+      const fresh = await reload(true);
+      if (done && fresh) showNotice(done(result));
     } catch (err) {
       showError(signupErrorMessage(err));
       if (["taken", "noSlot", "refused"].includes(signupErrorKind(err))) await reload(true);
     } finally {
       busy = false;
       if (button) acctIdle(button);
+    }
+    if (queued.length) {
+      const [nextWork, nextDone] = queued.shift();
+      act(null, "", nextWork, nextDone);
     }
   }
 
@@ -21056,26 +21081,31 @@ function signupErrorMessage(err) {
   });
 
 
-  /* the caller's role in the CTA's guild, read once per guild */
+  /* the caller's role in the CTA's guild, read once per guild; a failed
+     read is said and tried again on the next read of the sheet, never kept
+     (a caller would lose every control for the visit with no word) */
   async function readRole() {
     if (!sheet || !sheet.guild || isGuest()) { myRole = null; roleGuild = null; return; }
     if (roleGuild === sheet.guild.id) return;
     try {
       const mine = await loadMyGuilds();
       myRole = (mine.find(g => g.guild.id === sheet.guild.id) || {}).role || null;
+      roleGuild = sheet.guild.id;
     } catch (err) {
       myRole = null;
+      roleGuild = null;
+      showError(`Your role in the guild could not be read, so the caller's tools are hidden; refresh to try again. ${guildErrorMessage(err)}`);
     }
-    roleGuild = sheet.guild.id;
   }
 
 
   /* ---- loading ---- */
 
   /* keepForm: the player's typing stays; live: a change someone else
-     made, so the form is never refilled from the server, and a move of
-     the player's own row is said out loud */
-  async function reload(keepForm, live) {
+     made, and a move of the player's own row is said out loud; refill: the
+     player's own save, whose saved values fill the form. Any other read
+     keeps what the player typed. True once the sheet is read. */
+  async function reload(keepForm, live, refill) {
     const seq = ++openSeq;
     if (!keepForm) clearMessages();
     const wasAt = sheet && sheet.mine ? sheet.mine.position : undefined;
@@ -21085,30 +21115,34 @@ function signupErrorMessage(err) {
     try {
       next = await loadSheet(code, readToken());
     } catch (err) {
-      if (seq !== openSeq) return;
+      if (seq !== openSeq) return false;
       showError(signupErrorMessage(err));
       if (signupErrorKind(err) === "noEvent") showNoEvent();
-      return;
+      return false;
     }
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
 
     sheet = next;
     await readRole();
-    if (seq !== openSeq) return;
+    if (seq !== openSeq) return false;
     renderBoard();
-    if (!live && (!keepForm || sheet.mine)) fillForm();
+    if (!live && (!keepForm || refill)) fillForm();
     renderForm();
     if (!keepForm) acctFlagFields(FIELDS, {});
 
-    if (live && had) {
+    if (had) {
       const nowAt = sheet.mine ? sheet.mine.position : undefined;
       if (!sheet.mine) {
-        showNotice("The caller removed your sign-up.");
+        if (live) showNotice("The caller removed your sign-up.");
       } else if (nowAt !== wasAt) {
         el.slot.value = nowAt != null ? String(nowAt) : "";
-        showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
+        if (live) showNotice(nowAt != null ? `The caller moved you to slot ${nowAt}.` : "The caller moved you to the reserves.");
       }
     }
+    /* a sheet first read late (the first read failed, or an identity change
+       took its place) joins its channel now */
+    if (!leave) startWatching();
+    return true;
   }
 
 
@@ -21153,6 +21187,17 @@ function signupErrorMessage(err) {
     el.liveState.dataset.live = status === "SUBSCRIBED" ? "yes" : "no";
   }
 
+  /* the channel's state: a join after the first (the channel dropped and
+     came back) re-reads the sheet, since every change sent while it was
+     away is lost */
+  let joined = false;
+  function onLiveState(status) {
+    setLive(status);
+    if (status !== "SUBSCRIBED") return;
+    if (joined) onSheetChanged();
+    joined = true;
+  }
+
   function onSheetChanged() {
     clearTimeout(liveTimer);
     liveTimer = setTimeout(() => {
@@ -21164,9 +21209,10 @@ function signupErrorMessage(err) {
 
   function startWatching() {
     stopWatching();
+    joined = false;
     whenTimer = setInterval(paintWhen, 30000);
     try {
-      leave = watchSheet(code, onSheetChanged, setLive);
+      leave = watchSheet(code, onSheetChanged, onLiveState);
     } catch (err) {
       leave = null;
       setLive("CHANNEL_ERROR");
@@ -21220,7 +21266,6 @@ function signupErrorMessage(err) {
     showPage();
 
     await reload(false);
-    if (sheet) startWatching();
 
     /* an account's profile weapons are the first declaration */
     if (sheet && !sheet.mine && !isGuest() && sheet.event.status === "open") {
@@ -21239,6 +21284,11 @@ function signupErrorMessage(err) {
   }
 
   window.addEventListener("pagehide", stopWatching);
+  /* back from the back-forward cache (Open in planner, then Back): listen
+     again and read what changed meanwhile */
+  window.addEventListener("pageshow", e => {
+    if (e.persisted && sheet && !leave) { startWatching(); reload(true, true); }
+  });
 
 
   /* ---- identity and the link ---- */
@@ -21514,6 +21564,7 @@ function historyErrorMessage(err) {
   let facts = null;
   let rows = [];
   let openSeq = 0;
+  let state = "ready";       /* the read: "loading" until the service answers, "failed" when it did not */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const clearMessages = () => acctMessage(el.error, el.notice, null, "");
@@ -21658,6 +21709,17 @@ function historyErrorMessage(err) {
     const has = !!(facts && historyTotals(facts.totals).ctas);
     el.empty.hidden = has || !guildId();
     el.body.hidden = !has;
+    /* the totals sit outside the body: a guild without facts, or one still
+       loading, never shows the last guild's */
+    if (!has) el.totals.replaceChildren();
+    /* an unanswered read says so: "No completed CTA yet" and "Join or create
+       a guild" are the service's answers, never the wait for them */
+    if (state !== "ready") {
+      el.empty.textContent = state === "loading" ? "Loading the guild's history…"
+                                                 : "The history did not load. Close this dialog and open it again to retry.";
+      el.empty.hidden = false;
+      return;
+    }
     if (!guildId()) {
       el.empty.textContent = "Join or create a guild to see its history.";
       el.empty.hidden = false;
@@ -21693,6 +21755,7 @@ function historyErrorMessage(err) {
     const seq = ++openSeq;
     facts = null;
     rows = [];
+    state = guildId() ? "loading" : "ready";
     clearMessages();
     paint();
     if (!guildId()) return;
@@ -21701,11 +21764,14 @@ function historyErrorMessage(err) {
       facts = await loadGuildHistory(guildId());
     } catch (err) {
       if (seq !== openSeq) return;
+      state = "failed";
+      paint();
       showError(historyErrorMessage(err));
       return;
     }
     if (seq !== openSeq) return;
 
+    state = "ready";
     rows = playerRows(facts.players, CATALOG);
     paint();
     announce(`${historyTotals(facts.totals).ctas} completed CTAs.`);
@@ -21720,6 +21786,7 @@ function historyErrorMessage(err) {
     facts = null;
     rows = [];
     guilds = [];
+    state = "loading";
     el.search.value = "";
     renderGuilds();
     paint();
@@ -21730,6 +21797,8 @@ function historyErrorMessage(err) {
       guilds = await loadMyGuilds();
     } catch (err) {
       if (seq !== openSeq) return;
+      state = "failed";
+      paint();
       showError(guildErrorMessage(err));
       return;
     }
@@ -22625,9 +22694,20 @@ function importErrorMessage(err) {
   let layout = null;        /* the columns' kinds */
   let rows = [];            /* the slot rows */
   let choices = [];         /* the caller's choice per row */
+  /* the caller's own choices by the row's cell: a re-read of the rows (a
+     name forgotten, the guild's names arriving) keeps them, never resets a
+     skipped row to imported */
+  let chosen = {};
   let sourceName = "";      /* the file's name, for the comp's name */
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an import still waiting on the
+     service from before neither closes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
+  let aliasState = "ready"; /* the remembered names: "loading" until read, "failed" when not */
+  let shownGuild = null;    /* the guild whose names are shown */
+  const rowKey = r => `${r.row}:${r.col}:${r.text}`;
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -22691,7 +22771,9 @@ function importErrorMessage(err) {
     if (!aliases.length) {
       const li = document.createElement("li");
       li.className = "gd-none";
-      li.textContent = "No remembered names yet. A name you choose during an import is kept here.";
+      li.textContent = aliasState === "loading" ? "Loading the remembered names…"
+        : aliasState === "failed" ? "The remembered names did not load: names are read without them. Close this dialog and open it again to retry."
+        : "No remembered names yet. A name you choose during an import is kept here.";
       el.aliases.append(li);
     }
   }
@@ -22719,7 +22801,9 @@ function importErrorMessage(err) {
 
   async function reloadAliases() {
     const seq = ++openSeq;
+    shownGuild = guildId();
     aliases = [];
+    aliasState = guildId() ? "loading" : "ready";
     index = weaponIndex(CATALOG, aliases);
     paintAliases();
     if (!guildId()) return;
@@ -22727,16 +22811,23 @@ function importErrorMessage(err) {
       aliases = await loadGuildAliases(guildId());
     } catch (err) {
       if (seq !== openSeq) return;
+      aliasState = "failed";
+      paintAliases();
       showError(importErrorMessage(err));
       return;
     }
     if (seq !== openSeq) return;
+    aliasState = "ready";
     index = weaponIndex(CATALOG, aliases);
     paintAliases();
     if (cells.length) rereadRows();
   }
 
-  el.guild.addEventListener("change", () => { if (!busy) reloadAliases(); });
+  /* while an import waits, the guild stays the one it imports into */
+  el.guild.addEventListener("change", () => {
+    if (busy) { el.guild.value = shownGuild || ""; return; }
+    reloadAliases();
+  });
 
 
   /* ---- reading the sheet ---- */
@@ -22755,6 +22846,7 @@ function importErrorMessage(err) {
     }
     cells = parsed.cells;
     layout = detectColumns(cells, index);
+    chosen = {};
     rereadRows();
     if (parsed.cut) showNotice(`The sheet was cut at ${IMPORT_ROWS_MAX} rows.`);
     const s = importSummary(rows);
@@ -22764,7 +22856,7 @@ function importErrorMessage(err) {
 
   function rereadRows() {
     rows = layout ? sheetRows(cells, layout, index) : [];
-    choices = rows.map(defaultChoice);
+    choices = rows.map(r => Object.prototype.hasOwnProperty.call(chosen, rowKey(r)) ? chosen[rowKey(r)] : defaultChoice(r));
     if (!el.size.value || el.size.dataset.auto === "yes") {
       el.size.value = String(Math.min(Math.max(importSummary(rows).slots, COMP_SIZE_MIN), COMP_SLOTS_MAX));
       el.size.dataset.auto = "yes";
@@ -22904,7 +22996,9 @@ function importErrorMessage(err) {
   el.rows.addEventListener("change", e => {
     const select = e.target.closest("[data-im-row]");
     if (!select || busy) return;
-    choices[Number(select.dataset.imRow)] = select.value;
+    const i = Number(select.dataset.imRow);
+    choices[i] = select.value;
+    if (rows[i]) chosen[rowKey(rows[i])] = select.value;
     paintRows();
     paintSummary();
   });
@@ -22941,8 +23035,14 @@ function importErrorMessage(err) {
 
   el.form.addEventListener("submit", async e => {
     e.preventDefault();
-    if (busy || !rows.length || !guildId()) return;
+    if (busy) return;
     clearMessages();
+    if (!guildId()) {
+      showError(guilds.length ? "Choose the guild to import into."
+                              : "No guild to import into: the guild list did not load. Close this dialog and open it again to retry.");
+      return;
+    }
+    if (!rows.length) { showError("Nothing to import yet: paste a sheet or choose a file, then read it."); return; }
 
     const built = importSlots(rows, choices, { players: el.players.checked, parties: el.parties.checked });
     if (built.unresolved) { showError(IMPORT_MSG.unresolved); return; }
@@ -22958,29 +23058,37 @@ function importErrorMessage(err) {
     }, CONTENTS, STYLES));
     if (first) { first.focus(); return; }
 
+    /* the guild and the names to remember, taken now: the import never
+       reads the dialog after a wait */
+    const gid = guildId();
+    const pairs = el.remember.checked ? learnedAliases(rows, choices, index) : [];
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Importing…");
     try {
       const row = await saveTemplate(typed);
       let learned = 0;
-      const pairs = el.remember.checked ? learnedAliases(rows, choices, index) : [];
+      let namesError = "";
       if (pairs.length) {
         try {
-          learned = await saveGuildAliases(guildId(), pairs);
+          learned = await saveGuildAliases(gid, pairs);
         } catch (err) {
-          learned = -1;
-          showNotice(`The comp was imported; the names were not remembered: ${importErrorMessage(err)}`);
+          namesError = importErrorMessage(err);
         }
       }
+      if (mine !== session) return;
       announce(`${row.name} imported with ${built.slots.length} slots.`);
-      const opened = { id: row.id, guildId: guildId(), slots: built.slots.length, learned: Math.max(learned, 0) };
+      /* a name save that failed rides along: the comps dialog says so */
+      const opened = { id: row.id, guildId: gid, slots: built.slots.length, learned, namesError };
       dialog.close();
       document.dispatchEvent(new CustomEvent("comp-imported", { detail: opened }));
     } catch (err) {
-      showError(compErrorMessage(err));
+      if (mine === session) showError(compErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.save);
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+      }
     }
   });
 
@@ -22994,6 +23102,7 @@ function importErrorMessage(err) {
     layout = null;
     rows = [];
     choices = [];
+    chosen = {};
     sourceName = "";
     el.text.value = "";
     el.file.value = "";
@@ -23011,9 +23120,14 @@ function importErrorMessage(err) {
 
   async function openImport(preferredGuild) {
     if (!account.user) return;
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
     reset();
     guilds = [];
     aliases = [];
+    aliasState = "loading";
     index = weaponIndex(CATALOG, aliases);
     paintGuilds();
     paintAliases();
@@ -23024,6 +23138,8 @@ function importErrorMessage(err) {
       guilds = (await loadMyGuilds()).filter(g => compPowers(g.role).write);
     } catch (err) {
       if (seq !== openSeq) return;
+      aliasState = "failed";
+      paintAliases();
       showError(guildErrorMessage(err));
       return;
     }
@@ -23031,6 +23147,8 @@ function importErrorMessage(err) {
 
     paintGuilds();
     if (!guilds.length) {
+      aliasState = "ready";
+      paintAliases();
       showError("Your role in no guild imports comps: callers, officers and admins do.");
       return;
     }
@@ -23197,8 +23315,16 @@ function rosterOverstack(engine, party) {
 function rosterRead(event, board, engine) {
   const ctx = rosterContext(event, engine.data);
   if (!ctx.content) return null;
-  const held = heldParty(board);
-  const planned = plannedParty(board);
+  /* a key this build's dataset does not hold (a stale comp, an old profile,
+     a guest's own declaration) is left out of the read and named, never
+     allowed to stop it */
+  const knows = w => !engine.weapons || !!engine.weapons[w];
+  const heldAll = heldParty(board);
+  const plannedAll = plannedParty(board);
+  const held = { party: [], seats: [] };
+  heldAll.seats.forEach(s => { if (knows(s.weapon)) { held.seats.push(s); held.party.push(s.weapon); } });
+  const planned = plannedAll.filter(knows);
+  const unknown = [...new Set(heldAll.party.concat(plannedAll).filter(w => !knows(w)))].sort();
   const size = Math.min(Math.max(held.party.length, 1), ROSTER_SIZE_MAX);
   const at = n => engine.setContent(ctx.content, Math.min(Math.max(n, 1), ROSTER_SIZE_MAX), ctx.style);
 
@@ -23234,7 +23360,7 @@ function rosterRead(event, board, engine) {
   return {
     content: ctx.content, style: ctx.style, knownContent: ctx.known, size,
     held: { count: held.party.length, seats: held.seats, fitness, max, coverage: max ? fitness / max : 0 },
-    needs, over, duplicates, picks, replacements, plan
+    needs, over, duplicates, picks, replacements, plan, unknown
   };
 }
 
@@ -23526,6 +23652,10 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     const pool = rosterPool(board, members.rows);
     el.headline.textContent = rosterHeadline(read, board, CATALOG);
     const notes = [];
+    if (read.unknown && read.unknown.length) {
+      notes.push(`${read.unknown.length === 1 ? "A weapon" : `${read.unknown.length} weapons`} this build does not know `
+        + `${read.unknown.length === 1 ? "is" : "are"} left out of the read: ${read.unknown.join(", ")}.`);
+    }
     if (!read.knownContent) notes.push(`The CTA's content is not in this build's templates; the read uses ${CONTENTS[read.content] || read.content}.`);
     if (read.plan) notes.push(`The plan (${read.plan.count} slots) covers ${rosterPct(read.plan.coverage)}`
       + (read.plan.needs.length ? `; its biggest needs: ${read.plan.needs.map(n => n.label).join(", ")}.` : "."));
@@ -23538,18 +23668,24 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     paintOver(read);
   }
 
-  /* the guild's members with their lists, once per guild, for a member */
+  /* the guild's members with their lists, once per guild, for a member; a
+     read in flight is not started again, and a failed one is tried again
+     on the next sheet read, never kept for the visit */
+  let membersLoading = null;
   async function loadMembers(guildId) {
     const mySeq = ++seq;
-    let rows = [];
+    membersLoading = guildId;
+    let rows = null;
     try {
       const list = await loadGuildMembers(guildId);
       const weapons = await loadMembersWeapons(list.map(m => m.user_id));
       rows = memberRows(list, weapons, CATALOG);
     } catch (err) {
-      rows = [];
+      rows = null;
     }
     if (mySeq !== seq) return;
+    membersLoading = null;
+    if (rows === null) return;
     members = { guildId, rows };
     if (last) paint(last.read, last.board);
   }
@@ -23580,7 +23716,7 @@ const ROSTER_DEFINITIONS = "The engine reads the weapons of the held slots at th
     if (!read) { wrap.hidden = true; last = null; lastKey = null; return; }
     last = { read, board };
     lastKey = key;
-    if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id) {
+    if (d.member && d.guild && d.guild.id && members.guildId !== d.guild.id && membersLoading !== d.guild.id) {
       loadMembers(d.guild.id);
     } else if (!d.member) {
       members = { guildId: null, rows: [] };

@@ -325,9 +325,19 @@ const run = expr => vm.runInContext(expr, ctx);
   leave();
   check("leaving removes the channel", REMOVED.length === 1 && REMOVED[0] === ch);
   const src = fs.readFileSync(path.join(DASH, "_signup.js"), "utf8");
-  check("the sheet joins the channel once the sheet is read and leaves it when the page goes or another CTA opens",
-        /if \(sheet\) startWatching\(\);/.test(src) && /window\.addEventListener\("pagehide", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+showPage\(\);/.test(src));
-  check("a live change re-reads the sheet without refilling the player's form", /reload\(true, true\)/.test(src) && /if \(!live && \(!keepForm \|\| sheet\.mine\)\) fillForm\(\);/.test(src));
+  check("the sheet joins the channel once a read succeeds (a first read that failed, or one an identity change replaced, joins on the next) and leaves it when the page goes or another CTA opens",
+        /if \(!leave\) startWatching\(\);/.test(src) && /window\.addEventListener\("pagehide", stopWatching\)/.test(src) && /stopWatching\(\);\s+clearMessages\(\);\s+showPage\(\);/.test(src));
+  check("a live change re-reads the sheet without refilling the player's form; only the player's own save refills it",
+        /reload\(true, true\)/.test(src) && /if \(!live && \(!keepForm \|\| refill\)\) fillForm\(\);/.test(src) && /reload\(true, false, true\)/.test(src));
+  check("a channel that drops and comes back re-reads the sheet; a page restored from the back-forward cache listens again",
+        /if \(joined\) onSheetChanged\(\);/.test(src) && /watchSheet\(code, onSheetChanged, onLiveState\)/.test(src)
+        && /window\.addEventListener\("pageshow", e => \{\s+if \(e\.persisted && sheet && !leave\) \{ startWatching\(\); reload\(true, true\); \}/.test(src));
+  check("a caller's change made while another saves is queued and sent after it, never dropped",
+        /if \(!button\) queued\.push\(\[work, done\]\);/.test(src) && /const \[nextWork, nextDone\] = queued\.shift\(\);/.test(src));
+  check("a failed role read is said and tried again, never kept for the visit",
+        /myRole = null;\s+roleGuild = null;\s+showError\(`Your role in the guild could not be read/.test(src));
+  check("a guest's claim token lives in memory beside storage, so a blocked storage never offers a second sign-up",
+        /heldTokens\[code\] = token;/.test(src) && /return heldTokens\[code\] \|\| null;/.test(src) && /delete heldTokens\[code\];/.test(src));
 }
 
 

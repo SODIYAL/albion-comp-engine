@@ -326,6 +326,38 @@ const run = expr => vm.runInContext(expr, ctx);
   check("the download does nothing without a document", run("acctDownloadText")("a.csv", "x", "text/csv") === false);
 }
 
+/* 8b - a busy button's label: the label from before comes back unless a
+   redraw wrote a new one during the action (the sheet's Confirm turning
+   into Unconfirm: putting "Confirm I'm coming" back offered the opposite
+   of what a click then did) */
+{
+  const button = () => {
+    const attrs = {};
+    return { textContent: "", dataset: {},
+             setAttribute(k, v) { attrs[k] = v; }, removeAttribute(k) { delete attrs[k]; }, attrs };
+  };
+  const busy = run("acctBusy"), idle = run("acctIdle");
+  const a = button();
+  a.textContent = "Save comp";
+  busy(a, "Saving…");
+  const during = a.textContent === "Saving…" && a.attrs["aria-busy"] === "true" && a.attrs["aria-disabled"] === "true";
+  idle(a);
+  check("a busy button reads its busy text, then its label from before",
+        during && a.textContent === "Save comp" && !("aria-busy" in a.attrs) && !("aria-disabled" in a.attrs)
+        && a.dataset.idle === undefined && a.dataset.busyText === undefined);
+  const b = button();
+  b.textContent = "Confirm I'm coming";
+  busy(b, "…");
+  b.textContent = "Unconfirm";   /* the sheet redrew it while the action ran */
+  idle(b);
+  check("a label redrawn during the action is kept, and the busy state still ends",
+        b.textContent === "Unconfirm" && !("aria-busy" in b.attrs) && !("aria-disabled" in b.attrs));
+  const c = button();
+  c.textContent = "Leave";
+  idle(c);
+  check("an idle button is left alone", c.textContent === "Leave");
+}
+
 /* 9 - the client's fetch (_supabase.js): no account request waits forever.
    A request that never settled held the CTA dialog's New CTA until the
    page was reloaded. */
