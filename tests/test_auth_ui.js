@@ -10,8 +10,10 @@
  * Pinned: sign-up / log-in validation (a whitespace-only Albion name is
  * empty, the display name is optional, passwords are never trimmed), the
  * error wording for every failure the dialog explains, the duplicate-account
- * signal, the account name fallback, email-link parsing, and the head script
- * that keeps an email link's tokens away from the planner's hash rewrite.
+ * signal, the account name fallback, email-link parsing, the head script
+ * that keeps an email link's tokens away from the planner's hash rewrite,
+ * and the client's fetch (_supabase.js), which fails a request the service
+ * has not answered in time.
  *
  * Run:  node tests/test_auth_ui.js
  */
@@ -322,6 +324,53 @@ const run = expr => vm.runInContext(expr, ctx);
         name("Castle A: tanks/heals (v2)", "csv") === "Castle A tanks heals v2.csv" && name("Zaddy é", "csv") === "Zaddy e.csv"
         && name("", "csv") === "export.csv" && name("x".repeat(80), "txt").length === 64);
   check("the download does nothing without a document", run("acctDownloadText")("a.csv", "x", "text/csv") === false);
+}
+
+/* 9 - the client's fetch (_supabase.js): no account request waits forever.
+   A request that never settled held the CTA dialog's New CTA until the
+   page was reloaded. */
+{
+  const SUPA = fs.readFileSync(path.join(DASH, "_supabase.js"), "utf8");
+  let created = null;
+  const sctx = { console: { log() {} }, setTimeout, clearTimeout, Promise, AbortController };
+  sctx.window = sctx;
+  sctx.supabase = { createClient: (url, key, opts) => { created = { url, key, opts }; return {}; } };
+  vm.createContext(sctx);
+  vm.runInContext(SUPA, sctx, { filename: "_supabase.js" });
+  check("the client is created with the timed fetch",
+        !!(created && created.opts && created.opts.global && typeof created.opts.global.fetch === "function"));
+  check("the timeout is 20 s", vm.runInContext("ACCOUNT_FETCH_TIMEOUT_MS", sctx) === 20000);
+  const accountFetch = vm.runInContext("accountFetch", sctx);
+
+  let err = null;
+  const t0 = Date.now();
+  await accountFetch(() => new Promise(() => {}), 40)("https://x/rest/v1/events", { method: "GET" }).catch(e => { err = e; });
+  const message = err ? err.message : "";
+  check("a request that never answers fails once its time is up",
+        /failed to fetch/i.test(message) && Date.now() - t0 < 1000, message);
+  check("every dialog words that failure as the network one, raw or as postgrest-js wraps it (name: message)",
+        run(`authErrorKind({ message: ${JSON.stringify(message)} })`) === "network"
+        && run(`authErrorKind({ message: ${JSON.stringify("TypeError: " + message)} })`) === "network");
+
+  let seen = null;
+  const res = await accountFetch((input, init) => { seen = { input, init }; return Promise.resolve("ok"); }, 1000)(
+    "u", { method: "POST", headers: { a: "1" } });
+  check("an answer in time passes through with the caller's options and an abort signal",
+        res === "ok" && seen.input === "u" && seen.init.method === "POST" && seen.init.headers.a === "1"
+        && !!seen.init.signal && seen.init.signal.aborted === false);
+
+  const outer = new AbortController();
+  let inner = null, abortErr = null;
+  const pending = accountFetch((input, init) => {
+    inner = init.signal;
+    /* as fetch does: an aborted signal rejects at once, a later abort when it comes */
+    if (init.signal.aborted) return Promise.reject(new Error("aborted"));
+    return new Promise((_, reject) => init.signal.addEventListener("abort", () => reject(new Error("aborted"))));
+  }, 1000)("u", { signal: outer.signal });
+  outer.abort();
+  await pending.catch(e => { abortErr = e; });
+  check("the caller's own abort still aborts the request",
+        !!inner && inner.aborted && !!abortErr && abortErr.message === "aborted");
 }
 
 console.log(`\n${pass}/${pass + fail} account-layer tests passed`);

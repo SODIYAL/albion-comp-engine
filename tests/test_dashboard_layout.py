@@ -734,6 +734,11 @@ check(re.search(r"supabase-js@\d+\.\d+\.\d+/dist/umd/supabase\.js", _cdn_attrs) 
       and 'crossorigin="anonymous"' in _cdn_attrs,
       "L27s the library is pinned: an exact version and file, a sha384 integrity hash, anonymous CORS",
       _cdn_attrs.strip()[:160])
+SUPABASE_JS = read("_supabase.js")
+check("const ACCOUNT_FETCH_TIMEOUT_MS = 20000;" in SUPABASE_JS and "function accountFetch(" in SUPABASE_JS
+      and "global: { fetch: accountFetch(" in SUPABASE_JS and "Failed to fetch:" in SUPABASE_JS,
+      "L27t no account request waits forever: the client's fetch fails as a network error after "
+      "ACCOUNT_FETCH_TIMEOUT_MS (test_auth_ui pins the behaviour)")
 
 print("L28 - the profile: names and weapon lists, the account layer's first data")
 # The profile is the first user-owned data (supabase/migrations) and the
@@ -930,6 +935,15 @@ check(".ev-share-wrap{margin-left:0; flex-basis:100%}" in LAYOUT, "L31p on a pho
 i_events = script_at(lambda a, b: "function loadGuildEvents" in b)
 check(0 <= i_comps < i_events, "L31q the CTAs module loads after the comps module, in its own <script>",
       "script indices comps=%d events=%d" % (i_comps, i_events))
+check('if (listState !== "ready")' in events_ui and '"Loading CTAs…"' in events_ui
+      and 'listState = "failed"' in events_ui and "The CTAs did not load." in events_ui,
+      "L31v the CTA list reads Loading until the service answers and says when it did not: "
+      "\"No CTAs yet\" is the service's answer, never the wait for it")
+ev_open = seg(events_ui, "async function openEvents()", "await reloadList(null);", "L31w open anchors")
+check("session++;" in ev_open and "busy = false;" in ev_open and "acctIdle(el.save);" in ev_open
+      and events_ui.count("const mine = session;") == 4 and events_ui.count("if (mine === session)") >= 7,
+      "L31w a reopened CTAs dialog starts idle: an action still waiting from before neither changes it "
+      "nor ends its busy state (a request that never answered held New CTA until a reload)")
 
 print("L32 - sign-up: one sheet for guests and accounts, the page a CTA's link opens")
 # Sign-up (platform phase 5): the sheet is reached by ?cta=<code> and is

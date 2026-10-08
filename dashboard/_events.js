@@ -497,6 +497,7 @@ function eventErrorMessage(err) {
   let zone = storedZone();    /* the zone the time fields are typed in */
   let guilds = [];            /* [{guild, role}] the account belongs to */
   let events = [];            /* the selected guild's list */
+  let listState = "ready";    /* the list: "loading" until the service answers, "failed" when it did not */
   let templates = [];         /* the selected guild's comps, for a new event */
   let current = null;         /* the open event: {id, guild_id, ..., slots} or a new one */
   let slots = [];             /* the open event's slots as edited */
@@ -504,6 +505,10 @@ function eventErrorMessage(err) {
   let massFollows = true;     /* the mass field follows the start until the caller types one of their own */
   let busy = false;
   let openSeq = 0;
+  /* bumped by every opening of the dialog: an action still waiting on the
+     service from before neither changes the reopened dialog nor ends its
+     busy state */
+  let session = 0;
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -569,6 +574,18 @@ function eventErrorMessage(err) {
   function renderList() {
     powers = eventPowers(myRole(), current);
     el.create.hidden = !powers.write || !guildId();
+
+    /* an unanswered list says so: "No CTAs yet" is the service's answer,
+       never the wait for it */
+    if (listState !== "ready") {
+      const li = document.createElement("li");
+      li.className = "gd-none";
+      li.textContent = listState === "loading" ? "Loading CTAs…"
+                                               : "The CTAs did not load. Close this dialog and open it again to retry.";
+      el.list.replaceChildren(li);
+      el.listNote.hidden = true;
+      return;
+    }
 
     if (!guildId()) {
       const li = document.createElement("li");
@@ -957,6 +974,7 @@ function eventErrorMessage(err) {
       return next;
     }
     const seq = ++openSeq;
+    const mine = session;
     busy = true;
     try {
       const t = await loadTemplate(value);
@@ -967,7 +985,7 @@ function eventErrorMessage(err) {
       if (seq === openSeq) showError(eventErrorMessage(err));
       return null;
     } finally {
-      busy = false;
+      if (mine === session) busy = false;
     }
   }
 
@@ -1051,21 +1069,24 @@ function eventErrorMessage(err) {
     if (to === "completed" && !window.confirm("Mark the CTA completed? Its slots are kept as they are and cannot change again.")) return;
 
     busy = true;
+    const mine = session;
     acctBusy(b, "Changing…");
 
     try {
       const row = await setEventStatus(current.id, to);
+      if (mine !== session) return;
       current.status = row.status;
       current.updated_at = row.updated_at;
       await reloadList(current.id, true);
+      if (mine !== session) return;
       renderEvent();
       showNotice(`${current.name}: ${EVENT_STATUS_NAMES[to] || to}.`);
       announce(`Status: ${EVENT_STATUS_NAMES[to] || to}.`);
     } catch (err) {
-      showError(eventErrorMessage(err));
+      if (mine === session) showError(eventErrorMessage(err));
     } finally {
-      busy = false;
       acctIdle(b);
+      if (mine === session) busy = false;
     }
   });
 
@@ -1088,23 +1109,28 @@ function eventErrorMessage(err) {
     }
 
     busy = true;
+    const mine = session;
     acctBusy(el.save, "Saving…");
 
     try {
       const row = await saveEvent(typed);
+      if (mine !== session) return;
       row.slots = normalizeSlots(slots);
       current = row;
       slots = normalizeSlots(row.slots);
       await reloadList(row.id, true);
+      if (mine !== session) return;
       renderEvent();
       showNotice("CTA saved.");
       announce("CTA saved.");
     } catch (err) {
-      showError(eventErrorMessage(err));
+      if (mine === session) showError(eventErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.save);
-      markDirty();
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.save);
+        markDirty();
+      }
     }
   });
 
@@ -1113,21 +1139,26 @@ function eventErrorMessage(err) {
     if (!window.confirm(`Delete ${current.name}? This cannot be undone.`)) return;
 
     busy = true;
+    const mine = session;
     acctBusy(el.remove, "Deleting…");
     const name = current.name;
 
     try {
       await deleteEvent(current.id);
+      if (mine !== session) return;
       current = null;
       slots = [];
       await reloadList(null, true);
+      if (mine !== session) return;
       renderEvent();
       showNotice(`${name} was deleted.`);
     } catch (err) {
-      showError(eventErrorMessage(err));
+      if (mine === session) showError(eventErrorMessage(err));
     } finally {
-      busy = false;
-      acctIdle(el.remove);
+      if (mine === session) {
+        busy = false;
+        acctIdle(el.remove);
+      }
     }
   });
 
@@ -1136,8 +1167,14 @@ function eventErrorMessage(err) {
 
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
-    events = [];
-    if (!quiet) { current = null; slots = []; }
+    /* a quiet reload (after a save, a move or a delete) keeps the list on
+       screen until the new one arrives */
+    if (!quiet) {
+      events = [];
+      listState = guildId() ? "loading" : "ready";
+      current = null;
+      slots = [];
+    }
     renderList();
     renderEvent();
     if (!guildId()) return;
@@ -1146,11 +1183,13 @@ function eventErrorMessage(err) {
       [events, templates] = await Promise.all([loadGuildEvents(guildId()), loadGuildTemplates(guildId())]);
     } catch (err) {
       if (seq !== openSeq) return;
+      if (!quiet) { listState = "failed"; renderList(); }
       showError(eventErrorMessage(err));
       return;
     }
     if (seq !== openSeq) return;
 
+    listState = "ready";
     renderList();
     if (keepId && !quiet) await openEvent(keepId);
   }
@@ -1158,10 +1197,16 @@ function eventErrorMessage(err) {
   async function openEvents() {
     if (!account.user) return;
 
+    /* a reopened dialog starts idle (session) */
+    session++;
+    busy = false;
+    acctIdle(el.save);
+    acctIdle(el.remove);
     clearMessages();
     current = null;
     slots = [];
     events = [];
+    listState = "loading";
     templates = [];
     guilds = [];
     renderGuilds();
@@ -1174,6 +1219,8 @@ function eventErrorMessage(err) {
       guilds = await loadMyGuilds();
     } catch (err) {
       if (seq !== openSeq) return;
+      listState = "failed";
+      renderList();
       showError(guildErrorMessage(err));
       return;
     }
