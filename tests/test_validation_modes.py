@@ -17,6 +17,16 @@ comparison honest in both directions:
 Later sections (added by the same hardening pass) cover the V3 form
 parser, the V4 gear join, and the validation metrics.
 
+  V8  harvest-seeded V3 forms (tier2_blindtest.py generate): every case
+      is a killer party of exactly the form's size, every weapon known,
+      on the training split only, never from a holdout, graded or
+      earlier-round battle, one case per distinct roster, 2..size-1
+      members shown, deterministic for a seed; the form carries the shown
+      members alone and the answer key everything else; `score` finds the
+      key, reports harvest agreement, and scores a Dragon Portal form in
+      its own content and pool in both modes. On a synthetic artifact:
+      the real one is never loaded here.
+
 Run:  py -3 tests/test_validation_modes.py
 """
 import os, sys
@@ -446,6 +456,211 @@ def t_median_rows():
           f"rows={rows} soft_only={soft_only} wrong={wrong[:3]}")
 
 
+# ------------------------------------------------ V8 harvest-seeded forms
+def _synthetic_harvest(t2, e):
+    """A small roster artifact in the shape rosters_io.load returns.
+    Eligible: 24 distinct trios and 16 distinct fives, dominant, each in a
+    training battle (id % 5 != 0), the first trio's roster sighted again in
+    a later battle. Beside them one party per rule that keeps a party off
+    a form, each in a battle of its own. Returns (doc, weapons, never):
+    `never` maps each such battle to the rule."""
+    import itertools
+    W = sorted(e.weapons)[:9]
+    trios = [list(c) for c in itertools.combinations(W, 3)][:24]
+    fives = [list(c) for c in itertools.combinations(W, 5)][:16]
+    parties = []
+
+    def add(battle, weapons, **kw):
+        p = {"battle": battle, "index": 0, "size": len(weapons),
+             "known_weapons": len(weapons), "weapons": sorted(weapons),
+             "kills": 2, "deaths": 0, "guilds": []}
+        p.update(kw)
+        parties.append(p)
+
+    train = (b for b in itertools.count(5001) if b % 5)
+    for ws in trios + fives:
+        add(next(train), ws)
+    add(next(train), trios[0])                      # a second sighting
+    never = {6000: "holdout", 6005: "holdout",
+             t2.GRADED_BATTLES[0]: "graded", 7001: "earlier form",
+             7002: "size 4", 7003: "a weapon unknown",
+             7004: "a weapon outside the catalog", 7006: "took a death",
+             7007: "no kill"}
+    add(6000, [W[0], W[4], W[8]])
+    add(6005, [W[1], W[5], W[8]])
+    add(t2.GRADED_BATTLES[0], [W[2], W[6], W[8]])
+    add(7001, [W[3], W[7], W[8]])
+    add(7002, [W[0], W[1], W[2], W[8]])
+    add(7003, [W[0], W[2], W[7]], known_weapons=2)
+    add(7004, [W[0], W[3], "NOT_A_CATALOG_WEAPON"])
+    add(7006, [W[1], W[2], W[7]], deaths=1)
+    add(7007, [W[1], W[3], W[7]], kills=0)
+    battles = sorted({p["battle"] for p in parties})
+    doc = {"battles": [{"battle": b, "content": "ancient_lands",
+                        "source": "events_poll"} for b in battles],
+           "parties": parties, "builds": []}
+    return doc, W, never
+
+
+def t_harvest_forms():
+    import json, re, shutil, tempfile
+    import tier2_blindtest as t2
+    e = Engine(content="ancient_lands", size=3)
+    doc, W, never = _synthetic_harvest(t2, e)
+    cat = set(e.weapons)
+    excl = {"graded_battles": set(t2.GRADED_BATTLES), "earlier_forms": {7001}}
+    eligible = {}
+    for p in doc["parties"]:
+        if p["battle"] not in never:
+            eligible.setdefault(tuple(p["weapons"]), []).append(p["battle"])
+
+    cases, counts = t2.harvest_cases(doc, cat, 3, 100, 11, dominant=True, excluded=excl)
+    bad = [(c["battle"], never[c["battle"]]) for c in cases if c["battle"] in never]
+    check("V8a training split only: no case from a holdout, graded or "
+          "earlier-round battle, and the counts name each reason",
+          cases and not bad and all(c["battle"] % 5 for c in cases)
+          and counts["parties"] == 29 and counts["not_training"] == 2
+          and counts["graded_battles"] == 1 and counts["earlier_forms"] == 1
+          and counts["eligible"] == 25 and counts["rosters"] == 24,
+          f"bad={bad} counts={counts}")
+
+    harvest = t2._harvest_parties(doc, {}, e, 3, 3, 0, dominant=True)
+    check("V8b size exact, every weapon known and in the catalog, dominant: "
+          "the one eligibility rule v4h reads too",
+          all(tuple(sorted(c["shown"] + c["removed"])) in eligible for c in cases)
+          and len(harvest) == counts["parties"]
+          and t2.harvest_cases(doc, cat, 3, 100, 11, dominant=False,
+                               excluded=excl)[1]["eligible"] == 27,
+          f"v4h reads {len(harvest)} of {counts['parties']}")
+
+    five, _c5 = t2.harvest_cases(doc, cat, 5, 100, 11, dominant=True, excluded=excl)
+    kept = sorted({len(c["shown"]) for c in five})
+    check("V8c each case keeps 2..size-1 of its party's members, the rest "
+          "removed (one at size 3), shown + removed = the party",
+          all(len(c["shown"]) == 2 and len(c["removed"]) == 1 for c in cases)
+          and five and set(kept) <= {2, 3, 4} and len(kept) > 1
+          and all(len(c["shown"]) + len(c["removed"]) == 5 for c in five),
+          f"kept at size 5: {kept}")
+
+    def distinct(cs):
+        full = [tuple(sorted(c["shown"] + c["removed"])) for c in cs]
+        shown = [tuple(sorted(c["shown"])) for c in cs]
+        return len(set(full)) == len(full) and len(set(shown)) == len(shown)
+    src_ok = all(c["sightings"] == len(eligible[tuple(sorted(c["shown"] + c["removed"]))])
+                 and c["battle"] in eligible[tuple(sorted(c["shown"] + c["removed"]))]
+                 for c in cases)
+    check("V8d one case per distinct roster, no partial party shown twice in "
+          "a form, each case sourced from an eligible party fielding its roster",
+          distinct(cases) and distinct(five) and src_ok,
+          f"{len(cases)} cases at 3, {len(five)} at 5")
+
+    a, _ = t2.harvest_cases(doc, cat, 3, 12, 11, dominant=True, excluded=excl)
+    b, _ = t2.harvest_cases(doc, cat, 3, 12, 11, dominant=True, excluded=excl)
+    other, _ = t2.harvest_cases(doc, cat, 3, 12, 12, dominant=True, excluded=excl)
+    text_a = "\n".join(t2.form_lines(e, "ancient_lands", 3, "balanced", 11, [c["shown"] for c in a]))
+    text_b = "\n".join(t2.form_lines(e, "ancient_lands", 3, "balanced", 11, [c["shown"] for c in b]))
+    check("V8e deterministic for a seed: the same seed, the same cases and "
+          "form; another seed, another draw",
+          len(a) == 12 and a == b and text_a == text_b and other != a)
+
+    name = t2._display_names(e)
+    blocks = re.split(r"(?m)^### Case \d+$", text_a)[1:]
+    leaks = []
+    for c, block in zip(a, blocks):
+        keys = re.search(r"(?m)^- PARTY_KEYS: (.*)$", block).group(1).split()
+        names = re.search(r"(?m)^- Party \(\d+/\d+\): (.*)$", block).group(1).split(", ")
+        others = [ln for ln in block.splitlines()
+                  if ln.strip() and not ln.startswith(("- Party (", "- PARTY_KEYS:"))
+                  and not re.match(r"^- [A-Z ]+: ?$", ln)]
+        if keys != c["shown"] or names != [name[w] for w in c["shown"]] or others:
+            leaks.append((keys, names, others))
+    ids = [str(c["battle"]) for c in a if str(c["battle"]) in text_a]
+    check("V8f the form shows each case's kept members alone: no battle, "
+          "no party index, no removed member",
+          len(blocks) == len(a) and not leaks and not ids
+          and not re.search(r"(?im)^- *(removed|battle|party index|sightings)\b", text_a),
+          f"leaks={leaks[:2]} ids={ids[:3]}")
+
+    tmp = tempfile.mkdtemp(prefix="bion_v8_")
+    try:
+        def key_file(path, rnd, battles):
+            with open(path, "w", encoding="utf-8", newline="\n") as fh:
+                json.dump({"round": rnd, "cases": [{"battle": x} for x in battles]}, fh)
+        key_file(os.path.join(tmp, "tier2_form_r2_a.key.json"), 2, [111])
+        key_file(os.path.join(tmp, "tier2_form_r3_a.key.json"), 3, [222])
+        key_file(os.path.join(tmp, "tier2_form_r3_b.key.json"), 3, [333])
+        key_file(os.path.join(tmp, "tier2_form_old.key.json"), None, [444])
+        r3, used3 = t2.form_key_battles(3, (tmp,))
+        r4, _u4 = t2.form_key_battles(4, (tmp,), skip=(os.path.join(tmp, "tier2_form_r3_b.key.json"),))
+        check("V8g a form excludes the battles every EARLIER round's key "
+              "records (a key without a round counts as earlier); its own "
+              "round's keys are not read",
+              r3 == {111, 444} and r4 == {111, 222, 444} and len(used3) == 2,
+              f"round 3 reads {sorted(r3)}, round 4 {sorted(r4)}")
+
+        # a size-5 Dragon Portal form, two cases answered, with its key
+        e5 = Engine(content="ancient_lands", size=5)
+        cases5 = sorted(five, key=lambda c: -len(c["removed"]))[:2]
+        lines = t2.form_lines(e5, "ancient_lands", 5, "balanced", 11,
+                              [c["shown"] for c in cases5])
+        text5 = "\n".join(lines)
+        text5 = text5.replace("- BEST PICK: ", f"- BEST PICK: {name[cases5[0]['removed'][0]]}", 1)
+        outsider = next(w for w in W if w not in cases5[1]["removed"]
+                        and w not in cases5[1]["shown"])
+        i2 = text5.index("### Case 2")
+        tail = (text5[i2:].replace("- BEST PICK: ", f"- BEST PICK: {name[outsider]}", 1)
+                .replace("- OTHER GOOD PICKS: ", f"- OTHER GOOD PICKS: {name[cases5[1]['removed'][0]]}", 1))
+        text5 = text5[:i2] + tail
+        form5 = os.path.join(tmp, "tier2_form_r9_portal5.md")
+        with open(form5, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(text5)
+        key5 = {"round": 9, "cases": [dict(c, case=i) for i, c in enumerate(cases5, 1)]}
+        with open(os.path.splitext(form5)[0] + ".key.json", "w", encoding="utf-8", newline="\n") as fh:
+            json.dump(key5, fh)
+        copy5 = os.path.join(tmp, "answers_copy.md")
+        shutil.copy(form5, copy5)
+        parsed = t2._parse_cases(text5)
+        sib_path, sib = t2.form_key(form5, parsed)
+        copy_path, copy_key = t2.form_key(copy5, parsed)
+        wrong = os.path.join(tmp, "wrong.key.json")
+        with open(wrong, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump({"round": 9, "cases": [{"shown": c["shown"]} for c in cases5[::-1]]}, fh)
+        try:
+            t2.form_key(form5, parsed, wrong)
+            refused = False
+        except SystemExit:
+            refused = True
+        removed = [c["removed"] for c in sib["cases"]] if sib else None
+        rows_w, _u, _l = t2._score_mode(e5, parsed, "w", removed)
+        rows_d, _u, _l = t2._score_mode(e5, parsed, "d", removed)
+        m = t2._metrics(rows_d)
+        check("V8h score finds the form's key (beside it, or by its parties for "
+              "a renamed copy), refuses another form's key, and reports how "
+              "often the grader's picks name a removed member",
+              sib is not None and copy_key == sib and refused
+              and [r["harvest_hit"] for r in rows_w] == [True, False]
+              and [r["harvest_acceptable"] for r in rows_d] == [True, True]
+              and m["harvest_agreement"] == 0.5 and m["harvest_acceptable"] == 1.0
+              and m["harvest_n"] == 2,
+              f"sibling={sib_path} copy={copy_path} rows={[(r['harvest_hit'], r['harvest_acceptable']) for r in rows_d]}")
+
+        e_ctx, ctx = t2.form_engine(text5)
+        rows_cw, _u, _l = t2._score_mode(e_ctx, parsed, "w", removed)
+        rows_cd, _u, _l = t2._score_mode(e_ctx, parsed, "d", removed)
+        in_pool = all(not e_ctx.is_unfielded(w) for r in rows_cw + rows_cd
+                      for w in r["engine_top3"])
+        check("V8i a Dragon Portal form scores in its own FORM_CONTEXT: "
+              "ancient_lands at 5, the 4-5 pool's rows and fielded list, in "
+              "both modes",
+              ctx == {"content": "ancient_lands", "size": 5, "style": "balanced"}
+              and e_ctx.content == "ancient_lands" and e_ctx.size == 5
+              and e_ctx.pool_key == "4-5" and len(rows_cw) == len(rows_cd) == 2
+              and in_pool and e_ctx.dress_candidates is True,
+              f"ctx={ctx} pool={e_ctx.pool_key} rows={len(rows_cw)}/{len(rows_cd)}")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 if __name__ == "__main__":
     t_dressing_switch()
     t_form_parser()
@@ -454,6 +669,7 @@ if __name__ == "__main__":
     t_structural_floors()
     t_target_mults()
     t_median_rows()
+    t_harvest_forms()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} validation-mode tests passed")

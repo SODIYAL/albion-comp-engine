@@ -60,22 +60,48 @@ changes — every number and the exit code are those of the engine alone.
 This script does the three mechanical parts. It cannot do the human part.
 
     generate  build N partial parties and write a blind form (the form shows NO
-              engine output — that is what makes it blind)
-    score     read the filled form + compare against engine top-3 per mode
+              engine output — that is what makes it blind) and, beside it,
+              the form's answer key
+    score     read the filled form + compare against engine top-3 per mode,
+              and against the harvest where the form has a key
     v4        reproduce published meta comps minus one member
     v4h       the same leave-one-out over the killer-party HARVEST (report-only)
 
 Usage:
-    py -3 tests/tier2_blindtest.py generate --n 12 --out tier2_form.md
-    py -3 tests/tier2_blindtest.py score tier2_form_filled.md [--mode both|w|d]
+    py -3 -u tests/tier2_blindtest.py generate --round 3 --content ancient_lands --size 3 --seed 20261008 --out tests/tier2_form_r3_portal3.md
+    py -3 tests/tier2_blindtest.py generate --from-pool --n 12 --out tier2_form.md
+    py -3 tests/tier2_blindtest.py score tier2_form_filled.md [--mode both|w|d] [--key K]
     py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json] [--baseline]
     py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5] [--baseline]
 
-Party generation is seeded and deterministic, so every shotcaller sees the
-same parties and a re-run reproduces the same set (seed 20260812 still emits
-the validation-round-1 parties' PARTY_KEYS unchanged).
+HARVEST-SEEDED FORMS (the default; harvest_cases): every case is a real
+killer party of exactly the form's size, every weapon known and in the
+catalog, with a seeded-random number of its members removed (2..size-1
+shown; one removed at size 3). The population is the content's evidence
+unit (FORM_POPULATIONS: the Dragon Portal reads the dominant killer
+parties of the portal harvest, as pipeline/derive_portal_rows.py fits
+its rows; every other content reads the battle-list killer parties).
+Only the TRAINING split is drawn (battle % 5 != 0: the holdout slice v4h
+evaluates is never shown to a grader), never a battle a graded round
+showed (pipeline/graded_battles.py) nor one an earlier V3 round's key
+records; parties are drawn as v4h draws them, one case per distinct
+roster. The form shows the kept
+members alone; the source of each case (battle, party index, the removed
+weapons) goes to the answer key beside it, `<form>.key.json`, which is
+never sent to a grader. `score` reads the key and reports, beside the
+engine's agreement, how often the grader's pick names a removed member
+(harvest agreement; report-only, never a gate input).
+
+`--from-pool` keeps the draw of V3 rounds 1-2: partial parties sampled
+from the whole weapon pool, which put weapons at seven the harvest fields
+in under 2% of size-7 killer parties (Glaive, Druidic Staff, Spear, Pike,
+Warbow); no key. Party generation is seeded and deterministic in both
+modes, so every shotcaller sees the same parties and a re-run reproduces
+the same set (a harvest form on the same artifact, whose hash its key
+records; `--from-pool` with seed 20260812 still emits the
+validation-round-1 parties' PARTY_KEYS unchanged).
 """
-import glob, json, os, statistics, sys, argparse, random, re
+import collections, glob, json, os, statistics, sys, argparse, random, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
@@ -83,6 +109,7 @@ sys.path.insert(0, os.path.join(ROOT, "engine"))
 sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from engine import Engine  # noqa: E402
 import gear_join  # noqa: E402
+from graded_battles import GRADED_BATTLES  # noqa: E402
 
 TOP_N = 3          # "shotcaller pick appears in engine top-3"
 FULL_RANK = 10 ** 6  # top_n that returns every candidate (the v4h rank metric)
@@ -115,22 +142,170 @@ NEED_CAPS = {
 CONF_W = {"high": 1.0, "medium": 0.6, "low": 0.3}
 
 
-def generate(args):
-    e = Engine(content=args.content, size=args.size, style=args.style)
-    pool = sorted(e.weapons)
-    rng = random.Random(args.seed)
+# ------------------------------------------------------------ generate ----
+# The harvest population a form reads, by content: the evidence unit the
+# content's rows were fitted on. The Dragon Portal's is the dominant killer
+# party of the pool (no deaths, a kill) in the portal harvest, as
+# pipeline/derive_portal_rows.py fits its rows and v4h reads its pools;
+# every other content reads the battle-list killer parties (v4h's default).
+FORM_POPULATIONS = {
+    "ancient_lands": {"source": "all", "content": "ancient_lands", "dominant": True},
+}
+FORM_POPULATION_DEFAULT = {"source": "battle_list", "content": None, "dominant": False}
+# battles with id % 5 == 0 are the holdout slice v4h evaluates and every
+# harvest-derived table leaves out; a form never shows one to a grader
+FORM_HOLDOUT_MOD = 5
+KEY_GLOB = "tier2_form_*.key.json"
 
-    parties = []
-    while len(parties) < args.n:
-        # partial parties of 2..size-1, sampled without replacement
-        k = rng.randint(2, max(2, args.size - 1))
-        p = rng.sample(pool, k)
-        if p not in parties:
-            parties.append(p)
 
+def _known_party(p, catalog, min_size, max_size, dominant=False):
+    """A killer party of [min_size, max_size] members with every weapon
+    known and in the catalog; `dominant` also asks that it took no deaths
+    and a kill in its battle (the portal pools' unit). The one eligibility
+    rule of the harvest readers here (v4h and the forms)."""
+    ws = p.get("weapons") or []
+    n = p.get("size") or 0
+    if not (min_size <= n <= max_size) or p.get("known_weapons") != n:
+        return False
+    if len(ws) != n or any(w not in catalog for w in ws):
+        return False
+    return not dominant or ((p.get("deaths") or 0) == 0 and (p.get("kills") or 0) > 0)
+
+
+def _battle_id(b):
+    try:
+        return int(b)
+    except (TypeError, ValueError):
+        return b
+
+
+def _training(battle, holdout_mod):
+    """Training-split membership: battle % holdout_mod != 0. An id that is
+    not a number sits in no split."""
+    if not holdout_mod:
+        return True
+    try:
+        return int(battle) % holdout_mod != 0
+    except (TypeError, ValueError):
+        return False
+
+
+def harvest_cases(doc, catalog, size, n, seed, dominant=False, excluded=None,
+                  holdout_mod=FORM_HOLDOUT_MOD):
+    """The cases of a harvest-seeded form, from a loaded roster artifact.
+
+    Eligible: a killer party of exactly `size` members with every weapon
+    known and in `catalog` (`dominant`: no deaths and a kill), in a battle
+    of the training split (battle % holdout_mod != 0) and in no battle of
+    `excluded` ({reason: battle ids}: the graded battles, the battles of
+    earlier rounds' forms). The eligible parties, in battle-id and
+    party-index order, are shuffled by `seed` and drawn as v4h draws them
+    (by party, so a roster fielded more often is drawn more often); each
+    drawn party keeps a seeded-random 2..size-1 of its members (one
+    removed at size 3), and a party whose roster (the weapon multiset) or
+    partial party an earlier case already shows is passed over: one case
+    per distinct roster. Deterministic for a seed and an artifact.
+
+    Returns (cases, counts): a case is {battle, party, sightings, shown,
+    removed} (`party` the party's index in its battle, `sightings` the
+    eligible parties fielding its roster); counts are `parties` of the
+    size in the population, `not_training`, one per excluded reason,
+    `eligible` and `rosters` (distinct among the eligible)."""
+    import party_link
+    if size < 3:
+        raise ValueError("a harvest-seeded form needs a size of 3 or more "
+                         "(2..size-1 members shown)")
+    excluded = {r: {_battle_id(b) for b in ids} for r, ids in (excluded or {}).items()}
+    counts = {"parties": 0, "not_training": 0}
+    counts.update({r: 0 for r in excluded})
+    eligible, sightings = [], collections.Counter()
+    by_battle = party_link.parties_by_battle(doc)
+    for battle in sorted(by_battle, key=lambda b: (type(b).__name__, b)):
+        for p in sorted(by_battle[battle], key=lambda q: q["index"]):
+            if not _known_party(p, catalog, size, size, dominant):
+                continue
+            counts["parties"] += 1
+            if not _training(battle, holdout_mod):
+                counts["not_training"] += 1
+                continue
+            why = next((r for r in sorted(excluded)
+                        if _battle_id(battle) in excluded[r]), None)
+            if why:
+                counts[why] += 1
+                continue
+            eligible.append((battle, p["index"], list(p["weapons"])))
+            sightings[tuple(sorted(p["weapons"]))] += 1
+    counts["eligible"] = len(eligible)
+    counts["rosters"] = len(sightings)
+    rng = random.Random(seed)
+    cases, rosters_shown, partials_shown = [], set(), set()
+    for battle, index, ws in rng.sample(eligible, len(eligible)):
+        if len(cases) >= n:
+            break
+        roster = tuple(sorted(ws))
+        if roster in rosters_shown:
+            continue
+        kept = set(rng.sample(range(size), rng.randint(2, size - 1)))
+        shown = [w for i, w in enumerate(ws) if i in kept]
+        if tuple(sorted(shown)) in partials_shown:
+            continue
+        rosters_shown.add(roster)
+        partials_shown.add(tuple(sorted(shown)))
+        cases.append({"battle": battle, "party": index,
+                      "sightings": sightings[roster], "shown": shown,
+                      "removed": [w for i, w in enumerate(ws) if i not in kept]})
+    return cases, counts
+
+
+def form_key_battles(round_no, keys_dirs=(HERE,), skip=()):
+    """The battles the answer keys of EARLIER V3 rounds record (KEY_GLOB in
+    `keys_dirs`, a key without a round read as earlier), and the keys read.
+    A battle a form has shown is never shown again. Keys of this round or
+    a later one are not read, so a round's forms reproduce in any order of
+    generation; `skip` names key paths never read (the form's own key)."""
+    skip = {os.path.normcase(os.path.abspath(p)) for p in skip}
+    battles, used = set(), []
+    paths = sorted({os.path.normcase(os.path.abspath(p)) for d in keys_dirs
+                    for p in glob.glob(os.path.join(d, KEY_GLOB))})
+    for path in paths:
+        if path in skip:
+            continue
+        with open(path, encoding="utf-8") as f:
+            key = json.load(f)
+        r = key.get("round")
+        if isinstance(r, int) and r >= round_no:
+            continue
+        battles |= {_battle_id(c["battle"]) for c in key.get("cases") or []
+                    if c.get("battle") is not None}
+        used.append(os.path.basename(path))
+    return battles, used
+
+
+def _display_names(e):
+    """Each catalog weapon's display name on a form. A name the catalog
+    holds once reads as it is (the in-game names already tell a one-handed
+    weapon from its two-handed line: Arcane Staff, Great Arcane Staff); a
+    name two weapons share reads with the weapon's key beside it."""
+    count = collections.Counter(w["display_name"] for w in e.weapons.values())
+    return {k: (w["display_name"] if count[w["display_name"]] == 1
+                else f"{w['display_name']} ({k})")
+            for k, w in e.weapons.items()}
+
+
+def form_lines(e, content, size, style, seed, parties):
+    """The blind form's lines: instructions, the form's context and one
+    case per partial party. It carries the shown members alone, never a
+    case's source or the members removed from it."""
+    name = _display_names(e)
+    pool = (((e.template.get("size_prompt") or {}).get("labels") or {})
+            .get(str(size)))
     lines = [
-        f"# Tier-2 V3 — shotcaller blind test  ({e.template['name']}, size {args.size})",
+        f"# Tier-2 V3 — shotcaller blind test  ({e.template['name']}, size {size})",
         "",
+    ]
+    if pool:
+        lines += [f"{e.template['name']}: {pool}.", ""]
+    lines += [
         "For each case fill in **BEST PICK** — the next player to add.",
         "The other fields are optional; each one filled in makes the round",
         "count for more:",
@@ -144,15 +319,14 @@ def generate(args):
         "Answer from judgement alone — the engine's answer is deliberately",
         "not shown. Use weapons' common names (e.g. `Heavy Mace`, `Hallowfall`).",
         "",
-        f"Generated with seed {args.seed} — send every shotcaller this same file.",
+        f"Generated with seed {seed} — send every shotcaller this same file.",
         "",
-        f"- FORM_CONTEXT: {args.content} {args.size} {args.style} {args.seed}",
+        f"- FORM_CONTEXT: {content} {size} {style} {seed}",
         "",
     ]
     for i, p in enumerate(parties, 1):
-        names = ", ".join(e.weapons[w]["display_name"] for w in p)
         lines += [f"### Case {i}",
-                  f"- Party ({len(p)}/{args.size}): {names}",
+                  f"- Party ({len(p)}/{size}): {', '.join(name[w] for w in p)}",
                   f"- PARTY_KEYS: {' '.join(p)}",
                   "- PRIMARY NEED: ",
                   "- BEST PICK: ",
@@ -161,10 +335,110 @@ def generate(args):
                   "- CONFIDENCE: ",
                   "- REASON: ",
                   ""]
+    return lines
+
+
+def _pool_parties(e, args):
+    """The draw of V3 rounds 1-2: partial parties of 2..size-1 sampled from
+    the whole weapon pool, without replacement (unchanged, so a seed
+    reproduces its round's PARTY_KEYS)."""
+    pool = sorted(e.weapons)
+    rng = random.Random(args.seed)
+    parties = []
+    while len(parties) < args.n:
+        k = rng.randint(2, max(2, args.size - 1))
+        p = rng.sample(pool, k)
+        if p not in parties:
+            parties.append(p)
+    return parties
+
+
+def _rel(path):
+    """A path as the repository names it (forward slashes, relative to the
+    root where it sits inside)."""
+    p = os.path.relpath(os.path.abspath(path), os.path.abspath(ROOT))
+    return (os.path.abspath(path) if p.startswith("..") else p).replace(os.sep, "/")
+
+
+def _harvest_form(e, args, key_path):
+    """The partial parties of a harvest-seeded form and its answer key."""
+    import rosters_io
+    if args.round is None:
+        sys.exit("--round N is required: a harvest-seeded form belongs to a V3 "
+                 "round, and every battle an earlier round's key records is excluded")
+    if args.size < 3:
+        sys.exit("a harvest-seeded form needs --size 3 or more (2..size-1 members shown)")
+    pop = dict(FORM_POPULATIONS.get(args.content, FORM_POPULATION_DEFAULT))
+    if args.harvest_source:
+        pop["source"] = args.harvest_source
+    if args.harvest_content:
+        pop["content"] = args.harvest_content
+    if args.dominant:
+        pop["dominant"] = True
+    path = args.rosters or rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
+    if not os.path.exists(path):
+        sys.exit(f"{path} missing — run the harvest fold first")
+    doc = rosters_io.load(path, source=pop["source"], content=pop["content"])
+    earlier, key_files = form_key_battles(
+        args.round, (HERE, os.path.dirname(os.path.abspath(args.out))), skip=(key_path,))
+    cases, counts = harvest_cases(
+        doc, set(e.weapons), args.size, args.n, args.seed, dominant=pop["dominant"],
+        excluded={"graded_battles": set(GRADED_BATTLES), "earlier_forms": earlier})
+    if len(cases) < args.n:
+        print(f"note: {len(cases)} cases, the eligible rosters hold no more distinct partial parties")
+    name = _display_names(e)
+    order = lambda ws: sorted(ws, key=lambda w: (name[w].lower(), w))
+    for c in cases:
+        c["shown"], c["removed"] = order(c["shown"]), order(c["removed"])
+    unit = ("killer party of exactly the form's size, every weapon known and in the catalog"
+            + (", no deaths and a kill" if pop["dominant"] else ""))
+    key = {
+        "_note": "The answer key of the form named below: each case's source and the "
+                 "members removed from it. Never sent with the form.",
+        "form": _rel(args.out),
+        "round": args.round,
+        "context": {"content": args.content, "size": args.size,
+                    "style": args.style, "seed": args.seed},
+        "population": {"source": pop["source"], "content": pop["content"],
+                       "dominant": pop["dominant"], "unit": unit,
+                       "split": f"training: battle % {FORM_HOLDOUT_MOD} != 0"},
+        "rosters": {"path": _rel(path), "sha256": rosters_io.sha256(path),
+                    "battles": len(doc.get("battles") or [])},
+        "counts": counts,
+        "excluded": {"graded_battles": "pipeline/graded_battles.py "
+                                       f"({len(GRADED_BATTLES)} battles)",
+                     "earlier_forms": key_files},
+        "cases": [dict(c, case=i) for i, c in enumerate(cases, 1)],
+    }
+    print(f"population: source {pop['source']}, content {pop['content'] or 'any'}, {unit}, "
+          f"size {args.size}")
+    print(f"parties {counts['parties']}: not on the training split {counts['not_training']}, "
+          f"in a graded battle {counts['graded_battles']}, in an earlier round's form "
+          f"{counts['earlier_forms']} ({', '.join(key_files) or 'no earlier key'}) -> "
+          f"eligible {counts['eligible']} parties, {counts['rosters']} distinct rosters")
+    return [c["shown"] for c in cases], key
+
+
+def generate(args):
+    e = Engine(content=args.content, size=args.size, style=args.style)
+    key_path = os.path.splitext(args.out)[0] + ".key.json"
+    key = None
+    if args.from_pool:
+        parties = _pool_parties(e, args)
+    else:
+        parties, key = _harvest_form(e, args, key_path)
+    lines = form_lines(e, args.content, args.size, args.style, args.seed, parties)
     with open(args.out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
     print(f"wrote {args.out}: {len(parties)} cases, size {args.size}, seed {args.seed}")
-    print("Send the SAME file to 3+ shotcallers. Do not show them engine output.")
+    if key is not None:
+        with open(key_path, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(key, f, indent=1, sort_keys=True)
+            f.write("\n")
+        print(f"wrote {key_path}: the answer key (each case's source and removed members)")
+        print("Send the SAME form to 3+ shotcallers, never the key. Do not show them engine output.")
+    else:
+        print("Send the SAME file to 3+ shotcallers. Do not show them engine output.")
 
 
 def _resolve(e, text):
@@ -241,8 +515,17 @@ def _metrics(rows):
     ranks = [r["rank"] for r in rows if r.get("rank") is not None]
     need = [r for r in rows if r.get("need_hit") is not None]
     bad = [r for r in rows if r.get("bad_in_top3") is not None]
+    hv = [r for r in rows if r.get("harvest_hit") is not None]
     wsum = sum(CONF_W.get(r.get("confidence"), 0.6) for r in rows)
     return {
+        # HARVEST AGREEMENT (forms with an answer key): the grader's best
+        # pick, or any pick the grader lists as good, names a member the
+        # harvested party fielded and the form removed. Report-only.
+        "harvest_agreement": (sum(1 for r in hv if r["harvest_hit"]) / len(hv))
+                             if hv else None,
+        "harvest_acceptable": (sum(1 for r in hv if r["harvest_acceptable"]) / len(hv))
+                              if hv else None,
+        "harvest_n": len(hv),
         "n": len(rows),
         "top1": sum(1 for r in rows if r.get("top1")) / n,
         "top3": sum(1 for r in rows if r.get("top3")) / n,
@@ -267,17 +550,21 @@ def _fmt_pct(v):
     return "-" if v is None else f"{v:.0%}"
 
 
-def _score_mode(e, cases, mode):
+def _score_mode(e, cases, mode, removed=None):
     """Evaluate parsed cases under one gear regime.
 
     mode 'w': symmetric weapon-only (incumbents naked, candidates naked
     via set_dressing(False)). mode 'd': production dressed (incumbents in
-    recorded gear else doctrine kits; candidates dressed). Returns
-    (rows, unresolved, case_lines)."""
+    recorded gear else doctrine kits; candidates dressed). `removed`, from
+    the form's answer key, lists per case the members the form removed
+    from the harvested party; each row then records whether the grader's
+    picks name one (harvest agreement). Returns (rows, unresolved,
+    case_lines)."""
     e.set_dressing(mode == "d")
     rows, unresolved, case_lines = [], [], []
     try:
         for i, c in enumerate(cases, 1):
+            harvest = set(removed[i - 1]) if removed is not None else None
             gl = None
             gsrc = ["naked"] * len(c["party"])
             if mode == "d":
@@ -314,12 +601,16 @@ def _score_mode(e, cases, mode):
                 "bad_in_top3": (bad_key in top3) if bad_key else None,
                 "need_hit": need_hit, "confidence": c["confidence"],
                 "gear_source": gsrc, "engine_top3": top3,
+                "harvest_hit": (want in harvest) if harvest is not None else None,
+                "harvest_acceptable": (any(k in harvest for k in acc)
+                                       if harvest is not None else None),
             })
             case_lines.append(
                 f"{i:<4}{e.weapons[want]['display_name']:<22}"
                 f"{'YES' if want in top3 else 'no':<8}"
                 f"{'r' + str(rank) if rank else 'out-of-pool':<12}"
-                f"{', '.join(e.weapons[w]['display_name'] for w in top3)}")
+                + (f"{'YES' if want in harvest else 'no':<9}" if harvest is not None else "")
+                + f"{', '.join(e.weapons[w]['display_name'] for w in top3)}")
     finally:
         e.set_dressing(True)
     return rows, unresolved, case_lines
@@ -329,33 +620,85 @@ MODE_NAMES = {"w": "V3-W weapon-only (symmetric naked benchmark)",
               "d": "V3-D dressed (production metric — THE GATE)"}
 
 
+_CONTEXT_RE = re.compile(r"^-[ \t]*FORM_CONTEXT:[ \t]*(\S+)[ \t]+(\d+)[ \t]+(\S+)",
+                         re.MULTILINE)
+
+
+def form_engine(text, size_arg=7):
+    """The engine a form scores in, and the form's context. A form from
+    the current generator carries its own FORM_CONTEXT (content, size,
+    style) and scores in exactly that context in every mode (a Dragon
+    Portal form at 3, 5 or 7 reads that pool's rows and fielded list);
+    scoring under the wrong content or size silently invalidates a round.
+    A form without the line (round 1) scores castle_outpost at
+    `size_arg`."""
+    m = _CONTEXT_RE.search(text)
+    if not m:
+        return Engine(size=size_arg), None
+    content, size, style = m.group(1), int(m.group(2)), m.group(3)
+    if size_arg != 7 and size_arg != size:
+        print(f"note: form declares size {size}; overriding --size")
+    return (Engine(content=content, size=size, style=style),
+            {"content": content, "size": size, "style": style})
+
+
+def _key_matches(key, cases):
+    """True when the key's cases show exactly the form's parties, case by
+    case (as multisets)."""
+    return ([sorted(c.get("shown") or []) for c in key.get("cases") or []]
+            == [sorted(c["party"]) for c in cases])
+
+
+def form_key(form_path, cases, key_path=None):
+    """The answer key of a harvest-seeded form, as (path, key), or (None,
+    None) for a form without one. `key_path`, else `<form>.key.json`
+    beside the form; a key named either way that does not show the form's
+    parties fails loudly. Otherwise (a renamed copy of the form) the key in
+    the form's directory or tests/ that shows exactly its parties."""
+    sibling = os.path.splitext(form_path)[0] + ".key.json"
+    named = key_path or (sibling if os.path.exists(sibling) else None)
+    if named:
+        with open(named, encoding="utf-8") as f:
+            key = json.load(f)
+        if not _key_matches(key, cases):
+            sys.exit(f"{named}: its cases do not show this form's parties — "
+                     "not this form's key")
+        return named, key
+    dirs = (os.path.dirname(os.path.abspath(form_path)), HERE)
+    for path in sorted({os.path.abspath(p) for d in dirs
+                        for p in glob.glob(os.path.join(d, "*.key.json"))}):
+        with open(path, encoding="utf-8") as f:
+            key = json.load(f)
+        if _key_matches(key, cases):
+            return path, key
+    return None, None
+
+
 def score(args):
     with open(args.form, encoding="utf-8") as f:
         text = f.read()
-    # A form from the current generator carries its own context — scoring
-    # under the wrong content/size/style silently invalidates a round.
-    m = re.search(r"^-[ \t]*FORM_CONTEXT:[ \t]*(\S+)[ \t]+(\d+)[ \t]+(\S+)",
-                  text, re.MULTILINE)
-    if m:
-        content, size, style = m.group(1), int(m.group(2)), m.group(3)
-        if args.size != 7 and args.size != size:
-            print(f"note: form declares size {size}; overriding --size")
-        e = Engine(content=content, size=size, style=style)
-    else:
-        e = Engine(size=args.size)
+    e, context = form_engine(text, args.size)
+    print(f"scoring in {e.content} at {e.size}, style {e.style}"
+          + ("" if context else " (the form has no FORM_CONTEXT line)"))
     cases = _parse_cases(text)
     if not cases:
         sys.exit("no cases found — is this a filled form from `generate`?")
+    key_path, key = form_key(args.form, cases, args.key)
+    removed = [c.get("removed") or [] for c in key["cases"]] if key else None
+    if key:
+        print(f"answer key: {key_path} (harvest agreement reported; report-only, "
+              "never a gate input)")
 
     modes = ["w", "d"] if args.mode == "both" else [args.mode]
     report, gate_rate = {}, None
     for mode in modes:
-        rows, unresolved, case_lines = _score_mode(e, cases, mode)
+        rows, unresolved, case_lines = _score_mode(e, cases, mode, removed)
         m = _metrics(rows)
         report[mode] = {"metrics": m, "rows": rows,
                         "unresolved": unresolved}
         print(f"\n=== {MODE_NAMES[mode]} ===")
-        print(f"{'#':<4}{'shotcaller pick':<22}{'top-3':<8}{'rank':<12}engine top-3")
+        print(f"{'#':<4}{'shotcaller pick':<22}{'top-3':<8}{'rank':<12}"
+              + (f"{'harvest':<9}" if key else "") + "engine top-3")
         print("-" * 96)
         for line in case_lines:
             print(line)
@@ -372,6 +715,12 @@ def score(args):
         print(f"primary-need agreement {_fmt_pct(m['need_agreement'])} "
               f"(n={m['need_n']})   bad-pick-in-top3 rate "
               f"{_fmt_pct(m['bad_pick_rate'])} (n={m['bad_n']})")
+        if key:
+            hits = sum(1 for r in rows if r.get("harvest_hit"))
+            print(f"harvest agreement: the best pick names a removed member "
+                  f"{_fmt_pct(m['harvest_agreement'])} ({hits}/{m['harvest_n']}), "
+                  f"any listed pick {_fmt_pct(m['harvest_acceptable'])} "
+                  "(report-only)")
         if unresolved:
             print("unresolved answers (fix spelling or use PARTY_KEYS names):")
             for i, p in unresolved:
@@ -380,6 +729,9 @@ def score(args):
             gate_rate = m["top3"] if rows else None
 
     if args.json:
+        report["context"] = {"content": e.content, "size": e.size, "style": e.style}
+        if key:
+            report["key"] = _rel(key_path)
         with open(args.json, "w", encoding="utf-8", newline="\n") as f:
             json.dump(report, f, indent=1, sort_keys=True)
         print(f"\nwrote {args.json}")
@@ -771,14 +1123,10 @@ def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod, domi
         if holdout_mod and int(battle) % holdout_mod != 0:
             continue
         for p in by_battle[battle]:
-            ws = p.get("weapons") or []
-            n = p.get("size") or 0
-            if not (min_size <= n <= max_size) or p.get("known_weapons") != n:
+            if not _known_party(p, cat, min_size, max_size, dominant):
                 continue
-            if len(ws) != n or any(w not in cat for w in ws):
-                continue
-            if dominant and not ((p.get("deaths") or 0) == 0 and (p.get("kills") or 0) > 0):
-                continue
+            ws = p["weapons"]
+            n = p["size"]
             lab = label.get((battle, p["index"]))
             style = lab["style"] if lab and lab.get("style") in (e_probe.data.get("styles") or {}) else "balanced"
             out.append({"battle": battle, "index": p["index"], "size": n,
@@ -1068,12 +1416,29 @@ if __name__ == "__main__":
     g.add_argument("--content", default="castle_outpost")
     g.add_argument("--style", default="balanced")
     g.add_argument("--out", default="tier2_form.md")
+    g.add_argument("--round", type=int, default=None,
+                   help="the V3 round the form belongs to (required for a harvest-seeded "
+                        "form): every battle an earlier round's key records is excluded")
+    g.add_argument("--from-pool", action="store_true",
+                   help="the draw of V3 rounds 1-2: partial parties sampled from the "
+                        "whole weapon pool, no answer key")
+    g.add_argument("--rosters", default=None,
+                   help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
+    g.add_argument("--harvest-source", default=None, choices=["battle_list", "all"],
+                   help="override the content's population (FORM_POPULATIONS): which harvest")
+    g.add_argument("--harvest-content", default=None,
+                   help="override the content's population: one content tag's battles")
+    g.add_argument("--dominant", action="store_true", default=None,
+                   help="dominant killer parties only (no deaths, a kill); the portal's unit")
 
     s = sub.add_parser("score"); s.set_defaults(fn=score)
     s.add_argument("form")
     s.add_argument("--size", type=int, default=7)
     s.add_argument("--mode", choices=["both", "w", "d"], default="both")
     s.add_argument("--json", default=None, help="dump per-case rows + metrics")
+    s.add_argument("--key", default=None,
+                   help="the form's answer key (default: <form>.key.json beside it, else "
+                        "the key in its directory or tests/ that shows its parties)")
 
     v = sub.add_parser("v4"); v.set_defaults(fn=v4)
     v.add_argument("comps", nargs="?",

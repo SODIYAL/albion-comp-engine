@@ -97,17 +97,9 @@ SEATS = ("engage_tank", "stopper_tank", "off_tank", "shield_support",
          "dive_cleanup")
 PREDS = ("ranged_aoe_core", "primary_heal", "pierce", "anti_heal",
          "engage_tank", "stopper_tank", "shield_support")
-# validation round 1 (ten rosters) + round 2 (twenty): both graded and
-# pinned in test_golden T34 / T36; never re-sampled into a form
-GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088,
-                  1439323062, 1439423672, 1442916379, 1442381572, 1443149032, 1442340579, 1443089499, 1439330397,
-                  1439163242, 1442365275, 1442813939, 1443067935, 1443196794, 1442359908, 1442270050, 1442373560,
-                  1439247869, 1439330979, 1439276629,
-                  # round 3 (the 10-14 band, rosters 1-11 called; T39)
-                  1439331464, 1442240282, 1442879983, 1442360406, 1443108045, 1442343192, 1442339162, 1443074329, 1439338826, 1439172287, 1442358198,
-                  # round 4 (the 10-14 band, all twenty graded; T43)
-                  1439334286, 1442250301, 1442972989, 1442398268, 1443176864, 1442349353, 1442348698, 1443926164, 1443148724, 1439351476,
-                  1439174574, 1443907529, 1442378155, 1443767342, 1442865547, 1443867507, 1443110811, 1443257154, 1442366915, 1442294064]
+# the battles graded rounds have shown: never re-sampled into a form (one
+# list for every form generator, pipeline/graded_battles.py)
+from graded_battles import GRADED_BATTLES  # noqa: E402
 
 
 def strip(t):

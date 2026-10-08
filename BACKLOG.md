@@ -68,10 +68,6 @@ Each is decidable today from evidence already in the repo.
   by drafting carriers winners field rarely. A minimum per style x band
   from the harvest (the standoff rule: round-half-up of the p50 where it is
   1 or more) is the derivation to take.
-- **A blind validation round on the portal pools**: `validated_sizes` is
-  empty for `ancient_lands`, so the page flags every size as extrapolated.
-  The rows are measured; the round (one form per pool, graded before the
-  engine's answer) is what lifts the flag.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
@@ -110,12 +106,6 @@ Each is decidable today from evidence already in the repo.
   46% of single-healer 7s, is named first in 2 of 1,508. Scoring every
   member naked reads the held-out 7s better (top-3 8.9% against 7.5%).
   (V: 09b, V3 round 2)
-- **The V3 generator seeds from every weapon**: partial parties are drawn
-  from the whole pool, so forms carry Glaive, Druidic Staff, Spear, Pike
-  and Warbow at seven, weapons the harvest fields in under 2% of size-7
-  killer parties. Proposed: seed from harvested killer parties at the
-  form's size, members removed at random, graded battles and the holdout
-  slice excluded. Changes what a round measures. (V: 09b, V3 round 2)
 - **Kite weights**: with the seat skeleton and the standoff minimum the
   forged kite 20 reads clap_kite to the engine's own identity (it read as a
   strong clap before); a PURE kite read needs the kite style's multipliers
@@ -257,7 +247,20 @@ Each is decidable today from evidence already in the repo.
   engine output hidden. Score with `tests/tier2_blindtest.py score --mode
   both`. Answered blind it is the first uncontaminated validation case;
   the Castle Outpost 7 form was answered as a reviewed draft and is train.
-  (V: 08, the dressed-forge decisions, item 4; 09b, V3 round 2)
+  It predates harvest seeding: its parties come from the whole weapon
+  pool (`generate --from-pool`, seed 20260828). (V: 08, the
+  dressed-forge decisions, item 4; 09b, V3 round 2)
+- **The V3 round 3 Dragon Portal forms are waiting for answers**:
+  `tests/tier2_form_r3_portal3.md`, `tests/tier2_form_r3_portal5.md` and
+  `tests/tier2_form_r3_portal7.md` (seed 20261008, 12 cases each, one form
+  per matchmaking pool at its top size), every case a dominant killer
+  party of the pool from the training split with members removed; the
+  answer key beside each form (`*.key.json`) is never sent. Score each
+  with `tests/tier2_blindtest.py score --mode both`, which prints the
+  harvest agreement beside the engine's. Answered blind they are what can
+  lift `validated_sizes: []` on `ancient_lands`, the page's
+  "extrapolated" flag. (V: 10, V3 forms seed from harvested killer
+  parties)
 - **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
   style board learns from the training split): at `--n 500` (1,500 drops)
   role-level 59% (harvest_gear) against the baseline's 55%, weapon top-3 5%

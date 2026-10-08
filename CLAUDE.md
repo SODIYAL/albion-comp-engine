@@ -144,7 +144,9 @@ recommender beside the engine — report-only, the model the capability engine
 must beat.
 
 Validation-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
-generate|score` (V3 forms; `score --mode d` is the gate),
+generate|score` (V3 forms seeded from harvested killer parties, the
+answer key `<form>.key.json` beside each form and never sent; `generate`
+loads the rosters artifact; `score --mode d` is the gate),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N`,
 `pipeline/kit_blind_round.py`. Report-only audits: `pipeline/audit_*.py`. Findings
 and open questions: `notes/findings/`. The `BION_DATASET` env override on `engine.py`

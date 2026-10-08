@@ -127,11 +127,15 @@ The identity system, the role book and the kit doctrine were built by
 **validation rounds**: present cases, record the human answer BEFORE
 revealing the engine's, log both, and convert every disagreement the same day
 into a decision, a cited override, or a golden pin. Forms: `tests/tier2_blindtest.py
-generate|score` (V3 next-pick forms; `score --mode d` is the gate),
-`pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
+generate|score` (V3 next-pick forms seeded from harvested killer parties of
+the form's size, the answer key beside each form; `score --mode d` is the
+gate), `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
 rosters, weapons only), `pipeline/kit_blind_round.py` (a weapon's most-worn
 builds without labels). Graded
-battles join `GRADED_BATTLES` so no later form re-samples them. An answer the
+battles join `GRADED_BATTLES` (`pipeline/graded_battles.py`, the one list
+every form generator reads) so no later form re-samples them; a V3 form's
+answer key records its battles, and every later round's forms exclude
+them. An answer the
 data contradicts is shown the data (2026-09-04 roster 5, 2026-09-08 Arcane
 helmet); the decision then stands on the evidence, not the guess.
 
@@ -334,6 +338,7 @@ archive file and the section title to search for.
 | 10-08 | The harvest backs up the battle cache after its passes: `backup_cache.py` writes a consistent copy (SQLite's online backup, a quick check, a rename over the last copy, so a synced folder never holds a half-written file and a failed run keeps the last one) to the folder `-BackupDir` names, else `COMPFORGE_BACKUP_DIR`; with neither set, no copy; a backup is never a build input | `harvest_overnight.ps1`, `backup_cache.py` | (a run: 1018 MB, 532,332 battles, 37 s) | 10, The harvest backs up the battle cache |
 | 10-08 | Kits name the worn items that carry no combat effect: the plain Cape, Cabbage Soup and Pork Pie get entries with no rows (in the pinned data the base cape has no passive slot and no combat stat, a soup regenerates health out of combat, a pie raises load and gathering), so the join resolves them, the doctrine counts them and a kit names them where winners wear them; the plain Cape now leads the context-free kit's cape for 12 gang-band and 14 group-band weapons (balanced; 60 and 71 style cells), each losing that cape's row (a median of 3.5 to 5.5% of its dressed weighted value by content and band); the soup and the pie lead no kit. The common raw fish stays uncatalogued (its T8 fish raises crowd-control duration and the harvest drops the tier); the Calming Potion and the fish sandwich carry effects (BACKLOG) | `sheets/gear/cape.yaml`, `sheets/gear/food.yaml` | V4d, V4e; R24, R24b, R27, R28, V5a, V5b, V5f move | 10, Kits name the worn items that carry no combat effect |
 | 10-08 | The Armory import path is removed (built, never fed): `data/armory_imports/` (one file, the format example, never ingested), `parse_armory.py`, `armory_activities.json`, the `armory_manual` source kind, the promotion gate's Armory branch (no promotion rested on it: of 112 canonical defaults, 76 rest on two or more independent families and 36 on shotcaller approval) and the builds loader's activity-label check go; the in-game Armory has no export, and the killboard harvest supplies the worn builds of real players at scale (976,490 combatant builds in 92,013 battles over the usage artifact's 28 days). `armory.json` leaves the pin; `fetch_snapshot.py` records the pinned files and only those; the manifest is re-stamped offline on the pinned cache, its game patch now the pin's (2026-09-23; it carried the previous pin's 2026-07-21) | `builds_lib.py`, `build_builds.py`, `fetch_snapshot.py`, `source_pins.yaml`, `source_manifest.json`, `data/README.md` | H1, H9 (the MetaBattle import), H13 | 10, The Armory import path is removed |
+| 10-08 | V3 forms seed from harvested killer parties: every case a killer party of exactly the form's size with every weapon known, from the content's evidence unit (the Dragon Portal: the pool's dominant killer parties), training split only, never a graded battle nor one an earlier V3 round's answer key records, drawn by party, one case per distinct roster, 2 to size-1 members shown; each case's source and removed members in the answer key beside the form, never on it; `score` scores a form in its own context and reports harvest agreement beside the engine's (report-only); `--from-pool` keeps the draw of rounds 1-2. V3 round 3: one Dragon Portal form per pool (3, 5, 7), waiting for answers | `tier2_blindtest.py` generate / score, `pipeline/graded_battles.py`, `tests/tier2_form_r3_portal{3,5,7}.md` and keys | V8a-V8i | 10, V3 forms seed from harvested killer parties |
 
 ## Open questions
 
