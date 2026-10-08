@@ -60,10 +60,18 @@
 # so a focused night ADDS small-fight parties to the corpus; it never
 # narrows what party_rosters.json.gz is derived from.
 
+# BACKUP: the cache is the one copy of the harvest's evidence (the kill
+# feed it was polled from serves no history). After the passes the script
+# writes a consistent copy to the folder -BackupDir names, else the
+# COMPFORGE_BACKUP_DIR environment variable (a synced folder or a second
+# drive, set once per machine), through pipeline/backup_cache.py; with
+# neither set, no copy. A backup is never a build input.
+
 param(
     [int]$MinPlayers = 0,   # >0 with MaxPlayers: one banded pass
     [int]$MaxPlayers = 0,   # 0 = no ceiling
-    [int]$Battles = 800
+    [int]$Battles = 800,
+    [string]$BackupDir = $env:COMPFORGE_BACKUP_DIR
 )
 
 $ErrorActionPreference = "Continue"
@@ -95,3 +103,8 @@ if ($MinPlayers -gt 0 -or $MaxPlayers -gt 0) {
 }
 $n = & py -3 pipeline/party_store.py --count
 "=== done: cache holds $n battles ($(Get-Date -Format s)) ===" | Out-File $log -Encoding utf8 -Append
+if ($BackupDir) {
+    "--- backup to $BackupDir ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+    & py -3 -u pipeline/backup_cache.py --dest $BackupDir 2>&1 | Out-File $log -Encoding utf8 -Append
+    "--- backup exit $LASTEXITCODE ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+}

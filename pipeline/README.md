@@ -502,7 +502,15 @@ a fold would lose the artifact its tables were derived from.
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
   in the band. The cache keeps every battle and the analysis reads all of
-  it, so a focused night adds to the corpus, never narrows it.
+  it, so a focused night adds to the corpus, never narrows it. After the
+  passes the run BACKS UP the cache, the one copy of the evidence (the
+  kill feed serves no history): `pipeline/backup_cache.py` writes a
+  consistent copy (SQLite's online backup, checked, then renamed over the
+  last copy) to the folder `-BackupDir` names, else the
+  `COMPFORGE_BACKUP_DIR` environment variable (a synced folder or a second
+  drive, set once per machine); with neither set, no copy. A backup is
+  never a build input; a fresh machine copies it to
+  `out/party_cache.sqlite` and re-derives.
 - `pipeline/poll_events.ps1` — "CompForge kill-feed poll", every 3 minutes:
   `sample_parties.py --poll-events` reads the newest ~1,000 kill events off
   the official feed (the killer's party and every combat role's equipment
