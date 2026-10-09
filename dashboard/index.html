@@ -1214,7 +1214,18 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
+.cap-reading{position:relative; display:inline-flex; justify-content:flex-end; align-items:center;
+  min-width:104px; padding-right:34px; box-sizing:border-box; white-space:nowrap}
 .cap-val{font-family:var(--mono); font-size:12px; color:var(--ink-3); white-space:nowrap}
+.cap-delta{position:absolute; right:0; top:50%; z-index:1; transform:translateY(-50%);
+  font-family:var(--mono); font-size:9px; line-height:1; color:var(--ink-2);
+  opacity:0; pointer-events:none; animation:cap-delta-read 1.35s var(--ease) both}
+.cap-delta.up{color:#8FA7CF}.cap-delta.down{color:var(--amber)}
+@keyframes cap-delta-read{
+  0%,12%{opacity:0}
+  22%,72%{opacity:1}
+  100%{opacity:0}
+}
 /* ---- capability RINGS ----
    Nested semicircles, one per capability, faceted one panel per group.
    Same ruler as the bars they replace and as the radar (the display ruler):
@@ -1227,7 +1238,13 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    painting over the legend (tests/test_display_math.js guards it) */
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:var(--rule); stroke-linecap:round}
-.cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
+.cap-rings .ring{fill:none; stroke-linecap:round; stroke-dasharray:100;
+  stroke-dashoffset:calc(100 - var(--cap-to)); transition:stroke .18s var(--ease)}
+.cap-rings .ring.cap-shift{animation:cap-ring-settle .48s var(--ease) both}
+@keyframes cap-ring-settle{
+  from{stroke-dashoffset:calc(100 - var(--cap-from))}
+  to{stroke-dashoffset:calc(100 - var(--cap-to))}
+}
 /* four stages (target is the median, standing rule 17; L20): low = under the
    bare minimum winners get away with (red), part = above it but under the
    typical winner (amber), met = typical to the soft cap (green), over =
@@ -1873,7 +1890,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips span:not(.dl-kicker){font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:99px;
   border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
-.dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick{position:relative;border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick-new{animation:dl-pick-arrive .24s var(--ease) both}
+.dl-pick-ghost{position:absolute;inset:0 0 auto 0;z-index:4;width:100%;box-sizing:border-box;
+  pointer-events:none;animation:dl-pick-leave .24s var(--ease) both}
+@keyframes dl-pick-arrive{from{opacity:.35}to{opacity:1}}
+@keyframes dl-pick-leave{from{opacity:1}to{opacity:0}}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
 /* the pick's identity block: a larger icon, the role
    line tucked under the name, the gains directly beneath it, and Add moved
@@ -1886,6 +1908,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
 .dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
+/* Four quiet lines keep a new recommendation from pushing every board below
+   it. The complete explanation remains in the context overlay. */
+.dl-pick .dl-pick-reason{height:6.2em;min-height:6.2em;overflow:hidden;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4}
 /* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
    2+1 and made the orphan look like the biggest gain. One LINE each (gain,
    capability, the numbers, the verdict), and each line carries its own
@@ -1918,6 +1944,30 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
 .dl-score-dim{color:var(--amber)}
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
+/* Optional evidence never enters document flow. The fixed summary row is
+   always present; its panel overlays the card only after a deliberate click. */
+.dl-context-row{height:38px;margin:10px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.dl-context-trigger{width:100%;height:100%;display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:9px;padding:0;background:none;border:0;color:var(--ink-2);
+  text-align:left;font-size:12px}
+.dl-context-trigger:hover,.dl-context-trigger:focus-visible{color:var(--ink);outline:none}
+.dl-context-trigger:focus-visible{box-shadow:inset 0 0 0 1px var(--brass-deep)}
+.dl-context-read{justify-self:end;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;font-family:var(--mono);font-size:9px;color:var(--ink-3)}
+.dl-context-chevron{color:var(--brass-deep);transition:transform .18s var(--ease)}
+.dl-context-trigger[aria-expanded="true"] .dl-context-chevron{transform:rotate(90deg)}
+.dl-context-pop{position:absolute;z-index:7;left:12px;right:12px;bottom:12px;
+  max-height:calc(100% - 24px);overflow:auto;padding:13px 14px;
+  background:rgba(13,13,20,.98);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,201,58,.38);border-radius:12px;box-shadow:var(--shadow-lift)}
+.dl-context-pop[hidden]{display:none}
+.dl-context-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.dl-context-close{margin-left:auto;padding:0 5px;background:none;border:0;border-radius:5px;
+  color:var(--ink-3);font-size:21px;line-height:1}
+.dl-context-close:hover,.dl-context-close:focus-visible{color:var(--ink);background:var(--surface-2);outline:none}
+.dl-context-why{margin-bottom:10px}.dl-context-why p{height:auto;min-height:0;display:block;overflow:visible;margin:5px 0 0}
+.dl-context-pop .obs-note,.dl-context-pop .dl-whynot{margin-top:9px}
+.dl-context-empty{padding:8px 0;border-top:1px solid var(--rule);font-size:11px;line-height:1.45;color:var(--ink-3)}
 /* Add sits at the column's right edge, not against the name - butted up to
    the title it read as part of the wordmark rather than as an action. The
    name keeps its own width so the gap between them stays inert: clicking
@@ -1928,7 +1978,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
 .dl-alts{margin-top:10px}
-.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px;min-height:111px}
 .dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
   padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
@@ -2025,7 +2075,6 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-role-chip b{color:var(--brass); font-weight:600}
 .dl-role-flag{font-size:12px; color:var(--amber); margin-top:6px}
 .dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
-
 
 /* ACCOUNTS - the masthead account button, the account menu, the sign-in
    dialog (_auth.js) and the profile dialog (_profile.js). Component chrome
@@ -2881,6 +2930,7 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
    gap applies at EVERY width — below the grid bands these wrappers still
    exist, and without it their cards stacked border-to-border. */
 .dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
+.dl-col3{position:relative}
 @media (min-width:1251px){
   .main{display:grid; align-items:start; gap:18px 24px}
   .main>*{grid-column:1/-1; min-width:0}
@@ -2958,6 +3008,10 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
   .main{padding:14px 16px 70px; gap:22px}
+  /* Recommendation detail becomes a bottom sheet on touch-sized screens.
+     Fixed positioning keeps its full evidence out of the document flow. */
+  .dl-context-pop{position:fixed;left:10px;right:10px;bottom:12px;top:auto;
+    max-height:min(72vh,620px);border-radius:14px;z-index:70}
 }
 
 /* ---------- masthead / status bar ----------
@@ -11622,6 +11676,18 @@ function renderGroups(){
   const grouped = new Set(Object.values(GROUPS).flat());
   const other = Object.keys(REQS()).filter(c => !grouped.has(c));
   const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
+  /* `groups` is rebuilt because content switches may change its taxonomy,
+     but a roster edit should still read as ONE continuous instrument. Keep
+     the last displayed fill per capability on the renderer itself, then let
+     each newly-created SVG path animate from that value. This avoids a
+     flash through zero without coupling display history to planner state.
+     A different content/style is a fresh ruler, so it lands immediately. */
+  const contextKey = (typeof CONTENT === "undefined")
+    ? Object.keys(REQS()).sort().join("|")
+    : `${CONTENT}|${STYLE}`;
+  const previous = renderGroups._context === contextKey
+    ? (renderGroups._fills || {}) : {};
+  const next = {};
   $("groups").innerHTML = Object.entries(groups).map(([g, caps]) => {
     const rows = caps.filter(c => REQS()[c]).map(c => {
       const have = s[c] || 0, t = target(c), soft = softCap(c), lo = targetMin(c);
@@ -11658,7 +11724,13 @@ function renderGroups(){
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
         ` <span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "leans on" : "cares less about"} ${esc(capLabel(c))} (weight ${baseW} → ${styledW.toFixed(1)}, ×${mult.toFixed(2)}); the typical number is measured per style at 10+, so it already reflects how this style fights — the weight says how much the planner values it">${mult > 1 ? "▲" : "▼"}</span>`;
-      return {c, have, t, lo, cls, below, over, fillPct, tickPct, minPct, styleTag, srcNote};
+      const stateKey = `${g}:${c}`;
+      const fromPct = Object.prototype.hasOwnProperty.call(previous, stateKey)
+        ? previous[stateKey] : fillPct;
+      const deltaPct = fillPct - fromPct;
+      next[stateKey] = fillPct;
+      return {c, have, t, lo, cls, below, over, fillPct, fromPct, deltaPct,
+              tickPct, minPct, styleTag, srcNote};
     });
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
@@ -11677,9 +11749,11 @@ function renderGroups(){
          box clips on purpose) — clamp it, keeping 1px for the round cap */
       const tk = ringTick(cx, cy, r, x.tickPct / 100, Math.min(sw / 2 + 2, H - cy - r - 1));
       const mk = ringTick(cx, cy, r, x.minPct / 100, Math.min(sw / 2, H - cy - r - 1));
-      const d = ringPath(cx, cy, r, x.fillPct / 100);
+      const d = ringPath(cx, cy, r, 1);
+      const moving = Math.abs(x.deltaPct) >= .05;
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
-        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(capLabel(x.c))} ${x.have.toFixed(1)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>` : "")
+        + `<path class="ring ${x.cls}${moving ? " cap-shift" : ""}" d="${d}" pathLength="100"
+             style="--cap-from:${x.fromPct.toFixed(2)};--cap-to:${x.fillPct.toFixed(2)}" stroke-width="${sw}"><title>${esc(capLabel(x.c))} ${x.have.toFixed(1)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>`
         + (x.minPct < x.tickPct - 0.5 ? `<line class="ring-tick min" x1="${mk[0]}" y1="${mk[1]}" x2="${mk[2]}" y2="${mk[3]}"/>` : "")
         + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
         + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
@@ -11690,11 +11764,18 @@ function renderGroups(){
        contradict the colour (a whole-number have read 6 / 5.6 in amber).
        A space precedes every tag so a narrow column wraps the tags below
        the name instead of pushing the value past the panel edge. */
-    const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
+    const legend = rows.map((x, i) => {
+      const moving = Math.abs(x.deltaPct) >= .5;
+      const direction = x.deltaPct > 0 ? "up" : "down";
+      const delta = moving
+        ? `<span class="cap-delta ${direction}" title="coverage ${direction === "up" ? "increased" : "decreased"} ${Math.abs(x.deltaPct).toFixed(0)} percentage points" aria-hidden="true">${direction === "up" ? "\u2191" : "\u2193"}${Math.abs(x.deltaPct).toFixed(0)}%</span>`
+        : "";
+      return `<li class="cap ${x.below ? "floor-hit" : ""}">
         <span class="cap-sw ${x.cls}"></span>
         <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${esc(capLabel(x.c))}${x.below ? ' <span class="tag floor">below floor</span>' : ""}${x.over ? ' <span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
-        <span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}${x.srcNote}">${x.have.toFixed(1)} / ${x.t.toFixed(1)}</span>
-      </li>`).join("");
+        <span class="cap-reading"><span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}${x.srcNote}">${x.have.toFixed(1)} / ${x.t.toFixed(1)}</span>${delta}</span>
+      </li>`;
+    }).join("");
     return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
       <h3>${g}</h3>
       <svg class="cap-rings" viewBox="0 0 ${W} ${H}" role="img"
@@ -11704,6 +11785,8 @@ function renderGroups(){
       <ul class="cap-legend">${legend}</ul>
     </div>`;
   }).join("");
+  renderGroups._context = contextKey;
+  renderGroups._fills = next;
 }
 function renderWeaknesses(){
   const s = supply(party);
@@ -13670,6 +13753,11 @@ render();
      never the bare index (it used to compare another member after each) */
   let SWAP_W = null;
   let TOOLS_OPEN = true;
+  /* Recommendation detail is an overlay, not conditional document height.
+     Keep its state outside the rebuilt markup so an open read survives a
+     roster update and receives the new pick's evidence in place. */
+  let CONTEXT_OPEN = false;
+  let LAST_PICK_KEY = "";
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
@@ -14325,8 +14413,10 @@ render();
     const need = needs[0] || null;
     const recs = RECS_CUR;
     const top = recs && recs[0];
+    const oldPick = host.querySelector && host.querySelector(".dl-pick:not(.dl-pick-ghost)");
 
     if (!party.length){
+      CONTEXT_OPEN = false; LAST_PICK_KEY = "";
       host.innerHTML = `<div class="dl-status dl-empty">
         <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
         <p>Choose the content, playstyle and size in the setup panel, then add the weapons you already have or forge a full comp. Comp Zaddy will diagnose the gaps before suggesting the next slot.</p>
@@ -14337,6 +14427,7 @@ render();
     }
 
     if (!top){
+      CONTEXT_OPEN = false; LAST_PICK_KEY = "";
       host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
       syncSbIdentity();
       renderPlayerTools(host);
@@ -14382,6 +14473,20 @@ render();
     /* observed killboard context: _app.js owns the cohort math; the note
        appears only when killer-party cohorts echo this pick */
     const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
+    const reason = whySentence(party, top.w);
+    const whyNot = whyNotBlock(top, shownCaps, rep);
+    const contextRead = observed && whyNot ? "Observed + trade-off"
+      : observed ? "Observed evidence"
+      : whyNot ? (rep && rep.verdict === "negative" ? "Cost warning" : "Trade-off noted")
+      : "Full recommendation";
+    const contextPanel = `<div class="dl-context-pop" id="dl-context-pop" role="dialog"
+        aria-label="Recommendation context"${CONTEXT_OPEN ? "" : " hidden"}>
+      <div class="dl-context-head"><span class="dl-kicker">Recommendation context</span>
+        <button type="button" class="dl-context-close" data-dl-context-close aria-label="Close recommendation context">&times;</button></div>
+      <div class="dl-context-why"><span class="dl-kicker">Why this pick</span><p>${reason}</p></div>
+      ${observed || '<div class="dl-context-empty">No matching killboard context for this recommendation.</div>'}
+      ${whyNot || '<div class="dl-context-empty">No notable coverage cost or stacking trade-off.</div>'}
+    </div>`;
     /* alternatives, rehomed: the hidden flank carried the
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
@@ -14398,6 +14503,10 @@ render();
     /* three cards, not one stack: the diagnosis, the
        fight chain and the pick each get their own frame. They ride a single
        column wrapper so their heights stay independent of the grid's rows. */
+    const pickKey = `${party.length}|${top.w}|${top.score.toFixed(4)}|${top.verdict || "ok"}`;
+    const animatePick = !!oldPick && !!LAST_PICK_KEY && LAST_PICK_KEY !== pickKey
+      && !(typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const oldGhost = animatePick ? oldPick.cloneNode(true) : null;
     host.innerHTML = `
       <div class="dl-col1">
         <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
@@ -14420,15 +14529,39 @@ render();
             <ul class="dl-gains">${gains}</ul>
           </div>
         </div>
-        <p>${whySentence(party, top.w)}</p>
-        ${observed}
-        ${whyNotBlock(top, shownCaps, rep)}
+        <p class="dl-pick-reason">${reason}</p>
+        <div class="dl-context-row">
+          <button type="button" class="dl-context-trigger" data-dl-context-toggle
+            aria-expanded="${CONTEXT_OPEN}" aria-controls="dl-context-pop">
+            <span>Context &amp; trade-offs</span><span class="dl-context-read">${contextRead}</span><span class="dl-context-chevron" aria-hidden="true">&#9656;</span>
+          </button>
+        </div>
+        ${contextPanel}
         ${altsHtml}
       </div>
       </div>
       <div class="dl-pressure">${killPressureCard()}${roleCard()}
         <div class="dl-chain-card">${chainLine(top)}</div>
       </div>`;
+    const newPick = host.querySelector && host.querySelector(".dl-pick");
+    if (animatePick && newPick) newPick.classList.add("dl-pick-new");
+    if (oldGhost){
+      oldGhost.classList.remove("dl-pick-new");
+      oldGhost.classList.add("dl-pick-ghost");
+      oldGhost.setAttribute("aria-hidden", "true");
+      oldGhost.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
+      const oldPop = oldGhost.querySelector(".dl-context-pop");
+      if (oldPop) oldPop.remove();
+      const col = host.querySelector(".dl-col3");
+      if (col){
+        col.prepend(oldGhost);
+        oldGhost.addEventListener("animationend", e => {
+          if (e.target === oldGhost) oldGhost.remove();
+        });
+        setTimeout(() => { if (oldGhost.isConnected) oldGhost.remove(); }, 350);
+      }
+    }
+    LAST_PICK_KEY = pickKey;
     syncSbIdentity();
     renderPlayerTools(host);
   }
@@ -14456,6 +14589,21 @@ render();
     if (sw) SWAP_W = sw.dataset.swapto;
   }, true);
   document.addEventListener("click", e => {
+    const contextToggle = e.target.closest && e.target.closest("[data-dl-context-toggle]");
+    const contextClose = e.target.closest && e.target.closest("[data-dl-context-close]");
+    if (contextToggle || contextClose){
+      const open = contextToggle ? !CONTEXT_OPEN : false;
+      CONTEXT_OPEN = open;
+      const trigger = document.querySelector("[data-dl-context-toggle]");
+      const panel = document.getElementById("dl-context-pop");
+      if (trigger) trigger.setAttribute("aria-expanded", String(open));
+      if (panel) panel.hidden = !open;
+      if (open && panel){
+        const close = panel.querySelector("[data-dl-context-close]");
+        if (close) close.focus();
+      } else if (contextClose && trigger) trigger.focus();
+      return;
+    }
     const ch = e.target.closest && e.target.closest("[data-chain-stage]");
     if (ch){
       CHAIN_OPEN = CHAIN_OPEN === ch.dataset.chainStage ? null : ch.dataset.chainStage;
@@ -14465,7 +14613,22 @@ render();
     if (add){ PLAYER_POOL.add(add.dataset.poolAdd); POOL_QUERY = ""; renderDecisionLayer(); return; }
     const rm = e.target.closest && e.target.closest("[data-pool-remove]");
     if (rm){ PLAYER_POOL.delete(rm.dataset.poolRemove); renderDecisionLayer(); return; }
-    if (e.target.closest && e.target.closest("#dl-clear-pool")){ PLAYER_POOL.clear(); renderDecisionLayer(); }
+    if (e.target.closest && e.target.closest("#dl-clear-pool")){ PLAYER_POOL.clear(); renderDecisionLayer(); return; }
+    if (CONTEXT_OPEN && !(e.target.closest && e.target.closest(".dl-context-pop"))){
+      CONTEXT_OPEN = false;
+      const trigger = document.querySelector("[data-dl-context-toggle]");
+      const panel = document.getElementById("dl-context-pop");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+      if (panel) panel.hidden = true;
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || !CONTEXT_OPEN) return;
+    CONTEXT_OPEN = false;
+    const trigger = document.querySelector("[data-dl-context-toggle]");
+    const panel = document.getElementById("dl-context-pop");
+    if (trigger){ trigger.setAttribute("aria-expanded", "false"); trigger.focus(); }
+    if (panel) panel.hidden = true;
   });
   /* toggle doesn't bubble, but it does capture — keep the fold's open state
      across the innerHTML rebuilds every re-render performs */

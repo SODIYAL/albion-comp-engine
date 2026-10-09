@@ -460,8 +460,23 @@ function setUsage(baskets) {
   const std = {target: 2, soft_cap: 4, min: 1, weight: 3};
   const every = {reqs: Object.fromEntries(KEYS.map(k => [k, {...std}])),
                  have: Object.fromEntries(KEYS.map(k => [k, 2.5]))};
-  const groups = groupsOf(render(every));
+  const firstHtml = render(every);
+  const groups = groupsOf(firstHtml);
   const allRows = groups.flatMap(g => g.rows);
+
+  check("supply board: the first paint lands without a fake zero-to-value animation",
+        !/cap-shift|cap-delta/.test(firstHtml));
+  const lower = {reqs: every.reqs, have: Object.fromEntries(KEYS.map(k => [k, 0]))};
+  const downHtml = render(lower);
+  check("supply board: a lower coverage state animates from the prior fill and names the direction",
+        /class="ring [^"]*cap-shift/.test(downHtml)
+        && /class="cap-delta down"/.test(downHtml)
+        && /--cap-from:[1-9]/.test(downHtml));
+  const upHtml = render(every);
+  check("supply board: a higher coverage state uses the same motion path in the other direction",
+        /class="cap-delta up"/.test(upHtml)
+        && /pathLength="100"/.test(upHtml)
+        && /--cap-to:[1-9]/.test(upHtml));
 
   check(`supply board renders every shipped requirement (${KEYS.length})`,
         allRows.length === KEYS.length, `rendered ${allRows.length}: ${allRows.map(r => r.cap).join(",")}`);

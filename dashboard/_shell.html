@@ -1214,7 +1214,18 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
+.cap-reading{position:relative; display:inline-flex; justify-content:flex-end; align-items:center;
+  min-width:104px; padding-right:34px; box-sizing:border-box; white-space:nowrap}
 .cap-val{font-family:var(--mono); font-size:12px; color:var(--ink-3); white-space:nowrap}
+.cap-delta{position:absolute; right:0; top:50%; z-index:1; transform:translateY(-50%);
+  font-family:var(--mono); font-size:9px; line-height:1; color:var(--ink-2);
+  opacity:0; pointer-events:none; animation:cap-delta-read 1.35s var(--ease) both}
+.cap-delta.up{color:#8FA7CF}.cap-delta.down{color:var(--amber)}
+@keyframes cap-delta-read{
+  0%,12%{opacity:0}
+  22%,72%{opacity:1}
+  100%{opacity:0}
+}
 /* ---- capability RINGS ----
    Nested semicircles, one per capability, faceted one panel per group.
    Same ruler as the bars they replace and as the radar (the display ruler):
@@ -1227,7 +1238,13 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    painting over the legend (tests/test_display_math.js guards it) */
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:var(--rule); stroke-linecap:round}
-.cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
+.cap-rings .ring{fill:none; stroke-linecap:round; stroke-dasharray:100;
+  stroke-dashoffset:calc(100 - var(--cap-to)); transition:stroke .18s var(--ease)}
+.cap-rings .ring.cap-shift{animation:cap-ring-settle .48s var(--ease) both}
+@keyframes cap-ring-settle{
+  from{stroke-dashoffset:calc(100 - var(--cap-from))}
+  to{stroke-dashoffset:calc(100 - var(--cap-to))}
+}
 /* four stages (target is the median, standing rule 17; L20): low = under the
    bare minimum winners get away with (red), part = above it but under the
    typical winner (amber), met = typical to the soft cap (green), over =

@@ -148,6 +148,7 @@
    gap applies at EVERY width — below the grid bands these wrappers still
    exist, and without it their cards stacked border-to-border. */
 .dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
+.dl-col3{position:relative}
 @media (min-width:1251px){
   .main{display:grid; align-items:start; gap:18px 24px}
   .main>*{grid-column:1/-1; min-width:0}
@@ -225,6 +226,10 @@
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
   .main{padding:14px 16px 70px; gap:22px}
+  /* Recommendation detail becomes a bottom sheet on touch-sized screens.
+     Fixed positioning keeps its full evidence out of the document flow. */
+  .dl-context-pop{position:fixed;left:10px;right:10px;bottom:12px;top:auto;
+    max-height:min(72vh,620px);border-radius:14px;z-index:70}
 }
 
 /* ---------- masthead / status bar ----------

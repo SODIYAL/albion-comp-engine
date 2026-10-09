@@ -1706,6 +1706,27 @@ check('const LO_ENG_MARK = "e";' in LO_JS and "if (L._eng && fields.some(f => f 
       "L46e the link carries the engine-kit mark, so a reloaded engine kit never reads as a fielded build "
       "(test_loadout_codec)")
 
+print("L47 - roster changes move the instruments, never the page")
+board = seg(APP, "function renderGroups(){", "function renderWeaknesses(){", "L47 ring anchors")
+check('pathLength="100"' in board and "--cap-from:" in board and "--cap-to:" in board
+      and "renderGroups._fills = next;" in board,
+      "L47a capability rings carry their previous fill into the rebuilt SVG instead of flashing through zero")
+check(".cap-rings .ring.cap-shift{animation:cap-ring-settle" in SHELL
+      and "class=\"cap-delta ${direction}\"" in board,
+      "L47b the ring and its signed direction read move together")
+check('class="dl-context-row"' in DECISION_JS and 'id="dl-context-pop"' in DECISION_JS
+      and "${observed}" not in DECISION_JS[DECISION_JS.find('class="dl-pick"'):DECISION_JS.find("${altsHtml}")],
+      "L47c optional observed and trade-off detail lives behind a fixed summary row")
+check(".dl-context-row{height:38px" in DECISION_CSS
+      and ".dl-context-pop{position:absolute" in DECISION_CSS
+      and ".dl-context-pop{position:fixed" in LAYOUT,
+      "L47d recommendation detail overlays the card on desktop and the viewport on phones")
+check("LAST_PICK_KEY" in DECISION_JS and "cloneNode(true)" in DECISION_JS
+      and ".dl-pick-ghost{position:absolute" in DECISION_CSS,
+      "L47e a changed recommendation crossfades over its prior card without opening a blank frame")
+check("prefers-reduced-motion:reduce" in SHELL and "animation:none !important" in SHELL,
+      "L47f the existing reduced-motion contract disables the new motion")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

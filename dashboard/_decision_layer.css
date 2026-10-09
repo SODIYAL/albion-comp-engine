@@ -96,7 +96,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips span:not(.dl-kicker){font-family:var(--mono);font-size:10px;padding:3px 7px;border-radius:99px;
   border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
-.dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick{position:relative;border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick-new{animation:dl-pick-arrive .24s var(--ease) both}
+.dl-pick-ghost{position:absolute;inset:0 0 auto 0;z-index:4;width:100%;box-sizing:border-box;
+  pointer-events:none;animation:dl-pick-leave .24s var(--ease) both}
+@keyframes dl-pick-arrive{from{opacity:.35}to{opacity:1}}
+@keyframes dl-pick-leave{from{opacity:1}to{opacity:0}}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
 /* the pick's identity block: a larger icon, the role
    line tucked under the name, the gains directly beneath it, and Add moved
@@ -109,6 +114,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
 .dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
+/* Four quiet lines keep a new recommendation from pushing every board below
+   it. The complete explanation remains in the context overlay. */
+.dl-pick .dl-pick-reason{height:6.2em;min-height:6.2em;overflow:hidden;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4}
 /* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
    2+1 and made the orphan look like the biggest gain. One LINE each (gain,
    capability, the numbers, the verdict), and each line carries its own
@@ -141,6 +150,30 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
 .dl-score-dim{color:var(--amber)}
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
+/* Optional evidence never enters document flow. The fixed summary row is
+   always present; its panel overlays the card only after a deliberate click. */
+.dl-context-row{height:38px;margin:10px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.dl-context-trigger{width:100%;height:100%;display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:9px;padding:0;background:none;border:0;color:var(--ink-2);
+  text-align:left;font-size:12px}
+.dl-context-trigger:hover,.dl-context-trigger:focus-visible{color:var(--ink);outline:none}
+.dl-context-trigger:focus-visible{box-shadow:inset 0 0 0 1px var(--brass-deep)}
+.dl-context-read{justify-self:end;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;font-family:var(--mono);font-size:9px;color:var(--ink-3)}
+.dl-context-chevron{color:var(--brass-deep);transition:transform .18s var(--ease)}
+.dl-context-trigger[aria-expanded="true"] .dl-context-chevron{transform:rotate(90deg)}
+.dl-context-pop{position:absolute;z-index:7;left:12px;right:12px;bottom:12px;
+  max-height:calc(100% - 24px);overflow:auto;padding:13px 14px;
+  background:rgba(13,13,20,.98);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,201,58,.38);border-radius:12px;box-shadow:var(--shadow-lift)}
+.dl-context-pop[hidden]{display:none}
+.dl-context-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.dl-context-close{margin-left:auto;padding:0 5px;background:none;border:0;border-radius:5px;
+  color:var(--ink-3);font-size:21px;line-height:1}
+.dl-context-close:hover,.dl-context-close:focus-visible{color:var(--ink);background:var(--surface-2);outline:none}
+.dl-context-why{margin-bottom:10px}.dl-context-why p{height:auto;min-height:0;display:block;overflow:visible;margin:5px 0 0}
+.dl-context-pop .obs-note,.dl-context-pop .dl-whynot{margin-top:9px}
+.dl-context-empty{padding:8px 0;border-top:1px solid var(--rule);font-size:11px;line-height:1.45;color:var(--ink-3)}
 /* Add sits at the column's right edge, not against the name - butted up to
    the title it read as part of the wordmark rather than as an action. The
    name keeps its own width so the gap between them stays inert: clicking
@@ -151,7 +184,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
 .dl-alts{margin-top:10px}
-.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px;min-height:111px}
 .dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
   padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
@@ -248,4 +281,3 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-role-chip b{color:var(--brass); font-weight:600}
 .dl-role-flag{font-size:12px; color:var(--amber); margin-top:6px}
 .dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
-

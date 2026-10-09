@@ -19,6 +19,11 @@
      never the bare index (it used to compare another member after each) */
   let SWAP_W = null;
   let TOOLS_OPEN = true;
+  /* Recommendation detail is an overlay, not conditional document height.
+     Keep its state outside the rebuilt markup so an open read survives a
+     roster update and receives the new pick's evidence in place. */
+  let CONTEXT_OPEN = false;
+  let LAST_PICK_KEY = "";
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
@@ -674,8 +679,10 @@
     const need = needs[0] || null;
     const recs = RECS_CUR;
     const top = recs && recs[0];
+    const oldPick = host.querySelector && host.querySelector(".dl-pick:not(.dl-pick-ghost)");
 
     if (!party.length){
+      CONTEXT_OPEN = false; LAST_PICK_KEY = "";
       host.innerHTML = `<div class="dl-status dl-empty">
         <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
         <p>Choose the content, playstyle and size in the setup panel, then add the weapons you already have or forge a full comp. Comp Zaddy will diagnose the gaps before suggesting the next slot.</p>
@@ -686,6 +693,7 @@
     }
 
     if (!top){
+      CONTEXT_OPEN = false; LAST_PICK_KEY = "";
       host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
       syncSbIdentity();
       renderPlayerTools(host);
@@ -731,6 +739,20 @@
     /* observed killboard context: _app.js owns the cohort math; the note
        appears only when killer-party cohorts echo this pick */
     const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
+    const reason = whySentence(party, top.w);
+    const whyNot = whyNotBlock(top, shownCaps, rep);
+    const contextRead = observed && whyNot ? "Observed + trade-off"
+      : observed ? "Observed evidence"
+      : whyNot ? (rep && rep.verdict === "negative" ? "Cost warning" : "Trade-off noted")
+      : "Full recommendation";
+    const contextPanel = `<div class="dl-context-pop" id="dl-context-pop" role="dialog"
+        aria-label="Recommendation context"${CONTEXT_OPEN ? "" : " hidden"}>
+      <div class="dl-context-head"><span class="dl-kicker">Recommendation context</span>
+        <button type="button" class="dl-context-close" data-dl-context-close aria-label="Close recommendation context">&times;</button></div>
+      <div class="dl-context-why"><span class="dl-kicker">Why this pick</span><p>${reason}</p></div>
+      ${observed || '<div class="dl-context-empty">No matching killboard context for this recommendation.</div>'}
+      ${whyNot || '<div class="dl-context-empty">No notable coverage cost or stacking trade-off.</div>'}
+    </div>`;
     /* alternatives, rehomed: the hidden flank carried the
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
@@ -747,6 +769,10 @@
     /* three cards, not one stack: the diagnosis, the
        fight chain and the pick each get their own frame. They ride a single
        column wrapper so their heights stay independent of the grid's rows. */
+    const pickKey = `${party.length}|${top.w}|${top.score.toFixed(4)}|${top.verdict || "ok"}`;
+    const animatePick = !!oldPick && !!LAST_PICK_KEY && LAST_PICK_KEY !== pickKey
+      && !(typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const oldGhost = animatePick ? oldPick.cloneNode(true) : null;
     host.innerHTML = `
       <div class="dl-col1">
         <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
@@ -769,15 +795,39 @@
             <ul class="dl-gains">${gains}</ul>
           </div>
         </div>
-        <p>${whySentence(party, top.w)}</p>
-        ${observed}
-        ${whyNotBlock(top, shownCaps, rep)}
+        <p class="dl-pick-reason">${reason}</p>
+        <div class="dl-context-row">
+          <button type="button" class="dl-context-trigger" data-dl-context-toggle
+            aria-expanded="${CONTEXT_OPEN}" aria-controls="dl-context-pop">
+            <span>Context &amp; trade-offs</span><span class="dl-context-read">${contextRead}</span><span class="dl-context-chevron" aria-hidden="true">&#9656;</span>
+          </button>
+        </div>
+        ${contextPanel}
         ${altsHtml}
       </div>
       </div>
       <div class="dl-pressure">${killPressureCard()}${roleCard()}
         <div class="dl-chain-card">${chainLine(top)}</div>
       </div>`;
+    const newPick = host.querySelector && host.querySelector(".dl-pick");
+    if (animatePick && newPick) newPick.classList.add("dl-pick-new");
+    if (oldGhost){
+      oldGhost.classList.remove("dl-pick-new");
+      oldGhost.classList.add("dl-pick-ghost");
+      oldGhost.setAttribute("aria-hidden", "true");
+      oldGhost.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
+      const oldPop = oldGhost.querySelector(".dl-context-pop");
+      if (oldPop) oldPop.remove();
+      const col = host.querySelector(".dl-col3");
+      if (col){
+        col.prepend(oldGhost);
+        oldGhost.addEventListener("animationend", e => {
+          if (e.target === oldGhost) oldGhost.remove();
+        });
+        setTimeout(() => { if (oldGhost.isConnected) oldGhost.remove(); }, 350);
+      }
+    }
+    LAST_PICK_KEY = pickKey;
     syncSbIdentity();
     renderPlayerTools(host);
   }
@@ -805,6 +855,21 @@
     if (sw) SWAP_W = sw.dataset.swapto;
   }, true);
   document.addEventListener("click", e => {
+    const contextToggle = e.target.closest && e.target.closest("[data-dl-context-toggle]");
+    const contextClose = e.target.closest && e.target.closest("[data-dl-context-close]");
+    if (contextToggle || contextClose){
+      const open = contextToggle ? !CONTEXT_OPEN : false;
+      CONTEXT_OPEN = open;
+      const trigger = document.querySelector("[data-dl-context-toggle]");
+      const panel = document.getElementById("dl-context-pop");
+      if (trigger) trigger.setAttribute("aria-expanded", String(open));
+      if (panel) panel.hidden = !open;
+      if (open && panel){
+        const close = panel.querySelector("[data-dl-context-close]");
+        if (close) close.focus();
+      } else if (contextClose && trigger) trigger.focus();
+      return;
+    }
     const ch = e.target.closest && e.target.closest("[data-chain-stage]");
     if (ch){
       CHAIN_OPEN = CHAIN_OPEN === ch.dataset.chainStage ? null : ch.dataset.chainStage;
@@ -814,7 +879,22 @@
     if (add){ PLAYER_POOL.add(add.dataset.poolAdd); POOL_QUERY = ""; renderDecisionLayer(); return; }
     const rm = e.target.closest && e.target.closest("[data-pool-remove]");
     if (rm){ PLAYER_POOL.delete(rm.dataset.poolRemove); renderDecisionLayer(); return; }
-    if (e.target.closest && e.target.closest("#dl-clear-pool")){ PLAYER_POOL.clear(); renderDecisionLayer(); }
+    if (e.target.closest && e.target.closest("#dl-clear-pool")){ PLAYER_POOL.clear(); renderDecisionLayer(); return; }
+    if (CONTEXT_OPEN && !(e.target.closest && e.target.closest(".dl-context-pop"))){
+      CONTEXT_OPEN = false;
+      const trigger = document.querySelector("[data-dl-context-toggle]");
+      const panel = document.getElementById("dl-context-pop");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+      if (panel) panel.hidden = true;
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || !CONTEXT_OPEN) return;
+    CONTEXT_OPEN = false;
+    const trigger = document.querySelector("[data-dl-context-toggle]");
+    const panel = document.getElementById("dl-context-pop");
+    if (trigger){ trigger.setAttribute("aria-expanded", "false"); trigger.focus(); }
+    if (panel) panel.hidden = true;
   });
   /* toggle doesn't bubble, but it does capture — keep the fold's open state
      across the innerHTML rebuilds every re-render performs */

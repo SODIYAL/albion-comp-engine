@@ -1820,6 +1820,18 @@ function renderGroups(){
   const grouped = new Set(Object.values(GROUPS).flat());
   const other = Object.keys(REQS()).filter(c => !grouped.has(c));
   const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
+  /* `groups` is rebuilt because content switches may change its taxonomy,
+     but a roster edit should still read as ONE continuous instrument. Keep
+     the last displayed fill per capability on the renderer itself, then let
+     each newly-created SVG path animate from that value. This avoids a
+     flash through zero without coupling display history to planner state.
+     A different content/style is a fresh ruler, so it lands immediately. */
+  const contextKey = (typeof CONTENT === "undefined")
+    ? Object.keys(REQS()).sort().join("|")
+    : `${CONTENT}|${STYLE}`;
+  const previous = renderGroups._context === contextKey
+    ? (renderGroups._fills || {}) : {};
+  const next = {};
   $("groups").innerHTML = Object.entries(groups).map(([g, caps]) => {
     const rows = caps.filter(c => REQS()[c]).map(c => {
       const have = s[c] || 0, t = target(c), soft = softCap(c), lo = targetMin(c);
@@ -1856,7 +1868,13 @@ function renderGroups(){
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
         ` <span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "leans on" : "cares less about"} ${esc(capLabel(c))} (weight ${baseW} → ${styledW.toFixed(1)}, ×${mult.toFixed(2)}); the typical number is measured per style at 10+, so it already reflects how this style fights — the weight says how much the planner values it">${mult > 1 ? "▲" : "▼"}</span>`;
-      return {c, have, t, lo, cls, below, over, fillPct, tickPct, minPct, styleTag, srcNote};
+      const stateKey = `${g}:${c}`;
+      const fromPct = Object.prototype.hasOwnProperty.call(previous, stateKey)
+        ? previous[stateKey] : fillPct;
+      const deltaPct = fillPct - fromPct;
+      next[stateKey] = fillPct;
+      return {c, have, t, lo, cls, below, over, fillPct, fromPct, deltaPct,
+              tickPct, minPct, styleTag, srcNote};
     });
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
@@ -1875,9 +1893,11 @@ function renderGroups(){
          box clips on purpose) — clamp it, keeping 1px for the round cap */
       const tk = ringTick(cx, cy, r, x.tickPct / 100, Math.min(sw / 2 + 2, H - cy - r - 1));
       const mk = ringTick(cx, cy, r, x.minPct / 100, Math.min(sw / 2, H - cy - r - 1));
-      const d = ringPath(cx, cy, r, x.fillPct / 100);
+      const d = ringPath(cx, cy, r, 1);
+      const moving = Math.abs(x.deltaPct) >= .05;
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
-        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(capLabel(x.c))} ${x.have.toFixed(1)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>` : "")
+        + `<path class="ring ${x.cls}${moving ? " cap-shift" : ""}" d="${d}" pathLength="100"
+             style="--cap-from:${x.fromPct.toFixed(2)};--cap-to:${x.fillPct.toFixed(2)}" stroke-width="${sw}"><title>${esc(capLabel(x.c))} ${x.have.toFixed(1)} / typical ${x.t.toFixed(1)} (winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)})</title></path>`
         + (x.minPct < x.tickPct - 0.5 ? `<line class="ring-tick min" x1="${mk[0]}" y1="${mk[1]}" x2="${mk[2]}" y2="${mk[3]}"/>` : "")
         + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
         + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
@@ -1888,11 +1908,18 @@ function renderGroups(){
        contradict the colour (a whole-number have read 6 / 5.6 in amber).
        A space precedes every tag so a narrow column wraps the tags below
        the name instead of pushing the value past the panel edge. */
-    const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
+    const legend = rows.map((x, i) => {
+      const moving = Math.abs(x.deltaPct) >= .5;
+      const direction = x.deltaPct > 0 ? "up" : "down";
+      const delta = moving
+        ? `<span class="cap-delta ${direction}" title="coverage ${direction === "up" ? "increased" : "decreased"} ${Math.abs(x.deltaPct).toFixed(0)} percentage points" aria-hidden="true">${direction === "up" ? "\u2191" : "\u2193"}${Math.abs(x.deltaPct).toFixed(0)}%</span>`
+        : "";
+      return `<li class="cap ${x.below ? "floor-hit" : ""}">
         <span class="cap-sw ${x.cls}"></span>
         <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${esc(capLabel(x.c))}${x.below ? ' <span class="tag floor">below floor</span>' : ""}${x.over ? ' <span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
-        <span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}${x.srcNote}">${x.have.toFixed(1)} / ${x.t.toFixed(1)}</span>
-      </li>`).join("");
+        <span class="cap-reading"><span class="cap-val" title="have / typical winner \u2014 winners field ${x.lo.toFixed(1)} to ${softCap(x.c).toFixed(1)}${x.srcNote}">${x.have.toFixed(1)} / ${x.t.toFixed(1)}</span>${delta}</span>
+      </li>`;
+    }).join("");
     return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
       <h3>${g}</h3>
       <svg class="cap-rings" viewBox="0 0 ${W} ${H}" role="img"
@@ -1902,6 +1929,8 @@ function renderGroups(){
       <ul class="cap-legend">${legend}</ul>
     </div>`;
   }).join("");
+  renderGroups._context = contextKey;
+  renderGroups._fills = next;
 }
 function renderWeaknesses(){
   const s = supply(party);
