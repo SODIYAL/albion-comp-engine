@@ -154,16 +154,10 @@ Each is decidable today from evidence already in the repo.
   artifacts, which read 2.6-2.7%) against the guild's "2 Royals per 10".
   Increment 3b's second half; then mechanism pairing rules for effect
   carriers. (V: 09b, Other numbers; roles-design.md)
-- **Kill-vs-death contrast** in kit doctrine: needs a win-lift decision before
-  it orders anything (effectiveness claims are reserved for win-lift,
-  standing rule 7). (V: 09b, Coherent builds)
 - **Item-power gating**: the harvest's `item_power` is the API's average; the
   per-slot tier lives only in the raw cache. Five questions: which slot
   decides "geared", tier line or relative, per size band, quality, doctrine
   votes only. (V: 09b, Seat pooling)
-- **A dps seat for cloth Lifecurse** (9% of winning builds, Assassin Hood /
-  Soldier Helmet kits; the book gives the 1H curse line no dps seat). (V:
-  09a, THE KIT AUDIT addendum)
 - **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
   Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
 - **`MAIN_FROSTSTAFF_AVALON` (Chillhowl) >= 10 exclusion**: its stated premise
@@ -186,12 +180,6 @@ Each is decidable today from evidence already in the repo.
   Q14 ordering rule; no public numeric source exists. Open inside it: the
   unit-scale of one dedicated attacker, expected targets per content size
   for the escalation curve (caps at 8). (Q14)
-- **Asymmetric numbers at 21+** (Q11 / Q13): Disarray is a no-op in a mirror
-  fight; CC Escalation vs Disarray vs forced-dismount immunity removed at 21+
-  need netting together. Parked until templates gain an enemy-size field;
-  the app models no enemy (standing rule 11).
-- **A dive / assassination style**: only as a 20+-size style, if ever
-  (curation judgment). Not started.
 - **A no-row piece as the dressed forge's one alternative**: kit_variants
   takes as v1 the first in-band piece whose top weighted capability
   differs from v0's, and a piece with no row has none, so in 19 band x

@@ -216,7 +216,7 @@ Code and yaml cite these by Q-number. Every question is closed unless
 - **Q8** CC Escalation duration curve — from the dumps, same per-target factor as damage (0.08; Spirit Animal 0.25); published nowhere else.
 - **Q9** per-spell escalation eligibility — extracted from the dumps, 174/559.
 - **Q10** uniform AoE-class escalation — REFUTED; per-spell gating is the open item in `BACKLOG.md`.
-- **Q11 / Q13** asymmetric numbers at 21+ — OPEN, `BACKLOG.md`; Disarray is a no-op in a mirror fight.
+- **Q11 / Q13** asymmetric numbers at 21+ — CLOSED under standing rule 11 (the planner assumes a mirror fight, where Disarray is a no-op); recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens it.
 - **Q14** per-style mechanics numbers — delegated to curation under the ordering rule (attackers-per-target and expected-targets-hit are style properties); the enemy model in `BACKLOG.md`.
 - **Q15** weapon playstyle affinity — derive + curate exceptions: `derive_style_fit` + `style_overrides.yaml`; audit `out/style_fit_report.json`; MetaBattle cross-check in `build_dataset.py`.
 - **Q16** content-absolute physics — the `size_physics` tables (`st_value_mult`, `count_mult`, composition.yaml) match the wiki's Resilience and AoE Escalation pages (25% ST value at 20-man, 20% at 30+; ×1.6 clump at 20, ×2.0 at 40+); F8/T15/T16 pin them. The earlier `grow()` build is superseded.
