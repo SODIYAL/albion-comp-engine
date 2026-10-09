@@ -210,17 +210,12 @@ Each is decidable today from evidence already in the repo.
   ("no build fields it at 10+") is weaker since "AvA Raid" (10 players)
   fields one; the record is candidate, the exclusion stands. (V: 08, Corpus
   ingestion)
-- **Chillhowl / Stillgaze / Iron-clad menus**: off every seat pending a
-  decision (Stillgaze has stopper_tank; the other two stay out).
 - **Hellfire Hands in kite generation**: its E is unconditional so the derived
   rule passes it; the clap exclusion is a clap-scoped override. (V: 08, KITE
   EXTENSION)
 - **`brawl_clap` target_mults**: undecided, n=3 declared; every clap row beyond
   burst_aoe likewise (peel / disengage flipped sign between samples). (V:
   08, Per-style targets round 2)
-- **Whether 10-14 should field the Exalted Staff** (7% of winners do; one
-  curated 10-man does); the lever is the ramp anchors, never a weapon rule.
-  (V: 09b, Cost gate retired)
 - **Per-spell `burst_aoe` escalation gating** (Q10 refuted the uniform AoE
   class; factors are extracted on `cap_delivery.escalation`, not wired).
   Its stated precondition — a styled validation pass — is met: rounds 1-4
@@ -645,11 +640,6 @@ kit its saved link holds.
   co-member's character, display name, server and weapon lists. A member
   who wants to keep a secondary list private has no switch (curation
   judgment: a CTA tool exists to show a caller what members play).
-- **The caller's controls as their own column**: the sheet keeps the move
-  list and the record's mark on one line by sizing the weapon and role
-  columns; a window under the sheet's full width wraps them. A fifth
-  column for the caller's controls is the next step if callers work on
-  narrow windows.
 - **The portal page's chrome**: the headings, labels, chips and radii
   follow the planner (the planner's chip, its radius set). The tokens are
   still a copy inside `_portal.html`; a shared stylesheet is the proper
