@@ -121,19 +121,6 @@ Each is decidable today from evidence already in the repo.
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering
   changes many pinned first picks — a maintainer decision, not started.
-- **Is one unit of shred "pierce on the clump" in a 7-man?** The kill
-  lights bar on the bare minimum ("enough to kill" is a minimum question,
-  standing rule 17), and castle_outpost's refreshed three-comp fit says the
-  least winning 7-man brought exactly one unit of resist_shred — so the
-  burst trio (Longbow / Witchwork / Permafrost, one unit) now reads pierce
-  GREEN where the earlier pin (T25b) said red. Thin evidence, not a
-  semantic call: decide it (a fourth castle-outpost comp would settle it),
-  or raise the content `min` for resist_shred by hand. (V: 09b, Target is
-  the median; T25b)
-- **EU server in the harvest**: would double the 25+ corpus but mixes a second
-  server's meta into rows meant to describe the maintainer's own fights.
-  Review deferred to the date the log entry records. (V: 09b, Coverage, not
-  speed)
 - **Single-party forges past 20**: no page forges a party past 20 (the
   planner forges each party of a zerg at its own plan, capped at 20; the
   sheet's engine read recommends, it never forges), so three readings of

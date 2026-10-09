@@ -619,14 +619,16 @@ def run():
     # BARE MINIMUM now (enough to kill is a minimum question). The
     # trio's one unit of shred meets castle_outpost's minimum because the
     # refreshed three-comp fit says the least winning 7-man brought
-    # exactly one — so pierce turned GREEN here. Thin evidence (three
-    # comps), recorded as an open question (BACKLOG), not a
-    # semantic change; the separation the pin is about (burst green,
-    # heal-cut red) stands.
+    # exactly one — so pierce reads GREEN here: one unit of shred is
+    # pierce on the clump in a 7-man (maintainer decision; the measured
+    # minimum stands, never a hand number). The separation the pin is
+    # about (burst green, heal-cut red) stands.
     check("T25b kill pressure separates the lights: a burst trio is green "
-          "on burst, red on heal-cut — and none of it scores "
+          "on burst and on pierce (one unit of shred meets the 7-man "
+          "minimum), red on heal-cut — and none of it scores "
           "(fitness unchanged)",
           kp_trio["burst"]["ok"]
+          and kp_trio["pierce"]["ok"]
           and not kp_trio["heal_cut"]["ok"]
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"trio={{'pierce': {kp_trio['pierce']['ok']}, "
