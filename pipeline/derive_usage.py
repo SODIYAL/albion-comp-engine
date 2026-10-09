@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """
 Fight-size equipment prevalence and killer-party cohorts, derived from the
-killer-party artifact (out/party_rosters.json.gz). Offline and
-deterministic: the same artifact writes the same bytes. A fold step
-(pipeline/fold_harvest.ps1), never part of a build.
+full killer-party artifact (out/party_rosters_full.json.gz, every
+population, local: the committed artifact keeps the battle list and the
+Dragon Portal alone, rosters_io). Offline and deterministic: the same
+artifact writes the same bytes. A fold step (pipeline/fold_harvest.ps1),
+never part of a build; it fails closed when the full artifact is missing
+(sample_parties.py --pages 0 writes it).
 
 The artifact it writes, out/weapon_usage_v2.json, is the observed-evidence
 layer behind the planner's killboard strip and the recurring observed
@@ -57,7 +60,7 @@ A killer party scored at least one kill (the harvest's inclusion rule),
 so cohorts lean to the winning side; the copy on the page says "killer
 parties", never "winning comps".
 
-Run:  py -3 pipeline/derive_usage.py [path/to/party_rosters.json.gz]
+Run:  py -3 pipeline/derive_usage.py [path/to/party_rosters_full.json.gz]
 """
 import os
 import sys
@@ -174,7 +177,7 @@ def derive(doc, known):
             "UNKNOWN. Prevalence is not effectiveness; no win/loss "
             "dimension is read. Display evidence only; never feeds "
             "scoring."),
-        "source": "out/party_rosters.json.gz (every population)",
+        "source": "out/party_rosters_full.json.gz (every population; local, never committed)",
         "window": {"days": WINDOW_DAYS, "from": start, "to": newest,
                    "anchored_on": "the newest battle in the artifact"},
         "sampling_frame": {
@@ -203,9 +206,11 @@ def derive(doc, known):
 
 def main():
     import json
-    src = sys.argv[1] if len(sys.argv) > 1 else rosters_io.path()
+    src = sys.argv[1] if len(sys.argv) > 1 else rosters_io.full_path()
     if not os.path.exists(src):
-        print(f"FAIL: {src} missing - nothing to derive from")
+        print(f"FAIL: {src} missing - nothing to derive from (the usage reads "
+              f"every population; sample_parties.py --pages 0 writes the full "
+              f"artifact beside the committed one)")
         return 2
     if not os.path.exists(DATASET):
         print("FAIL: out/dataset-latest.json missing - run build_dataset.py "

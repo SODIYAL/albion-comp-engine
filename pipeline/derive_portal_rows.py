@@ -107,9 +107,12 @@ OWN_POOLS = ("trio", "seven", "large")   # the pools that carry rows of their ow
 OPTIONAL_POOLS = ("five", "seven", "large")   # the pools whose minority-fielded capabilities carry an optional row
 RAMP_TAKEOVER = 10    # where the style x size rows carry the targets
 # The pools that carry a fielded list (at the floor). The 15-20 pool
-# carries none: a list of the weapons in five of 40 rosters would gate
-# generation at 20 on thin evidence.
+# carries none until it holds LARGE_SHAPE_AT distinct rosters: a list of
+# the weapons in five of 40 rosters would gate generation at 20 on thin
+# evidence. At the threshold its fielded list and role counts of its own
+# are due (maintainer decision; this step and the fold report say so).
 FIELDED_POOLS = ("trio", "five", "seven")
+LARGE_SHAPE_AT = 200
 MIN_FIELDED_ROSTERS = 5   # distinct rosters (derive_meta_prior MIN_PAIR_PARTIES, the honesty gate)
 MIN_FIELDED_ORGS = 3      # ...across this many distinct guild-sets (MIN_PAIR_ORGS)
 SIGNAL_OF_TOP = 0.05      # share of the top weapon's rosters (derive_meta_prior MIN_PRIOR)
@@ -466,6 +469,9 @@ def main():
         if m:
             roles = ", ".join(f"{r} {m['with_role'][r] / m['n']:.0%}" for r in ("healer", "frontline", "support"))
         print(f"{name:<6} parties {len(ps):>5}  distinct rosters {distinct[name]:>5}  with a {roles}")
+    print(("DUE: the 15-20 pool's fielded list and role counts (BACKLOG): " if distinct["large"] >= LARGE_SHAPE_AT
+           else "the 15-20 pool's fielded list and role counts wait for ")
+          + f"{LARGE_SHAPE_AT} distinct rosters; it holds {distinct['large']}")
     if distinct[FIT_POOL] < FLOOR:
         sys.exit(f"the {FIT_POOL} pool holds {distinct[FIT_POOL]} distinct rosters, under the floor of {FLOOR}: nothing to fit")
     ramp_ok = distinct[RAMP_POOL] >= FLOOR

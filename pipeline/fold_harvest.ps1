@@ -17,7 +17,8 @@
 # The fold is OFFLINE: every step reads the cache or an artifact derived
 # from it. The observed-evidence artifact (weapon_usage_v2.json: the
 # prevalence strip, the killer-party cohorts and the observed families)
-# is derived from the rosters artifact by derive_usage.py, after
+# is derived from the full rosters artifact (party_rosters_full.json.gz,
+# every population, local) by derive_usage.py, after
 # build_dataset (weapon keys are filtered against the catalogue). Display
 # only, never a scoring input.
 

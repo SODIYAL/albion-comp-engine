@@ -1628,6 +1628,13 @@ def t_portal_fielded():
                   and all(w in cat for w in p["weapons"]) for p in pf.values())
           and th == {"min_rosters": 5, "min_guild_sets": 3, "share_of_top": 0.05},
           f"{ {k: len(p['weapons']) for k, p in pf.items()} } thresholds={th}")
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import derive_portal_rows as dpr
+    large_n = ((tpl.get("fit") or {}).get("pools") or {}).get("large", {}).get("distinct", 0)
+    check("F35a2 the 15-20 pool carries no fielded list until it holds 200 distinct dominant rosters "
+          "(the derive step and the fold report count it against the threshold)",
+          dpr.LARGE_SHAPE_AT == 200 and "large" not in dpr.FIELDED_POOLS and "15-20" not in pf,
+          f"threshold={dpr.LARGE_SHAPE_AT} large pool={large_n} distinct rosters")
     classes = lambda ws: {e5.role_of(w) for w in ws}
     check("F35b every list keeps a healer, a frontline and a damage dealer (the roles the pool's rows ask for)",
           all({"healer", "frontline", "dps"} <= classes(p["weapons"]) for p in pf.values()),

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Content tagging in the harvester (pipeline/sample_parties.py): the
 KillArea tally, the marker rule (an item only found inside one content,
-read off the victim's inventory), the tag a record reads, and the
-kill-feed record rebuilt as a pure function of its events. Pure
-functions, no network, no cache. Script-style: exit 0 = pass."""
+read off the victim's inventory), the tag a record reads, the kill-feed
+record rebuilt as a pure function of its events, and the population the
+committed artifact keeps. Pure functions, no network, no cache.
+Script-style: exit 0 = pass."""
 import collections
 import os
 import sys
@@ -11,6 +12,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+import rosters_io  # noqa: E402
 import sample_parties as sp  # noqa: E402
 
 FAILURES = []
@@ -106,6 +108,41 @@ check("C4c the record carries both tallies and the tag reads the marker, never t
       and r1["content_marks"] == {"ancient_lands": 1, "ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1}
       and sp.content_tag(r1["kill_areas"], r1["content_marks"]) == "ancient_lands"
       and sp.content_tag({"OPEN_WORLD": 1}, {"ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1}) == "open_world")
+
+# C5 the committed artifact keeps what the build reads; every record stays in the full one
+def battle(bid, source, content, total):
+    return {"battle": bid, "total_players": total, "source": source, "content": content,
+            "coverage": None, "parties": 1}
+
+
+BATTLES = [battle(1, "battle_list", "open_world", 30), battle(2, "events_poll", "open_world", 3),
+           battle(3, "events_poll", "ancient_lands", 5), battle(4, "battle_list", "unknown", 25)]
+PARTIES = [{"battle": b["battle"], "index": 0, "content": b["content"], "size": 2,
+            "known_weapons": 2, "weapons": ["2H_BOW", "2H_HOLYSTAFF"]} for b in BATTLES]
+BUILDS = [{"battle": b["battle"], "weapon": "2H_BOW", "armour_class": ac, "item_power": 1200.0,
+           "slots_filled": 6} for b, ac in zip(BATTLES, ("leather", "cloth", "leather", "plate"))]
+check("C5a the committed population is every battle-list battle and every Dragon Portal battle; "
+      "a record from before the fields existed reads battle-list",
+      [b["battle"] for b in BATTLES if rosters_io.committed(b)] == [1, 3, 4]
+      and rosters_io.committed({"battle": 9}))
+keep = {b["battle"] for b in BATTLES if rosters_io.committed(b)}
+full = sp.rosters_doc(BATTLES, PARTIES, BUILDS, "full")
+kept = sp.rosters_doc([b for b in BATTLES if b["battle"] in keep], [p for p in PARTIES if p["battle"] in keep],
+                      [x for x in BUILDS if x["battle"] in keep], "committed")
+check("C5b each file carries its own records, summary and armour table: the poll's open-world gank is in the full one alone",
+      full["summary"]["battles"] == 4 and kept["summary"]["battles"] == 3
+      and kept["summary"]["builds"] == 3 and {p["battle"] for p in kept["parties"]} == keep
+      and full["weapon_armour"]["2H_BOW"]["cloth"] == 1 and kept["weapon_armour"]["2H_BOW"]["cloth"] == 0
+      and kept["weapon_armour"]["2H_BOW"]["n"] == 3,
+      f"full={full['summary']} kept={kept['summary']}")
+with open(os.path.join(ROOT, ".gitignore"), encoding="utf-8") as f:
+    ignored = {ln.strip() for ln in f if ln.strip() and not ln.startswith("#")}
+with open(os.path.join(ROOT, "pipeline", "derive_usage.py"), encoding="utf-8") as f:
+    usage_src = f.read()
+check("C5c the full artifact stays local and feeds the usage derivation: .gitignore lists it and never the "
+      "committed one, and derive_usage reads it by default",
+      "pipeline/out/" + rosters_io.FULL_NAME in ignored and "pipeline/out/" + rosters_io.NAME not in ignored
+      and "rosters_io.full_path()" in usage_src)
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")

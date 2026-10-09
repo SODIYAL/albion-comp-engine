@@ -499,7 +499,13 @@ a fold would lose the artifact its tables were derived from.
   `party_store.py` module is the only reader and writer, and
   `py -3 pipeline/party_store.py` prints the count by source) and
   `out/party_rosters.json.gz`. This is the kit-doctrine and style × size
-  evidence. Rerun order afterwards: audit -> derive_style_bands ->
+  evidence. The committed artifact keeps the populations the build reads,
+  every battle-list battle and every Dragon Portal battle
+  (`rosters_io.committed`); the same pass writes every record, the
+  kill-feed poll's open-world fights included, to
+  `out/party_rosters_full.json.gz`, which stays local (gitignored: two
+  thirds of the builds, past GitHub's 100 MiB file limit) and which
+  `derive_usage.py` alone reads. Rerun order afterwards: audit -> derive_style_bands ->
   derive_portal_rows -> derive_party_styles -> derive_meta_prior -> derive_role_counts ->
   derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a
   fight-size band (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band)
@@ -615,7 +621,8 @@ a fold would lose the artifact its tables were derived from.
 - `pipeline/derive_usage.py` — the observed-evidence artifact
   (`out/weapon_usage_v2.json`: the prevalence strip, the cohorts, and
   through `build_cohort_families.py` the observed families), derived
-  offline from `party_rosters.json.gz`. The party harvest is the one
+  offline from the full artifact, `party_rosters_full.json.gz` (every
+  population, local; it fails closed without it). The party harvest is the one
   killboard sampler; the two albionbb samplers it replaced were weaker
   views of the same fights. The frame: every harvested battle of 6+
   players that started in the 28 days before the NEWEST battle in the

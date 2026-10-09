@@ -35,6 +35,10 @@ pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
 # the plain artifact is history: the harvest writes party_rosters.json.gz (2026-09-11)
 pipeline/out/party_rosters.json
+# the full killer-party artifact (every population, the kill-feed poll's
+# open-world fights included) is derived from the cache and stays local;
+# the committed party_rosters.json.gz keeps what the build reads
+pipeline/out/party_rosters_full.json.gz
 
 # derive_meta_prior.py --all-battles audit copy (never shipped)
 pipeline/out/meta_prior-all-battles.json

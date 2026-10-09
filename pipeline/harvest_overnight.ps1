@@ -22,13 +22,15 @@
 # 502s are the API, 429s mean lower --workers.
 #
 # It does NOT rebuild the dataset or commit: the harvest lands in
-# pipeline/out/party_cache.sqlite (gitignored) and pipeline/out/party_rosters.json.gz;
+# pipeline/out/party_cache.sqlite (gitignored), pipeline/out/party_rosters.json.gz
+# (the populations the build reads) and pipeline/out/party_rosters_full.json.gz
+# (every record, gitignored);
 # rebuilding, the gate list and the audit stay a reviewed, in-session step
 # (pipeline/README.md, CLAUDE.md "Kits are what winners wear").
 #
 # This harvest is the ONE killboard sampler: weapon_usage_v2.json
-# (prevalence, cohorts, families) is derived from its rosters artifact by
-# pipeline/derive_usage.py at the fold.
+# (prevalence, cohorts, families) is derived from its full rosters artifact
+# by pipeline/derive_usage.py at the fold.
 #
 # Registered as a Windows scheduled task (daily 03:00 AND 15:00, current
 # user, 6 h limit, runs late if the machine was asleep, HIDDEN window) from

@@ -101,7 +101,11 @@ the artifact goes through `rosters_io.load`, whose default population is
 the battle-list records only; a derive step that wants the poll's
 records asks for them by `source` and `content`. The shipped tables
 therefore keep the population they were fitted on until a decision
-admits another (BACKLOG, the Dragon Portal evidence unit).
+admits another (BACKLOG, the Dragon Portal evidence unit). The
+committed artifact keeps the battle list and the Dragon Portal records
+(`rosters_io.committed`); every record, the poll's open-world ganks
+included, is in the full artifact beside it, which stays local
+(rosters_io, TWO FILES, ONE PASS).
 
 STORAGE. A kill-feed record keeps its events SLIMMED (`slim_event`: ids,
 stamps, the classifier fields, every combat role's name / guild /
@@ -843,7 +847,7 @@ def analyze(known):
             if f"ARMOR_{cls}" in k:
                 return cls.lower()
         return None
-    builds, by_weapon = [], {}
+    builds = []
     for bid, rec in st.iter_records(ids=cache_ids):
         # PARTY SIZE per build (the Grailseeker case): the
         # battle floor admits 2-8 man gank parties fighting inside a
@@ -889,15 +893,56 @@ def analyze(known):
                            if nm else None),
                 "slots_filled": bd.get("slots_filled"),
                 "gear": {s: strip(v) for s, v in g.items() if v}})
-            e = by_weapon.setdefault(w, {"n": 0, "cloth": 0, "leather": 0,
-                                         "plate": 0, "ip_sum": 0.0,
-                                         "ip_n": 0})
-            e["n"] += 1
-            if ac:
-                e[ac] += 1
-            if bd.get("item_power"):
-                e["ip_sum"] += bd["item_power"]
-                e["ip_n"] += 1
+    st.close()
+    # TWO FILES, ONE PASS (rosters_io): the full artifact keeps every
+    # record and stays local; the committed one keeps the battle list and
+    # the Dragon Portal, the populations the build reads. Each carries its
+    # own summary and armour table.
+    full = rosters_doc(battles, parties, builds, "full")
+    keep = {b["battle"] for b in battles if rosters_io.committed(b)}
+    out = rosters_doc([b for b in battles if b["battle"] in keep],
+                      [p for p in parties if p["battle"] in keep],
+                      [bd for bd in builds if bd["battle"] in keep],
+                      "committed")
+    rosters_io.dump(full, rosters_io.full_path(OUT))
+    rosters_io.dump(out, rosters_io.path(OUT))      # gzipped, deterministic
+    s = out["summary"]
+    print(f"\n{s['battles']} battles, {s['parties']} distinct parties "
+          f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "
+          f"every member's weapon known)")
+    print(f"median per-battle gear coverage: {s['median_coverage']}")
+    print(f"{s['builds']} observed BUILDS ({s['builds_full_kit']} with 6+ "
+          f"equipment slots), armour evidence on "
+          f"{s['weapons_with_armour_evidence']} weapons")
+    print(f"wrote out/{rosters_io.NAME} (the battle list and the Dragon "
+          f"Portal) and out/{rosters_io.FULL_NAME} "
+          f"({full['summary']['battles']} battles, every record; local)")
+
+
+POPULATIONS = {
+    "committed": ("every battle-list battle and every ancient_lands battle "
+                  "(rosters_io.committed), parties and builds following their "
+                  "battle; out/party_rosters_full.json.gz, local, keeps every "
+                  "record"),
+    "full": "every record in the cache; local, never committed",
+}
+
+
+def rosters_doc(battles, parties, builds, population):
+    """One population's artifact: its records, the weapon -> armour-class
+    evidence over its builds, and its summary. Pure: the same records in
+    the same order give the same document."""
+    by_weapon = {}
+    for b in builds:
+        e = by_weapon.setdefault(b["weapon"], {"n": 0, "cloth": 0,
+                                               "leather": 0, "plate": 0,
+                                               "ip_sum": 0.0, "ip_n": 0})
+        e["n"] += 1
+        if b["armour_class"]:
+            e[b["armour_class"]] += 1
+        if b.get("item_power"):
+            e["ip_sum"] += b["item_power"]
+            e["ip_n"] += 1
     for w, e in by_weapon.items():
         seen_ac = e["cloth"] + e["leather"] + e["plate"]
         e["armour_majority"] = (max(("cloth", "leather", "plate"),
@@ -909,8 +954,9 @@ def analyze(known):
                                 if e["ip_n"] else None)
         e.pop("ip_sum", None)
 
-    out = {
+    return {
         "kind": "party_rosters",
+        "population": POPULATIONS[population],
         "builds": sorted(builds, key=lambda b: (b["weapon"], b["battle"])),
         "weapon_armour": dict(sorted(by_weapon.items())),
         "semantics": (
@@ -950,18 +996,6 @@ def analyze(known):
             "unreadable_cache_files": 0,
         },
     }
-    st.close()
-    path = rosters_io.path(OUT)
-    rosters_io.dump(out, path)      # gzipped, deterministic
-    s = out["summary"]
-    print(f"\n{s['battles']} battles, {s['parties']} distinct parties "
-          f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "
-          f"every member's weapon known)")
-    print(f"median per-battle gear coverage: {s['median_coverage']}")
-    print(f"{s['builds']} observed BUILDS ({s['builds_full_kit']} with 6+ "
-          f"equipment slots), armour evidence on "
-          f"{s['weapons_with_armour_evidence']} weapons")
-    print(f"wrote out/{rosters_io.NAME}")
 
 
 def main():

@@ -34,6 +34,7 @@ ARTIFACTS = {
     "bands": "pipeline/templates/style_bands.yaml",
     "prior": "pipeline/out/meta_prior.json",
     "board": "pipeline/out/style_roster_evidence.json",
+    "portal": "pipeline/templates/ancient_lands.yaml",
 }
 UNIFORM_VOTERS = 35   # KB_UNI_MIN in build_dataset.py (distinct-player voters)
 
@@ -143,7 +144,8 @@ def main():
         s_["ancient_lands_parties"] = len(pd.get("parties") or [])
     lines += ["## Corpus (the battle-list population the derive steps read)", "",
               "| unit | before | after |", "|---|---|---|"]
-    for k, label in (("battles", "battles"), ("battles_in_file", "battles in the file, every source"),
+    for k, label in (("battles", "battles"),
+                     ("battles_in_file", "battles in the committed file (the battle list and the Dragon Portal)"),
                      ("parties", "killer parties"),
                      ("builds", "observed builds"),
                      ("builds_full_kit", "builds with a full kit"),
@@ -151,6 +153,17 @@ def main():
                      ("ancient_lands_parties", "Dragon Portal killer parties (kill-feed, not yet read)")):
         lines.append(f"| {label} | {so.get(k)} | {sn.get(k)} |")
     lines.append("")
+    # the 15-20 portal pool takes its fielded list and role counts at
+    # derive_portal_rows.LARGE_SHAPE_AT distinct rosters
+    import yaml
+    import derive_portal_rows
+    large = [(((yaml.safe_load(open(p, encoding="utf-8")) or {}).get("fit") or {})
+              .get("pools") or {}).get("large", {}).get("distinct")
+             for p in (old["portal"], new["portal"])]
+    due = (large[1] or 0) >= derive_portal_rows.LARGE_SHAPE_AT
+    lines += [f"Dragon Portal 15-20 pool: {large[0]} -> {large[1]} distinct dominant rosters; "
+              + ("its fielded list and role counts are DUE" if due else "its fielded list and role counts wait for")
+              + f" {derive_portal_rows.LARGE_SHAPE_AT} (BACKLOG).", ""]
 
     # ---- style board ----
     bo, bn = load_json(old["board"]), load_json(new["board"])

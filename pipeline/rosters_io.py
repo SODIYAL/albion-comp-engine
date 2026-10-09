@@ -1,19 +1,27 @@
-"""The killer-party artifact on disk: out/party_rosters.json.gz.
+"""The killer-party artifacts on disk: out/party_rosters.json.gz and
+out/party_rosters_full.json.gz.
 
-One loader for every reader and the one writer (the file keeps
-growing). The artifact is the harvest's derived evidence -
-every build, party and battle summary the doctrine, the style rows and
-the meta prior are mined from - and it grows ~10 KB per harvested battle:
-77 MB raw at 7,652 battles, past GitHub's 100 MB per-file push limit at
-~10,000, which the twice-daily harvest reaches in days. Gzipped it is
-4.6 MB, ~24 MB at 40,000 battles. The compressed bytes are what the hash
-gates in derive_party_styles / derive_meta_prior / build_dataset record
-and compare, so provenance is unchanged: the same content writes the same
-bytes (gzip header mtime pinned to 0, one compression level).
+One loader for every reader and the one writer (the files keep growing).
+The artifact is the harvest's derived evidence - every build, party and
+battle summary the doctrine, the style rows and the meta prior are mined
+from. The compressed bytes are what the hash gates in derive_party_styles
+/ derive_meta_prior / build_dataset record and compare: the same content
+writes the same bytes (gzip header mtime pinned to 0, one compression
+level).
+
+TWO FILES, ONE PASS. The COMMITTED artifact (NAME) keeps the populations
+the build and the shipped tables read (`committed`): every battle-list
+battle and every Dragon Portal battle, parties and builds following their
+battle. The FULL artifact (FULL_NAME, gitignored) keeps every record,
+the kill-feed poll's open-world fights included (two-thirds of the
+builds on the cache the split was measured on: 92.3 MB gzipped against
+29.0 MB for the committed population, near GitHub's 100 MiB per-file
+push limit); only derive_usage.py, a display-only fold step, reads it.
+Both are derived from the cache, which stays the source of truth.
 
 `load` sniffs the gzip magic and falls back to plain JSON, so a tool that
 reads an older commit's artifact out of git (compare_fold) keeps working
-across the switch. Nothing else should open the file directly.
+across the switch. Nothing else should open the files directly.
 """
 import gzip
 import hashlib
@@ -23,6 +31,7 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 NAME = "party_rosters.json.gz"
+FULL_NAME = "party_rosters_full.json.gz"   # every record; local, never committed
 LEGACY_NAME = "party_rosters.json"   # the pre-gzip plain artifact
 
 
@@ -30,8 +39,21 @@ def path(out_dir=None):
     return os.path.join(out_dir or OUT, NAME)
 
 
+def full_path(out_dir=None):
+    return os.path.join(out_dir or OUT, FULL_NAME)
+
+
 def exists(p=None):
     return os.path.exists(p or path())
+
+
+def committed(battle):
+    """True for a battle the committed artifact keeps: a battle-list
+    battle (the population every shipped table was fitted on) or a Dragon
+    Portal battle (the pools' rows, role counts and stats). The kill-feed
+    poll's other records stay in the full artifact."""
+    return ((battle.get("source") or "battle_list") == "battle_list"
+            or (battle.get("content") or "unknown") == "ancient_lands")
 
 
 def load(p=None, source="battle_list", content=None):

@@ -13,13 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The Dragon Portal's 15-20 pool beyond its rows**: the pool reads
-  rows of its own, fitted at the floor (40 distinct rosters; V: 10, The
-  15-20 portal pool reads its own rows). It carries no fielded list and
-  no role counts of its own: generation at 15-20 keeps the open-world
-  seat skeleton and suggestion pool. Whether to gate and shape it on the
-  pool's winners is the decision to take once the pool holds a few
-  hundred rosters (it gains about five a day).
 - **The popularity baseline on the portal pools**: with the pool-fielded
   gate on, the engine names the hidden member in its top 3 on 9.5% /
   19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
@@ -137,15 +130,6 @@ Each is decidable today from evidence already in the repo.
   semantic call: decide it (a fourth castle-outpost comp would settle it),
   or raise the content `min` for resist_shred by hand. (V: 09b, Target is
   the median; T25b)
-- **Repo size: `pipeline/out/party_rosters.json.gz` is 63 MB and committed**,
-  growing with every fold (4.9 MB when it was gzipped, 28.7 MB the fold
-  before the last; as plain JSON it was 83 KB before builds joined the
-  artifact and 4.4 MB the same day they did). GitHub refuses a pushed file
-  over 100 MiB, and the unfolded artifact on the harvest machine reads
-  87 MiB, so the next fold's commit is likely to be refused. The split
-  proposed then: commit the aggregates, gitignore the raw `builds` array
-  beside the other caches. Not done because the raw builds are the
-  evidence. Decide. (V: 08, Observed BUILDS)
 - **EU server in the harvest**: would double the 25+ corpus but mixes a second
   server's meta into rows meant to describe the maintainer's own fights.
   Review deferred to the date the log entry records. (V: 09b, Coverage, not
@@ -303,6 +287,15 @@ Each is decidable today from evidence already in the repo.
 - **More caller sheets** in `data/published_comps/` remain the highest-value
   growth per observation: they are the only source of whole comps with roles,
   which calibration and the V4 gate need.
+- **The Dragon Portal's 15-20 pool at 200 rosters**: the pool reads rows of
+  its own, fitted at the floor (40 distinct rosters at the last fold; V: 10,
+  The 15-20 portal pool reads its own rows), and generation at 15-20 keeps
+  the open-world seat skeleton and suggestion pool until the pool holds 200
+  distinct dominant rosters (V: 10, The 15-20 portal pool takes its own list
+  and counts at 200 rosters). `derive_portal_rows.py` and the fold report
+  count it against the threshold; at 200, derive its fielded list and role
+  counts as the smaller pools' are (both ports read a pool's role counts
+  below 10 alone today).
 
 ## Engineering work, unblocked
 
@@ -457,6 +450,15 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
+- **The committed rosters artifact grows about 1 MB a day**: it keeps the
+  battle list and the Dragon Portal, what the build reads (29.0 MB gzipped
+  at 69,958 battles; the kill-feed poll's other records live in
+  the local `party_rosters_full.json.gz`; V: 10, The committed rosters
+  artifact keeps what the build reads), so GitHub's 100 MiB file limit
+  returns in about two months. The permanent fix: every table the build
+  reads (the kit doctrine included) derived at the fold and committed, the
+  raw records local beside the cache, the derived tables' provenance read
+  off the fold's record.
 - **The outcome layer, after the party-level read**:
   `pipeline/audit_capability_outcomes.py` (report-only) labels win (kills
   >= 2 x deaths) / loss (kills < deaths) on the harvest's killer parties,

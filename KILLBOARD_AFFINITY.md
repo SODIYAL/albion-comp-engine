@@ -75,7 +75,7 @@ py -3 pipeline/build_cohort_families.py
 py -3 dashboard/build.py
 ```
 
-The first command rewrites `pipeline/out/weapon_usage_v2.json` from the rosters artifact (no network; the same artifact writes the same bytes); the second re-mines the observed families from it (`out/cohort_families.json` — skipping it ships new baskets against stale families); the third embeds both into the static dashboard. Analysis is a reviewed step (pipeline/README.md weekly cadence), never automated.
+The first command rewrites `pipeline/out/weapon_usage_v2.json` from the full rosters artifact, `pipeline/out/party_rosters_full.json.gz` (every population, local; no network; the same artifact writes the same bytes); the second re-mines the observed families from it (`out/cohort_families.json` — skipping it ships new baskets against stale families); the third embeds both into the static dashboard. Analysis is a reviewed step (pipeline/README.md weekly cadence), never automated.
 
 ## Important limitations
 

@@ -95,6 +95,12 @@ the vocabulary below on every push.
   the per-battle JSON layout it replaced reached 127k files and made every
   workspace crawl (file watchers, VS Code Live Server, backups) take minutes.
   Live Server must be rooted at `/dashboard` (`.vscode/settings.json`, local).
+- The committed rosters artifact, `pipeline/out/party_rosters.json.gz`, keeps
+  what the build reads: every battle-list battle and every Dragon Portal
+  battle. The same pass writes every record, the kill-feed poll's open-world
+  fights included, to `pipeline/out/party_rosters_full.json.gz` (gitignored,
+  past GitHub's 100 MiB file limit); only `derive_usage.py` reads it. Never
+  commit the full file.
 
 ## Tests
 
@@ -170,7 +176,7 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
   `derive_skeletons` -> `build_dataset` -> `derive_usage` (the
   observed-evidence artifact: fight-size prevalence and killer-party
-  cohorts, display only) -> every gate ->
+  cohorts, display only, read from the full local rosters artifact) -> every gate ->
   `compare_fold.py`; offline, never commits; refuses to start while a
   harvest runs, `pipeline/harvest_guard.ps1`). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
