@@ -81,10 +81,6 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **Fill order as the beam's sequence** (healer -> frontline -> support ->
-  dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
-  END state; the greedy beam still picks its path by marginal. Ordering
-  changes many pinned first picks — a maintainer decision, not started.
 - **Single-party forges past 20**: no page forges a party past 20 (the
   planner forges each party of a zerg at its own plan, capped at 20; the
   sheet's engine read recommends, it never forges), so three readings of
