@@ -769,6 +769,18 @@ one vote, and writes `out/skeletons.json`:
 - **plan**: the same shape for plan tools — today `standoff`, the count
   of `style_fit.standoff_e` carriers, the fact the identity read defines
   a kiting plan by; the engine reads it as a generation MINIMUM;
+- **minima**: per style x band (10-14 / 15-19 / 20+) and pooled, the
+  p10 / p50 / p90 count of every generated band minimum's carriers per
+  roster — today `ranged_aoe_core`, a weapon some combo of which meets the
+  predicate (`Engine._pred_possible`, the forge's own test) — and the
+  minimum the forge reads, round(p50) where p50 >= 1 (the standoff rule),
+  an EMPTY row where the cell exists and most winners field none (no
+  minimum); a style's band under 40 rosters borrows its nearest filled
+  cell by the style rows' rule (same style, nearest band; else the parent
+  style), stated as `borrowed_from` with its own count, and a style with
+  none filled reads the pooled row. The engine lays the declared style's
+  row (else pooled; `balanced` reads pooled) on the band at 10+, replacing
+  the key; below 10 there is none;
 - **copies**: per style x band (10-14 / 15-19 / 20+) and pooled, for every
   weapon fielded by >= 40 rosters: copies p50 / p90, the shares with 2+
   and 3+, `free` = round(p50), `max` = ceil(p90) — the allowance the
@@ -777,9 +789,12 @@ one vote, and writes `out/skeletons.json`:
 - **distinct**: distinct weapons per roster per band, a report line.
 
 `build_dataset` hash-gates it to the two artifacts, refuses an
-all-battles derivation and a hand `composition.duplication.per_weapon`,
-validates every seat against `roles.yaml` and every weapon against the
-catalogue, and ships `composition.skeleton` + `duplication.per_weapon_cells`.
+all-battles derivation, a hand `composition.duplication.per_weapon` and a
+hand `ranged_aoe_core` minimum in any `constraint_bands` or
+`constraint_overrides` row, validates every seat against `roles.yaml`,
+every weapon against the catalogue and every minima row against the bands
+(the pooled row must carry every band), and ships `composition.skeleton`
+(seats, plan, minima) + `duplication.per_weapon_cells`.
 Gate: `tests/test_skeletons.py`.
 
 ```text

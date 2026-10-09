@@ -22,6 +22,13 @@ notes/specs/2026-09-15-skeleton-first-generation-design.md).
       identity style and balanced forge a full, feasible roster at
       10 / 12 / 15 / 17 / 20; without a cell the seat gate is off
   S5  build_dataset refuses a hand-set duplication.per_weapon
+  S6  plan tools: the standoff typical is a generation minimum
+  S7  band minima: the ranged_aoe_core minimum per style x band is the
+      round-half-up p50 of carriers per roster where p50 >= 1 (the
+      standoff rule), an empty row where most winners field none; the
+      artifact's rows match its cells, the dataset carries exactly them,
+      the engine lays the declared style's row (else pooled) on the band
+      at 10+ and none below, and a hand-set minimum fails the build
 
 Script-style: exit 0 = pass.
 """
@@ -105,6 +112,69 @@ def t_synthetic():
     check("S1g --all-battles is an audit copy: it votes the holdout roster too",
           out_all["rosters"] == 61 and not out_all["_split"]["holdout_mod"],
           f"rosters={out_all['rosters']}")
+    # band minima: D carries the predicate (6 in 40 rosters, 5 in 20 ->
+    # p50 6); S carries it in 20 of 60 rosters (p50 0 -> an empty row)
+    core = ds.derive({"parties": parties}, labels, lambda w: seat[w], known,
+                     minima_of=lambda w: frozenset(["ranged_aoe_core"])
+                     if w == "D" else frozenset())
+    mt = core["minima"]["typical"]
+    mc = core["minima"]["cells"]["pooled"].get("10-14") or {}
+    sc = core["minima"]["cells"]["styles"].get("brawl") or {}
+    check("S7a band minimum = round-half-up(p50) of carriers per roster: "
+          "ranged_aoe_core 6 at 10-14, pooled and in the declared style's "
+          "cell; a pooled band without rosters has no cell, and the style's "
+          "empty bands borrow its 10-14 cell",
+          mt["pooled"] == {"10-14": {"ranged_aoe_core": 6}}
+          and (mt["styles"].get("brawl") or {}).get("10-14") == {"ranged_aoe_core": 6}
+          and "borrowed_from" not in (sc.get("10-14") or {})
+          and all((sc.get(b) or {}).get("borrowed_from") == "brawl|10-14"
+                  and (sc.get(b) or {}).get("own_n") == 0 for b in ("15-19", "20"))
+          and mc.get("n") == 60 and (mc.get("ranged_aoe_core") or {}).get("p50") == 6
+          and core["minima_keys"] == ["ranged_aoe_core"], f"{mt} {mc}")
+    thin = ds.derive({"parties": parties}, labels, lambda w: seat[w], known,
+                     minima_of=lambda w: frozenset(["ranged_aoe_core"])
+                     if w == "S" else frozenset())
+    check("S7b most winners fielding none writes an EMPTY row (no minimum), "
+          "never an absent one (the pooled row would stand in)",
+          thin["minima"]["typical"]["pooled"] == {"10-14": {}}
+          and (thin["minima"]["typical"]["styles"].get("brawl") or {}).get("10-14") == {},
+          str(thin["minima"]["typical"]))
+    # a thin style cell borrows by the style rows' rule: same style,
+    # nearest filled band; else the parent style; else no row (pooled)
+    bp, bl = [], {}
+
+    def add(style, size, n_core, count):
+        for _ in range(count):
+            i = len(bp)
+            battle = 20001 + 3 * i
+            if battle % 5 == 0:
+                battle += 1
+            p = {"battle": battle, "index": 0, "size": size,
+                 "known_weapons": size, "guilds": [f"b{i}"],
+                 "weapons": ["D"] * n_core + ["H"] * (size - n_core)}
+            bp.append(p)
+            bl[(battle, 0)] = style
+    add("brawl_clap", 15, 1, 50)    # filled: p50 1
+    add("brawl_clap", 20, 3, 10)    # thin: own p50 3, borrows 15-19
+    add("clap", 20, 5, 45)          # filled: p50 5
+    add("clap_kite", 20, 2, 5)      # nothing filled: the parent clap's 20
+    add("kite", 20, 4, 5)           # nothing filled, no parent: no row
+    bor = ds.derive({"parties": bp}, bl, lambda w: seat[w], known,
+                    minima_of=lambda w: frozenset(["ranged_aoe_core"])
+                    if w == "D" else frozenset())
+    bt, bc = bor["minima"]["typical"]["styles"], bor["minima"]["cells"]["styles"]
+    check("S7b2 a thin style cell borrows: brawl_clap 20 (10 rosters) reads "
+          "its 15-19 cell (1, not its own 3), clap_kite (5) the parent clap's "
+          "20 (5), kite (5, no parent) carries no row and reads the pooled one",
+          (bt.get("brawl_clap") or {}).get("20") == {"ranged_aoe_core": 1}
+          and (bc.get("brawl_clap") or {}).get("20", {}).get("borrowed_from")
+          == "brawl_clap|15-19"
+          and (bc.get("brawl_clap") or {}).get("20", {}).get("own_n") == 10
+          and (bt.get("clap_kite") or {}).get("20") == {"ranged_aoe_core": 5}
+          and (bc.get("clap_kite") or {}).get("20", {}).get("borrowed_from") == "clap|20"
+          and "kite" not in bt and "borrowed_from" not in
+          (bc.get("clap") or {}).get("20", {}),
+          f"{bt} {({s: {b: c.get('borrowed_from') for b, c in v.items()} for s, v in bc.items()})}")
 
 
 # ------------------------------------------------------------------ S2
@@ -433,6 +503,94 @@ def t_plan(doc):
           isinstance(ek.comp_score(party), float))
 
 
+# ------------------------------------------------------------------ S7
+def t_minima(doc):
+    """Band minima (ranged_aoe_core): the typical carrier count of the
+    declared style's winners per band is the forge's minimum — round(p50)
+    where p50 >= 1 (the standoff rule), none where most field none."""
+    if not doc:
+        return
+    mins = doc.get("minima") or {}
+    typ = mins.get("typical") or {}
+    cells = mins.get("cells") or {}
+    bad = []
+    tables = [("pooled", typ.get("pooled") or {}, (cells.get("pooled") or {}))] + [
+        (st, rows, (cells.get("styles") or {}).get(st) or {})
+        for st, rows in sorted((typ.get("styles") or {}).items())]
+    n_borrowed = 0
+    for label, rows, crow in tables:
+        for band, row in rows.items():
+            cell = crow.get(band)
+            if band not in doc["bands"] or not cell or cell["n"] < doc["_min_distinct"]:
+                bad.append((label, band, "cell"))
+                continue
+            src = cell.get("borrowed_from")
+            if src:
+                # a borrowed cell: its own count under the floor, and the
+                # source a filled cell of the same style or its parent
+                n_borrowed += 1
+                sst, sband = src.split("|")
+                scell = ((cells.get("styles") or {}).get(sst) or {}).get(sband) or {}
+                if (label == "pooled" or cell.get("own_n", 0) >= doc["_min_distinct"]
+                        or sst not in (label, ds.PARENT.get(label))
+                        or scell.get("borrowed_from") or scell.get("n") != cell["n"]):
+                    bad.append((label, band, "borrow", src))
+            for k in doc["minima_keys"]:
+                p50 = cell[k]["p50"]
+                want = int(p50 + 0.5) if p50 >= 1 else None
+                if row.get(k) != want:
+                    bad.append((label, band, k, row.get(k), p50))
+    check("S7c the artifact's minima: keys [ranged_aoe_core], the pooled row "
+          "covers every band, every row is round-half-up(p50) of its cell where "
+          "p50 >= 1 and absent below, every cell >= 40 rosters, a borrowed "
+          f"cell's own count under 40 and its source filled ({n_borrowed} borrowed)",
+          doc.get("minima_keys") == ["ranged_aoe_core"]
+          and set(typ.get("pooled") or {}) == set(doc["bands"]) and not bad,
+          str(bad[:4]))
+    with open(os.path.join(OUT, "dataset-latest.json"), encoding="utf-8") as f:
+        comp = json.load(f)["composition"]
+    dm = (comp.get("skeleton") or {}).get("minima") or {}
+    check("S7d the dataset carries exactly the artifact's minima rows and bands",
+          dm.get("keys") == ["ranged_aoe_core"] and dm.get("bands") == doc["bands"]
+          and dm.get("pooled") == typ.get("pooled")
+          and dm.get("styles") == typ.get("styles"))
+    hand = [(i, r) for i, r in enumerate(comp.get("constraint_bands") or [])
+            if "ranged_aoe_core" in r]
+    e = Engine()
+    for st, cfg in (e.data.get("styles") or {}).items():
+        hand += [(st, r) for r in (cfg or {}).get("constraint_overrides") or []
+                 if "ranged_aoe_core" in r]
+    check("S7e no composition band or style override row carries a hand "
+          "ranged_aoe_core minimum", not hand, str(hand[:3]))
+    # resolution: the declared identity style's band row, else pooled;
+    # balanced reads pooled; below 10 none; a row without the key, none
+    bad = []
+    e2 = Engine()
+    for st in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+        for size in (7, 10, 14, 15, 19, 20, 25):
+            e2.set_content("blackzone_roam" if size < 21 else "castle", size, st)
+            got = ((e2._band or {}).get("ranged_aoe_core") or {}).get("min")
+            band = ds.band_of(size) if size >= doc["_style_min_size"] else None
+            row = None
+            if band and st != "balanced":
+                row = (typ.get("styles") or {}).get(st, {}).get(band)
+            if band and row is None:
+                row = (typ.get("pooled") or {}).get(band)
+            want = (row or {}).get("ranged_aoe_core") if band else None
+            if got != want:
+                bad.append((st, size, got, want))
+    check("S7f each style's band carries its generated ranged_aoe_core "
+          "minimum: the declared style's cell (balanced and a style without "
+          "a cell read the pooled row), none where most winners field none, "
+          "none below 10", not bad, str(bad[:6]))
+    eb = Engine(content="blackzone_roam", size=20, style="brawl")
+    brawl_row = (typ.get("styles") or {}).get("brawl", {}).get("20")
+    check("S7g brawl 20: its winners field a p50 under one carrier, so the "
+          "row is empty and the band carries no ranged_aoe_core minimum",
+          brawl_row == {} and "ranged_aoe_core" not in (eb._band or {}),
+          f"row {brawl_row} band {(eb._band or {}).get('ranged_aoe_core')}")
+
+
 # ------------------------------------------------------------------ S5
 def t_refusal():
     import build_dataset
@@ -448,6 +606,34 @@ def t_refusal():
     except SystemExit:
         ok = False
     check("S5b an empty list passes", ok)
+    refused = []
+    for comp, styles in (
+            ({"constraint_bands": [{"min_size": 20, "max_size": 29,
+                                    "ranged_aoe_core": {"min": 4}}]}, {}),
+            ({"constraint_bands": []},
+             {"clap": {"constraint_overrides": [{"min_size": 20, "max_size": 29,
+                                                 "ranged_aoe_core": {"min": 7}}]}}),
+            ({"constraint_bands": []},
+             {"brawl": {"constraint_overrides": [{"min_size": 10, "max_size": 14,
+                                                  "ranged_aoe_core": {"min": 0}}]}})):
+        try:
+            build_dataset.refuse_hand_minima(comp, styles)
+            refused.append(False)
+        except SystemExit:
+            refused.append(True)
+    check("S7h a hand-set ranged_aoe_core minimum fails the build: in a "
+          "composition band, in a style override row, a zero one too",
+          refused == [True, True, True], str(refused))
+    try:
+        build_dataset.refuse_hand_minima(
+            {"constraint_bands": [{"min_size": 20, "max_size": 29,
+                                   "healer": {"min": 3}}]},
+            {"kite": {"constraint_overrides": [{"min_size": 20, "max_size": 29,
+                                                "healer": {"min": 2}}]}})
+        ok = True
+    except SystemExit:
+        ok = False
+    check("S7i role rows without the key pass", ok)
 
 
 t_synthetic()
@@ -456,6 +642,7 @@ t_resolution(DOC)
 t_forge()
 t_gate_units()
 t_plan(DOC)
+t_minima(DOC)
 t_refusal()
 print(f"\n{'ALL PASS' if not FAILS else 'FAILURES: ' + ', '.join(FAILS)}")
 sys.exit(1 if FAILS else 0)

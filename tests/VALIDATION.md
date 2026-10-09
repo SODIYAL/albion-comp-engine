@@ -120,6 +120,16 @@ the index rows that record the decision.
     (`free` = round(p50), `max` = ceil(p90) of the rosters fielding the
     weapon per style x band) are GENERATED from the same artifact; a hand
     `per_weapon` list fails the build. Generation only.
+    **Extended to the ranged-AoE core (2026-10-09):** the band's
+    `ranged_aoe_core` minimum is the same artifact's typical carrier count
+    per style x band (10-14 / 15-19 / 20+): round(p50) of the weapons per
+    roster some combo of which meets the predicate, where that p50 is 1 or
+    more (the standoff rule); an empty row (most winners field none) sets
+    none; a style's band under 40 rosters borrows its nearest filled band,
+    else its parent style's (the style rows' rule); the declared style's
+    row, else pooled, replaces the band's key at 10+, and below 10 there is
+    none. A hand minimum in `composition.yaml` or `styles.yaml` fails the
+    build.
 
 ## The method — how a round runs
 
@@ -360,6 +370,7 @@ archive file and the section title to search for.
 | 10-09 | The 1H curse line takes no dps seat (maintainer decision): cloth Lifecurse, 9% of its winning builds, reads by its seat as support; a seat for one weapon's minority build would be a rule on an individual weapon (standing rule 4); the plate majority keeps its kit | (none: no code moves) | (none) | 10, The 1H curse line takes no dps seat |
 | 10-09 | Asymmetric numbers at 21+ close under standing rule 11 (maintainer decision): the planner assumes a mirror fight; Disarray, CC Escalation and the forced-dismount immunity removed at 21+ stay recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens them | `pipeline/README.md` (Q11 / Q13) | (none) | 10, Asymmetric numbers at 21+ close under standing rule 11 |
 | 10-09 | No dive style (maintainer decision): no harvest family supports a dive or assassination style at 20+; the whole-roster clustering of killer parties of 16-20 finds 14 families, whose labelled rosters read clap, clap_kite, kite or brawl (notes/findings/2026-10-08-roster-families.md); a dive lineup in a later clustering run reopens it | (none: no code moves) | (none) | 10, No dive style |
+| 10-09 | The ranged-AoE core minimum is generated (maintainer decision): every style's `ranged_aoe_core` minimum is its winners' typical carrier count per band, round(p50) of the weapons per distinct killer roster of 10+ (training split) some combo of which meets the predicate, where that p50 is 1 or more, none where most field none; a band under 40 rosters borrows its style's nearest filled band, else the parent style's. Generated at every fold into `skeletons.json` `minima`, laid on the band at 10+ by both ports (the declared style's row, else pooled; none below 10); the hand values go (the base band's 2 / 3 / 4 / 6 / 9, clap and clap_kite 5 / 7, kite 4 / 5, brawl 0) and a hand minimum fails the build. Derived at 10-14 / 15-19 / 20+: clap 3 / 3 / 4, clap_kite 3 / 4 / 4, kite 2 / 3 / 3, brawl_clap 1 / 1 / 1, pooled and balanced 2 / 3 / 3, brawl none; 24 of 78 probed forges move, none forges short | `derive_skeletons.py`, `build_dataset.py`, `engine.py`, `app_scoring.js`, `composition.yaml`, `styles.yaml` | S7, T33, F12, F21, F29, test_js_parity | 10, The ranged-AoE core minimum is generated |
 
 ## Open questions
 

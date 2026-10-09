@@ -2014,7 +2014,7 @@ function renderWarning(){
         <span class="b"><b>Nothing to refresh.</b> Every slot is locked and the plan is full, so the roster stays as it is. Unlock a slot, or raise the planned size, to let the forge rebuild.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
-        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — structural minimums fitted from real comps, which the capability score alone does not see.</span></div>`;
+        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — structural minimums from real comps and from what winning parties field, which the capability score alone does not see.</span></div>`;
   }
   $("warn-slot").innerHTML = greedy + forgeBits;
 }

@@ -303,8 +303,8 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   body beyond it only while a minimum only that role can meet is unmet, and
   never spends a typical slot on a body that leaves such a minimum short.
   dps is never gated. Sizes the harvest does not reach (21+) carry none.
-- **Role bands per style** (`styles.yaml constraint_overrides`), including the
-  clap / clap_kite 7-strong ranged-AoE core at 20 and kite's 5 / 4.
+- **Role bands per style** (`styles.yaml constraint_overrides`): healer and
+  frontline rows; the ranged-AoE core minimum is generated (below).
 - **Seat skeleton** (standing rule 18 extended to seats; spec
   `notes/specs/2026-09-15-skeleton-first-generation-design.md`):
   `derive_skeletons.py` -> `out/skeletons.json` (training split, distinct
@@ -327,6 +327,16 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   every roster; brawl and clap none, so they demand none. The forged kite 20
   reads as a kiting plan to the engine's own identity (clap_kite; it read as
   a strong clap before the plan minimum).
+- **The ranged-AoE core minimum**: the same artifact's `minima` table — per
+  style x band (10-14 / 15-19 / 20+) and pooled, round(p50) of the
+  `ranged_aoe_core` carriers per roster (a weapon some combo of which meets
+  the predicate, `Engine._pred_possible`) where that p50 is 1 or more, the
+  standoff rule — replaces the band's minimum at 10+ (the declared style's
+  row, else pooled; `balanced` reads pooled). Most of a style's winners
+  fielding none sets none (brawl); a style's band under 40 rosters borrows
+  its nearest filled band, else its parent style's (the style rows' rule);
+  below 10 there is none. A hand minimum in `composition.yaml` or
+  `styles.yaml` fails the build (S7).
 - **Duplicates**: 1 copy by default; penalty-free copies and the forge cap
   are GENERATED per style x band (`skeletons.json` copies: free =
   round(p50), max = ceil(p90) of the rosters fielding the weapon; the

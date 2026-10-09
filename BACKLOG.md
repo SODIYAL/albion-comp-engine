@@ -46,30 +46,15 @@ Each is decidable today from evidence already in the repo.
   (Grovekeeper, Camlann Mace, Morning Star); a pooled list lifts less;
   brawl_clap 20 is too thin for a list. Beside the base band's
   `ranged_aoe_core` minimum the gated brawl forge stopped at 13 of 15 and
-  17 of 20; brawl now carries no such minimum (V: 10, A gap-closer grounds
-  no ranged presence) and the gated forge is not re-measured since (see
-  "Forge minima above what winners field"). The ungated default forge
-  measured whole (notes/findings/2026-10-09-forge-quality.md): 18% of its
-  slots at 10-20 are weapons under 2% of the cell's winners field (6%
-  fielded by none of them), the share the earlier sweep measured; Fists of
-  Avalon is forged into 41 of 48 cells on at most 6.6% of a cell's
-  rosters, Arclight Blasters into 19 on under 1%. Decide the gate, styled,
-  once the minima are settled.
-- **Forge minima above what winners field**: with a gap-closer grounding
-  no ranged presence (H6c), killer parties of 10+ field `ranged_aoe_core`
-  carriers per party at a p50 of 3 / 3 / 4 on clap, 3 / 4 / 4 on clap_kite,
-  2 / 3 / 3 on kite, 1 / 1 / 1 on brawl_clap and 2 / 3 / 3 pooled at
-  10-14 / 15-19 / 20 (distinct rosters of the training split), against the
-  base band's 2 / 3 / 4 (met by 63 / 57 / 46% pooled and 10 / 0 / 0% of
-  brawl_clap rosters) and the styles' 5 and 7 at 15-19 and 20 on clap and
-  clap_kite, 4 and 5 on kite. The forge meets them by drafting carriers
-  winners field rarely: forged for brawl_clap at Territory Defense 20 and
-  Castle 20 the roster seats three ranged-AoE bodies against the brawl_clap
-  seat cell's typical of one and p90 of two
-  (notes/findings/2026-10-09-forge-quality.md). Brawl carries none (p50 0;
-  V: 10, A gap-closer grounds no ranged presence). A minimum per style x
-  band from the harvest (the standoff rule: round-half-up of the p50 where
-  it is 1 or more) is the derivation to take.
+  17 of 20; every style's minimum is now its winners' typical carrier
+  count (V: 10, The ranged-AoE core minimum is generated) and the gated
+  forge is not re-measured since. The ungated default forge measured
+  whole under the hand minima (notes/findings/2026-10-09-forge-quality.md):
+  18% of its slots at 10-20 are weapons under 2% of the cell's winners
+  field (6% fielded by none of them), the share the earlier sweep
+  measured; Fists of Avalon is forged into 41 of 48 cells on at most 6.6%
+  of a cell's rosters, Arclight Blasters into 19 on under 1%. Decide the
+  gate, styled.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
@@ -481,12 +466,12 @@ Each is decidable today from evidence already in the repo.
   split materially (`extract` then `fit`; the pull rule stays).
 - **The forged brawl_clap reads brawl**: its seat cells clear the floor
   through a +-1 size window (50-80 rosters per size) and its copy cells at
-  10-14 and 15-19 (20 reads the pooled copy cell); its band keeps the base
-  `ranged_aoe_core` minimum. Forged for brawl_clap, the roster reads brawl
-  in 9 of 10 sweep cells and split in one (Castle 20), never brawl_clap
-  (notes/findings/2026-10-09-forge-quality.md). The ranged minimum it
-  keeps sits above what brawl_clap winners field ("Forge minima above what
-  winners field").
+  10-14 and 15-19 (20 reads the pooled copy cell); its band carries its
+  winners' own `ranged_aoe_core` minimum, 1 in every band (V: 10, The
+  ranged-AoE core minimum is generated). Forged for brawl_clap on the forge
+  sweep's ten 10+ cells, the roster reads brawl in 6, clap in 2 (Territory
+  Defense 15 and 20) and split in 2 (Territory Defense 25, Castle 20), never
+  brawl_clap (4 / 3 / 3 under the base band's minimum; the same record).
 - **The forge returns a local optimum**: in 27 of 72 planner cells and 8
   of 18 Dragon Portal cells of the forge sweep a refresh alternative
   (`forge(avoid=)`) outscores the button's roster (best gap per cell:

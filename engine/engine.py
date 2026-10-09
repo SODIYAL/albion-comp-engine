@@ -771,6 +771,23 @@ class Engine:
             for tool, n in self._plan_typical().items():
                 self._band = dict(self._band)
                 self._band[tool] = {"min": n}
+        # GENERATED BAND MINIMA (composition.skeleton.minima, derive_
+        # skeletons.py): the ranged-AoE core minimum is the typical count
+        # of carriers the declared style's winners field in the band,
+        # round(p50) where p50 >= 1 (the standoff rule); a row without the
+        # key (most winners field none) sets no minimum. No hand minimum
+        # exists on these keys (build_dataset refuses one); a dataset
+        # without the table keeps the band as it stands.
+        if self._band is not None:
+            got = self._band_minima()
+            if got is not None:
+                keys, row = got
+                self._band = dict(self._band)
+                for k in keys:
+                    if k in row:
+                        self._band[k] = {"min": row[k]}
+                    else:
+                        self._band.pop(k, None)
         # NEED PROFILES (dataset need_profiles): fine-seat
         # bands + function coverage minima for the FORGE, scaled by
         # size/reference_size (half-up, the pinned rounding rule) and
@@ -4554,6 +4571,33 @@ class Engine:
         if row is None:
             row = (plan.get("pooled") or {}).get(key)
         return dict(row or {})
+
+    def _band_minima(self):
+        """The GENERATED band minima (composition.skeleton.minima) for this
+        style and size: at the style floor and above, the band that covers
+        the size, the DECLARED identity style's row, else the pooled row
+        (`balanced` never reads a cell). (keys, row): a key absent from the
+        row means most of the style's winners field none — no minimum.
+        None when no table or band covers the size (the band stands)."""
+        sk = self.skeleton or {}
+        mins = sk.get("minima") or {}
+        if not mins or self.size < sk.get("style_min_size", 10):
+            return None
+        band = None
+        for bk, lim in (mins.get("bands") or {}).items():
+            if lim[0] <= self.size <= lim[1]:
+                band = bk
+                break
+        if band is None:
+            return None
+        row = None
+        if self.style in self.IDENTITY_STYLES:
+            row = ((mins.get("styles") or {}).get(self.style) or {}).get(band)
+        if row is None:
+            row = (mins.get("pooled") or {}).get(band)
+        if row is None:
+            return None
+        return list(mins.get("keys") or []), dict(row)
 
     def _dup_cell(self):
         """The copy-allowance cell {weapon: {free, max}} for this style and

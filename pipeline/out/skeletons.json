@@ -1,5 +1,5 @@
 {
- "_generated": "2026-10-04",
+ "_generated": "2026-10-09",
  "_min_distinct": 40,
  "_seat_read": "Engine.seat_of: the weapon's primary seat (role_menu[0]) \u2014 the one role read; a menu-less weapon counts toward no seat",
  "_source": {
@@ -11,7 +11,7 @@
   "rule": "battle % 5 != 0 (training split; % 5 == 0 is the v4h holdout)"
  },
  "_style_min_size": 10,
- "_typical": "seats: round-half-up(p50) where p50 >= 1; copies: free = round-half-up(p50) (>= 1), max = ceil(p90) (>= free); a weapon under the floor has no row",
+ "_typical": "seats: round-half-up(p50) where p50 >= 1; copies: free = round-half-up(p50) (>= 1), max = ceil(p90) (>= free); a weapon under the floor has no row; minima: round-half-up(p50) of carriers per roster where p50 >= 1 per band, an empty row where most winners field none",
  "_unit": "one DISTINCT fully-known killer roster (guild set + weapon multiset) of 10+, one vote; pooled = every winner at the size, styles = the party_styles.json label; seat cells per exact size pool a +-1 then +-2 window until >= _min_distinct rosters (`window`); copy and distinct cells per band",
  "bands": {
   "10-14": [10, 14],
@@ -8772,6 +8772,235 @@
    }
   }
  },
+ "minima": {
+  "cells": {
+   "pooled": {
+    "10-14": {
+     "n": 7315,
+     "ranged_aoe_core": {
+      "p10": 0.0,
+      "p50": 2.0,
+      "p90": 5.0
+     }
+    },
+    "15-19": {
+     "n": 8696,
+     "ranged_aoe_core": {
+      "p10": 0.0,
+      "p50": 3.0,
+      "p90": 5.0
+     }
+    },
+    "20": {
+     "n": 1818,
+     "ranged_aoe_core": {
+      "p10": 1.0,
+      "p50": 3.0,
+      "p90": 5.0
+     }
+    }
+   },
+   "styles": {
+    "brawl": {
+     "10-14": {
+      "n": 1558,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 0.0,
+       "p90": 2.0
+      }
+     },
+     "15-19": {
+      "n": 1368,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 0.0,
+       "p90": 2.0
+      }
+     },
+     "20": {
+      "n": 232,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 0.0,
+       "p90": 2.0
+      }
+     }
+    },
+    "brawl_clap": {
+     "10-14": {
+      "n": 110,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 1.0,
+       "p90": 1.1
+      }
+     },
+     "15-19": {
+      "n": 118,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 1.0,
+       "p90": 1.0
+      }
+     },
+     "20": {
+      "borrowed_from": "brawl_clap|15-19",
+      "n": 118,
+      "own_n": 24,
+      "ranged_aoe_core": {
+       "p10": 0.0,
+       "p50": 1.0,
+       "p90": 1.0
+      }
+     }
+    },
+    "clap": {
+     "10-14": {
+      "n": 3309,
+      "ranged_aoe_core": {
+       "p10": 1.0,
+       "p50": 3.0,
+       "p90": 6.0
+      }
+     },
+     "15-19": {
+      "n": 4150,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 3.0,
+       "p90": 6.0
+      }
+     },
+     "20": {
+      "n": 758,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 4.0,
+       "p90": 6.0
+      }
+     }
+    },
+    "clap_kite": {
+     "10-14": {
+      "n": 322,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 3.0,
+       "p90": 5.0
+      }
+     },
+     "15-19": {
+      "n": 1373,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 4.0,
+       "p90": 5.0
+      }
+     },
+     "20": {
+      "n": 421,
+      "ranged_aoe_core": {
+       "p10": 3.0,
+       "p50": 4.0,
+       "p90": 6.0
+      }
+     }
+    },
+    "kite": {
+     "10-14": {
+      "n": 833,
+      "ranged_aoe_core": {
+       "p10": 1.0,
+       "p50": 2.0,
+       "p90": 4.0
+      }
+     },
+     "15-19": {
+      "n": 552,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 3.0,
+       "p90": 5.0
+      }
+     },
+     "20": {
+      "n": 165,
+      "ranged_aoe_core": {
+       "p10": 2.0,
+       "p50": 3.0,
+       "p90": 5.0
+      }
+     }
+    }
+   }
+  },
+  "typical": {
+   "pooled": {
+    "10-14": {
+     "ranged_aoe_core": 2
+    },
+    "15-19": {
+     "ranged_aoe_core": 3
+    },
+    "20": {
+     "ranged_aoe_core": 3
+    }
+   },
+   "styles": {
+    "brawl": {
+     "10-14": {},
+     "15-19": {},
+     "20": {}
+    },
+    "brawl_clap": {
+     "10-14": {
+      "ranged_aoe_core": 1
+     },
+     "15-19": {
+      "ranged_aoe_core": 1
+     },
+     "20": {
+      "ranged_aoe_core": 1
+     }
+    },
+    "clap": {
+     "10-14": {
+      "ranged_aoe_core": 3
+     },
+     "15-19": {
+      "ranged_aoe_core": 3
+     },
+     "20": {
+      "ranged_aoe_core": 4
+     }
+    },
+    "clap_kite": {
+     "10-14": {
+      "ranged_aoe_core": 3
+     },
+     "15-19": {
+      "ranged_aoe_core": 4
+     },
+     "20": {
+      "ranged_aoe_core": 4
+     }
+    },
+    "kite": {
+     "10-14": {
+      "ranged_aoe_core": 2
+     },
+     "15-19": {
+      "ranged_aoe_core": 3
+     },
+     "20": {
+      "ranged_aoe_core": 3
+     }
+    }
+   }
+  }
+ },
+ "minima_keys": ["ranged_aoe_core"],
  "plan": {
   "cells": {
    "pooled": {

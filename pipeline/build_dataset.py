@@ -2784,6 +2784,30 @@ def refuse_hand_per_weapon(dup):
                  "allowances from templates/composition.yaml")
 
 
+# Band minima GENERATED per style x band (derive_skeletons.MINIMA_KEYS):
+# what the declared style's winners field of the predicate's carriers
+GENERATED_MINIMA = ("ranged_aoe_core",)
+
+
+def refuse_hand_minima(composition, styles):
+    """A hand-set minimum on a GENERATED key blocks the build, in a
+    composition band and in a style's override row alike: the ranged-AoE
+    core minimum is the typical carrier count of the declared style's
+    winners per band (derive_skeletons.py minima, S7)."""
+    rows = [(f"templates/composition.yaml constraint_bands[{i}]", row)
+            for i, row in enumerate((composition or {}).get("constraint_bands") or [])]
+    for st, cfg in sorted((styles or {}).items()):
+        rows += [(f"templates/styles.yaml {st} constraint_overrides[{i}]", row)
+                 for i, row in enumerate((cfg or {}).get("constraint_overrides") or [])]
+    for where, row in rows:
+        for key in GENERATED_MINIMA:
+            if key in (row or {}):
+                sys.exit(f"{where}: the {key} minimum is GENERATED "
+                         f"(pipeline/derive_skeletons.py -> out/skeletons.json "
+                         f"minima, per style x band); remove the hand-set "
+                         f"minimum")
+
+
 def load_skeletons(known_weapons, seat_ids):
     """The GENERATED seat skeletons and copy allowances
     (derive_skeletons.py -> out/skeletons.json; S1-S6, spec
@@ -2792,16 +2816,20 @@ def load_skeletons(known_weapons, seat_ids):
     count of every PRIMARY SEAT (round(p50) of distinct fully-known killer
     rosters on the training split), and per style x band the copy
     allowance of every weapon fielded by >= 40 rosters (free = round(p50),
-    max = ceil(p90)). Attached as `composition.skeleton` = {style_min_size,
-    seats: {pooled: {size: {seat: n}}, styles: {style: {size: {...}}}}}
-    and `composition.duplication.per_weapon_cells` = {bands, pooled:
-    {band: {weapon: {free, max}}}, styles: {style: {band: {...}}}}; the
-    engine resolves one seat row and one copy cell for its style and size
-    at set_content. Fail closed, loudly: a missing file, a file derived
-    from different artifacts than the ones on disk, an all-battles
-    derivation, an unknown seat or weapon, or a row that is not a
-    positive integer count blocks the build. A size with no row stays
-    unconstrained (unknown is explicit, never filled)."""
+    max = ceil(p90)), and per style x band the GENERATED band minima
+    (round(p50) of the predicate's carriers per roster where p50 >= 1).
+    Attached as `composition.skeleton` = {style_min_size,
+    seats: {pooled: {size: {seat: n}}, styles: {style: {size: {...}}}},
+    plan: {...}, minima: {keys, bands, pooled: {band: {key: n}}, styles:
+    {style: {band: {...}}}}} and `composition.duplication.per_weapon_cells`
+    = {bands, pooled: {band: {weapon: {free, max}}}, styles: {style:
+    {band: {...}}}}; the engine resolves one seat row, one minima row and
+    one copy cell for its style and size at set_content. Fail closed,
+    loudly: a missing file, a file derived from different artifacts than
+    the ones on disk, an all-battles derivation, an unknown seat, weapon
+    or minimum key, a pooled minima table that misses a band, or a row
+    that is not a positive integer count blocks the build. A size with no
+    row stays unconstrained (unknown is explicit, never filled)."""
     import hashlib
     if not os.path.exists(SKELETONS_PATH):
         sys.exit("out/skeletons.json missing — seat skeletons and copy "
@@ -2893,6 +2921,38 @@ def load_skeletons(known_weapons, seat_ids):
             out[str(int(size))] = clean      # empty = fields none, no demand
         return out
 
+    if doc.get("minima_keys") != list(GENERATED_MINIMA):
+        sys.exit(f"out/skeletons.json: minima_keys must be "
+                 f"{list(GENERATED_MINIMA)} (the generated band minima), got "
+                 f"{doc.get('minima_keys')!r} — rerun py -3 "
+                 f"pipeline/derive_skeletons.py")
+    minima = (doc.get("minima") or {}).get("typical")
+    if not isinstance(minima, dict) or set(minima) != {"pooled", "styles"}:
+        sys.exit("out/skeletons.json: minima.typical must carry pooled / styles")
+
+    def minima_rows(table, where):
+        out = {}
+        for band, row in (table or {}).items():
+            if band not in bands or not isinstance(row, dict):
+                sys.exit(f"out/skeletons.json: bad minima row {where}[{band!r}]")
+            clean = {}
+            for key, n in row.items():
+                if key not in GENERATED_MINIMA:
+                    sys.exit(f"out/skeletons.json: {where}[{band}]: unknown "
+                             f"minimum {key!r}")
+                if isinstance(n, bool) or not isinstance(n, int) or n < 1:
+                    sys.exit(f"out/skeletons.json: {where}[{band}][{key}] "
+                             f"must be a positive integer count, got {n!r}")
+                clean[key] = n
+            # an EMPTY row is kept: most of the style's winners field none
+            # (no minimum), where an absent row falls back to the pooled one
+            out[band] = clean
+        return out
+
+    min_pooled = minima_rows(minima["pooled"], "minima pooled")
+    if set(min_pooled) != set(bands):
+        sys.exit(f"out/skeletons.json: the pooled minima must carry every band "
+                 f"{sorted(bands)}, got {sorted(min_pooled)}")
     skeleton = {"style_min_size": int(doc.get("_style_min_size") or 10),
                 "seats": {"pooled": seat_rows(seats["pooled"], "pooled"),
                           "styles": {st: seat_rows(rows, f"styles[{st}]")
@@ -2904,7 +2964,15 @@ def load_skeletons(known_weapons, seat_ids):
                 "plan": {"pooled": plan_rows(plan["pooled"], "plan pooled"),
                          "styles": {st: plan_rows(rows, f"plan styles[{st}]")
                                     for st, rows in sorted(
-                                        (plan["styles"] or {}).items())}}}
+                                        (plan["styles"] or {}).items())}},
+                # band minima (ranged_aoe_core): a generation MINIMUM per
+                # declared style and band — the typical carrier count of
+                # the style's winners; a row without the key sets none
+                "minima": {"keys": list(GENERATED_MINIMA), "bands": bands,
+                           "pooled": min_pooled,
+                           "styles": {st: minima_rows(rows, f"minima styles[{st}]")
+                                      for st, rows in sorted(
+                                          (minima["styles"] or {}).items())}}}
     cells = {"bands": bands,
              "pooled": copy_rows(copies["pooled"], "pooled"),
              "styles": {st: copy_rows(rows, f"styles[{st}]")
@@ -3185,6 +3253,9 @@ def main():
     # error, never silently merged (the meta-prior precedent)
     dup = composition.setdefault("duplication", {})
     refuse_hand_per_weapon(dup)
+    # the ranged-AoE core minimum likewise (S7): a hand minimum in a
+    # composition band or a style override row is a build error
+    refuse_hand_minima(composition, styles)
     dup["per_weapon"] = {}
     seat_ids = set()
     for path in glob.glob(os.path.join(HERE, "roles.yaml")):
@@ -3199,7 +3270,11 @@ def main():
           + ", ".join(f"{st} {len(rows)}" for st, rows in sk["seats"]["styles"].items())
           + "; copy cells pooled "
           + ", ".join(f"{bk} {len(rows)}"
-                      for bk, rows in dup["per_weapon_cells"]["pooled"].items()))
+                      for bk, rows in dup["per_weapon_cells"]["pooled"].items())
+          + "; minima pooled "
+          + ", ".join(f"{bk} {row.get(k, 0)} {k}"
+                      for bk, row in sk["minima"]["pooled"].items()
+                      for k in sk["minima"]["keys"]))
     print("  meta prior    : generated (out/meta_prior.json, training split), "
           + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
           + " weapon rows; pairs "

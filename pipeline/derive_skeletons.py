@@ -29,6 +29,20 @@ tier2_blindtest v4h's holdout and nothing shipped learns from it):
             (build_dataset refuses a hand-set one).
   distinct  per style x band: distinct weapons per roster (p10/p50/p90) —
             a report line, nothing reads it.
+  minima    per style x band and pooled, the count of every GENERATED
+            band minimum's carriers per roster (today `ranged_aoe_core`:
+            a weapon some combo of which meets the predicate,
+            Engine._pred_possible — the forge's own test): p10 / p50 /
+            p90 and the minimum the forge reads, round-half-up(p50) where
+            p50 >= 1 (the standoff rule). A cell needs >= MIN_DISTINCT
+            rosters and always writes its row, EMPTY where most winners
+            field none (no minimum); a style's band under the floor
+            borrows its nearest filled cell by the style rows' rule
+            (same style, nearest band; else the parent style; stated as
+            `borrowed_from` with the cell's own count), and a style with
+            none filled reads the pooled row. This REPLACES the hand
+            minima the composition bands and the style overrides kept
+            (build_dataset refuses a hand-set one).
 
 Vote unit: one DISTINCT roster (guild set + weapon multiset) one vote, the
 style-board convention — the same guild's standing comp recurring across
@@ -58,6 +72,7 @@ OUT = os.path.join(HERE, "out")
 sys.path.insert(0, HERE)
 import rosters_io  # noqa: E402
 import jsonfmt  # noqa: E402
+from derive_style_bands import PARENT  # noqa: E402  (the hybrid styles' parents)
 
 ARTIFACT = rosters_io.path(OUT)
 STYLES_ARTIFACT = os.path.join(OUT, "party_styles.json")
@@ -209,10 +224,56 @@ def _distinct_cell(rosters):
 
 
 PLAN_KEYS = ("standoff",)   # plan tools counted per roster, see derive()
+# band minima GENERATED per style x band, see derive(); build_dataset
+# refuses a hand-set minimum on any of these keys
+MINIMA_KEYS = ("ranged_aoe_core",)
+
+
+def _band_minima(by_band, keys):
+    """Per band, the cell {n, key: {p10, p50, p90}} and its minimum row
+    {key: round-half-up(p50)} where p50 >= 1 (the standoff rule). A band
+    under MIN_DISTINCT rosters has no cell of its own; a cell always
+    writes its row, EMPTY where most winners field none of a key: no
+    minimum, never the pooled one."""
+    cells, typical = {}, {}
+    for band in BANDS:
+        rows = by_band.get(band) or []
+        if len(rows) < MIN_DISTINCT:
+            continue
+        cell = {"n": len(rows)}
+        typ = {}
+        for k in keys:
+            vals = [r.get(k, 0) for r in rows]
+            cell[k] = _stats(vals)
+            p50 = percentile(vals, 0.5)
+            if p50 >= 1:
+                typ[k] = half_up(p50)
+        cells[band] = cell
+        typical[band] = typ
+    return cells, typical
+
+
+def _minima_source(filled, style, band):
+    """The cell a style x band minimum reads — the style rows' thin-cell
+    rule (derive_style_bands.nearest): its own cell when it holds
+    MIN_DISTINCT rosters, else the same style's nearest filled band, else
+    the parent style at the same band, else the parent's nearest band;
+    None when none is filled (the engine reads the pooled row).
+    `filled` = {(style, band)}."""
+    order = list(BANDS)
+    i = order.index(band)
+    by_dist = sorted(order, key=lambda b: abs(order.index(b) - i))
+    for st in (style, PARENT.get(style)):
+        if not st:
+            continue
+        for b in by_dist:
+            if (st, b) in filled:
+                return st, b
+    return None
 
 
 def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
-           plan_of=None):
+           plan_of=None, minima_of=None):
     """`labels` = {(battle, index): style}; `seat_of(weapon)` -> primary seat
     id or None; `known` = catalogue weapon ids; `universe` = every seat id
     a catalogue weapon can carry (derived from `known` when omitted);
@@ -223,25 +284,35 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
     winners field of each tool. The forge reads it as a generation
     MINIMUM (a kite forged without its standoff tools is not the kite the
     engine itself would label), so a style whose winners field none
-    carries no row and demands nothing."""
+    carries no row and demands nothing. `minima_of(weapon)` -> the set of
+    MINIMA_KEYS the weapon carries (today `ranged_aoe_core`: some combo
+    meets the predicate); the minima table is the typical carrier count
+    per style x band, the band minimum the forge reads."""
     if universe is None:
         universe = sorted({s for s in (seat_of(w) for w in known) if s})
     plan_of = plan_of or (lambda w: frozenset())
+    minima_of = minima_of or (lambda w: frozenset())
     rosters = list(distinct_rosters(doc, labels, known, holdout_mod))
     pooled_by_size, styled_by_size = {}, {}
     plan_pooled, plan_styled = {}, {}
     pooled_band, styled_band = {}, {}
+    min_pooled, min_styled = {}, {}
     for r in rosters:
         sc = _seat_counts(r["weapons"], seat_of, universe)
         pc = {k: 0 for k in PLAN_KEYS}
+        mc = {k: 0 for k in MINIMA_KEYS}
         for w in r["weapons"]:
             for k in plan_of(w):
                 if k in pc:
                     pc[k] += 1
+            for k in minima_of(w):
+                if k in mc:
+                    mc[k] += 1
         pooled_by_size.setdefault(r["size"], []).append(sc)
         plan_pooled.setdefault(r["size"], []).append(pc)
         band = band_of(r["size"])
         pooled_band.setdefault(band, []).append(r)
+        min_pooled.setdefault(band, []).append(mc)
         if r["style"]:
             styled_by_size.setdefault(r["style"], {}).setdefault(
                 r["size"], []).append(sc)
@@ -249,6 +320,8 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
                 r["size"], []).append(pc)
             styled_band.setdefault(r["style"], {}).setdefault(
                 band, []).append(r)
+            min_styled.setdefault(r["style"], {}).setdefault(
+                band, []).append(mc)
     seat_cells, seat_typ = _seat_cells(pooled_by_size, universe)
     seats = {"cells": {"pooled": seat_cells, "styles": {}},
              "typical": {"pooled": seat_typ, "styles": {}}}
@@ -267,6 +340,28 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
             plan["cells"]["styles"][st] = c
         if t:
             plan["typical"]["styles"][st] = t
+    min_cells, min_typ = _band_minima(min_pooled, MINIMA_KEYS)
+    minima = {"cells": {"pooled": min_cells, "styles": {}},
+              "typical": {"pooled": min_typ, "styles": {}}}
+    own = {st: _band_minima(min_styled[st], MINIMA_KEYS) for st in min_styled}
+    filled = {(st, band) for st, (c, _t) in own.items() for band in c}
+    for st in sorted(own):
+        cells, typ = {}, {}
+        for band in BANDS:
+            src = _minima_source(filled, st, band)
+            if src is None:
+                continue
+            cell = dict(own[src[0]][0][src[1]])
+            if src != (st, band):
+                # a thin cell borrows, and says so
+                cell["borrowed_from"] = f"{src[0]}|{src[1]}"
+                cell["own_n"] = len((min_styled.get(st) or {}).get(band) or [])
+            cells[band] = cell
+            typ[band] = dict(own[src[0]][1][src[1]])
+        if cells:
+            minima["cells"]["styles"][st] = cells
+        if typ:
+            minima["typical"]["styles"][st] = typ
     copies = {"pooled": {}, "styles": {}}
     distinct = {"pooled": {}, "styles": {}}
     for band in BANDS:
@@ -305,15 +400,20 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
                        "weapon counts toward no seat"),
         "_typical": ("seats: round-half-up(p50) where p50 >= 1; copies: "
                      "free = round-half-up(p50) (>= 1), max = ceil(p90) "
-                     "(>= free); a weapon under the floor has no row"),
+                     "(>= free); a weapon under the floor has no row; "
+                     "minima: round-half-up(p50) of carriers per roster "
+                     "where p50 >= 1 per band, an empty row where most "
+                     "winners field none"),
         "_min_distinct": MIN_DISTINCT,
         "_style_min_size": STYLE_MIN_SIZE,
         "bands": {k: list(v) for k, v in BANDS.items()},
         "rosters": len(rosters),
         "seat_universe": list(universe),
         "plan_keys": list(PLAN_KEYS),
+        "minima_keys": list(MINIMA_KEYS),
         "seats": seats,
         "plan": plan,
+        "minima": minima,
         "copies": copies,
         "distinct": distinct,
     }
@@ -341,9 +441,14 @@ def main():
     labels = {(r["battle"], r["index"]): r.get("style")
               for r in ps.get("parties") or [] if r.get("style")}
     standoff = e.pred_members[e.STANDOFF]
+    # a carrier of a band minimum: SOME combo of the weapon meets the
+    # predicate (the forge's own optimistic test, combo-aware)
+    carries = {w: frozenset(k for k in MINIMA_KEYS if k in e._pred_possible(w))
+               for w in e.weapons}
     out = derive(doc, labels, e.seat_of, set(e.weapons),
                  plan_of=lambda w: frozenset(["standoff"]) if w in standoff
-                 else frozenset())
+                 else frozenset(),
+                 minima_of=lambda w: carries.get(w, frozenset()))
     out["_generated"] = datetime.date.today().isoformat()
     out["_source"]["party_rosters_sha256"] = sha256_of(ARTIFACT)
     out["_source"]["party_styles_sha256"] = sha256_of(STYLES_ARTIFACT)
@@ -372,6 +477,19 @@ def main():
         if d:
             print(f"  distinct {label:<8} 20: {d['p10']} / {d['p50']} / {d['p90']} "
                   f"(n {d['n']})")
+    mins = out["minima"]
+    for label, cells in [("pooled", mins["cells"]["pooled"])] \
+            + sorted(mins["cells"]["styles"].items()):
+        typ = (mins["typical"]["pooled"] if label == "pooled"
+               else mins["typical"]["styles"].get(label) or {})
+        for k in MINIMA_KEYS:
+            print(f"  minima {label:<10} {k}: " + ", ".join(
+                f"{band} {(typ.get(band) or {}).get(k, 'none')} "
+                f"(p10/p50/p90 {c[k]['p10']}/{c[k]['p50']}/{c[k]['p90']}, "
+                f"n {c['n']}"
+                + (f", borrowed from {c['borrowed_from']}, own n {c['own_n']}"
+                   if c.get("borrowed_from") else "") + ")"
+                for band, c in sorted(cells.items())))
     print(f"skeletons ({out['_split']['rule']}) -> {os.path.relpath(TARGET, HERE)}")
 
 

@@ -709,6 +709,24 @@
         this._band[planTool] = { min: planRows[planTool] };
       }
     }
+    /* GENERATED BAND MINIMA (composition.skeleton.minima; mirrors
+       engine.py): the ranged-AoE core minimum is the typical carrier
+       count of the declared style's winners in the band; a row without
+       the key sets no minimum; a dataset without the table keeps the
+       band as it stands. */
+    if (this._band !== null) {
+      var bandMin = this._bandMinima();
+      if (bandMin !== null) {
+        this._band = Object.assign({}, this._band);
+        for (i = 0; i < bandMin.keys.length; i++) {
+          var minKey = bandMin.keys[i];
+          if (Object.prototype.hasOwnProperty.call(bandMin.row, minKey))
+            this._band[minKey] = { min: bandMin.row[minKey] };
+          else
+            delete this._band[minKey];
+        }
+      }
+    }
     /* NEED PROFILES (dataset need_profiles) — mirrors
        engine.py: fine-seat bands + function coverage minima for the
        FORGE, scaled by size/reference_size (half-up, the pinned
@@ -4151,6 +4169,31 @@
       row = ((plan.styles || {})[this.style] || {})[key] || null;
     if (row === null) row = (plan.pooled || {})[key] || null;
     return Object.assign({}, row || {});
+  };
+
+  CompEngine.prototype._bandMinima = function () {
+    /* mirrors engine.py _band_minima: at the style floor and above, the
+       band covering the size, the DECLARED identity style's row, else
+       the pooled row; {keys, row} (a key absent from the row = no
+       minimum), or null when no table or band covers the size. */
+    var sk = this.skeleton || {};
+    var mins = sk.minima || {};
+    var anyM = false;
+    for (var k3 in mins) { anyM = true; break; }
+    if (!anyM) return null;
+    var floor = sk.style_min_size === undefined ? 10 : sk.style_min_size;
+    if (this.size < floor) return null;
+    var bands = mins.bands || {}, band = null;
+    for (var bk in bands) {
+      if (bands[bk][0] <= this.size && this.size <= bands[bk][1]) { band = bk; break; }
+    }
+    if (band === null) return null;
+    var row = null;
+    if (IDENTITY_STYLES[this.style])
+      row = ((mins.styles || {})[this.style] || {})[band] || null;
+    if (row === null) row = (mins.pooled || {})[band] || null;
+    if (row === null) return null;
+    return { keys: (mins.keys || []).slice(), row: Object.assign({}, row) };
   };
 
   CompEngine.prototype._dupCell = function () {

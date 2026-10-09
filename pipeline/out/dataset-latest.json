@@ -351,9 +351,6 @@
     "primary_heal": {
      "min": 1
     },
-    "ranged_aoe_core": {
-     "min": 2
-    },
     "support": {
      "max": 4
     }
@@ -371,9 +368,6 @@
     "min_size": 15,
     "primary_heal": {
      "min": 2
-    },
-    "ranged_aoe_core": {
-     "min": 3
     },
     "support": {
      "max": 6
@@ -393,9 +387,6 @@
     "primary_heal": {
      "min": 2
     },
-    "ranged_aoe_core": {
-     "min": 4
-    },
     "support": {
      "max": 8
     }
@@ -414,9 +405,6 @@
     "primary_heal": {
      "min": 3
     },
-    "ranged_aoe_core": {
-     "min": 6
-    },
     "support": {
      "max": 11
     }
@@ -434,9 +422,6 @@
     "min_size": 45,
     "primary_heal": {
      "min": 5
-    },
-    "ranged_aoe_core": {
-     "min": 9
     },
     "support": {
      "max": 15
@@ -4838,6 +4823,87 @@
    }
   },
   "skeleton": {
+   "minima": {
+    "bands": {
+     "10-14": [
+      10,
+      14
+     ],
+     "15-19": [
+      15,
+      19
+     ],
+     "20": [
+      20,
+      99
+     ]
+    },
+    "keys": [
+     "ranged_aoe_core"
+    ],
+    "pooled": {
+     "10-14": {
+      "ranged_aoe_core": 2
+     },
+     "15-19": {
+      "ranged_aoe_core": 3
+     },
+     "20": {
+      "ranged_aoe_core": 3
+     }
+    },
+    "styles": {
+     "brawl": {
+      "10-14": {},
+      "15-19": {},
+      "20": {}
+     },
+     "brawl_clap": {
+      "10-14": {
+       "ranged_aoe_core": 1
+      },
+      "15-19": {
+       "ranged_aoe_core": 1
+      },
+      "20": {
+       "ranged_aoe_core": 1
+      }
+     },
+     "clap": {
+      "10-14": {
+       "ranged_aoe_core": 3
+      },
+      "15-19": {
+       "ranged_aoe_core": 3
+      },
+      "20": {
+       "ranged_aoe_core": 4
+      }
+     },
+     "clap_kite": {
+      "10-14": {
+       "ranged_aoe_core": 3
+      },
+      "15-19": {
+       "ranged_aoe_core": 4
+      },
+      "20": {
+       "ranged_aoe_core": 4
+      }
+     },
+     "kite": {
+      "10-14": {
+       "ranged_aoe_core": 2
+      },
+      "15-19": {
+       "ranged_aoe_core": 3
+      },
+      "20": {
+       "ranged_aoe_core": 3
+      }
+     }
+    }
+   },
    "plan": {
     "pooled": {
      "10": {},
@@ -300624,20 +300690,6 @@
    ],
    "constraint_overrides": [
     {
-     "max_size": 14,
-     "min_size": 10,
-     "ranged_aoe_core": {
-      "min": 0
-     }
-    },
-    {
-     "max_size": 19,
-     "min_size": 15,
-     "ranged_aoe_core": {
-      "min": 0
-     }
-    },
-    {
      "frontline": {
       "max": 5,
       "min": 4
@@ -300647,10 +300699,7 @@
       "min": 3
      },
      "max_size": 29,
-     "min_size": 20,
-     "ranged_aoe_core": {
-      "min": 0
-     }
+     "min_size": 20
     }
    ],
    "mechanics": {
@@ -300798,10 +300847,7 @@
       "min": 3
      },
      "max_size": 19,
-     "min_size": 15,
-     "ranged_aoe_core": {
-      "min": 5
-     }
+     "min_size": 15
     },
     {
      "frontline": {
@@ -300809,10 +300855,7 @@
       "min": 3
      },
      "max_size": 29,
-     "min_size": 20,
-     "ranged_aoe_core": {
-      "min": 7
-     }
+     "min_size": 20
     }
    ],
    "mechanics": {
@@ -300888,22 +300931,12 @@
    ],
    "constraint_overrides": [
     {
-     "max_size": 19,
-     "min_size": 15,
-     "ranged_aoe_core": {
-      "min": 5
-     }
-    },
-    {
      "healer": {
       "max": 4,
       "min": 3
      },
      "max_size": 29,
-     "min_size": 20,
-     "ranged_aoe_core": {
-      "min": 7
-     }
+     "min_size": 20
     }
    ],
    "mechanics": {
@@ -301002,10 +301035,7 @@
       "min": 2
      },
      "max_size": 19,
-     "min_size": 15,
-     "ranged_aoe_core": {
-      "min": 4
-     }
+     "min_size": 15
     },
     {
      "frontline": {
@@ -301016,10 +301046,7 @@
       "min": 2
      },
      "max_size": 29,
-     "min_size": 20,
-     "ranged_aoe_core": {
-      "min": 5
-     }
+     "min_size": 20
     }
    ],
    "mechanics": {

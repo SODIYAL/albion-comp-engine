@@ -1127,24 +1127,26 @@ def run():
     # melee-heavy kite forge read "split identity" at 65% melee; the one
     # real kite 20-man (ss_kite_20) fields zero ramp/channel bruisers and
     # counts 5 ranged-AoE-core qualifiers. Conditional-payload now demotes
-    # at kite too, and kite carries ranged_aoe_core min 5 at 20 (4 at
-    # 15-19) — lower than clap's 7 because kite pressure includes curse/
-    # sustained ranged damage the burst-AoE predicate does not count.
+    # at kite too, and kite 20 carries a ranged_aoe_core minimum: the
+    # GENERATED one (skeleton minima, S7), the typical carrier count of
+    # kite's winners at 20, which the detail line records.
     e_k20 = Engine(content="blackzone_roam", size=20, style="kite")
     k_pool = set(e_k20.suggest_pool())
-    k_rows = ((E.data["styles"].get("kite") or {}).get("constraint_overrides")
-              or [])
-    k20 = next((r for r in k_rows if r.get("min_size") == 20), {})
-    check("T33 kite: conditional-payload demotes there too; ranged-AoE core "
-          "min 5 armed at 20",
+    k_min = ((E.data["composition"].get("skeleton") or {}).get("minima") or {})
+    k20 = (((k_min.get("styles") or {}).get("kite") or {}).get("20")
+           or (k_min.get("pooled") or {}).get("20") or {})
+    k20_band = ((e_k20._band or {}).get("ranged_aoe_core") or {}).get("min")
+    check("T33 kite: conditional-payload demotes there too; a ranged-AoE "
+          "core minimum armed at 20, the generated kite cell's",
           clarent not in k_pool and ursine not in k_pool
           and carving not in k_pool
           and "2H_LONGBOW" in k_pool
           and E.weapons[ursine]["style_fit"]["fit"]["kite"]["group"] == "situational"
-          and (k20.get("ranged_aoe_core") or {}).get("min") == 5,
+          and k20_band is not None and k20_band >= 1
+          and k20_band == k20.get("ranged_aoe_core"),
           f"kite20 clarent={clarent in k_pool} ursine={ursine in k_pool} "
           f"carving={carving in k_pool} longbow={'2H_LONGBOW' in k_pool} "
-          f"core_min={(k20.get('ranged_aoe_core') or {}).get('min')}")
+          f"core_min={k20_band} (generated row {k20}; ss_kite_20 counts 5)")
 
     # T34 — THE KITE HALF IS STANDOFF TOOLS, THE CLAP HALF IS INSTANT
     # (validation round 1 on harvested rosters):

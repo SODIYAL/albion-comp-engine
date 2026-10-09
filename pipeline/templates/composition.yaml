@@ -94,15 +94,26 @@ predicates:
 # must be FULL healers (high-healing E). Counted like a predicate minimum;
 # the values scale ~2/3 of the healer minimum and are PROVISIONAL beyond the
 # validated sizes (the rule itself: a hybrid may never be the sole healer).
+# The `ranged_aoe_core` minimum is GENERATED, never set here:
+# pipeline/derive_skeletons.py -> out/skeletons.json `minima` carries, per
+# style x band (10-14 / 15-19 / 20+) and pooled, round(p50) of the
+# predicate's carriers per distinct killer roster of the training split
+# where that p50 is 1 or more (the standoff rule), no minimum where most
+# winners field none, and below 10 none (killer parties under 10 are
+# open-world squads). A style's band under 40 rosters borrows the style's
+# nearest filled band, else its parent style's, as the style rows do. The
+# engine lays the declared style's row (else the pooled row) on the band
+# at set_content; build_dataset refuses a hand minimum on the key in any
+# row here or in styles.yaml (S7).
 constraint_bands:
   - {min_size: 2,  max_size: 4,  healer: {max: 1}, frontline: {max: 2}, support: {max: 1}}
   - {min_size: 5,  max_size: 7,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}, support: {max: 2}, primary_heal: {min: 1}}
   - {min_size: 8,  max_size: 9,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 4}, support: {max: 3}, primary_heal: {min: 1}}
-  - {min_size: 10, max_size: 14, healer: {min: 2, max: 3}, frontline: {min: 2, max: 5}, support: {max: 4}, ranged_aoe_core: {min: 2}, primary_heal: {min: 1}}
-  - {min_size: 15, max_size: 19, healer: {min: 2, max: 4}, frontline: {min: 3, max: 7}, support: {max: 6}, ranged_aoe_core: {min: 3}, primary_heal: {min: 2}}
-  - {min_size: 20, max_size: 29, healer: {min: 3, max: 5}, frontline: {min: 4, max: 9}, support: {max: 8}, ranged_aoe_core: {min: 4}, primary_heal: {min: 2}}
-  - {min_size: 30, max_size: 44, healer: {min: 5, max: 8}, frontline: {min: 6, max: 13}, support: {max: 11}, ranged_aoe_core: {min: 6}, primary_heal: {min: 3}}
-  - {min_size: 45, max_size: 60, healer: {min: 7, max: 12}, frontline: {min: 9, max: 20}, support: {max: 15}, ranged_aoe_core: {min: 9}, primary_heal: {min: 5}}
+  - {min_size: 10, max_size: 14, healer: {min: 2, max: 3}, frontline: {min: 2, max: 5}, support: {max: 4}, primary_heal: {min: 1}}
+  - {min_size: 15, max_size: 19, healer: {min: 2, max: 4}, frontline: {min: 3, max: 7}, support: {max: 6}, primary_heal: {min: 2}}
+  - {min_size: 20, max_size: 29, healer: {min: 3, max: 5}, frontline: {min: 4, max: 9}, support: {max: 8}, primary_heal: {min: 2}}
+  - {min_size: 30, max_size: 44, healer: {min: 5, max: 8}, frontline: {min: 6, max: 13}, support: {max: 11}, primary_heal: {min: 3}}
+  - {min_size: 45, max_size: 60, healer: {min: 7, max: 12}, frontline: {min: 9, max: 20}, support: {max: 15}, primary_heal: {min: 5}}
 
 # ---------------------------------------------------------------------------
 # Exact-weapon duplication.

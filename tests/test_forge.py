@@ -506,8 +506,9 @@ def t_pred_combo_aware():
     member as core even when its equipped kit supplied nothing. A member
     locked with a non-qualifying spell pick must not count, and the forge
     must still deliver the minimum with real kits (or report infeasible)."""
-    # balanced keeps the base band's ranged_aoe_core minimum (4 at 20-29;
-    # brawl carries none)
+    # balanced reads the pooled generated ranged_aoe_core minimum at 20
+    # (skeleton minima, S7; brawl's winners field none, so brawl carries
+    # none)
     e = Engine(content="blackzone_roam", size=20, style="balanced")
     need = (e._band.get("ranged_aoe_core") or {}).get("min", 0)
     # lock core-capable weapons with spell kits that do NOT qualify
@@ -961,13 +962,16 @@ def t_need_profiles():
     ft = et.forge(20)
     st, _fnt = mix(et, ft["party"])
     terry_ok = ft["feasible"] and 2 <= st.get("stopper_tank", 0) <= 4
-    # follow-up rule: ranged styles at 20 field a
-    # 7-strong ranged-AoE core (combo-aware — the members' SELECTED
-    # spells deliver it), killing the melee-heavy clap_kite defect
+    # follow-up rule: ranged styles at 20 field a ranged-AoE core
+    # (combo-aware — the members' SELECTED spells deliver it), killing the
+    # melee-heavy clap_kite defect; its size is the GENERATED minimum of
+    # clap_kite's winners at 20 (skeleton minima, S7)
     ek = Engine(content="blackzone_roam", size=20, style="clap_kite")
     fk = ek.forge(20)
     _c, _r, pk, _g = ek._forge_counts(fk["party"], fk["combos"])
-    ranged_ok = fk["feasible"] and pk.get("ranged_aoe_core", 0) >= 7
+    ck_min = ((ek._band or {}).get("ranged_aoe_core") or {}).get("min", 0)
+    ranged_ok = (fk["feasible"] and ck_min >= 1
+                 and pk.get("ranged_aoe_core", 0) >= ck_min)
     e7 = Engine(content="blackzone_roam", size=7)
     unarmed = not e7._profile_min and not e7._profile_max \
         and e7.forge(7)["feasible"]
@@ -977,11 +981,11 @@ def t_need_profiles():
     locked_ok = fl["party"][0] == "2H_HAMMER_AVALON" \
         and 2 <= sl.get("engage_tank", 0) <= 3
     check("F21 need profiles: engage-leaning default bands + function "
-          "coverage at 20, stopper-heavy terry, clap_kite ranged core 7, "
-          "unarmed below 15, locked members count",
+          "coverage at 20, stopper-heavy terry, clap_kite ranged core at its "
+          "generated minimum, unarmed below 15, locked members count",
           bz_ok and terry_ok and ranged_ok and unarmed and locked_ok,
           f"bz={s} funcs={fn} terry_stoppers={st.get('stopper_tank', 0)} "
-          f"ck_ranged_core={pk.get('ranged_aoe_core', 0)} "
+          f"ck_ranged_core={pk.get('ranged_aoe_core', 0)}/{ck_min} "
           f"locked_engage={sl.get('engage_tank', 0)}")
 
 
@@ -1194,25 +1198,27 @@ def t_min_need_disjoint_seats():
     needing one more stopper AND one more ranged-AoE body reads 1 instead
     of 2, the beam commits its last slot, and the roster dies one short.
     Admissible means never MORE than a legal completion needs - it must
-    still never be LESS. Balanced keeps the base band's ranged_aoe_core
-    minimum (4 at 20-29; brawl carries none)."""
+    still never be LESS. Balanced reads the pooled generated ranged_aoe_core
+    minimum (skeleton minima, S7; brawl carries none); the state stands one
+    ranged-AoE body under it."""
     e = Engine(content="territory_defense", size=20, style="balanced")
     pool = e.suggest_pool()
     ctx = e._forge_ctx(pool)
+    core_min = ctx["pred_min"].get("ranged_aoe_core", 0)
 
     def sat(pn, w):
         return pn in (e._pred_possible(w)
                       | (e._profile_members.get(w) or frozenset()))
     stoppers = [w for w in pool if e._profile_primary.get(w) == "stopper_tank"]
     # the premise the arithmetic turns on, asserted rather than assumed
-    premise = bool(stoppers) and not any(sat("ranged_aoe_core", w)
-                                         for w in stoppers)
+    premise = bool(stoppers) and core_min >= 1 \
+        and not any(sat("ranged_aoe_core", w) for w in stoppers)
     # a roster one body short on TWO minima no single body can cover: the
     # frontline band is already met, so the stopper is a nested seat need
     roles = {"frontline": 4, "healer": 4, "dps": 8, "support": 2}
-    preds = {"stopper_tank": 1, "ranged_aoe_core": 3, "engage_tank": 3,
-             "shield_support": 1, "pierce": 1, "anti_heal": 1,
-             "primary_heal": 2}
+    preds = {"stopper_tank": 1, "ranged_aoe_core": core_min - 1,
+             "engage_tank": 3, "shield_support": 1, "pierce": 1,
+             "anti_heal": 1, "primary_heal": 2}
     probe = next(w for w in pool if e.role_of(w) == "healer")
     need = e._forge_min_need(ctx, roles, preds, probe, frozenset())
     f = e.forge(20)
@@ -1222,7 +1228,8 @@ def t_min_need_disjoint_seats():
           "minimum its satisfiers cannot fill; territory_defense balanced "
           "forges a full roster at 20",
           premise and need >= 2 and full,
-          f"premise={premise} need={need} (two bodies required) "
+          f"premise={premise} need={need} (two bodies required; ranged-AoE "
+          f"core minimum {core_min}) "
           f"feasible={f.get('feasible')} party={len(f.get('party') or [])}")
 
 
