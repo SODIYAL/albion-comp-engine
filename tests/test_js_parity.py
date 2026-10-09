@@ -146,7 +146,13 @@ def make_cases(data):
               "2H_CLAWPAIR", "2H_DAGGERPAIR", "2H_KNUCKLES_AVALON",
               "MAIN_NATURESTAFF_CRYSTAL", "MAIN_HOLYSTAFF_AVALON", "2H_ICECRYSTAL_UNDEAD",
               "2H_HOLYSTAFF_UNDEAD", "2H_ROCKSTAFF_KEEPER", "2H_LONGBOW_UNDEAD"]
-    for party, style in ((gank3, "balanced"), (gank18, "brawl")):
+    # a frontline counts melee by its seat (T43d): round 4's roster 11,
+    # its Witchwork Staff an engage tank beside two flex bombs
+    front11 = ["2H_KNUCKLES_SET2", "2H_NATURESTAFF_HELL", "2H_BOW", "2H_ENIGMATICSTAFF",
+               "2H_DUALSCIMITAR_UNDEAD", "2H_AXE", "MAIN_SPEAR_KEEPER", "MAIN_MACE",
+               "2H_AXE_AVALON", "MAIN_ARCANESTAFF_UNDEAD"]
+    for party, style in ((gank3, "balanced"), (gank18, "brawl"),
+                         (front11, "balanced")):
         if all(w in data["weapons"] for w in party) and style in styles:
             cases.append({"content": "territory_defense", "size": len(party),
                           "style": style, "party": party,

@@ -28,8 +28,6 @@ Each is decidable today from evidence already in the repo.
 - **Is the Infernal Staff's E a standoff tool** (it alone made a kite of
   round-4 roster 5), and should one tool out-vote five ranged dealers at bomb
   share 0.36. (V: 09b, validation round 4)
-- **A frontline's damage points making a ranged carrier** (Witchwork, round-4
-  roster 11) — same shape as the rejected utility-carrier rule. (V: 09b)
 - **Carrier FLOORS**: which of the six gear effects are needs. The harvest has
   the plate Royal Armor on 2.7% of builds in battles of 20-59 players (about
   0.5 per 20; the 3.65% the log records does not reproduce on that week's
@@ -501,9 +499,9 @@ kit its saved link holds.
   "Witchwork (DPS)" carries DPS as the slot's role label, and the role
   tag and the per-role counts still read the weapon's primary seat
   (frontline: one role read). Whether a comp's counts follow the caller's
-  label where it names a role class is a maintainer decision; the same
-  weapon's seat is the open question under "A frontline's damage points
-  making a ranged carrier".
+  label where it names a role class is a maintainer decision; the
+  identity reads the same weapon by its seat too (a frontline counts melee
+  in the melee share; V: 10, A frontline counts melee by its seat).
 - **Multi-party comps**: the planner holds a zerg as parties of 20, one
   tab each, every party its own comp and the address carrying all of them.
   A saved comp keeps the open party's slots and address alone (a comp or

@@ -3604,7 +3604,13 @@
         delivery = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
       }
       var side = delivery === "ranged" ? "ranged" : "melee";
-      if (delivery === "flex") {
+      if (this.roleOf(w) === "frontline") {
+        /* a frontline counts melee by its seat, whatever its delivery
+           (validation round 4, roster 11); the line, not the damage core:
+           it weighs in neither rigid core and anchors no split (mirrors
+           engine.py) */
+        side = "front";
+      } else if (delivery === "flex") {
         flex[w] = true;
         /* a flex BOMB (unconditional group payload at range) joins the
            rigid core below; single-target / ramp flex stays melee */
@@ -3627,7 +3633,8 @@
                     && rigidRanged < rigidMelee) ? "melee" : "ranged";
     for (pi = 0; pi < pending.length; pi++) {
       var pIdx = pending[pi][0], pW = pending[pi][1], pDmg = pending[pi][2],
-          pSide = pending[pi][3] === "flex" ? flexSide : pending[pi][3];
+          pSide = pending[pi][3] === "flex" ? flexSide
+                : pending[pi][3] === "front" ? "melee" : pending[pi][3];
       sides[pIdx] = pSide;
       if (carriers[pSide].indexOf(pW) === -1) carriers[pSide].push(pW);
       if (pSide === "ranged") ranged += pDmg; else melee += pDmg;
@@ -3724,12 +3731,13 @@
         ? "melee" : "ranged";
       var majority = minority === "melee" ? "ranged" : "melee";
       /* flex and utility-carrier weapons never anchor a damage-identity
-         split (mirrors engine.py — V3 round 1). */
+         split (mirrors engine.py — V3 round 1), nor does a frontline */
       var rigid = [];
       for (var ri = 0; ri < carriers[minority].length; ri++) {
         var rw = carriers[minority][ri];
         var rsf = this._styleFitOf(rw);
-        if (!flex[rw] && !(rsf && rsf.utility_carrier)) rigid.push(rw);
+        if (!flex[rw] && this.roleOf(rw) !== "frontline" &&
+            !(rsf && rsf.utility_carrier)) rigid.push(rw);
       }
       if (!rigid.length) {
         /* every minority carrier is flex — the comp is NOT split */

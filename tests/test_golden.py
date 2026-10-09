@@ -1736,6 +1736,41 @@ def run():
           f"others={ {k: (v.get('style'), v.get('archetype')) for k, v in not43.items()} } "
           f"no_style={no_style} unchanged={same43}")
 
+    # T43d — A FRONTLINE COUNTS MELEE BY ITS SEAT (round 4's abstention,
+    # roster 11, labelled brawl: its Witchwork Staff, seated as an engage
+    # tank, counted as a ranged carrier through its damage points, and with
+    # the Bow it pulled the Heron Spear and Realmbreaker to the ranged side:
+    # melee 0.47, split). A member whose primary seat is frontline (role_of)
+    # adds its damage to the melee side whatever its delivery; it is the
+    # line, so it weighs in neither rigid core the flex bombs join and
+    # anchors no split. Roster 11 reads brawl with the Witchwork on the
+    # melee side; no split conflict in any round or fixture roster here
+    # names a frontline; reading the identity moves no score.
+    e43d = Engine(content="territory_defense", size=10)
+    r11 = round4_open[11]
+    fit43d = e43d.fitness(r11)
+    ci11 = e43d.comp_identity(r11)
+    ww = next(m for m in ci11["members"] if m["weapon"] == "MAIN_ARCANESTAFF_UNDEAD")
+    front_split = []
+    rosters43d = ([ids for _c, _a, ids in round1.values()]
+                  + [ids for _c, _a, ids in round2.values()]
+                  + [ids for _c, _a, ids in round3.values()]
+                  + list(all4.values()) + [clap10, kite10, blap])
+    for ids in rosters43d:
+        e43d.set_content("territory_defense", len(ids))
+        for c in e43d.comp_identity(ids)["conflicts"]:
+            if c["kind"] == "split" and e43d.role_of(c["weapon"]) == "frontline":
+                front_split.append(c["display_name"])
+    e43d.set_content("territory_defense", len(r11))
+    check("T43d a frontline counts melee by its seat: round 4's roster 11 "
+          "(labelled brawl) reads brawl with its Witchwork Staff on the melee "
+          "side; no split conflict names a frontline; no score moves",
+          ci11.get("style") == "brawl" and ww["role"] == "frontline"
+          and ww["side"] == "melee" and not front_split
+          and e43d.fitness(r11) == fit43d,
+          f"read={ci11.get('style')} melee={ci11['melee_share']:.3f} "
+          f"witchwork={ww} front_split={front_split} rosters={len(rosters43d)}")
+
     # T40 — THE KIT VALIDATION ROUND (builds shown without labels,
     # graded against the styles of the rosters they were worn in).
     # Realmbreaker 7/8, Hallowfall 6/8; the disagreement was the LABEL:

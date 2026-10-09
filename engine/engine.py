@@ -3964,7 +3964,17 @@ class Engine:
                 delivery = ("ranged" if ar >= self.IDENTITY_RANGED_ATTACK
                             else "melee")
             side = "ranged" if delivery == "ranged" else "melee"
-            if delivery == "flex":
+            if self.role_of(w) == "frontline":
+                # A FRONTLINE COUNTS MELEE BY ITS SEAT (validation round 4,
+                # roster 11: a Witchwork Staff seated as an engage tank read
+                # as a ranged carrier through its damage points and held a
+                # brawl at 0.47 melee). A member whose primary seat is
+                # frontline (role_of, the one role read) adds its damage to
+                # the melee side whatever its delivery. It is the line, not
+                # the damage core: it weighs in neither rigid core the flex
+                # bombs join and anchors no split (below).
+                side = "front"
+            elif delivery == "flex":
                 flex.add(w)
                 # a FLEX BOMB — an unconditional group payload landed at
                 # range (Realmbreaker, Spiked Gauntlets, Rift Glaive) —
@@ -3986,7 +3996,8 @@ class Engine:
         # ranged damage is at least the rigid melee damage, its home melee
         # side otherwise). Round 2 rosters 3, 5, 16, 17 and 19 had read
         # brawl because three flex bombs outweighed a ranged core they
-        # were in fact part of.
+        # were in fact part of. A frontline ("front") weighs in neither
+        # rigid core.
         rigid_melee = sum(d for _, _, d, sd in pending if sd == "melee")
         rigid_ranged = sum(d for _, _, d, sd in pending if sd == "ranged")
         # a flex bomb goes home to the melee side only when the rigid core
@@ -4001,6 +4012,8 @@ class Engine:
         for i, w, dmg, side in pending:
             if side == "flex":
                 side = flex_side
+            elif side == "front":
+                side = "melee"
             sides[i] = side
             if w not in carriers[side]:
                 carriers[side].append(w)
@@ -4122,9 +4135,11 @@ class Engine:
             # catch bots — Harpoon) have a utility identity, not a damage
             # identity, so neither can anchor a damage-identity split
             # (V3 round 1: the 20v20 comp is a clap, not a split, and
-            # Spirithunter is why it misread).
+            # Spirithunter is why it misread); a frontline is the line
+            # every style fields, so it anchors none either.
             rigid = [w for w in carriers[minority]
                      if w not in flex
+                     and self.role_of(w) != "frontline"
                      and not ((self._style_fit_of(w) or {})
                               .get("utility_carrier"))]
             if not rigid:
