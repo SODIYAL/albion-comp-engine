@@ -1726,6 +1726,9 @@ check("LAST_PICK_KEY" in DECISION_JS and "cloneNode(true)" in DECISION_JS
       "L47e a changed recommendation crossfades over its prior card without opening a blank frame")
 check("prefers-reduced-motion:reduce" in SHELL and "animation:none !important" in SHELL,
       "L47f the existing reduced-motion contract disables the new motion")
+check(".cap-rings .ring{fill:none; stroke-linecap:round; stroke-dasharray:100 200;" in SHELL,
+      "L47g a ring at zero coverage paints nothing: its dash gap outruns the path, so no "
+      "zero-length dash lands on the path's end with a round cap")
 
 if FAILURES:
 

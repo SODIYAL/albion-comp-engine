@@ -1238,7 +1238,10 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    painting over the legend (tests/test_display_math.js guards it) */
 .cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:var(--rule); stroke-linecap:round}
-.cap-rings .ring{fill:none; stroke-linecap:round; stroke-dasharray:100;
+/* the gap outruns the path (pathLength 100): with a gap of 100 a zero fill
+   starts the next dash exactly at the path's end, and a zero-length dash
+   with a round cap paints a dot there */
+.cap-rings .ring{fill:none; stroke-linecap:round; stroke-dasharray:100 200;
   stroke-dashoffset:calc(100 - var(--cap-to)); transition:stroke .18s var(--ease)}
 .cap-rings .ring.cap-shift{animation:cap-ring-settle .48s var(--ease) both}
 @keyframes cap-ring-settle{
