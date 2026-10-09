@@ -55,8 +55,13 @@ Each is decidable today from evidence already in the repo.
   `ranged_aoe_core` minimum the gated brawl forge stopped at 13 of 15 and
   17 of 20; brawl now carries no such minimum (V: 10, A gap-closer grounds
   no ranged presence) and the gated forge is not re-measured since (see
-  "Forge minima above what winners field"). Decide the gate, styled, once
-  the minima are settled.
+  "Forge minima above what winners field"). The ungated default forge
+  measured whole (notes/findings/2026-10-09-forge-quality.md): 18% of its
+  slots at 10-20 are weapons under 2% of the cell's winners field (6%
+  fielded by none of them), the share the earlier sweep measured; Fists of
+  Avalon is forged into 41 of 48 cells on at most 6.6% of a cell's
+  rosters, Arclight Blasters into 19 on under 1%. Decide the gate, styled,
+  once the minima are settled.
 - **Forge minima above what winners field**: with a gap-closer grounding
   no ranged presence (H6c), killer parties of 10+ field `ranged_aoe_core`
   carriers per party at a p50 of 3 / 3 / 4 on clap, 3 / 4 / 4 on clap_kite,
@@ -65,10 +70,13 @@ Each is decidable today from evidence already in the repo.
   base band's 2 / 3 / 4 (met by 63 / 57 / 46% pooled and 10 / 0 / 0% of
   brawl_clap rosters) and the styles' 5 and 7 at 15-19 and 20 on clap and
   clap_kite, 4 and 5 on kite. The forge meets them by drafting carriers
-  winners field rarely. Brawl carries none (p50 0; V: 10, A gap-closer
-  grounds no ranged presence). A minimum per style x band from the harvest
-  (the standoff rule: round-half-up of the p50 where it is 1 or more) is
-  the derivation to take.
+  winners field rarely: forged for brawl_clap at Territory Defense 20 and
+  Castle 20 the roster seats three ranged-AoE bodies against the brawl_clap
+  seat cell's typical of one and p90 of two
+  (notes/findings/2026-10-09-forge-quality.md). Brawl carries none (p50 0;
+  V: 10, A gap-closer grounds no ranged presence). A minimum per style x
+  band from the harvest (the standoff rule: round-half-up of the p50 where
+  it is 1 or more) is the derivation to take.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
@@ -108,10 +116,14 @@ Each is decidable today from evidence already in the repo.
   member naked reads the held-out 7s better (top-3 8.9% against 7.5%).
   (V: 09b, V3 round 2)
 - **Kite weights**: with the seat skeleton and the standoff minimum the
-  forged kite 20 reads clap_kite to the engine's own identity (it read as a
-  strong clap before); a PURE kite read needs the kite style's multipliers
-  — never validated — to prefer sustained ranged pressure over bombs. Label
-  a forged kite in the next validation round.
+  forged kite reads to the engine's own identity as kite at 15 and
+  clap_kite at 20 in every content the forge sweep runs, each roster on
+  exactly the plan minimum's two standoff tools, and as clap at 10 (one
+  tool), below 10 and at 25 (no plan row)
+  (notes/findings/2026-10-09-forge-quality.md); a PURE kite read at 20
+  needs the kite style's multipliers — never validated — to prefer
+  sustained ranged pressure over bombs. Label a forged kite in the next
+  validation round.
 - **Fill order as the beam's sequence** (healer -> frontline -> support ->
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering
@@ -139,19 +151,27 @@ Each is decidable today from evidence already in the repo.
   planner forges each party of a zerg at its own plan, capped at 20; the
   sheet's engine read recommends, it never forges), so three readings of
   the forge at 25 concern the engine API and its tests only:
-  territory_defense at 25 forges one to two members short (the profile
-  scales stopper_tank to a minimum of 3 inside a frontline cap of 5, and the
-  deadlock guard checks capacity exists, not that it is enough; V: 09b,
-  Chains reach past a slot); `balanced` keeps the base band and forges 3
-  healers at castle 25 where the guild sheet says 4 at 20+ with no style
-  attached (V: 09b, Healers per five); and with no 21+ harvest rows the
-  typical role count (standing rule 18) stops at 20, so castle 25 forges 6
-  healers on clap (V: 09b, Tanks and supports). They return if a single
-  party past 20 does; a 21+ harvest band would settle the third.
+  territory_defense at 25 forges members short (the forge sweep: clap 23
+  of 25, the other five styles full; the profile scales stopper_tank to a
+  minimum of 3 inside a frontline cap of 5, and the deadlock guard checks
+  capacity exists, not that it is enough; V: 09b, Chains reach past a
+  slot), and refresh then returns the same partial roster without
+  `exhausted` (`avoid` applies at the final depth, which a beam that dies
+  short never reaches); `balanced` keeps the base band (3-5 healers) and
+  forges 5 healers at both 25-man contents where the guild sheet says 4 at
+  20+ with no style attached (V: 09b, Healers per five); and with no 21+
+  harvest rows the typical role count (standing rule 18) stops at 20, so
+  the styled 25 forges field 6-7 healers (9 of 10 sweep cells; 6 on clap)
+  (V: 09b, Tanks and supports; notes/findings/2026-10-09-forge-quality.md).
+  They return if a single party past 20 does; a 21+ harvest band would
+  settle the third.
 - **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
-  4): a typical only bars bodies beyond it; the shortfall is a support
-  demand question (which support capabilities the 20-man rows under-ask
-  for), not a role-count one. (V: 09b, Tanks and supports)
+  4; the forge sweep: 2 in five of the six clap and clap_kite cells at 20
+  and 1 at Castle 20 clap, under the cell's p10 of 2,
+  notes/findings/2026-10-09-forge-quality.md): a typical only bars bodies
+  beyond it; the shortfall is a support demand question (which support
+  capabilities the 20-man rows under-ask for), not a role-count one. (V:
+  09b, Tanks and supports)
 - **Sub-10 tanks and supports rest on three castle_outpost comps** (roads
   has one, so it reads the healer row only). More sub-10 published comps,
   or a sub-10 killboard filter that separates content comps from open-world
@@ -465,10 +485,29 @@ Each is decidable today from evidence already in the repo.
   label (battle location from the killboard) or each content has its own
   comps. Refit Blackzone Roam after each fold that moves the training
   split materially (`extract` then `fit`; the pull rule stays).
-- **brawl_clap under the floor everywhere** (28 / 36 / 15 rosters): its seat
-  and plan rows fall back to the pooled cell, its copy rows to pooled; the
-  forged brawl_clap 20 reads as a split identity. Nothing to derive until
-  the harvest supplies the cell.
+- **The forged brawl_clap reads brawl**: its seat cells clear the floor
+  through a +-1 size window (50-80 rosters per size) and its copy cells at
+  10-14 and 15-19 (20 reads the pooled copy cell); its band keeps the base
+  `ranged_aoe_core` minimum. Forged for brawl_clap, the roster reads brawl
+  in 9 of 10 sweep cells and split in one (Castle 20), never brawl_clap
+  (notes/findings/2026-10-09-forge-quality.md). The ranged minimum it
+  keeps sits above what brawl_clap winners field ("Forge minima above what
+  winners field").
+- **The forge returns a local optimum**: in 27 of 72 planner cells and 8
+  of 18 Dragon Portal cells of the forge sweep a refresh alternative
+  (`forge(avoid=)`) outscores the button's roster (best gap per cell:
+  median 0.07% of comp score, largest 1.22% at Blackzone Roam 15
+  brawl_clap, four slots apart; notes/findings/2026-10-09-forge-quality.md).
+  Of the 48 beating alternatives, the shared members' combos and kits alone
+  beat the button in 1; the weapon swap alone, every other member's build
+  kept, beats it in 24 (twelve of them two-to-four-slot swaps with every
+  shared build identical); the other 23 need the swap and other members'
+  builds to move together. The constrained 1-opt already re-resolves each
+  slot's build, so the gap is the weapon choice in one to four slots,
+  beyond the bounded 2-opt (the four weakest slots in pairs, a shortlist
+  of 12). A wider multi-slot search in both ports, held to parity and the
+  browser's perf budget; measure with `py -3
+  pipeline/audit_forge_quality.py` (deterministic).
 - **An independent style labeller**: the harvest rosters are labelled by
   the engine's own `comp_identity`, the style x size rows and the seat
   skeleton are fitted to those labels, and the forge is judged against
@@ -615,6 +654,8 @@ only). Saved player profiles moved to "Platform" above.
   exist. (Exalted is decided: healer, support lane secondary.)
 - **Refresh alternatives walk one swap at a time**: next-best is exact, so
   successive refreshes under the same locks usually differ by a single
-  member. If more diverse alternatives are wanted, a diversity rule (avoid
-  rosters sharing all but k members) is the knob — a maintainer decision,
-  not a derivation. (V: 09b, Slot controls)
+  member (the forge sweep: 87 of 144 alternatives one slot from the
+  button's roster, 34 two; notes/findings/2026-10-09-forge-quality.md). If
+  more diverse alternatives are wanted, a diversity rule (avoid rosters
+  sharing all but k members) is the knob — a maintainer decision, not a
+  derivation. (V: 09b, Slot controls)

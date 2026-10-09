@@ -120,6 +120,7 @@ py -3 pipeline/audit_validation_asymmetry.py  # legacy vs V3-W vs dressed top-3 
 py -3 pipeline/audit_dressed_templates.py     # per-comp capability supply weapon/combo/dressed/doctrine vs targets, soft caps, floors -> out/dressed_template_audit.json
 py -3 pipeline/audit_frontline_floor.py       # adversarial no-tank parties vs the tankiness hard floor -> out/frontline_floor_audit.json
 py -3 pipeline/audit_gear_synergy.py          # gear-sourced synergy sides: measured + labeled hypotheticals -> out/gear_synergy_audit.json
+py -3 pipeline/audit_forge_quality.py         # the forge button's rosters, planner grid + portal pools, graded against the harvest -> review/forge_quality/
 ```
 
 None of these writes anything a build reads. The gear-synergy finding is
@@ -129,6 +130,9 @@ are pruned, see `notes/validation/README.md`); the tuning discipline (train /
 validation / holdout) is a standing rule in `tests/VALIDATION.md`. (The
 `calibration/` scaffold and `calibrate_scoring.py` are retired: four train
 cases, empty validation and holdout, nothing in the build or CI read them.)
+The forge-quality sweep's finding is
+`notes/findings/2026-10-09-forge-quality.md`; its first run on an artifact
+parses the roster artifact and caches the parties it grades against.
 
 ## Mechanics
 
