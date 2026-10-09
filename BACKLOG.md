@@ -25,9 +25,6 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **Is the Infernal Staff's E a standoff tool** (it alone made a kite of
-  round-4 roster 5), and should one tool out-vote five ranged dealers at bomb
-  share 0.36. (V: 09b, validation round 4)
 - **Carrier FLOORS**: which of the six gear effects are needs. The harvest has
   the plate Royal Armor on 2.7% of builds in battles of 20-59 players (about
   0.5 per 20; the 3.65% the log records does not reproduce on that week's
@@ -101,6 +98,15 @@ Each is decidable today from evidence already in the repo.
   kite. A forged 20 called kite puts the question on the identity read;
   one called clap_kite or clap puts it on the kite weights. (V: 10, Kite
   weights wait for a style-labelling form)
+- **Is the Infernal Staff's E a standoff tool: the lone-tool floor waits
+  for the kite form's labels.** Round 4's roster 5 (one Infernal Staff,
+  bomb share 0.407, called clap) reads kite under the 0.45 floor; the
+  labelled one-tool rosters fit any floor in (0.304, 0.407], and the
+  midpoint would turn 333 of 807 10-14 kite reads clap. The kite form's
+  one-tool rosters of 10 (a harvested kite read at 0.294, the forged
+  kite 10 read clap at 0.458 and 0.481) refit the floor once answered.
+  (V: 10, The lone-tool floor waits for the kite form; 09b, validation
+  round 4)
 - **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
   style board learns from the training split): at `--n 500` (1,500 drops),
   on the fitted Blackzone Roam weights, role-level 64% (harvest_gear)
