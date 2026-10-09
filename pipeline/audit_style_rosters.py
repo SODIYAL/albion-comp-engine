@@ -10,7 +10,9 @@ near-complete killer-party roster of 10+ players:
 
   1. labels its playstyle with the engine's own comp_identity (the page's
      bottom-up read: brawl / clap / kite / brawl_clap / clap_kite; rosters
-     that read "forming" or "split" are set aside and counted);
+     that read "forming" or "split" are set aside and counted, and so are
+     the rosters of 14 or fewer the gank read labels: a gank is no style,
+     so it votes into no style cell, only the pooled one);
   2. joins each member's WORN KIT from the same battle by player name, so
      supply is measured DRESSED in the person units the templates speak
      (a member with no kit record is dressed in the seat's doctrine v0 kit
@@ -310,8 +312,12 @@ def main():
         r["style"] = ci.get("style")
         r["strength"] = ci.get("strength")
         r["label"] = ci.get("label")
+        r["archetype"] = ci.get("archetype")
         r["melee_share"] = ci.get("melee_share")
-        key = r["style"] or ("forming" if "forming" in (r["label"] or "")
+        # a gank read names no style (comp_identity): the board counts it
+        # under its own label, and the style cells below never see it
+        key = r["style"] or ("gank" if r["archetype"] == "gank"
+                             else "forming" if "forming" in (r["label"] or "")
                              else "split")
         label_counts[key] = label_counts.get(key, 0) + 1
     print("labels:", dict(sorted(label_counts.items())))
@@ -455,6 +461,7 @@ def main():
               "weapons": sorted(disp(m["weapon"]) for m in r["members"])}
              for i, r in enumerate(form)]
     answers = [{"id": i + 1, "style": r["style"], "strength": r["strength"],
+                "archetype": r["archetype"],
                 "melee_share": round(r["melee_share"] or 0, 2),
                 "battle": r["battle"]} for i, r in enumerate(form)]
 

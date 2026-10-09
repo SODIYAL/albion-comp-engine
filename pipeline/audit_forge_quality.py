@@ -373,7 +373,9 @@ def grade_roster(e, r, cell, rctx, declared):
     ident = e.comp_identity(party, combos, gears)
     style_read = ident.get("style")
     if style_read is None:
-        style_read = "split" if "split" in (ident.get("label") or "") else "forming"
+        # the gank read names its archetype, never a style
+        style_read = (ident.get("archetype")
+                      or ("split" if "split" in (ident.get("label") or "") else "forming"))
     kp = e.kill_pressure(party, combos, gears)
     chain = e.fight_chain(party, combos, gears)
     weak_stages = [f"{st.get('name')}:{st['verdict']}"

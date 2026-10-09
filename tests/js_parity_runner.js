@@ -47,6 +47,8 @@ const kitSer = (ko) => {
 const serIdentity = (ia) => ({
   style: ia.style, label: ia.label, strength: ia.strength, band: ia.band,
   carriers: ia.carriers, kit_lean: ia.kit_lean === undefined ? null : ia.kit_lean,
+  archetype: ia.archetype === undefined ? null : ia.archetype,
+  core_catch: ia.core_catch, line_catch: ia.line_catch,
   conflicts: ia.conflicts.map((x) => [x.weapon, x.kind]),
   members: ia.members.map((m) => [m.weapon, m.role, m.side, m.fit]),
   melee_share: ia.melee_share, posture: ia.posture, mode: ia.mode });

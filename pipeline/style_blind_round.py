@@ -154,11 +154,12 @@ def parse_names(line):
 
 
 def read_row(ci, read):
-    """One identity read as the key records it. A read with no style is a
-    split identity (or a roster still forming)."""
+    """One identity read as the key records it. A read with no style is the
+    gank read (its archetype), a split identity or a roster still forming."""
     style = ci.get("style")
     if style is None:
-        style = "split" if "split" in (ci.get("label") or "") else "forming"
+        style = (ci.get("archetype")
+                 or ("split" if "split" in (ci.get("label") or "") else "forming"))
     return {"read": READ_TAGS.get(read, read), "style": style, "strength": ci.get("strength"),
             "archetype": ci.get("archetype"), "label": ci.get("label"),
             "melee_share": round(ci.get("melee_share") or 0.0, 3),
@@ -546,7 +547,7 @@ def norm_label(text):
 
 def vocab(style):
     """The engine's read in the form's vocabulary: a read of no one style
-    (split, forming) is `balanced`."""
+    (split, forming, gank) is `balanced`."""
     return style if style in LABELS else "balanced"
 
 

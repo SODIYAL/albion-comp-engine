@@ -25,11 +25,6 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **A descriptive `gank` read at <= 14**: catch-and-execute damage core with
-  no bomb share (claws, dagger pair, whispering bow — catching and
-  dismounting); would label the board, stay OUT of the style rows, never be
-  a forge style. Until decided those rosters vote into brawl / clap at
-  10-14. (V: 09b, validation round 4)
 - **Is the Infernal Staff's E a standoff tool** (it alone made a kite of
   round-4 roster 5), and should one tool out-vote five ranged dealers at bomb
   share 0.36. (V: 09b, validation round 4)

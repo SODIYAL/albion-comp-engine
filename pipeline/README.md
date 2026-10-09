@@ -934,7 +934,12 @@ the cited exceptions (H6c).
 labels every killer party of 10+ with `Engine.comp_identity` on its
 weapons alone (naked matched the audit's dressed read 19/20 in validation
 round 4; the committed artifact carries no member kits), and writes
-`out/party_styles.json` with the SHA-256 of the artifact it read.
+`out/party_styles.json` with the SHA-256 of the artifact it read. A party
+of 14 or fewer the gank read labels (every catch tool on a dps seat,
+no bomb share; T43b) carries no style and `archetype: gank`, so it
+votes into no style cell here or on the style board
+(`audit_style_rosters.py` counts it under its own label), only the pooled
+cells.
 `build_dataset` refuses a party-styles file derived from a different
 artifact (exit 2); a missing file means no style cells that build.
 `pipeline/party_link.py` links a build to its party: exactly through the

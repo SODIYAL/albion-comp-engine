@@ -142,7 +142,9 @@ Three layers, never merged:
   an item is priced against the rest as equipped, the worn rest dressed once
   per waived set (F42). Manual kits always score.
 - Descriptive analyzers, parity-carried, never scoring inputs: `comp_identity`
-  (playstyle label, per-member fit, bomb-squad archetype, kit-aware), `kill_pressure`,
+  (playstyle label, per-member fit, bomb-squad archetype, kit-aware; at 14
+  or fewer the gank read, a label with no style that votes into no style
+  cell, T43b), `kill_pressure`,
   `fight_chain`, `pick_report` (signed decomposition reconstructing the pick
   marginal at 1e-9), `analyze`, `duplicate_conflicts`, the role advisory.
 - `engine/app_scoring.js` mirrors `engine/engine.py`; parity on 60 random

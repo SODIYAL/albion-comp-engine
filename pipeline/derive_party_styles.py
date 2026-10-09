@@ -6,7 +6,10 @@ engine's WEAPONS-ONLY identity (Engine.comp_identity — the same label the
 validation rounds grade; naked matched the audit's dressed read 19/20 in
 validation round 4). The dressed label would need member kits the committed
 artifact does not carry, so this runs on any machine and is
-byte-reproducible (only the `_generated` date moves across days).
+byte-reproducible (only the `_generated` date moves across days). A party
+of 14 or fewer the gank read labels carries no style and `archetype:
+gank`: every reader of the file (the seat skeleton, the role counts, the
+kit cells) counts it in the pooled cells only.
 
 Reads committed files only; never the raw cache. Explicit step, never part
 of a normal build. Rerun order after a harvest: sample_parties ->
@@ -63,6 +66,11 @@ def derive(doc, engine_factory):
                 row["style"] = ci.get("style")
                 row["strength"] = (ci.get("strength") if ci.get("style")
                                    else None)
+                # a read that names no style but an archetype (the gank
+                # read at 14 or fewer) records it: the party votes into no
+                # style cell, and the row says why
+                if not ci.get("style") and ci.get("archetype"):
+                    row["archetype"] = ci["archetype"]
             rows.append(row)
     rows.sort(key=lambda r: (r["battle"], r["index"]))
     return {"_source": {"party_rosters_sha256": None},

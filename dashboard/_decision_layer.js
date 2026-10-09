@@ -309,6 +309,9 @@
     const forming = {glyph: "forming", name: "FORMING", title: "Forming", sub: "", firm: false};
     if (!id || !id.label) return forming;
     if (id.archetype === "bomb_squad") return {glyph: "bomb", name: "BOMB SQUAD", title: "Bomb squad", sub: id.strength || "", firm: id.strength === "strong"};
+    /* the gank read (14 or fewer): a label, never a style — no chain, no
+       fit verdicts, nothing scores on it */
+    if (id.archetype === "gank") return {glyph: "crosshair", name: "GANK", title: "Gank", sub: "", firm: false};
     if (id.style){
       const nm = ((DATASET.styles || {})[id.style] || {}).name || id.style;
       return {glyph: DL_ICONS[id.style] ? id.style : "dot", name: nm.toUpperCase(), title: nm,

@@ -533,10 +533,13 @@ def run():
 
     # T23d — the all-rounder rule: Realmbreaker (melee stat line, E lands
     # at range -> flex, group-scale) DERIVES as fitting every style and is
-    # never flagged inside a ranged core; its member record says so.
+    # never flagged inside a ranged core; its member record says so. The
+    # five read kite before the gank read (T43b) and gank since (every
+    # catch tool on a dps seat, no bomb share), so the kite they read is
+    # declared: the member verdicts read the declared style.
     rng_core = ["2H_AXE_AVALON", "2H_LONGBOW", "2H_BOW", "MAIN_FROSTSTAFF",
                 HALLOWFALL]
-    idr = Engine(content="castle_outpost", size=7).comp_identity(rng_core)
+    idr = Engine(content="castle_outpost", size=7, style="kite").comp_identity(rng_core)
     rb_m = next(m for m in idr["members"] if m["weapon"] == "2H_AXE_AVALON")
     check("T23d Realmbreaker is the all-rounder: flex side, fits, never a "
           "conflict in a ranged core",
@@ -1593,14 +1596,13 @@ def run():
 
     # T43 — validation round 4 (the 10-14 band, all twenty called over
     # two sittings). 9 exact / 3 half / 1 miss of 14 callable; two
-    # abstentions (2, 11), two gank calls the engine cannot make (3, 18),
-    # three uncalled (1, 4, 19). NOTHING retuned: the miss (5 — the
-    # Infernal Staff's E as a lone standoff tool at 0.36 bomb share) and
-    # the abstention (11 — Witchwork's damage points as a ranged carrier)
-    # are open hypotheses, and the gank read is an open question that now
-    # has a recorded mechanism (Claws, Dagger Pair and Whispering Bow are
-    # catching-and-dismounting weapons). This pins the nine agreed
-    # rosters, weapons only, exactly as recorded.
+    # abstentions (2, 11), two gank calls (3, 18), three uncalled (1, 4,
+    # 19). NOTHING retuned: the miss (5 — the Infernal Staff's E as a
+    # lone standoff tool at 0.36 bomb share) and the abstention (11 —
+    # Witchwork's damage points as a ranged carrier) are open hypotheses.
+    # The two gank calls read gank since the gank read landed (T43b:
+    # every catch tool on a dps seat, no bomb share). This pins the nine
+    # agreed rosters, weapons only, exactly as recorded.
     round4 = {
         6: ('clap', ['MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_MACE', '2H_LONGBOW', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON']),
         8: ('brawl', ['2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_HOLYSTAFF_HELL', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_NATURESTAFF_KEEPER', 'MAIN_CURSEDSTAFF_AVALON', '2H_HAMMER_CRYSTAL']),
@@ -1623,6 +1625,116 @@ def run():
     check("T43 validation round 4 (the 10-14 band): the nine agreed "
           "rosters read as recorded; nothing retuned",
           r4_ok == 9, f"round={r4_ok}/9 bad={r4_bad}")
+
+    # T43b — THE GANK READ (validation round 4's two gank calls, the tell
+    # being catching and dismounting weapons: Claws, Dagger Pair,
+    # Whispering Bow). At 14 members or fewer a roster whose every catch
+    # tool (catch, engage, clump) sits on a dps seat (role_of), with one
+    # in that core, and whose bomb share is under 0.45 reads gank: a label
+    # of its own, no style. Rosters 3 (read brawl before) and 18 (split
+    # weapons-only, clap dressed) read gank, and they alone of round 4's
+    # twenty; the golden clap fixture and round 4's agreed brawl 15 (bomb
+    # share 0.18, the lowest of the agreed brawls, its engage tanks the
+    # line) and clap 14 (Camlann and Rootbound catch for it) do not. The
+    # read is never a style and scores nothing: gank is no style the forge
+    # or the style rows know, and an engine with the read switched off
+    # (IDENTITY_GANK_MAX = 0) reads the two rosters as before while their
+    # fitness, ceiling and recommendations stay identical.
+    round4_open = {
+        # the eleven rosters of round 4 that T43 does not pin (1, 4 and 19
+        # uncalled; 2 and 11 abstentions; 5 the miss; 7, 10 and 13 half;
+        # 3 and 18 the gank calls, below)
+        # 1: Camlann Mace, Dawnsong, Evensong, Hallowfall, Hammer x2,
+        # Malevolent Locus, Oathkeepers x3
+        1: ['2H_MACE_MORGANA', '2H_FIRE_RINGPAIR_AVALON', '2H_ARCANE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', 'MAIN_HAMMER', '2H_ENIGMATICORB_MORGANA', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON'],
+        # 2: Blazing Staff, Blight Staff, Bloodletter, Galatine Pair,
+        # Hallowfall, Hammer, Mace, Polehammer, Realmbreaker, Shadowcaller,
+        # Spiked Gauntlets
+        2: ['2H_INFERNOSTAFF_MORGANA', '2H_NATURESTAFF_HELL', 'MAIN_RAPIER_MORGANA', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', 'MAIN_MACE', '2H_POLEHAMMER', '2H_AXE_AVALON', 'MAIN_CURSEDSTAFF_AVALON', '2H_KNUCKLES_SET3'],
+        # 4: Arcane Staff x2, Bow of Badon, Double Bladed Staff, Earthrune
+        # Staff, Hallowfall, Heron Spear, Incubus Mace, Mace, Permafrost
+        # Prism, Polehammer, Rift Glaive, Spear, Wailing Bow
+        4: ['MAIN_ARCANESTAFF', 'MAIN_ARCANESTAFF', '2H_BOW_KEEPER', '2H_DOUBLEBLADEDSTAFF', '2H_SHAPESHIFTER_KEEPER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_SPEAR_KEEPER', 'MAIN_MACE_HELL', 'MAIN_MACE', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_GLAIVE_CRYSTAL', 'MAIN_SPEAR', '2H_BOW_HELL'],
+        # 5: Arcane Staff, Blazing Staff, Blight Staff, Damnation Staff,
+        # Earthrune Staff, Fallen Staff, Great Fire Staff, Great Holy Staff
+        # x2, Heavy Mace, Infernal Staff, Longbow, Oathkeepers, Realmbreaker
+        5: ['MAIN_ARCANESTAFF', '2H_INFERNOSTAFF_MORGANA', '2H_NATURESTAFF_HELL', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_HELL', '2H_FIRESTAFF', '2H_HOLYSTAFF', '2H_HOLYSTAFF', '2H_MACE', '2H_INFERNOSTAFF', '2H_LONGBOW', '2H_DUALMACE_AVALON', '2H_AXE_AVALON'],
+        # 7: Battle Bracers x4, Exalted Staff, Oathkeepers x2, Redemption
+        # Staff x2, Rootbound Staff x2
+        7: ['2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_HOLYSTAFF_CRYSTAL', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON', '2H_HOLYSTAFF_UNDEAD', '2H_HOLYSTAFF_UNDEAD', '2H_SHAPESHIFTER_SET2', '2H_SHAPESHIFTER_SET2'],
+        # 10: Blight Staff, Dawnsong, Earthrune Staff, Energy Shaper, Frost
+        # Staff, Hallowfall x2, Hellspawn Staff, Oathkeepers, Rift Glaive,
+        # Wailing Bow x3
+        10: ['2H_NATURESTAFF_HELL', '2H_FIRE_RINGPAIR_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_FROSTSTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_SHAPESHIFTER_HELL', '2H_DUALMACE_AVALON', '2H_GLAIVE_CRYSTAL', '2H_BOW_HELL', '2H_BOW_HELL', '2H_BOW_HELL'],
+        # 11: Battle Bracers, Blight Staff, Bow, Enigmatic Staff, Galatine
+        # Pair, Greataxe, Heron Spear, Mace, Realmbreaker, Witchwork Staff
+        11: ['2H_KNUCKLES_SET2', '2H_NATURESTAFF_HELL', '2H_BOW', '2H_ENIGMATICSTAFF', '2H_DUALSCIMITAR_UNDEAD', '2H_AXE', 'MAIN_SPEAR_KEEPER', 'MAIN_MACE', '2H_AXE_AVALON', 'MAIN_ARCANESTAFF_UNDEAD'],
+        # 13: Arcane Staff, Bridled Fury, Camlann Mace, Damnation Staff,
+        # Dawnsong x3, Exalted Staff, Hallowfall x3, Icicle Staff,
+        # Permafrost Prism
+        13: ['MAIN_ARCANESTAFF', '2H_DAGGER_KATAR_AVALON', '2H_MACE_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_FIRE_RINGPAIR_AVALON', '2H_FIRE_RINGPAIR_AVALON', '2H_FIRE_RINGPAIR_AVALON', '2H_HOLYSTAFF_CRYSTAL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_ICEGAUNTLETS_HELL', '2H_ICECRYSTAL_UNDEAD'],
+        # 19: Bedrock Mace, Bloodletter x3, Carving Sword, Exalted Staff,
+        # Fallen Staff, Longbow, Occult Staff, Permafrost Prism, Rotcaller
+        # Staff
+        19: ['MAIN_ROCKMACE_KEEPER', 'MAIN_RAPIER_MORGANA', 'MAIN_RAPIER_MORGANA', 'MAIN_RAPIER_MORGANA', '2H_CLEAVER_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_HOLYSTAFF_HELL', '2H_LONGBOW', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', 'MAIN_CURSEDSTAFF_CRYSTAL'],
+    }
+    gank4 = {
+        # 3: Astral Staff, Bear Paws x2, Carrioncaller, Deathgivers, Galatine
+        # Pair x2, Hallowfall, Infernal Scythe, Ursine Maulers
+        3: ['2H_ARCANESTAFF_CRYSTAL', '2H_DUALAXE_KEEPER', '2H_DUALAXE_KEEPER', '2H_HALBERD_MORGANA', '2H_DUALSICKLE_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_SCYTHE_HELL', '2H_KNUCKLES_KEEPER'],
+        # 18: Bear Paws x2, Bow of Badon, Claws x2, Dagger Pair, Fists of
+        # Avalon, Forgebark Staff, Hallowfall, Permafrost Prism, Redemption
+        # Staff, Staff of Balance, Whispering Bow
+        18: ['2H_DUALAXE_KEEPER', '2H_DUALAXE_KEEPER', '2H_BOW_KEEPER', '2H_CLAWPAIR', '2H_CLAWPAIR', '2H_DAGGERPAIR', '2H_KNUCKLES_AVALON', 'MAIN_NATURESTAFF_CRYSTAL', 'MAIN_HOLYSTAFF_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_HOLYSTAFF_UNDEAD', '2H_ROCKSTAFF_KEEPER', '2H_LONGBOW_UNDEAD'],
+    }
+    e43 = Engine(content="territory_defense", size=13)
+    e43_off = Engine(content="territory_defense", size=13)
+    e43_off.IDENTITY_GANK_MAX = 0
+    reads43, before43, same43 = {}, {}, []
+    for rid, ids in sorted(gank4.items()):
+        e43.set_content("territory_defense", len(ids))
+        e43_off.set_content("territory_defense", len(ids))
+        ci = e43.comp_identity(ids)
+        ci_off = e43_off.comp_identity(ids)
+        reads43[rid] = (ci.get("archetype"), ci.get("style"), ci["line_catch"],
+                        round(ci["mode"]["aoe"], 2))
+        before43[rid] = ci_off.get("style") or ("split" if "split" in ci_off["label"]
+                                                else ci_off["label"])
+        rest = ids[:-1]
+        same43.append(
+            e43.fitness(ids) == e43_off.fitness(ids)
+            and e43.max_fitness(ids) == e43_off.max_fitness(ids)
+            and [(r["weapon"], r["score"]) for r in e43.recommend(rest, 5)]
+            == [(r["weapon"], r["score"]) for r in e43_off.recommend(rest, 5)])
+    gank_ok = all(a == "gank" and s is None for a, s, _l, _b in reads43.values())
+    e43.set_content("blackzone_roam", len(clap10))
+    not43 = {"clap10": e43.comp_identity(clap10)}
+    for rid in (14, 15):
+        e43.set_content("territory_defense", len(round4[rid][1]))
+        not43[f"r{rid}"] = e43.comp_identity(round4[rid][1])
+    none_ok = (all(ci.get("archetype") != "gank" for ci in not43.values())
+               and not43["clap10"]["style"] == "clap"
+               and not43["r14"]["style"] == "clap" and not43["r15"]["style"] == "brawl")
+    # of round 4's twenty, 3 and 18 alone read gank
+    all4 = {**round4_open, **{k: v for k, (_s, v) in round4.items()}, **gank4}
+    gank_ids = []
+    for rid, ids in sorted(all4.items()):
+        e43.set_content("territory_defense", len(ids))
+        if e43.comp_identity(ids).get("archetype") == "gank":
+            gank_ids.append(rid)
+    no_style = ("gank" not in (e43.data.get("styles") or {})
+                and "gank" not in e43.IDENTITY_STYLES)
+    check("T43b the gank read: round 4's gank rosters 3 and 18 read gank (no "
+          "style), and they alone of the twenty; the clap fixture and the "
+          "agreed brawl 15 and clap 14 do not; gank is no style and scores "
+          "nothing (the read switched off leaves fitness, the ceiling and the "
+          "recommendations identical)",
+          gank_ok and none_ok and no_style and all(same43)
+          and len(all4) == 20 and gank_ids == [3, 18]
+          and before43 == {3: "brawl", 18: "split"},
+          f"reads={reads43} before={before43} gank={gank_ids}/{len(all4)} "
+          f"others={ {k: (v.get('style'), v.get('archetype')) for k, v in not43.items()} } "
+          f"no_style={no_style} unchanged={same43}")
 
     # T40 — THE KIT VALIDATION ROUND (builds shown without labels,
     # graded against the styles of the rosters they were worn in).

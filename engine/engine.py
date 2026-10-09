@@ -3760,6 +3760,22 @@ class Engine:
     IDENTITY_KITE_TOOLS_PER = 10
     IDENTITY_FLEX_HOME = 2.0       # rigid melee : rigid ranged that pulls flex bombs home
     IDENTITY_LONE_TOOL_AOE = 0.45  # a lone standoff body makes a kite only below this bomb share
+    # THE GANK READ (validation round 4, rosters 3 and 18): a damage core
+    # that catches and executes its own targets, with no bomb share. Every
+    # catch tool the roster fields (IDENTITY_CATCH_CAPS) sits on a dps
+    # seat (the one role read, role_of) — no frontline, support or healer
+    # catches or engages for it — at least one dps seat holds one, and the
+    # bomb share is under IDENTITY_GANK_AOE, the bomb-half line
+    # (IDENTITY_HYBRID_AOE): on the 7,315 distinct 10-14 training rosters
+    # every roster with no catch tool off the dps seats at 0.45 or more
+    # already reads clap or clap-kite, while below it they spread over
+    # brawl, split, clap and kite. A label of its own at IDENTITY_GANK_MAX
+    # members or fewer: never one of the five styles, so a gank roster
+    # votes into no style x size row, no forge style reads it and nothing
+    # scores on it.
+    IDENTITY_GANK_MAX = 14
+    IDENTITY_GANK_AOE = 0.45
+    IDENTITY_CATCH_CAPS = ("catch", "engage", "clump_create")
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
     # SEAT POOLING (spec notes/specs/2026-09-08-coherent-style-kits-
     # design.md section 3, R34a/b): a weapon slot whose own modal carries
@@ -3881,7 +3897,9 @@ class Engine:
     def comp_identity(self, party, combos=None, gears=None):
         """What this comp is BECOMING, in the caller's own playstyle
         vocabulary (styles.yaml): brawl / clap / kite / brawl_clap, plus
-        'mixed' for split identities and 'forming' while too small to say.
+        'mixed' for split identities and 'forming' while too small to say,
+        and at IDENTITY_GANK_MAX members or fewer the gank read (archetype
+        'gank', no style: a catch-and-execute damage core with no bomb).
 
         v2: identity builds up from MEMBER
         identities. Each member's side comes from the weapon's derived
@@ -3906,6 +3924,9 @@ class Engine:
         n_carrier_members = 0
         flex = set()
         sides = {}
+        # the gank read's two counts: the catch-tool points on the dps
+        # seats (the core) and on every other seat (the line)
+        core_catch = line_catch = 0
         for i, w in enumerate(party):
             caps = self._raw_member_caps(w, combos[i] if combos else None)
             dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
@@ -3914,6 +3935,11 @@ class Engine:
                 kite_tools += 1
             commit += caps.get("engage", 0) + caps.get("clump_create", 0)
             evade += caps.get("mobility", 0) + caps.get("disengage", 0)
+            hold = sum(caps.get(c, 0) for c in self.IDENTITY_CATCH_CAPS)
+            if self.role_of(w) == "dps":
+                core_catch += hold
+            else:
+                line_catch += hold
             # CLAP HALF: a ramp-dependent bomb is not a bomb — Galatine
             # Pair must charge its Q stacks before its E hits, while a
             # Realmbreaker lands from one action and belongs to a clap —
@@ -4012,6 +4038,7 @@ class Engine:
                "carriers": carriers, "mode": mode, "posture": posture,
                "kite_tools": kite_tools, "kite_tools_min": kite_min,
                "kite_tools_pure": max(1, per_ten), "melee_bomb_share": bc_bomb,
+               "core_catch": core_catch, "line_catch": line_catch,
                "band": band, "members": [], "conflicts": []}
         style_names = {k: (v.get("name") or k)
                        for k, v in (self.data.get("styles") or {}).items()}
@@ -4182,6 +4209,28 @@ class Engine:
             out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
                             " — melee ball (by the kits: brawl chests, "
                             "bombs or not)")
+        # THE GANK READ (validation round 4: rosters 3 and 18 were called
+        # gank, the tell being catching and dismounting weapons — Claws,
+        # Dagger Pair, Whispering Bow — and the engine read brawl and clap).
+        # At IDENTITY_GANK_MAX members or fewer, a roster whose every catch
+        # tool sits on a dps seat (no frontline, support or healer catches
+        # or engages for them), with a catch tool in that core, and whose
+        # bomb share is under IDENTITY_GANK_AOE reads gank, whatever the
+        # weapons or the kits read before (a monoculture under the bomb
+        # line is a pick party, not an artillery detachment, so the bomb
+        # squad gives way too): the damage catches and executes its own
+        # targets. No style: the per-member verdicts read the
+        # declared style only, the fight chain has none to read, and the
+        # harvest's label feeds (audit_style_rosters, derive_party_styles)
+        # vote the roster into no style cell. Descriptive only.
+        if (not forming and n <= self.IDENTITY_GANK_MAX
+                and line_catch == 0 and core_catch > 0
+                and mode["aoe"] < self.IDENTITY_GANK_AOE):
+            out["style"], out["strength"] = None, None
+            out["archetype"] = "gank"
+            out.pop("kit_lean", None)
+            out["conflicts"] = []
+            out["label"] = "Gank — the damage catches and executes, no bomb"
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — picking brawl means asking for brawl builds; balanced
         # falls back to the detected lean) ----

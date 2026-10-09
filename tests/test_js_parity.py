@@ -135,6 +135,23 @@ def make_cases(data):
                                 if ek.role_of(w) == "dps" else None
                                 for w in clap10],
                       "refine_pool": weapons[2::11]})
+    # the gank read (validation round 4, rosters 3 and 18; T43b): at 10
+    # members under balanced and at 13 under a declared brawl, so both
+    # ports read the same label, catch counts and member verdicts there
+    gank3 = ["2H_ARCANESTAFF_CRYSTAL", "2H_DUALAXE_KEEPER", "2H_DUALAXE_KEEPER",
+             "2H_HALBERD_MORGANA", "2H_DUALSICKLE_UNDEAD", "2H_DUALSCIMITAR_UNDEAD",
+             "2H_DUALSCIMITAR_UNDEAD", "MAIN_HOLYSTAFF_AVALON", "2H_SCYTHE_HELL",
+             "2H_KNUCKLES_KEEPER"]
+    gank18 = ["2H_DUALAXE_KEEPER", "2H_DUALAXE_KEEPER", "2H_BOW_KEEPER", "2H_CLAWPAIR",
+              "2H_CLAWPAIR", "2H_DAGGERPAIR", "2H_KNUCKLES_AVALON",
+              "MAIN_NATURESTAFF_CRYSTAL", "MAIN_HOLYSTAFF_AVALON", "2H_ICECRYSTAL_UNDEAD",
+              "2H_HOLYSTAFF_UNDEAD", "2H_ROCKSTAFF_KEEPER", "2H_LONGBOW_UNDEAD"]
+    for party, style in ((gank3, "balanced"), (gank18, "brawl")):
+        if all(w in data["weapons"] for w in party) and style in styles:
+            cases.append({"content": "territory_defense", "size": len(party),
+                          "style": style, "party": party,
+                          "combos": [None] * len(party), "gears": None,
+                          "refine_pool": weapons[4::11]})
     multi = [w for w in weapons if _combo_count(data, w) > 1]
     gk = sorted(data.get("gear") or {})
     short_party = [multi[(13 * k) % len(multi)] for k in range(5)]
@@ -431,6 +448,8 @@ def _ser_identity(ia):
     return {"style": ia["style"], "label": ia["label"],
             "strength": ia["strength"], "band": ia["band"],
             "carriers": ia["carriers"], "kit_lean": ia.get("kit_lean"),
+            "archetype": ia.get("archetype"),
+            "core_catch": ia["core_catch"], "line_catch": ia["line_catch"],
             "conflicts": [[x["weapon"], x["kind"]] for x in ia["conflicts"]],
             "members": [[m["weapon"], m["role"], m["side"], m["fit"]]
                         for m in ia["members"]],
@@ -794,6 +813,9 @@ def main():
             errs.append(f"uncovered: py={a['uncovered']} js={b['uncovered']}")
         ia, ib = a["identity"], b.get("identity") or {}
         if (ia["style"] != ib.get("style") or ia["label"] != ib.get("label")
+                or ia.get("archetype") != ib.get("archetype")
+                or (ia["core_catch"], ia["line_catch"])
+                != (ib.get("core_catch"), ib.get("line_catch"))
                 or ia["strength"] != ib.get("strength")
                 or ia["band"] != ib.get("band")
                 or ia["carriers"] != ib.get("carriers")

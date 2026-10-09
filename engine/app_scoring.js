@@ -3435,7 +3435,11 @@
       IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, validation round 2 */
       IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members */
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
-      IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
+      IDENTITY_LONE_TOOL_AOE = 0.45,  /* a lone standoff body makes a kite only below this bomb share */
+      /* the gank read (validation round 4; mirrors engine.py): every catch
+         tool on a dps seat, no bomb share, 14 or fewer members */
+      IDENTITY_GANK_MAX = 14, IDENTITY_GANK_AOE = 0.45,
+      IDENTITY_CATCH_CAPS = ["catch", "engage", "clump_create"];
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
   /* SEAT POOLING (R34a/b; mirrors engine.py POOL_MIN_VOTES /
      POOLED_SLOTS / CHEST_POOLED_SLOTS): a thin weapon slot is dressed from
@@ -3563,12 +3567,19 @@
     var nCarrierMembers = 0;
     var flex = {};
     var sides = {};
+    /* the gank read's two counts: catch-tool points on the dps seats (the
+       core) and on every other seat (the line) — mirrors engine.py */
+    var coreCatch = 0, lineCatch = 0;
     for (var i = 0; i < n; i++) {
       var w = party[i];
       var caps = this._rawMemberCaps(w, combos ? combos[i] : null);
       var dmg = 0;
       for (var di = 0; di < DAMAGE_CAPS_PROFILE.length; di++)
         dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
+      var hold = 0;
+      for (var hi = 0; hi < IDENTITY_CATCH_CAPS.length; hi++)
+        hold += caps[IDENTITY_CATCH_CAPS[hi]] || 0;
+      if (this.roleOf(w) === "dps") coreCatch += hold; else lineCatch += hold;
       var sf0 = this._styleFitOf(w) || {};
       /* clap half: a ramp-dependent bomb counts as sustained; standoff
          E = kite tool (mirrors engine.py) */
@@ -3643,7 +3654,8 @@
                 carriers: carriers, mode: mode, posture: posture,
                 band: band, members: [], conflicts: [],
                 kite_tools: kiteTools, kite_tools_min: kiteMin,
-                kite_tools_pure: Math.max(1, perTen), melee_bomb_share: bcBomb };
+                kite_tools_pure: Math.max(1, perTen), melee_bomb_share: bcBomb,
+                core_catch: coreCatch, line_catch: lineCatch };
     var styles = this.data.styles || {};
     var sname = function (k, fb) {
       return (styles[k] && styles[k].name) || fb;
@@ -3775,6 +3787,18 @@
     if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "brawl") {
       out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
       out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: brawl chests, bombs or not)";
+    }
+    /* the gank read (validation round 4, rosters 3 and 18; mirrors
+       engine.py): 14 or fewer members, every catch tool on a dps seat,
+       one in that core, bomb share under the bomb-half line (the bomb
+       squad gives way too) — a label of its own, no style, descriptive
+       only */
+    if (!forming && n <= IDENTITY_GANK_MAX && lineCatch === 0 && coreCatch > 0 &&
+        mode.aoe < IDENTITY_GANK_AOE) {
+      out.style = null; out.strength = null; out.archetype = "gank";
+      delete out.kit_lean;
+      out.conflicts = [];
+      out.label = "Gank — the damage catches and executes, no bomb";
     }
     /* per-member fit verdicts: the declared style is the caller's INTENT;
        balanced falls back to the detected lean */
