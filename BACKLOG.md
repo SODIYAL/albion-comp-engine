@@ -108,15 +108,6 @@ Each is decidable today from evidence already in the repo.
   46% of single-healer 7s, is named first in 2 of 1,508. Scoring every
   member naked reads the held-out 7s better (top-3 8.9% against 7.5%).
   (V: 09b, V3 round 2)
-- **Kite weights**: with the seat skeleton and the standoff minimum the
-  forged kite reads to the engine's own identity as kite at 15 and
-  clap_kite at 20 in every content the forge sweep runs, each roster on
-  exactly the plan minimum's two standoff tools, and as clap at 10 (one
-  tool), below 10 and at 25 (no plan row)
-  (notes/findings/2026-10-09-forge-quality.md); a PURE kite read at 20
-  needs the kite style's multipliers — never validated — to prefer
-  sustained ranged pressure over bombs. Label a forged kite in the next
-  validation round.
 - **Fill order as the beam's sequence** (healer -> frontline -> support ->
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering
@@ -244,6 +235,23 @@ Each is decidable today from evidence already in the repo.
   lift `validated_sizes: []` on `ancient_lands`, the page's
   "extrapolated" flag. (V: 10, V3 forms seed from harvested killer
   parties)
+- **Kite weights: the style-labelling form is waiting for answers**:
+  `tests/style_form_r1_kite.md` (seed 20261009, 20 cases, weapons only):
+  the kite forge at Blackzone Roam and Territory Defense 10, 15, 20 and
+  25 beside twelve harvested killer parties of 13-19 the engine reads
+  kite (4), clap_kite (4), clap (2) and brawl (2); the answer key beside
+  it (`.key.json`) is never sent. On its own kits the forged kite reads
+  clap at 10 (one standoff tool), kite at 15 and clap_kite at 20 (each on
+  two tools, the plan minimum) and clap at 25, in both contents; at 15
+  and 20 the bomb share sits within 0.02 of the 0.45 that divides kite
+  from clap_kite, and Territory Defense 20 reads kite on its weapons
+  alone. A pure kite read at 20 needs the kite style's multipliers, never
+  validated, to prefer sustained ranged pressure over bombs. Score each
+  filled copy with `py -3 pipeline/style_blind_round.py score <form>`:
+  the agreement per source and size, and the forged kites not called
+  kite. A forged 20 called kite puts the question on the identity read;
+  one called clap_kite or clap puts it on the kite weights. (V: 10, Kite
+  weights wait for a style-labelling form)
 - **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
   style board learns from the training split): at `--n 500` (1,500 drops),
   on the fitted Blackzone Roam weights, role-level 64% (harvest_gear)

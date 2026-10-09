@@ -3,10 +3,13 @@
 A battle on this list is never sampled into a later form: its rosters
 were shown to graders and pinned, so they are train under standing rule
 16 (tests/VALIDATION.md). Every form generator reads this one list:
-pipeline/audit_style_rosters.py (the roster rounds) and
+pipeline/audit_style_rosters.py (the roster rounds),
 tests/tier2_blindtest.py generate (the V3 next-pick forms, which also
-exclude every battle the answer key of an earlier V3 round records).
-A roster round's battles join the list when the round is graded.
+exclude every battle the answer key of an earlier V3 round records) and
+pipeline/style_blind_round.py generate (the style-labelling forms, which
+also exclude every battle an earlier round's key, V3 or style-labelling,
+records). A roster round's battles, and a style-labelling form's
+harvested battles, join the list when the round is graded.
 """
 
 # validation round 1 (ten rosters) + round 2 (twenty): both graded and

@@ -27,6 +27,13 @@ parser, the V4 gear join, and the validation metrics.
       its own content and pool in both modes. On a synthetic artifact:
       the real one is never loaded here.
 
+  V9  the style-labelling form (pipeline/style_blind_round.py): the
+      committed round-1 form and its key exist, the form holds 20 cases,
+      8 of them forged, each showing its size and weapons alone (the key's
+      sources and engine reads never on it), and `score` reads a filled
+      copy per source and size. Reads the committed files: no artifact,
+      no engine.
+
 Run:  py -3 tests/test_validation_modes.py
 """
 import os, sys
@@ -661,6 +668,102 @@ def t_harvest_forms():
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+# ------------------------------------------------ V9 style-labelling forms
+STYLE_FORM = os.path.join(HERE, "style_form_r1_kite.md")
+
+
+def t_style_forms():
+    import collections, json, re
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import style_blind_round as sbr
+    from graded_battles import GRADED_BATTLES
+    key_path = os.path.splitext(STYLE_FORM)[0] + ".key.json"
+    if not (os.path.exists(STYLE_FORM) and os.path.exists(key_path)):
+        check("V9a the style-labelling form and its key exist", False,
+              f"missing: {[p for p in (STYLE_FORM, key_path) if not os.path.exists(p)]}")
+        return
+    with open(STYLE_FORM, encoding="utf-8") as f:
+        text = f.read()
+    with open(key_path, encoding="utf-8") as f:
+        key = json.load(f)
+    cases = sbr.parse_form(text)
+    kc = sorted(key["cases"], key=lambda c: c["case"])
+    forged = [c for c in kc if c["source"] == "forged"]
+    harvest = [c for c in kc if c["source"] == "harvest"]
+    cells = sorted((c["content"], c["forge_size"], c["style"]) for c in forged)
+    want_cells = sorted((ct, n, "kite") for ct in ("blackzone_roam", "territory_defense")
+                        for n in (10, 15, 20, 25))
+    mix = collections.Counter(c["engine"]["style"] for c in harvest)
+    rosters = [tuple(sorted(c["weapons"])) for c in harvest]
+    forged_rosters = {tuple(sorted(c["weapons"])) for c in forged}
+    sources_ok = (all(c["battle"] % 5 and c["battle"] not in GRADED_BATTLES
+                      and 10 <= c["size"] <= 20 for c in harvest)
+                  and len(set(rosters)) == len(rosters)
+                  and not forged_rosters & set(rosters))
+    blank = all(not c["style"] and not c["confidence"] for c in cases)
+    check("V9a the style-labelling form and its key exist: 20 cases, 8 forged for "
+          "kite (Blackzone Roam and Territory Defense at 10, 15, 20, 25) and 12 "
+          "harvested killer parties of 10-20 the engine reads 4 kite, 4 clap_kite, "
+          "2 clap and 2 brawl, each on the training split, in no graded battle and a "
+          "roster of its own; the form shows every case's size and weapons as the key "
+          "records them, every answer blank",
+          len(cases) == 20 and len(kc) == 20 and len(forged) == 8 and len(harvest) == 12
+          and cells == want_cells and dict(mix) == {"kite": 4, "clap_kite": 4, "clap": 2,
+                                                    "brawl": 2}
+          and sources_ok and sbr.match_key(cases, key) and blank
+          and key.get("form") == "tests/style_form_r1_kite.md",
+          f"cases={len(cases)} forged={len(forged)} mix={dict(mix)} sources_ok={sources_ok} "
+          f"blank={blank}")
+
+    blocks = re.split(r"(?m)^### Case \d+$", text)[1:]
+    extra = [ln for b in blocks for ln in b.splitlines()
+             if ln.strip() and not re.match(r"^- (size: \d+|weapons: .+|style:|confidence \(1-3\):)$", ln)]
+    ids = [str(c["battle"]) for c in harvest if str(c["battle"]) in text]
+    # the prose around the weapons (weapon names carry such words: Forge
+    # Hammers, Battle Bracers)
+    prose = "\n".join(ln for ln in text.splitlines() if not ln.startswith("- weapons:"))
+    words = re.findall(r"(?i)\b(?:forged?|harvest\w*|battles?|engine|blackzone|territory|"
+                       r"sightings|melee|strength|leaning|key\.json)\b", prose)
+    check("V9b the key never appears in the form: no key file, battle id, source, content "
+          "or engine read on it, and each case carries its size, its weapons and the two "
+          "blank fields alone",
+          len(blocks) == 20 and not extra and not ids and not words
+          and os.path.basename(key_path) not in text,
+          f"extra={extra[:2]} ids={ids[:2]} words={sorted(set(words))[:5]}")
+
+    # a filled copy: every case labelled as the engine reads it, typed the
+    # way a labeller types (capitals, hyphens), confidence 3
+    def typed(style):
+        return sbr.vocab(style).replace("_", "-").title()
+    by_case = {c["case"]: c for c in kc}
+    parts = re.split(r"(?m)^(### Case (\d+))$", text)
+    filled = parts[0]
+    for head, num, body in zip(parts[1::3], parts[2::3], parts[3::3]):
+        label = typed(by_case[int(num)]["engine"]["style"])
+        body = re.sub(r"(?m)^- style:$", f"- style: {label}", body, count=1)
+        body = re.sub(r"(?m)^- confidence \(1-3\):$", "- confidence (1-3): 3", body, count=1)
+        filled += head + body
+    res = sbr.evaluate(sbr.parse_form(filled), key)
+    g = res["groups"]
+    not_kite = sorted(c["case"] for c in forged if sbr.vocab(c["engine"]["style"]) != "kite")
+    shuffled = dict(key, cases=[dict(c, case=len(kc) + 1 - c["case"]) for c in kc])
+    check("V9c score reads a filled copy: labels in any case and with hyphens, "
+          "agreement per source and size (forged by the size forged at, harvested by "
+          "band), the forged rosters not called kite listed; a key showing other "
+          "rosters is refused",
+          res["answered"] == 20 and not res["unresolved"]
+          and g[("all", "all")] == {"cases": 20, "answered": 20, "agree": 20}
+          and [k for k in g if k[0] == "forged"] == [("forged", "10"), ("forged", "15"),
+                                                    ("forged", "20"), ("forged", "25"),
+                                                    ("forged", "all")]
+          and all(g[("forged", s)]["cases"] == 2 for s in ("10", "15", "20", "25"))
+          and g[("harvest", "all")]["cases"] == 12
+          and sorted(r["case"] for r in res["missed"]) == not_kite
+          and all(r["confidence"] == 3 for r in res["rows"])
+          and not sbr.match_key(sbr.parse_form(filled), shuffled),
+          f"groups={dict(g)} missed={[r['case'] for r in res['missed']]} want={not_kite}")
+
+
 if __name__ == "__main__":
     t_dressing_switch()
     t_form_parser()
@@ -670,6 +773,7 @@ if __name__ == "__main__":
     t_target_mults()
     t_median_rows()
     t_harvest_forms()
+    t_style_forms()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} validation-mode tests passed")

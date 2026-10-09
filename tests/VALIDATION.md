@@ -129,13 +129,16 @@ revealing the engine's, log both, and convert every disagreement the same day
 into a decision, a cited override, or a golden pin. Forms: `tests/tier2_blindtest.py
 generate|score` (V3 next-pick forms seeded from harvested killer parties of
 the form's size, the answer key beside each form; `score --mode d` is the
-gate), `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
+gate), `pipeline/style_blind_round.py generate|score` (style-labelling
+forms: forged rosters beside harvested killer parties, weapons only, the
+engine's read in the key beside the form),
+`pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N` (harvested
 rosters, weapons only), `pipeline/kit_blind_round.py` (a weapon's most-worn
 builds without labels). Graded
 battles join `GRADED_BATTLES` (`pipeline/graded_battles.py`, the one list
-every form generator reads) so no later form re-samples them; a V3 form's
-answer key records its battles, and every later round's forms exclude
-them. An answer the
+every form generator reads) so no later form re-samples them; a V3 or
+style-labelling form's answer key records its battles, and every later
+round's forms exclude them. An answer the
 data contradicts is shown the data (2026-09-04 roster 5, 2026-09-08 Arcane
 helmet); the decision then stands on the evidence, not the guess.
 
@@ -350,6 +353,7 @@ archive file and the section title to search for.
 | 10-09 | The 15-20 portal pool takes its own list and counts at 200 rosters (maintainer decision): generation at 15-20 keeps the open-world seat skeleton and suggestion pool until the pool holds 200 distinct dominant rosters (`derive_portal_rows.LARGE_SHAPE_AT`; 40 at the last fold, about 51 dominant parties in the portal stats since), then takes a fielded list and role counts of its own as the 2-3, 4-5 and 6-7 pools do; the derive step prints the count against the threshold and the fold report carries it | `derive_portal_rows.py`, `compare_fold.py` | F35a2 | 10, The 15-20 portal pool takes its own list and counts at 200 rosters |
 | 10-09 | One unit of shred is pierce on the clump in a 7-man (maintainer decision): the kill lights' pierce bar at castle_outpost stays the measured minimum, the least winning published 7-man's supply of one unit (standing rule 17), never a hand number; the burst trio (Longbow / Witchwork / Permafrost) reads pierce green; display only | `test_golden.py` | T25b | 10, One unit of shred is pierce on the clump in a 7-man |
 | 10-09 | The harvest stays on the US server (maintainer decision): the tables describe the fights of the server the maintainer plays on; an EU harvest would roughly double the 25+ corpus but mix a second server's meta into them. The deferred review closes | `harvest_overnight.ps1` (`--server us`, unchanged) | (none: no code moves) | 10, The harvest stays on the US server |
+| 10-09 | Kite weights wait for a style-labelling form (maintainer decision): whether the forged kite is a kite is settled by a validation round before any kite multiplier moves. `style_blind_round.py generate` writes a form of rosters by size and weapons alone, blank style and confidence fields: forged rosters (`Engine(content, size, style).forge(size)`, read on the forge's own combos and kits, the weapons-only read beside it) among battle-list killer parties of 10-20 (every weapon known, training split, no graded battle nor one an earlier round's key records, one case per distinct roster) drawn in a seeded order while their engine label's quota is open, so the labeller cannot assume one answer; each case's source and the engine's read in the key beside the form, never on it; `score` prints the agreement per source and size and the forged rosters not called the style they were forged for. Round 1: `tests/style_form_r1_kite.md`, seed 20261009, the kite forge at Blackzone Roam and Territory Defense 10, 15, 20, 25 (read clap, kite, clap_kite, clap in both) beside 12 parties of 13-19 read kite 4, clap_kite 4, clap 2, brawl 2; waiting for answers | `pipeline/style_blind_round.py`, `tests/style_form_r1_kite.md` and key, `pipeline/graded_battles.py` | V9a-V9c | 10, Kite weights wait for a style-labelling form |
 
 ## Open questions
 
