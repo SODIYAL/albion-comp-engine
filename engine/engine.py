@@ -1626,6 +1626,15 @@ class Engine:
         for cap, pts in (self.weapons[weapon].get("self_costs") or {}).items():
             if cap in out:
                 out[cap] = max(0.0, out[cap] - pts / self.score_unit)
+        # WEAPON-BASIS ROWS (mechanics build_stats weapon_basis_caps): the
+        # member's weapon + loadout supply as the naked member brings it;
+        # no worn item adds to or changes it (standing rule 10 extended)
+        for cap in (bs.get("weapon_basis_caps") or ()):
+            naked = self.member_extra(weapon, combo).get(cap)
+            if naked is None:
+                out.pop(cap, None)
+            else:
+                out[cap] = naked
         return out
 
     def _member_uncharged(self, weapon, combo=None):
@@ -2459,8 +2468,13 @@ class Engine:
         channel (defense, damage, heal, CC-duration, cooldown, cast-time and
         attack-speed %) multiplies the spell's units exactly as it
         multiplies the member's whole capability, in the same order. No
-        doctrine passives: scoring never passes a role. Naked: `v`."""
+        doctrine passives: scoring never passes a role. Naked: `v`; a
+        weapon-basis capability (mechanics weapon_basis_caps) reads `v`
+        dressed too, as build_extra does."""
         if not gear:
+            return v
+        if cap in ((self.mechanics.get("build_stats") or {})
+                   .get("weapon_basis_caps") or ()):
             return v
         dmg = heal = ccdur = 0.0
         dfn = cdr = cast = aspd = 0.0

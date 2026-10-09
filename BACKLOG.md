@@ -69,30 +69,18 @@ Each is decidable today from evidence already in the repo.
   duplicate cost against T49, or accept that the engine optimises comps
   rather than the published pick. (V: 09b, Skeleton-first; Fitted
   capability weights)
-- **Healer pricing at 7** (V3 round 2, Castle Outpost 7): dressed mode
-  ranks Great Holy and Rampant above Hallowfall in every healer case
-  because the incumbents' doctrine kits already close disengage and
-  mobility and the choice falls to `heal_sustain` (weight 10, target 4.5;
-  two-handers supply 3.0 units, Hallowfall 2.0). Killer parties of 6-8
-  field Hallowfall in 29.1%, Rampant in 1.0%. Measured
-  (notes/findings/2026-10-08-castle-outpost-healers.md): worn gear is
-  the larger cause. Between naked and dressed scoring Rampant's lead over
-  Hallowfall moves 2.38 points, 1.19 from the utility rows (the
-  incumbents' kits stand the party at or past the 4.0 disengage target in
-  6 of 10 cases, and each rival's own kit brings the disengage and
-  mobility Hallowfall's weapon does) and 0.70 from the heal rows (the kit's
-  heal stat channel lifts the two-handers onto the 4.5 sustain target);
-  no heal-row retune puts Hallowfall first in more than 4 of 10 cases, each
-  hands the lead to Fallen Staff, and the sustain target at 3.0 lowers the
-  held-out 7s' top-3 from 7.5% to 5.2%. Reading disengage and mobility on
-  the weapon basis alone (the structural floors' rule extended to two
-  utility rows) makes Hallowfall the first healer in 492 of 1,508 held-out
-  healer drops (26 now) and lifts MRR 0.088 to 0.096, an engine-wide rule
-  that reshapes the default 7. Beside it: the cleanse row (target 2.7, the
-  median 6-8 winner fields none) favours Fallen Staff, and Redemption Staff,
-  46% of single-healer 7s, is named first in 2 of 1,508. Scoring every
-  member naked reads the held-out 7s better (top-3 8.9% against 7.5%).
-  (V: 09b, V3 round 2)
+- **Healer pricing at 7, what stays open** (V3 round 2, Castle Outpost
+  7): with disengage and mobility on the weapon basis (V: 10, Disengage and
+  mobility read the weapon basis) the engine names Hallowfall the first
+  healer in 589 of 1,508 held-out healer drops (38 before) and Fallen Staff
+  in 430, where the real healer is Redemption Staff in 683 and Hallowfall
+  in 404. Two causes remain (notes/findings/2026-10-08-castle-outpost-healers.md):
+  the cleanse row (target 2.7, the median 6-8 winner fields none) favours
+  Fallen Staff, which 4.0% of single-healer 6-8 winners field; and
+  Redemption Staff, 46% of single-healer 7s, is named first in none of the
+  1,508. Scoring every member naked read the held-out 7s better before the
+  rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
+  2)
 - **Fill order as the beam's sequence** (healer -> frontline -> support ->
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering

@@ -47595,7 +47595,11 @@
     "cooldown": 6.6
    },
    "tankiness_per_armor_point": 0.004,
-   "tankiness_per_ccr_point": 0.003
+   "tankiness_per_ccr_point": 0.003,
+   "weapon_basis_caps": [
+    "disengage",
+    "mobility"
+   ]
   },
   "cc_diminishing_returns": null,
   "disarray": {

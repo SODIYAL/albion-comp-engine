@@ -35,6 +35,12 @@ The scoring core of Comp Forge, in two parity-locked ports:
   floors read the weapon+loadout supply in `fitness` and every marginal
   path — worn gear improves coverage/headroom/overstack, never floor relief,
   on parties AND candidates alike.
+- **Two utility rows read the weapon basis** (standing rule 10 extended):
+  the capabilities in mechanics `build_stats.weapon_basis_caps`
+  (`disengage`, `mobility`) read the weapon+loadout supply in every path —
+  `build_extra` gives a dressed member its naked value on them and the
+  count-once share reads them unmultiplied — so no kit closes the row a
+  weapon is fielded for.
 - **Locked gear is sacred**: `forge(locked_gears=)` scores a locked member in
   exactly the supplied kit and never re-dresses it (naked when none —
   nothing is invented); `refine(gears=)` runs the dressed local search and

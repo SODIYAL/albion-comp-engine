@@ -67,7 +67,10 @@ the index rows that record the decision.
    units (Option C, 2026-08-27); any re-fit moves every row at once.
 10. **Structural floors are source-aware** (Option C, 2026-08-27): floors read the
     weapon+loadout supply only; worn gear never buys floor relief. Synergy is
-    weapon-interaction synergy (Model 2, 2026-08-27).
+    weapon-interaction synergy (Model 2, 2026-08-27). Extended to two
+    utility rows (2026-10-09): `disengage` and `mobility` read the
+    weapon+loadout supply only, in coverage too; worn gear neither adds to
+    nor changes them.
 11. **The app models no enemy** (2026-08-28): "our playstyle dictates how we fight
     regardless of who or where." Resistance stays one number; peel is explained
     by comp or content alone.
@@ -371,6 +374,7 @@ archive file and the section title to search for.
 | 10-09 | Asymmetric numbers at 21+ close under standing rule 11 (maintainer decision): the planner assumes a mirror fight; Disarray, CC Escalation and the forced-dismount immunity removed at 21+ stay recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens them | `pipeline/README.md` (Q11 / Q13) | (none) | 10, Asymmetric numbers at 21+ close under standing rule 11 |
 | 10-09 | No dive style (maintainer decision): no harvest family supports a dive or assassination style at 20+; the whole-roster clustering of killer parties of 16-20 finds 14 families, whose labelled rosters read clap, clap_kite, kite or brawl (notes/findings/2026-10-08-roster-families.md); a dive lineup in a later clustering run reopens it | (none: no code moves) | (none) | 10, No dive style |
 | 10-09 | The ranged-AoE core minimum is generated (maintainer decision): every style's `ranged_aoe_core` minimum is its winners' typical carrier count per band, round(p50) of the weapons per distinct killer roster of 10+ (training split) some combo of which meets the predicate, where that p50 is 1 or more, none where most field none; a band under 40 rosters borrows its style's nearest filled band, else the parent style's. Generated at every fold into `skeletons.json` `minima`, laid on the band at 10+ by both ports (the declared style's row, else pooled; none below 10); the hand values go (the base band's 2 / 3 / 4 / 6 / 9, clap and clap_kite 5 / 7, kite 4 / 5, brawl 0) and a hand minimum fails the build. Derived at 10-14 / 15-19 / 20+: clap 3 / 3 / 4, clap_kite 3 / 4 / 4, kite 2 / 3 / 3, brawl_clap 1 / 1 / 1, pooled and balanced 2 / 3 / 3, brawl none; 24 of 78 probed forges move, none forges short | `derive_skeletons.py`, `build_dataset.py`, `engine.py`, `app_scoring.js`, `composition.yaml`, `styles.yaml` | S7, T33, F12, F21, F29, test_js_parity | 10, The ranged-AoE core minimum is generated |
+| 10-09 | Disengage and mobility read the weapon basis (maintainer decision): the two rows read the weapon + loadout supply only, as the structural floors do (standing rule 10 extended); worn gear neither adds to nor changes them (`mechanics.yaml` `weapon_basis_caps`; both ports' `build_extra` and count-once share). Held-out 7s at Castle Outpost 7: top-3 7.4% to 7.9%, MRR 0.087 to 0.099 (+0.009 to +0.015), Hallowfall the first healer in 589 of 1,508 healer drops (38 before); v4h at 10+ flat (top-3 +0.1 points, CI -0.3 to +0.5; MRR 0.091 to 0.092; role-level 378 to 374 of 607); T38 records the fixtures' mobility against the dressed-fitted band minimum until the next fold re-measures it | `mechanics.yaml`, `engine.py`, `app_scoring.js` | T38, test_js_parity | 10, Disengage and mobility read the weapon basis |
 
 ## Open questions
 

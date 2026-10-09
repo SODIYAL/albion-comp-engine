@@ -81,7 +81,9 @@ Three layers, never merged:
   roster: numbers decide the outcome and fitness() adds nothing to them;
   tests/VALIDATION.md).
 - Fitness: coverage with diminishing returns, hard floors on the
-  weapon+loadout basis, headroom, overstack, Focus Fire / Resilience and AoE
+  weapon+loadout basis, the `disengage` and `mobility` rows on the same
+  basis (worn gear neither adds to nor changes them, mechanics
+  `weapon_basis_caps`), headroom, overstack, Focus Fire / Resilience and AoE
   escalation, per-weapon Resilience Penetration as a rebate, optional rows,
   ramped rows (`anti_zone`: none through 14, full at 25).
 - Recommendation score = exact marginal comp-score delta (0.55 capability +

@@ -1540,6 +1540,15 @@
     for (var wcap in wcosts) {
       if (wcap in out) out[wcap] = Math.max(0.0, out[wcap] - wcosts[wcap] / this.scoreUnit);
     }
+    /* WEAPON-BASIS ROWS (mechanics build_stats weapon_basis_caps; mirrors
+       engine.py): the member's weapon + loadout supply as the naked member
+       brings it; no worn item adds to or changes it */
+    var wbCaps = bs.weapon_basis_caps || [];
+    for (var wb = 0; wb < wbCaps.length; wb++) {
+      var nakedV = this.memberExtra(weapon, combo)[wbCaps[wb]];
+      if (nakedV === undefined) delete out[wbCaps[wb]];
+      else out[wbCaps[wb]] = nakedV;
+    }
     return out;
   };
 
@@ -2164,8 +2173,11 @@
     /* A count-once spell's units on `cap` as a member holding `weapon` and
        wearing `gear` supplies them: buildExtra's stat channel multiplies
        them as it multiplies the member's whole capability, same order, no
-       doctrine passives (mirrors engine.py _ns_share). Naked: v. */
+       doctrine passives (mirrors engine.py _ns_share). Naked: v; a
+       weapon-basis capability reads v dressed too, as buildExtra does. */
     if (!gear || !gear.length) return v;
+    if ((((this.mechanics || {}).build_stats || {}).weapon_basis_caps || []).indexOf(cap) >= 0)
+      return v;
     var dmg = 0.0, heal = 0.0, ccdur = 0.0;
     var dfn = 0.0, cdr = 0.0, cast = 0.0, aspd = 0.0;
     for (var i = 0; i < gear.length; i++) {

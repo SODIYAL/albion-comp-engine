@@ -242,6 +242,14 @@ build_stats:
   cooldown_mult_caps: [burst_st, burst_aoe, sustained_dps, execute, heal_sustain, heal_burst, stun, root, slow, silence]
   cast_mult_caps: [burst_st, burst_aoe, sustained_dps, execute, heal_sustain, heal_burst, stun, root, slow, silence]
   attack_speed_mult_caps: [sustained_dps]
+  # WEAPON-BASIS ROWS: these capabilities read the member's weapon and
+  # loadout (spell) supply only, the way the structural floors do (standing
+  # rule 10): no worn item adds to them (boots, capes, food) or changes
+  # them, so a kit never closes the row a weapon is fielded for. Measured
+  # at Castle Outpost 7, the incumbents' kits stood the party at the
+  # disengage target before a mobile healer joined
+  # (notes/findings/2026-10-08-castle-outpost-healers.md).
+  weapon_basis_caps: [disengage, mobility]
 
 # ---------------------------------------------------------------------------
 # KILL PRESSURE (identity Phase D, the caller's checklist): pierce on the
