@@ -283,17 +283,32 @@ def t_gate_units():
                                    ctx["role_min"].get("healer", 0))
           else True)
     # a cross-role minimum lifts the seat gate when no under-typical seat
-    # of the role can meet it
-    pn = next((p for p in ctx["pred_min"]
-               if len(ctx["pred_roles"].get(p) or ()) > 1), None)
-    if pn:
-        w = next((w for w in ctx["pred_sat"][pn] if e.role_of(w) == "dps"
-                  and e.seat_of(w) and ctx["seat_typ"].get(e.seat_of(w), 0) > 0), None)
-    if pn and w:
+    # of the role can meet it: the first cross-role minimum above 0 with a
+    # dps satisfier in a typed seat and another typed dps seat that cannot
+    # meet it (brawl carries no ranged_aoe_core minimum)
+    pn = w = None
+    other = []
+    for p, mn in ctx["pred_min"].items():
+        if mn <= 0 or len(ctx["pred_roles"].get(p) or ()) <= 1:
+            continue
+        for cand in ctx["pred_sat"][p]:
+            cs = e.seat_of(cand)
+            if e.role_of(cand) != "dps" or not cs or ctx["seat_typ"].get(cs, 0) <= 0:
+                continue
+            o = [s2 for s2 in ctx["role_seats"]["dps"]
+                 if s2 != cs and ctx["seat_typ"].get(s2, 0) > 0
+                 and s2 not in ctx["pred_seats"][p]]
+            if o:
+                pn, w, other = p, cand, o
+                break
+        if pn:
+            break
+    if not pn:
+        check("S4i a cross-role minimum lifts a seat past its typical while the "
+              "seats that cannot meet it stand under theirs", False,
+              "no cross-role minimum above 0 with a fixture at brawl 20")
+    else:
         s = e.seat_of(w)
-        other = [s2 for s2 in ctx["role_seats"]["dps"]
-                 if s2 != s and ctx["seat_typ"].get(s2, 0) > 0
-                 and s2 not in ctx["pred_seats"][pn]]
         roles = {"dps": ctx["seat_typ"][s]}
         preds = {"seat:" + s: ctx["seat_typ"][s]}
         # every other dps seat that COULD meet the minimum stands at its
@@ -308,9 +323,9 @@ def t_gate_units():
         preds2[pn] = ctx["pred_min"][pn]
         ok_when_met = e._typ_ok(ctx, roles, preds2, w, contrib)
         check(f"S4i {pn} (cross-role) unmet lifts the {s} seat past its typical "
-              f"while {other[:1] or ['no other']} seats that cannot meet it stand "
-              f"under theirs; once met the gate closes again",
-              (ok_when_unmet if other else True) and (not ok_when_met if other else True),
+              f"while {other[:1]} seats that cannot meet it stand under theirs; "
+              f"once met the gate closes again",
+              ok_when_unmet and not ok_when_met,
               f"unmet={ok_when_unmet} met={ok_when_met} other={other}")
 
 

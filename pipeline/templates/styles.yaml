@@ -138,8 +138,17 @@ styles:
     # At 20, brawl runs ~5 frontline (blap's count; the style-blind band
     # let 6 through — too many tanks); the healer entry below is replaced
     # by role_min_per_players above.
+    # No ranged_aoe_core minimum in any band: what brawl killer parties
+    # field, by the standoff rule (round-half-up of the p50 where it is 1 or
+    # more; most winners fielding none sets none). Carriers per party p10 /
+    # p50 / p90 0 / 0 / 2 at 10-14, 15-19 and 20 (distinct rosters of the
+    # training split, 1,558 / 1,368 / 232; a gap-closer grounds no ranged
+    # presence, H6c); the base band's 2 / 3 / 4 is met by 11 / 2 / 0% of
+    # them.
     constraint_overrides:
-      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, frontline: {min: 4, max: 5}}
+      - {min_size: 10, max_size: 14, ranged_aoe_core: {min: 0}}
+      - {min_size: 15, max_size: 19, ranged_aoe_core: {min: 0}}
+      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, frontline: {min: 4, max: 5}, ranged_aoe_core: {min: 0}}
     # brawl sequence: contact -> pressure -> sustain -> denial -> secure
     chain:
       - {name: Contact, caps: [engage, tankiness]}

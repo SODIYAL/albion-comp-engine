@@ -346,10 +346,14 @@ def load_sheets(weapon_lines, tune_sheets=None):
 #     target `ground`/`enemy` with cast_range >= RANGED_MIN_CASTRANGE.
 #     Cast ranges cluster like autoattack ranges did: melee spins/cleaves sit
 #     at 6-8, real ranged delivery at 9-26, so 9 splits in a real gap;
-#   - structure cannot tell a thrown bomb from a LEAP that carries the
-#     wielder into the clump (both are `target: ground` at range), so
-#     ranged_overrides.yaml carries explicit curated grant/deny records with
-#     citations — gap-closers are denied there;
+#   - a spell that carries the wielder (`caster_moves`, parsed from the
+#     spell's own dash or leap) is a gap-closer: its area lands where the
+#     body lands, an engage, never ranged pressure from outside the clump,
+#     so it is denied by default. ranged_overrides.yaml carries the cited
+#     exceptions both ways: a caster-moving spell whose payload still lands
+#     from range (Skystrider's perch) is a grant, and a deny names what
+#     structure misses (a cone anchored at a brawler). A deny that repeats
+#     the caster_moves rule fails the build (dead weight);
 #   - a claim whose spell has no structural facts is UNKNOWN: the capability
 #     stays off and the weapon is listed for curation, never inferred.
 #
@@ -400,6 +404,7 @@ def derive_ranged_presence(weapons, spell_index, overrides):
                 facts = spell_index.get(sid) or {}
                 cast_range = facts.get("cast_range")
                 cast_range = float(cast_range) if cast_range is not None else None
+                moves = bool(facts.get("caster_moves"))
                 rec = {
                     "spell": sid, "slot": names[i] if i < len(names) else None,
                     "cast_range": cast_range,
@@ -407,6 +412,7 @@ def derive_ranged_presence(weapons, spell_index, overrides):
                     "max_targets": facts.get("max_targets"),
                     "cooldown": facts.get("cooldown"),
                     "delivery": facts.get("target"),
+                    "caster_moves": moves,
                 }
                 ov = overrides.get((key, sid))
                 if ov:
@@ -416,6 +422,14 @@ def derive_ranged_presence(weapons, spell_index, overrides):
                     rec["override"] = {"reason": (ov.get("reason") or "").strip(),
                                        "source": (ov.get("source") or "").strip(),
                                        "as_of": str(ov.get("as_of") or "")}
+                    if ov["decision"] == "deny" and moves:
+                        problems.append(
+                            f"ranged_overrides: {key}/{sid} deny repeats the "
+                            f"caster_moves rule (delete the entry)")
+                elif moves:
+                    # a gap-closer: the area lands where the wielder lands
+                    rec["basis"] = "structural_caster_moves"
+                    rec["granted"] = False
                 elif cast_range is None or not facts:
                     rec["basis"] = "unknown_no_structural_facts"
                     rec["granted"] = False
@@ -3332,9 +3346,11 @@ def main():
         json.dump({"_meta": {
             "rule": (f"bundle claims {AOE_CLAIM} (curated, evidence-linted) "
                      f"AND its spell is {'/'.join(RANGED_DELIVERY)}-delivered "
-                     f"with cast_range >= {RANGED_MIN_CASTRANGE}; "
-                     "ranged_overrides.yaml wins with citation; missing "
-                     "structural facts = unknown, never inferred"),
+                     f"with cast_range >= {RANGED_MIN_CASTRANGE}; a spell "
+                     "that carries the wielder (caster_moves) is a "
+                     "gap-closer, denied; ranged_overrides.yaml wins with "
+                     "citation; missing structural facts = unknown, never "
+                     "inferred"),
             "granted": sorted(k for k, r in ranged_report.items()
                               if r["status"] == "granted"),
             "unknown": sorted(k for k, r in ranged_report.items()

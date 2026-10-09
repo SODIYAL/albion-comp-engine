@@ -300624,6 +300624,20 @@
    ],
    "constraint_overrides": [
     {
+     "max_size": 14,
+     "min_size": 10,
+     "ranged_aoe_core": {
+      "min": 0
+     }
+    },
+    {
+     "max_size": 19,
+     "min_size": 15,
+     "ranged_aoe_core": {
+      "min": 0
+     }
+    },
+    {
      "frontline": {
       "max": 5,
       "min": 4
@@ -300633,7 +300647,10 @@
       "min": 3
      },
      "max_size": 29,
-     "min_size": 20
+     "min_size": 20,
+     "ranged_aoe_core": {
+      "min": 0
+     }
     }
    ],
    "mechanics": {
@@ -314226,7 +314243,6 @@
     "damage_debuff": 2,
     "mobility": 2,
     "peel": 2,
-    "ranged_presence": 2,
     "reflect": 2,
     "root": 2,
     "self_sustain": 2,
@@ -314254,9 +314270,6 @@
      "CHARGINGBLADE"
     ],
     "peel": [
-     "SPEAR_AOE_FINISHER"
-    ],
-    "ranged_presence": [
      "SPEAR_AOE_FINISHER"
     ],
     "reflect": [
@@ -314318,8 +314331,7 @@
      [
       {
        "burst_aoe": 4,
-       "peel": 2,
-       "ranged_presence": 2
+       "peel": 2
       }
      ],
      [
@@ -320030,7 +320042,6 @@
     "knockback_displace": 3,
     "mobility": 4,
     "peel": 3,
-    "ranged_presence": 2,
     "reflect": 2,
     "resist_shred": 2,
     "slow": 4,
@@ -320072,9 +320083,6 @@
     "peel": [
      "IMPULSE_PUNCH",
      "BACKHAND_KNOCKBACK"
-    ],
-    "ranged_presence": [
-     "IMPULSE_PUNCH"
     ],
     "reflect": [
      "KNUCKLE_COUNTER"
@@ -320137,7 +320145,6 @@
        "burst_aoe": 4,
        "catch": 2,
        "peel": 2,
-       "ranged_presence": 2,
        "slow": 4
       }
      ],

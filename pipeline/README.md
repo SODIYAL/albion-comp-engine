@@ -269,8 +269,8 @@ spell against the fresh dumps text and delete entries the rebuild made
 unnecessary.
 
 The same re-check applies to the other cited-override files whose entries
-quote dumps text or spell behavior: `ranged_overrides.yaml` (gap-closer
-denies), `heal_overrides.yaml` (heal-scale sub-effect corrections — Divine
+quote dumps text or spell behavior: `ranged_overrides.yaml` (the cited
+exceptions to the gap-closer rule, both ways), `heal_overrides.yaml` (heal-scale sub-effect corrections — Divine
 Jump, Celestial Sphere), `style_overrides.yaml` (cited style-fit
 overrides), and the `CURSEDOT` non-stacking record in `interactions.yaml`
 (the "stacks up to 4 times" wording it cites).
@@ -861,7 +861,10 @@ py -3 pipeline/derive_role_counts.py
 primitive. `derive_style_fit` reads it as the delivery rule "payload
 reach, not travel": a caster-moving E's cast range counts toward flex
 delivery only for a flex bomb (group payload at the job bar); a standoff
-tool must move nothing.
+tool must move nothing. `derive_ranged_presence` reads it as the
+gap-closer rule: a caster-moving spell's area lands where the wielder
+lands, so it grounds no `ranged_presence`; `ranged_overrides.yaml` holds
+the cited exceptions (H6c).
 
 ## Party styles and style cells
 

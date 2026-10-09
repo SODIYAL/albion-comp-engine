@@ -23,7 +23,6 @@
    "2H_FROSTSTAFF",
    "2H_FROSTSTAFF_CRYSTAL",
    "2H_GLACIALSTAFF",
-   "2H_GLAIVE_CRYSTAL",
    "2H_HALBERD_MORGANA",
    "2H_HARPOON_HELL",
    "2H_ICECRYSTAL_UNDEAD",
@@ -32,7 +31,6 @@
    "2H_INFERNOSTAFF_MORGANA",
    "2H_KNUCKLES_AVALON",
    "2H_KNUCKLES_HELL",
-   "2H_KNUCKLES_SET3",
    "2H_LONGBOW",
    "2H_QUARTERSTAFF_AVALON",
    "2H_REPEATINGCROSSBOW_UNDEAD",
@@ -49,7 +47,7 @@
    "MAIN_SCIMITAR_MORGANA",
    "MAIN_SPEAR_KEEPER"
   ],
-  "rule": "bundle claims burst_aoe (curated, evidence-linted) AND its spell is ground/enemy-delivered with cast_range >= 9; ranged_overrides.yaml wins with citation; missing structural facts = unknown, never inferred",
+  "rule": "bundle claims burst_aoe (curated, evidence-linted) AND its spell is ground/enemy-delivered with cast_range >= 9; a spell that carries the wielder (caster_moves) is a gap-closer, denied; ranged_overrides.yaml wins with citation; missing structural facts = unknown, never inferred",
   "unknown": []
  },
  "weapons": {
@@ -58,6 +56,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "self",
      "granted": false,
@@ -74,6 +73,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "38",
      "delivery": "ground",
      "granted": true,
@@ -90,6 +90,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 5.0,
+     "caster_moves": false,
      "cooldown": "25",
      "delivery": "self",
      "granted": false,
@@ -104,17 +105,13 @@
   "2H_AXE_AVALON": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 10.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Leap towards the targeted position and slam your axe into the ground\" \u2014 the AoE lands around the wielder after a gap-close; this is an engage, not ranged pressure on a clump from outside it.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields Realmbreaker as melee dps \u2014 \"Press E on engage, chop people\" (2026-08)."
-     },
      "radius": 4.0,
      "slot": "e",
      "spell": "LETHAL_CLEAVER"
@@ -127,6 +124,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 24.0,
+     "caster_moves": false,
      "cooldown": "0",
      "delivery": "ground",
      "granted": true,
@@ -143,6 +141,7 @@
     {
      "basis": "curated_override_grant",
      "cast_range": 10.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
@@ -164,6 +163,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 24.0,
+     "caster_moves": false,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
@@ -180,6 +180,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 26.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -196,6 +197,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 6.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": false,
@@ -210,17 +212,13 @@
   "2H_CLEAVER_HELL": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 11.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Dash towards the targeted position, dealing damage to all enemies you pass through\" \u2014 a dash line, wielder ends inside the enemy clump.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields Carving as melee pierce \u2014 \"Pierce for engage\" (2026-08)."
-     },
      "radius": null,
      "slot": "e",
      "spell": "CLAYMORESLASH"
@@ -233,6 +231,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "26.8",
      "delivery": "ground",
      "granted": true,
@@ -249,6 +248,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -260,6 +260,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -276,6 +277,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 24.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -287,6 +289,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -298,6 +301,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -314,6 +318,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -325,6 +330,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -341,6 +347,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -352,6 +359,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -368,6 +376,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -384,6 +393,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 12.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -400,6 +410,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 7.0,
+     "caster_moves": false,
      "cooldown": "1",
      "delivery": "self",
      "granted": false,
@@ -416,6 +427,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
@@ -430,17 +442,13 @@
   "2H_DOUBLEBLADEDSTAFF": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 15.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Leap towards the targeted position, dealing damage in a 5 radius\" \u2014 body-delivered impact AoE after a gap-close.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
-     },
      "radius": null,
      "slot": "e",
      "spell": "DASH_KNOCKBACK"
@@ -453,6 +461,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 9.0,
+     "caster_moves": false,
      "cooldown": "1",
      "delivery": "ground",
      "granted": true,
@@ -467,8 +476,9 @@
   "2H_DUALAXE_KEEPER": {
    "decisions": [
     {
-     "basis": "structural_below_threshold",
+     "basis": "structural_caster_moves",
      "cast_range": 8.0,
+     "caster_moves": true,
      "cooldown": "20",
      "delivery": "ground",
      "granted": false,
@@ -483,8 +493,9 @@
   "2H_DUALCROSSBOW_CRYSTAL": {
    "decisions": [
     {
-     "basis": "structural_below_threshold",
+     "basis": "structural_caster_moves",
      "cast_range": 8.0,
+     "caster_moves": true,
      "cooldown": "10",
      "delivery": "ground",
      "granted": false,
@@ -496,6 +507,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -507,6 +519,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -523,6 +536,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -534,6 +548,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -550,6 +565,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "self",
      "granted": false,
@@ -564,17 +580,13 @@
   "2H_DUALSWORD": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 13.0,
+     "caster_moves": true,
      "cooldown": "15",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Leap towards the targeted position \u2026 deals damage in a 5 radius on impact\" \u2014 body-delivered impact AoE after a gap-close.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
-     },
      "radius": 5.0,
      "slot": "e",
      "spell": "SPINATTACK"
@@ -587,6 +599,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "ground",
      "granted": true,
@@ -598,6 +611,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -614,6 +628,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -625,6 +640,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -641,6 +657,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -652,6 +669,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -668,6 +686,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "1",
      "delivery": "ground",
      "granted": true,
@@ -684,6 +703,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -700,6 +720,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 10.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -714,24 +735,26 @@
   "2H_GLAIVE_CRYSTAL": {
    "decisions": [
     {
-     "basis": "curated_burst_aoe+structural_range",
+     "basis": "structural_caster_moves",
      "cast_range": 17.0,
+     "caster_moves": true,
      "cooldown": "30",
      "delivery": "ground",
-     "granted": true,
+     "granted": false,
      "max_targets": null,
      "radius": 8.5,
      "slot": "e",
      "spell": "SPEAR_AOE_FINISHER"
     }
    ],
-   "status": "granted"
+   "status": "not_granted"
   },
   "2H_HALBERD": {
    "decisions": [
     {
      "basis": "structural_below_threshold",
      "cast_range": 7.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "self",
      "granted": false,
@@ -748,6 +771,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 20.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "ground",
      "granted": true,
@@ -764,6 +788,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 12.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -780,6 +805,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -796,6 +822,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 14.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -812,6 +839,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -828,6 +856,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -844,13 +873,14 @@
     {
      "basis": "curated_override_grant",
      "cast_range": 12.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": true,
      "max_targets": null,
      "override": {
       "as_of": "2026-09-15",
-      "reason": "The dive kick leaps to the targeted position (caster moves), which the gap-closer rule would deny; the ranged grant stands (curation judgment) \u2014 the combo is fielded as a 12m knock-up bomb thrown onto the clump.",
+      "reason": "The dive kick leaps to the targeted position (caster moves), which the gap-closer rule denies; the ranged grant stands (curation judgment) \u2014 the combo is fielded as a 12m knock-up bomb thrown onto the clump.",
       "source": "curation:2026-09-15 \u2014 Fists of Avalon keeps its structural grant (target ground, cast_range 12)."
      },
      "radius": null,
@@ -865,6 +895,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 10.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -881,6 +912,7 @@
     {
      "basis": "curated_override_deny",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": false,
@@ -902,6 +934,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "self",
      "granted": false,
@@ -918,6 +951,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 3.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "ground",
      "granted": false,
@@ -932,8 +966,9 @@
   "2H_KNUCKLES_SET2": {
    "decisions": [
     {
-     "basis": "structural_below_threshold",
+     "basis": "structural_caster_moves",
      "cast_range": 0.0,
+     "caster_moves": true,
      "cooldown": "0",
      "delivery": "self",
      "granted": false,
@@ -948,24 +983,31 @@
   "2H_KNUCKLES_SET3": {
    "decisions": [
     {
-     "basis": "curated_burst_aoe+structural_range",
+     "basis": "curated_override_deny",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
-     "granted": true,
+     "granted": false,
      "max_targets": null,
+     "override": {
+      "as_of": "2026-10-08",
+      "reason": "\"Unleash a powerful punch in a cone in front of you\" \u2014 the cone is anchored at the wielder, a brawler's engage the same class as Ursine Maulers' Pummeling Strikes. The parser carries no area for the cone, so the structural rule reads only its 13 cast range.",
+      "source": "Spell description (ao-bin-dumps 47e4f5aca4d3); curation:2026-10-08 \u2014 a brawler's cone in front of the wielder is not ranged pressure."
+     },
      "radius": null,
      "slot": "e",
      "spell": "IMPULSE_PUNCH"
     }
    ],
-   "status": "granted"
+   "status": "not_granted"
   },
   "2H_LONGBOW": {
    "decisions": [
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "ground",
      "granted": true,
@@ -980,17 +1022,13 @@
   "2H_QUARTERSTAFF": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 13.0,
+     "caster_moves": true,
      "cooldown": "15",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Vault Leap towards the targeted position \u2026 deals damage in a 5 radius\" \u2014 body-delivered impact AoE after a gap-close.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
-     },
      "radius": 5.0,
      "slot": "e",
      "spell": "VAULT_ATTACK"
@@ -1003,6 +1041,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 20.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1019,6 +1058,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1030,6 +1070,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -1041,6 +1082,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -1055,8 +1097,9 @@
   "2H_SCYTHE_CRYSTAL": {
    "decisions": [
     {
-     "basis": "structural_below_threshold",
+     "basis": "structural_caster_moves",
      "cast_range": 3.0,
+     "caster_moves": true,
      "cooldown": "3",
      "delivery": "ground",
      "granted": false,
@@ -1073,6 +1116,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "self",
      "granted": false,
@@ -1089,6 +1133,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "self",
      "granted": false,
@@ -1105,6 +1150,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "8",
      "delivery": "self",
      "granted": false,
@@ -1121,6 +1167,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "10",
      "delivery": "self",
      "granted": false,
@@ -1137,6 +1184,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -1151,17 +1199,13 @@
   "2H_TRIDENT_UNDEAD": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 12.0,
+     "caster_moves": true,
      "cooldown": "30",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-09-15",
-      "reason": "\"Leap towards the targeted position, becoming immune to all Crowd Control effects ... until impact. Roots all enemies in a radius on impact\" \u2014 the wielder lands inside the clump; a gap-close, the same class as Realmbreaker's Lethal Cleaver.",
-      "source": "Spell description (ao-bin-dumps); curation:2026-09-15 \u2014 Trinity Spear is a melee weapon."
-     },
      "radius": 3.0,
      "slot": "e",
      "spell": "TRIDENTTHROW"
@@ -1174,6 +1218,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 25.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -1190,6 +1235,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "enemy",
      "granted": true,
@@ -1201,6 +1247,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 11.0,
+     "caster_moves": false,
      "cooldown": "12",
      "delivery": "ground",
      "granted": true,
@@ -1212,6 +1259,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 13.0,
+     "caster_moves": false,
      "cooldown": "2",
      "delivery": "ground",
      "granted": true,
@@ -1228,6 +1276,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 14.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1244,6 +1293,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "allplayers",
      "granted": false,
@@ -1260,6 +1310,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 3.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": false,
@@ -1276,6 +1327,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "63",
      "delivery": "ground",
      "granted": true,
@@ -1292,6 +1344,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 3.0,
+     "caster_moves": false,
      "cooldown": "0",
      "delivery": "ground",
      "granted": false,
@@ -1308,6 +1361,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 15.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "enemy",
      "granted": true,
@@ -1319,6 +1373,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1333,17 +1388,13 @@
   "MAIN_FIRESTAFF_CRYSTAL": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 14.0,
+     "caster_moves": true,
      "cooldown": "40",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-19",
-      "reason": "\"Transform into a Fireball \u2026 Fly up to 14 towards the targeted position, deals damage to all enemies in a radius\" \u2014 the wielder IS the projectile; damage lands around self at the destination. Same body-delivery class as the melee leaps.",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
-     },
      "radius": 5.0,
      "slot": "e",
      "spell": "FLAMEDASH"
@@ -1351,6 +1402,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1367,6 +1419,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 25.0,
+     "caster_moves": false,
      "cooldown": "30",
      "delivery": "ground",
      "granted": true,
@@ -1378,6 +1431,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1394,6 +1448,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 12.0,
+     "caster_moves": false,
      "cooldown": "18",
      "delivery": "ground",
      "granted": true,
@@ -1410,6 +1465,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 26.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1426,6 +1482,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 3.0,
+     "caster_moves": false,
      "cooldown": "1.5",
      "delivery": "ground",
      "granted": false,
@@ -1442,6 +1499,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 20.0,
+     "caster_moves": false,
      "cooldown": "15",
      "delivery": "ground",
      "granted": true,
@@ -1458,6 +1516,7 @@
     {
      "basis": "curated_burst_aoe+structural_range",
      "cast_range": 22.0,
+     "caster_moves": false,
      "cooldown": "20",
      "delivery": "ground",
      "granted": true,
@@ -1472,17 +1531,13 @@
   "MAIN_SPEAR_LANCE_AVALON": {
    "decisions": [
     {
-     "basis": "curated_override_deny",
+     "basis": "structural_caster_moves",
      "cast_range": 16.0,
+     "caster_moves": true,
      "cooldown": "25",
      "delivery": "ground",
      "granted": false,
      "max_targets": null,
-     "override": {
-      "as_of": "2026-08-21",
-      "reason": "\"Dash toward the targeted position ... Deals 222 physical damage\" to all enemies passed through \u2014 the line AoE is the wielder's own dash path, a gap-close that ends inside the enemy clump, not ranged pressure from outside it. (burst_st reclassified to burst_aoe in the 2026-08-21 taxonomy pass; this entry keeps that edit from granting ranged_presence.)",
-      "source": "Spell description (ao-bin-dumps 5cf2e8e9); curation:2026-08-21 \u2014 Daybreaker is fielded as a leather-archetype melee purge lance."
-     },
      "radius": null,
      "slot": "e",
      "spell": "LANCE_CHARGE"
@@ -1495,6 +1550,7 @@
     {
      "basis": "structural_below_threshold",
      "cast_range": 0.0,
+     "caster_moves": false,
      "cooldown": "0",
      "delivery": "self",
      "granted": false,

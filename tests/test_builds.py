@@ -102,6 +102,25 @@ check("H6 curated denials carry reason + source citations",
       denies and all((d.get("override") or {}).get("reason")
                      and (d.get("override") or {}).get("source")
                      for d in denies), f"{len(denies)} denials")
+# A gap-closer (the spell carries the wielder, `caster_moves`) is denied by
+# the derivation; only a cited grant keeps one ranged. Rift Glaive's Razor's
+# Edge moves its wielder, and Spiked Gauntlets' Gravitational Collapse is a
+# cone anchored at the wielder (a cited deny).
+moving = [(k, d) for k, wrec in REPORT["weapons"].items()
+          for d in wrec["decisions"] if d.get("caster_moves")]
+bad = [(k, d["spell"], d["basis"]) for k, d in moving
+       if d["granted"] != (d["basis"] == "curated_override_grant")
+       or (not d["granted"] and d["basis"] not in ("structural_caster_moves",
+                                                   "curated_override_deny"))]
+pinned = {(k, d["spell"]): d["granted"] for k, wrec in REPORT["weapons"].items()
+          for d in wrec["decisions"]}
+check("H6c a caster-moving claim grounds no ranged_presence unless a cited "
+      "grant keeps it (Razor's Edge and Gravitational Collapse are not ranged)",
+      moving and not bad
+      and pinned.get(("2H_GLAIVE_CRYSTAL", "SPEAR_AOE_FINISHER")) is False
+      and pinned.get(("2H_KNUCKLES_SET3", "IMPULSE_PUNCH")) is False
+      and pinned.get(("2H_BOW_CRYSTAL", "AIR_RAID")) is True,
+      f"{len(moving)} caster-moving claims; bad={bad[:3]}")
 
 # ---- H.7 stable spell-ID and item-ID resolution ------------------------------
 bad = []

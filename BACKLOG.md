@@ -51,19 +51,24 @@ Each is decidable today from evidence already in the repo.
   same relative lift as the 6-7 pool; it bars 4-5% of hidden picks (2 of
   them top-3 hits) and a quarter of the engine's committed top 3
   (Grovekeeper, Camlann Mace, Morning Star); a pooled list lifts less;
-  brawl_clap 20 is too thin for a list. It cannot ship beside the base
-  band's `ranged_aoe_core` minimum as it stands: the gated brawl forge
-  stops at 13 of 15 and 17 of 20 (see "Forge minima above what winners
-  field"). Decide the gate, styled, once the minima are settled.
-- **Forge minima above what winners field**: the base band's
-  `ranged_aoe_core` minimum (2 / 3 / 4 at 10-14 / 15-19 / 20-29) is met by
-  17 / 5 / 0% of brawl winners (carriers per party p10 / p50 / p90 0 / 1 / 2
-  in every band) and the styles' 7 at 20 by 14% of clap and 12% of
-  clap_kite winners (p50 5); kite's 5 by 59% (holdout killer parties,
-  notes/findings/2026-10-08-fielded-gate-at-10.md). The forge meets them
-  by drafting carriers winners field rarely. A minimum per style x band
-  from the harvest (the standoff rule: round-half-up of the p50 where it is
-  1 or more) is the derivation to take.
+  brawl_clap 20 is too thin for a list. Beside the base band's
+  `ranged_aoe_core` minimum the gated brawl forge stopped at 13 of 15 and
+  17 of 20; brawl now carries no such minimum (V: 10, A gap-closer grounds
+  no ranged presence) and the gated forge is not re-measured since (see
+  "Forge minima above what winners field"). Decide the gate, styled, once
+  the minima are settled.
+- **Forge minima above what winners field**: with a gap-closer grounding
+  no ranged presence (H6c), killer parties of 10+ field `ranged_aoe_core`
+  carriers per party at a p50 of 3 / 3 / 4 on clap, 3 / 4 / 4 on clap_kite,
+  2 / 3 / 3 on kite, 1 / 1 / 1 on brawl_clap and 2 / 3 / 3 pooled at
+  10-14 / 15-19 / 20 (distinct rosters of the training split), against the
+  base band's 2 / 3 / 4 (met by 63 / 57 / 46% pooled and 10 / 0 / 0% of
+  brawl_clap rosters) and the styles' 5 and 7 at 15-19 and 20 on clap and
+  clap_kite, 4 and 5 on kite. The forge meets them by drafting carriers
+  winners field rarely. Brawl carries none (p50 0; V: 10, A gap-closer
+  grounds no ranged presence). A minimum per style x band from the harvest
+  (the standoff rule: round-half-up of the p50 where it is 1 or more) is
+  the derivation to take.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
@@ -111,18 +116,6 @@ Each is decidable today from evidence already in the repo.
   dps, the guild sheet's "10-20 FILL ORDER"): the seat skeleton fixes the
   END state; the greedy beam still picks its path by marginal. Ordering
   changes many pinned first picks — a maintainer decision, not started.
-
-- **Gap-closers and ranged_presence: should `caster_moves` deny by default?**
-  `derive_ranged_presence` grants from structure (ground/enemy target,
-  cast_range >= 9) and denies leaps only by hand in `ranged_overrides.yaml`;
-  the parser carries `caster_moves` and this path never reads it. The three
-  obvious cases (Fists of Avalon stays, Trinity Spear melee, Skystrider
-  ranged) are cited overrides, which leaves two undecided grants a default
-  would flip: Rift Glaive's Razor's Edge (caster moves, 17 line) and Spiked
-  Gauntlets' Gravitational Collapse (no leap - a 13 cone "in front of you";
-  is a brawler's long cone ranged pressure?). Decide those two and the
-  derivation can read the fact. (V: 09b, Duplicates never outrank a
-  distinct bomb)
 - **Is one unit of shred "pierce on the clump" in a 7-man?** The kill
   lights bar on the bare minimum ("enough to kill" is a minimum question,
   standing rule 17), and castle_outpost's refreshed three-comp fit says the

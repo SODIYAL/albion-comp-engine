@@ -506,8 +506,10 @@ def t_pred_combo_aware():
     member as core even when its equipped kit supplied nothing. A member
     locked with a non-qualifying spell pick must not count, and the forge
     must still deliver the minimum with real kits (or report infeasible)."""
-    e = Engine(content="blackzone_roam", size=20, style="brawl")
-    need = 4   # constraint_bands 20-29: ranged_aoe_core min 4
+    # balanced keeps the base band's ranged_aoe_core minimum (4 at 20-29;
+    # brawl carries none)
+    e = Engine(content="blackzone_roam", size=20, style="balanced")
+    need = (e._band.get("ranged_aoe_core") or {}).get("min", 0)
     # lock core-capable weapons with spell kits that do NOT qualify
     locked, lcs = [], []
     for w in sorted(e.pred_members["ranged_aoe_core"]):
@@ -518,8 +520,9 @@ def t_pred_combo_aware():
             lcs.append(bad)
         if len(locked) == 2:
             break
-    check("F12a a non-qualifying combo exists to lock (fixture sanity)",
-          len(locked) >= 1, str(list(zip(locked, lcs))))
+    check("F12a a non-qualifying combo exists to lock and the band carries a "
+          "minimum (fixture sanity)",
+          len(locked) >= 1 and need >= 1, f"{list(zip(locked, lcs))}, need {need}")
     r = e.forge(20, locked, lcs)
     sel = sum(1 for w, c in zip(r["party"], r["combos"])
               if "ranged_aoe_core" in e._pred_contrib(w, c))
@@ -1191,8 +1194,9 @@ def t_min_need_disjoint_seats():
     needing one more stopper AND one more ranged-AoE body reads 1 instead
     of 2, the beam commits its last slot, and the roster dies one short.
     Admissible means never MORE than a legal completion needs - it must
-    still never be LESS."""
-    e = Engine(content="territory_defense", size=20, style="brawl")
+    still never be LESS. Balanced keeps the base band's ranged_aoe_core
+    minimum (4 at 20-29; brawl carries none)."""
+    e = Engine(content="territory_defense", size=20, style="balanced")
     pool = e.suggest_pool()
     ctx = e._forge_ctx(pool)
 
@@ -1215,7 +1219,7 @@ def t_min_need_disjoint_seats():
     full = bool(f.get("feasible")) and len(f.get("party") or []) == 20
     check("F29 minimum-need bound stays a LOWER bound: a cross-role "
           "predicate is not discounted against bodies committed to a seat "
-          "minimum its satisfiers cannot fill; territory_defense brawl "
+          "minimum its satisfiers cannot fill; territory_defense balanced "
           "forges a full roster at 20",
           premise and need >= 2 and full,
           f"premise={premise} need={need} (two bodies required) "

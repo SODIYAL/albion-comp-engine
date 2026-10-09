@@ -3,82 +3,20 @@
 #
 # The structural rule in build_dataset.py grants ranged_presence to a loadout
 # bundle when its curated burst_aoe evidence spell is ground/enemy-delivered
-# with cast_range >= 9. Structure cannot tell a THROWN area spell from a LEAP
-# that carries the wielder into the clump — both are `target: ground` with a
-# long cast range — so gap-closers are denied here explicitly, each citing the
-# game's own spell description and, where available, how real callers field
-# the weapon. An override is evidence, not taste: every entry needs a reason
-# and a source.
+# with cast_range >= 9, and denies it when the spell carries the wielder
+# (`caster_moves`, parsed from the spell's own dash or leap): a gap-closer's
+# area lands where the body lands, an engage, never ranged pressure from
+# outside the clump. This file holds the cited exceptions, both ways: a
+# caster-moving spell whose payload still lands from range is a grant, and a
+# deny names what structure misses. An override is evidence, not taste:
+# every entry needs a reason and a source.
 #
 # decision: deny  — the spell must NOT ground ranged_presence
-# decision: grant — force a grant the structural rule missed (cite why)
+# decision: grant — force a grant the structural rule misses (cite why)
 #
-# Validated at dataset build: the weapon must exist and the spell must be
-# equippable on it, or the release fails.
-
-- weapon: 2H_AXE_AVALON
-  spell: LETHAL_CLEAVER
-  decision: deny
-  reason: >
-    "Leap towards the targeted position and slam your axe into the ground" —
-    the AoE lands around the wielder after a gap-close; this is an engage,
-    not ranged pressure on a clump from outside it.
-  source: >
-    Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields
-    Realmbreaker as melee dps — "Press E on engage, chop people" (2026-08).
-  as_of: 2026-08-19
-
-- weapon: MAIN_SPEAR_LANCE_AVALON
-  spell: LANCE_CHARGE
-  decision: deny
-  reason: >
-    "Dash toward the targeted position ... Deals 222 physical damage" to all
-    enemies passed through — the line AoE is the wielder's own dash path, a
-    gap-close that ends inside the enemy clump, not ranged pressure from
-    outside it. (burst_st reclassified to burst_aoe in the 2026-08-21
-    taxonomy pass; this entry keeps that edit from granting ranged_presence.)
-  source: >
-    Spell description (ao-bin-dumps 5cf2e8e9); curation:2026-08-21 —
-    Daybreaker is fielded as a leather-archetype melee purge lance.
-  as_of: 2026-08-21
-
-- weapon: 2H_CLEAVER_HELL
-  spell: CLAYMORESLASH
-  decision: deny
-  reason: >
-    "Dash towards the targeted position, dealing damage to all enemies you
-    pass through" — a dash line, wielder ends inside the enemy clump.
-  source: >
-    Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields
-    Carving as melee pierce — "Pierce for engage" (2026-08).
-  as_of: 2026-08-19
-
-- weapon: 2H_DOUBLEBLADEDSTAFF
-  spell: DASH_KNOCKBACK
-  decision: deny
-  reason: >
-    "Leap towards the targeted position, dealing damage in a 5 radius" —
-    body-delivered impact AoE after a gap-close.
-  source: Spell description (ao-bin-dumps 5cf2e8e9).
-  as_of: 2026-08-19
-
-- weapon: 2H_DUALSWORD
-  spell: SPINATTACK
-  decision: deny
-  reason: >
-    "Leap towards the targeted position … deals damage in a 5 radius on
-    impact" — body-delivered impact AoE after a gap-close.
-  source: Spell description (ao-bin-dumps 5cf2e8e9).
-  as_of: 2026-08-19
-
-- weapon: 2H_QUARTERSTAFF
-  spell: VAULT_ATTACK
-  decision: deny
-  reason: >
-    "Vault Leap towards the targeted position … deals damage in a 5 radius"
-    — body-delivered impact AoE after a gap-close.
-  source: Spell description (ao-bin-dumps 5cf2e8e9).
-  as_of: 2026-08-19
+# Validated at dataset build: the weapon must exist, the spell must be
+# equippable on it and claim burst_aoe, and a deny must not repeat the
+# caster_moves rule, or the release fails.
 
 - weapon: 2H_KNUCKLES_KEEPER
   spell: PUMMELING_STRIKES
@@ -92,42 +30,30 @@
     overcommitted tanks" (2026-08).
   as_of: 2026-08-19
 
-- weapon: MAIN_FIRESTAFF_CRYSTAL
-  spell: FLAMEDASH
+- weapon: 2H_KNUCKLES_SET3
+  spell: IMPULSE_PUNCH
   decision: deny
   reason: >
-    "Transform into a Fireball … Fly up to 14 towards the targeted position,
-    deals damage to all enemies in a radius" — the wielder IS the projectile;
-    damage lands around self at the destination. Same body-delivery class as
-    the melee leaps.
-  source: Spell description (ao-bin-dumps 5cf2e8e9).
-  as_of: 2026-08-19
+    "Unleash a powerful punch in a cone in front of you" — the cone is
+    anchored at the wielder, a brawler's engage the same class as Ursine
+    Maulers' Pummeling Strikes. The parser carries no area for the cone, so
+    the structural rule reads only its 13 cast range.
+  source: >
+    Spell description (ao-bin-dumps 47e4f5aca4d3); curation:2026-10-08 —
+    a brawler's cone in front of the wielder is not ranged pressure.
+  as_of: 2026-10-08
 
 # Validation round on the 18-man clap roster (notes/validation/2026-09b.md):
-# the three caster-moving Es the structural rule granted were judged one by
-# one. Trinity Spear is denied; Fists of Avalon and Skystrider are recorded
-# as GRANTS so the decision lives in data and a later gap-closer derivation
-# (caster_moves is a parsed fact) cannot flip them silently.
-
-- weapon: 2H_TRIDENT_UNDEAD
-  spell: TRIDENTTHROW
-  decision: deny
-  reason: >
-    "Leap towards the targeted position, becoming immune to all Crowd
-    Control effects ... until impact. Roots all enemies in a radius on
-    impact" — the wielder lands inside the clump; a gap-close, the same
-    class as Realmbreaker's Lethal Cleaver.
-  source: >
-    Spell description (ao-bin-dumps); curation:2026-09-15 — Trinity Spear
-    is a melee weapon.
-  as_of: 2026-09-15
+# the caster-moving Es the structural rule granted were judged one by one.
+# Fists of Avalon and Skystrider are recorded as GRANTS so the decision
+# lives in data and the caster_moves rule does not flip them.
 
 - weapon: 2H_KNUCKLES_AVALON
   spell: TRIPLECOMBO_DIVEKICK
   decision: grant
   reason: >
     The dive kick leaps to the targeted position (caster moves), which the
-    gap-closer rule would deny; the ranged grant stands (curation
+    gap-closer rule denies; the ranged grant stands (curation
     judgment) — the combo is fielded as a 12m knock-up bomb thrown onto
     the clump.
   source: >
