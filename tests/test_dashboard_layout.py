@@ -993,10 +993,22 @@ check('if (listState !== "ready")' in events_ui and '"Loading CTAs…"' in event
       "L31v the CTA list reads Loading until the service answers and says when it did not: "
       "\"No CTAs yet\" is the service's answer, never the wait for it")
 ev_open = seg(events_ui, "async function openEvents()", "await reloadList(null);", "L31w open anchors")
-check("session++;" in ev_open and "busy = false;" in ev_open and "acctIdle(el.save);" in ev_open
-      and events_ui.count("const mine = session;") == 4 and events_ui.count("if (mine === session)") >= 7,
-      "L31w a reopened CTAs dialog starts idle: an action still waiting from before neither changes it "
-      "nor ends its busy state (a request that never answered held New CTA until a reload)")
+check("session++;" in ev_open and "busy = false;" in ev_open and "acctIdle(el.save);" in ev_open and "acctIdle(el.renew);" in ev_open
+      and events_ui.count("const mine = session;") == 6 and events_ui.count("if (mine === session)") >= 8,
+      "L31w a reopened CTAs dialog starts idle: an action still waiting from before (a save, a move, a deletion, "
+      "a source read, a renewal) or a live read neither changes it nor ends its busy state (a request that never "
+      "answered held New CTA until a reload)")
+check('id="ev-live-state"' in edlg and 'aria-live="polite"' in seg(edlg, '<div class="ev-list-hd">', "</div>", "L31x head anchors")
+      and "watchGuildEvents(id, ours(onGuildChanged), ours(onLiveState))" in events_ui
+      and 'dialog.addEventListener("close", stopWatching);' in events_ui and "watchGuild(shownGuild);" in events_ui
+      and all(s in AUTH_CSS for s in (".ev-list-hd{", ".ev-live-state{", '.ev-live-state[data-live="yes"]')),
+      "L31x the CTAs dialog is live while open: it joins the channel of the guild it shows, leaves it on close, "
+      "and says beside the list whether it is live")
+check('id="ev-renew"' in seg(edlg, '<span class="ev-share-wrap">', "</div>", "L31y share anchors")
+      and "el.renew.hidden = !powers.renew || !current.share_code;" in events_ui
+      and "window.confirm(renewConfirmText(current.name))" in events_ui and "renewShareCode(current.id)" in events_ui
+      and "renewShareCode" not in APP + DECISION_JS,
+      "L31y the share code's renewal sits beside the code, offered to an admin, asked first; the planner never calls it")
 
 print("L32 - sign-up: one sheet for guests and accounts, the page a CTA's link opens")
 # Sign-up (platform phase 5): the sheet is reached by ?cta=<code> and is
@@ -1170,7 +1182,7 @@ HISTORY_JS = read("_history.js")
 hdlg = seg(SHELL, '<dialog class="auth-dialog guild-dialog comp-dialog history-dialog"', "</dialog>", "L36 dialog anchors")
 check('aria-modal="true"' in hdlg and 'aria-labelledby="hs-title"' in hdlg and 'id="hs-title"' in hdlg,
       "L36a the history dialog is modal and titled")
-for fid in ("hs-guild", "hs-search"):
+for fid in ("hs-guild", "hs-window", "hs-search"):
     check(('id="%s"' % fid) in hdlg and ('for="%s"' % fid) in hdlg, "L36b field %s has its label" % fid)
 check('role="alert"' in hdlg and 'aria-live="polite"' in hdlg, "L36c errors and changes are announced, inside the dialog")
 check('id="hs-players"' in hdlg and 'id="hs-ctas"' in hdlg and hdlg.count("<th scope=\"col\"") == 13,
@@ -1203,6 +1215,13 @@ check("if (!has) el.totals.replaceChildren();" in history_ui and '"Loading the g
       and 'state = "failed";' in history_ui,
       "L36p the totals never show the last guild's: a guild without facts, or one loading, clears "
       "them; the dialog reads Loading until answered and says when the read failed")
+hs_head = seg(hdlg, '<div class="hs-head">', '<p class="gd-empty" id="hs-empty"', "L36q head anchors")
+check(hs_head.find('id="hs-guild"') < hs_head.find('id="hs-window"') < hs_head.find('id="hs-totals"') < hs_head.find('id="hs-window-note"')
+      and 'aria-describedby="hs-window-note"' in hs_head
+      and "el.windowNote.textContent = guildId() ? historyWindowNote(period.key, since) : \"\";" in history_ui
+      and all(s in AUTH_CSS for s in (".hs-window{", ".hs-window-note{")) and ".hs-window{flex-basis:100%}" in LAYOUT,
+      "L36q the period sits beside the guild over the totals, and the line under them says which period the facts read "
+      "(on a phone the period takes the row)")
 
 print("L37 - import and export: a spreadsheet as a saved comp, read on the client with uncertain names reviewed; CSV out of the comps and history dialogs")
 # Phase 10: the eighth feature module reads a sheet in the browser, reads

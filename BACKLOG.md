@@ -552,13 +552,20 @@ Realtime Broadcast), phase 8 (the attendance record) and phase 9 (the
 history: facts over completed CTAs), phase 10 (import and export: a
 spreadsheet, a CSV or an Excel workbook as a saved comp, its gear columns
 read into each slot's kit, CSV out) and phase 11 (the engine's read of
-the live roster, on the sheet) are built; the comps dialog sets a slot's
-weapon, each slot keeping the kit its saved link holds.
+the live roster, on the sheet) are built, and after them the history by
+period (the last 30 days, the last 90 days, all time), the live CTAs
+dialog (a private channel per guild) and an admin's renewal of a CTA's
+share code; the comps dialog sets a slot's weapon, each slot keeping the
+kit its saved link holds.
 
 - **Guest identity is a name and a claim token** (phase 5). A guest who
   clears their browser loses the claim; the caller removes or moves them
-  (phase 6). A Discord login (phase 12) is the stronger identity when it
-  comes.
+  (phase 6). A renewed share code keeps the claim: the browser keeps it
+  under the CTA as well as the code, and the new link finds it. A claim
+  the page made before it kept claims under the CTA, and has not read
+  since, sits under the old code alone, which opens nothing after a
+  renewal: that guest is the caller's to move or remove. A Discord login
+  (phase 12) is the stronger identity when it comes.
 - **Enable leaked-password protection** (Supabase Auth, the security
   advisor's one warning): the Email provider's "Prevent use of leaked
   passwords" in the project's Auth settings, no code. A Pro plan feature
@@ -598,15 +605,26 @@ weapon, each slot keeping the kit its saved link holds.
 - **A player's own history across guilds**: the history dialog reads a
   guild's facts; a player's list of their own CTAs and marks across
   guilds (and a guest's, by claim) is a later surface.
-- **History by period**: the facts run over every completed CTA; a
-  window (the last 30 days, a season) is a later increment if callers
-  ask for it.
-- **The CTAs dialog is not live**: the calendar and the sign-up counts
-  read on open; the sheet is the live surface. A channel per guild for the
-  dialog is a later increment if callers ask for it.
-- **Renewing a CTA's share code**: the code is generated at creation and
-  never changes; a leaked link needs a new CTA. An admin's renewal (the
-  guild join code's pattern) is a later increment if callers ask for it.
+- **A season in the history**: the facts cover the last 30 days, the
+  last 90 days or all time (`guild_history` takes a period's start). A
+  season, a stated start and end, needs an end beside the start and a
+  list of seasons; a later increment if callers ask for it.
+- **A slot's weapon changed on the sheet, in the live CTAs dialog**: the
+  guild's broadcast covers the CTA and its sign-ups (`save_event` writes
+  the CTA's row whenever it writes slots, so a roster saved in the dialog
+  is told). A slot's weapon a caller changes on the sheet shows in an
+  open dialog on its next read. Adding the slots to the guild's trigger
+  costs a message per slot `save_event` writes (sixty for a full roster,
+  beside the sheet's own sixty); a later increment if callers ask for it.
+- **A status move in the CTAs dialog drops unsaved edits**: with the form
+  edited, a status move asks "Unsaved changes are kept in the form.
+  Change the status now?" and then redraws the form from the saved CTA,
+  so the typed name, times, size and notes go (slots edited stay). Seen
+  in the stub-database page: a typed name came back as the saved one and
+  "Unsaved changes" cleared. The move handler redraws through
+  `renderEvent()`; the renewal repaints the share row alone
+  (`renderShare`, `renderMeta`) and keeps the typed fields. A fix keeps
+  the typed values across the move's redraw.
 - **A caller's role label against the weapon's seat**: an imported
   "Witchwork (DPS)" carries DPS as the slot's role label, and the role
   tag and the per-role counts still read the weapon's primary seat

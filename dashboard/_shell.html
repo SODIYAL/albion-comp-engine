@@ -2700,7 +2700,10 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
           <label for="ev-guild">Guild</label>
           <select id="ev-guild"></select>
         </div>
-        <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+        <div class="ev-list-hd">
+          <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+          <span class="ev-live-state" id="ev-live-state" aria-live="polite"></span>
+        </div>
         <ul class="gd-list ev-list" id="ev-list" aria-labelledby="ev-list-label"></ul>
         <p class="auth-hint" id="ev-list-note" hidden></p>
         <button type="button" class="auth-secondary" id="ev-new" hidden>New CTA</button>
@@ -2716,7 +2719,9 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
               <span class="ev-moves" id="ev-moves"></span>
               <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span>
                 <button type="button" class="gd-btn" id="ev-sheet" hidden>Sign-up sheet</button>
-                <button type="button" class="gd-btn" id="ev-link" hidden>Copy link</button></span>
+                <button type="button" class="gd-btn" id="ev-link" hidden>Copy link</button>
+                <button type="button" class="gd-btn" id="ev-renew" hidden
+                  title="A new code: the current sign-up link stops opening the sheet">Renew code</button></span>
             </div>
             <div class="cp-fields">
               <div class="auth-field cp-wide" id="ev-source-wrap">
@@ -2854,8 +2859,13 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <label for="hs-guild">Guild</label>
         <select id="hs-guild"></select>
       </div>
+      <div class="auth-field hs-window">
+        <label for="hs-window">Period</label>
+        <select id="hs-window" aria-describedby="hs-window-note"></select>
+      </div>
       <div class="gd-coverage hs-totals" id="hs-totals" aria-label="Totals over completed CTAs"></div>
     </div>
+    <p class="auth-hint hs-window-note" id="hs-window-note"></p>
     <p class="gd-empty" id="hs-empty" hidden></p>
 
     <div id="hs-body" hidden>

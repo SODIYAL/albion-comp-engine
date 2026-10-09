@@ -10,7 +10,8 @@
  * Pinned: the show rate and its wording, the regular's definition, the
  * player rows (order, rate, roles and plays through the catalog), the
  * name filter, the weapons fielded, the completed CTAs with their fill,
- * the totals, error wording, and the one call the helper makes.
+ * the totals, error wording, the one call the helper makes, and the
+ * period the facts cover (the last 30 days, the last 90 days, all time).
  *
  * Run:  node tests/test_history.js
  */
@@ -123,6 +124,12 @@ const CATALOG = {
   REPLY["rpc:guild_history"] = { data: { totals: { ctas: 1 }, ctas: [], players: [], weapons: [] }, error: null };
   const facts = await run("loadGuildHistory")("g1");
   check("loadGuildHistory asks guild_history for one guild", same(CALLS[0], { rpc: "guild_history", args: { guild_id: "g1" } }) && facts.totals.ctas === 1);
+  CALLS.length = 0;
+  await run("loadGuildHistory")("g1", "2026-09-08T12:00:00.000Z");
+  await run("loadGuildHistory")("g1", null);
+  check("a period rides the call as its start; all time is the call that names the guild alone",
+        same(CALLS[0], { rpc: "guild_history", args: { guild_id: "g1", since: "2026-09-08T12:00:00.000Z" } })
+        && same(CALLS[1], { rpc: "guild_history", args: { guild_id: "g1" } }), CALLS);
   REPLY["rpc:guild_history"] = { data: null, error: null };
   check("no answer reads as empty facts", same(await run("loadGuildHistory")("g1"), { totals: {}, ctas: [], players: [], weapons: [] }));
 
@@ -150,6 +157,28 @@ const CATALOG = {
         same(ctas, [["CTA", "Content", "Planned", "Starts (UTC)", "Slots", "Claimed", "Fill", "Attended", "No-show", "Unmarked", "Cancelled", "Reserve"],
                     ["First", "castle", 20, "2026-10-01T18:00:00Z", 4, 3, "75%", 2, 1, 0, 0, 1]]), ctas);
   check("no facts is a header alone", run("historySheetRows")("players", null, CATALOG).length === 1 && run("historySheetRows")("ctas", {}, CATALOG).length === 1);
+}
+
+/* 5 - the period: the last 30 days, the last 90 days, all time */
+{
+  const W = run("HISTORY_WINDOWS"), pick = run("historyWindow"), since = run("historySince"), note = run("historyWindowNote");
+  check("the periods are the last 30 days, the last 90 days and all time, each named; all time is the default",
+        same(W.map(w => `${w.key}:${w.days}`), ["30d:30", "90d:90", "all:null"]) && W.every(w => w.label)
+        && run("HISTORY_WINDOW_DEFAULT") === "all" && pick("all").days === null);
+  check("a key the dialog does not know reads as the default", pick("season").key === "all" && pick(null).key === "all" && pick(undefined).key === "all");
+  const now = new Date("2026-10-08T12:00:00.000Z");
+  check("a period starts that many days before now, as the instant the database compares a CTA's start with; all time has no start",
+        since("30d", now) === "2026-09-08T12:00:00.000Z" && since("90d", now) === "2026-07-10T12:00:00.000Z"
+        && since("all", now) === null && since("season", now) === null, [since("30d", now), since("90d", now)]);
+  const n30 = note("30d", since("30d", now), now), nAll = note("all", null, now);
+  check("the dialog says which period it reads: the period and the day it starts, or every completed CTA",
+        /last 30 days/.test(n30) && n30.includes(run("historyDateLabel")(since("30d", now), now)) && /Every completed CTA/.test(nAll), [n30, nAll]);
+  const src = fs.readFileSync(path.join(DASH, "_history.js"), "utf8");
+  check("the period is offered from the list, read again on a change, remembered per browser, named in the empty state, the totals and the export",
+        /HISTORY_WINDOWS\.map\(w =>/.test(src) && /el\.window\.addEventListener\("change"/.test(src)
+        && /localStorage\.setItem\(HISTORY_WINDOW_KEY, windowKey\)/.test(src) && /No completed CTA started in the \$\{period\.label\.toLowerCase\(\)\}/.test(src)
+        && /el\.totals\.setAttribute\("aria-label"/.test(src) && /players\$\{periodName\(\)\}/.test(src)
+        && /loadGuildHistory\(guildId\(\), since\)/.test(src));
 }
 
 /* ---- a table's date is the day alone; the time lives in the title ---- */

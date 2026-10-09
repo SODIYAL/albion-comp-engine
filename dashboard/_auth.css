@@ -381,9 +381,16 @@
 .ev-status[data-status="completed"]{color:var(--ink-3); border-style:dashed}
 .ev-moves{display:flex; flex-wrap:wrap; gap:6px}
 .ev-moves:empty{display:none}
-.ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
+.ev-share-wrap{display:inline-flex; flex-wrap:wrap; align-items:center; gap:8px; margin-left:auto}
 .ev-share-wrap .pw-label{margin:0}
+.ev-share-wrap .gd-btn{white-space:nowrap}   /* a narrow card wraps the buttons, never a button's label */
 .ev-share{font-size:var(--fs-body)}
+/* the calendar's head: the list's label and the channel's live mark, the sheet's mark */
+.ev-list-hd{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+.ev-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.ev-live-state:empty{display:none}
+.ev-live-state[data-live="yes"]{color:var(--role-healer)}
+.ev-live-state[data-live="yes"]::before{content:""; display:inline-block; width:6px; height:6px; margin-right:5px; border-radius:50%; background:currentColor; vertical-align:middle}
 
 /* ---- sign-up (_signup.js): the sheet a link opens as the page, the roster beside the player's form ---- */
 /* the page: the card's chrome at the page's width, the document the scroller (no cap, no inner scroll) */
@@ -576,6 +583,9 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .history-dialog{width:min(1040px, calc(100vw - 32px))}
 .hs-head{display:flex; flex-wrap:wrap; align-items:flex-end; gap:8px 20px; margin-bottom:12px}
 .hs-guild{flex:0 0 260px; margin:0}
+/* the period the facts cover, and the line that says which it is */
+.hs-window{flex:0 0 170px; margin:0}
+.hs-window-note{margin:-4px 0 12px}
 .hs-totals{margin:0 0 6px}
 .hs-section{margin-top:16px; padding-top:12px; border-top:1px solid var(--rule)}
 .hs-section-hd{display:flex; align-items:center; justify-content:space-between; gap:12px}

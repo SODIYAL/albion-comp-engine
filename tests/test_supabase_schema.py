@@ -40,6 +40,10 @@ DEFINER_ALLOWED = {
     # the caller lands nothing); the message names a table and an
     # operation, and no API role can call the function
     "public.sheet_changed": "trigger",
+    # the CTAs dialog's broadcast trigger, on the guild's private topic:
+    # the sheet's reason (a send as the caller lands nothing); the message
+    # names a table and an operation, and no API role can call it
+    "public.guild_ctas_changed": "trigger",
     # the attendance record is the guild's: no API role holds an insert
     # or delete grant on it, so the mirror from sign-ups and the
     # settlement at completion write it with the definer's rights; no
@@ -399,7 +403,15 @@ check(re.search(r"function public\.move_signup\(signup_id uuid, target smallint\
 check("public.claim_hash(gen_random_uuid()::text)" in ALL, "DB10e a player the caller adds is a guest row nobody holds a token for")
 
 print("DB11 - live updates: the broadcast names the table and the operation, on the CTA's topic, and nothing else")
-FUNC_BODY = re.search(r"create or replace function public\.sheet_changed\(\)(.*?)\$\$;", ALL, re.S)
+
+
+def in_force(pattern):
+    """The definition in force of a function: the last one in file order."""
+    found = list(re.finditer(pattern, ALL, re.S))
+    return found[-1] if found else None
+
+
+FUNC_BODY = in_force(r"create or replace function public\.sheet_changed\(\)(.*?)\$\$;")
 body = FUNC_BODY.group(1) if FUNC_BODY else ""
 check("jsonb_build_object('table', tg_table_name, 'op', tg_op)" in body, "DB11a the payload is the table name and the operation")
 check("'cta:' || code" in body and "false);" in body, "DB11b the topic is cta:<share code>; the channel is public (the code is the key)")
@@ -435,7 +447,7 @@ check("function markPowers" in SIGNUP_JS and 'status !== "completed"' in SIGNUP_
 print("DB13 - analytics: facts over completed CTAs, computed on read as the caller, each measure defined, no rating")
 with open(os.path.join(ROOT, "dashboard", "_history.js"), encoding="utf-8") as f:
     HISTORY_JS = f.read()
-GH = re.search(r"create or replace function public\.guild_history\(guild_id uuid\)(.*?)\$\$;", ALL, re.S)
+GH = in_force(r"create or replace function public\.guild_history\(guild_id uuid[^)]*\)(.*?)\$\$;")
 gh_header, gh_body = (GH.group(1).split("$$", 1) + [""])[:2] if GH else ("", "")
 check(GH is not None and "security invoker" in gh_header and "stable" in gh_header, "DB13a guild_history runs as the caller and only reads")
 check("and e.status = 'completed'" in gh_body, "DB13b the facts are over completed CTAs alone")
@@ -485,6 +497,86 @@ check('from("weapon_aliases")' in IMPORT_JS and 'rpc("save_weapon_aliases"' in I
 check("weapon_aliases" not in GUEST_TABLES and "public.save_weapon_aliases" not in GUEST_FUNCTIONS
       and re.search(r"to anon[^;]*weapon_aliases|weapon_aliases[^;]*to anon", ALL) is None,
       "DB14h a guest reaches no alias: nothing on the table is granted to anon")
+
+print("DB15 - history by period: the period bounds the CTAs the facts are read from; every measure keeps its definition")
+gh_all = list(re.finditer(r"create or replace function public\.guild_history\(([^)]*)\)(.*?)\$\$;", ALL, re.S))
+gh_args = gh_all[-1].group(1) if gh_all else ""
+check(gh_args == "guild_id uuid, since timestamptz default null",
+      "DB15a guild_history in force takes the guild and the period's start, null by default (all time)", gh_args)
+check(re.search(r"drop function if exists public\.guild_history\(uuid\);", ALL) is not None
+      and "public.guild_history(uuid)" not in funcs and "public.guild_history(uuid, timestamptz)" in funcs,
+      "DB15b the one-argument function is dropped: a call naming the guild alone matches one function", str(sorted(k for k in funcs if "guild_history" in k)))
+WINDOW_CLAUSE = r"\s+and \(guild_history\.since is null or e\.starts_at >= guild_history\.since\)"
+SINCE_ECHO = r"\s+'since', guild_history\.since,"
+check(len(gh_all) >= 2 and re.search(r"and e\.status = 'completed'" + WINDOW_CLAUSE, gh_all[-1].group(2)) is not None
+      and gh_all[-1].group(2).count("guild_history.since") == 3,
+      "DB15c the period bounds the completed CTAs of the one set every fact is read from (ev); the answer names its start")
+squash = lambda s: re.sub(r"\s+", " ", s).strip()
+check(len(gh_all) >= 2 and squash(re.sub(SINCE_ECHO, "", re.sub(WINDOW_CLAUSE, "", gh_all[-1].group(2)))) == squash(gh_all[0].group(2)),
+      "DB15d every measure keeps its definition: the body in force is the first one with the period's clause and its echo alone added")
+check('{ key: "30d", days: 30' in HISTORY_JS and '{ key: "90d", days: 90' in HISTORY_JS and '{ key: "all", days: null' in HISTORY_JS
+      and 'const HISTORY_WINDOW_DEFAULT = "all";' in HISTORY_JS,
+      "DB15e the client's periods are the last 30 days, the last 90 days and all time, all time the default")
+check("if (since) args.since = since;" in HISTORY_JS and 'rpc("guild_history", args)' in HISTORY_JS,
+      "DB15f the client names a period only when there is one: all time is the call that names the guild alone")
+
+print("DB16 - the CTAs dialog live: a broadcast on the guild's private topic naming the table and the operation, its members alone admitted")
+GC = in_force(r"create or replace function public\.guild_ctas_changed\(\)(.*?)\$\$;")
+gc_body = GC.group(1) if GC else ""
+check("security definer" in gc_body.split("$$", 1)[0] and "public.guild_ctas_changed" in DEFINER_ALLOWED,
+      "DB16a the guild's broadcast trigger runs with its definer's rights, a listed exception (the sheet's reason)")
+check("jsonb_build_object('table', tg_table_name, 'op', tg_op)" in gc_body and "'changed'," in gc_body,
+      "DB16b the payload is the table name and the operation")
+check("'guild:' || gid::text," in gc_body and re.search(r"'guild:' \|\| gid::text,\s+true\);", gc_body) is not None,
+      "DB16c the topic is guild:<guild id>; the channel is private")
+gc_cols = set(re.findall(r"\b(?:new|old)\.(\w+)", gc_body))
+check(gc_cols <= {"guild_id", "event_id"}, "DB16d the trigger reads the guild and the CTA of the row, no other column", str(sorted(gc_cols)))
+check("to_regprocedure('realtime.send(jsonb, text, text, boolean)') is null" in gc_body
+      and "not exists (select 1 from public.guilds g where g.id = gid)" in gc_body,
+      "DB16e without Realtime it does nothing; a cascade from a deleted guild tells nobody")
+check(all(re.search(r"create trigger \w+\s+after insert or update or delete on public\.%s\s+for each row execute function public\.guild_ctas_changed\(\)" % t, ALL)
+          for t in ("events", "signups")),
+      "DB16f the CTAs and their sign-ups carry the trigger, after every write")
+rm_pol = re.findall(r"create policy \"([^\"]+)\" on realtime\.messages\s+for (\w+) to ([\w, ]+)\s+using \((.*?)\);", ALL, re.S)
+check(len(rm_pol) == 1 and rm_pol[0][1] == "select" and rm_pol[0][2].strip() == "authenticated"
+      and not re.search(r"policy \"[^\"]+\" on realtime\.messages\s+for (insert|update|delete|all)", ALL)
+      and not re.search(r"on realtime\.messages\s+for \w+ to [\w, ]*\banon\b", ALL),
+      "DB16g one policy on realtime.messages: signed-in users receive; none lets an API role send, none admits anon", str(rm_pol))
+rm_body = rm_pol[0][3] if rm_pol else ""
+check("realtime.messages.extension = 'broadcast'" in rm_body and "m.user_id = (select auth.uid())" in rm_body
+      and "(select realtime.topic()) = 'guild:' || m.guild_id::text" in rm_body,
+      "DB16h it admits a member to their own guild's topic alone, the joiner and the topic read once per statement (lint 0003)")
+check("to_regclass('realtime.messages') is not null" in ALL and "to_regprocedure('realtime.topic()') is not null" in ALL,
+      "DB16i without Realtime no policy is made: the migration applies, the dialog reads on open")
+check("function watchGuildEvents" in EVENTS_JS and "window.DB.channel(guildTopic(guildId), { config: { private: true } })" in EVENTS_JS
+      and 'on("broadcast", { event: "changed" }' in EVENTS_JS and "window.DB.removeChannel(channel)" in EVENTS_JS
+      and "function guildTopic" in EVENTS_JS and "return `guild:${" in EVENTS_JS,
+      "DB16j the dialog joins the guild's private channel on the trigger's topic, listens for 'changed' and leaves it")
+
+print("DB17 - a CTA's share code: an admin renews it on the guild join code's pattern")
+check(re.search(r"grant update \(share_code\) on table public\.events to authenticated;", ALL) is not None
+      and not re.search(r"grant insert \([^)]*\bshare_code\b[^)]*\) on table public\.events", ALL),
+      "DB17a the update grant names the code (a renewal writes it); no insert grant does (generated, never chosen)")
+EG = in_force(r"create or replace function public\.events_guard\(\)(.*?)\$\$;")
+eg_body = EG.group(1) if EG else ""
+check("if new.share_code is distinct from old.share_code then" in eg_body
+      and "private.guild_role_of(old.guild_id) is distinct from 'admin'" in eg_body
+      and re.search(r"renews a CTA''s share code' using errcode = '42501'", eg_body) is not None
+      and "new.share_code := public.new_join_code();" in eg_body,
+      "DB17b the guard: a changed code is an admin's renewal and becomes a fresh code; any other role is refused (42501)")
+check(all(s in eg_body for s in ("a guild keeps at most 200 events", "(old.status, new.status) not in", "new.updated_by := (select auth.uid());")),
+      "DB17c the guard in force keeps the bound, the status moves and updated_by")
+GG = in_force(r"create or replace function public\.guilds_guard\(\)(.*?)\$\$;")
+check(GG is not None and "new.join_code := public.new_join_code();" in GG.group(1)
+      and "Admins rename their guild and renew its code" in ALL,
+      "DB17d the generator and the role are the join code's: public.new_join_code, an admin")
+SC = in_force(r"create or replace function public\.sheet_changed\(\)(.*?)\$\$;")
+sc_body = SC.group(1) if SC else ""
+check("if old.share_code is distinct from new.share_code then" in sc_body and "'cta:' || old.share_code," in sc_body,
+      "DB17e a renewed code tells the old topic: a sheet open on the old link reads again and finds that it opens nothing")
+check("function renewShareCode" in EVENTS_JS and '.update({ share_code: "RENEW" })' in EVENTS_JS
+      and 'renew: myRole === "admin" && !!(event && event.id)' in EVENTS_JS,
+      "DB17f the client renews by writing a value the guard replaces, offered to an admin alone on a saved CTA")
 
 if FAILURES:
     print("\n%d schema rule(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

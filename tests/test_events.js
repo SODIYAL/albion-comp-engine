@@ -12,8 +12,9 @@
  * time), a guild's calendar split into ahead and past, an event made
  * from a template or the planner's hash, validation on top of the comp's
  * rules, the payload (no slots once completed), what a role may do,
- * database errors as sentences, and each helper writing exactly what its
- * policy admits.
+ * database errors as sentences, each helper writing exactly what its
+ * policy admits, the guild's private channel and the dialog's live read,
+ * and the admin's renewal of a share code.
  *
  * Run:  node tests/test_events.js
  */
@@ -33,6 +34,8 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 const CALLS = [];
 const REPLY = {};
+const CHANNELS = [];
+const REMOVED = [];
 const SESSION = { user: { id: "u-me", email: "me@example.com" } };
 function chain(record, answer) {
   const proxy = new Proxy(function () {}, {
@@ -57,6 +60,13 @@ const DB = {
     CALLS.push({ rpc: fn, args });
     return Promise.resolve(REPLY[`rpc:${fn}`] || { data: null, error: null });
   },
+  channel(topic, opts) {
+    const ch = { topic, opts, handlers: [], status: null,
+      on(kind, filter, fn) { ch.handlers.push({ kind, filter, fn }); return ch; },
+      subscribe(fn) { ch.status = fn; CHANNELS.push(ch); return ch; } };
+    return ch;
+  },
+  removeChannel(ch) { REMOVED.push(ch); },
 };
 
 const ctx = { console, URLSearchParams, setTimeout, Promise, Proxy, Date, decodeURIComponent, encodeURIComponent };
@@ -295,6 +305,81 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
         /location\.hash/.test(src) && !/\bENG\b|CompEngine|DATASET|\brender\(|saveHash|loadHash|syncEngine/.test(src));
   check("the module never writes a template (an event is a copy)",
         !/from\("comp_template|save_comp_template|saveTemplate\(|deleteTemplate\(/.test(src));
+}
+
+/* 8 - the live calendar and the share code's renewal */
+{
+  check("the guild's topic is guild:<guild id>, the trigger's", run("guildTopic")("0f1e2d3c-0000-4000-8000-00000000000a") === "guild:0f1e2d3c-0000-4000-8000-00000000000a");
+  const M = run("GUILD_LIVE_MSG");
+  check("the channel's states read as words: live, not live, or nothing once closed",
+        M.SUBSCRIBED === "live" && /reopen/i.test(M.CHANNEL_ERROR) && /reopen/i.test(M.TIMED_OUT) && M.CLOSED === "");
+  check("the dialog settles before reading (a swap, a saved roster are several messages)", run("GUILD_LIVE_SETTLE_MS") >= 100 && run("GUILD_LIVE_SETTLE_MS") <= 1000);
+
+  CHANNELS.length = 0;
+  REMOVED.length = 0;
+  const seen = [], states = [];
+  const leave = run("watchGuildEvents")("g1", p => seen.push(p), s => states.push(s));
+  const ch = CHANNELS[0];
+  check("watchGuildEvents joins the guild's channel as a private one and listens for 'changed' broadcasts",
+        CHANNELS.length === 1 && ch.topic === "guild:g1" && same(ch.opts, { config: { private: true } }) && ch.handlers.length === 1
+        && ch.handlers[0].kind === "broadcast" && same(ch.handlers[0].filter, { event: "changed" }));
+  ch.handlers[0].fn({ payload: { table: "signups", op: "INSERT" } });
+  ch.handlers[0].fn({});
+  ch.status("SUBSCRIBED");
+  check("a message reaches the listener with its payload (or an empty one); the state reaches the state listener",
+        same(seen, [{ table: "signups", op: "INSERT" }, {}]) && same(states, ["SUBSCRIBED"]));
+  leave();
+  check("leaving removes the channel", REMOVED.length === 1 && REMOVED[0] === ch);
+
+  const powers = run("eventPowers");
+  check("an admin renews a saved CTA's share code; a caller, an officer and a member do not, and a new CTA has no code to renew",
+        powers("admin", { id: "e1", status: "open" }).renew && powers("admin", { id: "e1", status: "completed" }).renew
+        && !powers("officer", { id: "e1", status: "open" }).renew && !powers("caller", { id: "e1", status: "open" }).renew
+        && !powers("member", { id: "e1", status: "open" }).renew && !powers("admin", { id: null, status: "draft" }).renew && !powers(null, null).renew);
+  const say = run("renewConfirmText")("Friday CTA");
+  check("the renewal's confirm names the CTA and says what happens: the old link opens nothing at once, a guest's too; everyone keeps their place",
+        say.includes("Friday CTA") && /stops opening the sheet at once/.test(say) && /guests who signed up through it included/.test(say)
+        && /keeps their place/.test(say) && /new link/.test(say), say);
+
+  const find = table => CALLS.find(c => c.table === table);
+  const has = (ops, ...want) => ops.some(o => want.every((w, i) => same(o[i], w)));
+  CALLS.length = 0;
+  REPLY.events = { data: [{ id: "e1", share_code: "N3WC0DE123", updated_at: "x" }], error: null };
+  const row = await run("renewShareCode")("e1");
+  const q = find("events");
+  check("renewShareCode writes a value the guard replaces, on one CTA, and reads the new code back",
+        has(q.ops, "update", { share_code: "RENEW" }) && has(q.ops, "eq", "id", "e1")
+        && q.ops.some(o => o[0] === "select" && /share_code/.test(o[1]) && /updated_at/.test(o[1])) && row.share_code === "N3WC0DE123", q.ops);
+  CALLS.length = 0;
+  REPLY.events = { data: [], error: null };
+  let refused = null;
+  try { await run("renewShareCode")("e1"); } catch (x) { refused = x; }
+  check("a renewal the policy refused (no row back) is reported", refused && refused.code === "refused");
+
+  const msg = run("eventErrorMessage"), EM = run("EVENT_MSG");
+  check("error wording: the guard's refusal of a role but admin reads as who renews",
+        msg({ code: "42501", message: "an admin of the guild renews a CTA's share code" }) === EM.renewRefused
+        && msg({ code: "42501", message: "the CTA was not found, or your role does not edit it" }) === EM.refused);
+  check("the notice after a renewal says the old link opens nothing and that a guest finds their sign-up through the new one",
+        /old link opens nothing/.test(EM.renewed) && /new link/.test(EM.renewed) && /browser they signed up in/.test(EM.renewed) && /again/i.test(EM.renewCollision));
+
+  const src = fs.readFileSync(path.join(DASH, "_events.js"), "utf8");
+  const ui = src.slice(src.indexOf("(function eventsUI()"));
+  check("the dialog joins the channel of the guild it shows and leaves it on close; a left channel's late callback changes nothing",
+        /watchGuild\(shownGuild\);/.test(ui) && /dialog\.addEventListener\("close", stopWatching\);/.test(ui)
+        && /if \(join === joinSeq\) fn\(value\);/.test(ui) && /if \(!id \|\| !dialog\.open\) return;/.test(ui));
+  check("a message settles into one read that later messages ride; an action in progress, or the list loading, holds it",
+        /if \(liveTimer\) return;/.test(ui) && /if \(busy \|\| listState === "loading"\) \{ onGuildChanged\(\); return; \}/.test(ui)
+        && /if \(liveJoined\) onGuildChanged\(\);/.test(ui));
+  const live = ui.slice(ui.indexOf("async function liveRead()"), ui.indexOf("/* ---- loading ---- */"));
+  check("a live read has its own sequence (it never cancels a read the caller asked for) and is dropped by a reopening, another guild or an action",
+        live.length > 0 && /const seq = \+\+liveSeq;/.test(live) && !/openSeq/.test(live)
+        && /if \(seq !== liveSeq \|\| mine !== session \|\| gid !== guildId\(\) \|\| busy\) return;/.test(live));
+  check("an edited form is kept and the change under it said once; an unedited one takes the CTA as it is; a deleted CTA leaves the view",
+        /if \(dirty\(\)\) \{/.test(ui) && /staleSaid !== shownSig\(open\)/.test(ui) && /current = open;/.test(ui) && /was deleted\./.test(ui));
+  check("the renewal asks first, repaints the share code and the saved line alone (the typed fields stay), and is offered by role",
+        /window\.confirm\(renewConfirmText\(current\.name\)\)/.test(ui) && /renderShare\(\);\s+renderMeta\(\);\s+showNotice\(EVENT_MSG\.renewed\);/.test(ui)
+        && /el\.renew\.hidden = !powers\.renew \|\| !current\.share_code;/.test(ui));
 }
 
 console.log(`\n${pass}/${pass + fail} CTA tests passed`);

@@ -217,18 +217,21 @@ Three applications with explicit boundaries (each directory's README is its cont
   guild-scoped reads), saved comps (a guild's templates, saved from and
   opened in the planner through the address bar's share hash, never a
   call; a slot's weapon set in the dialog, each slot keeping the kit its
-  saved link holds), CTAs (a guild's events: a status the guard moves one step at a
-  time, a share code, slots COPIED from a comp and frozen once completed)
-  and sign-up (the sheet a CTA's link opens; a guest's reach through the
+  saved link holds), CTAs (a guild's events: a status the guard moves one
+  step at a time, a share code an admin renews, slots COPIED from a comp
+  and frozen once completed; the CTAs dialog live over a broadcast on the
+  guild's private topic, its members alone admitted) and sign-up (the
+  sheet a CTA's link opens; a guest's reach through the
   share code carried by the statement, their own row keyed by a claim
   token's hash; accounts under their id; the caller roles moving, adding
   and removing players until the CTA is completed; the sheet live over a
   Realtime broadcast that names a table and an operation, never a row;
   the attendance record kept apart from the sign-up by its own trigger,
   confirmed by the player, marked by the caller; the history: facts over
-  completed CTAs computed on read, every measure defined, no skill
-  rating) and import and export (a spreadsheet, a CSV or an Excel
-  workbook, read in the page, as a saved comp: the columns detected,
+  completed CTAs computed on read over a period (the last 30 days, the
+  last 90 days, all time), every measure defined, no skill rating) and
+  import and export (a spreadsheet, a CSV or an Excel workbook, read in
+  the page, as a saved comp: the columns detected,
   every weapon name read through the catalog and the guild's remembered
   names and every gear name through the gear catalog, uncertain ones
   reviewed, each slot's kit in the comp's share hash; a comp and the

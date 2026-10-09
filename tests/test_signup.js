@@ -80,6 +80,8 @@ const run = expr => vm.runInContext(expr, ctx);
   const token = run("newClaimToken")(new Uint8Array([0, 1, 15, 16, 255, 128, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]));
   check("a claim token is 16 bytes as 32 hex characters", token === "00010f10ff80070809 0a0b0c0d0e0f10".replace(" ", "") && run("CLAIM_TOKEN_RE").test(token));
   check("the token is kept per CTA", run("claimTokenKey")("a1b2c3d4e5") === "cta-claim:A1B2C3D4E5");
+  check("the token is kept under the CTA itself too, the key a renewed share code leaves as it was",
+        run("claimEventKey")("0f1e2d3c-0000-4000-8000-00000000000a") === "cta-claim-event:0f1e2d3c-0000-4000-8000-00000000000a");
 }
 
 /* 2 - the board */
@@ -338,6 +340,11 @@ const run = expr => vm.runInContext(expr, ctx);
         /myRole = null;\s+roleGuild = null;\s+showError\(`Your role in the guild could not be read/.test(src));
   check("a guest's claim token lives in memory beside storage, so a blocked storage never offers a second sign-up",
         /heldTokens\[code\] = token;/.test(src) && /return heldTokens\[code\] \|\| null;/.test(src) && /delete heldTokens\[code\];/.test(src));
+  check("a renewed share code: a read with no claim under the new code takes up the claim kept under the CTA and reads again with it; every read keeps the claim under the CTA, and a cancellation forgets both",
+        /if \(!token && next && next\.event && !next\.mine\) \{\s+const kept = claimForEvent\(next\.event\.id\);\s+if \(kept\) next = await loadSheet\(code, kept\);/.test(src)
+        && /keepClaim\(sheet\.event && sheet\.event\.id, readToken\(\)\);/.test(src) && /keepClaim\(sheet && sheet\.event && sheet\.event\.id, token\);/.test(src)
+        && /localStorage\.removeItem\(claimEventKey\(sheet\.event\.id\)\)/.test(src));
+  check("a link the code no longer opens says the CTA was deleted or its link renewed", /its link was renewed/.test(run("SIGNUP_MSG").noEvent));
 }
 
 

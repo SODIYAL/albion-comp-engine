@@ -8,7 +8,10 @@
  * sign-up per CTA under its id) and a guest (a name they type; their
  * sign-up is keyed by the hash of a claim token this browser keeps in
  * localStorage, so this browser alone edits or cancels it, and an account
- * created here later adopts it).
+ * created here later adopts it). The token is kept under the CTA's code
+ * and under the CTA itself: an admin who renews the code leaves the row
+ * as it was, and the new link, opened in the same browser, finds the
+ * claim again; the old link opens nothing.
  *
  * The link is index.html?cta=<share code>, and the sheet is the page it
  * opens: the head script sets the sheet view from the address before the
@@ -253,6 +256,14 @@ function newClaimToken(bytes) {
 
 function claimTokenKey(code) {
   return `cta-claim:${cleanJoinCode(code)}`;
+}
+
+
+/* the same claim kept under the CTA itself: a renewed share code leaves
+   the CTA and the player's row as they were, and the new link finds this
+   browser's claim through it */
+function claimEventKey(eventId) {
+  return `cta-claim-event:${String(eventId || "")}`;
 }
 
 
@@ -592,7 +603,7 @@ const SIGNUP_MSG = {
   network: PROFILE_MSG.network,
   session: PROFILE_MSG.session,
   missing: "Sign-up is not available yet: the account database has not been updated for this page. Try again later.",
-  noEvent: "No CTA has this link. Ask the caller for a fresh one.",
+  noEvent: "No CTA has this link: the CTA was deleted, or its link was renewed. Ask the caller for the current link.",
   closed: "Sign-up is not open for this CTA.",
   taken: "That slot was just taken. Pick another, or sign up as a reserve.",
   noSlot: "That slot is no longer on the roster. Pick another.",
@@ -766,12 +777,36 @@ function signupErrorMessage(err) {
     token = newClaimToken(bytes);
     heldTokens[code] = token;
     try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* storage blocked: the claim lasts the visit */ }
+    keepClaim(sheet && sheet.event && sheet.event.id, token);
     return token;
   }
 
   function forgetToken() {
     delete heldTokens[code];
     try { localStorage.removeItem(claimTokenKey(code)); } catch (err) { /* nothing kept */ }
+    if (sheet && sheet.event) {
+      try { localStorage.removeItem(claimEventKey(sheet.event.id)); } catch (err) { /* nothing kept */ }
+    }
+  }
+
+  /* The claim is kept under the CTA as well as its code (claimEventKey):
+     an admin's renewal of the share code leaves the CTA and the player's
+     row as they were, so the new link takes up the claim kept under the
+     CTA. Written on every read that carried this browser's token. */
+  function keepClaim(eventId, token) {
+    if (!eventId || !token) return;
+    try {
+      if (localStorage.getItem(claimEventKey(eventId)) !== token) localStorage.setItem(claimEventKey(eventId), token);
+    } catch (err) { /* storage blocked: the visit's copy under the code stands */ }
+  }
+
+  function claimForEvent(eventId) {
+    let token = null;
+    try { token = localStorage.getItem(claimEventKey(eventId)); } catch (err) { return null; }
+    if (!CLAIM_TOKEN_RE.test(token || "")) return null;
+    heldTokens[code] = token;
+    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* the visit's copy above */ }
+    return token;
   }
 
 
@@ -1711,7 +1746,14 @@ function signupErrorMessage(err) {
 
     let next;
     try {
-      next = await loadSheet(code, readToken());
+      const token = readToken();
+      next = await loadSheet(code, token);
+      /* a renewed share code: no claim under the new code, so the one kept
+         under the CTA reads the player's own sign-up through it */
+      if (!token && next && next.event && !next.mine) {
+        const kept = claimForEvent(next.event.id);
+        if (kept) next = await loadSheet(code, kept);
+      }
     } catch (err) {
       if (seq !== openSeq) return false;
       showError(signupErrorMessage(err));
@@ -1721,6 +1763,7 @@ function signupErrorMessage(err) {
     if (seq !== openSeq) return false;
 
     sheet = next;
+    keepClaim(sheet.event && sheet.event.id, readToken());
     await readRole();
     if (seq !== openSeq) return false;
     renderBoard();

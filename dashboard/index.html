@@ -2462,9 +2462,16 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .ev-status[data-status="completed"]{color:var(--ink-3); border-style:dashed}
 .ev-moves{display:flex; flex-wrap:wrap; gap:6px}
 .ev-moves:empty{display:none}
-.ev-share-wrap{display:inline-flex; align-items:center; gap:8px; margin-left:auto}
+.ev-share-wrap{display:inline-flex; flex-wrap:wrap; align-items:center; gap:8px; margin-left:auto}
 .ev-share-wrap .pw-label{margin:0}
+.ev-share-wrap .gd-btn{white-space:nowrap}   /* a narrow card wraps the buttons, never a button's label */
 .ev-share{font-size:var(--fs-body)}
+/* the calendar's head: the list's label and the channel's live mark, the sheet's mark */
+.ev-list-hd{display:flex; align-items:baseline; justify-content:space-between; gap:8px}
+.ev-live-state{font-family:var(--mono); font-size:var(--fs-meta); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.ev-live-state:empty{display:none}
+.ev-live-state[data-live="yes"]{color:var(--role-healer)}
+.ev-live-state[data-live="yes"]::before{content:""; display:inline-block; width:6px; height:6px; margin-right:5px; border-radius:50%; background:currentColor; vertical-align:middle}
 
 /* ---- sign-up (_signup.js): the sheet a link opens as the page, the roster beside the player's form ---- */
 /* the page: the card's chrome at the page's width, the document the scroller (no cap, no inner scroll) */
@@ -2657,6 +2664,9 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
 .history-dialog{width:min(1040px, calc(100vw - 32px))}
 .hs-head{display:flex; flex-wrap:wrap; align-items:flex-end; gap:8px 20px; margin-bottom:12px}
 .hs-guild{flex:0 0 260px; margin:0}
+/* the period the facts cover, and the line that says which it is */
+.hs-window{flex:0 0 170px; margin:0}
+.hs-window-note{margin:-4px 0 12px}
 .hs-totals{margin:0 0 6px}
 .hs-section{margin-top:16px; padding-top:12px; border-top:1px solid var(--rule)}
 .hs-section-hd{display:flex; align-items:center; justify-content:space-between; gap:12px}
@@ -3123,8 +3133,9 @@ button.su-next-slot:hover, button.su-next-slot:focus-visible{border-color:var(--
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}
-  /* the history's guild pick takes the row; the tables scroll sideways */
+  /* the history's guild and period picks take the row; the tables scroll sideways */
   .hs-guild{flex-basis:100%}
+  .hs-window{flex-basis:100%}
   .hs-table{display:block; overflow-x:auto}
   .im-source{grid-template-columns:1fr}
   .im-text-field{grid-column:1}
@@ -4069,7 +4080,10 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
           <label for="ev-guild">Guild</label>
           <select id="ev-guild"></select>
         </div>
-        <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+        <div class="ev-list-hd">
+          <h3 class="pw-label" id="ev-list-label">CTAs</h3>
+          <span class="ev-live-state" id="ev-live-state" aria-live="polite"></span>
+        </div>
         <ul class="gd-list ev-list" id="ev-list" aria-labelledby="ev-list-label"></ul>
         <p class="auth-hint" id="ev-list-note" hidden></p>
         <button type="button" class="auth-secondary" id="ev-new" hidden>New CTA</button>
@@ -4085,7 +4099,9 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
               <span class="ev-moves" id="ev-moves"></span>
               <span class="ev-share-wrap"><span class="pw-label">Share code</span> <span class="gd-code-value ev-share" id="ev-share"></span>
                 <button type="button" class="gd-btn" id="ev-sheet" hidden>Sign-up sheet</button>
-                <button type="button" class="gd-btn" id="ev-link" hidden>Copy link</button></span>
+                <button type="button" class="gd-btn" id="ev-link" hidden>Copy link</button>
+                <button type="button" class="gd-btn" id="ev-renew" hidden
+                  title="A new code: the current sign-up link stops opening the sheet">Renew code</button></span>
             </div>
             <div class="cp-fields">
               <div class="auth-field cp-wide" id="ev-source-wrap">
@@ -4223,8 +4239,13 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
         <label for="hs-guild">Guild</label>
         <select id="hs-guild"></select>
       </div>
+      <div class="auth-field hs-window">
+        <label for="hs-window">Period</label>
+        <select id="hs-window" aria-describedby="hs-window-note"></select>
+      </div>
       <div class="gd-coverage hs-totals" id="hs-totals" aria-label="Totals over completed CTAs"></div>
     </div>
+    <p class="auth-hint hs-window-note" id="hs-window-note"></p>
     <p class="gd-empty" id="hs-empty" hidden></p>
 
     <div id="hs-body" hidden>
@@ -18975,7 +18996,16 @@ function compErrorMessage(err) {
  * link (phase 5), the comp it was made from and its own slots, COPIED
  * from that template when the event is created: editing an event never
  * touches the template, and deleting the template leaves the event
- * whole. Members read; callers, officers and admins write.
+ * whole. Members read; callers, officers and admins write; an admin
+ * renews a CTA's share code (a leaked link: the old one opens nothing at
+ * once, the sign-ups stay).
+ *
+ * The dialog is live while it is open: the database sends 'changed' on
+ * the guild's private topic (guild:<id>) after every write to the guild's
+ * CTAs and their sign-ups, naming the table and the operation alone, and
+ * the dialog reads its list again, and the open CTA while its form holds
+ * no unsaved edit. It joins the channel of the guild it shows and leaves
+ * it on close.
  *
  * build.py inlines this file as its own <script> after _comps.js. It
  * reads no planner state and never calls the engine: as a saved comp, an
@@ -18986,10 +19016,10 @@ function compErrorMessage(err) {
  *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (events, event_slots,
- *             save_event)
+ *             save_event, the share code's renewal, the guild's channel)
  *   pure    - the statuses and their moves, the times, the grouping of a
- *             guild's calendar, validation, error wording
- *             (tests/test_events.js)
+ *             guild's calendar, validation, the channel's topic and states,
+ *             error wording (tests/test_events.js)
  *   UI      - the CTAs dialog the account menu opens
  */
 
@@ -19092,6 +19122,43 @@ async function deleteEvent(eventId) {
 }
 
 
+/* a fresh share code: any value written becomes a new code (the events
+   guard, the guild join code's rule, an admin's alone); the row comes
+   back with it */
+async function renewShareCode(eventId) {
+  const { data, error } = await window.DB
+    .from("events")
+    .update({ share_code: "RENEW" })
+    .eq("id", eventId)
+    .select("id, share_code, updated_at");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
+}
+
+
+/* The guild's channel: after every write to the guild's CTAs and their
+   sign-ups the database sends 'changed' on guild:<id> (a trigger; the
+   payload names the table and the operation, nothing else). The channel
+   is private: the Realtime service admits the guild's members alone (a
+   policy on realtime.messages). The dialog re-reads what it shows through
+   the helpers above, so what it sees is still what the policies allow.
+   Returns the function that leaves the channel. */
+function watchGuildEvents(guildId, onChange, onState) {
+  const channel = window.DB.channel(guildTopic(guildId), { config: { private: true } });
+  channel.on("broadcast", { event: "changed" }, message => onChange((message && message.payload) || {}));
+  channel.subscribe(status => { if (onState) onState(status); });
+  return () => { window.DB.removeChannel(channel); };
+}
+
+
 /* --------------------------------------------------------------- pure */
 
 /* The database's statuses and the moves its guard allows
@@ -19108,6 +19175,30 @@ const EVENTS_MAX = 200;
 
 /* an event whose start is this long gone lists with the past ones */
 const EVENT_PAST_AFTER_MS = 12 * 60 * 60 * 1000;
+
+
+/* the guild's channel topic: the trigger's, guild:<guild id> */
+function guildTopic(guildId) {
+  return `guild:${String(guildId || "")}`;
+}
+
+
+/* what the dialog says about its channel (the Realtime client's states):
+   live, the list and the open CTA re-read on every change; not live, they
+   are read on opening */
+const GUILD_LIVE_MSG = {
+  SUBSCRIBED: "live",
+  CHANNEL_ERROR: "not live: reopen to update",
+  TIMED_OUT: "not live: reopen to update",
+  CLOSED: ""
+};
+
+
+/* how long the dialog waits after a message before reading, so the
+   messages of one change (a swap, a roster saved) read once; a message
+   that arrives while a read waits rides that read, so a run of sign-ups
+   on a busy guild never holds the read back */
+const GUILD_LIVE_SETTLE_MS = 400;
 
 
 /* an ISO time as a datetime-local field shows it (local time, to the
@@ -19338,15 +19429,27 @@ function eventPayload(event) {
 
 
 /* what the caller's role may do with an event: the policies' writer
-   roles, the guard's moves, and no slot edits once completed */
+   roles, the guard's moves, no slot edits once completed, and the share
+   code's renewal, an admin's on a saved event (the guard's role, the guild
+   join code's) */
 function eventPowers(myRole, event) {
   const write = compPowers(myRole).write;
   const status = event && event.status;
   return {
     write,
     moves: write && status ? (EVENT_MOVES[status] || []) : [],
-    editSlots: write && status !== "completed"
+    editSlots: write && status !== "completed",
+    renew: myRole === "admin" && !!(event && event.id)
   };
+}
+
+
+/* what renewing a share code does, as the admin's confirm says it: the old
+   link opens nothing from then on, a guest's included; the sign-ups stay */
+function renewConfirmText(name) {
+  return `Renew the share code of ${name || "this CTA"}? The current sign-up link stops opening the sheet at once, `
+    + "for everyone who holds it, guests who signed up through it included. Everyone signed up keeps their place: "
+    + "share the new link.";
 }
 
 
@@ -19362,6 +19465,10 @@ const EVENT_MSG = {
   frozen: "A completed CTA keeps its slots.",
   templateGone: "The comp was not found: it may have been deleted. Choose another.",
   collision: "The generated share code collided with another. Save again.",
+  renewCollision: "The new share code collided with another. Renew it again.",
+  renewRefused: "Only an admin of the guild renews a CTA's share code.",
+  renewed: "A new share code is in force: the old link opens nothing now. Share the new link; a guest who signed up "
+    + "finds their sign-up through it in the browser they signed up in.",
   refused: "The server refused the change: your role in this guild does not edit CTAs, or the CTA has changed. Reload and try again.",
   invalid: "The server refused a value. Check the name, content, size, times and notes, then try again.",
   unknown: PROFILE_MSG.unknown
@@ -19383,6 +19490,7 @@ function eventErrorKind(err) {
   if (code === "P0002") return "templateGone";
   if (code === "23505") return "collision";
   if (code === "21000") return "duplicate";
+  if (code === "42501" && /share code/i.test(message)) return "renewRefused";
   if (code === "42501" || code === "refused") return "refused";
   if (code === "23514" || code === "22023" || code === "23502" || code === "22001" || code === "22P02" || code === "22003" || code === "22007" || code === "22008") return "invalid";
 
@@ -19449,6 +19557,8 @@ function eventErrorMessage(err) {
     share: $id("ev-share"),
     sheet: $id("ev-sheet"),
     link: $id("ev-link"),
+    renew: $id("ev-renew"),
+    liveState: $id("ev-live-state"),
     meta: $id("ev-meta"),
     summary: $id("ev-summary"),
     slots: $id("ev-slots"),
@@ -19478,6 +19588,17 @@ function eventErrorMessage(err) {
      service from before neither changes the reopened dialog nor ends its
      busy state */
   let session = 0;
+  /* the live channel: the guild it is joined for, the function that leaves
+     it, each join's number (a left channel's late callback changes
+     nothing), the read a message waits for, and the live reads' own
+     sequence (a live read never cancels a read the caller asked for) */
+  let leave = null;
+  let watchedGuild = null;
+  let joinSeq = 0;
+  let liveTimer = null;
+  let liveSeq = 0;
+  let liveJoined = false;
+  let staleSaid = null;       /* the change underneath an edited form last said */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -19708,10 +19829,7 @@ function eventErrorMessage(err) {
 
     el.status.textContent = EVENT_STATUS_NAMES[current.status] || current.status || "";
     el.status.dataset.status = current.status || "";
-    el.share.textContent = current.share_code || "";
-    el.share.parentElement.hidden = !current.share_code;
-    el.sheet.hidden = !current.share_code;
-    el.link.hidden = !current.share_code;
+    renderShare();
     el.moves.replaceChildren(...(current.id ? powers.moves : []).map(to => {
       const b = document.createElement("button");
       b.type = "button";
@@ -19721,14 +19839,29 @@ function eventErrorMessage(err) {
       return b;
     }));
 
-    el.meta.textContent = current.id
-      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
-        + (current.template_id ? " · copied from a saved comp" : "")
-      : "Not saved yet.";
+    renderMeta();
 
     el.save.hidden = !powers.write;
     el.remove.hidden = !powers.write || !current.id;
     renderSlots();
+  }
+
+  /* the share code and what it opens (the sheet, its link) with the
+     admin's renewal; a renewal repaints this and the saved line alone,
+     leaving the typed fields as they are */
+  function renderShare() {
+    el.share.textContent = current.share_code || "";
+    el.share.parentElement.hidden = !current.share_code;
+    el.sheet.hidden = !current.share_code;
+    el.link.hidden = !current.share_code;
+    el.renew.hidden = !powers.renew || !current.share_code;
+  }
+
+  function renderMeta() {
+    el.meta.textContent = current.id
+      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
+        + (current.template_id ? " · copied from a saved comp" : "")
+      : "Not saved yet.";
   }
 
   /* the roster part alone: the summary, the table, the note under an
@@ -20049,6 +20182,34 @@ function eventErrorMessage(err) {
     }
   });
 
+  /* the admin's renewal of the share code, after a confirm that says what
+     it does: the old link opens nothing from then on; the typed fields
+     stay as they are */
+  el.renew.addEventListener("click", async () => {
+    if (busy || !current || !current.id || !powers.renew) return;
+    if (!window.confirm(renewConfirmText(current.name))) return;
+
+    busy = true;
+    const mine = session;
+    acctBusy(el.renew, "Renewing…");
+
+    try {
+      const row = await renewShareCode(current.id);
+      if (mine !== session) return;
+      current.share_code = row.share_code;
+      current.updated_at = row.updated_at;
+      renderShare();
+      renderMeta();
+      showNotice(EVENT_MSG.renewed);
+      announce("A new share code is in force.");
+    } catch (err) {
+      if (mine === session) showError(eventErrorKind(err) === "collision" ? EVENT_MSG.renewCollision : eventErrorMessage(err));
+    } finally {
+      acctIdle(el.renew);
+      if (mine === session) busy = false;
+    }
+  });
+
   /* ---- status moves ---- */
 
   el.moves.addEventListener("click", async e => {
@@ -20158,6 +20319,128 @@ function eventErrorMessage(err) {
   });
 
 
+  /* ---- the live channel ---- */
+
+  function setLive(status) {
+    el.liveState.textContent = GUILD_LIVE_MSG[status] || "";
+    el.liveState.dataset.live = status === "SUBSCRIBED" ? "yes" : "no";
+  }
+
+  /* the channel's state: a join after the first (the channel dropped and
+     came back) reads again, since every change sent while it was away is
+     lost */
+  function onLiveState(status) {
+    setLive(status);
+    if (status !== "SUBSCRIBED") return;
+    if (liveJoined) onGuildChanged();
+    liveJoined = true;
+  }
+
+  /* a message settles, then the dialog reads once; the messages that
+     arrive while the read waits ride it, and an action in progress holds
+     it until the action ends */
+  function onGuildChanged() {
+    if (liveTimer) return;
+    liveTimer = setTimeout(() => {
+      liveTimer = null;
+      if (busy || listState === "loading") { onGuildChanged(); return; }
+      liveRead();
+    }, GUILD_LIVE_SETTLE_MS);
+  }
+
+  /* the channel of the guild the dialog shows: joined while the dialog is
+     open, once per guild, left for another guild and on close */
+  function watchGuild(id) {
+    if (id && id === watchedGuild && leave) return;
+    stopWatching();
+    if (!id || !dialog.open) return;
+    const join = joinSeq;
+    const ours = fn => value => { if (join === joinSeq) fn(value); };
+    watchedGuild = id;
+    liveJoined = false;
+    try {
+      leave = watchGuildEvents(id, ours(onGuildChanged), ours(onLiveState));
+    } catch (err) {
+      leave = null;
+      setLive("CHANNEL_ERROR");
+    }
+  }
+
+  function stopWatching() {
+    joinSeq++;
+    clearTimeout(liveTimer);
+    liveTimer = null;
+    liveSeq++;
+    watchedGuild = null;
+    if (leave) {
+      try { leave(); } catch (err) { /* the channel is gone either way */ }
+      leave = null;
+    }
+    setLive("CLOSED");
+  }
+
+  /* what the open CTA shows that a change elsewhere moves */
+  const shownSig = e => JSON.stringify([e.updated_at || "", e.status || "", e.share_code || "", normalizeSlots(e.slots)]);
+
+  /* What the dialog shows, read again after a message: the guild's list,
+     and the open CTA. A form without unsaved edits takes the CTA as it is
+     now; an edited form is kept, and a change underneath it is said once;
+     a CTA deleted elsewhere leaves the view. The read has its own
+     sequence: it never cancels a read the caller started, and a reopening,
+     another guild or an action in progress discards it. */
+  async function liveRead() {
+    const seq = ++liveSeq;
+    const mine = session;
+    const gid = guildId();
+    if (!gid || gid !== watchedGuild) return;
+    const openId = current && current.id ? current.id : null;
+
+    let list;
+    let open = null;
+    try {
+      [list, open] = await Promise.all([loadGuildEvents(gid), openId ? loadEvent(openId) : Promise.resolve(null)]);
+    } catch (err) {
+      return;   /* the next message, or a reopening, reads again */
+    }
+    if (seq !== liveSeq || mine !== session || gid !== guildId() || busy) return;
+
+    if (JSON.stringify(list) !== JSON.stringify(events) || listState !== "ready") {
+      /* the list is drawn again; the item that held the focus keeps it */
+      const held = el.list.contains(document.activeElement) ? document.activeElement.dataset.event : null;
+      events = list;
+      listState = "ready";
+      renderList();
+      const again = held ? Array.from(el.list.querySelectorAll("[data-event]")).find(b => b.dataset.event === held) : null;
+      if (again) again.focus();
+    }
+
+    if (!openId || !current || current.id !== openId) return;
+    if (!open) {
+      const name = current.name;
+      current = null;
+      slots = [];
+      renderList();
+      renderEvent();
+      showNotice(`${name || "The CTA"} was deleted.`);
+      return;
+    }
+    if (shownSig(open) === shownSig(current)) return;
+    if (dirty()) {
+      if (staleSaid !== shownSig(open)) {
+        staleSaid = shownSig(open);
+        showNotice("This CTA changed while you were editing it. Your edits are kept: saving writes them over the change; opening the CTA again shows it.");
+      }
+      return;
+    }
+    open.slots = normalizeSlots(open.slots);
+    current = open;
+    slots = normalizeSlots(open.slots);
+    renderList();
+    renderEvent();
+    announce(`${current.name}: changed, shown as it is now.`);
+  }
+
+
   /* ---- loading ---- */
 
   /* true once the guild's list is on screen; false when the read failed or
@@ -20165,6 +20448,7 @@ function eventErrorMessage(err) {
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
     shownGuild = guildId();
+    watchGuild(shownGuild);
     /* a quiet reload (after a save, a move or a delete) keeps the list on
        screen until the new one arrives */
     if (!quiet) {
@@ -20201,6 +20485,8 @@ function eventErrorMessage(err) {
     busy = false;
     acctIdle(el.save);
     acctIdle(el.remove);
+    acctIdle(el.renew);
+    staleSaid = null;
     clearMessages();
     current = null;
     slots = [];
@@ -20231,6 +20517,8 @@ function eventErrorMessage(err) {
 
   acctWireDialog(dialog, { canClose: () => !busy && !dirty() });
   $id("ev-close").addEventListener("click", () => dialog.close());
+  /* the channel lives while the dialog is open */
+  dialog.addEventListener("close", stopWatching);
 
 
   /* ---- identity ---- */
@@ -20259,7 +20547,10 @@ function eventErrorMessage(err) {
  * sign-up per CTA under its id) and a guest (a name they type; their
  * sign-up is keyed by the hash of a claim token this browser keeps in
  * localStorage, so this browser alone edits or cancels it, and an account
- * created here later adopts it).
+ * created here later adopts it). The token is kept under the CTA's code
+ * and under the CTA itself: an admin who renews the code leaves the row
+ * as it was, and the new link, opened in the same browser, finds the
+ * claim again; the old link opens nothing.
  *
  * The link is index.html?cta=<share code>, and the sheet is the page it
  * opens: the head script sets the sheet view from the address before the
@@ -20504,6 +20795,14 @@ function newClaimToken(bytes) {
 
 function claimTokenKey(code) {
   return `cta-claim:${cleanJoinCode(code)}`;
+}
+
+
+/* the same claim kept under the CTA itself: a renewed share code leaves
+   the CTA and the player's row as they were, and the new link finds this
+   browser's claim through it */
+function claimEventKey(eventId) {
+  return `cta-claim-event:${String(eventId || "")}`;
 }
 
 
@@ -20843,7 +21142,7 @@ const SIGNUP_MSG = {
   network: PROFILE_MSG.network,
   session: PROFILE_MSG.session,
   missing: "Sign-up is not available yet: the account database has not been updated for this page. Try again later.",
-  noEvent: "No CTA has this link. Ask the caller for a fresh one.",
+  noEvent: "No CTA has this link: the CTA was deleted, or its link was renewed. Ask the caller for the current link.",
   closed: "Sign-up is not open for this CTA.",
   taken: "That slot was just taken. Pick another, or sign up as a reserve.",
   noSlot: "That slot is no longer on the roster. Pick another.",
@@ -21017,12 +21316,36 @@ function signupErrorMessage(err) {
     token = newClaimToken(bytes);
     heldTokens[code] = token;
     try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* storage blocked: the claim lasts the visit */ }
+    keepClaim(sheet && sheet.event && sheet.event.id, token);
     return token;
   }
 
   function forgetToken() {
     delete heldTokens[code];
     try { localStorage.removeItem(claimTokenKey(code)); } catch (err) { /* nothing kept */ }
+    if (sheet && sheet.event) {
+      try { localStorage.removeItem(claimEventKey(sheet.event.id)); } catch (err) { /* nothing kept */ }
+    }
+  }
+
+  /* The claim is kept under the CTA as well as its code (claimEventKey):
+     an admin's renewal of the share code leaves the CTA and the player's
+     row as they were, so the new link takes up the claim kept under the
+     CTA. Written on every read that carried this browser's token. */
+  function keepClaim(eventId, token) {
+    if (!eventId || !token) return;
+    try {
+      if (localStorage.getItem(claimEventKey(eventId)) !== token) localStorage.setItem(claimEventKey(eventId), token);
+    } catch (err) { /* storage blocked: the visit's copy under the code stands */ }
+  }
+
+  function claimForEvent(eventId) {
+    let token = null;
+    try { token = localStorage.getItem(claimEventKey(eventId)); } catch (err) { return null; }
+    if (!CLAIM_TOKEN_RE.test(token || "")) return null;
+    heldTokens[code] = token;
+    try { localStorage.setItem(claimTokenKey(code), token); } catch (err) { /* the visit's copy above */ }
+    return token;
   }
 
 
@@ -21962,7 +22285,14 @@ function signupErrorMessage(err) {
 
     let next;
     try {
-      next = await loadSheet(code, readToken());
+      const token = readToken();
+      next = await loadSheet(code, token);
+      /* a renewed share code: no claim under the new code, so the one kept
+         under the CTA reads the player's own sign-up through it */
+      if (!token && next && next.event && !next.mine) {
+        const kept = claimForEvent(next.event.id);
+        if (kept) next = await loadSheet(code, kept);
+      }
     } catch (err) {
       if (seq !== openSeq) return false;
       showError(signupErrorMessage(err));
@@ -21972,6 +22302,7 @@ function signupErrorMessage(err) {
     if (seq !== openSeq) return false;
 
     sheet = next;
+    keepClaim(sheet.event && sheet.event.id, readToken());
     await readRole();
     if (seq !== openSeq) return false;
     renderBoard();
@@ -22189,20 +22520,30 @@ function signupErrorMessage(err) {
  *               stated beside the list)
  * None of these is a skill rating, and none is offered as one.
  *
+ * The facts cover a period: the last 30 days, the last 90 days or all
+ * time (HISTORY_WINDOWS). A period counts the completed CTAs that started
+ * in it; the database reads every fact from those CTAs alone, so each
+ * measure keeps its definition over any period, and the dialog says which
+ * period it reads. A season (a start and an end) is a later period.
+ *
  * build.py inlines this file as its own <script> after _signup.js. It
  * reads no planner state and never calls the engine: roles are read
  * through the catalog (one role read). Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (guild_history)
- *   pure    - rates, rows, filters, error wording (tests/test_history.js)
+ *   pure    - rates, rows, filters, the periods, error wording
+ *             (tests/test_history.js)
  *   UI      - the history dialog the account menu opens
  */
 
 
 /* ------------------------------------------------------------ helpers */
 
-/* the facts over one guild's completed CTAs */
-async function loadGuildHistory(guildId) {
-  const { data, error } = await window.DB.rpc("guild_history", { guild_id: guildId });
+/* the facts over one guild's completed CTAs: those that started at `since`
+   or after, or every one (no since: the call names the guild alone) */
+async function loadGuildHistory(guildId, since) {
+  const args = { guild_id: guildId };
+  if (since) args.since = since;
+  const { data, error } = await window.DB.rpc("guild_history", args);
 
   if (error) {
     throw error;
@@ -22221,6 +22562,43 @@ const REGULAR_MIN_RATE = 0.75;
 
 /* how many of a player's weapons the table lists */
 const HISTORY_PLAYS_SHOWN = 3;
+
+/* The periods the facts cover: the last 30 days, the last 90 days, all
+   time (the default, every completed CTA). A period counts the completed
+   CTAs that started in it; every measure keeps its definition over any
+   period. A season (a start and an end) is a later period. */
+const HISTORY_WINDOWS = [
+  { key: "30d", days: 30, label: "Last 30 days" },
+  { key: "90d", days: 90, label: "Last 90 days" },
+  { key: "all", days: null, label: "All time" }
+];
+const HISTORY_WINDOW_DEFAULT = "all";
+const HISTORY_WINDOW_KEY = "history-window";
+
+
+/* the period a key names; the default for a key it does not know */
+function historyWindow(key) {
+  return HISTORY_WINDOWS.find(w => w.key === key) || HISTORY_WINDOWS.find(w => w.key === HISTORY_WINDOW_DEFAULT);
+}
+
+
+/* the instant a period starts, as the ISO time guild_history compares a
+   CTA's start with; null for all time. `now` is injectable for the test. */
+function historySince(key, now) {
+  const w = historyWindow(key);
+  if (!w.days) return null;
+  const t = now instanceof Date ? now.getTime() : (now ? new Date(now).getTime() : Date.now());
+  return new Date(t - w.days * 86400000).toISOString();
+}
+
+
+/* the line that says which period the facts read */
+function historyWindowNote(key, since, now) {
+  const w = historyWindow(key);
+  if (!w.days) return "Every completed CTA the guild has run.";
+  const day = historyDateLabel(since, now);
+  return `Completed CTAs that started in the ${w.label.toLowerCase()}${day ? `, since ${day}` : ""}.`;
+}
 
 
 /* attended / (attended + no-show); null when nothing is marked */
@@ -22395,6 +22773,8 @@ function historyErrorMessage(err) {
     notice: $id("hs-notice"),
     live: $id("hs-live"),
     guild: $id("hs-guild"),
+    window: $id("hs-window"),
+    windowNote: $id("hs-window-note"),
     totals: $id("hs-totals"),
     empty: $id("hs-empty"),
     body: $id("hs-body"),
@@ -22414,6 +22794,7 @@ function historyErrorMessage(err) {
   let rows = [];
   let openSeq = 0;
   let state = "ready";       /* the read: "loading" until the service answers, "failed" when it did not */
+  let windowKey = storedWindow();   /* the period the facts cover, remembered per browser */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const clearMessages = () => acctMessage(el.error, el.notice, null, "");
@@ -22422,7 +22803,25 @@ function historyErrorMessage(err) {
 
   el.definitions.textContent = `Show rate is attended over attended plus no-show; an unmarked record counts as neither. `
     + `Fill is the slots held at the end over the roster's slots. Played is the slot's weapon at completion, over attended records. `
-    + `A regular attended ${REGULAR_MIN_ATTENDED} or more at ${Math.round(REGULAR_MIN_RATE * 100)}% or better. None of this is a skill rating.`;
+    + `A regular attended ${REGULAR_MIN_ATTENDED} or more at ${Math.round(REGULAR_MIN_RATE * 100)}% or better. `
+    + `A period counts the completed CTAs that started in it, and every fact is read from those alone. None of this is a skill rating.`;
+
+  el.window.replaceChildren(...HISTORY_WINDOWS.map(w => {
+    const o = document.createElement("option");
+    o.value = w.key;
+    o.textContent = w.label;
+    return o;
+  }));
+  el.window.value = windowKey;
+
+  function storedWindow() {
+    try {
+      const key = window.localStorage.getItem(HISTORY_WINDOW_KEY);
+      return historyWindow(key).key;
+    } catch (err) {
+      return HISTORY_WINDOW_DEFAULT;
+    }
+  }
 
   function renderGuilds() {
     el.guild.replaceChildren(...guilds.map(({ guild, role }) => {
@@ -22574,7 +22973,10 @@ function historyErrorMessage(err) {
       el.empty.hidden = false;
       return;
     }
-    el.empty.textContent = "No completed CTA yet. Facts appear once a CTA is completed and its attendance marked.";
+    const period = historyWindow(windowKey);
+    el.empty.textContent = period.days
+      ? `No completed CTA started in the ${period.label.toLowerCase()}. Choose a longer period, or All time.`
+      : "No completed CTA yet. Facts appear once a CTA is completed and its attendance marked.";
     if (!has) return;
     renderTotals();
     renderPlayers();
@@ -22584,33 +22986,49 @@ function historyErrorMessage(err) {
 
   el.search.addEventListener("input", renderPlayers);
 
-  /* the facts as CSV files (the export) */
+  /* the facts as CSV files (the export); a period's file names it */
   const guildName = () => {
     const g = guilds.find(x => x.guild.id === guildId());
     return g ? g.guild.name : "guild";
   };
+  const periodName = () => {
+    const period = historyWindow(windowKey);
+    return period.days ? ` ${period.label.toLowerCase()}` : "";
+  };
   el.exportPlayers.addEventListener("click", () => {
     if (!facts) return;
-    acctDownloadText(acctFilename(`${guildName()} players`, "csv"), acctCsvText(historySheetRows("players", facts, CATALOG)), "text/csv");
+    acctDownloadText(acctFilename(`${guildName()} players${periodName()}`, "csv"), acctCsvText(historySheetRows("players", facts, CATALOG)), "text/csv");
     announce("Players exported as CSV.");
   });
   el.exportCtas.addEventListener("click", () => {
     if (!facts) return;
-    acctDownloadText(acctFilename(`${guildName()} CTAs`, "csv"), acctCsvText(historySheetRows("ctas", facts, CATALOG)), "text/csv");
+    acctDownloadText(acctFilename(`${guildName()} CTAs${periodName()}`, "csv"), acctCsvText(historySheetRows("ctas", facts, CATALOG)), "text/csv");
     announce("CTAs exported as CSV.");
+  });
+
+  /* the period: a choice reads the facts again and is remembered */
+  el.window.addEventListener("change", () => {
+    windowKey = historyWindow(el.window.value).key;
+    try { window.localStorage.setItem(HISTORY_WINDOW_KEY, windowKey); } catch (err) { /* the choice lasts the visit */ }
+    reload();
   });
 
   async function reload() {
     const seq = ++openSeq;
+    const period = historyWindow(windowKey);
+    const since = historySince(period.key);
     facts = null;
     rows = [];
     state = guildId() ? "loading" : "ready";
+    /* the dialog says which period it reads, before and after the answer */
+    el.windowNote.textContent = guildId() ? historyWindowNote(period.key, since) : "";
+    el.totals.setAttribute("aria-label", period.days ? `Totals over completed CTAs, ${period.label.toLowerCase()}` : "Totals over completed CTAs");
     clearMessages();
     paint();
     if (!guildId()) return;
 
     try {
-      facts = await loadGuildHistory(guildId());
+      facts = await loadGuildHistory(guildId(), since);
     } catch (err) {
       if (seq !== openSeq) return;
       state = "failed";
@@ -22623,7 +23041,7 @@ function historyErrorMessage(err) {
     state = "ready";
     rows = playerRows(facts.players, CATALOG);
     paint();
-    announce(`${historyTotals(facts.totals).ctas} completed CTAs.`);
+    announce(`${historyTotals(facts.totals).ctas} completed CTAs, ${period.label.toLowerCase()}.`);
   }
 
   el.guild.addEventListener("change", reload);
@@ -22637,6 +23055,8 @@ function historyErrorMessage(err) {
     guilds = [];
     state = "loading";
     el.search.value = "";
+    el.window.value = windowKey;
+    el.windowNote.textContent = "";
     renderGuilds();
     paint();
     if (!dialog.open) dialog.showModal();

@@ -7,7 +7,16 @@
  * link (phase 5), the comp it was made from and its own slots, COPIED
  * from that template when the event is created: editing an event never
  * touches the template, and deleting the template leaves the event
- * whole. Members read; callers, officers and admins write.
+ * whole. Members read; callers, officers and admins write; an admin
+ * renews a CTA's share code (a leaked link: the old one opens nothing at
+ * once, the sign-ups stay).
+ *
+ * The dialog is live while it is open: the database sends 'changed' on
+ * the guild's private topic (guild:<id>) after every write to the guild's
+ * CTAs and their sign-ups, naming the table and the operation alone, and
+ * the dialog reads its list again, and the open CTA while its form holds
+ * no unsaved edit. It joins the channel of the guild it shows and leaves
+ * it on close.
  *
  * build.py inlines this file as its own <script> after _comps.js. It
  * reads no planner state and never calls the engine: as a saved comp, an
@@ -18,10 +27,10 @@
  *
  * Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (events, event_slots,
- *             save_event)
+ *             save_event, the share code's renewal, the guild's channel)
  *   pure    - the statuses and their moves, the times, the grouping of a
- *             guild's calendar, validation, error wording
- *             (tests/test_events.js)
+ *             guild's calendar, validation, the channel's topic and states,
+ *             error wording (tests/test_events.js)
  *   UI      - the CTAs dialog the account menu opens
  */
 
@@ -124,6 +133,43 @@ async function deleteEvent(eventId) {
 }
 
 
+/* a fresh share code: any value written becomes a new code (the events
+   guard, the guild join code's rule, an admin's alone); the row comes
+   back with it */
+async function renewShareCode(eventId) {
+  const { data, error } = await window.DB
+    .from("events")
+    .update({ share_code: "RENEW" })
+    .eq("id", eventId)
+    .select("id, share_code, updated_at");
+
+  if (error) {
+    throw error;
+  }
+
+  if (!data || !data.length) {
+    throw guildRefusal();
+  }
+
+  return data[0];
+}
+
+
+/* The guild's channel: after every write to the guild's CTAs and their
+   sign-ups the database sends 'changed' on guild:<id> (a trigger; the
+   payload names the table and the operation, nothing else). The channel
+   is private: the Realtime service admits the guild's members alone (a
+   policy on realtime.messages). The dialog re-reads what it shows through
+   the helpers above, so what it sees is still what the policies allow.
+   Returns the function that leaves the channel. */
+function watchGuildEvents(guildId, onChange, onState) {
+  const channel = window.DB.channel(guildTopic(guildId), { config: { private: true } });
+  channel.on("broadcast", { event: "changed" }, message => onChange((message && message.payload) || {}));
+  channel.subscribe(status => { if (onState) onState(status); });
+  return () => { window.DB.removeChannel(channel); };
+}
+
+
 /* --------------------------------------------------------------- pure */
 
 /* The database's statuses and the moves its guard allows
@@ -140,6 +186,30 @@ const EVENTS_MAX = 200;
 
 /* an event whose start is this long gone lists with the past ones */
 const EVENT_PAST_AFTER_MS = 12 * 60 * 60 * 1000;
+
+
+/* the guild's channel topic: the trigger's, guild:<guild id> */
+function guildTopic(guildId) {
+  return `guild:${String(guildId || "")}`;
+}
+
+
+/* what the dialog says about its channel (the Realtime client's states):
+   live, the list and the open CTA re-read on every change; not live, they
+   are read on opening */
+const GUILD_LIVE_MSG = {
+  SUBSCRIBED: "live",
+  CHANNEL_ERROR: "not live: reopen to update",
+  TIMED_OUT: "not live: reopen to update",
+  CLOSED: ""
+};
+
+
+/* how long the dialog waits after a message before reading, so the
+   messages of one change (a swap, a roster saved) read once; a message
+   that arrives while a read waits rides that read, so a run of sign-ups
+   on a busy guild never holds the read back */
+const GUILD_LIVE_SETTLE_MS = 400;
 
 
 /* an ISO time as a datetime-local field shows it (local time, to the
@@ -370,15 +440,27 @@ function eventPayload(event) {
 
 
 /* what the caller's role may do with an event: the policies' writer
-   roles, the guard's moves, and no slot edits once completed */
+   roles, the guard's moves, no slot edits once completed, and the share
+   code's renewal, an admin's on a saved event (the guard's role, the guild
+   join code's) */
 function eventPowers(myRole, event) {
   const write = compPowers(myRole).write;
   const status = event && event.status;
   return {
     write,
     moves: write && status ? (EVENT_MOVES[status] || []) : [],
-    editSlots: write && status !== "completed"
+    editSlots: write && status !== "completed",
+    renew: myRole === "admin" && !!(event && event.id)
   };
+}
+
+
+/* what renewing a share code does, as the admin's confirm says it: the old
+   link opens nothing from then on, a guest's included; the sign-ups stay */
+function renewConfirmText(name) {
+  return `Renew the share code of ${name || "this CTA"}? The current sign-up link stops opening the sheet at once, `
+    + "for everyone who holds it, guests who signed up through it included. Everyone signed up keeps their place: "
+    + "share the new link.";
 }
 
 
@@ -394,6 +476,10 @@ const EVENT_MSG = {
   frozen: "A completed CTA keeps its slots.",
   templateGone: "The comp was not found: it may have been deleted. Choose another.",
   collision: "The generated share code collided with another. Save again.",
+  renewCollision: "The new share code collided with another. Renew it again.",
+  renewRefused: "Only an admin of the guild renews a CTA's share code.",
+  renewed: "A new share code is in force: the old link opens nothing now. Share the new link; a guest who signed up "
+    + "finds their sign-up through it in the browser they signed up in.",
   refused: "The server refused the change: your role in this guild does not edit CTAs, or the CTA has changed. Reload and try again.",
   invalid: "The server refused a value. Check the name, content, size, times and notes, then try again.",
   unknown: PROFILE_MSG.unknown
@@ -415,6 +501,7 @@ function eventErrorKind(err) {
   if (code === "P0002") return "templateGone";
   if (code === "23505") return "collision";
   if (code === "21000") return "duplicate";
+  if (code === "42501" && /share code/i.test(message)) return "renewRefused";
   if (code === "42501" || code === "refused") return "refused";
   if (code === "23514" || code === "22023" || code === "23502" || code === "22001" || code === "22P02" || code === "22003" || code === "22007" || code === "22008") return "invalid";
 
@@ -481,6 +568,8 @@ function eventErrorMessage(err) {
     share: $id("ev-share"),
     sheet: $id("ev-sheet"),
     link: $id("ev-link"),
+    renew: $id("ev-renew"),
+    liveState: $id("ev-live-state"),
     meta: $id("ev-meta"),
     summary: $id("ev-summary"),
     slots: $id("ev-slots"),
@@ -510,6 +599,17 @@ function eventErrorMessage(err) {
      service from before neither changes the reopened dialog nor ends its
      busy state */
   let session = 0;
+  /* the live channel: the guild it is joined for, the function that leaves
+     it, each join's number (a left channel's late callback changes
+     nothing), the read a message waits for, and the live reads' own
+     sequence (a live read never cancels a read the caller asked for) */
+  let leave = null;
+  let watchedGuild = null;
+  let joinSeq = 0;
+  let liveTimer = null;
+  let liveSeq = 0;
+  let liveJoined = false;
+  let staleSaid = null;       /* the change underneath an edited form last said */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const showNotice = message => acctMessage(el.error, el.notice, "notice", message);
@@ -740,10 +840,7 @@ function eventErrorMessage(err) {
 
     el.status.textContent = EVENT_STATUS_NAMES[current.status] || current.status || "";
     el.status.dataset.status = current.status || "";
-    el.share.textContent = current.share_code || "";
-    el.share.parentElement.hidden = !current.share_code;
-    el.sheet.hidden = !current.share_code;
-    el.link.hidden = !current.share_code;
+    renderShare();
     el.moves.replaceChildren(...(current.id ? powers.moves : []).map(to => {
       const b = document.createElement("button");
       b.type = "button";
@@ -753,14 +850,29 @@ function eventErrorMessage(err) {
       return b;
     }));
 
-    el.meta.textContent = current.id
-      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
-        + (current.template_id ? " · copied from a saved comp" : "")
-      : "Not saved yet.";
+    renderMeta();
 
     el.save.hidden = !powers.write;
     el.remove.hidden = !powers.write || !current.id;
     renderSlots();
+  }
+
+  /* the share code and what it opens (the sheet, its link) with the
+     admin's renewal; a renewal repaints this and the saved line alone,
+     leaving the typed fields as they are */
+  function renderShare() {
+    el.share.textContent = current.share_code || "";
+    el.share.parentElement.hidden = !current.share_code;
+    el.sheet.hidden = !current.share_code;
+    el.link.hidden = !current.share_code;
+    el.renew.hidden = !powers.renew || !current.share_code;
+  }
+
+  function renderMeta() {
+    el.meta.textContent = current.id
+      ? `Saved ${current.updated_at ? new Date(current.updated_at).toLocaleString() : ""}`
+        + (current.template_id ? " · copied from a saved comp" : "")
+      : "Not saved yet.";
   }
 
   /* the roster part alone: the summary, the table, the note under an
@@ -1081,6 +1193,34 @@ function eventErrorMessage(err) {
     }
   });
 
+  /* the admin's renewal of the share code, after a confirm that says what
+     it does: the old link opens nothing from then on; the typed fields
+     stay as they are */
+  el.renew.addEventListener("click", async () => {
+    if (busy || !current || !current.id || !powers.renew) return;
+    if (!window.confirm(renewConfirmText(current.name))) return;
+
+    busy = true;
+    const mine = session;
+    acctBusy(el.renew, "Renewing…");
+
+    try {
+      const row = await renewShareCode(current.id);
+      if (mine !== session) return;
+      current.share_code = row.share_code;
+      current.updated_at = row.updated_at;
+      renderShare();
+      renderMeta();
+      showNotice(EVENT_MSG.renewed);
+      announce("A new share code is in force.");
+    } catch (err) {
+      if (mine === session) showError(eventErrorKind(err) === "collision" ? EVENT_MSG.renewCollision : eventErrorMessage(err));
+    } finally {
+      acctIdle(el.renew);
+      if (mine === session) busy = false;
+    }
+  });
+
   /* ---- status moves ---- */
 
   el.moves.addEventListener("click", async e => {
@@ -1190,6 +1330,128 @@ function eventErrorMessage(err) {
   });
 
 
+  /* ---- the live channel ---- */
+
+  function setLive(status) {
+    el.liveState.textContent = GUILD_LIVE_MSG[status] || "";
+    el.liveState.dataset.live = status === "SUBSCRIBED" ? "yes" : "no";
+  }
+
+  /* the channel's state: a join after the first (the channel dropped and
+     came back) reads again, since every change sent while it was away is
+     lost */
+  function onLiveState(status) {
+    setLive(status);
+    if (status !== "SUBSCRIBED") return;
+    if (liveJoined) onGuildChanged();
+    liveJoined = true;
+  }
+
+  /* a message settles, then the dialog reads once; the messages that
+     arrive while the read waits ride it, and an action in progress holds
+     it until the action ends */
+  function onGuildChanged() {
+    if (liveTimer) return;
+    liveTimer = setTimeout(() => {
+      liveTimer = null;
+      if (busy || listState === "loading") { onGuildChanged(); return; }
+      liveRead();
+    }, GUILD_LIVE_SETTLE_MS);
+  }
+
+  /* the channel of the guild the dialog shows: joined while the dialog is
+     open, once per guild, left for another guild and on close */
+  function watchGuild(id) {
+    if (id && id === watchedGuild && leave) return;
+    stopWatching();
+    if (!id || !dialog.open) return;
+    const join = joinSeq;
+    const ours = fn => value => { if (join === joinSeq) fn(value); };
+    watchedGuild = id;
+    liveJoined = false;
+    try {
+      leave = watchGuildEvents(id, ours(onGuildChanged), ours(onLiveState));
+    } catch (err) {
+      leave = null;
+      setLive("CHANNEL_ERROR");
+    }
+  }
+
+  function stopWatching() {
+    joinSeq++;
+    clearTimeout(liveTimer);
+    liveTimer = null;
+    liveSeq++;
+    watchedGuild = null;
+    if (leave) {
+      try { leave(); } catch (err) { /* the channel is gone either way */ }
+      leave = null;
+    }
+    setLive("CLOSED");
+  }
+
+  /* what the open CTA shows that a change elsewhere moves */
+  const shownSig = e => JSON.stringify([e.updated_at || "", e.status || "", e.share_code || "", normalizeSlots(e.slots)]);
+
+  /* What the dialog shows, read again after a message: the guild's list,
+     and the open CTA. A form without unsaved edits takes the CTA as it is
+     now; an edited form is kept, and a change underneath it is said once;
+     a CTA deleted elsewhere leaves the view. The read has its own
+     sequence: it never cancels a read the caller started, and a reopening,
+     another guild or an action in progress discards it. */
+  async function liveRead() {
+    const seq = ++liveSeq;
+    const mine = session;
+    const gid = guildId();
+    if (!gid || gid !== watchedGuild) return;
+    const openId = current && current.id ? current.id : null;
+
+    let list;
+    let open = null;
+    try {
+      [list, open] = await Promise.all([loadGuildEvents(gid), openId ? loadEvent(openId) : Promise.resolve(null)]);
+    } catch (err) {
+      return;   /* the next message, or a reopening, reads again */
+    }
+    if (seq !== liveSeq || mine !== session || gid !== guildId() || busy) return;
+
+    if (JSON.stringify(list) !== JSON.stringify(events) || listState !== "ready") {
+      /* the list is drawn again; the item that held the focus keeps it */
+      const held = el.list.contains(document.activeElement) ? document.activeElement.dataset.event : null;
+      events = list;
+      listState = "ready";
+      renderList();
+      const again = held ? Array.from(el.list.querySelectorAll("[data-event]")).find(b => b.dataset.event === held) : null;
+      if (again) again.focus();
+    }
+
+    if (!openId || !current || current.id !== openId) return;
+    if (!open) {
+      const name = current.name;
+      current = null;
+      slots = [];
+      renderList();
+      renderEvent();
+      showNotice(`${name || "The CTA"} was deleted.`);
+      return;
+    }
+    if (shownSig(open) === shownSig(current)) return;
+    if (dirty()) {
+      if (staleSaid !== shownSig(open)) {
+        staleSaid = shownSig(open);
+        showNotice("This CTA changed while you were editing it. Your edits are kept: saving writes them over the change; opening the CTA again shows it.");
+      }
+      return;
+    }
+    open.slots = normalizeSlots(open.slots);
+    current = open;
+    slots = normalizeSlots(open.slots);
+    renderList();
+    renderEvent();
+    announce(`${current.name}: changed, shown as it is now.`);
+  }
+
+
   /* ---- loading ---- */
 
   /* true once the guild's list is on screen; false when the read failed or
@@ -1197,6 +1459,7 @@ function eventErrorMessage(err) {
   async function reloadList(keepId, quiet) {
     const seq = ++openSeq;
     shownGuild = guildId();
+    watchGuild(shownGuild);
     /* a quiet reload (after a save, a move or a delete) keeps the list on
        screen until the new one arrives */
     if (!quiet) {
@@ -1233,6 +1496,8 @@ function eventErrorMessage(err) {
     busy = false;
     acctIdle(el.save);
     acctIdle(el.remove);
+    acctIdle(el.renew);
+    staleSaid = null;
     clearMessages();
     current = null;
     slots = [];
@@ -1263,6 +1528,8 @@ function eventErrorMessage(err) {
 
   acctWireDialog(dialog, { canClose: () => !busy && !dirty() });
   $id("ev-close").addEventListener("click", () => dialog.close());
+  /* the channel lives while the dialog is open */
+  dialog.addEventListener("close", stopWatching);
 
 
   /* ---- identity ---- */

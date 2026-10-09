@@ -20,20 +20,30 @@
  *               stated beside the list)
  * None of these is a skill rating, and none is offered as one.
  *
+ * The facts cover a period: the last 30 days, the last 90 days or all
+ * time (HISTORY_WINDOWS). A period counts the completed CTAs that started
+ * in it; the database reads every fact from those CTAs alone, so each
+ * measure keeps its definition over any period, and the dialog says which
+ * period it reads. A season (a start and an end) is a later period.
+ *
  * build.py inlines this file as its own <script> after _signup.js. It
  * reads no planner state and never calls the engine: roles are read
  * through the catalog (one role read). Three parts, as in _profile.js:
  *   helpers - the only code that talks to window.DB (guild_history)
- *   pure    - rates, rows, filters, error wording (tests/test_history.js)
+ *   pure    - rates, rows, filters, the periods, error wording
+ *             (tests/test_history.js)
  *   UI      - the history dialog the account menu opens
  */
 
 
 /* ------------------------------------------------------------ helpers */
 
-/* the facts over one guild's completed CTAs */
-async function loadGuildHistory(guildId) {
-  const { data, error } = await window.DB.rpc("guild_history", { guild_id: guildId });
+/* the facts over one guild's completed CTAs: those that started at `since`
+   or after, or every one (no since: the call names the guild alone) */
+async function loadGuildHistory(guildId, since) {
+  const args = { guild_id: guildId };
+  if (since) args.since = since;
+  const { data, error } = await window.DB.rpc("guild_history", args);
 
   if (error) {
     throw error;
@@ -52,6 +62,43 @@ const REGULAR_MIN_RATE = 0.75;
 
 /* how many of a player's weapons the table lists */
 const HISTORY_PLAYS_SHOWN = 3;
+
+/* The periods the facts cover: the last 30 days, the last 90 days, all
+   time (the default, every completed CTA). A period counts the completed
+   CTAs that started in it; every measure keeps its definition over any
+   period. A season (a start and an end) is a later period. */
+const HISTORY_WINDOWS = [
+  { key: "30d", days: 30, label: "Last 30 days" },
+  { key: "90d", days: 90, label: "Last 90 days" },
+  { key: "all", days: null, label: "All time" }
+];
+const HISTORY_WINDOW_DEFAULT = "all";
+const HISTORY_WINDOW_KEY = "history-window";
+
+
+/* the period a key names; the default for a key it does not know */
+function historyWindow(key) {
+  return HISTORY_WINDOWS.find(w => w.key === key) || HISTORY_WINDOWS.find(w => w.key === HISTORY_WINDOW_DEFAULT);
+}
+
+
+/* the instant a period starts, as the ISO time guild_history compares a
+   CTA's start with; null for all time. `now` is injectable for the test. */
+function historySince(key, now) {
+  const w = historyWindow(key);
+  if (!w.days) return null;
+  const t = now instanceof Date ? now.getTime() : (now ? new Date(now).getTime() : Date.now());
+  return new Date(t - w.days * 86400000).toISOString();
+}
+
+
+/* the line that says which period the facts read */
+function historyWindowNote(key, since, now) {
+  const w = historyWindow(key);
+  if (!w.days) return "Every completed CTA the guild has run.";
+  const day = historyDateLabel(since, now);
+  return `Completed CTAs that started in the ${w.label.toLowerCase()}${day ? `, since ${day}` : ""}.`;
+}
 
 
 /* attended / (attended + no-show); null when nothing is marked */
@@ -226,6 +273,8 @@ function historyErrorMessage(err) {
     notice: $id("hs-notice"),
     live: $id("hs-live"),
     guild: $id("hs-guild"),
+    window: $id("hs-window"),
+    windowNote: $id("hs-window-note"),
     totals: $id("hs-totals"),
     empty: $id("hs-empty"),
     body: $id("hs-body"),
@@ -245,6 +294,7 @@ function historyErrorMessage(err) {
   let rows = [];
   let openSeq = 0;
   let state = "ready";       /* the read: "loading" until the service answers, "failed" when it did not */
+  let windowKey = storedWindow();   /* the period the facts cover, remembered per browser */
 
   const showError = message => acctMessage(el.error, el.notice, "error", message);
   const clearMessages = () => acctMessage(el.error, el.notice, null, "");
@@ -253,7 +303,25 @@ function historyErrorMessage(err) {
 
   el.definitions.textContent = `Show rate is attended over attended plus no-show; an unmarked record counts as neither. `
     + `Fill is the slots held at the end over the roster's slots. Played is the slot's weapon at completion, over attended records. `
-    + `A regular attended ${REGULAR_MIN_ATTENDED} or more at ${Math.round(REGULAR_MIN_RATE * 100)}% or better. None of this is a skill rating.`;
+    + `A regular attended ${REGULAR_MIN_ATTENDED} or more at ${Math.round(REGULAR_MIN_RATE * 100)}% or better. `
+    + `A period counts the completed CTAs that started in it, and every fact is read from those alone. None of this is a skill rating.`;
+
+  el.window.replaceChildren(...HISTORY_WINDOWS.map(w => {
+    const o = document.createElement("option");
+    o.value = w.key;
+    o.textContent = w.label;
+    return o;
+  }));
+  el.window.value = windowKey;
+
+  function storedWindow() {
+    try {
+      const key = window.localStorage.getItem(HISTORY_WINDOW_KEY);
+      return historyWindow(key).key;
+    } catch (err) {
+      return HISTORY_WINDOW_DEFAULT;
+    }
+  }
 
   function renderGuilds() {
     el.guild.replaceChildren(...guilds.map(({ guild, role }) => {
@@ -405,7 +473,10 @@ function historyErrorMessage(err) {
       el.empty.hidden = false;
       return;
     }
-    el.empty.textContent = "No completed CTA yet. Facts appear once a CTA is completed and its attendance marked.";
+    const period = historyWindow(windowKey);
+    el.empty.textContent = period.days
+      ? `No completed CTA started in the ${period.label.toLowerCase()}. Choose a longer period, or All time.`
+      : "No completed CTA yet. Facts appear once a CTA is completed and its attendance marked.";
     if (!has) return;
     renderTotals();
     renderPlayers();
@@ -415,33 +486,49 @@ function historyErrorMessage(err) {
 
   el.search.addEventListener("input", renderPlayers);
 
-  /* the facts as CSV files (the export) */
+  /* the facts as CSV files (the export); a period's file names it */
   const guildName = () => {
     const g = guilds.find(x => x.guild.id === guildId());
     return g ? g.guild.name : "guild";
   };
+  const periodName = () => {
+    const period = historyWindow(windowKey);
+    return period.days ? ` ${period.label.toLowerCase()}` : "";
+  };
   el.exportPlayers.addEventListener("click", () => {
     if (!facts) return;
-    acctDownloadText(acctFilename(`${guildName()} players`, "csv"), acctCsvText(historySheetRows("players", facts, CATALOG)), "text/csv");
+    acctDownloadText(acctFilename(`${guildName()} players${periodName()}`, "csv"), acctCsvText(historySheetRows("players", facts, CATALOG)), "text/csv");
     announce("Players exported as CSV.");
   });
   el.exportCtas.addEventListener("click", () => {
     if (!facts) return;
-    acctDownloadText(acctFilename(`${guildName()} CTAs`, "csv"), acctCsvText(historySheetRows("ctas", facts, CATALOG)), "text/csv");
+    acctDownloadText(acctFilename(`${guildName()} CTAs${periodName()}`, "csv"), acctCsvText(historySheetRows("ctas", facts, CATALOG)), "text/csv");
     announce("CTAs exported as CSV.");
+  });
+
+  /* the period: a choice reads the facts again and is remembered */
+  el.window.addEventListener("change", () => {
+    windowKey = historyWindow(el.window.value).key;
+    try { window.localStorage.setItem(HISTORY_WINDOW_KEY, windowKey); } catch (err) { /* the choice lasts the visit */ }
+    reload();
   });
 
   async function reload() {
     const seq = ++openSeq;
+    const period = historyWindow(windowKey);
+    const since = historySince(period.key);
     facts = null;
     rows = [];
     state = guildId() ? "loading" : "ready";
+    /* the dialog says which period it reads, before and after the answer */
+    el.windowNote.textContent = guildId() ? historyWindowNote(period.key, since) : "";
+    el.totals.setAttribute("aria-label", period.days ? `Totals over completed CTAs, ${period.label.toLowerCase()}` : "Totals over completed CTAs");
     clearMessages();
     paint();
     if (!guildId()) return;
 
     try {
-      facts = await loadGuildHistory(guildId());
+      facts = await loadGuildHistory(guildId(), since);
     } catch (err) {
       if (seq !== openSeq) return;
       state = "failed";
@@ -454,7 +541,7 @@ function historyErrorMessage(err) {
     state = "ready";
     rows = playerRows(facts.players, CATALOG);
     paint();
-    announce(`${historyTotals(facts.totals).ctas} completed CTAs.`);
+    announce(`${historyTotals(facts.totals).ctas} completed CTAs, ${period.label.toLowerCase()}.`);
   }
 
   el.guild.addEventListener("change", reload);
@@ -468,6 +555,8 @@ function historyErrorMessage(err) {
     guilds = [];
     state = "loading";
     el.search.value = "";
+    el.window.value = windowKey;
+    el.windowNote.textContent = "";
     renderGuilds();
     paint();
     if (!dialog.open) dialog.showModal();

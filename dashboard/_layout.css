@@ -338,8 +338,9 @@
   /* the caller's add-a-player row stacks */
   .su-add{flex-wrap:wrap}
   .su-add .auth-field:first-child{flex-basis:100%}
-  /* the history's guild pick takes the row; the tables scroll sideways */
+  /* the history's guild and period picks take the row; the tables scroll sideways */
   .hs-guild{flex-basis:100%}
+  .hs-window{flex-basis:100%}
   .hs-table{display:block; overflow-x:auto}
   .im-source{grid-template-columns:1fr}
   .im-text-field{grid-column:1}

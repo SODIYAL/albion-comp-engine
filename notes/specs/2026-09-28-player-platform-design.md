@@ -276,7 +276,8 @@ roles.
   in phase 5, by a function that needs no membership).
 - **The share code is generated, never chosen**, the guild join code's
   form and generator (`new_join_code`), unique across events. It is the
-  sign-up link of phase 5; renewing it is deferred there.
+  sign-up link of phase 5; an admin renews it (Increments after phase
+  11).
 - **Times are instants.** `starts_at` (required) and `mass_at` (optional,
   never after the start: a check and the client's sentence) are
   `timestamptz`; the dialog reads and writes them in the viewer's local
@@ -287,8 +288,7 @@ roles.
   without the tool, so phase 8 can keep its attendance.
 - **Bounds**: 200 events per guild, the slot, notes, role and note bounds
   the comp's. Storage bounds against abuse, not product rules.
-- **Deferred**: renewing a share code, a guild-wide time zone, per-event
-  multi-party grouping, a caller-only "my CTAs" view.
+- **Deferred**: a guild-wide time zone, per-event multi-party grouping, a caller-only "my CTAs" view.
 
 ## Phase 5 decisions
 
@@ -393,8 +393,7 @@ roles.
   never refills the player's form; a move or removal of their own row
   is said out loud. Without Realtime (a self-hosted database without
   it) the trigger does nothing and the sheet keeps its Refresh.
-- **Deferred**: a live CTAs dialog (a channel per guild), presence (who
-  has the sheet open), a live planner roster from the sheet (phase 11).
+- **Deferred**: presence (who has the sheet open), a live planner roster from the sheet (phase 11).
 
 ## Phase 8 decisions
 
@@ -453,7 +452,8 @@ roles.
 - **Roles are read through the catalog, on the client**, from the
   weapons played: one role read, no second classification in the
   database.
-- **Deferred**: a period window, a player's own history across guilds,
+- **Deferred**: a season (a start and an end), a player's own history
+  across guilds,
   a caller's leaderboard by role. The export of the facts is phase 10.
 
 ## Phase 10 decisions
@@ -569,6 +569,27 @@ roles.
 - **Deferred**: the role advisory, kill pressure and the fight chain on
   the sheet; the read on a draft CTA or a saved comp (both open in the
   planner); a caller's own kit picks on the sheet's slots.
+
+## Increments after phase 11
+
+- **History by period.** `guild_history` takes a period's start and
+  reads every fact from the completed CTAs that started in it, so each
+  measure keeps its definition; the period lives in the function, since
+  a player's record and the weapons fielded are sums a page could never
+  cut. The dialog offers the last 30 days, the last 90 days and all time
+  and says which it reads. A season is a later period.
+- **The CTAs dialog live, on a private guild topic.** A trigger sends
+  `changed` on `guild:<guild id>` after every write to the guild's CTAs
+  and their sign-ups, naming the table and the operation. A guild id is
+  no key (the sheet names its CTA's guild to every link holder), so the
+  topic is private: one select policy on `realtime.messages` admits the
+  guild's members, and no API role sends. The dialog re-reads its list,
+  and the open CTA while its form holds no unsaved edit.
+- **An admin renews a share code**, the guild join code's pattern: a
+  written value becomes a fresh code by the guard, any role but admin
+  refused. The old code opens nothing at once; the sign-ups stay, a
+  guest's row keyed by the token's hash, and the browser keeps the claim
+  under the CTA as well as the code, so the new link finds it.
 
 ## Open questions
 

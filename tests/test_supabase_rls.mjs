@@ -79,6 +79,14 @@ const PLATFORM = `
   grant usage on schema realtime to anon, authenticated, service_role;
   grant execute on function realtime.send(jsonb, text, text, boolean) to anon, authenticated, service_role;
   grant insert on realtime.messages to anon, authenticated, service_role;
+  -- Realtime Authorization: a private channel's join reads realtime.messages
+  -- as the joining role, the topic in realtime.topic(); the API roles hold
+  -- select, row-level security decides
+  create function realtime.topic() returns text language sql stable as $$
+    select nullif(current_setting('realtime.topic', true), '')::text
+  $$;
+  grant execute on function realtime.topic() to anon, authenticated, service_role;
+  grant select on realtime.messages to anon, authenticated, service_role;
 `;
 
 const A = "00000000-0000-4000-8000-00000000000a";
@@ -425,8 +433,9 @@ try {
         && await code("authenticated", C, "select public.guild_members_succession()") === "42501");
   const definers = (await db.query(
     "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname in ('public', 'private') order by 1")).rows.map(r => r.f);
-  check("the API schema holds three definers, the sign-up, broadcast and record triggers; the helpers live in private",
-        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.attendance_record", "public.handle_new_user", "public.sheet_changed"]), definers);
+  check("the API schema holds four definers, the sign-up trigger, the two broadcast triggers and the record's trigger; the helpers live in private",
+        same(definers, ["private.guild_id_for_code", "private.guild_member_count", "private.guild_role_of", "public.attendance_record",
+                        "public.guild_ctas_changed", "public.handle_new_user", "public.sheet_changed"]), definers);
   check("anon reaches nothing in the private schema",
         await code("anon", null, "select private.guild_role_of(gen_random_uuid())") === "42501");
   const perm = (await db.query(
@@ -617,7 +626,8 @@ try {
         && await code("authenticated", F, "insert into public.event_slots (event_id, position, weapon_id) values ($1, 9, 'A')", [e.id]) === "42501"
         && await affected("authenticated", F, "delete from public.event_slots where event_id = $1", [e.id]) === 0
         && await affected("authenticated", F, "delete from public.events where id = $1", [e.id]) === 0);
-  for (const col of ["guild_id = gen_random_uuid()", "template_id = null", "share_code = 'ABCDEFGHIJ'", "created_by = null",
+  /* the share code is an admin's to renew (section 18), never a column a save writes */
+  for (const col of ["guild_id = gen_random_uuid()", "template_id = null", "created_by = null",
                      "updated_by = null", "created_at = now()", "updated_at = now()"]) {
     check(`no caller writes ${col.split(" ")[0]} on a CTA (column grants)`,
           await code("authenticated", C, `update public.events set ${col} where id = $1`, [e.id]) === "42501");
@@ -954,7 +964,8 @@ const code_ = code;
   })]))[0];
   const CODE = ev.share_code;
   const TOPIC = `cta:${CODE}`;
-  const sent = async () => (await db.query("select topic, event, payload, private from realtime.messages order by id")).rows;
+  /* the sheets' topics; the guild's (section 17) is told apart by its topic */
+  const sent = async () => (await db.query("select topic, event, payload, private from realtime.messages where topic like 'cta:%' order by id")).rows;
   const clear = () => db.query("delete from realtime.messages");
   const up = (role, sub, token, payload) => rows(role, sub, "select public.sign_up($1, $2, $3::jsonb) as s", [CODE, token, JSON.stringify(payload)]).then(r => r[0].s);
   const says = (m, table, op) => m.topic === TOPIC && m.event === "changed" && m.private === false
@@ -1007,8 +1018,8 @@ const code_ = code;
         && await code_("anon", null, "select public.sheet_changed()") === "42501");
   const definers = (await db.query(
     "select n.nspname || '.' || p.proname as f from pg_proc p join pg_namespace n on n.oid = p.pronamespace where p.prosecdef and n.nspname = 'public' order by 1")).rows.map(r => r.f);
-  check("the API schema holds three definers: the sign-up trigger, the broadcast trigger and the record's trigger, triggers no role can call",
-        same(definers, ["public.attendance_record", "public.handle_new_user", "public.sheet_changed"]), definers);
+  check("the API schema holds four definers: the sign-up trigger, the two broadcast triggers and the record's trigger, triggers no role can call",
+        same(definers, ["public.attendance_record", "public.guild_ctas_changed", "public.handle_new_user", "public.sheet_changed"]), definers);
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
   await clear();
 }
@@ -1224,6 +1235,32 @@ const code_ = code;
         outside.totals.ctas === 0 && outside.totals.records === 0 && outside.totals.show_rate === null && same(outside.players, []) && same(outside.ctas, []) && same(outside.weapons, []), outside);
   check("anon cannot ask", await code_("anon", null, "select public.guild_history($1)", [g.id]) === "42501");
   check("a guild with no completed CTA has zero facts", (await rows("authenticated", C, "select public.guild_history(gen_random_uuid()) as f"))[0].f.totals.ctas === 0);
+
+  /* a period: the completed CTAs that started at or after its start, every measure defined as before */
+  const within = since => rows("authenticated", F, "select public.guild_history($1, $2) as f", [g.id, since]).then(r => r[0].f);
+  const instant = t => (t == null ? null : new Date(t).toISOString());   /* the session's zone prints the offset; the instant is the fact */
+  const w = await within("2026-10-05T00:00:00Z");
+  check("a period counts the completed CTAs that started in it, every measure as defined: one CTA, three records, two attended, no no-show, one reserve, a show rate of one, a fill of two slots in three; the answer names its start",
+        w.totals.ctas === 1 && w.totals.records === 3 && w.totals.attended === 2 && w.totals.no_show === 0 && w.totals.reserve === 1
+        && w.totals.unmarked === 0 && Number(w.totals.show_rate) === 1 && Number(w.totals.fill) === 0.667
+        && w.ctas.length === 1 && w.ctas[0].name === "Facts two" && instant(w.since) === "2026-10-05T00:00:00.000Z", w);
+  const effIn = w.players.find(p => p.name === "Eff");
+  check("a player's record in the period is the period's: Eff one CTA, attended, a rate of one, first seen inside it (all time reads the first CTA); Disc, seen only before it, is not listed",
+        same(w.players.map(p => p.name), ["Eff", "Gus", "Res"]) && effIn.ctas === 1 && effIn.attended === 1 && effIn.no_show === 0
+        && Number(effIn.show_rate) === 1 && instant(effIn.first_seen) === "2026-10-08T18:00:00.000Z" && instant(eff.first_seen) === "2026-10-01T18:00:00.000Z", w.players);
+  check("the weapons fielded in the period: the Longbow and the Mace once each, one player each",
+        same(w.weapons.map(x => `${x.weapon_id}:${x.n}:${x.players}`), ["2H_LONGBOW:1:1", "MAIN_MACE_HELL:1:1"]), w.weapons);
+  const edge = await within("2026-10-08T18:00:00Z"), later = await within("2026-10-09T00:00:00Z"), early = await within("2026-09-01T00:00:00Z");
+  check("a period starts at its instant: a CTA starting then is in; a period after every CTA has empty facts; one before them all reads as all time",
+        edge.totals.ctas === 1 && later.totals.ctas === 0 && later.totals.show_rate === null && same(later.players, []) && same(later.ctas, [])
+        && early.totals.ctas === 2 && early.totals.records === facts.totals.records && same(early.players.map(p => p.name), names));
+  check("no period is all time: the call without one, or with null, reads every completed CTA, and names no start",
+        facts.since === null && (await within(null)).totals.ctas === 2 && (await within(null)).since === null);
+  check("an outsider's period is empty facts too; anon cannot ask with one",
+        (await rows("authenticated", X, "select public.guild_history($1, $2) as f", [g.id, "2026-09-01T00:00:00Z"]))[0].f.totals.ctas === 0
+        && await code_("anon", null, "select public.guild_history($1, $2)", [g.id, "2026-09-01T00:00:00Z"]) === "42501");
+  check("one guild_history stands: a call naming the guild alone has one function to match",
+        (await db.query("select count(*)::int as n from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'public' and p.proname = 'guild_history'")).rows[0].n === 1);
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
   await db.query("delete from realtime.messages");
 }
@@ -1286,6 +1323,190 @@ const code_ = code;
         && await code_("authenticated", K2, "select public.weapon_aliases_guard()") === "42501");
   await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
   check("deleting the guild deletes its names", await count() === 0);
+}
+
+/* 17 - the CTAs dialog live: a broadcast on the guild's private topic after every write to its CTAs and their sign-ups, its members alone admitted */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Calendar", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", K2, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  const other = (await rows("authenticated", X, "select * from public.create_guild($1, $2)", ["Zaddy Elsewhere", "europe"]))[0];
+  const TOPIC = `guild:${g.id}`;
+  const onTopic = async () => (await db.query("select event, payload, private from realtime.messages where topic = $1 order by id", [TOPIC])).rows;
+  const clear = () => db.query("delete from realtime.messages");
+  const says = (m, table, op) => m.event === "changed" && m.private === true
+    && Object.keys(m.payload).length === 2 && m.payload.table === table && m.payload.op === op;
+  const list = m => m.map(x => `${x.payload.table}:${x.payload.op}`);
+
+  await clear();
+  const ev = (await rows("authenticated", K2, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Calendar CTA", starts_at: "2026-10-09T18:00:00Z", content: "castle",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }] })]))[0];
+  let m = await onTopic();
+  check("a new CTA sends one message on its guild's topic: 'changed', the table and the operation, private; writing its slots sends none there",
+        m.length === 1 && says(m[0], "events", "INSERT"), m);
+
+  await clear();
+  await run("authenticated", K2, "update public.events set status = 'open' where id = $1", [ev.id]);
+  const g1 = (await rows("anon", null, "select public.sign_up($1, $2, $3::jsonb) as s", [ev.share_code, "6".repeat(32), JSON.stringify({ player_name: "Gus", position: 1 })]))[0].s;
+  m = await onTopic();
+  check("opening the CTA and a guest's sign-up (as anon) send one message each there; no payload names a player, a row or the CTA",
+        same(list(m), ["events:UPDATE", "signups:INSERT"]) && m.every(x => says(x, x.payload.table, x.payload.op))
+        && !JSON.stringify(m).includes("Gus") && !JSON.stringify(m).includes(g1.id) && !JSON.stringify(m).includes(ev.id), m);
+
+  await clear();
+  await run("authenticated", K2, "select public.save_event($1::jsonb)", [JSON.stringify({ id: ev.id, guild_id: g.id, name: "Calendar CTA",
+    starts_at: "2026-10-09T18:00:00Z", slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }] })]);
+  m = await onTopic();
+  check("a save that writes the slots writes the CTA's row: the dialog is told once", same(list(m), ["events:UPDATE"]), m);
+
+  await clear();
+  await rows("authenticated", K2, "select public.move_signup($1, $2)", [g1.id, 3]);
+  await run("authenticated", K2, "delete from public.signups where id = $1", [g1.id]);
+  m = await onTopic();
+  check("a caller's move and removal on the sheet are sign-up changes there", same(list(m), ["signups:UPDATE", "signups:DELETE"]), m);
+
+  /* who may listen: a private channel's join reads the policy as the joiner, the topic in realtime.topic()
+     (the service writes a probe row as itself and reads it back as the joiner) */
+  const joins = async (role, sub, topic) => {
+    const id = (await db.query("insert into realtime.messages (topic, extension, event, payload, private) values ($1, 'broadcast', 'probe', '{}'::jsonb, true) returning id", [topic])).rows[0].id;
+    try {
+      const r = await db.transaction(async tx => {
+        await tx.exec(`set local role ${role}`);
+        await tx.query("select set_config('request.jwt.claims', $1, true)", [sub ? JSON.stringify({ sub, role }) : ""]);
+        await tx.query("select set_config('realtime.topic', $1, true)", [topic]);
+        return tx.query("select id from realtime.messages where id = $1", [id]);
+      });
+      return r.rows.length === 1;
+    } finally {
+      await db.query("delete from realtime.messages where id = $1", [id]);
+    }
+  };
+  check("a member, a caller and an admin join their guild's topic",
+        await joins("authenticated", F, TOPIC) && await joins("authenticated", K2, TOPIC) && await joins("authenticated", C, TOPIC));
+  check("another guild's member, a guest and a sessionless caller do not; a member joins no other guild's topic",
+        !(await joins("authenticated", X, TOPIC)) && !(await joins("anon", null, TOPIC)) && !(await joins("authenticated", null, TOPIC))
+        && !(await joins("authenticated", F, `guild:${other.id}`)) && await joins("authenticated", X, `guild:${other.id}`));
+  check("a topic that names no guild admits nobody; a CTA's topic is not this policy's (the sheet's channel is public, its code the key)",
+        !(await joins("authenticated", F, "guild:not-a-guild")) && !(await joins("authenticated", C, `cta:${ev.share_code}`)));
+  await run("authenticated", F, "delete from public.guild_members where guild_id = $1 and user_id = $2", [g.id, F]);
+  check("a member who left joins no more", !(await joins("authenticated", F, TOPIC)));
+  await run("authenticated", F, "select * from public.join_guild($1)", [gCode]);
+
+  await clear();
+  check("no API role sends on a guild's topic: a member's send lands nothing (no policy lets an API role write a message)",
+        await code_("authenticated", F, "select realtime.send('{}'::jsonb, 'changed', $1, true)", [TOPIC]) === "ok"
+        && await code_("anon", null, "select realtime.send('{}'::jsonb, 'changed', $1, true)", [TOPIC]) === "ok"
+        && (await onTopic()).length === 0);
+
+  await clear();
+  await run("authenticated", C, "delete from public.events where id = $1", [ev.id]);
+  m = await onTopic();
+  check("deleting a CTA sends its own message there and none for the sign-ups the cascade removes", same(list(m), ["events:DELETE"]), m);
+  await run("authenticated", K2, "select public.save_event($1::jsonb)", [JSON.stringify({ guild_id: g.id, name: "Left to the guild", starts_at: "2026-10-09T18:00:00Z" })]);
+  await clear();
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  check("deleting the guild sends nothing on its topic: the cascade finds no guild left to tell", (await onTopic()).length === 0);
+  check("no API role calls the trigger",
+        await code_("authenticated", C, "select public.guild_ctas_changed()") === "42501" && await code_("anon", null, "select public.guild_ctas_changed()") === "42501");
+  const pol = (await db.query("select policyname, cmd, roles::text as roles, permissive from pg_policies where schemaname = 'realtime' and tablename = 'messages'")).rows;
+  check("realtime.messages carries one policy, select for signed-in users, permissive (lint 0006); none for anon, none that sends",
+        pol.length === 1 && pol[0].cmd === "SELECT" && pol[0].roles === "{authenticated}" && pol[0].permissive === "PERMISSIVE", pol);
+  await run("authenticated", X, "delete from public.guilds where id = $1", [other.id]);
+  await clear();
+}
+
+/* 18 - renewing a CTA's share code: an admin's write becomes a fresh code, the old one opens nothing at once, the sign-ups stay */
+{
+  const code_ = code;
+  const F = "00000000-0000-4000-8000-00000000000f";
+  const K2 = "00000000-0000-4000-8000-000000000014";
+  const X = "00000000-0000-4000-8000-000000000011";
+  const O = "00000000-0000-4000-8000-000000000017";
+  await signUp(O, { albion_name: "Oh" });
+  const g = (await rows("authenticated", C, "select * from public.create_guild($1, $2)", ["Zaddy Codes", "europe"]))[0];
+  const gCode = (await db.query("select join_code from public.guilds where id = $1", [g.id])).rows[0].join_code;
+  for (const who of [F, K2, O]) await run("authenticated", who, "select * from public.join_guild($1)", [gCode]);
+  await run("authenticated", C, "update public.guild_members set role = 'caller' where guild_id = $1 and user_id = $2", [g.id, K2]);
+  await run("authenticated", C, "update public.guild_members set role = 'officer' where guild_id = $1 and user_id = $2", [g.id, O]);
+  const ev = (await rows("authenticated", C, "select * from public.save_event($1::jsonb)", [JSON.stringify({
+    guild_id: g.id, name: "Leaked CTA", starts_at: "2026-10-10T18:00:00Z", content: "castle",
+    slots: [{ position: 1, weapon_id: "2H_LONGBOW" }, { position: 2, weapon_id: "MAIN_MACE_HELL" }, { position: 3, weapon_id: null }] })]))[0];
+  await run("authenticated", C, "update public.events set status = 'open' where id = $1", [ev.id]);
+  const OLD = ev.share_code;
+  const T = "4".repeat(32);
+  const g1 = (await rows("anon", null, "select public.sign_up($1, $2, $3::jsonb) as s", [OLD, T, JSON.stringify({ player_name: "Gus", position: 1 })]))[0].s;
+  const f1 = (await rows("authenticated", F, "select public.sign_up($1, null, $2::jsonb) as s", [OLD, JSON.stringify({ position: 2 })]))[0].s;
+  const shareOf = async () => (await db.query("select share_code from public.events where id = $1", [ev.id])).rows[0].share_code;
+  /* a statement that carries a code, as the guest functions set it */
+  const withCode = (role, sub, value, sql, params = []) => db.transaction(async tx => {
+    await tx.exec(`set local role ${role}`);
+    await tx.query("select set_config('request.jwt.claims', $1, true)", [sub ? JSON.stringify({ sub, role }) : ""]);
+    await tx.query("select set_config('app.share_code', $1, true)", [value]);
+    return (await tx.query(sql, params)).rows;
+  });
+
+  check("a caller and an officer cannot renew the code (the guard, 42501); a member and an outsider reach no row (the policy); anon holds no grant",
+        await code_("authenticated", K2, "update public.events set share_code = 'RENEW' where id = $1", [ev.id]) === "42501"
+        && await code_("authenticated", O, "update public.events set share_code = 'RENEW' where id = $1", [ev.id]) === "42501"
+        && await affected("authenticated", F, "update public.events set share_code = 'RENEW' where id = $1", [ev.id]) === 0
+        && await affected("authenticated", X, "update public.events set share_code = 'RENEW' where id = $1", [ev.id]) === 0
+        && await code_("anon", null, "update public.events set share_code = 'RENEW' where id = $1", [ev.id]) === "42501"
+        && await shareOf() === OLD);
+  check("a caller's edit of the CTA leaves the code as it is",
+        await affected("authenticated", K2, "update public.events set notes = 'bring pots' where id = $1", [ev.id]) === 1 && await shareOf() === OLD);
+  check("the code is still never chosen at creation: the insert grant does not name it",
+        await code_("authenticated", C, "insert into public.events (guild_id, name, starts_at, share_code) values ($1, 'X', now(), 'ABCDEFGHIJ')", [g.id]) === "42501");
+
+  await db.query("delete from realtime.messages");
+  const renewed = (await rows("authenticated", C, "update public.events set share_code = 'CHOSEN0000' where id = $1 returning share_code, updated_by", [ev.id]))[0];
+  const told = (await db.query("select topic, payload from realtime.messages order by id")).rows;
+  const NEW = renewed && renewed.share_code;
+  check("an admin renews the code by writing any value: the guard replaces it with a fresh code of the same form, read back by the admin; updated_by follows",
+        NEW && NEW !== "CHOSEN0000" && NEW !== OLD && /^[A-Z0-9]{10}$/.test(NEW) && renewed.updated_by === C && await shareOf() === NEW, renewed);
+  check("the renewal tells the old topic and the new one (a sheet open on either link reads again) and the guild's, each the table and the operation",
+        same(told.filter(x => x.topic.startsWith("cta:")).map(x => x.topic).sort(), [`cta:${NEW}`, `cta:${OLD}`].sort())
+        && told.some(x => x.topic === `guild:${g.id}`)
+        && told.every(x => x.payload.table === "events" && x.payload.op === "UPDATE" && Object.keys(x.payload).length === 2), told);
+  check("the old code opens nothing at once, for a guest, a member and a signed-in outsider; the new one opens the same CTA",
+        await code_("anon", null, "select public.event_by_code($1, null)", [OLD]) === "P0002"
+        && await code_("authenticated", F, "select public.event_by_code($1, null)", [OLD]) === "P0002"
+        && await code_("authenticated", X, "select public.event_by_code($1, null)", [OLD]) === "P0002"
+        && (await rows("anon", null, "select public.event_by_code($1, null) as s", [NEW]))[0].s.event.id === ev.id);
+  check("a guest's later reach through the old code is refused: no sheet, no sign-up or change, no confirmation, no cancellation, no row read",
+        await code_("anon", null, "select public.event_by_code($1, $2)", [OLD, T]) === "P0002"
+        && await code_("anon", null, "select public.sign_up($1, $2, $3::jsonb)", [OLD, T, JSON.stringify({ player_name: "Gus", position: 3 })]) === "P0002"
+        && await code_("anon", null, "select public.confirm_sign_up($1, $2, true)", [OLD, T]) === "P0002"
+        && await code_("anon", null, "select public.cancel_sign_up($1, $2)", [OLD, T]) === "P0002"
+        && (await withCode("anon", null, OLD, "select id from public.events")).length === 0
+        && (await withCode("anon", null, OLD, "select id from public.signups")).length === 0
+        && (await withCode("anon", null, OLD, "select id from public.attendance")).length === 0);
+  check("the sign-ups and their records stay as they were: the guest's and the member's",
+        (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n === 2
+        && (await db.query("select count(*)::int as n from public.attendance where event_id = $1", [ev.id])).rows[0].n === 2
+        && (await db.query("select position from public.signups where id = $1", [g1.id])).rows[0].position === 1);
+  check("a guest's claim token is not the code: through the new code the same token reads, changes and confirms their own row",
+        (await rows("anon", null, "select public.event_by_code($1, $2) as s", [NEW, T]))[0].s.mine.id === g1.id
+        && (await rows("anon", null, "select public.sign_up($1, $2, $3::jsonb) as s", [NEW, T, JSON.stringify({ player_name: "Gus", position: 3 })]))[0].s.id === g1.id
+        && (await rows("anon", null, "select public.confirm_sign_up($1, $2, true) as c", [NEW, T]))[0].c.status === "confirmed"
+        && (await db.query("select count(*)::int as n from public.signups where event_id = $1", [ev.id])).rows[0].n === 2);
+  check("an account's sign-up is its own whatever the code: the member reads it through the new one",
+        (await rows("authenticated", F, "select public.event_by_code($1, null) as s", [NEW]))[0].s.mine.id === f1.id);
+
+  await run("authenticated", C, "update public.events set status = 'locked' where id = $1", [ev.id]);
+  await run("authenticated", C, "update public.events set status = 'completed' where id = $1", [ev.id]);
+  const done = (await rows("authenticated", C, "update public.events set share_code = 'RENEW' where id = $1 returning share_code", [ev.id]))[0].share_code;
+  check("a completed CTA's code renews too; its record reads through the new code alone",
+        done !== NEW && (await rows("anon", null, "select public.event_by_code($1, null) as s", [done]))[0].s.attendance.length === 2
+        && await code_("anon", null, "select public.event_by_code($1, null)", [NEW]) === "P0002");
+  await run("authenticated", C, "delete from public.guilds where id = $1", [g.id]);
+  await db.query("delete from realtime.messages");
 }
 
 } catch (e) {

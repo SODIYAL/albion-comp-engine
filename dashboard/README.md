@@ -194,14 +194,31 @@ and its tests: `supabase/README.md`.
   (by the database when the payload names a comp and no slots; the
   dialog shows the copy first): the module never writes a template, and
   a comp deleted later leaves the CTA whole. A completed CTA's slots are
-  frozen; the payload carries none.
+  frozen; the payload carries none. The dialog is live while it is open:
+  `watchGuildEvents` joins the guild's private Realtime channel
+  (`guild:<guild id>`, a broadcast the database sends after every write
+  to the guild's CTAs and their sign-ups, naming the table and the
+  operation only; the service admits the guild's members alone), one
+  channel for the guild shown, left for another guild and on close. A
+  message settles (`GUILD_LIVE_SETTLE_MS`; messages arriving meanwhile
+  ride the same read, and an action in progress holds it), then the
+  dialog reads its list again and, while the form holds no unsaved edit,
+  the open CTA; an edited form is kept and a change under it is said
+  once, a CTA deleted elsewhere leaves the view. The live read has its
+  own sequence, so it never cancels a read the caller started; a mark
+  beside the list says whether the channel is live. An admin renews a
+  CTA's share code beside the code (`renewShareCode`: a value written
+  that the guard replaces, the guild join code's rule), after a confirm
+  that says the current link stops opening the sheet at once, guests'
+  included, while everyone signed up keeps their place.
 - **`_signup.js`** (platform phase 5) is the sheet of a CTA, one surface
   for guests and accounts: helpers over the three guest functions
   (`event_by_code`, `sign_up`, `cancel_sign_up`; the module reaches no
   table directly, since the share code rides each statement); pure
   functions for the link (`index.html?cta=<code>`) and the code in it,
-  the claim token (16 random bytes as hex, kept per CTA in
-  `localStorage`), the board (each slot with its claimant, the
+  the claim token (16 random bytes as hex, kept in `localStorage` under
+  the CTA's code and under the CTA itself, so the new link of a renewed
+  code finds the claim again; the old link opens nothing), the board (each slot with its claimant, the
   reserves, the free slots), validation on the database's bounds, the
   payload, a profile's lists as the first declaration, the tally (slots
   held of slots planned per role, the open slots to fill next grouped by
@@ -262,7 +279,13 @@ and its tests: `supabase/README.md`.
   wording (`tests/test_history.js`); and the history dialog
   (`registerView("history")`): the guild's totals, the players table
   with a search, the weapons fielded, the completed CTAs, and the
-  definitions beside them. No skill rating is offered.
+  definitions beside them. The facts cover a period (`HISTORY_WINDOWS`:
+  the last 30 days, the last 90 days, all time, the default; remembered
+  per browser): the dialog sends the period's start, the database reads
+  every fact from the completed CTAs that started in it, so each measure
+  keeps its definition, and the line under the totals, the empty state
+  and an exported file's name say which period was read. A season is a
+  later period. No skill rating is offered.
 - **`_import.js`** (platform phase 10) reads a caller's spreadsheet as a
   saved comp: helpers over `weapon_aliases` and `save_weapon_aliases`
   (the guild's remembered names; the comp itself is saved through the
@@ -459,11 +482,12 @@ and its tests: `supabase/README.md`.
 `tests/test_history.js`, `tests/test_import.js`, `tests/test_xlsx.js`, `tests/test_roster.js` and `tests/test_sheet_build.js` pin validation, error wording, the name fallback,
 link parsing, the weapon lists and search, the member table and role
 powers, the share hash both ways and the kits it carries per slot, the
-statuses and their moves, the times, the calendar, the sheet's board,
-link, record and channel, the history's measures and rows, the import's
-parser, workbook reader, matchers, columns, slots and kits, the
-export's sheets, the engine's read of a roster (what the engine is
-asked and handed), and what the helpers send;
+statuses and their moves, the times, the calendar, the guild's channel
+and the share code's renewal, the sheet's board, link, record and
+channel, the history's measures, rows and periods, the import's parser,
+workbook reader, matchers, columns, slots and kits, the export's sheets,
+the engine's read of a roster (what the engine is asked and handed), and
+what the helpers send;
 `test_dashboard_layout.py` L27–L38 pin the markup, the isolation, the
 boundary, the catalog and the address-bar bridge.
 
