@@ -137,12 +137,15 @@ Each is decidable today from evidence already in the repo.
   semantic call: decide it (a fourth castle-outpost comp would settle it),
   or raise the content `min` for resist_shred by hand. (V: 09b, Target is
   the median; T25b)
-- **Repo size: `pipeline/out/party_rosters.json.gz` is 52 MB and committed**,
-  growing with every fold (it was 83 KB before builds joined the artifact
-  and 4.4 MB the same day they did). The split proposed then: commit the
-  aggregates, gitignore the raw `builds` array beside the other caches. Not
-  done because the raw builds are the evidence. Decide. (V: 08, Observed
-  BUILDS)
+- **Repo size: `pipeline/out/party_rosters.json.gz` is 63 MB and committed**,
+  growing with every fold (4.9 MB when it was gzipped, 28.7 MB the fold
+  before the last; as plain JSON it was 83 KB before builds joined the
+  artifact and 4.4 MB the same day they did). GitHub refuses a pushed file
+  over 100 MiB, and the unfolded artifact on the harvest machine reads
+  87 MiB, so the next fold's commit is likely to be refused. The split
+  proposed then: commit the aggregates, gitignore the raw `builds` array
+  beside the other caches. Not done because the raw builds are the
+  evidence. Decide. (V: 08, Observed BUILDS)
 - **EU server in the harvest**: would double the 25+ corpus but mixes a second
   server's meta into rows meant to describe the maintainer's own fights.
   Review deferred to the date the log entry records. (V: 09b, Coverage, not
@@ -166,16 +169,20 @@ Each is decidable today from evidence already in the repo.
   They return if a single party past 20 does; a 21+ harvest band would
   settle the third.
 - **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
-  4; the forge sweep: 2 in five of the six clap and clap_kite cells at 20
-  and 1 at Castle 20 clap, under the cell's p10 of 2,
+  4 on clap and 3 on clap_kite; the forge sweep: 2 in five of the six clap
+  and clap_kite cells at 20 and 1 at Castle 20 clap, under the cell's p10
+  of 2,
   notes/findings/2026-10-09-forge-quality.md): a typical only bars bodies
   beyond it; the shortfall is a support demand question (which support
   capabilities the 20-man rows under-ask for), not a role-count one. (V:
   09b, Tanks and supports)
-- **Sub-10 tanks and supports rest on three castle_outpost comps** (roads
-  has one, so it reads the healer row only). More sub-10 published comps,
-  or a sub-10 killboard filter that separates content comps from open-world
-  squads, would let the harvest carry them. (V: 09b, Tanks and supports)
+- **Sub-10 tanks and supports outside the Dragon Portal rest on three
+  castle_outpost comps** (roads has one, so it reads the healer row only);
+  the portal's pools read role counts of their own from their dominant
+  winners (V: 10, Optional rows and role counts for the portal pools).
+  More sub-10 published comps, or a sub-10 killboard filter that separates
+  content comps from open-world squads, would let the harvest carry them.
+  (V: 09b, Tanks and supports)
 - **Melee instant-payload bombs in clap dps** (Spiked Gauntlets, Realmbreaker)
   generate under the standing conditional-payload rule; the "bomb builds
   in clap" complaint has no derived rule left without a new one. (V: 09a,
@@ -191,9 +198,11 @@ Each is decidable today from evidence already in the repo.
 - **A frontline's damage points making a ranged carrier** (Witchwork, round-4
   roster 11) — same shape as the rejected utility-carrier rule. (V: 09b)
 - **Carrier FLOORS**: which of the six gear effects are needs. The harvest has
-  Royal Armor on 3.65% of builds at 20-59 (~0.7 per 20) against the guild's
-  "2 Royals per 10". Increment 3b's second half; then mechanism pairing rules
-  for effect carriers. (V: 09b, Other numbers; roles-design.md)
+  the plate Royal Armor on 2.7% of builds in battles of 20-59 players (about
+  0.5 per 20; the 3.65% the log records does not reproduce on that week's
+  artifacts, which read 2.6-2.7%) against the guild's "2 Royals per 10".
+  Increment 3b's second half; then mechanism pairing rules for effect
+  carriers. (V: 09b, Other numbers; roles-design.md)
 - **Kill-vs-death contrast** in kit doctrine: needs a win-lift decision before
   it orders anything (effectiveness claims are reserved for win-lift,
   standing rule 7). (V: 09b, Coherent builds)
@@ -265,26 +274,32 @@ Each is decidable today from evidence already in the repo.
   "extrapolated" flag. (V: 10, V3 forms seed from harvested killer
   parties)
 - **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
-  style board learns from the training split): at `--n 500` (1,500 drops)
-  role-level 59% (harvest_gear) against the baseline's 55%, weapon top-3 5%
-  against 18%; rank metric median 31 against the baseline's 20, top-10 15%
-  against 33%, MRR 0.070 against 0.177; 173 of 1,500 dropped weapons sit
-  outside the suggestion pool. The 150-party reading (68% against 47%) was
-  sample noise. v4h stays report-only (maintainer decision) until the
-  outcome audit has run. Hypotheses only (standing rule 1), nothing
-  retuned. (V: 09b, Harvest V4)
-- **The 20+ identity band**: no validation round yet; kite|20 still borrows
-  kite|15-19 (31 distinct rosters) and brawl_clap borrows brawl in every band.
-  A round once the harvest can stand it. (V: 09b)
-- **Blap's escape**: winning brawls at 20 carry more disengage / knockback in
-  their bottom decile than blap does (7 vs 16, 5.8 vs 10.3); the next brawl
-  round should ask whether the escape is real. (V: 09a, The movement four)
-- **Calibration sharpening**: targets stay conservative (median coverage
-  ~1.8x); tier2 has saturated as a discriminator for per-style targets at
-  this corpus size, so sharpening needs held-out labelled comps or
-  validation rounds under the train / validation / holdout rule, not another
-  sweep. Watch: castle-25's saturated tail. (V: 08, Re-derivation; THE UNIT
-  RE-FIT)
+  style board learns from the training split): at `--n 500` (1,500 drops),
+  on the fitted Blackzone Roam weights, role-level 64% (harvest_gear)
+  against the baseline's 55%, weapon top-3 7% against 18%; rank metric
+  median 30 against the baseline's 20, top-10 20% against 33%, MRR 0.083
+  against 0.177; 173 of 1,500 dropped weapons sit outside the suggestion
+  pool. The 150-party reading (68% against 47%) was sample noise. v4h
+  stays report-only (maintainer decision); the outcome audit it waited for
+  has run, on guild-level labels and at party level (fitness() adds
+  nothing to the numbers), so whether v4h becomes a gate is the decision
+  left. Hypotheses only (standing rule 1), nothing retuned. (V: 09b,
+  Harvest V4; Fitted capability weights; 10, Capability outcomes at party
+  level, numbers controlled)
+- **The 20+ identity band**: no validation round yet; brawl_clap|20 still
+  borrows brawl_clap|15-19 (129 distinct rosters), while kite|20 reads a
+  cell of its own (174). A round once the harvest can stand it. (V: 09b)
+- **Blap's escape**: winning brawls at 20 carry more disengage in their
+  bottom decile than blap does (7 vs 18.5, dressed); its knockback (6.75)
+  now clears that decile (5.5) and sits under the median (12.5). The next
+  brawl round should ask whether the escape is real. (V: 09a, The movement
+  four)
+- **Calibration sharpening**: a target is the median of its evidence
+  (standing rule 17); tier2 has saturated as a discriminator for per-style
+  targets at this corpus size, so sharpening needs held-out labelled comps
+  or validation rounds under the train / validation / holdout rule, not
+  another sweep. Watch: castle-25's saturated tail. (V: 08, Re-derivation;
+  THE UNIT RE-FIT)
 - **More caller sheets** in `data/published_comps/` remain the highest-value
   growth per observation: they are the only source of whole comps with roles,
   which calibration and the V4 gate need.
@@ -303,8 +318,8 @@ Each is decidable today from evidence already in the repo.
   the fix (see "More caller sheets" above).
 - **Gear-active doctrine, the next evidence**: the doctrine reads 79
   recording builds (the Character Builder comps and the MetaBattle batch);
-  47 of 81 head / armor / shoes items have no vote and ASSUME their own
-  active. (Soldier Boots, one vote on Rejuvenating Sprint from a
+  50 of 84 head / armor / shoes items have no vote or a single one and
+  ASSUME their own active. (Soldier Boots, one vote on Rejuvenating Sprint from a
   small-scale build, assumes Wanderlust and supplies nothing from the
   slot: the piece is a solo pick, not a group build, so the reading
   stands; curation judgment.) The
@@ -316,13 +331,13 @@ Each is decidable today from evidence already in the repo.
   doctrine)
 - **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py`,
   a board generated locally into the gitignored `review/`): the PASV queue
-  (39 rows where a passive / stat sentinel grounds a score of 4 or more —
-  each needs a justification or a downgrade) and the TOP review (42 rows at
+  (44 rows where a passive / stat sentinel grounds a score of 4 or more —
+  each needs a justification or a downgrade) and the TOP review (40 rows at
   score 6 or more, the top of every ladder, against the dumps numbers),
-  and the RULE flags (14 pairs where one spell grounds one capability at
-  two scores on two weapons; each needs its reason in the row comment or
-  a downgrade — Heavy Mace's engage on Snare Charge 4 and zone_control on
-  Sacred Ground 4 state none). After each capability:
+  and the RULE flags (15 spell x capability pairs graded at two or three
+  scores across the weapons that share the spell; each needs its reason in
+  the row comment or a downgrade — Heavy Mace's engage on Snare Charge 4
+  and zone_control on Sacred Ground 4 state none). After each capability:
   sheet corrections, a golden case where a score decision changes, rebuild,
   gates.
 - **Rows marked for review when curated and never reviewed**: Defensive
@@ -473,12 +488,14 @@ Each is decidable today from evidence already in the repo.
   to resolve per weapon; the `v4h` A/B (standing rule 16) would test that
   controlled lift. The design doc's plan (§8.6) stands: a prior-adjuster,
   never the primary term.
-- **Choice-fitted weights for the other templates**: the harvest records
-  no content, so `fit_choice_weights.py` reads every killer party against
-  one template (Blackzone Roam). Castle, outpost, territory, faction-war
-  and roads weights stay curation judgment until parties carry a content
-  label (battle location from the killboard) or each content has its own
-  comps. Refit Blackzone Roam after each fold that moves the training
+- **Choice-fitted weights for the other templates**: `fit_choice_weights.py`
+  fits Blackzone Roam on the killer parties of 10-20 and the Dragon Portal
+  on its dominant pool parties of 2-7, which the harvest's content tag
+  selects (`weight_fit` in `ancient_lands.yaml`). Castle, outpost,
+  territory, faction-war and roads weights stay curation judgment until
+  parties carry a content label (battle location from the killboard; the
+  content tag reads every open-world fight alike) or each content has its
+  own comps. Refit Blackzone Roam after each fold that moves the training
   split materially (`extract` then `fit`; the pull rule stays).
 - **The forged brawl_clap reads brawl**: its seat cells clear the floor
   through a +-1 size window (50-80 rosters per size) and its copy cells at
@@ -582,8 +599,9 @@ kit its saved link holds.
   migration.
 - **Import: spells and a build in one cell**: Q, W and passive columns
   are not read, and a cell holding a whole build ("Hallowfall - Cleric
-  Cowl, Cleric Robe") reads as one weapon text. Later increments if
-  callers ask for them.
+  Cowl, Cleric Robe") reads its weapon alone: the gear after it is
+  dropped, or read as the player's name. Later increments if callers ask
+  for them.
 - **Import: what a workbook's cells do not carry**: a number reads as its
   stored value, never in the cell's format (a date reads as its serial
   number); an .xlsb or .ods file and a workbook protected by a password
@@ -629,9 +647,10 @@ kit its saved link holds.
   making a ranged carrier".
 - **Multi-party comps**: the planner holds a zerg as parties of 20, one
   tab each, every party its own comp and the address carrying all of them.
-  A saved comp keeps the open party's slots (its link carries the other
-  parties) and a CTA is one roster of up to 60; a template or sign-up sheet
-  that groups slots by party is the later increment.
+  A saved comp keeps the open party's slots and address alone (a comp or
+  CTA saved from a zerg brings no other party), and a CTA is one roster of
+  up to 60; a template or sign-up sheet that groups slots by party is the
+  later increment.
 - **Guild invitations beyond the code**: a member joins only by a code an
   officer shares. An officer adding a member by Albion name, or a player
   asking to join, needs a lookup of profiles the reader is not yet allowed
@@ -652,14 +671,15 @@ workflow as a tool; the companion loot module (COMPANION_SCOPE.md, proposal
 only). Saved player profiles moved to "Platform" above.
 
 - **Seat-vs-label open list** (`notes/findings/2026-09-11-labels-vs-seats.md`):
-  14 of 40 seated frontline / support weapons carry none of their seat's
+  12 of 39 seated frontline / support weapons carry none of their seat's
   signature capability at >= 4 (ten engage tanks without a clump tool —
   Grovekeeper, Polehammer, Hammer, Great Hammer, Tombhammer, Morning Star,
-  Soulscythe, Dreadstorm, Earthrune, Mace; Primal / Stillgaze stoppers under
-  4 everywhere; Exalted on the shield seat; Black Monk as an off-tank). Each
-  is a maintainer decision: a move changes the kit doctrine and the 15+
-  minima. Great Arcane may want a 'stopper support' seat that does not
-  exist. (Exalted is decided: healer, support lane secondary.)
+  Soulscythe, Dreadstorm, Earthrune, Mace; the Primal Staff, a stopper
+  under 4 everywhere; Black Monk as an off-tank). Each is a maintainer
+  decision: a move changes the kit doctrine and the 15+ minima. Great
+  Arcane may want a 'stopper support' seat that does not exist. (Exalted
+  is decided: healer, support lane secondary; Stillgaze's stun now reads
+  4.)
 - **Refresh alternatives walk one swap at a time**: next-best is exact, so
   successive refreshes under the same locks usually differ by a single
   member (the forge sweep: 87 of 144 alternatives one slot from the
