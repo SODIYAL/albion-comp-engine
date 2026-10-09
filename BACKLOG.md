@@ -32,20 +32,6 @@ Each is decidable today from evidence already in the repo.
   the meta prior should bucket by content with a larger `delta` at the
   portal, or the sheets under-credit sustained ranged pressure, is the
   question to settle from evidence.
-- **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
-  ranking candidates by role need then the prior's solo share places the
-  real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
-  33%) where the engine, after the fitted Blackzone Roam weights, places it
-  at 30 (MRR 0.083, top-10 20%); the engine leads at role level (64% vs
-  55%). The choice fit locates the gap: free, the meta prior would sit at
-  about 1,180 x `delta`, and copies would be rewarded instead of charged
-  (30% of killer-party members share their weapon; the engine ranks such a
-  copy at median 53). Measured in the engine: `delta` 0.5 / 1.5 move MRR
-  0.070 -> 0.072 / 0.081 and fail T49; `delta` 5 reaches 0.112 and fails
-  T16 and T49. Raise `delta` (popularity outweighs capability), soften the
-  duplicate cost against T49, or accept that the engine optimises comps
-  rather than the published pick. (V: 09b, Skeleton-first; Fitted
-  capability weights)
 - **Healer pricing at 7, what stays open** (V3 round 2, Castle Outpost
   7): with disengage and mobility on the weapon basis (V: 10, Disengage and
   mobility read the weapon basis) the engine names Hallowfall the first
