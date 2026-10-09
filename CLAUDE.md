@@ -154,8 +154,9 @@ generate|score` (V3 forms seeded from harvested killer parties, the
 answer key `<form>.key.json` beside each form and never sent; `generate`
 loads the rosters artifact; `score --mode d` is the gate),
 `pipeline/style_blind_round.py generate|score` (style-labelling forms:
-forged rosters beside harvested killer parties, weapons only, each
-case's source and the engine's identity read in the key beside the form;
+forged rosters beside harvested killer parties of the same sizes,
+weapons only, each case's source and the engine's identity read in the
+key beside the form;
 `generate` loads the rosters artifact; `score` prints the agreement per
 source and size),
 `pipeline/audit_style_rosters.py --blind-sizes LO HI --blind-round N`,

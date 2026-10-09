@@ -29,10 +29,10 @@ parser, the V4 gear join, and the validation metrics.
 
   V9  the style-labelling form (pipeline/style_blind_round.py): the
       committed round-1 form and its key exist, the form holds 20 cases,
-      8 of them forged, each showing its size and weapons alone (the key's
-      sources and engine reads never on it), and `score` reads a filled
-      copy per source and size. Reads the committed files: no artifact,
-      no engine.
+      8 of them forged and the harvested ones at the forged sizes, each
+      showing its size and weapons alone (the key's sources and engine
+      reads never on it), and `score` reads a filled copy per source and
+      size. Reads the committed files: no artifact, no engine.
 
 Run:  py -3 tests/test_validation_modes.py
 """
@@ -693,26 +693,39 @@ def t_style_forms():
     cells = sorted((c["content"], c["forge_size"], c["style"]) for c in forged)
     want_cells = sorted((ct, n, "kite") for ct in ("blackzone_roam", "territory_defense")
                         for n in (10, 15, 20, 25))
-    mix = collections.Counter(c["engine"]["style"] for c in harvest)
+    sizes = collections.Counter(c["size"] for c in harvest)
+    # the per-size mix is the dealt plan, moved only by a recorded substitution
+    plan = {int(n): collections.Counter(v) for n, v in key["harvest"]["plan"].items()}
+    want = {n: collections.Counter(v) for n, v in plan.items()}
+    for s in key["harvest"]["substitutions"]:
+        want[s["size"]][s["wanted"]] -= 1
+        want[s["size"]][s["took"]] += 1
+    have = {n: collections.Counter(c["engine"]["style"] for c in harvest if c["size"] == n)
+            for n in plan}
+    mix_ok = (all(+want[n] == have[n] for n in plan)
+              and sum(plan.values(), collections.Counter()) == {"kite": 4, "clap_kite": 4,
+                                                                 "clap": 2, "brawl": 2})
     rosters = [tuple(sorted(c["weapons"])) for c in harvest]
     forged_rosters = {tuple(sorted(c["weapons"])) for c in forged}
-    sources_ok = (all(c["battle"] % 5 and c["battle"] not in GRADED_BATTLES
-                      and 10 <= c["size"] <= 20 for c in harvest)
+    sources_ok = (all(c["battle"] % 5 and c["battle"] not in GRADED_BATTLES for c in harvest)
                   and len(set(rosters)) == len(rosters)
                   and not forged_rosters & set(rosters))
     blank = all(not c["style"] and not c["confidence"] for c in cases)
     check("V9a the style-labelling form and its key exist: 20 cases, 8 forged for "
           "kite (Blackzone Roam and Territory Defense at 10, 15, 20, 25) and 12 "
-          "harvested killer parties of 10-20 the engine reads 4 kite, 4 clap_kite, "
-          "2 clap and 2 brawl, each on the training split, in no graded battle and a "
-          "roster of its own; the form shows every case's size and weapons as the key "
-          "records them, every answer blank",
+          "harvested killer parties, four each of exactly 10, 15 and 20 players (no size "
+          "a killer party reaches belongs to one source alone), the engine reading 4 "
+          "kite, 4 clap_kite, 2 clap and 2 brawl as dealt across the sizes, a size's "
+          "shortfall a recorded substitution; each on the training split, in no graded "
+          "battle and a roster of its own; the form shows every case's size and weapons "
+          "as the key records them, every answer blank",
           len(cases) == 20 and len(kc) == 20 and len(forged) == 8 and len(harvest) == 12
-          and cells == want_cells and dict(mix) == {"kite": 4, "clap_kite": 4, "clap": 2,
-                                                    "brawl": 2}
+          and cells == want_cells and sizes == {10: 4, 15: 4, 20: 4}
+          and key["harvest"]["sizes"] == [10, 15, 20] and mix_ok
           and sources_ok and sbr.match_key(cases, key) and blank
           and key.get("form") == "tests/style_form_r1_kite.md",
-          f"cases={len(cases)} forged={len(forged)} mix={dict(mix)} sources_ok={sources_ok} "
+          f"cases={len(cases)} forged={len(forged)} sizes={dict(sizes)} "
+          f"mix={ {n: dict(v) for n, v in have.items()} } sources_ok={sources_ok} "
           f"blank={blank}")
 
     blocks = re.split(r"(?m)^### Case \d+$", text)[1:]
@@ -748,15 +761,17 @@ def t_style_forms():
     not_kite = sorted(c["case"] for c in forged if sbr.vocab(c["engine"]["style"]) != "kite")
     shuffled = dict(key, cases=[dict(c, case=len(kc) + 1 - c["case"]) for c in kc])
     check("V9c score reads a filled copy: labels in any case and with hyphens, "
-          "agreement per source and size (forged by the size forged at, harvested by "
-          "band), the forged rosters not called kite listed; a key showing other "
-          "rosters is refused",
+          "agreement per source and size, the forged rosters not called kite listed; a "
+          "key showing other rosters is refused",
           res["answered"] == 20 and not res["unresolved"]
           and g[("all", "all")] == {"cases": 20, "answered": 20, "agree": 20}
           and [k for k in g if k[0] == "forged"] == [("forged", "10"), ("forged", "15"),
                                                     ("forged", "20"), ("forged", "25"),
                                                     ("forged", "all")]
           and all(g[("forged", s)]["cases"] == 2 for s in ("10", "15", "20", "25"))
+          and [k for k in g if k[0] == "harvest"] == [("harvest", "10"), ("harvest", "15"),
+                                                     ("harvest", "20"), ("harvest", "all")]
+          and all(g[("harvest", s)]["cases"] == 4 for s in ("10", "15", "20"))
           and g[("harvest", "all")]["cases"] == 12
           and sorted(r["case"] for r in res["missed"]) == not_kite
           and all(r["confidence"] == 3 for r in res["rows"])

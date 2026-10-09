@@ -238,9 +238,9 @@ Each is decidable today from evidence already in the repo.
 - **Kite weights: the style-labelling form is waiting for answers**:
   `tests/style_form_r1_kite.md` (seed 20261009, 20 cases, weapons only):
   the kite forge at Blackzone Roam and Territory Defense 10, 15, 20 and
-  25 beside twelve harvested killer parties of 13-19 the engine reads
-  kite (4), clap_kite (4), clap (2) and brawl (2); the answer key beside
-  it (`.key.json`) is never sent. On its own kits the forged kite reads
+  25 beside twelve harvested killer parties, four each of 10, 15 and 20
+  players, the engine reading kite (4), clap_kite (4), clap (2) and brawl
+  (2) across them; the answer key beside it (`.key.json`) is never sent. On its own kits the forged kite reads
   clap at 10 (one standoff tool), kite at 15 and clap_kite at 20 (each on
   two tools, the plan minimum) and clap at 25, in both contents; at 15
   and 20 the bomb share sits within 0.02 of the 0.45 that divides kite

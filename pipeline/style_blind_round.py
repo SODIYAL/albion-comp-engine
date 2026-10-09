@@ -14,18 +14,23 @@ sources:
            combos and kits, as the forge-quality sweep reads a forged
            roster (pipeline/audit_forge_quality.py); the weapons-only read
            sits beside it in the key.
-  harvest  battle-list killer parties of 10-20 from the roster artifact,
-           every weapon known and in the catalog (the eligibility rule of
+  harvest  battle-list killer parties from the roster artifact of exactly
+           the forged sizes a killer party reaches (10-20), so no size on
+           the form belongs to one source alone; every weapon known and
+           in the catalog (the eligibility rule of
            tests/tier2_blindtest.py), the training split only
            (battle % 5 != 0), never a battle pipeline/graded_battles.py
            lists or one an earlier round's key records, one case per
-           distinct roster and none a forged roster. The eligible parties,
-           in battle and party order, are shuffled by the seed and walked;
-           a party is taken while the quota of its engine label is open
-           (labels beside the style under test, so the labeller cannot
-           assume one answer). The read is weapons only at the party's
-           size, the read pipeline/derive_party_styles.py stamps on the
-           harvest.
+           distinct roster and none a forged roster. Each engine label's
+           quota (labels beside the style under test, so the labeller
+           cannot assume one answer) is dealt across the sizes in turn,
+           the largest first, which gives every size an equal share. The
+           eligible parties, in battle and party order, are shuffled by the
+           seed and walked; a party is taken while its size's plan holds a
+           slot for its label. A slot its size cannot fill takes the first
+           label in quota order the size can still supply, recorded in the
+           key. The read is weapons only at the party's size, the read
+           pipeline/derive_party_styles.py stamps on the harvest.
 
 The cases are shuffled by the seed. Each shows its size and its weapons by
 display name, sorted, and two blank fields: style (kite / clap_kite / clap
@@ -197,66 +202,120 @@ def earlier_key_battles(round_no, own_key, dirs=(TESTS,)):
     return battles, used
 
 
-def eligible_parties(doc, catalog, min_size, max_size, excluded):
+def eligible_parties(doc, catalog, sizes, excluded):
     """The harvest's eligible parties as (battle, index, weapons), in battle
-    and party order, and the counts behind them: `parties` of the sizes in
-    the population, `not_training`, one per excluded reason ({reason:
-    battle ids}), `eligible` and `rosters` (distinct among the eligible)."""
+    and party order: killer parties of exactly one of `sizes`. The counts
+    behind them, in all and per size: `parties` of the sizes in the
+    population, `not_training`, one per excluded reason ({reason: battle
+    ids}), `eligible` and `rosters` (distinct among the eligible)."""
     import party_link
-    counts = {"parties": 0, "not_training": 0}
-    counts.update({r: 0 for r in excluded})
+    keys = ["parties", "not_training"] + sorted(excluded) + ["eligible", "rosters"]
+    counts = {k: 0 for k in keys}
+    by_size = {str(n): {k: 0 for k in keys} for n in sorted(sizes)}
     eligible, rosters = [], set()
     by_battle = party_link.parties_by_battle(doc)
     for battle in sorted(by_battle, key=lambda b: (type(b).__name__, b)):
         for p in sorted(by_battle[battle], key=lambda q: q["index"]):
-            if not known_party(p, catalog, min_size, max_size):
+            n = p.get("size") or 0
+            if n not in sizes or not known_party(p, catalog, n, n):
                 continue
-            counts["parties"] += 1
-            if not _training(battle):
-                counts["not_training"] += 1
-                continue
-            why = next((r for r in sorted(excluded)
-                        if _battle_id(battle) in excluded[r]), None)
+            mine = by_size[str(n)]
+            why = ("not_training" if not _training(battle) else
+                   next((r for r in sorted(excluded)
+                         if _battle_id(battle) in excluded[r]), None))
+            for c in (counts, mine):
+                c["parties"] += 1
+                if why:
+                    c[why] += 1
             if why:
-                counts[why] += 1
                 continue
             eligible.append((battle, p["index"], list(p["weapons"])))
-            rosters.add(tuple(sorted(p["weapons"])))
-    counts["eligible"] = len(eligible)
-    counts["rosters"] = len(rosters)
+            roster = tuple(sorted(p["weapons"]))
+            for c in (counts, mine):
+                c["eligible"] += 1
+                c["rosters"] += roster not in rosters
+            rosters.add(roster)
+    counts["by_size"] = by_size
     return eligible, counts
 
 
-def draw_harvest(eligible, quotas, rng, read, skip=()):
+def deal(quotas, sizes):
+    """The per-size plan: each label's quota dealt across the sizes in turn,
+    the largest size first, the turn carrying over from one label to the
+    next, so every size takes an equal share of the cases (12 over 10, 15
+    and 20: four each) and the focal labels reach every size."""
+    order = sorted(sizes, reverse=True)
+    plan = {n: collections.OrderedDict() for n in order}
+    turn = 0
+    for label, count in quotas.items():
+        for _ in range(count):
+            n = order[turn % len(order)]
+            plan[n][label] = plan[n].get(label, 0) + 1
+            turn += 1
+    return plan
+
+
+def draw_harvest(eligible, plan, labels, rng, read, skip=()):
     """Walk the eligible parties in a seeded order and take each party whose
-    engine label's quota is still open; a roster already shown (or in
-    `skip`, the forged rosters) is passed over, so every case is a distinct
-    roster. `read(weapons)` returns the comp_identity read; a case records
-    its `sightings`, the eligible parties fielding its roster. Returns
-    (cases, walked, short): `walked` the distinct rosters read before every
-    quota filled, `short` what each quota still lacks (all zero on a
-    full draw)."""
+    size's plan still holds a slot for its engine label; a roster already
+    taken (or in `skip`, the forged rosters) is passed over, so every case
+    is a distinct roster. A slot the walk leaves open (its size has no
+    further roster of the label) takes the first label of `labels` the size
+    can still supply, recorded as a substitution. `read(weapons)` returns
+    the comp_identity read; a case records its `sightings`, the eligible
+    parties fielding its roster. Returns (cases, walked, substitutions,
+    short): `walked` the distinct rosters read before every slot filled,
+    `short` the slots no roster of the size could fill (none on a full
+    draw)."""
     sightings = collections.Counter(tuple(sorted(ws)) for _b, _i, ws in eligible)
-    need = dict(quotas)
-    seen = set(skip)
-    cases, walked = [], 0
-    for battle, index, ws in rng.sample(eligible, len(eligible)):
-        if not any(need.values()):
-            break
+    need = {n: dict(slots) for n, slots in plan.items()}
+    used = set(skip)
+    reads = {}
+    cases = []
+
+    def label_of(ws):
         roster = tuple(sorted(ws))
-        if roster in seen:
-            continue
-        seen.add(roster)
-        walked += 1
-        ci = read(ws)
-        row = read_row(ci, WEAPONS_READ)
-        if need.get(row["style"], 0) <= 0:
-            continue
-        need[row["style"]] -= 1
+        if roster not in reads:
+            reads[roster] = read_row(read(ws), WEAPONS_READ)
+        return reads[roster]
+
+    def take(battle, index, ws, row):
+        used.add(tuple(sorted(ws)))
         cases.append({"source": "harvest", "battle": battle, "party": index,
-                      "sightings": sightings[roster], "weapons": list(ws),
+                      "sightings": sightings[tuple(sorted(ws))], "weapons": list(ws),
                       "engine": row})
-    return cases, walked, need
+
+    order = rng.sample(eligible, len(eligible))
+    for battle, index, ws in order:
+        if not any(v for slots in need.values() for v in slots.values()):
+            break
+        slots = need.get(len(ws))
+        if not slots or not any(slots.values()) or tuple(sorted(ws)) in used:
+            continue
+        row = label_of(ws)
+        if slots.get(row["style"], 0) > 0:
+            slots[row["style"]] -= 1
+            take(battle, index, ws, row)
+    walked = len(reads)
+    substitutions = []
+    for n in sorted(need):
+        for label in list(need[n]):
+            while need[n][label] > 0:
+                got = None
+                for alt in (x for x in labels if x != label):
+                    got = next(((b, i, ws) for b, i, ws in order if len(ws) == n
+                                and tuple(sorted(ws)) not in used
+                                and label_of(ws)["style"] == alt), None)
+                    if got:
+                        break
+                if not got:
+                    break
+                need[n][label] -= 1
+                take(*got, label_of(got[2]))
+                substitutions.append({"size": n, "wanted": label, "took": alt})
+    short = {str(n): {k: v for k, v in slots.items() if v}
+             for n, slots in sorted(need.items()) if any(slots.values())}
+    return cases, walked, substitutions, short
 
 
 def form_lines(cases, round_no, seed, blurbs):
@@ -306,6 +365,12 @@ def generate(args):
     contents = [c.strip() for c in args.contents.split(",") if c.strip()]
     sizes = [int(s) for s in args.sizes.split(",") if s.strip()]
     key_path = os.path.splitext(args.out)[0] + ".key.json"
+    # the harvest stands at the forged sizes a killer party reaches, so no
+    # size on the form belongs to one source alone
+    harvest_sizes = sorted({n for n in sizes if args.min_size <= n <= args.max_size})
+    if not harvest_sizes:
+        sys.exit(f"no forged size lies in {args.min_size}-{args.max_size}, the killer parties' sizes")
+    plan = deal(quotas, harvest_sizes)
 
     # the forged rosters first, with no artifact in memory
     forged, probe = [], None
@@ -343,15 +408,16 @@ def generate(args):
     earlier, key_files = earlier_key_battles(args.round, key_path,
                                              (TESTS, os.path.dirname(os.path.abspath(args.out))))
     eligible, counts = eligible_parties(
-        doc, catalog, args.min_size, args.max_size,
+        doc, catalog, set(harvest_sizes),
         {"graded_battles": {_battle_id(b) for b in GRADED_BATTLES}, "earlier_forms": earlier})
     del doc
     gc.collect()
-    print(f"harvest: {counts['parties']} parties of {args.min_size}-{args.max_size}, "
-          f"not on the training split {counts['not_training']}, in a graded battle "
-          f"{counts['graded_battles']}, in an earlier round's key {counts['earlier_forms']} "
-          f"({', '.join(key_files) or 'no earlier key'}) -> eligible {counts['eligible']} "
-          f"parties, {counts['rosters']} distinct rosters", flush=True)
+    for n, c in [("all", counts)] + sorted(counts["by_size"].items(), key=lambda t: int(t[0])):
+        print(f"harvest {n}: {c['parties']} parties, not on the training split "
+              f"{c['not_training']}, in a graded battle {c['graded_battles']}, in an earlier "
+              f"round's key {c['earlier_forms']} -> eligible {c['eligible']} parties, "
+              f"{c['rosters']} distinct rosters", flush=True)
+    print(f"earlier keys read: {', '.join(key_files) or 'none'}")
 
     readers = {}
 
@@ -365,10 +431,12 @@ def generate(args):
     for c in forged:
         c["engine_weapons_only"] = read_row(read(c["weapons"]), WEAPONS_READ)
     rng = random.Random(args.seed)
-    taken, walked, short = draw_harvest(eligible, quotas, rng, read, skip=set(rosters_forged))
-    if any(short.values()):
-        sys.exit("the eligible rosters hold too few of: "
-                 + ", ".join(f"{k} ({v} short)" for k, v in short.items() if v))
+    taken, walked, subs, short = draw_harvest(eligible, plan, list(quotas), rng, read,
+                                              skip=set(rosters_forged))
+    if short:
+        sys.exit(f"too few distinct rosters at a size to fill its slots: {short}")
+    for s in subs:
+        print(f"note: size {s['size']} supplies no further {s['wanted']}; the slot takes {s['took']}")
 
     cases = forged + taken
     rng.shuffle(cases)
@@ -384,6 +452,8 @@ def generate(args):
         f.write("\n".join(lines))
 
     mix = collections.Counter(c["engine"]["style"] for c in taken)
+    mix_by_size = {str(n): dict(sorted(collections.Counter(
+        c["engine"]["style"] for c in taken if c["size"] == n).items())) for n in harvest_sizes}
     key = {
         "_note": "The answer key of the form named below: each case's source and the "
                  "engine's identity read of it. Never sent with the form.",
@@ -398,10 +468,22 @@ def generate(args):
                    "read_beside": WEAPONS_READ},
         "harvest": {"population": "battle-list killer parties, every weapon known and in "
                                   "the catalog",
-                    "sizes": [args.min_size, args.max_size],
+                    "sizes": harvest_sizes,
+                    "sizes_rule": "the forged sizes a killer party reaches "
+                                  f"({args.min_size}-{args.max_size}), so no size on the "
+                                  "form belongs to one source alone",
                     "split": f"training: battle % {HOLDOUT_MOD} != 0",
                     "read": WEAPONS_READ, "quotas": dict(quotas),
-                    "mix": dict(sorted(mix.items())), "walked": walked},
+                    "plan": {str(n): dict(plan[n]) for n in harvest_sizes},
+                    "plan_rule": "each label's quota dealt across the sizes in turn, the "
+                                 "largest size first, the turn carrying over from one label "
+                                 "to the next",
+                    "substitutions": subs,
+                    "substitution_rule": "a slot whose size supplies no further roster of "
+                                         "its label takes the first label in quota order "
+                                         "the size can still supply",
+                    "mix": dict(sorted(mix.items())), "mix_by_size": mix_by_size,
+                    "walked": walked},
         "rosters": {"path": _rel(path), "sha256": rosters_sha, "battles": n_battles},
         "counts": counts,
         "excluded": {"graded_battles": "pipeline/graded_battles.py "
@@ -415,6 +497,10 @@ def generate(args):
     print(f"wrote {_rel(args.out)}: {len(cases)} cases ({len(forged)} forged, "
           f"{len(taken)} harvested: {', '.join(f'{k} {v}' for k, v in sorted(mix.items()))}), "
           f"seed {args.seed}")
+    for n in harvest_sizes:
+        print(f"  harvested at {n}: "
+              + ", ".join(f"{k} {v}" for k, v in mix_by_size[str(n)].items())
+              + f" (plan: {', '.join(f'{k} {v}' for k, v in plan[n].items())})")
     print(f"wrote {_rel(key_path)}: the answer key; never send it with the form")
     for c in cases:
         src = (f"forged {c['content']} {c['forge_size']}" if c["source"] == "forged"
@@ -463,15 +549,6 @@ def vocab(style):
     return style if style in LABELS else "balanced"
 
 
-def band(size):
-    """The style board's size bands at 10+."""
-    if size <= 14:
-        return "10-14"
-    if size <= 19:
-        return "15-19"
-    return "20" if size == 20 else "21+"
-
-
 def match_key(cases, key):
     """True when the key's cases show exactly the form's rosters, case by
     case: the same case numbers, sizes and weapons."""
@@ -485,8 +562,7 @@ def match_key(cases, key):
 
 def evaluate(cases, key):
     """Per case the label against the engine's read, and the agreement per
-    source and size: forged rosters by the size they were forged at,
-    harvested parties by size band (10-14, 15-19, 20)."""
+    source and size (a forged roster at the size it was forged at)."""
     by = {c["case"]: c for c in key["cases"]}
     rows, unresolved = [], []
     for c in cases:
@@ -499,7 +575,7 @@ def evaluate(cases, key):
         bare = (k.get("engine_weapons_only") or {}).get("style")
         rows.append({
             "case": c["case"], "source": k["source"], "size": k["size"],
-            "group": str(k["forge_size"]) if k["source"] == "forged" else band(k["size"]),
+            "group": str(k["forge_size"] if k["source"] == "forged" else k["size"]),
             "content": k.get("content"), "forged_for": k.get("style"),
             "battle": k.get("battle"), "engine": engine,
             "strength": k["engine"].get("strength"),
@@ -560,8 +636,7 @@ def score(args):
               f"{r['confidence'] or '-':<6}{agree}"
               + (f"   (weapons only: {r['engine_weapons_only']})"
                  if r["engine_weapons_only"] and r["engine_weapons_only"] != r["engine"] else ""))
-    print("\nagreement with the engine's read (answered cases; forged by the size forged "
-          "at, harvested by size band):")
+    print("\nagreement with the engine's read (answered cases, per source and size):")
     for (source, group), n in res["groups"].items():
         print(f"  {source:<9}{group:<7}{_pct(n['agree'], n['answered']):<12}"
               f"({n['answered']} of {n['cases']} answered)")
@@ -601,8 +676,10 @@ if __name__ == "__main__":
     g.add_argument("--contents", default="blackzone_roam,territory_defense")
     g.add_argument("--sizes", default="10,15,20,25")
     g.add_argument("--quotas", default=DEFAULT_QUOTAS,
-                   help="harvested parties per engine label, label:n comma-separated")
-    g.add_argument("--min-size", type=int, default=10)
+                   help="harvested parties per engine label, label:n comma-separated, "
+                        "dealt across the harvested sizes")
+    g.add_argument("--min-size", type=int, default=10,
+                   help="harvested parties stand at the forged sizes from min-size to max-size")
     g.add_argument("--max-size", type=int, default=20)
     g.add_argument("--rosters", default=None,
                    help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
