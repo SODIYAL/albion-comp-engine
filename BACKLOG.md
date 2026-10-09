@@ -138,17 +138,6 @@ Each is decidable today from evidence already in the repo.
   beyond it; the shortfall is a support demand question (which support
   capabilities the 20-man rows under-ask for), not a role-count one. (V:
   09b, Tanks and supports)
-- **Sub-10 tanks and supports outside the Dragon Portal rest on three
-  castle_outpost comps** (roads has one, so it reads the healer row only);
-  the portal's pools read role counts of their own from their dominant
-  winners (V: 10, Optional rows and role counts for the portal pools).
-  More sub-10 published comps, or a sub-10 killboard filter that separates
-  content comps from open-world squads, would let the harvest carry them.
-  (V: 09b, Tanks and supports)
-- **Melee instant-payload bombs in clap dps** (Spiked Gauntlets, Realmbreaker)
-  generate under the standing conditional-payload rule; the "bomb builds
-  in clap" complaint has no derived rule left without a new one. (V: 09a,
-  bug round)
 - **A descriptive `gank` read at <= 14**: catch-and-execute damage core with
   no bomb share (claws, dagger pair, whispering bow — catching and
   dismounting); would label the board, stay OUT of the style rows, never be
@@ -282,6 +271,14 @@ Each is decidable today from evidence already in the repo.
 - **More caller sheets** in `data/published_comps/` remain the highest-value
   growth per observation: they are the only source of whole comps with roles,
   which calibration and the V4 gate need.
+- **Sub-10 tanks and supports outside the Dragon Portal wait for caller
+  sheets**: they rest on three castle_outpost comps (roads has one, so it
+  reads the healer row only); the portal's pools read role counts of their
+  own from their dominant winners (V: 10, Optional rows and role counts for
+  the portal pools). The harvest cannot carry them while castles and
+  outposts read as open world (the content tag), so more sub-10 published
+  comps are the evidence (V: 10, Sub-10 role counts wait for caller sheets;
+  09b, Tanks and supports).
 - **The Dragon Portal's 15-20 pool at 200 rosters**: the pool reads rows of
   its own, fitted at the floor (40 distinct rosters at the last fold; V: 10,
   The 15-20 portal pool reads its own rows), and generation at 15-20 keeps
