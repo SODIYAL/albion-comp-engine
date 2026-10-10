@@ -395,9 +395,11 @@ index row in `tests/VALIDATION.md`; manual picks always score):
 - **Dressed forge**: candidates are priced dressed; forged members arrive with
   kits prefilled (`_eng`-marked); locked members keep their supplied gear and
   are never re-dressed; doctrine passives never enter evaluation. A weapon's
-  one alternative kit (`kit_variants` v1) swaps in a piece with a capability
-  row; a worn piece with no row (the plain Cape) is named in v0 where winners
-  wear it, never as the alternative.
+  one alternative kit (`kit_variants` v1) swaps in a piece whose worn
+  configuration (the active and passive its wearers equip) carries a
+  capability row; a piece that supplies nothing as worn (the plain Cape,
+  Soldier Boots on Wanderlust) is named in v0 where winners wear it, never
+  as the alternative.
 - The forge's minimum-need bound is admissible (never more than a legal
   completion needs, never less); the expansion sort is quantized in both ports.
 - **One party, at most 20**: the game seats at most 20 players in a party,

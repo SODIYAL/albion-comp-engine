@@ -7267,7 +7267,7 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
     /* Doctrine kit variants for GENERATION (the dressed forge; mirrors
        engine.py kit_variants): v0 = the seat's context-free doctrine kit
        (off-tier slots stay unset), plus ONE divergent single-slot swap
-       to a piece with a capability row (variant cap 2 — a performance
+       to a piece whose worn configuration carries a row (variant cap 2 — a performance
        bound; a weapon with no such piece has no v1); [["v0", null]]
        for weapons with no doctrine gear. NO doctrine passives anywhere
        in this path. */
@@ -7303,14 +7303,13 @@ if (/(?:^\?|&)cta=/.test(location.search)) document.documentElement.dataset.view
       for (var oi = 1; oi < opts.length; oi++) {
         var n1 = (opts[oi].doctrine_n || [0, 0])[0];
         if (n0 && n1 < 0.5 * n0) continue;
-        /* an alternative must supply something (mirrors engine.py): a
-           piece with no capability row is never the one alternative */
-        var gx = this.gearExtras(opts[oi].gear), hasRow = false;
-        for (var gi = 0; gi < gx.length; gi++) {
-          if (Object.keys(gx[gi]).length) { hasRow = true; break; }
-        }
-        if (!hasRow) continue;
-        if (topCap(opts[oi].gear) !== t0) {
+        /* an alternative must supply something AS WORN (mirrors
+           engine.py): judged on the configuration its wearers equip, so a
+           piece whose worn active and passive carry no row is never the
+           one alternative */
+        var t1 = topCap(opts[oi].gear);
+        if (t1 === null) continue;
+        if (t1 !== t0) {
           divergent.push([slot, opts[oi].gear]);
           break;
         }

@@ -44,18 +44,6 @@ Each is decidable today from evidence already in the repo.
   Caltrops). Whether the walk reads those references, and the cap per
   effect, need a maintainer decision. The in-game damage bonus reads the style clump, not the
   spell's reach. (V: 10, Delivery reads the bundle's own spell)
-- **An alternative whose worn active supplies nothing**: kit_variants'
-  v1 needs a piece with a capability row (V: 10, An alternative kit
-  supplies something). Soldier Boots has rows, but the active its wearers
-  equip (the gear-active doctrine: Wanderlust) carries none, so in 12
-  band x style x weapon cells v1 swaps a scored pair of shoes for Soldier
-  Boots that supply nothing as worn (gang band: Heavy Crossbow under
-  balanced, clap, clap_kite and kite; group band: Great Nature Staff
-  under balanced, brawl, brawl_clap and clap_kite, Bow of Badon,
-  Quarterstaff and Cursed Staff under brawl, Demonic Staff under clap).
-  Whether the row test reads the worn active (both ports) needs a
-  maintainer decision; read that way, the Heavy Crossbow and Demonic
-  Staff cells have no v1 and the other seven take the next scored piece.
 
 ## Needs evidence a round would produce
 
