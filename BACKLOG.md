@@ -35,8 +35,6 @@ Each is decidable today from evidence already in the repo.
   per-slot tier lives only in the raw cache. Five questions: which slot
   decides "geared", tier line or relative, per size band, quality, doctrine
   votes only. (V: 09b, Seat pooling)
-- **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
-  Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
 - **The AoE geometry's provisional parts** (Q9): `radius_targets`,
   `reference_clump: 2` and travel-distance footprints stay PROVISIONAL.
   With each bundle reading its own spell, 147 geometric rows on 38 spells

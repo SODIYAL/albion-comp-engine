@@ -146,6 +146,10 @@ roles:
     weapons:
       - {id: 2H_HOLYSTAFF, source: "curation:2026-08-23 (Great Holy is brawl-only for suggestions — the stationary anchor)"}
       - {id: MAIN_HOLYSTAFF_AVALON, source: "comp:timothy_blap (brawl comp healer x2)"}
+      # A second seat on its menu: the primary stays main_healer (that
+      # record comes first), so role_class, the board column and roster
+      # order hold.
+      - {id: MAIN_NATURESTAFF, source: "killboard:party_rosters training split, battle-list killer parties of 10+: 2,195 linked builds (0.84 of 2,606 members), 563 players; plate 71% of builds, 56% of player votes (323 players; Royal Armor 945, Judicator 603), cloth 21% / 31%, leather 8% / 13% — plate at least half (the identity-chest rule)"}
 
   # -------------------------------------------------------------- support
   # Function-named (the FUNCTION — pierce, purge, heal cut — is the role,
