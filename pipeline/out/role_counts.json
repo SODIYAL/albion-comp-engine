@@ -1,9 +1,9 @@
 {
- "_generated": "2026-10-04",
+ "_generated": "2026-10-09",
  "_min_comps": 3,
  "_min_distinct": 40,
  "_source": {
-  "dressed_template_audit_sha256": "e28777795e9266a3740abc389252a980c322d8c2c11e2b4350fb285971da7f91",
+  "dressed_template_audit_sha256": "988629123610483983e17d682ba7829da3193836f690590ec95765541e329dae",
   "party_rosters_sha256": "829c8c293b0735393e66cad37602562a8d6e162c9bfc8ab77992b7c23270ba4b",
   "party_styles_sha256": "6b056a5a27cdd58bb655f2ab8d1de9ef801c70f24f8980c25f58d61ffa5b66b7"
  },
@@ -12,7 +12,7 @@
   "rule": "battle % 5 != 0 (training split; % 5 == 0 is the v4h holdout)"
  },
  "_style_min_size": 10,
- "_typical": "round(p50) where p50 >= 1; harvest below 10: healer only; harvest at 10+ and comps: healer / frontline / support; pools: the same three, and 0 where the p75 winner fields none; dps never (the residual role). Resolution: size < 10 -> pools[content][size] else comps[content][size] else pooled[size]; size >= 10 -> styles[style][size] for a declared identity style else pooled[size]",
+ "_typical": "round(p50) where p50 >= 1; harvest below 10: healer only; harvest at 10+: healer / frontline / support / dps; comps: healer / frontline / support; pools: the same three, and 0 where the p75 winner fields none; dps below 10 never (the residual role). Resolution: size < 10 -> pools[content][size] else comps[content][size] else pooled[size]; size >= 10 -> styles[style][size] for a declared identity style else pooled[size]",
  "_unit": "counts of each role (Engine.role_of) per party; harvest rows = fully-known killer parties (known_weapons == size), p10/p50/p90 per exact size (pooled) and per declared style at 10+ (a cell pools a +-1 then +-2 size window until >= _min_distinct rosters; `window` states it); comps rows = the published comps the content's targets were fitted from, below 10, >= _min_comps; pool rows = the dominant killer parties of a matchmaking pool's content at the exact size (no deaths, a kill), below 10, >= _min_distinct distinct rosters",
  "comp_cells": {
   "castle_outpost": {
@@ -2078,56 +2078,67 @@
   },
   "pooled": {
    "10": {
+    "dps": 6,
     "frontline": 2,
     "healer": 2,
     "support": 1
    },
    "11": {
+    "dps": 6,
     "frontline": 2,
     "healer": 2,
     "support": 1
    },
    "12": {
+    "dps": 6,
     "frontline": 2,
     "healer": 2,
     "support": 1
    },
    "13": {
+    "dps": 6,
     "frontline": 3,
     "healer": 2,
     "support": 1
    },
    "14": {
+    "dps": 6,
     "frontline": 3,
     "healer": 2,
     "support": 2
    },
    "15": {
+    "dps": 7,
     "frontline": 3,
     "healer": 3,
     "support": 2
    },
    "16": {
+    "dps": 7,
     "frontline": 4,
     "healer": 3,
     "support": 2
    },
    "17": {
+    "dps": 7,
     "frontline": 4,
     "healer": 3,
     "support": 2
    },
    "18": {
+    "dps": 7,
     "frontline": 4,
     "healer": 3,
     "support": 3
    },
    "19": {
+    "dps": 8,
     "frontline": 5,
     "healer": 4,
     "support": 3
    },
    "20": {
+    "dps": 8,
     "frontline": 5,
     "healer": 4,
     "support": 3
@@ -2187,56 +2198,67 @@
   "styles": {
    "brawl": {
     "10": {
+     "dps": 6,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "11": {
+     "dps": 6,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "12": {
+     "dps": 6,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "13": {
+     "dps": 7,
      "frontline": 3,
      "healer": 2,
      "support": 1
     },
     "14": {
+     "dps": 7,
      "frontline": 3,
      "healer": 3,
      "support": 1
     },
     "15": {
+     "dps": 7,
      "frontline": 3,
      "healer": 3,
      "support": 1
     },
     "16": {
+     "dps": 8,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "17": {
+     "dps": 8,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "18": {
+     "dps": 8,
      "frontline": 4,
      "healer": 4,
      "support": 2
     },
     "19": {
+     "dps": 8,
      "frontline": 4,
      "healer": 4,
      "support": 2
     },
     "20": {
+     "dps": 9,
      "frontline": 4,
      "healer": 4,
      "support": 3
@@ -2244,56 +2266,67 @@
    },
    "brawl_clap": {
     "10": {
+     "dps": 4,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "11": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 1
     },
     "12": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 1
     },
     "13": {
+     "dps": 6,
      "frontline": 3,
      "healer": 3,
      "support": 1
     },
     "14": {
+     "dps": 6,
      "frontline": 3,
      "healer": 3,
      "support": 1
     },
     "15": {
+     "dps": 7,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "16": {
+     "dps": 6,
      "frontline": 4,
      "healer": 4,
      "support": 2
     },
     "17": {
+     "dps": 6,
      "frontline": 4,
      "healer": 4,
      "support": 2
     },
     "18": {
+     "dps": 6,
      "frontline": 5,
      "healer": 4,
      "support": 3
     },
     "19": {
+     "dps": 7,
      "frontline": 5,
      "healer": 4,
      "support": 3
     },
     "20": {
+     "dps": 7,
      "frontline": 5,
      "healer": 5,
      "support": 3
@@ -2301,56 +2334,67 @@
    },
    "clap": {
     "10": {
+     "dps": 5,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "11": {
+     "dps": 6,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "12": {
+     "dps": 6,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "13": {
+     "dps": 6,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "14": {
+     "dps": 6,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "15": {
+     "dps": 7,
      "frontline": 3,
      "healer": 3,
      "support": 2
     },
     "16": {
+     "dps": 7,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "17": {
+     "dps": 7,
      "frontline": 4,
      "healer": 3,
      "support": 3
     },
     "18": {
+     "dps": 7,
      "frontline": 4,
      "healer": 3,
      "support": 3
     },
     "19": {
+     "dps": 8,
      "frontline": 4,
      "healer": 4,
      "support": 3
     },
     "20": {
+     "dps": 8,
      "frontline": 5,
      "healer": 4,
      "support": 4
@@ -2358,56 +2402,67 @@
    },
    "clap_kite": {
     "10": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 1
     },
     "11": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "12": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 1
     },
     "13": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "14": {
+     "dps": 6,
      "frontline": 4,
      "healer": 2,
      "support": 2
     },
     "15": {
+     "dps": 6,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "16": {
+     "dps": 6,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "17": {
+     "dps": 7,
      "frontline": 5,
      "healer": 3,
      "support": 3
     },
     "18": {
+     "dps": 7,
      "frontline": 5,
      "healer": 3,
      "support": 3
     },
     "19": {
+     "dps": 7,
      "frontline": 5,
      "healer": 3,
      "support": 3
     },
     "20": {
+     "dps": 7,
      "frontline": 6,
      "healer": 4,
      "support": 3
@@ -2415,56 +2470,67 @@
    },
    "kite": {
     "10": {
+     "dps": 5,
      "frontline": 2,
      "healer": 1,
      "support": 1
     },
     "11": {
+     "dps": 5,
      "frontline": 2,
      "healer": 2,
      "support": 1
     },
     "12": {
+     "dps": 5,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "13": {
+     "dps": 6,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "14": {
+     "dps": 6,
      "frontline": 3,
      "healer": 2,
      "support": 2
     },
     "15": {
+     "dps": 6,
      "frontline": 4,
      "healer": 3,
      "support": 2
     },
     "16": {
+     "dps": 6,
      "frontline": 4,
      "healer": 3,
      "support": 3
     },
     "17": {
+     "dps": 6,
      "frontline": 4,
      "healer": 3,
      "support": 3
     },
     "18": {
+     "dps": 6,
      "frontline": 5,
      "healer": 3,
      "support": 4
     },
     "19": {
+     "dps": 7,
      "frontline": 5,
      "healer": 4,
      "support": 4
     },
     "20": {
+     "dps": 7,
      "frontline": 5,
      "healer": 4,
      "support": 4

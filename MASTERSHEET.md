@@ -126,7 +126,7 @@ same fail-loud promise:
 | Style role bands, healer minima | `pipeline/templates/styles.yaml` `constraint_overrides`, `role_min_per_players` |
 | Viability exclusions, duplicate defaults | `pipeline/templates/composition.yaml` |
 | Style-fit overrides per weapon (cited facts) | `pipeline/style_overrides.yaml` |
-| Style x size rows, meta prior, typical role counts | GENERATED from the harvest — never hand-set |
+| Style x size rows, meta prior, typical role counts (dps at 10+) | GENERATED from the harvest — never hand-set |
 | Seat skeleton, plan minima (standoff), the ranged-AoE core minimum, the fielded lists at 10+ and copy allowances per style x band | GENERATED (`pipeline/derive_skeletons.py` -> `out/skeletons.json`) — a hand `per_weapon` list or a hand `ranged_aoe_core` minimum fails the build |
 
 ## Guild-approved builds — `tune:guild_builds`

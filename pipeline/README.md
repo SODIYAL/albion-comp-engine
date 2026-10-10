@@ -868,22 +868,27 @@ content, style and size:
   size window until it holds 40 rosters (`window` stated) and a style
   that never reaches it at that size has no cell (brawl_clap). Else
   `pooled[size]` — every winner at the size, any style; `balanced` never
-  reads a cell (the kit rule). healer / frontline / support.
-- dps is never gated: the residual role, and gating all four could make
-  a size infeasible (p50s do not sum to the size). A zero p50 writes
-  nothing; sizes the harvest does not reach (21+) carry no harvest row.
+  reads a cell (the kit rule). healer / frontline / support / dps.
+- dps carries a typical at 10+ only (below 10 it is the residual role).
+  Gating all four roles could make a size infeasible (p50s do not sum to
+  the size), so the forge admits a body past its role's typical by ROLE
+  SPILL once every role the pool supplies stands at its typical. A zero
+  p50 writes nothing; sizes the harvest does not reach (21+) carry no
+  harvest row.
 
 `build_dataset` refuses a missing or stale file or a row that is not a
-positive integer count of a gated role, and ships the tables as
+positive integer count of a gated role (dps in the harvest rows at 10+
+only), and ships the tables as
 `composition.role_typical`. Both ports lay `typical` onto the band, and
 the forge's prune, per-combo evaluation, 1-opt and 2-opt read one
 predicate (`_typ_ok`): WITHIN the typical slots a pick is refused when
 it would leave more unmet exclusive need (`primary_heal` -> healers; a
 seat -> its class) than slots remain — the one healer slot is never
 spent on a hybrid that forces a full healer on top; OVER the typical
-count a pick passes only while the role's own minimum is unmet or an
-unmet exclusive predicate is one this pick carries on the combo it
-equips. The per-five healer minimum stays a minimum with no maximum;
+count a pick passes only while the role's own minimum is unmet, or an
+unmet predicate this pick carries on the combo it equips is one no other
+role still under its typical could meet (an exclusive one always), or by
+role spill once every role the pool supplies stands at its typical. The per-five healer minimum stays a minimum with no maximum;
 where it exceeds the typical count the minimum wins. Manual parties
 score anything. Gates: forge F31a-k, golden T48. Explicit step, never
 part of a normal build:

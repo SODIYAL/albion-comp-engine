@@ -104,8 +104,16 @@ the index rows that record the decision.
     it only while a minimum only that role can meet is unmet — the band
     minimum, or a predicate whose satisfiers all sit in that role
     (`primary_heal`) — and never spends a typical slot on a body that
-    leaves such a minimum short. dps is never gated. Minima always win
-    over it; sizes without a row carry none; manual parties score anything.
+    leaves such a minimum short. Below 10 dps is never gated (the
+    residual role). Minima always win over it; sizes without a row carry
+    none; manual parties score anything.
+    **dps at 10+ (2026-10-09):** dps carries a typical at 10+ like the
+    other roles (the same cells, round(p50)); a body past its role's
+    typical generates only for an unmet minimum that no OTHER role still
+    under its typical could meet (an exclusive one always), or by ROLE
+    SPILL once every role the pool supplies stands at its typical (clipped
+    to what the pool can generate), so role medians that never add up to
+    the size always fill.
     **Extended to seats and plan tools (2026-09-15):** at
     10+ every PRIMARY SEAT (`Engine.seat_of`, the first uniformed menu
     role) carries the typical of the declared style's cell (else pooled)
@@ -113,8 +121,7 @@ the index rows that record the decision.
     typical generates only for an unmet minimum (cross-role included) that
     no under-typical seat of its role could meet, or by SPILL once every
     seat of the role the pool supplies stands at typical — so seat medians
-    that never add up to the role's count, and dps with no role typical,
-    always fill. Refinement never trades away the seat that justified a
+    that never add up to the role's count always fill. Refinement never trades away the seat that justified a
     spill (`_seat_mix_ok`). The plan table's STANDOFF typical is a
     generation MINIMUM (flag predicate `standoff`): a kite forged without
     its standoff tools is not the kite the engine itself would label. A
@@ -378,6 +385,7 @@ archive file and the section title to search for.
 | 10-09 | The fill order is not the forge's sequence (maintainer decision: measure it, adopt if better; measured, not adopted): each beam depth drawing from the first of healer, frontline, support, dps still under its end-state count scores the button's roster lower than today's forge in 41 of the forge sweep's 90 cells and higher in 29 (38 and 21 of the 78 at 20 and under, mean -0.108), and a refresh alternative beats the button in 45 cells against 32; the beam keeps the marginal order, the seat skeleton fixes the end state | no change | — | 10, The fill order is not the forge's sequence |
 | 10-09 | Forges stop at 20 (maintainer decision): a party caps at 20 (`PARTY_CAP`, both ports); `forge` (its `avoid` refresh with it) for a size or a locked list past 20, `replace_options` and `refine` for a party past 20 refuse before any search with one message in both ports ("a single party seats at most 20 players, N asked: forge a zerg party by party"); scoring, reading and recommending on a manual roster of any size stay allowed; the forge sweep's grid stops at 20. The tests that forged 25 forge Castle 20, the full single party, recorded | `engine.py`, `app_scoring.js`, `audit_forge_quality.py`, `style_blind_round.py` | F47, F16, F17, F18b, F19, F27, F28, T42, test_js_parity (`forge_cap`) | 10, Forges stop at 20 |
 | 10-09 | The fielded gate at 10+ (maintainer decision: adopt once the minima land, if every planner cell forges full): per style x band and pooled, the weapons the distinct killer rosters of 10+ field by the Dragon Portal's rule (5 rosters across 3 guild-sets at 5% of the cell's most fielded weapon's rosters; a cell under 40 rosters carries no list), generated at every fold into `skeletons.json` `fielded`; at 10+ wherever no pool list applies both ports bar every other weapon from suggestions and generation (the declared style's list, `balanced` the pooled one; a manual pick always scores). Chillhowl's hand exclusion at 10+ and Hellfire Hands' clap override (curation judgment) retire into the gate. v4h harvest_gear top-3 7.8% to 10.2% (+2.4 points, 95% CI +1.5 to +3.3), MRR 0.092 to 0.116, role-level 374 to 390 of 607; every planner and portal cell forges full, no filler; never-fielded slots 5.7% to 1.1% | `derive_skeletons.py`, `build_dataset.py`, `engine.py`, `app_scoring.js`, `_app.js`, `composition.yaml`, `style_overrides.yaml` | S8, S4i, T27, T28, T31, T31d, T32, F14, F17, F35e, F5, F6, F6b, F11, T29, H16, test_js_parity | 10, The fielded gate at 10+ |
+| 10-09 | dps carries a typical at 10+ (maintainer decision): `derive_role_counts.py` writes round(p50) of dps per declared style's cell and pooled size at 10+ (below 10 dps stays the residual role); a body past its role's typical generates only for an unmet minimum no other role under its typical could meet, or by ROLE SPILL once every role the pool supplies stands at its typical (or the beam finds no legal body for any role under its typical at a depth); both ports. The "dps is never gated" rule retires at 10+. The forge sweep: every cell full, no filler; supports at the winners' median in 47 of 54 cells at 10+ (39), dps at or under the typical in 50 of 54 (32); 24 of 78 cells move (14 lower, 10 higher), none below 10 | `derive_role_counts.py`, `build_dataset.py`, `engine.py`, `app_scoring.js` | F31i, F31j, test_js_parity | 10, dps carries a typical at 10+ |
 
 ## Open questions
 

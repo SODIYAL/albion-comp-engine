@@ -1413,8 +1413,9 @@ def t_role_typical():
     # the contract is where each cell reads from, never the numbers. A
     # declared style reads its own cell at the exact size when the table
     # carries one (brawl_clap 20 does at 20,718 battles; it read the
-    # pooled row while thin), balanced reads the pooled row, and dps is
-    # never a typical.
+    # pooled row while thin), balanced reads the pooled row, and dps
+    # carries a typical at 10+ only (V: 10, dps carries a typical at 10+;
+    # below 10 it is the residual role).
     import json as _json
     with open(os.path.join(ROOT, "pipeline", "out", "role_counts.json"),
               encoding="utf-8") as fh:
@@ -1422,20 +1423,33 @@ def t_role_typical():
     def expect(style, size):
         own = _typ["styles"].get(style, {}).get(str(size))
         return own if own else _typ["pooled"][str(size)]
-    check("F31i at 10+ the band carries healer / frontline / support from "
-          "the declared style's generated cell at the exact size; balanced "
-          "reads the pooled row; a style without a cell reads pooled",
+    check("F31i at 10+ the band carries healer / frontline / support / dps "
+          "from the declared style's generated cell at the exact size; "
+          "balanced reads the pooled row; a style without a cell reads "
+          "pooled; below 10 dps carries none",
           b12 == expect("brawl", 12) and c20 == expect("clap", 20)
           and bal20 == _typ["pooled"]["20"] and bc20 == expect("brawl_clap", 20)
-          and "dps" not in c20,
+          and "dps" in c20
+          and "dps" not in {k for k, v in (e._band or {}).items()
+                            if isinstance(v, dict) and "typical" in v},
           f"brawl12={b12} clap20={c20} balanced20={bal20} brawl_clap20={bc20}")
+    # RE-PINNED as recorded (V: 10, dps carries a typical at 10+): with dps
+    # typed the role typicals sum to 11 at brawl 12, so one body spills
+    # past every role's typical and sits where the score puts it (a third
+    # tank today); never more tanks than the typical plus the spill, and
+    # never the four it fielded before the typical (the cell's p90)
     eb12 = Engine(content="blackzone_roam", size=12, style="brawl")
     rb12 = eb12.forge(12)
     f12 = sum(1 for w in rb12["party"] if eb12.role_of(w) == "frontline")
-    check("F31j brawl 12 forges the typical two tanks (it fielded four, the "
-          "cell's p90) and a full roster",
-          f12 == 2 and rb12["feasible"] and len(rb12["party"]) == 12,
-          f"frontline={f12} feasible={rb12['feasible']} n={len(rb12['party'])}")
+    typ12 = eb12._role_typical()
+    spill12 = max(0, 12 - sum(typ12.values()))
+    check("F31j brawl 12 forges at most the typical two tanks plus the bodies "
+          "that spill past every role's typical (it fielded four, the cell's "
+          "p90), and a full roster",
+          typ12.get("frontline") == 2 and f12 <= 2 + spill12 and f12 < 4
+          and rb12["feasible"] and len(rb12["party"]) == 12,
+          f"frontline={f12} typical={typ12} spill={spill12} "
+          f"feasible={rb12['feasible']} n={len(rb12['party'])}")
     # every declared style forges a full, feasible roster with the rows on
     lines, ok = [], True
     for content, style, size in (("blackzone_roam", "brawl", 11),

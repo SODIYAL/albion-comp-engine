@@ -42,12 +42,17 @@ Three tables, resolved by the engine in this order (both ports,
                                      (`window` stated); a style that never
                                      reaches it at that size has no cell.
               else pooled[size]      every winner at the size, any style;
-                                     healer / frontline / support
+                                     healer / frontline / support / dps
 
-dps is never gated: it is the residual role, and gating all four could
-make a size infeasible (p50s do not sum to the size). A zero p50 writes
-nothing ("most winners field none" is not a count). Sizes the harvest does
-not reach (21+) carry no harvest row.
+At 10+ dps carries a typical like every other role (the forge seated 9-10
+dps at 20 where clap winners field 8 and clap_kite winners 7, and the
+supports under their typical). Gating all four roles could make a size
+infeasible (p50s do not sum to the size), so the forge's ROLE SPILL
+(`Engine._role_spill`, the seat skeleton's rule at the role level) admits
+the remaining bodies in any role once every role the pool supplies stands
+at its typical. Below 10 dps stays the residual role (no row). A zero p50
+writes nothing ("most winners field none" is not a count). Sizes the
+harvest does not reach (21+) carry no harvest row.
 
 Fully-known parties only (known_weapons == size: a party with an unknown
 slot cannot vote on a count); role per weapon = Engine.role_of (the one
@@ -87,7 +92,8 @@ AUDIT = os.path.join(OUT, "dressed_template_audit.json")
 COMPS_DIR = os.path.join(ROOT, "data", "published_comps")
 TARGET = os.path.join(OUT, "role_counts.json")
 ROLES = ("healer", "frontline", "support", "dps")
-GATED_ROLES = ("healer", "frontline", "support")   # dps is the residual
+GATED_ROLES = ("healer", "frontline", "support")   # below 10 dps is the residual
+TYPED_ROLES = ROLES                                 # at 10+ every role
 POOLED_SMALL_ROLES = ("healer",)                    # below 10, harvest heals only
 MIN_DISTINCT = 40   # the style_bands convention: fewer rosters, no cell
 MIN_COMPS = 3       # the content fit's `stat: median` bar
@@ -170,7 +176,7 @@ def derive_harvest(doc, labels, role_of, known, holdout_mod=HOLDOUT_MOD):
         sizes[str(size)] = cell
         if n < MIN_DISTINCT:
             continue
-        roles = GATED_ROLES if size >= STYLE_MIN_SIZE else POOLED_SMALL_ROLES
+        roles = TYPED_ROLES if size >= STYLE_MIN_SIZE else POOLED_SMALL_ROLES
         t = _typical(rows, roles)
         if t:
             typ_pooled[str(size)] = t
@@ -196,7 +202,7 @@ def derive_harvest(doc, labels, role_of, known, holdout_mod=HOLDOUT_MOD):
             for r in ROLES:
                 cell[r] = _stats(rows[r])
             style_cells.setdefault(st, {})[str(size)] = cell
-            t = _typical(rows, GATED_ROLES)
+            t = _typical(rows, TYPED_ROLES)
             if t:
                 typ_styles.setdefault(st, {})[str(size)] = t
     return sizes, style_cells, typ_pooled, typ_styles
@@ -329,9 +335,10 @@ def derive(doc, labels, audit, comps, role_of, known, holdout_mod=HOLDOUT_MOD,
                   "pool's content at the exact size (no deaths, a kill), "
                   "below 10, >= _min_distinct distinct rosters"),
         "_typical": ("round(p50) where p50 >= 1; harvest below 10: healer "
-                     "only; harvest at 10+ and comps: healer / frontline / "
-                     "support; pools: the same three, and 0 where the p75 "
-                     "winner fields none; dps never (the residual role). "
+                     "only; harvest at 10+: healer / frontline / support / "
+                     "dps; comps: healer / frontline / support; pools: the "
+                     "same three, and 0 where the p75 winner fields none; "
+                     "dps below 10 never (the residual role). "
                      "Resolution: size < 10 -> pools[content][size] else "
                      "comps[content][size] else pooled[size]; "
                      "size >= 10 -> styles[style][size] for a declared "

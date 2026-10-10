@@ -302,13 +302,17 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   MINIMUM on clap, brawl and both hybrids; kite keeps its minima; balanced
   keeps the base band.
 - **Typical role counts** (`derive_role_counts.py`, standing rule 18): the
-  band carries `typical` for healer / frontline / support — below 10 the
-  content's fitted-comps median (harvest healer row where a content has
-  under 3 comps), at 10+ the declared style's harvest cell per exact size
-  (`balanced` and thin styles read the pooled row). The forge generates a
-  body beyond it only while a minimum only that role can meet is unmet, and
-  never spends a typical slot on a body that leaves such a minimum short.
-  dps is never gated. Sizes the harvest does not reach (21+) carry none.
+  band carries `typical` for healer / frontline / support, and at 10+ for
+  dps — below 10 the content's fitted-comps median (harvest healer row
+  where a content has under 3 comps; dps there is the residual role), at
+  10+ the declared style's harvest cell per exact size (`balanced` and
+  thin styles read the pooled row). The forge generates a body beyond its
+  role's typical only for an unmet minimum no other role still under its
+  typical could meet (a minimum only that role can meet always), or by
+  ROLE SPILL once every role the pool supplies stands at its typical
+  (`_role_spill`, the seat skeleton's rule at the role level), and never
+  spends a typical slot on a body that leaves such a minimum short. Sizes
+  the harvest does not reach (21+) carry none.
 - **Role bands per style** (`styles.yaml constraint_overrides`): healer and
   frontline rows; the ranged-AoE core minimum is generated (below).
 - **Seat skeleton** (standing rule 18 extended to seats; spec

@@ -4476,8 +4476,25 @@ class Engine:
             for pn, sats in pred_sat.items():
                 pred_seats[pn] = frozenset(s for s in (self.seat_of(w2) for w2 in sats)
                                            if s is not None)
+        # ROLE SPILL (the seat skeleton's rule at the role level): the
+        # count at which each typed role stands full, its typical (or its
+        # band minimum, the larger) clipped to what the pool can generate
+        # for the role (the sum of its weapons' copy maxima) and to the
+        # role's band maximum, so a role the pool cannot fill to its
+        # typical never blocks the spill; role_cap's keys are the roles
+        # the pool supplies, the set spill inspects.
+        role_cap = {}
+        for w2 in pool:
+            r2 = self.role_of(w2)
+            role_cap[r2] = role_cap.get(r2, 0) + self._dup_gen_max(w2)
+        for r2, mx in role_max.items():
+            if r2 in role_cap:
+                role_cap[r2] = min(role_cap[r2], mx)
+        role_full = {r2: min(max(t, role_min.get(r2, 0)), role_cap.get(r2, 0))
+                     for r2, t in role_typ.items()}
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
-                "role_typ": role_typ,
+                "role_typ": role_typ, "role_cap": role_cap,
+                "role_full": role_full,
                 "pred_min": pred_min, "seat_max": dict(self._profile_max),
                 "pred_gates": pred_gates, "pred_roles": pred_roles,
                 "pred_sat": pred_sat, "seat_typ": seat_typ,
@@ -4690,16 +4707,51 @@ class Engine:
                 row[w] = v
         return row
 
+    def _role_open(self, ctx, roles, r):
+        """Can role `r` still take a body inside its typical (clipped to
+        what the pool can generate)? A role without a typical always can."""
+        full = ctx["role_full"].get(r)
+        return full is None or roles.get(r, 0) < full
+
+    def _role_spill(self, ctx, roles):
+        """ROLE SPILL: every role the pool supplies stands at its typical
+        (clipped to what the pool can generate), so the remaining bodies
+        may sit in any role; or the forge found no legal body for any role
+        still under its typical at this depth (ctx `spill`, set by the
+        beam): those roles are full for this roster. Never while a role
+        without a typical is in the pool (below 10 dps takes the
+        remainder)."""
+        if ctx.get("spill"):
+            return True
+        return not any(self._role_open(ctx, roles, r) for r in ctx["role_cap"])
+
+    def _pred_elsewhere(self, ctx, roles, preds, pn, r):
+        """Could a role other than `r` that still stands under its
+        typical carry predicate `pn`: a satisfier gate (role, seat) of
+        another role with room in its role band and its seat?"""
+        for r3, s3 in ctx["pred_gates"].get(pn) or ():
+            if r3 == r or not self._role_open(ctx, roles, r3):
+                continue
+            mx3 = ctx["role_max"].get(r3)
+            if mx3 is not None and roles.get(r3, 0) >= mx3:
+                continue
+            smx3 = ctx["seat_max"].get(s3) if s3 else None
+            if smx3 is not None and preds.get(s3, 0) >= smx3:
+                continue
+            return True
+        return False
+
     def _typ_ok(self, ctx, roles, preds, w, contrib):
         """May `w` join a roster whose role counts are `roles`, given the
-        TYPICAL count of its role (F31)? A body beyond
-        the typical count is generated only when a minimum only that role
-        can meet still demands it: the role's own band minimum, or an
-        unmet predicate minimum this pick contributes to whose satisfiers
-        all sit in this role (primary_heal -> healers; a seat -> its
-        class). A cross-role predicate never lifts it - another role can
-        carry that. `contrib` is the pick's predicate set (optimistic in
-        the prune, exact per combo in the evaluation).
+        TYPICAL count of its role (F31; dps at 10+ since the dps typical)?
+        A body beyond the typical count is generated only for an unmet
+        minimum this pick contributes to that no OTHER role still under its
+        typical could meet - the role's own band minimum, a predicate whose
+        satisfiers all sit in this role (primary_heal -> healers; a seat ->
+        its class), or a cross-role one whose other satisfier roles stand
+        full - or by ROLE SPILL once every role the pool supplies stands at
+        its typical (_role_spill). `contrib` is the pick's predicate set
+        (optimistic in the prune, exact per combo in the evaluation).
 
         SEAT branch (the seat skeleton): once the role allows
         the body, its PRIMARY SEAT must too — a seat at its typical count
@@ -4708,8 +4760,8 @@ class Engine:
         pick meets it (minima win), or by SPILL: every seat of the role
         the pool can still supply stands at its typical, so the role's
         remaining bodies may sit anywhere. Spill is what keeps every size
-        feasible (seat medians never add up to the role's count; dps has
-        no role typical at all). No cell for the size = no seat gate."""
+        feasible (seat medians never add up to the role's count). No cell
+        for the size = no seat gate."""
         r = self.role_of(w)
         typ = ctx["role_typ"].get(r)
         excl = [(pn, mn) for pn, mn in ctx["pred_min"].items()
@@ -4729,11 +4781,16 @@ class Engine:
                     if unmet > remaining:
                         return False
             else:
-                for pn, mn in excl:
-                    if pn in contrib and preds.get(pn, 0) < mn:
+                # past the typical: an unmet minimum this pick carries that
+                # no other role still under its typical could meet (an
+                # exclusive one always), else the role spill
+                for pn, mn in ctx["pred_min"].items():
+                    if pn in contrib and preds.get(pn, 0) < mn \
+                            and not self._pred_elsewhere(ctx, roles, preds, pn, r):
                         break
                 else:
-                    return False
+                    if not self._role_spill(ctx, roles):
+                        return False
         if not ctx.get("seat_gate"):
             return True
         s = self.seat_of(w)
@@ -4801,14 +4858,22 @@ class Engine:
                 if mx2 is not None \
                         and roles.get(r2, 0) + (1 if r2 == r else 0) >= mx2:
                     continue
-                # typical (F31): the gate is open past the typical
-                # count only for a predicate this role alone satisfies
+                # typical (F31): past the typical count the gate is open
+                # only as _typ_ok opens it - no other satisfier role still
+                # under its typical (an exclusive predicate always), or the
+                # role spill - counted after this pick
                 ty2 = ctx["role_typ"].get(r2)
                 n2 = roles.get(r2, 0) + (1 if r2 == r else 0)
                 if ty2 is not None and n2 >= ty2 \
-                        and n2 >= ctx["role_min"].get(r2, 0) \
-                        and ctx["pred_roles"].get(pn) != frozenset([r2]):
-                    continue
+                        and n2 >= ctx["role_min"].get(r2, 0):
+                    after = dict(roles)
+                    after[r] = after.get(r, 0) + 1
+                    after_p = dict(preds)
+                    if p0:
+                        after_p[p0] = after_p.get(p0, 0) + 1
+                    if self._pred_elsewhere(ctx, after, after_p, pn, r2) \
+                            and not self._role_spill(ctx, after):
+                        continue
                 smx2 = ctx["seat_max"].get(s2) if s2 else None
                 if smx2 is not None \
                         and preds.get(s2, 0) + (1 if s2 == p0 else 0) >= smx2:
@@ -4967,19 +5032,26 @@ class Engine:
         for depth in range(len(locked), size):
             slots_left_after = size - depth - 1
             expansions = []
-            for bi in range(len(beams)):
-                beam = beams[bi]
-                for w in cand_pool:
-                    if not self._forge_feasible(ctx, beam["counts"], beam["roles"],
-                                                beam["preds"], beam["groups"], w,
-                                                slots_left_after):
-                        continue
-                    pick = self._forge_eval_pick(ctx, beam, w, slots_left_after)
-                    if pick is None:
-                        continue      # no combo keeps the minima satisfiable
-                    sc, combo, vkey, vgears = pick[0], pick[4], pick[5], pick[6]
-                    expansions.append((beam["score"] + sc, bi, w, combo,
-                                       vkey, vgears))
+            # ROLE SPILL at the depth: where no beam can add a body to any
+            # role under its typical, those roles are full for the roster
+            # and the depth reads the spill (bodies past the typical)
+            for dctx in ((ctx, dict(ctx, spill=True)) if ctx["role_full"]
+                         else (ctx,)):
+                for bi in range(len(beams)):
+                    beam = beams[bi]
+                    for w in cand_pool:
+                        if not self._forge_feasible(dctx, beam["counts"], beam["roles"],
+                                                    beam["preds"], beam["groups"], w,
+                                                    slots_left_after):
+                            continue
+                        pick = self._forge_eval_pick(dctx, beam, w, slots_left_after)
+                        if pick is None:
+                            continue      # no combo keeps the minima satisfiable
+                        sc, combo, vkey, vgears = pick[0], pick[4], pick[5], pick[6]
+                        expansions.append((beam["score"] + sc, bi, w, combo,
+                                           vkey, vgears))
+                if expansions:
+                    break
             if not expansions:
                 feasible = False
                 break

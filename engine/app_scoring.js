@@ -4074,8 +4074,24 @@
         predSeats[pn3] = ss;
       }
     }
+    /* ROLE SPILL (mirrors engine.py _forge_ctx): the count at which each
+       typed role stands full, its typical (or band minimum, the larger)
+       clipped to what the pool can generate for the role and to the
+       role's band maximum; roleCap's keys are the roles the pool
+       supplies, the set spill inspects. */
+    var roleCap = {}, roleFull = {};
+    for (var wi3 = 0; wi3 < pool.length; wi3++) {
+      var r3 = this.roleOf(pool[wi3]);
+      roleCap[r3] = (roleCap[r3] || 0) + this._dupGenMax(pool[wi3]);
+    }
+    for (var rm in roleMax) {
+      if (roleCap[rm] !== undefined) roleCap[rm] = Math.min(roleCap[rm], roleMax[rm]);
+    }
+    for (var rt in roleTyp) {
+      roleFull[rt] = Math.min(Math.max(roleTyp[rt], roleMin[rt] || 0), roleCap[rt] || 0);
+    }
     return { pool: pool, roleMin: roleMin, roleMax: roleMax,
-             roleTyp: roleTyp,
+             roleTyp: roleTyp, roleCap: roleCap, roleFull: roleFull,
              predMin: predMin, seatMax: seatMax, predGates: predGates,
              predRoles: predRoles, predSat: predSat,
              seatTyp: seatTyp, seatGate: seatGate, roleSeats: roleSeats,
@@ -4282,11 +4298,47 @@
     return !!(pr && pr.n === 1 && pr.roles[role]);
   };
 
+  CompEngine.prototype._roleOpen = function (ctx, roles, r) {
+    /* can role r still take a body inside its typical (clipped to what
+       the pool can generate)? a role without a typical always can
+       (mirrors engine.py _role_open) */
+    var full = ctx.roleFull[r];
+    return full === undefined || (roles[r] || 0) < full;
+  };
+
+  CompEngine.prototype._roleSpill = function (ctx, roles) {
+    /* ROLE SPILL: every role the pool supplies stands at its typical, or
+       the beam found no legal body for any role under its typical at this
+       depth (ctx.spill) (mirrors engine.py _role_spill) */
+    if (ctx.spill) return true;
+    for (var r in ctx.roleCap) { if (this._roleOpen(ctx, roles, r)) return false; }
+    return true;
+  };
+
+  CompEngine.prototype._predElsewhere = function (ctx, roles, preds, pn, r) {
+    /* could a role other than r still under its typical carry predicate
+       pn: a satisfier gate of another role with room in its role band and
+       its seat? (mirrors engine.py _pred_elsewhere) */
+    var gates = ctx.predGates[pn] || [];
+    for (var gi = 0; gi < gates.length; gi++) {
+      var r3 = gates[gi][0], s3 = gates[gi][1];
+      if (r3 === r || !this._roleOpen(ctx, roles, r3)) continue;
+      var mx3 = ctx.roleMax[r3];
+      if (mx3 !== undefined && (roles[r3] || 0) >= mx3) continue;
+      if (s3 !== undefined && ctx.seatMax[s3] !== undefined &&
+          (preds[s3] || 0) >= ctx.seatMax[s3]) continue;
+      return true;
+    }
+    return false;
+  };
+
   CompEngine.prototype._typOk = function (ctx, roles, preds, w, contrib) {
     /* May `w` join a roster whose role counts are `roles`, given the
-       TYPICAL count of its role (F31; mirrors engine.py _typ_ok)? A body
-       beyond the typical count is generated only when a minimum only
-       that role can meet still demands it.
+       TYPICAL count of its role (F31; dps at 10+; mirrors engine.py
+       _typ_ok)? A body beyond the typical count is generated only for an
+       unmet minimum this pick carries that no other role still under its
+       typical could meet, or by ROLE SPILL once every role the pool
+       supplies stands at its typical.
        SEAT branch (the seat skeleton): once the role allows the body its
        PRIMARY SEAT must too - a seat at its typical admits another body
        only when an unmet minimum this pick meets could not be met by an
@@ -4310,12 +4362,14 @@
           if (unmet > remaining) return false;
         }
       } else {
+        /* past the typical: an unmet minimum this pick carries that no
+           other role under its typical could meet, else the role spill */
         var lifted = false;
         for (pn in ctx.predMin) {
           if (contrib[pn] && (preds[pn] || 0) < ctx.predMin[pn] &&
-              this._predExclusive(ctx, pn, r)) { lifted = true; break; }
+              !this._predElsewhere(ctx, roles, preds, pn, r)) { lifted = true; break; }
         }
-        if (!lifted) return false;
+        if (!lifted && !this._roleSpill(ctx, roles)) return false;
       }
     }
     if (!ctx.seatGate) return true;
@@ -4372,12 +4426,19 @@
         var mx2 = ctx.roleMax[r2];
         if (mx2 !== undefined &&
             (roles[r2] || 0) + (r2 === r ? 1 : 0) >= mx2) continue;
-        /* typical (F31): the gate is open past the typical count
-           only for a predicate this role alone satisfies */
+        /* typical (F31): past the typical count the gate is open only
+           as _typOk opens it - no other satisfier role under its typical,
+           or the role spill - counted after this pick (mirrors engine.py) */
         var ty2 = ctx.roleTyp[r2];
         var n2 = (roles[r2] || 0) + (r2 === r ? 1 : 0);
-        if (ty2 !== undefined && n2 >= ty2 && n2 >= (ctx.roleMin[r2] || 0) &&
-            !this._predExclusive(ctx, pn, r2)) continue;
+        if (ty2 !== undefined && n2 >= ty2 && n2 >= (ctx.roleMin[r2] || 0)) {
+          var after = {}, afterP = {};
+          for (var ak in roles) after[ak] = roles[ak];
+          after[r] = (after[r] || 0) + 1;
+          for (var pk2 in preds) afterP[pk2] = preds[pk2];
+          if (p0 !== undefined) afterP[p0] = (afterP[p0] || 0) + 1;
+          if (this._predElsewhere(ctx, after, afterP, pn, r2) && !this._roleSpill(ctx, after)) continue;
+        }
         if (s2 !== undefined && ctx.seatMax[s2] !== undefined &&
             (preds[s2] || 0) + (s2 === p0 ? 1 : 0) >= ctx.seatMax[s2])
           continue;

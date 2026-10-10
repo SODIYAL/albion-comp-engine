@@ -58,14 +58,6 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
-  4 on clap and 3 on clap_kite; the forge sweep: 2 in five of the six clap
-  and clap_kite cells at 20 and 1 at Castle 20 clap, under the cell's p10
-  of 2,
-  notes/findings/2026-10-09-forge-quality.md): a typical only bars bodies
-  beyond it; the shortfall is a support demand question (which support
-  capabilities the 20-man rows under-ask for), not a role-count one. (V:
-  09b, Tanks and supports)
 - **A descriptive `gank` read at <= 14**: catch-and-execute damage core with
   no bomb share (claws, dagger pair, whispering bow — catching and
   dismounting); would label the board, stay OUT of the style rows, never be

@@ -2703,7 +2703,8 @@ def load_role_typical():
     out/role_counts.json; F31 / T48): the harvest p50 per
     exact size at 10+ (pooled, and per declared style), the median of the
     fitted published comps per content below 10, healer / frontline /
-    support (dps never — the residual role). Attached to the dataset's
+    support, and dps at 10+ only (below 10 the residual role; at 10+ the
+    forge's role spill keeps every size feasible). Attached to the dataset's
     `composition.role_typical` = {pooled: {size: {role: n}}, styles:
     {style: {size: {...}}}, comps: {content: {size: {...}}},
     style_min_size}; the engine resolves one row for its content, style
@@ -2739,18 +2740,24 @@ def load_role_typical():
         sys.exit("out/role_counts.json: typical must carry pooled / styles "
                  "/ comps / pools")
 
+    style_min = int(doc.get("_style_min_size") or 10)
+
     def rows_of(table, where, zero_ok=False):
         # a matchmaking pool's row may state ZERO (three winners in four
         # field none of the role: derive_role_counts.py `pools`); every
-        # other table states positive counts only
+        # other table states positive counts only. dps is a gated role in
+        # the harvest rows at 10+ only (below 10 the residual role)
         out = {}
         for size, roles in (table or {}).items():
             if not str(size).isdigit() or not isinstance(roles, dict):
                 sys.exit(f"out/role_counts.json: bad typical row {where}"
                          f"[{size!r}]")
+            harvest = where == "pooled" or where.startswith("styles[")
+            gated = ("healer", "frontline", "support") + (
+                ("dps",) if harvest and int(size) >= style_min else ())
             row = {}
             for role, n in roles.items():
-                if role not in ("healer", "frontline", "support") \
+                if role not in gated \
                         or isinstance(n, bool) or not isinstance(n, int) \
                         or n < (0 if zero_ok else 1):
                     sys.exit(f"out/role_counts.json: typical {where}[{size}]"
@@ -2767,7 +2774,7 @@ def load_role_typical():
                      for c, rows in sorted((typ["comps"] or {}).items())},
            "pools": {c: rows_of(rows, f"pools[{c}]", zero_ok=True)
                      for c, rows in sorted((typ["pools"] or {}).items())},
-           "style_min_size": int(doc.get("_style_min_size") or 10)}
+           "style_min_size": style_min}
     return out
 
 
