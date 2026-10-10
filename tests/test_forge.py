@@ -56,9 +56,27 @@ CONTENTS = ["ancient_lands", "blackzone_roam", "castle", "castle_outpost",
             "faction_war", "roads", "territory_defense"]
 LARGE = ["blackzone_roam", "castle", "faction_war", "territory_defense"]
 STYLES = ["balanced", "brawl", "brawl_clap", "clap", "kite"]
-EXCLUDED_TRIO = ("MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON")
+# Chillhowl left the hand exclusion: at 10+ the fielded gate decides it (F6b)
+EXCLUDED_PAIR = ("MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF")
 
 RESULTS = []
+_UG = []
+
+
+def ungated(**kw):
+    """An engine on a dataset copy without the fielded lists at 10+: the
+    pins on the style, generation-fit and cost rules read the pools those
+    rules leave (the fielded gate is its own layer, S8)."""
+    if not _UG:
+        import json as _j, tempfile as _t
+        e0 = Engine()
+        d = _j.loads(_j.dumps(e0.data))
+        d["composition"]["skeleton"]["fielded"] = {}
+        path = os.path.join(_t.gettempdir(), "bion_forge_no_fielded.json")
+        with open(path, "w", encoding="utf-8") as fh:
+            _j.dump(d, fh)
+        _UG.append(path)
+    return Engine(dataset_path=_UG[0], **kw)
 
 
 def check(name, cond, detail=""):
@@ -267,7 +285,7 @@ def t_size11_matrix():
                             f"better pick available {best:+.4f})")
             if [tuple(x) for x in (r2["party"],)] != [tuple(party)]:
                 problems.append("nondeterministic")
-            hit = [w for w in party if w in EXCLUDED_TRIO]
+            hit = [w for w in party if w in EXCLUDED_PAIR]
             if hit:
                 problems.append(f"excluded weapon {hit}")
             # Validate against the engine's EFFECTIVE band — the base
@@ -314,7 +332,7 @@ def t_size11_matrix():
             if problems:
                 ok = False
                 lines.append(f"{content}/{style}: {'; '.join(problems)}")
-    check("F5 size-11 matrix: full, legal, deterministic, no excluded trio, no filler",
+    check("F5 size-11 matrix: full, legal, deterministic, no excluded weapon, no filler",
           ok, "; ".join(lines) or "20/20 forges clean")
 
 
@@ -322,9 +340,9 @@ def t_size11_matrix():
 def t_exclusions():
     e = Engine(content="territory_defense", size=11)
     offered = set(e.suggest_pool())
-    barred = all(w not in offered for w in EXCLUDED_TRIO)
+    barred = all(w not in offered for w in EXCLUDED_PAIR)
     recs = {r["weapon"] for r in e.recommend([], top_n=200)}
-    not_recommended = all(w not in recs for w in EXCLUDED_TRIO)
+    not_recommended = all(w not in recs for w in EXCLUDED_PAIR)
     # manual party containing an excluded weapon still loads and scores...
     party = ["MAIN_CURSEDSTAFF", "MAIN_HOLYSTAFF_AVALON", "2H_MACE"]
     score = e.comp_score(party)
@@ -334,10 +352,34 @@ def t_exclusions():
     flagged = review[0]["off_comp"] and not review[1]["off_comp"]
     # small content does not exclude them
     e7 = Engine(content="castle_outpost", size=7)
-    small_ok = all(w in set(e7.suggest_pool()) for w in EXCLUDED_TRIO)
+    small_ok = all(w in set(e7.suggest_pool()) for w in EXCLUDED_PAIR)
     check("F6 exclusions bar suggestions only; manual members score, flagged off-comp",
           barred and not_recommended and scoreable and flagged and small_ok,
           f"score={score:.3f}, off_comp flags: {[m['off_comp'] for m in review]}")
+    # F6b Chillhowl carries no hand exclusion: at 10+ it is in the
+    # suggestion pool exactly where the declared style's fielded list
+    # (balanced: the pooled list) carries it, and a manual pick scores
+    chill = "MAIN_FROSTSTAFF_AVALON"
+    fl = (e.data["composition"].get("skeleton") or {}).get("fielded") or {}
+    bad, offered_in = [], []
+    for st in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+        for size in (10, 15, 20):
+            ex = Engine(content="blackzone_roam", size=size, style=st)
+            band = next((bk for bk, lim in (fl.get("bands") or {}).items()
+                         if lim[0] <= size <= lim[1]), None)
+            row = ((fl.get("pooled") or {}).get(band) if st == "balanced"
+                   else ((fl.get("styles") or {}).get(st) or {}).get(band))
+            got = chill in set(ex.suggest_pool())
+            if got:
+                offered_in.append(f"{st}/{size}")
+            if row is not None and got != (chill in row) and chill not in ex._gen_situational:
+                bad.append(f"{st}/{size}")
+    sc = Engine(content="blackzone_roam", size=20).comp_score(
+        [chill, "MAIN_HOLYSTAFF_AVALON", "2H_MACE"])
+    check("F6b Chillhowl has no hand exclusion at 10+: the fielded gate decides "
+          "it per style x band, and a manual Chillhowl scores",
+          not bad and sc == sc and sc != 0.0,
+          f"offered at {offered_in or 'none'}; mismatches {bad}")
 
 
 # ---------------------------------------------------------- F7 floor clamp
@@ -494,7 +536,7 @@ def t_locked_forge():
     r = e.forge(11, locked=locked)
     kept = r["party"][:2] == locked and r["locked"] == 2
     full = len(r["party"]) == 11
-    regen = [w for w in r["party"][2:] if w in EXCLUDED_TRIO]
+    regen = [w for w in r["party"][2:] if w in EXCLUDED_PAIR]
     check("F11 forge keeps locked members verbatim, never generates excluded ones",
           kept and full and not regen,
           f"party head {r['party'][:3]}, generated excluded: {regen}")
@@ -586,10 +628,16 @@ def t_cost_gate():
     requirement at 25+)."""
     CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL",
                "2H_DUALCROSSBOW_CRYSTAL")
-    pools = [set(Engine(content=c, size=n).suggest_pool())
+    # RE-PINNED as recorded (V: 10, The fielded gate at 10+): no COST rule
+    # bars a crystal weapon, so at 10+ the pools read are those without the
+    # fielded lists; the fielded gate may bar one where winners do not
+    # field it, recorded in the detail line
+    pools = [set(ungated(content=c, size=n).suggest_pool())
              for c, n in (("castle_outpost", 7), ("roads", 7),
                           ("blackzone_roam", 10), ("blackzone_roam", 20))]
     admitted = all(w in p for p in pools for w in CRYSTAL)
+    fielded_bars = sorted({f"{w}@{n}" for n in (10, 20) for w in CRYSTAL
+                           if Engine(content="blackzone_roam", size=n).is_unfielded(w)})
     e = Engine(content="blackzone_roam", size=20, style="brawl")
     review = e.swap_review(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"])
     no_flag = all("off_budget" not in m for m in review)
@@ -603,11 +651,12 @@ def t_cost_gate():
             and abs(e._targets["anti_zone"] - 1.8 * 6 / 11) < 1e-9
             and abs(e25._targets["anti_zone"] - 1.8) < 1e-9
             and abs(e30._targets["anti_zone"] - 1.8 * 30 / 25) < 1e-9)
-    check("F14 no cost gate: crystal in every suggest pool, no off_budget "
-          "flag, anti_zone has no row through 14, ramps to its measured "
-          "value at 25 and grows beyond",
+    check("F14 no cost gate: crystal in every suggest pool the cost rules "
+          "leave, no off_budget flag, anti_zone has no row through 14, ramps "
+          "to its measured value at 25 and grows beyond",
           admitted and no_flag and no_row_7 and ramp,
-          f"admitted={admitted} no_flag={no_flag} no_row_7={no_row_7} "
+          f"admitted={admitted} fielded gate bars {fielded_bars or 'none'} "
+          f"no_flag={no_flag} no_row_7={no_row_7} "
           f"t14={e14._targets.get('anti_zone')} t20={e._targets.get('anti_zone')} "
           f"t25={e25._targets.get('anti_zone')} t30={e30._targets.get('anti_zone')}")
 
@@ -746,7 +795,10 @@ def t_generation_fit():
     e = Engine(content="faction_war", size=15)
     dagger, bolt = by_name(e, "Dagger"), by_name(e, "Boltcasters")
     hxbow = by_name(e, "Heavy Crossbow")
-    pool = set(e.suggest_pool())
+    # RE-PINNED as recorded (V: 10, The fielded gate at 10+): the
+    # generation-fit gate's pool, without the fielded lists; the fielded
+    # gate bars Heavy Crossbow at 15 balanced (the pooled list)
+    pool = set(ungated(content="faction_war", size=15).suggest_pool())
     bal_ok = dagger not in pool and bolt not in pool and hxbow in pool
     # situational is manual territory: scores, and is NOT flagged off_style
     party = [dagger, "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
@@ -1687,10 +1739,22 @@ def t_portal_fielded():
     e10 = Engine(content="ancient_lands", size=10)
     e20 = Engine(content="ancient_lands", size=20)
     r5 = Engine(content="roads", size=5)
-    check("F35e outside every listed pool nothing is gated: the portal at 10 and 20 and a content "
-          "without lists keep their suggestion pools",
-          not e10._unfielded and not e20._unfielded and not r5._unfielded
-          and not any(r5.is_unfielded(w) for w in r5.pool),
+    # at 10+ the fielded gate every content reads (S8): balanced reads the
+    # pooled band list of the killer parties of 10+
+    ofl = (e5.data["composition"].get("skeleton") or {}).get("fielded") or {}
+
+    def pooled_list(size):
+        for bk, lim in (ofl.get("bands") or {}).items():
+            if lim[0] <= size <= lim[1]:
+                return set((ofl.get("pooled") or {}).get(bk) or [])
+        return set()
+    open10 = e10._unfielded == {w for w in e10.pool if w not in pooled_list(10)}
+    open20 = e20._unfielded == {w for w in e20.pool if w not in pooled_list(20)}
+    check("F35e outside every listed pool the pool lists gate nothing: below 10 a content without "
+          "lists keeps its suggestion pool; at 10+ the portal reads the fielded gate every content "
+          "reads (balanced: the pooled band list, S8)",
+          not r5._unfielded and not any(r5.is_unfielded(w) for w in r5.pool)
+          and open10 and open20 and bool(e10._unfielded) and bool(e20._unfielded),
           f"portal10={len(e10._unfielded)} portal20={len(e20._unfielded)} roads5={len(r5._unfielded)}")
 
 

@@ -222,7 +222,11 @@ viability:
     #     weapon that gains a CURRENT approved canonical large-group build
     #     (exact weapon, party size >= min_size) so the entry can be
     #     lifted — the data clears the gate, not a code change.
-    - weapons: [MAIN_CURSEDSTAFF, 2H_IRONCLADEDSTAFF, MAIN_FROSTSTAFF_AVALON]
+    # Chillhowl (MAIN_FROSTSTAFF_AVALON) left this list: a published 10-man
+    # (AvA Raid) fields it, and at 10+ the fielded gate bars it wherever
+    # the style's killer parties do not field it (V: 10, The fielded gate
+    # at 10+).
+    - weapons: [MAIN_CURSEDSTAFF, 2H_IRONCLADEDSTAFF]
       min_size: 10
       allow: {}
       evidence:

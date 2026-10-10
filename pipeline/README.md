@@ -781,6 +781,14 @@ one vote, and writes `out/skeletons.json`:
   none filled reads the pooled row. The engine lays the declared style's
   row (else pooled; `balanced` reads pooled) on the band at 10+, replacing
   the key; below 10 there is none;
+- **fielded**: per style x band and pooled, the weapons the cell's
+  rosters field by the Dragon Portal's rule (`derive_portal_rows.fielded`,
+  imported: in 5+ distinct rosters across 3+ guild-sets and in 5% of the
+  rosters of the cell's most fielded weapon), with the cell's counts; a
+  cell under 40 rosters carries no list. Both engine ports gate
+  suggestions and generation with it at 10+ wherever no pool list
+  applies (the declared style's list, `balanced` the pooled one); a cell
+  without a list gates nothing and a manual pick always scores;
 - **copies**: per style x band (10-14 / 15-19 / 20+) and pooled, for every
   weapon fielded by >= 40 rosters: copies p50 / p90, the shares with 2+
   and 3+, `free` = round(p50), `max` = ceil(p90) — the allowance the
@@ -793,8 +801,10 @@ all-battles derivation, a hand `composition.duplication.per_weapon` and a
 hand `ranged_aoe_core` minimum in any `constraint_bands` or
 `constraint_overrides` row, validates every seat against `roles.yaml`,
 every weapon against the catalogue and every minima row against the bands
-(the pooled row must carry every band), and ships `composition.skeleton`
-(seats, plan, minima) + `duplication.per_weapon_cells`.
+(the pooled row must carry every band), every fielded list against the
+bands and the catalogue (non-empty, each weapon once), and ships
+`composition.skeleton` (seats, plan, minima, fielded) +
+`duplication.per_weapon_cells`.
 Gate: `tests/test_skeletons.py`.
 
 ```text

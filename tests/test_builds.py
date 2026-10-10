@@ -306,7 +306,7 @@ check("H15 the same source within solo bounds validates",
       not any("solo/1v1" in x for x in bl.validate_comp_doc(ml_doc, LINES)))
 
 # ---- H.16 exact-weapon eligibility, no family-level leakage ---------------------
-excluded = ["MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON"]
+excluded = ["MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF"]
 # What silently re-admits an excluded weapon is an APPROVED/CANONICAL record,
 # which is exactly what composition.yaml's documented exit path watches for:
 # the evidence gate flags any excluded weapon that gains a CURRENT approved
@@ -316,18 +316,12 @@ excluded = ["MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON"]
 # which the design expects.
 #
 # This assertion used to be "no build records AT ALL", which was true only
-# while the corpus was small. The albioncompo ingest (23 comps) brought
-# one genuine candidate record (below), so the check now separates
-# the two cases instead of failing on expected evidence.
-KNOWN_CANDIDATE_EVIDENCE = {
-    # weapon -> build_id. OPEN QUESTION: this record CONTRADICTS the stated
-    # reason for excluding the weapon (no caller sheet, published build or
-    # observation fields them at party size >= 10). AvA Raid is a published
-    # 10-man that fields it. Still candidate, so the exclusion stands and the
-    # gate has not fired — but the premise is now weaker than when it was
-    # written. Flagged for a maintainer decision, not silently lifted.
-    "MAIN_FROSTSTAFF_AVALON": {"albioncompo_ava_raid_2026_05:comp:6"},
-}
+# while the corpus was small; the check separates the two cases instead of
+# failing on expected evidence. The one candidate record it listed, AvA
+# Raid's Chillhowl (a published 10-man), went with Chillhowl's exclusion:
+# at 10+ the fielded gate decides Chillhowl from the harvest (V: 10, The
+# fielded gate at 10+).
+KNOWN_CANDIDATE_EVIDENCE = {}   # weapon -> build ids recorded deliberately
 leaks, readmit = [], []
 for w in excluded:
     for ct, by_w in INDEX["by_content"].items():

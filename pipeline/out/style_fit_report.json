@@ -14,7 +14,6 @@
   "overridden": [
    "2H_HARPOON_HELL",
    "2H_HOLYSTAFF",
-   "2H_KNUCKLES_HELL",
    "2H_SHAPESHIFTER_HELL",
    "2H_TRIDENT_UNDEAD",
    "2H_WARBOW",
@@ -3551,7 +3550,7 @@
   },
   "2H_KNUCKLES_HELL": {
    "attackrange": 1.5,
-   "basis": "curated_override",
+   "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
@@ -3579,8 +3578,8 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "situational",
-     "group": "situational",
+     "gang": "fits",
+     "group": "fits",
      "trio": "fits"
     },
     "clap_kite": {
@@ -3595,11 +3594,6 @@
     }
    },
    "nonstack_member": false,
-   "override": {
-    "as_of": "2026-08-24",
-    "reason": "Curation judgment (forge-quality validation round 4): a flex bomber like Hellfire is usually a brawl-clap weapon, not a clap option; Realmbreaker works in clap because it brings several things at once \u2014 a health cut, a ranged E, an easy engage follow-up. The flex all-rounder derivation grades both as clap-fits; the split: Hellfire's Boulder Toss is a brawler's ranged tool, not a clap bomb core, so clap drops to situational (the generation-fit gate then keeps it out of DEFAULT clap comps while brawl-clap \u2014 its home \u2014 keeps it, and a caller can always pick it manually). Realmbreaker stays as derived.",
-    "source": "curation:2026-08-24 (forge-quality validation round)."
-   },
    "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,

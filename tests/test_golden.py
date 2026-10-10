@@ -770,17 +770,36 @@ def run():
     # was RETIRED — see T42. Contract details are pinned in
     # tests/test_forge.py F14-F16; this golden pins the recorded calls at
     # the suggestion surface where the validation round saw them.
-    e_clap10 = Engine(content="blackzone_roam", size=10, style="clap")
+    # RE-PINNED as recorded (V: 10, The fielded gate at 10+): T27, T28, T31,
+    # T31d and T32 pin the style and generation-fit gates, so at 10+ they
+    # read the suggestion pools of a dataset copy without the fielded
+    # lists (`ug`); the fielded gate, a separate layer (S8), may bar a
+    # weapon these gates keep, and each detail line records where it does.
+    import json as _jug, tempfile as _tfug
+    _dug = _jug.loads(_jug.dumps(E.data))
+    _dug["composition"]["skeleton"]["fielded"] = {}
+    _ug_path = os.path.join(_tfug.gettempdir(), "bion_golden_no_fielded.json")
+    with open(_ug_path, "w", encoding="utf-8") as _fug:
+        _jug.dump(_dug, _fug)
+
+    def ug(**kw):
+        return Engine(dataset_path=_ug_path, **kw)
+
+    def barred(e, ws):
+        return [e.weapons[w]["display_name"] for w in ws if e.is_unfielded(w)]
+    e_clap10 = ug(content="blackzone_roam", size=10, style="clap")
     clap_pool = set(e_clap10.suggest_pool())
-    e_brawl20 = Engine(content="blackzone_roam", size=20, style="brawl")
+    e_brawl20 = ug(content="blackzone_roam", size=20, style="brawl")
     brawl_pool = set(e_brawl20.suggest_pool())
+    gb20 = Engine(content="blackzone_roam", size=20, style="brawl")
     check("T27 E-identity rules: Great Holy barred from clap suggestions yet "
-          "kept for brawl",
+          "kept for brawl (the style gate)",
           GREAT_HOLY not in clap_pool
           and HALLOWFALL in clap_pool
           and GREAT_HOLY in brawl_pool,
           f"clap10 has GH={GREAT_HOLY in clap_pool} "
-          f"brawl20 has GH={GREAT_HOLY in brawl_pool}")
+          f"brawl20 has GH={GREAT_HOLY in brawl_pool}; the fielded gate bars at "
+          f"brawl 20: {barred(gb20, [GREAT_HOLY]) or 'none'}")
     # T42 — the cost gate retired: the gate had been added because the
     # engine kept putting the Exalted Staff in every comp for its area
     # cleanse; the better rule is that area cleanse matters less in small
@@ -855,15 +874,18 @@ def run():
     # every weapon passed derived FITS — the generation-fit gate makes the
     # forge honor the derivation (F17 pins the mechanics; this pins the
     # recorded case at the suggestion surface).
-    e_fw = Engine(content="faction_war", size=15)
+    e_fw = ug(content="faction_war", size=15)
     fw_pool = set(e_fw.suggest_pool())
     fw_names = {e_fw.weapons[k]["display_name"] for k in fw_pool}
+    gfw = Engine(content="faction_war", size=15)
     check("T28 single-target-E dps (Dagger, Boltcasters) "
-          "leave 15-man suggestions; Heavy Crossbow's pierce stays",
+          "leave 15-man suggestions; Heavy Crossbow's pierce stays (the "
+          "generation-fit gate)",
           "Dagger" not in fw_names and "Boltcasters" not in fw_names
           and "Heavy Crossbow" in fw_names,
           f"dagger_in={'Dagger' in fw_names} bolt_in={'Boltcasters' in fw_names} "
-          f"hxbow_in={'Heavy Crossbow' in fw_names}")
+          f"hxbow_in={'Heavy Crossbow' in fw_names}; the fielded gate bars at 15: "
+          f"{barred(gfw, [k for k in gfw.weapons if gfw.weapons[k]['display_name'] == 'Heavy Crossbow']) or 'none'}")
     # T28b — validation round 4: a 1H Holy healer has no place in a 15-man
     # party — none above 5, no chance above 9 (curation judgment).
     # Single-ally-heal-E healers leave GENERATION at group sizes even
@@ -878,23 +900,26 @@ def run():
           f"holy_in_15={'Holy Staff' in fw_names} "
           f"holy_at_7={'MAIN_HOLYSTAFF' in set(e7g.suggest_pool())}")
 
-    # T29 — validation round 4: a flex bomber like Hellfire is usually a
-    # brawl-clap weapon, not a clap option; Realmbreaker brings several
-    # things at once — health cut, a ranged E, an easy engage follow-up —
-    # which is why it works in clap. Cited override drops Hellfire's
-    # clap verdict to situational; the generation-fit gate keeps it out of
-    # DEFAULT clap comps while brawl-clap (its home) and manual picks keep
-    # it; Realmbreaker stays a derived clap fit.
+    # T29 — RE-PINNED as recorded (V: 10, The fielded gate at 10+): the
+    # curation override that dropped Hellfire's clap verdict to situational
+    # (validation round 4) retired into the fielded gate, so at 10+
+    # Hellfire generates in clap and in brawl-clap exactly where those
+    # styles' killer parties field it (clap's lists carry it at 10-14,
+    # 15-19 and 20; brawl_clap's at 10-14 and 15-19 do not); its derived
+    # clap verdict stands; Realmbreaker keeps its clap slot.
     e_c15 = Engine(content="blackzone_roam", size=15, style="clap")
     e_bc15 = Engine(content="blackzone_roam", size=15, style="brawl_clap")
     hell = "2H_KNUCKLES_HELL"
-    check("T29 Hellfire out of clap generation, home in "
-          "brawl-clap; Realmbreaker keeps its clap slot",
-          hell not in set(e_c15.suggest_pool())
-          and hell in set(e_bc15.suggest_pool())
+    fl29 = (e_c15.data["composition"].get("skeleton") or {}).get("fielded") or {}
+    in_list = lambda st: hell in (((fl29.get("styles") or {}).get(st) or {}).get("15-19") or [])  # noqa: E731
+    check("T29 Hellfire follows the fielded gate in clap and brawl-clap at 10+ "
+          "(no clap override); Realmbreaker keeps its clap slot",
+          (hell in set(e_c15.suggest_pool())) == in_list("clap")
+          and (hell in set(e_bc15.suggest_pool())) == in_list("brawl_clap")
+          and (e_c15.weapons[hell]["style_fit"]["fit"]["clap"]["group"] == "fits")
           and "2H_AXE_AVALON" in set(e_c15.suggest_pool()),
-          f"hell_clap={hell in set(e_c15.suggest_pool())} "
-          f"hell_bc={hell in set(e_bc15.suggest_pool())}")
+          f"hell_clap={hell in set(e_c15.suggest_pool())} (listed {in_list('clap')}) "
+          f"hell_bc={hell in set(e_bc15.suggest_pool())} (listed {in_list('brawl_clap')})")
 
     # T30 — negative recommendations / redundancy warnings (roadmap item
     # 3). The verdict layer is a DESCRIPTIVE lens over the exact
@@ -1018,7 +1043,8 @@ def run():
     # stay. The weak-group-E derivation (low E damage AND no real E tool)
     # demotes only the scattered-utility class; Heavy-Mace-style utility
     # Es are protected by the AND.
-    e20 = Engine(content="blackzone_roam", size=20)
+    e20 = ug(content="blackzone_roam", size=20)
+    g20 = Engine(content="blackzone_roam", size=20)
     e5 = Engine(content="blackzone_roam", size=5)
     e3 = Engine(content="blackzone_roam", size=3)
     p20, p5, p3 = (set(e20.suggest_pool()), set(e5.suggest_pool()),
@@ -1028,12 +1054,13 @@ def run():
     check("T31 round-7 E rule: Battle Bracers rejoins group pools (group-"
           "scale E, killboard-corroborated); Warbow/1H Fire/Hellspawn "
           "solo-class leave 5+; all open at trio; Energy Shaper/Greataxe "
-          "stay",
+          "stay (the generation-fit gate)",
           bb in p20 and e20.weapons[bb]["style_fit"]["damage_scale"] == "group"
           and all(w not in p20 and w not in p5 and w in p3 for w in solo)
           and "2H_CROSSBOW_CANNON_AVALON" in p20 and "2H_AXE" in p20,
           f"bb_in20={bb in p20} solo_out20={[w not in p20 for w in solo]} "
-          f"solo_in3={[w in p3 for w in solo]}")
+          f"solo_in3={[w in p3 for w in solo]}; the fielded gate bars at 20: "
+          f"{barred(g20, [bb, '2H_CROSSBOW_CANNON_AVALON', '2H_AXE']) or 'none'}")
 
     # the AND protects utility Es: Heavy Mace (low-damage silence E) and
     # Carrioncaller (heal-cut E) keep their group verdicts; the demotion
@@ -1097,7 +1124,8 @@ def run():
           f"purge={E.weapons[fists]['capabilities'].get('purge')} "
           f"fists@20={fists in set(e20.suggest_pool())} "
           f"trident@20={trident in set(e20.suggest_pool())} "
-          f"trident@7={trident in set(e7bz.suggest_pool())}")
+          f"trident@7={trident in set(e7bz.suggest_pool())}; the fielded gate "
+          f"bars at 20: {barred(g20, [fists]) or 'none'}")
 
     # T32 — conditional-payload rule (the melee-heavy clap radar
     # validation round): clap wants damage delivered in ONE
@@ -1111,9 +1139,12 @@ def run():
     # weapons (Clarent and Ursine are both melee brawl weapons).
     clarent, ursine, carving = ("MAIN_SCIMITAR_MORGANA", "2H_KNUCKLES_KEEPER",
                                 "2H_CLEAVER_HELL")
-    c_pool, b_pool = set(e_c20.suggest_pool()), set(e_b20.suggest_pool())
+    u_c20 = ug(content="blackzone_roam", size=20, style="clap")
+    u_b20 = ug(content="blackzone_roam", size=20, style="brawl")
+    c_pool, b_pool = set(u_c20.suggest_pool()), set(u_b20.suggest_pool())
     check("T32 conditional-payload: ramp/melee-channel damage Es leave clap-20 "
-          "generation; ranged channels and support seats stay; brawl keeps them",
+          "generation; ranged channels and support seats stay; brawl keeps them "
+          "(the generation-fit gate)",
           clarent not in c_pool and ursine not in c_pool
           and carving not in c_pool
           and "2H_LONGBOW" in c_pool
@@ -1122,7 +1153,9 @@ def run():
           and E.weapons["2H_LONGBOW"]["style_fit"]["fit"]["clap"]["group"] == "fits",
           f"clap20 clarent={clarent in c_pool} ursine={ursine in c_pool} "
           f"carving={carving in c_pool} longbow={'2H_LONGBOW' in c_pool}; "
-          f"brawl20 keeps: {clarent in b_pool}/{ursine in b_pool}/{carving in b_pool}")
+          f"brawl20 keeps: {clarent in b_pool}/{ursine in b_pool}/{carving in b_pool}; "
+          f"the fielded gate bars at brawl 20: "
+          f"{barred(e_b20, [clarent, ursine, carving]) or 'none'}")
 
     # T33 — kite extension (accepted at the T32 validation round): the
     # melee-heavy kite forge read "split identity" at 65% melee; the one

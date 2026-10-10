@@ -631,6 +631,11 @@
        blocked. No list for the size: nothing gated. */
     this._unfielded = {};
     var fielded = this._poolFielded(this.size);
+    /* THE FIELDED GATE AT 10+ (composition.skeleton.fielded; mirrors
+       engine.py): outside a pool's list, the weapons the declared style's
+       killer parties of 10+ field in the size's band, barred from
+       suggestions and generation only */
+    if (!fielded) fielded = this._openFielded();
     if (fielded) {
       var kept3 = [];
       for (i = 0; i < this.pool.length; i++) {
@@ -1056,8 +1061,9 @@
   };
 
   CompEngine.prototype.isUnfielded = function (weapon) {
-    /* The size sits in a matchmaking pool whose winners do not field the
-       weapon — bars suggestions only (mirrors engine.py is_unfielded). */
+    /* The winners the size reads from do not field the weapon: a
+       matchmaking pool's list, else at 10+ the declared style's band list
+       — bars suggestions only (mirrors engine.py is_unfielded). */
     return !!this._unfielded[weapon];
   };
 
@@ -3425,6 +3431,31 @@
       }
     }
     return null;
+  };
+
+  CompEngine.prototype._openFielded = function () {
+    /* mirrors engine.py _open_fielded: the declared identity style's band
+       list, balanced the pooled one, as a lookup; null below the style
+       floor, outside every band or where the cell carries no list */
+    var sk = this.skeleton || {};
+    var fl = sk.fielded || {};
+    var anyF = false;
+    for (var k4 in fl) { anyF = true; break; }
+    if (!anyF) return null;
+    var floor = sk.style_min_size === undefined ? 10 : sk.style_min_size;
+    if (this.size < floor) return null;
+    var bands = fl.bands || {}, band = null;
+    for (var bk in bands) {
+      if (bands[bk][0] <= this.size && this.size <= bands[bk][1]) { band = bk; break; }
+    }
+    if (band === null) return null;
+    var row = IDENTITY_STYLES[this.style]
+      ? ((fl.styles || {})[this.style] || {})[band]
+      : (fl.pooled || {})[band];
+    if (!row || !row.length) return null;
+    var out = {};
+    for (var i = 0; i < row.length; i++) out[row[i]] = true;
+    return out;
   };
 
   /* the matchmaking pool whose sizes cover `size` (template pool_rows,

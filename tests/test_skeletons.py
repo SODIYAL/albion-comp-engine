@@ -29,6 +29,11 @@ notes/specs/2026-09-15-skeleton-first-generation-design.md).
       artifact's rows match its cells, the dataset carries exactly them,
       the engine lays the declared style's row (else pooled) on the band
       at 10+ and none below, and a hand-set minimum fails the build
+  S8  the fielded gate at 10+: the weapons each style x band's killer
+      rosters field by the portal's rule (derive_portal_rows.fielded),
+      no list under 40 rosters; the dataset carries exactly the lists;
+      the declared style's list (balanced the pooled one) gates the
+      suggestion pool at 10+, nothing below; a manual pick still scores
 
 Script-style: exit 0 = pass.
 """
@@ -387,6 +392,12 @@ def t_gate_units():
             if s2 != s and s2 in ctx["pred_seats"][pn]:
                 preds["seat:" + s2] = ctx["seat_typ"].get(s2, 0)
                 roles["dps"] += ctx["seat_typ"].get(s2, 0)
+        # every OTHER minimum stands met, so `pn` alone decides (the
+        # fielded gate changes which satisfier the fixture finds, and a
+        # second unmet minimum the pick carries would lift it too)
+        for p2, m2 in ctx["pred_min"].items():
+            if p2 != pn:
+                preds[p2] = max(preds.get(p2, 0), m2)
         contrib = e._pred_possible(w) | (e._profile_members.get(w) or frozenset())
         ok_when_unmet = e._typ_ok(ctx, roles, preds, w, contrib)
         preds2 = dict(preds)
@@ -591,6 +602,117 @@ def t_minima(doc):
           f"row {brawl_row} band {(eb._band or {}).get('ranged_aoe_core')}")
 
 
+# ------------------------------------------------------------------ S8
+def t_fielded_synthetic():
+    """The open-world fielded list per style x band: the portal's rule
+    (derive_portal_rows.fielded) on the cell's distinct rosters; a cell
+    under 40 rosters carries no list."""
+    seat = {"H": "main_healer", "T": "engage_tank", "D": "ranged_aoe",
+            "R": "ranged_aoe", "F": "ranged_aoe", "G": "ranged_aoe"}
+    # one filler weapon per roster keeps every weapon multiset distinct
+    # (the rule counts distinct rosters); each sits in one roster only
+    seat.update({f"U{i}": None for i in range(60)})
+    known = set(seat)
+    parties, labels = [], {}
+
+    def add(style, size, ws, guild):
+        i = len(parties)
+        battle = 30001 + 3 * i
+        if battle % 5 == 0:
+            battle += 1
+        ws = ws + [f"U{i}"]
+        parties.append({"battle": battle, "index": 0, "size": size,
+                        "known_weapons": size, "guilds": [guild],
+                        "weapons": ws + ["H"] * (size - len(ws))})
+        labels[(battle, 0)] = style
+    # 50 clap rosters of 10: D in all (the top weapon), R in 6 rosters
+    # across 3 guild-sets (kept), F in 4 rosters (under 5: dropped), G in
+    # 6 rosters of 2 guild-sets (dropped)
+    for i in range(50):
+        ws = ["D", "T"]
+        if i < 6:
+            ws.append("R")
+        if 10 <= i < 14:
+            ws.append("F")
+        if 20 <= i < 26:
+            ws.append("G")
+        guild = f"r{i % 3}" if i < 6 else (f"gg{i % 2}" if 20 <= i < 26 else f"c{i}")
+        add("clap", 10, ws, guild)
+    for i in range(10):          # a thin kite cell at 20
+        add("kite", 20, ["D", "R"], f"k{i}")
+    out = ds.derive({"parties": parties}, labels, lambda w: seat[w], known)
+    lists = out["fielded"]["lists"]
+    check("S8a the fielded list keeps a weapon in 5+ distinct rosters across 3+ "
+          "guild-sets at 5% of the top weapon's rosters (D, R, T, H); 4 rosters or "
+          "2 guild-sets drop it (F, G); pooled and the style's cell alike",
+          (lists["styles"].get("clap") or {}).get("10-14") == ["D", "H", "R", "T"]
+          and (lists["pooled"] or {}).get("10-14") == ["D", "H", "R", "T"],
+          str(lists))
+    check("S8b a cell under 40 distinct rosters carries no list (kite 20: 10)",
+          "20" not in (lists["styles"].get("kite") or {})
+          and "20" not in (lists["pooled"] or {}),
+          str(lists))
+
+
+def t_fielded(doc):
+    """The open-world fielded gate at 10+: the declared style's list for
+    the size's band bars suggestions and generation; balanced reads the
+    pooled list; a thin cell gates nothing; below 10 nothing; a manual
+    pick always scores."""
+    if not doc:
+        return
+    fl = doc.get("fielded") or {}
+    lists = fl.get("lists") or {}
+    e = Engine()
+    bad = []
+    for label, table in [("pooled", lists.get("pooled") or {})] + sorted(
+            (lists.get("styles") or {}).items()):
+        cells = (fl.get("cells") or {}).get("pooled") if label == "pooled" \
+            else ((fl.get("cells") or {}).get("styles") or {}).get(label) or {}
+        for band, ws in table.items():
+            c = (cells or {}).get(band) or {}
+            if (band not in doc["bands"] or not ws or len(set(ws)) != len(ws)
+                    or any(w not in e.weapons for w in ws)
+                    or c.get("n", 0) < doc["_min_distinct"] or c.get("kept") != len(ws)):
+                bad.append((label, band))
+    check("S8c the artifact's fielded lists: every list in a band of a cell of 40+ "
+          "rosters, catalog weapons listed once, the portal's thresholds recorded",
+          lists.get("pooled") and set(lists["pooled"]) == set(doc["bands"]) and not bad
+          and fl.get("rule") == {"min_rosters": 5, "min_guild_sets": 3,
+                                 "share_of_top": 0.05, "min_distinct": 40},
+          str(bad[:4]))
+    with open(os.path.join(OUT, "dataset-latest.json"), encoding="utf-8") as f:
+        dfl = (json.load(f)["composition"].get("skeleton") or {}).get("fielded") or {}
+    check("S8d the dataset carries exactly the artifact's lists and bands",
+          dfl.get("pooled") == lists.get("pooled") and dfl.get("styles") == lists.get("styles")
+          and dfl.get("bands") == doc["bands"])
+    bad = []
+    for st in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+        for size in (10, 15, 20):
+            e.set_content("blackzone_roam", size, st)
+            band = ds.band_of(size)
+            row = ((lists.get("pooled") or {}).get(band) if st == "balanced"
+                   else ((lists.get("styles") or {}).get(st) or {}).get(band))
+            want = {w for w in e.pool if w not in set(row)} if row else set()
+            sp = set(e.suggest_pool())
+            if e._unfielded != want or (row and not sp <= set(row)):
+                bad.append((st, size, len(e._unfielded), len(want)))
+    check("S8e at 10+ the declared style's band list gates the suggestion pool "
+          "(balanced the pooled list; a thin cell gates nothing)", not bad, str(bad[:4]))
+    e.set_content("roads", 7, "clap")
+    check("S8f below 10 outside a portal pool nothing is gated", not e._unfielded)
+    e.set_content("blackzone_roam", 20, "clap")
+    outside = next(w for w in sorted(e.pool) if e.is_unfielded(w))
+    base = e.forge(20)
+    party = base["party"][:19]
+    rec = e.recommend(party, 1, pool=[outside])
+    check("S8g a weapon outside the list is barred from suggestions only: it "
+          "still scores as a manual pick",
+          base["feasible"] and outside not in set(e.suggest_pool())
+          and outside not in base["party"] and len(rec) == 1 and rec[0]["weapon"] == outside,
+          f"weapon={e.weapons[outside]['display_name']}")
+
+
 # ------------------------------------------------------------------ S5
 def t_refusal():
     import build_dataset
@@ -643,6 +765,8 @@ t_forge()
 t_gate_units()
 t_plan(DOC)
 t_minima(DOC)
+t_fielded_synthetic()
+t_fielded(DOC)
 t_refusal()
 print(f"\n{'ALL PASS' if not FAILS else 'FAILURES: ' + ', '.join(FAILS)}")
 sys.exit(1 if FAILS else 0)

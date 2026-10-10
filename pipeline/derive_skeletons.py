@@ -43,6 +43,14 @@ tier2_blindtest v4h's holdout and nothing shipped learns from it):
             none filled reads the pooled row. This REPLACES the hand
             minima the composition bands and the style overrides kept
             (build_dataset refuses a hand-set one).
+  fielded   per style x band and pooled, the weapons the cell's killer
+            rosters field by the portal's rule (derive_portal_rows.
+            fielded: in >= 5 distinct rosters across >= 3 guild-sets and
+            in >= 5% of the rosters of the cell's most fielded weapon),
+            the list both engine ports gate suggestions and generation
+            with at 10+ (the declared style's list, balanced the pooled
+            one). A cell under MIN_DISTINCT rosters carries no list and
+            gates nothing (thin evidence is absent, never borrowed).
 
 Vote unit: one DISTINCT roster (guild set + weapon multiset) one vote, the
 style-board convention — the same guild's standing comp recurring across
@@ -73,6 +81,10 @@ sys.path.insert(0, HERE)
 import rosters_io  # noqa: E402
 import jsonfmt  # noqa: E402
 from derive_style_bands import PARENT  # noqa: E402  (the hybrid styles' parents)
+# the portal's fielded rule and its thresholds, one implementation
+from derive_portal_rows import (fielded as portal_fielded,  # noqa: E402
+                                MIN_FIELDED_ROSTERS, MIN_FIELDED_ORGS,
+                                SIGNAL_OF_TOP)
 
 ARTIFACT = rosters_io.path(OUT)
 STYLES_ARTIFACT = os.path.join(OUT, "party_styles.json")
@@ -141,7 +153,7 @@ def distinct_rosters(doc, labels, known, holdout_mod, min_size=STYLE_MIN_SIZE):
         seen.add(key)
         yield {"size": size,
                "style": labels.get((p.get("battle"), p.get("index"))),
-               "weapons": ws}
+               "weapons": ws, "guilds": key[0]}
 
 
 def _seat_counts(weapons, seat_of, universe):
@@ -253,6 +265,26 @@ def _band_minima(by_band, keys):
     return cells, typical
 
 
+def _fielded_cells(by_band):
+    """Per band with >= MIN_DISTINCT rosters, the fielded list by the
+    portal's rule (derive_portal_rows.fielded: a weapon in >=
+    MIN_FIELDED_ROSTERS distinct rosters across >= MIN_FIELDED_ORGS
+    guild-sets and in >= SIGNAL_OF_TOP of the rosters of the cell's most
+    fielded weapon) and its cell {n, top, kept, seen}. A band under the
+    floor carries no list: nothing is gated there."""
+    cells, lists = {}, {}
+    for band in BANDS:
+        rows = by_band.get(band) or []
+        if len(rows) < MIN_DISTINCT:
+            continue
+        keep, top, counts = portal_fielded(
+            [{"weapons": r["weapons"], "guilds": r["guilds"]} for r in rows])
+        cells[band] = {"n": len(rows), "top": top, "kept": len(keep),
+                       "seen": len(counts)}
+        lists[band] = keep
+    return cells, lists
+
+
 def _minima_source(filled, style, band):
     """The cell a style x band minimum reads — the style rows' thin-cell
     rule (derive_style_bands.nearest): its own cell when it holds
@@ -362,6 +394,18 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
             minima["cells"]["styles"][st] = cells
         if typ:
             minima["typical"]["styles"][st] = typ
+    f_cells, f_lists = _fielded_cells(pooled_band)
+    fielded = {"rule": {"min_rosters": MIN_FIELDED_ROSTERS,
+                        "min_guild_sets": MIN_FIELDED_ORGS,
+                        "share_of_top": SIGNAL_OF_TOP,
+                        "min_distinct": MIN_DISTINCT},
+               "cells": {"pooled": f_cells, "styles": {}},
+               "lists": {"pooled": f_lists, "styles": {}}}
+    for st in sorted(styled_band):
+        c, lst = _fielded_cells(styled_band[st])
+        if c:
+            fielded["cells"]["styles"][st] = c
+            fielded["lists"]["styles"][st] = lst
     copies = {"pooled": {}, "styles": {}}
     distinct = {"pooled": {}, "styles": {}}
     for band in BANDS:
@@ -414,6 +458,7 @@ def derive(doc, labels, seat_of, known, holdout_mod=HOLDOUT_MOD, universe=None,
         "seats": seats,
         "plan": plan,
         "minima": minima,
+        "fielded": fielded,
         "copies": copies,
         "distinct": distinct,
     }
@@ -490,6 +535,12 @@ def main():
                 + (f", borrowed from {c['borrowed_from']}, own n {c['own_n']}"
                    if c.get("borrowed_from") else "") + ")"
                 for band, c in sorted(cells.items())))
+    fl = out["fielded"]
+    for label, cells in [("pooled", fl["cells"]["pooled"])] \
+            + sorted(fl["cells"]["styles"].items()):
+        print(f"  fielded {label:<10}: " + ", ".join(
+            f"{band} {c['kept']} of {c['seen']} (n {c['n']}, top {c['top']})"
+            for band, c in sorted(cells.items())))
     print(f"skeletons ({out['_split']['rule']}) -> {os.path.relpath(TARGET, HERE)}")
 
 

@@ -2953,6 +2953,27 @@ def load_skeletons(known_weapons, seat_ids):
     if set(min_pooled) != set(bands):
         sys.exit(f"out/skeletons.json: the pooled minima must carry every band "
                  f"{sorted(bands)}, got {sorted(min_pooled)}")
+    # the open-world fielded gate (suggestions and generation only)
+    lists = (doc.get("fielded") or {}).get("lists")
+    if not isinstance(lists, dict) or set(lists) != {"pooled", "styles"}:
+        sys.exit("out/skeletons.json: fielded.lists must carry pooled / styles "
+                 "(the fielded gate at 10+) — rerun py -3 "
+                 "pipeline/derive_skeletons.py")
+
+    def fielded_rows(table, where):
+        out = {}
+        for band, ws in (table or {}).items():
+            if band not in bands:
+                sys.exit(f"out/skeletons.json: {where}: unknown band {band!r}")
+            if not (isinstance(ws, list) and ws and len(set(ws)) == len(ws)):
+                sys.exit(f"out/skeletons.json: {where}[{band}]: a list must be "
+                         f"a non-empty list without repeats")
+            unknown = sorted(w for w in ws if w not in known_weapons)
+            if unknown:
+                sys.exit(f"out/skeletons.json: {where}[{band}]: not in the "
+                         f"weapon catalog: {', '.join(unknown)}")
+            out[band] = list(ws)
+        return out
     skeleton = {"style_min_size": int(doc.get("_style_min_size") or 10),
                 "seats": {"pooled": seat_rows(seats["pooled"], "pooled"),
                           "styles": {st: seat_rows(rows, f"styles[{st}]")
@@ -2972,7 +2993,16 @@ def load_skeletons(known_weapons, seat_ids):
                            "pooled": min_pooled,
                            "styles": {st: minima_rows(rows, f"minima styles[{st}]")
                                       for st, rows in sorted(
-                                          (minima["styles"] or {}).items())}}}
+                                          (minima["styles"] or {}).items())}},
+                # the fielded gate at 10+ (suggestions and generation
+                # only): per declared style and band the weapons the
+                # style's killer parties of 10+ field; a band without a
+                # list (a thin cell) gates nothing
+                "fielded": {"bands": bands,
+                            "pooled": fielded_rows(lists["pooled"], "fielded pooled"),
+                            "styles": {st: fielded_rows(rows, f"fielded styles[{st}]")
+                                       for st, rows in sorted(
+                                           (lists["styles"] or {}).items())}}}
     cells = {"bands": bands,
              "pooled": copy_rows(copies["pooled"], "pooled"),
              "styles": {st: copy_rows(rows, f"styles[{st}]")
@@ -3274,7 +3304,9 @@ def main():
           + "; minima pooled "
           + ", ".join(f"{bk} {row.get(k, 0)} {k}"
                       for bk, row in sk["minima"]["pooled"].items()
-                      for k in sk["minima"]["keys"]))
+                      for k in sk["minima"]["keys"])
+          + "; fielded pooled "
+          + ", ".join(f"{bk} {len(ws)}" for bk, ws in sk["fielded"]["pooled"].items()))
     print("  meta prior    : generated (out/meta_prior.json, training split), "
           + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
           + " weapon rows; pairs "

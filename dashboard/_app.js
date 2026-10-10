@@ -1615,10 +1615,11 @@ function renderHub(keys, idx, recs){
   const isTop = !!(recs && recs.length && recs[0].w === w);
   const marks = (isTop ? ' · <b>engine pick</b>' : "")
     + (ENG.isExcluded(w) ? ' · <i class="offcomp">off-comp</i>' : "")
-    /* the pool-fielded gate (engine isUnfielded): the weapon still scores
-       when picked, the engine never suggests it at this portal pool */
+    /* the fielded gate (engine isUnfielded): a portal pool's list, else
+       the style's list at 10+; the weapon still scores when picked, the
+       engine never suggests it here */
     + (typeof ENG.isUnfielded === "function" && ENG.isUnfielded(w)
-      ? ' · <i class="offcomp" title="winners of this portal pool do not field it: never suggested here, scored when picked">not fielded here</i>' : "")
+      ? ' · <i class="offcomp" title="the winners this size and style read from do not field it: never suggested here, scored when picked">not fielded here</i>' : "")
     + (WEAPONS[w].status === "curated" ? "" : " · illustrative");
   body.innerHTML = `
     <div class="hub-art-slot">${icon(w, 54)}</div>

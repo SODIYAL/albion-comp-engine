@@ -32,29 +32,6 @@ Each is decidable today from evidence already in the repo.
   the meta prior should bucket by content with a larger `delta` at the
   portal, or the sheets under-credit sustained ranged pressure, is the
   question to settle from evidence.
-- **The fielded gate beyond the portal**: the gate applies where a
-  matchmaking pool has its own harvest (the Dragon Portal's 2-3, 4-5 and
-  6-7). The 10+ contents generate through the seat skeleton and the
-  style bands with no weapon-level evidence gate. Measured on the v4h
-  holdout (notes/findings/2026-10-08-fielded-gate-at-10.md): a style x
-  band fielded list from killer parties of 10+ (the portal's rule: 5
-  rosters, 3 guild-sets, 5% of the cell's top weapon) lifts the hidden
-  member's top-3 from 7.7% to 10.1% (+2.5 points, 95% CI +1.7 to +3.3,
-  replicated at +2.3), MRR 0.090 to 0.114, role-level 62.3% to 64.6%, the
-  same relative lift as the 6-7 pool; it bars 4-5% of hidden picks (2 of
-  them top-3 hits) and a quarter of the engine's committed top 3
-  (Grovekeeper, Camlann Mace, Morning Star); a pooled list lifts less;
-  brawl_clap 20 is too thin for a list. Beside the base band's
-  `ranged_aoe_core` minimum the gated brawl forge stopped at 13 of 15 and
-  17 of 20; every style's minimum is now its winners' typical carrier
-  count (V: 10, The ranged-AoE core minimum is generated) and the gated
-  forge is not re-measured since. The ungated default forge measured
-  whole under the hand minima (notes/findings/2026-10-09-forge-quality.md):
-  18% of its slots at 10-20 are weapons under 2% of the cell's winners
-  field (6% fielded by none of them), the share the earlier sweep
-  measured; Fists of Avalon is forged into 41 of 48 cells on at most 6.6%
-  of a cell's rosters, Arclight Blasters into 19 on under 1%. Decide the
-  gate, styled.
 - **The baseline finding** (`tier2_blindtest.py --baseline`, report-only):
   ranking candidates by role need then the prior's solo share places the
   real weapon at median rank 20 on 500 holdout parties (MRR 0.177, top-10
@@ -111,13 +88,6 @@ Each is decidable today from evidence already in the repo.
   votes only. (V: 09b, Seat pooling)
 - **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
   Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
-- **`MAIN_FROSTSTAFF_AVALON` (Chillhowl) >= 10 exclusion**: its stated premise
-  ("no build fields it at 10+") is weaker since "AvA Raid" (10 players)
-  fields one; the record is candidate, the exclusion stands. (V: 08, Corpus
-  ingestion)
-- **Hellfire Hands in kite generation**: its E is unconditional so the derived
-  rule passes it; the clap exclusion is a clap-scoped override. (V: 08, KITE
-  EXTENSION)
 - **`brawl_clap` target_mults**: undecided, n=3 declared; every clap row beyond
   burst_aoe likewise (peel / disengage flipped sign between samples). (V:
   08, Per-style targets round 2)
@@ -223,7 +193,8 @@ Each is decidable today from evidence already in the repo.
 - **The Dragon Portal's 15-20 pool at 200 rosters**: the pool reads rows of
   its own, fitted at the floor (40 distinct rosters at the last fold; V: 10,
   The 15-20 portal pool reads its own rows), and generation at 15-20 keeps
-  the open-world seat skeleton and suggestion pool until the pool holds 200
+  the open-world seat skeleton, minima and fielded gate (V: 10, The
+  fielded gate at 10+) until the pool holds 200
   distinct dominant rosters (V: 10, The 15-20 portal pool takes its own list
   and counts at 200 rosters). `derive_portal_rows.py` and the fold report
   count it against the threshold; at 200, derive its fielded list and role

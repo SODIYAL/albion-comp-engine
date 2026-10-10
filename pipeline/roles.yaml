@@ -254,8 +254,8 @@ roles:
       - {id: 2H_ARCANESTAFF_HELL, source: "curation:2026-09-03 (Occult is a support weapon); dumps: E Time Corridor = ally move+attack speed 0.6, enemy slow 0.3 (mass slow / lane control); guide:metabattle Occult Staff ZvZ Support (Royal Jacket); killboard:party_rosters (61 builds, 85% leather); sheet role_hint support"}
       # MAIN_FROSTSTAFF_AVALON (Chillhowl) removed: a single-target E, no
       # good for group content, mostly a corrupted-dungeon weapon — off
-      # every menu, matching its standing >=10 viability exclusion
-      # (composition.yaml). NAME MIX-UP RESOLVED: the earlier "Chillhowl
+      # every menu (at 10+ the fielded gate decides its generation, from
+      # the harvest). NAME MIX-UP RESOLVED: the earlier "Chillhowl
       # off every menu" removal hit 2H_SHAPESHIFTER_CRYSTAL, which is
       # actually STILLGAZE — now a defensive tank seated in stopper_tank.
       # Role grading round — two removals stand: Glacial is more DPS than
