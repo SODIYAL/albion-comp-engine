@@ -100,14 +100,20 @@ aoe_escalation:
   # Applied after all other buffs; NOT reduced by the ~150% damage soft cap.
   applied_after_buffs: true
   bypasses_damage_soft_cap: true
-  # Escalation is per-ability ELIGIBILITY, per-effect MAGNITUDE — both now
-  # extracted from ao-bin-dumps (Q9 answered 2026-08-20, parse_dumps v4):
-  # spell_index.json carries `escalation: {value, duration}` per spell
-  # (@targetcountvaluebonusfactor / @targetcountdurationbonusfactor).
-  # 174/559 weapon-reachable spells escalate; standard factor 0.08/target
-  # (Spirit Animal: 0.25). Q8 answered by the same extraction: CC DURATION
-  # escalation uses the same per-target factor as damage; the per-spell
-  # factor in the dataset is authoritative, this note is documentation.
+  # Escalation is per-ability ELIGIBILITY, per-effect MAGNITUDE — both
+  # extracted from ao-bin-dumps (Q9): spell_index.json carries
+  # `escalation: {value, duration}` per spell (@targetcountvaluebonusfactor
+  # / @targetcountdurationbonusfactor) on its own effect tree, and
+  # `escalation_payload` for what a dash or channel's end, a knockback's
+  # collision or a trigger adds. Standard factor 0.08/target (Spirit
+  # Animal: 0.25). The damage bonus above applies to burst_aoe PER SPELL
+  # (Q10): only a bundle whose spell carries a value factor takes it
+  # (build_dataset stamp_aoe_escalation, `slot_escal`); a spell with no
+  # record is unknown and takes none; a flagged burst_aoe spell at another
+  # factor than bonus_per_extra_target fails the build. Q8 answered by the
+  # same extraction: CC DURATION escalation uses the same per-target factor
+  # as damage; the per-spell factor in the dataset is authoritative, this
+  # note is documentation.
   cc_escalation_duration_curve: same_factor_per_target_as_damage
 
 # ---------------------------------------------------------------------------

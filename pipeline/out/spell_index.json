@@ -74,6 +74,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Sky's Fury",
@@ -1845,6 +1848,9 @@
   "escalation": {
    "value": 0.08
   },
+  "escalation_payload": {
+   "duration": 0.08
+  },
   "flags": [
    "stun"
   ],
@@ -1872,6 +1878,10 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "duration": 0.08,
+   "value": 0.08
+  },
   "flags": [
    "root"
   ],
@@ -2571,6 +2581,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Relentless Assault",
@@ -2927,6 +2940,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -2954,6 +2970,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "slow"
   ],
@@ -3268,6 +3287,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Falcon Smash",
@@ -3369,6 +3391,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "heal"
   ],
@@ -7451,6 +7476,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -7659,6 +7687,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -8885,6 +8916,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -9002,6 +9036,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "heal",
    "knockback"
@@ -9144,6 +9181,10 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "duration": 0.08,
+   "value": 0.08
+  },
   "flags": [
    "slow",
    "stun"
@@ -9827,6 +9868,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Pounce",
@@ -14581,6 +14625,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],
@@ -14608,6 +14655,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Deadly Swipe",
@@ -14800,6 +14850,10 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "duration": 0.08,
+   "value": 0.08
+  },
   "flags": [
    "knockback",
    "stun"
@@ -15041,6 +15095,9 @@
   ],
   "escalation": {
    "value": 0.08
+  },
+  "escalation_payload": {
+   "duration": 0.08
   },
   "flags": [
    "heal",
@@ -15970,6 +16027,9 @@
   ],
   "escalation": {
    "value": 0.08
+  },
+  "escalation_payload": {
+   "duration": 0.08
   },
   "flags": [
    "root"
@@ -16998,6 +17058,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Spinning Blades",
@@ -17025,6 +17088,9 @@
   ],
   "escalation": {
    "duration": 0.08
+  },
+  "escalation_payload": {
+   "value": 0.08
   },
   "flags": [
    "knockback",
@@ -17448,6 +17514,9 @@
    "self"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [],
   "max_targets": null,
   "name": "Limitbreaker",
@@ -17871,6 +17940,10 @@
    "ally"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "duration": 0.08,
+   "value": 0.08
+  },
   "flags": [
    "root"
   ],
@@ -18910,6 +18983,9 @@
    "enemy"
   ],
   "escalation": null,
+  "escalation_payload": {
+   "value": 0.08
+  },
   "flags": [
    "knockback"
   ],

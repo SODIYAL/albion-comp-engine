@@ -19,7 +19,7 @@
     "gear_spells.json": "53be86f59c33670a180be845289b06cbd6e2ed728695b8105cf60b3ccfc1de72",
     "interactions.json": "ed6c5324bfb1123952a2e324b87e80e063c942853ba4afc780430e0e9edc4c52",
     "item_stats.json": "a45aa75b0d84a6c5e4825dd9e94760ff227e5918179e9d1559e3034acda6863d",
-    "spell_index.json": "516a733869bbcbacfd8eceae644eec5f9f8cc1e3cf6470a06ac3d4fc1cad7603",
+    "spell_index.json": "af66b0b0fc2cfb99860b37857613a69b80601b67c51d974a041683ea6628ce57",
     "weapon_lines.json": "c1891f3398028a74c40606495790434324f927fab8f74ad446e317f2a504cdb9"
    },
    "problems": [],
@@ -6776,6 +6776,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -6900,6 +6906,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7010,6 +7022,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7128,6 +7146,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7234,6 +7258,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7346,6 +7376,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7451,6 +7487,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7553,6 +7595,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7659,6 +7707,12 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7762,6 +7816,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -7895,6 +7955,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8005,6 +8071,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8124,6 +8196,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8239,6 +8317,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8353,6 +8437,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8459,6 +8549,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8565,6 +8661,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8683,6 +8785,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8798,6 +8906,12 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8900,6 +9014,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -8999,6 +9118,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9107,6 +9231,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9244,6 +9373,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9336,6 +9470,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9432,6 +9571,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9550,6 +9694,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9652,6 +9801,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9747,6 +9901,11 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -9804,6 +9963,7 @@
    "evidence": {},
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -9833,6 +9993,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -9874,6 +10039,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -9907,6 +10077,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -9944,6 +10119,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -9978,6 +10158,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10011,6 +10196,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10044,6 +10234,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10077,6 +10272,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10110,6 +10310,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10143,6 +10348,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10176,6 +10386,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10209,6 +10424,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10244,6 +10464,7 @@
     "always": {
      "tankiness": 1
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -10265,6 +10486,11 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "passive"
     ],
@@ -10378,6 +10604,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -10509,6 +10742,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -10640,6 +10880,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -10783,6 +11030,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -10913,6 +11167,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11043,6 +11304,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11170,6 +11438,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11297,6 +11572,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11433,6 +11715,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11550,6 +11839,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11655,6 +11951,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11759,6 +12062,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -11888,6 +12198,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12018,6 +12335,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12128,6 +12452,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12266,6 +12597,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12378,6 +12716,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12496,6 +12841,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12605,6 +12957,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12714,6 +13073,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12826,6 +13192,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -12931,6 +13304,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13046,6 +13426,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13152,6 +13539,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13252,6 +13646,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13362,6 +13763,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13464,6 +13872,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13559,6 +13974,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -13610,6 +14032,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13639,6 +14062,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13668,6 +14092,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13710,6 +14135,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13739,6 +14165,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13766,6 +14193,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13798,6 +14226,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13816,6 +14245,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13844,6 +14274,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13878,6 +14309,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13906,6 +14338,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13936,6 +14369,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13976,6 +14410,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -13994,6 +14429,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -14025,6 +14461,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -14056,6 +14493,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -14095,6 +14533,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -14113,6 +14552,7 @@
    "gear_class": null,
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -14197,6 +14637,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14306,6 +14753,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14414,6 +14868,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14525,6 +14986,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14649,6 +15117,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14770,6 +15245,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14879,6 +15361,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -14988,6 +15477,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15097,6 +15593,13 @@
    "gear_class": "cloth",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15224,6 +15727,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15338,6 +15848,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15452,6 +15969,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15572,6 +16096,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15698,6 +16229,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15813,6 +16351,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -15935,6 +16480,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16052,6 +16604,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16169,6 +16728,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16282,6 +16848,13 @@
    "gear_class": "leather",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16406,6 +16979,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16542,6 +17122,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16661,6 +17248,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16790,6 +17384,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -16908,6 +17509,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -17021,6 +17629,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -17139,6 +17754,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -17257,6 +17879,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -17380,6 +18009,13 @@
    "gear_class": "plate",
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "active"
     ],
@@ -17434,6 +18070,7 @@
    "evidence": {},
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17457,6 +18094,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17480,6 +18118,7 @@
     "always": {
      "self_sustain": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17503,6 +18142,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17526,6 +18166,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17549,6 +18190,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17572,6 +18214,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17587,6 +18230,7 @@
    "evidence": {},
    "loadout": {
     "always": {},
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17610,6 +18254,7 @@
     "always": {
      "self_sustain": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17638,6 +18283,7 @@
      "self_sustain": 2,
      "tankiness": 1
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17668,6 +18314,7 @@
     "always": {
      "resist_shred": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17691,6 +18338,7 @@
     "always": {
      "tankiness": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17714,6 +18362,7 @@
     "always": {
      "tankiness": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17752,6 +18401,7 @@
      "damage_debuff": 2,
      "slow": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17775,6 +18425,7 @@
     "always": {
      "tankiness": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17798,6 +18449,7 @@
     "always": {
      "tankiness": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17821,6 +18473,7 @@
     "always": {
      "tankiness": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17844,6 +18497,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17867,6 +18521,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17890,6 +18545,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17913,6 +18569,7 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17936,6 +18593,7 @@
     "always": {
      "disengage": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -17964,6 +18622,7 @@
      "burst_st": 2,
      "slow": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -18008,6 +18667,8 @@
      "burst_aoe": 2,
      "heal_reduction": 2
     },
+    "always_escal": 0.08,
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -18037,6 +18698,7 @@
     "always": {
      "anti_dive": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -18066,6 +18728,7 @@
     "always": {
      "knockback_displace": 2
     },
+    "slot_escal": [],
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -306534,6 +307197,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -306753,6 +307434,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -306971,6 +307670,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -307217,6 +307934,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -307437,6 +308172,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -307690,6 +308443,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -307929,6 +308700,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -308183,6 +308972,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -308422,6 +309229,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -308663,6 +309488,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -308927,6 +309770,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -309140,6 +310001,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -309401,6 +310281,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -309647,6 +310545,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -309897,6 +310813,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -310164,6 +311098,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -310402,6 +311355,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -310644,6 +311612,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -310874,6 +311857,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -311102,6 +312100,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -311320,6 +312333,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -311524,6 +312551,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -311714,6 +312755,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -311936,6 +312996,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -312165,6 +313244,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -312410,6 +313508,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -312569,6 +313681,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -312795,6 +313920,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -313064,6 +314208,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -313301,6 +314464,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -313563,6 +314744,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -313790,6 +314986,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -314075,6 +315286,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -314328,6 +315556,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -314549,6 +315794,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -314749,6 +316012,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -314992,6 +316274,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -315195,6 +316495,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -315394,6 +316712,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -315585,6 +316921,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -315750,6 +317096,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -315929,6 +317285,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -316156,6 +317522,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -316416,6 +317799,20 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -316661,6 +318058,23 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -316930,6 +318344,20 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -317107,6 +318535,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -317312,6 +318759,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -317531,6 +318997,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -317757,6 +319241,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -318027,6 +319529,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -318310,6 +319829,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -318578,6 +320114,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -318856,6 +320409,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319065,6 +320635,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319260,6 +320849,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319424,6 +321026,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319591,6 +321206,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319737,6 +321365,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -319975,6 +321616,20 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -320234,6 +321889,20 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -320436,6 +322105,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -320612,6 +322291,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -320821,6 +322510,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -321028,6 +322736,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -321310,6 +323037,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -321563,6 +323308,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -321835,6 +323598,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -322099,6 +323880,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -322346,6 +324145,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -322598,6 +324415,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -322850,6 +324685,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -323125,6 +324978,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -323385,6 +325256,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -323611,6 +325500,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -323870,6 +325777,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -324139,6 +326063,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -324351,6 +326292,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -324568,6 +326525,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -324783,6 +326756,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.25
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -325038,6 +327027,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -325305,6 +327311,25 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -325577,6 +327602,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -325836,6 +327880,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -326072,6 +328133,21 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -326310,6 +328386,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -326537,6 +328632,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -326768,6 +328881,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -327031,6 +329162,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -327303,6 +329452,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -327566,6 +329733,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -327839,6 +330024,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -328100,6 +330303,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -328372,6 +330593,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -328634,6 +330873,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -328905,6 +331162,24 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "passive",
@@ -329126,6 +331401,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -329299,6 +331588,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -329530,6 +331838,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -329802,6 +332129,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -330044,6 +332390,24 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "q",
@@ -330263,6 +332627,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -330479,6 +332859,21 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -330691,6 +333086,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -330940,6 +333353,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.08,
+      0.0
+     ],
+     [
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -331166,6 +333597,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -331377,6 +333826,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -331575,6 +334038,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -331792,6 +334269,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -332006,6 +334497,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.08
+     ],
+     [
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -332194,6 +334699,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -332426,6 +334950,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -332638,6 +335181,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -332835,6 +335388,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -333000,6 +335563,16 @@
     "always": {
      "sustained_dps": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w"
@@ -333236,6 +335809,20 @@
     "always": {
      "sustained_dps": 2
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -333473,6 +336060,21 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08,
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -333725,6 +336327,20 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -333970,6 +336586,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -334141,6 +336774,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -334301,6 +336947,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -334457,6 +337116,19 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.08
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -334689,6 +337361,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -334964,6 +337653,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -335240,6 +337946,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -335484,6 +338207,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -335693,6 +338432,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -335926,6 +338681,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -336132,6 +338903,22 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.08
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -336354,6 +339141,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.08,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -336623,6 +339429,23 @@
     "always": {
      "tankiness": 4
     },
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.08,
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -336869,6 +339692,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -337098,6 +339939,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -337334,6 +340194,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -337560,6 +340439,25 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.08,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -337775,6 +340673,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.0
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",
@@ -337984,6 +340900,24 @@
    },
    "loadout": {
     "always": {},
+    "slot_escal": [
+     [
+      0.08
+     ],
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.08,
+      0.08
+     ],
+     [
+      0.0
+     ],
+     [
+      0.0
+     ]
+    ],
     "slot_names": [
      "e",
      "w",

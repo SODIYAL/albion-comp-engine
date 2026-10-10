@@ -29,6 +29,13 @@ const out = {
   }),
   // an empty `always` with no slots reads the flat sheet
   raw: e7._rawMemberCaps(spec.flat_weapon, null),
+  // a not-flagged (0) and an unknown (null) bundle, and a not-flagged
+  // always-on gear row, take no in-game AoE escalation bonus
+  escal: {
+    zero: cell._unchargedExtras(spec.escal.zero),
+    null: cell._unchargedExtras(spec.escal.null),
+    gear: cell.gearExtras(spec.escal.gear),
+  },
   // an empty gang band, an empty style cell and an empty kit_build read
   // as absent
   seat_gang: gang._seatKit(gang.rolesBook[spec.seat_gang]),

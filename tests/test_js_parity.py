@@ -535,7 +535,10 @@ def scratch_pass(data):
     (F44); one weapon's loadout is an empty `always` with no slots (the
     flat-sheet fallback); one seat's gang band is empty and its clap cell
     carries an empty kit_build, another seat's clap cell is empty (each
-    read as absent); and top_n is an explicit null (the default, F45).
+    read as absent); top_n is an explicit null (the default, F45); and one
+    weapon's burst_aoe bundles read not flagged, another's unknown, and one
+    always-on gear row not flagged (the shipped sheets flag every one, T11d),
+    each the flagged supply over the context's AoE escalation ratio.
     Returns the mismatch lines; empty means both ports agree."""
     d = json.loads(json.dumps(data))
     probe = Engine(content="castle_outpost", size=7)
@@ -564,9 +567,24 @@ def scratch_pass(data):
     seats[0]["kit_styles"]["clap"] = {"kit": dict(seats[0]["kit_styles"]["clap"].get("kit") or {}),
                                       "kit_build": []}
     seats[1]["kit_styles"]["clap"] = {}
+    # per-spell AoE escalation (Q10): the shipped sheets flag every
+    # burst_aoe bundle, so one weapon's bundles read not flagged (0),
+    # another's unknown (None), and one always-on gear row not flagged
+    aoe = [w for w in sorted(d["weapons"]) if not d["weapons"][w].get("removed")
+           and w not in ("2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW")
+           and any("burst_aoe" in b for sl in d["weapons"][w]["loadout"]["slots"]
+                   for b in sl)]
+    for w, f in ((aoe[0], 0.0), (aoe[1], None)):
+        lo = d["weapons"][w]["loadout"]
+        lo["slot_escal"] = [[f for _ in sl] for sl in lo["slot_escal"]]
+    esc_gear = next(g for g in sorted(d["gear"])
+                    if "burst_aoe" in ((d["gear"][g].get("loadout") or {})
+                                       .get("always") or {}))
+    d["gear"][esc_gear]["loadout"]["always_escal"] = 0.0
     spec = {"floor": floor_cases, "flat_weapon": flat, "style": "clap",
             "seat_gang": seats[0]["id"], "seat_cell": seats[1]["id"],
-            "party": ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"]}
+            "party": ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"],
+            "escal": {"zero": aoe[0], "null": aoe[1], "gear": esc_gear}}
     paths = []
     try:
         for obj in (d, spec):
@@ -588,7 +606,13 @@ def scratch_pass(data):
             os.unlink(p)
     names = lambda rows: [r["weapon"] for r in rows]
     party = spec["party"]
-    py = {"floor": [], "raw": e7._raw_member_caps(flat),
+    esc = spec["escal"]
+    shipped = Engine(content="blackzone_roam", size=20, style="clap")
+    ratio = cell.mech_mults["burst_aoe"]
+    py_escal = {"zero": cell._uncharged_extras(esc["zero"]),
+                "null": cell._uncharged_extras(esc["null"]),
+                "gear": cell.gear_extras(esc["gear"])}
+    py = {"floor": [], "raw": e7._raw_member_caps(flat), "escal": py_escal,
           "seat_gang": json.loads(json.dumps(gang._seat_kit(gang.roles[spec["seat_gang"]]))),
           "seat_cell": json.loads(json.dumps(cell._seat_kit(cell.roles[spec["seat_cell"]]))),
           "top_null": {
@@ -606,9 +630,21 @@ def scratch_pass(data):
             "rows": [[r["cap"], r["gain"], r["floor_lift"], r["delta"]] for r in pr["caps"]],
             "actual": e7.comp_score([cand], [pr["combo"]], [pr["kit"]]) - e7.comp_score([])})
     errs = []
-    for k in ("floor", "raw", "seat_gang", "seat_cell", "top_null"):
+    for k in ("floor", "raw", "seat_gang", "seat_cell", "top_null", "escal"):
         if not _close(py[k], js.get(k)):
             errs.append(f"scratch {k}: py={str(py[k])[:240]} js={str(js.get(k))[:240]}")
+    # a bundle read without the in-game bonus is the shipped (flagged)
+    # bundle over the context's ratio, in every combo
+    if not ratio > 1.0 + 1e-9:
+        errs.append(f"scratch escal: the clap 20 ratio {ratio!r} cannot tell the cases apart")
+    for k, shipped_x in (("zero", shipped._uncharged_extras(esc["zero"])),
+                         ("null", shipped._uncharged_extras(esc["null"])),
+                         ("gear", shipped.gear_extras(esc["gear"]))):
+        for a, b in zip(py_escal[k], shipped_x):
+            if abs(a.get("burst_aoe", 0.0) * ratio - b.get("burst_aoe", 0.0)) > EPS:
+                errs.append(f"scratch escal {k}: {a.get('burst_aoe')!r} x {ratio!r} "
+                            f"is not the flagged {b.get('burst_aoe')!r}")
+                break
     for f in py["floor"] + js.get("floor", []):
         if abs(f["score"] - f["actual"]) > EPS:
             errs.append(f"scratch floor: pick score {f['score']!r} is not the "
@@ -925,7 +961,8 @@ def main():
         bad += 1
     else:
         print("scratch pass identical: a zeroed floored gain, an empty always, "
-              "empty doctrine cells and a null top_n read the same in both ports")
+              "empty doctrine cells, a null top_n and not-flagged / unknown AoE "
+              "escalation stamps read the same in both ports")
 
     # The generated dashboard must embed THIS engine verbatim — a stale
     # build means the public page scores with different math than the source

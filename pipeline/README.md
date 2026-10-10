@@ -150,11 +150,39 @@ every item of the pinned snapshot, F20).
 
 State: the three ZvZ mechanics are WIRED as supply-side effectiveness
 multipliers, per style, normalized to the balanced style (golden T11 pins the
-directions); the geometric AoE utility scaling is wired in both ports
-(T18/T18b); per-weapon Resilience Penetration is wired as a supply-side rebate
-(F20). Open mechanics work is in `BACKLOG.md` (per-spell `burst_aoe` gating
-Q9/Q10, the enemy model Q2/Q5, asymmetric numbers Q11/Q13, the dive style, the
-magnitude audit queues).
+directions); the in-game AoE damage escalation applies per spell, only to the
+bundles whose spell the game files flag (T11d/T11e); the geometric AoE utility
+scaling is wired in both ports (T18/T18b); per-weapon Resilience Penetration is
+wired as a supply-side rebate (F20). Open mechanics work is in `BACKLOG.md` (the
+AoE geometry's provisional parts and the payload factors the CC duration does
+not read yet, Q8/Q9; the magnitude audit queues).
+
+### Per-spell AoE damage escalation (standing rule)
+
+The in-game AoE Escalation (Q6: 8% per target from 2, 56% at 8, after
+buffs, past the soft cap) reaches `burst_aoe` as one ratio per context,
+`mech_mults["burst_aoe"]` = (1 + bonus at this style's clump) / (1 + bonus
+at the balanced base-size clump), the clump being the style's
+`expected_aoe_targets` x the `size_physics` `count_mult` step (Q16).
+`count_mult` is the clump's growth with party size, not the bonus; the bonus
+is `aoe_escalation.damage_bonus_by_targets`. `burst_aoe` is not a geometric
+capability, so it carries no geometric term: the ratio is its whole
+mechanics.
+
+Both ports apply the ratio to a bundle only when its spell is flagged.
+`build_dataset.stamp_aoe_escalation` writes `slot_escal` beside every
+loadout's `slot_spells` (and `always_escal` for an always-on `burst_aoe`
+row): the spell's `@targetcountvaluebonusfactor`, read from its own effect
+tree (`escalation`) and from what a dash or channel's end, a knockback's
+collision or a trigger delivers (`escalation_payload`); a shapeshifter's E
+reads its form's abilities too. 0 = the game gives the spell no escalation:
+no bonus. No record (a spell outside the index, a stat row) = unknown,
+stored as null: no bonus, the curated score at every size, the way a spell
+with no area fact scales flat. A flagged spell at a factor other than the
+table's fails the build, a spell index without escalation records fails it,
+and a loadout without the stamp fails both ports. Every `burst_aoe` bundle
+of the shipped sheets is flagged (93 weapon, 4 gear): 15 through a payload
+or a form.
 
 ### Geometric AoE utility scaling (standing rule)
 
@@ -196,9 +224,8 @@ so it could never up-rate AoE at the calibrated sizes). Soulscythe catch:
   (Q11); revisit if templates gain an expected-enemy-size field.
 - CC Escalation: `stun` IS wired (geometric transform + the dumps-derived
   duration factor, Q8 — `mechanics.yaml` `cc_duration_caps`); only
-  `clump_create` stays untouched.
-- Per-spell `burst_aoe` escalation eligibility: extracted, NOT wired —
-  `BACKLOG.md`.
+  `clump_create` stays untouched. The duration factor reads the spell's
+  own-tree `escalation`, not `escalation_payload` (`BACKLOG.md`).
 - Mob HP bonus (+10% max HP per player over a per-mob-type threshold):
   PvE, out of scope.
 
@@ -214,8 +241,8 @@ Code and yaml cite these by Q-number. Every question is closed unless
 - **Q6** AoE escalation magnitudes — 8%/target from 2, cap 56% at 8, after buffs, bypasses the soft cap.
 - **Q7** Resilience Penetration — WIRED as a supply-side rebate on burst_st/execute at the style's grown focus count (a partial rebate: single-target damage is usually a non-pick at 20+, the rebate keeps what high penetration retains); F20 pins it. Optional: dumps cross-check of the wiki values (`BACKLOG.md`).
 - **Q8** CC Escalation duration curve — from the dumps, same per-target factor as damage (0.08; Spirit Animal 0.25); published nowhere else.
-- **Q9** per-spell escalation eligibility — extracted from the dumps, 174/559.
-- **Q10** uniform AoE-class escalation — REFUTED; per-spell gating is the open item in `BACKLOG.md`.
+- **Q9** per-spell escalation eligibility — extracted from the dumps (174/559 when first extracted); on the pinned snapshot's 735 indexed spells a damage factor sits on 191 own trees and the payload walk (`escalation_payload`: a dash or channel's end, a knockback's collision, a trigger) adds 21, the dash and channel E's among them.
+- **Q10** uniform AoE-class escalation — REFUTED; WIRED per spell: `burst_aoe` takes the in-game bonus only from flagged spells (both ports, `slot_escal`; T11d/T11e).
 - **Q11 / Q13** asymmetric numbers at 21+ — CLOSED under standing rule 11 (the planner assumes a mirror fight, where Disarray is a no-op); recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens it.
 - **Q14** per-style mechanics numbers — delegated to curation under the ordering rule (attackers-per-target and expected-targets-hit are style properties); no measurement reaches them (Q2 / Q2b / Q5).
 - **Q15** weapon playstyle affinity — derive + curate exceptions: `derive_style_fit` + `style_overrides.yaml`; audit `out/style_fit_report.json`; MetaBattle cross-check in `build_dataset.py`.

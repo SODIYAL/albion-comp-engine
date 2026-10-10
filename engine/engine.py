@@ -77,8 +77,14 @@ DATASET = os.environ.get("BION_DATASET") or \
 # Focus Fire (Resilience) cuts focused single-target damage by attackers-on-
 # target. sustained_dps is deliberately in NEITHER family — brawl sustained
 # damage is spread across targets, so neither curve cleanly applies.
+# The AoE Escalation applies per spell (Q10): a bundle takes it only when
+# the game files flag its spell (the loadout's `slot_escal`, build_dataset
+# stamp_aoe_escalation); build_dataset.AOE_ESCALATION_CAPS mirrors this.
 AOE_ESCALATION_CAPS = ("burst_aoe",)
 RESILIENCE_CAPS = ("burst_st", "execute")
+# _eff's escalation argument when a caller passes none: a bundle carrying an
+# AOE_ESCALATION_CAPS capability read without its spell's stamp fails closed.
+_NO_STAMP = object()
 # Two builds of one candidate (combo x kit variant) whose pick values
 # differ by less than this are a tie, and the earlier build in search
 # order keeps it: several combos of one weapon often merge to the same
@@ -403,6 +409,10 @@ class Engine:
         self._geo_ref = geo.get("reference_clump")   # null -> base-clump anchor
         rt = geo.get("radius_targets") or {}
         self._radius_targets_table = sorted((float(k), rt[k]) for k in rt)
+        # The in-game AoE Escalation ratio: (1 + bonus at this style's
+        # clump) / (1 + bonus at the balanced base-size clump), the clump
+        # being expected_aoe_targets x the count_mult step. _eff applies it
+        # to a bundle only when the game files flag the bundle's spell.
         self.mech_mults = {}
         for cap in AOE_ESCALATION_CAPS:
             self.mech_mults[cap] = (
@@ -1209,17 +1219,30 @@ class Engine:
             m *= e_now / e_base
         return m
 
-    def _eff(self, caps, delivery=None, pen=0.0):
+    def _eff(self, caps, delivery=None, pen=0.0, escal=_NO_STAMP):
         """Apply mechanics multipliers (AoE escalation / Resilience) and the
         per-spell geometric transform to a bundle; sheet points convert to
         supply units through score_unit (1-7 scale, 2 points = 1 unit).
         `pen` is the wielder's Resilience Penetration: its burst_st/execute
         supply is rebated by the fraction of Focus-Fire reduction the stat
-        ignores at this context's focus count (a partial rebate)."""
+        ignores at this context's focus count (a partial rebate). `escal` is
+        the bundle's spell's AoE escalation stamp (`slot_escal`): the
+        AOE_ESCALATION_CAPS take the in-game ratio only when it is a factor
+        above 0; 0 (not flagged) and None (no record, unknown) take none,
+        and a bundle carrying one of those capabilities with no stamp
+        passed fails closed."""
         out = {}
         for c, v in caps.items():
             v /= self.score_unit
-            v *= self.mech_mults.get(c, 1.0)
+            m = self.mech_mults.get(c, 1.0)
+            if c in AOE_ESCALATION_CAPS:
+                if escal is _NO_STAMP:
+                    raise ValueError(
+                        f"{c}: a bundle read without its spell's AoE escalation "
+                        "stamp (slot_escal); rebuild the dataset")
+                if not escal:
+                    m = 1.0
+            v *= m
             if pen and self._pen_dr > 0.0 and c in RESILIENCE_CAPS:
                 v *= (1.0 - self._pen_dr * (1.0 - pen)) / (1.0 - self._pen_dr)
             if delivery is not None and c in self._geo_caps:
@@ -1234,10 +1257,30 @@ class Engine:
         dl = self.weapons[weapon].get("cap_delivery") or {}
         pen = self.weapons[weapon].get("resil_pen") or 0.0
         if not lo or not lo.get("slots") and not lo.get("always"):
-            return self._eff(self.caps_of(weapon), dl, pen), []
-        return (self._eff(lo.get("always", {}), dl, pen),
-                [[self._eff(b, dl, pen) for b in slot]
-                 for slot in lo.get("slots", [])])
+            # no game data, no spell: the escalation flag is unknown
+            return self._eff(self.caps_of(weapon), dl, pen, None), []
+        a_esc, s_esc = self._escal_stamps(lo, weapon)
+        return (self._eff(lo.get("always", {}), dl, pen, a_esc),
+                [[self._eff(b, dl, pen, s_esc[oi][ci]) for ci, b in enumerate(slot)]
+                 for oi, slot in enumerate(lo.get("slots", []))])
+
+    @staticmethod
+    def _escal_stamps(lo, key):
+        """(always-on factor, [[factor per bundle], ...]) of one loadout's
+        per-spell AoE escalation stamps (build_dataset stamp_aoe_escalation):
+        a factor above 0 = the game flags the spell, 0 = it does not, None =
+        no record (unknown). A loadout with bundles and no `slot_escal`, or
+        an always-on AoE escalation row with no `always_escal`, predates the
+        per-spell rule: fail closed."""
+        esc = lo.get("slot_escal")
+        if esc is None and lo.get("slots"):
+            raise ValueError(f"{key}: loadout carries no slot_escal (per-spell "
+                             "AoE escalation); rebuild the dataset")
+        always = lo.get("always") or {}
+        if "always_escal" not in lo and any(c in always for c in AOE_ESCALATION_CAPS):
+            raise ValueError(f"{key}: always-on AoE escalation row carries no "
+                             "always_escal; rebuild the dataset")
+        return lo.get("always_escal"), esc or []
 
     def _combo_extras(self, weapon):
         """Every one-spell-per-slot loadout as a merged effective-caps dict,
@@ -1445,9 +1488,11 @@ class Engine:
             else:
                 dl = g.get("cap_delivery") or {}
                 lo = g.get("loadout") or {}
-                always = self._eff(lo.get("always", {}), dl)
-                slots = [[self._eff(b, dl) for b in slot]
-                         for slot in (lo.get("slots") or []) if slot]
+                a_esc, s_esc = self._escal_stamps(lo, key)
+                always = self._eff(lo.get("always", {}), dl, 0.0, a_esc)
+                slots = [[self._eff(b, dl, 0.0, s_esc[oi][ci])
+                          for ci, b in enumerate(slot)]
+                         for oi, slot in enumerate(lo.get("slots") or []) if slot]
                 extras = [self._merge_max(always, combo)
                           for combo in (itertools.product(*slots) if slots else [()])]
             self._gear_cache[key] = extras

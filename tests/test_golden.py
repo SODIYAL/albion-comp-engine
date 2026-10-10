@@ -208,6 +208,52 @@ def run():
           and eff > raw / e_clap.score_unit,
           f"raw={raw:.1f}pts eff={eff:.2f}u unit={e_clap.score_unit:g}")
 
+    # T11d — the in-game AoE damage escalation applies per spell (Q10;
+    # pipeline/README.md "Per-spell AoE damage escalation"): a bundle takes
+    # the ratio only when the game files flag its spell. Every burst_aoe
+    # bundle of the shipped sheets is flagged: on the spell's own tree, on
+    # a dash's end payload (Realmbreaker's Aftershock), or on a
+    # shapeshifter's form (Lightcaller's Dawnbird Transformation).
+    def _aoe_stamps(items):
+        out = []
+        for k, it in sorted(items.items()):
+            lo = it.get("loadout") or {}
+            for oi, sl in enumerate(lo.get("slots") or []):
+                for ci, b in enumerate(sl):
+                    if "burst_aoe" in b:
+                        out.append((k, lo["slot_spells"][oi][ci], lo["slot_escal"][oi][ci]))
+            if "burst_aoe" in (lo.get("always") or {}):
+                out.append((k, None, lo["always_escal"]))
+        return out
+    stamps = _aoe_stamps(E.weapons) + _aoe_stamps(E.gear)
+    unflagged = [s for s in stamps if not s[2]]
+    by_spell = {(k, sid): f for k, sid, f in stamps}
+    check("T11d every burst_aoe bundle's spell is flagged, a dash's end payload "
+          "and a shapeshifter's form included",
+          stamps and not unflagged
+          and by_spell.get(("2H_AXE_AVALON", "LETHAL_CLEAVER")) == 0.08
+          and by_spell.get(("2H_SHAPESHIFTER_AVALON", "SHAPESHIFT_AVALONIAN_EAGLE")) == 0.08,
+          f"{len(stamps)} bundles; not flagged or unknown: {unflagged[:4]}")
+    # T11e — a not-flagged (0) or unknown (None) spell takes no in-game
+    # bonus, a flagged one the context's ratio; a bundle read without its
+    # stamp fails closed.
+    pts = {"burst_aoe": 4}
+    ratio = e_clap.mech_mults["burst_aoe"]
+    flagged = e_clap._eff(pts, None, 0.0, 0.08)["burst_aoe"]
+    plain = [e_clap._eff(pts, None, 0.0, f)["burst_aoe"] for f in (0.0, None)]
+    try:
+        e_clap._eff(pts, None, 0.0)
+        closed = False
+    except ValueError:
+        closed = True
+    check("T11e a not-flagged or unknown spell takes no in-game bonus; an "
+          "unstamped bundle fails closed",
+          ratio > 1.0 + 1e-9 and closed
+          and abs(flagged - 4 / e_clap.score_unit * ratio) < 1e-12
+          and all(abs(v - 4 / e_clap.score_unit) < 1e-12 for v in plain),
+          f"clap 20 ratio {ratio:.3f}: flagged {flagged:.3f}u, not flagged "
+          f"{plain[0]:.3f}u, unknown {plain[1]:.3f}u")
+
     # T12 — knockback is NOT clump creation (curation judgment).
     # Great Hammer's Tackle ("knocking back all enemies you pass through")
     # displaces; only drag/pull mechanics create clumps. The true clump

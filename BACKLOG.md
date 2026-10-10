@@ -37,11 +37,24 @@ Each is decidable today from evidence already in the repo.
   votes only. (V: 09b, Seat pooling)
 - **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
   Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
-- **Per-spell `burst_aoe` escalation gating** (Q10 refuted the uniform AoE
-  class; factors are extracted on `cap_delivery.escalation`, not wired).
-  Its stated precondition — a styled validation pass — is met: rounds 1-4
-  have run. Also PROVISIONAL: `radius_targets`, `reference_clump: 2`,
-  travel-distance footprints uncounted. (Q9 / Q10)
+- **The AoE geometry's provisional parts and the payload factors**
+  (Q8 / Q9): `radius_targets`, `reference_clump: 2` and travel-distance
+  footprints stay PROVISIONAL (the geometry walk follows no dash or channel
+  end, so a dash E's area is unknown). The CC duration factor and each
+  capability's delivery entry (`cap_delivery`, the first evidence spell
+  with a fact) read the own-tree `escalation`; read with
+  `escalation_payload` beside it, 18 root and stun entries gain the
+  duration factor (the root of Snare Charge on seven maces, Positional
+  Drift on eight shapeshifter staves and Trinity Spear's Spectral Trident;
+  the stun of Mace's Deep Leap and Grovekeeper's Ground Pound), and three
+  delivery entries move to a spell whose area is unknown and lose their
+  geometric scaling (Ravenstrike Cestus peel and knockback, Battle Bracers
+  catch).
+  Whether the CC factor reads the payload, and how a delivery entry picks
+  its spell (one per capability, where the loadout scores one spell per
+  bundle), need a maintainer decision. The in-game damage bonus reads the
+  style clump, not the spell's reach. (V: 10, The in-game AoE escalation
+  applies per spell)
 - **A no-row piece as the dressed forge's one alternative**: kit_variants
   takes as v1 the first in-band piece whose top weighted capability
   differs from v0's, and a piece with no row has none, so in 19 band x

@@ -188,11 +188,13 @@ def build_loadout(rows, line):
     for slot, ids in ((line or {}).get("spells", {}) or {}).items():
         for sid in ids:
             spell_slot.setdefault(sid, slot)
-    always, bundles = {}, {}
+    always, always_ev, bundles = {}, {}, {}
     for cap, score, ev, use in rows:
         slot = spell_slot.get(ev)
         if slot is None:
-            always[cap] = max(always.get(cap, 0), score)
+            if score > always.get(cap, 0):
+                always[cap] = score
+                always_ev[cap] = ev
         else:
             b = bundles.setdefault((slot, ev, use), {})
             b[cap] = max(b.get(cap, 0), score)
@@ -201,8 +203,125 @@ def build_loadout(rows, line):
         slots.setdefault(slot, []).append(b)
         spells.setdefault(slot, []).append(sp)
     names = list(slots)
+    # `_always_ev` (the evidence of each always-on capability's row) is
+    # read and dropped by stamp_aoe_escalation; it never reaches the dataset
     return {"always": always, "slots": [slots[n] for n in names],
-            "slot_names": names, "slot_spells": [spells[n] for n in names]}
+            "slot_names": names, "slot_spells": [spells[n] for n in names],
+            "_always_ev": always_ev}
+
+
+# The capabilities the in-game AoE damage escalation applies to: the
+# engines' AOE_ESCALATION_CAPS (engine.py, app_scoring.js).
+AOE_ESCALATION_CAPS = ("burst_aoe",)
+
+
+def stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines, mechanics):
+    """PER-SPELL AoE ESCALATION ELIGIBILITY (Q9 / Q10). The in-game AoE
+    damage escalation (mechanics.yaml `aoe_escalation`: 8% per target from
+    2, 56% at 8, after buffs, past the soft cap) applies only to the spells
+    the game files flag with `@targetcountvaluebonusfactor`. Every loadout
+    gets `slot_escal`, beside `slot_spells`: per bundle, its spell's value
+    factor (the larger of the spell index's `escalation` and
+    `escalation_payload`); 0 where the spell's record carries none (the
+    game gives it no escalation); None where the spell has no record
+    (unknown: the engines grant no bonus, the curated score at every size,
+    as a spell with no area fact scales flat). A shapeshifter's E is scored
+    for its form, so its factor is the largest of its own and its form's
+    abilities' (weapon_lines `form_spells`). An always-on bundle that
+    carries an AOE_ESCALATION_CAPS capability gets `always_escal`, the
+    factor of that capability's row (a stat row is no spell: None).
+
+    The engines read the escalation ratio from mechanics' per-target table,
+    so a flagged burst_aoe spell at a factor other than its
+    `bonus_per_extra_target` fails the build, as does a spell index without
+    escalation records (the flag source). Returns the report lines."""
+    per = (mechanics.get("aoe_escalation") or {}).get("bonus_per_extra_target")
+    if not per:
+        sys.exit("mechanics.yaml aoe_escalation: no bonus_per_extra_target")
+    unrecorded = sorted(s for s, r in spell_index.items() if "escalation" not in r)
+    if not spell_index or unrecorded:
+        sys.exit("spell_index.json carries no AoE escalation record on "
+                 f"{len(unrecorded) or 'any'} spells (Q9): rerun "
+                 "pipeline/parse_dumps.py")
+
+    def parts(sid):
+        """(own tree, payload) value factors of a spell; None unrecorded."""
+        r = spell_index.get(sid)
+        if r is None:
+            return None
+        return ((r.get("escalation") or {}).get("value") or 0.0,
+                (r.get("escalation_payload") or {}).get("value") or 0.0)
+
+    tally = {"flagged": [], "not flagged": [], "unknown": []}
+    via = {"payload": set(), "form": set()}
+    problems = []
+    for kind, items in (("weapon", weapons), ("gear", gear)):
+        for key, it in sorted(items.items()):
+            lo = it.get("loadout")
+            if lo is None:
+                continue
+            line = weapon_lines.get(key) if kind == "weapon" else None
+            e_ids = set(((line or {}).get("spells") or {}).get("e") or [])
+            forms = (line or {}).get("form_spells") or []
+
+            def source(sid):
+                """(factor, where it sits: own / payload / form)."""
+                p = parts(sid)
+                if p is None:
+                    return None, None
+                base, pay = p
+                form = 0.0
+                if sid in e_ids and forms:
+                    form = max(max(parts(s) or (0.0,)) for s in forms)
+                f = max(base, pay, form)
+                return f, ("form" if form > max(base, pay)
+                           else "payload" if pay > base else "own")
+
+            def factor(sid):
+                return source(sid)[0]
+
+            lo["slot_escal"] = [[factor(s) for s in sl]
+                                for sl in lo.get("slot_spells") or []]
+            always_ev = lo.pop("_always_ev", None) or {}
+            bundles = [(sl_i, b_i, b, lo["slot_escal"][sl_i][b_i])
+                       for sl_i, sl in enumerate(lo.get("slots") or [])
+                       for b_i, b in enumerate(sl)]
+            al = lo.get("always") or {}
+            hit = [c for c in AOE_ESCALATION_CAPS if c in al]
+            if hit:
+                lo["always_escal"] = factor(always_ev.get(hit[0]))
+                bundles.append((None, None, al, lo["always_escal"]))
+            for sl_i, b_i, b, f in bundles:
+                for c in AOE_ESCALATION_CAPS:
+                    if c not in b:
+                        continue
+                    sid = (always_ev.get(c) if sl_i is None
+                           else lo["slot_spells"][sl_i][b_i])
+                    where = f"{key}:{sid}"
+                    if f is None:
+                        tally["unknown"].append(where)
+                    elif f:
+                        tally["flagged"].append(where)
+                        how = source(sid)[1]
+                        if how in via:
+                            via[how].add(sid)
+                        if abs(f - per) > 1e-12:
+                            problems.append(
+                                f"{where}: {c} spell escalates at {f} per target, "
+                                f"the engines' table at {per}")
+                    else:
+                        tally["not flagged"].append(where)
+    if problems:
+        sys.exit("AoE escalation: " + "; ".join(problems))
+    lines = [f"{len(tally['flagged'])} {'/'.join(AOE_ESCALATION_CAPS)} bundles "
+             f"flagged ({len(via['payload'])} spells through a payload, "
+             f"{len(via['form'])} through a form), "
+             f"{len(tally['not flagged'])} not flagged, "
+             f"{len(tally['unknown'])} unknown"]
+    for k in ("not flagged", "unknown"):
+        if tally[k]:
+            lines.append(f"{k}: " + ", ".join(tally[k]))
+    return lines
 
 
 def load_sheets(weapon_lines, tune_sheets=None):
@@ -3670,6 +3789,11 @@ def main():
             roles_problems.append(f"need_profiles: overrides names "
                                   f"unknown content {c}")
     jsonfmt.dump(roles_report, os.path.join(OUT, "roles_report.json"))
+    # per-spell AoE escalation eligibility (Q9 / Q10), stamped once every
+    # bundle exists (the gear-active doctrine adds bundles in apply_roles)
+    for line in stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines,
+                                     mechanics):
+        print(f"  aoe escalation: {line}")
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements go to
     # the review queue (`metabattle_review_queue`), never silent fixes.

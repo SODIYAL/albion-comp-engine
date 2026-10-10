@@ -32,7 +32,20 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "6"   # 6: list indices kept in description tags; CC resistance is no shield; consume spells; form spells
+ADAPTER_VERSION = "7"   # 7: escalation factors on a spell's end, collision and trigger payloads (`escalation_payload`); 6: list indices kept in description tags; CC resistance is no shield; consume spells; form spells
+
+# The references the escalation walk follows. OWN_REFS reach a spell's own
+# effect tree (`escalation`). PAYLOAD_REFS reach the effects it delivers when
+# a dash or channel ends, a knockback collides or a trigger fires
+# (`escalation_payload`): Lethal Cleaver, Spinning Blades and the other dash
+# and channel E's carry their 8% factor only there. Name and icon references
+# (@uisprite, @spellname, @name) and button-state references (@chargespell,
+# @overridespell, @removedspell) are never followed: a walk through @uisprite
+# reached unrelated spells (Bear Trap's icon names Caltrops).
+OWN_REFS = ("@spell", "@effect")
+PAYLOAD_REFS = ("@endeffect", "@collisioneffect", "@landscapecollisioneffect",
+                "@spellontrigger", "@applyspellwhentargetsinarea",
+                "@applyspellwhennotargetsinarea")
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -257,8 +270,10 @@ def spell_geometry(sid, registry, max_depth=8):
     Escalation PER EFFECT — `@targetcountvaluebonusfactor` (damage/value bonus
     per target hit, the wiki's 8%) and `@targetcountdurationbonusfactor` (CC
     duration bonus per target — the CC Escalation whose curve the wiki never
-    published). The max factor of each kind found in the spell tree is
-    recorded; absent key = the game gives this spell no escalation."""
+    published). The max factor of each kind found in the spell's own effect
+    tree is recorded. `escalation_payload` records the factors the spell's
+    end, collision and trigger payloads (PAYLOAD_REFS) add beyond that tree.
+    No factor in either = the game gives this spell no escalation."""
     best = {"radius": None, "max_targets": None}
     escal = {}
     shapes = []
@@ -326,10 +341,14 @@ def spell_geometry(sid, registry, max_depth=8):
     escal = spell_escalation(sid, registry)
     if escal:
         out["escalation"] = escal
+    full = spell_escalation(sid, registry, OWN_REFS + PAYLOAD_REFS)
+    payload = {k: v for k, v in sorted(full.items()) if v > escal.get(k, 0)}
+    if payload:
+        out["escalation_payload"] = payload
     return out
 
 
-def spell_escalation(sid, registry, max_depth=10):
+def spell_escalation(sid, registry, refs=OWN_REFS, max_depth=10):
     """{value: f, duration: f} escalation factors for a spell, or {}.
 
     Separate from the geometry walk on purpose: escalation factors live on
@@ -337,8 +356,10 @@ def spell_escalation(sid, registry, max_depth=10):
     container key (Avalanche: ICEROCK_EXPLODE -> ..._PASSTHROUGH_EFFECT),
     while the geometry walk deliberately follows only applyspell/usespell/
     spelleffectarea so stray references can never inflate a spell's verified
-    footprint. This walk follows every reference but reads ONLY the two
-    targetcount attributes."""
+    footprint. This walk follows the `refs` attributes under every key but
+    reads ONLY the two targetcount attributes. OWN_REFS (the default) read
+    the spell's own effect tree; OWN_REFS + PAYLOAD_REFS add what a dash or
+    channel's end, a knockback's collision or a trigger delivers."""
     escal = {}
     visited = set()
 
@@ -358,7 +379,7 @@ def spell_escalation(sid, registry, max_depth=10):
             return
         bump("value", node.get("@targetcountvaluebonusfactor"))
         bump("duration", node.get("@targetcountdurationbonusfactor"))
-        for ref_attr in ("@spell", "@effect"):
+        for ref_attr in refs:
             ref = node.get(ref_attr)
             if isinstance(ref, str) and ref in registry and ref not in visited:
                 visited.add(ref)
@@ -679,8 +700,10 @@ def main(dump_dir, source_commit):
             "radius": geom.get("radius"),
             "max_targets": geom.get("max_targets"),
             "area": geom.get("area"),
-            # per-spell AoE Escalation factors from the dumps (Q9): absent =
-            # the game gives this spell no escalation bonus
+            # per-spell AoE Escalation factors from the dumps (Q9), the
+            # spell's own effect tree; `escalation_payload` (below, only when
+            # present) adds its end, collision and trigger payloads. No
+            # factor in either = the game gives this spell no escalation
             "escalation": geom.get("escalation"),
             # channel-delivered payload (structural: a channelingspell node
             # anywhere in the spell tree). None = no channel found.
@@ -694,6 +717,10 @@ def main(dump_dir, source_commit):
             # multi-component Es)
             "description": plain[:700],
         }
+        # written only when a payload adds a factor, so a spell without one
+        # keeps its record (and its evidence-review fingerprint) unchanged
+        if geom.get("escalation_payload"):
+            spell_index[sid]["escalation_payload"] = geom["escalation_payload"]
 
     for L in lines.values():
         L.pop("_nspells", None)
@@ -730,6 +757,11 @@ def main(dump_dir, source_commit):
           f" ({resolved_hits / total_tags:.0%})" if total_tags else "")
     n_geom = sum(1 for s in spell_index.values() if s.get("radius"))
     print(f"structural area geometry: {n_geom}/{len(spell_index)} spells")
+    own = {s for s, r in spell_index.items() if (r.get("escalation") or {}).get("value")}
+    pay = {s for s, r in spell_index.items()
+           if (r.get("escalation_payload") or {}).get("value")} - own
+    print(f"AoE escalation value factor: {len(own) + len(pay)}/{len(spell_index)} "
+          f"spells ({len(pay)} on a payload only)")
     print(f"wrote {out_dir}/weapon_lines.json, spell_index.json")
 
 if __name__ == "__main__":

@@ -31,7 +31,9 @@
   var nonEmpty = function (o) { if (!o) return false; for (var k in o) return true; return false; };
 
   /* Mechanics-affected capability families (MECHANICS_TODO.md): mirrors
-     AOE_ESCALATION_CAPS / RESILIENCE_CAPS in engine.py. */
+     AOE_ESCALATION_CAPS / RESILIENCE_CAPS in engine.py. The AoE
+     Escalation applies per spell (Q10): a bundle takes it only when the
+     game files flag its spell (the loadout's slot_escal). */
   var AOE_ESCALATION_CAPS = ["burst_aoe"];
   var RESILIENCE_CAPS = ["burst_st", "execute"];
   /* Two builds of one candidate whose pick values differ by less than
@@ -379,6 +381,8 @@
     var rtSrc = geo.radius_targets || {};
     for (var rk in rtSrc) this._radiusTargetsTable.push([parseFloat(rk), rtSrc[rk]]);
     this._radiusTargetsTable.sort(function (a, b) { return a[0] - b[0]; });
+    /* the in-game AoE Escalation ratio (mirrors engine.py): _eff applies
+       it to a bundle only when the game files flag the bundle's spell */
     this.mechMults = {};
     var i;
     for (i = 0; i < AOE_ESCALATION_CAPS.length; i++) {
@@ -1128,12 +1132,23 @@
     return m;
   };
 
-  CompEngine.prototype._eff = function (caps, delivery, pen) {
+  CompEngine.prototype._eff = function (caps, delivery, pen, escal) {
+    /* escal: the bundle's spell's AoE escalation stamp (mirrors engine.py
+       _eff): the AOE_ESCALATION_CAPS take the in-game ratio only when it
+       is a factor above 0; 0 (not flagged) and null (no record, unknown)
+       take none; undefined (no stamp passed) fails closed. */
     var out = {}, m, v;
     for (var c in caps) {
       v = caps[c] / this.scoreUnit;
       m = this.mechMults[c];
-      v = v * (m === undefined ? 1.0 : m);
+      if (m === undefined) m = 1.0;
+      if (AOE_ESCALATION_CAPS.indexOf(c) >= 0) {
+        if (escal === undefined)
+          throw new Error(c + ": a bundle read without its spell's AoE escalation "
+                          + "stamp (slot_escal); rebuild the dataset");
+        if (!escal) m = 1.0;
+      }
+      v = v * m;
       if (pen && this._penDr > 0.0 && RESILIENCE_CAPS.indexOf(c) >= 0)
         v *= (1.0 - this._penDr * (1.0 - pen)) / (1.0 - this._penDr);
       if (delivery !== undefined && delivery !== null && this._geoCaps[c])
@@ -1149,15 +1164,37 @@
     var pen = this.weapons[weapon].resil_pen || 0.0;
     var hasSlots = lo && lo.slots && lo.slots.length;
     var hasAlways = lo && lo.always && Object.keys(lo.always).length;
+    // no game data, no spell: the escalation flag is unknown
     if (!lo || (!hasSlots && !hasAlways))
-      return { always: this._eff(this.capsOf(weapon), dl, pen), slots: [] };
+      return { always: this._eff(this.capsOf(weapon), dl, pen, null), slots: [] };
     var self = this;
+    var st = this._escalStamps(lo, weapon);
     return {
-      always: this._eff(lo.always || {}, dl, pen),
-      slots: (lo.slots || []).map(function (slot) {
-        return slot.map(function (b) { return self._eff(b, dl, pen); });
+      always: this._eff(lo.always || {}, dl, pen, st.always),
+      slots: (lo.slots || []).map(function (slot, oi) {
+        return slot.map(function (b, ci) { return self._eff(b, dl, pen, st.slots[oi][ci]); });
       }),
     };
+  };
+
+  CompEngine.prototype._escalStamps = function (lo, key) {
+    /* (always-on factor, factor per bundle) of one loadout's per-spell AoE
+       escalation stamps (mirrors engine.py _escal_stamps): a loadout with
+       bundles and no slot_escal, or an always-on AoE escalation row with no
+       always_escal, fails closed. An absent always_escal reads null. */
+    var esc = lo.slot_escal;
+    if ((esc === undefined || esc === null) && lo.slots && lo.slots.length)
+      throw new Error(key + ": loadout carries no slot_escal (per-spell AoE "
+                      + "escalation); rebuild the dataset");
+    var always = lo.always || {};
+    if (lo.always_escal === undefined) {
+      for (var i = 0; i < AOE_ESCALATION_CAPS.length; i++)
+        if (always[AOE_ESCALATION_CAPS[i]] !== undefined)
+          throw new Error(key + ": always-on AoE escalation row carries no "
+                          + "always_escal; rebuild the dataset");
+    }
+    return { always: lo.always_escal === undefined ? null : lo.always_escal,
+             slots: esc || [] };
   };
 
   CompEngine.prototype._comboExtras = function (weapon) {
@@ -1334,13 +1371,15 @@
     if (!g) { extras = [{}]; this._gearCache[key] = extras; return extras; }
     var dl = g.cap_delivery || {};
     var lo = g.loadout || {};
-    var always = this._eff(lo.always || {}, dl);
+    var st = this._escalStamps(lo, key);
+    var always = this._eff(lo.always || {}, dl, 0.0, st.always);
     var slots = [];
     var raw = lo.slots || [];
     for (var i = 0; i < raw.length; i++) {
       if (!raw[i].length) continue;
       var eff = [];
-      for (var j = 0; j < raw[i].length; j++) eff.push(this._eff(raw[i][j], dl));
+      for (var j = 0; j < raw[i].length; j++)
+        eff.push(this._eff(raw[i][j], dl, 0.0, st.slots[i][j]));
       slots.push(eff);
     }
     extras = [];
