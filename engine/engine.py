@@ -85,6 +85,23 @@ RESILIENCE_CAPS = ("burst_st", "execute")
 # capabilities, and a last-bit difference between the two ports' float
 # arithmetic must not pick a different combo (parity case 41).
 PICK_TIE_EPS = 1e-9
+# The game seats at most 20 players in one party; a zerg is several
+# parties, each forged at its own plan. Everything that generates members
+# for a single party (forge and its refresh, replace_options, refine)
+# refuses a party past the cap; scoring a manual roster of any size stays
+# allowed (judged at roster size).
+PARTY_CAP = 20
+
+
+def party_cap_message(n):
+    """The refusal both ports raise for a party past PARTY_CAP."""
+    return (f"a single party seats at most {PARTY_CAP} players, {n} asked: "
+            "forge a zerg party by party")
+
+
+def _refuse_past_cap(n):
+    if n > PARTY_CAP:
+        raise ValueError(party_cap_message(n))
 
 
 class Engine:
@@ -4300,7 +4317,9 @@ class Engine:
         result returns {"party", "gears"}. gears=None keeps the legacy
         weapon-only search bit-identical, returning the plain list.
         `pool`: None reads every non-retired weapon (self.pool); a given
-        list, empty included, is the candidate set as given (F37)."""
+        list, empty included, is the candidate set as given (F37).
+        A party past PARTY_CAP is refused (ValueError)."""
+        _refuse_past_cap(len(party))
         party = list(party)
         if gears is None:
             if not party:
@@ -4878,8 +4897,13 @@ class Engine:
         under unchanged locks walks the alternatives in score order,
         deterministically. When every completion the final beam can
         reach is avoided the best of them is returned with
-        `exhausted: True` (the caller says so instead of repeating)."""
+        `exhausted: True` (the caller says so instead of repeating).
+
+        One party: a size or a locked list past PARTY_CAP is refused
+        (ValueError, party_cap_message) before any search; a zerg is
+        forged party by party."""
         locked = list(locked or [])
+        _refuse_past_cap(max(size, len(locked)))
         avoid_keys = frozenset(self.roster_key(p) for p in (avoid or []))
         # normalize locked_combos to EXACTLY len(locked): a missing/short/
         # empty list pads with None (default combos), extras are dropped — a
@@ -5058,7 +5082,9 @@ class Engine:
         {weapon, display_name, score, delta, combo, kit}, `delta` being
         the exact comp_score change of applying the swap; sorted by
         quantized score, then weapon id (deterministic in both ports).
-        Suggestion-layer only: manual swaps always score."""
+        Suggestion-layer only: manual swaps always score. A party past
+        PARTY_CAP is refused (ValueError), as the forge refuses it."""
+        _refuse_past_cap(len(party))
         if top_n is None:
             top_n = 5       # None reads as the default in both ports (F45)
         party = list(party)
@@ -5395,7 +5421,10 @@ if __name__ == "__main__":
           f"release_clean={meta['release_clean']}")
     style_bit = f", {e.style}" if e.style != "balanced" else ""
     if args.forge:
-        r = e.forge(e.size, locked=party)
+        try:
+            r = e.forge(e.size, locked=party)
+        except ValueError as err:
+            raise SystemExit(str(err))
         print(f"\nForged {len(r['party'])}/{e.size} ({e.template['name']}, "
               f"size {e.size}{style_bit})  score {r['score']:.3f}  "
               f"feasible={r['feasible']}  filler={r['filler']}")

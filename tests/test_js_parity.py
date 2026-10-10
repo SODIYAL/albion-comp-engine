@@ -16,7 +16,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
 
-from engine import Engine  # noqa: E402
+from engine import PARTY_CAP, Engine, party_cap_message  # noqa: E402
 
 DATASET = os.path.join(ROOT, "pipeline", "out", "dataset-latest.json")
 SCORING_JS = os.path.join(ROOT, "engine", "app_scoring.js")
@@ -191,6 +191,28 @@ def forge_case(i, c):
             "locked_gears": lgears}
 
 
+def _refusal(fn):
+    """The refusal message a call raises, else "no refusal"."""
+    try:
+        fn()
+    except ValueError as err:
+        return str(err)
+    return "no refusal"
+
+
+def forge_cap_results(e, pool):
+    """One party caps at PARTY_CAP: forging one more, forging with one
+    more locked, and replacing or refining in a party of one more each
+    refuse with the cap message, before any search (mirrors
+    js_parity_runner.js forgeCapResults)."""
+    over = PARTY_CAP + 1
+    party = [pool[0]] * over
+    return {"forge": _refusal(lambda: e.forge(over, pool=pool)),
+            "locked": _refusal(lambda: e.forge(PARTY_CAP, locked=party, pool=pool)),
+            "replace": _refusal(lambda: e.replace_options(party, 0, pool=pool)),
+            "refine": _refusal(lambda: e.refine(party, max_passes=1, pool=[]))}
+
+
 # kit_options is a full-catalog sweep (comp-aware = one fitness call per
 # item) — cover it on every 6th case, offset from the swap/refine cadence,
 # with the rest-of-party capped. Both modes ride: comp-aware (exact
@@ -215,6 +237,7 @@ def py_results(cases):
         rp = refine_case(i, c["party"])
         fc = forge_case(i, c)
         forged = None
+        forge_cap = None if fc is None else forge_cap_results(e, fc["pool"])
         if fc is not None:
             r = e.forge(fc["size"], locked=fc["locked"],
                         locked_combos=fc["locked_combos"], pool=fc["pool"],
@@ -259,6 +282,8 @@ def py_results(cases):
             "target_min": {cap: e.target_min(cap) for cap in e.reqs},
             "constraint_band": e._band,
             "forge": forged,
+            # one party caps at 20 (forges stop at 20), on the forge cadence
+            "forge_cap": forge_cap,
             # replace_options: the one-slot forge on the
             # swap cadence, slot 0 of the swap party, over the case pool
             "replace": None if sp is None or len(sp) < 2 else [
@@ -627,6 +652,12 @@ def main():
                     or abs(na["score"] - nb.get("score", 1e9)) > EPS \
                     or na["exhausted"] != nb.get("exhausted"):
                 errs.append(f"forge next-best (avoid): py={na} js={nb}")
+        if a.get("forge_cap") is not None:
+            want = party_cap_message(PARTY_CAP + 1)
+            if a["forge_cap"] != b.get("forge_cap") \
+                    or any(v != want for v in a["forge_cap"].values()):
+                errs.append(f"forge_cap: py={a['forge_cap']} "
+                            f"js={b.get('forge_cap')} want={want!r}")
         if a.get("replace") is not None:
             ra_, rb_ = a["replace"], b.get("replace") or []
             if [o["weapon"] for o in ra_] != [o["weapon"] for o in rb_]:

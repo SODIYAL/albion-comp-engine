@@ -41,6 +41,12 @@ The scoring core of Comp Forge, in two parity-locked ports:
   `build_extra` gives a dressed member its naked value on them and the
   count-once share reads them unmultiplied — so no kit closes the row a
   weapon is fielded for.
+- **One party, at most 20** (`PARTY_CAP`): `forge` (its `avoid` refresh
+  too), `replace_options` and `refine` refuse a size or a party past 20
+  before any search, with the same message in both ports
+  (`party_cap_message`; a ValueError in Python, an Error in JS); a zerg
+  is forged party by party. Scoring, reading and recommending on a
+  manual roster of any size stay allowed (judged at roster size).
 - **Locked gear is sacred**: `forge(locked_gears=)` scores a locked member in
   exactly the supplied kit and never re-dresses it (naked when none —
   nothing is invented); `refine(gears=)` runs the dressed local search and

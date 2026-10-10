@@ -358,6 +358,11 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   are never re-dressed; doctrine passives never enter evaluation.
 - The forge's minimum-need bound is admissible (never more than a legal
   completion needs, never less); the expansion sort is quantized in both ports.
+- **One party, at most 20**: the game seats at most 20 players in a party,
+  so the forge (its refresh too), `replace_options` and `refine` refuse a
+  party past 20 with the cap message (`PARTY_CAP`, both ports, F47 and the
+  parity field `forge_cap`); a zerg is forged party by party (the planner's
+  parties). Scoring and reading a manual roster of any size stays allowed.
 
 The dashboard tracks `party`, `PROV` (manual / live / forged), `COMBO` and
 `LOADOUT`; `sortPartyByRole()` applies one stable permutation across all of

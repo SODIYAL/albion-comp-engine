@@ -224,6 +224,9 @@ the final depth, where `avoid` is applied. Healers in the styled 25 cells:
 6-7 in nine of ten (Territory Defense clap_kite 5); balanced forges 5 at
 both contents (the base band's maximum).
 
+The forge now refuses a single party past 20 (V: 10, Forges stop at 20),
+and the sweep's grid stops at 20; the 25 cells above stay as measured.
+
 ### The Dragon Portal pools
 
 All 18 rosters are full, feasible and kill-ready, and none carries a weapon

@@ -40,8 +40,7 @@ Grades per forged roster (all descriptive; nothing here scores):
              least PAIR_MIN rosters of the cell, and the nearest harvested
              roster (multiset Jaccard). The cell is the HOLDOUT slice
              (battle % 5 == 0, which no shipped table learns from) where it
-             holds HOLDOUT_MIN rosters, else every battle (labelled). Killer
-             parties stop at 20, so a 21+ cell borrows the 18-20 rosters.
+             holds HOLDOUT_MIN rosters, else every battle (labelled).
   hygiene    copies past the penalty-free allowance, unseated weapons, and
              members a suggestion gate bars (viability exclusion, style
              unfit, generation situational, unfielded in a pool): a
@@ -106,18 +105,19 @@ PORTAL = "ancient_lands"
 EVIDENCE_FORMAT = 1
 ROLES = ("healer", "frontline", "support", "dps")
 
-# The planner's grid. Sizes per content: the template's base size plus the
-# sizes the harvest bands cover (10 / 15 / 20) and 25 (no harvest row: the
-# engine API's single-party forge past 20). Sub-10 cells run balanced and
-# the three primary styles; 10+ cells run every style. The Dragon Portal
-# grid forges each matchmaking pool at its top size.
+# The planner's grid. Sizes per content: the template's base size and the
+# sizes the harvest bands cover (10 / 15 / 20), at most 20: one party caps
+# at 20 and the forge refuses a party past it (a zerg forges party by
+# party). Sub-10 cells run balanced and the three primary styles; 10+ cells
+# run every style. The Dragon Portal grid forges each matchmaking pool at
+# its top size.
 GRID = [
     ("castle_outpost", 5), ("castle_outpost", 7),
     ("roads", 7),
     ("faction_war", 10), ("faction_war", 15),
     ("blackzone_roam", 10), ("blackzone_roam", 15), ("blackzone_roam", 20),
-    ("territory_defense", 15), ("territory_defense", 20), ("territory_defense", 25),
-    ("castle", 20), ("castle", 25),
+    ("territory_defense", 15), ("territory_defense", 20),
+    ("castle", 20),
 ]
 PORTAL_GRID = [(PORTAL, 3), (PORTAL, 5), (PORTAL, 7), (PORTAL, 20)]
 STYLES_SMALL = ("balanced", "brawl", "clap", "kite")
@@ -279,8 +279,6 @@ def evidence_cell(ev, e, size, style):
                 and (not styled or p["style"] == style)]
         where = (f"{ref - SIZE_WINDOW}-{min(ref + SIZE_WINDOW, HARVEST_MAX)}"
                  + (f" {style}" if styled else " any style"))
-        if size > HARVEST_MAX:
-            where += ", borrowed"
     hold = [p for p in cand if p["battle"] % HOLDOUT_MOD == 0]
     if len(hold) >= HOLDOUT_MIN:
         return Cell(hold, f"holdout, {where}")
@@ -668,9 +666,6 @@ def summarize(results):
         "max_gap_share": max(best_gap) if best_gap else None,
         "diff_slots": dict(sorted(Counter(g["diff_from_first"] for _c, g in alts).items())),
     }
-    # healers past the harvest's sizes
-    out["past_harvest"] = {f"{c['content']}/{c['size']}/{c['style']}": c["rosters"][0]["roles"]
-                           for c in results if c["size"] > HARVEST_MAX}
     # how alike the rank-0 rosters of two styles are at one content and size
     by_cs = {}
     for c in big:
@@ -743,8 +738,8 @@ def summary_lines(title, s):
                  f"Jaccard {s['median_nearest_jaccard']:.2f}")
     if s["reach_10_plus"]:
         L.append(f"- weapons the forge reaches for at 10+ (cells containing it of "
-                 f"{s['cells_10_plus']}; its highest prevalence in those cells' evidence, 21+ "
-                 "reading the borrowed 18-20 cell; cells whose evidence never fields it): "
+                 f"{s['cells_10_plus']}; its highest prevalence in those cells' evidence; "
+                 "cells whose evidence never fields it): "
                  + ", ".join(
                      f"{d['name']} {d['cells']} (max {fmt_pct(d['max_prevalence'])}, zero in "
                      f"{d['zero_cells']})" for d in s["reach_10_plus"][:15]))
@@ -763,10 +758,6 @@ def summary_lines(title, s):
              + ", ".join(f"{k}: {v}" for k, v in rf["diff_slots"].items()))
     if rf["beaten"]:
         L.append("  - " + ", ".join(rf["beaten"]))
-    if s["past_harvest"]:
-        L.append("- past the harvest's sizes (H/F/S/D): " + ", ".join(
-            f"{k} {v['healer']}/{v['frontline']}/{v['support']}/{v['dps']}"
-            for k, v in s["past_harvest"].items()))
     for pair, v in s["style_overlap"].items():
         a, b = pair.split("~")
         L.append(f"- {a} vs {b} rank-0 rosters share {fmt_pct(v['mean_share'])} of their "

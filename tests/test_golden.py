@@ -792,23 +792,24 @@ def run():
     # not needed at 10-14, growing with numbers, a firm requirement at
     # 25+; winners: 7% at 10-14, 21% at 15-19, 32% at 20+). Pinned at
     # both ends: a default 7-man and a default 10-man forge field no
-    # Exalted with nothing barring it, a default 25-man does, and a
-    # manual Exalted at 7 scores like any healer.
+    # Exalted with nothing barring it, a default 20-man (a full party; a
+    # single party forges at 20 at most) does, and a manual Exalted at 7
+    # scores like any healer.
     e_co7 = Engine(content="castle_outpost", size=7)
     p7 = e_co7.forge(7)["party"]
     p10 = Engine(content="blackzone_roam", size=10).forge(10)["party"]
-    p25 = Engine(content="castle", size=25).forge(25)["party"]
+    p20 = Engine(content="castle", size=20).forge(20)["party"]
     manual = e_co7.comp_score(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "2H_LONGBOW"])
     check("T42 no cost gate: Exalted absent from default 7- and 10-man "
-          "forges by mechanics alone, present at 25, and scores when manual",
+          "forges by mechanics alone, present at 20, and scores when manual",
           "2H_HOLYSTAFF_CRYSTAL" in set(e_co7.suggest_pool())
           and "2H_HOLYSTAFF_CRYSTAL" not in p7
           and "2H_HOLYSTAFF_CRYSTAL" not in p10
-          and "2H_HOLYSTAFF_CRYSTAL" in p25
+          and "2H_HOLYSTAFF_CRYSTAL" in p20
           and manual == manual and manual > 0,
           f"p7={[E.weapons[w]['display_name'] for w in p7]} "
           f"exalted@10={'2H_HOLYSTAFF_CRYSTAL' in p10} "
-          f"exalted@25={'2H_HOLYSTAFF_CRYSTAL' in p25} manual={manual:.2f}")
+          f"exalted@20={'2H_HOLYSTAFF_CRYSTAL' in p20} manual={manual:.2f}")
     check("T27b full-healer split matches the recorded cases "
           "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
           E.weapons[GREAT_HOLY]["full_healer"]

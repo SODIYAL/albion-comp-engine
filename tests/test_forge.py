@@ -674,12 +674,15 @@ def t_style_bands():
         if ec._band["healer"].get("min") != minimum                 or "max" in ec._band["healer"]:
             ok = False
             lines.append(f"clap@{size}: {ec._band['healer']}")
-    ec25 = Engine(content="castle", size=25, style="clap")
-    rc25 = ec25.forge(25)
-    hc25 = sum(ec25.role_of(w) == "healer" for w in rc25["party"])
-    if not rc25["feasible"] or len(rc25["party"]) != 25 or hc25 < 5:
+    # a single party caps at 20 (forges stop at 20): the full castle party
+    # forges at 20 with the per-five minimum's 4 healers; the band rule at
+    # 25 still stands for a manual roster's reads
+    ec20 = Engine(content="castle", size=20, style="clap")
+    rc20 = ec20.forge(20)
+    hc20 = sum(ec20.role_of(w) == "healer" for w in rc20["party"])
+    if not rc20["feasible"] or len(rc20["party"]) != 20 or hc20 < 4:
         ok = False
-    lines.append(f"castle clap@25: {hc25}h, feasible={rc25['feasible']}")
+    lines.append(f"castle clap@20: {hc20}h, feasible={rc20['feasible']}")
     # the per-five minimum on brawl and both hybrids
     for st in ("brawl", "brawl_clap", "clap_kite"):
         for size, minimum in ((20, 4), (24, 4), (25, 5)):
@@ -687,19 +690,19 @@ def t_style_bands():
             if band.get("min") != minimum or "max" in band:
                 ok = False
                 lines.append(f"{st}@{size}: {band}")
-        eb25 = Engine(content="castle", size=25, style=st)
-        rb25 = eb25.forge(25)
-        hb25 = sum(eb25.role_of(w) == "healer" for w in rb25["party"])
-        if not rb25["feasible"] or hb25 < 5:
+        eb20 = Engine(content="castle", size=20, style=st)
+        rb20 = eb20.forge(20)
+        hb20 = sum(eb20.role_of(w) == "healer" for w in rb20["party"])
+        if not rb20["feasible"] or hb20 < 4:
             ok = False
-        lines.append(f"castle {st}@25: {hb25}h")
+        lines.append(f"castle {st}@20: {hb20}h")
     eb = Engine(content="castle", size=25)
     if {k: v for k, v in eb._band["healer"].items() if k != "typical"}             != {"min": 3, "max": 5}:
         ok = False
         lines.append(f"balanced@25 band changed: {eb._band['healer']}")
     check("F16 one healer per five as a minimum on clap, brawl and both "
           "hybrids (4 at 20-24, 5 at 25-29, no cap); kite keeps its minima; "
-          "balanced keeps the base band; full 25-person castle forges", ok,
+          "balanced keeps the base band; full 20-person castle forges", ok,
           "; ".join(lines))
 
 
@@ -713,15 +716,15 @@ def t_double_bladed_gank():
     stays open (1.6% of 4-9 man killer parties); manual picks still
     score."""
     dbs = "2H_DOUBLEBLADEDSTAFF"
-    e25 = Engine(content="castle", size=25, style="brawl")
-    r = e25.forge(25)
+    e20 = Engine(content="castle", size=20, style="brawl")
+    r = e20.forge(20)
     e10 = Engine(content="blackzone_roam", size=10)
     e7 = Engine(content="castle_outpost", size=7)
-    manual = e25.comp_score(["MAIN_HOLYSTAFF_AVALON", "2H_MACE", dbs])
+    manual = e20.comp_score(["MAIN_HOLYSTAFF_AVALON", "2H_MACE", dbs])
     check("F27 Double Bladed is barred from 10+ generation (gank weapon, "
-          "harvest audit), open at 7; the castle-25 brawl "
+          "harvest audit), open at 7; the castle-20 brawl "
           "forge fields none; a manual Double Bladed still scores",
-          dbs not in set(e25.suggest_pool()) and dbs not in set(e10.suggest_pool())
+          dbs not in set(e20.suggest_pool()) and dbs not in set(e10.suggest_pool())
           and dbs in set(e7.suggest_pool()) and dbs not in r["party"]
           and r["feasible"] and manual == manual and manual != 0.0,
           f"in forge={dbs in r['party']} feasible={r['feasible']} "
@@ -752,14 +755,14 @@ def t_generation_fit():
     manual_ok = score != 0.0 and not review[0]["off_style"]
     # declared brawl: ranged bombs are situational -> out of generation;
     # the same weapons FIT clap and stay in a clap pool
-    eb = Engine(content="castle", size=25, style="brawl")
+    eb = Engine(content="castle", size=20, style="brawl")
     perma, wail = "2H_ICECRYSTAL_UNDEAD", by_name(eb, "Wailing Bow")
     brawl_pool = set(eb.suggest_pool())
     ec = Engine(content="blackzone_roam", size=15, style="clap")
     clap_pool = set(ec.suggest_pool())
     style_ok = (perma not in brawl_pool and wail not in brawl_pool
                 and perma in clap_pool and wail in clap_pool)
-    r = eb.forge(25)
+    r = eb.forge(20)
     named_bad = {dagger, bolt, perma, wail, by_name(eb, "Whispering Bow"),
                  by_name(eb, "Light Crossbow"), by_name(eb, "Glaive")}
     forge_ok = not (named_bad & set(r["party"]))
@@ -819,15 +822,15 @@ def t_dup_and_clump():
     # F18b (validation round 5): two curses are the usual maximum in a
     # 25-man party — the curse_pressure group is the whole cursed line,
     # derived from the shared Q pool the CURSEDOT record prices, capped
-    # at 2 generated.
+    # at 2 generated (a single party forges at 20 at most: castle 20)
     cg = next((g for g in e.groups if g.get("name") == "curse_pressure"),
               None)
-    e25 = Engine(content="castle", size=25, style="brawl")
-    r25 = e25.forge(25)
-    curse_ct = sum(1 for w in r25["party"]
+    e20c = Engine(content="castle", size=20, style="brawl")
+    r20c = e20c.forge(20)
+    curse_ct = sum(1 for w in r20c["party"]
                    if cg and w in set(cg["weapons"]))
     check("F18b curse budget: cursed line derived (8 members), max 2 "
-          "generated at castle 25",
+          "generated at castle 20",
           cg is not None and cg.get("max") == 2
           and len(cg.get("weapons", [])) == 8 and curse_ct <= 2,
           f"members={len(cg['weapons']) if cg else 0}, "
@@ -868,15 +871,15 @@ def t_curse_slot_earned():
     # a damage-E curse stays a legitimate MANUAL pick: scores, never flagged
     s = e.comp_score(["2H_SKULLORB_HELL", "MAIN_HOLYSTAFF", "2H_MACE"])
     scores = s == s and s != 0.0 and not e.is_style_unfit("2H_SKULLORB_HELL")
-    e25 = Engine(content="castle", size=25, style="brawl")
-    cg = next((g for g in e25.groups if g.get("name") == "curse_pressure"),
+    e20c = Engine(content="castle", size=20, style="brawl")
+    cg = next((g for g in e20c.groups if g.get("name") == "curse_pressure"),
               None)
-    gen_curse = [w for w in e25.forge(25)["party"]
+    gen_curse = [w for w in e20c.forge(20)["party"]
                  if cg and w in set(cg["weapons"])]
     forged_ok = bool(gen_curse) and all(w in DEBUFF_E for w in gen_curse)
     check("F19 curse slots are earned: damage-E curses situational at group "
           "(all styles), out of 10+ pools (balanced included), gang and "
-          "manual intact; castle 25 brawl fields only debuff-E curses",
+          "manual intact; castle 20 brawl fields only debuff-E curses",
           demoted and earned and barred20 and offered20 and barred_bal
           and open_gang and scores and forged_ok,
           f"demoted={demoted} earned={earned} barred20={barred20} "
@@ -1174,7 +1177,7 @@ def t_forge_every_band_size():
             ("blackzone_roam", "clap", 14), ("blackzone_roam", "clap", 16),
             ("blackzone_roam", "clap", 19), ("blackzone_roam", "clap", 20),
             ("blackzone_roam", "clap_kite", 20), ("blackzone_roam", "kite", 10),
-            ("blackzone_roam", "brawl", 20), ("castle", "clap", 25)):
+            ("blackzone_roam", "brawl", 20), ("castle", "clap", 20)):
         e = Engine(content=content, size=size, style=style)
         r = e.forge(size)
         n = len(r.get("party") or [])
@@ -1182,7 +1185,8 @@ def t_forge_every_band_size():
             ok = False
             lines.append(f"{content}/{style}@{size}: feasible={r.get('feasible')} party={n}")
     check("F28 every style forges a full roster at every band edge (10 / 14 / "
-          "15 / 16 / 19 / 20 / 25): the minimum-need precheck is admissible - "
+          "15 / 16 / 19 / 20; a single party stops at 20): the minimum-need "
+          "precheck is admissible - "
           "nested seats count inside their role band, cross-role predicates "
           "beyond the counted bodies only", ok,
           "; ".join(lines) if lines else "all full")
@@ -2423,6 +2427,45 @@ def t_refine_as_built():
           "comp_score(party) - comp_score(rest) on dressed forged rosters (1e-9)",
           n > 0 and worst < 1e-9, f"{n} slots, worst |diff| = {worst:.2e}")
 
+
+def t_party_cap():
+    """F47: one party caps at 20. The game seats at most 20 players in a
+    party and a zerg is forged party by party, so the forge (its refresh
+    too), replace_options and refine refuse a party past 20 with the cap
+    message before any search; a manual roster of any size still scores
+    and reads at its size (judged at roster size)."""
+    from engine import PARTY_CAP, party_cap_message
+
+    def refusal(fn):
+        try:
+            fn()
+        except ValueError as err:
+            return str(err)
+        return None
+
+    e = Engine(content="castle", size=25, style="clap")
+    party25 = (["MAIN_HOLYSTAFF_AVALON"] * 5 + ["2H_MACE"] * 5
+               + ["2H_LONGBOW"] * 15)
+    party21 = party25[:21]
+    got = {"forge 21": refusal(lambda: e.forge(21)),
+           "refresh 21": refusal(lambda: e.forge(21, avoid=[party21])),
+           "locked 21": refusal(lambda: e.forge(20, locked=party21)),
+           "replace 21": refusal(lambda: e.replace_options(party21, 0)),
+           "refine 21": refusal(lambda: e.refine(party21, max_passes=1, pool=[]))}
+    forge25 = refusal(lambda: e.forge(25))
+    refused = (PARTY_CAP == 20
+               and all(v == party_cap_message(21) for v in got.values())
+               and forge25 == party_cap_message(25)
+               and "20 players" in forge25)
+    s25 = e.comp_score(party25)
+    reads = (s25 == s25 and s25 != 0.0 and e.fitness(party25) > 0
+             and len(e.recommend(party25, 3)) == 3)
+    check("F47 one party caps at 20: forge, refresh, a lock list, "
+          "replace_options and refine refuse a party past 20 with the cap "
+          "message; a 25-member manual roster still scores and reads",
+          refused and reads,
+          f"refusals={got} forge25={forge25!r} score25={s25:.3f}")
+
 if __name__ == "__main__":
     t_gear_active_doctrine()
     t_invariant()
@@ -2470,6 +2513,7 @@ if __name__ == "__main__":
     t_floor_zeroed_gain()
     t_top_n_none()
     t_refine_as_built()
+    t_party_cap()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

@@ -9,7 +9,8 @@ beside the form, `<form>.key.json`, which is never sent. One form, two
 sources:
 
   forged   `Engine(content, size, style).forge(size)` for every content x
-           size asked: the planner's forge button (dressed, the default
+           size asked, at most 20 (the forge refuses a single party past
+           20): the planner's forge button (dressed, the default
            suggestion pool, no locks). The read is on the forge's own
            combos and kits, as the forge-quality sweep reads a forged
            roster (pipeline/audit_forge_quality.py); the weapons-only read
@@ -674,7 +675,8 @@ if __name__ == "__main__":
     g.add_argument("--seed", type=int, default=20261009)
     g.add_argument("--style", default="kite", help="the style the forged rosters are forged for")
     g.add_argument("--contents", default="blackzone_roam,territory_defense")
-    g.add_argument("--sizes", default="10,15,20,25")
+    g.add_argument("--sizes", default="10,15,20",
+                   help="the forged sizes, at most 20 (a single party caps at 20)")
     g.add_argument("--quotas", default=DEFAULT_QUOTAS,
                    help="harvested parties per engine label, label:n comma-separated, "
                         "dealt across the harvested sizes")

@@ -39,6 +39,19 @@
      PICK_TIE_EPS): a last-bit float difference must not pick another
      combo. */
   var PICK_TIE_EPS = 1e-9;
+  /* The game seats at most 20 players in one party; a zerg is several
+     parties, each forged at its own plan (mirrors engine.py PARTY_CAP).
+     forge (and its refresh), replaceOptions and refine refuse a party
+     past the cap with the same message as engine.py party_cap_message;
+     scoring a manual roster of any size stays allowed. */
+  var PARTY_CAP = 20;
+  function partyCapMessage(n) {
+    return "a single party seats at most " + PARTY_CAP + " players, " + n +
+      " asked: forge a zerg party by party";
+  }
+  function refusePastCap(n) {
+    if (n > PARTY_CAP) throw new Error(partyCapMessage(n));
+  }
 
   var KEY_TIER_RX = /^T\d+_/;
   var KEY_ENCH_RX = /@\d+$/;
@@ -3884,7 +3897,9 @@
        search optimizes the SAME dressed compScore used everywhere else
        — incumbent kits preserved, replacements tried in each doctrine
        kit variant, result {party, gears}. gears null keeps the legacy
-       weapon-only list return bit-identically. */
+       weapon-only list return bit-identically. A party past PARTY_CAP is
+       refused (mirrors engine.py). */
+    refusePastCap(party.length);
     party = party.slice();
     fixed = fixed || 0;
     /* mirrors engine.py `self.pool if pool is None else pool`: no pool
@@ -4425,8 +4440,10 @@
        — see its docstring for the contract; returns {party, combos, score,
        feasible, filler, held, locked, exhausted}). `avoid`:
        rosters already shown — the best roster NOT among them comes back;
-       `exhausted` when every reachable completion was shown. */
+       `exhausted` when every reachable completion was shown. A size or a
+       locked list past PARTY_CAP is refused before any search. */
     locked = (locked || []).slice();
+    refusePastCap(Math.max(size, locked.length));
     var avoidKeys = {}, hasAvoid = false;
     for (var ai = 0; ai < (avoid || []).length; ai++) {
       avoidKeys[CompEngine.rosterKey(avoid[ai])] = true; hasAvoid = true;
@@ -4598,7 +4615,9 @@
     /* Ranked replacements for ONE slot — a one-slot forge (mirrors
        engine.py replace_options): every candidate scored as a dressed
        pick into the REST and passed through the forge's own gates with
-       no slot to spare; the slot's current weapon left out. */
+       no slot to spare; the slot's current weapon left out. A party past
+       PARTY_CAP is refused, as the forge refuses it. */
+    refusePastCap(party.length);
     party = party.slice();
     var n = party.length, i;
     var cs = [], gs = [];

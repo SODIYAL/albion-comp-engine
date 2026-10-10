@@ -81,24 +81,6 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **Single-party forges past 20**: no page forges a party past 20 (the
-  planner forges each party of a zerg at its own plan, capped at 20; the
-  sheet's engine read recommends, it never forges), so three readings of
-  the forge at 25 concern the engine API and its tests only:
-  territory_defense at 25 forges members short (the forge sweep: clap 23
-  of 25, the other five styles full; the profile scales stopper_tank to a
-  minimum of 3 inside a frontline cap of 5, and the deadlock guard checks
-  capacity exists, not that it is enough; V: 09b, Chains reach past a
-  slot), and refresh then returns the same partial roster without
-  `exhausted` (`avoid` applies at the final depth, which a beam that dies
-  short never reaches); `balanced` keeps the base band (3-5 healers) and
-  forges 5 healers at both 25-man contents where the guild sheet says 4 at
-  20+ with no style attached (V: 09b, Healers per five); and with no 21+
-  harvest rows the typical role count (standing rule 18) stops at 20, so
-  the styled 25 forges field 6-7 healers (9 of 10 sweep cells; 6 on clap)
-  (V: 09b, Tanks and supports; notes/findings/2026-10-09-forge-quality.md).
-  They return if a single party past 20 does; a 21+ harvest band would
-  settle the third.
 - **Supports UNDER typical on clap / clap_kite at 20** (forge 2, cell p50
   4 on clap and 3 on clap_kite; the forge sweep: 2 in five of the six clap
   and clap_kite cells at 20 and 1 at Castle 20 clap, under the cell's p10
@@ -188,7 +170,9 @@ Each is decidable today from evidence already in the repo.
   players, the engine reading kite (4), clap_kite (4), clap (2) and brawl
   (2) across them; the answer key beside it (`.key.json`) is never sent. On its own kits the forged kite reads
   clap at 10 (one standoff tool), kite at 15 and clap_kite at 20 (each on
-  two tools, the plan minimum) and clap at 25, in both contents; at 15
+  two tools, the plan minimum) and clap at 25 (forged before a single
+  party's forge stopped at 20; the generator now forges 10, 15 and 20), in
+  both contents; at 15
   and 20 the bomb share sits within 0.02 of the 0.45 that divides kite
   from clap_kite, and Territory Defense 20 reads kite on its weapons
   alone. A pure kite read at 20 needs the kite style's multipliers, never
@@ -453,9 +437,9 @@ Each is decidable today from evidence already in the repo.
   10-14 and 15-19 (20 reads the pooled copy cell); its band carries its
   winners' own `ranged_aoe_core` minimum, 1 in every band (V: 10, The
   ranged-AoE core minimum is generated). Forged for brawl_clap on the forge
-  sweep's ten 10+ cells, the roster reads brawl in 6, clap in 2 (Territory
-  Defense 15 and 20) and split in 2 (Territory Defense 25, Castle 20), never
-  brawl_clap (4 / 3 / 3 under the base band's minimum; the same record).
+  sweep's nine 10+ cells (a single party forges at 20 at most), the roster
+  reads brawl in 6, clap in 2 (Territory Defense 15 and 20) and split in 1
+  (Castle 20), never brawl_clap (the same record).
 - **The forge returns a local optimum**: in 27 of 72 planner cells and 8
   of 18 Dragon Portal cells of the forge sweep a refresh alternative
   (`forge(avoid=)`) outscores the button's roster (best gap per cell:

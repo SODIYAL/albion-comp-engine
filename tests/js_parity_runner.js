@@ -12,6 +12,23 @@ const SWAP_EVERY = 6, SWAP_MAX_PARTY = 6;
 const REFINE_EVERY = 6, REFINE_MAX_PARTY = 6, REFINE_PASSES = 2;
 // mirrors FORGE_* in test_js_parity.py
 const FORGE_EVERY = 10, FORGE_SIZE = 8;
+// one party caps at 20 (mirrors PARTY_CAP and forge_cap_results in
+// test_js_parity.py): each call returns its refusal message
+const PARTY_CAP = 20;
+const refusal = (fn) => {
+  try { fn(); } catch (err) { return String(err.message); }
+  return "no refusal";
+};
+const forgeCapResults = (e, pool) => {
+  const over = PARTY_CAP + 1;
+  const party = new Array(over).fill(pool[0]);
+  return {
+    forge: refusal(() => e.forge(over, null, null, pool)),
+    locked: refusal(() => e.forge(PARTY_CAP, party, null, pool)),
+    replace: refusal(() => e.replaceOptions(party, 0, null, null, null, pool)),
+    refine: refusal(() => e.refine(party, 1, [])),
+  };
+};
 // mirrors KIT_* in test_js_parity.py (increment 2 kit doctrine)
 const KIT_EVERY = 6, KIT_OFFSET = 3, KIT_MAX_REST = 5;
 const kitSer = (ko) => {
@@ -92,6 +109,7 @@ const out = cases.map((c, i) => {
   const gl = c.gears || [];
   const rp = i % REFINE_EVERY === 0 ? c.party.slice(0, REFINE_MAX_PARTY) : null;
   let forged = null;
+  const forgeCap = i % FORGE_EVERY === 0 ? forgeCapResults(e, c.refine_pool) : null;
   if (i % FORGE_EVERY === 0) {
     // mirrors forge_case in test_js_parity.py incl. the empty-locked-combos
     // alternation (the [] truthiness divergence shipped once) and the
@@ -132,6 +150,7 @@ const out = cases.map((c, i) => {
     target_min: (() => { const o = {}; for (const cap in e.reqs) o[cap] = e.targetMin(cap); return o; })(),
     constraint_band: e._band,
     forge: forged,
+    forge_cap: forgeCap,
     // replaceOptions (mirrors test_js_parity.py)
     replace: (sp === null || sp.length < 2) ? null
       : e.replaceOptions(sp, 0, c.combos.slice(0, sp.length),
