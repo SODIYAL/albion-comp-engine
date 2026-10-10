@@ -1730,6 +1730,50 @@ def _load_rosters(path):
     return _ROSTERS[path]
 
 
+KIT_IP_QUANTILE = 0.1        # the bottom decile
+KIT_IP_MIN_BUILDS = 3        # linked builds a party's item power needs
+
+
+def kit_item_power_cut(doc):
+    """THE ITEM-POWER GATE on kit doctrine: the training split's
+    bottom-decile cut of party item power, recomputed from the artifact
+    every time the doctrine is derived. A party's item power is the mean
+    AverageItemPower over its linked builds (the party index; a party
+    with fewer than KIT_IP_MIN_BUILDS has none); the cut is the 10th
+    percentile (linear interpolation) over the killer parties of 10+ on
+    the training split, the decile control of the win-lift finding
+    (notes/findings/2026-10-08-win-lift.md). Doctrine votes only from
+    killboard builds at or above it, in every band and style cell (a
+    build with no item power is not shown to be above it and votes
+    nothing); nothing else reads it: never scoring, never the seats,
+    never the carrier measurement. Returns {cut, quantile, parties,
+    population}; cut None when no party qualifies (no gate)."""
+    sizes = {(p.get("battle"), p.get("index")): (p.get("size") or 0)
+             for p in doc.get("parties") or []}
+    per = {}
+    for b in doc.get("builds") or []:
+        if b.get("party") is None or not _in_split(b.get("battle")):
+            continue
+        ip = b.get("item_power") or 0
+        if ip <= 0:
+            continue
+        per.setdefault((b.get("battle"), b.get("party")), []).append(ip)
+    vals = sorted(math.fsum(v) / len(v) for k, v in per.items()
+                  if len(v) >= KIT_IP_MIN_BUILDS and sizes.get(k, 0) >= 10)
+    cut = None
+    if vals:
+        pos = (len(vals) - 1) * KIT_IP_QUANTILE
+        lo, hi = math.floor(pos), math.ceil(pos)
+        cut = round(vals[lo] + (vals[hi] - vals[lo]) * (pos - lo), 2)
+    return {"cut": cut, "quantile": KIT_IP_QUANTILE, "parties": len(vals),
+            "population": ("party item power (the mean AverageItemPower over "
+                           f"a party's linked builds, at least "
+                           f"{KIT_IP_MIN_BUILDS}) of the killer parties of "
+                           "10+, battle-list harvest, training split "
+                           "(battle % 5 != 0); the 10th percentile, linear "
+                           "interpolation")}
+
+
 def _normalize_gear_id(v, gear):
     """Conservative raw-id -> catalog-id: exact, else a unique tier
     prefix away. Anything else stays unknown (never guessed)."""
@@ -1761,7 +1805,7 @@ DOCTRINE_BANDS = {
 
 def derive_kit_doctrine(book, gear, problems, overrides=None,
                         effect_map=None, band="group", style=None,
-                        party_styles=None):
+                        party_styles=None, ip_cut=None, ip_stats=None):
     """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
     assigned role's uniform, evidence-led — reference builds first'):
     each seat role's observed per-slot items, mined from the reference
@@ -1816,7 +1860,14 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     `kit_styles.<style>` — absent where thin, never filled from the band
     or another style. The engine lays a DECLARED style's cell over the
     band (`_seat_kit`); `balanced` never reads one (it declares no
-    style)."""
+    style).
+
+    THE ITEM-POWER GATE (`ip_cut`, kit_item_power_cut): only killboard
+    builds whose AverageItemPower is at or above the cut vote, in every
+    band and cell, before any floor reads them, so a cell or slot the
+    gate leaves under its voter floor is absent (thin evidence is never
+    filled). `ip_stats` (the band passes) records the builds read and
+    dropped."""
     effect_map = effect_map or {}
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path):
@@ -1854,6 +1905,13 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                 if b.get("weapon") and b.get("gear")
                 and KB_MIN_PARTY <= (b.get("party_size") or 0) <= KB_MAX_PARTY
                 and _in_split(b.get("battle"))]
+        if ip_cut is not None:
+            # the item-power gate: under-geared builds cast no vote
+            gated = [b for b in kept if (b.get("item_power") or 0) >= ip_cut]
+            if ip_stats is not None and style is None:
+                ip_stats[band] = {"builds": len(kept),
+                                  "dropped": len(kept) - len(gated)}
+            kept = gated
         if style is not None:
             # STYLE CELL: only builds linked to a party labelled `style`,
             # and only weapons with STYLE_CELL_MIN_VOTERS distinct players
@@ -2658,14 +2716,23 @@ def apply_roles(weapons, gear):
         resolve_active_doctrine(gear, problems, gear_spells=json.load(f))
     effect_map = {it["id"]: ge["id"] for ge in effects
                   for it in (ge.get("items") or []) if it.get("id")}
+    # the item-power gate on kit doctrine: the cut is recomputed from the
+    # artifact on every derivation and recorded with its population
+    kb_path = rosters_io.path(OUT)
+    kit_ip = (kit_item_power_cut(_load_rosters(kb_path))
+              if os.path.exists(kb_path) else {"cut": None})
+    ip_cut = kit_ip.get("cut")
+    ip_stats = {}
     kit_detail = derive_kit_doctrine(
         book, gear, problems,
         (doc.get("kit_doctrine") or {}).get("overrides") or {},
-        effect_map)
+        effect_map, ip_cut=ip_cut, ip_stats=ip_stats)
     # the GANG band (4-9 man killer parties + small-scale curated
     # contents; no grading overrides — those were graded on ZvZ kits)
     kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
-                                          effect_map, band="gang")
+                                          effect_map, band="gang",
+                                          ip_cut=ip_cut, ip_stats=ip_stats)
+    kit_ip["bands"] = {b: ip_stats[b] for b in sorted(ip_stats)}
     # STYLE CELLS: one cell per declared style on the group
     # band, from builds linked to labelled parties; absent where thin
     kit_detail_styles = {}
@@ -2673,7 +2740,8 @@ def apply_roles(weapons, gear):
         for st in ("brawl", "clap", "kite", "brawl_clap", "clap_kite"):
             d = derive_kit_doctrine(book, gear, problems, None, effect_map,
                                     band="group", style=st,
-                                    party_styles=party_styles)
+                                    party_styles=party_styles,
+                                    ip_cut=ip_cut)
             if d:
                 kit_detail_styles[st] = d
     effect_quotas = mine_effect_quotas(gear, effect_map, problems)
@@ -2699,6 +2767,7 @@ def apply_roles(weapons, gear):
         "kit_doctrine": kit_detail,
         "kit_doctrine_gang": kit_detail_gang,
         "kit_doctrine_styles": kit_detail_styles,
+        "kit_item_power": kit_ip,
         "effect_quotas": effect_quotas,
         "carrier_quotas": carrier_quotas,
         "effect_candidates": effect_candidates,
@@ -4038,6 +4107,11 @@ def main():
         # generated rosters at share x size (see mine_carrier_quotas).
         # Generation-only; manual kits always score.
         "carrier_quotas": roles_report.get("carrier_quotas") or {},
+        # THE ITEM-POWER GATE on kit doctrine (kit_item_power_cut): the
+        # cut, its population and the builds each band dropped. Doctrine
+        # only; the engine reads none of it, the role audits re-measure
+        # the doctrine's own gated population with it.
+        "kit_item_power": roles_report.get("kit_item_power") or {},
     }
 
     os.makedirs(OUT, exist_ok=True)

@@ -134,8 +134,11 @@ Three layers, never merged:
 - Kits: `kit_options` is doctrine-led, observed-build-led and fail-closed.
   Every doctrine reader goes through `_seat_kit` (group band at 10+, gang band
   at <= 9, a declared style's cell laid over the band). Slots rank by observed
-  votes (one player, one vote; killer parties of 10+), the observed-build chain
-  fronts a real worn combination (chains may have gaps), thin slots pool to
+  votes (one player, one vote; killer parties of 10+; only builds at or above
+  the item-power cut vote, the training split's bottom decile of party item
+  power, recomputed and recorded at every build as `kit_item_power`), the
+  observed-build chain fronts a real worn combination (chains may have gaps),
+  thin slots pool to
   the seat (`kit_pool` / `kit_by_chest`), carrier chests obey a comp-level
   quota, two-handers get no off-hand (nor from the planner's caller-reference
   fill, L40f), and where evidence runs out nothing is proposed. Comp-aware,

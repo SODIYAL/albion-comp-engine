@@ -238,21 +238,30 @@ def t_gear_join():
           f"join={[gear_join.normalize_gear_id(r, e.gear) for r in norow]} "
           f"engine={[e.gear_key(r) for r in fielded]}")
     # the kit doctrine counts it like any worn piece: the plain Cape is
-    # mined into the seat pools, and a kit that ranks it first wears it
+    # mined into the seat pools, and a kit that wears it supplies what it
+    # supplies without it. Which v0 kits rank it first is RECORDED, not
+    # asserted: 14 weapons at castle 20 before the item-power gate on kit
+    # doctrine, none after (its wearers sit under the cut)
     e20 = Engine(content="castle", size=20)
     pooled = sorted(r for r, rec in e20.roles.items()
                     if "CAPE" in ((rec.get("kit") or {}).get("cape") or []))
     named = [w for w in e20.pool
              if "CAPE" in (dict(e20.kit_variants(w)).get("v0") or [])]
-    same = all(e20.build_extra(w, None, dict(e20.kit_variants(w))["v0"])
-               == e20.build_extra(w, None, [g for g in dict(
-                   e20.kit_variants(w))["v0"] if g != "CAPE"])
-               for w in named)
-    check("V4e the doctrine names the plain Cape where winners wear it: it "
-          "sits in the mined cape pools, a v0 kit that ranks it first wears "
-          "it, and the kit supplies what it supplies without it",
-          pooled and named and same,
-          f"seats={len(pooled)} weapons={len(named)} same={same}")
+    caped = [(w, v0) for w in sorted(e20.pool)
+             for v0 in [dict(e20.kit_variants(w)).get("v0") or []]
+             if any(e20.gear[g]["slot"] == "cape" for g in v0)][:5]
+    same = bool(caped) and all(
+        e20.build_extra(w, None, ["CAPE" if e20.gear[g]["slot"] == "cape" else g
+                                  for g in v0])
+        == e20.build_extra(w, None, [g for g in v0
+                                     if e20.gear[g]["slot"] != "cape"])
+        for w, v0 in caped)
+    check("V4e the doctrine counts the plain Cape like any worn piece: it "
+          "sits in the mined cape pools, and a kit that wears it supplies "
+          "what it supplies without it",
+          pooled and same,
+          f"seats={len(pooled)} v0 naming it (recorded)={len(named)} "
+          f"kits checked={len(caped)} same={same}")
 
 
 # ------------------------------------------- V5 Option C structural floors

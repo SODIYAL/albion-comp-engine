@@ -46,7 +46,7 @@ cape included — with passive defaults):
 
 Run:  py -3 tests/test_roles.py
 """
-import os, sys
+import json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -58,9 +58,10 @@ import rosters_io  # noqa: E402
 
 def _rosters():
     """The committed killer-party artifact (gzipped), its builds on the
-    TRAINING SPLIT (battle % 5 != 0): kit doctrine and the carrier quotas
-    learn from that split, so the audits below re-measure the same
-    population (a holdout-only vote must never flip a modal against the
+    TRAINING SPLIT (battle % 5 != 0) at or above the kit doctrine's
+    item-power cut (dataset `kit_item_power`): kit doctrine learns from
+    that population, so the audits below re-measure the same one (a
+    holdout-only or under-geared vote must never flip a modal against the
     table it audits). Parties and battles stay whole."""
     doc = rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
     def in_split(b):
@@ -68,8 +69,13 @@ def _rosters():
             return int(b) % 5 != 0
         except (TypeError, ValueError):
             return False
+    with open(os.path.join(ROOT, "pipeline", "out", "dataset-latest.json"),
+              encoding="utf-8") as f:
+        cut = (json.load(f).get("kit_item_power") or {}).get("cut")
     doc = dict(doc)
-    doc["builds"] = [b for b in doc.get("builds") or [] if in_split(b.get("battle"))]
+    doc["builds"] = [b for b in doc.get("builds") or []
+                     if in_split(b.get("battle"))
+                     and (cut is None or (b.get("item_power") or 0) >= cut)]
     return doc
 
 # Evidence-band slack: the engine ranks on the INTEGER counts
@@ -1703,6 +1709,58 @@ def t_seat_pooling():
           bool(ok), f"chest={found['chest']} plain={found['plain']} keep={found['keep']}")
 
 
+def t_item_power_gate():
+    # R38 (the item-power gate on kit doctrine): doctrine votes only from
+    # killboard builds whose AverageItemPower is at or above the training
+    # split's bottom-decile cut of party item power (the mean over a
+    # party's linked builds, >= 3, killer parties of 10+). The dataset
+    # records the cut with its population and the builds each band
+    # dropped; re-measured here from the artifact, the cut and the drop
+    # counts agree with the record.
+    import math as _math
+    e = Engine(content="territory_defense", size=20)
+    rec = e.data.get("kit_item_power") or {}
+    doc = rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
+
+    def in_split(b):
+        try:
+            return int(b) % 5 != 0
+        except (TypeError, ValueError):
+            return False
+    sizes = {(p.get("battle"), p.get("index")): (p.get("size") or 0)
+             for p in doc.get("parties") or []}
+    per = {}
+    for b in doc.get("builds") or []:
+        if b.get("party") is None or not in_split(b.get("battle")) \
+                or not (b.get("item_power") or 0) > 0:
+            continue
+        per.setdefault((b["battle"], b["party"]), []).append(b["item_power"])
+    vals = sorted(_math.fsum(v) / len(v) for k, v in per.items()
+                  if len(v) >= 3 and sizes.get(k, 0) >= 10)
+    pos = (len(vals) - 1) * 0.1
+    lo, hi = _math.floor(pos), _math.ceil(pos)
+    cut = vals[lo] + (vals[hi] - vals[lo]) * (pos - lo) if vals else None
+    dropped = {"group": 0, "gang": 0}
+    for b in doc.get("builds") or []:
+        if not (b.get("weapon") and b.get("gear") and in_split(b.get("battle"))):
+            continue
+        ps = b.get("party_size") or 0
+        band = "group" if ps >= 10 else "gang" if 4 <= ps <= 9 else None
+        if band and (b.get("item_power") or 0) < (rec.get("cut") or 0):
+            dropped[band] += 1
+    got = {b: (rec.get("bands") or {}).get(b, {}).get("dropped") for b in dropped}
+    check("R38 item-power gate: the dataset records the doctrine's cut (the "
+          "training split's bottom decile of party item power) with its "
+          "population; the cut and each band's dropped builds re-measure "
+          "from the artifact",
+          cut is not None and rec.get("cut") is not None
+          and abs(rec["cut"] - cut) < 0.006 and rec.get("quantile") == 0.1
+          and rec.get("parties") == len(vals) and rec.get("population")
+          and got == dropped and dropped["group"] > 0,
+          f"recorded={rec.get('cut')} measured={cut} parties={rec.get('parties')}/"
+          f"{len(vals)} dropped={got} measured={dropped}")
+
+
 def t_labels():
     """R37 (the tile-label validation round): every weapon ships a
     tile label {primary, tags} — PRIMARY = the seat's word (healers:
@@ -1824,6 +1882,7 @@ if __name__ == "__main__":
     t_style_cell_reader()
     t_seat_pools()
     t_seat_pooling()
+    t_item_power_gate()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

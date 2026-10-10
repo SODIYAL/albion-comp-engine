@@ -1643,14 +1643,26 @@ def t_portal_rows():
     rep = e5.pick_report(core, "2H_MACE")
     sil = next((x for x in rep["caps"] if x["cap"] == "silence"), None)
     row = opt5.get("silence") or {}
-    rep_h = e5.pick_report(core, "2H_HAMMER")
+    # the frontline without silence is found, not named: a kit brings
+    # silence too (the Hammer's gang head is the Stalker Hood since the
+    # item-power gate on kit doctrine), so the check reads the first
+    # frontline whose weapon and every kit variant supply none
+    def _no_silence(w):
+        if any((x or {}).get("silence") for x in e5._combo_extras(w)):
+            return False
+        return not any(e5.gear_extra(g).get("silence")
+                       for _v, gl in e5.kit_variants(w) for g in (gl or []))
+    quiet = next((w for w in sorted(e5.pool)
+                  if e5.role_of(w) == "frontline" and _no_silence(w)), None)
+    rep_h = (e5.pick_report(core, quiet) if quiet
+             else {"caps": [{"cap": "silence"}]})
     check("F34i an optional pool row pays the weapon that brings it and charges nobody: the Heavy "
           "Mace's silence earns coverage at 5 against the fielders' median, with no minimum; a "
-          "frontline without silence carries no silence term",
+          "frontline whose weapon and kit bring no silence carries no silence term",
           sil is not None and sil["delta"] > 0 and row.get("min") == 0
           and abs(e5.target("silence") - row["target"]) < 1e-9
           and not any(x["cap"] == "silence" for x in rep_h["caps"]),
-          f"silence={sil} row={row}")
+          f"silence={sil} row={row} quiet={quiet}")
     # F34j - the 15-20 pool's own rows outrank the style x size rows: a
     # large portal party is judged against what that pool's winners field
     # (tests/VALIDATION.md, the 15-20 portal pool). Every other context

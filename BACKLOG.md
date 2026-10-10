@@ -31,10 +31,6 @@ Each is decidable today from evidence already in the repo.
   artifacts, which read 2.6-2.7%) against the guild's "2 Royals per 10".
   Increment 3b's second half; then mechanism pairing rules for effect
   carriers. (V: 09b, Other numbers; roles-design.md)
-- **Item-power gating**: the harvest's `item_power` is the API's average; the
-  per-slot tier lives only in the raw cache. Five questions: which slot
-  decides "geared", tier line or relative, per size band, quality, doctrine
-  votes only. (V: 09b, Seat pooling)
 - **The AoE geometry's provisional parts** (Q9): `radius_targets`,
   `reference_clump: 2` and travel-distance footprints stay PROVISIONAL.
   With each bundle reading its own spell, 147 geometric rows on 38 spells
