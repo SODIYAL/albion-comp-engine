@@ -127,7 +127,9 @@ const out = cases.map((c, i) => {
     forged = { party: r.party, combos: r.combos, gears: r.gears,
                score: r.score,
                feasible: r.feasible, filler: r.filler, held: r.held,
-               exhausted: r.exhausted,
+               exhausted: r.exhausted, floors: r.floors,
+               kits: Object.keys(r.kits || {}).sort((a, b) => a - b)
+                 .map((k) => [Number(k), r.kits[k].variant]),
                next: { party: r2.party, gears: r2.gears, score: r2.score,
                        exhausted: r2.exhausted } };
   }
@@ -155,6 +157,14 @@ const out = cases.map((c, i) => {
     constraint_band: e._band,
     forge: forged,
     forge_cap: forgeCap,
+    // the carrier floors' dressing at 10+ (mirrors test_js_parity.py)
+    floor_forge: c.floor_forge ? (() => {
+      const r = e.forge(c.size, null, null, c.refine_pool);
+      return { party: r.party, gears: r.gears, score: r.score,
+               floors: r.floors,
+               kits: Object.keys(r.kits || {}).sort((a, b) => a - b)
+                 .map((k) => [Number(k), r.kits[k].variant]) };
+    })() : null,
     // replaceOptions (mirrors test_js_parity.py)
     replace: (sp === null || sp.length < 2) ? null
       : e.replaceOptions(sp, 0, c.combos.slice(0, sp.length),

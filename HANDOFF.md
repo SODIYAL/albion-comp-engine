@@ -382,9 +382,16 @@ index row in `tests/VALIDATION.md`; manual picks always score):
   and `curse_pressure` max 2 each.
 - **Need profiles** (`roles.yaml need_profiles`): fine-seat bands + function
   coverage, armed at 15+, scaled by size / 20.
-- **Carrier quota**: discretionary effect-carrier chests capped per roster at
-  killboard share x size; a weapon's identity chest (worn by half its builds)
-  is exempt.
+- **Carrier caps and floors**: one coverage-corrected measurement per effect
+  x style x band of the killer rosters of 10+ (`carrier_quotas`; an unlinked
+  member wears at its weapon's linked rate, counts exact). The cap is
+  max(floor, max(1, round(share x size))) and counts discretionary wearers
+  (a weapon's identity chest, worn by half its builds, is exempt); the floor
+  is the cell's median carriers per roster where it is 1 or more, and the
+  forge dresses its roster to it after the search (a generated member's
+  chest swapped to a carrier its own doctrine tier offers, the cheapest
+  swap first; locked members never; the result's `floors` says what each
+  effect holds). Below 10 no floor; generation only.
 - **Dressed forge**: candidates are priced dressed; forged members arrive with
   kits prefilled (`_eng`-marked); locked members keep their supplied gear and
   are never re-dressed; doctrine passives never enter evaluation. A weapon's

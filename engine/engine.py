@@ -331,7 +331,8 @@ class Engine:
         self.prior_pool = self._prior_pool(content, size)
         self.delta = (self._delta_base * self.pool_delta_x
                       if self.prior_pool is not None else self._delta_base)
-        self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
+        self._carrier_caps_cache = None   # carrier_caps() memo (size + style)
+        self._carrier_floors_cache = None  # carrier_floors() memo
         self.base_size = self.template.get("base_size", size)
         # DEMAND RAMP (first for anti_zone: not needed at 10-14, a need that
         # grows with the numbers through the teens and twenties, a firm
@@ -886,6 +887,7 @@ class Engine:
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
         self._floor_gain_cache = {}
+        self._floor_chest_cache = {}
 
     def set_dressing(self, enabled):
         """Validation affordance (V3-W): when OFF, every
@@ -2308,26 +2310,72 @@ class Engine:
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
 
+    def _carrier_cell(self):
+        """The carrier cell this context reads (dataset `carrier_quotas`):
+        the band holding the current size (a size under the lowest band
+        reads the lowest, past the highest the highest); at the lowest
+        band's size or more a DECLARED style's cell where the measurement
+        has one, else the pooled cell. Below that size the pooled cell of
+        the lowest band (no style cell: style labels start at 10). None
+        when the dataset carries no cells."""
+        q = self.data.get("carrier_quotas") or {}
+        bands = q.get("bands") or []
+        cells = q.get("cells") or {}
+        if not bands or not cells:
+            return None
+        band = None
+        for key, lo, hi in bands:
+            if lo <= self.size <= hi:
+                band = key
+                break
+        if band is None:
+            band = bands[0][0] if self.size < bands[0][1] else bands[-1][0]
+        cell = None
+        if self.size >= bands[0][1] and self.style in self.IDENTITY_STYLES:
+            cell = ((cells.get("styles") or {}).get(self.style) or {}).get(band)
+        return cell or (cells.get("pooled") or {}).get(band)
+
+    def carrier_floors(self):
+        """Per-roster FLOOR on each effect-carrier chest at the current
+        size and style: the median carriers per killer roster of the
+        cell, where it is 1 or more (dataset `carrier_quotas`, one
+        coverage-corrected measurement with the caps). {} under the
+        lowest band (killer parties of 10+ only). A GENERATION
+        constraint: the forge dresses a roster to its floors
+        (_floor_dress); manual kits always score."""
+        if getattr(self, "_carrier_floors_cache", None) is not None:
+            return self._carrier_floors_cache
+        q = self.data.get("carrier_quotas") or {}
+        bands = q.get("bands") or []
+        cell = self._carrier_cell()
+        floors = {}
+        if cell and bands and self.size >= bands[0][1]:
+            floors = {eff: int(n) for eff, n in sorted((cell.get("floor") or {}).items())
+                      if n >= 1}
+        self._carrier_floors_cache = floors
+        return floors
+
     def carrier_caps(self):
-        """Per-roster CAP on each effect-carrier chest at the current size:
-        killboard share of builds wearing it (dataset `carrier_quotas`,
-        nearest fight-size bucket) x size, half-up, min 1. {} when the
-        dataset carries no quotas (older datasets: unconstrained).
-        A GENERATION constraint: party_state
-        counts the carriers a roster wears, and every dressed candidate
-        skips a kit variant whose chest would push an effect past its
-        cap — so five maces cannot all wear Judicator while real rosters
-        field about 1.5 per 20. Manual kits always score."""
+        """Per-roster CAP on each effect-carrier chest at the current size
+        and style: the cell's expected carriers per member (dataset
+        `carrier_quotas`) x size, half-up, min 1 — held at the cell's
+        floor where that rule falls under it, so a floor never exceeds
+        its cap. {} when the dataset carries no cells (unconstrained).
+        A GENERATION constraint: party_state counts the DISCRETIONARY
+        carriers a roster wears, and every dressed candidate skips a kit
+        variant whose chest would push an effect past its cap. Manual
+        kits always score."""
         if getattr(self, "_carrier_caps_cache", None) is not None:
             return self._carrier_caps_cache
-        q = self.data.get("carrier_quotas") or {}
-        buckets = q.get("buckets") or {}
+        cell = self._carrier_cell()
         caps = {}
-        if buckets:
-            key = "60+" if (self.size >= 60 and "60+" in buckets) else "20-59"
-            share = (buckets.get(key) or {}).get("share") or {}
-            caps = {eff: max(1, self._half_up(s * self.size))
-                    for eff, s in sorted(share.items())}
+        if cell:
+            share = cell.get("share") or {}
+            floors = self.carrier_floors()
+            for eff in sorted(set(share) | set(floors)):
+                caps[eff] = max(floors.get(eff, 0),
+                                max(1, self._half_up(share.get(eff, 0.0)
+                                                     * self.size)))
         self._carrier_caps_cache = caps
         return caps
 
@@ -2384,6 +2432,112 @@ class Engine:
                 if carriers.get(eff, 0) >= caps[eff]:
                     return True
         return False
+
+    def _carrier_worn(self, party, gears):
+        """{effect: members wearing a chest that grants it} over a roster,
+        EVERY wearer (identity chests included): the floor's count, the
+        unit the measurement counts. A gears tail past the party is worn
+        by no member."""
+        out = {}
+        for i, g in enumerate(gears or []):
+            if i >= len(party):
+                break
+            for item in g or []:
+                for eff in self._item_effects.get(self._gear_item_key(item)) or []:
+                    out[eff] = out.get(eff, 0) + 1
+        return out
+
+    FLOOR_CHEST_TOP_N = 99   # the whole doctrine tier (kit_options top_n)
+
+    def _floor_chests(self, weapon):
+        """{effect: chest} the weapon's own doctrine tier offers for each
+        effect (kit_options' context-free armor options worn by this
+        weapon's winners, `doctrine` == "weapon"; the first by its
+        ranking): the chests a floor may dress it in. Cached per
+        set_content."""
+        out = self._floor_chest_cache.get(weapon)
+        if out is None:
+            out = {}
+            ko = self.kit_options(weapon, top_n=self.FLOOR_CHEST_TOP_N)
+            for o in ko["options"].get("armor") or []:
+                if o.get("doctrine") != "weapon":
+                    continue
+                for eff in self._item_effects.get(o["gear"]) or []:
+                    out.setdefault(eff, o["gear"])
+            self._floor_chest_cache[weapon] = out
+        return out
+
+    KIT_SLOTS = ("head", "armor", "shoes", "cape", "offhand", "potion", "food")
+
+    def _with_chest(self, gl, chest):
+        """`gl` with its chest replaced by `chest` (or added), in kit slot
+        order (kit_variants' order); items of other slots keep their place
+        after the kit slots."""
+        by_slot, rest = {}, []
+        for item in gl or []:
+            slot = (self.gear.get(self._gear_item_key(item)) or {}).get("slot")
+            if slot in self.KIT_SLOTS and slot not in by_slot:
+                by_slot[slot] = item
+            else:
+                rest.append(item)
+        by_slot["armor"] = chest
+        return [by_slot[s] for s in self.KIT_SLOTS if s in by_slot] + rest
+
+    def _floor_dress(self, party, combos, gears, fixed):
+        """THE CARRIER FLOORS in the forge's dressing (generation only):
+        while an effect's wearers (_carrier_worn) stand under its floor,
+        re-dress the one generated member whose chest swap to a carrier
+        its own doctrine tier offers (_floor_chests) costs the roster
+        least (the exact comp_score delta; ties keep the first effect in
+        id order, then the lowest slot). A member is never re-dressed out
+        of a floored effect at or under its floor, locked members never,
+        a naked member never (no doctrine kit). The cap cannot bind: a
+        short effect's discretionary wearers are under its floor, and the
+        floor is never above the cap. Returns (gears, re-dressed slot
+        indexes in order); an effect no member can carry stays short and
+        the forge reports it (`floors`)."""
+        floors = self.carrier_floors()
+        gears = list(gears)
+        dressed = []
+        if not floors or len(party) <= fixed:
+            return gears, dressed
+        while True:
+            worn = self._carrier_worn(party, gears)
+            short = [e for e in sorted(floors) if worn.get(e, 0) < floors[e]]
+            if not short:
+                break
+            base = self.comp_score(party, combos, gears)
+            best = None
+            for eff in short:
+                for i in range(fixed, len(party)):
+                    g = gears[i]
+                    if not g:
+                        continue
+                    chest = self._floor_chests(party[i]).get(eff)
+                    if chest is None:
+                        continue
+                    held = False
+                    for item in g:
+                        key = self._gear_item_key(item)
+                        if (self.gear.get(key) or {}).get("slot") != "armor":
+                            continue
+                        if key == chest:
+                            held = True
+                        for e2 in self._item_effects.get(key) or []:
+                            if e2 in floors and worn.get(e2, 0) <= floors[e2]:
+                                held = True
+                    if held:
+                        continue
+                    ng = self._with_chest(g, chest)
+                    d = self.comp_score(party, combos,
+                                        gears[:i] + [ng] + gears[i + 1:]) - base
+                    if best is None or d > best[0] + PICK_TIE_EPS:
+                        best = (d, i, ng)
+            if best is None:
+                break
+            gears[best[1]] = best[2]
+            dressed.append(best[1])
+        return gears, dressed
 
     def observed_share(self, weapon, gear_id):
         """How often this weapon's fielded builds wear `gear_id` in its
@@ -5139,7 +5293,7 @@ class Engine:
         toward every constraint, and they may be weapons the viability rules
         would not generate (their slots are flagged by swap_review, not
         here). Returns {"party", "combos", "score", "feasible", "filler",
-        "held", "locked"}; `feasible` False means the constraints could not
+        "held", "locked", "floors"}; `feasible` False means the constraints could not
         be met at this size (the roster is partial/provisional — the UI must
         say so instead of silently inserting negative filler); `filler`
         lists generated slot indexes whose members REDUCE comp_score while
@@ -5288,6 +5442,11 @@ class Engine:
                 ctx, party, combos, gears, fixed, avoid=avoid_keys)
             party, combos, gears = self._refine_constrained(
                 ctx, party, combos, gears, fixed, avoid=avoid_keys)
+        # THE CARRIER FLOORS (generation only): the searched roster is
+        # dressed to its floors; the score and the filler audit read it
+        # dressed
+        gears, floor_dressed = self._floor_dress(party, combos, gears,
+                                                 fixed)
         # filler audit — a generated member that REDUCES the objective is
         # surfaced, never silently kept quiet. A negative slot whose removal
         # would break a minimum constraint is `held` (mandated structure);
@@ -5327,13 +5486,20 @@ class Engine:
         kits = {}
         for i in range(fixed, len(party)):
             if gears[i]:
-                kits[i] = {"variant": next(
+                kits[i] = {"variant": ("floor" if i in floor_dressed
+                                       else next(
                     (vk for vk, gl in self.kit_variants(party[i])
-                     if gl == gears[i]), None), "gears": gears[i]}
+                     if gl == gears[i]), None)), "gears": gears[i]}
+        # each floored effect: its floor and the wearers the roster
+        # holds (an effect no member can carry stays short, said here)
+        worn = self._carrier_worn(party, gears)
+        floors = {eff: {"floor": n, "worn": worn.get(eff, 0)}
+                  for eff, n in sorted(self.carrier_floors().items())}
         return {"party": party, "combos": combos, "gears": gears,
                 "kits": kits, "score": base,
                 "feasible": feasible, "filler": filler, "held": held,
-                "locked": fixed, "exhausted": exhausted}
+                "locked": fixed, "exhausted": exhausted,
+                "floors": floors}
 
     def replace_options(self, party, index, combos=None, gears=None,
                         top_n=5, pool=None):

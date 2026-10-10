@@ -441,6 +441,11 @@ def grade_roster(e, r, cell, rctx, declared):
     return {
         "party": party, "names": names, "combos": combos,
         "kits": [list(g) if g else None for g in gears],
+        # the carrier floors the forge dressed to (each with the wearers
+        # the roster holds) and the slots it re-dressed
+        "floors": r.get("floors") or {},
+        "floor_dressed": sorted(int(i) for i, k in (r.get("kits") or {}).items()
+                                if k.get("variant") == "floor"),
         "score": round(r["score"], 4), "feasible": r["feasible"],
         "filler": r["filler"], "held": r["held"],
         "exhausted": bool(r.get("exhausted")),
@@ -520,6 +525,18 @@ def summarize(results):
            "with_held": sum(1 for g in r0 if g["held"]),
            "short": [f"{c['content']}/{c['size']}/{c['style']}: {len(c['rosters'][0]['party'])}"
                      for c in results if len(c["rosters"][0]["party"]) < c["size"]]}
+    # the carrier floors: cells with any floor, cells whose every floor
+    # is worn, the slots re-dressed, each effect's floored and met cells
+    fl = [g for g in r0 if g.get("floors")]
+    out["floors"] = {
+        "cells": len(fl),
+        "all_met": sum(1 for g in fl
+                       if all(v["worn"] >= v["floor"] for v in g["floors"].values())),
+        "redressed": sum(len(g.get("floor_dressed") or []) for g in r0),
+        "by_effect": {eff: [sum(1 for g in fl if eff in g["floors"]),
+                            sum(1 for g in fl if eff in g["floors"]
+                                and g["floors"][eff]["worn"] >= g["floors"][eff]["floor"])]
+                      for eff in sorted({k for g in fl for k in g["floors"]})}}
     # identity
     conf = {}
     for c in results:
@@ -695,6 +712,11 @@ def summary_lines(title, s):
     L.append(f"- cells: {s['cells']}; infeasible: {s['infeasible']}; with filler slots: "
              f"{s['with_filler']}; with held slots: {s['with_held']}"
              + (f"; short rosters: {', '.join(s['short'])}" if s["short"] else ""))
+    f = s.get("floors") or {}
+    if f.get("cells"):
+        L.append(f"- carrier floors: {f['all_met']}/{f['cells']} floored cells wear every "
+                 f"floor; {f['redressed']} slots re-dressed to a floor; met per effect: "
+                 + ", ".join(f"{k} {v[1]}/{v[0]}" for k, v in f["by_effect"].items()))
     L.append(f"- identity agrees with the forged-for style: {s['identity_agree']}/"
              f"{s['identity_styled']} styled cells")
     for st, reads in s["identity_by_style"].items():

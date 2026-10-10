@@ -2434,59 +2434,231 @@ def mine_effect_quotas(gear, effect_map, problems):
             "comps": rows, "summary": summary}
 
 
-def mine_carrier_quotas(gear, effect_map):
-    """CARRIER QUOTAS from the killboard harvest (the kit audit: lock
-    down what the people who win fights actually wear; R25): per
-    fight-size bucket, the share of fielded builds whose
-    chest grants each typed gear effect. Demon / Judicator / Guardian /
-    Royal-Jacket / Hellion chests are worn by a handful of a roster, not
-    by every tank whose own weapon favours them — Judicator is the modal
-    1H-Mace chest AND only ~1.5 of 20 players wear one. The engine turns
-    a share into a per-roster cap (share x size, half-up, min 1) and the
-    forge demotes the excess wearers to their next observed chest
-    (Engine._allocate_carriers). Evidence for GENERATION only; manual
-    kits always score. Buckets follow the harvest's own size floor:
-    nothing under 20 players is sampled, so 20-59 is the nearest bucket
-    for every smaller party and the engine says so."""
+CARRIER_BANDS = (("10-14", 10, 14), ("15-19", 15, 19), ("20", 20, 10 ** 6))
+CARRIER_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
+CARRIER_MIN_DISTINCT = 40   # rosters a cell needs (the style-band convention)
+CARRIER_MIN_RATE = 20       # linked members a wear rate needs before it stands
+
+
+def _carrier_band(size):
+    for key, lo, hi in CARRIER_BANDS:
+        if lo <= size <= hi:
+            return key
+    return None
+
+
+def _pb_dist(probs):
+    """Exact distribution of a sum of independent Bernoulli draws (the
+    Poisson-binomial), as a list indexed by the count."""
+    dist = [1.0]
+    for p in probs:
+        if p <= 0.0:
+            continue      # a draw that never lands leaves the distribution
+        nxt = [0.0] * (len(dist) + 1)
+        for k, v in enumerate(dist):
+            nxt[k] += v * (1.0 - p)
+            nxt[k + 1] += v * p
+        dist = nxt
+    return dist
+
+
+def mine_carrier_quotas(gear, effect_map, known, party_styles):
+    """CARRIER CAPS AND FLOORS from ONE coverage-corrected measurement
+    of the killboard harvest (roles-design.md increment 3b). The unit is
+    one DISTINCT fully-known killer roster of 10+ on the training split
+    (guild set + weapon multiset, the skeleton convention; of its
+    instances, the one with the most members whose chest is known). A
+    member linked to its build (the party index) counts as observed; an
+    unlinked member's weapon is known from the party's weapon multiset,
+    and its chest effect follows the wear rate among linked members of
+    the same weapon in the same style x band (falling back to the band,
+    then every band, while a rate holds CARRIER_MIN_RATE linked members;
+    a weapon under it everywhere takes the band's rate over every
+    weapon). Linkage depends on the seat (frontline and support link
+    about a third of the time, healers three times in four), so counting
+    linked builds alone under-counts frontline chests.
+
+    The count is EXACT, no sampling: per roster and effect the observed
+    carriers plus a sum of independent draws, one per unlinked member
+    (its Poisson-binomial distribution); a cell's distribution is the
+    mean of its rosters' (each roster one vote). Per effect x style x
+    band (10-14, 15-19, 20) and pooled:
+      floor  the cell's median carriers per roster (the lowest count
+             whose cumulative share reaches one half: an integer, so its
+             round-half-up is itself) where it is 1 or more; none where
+             most rosters wear none
+      share  expected carriers per member, the cap's rate: the engine
+             caps a roster at max(floor, max(1, round-half-up(share x
+             size))) — the share x size rule as before, held at the floor
+             where the rule falls under it, so a floor never exceeds its
+             cap by construction
+    A cell needs CARRIER_MIN_DISTINCT rosters; a thinner style cell is
+    absent and the engine reads the pooled one. GENERATION only (the
+    forge's dressing); manual kits always score."""
     kb_path = rosters_io.path(OUT)
     if not os.path.exists(kb_path) or not effect_map:
         return {}
     doc = _load_rosters(kb_path)
-    size_of = {b.get("battle"): (b.get("total_players") or 0)
-               for b in (doc.get("battles") or [])}
-    buckets = {"20-59": {"builds": 0, "wearers": {}},
-               "60+": {"builds": 0, "wearers": {}}}
+    effects = sorted(set(effect_map.values()))
+    # linked members per party: one build per player (the first), the
+    # chest effect "" when the chest is known and carries none, None when
+    # the chest is unknown (the member then counts as unlinked)
+    linked = {}
     for b in doc.get("builds") or []:
-        if (b.get("party_size") or 0) < 10:
-            continue   # killer parties of 10+ only (see derive_kit_doctrine)
-        if not _in_split(b.get("battle")):
-            continue   # the training split, as every harvest-derived table
-        size = size_of.get(b.get("battle"), 0)
-        key = "60+" if size >= 60 else "20-59"
-        bk = buckets[key]
-        bk["builds"] += 1
-        gid = _normalize_gear_id((b.get("gear") or {}).get("Armor"), gear)
-        eff = effect_map.get(gid)
-        if eff:
-            bk["wearers"][eff] = bk["wearers"].get(eff, 0) + 1
-    out = {}
-    for key, bk in buckets.items():
-        if bk["builds"] < 100:
+        if b.get("party") is None or not _in_split(b.get("battle")):
             continue
-        out[key] = {"builds": bk["builds"],
-                    "share": {eff: round(n / bk["builds"], 4)
-                              for eff, n in sorted(bk["wearers"].items())}}
-    if not out:
-        return {}
+        key = (b.get("battle"), b.get("party"))
+        players = linked.setdefault(key, {})
+        pk = b.get("player") or f"?{len(players)}"
+        if pk in players:
+            continue
+        gid = _normalize_gear_id((b.get("gear") or {}).get("Armor"), gear)
+        players[pk] = (b.get("weapon"), effect_map.get(gid, "") if gid else None)
+    best = {}
+    order = []
+    for p in doc.get("parties") or []:
+        size = p.get("size") or 0
+        if size < CARRIER_BANDS[0][1] or (p.get("known_weapons") or 0) < size:
+            continue
+        if not _in_split(p.get("battle")):
+            continue
+        ws = [w for w in (p.get("weapons") or []) if w in known]
+        if len(ws) < size:
+            continue
+        rk = (tuple(sorted(p.get("guilds") or [])), tuple(sorted(ws)))
+        mem = list((linked.get((p.get("battle"), p.get("index"))) or {}).values())
+        cov = sum(1 for _w, e in mem if e is not None)
+        if rk not in best:
+            order.append(rk)
+        elif cov <= best[rk][0]:
+            continue
+        best[rk] = (cov, {"size": size, "weapons": sorted(ws),
+                          "style": party_styles.get((p.get("battle"), p.get("index"))),
+                          "members": mem})
+    rosters = [best[rk][1] for rk in order]
+    # wear rates per (weapon, style, band), (weapon, band), (weapon,) and
+    # the band's rate over every weapon ("*", band)
+    cnt = {}
+    for r in rosters:
+        band, st = _carrier_band(r["size"]), r["style"] or "-"
+        for w, e in r["members"]:
+            if e is None:
+                continue
+            for key in ((w, st, band), (w, band), (w,), ("*", band)):
+                c = cnt.setdefault(key, {"n": 0})
+                c["n"] += 1
+                if e:
+                    c[e] = c.get(e, 0) + 1
+
+    def rate(w, st, band):
+        for key in ((w, st, band), (w, band), (w,)):
+            c = cnt.get(key)
+            if c and c["n"] >= CARRIER_MIN_RATE:
+                return [c.get(e, 0) / c["n"] for e in effects]
+        c = cnt.get(("*", band)) or {"n": 0}
+        return [(c.get(e, 0) / c["n"]) if c["n"] else 0.0 for e in effects]
+
+    per = []          # per roster: (size, style, band, [dist per effect])
+    members_total = known_total = 0
+    for r in rosters:
+        band, st = _carrier_band(r["size"]), r["style"] or "-"
+        obs = {e: 0 for e in effects}
+        seen = {}
+        for w, e in r["members"]:
+            if e is None:
+                continue
+            seen[w] = seen.get(w, 0) + 1
+            if e:
+                obs[e] += 1
+        n_known = sum(seen.values())
+        n_missing = max(0, r["size"] - n_known)
+        left = {}
+        for w in r["weapons"]:
+            left[w] = left.get(w, 0) + 1
+        for w, n in seen.items():
+            if w in left:
+                left[w] = max(0, left[w] - n)
+        pool = [w for w in sorted(left) for _ in range(left[w])]
+        if len(pool) == n_missing:
+            probs = [rate(w, st, band) for w in pool]
+        elif len(pool) > n_missing:
+            # a linked weapon the multiset lacks: each unlinked member is
+            # any one of the remaining weapons, at their mean rate
+            rows = [rate(w, st, band) for w in pool]
+            mean = [math.fsum(x[j] for x in rows) / len(rows)
+                    for j in range(len(effects))]
+            probs = [mean] * n_missing
+        else:
+            probs = ([rate(w, st, band) for w in pool]
+                     + [rate("?", st, band)] * (n_missing - len(pool)))
+        dists = []
+        for j, e in enumerate(effects):
+            d = _pb_dist([p[j] for p in probs])
+            dists.append([0.0] * obs[e] + d)
+        per.append((r["size"], r["style"], band, dists))
+        members_total += r["size"]
+        known_total += n_known
+
+    def cell(rows):
+        if len(rows) < CARRIER_MIN_DISTINCT:
+            return None
+        members = sum(x[0] for x in rows)
+        out = {"n": len(rows), "members": members,
+               "share": {}, "mean": {}, "p50": {}, "p90": {}, "floor": {}}
+        for j, e in enumerate(effects):
+            top = max(len(x[3][j]) for x in rows)
+            pmf = [math.fsum(x[3][j][k] for x in rows if k < len(x[3][j])) / len(rows)
+                   for k in range(top)]
+            expect = math.fsum(k * v for k, v in enumerate(pmf))
+            acc, p50, p90 = 0.0, None, None
+            for k, v in enumerate(pmf):
+                acc += v
+                if p50 is None and acc >= 0.5:
+                    p50 = k
+                if p90 is None and acc >= 0.9:
+                    p90 = k
+            p50 = p50 if p50 is not None else top - 1
+            p90 = p90 if p90 is not None else top - 1
+            out["share"][e] = round(expect * len(rows) / members, 4)
+            out["mean"][e] = round(expect, 2)
+            out["p50"][e] = p50
+            out["p90"][e] = p90
+            if p50 >= 1:
+                out["floor"][e] = p50
+        return out
+
+    cells = {"pooled": {}, "styles": {}}
+    for key, _lo, _hi in CARRIER_BANDS:
+        c = cell([x for x in per if x[2] == key])
+        if c:
+            cells["pooled"][key] = c
+        for st in CARRIER_STYLES:
+            c = cell([x for x in per if x[2] == key and x[1] == st])
+            if c:
+                cells["styles"].setdefault(st, {})[key] = c
     items = {}
     for gid, eff in sorted(effect_map.items()):
         if (gear.get(gid) or {}).get("slot") == "armor":
             items.setdefault(eff, []).append(gid)
-    return {"note": ("share of killboard builds wearing a chest that "
-                     "grants each typed gear effect, per fight-size "
-                     "bucket (official kill-event party rosters); the "
-                     "engine caps generated rosters at share x size"),
-            "buckets": out, "items": items}
+    return {"note": ("carrier caps and floors per effect x style x band from "
+                     "one coverage-corrected measurement of the killer "
+                     "rosters of 10+; the engine caps a generated roster at "
+                     "max(floor, max(1, round-half-up(share x size))) and "
+                     "dresses it to its floor (GENERATION only)"),
+            "unit": ("one distinct fully-known killer roster of 10+ (guild "
+                     "set + weapon multiset; the instance with the most "
+                     "chests known), training split (battle % 5 != 0)"),
+            "imputation": (f"an unlinked member wears each effect at its "
+                           f"weapon's rate among linked members (style x band, "
+                           f"else band, else every band, at >= {CARRIER_MIN_RATE} "
+                           f"linked members; else the band's rate over every "
+                           f"weapon); counts exact (Poisson-binomial), no sampling"),
+            "min_distinct": CARRIER_MIN_DISTINCT,
+            "min_rate": CARRIER_MIN_RATE,
+            "bands": [list(b) for b in CARRIER_BANDS],
+            "coverage": {"rosters": len(rosters), "members": members_total,
+                         "chest_known": known_total},
+            "cells": cells, "items": items}
 
 
 def apply_labels(weapons, book, doc, lines):
@@ -2745,7 +2917,8 @@ def apply_roles(weapons, gear):
             if d:
                 kit_detail_styles[st] = d
     effect_quotas = mine_effect_quotas(gear, effect_map, problems)
-    carrier_quotas = mine_carrier_quotas(gear, effect_map)
+    carrier_quotas = mine_carrier_quotas(gear, effect_map, set(weapons),
+                                         party_styles)
     # unique actives that buff allies but sit in no gear_effect yet —
     # candidates for the effects catalog (pending grading)
     effect_items = {it.get("id") for ge in effects
@@ -4102,9 +4275,10 @@ def main():
         # a manual party. Counts scale by size/reference_size, arm at
         # min_size.
         "need_profiles": need_profiles,
-        # CARRIER QUOTAS (R25): killboard share of builds wearing
-        # each effect-carrier chest per fight-size bucket; the forge caps
-        # generated rosters at share x size (see mine_carrier_quotas).
+        # CARRIER CAPS AND FLOORS (R25, increment 3b): one coverage-
+        # corrected measurement per effect x style x band (see
+        # mine_carrier_quotas); the forge caps generated rosters at
+        # max(floor, share x size) and dresses them to their floors.
         # Generation-only; manual kits always score.
         "carrier_quotas": roles_report.get("carrier_quotas") or {},
         # THE ITEM-POWER GATE on kit doctrine (kit_item_power_cut): the

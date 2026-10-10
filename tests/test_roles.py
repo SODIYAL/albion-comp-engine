@@ -1015,19 +1015,43 @@ def t_kit_audit_agreement():
 
 
 def t_carrier_quota():
-    # R25 (increment 3b): effect-carrier chests are capped per
-    # roster at the killboard share x size — a generation constraint in
-    # party_state/_eval_pick (kit variants past the cap are skipped, the
-    # carrier weapon gets a non-carrier alternative), never a scoring
+    # R25 (increment 3b): effect-carrier chests are capped AND floored per
+    # roster from ONE coverage-corrected measurement of the killer rosters
+    # of 10+ (dataset `carrier_quotas`, per effect x style x band): the cap
+    # is max(floor, max(1, round-half-up(share x size))), so no floor ever
+    # exceeds its cap; the floor is the cell's median carriers per roster
+    # where it is 1 or more. Both are GENERATION constraints (party_state
+    # counts the discretionary carriers, kit variants past a cap are
+    # skipped, the forge dresses a roster to its floors), never a scoring
     # rule: a manual party of five Demon Armors still scores.
     e = Engine(content="territory_defense", size=20, style="clap")
     caps = e.carrier_caps()
+    floors = e.carrier_floors()
     q = e.data.get("carrier_quotas") or {}
-    have_q = bool((q.get("buckets") or {}).get("20-59"))
+    cell = ((q.get("cells") or {}).get("styles") or {}).get("clap", {}).get("20") or {}
+    shipped = bool(cell.get("share")) and floors == {
+        k: v for k, v in sorted((cell.get("floor") or {}).items())}
+    rule = all(caps[k] == max(floors.get(k, 0),
+                              max(1, int(cell["share"][k] * 20 + 0.5)))
+               for k in cell.get("share") or {})
+    # floor <= cap everywhere the engine reads a cell: every style, every
+    # size of 10-20
+    bad = []
+    for st in ("balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+        for size in range(10, 21):
+            e.set_content("territory_defense", size, st)
+            c, f = e.carrier_caps(), e.carrier_floors()
+            bad += [(st, size, k) for k, n in f.items() if n > c.get(k, 0)]
+    e.set_content("territory_defense", 20, "clap")
     r = e.forge(20)
     worn = e._carrier_counts(r["party"], r["gears"])
     within = all(worn.get(k, 0) <= v for k, v in caps.items())
-    # identity chests are exempt (the Lifecurse case):
+    allw = e._carrier_worn(r["party"], r["gears"])
+    rep = r.get("floors") or {}
+    report_ok = (sorted(rep) == sorted(floors)
+                 and all(rep[k]["floor"] == floors[k]
+                         and rep[k]["worn"] == allw.get(k, 0) for k in rep))
+    # identity chests are exempt from the cap (the Lifecurse case):
     # a kite-20 fielding Bedrock Mace AND Lifecurse — both >= 50% Demon
     # wearers — dresses BOTH in Demon Armor; the cap rations only the
     # discretionary wearer
@@ -1037,8 +1061,6 @@ def t_carrier_quota():
                  if g and "ARMOR_PLATE_HELL" in g]
     life = ("MAIN_CURSEDSTAFF_UNDEAD" not in rk["party"]
             or "MAIN_CURSEDSTAFF_UNDEAD" in demon_ids)
-    # identity wearers are unlimited; DISCRETIONARY Demon wearers (a
-    # weapon whose builds wear it under half the time) stay within cap
     disc = [w for w in demon_ids
             if not ek._identity_chest(w, "ARMOR_PLATE_HELL")]
     identity_ok = life and len(disc) <= ek.carrier_caps().get(
@@ -1053,14 +1075,51 @@ def t_carrier_quota():
     manual = ["2H_DUALMACE_AVALON"] * 5
     demon = [["ARMOR_PLATE_HELL"]] * 5
     scores = e.fitness(manual, None, demon) > e.fitness(manual, None, None)
-    check("R25 carrier quota: caps ship (reflect_shell 1 per 20), a forged "
-          "20 wears no DISCRETIONARY carrier past its cap, identity chests "
-          "are exempt (Lifecurse keeps Demon beside Bedrock Mace), a "
+    check("R25 carrier caps and floors: one measurement ships both per "
+          "effect x style x band, the cap is the share x size rule held at "
+          "the floor (no floor above its cap at any size of 10-20 in any "
+          "style), a forged 20 wears no DISCRETIONARY carrier past its cap "
+          "and reports every floor with the wearers it holds, identity "
+          "chests are exempt (Lifecurse keeps Demon beside Bedrock Mace), a "
           "carrier weapon offers a non-carrier variant, manual builds score",
-          have_q and caps.get("reflect_shell") == 1 and within
+          shipped and rule and not bad and within and report_ok
           and st.get("carriers") is not None and v_ok and scores
           and identity_ok,
-          f"caps={caps} worn={worn} demon={demon_ids} kv={kv}")
+          f"caps={caps} floors={floors} bad={bad[:4]} worn={worn} "
+          f"floors_report={rep} demon={demon_ids} kv={kv}")
+
+
+def t_carrier_floor_dressing():
+    # R25b: the forge dresses a roster to its carrier floors with chests
+    # its members' own doctrine tiers offer (worn by that weapon's
+    # winners), re-dressing the member whose swap costs least; below 10 no
+    # floor exists; a locked member is never re-dressed; manual rosters
+    # are never dressed (scoring reads what is worn).
+    e = Engine(content="territory_defense", size=20, style="brawl")
+    floors = e.carrier_floors()
+    r = e.forge(20)
+    dressed = [i for i, k in (r.get("kits") or {}).items()
+               if k.get("variant") == "floor"]
+    def chest_of(gl):
+        return next((g for g in gl or []
+                     if (e.gear.get(e._gear_item_key(g)) or {}).get("slot")
+                     == "armor"), None)
+    legit = all(chest_of(r["gears"][i])
+                in e._floor_chests(r["party"][i]).values() for i in dressed)
+    rep = r.get("floors") or {}
+    met = sorted(k for k, v in rep.items() if v["worn"] >= v["floor"])
+    legit = legit and (bool(dressed) or met == sorted(floors))
+    e9 = Engine(content="territory_defense", size=9, style="brawl")
+    locked = ["2H_MACE", "MAIN_HOLYSTAFF"]
+    rl = e.forge(20, locked=locked, locked_gears=[["ARMOR_LEATHER_SET1"], None])
+    check("R25b the forge dresses a roster to its carrier floors from its "
+          "members' own doctrine chests (re-dressed slots marked `floor`), "
+          "no floor below 10, locked members keep their kit",
+          bool(floors) and legit and set(rep) == set(floors)
+          and e9.carrier_floors() == {}
+          and rl["gears"][0] == ["ARMOR_LEATHER_SET1"] and rl["gears"][1] is None,
+          f"floors={floors} re-dressed={[(r['party'][i], r['gears'][i]) for i in dressed]} "
+          f"met={met} report={rep}")
 
 
 def t_observed_chest_class():
@@ -1869,6 +1928,7 @@ if __name__ == "__main__":
     t_occult_support_seat()
     t_kit_audit_agreement()
     t_carrier_quota()
+    t_carrier_floor_dressing()
     t_labels()
     t_observed_chest_class()
     t_one_player_one_vote()

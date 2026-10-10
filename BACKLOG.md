@@ -25,12 +25,11 @@ Each is decidable today from evidence already in the repo.
   1,508. Scoring every member naked read the held-out 7s better before the
   rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
   2)
-- **Carrier FLOORS**: which of the six gear effects are needs. The harvest has
-  the plate Royal Armor on 2.7% of builds in battles of 20-59 players (about
-  0.5 per 20; the 3.65% the log records does not reproduce on that week's
-  artifacts, which read 2.6-2.7%) against the guild's "2 Royals per 10".
-  Increment 3b's second half; then mechanism pairing rules for effect
-  carriers. (V: 09b, Other numbers; roles-design.md)
+- **Effect-carrier pairing rules**: carrier caps and floors ship per effect
+  x style x band (V: 10, Carrier caps and floors from one corrected
+  measurement); which seat carries each chest beside which mechanism is
+  increment 3b's remaining half. What a pairing rule measures needs a
+  maintainer decision; nothing is measured yet. (roles-design.md)
 - **The AoE geometry's provisional parts** (Q9): `radius_targets`,
   `reference_clump: 2` and travel-distance footprints stay PROVISIONAL.
   With each bundle reading its own spell, 147 geometric rows on 38 spells

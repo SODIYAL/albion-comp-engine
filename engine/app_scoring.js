@@ -315,7 +315,8 @@
        every pool that carries one the size bucket's prior stands at delta */
     this.priorPool = this._priorPool(content, this.size);
     this.delta = this.priorPool !== null ? this._deltaBase * this.poolDeltaX : this._deltaBase;
-    this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
+    this._carrierCapsCache = null;   /* carrierCaps() memo (size + style) */
+    this._carrierFloorsCache = null;  /* carrierFloors() memo */
     /* DEMAND RAMP (mirrors engine.py set_content):
        a row with ramp {none_until, full_at} is dropped at sizes <=
        none_until, grows linearly to its measured value at full_at, and
@@ -817,6 +818,7 @@
     this._variantCache = {};
     this._variantFallback = {};
     this._dressedCache = {};
+    this._floorChestCache = {};
   };
 
   CompEngine.prototype.setDressing = function (enabled) {
@@ -2086,22 +2088,59 @@
     return { kit: kit, options: options, seat: seat };
   };
 
+  CompEngine.prototype._carrierCell = function () {
+    /* the carrier cell this context reads (mirrors engine.py
+       _carrier_cell): the band holding the size (nearest band outside
+       them); at the lowest band's size or more a declared style's cell
+       where one exists, else the pooled cell */
+    var q = this.data.carrier_quotas || {};
+    var bands = q.bands || [], cells = q.cells || {};
+    if (!bands.length || !cells.pooled) return null;
+    var band = null;
+    for (var bi = 0; bi < bands.length; bi++) {
+      if (bands[bi][1] <= this.size && this.size <= bands[bi][2]) { band = bands[bi][0]; break; }
+    }
+    if (band === null)
+      band = this.size < bands[0][1] ? bands[0][0] : bands[bands.length - 1][0];
+    var cell = null;
+    if (this.size >= bands[0][1] && IDENTITY_STYLES[this.style])
+      cell = ((cells.styles || {})[this.style] || {})[band] || null;
+    return cell || (cells.pooled || {})[band] || null;
+  };
+  CompEngine.prototype.carrierFloors = function () {
+    /* per-roster FLOOR on each effect-carrier chest (mirrors engine.py
+       carrier_floors): the cell's median carriers per killer roster where
+       it is 1 or more; {} under the lowest band. Generation only. */
+    if (this._carrierFloorsCache !== null && this._carrierFloorsCache !== undefined)
+      return this._carrierFloorsCache;
+    var q = this.data.carrier_quotas || {};
+    var bands = q.bands || [];
+    var cell = this._carrierCell(), floors = {};
+    if (cell && bands.length && this.size >= bands[0][1]) {
+      var fl = cell.floor || {}, effs = Object.keys(fl).sort();
+      for (var i = 0; i < effs.length; i++) if (fl[effs[i]] >= 1) floors[effs[i]] = fl[effs[i]];
+    }
+    this._carrierFloorsCache = floors;
+    return floors;
+  };
   CompEngine.prototype.carrierCaps = function () {
-    /* per-roster cap on each effect-carrier chest at this size (mirrors
-       engine.py carrier_caps): killboard share x size, half-up, min 1.
-       A GENERATION constraint: partyState counts what the roster wears,
+    /* per-roster CAP on each effect-carrier chest at this size and style
+       (mirrors engine.py carrier_caps): the cell's share x size, half-up,
+       min 1, held at the floor where the rule falls under it. A
+       GENERATION constraint: partyState counts what the roster wears,
        candidates skip capped kit variants. */
     if (this._carrierCapsCache !== null && this._carrierCapsCache !== undefined)
       return this._carrierCapsCache;
-    var q = this.data.carrier_quotas || {};
-    var buckets = q.buckets || {};
-    var any = false;
-    for (var bk in buckets) { any = true; break; }
-    var caps = {};
-    if (any) {
-      var key = (this.size >= 60 && buckets["60+"]) ? "60+" : "20-59";
-      var share = (buckets[key] || {}).share || {};
-      for (var eff in share) caps[eff] = Math.max(1, Math.floor(share[eff] * this.size + 0.5));
+    var cell = this._carrierCell(), caps = {};
+    if (cell) {
+      var share = cell.share || {}, floors = this.carrierFloors(), seen = {}, effs = [];
+      for (var e1 in share) if (!seen[e1]) { seen[e1] = true; effs.push(e1); }
+      for (var e2 in floors) if (!seen[e2]) { seen[e2] = true; effs.push(e2); }
+      effs.sort();
+      for (var i = 0; i < effs.length; i++) {
+        var rule = Math.max(1, Math.floor((share[effs[i]] || 0) * this.size + 0.5));
+        caps[effs[i]] = Math.max(floors[effs[i]] || 0, rule);
+      }
     }
     this._carrierCapsCache = caps;
     return caps;
@@ -2149,6 +2188,100 @@
       }
     }
     return false;
+  };
+  CompEngine.prototype._carrierWorn = function (party, gears) {
+    /* {effect: members wearing a chest that grants it}, EVERY wearer
+       (mirrors engine.py _carrier_worn): the floor's count */
+    var out = {};
+    for (var i = 0; i < (gears || []).length && i < party.length; i++) {
+      var g = gears[i] || [];
+      for (var j = 0; j < g.length; j++) {
+        var effs = this.itemEffects[this._gearItemKey(g[j])] || [];
+        for (var k = 0; k < effs.length; k++) out[effs[k]] = (out[effs[k]] || 0) + 1;
+      }
+    }
+    return out;
+  };
+  CompEngine.FLOOR_CHEST_TOP_N = 99;
+  CompEngine.prototype._floorChests = function (weapon) {
+    /* {effect: chest} the weapon's own doctrine tier offers (mirrors
+       engine.py _floor_chests) */
+    var out = this._floorChestCache[weapon];
+    if (out !== undefined) return out;
+    out = {};
+    var opts = this.kitOptions(weapon, null, null, CompEngine.FLOOR_CHEST_TOP_N).options.armor || [];
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].doctrine !== "weapon") continue;
+      var effs = this.itemEffects[opts[i].gear] || [];
+      for (var k = 0; k < effs.length; k++) {
+        if (out[effs[k]] === undefined) out[effs[k]] = opts[i].gear;
+      }
+    }
+    this._floorChestCache[weapon] = out;
+    return out;
+  };
+  var KIT_SLOTS = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+  CompEngine.prototype._withChest = function (gl, chest) {
+    /* `gl` with its chest replaced by `chest` (or added), in kit slot
+       order (mirrors engine.py _with_chest) */
+    var bySlot = {}, rest = [];
+    for (var i = 0; i < (gl || []).length; i++) {
+      var slot = (this.gear[this._gearItemKey(gl[i])] || {}).slot;
+      if (KIT_SLOTS.indexOf(slot) >= 0 && bySlot[slot] === undefined) bySlot[slot] = gl[i];
+      else rest.push(gl[i]);
+    }
+    bySlot.armor = chest;
+    var out = [];
+    for (var s = 0; s < KIT_SLOTS.length; s++) {
+      if (bySlot[KIT_SLOTS[s]] !== undefined) out.push(bySlot[KIT_SLOTS[s]]);
+    }
+    return out.concat(rest);
+  };
+  CompEngine.prototype._floorDress = function (party, combos, gears, fixed) {
+    /* the carrier floors in the forge's dressing (mirrors engine.py
+       _floor_dress): while an effect stands under its floor, re-dress
+       the generated member whose chest swap to a carrier of its own
+       doctrine tier costs the roster least */
+    var floors = this.carrierFloors();
+    var out = gears.slice(), dressed = [];
+    var effs = Object.keys(floors).sort();
+    if (!effs.length || party.length <= fixed) return [out, dressed];
+    while (true) {
+      var worn = this._carrierWorn(party, out), shortE = [];
+      for (var a = 0; a < effs.length; a++) {
+        if ((worn[effs[a]] || 0) < floors[effs[a]]) shortE.push(effs[a]);
+      }
+      if (!shortE.length) break;
+      var base = this.compScore(party, combos, out);
+      var best = null;
+      for (var b = 0; b < shortE.length; b++) {
+        for (var i = fixed; i < party.length; i++) {
+          var g = out[i];
+          if (!g || !g.length) continue;
+          var chest = this._floorChests(party[i])[shortE[b]];
+          if (chest === undefined) continue;
+          var held = false;
+          for (var j = 0; j < g.length; j++) {
+            var key = this._gearItemKey(g[j]);
+            if ((this.gear[key] || {}).slot !== "armor") continue;
+            if (key === chest) held = true;
+            var e2s = this.itemEffects[key] || [];
+            for (var m = 0; m < e2s.length; m++) {
+              if (floors[e2s[m]] !== undefined && (worn[e2s[m]] || 0) <= floors[e2s[m]]) held = true;
+            }
+          }
+          if (held) continue;
+          var ng = this._withChest(g, chest);
+          var trial = out.slice(0, i).concat([ng], out.slice(i + 1));
+          var d = this.compScore(party, combos, trial) - base;
+          if (best === null || d > best[0] + PICK_TIE_EPS) best = [d, i, ng];
+        }
+      }
+      if (best === null) break;
+      out[best[1]] = best[2];
+      dressed.push(best[1]);
+    }
+    return [out, dressed];
   };
   CompEngine.prototype.observedShare = function (weapon, gearId) {
     var seat = this.primarySeat(weapon);
@@ -4786,6 +4919,12 @@
       rc = this._refineConstrained(ctx, rc[0], rc[1], rc[2], fixed, undefined, av);
       party = rc[0]; combosOut = rc[1]; gearsOut = rc[2];
     }
+    /* the carrier floors (mirrors engine.py): the searched roster is
+       dressed to its floors; the score and the filler audit read it */
+    var fd = this._floorDress(party, combosOut, gearsOut, fixed);
+    gearsOut = fd[0];
+    var floorDressed = {};
+    for (var fdi = 0; fdi < fd[1].length; fdi++) floorDressed[fd[1][fdi]] = true;
     /* filler audit (mirrors engine.py): negative slots split into `held`
        (mandated by a minimum constraint) and `filler` (must not survive). */
     var filler = [], held = [];
@@ -4830,13 +4969,19 @@
             break;
           }
         }
-        kits[ki] = { variant: vname, gears: gearsOut[ki] };
+        kits[ki] = { variant: floorDressed[ki] ? "floor" : vname,
+                     gears: gearsOut[ki] };
       }
     }
+    /* each floored effect: its floor and the wearers the roster holds */
+    var wornF = this._carrierWorn(party, gearsOut), flo = this.carrierFloors(),
+        floorsOut = {}, flk = Object.keys(flo).sort();
+    for (var fk = 0; fk < flk.length; fk++)
+      floorsOut[flk[fk]] = { floor: flo[flk[fk]], worn: wornF[flk[fk]] || 0 };
     return { party: party, combos: combosOut, gears: gearsOut, kits: kits,
              score: base,
              feasible: feasible, filler: filler, held: held, locked: fixed,
-             exhausted: exhausted };
+             exhausted: exhausted, floors: floorsOut };
   };
 
   CompEngine.prototype.replaceOptions = function (party, index, combos, gears,

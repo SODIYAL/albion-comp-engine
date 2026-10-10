@@ -44,30 +44,753 @@
   "weapons_total": 137
  },
  "carrier_quotas": {
-  "buckets": {
-   "20-59": {
-    "builds": 90803,
-    "share": {
-     "cooldown_banner": 0.0401,
-     "energy_font": 0.0378,
-     "force_shield": 0.0945,
-     "lifesteal_aura": 0.1067,
-     "reflect_shell": 0.0291,
-     "weaken_aura": 0.0324
+  "bands": [
+   [
+    "10-14",
+    10,
+    14
+   ],
+   [
+    "15-19",
+    15,
+    19
+   ],
+   [
+    "20",
+    20,
+    1000000
+   ]
+  ],
+  "cells": {
+   "pooled": {
+    "10-14": {
+     "floor": {
+      "force_shield": 1,
+      "lifesteal_aura": 1
+     },
+     "mean": {
+      "cooldown_banner": 0.55,
+      "energy_font": 0.33,
+      "force_shield": 1.28,
+      "lifesteal_aura": 1.06,
+      "reflect_shell": 0.54,
+      "weaken_aura": 0.7
+     },
+     "members": 87056,
+     "n": 7315,
+     "p50": {
+      "cooldown_banner": 0,
+      "energy_font": 0,
+      "force_shield": 1,
+      "lifesteal_aura": 1,
+      "reflect_shell": 0,
+      "weaken_aura": 0
+     },
+     "p90": {
+      "cooldown_banner": 2,
+      "energy_font": 1,
+      "force_shield": 3,
+      "lifesteal_aura": 3,
+      "reflect_shell": 2,
+      "weaken_aura": 2
+     },
+     "share": {
+      "cooldown_banner": 0.0461,
+      "energy_font": 0.0274,
+      "force_shield": 0.1077,
+      "lifesteal_aura": 0.0893,
+      "reflect_shell": 0.0454,
+      "weaken_aura": 0.0586
+     }
+    },
+    "15-19": {
+     "floor": {
+      "force_shield": 2,
+      "lifesteal_aura": 1,
+      "reflect_shell": 2,
+      "weaken_aura": 1
+     },
+     "mean": {
+      "cooldown_banner": 0.93,
+      "energy_font": 0.73,
+      "force_shield": 2.32,
+      "lifesteal_aura": 1.21,
+      "reflect_shell": 1.62,
+      "weaken_aura": 1.27
+     },
+     "members": 149488,
+     "n": 8696,
+     "p50": {
+      "cooldown_banner": 0,
+      "energy_font": 0,
+      "force_shield": 2,
+      "lifesteal_aura": 1,
+      "reflect_shell": 2,
+      "weaken_aura": 1
+     },
+     "p90": {
+      "cooldown_banner": 3,
+      "energy_font": 2,
+      "force_shield": 4,
+      "lifesteal_aura": 4,
+      "reflect_shell": 3,
+      "weaken_aura": 3
+     },
+     "share": {
+      "cooldown_banner": 0.054,
+      "energy_font": 0.0422,
+      "force_shield": 0.1347,
+      "lifesteal_aura": 0.0706,
+      "reflect_shell": 0.0941,
+      "weaken_aura": 0.0736
+     }
+    },
+    "20": {
+     "floor": {
+      "cooldown_banner": 1,
+      "force_shield": 2,
+      "reflect_shell": 2,
+      "weaken_aura": 1
+     },
+     "mean": {
+      "cooldown_banner": 1.19,
+      "energy_font": 0.96,
+      "force_shield": 2.7,
+      "lifesteal_aura": 1.19,
+      "reflect_shell": 2.25,
+      "weaken_aura": 1.53
+     },
+     "members": 36360,
+     "n": 1818,
+     "p50": {
+      "cooldown_banner": 1,
+      "energy_font": 0,
+      "force_shield": 2,
+      "lifesteal_aura": 0,
+      "reflect_shell": 2,
+      "weaken_aura": 1
+     },
+     "p90": {
+      "cooldown_banner": 3,
+      "energy_font": 3,
+      "force_shield": 5,
+      "lifesteal_aura": 4,
+      "reflect_shell": 4,
+      "weaken_aura": 3
+     },
+     "share": {
+      "cooldown_banner": 0.0594,
+      "energy_font": 0.0481,
+      "force_shield": 0.1348,
+      "lifesteal_aura": 0.0593,
+      "reflect_shell": 0.1127,
+      "weaken_aura": 0.0763
+     }
     }
    },
-   "60+": {
-    "builds": 83646,
-    "share": {
-     "cooldown_banner": 0.0469,
-     "energy_font": 0.048,
-     "force_shield": 0.1192,
-     "lifesteal_aura": 0.0642,
-     "reflect_shell": 0.0618,
-     "weaken_aura": 0.0608
+   "styles": {
+    "brawl": {
+     "10-14": {
+      "floor": {
+       "force_shield": 1,
+       "lifesteal_aura": 2,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 0.16,
+       "energy_font": 0.58,
+       "force_shield": 1.44,
+       "lifesteal_aura": 2.03,
+       "reflect_shell": 0.35,
+       "weaken_aura": 0.82
+      },
+      "members": 18371,
+      "n": 1558,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 2,
+       "reflect_shell": 0,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 1,
+       "energy_font": 2,
+       "force_shield": 3,
+       "lifesteal_aura": 4,
+       "reflect_shell": 1,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.0139,
+       "energy_font": 0.0488,
+       "force_shield": 0.1219,
+       "lifesteal_aura": 0.1721,
+       "reflect_shell": 0.0294,
+       "weaken_aura": 0.0693
+      }
+     },
+     "15-19": {
+      "floor": {
+       "energy_font": 1,
+       "force_shield": 3,
+       "lifesteal_aura": 2,
+       "reflect_shell": 1,
+       "weaken_aura": 2
+      },
+      "mean": {
+       "cooldown_banner": 0.1,
+       "energy_font": 1.55,
+       "force_shield": 2.9,
+       "lifesteal_aura": 2.48,
+       "reflect_shell": 1.03,
+       "weaken_aura": 2.08
+      },
+      "members": 23379,
+      "n": 1368,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 1,
+       "force_shield": 3,
+       "lifesteal_aura": 2,
+       "reflect_shell": 1,
+       "weaken_aura": 2
+      },
+      "p90": {
+       "cooldown_banner": 0,
+       "energy_font": 3,
+       "force_shield": 5,
+       "lifesteal_aura": 5,
+       "reflect_shell": 3,
+       "weaken_aura": 4
+      },
+      "share": {
+       "cooldown_banner": 0.0059,
+       "energy_font": 0.0909,
+       "force_shield": 0.1699,
+       "lifesteal_aura": 0.1449,
+       "reflect_shell": 0.0606,
+       "weaken_aura": 0.1214
+      }
+     },
+     "20": {
+      "floor": {
+       "energy_font": 2,
+       "force_shield": 4,
+       "lifesteal_aura": 2,
+       "reflect_shell": 1,
+       "weaken_aura": 2
+      },
+      "mean": {
+       "cooldown_banner": 0.12,
+       "energy_font": 2.12,
+       "force_shield": 3.63,
+       "lifesteal_aura": 2.62,
+       "reflect_shell": 1.52,
+       "weaken_aura": 2.58
+      },
+      "members": 4640,
+      "n": 232,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 2,
+       "force_shield": 4,
+       "lifesteal_aura": 2,
+       "reflect_shell": 1,
+       "weaken_aura": 2
+      },
+      "p90": {
+       "cooldown_banner": 0,
+       "energy_font": 4,
+       "force_shield": 6,
+       "lifesteal_aura": 6,
+       "reflect_shell": 3,
+       "weaken_aura": 6
+      },
+      "share": {
+       "cooldown_banner": 0.0059,
+       "energy_font": 0.1062,
+       "force_shield": 0.1814,
+       "lifesteal_aura": 0.1312,
+       "reflect_shell": 0.0759,
+       "weaken_aura": 0.1291
+      }
+     }
+    },
+    "brawl_clap": {
+     "10-14": {
+      "floor": {
+       "force_shield": 2,
+       "lifesteal_aura": 1,
+       "weaken_aura": 2
+      },
+      "mean": {
+       "cooldown_banner": 0.23,
+       "energy_font": 0.66,
+       "force_shield": 1.89,
+       "lifesteal_aura": 1.83,
+       "reflect_shell": 0.7,
+       "weaken_aura": 1.7
+      },
+      "members": 1279,
+      "n": 110,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 0,
+       "force_shield": 2,
+       "lifesteal_aura": 1,
+       "reflect_shell": 0,
+       "weaken_aura": 2
+      },
+      "p90": {
+       "cooldown_banner": 1,
+       "energy_font": 2,
+       "force_shield": 4,
+       "lifesteal_aura": 4,
+       "reflect_shell": 2,
+       "weaken_aura": 4
+      },
+      "share": {
+       "cooldown_banner": 0.0199,
+       "energy_font": 0.0566,
+       "force_shield": 0.1622,
+       "lifesteal_aura": 0.1573,
+       "reflect_shell": 0.0601,
+       "weaken_aura": 0.1458
+      }
+     },
+     "15-19": {
+      "floor": {
+       "energy_font": 2,
+       "force_shield": 3,
+       "reflect_shell": 2,
+       "weaken_aura": 5
+      },
+      "mean": {
+       "cooldown_banner": 0.08,
+       "energy_font": 1.85,
+       "force_shield": 3.32,
+       "lifesteal_aura": 0.89,
+       "reflect_shell": 1.68,
+       "weaken_aura": 5.16
+      },
+      "members": 2029,
+      "n": 118,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 2,
+       "force_shield": 3,
+       "lifesteal_aura": 0,
+       "reflect_shell": 2,
+       "weaken_aura": 5
+      },
+      "p90": {
+       "cooldown_banner": 0,
+       "energy_font": 3,
+       "force_shield": 6,
+       "lifesteal_aura": 3,
+       "reflect_shell": 3,
+       "weaken_aura": 8
+      },
+      "share": {
+       "cooldown_banner": 0.0047,
+       "energy_font": 0.1077,
+       "force_shield": 0.1931,
+       "lifesteal_aura": 0.0517,
+       "reflect_shell": 0.0975,
+       "weaken_aura": 0.3001
+      }
+     }
+    },
+    "clap": {
+     "10-14": {
+      "floor": {
+       "cooldown_banner": 1,
+       "force_shield": 1
+      },
+      "mean": {
+       "cooldown_banner": 0.77,
+       "energy_font": 0.25,
+       "force_shield": 1.33,
+       "lifesteal_aura": 0.71,
+       "reflect_shell": 0.58,
+       "weaken_aura": 0.64
+      },
+      "members": 39392,
+      "n": 3309,
+      "p50": {
+       "cooldown_banner": 1,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 0,
+       "weaken_aura": 0
+      },
+      "p90": {
+       "cooldown_banner": 2,
+       "energy_font": 1,
+       "force_shield": 3,
+       "lifesteal_aura": 2,
+       "reflect_shell": 2,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.0647,
+       "energy_font": 0.0208,
+       "force_shield": 0.1118,
+       "lifesteal_aura": 0.0597,
+       "reflect_shell": 0.049,
+       "weaken_aura": 0.0537
+      }
+     },
+     "15-19": {
+      "floor": {
+       "cooldown_banner": 1,
+       "force_shield": 2,
+       "lifesteal_aura": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 0.96,
+       "energy_font": 0.59,
+       "force_shield": 2.38,
+       "lifesteal_aura": 0.99,
+       "reflect_shell": 1.58,
+       "weaken_aura": 1.1
+      },
+      "members": 71022,
+      "n": 4150,
+      "p50": {
+       "cooldown_banner": 1,
+       "energy_font": 0,
+       "force_shield": 2,
+       "lifesteal_aura": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 2,
+       "energy_font": 2,
+       "force_shield": 4,
+       "lifesteal_aura": 3,
+       "reflect_shell": 3,
+       "weaken_aura": 3
+      },
+      "share": {
+       "cooldown_banner": 0.0559,
+       "energy_font": 0.0346,
+       "force_shield": 0.1392,
+       "lifesteal_aura": 0.0577,
+       "reflect_shell": 0.0925,
+       "weaken_aura": 0.0642
+      }
+     },
+     "20": {
+      "floor": {
+       "cooldown_banner": 1,
+       "energy_font": 1,
+       "force_shield": 3,
+       "lifesteal_aura": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 0.92,
+       "energy_font": 1.02,
+       "force_shield": 3.04,
+       "lifesteal_aura": 1.12,
+       "reflect_shell": 2.01,
+       "weaken_aura": 1.54
+      },
+      "members": 15160,
+      "n": 758,
+      "p50": {
+       "cooldown_banner": 1,
+       "energy_font": 1,
+       "force_shield": 3,
+       "lifesteal_aura": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 3,
+       "energy_font": 3,
+       "force_shield": 5,
+       "lifesteal_aura": 3,
+       "reflect_shell": 3,
+       "weaken_aura": 3
+      },
+      "share": {
+       "cooldown_banner": 0.0461,
+       "energy_font": 0.0511,
+       "force_shield": 0.1521,
+       "lifesteal_aura": 0.0562,
+       "reflect_shell": 0.1003,
+       "weaken_aura": 0.0772
+      }
+     }
+    },
+    "clap_kite": {
+     "10-14": {
+      "floor": {
+       "cooldown_banner": 1,
+       "force_shield": 1,
+       "reflect_shell": 1
+      },
+      "mean": {
+       "cooldown_banner": 1.36,
+       "energy_font": 0.04,
+       "force_shield": 1.05,
+       "lifesteal_aura": 0.14,
+       "reflect_shell": 1.41,
+       "weaken_aura": 0.37
+      },
+      "members": 4036,
+      "n": 322,
+      "p50": {
+       "cooldown_banner": 1,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 1,
+       "weaken_aura": 0
+      },
+      "p90": {
+       "cooldown_banner": 3,
+       "energy_font": 0,
+       "force_shield": 2,
+       "lifesteal_aura": 1,
+       "reflect_shell": 3,
+       "weaken_aura": 1
+      },
+      "share": {
+       "cooldown_banner": 0.1088,
+       "energy_font": 0.0031,
+       "force_shield": 0.0835,
+       "lifesteal_aura": 0.011,
+       "reflect_shell": 0.1124,
+       "weaken_aura": 0.0295
+      }
+     },
+     "15-19": {
+      "floor": {
+       "cooldown_banner": 2,
+       "force_shield": 1,
+       "reflect_shell": 3
+      },
+      "mean": {
+       "cooldown_banner": 2.1,
+       "energy_font": 0.05,
+       "force_shield": 1.62,
+       "lifesteal_aura": 0.12,
+       "reflect_shell": 2.55,
+       "weaken_aura": 0.57
+      },
+      "members": 24094,
+      "n": 1373,
+      "p50": {
+       "cooldown_banner": 2,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 3,
+       "weaken_aura": 0
+      },
+      "p90": {
+       "cooldown_banner": 3,
+       "energy_font": 0,
+       "force_shield": 3,
+       "lifesteal_aura": 0,
+       "reflect_shell": 4,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.1199,
+       "energy_font": 0.0028,
+       "force_shield": 0.0924,
+       "lifesteal_aura": 0.007,
+       "reflect_shell": 0.1452,
+       "weaken_aura": 0.0328
+      }
+     },
+     "20": {
+      "floor": {
+       "cooldown_banner": 2,
+       "force_shield": 1,
+       "reflect_shell": 3,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 2.4,
+       "energy_font": 0.05,
+       "force_shield": 1.7,
+       "lifesteal_aura": 0.1,
+       "reflect_shell": 3.21,
+       "weaken_aura": 0.71
+      },
+      "members": 8420,
+      "n": 421,
+      "p50": {
+       "cooldown_banner": 2,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 3,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 4,
+       "energy_font": 0,
+       "force_shield": 3,
+       "lifesteal_aura": 0,
+       "reflect_shell": 4,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.1198,
+       "energy_font": 0.0026,
+       "force_shield": 0.085,
+       "lifesteal_aura": 0.005,
+       "reflect_shell": 0.1605,
+       "weaken_aura": 0.0354
+      }
+     }
+    },
+    "kite": {
+     "10-14": {
+      "floor": {
+       "force_shield": 1
+      },
+      "mean": {
+       "cooldown_banner": 0.67,
+       "energy_font": 0.11,
+       "force_shield": 1.04,
+       "lifesteal_aura": 0.41,
+       "reflect_shell": 0.65,
+       "weaken_aura": 0.68
+      },
+      "members": 9967,
+      "n": 833,
+      "p50": {
+       "cooldown_banner": 0,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 0,
+       "weaken_aura": 0
+      },
+      "p90": {
+       "cooldown_banner": 2,
+       "energy_font": 0,
+       "force_shield": 3,
+       "lifesteal_aura": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.056,
+       "energy_font": 0.0094,
+       "force_shield": 0.0873,
+       "lifesteal_aura": 0.0341,
+       "reflect_shell": 0.0547,
+       "weaken_aura": 0.0572
+      }
+     },
+     "15-19": {
+      "floor": {
+       "cooldown_banner": 2,
+       "force_shield": 1,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 1.58,
+       "energy_font": 0.08,
+       "force_shield": 1.58,
+       "lifesteal_aura": 0.37,
+       "reflect_shell": 2.23,
+       "weaken_aura": 0.83
+      },
+      "members": 9598,
+      "n": 552,
+      "p50": {
+       "cooldown_banner": 2,
+       "energy_font": 0,
+       "force_shield": 1,
+       "lifesteal_aura": 0,
+       "reflect_shell": 2,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 3,
+       "energy_font": 0,
+       "force_shield": 3,
+       "lifesteal_aura": 1,
+       "reflect_shell": 4,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.0907,
+       "energy_font": 0.0044,
+       "force_shield": 0.091,
+       "lifesteal_aura": 0.0211,
+       "reflect_shell": 0.1281,
+       "weaken_aura": 0.0476
+      }
+     },
+     "20": {
+      "floor": {
+       "cooldown_banner": 2,
+       "force_shield": 2,
+       "reflect_shell": 3,
+       "weaken_aura": 1
+      },
+      "mean": {
+       "cooldown_banner": 2.39,
+       "energy_font": 0.1,
+       "force_shield": 1.98,
+       "lifesteal_aura": 0.32,
+       "reflect_shell": 2.91,
+       "weaken_aura": 0.89
+      },
+      "members": 3300,
+      "n": 165,
+      "p50": {
+       "cooldown_banner": 2,
+       "energy_font": 0,
+       "force_shield": 2,
+       "lifesteal_aura": 0,
+       "reflect_shell": 3,
+       "weaken_aura": 1
+      },
+      "p90": {
+       "cooldown_banner": 4,
+       "energy_font": 0,
+       "force_shield": 4,
+       "lifesteal_aura": 1,
+       "reflect_shell": 4,
+       "weaken_aura": 2
+      },
+      "share": {
+       "cooldown_banner": 0.1194,
+       "energy_font": 0.0049,
+       "force_shield": 0.0992,
+       "lifesteal_aura": 0.0158,
+       "reflect_shell": 0.1454,
+       "weaken_aura": 0.0446
+      }
+     }
     }
    }
   },
+  "coverage": {
+   "chest_known": 150085,
+   "members": 272904,
+   "rosters": 17829
+  },
+  "imputation": "an unlinked member wears each effect at its weapon's rate among linked members (style x band, else band, else every band, at >= 20 linked members; else the band's rate over every weapon); counts exact (Poisson-binomial), no sampling",
   "items": {
    "cooldown_banner": [
     "ARMOR_LEATHER_ROYAL"
@@ -88,7 +811,10 @@
     "ARMOR_PLATE_SET3"
    ]
   },
-  "note": "share of killboard builds wearing a chest that grants each typed gear effect, per fight-size bucket (official kill-event party rosters); the engine caps generated rosters at share x size"
+  "min_distinct": 40,
+  "min_rate": 20,
+  "note": "carrier caps and floors per effect x style x band from one coverage-corrected measurement of the killer rosters of 10+; the engine caps a generated roster at max(floor, max(1, round-half-up(share x size))) and dresses it to its floor (GENERATION only)",
+  "unit": "one distinct fully-known killer roster of 10+ (guild set + weapon multiset; the instance with the most chests known), training split (battle % 5 != 0)"
  },
  "chest_lean": {
   "_source": "audit_style_rosters.py: dps chests in weapons-only labelled clean cores (melee share >= 0.65 brawl, <= 0.35 ranged), distinct players",

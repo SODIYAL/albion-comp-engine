@@ -158,6 +158,21 @@ def make_cases(data):
                           "style": style, "party": party,
                           "combos": [None] * len(party), "gears": None,
                           "refine_pool": weapons[4::11]})
+    # the carrier floors (increment 3b): a forge at 16 under a declared
+    # brawl_clap over a pool of weapons whose doctrine tiers hold carrier
+    # chests, so the floor dressing re-dresses three members and leaves
+    # one floor short in both ports
+    floor_pool = sorted(w for w in (
+        "2H_MACE", "MAIN_MACE_HELL", "2H_HAMMER_AVALON", "2H_SHAPESHIFTER_SET2",
+        "2H_CLEAVER_HELL", "MAIN_NATURESTAFF", "2H_HOLYSTAFF_CRYSTAL",
+        "2H_NATURESTAFF_HELL", "MAIN_HOLYSTAFF_AVALON", "2H_AXE_AVALON",
+        "2H_KNUCKLES_SET2", "2H_CLAYMORE_AVALON", "MAIN_CURSEDSTAFF_UNDEAD",
+        "2H_DUALAXE_KEEPER", "2H_POLEHAMMER", "2H_ICEGAUNTLETS_HELL")
+        if w in data["weapons"])
+    if data.get("carrier_quotas", {}).get("cells") and "brawl_clap" in styles:
+        cases.append({"content": "territory_defense", "size": 16, "style": "brawl_clap",
+                      "party": [], "combos": [], "gears": [],
+                      "refine_pool": floor_pool, "floor_forge": True})
     multi = [w for w in weapons if _combo_count(data, w) > 1]
     gk = sorted(data.get("gear") or {})
     short_party = [multi[(13 * k) % len(multi)] for k in range(5)]
@@ -267,6 +282,16 @@ def _kit_ser(ko):
             for s, opts in ko["options"].items()}
 
 
+def _floor_forge(e, c):
+    """The forge at the case's size over its pool, serialized to what both
+    ports must agree on: the roster, its kits, the score, the carrier
+    floors with their wearers, and the slots re-dressed to a floor."""
+    r = e.forge(c["size"], pool=c["refine_pool"])
+    return {"party": r["party"], "gears": r["gears"], "score": r["score"],
+            "floors": r["floors"],
+            "kits": [[i, r["kits"][i]["variant"]] for i in sorted(r["kits"])]}
+
+
 def py_results(cases):
     out = []
     for i, c in enumerate(cases):
@@ -291,6 +316,11 @@ def py_results(cases):
                       "score": r["score"], "feasible": r["feasible"],
                       "filler": r["filler"], "held": r["held"],
                       "exhausted": r["exhausted"],
+                      # the carrier floors the forge dressed to, and which
+                      # slots it re-dressed (variant "floor")
+                      "floors": r["floors"],
+                      "kits": [[i, r["kits"][i]["variant"]]
+                               for i in sorted(r["kits"])],
                       "next": {"party": r2["party"], "gears": r2["gears"],
                                "score": r2["score"], "exhausted": r2["exhausted"]}}
         # V3-W parity: dressing OFF while incumbents keep their
@@ -327,6 +357,8 @@ def py_results(cases):
             "forge": forged,
             # one party caps at 20 (forges stop at 20), on the forge cadence
             "forge_cap": forge_cap,
+            # the carrier floors' dressing at 10+ (the explicit case)
+            "floor_forge": _floor_forge(e, c) if c.get("floor_forge") else None,
             # replace_options: the one-slot forge on the
             # swap cadence, slot 0 of the swap party, over the case pool
             "replace": None if sp is None or len(sp) < 2 else [
@@ -743,13 +775,22 @@ def main():
                     or fa["feasible"] != fb.get("feasible") \
                     or fa["filler"] != fb.get("filler") \
                     or fa["held"] != fb.get("held") \
-                    or fa["exhausted"] != fb.get("exhausted"):
+                    or fa["exhausted"] != fb.get("exhausted") \
+                    or fa["floors"] != fb.get("floors") \
+                    or fa["kits"] != fb.get("kits"):
                 errs.append(f"forge result: py={fa} js={fb}")
             na, nb = fa["next"], fb.get("next") or {}
             if na["party"] != nb.get("party") or na["gears"] != nb.get("gears") \
                     or abs(na["score"] - nb.get("score", 1e9)) > EPS \
                     or na["exhausted"] != nb.get("exhausted"):
                 errs.append(f"forge next-best (avoid): py={na} js={nb}")
+        if a.get("floor_forge") is not None:
+            ffa, ffb = a["floor_forge"], b.get("floor_forge") or {}
+            if ffa["party"] != ffb.get("party") or ffa["gears"] != ffb.get("gears") \
+                    or abs(ffa["score"] - ffb.get("score", 1e9)) > EPS \
+                    or ffa["floors"] != ffb.get("floors") \
+                    or ffa["kits"] != ffb.get("kits"):
+                errs.append(f"floor forge: py={ffa} js={ffb}")
         if a.get("forge_cap") is not None:
             want = party_cap_message(PARTY_CAP + 1)
             if a["forge_cap"] != b.get("forge_cap") \

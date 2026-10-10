@@ -21,14 +21,19 @@ is the durable design record:
 - **An effect-carrier chest is a comp allocation, not weapon doctrine.** Hand
   of Justice does not wear Demon Armor by identity; an engage tank takes one
   when the comp lacks Demon Armors — per-weapon tiers + effect quotas, later
-  the carrier quota.
+  the carrier quota, now carrier caps AND floors per effect x style x band
+  from one coverage-corrected measurement of the killer rosters of 10+
+  (dataset `carrier_quotas`): the forge caps discretionary wearers at
+  max(floor, share x size) and dresses a roster to its floors from its
+  members' own doctrine chests (increment 3b's first half).
 - **What matters is what the data says.** The need profiles were fixed after
   a validation round and the killboard roster evidence; the data's
   engage-leaning split overrode the stopper-heavy blind grade, which survives
   as the territory-defense override.
 
-**Pending** (tracked in `BACKLOG.md`): increment 3b's second half (carrier
-floors + pairing rules), increment 4 (uptime economics), the menu-less weapons.
+**Pending** (tracked in `BACKLOG.md`): increment 3b's second half (mechanism
+pairing rules for effect carriers), increment 4 (uptime economics), the
+menu-less weapons.
 
 ## The problem (both verified)
 
