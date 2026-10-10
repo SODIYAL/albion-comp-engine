@@ -89,7 +89,9 @@
 # harvest DOES
 # supply per-style measurements now — templates/style_bands.yaml, generated
 # by derive_style_bands.py, is where those rows live; nothing is hand-written
-# here.
+# here. The burst_aoe multiplier is GENERATED at build from the generated
+# ranged_aoe_core minima (build_dataset.derive_target_mults); a hand
+# burst_aoe value fails the build.
 
 styles:
   balanced:
@@ -169,17 +171,18 @@ styles:
       mobility: 0.85
       heal_reduction: 0.8
       sustained_dps: 0.6
-    # DERIVED from the hand ranged_aoe_core minima this file carried before
-    # the minimum was generated (7 at 20 and 5 at 15-19, against
-    # composition.yaml's then base 4 and 3 — ratios 1.75 and 1.67, mean
-    # 1.71): a clap comp fields ~1.7x the base burst-AoE core, so scoring
-    # it against the base target handed it free over-coverage for doing
-    # the one thing its style demands.
-    # VALIDATED on the published comps: coverage spread across all styles
-    # tightens 2.38 -> 1.58 (see the findings doc). The same derivation was
-    # run for healing and tankiness and REJECTED by the same test. At 10+
-    # the style rows supersede it; it reads below 10 only.
-    target_mults: {burst_aoe: 1.71}
+    # burst_aoe is GENERATED at build (build_dataset.derive_target_mults):
+    # the ratio of clap's generated ranged_aoe_core minimum to the pooled
+    # one, mean over 15-19 and 20 (the rule the hand 1.71 was derived by,
+    # from the hand minima this file once carried); a hand value fails the
+    # build. A clap comp fields more of the burst-AoE core than the typical
+    # winner, so scoring it against the base target would hand it free
+    # over-coverage. The same derivation was run for healing and tankiness
+    # and REJECTED (it widened coverage spread on the published comps).
+    # Where a style row states the target (10+) the row supersedes it; it
+    # reads below 10, in soft-cap-only rows and in the Dragon Portal pools'
+    # own rows.
+    target_mults: {}
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
@@ -223,13 +226,11 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
-    # DERIVED + OBSERVED (at 10+ the style rows supersede these; they read
-    # below 10 only).
-    #   burst_aoe 1.29 — from the hand ranged_aoe_core minima this file
-    #     carried before the minimum was generated (5 at 20, 4 at 15-19 vs
-    #     the then base 4 and 3). An INDEPENDENT sample of 13
-    #     author-labelled albioncompo comps puts kite at 1.51x brawl's
-    #     burst_aoe, so the derived value is the conservative end of the range.
+    # OBSERVED (where a style row states the target, at 10+, the row
+    # supersedes these).
+    #   burst_aoe — GENERATED at build from the generated minima (the clap
+    #     note); kite's minimum equals the pooled one at 15-19 and 20, so it
+    #     reads identity.
     #   peel 1.25 — REPLICATED in two independent samples: 1.23x brawl in the
     #     published corpus, 1.27x in the author-labelled sample. Kite really
     #     does peel more, which is the half of the requirement claim the
@@ -237,7 +238,7 @@ styles:
     #   disengage 1.20 — direction replicated in both samples (kite above
     #     brawl in each) but the magnitude is unstable, 2.13x and 1.17x, so
     #     this takes the CONSERVATIVE end rather than the mean.
-    target_mults: {burst_aoe: 1.29, peel: 1.25, disengage: 1.20}
+    target_mults: {peel: 1.25, disengage: 1.20}
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
     # Kite may use fewer healers than clap, but it must not be forced to an
@@ -316,14 +317,13 @@ styles:
       heal_sustain: 0.95
       sustained_dps: 0.85
       tankiness: 0.8
-    # DERIVED + OBSERVED (at 10+ the style rows supersede these; they read
-    # below 10 only).
-    #   burst_aoe 1.71 — the hand ranged_aoe_core minima this file carried
-    #     before the minimum was generated were identical to clap's; the
-    #     author-labelled sample independently puts it at 1.62x brawl.
+    # OBSERVED (where a style row states the target, at 10+, the row
+    # supersedes these).
+    #   burst_aoe — GENERATED at build from the generated minima (the clap
+    #     note).
     #   peel 1.25 — replicated: 1.17x brawl published, 1.29x declared.
     #     No disengage row: the two samples flip sign on it (0.84x, 1.10x).
-    target_mults: {burst_aoe: 1.71, peel: 1.25}
+    target_mults: {peel: 1.25}
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}

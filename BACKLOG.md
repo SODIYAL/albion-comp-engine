@@ -80,9 +80,6 @@ Each is decidable today from evidence already in the repo.
   votes only. (V: 09b, Seat pooling)
 - **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
   Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
-- **`brawl_clap` target_mults**: undecided, n=3 declared; every clap row beyond
-  burst_aoe likewise (peel / disengage flipped sign between samples). (V:
-  08, Per-style targets round 2)
 - **Per-spell `burst_aoe` escalation gating** (Q10 refuted the uniform AoE
   class; factors are extracted on `cap_delivery.escalation`, not wired).
   Its stated precondition — a styled validation pass — is met: rounds 1-4

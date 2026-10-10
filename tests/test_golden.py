@@ -1398,7 +1398,7 @@ def run():
     #     clap's (what winning rosters field, per style);
     # (b) the rows are measured per style, so styles.yaml target_mults do
     #     NOT stack on them: clap's burst_aoe target equals the row x
-    #     size/ref exactly, not x1.71;
+    #     size/ref exactly, not x the style multiplier;
     # (c) a soft-cap-only row (p10 = 0) keeps the CONTENT target;
     # (d) `balanced` at 10+ reads the POOLED cell — every winning roster at
     #     the size, whatever it was playing (target is the median;

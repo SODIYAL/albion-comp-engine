@@ -360,15 +360,28 @@ def t_target_mults():
     # validation; the healing and tankiness derivations were run the same
     # way and REJECTED because they widened coverage spread instead of
     # tightening it. balanced and brawl are the reference and stay empty.
+    # burst_aoe is GENERATED: the style's generated ranged_aoe_core minimum
+    # against the pooled one, mean over 15-19 and 20, two places, identity
+    # at or under 1 (build_dataset.derive_target_mults)
     RECORDED = {"balanced": {}, "brawl": {}, "brawl_clap": {},
-             "clap": {"burst_aoe": 1.71},
-             "kite": {"burst_aoe": 1.29, "peel": 1.25, "disengage": 1.2},
-             "clap_kite": {"burst_aoe": 1.71, "peel": 1.25}}
+             "clap": {},
+             "kite": {"peel": 1.25, "disengage": 1.2},
+             "clap_kite": {"peel": 1.25}}
+    mins = base.data["composition"]["skeleton"]["minima"]
+    for st, rec in RECORDED.items():
+        row = (mins.get("styles") or {}).get(st)
+        if not row:
+            continue
+        v = round(sum((row.get(bk) or {}).get("ranged_aoe_core", 0)
+                      / mins["pooled"][bk]["ranged_aoe_core"]
+                      for bk in ("15-19", "20")) / 2, 2)
+        if v > 1.0:
+            rec["burst_aoe"] = v
     styles = base.data.get("styles") or {}
     shipped = {s: (v or {}).get("target_mults") or {}
                for s, v in styles.items()}
-    check("V6a shipped target_mults are exactly the recorded values "
-          "(an undocumented value fails here)",
+    check("V6a shipped target_mults are exactly the recorded values, burst_aoe "
+          "the ratio of the generated minima (an undocumented value fails here)",
           shipped == RECORDED, f"shipped={shipped}")
     check("V6a2 balanced is empty — it is the reference the others scale "
           "against", not shipped.get("balanced"))

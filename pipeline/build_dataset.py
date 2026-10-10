@@ -2780,6 +2780,54 @@ def load_role_typical():
 
 SKELETONS_PATH = os.path.join(OUT, "skeletons.json")
 
+# Target multipliers GENERATED from the generated minima: capability ->
+# (minimum key, bands). The ratio rule the hand values were derived by: a
+# style's minimum against the pooled one, the mean over the 15-19 and 20
+# bands (the bands that derivation read), rounded to two places as the
+# hand values were. A style at or under the pooled core keeps identity:
+# the derivation never lowered a target (brawl's 0 shipped none).
+DERIVED_TARGET_MULTS = {"burst_aoe": ("ranged_aoe_core", ("15-19", "20"))}
+
+
+def refuse_hand_target_mults(styles):
+    """A hand-set multiplier on a GENERATED capability blocks the build:
+    the burst_aoe target multiplier is derived from the generated
+    ranged_aoe_core minima (V6, derive_target_mults)."""
+    for st, cfg in sorted((styles or {}).items()):
+        for cap in DERIVED_TARGET_MULTS:
+            if cap in ((cfg or {}).get("target_mults") or {}):
+                sys.exit(f"templates/styles.yaml {st}: the {cap} target_mult is "
+                         f"GENERATED (the ratio of the style's generated "
+                         f"{DERIVED_TARGET_MULTS[cap][0]} minimum to the pooled "
+                         f"one); remove the hand-set value")
+
+
+def derive_target_mults(styles, minima):
+    """Lay the generated target multipliers on `styles` (in place) and
+    return {style: {cap: (value, ratios)}} for the build line."""
+    out = {}
+    pooled = minima.get("pooled") or {}
+    for cap, (key, bands) in DERIVED_TARGET_MULTS.items():
+        for st in sorted(styles):
+            row = (minima.get("styles") or {}).get(st)
+            if not row:
+                continue        # balanced and any style without a minima row
+            ratios = []
+            for bk in bands:
+                base = (pooled.get(bk) or {}).get(key)
+                if not base:
+                    sys.exit(f"out/skeletons.json: the pooled {key} minimum at "
+                             f"{bk} is missing or zero; the {cap} target_mult "
+                             f"cannot be derived")
+                ratios.append((row.get(bk) or {}).get(key, 0) / base)
+            value = round(sum(ratios) / len(ratios), 2)
+            if value > 1.0:
+                tm = dict(styles[st].get("target_mults") or {})
+                tm[cap] = value
+                styles[st]["target_mults"] = tm
+            out.setdefault(st, {})[cap] = (value if value > 1.0 else None, ratios)
+    return out
+
 
 def refuse_hand_per_weapon(dup):
     """A hand-set duplication.per_weapon list blocks the build: copy
@@ -3293,6 +3341,8 @@ def main():
     # the ranged-AoE core minimum likewise (S7): a hand minimum in a
     # composition band or a style override row is a build error
     refuse_hand_minima(composition, styles)
+    # and the burst_aoe target multipliers derived from those minima (V6)
+    refuse_hand_target_mults(styles)
     dup["per_weapon"] = {}
     seat_ids = set()
     for path in glob.glob(os.path.join(HERE, "roles.yaml")):
@@ -3302,6 +3352,11 @@ def main():
     composition["skeleton"], dup["per_weapon_cells"] = load_skeletons(
         set(weapons), seat_ids)
     sk = composition["skeleton"]
+    tmd = derive_target_mults(styles, sk["minima"])
+    print("  target mults  : generated from the minima, "
+          + ", ".join(f"{st} {cap} " + (f"{v}" if v else "identity")
+                      + " (" + " / ".join(f"{x:.2f}" for x in rs) + ")"
+                      for st, caps in tmd.items() for cap, (v, rs) in caps.items()))
     print("  skeleton      : generated (out/skeletons.json, training split), "
           f"pooled {len(sk['seats']['pooled'])} sizes, styles "
           + ", ".join(f"{st} {len(rows)}" for st, rows in sk["seats"]["styles"].items())

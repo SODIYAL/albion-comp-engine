@@ -756,6 +756,31 @@ def t_refusal():
     except SystemExit:
         ok = False
     check("S7i role rows without the key pass", ok)
+    # the burst_aoe target multiplier is generated from the minima (V6)
+    try:
+        build_dataset.refuse_hand_target_mults({"clap": {"target_mults": {"burst_aoe": 1.71}}})
+        hand_refused = False
+    except SystemExit:
+        hand_refused = True
+    try:
+        build_dataset.refuse_hand_target_mults({"kite": {"target_mults": {"peel": 1.25}}})
+        other_ok = True
+    except SystemExit:
+        other_ok = False
+    check("S7j a hand-set burst_aoe target_mult fails the build; the hand peel and "
+          "disengage rows pass", hand_refused and other_ok)
+    mins = {"pooled": {"15-19": {"ranged_aoe_core": 3}, "20": {"ranged_aoe_core": 3}},
+            "styles": {"clap": {"15-19": {"ranged_aoe_core": 3}, "20": {"ranged_aoe_core": 4}},
+                       "kite": {"15-19": {"ranged_aoe_core": 3}, "20": {"ranged_aoe_core": 3}},
+                       "brawl": {"15-19": {}, "20": {}}}}
+    sty = {"clap": {}, "kite": {"target_mults": {"peel": 1.25}}, "brawl": {}, "balanced": {}}
+    build_dataset.derive_target_mults(sty, mins)
+    check("S7k the burst_aoe target_mult is the mean ratio of the style's minimum to "
+          "the pooled one over 15-19 and 20, two places; at or under 1 identity",
+          sty["clap"].get("target_mults") == {"burst_aoe": 1.17}
+          and sty["kite"]["target_mults"] == {"peel": 1.25}
+          and not sty["brawl"].get("target_mults") and not sty["balanced"].get("target_mults"),
+          str(sty))
 
 
 t_synthetic()

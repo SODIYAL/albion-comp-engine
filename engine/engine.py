@@ -465,7 +465,7 @@ class Engine:
         # the POOLED cell (every winner at the size) once the audit has
         # written one; before that it keeps the content row. The rows are
         # MEASURED PER STYLE, so styles.yaml target_mults do not stack on
-        # them (clap's 1.71 burst_aoe was a proxy for exactly what the
+        # them (clap's burst_aoe multiplier is a proxy for exactly what the
         # harvest now states). Hard floors and weights are untouched; below
         # min_size the content row (with its target_mults) stands. The cell
         # is exposed as `band_row` for display ("what winning claps at 20
