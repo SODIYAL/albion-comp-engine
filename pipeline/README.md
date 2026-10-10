@@ -208,7 +208,7 @@ Code and yaml cite these by Q-number. Every question is closed unless
 `BACKLOG.md` lists it; the dated decisions are in `tests/VALIDATION.md`.
 
 - **Q1** form of numbers — global tables in mechanics.yaml, per-spell parts through sheets/overrides.
-- **Q2 / Q2b / Q5** the enemy model (attackers per target, expected targets hit) — OPEN, `BACKLOG.md`.
+- **Q2 / Q2b / Q5** the enemy model (attackers per target, expected targets hit) — CURATED: the official events detail lists only the top 4 contributors per kill and counts that list, so attackers per kill cannot be measured past 4; nothing records hits.
 - **Q3** which focus-fire mechanic — overkill saturation via the Resilience table, a supply-side transform, not a synergy.
 - **Q4 / Q12** Disarray numbers and table staleness — answered, recorded in mechanics.yaml, unwired.
 - **Q6** AoE escalation magnitudes — 8%/target from 2, cap 56% at 8, after buffs, bypasses the soft cap.
@@ -217,7 +217,7 @@ Code and yaml cite these by Q-number. Every question is closed unless
 - **Q9** per-spell escalation eligibility — extracted from the dumps, 174/559.
 - **Q10** uniform AoE-class escalation — REFUTED; per-spell gating is the open item in `BACKLOG.md`.
 - **Q11 / Q13** asymmetric numbers at 21+ — CLOSED under standing rule 11 (the planner assumes a mirror fight, where Disarray is a no-op); recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens it.
-- **Q14** per-style mechanics numbers — delegated to curation under the ordering rule (attackers-per-target and expected-targets-hit are style properties); the enemy model in `BACKLOG.md`.
+- **Q14** per-style mechanics numbers — delegated to curation under the ordering rule (attackers-per-target and expected-targets-hit are style properties); no measurement reaches them (Q2 / Q2b / Q5).
 - **Q15** weapon playstyle affinity — derive + curate exceptions: `derive_style_fit` + `style_overrides.yaml`; audit `out/style_fit_report.json`; MetaBattle cross-check in `build_dataset.py`.
 - **Q16** content-absolute physics — the `size_physics` tables (`st_value_mult`, `count_mult`, composition.yaml) match the wiki's Resilience and AoE Escalation pages (25% ST value at 20-man, 20% at 30+; ×1.6 clump at 20, ×2.0 at 40+); F8/T15/T16 pin them. The earlier `grow()` build is superseded.
 - **Q17** usage-derived MetaPrior — SUPERSEDED: the meta prior is GENERATED from the killer-party harvest (`derive_meta_prior.py`, one player one vote, per size bucket, T46/H18); the usage_v2 build and its artifact are gone.

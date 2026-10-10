@@ -42,11 +42,6 @@ Each is decidable today from evidence already in the repo.
   Its stated precondition — a styled validation pass — is met: rounds 1-4
   have run. Also PROVISIONAL: `radius_targets`, `reference_clump: 2`,
   travel-distance footprints uncounted. (Q9 / Q10)
-- **The enemy model** (Q2 / Q2b / Q5): attackers-per-target and
-  expected-targets-hit are style properties, delegated to curation under the
-  Q14 ordering rule; no public numeric source exists. Open inside it: the
-  unit-scale of one dedicated attacker, expected targets per content size
-  for the escalation curve (caps at 8). (Q14)
 - **A no-row piece as the dressed forge's one alternative**: kit_variants
   takes as v1 the first in-band piece whose top weighted capability
   differs from v0's, and a piece with no row has none, so in 19 band x
