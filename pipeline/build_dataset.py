@@ -204,7 +204,7 @@ def build_loadout(rows, line):
         spells.setdefault(slot, []).append(sp)
     names = list(slots)
     # `_always_ev` (the evidence of each always-on capability's row) is
-    # read and dropped by stamp_aoe_escalation; it never reaches the dataset
+    # read and dropped by stamp_bundle_facts; it never reaches the dataset
     return {"always": always, "slots": [slots[n] for n in names],
             "slot_names": names, "slot_spells": [spells[n] for n in names],
             "_always_ev": always_ev}
@@ -215,8 +215,27 @@ def build_loadout(rows, line):
 AOE_ESCALATION_CAPS = ("burst_aoe",)
 
 
-def stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines, mechanics):
-    """PER-SPELL AoE ESCALATION ELIGIBILITY (Q9 / Q10). The in-game AoE
+def _max_opt(a, b):
+    """The larger of two optional numbers; None when both are None."""
+    return b if a is None else a if b is None else max(a, b)
+
+
+def stamp_bundle_facts(weapons, gear, spell_index, weapon_lines, mechanics):
+    """Per-bundle spell facts for both engine ports: the AoE escalation
+    eligibility below and each bundle's DELIVERY.
+
+    DELIVERY PER BUNDLE (the one-spell-per-slot rule): every bundle reads
+    its own spell's facts, `slot_delivery` beside `slot_spells`: the radius
+    and target cap (the larger of the own tree's and `area_payload`) and the
+    CC duration factor (the larger of `escalation` and `escalation_payload`,
+    Q8); a shapeshifter's E with its form's abilities. {} where the spell's
+    record states no area and no factor (the geometric transform leaves it
+    flat: unknown is never inferred), None where the spell has no record.
+    An always-on bundle carrying a geometric capability gets
+    `always_delivery`, per capability its row's spell's facts (a stat row
+    is no spell: flat).
+
+    PER-SPELL AoE ESCALATION ELIGIBILITY (Q9 / Q10). The in-game AoE
     damage escalation (mechanics.yaml `aoe_escalation`: 8% per target from
     2, 56% at 8, after buffs, past the soft cap) applies only to the spells
     the game files flag with `@targetcountvaluebonusfactor`. Every loadout
@@ -252,6 +271,22 @@ def stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines, mechanics):
         return ((r.get("escalation") or {}).get("value") or 0.0,
                 (r.get("escalation_payload") or {}).get("value") or 0.0)
 
+    def area(sid):
+        """(radius, max_targets, CC duration factor) of a spell, own tree
+        and payload together; None unrecorded."""
+        r = spell_index.get(sid)
+        if r is None:
+            return None
+        ap = r.get("area_payload") or {}
+        return (_max_opt(r.get("radius"), ap.get("radius")),
+                _max_opt(r.get("max_targets"), ap.get("max_targets")),
+                max((r.get("escalation") or {}).get("duration") or 0.0,
+                    (r.get("escalation_payload") or {}).get("duration") or 0.0))
+
+    geo_caps = set((mechanics.get("aoe_geometry") or {}).get("geometric_caps") or [])
+    if not geo_caps:
+        sys.exit("mechanics.yaml aoe_geometry: no geometric_caps")
+    geo = {"area": 0, "flat": [], "unknown": [], "payload": set(), "form": set()}
     tally = {"flagged": [], "not flagged": [], "unknown": []}
     via = {"payload": set(), "form": set()}
     problems = []
@@ -280,13 +315,57 @@ def stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines, mechanics):
             def factor(sid):
                 return source(sid)[0]
 
+            def delivery(sid):
+                """The geometric transform's facts for one bundle's spell."""
+                own = area(sid)
+                if own is None:
+                    return None
+                rad, mt, dur = own
+                if sid in e_ids and forms:
+                    for f in filter(None, (area(s) for s in forms)):
+                        rad, mt, dur = (_max_opt(rad, f[0]), _max_opt(mt, f[1]),
+                                        max(dur, f[2]))
+                d = {}
+                if rad is not None:
+                    d["radius"] = rad
+                if mt is not None:
+                    d["max_targets"] = mt
+                if dur:
+                    d["escalation"] = {"duration": dur}
+                return d
+
             lo["slot_escal"] = [[factor(s) for s in sl]
                                 for sl in lo.get("slot_spells") or []]
+            lo["slot_delivery"] = [[delivery(s) for s in sl]
+                                   for sl in lo.get("slot_spells") or []]
             always_ev = lo.pop("_always_ev", None) or {}
+            al = lo.get("always") or {}
+            al_geo = sorted(c for c in al if c in geo_caps)
+            if al_geo:
+                lo["always_delivery"] = {c: delivery(always_ev.get(c))
+                                         for c in al_geo}
+            # the delivery report: every geometric row, by its spell's facts
+            rows = [(lo["slot_spells"][i][j], b, lo["slot_delivery"][i][j])
+                    for i, sl in enumerate(lo.get("slots") or [])
+                    for j, b in enumerate(sl)]
+            rows += [(always_ev.get(c), {c: al[c]}, lo["always_delivery"][c])
+                     for c in al_geo]
+            for sid, b, d in rows:
+                for c in sorted(set(b) & geo_caps):
+                    if d is None:
+                        geo["unknown"].append(f"{key}.{c}:{sid}")
+                    elif d.get("radius") is None:
+                        geo["flat"].append(f"{key}.{c}:{sid}")
+                    else:
+                        geo["area"] += 1
+                        r = spell_index[sid]
+                        if r.get("radius") is None and sid in e_ids and forms:
+                            geo["form"].add(sid)
+                        elif (r.get("area_payload") or {}).get("radius") is not None:
+                            geo["payload"].add(sid)
             bundles = [(sl_i, b_i, b, lo["slot_escal"][sl_i][b_i])
                        for sl_i, sl in enumerate(lo.get("slots") or [])
                        for b_i, b in enumerate(sl)]
-            al = lo.get("always") or {}
             hit = [c for c in AOE_ESCALATION_CAPS if c in al]
             if hit:
                 lo["always_escal"] = factor(always_ev.get(hit[0]))
@@ -321,6 +400,14 @@ def stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines, mechanics):
     for k in ("not flagged", "unknown"):
         if tally[k]:
             lines.append(f"{k}: " + ", ".join(tally[k]))
+    lines.append(f"{geo['area']} geometric rows read their own spell's area "
+                 f"({len(geo['payload'])} spells through a payload, "
+                 f"{len(geo['form'])} through a form), {len(geo['flat'])} "
+                 f"rows flat (the spell states no area), "
+                 f"{len(geo['unknown'])} unknown")
+    for k in ("flat", "unknown"):
+        if geo[k]:
+            lines.append(f"geometric {k}: " + ", ".join(geo[k]))
     return lines
 
 
@@ -3592,8 +3679,8 @@ def main():
     if os.path.exists(inter_path):
         with open(inter_path, encoding="utf-8") as f:
             interactions = json.load(f).get("spells", {})
-    # Gear layer (full-build members). Loaded before delivery stamping so
-    # gear items get cap_delivery from their ability spells too.
+    # Gear layer (full-build members): stamped per bundle like the weapons,
+    # so gear abilities carry their own spells' delivery facts too.
     gear_spells, gear_lines_db = {}, {}
     for name, target in (("gear_spells.json", "gs"), ("gear_lines.json", "gl")):
         p = os.path.join(OUT, name)
@@ -3668,32 +3755,8 @@ def main():
             if applied:
                 g["stats_scale"] = applied
 
-    # Per-capability DELIVERY facts (geometric-AoE step 3):
-    # from each capability's evidence spell, the structural area geometry and
-    # the game's own per-effect escalation factors (parse_dumps v4). Absent =
-    # the spell tree carries no area — "unknown", never "not AoE". This is
-    # display + physics INPUT data; the engine's geometric transform (step 1)
-    # is what turns it into supply scaling.
-    for w in list(weapons.values()) + list(gear.values()):
-        delivery = {}
-        for cap, spells in (w.get("evidence") or {}).items():
-            for sid in spells:
-                sp = spell_index.get(sid)
-                if not sp:
-                    continue
-                d = {}
-                if sp.get("radius") is not None:
-                    d["radius"] = sp["radius"]
-                if sp.get("max_targets") is not None:
-                    d["max_targets"] = sp["max_targets"]
-                if sp.get("escalation"):
-                    d["escalation"] = sp["escalation"]
-                if d:
-                    d["spell"] = sid
-                    delivery[cap] = d
-                    break                      # one evidence spell per cap
-        if delivery:
-            w["cap_delivery"] = delivery
+    # DELIVERY facts (geometric-AoE step 3) are stamped per bundle, each
+    # bundle reading its own spell (stamp_bundle_facts, after apply_roles).
 
     # Casted capabilities (the off-hand cast-time channel, mechanics
     # build_stats cast_mult_caps): a weapon capability whose evidence names
@@ -3789,11 +3852,12 @@ def main():
             roles_problems.append(f"need_profiles: overrides names "
                                   f"unknown content {c}")
     jsonfmt.dump(roles_report, os.path.join(OUT, "roles_report.json"))
-    # per-spell AoE escalation eligibility (Q9 / Q10), stamped once every
-    # bundle exists (the gear-active doctrine adds bundles in apply_roles)
-    for line in stamp_aoe_escalation(weapons, gear, spell_index, weapon_lines,
-                                     mechanics):
-        print(f"  aoe escalation: {line}")
+    # per-bundle facts (Q8 / Q9 / Q10): the AoE escalation stamp and each
+    # bundle's delivery, stamped once every bundle exists (the gear-active
+    # doctrine adds bundles in apply_roles)
+    for line in stamp_bundle_facts(weapons, gear, spell_index, weapon_lines,
+                                   mechanics):
+        print(f"  bundle facts  : {line}")
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements go to
     # the review queue (`metabattle_review_queue`), never silent fixes.

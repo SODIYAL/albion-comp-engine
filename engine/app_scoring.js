@@ -1160,41 +1160,63 @@
 
   CompEngine.prototype._loadoutEff = function (weapon) {
     var lo = this.weapons[weapon].loadout;
-    var dl = this.weapons[weapon].cap_delivery || {};
     var pen = this.weapons[weapon].resil_pen || 0.0;
     var hasSlots = lo && lo.slots && lo.slots.length;
     var hasAlways = lo && lo.always && Object.keys(lo.always).length;
-    // no game data, no spell: the escalation flag is unknown
+    // no game data, no spell: escalation and area are unknown
     if (!lo || (!hasSlots && !hasAlways))
-      return { always: this._eff(this.capsOf(weapon), dl, pen, null), slots: [] };
+      return { always: this._eff(this.capsOf(weapon), null, pen, null), slots: [] };
     var self = this;
-    var st = this._escalStamps(lo, weapon);
+    var st = this._bundleStamps(lo, weapon);
     return {
-      always: this._eff(lo.always || {}, dl, pen, st.always),
+      always: this._eff(lo.always || {}, st.alwaysDelivery, pen, st.always),
       slots: (lo.slots || []).map(function (slot, oi) {
-        return slot.map(function (b, ci) { return self._eff(b, dl, pen, st.slots[oi][ci]); });
+        return slot.map(function (b, ci) {
+          return self._eff(b, bundleDents(b, st.delivery[oi][ci]), pen, st.slots[oi][ci]);
+        });
       }),
     };
   };
 
-  CompEngine.prototype._escalStamps = function (lo, key) {
-    /* (always-on factor, factor per bundle) of one loadout's per-spell AoE
-       escalation stamps (mirrors engine.py _escal_stamps): a loadout with
-       bundles and no slot_escal, or an always-on AoE escalation row with no
-       always_escal, fails closed. An absent always_escal reads null. */
-    var esc = lo.slot_escal;
-    if ((esc === undefined || esc === null) && lo.slots && lo.slots.length)
-      throw new Error(key + ": loadout carries no slot_escal (per-spell AoE "
-                      + "escalation); rebuild the dataset");
+  /* a bundle's delivery as _eff reads it: every capability of the bundle on
+     its own spell's facts (mirrors engine.py _bundle_dents); no facts, no
+     geometric term */
+  var bundleDents = function (bundle, dent) {
+    if (!dent || !nonEmpty(dent)) return null;
+    var out = {};
+    for (var c in bundle) out[c] = dent;
+    return out;
+  };
+
+  CompEngine.prototype._bundleStamps = function (lo, key) {
+    /* one loadout's per-bundle spell facts (mirrors engine.py
+       _bundle_stamps): the AoE escalation factors and the delivery facts;
+       a loadout with bundles and no slot_escal or slot_delivery, or an
+       always-on row of an AoE escalation or geometric capability without its
+       always-on stamp, fails closed. An absent always_escal reads null. */
+    var esc = lo.slot_escal, dl = lo.slot_delivery;
+    if ((esc === undefined || esc === null || dl === undefined || dl === null)
+        && lo.slots && lo.slots.length)
+      throw new Error(key + ": loadout carries no slot_escal / slot_delivery "
+                      + "(per-bundle spell facts); rebuild the dataset");
     var always = lo.always || {};
+    var i;
     if (lo.always_escal === undefined) {
-      for (var i = 0; i < AOE_ESCALATION_CAPS.length; i++)
+      for (i = 0; i < AOE_ESCALATION_CAPS.length; i++)
         if (always[AOE_ESCALATION_CAPS[i]] !== undefined)
           throw new Error(key + ": always-on AoE escalation row carries no "
                           + "always_escal; rebuild the dataset");
     }
+    if (lo.always_delivery === undefined) {
+      for (var c in always)
+        if (this._geoCaps[c])
+          throw new Error(key + ": always-on geometric row carries no "
+                          + "always_delivery; rebuild the dataset");
+    }
     return { always: lo.always_escal === undefined ? null : lo.always_escal,
-             slots: esc || [] };
+             slots: esc || [],
+             alwaysDelivery: lo.always_delivery || {},
+             delivery: dl || [] };
   };
 
   CompEngine.prototype._comboExtras = function (weapon) {
@@ -1369,17 +1391,17 @@
     if (extras !== undefined) return extras;
     var g = this.gear[key];
     if (!g) { extras = [{}]; this._gearCache[key] = extras; return extras; }
-    var dl = g.cap_delivery || {};
     var lo = g.loadout || {};
-    var st = this._escalStamps(lo, key);
-    var always = this._eff(lo.always || {}, dl, 0.0, st.always);
+    var st = this._bundleStamps(lo, key);
+    var always = this._eff(lo.always || {}, st.alwaysDelivery, 0.0, st.always);
     var slots = [];
     var raw = lo.slots || [];
     for (var i = 0; i < raw.length; i++) {
       if (!raw[i].length) continue;
       var eff = [];
       for (var j = 0; j < raw[i].length; j++)
-        eff.push(this._eff(raw[i][j], dl, 0.0, st.slots[i][j]));
+        eff.push(this._eff(raw[i][j], bundleDents(raw[i][j], st.delivery[i][j]), 0.0,
+                           st.slots[i][j]));
       slots.push(eff);
     }
     extras = [];

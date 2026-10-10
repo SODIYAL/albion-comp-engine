@@ -36,6 +36,8 @@ const out = {
     null: cell._unchargedExtras(spec.escal.null),
     gear: cell.gearExtras(spec.escal.gear),
   },
+  // always-on rows read their own spell's delivery facts
+  always_geo: Object.fromEntries(spec.always_geo.map((g) => [g, cell.gearExtras(g)])),
   // an empty gang band, an empty style cell and an empty kit_build read
   // as absent
   seat_gang: gang._seatKit(gang.rolesBook[spec.seat_gang]),

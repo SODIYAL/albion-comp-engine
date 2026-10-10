@@ -79,7 +79,7 @@ DATASET = os.environ.get("BION_DATASET") or \
 # damage is spread across targets, so neither curve cleanly applies.
 # The AoE Escalation applies per spell (Q10): a bundle takes it only when
 # the game files flag its spell (the loadout's `slot_escal`, build_dataset
-# stamp_aoe_escalation); build_dataset.AOE_ESCALATION_CAPS mirrors this.
+# stamp_bundle_facts); build_dataset.AOE_ESCALATION_CAPS mirrors this.
 AOE_ESCALATION_CAPS = ("burst_aoe",)
 RESILIENCE_CAPS = ("burst_st", "execute")
 # _eff's escalation argument when a caller passes none: a bundle carrying an
@@ -1254,33 +1254,45 @@ class Engine:
         """(always_eff, [[bundle_eff, ...], ...]) for a weapon; empty loadout
         (no game data) falls back to the flat capability union."""
         lo = self.weapons[weapon].get("loadout")
-        dl = self.weapons[weapon].get("cap_delivery") or {}
         pen = self.weapons[weapon].get("resil_pen") or 0.0
         if not lo or not lo.get("slots") and not lo.get("always"):
-            # no game data, no spell: the escalation flag is unknown
-            return self._eff(self.caps_of(weapon), dl, pen, None), []
-        a_esc, s_esc = self._escal_stamps(lo, weapon)
-        return (self._eff(lo.get("always", {}), dl, pen, a_esc),
-                [[self._eff(b, dl, pen, s_esc[oi][ci]) for ci, b in enumerate(slot)]
+            # no game data, no spell: escalation and area are unknown
+            return self._eff(self.caps_of(weapon), None, pen, None), []
+        a_esc, s_esc, a_dl, s_dl = self._bundle_stamps(lo, weapon)
+        return (self._eff(lo.get("always", {}), a_dl, pen, a_esc),
+                [[self._eff(b, self._bundle_dents(b, s_dl[oi][ci]), pen, s_esc[oi][ci])
+                  for ci, b in enumerate(slot)]
                  for oi, slot in enumerate(lo.get("slots", []))])
 
     @staticmethod
-    def _escal_stamps(lo, key):
-        """(always-on factor, [[factor per bundle], ...]) of one loadout's
-        per-spell AoE escalation stamps (build_dataset stamp_aoe_escalation):
-        a factor above 0 = the game flags the spell, 0 = it does not, None =
-        no record (unknown). A loadout with bundles and no `slot_escal`, or
-        an always-on AoE escalation row with no `always_escal`, predates the
-        per-spell rule: fail closed."""
-        esc = lo.get("slot_escal")
-        if esc is None and lo.get("slots"):
-            raise ValueError(f"{key}: loadout carries no slot_escal (per-spell "
-                             "AoE escalation); rebuild the dataset")
+    def _bundle_dents(bundle, dent):
+        """A bundle's delivery as _eff reads it: every capability of the
+        bundle on its own spell's facts (the one-spell-per-slot rule); no
+        facts, no geometric term."""
+        return {c: dent for c in bundle} if dent else None
+
+    def _bundle_stamps(self, lo, key):
+        """(always-on AoE escalation factor, [[factor per bundle], ...],
+        always-on delivery {cap: facts}, [[facts per bundle], ...]) of one
+        loadout (build_dataset stamp_bundle_facts). A factor above 0 = the
+        game flags the spell, 0 = it does not, None = no record (unknown);
+        facts {} or None = no area fact (flat). A loadout with bundles and no
+        `slot_escal` or `slot_delivery`, or an always-on row of an AoE
+        escalation or geometric capability without its always-on stamp,
+        predates the per-bundle rules: fail closed."""
+        esc, dl = lo.get("slot_escal"), lo.get("slot_delivery")
+        if (esc is None or dl is None) and lo.get("slots"):
+            raise ValueError(f"{key}: loadout carries no slot_escal / slot_delivery "
+                             "(per-bundle spell facts); rebuild the dataset")
         always = lo.get("always") or {}
         if "always_escal" not in lo and any(c in always for c in AOE_ESCALATION_CAPS):
             raise ValueError(f"{key}: always-on AoE escalation row carries no "
                              "always_escal; rebuild the dataset")
-        return lo.get("always_escal"), esc or []
+        if "always_delivery" not in lo and any(c in always for c in self._geo_caps):
+            raise ValueError(f"{key}: always-on geometric row carries no "
+                             "always_delivery; rebuild the dataset")
+        return (lo.get("always_escal"), esc or [],
+                lo.get("always_delivery") or {}, dl or [])
 
     def _combo_extras(self, weapon):
         """Every one-spell-per-slot loadout as a merged effective-caps dict,
@@ -1448,9 +1460,9 @@ class Engine:
     # full build is weapon + helmet/armor/shoes (one chosen ability each) +
     # cape + offhand + potion + food. person contribution = combined
     # effective capabilities of the whole build. Gear items come from the
-    # dataset's `gear` section (sheets/gear/), carry cap_delivery, and go
-    # through the SAME _eff physics (a Force Field's 6m AoE shove scales
-    # geometrically like any weapon AoE).
+    # dataset's `gear` section (sheets/gear/), carry per-bundle delivery
+    # facts, and go through the SAME _eff physics (a Force Field's 6m AoE
+    # shove scales geometrically like any weapon AoE).
     def gear_key(self, key):
         """The CURATED key for a worn item, ignoring tier.
 
@@ -1486,11 +1498,11 @@ class Engine:
             if g is None:
                 extras = [{}]
             else:
-                dl = g.get("cap_delivery") or {}
                 lo = g.get("loadout") or {}
-                a_esc, s_esc = self._escal_stamps(lo, key)
-                always = self._eff(lo.get("always", {}), dl, 0.0, a_esc)
-                slots = [[self._eff(b, dl, 0.0, s_esc[oi][ci])
+                a_esc, s_esc, a_dl, s_dl = self._bundle_stamps(lo, key)
+                always = self._eff(lo.get("always", {}), a_dl, 0.0, a_esc)
+                slots = [[self._eff(b, self._bundle_dents(b, s_dl[oi][ci]), 0.0,
+                                    s_esc[oi][ci])
                           for ci, b in enumerate(slot)]
                          for oi, slot in enumerate(lo.get("slots") or []) if slot]
                 extras = [self._merge_max(always, combo)

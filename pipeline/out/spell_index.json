@@ -64,6 +64,9 @@
  },
  "AIR_RAID": {
   "area": null,
+  "area_payload": {
+   "radius": 4.0
+  },
   "cast_range": "10",
   "caster_moves": true,
   "casting_time": "0",
@@ -497,6 +500,9 @@
  },
  "ASSASSIN_DASH": {
   "area": null,
+  "area_payload": {
+   "radius": 6.0
+  },
   "cast_range": "15",
   "caster_moves": true,
   "casting_time": "0",
@@ -1991,6 +1997,9 @@
  },
  "CLAYMORECHARGE": {
   "area": null,
+  "area_payload": {
+   "radius": 6.0
+  },
   "cast_range": "13",
   "caster_moves": true,
   "casting_time": "0.4",
@@ -2193,6 +2202,9 @@
  },
  "CONCUSSIVEBLOW_MULTI_1": {
   "area": null,
+  "area_payload": {
+   "radius": 4.0
+  },
   "cast_range": "4",
   "caster_moves": null,
   "casting_time": "0",
@@ -2543,6 +2555,10 @@
  },
  "CRYSTAL_DAGGER_BLADE_RING": {
   "area": null,
+  "area_payload": {
+   "max_targets": 4,
+   "radius": 3.0
+  },
   "cast_range": "7",
   "caster_moves": null,
   "casting_time": "0",
@@ -2570,6 +2586,10 @@
  },
  "CRYSTAL_SCYTHE_DASH_ZONE": {
   "area": null,
+  "area_payload": {
+   "max_targets": 1,
+   "radius": 5.0
+  },
   "cast_range": "3",
   "caster_moves": true,
   "casting_time": "0",
@@ -2960,6 +2980,10 @@
  },
  "DASH_KNOCKBACK": {
   "area": null,
+  "area_payload": {
+   "max_targets": 1,
+   "radius": 5.0
+  },
   "cast_range": "15",
   "caster_moves": true,
   "casting_time": "0",
@@ -3277,6 +3301,9 @@
  },
  "DIVEPUNCH_RISE": {
   "area": null,
+  "area_payload": {
+   "radius": 6.0
+  },
   "cast_range": "0",
   "caster_moves": true,
   "casting_time": "0",
@@ -3305,6 +3332,9 @@
  },
  "DIVINE_JUMP": {
   "area": null,
+  "area_payload": {
+   "radius": 5.0
+  },
   "cast_range": "11",
   "caster_moves": true,
   "casting_time": "0",
@@ -4339,6 +4369,9 @@
     "radius": 2.0
    }
   ],
+  "area_payload": {
+   "radius": 4.0
+  },
   "cast_range": "18",
   "caster_moves": null,
   "casting_time": "0",
@@ -7165,6 +7198,9 @@
  },
  "GIANTSTEPS": {
   "area": null,
+  "area_payload": {
+   "radius": 4.0
+  },
   "cast_range": "0",
   "caster_moves": null,
   "casting_time": "0",
@@ -7465,6 +7501,9 @@
  },
  "GROWING_PUNCH": {
   "area": null,
+  "area_payload": {
+   "radius": 9.0
+  },
   "cast_range": "0",
   "caster_moves": null,
   "casting_time": "0",
@@ -8355,6 +8394,9 @@
     "radius": 2.5
    }
   ],
+  "area_payload": {
+   "radius": 5.0
+  },
   "cast_range": "26",
   "caster_moves": null,
   "casting_time": "0",
@@ -9204,6 +9246,9 @@
  },
  "MACE_CRYSTAL_FRAGMENT_STORM": {
   "area": null,
+  "area_payload": {
+   "radius": 4.0
+  },
   "cast_range": "3",
   "caster_moves": null,
   "casting_time": "0",
@@ -9540,6 +9585,10 @@
  },
  "MIMIC": {
   "area": null,
+  "area_payload": {
+   "max_targets": 1,
+   "radius": 6.0
+  },
   "cast_range": "15",
   "caster_moves": true,
   "casting_time": "0",
@@ -9858,6 +9907,10 @@
  },
  "PANTHER_POUNCE": {
   "area": null,
+  "area_payload": {
+   "max_targets": 1,
+   "radius": 4.0
+  },
   "cast_range": "9",
   "caster_moves": true,
   "casting_time": "0",
@@ -14405,6 +14458,9 @@
  },
  "PROTOTYPE_SKYFALL": {
   "area": null,
+  "area_payload": {
+   "radius": 5.5
+  },
   "cast_range": "0",
   "caster_moves": null,
   "casting_time": "0",
@@ -14614,6 +14670,10 @@
  },
  "PYROBLAST_SKILLSHOT": {
   "area": null,
+  "area_payload": {
+   "max_targets": 1,
+   "radius": 4.0
+  },
   "cast_range": "15",
   "caster_moves": null,
   "casting_time": "0",
@@ -14644,6 +14704,9 @@
  },
  "QDASH": {
   "area": null,
+  "area_payload": {
+   "radius": 3.0
+  },
   "cast_range": "4.5",
   "caster_moves": true,
   "casting_time": "0",
@@ -14840,6 +14903,9 @@
     "radius": 5.5
    }
   ],
+  "area_payload": {
+   "max_targets": 7
+  },
   "cast_range": "16",
   "caster_moves": true,
   "casting_time": "0.4",
@@ -15084,6 +15150,9 @@
  },
  "RENDINGCOMBO": {
   "area": null,
+  "area_payload": {
+   "radius": 5.0
+  },
   "cast_range": "3",
   "caster_moves": true,
   "casting_time": "0",
@@ -15277,6 +15346,9 @@
     "width": 9.0
    }
   ],
+  "area_payload": {
+   "radius": 6.0
+  },
   "cast_range": "8",
   "caster_moves": null,
   "casting_time": "0.7",
@@ -15345,6 +15417,9 @@
  },
  "ROOTFIELD": {
   "area": null,
+  "area_payload": {
+   "radius": 5.0
+  },
   "cast_range": "11",
   "caster_moves": true,
   "casting_time": "0",
@@ -17962,6 +18037,9 @@
  },
  "TRIPLECOMBO_DIVEKICK": {
   "area": null,
+  "area_payload": {
+   "radius": 5.5
+  },
   "cast_range": "12",
   "caster_moves": true,
   "casting_time": "0",

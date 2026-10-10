@@ -154,8 +154,7 @@ directions); the in-game AoE damage escalation applies per spell, only to the
 bundles whose spell the game files flag (T11d/T11e); the geometric AoE utility
 scaling is wired in both ports (T18/T18b); per-weapon Resilience Penetration is
 wired as a supply-side rebate (F20). Open mechanics work is in `BACKLOG.md` (the
-AoE geometry's provisional parts and the payload factors the CC duration does
-not read yet, Q8/Q9; the magnitude audit queues).
+AoE geometry's provisional parts; the magnitude audit queues).
 
 ### Per-spell AoE damage escalation (standing rule)
 
@@ -170,7 +169,7 @@ capability, so it carries no geometric term: the ratio is its whole
 mechanics.
 
 Both ports apply the ratio to a bundle only when its spell is flagged.
-`build_dataset.stamp_aoe_escalation` writes `slot_escal` beside every
+`build_dataset.stamp_bundle_facts` writes `slot_escal` beside every
 loadout's `slot_spells` (and `always_escal` for an always-on `burst_aoe`
 row): the spell's `@targetcountvaluebonusfactor`, read from its own effect
 tree (`escalation`) and from what a dash or channel's end, a knockback's
@@ -202,7 +201,10 @@ engine had no multi-target term for utility capabilities at all.
 2. **Expected targets = style clump × spell radius.** The style/size clump
    physics (expected_aoe_targets × count_mult) capped by what the spell's
    actual area can plausibly hit — per-spell shape/radius from
-   `out/spell_index.json`.
+   `out/spell_index.json`, the own tree's or, where larger, what its end,
+   collision or trigger payload states (`area_payload`). Each bundle reads
+   its own spell (the one-spell-per-slot rule, `slot_delivery`); a spell
+   that states no area stays flat.
 3. **Catch quality has four factors, ALL count**: AoE CC on the clump,
    CC-resist-ignoring displacement (Tornado air-throw), dismount potential
    (mounted Resilience column; forced-dismount immunity gone at 21+), self
@@ -212,7 +214,11 @@ engine had no multi-target term for utility capabilities at all.
 
 Implementation, both ports: AoE-delivered supply for `geometric_caps` scales
 with min(style clump, spell reach) / min(`reference_clump`, reach), with
-CC-duration escalation composing where the spell carries a dumps factor.
+CC-duration escalation composing where the bundle's spell carries a dumps
+factor (`escalation` or `escalation_payload`). `build_dataset.
+stamp_bundle_facts` writes each bundle's facts beside `slot_spells`
+(`slot_delivery`; `always_delivery` per capability for an always-on row,
+read from that row's spell); a loadout without them fails both ports.
 `reference_clump: 2` anchors the unit at small-gang scale — the (balanced,
 base_size) anchor was measured DEAD (base clumps exceed every spell's reach,
 so it could never up-rate AoE at the calibrated sizes). Soulscythe catch:
@@ -224,8 +230,8 @@ so it could never up-rate AoE at the calibrated sizes). Soulscythe catch:
   (Q11); revisit if templates gain an expected-enemy-size field.
 - CC Escalation: `stun` IS wired (geometric transform + the dumps-derived
   duration factor, Q8 — `mechanics.yaml` `cc_duration_caps`); only
-  `clump_create` stays untouched. The duration factor reads the spell's
-  own-tree `escalation`, not `escalation_payload` (`BACKLOG.md`).
+  `clump_create` stays untouched. The duration factor reads the bundle's
+  spell, its own tree and its payload alike.
 - Mob HP bonus (+10% max HP per player over a per-mob-type threshold):
   PvE, out of scope.
 
@@ -240,7 +246,7 @@ Code and yaml cite these by Q-number. Every question is closed unless
 - **Q4 / Q12** Disarray numbers and table staleness — answered, recorded in mechanics.yaml, unwired.
 - **Q6** AoE escalation magnitudes — 8%/target from 2, cap 56% at 8, after buffs, bypasses the soft cap.
 - **Q7** Resilience Penetration — WIRED as a supply-side rebate on burst_st/execute at the style's grown focus count (a partial rebate: single-target damage is usually a non-pick at 20+, the rebate keeps what high penetration retains); F20 pins it. Optional: dumps cross-check of the wiki values (`BACKLOG.md`).
-- **Q8** CC Escalation duration curve — from the dumps, same per-target factor as damage (0.08; Spirit Animal 0.25); published nowhere else.
+- **Q8** CC Escalation duration curve — from the dumps, same per-target factor as damage (0.08; Spirit Animal 0.25); published nowhere else. Read per bundle from the own tree and the payload (`escalation_payload`).
 - **Q9** per-spell escalation eligibility — extracted from the dumps (174/559 when first extracted); on the pinned snapshot's 735 indexed spells a damage factor sits on 191 own trees and the payload walk (`escalation_payload`: a dash or channel's end, a knockback's collision, a trigger) adds 21, the dash and channel E's among them.
 - **Q10** uniform AoE-class escalation — REFUTED; WIRED per spell: `burst_aoe` takes the in-game bonus only from flagged spells (both ports, `slot_escal`; T11d/T11e).
 - **Q11 / Q13** asymmetric numbers at 21+ — CLOSED under standing rule 11 (the planner assumes a mirror fight, where Disarray is a no-op); recorded in mechanics.yaml, unwired; an enemy-size input, if one is ever added, reopens it.

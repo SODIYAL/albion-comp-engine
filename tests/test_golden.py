@@ -72,6 +72,17 @@ def names(recs):
     return [r["display_name"] for r in recs]
 
 
+def _bundle_delivery(items, key, cap):
+    """(spell, delivery facts) of the first bundle of `key` scoring `cap`:
+    a bundle reads its own spell's facts (build_dataset stamp_bundle_facts)."""
+    lo = items[key].get("loadout") or {}
+    for oi, sl in enumerate(lo.get("slots") or []):
+        for ci, b in enumerate(sl):
+            if cap in b:
+                return lo["slot_spells"][oi][ci], lo["slot_delivery"][oi][ci]
+    return None, None
+
+
 def run():
     # T1 — the worked example: 3 DPS must pull a healer
     party = [LONGBOW, WITCHWORK, PERMAFROST]
@@ -393,7 +404,8 @@ def run():
     # is pinned with a wide footprint (radius 7 -> reach past the anchor):
     # with the factor the multiplier must exceed the same footprint without
     # it; a small footprint (3m -> reach == anchor) must stay exactly 1.
-    bow_root = E.weapons["2H_BOW"].get("cap_delivery", {}).get("root")
+    # The bow's root reads the delivery of the bundle that scores it.
+    bow_root = _bundle_delivery(E.weapons, "2H_BOW", "root")[1]
     wide = {"radius": 7.0, "escalation": {"duration": 0.08}}
     check("T18b CC escalation: duration factor composes above pure geometry",
           bow_root is not None
@@ -438,8 +450,7 @@ def run():
           full.get("stun", 0) > bare.get("stun", 0)
           and full.get("tankiness", 0) > bare.get("tankiness", 0)
           and len(gained) >= 4 and f_full > f_bare + 1e-9
-          and E.gear["HEAD_PLATE_KEEPER"].get("cap_delivery", {})
-                .get("stun") is not None,
+          and _bundle_delivery(E.gear, "HEAD_PLATE_KEEPER", "stun")[1],
           f"gained={gained} fitness {f_bare:.2f}->{f_full:.2f}")
 
     # T47 — Cleric Cowl's knockback is never equipped, whatever the content

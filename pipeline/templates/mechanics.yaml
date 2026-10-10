@@ -108,7 +108,7 @@ aoe_escalation:
   # collision or a trigger adds. Standard factor 0.08/target (Spirit
   # Animal: 0.25). The damage bonus above applies to burst_aoe PER SPELL
   # (Q10): only a bundle whose spell carries a value factor takes it
-  # (build_dataset stamp_aoe_escalation, `slot_escal`); a spell with no
+  # (build_dataset stamp_bundle_facts, `slot_escal`); a spell with no
   # record is unknown and takes none; a flagged burst_aoe spell at another
   # factor than bonus_per_extra_target fails the build. Q8 answered by the
   # same extraction: CC DURATION escalation uses the same per-target factor
@@ -120,8 +120,9 @@ aoe_escalation:
 # AoE GEOMETRY (geometric-AoE step 1 — the rule in MECHANICS_TODO.md): an
 # area effect does one target's worth of WORK per
 # enemy it actually affects. Utility supply delivered by an AoE spell
-# (weapon cap_delivery, from the evidence spell's structural footprint)
-# scales with expected targets affected — normalized to (balanced,
+# (each bundle reads its own spell's structural footprint, the loadout's
+# `slot_delivery`: own tree and payload; a spell that states no area stays
+# flat) scales with expected targets affected — normalized to (balanced,
 # base_size), so template calibration at the anchor is untouched and only
 # bigger fights / clumpier styles diverge. Single-target and self-buff
 # supply stays flat: +40% self move speed catches ONE runner at any size.
@@ -143,8 +144,9 @@ aoe_geometry:
   # it by area would double-count).
   geometric_caps: [catch, peel, slow, stun, root, silence, knockback_displace]
   # Of those, the ones whose in-game CC Escalation (duration per target hit)
-  # composes ON TOP of the geometric term — applied only when the delivering
-  # spell carries a duration escalation factor in the dumps.
+  # composes ON TOP of the geometric term — applied only when the bundle's
+  # spell carries a duration escalation factor in the dumps (`escalation`
+  # or `escalation_payload`, Q8).
   cc_duration_caps: [stun, root, silence]
   escalation_cap_targets: 8
   # The ANCHOR the geometric term is normalized against — where an AoE

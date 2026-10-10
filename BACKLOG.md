@@ -37,24 +37,20 @@ Each is decidable today from evidence already in the repo.
   votes only. (V: 09b, Seat pooling)
 - **Nature Staff**: seated main_healer, 53% of its users wear plate (n=93).
   Plate frontline healer, or a wrong seat. (V: 08, Observed BUILDS)
-- **The AoE geometry's provisional parts and the payload factors**
-  (Q8 / Q9): `radius_targets`, `reference_clump: 2` and travel-distance
-  footprints stay PROVISIONAL (the geometry walk follows no dash or channel
-  end, so a dash E's area is unknown). The CC duration factor and each
-  capability's delivery entry (`cap_delivery`, the first evidence spell
-  with a fact) read the own-tree `escalation`; read with
-  `escalation_payload` beside it, 18 root and stun entries gain the
-  duration factor (the root of Snare Charge on seven maces, Positional
-  Drift on eight shapeshifter staves and Trinity Spear's Spectral Trident;
-  the stun of Mace's Deep Leap and Grovekeeper's Ground Pound), and three
-  delivery entries move to a spell whose area is unknown and lose their
-  geometric scaling (Ravenstrike Cestus peel and knockback, Battle Bracers
-  catch).
-  Whether the CC factor reads the payload, and how a delivery entry picks
-  its spell (one per capability, where the loadout scores one spell per
-  bundle), need a maintainer decision. The in-game damage bonus reads the
-  style clump, not the spell's reach. (V: 10, The in-game AoE escalation
-  applies per spell)
+- **The AoE geometry's provisional parts** (Q9): `radius_targets`,
+  `reference_clump: 2` and travel-distance footprints stay PROVISIONAL.
+  With each bundle reading its own spell, 147 geometric rows on 38 spells
+  stay flat: their spell states no area the walk reads, mostly single
+  strikes and self buffs; four state one under a reference the walk does
+  not follow (Fear Aura's 4m pulse, Soul Chain's 30m tether, Frost Walk,
+  Hamstring). A spell's target cap is the largest explicit cap in its
+  tree, so where the one explicit cap sits on a one-target sub-effect the
+  whole spell reads one target and stays flat: 15 spells carrying
+  geometric rows read so, the single-target throws rightly (Harpoon, Spear
+  Throw) and some areas not (Soaring Swipe, Camlann's Vendetta,
+  Caltrops). Whether the walk reads those references, and the cap per
+  effect, need a maintainer decision. The in-game damage bonus reads the style clump, not the
+  spell's reach. (V: 10, Delivery reads the bundle's own spell)
 - **A no-row piece as the dressed forge's one alternative**: kit_variants
   takes as v1 the first in-band piece whose top weighted capability
   differs from v0's, and a piece with no row has none, so in 19 band x

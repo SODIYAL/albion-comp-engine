@@ -32,7 +32,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "7"   # 7: escalation factors on a spell's end, collision and trigger payloads (`escalation_payload`); 6: list indices kept in description tags; CC resistance is no shield; consume spells; form spells
+ADAPTER_VERSION = "8"   # 8: the area a spell's payload states (`area_payload`); 7: escalation factors on a spell's end, collision and trigger payloads (`escalation_payload`); 6: list indices kept in description tags; CC resistance is no shield; consume spells; form spells
 
 # The references the escalation walk follows. OWN_REFS reach a spell's own
 # effect tree (`escalation`). PAYLOAD_REFS reach the effects it delivers when
@@ -264,7 +264,11 @@ def spell_geometry(sid, registry, max_depth=8):
     """{radius, max_targets, area:[{kind,...}], escalation:{...}} for a spell,
     following applyspell/spelleffectarea references through the full registry.
     `radius` is the largest damage/zone footprint found; None means the tree
-    carries no structural area — 'unknown', never 'not AoE'.
+    carries no structural area — 'unknown', never 'not AoE'. `area_payload`
+    records the radius and target cap a dash or channel's end, a knockback's
+    collision or a trigger (PAYLOAD_REFS) states beyond the own tree, where
+    it states more (Earth Crusher's hit lands at the channel's end); an
+    area aimed at allies there counts none.
 
     `escalation` (Q9, answered from the dumps): the game marks AoE
     Escalation PER EFFECT — `@targetcountvaluebonusfactor` (damage/value bonus
@@ -274,8 +278,36 @@ def spell_geometry(sid, registry, max_depth=8):
     tree is recorded. `escalation_payload` records the factors the spell's
     end, collision and trigger payloads (PAYLOAD_REFS) add beyond that tree.
     No factor in either = the game gives this spell no escalation."""
+    out, shapes = _area_walk(sid, registry, max_depth, ())
+    if shapes:
+        out["area"] = shapes[:4]
+    full, _ = _area_walk(sid, registry, max_depth, PAYLOAD_REFS, enemy_only=True)
+    more = {k: full[k] for k in ("radius", "max_targets")
+            if full[k] is not None and (out[k] is None or full[k] > out[k])}
+    if more:
+        out["area_payload"] = more
+    escal = spell_escalation(sid, registry)
+    if escal:
+        out["escalation"] = escal
+    full = spell_escalation(sid, registry, OWN_REFS + PAYLOAD_REFS)
+    payload = {k: v for k, v in sorted(full.items()) if v > escal.get(k, 0)}
+    if payload:
+        out["escalation_payload"] = payload
+    return out
+
+
+def _area_walk(sid, registry, max_depth, payload_refs, enemy_only=False):
+    """({radius, max_targets}, shapes) of a spell's structural area: the
+    applyspell/usespell/spelleffectarea references, plus `payload_refs`
+    under any key (the end, collision and trigger payloads) and the spell a
+    recast grants (`multispell`). With `enemy_only`, an effect node aimed
+    at allies or the caster (`@target` friend... or self) and everything
+    under it count no area: Spectral Trident's landing carries the enemy
+    root in a 3m circle and an ally buff in an 8m one, and Spider's Thread's
+    pull a 20m self indicator. A spell's own `@target` is where it is cast,
+    so a spell node never counts as one. The payload reading only ever adds
+    to the own tree's (`area_payload` records where it states more)."""
     best = {"radius": None, "max_targets": None}
-    escal = {}
     shapes = []
     visited = {sid}
 
@@ -296,6 +328,9 @@ def spell_geometry(sid, registry, max_depth=8):
                 walk(key, item, depth)
             return
         if not isinstance(node, dict):
+            return
+        if (enemy_only and key is not None
+                and str(node.get("@target", "")).startswith(("friend", "self"))):
             return
         # damage / effect nodes that state their own area
         r = kf_max(node.get("@effectarearadius"))
@@ -320,12 +355,20 @@ def spell_geometry(sid, registry, max_depth=8):
                 shapes.append({"kind": "cone", "radius": r,
                                "angle": kf_max(node.get("@angle"))})
                 bump_radius(r)
-        # follow references to sub-spells (HAIL -> applyspell HAIL_DAMAGE …)
+        # follow references to sub-spells (HAIL -> applyspell HAIL_DAMAGE …);
+        # with payload references, also the recast a spell grants
+        # (multispell: Falcon Smash's dive lands its 6m hit)
         for ref_attr in ("@spell", "@effect"):
             ref = node.get(ref_attr)
-            if (key in ("applyspell", "usespell", "spelleffectarea")
+            if ((key in ("applyspell", "usespell", "spelleffectarea")
+                 or (payload_refs and key == "multispell"))
                     and isinstance(ref, str) and ref in registry
                     and ref not in visited):
+                visited.add(ref)
+                walk(None, registry[ref], depth + 1)
+        for ref_attr in payload_refs:
+            ref = node.get(ref_attr)
+            if isinstance(ref, str) and ref in registry and ref not in visited:
                 visited.add(ref)
                 walk(None, registry[ref], depth + 1)
         for k, v in node.items():
@@ -335,17 +378,7 @@ def spell_geometry(sid, registry, max_depth=8):
     node = registry.get(sid)
     if node is not None:
         walk(None, node, 0)
-    out = dict(best)
-    if shapes:
-        out["area"] = shapes[:4]
-    escal = spell_escalation(sid, registry)
-    if escal:
-        out["escalation"] = escal
-    full = spell_escalation(sid, registry, OWN_REFS + PAYLOAD_REFS)
-    payload = {k: v for k, v in sorted(full.items()) if v > escal.get(k, 0)}
-    if payload:
-        out["escalation_payload"] = payload
-    return out
+    return dict(best), shapes
 
 
 def spell_escalation(sid, registry, refs=OWN_REFS, max_depth=10):
@@ -717,10 +750,12 @@ def main(dump_dir, source_commit):
             # multi-component Es)
             "description": plain[:700],
         }
-        # written only when a payload adds a factor, so a spell without one
-        # keeps its record (and its evidence-review fingerprint) unchanged
-        if geom.get("escalation_payload"):
-            spell_index[sid]["escalation_payload"] = geom["escalation_payload"]
+        # written only when a payload adds a factor or an area, so a spell
+        # without one keeps its record (and its evidence-review fingerprint)
+        # unchanged
+        for k in ("escalation_payload", "area_payload"):
+            if geom.get(k):
+                spell_index[sid][k] = geom[k]
 
     for L in lines.values():
         L.pop("_nspells", None)

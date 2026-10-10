@@ -30,7 +30,7 @@
   curated_as_of: 2026-10-07
   role_hint: support
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: CURSEULTIMATE}    # E: 24 a tick x 6 = 144 over ~6s, below the burst ladder's 2-anchor (Trinity Spear 220 in 3r): the numbers decide the damage (VALIDATION.md 08, Round 9); the 13 radius and the escalation count through cap_delivery
+    - {cap: burst_aoe,     score: 2, evidence: CURSEULTIMATE}    # E: 24 a tick x 6 = 144 over ~6s, below the burst ladder's 2-anchor (Trinity Spear 220 in 3r): the numbers decide the damage (VALIDATION.md 08, Round 9); the escalation counts through the bundle's own spell
     - {cap: resist_shred,  score: 4, evidence: CURSEULTIMATE}    # E: -18% damage resistances on every cursed enemy in a 13 radius, the identity; W: Armor Piercer, -17% for 4s (QW)
 
 - weapon: 2H_DEMONICSTAFF            # Demonic Staff — the fear wave

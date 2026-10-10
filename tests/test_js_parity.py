@@ -584,7 +584,10 @@ def scratch_pass(data):
     spec = {"floor": floor_cases, "flat_weapon": flat, "style": "clap",
             "seat_gang": seats[0]["id"], "seat_cell": seats[1]["id"],
             "party": ["2H_HAMMER_AVALON", "2H_MACE", "2H_LONGBOW"],
-            "escal": {"zero": aoe[0], "null": aoe[1], "gear": esc_gear}}
+            "escal": {"zero": aoe[0], "null": aoe[1], "gear": esc_gear},
+            # always-on rows read their own spell's delivery (a potion's)
+            "always_geo": sorted(g for g in d["gear"]
+                                 if (d["gear"][g].get("loadout") or {}).get("always_delivery"))}
     paths = []
     try:
         for obj in (d, spec):
@@ -612,7 +615,9 @@ def scratch_pass(data):
     py_escal = {"zero": cell._uncharged_extras(esc["zero"]),
                 "null": cell._uncharged_extras(esc["null"]),
                 "gear": cell.gear_extras(esc["gear"])}
+    py_always = {g: cell.gear_extras(g) for g in spec["always_geo"]}
     py = {"floor": [], "raw": e7._raw_member_caps(flat), "escal": py_escal,
+          "always_geo": py_always,
           "seat_gang": json.loads(json.dumps(gang._seat_kit(gang.roles[spec["seat_gang"]]))),
           "seat_cell": json.loads(json.dumps(cell._seat_kit(cell.roles[spec["seat_cell"]]))),
           "top_null": {
@@ -630,9 +635,21 @@ def scratch_pass(data):
             "rows": [[r["cap"], r["gain"], r["floor_lift"], r["delta"]] for r in pr["caps"]],
             "actual": e7.comp_score([cand], [pr["combo"]], [pr["kit"]]) - e7.comp_score([])})
     errs = []
-    for k in ("floor", "raw", "seat_gang", "seat_cell", "top_null", "escal"):
+    for k in ("floor", "raw", "seat_gang", "seat_cell", "top_null", "escal", "always_geo"):
         if not _close(py[k], js.get(k)):
             errs.append(f"scratch {k}: py={str(py[k])[:240]} js={str(js.get(k))[:240]}")
+    # an always-on row with an area scales at clap 20, one without stays flat
+    for g in spec["always_geo"]:
+        al = d["gear"][g]["loadout"]
+        for c, dent in al["always_delivery"].items():
+            raw = al["always"][c] / cell.score_unit
+            got = max(x.get(c, 0.0) for x in py_always[g])
+            scaled = bool((dent or {}).get("radius")) and cell._geo_mult(c, dent) > 1.0 + 1e-9
+            if scaled != (got > raw + 1e-9):
+                errs.append(f"scratch always_geo {g}.{c}: {got!r} against raw {raw!r}, "
+                            f"facts {dent}")
+    if not spec["always_geo"]:
+        errs.append("scratch always_geo: no always-on row carries delivery facts")
     # a bundle read without the in-game bonus is the shipped (flagged)
     # bundle over the context's ratio, in every combo
     if not ratio > 1.0 + 1e-9:
@@ -961,8 +978,8 @@ def main():
         bad += 1
     else:
         print("scratch pass identical: a zeroed floored gain, an empty always, "
-              "empty doctrine cells, a null top_n and not-flagged / unknown AoE "
-              "escalation stamps read the same in both ports")
+              "empty doctrine cells, a null top_n, not-flagged / unknown AoE "
+              "escalation stamps and always-on delivery read the same in both ports")
 
     # The generated dashboard must embed THIS engine verbatim — a stale
     # build means the public page scores with different math than the source

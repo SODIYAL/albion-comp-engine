@@ -1840,8 +1840,11 @@ def t_gear_active_doctrine():
     # the shared Force Field would score more under the template weights
     sc = g["HEAD_CLOTH_SET1"].get("doctrine_active") or {}
     ex1 = e.gear_extra("HEAD_CLOTH_SET1")
-    ff = cowl["slots"][ai][cowl["slot_spells"][ai].index("PBAOE_KNOCKBACK")]
-    ff_val = sum(e._weights.get(c, 0.0) * v for c, v in e._eff(ff, g["HEAD_CLOTH_SET2"].get("cap_delivery") or {}).items())
+    fi = cowl["slot_spells"][ai].index("PBAOE_KNOCKBACK")
+    ff = cowl["slots"][ai][fi]
+    ff_eff = e._eff(ff, e._bundle_dents(ff, cowl["slot_delivery"][ai][fi]), 0.0,
+                    cowl["slot_escal"][ai][fi])
+    ff_val = sum(e._weights.get(c, 0.0) * v for c, v in ff_eff.items())
     own_val = sum(e._weights.get(c, 0.0) * v for c, v in ex1.items())
     check("F36d an unrecorded item ASSUMES its own active (Scholar Cowl: Energy Shield), not the "
           "higher-scoring shared Force Field",
