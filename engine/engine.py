@@ -1827,8 +1827,10 @@ class Engine:
         context-free (doctrine-tier-first; a slot whose ranked top is
         off-tier stays UNSET — the forge never guesses off-doctrine
         gear); v1/v2 = v0 with the first/second DIVERGENT single-slot
-        swap (a tier piece whose top weighted capability differs from
-        v0's piece in that slot). [("v0", None)] for weapons with no
+        swap (a tier piece WITH a capability row whose top weighted
+        capability differs from v0's piece in that slot: a piece with no
+        row supplies nothing, so it is never an alternative, and a weapon
+        with no such piece has no v1). [("v0", None)] for weapons with no
         doctrine gear at all — dressed == naked. Deterministic (slot
         order, then tier order); cached per set_content. NO doctrine
         passives anywhere in this path (role stays out of build_extra —
@@ -1868,6 +1870,11 @@ class Engine:
             for o in opts[1:]:
                 n1 = (o.get("doctrine_n") or [0, 0])[0]
                 if n0 and n1 < 0.5 * n0:
+                    continue
+                # an alternative must supply something: a worn piece with
+                # no capability row (the plain Cape) stays nameable in v0
+                # but is never the one alternative
+                if not any(self.gear_extras(o["gear"])):
                     continue
                 if top_cap(o["gear"]) != t0:
                     divergent.append((slot, o["gear"]))

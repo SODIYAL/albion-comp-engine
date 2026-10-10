@@ -2796,7 +2796,8 @@
     /* Doctrine kit variants for GENERATION (the dressed forge; mirrors
        engine.py kit_variants): v0 = the seat's context-free doctrine kit
        (off-tier slots stay unset), plus ONE divergent single-slot swap
-       (variant cap 2 — a performance bound); [["v0", null]]
+       to a piece with a capability row (variant cap 2 — a performance
+       bound; a weapon with no such piece has no v1); [["v0", null]]
        for weapons with no doctrine gear. NO doctrine passives anywhere
        in this path. */
     if (!this.dressCandidates) return [["v0", null]];  /* V3-W switch */
@@ -2831,6 +2832,13 @@
       for (var oi = 1; oi < opts.length; oi++) {
         var n1 = (opts[oi].doctrine_n || [0, 0])[0];
         if (n0 && n1 < 0.5 * n0) continue;
+        /* an alternative must supply something (mirrors engine.py): a
+           piece with no capability row is never the one alternative */
+        var gx = this.gearExtras(opts[oi].gear), hasRow = false;
+        for (var gi = 0; gi < gx.length; gi++) {
+          if (Object.keys(gx[gi]).length) { hasRow = true; break; }
+        }
+        if (!hasRow) continue;
         if (topCap(opts[oi].gear) !== t0) {
           divergent.push([slot, opts[oi].gear]);
           break;
