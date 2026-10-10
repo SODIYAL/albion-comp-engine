@@ -111,6 +111,13 @@
     var mpKeys = Object.keys(this.metaPrior);
     this.metaBucketed = mpKeys.length > 0 &&
       mpKeys.every(function (k) { return k === "small" || k === "mid" || k === "large"; });
+    /* MATCHMAKING POOL PRIOR (mirrors engine.py): meta_pools {content:
+       {pool: {sizes, solo, pairs}}}; at a size inside a pool of the content
+       the meta term reads the pool's own tables, weighted pool_delta_x x
+       delta (setContent). Absent = none. */
+    this.metaPools = this.scoring.meta_pools || {};
+    this.poolDeltaX = (w.pool_delta_x === undefined) ? 1.0 : w.pool_delta_x;
+    this._deltaBase = this.delta;
     this.synergies = (this.scoring.capability_synergies || []).map(function (s) {
       return [s.a, s.b, s.bonus];
     });
@@ -302,6 +309,10 @@
     this.content = content;
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
+    /* the pool's own prior and its weight (mirrors engine.py); outside
+       every pool that carries one the size bucket's prior stands at delta */
+    this.priorPool = this._priorPool(content, this.size);
+    this.delta = this.priorPool !== null ? this._deltaBase * this.poolDeltaX : this._deltaBase;
     this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
     /* DEMAND RAMP (mirrors engine.py set_content):
        a row with ramp {none_until, full_at} is dropped at sizes <=
@@ -2429,11 +2440,36 @@
   };
 
   /* ----------------------------------------------------------------- priors */
+  CompEngine.prototype._priorPool = function (content, size) {
+    /* the matchmaking pool of `content` covering `size` that carries a
+       prior of its own (meta_pools), with its key; null without (mirrors
+       engine.py _prior_pool) */
+    var pools = this.metaPools[content] || {};
+    for (var key in pools) {
+      var row = pools[key];
+      if (row.sizes[0] <= size && size <= row.sizes[1]) {
+        var out = {};
+        for (var k in row) out[k] = row[k];
+        out.key = key;
+        return out;
+      }
+    }
+    return null;
+  };
+
   CompEngine.prototype._soloOf = function (w) {
-    /* the weapon's own share of killer parties at the current size
-       (mirrors engine.py _solo_of) */
+    /* the weapon's own share of killer parties at the current size; inside
+       a pool with a prior of its own, the pool's (mirrors engine.py _solo_of) */
+    if (this.priorPool !== null) return this.priorPool.solo[w] || 0.0;
     if (!this.metaBucketed) return this.metaPrior[w] || 0.0;
     return (this.metaPrior[this.sizeBucket()] || {})[w] || 0.0;
+  };
+
+  CompEngine.prototype._pairTable = function () {
+    /* {weapon: {partner: s}} at the current context: the pool's own table
+       inside a pool with a prior, else the size bucket's (mirrors engine.py) */
+    if (this.priorPool !== null) return this.priorPool.pairs;
+    return this.metaPairs[this.sizeBucket()] || {};
   };
 
   CompEngine.prototype._pairOf = function (weapon, party, skip) {
@@ -2442,7 +2478,7 @@
        no row — absence is neutral, never a penalty. Ties break on the
        partner id so the explanation matches Python. */
     if (!party || !party.length || !this.metaPairW) return [0.0, null];
-    var rows = (this.metaPairs[this.sizeBucket()] || {})[weapon];
+    var rows = this._pairTable()[weapon];
     if (!rows) return [0.0, null];
     var best = 0.0, who = null;
     for (var i = 0; i < party.length; i++) {
@@ -2682,7 +2718,7 @@
     var party = state.party || [];
     var meta = this.metaOf(weapon, party), lam = this.metaPairW;
     if (lam && party.length) {
-      var rows = this.metaPairs[this.sizeBucket()] || {};
+      var rows = this._pairTable();
       for (var i = 0; i < party.length; i++) {
         var s = (rows[party[i]] || {})[weapon] || 0.0;
         if (s > state.pairMax[i]) meta += lam * (s - state.pairMax[i]);

@@ -1893,6 +1893,50 @@ def run():
           set(f7) <= listed7 and not (off7 & set(names7)) and r7c.count("healer") == 1,
           f"seven={names7} roles={r7c} off-list={sorted(off7)}")
 
+    # T56 — the Dragon Portal pools read their own prior (tests/VALIDATION.md,
+    # The Dragon Portal pools read their own prior). Inside the 2-3, 4-5 and
+    # 6-7 pools the meta term reads the pool's solo and pair tables (its
+    # dominant winners, training split) at pool_delta_x (8) x delta: on the
+    # size bucket's prior at delta the hidden weapon's portal holdout top-3
+    # read 8.5% / 20.8% / 8.2%, on the pool's own at 8x 12.3% / 21.9% /
+    # 10.6%. The 15-20 pool (no prior until its list at 200 rosters), the
+    # portal at 10 and every other content read the size bucket's prior at
+    # delta, as before.
+    pools56 = (E.scoring.get("meta_pools") or {}).get("ancient_lands") or {}
+    d56 = E.scoring["weights"]["delta"]
+    inside56, outside56 = [], []
+    for size in range(2, 8):
+        e56 = Engine(content="ancient_lands", size=size)
+        pk = next((k for k, p in pools56.items()
+                   if p["sizes"][0] <= size <= p["sizes"][1]), None)
+        pool = pools56.get(pk) or {"solo": {}, "pairs": {}}
+        bucket = e56.meta_prior.get(e56.size_bucket()) or {}
+        inside56.append((size, pk, pk is not None
+                         and (e56.prior_pool or {}).get("key") == pk
+                         and abs(e56.delta - 8 * d56) < 1e-12
+                         and all(e56._solo_of(w) == pool["solo"].get(w, 0.0) for w in e56.weapons)
+                         and e56._pair_table() == pool["pairs"]
+                         and any(pool["solo"].get(w, 0.0) != bucket.get(w, 0.0)
+                                 for w in e56.weapons)))
+    for content, size in (("ancient_lands", 10), ("ancient_lands", 15),
+                          ("ancient_lands", 20), ("roads", 5),
+                          ("castle_outpost", 7), ("blackzone_roam", 20)):
+        e56 = Engine(content=content, size=size)
+        bk = e56.size_bucket()
+        outside56.append((content, size, e56.prior_pool is None
+                          and abs(e56.delta - d56) < 1e-12
+                          and all(e56._solo_of(w) == (e56.meta_prior.get(bk) or {}).get(w, 0.0)
+                                  for w in e56.weapons)
+                          and e56._pair_table() == (e56.meta_pairs.get(bk) or {})))
+    check("T56 the Dragon Portal's 2-3, 4-5 and 6-7 pools read their own prior "
+          "(solo and pairs) at 8 x delta; the 15-20 pool, the portal at 10 and "
+          "every other content read the size bucket's prior at delta",
+          sorted(pools56) == ["2-3", "4-5", "6-7"]
+          and E.scoring["weights"].get("pool_delta_x") == 8
+          and all(ok for _s, _k, ok in inside56) and all(ok for _c, _s, ok in outside56),
+          f"pools={sorted(pools56)} inside={[(s, k, ok) for s, k, ok in inside56]} "
+          f"outside={[(c, s, ok) for c, s, ok in outside56]}")
+
     # T52 — a transform's form abilities score on the E, and anti_dive
     # counts a protection placed on another ally (tests/VALIDATION.md, the
     # anti-dive rule). Recorded on a Dragon Portal seven (Polehammer,

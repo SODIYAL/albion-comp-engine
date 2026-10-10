@@ -379,6 +379,22 @@ check("H18 the scoring meta prior is the GENERATED bucketed harvest prior "
       and all(mp[b] == {w: v for w, v in prior_doc["meta_prior"][b].items()
                         if w in DATASET["weapons"]} for b in mp),
       f"buckets={ {b: len(r) for b, r in mp.items()} }")
+portal_doc = load_json(os.path.join(OUT, "portal_prior.json"))
+mpools = (sc.get("meta_pools") or {}).get("ancient_lands") or {}
+check("H18c the Dragon Portal pools' prior is GENERATED (out/portal_prior.json, "
+      "hash-gated to the committed party_rosters.json.gz, training split): the "
+      "dataset carries the 2-3, 4-5 and 6-7 pools' solo and pair tables as "
+      "derived, scoring.yaml no hand-set map",
+      sorted(mpools) == ["2-3", "4-5", "6-7"]
+      and not scoring_yaml.get("meta_pools")
+      and (portal_doc.get("_source") or {}).get("party_rosters_sha256") == _rosters_sha
+      and (portal_doc.get("_split") or {}).get("holdout_mod") == 5
+      and all(mpools[k]["sizes"] == portal_doc["pools"][k]["sizes"]
+              and mpools[k]["solo"] == {w: v for w, v in portal_doc["pools"][k]["solo"].items()
+                                        if w in DATASET["weapons"]}
+              and max(mpools[k]["solo"].values()) == 1.0
+              for k in mpools),
+      f"pools={ {k: len(p['solo']) for k, p in mpools.items()} }")
 check("H18b the hand-listed viability core is retired (empty), so the "
       "viability term reads 0 for every weapon",
       not any((comp_cfg.get("viability") or {}).get("core", {}).values()))

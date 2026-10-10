@@ -56,6 +56,7 @@ Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py
 Step "derive_portal_rows"     "py" @("-3", "-u", "pipeline/derive_portal_rows.py", "--apply")
 Step "derive_party_styles"    "py" @("-3", "-u", "pipeline/derive_party_styles.py")
 Step "derive_meta_prior"      "py" @("-3", "-u", "pipeline/derive_meta_prior.py")
+Step "derive_portal_prior"    "py" @("-3", "-u", "pipeline/derive_portal_prior.py")
 Step "derive_role_counts"     "py" @("-3", "-u", "pipeline/derive_role_counts.py")
 Step "derive_skeletons"       "py" @("-3", "-u", "pipeline/derive_skeletons.py")
 Step "build_dataset"          "py" @("-3", "-u", "pipeline/build_dataset.py")

@@ -121,7 +121,7 @@ py -3 tests/test_cohort_families.py # observed-family artifact contracts
 py -3 tests/test_usage_derive.py    # usage derivation: the frame, fight-size and party-size axes, the even sample
 py -3 tests/test_roles.py           # role book, kit doctrine, advisory (descriptive)
 py -3 tests/test_validation_modes.py # dressed-validation contracts, set_dressing, gear join
-py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal
+py -3 tests/test_meta_pairs.py      # pair-aware prior: derivation + blend contracts, exact marginal; the portal pools' own prior
 py -3 tests/test_skeletons.py       # seat skeleton, plan minima, generated copy allowances (forge gates)
 py -3 tests/test_tone.py            # writing conventions on every tracked text file
 py -3 tests/test_content_tag.py     # harvest content tag: KillArea tally, the marker rule, kill-feed records
@@ -179,7 +179,7 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
 - After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
   `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
-  `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_role_counts` ->
+  `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_portal_prior` -> `derive_role_counts` ->
   `derive_skeletons` -> `build_dataset` -> `derive_usage` (the
   observed-evidence artifact: fight-size prevalence and killer-party
   cohorts, display only, read from the full local rosters artifact) -> every gate ->
@@ -273,7 +273,8 @@ One-way, provenance-checked data flow:
    `out/meta_prior.json` and the Dragon Portal's rows (`ancient_lands.yaml`: base
    rows plus `pool_rows` and `pool_fielded` per matchmaking pool, `derive_portal_rows.py`;
    a capability a minority of a pool's winners field is an OPTIONAL row at 4-5 and 6-7)
-   and the pools' role counts (`role_counts.json` `pools`) are
+   and the pools' role counts (`role_counts.json` `pools`) and prior
+   (`out/portal_prior.json`, `derive_portal_prior.py`) are
    GENERATED from the harvest — never hand-edit.
 5. Derived weapon facts stamped at build: `resil_pen`, `cost_tier`, `heal_scale`,
    `full_healer`, `style_fit` (delivery / damage scale / fits per style x band, from
@@ -281,7 +282,8 @@ One-way, provenance-checked data flow:
 6. `build_dataset.py` compiles everything plus the MASTERSHEET overrides into
    `out/dataset-latest.json`, byte-identically.
 7. Scoring: recommendation = exact marginal comp-score delta (0.55 capability +
-   0.20 synergy + 0.15 meta prior), evaluated one player ahead, each candidate on
+   0.20 synergy + 0.15 meta prior; inside the Dragon Portal's 2-3, 4-5 and 6-7
+   pools the pool's own prior at 8 x 0.15), evaluated one player ahead, each candidate on
    its best legal spell combo, DRESSED in its doctrine kit. Beside scoring sit the
    descriptive analyzers (`comp_identity`, `kill_pressure`, `fight_chain`,
    `pick_report`, `analyze`, the role layer) — parity-carried, never a scoring input.

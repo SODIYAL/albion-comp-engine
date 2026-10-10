@@ -1099,12 +1099,16 @@ V4H_CLASSES = ("weapon_only", "harvest_gear", "harvest_gear_doctrine")
 V4H_GEAR_SLOTS = ("Head", "Armor", "Shoes", "Cape", "OffHand", "Potion", "Food")
 
 
-def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod, dominant=False):
+def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod, dominant=False,
+                     split="holdout"):
     """Killer parties of [min_size, max_size] with every weapon known and in
     the catalog, each with its weapons-only style label (party_styles.json,
     the descriptive comp_identity read; `balanced` where the label is none /
     split) and its linked builds' gear. `holdout_mod` keeps only battles
     whose id % mod == 0 — a deterministic slice, see the caveat in v4h().
+    `split="train"` keeps the other battles instead (id % mod != 0, the
+    slice every harvest-derived table learns from; a diagnostic read of the
+    engine on training contexts, never an evaluation).
     `dominant` keeps the parties that took no deaths and a kill in their
     battle (the portal pools' unit)."""
     import party_link
@@ -1120,7 +1124,7 @@ def _harvest_parties(doc, styles, e_probe, min_size, max_size, holdout_mod, domi
     cat = set(e_probe.weapons)
     out = []
     for battle in sorted(by_battle):
-        if holdout_mod and int(battle) % holdout_mod != 0:
+        if holdout_mod and (int(battle) % holdout_mod == 0) != (split == "holdout"):
             continue
         for p in by_battle[battle]:
             if not _known_party(p, cat, min_size, max_size, dominant):
@@ -1221,8 +1225,13 @@ def v4h(args):
     """
     sys.path.insert(0, os.path.join(ROOT, "pipeline"))
     import rosters_io
-    rosters_path = rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
+    rosters_path = args.rosters or rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
     styles_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
+    active = [cl for cl in V4H_CLASSES
+              if not args.classes or cl in args.classes.split(",")]
+    if not active:
+        sys.exit(f"--classes names none of {', '.join(V4H_CLASSES)}")
+    drop_rows = []
     if not os.path.exists(rosters_path):
         sys.exit(f"{rosters_path} missing — run the harvest fold first")
     doc = rosters_io.load(rosters_path, source=args.harvest_source, content=args.harvest_content)
@@ -1244,14 +1253,14 @@ def v4h(args):
         return None
 
     parties = _harvest_parties(doc, styles, probe, args.min_size, args.max_size,
-                               args.holdout_mod, dominant=args.dominant)
+                               args.holdout_mod, dominant=args.dominant, split=args.split)
     if not parties:
         sys.exit("no harvested parties match the filter")
     rng = random.Random(args.seed)
     sample = parties if args.n >= len(parties) else rng.sample(parties, args.n)
     sample.sort(key=lambda p: (p["battle"], p["index"]))
 
-    labels = V4H_CLASSES + (("baseline",) if args.baseline else ())
+    labels = tuple(active) + (("baseline",) if args.baseline else ())
     # `ranks`: the dropped weapon's 1-based position in the FULL ranking
     # (None = outside the suggestion pool). Top-3 hits are coarse — a pick
     # moving from rank 40 to rank 5 reads as no change — so the rank
@@ -1276,6 +1285,7 @@ def v4h(args):
         dressed_n += dn; res_n += res; rec_n += rec; members_n += len(ws)
         classes = {"weapon_only": None, "harvest_gear": actual,
                    "harvest_gear_doctrine": mixed}
+        classes = {cl: gl for cl, gl in classes.items() if cl in active}
         # (class, incumbent gear, ranker): the engine's classes rank through
         # recommend() dressed in that gear; the report-only baseline ranks
         # through baseline_recommend() and wears nothing
@@ -1293,10 +1303,16 @@ def v4h(args):
         for i in drops:
             rest = ws[:i] + ws[i + 1:]
             role = role_of(ws[i])
+            row = {"battle": p["battle"], "index": p["index"], "size": p["size"],
+                   "style": p["style"], "hidden": ws[i], "role": role,
+                   "top": {}, "rank": {}}
+            drop_rows.append(row)
             for cl, gl, rank in runs:
                 g = None if gl is None else gl[:i] + gl[i + 1:]
                 full = rank(rest, g, FULL_RANK)
                 top = full[:TOP_N]
+                row["top"][cl] = top
+                row["rank"][cl] = full.index(ws[i]) + 1 if ws[i] in full else None
                 t = tallies[cl]
                 t["w_hits"] += ws[i] in top
                 t["w_total"] += 1
@@ -1339,14 +1355,17 @@ def v4h(args):
                     if g is not None:
                         g.append(dict(e.kit_variants(pick)).get("v0"))
 
-    base = tallies["weapon_only"]
+    base = tallies[labels[0]]
+    split_txt = ("all battles" if not args.holdout_mod else
+                 f"battles id%{args.holdout_mod}==0" if args.split == "holdout" else
+                 f"TRAINING battles id%{args.holdout_mod}!=0 (diagnostic, not an evaluation)")
     print(f"V4h leave-one-out over the killer-party harvest: {len(sample)} parties "
           f"of {len(parties)} eligible (size {args.min_size}-{args.max_size}, "
-          f"{'battles id%' + str(args.holdout_mod) + '==0' if args.holdout_mod else 'all battles'}, "
+          f"{split_txt}, "
           f"seed {args.seed}), {args.drop} drops per party = {base['w_total']} drops; "
           f"content {args.content}, style = the party's weapons-only label; harvest {args.harvest_source}"
           f"{' / ' + args.harvest_content if args.harvest_content else ''}{', dominant parties' if args.dominant else ''}")
-    for cl in V4H_CLASSES:
+    for cl in active:
         print(_tally_line(cl, tallies[cl], 22))
     if args.baseline:
         print(_tally_line("baseline", tallies["baseline"], 22))
@@ -1373,7 +1392,10 @@ def v4h(args):
                       + ("   <- baseline: REPORT-ONLY, never a gate"
                          if cl == "baseline" else ""))
     board_mod = _board_holdout_mod()
-    if args.holdout_mod and board_mod == args.holdout_mod:
+    if args.split == "train":
+        print("  split: TRAINING contexts — every harvest-derived table learned from "
+              "these battles; a diagnostic read, never an evaluation.")
+    elif args.holdout_mod and board_mod == args.holdout_mod:
         print(f"  holdout: the style board, meta prior, role counts and seat "
               f"skeleton learn from battles id%{board_mod}!=0; this slice is "
               f"unseen by every harvest-derived table.")
@@ -1402,6 +1424,10 @@ def v4h(args):
         with open(args.json, "w", encoding="utf-8", newline="\n") as f:
             json.dump(payload, f, indent=1, sort_keys=True)
         print(f"\nwrote {args.json}")
+    if args.drops_json:
+        with open(args.drops_json, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(drop_rows, f, indent=0, sort_keys=True)
+        print(f"wrote {args.drops_json} ({len(drop_rows)} drops)")
     return 0
 
 
@@ -1466,6 +1492,15 @@ if __name__ == "__main__":
                    help="killer parties with no deaths and a kill only (the portal pools' unit)")
     h.add_argument("--seed", type=int, default=20260910)
     h.add_argument("--json", default=None)
+    h.add_argument("--rosters", default=None,
+                   help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
+    h.add_argument("--classes", default=None,
+                   help="comma list of incumbent-gear classes to score (default: all three)")
+    h.add_argument("--split", default="holdout", choices=["holdout", "train"],
+                   help="train = battles id %% M != 0: a diagnostic read on training "
+                        "contexts, never an evaluation")
+    h.add_argument("--drops-json", default=None,
+                   help="dump every drop: hidden weapon, each class's top-3 and rank")
     h.add_argument("--baseline", action="store_true",
                    help="also score the role-skeleton + popularity baseline "
                         "(report-only, never a gate)")

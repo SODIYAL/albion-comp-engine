@@ -143,6 +143,8 @@ const out = cases.map((c, i) => {
       : e.refine(rp, REFINE_PASSES, c.refine_pool, 0,
                  c.gears.slice(0, rp.length)),
     comp_score: e.compScore(c.party),
+    // the meta term's weight at the case's context (mirrors test_js_parity.py)
+    delta: e.delta,
     comp_score_locked: e.compScore(c.party, c.combos),
     redundancy: e.redundancy(c.party),
     size_bucket: e.sizeBucket(),

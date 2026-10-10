@@ -95,6 +95,9 @@ Three layers, never merged:
   the roster (`meta_pairs`, one party one vote per pair, >=3 guild-sets,
   log2-lift capped at 8x, shrunk; standing rule 7), both tables on the
   training split `battle % 5 != 0`; a hand-set map fails the build.
+  Inside the Dragon Portal's 2-3, 4-5 and 6-7 pools the meta term reads
+  the pool's own tables (`out/portal_prior.json`, the pool's dominant
+  winners, `derive_portal_prior.py`) at `pool_delta_x` 8 x 0.15.
   Duplicates: 1 copy by default; the one super-additive case is
   `self_cost_offset_min_copies` (Demon Armor).
 - Gear scores (curated `sheets/gear/<slot>.yaml`, the tree-shared actives once in
@@ -244,7 +247,14 @@ generate from that list only (`is_unfielded`, F35, T51), the wheel marks
 the rest "not fielded here", and a manual pick always scores. The
 capability score alone ranked wide-sheet weapons no winner fields first
 (Claws and Hand of Justice in a forged seven, 1 of 162 dominant 6-7
-parties each). A content with no harvested evidence follows the rule
+parties each). The pools that carry a fielded list carry a meta prior
+of their own as well (`derive_portal_prior.py` -> `out/portal_prior.json`
+-> `scoring.meta_pools`: the same dominant winners, one player one vote,
+the pair table on the bucket prior's rules); inside such a pool both
+ports read it in place of the size bucket's at `weights.pool_delta_x` (8)
+x `delta` (T56; on the holdout the hidden weapon's top-3 rises from
+8.5% / 20.8% / 8.2% to 12.3% / 21.9% / 10.6% at 2-3 / 4-5 / 6-7). The
+15-20 pool's prior waits with its list. A content with no harvested evidence follows the rule
 this content used before: `fit: {stat: none, borrowed_from: <sibling>}`,
 every target read as `content_min`, the borrowed-evidence notice on the
 page.

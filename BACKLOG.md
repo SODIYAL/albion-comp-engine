@@ -13,25 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **The popularity baseline on the portal pools**: with the pool-fielded
-  gate on, the engine names the hidden member in its top 3 on 9.5% /
-  19.3% / 12.6% of holdout drops at 2-3 / 4-5 / 6-7 (9.1% / 13.8% / 9.4%
-  without the gate); the pool's three most fielded weapons name it on
-  27.3% / 29.6% / 13.9%. At role level the engine leads (76% / 62% / 46%
-  against 47% / 52% / 38%). With the optional rows at 4-5 and 6-7 (V: 10,
-  Optional rows and role counts for the portal pools; a 400-party holdout
-  sample on the artifact of that day) the role read rises to 86% and 69%
-  and the weapon's top-3 stays under the baseline's (16% and 12% against
-  22% and 17%); at the frontline seat of a five Heavy Mace is the first
-  pick in 41 of 150 cases where Great Hammer still leads in 79, on stun
-  (+3.8), catch and heal_reduction, capabilities Heavy Mace's sheet does
-  not carry. Inside the list the engine still prefers a
-  wide sheet (Battle Bracers and Crystal Reaper over the Rotcaller Staff
-  and the Longbow, which 26% and 20% of 6-7 winners field): the capability
-  score pays a first unit on many rows more than depth on one. Whether
-  the meta prior should bucket by content with a larger `delta` at the
-  portal, or the sheets under-credit sustained ranged pressure, is the
-  question to settle from evidence.
 - **Healer pricing at 7, what stays open** (V3 round 2, Castle Outpost
   7): with disengage and mobility on the weapon basis (V: 10, Disengage and
   mobility read the weapon basis) the engine names Hallowfall the first
@@ -174,7 +155,9 @@ Each is decidable today from evidence already in the repo.
   and counts at 200 rosters). `derive_portal_rows.py` and the fold report
   count it against the threshold; at 200, derive its fielded list and role
   counts as the smaller pools' are (both ports read a pool's role counts
-  below 10 alone today).
+  below 10 alone today), and measure its own prior on the holdout before
+  `derive_portal_prior.py` carries it (the smaller pools read theirs at 8 x
+  `delta`; V: 10, The Dragon Portal pools read their own prior).
 
 ## Engineering work, unblocked
 

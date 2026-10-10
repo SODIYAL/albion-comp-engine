@@ -143,6 +143,22 @@ def make_cases(data):
                   "combos": [_combo_count(data, short_party[0]) - 1, None],
                   "gears": [gk[:3]] if gk else [],
                   "refine_pool": weapons[3::11], "swap": True})
+    # inside each matchmaking pool that carries a prior of its own (the
+    # Dragon Portal's 2-3, 4-5, 6-7): the meta term reads the pool's solo
+    # and pair tables at pool_delta_x x delta. The random cases above reach
+    # one size per pool with random weapons; these draw the party from the
+    # pool's fielded list so its pair rows fire, at both ends of the pool
+    al = data["templates"].get("ancient_lands") or {}
+    for pk, pool in sorted(((data["scoring"].get("meta_pools") or {})
+                            .get("ancient_lands") or {}).items()):
+        listed = sorted(((al.get("pool_fielded") or {}).get(pk) or {}).get("weapons") or [])
+        if not listed:
+            continue
+        for size, style in ((pool["sizes"][0], "balanced"), (pool["sizes"][1], "brawl")):
+            party = [rng.choice(listed) for _ in range(size - 1)]
+            cases.append({"content": "ancient_lands", "size": size, "style": style,
+                          "party": party, "combos": [None] * len(party),
+                          "gears": [], "refine_pool": listed[::3], "swap": True})
     return cases
 
 
@@ -273,6 +289,10 @@ def py_results(cases):
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"],
                 fixed=0, gears=c["gears"][:len(rp)]),
             "comp_score": e.comp_score(c["party"]),
+            # the meta term's weight at this case's context (pool_delta_x x
+            # delta inside a pool with a prior of its own); the pick
+            # report's reconstruction reads it
+            "delta": e.delta,
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
             "size_bucket": e.size_bucket(),
@@ -611,7 +631,7 @@ def main():
             errs.append(f"refine_dressed: py={a['refine_dressed']} "
                         f"js={b.get('refine_dressed')}")
         for k in ("fitness", "synergy", "max_fitness", "max_fitness_party",
-                  "comp_score", "comp_score_locked", "fitness_locked",
+                  "comp_score", "delta", "comp_score_locked", "fitness_locked",
                   "synergy_locked", "redundancy", "fitness_build",
                   "comp_score_build"):
             if a[k] is None and b.get(k) is None:
@@ -724,10 +744,11 @@ def main():
                 # the decomposition must reconstruct the score EXACTLY —
                 # the report is the same math that ranked the pick, or the
                 # why-not panel is a second scoring system in disguise
-                # (the blend weights are dataset-global, any engine serves)
+                # (alpha, beta and viability are dataset-global; delta is the
+                # case engine's, pool_delta_x x delta inside a pool's prior)
                 w = data["scoring"]["weights"]
                 recon = (w["alpha"] * pa["d_fitness"] + w["beta"] * pa["d_synergy"]
-                         + w["delta"] * pa["meta_prior"]
+                         + a["delta"] * pa["meta_prior"]
                          + w.get("viability", 0.0) * pa["viability"]
                          - pa["dup_penalty"])
                 rowsum = sum(r["coverage"] + r["floor_lift"] - r["overstack_cost"]

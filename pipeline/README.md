@@ -506,8 +506,8 @@ a fold would lose the artifact its tables were derived from.
   `out/party_rosters_full.json.gz`, which stays local (gitignored: two
   thirds of the builds, past GitHub's 100 MiB file limit) and which
   `derive_usage.py` alone reads. Rerun order afterwards: audit -> derive_style_bands ->
-  derive_portal_rows -> derive_party_styles -> derive_meta_prior -> derive_role_counts ->
-  derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a
+  derive_portal_rows -> derive_party_styles -> derive_meta_prior -> derive_portal_prior ->
+  derive_role_counts -> derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a
   fight-size band (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
@@ -749,7 +749,7 @@ both agree. `build_dataset` validates the file (fail closed) and ships it as
 `style_bands`; the engine reads it after the content row for a declared
 style at 10+. Explicit step: `sample_parties` -> `audit_style_rosters` ->
 `derive_style_bands` -> `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` ->
-`derive_role_counts` -> `derive_skeletons` -> `build_dataset` -> gates.
+`derive_portal_prior` -> `derive_role_counts` -> `derive_skeletons` -> `build_dataset` -> gates.
 
 ## The generated seat skeleton, plan minima and copy allowances
 
@@ -828,7 +828,7 @@ derived from a different artifact than the one on disk, and refuses a
 hand-set map anywhere in the config (fail closed, loudly). The engine
 detects the bucketed shape by its keys and reads it through
 `size_bucket()` at roster size; the recommendation weight `delta` (0.15)
-is the only dial. The same script also writes `meta_pairs` (one killer
+is the only dial outside the portal pools (below). The same script also writes `meta_pairs` (one killer
 PARTY, one vote per distinct pair it fields; a row only across >= 3
 guild-sets and >= 5 parties; `s = clamp(log2 lift, 0, 3) / 3 x n / (n +
 8)`, lift <= 1 reads 0) and BOTH tables learn from `battle % 5 != 0` only
@@ -839,6 +839,27 @@ the roster (standing rule 7). Explicit step, never part of a normal build:
 
 ```text
 py -3 pipeline/derive_meta_prior.py
+```
+
+THE PORTAL POOLS' OWN PRIOR. Inside a Dragon Portal pool the size bucket
+describes open-world killer parties, not the pool's winners.
+`derive_portal_prior.py` derives the same two tables per matchmaking pool
+(2-3, 4-5, 6-7, the pools that carry a fielded list) on the pool's own
+evidence unit, the unit of `derive_portal_rows.py`: the dominant killer
+party of the pool's size in the Ancient Lands (no deaths, a kill, every
+weapon known and in the catalog), training split, a pool under the floor
+of 40 distinct rosters carrying none. Same constants and formulas as the
+bucket prior. It writes `out/portal_prior.json`; `build_dataset` attaches
+it as `scoring.meta_pools` (hash-gated to the artifact, refused when not
+derived on the training split or when a pool's sizes are not the sizes of
+the content's fielded list of the same key, a hand-set map refused).
+Both engine ports read a pool's tables in place of the size bucket's at a
+size inside the pool, weighted `weights.pool_delta_x` (8) x `delta`; the
+15-20 pool's prior waits with its fielded list for 200 rosters. The fold
+runs it after `derive_meta_prior`:
+
+```text
+py -3 pipeline/derive_portal_prior.py
 ```
 
 ## The typical role count
@@ -974,5 +995,5 @@ give the item a lean. `build_dataset` validates and ships it as
 and the class rule (leather -> brawl, cloth -> ranged) where an item has
 none. Descriptive only. Because the audit writes it, the post-harvest
 order is audit -> derive_style_bands -> derive_portal_rows ->
-derive_party_styles -> derive_meta_prior -> derive_role_counts -> derive_skeletons ->
-build_dataset -> gates.
+derive_party_styles -> derive_meta_prior -> derive_portal_prior -> derive_role_counts ->
+derive_skeletons -> build_dataset -> gates.

@@ -68,9 +68,11 @@ MAIN_FROSTSTAFF_KEEPER:        # Hoarfrost Staff
 ## Scoring dials — `tune:scoring`
 
 Empty: the engine runs on `templates/scoring.yaml` as committed (alpha 0.55 /
-beta 0.20 / delta 0.15 / gamma 0.70, rho, headroom, the synergy pairs). To
-override, uncomment and edit — dicts merge, scalars replace. `meta_prior` is
-GENERATED (`derive_meta_prior.py`); a hand-set map here fails the build.
+beta 0.20 / delta 0.15 / gamma 0.70, rho, headroom, the synergy pairs; inside
+a Dragon Portal pool with a prior of its own, pool_delta_x 8 x delta). To
+override, uncomment and edit — dicts merge, scalars replace. `meta_prior`,
+`meta_pairs` and `meta_pools` are GENERATED (`derive_meta_prior.py`,
+`derive_portal_prior.py`); a hand-set map here fails the build.
 
 ```yaml tune:scoring
 # weights:

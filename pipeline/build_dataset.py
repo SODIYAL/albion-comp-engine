@@ -2695,6 +2695,77 @@ def load_meta_prior(known_weapons):
     return out, pairs
 
 
+PORTAL_PRIOR_PATH = os.path.join(OUT, "portal_prior.json")
+
+
+def load_portal_prior(known_weapons, templates, path=PORTAL_PRIOR_PATH):
+    """The GENERATED prior of the Dragon Portal's matchmaking pools
+    (derive_portal_prior.py -> out/portal_prior.json): per pool its sizes
+    and the solo and pair tables of its own dominant winners. Returns
+    `scoring.meta_pools` = {content: {pool: {sizes, solo, pairs}}}; both
+    engine ports read a pool's tables in place of the size bucket's at a
+    size inside the pool, weighted weights.pool_delta_x x delta. Fail
+    closed, loudly, as load_meta_prior: a missing file, a file derived
+    from a different party_rosters.json.gz than the one on disk, a file not
+    derived on the training split, a content the templates do not carry, a
+    pool whose sizes are not the sizes of the content's fielded list of the
+    same key, overlapping pools, a value out of (0, 1] or an asymmetric
+    pair blocks the build. Rows for weapons the dataset does not carry are
+    dropped."""
+    name = "out/portal_prior.json" if path == PORTAL_PRIOR_PATH else path
+    if not os.path.exists(path):
+        sys.exit(f"{name} missing — the portal pools' prior is GENERATED from the "
+                 "committed harvest: run py -3 pipeline/derive_portal_prior.py")
+    with open(path, encoding="utf-8") as f:
+        doc = json.load(f) or {}
+    want = (doc.get("_source") or {}).get("party_rosters_sha256")
+    if want != rosters_io.sha256(rosters_io.path(OUT)):
+        sys.exit(f"{name} was derived from a different party_rosters.json.gz — "
+                 "rerun derive_portal_prior.py")
+    if (doc.get("_split") or {}).get("holdout_mod") != 5:
+        sys.exit(f"{name} was not derived on the training split (battle % 5 != 0) "
+                 "— rerun py -3 pipeline/derive_portal_prior.py")
+    content = doc.get("_content")
+    if content not in templates:
+        sys.exit(f"{name}: content {content!r} is not a template")
+    fielded = templates[content].get("pool_fielded") or {}
+    pools = doc.get("pools")
+    if not isinstance(pools, dict):
+        sys.exit(f"{name}: pools missing — rerun derive_portal_prior.py")
+    out, spans = {}, []
+    for pk, pool in sorted(pools.items()):
+        sz = pool.get("sizes")
+        if not (isinstance(sz, list) and len(sz) == 2 and all(type(x) is int for x in sz)
+                and 1 <= sz[0] <= sz[1] and pk == f"{sz[0]}-{sz[1]}"):
+            sys.exit(f"{name}: pool {pk}: sizes must be [lo, hi] named lo-hi, got {sz!r}")
+        if (fielded.get(pk) or {}).get("sizes") != sz:
+            sys.exit(f"{name}: pool {pk}: {content} carries no fielded list of these "
+                     "sizes (a pool's prior stands where its fielded list does)")
+        if any(lo <= sz[1] and sz[0] <= hi for lo, hi in spans):
+            sys.exit(f"{name}: pool {pk}: sizes {sz} overlap another pool")
+        spans.append((sz[0], sz[1]))
+        solo = {}
+        for w, v in sorted((pool.get("solo") or {}).items()):
+            v = float(v)
+            if not 0.0 < v <= 1.0:
+                sys.exit(f"{name}: pool {pk}: solo {w} = {v} out of (0, 1]")
+            if w in known_weapons:
+                solo[w] = v
+        rows, kept = pool.get("pairs") or {}, {}
+        for w, row in sorted(rows.items()):
+            for m, v in sorted((row or {}).items()):
+                v = float(v)
+                if not 0.0 < v <= 1.0 or m == w:
+                    sys.exit(f"{name}: pool {pk}: pair {w}|{m} = {v} out of (0, 1]")
+                if abs(float((rows.get(m) or {}).get(w, -1.0)) - v) > 1e-12:
+                    sys.exit(f"{name}: pool {pk}: pair {w}|{m} is not symmetric "
+                             "— rerun derive_portal_prior.py")
+                if w in known_weapons and m in known_weapons:
+                    kept.setdefault(w, {})[m] = v
+        out[pk] = {"sizes": list(sz), "solo": solo, "pairs": kept}
+    return {content: out} if out else {}
+
+
 ROLE_COUNTS_PATH = os.path.join(OUT, "role_counts.json")
 
 
@@ -3228,11 +3299,15 @@ def load_templates(tune=None):
     # The meta prior is GENERATED (H18: one harvest prior replaces both
     # hand lists) — a hand-set map in scoring.yaml or
     # MASTERSHEET tune:scoring is a build error, never silently merged.
-    if scoring.get("meta_prior") or scoring.get("meta_pairs"):
-        sys.exit("scoring.meta_prior / meta_pairs are GENERATED "
-                 "(pipeline/derive_meta_prior.py -> out/meta_prior.json); "
+    if scoring.get("meta_prior") or scoring.get("meta_pairs") or scoring.get("meta_pools"):
+        sys.exit("scoring.meta_prior / meta_pairs / meta_pools are GENERATED "
+                 "(pipeline/derive_meta_prior.py -> out/meta_prior.json, "
+                 "pipeline/derive_portal_prior.py -> out/portal_prior.json); "
                  "remove the hand-set map from templates/scoring.yaml or "
                  "MASTERSHEET.md tune:scoring")
+    pdx = (scoring.get("weights") or {}).get("pool_delta_x", 1.0)
+    if isinstance(pdx, bool) or not isinstance(pdx, (int, float)) or pdx <= 0:
+        sys.exit(f"scoring weights.pool_delta_x must be a positive number, got {pdx!r}")
     mechanics = mastersheet.deep_merge(mechanics, tune.get("mechanics", {}))
     for content, caps in (tune.get("templates") or {}).items():
         if content not in templates:
@@ -3374,6 +3449,16 @@ def main():
           + " weapon rows; pairs "
           + ", ".join(f"{bk} {sum(len(r) for r in rows.values()) // 2}"
                       for bk, rows in scoring["meta_pairs"].items()))
+    # the matchmaking pools' own prior (derive_portal_prior.py): read in
+    # place of the size bucket's inside a pool, at weights.pool_delta_x
+    scoring["meta_pools"] = load_portal_prior(set(weapons), templates)
+    print("  pool prior    : generated (out/portal_prior.json, training split), "
+          + "; ".join(f"{c} " + ", ".join(
+              f"{pk} {len(p['solo'])} weapons / "
+              f"{sum(len(r) for r in p['pairs'].values()) // 2} pairs"
+              for pk, p in pools.items())
+              for c, pools in scoring["meta_pools"].items())
+          + f"; weight {scoring['weights'].get('pool_delta_x', 1.0)} x delta")
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):

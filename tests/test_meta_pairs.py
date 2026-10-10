@@ -13,6 +13,13 @@ Part B — engine blend (engine/engine.py) on the committed dataset:
 meta_of is (1-lam)*solo + λ·best-partner, self-seat excluded, ≤ 1, and the
 pick score stays the EXACT comp_score delta with pair terms in play.
 
+Part C — the matchmaking pools' own prior (pipeline/derive_portal_prior.py,
+build_dataset.load_portal_prior, both engine ports through meta_pools):
+only dominant, fully known, in-catalog parties of a pool's sizes on the
+training split vote, one player one vote, the floor holds, and the build
+refuses an all-battles, mismatched or misplaced file; inside a pool the
+pick score stays the exact comp_score delta at the pool's weight.
+
 Run:  py -3 tests/test_meta_pairs.py
 """
 import math
@@ -160,9 +167,112 @@ def part_b():
           "")
 
 
+def portal_doc():
+    """Training battles: six dominant trios fielding A+B+C and six fielding
+    M+N+O, each set across three guilds; one trio with a death (D+E+F),
+    one trio on a holdout battle (G+H+I), one fielding a weapon outside
+    the catalog (J+K+Z), one dominant eight (L x8). Player P1 plays A in
+    two battles."""
+    ps, builds, bid = [], [], 1
+
+    def add(battle, weapons, guild, deaths=0, kills=2, players=None):
+        ps.append({"battle": battle, "index": 0, "size": len(weapons),
+                   "known_weapons": len(weapons), "weapons": list(weapons),
+                   "guilds": [guild], "deaths": deaths, "kills": kills})
+        for i, w in enumerate(weapons):
+            pl = (players or {}).get(i) or f"{battle}-{i}"
+            builds.append({"battle": battle, "party": 0, "player": pl, "weapon": w})
+
+    def nxt():
+        nonlocal bid
+        bid += 1
+        while bid % 5 == 0:
+            bid += 1
+        return bid
+    for j, g in enumerate(("G1", "G2", "G3", "G1", "G2", "G3")):
+        add(nxt(), ["A", "B", "C"], g, players={0: "P1"} if j < 2 else None)
+        add(nxt(), ["M", "N", "O"], g)
+    add(nxt(), ["D", "E", "F"], "G1", deaths=1)
+    add(10, ["G", "H", "I"], "G2")
+    add(nxt(), ["J", "K", "Z"], "G3")
+    add(nxt(), ["L"] * 8, "G1")
+    return {"parties": ps, "builds": builds}
+
+
+def part_c():
+    import json
+    import tempfile
+    import derive_portal_prior as dpp
+    catalog = set("ABCDEFGHIJKLMNO")
+    out = dpp.derive(portal_doc(), catalog, floor=1)
+    pool = out["pools"].get("2-3") or {}
+    solo = pool.get("solo") or {}
+    check("C1 the pool prior records the training split and its content",
+          out["_split"] == {"holdout_mod": 5,
+                            "rule": "battle % 5 != 0 (training split; % 5 == 0 is the v4h holdout)"}
+          and out["_content"] == "ancient_lands", str(out.get("_split")))
+    check("C2 only dominant, fully known, in-catalog parties of the pool on the "
+          "training split vote (a death, a holdout battle, a weapon outside the "
+          "catalog, a size outside every pool cast none)",
+          set(solo) == set("ABCMNO") and sorted(out["pools"]) == ["2-3"], str(sorted(solo)))
+    check("C3 one player, one vote: P1 on A in two battles counts once",
+          pool["players"]["A"] == 5 and pool["players"]["B"] == 6, str(pool.get("players")))
+    check("C4 the pool's top weapon reads 1.0", max(solo.values()) == 1.0, str(solo))
+    lift = 6 * 12 / (6 * 6)
+    want = round(min(math.log2(lift), 3.0) / 3.0 * 6 / (6 + 8.0), 3)
+    pairs = pool.get("pairs") or {}
+    check("C5 pairs: one party one vote, symmetric, the meta prior's formula",
+          pairs.get("A", {}).get("B") == want == pairs.get("B", {}).get("A")
+          and "M" not in pairs.get("A", {}), f"{pairs.get('A')} vs {want}")
+    check("C6 a pool under the floor of distinct rosters carries no prior",
+          dpp.derive(portal_doc(), catalog)["pools"] == {}, "")
+    import build_dataset as bd
+    import rosters_io
+    sha = rosters_io.sha256(rosters_io.path(bd.OUT))
+    tpl = {"ancient_lands": {"pool_fielded": {"2-3": {"sizes": [2, 3], "weapons": []}}}}
+
+    def load(doc):
+        fd, path = tempfile.mkstemp(suffix=".json")
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(doc, f)
+        try:
+            return bd.load_portal_prior(catalog, tpl, path)
+        except SystemExit:
+            return "refused"
+        finally:
+            os.unlink(path)
+    good = dict(out, _source={"party_rosters_sha256": sha})
+    got = load(good)
+    check("C7 the build attaches a pool's sizes, solo and pairs under its content",
+          got != "refused" and got["ancient_lands"]["2-3"]["solo"] == solo
+          and got["ancient_lands"]["2-3"]["pairs"] == pairs, str(got)[:120])
+    check("C8 the build refuses an all-battles file, a file of another artifact "
+          "and a pool with no fielded list of its sizes",
+          load(dict(good, _split={"holdout_mod": None})) == "refused"
+          and load(dict(out, _source={"party_rosters_sha256": "0" * 64})) == "refused"
+          and load(dict(good, pools={"6-7": dict(pool, sizes=[6, 7])})) == "refused", "")
+    from engine import Engine
+    e = Engine(content="ancient_lands", size=5)
+    p5 = e.prior_pool
+    if p5 is None:
+        check("C9 the portal's 4-5 pool reads a prior of its own", False, "no pool prior at 5")
+        return
+    w, m, s = max(((a, b, v) for a, row in p5["pairs"].items() for b, v in row.items()
+                   if a in e.weapons and b in e.weapons), key=lambda t: (t[2], t[0], t[1]))
+    rep = e.pick_report([m], w)
+    check("C9 inside a pool the pick score is the exact comp_score delta at the "
+          "pool's weight, its own best pair in play",
+          abs(e.delta - e._delta_base * e.pool_delta_x) < 1e-12 and rep["meta_pair"] == s
+          and abs(rep["score"] - (e.comp_score([m, w], [None, rep["combo"]],
+                                               [None, rep["kit"] or None])
+                                  - e.comp_score([m], [None]))) < 1e-9,
+          f"{w}+{m} s={s} meta_pair={rep['meta_pair']}")
+
+
 def run():
     part_a()
     part_b()
+    part_c()
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, det in results:

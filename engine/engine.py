@@ -153,6 +153,16 @@ class Engine:
         # {bucket: {weapon: {partner: s}}}, symmetric, GENERATED with the
         # solo prior; read only through _pair_of at roster size.
         self.meta_pairs = self.scoring.get("meta_pairs", {}) or {}
+        # MATCHMAKING POOL PRIOR (derive_portal_prior.py -> meta_pools,
+        # {content: {pool: {sizes, solo, pairs}}}, GENERATED from each
+        # pool's dominant winners on the training split): at a size inside
+        # a pool of the content the meta term reads the pool's own solo and
+        # pair tables in place of the size bucket's, weighted
+        # weights.pool_delta_x x delta (set_content; tests/VALIDATION.md,
+        # The Dragon Portal pools read their own prior). Absent = none.
+        self.meta_pools = self.scoring.get("meta_pools", {}) or {}
+        self.pool_delta_x = w.get("pool_delta_x", 1.0)
+        self._delta_base = self.delta
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
@@ -310,6 +320,11 @@ class Engine:
         self.template = self.data["templates"][content]
         self.content = content
         self.size = size
+        # the pool's own prior and its weight (see __init__); outside every
+        # pool that carries one the size bucket's prior stands at delta
+        self.prior_pool = self._prior_pool(content, size)
+        self.delta = (self._delta_base * self.pool_delta_x
+                      if self.prior_pool is not None else self._delta_base)
         self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
         self.base_size = self.template.get("base_size", size)
         # DEMAND RAMP (first for anti_zone: not needed at 10-14, a need that
@@ -2745,12 +2760,31 @@ class Engine:
         return total
 
     # ----------------------------------------------------------------- priors
+    def _prior_pool(self, content, size):
+        """The matchmaking pool of `content` covering `size` that carries a
+        prior of its own (meta_pools), with its key; None without."""
+        for key, row in (self.meta_pools.get(content) or {}).items():
+            lo, hi = row["sizes"]
+            if lo <= size <= hi:
+                return dict(row, key=key)
+        return None
+
     def _solo_of(self, weapon):
         """The weapon's own share of killer parties at the current size.
-        Flat map -> direct lookup; size-bucketed map -> size_bucket()."""
+        Inside a pool with a prior of its own -> the pool's solo table;
+        else flat map -> direct lookup; size-bucketed map -> size_bucket()."""
+        if self.prior_pool is not None:
+            return self.prior_pool["solo"].get(weapon, 0.0)
         if not self.meta_bucketed:
             return self.meta_prior.get(weapon, 0.0)
         return (self.meta_prior.get(self.size_bucket()) or {}).get(weapon, 0.0)
+
+    def _pair_table(self):
+        """{weapon: {partner: s}} at the current context: the pool's own
+        table inside a pool with a prior, else the size bucket's."""
+        if self.prior_pool is not None:
+            return self.prior_pool["pairs"]
+        return self.meta_pairs.get(self.size_bucket()) or {}
 
     def _pair_of(self, weapon, party, skip=None):
         """Best observed partner of `weapon` among the other seats of
@@ -2760,7 +2794,7 @@ class Engine:
         explanation is deterministic across the twins."""
         if not party or not self.meta_pair_w:
             return 0.0, None
-        rows = (self.meta_pairs.get(self.size_bucket()) or {}).get(weapon)
+        rows = self._pair_table().get(weapon)
         if not rows:
             return 0.0, None
         best, who = 0.0, None
@@ -3121,7 +3155,7 @@ class Engine:
         meta = self.meta_of(weapon, party)
         lam = self.meta_pair_w
         if lam and party:
-            rows = self.meta_pairs.get(self.size_bucket()) or {}
+            rows = self._pair_table()
             pmax = state["pair_max"]
             for i, m in enumerate(party):
                 s = (rows.get(m) or {}).get(weapon, 0.0)
