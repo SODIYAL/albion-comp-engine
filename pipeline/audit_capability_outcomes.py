@@ -459,7 +459,8 @@ def main():
                          "(default out/party_cache.sqlite; absent = uncontrolled)")
     args = ap.parse_args()
     if not rosters_io.exists():
-        sys.exit("out/party_rosters.json.gz missing — run the harvest fold")
+        sys.exit("the rosters fold copy is missing — seal a fold (rosters_io.py seal) "
+                 "or restore it from the harvest backup")
     doc = rosters_io.load()
     if not any("kills" in p for p in doc.get("parties", [])):
         sys.exit("the party artifact carries no outcome fields (kills / "

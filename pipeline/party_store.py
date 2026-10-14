@@ -146,6 +146,21 @@ class Store:
     def commit(self):
         self.db.commit()
 
+    def backup(self, dest):
+        """A consistent copy of the whole store at `dest` (SQLite's online
+        backup: the poll may write while it runs; the copy is one
+        snapshot). Written beside `dest` and renamed into place, so an
+        interrupted copy never replaces a good one."""
+        tmp = dest + ".tmp"
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        out = sqlite3.connect(tmp)
+        try:
+            self.db.backup(out)
+        finally:
+            out.close()
+        os.replace(tmp, dest)
+
     def close(self):
         self.db.close()
 

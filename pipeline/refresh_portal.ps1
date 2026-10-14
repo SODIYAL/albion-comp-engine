@@ -7,12 +7,12 @@
 #   powershell -NoProfile -ExecutionPolicy Bypass -File pipeline/refresh_portal.ps1
 #
 # Then commit ONLY pipeline/out/portal_stats.json, dashboard/portal.html
-# and docs/portal.html. The rewritten rosters artifact stays uncommitted:
-# the prior, bands, skeletons and portal rows are derived from it together
-# in the weekly fold (fold_harvest.ps1), and build_dataset refuses a
-# rosters artifact the committed prior was not derived from. The portal
+# and docs/portal.html. The portal stats read the harvest's working copy
+# of the rosters artifact; the fold copy and the fold's record move only
+# at the weekly fold (fold_harvest.ps1), where the prior, bands,
+# skeletons and portal rows are derived from one sealed copy. The portal
 # page sits outside the provenance chain (test_portal_stats P8-P11), so
-# its artifact may run ahead of the rosters between folds.
+# its artifact may run ahead of the fold between folds.
 #
 # Logs: pipeline/out/fetch_logs/portal-<date>.log.
 
@@ -53,4 +53,4 @@ Step "test_dashboard_layout" "py" @("-3", "-u", "tests/test_dashboard_layout.py"
 "=== portal refresh complete $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append
 Write-Host ""
 Write-Host "Green. Commit pipeline/out/portal_stats.json, dashboard/portal.html and"
-Write-Host "docs/portal.html; leave pipeline/out/party_rosters.json.gz for the fold."
+Write-Host "docs/portal.html."

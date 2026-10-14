@@ -685,7 +685,7 @@ if __name__ == "__main__":
                    help="harvested parties stand at the forged sizes from min-size to max-size")
     g.add_argument("--max-size", type=int, default=20)
     g.add_argument("--rosters", default=None,
-                   help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
+                   help="the roster artifact (default: the fold copy, pipeline/out/party_rosters.fold.json.gz)")
     s = sub.add_parser("score")
     s.set_defaults(fn=score)
     s.add_argument("form")

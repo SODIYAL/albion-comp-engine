@@ -9,7 +9,7 @@ killboard sightings, or community submissions never automatically become
 |---|---|---|
 | game facts | `source_pins.yaml` + `pipeline/out/` | items/spells/ranges from ONE pinned ao-bin-dumps commit, manifest-verified |
 | published builds | `published_comps/`, `published_builds/` | what named sources actually published, verbatim + provenance |
-| loadout observations | `pipeline/out/weapon_usage_v2.json`, `pipeline/out/party_rosters.json.gz` (killer parties with full gear, nightly harvest), companion imports | what players were SEEN wearing — prevalence and kit doctrine evidence, never advice |
+| loadout observations | `pipeline/out/weapon_usage_v2.json`, the rosters artifact (killer parties with full gear, twice-daily harvest; local, its hash in `pipeline/out/rosters_fold.json`; the kit doctrine it yields in `pipeline/out/kit_evidence.json`), companion imports | what players were SEEN wearing — prevalence and kit doctrine evidence, never advice |
 | canonical builds | `canonical_builds/` + generated flags in `builds_index.json` | human-reviewed defaults that cleared the promotion gate below |
 
 Generated views: `pipeline/build_builds.py` normalizes everything here into

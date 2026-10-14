@@ -152,6 +152,37 @@ with open(ds_path, "rb") as f:
     second = f.read()
 check("H2 build_dataset regenerates byte-identically", first == second)
 
+# ---- H.21 the harvest phase replays without the fold copy --------------------
+# A clone or CI holds no raw killer-party records (rosters_io, LOCAL FILES,
+# ONE COMMITTED RECORD): the build replays out/kit_evidence.json, and only
+# under the fingerprint of the inputs it was derived from.
+no_fold = dict(os.environ, BION_NO_FOLD_COPY="1")
+proc = subprocess.run([sys.executable, os.path.join(PIPELINE, "build_dataset.py")],
+                      capture_output=True, text=True, env=no_fold)
+with open(ds_path, "rb") as f:
+    replayed = f.read()
+check("H21 a build without the fold copy replays out/kit_evidence.json and "
+      "writes the same dataset",
+      proc.returncode == 0 and "replayed out/kit_evidence.json" in proc.stdout
+      and replayed == second, f"exit={proc.returncode}")
+ev_path = os.path.join(OUT, "kit_evidence.json")
+ev_backup = ev_path + ".test_backup"
+shutil.copyfile(ev_path, ev_backup)
+try:
+    ev = load_json(ev_path)
+    ev["_source"]["inputs_sha256"] = "0" * 64
+    with open(ev_path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(ev, f, separators=(",", ":"))
+    proc = subprocess.run([sys.executable, os.path.join(PIPELINE, "build_dataset.py")],
+                          capture_output=True, text=True, env=no_fold)
+    check("H21b a kit evidence derived from other inputs blocks the build",
+          proc.returncode != 0
+          and "derived from other inputs" in proc.stdout + proc.stderr,
+          f"exit={proc.returncode}")
+finally:
+    shutil.copyfile(ev_backup, ev_path)
+    os.remove(ev_backup)
+
 bi_path = os.path.join(OUT, "builds_index.json")
 with open(bi_path, "rb") as f:
     first = f.read()

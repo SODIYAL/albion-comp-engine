@@ -975,7 +975,8 @@ def main():
                     help="the stamp on the board and the form")
     args = ap.parse_args()
 
-    rosters_path = os.path.join(OUT, "party_rosters.json.gz")
+    import rosters_io
+    rosters_path = rosters_io.path(OUT)   # the fold copy the derived tables read
     styles_path = os.path.join(OUT, "party_styles.json")
     t0 = time.time()
     ev, source = load_evidence(args.out, rosters_path, styles_path, args.rebuild_evidence)

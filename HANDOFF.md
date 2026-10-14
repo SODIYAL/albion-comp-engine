@@ -495,6 +495,14 @@ Gates for the page: `tests/test_dashboard_layout.py` (L1–L19),
   spells and gear actives/passives are both indexed).
 - Generated artifacts are provenance-checked; the release fails closed on
   mismatch. Every writer of a committed artifact opens with `newline="\n"`.
+- The raw killer-party records stay on the harvest machine: the fold seals
+  a local copy and commits its record (`out/rosters_fold.json`), every
+  derived table is checked against that record, and the build's harvest
+  phase (kit doctrine, item-power cut, effect and carrier quotas) is
+  committed as `out/kit_evidence.json`, which a build without the local
+  copy (CI) replays under its input fingerprint (`pipeline/README.md`,
+  LOCAL ARTIFACTS, ONE COMMITTED RECORD). The harvest backup
+  (`pipeline/backup_harvest.py`) keeps them off the disk.
 - Reference build records carry source / provenance / confidence; quarantined
   records never become defaults; `unknown` stays `unknown`. Record conventions
   (source kinds, statuses, the promotion gate): `data/README.md`.

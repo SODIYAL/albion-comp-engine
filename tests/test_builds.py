@@ -355,7 +355,7 @@ check("H16 the evidence gate ran (exclusion_gate list present, currently "
 # ---- H.18 the meta prior is GENERATED from the harvest, never hand-set ----------
 # Rule (T46/H18): one harvest prior replaces both hand lists —
 # scoring.meta_prior is the size-bucketed map derive_meta_prior.py
-# wrote from the COMMITTED party_rosters.json.gz (hash-gated), scoring.yaml and
+# wrote from the fold copy the fold's record names (hash-gated), scoring.yaml and
 # MASTERSHEET carry no hand-set map, composition.yaml's viability core list is
 # empty, and the dataset embeds the aggregate only — never raw observations.
 import hashlib as _hl
@@ -366,9 +366,9 @@ prior_doc = load_json(os.path.join(OUT, "meta_prior.json"))
 mp = sc.get("meta_prior") or {}
 sys.path.insert(0, PIPELINE)
 import rosters_io  # noqa: E402
-_rosters_sha = rosters_io.sha256(rosters_io.path(OUT))
+_rosters_sha = rosters_io.fold_sha256(OUT)   # the fold's record (out/rosters_fold.json)
 check("H18 the scoring meta prior is the GENERATED bucketed harvest prior "
-      "(out/meta_prior.json, hash-gated to the committed party_rosters.json.gz); "
+      "(out/meta_prior.json, hash-gated to the fold's record, out/rosters_fold.json); "
       "scoring.yaml carries no hand-set map; every value in (0, 1] with the "
       "bucket's top weapon at 1.0",
       set(mp) == {"small", "mid", "large"}
@@ -382,7 +382,7 @@ check("H18 the scoring meta prior is the GENERATED bucketed harvest prior "
 portal_doc = load_json(os.path.join(OUT, "portal_prior.json"))
 mpools = (sc.get("meta_pools") or {}).get("ancient_lands") or {}
 check("H18c the Dragon Portal pools' prior is GENERATED (out/portal_prior.json, "
-      "hash-gated to the committed party_rosters.json.gz, training split): the "
+      "hash-gated to the fold's record, training split): the "
       "dataset carries the 2-3, 4-5 and 6-7 pools' solo and pair tables as "
       "derived, scoring.yaml no hand-set map",
       sorted(mpools) == ["2-3", "4-5", "6-7"]

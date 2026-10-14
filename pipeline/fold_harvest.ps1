@@ -15,10 +15,14 @@
 # churn, a weekly one is a meaningful step - VALIDATION.md).
 #
 # The fold is OFFLINE: every step reads the cache or an artifact derived
-# from it. The observed-evidence artifact (weapon_usage_v2.json: the
-# prevalence strip, the killer-party cohorts and the observed families)
-# is derived from the full rosters artifact (party_rosters_full.json.gz,
-# every population, local) by derive_usage.py, after
+# from it. The seal step copies the working rosters artifacts to the fold
+# copies every later step reads and writes the fold's record
+# (out/rosters_fold.json, committed); the artifacts themselves stay local
+# (rosters_io, LOCAL FILES, ONE COMMITTED RECORD) and the last step copies
+# them and the cache to the harvest backup (backup_harvest.py). The
+# observed-evidence artifact (weapon_usage_v2.json: the prevalence strip,
+# the killer-party cohorts and the observed families) is derived from the
+# full fold copy (every population) by derive_usage.py, after
 # build_dataset (weapon keys are filtered against the catalogue). Display
 # only, never a scoring input.
 
@@ -51,6 +55,7 @@ function Step($label, $exe, $argv) {
 
 # 1. the chain, in the documented order (CLAUDE.md "After a harvest")
 Step "rosters from cache"     "py" @("-3", "-u", "pipeline/sample_parties.py", "--pages", "0")
+Step "seal the fold"          "py" @("-3", "-u", "pipeline/rosters_io.py", "seal")
 Step "audit_style_rosters"    "py" @("-3", "-u", "pipeline/audit_style_rosters.py")
 Step "derive_style_bands"     "py" @("-3", "-u", "pipeline/derive_style_bands.py")
 Step "derive_portal_rows"     "py" @("-3", "-u", "pipeline/derive_portal_rows.py", "--apply")
@@ -94,7 +99,12 @@ Step "test_portal_page"       "node" @("tests/test_portal_page.js")
 # 3. the before/after report against the previous fold (HEAD)
 Step "compare_fold"           "py" @("-3", "-u", "pipeline/compare_fold.py")
 
+# 4. the raw records off this disk (pipeline/harvest_backup.json names the folder)
+Step "harvest backup"         "py" @("-3", "-u", "pipeline/backup_harvest.py")
+
 "=== fold complete $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append
 Write-Host ""
 Write-Host "All steps green. Review notes/findings/$stamp-fold-report.md, then commit"
-Write-Host "the artifacts (git status) with the report; nothing has been committed."
+Write-Host "the artifacts (git status) with the report, out/rosters_fold.json and"
+Write-Host "out/kit_evidence.json among them; the rosters artifacts stay local (gitignored)."
+Write-Host "Nothing has been committed."

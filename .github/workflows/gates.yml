@@ -2,8 +2,12 @@
 # and pull request. No gate reads network data: the pinned snapshot and
 # every generated artifact are committed, so the build chain verifies them
 # (test_provenance rebuilds the dataset and checks it byte-identical). The
-# network is used only to install pinned tooling (pip, and PGlite for the
-# account database test).
+# raw killer-party records stay on the harvest machine (rosters_io): the
+# build replays out/kit_evidence.json under the fold's record, the checks
+# that read raw records print SKIP here (the CI variable), and the
+# harvest-machine steps (the derive steps, build_portal_stats) are not
+# run. The network is used only to install pinned tooling (pip, and PGlite
+# for the account database test).
 name: gates
 
 on:
@@ -39,7 +43,6 @@ jobs:
           python3 pipeline/build_builds.py
           python3 pipeline/build_dataset.py
           python3 pipeline/build_cohort_families.py
-          python3 pipeline/build_portal_stats.py
           python3 dashboard/build.py
 
       - name: engine and evidence gates

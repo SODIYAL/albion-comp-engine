@@ -35,10 +35,18 @@ pipeline/out/dumps_cache/
 pipeline/out/fetch_logs/
 # the plain artifact is history: the harvest writes party_rosters.json.gz (2026-09-11)
 pipeline/out/party_rosters.json
-# the full killer-party artifact (every population, the kill-feed poll's
-# open-world fights included) is derived from the cache and stays local;
-# the committed party_rosters.json.gz keeps what the build reads
+# the killer-party artifacts are derived from the cache and stay local
+# (rosters_io, LOCAL FILES, ONE COMMITTED RECORD): the harvest's working
+# copies, the fold's sealed copies and the previous fold's copy; the
+# fold's record, out/rosters_fold.json, is committed
+pipeline/out/party_rosters.json.gz
 pipeline/out/party_rosters_full.json.gz
+pipeline/out/party_rosters.fold.json.gz
+pipeline/out/party_rosters_full.fold.json.gz
+pipeline/out/party_rosters.fold-prev.json.gz
+pipeline/out/party_rosters*.tmp
+# the harvest backup's target folder (backup_harvest.py), one per machine
+pipeline/harvest_backup.json
 
 # derive_meta_prior.py --all-battles audit copy (never shipped)
 pipeline/out/meta_prior-all-battles.json

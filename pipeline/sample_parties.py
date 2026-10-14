@@ -102,10 +102,11 @@ the battle-list records only; a derive step that wants the poll's
 records asks for them by `source` and `content`. The shipped tables
 therefore keep the population they were fitted on until a decision
 admits another (BACKLOG, the Dragon Portal evidence unit). The
-committed artifact keeps the battle list and the Dragon Portal records
-(`rosters_io.committed`); every record, the poll's open-world ganks
-included, is in the full artifact beside it, which stays local
-(rosters_io, TWO FILES, ONE PASS).
+build artifact keeps the battle list and the Dragon Portal records
+(`rosters_io.build_population`); every record, the poll's open-world
+ganks included, is in the full artifact beside it. Both stay local; the
+fold seals them and commits its record (rosters_io, TWO FILES, ONE PASS;
+LOCAL FILES, ONE COMMITTED RECORD).
 
 STORAGE. A kill-feed record keeps its events SLIMMED (`slim_event`: ids,
 stamps, the classifier fields, every combat role's name / guild /
@@ -895,17 +896,17 @@ def analyze(known):
                 "gear": {s: strip(v) for s, v in g.items() if v}})
     st.close()
     # TWO FILES, ONE PASS (rosters_io): the full artifact keeps every
-    # record and stays local; the committed one keeps the battle list and
-    # the Dragon Portal, the populations the build reads. Each carries its
-    # own summary and armour table.
+    # record; the build one keeps the battle list and the Dragon Portal,
+    # the populations the build reads. Each carries its own summary and
+    # armour table. Both are working copies the fold seals.
     full = rosters_doc(battles, parties, builds, "full")
-    keep = {b["battle"] for b in battles if rosters_io.committed(b)}
+    keep = {b["battle"] for b in battles if rosters_io.build_population(b)}
     out = rosters_doc([b for b in battles if b["battle"] in keep],
                       [p for p in parties if p["battle"] in keep],
                       [bd for bd in builds if bd["battle"] in keep],
-                      "committed")
+                      "build")
     rosters_io.dump(full, rosters_io.full_path(OUT))
-    rosters_io.dump(out, rosters_io.path(OUT))      # gzipped, deterministic
+    rosters_io.dump(out, rosters_io.working_path(OUT))   # gzipped, deterministic
     s = out["summary"]
     print(f"\n{s['battles']} battles, {s['parties']} distinct parties "
           f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "
@@ -916,15 +917,16 @@ def analyze(known):
           f"{s['weapons_with_armour_evidence']} weapons")
     print(f"wrote out/{rosters_io.NAME} (the battle list and the Dragon "
           f"Portal) and out/{rosters_io.FULL_NAME} "
-          f"({full['summary']['battles']} battles, every record; local)")
+          f"({full['summary']['battles']} battles, every record); the fold "
+          f"seals both (rosters_io.py seal)")
 
 
 POPULATIONS = {
-    "committed": ("every battle-list battle and every ancient_lands battle "
-                  "(rosters_io.committed), parties and builds following their "
-                  "battle; out/party_rosters_full.json.gz, local, keeps every "
-                  "record"),
-    "full": "every record in the cache; local, never committed",
+    "build": ("every battle-list battle and every ancient_lands battle "
+              "(rosters_io.build_population), parties and builds following "
+              "their battle; out/party_rosters_full.json.gz keeps every "
+              "record"),
+    "full": "every record in the cache",
 }
 
 

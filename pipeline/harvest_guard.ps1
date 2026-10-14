@@ -1,8 +1,9 @@
 # The harvest guard, dot-sourced by fold_harvest.ps1 and refresh_portal.ps1.
-# A harvest pass ends by rewriting pipeline/out/party_rosters.json.gz from
-# the cache, so a fold or a portal refresh begun while a harvest runs can
-# have its rosters artifact replaced under it: the derived tables then
-# record a hash no file has and build_dataset refuses the tree. A harvest
+# A harvest pass ends by rewriting the working rosters artifacts
+# (pipeline/out/party_rosters.json.gz and the full one) from the cache, so
+# a fold or a portal refresh begun while a harvest runs writes the same
+# files at the same time, and the fold's seal could copy a half-written
+# one. Once sealed, the fold reads its own copy (rosters_io). A harvest
 # is running when a "CompForge ... harvest" scheduled task is Running, or
 # when a process runs harvest_overnight.ps1 or a sample_parties.py harvest
 # pass (--battles). The kill-feed poll (--poll-events) writes the cache

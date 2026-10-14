@@ -298,15 +298,6 @@ Each is decidable today from evidence already in the repo.
   time-on-target term. Optional. (roles-design.md)
 - **Harvest targeting**: focused nights at 10-14 and 20+ (`-MinPlayers` /
   `-MaxPlayers`) once the bands need them; a mechanism for choosing which.
-- **The committed rosters artifact grows about 1 MB a day**: it keeps the
-  battle list and the Dragon Portal, what the build reads (29.0 MB gzipped
-  at 69,958 battles; the kill-feed poll's other records live in
-  the local `party_rosters_full.json.gz`; V: 10, The committed rosters
-  artifact keeps what the build reads), so GitHub's 100 MiB file limit
-  returns in about two months. The permanent fix: every table the build
-  reads (the kit doctrine included) derived at the fold and committed, the
-  raw records local beside the cache, the derived tables' provenance read
-  off the fold's record.
 - **The outcome layer, after the party-level read**:
   `pipeline/audit_capability_outcomes.py` (report-only) labels win (kills
   >= 2 x deaths) / loss (kills < deaths) on the harvest's killer parties,

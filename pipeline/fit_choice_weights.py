@@ -554,7 +554,7 @@ def main():
     ex.add_argument("--min-size", type=int, default=10)
     ex.add_argument("--max-size", type=int, default=20)
     ex.add_argument("--workers", type=int, default=max(2, (os.cpu_count() or 2) - 1))
-    ex.add_argument("--rosters", default=None, help="the roster artifact to read (default: pipeline/out/party_rosters.json.gz)")
+    ex.add_argument("--rosters", default=None, help="the roster artifact to read (default: the fold copy, pipeline/out/party_rosters.fold.json.gz)")
     ex.add_argument("--harvest-source", default="battle_list", choices=["battle_list", "all"],
                     help="which harvest population to read (all = the kill-feed poll's records too)")
     ex.add_argument("--harvest-content", default=None,

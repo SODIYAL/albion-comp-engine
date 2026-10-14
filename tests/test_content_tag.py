@@ -109,7 +109,7 @@ check("C4c the record carries both tallies and the tag reads the marker, never t
       and sp.content_tag(r1["kill_areas"], r1["content_marks"]) == "ancient_lands"
       and sp.content_tag({"OPEN_WORLD": 1}, {"ancient_lands:QUESTITEM_TOKEN_DRAGONS": 1}) == "open_world")
 
-# C5 the committed artifact keeps what the build reads; every record stays in the full one
+# C5 the build artifact keeps what the build reads; every record stays in the full one; both stay local
 def battle(bid, source, content, total):
     return {"battle": bid, "total_players": total, "source": source, "content": content,
             "coverage": None, "parties": 1}
@@ -121,14 +121,14 @@ PARTIES = [{"battle": b["battle"], "index": 0, "content": b["content"], "size": 
             "known_weapons": 2, "weapons": ["2H_BOW", "2H_HOLYSTAFF"]} for b in BATTLES]
 BUILDS = [{"battle": b["battle"], "weapon": "2H_BOW", "armour_class": ac, "item_power": 1200.0,
            "slots_filled": 6} for b, ac in zip(BATTLES, ("leather", "cloth", "leather", "plate"))]
-check("C5a the committed population is every battle-list battle and every Dragon Portal battle; "
+check("C5a the build population is every battle-list battle and every Dragon Portal battle; "
       "a record from before the fields existed reads battle-list",
-      [b["battle"] for b in BATTLES if rosters_io.committed(b)] == [1, 3, 4]
-      and rosters_io.committed({"battle": 9}))
-keep = {b["battle"] for b in BATTLES if rosters_io.committed(b)}
+      [b["battle"] for b in BATTLES if rosters_io.build_population(b)] == [1, 3, 4]
+      and rosters_io.build_population({"battle": 9}))
+keep = {b["battle"] for b in BATTLES if rosters_io.build_population(b)}
 full = sp.rosters_doc(BATTLES, PARTIES, BUILDS, "full")
 kept = sp.rosters_doc([b for b in BATTLES if b["battle"] in keep], [p for p in PARTIES if p["battle"] in keep],
-                      [x for x in BUILDS if x["battle"] in keep], "committed")
+                      [x for x in BUILDS if x["battle"] in keep], "build")
 check("C5b each file carries its own records, summary and armour table: the poll's open-world gank is in the full one alone",
       full["summary"]["battles"] == 4 and kept["summary"]["battles"] == 3
       and kept["summary"]["builds"] == 3 and {p["battle"] for p in kept["parties"]} == keep
@@ -139,10 +139,12 @@ with open(os.path.join(ROOT, ".gitignore"), encoding="utf-8") as f:
     ignored = {ln.strip() for ln in f if ln.strip() and not ln.startswith("#")}
 with open(os.path.join(ROOT, "pipeline", "derive_usage.py"), encoding="utf-8") as f:
     usage_src = f.read()
-check("C5c the full artifact stays local and feeds the usage derivation: .gitignore lists it and never the "
-      "committed one, and derive_usage reads it by default",
-      "pipeline/out/" + rosters_io.FULL_NAME in ignored and "pipeline/out/" + rosters_io.NAME not in ignored
-      and "rosters_io.full_path()" in usage_src)
+check("C5c every rosters artifact stays local (.gitignore lists the working, fold and previous copies of both), "
+      "the fold's record is committed, and derive_usage reads the full fold copy by default",
+      all("pipeline/out/" + n in ignored for n in (rosters_io.NAME, rosters_io.FULL_NAME, rosters_io.FOLD_NAME,
+                                                  rosters_io.FULL_FOLD_NAME, rosters_io.PREV_NAME))
+      and "pipeline/out/" + rosters_io.RECORD_NAME not in ignored
+      and "rosters_io.full_fold_path()" in usage_src)
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")

@@ -23,7 +23,7 @@ AND the evidence lint passes.
 
 Usage:  python3 build_dataset.py [--version 2026.08.1]
 """
-import json, os, glob, argparse, math, re, subprocess, sys
+import json, os, glob, argparse, hashlib, math, re, subprocess, sys
 
 try:
     import yaml
@@ -1730,6 +1730,220 @@ def _load_rosters(path):
     return _ROSTERS[path]
 
 
+# THE HARVEST PHASE (rosters_io, LOCAL FILES, ONE COMMITTED RECORD): the
+# one part of the build that reads raw killer-party records - the
+# item-power cut, the seven kit-doctrine passes, the effect quotas and the
+# carrier quotas. With the fold copy on disk the phase runs and its whole
+# effect is written to out/kit_evidence.json (committed): what it changed
+# on the role book and the gear catalogue, the problems it raised and the
+# tables it returned, under the fingerprint of everything else it read
+# (the book, the gear, the overrides, the effect map, the party styles,
+# the catalogue's weapon keys, builds_index.json and the phase's own
+# code). Without the fold copy (a clone, CI) the build replays that file
+# when its fingerprint and rosters hash match, and stops otherwise: the
+# build never reads a kit evidence derived from other inputs.
+KIT_EVIDENCE_PATH = os.path.join(OUT, "kit_evidence.json")
+HARVEST_PHASE_CODE = ("build_dataset.py", "party_link.py", "rosters_io.py")
+
+
+def _plain(x):
+    """A JSON-able, deterministic stand-in for a build structure (the
+    fingerprint's encoding): tuples read as lists, sets as sorted lists, a
+    non-string key as its type and repr."""
+    if isinstance(x, dict):
+        return {(k if isinstance(k, str) else f"{type(k).__name__}:{k!r}"):
+                _plain(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple)):
+        return [_plain(v) for v in x]
+    if isinstance(x, (set, frozenset)):
+        return sorted((_plain(v) for v in x),
+                      key=lambda v: json.dumps(v, sort_keys=True))
+    return x
+
+
+def _canon(x):
+    return json.dumps(_plain(x), sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False)
+
+
+def _same(a, b):
+    """Equal in value, type and key order (a replayed structure must be
+    the live one, not merely equal once serialized)."""
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        return (list(a) == list(b)
+                and all(_same(a[k], b[k]) for k in a))
+    if isinstance(a, list):
+        return len(a) == len(b) and all(_same(x, y) for x, y in zip(a, b))
+    if isinstance(a, float) and a != a:
+        return b != b
+    return a == b
+
+
+def _entry_canon(entries):
+    """Per entry, per key, the canonical encoding (book: by index; gear:
+    by id)."""
+    return {k: {f: _canon(v) for f, v in e.items()} for k, e in entries}
+
+
+def _harvest_fingerprint(book_c, gear_c, rest):
+    h = hashlib.sha256()
+
+    def feed(label, text):
+        h.update(label.encode("utf-8") + b"\0" + text + b"\0")
+    feed("book", _canon(book_c).encode("utf-8"))
+    feed("gear", _canon(gear_c).encode("utf-8"))
+    for name, v in rest:
+        feed(name, _canon(v).encode("utf-8"))
+    for rel in [os.path.join("out", "builds_index.json")] + list(HARVEST_PHASE_CODE):
+        with open(os.path.join(HERE, rel), "rb") as f:
+            feed(rel.replace(os.sep, "/"), f.read().replace(b"\r\n", b"\n"))
+    return h.hexdigest()
+
+
+def _entry_changes(before_c, entries):
+    """What the phase changed per entry: keys set (new or changed, in the
+    entry's own order) and keys removed."""
+    out = {}
+    for k, e in entries:
+        b = before_c.get(k) or {}
+        ch = {f: v for f, v in e.items() if b.get(f) != _canon(v)}
+        gone = [f for f in b if f not in e]
+        if ch or gone:
+            out[k] = {"set": ch, "del": gone}
+    return out
+
+
+def _apply_changes(changes, lookup, where):
+    for k, c in changes.items():
+        e = lookup(k)
+        if e is None:
+            sys.exit(f"out/kit_evidence.json: {where} {k} is not in this "
+                     "build - rerun build_dataset.py on the harvest machine")
+        for f in c.get("del") or []:
+            e.pop(f, None)
+        for f, v in (c.get("set") or {}).items():
+            e[f] = v
+
+
+def harvest_phase(book, gear, problems, doc, effect_map, party_styles,
+                  known):
+    """Run or replay the harvest phase (see KIT_EVIDENCE_PATH). Returns
+    (kit_ip, kit_detail, kit_detail_gang, kit_detail_styles,
+    effect_quotas, carrier_quotas); mutates `book`, `gear` and `problems`
+    exactly as the live phase does."""
+    overrides = (doc.get("kit_doctrine") or {}).get("overrides") or {}
+    book_idx = [(str(i), r) for i, r in enumerate(book)]
+    gear_ids = sorted(gear or {})
+    book_c = _entry_canon(book_idx)
+    gear_c = _entry_canon((g, gear[g]) for g in gear_ids)
+    fingerprint = _harvest_fingerprint(
+        book_c, gear_c,
+        [("overrides", overrides), ("effect_map", effect_map),
+         ("party_styles", party_styles), ("known", sorted(known))])
+    fold_sha = rosters_io.fold_sha256(OUT)
+    names = ("kit_item_power", "kit_doctrine", "kit_doctrine_gang",
+             "kit_doctrine_styles", "effect_quotas", "carrier_quotas")
+    kb_path = rosters_io.fold_copy(OUT)
+    if kb_path is None:
+        if not os.path.exists(KIT_EVIDENCE_PATH):
+            sys.exit("out/kit_evidence.json missing and no fold copy on disk "
+                     "- run build_dataset.py on the harvest machine")
+        with open(KIT_EVIDENCE_PATH, encoding="utf-8") as f:
+            ev = json.load(f) or {}
+        src = ev.get("_source") or {}
+        if src.get("party_rosters_sha256") != fold_sha:
+            sys.exit("out/kit_evidence.json was derived from a different "
+                     "rosters artifact than out/rosters_fold.json names - "
+                     "rerun build_dataset.py on the harvest machine")
+        if src.get("inputs_sha256") != fingerprint:
+            sys.exit("out/kit_evidence.json was derived from other inputs "
+                     "(the role book, the gear, the kit overrides, the "
+                     "effect map, the party styles, builds_index.json or "
+                     "the phase's code changed) - rerun build_dataset.py on "
+                     "the harvest machine, where the fold copy is")
+        by_idx = dict(book_idx)
+        _apply_changes(ev.get("book") or {}, by_idx.get, "role")
+        _apply_changes(ev.get("gear") or {}, (gear or {}).get, "gear item")
+        problems.extend(ev.get("problems") or [])
+        print("  kit evidence  : replayed out/kit_evidence.json (no fold copy "
+              "on disk; fingerprint and rosters hash match)")
+        return tuple(ev.get(n) for n in names)
+    n0 = len(problems)
+    # the item-power gate on kit doctrine: the cut is recomputed from the
+    # artifact on every derivation and recorded with its population
+    kit_ip = kit_item_power_cut(_load_rosters(kb_path))
+    ip_cut = kit_ip.get("cut")
+    ip_stats = {}
+    kit_detail = derive_kit_doctrine(
+        book, gear, problems, overrides, effect_map, ip_cut=ip_cut,
+        ip_stats=ip_stats)
+    # the GANG band (4-9 man killer parties + small-scale curated
+    # contents; no grading overrides — those were graded on ZvZ kits)
+    kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
+                                          effect_map, band="gang",
+                                          ip_cut=ip_cut, ip_stats=ip_stats)
+    kit_ip["bands"] = {b: ip_stats[b] for b in sorted(ip_stats)}
+    # STYLE CELLS: one cell per declared style on the group
+    # band, from builds linked to labelled parties; absent where thin
+    kit_detail_styles = {}
+    if party_styles:
+        for st in ("brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+            d = derive_kit_doctrine(book, gear, problems, None, effect_map,
+                                    band="group", style=st,
+                                    party_styles=party_styles,
+                                    ip_cut=ip_cut)
+            if d:
+                kit_detail_styles[st] = d
+    effect_quotas = mine_effect_quotas(gear, effect_map, problems)
+    carrier_quotas = mine_carrier_quotas(gear, effect_map, known,
+                                         party_styles)
+    live = (kit_ip, kit_detail, kit_detail_gang, kit_detail_styles,
+            effect_quotas, carrier_quotas)
+    if [str(i) for i in range(len(book))] != [k for k, _ in book_idx] \
+            or sorted(gear or {}) != gear_ids:
+        sys.exit("harvest phase: a role or a gear item was added or removed "
+                 "- out/kit_evidence.json records changes per entry only")
+    ev = {"_note": ("GENERATED by build_dataset.py from the fold copy of the "
+                    "killer-party artifact: the harvest phase's whole effect "
+                    "(the role book and gear entries it changed, the problems "
+                    "it raised, the tables it returned), replayed by a build "
+                    "without the fold copy when _source matches. Never "
+                    "hand-edit."),
+          "_source": {"party_rosters_sha256": fold_sha,
+                      "inputs_sha256": fingerprint},
+          "book": _entry_changes(book_c, book_idx),
+          "gear": _entry_changes(gear_c, [(g, gear[g]) for g in gear_ids]),
+          "problems": problems[n0:]}
+    ev.update(zip(names, live))
+    # compact: the replay reads it and nobody diffs it by eye (4.7 MB
+    # against 9.3 MB indented)
+    text = json.dumps(ev, ensure_ascii=False, separators=(",", ":")) + "\n"
+    # the replay must rebuild the live structures exactly: value, type and
+    # key order, for every table and every changed entry
+    back = json.loads(text)
+    if not all(_same(back[n], v) for n, v in zip(names, live)):
+        sys.exit("harvest phase: a returned table does not survive JSON "
+                 "(a tuple, a set or a non-string key) - out/kit_evidence.json "
+                 "cannot replay it")
+    for where, changes, lookup in (
+            ("book", ev["book"], dict(book_idx).get),
+            ("gear", ev["gear"], (gear or {}).get)):
+        for k, c in back[where].items():
+            e = lookup(k)
+            kept = [f for f in (book_c if where == "book" else gear_c)[k]
+                    if f not in c["del"]]
+            order = kept + [f for f in c["set"] if f not in kept]
+            if order != list(e) or                     not all(_same(v, e[f]) for f, v in c["set"].items()):
+                sys.exit(f"harvest phase: {where} entry {k} carries a value "
+                         "that does not survive JSON - out/kit_evidence.json "
+                         "cannot replay it")
+    with open(KIT_EVIDENCE_PATH, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+    return live
+
+
 KIT_IP_QUANTILE = 0.1        # the bottom decile
 KIT_IP_MIN_BUILDS = 3        # linked builds a party's item power needs
 
@@ -1832,7 +2046,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
 
     Killboard stream (R20: seats are based on the evidence harvested
     from the battles):
-    the KILLBOARD harvest (out/party_rosters.json.gz builds — real fielded
+    the KILLBOARD harvest (the fold copy's builds — real fielded
     kits at kill time, ids pre-normalized to the catalog key space)
     joins the mining as a SECOND evidence stream. Provenance stays
     separate (rows carry a `kb` count and a killboard source token) and
@@ -2758,9 +2972,9 @@ def apply_roles(weapons, gear):
     effects = doc.get("gear_effects") or []
     problems, seen = [], set()
     # party style labels (derive_party_styles.py -> out/party_styles.json):
-    # optional; a file derived from a DIFFERENT artifact than
-    # the one on disk blocks the release (fail closed, loudly); a missing
-    # file means no style cells this build
+    # optional; a file derived from a DIFFERENT artifact than the one the
+    # fold's record names blocks the release (fail closed, loudly); a
+    # missing file means no style cells this build
     party_styles = {}
     ps_path = os.path.join(OUT, "party_styles.json")
     if os.path.exists(ps_path):
@@ -2768,10 +2982,11 @@ def apply_roles(weapons, gear):
         with open(ps_path, encoding="utf-8") as f:
             ps_doc = json.load(f) or {}
         want = (ps_doc.get("_source") or {}).get("party_rosters_sha256")
-        have = rosters_io.sha256(rosters_io.path(OUT))
+        have = rosters_io.fold_sha256(OUT)
         if want != have:
             problems.append("party_styles.json was derived from a different "
-                            "party_rosters.json.gz — rerun derive_party_styles.py")
+                            "rosters artifact than out/rosters_fold.json names "
+                            "— rerun derive_party_styles.py")
         else:
             party_styles = {(r["battle"], r["index"]): r.get("style")
                             for r in ps_doc.get("parties") or []
@@ -2888,37 +3103,12 @@ def apply_roles(weapons, gear):
         resolve_active_doctrine(gear, problems, gear_spells=json.load(f))
     effect_map = {it["id"]: ge["id"] for ge in effects
                   for it in (ge.get("items") or []) if it.get("id")}
-    # the item-power gate on kit doctrine: the cut is recomputed from the
-    # artifact on every derivation and recorded with its population
-    kb_path = rosters_io.path(OUT)
-    kit_ip = (kit_item_power_cut(_load_rosters(kb_path))
-              if os.path.exists(kb_path) else {"cut": None})
-    ip_cut = kit_ip.get("cut")
-    ip_stats = {}
-    kit_detail = derive_kit_doctrine(
-        book, gear, problems,
-        (doc.get("kit_doctrine") or {}).get("overrides") or {},
-        effect_map, ip_cut=ip_cut, ip_stats=ip_stats)
-    # the GANG band (4-9 man killer parties + small-scale curated
-    # contents; no grading overrides — those were graded on ZvZ kits)
-    kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
-                                          effect_map, band="gang",
-                                          ip_cut=ip_cut, ip_stats=ip_stats)
-    kit_ip["bands"] = {b: ip_stats[b] for b in sorted(ip_stats)}
-    # STYLE CELLS: one cell per declared style on the group
-    # band, from builds linked to labelled parties; absent where thin
-    kit_detail_styles = {}
-    if party_styles:
-        for st in ("brawl", "clap", "kite", "brawl_clap", "clap_kite"):
-            d = derive_kit_doctrine(book, gear, problems, None, effect_map,
-                                    band="group", style=st,
-                                    party_styles=party_styles,
-                                    ip_cut=ip_cut)
-            if d:
-                kit_detail_styles[st] = d
-    effect_quotas = mine_effect_quotas(gear, effect_map, problems)
-    carrier_quotas = mine_carrier_quotas(gear, effect_map, set(weapons),
-                                         party_styles)
+    # the item-power cut, the kit doctrine (group, gang and the style
+    # cells), the effect and carrier quotas: run on the fold copy, or
+    # replayed from out/kit_evidence.json where it is absent
+    (kit_ip, kit_detail, kit_detail_gang, kit_detail_styles, effect_quotas,
+     carrier_quotas) = harvest_phase(book, gear, problems, doc, effect_map,
+                                     party_styles, set(weapons))
     # unique actives that buff allies but sit in no gear_effect yet —
     # candidates for the effects catalog (pending grading)
     effect_items = {it.get("id") for ge in effects
@@ -3084,8 +3274,8 @@ def load_meta_prior(known_weapons):
     out/meta_prior.json; H18) and its pair table (`meta_pairs`, the
     best-observed-partner half of the blend, A1-A13). Returns (solo,
     pairs). Fail closed, loudly: a missing file, a
-    file derived from a different party_rosters.json.gz than the one on
-    disk, an artifact not derived on the training split (battle % 5 != 0
+    file derived from a different rosters artifact than the fold's record
+    names, an artifact not derived on the training split (battle % 5 != 0
     -- an all-battles copy is AUDIT ONLY), a malformed bucket map, an
     asymmetric or out-of-range pair blocks the build. Rows for weapons the
     dataset does not carry are dropped; every kept value is in (0, 1].
@@ -3099,10 +3289,11 @@ def load_meta_prior(known_weapons):
     with open(META_PRIOR_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
     want = (doc.get("_source") or {}).get("party_rosters_sha256")
-    have = rosters_io.sha256(rosters_io.path(OUT))
+    have = rosters_io.fold_sha256(OUT)
     if want != have:
-        sys.exit("out/meta_prior.json was derived from a different "
-                 "party_rosters.json.gz — rerun derive_meta_prior.py")
+        sys.exit("out/meta_prior.json was derived from a different rosters "
+                 "artifact than out/rosters_fold.json names — rerun "
+                 "derive_meta_prior.py")
     split = doc.get("_split") or {}
     if split.get("holdout_mod") != 5:
         sys.exit("out/meta_prior.json was not derived on the training split "
@@ -3154,7 +3345,7 @@ def load_portal_prior(known_weapons, templates, path=PORTAL_PRIOR_PATH):
     engine ports read a pool's tables in place of the size bucket's at a
     size inside the pool, weighted weights.pool_delta_x x delta. Fail
     closed, loudly, as load_meta_prior: a missing file, a file derived
-    from a different party_rosters.json.gz than the one on disk, a file not
+    from a different rosters artifact than the fold's record names, a file not
     derived on the training split, a content the templates do not carry, a
     pool whose sizes are not the sizes of the content's fielded list of the
     same key, overlapping pools, a value out of (0, 1] or an asymmetric
@@ -3167,9 +3358,9 @@ def load_portal_prior(known_weapons, templates, path=PORTAL_PRIOR_PATH):
     with open(path, encoding="utf-8") as f:
         doc = json.load(f) or {}
     want = (doc.get("_source") or {}).get("party_rosters_sha256")
-    if want != rosters_io.sha256(rosters_io.path(OUT)):
-        sys.exit(f"{name} was derived from a different party_rosters.json.gz — "
-                 "rerun derive_portal_prior.py")
+    if want != rosters_io.fold_sha256(OUT):
+        sys.exit(f"{name} was derived from a different rosters artifact than "
+                 "out/rosters_fold.json names — rerun derive_portal_prior.py")
     if (doc.get("_split") or {}).get("holdout_mod") != 5:
         sys.exit(f"{name} was not derived on the training split (battle % 5 != 0) "
                  "— rerun py -3 pipeline/derive_portal_prior.py")
@@ -3230,8 +3421,8 @@ def load_role_typical():
     and size (`_role_typical`), lays `typical` onto the band, and the
     forge generates a body beyond it only when a minimum only that role
     can meet still demands one. Fail closed, loudly: a missing file, a
-    file derived from a different party_rosters.json.gz / party_styles.json
-    than the ones on disk, or a row that is not a positive integer count
+    file derived from a different rosters artifact than the fold's record
+    names or a different party_styles.json than the one on disk, or a row that is not a positive integer count
     blocks the build. A size with no row stays unconstrained (unknown is
     explicit, never filled)."""
     import hashlib
@@ -3242,13 +3433,15 @@ def load_role_typical():
     with open(ROLE_COUNTS_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
     src = doc.get("_source") or {}
-    for art, key in ((rosters_io.NAME, "party_rosters_sha256"),
-                     ("party_styles.json", "party_styles_sha256")):
-        with open(os.path.join(OUT, art), "rb") as f:
-            have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
-        if src.get(key) != have:
-            sys.exit(f"out/role_counts.json was derived from a different "
-                     f"{art} — rerun derive_role_counts.py")
+    if src.get("party_rosters_sha256") != rosters_io.fold_sha256(OUT):
+        sys.exit("out/role_counts.json was derived from a different rosters "
+                 "artifact than out/rosters_fold.json names — rerun "
+                 "derive_role_counts.py")
+    with open(os.path.join(OUT, "party_styles.json"), "rb") as f:
+        have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
+    if src.get("party_styles_sha256") != have:
+        sys.exit("out/role_counts.json was derived from a different "
+                 "party_styles.json — rerun derive_role_counts.py")
     if not (doc.get("_split") or {}).get("holdout_mod"):
         sys.exit("out/role_counts.json was not derived on the training split "
                  "(the harvest rows never learn from the v4h holdout) — "
@@ -3412,13 +3605,15 @@ def load_skeletons(known_weapons, seat_ids):
     with open(SKELETONS_PATH, encoding="utf-8") as f:
         doc = json.load(f) or {}
     src = doc.get("_source") or {}
-    for art, key in ((rosters_io.NAME, "party_rosters_sha256"),
-                     ("party_styles.json", "party_styles_sha256")):
-        with open(os.path.join(OUT, art), "rb") as f:
-            have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
-        if src.get(key) != have:
-            sys.exit(f"out/skeletons.json was derived from a different "
-                     f"{art} — rerun derive_skeletons.py")
+    if src.get("party_rosters_sha256") != rosters_io.fold_sha256(OUT):
+        sys.exit("out/skeletons.json was derived from a different rosters "
+                 "artifact than out/rosters_fold.json names — rerun "
+                 "derive_skeletons.py")
+    with open(os.path.join(OUT, "party_styles.json"), "rb") as f:
+        have = hashlib.sha256(f.read()).hexdigest()   # stored bytes
+    if src.get("party_styles_sha256") != have:
+        sys.exit("out/skeletons.json was derived from a different "
+                 "party_styles.json — rerun derive_skeletons.py")
     if not (doc.get("_split") or {}).get("holdout_mod"):
         sys.exit("out/skeletons.json was not derived on the training split "
                  "— rerun py -3 pipeline/derive_skeletons.py")

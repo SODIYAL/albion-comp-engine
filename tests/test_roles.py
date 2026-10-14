@@ -56,14 +56,19 @@ sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 import rosters_io  # noqa: E402
 
 
-def _rosters():
-    """The committed killer-party artifact (gzipped), its builds on the
-    TRAINING SPLIT (battle % 5 != 0) at or above the kit doctrine's
+def _rosters(label):
+    """The fold copy of the killer-party artifact (gzipped), its builds on
+    the TRAINING SPLIT (battle % 5 != 0) at or above the kit doctrine's
     item-power cut (dataset `kit_item_power`): kit doctrine learns from
     that population, so the audits below re-measure the same one (a
     holdout-only or under-geared vote must never flip a modal against the
-    table it audits). Parties and battles stay whole."""
-    doc = rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
+    table it audits). Parties and battles stay whole. None where the raw
+    records are absent and the CI variable is set (rosters_io.require):
+    the audit is skipped and says so."""
+    p = rosters_io.require(label, os.path.join(ROOT, "pipeline", "out"))
+    if p is None:
+        return None
+    doc = rosters_io.load(p)
     def in_split(b):
         try:
             return int(b) % 5 != 0
@@ -889,7 +894,9 @@ def t_kit_audit_agreement():
     import json as _json, random as _random
     from collections import Counter as _Counter
     e = Engine(content="territory_defense", size=20)
-    doc = _rosters()
+    doc = _rosters("R24 kit audit agreement")
+    if doc is None:
+        return
     by_w = {}
     # ONE PLAYER, ONE VOTE (R27): the audit counts in the miner's
     # unit — a player's builds on a weapon share one vote — so the modal
@@ -1159,7 +1166,9 @@ def t_one_player_one_vote():
     # front Morgana and Fey cannot even enter the tier on one voter.
     import json as _json
     from collections import Counter as _Counter, defaultdict as _dd
-    doc = _rosters()
+    doc = _rosters("R27 one player, one vote")
+    if doc is None:
+        return
     builds = doc.get("builds") or []
     keyed = all(b.get("player") for b in builds)
     e = Engine(content="territory_defense", size=20)
@@ -1255,9 +1264,9 @@ def t_doctrine_bands():
     ships = bool(seats_kit) and len(banded) == len(seats_kit)
     reads = (e7._seat_kit(banded[0]) is banded[0]["kit_bands"]["gang"]
              and e20._seat_kit(banded[0]) is banded[0]) if banded else False
-    doc = _rosters()
+    doc = _rosters("R28 the gang-band audit against the raw records")
     by_w = _dd(list)
-    for b in doc.get("builds") or []:
+    for b in (doc or {}).get("builds") or []:
         if 4 <= (b.get("party_size") or 0) <= 9 and b.get("weapon") in e7.weapons:
             by_w[b["weapon"]].append(b)
     slots = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
@@ -1311,8 +1320,8 @@ def t_doctrine_bands():
           "band read at <= 9 members (group at 10+); the size-7 kit is the "
           "gang modal in >= 85% of slots with no bad pick on every weapon "
           "with >= 30 gang builds; gang and group kits differ somewhere real",
-          ships and reads and tot >= 100 and agree >= 0.85 * tot and bad == 0
-          and differs,
+          ships and reads and differs
+          and (doc is None or (tot >= 100 and agree >= 0.85 * tot and bad == 0)),
           f"seats={len(banded)}/{len(seats_kit)} reads={reads} audit={agree}/{tot} "
           f"bad={bad} {misses[:3]} differs={differs}")
 
@@ -1534,7 +1543,7 @@ def t_party_link():
         _st.put(77, rec)
     sp.CACHE, sp.OUT = cache, tmp
     sp.analyze({"2H_LONGBOW", "MAIN_MACE"})
-    out = rosters_io.load(rosters_io.path(tmp))
+    out = rosters_io.load(rosters_io.working_path(tmp))
     by_w = {b["weapon"]: b for b in out["builds"]}
     idx = {tuple(p["weapons"])[0]: p.get("index") for p in out["parties"]}
     check("R31b analyzer stamps `index` on parties and `party` on builds "
@@ -1576,9 +1585,10 @@ def t_party_styles():
     pr_path = rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
     have = os.path.exists(ps_path)
     live = (_json.load(open(ps_path, encoding="utf-8")) if have else {})
-    check("R32b committed party_styles.json matches the committed artifact "
-          "hash and uses LF",
-          have and live["_source"]["party_rosters_sha256"] == dps.sha256_of(pr_path)
+    check("R32b committed party_styles.json matches the fold's record "
+          "(out/rosters_fold.json) and uses LF",
+          have and live["_source"]["party_rosters_sha256"]
+          == rosters_io.fold_sha256(os.path.dirname(pr_path))
           and b"\r\n" not in open(ps_path, "rb").read(),
           f"have={have}")
 
@@ -1779,7 +1789,11 @@ def t_item_power_gate():
     import math as _math
     e = Engine(content="territory_defense", size=20)
     rec = e.data.get("kit_item_power") or {}
-    doc = rosters_io.load(rosters_io.path(os.path.join(ROOT, "pipeline", "out")))
+    p = rosters_io.require("R38 the item-power cut re-measured from the raw records",
+                           os.path.join(ROOT, "pipeline", "out"))
+    if p is None:
+        return
+    doc = rosters_io.load(p)
 
     def in_split(b):
         try:

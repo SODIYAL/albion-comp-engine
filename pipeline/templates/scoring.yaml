@@ -115,7 +115,7 @@ capability_synergies:
 
 # Meta prior (design doc §4.1) — GENERATED: one harvest prior replaced both
 # hand lists. pipeline/derive_meta_prior.py
-# reads the committed killer-party harvest (out/party_rosters.json) and writes
+# reads the fold copy of the killer-party harvest (rosters_io) and writes
 # out/meta_prior.json: per fight-size bucket (small / mid / large — the
 # engine's size_bucket axis) a weapon's share of the bucket's DISTINCT PLAYERS
 # (one player, one vote), shrunk toward zero on thin counts, normalized so the

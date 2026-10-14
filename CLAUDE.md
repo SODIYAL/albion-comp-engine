@@ -95,12 +95,25 @@ the vocabulary below on every push.
   the per-battle JSON layout it replaced reached 127k files and made every
   workspace crawl (file watchers, VS Code Live Server, backups) take minutes.
   Live Server must be rooted at `/dashboard` (`.vscode/settings.json`, local).
-- The committed rosters artifact, `pipeline/out/party_rosters.json.gz`, keeps
-  what the build reads: every battle-list battle and every Dragon Portal
-  battle. The same pass writes every record, the kill-feed poll's open-world
-  fights included, to `pipeline/out/party_rosters_full.json.gz` (gitignored,
-  past GitHub's 100 MiB file limit); only `derive_usage.py` reads it. Never
-  commit the full file.
+- No rosters artifact is committed (`pipeline/rosters_io.py`, LOCAL FILES,
+  ONE COMMITTED RECORD). The harvest writes working copies,
+  `pipeline/out/party_rosters.json.gz` (what the build reads: every
+  battle-list and every Dragon Portal battle) and
+  `party_rosters_full.json.gz` (every record); the fold's seal
+  (`py -3 pipeline/rosters_io.py seal`) copies them to the fold copies
+  (`party_rosters.fold.json.gz`, `party_rosters_full.fold.json.gz`) that
+  every derive step, the build and the audits read, and writes
+  `out/rosters_fold.json` (committed), the hash every derived table is
+  checked against. The build's harvest phase (kit doctrine, item-power cut,
+  effect and carrier quotas) runs on the fold copy and writes
+  `out/kit_evidence.json` (committed); without the fold copy (CI, a
+  worktree) the build replays that file under its input fingerprint and
+  stops when an input changed: rebuild in the main tree, where the fold
+  copy is. Checks that read raw records stop without the fold copy, and
+  print SKIP only under the CI variable. `py -3 pipeline/rosters_io.py`
+  prints the record and the local copies; the harvest backup
+  (`pipeline/backup_harvest.py`, the folder in the gitignored
+  `pipeline/harvest_backup.json`) keeps the off-disk copies and the cache.
 
 ## Tests
 
@@ -172,26 +185,26 @@ py -3 pipeline/build_interactions.py    # interactions.yaml -> out/interactions.
 py -3 pipeline/build_builds.py          # data/ evidence -> out/builds_index.json
 py -3 pipeline/build_dataset.py         # single source of truth: out/dataset-latest.json (fails closed)
 py -3 pipeline/build_cohort_families.py # display-only observed cores (after build_dataset)
-py -3 pipeline/build_portal_stats.py    # display-only Dragon Portal stats (out/portal_stats.json -> portal.html)
+py -3 pipeline/build_portal_stats.py    # display-only Dragon Portal stats (out/portal_stats.json -> portal.html); harvest machine only, not in CI
 py -3 dashboard/build.py                # regenerates dashboard/index.html + docs/
 ```
 
 - After editing `MASTERSHEET.md`: rebuild dataset + dashboard, run golden + parity.
 - After a harvest: `pipeline/fold_harvest.ps1` (re-derives rosters, runs
-  `sample_parties --pages 0` -> `audit_style_rosters` -> `derive_style_bands` ->
+  `sample_parties --pages 0` -> `rosters_io seal` -> `audit_style_rosters` -> `derive_style_bands` ->
   `derive_portal_rows` -> `derive_party_styles` -> `derive_meta_prior` -> `derive_portal_prior` -> `derive_role_counts` ->
   `derive_skeletons` -> `build_dataset` -> `derive_usage` (the
   observed-evidence artifact: fight-size prevalence and killer-party
-  cohorts, display only, read from the full local rosters artifact) -> every gate ->
-  `compare_fold.py`; offline, never commits; refuses to start while a
+  cohorts, display only, read from the full fold copy) -> every gate ->
+  `compare_fold.py` -> `backup_harvest.py`; offline, never commits; refuses to start while a
   harvest runs, `pipeline/harvest_guard.ps1`). Weekly, Tuesdays. Every harvest-derived
   table learns from the training split (`battle % 5 != 0`); the build refuses
   an all-battles prior, role-count or skeleton artifact.
 - Between folds, the Dragon Portal page alone: `pipeline/refresh_portal.ps1`
   (rosters from the cache -> `build_portal_stats` -> `dashboard/build` ->
   the portal and layout gates; never commits). Commit `out/portal_stats.json`
-  and the two `portal.html` files only; the rewritten rosters artifact
-  waits for the fold, which commits it with the tables derived from it.
+  and the two `portal.html` files only; the portal stats read the working
+  copy and may run ahead of the fold, whose seal alone moves the record.
 - After moving the game-data snapshot (`data/source_pins.yaml`): `pipeline/README.md`.
 - Network steps are explicit, never part of a build: `sample_parties.py`
   (the one killboard sampler), `adapters/metabattle.py fetch`. The

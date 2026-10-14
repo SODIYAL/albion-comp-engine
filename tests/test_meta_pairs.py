@@ -228,7 +228,7 @@ def part_c():
           dpp.derive(portal_doc(), catalog)["pools"] == {}, "")
     import build_dataset as bd
     import rosters_io
-    sha = rosters_io.sha256(rosters_io.path(bd.OUT))
+    sha = rosters_io.fold_sha256(bd.OUT)
     tpl = {"ancient_lands": {"pool_fielded": {"2-3": {"sizes": [2, 3], "weapons": []}}}}
 
     def load(doc):

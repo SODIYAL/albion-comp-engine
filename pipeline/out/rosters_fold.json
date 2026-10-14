@@ -1,0 +1,10 @@
+{
+ "_note": "The fold's record of the killer-party artifact every derived table and the build read. The artifact stays on the harvest machine (pipeline/out/party_rosters.fold.json.gz, gitignored, kept in the harvest backup); every derived table's party_rosters_sha256 must equal party_rosters_sha256 here.",
+ "battles": 362212,
+ "builds": 1748183,
+ "bytes": 63408418,
+ "full": null,
+ "parties": 447130,
+ "party_rosters_sha256": "829c8c293b0735393e66cad37602562a8d6e162c9bfc8ab77992b7c23270ba4b",
+ "previous_sha256": null
+}

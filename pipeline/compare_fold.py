@@ -28,8 +28,9 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import rosters_io  # noqa: E402  (the gzipped killer-party artifact)
 
+# the rosters artifact is local (rosters_io): the revision's record names
+# the previous fold's copy, read from disk (rosters_io.prev_path)
 ARTIFACTS = {
-    "rosters": "pipeline/out/party_rosters.json.gz",
     "dataset": "pipeline/out/dataset-latest.json",
     "bands": "pipeline/templates/style_bands.yaml",
     "prior": "pipeline/out/meta_prior.json",
@@ -58,6 +59,33 @@ def git_show(rev, path, dest):
     with open(dest, "wb") as fh:
         subprocess.run(["git", "show", f"{rev}:{path}"], cwd=ROOT,
                        stdout=fh, check=True)
+
+
+def previous_rosters(rev, tmp):
+    """The rosters artifact the revision's fold read: the local copy whose
+    hash the revision's record names (the previous fold's copy, or the
+    fold copy itself before a new seal), else - for a revision from before
+    the record - the artifact committed at that revision."""
+    rec = os.path.join(tmp, rosters_io.RECORD_NAME)
+    try:
+        git_show(rev, "pipeline/out/" + rosters_io.RECORD_NAME, rec)
+    except subprocess.CalledProcessError:
+        for rel in ("pipeline/out/party_rosters.json.gz",
+                    "pipeline/out/party_rosters.json"):
+            dest = os.path.join(tmp, os.path.basename(rel))
+            try:
+                git_show(rev, rel, dest)
+                return dest
+            except subprocess.CalledProcessError:
+                continue
+        sys.exit(f"{rev} holds neither a fold record nor a rosters artifact")
+    want = load_json(rec)["party_rosters_sha256"]
+    for p in (rosters_io.prev_path(), rosters_io.path()):
+        if os.path.exists(p) and rosters_io.sha256(p) == want:
+            return p
+    sys.exit(f"the rosters artifact {rev}'s record names ({want[:12]}) is not "
+             "on disk - restore it from the harvest backup as "
+             f"pipeline/out/{rosters_io.PREV_NAME}")
 
 
 def load_json(p):
@@ -112,17 +140,11 @@ def main():
     old = {}
     for key, rel in ARTIFACTS.items():
         dest = os.path.join(tmp, os.path.basename(rel))
-        try:
-            git_show(args.base, rel, dest)
-        except subprocess.CalledProcessError:
-            if key != "rosters":
-                raise
-            # the previous fold predates the gzipped artifact
-            rel = rel[:-3]
-            dest = os.path.join(tmp, os.path.basename(rel))
-            git_show(args.base, rel, dest)
+        git_show(args.base, rel, dest)
         old[key] = dest
     new = {key: os.path.join(ROOT, rel) for key, rel in ARTIFACTS.items()}
+    new["rosters"] = rosters_io.path()
+    old["rosters"] = previous_rosters(args.base, tmp)
 
     lines = [f"# Fold report {stamp} - working tree vs `{args.base}`", ""]
 
@@ -145,7 +167,7 @@ def main():
     lines += ["## Corpus (the battle-list population the derive steps read)", "",
               "| unit | before | after |", "|---|---|---|"]
     for k, label in (("battles", "battles"),
-                     ("battles_in_file", "battles in the committed file (the battle list and the Dragon Portal)"),
+                     ("battles_in_file", "battles in the build artifact (the battle list and the Dragon Portal)"),
                      ("parties", "killer parties"),
                      ("builds", "observed builds"),
                      ("builds_full_kit", "builds with a full kit"),

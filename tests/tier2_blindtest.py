@@ -1449,7 +1449,7 @@ if __name__ == "__main__":
                    help="the draw of V3 rounds 1-2: partial parties sampled from the "
                         "whole weapon pool, no answer key")
     g.add_argument("--rosters", default=None,
-                   help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
+                   help="the roster artifact (default: the fold copy, pipeline/out/party_rosters.fold.json.gz)")
     g.add_argument("--harvest-source", default=None, choices=["battle_list", "all"],
                    help="override the content's population (FORM_POPULATIONS): which harvest")
     g.add_argument("--harvest-content", default=None,
@@ -1493,7 +1493,7 @@ if __name__ == "__main__":
     h.add_argument("--seed", type=int, default=20260910)
     h.add_argument("--json", default=None)
     h.add_argument("--rosters", default=None,
-                   help="the roster artifact (default: pipeline/out/party_rosters.json.gz)")
+                   help="the roster artifact (default: the fold copy, pipeline/out/party_rosters.fold.json.gz)")
     h.add_argument("--classes", default=None,
                    help="comma list of incumbent-gear classes to score (default: all three)")
     h.add_argument("--split", default="holdout", choices=["holdout", "train"],

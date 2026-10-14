@@ -43,8 +43,11 @@ parties and the weapons that fill each class, with the share of parties
 fielding one and the median copies where fielded.
 
 Usage:  py -3 pipeline/build_portal_stats.py [--rosters PATH]  -> out/portal_stats.json
-  --rosters names another roster artifact (a git-shown copy while the poll
-  rewrites the working file).
+  Reads the harvest's working copy (rosters_io.working_path): the page may
+  run ahead of the fold between folds (refresh_portal.ps1), and at the
+  fold the working copy is the one just sealed. A step on the harvest
+  machine only: no raw records reach a clone or CI, which read the
+  committed out/portal_stats.json. --rosters names another artifact.
 """
 import collections
 import datetime
@@ -334,6 +337,10 @@ def main():
     path_arg = None
     if "--rosters" in sys.argv:
         path_arg = sys.argv[sys.argv.index("--rosters") + 1]
+    path_arg = path_arg or rosters_io.working_path()
+    if not os.path.exists(path_arg):
+        sys.exit(f"{path_arg} missing - run sample_parties.py --pages 0 "
+                 "(the portal stats are built on the harvest machine)")
     doc = rosters_io.load(path_arg, source="all", content=CONTENT)
     with open(os.path.join(OUT, "dataset-latest.json"), encoding="utf-8") as f:
         ds = json.load(f)

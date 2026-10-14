@@ -191,9 +191,9 @@ def t_artifact():
     with open(path, encoding="utf-8") as f:
         doc = json.load(f)
     src = doc.get("_source") or {}
-    check("S2b hash chain: derived from the party_rosters.json.gz and "
-          "party_styles.json on disk",
-          src.get("party_rosters_sha256") == sha256_of(rosters_io.path(OUT))
+    check("S2b hash chain: derived from the rosters artifact the fold's record "
+          "names and the party_styles.json on disk",
+          src.get("party_rosters_sha256") == rosters_io.fold_sha256(OUT)
           and src.get("party_styles_sha256") == sha256_of(os.path.join(OUT, "party_styles.json")))
     check("S2c derived on the training split", (doc.get("_split") or {}).get("holdout_mod") == 5)
     import yaml
