@@ -65,6 +65,7 @@ jobs:
           python3 tests/test_content_tag.py
           python3 tests/test_portal_stats.py
           python3 tests/tier2_blindtest.py v4
+          python3 tests/tier2_blindtest.py v4h --gate
 
       - name: display-layer gates
         run: |

@@ -52,10 +52,13 @@ also score a role-skeleton-plus-popularity recommender
 (baseline_recommend: candidates ranked by need — the role under its band
 minimum first, then under its typical — then by the meta prior's solo
 share, top-3) through the SAME leave-one-out tallies and hit rules, and
-print it as one extra row beside the engine's classes. REPORT-ONLY,
-NEVER A GATE, never an exit-code input: the capability model must beat
-it or it is not earning its complexity. Without the flag nothing else
-changes — every number and the exit code are those of the engine alone.
+print it as one extra row beside the engine's classes: the capability
+model must beat it or it is not earning its complexity. In v4 and in the
+v4h report it is report-only, never an exit-code input; without the flag
+nothing else changes. One exit code reads it: `v4h --gate`, the
+role-level gate on the fold's holdout fixture, where the engine's
+role-level hit rate must beat the baseline's on the same drops (the v1
+quality bar, tests/VALIDATION.md).
 
 This script does the three mechanical parts. It cannot do the human part.
 
@@ -65,7 +68,8 @@ This script does the three mechanical parts. It cannot do the human part.
     score     read the filled form + compare against engine top-3 per mode,
               and against the harvest where the form has a key
     v4        reproduce published meta comps minus one member
-    v4h       the same leave-one-out over the killer-party HARVEST (report-only)
+    v4h       the same leave-one-out over the killer-party HARVEST (report-only;
+              --gate replays the fold's holdout fixture: the role-level gate)
 
 Usage:
     py -3 -u tests/tier2_blindtest.py generate --round 3 --content ancient_lands --size 3 --seed 20261008 --out tests/tier2_form_r3_portal3.md
@@ -73,6 +77,8 @@ Usage:
     py -3 tests/tier2_blindtest.py score tier2_form_filled.md [--mode both|w|d] [--key K]
     py -3 tests/tier2_blindtest.py v4 [--verbose] [--json out.json] [--baseline]
     py -3 tests/tier2_blindtest.py v4h [--n 150] [--drop 3] [--rebuild 5] [--holdout-mod 5] [--baseline]
+    py -3 tests/tier2_blindtest.py v4h --n 500 --export-cases pipeline/out/v4h_holdout.json   # the fold
+    py -3 tests/tier2_blindtest.py v4h --gate                                              # GATE
 
 HARVEST-SEEDED FORMS (the default; harvest_cases): every case is a real
 killer party of exactly the form's size, every weapon known and in the
@@ -355,8 +361,11 @@ def _pool_parties(e, args):
 
 def _rel(path):
     """A path as the repository names it (forward slashes, relative to the
-    root where it sits inside)."""
-    p = os.path.relpath(os.path.abspath(path), os.path.abspath(ROOT))
+    root where it sits inside; absolute outside it, another drive included)."""
+    try:
+        p = os.path.relpath(os.path.abspath(path), os.path.abspath(ROOT))
+    except ValueError:   # another drive: no relative path exists
+        p = ".."
     return (os.path.abspath(path) if p.startswith("..") else p).replace(os.sep, "/")
 
 
@@ -811,17 +820,18 @@ def _board_holdout_mod():
 
 # --------------------------------------------------------- baseline ----
 BASELINE_NOTE = ("  baseline = role skeleton (under band min, then under typical) "
-                 "+ meta-prior solo share, top-3; REPORT-ONLY, NEVER A GATE, "
-                 "no exit-code input — the capability model must beat it "
-                 "(the skeleton-first generation spec, decision 6).")
+                 "+ meta-prior solo share, top-3; report-only here - the "
+                 "capability model must beat it, and v4h --gate holds that "
+                 "at role level on the fold's holdout fixture.")
 
 
 def baseline_recommend(e, party, top_n=TOP_N):
     """The role-skeleton-plus-popularity BASELINE (spec notes/specs/
     2026-09-15-skeleton-first-generation-design.md decision 6): the
     recommender the capability model must beat, or it is not earning its
-    complexity. REPORT-ONLY, NEVER A GATE; it lives in the harness, never
-    in the engine, and no scoring path may read it.
+    complexity. Report-only except as the bar of `v4h --gate` (role
+    level); it lives in the harness, never in the engine, and no scoring
+    path may read it.
 
     Candidates are the engine's own suggest_pool() — the pool recommend()
     ranks — ordered by NEED, then POPULARITY, then weapon id:
@@ -1168,6 +1178,145 @@ def _harvest_gears(party, e):
     return gears, len(taken), res, rec
 
 
+# THE ROLE-LEVEL GATE ON THE HARVEST (tests/VALIDATION.md, the v1 quality
+# bar): the raw killer-party records stay on the harvest machine
+# (rosters_io), so the fold exports v4h's sampled holdout cases - each
+# party's weapons, its style label, its members' recorded gear and the
+# drops - to a committed fixture, and `v4h --gate` replays it anywhere. The
+# engine's role-level hit rate (harvest_gear class, top-3) must beat the
+# baseline's on the same drops; weapon level stays report-only.
+V4H_FIXTURE = os.path.join(ROOT, "pipeline", "out", "v4h_holdout.json")
+V4H_GATE_MIN_ROLE_DROPS = 200   # fewer healer / tank drops is too thin to judge
+
+
+def _sha256_file(path):
+    import hashlib
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()
+
+
+def _member_raw_gear(party):
+    """Per member, the recorded gear of its linked build, matched as
+    _harvest_gears matches it (raw ids, the catalog resolves them at
+    replay); None where no build links."""
+    raw = [None] * len(party["weapons"])
+    taken = set()
+    for b in sorted(party["builds"], key=lambda x: (x.get("player") or "", x.get("weapon") or "")):
+        for i, w in enumerate(party["weapons"]):
+            if i in taken or w != b.get("weapon"):
+                continue
+            g = b.get("gear") or {}
+            raw[i] = {slot: g[slot] for slot in V4H_GEAR_SLOTS if g.get(slot)}
+            taken.add(i)
+            break
+    return raw
+
+
+def _export_v4h_cases(args, sample, eligible, rng, rosters_path, styles_path):
+    """Write the sampled cases and their drops (the same draws v4h scores)
+    to the fixture. A fold step on the harvest machine."""
+    import rosters_io
+    cases = []
+    for p in sample:
+        ws = p["weapons"]
+        drops = list(range(len(ws)))
+        if args.drop < len(ws):
+            drops = sorted(rng.sample(drops, args.drop))
+        cases.append({"battle": p["battle"], "index": p["index"], "size": p["size"],
+                      "style": p["style"], "weapons": list(ws),
+                      "gear": _member_raw_gear(p), "drops": drops})
+    doc = {"_note": ("GENERATED by tests/tier2_blindtest.py v4h --export-cases at "
+                     "the fold: v4h's holdout cases (battle id % holdout_mod == 0, "
+                     "unseen by every harvest-derived table) for the role-level "
+                     "gate, v4h --gate. Never hand-edit."),
+           "_source": {"party_rosters_sha256": rosters_io.sha256(rosters_path),
+                       "party_styles_sha256": (_sha256_file(styles_path)
+                                               if os.path.exists(styles_path) else None)},
+           "filter": {"n": args.n, "drop": args.drop, "seed": args.seed,
+                      "min_size": args.min_size, "max_size": args.max_size,
+                      "holdout_mod": args.holdout_mod, "content": args.content,
+                      "harvest_source": args.harvest_source},
+           "eligible": eligible, "cases": cases}
+    out = args.export_cases
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(doc, f, separators=(",", ":"), sort_keys=True)
+        f.write("\n")
+    print(f"wrote {_rel(out)}: {len(cases)} parties of {eligible} eligible, "
+          f"{sum(len(c['drops']) for c in cases)} drops (seed {args.seed})")
+
+
+def v4h_gate(args):
+    """THE ROLE-LEVEL GATE: replay the committed holdout fixture; exit 1
+    unless the engine's role-level hit rate beats the baseline's. Fail
+    closed: a missing fixture, one derived from another rosters artifact
+    than the fold's record names or another party_styles.json, or too few
+    healer / tank drops."""
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import rosters_io
+    path = args.cases or V4H_FIXTURE
+    if not os.path.exists(path):
+        sys.exit(f"{_rel(path)} missing - run tier2_blindtest.py v4h --export-cases at the fold")
+    with open(path, encoding="utf-8") as f:
+        doc = json.load(f)
+    src = doc.get("_source") or {}
+    if src.get("party_rosters_sha256") != rosters_io.fold_sha256():
+        sys.exit(f"{_rel(path)} was drawn from a different rosters artifact than "
+                 "out/rosters_fold.json names - re-export it at the fold")
+    styles_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
+    if src.get("party_styles_sha256") != _sha256_file(styles_path):
+        sys.exit(f"{_rel(path)} was drawn under a different party_styles.json - "
+                 "re-export it at the fold")
+    flt = doc.get("filter") or {}
+    probe = Engine()
+    role_sets = probe.scoring.get("role_sets", {})
+    pools = {"healer": set(role_sets.get("healers", [])),
+             "tank": set(role_sets.get("frontline", []))}
+
+    def role_of(w):
+        for r, pool in pools.items():
+            if w in pool:
+                return r
+        return None
+    tally = {"engine": [0, 0], "baseline": [0, 0]}
+    engines = {}
+    for c in doc.get("cases") or []:
+        key = (c["size"], c["style"])
+        e = engines.get(key)
+        if e is None:
+            e = engines[key] = Engine(content=flt.get("content", "blackzone_roam"),
+                                      size=c["size"], style=c["style"])
+        ws = c["weapons"]
+        gears = []
+        for raw in c["gear"]:
+            kit = [gid for gid in (gear_join.normalize_gear_id(v, e.gear)
+                                   for v in (raw or {}).values()) if gid is not None]
+            gears.append(kit or None)
+        for i in c["drops"]:
+            role = role_of(ws[i])
+            if not role:
+                continue
+            rest = ws[:i] + ws[i + 1:]
+            g = gears[:i] + gears[i + 1:]
+            top_e = [r["weapon"] for r in e.recommend(rest, FULL_RANK, gears=g)][:TOP_N]
+            top_b = baseline_recommend(e, rest, FULL_RANK)[:TOP_N]
+            for name, top in (("engine", top_e), ("baseline", top_b)):
+                tally[name][0] += any(w in pools[role] for w in top)
+                tally[name][1] += 1
+    (eh, n), (bh, _) = tally["engine"], tally["baseline"]
+    if n < V4H_GATE_MIN_ROLE_DROPS:
+        sys.exit(f"v4h gate: {n} healer / tank drops, under the {V4H_GATE_MIN_ROLE_DROPS} "
+                 "a verdict needs - re-export with a larger --n")
+    er, br = eh / n, bh / n
+    print(f"v4h role-level gate ({_rel(path)}: {len(doc.get('cases') or [])} holdout "
+          f"parties, {n} healer / tank drops, top-{TOP_N}, harvest_gear class)")
+    print(f"  engine   {eh}/{n} = {er:.1%}")
+    print(f"  baseline {bh}/{n} = {br:.1%}")
+    if er <= br:
+        print("FAIL: the engine does not beat the baseline at role level")
+        sys.exit(1)
+    print(f"PASS: the engine beats the baseline at role level by {er - br:+.1%}")
+
+
 def v4h(args):
     """V4 on the killer-party HARVEST (report-only): the same
     leave-one-out as v4, over harvested parties of 10+ instead of the 23
@@ -1212,9 +1361,12 @@ def v4h(args):
     tallied once (it scores no gear) and printed as a `baseline` row.
     Report-only like everything here.
 
-    NOT A GATE. Prints beside v4 so the two can be compared; the holdout
-    split is honoured end to end, so promotion to a gate is a maintainer
-    decision.
+    REPORT-ONLY. Prints beside v4 so the two can be compared. The role
+    level on the holdout is GATED by `v4h --gate` (v4h_gate): the fold
+    exports this report's sample and drops (`--export-cases`) to a
+    committed fixture, and the gate replays it; weapon level, the rank
+    metric and the rebuild stay report-only (the v1 quality bar,
+    tests/VALIDATION.md).
 
     THE PORTAL POOLS: `--harvest-source all --harvest-content ancient_lands
     --dominant --min-size 2 --max-size 7 --content ancient_lands` reads
@@ -1223,6 +1375,8 @@ def v4h(args):
     dominant killer party of the pool's size, no deaths, a kill), still
     on the holdout slice; the same report, per pool.
     """
+    if args.gate:
+        return v4h_gate(args)
     sys.path.insert(0, os.path.join(ROOT, "pipeline"))
     import rosters_io
     rosters_path = args.rosters or rosters_io.path(os.path.join(ROOT, "pipeline", "out"))
@@ -1259,6 +1413,9 @@ def v4h(args):
     rng = random.Random(args.seed)
     sample = parties if args.n >= len(parties) else rng.sample(parties, args.n)
     sample.sort(key=lambda p: (p["battle"], p["index"]))
+    if args.export_cases:
+        return _export_v4h_cases(args, sample, len(parties), rng, rosters_path,
+                                 styles_path)
 
     labels = tuple(active) + (("baseline",) if args.baseline else ())
     # `ranks`: the dropped weapon's 1-based position in the FULL ranking
@@ -1405,8 +1562,8 @@ def v4h(args):
               f"{args.holdout_mod or 'all battles'} - styled numbers are "
               f"weak-form (the board learned from the evaluated battles).")
     print("  caveat: a killer party is win-conditioned evidence of what is "
-          "fielded, never a verdict on what should be; NOT A GATE - reported "
-          "beside v4.")
+          "fielded, never a verdict on what should be; report-only - the role "
+          "level is gated by v4h --gate on the fold's fixture.")
     if args.json:
         for cl in labels:
             tallies[cl]["rank_summary"] = _rank_summary(tallies[cl]["ranks"])
@@ -1476,6 +1633,14 @@ if __name__ == "__main__":
                         "(report-only, never a gate)")
 
     h = sub.add_parser("v4h"); h.set_defaults(fn=v4h)
+    h.add_argument("--gate", action="store_true",
+                   help="the role-level gate: replay the committed holdout fixture "
+                        "(pipeline/out/v4h_holdout.json); exit 1 unless the engine beats the baseline")
+    h.add_argument("--cases", default=None,
+                   help="the fixture --gate replays (default: pipeline/out/v4h_holdout.json)")
+    h.add_argument("--export-cases", default=None, metavar="PATH",
+                   help="write the sampled holdout cases and drops to PATH (the fold writes "
+                        "pipeline/out/v4h_holdout.json) and score nothing")
     h.add_argument("--n", type=int, default=150, help="parties to sample")
     h.add_argument("--drop", type=int, default=3, help="leave-one-out drops per party")
     h.add_argument("--rebuild", type=int, default=0, help="V4b: rebuild the last k members")

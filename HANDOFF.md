@@ -38,6 +38,23 @@ Three layers, never merged:
   Popularity is not effectiveness. Semantics and caveats:
   `KILLBOARD_AFFINITY.md`.
 
+## The quality bar
+
+The engine's claim is ROLE level: given a party, it proposes the role the
+party is missing. Two gates hold it: `tier2_blindtest.py v4` (published
+comps minus one member, role level at least 70%) and `v4h --gate`
+(harvested killer parties of the holdout slice, unseen by every
+harvest-derived table: the engine's role-level top-3 rate must beat a
+role-need-then-popularity baseline on the same drops; 65.7% against 52.4%
+on 607 healer and tank drops at the gate's adoption). WEAPON level is not
+the claim and stays report-only: the engine names the weapon that fills
+the capability gap, and it trails the popularity baseline at naming the
+weapon winners actually fielded (on the gate's 500 parties, 1,500 drops:
+top-3 11% against 20%, top-10 30% against 38%, median rank 16 against
+12). Popularity is not effectiveness, and neither popularity nor the
+capability fitness predicts the outcome of a fight (BACKLOG, the outcome
+layer). The decision: tests/VALIDATION.md.
+
 ## The engine today
 
 - 137 combat weapons; 31 sheet capabilities (`evidence_lint.CAPABILITIES`),

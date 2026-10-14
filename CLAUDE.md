@@ -151,16 +151,21 @@ node tests/test_xlsx.js             # the import's workbook reader: the zip, the
 py -3 tests/test_supabase_schema.py # account database rules as text: RLS, grants, functions, client bounds = database bounds
 node tests/test_supabase_rls.mjs    # migrations in a real Postgres (needs: npm install --no-save @electric-sql/pglite@0.5.8)
 py -3 tests/tier2_blindtest.py v4   # GATE: actual_gear role-level >= 70% on published comps minus one member
+py -3 tests/tier2_blindtest.py v4h --gate  # GATE: role level on harvested holdout parties beats the baseline (the fold's fixture)
 ```
 
-Report-only beside the gate: `py -3 tests/tier2_blindtest.py v4h --rebuild 5` —
-the same leave-one-out over ~700 harvested killer parties (holdout slice
-`battle id % 5 == 0`), plus a rebuild-the-last-5 recall. Never a gate until
-the committed style board honours the same holdout split (the audit carries
-the `--holdout-mod` flag; the board must be regenerated on the harvest
-machine). `--baseline` on `v4` / `v4h` prints a role-need-then-popularity
-recommender beside the engine — report-only, the model the capability engine
-must beat.
+The v1 quality bar is ROLE LEVEL (tests/VALIDATION.md): `v4` on the
+published comps, and `v4h --gate` on harvested killer parties of the
+holdout slice (`battle id % 5 == 0`, unseen by every harvest-derived
+table), where the engine's role-level top-3 rate must beat a
+role-need-then-popularity baseline on the same drops. The fold exports the
+cases (`v4h --n 500 --export-cases pipeline/out/v4h_holdout.json`, committed:
+weapons, style labels, recorded gear, drops) so the gate runs in CI without
+the raw records. Report-only beside the gates: `py -3 tests/tier2_blindtest.py
+v4h --rebuild 5 --baseline` — weapon level, the rank metric and a
+rebuild-the-last-5 recall. Weapon-level agreement with what winners field
+is not the engine's claim (it trails the popularity baseline: popularity is
+not effectiveness).
 
 Validation-round tooling (human in the loop, not gates): `tests/tier2_blindtest.py
 generate|score` (V3 forms seeded from harvested killer parties, the

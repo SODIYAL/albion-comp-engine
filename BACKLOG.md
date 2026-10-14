@@ -94,19 +94,6 @@ Each is decidable today from evidence already in the repo.
   kite 10 read clap at 0.458 and 0.481) refit the floor once answered.
   (V: 10, The lone-tool floor waits for the kite form; 09b, validation
   round 4)
-- **Harvest V4 findings** (`tier2_blindtest.py v4h`, true holdout since the
-  style board learns from the training split): at `--n 500` (1,500 drops),
-  on the fitted Blackzone Roam weights, role-level 64% (harvest_gear)
-  against the baseline's 55%, weapon top-3 7% against 18%; rank metric
-  median 30 against the baseline's 20, top-10 20% against 33%, MRR 0.083
-  against 0.177; 173 of 1,500 dropped weapons sit outside the suggestion
-  pool. The 150-party reading (68% against 47%) was sample noise. v4h
-  stays report-only (maintainer decision); the outcome audit it waited for
-  has run, on guild-level labels and at party level (fitness() adds
-  nothing to the numbers), so whether v4h becomes a gate is the decision
-  left. Hypotheses only (standing rule 1), nothing retuned. (V: 09b,
-  Harvest V4; Fitted capability weights; 10, Capability outcomes at party
-  level, numbers controlled)
 - **The 20+ identity band**: no validation round yet; brawl_clap|20 still
   borrows brawl_clap|15-19 (129 distinct rosters), while kite|20 reads a
   cell of its own (174). A round once the harvest can stand it. (V: 09b)
@@ -505,7 +492,7 @@ kit its saved link holds.
   still a copy inside `_portal.html`; a shared stylesheet is the proper
   fix and waits for a second killboard surface.
 
-## Product features (deprioritized until comp quality satisfies)
+## Product features (after v1; the comp-quality bar is the role-level gates)
 
 Enemy-comp counter drafting; fight-plan generation; the blind-validation
 workflow as a tool; the companion loot module (COMPANION_SCOPE.md, proposal
