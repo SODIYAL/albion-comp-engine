@@ -593,6 +593,10 @@ function eventErrorMessage(err) {
   let slots = [];             /* the open event's slots as edited */
   let powers = eventPowers(null, null);
   let massFollows = true;     /* the mass field follows the start until the caller types one of their own */
+  /* the CTA a status move is changing: while the move runs, a redraw of
+     that CTA leaves the typed fields as the form holds them (the move
+     changes the status alone) */
+  let holdTyped = null;
   let busy = false;
   let openSeq = 0;
   /* bumped by every opening of the dialog: an action still waiting on the
@@ -823,17 +827,19 @@ function eventErrorMessage(err) {
     const source = el.source.value;
     renderSources(!!current.id);
     el.source.value = !current.id && Array.from(el.source.options).some(o => o.value === source) ? source : "";
-    el.name.value = current.name || "";
-    el.content.value = current.content || "";
-    el.style.value = current.style || "";
-    el.size.value = current.planned_size || "";
-    el.zone.value = zone;
-    el.start.value = toZoneInput(current.starts_at, zone);
-    el.mass.value = toZoneInput(current.mass_at, zone);
-    el.mass.max = el.start.value;
-    massFollows = !el.mass.value || el.mass.value === toZoneInput(massDefault(current.starts_at), zone);
-    paintEchoes();
-    el.notes.value = current.notes || "";
+    if (holdTyped !== current) {
+      el.name.value = current.name || "";
+      el.content.value = current.content || "";
+      el.style.value = current.style || "";
+      el.size.value = current.planned_size || "";
+      el.zone.value = zone;
+      el.start.value = toZoneInput(current.starts_at, zone);
+      el.mass.value = toZoneInput(current.mass_at, zone);
+      el.mass.max = el.start.value;
+      massFollows = !el.mass.value || el.mass.value === toZoneInput(massDefault(current.starts_at), zone);
+      paintEchoes();
+      el.notes.value = current.notes || "";
+    }
     for (const input of [el.name, el.content, el.style, el.size, el.start, el.mass, el.notes]) {
       input.disabled = !powers.write;
     }
@@ -1233,6 +1239,9 @@ function eventErrorMessage(err) {
 
     busy = true;
     const mine = session;
+    /* the redraws below repaint the status, the moves and the saved line;
+       the typed fields stay as typed, and "Unsaved changes" with them */
+    holdTyped = current;
     acctBusy(b, "Changing…");
 
     try {
@@ -1250,6 +1259,7 @@ function eventErrorMessage(err) {
     } catch (err) {
       if (mine === session) showError(eventErrorMessage(err));
     } finally {
+      holdTyped = null;
       acctIdle(b);
       if (mine === session) busy = false;
     }

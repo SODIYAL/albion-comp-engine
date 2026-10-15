@@ -457,15 +457,6 @@ kit its saved link holds.
   open dialog on its next read. Adding the slots to the guild's trigger
   costs a message per slot `save_event` writes (sixty for a full roster,
   beside the sheet's own sixty); a later increment if callers ask for it.
-- **A status move in the CTAs dialog drops unsaved edits**: with the form
-  edited, a status move asks "Unsaved changes are kept in the form.
-  Change the status now?" and then redraws the form from the saved CTA,
-  so the typed name, times, size and notes go (slots edited stay). Seen
-  in the stub-database page: a typed name came back as the saved one and
-  "Unsaved changes" cleared. The move handler redraws through
-  `renderEvent()`; the renewal repaints the share row alone
-  (`renderShare`, `renderMeta`) and keeps the typed fields. A fix keeps
-  the typed values across the move's redraw.
 - **A caller's role label against the weapon's seat**: an imported
   "Witchwork (DPS)" carries DPS as the slot's role label, and the role
   tag and the per-role counts still read the weapon's primary seat

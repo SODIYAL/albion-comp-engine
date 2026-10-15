@@ -380,6 +380,11 @@ const STYLES = { brawl: "Brawl", clap: "Clap" };
   check("the renewal asks first, repaints the share code and the saved line alone (the typed fields stay), and is offered by role",
         /window\.confirm\(renewConfirmText\(current\.name\)\)/.test(ui) && /renderShare\(\);\s+renderMeta\(\);\s+showNotice\(EVENT_MSG\.renewed\);/.test(ui)
         && /el\.renew\.hidden = !powers\.renew \|\| !current\.share_code;/.test(ui));
+  const move = ui.slice(ui.indexOf("/* ---- status moves ---- */"), ui.indexOf('el.form.addEventListener("submit"'));
+  check("a status move keeps the typed fields: while it runs, a redraw of that CTA leaves them as typed, and the hold ends however the move ends",
+        /if \(holdTyped !== current\) \{\s+el\.name\.value = current\.name/.test(ui)
+        && move.length > 0 && /holdTyped = current;[\s\S]*setEventStatus\(current\.id, to\)/.test(move)
+        && /finally \{\s+holdTyped = null;/.test(move));
 }
 
 console.log(`\n${pass}/${pass + fail} CTA tests passed`);
