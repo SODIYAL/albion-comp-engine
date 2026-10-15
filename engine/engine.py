@@ -888,6 +888,34 @@ class Engine:
         self._dressed_pre_cache = {}
         self._floor_gain_cache = {}
         self._floor_chest_cache = {}
+        # A GENERATED MINIMUM THE GENERATION-FIT GATE WOULD STRAND (the
+        # harvest outranks the gate, tests/VALIDATION.md): where no weapon
+        # left in the suggestion pool can meet a generated minimum (a plan
+        # tool, a band minimum), its satisfiers the generation-fit gate
+        # removed return to the pool when the declared style's winners field
+        # them (the fielded gate admits them); unfit, unfielded and excluded
+        # weapons stay barred. Without it the forge reserved a body no pool
+        # weapon could fill and stopped one short (brawl 15-19, whose
+        # winners field a ranged-AoE core at the median: Longbow, Dawnsong,
+        # Permafrost Prism, all situational at brawl). Pool order kept.
+        self._gen_readmitted = set()
+        if self._band is not None and self._gen_situational:
+            got = self._band_minima()
+            gen_keys = set(self._plan_typical()) | set(got[0] if got else ())
+            for k in sorted(gen_keys):
+                rule = self._band.get(k)
+                if not isinstance(rule, dict) or not rule.get("min"):
+                    continue
+                if any(k in self._pred_possible(w) for w in self._suggest):
+                    continue
+                self._gen_readmitted.update(
+                    w for w in self.pool
+                    if w in self._gen_situational and w not in self._unfielded
+                    and w not in self._style_unfit and w not in self._excluded
+                    and k in self._pred_possible(w))
+            if self._gen_readmitted:
+                keep = set(self._suggest) | self._gen_readmitted
+                self._suggest = [w for w in self.pool if w in keep]
 
     def set_dressing(self, enabled):
         """Validation affordance (V3-W): when OFF, every
@@ -2488,6 +2516,30 @@ class Engine:
                 rest.append(item)
         by_slot["armor"] = chest
         return [by_slot[s] for s in self.KIT_SLOTS if s in by_slot] + rest
+
+    def _release_fallback(self, party, combos, gears, fixed):
+        """THE CAP FALLBACK, RELEASED (the forge's dressing): a generated
+        member wears its cap-fallback variant (the non-carrier chest that
+        serves a carrier cap, kit_variants) only while its first variant
+        is capped for the roster. Refinement can swap out the member that
+        capped it; the member then goes back to its first variant, in slot
+        order, each check reading the roster as already re-dressed, so the
+        forged roster is built as swap_review values it (test_forge F41)."""
+        out = list(gears)
+        for i in range(fixed, len(party)):
+            w = party[i]
+            fb = self._variant_fallback.get(w)
+            if not fb or not out[i]:
+                continue
+            variants = self.kit_variants(w)
+            if not any(out[i] == g for k, g in variants if k in fb):
+                continue
+            state = self.party_state(party[:i] + party[i + 1:],
+                                     combos[:i] + combos[i + 1:],
+                                     out[:i] + out[i + 1:])
+            if not self._variant_capped(state, w, variants[0][1]):
+                out[i] = variants[0][1]
+        return out
 
     def _floor_dress(self, party, combos, gears, fixed):
         """THE CARRIER FLOORS in the forge's dressing (generation only):
@@ -5448,6 +5500,7 @@ class Engine:
                 ctx, party, combos, gears, fixed, avoid=avoid_keys)
             party, combos, gears = self._refine_constrained(
                 ctx, party, combos, gears, fixed, avoid=avoid_keys)
+            gears = self._release_fallback(party, combos, gears, fixed)
         # THE CARRIER FLOORS (generation only): the searched roster is
         # dressed to its floors; the score and the filler audit read it
         # dressed

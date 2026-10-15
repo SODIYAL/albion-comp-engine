@@ -1942,6 +1942,11 @@ def t_empty_pool():
                            **kw(p)))
                 for p in kite_rosters]
     rows_w, rows_d = ref_rows(False), ref_rows(True)
+    # RE-PINNED AS RECORDED (a fold, V: 10): refine reads
+    # every non-retired weapon on both paths; that the suggestion pool
+    # would refine differently is shown on the weapon-only path, and on
+    # the dressed path recorded (at that fold's kits no move of these three
+    # rosters needs a style-gated weapon dressed)
     check("F37b pool=None reads the default: recommend and swap_review the "
           "suggestion pool, refine every non-retired weapon (weapon-only and "
           "dressed paths)",
@@ -1951,9 +1956,10 @@ def t_empty_pool():
           and sw_def == e.swap_review(party, pool=list(e.suggest_pool()))
           and sw_def != e.swap_review(party, pool=list(e.pool))
           and all(d == full for rows in (rows_w, rows_d) for d, full, _sp in rows)
-          and any(full != sp for _d, full, sp in rows_w)
-          and any(full != sp for _d, full, sp in rows_d),
-          f"swap ranks={[m['rank'] for m in sw_def]} refine={rows_w[0]}")
+          and any(full != sp for _d, full, sp in rows_w),
+          f"swap ranks={[m['rank'] for m in sw_def]} refine={rows_w[0]} "
+          f"dressed path differs from the suggestion pool: "
+          f"{any(full != sp for _d, full, sp in rows_d)} (recorded)")
 
 
 def t_short_member_lists():

@@ -819,6 +819,53 @@
     this._variantFallback = {};
     this._dressedCache = {};
     this._floorChestCache = {};
+    /* a generated minimum the generation-fit gate would strand (mirrors
+       engine.py): where no weapon left in the suggestion pool can meet a
+       generated minimum (a plan tool, a band minimum), its satisfiers the
+       generation-fit gate removed return to the pool when the declared
+       style's winners field them; unfit, unfielded and excluded weapons
+       stay barred. Pool order kept. */
+    this._genReadmitted = {};
+    var anySitR = false;
+    for (var gsk in this._genSituational) { anySitR = true; break; }
+    if (this._band && anySitR) {
+      var genKeys = {};
+      var planT = this._planTypical();
+      for (var pk in planT) genKeys[pk] = true;
+      var bm = this._bandMinima();
+      if (bm) for (var bmi = 0; bmi < bm.keys.length; bmi++) genKeys[bm.keys[bmi]] = true;
+      var gks = Object.keys(genKeys).sort();
+      var anyBack = false;
+      for (var gi = 0; gi < gks.length; gi++) {
+        var gk = gks[gi];
+        var gRule = this._band[gk];
+        if (!gRule || typeof gRule !== "object" || !gRule.min) continue;
+        var met = false;
+        for (var si5 = 0; si5 < this._suggest.length; si5++) {
+          if (this._predPossible(this._suggest[si5])[gk]) { met = true; break; }
+        }
+        if (met) continue;
+        for (var pi5 = 0; pi5 < this.pool.length; pi5++) {
+          var pw5 = this.pool[pi5];
+          if (this._genSituational[pw5] && !this._unfielded[pw5]
+              && !this._styleUnfit[pw5] && !this._excluded[pw5]
+              && this._predPossible(pw5)[gk]) {
+            this._genReadmitted[pw5] = true;
+            anyBack = true;
+          }
+        }
+      }
+      if (anyBack) {
+        var keepR = {};
+        for (var ki5 = 0; ki5 < this._suggest.length; ki5++) keepR[this._suggest[ki5]] = true;
+        for (var rw5 in this._genReadmitted) keepR[rw5] = true;
+        var keptR = [];
+        for (var pj5 = 0; pj5 < this.pool.length; pj5++) {
+          if (keepR[this.pool[pj5]]) keptR.push(this.pool[pj5]);
+        }
+        this._suggest = keptR;
+      }
+    }
   };
 
   CompEngine.prototype.setDressing = function (enabled) {
@@ -2236,6 +2283,31 @@
       if (bySlot[KIT_SLOTS[s]] !== undefined) out.push(bySlot[KIT_SLOTS[s]]);
     }
     return out.concat(rest);
+  };
+  CompEngine.prototype._releaseFallback = function (party, combos, gears, fixed) {
+    /* the cap fallback, released (mirrors engine.py _release_fallback): a
+       generated member wears its cap-fallback variant only while its first
+       variant is capped for the roster; in slot order, each check reading
+       the roster as already re-dressed */
+    var out = gears.slice();
+    for (var i = fixed; i < party.length; i++) {
+      var w = party[i];
+      var fb = this._variantFallback[w];
+      if (!fb || !out[i]) continue;
+      var variants = this.kitVariants(w);
+      var inFallback = false;
+      for (var v = 0; v < variants.length; v++) {
+        var g = variants[v][1];
+        if (fb[variants[v][0]] && g && g.length === out[i].length
+            && g.join("|") === out[i].join("|")) { inFallback = true; break; }
+      }
+      if (!inFallback) continue;
+      var state = this.partyState(party.slice(0, i).concat(party.slice(i + 1)),
+                                  combos.slice(0, i).concat(combos.slice(i + 1)),
+                                  out.slice(0, i).concat(out.slice(i + 1)));
+      if (!this._variantCapped(state, w, variants[0][1])) out[i] = variants[0][1];
+    }
+    return out;
   };
   CompEngine.prototype._floorDress = function (party, combos, gears, fixed) {
     /* the carrier floors in the forge's dressing (mirrors engine.py
@@ -4917,6 +4989,7 @@
       rc = this._twoOpt(ctx, rc[0], rc[1], rc[2], fixed, undefined, undefined, av);
       rc = this._refineConstrained(ctx, rc[0], rc[1], rc[2], fixed, undefined, av);
       party = rc[0]; combosOut = rc[1]; gearsOut = rc[2];
+      gearsOut = this._releaseFallback(party, combosOut, gearsOut, fixed);
     }
     /* the carrier floors (mirrors engine.py): the searched roster is
        dressed to its floors; the score and the filler audit read it */

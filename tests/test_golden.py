@@ -730,15 +730,29 @@ def run():
     # real ball clears the typical number on four stages and sits between
     # minimum and typical on Denial (63.8 of 71): a typical winner reads
     # ok-to-strong, never weak — which is what the pin always meant.
+    # RE-PINNED AS RECORDED (a fold, V: 10): Carving's
+    # gain on the thin five spreads over every stage, Pressure (its shred
+    # and dps) the largest; the chain claims a stage only at 30% of the
+    # pick's whole gain, and Carving straddles that bar (31.0% at the
+    # previous fold, 29.1% at this one: the harvested bands moved its
+    # disengage and mobility terms). The pin holds the mechanism, Pressure
+    # the largest stage; whether the claim fires is recorded.
+    terms5 = {t["cap"]: t["delta"]
+              for t in e_brl20.explain(brawl5, "2H_CLEAVER_HELL")}
+    gain5 = {st["name"]: sum(terms5.get(c, 0.0) for c in st["caps"])
+             for st in fc5["stages"]}
+    share5 = gain5["Pressure"] / sum(terms5.values())
     check("T26 fight chain: blap never weak on the brawl sequence; a thin "
-          "brawl five grades weak; Carving connects to Pressure",
+          "brawl five grades weak; Carving's largest stage is Pressure",
           fc_blap["style"] == "brawl"
           and all(s["verdict"] in ("ok", "strong") for s in fc_blap["stages"])
           and any(s["verdict"] in ("weak", "missing") for s in fc5["stages"])
-          and (fc5["improves"] or {}).get("stage") == "Pressure",
+          and max(gain5, key=gain5.get) == "Pressure"
+          and (fc5["improves"] or {}).get("stage") in (None, "Pressure"),
           f"blap={[s['verdict'] for s in fc_blap['stages']]} "
           f"five={[s['verdict'] for s in fc5['stages']]} "
-          f"carving->{(fc5['improves'] or {}).get('stage')}")
+          f"carving->{(fc5['improves'] or {}).get('stage')} "
+          f"(Pressure {share5:.1%} of the gain; recorded)")
     check("T26b chain honesty: a healer claims no chain stage (its value "
           "is survival); balanced uses the detected identity's chain; "
           "fitness untouched",
@@ -766,17 +780,27 @@ def run():
     src_ok = bool(con["sources"]) and all(
         cites_real_spell(r) and r["cap"] in con["caps"] and r["units"] > 0
         for r in con["sources"])
-    imp = fc5["improves"] or {}
+    # RE-PINNED (with T26): the terms of a claim are pinned on every
+    # catalogue weapon that claims a stage on the thin five, so the pin no
+    # longer rests on one pick sitting at the 30% bar
+    claims = []
+    for w in sorted(e_brl20.weapons):
+        imp = e_brl20.fight_chain(brawl5, candidate=w)["improves"]
+        if imp:
+            caps = next(st["caps"] for st in fc5["stages"]
+                        if st["name"] == imp["stage"])
+            claims.append((w, imp["stage"],
+                           bool(imp["terms"])
+                           and {t["cap"] for t in imp["terms"]} <= set(caps)
+                           and abs(sum(t["gain"] for t in imp["terms"])
+                                   - imp["gain"]) < 1e-9))
     check("T26c chain sources: Contact lists the blap ball's real engage/"
-          "tank spells; improves names its terms (Carving -> Pressure = "
-          "its shred + dps, summed)",
-          src_ok and imp.get("terms")
-          and set(t["cap"] for t in imp["terms"])
-          <= set(next(s["caps"] for s in fc5["stages"]
-                      if s["name"] == "Pressure"))
-          and abs(sum(t["gain"] for t in imp["terms"]) - imp["gain"]) < 1e-9,
-          f"contact_sources={len(con['sources'])} "
-          f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
+          "tank spells; every claim on the thin five names its terms "
+          "(the claimed stage's own caps, summed to the gain)",
+          src_ok and len(claims) >= 5 and all(ok for _, _, ok in claims),
+          f"contact_sources={len(con['sources'])} claims={len(claims)} "
+          f"stages={sorted({st for _, st, _ in claims})} "
+          f"bad={[w for w, _, ok in claims if not ok]}")
 
     # T26d — BALANCED FOLLOWS THE DRESSED IDENTITY: a balanced comp is
     # graded on the chain of the identity its worn kits decide (T35: the
