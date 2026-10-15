@@ -13,18 +13,6 @@ index rows in `tests/VALIDATION.md`, never here.
 
 Each is decidable today from evidence already in the repo.
 
-- **Healer pricing at 7, what stays open** (V3 round 2, Castle Outpost
-  7): with disengage and mobility on the weapon basis (V: 10, Disengage and
-  mobility read the weapon basis) the engine names Hallowfall the first
-  healer in 589 of 1,508 held-out healer drops (38 before) and Fallen Staff
-  in 430, where the real healer is Redemption Staff in 683 and Hallowfall
-  in 404. Two causes remain (notes/findings/2026-10-08-castle-outpost-healers.md):
-  the cleanse row (target 2.7, the median 6-8 winner fields none) favours
-  Fallen Staff, which 4.0% of single-healer 6-8 winners field; and
-  Redemption Staff, 46% of single-healer 7s, is named first in none of the
-  1,508. Scoring every member naked read the held-out 7s better before the
-  rule (top-3 8.9% against 7.5%); not re-measured since. (V: 09b, V3 round
-  2)
 - **Effect-carrier pairing rules**: carrier caps and floors ship per effect
   x style x band (V: 10, Carrier caps and floors from one corrected
   measurement); which seat carries each chest beside which mechanism is
@@ -171,6 +159,15 @@ Each is decidable today from evidence already in the repo.
 - **Rows marked for review when curated and never reviewed**: Defensive
   Slam's buff_allies 3 and peel 2 (`pools/mace.yaml`; the dumps text grants
   the buff "for you and up to 10 allies in a 8 radius").
+- **Redemption Staff's Celestial Sphere reads sustain alone**: the E
+  (77 health for up to 10 allies in a 4 radius, bouncing to the closest
+  ally within 11, up to 8 hits) grades heal_sustain 6 and carries no
+  heal_burst row; its burst comes from the Q (Holy Flash, heal_burst 4).
+  Redemption is the healer of 45% of held-out single-healer 7s and the
+  engine's first healer in 2 of 600 at castle_outpost 7 (median rank 12;
+  3 with the cleanse row removed, which stays). Whether the bounce chain
+  earns a heal_burst row is a rubric grade and a logged decision. (V: 10,
+  The cleanse row stays at Castle Outpost)
 - **Small W and passive carriers held at no row**: the sword Weakening
   passive (`PASSIVE_REDUCE_DMG_SWORD`, every auto-attack cuts the target's
   damage dealt by 0.02 for 2s, stacking) and Frost Beam (`FROSTBEAM`,

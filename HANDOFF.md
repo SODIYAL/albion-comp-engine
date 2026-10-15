@@ -55,6 +55,15 @@ top-3 11% against 20%, top-10 30% against 38%, median rank 16 against
 capability fitness predicts the outcome of a fight (BACKLOG, the outcome
 layer). The decision: tests/VALIDATION.md.
 
+A content template reads its own content. At Castle Outpost 7 the cleanse
+row (target 2.7, weight 5, from the three published caller comps) puts a
+cleanse healer forward, where open-world 6-8 winners field none at the
+median; the row stands (castle outposts are played with cleanse), so the
+engine's healer read at 7 is a castle-outpost read: on held-out open-world
+7s the real healer reaches its top 3 in 25.8% of healer drops (71.8% with
+the row removed). The harvest cannot separate castles from open world
+(the content tag), so no open-world 7 template exists to read them by.
+
 ## The engine today
 
 - 137 combat weapons; 31 sheet capabilities (`evidence_lint.CAPABILITIES`),
