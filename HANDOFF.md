@@ -468,9 +468,10 @@ Generated: `dashboard/index.html`, `docs/` — never hand-edit.
   `portal.html`, linked from the masthead and the welcome page): the
   killboard's own read of the Ancient Lands per matchmaking pool, from
   `out/portal_stats.json` (`pipeline/build_portal_stats.py`). Weapons
-  ranked by winning parties with their modal winning build, comps seen
-  twice or more, dominant share and K/D beside every count, small samples
-  marked. A display surface with no engine embedded; the planner's
+  ranked by winning parties with their modal winning build and a
+  two-sided win rate (both sides of every portal kill, 50% even, shown
+  from 100 fights); comps and shapes seen twice or more with their
+  dominant share against the pool's and K/D; small samples marked. A display surface with no engine embedded; the planner's
   recommendations never read it (three layers, never merged).
 - **Live members are found by guid** (stamped on the member's loadout);
   the weapon match is the fallback for a slot restored without one, so

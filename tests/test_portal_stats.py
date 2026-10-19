@@ -133,6 +133,51 @@ check("P13b pools under six members and a build without the role book carry no s
       "shapes" not in bps.build(_doc, _wm, {}, {}, _roles)["pools"]["five"]
       and "shapes" not in bps.build(_doc, _wm, {}, {})["pools"]["seven"])
 
+# the two-sided win rate: sample_parties.kill_ledger over events, then the pools
+import sample_parties as sp  # noqa: E402
+_known = {"2H_BOW", "2H_HOLYSTAFF", "2H_CLAWS", "MAIN_MACE"}
+_eq = lambda w: {"Equipment": {"MainHand": {"Type": f"T6_{w}@1"}}} if w else {"Equipment": {}}
+_mem = lambda nm, w: dict(_eq(w), Name=nm)
+_events = [
+    # a trio (bow, holy staff, claws) kills a mace: each member takes the kill, the mace the death
+    {"EventId": 1, "Killer": _mem("a", "2H_BOW"), "Victim": _mem("x", "MAIN_MACE"),
+     "GroupMembers": [_mem("a", "2H_BOW"), _mem("b", "2H_HOLYSTAFF"), _mem("c", "2H_CLAWS")]},
+    {"EventId": 1, "Killer": _mem("a", "2H_BOW"), "Victim": _mem("x", "MAIN_MACE"),
+     "GroupMembers": [_mem("a", "2H_BOW")]},                          # the same event again: counted once
+    # a solo with no GroupMembers kills a bow; an unknown weapon on the victim side is left out
+    {"EventId": 2, "Killer": _mem("y", "MAIN_MACE"), "Victim": _mem("a", "2H_BOW"), "GroupMembers": []},
+    {"EventId": 3, "Killer": _mem("y", "MAIN_MACE"), "Victim": _mem("z", "2H_UNKNOWN")},
+    {"EventId": 4, "Killer": {}, "Victim": _mem("y", "MAIN_MACE")},       # no killer group: not a fight
+]
+_led = sp.kill_ledger(_events, _known)
+check("P14 the kill ledger counts each weapon of the killing group once per kill and the victim's weapon "
+      "once per death, keyed by the group's size; an event counts once, an unknown weapon is left out",
+      _led == {"1": {"won": {"MAIN_MACE": 2}, "lost": {"2H_BOW": 1}},
+               "3": {"won": {"2H_BOW": 1, "2H_CLAWS": 1, "2H_HOLYSTAFF": 1}, "lost": {"MAIN_MACE": 1}}},
+      json.dumps(_led))
+_floor = bps.MIN_FIGHTS
+_ldoc = {"builds": [], "battles": [
+    {"battle": 9, "kill_ledger": {"3": {"won": {"2H_BOW": 3 * _floor, "2H_HOLYSTAFF": 3 * _floor,
+                                                "2H_CLAWS": 3 * _floor},
+                                        "lost": {"2H_BOW": _floor, "2H_HOLYSTAFF": _floor, "2H_CLAWS": 1}},
+                                  "1": {"won": {"2H_BOW": 2}, "lost": {"2H_BOW": 1}}}}],
+    "parties": [party(9, 0, ["2H_BOW", "2H_HOLYSTAFF", "2H_CLAWS"], 3, 0), party(9, 1, ["2H_BOW"], 2, 1)]}
+_lo = bps.build(_ldoc, weapons_meta, gear_meta, {})
+_lt = {w["id"]: w for w in _lo["pools"]["trio"]["weapons"]}
+check("P15 a weapon's win rate is its share of each kill (1/n of the killing group) over that share plus its "
+      "deaths, in the pool of the group that made the kill; a healer's party kills count for the healer",
+      _lt["2H_BOW"]["wins"] == _floor and _lt["2H_BOW"]["losses"] == _floor
+      and _lt["2H_BOW"]["win_rate"] == 0.5 and _lt["2H_HOLYSTAFF"]["win_rate"] == 0.5
+      and _lt["2H_BOW"]["fights"] == 4 * _floor
+      and _lo["pools"]["solo"]["weapons"][0]["fights"] == 3 and _lo["thresholds"]["fights"] == _floor,
+      json.dumps(_lt["2H_BOW"])[:300])
+check("P15b under the fights floor a weapon carries its counts and no win rate; the pool carries its own rate "
+      "over every weapon, and a pool with no ledger none",
+      _lo["pools"]["solo"]["weapons"][0]["win_rate"] is None and _lt["2H_CLAWS"]["win_rate"] == round(_floor / (_floor + 1), 3)
+      and _lo["pools"]["trio"]["win_rate"] == round(3 * _floor / (5 * _floor + 1), 3)
+      and _lo["pools"]["five"]["win_rate"] is None,
+      f"trio pool {_lo['pools']['trio']['win_rate']}")
+
 # the committed artifact and page
 path = os.path.join(ROOT, "pipeline", "out", "portal_stats.json")
 check("P8 the committed artifact exists, is LF and carries every pool",
@@ -151,6 +196,9 @@ check("P10 the page is display only: no engine, no scoring, no dataset embed",
 check("P11 the page states the unit, dominance and the marker rule for the reader",
       "Ancient Bone" in src and "Dominant" in src and "one player one vote" in src
       and "do not read it" in src)
+check("P11b the page states the win rate's two sides, its even point and the builder's fights floor",
+      "<b>Win rate</b> (weapons) counts both sides of every portal kill" in src and "so 50% is even" in src
+      and f"the win rate shows from {bps.MIN_FIGHTS} fights" in src)
 
 if FAILURES:
     print(f"\n{len(FAILURES)} portal-stats test(s) failed: {', '.join(FAILURES)}")

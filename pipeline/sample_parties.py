@@ -383,6 +383,50 @@ def ingest_event(d, known, builds, parties, participants, areas, stamps,
         sink[key]["kill_areas"][area] = sink[key]["kill_areas"].get(area, 0) + 1
 
 
+def _main_hand(m):
+    eq = (m or {}).get("Equipment") if isinstance(m, dict) else None
+    v = (eq or {}).get("MainHand")
+    return v.get("Type") if isinstance(v, dict) else None
+
+
+def kill_ledger(events, known):
+    """Both sides of a battle's kills, keyed by the size of the group that
+    made each kill (a string key): `won` counts every weapon in the
+    killer's group once per kill (the killer and its GroupMembers, one per
+    member), `lost` the victim's weapon once per death. Filed under the
+    killing group's size, both sides read in that group's pool. Integer
+    counts only: a reader that splits a kill among the group divides by
+    the key. A weapon unknown on either side is left out, never guessed.
+    Each event counts once (EventId)."""
+    won = collections.defaultdict(collections.Counter)
+    lost = collections.defaultdict(collections.Counter)
+    seen = set()
+    for d in events:
+        eid = d.get("EventId")
+        if eid is not None:
+            if eid in seen:
+                continue
+            seen.add(eid)
+        group = {m["Name"]: m for m in (d.get("GroupMembers") or [])
+                 if isinstance(m, dict) and m.get("Name")}
+        killer = d.get("Killer") or {}
+        if killer.get("Name"):
+            group[killer["Name"]] = killer
+        if not group:
+            continue
+        n = len(group)
+        for m in group.values():
+            w = weapon_key(_main_hand(m), known)
+            if w:
+                won[n][w] += 1
+        w = weapon_key(_main_hand(d.get("Victim")), known)
+        if w:
+            lost[n][w] += 1
+    return {str(n): {"won": dict(sorted(won[n].items())),
+                     "lost": dict(sorted(lost[n].items()))}
+            for n in sorted(set(won) | set(lost))}
+
+
 def rebuild_poll_record(bid, raw, known):
     """A kill-feed record as a pure function of its event set: the sinks,
     the roster rebuilt from the events (kills = times named as killer,
@@ -756,7 +800,7 @@ def analyze(known):
             in_fight, outside = set(), set()
         areas = rec.get("kill_areas")
         content = content_tag(areas, rec.get("content_marks"))
-        battles.append({
+        summary = {
             "battle": rec["battle"], "total_players": total,
             "source": rec.get("source") or "battle_list",
             "started_at": rec.get("started_at"),
@@ -771,7 +815,14 @@ def analyze(known):
             "party_members_not_in_this_battle": len(outside) if not from_poll else None,
             "kill_events": rec.get("kill_events"),
             "events_fetched": rec.get("events_fetched"),
-            "parties": len(rec.get("parties") or [])})
+            "parties": len(rec.get("parties") or [])}
+        # THE TWO-SIDED LEDGER rides on a battle an instanced content tags
+        # (today the Dragon Portal's): the portal page's win rate reads
+        # the deaths beside the kills. An open-world battle carries none;
+        # no reader asks for its thousands of kills.
+        if content not in ("open_world", "unknown"):
+            summary["kill_ledger"] = kill_ledger(rec.get("raw_events") or [], known)
+        battles.append(summary)
         # SECOND DEDUPE — by MEMBER OVERLAP, not exact set. Keying on the
         # exact name-set is not enough: a squad loses members as they die,
         # so one 19-man party emits 19/18/15/14/13-member arrays across a

@@ -28,9 +28,10 @@ function check(name, ok, detail) {
   if (ok) passed++; else failed++;
 }
 
-const W = (id, parties, kd, dom, extra) => Object.assign({
+const W = (id, parties, wr, fights, extra) => Object.assign({
   id, name: id, icon: "T6_" + id, parties, share: parties / 10, players: parties,
-  scored: 9, dominant_share: dom, kd, kills: 1, deaths: 1, median_ip: 1200, build: {},
+  scored: 9, dominant_share: 0.9, kd: 3.0, kills: 1, deaths: 1, median_ip: 1200, build: {},
+  win_rate: wr, fights, wins: 70.5, losses: 30,
 }, extra || {});
 const pool = (label, lo, hi, extra) => Object.assign({
   label, sizes: [lo, hi], parties: 50, scored: 48, dominant_share: 0.9,
@@ -44,14 +45,14 @@ const comp = (names, n, kd, dom) => ({
 const STATS = {
   battles: 10, parties: 20, generated_at: "2026-10-03T06:40Z",
   window: {first: "2026-09-05T08:09", last: "2026-10-03T06:34"},
-  thresholds: {slot_votes: 3, comp_sightings: 2},
+  thresholds: {slot_votes: 3, comp_sightings: 2, fights: 100},
   pools: {
     solo: pool("Solo", 1, 1, {weapons: [
-      W("ALPHA", 9, 2.0, 0.5, {build: {armor: {id: "ARMOR_A", name: "Armor A", votes: 5, share: 0.5, of: 10,
+      W("ALPHA", 9, 0.42, 120, {build: {armor: {id: "ARMOR_A", name: "Armor A", votes: 5, share: 0.5, of: 10,
         others: [{id: "ARMOR_B", name: "Armor B", votes: 3, share: 0.3}]}}}),
-      W("BRAVO", 7, 9.0, 0.9), W("CHARLIE", 5, null, null, {scored: 0}), W("DELTA", 3, 4.0, 0.7, {scored: 2})]}),
+      W("BRAVO", 7, 0.61, 300), W("CHARLIE", 5, null, 40), W("DELTA", 3, 0.55, 150)]}),
     trio: pool("3v3", 2, 3),
-    five: pool("5v5", 4, 5, {weapons: [W("ALPHA", 9, 2.0, 0.5)],
+    five: pool("5v5", 4, 5, {weapons: [W("ALPHA", 9, 0.42, 120)],
       comps: [comp(["ALPHA", "BRAVO"], 8, 1.5, 0.4), comp(["CHARLIE", "DELTA"], 3, 7.0, 0.95)]}),
     seven: pool("7v7", 6, 7, {
       comps: [comp(["ALPHA", "BRAVO"], 2, 1.0, 0.5)],
@@ -126,20 +127,27 @@ check("PP2 the chips state the window and the tabs every pool with its size rang
       && (p.els.tabs.innerHTML.match(/class="tab"/g) || []).length === 5);
 
 /* ---- sorting ---- */
-p.sort("weapons", "kd");
+p.sort("weapons", "win_rate");
 check("PP3 a heading click orders by that column, highest first; a missing value sorts last",
-      order(p.html(), NAMES) === "BRAVO DELTA ALPHA CHARLIE" && /data-sort="kd"[^>]*aria-sort="descending"/.test(p.html()),
+      order(p.html(), NAMES) === "BRAVO DELTA ALPHA CHARLIE" && /data-sort="win_rate"[^>]*aria-sort="descending"/.test(p.html()),
       order(p.html(), NAMES));
-p.sort("weapons", "kd");
+p.sort("weapons", "win_rate");
 check("PP3b the same heading again flips the order; the missing value stays last",
-      order(p.html(), NAMES) === "ALPHA DELTA BRAVO CHARLIE" && /data-sort="kd"[^>]*aria-sort="ascending"/.test(p.html()),
+      order(p.html(), NAMES) === "ALPHA DELTA BRAVO CHARLIE" && /data-sort="win_rate"[^>]*aria-sort="ascending"/.test(p.html()),
       order(p.html(), NAMES));
-p.sort("weapons", "dominant_share");
+p.sort("weapons", "fights");
 check("PP3c another heading starts at highest first",
       order(p.html(), NAMES) === "BRAVO DELTA ALPHA CHARLIE", order(p.html(), NAMES));
-check("PP4 a weapon under five scored parties is marked thin; a slot card carries its whole field",
-      (p.html().match(/\(thin\)/g) || []).length === 2 && p.html().includes('data-alts="1"')
+check("PP4 a weapon under the fights floor shows no win rate and says why; a slot card carries its whole field",
+      p.html().includes('title="40 fights; a win rate shows from 100"><span class="few">–</span>')
+      && !p.html().includes("(thin)") && p.html().includes('data-alts="1"')
       && p.html().includes("Armor B") && p.html().includes("and 2 more across rarer items"));
+check("PP4b a win rate reads against the even mark: the bar's width is the rate, a rate under half is marked down, "
+      + "and the cell names its kills, deaths and fights",
+      p.html().includes('<span class="bar wr"><i style="width:61%"></i></span>61%')
+      && p.html().includes('<span class="bar wr down"><i style="width:42%"></i></span>42%')
+      && p.html().includes('title="70.5 kills, shared across each killing party, against 30 deaths over 300 fights"')
+      && !p.html().includes('data-sort="dominant_share" data-table="weapons"') && !p.html().includes('data-sort="kd" data-table="weapons"'));
 
 /* ---- the view switch ---- */
 p.tab("five");
@@ -149,6 +157,9 @@ p.view("comps");
 check("PP5b the comps view replaces the weapons table, ordered by sightings, and is remembered",
       p.html().includes('id="comps"') && !p.html().includes("click a row for the build")
       && p.html().indexOf(">ALPHA<") < p.html().indexOf(">CHARLIE<") && p.store["portal-view"] === "comps");
+check("PP5f a comp's dominant share reads against the pool's, in points, the share and the pool's in its title",
+      p.html().includes('title="40% took no deaths; the pool 90%"><span class="delta down">−50 pts</span>')
+      && p.html().includes('<span class="delta up">+5 pts</span>') && p.html().includes(">Dominant vs pool<"), p.html());
 p.sort("comps", "kd");
 check("PP5c comps sort by their own headings", p.html().indexOf(">CHARLIE<") < p.html().indexOf(">ALPHA<"));
 check("PP5d a pool under six shows no shapes and calls its comps plain comps",
@@ -198,9 +209,9 @@ check("PP9c a chosen weapon narrows the weapons table to its row at its rank, th
       && p.html().includes("<b>ALPHA</b> is <b>#1</b> of 4 weapons in Solo by parties") && !p.html().includes('data-for="0" hidden')
       && p.store["portal-weapon"] === "ALPHA" && p.els["wfilter-in"].value === "ALPHA" && p.els.wfilter.dataset.on === "1" && !p.els["wfilter-clear"].hidden,
       p.html());
-p.sort("weapons", "kd");
-check("PP9d the rank follows the order: by K/D ALPHA is third",
-      p.html().includes("<b>ALPHA</b> is <b>#3</b> of 4 weapons in Solo by k/d"), p.html());
+p.sort("weapons", "win_rate");
+check("PP9d the rank follows the order: by win rate ALPHA is third",
+      p.html().includes("<b>ALPHA</b> is <b>#3</b> of 4 weapons in Solo by win rate"), p.html());
 check("PP9e every tab says how many of its winning parties fielded the weapon, or that it is not seen",
       p.els.tabs.innerHTML.includes("ALPHA: 9 parties") && p.els.tabs.innerHTML.includes('class="tw none">ALPHA: not seen')
       && p.els.tabs.innerHTML.includes("ALPHA: fielded"), p.els.tabs.innerHTML);
@@ -245,7 +256,7 @@ check("PP10d an address without a weapon clears the filter", p.els.wfilter.datas
 check("PP10e an address naming an inherited key opens the default pool, never a broken one",
       boot("#constructor").html().includes("Weapon rankings"));
 const trio = STATS.pools.trio;
-STATS.pools.trio = Object.assign({}, trio, {weapons: [W("BRAVO", 3, 1.0, 0.5)], weapons_total: 9});
+STATS.pools.trio = Object.assign({}, trio, {weapons: [W("BRAVO", 3, 0.5, 100)], weapons_total: 9});
 p = boot("#solo/weapons/ALPHA");
 check("PP10f a pool whose table is the top of more says a missing weapon is not in its top, never that it went unseen",
       p.els.tabs.innerHTML.includes("ALPHA: not in the top 1") && p.els.tabs.innerHTML.includes('class="tw none">ALPHA: not seen'), p.els.tabs.innerHTML);
@@ -254,11 +265,11 @@ STATS.pools.trio = trio;
 /* ---- the keyboard: headings, rows and slot cards take focus and answer Enter and Space ---- */
 p = boot("#solo/weapons");
 check("PP11a the headings, the rows and the slot cards take keyboard focus; a slot card says whether its field is open",
-      /<th class="num sortable" data-sort="kd" data-table="weapons" tabindex="0"/.test(p.html())
+      /<th class="num sortable" data-sort="fights" data-table="weapons" tabindex="0"/.test(p.html())
       && /<tr class="row[^"]*" data-w="\d+" tabindex="0"/.test(p.html())
       && /class="slot" data-alts="1" tabindex="0" role="button" aria-expanded="false"/.test(p.html()), p.html().slice(0, 400));
 /* a focused heading: the keydown reaches the page's click path on that heading */
-const heading = {dataset: {table: "weapons", sort: "kd"}};
+const heading = {dataset: {table: "weapons", sort: "win_rate"}};
 heading.closest = s => (s === "th.sortable, tr.row, .slot[data-alts]" || s === "th.sortable" ? heading : null);
 heading.click = () => p.els.pool.h.click({target: heading});
 let prevented = 0;

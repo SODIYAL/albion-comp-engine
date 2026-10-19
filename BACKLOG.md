@@ -32,6 +32,16 @@ Each is decidable today from evidence already in the repo.
   Caltrops). Whether the walk reads those references, and the cap per
   effect, need a maintainer decision. The in-game damage bonus reads the style clump, not the
   spell's reach. (V: 10, Delivery reads the bundle's own spell)
+- **Open-world fights inside the Dragon Portal's 15-20 pool**: the content
+  marker tags a whole battle from one marked victim, and a bone or shard
+  carried out of the Ancient Lands tags an open-world fight. On the fold
+  copy 119 of the 283 parties of 15-20 come from battles of 100+ players
+  (26 battles, up to 459; 174 from battles of 51+), which a 15-20
+  matchmade instance cannot hold. A battle-size cap on the portal tag
+  (the pool's two sides plus a margin) would move the portal page, the
+  15-20 pool's own rows and its count toward the 200-roster threshold
+  (the item below); the cap needs a maintainer decision. (V: 10, The
+  Dragon Portal weapon table reads a two-sided win rate)
 
 ## Needs evidence a round would produce
 

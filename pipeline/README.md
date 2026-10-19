@@ -626,7 +626,12 @@ fold's own rewrite and seal would race it.
   writes `out/portal_stats.json`, per matchmaking pool (solo, 2-3, 4-5,
   6-7, 15-20): the weapons winning parties carry (parties, share, distinct
   players, dominant share = the party took no deaths in its battle, K/D,
-  median item power), the modal winning build per weapon and slot (one
+  median item power, and the WIN RATE: both sides of every kill from the
+  battle's `kill_ledger`, which `sample_parties.py` writes on a battle an
+  instanced content tags, each weapon of the killing group taking 1/n of
+  the kill and the victim's weapon the death, both filed in the killing
+  group's pool, so a pool reads about 50%; shown from 100 fights), the
+  modal winning build per weapon and slot (one
   player one vote, from three votes), and the comps seen twice or more
   with every weapon known. Pools of six and more also carry SHAPES (the
   party's members per role class, each weapon read through its primary

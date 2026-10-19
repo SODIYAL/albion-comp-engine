@@ -16,7 +16,21 @@ kills and deaths are the battle's per-name tallies summed over its
 members (for a kill-feed record: times named as killer and as victim in
 that battle's events). `dominant` = the party took no deaths in the
 battle; `kd` = kills over deaths (deaths floored at one). Both are
-reported beside the counts, never folded into one number.
+reported beside the counts, never folded into one number. Both read
+winners only, so neither separates weapons (measured: every one of the
+top 40 solo weapons read 86% to 97% dominant against a pool of 93%).
+
+THE WIN RATE (weapons). Both sides of every kill, from the battle's
+`kill_ledger` (sample_parties.kill_ledger): each weapon in the killing
+group takes 1/n of the kill (n = the group's size at the kill, so a
+healer's party kill counts for the healer), the victim's weapon takes
+the death, and both sides are filed in the pool of the group that made
+the kill. A weapon's `win_rate` = wins / (wins + losses); across a pool
+the wins and the losses balance, so the pool's own rate is about 50%
+(the remainder is weapons unknown on one side). `fights` = the kills a
+weapon took part in plus its deaths; the rate shows from MIN_FIGHTS.
+The victim's own group is not in the data, so comps and shapes carry no
+win rate: the page reads their dominant share against the pool's.
 
 BUILDS. Per weapon and pool, the modal item per slot over the WINNING
 builds (a member of a killer party: seen as killer or participant, never
@@ -52,6 +66,7 @@ Usage:  py -3 pipeline/build_portal_stats.py [--rosters PATH]  -> out/portal_sta
 import collections
 import datetime
 import json
+import math
 import os
 import re
 import sys
@@ -67,6 +82,7 @@ POOLS = (("solo", "Solo", 1, 1), ("trio", "3v3", 2, 3), ("five", "5v5", 4, 5),
 SLOTS = ("Head", "Armor", "Shoes", "Cape", "OffHand", "Potion", "Food")
 MIN_VOTES = 3          # a slot's modal item shows from this many distinct players
 MIN_COMP = 2           # a comp shows from this many sightings
+MIN_FIGHTS = 100       # a weapon's win rate shows from this many fights (kills taken part in + deaths)
 TOP_WEAPONS = 40
 TOP_COMPS = 40
 OTHERS = 8             # alternatives listed per slot beside the modal item
@@ -139,6 +155,22 @@ def build(doc, weapons_meta, gear_meta, items, roles=None):
         if b.get("seen_as") == "victim" or b.get("party") is None:
             continue
         by_party[(b.get("battle"), b.get("party"))].append(b)
+    # THE TWO-SIDED LEDGER per pool: weapon -> {group size: kills taken
+    # part in}, and weapon -> deaths, both filed by the killing group's size
+    won_by = {key: collections.defaultdict(collections.Counter) for key, *_ in POOLS}
+    lost_by = {key: collections.Counter() for key, *_ in POOLS}
+    for b in battles:
+        for n, side in (b.get("kill_ledger") or {}).items():
+            pool = pool_of(int(n))
+            if pool is None:
+                continue
+            for w, c in (side.get("won") or {}).items():
+                won_by[pool][w][int(n)] += c
+            for w, c in (side.get("lost") or {}).items():
+                lost_by[pool][w] += c
+
+    def wins_of(pool, w):
+        return math.fsum(c / n for n, c in sorted(won_by[pool].get(w, {}).items()))
     out_pools = {}
     for key, label, lo, hi in POOLS:
         ps = [p for p in parties if lo <= (p.get("size") or 0) <= hi]
@@ -223,6 +255,8 @@ def build(doc, weapons_meta, gear_meta, items, roles=None):
         for w, st in wstat.items():
             best = modal_build(kits[w].values(), MIN_VOTES)
             ips = [b.get("item_power") for b in kits[w].values() if b.get("item_power")]
+            wins, losses = wins_of(key, w), lost_by[key].get(w, 0)
+            fights = sum(won_by[key].get(w, {}).values()) + losses
             weapons.append({
                 "id": w, "name": wname(w), "icon": items.get(w) or f"T6_{w}",
                 "parties": st["parties"], "share": round(st["parties"] / n_parties, 3) if n_parties else 0.0,
@@ -231,6 +265,8 @@ def build(doc, weapons_meta, gear_meta, items, roles=None):
                 "dominant_share": round(st["dominant"] / st["scored"], 3) if st["scored"] else None,
                 "kd": round(st["kills"] / max(1, st["deaths"]), 2) if st["scored"] else None,
                 "kills": st["kills"], "deaths": st["deaths"],
+                "fights": fights, "wins": round(wins, 1), "losses": losses,
+                "win_rate": round(wins / (wins + losses), 3) if fights >= MIN_FIGHTS else None,
                 "median_ip": int(sorted(ips)[len(ips) // 2]) if ips else None,
                 "build": best,
             })
@@ -253,10 +289,13 @@ def build(doc, weapons_meta, gear_meta, items, roles=None):
                 "kd": round(c["kills"] / max(1, c["deaths"]), 2) if c["scored"] else None,
             })
         comp_rows.sort(key=lambda r: (-r["n"], -(r["dominant_share"] or 0), [w["name"] for w in r["weapons"]]))
+        pool_wins = math.fsum(wins_of(key, w) for w in sorted(won_by[key]))
+        pool_losses = sum(lost_by[key].values())
         out_pools[key] = {
             "label": label, "sizes": [lo, hi], "parties": n_parties,
             "scored": scored_total,
             "dominant_share": round(dom_total / scored_total, 3) if scored_total else None,
+            "win_rate": round(pool_wins / (pool_wins + pool_losses), 3) if pool_wins + pool_losses else None,
             "weapons": weapons[:TOP_WEAPONS], "weapons_total": len(weapons),
             "comps": comp_rows[:TOP_COMPS], "comps_total": len(comp_rows),
         }
@@ -323,12 +362,12 @@ def build(doc, weapons_meta, gear_meta, items, roles=None):
         "content": CONTENT,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
         "source": ("kill-feed poll records marked by the Ancient Bone in the victim's "
-                   "inventory (sample_parties.py CONTENT MARKER); killer parties only; "
-                   "display only, never a scoring input"),
+                   "inventory (sample_parties.py CONTENT MARKER); killer parties, and for "
+                   "the win rate the victims of their kills; display only, never a scoring input"),
         "window": {"first": min(stamps)[:16] if stamps else None,
                    "last": max(stamps)[:16] if stamps else None},
         "battles": len(battles), "parties": len(parties),
-        "thresholds": {"slot_votes": MIN_VOTES, "comp_sightings": MIN_COMP},
+        "thresholds": {"slot_votes": MIN_VOTES, "comp_sightings": MIN_COMP, "fights": MIN_FIGHTS},
         "pools": out_pools,
     }
 
@@ -363,7 +402,7 @@ def main():
     for key, _l, _lo, _hi in POOLS:
         p = pools[key]
         print(f"  {p['label']:6s} parties {p['parties']:5d}  weapons {p['weapons_total']:3d}  "
-              f"comps {p['comps_total']:3d}  dominant {p['dominant_share']}"
+              f"comps {p['comps_total']:3d}  dominant {p['dominant_share']}  win rate {p['win_rate']}"
               + (f"  shapes {p['shapes_total']:3d}" if "shapes_total" in p else ""))
     print(f"wrote out/portal_stats.json")
 
