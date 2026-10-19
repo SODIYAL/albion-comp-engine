@@ -11636,18 +11636,36 @@
    "display_name": "Smuggler Cape",
    "evidence": {
     "tankiness": [
-     "GEAR_STATS"
+     "PASSIVE_CAPE_SMUGGLER"
     ]
    },
    "loadout": {
-    "always": {
-     "tankiness": 1
-    },
-    "slot_delivery": [],
-    "slot_escal": [],
-    "slot_names": [],
-    "slot_spells": [],
-    "slots": []
+    "always": {},
+    "slot_delivery": [
+     [
+      {}
+     ]
+    ],
+    "slot_escal": [
+     [
+      0.0
+     ]
+    ],
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_SMUGGLER"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 1
+      }
+     ]
+    ]
    },
    "slot": "cape",
    "stats": {},

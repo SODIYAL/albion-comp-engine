@@ -95,10 +95,12 @@
   slot: cape
   curated_as_of: 2026-08-20
   # Hidden Vial (PASSIVE_CAPE_SMUGGLER, on the menu): casting the potion
-  # cuts the potion slot's cooldown by 80. The row cites GEAR_STATS; the
-  # item carries no combat stats (out/item_stats.json).
+  # cuts the potion slot's cooldown by 80, a second potion at once. The
+  # item carries no combat stats (out/item_stats.json); the row cites the
+  # passive: 78% of the cape's winners drink the Gigantify Potion
+  # (tankiness 2), so the second potion is a defensive one.
   capabilities:
-    - {cap: tankiness,     score: 1, evidence: GEAR_STATS}
+    - {cap: tankiness,     score: 1, evidence: PASSIVE_CAPE_SMUGGLER}  # a second Gigantify Potion (candidate added in effect_overrides.yaml)
 
 - gear: CAPEITEM_UNDEAD              # Undead Cape — Vanisher
   slot: cape

@@ -120,6 +120,8 @@ add:
     buff_allies: "group absorb shield; outside the structured vocab"
   POTION_MOB_RESET_P5:               # Calming Potion — "Turns you and up to 20 group members within a 15 radius ... Applies a shield to all affected players, absorbing 90.85 damage"
     buff_allies: "group absorb shield; outside the structured vocab"
+  PASSIVE_CAPE_SMUGGLER:             # Hidden Vial — "Grab a hidden potion, reducing the cooldown of your potion slot ability by 80"
+    tankiness: "a second potion at once; 78% of the cape's winners drink the Gigantify Potion (tankiness 2)"
   GROUNDBREAKER2:                    # Groundbreaker — "Split the earth in a 20 long line in front of you ... Enemies at the center of the split earth will be stunned for 2.7"
     engage: "a 20m line stun opens the fight from range; the effect map grounds engage on the caster's own movement only"
   # ANTI-DIVE RULE: anti_dive is what denies a dive. It counts an effect

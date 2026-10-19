@@ -194,8 +194,9 @@ Each is decidable today from evidence already in the repo.
   Arrows and others) and the scope of the 191 = 2 burst anchor; Soulscythe's
   knockback 4 on an air-throw; Siegebow and Energy Shaper's Bolt Shot 4
   now that Explosive Salvo scores its own row; Permafrost's burst_aoe 6
-  (173 vs players); the Smuggler Cape's tankiness on GEAR_STATS; Fallen
-  Staff's and Chillhowl's ally-save peel; the fear ladder (Demonic 4,
+  (173 vs players: on raw magnitude the 4 rung, Hail 160 and Flame Pillar
+  200; the 6 rests on the stun before the blast, and the row anchors the
+  brawl 15-19 ranged-AoE minimum); the fear ladder (Demonic 4,
   Infernal 2); Flare's enemy cooldown-rate cut and the `reveal`
   capability; gear self-costs stated in cited texts. (V: 10, The movement
   rows the snapshot move deferred)
