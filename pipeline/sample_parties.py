@@ -618,38 +618,51 @@ def harvest_battle(args, known, b, bid, total):
     independent — one row per battle, no shared state — so battles run
     side by side while each battle's events stay sequential, and the
     record a worker writes is identical to what the old sequential loop
-    wrote. Returns (log line, kills counted, events fetched)."""
+    wrote. Returns (log line, kills counted, events read, events read from
+    the record already cached)."""
     server = args.server
     st = store()
+    prev = st.get(bid)
     # step 2 — the full roster (denominator)
     detail = get_json(f"{GAMEINFO}/battles/{bid}")
-    if detail is None and st.has(bid):
-        prev = st.get(bid)
-        if prev and prev.get("source") == "events_poll":
-            st.close()
-            # the official record lags the kills: the poll record, with its
-            # event-built roster, is the better one until it exists
-            return (f"  battle {bid}: official record not yet available, "
-                    f"kill-feed record kept", 0, 0)
+    if detail is None and prev and prev.get("source") == "events_poll":
+        st.close()
+        # the official record lags the kills: the poll record, with its
+        # event-built roster, is the better one until it exists
+        return (f"  battle {bid}: official record not yet available, "
+                f"kill-feed record kept", 0, 0, 0)
     roster = list((detail or {}).get("players", {}).values())
 
     # step 3 — per-kill parties
     kills = get_json(
         f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
     ) or []
-    parties, participants, ev_ok = {}, {}, 0
+    # THE CACHED EVENTS FIRST. The kill-feed poll stores every kill it sees,
+    # slimmed, and a stored event is the detail endpoint's event slimmed
+    # (measured: 31 of 31 identical); before the harvest reaches a listed
+    # battle the poll holds 88-98% of its kills (8+ and 25+ floors). A
+    # stored event is read, never fetched again: a pass costs the events
+    # the poll missed, where one detail fetch per kill (1-2 s each) ran a
+    # 25+ pass past the task's six hours.
+    stored = {e.get("EventId"): e for e in ((prev or {}).get("raw_events") or [])
+              if e.get("EventId")}
+    parties, participants, ev_ok, reused = {}, {}, 0, 0
     builds, areas, stamps = {}, collections.Counter(), []
     marks, raw_kept = collections.Counter(), []
     for x in kills[:args.max_events]:
         eid = x.get("EventId")
         if not eid:
             continue
-        # three tries (was two): daytime 502s ran ~4% per call
-        # and a second 502 lost the event; the third try, 4.5 s later,
-        # costs nothing while other workers keep fetching
-        d = get_json(f"{GAMEINFO}/events/{eid}", tries=3)
-        if not d:
-            continue
+        d = stored.get(eid)
+        if d is not None:
+            reused += 1
+        else:
+            # three tries (was two): daytime 502s ran ~4% per call
+            # and a second 502 lost the event; the third try, 4.5 s later,
+            # costs nothing while other workers keep fetching
+            d = get_json(f"{GAMEINFO}/events/{eid}", tries=3)
+            if not d:
+                continue
         ev_ok += 1
         raw_kept.append(slim_event(d))
         ingest_event(d, known, builds, parties, participants, areas, stamps,
@@ -679,6 +692,7 @@ def harvest_battle(args, known, b, bid, total):
         # through --retag, never another fetch
         "raw_events": sorted(raw_kept, key=lambda e: e.get("EventId") or 0),
     }
+    # read again: the poll may have added kills while this battle fetched
     prev = st.get(bid)
     if prev and prev.get("source") == "events_poll":
         # the poll saw this battle first: its marks and stored events ride
@@ -693,8 +707,8 @@ def harvest_battle(args, known, b, bid, total):
     st.put(bid, rec)
     st.close()
     return (f"  battle {bid}: {total} players, {len(kills)} kills, "
-            f"{ev_ok} events fetched, {len(parties)} distinct parties",
-            min(len(kills), args.max_events), ev_ok)
+            f"{ev_ok} events read ({reused} cached), {len(parties)} distinct parties",
+            min(len(kills), args.max_events), ev_ok, reused)
 
 
 def fetch(args, known):
@@ -740,23 +754,25 @@ def fetch(args, known):
     # the event is skipped, not raised) is visible rather than silent:
     # the sequential baseline was 0.987 (one nightly pass).
     import concurrent.futures as cf
-    kills_total = events_total = 0
+    kills_total = events_total = reused_total = 0
     workers = max(1, args.workers)
     print(f"{len(todo)} battles to fetch, {workers} worker(s)", flush=True)
     with cf.ThreadPoolExecutor(max_workers=workers) as pool:
         futs = [pool.submit(harvest_battle, args, known, *t) for t in todo]
         for fut in cf.as_completed(futs):
             try:
-                line, k, e = fut.result()
+                line, k, e, r = fut.result()
             except Exception as ex:      # one bad battle must not kill a night
                 print(f"  battle failed: {ex!r}", flush=True)
                 continue
             kills_total += k
             events_total += e
+            reused_total += r
             print(line, flush=True)
     cov = (events_total / kills_total) if kills_total else 1.0
     flag = "" if cov >= 0.95 else "   WARNING: below the 0.95 floor — rate limited? lower --workers"
     errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
+    print(f"events read from the cache: {reused_total}, fetched: {events_total - reused_total}", flush=True)
     print(f"event coverage this pass: {events_total}/{kills_total} = {cov:.3f}"
           f"  (request misses after retries: {errs}){flag}", flush=True)
     print(f"cache holds {st.count()} battles", flush=True)

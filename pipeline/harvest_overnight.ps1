@@ -21,6 +21,13 @@
 # (sequential baseline 0.987) and a tally of request misses by HTTP code —
 # 502s are the API, 429s mean lower --workers.
 #
+# CACHED EVENTS: a kill the kill-feed poll already stored is read from its
+# record, never fetched again (the poll holds 88-98% of a listed battle's
+# kills), so a pass fetches the official roster, the kill list and the
+# kills the poll missed; the pass prints how many it read from the cache.
+# One detail fetch per kill (1-2 s each) had run the 25+ pass past the
+# task's six hours, and the 8+ pass never started.
+#
 # It does NOT rebuild the dataset or commit: the harvest lands in
 # pipeline/out/party_cache.sqlite (gitignored), pipeline/out/party_rosters.json.gz
 # (the populations the build reads) and pipeline/out/party_rosters_full.json.gz

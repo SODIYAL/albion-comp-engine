@@ -2,8 +2,9 @@
 """Content tagging in the harvester (pipeline/sample_parties.py): the
 KillArea tally, the marker rule (an item only found inside one content,
 read off the victim's inventory), the tag a record reads, the kill-feed
-record rebuilt as a pure function of its events, and the population the
-committed artifact keeps. Pure functions, no network, no cache.
+record rebuilt as a pure function of its events, the population the
+committed artifact keeps, and the battle harvest reading the poll's stored
+kills. No network; the harvest runs over a temporary cache.
 Script-style: exit 0 = pass."""
 import collections
 import os
@@ -145,6 +146,51 @@ check("C5c every rosters artifact stays local (.gitignore lists the working, fol
                                                   rosters_io.FULL_FOLD_NAME, rosters_io.PREV_NAME))
       and "pipeline/out/" + rosters_io.RECORD_NAME not in ignored
       and "rosters_io.full_fold_path()" in usage_src)
+
+# C6 the battle harvest reads the kills the poll already stored and fetches the rest
+import tempfile  # noqa: E402
+import types  # noqa: E402
+import party_store  # noqa: E402
+
+
+def harvest_once(stored_ids):
+    """One harvest_battle over a fresh temporary cache, the poll's record
+    holding `stored_ids` beforehand; the network is a stub that counts the
+    event-detail calls."""
+    sp.CACHE = os.path.join(tempfile.mkdtemp(), "cache.sqlite")
+    full = {i: event(i, "a", f"v{i}", ["a", "b"]) for i in (21, 22, 23)}
+    with party_store.Store(sp.CACHE) as st:
+        if stored_ids:
+            st.put(7, sp.rebuild_poll_record(7, {i: full[i] for i in stored_ids}, KNOWN))
+    fetched = []
+
+    def fake_get(url, tries=4, pause=1.5):
+        if url.endswith("/battles/7"):
+            return {"players": {"1": {"name": "a", "guildName": "G", "kills": 3, "deaths": 0}}}
+        if "battles/kills" in url:
+            return [{"EventId": i} for i in (21, 22, 23)]
+        if "/events/" in url:
+            eid = int(url.rsplit("/", 1)[1])
+            fetched.append(eid)
+            return full[eid]
+        return None
+    real_get, sp.get_json = sp.get_json, fake_get
+    try:
+        out = sp.harvest_battle(types.SimpleNamespace(server="us", max_events=120), KNOWN,
+                                {"startedAt": "2026-09-27T12:00:00Z", "totalKills": 3}, 7, 6)
+    finally:
+        sp.get_json = real_get
+    with party_store.Store(sp.CACHE) as st:
+        return out, fetched, st.get(7)
+
+
+(_line, _k, _e, _r), _fetched, _rec = harvest_once([21, 22])
+(_line0, _k0, _e0, _r0), _fetched0, _rec0 = harvest_once([])
+check("C6a a kill the poll stored is read from the cache, never fetched again; the pass counts it as read",
+      _fetched == [23] and (_k, _e, _r) == (3, 3, 2) and "3 events read (2 cached)" in _line, f"{_fetched} {_line}")
+check("C6b the record equals the one a pass fetching every kill writes",
+      _fetched0 == [21, 22, 23] and _r0 == 0 and _rec == _rec0
+      and [e["EventId"] for e in _rec["raw_events"]] == [21, 22, 23] and _rec["events_fetched"] == 3)
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")
