@@ -121,6 +121,7 @@
   curated_as_of: 2026-08-20
   capabilities:
     - {cap: mobility,      score: 3, evidence: DMG_BLINK}        # Raging Blink: teleport + stacking damage buff, recastable within 4s
+    - {cap: disengage,     score: 3, evidence: DMG_BLINK}        # the teleport out, 0.2s immune to damage and purges: Blink's rung (3)
     - {cap: engage,        score: 2, evidence: DMG_BLINK}
     - {cap: sustained_dps, score: 2, evidence: DMG_BLINK}
 

@@ -1354,6 +1354,7 @@
   {
    "active_caps": {
     "disengage": 2,
+    "engage": 2,
     "mobility": 2,
     "reflect": 2,
     "sustained_dps": 2,
@@ -2444,7 +2445,7 @@
   },
   {
    "active_caps": {
-    "disengage": 2,
+    "disengage": 3,
     "engage": 2,
     "mobility": 3,
     "sustained_dps": 2

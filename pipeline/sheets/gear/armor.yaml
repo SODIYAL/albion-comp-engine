@@ -102,6 +102,7 @@
     - {cap: sustained_dps, score: 2, evidence: IMMUNEAREA}       # +15% damage and cooldown rate for 6s (Mortal Agony's +15% damage=2)
     - {cap: disengage,     score: 2, evidence: IMMUNEAREA}       # CC-immune 12m leap behind a 0.6s cast (Delayed Teleport's delay=2, Evasive Jump=3)
     - {cap: mobility,      score: 2, evidence: IMMUNEAREA}       # the leap (Evasive Jump=2)
+    - {cap: engage,        score: 2, evidence: IMMUNEAREA}       # the CC-immune leap in, landing in an area outside enemies cannot reach: Raging Blink's teleport in (2)
 
 - gear: ARMOR_LEATHER_FEY            # Mistwalker Jacket — Mist Cloud
   slot: armor

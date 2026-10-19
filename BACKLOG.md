@@ -196,21 +196,18 @@ Each is decidable today from evidence already in the repo.
   isolating a rooted target earns more than that rung (Knockback Shot's 4
   is a directional push) is a validation-round question.
 - **Curation grades deferred at the move to the newer snapshot** (each
-  needs a rubric grade and a logged decision): Oathkeepers' heal_sustain on
-  Blessed Aurora (50 per auto-attack for 5s); Hoarfrost's Avalanche at 320
-  per cast against the T44 pin; Ground Shaker (every mace's W: 219 in a 4
-  radius plus an air-throw) and the 1H Mace's Deep Leap damage, no rows;
-  Harpoon's catch; Battleaxe burst_st 2 on a rejected "1H budget"; Fleet
-  Footwork and Shockwave mobility; the damage-only shared spells (Whirling
-  Strikes, Throwing Blades, Explosive Arrows and others) and the scope of
-  the 191 = 2 burst anchor; Soulscythe's knockback 4 on an air-throw;
-  Siegebow and Energy Shaper's Bolt Shot 4 now that Explosive Salvo scores
-  its own row; Permafrost's burst_aoe 6 (173 vs players); Raging Blink's
-  missing disengage; the Smuggler Cape's tankiness on GEAR_STATS; Fallen
+  needs a rubric grade and a logged decision): Ground Shaker (every mace's
+  W: 219 in a 4 radius plus an air-throw) and the 1H Mace's Deep Leap
+  damage, no rows; Battleaxe burst_st 2 on a rejected "1H budget"; the
+  damage-only shared spells (Whirling Strikes, Throwing Blades, Explosive
+  Arrows and others) and the scope of the 191 = 2 burst anchor; Soulscythe's
+  knockback 4 on an air-throw; Siegebow and Energy Shaper's Bolt Shot 4
+  now that Explosive Salvo scores its own row; Permafrost's burst_aoe 6
+  (173 vs players); the Smuggler Cape's tankiness on GEAR_STATS; Fallen
   Staff's and Chillhowl's ally-save peel; the fear ladder (Demonic 4,
-  Infernal 2); Wings of Fire's engage; the Dragon omelette's Healing Cast
-  rider; Flare's enemy cooldown-rate cut and the `reveal` capability; gear
-  self-costs stated in cited texts.
+  Infernal 2); Flare's enemy cooldown-rate cut and the `reveal`
+  capability; gear self-costs stated in cited texts. (V: 10, The movement
+  rows the snapshot move deferred)
 - **Black Hands' Devastating Strike knockback has no structured candidate**:
   the second hit's knockback is unscored (an `effect_overrides.yaml` add:
   entry would ground it); the weapon is retired, so only old permalinks

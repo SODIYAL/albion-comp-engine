@@ -8964,6 +8964,7 @@
   "ARMOR_LEATHER_DRAGON": {
    "capabilities": {
     "disengage": 2,
+    "engage": 2,
     "mobility": 2,
     "reflect": 2,
     "sustained_dps": 2,
@@ -9006,6 +9007,9 @@
    },
    "evidence": {
     "disengage": [
+     "IMMUNEAREA"
+    ],
+    "engage": [
      "IMMUNEAREA"
     ],
     "mobility": [
@@ -9052,6 +9056,7 @@
      [
       {
        "disengage": 2,
+       "engage": 2,
        "mobility": 2,
        "sustained_dps": 2,
        "tankiness": 2
@@ -17178,7 +17183,7 @@
   },
   "SHOES_LEATHER_MORGANA": {
    "capabilities": {
-    "disengage": 2,
+    "disengage": 3,
     "engage": 2,
     "mobility": 3,
     "sustained_dps": 2
@@ -17228,6 +17233,7 @@
    },
    "evidence": {
     "disengage": [
+     "DMG_BLINK",
      "DODGE"
     ],
     "engage": [
@@ -17275,6 +17281,7 @@
     "slots": [
      [
       {
+       "disengage": 3,
        "engage": 2,
        "mobility": 3,
        "sustained_dps": 2
@@ -305195,7 +305202,8 @@
    "evidence": {
     "catch": [
      "SHOVEL",
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -305327,6 +305335,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -305418,7 +305427,8 @@
      "SPEAR_AOE_FINISHER"
     ],
     "catch": [
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -305551,6 +305561,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -307100,7 +307111,8 @@
      "GROUNDSPEAR"
     ],
     "catch": [
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -307237,6 +307249,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -309301,7 +309314,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -309319,7 +309333,9 @@
     ],
     "mobility": [
      "TRIPLECOMBO_DIVEKICK",
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -309384,6 +309400,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -309401,6 +309424,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -309426,7 +309451,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER_SPEED"
@@ -309469,6 +309496,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -309551,7 +309585,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -309568,7 +309603,9 @@
     ],
     "mobility": [
      "CONEPUNCH2",
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -309625,6 +309662,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -309642,6 +309686,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -309667,7 +309713,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER_SPEED"
@@ -309707,6 +309755,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -309796,7 +309851,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -309811,7 +309867,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -309873,6 +309931,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -309890,6 +309955,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -309915,7 +309982,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER"
@@ -309954,6 +310023,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -310044,7 +310120,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -310056,7 +310133,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -310114,6 +310193,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -310131,6 +310217,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -310156,7 +310244,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER"
@@ -310195,6 +310285,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -310278,7 +310375,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -310291,7 +310389,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "GROWING_PUNCH",
@@ -310351,6 +310451,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -310368,6 +310475,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -310393,7 +310502,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER_SPEED"
@@ -310432,6 +310543,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -310515,7 +310633,8 @@
      "KNUCKLECOMBO"
     ],
     "catch": [
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -310528,7 +310647,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BLAZING_GEYSER",
@@ -310588,6 +310709,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -310605,6 +310733,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -310630,7 +310760,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER"
@@ -310669,6 +310801,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -310754,7 +310893,8 @@
     ],
     "catch": [
      "DIVEPUNCH_RISE",
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -310771,7 +310911,9 @@
     ],
     "mobility": [
      "DIVEPUNCH_RISE",
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "BACKHAND_KNOCKBACK"
@@ -310830,6 +310972,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -310847,6 +310996,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -310872,7 +311023,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER_SPEED"
@@ -310913,6 +311066,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -311004,7 +311164,8 @@
     ],
     "catch": [
      "IMPULSE_PUNCH",
-     "DASHKICK"
+     "DASHKICK",
+     "SHOCKWAVE_PUNCH"
     ],
     "clump_create": [
      "TRIPLE_KICK"
@@ -311016,7 +311177,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "mobility": [
-     "DASHKICK"
+     "DASHKICK",
+     "CROSSSTEP_ROUNDHOUSE",
+     "SHOCKWAVE_PUNCH"
     ],
     "peel": [
      "IMPULSE_PUNCH",
@@ -311081,6 +311244,13 @@
       },
       {
        "radius": 2.5
+      },
+      {
+       "max_targets": 10
+      },
+      {
+       "max_targets": 10,
+       "radius": 1.75
       }
      ],
      [
@@ -311098,6 +311268,8 @@
       0.08
      ],
      [
+      0.08,
+      0.08,
       0.08,
       0.08
      ],
@@ -311123,7 +311295,9 @@
      ],
      [
       "CREATE_OPENING",
-      "DASHKICK"
+      "DASHKICK",
+      "CROSSSTEP_ROUNDHOUSE",
+      "SHOCKWAVE_PUNCH"
      ],
      [
       "PASSIVE_KNUCKLE_BRAWLER"
@@ -311163,6 +311337,13 @@
        "catch": 2,
        "engage": 2,
        "mobility": 4
+      },
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "mobility": 2
       }
      ],
      [
@@ -317052,7 +317233,8 @@
    "evidence": {
     "catch": [
      "HALBERDSMASH",
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -317186,6 +317368,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -317280,7 +317463,8 @@
     ],
     "catch": [
      "TRIDENTTHROW",
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -317431,6 +317615,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -324701,7 +324886,8 @@
    "display_name": "Spear",
    "evidence": {
     "catch": [
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -324846,6 +325032,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -324936,7 +325123,8 @@
     ],
     "catch": [
      "SPEARTHROW",
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -325083,6 +325271,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
@@ -325177,7 +325366,8 @@
      "LANCE_CHARGE"
     ],
     "catch": [
-     "LEGBREAKER"
+     "LEGBREAKER",
+     "SKILLSHOT_PULL"
     ],
     "damage_debuff": [
      "LEGBREAKER"
@@ -325315,6 +325505,7 @@
        "damage_debuff": 2
       },
       {
+       "catch": 2,
        "root": 2
       },
       {
