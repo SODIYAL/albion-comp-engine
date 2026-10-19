@@ -301792,7 +301792,7 @@
     "root": 2,
     "slow": 4,
     "stun": 2,
-    "sustained_dps": 2,
+    "sustained_dps": 4,
     "zone_control": 6
    },
    "cast_caps": [
@@ -301946,7 +301946,7 @@
        "peel": 4,
        "ranged_presence": 2,
        "slow": 4,
-       "sustained_dps": 2,
+       "sustained_dps": 4,
        "zone_control": 6
       }
      ],
@@ -314101,7 +314101,7 @@
   },
   "2H_TRIDENT_UNDEAD": {
    "capabilities": {
-    "buff_allies": 3,
+    "buff_allies": 4,
     "burst_aoe": 2,
     "catch": 4,
     "damage_debuff": 2,
@@ -314256,7 +314256,7 @@
     "slots": [
      [
       {
-       "buff_allies": 3,
+       "buff_allies": 4,
        "burst_aoe": 2,
        "catch": 4,
        "disengage": 2,

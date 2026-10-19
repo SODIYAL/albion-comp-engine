@@ -2399,11 +2399,11 @@
    "basis": "derived",
    "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 4,
+   "damage_pts": 6,
    "damage_scale": "group",
    "delivery": "ranged",
    "e_channel_nonranged": false,
-   "e_damage_pts": 4,
+   "e_damage_pts": 6,
    "e_damage_spells": [
     "ICESTORM2"
    ],

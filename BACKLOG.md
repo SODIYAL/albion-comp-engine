@@ -195,25 +195,6 @@ Each is decidable today from evidence already in the repo.
   knock-away rung (Force of Nature, Hurricane, Holy Explosion); whether
   isolating a rooted target earns more than that rung (Knockback Shot's 4
   is a directional push) is a validation-round question.
-- **Magnitudes the list-index fix corrected, for a rubric read**: with the
-  description tags' list indices kept, 55 cited spells read their real
-  numbers (V: 10, Description numbers read the element their tag names);
-  no score crossed a rung the logged ladders state, the comments now carry
-  the real numbers, and these rows read a magnitude the score was not set
-  on (each needs a rubric grade and a logged decision): Ice Storm's tick
-  (72 every 0.5s vs players where 25 was read; both damage elements target
-  every enemy in the data) on burst_aoe 2 and sustained_dps 2; Haste's +60%
-  Auto-Attack speed (20% was read) on sustained_dps 2; the Spectral
-  Trident's soul mist, 6s (0.5s was read) of +50% Move Speed, +75%
-  Auto-Attack speed and -30% cast time for up to 10 allies, on buff_allies
-  3; Royal Banner's +50% cooldown rate for allies (30% was read) on
-  buff_allies 4; Circle of Life's 107 / 133 / 173 / 227 by Rejuvenation
-  Charges (107 flat was read) on heal_burst 4; Mystic Rocks' -35% Healing
-  Received aura (-50% was read) on heal_reduction 4, under the -40/-50%
-  rung; Magic Rune's +5% magic damage and Healing Cast a stack (10% was
-  read) on buff_allies 3; Anguished Soul's fear, 1.25s rising to 2.25s with
-  charges, on peel and knockback_displace 4; Earth Crusher's radius, 5
-  rising to 9 with charges, on burst_aoe 4.
 - **Curation grades deferred at the move to the newer snapshot** (each
   needs a rubric grade and a logged decision): Oathkeepers' heal_sustain on
   Blessed Aurora (50 per auto-attack for 5s); Hoarfrost's Avalanche at 320
