@@ -189,11 +189,9 @@ Each is decidable today from evidence already in the repo.
 - **Curation grades deferred at the move to the newer snapshot** (each
   needs a rubric grade and a logged decision): Ground Shaker (every mace's
   W: 219 in a 4 radius plus an air-throw) and the 1H Mace's Deep Leap
-  damage, no rows; Battleaxe burst_st 2 on a rejected "1H budget"; the
-  damage-only shared spells (Whirling Strikes, Throwing Blades, Explosive
-  Arrows and others) and the scope of the 191 = 2 burst anchor; Soulscythe's
-  knockback 4 on an air-throw; Siegebow and Energy Shaper's Bolt Shot 4
-  now that Explosive Salvo scores its own row; Permafrost's burst_aoe 6
+  damage, no rows; the damage-only shared spells (Whirling Strikes,
+  Throwing Blades, Explosive Arrows and others) and the scope of the 191 =
+  2 burst anchor; Permafrost's burst_aoe 6
   (173 vs players: on raw magnitude the 4 rung, Hail 160 and Flame Pillar
   200; the 6 rests on the stun before the blast, and the row anchors the
   brawl 15-19 ranged-AoE minimum); the fear ladder (Demonic 4,
