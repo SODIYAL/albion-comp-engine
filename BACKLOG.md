@@ -167,11 +167,11 @@ Each is decidable today from evidence already in the repo.
   repeater weapons read sustained_dps 4 on WEAPON_STATS as a stand-in for
   their auto-attack and Q/W patterns; 10 knuckles read sustained_dps 4 on
   the Fatal Fury passives, +18% damage at full stacks) and the TOP review (40 rows at
-  score 6 or more, the top of every ladder, against the dumps numbers),
-  and the RULE flags (15 spell x capability pairs graded at two or three
-  scores across the weapons that share the spell; each needs its reason in
-  the row comment or a downgrade — Heavy Mace's engage on Snare Charge 4
-  and zone_control on Sacred Ground 4 state none). After each capability:
+  score 6 or more, the top of every ladder, against the dumps numbers).
+  The RULE flags (14 spell x capability pairs graded at two or three
+  scores across the weapons sharing the spell) each state their reason in
+  the row comment: the Round 9 E-supplement upgrade or the ladder the row
+  sits on. After each capability:
   sheet corrections, a golden case where a score decision changes, rebuild,
   gates.
 - **The W-option discount**: some W rows sit a step below their magnitude
