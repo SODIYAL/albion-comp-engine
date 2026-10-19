@@ -177,15 +177,6 @@ Each is decidable today from evidence already in the repo.
   comments as the reason an E row is high, and ground no row of their own;
   the E-row shares themselves (Blazing zone_control 6, Dawnsong burst_aoe 6,
   Lifetouch buff_allies 4) read lower spell by spell.
-- **Polehammer's engage cites its W**: engage 6 sits on Slowing Charge
-  (the Round 9 RULE queue as recorded: "engage 6 on Slowing Charge") while
-  the row's own comment credits the E's 20m line stun, so with every row
-  scoring on its own spell the engage exists only with that W equipped and
-  every dressed Polehammer reads Slowing Charge. Moving it to Groundbreaker
-  needs an `effect_overrides.yaml` engage candidate (the lint reads anti_dive,
-  catch, peel and stun there), a logged decision against the recorded
-  Round 9 list, and the `roles.yaml` source text ("Slowing Charge identity").
-  Needs a maintainer decision.
 - **Impaler's burst_aoe on one spear**: Spirithunter keeps Impaler's
   burst_aoe 2 as an own row; the spear pool cannot carry it without
   `derive_ranged_presence` granting ranged_presence to every spear's Impaler

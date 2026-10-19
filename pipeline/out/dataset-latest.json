@@ -71985,7 +71985,7 @@
     },
     {
      "id": "2H_POLEHAMMER",
-     "source": "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Slowing Charge identity)",
+     "source": "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Groundbreaker's 20m line stun)",
      "tier": "primary"
     },
     {
@@ -313043,6 +313043,7 @@
      "CHARGESLOWAE"
     ],
     "engage": [
+     "GROUNDBREAKER2",
      "CHARGESLOWAE"
     ],
     "knockback_displace": [
@@ -313168,6 +313169,7 @@
      [
       {
        "catch": 4,
+       "engage": 6,
        "peel": 4,
        "stun": 6
       }
@@ -313175,7 +313177,7 @@
      [
       {
        "disengage": 2,
-       "engage": 6,
+       "engage": 2,
        "mobility": 2
       },
       {

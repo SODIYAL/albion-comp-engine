@@ -106,7 +106,7 @@
   role_hint: tank
   capabilities:
     - {cap: stun,          score: 6, evidence: GROUNDBREAKER2}   # E: 20m line, 2.7s stun at center
-    - {cap: engage,        score: 6, evidence: CHARGESLOWAE}     # the 6 credits the E's 20m line stun as the initiation; the row cites the W dash because the effect map grounds engage on dashes only, not on enemy CC; override of the pool's 2: E-supplement upgrade (RULE queue, VALIDATION.md 08, Round 9)
+    - {cap: engage,        score: 6, evidence: GROUNDBREAKER2}   # E: the 20m line stun is the initiation (candidate added in effect_overrides.yaml); the W's Slowing Charge keeps the pool's engage 2 on its own slot
     - {cap: peel,          score: 4, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser (its pool row, 4, scores on its own W)
     - {cap: catch,         score: 4, evidence: GROUNDBREAKER2}   # 20m lockdown line
 
