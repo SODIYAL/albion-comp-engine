@@ -19,7 +19,7 @@
 # frontline durability). The Interrupt W scores no silence: an instant
 # interrupt opens no cast-denial window (the Forbidden Stab precedent).
 # Weakening (each auto-attack cuts the target's damage dealt by 2% for
-# 2s, stacking) carries no row.
+# 2s, stacking) reads damage_debuff 1 in the pool.
 
 - weapon: 2H_CLAYMORE                # Claymore — immune-charge duellist
   curated_as_of: 2026-08-12

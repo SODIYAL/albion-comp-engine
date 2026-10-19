@@ -166,24 +166,6 @@ Each is decidable today from evidence already in the repo.
   and zone_control on Sacred Ground 4 state none). After each capability:
   sheet corrections, a golden case where a score decision changes, rebuild,
   gates.
-- **Rows marked for review when curated and never reviewed**: Defensive
-  Slam's buff_allies 3 and peel 2 (`pools/mace.yaml`; the dumps text grants
-  the buff "for you and up to 10 allies in a 8 radius").
-- **Redemption Staff's Celestial Sphere reads sustain alone**: the E
-  (77 health for up to 10 allies in a 4 radius, bouncing to the closest
-  ally within 11, up to 8 hits) grades heal_sustain 6 and carries no
-  heal_burst row; its burst comes from the Q (Holy Flash, heal_burst 4).
-  Redemption is the healer of 45% of held-out single-healer 7s and the
-  engine's first healer in 2 of 600 at castle_outpost 7 (median rank 12;
-  3 with the cleanse row removed, which stays). Whether the bounce chain
-  earns a heal_burst row is a rubric grade and a logged decision. (V: 10,
-  The cleanse row stays at Castle Outpost)
-- **Small W and passive carriers held at no row**: the sword Weakening
-  passive (`PASSIVE_REDUCE_DMG_SWORD`, every auto-attack cuts the target's
-  damage dealt by 0.02 for 2s, stacking) and Frost Beam (`FROSTBEAM`,
-  attack-speed debuff and a 0.15 slow stacking to 5) carry no
-  damage_debuff or slow row, though damage_debuff scores elsewhere
-  (Stillgaze's Neurotoxin 2). Grade each on the rubric and log it.
 - **The W-option discount**: some W rows sit a step below their magnitude
   as "one W among five" (Armor Piercer resist_shred 2; Desecrate root 3
   at 2.6s beside Freezing Wind 4 at 2s and Snare Charge 5 at 2.56s vs

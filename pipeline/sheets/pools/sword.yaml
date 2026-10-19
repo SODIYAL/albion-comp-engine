@@ -19,6 +19,7 @@ capabilities:
   - {cap: sustained_dps, score: 4, evidence: HEROICSTRIKE2}             # heroic-charge AA stacking, same engine as Dual Swords (QW)
   - {cap: interrupt, score: 2, evidence: INTERRUPT2}                    # W: Interrupt, "interrupting the target's spell casting" on one target: Forbidden Stab's rung (interrupt taxonomy) (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: Increased Defense, +23% own resistances for 2s every 5th auto-attack
+  - {cap: damage_debuff, score: 1, evidence: PASSIVE_REDUCE_DMG_SWORD}  # PASSIVE: Weakening, each auto-attack cuts the target's damage dealt by 2% for 2s, 5 stacks at most (-10%), one target held by continuous auto-attacks: under Neurotoxin's 12% and Cripple's 25% (2)
   - {cap: peel, score: 2, evidence: SPLITTINGSLASH}                     # W: Splitting Slash's line root, used on divers (QW)
   - {cap: root, score: 2, evidence: SPLITTINGSLASH}                     # W: Splitting Slash, a 1.25s line root (QW)
   # Parry Strike: a damage-immune channel that reflects 125% of incoming

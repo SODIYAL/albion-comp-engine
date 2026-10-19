@@ -14,6 +14,7 @@ capabilities:
   - {cap: zone_control, score: 4, evidence: FROSTBOMB_CASTSLOW}  # W: the bomb's slowed circle; the frost zone ladder: Chillhowl 2, here 4, Permafrost 6 (QW)
   - {cap: disengage, score: 2, evidence: FROSTNOVA}              # W: Frost Nova, a teleport away from a stunned start point (QW)
   - {cap: stun, score: 2, evidence: FROSTNOVA}                   # W: the Nova's 1s stun in a 3 radius (QW)
+  - {cap: slow, score: 4, evidence: FROSTBEAM}                   # W: Frost Beam, a 3s channel whose every 0.3s tick slows enemies within 5 of the target by 0.15 for 2s, 5 stacks (-75%): the frost volley channel's rung (60%, 4) (QW)
   - {cap: resist_shred, score: 2, evidence: FROST_LANCE}         # W: Frost Lance, -12% damage resistances for 3s in a 3 radius (QW)
   - {cap: buff_allies, score: 2, evidence: ICE_SCULPTURE}        # W: Glacial Obelisk, +20% damage and cooldown rate for up to 10 allies (QW)
   - {cap: root, score: 2, evidence: PASSIVE_FROST}               # PASSIVE: after every 4 spells, the next auto-attack roots for 0.86s

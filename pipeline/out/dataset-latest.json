@@ -294348,6 +294348,7 @@
    "capabilities": {
     "burst_st": 4,
     "catch": 4,
+    "damage_debuff": 1,
     "disengage": 2,
     "engage": 6,
     "interrupt": 2,
@@ -294377,6 +294378,9 @@
     "catch": [
      "CLAYMORECHARGE",
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -294451,6 +294455,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -294469,6 +294474,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -294493,7 +294499,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -294534,6 +294541,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -294588,6 +294598,7 @@
     "buff_allies": 2,
     "burst_aoe": 4,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "engage": 2,
     "execute": 2,
@@ -294613,6 +294624,9 @@
     ],
     "catch": [
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -294690,6 +294704,7 @@
       }
      ],
      [
+      {},
       {}
      ]
     ],
@@ -294708,6 +294723,7 @@
       0.08
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -294732,7 +294748,8 @@
       "PARRY"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -294774,6 +294791,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -294827,6 +294847,7 @@
    "capabilities": {
     "burst_aoe": 2,
     "catch": 4,
+    "damage_debuff": 1,
     "disengage": 4,
     "engage": 4,
     "interrupt": 2,
@@ -294849,6 +294870,9 @@
     "catch": [
      "CLAYMORESLASH",
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "CLAYMORESLASH",
@@ -294922,6 +294946,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -294940,6 +294965,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -294964,7 +294990,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -295006,6 +295033,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -299367,6 +299397,7 @@
    "capabilities": {
     "burst_aoe": 6,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "interrupt": 2,
     "max_health_cut": 2,
@@ -299391,6 +299422,9 @@
     ],
     "catch": [
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -299461,6 +299495,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -299479,6 +299514,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -299503,7 +299539,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -299541,6 +299578,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -299832,6 +299872,7 @@
    "capabilities": {
     "burst_aoe": 2,
     "catch": 4,
+    "damage_debuff": 1,
     "disengage": 4,
     "engage": 4,
     "interrupt": 2,
@@ -299853,6 +299894,9 @@
     "catch": [
      "SPINATTACK",
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "SPINATTACK",
@@ -299926,6 +299970,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -299944,6 +299989,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -299968,7 +300014,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -300010,6 +300057,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -301292,7 +301342,8 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -301343,6 +301394,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -301366,6 +301420,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -301384,6 +301439,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -301408,6 +301464,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -301516,7 +301575,8 @@
     ],
     "slow": [
      "FROST_TARGETED_CHANNEL",
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -301572,6 +301632,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -301598,6 +301661,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -301620,6 +301684,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -301649,6 +301714,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -301766,7 +301834,8 @@
     ],
     "slow": [
      "ICESTORM2",
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -301816,6 +301885,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -301839,6 +301911,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -301857,6 +301930,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -301884,6 +301958,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -304813,7 +304890,8 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROST_ULTIMATE",
@@ -304862,6 +304940,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -304885,6 +304966,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -304903,6 +304985,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -304928,6 +305011,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -305043,7 +305129,8 @@
     ],
     "slow": [
      "GLACIALFIELD",
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -305092,6 +305179,9 @@
        "radius": 5.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -305115,6 +305205,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -305133,6 +305224,7 @@
      [
       "FROSTNOVA",
       "FROSTBOMB_CASTSLOW",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -305160,6 +305252,9 @@
       {
        "slow": 4,
        "zone_control": 4
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -317672,7 +317767,8 @@
      "PASSIVE_FROST"
     ],
     "slow": [
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -317722,6 +317818,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -317745,6 +317844,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -317763,6 +317863,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -317788,6 +317889,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -317894,7 +317998,8 @@
     ],
     "slow": [
      "FROZEN_CRYSTAL",
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROZEN_CRYSTAL",
@@ -317941,6 +318046,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -317965,6 +318073,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -317984,6 +318093,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -318011,6 +318121,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -318122,7 +318235,8 @@
     ],
     "slow": [
      "ICEROCK_EXPLODE",
-     "FROSTBOMB_CASTSLOW"
+     "FROSTBOMB_CASTSLOW",
+     "FROSTBEAM"
     ],
     "stun": [
      "FROSTNOVA"
@@ -318166,6 +318280,9 @@
        "radius": 3.0
       },
       {
+       "radius": 5.0
+      },
+      {
        "max_targets": 1,
        "radius": 3.0
       },
@@ -318189,6 +318306,7 @@
       0.08,
       0.08,
       0.08,
+      0.08,
       0.08
      ],
      [
@@ -318207,6 +318325,7 @@
      [
       "FROSTBOMB_CASTSLOW",
       "FROSTNOVA",
+      "FROSTBEAM",
       "FROST_LANCE",
       "ICE_SCULPTURE"
      ],
@@ -318234,6 +318353,9 @@
       {
        "disengage": 2,
        "stun": 2
+      },
+      {
+       "slow": 4
       },
       {
        "resist_shred": 2
@@ -321163,6 +321285,7 @@
    "capabilities": {
     "burst_aoe": 4,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "interrupt": 2,
     "mobility": 4,
@@ -321185,6 +321308,9 @@
     "catch": [
      "MIGHTYSWING",
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -321263,6 +321389,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -321281,6 +321408,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -321305,7 +321433,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -321346,6 +321475,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -322101,6 +322233,7 @@
    "capabilities": {
     "burst_st": 4,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "engage": 2,
     "execute": 2,
@@ -322123,6 +322256,9 @@
     "catch": [
      "MIGHTYBLOW",
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -322196,6 +322332,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -322214,6 +322351,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -322238,7 +322376,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -322280,6 +322419,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]
@@ -322334,6 +322476,7 @@
     "burst_aoe": 2,
     "burst_st": 4,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "interrupt": 2,
     "mobility": 4,
@@ -322356,6 +322499,9 @@
     ],
     "catch": [
      "HAMSTRINGSWORD"
+    ],
+    "damage_debuff": [
+     "PASSIVE_REDUCE_DMG_SWORD"
     ],
     "disengage": [
      "DEFENSERUN"
@@ -322423,6 +322569,7 @@
       {}
      ],
      [
+      {},
       {}
      ]
     ],
@@ -322441,6 +322588,7 @@
       0.0
      ],
      [
+      0.0,
       0.0
      ]
     ],
@@ -322465,7 +322613,8 @@
       "HEROICSTRIKE2"
      ],
      [
-      "PASSIVE_ARMORCHANCE_SWORD"
+      "PASSIVE_ARMORCHANCE_SWORD",
+      "PASSIVE_REDUCE_DMG_SWORD"
      ]
     ],
     "slots": [
@@ -322505,6 +322654,9 @@
      [
       {
        "self_sustain": 2
+      },
+      {
+       "damage_debuff": 1
       }
      ]
     ]

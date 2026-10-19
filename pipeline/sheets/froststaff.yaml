@@ -13,8 +13,9 @@
 # has one, still scores on its own slot, and the larger reads. Frost Nova's
 # teleport files as disengage, never mobility, and its 0.2s damage immunity
 # grounds no tankiness. Frost Beam (a channelled beam whose every tick cuts
-# Auto-Attack Speed and slows by 0.15, stacking up to 5 times) carries no
-# row.
+# Auto-Attack Speed and slows by 0.15, stacking up to 5 times) reads slow
+# in the pool; its Auto-Attack Speed cut grounds no damage_debuff, which
+# reads a cut to all damage dealt (curation judgment).
 
 - weapon: 2H_FROSTSTAFF              # Great Frost Staff — hail battery
   curated_as_of: 2026-08-12

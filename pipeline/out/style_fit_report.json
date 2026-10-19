@@ -705,7 +705,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 16,
+   "utility_pts": 17,
    "weak_group_e": false
   },
   "2H_CLAYMORE_AVALON": {
@@ -758,7 +758,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_CLEAVER_HELL": {
@@ -811,7 +811,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 16,
+   "utility_pts": 17,
    "weak_group_e": false
   },
   "2H_COMBATSTAFF_MORGANA": {
@@ -1867,7 +1867,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 8,
+   "utility_pts": 9,
    "weak_group_e": false
   },
   "2H_DUALSICKLE_UNDEAD": {
@@ -1973,7 +1973,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 12,
+   "utility_pts": 13,
    "weak_group_e": false
   },
   "2H_ENIGMATICORB_MORGANA": {
@@ -6969,7 +6969,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 8,
+   "utility_pts": 9,
    "weak_group_e": false
   },
   "MAIN_SPEAR": {
@@ -7179,7 +7179,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
-   "utility_pts": 8,
+   "utility_pts": 9,
    "weak_group_e": false
   },
   "MAIN_SWORD_CRYSTAL": {
@@ -7232,7 +7232,7 @@
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
-   "utility_pts": 6,
+   "utility_pts": 7,
    "weak_group_e": false
   }
  }
