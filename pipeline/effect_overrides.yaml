@@ -118,6 +118,8 @@ add:
     anti_dive: "a 456 absorb shield cast on the dived ally (the anti-dive rule: absorb shield)"
   CRYSTALWAVE:                       # Hyperstatic — "Allies in the area gain a Shield, absorbing up to 350"
     buff_allies: "group absorb shield; outside the structured vocab"
+  POTION_MOB_RESET_P5:               # Calming Potion — "Turns you and up to 20 group members within a 15 radius ... Applies a shield to all affected players, absorbing 90.85 damage"
+    buff_allies: "group absorb shield; outside the structured vocab"
   # ANTI-DIVE RULE: anti_dive is what denies a dive. It counts an effect
   # landed on the diver (the effect map's enemy rows) and a protection
   # placed on OTHER allies at the moment of the dive: an absorb shield, a

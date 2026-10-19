@@ -19352,6 +19352,31 @@
    "stats": {},
    "unique_name": "T7_POTION_CLEANSE2"
   },
+  "T7_POTION_MOB_RESET": {
+   "capabilities": {
+    "buff_allies": 1
+   },
+   "curated_as_of": "2026-10-19",
+   "display_name": "Calming Potion",
+   "evidence": {
+    "buff_allies": [
+     "POTION_MOB_RESET_P5"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "buff_allies": 1
+    },
+    "slot_delivery": [],
+    "slot_escal": [],
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T7_POTION_MOB_RESET"
+  },
   "T7_POTION_REVIVE": {
    "capabilities": {
     "tankiness": 2
@@ -19486,6 +19511,31 @@
    "slot": "food",
    "stats": {},
    "unique_name": "T8_MEAL_SANDWICH_AVALON"
+  },
+  "T8_MEAL_SANDWICH_FISH": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-10-19",
+   "display_name": "Thunderfall Lurcher Sandwich",
+   "evidence": {
+    "tankiness": [
+     "FOOD_FISH_BUFF_MAXHP_P5"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_delivery": [],
+    "slot_escal": [],
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "food",
+   "stats": {},
+   "unique_name": "T8_MEAL_SANDWICH_FISH"
   },
   "T8_MEAL_STEW": {
    "capabilities": {
@@ -50549,6 +50599,7 @@
      "T8_MEAL_SANDWICH_AVALON",
      "T8_MEAL_STEW",
      "T7_MEAL_OMELETTE",
+     "T8_MEAL_SANDWICH_FISH",
      "T8_MEAL_STEW_FISH",
      "T5_MEAL_SOUP",
      "T7_MEAL_OMELETTE_FISH",
@@ -50603,6 +50654,7 @@
      "T8_POTION_COOLDOWN",
      "T8_POTION_LAVA",
      "T7_POTION_CLEANSE2",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_SLOWFIELD",
      "T8_POTION_CLEANSE",
      "T8_POTION_TORNADO",
@@ -50675,6 +50727,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_FISH",
        "T8_MEAL_STEW_AVALON",
@@ -50730,6 +50783,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_LAVA",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T7_POTION_SLOWFIELD",
        "T8_POTION_TORNADO",
@@ -51236,8 +51290,8 @@
          79
         ],
         [
-         "T7_MEAL_OMELETTE",
-         41
+         "T8_MEAL_SANDWICH_FISH",
+         50
         ]
        ],
        "head": [
@@ -51260,12 +51314,12 @@
          214
         ],
         [
-         "T7_POTION_ACID",
-         53
+         "T7_POTION_MOB_RESET",
+         67
         ],
         [
-         "T8_POTION_LAVA",
-         36
+         "T7_POTION_ACID",
+         53
         ]
        ],
        "shoes": [
@@ -51464,8 +51518,8 @@
          173
         ],
         [
-         "T8_POTION_TORNADO",
-         60
+         "T7_POTION_MOB_RESET",
+         117
         ]
        ],
        "shoes": [
@@ -51536,8 +51590,8 @@
          78
         ],
         [
-         "T7_POTION_ACID",
-         9
+         "T7_POTION_MOB_RESET",
+         50
         ]
        ],
        "shoes": [
@@ -51672,12 +51726,12 @@
          490
         ],
         [
-         "T8_POTION_TORNADO",
-         79
+         "T7_POTION_MOB_RESET",
+         159
         ],
         [
-         "T8_POTION_LAVA",
-         54
+         "T8_POTION_TORNADO",
+         79
         ]
        ],
        "shoes": [
@@ -51744,12 +51798,12 @@
          473
         ],
         [
-         "T8_POTION_LAVA",
-         98
+         "T7_POTION_MOB_RESET",
+         129
         ],
         [
-         "T8_POTION_COOLDOWN",
-         78
+         "T8_POTION_LAVA",
+         98
         ]
        ],
        "shoes": [
@@ -51889,12 +51943,12 @@
         2391
        ],
        [
-        "T8_POTION_LAVA",
-        482
+        "T7_POTION_MOB_RESET",
+        517
        ],
        [
-        "T8_POTION_COOLDOWN",
-        408
+        "T8_POTION_LAVA",
+        482
        ]
       ],
       "shoes": [
@@ -51982,6 +52036,11 @@
          "T7_POTION_REVIVE",
          10,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -52134,6 +52193,11 @@
          20
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         13,
+         15
+        ],
+        [
          "T8_MEAL_STEW",
          11,
          14
@@ -52256,6 +52320,11 @@
          "T8_POTION_LAVA",
          88,
          104
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         43,
+         55
         ],
         [
          "T8_POTION_TORNADO",
@@ -52533,6 +52602,11 @@
          41
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         17,
+         20
+        ],
+        [
          "T8_MEAL_SANDWICH_AVALON",
          14,
          17
@@ -52600,6 +52674,11 @@
          "T7_POTION_REVIVE",
          210,
          214
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         13,
+         15
         ],
         [
          "T7_POTION_STONESKIN",
@@ -52827,6 +52906,11 @@
          16
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         10,
+         13
+        ],
+        [
          "T7_MEAL_OMELETTE_AVALON",
          8,
          11
@@ -52964,6 +53048,11 @@
          "T7_POTION_STONESKIN",
          8,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         9
         ],
         [
          "T8_POTION_CLEANSE",
@@ -53176,6 +53265,11 @@
          8
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         4
+        ],
+        [
          "T7_MEAL_OMELETTE_AVALON",
          3,
          3
@@ -53238,6 +53332,11 @@
          "T7_POTION_REVIVE",
          62,
          65
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         5
         ],
         [
          "T8_POTION_LAVA",
@@ -53435,6 +53534,11 @@
          82
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         56,
+         72
+        ],
+        [
          "T5_MEAL_SOUP",
          39,
          46
@@ -53557,6 +53661,11 @@
          "T7_POTION_REVIVE",
          368,
          403
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         154,
+         196
         ],
         [
          "T8_POTION_LAVA",
@@ -54033,6 +54142,11 @@
          42
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         18,
+         22
+        ],
+        [
          "T8_MEAL_STEW",
          4,
          8
@@ -54110,6 +54224,11 @@
          "T8_POTION_LAVA",
          32,
          41
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         29,
+         46
         ],
         [
          "T7_POTION_STONESKIN",
@@ -54398,6 +54517,11 @@
         [
          "T8_POTION_LAVA",
          3,
+         3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
          3
         ],
         [
@@ -54827,6 +54951,11 @@
          11
         ],
         [
+         "T7_POTION_MOB_RESET",
+         8,
+         10
+        ],
+        [
          "T7_POTION_CLEANSE2",
          7,
          8
@@ -55057,6 +55186,11 @@
          26
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         9
+        ],
+        [
          "T8_MEAL_STEW",
          3,
          3
@@ -55181,6 +55315,11 @@
          "T8_POTION_LAVA",
          35,
          38
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         13,
+         17
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -55423,6 +55562,11 @@
          167
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         74,
+         97
+        ],
+        [
          "T8_MEAL_STEW",
          51,
          67
@@ -55647,6 +55791,11 @@
          "T7_POTION_SLOWFIELD",
          160,
          203
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         127,
+         179
         ],
         [
          "T8_POTION_CLEANSE",
@@ -55924,6 +56073,11 @@
          44
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         18,
+         18
+        ],
+        [
          "T7_MEAL_OMELETTE",
          17,
          20
@@ -56058,6 +56212,11 @@
          "T7_POTION_REVIVE",
          118,
          122
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         26,
+         30
         ],
         [
          "T8_POTION_LAVA",
@@ -56244,8 +56403,8 @@
        ],
        "food": [
         "T8_MEAL_SANDWICH_AVALON",
-        12,
-        30
+        9,
+        23
        ],
        "potion": [
         "T8_POTION_LAVA",
@@ -57336,8 +57495,8 @@
        23
       ],
       [
-       "T7_POTION_STONESKIN",
-       5
+       "T7_POTION_MOB_RESET",
+       8
       ]
      ],
      "shoes": [
@@ -57444,12 +57603,12 @@
        981
       ],
       [
-       "T8_POTION_TORNADO",
-       22
+       "T7_POTION_MOB_RESET",
+       39
       ],
       [
-       "T7_POTION_CLEANSE2",
-       15
+       "T8_POTION_TORNADO",
+       22
       ]
      ],
      "shoes": [
@@ -57520,8 +57679,8 @@
        45
       ],
       [
-       "T8_POTION_LAVA",
-       30
+       "T7_POTION_MOB_RESET",
+       34
       ]
      ],
      "shoes": [
@@ -57719,6 +57878,7 @@
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_OMELETTE_FISH",
@@ -57764,6 +57924,7 @@
        "T8_POTION_LAVA",
        "T8_POTION_CLEANSE",
        "T7_POTION_SLOWFIELD",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T7_POTION_STONESKIN",
        "T8_POTION_TORNADO",
@@ -57976,6 +58137,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         4
+        ],
+        [
          "T8_MEAL_STEW",
          3,
          3
@@ -58048,6 +58214,11 @@
          "T7_POTION_REVIVE",
          38,
          40
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T8_POTION_LAVA",
@@ -58178,6 +58349,11 @@
          "T8_MEAL_SANDWICH",
          8,
          10
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
         ],
         [
          "T8_MEAL_STEW_FISH",
@@ -58385,6 +58561,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         4
         ],
         [
          "T7_MEAL_OMELETTE",
@@ -58615,6 +58796,11 @@
          129
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
+        ],
+        [
          "T8_POTION_LAVA",
          6,
          7
@@ -58820,6 +59006,11 @@
          "T7_MEAL_OMELETTE",
          12,
          15
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         7
         ],
         [
          "T8_MEAL_SANDWICH_AVALON",
@@ -59116,6 +59307,11 @@
          15
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         10
+        ],
+        [
          "T8_MEAL_STEW",
          1,
          2
@@ -59210,6 +59406,11 @@
          "T8_POTION_LAVA",
          5,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         3
         ],
         [
          "T7_POTION_STONESKIN",
@@ -59407,6 +59608,11 @@
          29
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         9
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          4,
          5
@@ -59586,6 +59792,11 @@
          "T8_POTION_LAVA",
          14,
          20
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         14
         ],
         [
          "T8_POTION_TORNADO",
@@ -59773,6 +59984,11 @@
          27
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         10,
+         13
+        ],
+        [
          "T7_MEAL_OMELETTE",
          8,
          9
@@ -59892,6 +60108,11 @@
          "T8_POTION_LAVA",
          8,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -60890,6 +61111,7 @@
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_OMELETTE",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T5_MEAL_SOUP",
        "T7_MEAL_OMELETTE_FISH",
@@ -60933,6 +61155,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T8_POTION_LAVA",
        "T8_POTION_TORNADO",
@@ -61193,6 +61416,11 @@
          "T8_MEAL_STEW",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -61255,6 +61483,11 @@
         ],
         [
          "T7_POTION_CLEANSE2",
+         2,
+         2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
          2,
          2
         ],
@@ -61424,6 +61657,11 @@
          10
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         10
+        ],
+        [
          "T8_MEAL_STEW",
          5,
          6
@@ -61476,6 +61714,11 @@
          "T7_POTION_CLEANSE2",
          8,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_STONESKIN",
@@ -61694,6 +61937,11 @@
          "T7_MEAL_OMELETTE",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         0,
+         2
         ]
        ],
        "head": [
@@ -61890,6 +62138,11 @@
          51
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         20,
+         25
+        ],
+        [
          "T5_MEAL_SOUP",
          10,
          11
@@ -61962,6 +62215,11 @@
          "T7_POTION_REVIVE",
          554,
          566
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         26,
+         28
         ],
         [
          "T8_POTION_TORNADO",
@@ -62313,6 +62571,11 @@
          48
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         11,
+         18
+        ],
+        [
          "T8_MEAL_STEW",
          1,
          4
@@ -62360,6 +62623,11 @@
          "T7_POTION_REVIVE",
          574,
          581
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         9
         ],
         [
          "T8_POTION_LAVA",
@@ -62902,6 +63170,11 @@
          23
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
+        ],
+        [
          "T7_POTION_ACID",
          3,
          3
@@ -63075,6 +63348,11 @@
          "T8_MEAL_STEW",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -63383,6 +63661,11 @@
          79
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         25,
+         31
+        ],
+        [
          "T8_MEAL_STEW",
          7,
          10
@@ -63537,6 +63820,11 @@
          "T8_POTION_COOLDOWN",
          16,
          20
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         14,
+         16
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -63722,6 +64010,11 @@
          "T7_MEAL_OMELETTE",
          5,
          6
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         5
         ]
        ],
        "head": [
@@ -63808,6 +64101,11 @@
          "T7_POTION_REVIVE",
          106,
          107
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -64186,6 +64484,7 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
        "T8_MEAL_STEW_FISH",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW_AVALON"
@@ -64217,6 +64516,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_SLOWFIELD",
        "T7_POTION_STONESKIN",
        "T8_POTION_TORNADO",
@@ -64338,6 +64638,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          4,
          7
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         5
         ],
         [
          "T8_MEAL_STEW",
@@ -64593,6 +64898,11 @@
          17
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         9
+        ],
+        [
          "T5_MEAL_SOUP",
          3,
          4
@@ -64640,6 +64950,11 @@
          "T7_POTION_CLEANSE2",
          9,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         7
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -64825,6 +65140,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          6,
          10
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ],
         [
          "T8_MEAL_STEW",
@@ -65436,6 +65756,11 @@
          7
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_STEW",
          3,
          4
@@ -65763,6 +66088,7 @@
        "T8_MEAL_STEW",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T5_MEAL_SOUP"
       ],
@@ -65798,6 +66124,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LAVA",
        "T8_POTION_TORNADO",
        "T8_POTION_CLEANSE",
@@ -65950,6 +66277,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          7,
          7
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ],
         [
          "T8_MEAL_STEW",
@@ -66196,6 +66528,11 @@
          11
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         6
+        ],
+        [
          "T5_MEAL_SOUP",
          4,
          5
@@ -66258,6 +66595,11 @@
          "T7_POTION_CLEANSE2",
          8,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T8_POTION_TORNADO",
@@ -66411,6 +66753,11 @@
          28
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         7
+        ],
+        [
          "T8_MEAL_SANDWICH_AVALON",
          2,
          3
@@ -66453,6 +66800,11 @@
          "T7_POTION_STONESKIN",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T8_POTION_TORNADO",
@@ -66970,6 +67322,11 @@
          "T7_MEAL_OMELETTE_AVALON",
          10,
          11
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         5
         ]
        ],
        "head": [
@@ -67205,6 +67562,11 @@
          "T7_POTION_REVIVE",
          11,
          11
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -67406,6 +67768,11 @@
       [
        "T7_MEAL_OMELETTE",
        3,
+       3
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
        3
       ]
      ],
@@ -67628,6 +67995,11 @@
        6
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       5,
+       6
+      ],
+      [
        "T8_MEAL_STEW_AVALON",
        3,
        3
@@ -67715,6 +68087,11 @@
        "T8_POTION_LAVA",
        21,
        23
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       7,
+       9
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -67942,6 +68319,11 @@
        24
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       13,
+       19
+      ],
+      [
        "T8_MEAL_STEW",
        10,
        14
@@ -68014,6 +68396,11 @@
        "T7_POTION_CLEANSE2",
        20,
        22
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       3,
+       4
       ],
       [
        "T8_POTION_TORNADO",
@@ -68250,6 +68637,11 @@
        7
       ],
       [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
+      ],
+      [
        "T8_POTION_CLEANSE",
        1,
        2
@@ -68382,6 +68774,11 @@
       [
        "T8_MEAL_SANDWICH_AVALON",
        10,
+       12
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       9,
        12
       ],
       [
@@ -68624,6 +69021,11 @@
        92
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       27,
+       36
+      ],
+      [
        "T5_MEAL_SOUP",
        17,
        24
@@ -68725,6 +69127,11 @@
        "T7_POTION_REVIVE",
        915,
        933
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       36,
+       42
       ],
       [
        "T8_POTION_LAVA",
@@ -68950,6 +69357,11 @@
        "T7_MEAL_OMELETTE",
        5,
        5
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
+       2
       ]
      ],
      "head": [
@@ -69165,6 +69577,11 @@
        69
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       17,
+       32
+      ],
+      [
        "T8_MEAL_STEW",
        3,
        10
@@ -69242,6 +69659,11 @@
        "T7_POTION_REVIVE",
        822,
        829
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       10,
+       13
       ],
       [
        "T8_POTION_LAVA",
@@ -69719,6 +70141,11 @@
        "T8_MEAL_SANDWICH_AVALON",
        1,
        5
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       2
       ]
      ],
      "head": [
@@ -69895,6 +70322,11 @@
        "T8_POTION_TORNADO",
        4,
        4
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       3,
+       5
       ],
       [
        "T6_POTION_HEAL",
@@ -70106,6 +70538,11 @@
        43
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       14,
+       20
+      ],
+      [
        "T8_MEAL_STEW",
        4,
        7
@@ -70220,6 +70657,11 @@
        "T7_POTION_CLEANSE2",
        9,
        10
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
+       6
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -70471,6 +70913,11 @@
        170
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       38,
+       53
+      ],
+      [
        "T8_MEAL_STEW",
        35,
        62
@@ -70685,6 +71132,11 @@
        "T8_POTION_LAVA",
        29,
        44
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       24,
+       39
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -70922,6 +71374,11 @@
        21
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       15,
+       21
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        2,
        2
@@ -71046,6 +71503,11 @@
        "T7_POTION_REVIVE",
        336,
        338
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       11,
+       12
       ],
       [
        "T8_POTION_LAVA",
@@ -71596,6 +72058,7 @@
      "T8_MEAL_SANDWICH",
      "T7_MEAL_OMELETTE",
      "T8_MEAL_SANDWICH_AVALON",
+     "T8_MEAL_SANDWICH_FISH",
      "T8_MEAL_STEW",
      "T7_MEAL_OMELETTE_FISH",
      "T5_MEAL_SOUP",
@@ -71639,6 +72102,7 @@
     "potion": [
      "T7_POTION_REVIVE",
      "T8_POTION_COOLDOWN",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_SLOWFIELD",
      "T8_POTION_TORNADO",
      "T8_POTION_CLEANSE",
@@ -71712,6 +72176,7 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_OMELETTE_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T5_MEAL_SOUP",
        "T7_MEAL_PIE",
@@ -71760,6 +72225,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T7_POTION_SLOWFIELD",
        "T8_POTION_LAVA",
@@ -72014,6 +72480,10 @@
          38
         ],
         [
+         "T7_POTION_MOB_RESET",
+         25
+        ],
+        [
          "T8_POTION_LAVA",
          9
         ]
@@ -72144,6 +72614,10 @@
         [
          "T7_POTION_REVIVE",
          126
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5
         ]
        ],
        "shoes": [
@@ -72214,8 +72688,8 @@
          52
         ],
         [
-         "T8_POTION_TORNADO",
-         24
+         "T7_POTION_MOB_RESET",
+         50
         ]
        ],
        "shoes": [
@@ -72278,6 +72752,10 @@
          20
         ],
         [
+         "T7_POTION_MOB_RESET",
+         15
+        ],
+        [
          "T8_POTION_LAVA",
          7
         ]
@@ -72308,6 +72786,10 @@
         [
          "T7_POTION_REVIVE",
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6
         ]
        ]
       },
@@ -72360,12 +72842,12 @@
          248
         ],
         [
-         "T8_POTION_TORNADO",
-         72
+         "T7_POTION_MOB_RESET",
+         76
         ],
         [
-         "T8_POTION_LAVA",
-         15
+         "T8_POTION_TORNADO",
+         72
         ]
        ],
        "shoes": [
@@ -72404,12 +72886,12 @@
          161
         ],
         [
-         "T7_MEAL_OMELETTE",
-         89
+         "T8_MEAL_SANDWICH_FISH",
+         113
         ],
         [
-         "T7_MEAL_OMELETTE_AVALON",
-         64
+         "T7_MEAL_OMELETTE",
+         89
         ]
        ],
        "head": [
@@ -72432,12 +72914,12 @@
          354
         ],
         [
-         "T8_POTION_COOLDOWN",
-         50
+         "T7_POTION_MOB_RESET",
+         206
         ],
         [
-         "T7_POTION_SLOWFIELD",
-         23
+         "T8_POTION_COOLDOWN",
+         50
         ]
        ],
        "shoes": [
@@ -72573,12 +73055,12 @@
         1029
        ],
        [
-        "T8_POTION_COOLDOWN",
-        256
+        "T7_POTION_MOB_RESET",
+        391
        ],
        [
-        "T7_POTION_SLOWFIELD",
-        213
+        "T8_POTION_COOLDOWN",
+        256
        ]
       ],
       "shoes": [
@@ -72709,6 +73191,11 @@
          103
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         21,
+         24
+        ],
+        [
          "T8_MEAL_STEW",
          4,
          5
@@ -72791,6 +73278,11 @@
          "T7_POTION_REVIVE",
          457,
          471
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         61,
+         71
         ],
         [
          "T8_POTION_LAVA",
@@ -73227,6 +73719,11 @@
          14
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
+        ],
+        [
          "T7_POTION_STONESKIN",
          3,
          3
@@ -73422,6 +73919,11 @@
          14
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         6
+        ],
+        [
          "T8_MEAL_STEW",
          5,
          7
@@ -73524,6 +74026,11 @@
          "T8_POTION_TORNADO",
          8,
          11
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T8_POTION_LAVA",
@@ -73676,6 +74183,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          2
@@ -73718,6 +74230,11 @@
          "T7_POTION_REVIVE",
          28,
          28
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ]
        ],
        "shoes": [
@@ -73860,6 +74377,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          2,
          2
@@ -73962,6 +74484,11 @@
          "T8_POTION_TORNADO",
          9,
          11
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         13
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -74164,6 +74691,11 @@
          142
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         121,
+         135
+        ],
+        [
          "T7_MEAL_OMELETTE",
          81,
          90
@@ -74329,6 +74861,11 @@
         ]
        ],
        "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         259,
+         274
+        ],
         [
          "T7_POTION_REVIVE",
          179,
@@ -74575,6 +75112,11 @@
          7
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         8
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          3
@@ -74684,6 +75226,11 @@
          "T8_POTION_TORNADO",
          32,
          33
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         20,
+         24
         ],
         [
          "T8_POTION_LAVA",
@@ -75307,11 +75854,11 @@
        175
       ],
       [
-       "T7_POTION_STONESKIN",
-       6
+       "T7_POTION_MOB_RESET",
+       8
       ],
       [
-       "T8_POTION_LAVA",
+       "T7_POTION_STONESKIN",
        6
       ]
      ],
@@ -75435,8 +75982,8 @@
        26
       ],
       [
-       "T7_POTION_SLOWFIELD",
-       7
+       "T7_POTION_MOB_RESET",
+       14
       ]
      ],
      "shoes": [
@@ -75503,12 +76050,12 @@
        1138
       ],
       [
-       "T8_POTION_COOLDOWN",
-       20
+       "T7_POTION_MOB_RESET",
+       47
       ],
       [
-       "T7_POTION_STONESKIN",
-       12
+       "T8_POTION_COOLDOWN",
+       20
       ]
      ],
      "shoes": [
@@ -75644,8 +76191,8 @@
       129
      ],
      [
-      "T7_POTION_SLOWFIELD",
-      62
+      "T7_POTION_MOB_RESET",
+      81
      ]
     ],
     "shoes": [
@@ -75694,6 +76241,7 @@
        "T8_MEAL_SANDWICH",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_OMELETTE",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T7_MEAL_OMELETTE_FISH",
        "T5_MEAL_SOUP"
@@ -75724,6 +76272,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T7_POTION_SLOWFIELD",
        "T7_POTION_STONESKIN",
@@ -75869,6 +76418,11 @@
          "T7_MEAL_OMELETTE",
          29,
          32
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         12,
+         13
         ],
         [
          "T8_MEAL_STEW",
@@ -76197,6 +76751,11 @@
          "T8_POTION_TORNADO",
          2,
          2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         3
         ]
        ],
        "shoes": [
@@ -76302,6 +76861,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          12,
          16
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         10
         ],
         [
          "T7_MEAL_OMELETTE",
@@ -76481,6 +77045,11 @@
          "T8_MEAL_SANDWICH",
          4,
          5
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         4
         ],
         [
          "T7_MEAL_OMELETTE",
@@ -76741,6 +77310,11 @@
          10
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         7
+        ],
+        [
          "T7_MEAL_OMELETTE",
          6,
          6
@@ -76805,6 +77379,11 @@
          "T7_POTION_REVIVE",
          57,
          57
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         11,
+         11
         ],
         [
          "T7_POTION_ACID",
@@ -77492,6 +78071,7 @@
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T7_MEAL_OMELETTE_FISH"
       ],
@@ -77522,6 +78102,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_SLOWFIELD",
        "T8_POTION_TORNADO",
        "T7_POTION_STONESKIN",
@@ -77671,6 +78252,11 @@
          78
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         22,
+         29
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          1,
          2
@@ -77738,6 +78324,11 @@
          "T7_POTION_CLEANSE2",
          6,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         7
         ],
         [
          "T8_POTION_LAVA",
@@ -78001,6 +78592,11 @@
         [
          "T7_MEAL_OMELETTE",
          3,
+         3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
          3
         ]
        ],
@@ -78382,6 +78978,11 @@
          13
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         11,
+         12
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          2,
          2
@@ -78506,6 +79107,11 @@
          "T7_POTION_SLOWFIELD",
          16,
          17
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         14,
+         14
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -78673,6 +79279,11 @@
          82
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         9,
+         10
+        ],
+        [
          "T8_MEAL_SANDWICH_AVALON",
          8,
          9
@@ -78792,6 +79403,11 @@
          "T8_POTION_TORNADO",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -79059,6 +79675,7 @@
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T7_MEAL_OMELETTE_FISH"
       ],
@@ -79088,6 +79705,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_TORNADO",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T7_POTION_SLOWFIELD",
        "T7_POTION_STONESKIN"
@@ -79247,6 +79865,11 @@
          "T7_POTION_REVIVE",
          122,
          122
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -79625,6 +80248,11 @@
          17
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         8
+        ],
+        [
          "T8_MEAL_STEW",
          6,
          8
@@ -79729,6 +80357,11 @@
          "T8_POTION_TORNADO",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -79935,6 +80568,7 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH_AVALON",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP"
       ],
       "head": [
@@ -79965,6 +80599,7 @@
        "T8_POTION_COOLDOWN",
        "T8_POTION_TORNADO",
        "T7_POTION_SLOWFIELD",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LAVA"
       ],
       "shoes": [
@@ -80498,6 +81133,11 @@
          6
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_SANDWICH_AVALON",
          2,
          2
@@ -80577,6 +81217,11 @@
          "T8_POTION_TORNADO",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -80702,6 +81347,11 @@
          "T8_MEAL_STEW",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -80788,6 +81438,11 @@
          "T8_POTION_TORNADO",
          7,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -81086,6 +81741,11 @@
        145
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       38,
+       49
+      ],
+      [
        "T8_MEAL_STEW",
        4,
        8
@@ -81163,6 +81823,11 @@
        "T7_POTION_STONESKIN",
        14,
        16
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       10,
+       13
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -81532,6 +82197,11 @@
        "T7_POTION_CLEANSE2",
        2,
        2
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       4
       ]
      ],
      "shoes": [
@@ -81697,6 +82367,11 @@
        "T8_MEAL_SANDWICH_AVALON",
        23,
        28
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       13,
+       15
       ],
       [
        "T7_MEAL_OMELETTE",
@@ -81936,6 +82611,11 @@
        8
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       4,
+       5
+      ],
+      [
        "T8_MEAL_SANDWICH_AVALON",
        3,
        3
@@ -81978,6 +82658,11 @@
        "T7_POTION_REVIVE",
        80,
        80
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -82088,6 +82773,11 @@
        "T8_MEAL_STEW",
        4,
        4
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
+       2
       ]
      ],
      "head": [
@@ -82319,6 +83009,11 @@
        53
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       26,
+       31
+      ],
+      [
        "T8_MEAL_SANDWICH_AVALON",
        15,
        20
@@ -82448,6 +83143,11 @@
        "T7_POTION_REVIVE",
        351,
        357
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       48,
+       50
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -82665,6 +83365,11 @@
        34
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       17,
+       20
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        7,
        10
@@ -82794,6 +83499,11 @@
        "T8_POTION_TORNADO",
        19,
        22
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       12,
+       14
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -83191,6 +83901,7 @@
      "T7_MEAL_OMELETTE",
      "T8_MEAL_SANDWICH",
      "T8_MEAL_STEW",
+     "T8_MEAL_SANDWICH_FISH",
      "T8_MEAL_SANDWICH_AVALON",
      "T5_MEAL_SOUP",
      "T8_MEAL_STEW_FISH",
@@ -83223,6 +83934,7 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
+     "T7_POTION_MOB_RESET",
      "T8_POTION_COOLDOWN",
      "T7_POTION_STONESKIN",
      "T7_POTION_SLOWFIELD",
@@ -83297,6 +84009,7 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T8_MEAL_STEW_AVALON",
        "T7_MEAL_ROAST_FISH",
@@ -83328,6 +84041,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T8_POTION_LAVA",
        "T8_POTION_CLEANSE",
@@ -83864,11 +84578,11 @@
          90
         ],
         [
-         "T8_POTION_LAVA",
-         7
+         "T7_POTION_MOB_RESET",
+         16
         ],
         [
-         "T8_POTION_TORNADO",
+         "T8_POTION_LAVA",
          7
         ]
        ],
@@ -83926,6 +84640,10 @@
         [
          "T7_POTION_REVIVE",
          21
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         11
         ],
         [
          "T8_POTION_LAVA",
@@ -84111,8 +84829,8 @@
         64
        ],
        [
-        "T7_POTION_STONESKIN",
-        35
+        "T7_POTION_MOB_RESET",
+        39
        ]
       ],
       "shoes": [
@@ -84231,6 +84949,11 @@
          "T8_MEAL_STEW",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -84507,6 +85230,11 @@
          16
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         12,
+         14
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          6,
          7
@@ -84619,6 +85347,11 @@
          "T7_POTION_REVIVE",
          359,
          366
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         21,
+         26
         ],
         [
          "T7_POTION_STONESKIN",
@@ -84871,6 +85604,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T7_MEAL_ROAST_FISH",
          1,
          2
@@ -84938,6 +85676,11 @@
          "T7_POTION_REVIVE",
          42,
          42
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10,
+         10
         ],
         [
          "T8_POTION_LAVA",
@@ -85302,6 +86045,11 @@
          "T8_POTION_TORNADO",
          2,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -85474,7 +86222,7 @@
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
      117,
-     438
+     435
     ],
     "head": [
      "HEAD_LEATHER_SET3",
@@ -85752,8 +86500,8 @@
        17
       ],
       [
-       "T7_POTION_CLEANSE2",
-       8
+       "T7_POTION_MOB_RESET",
+       14
       ]
      ],
      "shoes": [
@@ -85818,6 +86566,10 @@
       [
        "T7_POTION_REVIVE",
        233
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       27
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -85886,6 +86638,10 @@
       [
        "T7_POTION_REVIVE",
        30
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       7
       ]
      ],
      "shoes": [
@@ -86008,6 +86764,10 @@
        154
       ],
       [
+       "T7_POTION_MOB_RESET",
+       9
+      ],
+      [
        "T7_POTION_SLOWFIELD",
        7
       ]
@@ -86077,12 +86837,12 @@
       1875
      ],
      [
-      "T8_POTION_COOLDOWN",
-      34
+      "T7_POTION_MOB_RESET",
+      57
      ],
      [
-      "T7_POTION_ACID",
-      20
+      "T8_POTION_COOLDOWN",
+      34
      ]
     ],
     "shoes": [
@@ -86134,6 +86894,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH_AVALON",
        "T8_MEAL_STEW_AVALON"
@@ -86152,6 +86913,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T7_POTION_ACID",
        "T7_POTION_SLOWFIELD",
@@ -86191,7 +86953,7 @@
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
        38,
-       132
+       131
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -86277,6 +87039,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          3
@@ -86309,6 +87076,11 @@
          "T7_POTION_REVIVE",
          52,
          53
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -86456,6 +87228,11 @@
          49
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         21,
+         26
+        ],
+        [
          "T8_MEAL_STEW",
          7,
          10
@@ -86526,6 +87303,11 @@
         ],
         [
          "T7_POTION_ACID",
+         12,
+         15
+        ],
+        [
+         "T7_POTION_MOB_RESET",
          12,
          15
         ],
@@ -86717,6 +87499,11 @@
          "T7_POTION_REVIVE",
          26,
          26
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ]
        ],
        "shoes": [
@@ -86892,7 +87679,7 @@
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
         38,
-        131
+        130
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -87156,6 +87943,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH_AVALON",
        "T5_MEAL_SOUP"
@@ -87174,6 +87962,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_SLOWFIELD",
        "T7_POTION_CLEANSE2",
@@ -87211,7 +88000,7 @@
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
        71,
-       281
+       279
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -87339,6 +88128,11 @@
          "T7_POTION_REVIVE",
          63,
          63
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ]
        ],
        "shoes": [
@@ -87466,6 +88260,11 @@
          158
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         16,
+         22
+        ],
+        [
          "T8_MEAL_SANDWICH_AVALON",
          6,
          7
@@ -87523,6 +88322,11 @@
          "T7_POTION_REVIVE",
          933,
          944
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         19,
+         22
         ],
         [
          "T7_POTION_STONESKIN",
@@ -87688,6 +88492,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          4,
          4
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -87732,6 +88541,11 @@
          "T7_POTION_REVIVE",
          39,
          40
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -87890,7 +88704,7 @@
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
         71,
-        279
+        277
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -87949,7 +88763,8 @@
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
-       "T8_MEAL_SANDWICH"
+       "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH"
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -87959,6 +88774,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2"
       ],
       "shoes": [
@@ -88067,6 +88883,11 @@
          "T7_MEAL_OMELETTE",
          40,
          44
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         5
         ]
        ],
        "head": [
@@ -88096,6 +88917,11 @@
          "T7_POTION_REVIVE",
          293,
          296
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -88208,6 +89034,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH_AVALON"
       ],
@@ -88342,6 +89169,11 @@
          "T7_MEAL_OMELETTE",
          20,
          22
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
         ],
         [
          "T8_MEAL_STEW",
@@ -88585,6 +89417,11 @@
        "T8_MEAL_STEW",
        5,
        6
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       4,
+       5
       ]
      ],
      "head": [
@@ -88639,6 +89476,11 @@
        "T7_POTION_REVIVE",
        156,
        155
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       6,
+       6
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -88846,6 +89688,11 @@
        264
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       40,
+       55
+      ],
+      [
        "T8_MEAL_STEW",
        16,
        25
@@ -88949,6 +89796,11 @@
        "T7_POTION_REVIVE",
        1625,
        1637
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       29,
+       38
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -89181,6 +90033,11 @@
        13
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       4,
+       4
+      ],
+      [
        "T8_MEAL_STEW",
        2,
        2
@@ -89228,6 +90085,11 @@
        "T7_POTION_REVIVE",
        86,
        87
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       13,
+       13
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -89625,7 +90487,7 @@
      "food": [
       "T7_MEAL_OMELETTE_AVALON",
       117,
-      433
+      430
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -89737,6 +90599,7 @@
      "T7_MEAL_OMELETTE_FISH",
      "T8_MEAL_STEW",
      "T8_MEAL_SANDWICH",
+     "T8_MEAL_SANDWICH_FISH",
      "T5_MEAL_SOUP",
      "T7_MEAL_PIE",
      "T8_MEAL_SANDWICH_AVALON",
@@ -89790,6 +90653,7 @@
     "potion": [
      "T7_POTION_REVIVE",
      "T7_POTION_STONESKIN",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_CLEANSE2",
      "T6_POTION_ENERGY",
      "T8_POTION_COOLDOWN",
@@ -89869,6 +90733,7 @@
        "T8_MEAL_STEW",
        "T5_MEAL_SOUP",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_PIE",
        "T8_MEAL_STEW_AVALON",
        "T7_MEAL_ROAST",
@@ -89924,6 +90789,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
        "T6_POTION_ENERGY",
@@ -89978,8 +90844,8 @@
       ],
       "food": [
        "T7_MEAL_OMELETTE",
-       481,
-       937
+       456,
+       902
       ],
       "potion": [
        "T7_POTION_REVIVE",
@@ -90046,8 +90912,8 @@
          223
         ],
         [
-         "T7_POTION_CLEANSE2",
-         49
+         "T7_POTION_MOB_RESET",
+         53
         ]
        ],
        "shoes": [
@@ -90116,6 +90982,10 @@
         [
          "T7_POTION_STONESKIN",
          25
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9
         ]
        ],
        "shoes": [
@@ -90182,12 +91052,12 @@
          134
         ],
         [
-         "T7_POTION_STONESKIN",
-         23
+         "T7_POTION_MOB_RESET",
+         31
         ],
         [
-         "T8_POTION_COOLDOWN",
-         15
+         "T7_POTION_STONESKIN",
+         23
         ]
        ],
        "shoes": [
@@ -90306,16 +91176,16 @@
        ],
        "potion": [
         [
+         "T7_POTION_MOB_RESET",
+         46
+        ],
+        [
          "T7_POTION_REVIVE",
          41
         ],
         [
          "T7_POTION_STONESKIN",
          8
-        ],
-        [
-         "T8_POTION_CLEANSE",
-         6
         ]
        ],
        "shoes": [
@@ -90400,8 +91270,8 @@
          923
         ],
         [
-         "T7_POTION_CLEANSE2",
-         77
+         "T7_POTION_MOB_RESET",
+         119
         ]
        ],
        "shoes": [
@@ -90568,12 +91438,12 @@
          38
         ],
         [
-         "T7_POTION_STONESKIN",
+         "T7_POTION_MOB_RESET",
          8
         ],
         [
-         "T6_POTION_ENERGY",
-         5
+         "T7_POTION_STONESKIN",
+         8
         ]
        ],
        "shoes": [
@@ -90640,6 +91510,10 @@
          105
         ],
         [
+         "T7_POTION_MOB_RESET",
+         43
+        ],
+        [
          "T8_POTION_LIFEWARD",
          6
         ]
@@ -90679,6 +91553,10 @@
         ]
        ],
        "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         8
+        ],
         [
          "T7_POTION_REVIVE",
          7
@@ -90869,8 +91747,8 @@
         1423
        ],
        [
-        "T7_POTION_CLEANSE2",
-        150
+        "T7_POTION_MOB_RESET",
+        579
        ]
       ],
       "shoes": [
@@ -90998,6 +91876,11 @@
          "T7_POTION_REVIVE",
          27,
          27
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10,
+         10
         ],
         [
          "T7_POTION_STONESKIN",
@@ -91493,6 +92376,11 @@
          345
         ],
         [
+         "T7_POTION_MOB_RESET",
+         80,
+         83
+        ],
+        [
          "T7_POTION_STONESKIN",
          19,
          21
@@ -91882,6 +92770,11 @@
          553
         ],
         [
+         "T7_POTION_MOB_RESET",
+         153,
+         193
+        ],
+        [
          "T7_POTION_CLEANSE2",
          70,
          99
@@ -92187,6 +93080,11 @@
          13
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         9,
+         16
+        ],
+        [
          "T7_MEAL_PIE",
          3,
          6
@@ -92304,6 +93202,11 @@
          "T7_POTION_STONESKIN",
          259,
          293
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         117,
+         139
         ],
         [
          "T6_POTION_ENERGY",
@@ -93080,6 +93983,11 @@
          172
         ],
         [
+         "T7_POTION_MOB_RESET",
+         58,
+         60
+        ],
+        [
          "T8_POTION_COOLDOWN",
          13,
          15
@@ -93365,6 +94273,11 @@
          12
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         11
+        ],
+        [
          "T7_MEAL_PIE",
          6,
          15
@@ -93604,6 +94517,11 @@
          "T7_POTION_STONESKIN",
          384,
          458
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         74,
+         105
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -93881,6 +94799,11 @@
          18
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         9,
+         11
+        ],
+        [
          "T8_MEAL_SANDWICH",
          2,
          2
@@ -94055,6 +94978,11 @@
          "T7_POTION_CLEANSE2",
          7,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
         ],
         [
          "T8_POTION_CLEANSE",
@@ -94257,6 +95185,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_STEW",
          1,
          2
@@ -94376,6 +95309,11 @@
          "T7_POTION_STONESKIN",
          31,
          33
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         13,
+         13
         ],
         [
          "T6_POTION_ENERGY",
@@ -94522,8 +95460,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE",
-        146,
-        317
+        138,
+        304
        ],
        "potion": [
         "T7_POTION_REVIVE",
@@ -94549,8 +95487,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE",
-        84,
-        164
+        83,
+        163
        ],
        "potion": [
         "T7_POTION_REVIVE",
@@ -94637,8 +95575,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE",
-        21,
-        41
+        20,
+        38
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -95043,6 +95981,10 @@
       [
        "T7_POTION_REVIVE",
        27
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       20
       ]
      ],
      "shoes": [
@@ -95157,8 +96099,8 @@
        338
       ],
       [
-       "T6_POTION_ENERGY",
-       32
+       "T7_POTION_MOB_RESET",
+       55
       ]
      ],
      "shoes": [
@@ -95371,8 +96313,8 @@
        52
       ],
       [
-       "T7_POTION_CLEANSE2",
-       8
+       "T7_POTION_MOB_RESET",
+       25
       ]
      ],
      "shoes": [
@@ -95475,12 +96417,12 @@
        171
       ],
       [
-       "T6_POTION_ENERGY",
-       8
+       "T7_POTION_MOB_RESET",
+       27
       ],
       [
-       "T7_POTION_ACID",
-       7
+       "T6_POTION_ENERGY",
+       8
       ]
      ],
      "shoes": [
@@ -95545,6 +96487,10 @@
       [
        "T7_POTION_REVIVE",
        19
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       8
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -95830,8 +96776,8 @@
       718
      ],
      [
-      "T7_POTION_CLEANSE2",
-      172
+      "T7_POTION_MOB_RESET",
+      233
      ]
     ],
     "shoes": [
@@ -95880,6 +96826,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH",
        "T7_MEAL_PIE",
        "T5_MEAL_SOUP",
@@ -95927,6 +96874,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
        "T8_POTION_CLEANSE",
@@ -96238,6 +97186,11 @@
          11
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         7
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          3
@@ -96325,6 +97278,11 @@
          "T7_POTION_REVIVE",
          183,
          188
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         19,
+         21
         ],
         [
          "T7_POTION_STONESKIN",
@@ -96621,6 +97579,11 @@
          31
         ],
         [
+         "T7_POTION_MOB_RESET",
+         8,
+         9
+        ],
+        [
          "T7_POTION_CLEANSE2",
          4,
          5
@@ -96821,6 +97784,11 @@
          4
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         5
+        ],
+        [
          "T7_MEAL_PIE",
          2,
          4
@@ -96903,6 +97871,11 @@
          "T7_POTION_STONESKIN",
          49,
          56
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         22,
+         28
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -97629,6 +98602,11 @@
          25
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         16
+        ],
+        [
          "T7_MEAL_PIE",
          4,
          7
@@ -97833,6 +98811,11 @@
          "T8_POTION_COOLDOWN",
          18,
          35
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         11
         ],
         [
          "T8_POTION_CLEANSE",
@@ -98171,6 +99154,11 @@
          7
         ],
         [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
+        ],
+        [
          "T8_POTION_TORNADO",
          0,
          2
@@ -98433,7 +99421,7 @@
        "food": [
         "T7_MEAL_OMELETTE",
         11,
-        32
+        30
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -99343,6 +100331,7 @@
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_PIE",
@@ -99388,6 +100377,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T6_POTION_ENERGY",
        "T8_POTION_LIFEWARD",
@@ -99674,6 +100664,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T8_POTION_LIFEWARD",
          2,
          4
@@ -99936,6 +100931,11 @@
          "T7_POTION_STONESKIN",
          27,
          29
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         25,
+         32
         ],
         [
          "T6_POTION_ENERGY",
@@ -100237,6 +101237,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         16,
+         21
+        ],
+        [
          "T8_POTION_TORNADO",
          5,
          6
@@ -100457,6 +101462,11 @@
          2
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          1,
          2
@@ -100539,6 +101549,11 @@
          "T7_POTION_STONESKIN",
          63,
          74
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         32,
+         37
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -101185,6 +102200,11 @@
          9
         ],
         [
+         "T7_POTION_MOB_RESET",
+         8,
+         8
+        ],
+        [
          "T6_POTION_ENERGY",
          2,
          2
@@ -101373,6 +102393,11 @@
          "T8_MEAL_SANDWICH",
          7,
          17
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         7
         ],
         [
          "T8_MEAL_STEW_FISH",
@@ -101569,6 +102594,11 @@
          "T7_POTION_CLEANSE2",
          31,
          44
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         16,
+         24
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -101784,6 +102814,11 @@
          "T8_MEAL_SANDWICH",
          1,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -101940,6 +102975,11 @@
          "T7_POTION_CLEANSE2",
          6,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         3
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -102176,6 +103216,11 @@
          "T7_POTION_CLEANSE2",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
         ]
        ],
        "shoes": [
@@ -102308,7 +103353,7 @@
        "food": [
         "T7_MEAL_OMELETTE",
         8,
-        25
+        24
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -102550,6 +103595,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_TORNADO",
        "T8_POTION_LIFEWARD"
       ],
@@ -102737,6 +103783,11 @@
          "T7_POTION_STONESKIN",
          3,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -102896,6 +103947,11 @@
          "T7_POTION_REVIVE",
          185,
          188
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         8
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -103246,6 +104302,11 @@
          13
         ],
         [
+         "T7_POTION_MOB_RESET",
+         12,
+         14
+        ],
+        [
          "T7_POTION_CLEANSE2",
          2,
          2
@@ -103407,6 +104468,11 @@
         [
          "T8_POTION_LIFEWARD",
          2,
+         2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
          2
         ],
         [
@@ -103778,6 +104844,11 @@
          "T7_POTION_CLEANSE2",
          17,
          21
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
         ],
         [
          "T8_POTION_TORNADO",
@@ -104389,6 +105460,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T6_POTION_ENERGY",
        "T8_POTION_CLEANSE",
        "T8_POTION_LIFEWARD",
@@ -104759,6 +105831,11 @@
          109
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         7
+        ],
+        [
          "T6_POTION_ENERGY",
          4,
          4
@@ -104943,6 +106020,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
+        ],
+        [
          "T8_POTION_CLEANSE",
          2,
          2
@@ -105115,6 +106197,11 @@
          "T7_POTION_STONESKIN",
          20,
          21
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         11,
+         11
         ],
         [
          "T6_POTION_ENERGY",
@@ -105485,6 +106572,11 @@
          "T7_POTION_REVIVE",
          7,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -105751,6 +106843,11 @@
          "T7_POTION_CLEANSE2",
          17,
          21
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -106083,6 +107180,11 @@
          "T7_POTION_REVIVE",
          47,
          47
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -106639,6 +107741,11 @@
        11
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       6
+      ],
+      [
        "T8_POTION_LIFEWARD",
        3,
        6
@@ -106859,6 +107966,11 @@
        10
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       5,
+       9
+      ],
+      [
        "T5_MEAL_SOUP",
        3,
        5
@@ -106966,6 +108078,11 @@
        "T7_POTION_REVIVE",
        930,
        952
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       53,
+       66
       ],
       [
        "T7_POTION_STONESKIN",
@@ -107382,6 +108499,11 @@
        152
       ],
       [
+       "T7_POTION_MOB_RESET",
+       30,
+       41
+      ],
+      [
        "T7_POTION_CLEANSE2",
        25,
        31
@@ -107662,6 +108784,11 @@
        9
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       5,
+       10
+      ],
+      [
        "T8_MEAL_STEW_FISH",
        4,
        5
@@ -107774,6 +108901,11 @@
        "T7_POTION_STONESKIN",
        147,
        180
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       48,
+       62
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -108105,6 +109237,11 @@
        9
       ],
       [
+       "T7_POTION_MOB_RESET",
+       6,
+       8
+      ],
+      [
        "T6_POTION_ENERGY",
        2,
        2
@@ -108251,6 +109388,11 @@
       ],
       [
        "T8_MEAL_SANDWICH",
+       2,
+       2
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
        2,
        2
       ],
@@ -108605,6 +109747,11 @@
        24
       ],
       [
+       "T7_POTION_MOB_RESET",
+       9,
+       9
+      ],
+      [
        "T6_POTION_ENERGY",
        4,
        4
@@ -108865,6 +110012,11 @@
        36
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       10,
+       28
+      ],
+      [
        "T7_MEAL_PIE",
        5,
        17
@@ -109094,6 +110246,11 @@
        "T7_POTION_CLEANSE2",
        53,
        80
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       26,
+       55
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -109376,6 +110533,11 @@
        3
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       3
+      ],
+      [
        "T8_MEAL_STEW_FISH",
        1,
        2
@@ -109555,6 +110717,11 @@
        "T7_POTION_CLEANSE2",
        10,
        13
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
+       7
       ],
       [
        "T6_POTION_ENERGY",
@@ -109780,6 +110947,11 @@
        "T8_MEAL_STEW",
        2,
        2
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       2
       ]
      ],
      "head": [
@@ -109916,6 +111088,11 @@
        "T7_POTION_CLEANSE2",
        4,
        4
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
+       5
       ],
       [
        "T7_POTION_STONESKIN",
@@ -110092,7 +111269,7 @@
      "food": [
       "T7_MEAL_OMELETTE",
       73,
-      159
+      158
      ],
      "potion": [
       "T7_POTION_REVIVE",
@@ -110118,8 +111295,8 @@
      ],
      "food": [
       "T7_MEAL_OMELETTE",
-      53,
-      132
+      52,
+      129
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -110418,6 +111595,7 @@
      "T7_MEAL_OMELETTE_FISH",
      "T8_MEAL_STEW",
      "T8_MEAL_SANDWICH",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_PIE",
      "T7_MEAL_ROAST",
      "T8_MEAL_SANDWICH_AVALON",
@@ -110471,6 +111649,7 @@
      "T7_POTION_REVIVE",
      "T7_POTION_STONESKIN",
      "T7_POTION_CLEANSE2",
+     "T7_POTION_MOB_RESET",
      "T8_POTION_COOLDOWN",
      "T8_POTION_CLEANSE",
      "T8_POTION_LIFEWARD",
@@ -110542,6 +111721,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH",
        "T5_MEAL_SOUP",
        "T7_MEAL_PIE",
@@ -110597,6 +111777,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T6_POTION_ENERGY",
        "T7_POTION_CLEANSE2",
@@ -110647,8 +111828,8 @@
       ],
       "food": [
        "T7_MEAL_OMELETTE",
-       21,
-       41
+       20,
+       38
       ],
       "head": [
        "HEAD_PLATE_SET3",
@@ -110884,6 +112065,14 @@
         ]
        ]
       },
+      "ARMOR_CLOTH_KEEPER": {
+       "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         5
+        ]
+       ]
+      },
       "ARMOR_CLOTH_ROYAL": {
        "cape": [
         [
@@ -110911,6 +112100,10 @@
         [
          "T7_POTION_REVIVE",
          13
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9
         ]
        ],
        "shoes": [
@@ -110977,8 +112170,8 @@
          364
         ],
         [
-         "T6_POTION_ENERGY",
-         16
+         "T7_POTION_MOB_RESET",
+         27
         ]
        ],
        "shoes": [
@@ -111213,6 +112406,12 @@
          12
         ]
        ],
+       "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         8
+        ]
+       ],
        "shoes": [
         [
          "SHOES_LEATHER_AVALON",
@@ -111278,8 +112477,8 @@
         618
        ],
        [
-        "T8_POTION_COOLDOWN",
-        77
+        "T7_POTION_MOB_RESET",
+        152
        ]
       ],
       "shoes": [
@@ -111445,6 +112644,11 @@
          2
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          2,
          2
@@ -111537,6 +112741,11 @@
          "T6_POTION_ENERGY",
          8,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         8
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -111983,6 +113192,11 @@
          12
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         11
+        ],
+        [
          "T7_MEAL_PIE",
          6,
          15
@@ -112222,6 +113436,11 @@
          "T7_POTION_STONESKIN",
          384,
          458
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         74,
+         105
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -112492,6 +113711,11 @@
          "T8_MEAL_SANDWICH",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -112593,6 +113817,11 @@
          "T7_POTION_REVIVE",
          28,
          28
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         20,
+         21
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -112805,6 +114034,11 @@
         ]
        ],
        "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         20,
+         20
+        ],
         [
          "T6_POTION_ENERGY",
          9,
@@ -113039,8 +114273,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE",
-        21,
-        41
+        20,
+        38
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -113385,6 +114619,10 @@
       ]
      ],
      "potion": [
+      [
+       "T7_POTION_MOB_RESET",
+       7
+      ],
       [
        "T7_POTION_REVIVE",
        7
@@ -113849,6 +115087,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_PIE",
        "T8_MEAL_SANDWICH",
        "T8_MEAL_STEW_AVALON",
@@ -113895,6 +115134,7 @@
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T6_POTION_ENERGY",
        "T7_POTION_SLOWFIELD",
@@ -114290,6 +115530,11 @@
          25
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         16
+        ],
+        [
          "T7_MEAL_PIE",
          4,
          7
@@ -114489,6 +115734,11 @@
          "T8_POTION_COOLDOWN",
          18,
          35
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         11
         ],
         [
          "T8_POTION_CLEANSE",
@@ -114997,6 +116247,7 @@
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_PIE",
        "T8_MEAL_SANDWICH_AVALON"
@@ -115040,6 +116291,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T8_POTION_LIFEWARD",
        "T6_POTION_HEAL",
@@ -115444,6 +116696,11 @@
          17
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         7
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          2,
          4
@@ -115633,6 +116890,11 @@
          "T7_POTION_CLEANSE2",
          31,
          44
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         16,
+         24
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -115874,6 +117136,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_TORNADO"
       ],
       "shoes": [
@@ -116247,6 +117510,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
+        ],
+        [
          "T8_POTION_TORNADO",
          2,
          3
@@ -116411,6 +117679,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LIFEWARD"
       ],
       "shoes": [
@@ -116825,6 +118094,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
+        ],
+        [
          "T8_POTION_LIFEWARD",
          3,
          3
@@ -117089,6 +118363,11 @@
        2
       ],
       [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
+      ],
+      [
        "T8_POTION_CLEANSE",
        2,
        2
@@ -117215,6 +118494,11 @@
       ],
       [
        "T8_MEAL_SANDWICH",
+       2,
+       2
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
        2,
        2
       ],
@@ -117543,6 +118827,11 @@
        36
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       10,
+       28
+      ],
+      [
        "T7_MEAL_PIE",
        5,
        17
@@ -117772,6 +119061,11 @@
        "T7_POTION_CLEANSE2",
        53,
        80
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       26,
+       55
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -118402,6 +119696,7 @@
      "T7_MEAL_OMELETTE_FISH",
      "T8_MEAL_STEW",
      "T8_MEAL_SANDWICH",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_PIE",
      "T8_MEAL_SANDWICH_AVALON",
      "T5_MEAL_SOUP",
@@ -118452,6 +119747,7 @@
      "T7_POTION_REVIVE",
      "T7_POTION_STONESKIN",
      "T7_POTION_CLEANSE2",
+     "T7_POTION_MOB_RESET",
      "T8_POTION_COOLDOWN",
      "T8_POTION_LIFEWARD",
      "T8_POTION_CLEANSE",
@@ -118527,6 +119823,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH",
        "T7_MEAL_PIE",
        "T8_MEAL_STEW_AVALON",
@@ -118580,6 +119877,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
        "T6_POTION_ENERGY",
@@ -118625,8 +119923,8 @@
       ],
       "food": [
        "T7_MEAL_OMELETTE",
-       83,
-       167
+       78,
+       161
       ],
       "head": [
        "HEAD_PLATE_SET3",
@@ -118893,6 +120191,10 @@
         [
          "T7_POTION_REVIVE",
          13
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6
         ]
        ],
        "shoes": [
@@ -118959,8 +120261,8 @@
          401
         ],
         [
-         "T6_POTION_ENERGY",
-         22
+         "T7_POTION_MOB_RESET",
+         34
         ]
        ],
        "shoes": [
@@ -119153,8 +120455,8 @@
          49
         ],
         [
-         "T8_POTION_COOLDOWN",
-         7
+         "T7_POTION_MOB_RESET",
+         15
         ]
        ],
        "shoes": [
@@ -119269,6 +120571,10 @@
          97
         ],
         [
+         "T7_POTION_MOB_RESET",
+         19
+        ],
+        [
          "T7_POTION_STONESKIN",
          8
         ]
@@ -119381,8 +120687,8 @@
          17
         ],
         [
-         "T7_POTION_STONESKIN",
-         5
+         "T7_POTION_MOB_RESET",
+         10
         ]
        ],
        "shoes": [
@@ -119622,8 +120928,8 @@
         612
        ],
        [
-        "T8_POTION_COOLDOWN",
-        87
+        "T7_POTION_MOB_RESET",
+        130
        ]
       ],
       "shoes": [
@@ -119802,6 +121108,11 @@
          "T8_MEAL_SANDWICH",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -119906,6 +121217,11 @@
          "T7_POTION_STONESKIN",
          78,
          87
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         15,
+         16
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -120248,6 +121564,11 @@
          12
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         11
+        ],
+        [
          "T7_MEAL_PIE",
          6,
          15
@@ -120482,6 +121803,11 @@
          "T7_POTION_STONESKIN",
          384,
          458
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         74,
+         105
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -120784,6 +122110,11 @@
          18
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         9,
+         11
+        ],
+        [
          "T8_MEAL_SANDWICH",
          2,
          2
@@ -120960,6 +122291,11 @@
          9
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
+        ],
+        [
          "T8_POTION_CLEANSE",
          2,
          2
@@ -121079,7 +122415,7 @@
        "food": [
         "T7_MEAL_OMELETTE",
         17,
-        28
+        27
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -121110,8 +122446,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE",
-        21,
-        41
+        20,
+        38
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -121435,6 +122771,10 @@
      ],
      "potion": [
       [
+       "T7_POTION_MOB_RESET",
+       7
+      ],
+      [
        "T7_POTION_REVIVE",
        6
       ]
@@ -121499,8 +122839,8 @@
        118
       ],
       [
-       "T8_POTION_CLEANSE",
-       10
+       "T7_POTION_MOB_RESET",
+       13
       ]
      ],
      "shoes": [
@@ -121717,6 +123057,10 @@
       [
        "T7_POTION_STONESKIN",
        35
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       13
       ]
      ],
      "shoes": [
@@ -122015,12 +123359,12 @@
        38
       ],
       [
-       "T8_POTION_COOLDOWN",
-       6
+       "T7_POTION_MOB_RESET",
+       9
       ],
       [
-       "T7_POTION_STONESKIN",
-       5
+       "T8_POTION_COOLDOWN",
+       6
       ]
      ],
      "shoes": [
@@ -122382,6 +123726,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_PIE",
        "T8_MEAL_SANDWICH",
        "T5_MEAL_SOUP",
@@ -122429,6 +123774,7 @@
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T6_POTION_ENERGY",
        "T8_POTION_LIFEWARD",
@@ -122797,6 +124143,11 @@
          25
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         16
+        ],
+        [
          "T7_MEAL_PIE",
          4,
          7
@@ -123001,6 +124352,11 @@
          "T8_POTION_COOLDOWN",
          18,
          35
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         11
         ],
         [
          "T8_POTION_CLEANSE",
@@ -123342,6 +124698,11 @@
          "T7_POTION_CLEANSE2",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ],
         [
          "T8_POTION_TORNADO",
@@ -124012,6 +125373,7 @@
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_PIE",
@@ -124056,6 +125418,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T8_POTION_LIFEWARD",
        "T8_POTION_COOLDOWN",
@@ -124223,6 +125586,11 @@
          "T7_POTION_STONESKIN",
          10,
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -124450,6 +125818,11 @@
          17
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         7
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          2,
          4
@@ -124644,6 +126017,11 @@
          "T7_POTION_CLEANSE2",
          31,
          44
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         16,
+         24
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -124864,6 +126242,11 @@
          "T8_MEAL_SANDWICH",
          1,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -125020,6 +126403,11 @@
          "T7_POTION_CLEANSE2",
          6,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         3
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -125227,6 +126615,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_TORNADO"
       ],
       "shoes": [
@@ -125554,6 +126943,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
+        ],
+        [
          "T8_POTION_TORNADO",
          2,
          3
@@ -125837,6 +127231,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LIFEWARD"
       ],
       "shoes": [
@@ -126220,6 +127615,11 @@
          "T7_POTION_CLEANSE2",
          17,
          21
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T8_POTION_LIFEWARD",
@@ -126615,6 +128015,11 @@
        2
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
+       2
+      ],
+      [
        "T8_MEAL_STEW",
        2,
        3
@@ -126687,6 +128092,11 @@
        "T7_POTION_STONESKIN",
        20,
        24
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       5,
+       7
       ],
       [
        "T8_POTION_CLEANSE",
@@ -126994,6 +128404,11 @@
        36
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       10,
+       28
+      ],
+      [
        "T7_MEAL_PIE",
        5,
        17
@@ -127213,6 +128628,11 @@
        "T7_POTION_CLEANSE2",
        53,
        80
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       26,
+       55
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -127500,6 +128920,11 @@
        3
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       3
+      ],
+      [
        "T8_MEAL_STEW_FISH",
        1,
        2
@@ -127674,6 +129099,11 @@
        "T7_POTION_CLEANSE2",
        10,
        13
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
+       7
       ],
       [
        "T6_POTION_ENERGY",
@@ -127952,6 +129382,7 @@
      "T7_MEAL_OMELETTE_FISH",
      "T7_MEAL_OMELETTE_DRAGONAREA",
      "T8_MEAL_SANDWICH_AVALON",
+     "T8_MEAL_SANDWICH_FISH",
      "T8_MEAL_STEW",
      "T8_MEAL_STEW_FISH",
      "T7_MEAL_PIE"
@@ -127998,6 +129429,7 @@
      "T8_POTION_TORNADO",
      "T7_POTION_ACID",
      "T8_POTION_LIFEWARD",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_SLOWFIELD",
      "T8_POTION_COOLDOWN",
      "T8_POTION_LAVA",
@@ -128069,6 +129501,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_AVALON"
@@ -128114,6 +129547,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_TORNADO",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LAVA",
        "T7_POTION_ACID",
        "T8_POTION_CLEANSE",
@@ -128159,8 +129593,8 @@
       ],
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
-       30,
-       91
+       29,
+       89
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -128608,8 +130042,8 @@
          29
         ],
         [
-         "T8_POTION_LAVA",
-         14
+         "T7_POTION_MOB_RESET",
+         19
         ]
        ],
        "shoes": [
@@ -128676,8 +130110,8 @@
          15
         ],
         [
-         "T7_POTION_STONESKIN",
-         6
+         "T7_POTION_MOB_RESET",
+         8
         ]
        ],
        "shoes": [
@@ -128748,8 +130182,8 @@
          44
         ],
         [
-         "T7_POTION_ACID",
-         6
+         "T7_POTION_MOB_RESET",
+         20
         ]
        ],
        "shoes": [
@@ -129065,6 +130499,11 @@
          8
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         7
+        ],
+        [
          "T7_MEAL_OMELETTE_DRAGONAREA",
          2,
          2
@@ -129152,6 +130591,11 @@
          "T8_POTION_CLEANSE",
          15,
          16
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         14,
+         20
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -129282,6 +130726,11 @@
          "T8_MEAL_SANDWICH",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ],
         [
          "T8_MEAL_STEW",
@@ -129436,6 +130885,11 @@
          "T8_MEAL_STEW",
          3,
          4
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -129500,6 +130954,11 @@
          "T7_POTION_STONESKIN",
          9,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         8
         ],
         [
          "T6_POTION_ENERGY",
@@ -129894,6 +131353,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -129993,6 +131457,11 @@
          "T8_POTION_LAVA",
          24,
          28
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         18,
+         22
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -130366,6 +131835,11 @@
          133
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
+        ],
+        [
          "T7_POTION_CLEANSE2",
          4,
          4
@@ -130469,8 +131943,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
-        19,
-        49
+        14,
+        43
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -130567,8 +132041,8 @@
        ],
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
-        20,
-        59
+        19,
+        58
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -130627,7 +132101,7 @@
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
      123,
-     408
+     407
     ],
     "head": [
      "HEAD_LEATHER_SET3",
@@ -131427,6 +132901,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_STEW",
@@ -131466,7 +132941,8 @@
        "T8_POTION_COOLDOWN",
        "T8_POTION_LIFEWARD",
        "T7_POTION_SLOWFIELD",
-       "T8_POTION_CLEANSE"
+       "T8_POTION_CLEANSE",
+       "T7_POTION_MOB_RESET"
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -131495,7 +132971,7 @@
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
        29,
-       111
+       110
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -131604,6 +133080,11 @@
          "T8_MEAL_SANDWICH",
          10,
          11
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
         ],
         [
          "T8_MEAL_STEW",
@@ -131867,6 +133348,11 @@
          "T7_MEAL_OMELETTE_AVALON",
          21,
          22
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         8
         ],
         [
          "T8_MEAL_SANDWICH",
@@ -132212,6 +133698,11 @@
          12
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         11
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          3,
          3
@@ -132299,6 +133790,11 @@
          "T7_POTION_CLEANSE2",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -132414,6 +133910,11 @@
          "T7_MEAL_OMELETTE",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -132619,7 +134120,7 @@
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
         19,
-        68
+        67
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -133047,6 +134548,7 @@
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH_AVALON",
        "T8_MEAL_STEW"
       ],
@@ -133081,6 +134583,7 @@
        "T7_POTION_CLEANSE2",
        "T7_POTION_STONESKIN",
        "T8_POTION_TORNADO",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_LIFEWARD",
        "T7_POTION_ACID",
        "T8_POTION_COOLDOWN",
@@ -133220,6 +134723,11 @@
          8
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         5
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          2,
          3
@@ -133277,6 +134785,11 @@
          "T7_POTION_CLEANSE2",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_ACID",
@@ -133630,6 +135143,11 @@
          "T7_POTION_CLEANSE2",
          2,
          2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         3
         ]
        ],
        "shoes": [
@@ -133851,6 +135369,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T8_POTION_LIFEWARD",
          2,
          4
@@ -133996,6 +135519,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         9
+        ],
+        [
          "T8_MEAL_STEW",
          4,
          6
@@ -134077,6 +135605,11 @@
         [
          "T8_POTION_LAVA",
          4,
+         5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
          5
         ],
         [
@@ -134233,6 +135766,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          8,
          10
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         7
         ],
         [
          "T8_MEAL_STEW",
@@ -134606,7 +136144,8 @@
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA",
-       "T8_MEAL_SANDWICH_AVALON"
+       "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH"
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -134749,6 +136288,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          5,
          6
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -135665,6 +137209,7 @@
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_OMELETTE_FISH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW"
       ],
       "head": [
@@ -135689,6 +137234,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
        "T8_POTION_TORNADO",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_ACID",
        "T8_POTION_LIFEWARD"
@@ -135803,6 +137349,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -136308,6 +137859,11 @@
          "T7_POTION_REVIVE",
          101,
          101
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -136415,6 +137971,11 @@
          6
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
+        ],
+        [
          "T8_MEAL_STEW",
          1,
          2
@@ -136479,6 +138040,11 @@
          "T7_POTION_CLEANSE2",
          14,
          15
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -136794,6 +138360,11 @@
        19
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       8,
+       10
+      ],
+      [
        "T8_MEAL_STEW",
        7,
        8
@@ -136901,6 +138472,11 @@
        "T8_POTION_CLEANSE",
        6,
        6
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       5,
+       4
       ],
       [
        "T8_POTION_LIFEWARD",
@@ -137040,6 +138616,11 @@
        "T8_MEAL_SANDWICH",
        6,
        8
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       2
       ]
      ],
      "head": [
@@ -137235,6 +138816,11 @@
        12
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       8,
+       9
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        6,
        7
@@ -137336,6 +138922,11 @@
       [
        "T8_POTION_TORNADO",
        5,
+       6
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
        6
       ],
       [
@@ -137618,6 +139209,11 @@
        11
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       6
+      ],
+      [
        "T8_POTION_LIFEWARD",
        3,
        6
@@ -137793,6 +139389,11 @@
        56
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       11,
+       21
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        8,
        12
@@ -137930,6 +139531,11 @@
        "T8_POTION_LIFEWARD",
        6,
        9
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       5,
+       8
       ],
       [
        "T8_POTION_TORNADO",
@@ -138141,6 +139747,11 @@
        21
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       10,
+       12
+      ],
+      [
        "T8_MEAL_STEW",
        5,
        6
@@ -138274,6 +139885,11 @@
       [
        "T7_POTION_STONESKIN",
        3,
+       2
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
        2
       ],
       [
@@ -139287,6 +140903,7 @@
      "T8_MEAL_SANDWICH",
      "T8_MEAL_STEW",
      "T8_MEAL_SANDWICH_AVALON",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_OMELETTE_FISH",
      "T5_MEAL_SOUP"
     ],
@@ -139317,6 +140934,7 @@
      "T7_POTION_REVIVE",
      "T7_POTION_CLEANSE2",
      "T8_POTION_TORNADO",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_STONESKIN",
      "T8_POTION_COOLDOWN",
      "T8_POTION_LIFEWARD"
@@ -139367,6 +140985,7 @@
        "T8_MEAL_SANDWICH",
        "T8_MEAL_STEW",
        "T5_MEAL_SOUP",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH_AVALON"
       ],
       "head": [
@@ -139392,6 +141011,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_TORNADO",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
        "T7_POTION_SLOWFIELD",
@@ -139756,7 +141376,7 @@
         11
        ],
        [
-        "T7_POTION_STONESKIN",
+        "T7_POTION_MOB_RESET",
         8
        ]
       ],
@@ -140062,6 +141682,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          2
@@ -140119,6 +141744,11 @@
          "T7_POTION_REVIVE",
          100,
          102
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_STONESKIN",
@@ -140299,6 +141929,11 @@
          "T8_MEAL_SANDWICH",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -140360,6 +141995,11 @@
          "T7_POTION_REVIVE",
          22,
          22
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T8_POTION_TORNADO",
@@ -141417,7 +143057,8 @@
        "T8_MEAL_SANDWICH",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH_AVALON",
-       "T7_MEAL_OMELETTE_FISH"
+       "T7_MEAL_OMELETTE_FISH",
+       "T8_MEAL_SANDWICH_FISH"
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -141769,6 +143410,11 @@
          6
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         4
+        ],
+        [
          "T8_MEAL_STEW",
          2,
          3
@@ -142073,6 +143719,7 @@
        "T7_MEAL_OMELETTE_AVALON",
        "T8_MEAL_SANDWICH",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW"
       ],
       "head": [
@@ -142096,6 +143743,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_TORNADO"
       ],
       "shoes": [
@@ -142238,6 +143886,11 @@
          "T7_POTION_CLEANSE2",
          7,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -142399,6 +144052,11 @@
          127
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T7_POTION_CLEANSE2",
          2,
          3
@@ -142497,6 +144155,11 @@
          "T7_MEAL_OMELETTE_AVALON",
          8,
          10
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -143317,6 +144980,11 @@
        14
       ],
       [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
+      ],
+      [
        "T8_POTION_LIFEWARD",
        3,
        4
@@ -143507,6 +145175,11 @@
        11
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       5,
+       7
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        1,
        2
@@ -143574,6 +145247,11 @@
        "T7_POTION_CLEANSE2",
        5,
        7
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       4,
+       5
       ],
       [
        "T7_POTION_STONESKIN",
@@ -143717,6 +145395,11 @@
       ],
       [
        "T8_MEAL_SANDWICH_AVALON",
+       2,
+       2
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
        2,
        2
       ]
@@ -143978,6 +145661,7 @@
      "T8_MEAL_STEW_FISH",
      "T5_MEAL_SOUP",
      "T7_MEAL_OMELETTE_FISH",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_ROAST",
      "T8_MEAL_SANDWICH_AVALON",
      "T7_MEAL_ROAST_FISH",
@@ -144027,6 +145711,7 @@
     "potion": [
      "T7_POTION_REVIVE",
      "T8_POTION_COOLDOWN",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_STONESKIN",
      "T7_POTION_CLEANSE2",
      "T8_POTION_CLEANSE",
@@ -144112,6 +145797,7 @@
        "T5_MEAL_SOUP",
        "T7_MEAL_PIE",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_ROAST_FISH",
        "T7_MEAL_OMELETTE_FISH"
       ],
@@ -144162,6 +145848,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T8_POTION_CLEANSE",
        "T7_POTION_STONESKIN",
@@ -144213,7 +145900,7 @@
       "food": [
        "T7_MEAL_OMELETTE_AVALON",
        28,
-       109
+       108
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -144732,16 +146419,16 @@
        ],
        "potion": [
         [
+         "T7_POTION_MOB_RESET",
+         258
+        ],
+        [
          "T7_POTION_REVIVE",
          204
         ],
         [
          "T8_POTION_CLEANSE",
          21
-        ],
-        [
-         "T8_POTION_TORNADO",
-         20
         ]
        ],
        "shoes": [
@@ -144918,6 +146605,12 @@
          7
         ]
        ],
+       "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         31
+        ]
+       ],
        "shoes": [
         [
          "SHOES_CLOTH_MORGANA",
@@ -145090,6 +146783,10 @@
         [
          "T7_POTION_REVIVE",
          127
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9
         ]
        ],
        "shoes": [
@@ -145238,6 +146935,10 @@
          31
         ],
         [
+         "T7_POTION_MOB_RESET",
+         10
+        ],
+        [
          "T8_POTION_TORNADO",
          7
         ]
@@ -145310,8 +147011,8 @@
          14
         ],
         [
-         "T8_POTION_CLEANSE",
-         5
+         "T7_POTION_MOB_RESET",
+         7
         ]
        ],
        "shoes": [
@@ -145379,12 +147080,12 @@
         1207
        ],
        [
-        "T8_POTION_COOLDOWN",
-        339
+        "T7_POTION_MOB_RESET",
+        364
        ],
        [
-        "T8_POTION_CLEANSE",
-        139
+        "T8_POTION_COOLDOWN",
+        339
        ]
       ],
       "shoes": [
@@ -145473,6 +147174,11 @@
         ]
        ],
        "potion": [
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
+        ],
         [
          "T7_POTION_STONESKIN",
          3,
@@ -145676,6 +147382,11 @@
          "T7_POTION_CLEANSE2",
          5,
          5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         6
         ],
         [
          "T7_POTION_ACID",
@@ -145925,6 +147636,11 @@
          "T8_POTION_TORNADO",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T6_POTION_HEAL",
@@ -146204,6 +147920,11 @@
          "T7_POTION_CLEANSE2",
          10,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         6
         ],
         [
          "T6_POTION_HEAL",
@@ -146652,6 +148373,11 @@
          75
         ],
         [
+         "T7_POTION_MOB_RESET",
+         18,
+         20
+        ],
+        [
          "T7_POTION_STONESKIN",
          14,
          18
@@ -147012,6 +148738,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         4
+        ],
+        [
          "T7_MEAL_ROAST_FISH",
          2,
          2
@@ -147176,6 +148907,11 @@
          "T7_POTION_REVIVE",
          309,
          323
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         291,
+         306
         ],
         [
          "T8_POTION_CLEANSE",
@@ -147573,6 +149309,11 @@
          4
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          2,
          2
@@ -147777,6 +149518,11 @@
          "T7_POTION_STONESKIN",
          22,
          24
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         21,
+         23
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -148040,11 +149786,6 @@
         22,
         71
        ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        18,
-        20
-       ],
        "head": [
         "HEAD_LEATHER_UNDEAD",
         216,
@@ -148054,6 +149795,11 @@
         "OFF_HORN_KEEPER",
         20,
         22
+       ],
+       "potion": [
+        "T7_POTION_MOB_RESET",
+        14,
+        20
        ],
        "shoes": [
         "SHOES_LEATHER_SET1",
@@ -149000,8 +150746,8 @@
       160
      ],
      [
-      "T7_POTION_CLEANSE2",
-      40
+      "T7_POTION_MOB_RESET",
+      64
      ]
     ],
     "shoes": [
@@ -149050,6 +150796,7 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_STEW",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_OMELETTE_FISH"
       ],
@@ -149084,6 +150831,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T7_POTION_CLEANSE2",
        "T7_POTION_SLOWFIELD",
@@ -149463,6 +151211,11 @@
          4
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T7_POTION_SLOWFIELD",
          2,
          2
@@ -149586,6 +151339,11 @@
          "T8_MEAL_STEW",
          6,
          6
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         7
         ]
        ],
        "head": [
@@ -149657,6 +151415,11 @@
          "T7_POTION_REVIVE",
          162,
          163
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_ACID",
@@ -150427,7 +152190,8 @@
        "T8_MEAL_STEW_FISH",
        "T5_MEAL_SOUP",
        "T7_MEAL_ROAST",
-       "T7_MEAL_OMELETTE_FISH"
+       "T7_MEAL_OMELETTE_FISH",
+       "T8_MEAL_SANDWICH_FISH"
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -150464,6 +152228,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
@@ -150887,6 +152652,11 @@
          "T7_POTION_CLEANSE2",
          4,
          5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -151148,6 +152918,11 @@
          "T8_MEAL_STEW",
          18,
          22
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -151264,6 +153039,11 @@
          "T7_POTION_REVIVE",
          465,
          469
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         15,
+         16
         ],
         [
          "T7_POTION_STONESKIN",
@@ -151602,6 +153382,11 @@
          714
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         8
+        ],
+        [
          "T7_POTION_CLEANSE2",
          6,
          7
@@ -151852,7 +153637,8 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
-       "T7_POTION_CLEANSE2"
+       "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET"
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -152306,6 +154092,11 @@
          "T7_POTION_REVIVE",
          180,
          181
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
         ]
        ],
        "shoes": [
@@ -152538,6 +154329,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T7_POTION_STONESKIN",
        "T7_POTION_SLOWFIELD"
@@ -153019,6 +154811,11 @@
          "T7_POTION_REVIVE",
          34,
          34
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -153220,6 +155017,11 @@
          "T7_POTION_REVIVE",
          127,
          127
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -154024,6 +155826,11 @@
        "T7_POTION_CLEANSE2",
        5,
        6
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -154362,6 +156169,11 @@
        16
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       5
+      ],
+      [
        "T7_POTION_SLOWFIELD",
        4,
        7
@@ -154577,6 +156389,11 @@
        39
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       8,
+       12
+      ],
+      [
        "T7_MEAL_ROAST_FISH",
        3,
        3
@@ -154741,6 +156558,11 @@
        "T7_POTION_REVIVE",
        711,
        715
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       38,
+       39
       ],
       [
        "T7_POTION_STONESKIN",
@@ -155048,6 +156870,11 @@
        3
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
+       4
+      ],
+      [
        "T8_MEAL_STEW_AVALON",
        2,
        2
@@ -155222,6 +157049,11 @@
        "T8_POTION_COOLDOWN",
        24,
        32
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       16,
+       18
       ],
       [
        "T8_POTION_CLEANSE",
@@ -155623,6 +157455,7 @@
      "T7_MEAL_PIE",
      "T7_MEAL_OMELETTE_FISH",
      "T7_MEAL_ROAST_FISH",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_OMELETTE_DRAGONAREA"
     ],
     "head": [
@@ -155674,6 +157507,7 @@
     "potion": [
      "T7_POTION_REVIVE",
      "T8_POTION_COOLDOWN",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_STONESKIN",
      "T7_POTION_CLEANSE2",
      "T8_POTION_CLEANSE",
@@ -155771,6 +157605,7 @@
        "T7_MEAL_ROAST_FISH",
        "T8_MEAL_SANDWICH",
        "T7_MEAL_OMELETTE_FISH",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA"
       ],
       "head": [
@@ -155824,6 +157659,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T8_POTION_CLEANSE",
        "T8_POTION_LAVA",
@@ -155875,8 +157711,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       814,
-       1363
+       774,
+       1308
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -156160,12 +157996,12 @@
          625
         ],
         [
-         "T8_POTION_TORNADO",
-         104
+         "T7_POTION_MOB_RESET",
+         327
         ],
         [
-         "T8_POTION_CLEANSE",
-         68
+         "T8_POTION_TORNADO",
+         104
         ]
        ],
        "shoes": [
@@ -156300,12 +158136,12 @@
          231
         ],
         [
-         "T8_POTION_TORNADO",
-         26
+         "T7_POTION_MOB_RESET",
+         189
         ],
         [
-         "T7_POTION_ACID",
-         24
+         "T8_POTION_TORNADO",
+         26
         ]
        ],
        "shoes": [
@@ -156372,12 +158208,12 @@
          2807
         ],
         [
-         "T8_POTION_TORNADO",
-         208
+         "T7_POTION_MOB_RESET",
+         294
         ],
         [
-         "T7_POTION_STONESKIN",
-         168
+         "T8_POTION_TORNADO",
+         208
         ]
        ],
        "shoes": [
@@ -156734,6 +158570,10 @@
         [
          "T7_POTION_STONESKIN",
          14
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10
         ]
        ],
        "shoes": [
@@ -156804,8 +158644,8 @@
          21
         ],
         [
-         "T8_POTION_COOLDOWN",
-         8
+         "T7_POTION_MOB_RESET",
+         9
         ]
        ],
        "shoes": [
@@ -156862,6 +158702,10 @@
         [
          "T7_POTION_STONESKIN",
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6
         ]
        ],
        "shoes": [
@@ -156928,12 +158772,12 @@
          150
         ],
         [
-         "T8_POTION_COOLDOWN",
-         24
+         "T7_POTION_MOB_RESET",
+         140
         ],
         [
-         "T7_POTION_STONESKIN",
-         13
+         "T8_POTION_COOLDOWN",
+         24
         ]
        ],
        "shoes": [
@@ -157667,8 +159511,8 @@
         1309
        ],
        [
-        "T7_POTION_STONESKIN",
-        1114
+        "T7_POTION_MOB_RESET",
+        1263
        ]
       ],
       "shoes": [
@@ -157871,6 +159715,11 @@
          "T7_POTION_STONESKIN",
          38,
          48
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         9
         ],
         [
          "T7_POTION_ACID",
@@ -158076,6 +159925,11 @@
          "T8_MEAL_STEW_FISH",
          3,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -158115,6 +159969,11 @@
          "T7_POTION_STONESKIN",
          6,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -158409,6 +160268,11 @@
          "T8_POTION_COOLDOWN",
          4,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -158775,6 +160639,11 @@
          1375
         ],
         [
+         "T7_POTION_MOB_RESET",
+         297,
+         356
+        ],
+        [
          "T8_POTION_TORNADO",
          152,
          205
@@ -159092,6 +160961,11 @@
          "T8_POTION_COOLDOWN",
          4,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T8_POTION_CLEANSE",
@@ -159721,6 +161595,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -159840,6 +161719,11 @@
          "T8_POTION_LAVA",
          216,
          244
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         148,
+         155
         ],
         [
          "T8_POTION_CLEANSE",
@@ -160281,6 +162165,11 @@
          90
         ],
         [
+         "T7_POTION_MOB_RESET",
+         10,
+         15
+        ],
+        [
          "T7_POTION_STONESKIN",
          8,
          11
@@ -160640,6 +162529,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
+        ],
+        [
          "T8_POTION_CLEANSE",
          4,
          5
@@ -160937,6 +162831,11 @@
          "T7_POTION_REVIVE",
          119,
          120
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         5
         ],
         [
          "T7_POTION_STONESKIN",
@@ -161308,6 +163207,11 @@
          39
         ],
         [
+         "T7_POTION_MOB_RESET",
+         31,
+         40
+        ],
+        [
          "T8_POTION_CLEANSE",
          30,
          35
@@ -161650,6 +163554,11 @@
          "T7_POTION_STONESKIN",
          29,
          33
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         7,
+         8
         ],
         [
          "T8_POTION_CLEANSE",
@@ -162071,6 +163980,11 @@
          41
         ],
         [
+         "T7_POTION_MOB_RESET",
+         24,
+         24
+        ],
+        [
          "T7_POTION_STONESKIN",
          18,
          20
@@ -162425,6 +164339,11 @@
          14
         ],
         [
+         "T7_POTION_MOB_RESET",
+         11,
+         11
+        ],
+        [
          "T8_POTION_COOLDOWN",
          5,
          5
@@ -162672,6 +164591,11 @@
          "T7_POTION_CLEANSE2",
          8,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T8_POTION_CLEANSE",
@@ -163035,6 +164959,11 @@
          "T7_POTION_CLEANSE2",
          68,
          89
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         35,
+         47
         ],
         [
          "T8_POTION_TORNADO",
@@ -163470,6 +165399,11 @@
          4
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T7_POTION_SLOWFIELD",
          2,
          2
@@ -163797,6 +165731,11 @@
          "T8_POTION_TORNADO",
          15,
          18
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10,
+         11
         ],
         [
          "T6_POTION_HEAL",
@@ -164417,6 +166356,11 @@
          1250
         ],
         [
+         "T7_POTION_MOB_RESET",
+         82,
+         98
+        ],
+        [
          "T7_POTION_STONESKIN",
          42,
          49
@@ -164836,6 +166780,11 @@
          101
         ],
         [
+         "T7_POTION_MOB_RESET",
+         21,
+         24
+        ],
+        [
          "T7_POTION_STONESKIN",
          13,
          14
@@ -165159,6 +167108,11 @@
          "T7_MEAL_OMELETTE_FISH",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -165273,6 +167227,11 @@
          "T7_POTION_REVIVE",
          690,
          730
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         242,
+         266
         ],
         [
          "T8_POTION_CLEANSE",
@@ -165834,6 +167793,11 @@
          73
         ],
         [
+         "T7_POTION_MOB_RESET",
+         58,
+         70
+        ],
+        [
          "T8_POTION_TORNADO",
          28,
          36
@@ -166328,6 +168292,11 @@
          105
         ],
         [
+         "T7_POTION_MOB_RESET",
+         37,
+         43
+        ],
+        [
          "T8_POTION_TORNADO",
          17,
          18
@@ -166612,6 +168581,11 @@
          33
         ],
         [
+         "T7_POTION_MOB_RESET",
+         9,
+         9
+        ],
+        [
          "T7_POTION_STONESKIN",
          4,
          4
@@ -166855,6 +168829,11 @@
          "T7_MEAL_ROAST_FISH",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -166934,6 +168913,11 @@
          "T7_POTION_STONESKIN",
          40,
          48
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         36,
+         46
         ],
         [
          "T8_POTION_TORNADO",
@@ -167239,6 +169223,11 @@
          "T7_MEAL_ROAST_FISH",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         3
         ]
        ],
        "head": [
@@ -167338,6 +169327,11 @@
          "T7_POTION_STONESKIN",
          72,
          84
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         17,
+         27
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -167729,6 +169723,11 @@
          4
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         3
+        ],
+        [
          "T8_POTION_BERSERK",
          2,
          2
@@ -168110,6 +170109,11 @@
          18
         ],
         [
+         "T7_POTION_MOB_RESET",
+         15,
+         16
+        ],
+        [
          "T8_POTION_CLEANSE",
          9,
          9
@@ -168370,6 +170374,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_SANDWICH",
          2,
          2
@@ -168539,6 +170548,11 @@
          "T7_POTION_CLEANSE2",
          58,
          72
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         28,
+         36
         ],
         [
          "T8_POTION_TORNADO",
@@ -169082,6 +171096,11 @@
          18
         ],
         [
+         "T7_POTION_MOB_RESET",
+         14,
+         15
+        ],
+        [
          "T6_POTION_HEAL",
          6,
          9
@@ -169503,6 +171522,11 @@
          41
         ],
         [
+         "T7_POTION_MOB_RESET",
+         13,
+         14
+        ],
+        [
          "T8_POTION_CLEANSE",
          10,
          10
@@ -169804,6 +171828,11 @@
          11
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
+        ],
+        [
          "T8_POTION_COOLDOWN",
          3,
          4
@@ -170082,6 +172111,11 @@
          "T7_MEAL_OMELETTE_FISH",
          2,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -170295,6 +172329,11 @@
          25
         ],
         [
+         "T7_POTION_MOB_RESET",
+         13,
+         21
+        ],
+        [
          "T8_POTION_TORNADO",
          12,
          18
@@ -170408,8 +172447,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        16,
-        27
+        15,
+        26
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -170479,8 +172518,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        221,
-        306
+        208,
+        291
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -170753,8 +172792,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        61,
-        93
+        60,
+        92
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -170871,8 +172910,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        77,
-        204
+        75,
+        200
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -170952,8 +172991,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        30,
-        42
+        26,
+        37
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -170984,8 +173023,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        30,
-        40
+        24,
+        32
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -171029,7 +173068,7 @@
        "food": [
         "T8_MEAL_STEW",
         11,
-        33
+        31
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -171139,7 +173178,7 @@
        "food": [
         "T8_MEAL_STEW",
         12,
-        22
+        21
        ],
        "head": [
         "HEAD_PLATE_SET3",
@@ -171256,8 +173295,8 @@
     ],
     "food": [
      "T8_MEAL_STEW",
-     1414,
-     3024
+     1396,
+     2989
     ],
     "head": [
      "HEAD_LEATHER_SET3",
@@ -171541,12 +173580,12 @@
        408
       ],
       [
-       "T8_POTION_COOLDOWN",
-       37
+       "T7_POTION_MOB_RESET",
+       97
       ],
       [
-       "T8_POTION_CLEANSE",
-       21
+       "T8_POTION_COOLDOWN",
+       37
       ]
      ],
      "shoes": [
@@ -171673,12 +173712,12 @@
        101
       ],
       [
-       "T7_POTION_STONESKIN",
-       8
+       "T7_POTION_MOB_RESET",
+       29
       ],
       [
-       "T8_POTION_COOLDOWN",
-       5
+       "T7_POTION_STONESKIN",
+       8
       ]
      ],
      "shoes": [
@@ -171745,12 +173784,12 @@
        2890
       ],
       [
-       "T7_POTION_STONESKIN",
-       80
+       "T7_POTION_MOB_RESET",
+       83
       ],
       [
-       "T7_POTION_CLEANSE2",
-       64
+       "T7_POTION_STONESKIN",
+       80
       ]
      ],
      "shoes": [
@@ -172297,12 +174336,12 @@
        167
       ],
       [
-       "T8_POTION_COOLDOWN",
-       14
+       "T7_POTION_MOB_RESET",
+       40
       ],
       [
-       "T7_POTION_STONESKIN",
-       12
+       "T8_POTION_COOLDOWN",
+       14
       ]
      ],
      "shoes": [
@@ -172687,7 +174726,7 @@
        13
       ],
       [
-       "T8_POTION_LAVA",
+       "T7_POTION_MOB_RESET",
        11
       ]
      ],
@@ -173137,6 +175176,7 @@
        "T8_MEAL_STEW_AVALON",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_SANDWICH",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_ROAST"
       ],
       "head": [
@@ -173186,6 +175226,7 @@
        "T8_POTION_CLEANSE",
        "T7_POTION_STONESKIN",
        "T8_POTION_LAVA",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T7_POTION_SLOWFIELD",
        "T7_POTION_ACID",
@@ -173327,6 +175368,11 @@
          "T7_POTION_STONESKIN",
          5,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -173417,6 +175463,11 @@
          "T7_MEAL_OMELETTE",
          7,
          9
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         4
         ],
         [
          "T8_MEAL_STEW",
@@ -173897,6 +175948,11 @@
          "T8_POTION_CLEANSE",
          13,
          15
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         3
         ]
        ],
        "shoes": [
@@ -174071,6 +176127,11 @@
          "T8_POTION_BERSERK",
          2,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -174266,6 +176327,11 @@
          "T7_POTION_CLEANSE2",
          2,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -175145,6 +177211,11 @@
          13
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
+        ],
+        [
          "T8_POTION_COOLDOWN",
          3,
          5
@@ -175588,6 +177659,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T8_POTION_COOLDOWN",
          2,
          3
@@ -175673,6 +177749,11 @@
          "T7_POTION_STONESKIN",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T8_POTION_LAVA",
@@ -176404,6 +178485,11 @@
          "T8_POTION_LAVA",
          4,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         3
         ]
        ],
        "shoes": [
@@ -177389,6 +179475,7 @@
        "T7_MEAL_PIE",
        "T7_MEAL_ROAST_FISH",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA"
       ],
       "head": [
@@ -177435,6 +179522,7 @@
       ],
       "potion": [
        "T7_POTION_REVIVE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
@@ -177582,6 +179670,11 @@
          "T7_POTION_STONESKIN",
          12,
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T7_POTION_ACID",
@@ -177995,6 +180088,11 @@
          "T7_POTION_REVIVE",
          358,
          363
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         62,
+         66
         ],
         [
          "T7_POTION_STONESKIN",
@@ -178645,6 +180743,11 @@
          100
         ],
         [
+         "T7_POTION_MOB_RESET",
+         28,
+         28
+        ],
+        [
          "T8_POTION_LAVA",
          16,
          18
@@ -178867,6 +180970,11 @@
          "T8_POTION_CLEANSE",
          4,
          5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -179571,6 +181679,11 @@
          26
         ],
         [
+         "T7_POTION_MOB_RESET",
+         13,
+         17
+        ],
+        [
          "T7_POTION_STONESKIN",
          7,
          9
@@ -179849,6 +181962,11 @@
          "T8_POTION_COOLDOWN",
          24,
          25
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10,
+         11
         ],
         [
          "T8_POTION_CLEANSE",
@@ -180541,6 +182659,11 @@
          "T7_POTION_STONESKIN",
          30,
          37
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         17,
+         21
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -181417,6 +183540,11 @@
          42
         ],
         [
+         "T7_POTION_MOB_RESET",
+         21,
+         27
+        ],
+        [
          "T7_POTION_STONESKIN",
          15,
          22
@@ -181552,6 +183680,11 @@
          "T8_POTION_COOLDOWN",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -181771,6 +183904,11 @@
          "T7_POTION_REVIVE",
          271,
          276
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         23,
+         25
         ],
         [
          "T7_POTION_STONESKIN",
@@ -182182,6 +184320,11 @@
          45
         ],
         [
+         "T7_POTION_MOB_RESET",
+         18,
+         21
+        ],
+        [
          "T8_POTION_CLEANSE",
          14,
          15
@@ -182516,6 +184659,11 @@
          60
         ],
         [
+         "T7_POTION_MOB_RESET",
+         14,
+         16
+        ],
+        [
          "T7_POTION_STONESKIN",
          13,
          14
@@ -182708,6 +184856,11 @@
          "T7_POTION_REVIVE",
          25,
          25
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         5
         ],
         [
          "T6_POTION_ENERGY",
@@ -182952,6 +185105,11 @@
          "T7_POTION_STONESKIN",
          19,
          20
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         10
         ],
         [
          "T8_POTION_LAVA",
@@ -183416,6 +185574,11 @@
          11
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
+        ],
+        [
          "T7_POTION_STONESKIN",
          4,
          4
@@ -183720,6 +185883,11 @@
          "T7_POTION_STONESKIN",
          10,
          11
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         10
         ],
         [
          "T8_POTION_TORNADO",
@@ -184517,8 +186685,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        39,
-        66
+        36,
+        59
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -184549,8 +186717,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        129,
-        250
+        128,
+        249
        ],
        "head": [
         "HEAD_PLATE_SET1",
@@ -184742,8 +186910,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        138,
-        256
+        136,
+        254
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -184835,8 +187003,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        197,
-        498
+        193,
+        492
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -185126,6 +187294,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T8_POTION_BERSERK",
        "T8_POTION_CLEANSE",
@@ -185167,8 +187336,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       148,
-       341
+       144,
+       337
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -185353,6 +187522,11 @@
          "T7_POTION_REVIVE",
          42,
          42
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_STONESKIN",
@@ -185853,6 +188027,11 @@
          10
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         10
+        ],
+        [
          "T7_POTION_CLEANSE2",
          4,
          4
@@ -186276,6 +188455,11 @@
          "T7_POTION_CLEANSE2",
          9,
          16
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         8
         ],
         [
          "T7_POTION_STONESKIN",
@@ -186738,6 +188922,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         9
+        ],
+        [
          "T7_POTION_STONESKIN",
          4,
          4
@@ -186950,6 +189139,11 @@
          "T7_POTION_REVIVE",
          53,
          53
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -187183,6 +189377,11 @@
         [
          "T8_POTION_CLEANSE",
          3,
+         3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
          3
         ],
         [
@@ -187753,7 +189952,7 @@
        "food": [
         "T8_MEAL_STEW",
         9,
-        15
+        14
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -187904,8 +190103,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        100,
-        207
+        99,
+        206
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -187960,8 +190159,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        119,
-        285
+        116,
+        282
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -188190,6 +190389,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T8_POTION_CLEANSE",
        "T7_POTION_ACID",
@@ -188238,8 +190438,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       103,
-       200
+       99,
+       195
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -188427,6 +190627,11 @@
          "T7_POTION_REVIVE",
          147,
          149
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         18,
+         19
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -189211,6 +191416,11 @@
          7
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T7_POTION_ACID",
          2,
          2
@@ -189373,6 +191583,11 @@
          "T8_POTION_COOLDOWN",
          8,
          8
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T8_POTION_CLEANSE",
@@ -189825,6 +192040,11 @@
          "T7_POTION_CLEANSE2",
          8,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T7_POTION_STONESKIN",
@@ -190418,6 +192638,11 @@
          14
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T7_POTION_STONESKIN",
          2,
          3
@@ -190759,6 +192984,11 @@
          "T7_POTION_REVIVE",
          84,
          86
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         6
         ]
        ],
        "shoes": [
@@ -191028,6 +193258,11 @@
          "T7_POTION_CLEANSE2",
          5,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -191621,6 +193856,11 @@
          "T7_POTION_CLEANSE2",
          12,
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -192107,6 +194347,11 @@
          6
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T6_POTION_HEAL",
          2,
          2
@@ -192185,8 +194430,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        25,
-        37
+        22,
+        33
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -192371,7 +194616,7 @@
        "food": [
         "T8_MEAL_STEW",
         36,
-        74
+        73
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -192448,8 +194693,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        65,
-        132
+        64,
+        131
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -192787,6 +195032,11 @@
        21
       ],
       [
+       "T7_POTION_MOB_RESET",
+       9,
+       10
+      ],
+      [
        "T7_POTION_ACID",
        3,
        4
@@ -192964,6 +195214,11 @@
        "T8_MEAL_SANDWICH",
        5,
        7
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       4,
+       5
       ]
      ],
      "head": [
@@ -193484,6 +195739,11 @@
        "T7_POTION_REVIVE",
        551,
        563
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       87,
+       95
       ],
       [
        "T7_POTION_STONESKIN",
@@ -194351,6 +196611,11 @@
        48
       ],
       [
+       "T7_POTION_MOB_RESET",
+       37,
+       39
+      ],
+      [
        "T8_POTION_CLEANSE",
        31,
        33
@@ -194700,6 +196965,11 @@
        42
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       6
+      ],
+      [
        "T7_POTION_STONESKIN",
        2,
        2
@@ -194966,6 +197236,11 @@
       [
        "T8_POTION_CLEANSE",
        2,
+       2
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       1,
        2
       ]
      ],
@@ -195602,6 +197877,11 @@
        40
       ],
       [
+       "T7_POTION_MOB_RESET",
+       22,
+       28
+      ],
+      [
        "T8_POTION_CLEANSE",
        11,
        14
@@ -196147,6 +198427,11 @@
        "T8_POTION_COOLDOWN",
        45,
        50
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       16,
+       18
       ],
       [
        "T8_POTION_CLEANSE",
@@ -197051,6 +199336,11 @@
        53
       ],
       [
+       "T7_POTION_MOB_RESET",
+       23,
+       29
+      ],
+      [
        "T8_POTION_COOLDOWN",
        9,
        15
@@ -197439,6 +199729,11 @@
        9
       ],
       [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
+      ],
+      [
        "T8_POTION_CLEANSE",
        2,
        3
@@ -197732,6 +200027,11 @@
        4
       ],
       [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
+      ],
+      [
        "T6_POTION_HEAL",
        2,
        2
@@ -197974,6 +200274,11 @@
        "T7_POTION_CLEANSE2",
        6,
        6
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -198313,6 +200618,11 @@
        "T7_POTION_CLEANSE2",
        41,
        63
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       27,
+       36
       ],
       [
        "T7_POTION_STONESKIN",
@@ -198674,6 +200984,11 @@
        12
       ],
       [
+       "T7_POTION_MOB_RESET",
+       5,
+       8
+      ],
+      [
        "T6_POTION_HEAL",
        4,
        4
@@ -199021,6 +201336,11 @@
        "T7_POTION_REVIVE",
        436,
        446
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       37,
+       40
       ],
       [
        "T7_POTION_STONESKIN",
@@ -199532,6 +201852,11 @@
        45
       ],
       [
+       "T7_POTION_MOB_RESET",
+       29,
+       36
+      ],
+      [
        "T7_POTION_CLEANSE2",
        19,
        32
@@ -199996,6 +202321,11 @@
        33
       ],
       [
+       "T7_POTION_MOB_RESET",
+       20,
+       22
+      ],
+      [
        "T7_POTION_STONESKIN",
        18,
        22
@@ -200223,6 +202553,11 @@
        "T7_POTION_REVIVE",
        38,
        38
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       9,
+       8
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -200544,6 +202879,11 @@
        34
       ],
       [
+       "T7_POTION_MOB_RESET",
+       13,
+       16
+      ],
+      [
        "T8_POTION_LAVA",
        10,
        12
@@ -200827,6 +203167,11 @@
        10
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       4
+      ],
+      [
        "T7_POTION_ACID",
        3,
        3
@@ -201074,6 +203419,11 @@
        "T7_POTION_STONESKIN",
        4,
        4
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
       ],
       [
        "T8_POTION_TORNADO",
@@ -201337,6 +203687,11 @@
        9
       ],
       [
+       "T7_POTION_MOB_RESET",
+       6,
+       6
+      ],
+      [
        "T7_POTION_STONESKIN",
        6,
        6
@@ -201577,6 +203932,11 @@
        5
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       2,
+       2
+      ],
+      [
        "T8_MEAL_SANDWICH_AVALON",
        1,
        2
@@ -201719,6 +204079,11 @@
        "T7_POTION_STONESKIN",
        22,
        23
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       10,
+       12
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -202356,6 +204721,11 @@
        "T8_POTION_CLEANSE",
        4,
        5
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ],
       [
        "T7_POTION_STONESKIN",
@@ -203060,6 +205430,11 @@
        9
       ],
       [
+       "T7_POTION_MOB_RESET",
+       5,
+       9
+      ],
+      [
        "T6_POTION_HEAL",
        4,
        4
@@ -203168,8 +205543,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      15,
-      32
+      14,
+      31
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -203244,8 +205619,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      71,
-      109
+      66,
+      100
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -203283,8 +205658,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      129,
-      253
+      128,
+      252
      ],
      "head": [
       "HEAD_PLATE_SET1",
@@ -203508,8 +205883,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      195,
-      367
+      194,
+      365
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -203606,8 +205981,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      271,
-      638
+      265,
+      630
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -203650,8 +206025,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      25,
-      39
+      24,
+      38
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -203816,8 +206191,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      124,
-      297
+      123,
+      296
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -204188,6 +206563,7 @@
      "T8_MEAL_SANDWICH",
      "T8_MEAL_STEW_AVALON",
      "T5_MEAL_SOUP",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_ROAST_FISH",
      "T7_MEAL_ROAST",
      "T7_MEAL_PIE",
@@ -204243,6 +206619,7 @@
      "T7_POTION_REVIVE",
      "T8_POTION_COOLDOWN",
      "T7_POTION_STONESKIN",
+     "T7_POTION_MOB_RESET",
      "T8_POTION_CLEANSE",
      "T7_POTION_CLEANSE2",
      "T7_POTION_ACID",
@@ -204337,6 +206714,7 @@
        "T7_MEAL_ROAST",
        "T8_MEAL_SANDWICH",
        "T7_MEAL_PIE",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_OMELETTE_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA"
@@ -204391,6 +206769,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T6_POTION_HEAL",
        "T8_POTION_LAVA",
@@ -204446,7 +206825,7 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       215,
+       214,
        327
       ],
       "head": [
@@ -204667,12 +207046,12 @@
          100
         ],
         [
-         "T7_POTION_STONESKIN",
-         19
+         "T7_POTION_MOB_RESET",
+         41
         ],
         [
-         "T8_POTION_COOLDOWN",
-         8
+         "T7_POTION_STONESKIN",
+         19
         ]
        ],
        "shoes": [
@@ -205011,12 +207390,12 @@
          475
         ],
         [
-         "T7_POTION_STONESKIN",
-         33
+         "T7_POTION_MOB_RESET",
+         38
         ],
         [
-         "T8_POTION_CLEANSE",
-         5
+         "T7_POTION_STONESKIN",
+         33
         ]
        ],
        "shoes": [
@@ -205227,12 +207606,12 @@
          456
         ],
         [
-         "T7_POTION_STONESKIN",
-         18
+         "T7_POTION_MOB_RESET",
+         34
         ],
         [
-         "T7_POTION_ACID",
-         13
+         "T7_POTION_STONESKIN",
+         18
         ]
        ],
        "shoes": [
@@ -205367,8 +207746,8 @@
          15
         ],
         [
-         "T6_POTION_ENERGY",
-         9
+         "T7_POTION_MOB_RESET",
+         11
         ]
        ],
        "shoes": [
@@ -205685,8 +208064,8 @@
          85
         ],
         [
-         "T8_POTION_COOLDOWN",
-         13
+         "T7_POTION_MOB_RESET",
+         17
         ]
        ],
        "shoes": [
@@ -205825,12 +208204,12 @@
          27
         ],
         [
-         "T7_POTION_STONESKIN",
-         6
+         "T7_POTION_MOB_RESET",
+         7
         ],
         [
-         "T8_POTION_LAVA",
-         5
+         "T7_POTION_STONESKIN",
+         6
         ]
        ],
        "shoes": [
@@ -205901,8 +208280,8 @@
          16
         ],
         [
-         "T7_POTION_STONESKIN",
-         8
+         "T7_POTION_MOB_RESET",
+         11
         ]
        ],
        "shoes": [
@@ -206246,6 +208625,11 @@
          "T7_MEAL_PIE",
          4,
          6
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -206380,6 +208764,11 @@
          "T6_POTION_ENERGY",
          20,
          23
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         18,
+         24
         ],
         [
          "T8_POTION_CLEANSE",
@@ -206874,6 +209263,11 @@
          "T7_POTION_STONESKIN",
          69,
          75
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         30,
+         34
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -207669,6 +210063,11 @@
          123
         ],
         [
+         "T7_POTION_MOB_RESET",
+         28,
+         39
+        ],
+        [
          "T8_POTION_LAVA",
          28,
          35
@@ -208032,6 +210431,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -208161,6 +210565,11 @@
          "T8_POTION_CLEANSE",
          26,
          31
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         22,
+         28
         ],
         [
          "T6_POTION_HEAL",
@@ -208562,6 +210971,11 @@
          15
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T8_POTION_LAVA",
          3,
          4
@@ -208911,6 +211325,11 @@
          11
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         8
+        ],
+        [
          "T8_POTION_CLEANSE",
          6,
          8
@@ -209251,6 +211670,11 @@
          5
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
+        ],
+        [
          "T7_MEAL_OMELETTE_DRAGONAREA",
          1,
          2
@@ -209403,6 +211827,11 @@
          "T7_POTION_STONESKIN",
          182,
          232
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         108,
+         158
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -209790,6 +212219,11 @@
          2
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          1,
          2
@@ -209901,6 +212335,11 @@
         [
          "T8_POTION_LAVA",
          20,
+         25
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         17,
          25
         ],
         [
@@ -210333,6 +212772,11 @@
          31
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         6
+        ],
+        [
          "T6_POTION_ENERGY",
          2,
          2
@@ -210692,6 +213136,11 @@
          24
         ],
         [
+         "T7_POTION_MOB_RESET",
+         9,
+         9
+        ],
+        [
          "T8_POTION_COOLDOWN",
          4,
          5
@@ -210940,6 +213389,11 @@
          "T8_MEAL_SANDWICH",
          2,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -211019,6 +213473,11 @@
          "T7_POTION_STONESKIN",
          53,
          54
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         8
         ],
         [
          "T8_POTION_LAVA",
@@ -211281,6 +213740,11 @@
          19
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         5,
+         5
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          5,
          6
@@ -211393,6 +213857,11 @@
          "T8_POTION_TORNADO",
          7,
          9
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -211774,6 +214243,11 @@
          187
         ],
         [
+         "T7_POTION_MOB_RESET",
+         65,
+         68
+        ],
+        [
          "T7_POTION_STONESKIN",
          32,
          38
@@ -212133,6 +214607,11 @@
          14
         ],
         [
+         "T7_POTION_MOB_RESET",
+         8,
+         9
+        ],
+        [
          "T7_POTION_STONESKIN",
          6,
          7
@@ -212475,6 +214954,11 @@
          "T7_POTION_STONESKIN",
          25,
          30
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         24,
+         25
         ],
         [
          "T7_POTION_ACID",
@@ -212841,6 +215325,11 @@
          8
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         6
+        ],
+        [
          "T8_POTION_LAVA",
          3,
          4
@@ -213153,6 +215642,11 @@
          "T7_POTION_STONESKIN",
          5,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T8_POTION_CLEANSE",
@@ -213557,6 +216051,11 @@
          "T8_POTION_COOLDOWN",
          85,
          104
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         73,
+         82
         ],
         [
          "T7_POTION_STONESKIN",
@@ -214008,6 +216507,11 @@
          532
         ],
         [
+         "T7_POTION_MOB_RESET",
+         41,
+         43
+        ],
+        [
          "T7_POTION_STONESKIN",
          12,
          14
@@ -214360,6 +216864,11 @@
          "T7_POTION_REVIVE",
          90,
          93
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         43,
+         45
         ],
         [
          "T7_POTION_STONESKIN",
@@ -214726,6 +217235,11 @@
          9
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         8
+        ],
+        [
          "T8_POTION_CLEANSE",
          6,
          6
@@ -214946,6 +217460,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
+        ],
+        [
          "T8_MEAL_SANDWICH",
          1,
          2
@@ -215033,6 +217552,11 @@
          "T7_POTION_STONESKIN",
          77,
          86
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         15,
+         20
         ],
         [
          "T6_POTION_HEAL",
@@ -215364,6 +217888,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T7_POTION_STONESKIN",
          3,
          5
@@ -215514,6 +218043,11 @@
          16
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         12,
+         12
+        ],
+        [
          "T7_MEAL_OMELETTE",
          4,
          4
@@ -215566,6 +218100,11 @@
          "T7_POTION_ACID",
          11,
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
         ],
         [
          "T7_POTION_STONESKIN",
@@ -215776,6 +218315,11 @@
          "T7_MEAL_PIE",
          3,
          4
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
         ]
        ],
        "head": [
@@ -215937,6 +218481,11 @@
          "T8_POTION_CLEANSE",
          32,
          35
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8,
+         9
         ],
         [
          "T8_POTION_LAVA",
@@ -216333,6 +218882,11 @@
          "T8_POTION_CLEANSE",
          2,
          2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -216620,6 +219174,11 @@
          7
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         7
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          6,
          8
@@ -216849,6 +219408,11 @@
          "T8_POTION_CLEANSE",
          15,
          16
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         10,
+         17
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -217156,6 +219720,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T7_MEAL_OMELETTE_FISH",
          2,
          2
@@ -217330,6 +219899,11 @@
          "T7_POTION_STONESKIN",
          27,
          30
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         11,
+         13
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -217959,6 +220533,11 @@
          2
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         5
+        ],
+        [
          "T8_POTION_CLEANSE",
          2,
          2
@@ -218126,11 +220705,6 @@
         30,
         57
        ],
-       "food": [
-        "T8_MEAL_STEW",
-        17,
-        22
-       ],
        "head": [
         "HEAD_LEATHER_MORGANA",
         132,
@@ -218160,7 +220734,7 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        34,
+        33,
         56
        ],
        "potion": [
@@ -218221,8 +220795,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        207,
-        269
+        203,
+        264
        ],
        "head": [
         "HEAD_CLOTH_HELL",
@@ -218271,7 +220845,7 @@
        "food": [
         "T8_MEAL_STEW",
         36,
-        92
+        91
        ],
        "potion": [
         "T7_POTION_REVIVE",
@@ -218332,7 +220906,7 @@
        "food": [
         "T8_MEAL_STEW",
         19,
-        60
+        59
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -218372,11 +220946,6 @@
         "CAPEITEM_SMUGGLER",
         26,
         72
-       ],
-       "food": [
-        "T8_MEAL_STEW",
-        13,
-        19
        ],
        "potion": [
         "T7_POTION_REVIVE",
@@ -218506,7 +221075,7 @@
        "food": [
         "T8_MEAL_STEW",
         60,
-        101
+        100
        ],
        "head": [
         "HEAD_LEATHER_FEY",
@@ -218779,8 +221348,8 @@
     ],
     "food": [
      "T8_MEAL_STEW",
-     506,
-     910
+     505,
+     907
     ],
     "head": [
      "HEAD_PLATE_SET1",
@@ -219588,12 +222157,12 @@
        480
       ],
       [
-       "T7_POTION_CLEANSE2",
-       8
+       "T7_POTION_MOB_RESET",
+       15
       ],
       [
-       "T7_POTION_STONESKIN",
-       6
+       "T7_POTION_CLEANSE2",
+       8
       ]
      ],
      "shoes": [
@@ -219896,8 +222465,8 @@
        13
       ],
       [
-       "T8_POTION_COOLDOWN",
-       8
+       "T7_POTION_MOB_RESET",
+       9
       ]
      ],
      "shoes": [
@@ -220346,6 +222915,7 @@
        "T8_MEAL_STEW_FISH",
        "T7_MEAL_OMELETTE_AVALON",
        "T7_MEAL_OMELETTE",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH",
        "T8_MEAL_STEW_AVALON",
        "T5_MEAL_SOUP",
@@ -220400,6 +222970,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_ACID",
        "T8_POTION_CLEANSE",
        "T7_POTION_CLEANSE2",
@@ -220452,8 +223023,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       262,
-       491
+       261,
+       488
       ],
       "head": [
        "HEAD_PLATE_SET1",
@@ -221015,6 +223586,11 @@
          "T8_POTION_COOLDOWN",
          7,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -221318,6 +223894,11 @@
          4
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         4
+        ],
+        [
          "T6_POTION_ENERGY",
          2,
          3
@@ -221528,6 +224109,11 @@
          22
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         7
+        ],
+        [
          "T7_MEAL_PIE",
          1,
          2
@@ -221625,6 +224211,11 @@
          "T7_POTION_STONESKIN",
          17,
          19
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -222210,6 +224801,11 @@
          21
         ],
         [
+         "T7_POTION_MOB_RESET",
+         16,
+         27
+        ],
+        [
          "T7_POTION_SLOWFIELD",
          4,
          5
@@ -222467,6 +225063,11 @@
          "T7_POTION_STONESKIN",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -222902,6 +225503,11 @@
          2
         ],
         [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
+        ],
+        [
          "T8_POTION_COOLDOWN",
          1,
          3
@@ -223226,6 +225832,11 @@
          25
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         7,
+         9
+        ],
+        [
          "T8_MEAL_SANDWICH",
          2,
          2
@@ -223283,6 +225894,11 @@
          "T7_POTION_CLEANSE2",
          4,
          5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -223457,6 +226073,11 @@
          "T7_POTION_REVIVE",
          37,
          37
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9,
+         9
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -223703,6 +226324,11 @@
          "T8_POTION_CLEANSE",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -223970,6 +226596,11 @@
         ],
         [
          "T7_POTION_CLEANSE2",
+         4,
+         5
+        ],
+        [
+         "T7_POTION_MOB_RESET",
          4,
          5
         ],
@@ -224323,6 +226954,11 @@
          38
         ],
         [
+         "T7_POTION_MOB_RESET",
+         13,
+         16
+        ],
+        [
          "T7_POTION_CLEANSE2",
          8,
          12
@@ -224582,6 +227218,11 @@
          5
         ],
         [
+         "T7_POTION_MOB_RESET",
+         4,
+         4
+        ],
+        [
          "T8_POTION_COOLDOWN",
          1,
          4
@@ -224749,6 +227390,11 @@
          "T7_POTION_REVIVE",
          42,
          44
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         12,
+         14
         ]
        ],
        "shoes": [
@@ -225191,6 +227837,11 @@
        ],
        "food": [
         [
+         "T8_MEAL_SANDWICH_FISH",
+         24,
+         27
+        ],
+        [
          "T8_MEAL_STEW",
          7,
          9
@@ -225233,6 +227884,11 @@
          "T7_POTION_ACID",
          26,
          31
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         5
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -225742,6 +228398,11 @@
          62
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         9
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          6,
          8
@@ -225913,6 +228574,11 @@
          7
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T8_POTION_CLEANSE",
          3,
          3
@@ -226058,6 +228724,11 @@
          30
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         8,
+         8
+        ],
+        [
          "T8_MEAL_STEW_FISH",
          3,
          3
@@ -226172,6 +228843,11 @@
          "T7_POTION_STONESKIN",
          3,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -226441,7 +229117,7 @@
        "food": [
         "T8_MEAL_STEW",
         35,
-        76
+        75
        ],
        "head": [
         "HEAD_PLATE_SET1",
@@ -226578,7 +229254,7 @@
        "food": [
         "T8_MEAL_STEW",
         43,
-        71
+        70
        ],
        "head": [
         "HEAD_PLATE_SET1",
@@ -226760,8 +229436,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        30,
-        44
+        29,
+        43
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -226932,6 +229608,11 @@
         31,
         38
        ],
+       "food": [
+        "T8_MEAL_SANDWICH_FISH",
+        11,
+        20
+       ],
        "head": [
         "HEAD_LEATHER_SET2",
         38,
@@ -227071,6 +229752,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN"
       ],
       "shoes": [
@@ -227638,6 +230320,11 @@
          9
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T8_POTION_COOLDOWN",
          2,
          2
@@ -227989,6 +230676,7 @@
        "T7_MEAL_ROAST_FISH",
        "T7_MEAL_OMELETTE_FISH",
        "T8_MEAL_SANDWICH_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA",
        "T7_MEAL_PIE"
       ],
@@ -228034,6 +230722,7 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
        "T8_POTION_CLEANSE",
@@ -228086,8 +230775,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       225,
-       406
+       224,
+       405
       ],
       "head": [
        "HEAD_PLATE_SET1",
@@ -228487,6 +231176,11 @@
          4
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         6
+        ],
+        [
          "T5_MEAL_SOUP",
          2,
          3
@@ -228619,6 +231313,11 @@
          "T7_POTION_CLEANSE2",
          13,
          20
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         8
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -229044,6 +231743,11 @@
          2
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          2,
          2
@@ -229149,6 +231853,11 @@
         ],
         [
          "T7_POTION_CLEANSE2",
+         2,
+         3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
          2,
          3
         ],
@@ -229451,6 +232160,11 @@
          "T8_POTION_COOLDOWN",
          32,
          33
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T7_POTION_STONESKIN",
@@ -230033,6 +232747,11 @@
          "T7_POTION_STONESKIN",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -230177,6 +232896,11 @@
          "T7_POTION_STONESKIN",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -230418,6 +233142,11 @@
          17
         ],
         [
+         "T7_POTION_MOB_RESET",
+         7,
+         9
+        ],
+        [
          "T7_POTION_STONESKIN",
          5,
          8
@@ -230610,6 +233339,11 @@
          "T7_POTION_REVIVE",
          41,
          42
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         4,
+         5
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -230838,6 +233572,11 @@
          "T7_POTION_ACID",
          6,
          7
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T7_POTION_STONESKIN",
@@ -231303,6 +234042,11 @@
          801
         ],
         [
+         "T7_POTION_MOB_RESET",
+         9,
+         9
+        ],
+        [
          "T7_POTION_CLEANSE2",
          7,
          8
@@ -231630,6 +234374,11 @@
          "T7_POTION_REVIVE",
          1427,
          1440
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         21,
+         23
         ],
         [
          "T7_POTION_CLEANSE2",
@@ -232110,6 +234859,11 @@
          2
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T8_POTION_CLEANSE",
          2,
          2
@@ -232570,6 +235324,11 @@
          "T6_POTION_HEAL",
          3,
          3
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
         ]
        ],
        "shoes": [
@@ -232873,7 +235632,7 @@
        "food": [
         "T7_MEAL_OMELETTE_AVALON",
         24,
-        67
+        66
        ],
        "head": [
         "HEAD_PLATE_SET2",
@@ -232984,8 +235743,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        68,
-        224
+        67,
+        223
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -233292,6 +236051,7 @@
        "T7_POTION_REVIVE",
        "T7_POTION_CLEANSE2",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T7_POTION_STONESKIN"
       ],
@@ -233483,6 +236243,11 @@
          "T7_POTION_CLEANSE2",
          12,
          14
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -233905,6 +236670,11 @@
          "T7_POTION_CLEANSE2",
          18,
          24
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ],
         [
          "T8_POTION_CLEANSE",
@@ -234397,6 +237167,11 @@
          "T7_POTION_CLEANSE2",
          11,
          16
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         6
         ]
        ],
        "shoes": [
@@ -234748,6 +237523,7 @@
        "T8_POTION_COOLDOWN",
        "T7_POTION_CLEANSE2",
        "T8_POTION_CLEANSE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T6_POTION_HEAL",
        "T8_POTION_TORNADO",
@@ -236001,6 +238777,11 @@
          "T8_POTION_COOLDOWN",
          4,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ]
       },
@@ -236108,6 +238889,11 @@
          "T7_POTION_REVIVE",
          52,
          52
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -236333,6 +239119,11 @@
          45
         ],
         [
+         "T7_POTION_MOB_RESET",
+         3,
+         3
+        ],
+        [
          "T8_POTION_CLEANSE",
          2,
          2
@@ -236525,6 +239316,11 @@
          "T7_POTION_CLEANSE2",
          9,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         5,
+         6
         ],
         [
          "T7_POTION_STONESKIN",
@@ -237404,6 +240200,11 @@
        3
       ],
       [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
+      ],
+      [
        "T8_POTION_LAVA",
        2,
        2
@@ -237704,6 +240505,11 @@
        14
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       6,
+       10
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        4,
        6
@@ -237856,6 +240662,11 @@
        "T8_POTION_COOLDOWN",
        12,
        28
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       8,
+       12
       ],
       [
        "T8_POTION_CLEANSE",
@@ -238441,6 +241252,11 @@
        8
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       6
+      ],
+      [
        "T6_POTION_ENERGY",
        2,
        3
@@ -238726,6 +241542,11 @@
        48
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       8,
+       13
+      ],
+      [
        "T8_MEAL_STEW_AVALON",
        7,
        9
@@ -238863,6 +241684,11 @@
        "T7_POTION_STONESKIN",
        32,
        41
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       8,
+       12
       ],
       [
        "T8_POTION_CLEANSE",
@@ -239802,6 +242628,11 @@
        43
       ],
       [
+       "T7_POTION_MOB_RESET",
+       25,
+       39
+      ],
+      [
        "T7_POTION_SLOWFIELD",
        14,
        18
@@ -240171,6 +243002,11 @@
       ],
       [
        "T7_POTION_ACID",
+       2,
+       2
+      ],
+      [
+       "T7_POTION_MOB_RESET",
        2,
        2
       ],
@@ -240763,6 +243599,11 @@
        16
       ],
       [
+       "T7_POTION_MOB_RESET",
+       11,
+       13
+      ],
+      [
        "T7_POTION_CLEANSE2",
        2,
        3
@@ -241027,6 +243868,11 @@
        10
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       4
+      ],
+      [
        "T8_POTION_COOLDOWN",
        2,
        3
@@ -241262,6 +244108,11 @@
        9
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       6,
+       10
+      ],
+      [
        "T7_MEAL_OMELETTE_FISH",
        3,
        6
@@ -241359,6 +244210,11 @@
        "T7_POTION_STONESKIN",
        18,
        22
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       10,
+       12
       ],
       [
        "T7_POTION_ACID",
@@ -241673,6 +244529,11 @@
        "T7_POTION_REVIVE",
        108,
        110
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       15,
+       16
       ],
       [
        "T8_POTION_COOLDOWN",
@@ -242153,6 +245014,11 @@
        11
       ],
       [
+       "T7_POTION_MOB_RESET",
+       8,
+       9
+      ],
+      [
        "T8_POTION_CLEANSE",
        5,
        6
@@ -242505,6 +245371,11 @@
        "T8_POTION_COOLDOWN",
        7,
        13
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       6,
+       8
       ],
       [
        "T7_POTION_CLEANSE2",
@@ -243000,6 +245871,11 @@
        61
       ],
       [
+       "T7_POTION_MOB_RESET",
+       27,
+       32
+      ],
+      [
        "T7_POTION_CLEANSE2",
        14,
        20
@@ -243419,6 +246295,11 @@
        2067
       ],
       [
+       "T7_POTION_MOB_RESET",
+       27,
+       33
+      ],
+      [
        "T7_POTION_CLEANSE2",
        26,
        35
@@ -243711,6 +246592,11 @@
        "T7_POTION_REVIVE",
        82,
        84
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       16,
+       17
       ],
       [
        "T7_POTION_STONESKIN",
@@ -244425,6 +247311,11 @@
      ],
      "food": [
       [
+       "T8_MEAL_SANDWICH_FISH",
+       26,
+       29
+      ],
+      [
        "T8_MEAL_STEW",
        16,
        18
@@ -244487,6 +247378,11 @@
        "T7_POTION_ACID",
        32,
        37
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       5,
+       5
       ],
       [
        "T8_POTION_CLEANSE",
@@ -244793,6 +247689,11 @@
        "T7_POTION_STONESKIN",
        7,
        7
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -245316,6 +248217,11 @@
        14
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       9,
+       10
+      ],
+      [
        "T8_MEAL_SANDWICH_AVALON",
        6,
        8
@@ -245552,6 +248458,11 @@
        7
       ],
       [
+       "T7_POTION_MOB_RESET",
+       6,
+       7
+      ],
+      [
        "T8_POTION_LAVA",
        5,
        8
@@ -245777,6 +248688,11 @@
        70
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       8,
+       8
+      ],
+      [
        "T8_MEAL_STEW_FISH",
        4,
        4
@@ -245961,6 +248877,11 @@
        "T6_POTION_HEAL",
        3,
        5
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       3,
+       3
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -246506,7 +249427,7 @@
      "food": [
       "T8_MEAL_STEW",
       93,
-      180
+      179
      ],
      "head": [
       "HEAD_PLATE_SET1",
@@ -246582,7 +249503,7 @@
      "food": [
       "T7_MEAL_OMELETTE_AVALON",
       47,
-      124
+      123
      ],
      "head": [
       "HEAD_PLATE_SET2",
@@ -246642,8 +249563,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      66,
-      103
+      65,
+      102
      ],
      "head": [
       "HEAD_PLATE_SET1",
@@ -246752,8 +249673,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      107,
-      359
+      106,
+      358
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -247038,6 +249959,11 @@
       "CAPEITEM_FW_THETFORD",
       39,
       53
+     ],
+     "food": [
+      "T8_MEAL_SANDWICH_FISH",
+      12,
+      24
      ],
      "head": [
       "HEAD_LEATHER_SET2",
@@ -247382,7 +250308,8 @@
      "T5_MEAL_SOUP",
      "T7_MEAL_ROAST_FISH",
      "T8_MEAL_SANDWICH",
-     "T7_MEAL_PIE"
+     "T7_MEAL_PIE",
+     "T8_MEAL_SANDWICH_FISH"
     ],
     "head": [
      "HEAD_LEATHER_SET3",
@@ -247406,6 +250333,7 @@
      "T7_POTION_ACID",
      "T7_POTION_CLEANSE2",
      "T7_POTION_STONESKIN",
+     "T7_POTION_MOB_RESET",
      "T8_POTION_CLEANSE",
      "T8_POTION_BERSERK",
      "T8_POTION_COOLDOWN"
@@ -247493,6 +250421,7 @@
        "T7_POTION_ACID",
        "T7_POTION_CLEANSE2",
        "T7_POTION_STONESKIN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_CLEANSE",
        "T8_POTION_BERSERK",
        "T8_POTION_COOLDOWN",
@@ -247527,8 +250456,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       133,
-       245
+       131,
+       243
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -248090,8 +251019,8 @@
          15
         ],
         [
-         "T8_POTION_COOLDOWN",
-         5
+         "T7_POTION_MOB_RESET",
+         9
         ]
        ],
        "shoes": [
@@ -248578,6 +251507,11 @@
          19
         ],
         [
+         "T7_POTION_MOB_RESET",
+         12,
+         12
+        ],
+        [
          "T7_POTION_ACID",
          5,
          7
@@ -248832,6 +251766,11 @@
          3
         ],
         [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
+        ],
+        [
          "T7_POTION_STONESKIN",
          2,
          3
@@ -249071,8 +252010,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        80,
-        142
+        78,
+        140
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -249997,6 +252936,7 @@
        "T7_POTION_CLEANSE2",
        "T7_POTION_STONESKIN",
        "T8_POTION_COOLDOWN",
+       "T7_POTION_MOB_RESET",
        "T8_POTION_BERSERK",
        "T8_POTION_CLEANSE"
       ],
@@ -250350,6 +253290,11 @@
          "T8_POTION_COOLDOWN",
          3,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         4
         ],
         [
          "T8_POTION_BERSERK",
@@ -251480,7 +254425,7 @@
        "food": [
         "T8_MEAL_STEW",
         22,
-        40
+        39
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -251597,7 +254542,7 @@
       "food": [
        "T8_MEAL_STEW",
        72,
-       147
+       146
       ],
       "head": [
        "HEAD_LEATHER_SET3",
@@ -251862,7 +254807,7 @@
        "food": [
         "T8_MEAL_STEW",
         72,
-        147
+        146
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -251918,7 +254863,8 @@
       "potion": [
        "T7_POTION_REVIVE",
        "T7_POTION_ACID",
-       "T7_POTION_CLEANSE2"
+       "T7_POTION_CLEANSE2",
+       "T7_POTION_MOB_RESET"
       ],
       "shoes": [
        "SHOES_LEATHER_MORGANA",
@@ -252108,6 +255054,11 @@
          "T7_POTION_REVIVE",
          28,
          29
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -252481,6 +255432,11 @@
        "T8_POTION_CLEANSE",
        6,
        8
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -252775,6 +255731,11 @@
        "T7_POTION_STONESKIN",
        12,
        22
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       6,
+       9
       ],
       [
        "T8_POTION_BERSERK",
@@ -253076,6 +256037,11 @@
        15
       ],
       [
+       "T7_POTION_MOB_RESET",
+       4,
+       5
+      ],
+      [
        "T7_POTION_STONESKIN",
        4,
        5
@@ -253360,8 +256326,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      171,
-      362
+      170,
+      361
      ],
      "head": [
       "HEAD_LEATHER_SET3",
@@ -253518,6 +256484,7 @@
      "T8_MEAL_STEW_FISH",
      "T5_MEAL_SOUP",
      "T8_MEAL_STEW_AVALON",
+     "T8_MEAL_SANDWICH_FISH",
      "T7_MEAL_ROAST_FISH",
      "T8_MEAL_SANDWICH_AVALON",
      "T7_MEAL_PIE",
@@ -253572,6 +256539,7 @@
      "T8_POTION_COOLDOWN",
      "T7_POTION_ACID",
      "T8_POTION_CLEANSE",
+     "T7_POTION_MOB_RESET",
      "T7_POTION_STONESKIN",
      "T7_POTION_CLEANSE2",
      "T7_POTION_SLOWFIELD",
@@ -253652,6 +256620,7 @@
        "T7_MEAL_PIE",
        "T7_MEAL_ROAST",
        "T7_MEAL_ROAST_FISH",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH_AVALON"
       ],
       "head": [
@@ -253703,6 +256672,7 @@
        "T7_POTION_REVIVE",
        "T8_POTION_COOLDOWN",
        "T8_POTION_CLEANSE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_ACID",
        "T7_POTION_SLOWFIELD",
@@ -253756,8 +256726,8 @@
       ],
       "food": [
        "T8_MEAL_STEW",
-       69,
-       85
+       68,
+       84
       ],
       "head": [
        "HEAD_CLOTH_HELL",
@@ -254275,6 +257245,10 @@
         [
          "T7_POTION_REVIVE",
          12
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         8
         ]
        ],
        "shoes": [
@@ -254732,6 +257706,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          1,
          3
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         2
         ]
        ],
        "head": [
@@ -254851,6 +257830,11 @@
          "T7_POTION_SLOWFIELD",
          21,
          27
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9,
+         11
         ],
         [
          "T8_POTION_TORNADO",
@@ -255207,6 +258191,11 @@
          44
         ],
         [
+         "T7_POTION_MOB_RESET",
+         30,
+         40
+        ],
+        [
          "T7_POTION_STONESKIN",
          16,
          21
@@ -255484,6 +258473,11 @@
          "T7_POTION_STONESKIN",
          10,
          10
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         7
         ],
         [
          "T8_POTION_CLEANSE",
@@ -256022,6 +259016,11 @@
          "T7_POTION_STONESKIN",
          26,
          31
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         14,
+         20
         ],
         [
          "T6_POTION_HEAL",
@@ -256703,6 +259702,11 @@
          11
         ],
         [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
+        ],
+        [
          "T7_POTION_ACID",
          5,
          5
@@ -257074,6 +260078,11 @@
          22
         ],
         [
+         "T7_POTION_MOB_RESET",
+         10,
+         10
+        ],
+        [
          "T8_POTION_COOLDOWN",
          7,
          8
@@ -257349,6 +260358,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         3
+        ],
+        [
          "T7_MEAL_ROAST",
          1,
          2
@@ -257548,6 +260562,11 @@
          "T7_POTION_REVIVE",
          504,
          526
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         122,
+         130
         ],
         [
          "T8_POTION_COOLDOWN",
@@ -257994,6 +261013,11 @@
          "T8_POTION_CLEANSE",
          2,
          2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         1,
+         2
         ]
        ],
        "shoes": [
@@ -258199,6 +261223,11 @@
          "T7_MEAL_OMELETTE",
          4,
          5
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         4,
+         4
         ],
         [
          "T7_MEAL_PIE",
@@ -258455,8 +261484,8 @@
        ],
        "food": [
         "T8_MEAL_STEW",
-        47,
-        52
+        45,
+        50
        ],
        "head": [
         "HEAD_CLOTH_HELL",
@@ -258488,7 +261517,7 @@
        "food": [
         "T8_MEAL_STEW",
         42,
-        52
+        51
        ],
        "head": [
         "HEAD_CLOTH_HELL",
@@ -258748,7 +261777,7 @@
     "food": [
      "T8_MEAL_STEW",
      26,
-     33
+     32
     ],
     "head": [
      "HEAD_CLOTH_HELL",
@@ -259216,6 +262245,10 @@
      ],
      "food": [
       [
+       "T8_MEAL_SANDWICH_FISH",
+       5
+      ],
+      [
        "T8_MEAL_STEW",
        5
       ]
@@ -259549,6 +262582,7 @@
        "T8_MEAL_SANDWICH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T8_MEAL_SANDWICH_AVALON",
        "T7_MEAL_PIE",
        "T7_MEAL_ROAST",
@@ -259597,6 +262631,7 @@
        "T8_POTION_COOLDOWN",
        "T8_POTION_CLEANSE",
        "T7_POTION_ACID",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T7_POTION_CLEANSE2",
        "T7_POTION_SLOWFIELD",
@@ -259740,6 +262775,11 @@
          "T7_MEAL_OMELETTE",
          5,
          6
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         2,
+         2
         ]
        ],
        "head": [
@@ -259812,6 +262852,11 @@
         ],
         [
          "T7_POTION_CLEANSE2",
+         2,
+         2
+        ],
+        [
+         "T7_POTION_MOB_RESET",
          2,
          2
         ]
@@ -260058,6 +263103,11 @@
          "T8_POTION_CLEANSE",
          21,
          22
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         9,
+         11
         ],
         [
          "T7_POTION_SLOWFIELD",
@@ -260508,6 +263558,11 @@
          "T7_POTION_STONESKIN",
          5,
          6
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         7
         ]
        ],
        "shoes": [
@@ -261030,6 +264085,11 @@
          "T8_MEAL_SANDWICH_AVALON",
          1,
          2
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         1,
+         3
         ]
        ],
        "head": [
@@ -261146,6 +264206,11 @@
          "T7_POTION_REVIVE",
          326,
          333
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         23,
+         25
         ],
         [
          "T8_POTION_CLEANSE",
@@ -261468,6 +264533,11 @@
         ]
        ],
        "food": [
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         6,
+         9
+        ],
         [
          "T8_MEAL_STEW",
          4,
@@ -262040,6 +265110,7 @@
        "T8_MEAL_STEW_FISH",
        "T5_MEAL_SOUP",
        "T8_MEAL_STEW_AVALON",
+       "T8_MEAL_SANDWICH_FISH",
        "T7_MEAL_OMELETTE_DRAGONAREA"
       ],
       "head": [
@@ -262080,6 +265151,7 @@
        "T8_POTION_COOLDOWN",
        "T7_POTION_ACID",
        "T8_POTION_CLEANSE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_STONESKIN",
        "T6_POTION_ENERGY",
        "T7_POTION_CLEANSE2",
@@ -262363,6 +265435,11 @@
          "T8_POTION_CLEANSE",
          4,
          4
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         2,
+         2
         ]
        ],
        "shoes": [
@@ -263037,6 +266114,11 @@
          "T8_MEAL_STEW_AVALON",
          4,
          4
+        ],
+        [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
         ]
        ],
        "head": [
@@ -263153,6 +266235,11 @@
          "T7_POTION_REVIVE",
          212,
          213
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         17,
+         17
         ],
         [
          "T8_POTION_CLEANSE",
@@ -263850,7 +266937,8 @@
        "T7_MEAL_OMELETTE",
        "T8_MEAL_STEW_FISH",
        "T8_MEAL_STEW_AVALON",
-       "T5_MEAL_SOUP"
+       "T5_MEAL_SOUP",
+       "T8_MEAL_SANDWICH_FISH"
       ],
       "head": [
        "HEAD_PLATE_SET1",
@@ -263878,6 +266966,7 @@
        "T8_POTION_COOLDOWN",
        "T7_POTION_ACID",
        "T8_POTION_CLEANSE",
+       "T7_POTION_MOB_RESET",
        "T7_POTION_CLEANSE2",
        "T7_POTION_STONESKIN"
       ],
@@ -264449,6 +267538,11 @@
          3
         ],
         [
+         "T8_MEAL_SANDWICH_FISH",
+         3,
+         3
+        ],
+        [
          "T8_MEAL_STEW_AVALON",
          3,
          3
@@ -264533,6 +267627,11 @@
          "T7_POTION_REVIVE",
          94,
          94
+        ],
+        [
+         "T7_POTION_MOB_RESET",
+         6,
+         6
         ],
         [
          "T8_POTION_CLEANSE",
@@ -264868,6 +267967,11 @@
        "T5_MEAL_SOUP",
        1,
        2
+      ],
+      [
+       "T8_MEAL_SANDWICH_FISH",
+       1,
+       2
       ]
      ],
      "head": [
@@ -264947,6 +268051,11 @@
        "T7_POTION_CLEANSE2",
        2,
        3
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ],
       [
        "T8_POTION_TORNADO",
@@ -265233,6 +268342,11 @@
        44
       ],
       [
+       "T7_POTION_MOB_RESET",
+       14,
+       18
+      ],
+      [
        "T7_POTION_SLOWFIELD",
        8,
        11
@@ -265440,6 +268554,11 @@
        "T8_POTION_COOLDOWN",
        5,
        8
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -265649,6 +268768,11 @@
        "T8_POTION_CLEANSE",
        6,
        8
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       2,
+       2
       ]
      ],
      "shoes": [
@@ -265913,6 +269037,11 @@
        "T6_POTION_HEAL",
        4,
        4
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       3,
+       11
       ],
       [
        "T7_POTION_SLOWFIELD",
@@ -266367,6 +269496,11 @@
        "T8_POTION_COOLDOWN",
        4,
        5
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       1,
+       2
       ]
      ],
      "shoes": [
@@ -266668,6 +269802,10 @@
        "T7_POTION_ACID",
        3,
        3
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       1
       ]
      ],
      "shoes": [
@@ -266885,6 +270023,11 @@
        20
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       6,
+       10
+      ],
+      [
        "T7_MEAL_PIE",
        4,
        7
@@ -267074,6 +270217,11 @@
        "T7_POTION_REVIVE",
        709,
        718
+      ],
+      [
+       "T7_POTION_MOB_RESET",
+       49,
+       53
       ],
       [
        "T8_POTION_CLEANSE",
@@ -267582,6 +270730,11 @@
        9
       ],
       [
+       "T8_MEAL_SANDWICH_FISH",
+       6,
+       9
+      ],
+      [
        "T7_MEAL_ROAST_FISH",
        3,
        3
@@ -267925,8 +271078,8 @@
      ],
      "food": [
       "T8_MEAL_STEW",
-      6,
-      8
+      5,
+      7
      ],
      "head": [
       "HEAD_LEATHER_SET3",

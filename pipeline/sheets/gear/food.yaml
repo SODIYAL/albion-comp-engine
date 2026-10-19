@@ -9,7 +9,9 @@
 # eat it, and it supplies nothing. A common raw fish is not catalogued:
 # its T8 fish raises crowd-control duration (FOOD_FISH_FRESHWATER_8_RAW,
 # FOOD_FISH_SALTWATER_8_RAW) where T1-T7 regenerate health out of combat,
-# and the tierless record cannot tell them apart.
+# and the tierless record cannot tell them apart; either tier would carry
+# no row, as the Avalonian sandwich's crowd-control-duration rider carries
+# none.
 
 - gear: T5_MEAL_SOUP                 # Cabbage Soup — no combat effect
   slot: food
@@ -73,6 +75,12 @@
   curated_as_of: 2026-08-20
   capabilities:
     - {cap: tankiness,     score: 2, evidence: FOOD_BUFF_MAXHP_AVALON_P5} # max health + CC duration
+
+- gear: T8_MEAL_SANDWICH_FISH        # Lurcher Sandwich
+  slot: food
+  curated_as_of: 2026-10-19
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: FOOD_FISH_BUFF_MAXHP_P5} # +10.87% max health and +9.5% Healing Received: the Beef Sandwich's step (+15.53% max health)
 
 - gear: T8_MEAL_STEW                 # Beef Stew
   slot: food

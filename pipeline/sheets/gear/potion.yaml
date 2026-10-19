@@ -29,6 +29,12 @@
   capabilities:
     - {cap: tankiness,     score: 2, evidence: POTION_CLEANSE2_P5} # self-cleanse of DoTs, CC and debuffs, usable under CC (a self-only cleanse)
 
+- gear: T7_POTION_MOB_RESET          # Major Calming Potion
+  slot: potion
+  curated_as_of: 2026-10-19
+  capabilities:
+    - {cap: buff_allies,   score: 1, evidence: POTION_MOB_RESET_P5} # a 90.85 absorb shield on you and up to 20 group members in 15m for 5.7s (the invisibility to mobs is PvE): under Adapting Matter's 150 on 5 allies (2)
+
 - gear: T7_POTION_REVIVE             # Major Gigantify Potion
   slot: potion
   curated_as_of: 2026-08-20
