@@ -59,6 +59,8 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: POTION_BERSERK_P5} # +20% damage 5s at -10% defense
+  self_costs:
+    - {cap: tankiness, points: 1, evidence: POTION_BERSERK_P5}    # -10% own Defense for 5s: under Bow of Badon's -25% (2)
 
 - gear: T8_POTION_CLEANSE            # Invisibility Potion
   slot: potion

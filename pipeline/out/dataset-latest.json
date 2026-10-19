@@ -10057,6 +10057,12 @@
     "sustained_brawler",
     "zone_support"
    ],
+   "self_cost_evidence": {
+    "tankiness": "BURNAURA"
+   },
+   "self_costs": {
+    "tankiness": 3
+   },
    "slot": "armor",
    "stats": {
     "bonusccdurationvsplayers": 0.1,
@@ -16338,6 +16344,12 @@
     "shield_support",
     "zone_support"
    ],
+   "self_cost_evidence": {
+    "tankiness": "GLASS_MOVESPEED"
+   },
+   "self_costs": {
+    "tankiness": 1
+   },
    "slot": "shoes",
    "stats": {},
    "tree_passives": [
@@ -19657,6 +19669,12 @@
     "slot_names": [],
     "slot_spells": [],
     "slots": []
+   },
+   "self_cost_evidence": {
+    "tankiness": "POTION_BERSERK_P5"
+   },
+   "self_costs": {
+    "tankiness": 1
    },
    "slot": "potion",
    "stats": {},

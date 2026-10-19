@@ -58,6 +58,8 @@
   capabilities:
     - {cap: mobility,      score: 2, evidence: GLASS_MOVESPEED}  # +75% speed and +15% damage at -15% defense
     - {cap: sustained_dps, score: 2, evidence: GLASS_MOVESPEED}
+  self_costs:
+    - {cap: tankiness, points: 1, evidence: GLASS_MOVESPEED}     # -15% own Defense up to 7s: under Bow of Badon's -25% (2)
 
 - gear: SHOES_CLOTH_SET1             # Scholar Sandals — Focused Run
   slot: shoes

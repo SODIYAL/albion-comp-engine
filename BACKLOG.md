@@ -196,8 +196,7 @@ Each is decidable today from evidence already in the repo.
   200; the 6 rests on the stun before the blast, and the row anchors the
   brawl 15-19 ranged-AoE minimum); the fear ladder (Demonic 4,
   Infernal 2); Flare's enemy cooldown-rate cut and the `reveal`
-  capability; gear self-costs stated in cited texts. (V: 10, The movement
-  rows the snapshot move deferred)
+  capability. (V: 10, The movement rows the snapshot move deferred)
 - **Black Hands' Devastating Strike knockback has no structured candidate**:
   the second hit's knockback is unscored (an `effect_overrides.yaml` add:
   entry would ground it); the weapon is retired, so only old permalinks

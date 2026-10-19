@@ -154,6 +154,8 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: BURNAURA}         # true-damage aura at own-HP cost
+  self_costs:
+    - {cap: tankiness, points: 3, evidence: BURNAURA}            # 2% of own max health every 0.5s as true damage and -50% Healing Received, up to 20s: past the 24%-over-6s drains (2), at the no-healing E (3)
 
 # ------------------------------------------ plate (pools/armor_plate.yaml)
 - gear: ARMOR_PLATE_AVALON           # Armor of Valor — Requite
