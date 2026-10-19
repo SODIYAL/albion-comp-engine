@@ -158,7 +158,15 @@ Each is decidable today from evidence already in the repo.
 - **Magnitude audit queues** (`py -3 pipeline/build_magnitude_review.py`,
   a board generated locally into the gitignored `review/`): the PASV queue
   (44 rows where a passive / stat sentinel grounds a score of 4 or more —
-  each needs a justification or a downgrade) and the TOP review (40 rows at
+  each needs a justification or a downgrade; by source: 18 maces and
+  hammers read tankiness 4 on WEAPON_STATS, "tank-line weapon, played
+  frontline", though a weapon carries no defensive stat
+  (`out/item_stats.json`: durability, weight, item power) and the
+  structural floors read weapon supply alone, so a downgrade moves every
+  frontline floor and needs a maintainer decision; 16 fire, bow and
+  repeater weapons read sustained_dps 4 on WEAPON_STATS as a stand-in for
+  their auto-attack and Q/W patterns; 10 knuckles read sustained_dps 4 on
+  the Fatal Fury passives, +18% damage at full stacks) and the TOP review (40 rows at
   score 6 or more, the top of every ladder, against the dumps numbers),
   and the RULE flags (15 spell x capability pairs graded at two or three
   scores across the weapons that share the spell; each needs its reason in
