@@ -105,6 +105,8 @@ function boot(hash, stored) {
     /* the filter box: a typed query, a press on a match, the clear button */
     type: q => { els["wfilter-in"].value = q; els["wfilter-in"].h.input(); },
     pick: id => els["wfilter-list"].h.mousedown({target: target("li[data-id]", {id}), preventDefault() {}}),
+    spotlight: id => els.pool.h.click({target: target("[data-spotlight]", {spotlight: id})}),
+    activity: k => els.pool.h.click({target: target("[data-activity]", {activity: k})}),
     clear: () => els["wfilter-clear"].h.click(),
     list: () => els["wfilter-list"].innerHTML,
     key: k => els["wfilter-in"].h.keydown({key: k, preventDefault() {}}),
@@ -113,9 +115,37 @@ function boot(hash, stored) {
   };
 }
 /* the data rows' first cell text after the rank, in page order */
-const order = (html, names) => names.map(n => [n, html.indexOf(">" + n + "<")]).filter(x => x[1] >= 0)
+const tableContent = html => html.slice(html.indexOf('<div class="pool-head">'));
+const order = (html, names) => names.map(n => [n, tableContent(html).indexOf(">" + n + "<")]).filter(x => x[1] >= 0)
   .sort((a, b) => a[1] - b[1]).map(x => x[0]).join(" ");
 const NAMES = ["ALPHA", "BRAVO", "CHARLIE", "DELTA"];
+
+/* ---- the overview follows the active pool and weapon ---- */
+let overview = boot();
+check("PP12a the spotlight uses the most-fielded weapon and its own two-sided rate",
+      overview.html().includes('data-spotlight="ALPHA"')
+      && overview.html().includes('aria-label="ALPHA: 42% win rate; 50% is even"')
+      && overview.html().includes('class="rate-ring is-down"'));
+overview.sort("weapons", "win_rate");
+check("PP12b sorting the table keeps the spotlight on the most-fielded weapon",
+      overview.html().includes('data-spotlight="ALPHA"') && order(overview.html(), NAMES).startsWith("BRAVO"));
+overview.pick("CHARLIE");
+check("PP12c a filtered weapon's rate remains unavailable below the sample floor",
+      overview.html().includes('data-spotlight="CHARLIE"') && overview.html().includes('class="rate-ring is-empty"')
+      && overview.html().includes("Win rate needs 100+ fights."));
+overview.activity("five");
+check("PP12d the activity chart switches pools and preserves the weapon filter",
+      overview.store["portal-pool"] === "five" && overview.els["wfilter-in"].value === "CHARLIE"
+      && overview.html().includes("This weapon is outside the pool's listed rankings."));
+overview.clear();
+overview.view("comps");
+overview.spotlight("ALPHA");
+check("PP12e the spotlight action opens the weapon ranking with its winning build expanded",
+      overview.store["portal-view"] === "weapons" && overview.els["wfilter-in"].value === "ALPHA"
+      && overview.html().includes('class="row hit"') && overview.html().includes('aria-expanded="true"'));
+check("PP12f an empty pool renders an honest overview and activity chart",
+      boot("#trio").html().includes("A new frontier") && boot("#trio").html().includes('data-activity="trio"')
+      && boot("#trio").html().includes("win rate unavailable"));
 
 /* ---- the first paint ---- */
 let p = boot();
@@ -161,7 +191,7 @@ check("PP5f a comp's dominant share reads against the pool's, in points, the sha
       p.html().includes('title="40% took no deaths; the pool 90%"><span class="delta down">−50 pts</span>')
       && p.html().includes('<span class="delta up">+5 pts</span>') && p.html().includes(">Dominant vs pool<"), p.html());
 p.sort("comps", "kd");
-check("PP5c comps sort by their own headings", p.html().indexOf(">CHARLIE<") < p.html().indexOf(">ALPHA<"));
+check("PP5c comps sort by their own headings", order(p.html(), NAMES).startsWith("CHARLIE DELTA"));
 check("PP5d a pool under six shows no shapes and calls its comps plain comps",
       !p.html().includes('id="shapes"') && !p.html().includes('id="profile"') && p.html().includes("<h3>Comps that won"));
 p.tab("solo");

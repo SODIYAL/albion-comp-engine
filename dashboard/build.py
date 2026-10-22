@@ -551,6 +551,8 @@ def main():
         portal_stats = json.load(f)
     # the logo rides inline, as on every other page: docs/ ships no assets
     portal = portal.replace(BRAND_LOGO_FILE.replace(os.sep, "/"), load_brand_logo())
+    # Weapon art remains available without the external item-image service.
+    portal = portal.replace("/* PORTAL_ICONS */ {}", js(icons))
     portal = portal.replace("<!-- PORTAL_STATS -->",
                             f"<script>const PORTAL_STATS = {js(portal_stats)};</script>")
     with open(os.path.join(DASH, "portal.html"), "w", encoding="utf-8", newline="\n") as f:
