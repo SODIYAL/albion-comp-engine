@@ -29,7 +29,8 @@ answer the question):
                  after the machine slept still reaches them (the kill-feed
                  poll recorded nothing in 91 of 221 hours over nine days:
                  the machine was asleep). A fight the list did not reach
-                 (older than its depth, or on a page that failed) is found
+                 (older than its depth, or inside the span of a page that
+                 failed: a failed page reopens its own span only) is found
                  among the poll's records instead: the poll
                  (`--poll-events`) records every kill the feed lists
                  while the machine is awake (696 of the list's 698 fights
@@ -48,7 +49,8 @@ answer the question):
                  (albionbb's `totalPlayers` was the same number on 2,970
                  of 2,970 cached battles). A fight of one or two kills
                  has no official battle (404, still so a day later) and
-                 stays the poll's record.
+                 stays the poll's record; a poll record holding fewer
+                 than OFFICIAL_MIN_KILLS kills is never asked about.
   3. PARTIES     the poll's stored kill events, and official
                  /events/battle/{id} for the kills the poll missed (the
                  poll holds every kill of 93% of the fights of 8+ it saw)
@@ -219,6 +221,13 @@ LIST_DEPTH = 10000
 # the poll runs every 3 minutes while the machine is awake: a pass ending
 # with no poll write this recent means the poll stopped
 STALE_POLL_MINUTES = 60
+# an official battle holds this many kills or more (16,757 of 16,757
+# harvested held 3+). A poll record holding fewer is never asked about:
+# 93% of the poll's records of 8+ seen players the API kept no battle of
+# 8+ for hold one or two kills. The cost: the poll held one or two kills of
+# 65 of the 14,871 official battles it saw, which the list still reaches
+# inside its depth
+OFFICIAL_MIN_KILLS = 3
 
 
 # Why a request came back empty, tallied across a pass so the coverage line
@@ -813,32 +822,44 @@ def list_battles(since):
     are read in order: a fight added while the pass reads pushes the rest
     down a place, so an item can repeat on the next page, never drop.
     Returns ({battle id: item}, the oldest start read, pages read, pages
-    failed, whether the first page failed)."""
+    failed, whether the first page failed, the failed pages' spans). A
+    span is (lo, hi): the start times a run of failed pages held, from the
+    newest start of the page read after it to the oldest of the page read
+    before it; None is an open end (the run opened the list, or the list
+    stopped answering)."""
     found, oldest, read, failed, run, first_failed = {}, None, 0, 0, 0, False
+    gaps, gap_hi, page_oldest = [], None, None
     off = 0
     while off < LIST_DEPTH:
         page = get_json(f"{GAMEINFO}/battles?offset={off}&limit=51&sort=recent",
                         tries=3, timeout=60)
         if page is None:
             failed += 1
+            if not run:
+                gap_hi = page_oldest
             run += 1
             first_failed = first_failed or off == 0
             if run >= 3:
                 break           # the list stopped answering
             off += 51
             continue
+        starts = [s for s in (b.get("startTime") for b in page if b.get("id")) if s]
+        if run:
+            gaps.append((max(starts) if starts else None, gap_hi))
         run = 0
         read += 1
-        starts = [b.get("startTime") or "" for b in page if b.get("id")]
         for b in page:
             if b.get("id"):
                 found.setdefault(b["id"], b)
         if starts:
-            oldest = min([s for s in starts if s] + ([oldest] if oldest else []))
+            page_oldest = min(starts)
+            oldest = min(starts + ([oldest] if oldest else []))
         if len(page) < 51 or (starts and max(starts) < since):
             break
         off += 51
-    return found, oldest, read, failed, first_failed
+    if run:
+        gaps.append((None, gap_hi))
+    return found, oldest, read, failed, first_failed, gaps
 
 
 def fetch(args, known, now=None):
@@ -850,7 +871,7 @@ def fetch(args, known, now=None):
     since = args.since or _stamp(t0 - datetime.timedelta(hours=args.since_hours))
     settled = _stamp(t0 - datetime.timedelta(minutes=args.settle_minutes))
     problems = []
-    listed, oldest, read, failed, first_failed = list_battles(since)
+    listed, oldest, read, failed, first_failed, gaps = list_battles(since)
     if first_failed:
         problems.append("the battle list's first page failed - discovery read the "
                         "kill-feed poll's records alone")
@@ -872,14 +893,27 @@ def fetch(args, known, now=None):
             continue        # harvested
         todo.append((bid, b))
     # the poll's records the list did not settle: a fight older than the
-    # list's reach or on a page that failed. One whose first kill is two
-    # hours or more inside the list's reach, the list read whole, is no
-    # official battle of 4+ (the list holds every one) and costs nothing.
-    reach = (_stamp(_parse(oldest) + datetime.timedelta(hours=2))
-             if oldest and not failed else None)
-    from_poll = 0
+    # list's reach or inside a failed page's span. One whose first kill is
+    # two hours or more inside the reach and outside every such span is no
+    # official battle of 4+ (the list holds every one) and costs nothing;
+    # one holding fewer than OFFICIAL_MIN_KILLS kills is a fight the API
+    # keeps no battle for and costs nothing either.
+    margin = datetime.timedelta(hours=2)
+    reach = _stamp(_parse(oldest) + margin) if oldest else None
+    spans = [(_stamp(_parse(lo) - margin) if lo else None,
+              _stamp(_parse(hi) + margin) if hi else None) for lo, hi in gaps]
+
+    def unsettled(first):
+        if not reach or first < reach:
+            return True
+        return any((lo is None or first >= lo) and (hi is None or first <= hi)
+                   for lo, hi in spans)
+    from_poll = few_kills = 0
     for bid, first in st.poll_candidates(args.min_players, since, settled):
-        if bid in listed or (reach and first >= reach):
+        if bid in listed or not unsettled(first):
+            continue
+        if ((st.get(bid) or {}).get("total_kills") or 0) < OFFICIAL_MIN_KILLS:
+            few_kills += 1
             continue
         todo.append((bid, None))
         from_poll += 1
@@ -897,7 +931,9 @@ def fetch(args, known, now=None):
     band = (args.min_players, args.max_players)
     print(f"{len(todo[:args.battles])} battles to fetch ({len(todo) - from_poll} off the "
           f"list, {from_poll} kill-feed records of {args.min_players}+ seen players; "
-          f"started since {since[:16]}, settled), {workers} worker(s)", flush=True)
+          f"started since {since[:16]}, settled), {workers} worker(s); {few_kills} "
+          f"kill-feed records of under {OFFICIAL_MIN_KILLS} kills not asked "
+          f"(no official battle holds fewer)", flush=True)
     with cf.ThreadPoolExecutor(max_workers=workers) as pool:
         futs = [pool.submit(harvest_battle, args, known, bid, band, detail)
                 for bid, detail in todo[:args.battles]]

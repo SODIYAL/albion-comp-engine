@@ -507,13 +507,16 @@ not needed as a source.
 
 ## Scheduled killboard fetches (cache-only)
 
-Two scheduled jobs, two APIs, two caches — neither rebuilds or commits.
+Two scheduled jobs on the official gameinfo API, one cache
+(`party_store.py`) — neither rebuilds or commits.
 The fold is `pipeline/fold_harvest.ps1` (PowerShell, weekly): rosters
 from the cache -> the seal -> the derive chain -> dataset -> pages -> every
 gate -> `pipeline/compare_fold.py`, which writes the before/after report to
 `notes/findings/<date>-fold-report.md` against the previous fold at
-HEAD (`--base` for another revision) -> the harvest backup. Review the
-report, then commit.
+HEAD (`--base` for another revision) -> the harvest backup. A chain step's
+failure stops the fold; the gates all run whatever one returns, and a fold
+that moved several pins lists every failing gate with its FAIL lines after
+the report and the backup, then exits 1. Review the report, then commit.
 
 LOCAL ARTIFACTS, ONE COMMITTED RECORD (`rosters_io.py`). No rosters
 artifact is committed: the build artifact grows about 1 MB a day toward
@@ -579,9 +582,12 @@ fold's own rewrite and seal would race it.
   in the band. A BACKFILL after a stop names the window's start
   (`--since YYYY-MM-DDTHH:MM --battles 1000000`, UTC): the list reaches two
   days back, the poll's records as far as the poll ran. A week's backfill
-  runs about ten hours; a pass beside it shares the API's rate limit, and
-  its list pages and rosters that answer 429 are read again by the next
-  pass inside the 36-hour window. The cache keeps every battle and the analysis reads all of
+  ran ten hours while it still asked about the poll's records of one or two
+  kills (40% of its requests, every one a 404; such records are no longer
+  asked about, `OFFICIAL_MIN_KILLS`); a pass beside it shares the API's
+  rate limit, and its list pages and rosters that answer 429 are read
+  again by the next pass inside the 36-hour window. A failed list page
+  reopens the poll's records inside its own span only. The cache keeps every battle and the analysis reads all of
   it, so a focused night adds to the corpus, never narrows it. After the
   passes the run BACKS UP the cache, the one copy of the evidence (the
   kill feed serves no history): `pipeline/backup_cache.py` writes a

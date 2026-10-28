@@ -161,12 +161,16 @@ ROSTER = {"startTime": "2026-09-27T11:59:00.000000000Z", "totalKills": 3,
 
 
 def stub_net(calls, roster=ROSTER, listing=()):
-    """The network: the battle list (one page, `listing`; None = the page
-    fails), the official roster of battle 7 (404 = the API holds none) and
+    """The network: the battle list (`listing`: one page, None = the page
+    fails, or {offset: page or None} for several, an offset past them
+    empty), the official roster of battle 7 (404 = the API holds none) and
     its kill list (one page), each request logged in `calls`."""
     def fake_get(url, tries=4, pause=1.5, timeout=30, missing=None):
         calls.append(url)
         if "/battles?offset=" in url:
+            if isinstance(listing, dict):
+                page = listing.get(int(url.split("offset=")[1].split("&")[0]), [])
+                return None if page is None else list(page)
             return None if listing is None else list(listing)
         if url.endswith("/battles/7"):
             return missing if roster == 404 else roster
@@ -222,15 +226,18 @@ def listed(bid, n, start="2026-09-27T11:59:00.0Z", end="2026-09-27T12:30:00.0Z")
                                  "guildName": "G", "kills": 0, "deaths": 0} for i in range(n)}}
 
 
-def pass_over(now, roster=ROSTER, since="2026-09-01", listing=(), settle=0):
-    """fetch() over a fresh cache holding battle 7's poll record (kills
-    21-22, four seen players; the official roster holds five) and battle
-    9's (two seen players, under every floor here, so the poll's newest
-    write stays the cache's): (problems, requests, battle 7's record
-    after)."""
+def pass_over(now, roster=ROSTER, since="2026-09-01", listing=(), settle=0,
+              stored=(21, 22, 23), extra=()):
+    """fetch() over a fresh cache holding battle 7's poll record (the
+    `stored` kills, first at 12:00; the official roster holds five
+    players), battle 9's (two seen players, under every floor here, so the
+    poll's newest write stays the cache's) and the `extra` (id, events)
+    records: (problems, requests, battle 7's record after)."""
     sp.CACHE = os.path.join(tempfile.mkdtemp(), "cache.sqlite")
     with party_store.Store(sp.CACHE) as st:
-        st.put(7, sp.rebuild_poll_record(7, {i: FULL[i] for i in (21, 22)}, KNOWN))
+        st.put(7, sp.rebuild_poll_record(7, {i: FULL[i] for i in stored}, KNOWN))
+        for bid, evs in extra:
+            st.put(bid, sp.rebuild_poll_record(bid, evs, KNOWN))
         st.put(9, sp.rebuild_poll_record(9, {31: event(31, "x", "y", ["x"])}, KNOWN))
     calls = []
     real_get, sp.get_json = sp.get_json, stub_net(calls, roster, listing)
@@ -271,7 +278,7 @@ check("C6i a pass whose roster requests mostly fail fails loudly; the poll recor
 _p, _c, _rec7 = pass_over(_soon, roster=404)
 check("C6j a fight with no official battle (404) stays the poll's record and is no failure",
       _p == [] and _rec7.get("source") == "events_poll", f"{_p}")
-_p, _c, _rec7 = pass_over(_soon, listing=[listed(7, 5)])
+_p, _c, _rec7 = pass_over(_soon, listing=[listed(7, 5)], stored=(21, 22))
 check("C6k a listed fight is harvested on the list's own roster: no roster request",
       _p == [] and _rec7.get("source") is None and _rec7["total_players"] == 5
       and asked(_c, "/battles/7") == 0 and asked(_c, "/events/battle/7?") == 1, f"{_p} {_c}")
@@ -291,6 +298,24 @@ _p, _c, _rec7 = pass_over(_soon, listing=None)
 check("C6o a battle list whose first page fails fails the pass loudly; the poll's records "
       "are still harvested",
       len(_p) == 1 and "first page failed" in _p[0] and _rec7.get("source") is None, f"{_p} {_c}")
+_p, _c, _rec7 = pass_over(_soon, stored=(21, 22))
+check("C6p a poll record holding fewer than OFFICIAL_MIN_KILLS kills is never asked about "
+      "(no official battle holds fewer) and stays the poll's record",
+      sp.OFFICIAL_MIN_KILLS == 3 and _p == [] and asked(_c, "/battles/7") == 0
+      and _rec7.get("source") == "events_poll", f"{_p} {_c}")
+# three pages: the newest read (51 fights at 20:00, under the floor), the
+# next failed, the third read (one fight at 05:00); the failed page held
+# the starts between 05:00 and 20:00
+_late = {i: event(i, "k", f"w{i}", ["k", "m"], ts="2026-09-27T23:30:00Z") for i in (41, 42, 43)}
+_p, _c, _rec7 = pass_over(_soon, extra=[(11, _late)], listing={
+    0: [listed(1000 + i, 3, start="2026-09-27T20:00:00.0Z", end="2026-09-27T20:30:00.0Z")
+        for i in range(51)],
+    51: None,
+    102: [listed(8, 3, start="2026-09-27T05:00:00.0Z", end="2026-09-27T05:10:00.0Z")]})
+check("C6q a failed list page reopens the poll records inside its span alone: the 12:00 fight "
+      "is asked about and harvested, the 23:30 fight (inside the reach, outside the span) is not",
+      _p == [] and asked(_c, "/battles/7") == 1 and _rec7.get("source") is None
+      and asked(_c, "/battles/11") == 0, f"{_p} {_c}")
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")
