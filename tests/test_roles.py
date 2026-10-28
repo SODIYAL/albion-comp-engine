@@ -916,7 +916,11 @@ def t_kit_audit_agreement():
             g["_w"] = 1.0 / per[(r["weapon"], r.get("player"))]
             g["_p"] = r.get("player")
             by_w.setdefault(r["weapon"], []).append(g)
-    eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
+    # a weapon the role book seats nowhere carries no doctrine kit
+    # (fail-closed: Iron-clad Staff, off every menu by curation), so it
+    # has no forge kit to audit
+    eligible = sorted(w for w, rs in by_w.items()
+                      if len(rs) >= 30 and e.seat_of(w))
     pick = _random.Random(20260903).sample(eligible, 10)
     slot_kb = [("head", "Head"), ("armor", "Armor"), ("shoes", "Shoes"),
                ("cape", "Cape"), ("offhand", "OffHand"),
@@ -1206,7 +1210,8 @@ def t_one_player_one_vote():
         rows = (((kd.get(rid) or {}).get("by_weapon") or {}).get(w) or {}
                 ).get(slot) or []
         row = next((r for r in rows if r.get("id") == gid), None)
-        return bool(row) and any(not str(src).startswith("killboard:")
+        # a killboard source reads "killboard (<votes>x/<players>p)"
+        return bool(row) and any(not str(src).startswith("killboard")
                                  for src in (row.get("sources") or []))
     wrong = []
     slot_map = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
@@ -1224,6 +1229,23 @@ def t_one_player_one_vote():
             checked += 1
             if tier and tier[0][0] == gid and not _curated(rid, w, slot_map[slot], gid):
                 wrong.append((w, slot, top, n))
+    # the floor that keeps one voter's sightings out of a weapon tier: a
+    # killboard-only row rests on KB_MIN_WEAPON (2) distinct players. The
+    # live fixture above needs a cell whose top sighting is one voter's,
+    # and a harvest of 400,000 builds of 10+ holds none (V: 10, The
+    # official-list fold's pins), so the floor is read on every shipped row
+    floor_rows, floor_bad = 0, []
+    for rid, d in kd.items():
+        if not isinstance(d, dict):
+            continue
+        for w, slots in (d.get("by_weapon") or {}).items():
+            for slot, rows in slots.items():
+                for row in rows:
+                    srcs = row.get("sources") or []
+                    if srcs and all(str(s).startswith("killboard") for s in srcs):
+                        floor_rows += 1
+                        if (row.get("players") or 0) < 2:
+                            floor_bad.append((rid, w, slot, row.get("id")))
     # rows carry players beside the votes; extension is measured in voters
     rows_with_players = sum(
         1 for d in kd.values() if isinstance(d, dict)
@@ -1235,12 +1257,15 @@ def t_one_player_one_vote():
     grail = ext_n.get("2H_QUARTERSTAFF_AVALON")   # 35 voters, harvest-admitted
     check("R27 one player, one vote: every harvested build carries a player "
           "key; a single voter's repeat sightings never front a tier (the "
-          "Heavy Crossbow Fey Shoes case); rows carry players beside votes; "
+          "Heavy Crossbow Fey Shoes case) and every killboard-only weapon-tier "
+          "row rests on two or more players; rows carry players beside votes; "
           "the uniform extension is measured in voters (Galatine at 200, "
           "Grailseeker at the 35 floor)",
-          keyed and checked >= 1 and not wrong and rows_with_players >= 100
+          keyed and not wrong and floor_rows >= 100 and not floor_bad
+          and rows_with_players >= 100
           and galatine and galatine >= 35 and grail and grail >= 35,
           f"keyed={keyed} single-voter tops checked={checked} wrong={wrong[:3]} "
+          f"floor rows={floor_rows} under two players={floor_bad[:3]} "
           f"rows_with_players={rows_with_players} galatine_voters={galatine} "
           f"grail={grail}")
 

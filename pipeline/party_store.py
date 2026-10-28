@@ -129,6 +129,28 @@ class Store:
         for bid, blob in cur:
             yield bid, decode(blob)
 
+    def newest_write(self, source=None):
+        """The UTC time of the newest `put` (of one source), or None."""
+        if source:
+            row = self.db.execute(
+                "SELECT MAX(updated_at) FROM battles WHERE source=?", (source,)).fetchone()
+        else:
+            row = self.db.execute("SELECT MAX(updated_at) FROM battles").fetchone()
+        return row[0]
+
+    def poll_candidates(self, min_seen, since, settled_before):
+        """The harvest's fallback discovery (sample_parties.py
+        "DISCOVERY"): (id, first kill) of the kill-feed records of
+        `min_seen`+ seen players whose first kill is at or after `since`
+        and whose last write is at or before `settled_before`, newest
+        first."""
+        rows = self.db.execute(
+            "SELECT battle, first_event_at FROM battles WHERE source='events_poll' "
+            "AND total_players >= ? AND first_event_at >= ? AND updated_at <= ? "
+            "ORDER BY first_event_at DESC, battle DESC",
+            (int(min_seen), since, settled_before))
+        return [(r[0], r[1]) for r in rows]
+
     # ---- writes --------------------------------------------------------
     def put(self, bid, rec, commit=True):
         """Store one record whole (insert or replace)."""

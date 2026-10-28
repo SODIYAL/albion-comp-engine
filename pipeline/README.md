@@ -547,14 +547,19 @@ harvest pass ends by rewriting the working copies from the cache and the
 fold's own rewrite and seal would race it.
 
 - `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
-  at 03:00 AND 15:00 (the job CLAUDE.md names; twice daily because the
-  800-battle discovery list reaches back only ~13 h at the 8-player floor,
-  ~60 h at 25 — one pass a day saw every ZvZ fight and half the
-  8-24-player ones): `sample_parties.py` at the 25- and 8-player floors,
-  battles fetched four at a time (`--workers`, each pass ends with an
-  event-coverage line and a request-miss tally; sequential baseline 0.987),
-  against the OFFICIAL gameinfo API, whose `GroupMembers` carries the
-  killer's party at kill time with gear → `out/party_cache.sqlite` (one
+  at 03:00 AND 15:00 (the job CLAUDE.md names): one `sample_parties.py`
+  pass at the 8-player floor over the fights that started in the last 36
+  hours and ended an hour ago or more, discovered on the OFFICIAL battle
+  list (every battle of 4+ with its roster, about two days deep) and,
+  past its reach, among the kill-feed poll's records; kills read from the
+  poll's records first and from the battle's own kill list for the rest
+  (`sample_parties.py` "DISCOVERY", "WINDOW"). Battles are read four at a
+  time (`--workers`); each pass ends with an "official rosters" line, an
+  event-coverage line and a request-miss tally, and exits 1 when the
+  list's first page fails, when most roster requests fail, or when the
+  poll has stopped ("FAILS LOUDLY"). The official gameinfo API's
+  `GroupMembers` carries the killer's party at kill time with gear →
+  `out/party_cache.sqlite` (one
   SQLite file, one row per battle, the record zlib-compressed; the
   `party_store.py` module is the only reader and writer, and
   `py -3 pipeline/party_store.py` prints the count by source) and the
@@ -569,9 +574,14 @@ fold's own rewrite and seal would race it.
   derive_portal_rows -> derive_party_styles -> derive_meta_prior -> derive_portal_prior ->
   derive_role_counts -> derive_skeletons -> build_dataset -> gates. A FOCUSED NIGHT takes a
   fight-size band (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band)
-  and runs one pass over it; `sample_parties.py --max-players` is a local
-  ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
-  in the band. The cache keeps every battle and the analysis reads all of
+  and runs one pass over it; `sample_parties.py --max-players` is a
+  ceiling on the official roster's size, so the budget goes only to fights
+  in the band. A BACKFILL after a stop names the window's start
+  (`--since YYYY-MM-DDTHH:MM --battles 1000000`, UTC): the list reaches two
+  days back, the poll's records as far as the poll ran. A week's backfill
+  runs about ten hours; a pass beside it shares the API's rate limit, and
+  its list pages and rosters that answer 429 are read again by the next
+  pass inside the 36-hour window. The cache keeps every battle and the analysis reads all of
   it, so a focused night adds to the corpus, never narrows it. After the
   passes the run BACKS UP the cache, the one copy of the evidence (the
   kill feed serves no history): `pipeline/backup_cache.py` writes a
@@ -588,8 +598,8 @@ fold's own rewrite and seal would race it.
   per-battle cache records (`source: events_poll`, deduplicated by EventId
   across polls; the roster is rebuilt from the events, so coverage is
   against the seen set). Cache only. This is the discovery for the Ancient
-  Lands portal pools (2-3, 4-5, 5-7): their fights are 4-14 players, which
-  the battle list never surfaces, and portals open on 30 / 60 / 180 minute
+  Lands portal pools (2-3, 4-5, 5-7): their fights are 4-14 players, mostly
+  under the harvest's floor of 8, and portals open on 30 / 60 / 180 minute
   locks, so the kills arrive in bursts. A later battle-list harvest of the
   same battle replaces the poll record with the official-roster one.
   CONTENT TAG: every event's `KillArea` (the content classifier the API

@@ -22,16 +22,54 @@ second).
 THREE-STEP PIPELINE (each step exists because the one before it cannot
 answer the question):
 
-  1. DISCOVERY   albionbb /battles?minPlayers=N   — the only source with a
-                 size filter, so large fights can be found without crawling
-                 everything. Gives `totalPlayers`, the stated fight size.
-  2. ROSTER      official /battles/{id}           — EVERY player in the
-                 fight (name, guild, alliance, kills, deaths). No equipment,
-                 but it is the honest DENOMINATOR: coverage becomes measured
-                 rather than assumed.
-  3. PARTIES     official /events/{id} per kill   — `GroupMembers` (the
-                 killer's party, with equipment) and `Participants` (who
-                 damaged the victim, with equipment).
+  1. DISCOVERY   official /battles?sort=recent    — every official battle
+                 of 4+ players, newest first, each item with its roster;
+                 paged back to the window's start. It answers offsets
+                 below LIST_DEPTH, about two days of fights, so a pass run
+                 after the machine slept still reaches them (the kill-feed
+                 poll recorded nothing in 91 of 221 hours over nine days:
+                 the machine was asleep). A fight the list did not reach
+                 (older than its depth, or on a page that failed) is found
+                 among the poll's records instead: the poll
+                 (`--poll-events`) records every kill the feed lists
+                 while the machine is awake (696 of the list's 698 fights
+                 of 8+ held), and a record's seen-name count is the
+                 prefilter (the seen set holds the roster and more, a
+                 killer's party listing members who were not at the
+                 fight: 342 of 344 fights of 8+ seen at 8). No
+                 third-party list: albionbb's, the discovery before this
+                 one, answers the harvest with a Cloudflare challenge
+                 (403).
+  2. ROSTER      the list's item, or official /battles/{id} for a fight
+                 found through the poll — EVERY player in the fight (name,
+                 guild, alliance, kills, deaths). No equipment, but it is
+                 the honest DENOMINATOR: coverage becomes measured rather
+                 than assumed. Its size is the fight size the floor reads
+                 (albionbb's `totalPlayers` was the same number on 2,970
+                 of 2,970 cached battles). A fight of one or two kills
+                 has no official battle (404, still so a day later) and
+                 stays the poll's record.
+  3. PARTIES     the poll's stored kill events, and official
+                 /events/battle/{id} for the kills the poll missed (the
+                 poll holds every kill of 93% of the fights of 8+ it saw)
+                 — `GroupMembers` (the killer's party, with equipment) and
+                 `Participants` (who damaged the victim, with equipment).
+                 A listed event is the full event: no per-kill detail
+                 fetch.
+
+WINDOW. A pass reads the fights that started in the last `--since-hours`
+(36: a missed run of the twice-daily task still lands in the next) and
+ended `--settle-minutes` ago or more (60; for a poll record, its last
+write): a fight still going keeps gaining kills. A fight already
+harvested is skipped; a poll record the roster puts under the floor stays
+the poll's, read again by each pass whose window holds it.
+
+FAILS LOUDLY. A pass rewrites the working copies and then exits 1 when
+the battle list's first page fails, when more than half its roster
+requests failed, or when the poll has written nothing in the
+STALE_POLL_MINUTES before the pass ends (it runs every 3 minutes while
+the machine is awake): a refused request otherwise reads as "0 battles
+to fetch" and exits 0.
 
 WHAT THIS DATA IS — AND IS NOT.
   * A party here is a GroupMembers set: players grouped in-game at kill
@@ -58,9 +96,10 @@ WHAT THIS DATA IS — AND IS NOT.
     layer, it may inform a rule; it never becomes a scoring input on its
     own.
 
-Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
+Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 8]
                                          [--max-players 0] [--max-events 120]
-                                         [--server us] [--pages 40]
+                                         [--since-hours 36 | --since ISO]
+                                         [--settle-minutes 60]
         py -3 pipeline/sample_parties.py --pages 0     (offline re-analysis)
         py -3 pipeline/sample_parties.py --poll-events  (kill-feed poll, cache only)
 
@@ -96,7 +135,7 @@ kill-feed record from its stored events, offline.
 
 POPULATION. The poll samples the whole server's kill feed, so its records
 are dominated by 1-5 man open-world ganks, a population the battle-list
-harvest never sampled (its floors are 25 and 8 players). Every reader of
+harvest never samples (its floor is 8 players). Every reader of
 the artifact goes through `rosters_io.load`, whose default population is
 the battle-list records only; a derive step that wants the poll's
 records asks for them by `source` and `content`. The shipped tables
@@ -120,13 +159,13 @@ unreadable file is skipped and reported, never overwritten and never
 fatal. A battle-list harvest that reaches a poll record while the
 official battle record still lags (404) keeps the poll record.
 
-KILL-FEED POLL (`--poll-events`). The battle list is the wrong discovery
-for the Ancient Lands portal pools of 2-3, 4-5 and 5-7 players: their
-fights are 4-14 players, albionbb lists fights by a player floor, and the
-official battle record lags the kills. The public events feed exposes the
+KILL-FEED POLL (`--poll-events`). The public events feed exposes the
 newest ~1,000 kills with the killer's party and every combat role's
 equipment in the list itself, so a poll every few minutes catches each
-small-bracket kill without a per-event detail fetch. Events are grouped by
+kill without a per-event detail fetch: the Ancient Lands portal pools of
+2-3, 4-5 and 5-7 players (fights of 4-14 players, under the harvest's
+floor, whose official battle record lags the kills) and every fight the
+harvest later reads (DISCOVERY above). Events are grouped by
 BattleId and merged into per-battle cache records (`source: events_poll`,
 deduplicated by EventId across polls); the roster of such a record is
 rebuilt from the events (kills = times named as killer, deaths = times
@@ -135,18 +174,20 @@ official roster. A later full harvest of the same battle replaces the poll
 record with the official one. The poll writes the cache only; the artifact
 is re-derived by the fold.
 
-FIGHT-SIZE BAND. `--min-players` is the discovery floor albionbb filters on;
-`--max-players` (0 = none) is a local ceiling on the listed `totalPlayers`,
-so a pass can be pointed at one size class — `--min-players 10
---max-players 14` walks the 5v5 / 7v7 band (a focused night on 7v7 and
-5v5 fights) and spends its `--battles` budget only on fights in the band;
-everything larger is skipped, not fetched. The band is a DISCOVERY
-choice: the cache keeps every battle ever fetched and `analyze()` reads all
-of it, so a banded night adds to the corpus and never narrows it.
+FIGHT-SIZE BAND. `--min-players` is the floor (the prefilter reads it on
+the seen count, the harvest on the official roster) and `--max-players`
+(0 = none) a ceiling on the official roster, so a pass can be pointed at
+one size class — `--min-players 10 --max-players 14` walks the 5v5 / 7v7
+band (a focused night on 7v7 and 5v5 fights); a fight outside the band
+costs its roster request and stays the poll's record. The band is a
+DISCOVERY choice: the cache keeps every battle ever fetched and
+`analyze()` reads all of it, so a banded night adds to the corpus and
+never narrows it.
 """
 import argparse
 import hashlib
 import collections
+import datetime
 import json
 import os
 import re
@@ -172,6 +213,12 @@ def store():
     return party_store.Store(CACHE)
 UA = {"User-Agent": "bion-comp-engine/sample_parties (albion comp research)"}
 GAMEINFO = "https://gameinfo.albiononline.com/api/gameinfo"
+# the battle list answers offsets below this (measured: 9,945 answered,
+# two days back; 10,200 timed out and 20,400 returned 500)
+LIST_DEPTH = 10000
+# the poll runs every 3 minutes while the machine is awake: a pass ending
+# with no poll write this recent means the poll stopped
+STALE_POLL_MINUTES = 60
 
 
 # Why a request came back empty, tallied across a pass so the coverage line
@@ -180,18 +227,23 @@ GAMEINFO = "https://gameinfo.albiononline.com/api/gameinfo"
 ERRORS = collections.Counter()
 
 
-def get_json(url, tries=4, pause=1.5):
+def get_json(url, tries=4, pause=1.5, timeout=30, missing=None):
     """One request with backoff. Returns None rather than raising — the
     gameinfo API returns intermittent 502s and a single miss must not kill
-    a long harvest. Thread-safe: no state beyond the ERRORS tally."""
+    a long harvest — and `missing` instead when given and the API answers
+    404 (it holds no such record). Thread-safe: no state beyond the ERRORS
+    tally."""
     last = None
     for attempt in range(tries):
         try:
             req = urllib.request.Request(url, headers=UA)
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
                 return json.loads(r.read())
         except urllib.error.HTTPError as ex:
             last = str(ex.code)
+            if ex.code == 404 and missing is not None:
+                ERRORS[last] += 1
+                return missing
             if ex.code in (429, 502, 503, 504):
                 time.sleep(pause * (attempt + 1))
                 continue
@@ -529,18 +581,17 @@ def remark(args, known):
             continue
         if args.remark_max_players and (rec.get("total_players") or 0) > args.remark_max_players:
             continue
-        todo.append((rec, bid, rec.get("total_players") or 0))
+        todo.append((rec, bid))
     todo.sort(key=lambda t: t[0].get("started_at") or "", reverse=True)   # newest first
     print(f"remark: {len(todo)} battle-list record(s) without marks to re-fetch, "
           f"{max(1, args.workers)} worker(s)", flush=True)
     import concurrent.futures as cf
     marked = 0
     with cf.ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
-        futs = [pool.submit(harvest_battle, args, known, {}, bid, total)
-                for _rec, bid, total in todo]
-        for fut, (_rec, bid, _t) in zip(futs, todo):
+        futs = [pool.submit(harvest_battle, args, known, bid) for _rec, bid in todo]
+        for fut, (_rec, bid) in zip(futs, todo):
             try:
-                line, _k, _e = fut.result()
+                _status, line, _k, _e, _r = fut.result()
             except Exception as ex:
                 print(f"  battle {bid} failed: {ex!r}", flush=True)
                 continue
@@ -611,86 +662,120 @@ def poll_events(args, known):
     print(f"  request misses after retries: {errs}", flush=True)
 
 
-def harvest_battle(args, known, b, bid, total):
-    """Steps 2-3 for ONE battle: the official roster, the kill list, every
-    kill event's parties and builds, written to its own cache row. Runs
-    on a worker thread (`--workers`): the per-battle work is
-    independent — one row per battle, no shared state — so battles run
-    side by side while each battle's events stay sequential, and the
-    record a worker writes is identical to what the old sequential loop
-    wrote. Returns (log line, kills counted, events read, events read from
-    the record already cached)."""
-    server = args.server
+def battle_events(bid, have, want):
+    """Step 3's request: the battle's own kill list, full events 51 a
+    page, read until `want` distinct events are in hand (`have` counted)
+    or the list ends. Returns {event id: event} of the events not in
+    `have`; a page that fails ends the read (the record then states the
+    kills it holds against the official count)."""
+    out = {}
+    off = 0
+    while len(have) + len(out) < want:
+        # three tries: daytime 502s run a few percent per call; a large
+        # fight's page answers slowly (a 268-player fight's first page
+        # timed out three times at 40 s)
+        page = get_json(f"{GAMEINFO}/events/battle/{bid}?offset={off}&limit=51",
+                        tries=3, timeout=90)
+        if not page:
+            break
+        for d in page:
+            eid = d.get("EventId")
+            if eid and eid not in have:
+                out[eid] = d
+        if len(page) < 51:
+            break
+        off += 51
+    return out
+
+
+def harvest_battle(args, known, bid, band=None, detail=None):
+    """Steps 2-3 for ONE battle: the official roster (`detail`, the battle
+    list's item, else requested), the kill events, every event's parties
+    and builds, written to its own cache row. Runs on a worker thread
+    (`--workers`): the per-battle work is independent — one row per
+    battle, no shared state — so battles run side by side while each
+    battle's requests stay sequential. The record is a function of the
+    battle's roster and event set, whichever of the poll and the kill list
+    supplied each event. `band` = (floor, ceiling, 0 = none) on the
+    official roster: a battle outside it is not written. Returns (status,
+    log line, kills counted, events read, events read from the record
+    already cached); status is "harvested", "outside" (the roster puts it
+    outside the band), "no_battle" (the API holds no battle record) or
+    "no_roster" (the roster request failed)."""
     st = store()
     prev = st.get(bid)
+    from_poll = bool(prev) and prev.get("source") == "events_poll"
     # step 2 — the full roster (denominator)
-    detail = get_json(f"{GAMEINFO}/battles/{bid}")
-    if detail is None and prev and prev.get("source") == "events_poll":
+    if detail is None:
+        detail = get_json(f"{GAMEINFO}/battles/{bid}", missing=False)
+        if detail is False:
+            detail = None
+            if from_poll:
+                st.close()
+                # a fight of one or two kills: no official battle exists
+                return ("no_battle", f"  battle {bid}: no official battle record, "
+                        f"kill-feed record kept", 0, 0, 0)
+    if detail is None and from_poll:
         st.close()
-        # the official record lags the kills: the poll record, with its
-        # event-built roster, is the better one until it exists
-        return (f"  battle {bid}: official record not yet available, "
+        # the request failed: the poll record, with its event-built
+        # roster, stays until the API answers
+        return ("no_roster", f"  battle {bid}: official record not available, "
                 f"kill-feed record kept", 0, 0, 0)
     roster = list((detail or {}).get("players", {}).values())
+    total = len(roster) or (prev or {}).get("total_players") or 0
+    if band and detail is not None:
+        lo, hi = band
+        if total < lo or (hi and total > hi):
+            st.close()
+            return ("outside", f"  battle {bid}: {total} players, outside the band", 0, 0, 0)
 
     # step 3 — per-kill parties
-    kills = get_json(
-        f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
-    ) or []
-    # THE CACHED EVENTS FIRST. The kill-feed poll stores every kill it sees,
-    # slimmed, and a stored event is the detail endpoint's event slimmed
-    # (measured: 31 of 31 identical); before the harvest reaches a listed
-    # battle the poll holds 88-98% of its kills (8+ and 25+ floors). A
-    # stored event is read, never fetched again: a pass costs the events
-    # the poll missed, where one detail fetch per kill (1-2 s each) ran a
-    # 25+ pass past the task's six hours.
+    kills_total = (detail or {}).get("totalKills") or (prev or {}).get("total_kills") or 0
+    want = min(kills_total, args.max_events)
+    # THE POLL'S EVENTS FIRST. The kill-feed poll stores every kill it
+    # sees, slimmed, and a stored event is the listed event slimmed
+    # (measured: 49 of 49 identical); the poll holds every kill of 93% of
+    # the fights of 8+. The battle's kill list is read only for what the
+    # poll missed.
     stored = {e.get("EventId"): e for e in ((prev or {}).get("raw_events") or [])
               if e.get("EventId")}
-    parties, participants, ev_ok, reused = {}, {}, 0, 0
+    events = dict(stored)
+    events.update(battle_events(bid, stored, want) if len(stored) < want else {})
+    # the cap: the first `--max-events` kills by id (the kill list's order
+    # is the API's; the record must not depend on which source held a kill)
+    use = sorted(events)[:args.max_events]
+    parties, participants = {}, {}
     builds, areas, stamps = {}, collections.Counter(), []
-    marks, raw_kept = collections.Counter(), []
-    for x in kills[:args.max_events]:
-        eid = x.get("EventId")
-        if not eid:
-            continue
-        d = stored.get(eid)
-        if d is not None:
-            reused += 1
-        else:
-            # three tries (was two): daytime 502s ran ~4% per call
-            # and a second 502 lost the event; the third try, 4.5 s later,
-            # costs nothing while other workers keep fetching
-            d = get_json(f"{GAMEINFO}/events/{eid}", tries=3)
-            if not d:
-                continue
-        ev_ok += 1
-        raw_kept.append(slim_event(d))
-        ingest_event(d, known, builds, parties, participants, areas, stamps,
-                     marks)
+    marks = collections.Counter()
+    for eid in use:
+        ingest_event(events[eid], known, builds, parties, participants, areas,
+                     stamps, marks)
+    reused = sum(1 for eid in use if eid in stored)
 
     rec = {
         "schema": 2,          # 2 = carries full builds; 1 did not
         "battle": bid,
         "builds": list(builds.values()),
-        "started_at": b.get("startedAt"),
+        "started_at": (detail or {}).get("startTime") or (prev or {}).get("started_at"),
         "total_players": total,
-        "total_kills": b.get("totalKills"),
+        "total_kills": kills_total,
         "roster": [{"name": p.get("name"),
                     "guild": p.get("guildName") or None,
                     "alliance": p.get("allianceName") or None,
                     "kills": p.get("kills"), "deaths": p.get("deaths")}
                    for p in roster],
-        "kill_events": len(kills),
-        "events_fetched": ev_ok,
+        "kill_events": kills_total,
+        "events_fetched": len(use),
         "kill_areas": dict(areas),
         "content_marks": dict(marks),
         "first_event_at": min(stamps) if stamps else None,
         "last_event_at": max(stamps) if stamps else None,
         "parties": list(parties.values()),
         "participant_sets": list(participants.values()),
-        # the slimmed events: a marker added later reaches this record
-        # through --retag, never another fetch
-        "raw_events": sorted(raw_kept, key=lambda e: e.get("EventId") or 0),
+        # the slimmed events, every one in hand (the capped ones too): a
+        # marker added later reaches this record through --retag, never
+        # another fetch
+        "raw_events": [slim_event(events[eid]) for eid in sorted(events)],
     }
     # read again: the poll may have added kills while this battle fetched
     prev = st.get(bid)
@@ -706,77 +791,150 @@ def harvest_battle(args, known, b, bid, total):
                 key=lambda e: e.get("EventId") or 0)
     st.put(bid, rec)
     st.close()
-    return (f"  battle {bid}: {total} players, {len(kills)} kills, "
-            f"{ev_ok} events read ({reused} cached), {len(parties)} distinct parties",
-            min(len(kills), args.max_events), ev_ok, reused)
+    return ("harvested",
+            f"  battle {bid}: {total} players, {kills_total} kills, "
+            f"{len(use)} events read ({reused} cached), {len(parties)} distinct parties",
+            want, len(use), reused)
 
 
-def fetch(args, known):
-    st = store()
-    server = args.server
-    seen_battles = 0
-    page = 1
-    max_pages = args.pages if args.pages and args.pages > 0 else 40
-    todo = []          # (b, bid, total) not yet in the cache
-    while seen_battles < args.battles and page <= max_pages:
-        url = (f"https://api.albionbb.com/{server}/battles"
-               f"?minPlayers={args.min_players}&page={page}")
-        lst = get_json(url) or []
-        if not lst:
+def _stamp(t):
+    return t.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _parse(s):
+    """A UTC time stamp of the API or the cache, to the second."""
+    return datetime.datetime.strptime(s[:19], "%Y-%m-%dT%H:%M:%S").replace(
+        tzinfo=datetime.timezone.utc)
+
+
+def list_battles(since):
+    """Step 1: the official battle list, newest first, paged back until a
+    whole page started before `since`, the list ends, or LIST_DEPTH. Pages
+    are read in order: a fight added while the pass reads pushes the rest
+    down a place, so an item can repeat on the next page, never drop.
+    Returns ({battle id: item}, the oldest start read, pages read, pages
+    failed, whether the first page failed)."""
+    found, oldest, read, failed, run, first_failed = {}, None, 0, 0, 0, False
+    off = 0
+    while off < LIST_DEPTH:
+        page = get_json(f"{GAMEINFO}/battles?offset={off}&limit=51&sort=recent",
+                        tries=3, timeout=60)
+        if page is None:
+            failed += 1
+            run += 1
+            first_failed = first_failed or off == 0
+            if run >= 3:
+                break           # the list stopped answering
+            off += 51
+            continue
+        run = 0
+        read += 1
+        starts = [b.get("startTime") or "" for b in page if b.get("id")]
+        for b in page:
+            if b.get("id"):
+                found.setdefault(b["id"], b)
+        if starts:
+            oldest = min([s for s in starts if s] + ([oldest] if oldest else []))
+        if len(page) < 51 or (starts and max(starts) < since):
             break
-        for b in lst:
-            if seen_battles >= args.battles:
-                break
-            bid = b.get("albionId")
-            total = b.get("totalPlayers") or 0
-            if not bid or total < args.min_players:
-                continue
-            if args.max_players and total > args.max_players:
-                continue        # outside the requested size band
-            meta = st.meta(bid)
-            if meta:
-                # schema 1 cached weapons only — re-fetch it for the builds;
-                # a kill-feed poll record has no official roster: the
-                # battle-list harvest replaces it
-                source, schema = meta[0], meta[1] if meta[1] is not None else 1
-                if schema >= 2 and source != "events_poll":
-                    seen_battles += 1
-                    continue
-            todo.append((b, bid, total))
-            seen_battles += 1
-        page += 1
-    # FETCH IN PARALLEL: the harvest's cost is the kill-event
-    # detail fetch, ~1.8 s per event sequentially and one HTTP call each.
-    # Battles are independent units of work (own cache row, own log line),
-    # so a small pool runs them side by side; events within a battle stay
-    # sequential. `--workers 1` is the old loop. Coverage is reported at
+        off += 51
+    return found, oldest, read, failed, first_failed
+
+
+def fetch(args, known, now=None):
+    """Steps 1-3 over the window (DISCOVERY, WINDOW). Returns the reasons
+    the pass failed (FAILS LOUDLY), empty when it did not. `now` fixes the
+    clock (a test)."""
+    clock = (lambda: now) if now else (lambda: datetime.datetime.now(datetime.timezone.utc))
+    t0 = clock()
+    since = args.since or _stamp(t0 - datetime.timedelta(hours=args.since_hours))
+    settled = _stamp(t0 - datetime.timedelta(minutes=args.settle_minutes))
+    problems = []
+    listed, oldest, read, failed, first_failed = list_battles(since)
+    if first_failed:
+        problems.append("the battle list's first page failed - discovery read the "
+                        "kill-feed poll's records alone")
+    print(f"battle list: {len(listed)} battles on {read} page(s) back to "
+          f"{(oldest or '-')[:16]}, {failed} page(s) failed", flush=True)
+    st = store()
+    todo = []          # (battle id, the list's item or None), newest first
+    for bid, b in sorted(listed.items(), key=lambda kv: kv[1].get("startTime") or "",
+                         reverse=True):
+        n = len(b.get("players") or {})
+        if n < args.min_players or (args.max_players and n > args.max_players):
+            continue
+        if (b.get("startTime") or "") < since:
+            continue
+        if (b.get("endTime") or b.get("startTime") or "") > settled:
+            continue        # still going
+        meta = st.meta(bid)
+        if meta and meta[0] != "events_poll" and (meta[1] or 1) >= 2:
+            continue        # harvested
+        todo.append((bid, b))
+    # the poll's records the list did not settle: a fight older than the
+    # list's reach or on a page that failed. One whose first kill is two
+    # hours or more inside the list's reach, the list read whole, is no
+    # official battle of 4+ (the list holds every one) and costs nothing.
+    reach = (_stamp(_parse(oldest) + datetime.timedelta(hours=2))
+             if oldest and not failed else None)
+    from_poll = 0
+    for bid, first in st.poll_candidates(args.min_players, since, settled):
+        if bid in listed or (reach and first >= reach):
+            continue
+        todo.append((bid, None))
+        from_poll += 1
+    st.close()
+    # FETCH IN PARALLEL: battles are independent units of work (own cache
+    # row, own log line), so a small pool runs them side by side; the
+    # requests within a battle stay sequential. Coverage is reported at
     # the end so a rate-limited night (429s exhaust get_json's retries and
-    # the event is skipped, not raised) is visible rather than silent:
-    # the sequential baseline was 0.987 (one nightly pass).
+    # the kill-list page is skipped, not raised) is visible rather than
+    # silent.
     import concurrent.futures as cf
     kills_total = events_total = reused_total = 0
+    status = collections.Counter()
     workers = max(1, args.workers)
-    print(f"{len(todo)} battles to fetch, {workers} worker(s)", flush=True)
+    band = (args.min_players, args.max_players)
+    print(f"{len(todo[:args.battles])} battles to fetch ({len(todo) - from_poll} off the "
+          f"list, {from_poll} kill-feed records of {args.min_players}+ seen players; "
+          f"started since {since[:16]}, settled), {workers} worker(s)", flush=True)
     with cf.ThreadPoolExecutor(max_workers=workers) as pool:
-        futs = [pool.submit(harvest_battle, args, known, *t) for t in todo]
+        futs = [pool.submit(harvest_battle, args, known, bid, band, detail)
+                for bid, detail in todo[:args.battles]]
         for fut in cf.as_completed(futs):
             try:
-                line, k, e, r = fut.result()
+                s, line, k, e, r = fut.result()
             except Exception as ex:      # one bad battle must not kill a night
                 print(f"  battle failed: {ex!r}", flush=True)
+                status["failed"] += 1
                 continue
+            status[s] += 1
             kills_total += k
             events_total += e
             reused_total += r
-            print(line, flush=True)
+            if s not in ("outside", "no_battle"):
+                print(line, flush=True)
     cov = (events_total / kills_total) if kills_total else 1.0
     flag = "" if cov >= 0.95 else "   WARNING: below the 0.95 floor — rate limited? lower --workers"
     errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
+    print(f"official rosters: {status['harvested']} harvested, {status['outside']} outside "
+          f"the band, {status['no_battle']} no official battle (kill-feed records kept), "
+          f"{status['no_roster']} unavailable, {status['failed']} failed", flush=True)
     print(f"events read from the cache: {reused_total}, fetched: {events_total - reused_total}", flush=True)
     print(f"event coverage this pass: {events_total}/{kills_total} = {cov:.3f}"
           f"  (request misses after retries: {errs}){flag}", flush=True)
+    st = store()
     print(f"cache holds {st.count()} battles", flush=True)
+    newest = st.newest_write("events_poll")
     st.close()
+    tried = sum(status.values())
+    if tried and status["no_roster"] + status["failed"] > tried / 2:
+        problems.append(f"{status['no_roster'] + status['failed']} of {tried} roster requests "
+                        f"failed (request misses: {errs})")
+    if not newest or (clock() - _parse(newest)).total_seconds() > STALE_POLL_MINUTES * 60:
+        problems.append(f"the kill-feed poll has written nothing since {newest} - it records "
+                        "the kills the harvest reads (Get-ScheduledTask 'CompForge kill-feed poll')")
+    return problems
 
 
 def analyze(known):
@@ -1069,21 +1227,32 @@ def rosters_doc(battles, parties, builds, population):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--battles", type=int, default=25)
-    ap.add_argument("--min-players", type=int, default=25)
+    ap.add_argument("--battles", type=int, default=25,
+                    help="the most battles a pass reads, newest first")
+    ap.add_argument("--min-players", type=int, default=8,
+                    help="the floor, on the official roster (the battle "
+                         "list's, else requested); a poll record's seen "
+                         "count is the fallback's prefilter")
     ap.add_argument("--max-players", type=int, default=0,
-                    help="skip listed fights above this totalPlayers "
-                         "(0 = no ceiling); --min-players 10 --max-players "
-                         "14 is the 5v5 / 7v7 band")
+                    help="leave fights above this official roster size to "
+                         "the poll (0 = no ceiling); --min-players 10 "
+                         "--max-players 14 is the 5v5 / 7v7 band")
     ap.add_argument("--max-events", type=int, default=120,
                     help="cap per battle; a 300-man fight has ~180 kills")
-    ap.add_argument("--server", default="us", choices=["us", "eu", "asia"])
+    ap.add_argument("--since-hours", type=float, default=36,
+                    help="the window: fights that started this recently")
+    ap.add_argument("--since", default=None,
+                    help="the window's start as a UTC time "
+                         "(YYYY-MM-DDTHH:MM), in place of --since-hours: "
+                         "a backfill")
+    ap.add_argument("--settle-minutes", type=float, default=60,
+                    help="read a fight only once it ended (a poll record: "
+                         "its last write) this long ago")
     ap.add_argument("--workers", type=int, default=4,
                     help="battles fetched side by side (1 = sequential); "
                          "the pass reports its event coverage")
     ap.add_argument("--pages", type=int, default=None,
-                    help="0 = offline re-analysis, no network; N > 0 = "
-                         "discovery page cap (default 40, 20 battles each)")
+                    help="0 = offline re-analysis, no network")
     ap.add_argument("--poll-events", action="store_true",
                     help="kill-feed poll: the newest events grouped by "
                          "battle into the cache; no battle list, no "
@@ -1127,9 +1296,12 @@ def main():
         if args.analyze:
             analyze(known)
         return
-    if args.pages != 0:
-        fetch(args, known)
+    problems = fetch(args, known) if args.pages != 0 else []
     analyze(known)
+    if problems:
+        # FAILS LOUDLY: after the rewrite, so the working copies still
+        # hold what the cache holds
+        sys.exit("harvest FAILED: " + "; ".join(problems))
 
 
 if __name__ == "__main__":

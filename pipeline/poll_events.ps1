@@ -5,17 +5,20 @@
 # artifact, never rebuilds, never commits. Network step, never part of a
 # build.
 #
-# WHY A POLL BESIDE THE TWICE-DAILY HARVEST. The harvest discovers fights
-# through albionbb's battle list at a player floor (25 and 8), which is
-# blind to the Ancient Lands portal pools of 2-3, 4-5 and 5-7 players:
-# their fights are 4-14 players and the official battle record lags the
-# kills. The events feed carries the killer's party and every combat
-# role's equipment in the list itself, exposes only the newest thousand
-# kills, and portals open on 30 / 60 / 180 minute locks, so the kills
-# arrive in bursts; a poll every five minutes catches each small-bracket
-# kill (measured: a five-minute poll's p90 reached 600 new events and its
-# peak 875 against the feed's cap of about 1,000, so one skipped run at
-# peak lost kills; three minutes keeps the headroom). Every record
+# WHY A POLL. The poll is the DISCOVERY of every harvested fight: the
+# twice-daily harvest reads the poll's records of 8+ seen players and
+# upgrades each to the official roster (sample_parties.py "DISCOVERY"), and
+# fails loudly when the poll has written nothing for hours. It is also the
+# whole record of the Ancient Lands portal pools of 2-3, 4-5 and 5-7
+# players, whose fights of 4-14 players sit under the harvest's floor and
+# whose official battle record lags the kills. The events feed carries
+# the killer's party and every combat role's equipment in the list itself,
+# exposes only the newest thousand kills, and portals open on 30 / 60 /
+# 180 minute locks, so the kills arrive in bursts; a poll every five
+# minutes catches each small-bracket kill (measured: a five-minute poll's
+# p90 reached 600 new events and its peak 875 against the feed's cap of
+# about 1,000, so one skipped run at peak lost kills; three minutes keeps
+# the headroom). Every record
 # carries the event's KillArea, the content classifier
 # the API exposes, so the first portal kill observed names the label the
 # derive steps then select on (sample_parties.py "CONTENT TAG").
@@ -43,6 +46,6 @@ Get-ChildItem $logDir -Filter "poll-*.log" |
 Set-Location $root
 
 "=== poll $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append
-& py -3 -u pipeline/sample_parties.py --poll-events --server us 2>&1 |
+& py -3 -u pipeline/sample_parties.py --poll-events 2>&1 |
     Out-File $log -Encoding utf8 -Append
 "--- exit $LASTEXITCODE ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append

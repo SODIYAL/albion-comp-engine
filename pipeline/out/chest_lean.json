@@ -2,200 +2,200 @@
  "_source": "audit_style_rosters.py: dps chests in weapons-only labelled clean cores (melee share >= 0.65 brawl, <= 0.35 ranged), distinct players",
  "items": {
   "ARMOR_CLOTH_AVALON": {
-   "brawl": 154,
+   "brawl": 178,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 3618,
-   "wearers": 3689
+   "ranged": 4045,
+   "wearers": 4123
   },
   "ARMOR_CLOTH_FEY": {
-   "brawl": 33,
+   "brawl": 40,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 1279,
-   "wearers": 1302
+   "ranged": 1461,
+   "wearers": 1490
   },
   "ARMOR_CLOTH_HELL": {
-   "brawl": 164,
+   "brawl": 211,
    "class": "cloth",
    "lean": null,
-   "ranged": 80,
-   "wearers": 236
+   "ranged": 100,
+   "wearers": 296
   },
   "ARMOR_CLOTH_KEEPER": {
-   "brawl": 98,
+   "brawl": 113,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 797,
-   "wearers": 879
+   "ranged": 951,
+   "wearers": 1040
   },
   "ARMOR_CLOTH_MORGANA": {
-   "brawl": 18,
+   "brawl": 19,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 70,
-   "wearers": 84
+   "ranged": 85,
+   "wearers": 100
   },
   "ARMOR_CLOTH_ROYAL": {
    "brawl": 5,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 186,
-   "wearers": 191
+   "ranged": 220,
+   "wearers": 225
   },
   "ARMOR_CLOTH_SET1": {
-   "brawl": 252,
+   "brawl": 301,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 3464,
-   "wearers": 3585
+   "ranged": 3962,
+   "wearers": 4108
   },
   "ARMOR_CLOTH_SET2": {
-   "brawl": 599,
+   "brawl": 709,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 2778,
-   "wearers": 3213
+   "ranged": 3324,
+   "wearers": 3829
   },
   "ARMOR_CLOTH_SET3": {
-   "brawl": 62,
+   "brawl": 72,
    "class": "cloth",
    "lean": "ranged",
-   "ranged": 538,
-   "wearers": 588
+   "ranged": 640,
+   "wearers": 700
   },
   "ARMOR_LEATHER_AVALON": {
-   "brawl": 616,
+   "brawl": 693,
    "class": "leather",
    "lean": "ranged",
-   "ranged": 1909,
-   "wearers": 2255
+   "ranged": 2159,
+   "wearers": 2533
   },
   "ARMOR_LEATHER_DRAGON": {
-   "brawl": 382,
+   "brawl": 521,
    "class": "leather",
    "lean": "ranged",
-   "ranged": 1802,
-   "wearers": 1954
+   "ranged": 2454,
+   "wearers": 2642
   },
   "ARMOR_LEATHER_FEY": {
-   "brawl": 679,
+   "brawl": 761,
    "class": "leather",
    "lean": null,
-   "ranged": 1132,
-   "wearers": 1567
+   "ranged": 1352,
+   "wearers": 1814
   },
   "ARMOR_LEATHER_HELL": {
-   "brawl": 3731,
+   "brawl": 4343,
    "class": "leather",
    "lean": null,
-   "ranged": 2842,
-   "wearers": 5521
+   "ranged": 3282,
+   "wearers": 6341
   },
   "ARMOR_LEATHER_MORGANA": {
-   "brawl": 352,
+   "brawl": 434,
    "class": "leather",
    "lean": null,
-   "ranged": 275,
-   "wearers": 602
+   "ranged": 346,
+   "wearers": 740
   },
   "ARMOR_LEATHER_ROYAL": {
-   "brawl": 211,
+   "brawl": 240,
    "class": "leather",
    "lean": "ranged",
-   "ranged": 2536,
-   "wearers": 2679
+   "ranged": 2911,
+   "wearers": 3067
   },
   "ARMOR_LEATHER_SET1": {
-   "brawl": 439,
+   "brawl": 552,
    "class": "leather",
    "lean": null,
-   "ranged": 723,
-   "wearers": 1105
+   "ranged": 906,
+   "wearers": 1376
   },
   "ARMOR_LEATHER_SET2": {
-   "brawl": 374,
+   "brawl": 448,
    "class": "leather",
    "lean": "ranged",
-   "ranged": 1524,
-   "wearers": 1772
+   "ranged": 1801,
+   "wearers": 2093
   },
   "ARMOR_LEATHER_SET3": {
-   "brawl": 1782,
+   "brawl": 2250,
    "class": "leather",
    "lean": null,
-   "ranged": 1903,
-   "wearers": 3423
+   "ranged": 2337,
+   "wearers": 4224
   },
   "ARMOR_LEATHER_UNDEAD": {
    "brawl": 6,
    "class": "leather",
-   "lean": null,
-   "ranged": 15,
-   "wearers": 21
+   "lean": "ranged",
+   "ranged": 21,
+   "wearers": 27
   },
   "ARMOR_PLATE_AVALON": {
-   "brawl": 33,
+   "brawl": 41,
    "class": "plate",
    "lean": null,
-   "ranged": 72,
-   "wearers": 96
+   "ranged": 81,
+   "wearers": 109
   },
   "ARMOR_PLATE_FEY": {
-   "brawl": 9,
+   "brawl": 13,
    "class": "plate",
    "lean": "ranged",
-   "ranged": 49,
-   "wearers": 58
+   "ranged": 57,
+   "wearers": 70
   },
   "ARMOR_PLATE_HELL": {
-   "brawl": 99,
-   "class": "plate",
-   "lean": null,
-   "ranged": 286,
-   "wearers": 364
-  },
-  "ARMOR_PLATE_KEEPER": {
-   "brawl": 343,
-   "class": "plate",
-   "lean": null,
-   "ranged": 656,
-   "wearers": 941
-  },
-  "ARMOR_PLATE_ROYAL": {
-   "brawl": 564,
-   "class": "plate",
-   "lean": null,
-   "ranged": 503,
-   "wearers": 978
-  },
-  "ARMOR_PLATE_SET1": {
-   "brawl": 1658,
-   "class": "plate",
-   "lean": null,
-   "ranged": 855,
-   "wearers": 2249
-  },
-  "ARMOR_PLATE_SET2": {
-   "brawl": 45,
+   "brawl": 111,
    "class": "plate",
    "lean": "ranged",
-   "ranged": 138,
-   "wearers": 177
+   "ranged": 334,
+   "wearers": 420
+  },
+  "ARMOR_PLATE_KEEPER": {
+   "brawl": 400,
+   "class": "plate",
+   "lean": null,
+   "ranged": 793,
+   "wearers": 1120
+  },
+  "ARMOR_PLATE_ROYAL": {
+   "brawl": 648,
+   "class": "plate",
+   "lean": null,
+   "ranged": 616,
+   "wearers": 1151
+  },
+  "ARMOR_PLATE_SET1": {
+   "brawl": 1915,
+   "class": "plate",
+   "lean": null,
+   "ranged": 1061,
+   "wearers": 2624
+  },
+  "ARMOR_PLATE_SET2": {
+   "brawl": 52,
+   "class": "plate",
+   "lean": "ranged",
+   "ranged": 169,
+   "wearers": 215
   },
   "ARMOR_PLATE_SET3": {
-   "brawl": 622,
+   "brawl": 696,
    "class": "plate",
    "lean": null,
-   "ranged": 562,
-   "wearers": 1041
+   "ranged": 659,
+   "wearers": 1186
   },
   "ARMOR_PLATE_UNDEAD": {
-   "brawl": 138,
+   "brawl": 178,
    "class": "plate",
    "lean": null,
-   "ranged": 103,
-   "wearers": 230
+   "ranged": 130,
+   "wearers": 294
   }
  },
  "min_wearers": 20,

@@ -104,8 +104,9 @@ def load(p=None, source="battle_list", content=None):
     """The artifact as a dict; gzip or (legacy / git-history) plain JSON.
 
     POPULATION (sample_parties.py "POPULATION"): battles carry `source`
-    (`battle_list`, the albionbb-discovered harvest with an official
-    roster; `events_poll`, the kill-feed poll) and `content` (a tag).
+    (`battle_list`, the harvest of the fights of 8+ players, each with
+    its official roster; `events_poll`, the kill-feed poll) and
+    `content` (a tag).
     The default keeps the battle-list population only, the one every
     shipped table was fitted on; parties and builds follow their battle.
     `source="all"` keeps everything; `content` keeps one content's
@@ -145,16 +146,56 @@ def select(doc, source="battle_list", content=None):
     return out
 
 
+def _text_pieces(obj):
+    """The text `json.dumps(obj, indent=1, sort_keys=True)` returns, in
+    pieces: a top-level list one item at a time, each item through the C
+    encoder and re-indented (JSON strings escape their newlines, so every
+    newline in an item's text is a line break)."""
+    if not isinstance(obj, dict) or not obj:
+        yield json.dumps(obj, indent=1, sort_keys=True)
+        return
+    for n, k in enumerate(sorted(obj)):
+        yield ("{\n " if n == 0 else ",\n ") + json.dumps(k) + ": "
+        v = obj[k]
+        if isinstance(v, list) and v:
+            for i, x in enumerate(v):
+                yield (("[\n  " if i == 0 else ",\n  ")
+                       + json.dumps(x, indent=1, sort_keys=True).replace("\n", "\n  "))
+            yield "\n ]"
+        else:
+            yield json.dumps(v, indent=1, sort_keys=True).replace("\n", "\n ")
+    yield "\n}"
+
+
+DUMP_BLOCK = 1 << 20
+
+
 def dump(obj, p=None):
     """Write an artifact (default: the working copy): sorted keys,
     one-space indent, LF, gzip with the header mtime pinned so identical
-    content is byte-identical."""
+    content is byte-identical.
+
+    STREAMED: the text goes to the gzip stream in fixed 1 MiB blocks and
+    is never held whole; holding it whole (the text and its UTF-8 copy
+    beside the records) ran out of memory on the full artifact of a
+    million-battle cache. The compressor here gives different bytes for
+    the same text split differently, so the blocks are cut from the text
+    alone: the same text writes the same bytes, whatever the encoder's
+    pieces."""
     p = p or working_path()
-    text = json.dumps(obj, indent=1, sort_keys=True) + "\n"
     with open(p, "wb") as f:
         with gzip.GzipFile(filename="", mode="wb", fileobj=f, mtime=0,
                            compresslevel=6) as g:
-            g.write(text.encode("utf-8"))
+            buf = bytearray()
+            for piece in _text_pieces(obj):
+                buf += piece.encode("utf-8")
+                while len(buf) >= DUMP_BLOCK:
+                    g.write(bytes(buf[:DUMP_BLOCK]))
+                    del buf[:DUMP_BLOCK]
+            buf += b"\n"
+            while buf:
+                g.write(bytes(buf[:DUMP_BLOCK]))
+                del buf[:DUMP_BLOCK]
 
 
 _SHA = {}

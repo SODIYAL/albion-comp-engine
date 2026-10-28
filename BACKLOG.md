@@ -42,6 +42,14 @@ Each is decidable today from evidence already in the repo.
   15-20 pool's own rows and its count toward the 200-roster threshold
   (the item below); the cap needs a maintainer decision. (V: 10, The
   Dragon Portal weapon table reads a two-sided win rate)
+- **Iron-clad Staff's seat**: the role book keeps it off every menu as a
+  small-scale weapon nobody fields in ZvZ (17 builds when graded; curation
+  judgment) beside a standing >=10 viability exclusion, so it carries no
+  doctrine kit and never generates at 10+. The fold copy holds 229 of its
+  builds in killer parties of 10+ from 172 players (293 parties), and it
+  entered the mid meta-prior bucket. Seating it, and lifting the
+  exclusion, needs a maintainer decision. (V: 10, The official-list
+  fold's pins)
 
 ## Needs evidence a round would produce
 

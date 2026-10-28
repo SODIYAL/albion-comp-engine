@@ -72,11 +72,16 @@ the vocabulary below on every push.
   rebuilds churn the tree with CRLF and invalidate recorded hashes.
 - `wiki.albiononline.com` and the forum 403 scripts. Use the Playwright MCP
   (`browser_navigate` + `innerText`); the dumps carry the same numbers anyway.
-- Killboard: `api.albionbb.com` for DISCOVERY (only source with `minPlayers`;
-  fight size comes from its battle list). The official gameinfo API for DETAIL
-  (`GroupMembers` = the killer's party with gear; albionbb strips it). The
-  official events endpoint answers at sampling scale; an older note that it
-  504s no longer applies.
+- Killboard: the official gameinfo API only. DISCOVERY is its battle list
+  (`/battles?sort=recent`: every battle of 4+ with its roster, no size
+  filter, offsets below 10,000, about two days), the kill-feed poll's
+  records the fallback; DETAIL is the poll's stored events and
+  `/events/battle/{id}` (`GroupMembers` = the killer's party with gear).
+  `api.albionbb.com` answers the harvest with a Cloudflare challenge (403);
+  never try to get past it. A harvest pass exits 0 with "0 battles to
+  fetch" only when nothing new ended; read the `battles to fetch` and
+  `official rosters` lines of `out/fetch_logs/harvest-<date>.log`, and a
+  failed pass reads `pass exit 1`.
 - `render.albiononline.com` serves every weapon except `2H_IRONGAUNTLETS_HELL`
   (404 at every tier) — retry with backoff, don't delete on first failure.
 - Playwright MCP: `file://` is blocked — serve with
@@ -218,7 +223,8 @@ py -3 dashboard/build.py                # regenerates dashboard/index.html + doc
   The task "CompForge kill-feed poll" runs `poll_events.ps1` every 3 minutes
   (`sample_parties.py --poll-events`: the newest kill events grouped by
   battle, cache only) — the discovery for the Ancient Lands portal pools of
-  2-7, which the battle list never surfaces. Every cache record carries the
+  2-7, under the harvest's floor, and the source of most kills the harvest
+  reads. Every cache record carries the
   event's `KillArea`; `analyze()` stamps a `content` tag on every battle,
   party and build. A tag, never a filter.
 - `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation,

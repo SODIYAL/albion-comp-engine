@@ -147,50 +147,150 @@ check("C5c every rosters artifact stays local (.gitignore lists the working, fol
       and "pipeline/out/" + rosters_io.RECORD_NAME not in ignored
       and "rosters_io.full_fold_path()" in usage_src)
 
-# C6 the battle harvest reads the kills the poll already stored and fetches the rest
+# C6 the battle harvest: discovery from the poll's records, the official
+# roster's band, the poll's stored kills read and the rest off the kill list
+import datetime  # noqa: E402
 import tempfile  # noqa: E402
 import types  # noqa: E402
 import party_store  # noqa: E402
 
+FULL = {i: event(i, "a", f"v{i}", ["a", "b"]) for i in (21, 22, 23)}
+ROSTER = {"startTime": "2026-09-27T11:59:00.000000000Z", "totalKills": 3,
+          "players": {str(i): {"name": n, "guildName": "G", "kills": 0, "deaths": 0}
+                      for i, n in enumerate(["a", "b", "v21", "v22", "v23"])}}
 
-def harvest_once(stored_ids):
+
+def stub_net(calls, roster=ROSTER, listing=()):
+    """The network: the battle list (one page, `listing`; None = the page
+    fails), the official roster of battle 7 (404 = the API holds none) and
+    its kill list (one page), each request logged in `calls`."""
+    def fake_get(url, tries=4, pause=1.5, timeout=30, missing=None):
+        calls.append(url)
+        if "/battles?offset=" in url:
+            return None if listing is None else list(listing)
+        if url.endswith("/battles/7"):
+            return missing if roster == 404 else roster
+        if "/events/battle/7?" in url:
+            return [FULL[i] for i in (21, 22, 23)]
+        return None
+    return fake_get
+
+
+def harvest_once(stored_ids, band=None):
     """One harvest_battle over a fresh temporary cache, the poll's record
-    holding `stored_ids` beforehand; the network is a stub that counts the
-    event-detail calls."""
+    holding `stored_ids` beforehand."""
     sp.CACHE = os.path.join(tempfile.mkdtemp(), "cache.sqlite")
-    full = {i: event(i, "a", f"v{i}", ["a", "b"]) for i in (21, 22, 23)}
     with party_store.Store(sp.CACHE) as st:
         if stored_ids:
-            st.put(7, sp.rebuild_poll_record(7, {i: full[i] for i in stored_ids}, KNOWN))
-    fetched = []
-
-    def fake_get(url, tries=4, pause=1.5):
-        if url.endswith("/battles/7"):
-            return {"players": {"1": {"name": "a", "guildName": "G", "kills": 3, "deaths": 0}}}
-        if "battles/kills" in url:
-            return [{"EventId": i} for i in (21, 22, 23)]
-        if "/events/" in url:
-            eid = int(url.rsplit("/", 1)[1])
-            fetched.append(eid)
-            return full[eid]
-        return None
-    real_get, sp.get_json = sp.get_json, fake_get
+            st.put(7, sp.rebuild_poll_record(7, {i: FULL[i] for i in stored_ids}, KNOWN))
+    calls = []
+    real_get, sp.get_json = sp.get_json, stub_net(calls)
     try:
-        out = sp.harvest_battle(types.SimpleNamespace(server="us", max_events=120), KNOWN,
-                                {"startedAt": "2026-09-27T12:00:00Z", "totalKills": 3}, 7, 6)
+        out = sp.harvest_battle(types.SimpleNamespace(max_events=120), KNOWN, 7, band)
     finally:
         sp.get_json = real_get
     with party_store.Store(sp.CACHE) as st:
-        return out, fetched, st.get(7)
+        return out, calls, st.get(7)
 
 
-(_line, _k, _e, _r), _fetched, _rec = harvest_once([21, 22])
-(_line0, _k0, _e0, _r0), _fetched0, _rec0 = harvest_once([])
-check("C6a a kill the poll stored is read from the cache, never fetched again; the pass counts it as read",
-      _fetched == [23] and (_k, _e, _r) == (3, 3, 2) and "3 events read (2 cached)" in _line, f"{_fetched} {_line}")
-check("C6b the record equals the one a pass fetching every kill writes",
-      _fetched0 == [21, 22, 23] and _r0 == 0 and _rec == _rec0
-      and [e["EventId"] for e in _rec["raw_events"]] == [21, 22, 23] and _rec["events_fetched"] == 3)
+(_s, _line, _k, _e, _r), _calls, _rec = harvest_once([21, 22])
+(_s0, _line0, _k0, _e0, _r0), _calls0, _rec0 = harvest_once([])
+(_s3, _line3, _k3, _e3, _r3), _calls3, _rec3 = harvest_once([21, 22, 23])
+check("C6a a kill the poll stored is read from the cache; the kill list is read for the rest, "
+      "and the pass counts what it read",
+      _s == "harvested" and sum("/events/battle/7?" in u for u in _calls) == 1
+      and (_k, _e, _r) == (3, 3, 2) and "3 events read (2 cached)" in _line, f"{_calls} {_line}")
+check("C6b the record equals the one a pass reading every kill off the kill list writes: "
+      "the official roster's size and start, every event kept",
+      _r0 == 0 and _rec == _rec0 and _rec == _rec3
+      and [e["EventId"] for e in _rec["raw_events"]] == [21, 22, 23] and _rec["events_fetched"] == 3
+      and _rec["total_players"] == 5 and _rec["kill_events"] == 3
+      and _rec["started_at"] == ROSTER["startTime"] and _rec.get("source") is None)
+check("C6c a fight whose every kill the poll holds costs its roster request alone",
+      _calls3 == [sp.GAMEINFO + "/battles/7"] and _r3 == 3, f"{_calls3}")
+(_s4, _line4, *_), _calls4, _rec4 = harvest_once([21, 22], band=(8, 0))
+(_s5, *_), _calls5, _rec5 = harvest_once([21, 22], band=(2, 4))
+check("C6d a fight the official roster puts outside the band stays the poll's record, unread",
+      _s4 == "outside" and _s5 == "outside" and _rec4.get("source") == "events_poll"
+      and _rec4["raw_events"] == _rec5["raw_events"] and len(_calls4) == 1, f"{_s4} {_calls4}")
+
+
+def listed(bid, n, start="2026-09-27T11:59:00.0Z", end="2026-09-27T12:30:00.0Z"):
+    """A battle list item: `n` players, its start and end."""
+    return {"id": bid, "startTime": start, "endTime": end, "totalKills": 3,
+            "players": {str(i): {"name": f"p{i}" if bid != 7 else ["a", "b", "v21", "v22", "v23"][i],
+                                 "guildName": "G", "kills": 0, "deaths": 0} for i in range(n)}}
+
+
+def pass_over(now, roster=ROSTER, since="2026-09-01", listing=(), settle=0):
+    """fetch() over a fresh cache holding battle 7's poll record (kills
+    21-22, four seen players; the official roster holds five) and battle
+    9's (two seen players, under every floor here, so the poll's newest
+    write stays the cache's): (problems, requests, battle 7's record
+    after)."""
+    sp.CACHE = os.path.join(tempfile.mkdtemp(), "cache.sqlite")
+    with party_store.Store(sp.CACHE) as st:
+        st.put(7, sp.rebuild_poll_record(7, {i: FULL[i] for i in (21, 22)}, KNOWN))
+        st.put(9, sp.rebuild_poll_record(9, {31: event(31, "x", "y", ["x"])}, KNOWN))
+    calls = []
+    real_get, sp.get_json = sp.get_json, stub_net(calls, roster, listing)
+    sp.ERRORS.clear()
+    args = types.SimpleNamespace(max_events=120, min_players=4, max_players=0, battles=25,
+                                 since=since, since_hours=36, settle_minutes=settle, workers=1)
+    try:
+        problems = sp.fetch(args, KNOWN, now=now)
+    finally:
+        sp.get_json = real_get
+    with party_store.Store(sp.CACHE) as st:
+        return problems, calls, st.get(7)
+
+
+def asked(calls, part):
+    return sum(part in u for u in calls)
+
+
+_soon = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=1)
+_p, _c, _rec7 = pass_over(_soon)
+check("C6e a poll record of the floor's seen players the list does not hold is found and "
+      "harvested on its official roster",
+      _p == [] and _rec7.get("source") is None and _rec7["total_players"] == 5
+      and asked(_c, "/battles/7") == 1, f"{_p} {_c}")
+_p, _c, _rec7 = pass_over(_soon + datetime.timedelta(minutes=29), settle=60)
+check("C6f a record written inside the settle time is left to the poll (the fight may go on)",
+      _p == [] and asked(_c, "/battles/7") == 0 and _rec7.get("source") == "events_poll", f"{_p} {_c}")
+_p, _c, _rec7 = pass_over(_soon, since="2026-09-28")
+check("C6g a record whose first kill is before the window is not read",
+      asked(_c, "/battles/7") == 0 and _rec7.get("source") == "events_poll", f"{_c}")
+_p, _c, _ = pass_over(_soon + datetime.timedelta(minutes=sp.STALE_POLL_MINUTES + 1))
+check("C6h a pass ending with no poll write in STALE_POLL_MINUTES fails loudly",
+      len(_p) == 1 and "kill-feed poll has written nothing" in _p[0], f"{_p}")
+_p, _c, _rec7 = pass_over(_soon, roster=None)
+check("C6i a pass whose roster requests mostly fail fails loudly; the poll record stays",
+      len(_p) == 1 and "roster requests failed" in _p[0] and _rec7.get("source") == "events_poll",
+      f"{_p}")
+_p, _c, _rec7 = pass_over(_soon, roster=404)
+check("C6j a fight with no official battle (404) stays the poll's record and is no failure",
+      _p == [] and _rec7.get("source") == "events_poll", f"{_p}")
+_p, _c, _rec7 = pass_over(_soon, listing=[listed(7, 5)])
+check("C6k a listed fight is harvested on the list's own roster: no roster request",
+      _p == [] and _rec7.get("source") is None and _rec7["total_players"] == 5
+      and asked(_c, "/battles/7") == 0 and asked(_c, "/events/battle/7?") == 1, f"{_p} {_c}")
+_p, _c, _rec7 = pass_over(_soon, listing=[listed(7, 3)])
+check("C6l a listed fight under the floor costs nothing and stays the poll's record",
+      asked(_c, "/battles/7") == 0 and _rec7.get("source") == "events_poll", f"{_c}")
+_p, _c, _rec7 = pass_over(_soon, listing=[listed(8, 3, start="2026-09-27T09:00:00.0Z",
+                                                   end="2026-09-27T09:10:00.0Z")])
+check("C6m a poll record two hours inside the list's reach that the list does not hold is no "
+      "official battle of 4+: no request",
+      _p == [] and asked(_c, "/battles/7") == 0 and _rec7.get("source") == "events_poll", f"{_c}")
+_p, _c, _rec7 = pass_over(_soon, listing=[listed(7, 5, end=_soon.strftime("%Y-%m-%dT%H:%M:%S.0Z"))],
+                          settle=60)
+check("C6n a listed fight that ended inside the settle time waits for the next pass",
+      asked(_c, "/battles/7") == 0 and _rec7.get("source") == "events_poll", f"{_c}")
+_p, _c, _rec7 = pass_over(_soon, listing=None)
+check("C6o a battle list whose first page fails fails the pass loudly; the poll's records "
+      "are still harvested",
+      len(_p) == 1 and "first page failed" in _p[0] and _rec7.get("source") is None, f"{_p} {_c}")
 
 if FAILURES:
     print(f"\n{len(FAILURES)} content-tag test(s) failed: {', '.join(FAILURES)}")

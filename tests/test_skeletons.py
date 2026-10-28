@@ -360,7 +360,7 @@ def t_gate_units():
     # a cross-role minimum lifts the seat gate when no under-typical seat
     # of the role can meet it: the first cross-role minimum above 0 with a
     # dps satisfier in a typed seat and another typed dps seat that cannot
-    # meet it (brawl carries no ranged_aoe_core minimum)
+    # meet it
     pn = w = None
     other = []
     for p, mn in ctx["pred_min"].items():
@@ -441,21 +441,29 @@ def t_forge():
           "once its typed seats are full)", r["feasible"] and healers >= band_min,
           f"healers={healers}")
     # the mix: three frontline seats typed at one each against a frontline
-    # minimum of four forces one of each before the fourth spills
+    # minimum of four: a seat passes its one only by spill (every typed
+    # seat full) or for a minimum the seats left under theirs cannot meet.
+    # RE-PINNED as recorded (V: 10, The official-list fold's pins):
+    # the brawl 20 minima seat a second engage tank (engage_tank 2) and a
+    # second stopper (stopper_tank, anti_heal), and refinement may then
+    # trade the off-tank for a better body; a typical is a cap, not a floor
     e = Engine(content="blackzone_roam", size=20, style="brawl")
     fmin = (e._band.get("frontline") or {}).get("min", 0)
     e._seat_typ = {"engage_tank": 1, "stopper_tank": 1, "off_tank": 1}
     r = e.forge(20)
+    ctx = e._forge_ctx(e.suggest_pool())
     seats = {}
     for w in r["party"]:
         s = e.seat_of(w)
         seats[s] = seats.get(s, 0) + 1
     front = sum(1 for w in r["party"] if e.role_of(w) == "frontline")
-    check(f"S4c the seat mix is honoured before spill: engage / stopper / off-tank "
-          f"each at least one with frontline >= {fmin}",
-          r["feasible"] and front >= fmin and all(seats.get(s, 0) >= 1 for s in
-                                                    ("engage_tank", "stopper_tank", "off_tank")),
-          f"front={front} seats={seats}")
+    bad = _seat_audit(e, r["party"], ctx)
+    check(f"S4c the seat mix is honoured before spill: frontline >= {fmin}, and "
+          "a frontline seat past its typical of one while another stands under "
+          "it holds only bodies a minimum excuses",
+          r["feasible"] and front >= fmin and not bad
+          and e._seat_mix_ok(ctx, r["party"]),
+          f"front={front} seats={seats} audit={bad}")
     # no cell, no gate
     e25 = Engine(content="castle", size=25, style="clap")
     ctx25 = e25._forge_ctx(e25.suggest_pool())
@@ -594,12 +602,25 @@ def t_minima(doc):
           "minimum: the declared style's cell (balanced and a style without "
           "a cell read the pooled row), none where most winners field none, "
           "none below 10", not bad, str(bad[:6]))
-    eb = Engine(content="blackzone_roam", size=20, style="brawl")
-    brawl_row = (typ.get("styles") or {}).get("brawl", {}).get("20")
-    check("S7g brawl 20: its winners field a p50 under one carrier, so the "
-          "row is empty and the band carries no ranged_aoe_core minimum",
-          brawl_row == {} and "ranged_aoe_core" not in (eb._band or {}),
-          f"row {brawl_row} band {(eb._band or {}).get('ranged_aoe_core')}")
+    # an EMPTY style row leaves the band without a minimum, never the
+    # pooled one. Read on a dataset copy whose brawl 20 row is emptied:
+    # the live brawl rows sit at the median's edge (about half of the
+    # brawl winners field a carrier at every band) and move between folds
+    # (V: 10, The official-list fold's pins); S7f reads the live rows
+    import tempfile
+    d = json.loads(json.dumps(Engine().data))
+    sm = d["composition"]["skeleton"]["minima"]
+    sm["styles"].setdefault("brawl", {})["20"] = {}
+    pooled20 = ((sm.get("pooled") or {}).get("20") or {}).get("ranged_aoe_core")
+    path = os.path.join(tempfile.gettempdir(), "bion_skeleton_empty_row.json")
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(d, fh)
+    eb = Engine(dataset_path=path, content="blackzone_roam", size=20, style="brawl")
+    check("S7g an empty style row (most of the style's winners field no "
+          "carrier) leaves the band without a ranged_aoe_core minimum, never "
+          "the pooled one",
+          (pooled20 or 0) >= 1 and "ranged_aoe_core" not in (eb._band or {}),
+          f"pooled {pooled20} band {(eb._band or {}).get('ranged_aoe_core')}")
 
 
 # ------------------------------------------------------------------ S8

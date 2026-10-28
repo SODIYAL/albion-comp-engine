@@ -513,7 +513,7 @@ function setUsage(baskets) {
   check("supply board: fixed roster renders style-specific brawl/clap AoE supply and typical",
         brawlAoe && clapAoe
         && brawlAoe.val === "5.3 / 20.4"
-        && clapAoe.val === "6.3 / 26.5",   /* the clap typical as harvested (re-pinned as recorded, V: 10) */
+        && clapAoe.val === "6.3 / 26.2",   /* the clap typical as harvested (re-pinned as recorded, V: 10) */
         `brawl=${JSON.stringify(brawlAoe)} clap=${JSON.stringify(clapAoe)}`);
 
   const kpM = DL.match(/const KP_LABEL = \{pierce: "([^"]+)"/);

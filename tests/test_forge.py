@@ -806,18 +806,25 @@ def t_generation_fit():
     review = e.swap_review(party)
     manual_ok = score != 0.0 and not review[0]["off_style"]
     # declared brawl: ranged bombs are situational -> out of generation;
-    # the same weapons FIT clap and stay in a clap pool
+    # the same weapons FIT clap and stay in a clap pool. RE-PINNED as
+    # recorded (V: 10, The official-list fold's pins): a ranged
+    # bomb returns to the brawl pool only as the satisfier of a generated
+    # minimum no pool weapon meets (_gen_readmitted), and the gate still
+    # marks it situational
     eb = Engine(content="castle", size=20, style="brawl")
     perma, wail = "2H_ICECRYSTAL_UNDEAD", by_name(eb, "Wailing Bow")
     brawl_pool = set(eb.suggest_pool())
+    readmitted = eb._gen_readmitted
     ec = Engine(content="blackzone_roam", size=15, style="clap")
     clap_pool = set(ec.suggest_pool())
-    style_ok = (perma not in brawl_pool and wail not in brawl_pool
+    style_ok = (all(w in eb._gen_situational
+                    and (w not in brawl_pool or w in readmitted)
+                    for w in (perma, wail))
                 and perma in clap_pool and wail in clap_pool)
     r = eb.forge(20)
     named_bad = {dagger, bolt, perma, wail, by_name(eb, "Whispering Bow"),
                  by_name(eb, "Light Crossbow"), by_name(eb, "Glaive")}
-    forge_ok = not (named_bad & set(r["party"]))
+    forge_ok = not ((named_bad - readmitted) & set(r["party"]))
     # trio open; healers untouched (Druidic keeps its gang slot — left
     # as is, so the gang band stays consistent)
     trio_ok = dagger in set(Engine(content="roads", size=3).suggest_pool())
@@ -829,7 +836,8 @@ def t_generation_fit():
           bal_ok and manual_ok and style_ok and forge_ok and trio_ok
           and druidic_ok,
           f"bal_ok={bal_ok} manual_ok={manual_ok} style_ok={style_ok} "
-          f"forge_ok={forge_ok} trio_ok={trio_ok} druidic_ok={druidic_ok}")
+          f"forge_ok={forge_ok} trio_ok={trio_ok} druidic_ok={druidic_ok} "
+          f"readmitted={sorted(readmitted)}")
 
 
 def t_dup_and_clump():
